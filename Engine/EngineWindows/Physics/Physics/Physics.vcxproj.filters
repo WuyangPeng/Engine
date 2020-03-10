@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionDetection 头文件">
+      <UniqueIdentifier>{66bebb76-8337-422f-b506-74a3f29c15e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fluid 头文件">
+      <UniqueIdentifier>{6254c415-f08c-43ee-8936-385997fc0fce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 头文件">
+      <UniqueIdentifier>{52552c94-922c-4600-9e9f-38fa3fe003b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LCPSolver 头文件">
+      <UniqueIdentifier>{779e60d0-8c7c-40cd-a359-bef52a3660f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{3f303636-8113-4d50-988a-0b95f23d8174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Miscellaneous 头文件">
+      <UniqueIdentifier>{8bd4e3d5-4ce7-4bd5-9162-6925c1ee55ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RigidBody 头文件">
+      <UniqueIdentifier>{a38d4675-1b24-46c3-80f2-c1673a9227f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleSystem 头文件">
+      <UniqueIdentifier>{04bc9641-8f88-48d2-a77b-e23f946206b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionDetection 源文件">
+      <UniqueIdentifier>{b32bfef0-baa0-4400-ae38-f8d72207c7c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fluid 源文件">
+      <UniqueIdentifier>{9e5dcfe0-d2b0-4299-9f44-5b36c0047534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 源文件">
+      <UniqueIdentifier>{30f550d5-ab77-49db-9aea-8ab3330eed11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LCPSolver 源文件">
+      <UniqueIdentifier>{aad5cb3b-33b4-4b06-a382-efc2b35d0dd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Miscellaneous 源文件">
+      <UniqueIdentifier>{268e6c26-bf8f-4f5c-b532-b3e57255acf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionDetection 头文件\Detail">
+      <UniqueIdentifier>{72e00aef-1609-427c-9fcc-752fe562c961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionDetection 源文件\Detail">
+      <UniqueIdentifier>{7f45a046-c1d7-4049-8e65-1ae4bf075901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionDetection 模板文件">
+      <UniqueIdentifier>{9eaeb94e-2604-4069-8364-1e5a61e26b02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fluid 模板文件">
+      <UniqueIdentifier>{73c386bb-0fa1-44ba-bd91-e8cbea68e07c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 模板文件">
+      <UniqueIdentifier>{48942e3b-f5d9-4681-898e-4d1b15d620ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LCPSolver 模板文件">
+      <UniqueIdentifier>{783ba715-fee8-4e8f-9295-fa437dfa9732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleSystem 模板文件">
+      <UniqueIdentifier>{b9ef6123-9639-4f59-9189-6a5ae9c447a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RigidBody 模板文件">
+      <UniqueIdentifier>{a0dfa660-137a-4bcb-8105-bfaae91b7b83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Physics\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\Detail\BoundTreeSplitTrianglesImpl.cpp">
+      <Filter>CollisionDetection 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeProjectionInfo.cpp">
+      <Filter>CollisionDetection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeSplitTriangles.cpp">
+      <Filter>CollisionDetection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\Fluid\Fluid2Da.cpp">
+      <Filter>Fluid 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\Fluid\Fluid2Db.cpp">
+      <Filter>Fluid 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\Fluid\Fluid3Da.cpp">
+      <Filter>Fluid 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\Fluid\Fluid3Db.cpp">
+      <Filter>Fluid 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\Intersection\ExtremalQuery3.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\Intersection\ExtremalQuery3BSP.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\LCPSolver\LCPSolverManager.cpp">
+      <Filter>LCPSolver 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Physics.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\Detail\BoundTreeSplitTrianglesImpl.h">
+      <Filter>CollisionDetection 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\BoundTree.h">
+      <Filter>CollisionDetection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeChild.h">
+      <Filter>CollisionDetection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeProjectionInfo.h">
+      <Filter>CollisionDetection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeSplitTriangles.h">
+      <Filter>CollisionDetection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\CollisionDetection.h">
+      <Filter>CollisionDetection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\CollisionDetectionFwd.h">
+      <Filter>CollisionDetection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\CollisionGroup.h">
+      <Filter>CollisionDetection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\CollisionRecord.h">
+      <Filter>CollisionDetection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeChildDetail.h">
+      <Filter>CollisionDetection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\CollisionGroupDetail.h">
+      <Filter>CollisionDetection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\CollisionRecordDetail.h">
+      <Filter>CollisionDetection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\FluidFwd.h">
+      <Filter>Fluid 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid.h">
+      <Filter>Fluid 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid2Da.h">
+      <Filter>Fluid 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid2Db.h">
+      <Filter>Fluid 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid3Da.h">
+      <Filter>Fluid 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid3Db.h">
+      <Filter>Fluid 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid2DaDetail.h">
+      <Filter>Fluid 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid2DbDetail.h">
+      <Filter>Fluid 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid3DaDetail.h">
+      <Filter>Fluid 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Fluid\Fluid3DbDetail.h">
+      <Filter>Fluid 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\Intersection.h">
+      <Filter>Intersection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\IntersectionFwd.h">
+      <Filter>Intersection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\IntervalManager.h">
+      <Filter>Intersection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\RectangleManager.h">
+      <Filter>Intersection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\BoxManager.h">
+      <Filter>Intersection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\ExtremalQuery3.h">
+      <Filter>Intersection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\ExtremalQuery3BSP.h">
+      <Filter>Intersection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\ExtremalQuery3PRJ.h">
+      <Filter>Intersection 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\BoxManagerDetail.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\ExtremalQuery3BSPDetail.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\ExtremalQuery3PRJDetail.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\IntervalManagerDetail.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\RectangleManagerDetail.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Intersection\ExtremalQuery3Detail.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\LCPSolver\LCPSolverManager.h">
+      <Filter>LCPSolver 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\LCPSolver\LCPPolyDist.h">
+      <Filter>LCPSolver 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\LCPSolver\LCPSolver.h">
+      <Filter>LCPSolver 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\LCPSolver\LCPSolverFwd.h">
+      <Filter>LCPSolver 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\LCPSolver\LCPPolyDistDetail.h">
+      <Filter>LCPSolver 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Miscellaneous\MiscellaneousFwd.h">
+      <Filter>Miscellaneous 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Miscellaneous\Miscellaneous.h">
+      <Filter>Miscellaneous 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\MassSpringSurface.h">
+      <Filter>ParticleSystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\MassSpringVolume.h">
+      <Filter>ParticleSystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\ParticleSystem.h">
+      <Filter>ParticleSystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\ParticleSystemFwd.h">
+      <Filter>ParticleSystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\ParticleSystemManager.h">
+      <Filter>ParticleSystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\MassSpringArbitrary.h">
+      <Filter>ParticleSystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\MassSpringCurve.h">
+      <Filter>ParticleSystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\ParticleSystemManagerDetail.h">
+      <Filter>ParticleSystem 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\MassSpringVolumeDetail.h">
+      <Filter>ParticleSystem 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\MassSpringSurfaceDetail.h">
+      <Filter>ParticleSystem 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\MassSpringCurveDetail.h">
+      <Filter>ParticleSystem 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\ParticleSystem\MassSpringArbitraryDetail.h">
+      <Filter>ParticleSystem 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBody.h">
+      <Filter>RigidBody 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBodyFwd.h">
+      <Filter>RigidBody 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBodyManager.h">
+      <Filter>RigidBody 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\RigidBody\PolyhedralMassProperties.h">
+      <Filter>RigidBody 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBodyManagerDetail.h">
+      <Filter>RigidBody 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\RigidBody\PolyhedralMassPropertiesDetail.h">
+      <Filter>RigidBody 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeDetail.h">
+      <Filter>CollisionDetection 模板文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

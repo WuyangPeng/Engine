@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{A7968056-15E9-4C40-9319-4DB908EE9EF9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Rendering</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;RENDERING_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnforceTypeConversionRules>
+      </EnforceTypeConversionRules>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubRendering>Windows</SubRendering>
+    </Link>
+    <PostBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubRendering>Windows</SubRendering>
+    </Link>
+    <PostBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;RENDERING_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubRendering>Windows</SubRendering>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubRendering>Windows</SubRendering>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;RENDERING_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubRendering>Windows</SubRendering>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubRendering>Windows</SubRendering>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;RENDERING_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubRendering>Windows</SubRendering>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubRendering>Windows</SubRendering>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Rendering\AglRenderer\AglRenderer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\AglRenderer\AglRendererData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\BlendTransformController.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\ControlledObject.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Controller.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\ControllerInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\ControllerKeyInfo.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\BlendTransformControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\ControlledObjectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\ControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\IKControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\IKGoalImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\IKJointImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\KeyframeControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\MorphControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\ParticleControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\PointControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\SkinControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\Detail\TransformControllerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\IKController.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\IKGoal.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\IKJoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\KeyframeController.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\MorphController.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\ParticleController.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\PointController.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\SkinController.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Controllers\TransformController.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\BoxSurface.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\BSplineSurfacePatch.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\CurveMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\CurveSegment.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\Float2ArrayImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\FloatArrayImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\PrincipalCurvatureInfoImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\SurfacePatchFrameImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\SurfacePatchImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\Float2Array.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\FloatArray.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\PrincipalCurvatureInfo.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\RectangleSurface.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\RevolutionSurface.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfaceMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatch.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatchFrame.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\TubeSurface.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Bound.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFrom.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourConvertTo.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Detail\BoundImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrix.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\HalfFloat.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\SpecializedIO.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\TextureColour.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Transform.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Utility.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\BillboardNode.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\ClodMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\CollapseRecord.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\CollapseRecordArray.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\CreateClodMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\BillboardNodeImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshCollapseInfo.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshEdge.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshTriangleMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertex.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertexEdgeTriangleGraph.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordArrayImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CreateClodMeshImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\DlodNodeImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\DlodNode.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Detail\SwitchNode.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DllLib.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\DllMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9IndexBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Mapping.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9PixelShader.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RenderTarget.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Shader.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Texture1D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Texture2D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Texture3D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9TextureCube.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexShader.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\PlanarShadowEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlutRenderer\GlutRenderers.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlxRenderer\GlxRenderer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlxRenderer\GlxRendererData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing2.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingBase.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\DefaultEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightAmbEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerPixEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerVerEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerPixEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerVerEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerPixEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerVerEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\MaterialEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\MaterialTextureEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture1DEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2AddEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2ColorBlendEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2DEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2MulEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor3Effect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4Effect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4TextureEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBindTexture.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLMapping.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLPixelShader.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTarget.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLShader.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTexture1D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTexture2D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTexture3D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureCube.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVerdanaS16B0I0.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatArrayData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexShader.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\CameraState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\ClearParameter.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\AnalysisRendererManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\AnalysisRendererParameterManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\Dx9Renderer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\Dx9RendererInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\GlutRenderer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\GlutRendererInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLESRenderer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLESRendererInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLRenderer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLRendererInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformIndexBufferImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformPixelShaderImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformRenderTargetImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformShaderImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture1DImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture2DImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture3DImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTextureCube.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTextureCubeImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformVertexBufferImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformVertexFormatImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformVertexShaderImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\RendererDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\RendererImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\RendererInputDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\RendererInputImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\RendererManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\RendererParameterImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\RenderTargetManagementImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\VertexFormatManagementImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\WindowRenderer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\WindowRendererInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\DrawManagement.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\GlobalState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformIndexBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformRenderTarget.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTexture1D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTexture2D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTexture3D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformVertexBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformVertexFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Renderer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererBasis.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererInputData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererParameter.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RenderTargetManagement.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\TextureLockManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\TextureManagementLockEncapsulation.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\VertexFormatManagement.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\ViewportManagement.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\BufferImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\BufferParameter.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\RenderTargetImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Texture1DImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Texture2DImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Texture3DImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureCubeImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureUserField.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\VertexBufferAccessorImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\VertexFormatImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\IndexBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\LoadTexture.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\RenderTarget.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\SaveTexture.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Texture.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Texture1D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Texture2D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Texture3D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\TextureCube.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessor.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexFormatElement.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexFormatType.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Camera.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\CameraFrustumData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\CameraManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\CameraNode.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Culler.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraFrustum.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraMatrix.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraNodeImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\MaterialImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NormalDerivatives.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParticlesImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisibleSetImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\WorldCoordinateFrame.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Light.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Material.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Node.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Particles.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Picker.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickRecord.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickRecordContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Polypoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Polysegment.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Projector.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\SaveVisual.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ScreenTarget.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Spatial.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\SpatialData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TriangleIndex.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglePosition.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Triangles.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesFan.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesStrip.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\VisibleSet.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Visual.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\VisualData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelPositionConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldDirectionVectorConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldPositionConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\LightConstantImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\MaterialConstantImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ProjectorConstantImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ProjectorMatrixConstantImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ShaderFloatImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightAmbientConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightAttenuationConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightDiffuseConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightModelDirectionVectorConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightModelPositionConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightSpecularConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightSpotConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightWorldDirectionVectorConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightWorldPositionConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialAmbientConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialDiffuseConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialEmissiveConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialSpecularConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionMatrixConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionViewMatrixConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionViewWorldMatrixConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectorMatrixConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectorWorldPositionConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ShaderFloat.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ViewMatrixConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ViewWorldMatrixConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\WorldMatrixConstant.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\AlphaState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\CullState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\DepthState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\AlphaStateImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\CullStateImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\DepthStateImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\OffsetStateImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderBaseDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderBaseImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderConstantsDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderParametersImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderProfileDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderSamplerDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\SingleShaderBaseDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\SingleShaderConstantsDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\SingleShaderProfileDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\SingleShaderSamplerDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\StencilStateImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\VisualEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\VisualEffectInstanceImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\VisualPassImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\VisualTechniqueImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\WireStateImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\LoadVisualEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\OffsetState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\PixelShader.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\SaveVisualEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderBase.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderBaseData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderConstantsData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderParameters.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderProfileData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderSamplerData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\SingleShaderBaseData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\SingleShaderConstantsData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\SingleShaderProfileData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\SingleShaderSamplerData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\StencilState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\VertexShader.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\VisualEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\VisualEffectInstance.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\VisualPass.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\VisualTechnique.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\WireState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Sorting\BspNode.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Sorting\ConvexRegion.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Sorting\ConvexRegionManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Sorting\CRMCuller.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Sorting\Portal.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Terrain\TerrainBase.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Terrain\TerrainPage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Rendering\Abuse\Abuse.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Abuse\AbuseFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRendererData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRendererFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ConsoleGraph\ConsoleGraph.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ConsoleGraph\ConsoleGraphFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\BlendTransformController.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\ControlledObject.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Controller.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\ControllerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\ControllerKeyInfo.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Controllers.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\ControllersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\BlendTransformControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\ControlledObjectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\ControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\IKControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\IKGoalImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\IKJointImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\KeyframeControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\MorphControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\ParticleControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\PointControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\SkinControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Detail\TransformControllerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\Flags\ControllerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\IKController.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\IKGoal.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\IKJoint.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\KeyframeController.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\MorphController.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\ParticleController.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\PointController.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\SkinController.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Controllers\TransformController.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\BoxSurface.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\BSplineSurfacePatch.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\CurveMesh.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\CurveSegment.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\CurvesSurfaces.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\CurvesSurfacesFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\Float2ArrayImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\FloatArrayImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\PrincipalCurvatureInfoImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\SurfacePatchFrameImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\Detail\SurfacePatchImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\Float2Array.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\FloatArray.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\PrincipalCurvatureInfo.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\RectangleSurface.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\RevolutionSurface.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfaceMesh.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatch.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatchFrame.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\TubeSurface.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Bound.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Colour.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFrom.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertTo.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourDefaultTraits.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourTextureFormatTraits.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\DataTypes.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\DataTypesFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\BoundImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrix.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Flags\TextureFormat.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\HalfFloat.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\SpecializedIO.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TextureColour.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TextureColourDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Transform.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Utility.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Demogl\Demogl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Demogl\DemoglFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\BillboardNode.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\ClodMesh.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\CollapseRecord.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\CollapseRecordArray.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\CreateClodMesh.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\DetailFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\BillboardNodeImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshCollapseInfo.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshEdge.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshTriangleMesh.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertex.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertexEdgeTriangleGraph.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordArrayImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CreateClodMeshImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\DlodNodeImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\DlodNode.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\Flags\SwitchNodeType.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Detail\SwitchNode.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DevIL\DevIL.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DevIL\DevILFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DirectAPI\DirectAPI.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DirectAPI\DirectAPIFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9IndexBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Mapping.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9PixelShader.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Renderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RendererData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RendererFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RenderTarget.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Shader.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Texture1D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Texture2D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Texture3D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9TextureCube.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexFormat.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexShader.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\FBX\FBX.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\FBX\FBXFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffects.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffectsFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarShadowEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlutRenderer\GlutRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlutRenderer\GlutRendererData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlutRenderer\GlutRendererFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlutRenderer\GlutRendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlxRenderer\GlxRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlxRenderer\GlxRendererData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlxRenderer\GlxRendererFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlxRenderer\GlxRendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Illumination\Illumination.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Illumination\IlluminationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing2.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingBase.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\JPEG\JPEG.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\JPEG\JPEGFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Lib3ds\Lib3ds.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Lib3ds\Lib3dsFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\DefaultEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightAmbEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerPixEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerVerEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerPixEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerVerEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerPixEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerVerEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffects.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffectsFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\MaterialEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\MaterialTextureEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture1DEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2AddEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2ColorBlendEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2DEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2MulEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor3Effect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4Effect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4TextureEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Macro\Macro.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Macro\MacroFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Nethack\Nethack.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Nethack\NethackFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Nvtoolkit\Nvtoolkit.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Nvtoolkit\NvtoolkitFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPI.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPIFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBindTexture.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBitmapFont.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLIndexBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLMapping.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLPixelShader.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTarget.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLShader.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTexture1D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTexture2D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTexture3D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureCube.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManageDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormat.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatArrayData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatArrayDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexShader.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\TextureDataTraits.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Openvidia\Openvidia.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Openvidia\OpenvidiaFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Picture\Picture.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Picture\PictureFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\BufferLockManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\BufferLockManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\BufferManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\BufferManagementDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\BufferManagementLockEncapsulation.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\BufferManagementLockEncapsulationDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\CameraState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\ClearParameter.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\AnalysisRendererManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\AnalysisRendererParameterManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\Dx9Renderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\Dx9RendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\GlutRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\GlutRendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLESRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLESRendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLRendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformIndexBufferImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformPixelShaderImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformRenderTargetImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformShaderImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture1DImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture2DImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture3DImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTextureCubeImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformVertexBufferImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformVertexFormatImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformVertexShaderImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\RendererDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\RendererImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\RendererInputDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\RendererInputImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\RendererManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\RendererParameterImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\RenderTargetManagementImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\VertexFormatManagementImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\WindowRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\WindowRendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\DrawManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Flags\RendererTypes.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\GlobalState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformIndexBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformRenderTarget.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformTexture1D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformTexture2D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformTexture3D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformTextureCube.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformVertexBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformVertexFormat.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Renderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RendererBasis.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RendererData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RendererFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RendererInputData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RendererManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RendererParameter.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Renderers.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderTargetManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\ShaderManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\ShaderManagementDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureLockManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureLockManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureManagementDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureManagementLockEncapsulation.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureManagementLockEncapsulationDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\VertexFormatManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\ViewportManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Rendering.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingDll.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingExport.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingImport.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingLib.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingNoImport.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\BufferImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\BufferParameter.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\RenderTargetImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Texture1DImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Texture2DImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Texture3DImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureCubeImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureUserField.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\VertexBufferAccessorImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\VertexFormatImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\BufferFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\TextureFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\VertexFormatFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\IndexBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\LoadTexture.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\LoadTextureDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\RenderTarget.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Resources.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\ResourcesFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\SaveTexture.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture1D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture2D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture3D.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\TextureCube.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\TextureLevelData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\TextureLevelDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessor.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorArrayData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorArrayDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexFormat.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexFormatElement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexFormatType.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Camera.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraFrustumData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraNode.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Culler.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraFrustum.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraMatrix.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraNodeImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\MaterialImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NormalDerivatives.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParticlesImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisibleSetImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\WorldCoordinateFrame.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\CameraFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\CullingModeFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\LightFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\VisualFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Light.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Material.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Node.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Particles.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Picker.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickRecord.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickRecordContainer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Polypoint.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Polysegment.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Projector.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SaveVisual.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraph.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraphFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ScreenTarget.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Spatial.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SpatialData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TriangleIndex.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglePosition.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Triangles.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesFan.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesMesh.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesStrip.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\VisibleSet.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Visual.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\VisualData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelPositionConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldDirectionVectorConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldPositionConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\LightConstantImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\MaterialConstantImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ProjectorConstantImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ProjectorMatrixConstantImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ShaderFloatImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightAmbientConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightAttenuationConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightDiffuseConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightModelDirectionVectorConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightModelPositionConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightSpecularConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightSpotConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightWorldDirectionVectorConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightWorldPositionConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialAmbientConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialDiffuseConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialEmissiveConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialSpecularConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionMatrixConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionViewMatrixConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionViewWorldMatrixConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectorMatrixConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectorWorldPositionConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ShaderFloat.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ShaderFloats.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ShaderFloatsFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ViewMatrixConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ViewWorldMatrixConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\WorldMatrixConstant.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\AlphaState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\CullState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\DepthState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\AlphaStateImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\CullStateImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\DepthStateImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\OffsetStateImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderBaseDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderBaseImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderConstantsDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderParametersImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderProfileDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderSamplerDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\SingleShaderBaseDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\SingleShaderConstantsDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\SingleShaderProfileDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\SingleShaderSamplerDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\StencilStateImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\VisualEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\VisualEffectInstanceImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\VisualPassImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\VisualTechniqueImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\WireStateImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\AlphaStateFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\DepthStateFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\ShaderFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\StencilStateFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\LoadVisualEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\OffsetState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\PixelShader.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\SaveVisualEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderBase.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderBaseData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderConstantsData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderParameters.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderProfileData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Shaders.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderSamplerData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShadersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\SingleShaderBaseData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\SingleShaderConstantsData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\SingleShaderProfileData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\SingleShaderSamplerData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\StencilState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\VertexShader.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\VisualEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\VisualEffectInstance.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\VisualPass.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\VisualTechnique.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\WireState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Sorting\BspNode.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Sorting\ConvexRegion.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Sorting\ConvexRegionManager.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Sorting\CRMCuller.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Sorting\Portal.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Sorting\Sorting.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Sorting\SortingFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Terrain\Terrain.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Terrain\TerrainBase.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Terrain\TerrainFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Terrain\TerrainPage.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\TextFonts\TextFonts.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\TextFonts\TextFontsFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\TIFF\TIFF.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\TIFF\TIFFFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Vertex\Vertex.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Vertex\VertexFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Wargamer\Wargamer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Wargamer\WargamerFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\WglRenderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\WglRendererFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Wing\Wing.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Wing\WingFwd.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

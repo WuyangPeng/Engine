@@ -1,0 +1,16 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.2.0 (2019/12/30 10:15)
+
+#ifndef THREADING_CORE_RENDER_ENGINE_EXPORT_H
+#define THREADING_CORE_RENDER_ENGINE_EXPORT_H
+
+#include "Framework/Macro/UserMacro.h"
+
+#ifndef BUILDING_THREADING_CORE_RENDER_ENGINE_EXPORT
+  #define BUILDING_THREADING_CORE_RENDER_ENGINE_EXPORT
+#endif // BUILDING_THREADING_CORE_RENDER_ENGINE_EXPORT
+
+#endif // THREADING_CORE_RENDER_ENGINE_EXPORT_H

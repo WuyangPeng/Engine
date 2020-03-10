@@ -1,0 +1,49 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/24 10:30)
+
+#ifndef RENDERING_DETAIL_SWITCH_NODE_H
+#define RENDERING_DETAIL_SWITCH_NODE_H
+
+#include "Rendering/SceneGraph/Node.h"
+#include "Flags/SwitchNodeType.h"
+
+namespace Rendering
+{	
+	class RENDERING_DEFAULT_DECLARE SwitchNode : public Node
+	{
+	public:
+		using ClassType = SwitchNode;
+		using ParentType = Node;
+		using ClassShareType = CoreTools::CopyUnsharedClasses;
+
+	public:
+		SwitchNode ();
+		virtual ~SwitchNode ();
+
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		
+		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(SwitchNode); 
+	
+		void SetActiveChild (int activeChild);
+		int GetActiveChild () const;
+		void DisableAllChildren ();
+
+		virtual ControllerInterfaceSmartPointer Clone() const override;
+
+		virtual const PickRecordContainer ExecuteRecursive(const APoint& origin,const AVector& direction, float tMin, float tMax) const override;
+	 
+	protected:
+		 virtual void GetVisibleSet (Culler& culler, bool noCull) override;
+		 
+	private:
+		 int m_ActiveChild;
+	};
+
+	CORE_TOOLS_STREAM_REGISTER(SwitchNode);
+	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, SwitchNode); 
+}
+
+#endif // RENDERING_DETAIL_SWITCH_NODE_H

@@ -1,0 +1,78 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 引擎版本：0.0.0.3 (2019/07/23 10:36)
+
+#ifndef RENDERING_CONTROLLERS_MORPH_CONTROLLER_H
+#define RENDERING_CONTROLLERS_MORPH_CONTROLLER_H
+
+#include "Rendering/RenderingDll.h"
+
+#include "Controller.h"
+#include "ControllerKeyInfo.h"
+#include "Mathematics/Algebra/APoint.h"
+#include "Mathematics/Algebra/AVector.h"
+
+RENDERING_EXPORT_SHARED_PTR(MorphControllerImpl); 
+
+namespace Rendering
+{
+	class RENDERING_DEFAULT_DECLARE MorphController : public Controller
+	{
+	public:
+		COPY_UNSHARE_CLASSES_TYPE_DECLARE(MorphController);
+		using ParentType = Controller;
+		using AVector = Mathematics::AVectorf;
+		using APoint = Mathematics::APointf;
+
+	public:
+		// 顶点的数目，变形的目标，被固定对象的生存期的键。
+		// 构造函数做一些创建控制器的工作。
+		// 每个目标顶点，时间，和权重都必须由相应的成员访问分配。
+
+		// numVertices: 每个目标的顶点的数量。所有的目标具有相同数量的顶点。
+
+		// numTargets:  变形的目标数
+
+		// numKeys:  键的数目，每个键发生在一个特定的时间。
+
+		MorphController(int numVertices, int numTargets, int numKeys);
+		virtual ~MorphController ();
+
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		
+		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(MorphController); 
+
+		// 调用构造函数后，您必须使用这些函数设置顶点数组，时间和权重。
+		int GetNumVertices () const;
+		int GetNumTargets () const;
+		int GetNumKeys () const;
+		const APoint GetVertices(int target, int vertices) const;	 
+		float GetTimes(int key) const;
+		float GetWeights(int key, int target) const;
+
+		void SetVertices(int target, int vertices, const APoint& point);
+		void SetTimes(int key,float times);
+		void SetWeights(int key, int target,float weights);
+
+		// 动画更新。应用程序时间以毫秒为单位。
+		virtual bool Update(double applicationTime) override;
+		virtual void SetObject(ControllerInterface* object) override;
+		virtual void SetObjectInCopy(ControllerInterface* object) override;
+
+		virtual ControllerInterfaceSmartPointer Clone() const override;
+
+	protected:
+		// 查找边界上的键。
+		const ControllerKeyInfo GetKeyInfo(float ctrlTime);
+ 
+	private:
+		IMPL_TYPE_DECLARE(MorphController);
+	};
+
+	CORE_TOOLS_STREAM_REGISTER(MorphController);
+	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, MorphController); 
+}
+
+#endif // RENDERING_CONTROLLERS_MORPH_CONTROLLER_H

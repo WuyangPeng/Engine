@@ -1,0 +1,36 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 引擎版本：0.0.2.1 (2020/01/21 17:54)
+
+// 将信息输出至指定的ostream。UnitTestSuiteReportOutputImpl为内部接口子类。实现输出单元测试名、测试套件名和测试结果
+
+#ifndef CORE_TOOLS_REPORT_OUTPUT_CORE_TOOLS_SUITE_REPORT_OUTPUT_IMPL_H
+#define CORE_TOOLS_REPORT_OUTPUT_CORE_TOOLS_SUITE_REPORT_OUTPUT_IMPL_H
+
+#include "CoreTools/CoreToolsDll.h"
+
+#include "TimeReportOutput.h"
+
+namespace CoreTools
+{
+	class CORE_TOOLS_HIDDEN_DECLARE UnitTestSuiteReportOutputImpl : public TimeReportOutput
+	{
+	public:
+		using ClassType = UnitTestSuiteReportOutputImpl;
+		using ParentType = TimeReportOutput;
+
+	public:
+		UnitTestSuiteReportOutputImpl(const std::string& timeDescribe, int borderLineLength, std::ostream* osPtr = &std::cout);
+		virtual ~UnitTestSuiteReportOutputImpl();
+
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+
+		void PrintTestName(const std::string& testName);
+		void PrintSuiteName(const std::string& suiteName);
+		void PrintTestResult(int passedNumber, int failedNumber, int errorNumber, int characterWidth);
+	};
+}
+
+#endif // CORE_TOOLS_REPORT_OUTPUT_CORE_TOOLS_SUITE_REPORT_OUTPUT_IMPL_H

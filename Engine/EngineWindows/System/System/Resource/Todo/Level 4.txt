@@ -1,0 +1,12 @@
+TODO Level 4
+
+0.0.2.0
+
+1.  （Helper）增加注释以清晰的了解GL宏所使用的函数，并使用枚举进行封装。
+2.  （Helper）GL宏增加使用函数的注释，以标明用途。
+3.  （OpenGL）根据最新的glew版本对模块进行扩展。
+4.  （OpenGL）完成OpenGL测试模块，对所有OpenGL API通过枚举调用函数进行封装。
+5.  （DirectX）完成DirectX库：D3D9、D3D10、D3D11。
+6.  （Linux）完成Linux API以及其他平台对Linux API的虚拟实现。
+7.  （Macintosh）完成Macintosh API以及其他平台对Macintosh API的虚拟实现。 
+8.  （Android）完成Android API以及其他平台对Android API的虚拟实现。 

@@ -1,0 +1,6 @@
+TODO Level 4
+
+0.0.2.0  
+
+1.  判断以下库引擎是否需要关联：
+	Abuse、demogl、DevIL、FBX、FreeAlut、TIFF、OpenCL。

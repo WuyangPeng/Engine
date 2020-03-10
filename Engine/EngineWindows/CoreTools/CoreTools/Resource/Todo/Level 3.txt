@@ -1,0 +1,9 @@
+TODO Level 3
+ 
+0.0.2.1
+
+1.  （ImplHelper）考虑修改Impl模式，使用继承代替宏，在基类中调用静态断言和Copy函数。
+2.  （ImplHelper）检查Impl模式中的移动运算符。
+3.  （CharacterString）将类MultiByteConversionWideChar和WideCharConversionMultiByte中使用的堆指针改成vector，简化代码。
+4.  （MemoryTools）重构类Memory的实现。
+5.  （ObjectSystems）将模块使用的子类智能指针改成std::shared_ptr。

@@ -1,0 +1,204 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/23 13:46)
+
+#include "Rendering/RenderingExport.h"
+
+#include "IKGoalImpl.h"
+#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+
+using std::string;
+using std::vector;
+
+Rendering::IKGoalImpl
+	::IKGoalImpl(const SpatialSmartPointer& target,const SpatialSmartPointer& effector,float weight)
+	:m_Target{ target }, m_Effector{ effector }, m_Weight{ weight }
+{
+	RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::IKGoalImpl
+	::IKGoalImpl()
+	:m_Target{}, m_Effector{}, m_Weight{ 1.0f }
+{
+	RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_STUB_DEFINE(Rendering,IKGoalImpl)
+#endif // OPEN_CLASS_INVARIANT	
+
+int Rendering::IKGoalImpl
+	::GetStreamingSize() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	auto size = CORE_TOOLS_STREAM_SIZE(m_Weight);
+	size += CORE_TOOLS_STREAM_SIZE(m_Target);
+	size += CORE_TOOLS_STREAM_SIZE(m_Effector);
+
+	return size;
+}
+
+void Rendering::IKGoalImpl
+	::Save(CoreTools::BufferTarget& target) const 
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	target.Write(m_Weight);
+	target.WriteSmartPointer(m_Target);
+	target.WriteSmartPointer(m_Effector);
+}
+
+void Rendering::IKGoalImpl
+	::Load(CoreTools::BufferSource& source)
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	source.Read(m_Weight);
+	source.ReadSmartPointer(m_Target);
+	source.ReadSmartPointer(m_Effector);
+}
+
+void Rendering::IKGoalImpl
+	::Link(CoreTools::ObjectLink& source)
+{
+	RENDERING_CLASS_IS_VALID_9;	 
+
+	source.ResolveObjectSmartPointerLink(m_Target);
+	source.ResolveObjectSmartPointerLink(m_Effector);
+}
+
+void Rendering::IKGoalImpl
+	::Register(CoreTools::ObjectRegister& target) const 
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	target.RegisterSmartPointer(m_Target);
+	target.RegisterSmartPointer(m_Effector);
+}
+
+const Rendering::ConstSpatialSmartPointer Rendering::IKGoalImpl
+	::GetTarget() const 
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_Target.PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+}
+
+const Rendering::ConstSpatialSmartPointer Rendering::IKGoalImpl
+	::GetEffector() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_Effector.PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+}
+
+const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl
+	::GetTargetPosition() const 
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_Target->GetWorldTransform().GetTranslate();
+}
+
+const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl
+	::GetEffectorPosition() const 
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_Effector->GetWorldTransform().GetTranslate();
+}
+
+void Rendering::IKGoalImpl
+	::SetWeight(float weight) 
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	m_Weight = weight;
+}
+
+float Rendering::IKGoalImpl
+	::GetWeight() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_Weight;
+}
+
+const CoreTools::ObjectSmartPointer Rendering::IKGoalImpl
+	::GetObjectByName(const string& name) 
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	auto targetObject = m_Target->GetObjectByName(name);
+
+	if (targetObject != nullptr)
+	{
+		return targetObject;
+	}		
+	else
+	{
+		auto effectorObject = m_Effector->GetObjectByName(name);
+		if (effectorObject != nullptr)
+			return effectorObject;
+		else
+			return CoreTools::ObjectSmartPointer{};
+	}		
+}
+
+const vector<CoreTools::ObjectSmartPointer> Rendering::IKGoalImpl
+	::GetAllObjectsByName(const string& name)
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	auto objects = m_Target->GetAllObjectsByName(name);
+	auto effectorObject = m_Effector->GetAllObjectsByName(name);
+
+	objects.insert(objects.end(), effectorObject.begin(), effectorObject.end());
+
+	return objects;
+}
+
+const CoreTools::ConstObjectSmartPointer Rendering::IKGoalImpl
+	::GetConstObjectByName(const string& name) const 
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	auto targetObject = m_Target->GetConstObjectByName(name);
+
+	if (targetObject != nullptr)
+	{
+		return targetObject;
+	}		
+	else
+	{
+		auto effectorObject = m_Effector->GetConstObjectByName(name);
+		if (effectorObject != nullptr)
+			return effectorObject;
+		else
+			return CoreTools::ConstObjectSmartPointer{};
+	}		
+}
+
+const vector<CoreTools::ConstObjectSmartPointer> Rendering::IKGoalImpl
+	::GetAllConstObjectsByName(const string& name) const
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	auto objects = m_Target->GetAllConstObjectsByName(name);
+	auto effectorObject = m_Effector->GetAllConstObjectsByName(name);
+
+	objects.insert(objects.end(), effectorObject.begin(), effectorObject.end());
+
+	return objects;
+}

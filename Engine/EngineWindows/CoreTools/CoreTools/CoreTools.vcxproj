@@ -1,0 +1,1296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{72A60213-0F4A-42CD-9091-BF266C7B2CF4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CoreTools</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\CoreTools\Assert\Assert.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Assert\AssertFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Assert\Assertion.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Base.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\BaseFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Flags\UniqueIDSelectFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Singleton.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\SingletonDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ArrayProxy.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray2D.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitArrayManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitArrayManagerFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitProxy.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ConstArrayProxy.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ConstBitProxy.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ConstTwoBitProxy.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\TwoBitArray.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\TwoBitProxy.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveString.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveStringDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CharacterString.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CharacterStringFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\FormatErrorMessageImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\MultiByteConversionWideChar.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\WideCharConversionMultiByte.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\FormatErrorMessage.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\StringConversion.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\CheckInvariant.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\CheckInvariantDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ClassInvariant.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ClassInvariantFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\Flags\CheckInvariantFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\FunctionDescribed.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ScopeExit.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ScopeExitDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\TriggerAssert.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Command.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandArgument.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandHandle.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandLineInformation.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\AnalysisCommandArgumentContainer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandLineInformationImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\NoValueCommandArgument.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\NumberCommandArgument.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\StringCommandArgument.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\Console.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleAlloc.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleColors.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleColorsDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleInstance.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleInstanceDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleTextColorsManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleTextColorsManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\Flags\ConsoleColorsFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreTools.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsDll.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsExport.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsImport.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsLib.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsNoImport.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck16.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITT.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITTUsingTable.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckHandle.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck16Table.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck32Table.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCCITTTable.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckHandleImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Flags\SpecifyCheckSumPowersFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\IntelCheckSum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SevenModElevenCheckSum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypes.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypesFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeap.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecord.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStored.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Table.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TableDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Tuple.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLess.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLessDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\Detail\LoadingLibraryImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\DynamicLink.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\DynamicLinkFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\LoadingLibrary.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\EngineConfiguration.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\EngineConfigurationFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\StringReplacing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\NormalError.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\WindowsError.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Error.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Exception.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\ExceptionFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\GameError.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\GameErrorDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\LastError.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\CFileManagerHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\CopyFileTools.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\CReadFileManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\CWriteFileManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\DeleteFileTools.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\BufferIOImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CFileManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CommonCopyFileTools.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CReadFileManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CWriteFileManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\DeleteFileToolsImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentVariableImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileBufferImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileHandleImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileManagerFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamSeekManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamSeekManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadAndWriteFileHandleImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadBufferIOImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileHandleImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WindowsCopyFileTools.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteBufferIOImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileHandleImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Endian.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Environment.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\EnvironmentVariable.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileBuffer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileHandleHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManagerFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManagerHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Flags\BufferIOFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\IFStreamManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\OFStreamManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadAndWriteFileHandle.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadBufferIO.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadFileHandle.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadFileManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteBufferIO.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteFileHandle.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteFileManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\BaseFrameMemorySystem.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\BaseFrameMemorySystemImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\FrameMemorySystemImplDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\FrameMemorySystemPointerShareImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\Flags\FrameMemorySystemFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystem.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemPointerShare.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Freetype\Freetype.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Freetype\FreetypeFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\HandleManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\HandleManagerFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\HandleTypeManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\HandleTypeManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\ResourceHandle.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\ResourceHandleDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplHelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplStaticAssertHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Appender.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\AppenderManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AnalysisAppenderManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderConsole.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFile.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFileConfiguration.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderPrintFlagsExist.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\ErrorConsoleTextColorsManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImplDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogFileNameImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LoggerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessageImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessagePostfixImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessagePrefixImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\OutputConsoleTextColorsManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Flags\LogManagerFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Log.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogAppenderIOManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogConsoleTextColorsManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogFileName.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogFilterManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Logger.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogLevelManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManagerFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessage.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessagePostfix.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessagePrefix.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\AnimationCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ArtificialIntellegenceCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\AssistToolsCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\CoreToolsCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\DatabaseCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\FrameworkCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ImagicsCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\InputOutputCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\MathematicsCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\NetworkCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\PhysicsCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\RenderingCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ResourceManagerCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ScriptCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\SoundEffectCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\UserCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\UserInterfaceCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\AssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\AnimationClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ArtificialIntellegenceClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\AssistToolsClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\CoreToolsClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\DatabaseClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\FrameworkClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ImagicsClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\InputOutputClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\MathematicsClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\NetworkClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\PhysicsClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\RenderingClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ResourceManagerClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ScriptClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\SoundEffectClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\UserClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\UserInterfaceClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\CustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ExceptionMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\FunctionDescribedMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\InitializeTerminatorMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\LogMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\MainFunctionMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\MemberFunctionMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\MemoryMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ModuleClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ModuleCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\NameMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\PropertiesMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\RttiMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\SingletonMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\StreamMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\SubclassSmartPointerMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\TemplateToolsMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ThirdSubclassSmartPointerMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTestSuiteMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\AssertExceptionMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\AssertTestMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\Detail\AssertTestMacroDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionTestingHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformation.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformationHelperImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\DllFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\MainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\MainFunctionHelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\TestingInformationHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferPool.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstFirstSubclassSmartPointer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstFirstSubclassSmartPointerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstSecondSubclassSmartPointer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstSecondSubclassSmartPointerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstThirdSubclassSmartPointer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstThirdSubclassSmartPointerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemoryDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferPoolImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferStreamImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MD5ContextImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryInformation.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\SmartPointerManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\FirstSubclassSmartPointer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\FirstSubclassSmartPointerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Flags\MD5ContextStatus.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\HeapAllocate.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\HeapAllocateDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MD5.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MD5Context.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Memory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryTools.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryToolsFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Pool.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\PoolDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Random.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SecondSubclassSmartPointer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SecondSubclassSmartPointerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArray.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArrayDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer2DArray.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer2DArrayDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer3DArray.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer3DArrayDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer4DArray.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer4DArrayDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerSingle.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerSingleDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointerTraits.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassWeakPointer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassWeakPointerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ThirdSubclassSmartPointer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ThirdSubclassSmartPointerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\BaseEntity.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\CallbackParameters.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\CallbackParametersDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Detail\CallbackParametersImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Detail\CallbackParametersImplDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Detail\EntityManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EntityManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EntityManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventEntity.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventEntityDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventInterface.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventSlot.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventSlotDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventSlotManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventSlotManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\MessageEvent.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\MessageEventFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\MessageManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\MessageManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\ParametersInterface.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Telegram.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramLess.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramLessDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramMessageManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramMessageManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ModuleInitializerTerminator\ModuleInitializerTerminator.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ModuleInitializerTerminator\ModuleInitializerTerminatorFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\DownloadingFilesImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\InternetConnection.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\OpenUrlInternet.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\DownloadingFiles.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\DownloadingFilesEvent.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\Network.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\NetworkFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferInStream.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferOutStream.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferSource.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferSourceDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTarget.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTargetDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferInStreamImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferOutStreamImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\InTopLevelImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectLinkImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectNameImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectRegisterImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\OutTopLevelImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\TopLevel.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\FileInStream.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\FileOutStream.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTerm.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InTopLevel.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Object.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterface.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterfaceLess.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectLink.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectLinkDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectName.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectRegister.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectRegisterDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectSystems.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectSystemsFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\OutTopLevel.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Rtti.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Stream.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\StreamDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\StreamSize.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\TypeCasting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\PerformanceProfiler\PerformanceProfiler.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\PerformanceProfiler\PerformanceProfilerFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertyGetInternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertyGetInternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertySetInternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertySetInternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGet.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetSet.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetSetDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetSetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetSetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertySet.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertySetDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertySetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertySetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\Properties.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertiesFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\Property.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyBase.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyBaseDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetExternalOffset.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetExternalOffsetDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetInternalOffset.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetInternalOffsetDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetSetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetSetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertySetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertySetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\SimplePropertyGetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\SimplePropertyGetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\SimplePropertySetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\SimplePropertySetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetSet.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetSetDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetSetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetSetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertySetExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertySetExternalDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\RegularExpression\RegularExpression.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\RegularExpression\RegularExpressionFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\EquilongReportOutputImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\ReportOutput.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\TimeReportOutput.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestFailReportOutputImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestSuiteReportOutputImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\EquilongReportOutput.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\ReportOutput.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\ReportOutputFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestFailReportOutput.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestSuiteReportOutput.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\BaseResource.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\BaseResourceManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\CommonDataResource.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceLockManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\CommonDataResourceImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\ResourceManagerLockImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\ResourceManagerPriorityQueue.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Flags\ResourceManagerFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\ResourceFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\ResourceManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\ResourceManagerFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\ResourceManagerLock.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\DefaultEventDispatcher.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\DefaultEventDispatcherDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\EventDispatcher.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\EventDispatcherDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\GenerateDispatcher.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\State.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateEntity.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateEntityDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachine.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineBase.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineBaseDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineManagerFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineRow.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineRowDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\TransitionEvent.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\SyntacticParser\SyntacticParser.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\SyntacticParser\SyntacticParserFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ExplicitCast.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ExplicitCastDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Factorial.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Fibonacci.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IfThenElse.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IncrementScope.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IncrementScopeDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\LiteralCast.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\LiteralCastDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBePod.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBeSameSize.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBeSubscriptable.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustHaveBase.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveCosine.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveSine.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveTangent.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ParamType.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Pow3.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\PtrCompare.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RealAddress.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RealAddressDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RecursiveSine.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ReferenceCast.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ReferenceCastDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\SimpleDecrementer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\SimpleDecrementerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\SimpleIncrementer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\SimpleIncrementerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Sqrt.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\TemplateTools.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\TemplateToolsFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Tiny.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\TrigonometricFunction.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ValueScope.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ValueScopeDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\BoostParsing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TextParsing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TextParsingFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\BoostMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\BoostRecursiveMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\CriticalSection.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\EventImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\MutexFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\MutexImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\NullMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\SemaphoreImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\StdMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\StdRecursiveMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\WindowsMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\DllMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Event.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Flags\MutexFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Mutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ScopedMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Semaphore.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Thread.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Threading.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadingFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\TryScopedMutex.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\CustomTime.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\DeltaTimeManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Detail\DeltaTimeManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\MillisecondTimer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\SecondTimer.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Time.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\TimeFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\CpuTimerData.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuiteImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuitePrintManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestData.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestFailPrintManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestPrintManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Suite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestComposite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestInterface.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestStream.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestSuiteFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\Version.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\VersionInformation.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\VersionInformationFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Zlib\Zlib.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Zlib\ZlibFwd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\CoreTools\Assert\Assertion.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ArrayProxy.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray2D.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\BitProxy.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ConstArrayProxy.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ConstBitProxy.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ConstTwoBitProxy.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\TwoBitArray.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\TwoBitProxy.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveString.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\FormatErrorMessageImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\MultiByteConversionWideChar.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\WideCharConversionMultiByte.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\FormatErrorMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\StringConversion.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ClassInvariant\FunctionDescribed.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ClassInvariant\TriggerAssert.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandArgument.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandHandle.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandLineInformation.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\AnalysisCommandArgumentContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandLineInformationImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\NoValueCommandArgument.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\NumberCommandArgument.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\StringCommandArgument.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Console\ConsoleAlloc.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck16.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITT.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITTUsingTable.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckHandle.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck16Table.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck32Table.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCCITTTable.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckHandleImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\IntelCheckSum.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SevenModElevenCheckSum.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\DllMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\DynamicLink\Detail\LoadingLibraryImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\DynamicLink\LoadingLibrary.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\StringReplacing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\NormalError.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\WindowsError.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Error.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\LastError.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\CFileManagerHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\CopyFileTools.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\CReadFileManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\CWriteFileManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\DeleteFileTools.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\BufferIOImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CFileManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CommonCopyFileTools.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CReadFileManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CWriteFileManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\DeleteFileToolsImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentVariableImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileBufferImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileHandleImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileManagerFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamSeekManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamSeekManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadAndWriteFileHandleImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadBufferIOImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileHandleImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileManagerInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WindowsCopyFileTools.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteBufferIOImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileHandleImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileManagerInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Endian.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Environment.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\EnvironmentVariable.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileHandleHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileManagerHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\IFStreamManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\OFStreamManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadAndWriteFileHandle.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadBufferIO.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadFileHandle.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadFileManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\WriteBufferIO.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\WriteFileHandle.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\WriteFileManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\BaseFrameMemorySystem.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\BaseFrameMemorySystemImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\FrameMemorySystemPointerShareImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemPointerShare.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Appender.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\AppenderManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AnalysisAppenderManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderConsole.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFile.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFileConfiguration.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderPrintFlagsExist.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\ErrorConsoleTextColorsManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogFileNameImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LoggerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessageImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessagePostfixImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessagePrefixImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\OutputConsoleTextColorsManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Log.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogAppenderIOManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogConsoleTextColorsManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogFileName.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogFilterManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Logger.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogLevelManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogMessagePostfix.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogMessagePrefix.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionTestingHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformation.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformationHelperImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\DllFunctionHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\TestingInformationHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\BufferPool.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferPoolImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferStreamImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MD5ContextImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryInformation.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\SmartPointerManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\MD5.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\MD5Context.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Memory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\MemoryManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Random.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\BaseEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\CallbackParameters.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\Detail\CallbackParametersImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\Detail\EntityManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\EntityManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\EventInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\ParametersInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\DownloadingFilesImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\InternetConnection.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\OpenUrlInternet.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\DownloadingFiles.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\DownloadingFilesEvent.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferInStream.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferOutStream.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferSource.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTarget.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferInStreamImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferOutStreamImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\InTopLevelImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectLinkImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectNameImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectRegisterImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\OutTopLevelImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\TopLevel.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\FileInStream.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\FileOutStream.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTerm.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InTopLevel.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Object.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterfaceLess.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectLink.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectName.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectRegister.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\OutTopLevel.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Rtti.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Stream.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\EquilongReportOutputImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\ReportOutput.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\TimeReportOutput.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestFailReportOutputImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestSuiteReportOutputImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\EquilongReportOutput.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestFailReportOutput.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestSuiteReportOutput.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\BaseResource.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\BaseResourceManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\CommonDataResource.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceLockManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\CommonDataResourceImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\ResourceManagerLockImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\ResourceManagerPriorityQueue.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\ResourceFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\ResourceManagerLock.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\Factorial.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\Fibonacci.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\TrigonometricFunction.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\BoostParsing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\BoostMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\BoostRecursiveMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\CriticalSection.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\EventImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\MutexFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\MutexImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\NullMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\SemaphoreImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\StdMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\StdRecursiveMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\WindowsMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\DllMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Event.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Mutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\ScopedMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Semaphore.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Thread.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\ThreadManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\TryScopedMutex.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\CustomTime.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\DeltaTimeManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\Detail\DeltaTimeManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\MillisecondTimer.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\SecondTimer.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\CpuTimerData.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuiteImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuitePrintManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestData.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestFailPrintManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestPrintManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Suite.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestComposite.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestStream.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\VersionInformation\Version.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

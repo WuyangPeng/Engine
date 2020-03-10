@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimationManager 头文件">
+      <UniqueIdentifier>{97514778-42f6-4392-a7d1-06dfe051ab4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleGraph 头文件">
+      <UniqueIdentifier>{eb92824e-1ba6-4906-9792-64f4b2c2abd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ElfAnimation 头文件">
+      <UniqueIdentifier>{fb830dde-563e-4c4a-a484-ff189e54e078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GradientAnimation 头文件">
+      <UniqueIdentifier>{d22e31dd-30ff-4059-8d28-3a1ca60bb8d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{fad679ed-73a9-4c8a-88c2-c4849e90651d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MorphTargetAnimation 头文件">
+      <UniqueIdentifier>{64e5846f-a1dc-4fdd-ac3e-0d99505ed815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureAnimation 头文件">
+      <UniqueIdentifier>{b6033dab-f6ab-4f39-817f-411fd1453c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkeletonAnimation 头文件">
+      <UniqueIdentifier>{a0c1c71f-1fb7-4858-8f0c-3961db221ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RigidBodyHierarchyAnimation 头文件">
+      <UniqueIdentifier>{54bfb786-b55f-4f9e-9992-d749acd0200e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PerVertexAnimation 头文件">
+      <UniqueIdentifier>{d424644e-bfd3-4314-a5e1-0f81fc821e19}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Animation\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Animation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationManagerFwd.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationManager.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\ConsoleGraph.h">
+      <Filter>ConsoleGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\ConsoleGraphFwd.h">
+      <Filter>ConsoleGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\Graph.h">
+      <Filter>ConsoleGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\ElfAnimation\ElfAnimation.h">
+      <Filter>ElfAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\ElfAnimation\ElfAnimationFwd.h">
+      <Filter>ElfAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\GradientAnimation\GradientAnimation.h">
+      <Filter>GradientAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\GradientAnimation\GradientAnimationFwd.h">
+      <Filter>GradientAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTargetAnimation\MorphTargetAnimation.h">
+      <Filter>MorphTargetAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTargetAnimation\MorphTargetAnimationFwd.h">
+      <Filter>MorphTargetAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertexAnimation\PerVertexAnimation.h">
+      <Filter>PerVertexAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertexAnimation\PerVertexAnimationFwd.h">
+      <Filter>PerVertexAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchyAnimation\RigidBodyHierarchyAnimationFwd.h">
+      <Filter>RigidBodyHierarchyAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchyAnimation\RigidBodyHierarchyAnimation.h">
+      <Filter>RigidBodyHierarchyAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\SkeletonAnimation\SkeletonAnimation.h">
+      <Filter>SkeletonAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\SkeletonAnimation\SkeletonAnimationFwd.h">
+      <Filter>SkeletonAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\TextureAnimation\TextureAnimation.h">
+      <Filter>TextureAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\TextureAnimation\TextureAnimationFwd.h">
+      <Filter>TextureAnimation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,47 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 引擎版本：0.0.2.4 (2020/03/09 19:19)
+
+#ifndef NETWORK_HELPER_USER_MACRO_H
+#define NETWORK_HELPER_USER_MACRO_H
+
+#include "System/Helper/Platform.h" 
+#include "CoreTools/Helper/UserMacro.h"
+
+#define CLOSE_USE_ACE (0x01)
+#define CLOSE_USE_OPENSSL (0x01 << 1) 
+#define CLOSE_USE_ACE_WCHAR (0x01 << 2) 
+#define CLOSE_NETWORK_MAX (((CLOSE_USE_ACE_WCHAR) << 1) - 1)
+
+// 编译测试（默认为0，最大值为0x07）
+#define COMPILE_NETWORK_CLOSE 0x04
+
+static_assert(0 <= COMPILE_NETWORK_CLOSE, "COMPILE_NETWORK_CLOSE Must be greater than or equal 0.");
+static_assert(COMPILE_NETWORK_CLOSE <= CLOSE_NETWORK_MAX, "COMPILE_NETWORK_CLOSE Must be less than or equal CLOSE_NETWORK_MAX.");
+
+ // 是否编译为静态库
+#ifdef BUILDING_STATIC
+	#define  BUILDING_NETWORK_STATIC
+#endif // BUILDING_STATIC
+
+#define BOOST_ASIO_NO_DEPRECATED
+
+#if !defined(COMPILE_NETWORK_CLOSE) || (COMPILE_NETWORK_CLOSE & CLOSE_USE_ACE) != CLOSE_USE_ACE
+	#define NETWORK_USE_ACE
+#endif // !defined(COMPILE_NETWORK_CLOSE) || (COMPILE_NETWORK_CLOSE & CLOSE_USE_ACE) != CLOSE_USE_ACE 
+
+#if !defined(COMPILE_NETWORK_CLOSE) || (COMPILE_NETWORK_CLOSE & CLOSE_USE_ACE_WCHAR) != CLOSE_USE_ACE_WCHAR
+	#define NETWORK_USE_ACE_WCHAR
+#endif // !defined(COMPILE_NETWORK_CLOSE) || (COMPILE_NETWORK_CLOSE & CLOSE_USE_ACE_WCHAR) != CLOSE_USE_ACE_WCHAR 
+
+#if defined(NETWORK_USE_ACE) && defined(NETWORK_USE_ACE_WCHAR)
+    #define NETWORK_USES_ACE_WCHAR
+#endif // defined(NETWORK_USE_ACE) && defined(NETWORK_USE_ACE_WCHAR)
+
+#if !defined(COMPILE_NETWORK_CLOSE) || (COMPILE_NETWORK_CLOSE & CLOSE_USE_OPENSSL) != CLOSE_USE_OPENSSL
+	#define NETWORK_USE_OPENSSL
+#endif // !defined(COMPILE_NETWORK_CLOSE) || (COMPILE_NETWORK_CLOSE & CLOSE_USE_OPENSSL) != CLOSE_USE_OPENSSL  
+ 
+#endif // NETWORK_HELPER_USER_MACRO_H

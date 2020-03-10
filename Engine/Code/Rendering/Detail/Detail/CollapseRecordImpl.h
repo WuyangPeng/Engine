@@ -1,0 +1,69 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 引擎版本：0.0.0.3 (2019/07/24 10:26)
+
+#ifndef RENDERING_DETAIL_COLLAPSE_RECORD_IMPL_H
+#define RENDERING_DETAIL_COLLAPSE_RECORD_IMPL_H
+
+#include "Rendering/RenderingDll.h"
+
+#include <vector>
+
+namespace CoreTools
+{
+	class BufferSource;
+	class BufferTarget;
+}
+
+namespace Rendering
+{	
+	class RENDERING_HIDDEN_DECLARE CollapseRecordImpl
+	{
+	public:
+		using ClassType = CollapseRecordImpl;
+		using BufferSource = CoreTools::BufferSource;
+		using BufferTarget = CoreTools::BufferTarget;
+
+	public:
+		explicit CollapseRecordImpl (int vKeep = -1, int vThrow = -1,int numVertices = 0, int numTriangles = 0);
+
+		CLASS_INVARIANT_DECLARE;
+
+		void SetIndices(const std::vector<int>& indices);
+		const std::vector<int> GetIndices() const;
+		int GetIndex(int index) const;
+		int GetIndicesSize() const;
+		void ClearIndices();
+
+		int GetVKeep() const;
+		void SetVKeep(int vKeep);
+		int GetVThrow() const;
+		void SetVThrow(int vThrow);
+		int GetNumVertices() const;
+		void SetNumVertices(int numVertices);
+		int GetNumTriangles() const;
+		void SetNumTriangles(int numTriangles);
+
+		void Load(BufferSource& source);
+		void Save(BufferTarget& target) const;
+		int GetStreamingSize() const;
+
+	private:
+		// 边<VKeep，VThrow>折叠使VThrow被VKeep取代。
+		int m_VKeep;	
+		int m_VThrow;
+		
+		// 边折叠后的顶点数。
+		int m_NumVertices;	
+
+		// 边折叠后的三角形数
+		int m_NumTriangles;	
+
+		// [0..NumTriangles-1]中包含VThrow的索引数组
+		std::vector<int> m_Indices;
+	};
+}
+
+#endif // RENDERING_DETAIL_COLLAPSE_RECORD_IMPL_H

@@ -1,0 +1,23 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.2.2 (2020/01/22 17:06)
+
+#ifndef CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_DETAIL_H
+#define CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_DETAIL_H
+
+#include "EntityManager.h"
+
+template<typename EntityType, typename ResultType, typename... Args>
+std::shared_ptr<ResultType> CoreTools::EntityManager
+	::MakeEntity(Args&&... args)
+{
+	auto result = std::make_shared<EntityType>(args...);
+
+	result->Register();
+
+	return result;
+}
+
+#endif // CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_DETAIL_H

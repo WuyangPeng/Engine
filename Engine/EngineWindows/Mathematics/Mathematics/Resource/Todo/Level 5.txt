@@ -1,0 +1,25 @@
+TODO Level 5
+
+0.0.0.2
+ 
+1.  替换掉boost库的静态断言为标准语法。
+2.  在我们支持实现的平台上提供Math类的SIMD版本。
+3.  考虑将Math类的常量改成constexpr。
+4.  将AlgebraStreamSize的GetStreamSize里使用的常量改成constexpr或可从类获取。
+5.  将ReadAggregate和WriteAggregate里使用的常量改成constexpr或可从类获取。
+6.  外部库引用数学库时，需要包含Detail.h头文件。改成根据MATHEMATICS_EXPORT_TEMPLATE是否定义包含不同的头文件。
+7.  AQuaternion类FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。
+8.  修改数学库中使用的static_cast<Real>(0.5)和Real{}，改用其他方式简化。
+9.  各个类的GetStreamSize函数返回改成int。
+10. Matrix3类的ExtractAngleAxis、Orthonormalize、ExtractEuler系列函数增加断言，判断矩阵是否是旋转矩阵。
+11. Quaternion类的FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。
+12. Segment2、Segment3类修正线段的值，按需求添加。
+13. Polygon2类的类不变式判断多边形为简单多边形。
+14. Triangle2类的类不变式判断三角形不共线。
+15. Rectangle3类的类不变式判断m_Axis[0]和m_Axis[1]是互相垂直的。
+16. Tetrahedron3类的类不变式判断三角形的面是被逆时针排序的三角形。
+17. Triangle3类的类不变式判断三角形不共线。
+18. Integer除法和求余操作，在除数为零时，返回无效或有符号的无穷大？
+19. 将EquationResult的ImaginaryLess类提取出来。
+20. PolynomialRoots类有一些TODO需要完成。
+21. SingularValueDecomposition类的Calculate函数需要从“矩阵计算”实现其他QR分解和奇异值分解代码，然后给用户指定这里使用哪些方法的能力。 

@@ -1,0 +1,17 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 10:48)
+
+#ifndef ASSIST_TOOLS_FWD_H
+#define ASSIST_TOOLS_FWD_H
+
+#include "Macro/MacroFwd.h"
+#include "GenerateProjects/GenerateProjectsFwd.h"
+#include "FeaturesImporter/FeaturesImporterFwd.h"
+#include "BmpColorToGray/BmpColorToGrayFwd.h"
+#include "BmpToTf/BmpToWmtfFwd.h"
+#include "FxCompiler/WmfxCompilerFwd.h"
+
+#endif // ASSIST_TOOLS_FWD_H

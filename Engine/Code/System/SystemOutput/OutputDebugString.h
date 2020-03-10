@@ -1,0 +1,23 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 引擎版本：0.0.2.0 (2020/01/02 16:04)
+
+#ifndef SYSTEM_SYSTEM_OUTPUT_OUTPUT_DEBUG_STRING_H
+#define SYSTEM_SYSTEM_OUTPUT_OUTPUT_DEBUG_STRING_H
+
+#include "System/SystemDll.h"
+
+#include "System/Helper/UnicodeUsing.h"
+
+namespace System
+{
+	// 消息输出到调试窗口。
+
+	void SYSTEM_DEFAULT_DECLARE OutputDebugStringWithChar(const char* outputString) noexcept;
+	void SYSTEM_DEFAULT_DECLARE OutputDebugStringWithWChar(const wchar_t* outputString) noexcept;
+	void SYSTEM_DEFAULT_DECLARE OutputDebugStringWithTChar(const TChar* outputString) noexcept;
+}
+
+#endif // SYSTEM_SYSTEM_OUTPUT_OUTPUT_DEBUG_STRING_H

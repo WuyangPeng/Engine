@@ -1,0 +1,37 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 09:44)
+
+#ifndef ANIMATION_DLL_H
+#define ANIMATION_DLL_H
+
+#include "System/Helper/ExportMacro.h"
+#include "Animation/Macro/UserMacro.h"
+
+#if defined(BUILDING_ANIMATION_NO_IMPORT) || defined(BUILDING_ANIMATION_STATIC)
+
+  #define ANIMATION_DEFAULT_DECLARE
+  #define ANIMATION_HIDDEN_DECLARE
+  #define ANIMATION_VISIBLE
+
+#else // !defined(BUILDING_ANIMATION_NO_IMPORT) && !defined(BUILDING_ANIMATION_STATIC)
+
+   #if defined(BUILDING_ANIMATION_EXPORT)
+ 
+        #define ANIMATION_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define ANIMATION_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BUILDING_ANIMATION_EXPORT)
+
+		#define ANIMATION_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define ANIMATION_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BUILDING_ANIMATION_EXPORT
+
+   #define ANIMATION_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BUILDING_ANIMATION_NO_IMPORT) || defined(BUILDING_ANIMATION_STATIC)
+
+#endif // ANIMATION_DLL_H

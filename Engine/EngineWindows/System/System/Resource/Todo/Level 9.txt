@@ -1,0 +1,14 @@
+TODO Level 9
+
+0.0.2.0
+
+1. （Helper）将字符串拼接移出配置宏。
+1. （UserInterface）完成UserInterface非Windows平台的实现：OpenGLWglPrototypes。
+2. （UserInterface）完成Windows、Macintosh、Linux和Android平台的GUI调用。 
+3. （Com）完成Com非Windows平台的实现：ComObjectBase。Com其他实现根据需要添加。
+
+0.0.2.3
+
+1. （ecurity）将LookupPrivilegeUsing的string常量改成非constexpr函数。
+2. （OpenGL）将SYSTEM_GET_FUNCTION、SYSTEM_GET_FUNCTION_SUFFIX、SYSTEM_GET_FUNCTION_SUFFIX_ALT宏改成宏加函数，并把捕获所有异常去掉，上层调用改成可抛出异常。
+3. （Helper）完成Helper的Noexcept，对参数进行修改，自动适配传值或传引用参数。 

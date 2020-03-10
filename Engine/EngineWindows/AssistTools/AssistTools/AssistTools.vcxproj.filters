@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BmpColorToGray 头文件">
+      <UniqueIdentifier>{bc1abb47-3b09-4e8d-9c5c-e396db6cdd41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BmpToTf 头文件">
+      <UniqueIdentifier>{9e24389c-8fc7-40ad-94bf-d629ebf428ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FeaturesImporter 头文件">
+      <UniqueIdentifier>{8afa6c45-d5ec-4d4f-98d6-c1352707200e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FxCompiler 头文件">
+      <UniqueIdentifier>{85868bcc-59cd-4b1b-8e4a-7f3c6434bac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 头文件">
+      <UniqueIdentifier>{dbd184f0-0107-46c4-920b-094e35fa5b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{89304fa0-1cf9-4935-8359-c1239f1ce551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BmpColorToGray 源文件">
+      <UniqueIdentifier>{63b19399-1f13-458d-b14d-bc26f0b6724e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BmpToTf 源文件">
+      <UniqueIdentifier>{030523ee-c767-496f-b988-e4e3c8e48f72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FeaturesImporter 源文件">
+      <UniqueIdentifier>{a1d2f327-8bd1-4066-86aa-157b4b39cb9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FxCompiler 源文件">
+      <UniqueIdentifier>{5e120aca-de84-4d1e-a07e-de539cac287f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 源文件">
+      <UniqueIdentifier>{c608ca6c-f38e-47b8-90e7-ae79a7fdc580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 头文件\Flags">
+      <UniqueIdentifier>{c6d12f7a-3430-4159-9e16-41360affd97a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 头文件\Detail">
+      <UniqueIdentifier>{628d9815-92b3-4f05-839c-bea0b2fe96e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 源文件\Detail">
+      <UniqueIdentifier>{126d6852-9b6d-4df0-8ce9-9660ee8e7dd6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\AssistTools\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\ColorToGray.cpp">
+      <Filter>BmpColorToGray 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\LoadBmp.cpp">
+      <Filter>BmpColorToGray 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\SaveBmp.cpp">
+      <Filter>BmpColorToGray 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpToTf\LoadBmpUseAlpha.cpp">
+      <Filter>BmpToTf 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoader.cpp">
+      <Filter>FeaturesImporter 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoaderCodes.cpp">
+      <Filter>FeaturesImporter 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoader.cpp">
+      <Filter>FeaturesImporter 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoaderCodes.cpp">
+      <Filter>FeaturesImporter 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.cpp">
+      <Filter>FxCompiler 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\CopyrightData.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateCodeDirectory.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateDllLib.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateDllMain.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateEngine.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateEngineDirectory.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateHeader.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateHelper.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateLib.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateLogJson.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMacro.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMain.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateManager.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateManagerLib.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMessage.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMiddleLayerVcxproj.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMiddleLayerVcxprojFilters.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateModuleVcxproj.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateModuleVcxprojFilters.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateSolution.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateVcxproj.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateVcxprojFilters.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateCodeDirectory.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateEngine.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateEngineDirectory.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateSolution.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxproj.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxprojFilters.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC100.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC110.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateBaseImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CopyrightDataImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateCodeDirectoryImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDirectoryImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDllLibImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDllMainImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateEngineDirectoryImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateEngineImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateHeaderImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateHelperImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateLibImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateLogJsonImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMacroImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMainImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateManagerImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateManagerLibImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMessageImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMiddleLayerVcxprojFiltersImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMiddleLayerVcxprojImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateModuleVcxprojFiltersImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateModuleVcxprojImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateSolutionImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateVcxprojFiltersImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateVcxprojImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateCodeDirectoryImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateEngineDirectoryImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateEngineImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateSolutionImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojFiltersImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpToTf\SaveWmtf.cpp">
+      <Filter>BmpToTf 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistTools.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\BmpColorToGray.h">
+      <Filter>BmpColorToGray 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\BmpColorToGrayFwd.h">
+      <Filter>BmpColorToGray 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\ColorToGray.h">
+      <Filter>BmpColorToGray 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\LoadBmp.h">
+      <Filter>BmpColorToGray 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\SaveBmp.h">
+      <Filter>BmpColorToGray 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtf.h">
+      <Filter>BmpToTf 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtfFwd.h">
+      <Filter>BmpToTf 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\LoadBmpUseAlpha.h">
+      <Filter>BmpToTf 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\SaveWmtf.h">
+      <Filter>BmpToTf 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporter.h">
+      <Filter>FeaturesImporter 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporterFwd.h">
+      <Filter>FeaturesImporter 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoader.h">
+      <Filter>FeaturesImporter 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoader.h">
+      <Filter>FeaturesImporter 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.h">
+      <Filter>FxCompiler 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\WmfxCompiler.h">
+      <Filter>FxCompiler 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\WmfxCompilerFwd.h">
+      <Filter>FxCompiler 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\CopyrightData.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateProjects.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateProjectsFwd.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateCodeDirectory.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateDllLib.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateDllMain.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateEngine.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateEngineDirectory.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateHeader.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateHelper.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateLib.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateLogJson.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMacro.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMain.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateManager.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateManagerLib.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMessage.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMiddleLayerVcxproj.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMiddleLayerVcxprojFilters.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateModuleVcxproj.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateModuleVcxprojFilters.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateSolution.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateVcxproj.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateVcxprojFilters.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateCodeDirectory.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateEngine.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateEngineDirectory.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateSolution.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxproj.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxprojFilters.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC100.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC110.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Flags\GenerateTemplateReplaceFlags.h">
+      <Filter>GenerateProjects 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CopyrightDataImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateBaseImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateCodeDirectoryImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDirectoryImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDllLibImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDllMainImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateEngineDirectoryImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateEngineImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateHeaderImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateHelperImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateLibImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateLogJsonImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMacroImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMainImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateManagerImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateManagerLibImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMessageImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMiddleLayerVcxprojFiltersImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMiddleLayerVcxprojImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateModuleVcxprojFiltersImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateModuleVcxprojImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateSolutionImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateVcxprojFiltersImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateVcxprojImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateCodeDirectoryImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateEngineDirectoryImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateEngineImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateSolutionImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojFiltersImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

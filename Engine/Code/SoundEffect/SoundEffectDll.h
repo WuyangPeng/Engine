@@ -1,0 +1,37 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/16 14:28)
+
+#ifndef SOUND_EFFECT_DLL_H
+#define SOUND_EFFECT_DLL_H
+
+#include "System/Helper/ExportMacro.h"
+#include "SoundEffect/Macro/UserMacro.h"
+
+#if defined(BUILDING_SOUND_EFFECT_NO_IMPORT) || defined(BUILDING_SOUND_EFFECT_STATIC)
+
+  #define SOUND_EFFECT_DEFAULT_DECLARE
+  #define SOUND_EFFECT_HIDDEN_DECLARE
+  #define SOUND_EFFECT_VISIBLE
+
+#else // !defined(BUILDING_SOUND_EFFECT_NO_IMPORT) && !defined(BUILDING_SOUND_EFFECT_STATIC)
+ 
+   #if defined(BUILDING_SOUND_EFFECT_EXPORT)
+ 
+        #define SOUND_EFFECT_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define SOUND_EFFECT_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BUILDING_SOUND_EFFECT_EXPORT)
+
+		#define SOUND_EFFECT_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define SOUND_EFFECT_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BUILDING_SOUND_EFFECT_EXPORT
+
+   #define SOUND_EFFECT_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BUILDING_SOUND_EFFECT_NO_IMPORT) || defined(BUILDING_SOUND_EFFECT_STATIC)
+
+#endif // SOUND_EFFECT_DLL_H

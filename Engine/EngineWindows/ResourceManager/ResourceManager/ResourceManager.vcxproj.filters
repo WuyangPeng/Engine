@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision 头文件">
+      <UniqueIdentifier>{07a33ffd-030a-4cf9-99d9-8029022d3df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Font 头文件">
+      <UniqueIdentifier>{209161f8-a96d-4c13-a329-fa4d839633ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameWorldMap 头文件">
+      <UniqueIdentifier>{0f93409c-b7a6-407b-8ba9-3c1c509df7c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{557a84ff-58f4-4073-a3f1-406071d01157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Material 头文件">
+      <UniqueIdentifier>{179f116a-2e80-4b1f-909a-1a05ceb82bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Miscellaneous 头文件">
+      <UniqueIdentifier>{b2c31dfe-759d-4a77-a46d-aded4cfc7fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreeDimensionalModel 头文件">
+      <UniqueIdentifier>{42f481d9-fe6d-4d57-abeb-a4b158a8b654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture 头文件">
+      <UniqueIdentifier>{c111fc77-970f-4d7c-be55-4f423b312466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skeleton 头文件">
+      <UniqueIdentifier>{a93a5f4b-5c82-4d5b-bbbc-65168e9c58fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicalParameters 头文件">
+      <UniqueIdentifier>{918402f0-dbcf-4e2c-a4bd-7f972c3fb17e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\ResourceManager\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\ResourceManager\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Collision\Collision.h">
+      <Filter>Collision 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Collision\CollisionFwd.h">
+      <Filter>Collision 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Font\Font.h">
+      <Filter>Font 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Font\FontFwd.h">
+      <Filter>Font 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\GameWorldMap\GameWorldMapFwd.h">
+      <Filter>GameWorldMap 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\GameWorldMap\Map.h">
+      <Filter>GameWorldMap 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\GameWorldMap\GameWorldMap.h">
+      <Filter>GameWorldMap 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Material\Material.h">
+      <Filter>Material 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Material\MaterialFwd.h">
+      <Filter>Material 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Miscellaneous\Miscellaneous.h">
+      <Filter>Miscellaneous 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Miscellaneous\MiscellaneousFwd.h">
+      <Filter>Miscellaneous 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\PhysicalParameters\PhysicalParameters.h">
+      <Filter>PhysicalParameters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\PhysicalParameters\PhysicalParametersFwd.h">
+      <Filter>PhysicalParameters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Skeleton\Skeleton.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Skeleton\SkeletonFwd.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Texture\Texture.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Texture\TextureFwd.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ThreeDimensionalModel\ThreeDimensionalModel.h">
+      <Filter>ThreeDimensionalModel 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ThreeDimensionalModel\ThreeDimensionalModelFwd.h">
+      <Filter>ThreeDimensionalModel 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

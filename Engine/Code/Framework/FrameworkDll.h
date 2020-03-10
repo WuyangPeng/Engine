@@ -1,0 +1,37 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 17:37)
+
+#ifndef FRAMEWORK_DLL_H
+#define FRAMEWORK_DLL_H
+
+#include "System/Helper/ExportMacro.h"
+#include "Framework/Macro/UserMacro.h"
+
+#if defined(BUILDING_FRAMEWORK_NO_IMPORT) || defined(BUILDING_FRAMEWORK_STATIC)
+
+  #define FRAMEWORK_DEFAULT_DECLARE
+  #define FRAMEWORK_HIDDEN_DECLARE
+  #define FRAMEWORK_VISIBLE
+
+#else // !defined(BUILDING_FRAMEWORK_NO_IMPORT) && !defined(BUILDING_FRAMEWORK_STATIC)
+
+   #if defined(BUILDING_FRAMEWORK_EXPORT)
+ 
+        #define FRAMEWORK_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define FRAMEWORK_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BUILDING_FRAMEWORK_EXPORT)
+
+		#define FRAMEWORK_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define FRAMEWORK_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BUILDING_FRAMEWORK_EXPORT
+
+   #define FRAMEWORK_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BUILDING_FRAMEWORK_NO_IMPORT) || defined(BUILDING_FRAMEWORK_STATIC)
+
+#endif // FRAMEWORK_DLL_H

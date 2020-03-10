@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BinaryOperations 头文件">
+      <UniqueIdentifier>{3d4917e0-7f9f-4532-bc8f-173802a47fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extraction 头文件">
+      <UniqueIdentifier>{1ace15b1-0385-4d67-bf52-d4fa7dc1fbd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Filters 头文件">
+      <UniqueIdentifier>{a04a51dc-796f-48b0-878d-c1297a397ac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images 头文件">
+      <UniqueIdentifier>{852e30fe-3fde-47c1-b0d8-455fcc44a7eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{72372d09-362e-4af2-8044-663f379f95e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Segmenters 头文件">
+      <UniqueIdentifier>{ab25205c-095d-46ea-b5de-a5f982cd034f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RasterDrawing 头文件">
+      <UniqueIdentifier>{ac8cf206-d15f-4cfa-8fa0-f0f1ed659614}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenCV 头文件">
+      <UniqueIdentifier>{5c324f56-92d1-4a22-8bcb-7081772db6e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BinaryOperations 源文件">
+      <UniqueIdentifier>{29e9baf4-1567-4ba6-9cfb-2c6783d5eeb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extraction 源文件">
+      <UniqueIdentifier>{587e0a72-578a-482d-a68f-b51a7a03490f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Filters 源文件">
+      <UniqueIdentifier>{6cd309e0-6820-4156-a2b8-5a976811b0e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images 源文件">
+      <UniqueIdentifier>{946cbc77-60a8-4712-8950-e7dc1bc180c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Segmenters 源文件">
+      <UniqueIdentifier>{b22c09ce-44ad-49d8-8b0e-89baa551ef01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RasterDrawing 源文件">
+      <UniqueIdentifier>{64ae454c-a7ad-439c-a42e-db7775f54a02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenCV 源文件">
+      <UniqueIdentifier>{bc8e20eb-a473-49ea-98e5-a246827ae35a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Filters 模板文件">
+      <UniqueIdentifier>{c8023598-0c99-45ba-b0fa-4447848dcf75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images 模板文件">
+      <UniqueIdentifier>{01556103-c28d-40ca-bf19-8fed86d0ab52}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Imagics\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\BinaryOperations\Binary2D.cpp">
+      <Filter>BinaryOperations 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\BinaryOperations\Binary3D.cpp">
+      <Filter>BinaryOperations 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Extraction\ExtractCurveSquares.cpp">
+      <Filter>Extraction 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Extraction\ExtractCurveTris.cpp">
+      <Filter>Extraction 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Extraction\ExtractSurfaceCubes.cpp">
+      <Filter>Extraction 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Extraction\ExtractSurfaceTetra.cpp">
+      <Filter>Extraction 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\CurvatureFlow2.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\CurvatureFlow3.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\GaussianBlur2.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\GaussianBlur3.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\GradientAnisotropic2.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\GradientAnisotropic3.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\PdeFilter.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\PdeFilter2.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Filters\PdeFilter3.cpp">
+      <Filter>Filters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Images\Element.cpp">
+      <Filter>Images 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Images\ImageConvert.cpp">
+      <Filter>Images 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Images\ImagesTypedef.cpp">
+      <Filter>Images 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Images\Lattice.cpp">
+      <Filter>Images 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\RasterDrawing\RasterDrawingTools.cpp">
+      <Filter>RasterDrawing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Segmenters\FastMarch.cpp">
+      <Filter>Segmenters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Segmenters\FastMarch2.cpp">
+      <Filter>Segmenters 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\Segmenters\FastMarch3.cpp">
+      <Filter>Segmenters 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Imagics.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\BinaryOperations\Binary3D.h">
+      <Filter>BinaryOperations 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\BinaryOperations\BinaryOperations.h">
+      <Filter>BinaryOperations 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\BinaryOperations\BinaryOperationsFwd.h">
+      <Filter>BinaryOperations 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\BinaryOperations\Binary2D.h">
+      <Filter>BinaryOperations 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Extraction\ExtractCurveSquares.h">
+      <Filter>Extraction 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Extraction\ExtractCurveTris.h">
+      <Filter>Extraction 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Extraction\Extraction.h">
+      <Filter>Extraction 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Extraction\ExtractionFwd.h">
+      <Filter>Extraction 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Extraction\ExtractSurfaceCubes.h">
+      <Filter>Extraction 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Extraction\ExtractSurfaceTetra.h">
+      <Filter>Extraction 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\Element.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\ImageConvert.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\Images.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\ImagesFwd.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\ImagesTypedef.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\Lattice.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\TImage.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\TImage2D.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\TImage3D.h">
+      <Filter>Images 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\CurvatureFlow2.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\CurvatureFlow3.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\FastBlur.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\Filters.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\FiltersFwd.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\GaussianBlur2.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\GaussianBlur3.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\GradientAnisotropic2.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\GradientAnisotropic3.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\PdeFilter.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\PdeFilter2.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\PdeFilter3.h">
+      <Filter>Filters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Filters\FastBlurDetail.h">
+      <Filter>Filters 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\TImage2DDetail.h">
+      <Filter>Images 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\TImage3DDetail.h">
+      <Filter>Images 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Images\TImageDetail.h">
+      <Filter>Images 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Macro\ElementMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Macro\ImageConvertMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\OpenCV\Interface.h">
+      <Filter>OpenCV 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\OpenCV\OpenCV.h">
+      <Filter>OpenCV 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\OpenCV\OpenCVFwd.h">
+      <Filter>OpenCV 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\RasterDrawing\RasterDrawing.h">
+      <Filter>RasterDrawing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\RasterDrawing\RasterDrawingFwd.h">
+      <Filter>RasterDrawing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\RasterDrawing\RasterDrawingTools.h">
+      <Filter>RasterDrawing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Segmenters\FastMarch.h">
+      <Filter>Segmenters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Segmenters\FastMarch2.h">
+      <Filter>Segmenters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Segmenters\FastMarch3.h">
+      <Filter>Segmenters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Segmenters\Segmenters.h">
+      <Filter>Segmenters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Segmenters\SegmentersFwd.h">
+      <Filter>Segmenters 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,48 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 引擎版本：0.0.2.4 (2020/03/10 14:16)
+
+#ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_FLAGS_H
+#define NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_FLAGS_H
+
+#include "System/Helper/ConfigMacro.h"
+
+namespace Network
+{
+	enum class MessageEventPriority
+	{
+		Highest = 0,
+		High = 1,
+		Middle = 2,
+		Low = 3,
+		Lowest = 4,
+		Count = 5,
+	};
+
+	enum class SocketManagerEvent
+	{
+		None = 0,
+
+		AsyncConnect = 1,
+		AsyncSend,
+		AsyncAcceptor,
+		AsyncReceive,
+	};
+
+	enum class SocketManagerPoisition
+	{
+		Event = 0, // 类型int
+		WrappersStrategy = 1, // 类型int
+		Error = 2, // 类型int
+		Port = 3, // 类型int
+		Address = 4, // 类型string
+		Async = 5, // 类型int
+		BytesTransferred = 6, // 类型int
+
+		Count,
+	};
+}
+
+#endif // NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_FLAGS_H

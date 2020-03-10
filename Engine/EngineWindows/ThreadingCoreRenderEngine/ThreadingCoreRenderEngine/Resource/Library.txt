@@ -1,0 +1,202 @@
+库
+
+GSL（引擎直接关联）
+
+1. 版本：2.1.0。
+2. 官方网站：https://github.com/microsoft/GSL。
+
+CppCoreGuidelines（引擎直接关联）
+
+1. 版本：0.8。
+2. 官方网站：https://github.com/isocpp/CppCoreGuidelines。
+
+boost（引擎直接关联）
+
+1. 版本：1.72.0。
+2. 官方网站：http://www.boost.org/。
+3. 编译指令：
+  （1）运行bootstrap。
+  （2）运行bjam --toolset=msvc-10.0（特定版本）
+           bjam（最新版本）	
+  （3）使用选项asmflags=\safeseh。（链接context库需要）
+
+stlsoft（引擎直接关联）
+
+1. 版本：1.10.1-beta16。
+2. 官方网站：http://www.stlsoft.org/。
+3. 文件stlsoft.h（在stlsoft下）
+   在732行改成
+   # elif (_MSC_VER < 2000)
+   #  define STLSOFT_COMPILER_VERSION_STRING       "Visual C++ 14.1"
+
+ACE（引擎通过宏NETWORK_USE_ACE关联）
+
+1. 版本：6.5.8。
+2. 官方网站：http://download.dre.vanderbilt.edu/、 http://www.dre.vanderbilt.edu/~schmidt/ACE.html。
+3. 在ace目录下增加文件config.h包含正确的config文件。
+   #ifndef ACE_CONFIG_H
+   #define ACE_CONFIG_H
+
+   #include "config-win32.h"
+
+   #endif /* ACE_CONFIG_H */
+   可使用ACE下的批处理文件CopyACEConfig执行。
+4. 编译好x64版本后，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\X64，
+   然后再编译Win32版本，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\Win32。
+   可使用ACE下的批处理文件CopyACEWin32和CopyACEX64执行。
+
+openssl（引擎通过宏NETWORK_USE_OPENSSL关联）
+
+1.  版本：1.1.1d。
+2.  官方网站：https://www.openssl.org/。
+3.  下载并安装 ActivePerl。下载地址：http://www.activestate.com/activeperl/downloads 
+4.  打开命令提示符，定位到 ($Perl64)\eg 目录，执行 perl example.pl，
+    若提示 Hello from ActivePerl! 则说明 Perl 安装成功。
+5.  下载并安装 Nasm 汇编器，并将 ($NASM)\ 目录 添加到系统环境变量 Path 中。
+    下载地址：http://www.nasm.us/ 
+6.  通过管理员身份运行VS，并打开命令提示符，定位至 ($openssl)目录
+7.  输入 perl Configure VC-WIN32 --prefix=($openssl)\Win32\release（编译release版本），
+    perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\debug（编译debug版），
+	会出现错误，可忽视。
+8.  编译X64，转到目录Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build下运行vcvars64.bat，
+    然后输入 perl Configure VC-WIN64A --debug --prefix=($openssl)\X64\debug（编译debug版）。
+	perl Configure VC-WIN64A --prefix=($openssl)\X64\release（编译release版）。    
+9.  编译四个版本中需要执行 nmake clean，再输入perl语句。然后
+	执行 nmake、nmake test、nmake install。
+
+mysql （引擎不关联）
+1.  版本：8.0.16。
+2.  官方网站：https://www.mysql.com/。
+3.  编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。如果编译的是x64版本，需要链接x64的openssl。
+4.  Windows.cmake 66行FATAL_ERROR改成WARNING。
+5.  定义正确的BOOST_INCLUDE_DIR到($boost)。
+6.  boost.cmake 41行、287行、289行、297行改成当前使用的boost库版本。
+7.  定义正确的OPENSSL_ROOT_DIR到($openssl)。
+8.  定义正确的OPENSSL_INCLUDE_DIR到($openssl)/include。
+9.  定义正确的OPENSSL_LIBRARY为全路径的($openssl)/lib/libssl.lib。
+10. 定义正确的CRYPTO_LIBRARY为全路径的($openssl)/lib/libcrypto.lib。
+11. sql_locale.cc、test_string_service_charset.cc、http_client.cc另存为ANSI编码。
+12. mysqld链接前事件命令行x64改成x86（两处）。
+13. 文件crc32.cc（在storage\innobase\ut下）
+    第227行开始改成
+    #if defined(_M_X64)  
+        crc_64bit = _mm_crc32_u64(crc_64bit, data);   
+    #else // !_M_X64 
+        ulint len = 8;  
+        const byte* buf = reinterpret_cast<byte*>(&data);
+        while (len > 0 && (reinterpret_cast<uintptr_t>(buf) & 7) != 0) {   
+           ut_crc32_8_hw(&crc_64bit, &buf, &len); 
+        }
+    #endif /* defined (_M_X64) */
+14. 由于boost库版本不一致，导致编译不过时，使用mysql指定的boost版本。
+	复制到include\boost下（只需要boost下文件）。
+ 
+mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）
+1. 版本：8.0.16。
+2. 官方网站：https://www.mysql.com/。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+4. 设置正确的WITH_SSL指向($openssl)（原为system），如果编译的是x64版本，需要指向x64的openssl。
+5. 定义正确的OPENSSL_LIBRARY为全路径的($openssl)/lib/libssl.lib。
+6. 定义正确的CRYPTO_LIBRARY为全路径的($openssl)/lib/libcrypto.lib。
+7. 将mysql-connector-c++-8.0.16-win32.zip和mysql-connector-c++-8.0.16-winx64.zip的ssleay32.lib、libeay32.lib、libeay32.dll和ssleay32.dll复制到对应的Debug和Release目录。
+   将对应的ssleay32.lib、libeay32.lib复制到BuildWin32和BuildX64下。
+   可使用mysql-connector-c++下的批处理文件执行。
+8. X64平台需要进行以下操作：
+   打开cdk/protobuf下Protobuf工程，复制x64工程，
+   protobuf：中间目录protobuf.dir\$(Configuration)\，输出目录：$(SolutionDir)\$(Configuration)\，
+   protobuf-lite：中间目录protobuf-lite.dir\$(Configuration)\，输出目录：$(SolutionDir)\$(Configuration)\，
+   protoclib：中间目录protoclib.dir\$(Configuration)\，输出目录：$(SolutionDir)\$(Configuration)\，
+   protoc：中间目录protoc.dir\$(Configuration)\，输出目录：$(SolutionDir)\$(Configuration)\，附加库目录增加：$(SolutionDir)$(Platform)\;，链接器附加选项改成%(AdditionalOptions) /machine:X64。
+   然后编译x64工程。  
+   编译总工程，删除build_protobuf。
+   
+protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）
+1. 版本：3.11.4。
+2. 官方网站：https://github.com/protocolbuffers/protobuf。
+
+ogre（引擎不关联）
+
+1. 版本：1.12.0。
+2. 官方网站：https://www.ogre3d.org/。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+
+freeglut（引擎通过宏SYSTEM_USE_GLUT关联）
+
+1. 版本：3.0.0。
+2. 官方网站：http://freeglut.sourceforge.net/。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+
+wxWidgets（引擎通过宏USER_INTERFACE_USE_WX_WIDGETS关联）
+
+1. 版本：3.1.2。
+2. 官方网站：http://www.wxwidgets.org/。
+
+opencv（引擎通过宏IMAGICS_USE_OPENCV关联）
+
+1. 版本：4.1.0。
+2. 官方网站：https://opencv.org/
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+
+Wild Magic（引擎不关联）
+
+1. 版本：5.17。
+2. 官方网站：https://www.geometrictools.com/index.html。
+3. 设置正确的环境变量DXSDK_DIR指向正确的Microsoft DirectX SDK路径。
+4. 一些文件另存为ANSI编码，以通过编译。
+
+Geometric Tools（引擎不关联）
+                  
+1. 版本：3.25。
+2. 官方网站：https://www.geometrictools.com/index.html。
+3. 一些文件另存为ANSI编码，以通过编译。
+
+irrlicht（引擎不关联）
+
+1. 版本：1.8.4。
+2. 官方网站：http://irrlicht.sourceforge.net/
+3. 设置附加包含目录$(DXSDK_DIR)\Include;
+
+Visual Leak Detector（引擎Debug版本直接关联）
+
+1. 版本：2.5.1。
+2. 官方网站：https://archive.codeplex.com/?p=vld
+3. vld.cpp，976行去掉对高版本的VS的编译限制。
+4. Allocs.cpp，35行、60行，testsuite.cpp，74行、98行增加 
+   #elif _MSC_VER > 1900	// VS 2017
+   #define CRTDLLNAME   _T("ucrtbased.dll")
+5. 工程vld_main_test增加宏_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING。
+6. src\tests下Common.props第18行改成v141。
+
+OpenAL Soft（引擎通过宏SOUND_EFFECT_USE_OPENAL关联）
+1. 版本：1.19.1。
+2. 官方网站：https://www.openal-soft.org/。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+
+zlib（引擎直接关联）
+1. 版本：1.2.11。
+2. 官方网站：http://www.zlib.net/
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+
+freetype（引擎直接关联）
+1. 版本：2.10.0。
+2. 官方网站：https://www.freetype.org/
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+
+glew（引擎不关联）
+
+1. 版本：2.1.0。
+2. 官方网站：http://glew.sourceforge.net/。
+3. 使用https://sourceforge.net/projects/glew/files/glew/2.1.0/下的才有源代码。
+4. 目录在build\vc12。
+
+lua（引擎通过宏SCRIPT_USE_LUA关联）
+1. 版本：5.3.5。
+2. 官方网站：http://www.lua.org/
+3. 在build下建立VS工程，lua，静态库。包含以下文件：lapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c 
+   lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c ltm.c 
+   lundump.c lvm.c lzio.c lauxlib.c lbaselib.c lbitlib.c lcorolib.c ldblib.c liolib.c lmathlib.c 
+   loslib.c lstrlib.c ltablib.c lutf8lib.c loadlib.c linit.c。（除去luac.c和lua.c的所有文件）。
+   输出目录改成：$(SolutionDir)$(Platform)\$(Configuration)\。
+4. 建立VS工程，程序interpreter（包含lua.c）和compiler（包含luac.c）。
+   输出目录改成：$(SolutionDir)$(Platform)\$(Configuration)\。
+   增加附加库目录：$(SolutionDir)$(Platform)\$(Configuration)\。附加依赖项增加：lua.lib。

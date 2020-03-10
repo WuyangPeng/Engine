@@ -1,0 +1,439 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 引擎版本：0.0.0.3 (2019/07/22 16:15)
+
+#include "Rendering/RenderingExport.h"
+
+#include "NodeImpl.h"
+#include "Rendering/SceneGraph/Node.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
+
+#include <boost/numeric/conversion/cast.hpp>
+
+using std::string;
+using std::vector;
+
+Rendering::NodeImpl
+    ::NodeImpl (Node* realThis)
+	:m_Child{}, m_RealThis{ realThis }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::NodeImpl
+    ::~NodeImpl ()
+{
+    for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
+    {
+        if (*iter != nullptr)
+        {
+            (*iter)->SetObject(nullptr);
+            iter->Reset();
+        }
+    }
+    
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+CLASS_INVARIANT_STUB_DEFINE(Rendering,NodeImpl)
+
+int Rendering::NodeImpl
+    ::GetNumChildren () const 
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    return boost::numeric_cast<int>(m_Child.size());
+}
+
+int Rendering::NodeImpl
+    ::AttachChild (SpatialSmartPointer& child)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+	if (child.IsNullPtr())
+    {
+        RENDERING_ASSERTION_1(false, "你不能附加一个空节点到NodeImpl。\n");
+        return -1;
+    }
+
+    if (child->GetParent() != nullptr)
+    {
+        RENDERING_ASSERTION_1(false, "子节点已被附加到另一NodeImpl。\n");
+        return -1;
+    }
+
+	child->SetParent(m_RealThis);
+
+    // 插入子节点到第一个可用插槽(如果有的话)。
+    auto index = GetFirstNullIndex();
+    if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
+    {
+        m_Child[index] = child;
+        return index;
+    }
+    else
+    {
+        // 所有插槽都被使用，附加子节点到数组后面。
+        const auto numChildren = boost::numeric_cast<int>(m_Child.size());
+        m_Child.push_back(child);
+        return numChildren;
+    }
+}
+
+// private
+int Rendering::NodeImpl
+    ::GetFirstNullIndex() const
+{
+    for (auto index = 0u;index < m_Child.size();++index)
+    {
+        if (m_Child[index].IsNullPtr())
+        {
+            return index;
+        }
+    }
+    
+    return -1;
+}
+
+int Rendering::NodeImpl
+   ::DetachChild(SpatialSmartPointer& child)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    if (!child.IsNullPtr())
+    {
+        for (auto index = 0u;index < m_Child.size();++index)
+        {
+            if (m_Child[index] == child)
+            {
+                m_Child[index]->SetParent(nullptr);
+                m_Child[index].Reset();
+                
+                return index;
+            }
+        }
+    }
+    
+    return -1;
+}
+
+Rendering::SpatialSmartPointer Rendering::NodeImpl
+    ::DetachChildAt (int index)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+	if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
+    {
+		auto child = m_Child[index];
+        if (!child.IsNullPtr())
+        {
+			child->SetParent(nullptr);
+			m_Child[index].Reset();
+        }
+        
+        return child;
+    }
+	return SpatialSmartPointer{};
+}
+
+Rendering::SpatialSmartPointer Rendering::NodeImpl
+    ::SetChild(int index, SpatialSmartPointer& child)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    if (child != nullptr)
+    {
+        RENDERING_ASSERTION_1(!child->GetParent(),  "子节点已被附加到另一NodeImpl。\n");
+    }
+ 
+    const auto numChildren = boost::numeric_cast<int>(m_Child.size());
+    if (0 <= index && index < numChildren)
+    {
+        // 从插槽中移除当前的子节点。
+		auto previousChild = m_Child[index];
+        if (previousChild != nullptr)
+        {
+            previousChild->SetParent(nullptr);
+        }
+
+           // 插入一个新的子节点到插槽。
+        if (child != nullptr)
+        {
+			child->SetParent(m_RealThis);
+        }
+
+		m_Child[index] = child;
+        
+        return previousChild;
+    }
+
+    // 索引超出了范围，附加子节点到数组。
+    if (!child.IsNullPtr())
+    {
+		child->SetParent(m_RealThis);
+    }
+    
+    m_Child.push_back(child);
+    
+	return SpatialSmartPointer{};
+}
+
+Rendering::SpatialSmartPointer Rendering::NodeImpl
+    ::GetChild (int index)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
+    {
+        return m_Child[index];
+    }
+    
+	return SpatialSmartPointer{};
+}
+
+Rendering::ConstSpatialSmartPointer Rendering::NodeImpl
+    ::GetConstChild(int index) const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
+	{
+		return m_Child[index].PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+	}
+
+	return ConstSpatialSmartPointer{};
+}
+
+bool Rendering::NodeImpl
+    ::UpdateWorldData (double applicationTime)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+	auto result = true;
+    
+    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    {
+		auto child = *iter;
+        
+        if(!child.IsNullPtr())
+        {
+			if (!child->Update(applicationTime, false))
+			{
+				result = false;
+			}
+        }
+    }
+
+	return result;
+}
+
+const Rendering::Bound Rendering::NodeImpl
+    ::GetWorldBound ()
+{
+    RENDERING_CLASS_IS_VALID_9;
+ 
+    // 从一个无效的边界开始。
+	Bound bound{ Bound::APoint::sm_Origin,0.0f };
+    
+    for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
+    {
+		auto child = *iter;
+        
+        if (child != nullptr)
+        {
+            // GrowToContain忽略无效的子边界。
+            // 如果世界是无效的和子边界是有效,子边界会复制到世界边界。
+            // 如果世界边界和子边界都是有效的,最小的包含两个边界的边界会赋值给世界边界。
+            bound.GrowToContain(child->GetWorldBound());
+        }
+    }
+    
+    return bound;
+}
+
+void Rendering::NodeImpl
+    ::GetVisibleSet (Culler& culler, bool noCull)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
+    {
+		auto child = *iter;
+        
+        if (child != nullptr)
+        {
+            child->OnGetVisibleSet(culler, noCull);
+        }
+    }   
+}
+
+// 名字支持。
+
+const CoreTools::ObjectSmartPointer Rendering::NodeImpl
+    ::GetObjectByName (const string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
+    {
+		auto child = *iter;
+        
+        if (child != nullptr && child->GetName() == name)
+        {
+            return child;
+        }
+    }
+    
+    return CoreTools::ObjectSmartPointer();
+}
+
+const vector<CoreTools::ObjectSmartPointer> Rendering::NodeImpl
+    ::GetAllObjectsByName (const string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    vector<CoreTools::ObjectSmartPointer> objects;
+    
+    for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
+    {
+		auto child = *iter;
+        
+        if (child != nullptr && child->GetName() == name)
+        {
+            objects.push_back(child);
+        }
+    }
+    
+    return objects;
+}
+
+const CoreTools::ConstObjectSmartPointer Rendering::NodeImpl
+    ::GetConstObjectByName (const string& name) const
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    for (auto iter = m_Child.begin(),end = m_Child.end(); iter != end; ++iter)
+    {
+		auto child = iter->PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+        
+        if (child != nullptr && child->GetName() == name)
+        {
+            return child;
+        }
+    }
+    
+	return CoreTools::ConstObjectSmartPointer{};
+}
+
+const vector<CoreTools::ConstObjectSmartPointer> Rendering::NodeImpl
+    ::GetAllConstObjectsByName (const string& name) const
+{
+    RENDERING_CLASS_IS_VALID_9;
+    
+    vector<CoreTools::ConstObjectSmartPointer> objects;
+    
+    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    {
+		auto child = iter->PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+        
+        if (child != nullptr && child->GetName() == name)
+        {
+            objects.push_back(child);
+        }
+    }
+    
+    return objects;
+}
+
+// 流支持
+
+void Rendering::NodeImpl
+    ::Load (BufferSource& source)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+	int numChildren{ 0 };
+    source.Read(numChildren);
+    
+    m_Child.resize(numChildren);
+    
+    if (!m_Child.empty())
+    {
+        source.ReadSmartPointer(boost::numeric_cast<int>(m_Child.size()),&m_Child[0]);
+    }
+}
+
+void Rendering::NodeImpl
+    ::Link (ObjectLink& source)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto numChildren = boost::numeric_cast<int>(m_Child.size());
+    
+    for (auto i = 0; i < numChildren; ++i)
+    {
+        if (m_Child[i].GetAddress() != 0)
+        {
+            source.ResolveObjectSmartPointerLink(m_Child[i]);
+            SetChild(i, m_Child[i]);
+        }
+    }
+}
+
+void Rendering::NodeImpl
+    ::Register (ObjectRegister& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    
+    const auto numChildren = boost::numeric_cast<int>(m_Child.size());
+   
+    for (auto i = 0; i < numChildren; ++i)
+    {
+        if (!m_Child[i].IsNullPtr())
+        {
+            target.RegisterSmartPointer(m_Child[i]);
+        }
+    }
+}
+
+void Rendering::NodeImpl
+    ::Save (BufferTarget& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    
+    const auto numChildren = boost::numeric_cast<int>(m_Child.size());
+    target.Write(numChildren);
+
+	if (!m_Child.empty())
+	{
+		target.WriteSmartPointerWithoutNumber(boost::numeric_cast<int>(m_Child.size()), &m_Child[0]);
+	}  
+}
+
+int Rendering::NodeImpl
+    ::GetStreamingSize () const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    
+	auto numChildren = boost::numeric_cast<int>(m_Child.size());
+    
+	auto size = CORE_TOOLS_STREAM_SIZE(numChildren);
+
+	if (0 < numChildren)
+	{
+		size += numChildren * CORE_TOOLS_STREAM_SIZE(m_Child[0]);
+	}
+		
+    return size;
+}
+

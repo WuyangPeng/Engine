@@ -1,0 +1,119 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 引擎版本：0.0.2.2 (2020/01/22 11:15)
+
+#include "CoreTools/CoreToolsExport.h"
+
+#include "StringCommandArgument.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+
+using std::string;
+using std::make_shared;
+
+CoreTools::StringCommandArgument
+	::StringCommandArgument(int index, const string& name, const string& value)
+	:ParentType{ index,name }, m_String{ value }
+{
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::StringCommandArgument
+	::~StringCommandArgument()
+{
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StringCommandArgument)
+
+int CoreTools::StringCommandArgument
+	::GetInteger() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是整数！"));
+}
+
+float CoreTools::StringCommandArgument
+	::GetFloat() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是浮点数！"));
+}
+
+double CoreTools::StringCommandArgument
+	::GetDouble() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是浮点数！"));
+}
+
+const string CoreTools::StringCommandArgument
+	::GetString() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	return m_String;
+}
+
+bool CoreTools::StringCommandArgument
+	::IsInteger() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	return false;
+}
+
+bool CoreTools::StringCommandArgument
+	::IsFloat() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	return false;
+}
+
+bool CoreTools::StringCommandArgument
+	::IsDouble() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	return false;
+}
+
+bool CoreTools::StringCommandArgument
+	::IsString() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	return true;
+}
+
+bool CoreTools::StringCommandArgument
+	::IsNoValue() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	return false;
+}
+
+CoreTools::StringCommandArgument::CommandArgumentSharedPtr CoreTools::StringCommandArgument
+	::Clone() const
+{
+	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+	return make_shared<StringCommandArgument>(*this);
+}
+
+void CoreTools::StringCommandArgument
+	::AddArgumentValue(const string& value)
+{
+	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	m_String += " ";
+	m_String += value;
+}

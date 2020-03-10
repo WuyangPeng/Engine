@@ -1,0 +1,54 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/23 10:16)
+
+#ifndef RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_IMPL_H
+#define RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_IMPL_H
+
+#include "Rendering/RenderingDll.h"
+
+#include "Mathematics/Algebra/APoint.h"
+#include "Mathematics/Algebra/Matrix.h"
+#include "Rendering/DataTypes/Transform.h"
+
+namespace CoreTools
+{
+	class BufferTarget;
+	class BufferSource;
+}
+
+namespace Rendering
+{
+	class RENDERING_HIDDEN_DECLARE TransformControllerImpl
+	{
+	public:
+		using ClassType = TransformControllerImpl;
+		using APoint = Mathematics::APointf;
+		using Matrix = Mathematics::Matrixf;
+
+	public:		
+		explicit TransformControllerImpl(const Transform& localTransform);
+
+		CLASS_INVARIANT_DECLARE;
+		
+		void SetTransform (const Transform& localTransform);
+		const Transform GetTransform () const; 
+
+		void SetTranslate(const APoint& translate);
+		void SetRotate(const Matrix& rotate);
+		void SetUniformScale(float scale);
+		void SetScale(const APoint& scale);
+		void SetMatrix(const Matrix& matrix);
+
+		int GetStreamingSize() const;
+		void Save(CoreTools::BufferTarget& target) const;
+		void Load(CoreTools::BufferSource& source);
+
+	private:
+		Transform m_LocalTransform;
+	};
+}
+
+#endif // RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_IMPL_H

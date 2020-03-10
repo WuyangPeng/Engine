@@ -1,0 +1,14 @@
+TODO Level 5
+
+0.0.2.0
+
+1. （OpenGL）将OpenGLAPI中的类型宏改成枚举。
+2. （OpenGL）将OpenGLGlut中的类型宏改成枚举。
+3. （OpenGL）考虑使用类和锁封装opengl是否存在的全局变量。 
+
+
+
+
+
+
+		

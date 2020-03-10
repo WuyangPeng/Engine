@@ -1,0 +1,6 @@
+TODO Level 3
+ 
+0.0.2.0
+
+1.  （MemoryTools）完成MemoryTools非Windows平台的实现：HeapTools。
+2.  （FileManager）安卓系统屏蔽GetEnvironment函数的调用，查看是否有解决方案。

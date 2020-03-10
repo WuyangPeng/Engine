@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration 头文件">
+      <UniqueIdentifier>{6ffc436b-a29b-4ee5-b279-243476a69647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 头文件">
+      <UniqueIdentifier>{537d926a-6d62-48f5-8547-cade5ff9e673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Java 头文件">
+      <UniqueIdentifier>{042602fe-3fbf-4d6c-b3a9-1211d878517b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lua 头文件">
+      <UniqueIdentifier>{c0ca4b19-7e3a-4d43-a2ab-f29207c95a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{9f67c3b5-d757-46eb-b93f-c432c22a217f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TCREScript 头文件">
+      <UniqueIdentifier>{2ed232d9-daa3-4eba-8824-6e5dfc31034e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Python 头文件">
+      <UniqueIdentifier>{d188b222-adda-4c07-9658-4e4da5d59a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Perl 头文件">
+      <UniqueIdentifier>{e89675dc-22a7-416a-958d-ff3ef5cb4ffb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Script\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Script\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Script\ScriptImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Script.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Configuration\Configuration.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Configuration\ConfigurationFwd.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Interface\Interface.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Interface\InterfaceFwd.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Interface\ScriptInterface.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Java\Java.h">
+      <Filter>Java 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Java\JavaFwd.h">
+      <Filter>Java 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Lua\Lua.h">
+      <Filter>Lua 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Lua\LuaFwd.h">
+      <Filter>Lua 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Perl\Perl.h">
+      <Filter>Perl 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Perl\PerlFwd.h">
+      <Filter>Perl 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Python\Python.h">
+      <Filter>Python 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Python\PythonFwd.h">
+      <Filter>Python 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\TCREScript\TCREScript.h">
+      <Filter>TCREScript 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\TCREScript\TCREScriptFwd.h">
+      <Filter>TCREScript 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

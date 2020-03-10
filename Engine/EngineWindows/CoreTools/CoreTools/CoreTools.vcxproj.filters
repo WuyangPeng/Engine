@@ -1,0 +1,3077 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{3d1e5eeb-9b4e-4b7d-ad2d-581c8507be7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assert 头文件">
+      <UniqueIdentifier>{f605821d-2e0b-4561-af95-6a20899812d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assert 源文件">
+      <UniqueIdentifier>{408f25d0-7a59-4a59-bd98-e987329b9be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 头文件">
+      <UniqueIdentifier>{cb5f445c-79a7-42e8-9ee6-df14cb20b502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 模板文件">
+      <UniqueIdentifier>{f99896c0-27fe-4353-9bc4-71a396a92076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 源文件">
+      <UniqueIdentifier>{37b1a001-293a-40a3-bb14-418a840ab77a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 头文件\Detail">
+      <UniqueIdentifier>{a0bd6053-a14a-4a3a-aa50-582fb95a92fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 源文件\Detail">
+      <UniqueIdentifier>{a7f5a804-365a-441f-95bd-169973db483f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BitArrayManager 头文件">
+      <UniqueIdentifier>{759c2723-257d-44d6-9079-0e30df3493f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BitArrayManager 源文件">
+      <UniqueIdentifier>{080e2974-048b-48b4-b593-e526a9617004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterString 头文件">
+      <UniqueIdentifier>{c7aa7c53-57ce-442c-a207-20d508b68499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterString 源文件">
+      <UniqueIdentifier>{30657cda-b667-4503-bcf5-25b4ace3a7f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterString 头文件\Detail">
+      <UniqueIdentifier>{9a5bba3c-4bef-45f0-940b-1e233ae8256a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterString 源文件\Detail">
+      <UniqueIdentifier>{e1be31b2-7b6e-4a45-a48d-c4e3843b3da9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterString 模板文件">
+      <UniqueIdentifier>{0fe27edf-c7a4-4636-bcda-82337bf44d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassInvariant 头文件">
+      <UniqueIdentifier>{4edb32c4-fee8-47df-8237-c451bb236d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassInvariant 模板文件">
+      <UniqueIdentifier>{94a31275-5cc0-429c-a276-27f9c05ff213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassInvariant 头文件\Flags">
+      <UniqueIdentifier>{c19b0ca2-a76d-47a9-8a99-df48784105f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command 头文件">
+      <UniqueIdentifier>{e2c06ec6-0612-4d73-a5d8-0d5eec943631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command 源文件">
+      <UniqueIdentifier>{a0ef4d6f-9120-4eb1-afac-f9a9063f3075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command 头文件\Detail">
+      <UniqueIdentifier>{a074a41f-8e59-4c3b-ac6a-98126b8656f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command 源文件\Detail">
+      <UniqueIdentifier>{c6cfcb02-30c7-4bc0-b722-9372e93c6c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Console 头文件">
+      <UniqueIdentifier>{a2aea03e-a203-4c96-9b99-c6b698dffc9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Console 源文件">
+      <UniqueIdentifier>{52aaf0d6-4496-4dcc-b6c2-ee470fb2ec30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Console 头文件\Flags">
+      <UniqueIdentifier>{df4d2637-8212-406e-b9c2-22500ad83790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Console 模板文件">
+      <UniqueIdentifier>{77281494-fcae-479c-8140-4686399ea41b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CyclicRedundancyCheck 头文件">
+      <UniqueIdentifier>{f71fa4fc-8083-4b69-b12c-7450466a4006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CyclicRedundancyCheck 源文件">
+      <UniqueIdentifier>{b54f956e-d23f-4929-b7c8-a84e2993ed01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CyclicRedundancyCheck 头文件\Detail">
+      <UniqueIdentifier>{37689fec-9d00-4cbf-ace4-6fd6aecd88fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CyclicRedundancyCheck 源文件\Detail">
+      <UniqueIdentifier>{991d6c3e-f3f7-41d9-a27a-cacf279a6b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CyclicRedundancyCheck 头文件\Flags">
+      <UniqueIdentifier>{16b57d2e-7d00-4c93-985b-5c7c916cfb0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataTypes 头文件">
+      <UniqueIdentifier>{f9d7ddc9-78ff-4dad-90a3-b96fa2b8ae16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataTypes 源文件">
+      <UniqueIdentifier>{ac9ba6fa-5364-4cdb-abab-30bacdacc72a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataTypes 模板文件">
+      <UniqueIdentifier>{40494400-4610-486e-9ba4-cb0eaa402674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLink 头文件">
+      <UniqueIdentifier>{60c79edb-7d6e-4dd9-ae6b-df37b1bd16e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLink 源文件">
+      <UniqueIdentifier>{78ecc0db-b1b8-4493-b579-6df0827a4c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLink 头文件\Detail">
+      <UniqueIdentifier>{8cb5fada-b060-4ce0-abc0-2045fd9abbb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLink 源文件\Detail">
+      <UniqueIdentifier>{7b6ad5d6-1243-42a5-83aa-841d6de6f6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineConfiguration 头文件">
+      <UniqueIdentifier>{4787abcd-d84d-47be-824b-3cd067c4ca6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineConfiguration 源文件">
+      <UniqueIdentifier>{744c9baf-f682-4d94-ad53-f21b90ed7a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineConfiguration 头文件\Detail">
+      <UniqueIdentifier>{409547c2-f83e-478f-aefa-8b935413bfb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineConfiguration 源文件\Detail">
+      <UniqueIdentifier>{eeff591a-e123-42fc-9640-11eb8ab3632d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exception 头文件">
+      <UniqueIdentifier>{51debf85-6f24-4d8e-802c-557e2d9d31fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exception 源文件">
+      <UniqueIdentifier>{66aba2b5-2581-4b0f-b1bd-7ed8559bef17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exception 头文件\Detail">
+      <UniqueIdentifier>{57248d58-88c8-4293-8b93-9a169bb9de27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exception 源文件\Detail">
+      <UniqueIdentifier>{7cd415bf-8be7-413e-ac15-b38d25bb5aff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileManager 头文件">
+      <UniqueIdentifier>{3aac9d2d-670b-4b25-b0cc-9d1b75d594f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileManager 源文件">
+      <UniqueIdentifier>{0d32a184-4012-4f94-a653-2a60da2a1513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileManager 头文件\Detail">
+      <UniqueIdentifier>{cc58719c-e349-4956-94a2-f03da456504c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileManager 源文件\Detail">
+      <UniqueIdentifier>{e7ecdbfa-21b7-4d3b-b5c5-39d5bb230ad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileManager 头文件\Flags">
+      <UniqueIdentifier>{099cdb0e-17d0-4780-bf79-60ddd249d3e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystem 头文件">
+      <UniqueIdentifier>{6b466e67-c10d-483c-9b52-b0dec22673c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystem 源文件">
+      <UniqueIdentifier>{51176fe5-f89d-4dee-b8fb-4ed20e20a7cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystem 头文件\Detail">
+      <UniqueIdentifier>{ce021f43-9f09-454d-af2d-183152eec4a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystem 源文件\Detail">
+      <UniqueIdentifier>{37926d47-5408-4e36-b803-f1e1b9d887f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystem 头文件\Flags">
+      <UniqueIdentifier>{12f7c35b-f884-48bc-97a7-4527c4815888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HandleManager 头文件">
+      <UniqueIdentifier>{df696a2e-3952-47cc-892e-81086948c99c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HandleManager 模板文件">
+      <UniqueIdentifier>{f0f7bd71-e106-4fb1-af56-1ec2fa79cf8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImplHelper 头文件">
+      <UniqueIdentifier>{018ce0f4-e82c-41e6-b7cb-3439bca94af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManager 源文件">
+      <UniqueIdentifier>{f47dbc89-348e-434b-971f-358e4b6653eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManager 头文件">
+      <UniqueIdentifier>{9c496d5e-5773-4745-b764-e6ce0c4d2c11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManager 源文件\Detail">
+      <UniqueIdentifier>{57058b60-f70f-4e4f-9ae5-b02c7047b5e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManager 头文件\Detail">
+      <UniqueIdentifier>{55625382-26d6-4619-b3c7-362d2c966210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManager 模板文件">
+      <UniqueIdentifier>{32d80901-16f0-40a8-97c9-f3d55d06047e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManager 模板文件\Detail">
+      <UniqueIdentifier>{6d680cd1-75da-42e8-b2c4-3fe7b8569c44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManager 头文件\Flags">
+      <UniqueIdentifier>{c34d96ad-488a-4cd9-9c36-1ec1869a2de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelper 头文件">
+      <UniqueIdentifier>{e20f0975-d6f1-4cea-b2ac-a61558942131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelper 源文件">
+      <UniqueIdentifier>{b928c4cb-76c2-4f95-88d7-a192074057b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelper 头文件\Detail">
+      <UniqueIdentifier>{45b007a4-1b33-4dd9-bcd8-919ed9443618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelper 源文件\Detail">
+      <UniqueIdentifier>{c335c3f0-36f2-4c2f-baef-c3343a05313a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryTools 头文件">
+      <UniqueIdentifier>{b016fcf0-69e7-4516-9883-a600e0938586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryTools 源文件">
+      <UniqueIdentifier>{fd6cb240-37de-4bc3-91de-25cc2bd6960a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryTools 头文件\Detail">
+      <UniqueIdentifier>{34e15b4d-5158-4e8e-a240-416eb3b60364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryTools 源文件\Detail">
+      <UniqueIdentifier>{ce839267-98dd-489c-bf66-24bf9ee9dda0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryTools 头文件\Flags">
+      <UniqueIdentifier>{f05e67cb-74cd-4a7d-af34-9220a73dd915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryTools 模板文件">
+      <UniqueIdentifier>{0a9cb0e0-c8db-465c-b5bf-1b7751b24c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEvent 头文件">
+      <UniqueIdentifier>{ca794176-d91e-4656-a9a2-c6dfa97ac8da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEvent 源文件">
+      <UniqueIdentifier>{1148e62e-8ca7-46a7-8ed2-e228458dd0fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEvent 头文件\Detail">
+      <UniqueIdentifier>{957ea863-1017-437a-baee-6c2921008ab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEvent 源文件\Detail">
+      <UniqueIdentifier>{d74b1b50-640a-4f07-a027-0475ff0b6bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEvent 模板文件">
+      <UniqueIdentifier>{40278e0f-7700-4244-b429-823e2ef3f393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEvent 模板文件\Detail">
+      <UniqueIdentifier>{24d4b390-b28d-4e16-8b4f-c342ea656107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModuleInitializerTerminator 头文件">
+      <UniqueIdentifier>{dfc5722e-4db7-4c76-97aa-a7e8e33d9bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network 头文件">
+      <UniqueIdentifier>{fa6f8e56-0ceb-445b-aa24-7457aad4156e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network 源文件">
+      <UniqueIdentifier>{28f78546-ac38-40f4-b5dd-e2e4872a0fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network 头文件\Detail">
+      <UniqueIdentifier>{134534c3-e986-42b7-857d-55a10691e704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network 源文件\Detail">
+      <UniqueIdentifier>{cd09f0dc-c8ef-4cfe-b44c-b1f46ceda341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystems 头文件">
+      <UniqueIdentifier>{734d7b12-2867-4b32-b72a-3920d5915ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystems 源文件">
+      <UniqueIdentifier>{c57ac773-58fc-4425-bba3-fd34c337b9a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystems 源文件\Detail">
+      <UniqueIdentifier>{7d82f308-06a4-4762-91ec-0990e2ea2ea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystems 头文件\Detail">
+      <UniqueIdentifier>{8c436a06-68bc-41a8-b7a1-6a1424a0ccff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystems 模板文件">
+      <UniqueIdentifier>{3f0c34ff-7202-43df-8e3a-1bd9d5487efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PerformanceProfiler 头文件">
+      <UniqueIdentifier>{aafd8a15-267b-450e-84cb-38133693617f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Properties 头文件">
+      <UniqueIdentifier>{6f30a6bc-3726-41a3-b0c5-676f2ec68358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Properties 模板文件">
+      <UniqueIdentifier>{e32c11ee-26cb-4758-9191-da6fd34ec616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RegularExpression 头文件">
+      <UniqueIdentifier>{12c12c07-773c-484a-ba05-9ee0d36a43f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ReportOutput 头文件">
+      <UniqueIdentifier>{73715a0a-1af3-4005-8d7c-dca09e70a7b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ReportOutput 源文件">
+      <UniqueIdentifier>{abdd8a5d-edc6-4bdb-9375-16d5d9886427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ReportOutput 源文件\Detail">
+      <UniqueIdentifier>{89718cd2-e5fc-4c44-a91f-07c8fe48e2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ReportOutput 头文件\Detail">
+      <UniqueIdentifier>{238fb551-3e42-4b38-9129-8316b82137d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManager 头文件">
+      <UniqueIdentifier>{bdf7337e-a26f-4cf5-9ffb-48c14bb9ca2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManager 源文件">
+      <UniqueIdentifier>{68584091-8dff-40af-aa68-736eb72eac3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManager 源文件\Detail">
+      <UniqueIdentifier>{25769647-fd6b-469d-9e11-42685430dfd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManager 头文件\Detail">
+      <UniqueIdentifier>{0188eb3b-2deb-4a1c-9522-e777d92877ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManager 头文件\Flags">
+      <UniqueIdentifier>{44bf4604-5a31-4d4f-ac42-72def1960ce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineManager 头文件">
+      <UniqueIdentifier>{9408745e-1469-4dbe-838e-4da943481416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineManager 模板文件">
+      <UniqueIdentifier>{d8d734bd-7084-49f5-b4fd-a709b3024540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SyntacticParser 头文件">
+      <UniqueIdentifier>{f905de35-11d2-4cd0-b71d-44f5e3754d06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TemplateTools 头文件">
+      <UniqueIdentifier>{a3d8f1ec-e730-400c-9e90-f170905b5a62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TemplateTools 模板文件">
+      <UniqueIdentifier>{1bf48ca3-a34b-4896-b7bc-7f7cfc088568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TemplateTools 源文件">
+      <UniqueIdentifier>{c32b7029-71d3-4baa-a9f9-41117fb9b696}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件">
+      <UniqueIdentifier>{1c335d73-1fc8-4a61-b626-62a2d5bcbbed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading 头文件">
+      <UniqueIdentifier>{23e5a8ce-56f7-4e9f-9ab0-4ea19e7961e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading 源文件">
+      <UniqueIdentifier>{5fe8eb74-2dc6-436c-b67d-fc15dd0985c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading 源文件\Detail">
+      <UniqueIdentifier>{3ba584a6-85eb-4599-9d6b-a69936a56b40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading 头文件\Detail">
+      <UniqueIdentifier>{5f3cb258-ebe8-4ef2-b1b2-a7c5d0d130f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading 头文件\Flags">
+      <UniqueIdentifier>{d15d5441-3a92-4b5c-bf39-26415737fbc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time 头文件">
+      <UniqueIdentifier>{6db99370-447c-4c12-b834-a5d814b47bc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time 源文件">
+      <UniqueIdentifier>{17a33e86-7695-43fa-bee6-cc8d95575ef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time 源文件\Detail">
+      <UniqueIdentifier>{b012788d-2d55-46f6-990f-024ea974abdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time 头文件\Detail">
+      <UniqueIdentifier>{b9fecc29-45fe-40ed-8af7-b94f7f902993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTestSuite 头文件">
+      <UniqueIdentifier>{576c8303-2cfd-48fb-9224-e9f550662ac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTestSuite 源文件">
+      <UniqueIdentifier>{5d466339-ce67-47b1-8046-f1232fdc7472}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTestSuite 源文件\Detail">
+      <UniqueIdentifier>{c6b94238-ba5b-47bc-aee7-d0977b30a2c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTestSuite 头文件\Detail">
+      <UniqueIdentifier>{8683d492-94e8-42fb-a1c8-2f929420aa80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTestSuite 模板文件">
+      <UniqueIdentifier>{8b90d282-c8cd-4460-95c5-e9300da6d8fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionInformation 头文件">
+      <UniqueIdentifier>{22378e5d-e538-4039-890d-44dd2d37e3ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionInformation 源文件">
+      <UniqueIdentifier>{24d6e447-7fdd-4d27-bd8a-1972e4e7b68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassInvariant 源文件">
+      <UniqueIdentifier>{dcdb5e83-2e97-4cee-8140-9082ffd2cc93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 头文件\Flags">
+      <UniqueIdentifier>{dba5c63c-b7eb-4de4-9d48-ba14e5f932ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystem 模板文件">
+      <UniqueIdentifier>{132cb58a-ef11-4520-b4ff-4b1b85c4dc24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystem 模板文件\Detail">
+      <UniqueIdentifier>{cf01235e-5895-479f-9629-d28c3c5617bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zlib 头文件">
+      <UniqueIdentifier>{1740f262-ea5a-4099-ab70-c12061a375b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Freetype 头文件">
+      <UniqueIdentifier>{deb1eaad-a4df-4427-95f1-e2625e790ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exception 模板文件">
+      <UniqueIdentifier>{81cb76c6-1fd2-408a-bffb-ae0783ecaf7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command 模板文件">
+      <UniqueIdentifier>{80006222-037f-4555-bfbe-0fe88264a717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command 模板文件\Detail">
+      <UniqueIdentifier>{f07a3f6f-3d4b-4e4a-b744-c6eb0df1e677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{24271a45-1bf0-4a29-8f6a-a8d5ce3f5ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件\Assertion">
+      <UniqueIdentifier>{731bddb7-f43b-428f-820e-8b2876d7e259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件\ClassInvariant">
+      <UniqueIdentifier>{46a76f86-3590-48ad-87ef-fe98969feb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件\UnitTest">
+      <UniqueIdentifier>{020baee4-1b95-4596-88a9-a72181e2d92a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件\UnitTest\Detail">
+      <UniqueIdentifier>{9ec901a2-f91b-4dcf-a383-f391e86360bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件">
+      <UniqueIdentifier>{9018e4b3-6017-4509-9c78-555538226a14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreTools.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Assert\AssertFwd.h">
+      <Filter>Assert 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Assert\Assertion.h">
+      <Filter>Assert 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Assert\Assert.h">
+      <Filter>Assert 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\BaseFwd.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Singleton.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Base.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\SingletonDetail.h">
+      <Filter>Base 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray2D.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitArrayManager.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitArrayManagerFwd.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitProxy.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ConstArrayProxy.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ConstBitProxy.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ConstTwoBitProxy.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\TwoBitArray.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\TwoBitProxy.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ArrayProxy.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray.h">
+      <Filter>BitArrayManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\FormatErrorMessageImpl.h">
+      <Filter>CharacterString 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\MultiByteConversionWideChar.h">
+      <Filter>CharacterString 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\WideCharConversionMultiByte.h">
+      <Filter>CharacterString 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveString.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CharacterString.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CharacterStringFwd.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\FormatErrorMessage.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\StringConversion.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveStringDetail.h">
+      <Filter>CharacterString 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\Flags\CheckInvariantFlags.h">
+      <Filter>ClassInvariant 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\CheckInvariant.h">
+      <Filter>ClassInvariant 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ClassInvariant.h">
+      <Filter>ClassInvariant 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ClassInvariantFwd.h">
+      <Filter>ClassInvariant 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\FunctionDescribed.h">
+      <Filter>ClassInvariant 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\TriggerAssert.h">
+      <Filter>ClassInvariant 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\CheckInvariantDetail.h">
+      <Filter>ClassInvariant 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainer.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandLineInformationImpl.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\NoValueCommandArgument.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\NumberCommandArgument.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\StringCommandArgument.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\AnalysisCommandArgumentContainer.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainerDetail.h">
+      <Filter>Command 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Command.h">
+      <Filter>Command 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandArgument.h">
+      <Filter>Command 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandFwd.h">
+      <Filter>Command 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandHandle.h">
+      <Filter>Command 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandLineInformation.h">
+      <Filter>Command 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\Flags\ConsoleColorsFlags.h">
+      <Filter>Console 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\Console.h">
+      <Filter>Console 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleAlloc.h">
+      <Filter>Console 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleColors.h">
+      <Filter>Console 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleFwd.h">
+      <Filter>Console 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleInstance.h">
+      <Filter>Console 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleTextColorsManager.h">
+      <Filter>Console 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleInstanceDetail.h">
+      <Filter>Console 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleTextColorsManagerDetail.h">
+      <Filter>Console 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleColorsDetail.h">
+      <Filter>Console 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck32Table.h">
+      <Filter>CyclicRedundancyCheck 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCCITTTable.h">
+      <Filter>CyclicRedundancyCheck 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckHandleImpl.h">
+      <Filter>CyclicRedundancyCheck 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck16Table.h">
+      <Filter>CyclicRedundancyCheck 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Flags\SpecifyCheckSumPowersFlags.h">
+      <Filter>CyclicRedundancyCheck 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck16.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITT.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITTUsingTable.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckFwd.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckHandle.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\IntelCheckSum.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SevenModElevenCheckSum.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.h">
+      <Filter>CyclicRedundancyCheck 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecord.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStored.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManager.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Table.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Tuple.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLess.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypes.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypesFwd.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeap.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManagerDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLessDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TableDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\Detail\LoadingLibraryImpl.h">
+      <Filter>DynamicLink 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\DynamicLink.h">
+      <Filter>DynamicLink 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\DynamicLinkFwd.h">
+      <Filter>DynamicLink 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\LoadingLibrary.h">
+      <Filter>DynamicLink 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.h">
+      <Filter>EngineConfiguration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\EngineConfigurationFwd.h">
+      <Filter>EngineConfiguration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\StringReplacing.h">
+      <Filter>EngineConfiguration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\EngineConfiguration.h">
+      <Filter>EngineConfiguration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorImpl.h">
+      <Filter>Exception 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\NormalError.h">
+      <Filter>Exception 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\WindowsError.h">
+      <Filter>Exception 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorFactory.h">
+      <Filter>Exception 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Error.h">
+      <Filter>Exception 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\Exception.h">
+      <Filter>Exception 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\ExceptionFwd.h">
+      <Filter>Exception 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\LastError.h">
+      <Filter>Exception 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteBufferIO.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteFileHandle.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteFileManager.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\CFileManagerHelper.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\CopyFileTools.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\CReadFileManager.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\CWriteFileManager.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\DeleteFileTools.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Endian.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Environment.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\EnvironmentVariable.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileBuffer.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileHandleHelper.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManager.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManagerFwd.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManagerHelper.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\IFStreamManager.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\OFStreamManager.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadAndWriteFileHandle.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadBufferIO.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadFileHandle.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadFileManager.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CommonCopyFileTools.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsFactory.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CReadFileManagerImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CWriteFileManagerImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\DeleteFileToolsImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentVariableImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileBufferImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileHandleImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileManagerFactory.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamManagerImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamSeekManager.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamManagerImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamSeekManager.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadAndWriteFileHandleImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadBufferIOImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileHandleImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileManagerInterface.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WindowsCopyFileTools.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteBufferIOImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileHandleImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileManagerInterface.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\BufferIOImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CFileManagerImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Flags\BufferIOFlags.h">
+      <Filter>FileManager 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\BaseFrameMemorySystemImpl.h">
+      <Filter>FrameMemorySystem 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\FrameMemorySystemPointerShareImpl.h">
+      <Filter>FrameMemorySystem 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\Flags\FrameMemorySystemFlags.h">
+      <Filter>FrameMemorySystem 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\BaseFrameMemorySystem.h">
+      <Filter>FrameMemorySystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystem.h">
+      <Filter>FrameMemorySystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemFwd.h">
+      <Filter>FrameMemorySystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemManager.h">
+      <Filter>FrameMemorySystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemPointerShare.h">
+      <Filter>FrameMemorySystem 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\ResourceHandle.h">
+      <Filter>HandleManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\HandleManager.h">
+      <Filter>HandleManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\HandleManagerFwd.h">
+      <Filter>HandleManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\HandleTypeManager.h">
+      <Filter>HandleManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\HandleTypeManagerDetail.h">
+      <Filter>HandleManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\ResourceHandleDetail.h">
+      <Filter>HandleManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplHelperFwd.h">
+      <Filter>ImplHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplStaticAssertHelper.h">
+      <Filter>ImplHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplHelper.h">
+      <Filter>ImplHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AnalysisAppenderManager.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderConsole.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFactory.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFile.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFileConfiguration.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderManagerImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderPrintFlagsExist.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\ErrorConsoleTextColorsManager.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerFactory.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogFileNameImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LoggerImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessageImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessagePostfixImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessagePrefixImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\OutputConsoleTextColorsManager.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImplDetail.h">
+      <Filter>LogManager 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManagerFwd.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessage.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessagePostfix.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessagePrefix.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Appender.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\AppenderManager.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Log.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogAppenderIOManager.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogConsoleTextColorsManager.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogFileName.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogFilterManager.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Logger.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogLevelManager.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManager.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTestSuiteMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\AssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\CustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ExceptionMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ExportMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\FunctionDescribedMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\LogMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\MainFunctionMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\MemberFunctionMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\MemoryMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ModuleClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ModuleCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\NameMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\PropertiesMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\RttiMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\SingletonMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\StreamMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\SubclassSmartPointerMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\TemplateToolsMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\CoreToolsCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\DatabaseCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\FrameworkCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ImagicsCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\InputOutputCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\MathematicsCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\NetworkCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\PhysicsCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\RenderingCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ResourceManagerCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ScriptCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\SoundEffectCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\UserCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\UserInterfaceCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\AnimationCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ArtificialIntellegenceCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\AssistToolsCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\AssistToolsClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\CoreToolsClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\DatabaseClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\FrameworkClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ImagicsClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\InputOutputClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\MathematicsClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\NetworkClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\PhysicsClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\RenderingClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ResourceManagerClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ScriptClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\SoundEffectClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\UserClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\UserInterfaceClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\AnimationClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ArtificialIntellegenceClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\AssertExceptionMacro.h">
+      <Filter>Helper 头文件\UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\AssertTestMacro.h">
+      <Filter>Helper 头文件\UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\Detail\AssertTestMacroDetail.h">
+      <Filter>Helper 头文件\UnitTest\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformation.h">
+      <Filter>MainFunctionHelper 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformationHelperImpl.h">
+      <Filter>MainFunctionHelper 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionTestingHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\DllFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\MainFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\MainFunctionHelperFwd.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\TestingInformationHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferStreamImpl.h">
+      <Filter>MemoryTools 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MD5ContextImpl.h">
+      <Filter>MemoryTools 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryInformation.h">
+      <Filter>MemoryTools 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryManagerImpl.h">
+      <Filter>MemoryTools 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\SmartPointerManagerImpl.h">
+      <Filter>MemoryTools 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferPoolImpl.h">
+      <Filter>MemoryTools 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Flags\MD5ContextStatus.h">
+      <Filter>MemoryTools 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ThirdSubclassSmartPointer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferPool.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstFirstSubclassSmartPointer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstSecondSubclassSmartPointer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstThirdSubclassSmartPointer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemory.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\FirstSubclassSmartPointer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\HeapAllocate.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MD5.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MD5Context.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Memory.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryManager.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryTools.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryToolsFwd.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Pool.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Random.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SecondSubclassSmartPointer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArray.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer2DArray.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer3DArray.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer4DArray.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerManager.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerSingle.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointerTraits.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassWeakPointer.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstFirstSubclassSmartPointerDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstSecondSubclassSmartPointerDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstThirdSubclassSmartPointerDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemoryDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\FirstSubclassSmartPointerDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\HeapAllocateDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\PoolDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SecondSubclassSmartPointerDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArrayDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer2DArrayDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer3DArrayDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer4DArrayDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerSingleDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointerDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassWeakPointerDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ThirdSubclassSmartPointerDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Detail\CallbackParametersImpl.h">
+      <Filter>MessageEvent 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Detail\EntityManagerImpl.h">
+      <Filter>MessageEvent 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Detail\CallbackParametersImplDetail.h">
+      <Filter>MessageEvent 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramLess.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramMessageManager.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\BaseEntity.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\CallbackParameters.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EntityManager.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventEntity.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventInterface.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventSlot.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventSlotManager.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\MessageEvent.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\MessageEventFwd.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\MessageManager.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\ParametersInterface.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Telegram.h">
+      <Filter>MessageEvent 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\CallbackParametersDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EntityManagerDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventEntityDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventSlotDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\EventSlotManagerDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\MessageManagerDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramLessDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramMessageManagerDetail.h">
+      <Filter>MessageEvent 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ModuleInitializerTerminator\ModuleInitializerTerminatorFwd.h">
+      <Filter>ModuleInitializerTerminator 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ModuleInitializerTerminator\ModuleInitializerTerminator.h">
+      <Filter>ModuleInitializerTerminator 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\DownloadingFilesImpl.h">
+      <Filter>Network 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\InternetConnection.h">
+      <Filter>Network 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\OpenUrlInternet.h">
+      <Filter>Network 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\DownloadingFilesEvent.h">
+      <Filter>Network 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\Network.h">
+      <Filter>Network 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\NetworkFwd.h">
+      <Filter>Network 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Network\DownloadingFiles.h">
+      <Filter>Network 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferInStreamImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferOutStreamImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\InTopLevelImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectLinkImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectManagerImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectNameImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectRegisterImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\OutTopLevelImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\TopLevel.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\StreamDetail.h">
+      <Filter>ObjectSystems 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferSourceDetail.h">
+      <Filter>ObjectSystems 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTargetDetail.h">
+      <Filter>ObjectSystems 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectLinkDetail.h">
+      <Filter>ObjectSystems 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectRegisterDetail.h">
+      <Filter>ObjectSystems 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferInStream.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferOutStream.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferSource.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTarget.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\FileInStream.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\FileOutStream.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTerm.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InTopLevel.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Object.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterface.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterfaceLess.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectLink.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectManager.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectName.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectRegister.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectSystems.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectSystemsFwd.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\OutTopLevel.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Rtti.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Stream.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\StreamSize.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\TypeCasting.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\PerformanceProfiler\PerformanceProfiler.h">
+      <Filter>PerformanceProfiler 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\PerformanceProfiler\PerformanceProfilerFwd.h">
+      <Filter>PerformanceProfiler 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertyGetInternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertySetInternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetSetDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetSetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertySetDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertySetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyBaseDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetExternalOffsetDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetInternalOffsetDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetSetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertySetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\SimplePropertyGetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\SimplePropertySetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetSetDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetSetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertySetExternalDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertyGetInternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertySetInternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGet.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetSet.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertyGetSetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertySet.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\MethodPropertySetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\Properties.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertiesFwd.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\Property.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyBase.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetExternalOffset.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetInternalOffset.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyGetSetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertySetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\SimplePropertyGetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\SimplePropertySetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetSet.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertyGetSetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertySetExternal.h">
+      <Filter>Properties 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\RegularExpression\RegularExpressionFwd.h">
+      <Filter>RegularExpression 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\RegularExpression\RegularExpression.h">
+      <Filter>RegularExpression 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\EquilongReportOutputImpl.h">
+      <Filter>ReportOutput 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\ReportOutput.h">
+      <Filter>ReportOutput 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\TimeReportOutput.h">
+      <Filter>ReportOutput 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestFailReportOutputImpl.h">
+      <Filter>ReportOutput 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestSuiteReportOutputImpl.h">
+      <Filter>ReportOutput 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\EquilongReportOutput.h">
+      <Filter>ReportOutput 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\ReportOutput.h">
+      <Filter>ReportOutput 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\ReportOutputFwd.h">
+      <Filter>ReportOutput 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestFailReportOutput.h">
+      <Filter>ReportOutput 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestSuiteReportOutput.h">
+      <Filter>ReportOutput 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceImpl.h">
+      <Filter>ResourceManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceLockManager.h">
+      <Filter>ResourceManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceManagerImpl.h">
+      <Filter>ResourceManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\CommonDataResourceImpl.h">
+      <Filter>ResourceManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\ResourceManagerLockImpl.h">
+      <Filter>ResourceManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Detail\ResourceManagerPriorityQueue.h">
+      <Filter>ResourceManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\Flags\ResourceManagerFlags.h">
+      <Filter>ResourceManager 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\BaseResource.h">
+      <Filter>ResourceManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\BaseResourceManager.h">
+      <Filter>ResourceManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\CommonDataResource.h">
+      <Filter>ResourceManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\ResourceFactory.h">
+      <Filter>ResourceManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\ResourceManager.h">
+      <Filter>ResourceManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\ResourceManagerFwd.h">
+      <Filter>ResourceManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ResourceManager\ResourceManagerLock.h">
+      <Filter>ResourceManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\DefaultEventDispatcher.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\EventDispatcher.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\GenerateDispatcher.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\State.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateEntity.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachine.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineBase.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineManager.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineManagerFwd.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineRow.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\TransitionEvent.h">
+      <Filter>StateMachineManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineRowDetail.h">
+      <Filter>StateMachineManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineDetail.h">
+      <Filter>StateMachineManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateMachineBaseDetail.h">
+      <Filter>StateMachineManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateEntityDetail.h">
+      <Filter>StateMachineManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\EventDispatcherDetail.h">
+      <Filter>StateMachineManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\DefaultEventDispatcherDetail.h">
+      <Filter>StateMachineManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\StateMachineManager\StateDetail.h">
+      <Filter>StateMachineManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\SyntacticParser\SyntacticParserFwd.h">
+      <Filter>SyntacticParser 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\SyntacticParser\SyntacticParser.h">
+      <Filter>SyntacticParser 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\LiteralCast.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBePod.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBeSameSize.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBeSubscriptable.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustHaveBase.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveCosine.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveSine.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveTangent.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ParamType.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Pow3.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\PtrCompare.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RealAddress.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RecursiveSine.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ReferenceCast.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\SimpleDecrementer.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\SimpleIncrementer.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Sqrt.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\TemplateTools.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\TemplateToolsFwd.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Tiny.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\TrigonometricFunction.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ValueScope.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ExplicitCast.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Factorial.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Fibonacci.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IfThenElse.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IncrementScope.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ExplicitCastDetail.h">
+      <Filter>TemplateTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IncrementScopeDetail.h">
+      <Filter>TemplateTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\LiteralCastDetail.h">
+      <Filter>TemplateTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RealAddressDetail.h">
+      <Filter>TemplateTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ReferenceCastDetail.h">
+      <Filter>TemplateTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\SimpleDecrementerDetail.h">
+      <Filter>TemplateTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\SimpleIncrementerDetail.h">
+      <Filter>TemplateTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ValueScopeDetail.h">
+      <Filter>TemplateTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TextParsing.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TextParsingFwd.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\BoostMutex.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\BoostRecursiveMutex.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\CriticalSection.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\EventImpl.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\MutexFactory.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\MutexImpl.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\NullMutex.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\SemaphoreImpl.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\StdMutex.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\StdRecursiveMutex.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadImpl.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadManagerImpl.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadMutex.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\WindowsMutex.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Threading.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadingFwd.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadManager.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\TryScopedMutex.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\DllMutex.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Event.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Mutex.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ScopedMutex.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Semaphore.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Thread.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Flags\MutexFlags.h">
+      <Filter>Threading 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Detail\DeltaTimeManagerImpl.h">
+      <Filter>Time 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\DeltaTimeManager.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\CustomTime.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\MillisecondTimer.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\SecondTimer.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Time.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\TimeFwd.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\CpuTimerData.h">
+      <Filter>UnitTestSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuiteImpl.h">
+      <Filter>UnitTestSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuitePrintManager.h">
+      <Filter>UnitTestSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestData.h">
+      <Filter>UnitTestSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestFailPrintManager.h">
+      <Filter>UnitTestSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestPrintManager.h">
+      <Filter>UnitTestSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Suite.h">
+      <Filter>UnitTestSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTest.h">
+      <Filter>UnitTestSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestComposite.h">
+      <Filter>UnitTestSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestInterface.h">
+      <Filter>UnitTestSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestStream.h">
+      <Filter>UnitTestSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestSuite.h">
+      <Filter>UnitTestSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestSuiteFwd.h">
+      <Filter>UnitTestSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestDetail.h">
+      <Filter>UnitTestSuite 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\Version.h">
+      <Filter>VersionInformation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\VersionInformation.h">
+      <Filter>VersionInformation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\VersionInformationFwd.h">
+      <Filter>VersionInformation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.h">
+      <Filter>Base 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManagerDetail.h">
+      <Filter>Base 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Flags\LogManagerFlags.h">
+      <Filter>LogManager 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Flags\UniqueIDSelectFlags.h">
+      <Filter>Base 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\FrameMemorySystemImplDetail.h">
+      <Filter>FrameMemorySystem 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyDetail.h">
+      <Filter>Properties 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Zlib\Zlib.h">
+      <Filter>Zlib 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Zlib\ZlibFwd.h">
+      <Filter>Zlib 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Freetype\Freetype.h">
+      <Filter>Freetype 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Freetype\FreetypeFwd.h">
+      <Filter>Freetype 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\GameError.h">
+      <Filter>Exception 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\GameErrorDetail.h">
+      <Filter>Exception 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\InitializeTerminatorMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ThirdSubclassSmartPointerMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ScopeExit.h">
+      <Filter>ClassInvariant 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ScopeExitDetail.h">
+      <Filter>ClassInvariant 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\BoostParsing.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Assert\Assertion.cpp">
+      <Filter>Assert 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.cpp">
+      <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ArrayProxy.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray2D.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\BitProxy.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ConstArrayProxy.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ConstBitProxy.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ConstTwoBitProxy.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\TwoBitArray.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\TwoBitProxy.cpp">
+      <Filter>BitArrayManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\FormatErrorMessageImpl.cpp">
+      <Filter>CharacterString 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\MultiByteConversionWideChar.cpp">
+      <Filter>CharacterString 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\WideCharConversionMultiByte.cpp">
+      <Filter>CharacterString 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveString.cpp">
+      <Filter>CharacterString 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\FormatErrorMessage.cpp">
+      <Filter>CharacterString 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\StringConversion.cpp">
+      <Filter>CharacterString 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ClassInvariant\FunctionDescribed.cpp">
+      <Filter>ClassInvariant 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ClassInvariant\TriggerAssert.cpp">
+      <Filter>ClassInvariant 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\AnalysisCommandArgumentContainer.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainer.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandLineInformationImpl.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\NoValueCommandArgument.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\NumberCommandArgument.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\StringCommandArgument.cpp">
+      <Filter>Command 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandArgument.cpp">
+      <Filter>Command 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandHandle.cpp">
+      <Filter>Command 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandLineInformation.cpp">
+      <Filter>Command 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Console\ConsoleAlloc.cpp">
+      <Filter>Console 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckHandleImpl.cpp">
+      <Filter>CyclicRedundancyCheck 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCCITTTable.cpp">
+      <Filter>CyclicRedundancyCheck 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck32Table.cpp">
+      <Filter>CyclicRedundancyCheck 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck16Table.cpp">
+      <Filter>CyclicRedundancyCheck 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck16.cpp">
+      <Filter>CyclicRedundancyCheck 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.cpp">
+      <Filter>CyclicRedundancyCheck 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITT.cpp">
+      <Filter>CyclicRedundancyCheck 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITTUsingTable.cpp">
+      <Filter>CyclicRedundancyCheck 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckHandle.cpp">
+      <Filter>CyclicRedundancyCheck 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\IntelCheckSum.cpp">
+      <Filter>CyclicRedundancyCheck 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SevenModElevenCheckSum.cpp">
+      <Filter>CyclicRedundancyCheck 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.cpp">
+      <Filter>CyclicRedundancyCheck 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.cpp">
+      <Filter>DataTypes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\DynamicLink\Detail\LoadingLibraryImpl.cpp">
+      <Filter>DynamicLink 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\DynamicLink\LoadingLibrary.cpp">
+      <Filter>DynamicLink 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.cpp">
+      <Filter>EngineConfiguration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\StringReplacing.cpp">
+      <Filter>EngineConfiguration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorFactory.cpp">
+      <Filter>Exception 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorImpl.cpp">
+      <Filter>Exception 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\NormalError.cpp">
+      <Filter>Exception 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\WindowsError.cpp">
+      <Filter>Exception 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\Error.cpp">
+      <Filter>Exception 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Exception\LastError.cpp">
+      <Filter>Exception 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\CFileManagerHelper.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\CopyFileTools.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\CReadFileManager.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\CWriteFileManager.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\DeleteFileTools.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Endian.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Environment.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\EnvironmentVariable.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileBuffer.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileHandleHelper.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileManagerHelper.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\IFStreamManager.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\OFStreamManager.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadAndWriteFileHandle.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadBufferIO.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadFileHandle.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadFileManager.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\WriteBufferIO.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\WriteFileHandle.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\WriteFileManager.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\BufferIOImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CFileManagerImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CommonCopyFileTools.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsFactory.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CReadFileManagerImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CWriteFileManagerImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\DeleteFileToolsImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentVariableImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileBufferImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileHandleImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileManagerFactory.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamManagerImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamSeekManager.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamManagerImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamSeekManager.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadAndWriteFileHandleImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadBufferIOImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileHandleImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileManagerInterface.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WindowsCopyFileTools.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteBufferIOImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileHandleImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileManagerInterface.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\BaseFrameMemorySystemImpl.cpp">
+      <Filter>FrameMemorySystem 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\Detail\FrameMemorySystemPointerShareImpl.cpp">
+      <Filter>FrameMemorySystem 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemManager.cpp">
+      <Filter>FrameMemorySystem 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\FrameMemorySystemPointerShare.cpp">
+      <Filter>FrameMemorySystem 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FrameMemorySystem\BaseFrameMemorySystem.cpp">
+      <Filter>FrameMemorySystem 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFile.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFileConfiguration.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderManagerImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderPrintFlagsExist.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\ErrorConsoleTextColorsManager.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerFactory.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogFileNameImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LoggerImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessageImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessagePostfixImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessagePrefixImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\OutputConsoleTextColorsManager.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AnalysisAppenderManager.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderConsole.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFactory.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\AppenderManager.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Appender.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Log.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogAppenderIOManager.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogConsoleTextColorsManager.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogFileName.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogFilterManager.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Logger.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogLevelManager.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogMessage.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogMessagePostfix.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogMessagePrefix.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformationHelperImpl.cpp">
+      <Filter>MainFunctionHelper 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformation.cpp">
+      <Filter>MainFunctionHelper 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionTestingHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\DllFunctionHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\TestingInformationHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferPoolImpl.cpp">
+      <Filter>MemoryTools 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferStreamImpl.cpp">
+      <Filter>MemoryTools 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MD5ContextImpl.cpp">
+      <Filter>MemoryTools 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryInformation.cpp">
+      <Filter>MemoryTools 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryManagerImpl.cpp">
+      <Filter>MemoryTools 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\SmartPointerManagerImpl.cpp">
+      <Filter>MemoryTools 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\BufferPool.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\MD5Context.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\MD5.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Memory.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\MemoryManager.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Random.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerManager.cpp">
+      <Filter>MemoryTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\Detail\CallbackParametersImpl.cpp">
+      <Filter>MessageEvent 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\Detail\EntityManagerImpl.cpp">
+      <Filter>MessageEvent 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\BaseEntity.cpp">
+      <Filter>MessageEvent 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\CallbackParameters.cpp">
+      <Filter>MessageEvent 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\EntityManager.cpp">
+      <Filter>MessageEvent 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\EventInterface.cpp">
+      <Filter>MessageEvent 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\DownloadingFilesImpl.cpp">
+      <Filter>Network 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\InternetConnection.cpp">
+      <Filter>Network 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\OpenUrlInternet.cpp">
+      <Filter>Network 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\DownloadingFiles.cpp">
+      <Filter>Network 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Network\DownloadingFilesEvent.cpp">
+      <Filter>Network 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferOutStreamImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\InTopLevelImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectLinkImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectManagerImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectNameImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectRegisterImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\OutTopLevelImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\TopLevel.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferInStreamImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferInStream.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferOutStream.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferSource.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTarget.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\FileInStream.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\FileOutStream.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTerm.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InTopLevel.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Object.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterface.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterfaceLess.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectLink.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectManager.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectName.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectRegister.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\OutTopLevel.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Rtti.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Stream.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\TimeReportOutput.cpp">
+      <Filter>ReportOutput 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestFailReportOutputImpl.cpp">
+      <Filter>ReportOutput 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestSuiteReportOutputImpl.cpp">
+      <Filter>ReportOutput 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\EquilongReportOutputImpl.cpp">
+      <Filter>ReportOutput 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\ReportOutput.cpp">
+      <Filter>ReportOutput 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\EquilongReportOutput.cpp">
+      <Filter>ReportOutput 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestFailReportOutput.cpp">
+      <Filter>ReportOutput 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestSuiteReportOutput.cpp">
+      <Filter>ReportOutput 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceLockManager.cpp">
+      <Filter>ResourceManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceManagerImpl.cpp">
+      <Filter>ResourceManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\CommonDataResourceImpl.cpp">
+      <Filter>ResourceManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\ResourceManagerLockImpl.cpp">
+      <Filter>ResourceManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\ResourceManagerPriorityQueue.cpp">
+      <Filter>ResourceManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\Detail\BaseResourceImpl.cpp">
+      <Filter>ResourceManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\BaseResource.cpp">
+      <Filter>ResourceManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\BaseResourceManager.cpp">
+      <Filter>ResourceManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\CommonDataResource.cpp">
+      <Filter>ResourceManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\ResourceFactory.cpp">
+      <Filter>ResourceManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ResourceManager\ResourceManagerLock.cpp">
+      <Filter>ResourceManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\Factorial.cpp">
+      <Filter>TemplateTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\Fibonacci.cpp">
+      <Filter>TemplateTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\TrigonometricFunction.cpp">
+      <Filter>TemplateTools 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\CriticalSection.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\EventImpl.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\MutexFactory.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\MutexImpl.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\NullMutex.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\SemaphoreImpl.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\StdMutex.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\StdRecursiveMutex.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadImpl.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadManagerImpl.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadMutex.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\WindowsMutex.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\BoostMutex.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\BoostRecursiveMutex.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\DllMutex.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Event.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Mutex.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\ScopedMutex.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Semaphore.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Thread.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\ThreadManager.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\TryScopedMutex.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\Detail\DeltaTimeManagerImpl.cpp">
+      <Filter>Time 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\CustomTime.cpp">
+      <Filter>Time 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\DeltaTimeManager.cpp">
+      <Filter>Time 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\MillisecondTimer.cpp">
+      <Filter>Time 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\SecondTimer.cpp">
+      <Filter>Time 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestData.cpp">
+      <Filter>UnitTestSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestFailPrintManager.cpp">
+      <Filter>UnitTestSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestPrintManager.cpp">
+      <Filter>UnitTestSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\CpuTimerData.cpp">
+      <Filter>UnitTestSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuiteImpl.cpp">
+      <Filter>UnitTestSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuitePrintManager.cpp">
+      <Filter>UnitTestSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Suite.cpp">
+      <Filter>UnitTestSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTest.cpp">
+      <Filter>UnitTestSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestComposite.cpp">
+      <Filter>UnitTestSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestInterface.cpp">
+      <Filter>UnitTestSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestStream.cpp">
+      <Filter>UnitTestSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\VersionInformation\Version.cpp">
+      <Filter>VersionInformation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.cpp">
+      <Filter>Base 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\ParametersInterface.cpp">
+      <Filter>MessageEvent 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\BoostParsing.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,18 @@
+TODO Level 1
+ 
+0.0.2.1
+
+1.  （Base）使用UniqueIDManager来管理唯一ID，替换原先的ID。
+2.  （Base）单例在静态库和动态库混用时产生问题，引擎静态链接游戏动态链接时，Game dll增加创建引擎单例函数，由exe调用。
+		    引擎动态链接游戏静态链接时，Game dll增加创建游戏单例函数，由exe调用。
+3.  （FileManager）FileManager增加operator>和operator<接口。
+4.  （TextParsing）完成TextParsing模块的相关内容：增加一个文本解析类，对配置进行读取。 
+5.  （TextParsing）完成TextParsing模块的相关内容：增加一个二维表解析类，对二维表进行读取。 
+6.  （LogManager）日志库使用CFileManager或FileHandle代替目前的StreamManager，看是否可以取消独占式打开文件。考虑是否改成打开、写入、关闭的模式。
+7.  （LogManager）日志库在没有配置的情况下会死循环，需要修改。
+8.  （LogManager）检查日志库的多线程是否还存在问题。
+9.  （LogManager）使用ReadFileHandle和WriteFileHandle代替目前的fstream写日志。
+10. （DataTypes）实现一个无锁数据结构。
+11. （MemoryTools）读写锁用于单例需要细致编程，很容易导致死锁。 
+12. （MemoryTools）目前类不变式调用无法加入读锁，又无法设为私有，目前只有考虑将类不变式类设为友元，并将IsValid函数设为私有一种解决方案。
+13. （ObjectSystems）C++11保证局部静态变量只初始化一次，看需要不需要修改ObjectInterface的注册方式。

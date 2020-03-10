@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AssistTools</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;ASSISTTOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnforceTypeConversionRules>
+      </EnforceTypeConversionRules>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubAssistTools>Windows</SubAssistTools>
+    </Link>
+    <PostBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubAssistTools>Windows</SubAssistTools>
+    </Link>
+    <PostBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;ASSISTTOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubAssistTools>Windows</SubAssistTools>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubAssistTools>Windows</SubAssistTools>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;ASSISTTOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubAssistTools>Windows</SubAssistTools>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubAssistTools>Windows</SubAssistTools>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;ASSISTTOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubAssistTools>Windows</SubAssistTools>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubAssistTools>Windows</SubAssistTools>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\ColorToGray.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\LoadBmp.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\SaveBmp.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpToTf\LoadBmpUseAlpha.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\BmpToTf\SaveWmtf.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\DllLib.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\DllMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoader.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoaderCodes.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoader.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoaderCodes.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\CopyrightData.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CopyrightDataImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateBaseImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateCodeDirectoryImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDirectoryImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDllLibImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDllMainImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateEngineDirectoryImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateEngineImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateHeaderImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateHelperImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateLibImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateLogJsonImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMainImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateManagerLibImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMessageImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMiddleLayerVcxprojFiltersImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMiddleLayerVcxprojImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateModuleVcxprojFiltersImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateModuleVcxprojImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateSolutionImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateVcxprojFiltersImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateVcxprojImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateCodeDirectoryImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateEngineDirectoryImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateEngineImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateSolutionImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojFiltersImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateCodeDirectory.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateDllLib.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateDllMain.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateEngine.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateEngineDirectory.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateHeader.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateLib.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateLogJson.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMacro.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMain.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateManager.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateManagerLib.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMiddleLayerVcxproj.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMiddleLayerVcxprojFilters.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateModuleVcxproj.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateModuleVcxprojFilters.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateSolution.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateVcxproj.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateVcxprojFilters.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateCodeDirectory.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateEngine.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateEngineDirectory.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateSolution.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxproj.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxprojFilters.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC100.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC110.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistTools.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsDll.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsExport.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsFwd.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsImport.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsLib.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsNoImport.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\BmpColorToGray.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\BmpColorToGrayFwd.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\ColorToGray.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\LoadBmp.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\SaveBmp.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtf.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtfFwd.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\LoadBmpUseAlpha.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\SaveWmtf.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporter.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporterFwd.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoader.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoader.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\WmfxCompiler.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\WmfxCompilerFwd.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\CopyrightData.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CopyrightDataImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateBaseImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateCodeDirectoryImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDirectoryImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDllLibImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateDllMainImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateEngineDirectoryImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateEngineImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateHeaderImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateHelperImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateLibImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateLogJsonImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMacroImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMainImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateManagerLibImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMessageImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMiddleLayerVcxprojFiltersImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateMiddleLayerVcxprojImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateModuleVcxprojFiltersImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateModuleVcxprojImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateSolutionImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateVcxprojFiltersImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateVcxprojImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateCodeDirectoryImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateEngineDirectoryImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateEngineImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateSolutionImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojFiltersImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Flags\GenerateTemplateReplaceFlags.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateProjects.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateProjectsFwd.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateCodeDirectory.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateDllLib.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateDllMain.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateEngine.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateEngineDirectory.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateHeader.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateHelper.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateLib.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateLogJson.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMacro.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMain.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateManager.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateManagerLib.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMessage.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMiddleLayerVcxproj.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateMiddleLayerVcxprojFilters.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateModuleVcxproj.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateModuleVcxprojFilters.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateSolution.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateVcxproj.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTemplateVcxprojFilters.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateCodeDirectory.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateEngine.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateEngineDirectory.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateSolution.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxproj.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxprojFilters.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC100.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC110.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\Macro\Macro.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\Macro\MacroFwd.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\Macro\UserMacro.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

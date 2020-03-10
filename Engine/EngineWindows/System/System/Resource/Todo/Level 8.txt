@@ -1,0 +1,13 @@
+TODO Level 8
+
+0.0.2.0
+
+1.  （Console）完成Console非Windows平台的实现：ConsoleHandle、ConsoleColours、ConsoleInput、ConsoleOutput、ConsoleScreenBuffer、ConsoleFont、ConsoleMode、
+		       ConsoleCursor、ConsoleTitle、ConsoleAlias、ConsoleCodePage、ConsoleInfo、ConsoleTools、ConsoleCreate。
+2.  （MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、ViewOfFile、MemoryHelper、GlobalTools、LocalTools。
+3.  （Threading）完成Threading非Windows平台的实现： CriticalSection、Semaphore、Event、Mutex、SlimReaderWriter、ConditionVariable、InitOnce、WaitableTimer、SyncTools、Interlocked、
+				 Thread、ThreadTools、ThreadLocalStorage、Process、ProcessTools、HandleTools、ThreadPool、OverlappedTools、FiberTools。
+4.  （FileManager）完成FileManager非Windows平台的实现： File、FileTime、FileTools、FindFile。
+5.  （Security）完成Security非Windows平台的实现：LookupPrivilege、CreateSecurity、SecuritySid、SecurityAcl、SecurityDescriptor、SecurityAce、AddAccess、SecurityBase、AccessCheck。
+6.  （Network）完成Network非Windows平台的实现：SocketPrototypes、DatabasePrototypes、WindowsExtensionPrototypes、WindowsSockEx、WindowsInternet。
+7.  （Window）完成Window非Windows平台的实现：WindowCreate、WindowProcess、WindowRegister、WindowFontInformation、WindowSystem、WindowNamedPipe、WindowUser、WindowRegistry。 

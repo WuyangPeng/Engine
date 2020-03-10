@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration 头文件">
+      <UniqueIdentifier>{cda64317-5c43-4441-b066-ccbd5e3e68b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputInterface 头文件">
+      <UniqueIdentifier>{cf13dc03-6818-42c5-82e3-ad3d8ade59c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{acc9c966-90e0-49bd-a68a-1032a8e2600a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OutputInterface 头文件">
+      <UniqueIdentifier>{84ce290d-fb0e-4837-9d6c-b88ee3678443}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\InputOutput\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\InputOutput\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputOutputImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputOutputLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputOutputNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputOutput.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputOutputDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputOutputExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputOutputFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Configuration\Configuration.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Configuration\ConfigurationFwd.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Configuration\Interface.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputInterface\InputInterface.h">
+      <Filter>InputInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputInterface\InputInterfaceFwd.h">
+      <Filter>InputInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\OutputInterface\OutputInterface.h">
+      <Filter>OutputInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\OutputInterface\OutputInterfaceFwd.h">
+      <Filter>OutputInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

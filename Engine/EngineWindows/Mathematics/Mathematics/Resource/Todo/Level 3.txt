@@ -1,0 +1,10 @@
+TODO Level 3
+
+0.0.0.2
+
+1.   看是否能简化导出模板的宏定义。
+2.   代数类中向量、矩阵等存储的数据类型实用性不强，改成std::array。
+3.   BandedMatrixSolve的类不变式要实现为noexcept，对应的函数也需要修改。
+4.   将Polygon2类中的CoreTools::SmartPointer1DArray<Vector2D>改成std::shared_ptr<Vector2D>。
+5.   将ConvexPolygon2类中的CoreTools::SmartPointer1DArray<Line> 改成std::shared_ptr<Line>。
+6.   将数学库的智能指针改成std::shared_ptr。

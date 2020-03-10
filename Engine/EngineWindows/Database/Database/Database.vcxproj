@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{F2255658-123C-4DB9-A04B-C3A98DD32364}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Database</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DATABASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnforceTypeConversionRules>
+      </EnforceTypeConversionRules>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubDatabase>Windows</SubDatabase>
+    </Link>
+    <PostBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubDatabase>Windows</SubDatabase>
+    </Link>
+    <PostBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;DATABASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubDatabase>Windows</SubDatabase>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubDatabase>Windows</SubDatabase>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;DATABASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubDatabase>Windows</SubDatabase>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubDatabase>Windows</SubDatabase>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;DATABASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubDatabase>Windows</SubDatabase>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubDatabase>Windows</SubDatabase>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Database\Configuration\AnalysisDatabaseConfiguration.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\Configuration\ConfigurationStrategy.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\Configuration\Detail\AnalysisDatabaseConfigurationImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\Configuration\Detail\ConfigurationStrategyImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DllLib.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DllMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorCollection.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDatabaseObject.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDocResult.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDocResultRow.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorResult.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorResultRow.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorSchema.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorSession.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorTable.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Collection.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\DatabaseObject.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\CollectionFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\CollectionImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\DatabaseObjectFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\DatabaseObjectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullCollection.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullDatabaseObject.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullResult.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullResultRow.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullSchema.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullSession.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullTable.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\ResultFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\ResultImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\ResultRowFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\ResultRowImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\SchemaFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\SchemaImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\SessionFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\SessionImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\TableFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\TableImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Result.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\ResultRow.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Schema.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Session.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Table.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Database\Configuration\AnalysisDatabaseConfiguration.h" />
+    <ClInclude Include="..\..\..\Code\Database\Configuration\Configuration.h" />
+    <ClInclude Include="..\..\..\Code\Database\Configuration\ConfigurationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\Configuration\ConfigurationStrategy.h" />
+    <ClInclude Include="..\..\..\Code\Database\Configuration\Detail\AnalysisDatabaseConfigurationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\Configuration\Detail\ConfigurationStrategyImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\Configuration\Flags\ConfigurationStrategyFlags.h" />
+    <ClInclude Include="..\..\..\Code\Database\Database.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseDll.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseExport.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseImport.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseLib.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseNoImport.h" />
+    <ClInclude Include="..\..\..\Code\Database\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\Database\FlatFileWrappers\FlatFileWrappers.h" />
+    <ClInclude Include="..\..\..\Code\Database\FlatFileWrappers\FlatFileWrappersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\Macro\Macro.h" />
+    <ClInclude Include="..\..\..\Code\Database\Macro\MacroFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorCollection.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDatabaseObject.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDocResult.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDocResultRow.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorResult.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorResultRow.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorSchema.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorSession.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorTable.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Fwd\MysqlConnectorFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\MysqlConnectorWrappers.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\MysqlConnectorWrappersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Using\MysqlConnectorUsing.h" />
+    <ClInclude Include="..\..\..\Code\Database\OracleWrappers\OracleWrappers.h" />
+    <ClInclude Include="..\..\..\Code\Database\OracleWrappers\OracleWrappersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\PostgreSqlWrappers\PostgreSqlWrappers.h" />
+    <ClInclude Include="..\..\..\Code\Database\PostgreSqlWrappers\PostgreSqlWrappersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Collection.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\DatabaseObject.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\CollectionFactory.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\CollectionImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\DatabaseObjectFactory.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\DatabaseObjectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullCollection.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullDatabaseObject.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullResult.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullResultRow.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullSchema.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullSession.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullTable.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\ResultFactory.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\ResultImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\ResultRowFactory.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\ResultRowImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\SchemaFactory.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\SchemaImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\SessionFactory.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\SessionImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\TableFactory.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\TableImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Result.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\ResultRow.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Schema.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Session.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\SqlInterface.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\SqlInterfaceFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Table.h" />
+    <ClInclude Include="..\..\..\Code\Database\SQLiteWrappers\SQLiteWrappers.h" />
+    <ClInclude Include="..\..\..\Code\Database\SQLiteWrappers\SQLiteWrappersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlServerWrappers\SqlServerWrappers.h" />
+    <ClInclude Include="..\..\..\Code\Database\SqlServerWrappers\SqlServerWrappersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\Statement\Statement.h" />
+    <ClInclude Include="..\..\..\Code\Database\Statement\StatementFwd.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

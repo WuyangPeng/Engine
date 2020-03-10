@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PathSearch 头文件">
+      <UniqueIdentifier>{be78d733-e82f-4011-a6f2-ce7b90625527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NeuralNetwork 头文件">
+      <UniqueIdentifier>{36fd14e5-7002-4955-b10b-51fec29f8f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Miscellaneous 头文件">
+      <UniqueIdentifier>{ab5da2fa-780b-4166-b45a-775991da6888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{825a9cfe-ddf6-4830-bbc9-5a4f3346a11b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeneticAlgorithm 头文件">
+      <UniqueIdentifier>{ad66de4c-f0eb-4c30-9913-83879223b22d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FuzzyStateMachine 头文件">
+      <UniqueIdentifier>{562421f3-f3e7-4869-8c68-ebcc04f74522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FiniteStateMachine 头文件">
+      <UniqueIdentifier>{a7c853ba-66d3-42f5-b4a1-904b8fb0c2fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\ArtificialIntellegence\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\ArtificialIntellegence\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\ArtificialIntellegenceDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\ArtificialIntellegenceExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\ArtificialIntellegenceFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\ArtificialIntellegenceImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\ArtificialIntellegenceLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\ArtificialIntellegenceNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\ArtificialIntellegence.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\FiniteStateMachine\FiniteStateMachine.h">
+      <Filter>FiniteStateMachine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\FiniteStateMachine\FiniteStateMachineFwd.h">
+      <Filter>FiniteStateMachine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\FuzzyStateMachine\FuzzyStateMachine.h">
+      <Filter>FuzzyStateMachine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\FuzzyStateMachine\FuzzyStateMachineFwd.h">
+      <Filter>FuzzyStateMachine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\GeneticAlgorithm\GeneticAlgorithm.h">
+      <Filter>GeneticAlgorithm 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\GeneticAlgorithm\GeneticAlgorithmFwd.h">
+      <Filter>GeneticAlgorithm 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\Miscellaneous\Miscellaneous.h">
+      <Filter>Miscellaneous 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\Miscellaneous\MiscellaneousFwd.h">
+      <Filter>Miscellaneous 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\NeuralNetwork\NeuralNetwork.h">
+      <Filter>NeuralNetwork 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\NeuralNetwork\NeuralNetworkFwd.h">
+      <Filter>NeuralNetwork 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\PathSearch\PathSearch.h">
+      <Filter>PathSearch 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\PathSearch\PathSearchFwd.h">
+      <Filter>PathSearch 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\PathSearch\Search.h">
+      <Filter>PathSearch 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ArtificialIntellegence\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

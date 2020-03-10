@@ -1,0 +1,59 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/25 09:35)
+
+#ifndef RENDERING_LOCAL_EFFECTS_TEXTURE2_MULEFFECT_H
+#define RENDERING_LOCAL_EFFECTS_TEXTURE2_MULEFFECT_H
+
+#include "Rendering/RenderingDll.h"
+
+#include "Rendering/Resources/Texture2D.h"
+#include "Rendering/Shaders/VisualEffectInstance.h" 
+
+namespace Rendering
+{
+	class   Texture2MulEffect : public VisualEffect
+	{
+	public:
+		using ClassType = Texture2MulEffect;
+		using ParentType = VisualEffect;
+
+	private:
+		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture2MulEffect);
+
+	public:
+		// Construction and destruction.
+		Texture2MulEffect ();
+		virtual ~Texture2MulEffect ();
+
+		// Any change in sampler state is made via the pixel shader.
+		PixelShader* GetPixelShader () const;
+
+		// Create an instance of the effect with unique parameters.  If a
+		// sampler filter mode is set to a value corresponding to mipmapping,
+		// then the mipmaps will be generated if necessary.
+		VisualEffectInstance* CreateInstance (Texture2D* texture0, Texture2D* texture1) const;
+
+		// Convenience for creating an instance.  The application does not have to
+		// create the effect explicitly in order to create an instance from it.
+		static VisualEffectInstance* CreateUniqueInstance ( Texture2D* texture0, ShaderFlags::SamplerFilter filter0, ShaderFlags::SamplerCoordinate coordinate00,
+															ShaderFlags::SamplerCoordinate coordinate01, Texture2D* texture1, ShaderFlags::SamplerFilter filter1,
+														    ShaderFlags::SamplerCoordinate coordinate10, ShaderFlags::SamplerCoordinate coordinate11 );
+
+	private:
+		static int msDx9VRegisters[1];
+		static int msOglVRegisters[1];
+		static int* msVRegisters[ShaderFlags::MaxProfiles];
+		static std::string msVPrograms[ShaderFlags::MaxProfiles];
+		static int msAllPTextureUnits[2];
+		static int* msPTextureUnits[ShaderFlags::MaxProfiles];
+		static std::string msPPrograms[ShaderFlags::MaxProfiles];
+	};
+ 
+	CORE_TOOLS_STREAM_REGISTER(Texture2MulEffect);
+	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, Texture2MulEffect);
+}
+
+#endif // RENDERING_LOCAL_EFFECTS_TEXTURE2_MULEFFECT_H

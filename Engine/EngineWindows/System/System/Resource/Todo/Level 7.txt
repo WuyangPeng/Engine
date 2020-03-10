@@ -1,0 +1,7 @@
+TODO Level 7
+
+0.0.2.0
+
+1.  （Helper）考虑是否添加不同类型枚举之间的数学运算符。
+2.  （DynamicLink）完成DynamicLink模块非Windows平台的实现：EnumResourceTools、LoadResourceTools。
+3.  （CharacterString）完成CharacterString非Windows平台的实现：CodePage。

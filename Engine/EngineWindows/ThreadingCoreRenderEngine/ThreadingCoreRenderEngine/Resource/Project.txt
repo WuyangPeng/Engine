@@ -1,0 +1,76 @@
+框架设计
+
+游戏系统管理器分为输入管理器、网络管理器、对象逻辑、物理模拟、消息管理器、事件管理器、系统管理器、资源管理器、音频管理器、相机系统、渲染管理器、GUI管理器构成。
+1.  输入管理器与网络管理器、对象逻辑、系统管理器相互通信，并将指令发送给相机系统。
+2.  网络管理器与输入管理器、对象逻辑相互通信，使用多个线程进行管理。
+3.  对象逻辑与网络管理器、输入管理器、物理模拟、系统管理器、消息管理器相互通信。
+4.  物理模拟与对象逻辑相互通信。
+5.  消息管理器与系统管理器、对象逻辑相互通信，并接收事件管理器的指令，使用无锁数据结构进行管理。
+6.  事件管理器与系统管理器相互通信，并将指令发送给消息管理器，使用无锁数据结构进行管理。
+7.  系统管理器与输入管理器、对象逻辑、消息管理器、事件管理器、相机系统、渲染管理器、资源管理器、音频管理器相互通信，使用单独线程管理日志系统，多个线程管理数据库操作。
+8.  资源管理器与系统管理器、音频管理器、GUI管理器相互通信，并将指令发送给渲染管理器，使用单独线程进行管理。
+9.  音频管理器与系统管理器、资源管理器相互通信。
+10. 相机系统与系统管理器相互通信，并将指令发送给渲染管理器、GUI管理器，并接收输入管理器的指令。
+11. 渲染管理器与系统管理器相互通信，并接收资源管理器、GUI管理器、相机系统的指令。
+12. GUI管理器与资源管理器相互通信，并接收相机系统的指令，并将指令发送给渲染管理器。
+
+客户端设计
+
+1.  GameClient（游戏客户端），与GatewayServer（网关服务器）、UpdateServer（更新服务器）相连。
+2.  RobotClient（机器人客户端），与GatewayServer（网关服务器）相连。
+3.  MessageClient（消息客户端），与GatewayServer（网关服务器）相连。
+4.  BackgroundClient（后台客户端），与BackgroundServer（后台服务器）相连。
+
+服务器设计
+
+1.  GatewayServer（网关服务器），监听客户端：GameClient（游戏客户端）、RobotClient（机器人客户端）、MessageClient（消息客户端）。
+	监听服务器：LoginServer（登陆服务器）、GameServer（游戏服务器）、FightingServer（战斗服务器）、WorldServer（世界服务器）、
+	OfflineServer（离线服务器）、LeaderboardServer（排行榜服务器）、ServerManager（服务器管理者）。
+	每个游戏根据需要开启一到多个网关服务器。
+2.  LoginServer（登陆服务器），主动连接GatewayServer（网关服务器），监听服务器：ServerManager（服务器管理者），BackgroundServer（后台服务器）。
+	每个游戏根据需要开启一到多个登陆服务器。
+3.  GameServer（游戏服务器），主动连接GatewayServer（网关服务器），WorldServer（世界服务器）、OfflineServer（离线服务器）、LeaderboardServer（排行榜服务器）。	
+	监听服务器：FightingServer（战斗服务器）、RechargeServer（充值服务器）、LogServer（日志服务器）、GameMasterServer（游戏管理员服务器）、ServerManager（服务器管理者）。
+	每个服开启一个游戏服务器。
+4.  FightingServer（战斗服务器），主动连接GatewayServer（网关服务器），GameServer（游戏服务器），WorldServer（世界服务器）。
+	监听服务器：ServerManager（服务器管理者）。
+	每个服开启一个战斗服务器或每个游戏根据需要开启一到多个战斗服务器。
+5.  WorldServer（世界服务器），主动连接GatewayServer（网关服务器），监听服务器：GameServer（游戏服务器）、FightingServer（战斗服务器）。
+	监听服务器：ServerManager（服务器管理者）。
+	每个游戏根据需要开启一到多个世界服务器。
+6.  OfflineServer（离线服务器），主动连接GatewayServer（网关服务器），监听服务器：GameServer（游戏服务器）、ServerManager（服务器管理者）。
+	每个游戏根据需要开启一到多个离线服务器。
+7.  LeaderboardServer（排行榜服务器），主动连接GatewayServer（网关服务器），监听服务器：GameServer（游戏服务器）、ServerManager（服务器管理者）。
+	每个游戏根据需要开启一到多个排行榜服务器。
+8.  RechargeServer（充值服务器），主动连接GameServer（游戏服务器），监听服务器：BackgroundServer（后台服务器）、ServerManager（服务器管理者）。
+	每个游戏根据需要开启一到多个充值服务器。
+9.  LogServer（日志服务器），主动连接GameServer（游戏服务器），监听服务器：ServerManager（服务器管理者）。
+	每个服开启一个日志服务器或每个游戏根据需要开启一到多个日志服务器。
+10. GameMasterServer（游戏管理员服务器），主动连接GameServer（游戏服务器），监听服务器：BackgroundServer（后台服务器）、ServerManager（服务器管理者）。
+	每个游戏根据需要开启一到多个游戏管理员服务器。
+11. ServerManager（服务器管理者），主动连接GatewayServer（网关服务器），LoginServer（登陆服务器），GameServer（游戏服务器），FightingServer（战斗服务器），
+	WorldServer（世界服务器），OfflineServer（离线服务器），LeaderboardServer（排行榜服务器），
+	RechargeServer（充值服务器），LogServer（日志服务器），UpdateServer（更新服务器）
+	监听服务器：BackgroundServer（后台服务器）。
+	每个游戏根据需要开启一个服务器管理者。
+12. UpdateServer（更新服务器），监听客户端：GameClient（游戏客户端），监听服务器：ServerManager（服务器管理者）。
+	每个游戏根据需要开启一到多个更新服务器。
+13. BackgroundServer（后台服务器），监听客户端：BackgroundClient（后台客户端）。
+	主动连接LoginServer（登陆服务器），RechargeServer（充值服务器），GameMasterServer（游戏管理员服务器），ServerManager（服务器管理者）。
+	每个游戏根据需要开启一个后台服务器。
+
+消息号分段
+
+1.  默认占用：消息号0，及负数。
+2.  登陆服务器：1——200。
+3.  更新服务器：201——400。 
+4.  充值服务器：401——600。
+5.  服务器管理者：601——800。 
+6.  排行榜服务器：801——1000。
+7.  游戏服务器：1001——20000。
+8.  战斗服务器：20001——40000。
+9.  世界服务器：40001——60000。
+10. 离线服务器：60001——70000。   
+11. 日志服务器：70001——80000。  
+12. 游戏管理员服务器：80001——90000。 
+13. 后台服务器：90001——100000。

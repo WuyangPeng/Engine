@@ -1,0 +1,11 @@
+TODO Level 2
+
+0.0.0.2
+ 
+1.  增加数值精度的断言和不变式。 
+2.  根据用户宏的五个断言宏在模块中使用断言。
+3.  静态数组改成std::array。
+
+0.0.0.5
+
+1.  考虑使用Math::FloatingPointEqual替换Math::Approximate来比较浮点数的近似相等。

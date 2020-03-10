@@ -1,0 +1,1571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{6A32C718-DB51-4F52-A30C-E5D2BBA20C5F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Mathematics</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine.props" />
+    <Import Project="..\..\EngineStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;MATHEMATICS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnforceTypeConversionRules>
+      </EnforceTypeConversionRules>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubMathematics>Windows</SubMathematics>
+    </Link>
+    <PostBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubMathematics>Windows</SubMathematics>
+    </Link>
+    <PostBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;MATHEMATICS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubMathematics>Windows</SubMathematics>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubMathematics>Windows</SubMathematics>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;MATHEMATICS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubMathematics>Windows</SubMathematics>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubMathematics>Windows</SubMathematics>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;MATHEMATICS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubMathematics>Windows</SubMathematics>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubMathematics>Windows</SubMathematics>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AlgebraAggregate.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AQuaternion.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BandedMatrix.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Euler.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Polynomial.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Quaternion.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\QuaternionConstraints.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\VariableLengthVector.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\VariableMatrix.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector2DTools.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector3DTools.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector4DTools.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\BitHacks.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Detail\Float1Impl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Detail\Float2Impl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Detail\Float3Impl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Detail\Float4Impl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\FastNegativeExp.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\FastTrigonometric.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Float1.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Float2.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Float3.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Float4.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Math.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\Random.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Base\ScaledFloatToInt.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BezierCurve2.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BezierCurve3.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineBasis.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurve2.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurve3.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineFitBasis.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\Curve2.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\Curve3.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\SingleCurve2.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\SingleCurve3.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\DllLib.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\DllMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSet.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorAxis.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfiguration.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorUtility3.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\BasicMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\BasicMeshEdge.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\BasicMeshTriangle.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\BasicMeshVertex.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\Detail\BasicMeshVertexImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\EdgeKey.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\ETManifoldMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\ETNonmanifoldMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\OrderedEdgeKey.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\TetrahedronKey.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\TriangleKey.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\TSManifoldMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\UnorderedTriangleKey.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\VEManifoldMesh.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Miscellaneous\NormalCompression.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Miscellaneous\RandomHypersphere.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationOnce.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationQuartic.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationResult.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationSecondary.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationThrice.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Equation.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveSymmetricConjugateGradient.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrixIndex.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Torus3.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Torus3Parameters.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Detail\QuerySortToolsImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\QueryBase.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\QuerySortTools.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\Detail\Int64Vector2Impl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\Detail\Int64Vector3Impl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\Int64Vector2.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\Int64Vector3.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Algebra.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraAggregate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraStreamSize.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraTraits.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APoint.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APointDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AQuaternion.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AQuaternionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalBasis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalBasisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalize.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalizeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox2D.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox2DDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox3D.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox3DDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox4D.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox4DDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BandedMatrix.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BandedMatrixDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BandedMatrixSolve.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BandedMatrixSolveDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BarycentricCoordinates.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BarycentricCoordinatesDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Euler.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\EulerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\ExtractEulerResultType.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\MatrixFlags.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\QuaternionFlags.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPoint.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPointDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix2EigenDecomposition.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix2EigenDecompositionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecomposition.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecompositionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3Extract.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3ExtractDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\MatrixDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Plane.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PlaneDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Polynomial.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PolynomialDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PolynomialDivide.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PolynomialDivideDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Quaternion.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionConstraints.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionConstraintsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionFactor.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionFactorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionSwingTwist.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionSwingTwistDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Tridiagonalize.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\TridiagonalizeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\VariableLengthVector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\VariableLengthVectorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\VariableMatrix.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\VariableMatrixDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2D.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DInformation.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DInformationDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DOrthonormalBasis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DOrthonormalBasisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DOrthonormalize.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DOrthonormalizeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DTools.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DToolsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3D.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DInformation.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DInformationDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalBasis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalBasisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalize.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalizeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DTools.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DToolsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4D.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4DDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4DTools.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4DToolsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Approximation.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CircleFit2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CircleFit2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3Update.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3UpdateData.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3UpdateDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3UpdateDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipseByArcs2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipseByArcs2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipseFit2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipseFit2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipsoidFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipsoidFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GaussPointsFit2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GaussPointsFit2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GaussPointsFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GaussPointsFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3Item.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3ItemDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatCircleFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatCircleFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\HeightLineFit2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\HeightLineFit2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\HeightPlaneFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\HeightPlaneFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalLineFit2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalLineFit2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalLineFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalLineFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalPlaneFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalPlaneFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ParaboloidFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ParaboloidFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit2Powers.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit2PowersDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit3Powers.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit3PowersDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4Powers.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4PowersDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFitPowersData.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFitPowersDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialSamplesPower.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialSamplesPowerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticCircleFit2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticCircleFit2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticFit2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticFit2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticSphereFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticSphereFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\SphereFit3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\SphereFit3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Base.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\BaseFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\BitHacks.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\BitHacksDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Detail\Float1Impl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Detail\Float2Impl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Detail\Float3Impl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Detail\Float4Impl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\FastNegativeExp.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\FastNegativeExpDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\FastTrigonometric.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\FastTrigonometricDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Flags\NumericalValueSymbol.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float4.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Log2OfPowerOfTwo.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Log2OfPowerOfTwoDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Math.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\MathDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Random.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\RandomDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\ScaledFloatToInt.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ComputationalGeometry.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ComputationalGeometryFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHullDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\DelaunayDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateEC.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateECDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\Containment.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContainmentFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContBox2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContBox2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContBox3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContBox3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContCapsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContCapsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContCylinder3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContCylinder3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContEllipse2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContEllipse2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContEllipse2MinCR.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContEllipse2MinCRDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContEllipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContEllipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContEllipsoid3MinCR.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContEllipsoid3MinCRDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContLozenge3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContLozenge3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContMinBox2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContMinBox2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContMinBox3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContMinBox3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContMinCircle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContMinCircle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContMinSphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContMinSphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContPointInPolygon2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContPointInPolygon2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContPointInPolyhedron3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContPointInPolyhedron3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContScribeCircle3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContScribeCircle3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContSeparatePoints2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContSeparatePoints2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContSeparatePoints3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContSeparatePoints3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContSphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContSphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ScribeCircle2Circumscribe.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ScribeCircle2CircumscribeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ScribeCircle2Inscribe.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ScribeCircle2InscribeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BezierCurve2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BezierCurve2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BezierCurve3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BezierCurve3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineBasis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineBasisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurve2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurve2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurve3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurve3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurveFit.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurveFitDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineFitBasis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineFitBasisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineGeodesic.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineGeodesicDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineRectangle.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineRectangleDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineReduction.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineReductionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineSurfaceFit.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineSurfaceFitDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineVolume.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineVolumeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\CubicPolynomialCurve2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\CubicPolynomialCurve2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\CubicPolynomialCurve3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\CubicPolynomialCurve3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\Curve2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\Curve2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\Curve3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\Curve3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\CurvesSurfacesVolumes.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\CurvesSurfacesVolumesFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\EllipsoidGeodesic.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\EllipsoidGeodesicDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\ImplicitSurface.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\ImplicitSurfaceDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\MultipleCurve2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\MultipleCurve2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\MultipleCurve3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\MultipleCurve3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSCurve2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSCurve2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSCurve3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSCurve3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSRectangle.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSRectangleDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\ParametricSurface.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\ParametricSurfaceDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\PolynomialCurve2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\PolynomialCurve2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\PolynomialCurve3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\PolynomialCurve3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\QuadricSurface.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\QuadricSurfaceDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\RiemannianGeodesic.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\RiemannianGeodesicDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\SingleCurve2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\SingleCurve2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\SingleCurve3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\SingleCurve3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\Surface.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\SurfaceDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\TCBSpline2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\TCBSpline2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\TCBSpline3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\TCBSpline3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceClosestPointsParameterResult.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceClosestPointsParameterResultDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceClosestPointsResult.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceClosestPointsResultDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceContactTimeResult.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceContactTimeResultDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceMultipleClosestPointsResult.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceMultipleClosestPointsResultDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceResultFactory.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceResultFactoryDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceResultImpl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\DistanceResultImplDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\IntervalDistance.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\IntervalDistanceBase.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\IntervalDistanceBaseDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\IntervalDistanceDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\IntervalDistanceSquared.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Detail\IntervalDistanceSquaredDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\Detail\DistanceLine2Line2Tool.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\Detail\DistanceLine2Line2ToolDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\Detail\DistancePoint2Ellipse2Tool.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\Detail\DistancePoint2Ellipse2ToolDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Line2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Line2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Ray2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Ray2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Ellipse2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Ellipse2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Hyperbola2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Hyperbola2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Line2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Line2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Ray2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Ray2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceRay2Ray2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceRay2Ray2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceRay2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceRay2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceSegment2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceSegment2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\Detail\DistanceLine3Line3Tool.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\Detail\DistanceLine3Line3ToolDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\Detail\DistancePoint3Ellipsoid3Tool.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\Detail\DistancePoint3Ellipsoid3ToolDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceCircle3Circle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceCircle3Circle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Line3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Line3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Ray3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Ray3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Line3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Line3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Ray3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Ray3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Ray3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Ray3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Circle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Circle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Rectangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Rectangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Circle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Circle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Frustum3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Frustum3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Rectangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Rectangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Tetrahedron3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Tetrahedron3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Rectangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Rectangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRectangle3Rectangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRectangle3Rectangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Rectangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Rectangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistTriangle3Rectangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistTriangle3Rectangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistTriangle3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistTriangle3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceBase.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceBaseDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceResult.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceResultDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\Interpolation.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\InterpolationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkima1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkima1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaNonuniform1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaNonuniform1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBicubic2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBicubic2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBilinear2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBilinear2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform4.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform4Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniformDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniformN.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniformNDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpLinearNonuniform2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpLinearNonuniform2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpLinearNonuniform3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpLinearNonuniform3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpQdrNonuniform2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpQdrNonuniform2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpSphere2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpSphere2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpThinPlateSpline2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpThinPlateSpline2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpThinPlateSpline3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpThinPlateSpline3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpTricubic3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpTricubic3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpTrilinear3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpTrilinear3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpVectorField2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpVectorField2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicFindIntersector1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicFindIntersector1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicIntersector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicIntersectorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicTestIntersector1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicTestIntersector1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Flags\IntersectionType.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicFindIntersectorBox2Circle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicFindIntersectorBox2Circle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicFindIntersectorTriangle2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicFindIntersectorTriangle2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicTestIntersectorTriangle2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicTestIntersectorTriangle2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorArc2Arc2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorArc2Arc2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorArc2Circle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorArc2Circle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorCircle2Circle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorCircle2Circle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorEllipse2Ellipse2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorEllipse2Ellipse2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Arc2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Arc2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Circle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Circle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Line2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Line2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Ray2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Ray2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Arc2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Arc2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Circle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Circle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Ray2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Ray2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Arc2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Arc2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Circle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Circle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorTriangle2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorTriangle2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorBox2Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorBox2Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorBox2Circle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorBox2Circle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Classify.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2ClassifyDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Line2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Line2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Ray2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Ray2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Ray2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Ray2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorTriangle2Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorTriangle2Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicAngularTestIntersectorBox3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicAngularTestIntersectorBox3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorPlane3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorPlane3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorSegment3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorSegment3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorSegment3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorSegment3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorSegment3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorSegment3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorSphere3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorSphere3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorTriangle3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorTriangle3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorTriangle3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorTriangle3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorTriangle3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorTriangle3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorBox3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorBox3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorHalfspace3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorHalfspace3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorHalfspace3Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorHalfspace3Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorHalfspace3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorHalfspace3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorHalfspace3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorHalfspace3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorPlane3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorPlane3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorSegment3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorSegment3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorSegment3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorSegment3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorSegment3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorSegment3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorSphere3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorSphere3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorTriangle3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorTriangle3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorTriangle3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorTriangle3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSet.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSetDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorAxis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorAxisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfiguration.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfigurationDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorLine3Triangle3Data.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorLine3Triangle3DataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorUtility3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorUtility3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorCircle3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorCircle3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorHalfspace3Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorHalfspace3Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorHalfspace3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorHalfspace3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Cone3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Cone3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Cylinder3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Cylinder3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Torus3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Torus3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorPlane3Cylinder3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorPlane3Cylinder3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorPlane3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorPlane3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorPlane3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorPlane3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorPlane3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorPlane3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Cylinder3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Cylinder3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorRay3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Cylinder3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Cylinder3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSphere3Cone3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSphere3Cone3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSphere3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSphere3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorTetrahedron3Tetrahedron3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorTetrahedron3Tetrahedron3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorTriangle3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorTriangle3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorTriangle3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorTriangle3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorBox3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorBox3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorBox3Frustum3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorBox3Frustum3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorBox3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorBox3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorCapsule3Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorCapsule3Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorCircle3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorCircle3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorEllipsoid3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorEllipsoid3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorHalfspace3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorHalfspace3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorHalfspace3Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorHalfspace3Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorHalfspace3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorHalfspace3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorHalfspace3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorHalfspace3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Lozenge3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Lozenge3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLine3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLozenge3Lozenge3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorLozenge3Lozenge3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Cylinder3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Cylinder3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Lozenge3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Lozenge3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorPlane3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Lozenge3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Lozenge3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorRay3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Lozenge3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Lozenge3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSegment3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSphere3Cone3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSphere3Cone3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSphere3Frustum3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSphere3Frustum3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSphere3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorSphere3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Cone3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Cone3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Cylinder3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Cylinder3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TrianglePlaneRelations.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TrianglePlaneRelationsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TriangleProjectOntoAxis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TriangleProjectOntoAxisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\IntersectionFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersector1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersector1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\IntersectorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticFindIntersector1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticFindIntersector1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticIntersector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticIntersectorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticTestIntersector1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticTestIntersector1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Macro\Macro.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Macro\MacroFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Mathematics.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsDll.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsExport.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsImport.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsLib.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsNoImport.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\BasicMesh.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\BasicMeshEdge.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\BasicMeshTriangle.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\BasicMeshVertex.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\ConformalMap.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\ConformalMapDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\Detail\BasicMeshVertexImpl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\EdgeKey.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\ETManifoldMesh.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\ETNonmanifoldMesh.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\MeshCurvature.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\MeshCurvatureDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\Meshes.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\MeshesFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\MeshSmoother.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\MeshSmootherDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\OrderedEdgeKey.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\PlanarGraph.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\PlanarGraphDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\TetrahedronKey.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\TriangleKey.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\TSManifoldMesh.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\UniqueVerticesTriangles.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\UniqueVerticesTrianglesDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\UnorderedTriangleKey.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\VEManifoldMesh.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\GridGraph2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\GridGraph2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\Miscellaneous.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\MiscellaneousFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\NormalCompression.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\PerspProjEllipsoid.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\PerspProjEllipsoidDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\QuadToQuadTransforms.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\QuadToQuadTransformsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\RandomHypersphere.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\TangentsToCircles.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\TangentsToCirclesDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BandedMatrixInvert.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BandedMatrixInvertDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1Root.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1RootDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Calculate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2CalculateDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Node.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2NodeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Root.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2RootDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Storage.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2StorageDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Calculate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3CalculateDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Node.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3NodeDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Root.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3RootDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Storage.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3StorageDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethod.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethodCalculate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethodCalculateDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethodDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethodRoot.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethodRootDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationFactory.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationOnce.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationQuartic.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationResult.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationSecondary.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EquationThrice.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\EigenDecomposition.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\EigenDecompositionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Equation.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\EquationResultConstIterator.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\EquationResultConstIteratorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Flags\BisectStorageType.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Flags\QuantityType.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Flags\RootType.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\GaussianQuadrature.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\GaussianQuadratureDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystem.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemConstIterator.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemConstIteratorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemInverse.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemInverseDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Matrix3Tools.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Matrix3ToolsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Minimize1.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Minimize1Data.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Minimize1DataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Minimize1Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeN.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeNData.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeNDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeNDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeNGetMinimum.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeNGetMinimumDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\NoniterativeEigen3x3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\NoniterativeEigen3x3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\NumericalAnalysis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\NumericalAnalysisFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeEuler.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeEulerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeImplicitEuler.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeImplicitEulerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeMidpoint.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeMidpointDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeRungeKutta4.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeRungeKutta4Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeSolver.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeSolverDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolarDecompositionValue.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolarDecompositionValueDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolynomialRoots.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolynomialRootsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolynomialRootsRational.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolynomialRootsRationalDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\QDUDecompositionValue.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\QDUDecompositionValueDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\RombergIntegral.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\RombergIntegralDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValue.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecomposition.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecompositionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecompositionGTE.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecompositionGTEDeteil.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveBanded.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveBandedDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveSymmetricConjugateGradient.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveSymmetricConjugateGradientDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrix.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrixConstIterator.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrixConstIteratorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrixDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrixIndex.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolverGTE.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolverGTEDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\TrapezoidRule.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\TrapezoidRuleDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Arc2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Arc2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Box2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Box2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Circle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Circle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\ConvexPolygon2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\ConvexPolygon2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ellipse2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ellipse2Coefficients.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ellipse2CoefficientsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ellipse2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Line2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Line2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Objects2D.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Objects2DFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Polygon2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Polygon2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ray2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ray2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Segment2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Segment2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Triangle2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Triangle2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Box3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Box3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Capsule3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Capsule3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Circle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Circle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Cone3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Cone3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\ConvexPolyhedron3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\ConvexPolyhedron3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Cylinder3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Cylinder3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipse3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipse3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipsoid3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipsoid3Coefficients.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipsoid3CoefficientsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipsoid3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Frustum3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Frustum3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Line3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Line3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Lozenge3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Lozenge3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Objects3D.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Objects3DFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Plane3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Plane3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Polyhedron3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Polyhedron3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ray3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ray3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Rectangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Rectangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Segment3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Segment3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Sphere3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Sphere3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Tetrahedron3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Tetrahedron3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Torus3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Torus3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Torus3Parameters.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Torus3ParametersDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Triangle3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Triangle3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Detail\QuerySortToolsImpl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Flags\QueryType.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2Filtered.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2FilteredDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2Int64.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2Int64Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2Integer.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2IntegerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2Rational.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query2RationalDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3Filtered.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3FilteredDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3Int64.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3Int64Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3Integer.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3IntegerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3Rational.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\Query3RationalDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\QueryBase.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\QueryDotTools.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\QueryDotToolsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\QueryFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\QuerySortTools.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\ConversionInteger.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\ConversionIntegerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\ConversionRational.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\ConversionRationalDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Detail\Int64Vector2Impl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Detail\Int64Vector3Impl.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Flags\FloatingPointAnalysisType.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\FloatingPointAnalysis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\FloatingPointAnalysisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Int64Vector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Int64Vector2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Int64Vector3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Int64VectorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Integer.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerData.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataAmend.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataAmendDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataAnalysis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataAnalysisDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataConversion.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataConversionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataOperator.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDataOperatorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDivisionModulo.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDivisionModuloDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDivisionMultiple.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerDivisionMultipleDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerMultiplication.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerMultiplicationDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\IntegerTraits.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\Rational.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalConversion.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalConversionDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalFwd.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalVector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalVector2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalVector2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalVector3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalVector3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalVectorDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\SignRational.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\SignRationalDetail.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

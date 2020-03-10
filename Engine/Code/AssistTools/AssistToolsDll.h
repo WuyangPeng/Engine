@@ -1,0 +1,37 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 10:48)
+
+#ifndef ASSIST_TOOLS_DLL_H
+#define ASSIST_TOOLS_DLL_H
+
+#include "System/Helper/ExportMacro.h"
+#include "AssistTools/Macro/UserMacro.h"
+
+#if defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) || defined(BUILDING_ASSIST_TOOLS_STATIC)
+
+  #define ASSIST_TOOLS_DEFAULT_DECLARE
+  #define ASSIST_TOOLS_HIDDEN_DECLARE
+  #define ASSIST_TOOLS_VISIBLE
+
+#else // !defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) && !defined(BUILDING_ASSIST_TOOLS_STATIC)
+
+   #if defined(BUILDING_ASSIST_TOOLS_EXPORT)
+ 
+        #define ASSIST_TOOLS_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define ASSIST_TOOLS_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BUILDING_ASSIST_TOOLS_EXPORT)
+
+		#define ASSIST_TOOLS_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define ASSIST_TOOLS_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BUILDING_ASSIST_TOOLS_EXPORT
+
+   #define ASSIST_TOOLS_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) || defined(BUILDING_ASSIST_TOOLS_STATIC)
+
+#endif // ASSIST_TOOLS_DLL_H

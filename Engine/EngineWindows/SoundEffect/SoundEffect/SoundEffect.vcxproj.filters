@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ogg 头文件">
+      <UniqueIdentifier>{869efd04-71af-436c-a9e3-08aea344b292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenAL 头文件">
+      <UniqueIdentifier>{12513be2-c9b2-4a7f-87ff-304bf954c6a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vorbis 头文件">
+      <UniqueIdentifier>{da2b2d17-9762-4e81-bdc1-17dc7f305a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{9a2d23ab-4aab-4251-bdf8-6f0bca7e5c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 头文件">
+      <UniqueIdentifier>{246d9bc0-dff0-4add-93a0-b44a1189a270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeAlut 头文件">
+      <UniqueIdentifier>{66b8601a-f1d8-4ce1-91bf-33232fddc724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectSound 头文件">
+      <UniqueIdentifier>{204a8b78-e5b4-413f-995e-11c755522a9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CsynUtil 头文件">
+      <UniqueIdentifier>{1ca6c448-0a1a-41c5-a677-7a00826b9a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration 头文件">
+      <UniqueIdentifier>{9edc33e1-b775-48e6-8efd-6d1b3d2c614b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\SoundEffect\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\SoundEffect\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Configuration\Configuration.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Configuration\ConfigurationFwd.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\CsynUtil\CsynUtil.h">
+      <Filter>CsynUtil 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\CsynUtil\CsynUtilFwd.h">
+      <Filter>CsynUtil 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\DirectSound\DirectSound.h">
+      <Filter>DirectSound 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\DirectSound\DirectSoundFwd.h">
+      <Filter>DirectSound 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\FreeAlut\FreeAlut.h">
+      <Filter>FreeAlut 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\FreeAlut\FreeAlutFwd.h">
+      <Filter>FreeAlut 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Interface\Interface.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Interface\InterfaceFwd.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Interface\User.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Ogg\Ogg.h">
+      <Filter>Ogg 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Ogg\OggFwd.h">
+      <Filter>Ogg 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\OpenAL\OpenAL.h">
+      <Filter>OpenAL 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\OpenAL\OpenALFwd.h">
+      <Filter>OpenAL 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Vorbis\Vorbis.h">
+      <Filter>Vorbis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Vorbis\VorbisFwd.h">
+      <Filter>Vorbis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
