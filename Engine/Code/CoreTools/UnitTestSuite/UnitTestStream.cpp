@@ -15,7 +15,7 @@
 using std::ostream;
 
 CoreTools::UnitTestStream
-	::UnitTestStream(ostream* osPtr)
+	::UnitTestStream(const OStreamShared& osPtr)
 	:m_OsPtr{ osPtr }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -30,27 +30,23 @@ CoreTools::UnitTestStream
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::UnitTestStream
 	::IsValid() const noexcept
-{
-	if (m_OsPtr != nullptr && *m_OsPtr)
-		return true;
-	else
-		return false;
+{ 
+	return true; 
 }
 #endif // OPEN_CLASS_INVARIANT
 
-ostream* CoreTools::UnitTestStream
-	::GetStream() noexcept
+CoreTools::OStreamShared& CoreTools::UnitTestStream
+	::GetStream()
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	return m_OsPtr;
 }
 
-void CoreTools::UnitTestStream
-	::SetStream(ostream* osPtr)
+bool CoreTools::UnitTestStream::IsStreamSharedFile() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
-	CORE_TOOLS_ASSERTION_0(osPtr != nullptr, "÷∏’ÎŒﬁ–ß");
 
-	m_OsPtr = osPtr;
+	return m_OsPtr.IsFile();
 }
+

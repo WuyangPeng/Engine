@@ -1,31 +1,29 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 14:22)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 17:08)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_H
 
 #include "Mathematics/Base/Math.h"
 
-#include <boost/shared_ptr.hpp>
-
 namespace Mathematics
 {
 	template <typename Real, typename Vector>
 	class DistanceResultImpl
 	{
-	public:		
-		using ClassType = DistanceResultImpl<Real,Vector>;
+	public:
+		using ClassType = DistanceResultImpl<Real, Vector>;
 		using ImplTypePtr = std::shared_ptr<ClassType>;
 		using Math = Math<Real>;
 
 	public:
-		explicit DistanceResultImpl(Real distance); 
+		explicit DistanceResultImpl(Real distance);
 		virtual ~DistanceResultImpl();
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE; 
+		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		Real GetDistance() const;
 		const Vector GetLhsClosestPoint() const;
@@ -34,7 +32,7 @@ namespace Mathematics
 		void SetDistance(Real distance);
 		void SetSqrtDistance();
 
-		virtual Real GetContactTime() const;		
+		virtual Real GetContactTime() const;
 		virtual const Vector GetLhsClosestPoint(int index) const;
 		virtual const Vector GetRhsClosestPoint(int index) const;
 		virtual int GetLhsClosestPointSize() const;
@@ -51,8 +49,8 @@ namespace Mathematics
 		static constexpr auto sm_ClosestPointZeroSize = 0;
 
 	private:
-		Real m_Distance;		 
-	};	  
+		Real m_Distance;
+	};
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_H

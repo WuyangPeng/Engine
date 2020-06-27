@@ -9,7 +9,7 @@
 #include "FileTime.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 System::ComparesFileTimeReturn System
 	::FileTimeCompare(const FileTime* lhsFileTime, const FileTime* rhsFileTime) noexcept

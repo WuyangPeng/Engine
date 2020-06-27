@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 13:27)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:52)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_H
@@ -16,7 +16,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class StaticFindIntersectorSphere3Sphere3: public  StaticIntersector<Real, Vector3D>
+	class StaticFindIntersectorSphere3Sphere3 : public  StaticIntersector<Real, Vector3D>
 	{
 	public:
 		using ClassType = StaticFindIntersectorSphere3Sphere3<Real>;
@@ -25,14 +25,14 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Circle3 = Circle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;	
- 
+		using Math = Math<Real>;
+
 	public:
-		StaticFindIntersectorSphere3Sphere3 (const Sphere3& sphere0,const Sphere3& sphere1);
-		
+		StaticFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1);
+
 		// Object access.
-		const Sphere3 GetSphere0 () const;
-		const Sphere3 GetSphere1 () const;
+		const Sphere3 GetSphere0() const;
+		const Sphere3 GetSphere1() const;
 
 		enum
 		{
@@ -46,25 +46,25 @@ namespace Mathematics
 		};
 
 		// Intersection set for static find-intersection query.
-		const Circle3 GetCircle () const;
+		const Circle3 GetCircle() const;
 
 		// Intersection set for dynamic find-intersection query.
-		const Vector3D GetContactPoint () const;
+		const Vector3D GetContactPoint() const;
 
 	private:
-		void Find ();   		
-		
+		void Find();
+
 		// The objects to intersect.
 		Sphere3 mSphere0;
 		Sphere3 mSphere1;
-		
+
 		// Circle of intersection for static spheres.
 		Circle3 mCircle;
-		
+
 		// Point of intersection for dynamic spheres.
 		Vector3D mContactPoint;
 	};
-	
+
 	using StaticFindIntersectorSphere3Sphere3f = StaticFindIntersectorSphere3Sphere3<float>;
 	using StaticFindIntersectorSphere3Sphere3d = StaticFindIntersectorSphere3Sphere3<double>;
 }

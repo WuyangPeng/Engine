@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 18:06)
+// 引擎版本：0.0.2.5 (2020/03/24 15:17)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_DETAIL_H
@@ -15,8 +15,8 @@
 
 template <typename Real>
 Mathematics::DynamicTestIntersector1<Real>
-	::DynamicTestIntersector1(Real u0, Real u1, Real v0, Real v1,Real tMax, Real speedU, Real speedV,const Real epsilon)
-	:ParentType{ u0, u1, v0, v1,epsilon },m_FirstTime{}, m_LastTime{},m_Intersection{ false }
+	::DynamicTestIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon)
+	:ParentType{ u0, u1, v0, v1,epsilon }, m_FirstTime{}, m_LastTime{}, m_Intersection{ false }
 {
 	Test(tMax, speedU, speedV);
 
@@ -34,62 +34,61 @@ void Mathematics::DynamicTestIntersector1<Real>
 	auto v1 = this->GetV(1);
 	auto epsilon = this->GetEpsilon();
 
-    if (u1 + epsilon < v0)
-    {
+	if (u1 + epsilon < v0)
+	{
 		// [u0,u1]最初在[v0,v1]的左边。
 		auto differenceSpeed = speedU - speedV;
-        if (Real{} < differenceSpeed)
-        {
+		if (Math::sm_Zero < differenceSpeed)
+		{
 			// 区间必须朝向彼此移动。
 			auto differencePosition = v0 - u1;
-            if (differencePosition <= tMax * differenceSpeed)
-            {
+			if (differencePosition <= tMax * differenceSpeed)
+			{
 				// 区间在指定时间内相交。
-	            m_FirstTime = differencePosition / differenceSpeed;
-                m_LastTime = (v1 - u0) / differenceSpeed;
-               
+				m_FirstTime = differencePosition / differenceSpeed;
+				m_LastTime = (v1 - u0) / differenceSpeed;
+
 				m_Intersection = true;
-            }
-        }
-    }
-    else if (v1 + epsilon < u0)
-    {
-        // [u0,u1]最初在[v0,v1]的右边。
+			}
+		}
+	}
+	else if (v1 + epsilon < u0)
+	{
+		// [u0,u1]最初在[v0,v1]的右边。
 		auto differenceSpeed = speedV - speedU;
-        if (Real{} < differenceSpeed)
-        {
-            // 区间必须朝向彼此移动。
+		if (Math::sm_Zero < differenceSpeed)
+		{
+			// 区间必须朝向彼此移动。
 			auto differencePosition = u0 - v1;
-            if (differencePosition <= tMax * differenceSpeed)
-            {
-                // 区间在指定时间内相交。
-                m_FirstTime = differencePosition / differenceSpeed;
-                m_LastTime = (u1 - v0) / differenceSpeed;
+			if (differencePosition <= tMax * differenceSpeed)
+			{
+				// 区间在指定时间内相交。
+				m_FirstTime = differencePosition / differenceSpeed;
+				m_LastTime = (u1 - v0) / differenceSpeed;
 				m_Intersection = true;
-            }
-        }
-    }
-    else
-    {
-  		// 区间本来就相交。
-        m_FirstTime = Real{ };
-        if (speedU + epsilon < speedV)
-        {
-            m_LastTime = (u1 - v0) / (speedV - speedU);
-        }
-        else if (speedV + epsilon < speedU)
-        {
-            m_LastTime = (v1 - u0) / (speedU - speedV);
-        }
-        else
-        {
-            m_LastTime = Math::sm_MaxReal;
-        }
+			}
+		}
+	}
+	else
+	{
+		// 区间本来就相交。
+		m_FirstTime = Math::sm_Zero;
+		if (speedU + epsilon < speedV)
+		{
+			m_LastTime = (u1 - v0) / (speedV - speedU);
+		}
+		else if (speedV + epsilon < speedU)
+		{
+			m_LastTime = (v1 - u0) / (speedU - speedV);
+		}
+		else
+		{
+			m_LastTime = Math::sm_MaxReal;
+		}
 
-        m_Intersection = true;
-    }
+		m_Intersection = true;
+	}
 }
-
 
 template <typename Real>
 Mathematics::DynamicTestIntersector1<Real>
@@ -103,12 +102,11 @@ template <typename Real>
 bool Mathematics::DynamicTestIntersector1<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Real{} <= m_FirstTime && m_FirstTime <= m_LastTime)
+	if (ParentType::IsValid() && Math::sm_Zero <= m_FirstTime && m_FirstTime <= m_LastTime)
 		return true;
 	else
 		return false;
 }
-
 #endif // OPEN_CLASS_INVARIANT	
 
 template <typename Real>
@@ -119,7 +117,6 @@ bool Mathematics::DynamicTestIntersector1<Real>
 
 	return m_Intersection;
 }
-
 
 template <typename Real>
 Real Mathematics::DynamicTestIntersector1<Real>
@@ -154,4 +151,3 @@ Real Mathematics::DynamicTestIntersector1<Real>
 }
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_DETAIL_H
 
- 

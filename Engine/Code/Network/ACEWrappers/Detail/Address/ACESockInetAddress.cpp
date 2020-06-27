@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 20:20)
+// 引擎版本：0.0.2.4 (2020/03/11 13:45)
 
 #include "Network/NetworkExport.h" 
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/ACEWrappers/Detail/BaseMainManager/StringConversion.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <array>
 
 using std::string;
@@ -23,7 +23,7 @@ using std::make_shared;
 Network::ACESockInetAddress
 	::ACESockInetAddress(const string& hostName, int port)
 	:m_ACEInetAddress{}
-{	
+{
 	if (m_ACEInetAddress.set(boost::numeric_cast<uint16_t>(port), hostName.c_str()) != 0)
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("网络地址设置无效！"));
@@ -90,7 +90,7 @@ const string Network::ACESockInetAddress
 
 	constexpr auto bufferSize = 256;
 
-	array<ACEChar, bufferSize> buffer { };
+	array<ACEChar, bufferSize> buffer{};
 
 	if (0 == m_ACEInetAddress.addr_to_string(buffer.data(), buffer.size()))
 		return StringConversion::ACEStringConversionMultiByte(buffer.data());

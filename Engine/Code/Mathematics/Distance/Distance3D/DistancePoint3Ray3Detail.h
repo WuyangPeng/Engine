@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/11 10:08)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 10:22)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_RAY3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_RAY3_DETAIL_H 
@@ -33,10 +33,10 @@ template <typename Real>
 bool Mathematics::DistancePoint3Ray3<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -67,16 +67,16 @@ const typename Mathematics::DistancePoint3Ray3<Real>::DistanceResult Mathematics
 	auto difference = m_Point - m_Ray.GetOrigin();
 	auto param = Vector3DTools::DotProduct(m_Ray.GetDirection(), difference);
 
-	if (param <= Real{})
+	if (param <= Math<Real>::sm_Zero)
 	{
-		param = Real{ };
+		param = Math<Real>::sm_Zero;
 	}
 
 	auto rhsClosestPoint = m_Ray.GetOrigin() + param * m_Ray.GetDirection();
 	difference = rhsClosestPoint - m_Point;
 
-	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(difference), Real{},
-						   m_Point,rhsClosestPoint,Real{},param };
+	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(difference), Math<Real>::sm_Zero,
+						   m_Point,rhsClosestPoint,Math<Real>::sm_Zero,param };
 }
 
 template <typename Real>
@@ -84,12 +84,12 @@ const typename Mathematics::DistancePoint3Ray3<Real>::DistanceResult Mathematics
 	::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
- 
+
 	auto movePoint = m_Point.GetMove(t, lhsVelocity);
 	auto movedRay = m_Ray.GetMove(t, rhsVelocity);
 
 	ClassType distance{ movePoint, movedRay };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 

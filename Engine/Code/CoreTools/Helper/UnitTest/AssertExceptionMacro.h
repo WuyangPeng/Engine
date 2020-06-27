@@ -47,4 +47,10 @@
 #define ASSERT_THROW_EXCEPTION_USE_MESSAGE_2(function,parameter1, parameter2, message) \
 	    AssertThrowException(this,&ClassType::function,(parameter1),(parameter2),(CORE_TOOLS_FUNCTION_DESCRIBED), message)
 
+#define ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(function) \
+	    AssertNotThrowException<ClassType,decltype(&ClassType::ExecuteLoopTesting<ClassType, decltype(&ClassType::function)>),ClassType*,decltype(&ClassType::function)>(this,&ClassType::ExecuteLoopTesting<ClassType, decltype(&ClassType::function)>,this,&ClassType::function,(CORE_TOOLS_FUNCTION_DESCRIBED))
+		
+#define ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION_USE_MESSAGE(function,message) \
+	    AssertNotThrowException<ClassType,decltype(&ClassType::ExecuteLoopTesting<ClassType, decltype(&ClassType::function)>),ClassType*,decltype(&ClassType::function)>(this,&ClassType::ExecuteLoopTesting<ClassType, decltype(&ClassType::function)>,this,&ClassType::function,(CORE_TOOLS_FUNCTION_DESCRIBED),message)
+
 #endif // CORE_TOOLS_HELPER_ASSERT_EXCEPTION_MACRO_H

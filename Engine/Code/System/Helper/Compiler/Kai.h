@@ -2,15 +2,15 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:01)
+// 引擎版本：0.2.0.0 (2020/05/07 15:27)
 
 #ifndef SYSTEM_HELPER_KAI_H
 #define SYSTEM_HELPER_KAI_H
 
 #ifdef __KCC
 
-// Kai C++ 编译器设置：
- 
+	// Kai C++ 编译器设置：
+
 	#if (4001 < __KCC_VERSION) 
 		#error "未知编译器" 
 	#endif // (4001 < __KCC_VERSION)
@@ -36,4 +36,3 @@
 #endif // SYSTEM_HELPER_KAI_H
 
 
- 

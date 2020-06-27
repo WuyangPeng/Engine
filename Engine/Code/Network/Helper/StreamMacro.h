@@ -8,12 +8,10 @@
 #define NETWORK_NETWORK_HELPER_NETWORK_STREAM_MACRO_H  
 
 #include "System/Helper/PragmaWarning/Format.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/StreamMacro.h" 
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/CustomAssertMacro.h"
-#include "CoreTools/ObjectSystems/InitTerm.h"
-
-#include <boost/numeric/conversion/cast.hpp>
+#include "CoreTools/Helper/CustomAssertMacro.h" 
 
 #define NETWORK_ABSTRACT_FACTORY_DEFINE(namespaceName,className) \
 	    Network::MessageInterfaceSharedPtr namespaceName::className::Factory (const Network::MessageSourceSharedPtr&,int64_t){ \

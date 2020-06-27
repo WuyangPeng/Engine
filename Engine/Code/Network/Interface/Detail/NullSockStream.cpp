@@ -1,19 +1,19 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 17:23)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:22)
 
 #include "Network/NetworkExport.h" 
 
 #include "NullSockStream.h"
+#include "System/Helper/UnusedMacro.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
-#include "System/Helper/UnusedMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h" 
 
@@ -41,7 +41,7 @@ int Network::NullSockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(messageBuffer); 
+	SYSTEM_UNUSED_ARG(messageBuffer);
 
 	return 0;
 }
@@ -51,7 +51,7 @@ int Network::NullSockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(messageBuffer); 
+	SYSTEM_UNUSED_ARG(messageBuffer);
 
 	return 0;
 }
@@ -61,7 +61,7 @@ void Network::NullSockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(messageBuffer); 
+	SYSTEM_UNUSED_ARG(messageBuffer);
 
 	CoreTools::CallbackParameters callbackParameters{};
 	callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
@@ -75,7 +75,7 @@ void Network::NullSockStream
 	NETWORK_CLASS_IS_VALID_9;
 
 	SYSTEM_UNUSED_ARG(eventInterface);
-	SYSTEM_UNUSED_ARG(messageBuffer); 
+	SYSTEM_UNUSED_ARG(messageBuffer);
 }
 
 bool Network::NullSockStream

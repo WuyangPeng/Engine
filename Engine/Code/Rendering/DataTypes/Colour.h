@@ -9,7 +9,7 @@
 
 #include "ColourDefaultTraits.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
 #include <ostream>
 #include <array>
@@ -30,7 +30,11 @@ namespace Rendering
 		using ClassType = Colour<T>;
 
 	public:
-		Colour();				
+		constexpr Colour() noexcept
+			:m_Colour{ sm_MinValue, sm_MinValue, sm_MinValue, sm_MaxValue }
+		{
+		}
+
 		Colour(T red,T green,T blue,T alpha = sm_MaxValue);
 		
 		template <typename RhsType>
@@ -41,11 +45,11 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 		
-		T GetRed() const;
-		T GetGreen() const;
-		T GetBlue() const;
-		T GetAlpha() const;
-		const T* GetPoint() const;
+		T GetRed() const noexcept;
+		T GetGreen() const noexcept;
+		T GetBlue() const noexcept;
+		T GetAlpha() const noexcept;
+		const T* GetPoint() const noexcept;
 
 		void SetColour(T red,T green,T blue,T alpha = sm_MaxValue);
 		void SetRed(T red);
@@ -63,7 +67,7 @@ namespace Rendering
 		Colour& operator/= (RhsType rhs);	
 
 	private:
-		static T Clamp(T colour);
+		static T Clamp(T colour) noexcept;
 
 		template <typename RhsType>
 		static T ConvertingIntegralToFloatingPoint(RhsType rhs);
@@ -71,7 +75,7 @@ namespace Rendering
 		template <typename RhsType>
 		static T ConvertingFloatingPointToIntegral(RhsType rhs);
 
-		void InitColour(T red,T green,T blue,T alpha);
+		void InitColour(T red,T green,T blue,T alpha) noexcept;
 		void Standardization();
 		void StandardizationRed();
 		void StandardizationGreen();
@@ -111,10 +115,10 @@ namespace Rendering
 	};
 
 	template <typename T>
-	bool Approximate(const Colour<T>& lhs,const Colour<T>& rhs,T epsilon);	
+	bool Approximate(const Colour<T>& lhs,const Colour<T>& rhs,T epsilon) noexcept;
 
 	template <typename T>
-	bool operator== (const Colour<T>& lhs,const Colour<T>& rhs);
+	bool operator== (const Colour<T>& lhs,const Colour<T>& rhs) noexcept;
 
 	template <typename LhsType,typename RhsType>
 	const Colour<LhsType> operator* (const Colour<LhsType>& lhs,RhsType rhs);

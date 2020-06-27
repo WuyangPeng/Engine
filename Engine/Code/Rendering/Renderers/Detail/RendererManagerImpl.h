@@ -9,9 +9,9 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include <boost/weak_ptr.hpp>
-#include <boost/shared_ptr.hpp>
-#include <set>
+
+#include <map>
+#include <memory>
 
 namespace Rendering
 {
@@ -31,7 +31,7 @@ namespace Rendering
 	{
 	public:
 		using ClassType = RendererManagerImpl;
-		using RendererPtr = Renderer*;
+		using RendererPtr = std::shared_ptr<Renderer>;
 		using VertexFormatConstPtr = const VertexFormat*;
 		using VertexBufferConstPtr = const VertexBuffer*;
 		using IndexBufferConstPtr = const IndexBuffer*;
@@ -48,8 +48,8 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 		
-		void Insert(RendererPtr ptr);
-		void Erase(RendererPtr ptr);
+		int64_t Insert(RendererPtr ptr);
+		bool Erase(int64_t rendererID);
 		
 		void BindAll (VertexFormatConstPtr vertexFormat);
 		void UnbindAll (VertexFormatConstPtr vertexFormat);		
@@ -88,7 +88,7 @@ namespace Rendering
 		void UnbindAll(PixelShaderConstPtr pixelShader);
 		
 	private:		
-		using RendererSet = std::set<RendererPtr>; 
+		using RendererSet = std::map<int64_t,std::weak_ptr<Renderer>>;
 
 	private:
 		RendererSet m_Renderers;	 

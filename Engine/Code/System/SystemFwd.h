@@ -1,14 +1,13 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2019/12/31 14:52)
+// 引擎版本：0.2.0.0 (2020/05/07 10:15)
 
 #ifndef SYSTEM_FWD_H
 #define SYSTEM_FWD_H
 
 #include "Helper/HelperFwd.h"
-#include "EnumOperator/EnumOperatorFwd.h"
 #include "SystemOutput/SystemOutputFwd.h"
 #include "DynamicLink/DynamicLinkFwd.h"
 #include "CharacterString/CharacterStringFwd.h"

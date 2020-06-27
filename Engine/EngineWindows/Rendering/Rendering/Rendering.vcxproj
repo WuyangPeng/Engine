@@ -512,6 +512,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLESRendererInput.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLRenderer.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLRendererInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PickRayImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformIndexBufferImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformPixelShaderImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformRenderTargetImpl.cpp" />
@@ -536,6 +537,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\WindowRendererInput.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\DrawManagement.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\GlobalState.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PickRay.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformIndexBuffer.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformRenderTarget.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTexture1D.cpp" />
@@ -906,6 +908,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTarget.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetDataImpl.h" />
@@ -938,6 +941,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\BufferManagementLockEncapsulationDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\CameraState.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\ClearParameter.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\DepthRange.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\AnalysisRendererManager.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\AnalysisRendererParameterManager.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\Dx9Renderer.h" />
@@ -948,6 +952,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLESRendererInput.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLRenderer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\OpenGLRendererInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PickRayImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformIndexBufferImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformPixelShaderImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformRenderTargetImpl.h" />
@@ -972,6 +977,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\DrawManagement.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Flags\RendererTypes.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\GlobalState.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PickRay.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformIndexBuffer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformRenderTarget.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformTexture1D.h" />
@@ -990,6 +996,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\RendererParameter.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Renderers.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderersFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderersInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderTargetManagement.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\ShaderManagement.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\ShaderManagementDetail.h" />
@@ -1000,6 +1007,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureManagementLockEncapsulation.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureManagementLockEncapsulationDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\VertexFormatManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Viewport.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\ViewportManagement.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Rendering.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingDll.h" />

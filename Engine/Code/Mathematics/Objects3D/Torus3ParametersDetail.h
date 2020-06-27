@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 10:18)
+// 引擎版本：0.0.2.5 (2020/03/19 17:48)
 
 #ifndef MATHEMATICS_OBJECTS3D_TORUS3_PARAMETERS_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_TORUS3_PARAMETERS_DETAIL_H
@@ -28,14 +28,13 @@ template <typename Real>
 bool Mathematics::Torus3Parameters<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_S && m_S <= static_cast<Real>(1) &&
-		Real {} <= m_T && m_T <= static_cast<Real>(1))
-	    return true;
+	if (Math::sm_Zero <= m_S && m_S <= static_cast<Real>(1) &&
+		Math::sm_Zero <= m_T && m_T <= static_cast<Real>(1))
+		return true;
 	else
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 Real Mathematics::Torus3Parameters<Real>

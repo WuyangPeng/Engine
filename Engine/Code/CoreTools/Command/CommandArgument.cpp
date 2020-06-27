@@ -59,7 +59,7 @@ void CoreTools::CommandArgument
 	if (m_Impl->IsNoValue())
 	{
 		// 由于重设了m_Impl，不进行Copy调用。
-		auto index = m_Impl->GetIndex();
+		const auto index = m_Impl->GetIndex();
 		auto arguments = m_Impl->GetName();
 
 		m_Impl = CommandArgumentFactory::Create(index, arguments, value);

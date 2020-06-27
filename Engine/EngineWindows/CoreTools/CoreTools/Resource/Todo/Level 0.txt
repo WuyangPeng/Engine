@@ -3,3 +3,7 @@ TODO Level 0
 0.0.2.1
 
 1.  （Threading）依照boost库封装std::thread组。
+
+0.0.3.0
+
+1.  （ObjectSystems）使用智能指针重新设计对象系统。

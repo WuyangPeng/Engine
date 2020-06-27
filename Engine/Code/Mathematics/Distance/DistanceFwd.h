@@ -1,12 +1,12 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 14:03)
+// 引擎版本：0.0.2.5 (2020/03/23 17:07)
 
 #ifndef MATHEMATICS_DISTANCE_FWD_H
 #define MATHEMATICS_DISTANCE_FWD_H
- 
+
 namespace Mathematics
 {
 	template <typename Real, typename Vector>
@@ -20,7 +20,7 @@ namespace Mathematics
 	class DistanceLine2Line2;
 
 	template <typename Real>
-	class DistanceRay2Ray2;	
+	class DistanceRay2Ray2;
 
 	template <typename Real>
 	class DistanceSegment2Segment2;

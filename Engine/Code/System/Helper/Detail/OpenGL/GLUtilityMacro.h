@@ -2,15 +2,12 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:05)
+// 引擎版本：0.2.0.0 (2020/05/07 23:43)
 
 #ifndef SYSTEM_HELPER_GL_UTILITY_MACRO_H
 #define SYSTEM_HELPER_GL_UTILITY_MACRO_H
 
-#include "System/Helper/ConfigMacro.h"
-#include "System/Helper/PragmaWarning.h"
-
-#include <cassert>
+#include "System/OpenGL/Detail/GetOpenGLFunction.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
 	// Microsoft Windows
@@ -21,6 +18,30 @@
 	#define OPENGL_STDCALL
 	#define OPENGL_EXTERN extern
 #endif // SYSTEM_PLATFORM_WIN32
+
+namespace System
+{
+	constexpr auto g_SystemOpenGLVersionNone = 0;
+	constexpr auto g_SystemOpenGLVersion11 = 11;
+	constexpr auto g_SystemOpenGLVersion12 = 12;
+	constexpr auto g_SystemOpenGLVersion13 = 13;
+	constexpr auto g_SystemOpenGLVersion14 = 14;
+	constexpr auto g_SystemOpenGLVersion15 = 15;
+	constexpr auto g_SystemOpenGLVersion20 = 20;
+	constexpr auto g_SystemOpenGLVersion21 = 21;
+	constexpr auto g_SystemOpenGLVersion30 = 30;
+	constexpr auto g_SystemOpenGLVersion31 = 31;
+	constexpr auto g_SystemOpenGLVersion32 = 32;
+	constexpr auto g_SystemOpenGLVersion33 = 33;
+	constexpr auto g_SystemOpenGLVersion40 = 40;
+	constexpr auto g_SystemOpenGLVersion41 = 41;
+	constexpr auto g_SystemOpenGLVersion42 = 42;
+	constexpr auto g_SystemOpenGLVersion43 = 43;
+	constexpr auto g_SystemOpenGLVersion44 = 44;
+	constexpr auto g_SystemOpenGLVersion45 = 45;
+	constexpr auto g_SystemOpenGLVersion46 = 46;
+	constexpr auto g_SystemOpenGLVersionMax = 100;
+}
 
 // 如果一个函数指针为null，您可以重写指针为ARB或EXT的函数指针。设置为1为覆盖，0为不覆盖。
 namespace System
@@ -58,250 +79,164 @@ namespace System
 	constexpr auto g_SystemWinOverride = 0;
 }
 
-extern "C"
-{
-	void* GetOpenGLFunctionPointer(const char* glFunction) noexcept;
-}
-
-namespace System
-{
-	template<typename Function>
-	void GetFunction(const char* functionName, Function& function) noexcept
-	{
-		try 		
-		{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-			if (functionName != nullptr)
-			{
-				const std::string acString{ functionName };
-				if (1 < acString.size())
-				{
-					const std::string actual{ acString.begin() + 1,acString.end() };
-
-					function = static_cast<Function>(GetOpenGLFunctionPointer(actual.c_str()));
-					assert(function);
-				}
-			}
-#include STSTEM_WARNING_POP
-		}		
-		catch (...)
-		{
-		}	
-	}
-
-	template<typename Function>
-	void GetFunctionSuffix(const char* functionName, Function& functionSuffix, Function& function,bool allowOverride) noexcept
-	{
-		try
-		{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-			if (functionName != nullptr)
-			{
-				const std::string acString{ functionName };
-				if (1 < acString.size())
-				{
-					const std::string actual{ acString.begin() + 1,acString.end() };
-
-					functionSuffix = static_cast<Function>(GetOpenGLFunctionPointer(actual.c_str()));
-					assert(functionSuffix);
-					if (allowOverride && function == nullptr)
-					{
-						function = functionSuffix;
-					}
-				}
-			}
-#include STSTEM_WARNING_POP
-		}
-		catch (...)
-		{
-		}
-	}
-}
-
 #define SYSTEM_GET_FUNCTION(glFunction) \
-		System::GetFunction(SYSTEM_STRINGIZE(glFunction),glFunction)
+		System::GetFunction(SYSTEM_STRINGIZE(glFunction), glFunction)
 
 #define SYSTEM_GET_FUNCTION_SUFFIX(glFunction,suffix,allowOverride) \
-		System::GetFunctionSuffix(SYSTEM_STRINGIZE(glFunction)SYSTEM_STRINGIZE(suffix),SYSTEM_CONCATENATOR(glFunction,suffix),glFunction,allowOverride)  
+		System::GetFunctionSuffix(SYSTEM_STRINGIZE(glFunction)SYSTEM_STRINGIZE(suffix), SYSTEM_CONCATENATOR(glFunction,suffix), glFunction, allowOverride)  
 
 #define SYSTEM_GET_FUNCTION_SUFFIX_ALT(glFunction,altGlFunction,suffix,allowOverride) \
-		System::GetFunctionSuffix(SYSTEM_STRINGIZE(glFunction)SYSTEM_STRINGIZE(suffix),SYSTEM_CONCATENATOR(glFunction,suffix),altGlFunction,allowOverride)
+		System::GetFunctionSuffix(SYSTEM_STRINGIZE(glFunction)SYSTEM_STRINGIZE(suffix), SYSTEM_CONCATENATOR(glFunction,suffix), altGlFunction, allowOverride)
 
 // 宏对于事先存在的函数没有返回值。
 
-#define SYSTEM_PRE_BODY_A0(function) \
-        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function();SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_0(function) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A1(function,a0) \
-        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_1(function,a0) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A2(function,a0,a1) \
-        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_2(function,a0,a1) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A3(function,a0,a1,a2) \
-        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_3(function,a0,a1,a2) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A4(function,a0,a1,a2,a3) \
-        SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_4(function,a0,a1,a2,a3) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A5(function,a0,a1,a2,a3,a4) \
-        SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_5(function,a0,a1,a2,a3,a4) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A6(function,a0,a1,a2,a3,a4,a5) \
-        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function);function(a0,a1,a2,a3,a4,a5);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_6(function,a0,a1,a2,a3,a4,a5) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4,a5); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A7(function,a0,a1,a2,a3,a4,a5,a6) \
-        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4,a5,a6);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_7(function,a0,a1,a2,a3,a4,a5,a6) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4,a5,a6); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A8(function,a0,a1,a2,a3,a4,a5,a6,a7) \
-        SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4,a5,a6,a7); SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_8(function,a0,a1,a2,a3,a4,a5,a6,a7) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4,a5,a6,a7); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A9(function,a0,a1,a2,a3,a4,a5,a6,a7,a8) \
-        SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function);function(a0,a1,a2,a3,a4,a5,a6,a7,a8);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_9(function,a0,a1,a2,a3,a4,a5,a6,a7,a8) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4,a5,a6,a7,a8); SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_PRE_BODY_A10(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9) \
-        SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function);function(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9);SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_PREVIOUSLY_BODY_10(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9) \
+        SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); function(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9); SYSTEM_EXIT_FUNCTION(function)
 
 // 宏对于事先存在的函数有返回值。
 
-#define SYSTEM_PRE_BODY_A0_RESULT(function,type) \
-        type result{};SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function);result = function();SYSTEM_EXIT_FUNCTION(function);return result
+#define SYSTEM_PREVIOUSLY_BODY_0_RESULT(function,type) \
+        type result{ }; SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); result = function(); SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_PRE_BODY_A1_RESULT(function,a0,type) \
-        type result{};SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function);result = function(a0);SYSTEM_EXIT_FUNCTION(function);return result
+#define SYSTEM_PREVIOUSLY_BODY_1_RESULT(function,a0,type) \
+        type result{ }; SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); result = function(a0); SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_PRE_BODY_A2_RESULT(function,a0,a1,type) \
-        type result{};SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function);result = function(a0,a1);SYSTEM_EXIT_FUNCTION(function);return result
+#define SYSTEM_PREVIOUSLY_BODY_2_RESULT(function,a0,a1,type) \
+        type result{ }; SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); result = function(a0,a1); SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_PRE_BODY_A3_RESULT(function,a0,a1,a2,type) \
-        type result{};SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function);result = function(a0,a1,a2);SYSTEM_EXIT_FUNCTION(function); return result
+#define SYSTEM_PREVIOUSLY_BODY_3_RESULT(function,a0,a1,a2,type) \
+        type result{ }; SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); result = function(a0,a1,a2); SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_PRE_BODY_A4_RESULT(function,a0,a1,a2,a3,type) \
-        type result{};SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function);result = function(a0,a1,a2,a3);SYSTEM_EXIT_FUNCTION(function);return result
+#define SYSTEM_PREVIOUSLY_BODY_4_RESULT(function,a0,a1,a2,a3,type) \
+        type result{ }; SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); result = function(a0,a1,a2,a3); SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_PRE_BODY_A5_RESULT(function,a0,a1,a2,a3,a4,type) \
-        type result{}; SYSTEM_ENTER_FUNCTION(function);SYSTEM_NONNULL_FUNCTION(function);result = function(a0,a1,a2,a3,a4);SYSTEM_EXIT_FUNCTION(function);return result
+#define SYSTEM_PREVIOUSLY_BODY_5_RESULT(function,a0,a1,a2,a3,a4,type) \
+        type result{ }; SYSTEM_ENTER_FUNCTION(function); SYSTEM_NONNULL_FUNCTION(function); result = function(a0,a1,a2,a3,a4); SYSTEM_EXIT_FUNCTION(function); return result
 
 // 宏对于函数没有返回值。
 
-#define SYSTEM_BODY_A0(function) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); function(); } \
-        else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_BODY_0(function) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+		function(); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A1(function,a0) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function);function(a0); } else { \
-        SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_BODY_1(function,a0) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+		function(a0); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A2(function,a0,a1) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function);function(a0,a1); } else { \
-        SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_BODY_2(function,a0,a1) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+		function(a0,a1); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A3(function,a0,a1,a2) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function);function(a0,a1,a2); } else { \
-        SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_BODY_3(function,a0,a1,a2) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+		function(a0,a1,a2); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A4(function,a0,a1,a2,a3) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function);function(a0,a1,a2,a3); } else { \
-        SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_BODY_4(function,a0,a1,a2,a3) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+		function(a0,a1,a2,a3); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A5(function,a0,a1,a2,a3,a4) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function);function(a0,a1,a2,a3,a4); } else { \
-        SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_BODY_5(function,a0,a1,a2,a3,a4) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+		function(a0,a1,a2,a3,a4); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A6(function,a0,a1,a2,a3,a4,a5) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function);function(a0,a1,a2,a3,a4,a5); } else { \
-        SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_BODY_6(function,a0,a1,a2,a3,a4,a5) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+		function(a0,a1,a2,a3,a4,a5); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A7(function,a0,a1,a2,a3,a4,a5,a6) \
-        SYSTEM_ENTER_FUNCTION(function);if (function  != nullptr) { SYSTEM_NONNULL_FUNCTION(function);function(a0,a1,a2,a3,a4,a5,a6); } else { \
-        SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
+#define SYSTEM_BODY_7(function,a0,a1,a2,a3,a4,a5,a6) \
+        SYSTEM_ENTER_FUNCTION(function); if (function  != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+		function(a0,a1,a2,a3,a4,a5,a6); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A8(function,a0,a1,a2,a3,a4,a5,a6,a7) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+#define SYSTEM_BODY_8(function,a0,a1,a2,a3,a4,a5,a6,a7) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
         function(a0,a1,a2,a3,a4,a5,a6,a7); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A9(function,a0,a1,a2,a3,a4,a5,a6,a7,a8) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+#define SYSTEM_BODY_9(function,a0,a1,a2,a3,a4,a5,a6,a7,a8) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
         function(a0,a1,a2,a3,a4,a5,a6,a7,a8); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A10(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+#define SYSTEM_BODY_10(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
         function(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A11(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) \
-        SYSTEM_ENTER_FUNCTION(function);if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
+#define SYSTEM_BODY_11(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) \
+        SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
         function(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A12(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) \
+#define SYSTEM_BODY_12(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) \
         SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
         function(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
-#define SYSTEM_BODY_A15(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) \
+#define SYSTEM_BODY_15(function,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) \
         SYSTEM_ENTER_FUNCTION(function); if (function != nullptr) { SYSTEM_NONNULL_FUNCTION(function); \
         function(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function)
 
 // 宏对于函数有返回值。
 
-#define SYSTEM_BODY_A0_RESULT(function,type,nullReturnValue) \
+#define SYSTEM_BODY_0_RESULT(function,type,nullReturnValue) \
         type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
-		result = function(); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function);return result
+		result = function(); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_BODY_A1_RESULT(function,a0,type,nullReturnValue) \
+#define SYSTEM_BODY_1_RESULT(function,a0,type,nullReturnValue) \
         type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
 		result = function(a0); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_BODY_A2_RESULT(function,a0,a1,type,nullReturnValue) \
-        type result{ nullReturnValue };SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
-		result = function(a0,a1); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function);return result
+#define SYSTEM_BODY_2_RESULT(function,a0,a1,type,nullReturnValue) \
+        type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
+		result = function(a0,a1); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_BODY_A3_RESULT(function,a0,a1,a2,type,nullReturnValue) \
-        type result{ nullReturnValue };SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
+#define SYSTEM_BODY_3_RESULT(function,a0,a1,a2,type,nullReturnValue) \
+        type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
 		result = function(a0,a1,a2); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_BODY_A4_RESULT(function,a0,a1,a2,a3,type,nullReturnValue) \
-        type result{ nullReturnValue };SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
-		result = function(a0,a1,a2,a3); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function);return result
+#define SYSTEM_BODY_4_RESULT(function,a0,a1,a2,a3,type,nullReturnValue) \
+        type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
+		result = function(a0,a1,a2,a3); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_BODY_A5_RESULT(function,a0,a1,a2,a3,a4,type,nullReturnValue) \
-        type result{ nullReturnValue };SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
+#define SYSTEM_BODY_5_RESULT(function,a0,a1,a2,a3,a4,type,nullReturnValue) \
+        type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
 		result = function(a0,a1,a2,a3,a4); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_BODY_A6_RESULT(function,a0,a1,a2,a3,a4,a5,type,nullReturnValue) \
-        type result{ nullReturnValue };SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
+#define SYSTEM_BODY_6_RESULT(function,a0,a1,a2,a3,a4,a5,type,nullReturnValue) \
+        type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
 		result = function(a0,a1,a2,a3,a4,a5); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_BODY_A7_RESULT(function,a0,a1,a2,a3,a4,a5,a6,type,nullReturnValue) \
+#define SYSTEM_BODY_7_RESULT(function,a0,a1,a2,a3,a4,a5,a6,type,nullReturnValue) \
         type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
 		result = function(a0,a1,a2,a3,a4,a5,a6); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result
 
-#define SYSTEM_BODY_A8_RESULT(function,a0,a1,a2,a3,a4,a5,a6,a7,type,nullReturnValue) \
+#define SYSTEM_BODY_8_RESULT(function,a0,a1,a2,a3,a4,a5,a6,a7,type,nullReturnValue) \
         type result{ nullReturnValue }; SYSTEM_ENTER_FUNCTION(function); if (function != nullptr){ SYSTEM_NONNULL_FUNCTION(function); \
 		result = function(a0,a1,a2,a3,a4,a5,a6,a7); } else { SYSTEM_NULL_FUNCTION(function); } SYSTEM_EXIT_FUNCTION(function); return result 
-
-namespace System
-{
-	constexpr auto g_SystemOpenGLVersionNone = 0;
-	constexpr auto g_SystemOpenGLVersion11 = 11;
-	constexpr auto g_SystemOpenGLVersion12 = 12;
-	constexpr auto g_SystemOpenGLVersion13 = 13;
-	constexpr auto g_SystemOpenGLVersion14 = 14;
-	constexpr auto g_SystemOpenGLVersion15 = 15;
-	constexpr auto g_SystemOpenGLVersion20 = 20;
-	constexpr auto g_SystemOpenGLVersion21 = 21;
-	constexpr auto g_SystemOpenGLVersion30 = 30;
-	constexpr auto g_SystemOpenGLVersion31 = 31;
-	constexpr auto g_SystemOpenGLVersion32 = 32;
-	constexpr auto g_SystemOpenGLVersion33 = 33;
-	constexpr auto g_SystemOpenGLVersion40 = 40;
-	constexpr auto g_SystemOpenGLVersion41 = 41;
-	constexpr auto g_SystemOpenGLVersion42 = 42;
-	constexpr auto g_SystemOpenGLVersion43 = 43;
-	constexpr auto g_SystemOpenGLVersion44 = 44;
-	constexpr auto g_SystemOpenGLVersion45 = 45;
-	constexpr auto g_SystemOpenGLVersion46 = 46;
-	constexpr auto g_SystemOpenGLVersionMax = 100;
-}
 
 #endif // SYSTEM_HELPER_GL_UTILITY_MACRO_H

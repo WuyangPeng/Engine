@@ -77,6 +77,8 @@ Mathematics::TSManifoldMesh::Tetrahedron* Mathematics::TSManifoldMesh
     // Add the faces to the mesh if they do not already exist.
 	for (int i = 0; i < 4; ++i)
 	{
+		if (tetra)
+		{
 		int opposite[3]{ TetrahedronKey::oppositeFace[i][0],   TetrahedronKey::oppositeFace[i][1],TetrahedronKey::oppositeFace[i][2] };
 		UnorderedTriangleKey tkey{tetra->V[opposite[0]],tetra->V[opposite[1]],tetra->V[opposite[2]]};
         Triangle* face;
@@ -126,8 +128,11 @@ Mathematics::TSManifoldMesh::Tetrahedron* Mathematics::TSManifoldMesh
             }
 
             // Update the tetrahedron.
-            tetra->T[i] = face;
-            tetra->S[i] = adjacent;
+			
+				tetra->T[i] = face;
+				tetra->S[i] = adjacent;
+			}
+            
         }
     }
 
@@ -340,6 +345,7 @@ Mathematics::TSManifoldMesh::Tetrahedron
 
 Mathematics::TSManifoldMesh::Tetrahedron
 	::Tetrahedron(int v0, int v1, int v2, int v3)
+	:V{}, T{}, S{}
 {
     V[0] = v0;
     V[1] = v1;

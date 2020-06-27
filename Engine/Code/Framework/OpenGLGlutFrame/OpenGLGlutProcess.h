@@ -1,74 +1,78 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.5 (2019/08/01 17:29)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 15:58)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_H
 
 #include "OpenGLGlutCallBackInterface.h"
 #include "System/OpenGL/Using/GlutUsing.h"
+#include "Framework/Application/GLUTApplicationInformation.h"
 
 #include <type_traits>
 
 namespace Framework
 {
 	template <typename OpenGLGlutCallBack>
-	class OpenGLGlutProcess 
+	class OpenGLGlutProcess
 	{
 	public:
-		static_assert(std::is_base_of<OpenGLGlutCallBackInterface,OpenGLGlutCallBack>::value);
-	
-	public:	
-		typedef OpenGLGlutCallBack CallBackType;
-		typedef OpenGLGlutProcess<CallBackType> ClassType;	
-		typedef std::shared_ptr<OpenGLGlutCallBackInterface>
-			    OpenGLGlutCallBackInterfacePtr;	
-		typedef System::RenderSceneCallback RenderSceneCallback;
-		typedef System::ChangeSizeCallback ChangeSizeCallback;
-		typedef System::TimerFunctionCallback TimerFunctionCallback;
-		typedef System::SpecialKeysDownCallback SpecialKeysDownCallback;
-		typedef System::KeyboardDownCallback KeyboardDownCallback; 
- 		typedef System::SpecialKeysUpCallback SpecialKeysUpCallback; 
- 		typedef System::KeyboardUpCallback KeyboardUpCallback; 
- 		typedef System::MouseFunctionCallback MouseFunctionCallback;
-  		typedef System::MotionFunctionCallback MotionFunctionCallback;
-  		typedef System::PassiveMotionFunctionCallback PassiveMotionFunctionCallback;   
-  		typedef System::IdleFunctionCallback IdleFunctionCallback; 
-  		typedef System::ProcessMenuCallback ProcessMenuCallback;  
-  		typedef System::TerminateCallback TerminateCallback; 	
+		static_assert(std::is_base_of_v<OpenGLGlutCallBackInterface, OpenGLGlutCallBack>);
 
 	public:
-		OpenGLGlutProcess();		
-		virtual ~OpenGLGlutProcess();
-	
+		using CallBackType = OpenGLGlutCallBack;
+		using ClassType = OpenGLGlutProcess<CallBackType>;
+		using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;
+		using RenderSceneCallback = System::RenderSceneCallback;
+		using ChangeSizeCallback = System::ChangeSizeCallback;
+		using TimerFunctionCallback = System::TimerFunctionCallback;
+		using SpecialKeysDownCallback = System::SpecialKeysDownCallback;
+		using KeyboardDownCallback = System::KeyboardDownCallback;
+		using SpecialKeysUpCallback = System::SpecialKeysUpCallback;
+		using KeyboardUpCallback = System::KeyboardUpCallback;
+		using MouseFunctionCallback = System::MouseFunctionCallback;
+		using MotionFunctionCallback = System::MotionFunctionCallback;
+		using PassiveMotionFunctionCallback = System::PassiveMotionFunctionCallback;
+		using IdleFunctionCallback = System::IdleFunctionCallback;
+		using ProcessMenuCallback = System::ProcessMenuCallback;
+		using TerminateCallback = System::TerminateCallback;
+
+	public:
+		explicit OpenGLGlutProcess(int64_t delta);
+		virtual ~OpenGLGlutProcess() noexcept = default;
+		OpenGLGlutProcess(const OpenGLGlutProcess&) noexcept = default;
+		OpenGLGlutProcess& operator=(const OpenGLGlutProcess&) noexcept = default;
+		OpenGLGlutProcess(OpenGLGlutProcess&&) noexcept = default;
+		OpenGLGlutProcess& operator=(OpenGLGlutProcess&&) noexcept = default;
+
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		RenderSceneCallback GetRenderSceneCallback() const; 
-		ChangeSizeCallback GetChangeSizeCallback() const; 
-		TimerFunctionCallback GetTimerFunctionCallback() const; 
-		SpecialKeysDownCallback GetSpecialKeysDownCallback() const; 
-		KeyboardDownCallback GetKeyboardDownCallback() const;
-		SpecialKeysUpCallback GetSpecialKeysUpCallback() const; 
-		KeyboardUpCallback GetKeyboardUpCallback() const;
-		MouseFunctionCallback GetMouseFunctionCallback() const;	
-		MotionFunctionCallback GetMotionFunctionCallback() const;
-		PassiveMotionFunctionCallback GetPassiveMotionCallback() const;
-		IdleFunctionCallback GetIdleFunctionCallback() const;
-		ProcessMenuCallback GetProcessMenuCallback() const;	
-		TerminateCallback GetTerminateCallback() const;
+		RenderSceneCallback GetRenderSceneCallback() const noexcept;
+		ChangeSizeCallback GetChangeSizeCallback() const noexcept;
+		TimerFunctionCallback GetTimerFunctionCallback() const noexcept;
+		SpecialKeysDownCallback GetSpecialKeysDownCallback() const noexcept;
+		KeyboardDownCallback GetKeyboardDownCallback() const noexcept;
+		SpecialKeysUpCallback GetSpecialKeysUpCallback() const noexcept;
+		KeyboardUpCallback GetKeyboardUpCallback() const noexcept;
+		MouseFunctionCallback GetMouseFunctionCallback() const noexcept;
+		MotionFunctionCallback GetMotionFunctionCallback() const noexcept;
+		PassiveMotionFunctionCallback GetPassiveMotionCallback() const noexcept;
+		IdleFunctionCallback GetIdleFunctionCallback() const noexcept;
+		ProcessMenuCallback GetProcessMenuCallback() const noexcept;
+		TerminateCallback GetTerminateCallback() const noexcept;
 
 		void SetWindowID(int window);
-		void SetMillisecond(unsigned millisecond);
-		unsigned int GetMillisecond() const;
-		int GetWindowID() const;
+		void SetMillisecond(int millisecond);
+		int GetMillisecond() const;
+		int GetWindowID() const; 
 
 		virtual bool PreCreate();
 		virtual bool Initialize();
 		virtual void PreIdle();
-		virtual void Terminate();
-	};	
+		virtual void Terminate();	 
+	};
 
 	using OpenGLGlutProcessInterface = OpenGLGlutProcess<OpenGLGlutCallBackInterface>;
 }

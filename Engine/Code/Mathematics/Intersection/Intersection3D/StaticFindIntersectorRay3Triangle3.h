@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 11:27)
+// 引擎版本：0.0.2.5 (2020/03/24 14:51)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_RAY3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_RAY3_TRIANGLE3_H
@@ -12,7 +12,7 @@
 #include "Mathematics/Objects3D/Line3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
 #include "Mathematics/Intersection/StaticIntersector.h"
- 
+
 namespace Mathematics
 {
 	// Find-intersection query.  The point of intersection is
@@ -27,31 +27,31 @@ namespace Mathematics
 		using Ray3 = Ray3<Real>;
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;   		
-		
+		using Math = Math<Real>;
+
 	public:
-		StaticFindIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle,const Real epsilon = Math::sm_ZeroTolerance);
+		StaticFindIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon = Math::sm_ZeroTolerance);
 
 		virtual ~StaticFindIntersectorRay3Triangle3();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
+
 		const Ray3 GetRay() const;
-		const Triangle3 GetTriangle () const;
-		
+		const Triangle3 GetTriangle() const;
+
 		Real GetRayParameter() const;
 		Real GetTriangleBary0() const;
 		Real GetTriangleBary1() const;
 		Real GetTriangleBary2() const;
 
-	private:	
+	private:
 		void Find();
-		
-	private: 
+
+	private:
 		// 相交对象
 		Ray3 m_Ray;
 		Triangle3 m_Triangle;
-		
+
 		// 相交对象集信息
 		Real m_RayParameter;
 		Real m_TriangleBary0;

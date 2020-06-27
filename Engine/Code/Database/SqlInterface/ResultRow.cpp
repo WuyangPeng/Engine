@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 10:07)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 12:35)
 
 #include "Database/DatabaseExport.h"
 
@@ -43,7 +43,7 @@ Database::ResultRow
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, ResultRow)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, Print, ostream&,void) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, Print, ostream&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetIntValue, int, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetUIntValue, int, uint32_t)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetInt64Value, int, int64_t)
@@ -52,7 +52,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetFloatValue, int, f
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetDoubleValue, int, double)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetBoolValue, int, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetStringValue, int, string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetWStringValue, int, wstring) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetWStringValue, int, wstring)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ResultRow, GetColCount, int)
 
 ostream& Database
@@ -62,4 +62,4 @@ ostream& Database
 
 	return out;
 }
- 
+

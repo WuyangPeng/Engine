@@ -1,30 +1,31 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:22)
+// 引擎版本：0.3.0.1 (2020/05/21 16:39)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_DETAIL_H
 
 #include "AndroidFrameBuild.h"
+#include "System/Console/ConsoleCreate.h"
+#include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "System/Console/ConsoleCreate.h"
 
 template <typename AndroidProcess>
 Framework::AndroidFrameBuild<AndroidProcess>
 	::AndroidFrameBuild(AndroidApp* state)
-	:m_State(state),
-	 m_AndroidProcess(),
-	 m_AndroidMessageLoop(m_State,m_AndroidProcess.GetDisplay())
+	:m_State{ state }, m_AndroidProcess{ System::g_Microseconds / sm_Interval }, m_AndroidMessageLoop{ m_State, m_AndroidProcess.GetDisplay() }
 {
+	using namespace std::literals;
+
 	System::AppDummy();
 
 	if (!(m_AndroidProcess.PreCreate() && InitApplication()))
-    {
-		THROW_EXCEPTION(SYSTEM_TEXT("创建窗口失败！"));
-    }
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("创建窗口失败！"s));
+	}
 
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -34,21 +35,14 @@ template <typename AndroidProcess>
 bool Framework::AndroidFrameBuild<AndroidProcess>
 	::InitApplication()
 {
-	m_State->onAppCmd = m_AndroidProcess.GetAppCmd();
-	m_State->onInputEvent = m_AndroidProcess.GetInputEvent();
+	m_State->SetOnAppCmd(m_AndroidProcess.GetAppCmd());
+	m_State->SetOnInputEvent(m_AndroidProcess.GetInputEvent());
 
 	System::CreateVirtualWindow(m_State, SYSTEM_TEXT("Android Virtual Window"));
-  
+
 	System::RemoveConsoleCloseButton();
 
-    return true;
-}
-
-template <typename AndroidProcess>
-Framework::AndroidFrameBuild<AndroidProcess>
-	::~AndroidFrameBuild()
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+	return true;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -56,7 +50,7 @@ template <typename AndroidProcess>
 bool Framework::AndroidFrameBuild<AndroidProcess>
 	::IsValid() const noexcept
 {
-	  return true;
+	return true;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -66,7 +60,7 @@ void Framework::AndroidFrameBuild<AndroidProcess>
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_AndroidProcess.Initialize())
+	if (m_AndroidProcess.Initialize())
 	{
 		m_AndroidProcess.PreIdle();
 
@@ -78,7 +72,7 @@ void Framework::AndroidFrameBuild<AndroidProcess>
 
 template <typename AndroidProcess>
 System::AndroidApp* Framework::AndroidFrameBuild<AndroidProcess>
-	::GetAndroidApp()
+	::GetAndroidApp() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 

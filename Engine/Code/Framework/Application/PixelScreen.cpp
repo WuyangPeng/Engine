@@ -1,93 +1,93 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:25)
+// 引擎版本：0.3.0.1 (2020/05/21 13:57)
 
 #include "Framework/FrameworkExport.h"
 
 #include "PixelScreen.h"
 #include "Detail/PixelScreenImpl.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowCreate/WindowSize.h"
+
+using std::make_shared;
 
 Framework::PixelScreen
 	::PixelScreen(const WindowSize& size)
-	:m_Impl(new ImplType(size))
+	:m_Impl{ make_shared<ImplType>(size) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework,PixelScreen)
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, PixelScreen)
 
 DELAY_COPY_CONSTRUCTION_DEFINE(Framework, PixelScreen)
 
- 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework, PixelScreen,Draw, Rendering::RendererSmartPointer,void);
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework, PixelScreen, ClearScreen,Colour , void);
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Framework, PixelScreen, DoFlip, bool ,void); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelScreen,GetScreenWidth,int);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelScreen, GetScreenHeight, int);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, PixelScreen,IsDoFlip, bool);
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework, PixelScreen, Draw, RendererSharedPtr, void);
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework, PixelScreen, ClearScreen, Colour, void);
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Framework, PixelScreen, DoFlip, bool, void);
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelScreen, IsDoFlip, bool);
 
 void Framework::PixelScreen
-	::SetPixel (int x, int y, const Colour& color)
+	::SetPixel(int x, int y, const Colour& color)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetPixel(x,y,color);
+	return m_Impl->SetPixel(x, y, color);
 }
 
 void Framework::PixelScreen
-	::SetThickPixel (int x, int y, int thick, const Colour& color)
+	::SetThickPixel(int x, int y, int thick, const Colour& color)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetThickPixel(x,y, thick ,color);
+	return m_Impl->SetThickPixel(x, y, thick, color);
 }
-
 
 const Framework::PixelScreen::Colour Framework::PixelScreen
-	::GetPixel (int x, int y) const
+	::GetPixel(int x, int y) const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl-> GetPixel(x,y);
-}
-
-
-void  Framework::PixelScreen
-	::DrawLine (int beginX, int beginY, int endX, int endY, const Colour& color)
-{
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->DrawLine(beginX, beginY, endX, endY, color);
+	return m_Impl->GetPixel(x, y);
 }
 
 void  Framework::PixelScreen
-	::DrawRectangle (int xMin, int yMin, int xMax, int yMax,const Colour& color, bool solid)
+	::DrawLine(int xMin, int yMin, int xMax, int yMax, const Colour& color)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->DrawRectangle(xMin, yMin, xMax, yMax, color, solid);
+	return m_Impl->DrawLine(xMin, yMin, xMax, yMax, color);
 }
 
 void  Framework::PixelScreen
-	::DrawCircle (int xCenter, int yCenter,int radius, const Colour& color,bool solid)
+	::DrawRectangle(int xMin, int yMin, int xMax, int yMax, const Colour& color, bool solid)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->DrawCircle(xCenter, yCenter, radius, color, solid);
+	return m_Impl->DrawRectangle(xMin, yMin, xMax, yMax, color, solid);
 }
 
 void  Framework::PixelScreen
-	::Fill (int x, int y, const Colour& foreColor, const Colour& backColor)
+	::DrawCircle(int xCenter, int yCenter, int radius, const Colour& color, bool solid)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl-> Fill(x, y, foreColor, backColor);
+	return m_Impl->DrawCircle(xCenter, yCenter, radius, color, solid);
+}
+
+void  Framework::PixelScreen
+	::Fill(int x, int y, const Colour& foreColor, const Colour& backColor)
+{
+	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	return m_Impl->Fill(x, y, foreColor, backColor);
 }
 
 void Framework::PixelScreen

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 19:24)
+// 引擎版本：0.0.2.5 (2020/03/19 12:25)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H
@@ -24,7 +24,7 @@
 
 template <typename Real>
 Mathematics::BandedMatrix<Real>
-	::BandedMatrix( int size, int lowerBandsNumber, int upperBandsNumber )
+	::BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber)
 	:m_Size{ size }, m_LowerBandsNumber{ lowerBandsNumber },
 	 m_UpperBandsNumber{ upperBandsNumber }, m_DiagonalBand{ NEW1<Real>(m_Size) },
 	 m_LowerBand{ 0 < m_LowerBandsNumber ? NEW1<Real*>(m_LowerBandsNumber) : nullptr },
@@ -42,7 +42,7 @@ void Mathematics::BandedMatrix<Real>
 {
 	auto bytesNumber = m_Size * sizeof(Real);
 	memset(m_DiagonalBand, 0, bytesNumber);
-	
+
 	for (auto i = 0; i < m_LowerBandsNumber; ++i)
 	{
 		auto lowerSize = m_Size - 1 - i;
@@ -56,8 +56,7 @@ void Mathematics::BandedMatrix<Real>
 		m_UpperBand[i] = NEW1<Real>(upperSize);
 		memset(m_UpperBand[i], 0, upperSize * sizeof(Real));
 	}
-}
-
+} 
 
 template <typename Real>
 Mathematics::BandedMatrix<Real>
@@ -100,7 +99,7 @@ void Mathematics::BandedMatrix<Real>
 
 template <typename Real>
 Mathematics::BandedMatrix<Real>
-	::BandedMatrix( const BandedMatrix& rhs )
+	::BandedMatrix(const BandedMatrix& rhs)
 	:m_Size{ rhs.m_Size }, m_LowerBandsNumber{ rhs.m_LowerBandsNumber },
 	 m_UpperBandsNumber{ rhs.m_UpperBandsNumber }, m_DiagonalBand{ NEW1<Real>(m_Size) },
 	 m_LowerBand{ 0 < m_LowerBandsNumber ? NEW1<Real*>(m_LowerBandsNumber) : nullptr },
@@ -114,13 +113,13 @@ Mathematics::BandedMatrix<Real>
 // private
 template <typename Real>
 void Mathematics::BandedMatrix<Real>
-	::Allocate( const BandedMatrix& rhs )
+	::Allocate(const BandedMatrix& rhs)
 {
 	auto bytesNumber = m_Size * sizeof(Real);
 	memcpy(m_DiagonalBand, rhs.m_DiagonalBand, bytesNumber);
-	
+
 	for (auto i = 0; i < m_LowerBandsNumber; ++i)
-	{	
+	{
 		auto lowerSize = m_Size - 1 - i;
 		m_LowerBand[i] = NEW1<Real>(lowerSize);
 		memcpy(m_LowerBand[i], rhs.m_LowerBand[i], lowerSize * sizeof(Real));
@@ -136,7 +135,7 @@ void Mathematics::BandedMatrix<Real>
 
 template <typename Real>
 Mathematics::BandedMatrix<Real>& Mathematics::BandedMatrix<Real>
-	::operator=( const BandedMatrix& rhs )
+	::operator=(const BandedMatrix& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -149,14 +148,14 @@ Mathematics::BandedMatrix<Real>& Mathematics::BandedMatrix<Real>
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>
-	::Swap( BandedMatrix& rhs )
+	::Swap(BandedMatrix& rhs)
 {
-	std::swap(m_Size,rhs.m_Size);
-	std::swap(m_LowerBandsNumber,rhs.m_LowerBandsNumber);
-	std::swap(m_UpperBandsNumber,rhs.m_UpperBandsNumber);
- 	std::swap(m_DiagonalBand,rhs.m_DiagonalBand);
- 	std::swap(m_LowerBand,rhs.m_LowerBand);
- 	std::swap(m_UpperBand,rhs.m_UpperBand);
+	std::swap(m_Size, rhs.m_Size);
+	std::swap(m_LowerBandsNumber, rhs.m_LowerBandsNumber);
+	std::swap(m_UpperBandsNumber, rhs.m_UpperBandsNumber);
+	std::swap(m_DiagonalBand, rhs.m_DiagonalBand);
+	std::swap(m_LowerBand, rhs.m_LowerBand);
+	std::swap(m_UpperBand, rhs.m_UpperBand);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -164,15 +163,15 @@ template <typename Real>
 bool Mathematics::BandedMatrix<Real>
 	::IsValid() const noexcept
 {
-	if(m_Size <= 0 || m_Size <= m_LowerBandsNumber || m_Size <= m_UpperBandsNumber || m_LowerBandsNumber < 0 || m_UpperBandsNumber < 0 || m_DiagonalBand == nullptr)
-	    return false;
-	else if(m_LowerBandsNumber == 0 && m_LowerBand != nullptr)
+	if (m_Size <= 0 || m_Size <= m_LowerBandsNumber || m_Size <= m_UpperBandsNumber || m_LowerBandsNumber < 0 || m_UpperBandsNumber < 0 || m_DiagonalBand == nullptr)
 		return false;
-	else if(m_UpperBandsNumber == 0 && m_UpperBand != nullptr)
+	else if (m_LowerBandsNumber == 0 && m_LowerBand != nullptr)
 		return false;
-	else if(m_LowerBandsNumber != 0 && m_LowerBand == nullptr)
+	else if (m_UpperBandsNumber == 0 && m_UpperBand != nullptr)
 		return false;
-	else if(m_UpperBandsNumber != 0 && m_UpperBand == nullptr)
+	else if (m_LowerBandsNumber != 0 && m_LowerBand == nullptr)
+		return false;
+	else if (m_UpperBandsNumber != 0 && m_UpperBand == nullptr)
 		return false;
 	else
 		return true;
@@ -230,15 +229,15 @@ int Mathematics::BandedMatrix<Real>
 	size += CORE_TOOLS_STREAM_SIZE(m_DiagonalBand[0]) * m_Size;
 
 	for (auto i = 0; i < m_LowerBandsNumber; ++i)
-	{	
+	{
 		auto lowerSize = m_Size - 1 - i;
-		size += CORE_TOOLS_STREAM_SIZE(m_LowerBand[i][0]) * lowerSize; 
+		size += CORE_TOOLS_STREAM_SIZE(m_LowerBand[i][0]) * lowerSize;
 	}
 
 	for (auto i = 0; i < m_UpperBandsNumber; ++i)
 	{
 		auto upperSize = m_Size - 1 - i;
-		size += CORE_TOOLS_STREAM_SIZE(m_UpperBand[i][0]) * upperSize; 
+		size += CORE_TOOLS_STREAM_SIZE(m_UpperBand[i][0]) * upperSize;
 	}
 
 	return size;
@@ -264,7 +263,7 @@ const Real* Mathematics::BandedMatrix<Real>
 
 template <typename Real>
 int Mathematics::BandedMatrix<Real>
-	::GetLowerBandMax( int index ) const
+	::GetLowerBandMax(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_1(0 <= index && index < m_LowerBandsNumber, "无效索引在 GetLBandMax\n");
@@ -274,76 +273,86 @@ int Mathematics::BandedMatrix<Real>
 
 template <typename Real>
 Real* Mathematics::BandedMatrix<Real>
-	::GetLowerBand( int index )
+	::GetLowerBand(int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < m_LowerBandsNumber, "无效索引在 GetLowerBand\n");
-	MATHEMATICS_ASSERTION_0(m_LowerBand != nullptr,"m_LowerBand为空。");
+	MATHEMATICS_ASSERTION_0(m_LowerBand != nullptr, "m_LowerBand为空。");
 
 	return  const_cast<Real*>(static_cast<const ClassType&>(*this).GetLowerBand(index));
 }
 
 template <typename Real>
 const Real* Mathematics::BandedMatrix<Real>
-	::GetLowerBand( int index ) const
+	::GetLowerBand(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < m_LowerBandsNumber,"无效索引在 GetLowerBand\n");
-	MATHEMATICS_ASSERTION_0(m_LowerBand != nullptr,"m_LowerBand为空。");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < m_LowerBandsNumber, "无效索引在 GetLowerBand\n");
 
-	return m_LowerBand[index];
+	if (m_LowerBand != nullptr)
+	{
+		return m_LowerBand[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("m_LowerBand为空。"));
+	}
 }
 
 template <typename Real>
 int Mathematics::BandedMatrix<Real>
-	::GetUpperBandMax( int index ) const
+	::GetUpperBandMax(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(0 <= index && index < m_UpperBandsNumber,"无效索引在 GetUBandMax\n");
+	MATHEMATICS_ASSERTION_1(0 <= index && index < m_UpperBandsNumber, "无效索引在 GetUBandMax\n");
 
 	return m_Size - 1 - index;
 }
 
 template <typename Real>
 Real* Mathematics::BandedMatrix<Real>
-	::GetUpperBand( int index )
+	::GetUpperBand(int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < m_UpperBandsNumber, "无效索引在 GetUpperBand\n");
 	MATHEMATICS_ASSERTION_0(m_UpperBand != nullptr, "m_UpperBand为空。");
 
 	return  const_cast<Real*>(static_cast<const ClassType&>(*this).GetUpperBand(index));
-}
-
+} 
 
 template <typename Real>
 const Real* Mathematics::BandedMatrix<Real>
-	::GetUpperBand( int index ) const
+	::GetUpperBand(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < m_UpperBandsNumber, "无效索引在 GetUpperBand\n");
-	MATHEMATICS_ASSERTION_0(m_UpperBand != nullptr,"m_UpperBand为空。");
 
-	return m_UpperBand[index];
-}
-
+	if (m_UpperBand != nullptr)
+	{
+		return m_UpperBand[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("m_UpperBand为空。"));
+	}
+} 
 
 template <typename Real>
 Real& Mathematics::BandedMatrix<Real>
-	::operator()( int row, int column )
+	::operator()(int row, int column)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < m_Size && 0 <= column && column < m_Size,"无效 row 或 column 在 BandedMatrix::operator\n");
+	MATHEMATICS_ASSERTION_0(0 <= row && row < m_Size && 0 <= column && column < m_Size, "无效 row 或 column 在 BandedMatrix::operator\n");
 
-	return  const_cast<Real&>(static_cast<const ClassType&>(*this)(row,column));
+	return  const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 }
 
 template <typename Real>
 const Real& Mathematics::BandedMatrix<Real>
-	::operator()( int row, int column ) const
+	::operator()(int row, int column) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < m_Size && 0 <= column && column < m_Size,"无效 row 或 column 在 BandedMatrix::operator\n");
+	MATHEMATICS_ASSERTION_0(0 <= row && row < m_Size && 0 <= column && column < m_Size, "无效 row 或 column 在 BandedMatrix::operator\n");
 
 	auto band = column - row;
 	if (0 < band)
@@ -365,17 +374,16 @@ const Real& Mathematics::BandedMatrix<Real>
 	{
 		return m_DiagonalBand[row];
 	}
-	
+
 	// CholeskyFactor函数会将s_Dummy重复赋值为0。
-	static auto s_Dummy = Real{};
+	static auto s_Dummy = Math::sm_Zero;
 
 	MATHEMATICS_ASSERTION_1(Math::FAbs(s_Dummy) <= Math::sm_ZeroTolerance, "静态变量s_Dummy值被修改！s_Dummy值必须为零！");
-	
-	s_Dummy = Real{};
+
+	s_Dummy = Math::sm_Zero;
 
 	return s_Dummy;
-}
-
+} 
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>
@@ -385,7 +393,7 @@ void Mathematics::BandedMatrix<Real>
 
 	auto bytesNumber = m_Size * sizeof(Real);
 	memset(m_DiagonalBand, 0, bytesNumber);
-	
+
 	for (auto i = 0; i < m_LowerBandsNumber; ++i)
 	{
 		auto lowerSize = m_Size - 1 - i;
@@ -399,7 +407,6 @@ void Mathematics::BandedMatrix<Real>
 	}
 }
 
-
 template <typename Real>
 void Mathematics::BandedMatrix<Real>
 	::SetIdentity()
@@ -408,9 +415,9 @@ void Mathematics::BandedMatrix<Real>
 
 	for (auto i = 0; i < m_Size; ++i)
 	{
-		m_DiagonalBand[i] = AlgebraTraits::UnitValue;
+		m_DiagonalBand[i] = Math::sm_One;
 	}
-	
+
 	for (auto i = 0; i < m_LowerBandsNumber; ++i)
 	{
 		auto lowerSize = m_Size - 1 - i;
@@ -422,22 +429,22 @@ void Mathematics::BandedMatrix<Real>
 		auto upperSize = m_Size - 1 - i;
 		memset(m_UpperBand[i], 0, upperSize * sizeof(Real));
 	}
-} 
+}
 
 template <typename Real>
 typename const Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatrix<Real>
 	::ToVariableMatrix() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;	
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	VariableMatrix variableMatrix{ m_Size, m_Size };
 
-	for (auto row = 0; row < m_Size; ++ row)
+	for (auto row = 0; row < m_Size; ++row)
 	{
-		for (auto column = 0; column < m_Size; ++ column)
-	    {	
-	         variableMatrix(row,column) = (*this)(row,column); 
-	    }
+		for (auto column = 0; column < m_Size; ++column)
+		{
+			variableMatrix(row, column) = (*this)(row, column);
+		}
 	}
 
 	return variableMatrix;

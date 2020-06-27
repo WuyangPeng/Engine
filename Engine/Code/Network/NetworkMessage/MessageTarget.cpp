@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <array>
 
 using std::array;

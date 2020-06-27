@@ -10,7 +10,7 @@
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 bool System
 	::SystemConvertToAutoInheritPrivateObjectSecurity(SecurityDescriptorPtr parentDescriptor, SecurityDescriptorPtr currentSecurityDescriptor, SecurityDescriptorPtr* newSecurityDescriptor,

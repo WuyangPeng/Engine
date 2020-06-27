@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 16:31)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 17:21)
 
 #ifndef MATHEMATICS_DISTANCE_DIST_TRIANGLE3_RECTANGLE3_H
 #define MATHEMATICS_DISTANCE_DIST_TRIANGLE3_RECTANGLE3_H
@@ -16,7 +16,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class DistTriangle3Rectangle3 : public DistanceBase<Real,Vector3D<Real> >
+	class DistTriangle3Rectangle3 : public DistanceBase<Real, Vector3D<Real> >
 	{
 	public:
 		using ClassType = DistTriangle3Rectangle3<Real>;
@@ -25,27 +25,26 @@ namespace Mathematics
 		using Rectangle3 = Rectangle3<Real>;
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
+		using DistanceResult = typename ParentType::DistanceResult; 
 
 	public:
-		DistTriangle3Rectangle3 (const Triangle3& triangle,const Rectangle3& rectangle);
-		
+		DistTriangle3Rectangle3(const Triangle3& triangle, const Rectangle3& rectangle);
+
 		// Object access.
-		const Triangle3& GetTriangle () const;
-		const Rectangle3& GetRectangle () const;
-		
+		const Triangle3& GetTriangle() const;
+		const Rectangle3& GetRectangle() const;
+
 		// Static distance queries.
 		virtual const DistanceResult GetSquared() const override;
-		
+
 		// Function calculations for dynamic distance queries.
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		Triangle3 mTriangle;
 		Rectangle3 mRectangle;
 	};
-	
+
 	using DistTriangle3Rectangle3f = DistTriangle3Rectangle3<float>;
 	using DistTriangle3Rectangle3d = DistTriangle3Rectangle3<double>;
 }

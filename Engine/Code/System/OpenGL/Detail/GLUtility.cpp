@@ -148,7 +148,10 @@ const char* System
 	}
 	catch (...)
 	{
-		return gs_ErrorString[g_ErrorStringSize - 1];		
+	#include STSTEM_WARNING_PUSH 
+	#include SYSTEM_WARNING_DISABLE(26446)
+		return gs_ErrorString[g_ErrorStringSize - 1];	
+	#include STSTEM_WARNING_POP 
 	}
 }
 

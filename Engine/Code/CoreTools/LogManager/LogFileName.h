@@ -25,7 +25,7 @@ namespace CoreTools
 		using String = System::String;
 
 	public:
-		explicit LogFileName(const String& fileName);
+		explicit LogFileName(const System::TChar* fileName) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

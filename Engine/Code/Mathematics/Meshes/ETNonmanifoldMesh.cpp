@@ -379,6 +379,7 @@ Mathematics::ETNonmanifoldMesh::Edge
 
 Mathematics::ETNonmanifoldMesh::Triangle
 	::Triangle (int v0, int v1, int v2)
+	:E{}, V{} 
 {
     V[0] = v0;
     V[1] = v1;

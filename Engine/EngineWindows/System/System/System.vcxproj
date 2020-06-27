@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="StaticDebug|Win32">
-      <Configuration>StaticDebug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticDebug|x64">
-      <Configuration>StaticDebug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticRelease|Win32">
-      <Configuration>StaticRelease</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticRelease|x64">
-      <Configuration>StaticRelease</Configuration>
-      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -33,10 +17,26 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{7CD661CE-A75D-448D-9D2D-E0ED94D8EA93}</ProjectGuid>
+    <ProjectGuid>{8B2FD97A-F02B-419D-AC7D-0ECCDEF48422}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>System</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
@@ -185,16 +185,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;SYSTEM_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>
-      </EnforceTypeConversionRules>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -207,8 +203,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -221,7 +215,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -234,7 +227,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -251,7 +243,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -268,7 +259,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -285,7 +275,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -302,283 +291,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 7.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 8.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 9.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputKeyEvent.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputMotionEvent.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputQueue.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidLooper.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeAppGlue.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeWindow.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidInputUsing.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidNativeAppGlueUsing.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidNativeWindowUsing.cpp" />
-    <ClCompile Include="..\..\..\Code\System\CharacterString\CodePage.cpp" />
-    <ClCompile Include="..\..\..\Code\System\CharacterString\FormatErrorMessage.cpp" />
-    <ClCompile Include="..\..\..\Code\System\CharacterString\FormatString.cpp" />
-    <ClCompile Include="..\..\..\Code\System\CharacterString\StringConversion.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Com\ComObjectBase.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleAlias.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleCodePage.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleColours.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleCreate.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleCursor.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleFont.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleHandle.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleInfo.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleInput.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleMode.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleOutput.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleScreenBuffer.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleTitle.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D10.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D11.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D9.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DllLib.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-      </ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\DllMain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-      </ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\DynamicLink\Data\EnumResourceData.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DynamicLink\EnumResourceTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DynamicLink\LibraryDirectory.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DynamicLink\LibraryTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DynamicLink\LoadLibrary.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DynamicLink\LoadResourceTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\FileManager\CFile.cpp" />
-    <ClCompile Include="..\..\..\Code\System\FileManager\EnvironmentVariable.cpp" />
-    <ClCompile Include="..\..\..\Code\System\FileManager\File.cpp" />
-    <ClCompile Include="..\..\..\Code\System\FileManager\FileTime.cpp" />
-    <ClCompile Include="..\..\..\Code\System\FileManager\FileTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\FileManager\FindFile.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Linux\LinuxNativeWindow.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Macintosh\MacintoshNativeWindow.cpp" />
-    <ClCompile Include="..\..\..\Code\System\MemoryTools\GlobalTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\MemoryTools\HeapTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\MemoryTools\LocalTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\MemoryTools\MemoryHelper.cpp" />
-    <ClCompile Include="..\..\..\Code\System\MemoryTools\ViewOfFile.cpp" />
-    <ClCompile Include="..\..\..\Code\System\MemoryTools\VirtualTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Network\DatabasePrototypes.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Network\SocketPrototypes.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Network\WindowsExtensionPrototypes.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Network\WindowsInternet.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Network\WindowsSockEx.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL11Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL12Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL13Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL14Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL15Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL20Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL21Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL30Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL31Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL32Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL33Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL40Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL41Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL42Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL43Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL44Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL45Extensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLARBESExtensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLARBExtensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLARBImagingExtensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLExtensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLEXTExtensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLPlugin.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLUtility.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GlxExtensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\WglExtensions.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLAPI.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLGlut.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLInit.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLUtility.cpp" />
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Test\GL11Test.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\AccessCheck.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\AddAccess.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\CreateSecurity.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\LookupPrivilege.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\SecurityAce.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\SecurityAcl.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\SecurityBase.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\SecurityDescriptor.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Security\SecuritySid.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemOutput\Data\LanguageIDData.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemOutput\Data\MessageBoxFlagsData.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemOutput\MessageBoxSelection.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemOutput\OutputDebugString.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\ConditionVariable.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\CriticalSection.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\Event.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\FiberTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\HandleTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\InitOnce.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\Mutex.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\OverlappedTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\Process.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\ProcessTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\Semaphore.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\SlimReaderWriter.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\SyncTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\Thread.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\ThreadLocalStorage.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\ThreadPool.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\ThreadTools.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Threading\WaitableTimer.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Time\Data\CurrentDeltaTime.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Time\Data\DeltaTimeValueData.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Time\DeltaTime.cpp" />
-    <ClCompile Include="..\..\..\Code\System\UserInterface\OpenGLWglPrototypes.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\LastPlatformError.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\WindowCreate.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\WindowFontInformation.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\WindowNamedPipe.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\WindowProcess.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\WindowRegister.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\WindowRegistry.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\WindowSystem.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Window\WindowUser.cpp" />
-  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\System\Android\Android.h" />
     <ClInclude Include="..\..\..\Code\System\Android\AndroidFwd.h" />
@@ -616,10 +329,6 @@
     <ClInclude Include="..\..\..\Code\System\CharacterString\FormatString.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\FormatStringDetail.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\Fwd\CharacterStringFlagsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\CharacterString\Fwd\CodePageFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\CharacterString\Fwd\FormatErrorMessageFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\CharacterString\Fwd\FormatStringFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\CharacterString\Fwd\StringConversionFwd.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\StringConversion.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\Using\CodePageUsing.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\Using\StringConversionUsing.h" />
@@ -650,21 +359,7 @@
     <ClInclude Include="..\..\..\Code\System\Console\Flags\ConsoleHandleFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Console\Flags\ConsoleModeFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Console\Flags\ConsoleScreenBufferFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleAliasFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleCodePageFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleColoursFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleCreateFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleCursorFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleFlagsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleFontFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleHandleFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleInfoFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleInputFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleModeFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleOutputFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleScreenBufferFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleTitleFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Console\Fwd\ConsoleToolsFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleColoursUsing.h" />
     <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleCursorUsing.h" />
     <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleFontUsing.h" />
@@ -691,11 +386,6 @@
     <ClInclude Include="..\..\..\Code\System\DynamicLink\Flags\LoadLibraryFlags.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\Fwd\DynamicLinkDataFwd.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\Fwd\DynamicLinkFlagsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\DynamicLink\Fwd\EnumResourceToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\DynamicLink\Fwd\LibraryDirectoryFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\DynamicLink\Fwd\LibraryToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\DynamicLink\Fwd\LoadLibraryFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\DynamicLink\Fwd\LoadResourceToolsFwd.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\LibraryDirectory.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\LibraryTools.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\LoadLibrary.h" />
@@ -703,10 +393,6 @@
     <ClInclude Include="..\..\..\Code\System\DynamicLink\Using\EnumResourceToolsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\Using\LoadLibraryUsing.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\Using\LoadResourceToolsUsing.h" />
-    <ClInclude Include="..\..\..\Code\System\EnumOperator\EnumCast.h" />
-    <ClInclude Include="..\..\..\Code\System\EnumOperator\EnumCastDetail.h" />
-    <ClInclude Include="..\..\..\Code\System\EnumOperator\EnumOperator.h" />
-    <ClInclude Include="..\..\..\Code\System\EnumOperator\EnumOperatorFwd.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\CFile.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\EnvironmentVariable.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\File.h" />
@@ -720,91 +406,11 @@
     <ClInclude Include="..\..\..\Code\System\FileManager\Flags\FileTimeFlags.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\Flags\FileToolsFlags.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\Flags\FindFileFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\FileManager\Fwd\CFileFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\FileManager\Fwd\EnvironmentVariableFwd.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\Fwd\FileFlagsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\FileManager\Fwd\FileFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\FileManager\Fwd\FileTimeFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\FileManager\Fwd\FileToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\FileManager\Fwd\FindFileFwd.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\Using\CFileUsing.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\Using\FileToolsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\Using\FileUsing.h" />
     <ClInclude Include="..\..\..\Code\System\FileManager\Using\FindFileUsing.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GL11ExtensionsMacro.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GLARBESExtensionsMacro.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL11Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL12Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL13Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL14Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL15Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL20Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL21Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL30Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL31Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL32Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL33Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL40Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL45Flags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLARBESFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLARBFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLARBImagingFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLEXTFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLPluginFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GlxFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\WglFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\Noexcept.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Algorithm.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioConnect.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioIpTcp.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioPlaceholders.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioPost.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Chrono.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26110.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26408.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26426.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26439.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26444.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26447.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26451.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26455.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26461.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26481.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26482.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26486.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26490.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26495.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26498.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28251.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6001.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6255.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6258.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6387.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6388.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\EngineDisable.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ExecutorWorkGuard.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Format.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Freeglut.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Gregorian.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\LexicalCast.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Mutex.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Pop.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PosixTime.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PropertyTree.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Push.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\RecursiveMutex.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Thread.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Timer.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\STLPort.h" />
-    <ClInclude Include="..\..\..\Code\System\Linux\Fwd\LinuxNativeWindowFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Linux\Linux.h" />
-    <ClInclude Include="..\..\..\Code\System\Linux\LinuxFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Linux\LinuxNativeWindow.h" />
-    <ClInclude Include="..\..\..\Code\System\Macintosh\Fwd\MacintoshNativeWindowFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Macintosh\Macintosh.h" />
-    <ClInclude Include="..\..\..\Code\System\Macintosh\MacintoshFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Macintosh\MacintoshNativeWindow.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Borland.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Clang.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\CodeGear.h" />
@@ -830,6 +436,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Xlcpp.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\ConfigMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\DeprecatedMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GL11ExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GL12ExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GL13ExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GL14ExtensionsMacro.h" />
@@ -845,6 +452,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GL43ExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GL44ExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GL45ExtensionsMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GLARBESExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GLARBExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GLARBImagingExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GLEXTExtensionsMacro.h" />
@@ -853,14 +461,35 @@
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GLUtilityMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GlxExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\OpenGLMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL11Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL12Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL13Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL14Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL15Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL20Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL21Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL30Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL31Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL32Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL33Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL40Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GL45Flags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLARBESFlags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLARBFlags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLARBImagingFlags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLEXTFlags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GLPluginFlags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\GlxFlags.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\TestFlags\WglFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\WglExtensionsMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\EnumCast.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\EnumMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\ExportMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\GLExtensionsMacro.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\UnusedMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\HelperFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\NetworkMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Noexcept.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Platform.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Platform\Aix.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Platform\Amigaos.h" />
@@ -881,11 +510,106 @@
     <ClInclude Include="..\..\..\Code\System\Helper\Platform\Vxworks.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Platform\Win32.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaMessageMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ACE.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Algorithm.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioConnect.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioIpTcp.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioPlaceholders.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioPost.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\CallTraits.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Chrono.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26110.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26135.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26400.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26401.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26408.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26409.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26414.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26426.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26429.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26432.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26433.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26434.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26436.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26438.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26439.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26440.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26443.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26444.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26446.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26447.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26451.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26455.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26456.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26460.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26461.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26462.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26465.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26466.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26471.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26472.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26473.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26474.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26475.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26476.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26477.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26481.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26482.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26485.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26486.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26487.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26488.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26489.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26490.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26491.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26492.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26493.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26494.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26495.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26496.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26497.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26498.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26812.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26814.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28251.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4100.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4239.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4244.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4505.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4996.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6001.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6255.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6258.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6320.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6330.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6385.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6387.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6388.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\EngineDisable.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ExecutorWorkGuard.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Format.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Freeglut.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Gregorian.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\IteratorFacade.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\LexicalCast.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\LimitTraits.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ListInserter.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Mutex.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\MysqlxXdevapi.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\NumericCast.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Operators.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PolymorphicCast.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PolymorphicPointerCast.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Pop.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PosixTime.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PropertyTree.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PtrVector.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Push.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\RecursiveMutex.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Thread.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Timer.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\TypeTraits.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\SecuritySidMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\SelectCompilerConfig.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\SelectPlatformConfig.h" />
@@ -898,24 +622,29 @@
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Msl.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Roguewave.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Sgi.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\STLPort.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Vacpp.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\StringizeMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\UnicodeUsing.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\UnusedMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Version.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\WindowsMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Linux\Fwd\LinuxNativeWindowFwd.h" />
+    <ClInclude Include="..\..\..\Code\System\Linux\Linux.h" />
+    <ClInclude Include="..\..\..\Code\System\Linux\LinuxFwd.h" />
+    <ClInclude Include="..\..\..\Code\System\Linux\LinuxNativeWindow.h" />
+    <ClInclude Include="..\..\..\Code\System\Macintosh\Fwd\MacintoshNativeWindowFwd.h" />
+    <ClInclude Include="..\..\..\Code\System\Macintosh\Macintosh.h" />
+    <ClInclude Include="..\..\..\Code\System\Macintosh\MacintoshFwd.h" />
+    <ClInclude Include="..\..\..\Code\System\Macintosh\MacintoshNativeWindow.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\GlobalToolsFlags.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\HeapToolsFlags.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\LocalMemoryFlags.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\MemoryHelperFlags.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\ViewOfFileFlags.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\VirtualToolsFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Fwd\GlobalToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Fwd\HeapToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Fwd\LocalToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Fwd\MemoryHelperFwd.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Fwd\MemoryToolsFlagsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Fwd\ViewOfFileFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Fwd\VirtualToolsFwd.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\GlobalTools.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\HeapTools.h" />
     <ClInclude Include="..\..\..\Code\System\MemoryTools\HeapToolsDetail.h" />
@@ -952,6 +681,7 @@
     <ClInclude Include="..\..\..\Code\System\Network\WindowsExtensionPrototypes.h" />
     <ClInclude Include="..\..\..\Code\System\Network\WindowsInternet.h" />
     <ClInclude Include="..\..\..\Code\System\Network\WindowsSockEx.h" />
+    <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GetOpenGLFunction.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GL11Extensions.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GL12Extensions.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GL13Extensions.h" />
@@ -996,7 +726,6 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLUtility.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Test\GL11Test.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GL11ExtensionsUsing.h" />
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GLTestUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GL12ExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GL13ExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GL14ExtensionsUsing.h" />
@@ -1012,6 +741,7 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GLARBESExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GLARBExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GLARBImagingExtensionsUsing.h" />
+    <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GLTestUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GlutUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GlxExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\OpenGLUsing.h" />
@@ -1066,8 +796,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemOutput\Flags\MessageBoxFlags.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOutput\Flags\PrimaryLanguageFlags.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOutput\Flags\SubLanguageFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemOutput\Fwd\MessageBoxSelectionFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemOutput\Fwd\OutputDebugStringFwd.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOutput\Fwd\SystemOutputDataFwd.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOutput\Fwd\SystemOutputFlagsFwd.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOutput\MessageBoxSelection.h" />
@@ -1092,26 +820,7 @@
     <ClInclude Include="..\..\..\Code\System\Threading\Flags\ThreadLocalStorageFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Threading\Flags\ThreadToolsFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Threading\Flags\WaitableTimerFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\ConditionVariableFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\CriticalSectionFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\EventFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\FiberToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\HandleToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\InitOnceFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\InterlockedFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\MutexFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\OverlappedToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\ProcessFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\ProcessToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\SemaphoreFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\SlimReaderWriterFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\SyncToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\ThreadFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Threading\Fwd\ThreadingFlagsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\ThreadLocalStorageFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\ThreadPoolFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\ThreadToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Threading\Fwd\WaitableTimerFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Threading\HandleTools.h" />
     <ClInclude Include="..\..\..\Code\System\Threading\InitOnce.h" />
     <ClInclude Include="..\..\..\Code\System\Threading\Interlocked.h" />
@@ -1157,6 +866,7 @@
     <ClInclude Include="..\..\..\Code\System\UserInterface\UserInterface.h" />
     <ClInclude Include="..\..\..\Code\System\UserInterface\UserInterfaceFwd.h" />
     <ClInclude Include="..\..\..\Code\System\UserInterface\Using\OpenGLWglPrototypesUsing.h" />
+    <ClInclude Include="..\..\..\Code\System\Window\Engineering.h" />
     <ClInclude Include="..\..\..\Code\System\Window\Flags\ExceptionFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Window\Flags\PlatformErrorFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Window\Flags\WindowClassStyleFlags.h" />
@@ -1194,6 +904,153 @@
     <ClInclude Include="..\..\..\Code\System\Window\WindowRegistry.h" />
     <ClInclude Include="..\..\..\Code\System\Window\WindowSystem.h" />
     <ClInclude Include="..\..\..\Code\System\Window\WindowUser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputKeyEvent.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputMotionEvent.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputQueue.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidLooper.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeAppGlue.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeWindow.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidInputUsing.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidNativeAppGlueUsing.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidNativeWindowUsing.cpp" />
+    <ClCompile Include="..\..\..\Code\System\CharacterString\CodePage.cpp" />
+    <ClCompile Include="..\..\..\Code\System\CharacterString\FormatErrorMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\System\CharacterString\FormatString.cpp" />
+    <ClCompile Include="..\..\..\Code\System\CharacterString\StringConversion.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Com\ComObjectBase.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleAlias.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleCodePage.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleColours.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleCreate.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleCursor.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleFont.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleHandle.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleInfo.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleInput.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleMode.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleOutput.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleScreenBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleTitle.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D10.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D11.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D9.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DllLib.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DllMain.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DynamicLink\EnumResourceTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DynamicLink\LibraryDirectory.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DynamicLink\LibraryTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DynamicLink\LoadLibrary.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DynamicLink\LoadResourceTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\FileManager\CFile.cpp" />
+    <ClCompile Include="..\..\..\Code\System\FileManager\EnvironmentVariable.cpp" />
+    <ClCompile Include="..\..\..\Code\System\FileManager\File.cpp" />
+    <ClCompile Include="..\..\..\Code\System\FileManager\FileTime.cpp" />
+    <ClCompile Include="..\..\..\Code\System\FileManager\FileTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\FileManager\FindFile.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Linux\LinuxNativeWindow.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Macintosh\MacintoshNativeWindow.cpp" />
+    <ClCompile Include="..\..\..\Code\System\MemoryTools\GlobalTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\MemoryTools\HeapTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\MemoryTools\LocalTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\MemoryTools\MemoryHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\System\MemoryTools\ViewOfFile.cpp" />
+    <ClCompile Include="..\..\..\Code\System\MemoryTools\VirtualTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Network\DatabasePrototypes.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Network\SocketPrototypes.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Network\WindowsExtensionPrototypes.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Network\WindowsInternet.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Network\WindowsSockEx.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GetOpenGLFunction.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL11Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL12Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL13Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL14Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL15Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL20Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL21Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL30Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL31Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL32Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL33Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL40Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL41Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL42Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL43Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL44Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL45Extensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLARBESExtensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLARBExtensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLARBImagingExtensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLExtensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLEXTExtensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLPlugin.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GLUtility.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GlxExtensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\WglExtensions.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLAPI.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLGlut.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLInit.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLUtility.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Test\GL11Test.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\AccessCheck.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\AddAccess.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\CreateSecurity.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\LookupPrivilege.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\SecurityAce.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\SecurityAcl.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\SecurityBase.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\SecurityDescriptor.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Security\SecuritySid.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemOutput\MessageBoxSelection.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemOutput\OutputDebugString.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\ConditionVariable.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\CriticalSection.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\Event.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\FiberTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\HandleTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\InitOnce.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\Mutex.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\OverlappedTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\Process.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\ProcessTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\Semaphore.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\SlimReaderWriter.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\SyncTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\Thread.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\ThreadLocalStorage.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\ThreadPool.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\ThreadTools.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Threading\WaitableTimer.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Time\Data\CurrentDeltaTime.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Time\Data\DeltaTimeValueData.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Time\DeltaTime.cpp" />
+    <ClCompile Include="..\..\..\Code\System\UserInterface\OpenGLWglPrototypes.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\LastPlatformError.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\WindowCreate.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\WindowFontInformation.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\WindowNamedPipe.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\WindowProcess.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\WindowRegister.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\WindowRegistry.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\WindowSystem.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Window\WindowUser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

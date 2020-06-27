@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // „ч’я£Ї≈нќд—ф£ђ≈нк ґч£ђ≈нк ‘у
 // 
-// “э«ж∞ж±Њ£Ї0.0.2.0 (2020/01/02 15:02)
+// “э«ж∞ж±Њ£Ї0.2.0.0 (2020/05/07 15:28)
 
 #ifndef SYSTEM_HELPER_MPW_H
 #define SYSTEM_HELPER_MPW_H
@@ -14,7 +14,7 @@
 	#if MPW_CPLUS < 0x890
 		#error "±а“л∆чќі≈д÷√"
 	#endif // MPW_CPLUS < 0x890
- 
+
 	#if (0x890 < MPW_CPLUS)
 		#error "ќі÷™±а“л∆ч"
 	#endif // 0x890 < MPW_CPLUS

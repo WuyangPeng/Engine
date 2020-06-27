@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 17:05)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 19:00)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_DETAIL_H
@@ -10,11 +10,11 @@
 #include "DistanceMultipleClosestPointsResult.h"
 #include "DistanceClosestPointsResultDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real, typename Vector>
 Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::DistanceMultipleClosestPointsResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints,const ClosestPoints& rhsClosestPoints)
+	::DistanceMultipleClosestPointsResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints)
 	:ParentType{ distance, contactTime }, m_LhsClosestPoints{ lhsClosestPoints }, m_RhsClosestPoints{ rhsClosestPoints }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -32,7 +32,7 @@ template <typename Real, typename Vector>
 bool Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid() && m_LhsClosestPoints.size() == m_RhsClosestPoints.size())
+	if (ParentType::IsValid() && m_LhsClosestPoints.size() == m_RhsClosestPoints.size())
 		return true;
 	else
 		return false;
@@ -87,4 +87,3 @@ typename Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::ImplTyp
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_DETAIL_H
- 

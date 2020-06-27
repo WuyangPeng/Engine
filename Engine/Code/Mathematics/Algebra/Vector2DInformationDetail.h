@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/06 10:06)
+// 引擎版本：0.0.2.5 (2020/03/19 15:46)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR_2D_TOOLS_INFORMATION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VECTOR_2D_TOOLS_INFORMATION_DETAIL_H
@@ -15,16 +15,16 @@
 
 template <typename Real>
 Mathematics::Vector2DInformation<Real>
-	::Vector2DInformation(const std::vector<Vector2D>& points,Real epsilon)
-	:m_Points{ points }, m_Epsilon{ epsilon },m_Dimension{ -1 }, m_AABBPtr{}, m_MaxRange{ Real{} },m_Origin{}, 
-	 m_DirectionX{},m_DirectionY{}, m_MinExtreme{ -1 }, m_MaxExtreme{ -1 },m_PerpendicularExtreme{ -1 }, m_ExtremeCCW{ false }
+	::Vector2DInformation(const std::vector<Vector2D>& points, Real epsilon)
+	:m_Points{ points }, m_Epsilon{ epsilon }, m_Dimension{ -1 }, m_AABBPtr{}, m_MaxRange{ Math::sm_Zero }, m_Origin{},
+	 m_DirectionX{}, m_DirectionY{}, m_MinExtreme{ -1 }, m_MaxExtreme{ -1 }, m_PerpendicularExtreme{ -1 }, m_ExtremeCCW{ false }
 {
-	MATHEMATICS_ASSERTION_0(0 < m_Points.size() && Real{} <= m_Epsilon, "无效输入在Vector2DInformation\n");
+	MATHEMATICS_ASSERTION_0(0 < m_Points.size() && Math::sm_Zero <= m_Epsilon, "无效输入在Vector2DInformation\n");
 
-    m_IndexMin[0] = 0;
-    m_IndexMin[1] = 0;
-    m_IndexMax[0] = 0;
-    m_IndexMax[1] = 0;
+	m_IndexMin[0] = 0;
+	m_IndexMin[1] = 0;
+	m_IndexMax[0] = 0;
+	m_IndexMax[1] = 0;
 
 	Init();
 
@@ -40,15 +40,15 @@ void Mathematics::Vector2DInformation<Real>
 	ComputeAxisAlignedBoundingBox();
 
 	// 确定边界框的最大范围。
-	DetermineMaximumRange();	
+	DetermineMaximumRange();
 
 	// 原点是最小x值的点或最小y值的点。
 	m_Origin = m_Points[m_MinExtreme];
 
 	// 测试点集是否是（几乎）一个点或一个线段
-	if(!(TestPointSetIsNearlyAPoint() || TestPointSetIsNearlyALineSegment()))
+	if (!(TestPointSetIsNearlyAPoint() || TestPointSetIsNearlyALineSegment()))
 	{
-		m_Dimension = 2;	
+		m_Dimension = 2;
 	}
 }
 
@@ -60,7 +60,7 @@ void Mathematics::Vector2DInformation<Real>
 	auto min = m_Points[0];
 	auto max = min;
 
-	for(auto pointsIndex = 1u;pointsIndex < m_Points.size();++pointsIndex)
+	for (auto pointsIndex = 1u; pointsIndex < m_Points.size(); ++pointsIndex)
 	{
 		const auto& eachVector = m_Points[pointsIndex];
 
@@ -78,8 +78,8 @@ void Mathematics::Vector2DInformation<Real>
 			}
 		}
 	}
-	
-	m_AABBPtr = std::make_shared<AxesAlignBoundingBox2D>(min,max);
+
+	m_AABBPtr = std::make_shared<AxesAlignBoundingBox2D>(min, max);
 }
 
 // private
@@ -119,8 +119,8 @@ bool Mathematics::Vector2DInformation<Real>
 		m_MaxExtreme = m_MinExtreme;
 		m_PerpendicularExtreme = m_MinExtreme;
 
-		m_DirectionX[0] = Real{ };
-		m_DirectionY[1] = Real{ };
+		m_DirectionX[0] = Math::sm_Zero;
+		m_DirectionY[1] = Math::sm_Zero;
 
 		return true;
 	}
@@ -136,13 +136,13 @@ bool Mathematics::Vector2DInformation<Real>
 	m_DirectionX.Normalize(m_Epsilon);
 	m_DirectionY = -Vector2DTools::GetPerp(m_DirectionX);
 
-	Real maxDistance { };
+	auto maxDistance = Math::sm_Zero;
 	auto maxSign = NumericalValueSymbol::Zero;
-    m_PerpendicularExtreme = m_MinExtreme;
+	m_PerpendicularExtreme = m_MinExtreme;
 	for (auto index = 0u; index < m_Points.size(); ++index)
 	{
 		auto difference = m_Points[index] - m_Origin;
-		auto distance = Vector2DTools::DotProduct(m_DirectionY,difference);
+		auto distance = Vector2DTools::DotProduct(m_DirectionY, difference);
 		auto sign = Math::Sign(distance);
 		distance = Math::FAbs(distance);
 		if (maxDistance < distance)
@@ -161,7 +161,7 @@ bool Mathematics::Vector2DInformation<Real>
 		return true;
 	}
 
-	m_ExtremeCCW = (maxSign == NumericalValueSymbol::Positive);	
+	m_ExtremeCCW = (maxSign == NumericalValueSymbol::Positive);
 
 	return false;
 }
@@ -177,11 +177,11 @@ bool Mathematics::Vector2DInformation<Real>
 		0 <= m_MaxExtreme && 0 <= m_PerpendicularExtreme && m_MinExtreme < pointsSize && m_MaxExtreme < pointsSize && m_PerpendicularExtreme < pointsSize)
 	{
 		return true;
-	}	   
+	}
 	else
 	{
 		return false;
-	}		
+	}
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -195,8 +195,8 @@ int Mathematics::Vector2DInformation<Real>
 }
 
 template <typename Real>
-typename Mathematics::Vector2DInformation<Real>::AxesAlignBoundingBox2DPtr 
-	Mathematics::Vector2DInformation<Real>
+typename Mathematics::Vector2DInformation<Real>::AxesAlignBoundingBox2DPtr
+Mathematics::Vector2DInformation<Real>
 	::GetAABBPtr() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -230,7 +230,6 @@ typename const Mathematics::Vector2DInformation<Real>::Vector2D Mathematics::Vec
 
 	return m_DirectionX;
 }
-
 
 template <typename Real>
 typename const Mathematics::Vector2DInformation<Real>::Vector2D Mathematics::Vector2DInformation<Real>
@@ -277,7 +276,6 @@ bool Mathematics::Vector2DInformation<Real>
 	return m_ExtremeCCW;
 }
 
-
 template <typename Real>
 int Mathematics::Vector2DInformation<Real>
 	::GetMinExtremeIndex() const
@@ -310,10 +308,15 @@ int Mathematics::Vector2DInformation<Real>
 	::GetIndexMin(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 2, "索引错误！");
 
-	return m_IndexMin[index];
+	if (0 <= index && index < 2)
+	{
+		return m_IndexMin[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
-
 
 #endif // MATHEMATICS_ALGEBRA_VECTOR_2D_TOOLS_INFORMATION_DETAIL_H

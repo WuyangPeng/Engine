@@ -1,27 +1,27 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:18)
+// 引擎版本：0.0.2.5 (2020/03/19 17:25)
 
 #ifndef MATHEMATICS_OBJECTS3D_TRIANGLE3_H
 #define MATHEMATICS_OBJECTS3D_TRIANGLE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 #include "Mathematics/Algebra/Vector3DTools.h"
-#include "Mathematics/Base/MathDetail.h"
 
-#include <type_traits> 
 #include <vector>
+#include <type_traits> 
 
 namespace Mathematics
 {
 	template <typename Real>
 	class Triangle3
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Triangle3<Real>;
@@ -31,12 +31,12 @@ namespace Mathematics
 
 	public:
 		// 三角形表示为三个顶点数组： 
-		Triangle3 (const Vector3D& firstVector, const Vector3D& secondVector,const Vector3D& thirdVector);
+		Triangle3(const Vector3D& firstVector, const Vector3D& secondVector, const Vector3D& thirdVector);
 
 		CLASS_INVARIANT_DECLARE;
 
 		// 从点point到三角形的距离。
-		Real DistanceTo (const Vector3D& point) const;
+		Real DistanceTo(const Vector3D& point) const;
 
 		const std::vector<Vector3D> GetVertex() const;
 		const Vector3D GetVertex(int index) const;

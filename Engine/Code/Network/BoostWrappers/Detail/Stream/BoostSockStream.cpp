@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/26 13:12)
-
+// 引擎版本：0.0.2.4 (2020/03/11 15:59)
 
 #include "Network/NetworkExport.h" 
 
 #include "BoostSockStream.h"
 #include "BoostSockStreamHelper.h"
+#include "System/Helper/PragmaWarning/AsioPlaceholders.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
@@ -17,19 +17,19 @@
 #include "Network/NetworkMessage/MessageBuffer.h"
 
 #include <boost/bind.hpp>
-#include "System/Helper/PragmaWarning/AsioPlaceholders.h"
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
 using std::to_string;
+using namespace std::literals;
 using boost::bind;
 using boost::numeric_cast;
 using boost::asio::detail::throw_error;
 
 namespace
 {
-	const System::String g_SynchronizeSendSuccessDescription{ SYSTEM_TEXT("同步发送消息成功，字节数：") };
-	const System::String g_SynchronizeReceiveSuccessDescription{ SYSTEM_TEXT("同步接收消息成功，字节数：") };
+	const auto g_SynchronizeSendSuccessDescription = SYSTEM_TEXT("同步发送消息成功，字节数："s);
+	const auto g_SynchronizeReceiveSuccessDescription = SYSTEM_TEXT("同步接收消息成功，字节数："s);
 }
 
 Network::BoostSockStream

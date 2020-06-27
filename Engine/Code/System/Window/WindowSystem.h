@@ -13,6 +13,8 @@
 #include "Fwd/WindowFlagsFwd.h"
 #include "System/Helper/UnicodeUsing.h" 
 
+#include <iostream>
+
 namespace System
 {
 	// 系统相关函数。
@@ -31,6 +33,14 @@ namespace System
 
 	WindowBool SYSTEM_DEFAULT_DECLARE BoolConversion(bool value) noexcept;
 	void SYSTEM_DEFAULT_DECLARE BoolConversion(WindowBool value, bool* result) noexcept;
+
+	template<typename T>
+	T GetSystemInput()
+	{
+		T value{ };
+		std::cin >> value;
+		return value;
+	}
 }
 
 #endif // SYSTEM_WINDOW_WINDOW_SYSTEM_H

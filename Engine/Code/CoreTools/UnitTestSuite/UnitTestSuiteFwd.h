@@ -14,6 +14,7 @@ namespace CoreTools
 	class UnitTestComposite; 
     class UnitTest;
     class Suite;
+	class OStreamShared;
 }
 
 #endif // CORE_TOOLS_UNIT_TEST_SUITE_FWD_H

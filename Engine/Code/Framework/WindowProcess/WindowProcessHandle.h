@@ -1,57 +1,64 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 10:01)
+// 引擎版本：0.3.0.1 (2020/05/21 10:50)
 
-// 窗口过程类的声明 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_H
 
 #include "System/Window/WindowProcess.h"
 
 #include "WindowMessageInterface.h"
-#include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Flags/WindowFlags.h"
- 
-#include <type_traits>
-#include <string>
+#include "System/Helper/UnicodeUsing.h" 
+
+#include <type_traits> 
 
 namespace Framework
 {
-	class WindowMessageInterface;
-
 	template <typename WindowMessage>
-	class WindowProcessHandle 
+	class WindowProcessHandle
 	{
 	public:
-		static_assert(std::is_base_of<WindowMessageInterface,WindowMessage>::value);
-	
-	public:	
-		using MessageType = WindowMessage;
-		using ClassType = WindowProcessHandle<MessageType>;
-		using WindowMessageInterfacePtr = std::shared_ptr<WindowMessageInterface>;
-		using HWnd = System::WindowHWnd;
+		static_assert(std::is_base_of_v<WindowMessageInterface, WindowMessage>);
 
 	public:
-		WindowProcessHandle();		
-		virtual ~WindowProcessHandle();
+		using MessageType = WindowMessage;
+		using ClassType = WindowProcessHandle<MessageType>;
+		using String = System::String;
+		using HWnd = System::WindowHWnd;
+		using WindowProcess = System::WindowProcess;
+		using DisplayFunction = System::DisplayFunction;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;		
+	public:
+		explicit WindowProcessHandle(int64_t delta);
+		virtual ~WindowProcessHandle() noexcept;
+		WindowProcessHandle(const WindowProcessHandle& rhs) noexcept = default;
+		WindowProcessHandle& operator=(const WindowProcessHandle& rhs) noexcept = default;
+		WindowProcessHandle(WindowProcessHandle&& rhs) noexcept = default;
+		WindowProcessHandle& operator=(WindowProcessHandle&& rhs) noexcept = default;
 
-	public:	
-		System::WindowProc GetProcess() const;
-		System::DisplayPtr GetFunction() const;
+		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		bool PreCreate();
-		bool Initialize();
-		void PreIdle();
-		void Terminate();
+	public:
+		static WindowProcess GetProcess() noexcept;
+		static DisplayFunction GetFunction() noexcept;
 
-		bool IsClassNameExist(const System::String& className) const;
-		bool SetNewClassName(const System::String& className);
+		static bool IsClassNameExist(const String& className);
+		static bool SetNewClassName(const String& className);
 
-		HWnd GetMainWindowHwnd() const;
+		static HWnd GetMainWindowHwnd();
+
+		virtual bool PreCreate(const EnvironmentDirectory& environmentDirectory);
+		virtual bool Initialize();
+		virtual void PreIdle();
+		virtual void Terminate();
+
+	private:
+		void ClearWindowMessage();
+
+	private:
+		WindowMessageInterfaceSharedPtr m_WindowMessage;
 	};
 
 	using WindowProcessInterface = WindowProcessHandle<WindowMessageInterface>;

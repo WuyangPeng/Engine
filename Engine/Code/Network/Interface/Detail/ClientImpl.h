@@ -1,30 +1,30 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 16:53)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:02)
 
 #ifndef NETWORK_NETWORK_INTERFACE_CLIENT_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_CLIENT_IMPL_H
 
 #include "Network/NetworkDll.h"
 
-#include "Network/Configuration/ConfigurationStrategy.h"
-#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/NetworkMessage/SocketManager.h"
 #include "Network/NetworkMessage/MessageInterface.h"
+#include "Network/Configuration/ConfigurationStrategy.h" 
 
 namespace Network
-{	
+{
 	class NETWORK_HIDDEN_DECLARE ClientImpl : public CoreTools::EventInterface
 	{
 	public:
 		using ClassType = ClientImpl;
 		using ParentType = EventInterface;
 		using EventInterfaceSharedPtr = CoreTools::EventInterfaceSharedPtr;
-		 
+
 	public:
-		ClientImpl (const ConfigurationStrategy& configurationStrategy,const SocketManagerSharedPtr& socketManager);
+		ClientImpl(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager);
 		virtual ~ClientImpl();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
@@ -49,11 +49,11 @@ namespace Network
 
 	private:
 		virtual bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
-		 	 
+
 	private:
-		ConfigurationStrategy m_ConfigurationStrategy; 
+		ConfigurationStrategy m_ConfigurationStrategy;
 		SocketManagerWeakPtr m_SocketManager;
-	};	
-} 
+	};
+}
 
 #endif // NETWORK_NETWORK_INTERFACE_CLIENT_IMPL_H

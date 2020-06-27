@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 14:31)
+// 引擎版本：0.0.2.5 (2020/03/24 14:33)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_H
@@ -20,7 +20,7 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		DynamicTestIntersector1(Real u0, Real u1, Real v0, Real v1,Real tMax, Real speedU, Real speedV,const Real epsilon = Math::sm_ZeroTolerance);
+		DynamicTestIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::sm_ZeroTolerance);
 		virtual ~DynamicTestIntersector1();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;

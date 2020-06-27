@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Base/SingletonDetail.h"  
 
-#include <boost/shared_ptr.hpp>
+
 #include <boost/noncopyable.hpp>
  
 EXPORT_NONCOPYABLE_CLASS(RENDERING);  

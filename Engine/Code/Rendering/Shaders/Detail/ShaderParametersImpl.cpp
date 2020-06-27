@@ -418,7 +418,7 @@ const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
 }
 
 void Rendering::ShaderParametersImpl
-	::UpdateConstants(const Visual* visual, const Camera* camera)
+	::UpdateConstants(const VisualSmartPointer& visual, const CameraSmartPointer& camera)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -426,7 +426,7 @@ void Rendering::ShaderParametersImpl
 	{
 		if (constant->AllowUpdater())
 		{
-			constant->Update(visual, camera);
+			constant->Update(visual.GetData(), camera.GetData());
 		}
 	}	 
 }

@@ -1,13 +1,13 @@
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// Copyright (c) 2011-2017
-//
-// 引擎版本：1.0.0.0 (2017/11/22 10:42)
+// 
+// 引擎版本：0.3.0.1 (2020/05/20 0:08)
 
 #ifndef FRAMEWORK_LIB_H
 #define FRAMEWORK_LIB_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(TCRE_USE_MSVC) 
 
@@ -21,9 +21,7 @@
 
 	#else // !BUILDING_FRAMEWORK_STATIC
 
-		#include "DllLib.h"
-		#include "System/SystemLib.h"
-		#include "CoreTools/CoreToolsLib.h"
+		#include "DllLib.h"  
 
 		#ifdef _DEBUG 
 			#pragma comment(lib,"FrameworkStaticD.lib")

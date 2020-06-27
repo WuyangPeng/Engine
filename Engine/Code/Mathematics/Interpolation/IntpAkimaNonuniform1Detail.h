@@ -26,10 +26,10 @@ namespace Mathematics
 			slope[ip2] = df / dx;
 		}
 
-		slope[1] = ((Real)2)*slope[2] - slope[3];
-		slope[0] = ((Real)2)*slope[1] - slope[2];
-		slope[quantity + 1] = ((Real)2)*slope[quantity] - slope[quantity - 1];
-		slope[quantity + 2] = ((Real)2)*slope[quantity + 1] - slope[quantity];
+		slope[1] = (static_cast<Real>(2))*slope[2] - slope[3];
+		slope[0] = (static_cast<Real>(2))*slope[1] - slope[2];
+		slope[quantity + 1] = (static_cast<Real>(2))*slope[quantity] - slope[quantity - 1];
+		slope[quantity + 2] = (static_cast<Real>(2))*slope[quantity + 1] - slope[quantity];
 
 		// Construct derivatives.
 		Real* FDer = NEW1<Real>(quantity);
@@ -54,8 +54,8 @@ namespace Mathematics
 
 			poly[0] = F0;
 			poly[1] = FDer0;
-			poly[2] = (((Real)3)*df - dx * (FDer1 + ((Real)2)*FDer0)) / dx2;
-			poly[3] = (dx*(FDer0 + FDer1) - ((Real)2)*df) / dx3;
+			poly[2] = ((static_cast<Real>(3))*df - dx * (FDer1 + (static_cast<Real>(2))*FDer0)) / dx2;
+			poly[3] = (dx*(FDer0 + FDer1) - (static_cast<Real>(2))*df) / dx3;
 		}
 
 		DELETE1(slope);

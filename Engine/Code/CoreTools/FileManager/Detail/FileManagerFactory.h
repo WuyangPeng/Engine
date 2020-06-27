@@ -12,6 +12,7 @@
 #include "System/Helper/UnicodeUsing.h" 
 
 #include <string>
+#include <memory>
 
 namespace CoreTools
 {

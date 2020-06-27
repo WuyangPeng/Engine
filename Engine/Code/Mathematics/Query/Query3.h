@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 09:37)
+// 引擎版本：0.0.2.5 (2020/03/23 09:49)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_H
 #define MATHEMATICS_QUERY_QUERY3_H
@@ -28,8 +28,8 @@ namespace Mathematics
 		// 基类处理浮点查询。
 		explicit Query3(const std::vector<Vector3D>& vertices);
 		virtual ~Query3();
- 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; 
+
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		virtual QueryType GetType() const override;
 
@@ -49,16 +49,16 @@ namespace Mathematics
 		// TetrahedronQueryType::Outside, 四面体外  
 		// TetrahedronQueryType::Inside, 四面体内
 		// TetrahedronQueryType::OnTetrahedron,在四面体上
-		virtual TetrahedronQueryType ToTetrahedron(int index, int v0,int v1, int v2, int v3) const;
-		virtual TetrahedronQueryType ToTetrahedron(const Vector3D& testVector, int v0,int v1, int v2, int v3) const;
+		virtual TetrahedronQueryType ToTetrahedron(int index, int v0, int v1, int v2, int v3) const;
+		virtual TetrahedronQueryType ToTetrahedron(const Vector3D& testVector, int v0, int v1, int v2, int v3) const;
 
 		// 返回:
 		// Returns:
 		// CircumsphereQueryType::Outside, 在四面体的外切球外 
 		// CircumsphereQueryType::Inside,在四面体的外切球内
 		// CircumsphereQueryType::OnCircumsphere, 在四面体的外切球上
-		virtual CircumsphereQueryType ToCircumsphere(int index, int v0,int v1, int v2, int v3) const;
-		virtual CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0,int v1, int v2, int v3) const;
+		virtual CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const;
+		virtual CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const;
 
 	private:
 		// 输入点

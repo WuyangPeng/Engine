@@ -13,6 +13,8 @@
 
 #include "TimeReportOutput.h"
 
+#include "CoreTools/LogManager/LogManagerFwd.h"
+
 namespace CoreTools
 {
 	class CORE_TOOLS_HIDDEN_DECLARE UnitTestSuiteReportOutputImpl : public TimeReportOutput
@@ -22,7 +24,7 @@ namespace CoreTools
 		using ParentType = TimeReportOutput;
 
 	public:
-		UnitTestSuiteReportOutputImpl(const std::string& timeDescribe, int borderLineLength, std::ostream* osPtr = &std::cout);
+		UnitTestSuiteReportOutputImpl(const std::string& timeDescribe, int borderLineLength, const OStreamShared& osPtr  );
 		virtual ~UnitTestSuiteReportOutputImpl();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
@@ -30,6 +32,11 @@ namespace CoreTools
 		void PrintTestName(const std::string& testName);
 		void PrintSuiteName(const std::string& suiteName);
 		void PrintTestResult(int passedNumber, int failedNumber, int errorNumber, int characterWidth);
+
+	private:
+		using LogConsoleTextColorsManagerPtr = std::shared_ptr<LogConsoleTextColorsManager>;
+
+		LogConsoleTextColorsManagerPtr GetLogConsoleTextColorsManager(int failedNumber, int errorNumber);
 	};
 }
 

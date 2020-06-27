@@ -48,31 +48,31 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
 	auto  matDiff = M*diff;
 	auto a2 = Vector3DTools::DotProduct(mRay.GetDirection(), matDir);
 	auto a1 = Vector3DTools::DotProduct(mRay.GetDirection(), matDiff);
-	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - (Real)1;
+	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - static_cast<Real>(1);
 
     // Intersection occurs if Q(t) has real roots with t >= 0.
 	auto discr = a1*a1 - a0*a2;
     Real t[2];
-    if (discr < Real{})
+    if (discr < Math<Real>::sm_Zero)
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         mQuantity = 0;
     }
-    else if (discr > Real{})
+    else if (discr > Math<Real>::sm_Zero)
     {
 		auto root = Math::Sqrt(discr);
-		auto inv = ((Real)1)/a2;
+		auto inv = (static_cast<Real>(1))/a2;
         t[0] = (-a1 - root)*inv;
         t[1] = (-a1 + root)*inv;
 
-        if (t[0] >= Real{})
+        if (t[0] >= Math<Real>::sm_Zero)
         {
 			this->SetIntersectionType(IntersectionType::Segment);
             mQuantity = 2;
 			mPoint[0] = mRay.GetOrigin() + t[0] * mRay.GetDirection();
 			mPoint[1] = mRay.GetOrigin() + t[1] * mRay.GetDirection();
         }
-        else if (t[1] >= Real{})
+        else if (t[1] >= Math<Real>::sm_Zero)
         {
 			this->SetIntersectionType(IntersectionType::Point);
             mQuantity = 1;
@@ -88,7 +88,7 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
     else
     {
         t[0] = -a1/a2;
-        if (t[0] >= Real{})
+        if (t[0] >= Math<Real>::sm_Zero)
         {
 			this->SetIntersectionType(IntersectionType::Point);
             mQuantity = 1;

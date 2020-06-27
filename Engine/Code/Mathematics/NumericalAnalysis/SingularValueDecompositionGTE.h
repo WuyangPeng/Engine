@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 10:50)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 12:54)
 
 // NOTE: This code was written for the upcoming Geometric Tools Engine but
 // has been back-ported to Wild Magic 5 to replace its badly implemented
@@ -109,8 +109,14 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class   SingularValueDecompositionGTE
+	class SingularValueDecompositionGTE
 	{
+	public:
+		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+		using ClassType = SingularValueDecompositionGTE<Real>;
+		using Math = Math<Real>;
+
 	public:
 		// The solver processes MxN symmetric matrices, where M >= N > 1
 		// ('numRows' is M and 'numCols' is N) and the matrix is stored in
@@ -121,6 +127,8 @@ namespace Mathematics
 		// nonzero entries of S are on the diagonal; the diagonal entries are
 		// the singular values of the original matrix.
 		SingularValueDecompositionGTE(int numRows, int numCols, unsigned int maxIterations);
+
+		CLASS_INVARIANT_DECLARE;
 
 		// A copy of the MxN input is made internally.  The order of the singular
 		// values is specified by sortType: -1 (decreasing), 0 (no sorting), or +1

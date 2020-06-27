@@ -66,7 +66,7 @@ namespace System
 void System
 	::GlBlendColorEXT(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha) noexcept
 {
-	SYSTEM_BODY_A4(gglBlendColorEXT, red, green, blue, alpha);
+	SYSTEM_BODY_4(gglBlendColorEXT, red, green, blue, alpha);
 }
 
 void System
@@ -110,7 +110,7 @@ namespace System
 void System
 	::GlPolygonOffsetEXT(GLfloat scale, GLfloat bias) noexcept
 {
-	SYSTEM_BODY_A2(gglPolygonOffsetEXT, scale, bias);
+	SYSTEM_BODY_2(gglPolygonOffsetEXT, scale, bias);
 }
 
 void System
@@ -177,14 +177,14 @@ namespace System
 void System
 	::GlTexImage3DEXT(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A10(gglTexImage3DEXT, target, level, internalFormat, width, height, depth, border, format, type, data);
+	SYSTEM_BODY_10(gglTexImage3DEXT, target, level, internalFormat, width, height, depth, border, format, type, data);
 }
 
 void System
 	::GlTexSubImage3DEXT(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width,
 						 GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A11(gglTexSubImage3DEXT, target, level, xOffset, yOffset, zOffset, width, height, depth, format, type, data);
+	SYSTEM_BODY_11(gglTexSubImage3DEXT, target, level, xOffset, yOffset, zOffset, width, height, depth, format, type, data);
 }
 
 void System
@@ -230,13 +230,13 @@ namespace System
 void System
 	::GlTexSubImage1DEXT(GLenum target, GLint level, GLint xOffset, GLsizei width, GLenum format, GLenum type, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A7(gglTexSubImage1DEXT, target, level, xOffset, width, format, type, data);
+	SYSTEM_BODY_7(gglTexSubImage1DEXT, target, level, xOffset, width, format, type, data);
 }
 
 void System
 	::GlTexSubImage2DEXT(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A9(gglTexSubImage2DEXT, target, level, xOffset, yOffset, width, height, format, type, data);
+	SYSTEM_BODY_9(gglTexSubImage2DEXT, target, level, xOffset, yOffset, width, height, format, type, data);
 }
 
 void System
@@ -289,31 +289,31 @@ namespace System
 void System
 	::GlCopyTexImage1DEXT(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLint border) noexcept
 {
-	SYSTEM_BODY_A7(gglCopyTexImage1DEXT, target, level, internalFormat, x, y, width, border);
+	SYSTEM_BODY_7(gglCopyTexImage1DEXT, target, level, internalFormat, x, y, width, border);
 }
 
 void System
 	::GlCopyTexImage2DEXT(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) noexcept
 {
-	SYSTEM_BODY_A8(gglCopyTexImage2DEXT, target, level, internalFormat, x, y, width, height, border);
+	SYSTEM_BODY_8(gglCopyTexImage2DEXT, target, level, internalFormat, x, y, width, height, border);
 }
 
 void System
 	::GlCopyTexSubImage1DEXT(GLenum target, GLint level, GLint xOffset, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_BODY_A6(gglCopyTexSubImage1DEXT, target, level, xOffset, x, y, width);
+	SYSTEM_BODY_6(gglCopyTexSubImage1DEXT, target, level, xOffset, x, y, width);
 }
 
 void System
 	::GlCopyTexSubImage2DEXT(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A8(gglCopyTexSubImage2DEXT, target, level, xOffset, yOffset, x, y, width, height);
+	SYSTEM_BODY_8(gglCopyTexSubImage2DEXT, target, level, xOffset, yOffset, x, y, width, height);
 }
 
 void System
 	::GlCopyTexSubImage3DEXT(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A9(gglCopyTexSubImage3DEXT, target, level, xOffset, yOffset, zOffset, x, y, width, height);
+	SYSTEM_BODY_9(gglCopyTexSubImage3DEXT, target, level, xOffset, yOffset, zOffset, x, y, width, height);
 }
 
 void System
@@ -367,61 +367,61 @@ namespace System
 void System
 	::GlGetHistogramEXT(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid* values) noexcept
 {
-	SYSTEM_BODY_A5(gglGetHistogramEXT, target, reset, format, type, values);
+	SYSTEM_BODY_5(gglGetHistogramEXT, target, reset, format, type, values);
 }
 
 void System
 	::GlGetHistogramParameterfvEXT(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetHistogramParameterfvEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetHistogramParameterfvEXT, target, name, param);
 }
 
 void System
 	::GlGetHistogramParameterivEXT(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetHistogramParameterivEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetHistogramParameterivEXT, target, name, param);
 }
 
 void System
 	::GlGetMinmaxEXT(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid* values) noexcept
 {
-	SYSTEM_BODY_A5(gglGetMinmaxEXT, target, reset, format, type, values);
+	SYSTEM_BODY_5(gglGetMinmaxEXT, target, reset, format, type, values);
 }
 
 void System
 	::GlGetMinmaxParameterfvEXT(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetMinmaxParameterfvEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetMinmaxParameterfvEXT, target, name, param);
 }
 
 void System
 	::GlGetMinmaxParameterivEXT(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetMinmaxParameterivEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetMinmaxParameterivEXT, target, name, param);
 }
 
 void System
 	::GlHistogramEXT(GLenum target, GLsizei width, GLenum internalFormat, GLboolean sink) noexcept
 {
-	SYSTEM_BODY_A4(gglHistogramEXT, target, width, internalFormat, sink);
+	SYSTEM_BODY_4(gglHistogramEXT, target, width, internalFormat, sink);
 }
 
 void System
 	::GlMinmaxEXT(GLenum target, GLenum internalFormat, GLboolean sink) noexcept
 {
-	SYSTEM_BODY_A3(gglMinmaxEXT, target, internalFormat, sink);
+	SYSTEM_BODY_3(gglMinmaxEXT, target, internalFormat, sink);
 }
 
 void System
 	::GlResetHistogramEXT(GLenum target) noexcept
 {
-	SYSTEM_BODY_A1(gglResetHistogramEXT, target);
+	SYSTEM_BODY_1(gglResetHistogramEXT, target);
 }
 
 void System
 	::GlResetMinmaxEXT(GLenum target) noexcept
 {
-	SYSTEM_BODY_A1(gglResetMinmaxEXT, target);
+	SYSTEM_BODY_1(gglResetMinmaxEXT, target);
 }
 
 void System
@@ -481,79 +481,79 @@ namespace System
 void System
 	::GlConvolutionFilter1DEXT(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid* image) noexcept
 {
-	SYSTEM_BODY_A6(gglConvolutionFilter1DEXT, target, internalFormat, width, format, type, image);
+	SYSTEM_BODY_6(gglConvolutionFilter1DEXT, target, internalFormat, width, format, type, image);
 }
 
 void System
 	::GlConvolutionFilter2DEXT(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* image) noexcept
 {
-	SYSTEM_BODY_A7(gglConvolutionFilter2DEXT, target, internalFormat, width, height, format, type, image);
+	SYSTEM_BODY_7(gglConvolutionFilter2DEXT, target, internalFormat, width, height, format, type, image);
 }
 
 void System
 	::GlConvolutionParameterfEXT(GLenum target, GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A3(gglConvolutionParameterfEXT, target, name, param);
+	SYSTEM_BODY_3(gglConvolutionParameterfEXT, target, name, param);
 }
 
 void System
 	::GlConvolutionParameterfvEXT(GLenum target, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A3(gglConvolutionParameterfvEXT, target, name, param);
+	SYSTEM_BODY_3(gglConvolutionParameterfvEXT, target, name, param);
 }
 
 void System
 	::GlConvolutionParameteriEXT(GLenum target, GLenum name, GLint param) noexcept
 {
-	SYSTEM_BODY_A3(gglConvolutionParameteriEXT, target, name, param);
+	SYSTEM_BODY_3(gglConvolutionParameteriEXT, target, name, param);
 }
 
 void System
 	::GlConvolutionParameterivEXT(GLenum target, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglConvolutionParameterivEXT, target, name, param);
+	SYSTEM_BODY_3(gglConvolutionParameterivEXT, target, name, param);
 }
 
 void System
 	::GlCopyConvolutionFilter1DEXT(GLenum target, GLenum internalFormat, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_BODY_A5(gglCopyConvolutionFilter1DEXT, target, internalFormat, x, y, width);
+	SYSTEM_BODY_5(gglCopyConvolutionFilter1DEXT, target, internalFormat, x, y, width);
 }
 
 void System
 	::GlCopyConvolutionFilter2DEXT(GLenum target, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A6(gglCopyConvolutionFilter2DEXT, target, internalFormat, x, y, width, height);
+	SYSTEM_BODY_6(gglCopyConvolutionFilter2DEXT, target, internalFormat, x, y, width, height);
 }
 
 void System
 	::GlGetConvolutionFilterEXT(GLenum target, GLenum format, GLenum type, GLvoid* image) noexcept
 {
-	SYSTEM_BODY_A4(gglGetConvolutionFilterEXT, target, format, type, image);
+	SYSTEM_BODY_4(gglGetConvolutionFilterEXT, target, format, type, image);
 }
 
 void System
 	::GlGetConvolutionParameterfvEXT(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetConvolutionParameterfvEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetConvolutionParameterfvEXT, target, name, param);
 }
 
 void System
 	::GlGetConvolutionParameterivEXT(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetConvolutionParameterivEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetConvolutionParameterivEXT, target, name, param);
 }
 
 void System
 	::GlGetSeparableFilterEXT(GLenum target, GLenum format, GLenum type, GLvoid* row, GLvoid* column, GLvoid* span) noexcept
 {
-	SYSTEM_BODY_A6(gglGetSeparableFilterEXT, target, format, type, row, column, span);
+	SYSTEM_BODY_6(gglGetSeparableFilterEXT, target, format, type, row, column, span);
 }
 
 void System
 	::GlSeparableFilter2DEXT(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* row, const GLvoid* column) noexcept
 {
-	SYSTEM_BODY_A8(gglSeparableFilter2DEXT, target, internalFormat, width, height, format, type, row, column);
+	SYSTEM_BODY_8(gglSeparableFilter2DEXT, target, internalFormat, width, height, format, type, row, column);
 }
 
 void System
@@ -645,37 +645,37 @@ namespace System
 GLboolean System
 	::GlAreTexturesResidentEXT(GLsizei numTextures, const GLuint* textures, GLboolean* residences) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gglAreTexturesResidentEXT, numTextures, textures, residences, GLboolean, GL_FALSE);
+	SYSTEM_BODY_3_RESULT(gglAreTexturesResidentEXT, numTextures, textures, residences, GLboolean, GL_FALSE);
 }
 
 void System
 	::GlBindTextureEXT(GLenum target, GLuint texture) noexcept
 {
-	SYSTEM_BODY_A2(gglBindTextureEXT, target, texture);
+	SYSTEM_BODY_2(gglBindTextureEXT, target, texture);
 }
 
 void System
 	::GlDeleteTexturesEXT(GLsizei numTextures, const GLuint* textures) noexcept
 {
-	SYSTEM_BODY_A2(gglDeleteTexturesEXT, numTextures, textures);
+	SYSTEM_BODY_2(gglDeleteTexturesEXT, numTextures, textures);
 }
 
 void System
 	::GlGenTexturesEXT(GLsizei numTextures, GLuint* texture) noexcept
 {
-	SYSTEM_BODY_A2(gglGenTexturesEXT, numTextures, texture);
+	SYSTEM_BODY_2(gglGenTexturesEXT, numTextures, texture);
 }
 
 GLboolean System
 	::GlIsTextureEXT(GLuint texture) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglIsTextureEXT, texture, GLboolean, 0);
+	SYSTEM_BODY_1_RESULT(gglIsTextureEXT, texture, GLboolean, 0);
 }
 
 void System
 	::GlPrioritizeTexturesEXT(GLsizei numTextures, const GLuint* textures, const GLclampf* priorities) noexcept
 {
-	SYSTEM_BODY_A3(gglPrioritizeTexturesEXT, numTextures, textures, priorities);
+	SYSTEM_BODY_3(gglPrioritizeTexturesEXT, numTextures, textures, priorities);
 }
 
 void System
@@ -793,55 +793,58 @@ namespace System
 void System
 	::GlArrayElementEXT(GLint i) noexcept
 {
-	SYSTEM_BODY_A1(gglArrayElementEXT, i);
+	SYSTEM_BODY_1(gglArrayElementEXT, i);
 }
 
 void System
 	::GlColorPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A5(gglColorPointerEXT, size, type, stride, count, pointer);
+	SYSTEM_BODY_5(gglColorPointerEXT, size, type, stride, count, pointer);
 }
 
 void System
 	::GlDrawArraysEXT(GLenum mode, GLint first, GLsizei count) noexcept
 {
-	SYSTEM_BODY_A3(gglDrawArraysEXT, mode, first, count);
+	SYSTEM_BODY_3(gglDrawArraysEXT, mode, first, count);
 }
 
 void System
 	::GlEdgeFlagPointerEXT(GLsizei stride, GLsizei count, const GLboolean* pointer) noexcept
 {
-	SYSTEM_BODY_A3(gglEdgeFlagPointerEXT, stride, count, pointer);
+	SYSTEM_BODY_3(gglEdgeFlagPointerEXT, stride, count, pointer);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::GlGetPointervEXT(GLenum name, GLvoid** param) noexcept
 {
-	SYSTEM_BODY_A2(gglGetPointervEXT, name, param);
+	SYSTEM_BODY_2(gglGetPointervEXT, name, param);
 }
+#include STSTEM_WARNING_POP
 
 void System
 	::GlIndexPointerEXT(GLenum type, GLsizei stride, GLsizei count, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A4(gglIndexPointerEXT, type, stride, count, pointer);
+	SYSTEM_BODY_4(gglIndexPointerEXT, type, stride, count, pointer);
 }
 
 void System
 	::GlNormalPointerEXT(GLenum type, GLsizei stride, GLsizei count, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A4(gglNormalPointerEXT, type, stride, count, pointer);
+	SYSTEM_BODY_4(gglNormalPointerEXT, type, stride, count, pointer);
 }
 
 void System
 	::GlTexCoordPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A5(gglTexCoordPointerEXT, size, type, stride, count, pointer);
+	SYSTEM_BODY_5(gglTexCoordPointerEXT, size, type, stride, count, pointer);
 }
 
 void System
 	::GlVertexPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexPointerEXT, size, type, stride, count, pointer);
+	SYSTEM_BODY_5(gglVertexPointerEXT, size, type, stride, count, pointer);
 }
 
 void System
@@ -942,7 +945,7 @@ namespace System
 void System
 	::GlBlendEquationEXT(GLenum mode) noexcept
 {
-	SYSTEM_BODY_A1(gglBlendEquationEXT, mode);
+	SYSTEM_BODY_1(gglBlendEquationEXT, mode);
 }
 
 void System
@@ -1034,13 +1037,13 @@ namespace System
 void System
 	::GlPointParameterfEXT(GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A2(gglPointParameterfEXT, name, param);
+	SYSTEM_BODY_2(gglPointParameterfEXT, name, param);
 }
 
 void System
 	::GlPointParameterfvEXT(GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A2(gglPointParameterfvEXT, name, param);
+	SYSTEM_BODY_2(gglPointParameterfvEXT, name, param);
 }
 
 void System
@@ -1081,13 +1084,13 @@ namespace System
 void System
 	::GlColorSubTableEXT(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A6(gglColorSubTableEXT, target, start, count, format, type, data);
+	SYSTEM_BODY_6(gglColorSubTableEXT, target, start, count, format, type, data);
 }
 
 void System
 	::GlCopyColorSubTableEXT(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_BODY_A5(gglCopyColorSubTableEXT, target, start, x, y, width);
+	SYSTEM_BODY_5(gglCopyColorSubTableEXT, target, start, x, y, width);
 }
 
 void System
@@ -1130,25 +1133,25 @@ namespace System
 void System
 	::GlColorTableEXT(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid* table) noexcept
 {
-	SYSTEM_BODY_A6(gglColorTableEXT, target, internalFormat, width, format, type, table);
+	SYSTEM_BODY_6(gglColorTableEXT, target, internalFormat, width, format, type, table);
 }
 
 void System
 	::GlGetColorTableEXT(GLenum target, GLenum format, GLenum type, GLvoid* table) noexcept
 {
-	SYSTEM_BODY_A4(gglGetColorTableEXT, target, format, type, table);
+	SYSTEM_BODY_4(gglGetColorTableEXT, target, format, type, table);
 }
 
 void System
 	::GlGetColorTableParameterfvEXT(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetColorTableParameterfvEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetColorTableParameterfvEXT, target, name, param);
 }
 
 void System
 	::GlGetColorTableParameterivEXT(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetColorTableParameterivEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetColorTableParameterivEXT, target, name, param);
 }
 
 void System
@@ -1247,7 +1250,7 @@ namespace System
 void System
 	::GlIndexMaterialEXT(GLenum face, GLenum mode) noexcept
 {
-	SYSTEM_BODY_A2(gglIndexMaterialEXT, face, mode);
+	SYSTEM_BODY_2(gglIndexMaterialEXT, face, mode);
 }
 
 void System
@@ -1291,7 +1294,7 @@ namespace System
 void System
 	::GlIndexFuncEXT(GLenum eFunction, GLclampf fReference) noexcept
 {
-	SYSTEM_BODY_A2(gglIndexFuncEXT, eFunction, fReference);
+	SYSTEM_BODY_2(gglIndexFuncEXT, eFunction, fReference);
 }
 
 void System
@@ -1363,13 +1366,13 @@ namespace System
 void System
 	::GlLockArraysEXT(GLint first, GLsizei count) noexcept
 {
-	SYSTEM_BODY_A2(gglLockArraysEXT, first, count);
+	SYSTEM_BODY_2(gglLockArraysEXT, first, count);
 }
 
 void System
 	::GlUnlockArraysEXT() noexcept
 {
-	SYSTEM_BODY_A0(gglUnlockArraysEXT);
+	SYSTEM_BODY_0(gglUnlockArraysEXT);
 }
 
 void System
@@ -1416,13 +1419,13 @@ namespace System
 void System
 	::GlCullParameterdvEXT(GLenum name, GLdouble* param) noexcept
 {
-	SYSTEM_BODY_A2(gglCullParameterdvEXT, name, param);
+	SYSTEM_BODY_2(gglCullParameterdvEXT, name, param);
 }
 
 void System
 	::GlCullParameterfvEXT(GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A2(gglCullParameterfvEXT, name, param);
+	SYSTEM_BODY_2(gglCullParameterfvEXT, name, param);
 }
 
 void System
@@ -1501,109 +1504,109 @@ namespace System
 void System
 	::GlFragmentColorMaterialEXT(GLenum face, GLenum mode) noexcept
 {
-	SYSTEM_BODY_A2(gglFragmentColorMaterialEXT, face, mode);
+	SYSTEM_BODY_2(gglFragmentColorMaterialEXT, face, mode);
 }
 
 void System
 	::GlFragmentLightModelfEXT(GLenum parameterName, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A2(gglFragmentLightModelfEXT, parameterName, param);
+	SYSTEM_BODY_2(gglFragmentLightModelfEXT, parameterName, param);
 }
 
 void System
 	::GlFragmentLightModelfvEXT(GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A2(gglFragmentLightModelfvEXT, parameterName, params);
+	SYSTEM_BODY_2(gglFragmentLightModelfvEXT, parameterName, params);
 }
 
 void System
 	::GlFragmentLightModeliEXT(GLenum parameterName, GLint param) noexcept
 {
-	SYSTEM_BODY_A2(gglFragmentLightModeliEXT, parameterName, param);
+	SYSTEM_BODY_2(gglFragmentLightModeliEXT, parameterName, param);
 }
 
 void System
 	::GlFragmentLightModelivEXT(GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A2(gglFragmentLightModelivEXT, parameterName, params);
+	SYSTEM_BODY_2(gglFragmentLightModelivEXT, parameterName, params);
 }
 
 void System
 	::GlFragmentLightfEXT(GLenum light, GLenum parameterName, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A3(gglFragmentLightfEXT, light, parameterName, param);
+	SYSTEM_BODY_3(gglFragmentLightfEXT, light, parameterName, param);
 }
 
 void System
 	::GlFragmentLightfvEXT(GLenum light, GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A3(gglFragmentLightfvEXT, light, parameterName, params);
+	SYSTEM_BODY_3(gglFragmentLightfvEXT, light, parameterName, params);
 }
 
 void System
 	::GlFragmentLightiEXT(GLenum light, GLenum parameterName, GLint param) noexcept
 {
-	SYSTEM_BODY_A3(gglFragmentLightiEXT, light, parameterName, param);
+	SYSTEM_BODY_3(gglFragmentLightiEXT, light, parameterName, param);
 }
 
 void System
 	::GlFragmentLightivEXT(GLenum light, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglFragmentLightivEXT, light, parameterName, params);
+	SYSTEM_BODY_3(gglFragmentLightivEXT, light, parameterName, params);
 }
 
 void System
 	::GlFragmentMaterialfEXT(GLenum face, GLenum parameterName, const GLfloat param) noexcept
 {
-	SYSTEM_BODY_A3(gglFragmentMaterialfEXT, face, parameterName, param);
+	SYSTEM_BODY_3(gglFragmentMaterialfEXT, face, parameterName, param);
 }
 
 void System
 	::GlFragmentMaterialfvEXT(GLenum face, GLenum parameterName, const GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A3(gglFragmentMaterialfvEXT, face, parameterName, params);
+	SYSTEM_BODY_3(gglFragmentMaterialfvEXT, face, parameterName, params);
 }
 
 void System
 	::GlFragmentMaterialiEXT(GLenum face, GLenum parameterName, const GLint param) noexcept
 {
-	SYSTEM_BODY_A3(gglFragmentMaterialiEXT, face, parameterName, param);
+	SYSTEM_BODY_3(gglFragmentMaterialiEXT, face, parameterName, param);
 }
 
 void System
 	::GlFragmentMaterialivEXT(GLenum face, GLenum parameterName, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglFragmentMaterialivEXT, face, parameterName, params);
+	SYSTEM_BODY_3(gglFragmentMaterialivEXT, face, parameterName, params);
 }
 
 void System
 	::GlGetFragmentLightfvEXT(GLenum light, GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetFragmentLightfvEXT, light, parameterName, params);
+	SYSTEM_BODY_3(gglGetFragmentLightfvEXT, light, parameterName, params);
 }
 
 void System
 	::GlGetFragmentLightivEXT(GLenum light, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetFragmentLightivEXT, light, parameterName, params);
+	SYSTEM_BODY_3(gglGetFragmentLightivEXT, light, parameterName, params);
 }
 
 void System
 	::GlGetFragmentMaterialfvEXT(GLenum face, GLenum parameterName, const GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetFragmentMaterialfvEXT, face, parameterName, params);
+	SYSTEM_BODY_3(gglGetFragmentMaterialfvEXT, face, parameterName, params);
 }
 
 void System
 	::GlGetFragmentMaterialivEXT(GLenum face, GLenum parameterName, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetFragmentMaterialivEXT, face, parameterName, params);
+	SYSTEM_BODY_3(gglGetFragmentMaterialivEXT, face, parameterName, params);
 }
 
 void System
 	::GlLightEnviEXT(GLenum parameterName, GLint param) noexcept
 {
-	SYSTEM_BODY_A2(gglLightEnviEXT, parameterName, param);
+	SYSTEM_BODY_2(gglLightEnviEXT, parameterName, param);
 }
 
 void System
@@ -1659,7 +1662,7 @@ namespace System
 void System
 	::GlDrawRangeElementsEXT(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid* indices) noexcept
 {
-	SYSTEM_BODY_A6(gglDrawRangeElementsEXT, mode, start, end, count, type, indices);
+	SYSTEM_BODY_6(gglDrawRangeElementsEXT, mode, start, end, count, type, indices);
 }
 
 void System
@@ -1707,19 +1710,19 @@ namespace System
 void System
 	::GlApplyTextureEXT(GLenum mode) noexcept
 {
-	SYSTEM_BODY_A1(gglApplyTextureEXT, mode);
+	SYSTEM_BODY_1(gglApplyTextureEXT, mode);
 }
 
 void System
 	::GlTextureLightEXT(GLenum name) noexcept
 {
-	SYSTEM_BODY_A1(gglTextureLightEXT, name);
+	SYSTEM_BODY_1(gglTextureLightEXT, name);
 }
 
 void System
 	::GlTextureMaterialEXT(GLenum face, GLenum mode) noexcept
 {
-	SYSTEM_BODY_A2(gglTextureMaterialEXT, face, mode);
+	SYSTEM_BODY_2(gglTextureMaterialEXT, face, mode);
 }
 
 void System
@@ -1767,13 +1770,13 @@ namespace System
 void System
 	::GlBeginSceneEXT(void) noexcept
 {
-	SYSTEM_BODY_A0(gglBeginSceneEXT);
+	SYSTEM_BODY_0(gglBeginSceneEXT);
 }
 
 void System
 	::GlEndSceneEXT(void) noexcept
 {
-	SYSTEM_BODY_A0(gglEndSceneEXT);
+	SYSTEM_BODY_0(gglEndSceneEXT);
 }
 
 void System
@@ -1850,25 +1853,25 @@ namespace System
 void System
 	::GlPixelTransformParameteriEXT(GLenum target, GLenum name, GLint param) noexcept
 {
-	SYSTEM_BODY_A3(gglPixelTransformParameteriEXT, target, name, param);
+	SYSTEM_BODY_3(gglPixelTransformParameteriEXT, target, name, param);
 }
 
 void System
 	::GlPixelTransformParameterfEXT(GLenum target, GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A3(gglPixelTransformParameterfEXT, target, name, param);
+	SYSTEM_BODY_3(gglPixelTransformParameterfEXT, target, name, param);
 }
 
 void System
 	::GlPixelTransformParameterivEXT(GLenum target, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglPixelTransformParameterivEXT, target, name, param);
+	SYSTEM_BODY_3(gglPixelTransformParameterivEXT, target, name, param);
 }
 
 void System
 	::GlPixelTransformParameterfvEXT(GLenum target, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A3(gglPixelTransformParameterfvEXT, target, name, param);
+	SYSTEM_BODY_3(gglPixelTransformParameterfvEXT, target, name, param);
 }
 
 void System
@@ -2004,103 +2007,103 @@ namespace System
 void System
 	::GlSecondaryColor3bEXT(GLbyte red, GLbyte green, GLbyte blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3bEXT, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3bEXT, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3bvEXT(const GLbyte* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3bvEXT, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3bvEXT, rgb);
 }
 
 void System
 	::GlSecondaryColor3dEXT(GLdouble red, GLdouble green, GLdouble blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3dEXT, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3dEXT, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3dvEXT(const GLdouble* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3dvEXT, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3dvEXT, rgb);
 }
 
 void System
 	::GlSecondaryColor3fEXT(GLfloat red, GLfloat green, GLfloat blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3fEXT, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3fEXT, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3fvEXT(const GLfloat* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3fvEXT, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3fvEXT, rgb);
 }
 
 void System
 	::GlSecondaryColor3iEXT(GLint red, GLint green, GLint blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3iEXT, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3iEXT, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3ivEXT(const GLint* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3ivEXT, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3ivEXT, rgb);
 }
 
 void System
 	::GlSecondaryColor3sEXT(GLshort red, GLshort green, GLshort blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3sEXT, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3sEXT, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3svEXT(const GLshort* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3svEXT, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3svEXT, rgb);
 }
 
 void System
 	::GlSecondaryColor3ubEXT(GLubyte red, GLubyte green, GLubyte blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3ubEXT, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3ubEXT, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3ubvEXT(const GLubyte* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3ubvEXT, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3ubvEXT, rgb);
 }
 
 void System
 	::GlSecondaryColor3uiEXT(GLuint red, GLuint green, GLuint blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3uiEXT, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3uiEXT, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3uivEXT(const GLuint* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3uivEXT, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3uivEXT, rgb);
 }
 
 void System
 	::GlSecondaryColor3usEXT(GLushort red, GLushort green, GLushort blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3usEXT, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3usEXT, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3usvEXT(const GLushort* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3usvEXT, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3usvEXT, rgb);
 }
 
 void System
 	::GlSecondaryColorPointerEXT(GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A4(gglSecondaryColorPointerEXT, size, type, stride, pointer);
+	SYSTEM_BODY_4(gglSecondaryColorPointerEXT, size, type, stride, pointer);
 }
 
 void System
@@ -2186,7 +2189,7 @@ namespace System
 void System
 	::GlTextureNormalEXT(GLenum mode) noexcept
 {
-	SYSTEM_BODY_A1(gglTextureNormalEXT, mode);
+	SYSTEM_BODY_1(gglTextureNormalEXT, mode);
 }
 
 void System
@@ -2226,14 +2229,17 @@ namespace System
 void System
 	::GlMultiDrawArraysEXT(GLenum mode, GLint* first, GLsizei* count, GLsizei primitiveCount) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiDrawArraysEXT, mode, first, count, primitiveCount);
+	SYSTEM_BODY_4(gglMultiDrawArraysEXT, mode, first, count, primitiveCount);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::GlMultiDrawElementsEXT(GLenum mode, const GLsizei* count, GLenum type, const GLvoid** indices, GLsizei primitiveCount) noexcept
 {
-	SYSTEM_BODY_A5(gglMultiDrawElementsEXT, mode, count, type, indices, primitiveCount);
+	SYSTEM_BODY_5(gglMultiDrawElementsEXT, mode, count, type, indices, primitiveCount);
 }
+#include STSTEM_WARNING_POP
 
 void System
 	::InitGlExtMultidrawArrays() noexcept
@@ -2276,31 +2282,31 @@ namespace System
 void System
 	::GlFogCoorddEXT(GLdouble coord) noexcept
 {
-	SYSTEM_BODY_A1(gglFogCoorddEXT, coord);
+	SYSTEM_BODY_1(gglFogCoorddEXT, coord);
 }
 
 void System
 	::GlFogCoorddvEXT(const GLdouble* coord) noexcept
 {
-	SYSTEM_BODY_A1(gglFogCoorddvEXT, coord);
+	SYSTEM_BODY_1(gglFogCoorddvEXT, coord);
 }
 
 void System
 	::GlFogCoordfEXT(GLfloat coord) noexcept
 {
-	SYSTEM_BODY_A1(gglFogCoordfEXT, coord);
+	SYSTEM_BODY_1(gglFogCoordfEXT, coord);
 }
 
 void System
 	::GlFogCoordfvEXT(const GLfloat* coord) noexcept
 {
-	SYSTEM_BODY_A1(gglFogCoordfvEXT, coord);
+	SYSTEM_BODY_1(gglFogCoordfvEXT, coord);
 }
 
 void System
 	::GlFogCoordPointerEXT(GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A3(gglFogCoordPointerEXT, type, stride, pointer);
+	SYSTEM_BODY_3(gglFogCoordPointerEXT, type, stride, pointer);
 }
 
 void System
@@ -2390,133 +2396,133 @@ namespace System
 void System
 	::GlTangent3bEXT(GLbyte x, GLbyte y, GLbyte z) noexcept
 {
-	SYSTEM_BODY_A3(gglTangent3bEXT, x, y, z);
+	SYSTEM_BODY_3(gglTangent3bEXT, x, y, z);
 }
 
 void System
 	::GlTangent3bvEXT(const GLbyte* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglTangent3bvEXT, xyz);
+	SYSTEM_BODY_1(gglTangent3bvEXT, xyz);
 }
 
 void System
 	::GlTangent3dEXT(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_BODY_A3(gglTangent3dEXT, x, y, z);
+	SYSTEM_BODY_3(gglTangent3dEXT, x, y, z);
 }
 
 void System
 	::GlTangent3dvEXT(const GLdouble* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglTangent3dvEXT, xyz);
+	SYSTEM_BODY_1(gglTangent3dvEXT, xyz);
 }
 
 void System
 	::GlTangent3fEXT(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_BODY_A3(gglTangent3fEXT, x, y, z);
+	SYSTEM_BODY_3(gglTangent3fEXT, x, y, z);
 }
 
 void System
 	::GlTangent3fvEXT(const GLfloat* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglTangent3fvEXT, xyz);
+	SYSTEM_BODY_1(gglTangent3fvEXT, xyz);
 }
 
 void System
 	::GlTangent3iEXT(GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_BODY_A3(gglTangent3iEXT, x, y, z);
+	SYSTEM_BODY_3(gglTangent3iEXT, x, y, z);
 }
 
 void System
 	::GlTangent3ivEXT(const GLint* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglTangent3ivEXT, xyz);
+	SYSTEM_BODY_1(gglTangent3ivEXT, xyz);
 }
 
 void System
 	::GlTangent3sEXT(GLshort x, GLshort y, GLshort z) noexcept
 {
-	SYSTEM_BODY_A3(gglTangent3sEXT, x, y, z);
+	SYSTEM_BODY_3(gglTangent3sEXT, x, y, z);
 }
 
 void System
 	::GlTangent3svEXT(const GLshort* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglTangent3svEXT, xyz);
+	SYSTEM_BODY_1(gglTangent3svEXT, xyz);
 }
 
 void System
 	::GlBinormal3bEXT(GLbyte x, GLbyte y, GLbyte z) noexcept
 {
-	SYSTEM_BODY_A3(gglBinormal3bEXT, x, y, z);
+	SYSTEM_BODY_3(gglBinormal3bEXT, x, y, z);
 }
 
 void System
 	::GlBinormal3bvEXT(const GLbyte* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglBinormal3bvEXT, xyz);
+	SYSTEM_BODY_1(gglBinormal3bvEXT, xyz);
 }
 
 void System
 	::GlBinormal3dEXT(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_BODY_A3(gglBinormal3dEXT, x, y, z);
+	SYSTEM_BODY_3(gglBinormal3dEXT, x, y, z);
 }
 
 void System
 	::GlBinormal3dvEXT(const GLdouble* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglBinormal3dvEXT, xyz);
+	SYSTEM_BODY_1(gglBinormal3dvEXT, xyz);
 }
 
 void System
 	::GlBinormal3fEXT(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_BODY_A3(gglBinormal3fEXT, x, y, z);
+	SYSTEM_BODY_3(gglBinormal3fEXT, x, y, z);
 }
 
 void System
 	::GlBinormal3fvEXT(const GLfloat* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglBinormal3fvEXT, xyz);
+	SYSTEM_BODY_1(gglBinormal3fvEXT, xyz);
 }
 
 void System
 	::GlBinormal3iEXT(GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_BODY_A3(gglBinormal3iEXT, x, y, z);
+	SYSTEM_BODY_3(gglBinormal3iEXT, x, y, z);
 }
 
 void System
 	::GlBinormal3ivEXT(const GLint* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglBinormal3ivEXT, xyz);
+	SYSTEM_BODY_1(gglBinormal3ivEXT, xyz);
 }
 
 void System
 	::GlBinormal3sEXT(GLshort x, GLshort y, GLshort z) noexcept
 {
-	SYSTEM_BODY_A3(gglBinormal3sEXT, x, y, z);
+	SYSTEM_BODY_3(gglBinormal3sEXT, x, y, z);
 }
 
 void System
 	::GlBinormal3svEXT(const GLshort* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglBinormal3svEXT, xyz);
+	SYSTEM_BODY_1(gglBinormal3svEXT, xyz);
 }
 
 void System
 	::GlTangentPointerEXT(GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A3(gglTangentPointerEXT, type, stride, pointer);
+	SYSTEM_BODY_3(gglTangentPointerEXT, type, stride, pointer);
 }
 
 void System
 	::GlBinormalPointerEXT(GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A3(gglBinormalPointerEXT, type, stride, pointer);
+	SYSTEM_BODY_3(gglBinormalPointerEXT, type, stride, pointer);
 }
 
 void System
@@ -2602,7 +2608,7 @@ namespace System
 void System
 	::GlBlendFuncSeparateEXT(GLenum srcFactorRGB, GLenum dstFactorRGB, GLenum srcFactorA, GLenum dstFactorA) noexcept
 {
-	SYSTEM_BODY_A4(gglBlendFuncSeparateEXT, srcFactorRGB, dstFactorRGB, srcFactorA, dstFactorA);
+	SYSTEM_BODY_4(gglBlendFuncSeparateEXT, srcFactorRGB, dstFactorRGB, srcFactorA, dstFactorA);
 }
 
 void System
@@ -2806,19 +2812,19 @@ namespace System
 void System
 	::GlVertexWeightfEXT(GLfloat weight) noexcept
 {
-	SYSTEM_BODY_A1(gglVertexWeightfEXT, weight);
+	SYSTEM_BODY_1(gglVertexWeightfEXT, weight);
 }
 
 void System
 	::GlVertexWeightfvEXT(const GLfloat* weight) noexcept
 {
-	SYSTEM_BODY_A1(gglVertexWeightfvEXT, weight);
+	SYSTEM_BODY_1(gglVertexWeightfvEXT, weight);
 }
 
 void System
 	::GlVertexWeightPointerEXT(GLsizei size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A4(gglVertexWeightPointerEXT, size, type, stride, pointer);
+	SYSTEM_BODY_4(gglVertexWeightPointerEXT, size, type, stride, pointer);
 }
 
 void System
@@ -2892,13 +2898,13 @@ namespace System
 void System
 	::GlSampleMaskEXT(GLclampf value, GLboolean invert) noexcept
 {
-	SYSTEM_BODY_A2(gglSampleMaskEXT, value, invert);
+	SYSTEM_BODY_2(gglSampleMaskEXT, value, invert);
 }
 
 void System
 	::GlSamplePatternEXT(GLenum pattern) noexcept
 {
-	SYSTEM_BODY_A1(gglSamplePatternEXT, pattern);
+	SYSTEM_BODY_1(gglSamplePatternEXT, pattern);
 }
 
 void System
@@ -3077,253 +3083,256 @@ namespace System
 void System
 	::GlBeginVertexShaderEXT(void) noexcept
 {
-	SYSTEM_BODY_A0(gglBeginVertexShaderEXT);
+	SYSTEM_BODY_0(gglBeginVertexShaderEXT);
 }
 
 GLuint System
 	::GlBindLightParameterEXT(GLenum light, GLenum value) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglBindLightParameterEXT, light, value, GLuint, 0);
+	SYSTEM_BODY_2_RESULT(gglBindLightParameterEXT, light, value, GLuint, 0);
 }
 
 GLuint System
 	::GlBindMaterialParameterEXT(GLenum face, GLenum value) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglBindMaterialParameterEXT, face, value, GLuint, 0);
+	SYSTEM_BODY_2_RESULT(gglBindMaterialParameterEXT, face, value, GLuint, 0);
 }
 
 GLuint System
 	::GlBindParameterEXT(GLenum value) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglBindParameterEXT, value, GLuint, 0);
+	SYSTEM_BODY_1_RESULT(gglBindParameterEXT, value, GLuint, 0);
 }
 
 GLuint System
 	::GlBindTexGenParameterEXT(GLenum unit, GLenum coord, GLenum value) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gglBindTexGenParameterEXT, unit, coord, value, GLuint, 0);
+	SYSTEM_BODY_3_RESULT(gglBindTexGenParameterEXT, unit, coord, value, GLuint, 0);
 }
 
 GLuint System
 	::GlBindTextureUnitParameterEXT(GLenum unit, GLenum value) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglBindTextureUnitParameterEXT, unit, value, GLuint, 0);
+	SYSTEM_BODY_2_RESULT(gglBindTextureUnitParameterEXT, unit, value, GLuint, 0);
 }
 
 void System
 	::GlBindVertexShaderEXT(GLuint id) noexcept
 {
-	SYSTEM_BODY_A1(gglBindVertexShaderEXT, id);
+	SYSTEM_BODY_1(gglBindVertexShaderEXT, id);
 }
 
 void System
 	::GlDeleteVertexShaderEXT(GLuint id) noexcept
 {
-	SYSTEM_BODY_A1(gglDeleteVertexShaderEXT, id);
+	SYSTEM_BODY_1(gglDeleteVertexShaderEXT, id);
 }
 
 void System
 	::GlDisableVariantClientStateEXT(GLuint id) noexcept
 {
-	SYSTEM_BODY_A1(gglDisableVariantClientStateEXT, id);
+	SYSTEM_BODY_1(gglDisableVariantClientStateEXT, id);
 }
 
 void System
 	::GlEnableVariantClientStateEXT(GLuint id) noexcept
 {
-	SYSTEM_BODY_A1(gglEnableVariantClientStateEXT, id);
+	SYSTEM_BODY_1(gglEnableVariantClientStateEXT, id);
 }
 
 void System
 	::GlEndVertexShaderEXT(void) noexcept
 {
-	SYSTEM_BODY_A0(gglEndVertexShaderEXT);
+	SYSTEM_BODY_0(gglEndVertexShaderEXT);
 }
 
 void System
 	::GlExtractComponentEXT(GLuint res, GLuint src, GLuint num) noexcept
 {
-	SYSTEM_BODY_A3(gglExtractComponentEXT, res, src, num);
+	SYSTEM_BODY_3(gglExtractComponentEXT, res, src, num);
 }
 
 GLuint System
 	::GlGenSymbolsEXT(GLenum dataType, GLenum storageType, GLenum range, GLuint components) noexcept
 {
-	SYSTEM_BODY_A4_RESULT(gglGenSymbolsEXT, dataType, storageType, range, components, GLuint, 0);
+	SYSTEM_BODY_4_RESULT(gglGenSymbolsEXT, dataType, storageType, range, components, GLuint, 0);
 }
 
 GLuint System
 	::GlGenVertexShadersEXT(GLuint range) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglGenVertexShadersEXT, range, GLuint, 0);
+	SYSTEM_BODY_1_RESULT(gglGenVertexShadersEXT, range, GLuint, 0);
 }
 
 void System
 	::GlGetInvariantBooleanvEXT(GLuint id, GLenum value, GLboolean* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetInvariantBooleanvEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetInvariantBooleanvEXT, id, value, data);
 }
 
 void System
 	::GlGetInvariantFloatvEXT(GLuint id, GLenum value, GLfloat* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetInvariantFloatvEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetInvariantFloatvEXT, id, value, data);
 }
 
 void System
 	::GlGetInvariantIntegervEXT(GLuint id, GLenum value, GLint* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetInvariantIntegervEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetInvariantIntegervEXT, id, value, data);
 }
 
 void System
 	::GlGetLocalConstantBooleanvEXT(GLuint id, GLenum value, GLboolean* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetLocalConstantBooleanvEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetLocalConstantBooleanvEXT, id, value, data);
 }
 
 void System
 	::GlGetLocalConstantFloatvEXT(GLuint id, GLenum value, GLfloat* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetLocalConstantFloatvEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetLocalConstantFloatvEXT, id, value, data);
 }
 
 void System
 	::GlGetLocalConstantIntegervEXT(GLuint id, GLenum value, GLint* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetLocalConstantIntegervEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetLocalConstantIntegervEXT, id, value, data);
 }
 
 void System
 	::GlGetVariantBooleanvEXT(GLuint id, GLenum value, GLboolean* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVariantBooleanvEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetVariantBooleanvEXT, id, value, data);
 }
 
 void System
 	::GlGetVariantFloatvEXT(GLuint id, GLenum value, GLfloat* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVariantFloatvEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetVariantFloatvEXT, id, value, data);
 }
 
 void System
 	::GlGetVariantIntegervEXT(GLuint id, GLenum value, GLint* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVariantIntegervEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetVariantIntegervEXT, id, value, data);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::GlGetVariantPointervEXT(GLuint id, GLenum value, void** data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVariantPointervEXT, id, value, data);
+	SYSTEM_BODY_3(gglGetVariantPointervEXT, id, value, data);
 }
+#include STSTEM_WARNING_POP
 
 void System
 	::GlInsertComponentEXT(GLuint res, GLuint src, GLuint num) noexcept
 {
-	SYSTEM_BODY_A3(gglInsertComponentEXT, res, src, num);
+	SYSTEM_BODY_3(gglInsertComponentEXT, res, src, num);
 }
 
 GLboolean System
 	::GlIsVariantEnabledEXT(GLuint id, GLenum cap) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglIsVariantEnabledEXT, id, cap, GLboolean, GL_FALSE);
+	SYSTEM_BODY_2_RESULT(gglIsVariantEnabledEXT, id, cap, GLboolean, GL_FALSE);
 }
 
 void System
 	::GlSetInvariantEXT(GLuint id, GLenum type, void* addr) noexcept
 {
-	SYSTEM_BODY_A3(gglSetInvariantEXT, id, type, addr);
+	SYSTEM_BODY_3(gglSetInvariantEXT, id, type, addr);
 }
 
 void System
 	::GlSetLocalConstantEXT(GLuint id, GLenum type, void* addr) noexcept
 {
-	SYSTEM_BODY_A3(gglSetLocalConstantEXT, id, type, addr);
+	SYSTEM_BODY_3(gglSetLocalConstantEXT, id, type, addr);
 }
 
 void System
 	::GlShaderOp1EXT(GLenum op, GLuint res, GLuint arg1) noexcept
 {
-	SYSTEM_BODY_A3(gglShaderOp1EXT, op, res, arg1);
+	SYSTEM_BODY_3(gglShaderOp1EXT, op, res, arg1);
 }
 
 void System
 	::GlShaderOp2EXT(GLenum op, GLuint res, GLuint arg1, GLuint arg2) noexcept
 {
-	SYSTEM_BODY_A4(gglShaderOp2EXT, op, res, arg1, arg2);
+	SYSTEM_BODY_4(gglShaderOp2EXT, op, res, arg1, arg2);
 }
 
 void System
 	::GlShaderOp3EXT(GLenum op, GLuint res, GLuint arg1, GLuint arg2, GLuint arg3) noexcept
 {
-	SYSTEM_BODY_A5(gglShaderOp3EXT, op, res, arg1, arg2, arg3);
+	SYSTEM_BODY_5(gglShaderOp3EXT, op, res, arg1, arg2, arg3);
 }
 
 void System
 	::GlSwizzleEXT(GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW) noexcept
 {
-	SYSTEM_BODY_A6(gglSwizzleEXT, res, in, outX, outY, outZ, outW);
+	SYSTEM_BODY_6(gglSwizzleEXT, res, in, outX, outY, outZ, outW);
 }
 
 void System
 	::GlVariantPointerEXT(GLuint id, GLenum type, GLuint stride, void* addr) noexcept
 {
-	SYSTEM_BODY_A4(gglVariantPointerEXT, id, type, stride, addr);
+	SYSTEM_BODY_4(gglVariantPointerEXT, id, type, stride, addr);
 }
 
 void System
 	::GlVariantbvEXT(GLuint id, GLbyte* addr) noexcept
 {
-	SYSTEM_BODY_A2(gglVariantbvEXT, id, addr);
+	SYSTEM_BODY_2(gglVariantbvEXT, id, addr);
 }
 
 void System
 	::GlVariantdvEXT(GLuint id, GLdouble* addr) noexcept
 {
-	SYSTEM_BODY_A2(gglVariantdvEXT, id, addr);
+	SYSTEM_BODY_2(gglVariantdvEXT, id, addr);
 }
 
 void System
 	::GlVariantfvEXT(GLuint id, GLfloat* addr) noexcept
 {
-	SYSTEM_BODY_A2(gglVariantfvEXT, id, addr);
+	SYSTEM_BODY_2(gglVariantfvEXT, id, addr);
 }
 
 void System
 	::GlVariantivEXT(GLuint id, GLint* addr) noexcept
 {
-	SYSTEM_BODY_A2(gglVariantivEXT, id, addr);
+	SYSTEM_BODY_2(gglVariantivEXT, id, addr);
 }
 
 void System
 	::GlVariantsvEXT(GLuint id, GLshort* addr) noexcept
 {
-	SYSTEM_BODY_A2(gglVariantsvEXT, id, addr);
+	SYSTEM_BODY_2(gglVariantsvEXT, id, addr);
 }
 
 void System
 	::GlVariantubvEXT(GLuint id, GLubyte* addr) noexcept
 {
-	SYSTEM_BODY_A2(gglVariantubvEXT, id, addr);
+	SYSTEM_BODY_2(gglVariantubvEXT, id, addr);
 }
 
 void System
 	::GlVariantuivEXT(GLuint id, GLuint* addr) noexcept
 {
-	SYSTEM_BODY_A2(gglVariantuivEXT, id, addr);
+	SYSTEM_BODY_2(gglVariantuivEXT, id, addr);
 }
 
 void System
 	::GlVariantusvEXT(GLuint id, GLushort* addr) noexcept
 {
-	SYSTEM_BODY_A2(gglVariantusvEXT, id, addr);
+	SYSTEM_BODY_2(gglVariantusvEXT, id, addr);
 }
 
 void System
 	::GlWriteMaskEXT(GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW) noexcept
 {
-	SYSTEM_BODY_A6(gglWriteMaskEXT, res, in, outX, outY, outZ, outW);
+	SYSTEM_BODY_6(gglWriteMaskEXT, res, in, outX, outY, outZ, outW);
 }
 
 void System
@@ -3434,7 +3443,7 @@ namespace System
 void System
 	::GlActiveStencilFaceEXT(GLenum face) noexcept
 {
-	SYSTEM_BODY_A1(gglActiveStencilFaceEXT, face);
+	SYSTEM_BODY_1(gglActiveStencilFaceEXT, face);
 }
 
 void System
@@ -3478,7 +3487,7 @@ namespace System
 void System
 	::GlDepthBoundsEXT(GLclampd min, GLclampd max) noexcept
 {
-	SYSTEM_BODY_A2(gglDepthBoundsEXT, min, max);
+	SYSTEM_BODY_2(gglDepthBoundsEXT, min, max);
 }
 
 void System
@@ -3543,7 +3552,7 @@ namespace System
 void System
 	::GlBlendEquationSeparateEXT(GLenum modeRGB, GLenum modeAlpha) noexcept
 {
-	SYSTEM_BODY_A2(gglBlendEquationSeparateEXT, modeRGB, modeAlpha);
+	SYSTEM_BODY_2(gglBlendEquationSeparateEXT, modeRGB, modeAlpha);
 }
 
 void System
@@ -3671,103 +3680,103 @@ namespace System
 GLboolean System
 	::GlIsRenderbufferEXT(GLuint renderBuffer) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglIsRenderbufferEXT, renderBuffer, GLboolean, GL_FALSE);
+	SYSTEM_BODY_1_RESULT(gglIsRenderbufferEXT, renderBuffer, GLboolean, GL_FALSE);
 }
 
 void System
 	::GlBindRenderbufferEXT(GLenum target, GLuint renderBuffer) noexcept
 {
-	SYSTEM_BODY_A2(gglBindRenderbufferEXT, target, renderBuffer);
+	SYSTEM_BODY_2(gglBindRenderbufferEXT, target, renderBuffer);
 }
 
 void System
 	::GlDeleteRenderbuffersEXT(GLsizei numBuffers, const GLuint* renderBuffer) noexcept
 {
-	SYSTEM_BODY_A2(gglDeleteRenderbuffersEXT, numBuffers, renderBuffer);
+	SYSTEM_BODY_2(gglDeleteRenderbuffersEXT, numBuffers, renderBuffer);
 }
 
 void System
 	::GlGenRenderbuffersEXT(GLsizei numBuffers, GLuint* renderBuffer) noexcept
 {
-	SYSTEM_BODY_A2(gglGenRenderbuffersEXT, numBuffers, renderBuffer);
+	SYSTEM_BODY_2(gglGenRenderbuffersEXT, numBuffers, renderBuffer);
 }
 
 void System
 	::GlRenderbufferStorageEXT(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A4(gglRenderbufferStorageEXT, target, internalFormat, width, height);
+	SYSTEM_BODY_4(gglRenderbufferStorageEXT, target, internalFormat, width, height);
 }
 
 void System
 	::GlGetRenderbufferParameterivEXT(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetRenderbufferParameterivEXT, target, name, param);
+	SYSTEM_BODY_3(gglGetRenderbufferParameterivEXT, target, name, param);
 }
 
 GLboolean System
 	::GlIsFramebufferEXT(GLuint frameBuffer) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglIsFramebufferEXT, frameBuffer, GLboolean, GL_FALSE);
+	SYSTEM_BODY_1_RESULT(gglIsFramebufferEXT, frameBuffer, GLboolean, GL_FALSE);
 }
 
 void System
 	::GlBindFramebufferEXT(GLenum target, GLuint frameBuffer) noexcept
 {
-	SYSTEM_BODY_A2(gglBindFramebufferEXT, target, frameBuffer);
+	SYSTEM_BODY_2(gglBindFramebufferEXT, target, frameBuffer);
 }
 
 void System
 	::GlDeleteFramebuffersEXT(GLsizei numBuffers, const GLuint* frameBuffer) noexcept
 {
-	SYSTEM_BODY_A2(gglDeleteFramebuffersEXT, numBuffers, frameBuffer);
+	SYSTEM_BODY_2(gglDeleteFramebuffersEXT, numBuffers, frameBuffer);
 }
 
 void System
 	::GlGenFramebuffersEXT(GLsizei numBuffers, GLuint* frameBuffer) noexcept
 {
-	SYSTEM_BODY_A2(gglGenFramebuffersEXT, numBuffers, frameBuffer);
+	SYSTEM_BODY_2(gglGenFramebuffersEXT, numBuffers, frameBuffer);
 }
 
 GLenum System
 	::GlCheckFramebufferStatusEXT(GLenum target) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglCheckFramebufferStatusEXT, target, GLenum, GL_FRAMEBUFFER_UNSUPPORTED_EXT);
+	SYSTEM_BODY_1_RESULT(gglCheckFramebufferStatusEXT, target, GLenum, GL_FRAMEBUFFER_UNSUPPORTED_EXT);
 }
 
 void System
 	::GlFramebufferTexture1DEXT(GLenum target, GLenum attachment, GLenum textureTarget, GLuint texture, GLint level) noexcept
 {
-	SYSTEM_BODY_A5(gglFramebufferTexture1DEXT, target, attachment, textureTarget, texture, level);
+	SYSTEM_BODY_5(gglFramebufferTexture1DEXT, target, attachment, textureTarget, texture, level);
 }
 
 void System
 	::GlFramebufferTexture2DEXT(GLenum target, GLenum attachment, GLenum textureTarget, GLuint texture, GLint level) noexcept
 {
-	SYSTEM_BODY_A5(gglFramebufferTexture2DEXT, target, attachment, textureTarget, texture, level);
+	SYSTEM_BODY_5(gglFramebufferTexture2DEXT, target, attachment, textureTarget, texture, level);
 }
 
 void System
 	::GlFramebufferTexture3DEXT(GLenum target, GLenum attachment, GLenum textureTarget, GLuint texture, GLint level, GLint zOffset) noexcept
 {
-	SYSTEM_BODY_A6(gglFramebufferTexture3DEXT, target, attachment, textureTarget, texture, level, zOffset);
+	SYSTEM_BODY_6(gglFramebufferTexture3DEXT, target, attachment, textureTarget, texture, level, zOffset);
 }
 
 void System
 	::GlFramebufferRenderbufferEXT(GLenum target, GLenum attachment, GLenum renderBufferTarget, GLuint renderBuffer) noexcept
 {
-	SYSTEM_BODY_A4(gglFramebufferRenderbufferEXT, target, attachment, renderBufferTarget, renderBuffer);
+	SYSTEM_BODY_4(gglFramebufferRenderbufferEXT, target, attachment, renderBufferTarget, renderBuffer);
 }
 
 void System
 	::GlGetFramebufferAttachmentParameterivEXT(GLenum target, GLenum attachment, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A4(gglGetFramebufferAttachmentParameterivEXT, target, attachment, name, param);
+	SYSTEM_BODY_4(gglGetFramebufferAttachmentParameterivEXT, target, attachment, name, param);
 }
 
 void System
 	::GlGenerateMipmapEXT(GLenum target) noexcept
 {
-	SYSTEM_BODY_A1(gglGenerateMipmapEXT, target);
+	SYSTEM_BODY_1(gglGenerateMipmapEXT, target);
 }
 
 void System
@@ -3853,7 +3862,7 @@ namespace System
 void System
 	::GlStencilClearTagEXT(GLsizei stencilTagBits, GLuint stencilClearTag) noexcept
 {
-	SYSTEM_BODY_A2(gglStencilClearTagEXT, stencilTagBits, stencilClearTag);
+	SYSTEM_BODY_2(gglStencilClearTagEXT, stencilTagBits, stencilClearTag);
 }
 
 void System
@@ -3923,7 +3932,7 @@ namespace System
 void System
 	::GlBlitFramebufferEXT(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept
 {
-	SYSTEM_BODY_A10(gglBlitFramebufferEXT, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+	SYSTEM_BODY_10(gglBlitFramebufferEXT, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
 }
 
 void System
@@ -3967,7 +3976,7 @@ namespace System
 void System
 	::GlRenderbufferStorageMultisampleEXT(GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A5(gglRenderbufferStorageMultisampleEXT, target, samples, internalFormat, width, height);
+	SYSTEM_BODY_5(gglRenderbufferStorageMultisampleEXT, target, samples, internalFormat, width, height);
 }
 
 void System
@@ -4013,13 +4022,13 @@ namespace System
 void System
 	::GlGetQueryObjecti64vEXT(GLuint id, GLenum parameterName, GLint64* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetQueryObjecti64vEXT, id, parameterName, params);
+	SYSTEM_BODY_3(gglGetQueryObjecti64vEXT, id, parameterName, params);
 }
 
 void System
 	::GlGetQueryObjectui64vEXT(GLuint id, GLenum parameterName, GLuint64* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetQueryObjectui64vEXT, id, parameterName, params);
+	SYSTEM_BODY_3(gglGetQueryObjectui64vEXT, id, parameterName, params);
 }
 
 void System
@@ -4066,13 +4075,13 @@ namespace System
 void System
 	::GlProgramEnvParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramEnvParameters4fvEXT, target, index, count, params);
+	SYSTEM_BODY_4(gglProgramEnvParameters4fvEXT, target, index, count, params);
 }
 
 void System
 	::GlProgramLocalParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramLocalParameters4fvEXT, target, index, count, params);
+	SYSTEM_BODY_4(gglProgramLocalParameters4fvEXT, target, index, count, params);
 }
 
 void System
@@ -4121,19 +4130,19 @@ namespace System
 void System
 	::GlFramebufferTextureEXT(GLenum target, GLenum attachment, GLuint texture, GLint level) noexcept
 {
-	SYSTEM_BODY_A4(gglFramebufferTextureEXT, target, attachment, texture, level);
+	SYSTEM_BODY_4(gglFramebufferTextureEXT, target, attachment, texture, level);
 }
 
 void System
 	::GlFramebufferTextureFaceEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face) noexcept
 {
-	SYSTEM_BODY_A5(gglFramebufferTextureFaceEXT, target, attachment, texture, level, face);
+	SYSTEM_BODY_5(gglFramebufferTextureFaceEXT, target, attachment, texture, level, face);
 }
 
 void System
 	::GlProgramParameteriEXT(GLuint program, GLenum parameterName, GLint value) noexcept
 {
-	SYSTEM_BODY_A3(gglProgramParameteriEXT, program, parameterName, value);
+	SYSTEM_BODY_3(gglProgramParameteriEXT, program, parameterName, value);
 }
 
 void System
@@ -4245,205 +4254,205 @@ namespace System
 void System
 	::GlBindFragDataLocationEXT(GLuint program, GLuint color, const GLchar* name) noexcept
 {
-	SYSTEM_BODY_A3(gglBindFragDataLocationEXT, program, color, name);
+	SYSTEM_BODY_3(gglBindFragDataLocationEXT, program, color, name);
 }
 
 GLint System
 	::GlGetFragDataLocationEXT(GLuint program, const GLchar* name) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglGetFragDataLocationEXT, program, name, GLint, 0);
+	SYSTEM_BODY_2_RESULT(gglGetFragDataLocationEXT, program, name, GLint, 0);
 }
 
 void System
 	::GlGetUniformuivEXT(GLuint program, GLint location, GLuint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetUniformuivEXT, program, location, params);
+	SYSTEM_BODY_3(gglGetUniformuivEXT, program, location, params);
 }
 
 void System
 	::GlGetVertexAttribIivEXT(GLuint index, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVertexAttribIivEXT, index, parameterName, params);
+	SYSTEM_BODY_3(gglGetVertexAttribIivEXT, index, parameterName, params);
 }
 
 void System
 	::GlGetVertexAttribIuivEXT(GLuint index, GLenum parameterName, GLuint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVertexAttribIuivEXT, index, parameterName, params);
+	SYSTEM_BODY_3(gglGetVertexAttribIuivEXT, index, parameterName, params);
 }
 
 void System
 	::GlUniform1uiEXT(GLint location, GLuint v0) noexcept
 {
-	SYSTEM_BODY_A2(gglUniform1uiEXT, location, v0);
+	SYSTEM_BODY_2(gglUniform1uiEXT, location, v0);
 }
 
 void System
 	::GlUniform1uivEXT(GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_A3(gglUniform1uivEXT, location, count, value);
+	SYSTEM_BODY_3(gglUniform1uivEXT, location, count, value);
 }
 
 void System
 	::GlUniform2uiEXT(GLint location, GLuint v0, GLuint v1) noexcept
 {
-	SYSTEM_BODY_A3(gglUniform2uiEXT, location, v0, v1);
+	SYSTEM_BODY_3(gglUniform2uiEXT, location, v0, v1);
 }
 
 void System
 	::GlUniform2uivEXT(GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_A3(gglUniform2uivEXT, location, count, value);
+	SYSTEM_BODY_3(gglUniform2uivEXT, location, count, value);
 }
 
 void System
 	::GlUniform3uiEXT(GLint location, GLuint v0, GLuint v1, GLuint v2) noexcept
 {
-	SYSTEM_BODY_A4(gglUniform3uiEXT, location, v0, v1, v2);
+	SYSTEM_BODY_4(gglUniform3uiEXT, location, v0, v1, v2);
 }
 
 void System
 	::GlUniform3uivEXT(GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_A3(gglUniform3uivEXT, location, count, value);
+	SYSTEM_BODY_3(gglUniform3uivEXT, location, count, value);
 }
 
 void System
 	::GlUniform4uiEXT(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) noexcept
 {
-	SYSTEM_BODY_A5(gglUniform4uiEXT, location, v0, v1, v2, v3);
+	SYSTEM_BODY_5(gglUniform4uiEXT, location, v0, v1, v2, v3);
 }
 
 void System
 	::GlUniform4uivEXT(GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_A3(gglUniform4uivEXT, location, count, value);
+	SYSTEM_BODY_3(gglUniform4uivEXT, location, count, value);
 }
 
 void System
 	::GlVertexAttribI1iEXT(GLuint index, GLint x) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI1iEXT, index, x);
+	SYSTEM_BODY_2(gglVertexAttribI1iEXT, index, x);
 }
 
 void System
 	::GlVertexAttribI1ivEXT(GLuint index, const GLint* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI1ivEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI1ivEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI1uiEXT(GLuint index, GLuint x) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI1uiEXT, index, x);
+	SYSTEM_BODY_2(gglVertexAttribI1uiEXT, index, x);
 }
 
 void System
 	::GlVertexAttribI1uivEXT(GLuint index, const GLuint* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI1uivEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI1uivEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI2iEXT(GLuint index, GLint x, GLint y) noexcept
 {
-	SYSTEM_BODY_A3(gglVertexAttribI2iEXT, index, x, y);
+	SYSTEM_BODY_3(gglVertexAttribI2iEXT, index, x, y);
 }
 
 void System
 	::GlVertexAttribI2ivEXT(GLuint index, const GLint* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI2ivEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI2ivEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI2uiEXT(GLuint index, GLuint x, GLuint y) noexcept
 {
-	SYSTEM_BODY_A3(gglVertexAttribI2uiEXT, index, x, y);
+	SYSTEM_BODY_3(gglVertexAttribI2uiEXT, index, x, y);
 }
 
 void System
 	::GlVertexAttribI2uivEXT(GLuint index, const GLuint* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI2uivEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI2uivEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI3iEXT(GLuint index, GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_BODY_A4(gglVertexAttribI3iEXT, index, x, y, z);
+	SYSTEM_BODY_4(gglVertexAttribI3iEXT, index, x, y, z);
 }
 
 void System
 	::GlVertexAttribI3ivEXT(GLuint index, const GLint* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI3ivEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI3ivEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI3uiEXT(GLuint index, GLuint x, GLuint y, GLuint z) noexcept
 {
-	SYSTEM_BODY_A4(gglVertexAttribI3uiEXT, index, x, y, z);
+	SYSTEM_BODY_4(gglVertexAttribI3uiEXT, index, x, y, z);
 }
 
 void System
 	::GlVertexAttribI3uivEXT(GLuint index, const GLuint* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI3uivEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI3uivEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI4bvEXT(GLuint index, const GLbyte* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI4bvEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI4bvEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI4iEXT(GLuint index, GLint x, GLint y, GLint z, GLint w) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexAttribI4iEXT, index, x, y, z, w);
+	SYSTEM_BODY_5(gglVertexAttribI4iEXT, index, x, y, z, w);
 }
 
 void System
 	::GlVertexAttribI4ivEXT(GLuint index, const GLint* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI4ivEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI4ivEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI4svEXT(GLuint index, const GLshort* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI4svEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI4svEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI4ubvEXT(GLuint index, const GLubyte* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI4ubvEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI4ubvEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI4uiEXT(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexAttribI4uiEXT, index, x, y, z, w);
+	SYSTEM_BODY_5(gglVertexAttribI4uiEXT, index, x, y, z, w);
 }
 
 void System
 	::GlVertexAttribI4uivEXT(GLuint index, const GLuint* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI4uivEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI4uivEXT, index, v);
 }
 
 void System
 	::GlVertexAttribI4usvEXT(GLuint index, const GLushort* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribI4usvEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribI4usvEXT, index, v);
 }
 
 void System
 	::GlVertexAttribIPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexAttribIPointerEXT, index, size, type, stride, pointer);
+	SYSTEM_BODY_5(gglVertexAttribIPointerEXT, index, size, type, stride, pointer);
 }
 
 void System
@@ -4522,13 +4531,13 @@ namespace System
 void System
 	::GlDrawArraysInstancedEXT(GLenum mode, GLint start, GLsizei count, GLsizei primcount) noexcept
 {
-	SYSTEM_BODY_A4(gglDrawArraysInstancedEXT, mode, start, count, primcount);
+	SYSTEM_BODY_4(gglDrawArraysInstancedEXT, mode, start, count, primcount);
 }
 
 void System
 	::GlDrawElementsInstancedEXT(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount) noexcept
 {
-	SYSTEM_BODY_A5(gglDrawElementsInstancedEXT, mode, count, type, indices, primcount);
+	SYSTEM_BODY_5(gglDrawElementsInstancedEXT, mode, count, type, indices, primcount);
 }
 
 void System
@@ -4599,7 +4608,7 @@ namespace System
 void System
 	::GlFramebufferTextureLayerEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer) noexcept
 {
-	SYSTEM_BODY_A5(gglFramebufferTextureLayerEXT, target, attachment, texture, level, layer);
+	SYSTEM_BODY_5(gglFramebufferTextureLayerEXT, target, attachment, texture, level, layer);
 }
 
 void System
@@ -4644,7 +4653,7 @@ namespace System
 void System
 	::GlTexBufferEXT(GLenum target, GLenum internalformat, GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A3(gglTexBufferEXT, target, internalformat, buffer);
+	SYSTEM_BODY_3(gglTexBufferEXT, target, internalformat, buffer);
 }
 
 void System
@@ -4803,37 +4812,37 @@ namespace System
 void System
 	::GlColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a) noexcept
 {
-	SYSTEM_BODY_A5(gglColorMaskIndexedEXT, buf, r, g, b, a);
+	SYSTEM_BODY_5(gglColorMaskIndexedEXT, buf, r, g, b, a);
 }
 
 void System
 	::GlDisableIndexedEXT(GLenum target, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2(gglDisableIndexedEXT, target, index);
+	SYSTEM_BODY_2(gglDisableIndexedEXT, target, index);
 }
 
 void System
 	::GlEnableIndexedEXT(GLenum target, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2(gglEnableIndexedEXT, target, index);
+	SYSTEM_BODY_2(gglEnableIndexedEXT, target, index);
 }
 
 void System
 	::GlGetBooleanIndexedvEXT(GLenum value, GLuint index, GLboolean* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetBooleanIndexedvEXT, value, index, data);
+	SYSTEM_BODY_3(gglGetBooleanIndexedvEXT, value, index, data);
 }
 
 void System
 	::GlGetIntegerIndexedvEXT(GLenum value, GLuint index, GLint* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetIntegerIndexedvEXT, value, index, data);
+	SYSTEM_BODY_3(gglGetIntegerIndexedvEXT, value, index, data);
 }
 
 GLboolean System
 	::GlIsEnabledIndexedEXT(GLenum target, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglIsEnabledIndexedEXT, target, index, GLboolean, GL_FALSE);
+	SYSTEM_BODY_2_RESULT(gglIsEnabledIndexedEXT, target, index, GLboolean, GL_FALSE);
 }
 
 void System
@@ -4886,19 +4895,19 @@ namespace System
 GLint System
 	::GlGetUniformBufferSizeEXT(GLuint program, GLint location) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglGetUniformBufferSizeEXT, program, location, GLint, -1);
+	SYSTEM_BODY_2_RESULT(gglGetUniformBufferSizeEXT, program, location, GLint, -1);
 }
 
 GLintptr System
 	::GlGetUniformOffsetEXT(GLuint program, GLint location) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglGetUniformOffsetEXT, program, location, GLintptr, -1);
+	SYSTEM_BODY_2_RESULT(gglGetUniformOffsetEXT, program, location, GLintptr, -1);
 }
 
 void System
 	::GlUniformBufferEXT(GLuint program, GLint location, GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A3(gglUniformBufferEXT, program, location, buffer);
+	SYSTEM_BODY_3(gglUniformBufferEXT, program, location, buffer);
 }
 
 void System
@@ -4955,37 +4964,37 @@ namespace System
 void System
 	::GlClearColorIiEXT(GLint red, GLint green, GLint blue, GLint alpha) noexcept
 {
-	SYSTEM_BODY_A4(gglClearColorIiEXT, red, green, blue, alpha);
+	SYSTEM_BODY_4(gglClearColorIiEXT, red, green, blue, alpha);
 }
 
 void System
 	::GlClearColorIuiEXT(GLuint red, GLuint green, GLuint blue, GLuint alpha) noexcept
 {
-	SYSTEM_BODY_A4(gglClearColorIuiEXT, red, green, blue, alpha);
+	SYSTEM_BODY_4(gglClearColorIuiEXT, red, green, blue, alpha);
 }
 
 void System
 	::GlGetTexParameterIivEXT(GLenum target, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetTexParameterIivEXT, target, parameterName, params);
+	SYSTEM_BODY_3(gglGetTexParameterIivEXT, target, parameterName, params);
 }
 
 void System
 	::GlGetTexParameterIuivEXT(GLenum target, GLenum parameterName, GLuint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetTexParameterIuivEXT, target, parameterName, params);
+	SYSTEM_BODY_3(gglGetTexParameterIuivEXT, target, parameterName, params);
 }
 
 void System
 	::GlTexParameterIivEXT(GLenum target, GLenum parameterName, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglTexParameterIivEXT, target, parameterName, params);
+	SYSTEM_BODY_3(gglTexParameterIivEXT, target, parameterName, params);
 }
 
 void System
 	::GlTexParameterIuivEXT(GLenum target, GLenum parameterName, const GLuint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglTexParameterIuivEXT, target, parameterName, params);
+	SYSTEM_BODY_3(gglTexParameterIuivEXT, target, parameterName, params);
 }
 
 void System
@@ -5046,43 +5055,43 @@ namespace System
 void System
 	::GlBeginTransformFeedbackEXT(GLenum primitiveMode) noexcept
 {
-	SYSTEM_BODY_A1(gglBeginTransformFeedbackEXT, primitiveMode);
+	SYSTEM_BODY_1(gglBeginTransformFeedbackEXT, primitiveMode);
 }
 
 void System
 	::GlBindBufferBaseEXT(GLenum target, GLuint index, GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A3(gglBindBufferBaseEXT, target, index, buffer);
+	SYSTEM_BODY_3(gglBindBufferBaseEXT, target, index, buffer);
 }
 
 void System
 	::GlBindBufferOffsetEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A4(gglBindBufferOffsetEXT, target, index, buffer, offset);
+	SYSTEM_BODY_4(gglBindBufferOffsetEXT, target, index, buffer, offset);
 }
 
 void System
 	::GlBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size) noexcept
 {
-	SYSTEM_BODY_A5(gglBindBufferRangeEXT, target, index, buffer, offset, size);
+	SYSTEM_BODY_5(gglBindBufferRangeEXT, target, index, buffer, offset, size);
 }
 
 void System
 	::GlEndTransformFeedbackEXT(void) noexcept
 {
-	SYSTEM_BODY_A0(gglEndTransformFeedbackEXT);
+	SYSTEM_BODY_0(gglEndTransformFeedbackEXT);
 }
 
 void System
 	::GlGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLsizei* size, GLenum* type, GLchar* name) noexcept
 {
-	SYSTEM_BODY_A7(gglGetTransformFeedbackVaryingEXT, program, index, bufSize, length, size, type, name);
+	SYSTEM_BODY_7(gglGetTransformFeedbackVaryingEXT, program, index, bufSize, length, size, type, name);
 }
 
 void System
 	::GlTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar* const* varyings, GLenum bufferMode) noexcept
 {
-	SYSTEM_BODY_A4(gglTransformFeedbackVaryingsEXT, program, count, varyings, bufferMode);
+	SYSTEM_BODY_4(gglTransformFeedbackVaryingsEXT, program, count, varyings, bufferMode);
 }
 
 void System
@@ -5588,1297 +5597,1306 @@ namespace System
 void System
 	::GlBindMultiTextureEXT(GLenum texunit, GLenum target, GLuint texture) noexcept
 {
-	SYSTEM_BODY_A3(gglBindMultiTextureEXT, texunit, target, texture);
+	SYSTEM_BODY_3(gglBindMultiTextureEXT, texunit, target, texture);
 }
 
 GLenum System
 	::GlCheckNamedFramebufferStatusEXT(GLuint framebuffer, GLenum target) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglCheckNamedFramebufferStatusEXT, framebuffer, target, GLenum, 0);
+	SYSTEM_BODY_2_RESULT(gglCheckNamedFramebufferStatusEXT, framebuffer, target, GLenum, 0);
 }
 
 void System
 	::GlClientAttribDefaultEXT(GLbitfield mask) noexcept
 {
-	SYSTEM_BODY_A1(gglClientAttribDefaultEXT, mask);
+	SYSTEM_BODY_1(gglClientAttribDefaultEXT, mask);
 }
 
 void System
 	::GlCompressedMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A8(gglCompressedMultiTexImage1DEXT, texunit, target, level, internalformat, width, border, imageSize, data);
+	SYSTEM_BODY_8(gglCompressedMultiTexImage1DEXT, texunit, target, level, internalformat, width, border, imageSize, data);
 }
 
 void System
 	::GlCompressedMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A9(gglCompressedMultiTexImage2DEXT, texunit, target, level, internalformat, width, height, border, imageSize, data);
+	SYSTEM_BODY_9(gglCompressedMultiTexImage2DEXT, texunit, target, level, internalformat, width, height, border, imageSize, data);
 }
 
 void System
 	::GlCompressedMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width,
 									 GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A10(gglCompressedMultiTexImage3DEXT, texunit, target, level, internalformat, width, height, depth, border, imageSize, data);
+	SYSTEM_BODY_10(gglCompressedMultiTexImage3DEXT, texunit, target, level, internalformat, width, height, depth, border, imageSize, data);
 }
 
 void System
 	::GlCompressedMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A8(gglCompressedMultiTexSubImage1DEXT, texunit, target, level, xoffset, width, format, imageSize, data);
+	SYSTEM_BODY_8(gglCompressedMultiTexSubImage1DEXT, texunit, target, level, xoffset, width, format, imageSize, data);
 }
 
 void System
 	::GlCompressedMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset,
 										GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A10(gglCompressedMultiTexSubImage2DEXT, texunit, target, level, xoffset, yoffset, width, height, format, imageSize, data);
+	SYSTEM_BODY_10(gglCompressedMultiTexSubImage2DEXT, texunit, target, level, xoffset, yoffset, width, height, format, imageSize, data);
 }
 
 void System
 	::GlCompressedMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset,
 										GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A12(gglCompressedMultiTexSubImage3DEXT, texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
+	SYSTEM_BODY_12(gglCompressedMultiTexSubImage3DEXT, texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
 }
 
 void System
 	::GlCompressedTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A8(gglCompressedTextureImage1DEXT, texture, target, level, internalformat, width, border, imageSize, data);
+	SYSTEM_BODY_8(gglCompressedTextureImage1DEXT, texture, target, level, internalformat, width, border, imageSize, data);
 }
 
 void System
 	::GlCompressedTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width,
 									GLsizei height, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A9(gglCompressedTextureImage2DEXT, texture, target, level, internalformat, width, height, border, imageSize, data);
+	SYSTEM_BODY_9(gglCompressedTextureImage2DEXT, texture, target, level, internalformat, width, height, border, imageSize, data);
 }
 
 void System
 	::GlCompressedTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width,
 									GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A10(gglCompressedTextureImage3DEXT, texture, target, level, internalformat, width, height, depth, border, imageSize, data);
+	SYSTEM_BODY_10(gglCompressedTextureImage3DEXT, texture, target, level, internalformat, width, height, depth, border, imageSize, data);
 }
 
 void System
 	::GlCompressedTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A8(gglCompressedTextureSubImage1DEXT, texture, target, level, xoffset, width, format, imageSize, data);
+	SYSTEM_BODY_8(gglCompressedTextureSubImage1DEXT, texture, target, level, xoffset, width, format, imageSize, data);
 }
 
 void System
 	::GlCompressedTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset,
 									   GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A10(gglCompressedTextureSubImage2DEXT, texture, target, level, xoffset, yoffset, width, height, format, imageSize, data);
+	SYSTEM_BODY_10(gglCompressedTextureSubImage2DEXT, texture, target, level, xoffset, yoffset, width, height, format, imageSize, data);
 }
 
 void System
 	::GlCompressedTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset,
 									   GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-	SYSTEM_BODY_A12(gglCompressedTextureSubImage3DEXT, texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
+	SYSTEM_BODY_12(gglCompressedTextureSubImage3DEXT, texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
 }
 
 void System
 	::GlCopyMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border) noexcept
 {
-	SYSTEM_BODY_A8(gglCopyMultiTexImage1DEXT, texunit, target, level, internalformat, x, y, width, border);
+	SYSTEM_BODY_8(gglCopyMultiTexImage1DEXT, texunit, target, level, internalformat, x, y, width, border);
 }
 
 void System
 	::GlCopyMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) noexcept
 {
-	SYSTEM_BODY_A9(gglCopyMultiTexImage2DEXT, texunit, target, level, internalformat, x, y, width, height, border);
+	SYSTEM_BODY_9(gglCopyMultiTexImage2DEXT, texunit, target, level, internalformat, x, y, width, height, border);
 }
 
 void System
 	::GlCopyMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_BODY_A7(gglCopyMultiTexSubImage1DEXT, texunit, target, level, xoffset, x, y, width);
+	SYSTEM_BODY_7(gglCopyMultiTexSubImage1DEXT, texunit, target, level, xoffset, x, y, width);
 }
 
 void System
 	::GlCopyMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A9(gglCopyMultiTexSubImage2DEXT, texunit, target, level, xoffset, yoffset, x, y, width, height);
+	SYSTEM_BODY_9(gglCopyMultiTexSubImage2DEXT, texunit, target, level, xoffset, yoffset, x, y, width, height);
 }
 
 void System
 	::GlCopyMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A10(gglCopyMultiTexSubImage3DEXT, texunit, target, level, xoffset, yoffset, zoffset, x, y, width, height);
+	SYSTEM_BODY_10(gglCopyMultiTexSubImage3DEXT, texunit, target, level, xoffset, yoffset, zoffset, x, y, width, height);
 }
 
 void System
 	::GlCopyTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border) noexcept
 {
-	SYSTEM_BODY_A8(gglCopyTextureImage1DEXT, texture, target, level, internalformat, x, y, width, border);
+	SYSTEM_BODY_8(gglCopyTextureImage1DEXT, texture, target, level, internalformat, x, y, width, border);
 }
 
 void System
 	::GlCopyTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) noexcept
 {
-	SYSTEM_BODY_A9(gglCopyTextureImage2DEXT, texture, target, level, internalformat, x, y, width, height, border);
+	SYSTEM_BODY_9(gglCopyTextureImage2DEXT, texture, target, level, internalformat, x, y, width, height, border);
 }
 
 void System
 	::GlCopyTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_BODY_A7(gglCopyTextureSubImage1DEXT, texture, target, level, xoffset, x, y, width);
+	SYSTEM_BODY_7(gglCopyTextureSubImage1DEXT, texture, target, level, xoffset, x, y, width);
 }
 
 void System
 	::GlCopyTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A9(gglCopyTextureSubImage2DEXT, texture, target, level, xoffset, yoffset, x, y, width, height);
+	SYSTEM_BODY_9(gglCopyTextureSubImage2DEXT, texture, target, level, xoffset, yoffset, x, y, width, height);
 }
 
 void System
 	::GlCopyTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A10(gglCopyTextureSubImage3DEXT, texture, target, level, xoffset, yoffset, zoffset, x, y, width, height);
+	SYSTEM_BODY_10(gglCopyTextureSubImage3DEXT, texture, target, level, xoffset, yoffset, zoffset, x, y, width, height);
 }
 
 void System
 	::GlDisableClientStateIndexedEXT(GLenum array, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2(gglDisableClientStateIndexedEXT, array, index);
+	SYSTEM_BODY_2(gglDisableClientStateIndexedEXT, array, index);
 }
 
 void System
 	::GlDisableClientStateiEXT(GLenum array, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2(gglDisableClientStateiEXT, array, index);
+	SYSTEM_BODY_2(gglDisableClientStateiEXT, array, index);
 }
 
 void System
 	::GlDisableVertexArrayAttribEXT(GLuint vaobj, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2(gglDisableVertexArrayAttribEXT, vaobj, index);
+	SYSTEM_BODY_2(gglDisableVertexArrayAttribEXT, vaobj, index);
 }
 
 void System
 	::GlDisableVertexArrayEXT(GLuint vaobj, GLenum array) noexcept
 {
-	SYSTEM_BODY_A2(gglDisableVertexArrayEXT, vaobj, array);
+	SYSTEM_BODY_2(gglDisableVertexArrayEXT, vaobj, array);
 }
 
 void System
 	::GlEnableClientStateIndexedEXT(GLenum array, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2(gglEnableClientStateIndexedEXT, array, index);
+	SYSTEM_BODY_2(gglEnableClientStateIndexedEXT, array, index);
 }
 
 void System
 	::GlEnableClientStateiEXT(GLenum array, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2(gglEnableClientStateiEXT, array, index);
+	SYSTEM_BODY_2(gglEnableClientStateiEXT, array, index);
 }
 
 void System
 	::GlEnableVertexArrayAttribEXT(GLuint vaobj, GLuint index) noexcept
 {
-	SYSTEM_BODY_A2(gglEnableVertexArrayAttribEXT, vaobj, index);
+	SYSTEM_BODY_2(gglEnableVertexArrayAttribEXT, vaobj, index);
 }
 
 void System
 	::GlEnableVertexArrayEXT(GLuint vaobj, GLenum array) noexcept
 {
-	SYSTEM_BODY_A2(gglEnableVertexArrayEXT, vaobj, array);
+	SYSTEM_BODY_2(gglEnableVertexArrayEXT, vaobj, array);
 }
 
 void System
 	::GlFlushMappedNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length) noexcept
 {
-	SYSTEM_BODY_A3(gglFlushMappedNamedBufferRangeEXT, buffer, offset, length);
+	SYSTEM_BODY_3(gglFlushMappedNamedBufferRangeEXT, buffer, offset, length);
 }
 
 void System
 	::GlFramebufferDrawBufferEXT(GLuint framebuffer, GLenum mode) noexcept
 {
-	SYSTEM_BODY_A2(gglFramebufferDrawBufferEXT, framebuffer, mode);
+	SYSTEM_BODY_2(gglFramebufferDrawBufferEXT, framebuffer, mode);
 }
 
 void System
 	::GlFramebufferDrawBuffersEXT(GLuint framebuffer, GLsizei n, const GLenum* bufs) noexcept
 {
-	SYSTEM_BODY_A3(gglFramebufferDrawBuffersEXT, framebuffer, n, bufs);
+	SYSTEM_BODY_3(gglFramebufferDrawBuffersEXT, framebuffer, n, bufs);
 }
 
 void System
 	::GlFramebufferReadBufferEXT(GLuint framebuffer, GLenum mode) noexcept
 {
-	SYSTEM_BODY_A2(gglFramebufferReadBufferEXT, framebuffer, mode);
+	SYSTEM_BODY_2(gglFramebufferReadBufferEXT, framebuffer, mode);
 }
 
 void System
 	::GlGenerateMultiTexMipmapEXT(GLenum texunit, GLenum target) noexcept
 {
-	SYSTEM_BODY_A2(gglGenerateMultiTexMipmapEXT, texunit, target);
+	SYSTEM_BODY_2(gglGenerateMultiTexMipmapEXT, texunit, target);
 }
 
 void System
 	::GlGenerateTextureMipmapEXT(GLuint texture, GLenum target) noexcept
 {
-	SYSTEM_BODY_A2(gglGenerateTextureMipmapEXT, texture, target);
+	SYSTEM_BODY_2(gglGenerateTextureMipmapEXT, texture, target);
 }
 
 void System
 	::GlGetCompressedMultiTexImageEXT(GLenum texunit, GLenum target, GLint level, void* img) noexcept
 {
-	SYSTEM_BODY_A4(gglGetCompressedMultiTexImageEXT, texunit, target, level, img);
+	SYSTEM_BODY_4(gglGetCompressedMultiTexImageEXT, texunit, target, level, img);
 }
 
 void System
 	::GlGetCompressedTextureImageEXT(GLuint texture, GLenum target, GLint level, void* img) noexcept
 {
-	SYSTEM_BODY_A4(gglGetCompressedTextureImageEXT, texture, target, level, img);
+	SYSTEM_BODY_4(gglGetCompressedTextureImageEXT, texture, target, level, img);
 }
 
 void System
 	::GlGetDoubleIndexedvEXT(GLenum target, GLuint index, GLdouble* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetDoubleIndexedvEXT, target, index, params);
+	SYSTEM_BODY_3(gglGetDoubleIndexedvEXT, target, index, params);
 }
 
 void System
 	::GlGetDoublei_vEXT(GLenum parameterName, GLuint index, GLdouble* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetDoublei_vEXT, parameterName, index, params);
+	SYSTEM_BODY_3(gglGetDoublei_vEXT, parameterName, index, params);
 }
 
 void System
 	::GlGetFloatIndexedvEXT(GLenum target, GLuint index, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetFloatIndexedvEXT, target, index, params);
+	SYSTEM_BODY_3(gglGetFloatIndexedvEXT, target, index, params);
 }
 
 void System
 	::GlGetFloati_vEXT(GLenum parameterName, GLuint index, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetFloati_vEXT, parameterName, index, params);
+	SYSTEM_BODY_3(gglGetFloati_vEXT, parameterName, index, params);
 }
 
 void System
 	::GlGetFramebufferParameterivEXT(GLuint framebuffer, GLenum parameterName, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetFramebufferParameterivEXT, framebuffer, parameterName, param);
+	SYSTEM_BODY_3(gglGetFramebufferParameterivEXT, framebuffer, parameterName, param);
 }
 
 void System
 	::GlGetMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexEnvfvEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexEnvfvEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexEnvivEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexEnvivEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum parameterName, GLdouble* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexGendvEXT, texunit, coord, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexGendvEXT, texunit, coord, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexGenfvEXT, texunit, coord, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexGenfvEXT, texunit, coord, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexGenivEXT, texunit, coord, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexGenivEXT, texunit, coord, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexImageEXT(GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void* pixels) noexcept
 {
-	SYSTEM_BODY_A6(gglGetMultiTexImageEXT, texunit, target, level, format, type, pixels);
+	SYSTEM_BODY_6(gglGetMultiTexImageEXT, texunit, target, level, format, type, pixels);
 }
 
 void System
 	::GlGetMultiTexLevelParameterfvEXT(GLenum texunit, GLenum target, GLint level, GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A5(gglGetMultiTexLevelParameterfvEXT, texunit, target, level, parameterName, params);
+	SYSTEM_BODY_5(gglGetMultiTexLevelParameterfvEXT, texunit, target, level, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexLevelParameterivEXT(GLenum texunit, GLenum target, GLint level, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A5(gglGetMultiTexLevelParameterivEXT, texunit, target, level, parameterName, params);
+	SYSTEM_BODY_5(gglGetMultiTexLevelParameterivEXT, texunit, target, level, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexParameterIivEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexParameterIivEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum parameterName, GLuint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexParameterIuivEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexParameterIuivEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexParameterfvEXT(GLenum texunit, GLenum target, GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexParameterfvEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexParameterfvEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlGetMultiTexParameterivEXT(GLenum texunit, GLenum target, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetMultiTexParameterivEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetMultiTexParameterivEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlGetNamedBufferParameterivEXT(GLuint buffer, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetNamedBufferParameterivEXT, buffer, parameterName, params);
+	SYSTEM_BODY_3(gglGetNamedBufferParameterivEXT, buffer, parameterName, params);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::GlGetNamedBufferPointervEXT(GLuint buffer, GLenum parameterName, void** params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetNamedBufferPointervEXT, buffer, parameterName, params);
+	SYSTEM_BODY_3(gglGetNamedBufferPointervEXT, buffer, parameterName, params);
 }
+#include STSTEM_WARNING_POP
 
 void System
 	::GlGetNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, GLsizeiptr size, void* data) noexcept
 {
-	SYSTEM_BODY_A4(gglGetNamedBufferSubDataEXT, buffer, offset, size, data);
+	SYSTEM_BODY_4(gglGetNamedBufferSubDataEXT, buffer, offset, size, data);
 }
 
 void System
 	::GlGetNamedFramebufferAttachmentParameterivEXT(GLuint framebuffer, GLenum attachment, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetNamedFramebufferAttachmentParameterivEXT, framebuffer, attachment, parameterName, params);
+	SYSTEM_BODY_4(gglGetNamedFramebufferAttachmentParameterivEXT, framebuffer, attachment, parameterName, params);
 }
 
 void System
 	::GlGetNamedProgramLocalParameterIivEXT(GLuint program, GLenum target, GLuint index, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetNamedProgramLocalParameterIivEXT, program, target, index, params);
+	SYSTEM_BODY_4(gglGetNamedProgramLocalParameterIivEXT, program, target, index, params);
 }
 
 void System
 	::GlGetNamedProgramLocalParameterIuivEXT(GLuint program, GLenum target, GLuint index, GLuint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetNamedProgramLocalParameterIuivEXT, program, target, index, params);
+	SYSTEM_BODY_4(gglGetNamedProgramLocalParameterIuivEXT, program, target, index, params);
 }
 
 void System
 	::GlGetNamedProgramLocalParameterdvEXT(GLuint program, GLenum target, GLuint index, GLdouble* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetNamedProgramLocalParameterdvEXT, program, target, index, params);
+	SYSTEM_BODY_4(gglGetNamedProgramLocalParameterdvEXT, program, target, index, params);
 }
 
 void System
 	::GlGetNamedProgramLocalParameterfvEXT(GLuint program, GLenum target, GLuint index, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetNamedProgramLocalParameterfvEXT, program, target, index, params);
+	SYSTEM_BODY_4(gglGetNamedProgramLocalParameterfvEXT, program, target, index, params);
 }
 
 void System
 	::GlGetNamedProgramStringEXT(GLuint program, GLenum target, GLenum parameterName, void* programString) noexcept
 {
-	SYSTEM_BODY_A4(gglGetNamedProgramStringEXT, program, target, parameterName, programString);
+	SYSTEM_BODY_4(gglGetNamedProgramStringEXT, program, target, parameterName, programString);
 }
 
 void System
 	::GlGetNamedProgramivEXT(GLuint program, GLenum target, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetNamedProgramivEXT, program, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetNamedProgramivEXT, program, target, parameterName, params);
 }
 
 void System
 	::GlGetNamedRenderbufferParameterivEXT(GLuint renderbuffer, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetNamedRenderbufferParameterivEXT, renderbuffer, parameterName, params);
+	SYSTEM_BODY_3(gglGetNamedRenderbufferParameterivEXT, renderbuffer, parameterName, params);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::GlGetPointerIndexedvEXT(GLenum target, GLuint index, void** params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetPointerIndexedvEXT, target, index, params);
+	SYSTEM_BODY_3(gglGetPointerIndexedvEXT, target, index, params);
 }
 
 void System
 	::GlGetPointeri_vEXT(GLenum parameterName, GLuint index, void** params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetPointeri_vEXT, parameterName, index, params);
+	SYSTEM_BODY_3(gglGetPointeri_vEXT, parameterName, index, params);
 }
+#include STSTEM_WARNING_POP
 
 void System
 	::GlGetTextureImageEXT(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void* pixels) noexcept
 {
-	SYSTEM_BODY_A6(gglGetTextureImageEXT, texture, target, level, format, type, pixels);
+	SYSTEM_BODY_6(gglGetTextureImageEXT, texture, target, level, format, type, pixels);
 }
 
 void System
 	::GlGetTextureLevelParameterfvEXT(GLuint texture, GLenum target, GLint level, GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A5(gglGetTextureLevelParameterfvEXT, texture, target, level, parameterName, params);
+	SYSTEM_BODY_5(gglGetTextureLevelParameterfvEXT, texture, target, level, parameterName, params);
 }
 
 void System
 	::GlGetTextureLevelParameterivEXT(GLuint texture, GLenum target, GLint level, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A5(gglGetTextureLevelParameterivEXT, texture, target, level, parameterName, params);
+	SYSTEM_BODY_5(gglGetTextureLevelParameterivEXT, texture, target, level, parameterName, params);
 }
 
 void System
 	::GlGetTextureParameterIivEXT(GLuint texture, GLenum target, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetTextureParameterIivEXT, texture, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetTextureParameterIivEXT, texture, target, parameterName, params);
 }
 
 void System
 	::GlGetTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum parameterName, GLuint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetTextureParameterIuivEXT, texture, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetTextureParameterIuivEXT, texture, target, parameterName, params);
 }
 
 void System
 	::GlGetTextureParameterfvEXT(GLuint texture, GLenum target, GLenum parameterName, GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetTextureParameterfvEXT, texture, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetTextureParameterfvEXT, texture, target, parameterName, params);
 }
 
 void System
 	::GlGetTextureParameterivEXT(GLuint texture, GLenum target, GLenum parameterName, GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglGetTextureParameterivEXT, texture, target, parameterName, params);
+	SYSTEM_BODY_4(gglGetTextureParameterivEXT, texture, target, parameterName, params);
 }
 
 void System
 	::GlGetVertexArrayIntegeri_vEXT(GLuint vaobj, GLuint index, GLenum parameterName, GLint* param) noexcept
 {
-	SYSTEM_BODY_A4(gglGetVertexArrayIntegeri_vEXT, vaobj, index, parameterName, param);
+	SYSTEM_BODY_4(gglGetVertexArrayIntegeri_vEXT, vaobj, index, parameterName, param);
 }
 
 void System
 	::GlGetVertexArrayIntegervEXT(GLuint vaobj, GLenum parameterName, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVertexArrayIntegervEXT, vaobj, parameterName, param);
+	SYSTEM_BODY_3(gglGetVertexArrayIntegervEXT, vaobj, parameterName, param);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::GlGetVertexArrayPointeri_vEXT(GLuint vaobj, GLuint index, GLenum parameterName, void** param) noexcept
 {
-	SYSTEM_BODY_A4(gglGetVertexArrayPointeri_vEXT, vaobj, index, parameterName, param);
+	SYSTEM_BODY_4(gglGetVertexArrayPointeri_vEXT, vaobj, index, parameterName, param);
 }
 
 void System
 	::GlGetVertexArrayPointervEXT(GLuint vaobj, GLenum parameterName, void** param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVertexArrayPointervEXT, vaobj, parameterName, param);
+	SYSTEM_BODY_3(gglGetVertexArrayPointervEXT, vaobj, parameterName, param);
 }
+#include STSTEM_WARNING_POP
 
 void System
 	::GlMapNamedBufferEXT(GLuint buffer, GLenum access) noexcept
 {
-	SYSTEM_BODY_A2(gglMapNamedBufferEXT, buffer, access);
+	SYSTEM_BODY_2(gglMapNamedBufferEXT, buffer, access);
 }
 
 void System
 	::GlMapNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access) noexcept
 {
-	SYSTEM_BODY_A4(gglMapNamedBufferRangeEXT, buffer, offset, length, access);
+	SYSTEM_BODY_4(gglMapNamedBufferRangeEXT, buffer, offset, length, access);
 }
 
 void System
 	::GlMatrixFrustumEXT(GLenum matrixMode, GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdouble n, GLdouble f) noexcept
 {
-	SYSTEM_BODY_A7(gglMatrixFrustumEXT, matrixMode, l, r, b, t, n, f);
+	SYSTEM_BODY_7(gglMatrixFrustumEXT, matrixMode, l, r, b, t, n, f);
 }
 
 void System
 	::GlMatrixLoadIdentityEXT(GLenum matrixMode) noexcept
 {
-	SYSTEM_BODY_A1(gglMatrixLoadIdentityEXT, matrixMode);
+	SYSTEM_BODY_1(gglMatrixLoadIdentityEXT, matrixMode);
 }
 
 void System
 	::GlMatrixLoadTransposedEXT(GLenum matrixMode, const GLdouble* m) noexcept
 {
-	SYSTEM_BODY_A2(gglMatrixLoadTransposedEXT, matrixMode, m);
+	SYSTEM_BODY_2(gglMatrixLoadTransposedEXT, matrixMode, m);
 }
 
 void System
 	::GlMatrixLoadTransposefEXT(GLenum matrixMode, const GLfloat* m) noexcept
 {
-	SYSTEM_BODY_A2(gglMatrixLoadTransposefEXT, matrixMode, m);
+	SYSTEM_BODY_2(gglMatrixLoadTransposefEXT, matrixMode, m);
 }
 
 void System
 	::GlMatrixLoaddEXT(GLenum matrixMode, const GLdouble* m) noexcept
 {
-	SYSTEM_BODY_A2(gglMatrixLoaddEXT, matrixMode, m);
+	SYSTEM_BODY_2(gglMatrixLoaddEXT, matrixMode, m);
 }
 
 void System
 	::GlMatrixLoadfEXT(GLenum matrixMode, const GLfloat* m) noexcept
 {
-	SYSTEM_BODY_A2(gglMatrixLoadfEXT, matrixMode, m);
+	SYSTEM_BODY_2(gglMatrixLoadfEXT, matrixMode, m);
 }
 
 void System
 	::GlMatrixMultTransposedEXT(GLenum matrixMode, const GLdouble* m) noexcept
 {
-	SYSTEM_BODY_A2(gglMatrixMultTransposedEXT, matrixMode, m);
+	SYSTEM_BODY_2(gglMatrixMultTransposedEXT, matrixMode, m);
 }
 
 void System
 	::GlMatrixMultTransposefEXT(GLenum matrixMode, const GLfloat* m) noexcept
 {
-	SYSTEM_BODY_A2(gglMatrixMultTransposefEXT, matrixMode, m);
+	SYSTEM_BODY_2(gglMatrixMultTransposefEXT, matrixMode, m);
 }
 
 void System
 	::GlMatrixMultdEXT(GLenum matrixMode, const GLdouble* m) noexcept
 {
-	SYSTEM_BODY_A2(gglMatrixMultdEXT, matrixMode, m);
+	SYSTEM_BODY_2(gglMatrixMultdEXT, matrixMode, m);
 }
 
 void System
 	::GlMatrixMultfEXT(GLenum matrixMode, const GLfloat* m) noexcept
 {
-	SYSTEM_BODY_A2(gglMatrixMultfEXT, matrixMode, m);
+	SYSTEM_BODY_2(gglMatrixMultfEXT, matrixMode, m);
 }
 
 void System
 	::GlMatrixOrthoEXT(GLenum matrixMode, GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdouble n, GLdouble f) noexcept
 {
-	SYSTEM_BODY_A7(gglMatrixOrthoEXT, matrixMode, l, r, b, t, n, f);
+	SYSTEM_BODY_7(gglMatrixOrthoEXT, matrixMode, l, r, b, t, n, f);
 }
 
 void System
 	::GlMatrixPopEXT(GLenum matrixMode) noexcept
 {
-	SYSTEM_BODY_A1(gglMatrixPopEXT, matrixMode);
+	SYSTEM_BODY_1(gglMatrixPopEXT, matrixMode);
 }
 
 void System
 	::GlMatrixPushEXT(GLenum matrixMode) noexcept
 {
-	SYSTEM_BODY_A1(gglMatrixPushEXT, matrixMode);
+	SYSTEM_BODY_1(gglMatrixPushEXT, matrixMode);
 }
 
 void System
 	::GlMatrixRotatedEXT(GLenum matrixMode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_BODY_A5(gglMatrixRotatedEXT, matrixMode, angle, x, y, z);
+	SYSTEM_BODY_5(gglMatrixRotatedEXT, matrixMode, angle, x, y, z);
 }
 
 void System
 	::GlMatrixRotatefEXT(GLenum matrixMode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_BODY_A5(gglMatrixRotatefEXT, matrixMode, angle, x, y, z);
+	SYSTEM_BODY_5(gglMatrixRotatefEXT, matrixMode, angle, x, y, z);
 }
 
 void System
 	::GlMatrixScaledEXT(GLenum matrixMode, GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_BODY_A4(gglMatrixScaledEXT, matrixMode, x, y, z);
+	SYSTEM_BODY_4(gglMatrixScaledEXT, matrixMode, x, y, z);
 }
 
 void System
 	::GlMatrixScalefEXT(GLenum matrixMode, GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_BODY_A4(gglMatrixScalefEXT, matrixMode, x, y, z);
+	SYSTEM_BODY_4(gglMatrixScalefEXT, matrixMode, x, y, z);
 }
 
 void System
 	::GlMatrixTranslatedEXT(GLenum matrixMode, GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_BODY_A4(gglMatrixTranslatedEXT, matrixMode, x, y, z);
+	SYSTEM_BODY_4(gglMatrixTranslatedEXT, matrixMode, x, y, z);
 }
 
 void System
 	::GlMatrixTranslatefEXT(GLenum matrixMode, GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_BODY_A4(gglMatrixTranslatefEXT, matrixMode, x, y, z);
+	SYSTEM_BODY_4(gglMatrixTranslatefEXT, matrixMode, x, y, z);
 }
 
 void System
 	::GlMultiTexBufferEXT(GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexBufferEXT, texunit, target, internalformat, buffer);
+	SYSTEM_BODY_4(gglMultiTexBufferEXT, texunit, target, internalformat, buffer);
 }
 
 void System
 	::GlMultiTexCoordPointerEXT(GLenum texunit, GLint size, GLenum type, GLsizei stride, const void* pointer) noexcept
 {
-	SYSTEM_BODY_A5(gglMultiTexCoordPointerEXT, texunit, size, type, stride, pointer);
+	SYSTEM_BODY_5(gglMultiTexCoordPointerEXT, texunit, size, type, stride, pointer);
 }
 
 void System
 	::GlMultiTexEnvfEXT(GLenum texunit, GLenum target, GLenum parameterName, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexEnvfEXT, texunit, target, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexEnvfEXT, texunit, target, parameterName, param);
 }
 
 void System
 	::GlMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum parameterName, const GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexEnvfvEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglMultiTexEnvfvEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlMultiTexEnviEXT(GLenum texunit, GLenum target, GLenum parameterName, GLint param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexEnviEXT, texunit, target, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexEnviEXT, texunit, target, parameterName, param);
 }
 
 void System
 	::GlMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum parameterName, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexEnvivEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglMultiTexEnvivEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlMultiTexGendEXT(GLenum texunit, GLenum coord, GLenum parameterName, GLdouble param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexGendEXT, texunit, coord, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexGendEXT, texunit, coord, parameterName, param);
 }
 
 void System
 	::GlMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum parameterName, const GLdouble* params) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexGendvEXT, texunit, coord, parameterName, params);
+	SYSTEM_BODY_4(gglMultiTexGendvEXT, texunit, coord, parameterName, params);
 }
 
 void System
 	::GlMultiTexGenfEXT(GLenum texunit, GLenum coord, GLenum parameterName, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexGenfEXT, texunit, coord, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexGenfEXT, texunit, coord, parameterName, param);
 }
 
 void System
 	::GlMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum parameterName, const GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexGenfvEXT, texunit, coord, parameterName, params);
+	SYSTEM_BODY_4(gglMultiTexGenfvEXT, texunit, coord, parameterName, params);
 }
 
 void System
 	::GlMultiTexGeniEXT(GLenum texunit, GLenum coord, GLenum parameterName, GLint param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexGeniEXT, texunit, coord, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexGeniEXT, texunit, coord, parameterName, param);
 }
 
 void System
 	::GlMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum parameterName, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexGenivEXT, texunit, coord, parameterName, params);
+	SYSTEM_BODY_4(gglMultiTexGenivEXT, texunit, coord, parameterName, params);
 }
 
 void System
 	::GlMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A9(gglMultiTexImage1DEXT, texunit, target, level, internalformat, width, border, format, type, pixels);
+	SYSTEM_BODY_9(gglMultiTexImage1DEXT, texunit, target, level, internalformat, width, border, format, type, pixels);
 }
 
 void System
 	::GlMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A10(gglMultiTexImage2DEXT, texunit, target, level, internalformat, width, height, border, format, type, pixels);
+	SYSTEM_BODY_10(gglMultiTexImage2DEXT, texunit, target, level, internalformat, width, height, border, format, type, pixels);
 }
 
 void System
 	::GlMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height,
 						   GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A11(gglMultiTexImage3DEXT, texunit, target, level, internalformat, width, height, depth, border, format, type, pixels);
+	SYSTEM_BODY_11(gglMultiTexImage3DEXT, texunit, target, level, internalformat, width, height, depth, border, format, type, pixels);
 }
 
 void System
 	::GlMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum parameterName, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexParameterIivEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglMultiTexParameterIivEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum parameterName, const GLuint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexParameterIuivEXT, texunit, target, parameterName, params);
+	SYSTEM_BODY_4(gglMultiTexParameterIuivEXT, texunit, target, parameterName, params);
 }
 
 void System
 	::GlMultiTexParameterfEXT(GLenum texunit, GLenum target, GLenum parameterName, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexParameterfEXT, texunit, target, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexParameterfEXT, texunit, target, parameterName, param);
 }
 
 void System
 	::GlMultiTexParameterfvEXT(GLenum texunit, GLenum target, GLenum parameterName, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexParameterfvEXT, texunit, target, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexParameterfvEXT, texunit, target, parameterName, param);
 }
 
 void System
 	::GlMultiTexParameteriEXT(GLenum texunit, GLenum target, GLenum parameterName, GLint param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexParameteriEXT, texunit, target, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexParameteriEXT, texunit, target, parameterName, param);
 }
 
 void System
 	::GlMultiTexParameterivEXT(GLenum texunit, GLenum target, GLenum parameterName, const GLint* param) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiTexParameterivEXT, texunit, target, parameterName, param);
+	SYSTEM_BODY_4(gglMultiTexParameterivEXT, texunit, target, parameterName, param);
 }
 
 void System
 	::GlMultiTexRenderbufferEXT(GLenum texunit, GLenum target, GLuint renderbuffer) noexcept
 {
-	SYSTEM_BODY_A3(gglMultiTexRenderbufferEXT, texunit, target, renderbuffer);
+	SYSTEM_BODY_3(gglMultiTexRenderbufferEXT, texunit, target, renderbuffer);
 }
 
 void System
 	::GlMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A8(gglMultiTexSubImage1DEXT, texunit, target, level, xoffset, width, format, type, pixels);
+	SYSTEM_BODY_8(gglMultiTexSubImage1DEXT, texunit, target, level, xoffset, width, format, type, pixels);
 }
 
 void System
 	::GlMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A10(gglMultiTexSubImage2DEXT, texunit, target, level, xoffset, yoffset, width, height, format, type, pixels);
+	SYSTEM_BODY_10(gglMultiTexSubImage2DEXT, texunit, target, level, xoffset, yoffset, width, height, format, type, pixels);
 }
 
 void System
 	::GlMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset,
 							  GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A12(gglMultiTexSubImage3DEXT, texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+	SYSTEM_BODY_12(gglMultiTexSubImage3DEXT, texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
 
 }
 
 void System
 	::GlNamedBufferDataEXT(GLuint buffer, GLsizeiptr size, const void* data, GLenum usage) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedBufferDataEXT, buffer, size, data, usage);
+	SYSTEM_BODY_4(gglNamedBufferDataEXT, buffer, size, data, usage);
 }
 
 void System
 	::GlNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, GLsizeiptr size, const void* data) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedBufferSubDataEXT, buffer, offset, size, data);
+	SYSTEM_BODY_4(gglNamedBufferSubDataEXT, buffer, offset, size, data);
 }
 
 void System
 	::GlNamedCopyBufferSubDataEXT(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedCopyBufferSubDataEXT, readBuffer, writeBuffer, readOffset, writeOffset, size);
+	SYSTEM_BODY_5(gglNamedCopyBufferSubDataEXT, readBuffer, writeBuffer, readOffset, writeOffset, size);
 }
 
 void System
 	::GlNamedFramebufferRenderbufferEXT(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedFramebufferRenderbufferEXT, framebuffer, attachment, renderbuffertarget, renderbuffer);
+	SYSTEM_BODY_4(gglNamedFramebufferRenderbufferEXT, framebuffer, attachment, renderbuffertarget, renderbuffer);
 }
 
 void System
 	::GlNamedFramebufferTexture1DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedFramebufferTexture1DEXT, framebuffer, attachment, textarget, texture, level);
+	SYSTEM_BODY_5(gglNamedFramebufferTexture1DEXT, framebuffer, attachment, textarget, texture, level);
 }
 
 void System
 	::GlNamedFramebufferTexture2DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedFramebufferTexture2DEXT, framebuffer, attachment, textarget, texture, level);
+	SYSTEM_BODY_5(gglNamedFramebufferTexture2DEXT, framebuffer, attachment, textarget, texture, level);
 }
 
 void System
 	::GlNamedFramebufferTexture3DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset) noexcept
 {
-	SYSTEM_BODY_A6(gglNamedFramebufferTexture3DEXT, framebuffer, attachment, textarget, texture, level, zoffset);
+	SYSTEM_BODY_6(gglNamedFramebufferTexture3DEXT, framebuffer, attachment, textarget, texture, level, zoffset);
 }
 
 void System
 	::GlNamedFramebufferTextureEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedFramebufferTextureEXT, framebuffer, attachment, texture, level);
+	SYSTEM_BODY_4(gglNamedFramebufferTextureEXT, framebuffer, attachment, texture, level);
 }
 
 void System
 	::GlNamedFramebufferTextureFaceEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedFramebufferTextureFaceEXT, framebuffer, attachment, texture, level, face);
+	SYSTEM_BODY_5(gglNamedFramebufferTextureFaceEXT, framebuffer, attachment, texture, level, face);
 }
 
 void System
 	::GlNamedFramebufferTextureLayerEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedFramebufferTextureLayerEXT, framebuffer, attachment, texture, level, layer);
+	SYSTEM_BODY_5(gglNamedFramebufferTextureLayerEXT, framebuffer, attachment, texture, level, layer);
 }
 
 void System
 	::GlNamedProgramLocalParameter4dEXT(GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w) noexcept
 {
-	SYSTEM_BODY_A7(gglNamedProgramLocalParameter4dEXT, program, target, index, x, y, z, w);
+	SYSTEM_BODY_7(gglNamedProgramLocalParameter4dEXT, program, target, index, x, y, z, w);
 }
 
 void System
 	::GlNamedProgramLocalParameter4dvEXT(GLuint program, GLenum target, GLuint index, const GLdouble* params) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedProgramLocalParameter4dvEXT, program, target, index, params);
+	SYSTEM_BODY_4(gglNamedProgramLocalParameter4dvEXT, program, target, index, params);
 }
 
 void System
 	::GlNamedProgramLocalParameter4fEXT(GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w) noexcept
 {
-	SYSTEM_BODY_A7(gglNamedProgramLocalParameter4fEXT, program, target, index, x, y, z, w);
+	SYSTEM_BODY_7(gglNamedProgramLocalParameter4fEXT, program, target, index, x, y, z, w);
 }
 
 void System
 	::GlNamedProgramLocalParameter4fvEXT(GLuint program, GLenum target, GLuint index, const GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedProgramLocalParameter4fvEXT, program, target, index, params);
+	SYSTEM_BODY_4(gglNamedProgramLocalParameter4fvEXT, program, target, index, params);
 }
 
 void System
 	::GlNamedProgramLocalParameterI4iEXT(GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w) noexcept
 {
-	SYSTEM_BODY_A7(gglNamedProgramLocalParameterI4iEXT, program, target, index, x, y, z, w);
+	SYSTEM_BODY_7(gglNamedProgramLocalParameterI4iEXT, program, target, index, x, y, z, w);
 }
 
 void System
 	::GlNamedProgramLocalParameterI4ivEXT(GLuint program, GLenum target, GLuint index, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedProgramLocalParameterI4ivEXT, program, target, index, params);
+	SYSTEM_BODY_4(gglNamedProgramLocalParameterI4ivEXT, program, target, index, params);
 }
 
 void System
 	::GlNamedProgramLocalParameterI4uiEXT(GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w) noexcept
 {
-	SYSTEM_BODY_A7(gglNamedProgramLocalParameterI4uiEXT, program, target, index, x, y, z, w);
+	SYSTEM_BODY_7(gglNamedProgramLocalParameterI4uiEXT, program, target, index, x, y, z, w);
 }
 
 void System
 	::GlNamedProgramLocalParameterI4uivEXT(GLuint program, GLenum target, GLuint index, const GLuint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedProgramLocalParameterI4uivEXT, program, target, index, params);
+	SYSTEM_BODY_4(gglNamedProgramLocalParameterI4uivEXT, program, target, index, params);
 }
 
 void System
 	::GlNamedProgramLocalParameters4fvEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat* params) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedProgramLocalParameters4fvEXT, program, target, index, count, params);
+	SYSTEM_BODY_5(gglNamedProgramLocalParameters4fvEXT, program, target, index, count, params);
 }
 
 void System
 	::GlNamedProgramLocalParametersI4ivEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedProgramLocalParametersI4ivEXT, program, target, index, count, params);
+	SYSTEM_BODY_5(gglNamedProgramLocalParametersI4ivEXT, program, target, index, count, params);
 
 }
 
 void System
 	::GlNamedProgramLocalParametersI4uivEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint* params) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedProgramLocalParametersI4uivEXT, program, target, index, count, params);
+	SYSTEM_BODY_5(gglNamedProgramLocalParametersI4uivEXT, program, target, index, count, params);
 }
 
 void System
 	::GlNamedProgramStringEXT(GLuint program, GLenum target, GLenum format, GLsizei len, const void* programString) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedProgramStringEXT, program, target, format, len, programString);
+	SYSTEM_BODY_5(gglNamedProgramStringEXT, program, target, format, len, programString);
 }
 
 void System
 	::GlNamedRenderbufferStorageEXT(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A4(gglNamedRenderbufferStorageEXT, renderbuffer, internalformat, width, height);
+	SYSTEM_BODY_4(gglNamedRenderbufferStorageEXT, renderbuffer, internalformat, width, height);
 }
 
 void System
 	::GlNamedRenderbufferStorageMultisampleCoverageEXT(GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A6(gglNamedRenderbufferStorageMultisampleCoverageEXT, renderbuffer, coverageSamples, colorSamples, internalformat, width, height);
+	SYSTEM_BODY_6(gglNamedRenderbufferStorageMultisampleCoverageEXT, renderbuffer, coverageSamples, colorSamples, internalformat, width, height);
 }
 
 void System
 	::GlNamedRenderbufferStorageMultisampleEXT(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A5(gglNamedRenderbufferStorageMultisampleEXT, renderbuffer, samples, internalformat, width, height);
+	SYSTEM_BODY_5(gglNamedRenderbufferStorageMultisampleEXT, renderbuffer, samples, internalformat, width, height);
 }
 
 void System
 	::GlProgramUniform1fEXT(GLuint program, GLint location, GLfloat v0) noexcept
 {
-	SYSTEM_BODY_A3(gglProgramUniform1fEXT, program, location, v0);
+	SYSTEM_BODY_3(gglProgramUniform1fEXT, program, location, v0);
 }
 
 void System
 	::GlProgramUniform1fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform1fvEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform1fvEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform1iEXT(GLuint program, GLint location, GLint v0) noexcept
 {
-	SYSTEM_BODY_A3(gglProgramUniform1iEXT, program, location, v0);
+	SYSTEM_BODY_3(gglProgramUniform1iEXT, program, location, v0);
 }
 
 void System
 	::GlProgramUniform1ivEXT(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform1ivEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform1ivEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform1uiEXT(GLuint program, GLint location, GLuint v0) noexcept
 {
-	SYSTEM_BODY_A3(gglProgramUniform1uiEXT, program, location, v0);
+	SYSTEM_BODY_3(gglProgramUniform1uiEXT, program, location, v0);
 }
 
 void System
 	::GlProgramUniform1uivEXT(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform1uivEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform1uivEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform2fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform2fEXT, program, location, v0, v1);
+	SYSTEM_BODY_4(gglProgramUniform2fEXT, program, location, v0, v1);
 }
 
 void System
 	::GlProgramUniform2fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform2fvEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform2fvEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform2iEXT(GLuint program, GLint location, GLint v0, GLint v1) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform2iEXT, program, location, v0, v1);
+	SYSTEM_BODY_4(gglProgramUniform2iEXT, program, location, v0, v1);
 }
 
 void System
 	::GlProgramUniform2ivEXT(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform2ivEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform2ivEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform2uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform2uiEXT, program, location, v0, v1);
+	SYSTEM_BODY_4(gglProgramUniform2uiEXT, program, location, v0, v1);
 }
 
 void System
 	::GlProgramUniform2uivEXT(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform2uivEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform2uivEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform3fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniform3fEXT, program, location, v0, v1, v2);
+	SYSTEM_BODY_5(gglProgramUniform3fEXT, program, location, v0, v1, v2);
 }
 
 void System
 	::GlProgramUniform3fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform3fvEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform3fvEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform3iEXT(GLuint program, GLint location, GLint v0, GLint v1, GLint v2) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniform3iEXT, program, location, v0, v1, v2);
+	SYSTEM_BODY_5(gglProgramUniform3iEXT, program, location, v0, v1, v2);
 }
 
 void System
 	::GlProgramUniform3ivEXT(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform3ivEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform3ivEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform3uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniform3uiEXT, program, location, v0, v1, v2);
+	SYSTEM_BODY_5(gglProgramUniform3uiEXT, program, location, v0, v1, v2);
 }
 
 void System
 	::GlProgramUniform3uivEXT(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform3uivEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform3uivEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform4fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) noexcept
 {
-	SYSTEM_BODY_A6(gglProgramUniform4fEXT, program, location, v0, v1, v2, v3);
+	SYSTEM_BODY_6(gglProgramUniform4fEXT, program, location, v0, v1, v2, v3);
 }
 
 void System
 	::GlProgramUniform4fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform4fvEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform4fvEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform4iEXT(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3) noexcept
 {
-	SYSTEM_BODY_A6(gglProgramUniform4iEXT, program, location, v0, v1, v2, v3);
+	SYSTEM_BODY_6(gglProgramUniform4iEXT, program, location, v0, v1, v2, v3);
 }
 
 void System
 	::GlProgramUniform4ivEXT(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform4ivEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform4ivEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniform4uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) noexcept
 {
-	SYSTEM_BODY_A6(gglProgramUniform4iEXT, program, location, v0, v1, v2, v3);
+	SYSTEM_BODY_6(gglProgramUniform4iEXT, program, location, v0, v1, v2, v3);
 }
 
 void System
 	::GlProgramUniform4uivEXT(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_A4(gglProgramUniform4uivEXT, program, location, count, value);
+	SYSTEM_BODY_4(gglProgramUniform4uivEXT, program, location, count, value);
 }
 
 void System
 	::GlProgramUniformMatrix2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix2fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix2fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlProgramUniformMatrix2x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix2x3fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix2x3fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlProgramUniformMatrix2x4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix2x4fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix2x4fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlProgramUniformMatrix3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix3fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix3fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlProgramUniformMatrix3x2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix3x2fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix3x2fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlProgramUniformMatrix3x4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix3x4fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix3x4fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlProgramUniformMatrix4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix4fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix4fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlProgramUniformMatrix4x2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix4x2fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix4x2fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlProgramUniformMatrix4x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A5(gglProgramUniformMatrix4x3fvEXT, program, location, count, transpose, value);
+	SYSTEM_BODY_5(gglProgramUniformMatrix4x3fvEXT, program, location, count, transpose, value);
 }
 
 void System
 	::GlPushClientAttribDefaultEXT(GLbitfield mask) noexcept
 {
-	SYSTEM_BODY_A1(gglPushClientAttribDefaultEXT, mask);
+	SYSTEM_BODY_1(gglPushClientAttribDefaultEXT, mask);
 }
 
 void System
 	::GlTextureBufferEXT(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A4(gglTextureBufferEXT, texture, target, internalformat, buffer);
+	SYSTEM_BODY_4(gglTextureBufferEXT, texture, target, internalformat, buffer);
 }
 
 void System
 	::GlTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A9(gglTextureImage1DEXT, texture, target, level, internalformat, width, border, format, type, pixels);
+	SYSTEM_BODY_9(gglTextureImage1DEXT, texture, target, level, internalformat, width, border, format, type, pixels);
 }
 
 void System
 	::GlTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A10(gglTextureImage2DEXT, texture, target, level, internalformat, width, height, border, format, type, pixels);
+	SYSTEM_BODY_10(gglTextureImage2DEXT, texture, target, level, internalformat, width, height, border, format, type, pixels);
 }
 
 void System
 	::GlTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A11(gglTextureImage3DEXT, texture, target, level, internalformat, width, height, depth, border, format, type, pixels);
+	SYSTEM_BODY_11(gglTextureImage3DEXT, texture, target, level, internalformat, width, height, depth, border, format, type, pixels);
 }
 
 void System
 	::GlTextureParameterIivEXT(GLuint texture, GLenum target, GLenum parameterName, const GLint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglTextureParameterIivEXT, texture, target, parameterName, params);
+	SYSTEM_BODY_4(gglTextureParameterIivEXT, texture, target, parameterName, params);
 }
 
 void System
 	::GlTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum parameterName, const GLuint* params) noexcept
 {
-	SYSTEM_BODY_A4(gglTextureParameterIuivEXT, texture, target, parameterName, params);
+	SYSTEM_BODY_4(gglTextureParameterIuivEXT, texture, target, parameterName, params);
 }
 
 void System
 	::GlTextureParameterfEXT(GLuint texture, GLenum target, GLenum parameterName, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A4(gglTextureParameterfEXT, texture, target, parameterName, param);
+	SYSTEM_BODY_4(gglTextureParameterfEXT, texture, target, parameterName, param);
 }
 
 void System
 	::GlTextureParameterfvEXT(GLuint texture, GLenum target, GLenum parameterName, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A4(gglTextureParameterfvEXT, texture, target, parameterName, param);
+	SYSTEM_BODY_4(gglTextureParameterfvEXT, texture, target, parameterName, param);
 }
 
 void System
 	::GlTextureParameteriEXT(GLuint texture, GLenum target, GLenum parameterName, GLint param) noexcept
 {
-	SYSTEM_BODY_A4(gglTextureParameteriEXT, texture, target, parameterName, param);
+	SYSTEM_BODY_4(gglTextureParameteriEXT, texture, target, parameterName, param);
 }
 
 void System
 	::GlTextureParameterivEXT(GLuint texture, GLenum target, GLenum parameterName, const GLint* param) noexcept
 {
-	SYSTEM_BODY_A4(gglTextureParameterivEXT, texture, target, parameterName, param);
+	SYSTEM_BODY_4(gglTextureParameterivEXT, texture, target, parameterName, param);
 }
 
 void System
 	::GlTextureRenderbufferEXT(GLuint texture, GLenum target, GLuint renderbuffer) noexcept
 {
-	SYSTEM_BODY_A3(gglTextureRenderbufferEXT, texture, target, renderbuffer);
+	SYSTEM_BODY_3(gglTextureRenderbufferEXT, texture, target, renderbuffer);
 }
 
 void System
 	::GlTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A8(gglTextureSubImage1DEXT, texture, target, level, xoffset, width, format, type, pixels);
+	SYSTEM_BODY_8(gglTextureSubImage1DEXT, texture, target, level, xoffset, width, format, type, pixels);
 }
 
 void System
 	::GlTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A10(gglTextureSubImage2DEXT, texture, target, level, xoffset, yoffset, width, height, format, type, pixels);
+	SYSTEM_BODY_10(gglTextureSubImage2DEXT, texture, target, level, xoffset, yoffset, width, height, format, type, pixels);
 }
 
 void System
 	::GlTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset,
 							 GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels) noexcept
 {
-	SYSTEM_BODY_A12(gglTextureSubImage3DEXT, texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+	SYSTEM_BODY_12(gglTextureSubImage3DEXT, texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
 
 }
 
 GLboolean System
 	::GlUnmapNamedBufferEXT(GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglUnmapNamedBufferEXT, buffer, GLboolean, GL_FALSE);
+	SYSTEM_BODY_1_RESULT(gglUnmapNamedBufferEXT, buffer, GLboolean, GL_FALSE);
 }
 
 void System
 	::GlVertexArrayColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A6(gglVertexArrayColorOffsetEXT, vaobj, buffer, size, type, stride, offset);
+	SYSTEM_BODY_6(gglVertexArrayColorOffsetEXT, vaobj, buffer, size, type, stride, offset);
 }
 
 void System
 	::GlVertexArrayEdgeFlagOffsetEXT(GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A4(gglVertexArrayEdgeFlagOffsetEXT, vaobj, buffer, stride, offset);
+	SYSTEM_BODY_4(gglVertexArrayEdgeFlagOffsetEXT, vaobj, buffer, stride, offset);
 }
 
 void System
 	::GlVertexArrayFogCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexArrayFogCoordOffsetEXT, vaobj, buffer, type, stride, offset);
+	SYSTEM_BODY_5(gglVertexArrayFogCoordOffsetEXT, vaobj, buffer, type, stride, offset);
 }
 
 void System
 	::GlVertexArrayIndexOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexArrayIndexOffsetEXT, vaobj, buffer, type, stride, offset);
+	SYSTEM_BODY_5(gglVertexArrayIndexOffsetEXT, vaobj, buffer, type, stride, offset);
 }
 
 void System
 	::GlVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A7(gglVertexArrayMultiTexCoordOffsetEXT, vaobj, buffer, texunit, size, type, stride, offset);
+	SYSTEM_BODY_7(gglVertexArrayMultiTexCoordOffsetEXT, vaobj, buffer, texunit, size, type, stride, offset);
 }
 
 void System
 	::GlVertexArrayNormalOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexArrayNormalOffsetEXT, vaobj, buffer, type, stride, offset);
+	SYSTEM_BODY_5(gglVertexArrayNormalOffsetEXT, vaobj, buffer, type, stride, offset);
 }
 
 void System
 	::GlVertexArraySecondaryColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A6(gglVertexArraySecondaryColorOffsetEXT, vaobj, buffer, size, type, stride, offset);
+	SYSTEM_BODY_6(gglVertexArraySecondaryColorOffsetEXT, vaobj, buffer, size, type, stride, offset);
 }
 
 void System
 	::GlVertexArrayTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A6(gglVertexArrayTexCoordOffsetEXT, vaobj, buffer, size, type, stride, offset);
+	SYSTEM_BODY_6(gglVertexArrayTexCoordOffsetEXT, vaobj, buffer, size, type, stride, offset);
 }
 
 void System
 	::GlVertexArrayVertexAttribDivisorEXT(GLuint vaobj, GLuint index, GLuint divisor) noexcept
 {
-	SYSTEM_BODY_A3(gglVertexArrayVertexAttribDivisorEXT, vaobj, index, divisor);
+	SYSTEM_BODY_3(gglVertexArrayVertexAttribDivisorEXT, vaobj, index, divisor);
 }
 
 void System
 	::GlVertexArrayVertexAttribIOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A7(gglVertexArrayVertexAttribIOffsetEXT, vaobj, buffer, index, size, type, stride, offset);
+	SYSTEM_BODY_7(gglVertexArrayVertexAttribIOffsetEXT, vaobj, buffer, index, size, type, stride, offset);
 }
 
 void System
 	::GlVertexArrayVertexAttribOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A8(gglVertexArrayVertexAttribOffsetEXT, vaobj, buffer, index, size, type, normalized, stride, offset);
+	SYSTEM_BODY_8(gglVertexArrayVertexAttribOffsetEXT, vaobj, buffer, index, size, type, normalized, stride, offset);
 }
 void System
 	::GlVertexArrayVertexOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A6(gglVertexArrayVertexOffsetEXT, vaobj, buffer, size, type, stride, offset);
+	SYSTEM_BODY_6(gglVertexArrayVertexOffsetEXT, vaobj, buffer, size, type, stride, offset);
 }
 
 void System
@@ -7187,7 +7205,7 @@ namespace System
 void System
 	::GlProvokingVertexEXT(GLenum mode) noexcept
 {
-	SYSTEM_BODY_A1(gglProvokingVertexEXT, mode);
+	SYSTEM_BODY_1(gglProvokingVertexEXT, mode);
 }
 
 void System
@@ -7261,19 +7279,19 @@ namespace System
 void System
 	::GlActiveProgramEXT(GLuint program) noexcept
 {
-	SYSTEM_BODY_A1(gglActiveProgramEXT, program);
+	SYSTEM_BODY_1(gglActiveProgramEXT, program);
 }
 
 GLuint System
 	::GlCreateShaderProgramEXT(GLenum type, const GLchar* programString) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglCreateShaderProgramEXT, type, programString, GLuint, 0);
+	SYSTEM_BODY_2_RESULT(gglCreateShaderProgramEXT, type, programString, GLuint, 0);
 }
 
 void System
 	::GlUseShaderProgramEXT(GLenum type, GLuint program) noexcept
 {
-	SYSTEM_BODY_A2(gglUseShaderProgramEXT, type, program);
+	SYSTEM_BODY_2(gglUseShaderProgramEXT, type, program);
 }
 
 void System
@@ -7321,13 +7339,13 @@ namespace System
 void System
 	::GlBindImageTextureEXT(GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format) noexcept
 {
-	SYSTEM_BODY_A7(gglBindImageTextureEXT, index, texture, level, layered, layer, access, format);
+	SYSTEM_BODY_7(gglBindImageTextureEXT, index, texture, level, layered, layer, access, format);
 }
 
 void System
 	::GlMemoryBarrierEXT(GLbitfield barriers) noexcept
 {
-	SYSTEM_BODY_A1(gglMemoryBarrierEXT, barriers);
+	SYSTEM_BODY_1(gglMemoryBarrierEXT, barriers);
 }
 
 void System
@@ -7392,67 +7410,67 @@ namespace System
 void System
 	::GlGetVertexAttribLdvEXT(GLuint index, GLenum parameterName, GLdouble* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetVertexAttribLdvEXT, index, parameterName, params);
+	SYSTEM_BODY_3(gglGetVertexAttribLdvEXT, index, parameterName, params);
 }
 
 void System
 	::GlVertexArrayVertexAttribLOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset) noexcept
 {
-	SYSTEM_BODY_A7(gglVertexArrayVertexAttribLOffsetEXT, vaobj, buffer, index, size, type, stride, offset);
+	SYSTEM_BODY_7(gglVertexArrayVertexAttribLOffsetEXT, vaobj, buffer, index, size, type, stride, offset);
 }
 
 void System
 	::GlVertexAttribL1dEXT(GLuint index, GLdouble x) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribL1dEXT, index, x);
+	SYSTEM_BODY_2(gglVertexAttribL1dEXT, index, x);
 }
 
 void System
 	::GlVertexAttribL1dvEXT(GLuint index, const GLdouble* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribL1dvEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribL1dvEXT, index, v);
 }
 
 void System
 	::GlVertexAttribL2dEXT(GLuint index, GLdouble x, GLdouble y) noexcept
 {
-	SYSTEM_BODY_A3(gglVertexAttribL2dEXT, index, x, y);
+	SYSTEM_BODY_3(gglVertexAttribL2dEXT, index, x, y);
 }
 
 void System
 	::GlVertexAttribL2dvEXT(GLuint index, const GLdouble* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribL2dvEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribL2dvEXT, index, v);
 }
 
 void System
 	::GlVertexAttribL3dEXT(GLuint index, GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_BODY_A4(gglVertexAttribL3dEXT, index, x, y, z);
+	SYSTEM_BODY_4(gglVertexAttribL3dEXT, index, x, y, z);
 }
 
 void System
 	::GlVertexAttribL3dvEXT(GLuint index, const GLdouble* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribL3dvEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribL3dvEXT, index, v);
 }
 
 void System
 	::GlVertexAttribL4dEXT(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexAttribL4dEXT, index, x, y, z, w);
+	SYSTEM_BODY_5(gglVertexAttribL4dEXT, index, x, y, z, w);
 }
 
 void System
 	::GlVertexAttribL4dvEXT(GLuint index, const GLdouble* v) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribL4dvEXT, index, v);
+	SYSTEM_BODY_2(gglVertexAttribL4dvEXT, index, v);
 }
 
 void System
 	::GlVertexAttribLPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer) noexcept
 {
-	SYSTEM_BODY_A5(gglVertexAttribLPointerEXT, index, size, type, stride, pointer);
+	SYSTEM_BODY_5(gglVertexAttribLPointerEXT, index, size, type, stride, pointer);
 }
 
 void System
@@ -7532,7 +7550,7 @@ namespace System
 GLsync System
 	::GlImportSyncEXT(GLenum externalSyncType, GLintptr externalSync, GLbitfield flags) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gglImportSyncEXT, externalSyncType, externalSync, flags, GLsync, nullptr);
+	SYSTEM_BODY_3_RESULT(gglImportSyncEXT, externalSyncType, externalSync, flags, GLsync, nullptr);
 }
 
 void System
@@ -7629,13 +7647,13 @@ namespace System
 void System
 	::GlGetObjectLabelEXT(GLenum type, GLuint object, GLsizei bufSize, GLsizei* length, GLchar* label) noexcept
 {
-	SYSTEM_BODY_A5(gglGetObjectLabelEXT, type, object, bufSize, length, label);
+	SYSTEM_BODY_5(gglGetObjectLabelEXT, type, object, bufSize, length, label);
 }
 
 void System
 	::GlLabelObjectEXT(GLenum type, GLuint object, GLsizei length, const GLchar* label) noexcept
 {
-	SYSTEM_BODY_A4(gglLabelObjectEXT, type, object, length, label);
+	SYSTEM_BODY_4(gglLabelObjectEXT, type, object, length, label);
 }
 
 void System
@@ -7684,19 +7702,19 @@ namespace System
 void System
 	::GlInsertEventMarkerEXT(GLsizei length, const GLchar* marker) noexcept
 {
-	SYSTEM_BODY_A2(gglInsertEventMarkerEXT, length, marker);
+	SYSTEM_BODY_2(gglInsertEventMarkerEXT, length, marker);
 }
 
 void System
 	::GlPopGroupMarkerEXT(void) noexcept
 {
-	SYSTEM_BODY_A0(gglPopGroupMarkerEXT);
+	SYSTEM_BODY_0(gglPopGroupMarkerEXT);
 }
 
 void System
 	::GlPushGroupMarkerEXT(GLsizei length, const GLchar* marker) noexcept
 {
-	SYSTEM_BODY_A2(gglPushGroupMarkerEXT, length, marker);
+	SYSTEM_BODY_2(gglPushGroupMarkerEXT, length, marker);
 }
 
 void System
@@ -7769,7 +7787,7 @@ namespace System
 void System
 	::GlPolygonOffsetClampEXT(GLfloat factor, GLfloat units, GLfloat clamp) noexcept
 {
-	SYSTEM_BODY_A3(gglPolygonOffsetClampEXT, factor, units, clamp);
+	SYSTEM_BODY_3(gglPolygonOffsetClampEXT, factor, units, clamp);
 }
 
 void System
@@ -7845,25 +7863,25 @@ namespace System
 void System
 	::GlCoverageModulationNV(GLenum components) noexcept
 {
-	SYSTEM_BODY_A1(gglCoverageModulationNV, components);
+	SYSTEM_BODY_1(gglCoverageModulationNV, components);
 }
 
 void System
 	::GlCoverageModulationTableNV(GLsizei n, const GLfloat* v) noexcept
 {
-	SYSTEM_BODY_A2(gglCoverageModulationTableNV, n, v);
+	SYSTEM_BODY_2(gglCoverageModulationTableNV, n, v);
 }
 
 void System
 	::GlGetCoverageModulationTableNV(GLsizei bufsize, GLfloat* v) noexcept
 {
-	SYSTEM_BODY_A2(gglGetCoverageModulationTableNV, bufsize, v);
+	SYSTEM_BODY_2(gglGetCoverageModulationTableNV, bufsize, v);
 }
 
 void System
 	::GlRasterSamplesEXT(GLuint samples, GLboolean fixedsamplelocations) noexcept
 {
-	SYSTEM_BODY_A2(gglRasterSamplesEXT, samples, fixedsamplelocations);
+	SYSTEM_BODY_2(gglRasterSamplesEXT, samples, fixedsamplelocations);
 }
 
 void System

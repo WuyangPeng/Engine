@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 16:53)
+// 引擎版本：0.0.2.5 (2020/03/23 17:43)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_DETAIL_H
@@ -24,7 +24,7 @@ const Real Mathematics::DistanceBase<Real, Vector>
 template <typename Real, typename Vector>
 Mathematics::DistanceBase<Real, Vector>
 	::DistanceBase()
-	:m_MaximumIterations{ sm_DefaultMaximumIterations },m_ZeroThreshold{ sm_DefaultZeroThreshold },m_DifferenceStep{ sm_DefaultDifferenceStep },m_InverseTwoDifferenceStep{ static_cast<Real>(0.5) / m_DifferenceStep }
+	:m_MaximumIterations{ sm_DefaultMaximumIterations }, m_ZeroThreshold{ sm_DefaultZeroThreshold }, m_DifferenceStep{ sm_DefaultDifferenceStep }, m_InverseTwoDifferenceStep{ static_cast<Real>(0.5) / m_DifferenceStep }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -41,7 +41,7 @@ template <typename Real, typename Vector>
 bool Mathematics::DistanceBase<Real, Vector>
 	::IsValid() const noexcept
 {
-	if (0 < m_MaximumIterations && Real{} <= m_ZeroThreshold &&Real{} < m_DifferenceStep &&
+	if (0 < m_MaximumIterations && Math::sm_Zero <= m_ZeroThreshold && Math::sm_Zero < m_DifferenceStep &&
 		Math::Approximate(static_cast<Real>(0.5) / m_DifferenceStep, m_InverseTwoDifferenceStep, m_ZeroThreshold))
 	{
 		return true;
@@ -58,10 +58,10 @@ void Mathematics::DistanceBase<Real, Vector>
 	::SetDifferenceStep(Real differenceStep)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_2(Real{} < differenceStep, "无效的相差步进值\n");
+	MATHEMATICS_ASSERTION_2(Math::sm_Zero < differenceStep, "无效的相差步进值\n");
 
 	m_DifferenceStep = differenceStep;
-	m_InverseTwoDifferenceStep = static_cast<Real>(0.5) / m_DifferenceStep;	
+	m_InverseTwoDifferenceStep = static_cast<Real>(0.5) / m_DifferenceStep;
 }
 
 template <typename Real, typename Vector>
@@ -88,7 +88,7 @@ void Mathematics::DistanceBase<Real, Vector>
 	::SetZeroThreshold(Real zeroThreshold)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_2(Real{} <= zeroThreshold, "无效的临界值\n");
+	MATHEMATICS_ASSERTION_2(Math::sm_Zero <= zeroThreshold, "无效的临界值\n");
 
 	m_ZeroThreshold = zeroThreshold;
 }
@@ -129,7 +129,7 @@ const typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathemati
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	auto result = GetSquared(t,lhsVelocity,rhsVelocity);
+	auto result = GetSquared(t, lhsVelocity, rhsVelocity);
 	result.SetSqrtDistance();
 
 	return result;
@@ -154,11 +154,11 @@ Real Mathematics::DistanceBase<Real, Vector>
 	::GetDerivativeSquared(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
+
 	// 如果计算平方距离的导数为特定类别更快的方法，派生类应该重写它。
 	auto distance = Get(t, lhsVelocity, rhsVelocity);
 	auto derivative = GetDerivative(t, lhsVelocity, rhsVelocity);
-	
+
 	return static_cast<Real>(2) * distance.GetDistance() * derivative;
 }
 
@@ -174,7 +174,7 @@ const typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathemati
 
 	IntervalDistance<Real, Vector> intervalDistance{ *this,tMin,tMax,lhsVelocity,rhsVelocity };
 
-    return intervalDistance.GetResult();
+	return intervalDistance.GetResult();
 }
 
 template <typename Real, typename Vector>
@@ -193,4 +193,3 @@ const typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathemati
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_DETAIL_H
- 

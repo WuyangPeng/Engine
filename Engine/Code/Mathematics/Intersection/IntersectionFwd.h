@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 14:17)
+// 引擎版本：0.0.2.5 (2020/03/24 14:32)
 
 #ifndef MATHEMATICS_INTERSECTION_FWD_H
 #define MATHEMATICS_INTERSECTION_FWD_H
@@ -16,7 +16,7 @@ namespace Mathematics
 	template <typename Real, template <typename> class Vector>
 	class StaticIntersector;
 
-	template <typename Real,  template <typename> class Vector>
+	template <typename Real, template <typename> class Vector>
 	class DynamicIntersector;
 
 	template <typename Real>
@@ -85,7 +85,7 @@ namespace Mathematics
 
 	template <typename Real>
 	class StaticFindIntersectorRay2Segment2;
-	
+
 	// 3D
 	template <typename Real>
 	class StaticFindIntersectorLine3Triangle3;
@@ -101,6 +101,11 @@ namespace Mathematics
 
 	template <typename Real>
 	class TrianglePlaneRelations;
+
+	enum class IntersectionType;
+
+	template <typename Real>
+	class IntersectorConfiguration;
 }
 
 #endif // MATHEMATICS_INTERSECTION_FWD_H

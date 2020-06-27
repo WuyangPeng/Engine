@@ -13,7 +13,7 @@ using std::string;
 using std::ostream;
 
 CoreTools::EquilongReportOutputImpl
-	::EquilongReportOutputImpl(int borderLineLength, ostream* osPtr)
+	::EquilongReportOutputImpl(int borderLineLength, const OStreamShared& osPtr)
 	:ParentType{ osPtr }, m_BorderLineLength{ borderLineLength }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

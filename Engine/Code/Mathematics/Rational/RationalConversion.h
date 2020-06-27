@@ -1,31 +1,25 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 11:09)
-
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 09:49)
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_H
 #define MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Flags/NumericalValueSymbol.h"
+#include "RationalFwd.h"
 #include "IntegerTraits.h"
+#include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 
 #include <type_traits>
 
 namespace Mathematics
 {
-	template <int N>
-	class SignRational;
-
-	template <int N>
-	class Integer;
-
-	template <int N,typename T>
+	template <int N, typename T>
 	class RationalConversion
 	{
-	public:	
+	public:
 		static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
 		using ClassType = RationalConversion<N, T>;
@@ -38,7 +32,7 @@ namespace Mathematics
 		explicit RationalConversion(const Rational& rational);
 
 		CLASS_INVARIANT_DECLARE;
-		
+
 		T GetValue() const;
 
 	private:
@@ -61,7 +55,7 @@ namespace Mathematics
 		NumericalValueSymbol m_Symbol;
 		uint64_t m_Mantissa;
 		T m_Value;
-	};		
+	};
 }
 
 #endif // MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_H

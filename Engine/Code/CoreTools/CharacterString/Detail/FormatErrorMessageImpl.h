@@ -15,12 +15,12 @@
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "CoreTools/DynamicLink/DynamicLinkFwd.h"
 
-#include <boost/noncopyable.hpp> 
 #include <string>
+#include <memory>
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE FormatErrorMessageImpl : private boost::noncopyable
+	class CORE_TOOLS_HIDDEN_DECLARE FormatErrorMessageImpl  
 	{
 	public:
 		using ClassType = FormatErrorMessageImpl;
@@ -28,11 +28,17 @@ namespace CoreTools
 
 	public:
 		explicit FormatErrorMessageImpl(WindowError lastError);
-		~FormatErrorMessageImpl();
+		~FormatErrorMessageImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		const System::String GetErrorMessage() const;
+
+		FormatErrorMessageImpl(const FormatErrorMessageImpl&) = delete;
+		FormatErrorMessageImpl& operator=(const FormatErrorMessageImpl&) = delete;
+
+		FormatErrorMessageImpl(FormatErrorMessageImpl&&) noexcept = delete;
+		FormatErrorMessageImpl& operator=(FormatErrorMessageImpl&&) noexcept = delete;
 
 	private:
 		using LoadingLibraryPtr = std::shared_ptr<LoadingLibrary>;
@@ -45,7 +51,7 @@ namespace CoreTools
 		void InitNetworkMessage(DynamicLinkModule module);
 		void LoadedModuleSucceed(DynamicLinkModule module);
 		void LoadedModuleFailure();
-		void ReleaseMemory();	
+		void ReleaseMemory() noexcept;
 
 	private:
 		WindowError m_LastError;

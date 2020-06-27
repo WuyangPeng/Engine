@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 09:47)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 09:46)
 
 #ifndef MATHEMATICS_ALGEBRA_FWD_H
 #define MATHEMATICS_ALGEBRA_FWD_H
@@ -15,7 +15,7 @@ namespace Mathematics
 	template<typename Traits>
 	struct AlgebraTraits;
 
-	template <typename Real,int WindowSize>
+	template <typename Real, int WindowSize>
 	class BarycentricCoordinates;
 
 	template <typename Real>
@@ -55,7 +55,7 @@ namespace Mathematics
 	class Vector3DTools;
 
 	template <typename Real>
-	class Vector4DTools;		
+	class Vector4DTools;
 
 	template <typename Real>
 	class Vector2DInformation;
@@ -91,7 +91,7 @@ namespace Mathematics
 	class Matrix2;
 
 	template <typename Real>
-	class Matrix2EigenDecomposition; 
+	class Matrix2EigenDecomposition;
 
 	template <typename Real>
 	class Matrix3;
@@ -134,6 +134,15 @@ namespace Mathematics
 
 	template <typename Real>
 	class AQuaternion;
+
+	enum class ExtractEulerResultType;
+	enum class ExtractEulerResultOrder;
+	enum class MatrixTypeFlags;
+	enum class MatrixMajorFlags;
+	enum class MatrixRotationAxis;
+	enum class BandedMatrixSolveFlags;
+	enum class QuaternionClosestAxis;
+	enum class QuaternionFactorFlags;
 }
 
 #endif // MATHEMATICS_ALGEBRA_FWD_H

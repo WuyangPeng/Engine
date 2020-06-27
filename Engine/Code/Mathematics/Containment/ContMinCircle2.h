@@ -23,7 +23,7 @@ namespace Mathematics
 	public:
 		// The epsilon value is a floating-point tolerance used for various
 		// computations.
-		MinCircle2 (int numPoints, const Vector2D<Real>* points,Circle2<Real>& minimal, Real epsilon = (Real)1e-05);
+		MinCircle2 (int numPoints, const Vector2D<Real>* points,Circle2<Real>& minimal, Real epsilon = static_cast<Real>(1e-05));
 		
 	private:
 		// Indices of points that support current minimum area circle.

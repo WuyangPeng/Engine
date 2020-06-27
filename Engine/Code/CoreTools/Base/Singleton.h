@@ -8,15 +8,16 @@
 // 如果实例化顺序并不重要，可以通过将派生类设为全局或局部静态。
 // 也可以通过在派生类中使用new和delete来自己做。
 // 静态库和动态库混用时会导致不同dll和exe使用不同的单例，需要特殊处理。
+// 单例在创建和销毁时没有加锁，必须保证单线程处理。
 #ifndef CORE_TOOLS_BASE_SINGLETON_H
 #define CORE_TOOLS_BASE_SINGLETON_H
 
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Threading/Mutex.h"
 
 namespace CoreTools
 {
 	template <typename T>
-	class Singleton : private boost::noncopyable
+	class Singleton 
 	{
 	public:
 		using ClassType = Singleton<T>;
@@ -26,14 +27,22 @@ namespace CoreTools
 
 	public:
 		static ReferenceType GetSingleton() noexcept;
-		static PointType GetSingletonPtr() noexcept;
+		static PointType GetSingletonPtr() noexcept;		
 
 	protected:
 		Singleton() noexcept;
-		virtual ~Singleton() noexcept;
+		~Singleton() noexcept;
+		static Mutex& GetMutex() noexcept;
+
+	public:
+		Singleton(const Singleton&) noexcept = delete;
+		Singleton& operator=(const Singleton&)  noexcept  = delete;
+		Singleton(Singleton&& rhs) noexcept = delete;
+		Singleton& operator=(Singleton&& rhs) noexcept = delete; 
 
 	private:
 		static PointType sm_Singleton;
+		static Mutex* sm_Mutex;
 	};
 }
 

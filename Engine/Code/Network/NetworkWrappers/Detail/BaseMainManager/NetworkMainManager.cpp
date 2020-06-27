@@ -1,23 +1,23 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/02 10:24)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 16:31)
 
 #include "Network/NetworkExport.h"
 
 #include "NetworkMainManager.h"
-#include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/MemoryTools/MemoryHelperDetail.h"
 #include "System/Network/WindowsExtensionPrototypes.h"
 #include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
+#include "CoreTools/Helper/LogMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 Network::NetworkMainManager
-	::NetworkMainManager() 
+	::NetworkMainManager()
 	:ParentType{}
 {
 	Init();
@@ -30,7 +30,7 @@ Network::NetworkMainManager
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 
-	Release();	
+	Release();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkMainManager)
@@ -38,7 +38,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, NetworkMainManager)
 void Network::NetworkMainManager
 	::Run()
 {
-	NETWORK_CLASS_IS_VALID_9; 
+	NETWORK_CLASS_IS_VALID_9;
 }
 
 void Network::NetworkMainManager
@@ -56,7 +56,7 @@ void Network::NetworkMainManager
 	}
 }
 
-void Network::NetworkMainManager	
+void Network::NetworkMainManager
 	::Release()
 {
 	auto cleanup = System::WinSockCleanup();

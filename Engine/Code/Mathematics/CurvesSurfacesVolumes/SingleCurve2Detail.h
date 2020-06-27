@@ -31,8 +31,8 @@ template <typename Real>
 Real Mathematics::SingleCurve2<Real>
 	::GetLength(Real t0, Real t1) const
 {
-    MATHEMATICS_ASSERTION_0(mTMin <= t0 && t0 <= mTMax, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(mTMin <= t1 && t1 <= mTMax, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(this->mTMin <= t0 && t0 <= this->mTMax, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(this->mTMin <= t1 && t1 <= this->mTMax, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(t0 <= t1, "Invalid input\n");
 
 	return RombergIntegral<Real, SingleCurve2>(8, t0, t1, GetSpeedWithData, this).GetValue();
@@ -42,14 +42,14 @@ template <typename Real>
 Real Mathematics::SingleCurve2<Real>
 	::GetTime(Real length, int iterations, Real tolerance) const
 {
-    if (length <= Real{})
+    if (length <= Math<Real>::sm_Zero)
     {
-        return mTMin;
+        return this->mTMin;
     }
 
     if (length >= GetTotalLength())
     {
-        return mTMax;
+        return this->mTMax;
     }
 
     // If L(t) is the length function for t in [tmin,tmax], the derivative is
@@ -64,15 +64,15 @@ Real Mathematics::SingleCurve2<Real>
 
     // Initial guess for Newton's method.
     Real ratio = length/GetTotalLength();
-    Real oneMinusRatio = (Real)1 - ratio;
-    Real t = oneMinusRatio*mTMin + ratio*mTMax;
+    Real oneMinusRatio = static_cast<Real>(1) - ratio;
+    Real t = oneMinusRatio* this->mTMin + ratio* this->mTMax;
 
     // Initial root-bounding interval for bisection.
-    Real lower = mTMin, upper = mTMax;
+    Real lower = this->mTMin, upper = this->mTMax;
 
     for (int i = 0; i < iterations; ++i)
     {
-        Real difference = GetLength(mTMin, t) - length;
+        Real difference = GetLength(this->mTMin, t) - length;
         if (Math<Real>::FAbs(difference) < tolerance)
         {
             // |L(t)-length| is close enough to zero, report t as the time
@@ -85,7 +85,7 @@ Real Mathematics::SingleCurve2<Real>
 
         // Update the root-bounding interval and test for containment of the
         // candidate.
-        if (difference > Real{})
+        if (difference > Math<Real>::sm_Zero)
         {
             upper = t;
             if (tCandidate <= lower)

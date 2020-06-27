@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 19:15)
+// 引擎版本：0.0.2.5 (2020/03/19 12:22)
 
 // 轴对齐包围盒2D类的实现
 #ifndef MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX_2D_DETAIL_H
@@ -15,9 +15,9 @@
 
 template <typename Real>
 Mathematics::AxesAlignBoundingBox2D<Real>
-	::AxesAlignBoundingBox2D(const Vector2D& minPoint,const Vector2D& maxPoint)
+	::AxesAlignBoundingBox2D(const Vector2D& minPoint, const Vector2D& maxPoint)
 	:m_MinPoint{ minPoint }, m_MaxPoint{ maxPoint }
-{	
+{
 	Recalculate();
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -28,7 +28,7 @@ template <typename T1>
 Mathematics::AxesAlignBoundingBox2D<Real>
 	::AxesAlignBoundingBox2D(const AxesAlignBoundingBox2D<T1>& aabb)
 	:m_MinPoint{ aabb.GetMinPoint() }, m_MaxPoint{ aabb.GetMaxPoint() }
-{	
+{
 	Recalculate();
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -38,7 +38,7 @@ template <typename Real>
 Mathematics::AxesAlignBoundingBox2D<Real>
 	::AxesAlignBoundingBox2D(Real xMin, Real xMax, Real yMin, Real yMax)
 	:m_MinPoint{ xMin,yMin }, m_MaxPoint{ xMax, yMax }
-{	
+{
 	Recalculate();
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -49,18 +49,18 @@ template <typename Real>
 void Mathematics::AxesAlignBoundingBox2D<Real>
 	::Recalculate()
 {
-	if(m_MaxPoint.GetXCoordinate() < m_MinPoint.GetXCoordinate())
+	if (m_MaxPoint.GetXCoordinate() < m_MinPoint.GetXCoordinate())
 	{
-		MATHEMATICS_ASSERTION_1(false,"输入的最大点和最小点X坐标错误！");
+		MATHEMATICS_ASSERTION_1(false, "输入的最大点和最小点X坐标错误！");
 
-		std::swap(m_MinPoint[0],m_MaxPoint[0]);
+		std::swap(m_MinPoint[0], m_MaxPoint[0]);
 	}
 
-	if(m_MaxPoint.GetYCoordinate() < m_MinPoint.GetYCoordinate())
+	if (m_MaxPoint.GetYCoordinate() < m_MinPoint.GetYCoordinate())
 	{
-		MATHEMATICS_ASSERTION_1(false,"输入的最大点和最小点Y坐标错误！");
+		MATHEMATICS_ASSERTION_1(false, "输入的最大点和最小点Y坐标错误！");
 
-		std::swap(m_MinPoint[1],m_MaxPoint[1]);
+		std::swap(m_MinPoint[1], m_MaxPoint[1]);
 	}
 }
 
@@ -69,8 +69,8 @@ template <typename Real>
 bool Mathematics::AxesAlignBoundingBox2D<Real>
 	::IsValid() const noexcept
 {
-	if(m_MaxPoint.GetXCoordinate() < m_MinPoint.GetXCoordinate() || m_MaxPoint.GetYCoordinate() < m_MinPoint.GetYCoordinate())
-	    return false;
+	if (m_MaxPoint.GetXCoordinate() < m_MinPoint.GetXCoordinate() || m_MaxPoint.GetYCoordinate() < m_MinPoint.GetYCoordinate())
+		return false;
 	else
 		return true;
 }
@@ -78,8 +78,8 @@ bool Mathematics::AxesAlignBoundingBox2D<Real>
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::AxesAlignBoundingBox2D<Real>
-	::GetMinPoint() const 
-{ 
+	::GetMinPoint() const
+{
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	return m_MinPoint;
@@ -87,13 +87,12 @@ const Mathematics::Vector2D<Real> Mathematics::AxesAlignBoundingBox2D<Real>
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::AxesAlignBoundingBox2D<Real>
-	::GetMaxPoint() const 
-{ 
+	::GetMaxPoint() const
+{
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	return m_MaxPoint;
-}
-
+} 
 
 template <typename Real>
 typename const Mathematics::AxesAlignBoundingBox2D<Real>::Vector2D Mathematics::AxesAlignBoundingBox2D<Real>
@@ -101,8 +100,8 @@ typename const Mathematics::AxesAlignBoundingBox2D<Real>::Vector2D Mathematics::
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	Vector2D center{ (m_MinPoint.GetXCoordinate() + m_MaxPoint.GetXCoordinate()) / static_cast<Real>(2),
-					 (m_MinPoint.GetYCoordinate() + m_MaxPoint.GetYCoordinate()) / static_cast<Real>(2) };
+	Vector2D center{ (m_MinPoint.GetXCoordinate() + m_MaxPoint.GetXCoordinate()) / Math::sm_Two,
+					 (m_MinPoint.GetYCoordinate() + m_MaxPoint.GetYCoordinate()) / Math::sm_Two };
 
 	return center;
 }
@@ -113,7 +112,7 @@ Real Mathematics::AxesAlignBoundingBox2D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return (m_MaxPoint.GetXCoordinate() - m_MinPoint.GetXCoordinate()) / static_cast<Real>(2);
+	return (m_MaxPoint.GetXCoordinate() - m_MinPoint.GetXCoordinate()) / Math::sm_Two;
 }
 
 template <typename Real>
@@ -122,34 +121,34 @@ Real Mathematics::AxesAlignBoundingBox2D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return (m_MaxPoint.GetYCoordinate() - m_MinPoint.GetYCoordinate()) / static_cast<Real>(2);;
+	return (m_MaxPoint.GetYCoordinate() - m_MinPoint.GetYCoordinate()) / Math::sm_Two;
 }
 
 
 template <typename Real>
 bool Mathematics
-	::HasXOverlap( const AxesAlignBoundingBox2D<Real>& lhs,const AxesAlignBoundingBox2D<Real>& rhs )
+	::HasXOverlap(const AxesAlignBoundingBox2D<Real>& lhs, const AxesAlignBoundingBox2D<Real>& rhs)
 {
-	return (lhs.GetMinPoint().GetXCoordinate() <=  rhs.GetMaxPoint().GetXCoordinate()) &&
-		   (rhs.GetMinPoint().GetXCoordinate() <=  lhs.GetMaxPoint().GetXCoordinate());		
+	return (lhs.GetMinPoint().GetXCoordinate() <= rhs.GetMaxPoint().GetXCoordinate()) &&
+		   (rhs.GetMinPoint().GetXCoordinate() <= lhs.GetMaxPoint().GetXCoordinate());
 }
 
 template <typename Real>
 bool Mathematics
-	::HasYOverlap( const AxesAlignBoundingBox2D<Real>& lhs,const AxesAlignBoundingBox2D<Real>& rhs )
+	::HasYOverlap(const AxesAlignBoundingBox2D<Real>& lhs, const AxesAlignBoundingBox2D<Real>& rhs)
 {
 	return (lhs.GetMinPoint().GetYCoordinate() <= rhs.GetMaxPoint().GetYCoordinate()) &&
-		   (rhs.GetMinPoint().GetYCoordinate() <= lhs.GetMaxPoint().GetYCoordinate());	
+		   (rhs.GetMinPoint().GetYCoordinate() <= lhs.GetMaxPoint().GetYCoordinate());
 }
 
 template <typename Real>
 bool Mathematics
-	::IsIntersection( const AxesAlignBoundingBox2D<Real>& lhs,const AxesAlignBoundingBox2D<Real>& rhs )
+	::IsIntersection(const AxesAlignBoundingBox2D<Real>& lhs, const AxesAlignBoundingBox2D<Real>& rhs)
 {
 	for (auto i = 0; i < 2; ++i)
 	{
-		if((lhs.GetMaxPoint()[i] < rhs.GetMinPoint()[i]) ||
-		   (rhs.GetMaxPoint()[i] < lhs.GetMinPoint()[i])) 
+		if ((lhs.GetMaxPoint()[i] < rhs.GetMinPoint()[i]) ||
+			(rhs.GetMaxPoint()[i] < lhs.GetMinPoint()[i]))
 		{
 			return false;
 		}
@@ -160,10 +159,10 @@ bool Mathematics
 
 
 template <typename Real>
-const Mathematics::AxesAlignBoundingBox2D<Real>
-	Mathematics::FindIntersection( const AxesAlignBoundingBox2D<Real>& lhs,const AxesAlignBoundingBox2D<Real>& rhs )
+const Mathematics::AxesAlignBoundingBox2D<Real> Mathematics
+	::FindIntersection(const AxesAlignBoundingBox2D<Real>& lhs, const AxesAlignBoundingBox2D<Real>& rhs)
 {
-	if(!IsIntersection(lhs,rhs))
+	if (!IsIntersection(lhs, rhs))
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("包围盒不相交！"));
 	}
@@ -189,7 +188,7 @@ const Mathematics::AxesAlignBoundingBox2D<Real>
 		else
 		{
 			minPoint[i] = lhs.GetMinPoint()[i];
-		}		
+		}
 	}
 
 	return AxesAlignBoundingBox2D<Real>{ minPoint, maxPoint };

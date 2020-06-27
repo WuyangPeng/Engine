@@ -1,0 +1,25 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 14:47)
+
+#ifndef FRAMEWORK_MODEL_VIEW_CONTROLLER_FLAGS_H
+#define FRAMEWORK_MODEL_VIEW_CONTROLLER_FLAGS_H
+
+#include "System/Helper/ConfigMacro.h"
+ 
+namespace Framework
+{
+	enum class MiddleLayerPlatform
+	{
+		Windows,
+		Macintosh,
+		Android,
+		Linux,
+
+		Count,
+	};
+}
+
+#endif // FRAMEWORK_MODEL_VIEW_CONTROLLER_FLAGS_H

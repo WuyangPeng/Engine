@@ -1,14 +1,12 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 09:48)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 09:54)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_STREAM_SIZE_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_STREAM_SIZE_H
 
-#include "CoreTools/ObjectSystems/ObjectInterface.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "HomogeneousPoint.h"
 #include "Vector2D.h"
 #include "Vector3D.h"
@@ -27,6 +25,8 @@
 #include "BandedMatrixSolve.h"
 #include "Quaternion.h"
 #include "AQuaternion.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/ObjectSystems/ObjectInterface.h"
 #include "Mathematics/Base/Float1.h"
 #include "Mathematics/Base/Float2.h"
 #include "Mathematics/Base/Float3.h"
@@ -41,7 +41,7 @@ struct CoreTools::StreamSize<Mathematics::HomogeneousPoint<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * HomogeneousPoint::GetPointSize();
+		return StreamSize<Real>::GetStreamSize() * HomogeneousPoint::GetPointSize();
 	}
 };
 
@@ -52,7 +52,7 @@ struct CoreTools::StreamSize<Mathematics::Vector2D<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 2;
+		return StreamSize<Real>::GetStreamSize() * 2;
 	}
 };
 
@@ -63,7 +63,7 @@ struct CoreTools::StreamSize<Mathematics::Vector3D<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 3;
+		return StreamSize<Real>::GetStreamSize() * 3;
 	}
 };
 
@@ -74,7 +74,7 @@ struct CoreTools::StreamSize<Mathematics::Vector4D<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 4;
+		return StreamSize<Real>::GetStreamSize() * 4;
 	}
 };
 
@@ -85,7 +85,7 @@ struct CoreTools::StreamSize<Mathematics::AVector<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 3;
+		return StreamSize<Real>::GetStreamSize() * 3;
 	}
 };
 
@@ -96,7 +96,7 @@ struct CoreTools::StreamSize<Mathematics::APoint<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 3;
+		return StreamSize<Real>::GetStreamSize() * 3;
 	}
 };
 
@@ -105,10 +105,9 @@ struct CoreTools::StreamSize<Mathematics::VariableLengthVector<Real>>
 {
 	static int GetStreamSize(const Mathematics::VariableLengthVector<Real>& value)
 	{
-		return sizeof(Real) * value.GetSize() + sizeof(int);
+		return StreamSize<Real>::GetStreamSize() * value.GetSize() + StreamSize<int32_t>::GetStreamSize();
 	}
 };
-
 
 template <typename Real>
 struct CoreTools::StreamSize<Mathematics::Plane<Real>>
@@ -117,7 +116,7 @@ struct CoreTools::StreamSize<Mathematics::Plane<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 4 + sizeof(Real);
+		return StreamSize<Real>::GetStreamSize() * 4 + StreamSize<Real>::GetStreamSize();
 	}
 };
 
@@ -125,8 +124,8 @@ template <typename Real>
 struct CoreTools::StreamSize<Mathematics::Polynomial<Real>>
 {
 	static int GetStreamSize(const Mathematics::Polynomial<Real>& value)
-	{
-		return sizeof(Real) * (value.GetDegree() + 1) + sizeof(int);
+	{	 
+		return StreamSize<Real>::GetStreamSize() * (value.GetDegree() + 1) + StreamSize<int32_t>::GetStreamSize();
 	}
 };
 
@@ -137,7 +136,7 @@ struct CoreTools::StreamSize<Mathematics::Matrix2<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 4;
+		return StreamSize<Real>::GetStreamSize() * 4;
 	}
 };
 
@@ -148,7 +147,7 @@ struct CoreTools::StreamSize<Mathematics::Matrix3<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 9;
+		return StreamSize<Real>::GetStreamSize() * 9;
 	}
 };
 
@@ -159,7 +158,7 @@ struct CoreTools::StreamSize<Mathematics::Matrix4<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 16;
+		return StreamSize<Real>::GetStreamSize() * 16;
 	}
 };
 
@@ -170,7 +169,7 @@ struct CoreTools::StreamSize<Mathematics::Matrix<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 16;
+		return StreamSize<Real>::GetStreamSize() * 16;
 	}
 };
 
@@ -179,7 +178,7 @@ struct CoreTools::StreamSize<Mathematics::VariableMatrix<Real>>
 {
 	static int GetStreamSize(const Mathematics::VariableMatrix<Real>& value)
 	{
-		return sizeof(Real) * value.GetElementsNumber() + sizeof(int) * 2;
+		return StreamSize<Real>::GetStreamSize() * value.GetElementsNumber() + StreamSize<int32_t>::GetStreamSize() * 2;
 	}
 };
 
@@ -208,7 +207,7 @@ struct CoreTools::StreamSize<Mathematics::Quaternion<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 4;
+		return StreamSize<Real>::GetStreamSize() * 4;
 	}
 };
 
@@ -219,29 +218,29 @@ struct CoreTools::StreamSize<Mathematics::AQuaternion<Real>>
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(Real) * 4;
+		return StreamSize<Real>::GetStreamSize() * 4;
 	}
 };
 
 template <>
 struct CoreTools::StreamSize<Mathematics::Float1>
 {
-	static int GetStreamSize(const Mathematics::Float1& value)
+	static int GetStreamSize(const Mathematics::Float1& value) noexcept
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(float);
+		return StreamSize<float>::GetStreamSize();
 	}
 };
 
 template <>
 struct CoreTools::StreamSize<Mathematics::Float2>
 {
-	static int GetStreamSize(const Mathematics::Float2& value)
+	static int GetStreamSize(const Mathematics::Float2& value) noexcept
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(float) * 2;
+		return StreamSize<float>::GetStreamSize() * 2;
 	}
 };
 
@@ -250,31 +249,31 @@ struct CoreTools::StreamSize<std::vector<Mathematics::Float2> >
 {
 	static int GetStreamSize(const std::vector<Mathematics::Float2>& value)
 	{
-		auto elementsSize = value.size();
+		const auto elementsSize = value.size();
 
-		return static_cast<unsigned>( sizeof(int) + sizeof(float)* 2 * elementsSize);
+		return StreamSize<int32_t>::GetStreamSize() + StreamSize<float>::GetStreamSize() * 2 * boost::numeric_cast<int>(elementsSize);
 	}
 };
 
 template <>
 struct CoreTools::StreamSize<Mathematics::Float3>
 {
-	static int GetStreamSize(const Mathematics::Float3& value)
+	static int GetStreamSize(const Mathematics::Float3& value) noexcept
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(float) * 3;
+		return StreamSize<float>::GetStreamSize() * 3;
 	}
 };
 
 template <>
 struct CoreTools::StreamSize<Mathematics::Float4>
 {
-	static int GetStreamSize(const Mathematics::Float4& value)
+	static int GetStreamSize(const Mathematics::Float4& value) noexcept
 	{
 		SYSTEM_UNUSED_ARG(value);
 
-		return sizeof(float) * 4;
+		return StreamSize<float>::GetStreamSize() * 4;
 	}
 };
 

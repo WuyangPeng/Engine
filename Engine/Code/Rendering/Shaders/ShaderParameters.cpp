@@ -90,7 +90,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderParameters, GetTexture,in
 
 
 void Rendering::ShaderParameters
-	::UpdateConstants(const Visual* visual, const Camera* camera)
+	::UpdateConstants(const VisualSmartPointer& visual, const CameraSmartPointer& camera)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
        

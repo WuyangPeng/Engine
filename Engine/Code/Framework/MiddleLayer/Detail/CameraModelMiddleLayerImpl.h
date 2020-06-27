@@ -1,9 +1,9 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:35)
- 
+// 引擎版本：0.3.0.1 (2020/05/21 14:45)
+
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_IMPL_H
 
@@ -11,50 +11,63 @@
 
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/DataTypes/Transform.h"
-
-#include <boost/noncopyable.hpp>
+#include "Framework/Application/ApplicationFwd.h" 
 
 namespace Framework
 {
-	class CameraMotion;
-	class ObjectMotion;
-
-	class FRAMEWORK_HIDDEN_DECLARE CameraModelMiddleLayerImpl : private boost::noncopyable
+	class FRAMEWORK_HIDDEN_DECLARE CameraModelMiddleLayerImpl
 	{
 	public:
 		using ClassType = CameraModelMiddleLayerImpl;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
 		using APoint = Mathematics::APointf;
 		using AVector = Mathematics::AVectorf;
+		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
 		using Transform = Rendering::Transform;
+		using CameraSmartPointer = Rendering::CameraSmartPointer;
+		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
 
 	public:
-		CameraModelMiddleLayerImpl();
-		~CameraModelMiddleLayerImpl();
-	
+		CameraModelMiddleLayerImpl() noexcept;
+		~CameraModelMiddleLayerImpl() noexcept = default;
+		CameraModelMiddleLayerImpl(const CameraModelMiddleLayerImpl& rhs) noexcept = delete;
+		CameraModelMiddleLayerImpl& operator=(const CameraModelMiddleLayerImpl& rhs) noexcept = delete;
+		CameraModelMiddleLayerImpl(CameraModelMiddleLayerImpl&& rhs) noexcept;
+		CameraModelMiddleLayerImpl& operator=(CameraModelMiddleLayerImpl&& rhs) noexcept;
+
 		CLASS_INVARIANT_DECLARE;
 
-		// CameraMotion
-		bool MoveCamera ();	
+		void InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor);
 
-		void SlowerCameraTranslation ();
-		void FasterCameraTranslation ();
-		void SlowerCameraRotation ();
-		void FasterCameraRotation ();
+		void InitializeObjectMotion();
+
+		ConstCameraSmartPointer GetCamera() const;
+		CameraSmartPointer GetCamera();
+
+		const Transform GetMotionObjectLocalTransform() const;
+
+		void Terminate() noexcept;
+
+		// CameraMotion
+		bool MoveCamera();
+
+		void SlowerCameraTranslation() noexcept;
+		void FasterCameraTranslation() noexcept;
+		void SlowerCameraRotation() noexcept;
+		void FasterCameraRotation() noexcept;
 
 		float GetRotationSpeed() const;
 		float GetTranslationSpeed() const;
 
-		void SetMoveForward(bool pressed); // 向前
-		void SetMoveBackward(bool pressed); // 向后
-		void SetTurnLeft(bool pressed); // 左转
-		void SetTurnRight(bool pressed);// 右转
-		void SetLookUp(bool pressed);// 向上看
-		void SetLookDown(bool pressed);// 向下看
-		void SetMoveUp(bool pressed);// 向上
-		void SetMoveDown(bool pressed);// 向下
-		void SetMoveRight(bool pressed);// 向右
-		void SetMoveLeft(bool pressed); // 向左	
+		void SetMoveForward(bool pressed) noexcept; // 向前
+		void SetMoveBackward(bool pressed) noexcept; // 向后
+		void SetTurnLeft(bool pressed) noexcept; // 左转
+		void SetTurnRight(bool pressed) noexcept;// 右转
+		void SetLookUp(bool pressed) noexcept;// 向上看
+		void SetLookDown(bool pressed) noexcept;// 向下看
+		void SetMoveUp(bool pressed) noexcept;// 向上
+		void SetMoveDown(bool pressed) noexcept;// 向下
+		void SetMoveRight(bool pressed) noexcept;// 向右
+		void SetMoveLeft(bool pressed) noexcept; // 向左	
 
 		const APoint GetCameraPosition() const;
 		const AVector GetCameraDirectionVector() const;
@@ -62,30 +75,24 @@ namespace Framework
 		const AVector GetCameraRightVector() const;
 
 		// ObjectMotion
-		bool MoveObject ();
-		void SetBeginTrack(float xTrack,float yTrack);
-		void SetEndTrack(float xTrack,float yTrack);
+		bool MoveObject();
+		void SetBeginTrack(float xTrack, float yTrack) noexcept;
+		void SetEndTrack(float xTrack, float yTrack) noexcept;
 		void RotateTrackBall();
-		void SetTrackBallDow(bool value);
+		void SetTrackBallDow(bool value) noexcept;
 		void SetSaveRotate();
-		void SetDoRoll(Mathematics::NumericalValueSymbol doRoll);
-		void SetDoYaw(Mathematics::NumericalValueSymbol doYaw);
-		void SetDoPitch(Mathematics::NumericalValueSymbol doPitch);
-		bool GetTrackBallDow() const;
-	 
-		void InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor,float rotationSpeedFactor);
+		void SetDoRoll(NumericalValueSymbol doRoll) noexcept;
+		void SetDoYaw(NumericalValueSymbol doYaw) noexcept;
+		void SetDoPitch(NumericalValueSymbol doPitch) noexcept;
+		bool GetTrackBallDow() const noexcept;
 
-		void InitializeObjectMotion();
+	private:
+		using CameraMotionSharedPtr = std::shared_ptr<CameraMotion>;
+		using ObjectMotionSharedPtr = std::shared_ptr<ObjectMotion>;
 
-		ConstCameraSmartPointer GetCamera() const;
-
-		const Transform GetMotionObjectLocalTransform() const;
-
-		void Terminate();
-
-	private:		
-		std::shared_ptr<CameraMotion> m_CameraMotion;
-		std::shared_ptr<ObjectMotion> m_ObjectMotion;
+	private:
+		CameraMotionSharedPtr m_CameraMotion;
+		ObjectMotionSharedPtr m_ObjectMotion;
 	};
 }
 

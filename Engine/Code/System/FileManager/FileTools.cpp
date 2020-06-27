@@ -12,7 +12,7 @@
 #include "System/Helper/WindowsMacro.h"
 #include "System/Window/LastPlatformError.h"
 #include "System/Window/Flags/PlatformErrorFlags.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 bool System
 	::CreateFileDirectory(const String& pathName, WindowSecurityAttributesPtr securityAttributes) noexcept

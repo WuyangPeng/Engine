@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 09:47)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H
@@ -23,20 +23,20 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;   
+		using Math = Math<Real>;
 
 	public:
-		DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, 
-									   const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon = Math::sm_ZeroTolerance);
+		DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax,
+									   const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
 
 		// Object access.
 		const Box3 GetBox0() const;
 		const Box3 GetBox1() const;
-		
+
 	private:
 		// Dynamic test-intersection query.  The first time of contact (if any)
 		// is computed, but not any information about the contact set.
-		void Test ();
+		void Test();
 
 		// Support for dynamic queries.  The inputs are the projection intervals
 		// for the boxes onto a potential separating axis, the relative speed of
@@ -53,11 +53,11 @@ namespace Mathematics
 		// This function is effectively BoxBoxAxisTest but without the dot product
 		// of axis-direction and velocity to obtain speed.  The optimizations are
 		// to compute the speed with fewer operations.
-		bool IsSeparated (Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real& tlast);
+		bool IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real& tlast);
 
 		// The objects to intersect.
 		Box3 mBox0;
-		Box3 mBox1;		
+		Box3 mBox1;
 	};
 
 	using DynamicTestIntersectorBox3Box3f = DynamicTestIntersectorBox3Box3<float>;

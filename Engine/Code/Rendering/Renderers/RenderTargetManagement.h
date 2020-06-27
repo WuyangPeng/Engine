@@ -13,6 +13,7 @@
 #include "Rendering/Resources/Texture2D.h"
 
 #include <boost/noncopyable.hpp>
+#include "../Resources/RenderTarget.h"
 
 RENDERING_EXPORT_SHARED_PTR(RenderTargetManagementImpl);
 EXPORT_NONCOPYABLE_CLASS(RENDERING);
@@ -27,9 +28,9 @@ namespace Rendering
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(RenderTargetManagement);
-		using RenderTargetConstPtr = const RenderTarget*;
+		using RenderTargetConstPtr = CoreTools::ConstThirdSubclassSmartPointer<RenderTarget>;
 		using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
-	    using RendererPtr = Renderer*;
+	    using RendererPtr = std::shared_ptr<Renderer>;
 
 	public:
 		explicit RenderTargetManagement(RendererPtr ptr);

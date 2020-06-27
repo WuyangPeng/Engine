@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/21 17:15)
-
+// 引擎版本：0.0.2.4 (2020/03/11 15:56)
 
 #include "Network/NetworkExport.h" 
 
 #include "BoostSockConnector.h"
 #include "BoostSockConnectorHelper.h"
+#include "System/Helper/PragmaWarning/AsioConnect.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 #include "Network/Interface/SockStream.h"
@@ -16,19 +16,18 @@
 #include "Network/Interface/BaseMainManager.h" 
 #include "Network/Interface/Data/AddressData.h"
 
-#include "System/Helper/PragmaWarning/AsioConnect.h"
-
 using std::to_string;
 using std::make_shared;
+using namespace std::literals;
 using boost::asio::connect;
 using boost::asio::async_connect;
 using TcpType = boost::asio::ip::tcp;
 
 namespace
 {
-	const System::String g_SynchronizeConnectorDescription{ SYSTEM_TEXT("准备进行同步连接，地址：") };
-	const System::String g_AsynchronousConnectorDescription{ SYSTEM_TEXT("准备进行异步连接，地址：") };
-	const System::String g_SynchronizeConnectorSuccessDescription{ SYSTEM_TEXT("同步连接成功，地址：") };
+	const auto g_SynchronizeConnectorDescription = SYSTEM_TEXT("准备进行同步连接，地址："s);
+	const auto g_AsynchronousConnectorDescription = SYSTEM_TEXT("准备进行异步连接，地址："s);
+	const auto g_SynchronizeConnectorSuccessDescription = SYSTEM_TEXT("同步连接成功，地址："s);
 }
 
 Network::BoostSockConnector

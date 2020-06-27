@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 11:39)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 10:14)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_H
@@ -20,19 +20,19 @@ namespace Mathematics
 	template <typename Real>
 	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QuaternionConstraints
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = QuaternionConstraints<Real>;
 		using Quaternion = Quaternion<Real>;
 		using Math = Math<Real>;
 
-	public:			
-		QuaternionConstraints (Real minAngle, Real maxAngle);		
+	public:
+		QuaternionConstraints(Real minAngle, Real maxAngle);
 
 		CLASS_INVARIANT_DECLARE;
-		
-		bool IsValid (Real x, Real y) const;	
+
+		bool IsValid(Real x, Real y) const;
 
 		Real GetCosMinAngle() const;
 		Real GetSinMinAngle() const;

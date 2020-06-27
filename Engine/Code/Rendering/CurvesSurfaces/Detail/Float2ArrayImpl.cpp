@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 Rendering::Float2ArrayImpl
 	::Float2ArrayImpl( const Float2Vector& elements )

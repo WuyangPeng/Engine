@@ -1,18 +1,18 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:23)
+// 引擎版本：0.0.2.5 (2020/03/23 14:19)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_DETAIL_H
 
 #include "PolynomialFit2.h"
 #include "PolynomialSamplesPowerDetail.h" 
-#include "Mathematics/Algebra/VariableMatrixDetail.h"
-#include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/VariableMatrixDetail.h"
+#include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 
 template <typename Real>
 Mathematics::PolynomialFit2<Real>
@@ -34,8 +34,8 @@ void Mathematics::PolynomialFit2<Real>
 	auto degree = m_Coeff.GetDegree();
 	auto quantity = degree + 1;
 	auto numSamples = wSamples.size();
-	
-    // x的幂。
+
+	// x的幂。
 	PolynomialSamplesPower<Real> power{ xSamples, degree };
 
 	// Vandermonde矩阵和右手坐标系的线性系统。
@@ -43,23 +43,23 @@ void Mathematics::PolynomialFit2<Real>
 	std::vector<Real> inputVector(quantity);
 
 	for (auto degreeIndex = 0; degreeIndex <= degree; ++degreeIndex)
-    {    
-		inputVector[degreeIndex] = Real{ };
+	{
+		inputVector[degreeIndex] = Math<Real>::sm_Zero;
 		for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
-        {
-			inputVector[degreeIndex] += wSamples[samplesIndex] * power(samplesIndex,degreeIndex);
-        }
+		{
+			inputVector[degreeIndex] += wSamples[samplesIndex] * power(samplesIndex, degreeIndex);
+		}
 
 		for (auto innerIndex = 0; innerIndex <= degree; ++innerIndex)
-        {
-			matrix(degreeIndex, innerIndex) = Real{ };
+		{
+			matrix(degreeIndex, innerIndex) = Math<Real>::sm_Zero;
 			for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
-            {
+			{
 				matrix(degreeIndex, innerIndex) += power(samplesIndex, degreeIndex + innerIndex);
-            }			 
-        }
-    }
-	    
+			}
+		}
+	}
+
 	try
 	{
 		// 求解多项式系数。
@@ -80,9 +80,8 @@ void Mathematics::PolynomialFit2<Real>
 			<< SYSTEM_TEXT("求解线性系统失败\n")
 			<< error
 			<< CoreTools::LogAppenderIOManageSign::Refresh;
-	}     
+	}
 }
-
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
@@ -102,7 +101,6 @@ typename const Mathematics::PolynomialFit2<Real>::Polynomial Mathematics::Polyno
 	return m_Coeff;
 }
 
-
 template <typename Real>
 bool Mathematics::PolynomialFit2<Real>
 	::IsSolveSucceed() const
@@ -112,6 +110,4 @@ bool Mathematics::PolynomialFit2<Real>
 	return m_SolveSucceed;
 }
 
-
 #endif // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_DETAIL_H
- 

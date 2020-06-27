@@ -14,9 +14,18 @@
 using std::make_shared;
 
 CoreTools::LogFileName
-	::LogFileName(const System::String& fileName)
-	:m_Impl{ make_shared<ImplType>(fileName) }
+	::LogFileName(const System::TChar* fileName) noexcept
+	:m_Impl{  }
 {
+	try
+	{
+		m_Impl = make_shared<ImplType>(fileName);
+	}
+	catch (...)
+	{
+		
+	}
+	 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

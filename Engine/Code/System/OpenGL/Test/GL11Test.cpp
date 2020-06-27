@@ -8,8 +8,10 @@
 
 #include "GL11Test.h"  
 #include "System/Helper/UnusedMacro.h"
+#include "System/Helper/PragmaWarning.h"
 #include "System/OpenGL/Detail/GL11Extensions.h"
-
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26446)
 using std::any_cast;
 
 namespace System
@@ -2266,3 +2268,4 @@ GLint System
 	}
 }
  
+#include STSTEM_WARNING_POP

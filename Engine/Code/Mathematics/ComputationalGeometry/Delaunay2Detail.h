@@ -56,7 +56,7 @@ Mathematics::Delaunay2<Real>
     {
         // Transform the vertices to the square [0,1]^2.
         mMin = info.GetMinExtreme();
-        mScale = ((Real)1)/info.GetMaxRange();
+        mScale = (static_cast<Real>(1))/info.GetMaxRange();
         for (i = 0; i < mNumVertices; ++i)
         {
             mSVertices[i] = (mVertices[i] - mMin)*mScale;
@@ -81,7 +81,7 @@ Mathematics::Delaunay2<Real>
         else // queryType == Query::QT_REAL
         {
             // No scaling for floating point.
-            expand = (Real)1;
+            expand = static_cast<Real>(1);
             mQuery = NEW0 Query2<Real>(mSVertices);
         }
 
@@ -95,7 +95,7 @@ Mathematics::Delaunay2<Real>
     {
         // No transformation needed for exact rational arithmetic.
         mMin = Vector2D<Real>::sm_Zero;
-        mScale = (Real)1;
+        mScale = static_cast<Real>(1);
         memcpy(&mSVertices[0], &mVertices[0], mNumVertices*sizeof(Vector2D<Real>));
 
         if (queryType == QueryType::Rational)
@@ -467,7 +467,7 @@ bool Mathematics::Delaunay2<Real>
 template <typename Real>
 Mathematics::Delaunay2<Real>
 	::Delaunay2 (const System::TChar* filename)
-	:Delaunay<Real>{ 0, Real{}, false, QueryType::Real }, mVertices{ 0 }, mSVertices{ 0 }, mQuery{ 0 }, mPath{ 0 }
+	:Delaunay<Real>{ 0, Math<Real>::sm_Zero, false, QueryType::Real }, mVertices{ 0 }, mSVertices{ 0 }, mQuery{ 0 }, mPath{ 0 }
 {
     bool loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);

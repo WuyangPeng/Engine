@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:52)
+// 引擎版本：0.0.2.5 (2020/03/23 13:53)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_DETAIL_H
@@ -32,21 +32,21 @@ void Mathematics::EllipsoidFit3<Real>
 	::Fit3()
 {
 	// 能量函数为 E : Real^9 -> Real  其中
-    // V = (V0,V1,V2,V3,V4,V5,V6,V7,V8)
-    //   = (D[0],D[1],D[2],U.X(),U,y,U.Z(),A0,A1,A2)。
+	// V = (V0,V1,V2,V3,V4,V5,V6,V7,V8)
+	//   = (D[0],D[1],D[2],U.X(),U,y,U.Z(),A0,A1,A2)。
 	// 对于真正分散的数据，你可能需要一个搜索函数
 
-    InitialGuess();
+	InitialGuess();
 
 	auto angle = MatrixToAngles(m_Rotate);
 
 	std::vector<Real> extent{ m_FirstExtent * Math<Real>::FAbs(m_Rotate[0][0]) + m_SecondExtent * Math<Real>::FAbs(m_Rotate[0][1]) + m_ThirdExtent * Math<Real>::FAbs(m_Rotate[0][2]),
 							  m_FirstExtent * Math<Real>::FAbs(m_Rotate[1][0]) + m_SecondExtent * Math<Real>::FAbs(m_Rotate[1][1]) + m_ThirdExtent * Math<Real>::FAbs(m_Rotate[1][2]),
-							  m_FirstExtent * Math<Real>::FAbs(m_Rotate[2][0]) + m_SecondExtent * Math<Real>::FAbs(m_Rotate[2][1]) + m_ThirdExtent * Math<Real>::FAbs(m_Rotate[2][2]) };    
+							  m_FirstExtent * Math<Real>::FAbs(m_Rotate[2][0]) + m_SecondExtent * Math<Real>::FAbs(m_Rotate[2][1]) + m_ThirdExtent * Math<Real>::FAbs(m_Rotate[2][2]) };
 
 	std::vector<Real> begin{ static_cast<Real>(0.5) * m_FirstExtent,static_cast<Real>(0.5) * m_SecondExtent,static_cast<Real>(0.5) * m_ThirdExtent,
 							 m_Center.GetXCoordinate() - extent[0], m_Center.GetYCoordinate() - extent[1], m_Center.GetZCoordinate() - extent[2],
-							 -Math<Real>::sm_PI, Real{}, Real{} };
+							 -Math<Real>::sm_PI, Math<Real>::sm_Zero, Math<Real>::sm_Zero };
 
 	std::vector<Real> end{ static_cast<Real>(2) * m_FirstExtent, static_cast<Real>(2) * m_SecondExtent,static_cast<Real>(2) * m_ThirdExtent,
 						   m_Center.GetXCoordinate() + extent[0], m_Center.GetYCoordinate() + extent[1], m_Center.GetZCoordinate() + extent[2],
@@ -78,7 +78,7 @@ void Mathematics::EllipsoidFit3<Real>
 {
 	auto box = ContBox3<Real>::ContOrientedBox(m_Points);
 
-    m_Center = box.GetCenter();
+	m_Center = box.GetCenter();
 	m_Rotate[0][0] = box.GetFirstAxis().GetXCoordinate();
 	m_Rotate[0][1] = box.GetFirstAxis().GetYCoordinate();
 	m_Rotate[0][2] = box.GetFirstAxis().GetZCoordinate();
@@ -99,8 +99,8 @@ template <typename Real>
 Real Mathematics::EllipsoidFit3<Real>
 	::Energy(const std::vector<Real>& input, const ClassType* userData)
 {
-	const auto& self = *userData; 
-	
+	const auto& self = *userData;
+
 	// 构建旋转矩阵
 	Angle angle{ input[6], input[7], input[8] };
 	auto rotate = AnglesToMatrix(angle);
@@ -108,23 +108,23 @@ Real Mathematics::EllipsoidFit3<Real>
 	// 均匀缩放程度，以保持合理的浮点值距离计算。
 	auto maxValue = input[0];
 	if (maxValue < input[1])
-    {
-        maxValue = input[1];
-    }
+	{
+		maxValue = input[1];
+	}
 	if (maxValue < input[2])
-    {
-        maxValue = input[2];
-    }
- 
+	{
+		maxValue = input[2];
+	}
+
 	Ellipsoid3<Real> ellipsoid{ Vector3D::sm_Zero, Vector3D::sm_UnitX, Vector3D::sm_UnitY, Vector3D::sm_UnitZ, input[0] / maxValue, input[1] / maxValue, input[2] / maxValue };
 
 	// 变换点到中心C和旋转Real的列的坐标系统
-	Real energy { };
+	auto energy = Math<Real>::sm_Zero;
 
 	auto numPoints = userData->GetNumPoint();
 
 	for (auto i = 0; i < numPoints; ++i)
-    {
+	{
 		Vector3D diff{ self.GetPoint(i).GetXCoordinate() - input[3],
 					   self.GetPoint(i).GetYCoordinate() - input[4],
 					   self.GetPoint(i).GetZCoordinate() - input[5] };
@@ -134,54 +134,52 @@ Real Mathematics::EllipsoidFit3<Real>
 		DistancePoint3Ellipsoid3<Real> distancePoint3Ellipsoid3{ point, ellipsoid };
 		auto distance = distancePoint3Ellipsoid3.Get();
 
-		energy += distance.GetDistance() * maxValue;    
-    }
+		energy += distance.GetDistance() * maxValue;
+	}
 
-    return energy;
+	return energy;
 }
-
 
 template <typename Real>
 typename const Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit3<Real>
 	::MatrixToAngles(const Matrix3& rotate)
 {
 	// 旋转轴 = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
-    // a0 在 [-pi,pi], a1 在 [0,pi], a2 在 [0,pi]
+	// a0 在 [-pi,pi], a1 在 [0,pi], a2 在 [0,pi]
 
 	auto extract = rotate.ExtractAngleAxis();
 	auto axis = extract.GetAxis();
 	Angle angle(3);
 	angle[2] = extract.GetAngle();
-    
-    if (static_cast<Real>(-1) < axis.GetZCoordinate())
-    {
+
+	if (static_cast<Real>(-1) < axis.GetZCoordinate())
+	{
 		if (axis.GetZCoordinate() < static_cast<Real>(1))
-        {
-            angle[0] = Math<Real>::ATan2(axis.GetYCoordinate(), axis.GetXCoordinate());
-            angle[1] = Math<Real>::ACos(axis.GetZCoordinate());
-        }
-        else
-        {
-            angle[0] = Real{ };
-            angle[1] = Real{ };
-        }
-    }
-    else
-    {
-        angle[0] = Real{ };
-        angle[1] = Math<Real>::sm_PI;
-    }
+		{
+			angle[0] = Math<Real>::ATan2(axis.GetYCoordinate(), axis.GetXCoordinate());
+			angle[1] = Math<Real>::ACos(axis.GetZCoordinate());
+		}
+		else
+		{
+			angle[0] = Math<Real>::sm_Zero;
+			angle[1] = Math<Real>::sm_Zero;
+		}
+	}
+	else
+	{
+		angle[0] = Math<Real>::sm_Zero;
+		angle[1] = Math<Real>::sm_PI;
+	}
 
 	return angle;
 }
-
 
 template <typename Real>
 typename const Mathematics::EllipsoidFit3<Real>::Matrix3 Mathematics::EllipsoidFit3<Real>
 	::AnglesToMatrix(const Angle& angle)
 {
-    // 旋转轴 = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
-    // a0 在  [-pi,pi], a1 在 [0,pi], a2 在 [0,pi]
+	// 旋转轴 = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
+	// a0 在  [-pi,pi], a1 在 [0,pi], a2 在 [0,pi]
 
 	auto cs0 = Math<Real>::Cos(angle[0]);
 	auto sn0 = Math<Real>::Sin(angle[0]);
@@ -192,19 +190,17 @@ typename const Mathematics::EllipsoidFit3<Real>::Matrix3 Mathematics::EllipsoidF
 	return Matrix3{ axis, angle[2] };
 }
 
-
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::EllipsoidFit3<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_Exactly)
+	if (Math<Real>::sm_Zero <= m_Exactly)
 		return true;
 	else
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 Real Mathematics::EllipsoidFit3<Real>
@@ -215,7 +211,6 @@ Real Mathematics::EllipsoidFit3<Real>
 	return m_Exactly;
 }
 
-
 template <typename Real>
 typename const Mathematics::EllipsoidFit3<Real>::Vector3D Mathematics::EllipsoidFit3<Real>
 	::GetCenter() const
@@ -225,7 +220,6 @@ typename const Mathematics::EllipsoidFit3<Real>::Vector3D Mathematics::Ellipsoid
 	return m_Center;
 }
 
-
 template <typename Real>
 typename const Mathematics::EllipsoidFit3<Real>::Matrix3 Mathematics::EllipsoidFit3<Real>
 	::GetRotate() const
@@ -234,7 +228,6 @@ typename const Mathematics::EllipsoidFit3<Real>::Matrix3 Mathematics::EllipsoidF
 
 	return m_Rotate;
 }
-
 
 template <typename Real>
 Real Mathematics::EllipsoidFit3<Real>
@@ -263,7 +256,6 @@ Real Mathematics::EllipsoidFit3<Real>
 	return m_ThirdExtent;
 }
 
-
 template <typename Real>
 int Mathematics::EllipsoidFit3<Real>
 	::GetNumPoint() const
@@ -284,4 +276,3 @@ typename const Mathematics::EllipsoidFit3<Real>::Vector3D Mathematics::Ellipsoid
 }
 
 #endif // MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_DETAIL_H
- 

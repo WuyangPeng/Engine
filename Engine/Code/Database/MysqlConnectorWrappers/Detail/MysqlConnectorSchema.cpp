@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/03 10:25)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/16 12:51)
 
 #include "Database/DatabaseExport.h"
 
@@ -16,7 +16,7 @@ using std::string;
 using std::make_unique;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
- 
+
 Database::MysqlConnectorSchema
 	::MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr)
 	: ParentType{ GetConfigurationStrategy(sessionWeakPtr) }, m_MysqlxSchema{ GetMysqlxSchemaPtr(sessionWeakPtr) }
@@ -71,7 +71,7 @@ Database::MysqlConnectorSchema::MysqlxSchemaPtr Database::MysqlConnectorSchema
 {
 	auto session = sessionWeakPtr.lock();
 	if (session)
-	{	
+	{
 		return session->GetMysqlxSchemaPtr(dbIndex);
 	}
 	else

@@ -13,6 +13,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <iosfwd>
+#include "OStreamShared.h"
 
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
@@ -24,17 +25,16 @@ namespace CoreTools
 		using ClassType = UnitTestStream;
 
 	public:
-		explicit UnitTestStream(std::ostream* osPtr);
+		explicit UnitTestStream(const OStreamShared& osPtr);
 		virtual ~UnitTestStream();
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		std::ostream* GetStream() noexcept;
-
-		virtual void SetStream(std::ostream* osPtr);
+		OStreamShared& GetStream();
+		bool IsStreamSharedFile() const noexcept;
 
 	private:
-		std::ostream* m_OsPtr;
+		OStreamShared m_OsPtr;
 	};
 }
 #endif // CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H

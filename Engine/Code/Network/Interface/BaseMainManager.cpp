@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/11/29 10:30)
-
+// 引擎版本：0.0.2.4 (2020/03/11 10:53)
 
 #include "Network/NetworkExport.h"
 
@@ -20,7 +19,7 @@ using std::make_unique;
 
 SINGLETON_MUTEX_DEFINE(Network, BaseMainManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_NetworkMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetNetworkMutex() }
 
 #define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_BaseMainManagerMutex }
 
@@ -40,6 +39,11 @@ void Network::BaseMainManager
 		Destroy();
 		throw;
 	}
+}
+
+void Network::BaseMainManager::Create()
+{
+	MUTEX_ENTER_GLOBAL;
 }
 
 void Network::BaseMainManager

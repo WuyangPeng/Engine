@@ -8,11 +8,13 @@
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_DETAIL_H
 
 #include "MessageSource.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/FileManager/Endian.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
 
 template <typename T>
 void Network::MessageSource

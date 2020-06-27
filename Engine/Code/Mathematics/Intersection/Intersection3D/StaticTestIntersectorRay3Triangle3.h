@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 14:16)
+// 引擎版本：0.0.2.5 (2020/03/24 14:58)
 
 #ifndef MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_RAY3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_RAY3_TRIANGLE3_H
@@ -18,7 +18,7 @@ namespace Mathematics
 	template <typename Real>
 	class StaticTestIntersectorRay3Triangle3 : public StaticIntersector<Real, Vector3D>
 	{
-	public:		
+	public:
 		using ClassType = StaticTestIntersectorRay3Triangle3<Real>;
 		using ParentType = StaticIntersector<Real, Vector3D>;
 		using Vector3D = Vector3D<Real>;
@@ -33,17 +33,17 @@ namespace Mathematics
 		virtual ~StaticTestIntersectorRay3Triangle3();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
-		const Ray3 GetRay() const;
-		const Triangle3 GetTriangle () const; 
 
-	private:	
+		const Ray3 GetRay() const;
+		const Triangle3 GetTriangle() const;
+
+	private:
 		void Test();
-		
-	private: 
+
+	private:
 		// 相交对象
 		Ray3 m_Ray;
-		Triangle3 m_Triangle; 		
+		Triangle3 m_Triangle;
 	};
 
 	using StaticTestIntersectorRay3Triangle3f = StaticTestIntersectorRay3Triangle3<float>;

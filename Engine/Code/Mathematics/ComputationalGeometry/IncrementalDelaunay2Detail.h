@@ -18,9 +18,9 @@ Mathematics::IncrementalDelaunay2<Real>
 	 mAdjacencies{ 0 }, mPathLast{ -1 }, mPath{ 0 }, mLastEdgeV0{ -1 }, mLastEdgeV1{ -1 }, mLastEdgeOpposite{ -1 }, mLastEdgeOppositeIndex{ -1 }
 {
     MATHEMATICS_ASSERTION_0(mXMin < mXMax && mYMin < mYMax,"Invalid bounding rectangle\n");
-    MATHEMATICS_ASSERTION_0(Real{} <= mUncertainty && mUncertainty <= (Real)1,"Invalid uncertainty\n");
+    MATHEMATICS_ASSERTION_0(Math<Real>::sm_Zero <= mUncertainty && mUncertainty <= static_cast<Real>(1),"Invalid uncertainty\n");
 
-    if (mUncertainty > Real{})
+    if (mUncertainty > Math<Real>::sm_Zero)
     {
         mRatVertexPool = NEW0 std::vector<QRVector>();
         mRatVertexEvaluated = NEW0 std::vector<bool>();
@@ -32,12 +32,12 @@ Mathematics::IncrementalDelaunay2<Real>
     }
 
     // Create a supertriangle that contains the input rectangle.
-    auto x0 = ((Real)2)*xmin - xmax;
-	auto y0 = ((Real)2)*ymin - ymax;
-	auto x1 = ((Real)2)*xmax - xmin + ((Real)3)*(ymax - ymin);
+    auto x0 = (static_cast<Real>(2))*xmin - xmax;
+	auto y0 = (static_cast<Real>(2))*ymin - ymax;
+	auto x1 = (static_cast<Real>(2))*xmax - xmin + (static_cast<Real>(3))*(ymax - ymin);
 	auto y1 = y0;
 	auto x2 = x0;
-	auto y2 = ((Real)2)*ymax - ymin + ((Real)3)*(xmax - xmin);
+	auto y2 = (static_cast<Real>(2))*ymax - ymin + (static_cast<Real>(3))*(xmax - xmin);
 	Vector2D<Real> superVertex0{ x0, y0 };
 	Vector2D<Real> superVertex1{ x1, y1 };
 	Vector2D<Real> superVertex2{ x2, y2 };
@@ -94,7 +94,7 @@ int Mathematics::IncrementalDelaunay2<Real>
     int posIndex = boost::numeric_cast<int>(mVertexPool.size());
     mVMap[position] = posIndex;
     mVertexPool.push_back(position);
-    if (mUncertainty > Real{})
+    if (mUncertainty > Math<Real>::sm_Zero)
     {
         (*mRatVertexPool).push_back(QRVector());
         (*mRatVertexEvaluated).push_back(false);
@@ -633,7 +633,7 @@ template <typename Real>
 int Mathematics::IncrementalDelaunay2<Real>
 	::ToLine (const Vector2D<Real>& test, int v0, int v1) const
 {
-    if (mUncertainty < (Real)1)
+    if (mUncertainty < static_cast<Real>(1))
     {
         // Order the points so that ToLine(test,v0,v1) and ToLine(test,v1,v0)
         // return the same geometric result.
@@ -662,10 +662,10 @@ int Mathematics::IncrementalDelaunay2<Real>
             det = -det;
         }
 
-        if (mUncertainty == Real{})
+        if (mUncertainty == Math<Real>::sm_Zero)
         {
             // Compute the sign test using floating-point arithmetic.
-            return (det > Real{} ? +1 : (det < Real{} ? -1 : 0));
+            return (det > Math<Real>::sm_Zero ? +1 : (det < Math<Real>::sm_Zero ? -1 : 0));
         }
 
         // Use filtered predicates.
@@ -675,7 +675,7 @@ int Mathematics::IncrementalDelaunay2<Real>
         if (Math<Real>::FAbs(det) >= scaledUncertainty)
         {
             // The floating-point sign test is deemed to be certain.
-            return (det > Real{} ? +1 : (det < Real{} ? -1 : 0));
+            return (det > Math<Real>::sm_Zero ? +1 : (det < Math<Real>::sm_Zero ? -1 : 0));
         }
     }
 
@@ -735,7 +735,7 @@ template <typename Real>
 int Mathematics::IncrementalDelaunay2<Real>
 	::ToCircumcircle (const Vector2D<Real>& test, int v0, int v1, int v2) const
 {
-    if (mUncertainty < (Real)1)
+    if (mUncertainty < static_cast<Real>(1))
     {
         // Order the points so that ToCircumcircle(test,u0,u1,u2) returns the
         // same containment result for any permutation (u0,u1,u2) of
@@ -823,10 +823,10 @@ int Mathematics::IncrementalDelaunay2<Real>
             det = -det;
         }
 
-        if (mUncertainty == Real{})
+        if (mUncertainty == Math<Real>::sm_Zero)
         {
             // Compute the sign test using floating-point arithmetic.
-            return (det < Real{} ? +1 : (det > Real{} ? -1 : 0));
+            return (det < Math<Real>::sm_Zero ? +1 : (det > Math<Real>::sm_Zero ? -1 : 0));
         }
 
         // Use filtered predicates.
@@ -836,7 +836,7 @@ int Mathematics::IncrementalDelaunay2<Real>
 		auto scaledUncertainty = mUncertainty*length0*length1*length2;
         if (Math<Real>::FAbs(det) >= scaledUncertainty)
         {
-            return (det < Real{} ? 1 : (det > Real{} ? -1 : 0));
+            return (det < Math<Real>::sm_Zero ? 1 : (det > Math<Real>::sm_Zero ? -1 : 0));
         }
     }
 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 10:58)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:38)
 
 #ifndef FRAMEWORK_APPLICATION_CAMERA_MOTION_IMPL_H
 #define FRAMEWORK_APPLICATION_CAMERA_MOTION_IMPL_H
@@ -13,48 +13,49 @@
 
 #include "Rendering/SceneGraph/Camera.h"
 
+#include <array>
+
 namespace Framework
 {
 	class FRAMEWORK_HIDDEN_DECLARE CameraMotionImpl
 	{
 	public:
 		using ClassType = CameraMotionImpl;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
-		using CameraSmartPointer = Rendering::CameraSmartPointer;
 		using Camera = Rendering::Camera;
+		using CameraSmartPointer = Rendering::CameraSmartPointer;	
 
 	public:
-		CameraMotionImpl(float translationSpeed,float rotationSpeed,float translationSpeedFactor = 2.0f, float rotationSpeedFactor = 2.0f);
-	
+		CameraMotionImpl(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor);
+
 		CLASS_INVARIANT_DECLARE;
 
-		const ConstCameraSmartPointer GetCameraPtr() const;
+		const CameraSmartPointer GetCameraPtr();
 
-		bool MoveCamera ();		
+		bool MoveCamera();
 
-		void SlowerCameraTranslation ();
-		void FasterCameraTranslation ();
-		void SlowerCameraRotation ();
-		void FasterCameraRotation ();
+		void SlowerCameraTranslation() noexcept;
+		void FasterCameraTranslation() noexcept;
+		void SlowerCameraRotation() noexcept;
+		void FasterCameraRotation() noexcept;
 
-		void SetMoveForward(bool pressed);
-		void SetMoveBackward(bool pressed);
-		void SetTurnLeft(bool pressed);
-		void SetTurnRight(bool pressed);
-		void SetLookUp(bool pressed);
-		void SetLookDown(bool pressed);
-		void SetMoveUp(bool pressed);
-		void SetMoveDown(bool pressed);
-		void SetMoveRight(bool pressed);
-		void SetMoveLeft(bool pressed);
+		void SetMoveForward(bool pressed) noexcept;
+		void SetMoveBackward(bool pressed) noexcept;
+		void SetTurnLeft(bool pressed) noexcept;
+		void SetTurnRight(bool pressed) noexcept;
+		void SetLookUp(bool pressed) noexcept;
+		void SetLookDown(bool pressed) noexcept;
+		void SetMoveUp(bool pressed) noexcept;
+		void SetMoveDown(bool pressed) noexcept;
+		void SetMoveRight(bool pressed) noexcept;
+		void SetMoveLeft(bool pressed) noexcept;
 
-        float GetRotationSpeed() const;
-		float GetTranslationSpeed() const;
+		float GetRotationSpeed() const noexcept;
+		float GetTranslationSpeed() const noexcept;	
 
-	private:    
-        using AVector = Mathematics::AVector<float>;
-        using APoint = Mathematics::APoint<float>;
-        using Matrix = Mathematics::Matrix<float>;
+	private:
+		using AVector = Mathematics::AVector<float>;
+		using APoint = Mathematics::APoint<float>;
+		using Matrix = Mathematics::Matrix<float>;
 
 	private:
 		void MoveForward();
@@ -70,10 +71,12 @@ namespace Framework
 
 	private:
 		CameraSmartPointer m_Camera;
-		AVector m_WorldAxis[3];
+		AVector m_WorldDirection;
+		AVector	m_WorldUp;
+		AVector	m_WorldRight;
 		float m_TranslationSpeed;
 		float m_TranslationSpeedFactor;
-		float m_RotationSpeed; 
+		float m_RotationSpeed;
 		float m_RotationSpeedFactor;
 		bool m_MoveForwardPressed;
 		bool m_MoveBackwardPressed;
@@ -92,4 +95,3 @@ namespace Framework
 
 
 
-	

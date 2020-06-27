@@ -20,12 +20,14 @@
 template <typename Real>
 Mathematics::BSplineBasis<Real>
 	::BSplineBasis ()
+	:mBD1{}, mBD2{}, mBD3{}, mNumCtrlPoints{}, mDegree{}, mKnot{}, mOpen{}, mUniform{}, mBD0{}
 {
 }
 
 template <typename Real>
 Mathematics::BSplineBasis<Real>
 	::BSplineBasis (int numCtrlPoints, int degree, bool open)
+	:mBD1{}, mBD2{}, mBD3{}, mNumCtrlPoints{}, mDegree{}, mKnot{}, mOpen{}, mUniform{}, mBD0{}
 {
     Create(numCtrlPoints, degree, open);
 }
@@ -37,29 +39,32 @@ void Mathematics::BSplineBasis<Real>
     mUniform = true;
 
     int i, numKnots = Initialize(numCtrlPoints, degree, open);
-    auto factor = ((Real)1)/(mNumCtrlPoints - mDegree);
+	auto temp = mNumCtrlPoints - mDegree;
+    auto factor = (static_cast<Real>(1))/(temp);
     if (mOpen)
     {
         for (i = 0; i <= mDegree; ++i)
         {
-            mKnot[i] = Real{};
+            mKnot[i] = Math<Real>::sm_Zero;
         }
 
         for (/**/; i < mNumCtrlPoints; ++i)
         {
-            mKnot[i] = (i - mDegree)*factor;
+			auto temp1 = i - mDegree;
+            mKnot[i] = temp1 *factor;
         }
 
         for (/**/; i < numKnots; ++i)
         {
-            mKnot[i] = (Real)1;
+            mKnot[i] = static_cast<Real>(1);
         }
     }
     else
     {
         for (i = 0; i < numKnots; ++i)
         {
-            mKnot[i] = (i - mDegree)*factor;
+			auto temp2 = i - mDegree;
+            mKnot[i] = temp2 *factor;
         }
     }
 }
@@ -67,6 +72,7 @@ void Mathematics::BSplineBasis<Real>
 template <typename Real>
 Mathematics::BSplineBasis<Real>
 	::BSplineBasis (int numCtrlPoints, int degree,const Real* interiorKnot)
+	:mBD1{}, mBD2{}, mBD3{}, mNumCtrlPoints{},mDegree{},mKnot{},mOpen{}, mUniform{}, mBD0{}
 {
     Create(numCtrlPoints, degree, interiorKnot);
 }
@@ -80,7 +86,7 @@ void Mathematics::BSplineBasis<Real>
     int i, numKnots = Initialize(numCtrlPoints, degree, true);
     for (i = 0; i <= mDegree; ++i)
     {
-        mKnot[i] = Real{};
+        mKnot[i] = Math<Real>::sm_Zero;
     }
 
     for (auto j = 0; i < mNumCtrlPoints; ++i, ++j)
@@ -90,7 +96,7 @@ void Mathematics::BSplineBasis<Real>
 
     for (/**/; i < numKnots; ++i)
     {
-        mKnot[i] = (Real)1;
+        mKnot[i] = static_cast<Real>(1);
     }
 }
 
@@ -168,7 +174,8 @@ Real** Mathematics::BSplineBasis<Real>
 	auto numRows = mDegree + 1;
 	auto numCols = mNumCtrlPoints + mDegree;
     Real** data = NEW2<Real>(numCols, numRows);
-    memset(data[0], 0, numRows*numCols*sizeof(Real));
+	auto num = numRows * numCols;
+    memset(data[0], 0, num *sizeof(Real));
     return data;
 }
 
@@ -246,21 +253,21 @@ int Mathematics::BSplineBasis<Real>
     if (mOpen)
     {
         // Open splines clamp to [0,1].
-        if (t <= Real{})
+        if (t <= Math<Real>::sm_Zero)
         {
-            t = Real{};
+            t = Math<Real>::sm_Zero;
             return mDegree;
         }
-        else if (t >= (Real)1)
+        else if (t >= static_cast<Real>(1))
         {
-            t = (Real)1;
+            t = static_cast<Real>(1);
             return mNumCtrlPoints - 1;
         }
     }
     else
     {
         // Periodic splines wrap to [0,1).
-        if (t < Real{} || t >= (Real)1)
+        if (t < Math<Real>::sm_Zero || t >= static_cast<Real>(1))
         {
             t -= Math<Real>::Floor(t);
         }
@@ -319,17 +326,17 @@ void Mathematics::BSplineBasis<Real>
     }
 
 	auto i = GetKey(t);
-    mBD0[0][i] = (Real)1;
+    mBD0[0][i] = static_cast<Real>(1);
 
     if (order >= 1)
     {
-        mBD1[0][i] = Real{};
+        mBD1[0][i] = Math<Real>::sm_Zero;
         if (order >= 2)
         {
-            mBD2[0][i] = Real{};
+            mBD2[0][i] = Math<Real>::sm_Zero;
             if (order >= 3)
             {
-                mBD3[0][i] = Real{};
+                mBD3[0][i] = Math<Real>::sm_Zero;
             }
         }
     }
@@ -339,8 +346,8 @@ void Mathematics::BSplineBasis<Real>
     int j;
     for (j = 1; j <= mDegree; j++)
     {
-        invD0 = ((Real)1)/(mKnot[i+j] - mKnot[i]);
-        invD1 = ((Real)1)/(mKnot[i+1] - mKnot[i-j+1]);
+        invD0 = (static_cast<Real>(1))/(mKnot[i+j] - mKnot[i]);
+        invD1 = (static_cast<Real>(1))/(mKnot[i+1] - mKnot[i-j+1]);
 
         mBD0[j][i] = n0*mBD0[j-1][i]*invD0;
         mBD0[j][i-j] = n1*mBD0[j-1][i-j+1]*invD1;
@@ -352,13 +359,13 @@ void Mathematics::BSplineBasis<Real>
 
             if (order >= 2)
             {
-                mBD2[j][i] = (n0*mBD2[j-1][i] + ((Real)2)*mBD1[j-1][i])*invD0;
-                mBD2[j][i-j] = (n1*mBD2[j-1][i-j+1] -   ((Real)2)*mBD1[j-1][i-j+1])*invD1;
+                mBD2[j][i] = (n0*mBD2[j-1][i] + (static_cast<Real>(2))*mBD1[j-1][i])*invD0;
+                mBD2[j][i-j] = (n1*mBD2[j-1][i-j+1] -   (static_cast<Real>(2))*mBD1[j-1][i-j+1])*invD1;
 
                 if (order >= 3)
                 {
-                    mBD3[j][i] = (n0*mBD3[j-1][i] +  ((Real)3)*mBD2[j-1][i])*invD0;
-                    mBD3[j][i-j] = (n1*mBD3[j-1][i-j+1] -  ((Real)3)*mBD2[j-1][i-j+1])*invD1;
+                    mBD3[j][i] = (n0*mBD3[j-1][i] +  (static_cast<Real>(3))*mBD2[j-1][i])*invD0;
+                    mBD3[j][i-j] = (n1*mBD3[j-1][i-j+1] -  (static_cast<Real>(3))*mBD2[j-1][i-j+1])*invD1;
                 }
             }
         }
@@ -370,8 +377,8 @@ void Mathematics::BSplineBasis<Real>
         {
             n0 = t - mKnot[k];
             n1 = mKnot[k+j+1] - t;
-            invD0 = ((Real)1)/(mKnot[k+j] - mKnot[k]);
-            invD1 = ((Real)1)/(mKnot[k+j+1] - mKnot[k+1]);
+            invD0 = (static_cast<Real>(1))/(mKnot[k+j] - mKnot[k]);
+            invD1 = (static_cast<Real>(1))/(mKnot[k+j+1] - mKnot[k+1]);
 
             mBD0[j][k] = n0*mBD0[j-1][k]*invD0 + n1*mBD0[j-1][k+1]*invD1;
 
@@ -381,11 +388,11 @@ void Mathematics::BSplineBasis<Real>
 
                 if (order >= 2)
                 {
-                    mBD2[j][k] = (n0*mBD2[j-1][k] +   ((Real)2)*mBD1[j-1][k])*invD0 +   (n1*mBD2[j-1][k+1] - ((Real)2)*mBD1[j-1][k+1])*invD1;
+                    mBD2[j][k] = (n0*mBD2[j-1][k] +   (static_cast<Real>(2))*mBD1[j-1][k])*invD0 +   (n1*mBD2[j-1][k+1] - (static_cast<Real>(2))*mBD1[j-1][k+1])*invD1;
 
                     if (order >= 3)
                     {
-                        mBD3[j][k] = (n0*mBD3[j-1][k] +   ((Real)3)*mBD2[j-1][k])*invD0 + (n1*mBD3[j-1][k+1] - ((Real)3)*  mBD2[j-1][k+1])*invD1;
+                        mBD3[j][k] = (n0*mBD3[j-1][k] +   (static_cast<Real>(3))*mBD2[j-1][k])*invD0 + (n1*mBD3[j-1][k+1] - (static_cast<Real>(3))*  mBD2[j-1][k+1])*invD1;
                     }
                 }
             }

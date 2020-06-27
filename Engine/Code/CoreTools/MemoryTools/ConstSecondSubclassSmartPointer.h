@@ -27,14 +27,14 @@ namespace CoreTools
 
 	public:
 		explicit ConstSecondSubclassSmartPointer(uint64_t address, const SubclassType* data = nullptr);
-		explicit ConstSecondSubclassSmartPointer(const SubclassType* data = nullptr);
-		virtual ~ConstSecondSubclassSmartPointer();
+		explicit ConstSecondSubclassSmartPointer(const SubclassType* data);
+		ConstSecondSubclassSmartPointer() noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const SubclassType* GetData() const;
-		virtual const SubclassType& operator* () const;
-		virtual const SubclassType* operator-> () const;
+		const SubclassType* GetData() const override;
+		const SubclassType& operator* () const override;
+		const SubclassType* operator-> () const override;
 	};
 }
 

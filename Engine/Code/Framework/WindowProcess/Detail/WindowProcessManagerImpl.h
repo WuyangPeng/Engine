@@ -1,72 +1,84 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 09:52)
+// “˝«Ê∞Ê±æ£∫0.3.0.2 (2020/06/06 20:57)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_MANAGER_IMPL_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_MANAGER_IMPL_H
 
-#include "System/Window/WindowProcess.h"
+#include "Framework/FrameworkDll.h"
+
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Helper/WindowsMacro.h"
+#include "System/Window/WindowProcess.h"
 #include "Framework/WindowProcess/WindowMessageInterface.h"
 
-#include <string>
 #include <map>
-#include <set>
+#include <set> 
+#include <string>
 
 namespace Framework
-{	
+{
 	class FRAMEWORK_HIDDEN_DECLARE WindowProcessManagerImpl
-	{	
+	{
 	public:
 		using ClassType = WindowProcessManagerImpl;
-		using MessageFunctionPointer = WindowMessageInterface::FunctionPointer;
+		using String = System::String;
 		using HWnd = System::WindowHWnd;
+		using UInt = System::WindowUInt;
 		using WParam = System::WindowWParam;
 		using LParam = System::WindowLParam;
-		using UInt = System::WindowUInt;
 		using LResult = System::WindowLResult;
+		using WindowProcess = System::WindowProcess;
+		using WindowMessages = System::WindowMessages;
+		using DisplayFunction = System::DisplayFunction;
+		using MessageFunctionPointer = WindowMessageInterface::FunctionPointer;
 
 	public:
-		WindowProcessManagerImpl();
-		
-		CLASS_INVARIANT_DECLARE;	
+		CLASS_INVARIANT_DECLARE;
 
 	public:
-		System::WindowProc GetProcess() const;
-		System::DisplayPtr GetFunction() const;
-		ConstWindowMessageInterfaceSmartPointer GetWindowMessageInterface() const;
+		static WindowProcess GetProcess() noexcept;
+		static DisplayFunction GetFunction() noexcept;
 
-		void SetWindowMessage(const WindowMessageInterfaceSmartPointer& smartPointer);
-		void ClearWindowMessage();	
+		static bool IsClassNameExist(const String& className);
+		static bool SetNewClassName(const String& className);
 
-		bool PreCreate();
+		ConstWindowMessageInterfaceSharedPtr GetWindowMessageInterface() const noexcept;
+		void SetWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage);
+		void ClearWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage);
+
+		bool PreCreate(const EnvironmentDirectory& environmentDirectory);
 		bool Initialize();
 		void PreIdle();
 		void Terminate();
 
-		bool IsClassNameExist(const System::String& className) const;
-		bool SetNewClassName(const System::String& className);
-		
-		void SetMainWindow(HWnd hwnd);
-		HWnd GetMainWindowHwnd() const;
+		void SetMainWindowHwnd(HWnd hwnd);
+		HWnd GetMainWindowHwnd() const noexcept;
 
 	private:
-		using MessageFunctionPointerContainer = std::map<System::WindowMessages,MessageFunctionPointer>;
-		using MessageFunctionPointerContainerConstIter = MessageFunctionPointerContainer::const_iterator;
-		using ClassNameContainer = std::set<System::String>;
+		using MessageFunctionPointerContainer = std::map<WindowMessages, MessageFunctionPointer>;
+		using MessageFunctionPointerContainerSharedPtr = std::shared_ptr<MessageFunctionPointerContainer>;
+		using ClassNameContainer = std::set<String>;
+		using ClassNameContainerSharedPtr = std::shared_ptr<ClassNameContainer>;
+		using WindowMessageInterfaceWeakPtr = std::weak_ptr<WindowMessageInterface>;
+		using WindowMessageContainer = std::map<int, WindowMessageInterfaceWeakPtr, std::greater<int>>;
+		using WindowMessageContainerSharedPtr = std::shared_ptr<WindowMessageContainer>;
 
 	private:
-		static LResult SYSTEM_CALL_BACK WindowProc(HWnd hwnd,UInt message,WParam wParam,LParam lParam);
-		static void Display(HWnd hwnd,int64_t timeDelta);	
-		static void GenerateMessage();		
+		static LResult SYSTEM_CALL_BACK WindowProc(HWnd hwnd, UInt message, WParam wParam, LParam lParam);
+		static void Display(HWnd hwnd, int64_t timeDelta);
+		static MessageFunctionPointerContainerSharedPtr GetMessageFunctionPointer();
+		static ClassNameContainerSharedPtr GetClassNameContainer();
+		static WindowMessageContainerSharedPtr GetWindowMessageContainer();
+
+		void ResetMainWindowMessage();
+		void ClearWindowMessageContainer(const WindowMessageInterfaceSharedPtr& windowMessage);		
 
 	private:
-		static MessageFunctionPointerContainer sm_FunctionPointer;
-		static WindowMessageInterfaceSmartPointer sm_WindowMessage;
-		static ClassNameContainer sm_ClassName;
+		static WindowMessageInterfaceSharedPtr sm_WindowMessage;
+		static int sm_WindowMessageIndex;
 	};
 }
 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 17:22)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:12)
 
 #include "Network/NetworkExport.h" 
 
@@ -19,7 +19,7 @@ using std::to_string;
 Network::NullSockAcceptor
 	::NullSockAcceptor()
 	:ParentType{}
-{	
+{
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
@@ -29,7 +29,7 @@ Network::NullSockAcceptor
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockAcceptor) 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockAcceptor)
 
 bool Network::NullSockAcceptor
 	::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
@@ -66,7 +66,7 @@ void Network::NullSockAcceptor
 
 	SYSTEM_UNUSED_ARG(eventInterface);
 	SYSTEM_UNUSED_ARG(sockStream);
-	SYSTEM_UNUSED_ARG(sockAddress);	
+	SYSTEM_UNUSED_ARG(sockAddress);
 }
 
 bool Network::NullSockAcceptor
@@ -82,7 +82,7 @@ bool Network::NullSockAcceptor
 const std::string Network::NullSockAcceptor
 	::GetAddress() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9; 
+	NETWORK_CLASS_IS_VALID_CONST_9;
 
 	return "";
 }

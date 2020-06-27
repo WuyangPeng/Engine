@@ -46,9 +46,12 @@ CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, VisualEffectInstance)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance,GetEffect, const Rendering::ConstVisualEffectSmartPointer)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance, GetTechniqueIndex, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance, GetNumPasses, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetPass, int, const Rendering::ConstVisualPassSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetPixelParameters, int, const Rendering::ConstShaderParametersSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance,GetVertexParameters, int, const Rendering::ConstShaderParametersSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPass, int, const Rendering::ConstVisualPassSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPixelParameters, int, const Rendering::ConstShaderParametersSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance,GetConstVertexParameters, int, const Rendering::ConstShaderParametersSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetPixelParameters, int, const Rendering::ShaderParametersSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetVertexParameters, int, const Rendering::ShaderParametersSmartPointer)
+ 
 
 void Rendering::VisualEffectInstance
 	::SetVertexTexture(int pass, int handle, const TextureSmartPointer& texture)

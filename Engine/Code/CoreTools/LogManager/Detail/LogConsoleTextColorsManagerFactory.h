@@ -15,6 +15,7 @@
 namespace CoreTools
 {
 	class LogConsoleTextColorsManagerImpl;
+	class OStreamShared;
 
 	class LogConsoleTextColorsManagerFactory
 	{
@@ -24,7 +25,7 @@ namespace CoreTools
 
 	public:
 		static LogConsoleTextColorsManagerPtr Create(LogLevel logLevel);
-		static LogConsoleTextColorsManagerPtr Create(std::ostream* osPtr, LogLevel logLevel);
+		static LogConsoleTextColorsManagerPtr Create(const OStreamShared& osPtr, LogLevel logLevel);
 	};
 }
 

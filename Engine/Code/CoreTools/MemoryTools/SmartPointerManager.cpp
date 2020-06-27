@@ -14,9 +14,9 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-SINGLETON_MUTEX_DEFINE(CoreTools, SmartPointerManager)
+SINGLETON_MUTEX_DEFINE(CoreTools, SmartPointerManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_CoreToolsMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
 
 #define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_SmartPointerManagerMutex }
 

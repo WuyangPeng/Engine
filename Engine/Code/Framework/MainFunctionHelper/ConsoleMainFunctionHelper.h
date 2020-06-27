@@ -1,51 +1,56 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 17:51)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/20 11:46)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_H
 
-#include "Framework/FrameworkDll.h"
-
-#include "MainFunctionHelperBase.h"
-#include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/shared_ptr.hpp>
-#include <string>
-
-FRAMEWORK_EXPORT_SHARED_PTR(ConsoleMainFunctionHelperImpl);
+#include "ConsoleMainFunctionHelperBase.h" 
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE ConsoleMainFunctionHelper : public MainFunctionHelperBase
+	template <template<typename> class Build, typename Process>
+	class ConsoleMainFunctionHelper : public ConsoleMainFunctionHelperBase
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(ConsoleMainFunctionHelper);
-		using ParentType = MainFunctionHelperBase;
+		using ClassType = ConsoleMainFunctionHelper<Build, Process>;
+		using ParentType = ConsoleMainFunctionHelperBase;
+		using ClassShareType = CoreTools::NonCopyClasses;
+		using BuildType = Build<Process>;
 
 	public:
-		ConsoleMainFunctionHelper(int argc,char* argv[],const System::String& consoleTitle,
-			                      const EnvironmentDirectory& environmentDirectory);
-		virtual ~ConsoleMainFunctionHelper();
+		ConsoleMainFunctionHelper(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory);
+		~ConsoleMainFunctionHelper() noexcept;
+		ConsoleMainFunctionHelper(const ConsoleMainFunctionHelper& rhs) noexcept = delete;
+		ConsoleMainFunctionHelper& operator=(const ConsoleMainFunctionHelper& rhs) noexcept = delete;
+		ConsoleMainFunctionHelper(ConsoleMainFunctionHelper&& rhs) noexcept;
+		ConsoleMainFunctionHelper& operator=(ConsoleMainFunctionHelper&& rhs) noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		int GetArgc() const;
-		char** GetArgv() const;
-		System::String GetApplicationProjectDirectory() const;
-
-	private:		
-		void ConsoleMainFunctionHelperInit(const System::String& consoleTitle);
-
-		virtual int DoRun() = 0;
+		void Destroy() override;
 
 	private:
-		int m_Argc;
-		char** m_Argv; 
+		using BuildSharedPtr = std::shared_ptr<BuildType>;
 
-	    IMPL_TYPE_DECLARE(ConsoleMainFunctionHelper);
+	private:
+		int DoRun() noexcept override;
+		virtual int RunConsoleMainLoop() noexcept;
+
+		void Initializers();
+		void Terminators();
+
+		void InitConsoleProcess() noexcept;
+		void InitImpl();
+
+		void DestroyImpl() noexcept;
+		void DestroyConsoleProcess() noexcept;
+
+	private:
+		BuildSharedPtr m_Build;
+		ConsoleMainFunctionSchedule m_ConsoleMainFunctionSchedule;
 	};
 }
 

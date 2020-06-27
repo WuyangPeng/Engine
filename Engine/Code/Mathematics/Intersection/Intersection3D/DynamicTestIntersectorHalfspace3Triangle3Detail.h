@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/13 13:34)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 16:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
@@ -11,38 +11,39 @@
 
 template <typename Real>
 Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
-	::DynamicTestIntersectorHalfspace3Triangle3 (const Plane3& halfspace,const Triangle3& triangle,Real tmax, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon)
+	::DynamicTestIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
 	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mHalfspace{ halfspace }, mTriangle{ triangle }
 {
-    Test();
+	Test();
 }
 
 template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
-	::GetHalfspace () const
+	::GetHalfspace() const
 {
-    return mHalfspace;
+	return mHalfspace;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
-	::GetTriangle () const
+	::GetTriangle() const
 {
-    return mTriangle;
+	return mTriangle;
 }
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
-	::Test ()
+	::Test()
 {
-	auto mContactTime = Real{};
+	auto mContactTime = Math<Real>::sm_Zero;
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    Real fmin, fmax;
-    IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), mTriangle, fmin, fmax);
+	auto fmin = Math::sm_Zero;
+	auto fmax = Math::sm_Zero;
+	IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), mTriangle, fmin, fmax);
 
-    if( IntersectorAxis<Real>::Test(mHalfspace.GetNormal(), relVelocity,  -Math::sm_MaxReal, mHalfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))
+	if (IntersectorAxis<Real>::Test(mHalfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, mHalfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))
 	{
 		SetContactTime(mContactTime);
 		this->SetIntersectionType(IntersectionType::Point);
@@ -53,5 +54,5 @@ void Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
 		this->SetIntersectionType(IntersectionType::Empty);
 	}
 }
- 
+
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H

@@ -33,7 +33,7 @@ template <typename PlatformBufferType>
 bool Rendering::BufferManagement< PlatformBufferType>
 	::IsValid() const noexcept
 {
-	if(m_Renderer != nullptr)
+	if(m_Renderer.lock())
         return true;
     else
         return false;
@@ -46,9 +46,15 @@ void Rendering::BufferManagement< PlatformBufferType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 
+	auto ptr = m_Renderer.lock();
+	if (!ptr)
+	{
+		return;
+	}
+
     if (m_Buffers.find(buffer) == m_Buffers.end())
     {
-		PlatformBufferTypeSharedPtr platformBuffer{ std::make_shared<PlatformBufferType>(m_Renderer, buffer) };
+		PlatformBufferTypeSharedPtr platformBuffer{ std::make_shared<PlatformBufferType>(ptr.get(), buffer.GetData()) };
 		m_Buffers.insert({ buffer, platformBuffer });
     }
 }
@@ -70,6 +76,12 @@ void Rendering::BufferManagement<PlatformBufferType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
+	auto ptr = m_Renderer.lock();
+	if (!ptr)
+	{
+		return;
+	}
+
     auto iter = m_Buffers.find(buffer);
     PlatformBufferTypeSharedPtr platformBuffer;
     if (iter != m_Buffers.end())
@@ -79,11 +91,11 @@ void Rendering::BufferManagement<PlatformBufferType>
     else
     {
         // 延迟构造。
-		platformBuffer = std::make_shared<PlatformIndexBuffer>(m_Renderer, buffer);
+		platformBuffer = std::make_shared<PlatformIndexBuffer>(ptr.get(), buffer.GetData());
 		m_Buffers.insert({ buffer,  platformBuffer });
     }
 
-     platformBuffer->Enable(m_Renderer);
+     platformBuffer->Enable(ptr.get());
 }
 
 template <typename PlatformBufferType>
@@ -94,13 +106,19 @@ void Rendering::BufferManagement<PlatformBufferType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
+	auto ptr = m_Renderer.lock();
+	if (!ptr)
+	{
+		return;
+	}
+
 	auto iter = m_Buffers.find(buffer);
  
     if (iter != m_Buffers.end())
     {
         auto platformBuffer = iter->second;
 
-        platformBuffer->Disable(m_Renderer);
+        platformBuffer->Disable(ptr.get());
     }
 }
 
@@ -112,6 +130,12 @@ void Rendering::BufferManagement<PlatformBufferType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
+	auto ptr = m_Renderer.lock();
+	if (!ptr)
+	{
+		return;
+	}
+
 	auto iter = m_Buffers.find(buffer);
     PlatformBufferTypeSharedPtr platformBuffer;
     if (iter != m_Buffers.end())
@@ -121,11 +145,11 @@ void Rendering::BufferManagement<PlatformBufferType>
     else
     {
         // 延迟构造。
-		platformBuffer = std::make_shared<PlatformBufferType>(m_Renderer, buffer);
+		platformBuffer = std::make_shared<PlatformBufferType>(ptr.get(), buffer.GetData());
 		m_Buffers.insert({ buffer,  platformBuffer });
     }
 
-     platformBuffer->Enable(m_Renderer, buffer->GetElementSize(),streamIndex, offset);
+     platformBuffer->Enable(ptr.get(), buffer->GetElementSize(),streamIndex, offset);
 }
 
 template <typename PlatformBufferType>
@@ -136,13 +160,19 @@ void Rendering::BufferManagement<PlatformBufferType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
+	auto ptr = m_Renderer.lock();
+	if (!ptr)
+	{
+		return;
+	}
+
 	auto iter = m_Buffers.find(buffer);
  
     if (iter != m_Buffers.end())
     {
         auto platformBuffer = iter->second;
 
-        platformBuffer->Disable(m_Renderer, streamIndex);
+        platformBuffer->Disable(ptr.get(), streamIndex);
     }
 }
 
@@ -151,6 +181,12 @@ void* Rendering::BufferManagement< PlatformBufferType>
 	::Lock (BufferConstPtr buffer,BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
+
+	auto ptr = m_Renderer.lock();
+	if (!ptr)
+	{
+		return nullptr;
+	}
 
 	auto iter = m_Buffers.find(buffer);
     PlatformBufferTypeSharedPtr platformBuffer;
@@ -161,7 +197,7 @@ void* Rendering::BufferManagement< PlatformBufferType>
     else
     {
         // 延迟构造。
-        platformBuffer = std::make_shared<PlatformBufferType>(m_Renderer, buffer);
+        platformBuffer = std::make_shared<PlatformBufferType>(ptr.get(), buffer.GetData());
 		m_Buffers.insert({ buffer,  platformBuffer });
     }
 

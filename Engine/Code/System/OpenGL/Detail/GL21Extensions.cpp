@@ -35,37 +35,37 @@ System::PgglUniformMatrix4x3fv System::gglUniformMatrix4x3fv{ nullptr };
 void System
 	::GlUniformMatrix2x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglUniformMatrix2x3fv, location, count, transpose, value);
+	SYSTEM_BODY_4(gglUniformMatrix2x3fv, location, count, transpose, value);
 }
 
 void System
 	::GlUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglUniformMatrix3x2fv, location, count, transpose, value);
+	SYSTEM_BODY_4(gglUniformMatrix3x2fv, location, count, transpose, value);
 }
 
 void System
 	::GlUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglUniformMatrix2x4fv, location, count, transpose, value);
+	SYSTEM_BODY_4(gglUniformMatrix2x4fv, location, count, transpose, value);
 }
 
 void System
 	::GlUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglUniformMatrix4x2fv, location, count, transpose, value);
+	SYSTEM_BODY_4(gglUniformMatrix4x2fv, location, count, transpose, value);
 }
 
 void System
 	::GlUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglUniformMatrix3x4fv, location, count, transpose, value);
+	SYSTEM_BODY_4(gglUniformMatrix3x4fv, location, count, transpose, value);
 }
 
 void System
 	::GlUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_A4(gglUniformMatrix4x3fv, location, count, transpose, value);
+	SYSTEM_BODY_4(gglUniformMatrix4x3fv, location, count, transpose, value);
 }
 
 void System

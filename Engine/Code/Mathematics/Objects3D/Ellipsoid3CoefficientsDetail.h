@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:54)
+// 引擎版本：0.0.2.5 (2020/03/19 17:39)
 
 #ifndef MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
@@ -14,11 +14,11 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Ellipsoid3Coefficients<Real>
-	::Ellipsoid3Coefficients( const Matrix3& matrix, const Vector3D& vector,Real constants )
+	::Ellipsoid3Coefficients(const Matrix3& matrix, const Vector3D& vector, Real constants)
 	:m_Coefficients{ constants,vector[0] ,vector[1] ,vector[2],matrix(0,0),
 					 matrix(0,1) * static_cast<Real>(2),matrix(0,2) * static_cast<Real>(2),matrix(1,1),matrix(1,2) * static_cast<Real>(2),matrix(2,2) }
 {
@@ -27,7 +27,7 @@ Mathematics::Ellipsoid3Coefficients<Real>
 
 template <typename Real>
 Mathematics::Ellipsoid3Coefficients<Real>
-	::Ellipsoid3Coefficients( const std::vector<Real>& coefficient )
+	::Ellipsoid3Coefficients(const std::vector<Real>& coefficient)
 	:m_Coefficients{ coefficient }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -38,7 +38,7 @@ template <typename Real>
 bool Mathematics::Ellipsoid3Coefficients<Real>
 	::IsValid() const noexcept
 {
-	if(m_Coefficients.size() == static_cast<size_t>(GetCoefficientsSize()))
+	if (m_Coefficients.size() == static_cast<size_t>(GetCoefficientsSize()))
 		return true;
 	else
 		return false;
@@ -52,14 +52,14 @@ typename const  Mathematics::Ellipsoid3Coefficients<Real>::Matrix3 Mathematics::
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	return Matrix3{ m_Coefficients[4],
-				    static_cast<Real>(0.5) * m_Coefficients[5],
-				    static_cast<Real>(0.5) * m_Coefficients[6],
-				    static_cast<Real>(0.5) * m_Coefficients[5],
-				    m_Coefficients[7],
-				    static_cast<Real>(0.5) * m_Coefficients[8],
-				    static_cast<Real>(0.5) * m_Coefficients[6],
-				    static_cast<Real>(0.5) * m_Coefficients[8],
-				    m_Coefficients[9] };
+					static_cast<Real>(0.5) * m_Coefficients[5],
+					static_cast<Real>(0.5) * m_Coefficients[6],
+					static_cast<Real>(0.5) * m_Coefficients[5],
+					m_Coefficients[7],
+					static_cast<Real>(0.5) * m_Coefficients[8],
+					static_cast<Real>(0.5) * m_Coefficients[6],
+					static_cast<Real>(0.5) * m_Coefficients[8],
+					m_Coefficients[9] };
 }
 
 template <typename Real>
@@ -130,7 +130,7 @@ int Mathematics::Ellipsoid3Coefficients<Real>
 
 template <typename Real>
 bool Mathematics
-	::Approximate( const Ellipsoid3Coefficients<Real>& lhs,const Ellipsoid3Coefficients<Real>& rhs ,const Real epsilon)
+	::Approximate(const Ellipsoid3Coefficients<Real>& lhs, const Ellipsoid3Coefficients<Real>& rhs, const Real epsilon)
 {
 	auto lhsCoefficients = lhs.GetCoefficients();
 	auto rhsCoefficients = rhs.GetCoefficients();
@@ -139,17 +139,16 @@ bool Mathematics
 							rhsCoefficients.size() == boost::numeric_cast<size_t>(rhs.GetCoefficientsSize()),
 							"GetCoefficients返回的数组大小错误！");
 
-	for(auto i = 0;i < Ellipsoid3Coefficients<Real>::GetCoefficientsSize();++i)
+	for (auto i = 0; i < Ellipsoid3Coefficients<Real>::GetCoefficientsSize(); ++i)
 	{
 		if (!Math<Real>::Approximate(lhsCoefficients[i], rhsCoefficients[i], epsilon))
 		{
 			return false;
-		}			
+		}
 	}
 
 	return true;
 }
-
 
 #endif // MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
 

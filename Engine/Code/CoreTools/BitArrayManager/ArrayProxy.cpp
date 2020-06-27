@@ -13,14 +13,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::ArrayProxy
-	::ArrayProxy(BitArray2D& arrayProxy, int pos)
+	::ArrayProxy(BitArray2D& arrayProxy, int pos) noexcept
 	:m_Array{ arrayProxy }, m_Position{ pos }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::ArrayProxy
-	::ArrayProxy(const ArrayProxy& rhs)
+	::ArrayProxy(const ArrayProxy& rhs) noexcept
 	:m_Array{ rhs.m_Array }, m_Position{ rhs.m_Position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

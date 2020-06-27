@@ -44,7 +44,7 @@ void Mathematics::StaticFindIntersectorSegment3Box3<Real>
 	auto t1 = mSegment.GetExtent();
 	int mIntersectionType = 0;
 	StaticFindIntersectorLine3Box3<Real>::DoClipping(t0, t1, mSegment.GetCenterPoint(),  mSegment.GetDirection(), mBox, mSolid, mQuantity, mPoint,  mIntersectionType);
-	SetIntersectionType(System::UnderlyingCastEnum<IntersectionType>( mIntersectionType));
+	this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType>( mIntersectionType));
 }
  
 template <typename Real>

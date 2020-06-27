@@ -1,20 +1,19 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/21 13:09)
-
+// 引擎版本：0.0.2.4 (2020/03/11 15:54)
 
 #include "Network/NetworkExport.h"
 
 #include "BoostMainManagerUseMultiContext.h"
+#include "System/Helper/PragmaWarning/AsioPost.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 #include "Network/Configuration/ConfigurationSubStrategy.h"
-
-#include "System/Helper/PragmaWarning/AsioPost.h"
-#include <boost/numeric/conversion/cast.hpp>
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::move;
 using std::make_unique;

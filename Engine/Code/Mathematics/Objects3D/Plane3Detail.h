@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 10:04)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 17:43)
 
 #ifndef MATHEMATICS_OBJECTS3D_PLANE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_PLANE3_DETAIL_H
@@ -15,7 +15,7 @@
 
 template <typename Real>
 Mathematics::Plane3<Real>
-	::Plane3( const Vector3D& normal, Real constant ,const Real epsilon)
+	::Plane3(const Vector3D& normal, Real constant, const Real epsilon)
 	:m_Normal{ normal }, m_Constant{ constant }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -29,24 +29,22 @@ Mathematics::Plane3<Real>
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-
 template <typename Real>
 Mathematics::Plane3<Real>
-	::Plane3( const Vector3D& normal, const Vector3D& point ,const Real epsilon)
-	:m_Normal{ normal },m_Constant{ Vector3DTools::DotProduct(normal,point) },m_Epsilon{ epsilon }
+	::Plane3(const Vector3D& normal, const Vector3D& point, const Real epsilon)
+	:m_Normal{ normal }, m_Constant{ Vector3DTools::DotProduct(normal,point) }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-
 template <typename Real>
 Mathematics::Plane3<Real>
-	::Plane3(const Triangle3& triangle,const Real epsilon)
+	::Plane3(const Triangle3& triangle, const Real epsilon)
 	:m_Normal{}, m_Constant{}, m_Epsilon{ epsilon }
 {
 	auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
 	auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
-	m_Normal = Vector3DTools::UnitCrossProduct(edge1,edge2);
+	m_Normal = Vector3DTools::UnitCrossProduct(edge1, edge2);
 	m_Constant = Vector3DTools::DotProduct(m_Normal, triangle.GetVertex(0));
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -54,13 +52,13 @@ Mathematics::Plane3<Real>
 
 template <typename Real>
 Mathematics::Plane3<Real>
-	::Plane3( const Vector3D& firstPoint, const Vector3D& secondPoint,const Vector3D& thirdPoint,const Real epsilon )
+	::Plane3(const Vector3D& firstPoint, const Vector3D& secondPoint, const Vector3D& thirdPoint, const Real epsilon)
 	:m_Normal{}, m_Constant{}, m_Epsilon{ epsilon }
 {
 	auto edge1 = secondPoint - firstPoint;
 	auto edge2 = thirdPoint - firstPoint;
-	m_Normal = Vector3DTools::UnitCrossProduct(edge1,edge2);
-	m_Constant = Vector3DTools::DotProduct(m_Normal,firstPoint);
+	m_Normal = Vector3DTools::UnitCrossProduct(edge1, edge2);
+	m_Constant = Vector3DTools::DotProduct(m_Normal, firstPoint);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -70,7 +68,7 @@ template <typename Real>
 bool Mathematics::Plane3<Real>
 	::IsValid() const noexcept
 {
-	if(m_Normal.IsNormalize(m_Epsilon))
+	if (m_Normal.IsNormalize(m_Epsilon))
 		return true;
 	else
 		return false;
@@ -93,21 +91,20 @@ Real Mathematics::Plane3<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	return m_Constant;
-}
-
+} 
 
 template <typename Real>
 Real Mathematics::Plane3<Real>
-	::DistanceTo( const Vector3D& point ) const
+	::DistanceTo(const Vector3D& point) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
-	return Vector3DTools::DotProduct(m_Normal,point) - m_Constant;
+
+	return Vector3DTools::DotProduct(m_Normal, point) - m_Constant;
 }
 
 template <typename Real>
 Mathematics::NumericalValueSymbol Mathematics::Plane3<Real>
-	::WhichSide( const Vector3D& point ) const
+	::WhichSide(const Vector3D& point) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

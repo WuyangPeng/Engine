@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 10:43)
+// 引擎版本：0.0.2.5 (2020/03/20 09:45)
 
 #ifndef MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
 #define MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
@@ -21,12 +21,12 @@ namespace Mathematics
 	class FloatingPointAnalysis
 	{
 	public:
-		BOOST_STATIC_ASSERT((boost::is_floating_point<T>::value));
+		static_assert(std::is_floating_point<T>::value, "T must be floating point.");
 
 		using ClassType = FloatingPointAnalysis<T>;
 		using TraitsType = typename IntegerTraits<T>::TraitsType;
 		using IntegerType = typename TraitsType::IntegerType;
-		
+
 	public:
 		explicit FloatingPointAnalysis(T value);
 

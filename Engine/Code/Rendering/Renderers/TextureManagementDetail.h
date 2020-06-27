@@ -36,7 +36,7 @@ template <typename PlatformTextureType>
 bool Rendering::TextureManagement <PlatformTextureType>
 	::IsValid() const noexcept
 {
-	if(m_Renderer != nullptr)
+	if(m_Renderer.lock())
         return true;
     else
         return false;
@@ -51,7 +51,7 @@ void Rendering::TextureManagement <PlatformTextureType>
 
     if (m_Textures.find(texture) == m_Textures.end())
     {
-		PlatformTextureSharedPtr platformTexture{ std::make_shared<PlatformTextureType>(m_Renderer, texture) };
+		PlatformTextureSharedPtr platformTexture{ std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.GetData()) };
 		m_Textures.insert({ texture, platformTexture });
     }
 }
@@ -80,11 +80,11 @@ void Rendering::TextureManagement <PlatformTextureType>
     else
     {
         // 延迟构造。
-		platformTexture = std::make_shared<PlatformTextureType>(m_Renderer, texture);  
+		platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.GetData());
 		m_Textures.insert({ texture,  platformTexture });
     }
 
-     platformTexture->Enable(m_Renderer, textureUnit);
+     platformTexture->Enable(m_Renderer.lock().get(), textureUnit);
 }
 
 template <typename PlatformTextureType>
@@ -99,7 +99,7 @@ void Rendering::TextureManagement <PlatformTextureType>
     {
 		auto platformTexture = iter->second;
 
-        platformTexture->Disable(m_Renderer, textureUnit);
+        platformTexture->Disable(m_Renderer.lock().get(), textureUnit);
     }
 }
 
@@ -120,7 +120,7 @@ void* Rendering::TextureManagement <PlatformTextureType>
     else
     {
         // 延迟构造。
-        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer, texture);   
+        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.GetData());
         m_Textures.insert(std::make_pair(texture, platformTexture));
     }
 
@@ -196,7 +196,7 @@ void* Rendering::TextureManagement <PlatformTextureType>
     else
     {
         // 延迟构造。
-        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer, texture);  
+        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.GetData());
 		m_Textures.insert({ texture, platformTexture });
     }
 

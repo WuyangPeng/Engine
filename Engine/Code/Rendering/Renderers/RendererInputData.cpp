@@ -19,7 +19,7 @@ using std::make_shared;
 
 SINGLETON_MUTEX_DEFINE(Rendering,RendererInputData);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_RenderingMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetRenderingMutex() }
 
 #define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_RendererInputDataMutex }
 

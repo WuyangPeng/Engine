@@ -9,7 +9,7 @@
 
 #include "Spatial.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 
 RENDERING_EXPORT_SHARED_PTR(PickRecordImpl);
 

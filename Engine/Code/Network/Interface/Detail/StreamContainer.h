@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 16:56)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:17)
 
 #ifndef NETWORK_NETWORK_STREAM_CONTAINER_H
 #define NETWORK_NETWORK_STREAM_CONTAINER_H
@@ -13,26 +13,26 @@
 #include "Network/NetworkMessage/BufferSendStream.h" 
 
 namespace Network
-{ 
-	class NETWORK_HIDDEN_DECLARE StreamContainer 
+{
+	class NETWORK_HIDDEN_DECLARE StreamContainer
 	{
 	public:
-		using ClassType = StreamContainer; 
+		using ClassType = StreamContainer;
 
 	public:
 		explicit StreamContainer(const ConfigurationStrategy& configurationStrategy, const SockStreamSharedPtr& sockStream);
 
-		CLASS_INVARIANT_DECLARE;	
+		CLASS_INVARIANT_DECLARE;
 
 		void SetSockStream(const SockStreamSharedPtr& sockStream);
 
 		SockStreamSharedPtr GetSockStreamSharedPtr();
-		BufferSendStream& GetBufferSendStream(); 
+		BufferSendStream& GetBufferSendStream();
 
-	private:			
+	private:
 		BufferSendStream m_BufferSendStream;
 		SockStreamSharedPtr m_SockStream;
 	};
-} 
+}
 
 #endif // NETWORK_NETWORK_STREAM_CONTAINER_H

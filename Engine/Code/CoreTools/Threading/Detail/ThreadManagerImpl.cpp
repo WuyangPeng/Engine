@@ -9,11 +9,11 @@
 #include "ThreadManagerImpl.h"
 #include "System/Threading/Thread.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <functional>
 #include <algorithm>
 

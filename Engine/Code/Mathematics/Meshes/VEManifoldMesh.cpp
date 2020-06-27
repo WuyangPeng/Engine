@@ -11,6 +11,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 #include <fstream>
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 Mathematics::VEManifoldMesh
 	::VEManifoldMesh (VCreator vCreator, ECreator eCreator)
@@ -69,6 +70,8 @@ Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh
     // Add vertices to mesh.
     for (int i = 0; i < 2; ++i)
     {
+		if (edge)
+		{
         int v = edge->V[i];
         VPtr vertex;
         VMapIterator viter = mVMap.find(v);
@@ -85,7 +88,11 @@ Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh
         {
             // Second time vertex encountered.
             vertex = viter->second;
-            MATHEMATICS_ASSERTION_0(vertex != 0, "Unexpected condition\n");
+    
+			if (vertex == 0)
+			{
+				THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"));
+			}
 
             // Update vertex.
             if (vertex->E[1])
@@ -97,7 +104,11 @@ Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh
 
             // Update adjacent edge.
             EPtr adjacent = vertex->E[0];
-            MATHEMATICS_ASSERTION_0(adjacent != 0, "Unexpected condition\n");
+         
+			if (adjacent == 0)
+			{
+				THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"));
+			}
             for (int j = 0; j < 2; ++j)
             {
                 if (adjacent->V[j] == v)
@@ -108,7 +119,10 @@ Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh
             }
 
             // Update edge.
-            edge->E[i] = adjacent;
+			
+				edge->E[i] = adjacent;
+			}
+           
         }
     }
 
@@ -133,7 +147,10 @@ bool Mathematics::VEManifoldMesh
         VMapIterator viter = mVMap.find(edge->V[i]);
         MATHEMATICS_ASSERTION_0(viter != mVMap.end(), "Unexpected condition\n");
         Vertex* vertex = viter->second;
-        MATHEMATICS_ASSERTION_0(vertex != 0, "Unexpected condition\n");
+		if (vertex == 0)
+		{
+			THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"));
+		}
         if (vertex->E[0] == edge)
         {
             // One-edge vertices always have pointer in slot zero.

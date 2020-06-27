@@ -71,7 +71,7 @@ Mathematics::ConvexHull3<Real>
     {
         // Transform the vertices to the cube [0,1]^3.
 		auto minValue = info.GetMinExtreme();
-		auto scale = ((Real)1)/info.GetMaxRange();
+		auto scale = (static_cast<Real>(1))/info.GetMaxRange();
         for (i = 0; i < mNumVertices; ++i)
         {
             mSVertices[i] = (mVertices[i] - minValue)*scale;
@@ -95,7 +95,7 @@ Mathematics::ConvexHull3<Real>
         else  // eQueryType == Query::QT_REAL
         {
             // No scaling for floating point.
-            expand = (Real)1;
+            expand = static_cast<Real>(1);
             mQuery = NEW0 Query3<Real>(mSVertices);
         }
 
@@ -245,7 +245,7 @@ Mathematics::ConvexHull2<Real>* Mathematics::ConvexHull3<Real>
 template <typename Real>
 Mathematics::ConvexHull3<Real>
 	::ConvexHull3 (const System::TChar* filename)
-	:ConvexHull<Real>{ 0, Real{}, false, QueryType::Real }, mVertices{}, mSVertices{}, mQuery{ 0 }
+	:ConvexHull<Real>{ 0, Math<Real>::sm_Zero, false, QueryType::Real }, mVertices{}, mSVertices{}, mQuery{ 0 }
 {
     bool loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);

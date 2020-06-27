@@ -1,54 +1,63 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:17)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 15:57)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_WINDOW_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_IMPL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_WINDOW_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_IMPL_H
 
 #include "Framework/FrameworkDll.h"
 
+#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 #include "CoreTools/MainFunctionHelper/TestingInformationHelper.h"
 
+#include <map>
 #include <string>
-#include <iosfwd>
-
-namespace CoreTools
-{
-	class Suite;
-	class UnitTestComposite;
-}
 
 namespace Framework
 {
 	class FRAMEWORK_HIDDEN_DECLARE OpenGLGlutCallBackUnitTestSuiteImpl
 	{
-	public:	
-		typedef OpenGLGlutCallBackUnitTestSuiteImpl ClassType;
-		typedef CoreTools::Suite Suite;
-		typedef std::shared_ptr<CoreTools::UnitTestComposite> UnitTestPtr;
+	public:
+		using ClassType = OpenGLGlutCallBackUnitTestSuiteImpl;
+		using WindowsKeyCodes = System::WindowsKeyCodes;
+		using Suite = CoreTools::Suite;
+		using OStreamShared = CoreTools::OStreamShared;
+		using TestingInformationHelper = CoreTools::TestingInformationHelper;
+		using UnitTestSharedPtr = std::shared_ptr<CoreTools::UnitTestComposite>;
 
 	public:
-		OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name,std::ostream* osPtr);		
-	
-		CLASS_INVARIANT_DECLARE;	
+		OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared);
+
+		CLASS_INVARIANT_DECLARE;
 
 		void AddSuite(const Suite& suite);
 		void RunUnitTest();
 		void PrintReport();
-		void ResetTestData();
-		int GetPassedNumber() const;
-		
-		void AddTest(const std::string& suiteName,Suite& suite, 
-			         const std::string& testName,const UnitTestPtr& unitTest);
+		void ResetTestData();	
+
+		void KeyDownMessage(WindowsKeyCodes windowsKeyCodes);
+
+		void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
+
+		bool IsPrintRun() const noexcept;
+		int GetPassedNumber() const noexcept;
 
 	private:
-		typedef std::shared_ptr<Suite> SuitePtr;
+		using SuiteSharedPtr = std::shared_ptr<Suite>;
+		using HandlerFunction = void (ClassType::*)();
+		using Process = std::map<System::WindowsKeyCodes, HandlerFunction>;
 
 	private:
-		SuitePtr m_SuitePtr;
-		CoreTools::TestingInformationHelper m_TestingInformationHelper;
+		void RunUnitTestOnMessage(); 
+		void ResetTestDataOnMessage();
+
+	private:
+		TestingInformationHelper m_TestingInformationHelper;
+		SuiteSharedPtr m_Suite;		
+		Process m_Process;
 	};
 }
 

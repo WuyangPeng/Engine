@@ -9,6 +9,8 @@
 #include "CaseInsensitiveString.h" 
 #include "StringConversion.h"
 
+#include <iostream>
+
 using std::ostream;
 using std::string;
 using std::wstring;

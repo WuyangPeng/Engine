@@ -13,6 +13,7 @@
 #include "CoreTools/LogManager/LogManagerFwd.h"
 
 #include <string> 
+#include <memory>
 
 namespace CoreTools
 {

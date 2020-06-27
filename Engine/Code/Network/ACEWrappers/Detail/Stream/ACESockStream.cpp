@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 20:22)
+// 引擎版本：0.0.2.4 (2020/03/11 13:48)
 
 #include "Network/NetworkExport.h" 
 
@@ -18,9 +18,9 @@
 #include "Network/NetworkMessage/MessageInterface.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h" 
 #include "Network/ACEWrappers/Detail/Address/ACESockInetAddress.h"
-
-#include <boost/numeric/conversion/cast.hpp>
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
 using std::array;
@@ -57,7 +57,7 @@ int Network::ACESockStream
 
 	auto bytesTotal = messageBuffer->GetSize();
 
-	static const int headSize = boost::numeric_cast<int>(MessageInterface::GetMessageHeadSize());
+	static const auto headSize = MessageInterface::GetMessageHeadSize();
 
 	if (bytesTotal <= headSize)
 	{
@@ -98,7 +98,7 @@ int Network::ACESockStream
 	::Send(const MessageBufferSharedPtr& messageBuffer)
 {
 	NETWORK_CLASS_IS_VALID_9;
-	 
+
 	if (m_ACESockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"));
@@ -116,7 +116,7 @@ Network::ACEHandle Network::ACESockStream
 }
 
 void Network::ACESockStream
-	::SetACEHandle( ACEHandle handle )
+	::SetACEHandle(ACEHandle handle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -128,7 +128,7 @@ bool Network::ACESockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	if(m_ACESockStream.close() == 0)
+	if (m_ACESockStream.close() == 0)
 	{
 		m_ACESockStream.set_handle(reinterpret_cast<ACEHandle>(System::g_InvalidSocket));
 
@@ -153,7 +153,7 @@ void Network::ACESockStream
 	CoreTools::CallbackParameters callbackParameters{};
 	callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
 	callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-	eventInterface->EventFunction(callbackParameters); 
+	eventInterface->EventFunction(callbackParameters);
 }
 
 void Network::ACESockStream
@@ -163,7 +163,7 @@ void Network::ACESockStream
 
 	auto bytesTotal = messageBuffer->GetSize();
 
-	static const auto headSize = boost::numeric_cast<int>(MessageInterface::GetMessageHeadSize());
+	static const auto headSize = MessageInterface::GetMessageHeadSize();
 
 	if (bytesTotal <= headSize)
 	{
@@ -201,8 +201,7 @@ void Network::ACESockStream
 	{
 		return;
 	}
-
-} 
+}
 
 const std::string Network::ACESockStream
 	::GetRemoteAddress() const
@@ -218,7 +217,7 @@ const std::string Network::ACESockStream
 	else
 	{
 		return "";
-	}	
+	}
 }
 
 int Network::ACESockStream
@@ -235,7 +234,7 @@ int Network::ACESockStream
 	else
 	{
 		return 0;
-	}	
+	}
 }
 
 bool Network::ACESockStream

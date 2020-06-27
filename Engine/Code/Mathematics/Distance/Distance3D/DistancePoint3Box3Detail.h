@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/11 10:01)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 10:17)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_DETAIL_H
@@ -33,10 +33,10 @@ template <typename Real>
 bool Mathematics::DistancePoint3Box3<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -71,8 +71,8 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 	Vector3D closest{ Vector3DTools::DotProduct(difference, m_Box.GetFirstAxis()),
 					  Vector3DTools::DotProduct(difference,m_Box.GetSecondAxis()),
 					  Vector3DTools::DotProduct(difference,m_Box.GetThirdAxis()) };
-	Real squaredDistance { };
-	Real delta { };
+	auto squaredDistance = Math::sm_Zero;
+	auto delta = Math::sm_Zero;
 
 	if (closest.GetXCoordinate() < -m_Box.GetFirstExtent())
 	{
@@ -113,7 +113,7 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 		closest.SetZCoordinate(m_Box.GetThirdExtent());
 	}
 
-	return DistanceResult{ squaredDistance, Real{}, m_Point,
+	return DistanceResult{ squaredDistance, Math::sm_Zero, m_Point,
 						   m_Box.GetCenter() + closest.GetXCoordinate() * m_Box.GetFirstAxis() +
 						   closest.GetYCoordinate() * m_Box.GetSecondAxis() +
 						   closest.GetZCoordinate() * m_Box.GetThirdAxis() };
@@ -124,12 +124,12 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 	::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
- 
+
 	auto movePoint = m_Point.GetMove(t, lhsVelocity);
 	auto movedBox = m_Box.GetMove(t, rhsVelocity);
 
 	ClassType distance{ movePoint, movedBox };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 
@@ -137,4 +137,3 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_DETAIL_H
- 

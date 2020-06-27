@@ -9,13 +9,29 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "ShaderBase.h"
+#include "ShaderBase.h" 
 #include "Rendering/Resources/Texture.h"
 #include "Rendering/ShaderFloats/ShaderFloat.h"
+#include "Rendering/SceneGraph/Camera.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+#include "CoreTools/MemoryTools/SubclassSmartPointerTraits.h"
 
 RENDERING_EXPORT_SHARED_PTR(ShaderParametersImpl);
+
+namespace Rendering
+{
+	class Spatial;
+}
+
+// 编译不过的临时解决方案
+namespace CoreTools
+{
+	template<>
+	struct SubclassSmartPointerTraits<Rendering::Visual>
+	{
+		using ParentType = Rendering::Spatial;
+	};
+}
 
 namespace Rendering
 {
@@ -25,7 +41,8 @@ namespace Rendering
 		COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderParameters);
 		using ParentType = Object;
 		using ConstShaderFloatSmartPointerGather = std::vector<ConstShaderFloatSmartPointer>;
-		using ConstTextureSmartPointerGather = std::vector<ConstTextureSmartPointer>;
+		using ConstTextureSmartPointerGather = std::vector<ConstTextureSmartPointer>; 
+		using VisualSmartPointer = CoreTools::SixthSubclassSmartPointer<Visual>;
 
 	public:
 		explicit ShaderParameters(const ConstShaderBaseSmartPointer& shader);
@@ -60,13 +77,15 @@ namespace Rendering
 		const ConstTextureSmartPointer GetTexture(int handle) const;
 
 		// 更新着色器常量在绘制调用期间。
-		void UpdateConstants(const Visual* visual, const Camera* camera);
+		void UpdateConstants(const VisualSmartPointer& visual,const CameraSmartPointer& camera);
 
 	private:
 		IMPL_TYPE_DECLARE(ShaderParameters);
 	};
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(ShaderParameters);
+#include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ShaderParameters);
 }
 

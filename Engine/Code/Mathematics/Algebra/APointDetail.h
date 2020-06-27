@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 14:33)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 11:34)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_DETAIL_H
 #define MATHEMATICS_ALGEBRA_A_POINT_DETAIL_H
@@ -16,40 +16,40 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename T>
 const Mathematics::APoint<T> Mathematics::APoint<T>
-	::sm_Origin{ AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::NullValue };
+	::sm_Origin{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
 
 template <typename T>
 Mathematics::APoint<T>
 	::APoint()
-	:m_HomogeneousPoint{ AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::UnitValue }
+	:m_HomogeneousPoint{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_One }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
 Mathematics::APoint<T>
-	::APoint( T x, T y, T z )
-	:m_HomogeneousPoint{ x,y,z,AlgebraTraits::UnitValue }
+::APoint(T x, T y, T z)
+	:m_HomogeneousPoint{ x,y,z,Math::sm_One }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
 Mathematics::APoint<T>
-	::APoint( const Float3& tuple )
-	:m_HomogeneousPoint{ tuple.GetFirstValue(),tuple.GetSecondValue(),tuple.GetThirdValue(),AlgebraTraits::UnitValue }
+	::APoint(const Float3& tuple)
+	:m_HomogeneousPoint{ tuple.GetFirstValue(),tuple.GetSecondValue(),tuple.GetThirdValue(),Math::sm_One }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
 Mathematics::APoint<T>
-	::APoint( const Vector3D& rhs )
-	:m_HomogeneousPoint{ rhs.GetXCoordinate(),rhs.GetYCoordinate(),rhs.GetZCoordinate(),AlgebraTraits::UnitValue }
+	::APoint(const Vector3D& rhs)
+	:m_HomogeneousPoint{ rhs.GetXCoordinate(),rhs.GetYCoordinate(),rhs.GetZCoordinate(),Math::sm_One }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -59,8 +59,8 @@ template <typename T>
 bool Mathematics::APoint<T>
 	::IsValid() const noexcept
 {
-	if(Math::FAbs(m_HomogeneousPoint.GetW() - AlgebraTraits::UnitValue) <= Math::sm_Epsilon)
-	    return true;
+	if (Math::FAbs(m_HomogeneousPoint.GetW() - Math::sm_One) <= Math::sm_Epsilon)
+		return true;
 	else
 		return false;
 }
@@ -71,7 +71,7 @@ const Mathematics::Float3 Mathematics::APoint<T>
 	::GetFloat3() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
+
 	return Float3{ boost::numeric_cast<float>(m_HomogeneousPoint.GetX()),boost::numeric_cast<float>(m_HomogeneousPoint.GetY()),boost::numeric_cast<float>(m_HomogeneousPoint.GetZ()) };
 }
 
@@ -80,7 +80,7 @@ const Mathematics::Vector3D<T>Mathematics::APoint<T>
 	::GetVector3D() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
+
 	return Vector3D{ m_HomogeneousPoint.GetX(),m_HomogeneousPoint.GetY(),m_HomogeneousPoint.GetZ() };
 }
 
@@ -95,53 +95,27 @@ const Mathematics::HomogeneousPoint<T> Mathematics::APoint<T>
 
 template <typename T>
 const T& Mathematics::APoint<T>
-	::operator[]( int index ) const
+	::operator[](int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"À˜“˝¥ÌŒÛ£°");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < 3, "À˜“˝¥ÌŒÛ£°");
 
 	return m_HomogeneousPoint[index];
 }
 
 template <typename T>
 T& Mathematics::APoint<T>
-	::operator[]( int index )
+	::operator[](int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"À˜“˝¥ÌŒÛ£°");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < 3, "À˜“˝¥ÌŒÛ£°");
 
-	return OPERATOR_SQUARE_BRACKETS(T,index);
+	return OPERATOR_SQUARE_BRACKETS(T, index);
 }
 
 template <typename T>
 Mathematics::APoint<T>& Mathematics::APoint<T>
-	::operator+=( const AVector& rhs )
-{
-	MATHEMATICS_CLASS_IS_VALID_1;
-
-	m_HomogeneousPoint[0] += rhs[0];
-	m_HomogeneousPoint[1] += rhs[1];
-	m_HomogeneousPoint[2] += rhs[2];
-
-	return *this;
-}
-
-template <typename T>
-Mathematics::APoint<T>& Mathematics::APoint<T>
-	::operator-=( const AVector& rhs )
-{
-	MATHEMATICS_CLASS_IS_VALID_1;
-
-	m_HomogeneousPoint[0] -= rhs[0];
-	m_HomogeneousPoint[1] -= rhs[1];
-	m_HomogeneousPoint[2] -= rhs[2];
-
-	return *this;
-}
-
-template <typename T>
-Mathematics::APoint<T>& Mathematics::APoint<T>
-	::operator+=( const ClassType& rhs )
+	::operator+=(const AVector& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -154,7 +128,7 @@ Mathematics::APoint<T>& Mathematics::APoint<T>
 
 template <typename T>
 Mathematics::APoint<T>& Mathematics::APoint<T>
-	::operator-=( const ClassType& rhs )
+	::operator-=(const AVector& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -167,7 +141,33 @@ Mathematics::APoint<T>& Mathematics::APoint<T>
 
 template <typename T>
 Mathematics::APoint<T>& Mathematics::APoint<T>
-	::operator*=( T scalar )
+	::operator+=(const ClassType& rhs)
+{
+	MATHEMATICS_CLASS_IS_VALID_1;
+
+	m_HomogeneousPoint[0] += rhs[0];
+	m_HomogeneousPoint[1] += rhs[1];
+	m_HomogeneousPoint[2] += rhs[2];
+
+	return *this;
+}
+
+template <typename T>
+Mathematics::APoint<T>& Mathematics::APoint<T>
+	::operator-=(const ClassType& rhs)
+{
+	MATHEMATICS_CLASS_IS_VALID_1;
+
+	m_HomogeneousPoint[0] -= rhs[0];
+	m_HomogeneousPoint[1] -= rhs[1];
+	m_HomogeneousPoint[2] -= rhs[2];
+
+	return *this;
+}
+
+template <typename T>
+Mathematics::APoint<T>& Mathematics::APoint<T>
+	::operator*=(T scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -180,7 +180,7 @@ Mathematics::APoint<T>& Mathematics::APoint<T>
 
 template <typename T>
 Mathematics::APoint<T>& Mathematics::APoint<T>
-	::operator/=( T scalar )
+	::operator/=(T scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -192,7 +192,7 @@ Mathematics::APoint<T>& Mathematics::APoint<T>
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"≥˝¡„¥ÌŒÛ£°");
+		MATHEMATICS_ASSERTION_1(false, "≥˝¡„¥ÌŒÛ£°");
 
 		m_HomogeneousPoint[0] = Math::sm_MaxReal;
 		m_HomogeneousPoint[1] = Math::sm_MaxReal;
@@ -213,25 +213,25 @@ const Mathematics::APoint<T> Mathematics::APoint<T>
 
 template <typename T>
 const Mathematics::AVector<T> Mathematics
-	::operator-( const APoint<T>& lhs,const APoint<T>& rhs )
+	::operator-(const APoint<T>& lhs, const APoint<T>& rhs)
 {
 	return AVector<T>{ lhs[0] - rhs[0], lhs[1] - rhs[1], lhs[2] - rhs[2] };
 }
 
 template <typename T>
 const Mathematics::APoint<T> Mathematics
-	::operator+( const APoint<T>& lhs,const AVector<T>& rhs )
+	::operator+(const APoint<T>& lhs, const AVector<T>& rhs)
 {
 	APoint<T> result{ lhs };
 
 	result += rhs;
-	
+
 	return result;
 }
 
 template <typename T>
 const Mathematics::APoint<T> Mathematics
-	::operator-( const APoint<T>& lhs,const AVector<T>& rhs )
+	::operator-(const APoint<T>& lhs, const AVector<T>& rhs)
 {
 	APoint<T> result{ lhs };
 
@@ -242,7 +242,7 @@ const Mathematics::APoint<T> Mathematics
 
 template <typename T>
 const Mathematics::APoint<T> Mathematics
-	::operator+( const APoint<T>& lhs,const APoint<T>& rhs )
+	::operator+(const APoint<T>& lhs, const APoint<T>& rhs)
 {
 	APoint<T> result{ lhs };
 
@@ -253,7 +253,7 @@ const Mathematics::APoint<T> Mathematics
 
 template <typename T>
 const Mathematics::APoint<T> Mathematics
-	::operator*( const APoint<T>& lhs,T scalar )
+	::operator*(const APoint<T>& lhs, T scalar)
 {
 	APoint<T> result{ lhs };
 
@@ -264,7 +264,7 @@ const Mathematics::APoint<T> Mathematics
 
 template <typename T>
 const Mathematics::APoint<T> Mathematics
-	::operator/( const APoint<T>& lhs,T scalar )
+	::operator/(const APoint<T>& lhs, T scalar)
 {
 	APoint<T> result{ lhs };
 
@@ -275,35 +275,35 @@ const Mathematics::APoint<T> Mathematics
 
 template <typename T>
 const Mathematics::APoint<T> Mathematics
-	::operator*( T scalar,const APoint<T>& rhs )
+	::operator*(T scalar, const APoint<T>& rhs)
 {
 	return rhs * scalar;
 }
 
 template <typename T>
 T Mathematics
-	::Dot( const APoint<T>& lhs,const AVector<T>& rhs )
+	::Dot(const APoint<T>& lhs, const AVector<T>& rhs)
 {
-	 return lhs[0] * rhs[0] + lhs[1] * rhs[1] + lhs[2] * rhs[2];
+	return lhs[0] * rhs[0] + lhs[1] * rhs[1] + lhs[2] * rhs[2];
 }
 
 template <typename T>
-bool Mathematics	
-	::Approximate( const APoint<T>& lhs, const APoint<T>& rhs,const T epsilon )
+bool Mathematics
+	::Approximate(const APoint<T>& lhs, const APoint<T>& rhs, const T epsilon)
 {
 	return Math<T>::FAbs(lhs[0] - rhs[0]) <= epsilon && Math<T>::FAbs(lhs[1] - rhs[1]) <= epsilon && Math<T>::FAbs(lhs[2] - rhs[2]) <= epsilon;
 }
 
 template <typename T>
 bool Mathematics
-	::Approximate( const APoint<T>& lhs, const APoint<T>& rhs )
+	::Approximate(const APoint<T>& lhs, const APoint<T>& rhs)
 {
-	return Approximate(lhs,rhs,Math<T>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math<T>::sm_ZeroTolerance);
 }
 
 template <typename T>
 std::ostream& Mathematics
-	::operator<<(std::ostream& outFile, const APoint<T>& point) 
+	::operator<<(std::ostream& outFile, const APoint<T>& point)
 {
 	outFile << point[0] << "°°" << point[1] << "°°" << point[2];
 

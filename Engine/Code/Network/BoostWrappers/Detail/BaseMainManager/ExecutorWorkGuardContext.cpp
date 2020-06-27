@@ -1,18 +1,16 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/21 13:07)
-
+// 引擎版本：0.0.2.4 (2020/03/11 15:55)
 
 #include "Network/NetworkExport.h"
 
 #include "ExecutorWorkGuardContext.h"
+#include "System/Helper/PragmaWarning/AsioPost.h"
 #include "CoreTools/Exception/Error.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
-
-#include "System/Helper/PragmaWarning/AsioPost.h"
 
 using std::bind;
 using std::exception;

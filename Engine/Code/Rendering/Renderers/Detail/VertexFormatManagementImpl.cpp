@@ -24,7 +24,7 @@ Rendering::VertexFormatManagementImpl
 bool Rendering::VertexFormatManagementImpl
 	::IsValid() const noexcept
 {
-	if(m_Renderer != nullptr)
+	if(m_Renderer.lock())
         return true;
     else
         return false;
@@ -32,19 +32,23 @@ bool Rendering::VertexFormatManagementImpl
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::VertexFormatManagementImpl
-	::Bind (VertexFormatConstPtr vertexFormat)
+	::Bind (ConstVertexFormatSmartPointer vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
     if (m_VertexFormats.find(vertexFormat) == m_VertexFormats.end())
     {
-		PlatformVertexFormatSharedPtr platformVertexForma{ make_shared<PlatformVertexFormat>(m_Renderer,vertexFormat) };
-		m_VertexFormats.insert({ vertexFormat, platformVertexForma });
+		auto ptr = m_Renderer.lock();
+		if (ptr)
+		{
+			PlatformVertexFormatSharedPtr platformVertexForma{ make_shared<PlatformVertexFormat>(ptr.get(),vertexFormat.GetData()) };
+			m_VertexFormats.insert({ vertexFormat, platformVertexForma });
+		}		
     }
 }
 
 void Rendering::VertexFormatManagementImpl
-	::Unbind (VertexFormatConstPtr vertexFormat)
+	::Unbind (ConstVertexFormatSmartPointer vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -52,7 +56,7 @@ void Rendering::VertexFormatManagementImpl
 }
  
 void Rendering::VertexFormatManagementImpl
-	::Enable (VertexFormatConstPtr vertexFormat)
+	::Enable (ConstVertexFormatSmartPointer vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -65,15 +69,23 @@ void Rendering::VertexFormatManagementImpl
     else
     {
         // —”≥Ÿππ‘Ï°£
-		platformVertexFormat = make_shared<PlatformVertexFormat>(m_Renderer, vertexFormat);
-		m_VertexFormats.insert({ vertexFormat, platformVertexFormat });
+		auto ptr = m_Renderer.lock();
+		if (ptr)
+		{
+			platformVertexFormat = make_shared<PlatformVertexFormat>(ptr.get(), vertexFormat.GetData());
+			m_VertexFormats.insert({ vertexFormat, platformVertexFormat });
+		}
     }
 
-    platformVertexFormat->Enable(m_Renderer);
+	auto ptr = m_Renderer.lock();
+	if (ptr)
+	{
+		platformVertexFormat->Enable(ptr.get());
+	}
 }
 
 void Rendering::VertexFormatManagementImpl
-	::Disable (VertexFormatConstPtr vertexFormat)
+	::Disable (ConstVertexFormatSmartPointer vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -83,12 +95,16 @@ void Rendering::VertexFormatManagementImpl
     {
         auto platformVertexFormat = iter->second;
 
-        platformVertexFormat->Disable(m_Renderer);
+		auto ptr = m_Renderer.lock();
+		if (ptr)
+		{
+			platformVertexFormat->Disable(ptr.get());
+		}
     }
 }
 
 Rendering::VertexFormatManagementImpl::PlatformVertexFormatSharedPtr Rendering::VertexFormatManagementImpl
-	::GetResource (VertexFormatConstPtr vertexFormat)
+	::GetResource (ConstVertexFormatSmartPointer vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:02)
+// 引擎版本：0.2.0.0 (2020/05/07 15:27)
 
 #ifndef SYSTEM_HELPER_METROWERKS_H
 #define SYSTEM_HELPER_METROWERKS_H
@@ -56,7 +56,7 @@
 	#else // !(__INTEL__ && _WIN32) && !(__POWERPC__ && macintosh)
 		#define TCRE_COMPILER_VERSION __MWERKS__
 	#endif // (__INTEL__ && _WIN32) || (__POWERPC__ && macintosh)
- 
+
 	#define TCRE_SYSTEM_COMPILER "Metrowerks CodeWarrior C++ 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
 #endif // __MWERKS__

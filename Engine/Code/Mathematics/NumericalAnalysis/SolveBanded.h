@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 10:52)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 12:55)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_BANDED_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_BANDED_H
@@ -17,24 +17,24 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class SolveBanded  
-    {
-    public:
+	class SolveBanded
+	{
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = SolveBanded<Real>;
 		using BandedMatrix = BandedMatrix<Real>;
 		using OutputConstIterator = LinearSystemConstIterator<Real>;
-		 
-    public:
-		explicit SolveBanded(const BandedMatrix& matrix, const Real* inputVector,Real zeroTolerance =  Math<Real>::sm_ZeroTolerance );
-        
+
+	public:
+		explicit SolveBanded(const BandedMatrix& matrix, const Real* inputVector, Real zeroTolerance = Math<Real>::sm_ZeroTolerance);
+
 		CLASS_INVARIANT_DECLARE;
-      
+
 		const OutputConstIterator GetBegin() const;
 		const OutputConstIterator GetEnd() const;
 
-    private:
+	private:
 		using RealVector = std::vector<Real>;
 
 	private:
@@ -43,9 +43,9 @@ namespace Mathematics
 
 	private:
 		Real m_ZeroTolerance;
-		BandedMatrix m_Matrix;		
-		RealVector m_Output;		
-    };	     
+		BandedMatrix m_Matrix;
+		RealVector m_Output;
+	};
 }
 
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_BANDED_H

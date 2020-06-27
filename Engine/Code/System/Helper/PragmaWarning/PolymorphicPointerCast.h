@@ -1,0 +1,30 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/08 19:30)
+
+#ifndef SYSTEM_HELPER_PRAGMA_POLYMORPHIC_POINTER_CAST_H
+#define SYSTEM_HELPER_PRAGMA_POLYMORPHIC_POINTER_CAST_H 
+
+#include "System/Helper/PragmaWarning.h"
+
+#include STSTEM_WARNING_PUSH
+
+	#include SYSTEM_WARNING_DISABLE(26409) 	 
+	#include SYSTEM_WARNING_DISABLE(26432) 
+	#include SYSTEM_WARNING_DISABLE(26433) 
+	#include SYSTEM_WARNING_DISABLE(26434) 
+	#include SYSTEM_WARNING_DISABLE(26436) 
+	#include SYSTEM_WARNING_DISABLE(26440) 
+	#include SYSTEM_WARNING_DISABLE(26447) 
+	#include SYSTEM_WARNING_DISABLE(26455)
+	#include SYSTEM_WARNING_DISABLE(26462) 
+	#include SYSTEM_WARNING_DISABLE(26477) 
+	#include SYSTEM_WARNING_DISABLE(26489) 	
+
+	#include <boost/polymorphic_pointer_cast.hpp>
+
+#include STSTEM_WARNING_POP
+
+#endif // SYSTEM_HELPER_PRAGMA_POLYMORPHIC_POINTER_CAST_H

@@ -24,7 +24,7 @@ Rendering::RenderTargetManagementImpl
 bool Rendering::RenderTargetManagementImpl
 	::IsValid() const noexcept
 {
-	if(m_Renderer != nullptr)
+	if(m_Renderer.lock())
         return true;
     else
         return false;
@@ -38,7 +38,7 @@ void Rendering::RenderTargetManagementImpl
 
     if (m_RenderTargets.find(renderTarget) == m_RenderTargets.end())
     {
-		PlatformRenderTargetSharedPtr platformRenderTarget{ make_shared<PlatformRenderTarget>(m_Renderer,renderTarget) };
+		PlatformRenderTargetSharedPtr platformRenderTarget{ make_shared<PlatformRenderTarget>(m_Renderer.lock().get(),renderTarget.GetData()) };
 		m_RenderTargets.insert({ renderTarget, platformRenderTarget });
     }
 }
@@ -64,11 +64,11 @@ void Rendering::RenderTargetManagementImpl
     }
     else
     {
-        platformRenderTarget = make_shared<PlatformRenderTarget>(m_Renderer,renderTarget);
+        platformRenderTarget = make_shared<PlatformRenderTarget>(m_Renderer.lock().get(),renderTarget.GetData());
 		m_RenderTargets.insert({ renderTarget, platformRenderTarget });
     }
 
-    platformRenderTarget->Enable(m_Renderer);
+    platformRenderTarget->Enable(m_Renderer.lock().get());
 }
 
 void Rendering::RenderTargetManagementImpl
@@ -82,7 +82,7 @@ void Rendering::RenderTargetManagementImpl
     {
         auto platformRenderTarget = iter->second;
 
-        platformRenderTarget->Disable(m_Renderer);
+        platformRenderTarget->Disable(m_Renderer.lock().get());
     }
 }
 
@@ -95,7 +95,7 @@ Rendering::ConstTexture2DSmartPointer  Rendering::RenderTargetManagementImpl
     if (iter != m_RenderTargets.end())
     {
 		auto platformRenderTarget = iter->second;
-        return platformRenderTarget->ReadColor(index, m_Renderer);
+        return platformRenderTarget->ReadColor(index, m_Renderer.lock().get());
     }
 	else
 	{

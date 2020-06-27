@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 13:28)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/09 16:35)
 
 #include "System/SystemExport.h"
 
@@ -10,18 +10,20 @@
 #include "CodePage.h"
 #include "Flags/CodePageFlags.h"
 #include "Flags/StringConversionFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
 #ifndef SYSTEM_PLATFORM_WIN32  
+
 	#ifdef SYSTEM_PLATFORM_ANDROID
 		#include <iconv.h>
 	#else // !SYSTEM_PLATFORM_ANDROID
 		#include <locale>
 		#include <cstdlib>
 	#endif // SYSTEM_PLATFORM_ANDROID
+
 #endif // SYSTEM_PLATFORM_WIN32
 
 #ifndef SYSTEM_PLATFORM_WIN32
@@ -85,6 +87,7 @@ int System
 	::MultiByteConversionWideChar(CodePage codePage, MultiByte flag, const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32    
+
 	return ::MultiByteToWideChar(EnumCastUnderlying(codePage), EnumCastUnderlying(flag), multiByte, multiByteLength, wideChar, wideCharLength);
 
 #else // !SYSTEM_PLATFORM_WIN32     
@@ -122,7 +125,7 @@ int System
 {
 	// ¥˙¬Î“≥
 	const auto codePage = GetANSICodePage();
-	constexpr WideChar defaultWideChar = WideChar::NoFlags;
+	constexpr auto defaultWideChar = WideChar::NoFlags;
 
 	return WideCharConversionMultiByte(codePage, defaultWideChar, wideChar, wideCharLength, multiByte, multiByteLength, nullptr, nullptr);
 }
@@ -131,7 +134,7 @@ int System
 	::WideCharConversionUTF8(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept
 {
 	const auto codePage = CodePage::UTF8;
-	constexpr WideChar defaultWideChar = WideChar::NoFlags;
+	constexpr auto defaultWideChar = WideChar::NoFlags;
 
 	return WideCharConversionMultiByte(codePage, defaultWideChar, wideChar, wideCharLength, multiByte, multiByteLength, nullptr, nullptr);
 }
@@ -141,7 +144,7 @@ int System
 								  char* multiByte, int multiByteLength, const char* defaultChar, bool* usedDefaultChar) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	WindowBool result{ g_False };
+	auto result = g_False;
 
 	const auto size = ::WideCharToMultiByte(EnumCastUnderlying(codePage), EnumCastUnderlying(flag), wideChar, wideCharLength, multiByte, multiByteLength, defaultChar, &result);
 	BoolConversion(result, usedDefaultChar);
@@ -247,7 +250,7 @@ bool System
 	::GetStringTypeUseCharacterType(LanguageLocale locale, CharacterType infoType, const TChar* src, int srcCount, WindowWordPtr charType) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (g_False != ::GetStringTypeEx(EnumCastUnderlying(locale), EnumCastUnderlying(infoType), src, srcCount, charType))
+	if (::GetStringTypeEx(EnumCastUnderlying(locale), EnumCastUnderlying(infoType), src, srcCount, charType) != g_False)
 		return true;
 	else
 		return false;

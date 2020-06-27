@@ -7,13 +7,14 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "Assertion.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/ClassInvariant/TriggerAssert.h"
 #include "CoreTools/ClassInvariant/ScopeExitDetail.h"
 #include "CoreTools/ClassInvariant/Flags/CheckInvariantFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include <cstdarg>
-
+ 
 CoreTools::Assertion
 	::Assertion(bool condition, const FunctionDescribed& functionDescribed, const char* format, ...)
 {
@@ -24,10 +25,15 @@ CoreTools::Assertion
 
 		ScopeExit<> onExit{ [&arguments]()
 		{
+		#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26477)
+
 			va_end(arguments);
+
+		#include STSTEM_WARNING_POP
 		} };
 
-		TriggerAssert triggerAssert{ TriggerAssertCheck::Assertion, functionDescribed, format, arguments };
+		const TriggerAssert triggerAssert{ TriggerAssertCheck::Assertion, functionDescribed, format, arguments };
 	}
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;

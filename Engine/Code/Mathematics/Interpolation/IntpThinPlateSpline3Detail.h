@@ -15,7 +15,7 @@ namespace Mathematics
 	IntpThinPlateSpline3<Real>::IntpThinPlateSpline3(int quantity,Real* X, Real* Y, Real* Z, Real* F, Real smooth, bool owner,bool transformToUnitCube)
 		:mSmooth(smooth)
 	{
-		MATHEMATICS_ASSERTION_0(quantity >= 4 && X && Y && Z && F && smooth >= Real{},"Invalid input\n");
+		MATHEMATICS_ASSERTION_0(quantity >= 4 && X && Y && Z && F && smooth >= Math<Real>::sm_Zero,"Invalid input\n");
 
 		mInitialized = false;
 		mQuantity = quantity;
@@ -44,7 +44,7 @@ namespace Mathematics
 					mXMax = X[i];
 				}
 			}
-			mXInvRange = ((Real)1) / (mXMax - mXMin);
+			mXInvRange = (static_cast<Real>(1)) / (mXMax - mXMin);
 			for (i = 0; i < mQuantity; ++i)
 			{
 				mX[i] = (X[i] - mXMin)*mXInvRange;
@@ -63,7 +63,7 @@ namespace Mathematics
 					mYMax = Y[i];
 				}
 			}
-			mYInvRange = ((Real)1) / (mYMax - mYMin);
+			mYInvRange = (static_cast<Real>(1)) / (mYMax - mYMin);
 			for (i = 0; i < mQuantity; ++i)
 			{
 				mY[i] = (Y[i] - mYMin)*mYInvRange;
@@ -82,7 +82,7 @@ namespace Mathematics
 					mZMax = Z[i];
 				}
 			}
-			mZInvRange = ((Real)1) / (mZMax - mZMin);
+			mZInvRange = (static_cast<Real>(1)) / (mZMax - mZMin);
 			for (i = 0; i < mQuantity; ++i)
 			{
 				mZ[i] = (Z[i] - mZMin)*mZInvRange;
@@ -93,15 +93,15 @@ namespace Mathematics
 			// The classical thin-plate spline uses the data as is.  The values
 			// mXMax, mYMax, and mZMax are not used, but they are initialized
 			// anyway (to irrelevant numbers).
-			mXMin = Real{};
-			mXMax = (Real)1;
-			mXInvRange = (Real)1;
-			mYMin = Real{};
-			mYMax = (Real)1;
-			mYInvRange = (Real)1;
-			mZMin = Real{};
-			mZMax = (Real)1;
-			mZInvRange = (Real)1;
+			mXMin = Math<Real>::sm_Zero;
+			mXMax = static_cast<Real>(1);
+			mXInvRange = static_cast<Real>(1);
+			mYMin = Math<Real>::sm_Zero;
+			mYMax = static_cast<Real>(1);
+			mYInvRange = static_cast<Real>(1);
+			mZMin = Math<Real>::sm_Zero;
+			mZMax = static_cast<Real>(1);
+			mZInvRange = static_cast<Real>(1);
 			memcpy(mX, X, mQuantity * sizeof(Real));
 			memcpy(mY, Y, mQuantity * sizeof(Real));
 			memcpy(mZ, Z, mQuantity * sizeof(Real));
@@ -132,7 +132,7 @@ namespace Mathematics
 		VariableMatrix<Real> BMat(mQuantity, 4);
 		for (row = 0; row < mQuantity; ++row)
 		{
-			BMat[row][0] = (Real)1;
+			BMat[row][0] = static_cast<Real>(1);
 			BMat[row][1] = mX[row];
 			BMat[row][2] = mY[row];
 			BMat[row][3] = mZ[row];
@@ -158,7 +158,7 @@ namespace Mathematics
 		Real prod[4];
 		for (row = 0; row < 4; ++row)
 		{
-			prod[row] = Real{};
+			prod[row] = Math<Real>::sm_Zero;
 			for (i = 0; i < mQuantity; ++i)
 			{
 				prod[row] += PMat[row][i] * F[i];
@@ -168,7 +168,7 @@ namespace Mathematics
 		// Compute 'b' vector for smooth thin plate spline.
 		for (row = 0; row < 4; ++row)
 		{
-			mB[row] = Real{};
+			mB[row] = Math<Real>::sm_Zero;
 			for (i = 0; i < 4; ++i)
 			{
 				mB[row] += invQMat[row][i] * prod[i];
@@ -189,7 +189,7 @@ namespace Mathematics
 		// Compute 'a' vector for smooth thin plate spline.
 		for (row = 0; row < mQuantity; ++row)
 		{
-			mA[row] = Real{};
+			mA[row] = Math<Real>::sm_Zero;
 			for (i = 0; i < mQuantity; ++i)
 			{
 				mA[row] += invAMat[row][i] * tmp[i];
@@ -269,7 +269,7 @@ namespace Mathematics
 	template <typename Real>
 	Real IntpThinPlateSpline3<Real>::ComputeFunctional() const
 	{
-		Real functional = Real{};
+		Real functional = Math<Real>::sm_Zero;
 		for (int row = 0; row < mQuantity; ++row)
 		{
 			for (int col = 0; col < mQuantity; ++col)
@@ -290,7 +290,7 @@ namespace Mathematics
 			}
 		}
 
-		if (mSmooth > Real{})
+		if (mSmooth > Math<Real>::sm_Zero)
 		{
 			functional *= mSmooth;
 		}

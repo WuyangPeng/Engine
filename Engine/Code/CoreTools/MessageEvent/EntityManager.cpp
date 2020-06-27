@@ -15,7 +15,7 @@
 
 SINGLETON_MUTEX_DEFINE(CoreTools, EntityManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_CoreToolsMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
 
 #define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_EntityManagerMutex }
 

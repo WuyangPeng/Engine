@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/15 09:39)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 17:11)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_DETAIL_H
@@ -15,8 +15,8 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorLine3Plane3<Real>
-	::StaticFindIntersectorLine3Plane3(const Line3& line, const Plane3& plane,const Real epsilon) 
-	:ParentType{ epsilon }, m_Line{ line },m_Plane{ plane }, m_LineParameter{}
+	::StaticFindIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon)
+	:ParentType{ epsilon }, m_Line{ line }, m_Plane{ plane }, m_LineParameter{}
 {
 	Find();
 
@@ -25,7 +25,7 @@ Mathematics::StaticFindIntersectorLine3Plane3<Real>
 
 template <typename Real>
 Mathematics::StaticFindIntersectorLine3Plane3<Real>
-	::~StaticFindIntersectorLine3Plane3() 
+	::~StaticFindIntersectorLine3Plane3()
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -52,7 +52,7 @@ const Mathematics::Line3<Real> Mathematics::StaticFindIntersectorLine3Plane3<Rea
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Line;
+	return m_Line;
 }
 
 template <typename Real>
@@ -67,15 +67,15 @@ const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorLine3Plane3<Re
 // private
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Plane3<Real>
-	::Find() 
+	::Find()
 {
-	auto DdN = Vector3DTools::DotProduct(m_Line.GetDirection(),m_Plane.GetNormal());
+	auto DdN = Vector3DTools::DotProduct(m_Line.GetDirection(), m_Plane.GetNormal());
 	auto signedDistance = m_Plane.DistanceTo(m_Line.GetOrigin());
 	if (Math::FAbs(DdN) > Math::sm_ZeroTolerance)
 	{
 		// The line is not parallel to the plane, so they must intersect.
 		m_LineParameter = -signedDistance / DdN;
-		 
+
 		this->SetIntersectionType(IntersectionType::Point);
 		return;
 	}
@@ -86,9 +86,9 @@ void Mathematics::StaticFindIntersectorLine3Plane3<Real>
 	{
 		// The line is coincident with the plane, so choose t = 0 for the
 		// parameter.
-		m_LineParameter = Real{};
+		m_LineParameter = Math<Real>::sm_Zero;
 		this->SetIntersectionType(IntersectionType::Line);
- 
+
 		return;
 	}
 
@@ -100,7 +100,7 @@ Real Mathematics::StaticFindIntersectorLine3Plane3<Real>
 	::GetLineParameter() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	 
+
 	return m_LineParameter;
 }
 

@@ -37,13 +37,12 @@ void System::AndroidPollSource
 System::AndroidApp
 	::AndroidApp()
 	:userData{ nullptr }, activity{ nullptr }, config{ nullptr }, savedState{ nullptr }, savedStateSize{ 0 }, looper{ nullptr }, 
-	 inputQueue{ nullptr }, window{ nullptr }, contentRect{}, activityState{ 0 }, destroyRequested{ 0 },
+	 contentRect{}, activityState{ 0 }, destroyRequested{ 0 },
 	 msgread{ 0 }, msgwrite{ 0 }, cmdPollSource{}, inputPollSource{}, running{ nullptr }, stateSaved{ 0 }, destroyed{ 0 }, redrawNeeded{ 0 }, 
 	 pendingInputQueue{ nullptr }, pendingWindow{ nullptr }, pendingContentRect{}, onAppCmd{ nullptr }, onInputEvent{ nullptr },
-	 m_InputQueue{ std::make_shared<AndroidInputQueue>() },m_Window{ std::make_shared<AndroidNativeWindow>() }
+	 inputQueue{ std::make_shared<AndroidInputQueue>() },window{ std::make_shared<AndroidNativeWindow>() }
 {	
-	inputQueue = m_InputQueue.get();
-	window = m_Window.get();	
+	 
 }
 #include STSTEM_WARNING_POP
 
@@ -57,6 +56,42 @@ int System::AndroidApp
 	::GetDestroyRequested() const noexcept
 {
 	return destroyRequested;
-} 
+}  
+
+System::WindowHWnd System::AndroidApp
+	::GetRunning() const noexcept
+{
+	return running;
+}
+
+void System::AndroidApp
+	::SetRunning(System::WindowHWnd val) noexcept
+{
+	running = val;
+}
+
+void System::AndroidApp
+	::OnAppCmd(struct AndroidApp* app, int cmd) noexcept
+{
+	onAppCmd(app, cmd);
+}
+
+void System::AndroidApp
+	::OnInputEvent(struct AndroidApp* app, AndroidInputEvent* event) noexcept
+{
+	onInputEvent(app, event);
+}
+
+void System::AndroidApp
+	::SetOnAppCmd(AppCmd value) noexcept
+{
+	onAppCmd = value;
+}
+
+void System::AndroidApp
+	::SetOnInputEvent(InputEvent value) noexcept
+{
+	onInputEvent = value;
+}
 
 #endif // SYSTEM_PLATFORM_ANDROID

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/05 09:55)
+// 引擎版本：0.0.2.5 (2020/03/19 12:58)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H
@@ -13,19 +13,19 @@
 #include "BandedMatrixDetail.h"
 #include "VariableLengthVector.h"
 #include "Mathematics/Base/Math.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/ObjectInterface.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/ObjectSystems/ObjectInterface.h"
 
 template <typename Real>
 Mathematics::BandedMatrixSolve<Real>
-	::BandedMatrixSolve( int size, int lowerBandsNumber,int upperBandsNumber, const Real epsilon)
+	::BandedMatrixSolve(int size, int lowerBandsNumber, int upperBandsNumber, const Real epsilon)
 	:m_Input{ size,lowerBandsNumber,upperBandsNumber },
 	 m_Cholesky{ size,lowerBandsNumber,upperBandsNumber },
 	 m_Solve{ BandedMatrixSolveFlags::Unsolved },
@@ -43,7 +43,7 @@ Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 Mathematics::BandedMatrixSolve<Real>
-	::BandedMatrixSolve( const BandedMatrixSolve& rhs )
+	::BandedMatrixSolve(const BandedMatrixSolve& rhs)
 	:m_Input{ rhs.m_Input },
 	 m_Cholesky{ rhs.m_Cholesky },
 	 m_Solve{ rhs.m_Solve },
@@ -54,7 +54,7 @@ Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 Mathematics::BandedMatrixSolve<Real>& Mathematics::BandedMatrixSolve<Real>
-	::operator=( const BandedMatrixSolve& rhs )
+	::operator=(const BandedMatrixSolve& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
 
@@ -69,7 +69,7 @@ Mathematics::BandedMatrixSolve<Real>& Mathematics::BandedMatrixSolve<Real>
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::BandedMatrixSolve<Real>
-	::IsValid() const noexcept 
+	::IsValid() const noexcept
 {
 	try
 	{
@@ -92,55 +92,54 @@ bool Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 bool Mathematics::BandedMatrixSolve<Real>
-	::IsSolveValid() const  
+	::IsSolveValid() const
 {
 	BandedMatrix upperBandedMatrix{ m_Cholesky };
 
-     // 下三角置零
-	 for (auto i = 0; i < upperBandedMatrix.GetUpperBandsNumber(); ++i)
-	 {	
-		 auto lowerSize = upperBandedMatrix.GetSize() - 1 - i;
-		 memset(upperBandedMatrix.GetLowerBand(i), 0, lowerSize * sizeof(Real));
-	 }
+	// 下三角置零
+	for (auto i = 0; i < upperBandedMatrix.GetUpperBandsNumber(); ++i)
+	{
+		auto lowerSize = upperBandedMatrix.GetSize() - 1 - i;
+		memset(upperBandedMatrix.GetLowerBand(i), 0, lowerSize * sizeof(Real));
+	}
 
-     BandedMatrix lowerBandedMatrix(m_Cholesky);
+	BandedMatrix lowerBandedMatrix(m_Cholesky);
 
-     // 上三角置零
-     for (int i = 0; i < lowerBandedMatrix.GetLowerBandsNumber(); ++i)
-     {	
-		 int upperSize = lowerBandedMatrix.GetSize() - 1 - i;
-		 memset(lowerBandedMatrix.GetUpperBand(i), 0, upperSize * sizeof(Real));
-     }
+	// 上三角置零
+	for (int i = 0; i < lowerBandedMatrix.GetLowerBandsNumber(); ++i)
+	{
+		int upperSize = lowerBandedMatrix.GetSize() - 1 - i;
+		memset(lowerBandedMatrix.GetUpperBand(i), 0, upperSize * sizeof(Real));
+	}
 
-     for (auto row = 0; row < m_Input.GetSize(); ++ row)
-     {
-		 for (auto column = 0; column < m_Input.GetSize(); ++ column)
-	     {				
-			 if(!Math::Approximate(m_Input(row, column),GetProduct(upperBandedMatrix,lowerBandedMatrix,row,column),m_Epsilon))
-	         {	
-                 return false;
-	         }
-	     }
-     }
+	for (auto row = 0; row < m_Input.GetSize(); ++row)
+	{
+		for (auto column = 0; column < m_Input.GetSize(); ++column)
+		{
+			if (!Math::Approximate(m_Input(row, column), GetProduct(upperBandedMatrix, lowerBandedMatrix, row, column), m_Epsilon))
+			{
+				return false;
+			}
+		}
+	}
 
-     return true;
+	return true;
 }
 
 template <typename Real>
 Real Mathematics::BandedMatrixSolve<Real>
-	::GetProduct(const BandedMatrix& upperBandedMatrix,const BandedMatrix& lowerBandedMatrix,int row,int column) const  
+	::GetProduct(const BandedMatrix& upperBandedMatrix, const BandedMatrix& lowerBandedMatrix, int row, int column) const
 {
-     Real sum { };
-     for (auto index = 0; index < upperBandedMatrix.GetSize(); ++ index)
-     {	 
-		 sum += lowerBandedMatrix(row, index) * upperBandedMatrix(index, column);	 
-     }
+	auto sum = Math::sm_Zero;
+	for (auto index = 0; index < upperBandedMatrix.GetSize(); ++index)
+	{
+		sum += lowerBandedMatrix(row, index) * upperBandedMatrix(index, column);
+	}
 
-     return sum;
+	return sum;
 }
 
 #endif	// OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 int Mathematics::BandedMatrixSolve<Real>
@@ -192,7 +191,7 @@ int Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 void Mathematics::BandedMatrixSolve<Real>
-	::SetEpsilon( Real epsilon )
+	::SetEpsilon(Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
 
@@ -211,14 +210,14 @@ Real Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 void Mathematics::BandedMatrixSolve<Real>
-	::ResetSize(int size, int lowerBandsNumber,int upperBandsNumber,const Real epsilon)
+	::ResetSize(int size, int lowerBandsNumber, int upperBandsNumber, const Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
 
 	m_Input.ResetSize(size, lowerBandsNumber, upperBandsNumber);
 	m_Cholesky.ResetSize(size, lowerBandsNumber, upperBandsNumber);
 	m_Solve = BandedMatrixSolveFlags::Unsolved;
-	m_Epsilon = epsilon;	
+	m_Epsilon = epsilon;
 }
 
 template <typename Real>
@@ -243,7 +242,7 @@ const Real* Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 int Mathematics::BandedMatrixSolve<Real>
-	::GetLowerBandMax( int index ) const
+	::GetLowerBandMax(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -252,7 +251,7 @@ int Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 Real* Mathematics::BandedMatrixSolve<Real>
-	::GetLowerBand( int index )
+	::GetLowerBand(int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
 
@@ -263,7 +262,7 @@ Real* Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 const Real* Mathematics::BandedMatrixSolve<Real>
-	::GetLowerBand( int index ) const
+	::GetLowerBand(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -272,7 +271,7 @@ const Real* Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 int Mathematics::BandedMatrixSolve<Real>
-	::GetUpperBandMax( int index ) const
+	::GetUpperBandMax(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -281,10 +280,10 @@ int Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 Real* Mathematics::BandedMatrixSolve<Real>
-	::GetUpperBand( int index )
+	::GetUpperBand(int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
-	
+
 	m_Solve = BandedMatrixSolveFlags::Unsolved;
 
 	return  const_cast<Real*>(static_cast<const ClassType&>(*this).GetUpperBand(index));
@@ -292,7 +291,7 @@ Real* Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 const Real* Mathematics::BandedMatrixSolve<Real>
-	::GetUpperBand( int index ) const
+	::GetUpperBand(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -301,22 +300,22 @@ const Real* Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 Real& Mathematics::BandedMatrixSolve<Real>
-	::operator()( int row, int column )
+	::operator()(int row, int column)
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
 
 	m_Solve = BandedMatrixSolveFlags::Unsolved;
 
-	return  const_cast<Real&>(static_cast<const ClassType&>(*this)(row,column));
+	return  const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 }
 
 template <typename Real>
 const Real& Mathematics::BandedMatrixSolve<Real>
-	::operator()( int row, int column ) const
+	::operator()(int row, int column) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
-	return m_Input(row,column);
+	return m_Input(row, column);
 }
 
 template <typename Real>
@@ -364,9 +363,9 @@ bool Mathematics::BandedMatrixSolve<Real>
 	::CholeskyFactor()
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
-	MATHEMATICS_ASSERTION_1(m_Input.GetLowerBandsNumber() == m_Input.GetUpperBandsNumber(),"Bands 必须相等在 CholeskyFactor\n");
-    
-	if(m_Solve == BandedMatrixSolveFlags::Unsolved)
+	MATHEMATICS_ASSERTION_1(m_Input.GetLowerBandsNumber() == m_Input.GetUpperBandsNumber(), "Bands 必须相等在 CholeskyFactor\n");
+
+	if (m_Solve == BandedMatrixSolveFlags::Unsolved)
 	{
 		m_Cholesky = m_Input;
 		auto size = GetSize();
@@ -393,7 +392,7 @@ bool Mathematics::BandedMatrixSolve<Real>
 
 				for (auto k = index; k <= maxColumn; ++k)
 				{
-					m_Cholesky(k,index) -= m_Cholesky(index,column) *  m_Cholesky(k,column);
+					m_Cholesky(k, index) -= m_Cholesky(index, column) *  m_Cholesky(k, column);
 				}
 			}
 
@@ -407,13 +406,13 @@ bool Mathematics::BandedMatrixSolve<Real>
 			// 将下三角矩阵的值复制到上三角矩阵
 			for (auto k = 0; k < index; ++k)
 			{
-				m_Cholesky(k,index) = m_Cholesky(index,k);			
+				m_Cholesky(k, index) = m_Cholesky(index, k);
 			}
 
-			auto diagonal = m_Cholesky(index,index);
-			if (diagonal <= Real{})
+			auto diagonal = m_Cholesky(index, index);
+			if (diagonal <= Math::sm_Zero)
 			{
-				m_Solve = BandedMatrixSolveFlags::Failure;	
+				m_Solve = BandedMatrixSolveFlags::Failure;
 
 				return false;
 			}
@@ -421,37 +420,36 @@ bool Mathematics::BandedMatrixSolve<Real>
 			auto invSqrt = Math::InvSqrt(diagonal);
 			for (auto k = index; k <= maxColumn; ++k)
 			{
-				m_Cholesky(k,index) *= invSqrt;		
-			}		
+				m_Cholesky(k, index) *= invSqrt;
+			}
 		}
 
 		m_Solve = BandedMatrixSolveFlags::Succeed;
-	}	
+	}
 
 	return true;
 }
 
 template <typename Real>
 typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics::BandedMatrixSolve<Real>
-	::SolveSystem( const VariableLengthVector& vector )
+	::SolveSystem(const VariableLengthVector& vector)
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
-	MATHEMATICS_ASSERTION_1(vector.GetSize() == GetSize(),"矩阵和向量大小不相等");
+	MATHEMATICS_ASSERTION_1(vector.GetSize() == GetSize(), "矩阵和向量大小不相等");
 
-	if(!CholeskyFactor())
+	if (!CholeskyFactor())
 	{
-	     THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveSystem！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveSystem！"));
 	}
-	
+
 	auto solveLowerVector = SolveLower(vector);
 
 	return SolveUpper(solveLowerVector);
 }
 
-
 template <typename Real>
 typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics::BandedMatrixSolve<Real>
-	::SolveLower( const VariableLengthVector& dataVector ) const
+	::SolveLower(const VariableLengthVector& dataVector) const
 {
 	VariableLengthVector result{ dataVector };
 
@@ -459,7 +457,7 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathem
 
 	for (auto row = 0; row < size; ++row)
 	{
-		auto lowerRR = m_Cholesky(row,row);
+		auto lowerRR = m_Cholesky(row, row);
 		if (Math::FAbs(lowerRR) < m_Epsilon)
 		{
 			THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveLower！"));
@@ -467,7 +465,7 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathem
 
 		for (auto column = 0; column < row; ++column)
 		{
-			auto lowerRC = m_Cholesky(row,column);
+			auto lowerRC = m_Cholesky(row, column);
 			result[row] -= lowerRC * result[column];
 		}
 
@@ -477,10 +475,9 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathem
 	return result;
 }
 
-
 template <typename Real>
 typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics::BandedMatrixSolve<Real>
-	::SolveUpper( const VariableLengthVector& dataVector ) const
+	::SolveUpper(const VariableLengthVector& dataVector) const
 {
 	VariableLengthVector result{ dataVector };
 
@@ -488,7 +485,7 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathem
 
 	for (auto row = size - 1; 0 <= row; --row)
 	{
-		auto upperRR = m_Cholesky(row,row);
+		auto upperRR = m_Cholesky(row, row);
 		if (Math::FAbs(upperRR) < m_Epsilon)
 		{
 			THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveUpper！"));
@@ -496,7 +493,7 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathem
 
 		for (auto column = row + 1; column < size; ++column)
 		{
-			auto upperRC = m_Cholesky(row,column);
+			auto upperRC = m_Cholesky(row, column);
 			result[row] -= upperRC * result[column];
 		}
 
@@ -509,14 +506,14 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathem
 
 template <typename Real>
 typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>
-	::SolveSystem( const VariableMatrix& matrix )
+	::SolveSystem(const VariableMatrix& matrix)
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
-	MATHEMATICS_ASSERTION_1(matrix.GetColumnsNumber() == GetSize() && matrix.GetRowsNumber() == GetSize(),"矩阵大小不相等");
+	MATHEMATICS_ASSERTION_1(matrix.GetColumnsNumber() == GetSize() && matrix.GetRowsNumber() == GetSize(), "矩阵大小不相等");
 
-	if(!CholeskyFactor())
+	if (!CholeskyFactor())
 	{
-	     THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveSystem！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveSystem！"));
 	}
 
 	auto solveLowerMatrix = SolveLower(matrix);
@@ -526,7 +523,7 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics:
 
 template <typename Real>
 typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>
-	::SolveLower( const VariableMatrix& dataMatrix ) const
+	::SolveLower(const VariableMatrix& dataMatrix) const
 {
 	VariableMatrix result{ dataMatrix };
 
@@ -534,7 +531,7 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics:
 
 	for (auto row = 0; row < size; ++row)
 	{
-		auto lowerRR = m_Cholesky(row,row);
+		auto lowerRR = m_Cholesky(row, row);
 		if (Math::FAbs(lowerRR) < m_Epsilon)
 		{
 			THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveLower！"));
@@ -542,14 +539,14 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics:
 
 		for (auto column = 0; column < row; ++column)
 		{
-			auto lowerRC = m_Cholesky(row,column);
+			auto lowerRC = m_Cholesky(row, column);
 			for (auto bCol = 0; bCol < result.GetColumnsNumber(); ++bCol)
 			{
 				result[row][bCol] -= lowerRC * result[column][bCol];
 			}
 		}
 
-		auto inverse = AlgebraTraits::UnitValue / lowerRR;
+		auto inverse = Math::sm_One / lowerRR;
 		for (auto bCol = 0; bCol < result.GetColumnsNumber(); ++bCol)
 		{
 			result[row][bCol] *= inverse;
@@ -557,18 +554,17 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics:
 	}
 
 	return result;
-}
-
+} 
 
 template <typename Real>
 typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>
-	::SolveUpper( const VariableMatrix& dataMatrix ) const
+	::SolveUpper(const VariableMatrix& dataMatrix) const
 {
 	VariableMatrix result{ dataMatrix };
 
-	for (auto row = GetSize() - 1;0 <= row; --row)
+	for (auto row = GetSize() - 1; 0 <= row; --row)
 	{
-		auto upperRR = m_Cholesky(row,row);
+		auto upperRR = m_Cholesky(row, row);
 		if (Math::FAbs(upperRR) < m_Epsilon)
 		{
 			THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveUpper！"));
@@ -576,14 +572,14 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics:
 
 		for (auto column = row + 1; column < GetSize(); ++column)
 		{
-			auto upperRC = m_Cholesky(row,column);
+			auto upperRC = m_Cholesky(row, column);
 			for (auto bCol = 0; bCol < dataMatrix.GetColumnsNumber(); ++bCol)
 			{
 				result[row][bCol] -= upperRC * result[column][bCol];
 			}
 		}
 
-		auto inverse = AlgebraTraits::UnitValue / upperRR;
+		auto inverse = Math::sm_One / upperRR;
 		for (auto bCol = 0; bCol < result.GetColumnsNumber(); ++bCol)
 		{
 			result[row][bCol] *= inverse;

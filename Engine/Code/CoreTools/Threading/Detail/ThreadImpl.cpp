@@ -10,7 +10,7 @@
 #include "System/Threading/Thread.h" 
 #include "System/Threading/Flags/ThreadFlags.h"
 #include "System/Helper/PragmaWarning/Format.h" 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/LogMacro.h" 
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"

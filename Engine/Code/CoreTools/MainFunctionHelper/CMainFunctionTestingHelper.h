@@ -13,6 +13,8 @@
 
 #include "CMainFunctionHelper.h"
 #include "TestingInformationHelper.h"
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
+#include "CoreTools/UnitTestSuite/Suite.h"
 
 namespace CoreTools
 {
@@ -24,21 +26,49 @@ namespace CoreTools
 	public:
 		using ClassType = CMainFunctionTestingHelper;
 		using ParentType = CMainFunctionHelper;
-		using UnitTestPtr = std::shared_ptr<UnitTestComposite>;
+		using UnitTestPtr = std::shared_ptr<UnitTestComposite>;		
+		using Suite = CoreTools::Suite;
 
 	public:
 		CMainFunctionTestingHelper(int argc, char* argv[]);
-		virtual ~CMainFunctionTestingHelper();
+		CMainFunctionTestingHelper(int argc, char* argv[],const std::string& suiteName);
+		~CMainFunctionTestingHelper() = 0; 
+
+		CMainFunctionTestingHelper(const CMainFunctionTestingHelper& rhs) = delete;
+		CMainFunctionTestingHelper& operator=(const CMainFunctionTestingHelper& rhs) = delete;
+		CMainFunctionTestingHelper(CMainFunctionTestingHelper&& rhs) noexcept = delete;
+		CMainFunctionTestingHelper& operator=(CMainFunctionTestingHelper&& rhs) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+
+	protected:
+		using SuiteSharedPtr = std::shared_ptr<Suite>;
 
 	protected:
 		void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestPtr& unitTest);
 
 		bool IsPrintRun() const;
 
+		int RunSuite();
+
+		void AddSuite(const Suite& suite);
+
+		template<typename TestType, typename... Types>
+		void AddTest(Suite& suite, const std::string& suiteName, const std::string& testName, Types&&... args)
+		{
+			auto unitTest = std::make_shared<TestType>(GetStreamShared(), std::forward<Types>(args)...);
+
+			AddTest(suiteName, suite, testName, unitTest);
+		} 
+
+		Suite GenerateSuite(const std::string& name); 
+
+	private:
+		int DoRun() override;
+
 	private:
 		TestingInformationHelper m_TestingInformationHelper;
+		Suite m_Suite;
 	};
 }
 

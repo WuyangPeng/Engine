@@ -1,25 +1,25 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 09:58)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 11:27)
 
 #ifndef DATABASE_SQL_INTERFACE_SESSION_IMPL_H
 #define DATABASE_SQL_INTERFACE_SESSION_IMPL_H
 
 #include "Database/DatabaseDll.h"
 
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/MysqlConnectorWrappers/Using/MysqlConnectorUsing.h"
 #include "Database/SqlInterface/Schema.h"
 #include "Database/SqlInterface/Result.h"
- 
+#include "Database/Configuration/ConfigurationStrategy.h"
+#include "Database/MysqlConnectorWrappers/Using/MysqlConnectorUsing.h"
+
 namespace Database
 {
 	class DATABASE_HIDDEN_DECLARE SessionImpl
 	{
 	public:
-		using ClassType = SessionImpl; 
+		using ClassType = SessionImpl;
 		using ImplTypePtr = std::shared_ptr<ClassType>;
 		using MysqlxSchemaPtr = std::unique_ptr<MysqlxSchema>;
 		using SchemaPtr = std::unique_ptr<Schema>;
@@ -27,10 +27,10 @@ namespace Database
 		using ResultPtr = std::shared_ptr<Result>;
 
 	public:
-		explicit SessionImpl(const ConfigurationStrategy& configurationStrategy); 
+		explicit SessionImpl(const ConfigurationStrategy& configurationStrategy);
 		virtual ~SessionImpl() = 0;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE; 	
+		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		ConfigurationStrategy GetConfigurationStrategy() const;
 

@@ -14,6 +14,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <vector>
+#include <string>
 
 EXPORT_NONCOPYABLE_CLASS(NETWORK);
 

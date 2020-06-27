@@ -15,7 +15,7 @@
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
-#include <boost/numeric/conversion/cast.hpp> 
+#include "System/Helper/PragmaWarning/NumericCast.h" 
 
 using std::string;
 

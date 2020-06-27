@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <boost/polymorphic_cast.hpp>
+#include "System/Helper/PragmaWarning/PolymorphicCast.h"
 
 template <typename SubClass, typename BaseClass>
 CoreTools::SecondSubclassSmartPointer<SubClass, BaseClass>
@@ -21,21 +21,30 @@ CoreTools::SecondSubclassSmartPointer<SubClass, BaseClass>
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_PUSH
 
+#include SYSTEM_WARNING_DISABLE(26434)   
 template <typename SubClass, typename BaseClass>
 CoreTools::SecondSubclassSmartPointer<SubClass, BaseClass>
-	::SecondSubclassSmartPointer(SubclassType* data)
+	::SecondSubclassSmartPointer(SubclassType* data)  
 	:ParentType{ data }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+} 
+#include STSTEM_WARNING_POP
 
+#include STSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26434)  
 template <typename SubClass, typename BaseClass>
 CoreTools::SecondSubclassSmartPointer<SubClass, BaseClass>
-	::~SecondSubclassSmartPointer()
+	::SecondSubclassSmartPointer() noexcept
+	:ParentType{   }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_POP
+
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename SubClass, typename BaseClass>

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 09:59)
+// 引擎版本：0.3.0.1 (2020/05/21 10:47)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_UNIT_TEST_SUITE_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_UNIT_TEST_SUITE_H
@@ -12,84 +12,61 @@
 #include "WindowMessageInterface.h"
 #include "WindowProcessHandleDetail.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
-
-namespace CoreTools
-{
-	class Suite;
-	class UnitTestComposite;
-}
+#include "CoreTools/UnitTestSuite/OStreamShared.h"
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteImpl);
-FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteOsPtr);
-EXPORT_NONCOPYABLE_CLASS(FRAMEWORK);
+FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteStream);
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE WindowMessageUnitTestSuite : public WindowMessageInterface, private boost::noncopyable
+	class FRAMEWORK_DEFAULT_DECLARE WindowMessageUnitTestSuite : public WindowMessageInterface
 	{
-	public:	
-		using ClassShareType = CoreTools::NonCopyClasses;
-		using ClassType = WindowMessageUnitTestSuite;
+	public:
+		NON_COPY_CLASSES_TYPE_DECLARE(WindowMessageUnitTestSuite);
 		using ParentType = WindowMessageInterface;
-		using ImplType = WindowMessageUnitTestSuiteImpl;
-		using OsPtrType = WindowMessageUnitTestSuiteOsPtr;
+		using StreamType = WindowMessageUnitTestSuiteStream;
 		using Suite = CoreTools::Suite;
+		using OStreamShared = CoreTools::OStreamShared;
 		using UnitTestPtr = std::shared_ptr<CoreTools::UnitTestComposite>;
 
 	public:
-		WindowMessageUnitTestSuite();		
-		virtual ~WindowMessageUnitTestSuite();
- 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;	 
+		WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName);
 
-		virtual LResult CreateMessage(HWnd hwnd,WParam wParam,LParam lParam);	
-		virtual LResult KeyDownMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual void Display(HWnd hwnd,int64_t timeDelta);
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		int GetPassedNumber() const;
+		int GetPassedNumber() const noexcept;
 
-	protected:	
-		std::ostream* GetOStream();		
+		LResult CreateMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		void Display(HWnd hwnd, int64_t timeDelta) override;
 
-		void DoAddSuite(const Suite& suite);	
-
-		// 子类初始化必须调用。
-		void GenerateSuite();
+	protected:
+		bool IsPrintRun() const noexcept;
+		OStreamShared GetStreamShared() noexcept;
+		void AddSuite(const Suite& suite);
 
 		void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestPtr& unitTest);
-		
-		bool IsPrintRun() const;
+
+		template<typename TestType, typename... Types>
+		void AddTest(Suite& suite, const std::string& suiteName, const std::string& testName, Types&&... args);
+
+		Suite GenerateSuite(const std::string& name);
 
 	private:
-		using WindowMessageUnitTestSuiteImplPtr = std::shared_ptr<ImplType>;
-		using OsPtrTypePtr = std::shared_ptr<OsPtrType>;
+		using StreamSharedPtr = std::shared_ptr<StreamType>;
 
-	private:	
-		virtual void AddSuite() = 0;
-		virtual std::string GetSuiteName() const = 0;	
+	private:	 
+		virtual void InitSuite() = 0;
 
-		LResult AddSuiteOnCreateMessage( HWnd hwnd, WParam wParam, LParam lParam );
-		void RunUnitTest();
-		void ResetTestData();
+		LResult AddSuiteOnCreateMessage(HWnd hwnd, WParam wParam, LParam lParam);
 
-	private:		
-		OsPtrTypePtr m_OsPtrTypePtr;
-		WindowMessageUnitTestSuiteImplPtr m_Impl;
+	private:
+		StreamSharedPtr m_Stream;
+		IMPL_TYPE_DECLARE(WindowMessageUnitTestSuite);
 	};
 
 	using WindowProcessUnitTestSuite = WindowProcessHandle<WindowMessageUnitTestSuite>;
 }
-
-#define WINDOW_MESSAGE_UNIT_TEST_SUITE_SUBCLASS_DECLARE(className) \
-	    using ClassType = className;\
-	    using ParentType = WindowMessageUnitTestSuite;\
-	    public: className(); virtual ~className()
-
-#define WINDOW_MESSAGE_UNIT_TEST_SUITE_SUBCLASS_DEFINE(namespaceName, \
-	    className) namespaceName::className::className \
-		() :ParentType{} { GenerateSuite(); FRAMEWORK_SELF_CLASS_IS_VALID_0; } \
-		namespaceName::className::~className() { FRAMEWORK_SELF_CLASS_IS_VALID_0; }
 
 #endif // FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_UNIT_TEST_SUITE_H

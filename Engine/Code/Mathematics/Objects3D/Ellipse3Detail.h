@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 09:49)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 17:38)
 
 #ifndef MATHEMATICS_OBJECTS3D_ELLIPSE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_ELLIPSE3_DETAIL_H
@@ -14,8 +14,8 @@
 
 template <typename Real>
 Mathematics::Ellipse3<Real>
-	::Ellipse3( const Vector3D& center, const Vector3D& normal,const Vector3D& major, const Vector3D& minor, 
-				Real majorLength, Real minorLength,const Real epsilon )
+	::Ellipse3(const Vector3D& center, const Vector3D& normal, const Vector3D& major, const Vector3D& minor,
+			   Real majorLength, Real minorLength, const Real epsilon)
 	:m_Center{ center }, m_Normal{ normal }, m_Major{ major }, m_Minor{ minor },
 	 m_MajorLength{ majorLength }, m_MinorLength{ minorLength }, m_Epsilon{ epsilon }
 {
@@ -28,7 +28,7 @@ bool Mathematics::Ellipse3<Real>
 	::IsValid() const noexcept
 {
 	if (m_Normal.IsNormalize(m_Epsilon) && m_Major.IsNormalize(m_Epsilon) && m_Minor.IsNormalize(m_Epsilon) &&
-		Real {} <= m_MajorLength && Real{} <= m_MinorLength)
+		Math::sm_Zero <= m_MajorLength && Math::sm_Zero <= m_MinorLength)
 	{
 		return true;
 	}
@@ -38,7 +38,6 @@ bool Mathematics::Ellipse3<Real>
 	}
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 typename const Mathematics::Ellipse3<Real>::Vector3D Mathematics::Ellipse3<Real>
@@ -75,7 +74,6 @@ typename const Mathematics::Ellipse3<Real>::Vector3D Mathematics::Ellipse3<Real>
 
 	return m_Minor;
 }
-
 
 template <typename Real>
 Real Mathematics::Ellipse3<Real>

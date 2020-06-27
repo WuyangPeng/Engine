@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 20:13)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 13:41)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
 #define NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
@@ -16,7 +16,7 @@
 #include <ace/SOCK_Acceptor.h>
 
 namespace Network
-{	
+{
 	class NETWORK_HIDDEN_DECLARE ACESockAcceptor : public SockAcceptorImpl
 	{
 	public:
@@ -29,7 +29,7 @@ namespace Network
 		virtual ~ACESockAcceptor();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
+
 		virtual bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 		virtual bool Accept(const SockStreamSharedPtr& sockStream) override;
 
@@ -45,8 +45,8 @@ namespace Network
 
 	private:
 		ACE_SOCK_Acceptor m_ACESockAcceptor;
-	};	
-} 
+	};
+}
 
 #endif // NETWORK_USE_ACE
 

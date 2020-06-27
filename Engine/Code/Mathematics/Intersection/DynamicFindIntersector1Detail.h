@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 18:03)
+// 引擎版本：0.0.2.5 (2020/03/24 15:16)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_DETAIL_H
@@ -13,11 +13,11 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::DynamicFindIntersector1<Real>
-	::DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1,Real tMax, Real speedU, Real speedV, const Real epsilon)
+	::DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon)
 	:ParentType{ u0, u1, v0, v1,epsilon }, m_FirstTime{}, m_LastTime{}, m_Intersections{}
 {
 	Find(tMax, speedU, speedV);
@@ -36,63 +36,63 @@ void Mathematics::DynamicFindIntersector1<Real>
 	auto v1 = this->GetV(1);
 	auto epsilon = this->GetEpsilon();
 
-    if (u1 + epsilon < v0)
-    {
+	if (u1 + epsilon < v0)
+	{
 		// [u0,u1]最初在[v0,v1]的左边。
 		auto differenceSpeed = speedU - speedV;
-        if (Real{} < differenceSpeed)
-        {
+		if (Math::sm_Zero < differenceSpeed)
+		{
 			// 区间必须朝向彼此移动。
 			auto differencePosition = v0 - u1;
-            if (differencePosition <= tMax * differenceSpeed)
-            {
+			if (differencePosition <= tMax * differenceSpeed)
+			{
 				// 区间在指定时间内相交。
-	            m_FirstTime = differencePosition / differenceSpeed;
-                m_LastTime = (v1 - u0) / differenceSpeed;
+				m_FirstTime = differencePosition / differenceSpeed;
+				m_LastTime = (v1 - u0) / differenceSpeed;
 
 				m_Intersections.push_back(u1 + m_FirstTime * speedU);
-            }
-        }
-    }
-    else if (v1 + epsilon < u0)
-    {
-        // [u0,u1]最初在[v0,v1]的右边。
+			}
+		}
+	}
+	else if (v1 + epsilon < u0)
+	{
+		// [u0,u1]最初在[v0,v1]的右边。
 		auto differenceSpeed = speedV - speedU;
-        if (Real{} < differenceSpeed)
-        {
-            // 区间必须朝向彼此移动。
+		if (Math::sm_Zero < differenceSpeed)
+		{
+			// 区间必须朝向彼此移动。
 			auto differencePosition = u0 - v1;
-            if (differencePosition <= tMax * differenceSpeed)
-            {
-                // 区间在指定时间内相交。
-                m_FirstTime = differencePosition / differenceSpeed;
-                m_LastTime = (u1 - v0) / differenceSpeed;
+			if (differencePosition <= tMax * differenceSpeed)
+			{
+				// 区间在指定时间内相交。
+				m_FirstTime = differencePosition / differenceSpeed;
+				m_LastTime = (u1 - v0) / differenceSpeed;
 
-				m_Intersections.push_back(v1 + m_FirstTime * speedV); 
-            }
-        }
-    }
-    else
-    {
-  		// 区间本来就相交。
-        m_FirstTime = Real { };
-        if (speedU + epsilon < speedV)
-        {
-            m_LastTime = (u1 - v0) / (speedV - speedU);
-        }
-        else if (speedV + epsilon < speedU)
-        {
-            m_LastTime = (v1 - u0) / (speedU - speedV);
-        }
-        else
-        {
-            m_LastTime = Math::sm_MaxReal;
-        }
+				m_Intersections.push_back(v1 + m_FirstTime * speedV);
+			}
+		}
+	}
+	else
+	{
+		// 区间本来就相交。
+		m_FirstTime = Math::sm_Zero;
+		if (speedU + epsilon < speedV)
+		{
+			m_LastTime = (u1 - v0) / (speedV - speedU);
+		}
+		else if (speedV + epsilon < speedU)
+		{
+			m_LastTime = (v1 - u0) / (speedU - speedV);
+		}
+		else
+		{
+			m_LastTime = Math::sm_MaxReal;
+		}
 
 		if (v0 + epsilon < u1)
 		{
 			if (u0 + epsilon < v1)
-			{	
+			{
 				auto lhsIntersection = (u0 < v0 ? v0 : u0);
 				auto rhsIntersection = (v1 < u1 ? v1 : u1);
 
@@ -104,7 +104,7 @@ void Mathematics::DynamicFindIntersector1<Real>
 				{
 					m_Intersections.push_back(lhsIntersection);
 					m_Intersections.push_back(rhsIntersection);
-				}				
+				}
 			}
 			else  // u0 == v1 
 			{
@@ -115,9 +115,8 @@ void Mathematics::DynamicFindIntersector1<Real>
 		{
 			m_Intersections.push_back((u1 + v0) / static_cast<Real>(2));
 		}
-    }
+	}
 }
-
 
 template <typename Real>
 Mathematics::DynamicFindIntersector1<Real>
@@ -131,12 +130,11 @@ template <typename Real>
 bool Mathematics::DynamicFindIntersector1<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Real{} <= m_FirstTime && m_FirstTime <= m_LastTime)
+	if (ParentType::IsValid() && Math::sm_Zero <= m_FirstTime && m_FirstTime <= m_LastTime)
 		return true;
 	else
 		return false;
 }
-
 #endif // OPEN_CLASS_INVARIANT	
 
 template <typename Real>
@@ -200,4 +198,3 @@ Real Mathematics::DynamicFindIntersector1<Real>
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_DETAIL_H
- 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 10:26)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 12:52)
 
 #include "Database/DatabaseExport.h"
 
@@ -17,10 +17,10 @@ using std::string;
 using std::initializer_list;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
- 
+
 Database::MysqlConnectorTable
 	::MysqlConnectorTable(const Schema& schema, const string& tableName)
-	: ParentType{ schema.GetConfigurationStrategy() },m_MysqlxTable { GetMysqlxTablePtr(schema,tableName) }
+	: ParentType{ schema.GetConfigurationStrategy() }, m_MysqlxTable{ GetMysqlxTablePtr(schema,tableName) }
 {
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
@@ -63,7 +63,7 @@ Database::MysqlConnectorTable::ResultPtr Database::MysqlConnectorTable
 	DATABASE_CLASS_IS_VALID_1;
 
 	using MysqlxRowResultPtr = std::shared_ptr<MysqlxRowResult>;
-	 
+
 	auto statement = m_MysqlxTable->select(selectStatement);
 
 	if (!whereStatement.empty())

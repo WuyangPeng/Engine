@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 13:55)
+// 引擎版本：0.0.2.5 (2020/03/24 14:54)
 
 #ifndef MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_LINE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_LINE3_TRIANGLE3_H
@@ -27,24 +27,24 @@ namespace Mathematics
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
 		using Math = Math<Real>;
-		
+
 	public:
-		StaticTestIntersectorLine3Triangle3(const Line3& line,const Triangle3& triangle,const Real epsilon = Math::sm_ZeroTolerance);
+		StaticTestIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon = Math::sm_ZeroTolerance);
 
 		virtual ~StaticTestIntersectorLine3Triangle3();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
-		const Line3 GetLine () const;
-		const Triangle3 GetTriangle () const;
+
+		const Line3 GetLine() const;
+		const Triangle3 GetTriangle() const;
 
 	private:
 		void Test();
-		
-	private: 
+
+	private:
 		// 相交对象
 		Line3 m_Line;
-		Triangle3 m_Triangle;		
+		Triangle3 m_Triangle;
 	};
 
 	using StaticTestIntersectorLine3Triangle3f = StaticTestIntersectorLine3Triangle3<float>;

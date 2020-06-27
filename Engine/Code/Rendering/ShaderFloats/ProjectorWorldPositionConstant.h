@@ -12,7 +12,6 @@
 #include "ShaderFloat.h"
 #include "Rendering/SceneGraph/Projector.h"
 
-#include <boost/shared_ptr.hpp>
 
 RENDERING_EXPORT_SHARED_PTR(ProjectorConstantImpl);
 
@@ -52,8 +51,10 @@ namespace Rendering
 	private:
 		IMPL_TYPE_DECLARE(ProjectorWorldPositionConstant);
 	};
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(ProjectorWorldPositionConstant);
+#include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ProjectorWorldPositionConstant);
 }
 

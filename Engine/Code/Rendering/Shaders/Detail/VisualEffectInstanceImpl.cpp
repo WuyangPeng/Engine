@@ -305,7 +305,7 @@ int Rendering::VisualEffectInstanceImpl
 }
 
 const Rendering::ConstVisualPassSmartPointer Rendering::VisualEffectInstanceImpl
-	::GetPass(int pass) const
+	::GetConstPass(int pass) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	
@@ -313,7 +313,7 @@ const Rendering::ConstVisualPassSmartPointer Rendering::VisualEffectInstanceImpl
 }
 
 const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
-	::GetVertexParameters(int pass) const
+	::GetConstVertexParameters(int pass) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -322,7 +322,7 @@ const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstan
 }
 
 const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
-	::GetPixelParameters(int pass) const
+	::GetConstPixelParameters(int pass) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -473,3 +473,23 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImp
 
 	return m_VertexParameters[pass]->GetConstant(handle);
 }
+
+const Rendering::ShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
+	::GetVertexParameters(int pass) 
+{
+	RENDERING_CLASS_IS_VALID_1;
+	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
+
+	return m_VertexParameters[pass];
+}
+
+const Rendering::ShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
+	::GetPixelParameters(int pass) 
+{
+	RENDERING_CLASS_IS_VALID_1;
+	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
+
+	return m_PixelParameters[pass];
+}
+
+ 

@@ -1,15 +1,15 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 17:18)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:03)
 
 #include "Network/NetworkExport.h" 
 
 #include "HandleSetContainer.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <functional>
 
 using std::placeholders::_1;
@@ -17,10 +17,8 @@ using std::bind;
 
 Network::HandleSetContainer
 	::HandleSetContainer(const ConfigurationStrategy& configurationStrategy, ACEHandle acceptorHandle)
-	: m_ConfigurationStrategy{ configurationStrategy },
-	  m_AcceptorHandle{ acceptorHandle },
-	  m_HandleSetGroup{ HandleSet(configurationStrategy) },
-	  m_CurrentIndex{ 0 }
+	: m_ConfigurationStrategy{ configurationStrategy }, m_AcceptorHandle{ acceptorHandle },
+	  m_HandleSetGroup{ HandleSet(configurationStrategy) }, m_CurrentIndex{ 0 }
 {
 	Init();
 

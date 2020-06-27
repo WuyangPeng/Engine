@@ -1,11 +1,13 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 09:35)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 09:44)
 
-#ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_IMPL_H
-#define FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_IMPL_H
+#ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_IMPL_H
+#define FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_IMPL_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "System/Window/Flags/WindowFlags.h"
 #include "Framework/WindowCreate/WindowSize.h"
@@ -16,31 +18,31 @@
 
 namespace Framework
 {
-	class WindowCreateHandleImpl : private boost::noncopyable
+	class FRAMEWORK_HIDDEN_DECLARE WindowCreateHandleImpl : private boost::noncopyable
 	{
 	public:
 		using ClassType = WindowCreateHandleImpl;
-        using HWnd = System::WindowHWnd;
+		using HWnd = System::WindowHWnd;
 
-	public:		
-		WindowCreateHandleImpl(const WindowInstanceParameter& windowInstanceParameter,const WindowCreateParameter& windowCreateParameter,const WindowSize& size);
-		
-		CLASS_INVARIANT_DECLARE;	
+	public:
+		WindowCreateHandleImpl(const WindowInstanceParameter& windowInstanceParameter, const WindowCreateParameter& windowCreateParameter, const WindowSize& size);
 
-		HWnd GetHwnd() const;
-		
+		CLASS_INVARIANT_DECLARE;
+
+		HWnd GetHwnd() const noexcept;
+
 		void SetMainWindow();
 
-	private:		
-		void InitInstance();	
+	private:
+		void InitInstance();
 
 	private:
 		WindowInstanceParameter m_WindowInstanceParameter;
 		WindowCreateParameter m_WindowCreateParameter;
-		WindowSize m_Size;		
-		HWnd m_Hwnd;		
-	};		
+		WindowSize m_Size;
+		HWnd m_Hwnd;
+	};
 }
 
-#endif // FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_IMPL_H
+#endif // FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_IMPL_H
 

@@ -8,7 +8,7 @@
 
 #include "DatabasePrototypes.h"
 #include "Using/SocketPrototypesUsing.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/PragmaWarning.h"
 

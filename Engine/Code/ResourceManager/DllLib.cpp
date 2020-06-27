@@ -42,4 +42,5 @@
 	}
 
 #endif // !BUILDING_RESOURCE_MANAGER_STATIC
- 
+
+	// 游戏编程精粹7 第1章 1.1 有资源管理算法

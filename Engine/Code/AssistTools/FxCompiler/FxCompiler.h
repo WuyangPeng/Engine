@@ -18,7 +18,7 @@
 #include <string>
 #include <vector> 
 #include <map>
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 namespace AssistTools
 {

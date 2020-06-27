@@ -10,6 +10,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 Mathematics::OrderedEdgeKey
 	::OrderedEdgeKey (int first, int second)
@@ -46,10 +47,17 @@ CLASS_INVARIANT_STUB_DEFINE(Mathematics, OrderedEdgeKey)
 int Mathematics::OrderedEdgeKey
 	::GetKey(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < 2,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_CONST_9; 
     
-    return m_Vertex[index];
+	if (0 <= index && index < 2)
+	{
+		return m_Vertex[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}
+    
 }
 
 bool Mathematics

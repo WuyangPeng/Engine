@@ -9,7 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include <boost/property_tree/ptree.hpp>
+#include "System/Helper/PragmaWarning/PropertyTree.h"
 #include <string>
 
 namespace Rendering

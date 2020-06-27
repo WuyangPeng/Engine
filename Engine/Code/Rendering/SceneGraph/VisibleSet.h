@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Spatial.h"
+#include "Visual.h"
 
 #include <boost/noncopyable.hpp>
 
@@ -27,7 +27,9 @@ namespace Rendering
     {
     public:
         NON_COPY_CLASSES_TYPE_DECLARE(VisibleSet);     
-        
+		using VisualContainer = std::vector<VisualSmartPointer>;
+		using VisualContainerIter = VisualContainer::iterator;
+
     public:
         VisibleSet ();
         
@@ -35,13 +37,16 @@ namespace Rendering
 
         // 获得可见的元素集。
         int GetNumVisible () const;
-		const ConstSpatialSmartPointer& GetVisible(int index) const;
+		const ConstVisualSmartPointer GetVisible(int index) const;
 
         // 插入一个可见的对象。
-		void Insert(const ConstSpatialSmartPointer& visible);
+		void Insert(const VisualSmartPointer& visible);
 
         // 设置集合元素的个数为零。
         void Clear ();
+
+		VisualContainerIter begin();
+		VisualContainerIter end();
 
     private:
         IMPL_TYPE_DECLARE(VisibleSet);

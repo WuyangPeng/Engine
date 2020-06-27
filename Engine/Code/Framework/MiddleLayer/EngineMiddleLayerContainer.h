@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:40)
+// 引擎版本：0.3.0.1 (2020/05/21 14:48)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_H
@@ -29,7 +29,7 @@ namespace Framework
 	// 消息管理器、事件管理器、系统管理器、资源管理器、
 	// 音频管理器、相机系统、渲染管理器、GUI管理器构成。
 	template <typename ApplicationTrait,
-			  template<typename > class InputManager = InputManager,
+			  template<typename> class InputManager = InputManager,
 			  typename NetworkManager = NetworkManagerInterface,
 			  typename ObjectLogicManager = ObjectLogicManagerInterface,
 			  typename PhysicalModellingManager = PhysicalModellingManagerInterface,
@@ -42,11 +42,11 @@ namespace Framework
 			  typename RenderingManager = RenderingManagerInterface,
 			  typename GUIManager = GUIManagerInterface>
 	class EngineMiddleLayerContainer : public EngineMiddleLayerInterface
-	{	
+	{
 	public:
 		using ClassType = EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager,
 													 PhysicalModellingManager, MessageManager, EventManager,
-													 SystemManager, ResourceManager, AudioManager,
+												     SystemManager, ResourceManager, AudioManager,
 													 CameraSystemsManager, RenderingManager, GUIManager>;
 		using ParentType = EngineMiddleLayerInterface;
 		using InputManagerType = InputManager<ApplicationTrait>;
@@ -63,56 +63,60 @@ namespace Framework
 		using GUIManagerType = GUIManager;
 
 	public:
-		static_assert(std::is_base_of_v<InputManagerInterface,InputManagerType>);
-		static_assert(std::is_base_of_v<NetworkManagerInterface,NetworkManagerType>);
-		static_assert(std::is_base_of_v<ObjectLogicManagerInterface,ObjectLogicManagerType>);
-		static_assert(std::is_base_of_v<PhysicalModellingManagerInterface,PhysicalModellingManagerType>);
-		static_assert(std::is_base_of_v<MessageManagerInterface,MessageManagerType>);
-		static_assert(std::is_base_of_v<EventManagerInterface,EventManagerType>);
-		static_assert(std::is_base_of_v<SystemManagerInterface,SystemManagerType>);
-		static_assert(std::is_base_of_v<ResourceManagerInterface,ResourceManagerType>);
-		static_assert(std::is_base_of_v<AudioManagerInterface,AudioManagerType>);
-		static_assert(std::is_base_of_v<CameraSystemsManagerInterface,CameraSystemsManagerType>);
-		static_assert(std::is_base_of_v<RenderingManagerInterface,RenderingManagerType>);
-		static_assert(std::is_base_of_v<GUIManagerInterface,GUIManagerType>);
+		static_assert(std::is_base_of_v<InputManagerInterface, InputManagerType>);
+		static_assert(std::is_base_of_v<NetworkManagerInterface, NetworkManagerType>);
+		static_assert(std::is_base_of_v<ObjectLogicManagerInterface, ObjectLogicManagerType>);
+		static_assert(std::is_base_of_v<PhysicalModellingManagerInterface, PhysicalModellingManagerType>);
+		static_assert(std::is_base_of_v<MessageManagerInterface, MessageManagerType>);
+		static_assert(std::is_base_of_v<EventManagerInterface, EventManagerType>);
+		static_assert(std::is_base_of_v<SystemManagerInterface, SystemManagerType>);
+		static_assert(std::is_base_of_v<ResourceManagerInterface, ResourceManagerType>);
+		static_assert(std::is_base_of_v<AudioManagerInterface, AudioManagerType>);
+		static_assert(std::is_base_of_v<CameraSystemsManagerInterface, CameraSystemsManagerType>);
+		static_assert(std::is_base_of_v<RenderingManagerInterface, RenderingManagerType>);
+		static_assert(std::is_base_of_v<GUIManagerInterface, GUIManagerType>);
 
 	public:
-		EngineMiddleLayerContainer();
-		virtual ~EngineMiddleLayerContainer();
-	
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		explicit EngineMiddleLayerContainer(MiddleLayerPlatform modelViewController);
+		~EngineMiddleLayerContainer();
+		EngineMiddleLayerContainer(const EngineMiddleLayerContainer& rhs) noexcept = delete;
+		EngineMiddleLayerContainer& operator=(const EngineMiddleLayerContainer& rhs) noexcept = delete;
+		EngineMiddleLayerContainer(EngineMiddleLayerContainer&& rhs) noexcept;
+		EngineMiddleLayerContainer& operator=(EngineMiddleLayerContainer&& rhs) noexcept;
 
-		void SetNetworkManager(MiddleLayerInterfaceSmartPointer& networkManager);
-		void SetInputManager(MiddleLayerInterfaceSmartPointer& inputManager);
-		void SetObjectLogicManager(MiddleLayerInterfaceSmartPointer& objectLogicManager);
-		void SetPhysicalModellingManager(MiddleLayerInterfaceSmartPointer& physicalModellingManager);
-		void SetMessageManager(MiddleLayerInterfaceSmartPointer& messageManager);
-		void SetEventManager(MiddleLayerInterfaceSmartPointer& eventManager);
-		void SetSystemManager(MiddleLayerInterfaceSmartPointer& systemManager);
-		void SetResourceManager(MiddleLayerInterfaceSmartPointer& resourceManager);
-		void SetAudioManager(MiddleLayerInterfaceSmartPointer& audioManager);
-		void SetCameraSystemsManager(MiddleLayerInterfaceSmartPointer& cameraSystemsManager);
-		void SetRenderingManager(MiddleLayerInterfaceSmartPointer& renderingManager);
-		void SetGUIManager(MiddleLayerInterfaceSmartPointer& guiManager);
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool PreCreate();
-		virtual bool Initialize();
-		virtual void PreIdle();
-		virtual void Terminate();
-		virtual bool Paint();
-		virtual bool Move(const WindowPoint& point);
-		virtual bool Resize(WindowDisplayFlags type,const WindowSize& size);
-		virtual bool KeyDown(uint8_t key,const WindowPoint& point);
-	    virtual bool KeyUp(uint8_t key, const WindowPoint& point);
-		virtual bool SpecialKeyDown (int key, const WindowPoint& point);
-		virtual bool SpecialKeyUp (int key, const WindowPoint& point);
-		virtual bool MouseClick(MouseButtonsTypes button,MouseStateTypes state, const WindowPoint& point,const VirtualKeysTypes& virtualKeysTypes);
-		virtual bool Motion(const WindowPoint& point,const VirtualKeysTypes& virtualKeysTypes);
-		virtual bool PassiveMotion(const WindowPoint& point);
-		virtual bool MouseWheel(int delta,const WindowPoint& point,const VirtualKeysTypes& virtualKeysTypes);
-		virtual bool Create();
-		virtual bool Destroy();
-		virtual bool Idle(int64_t timeDelta);
+		void SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager) override;
+		void SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager) override;
+		void SetObjectLogicManager(const MiddleLayerInterfaceSharedPtr& objectLogicManager) override;
+		void SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager) override;
+		void SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager) override;
+		void SetEventManager(const MiddleLayerInterfaceSharedPtr& eventManager) override;
+		void SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager) override;
+		void SetResourceManager(const MiddleLayerInterfaceSharedPtr& resourceManager) override;
+		void SetAudioManager(const MiddleLayerInterfaceSharedPtr& audioManager) override;
+		void SetCameraSystemsManager(const MiddleLayerInterfaceSharedPtr& cameraSystemsManager) override;
+		void SetRenderingManager(const MiddleLayerInterfaceSharedPtr& renderingManager) override;
+		void SetGUIManager(const MiddleLayerInterfaceSharedPtr& guiManager) override;
+
+		bool PreCreate(const EnvironmentDirectory& environmentDirectory) override;
+		bool Initialize() override;
+		void PreIdle() override;
+		void Terminate() override;
+		bool Paint() override;
+		bool Move(const WindowPoint& point) override;
+		bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
+		bool KeyDown(int key, const WindowPoint& point) override;
+		bool KeyUp(int key, const WindowPoint& point) override;
+		bool SpecialKeyDown(int key, const WindowPoint& point) override;
+		bool SpecialKeyUp(int key, const WindowPoint& point) override;
+		bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+		bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+		bool PassiveMotion(const WindowPoint& point) override;
+		bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+		bool Create() override;
+		bool Destroy() override;
+		bool Idle(int64_t timeDelta) override;
 
 	private:
 		void Init();
@@ -144,19 +148,21 @@ namespace Framework
 
 		bool InitSystemEngineInterface();
 
+		void SetEngineManagerNullptr();
+
 	private:
-		NetworkManagerInterfaceSmartPointer m_NetworkManager;
-		InputManagerInterfaceSmartPointer m_InputManager;
-		ObjectLogicManagerInterfaceSmartPointer m_ObjectLogicManager;
-		PhysicalModellingManagerInterfaceSmartPointer m_PhysicalModellingManager;
-		MessageManagerInterfaceSmartPointer m_MessageManager;
-		EventManagerInterfaceSmartPointer m_EventManager;
-		SystemManagerInterfaceSmartPointer m_SystemManager;
-		ResourceManagerInterfaceSmartPointer m_ResourceManager;
-		AudioManagerInterfaceSmartPointer m_AudioManager;
-		CameraSystemsManagerInterfaceSmartPointer m_CameraSystemsManager;
-		RenderingManagerInterfaceSmartPointer m_RenderingManager;
-		GUIManagerInterfaceSmartPointer m_GUIManager;
+		NetworkManagerInterfaceSharedPtr m_NetworkManager;
+		InputManagerInterfaceSharedPtr m_InputManager;
+		ObjectLogicManagerInterfaceSharedPtr m_ObjectLogicManager;
+		PhysicalModellingManagerInterfaceSharedPtr m_PhysicalModellingManager;
+		MessageManagerInterfaceSharedPtr m_MessageManager;
+		EventManagerInterfaceSharedPtr m_EventManager;
+		SystemManagerInterfaceSharedPtr m_SystemManager;
+		ResourceManagerInterfaceSharedPtr m_ResourceManager;
+		AudioManagerInterfaceSharedPtr m_AudioManager;
+		CameraSystemsManagerInterfaceSharedPtr m_CameraSystemsManager;
+		RenderingManagerInterfaceSharedPtr m_RenderingManager;
+		GUIManagerInterfaceSharedPtr m_GUIManager;
 	};
 }
 

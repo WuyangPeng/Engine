@@ -8,6 +8,7 @@
 #define CORE_TOOLS_HELPER_MEMORY_MACRO_H
 
 #include "UserMacro.h"
+#include "System/Helper/PragmaWarning.h"
 
 // 内存管理的宏。报告内存泄漏和相关文件行信息，您必须启用OPEN_USE_MEMORY。
 // 启用后必须调用MEMORY_CREATE() 和 MEMORY_DESTROY() 在你的应用程序。
@@ -69,12 +70,35 @@
 	#define MEMORY_DESTROY \
 			CoreTools::MemoryManager::Destroy()
 
+	namespace CoreTools
+	{
+		constexpr auto g_MemoryNoexcept = false;
+	}	
+
 #else // !defined(CORE_TOOLS_USE_MEMORY) && !defined(CORE_TOOLS_MEMORY_ALWAYS_CREATE)
 
 	#define MEMORY_CREATE ((void)0)
 	#define MEMORY_CREATE_WITH_ALLOCATOR_AND_DEALLOCATOR(allocator,deallocator) ((void)0)
 	#define MEMORY_DESTROY ((void)0)
+	
+	namespace CoreTools
+	{
+		constexpr auto g_MemoryNoexcept = true;
+	}
 
 #endif // defined(CORE_TOOLS_USE_MEMORY) || defined(CORE_TOOLS_MEMORY_ALWAYS_CREATE)
+	namespace CoreTools
+	{
+		template<typename T>
+		static T* New0()
+		{
+		#include STSTEM_WARNING_PUSH
+
+		#include SYSTEM_WARNING_DISABLE(26409)  
+			return NEW0 T;
+
+		#include STSTEM_WARNING_POP
+		}
+	}
 
 #endif // CORE_TOOLS_HELPER_MEMORY_MACRO_H

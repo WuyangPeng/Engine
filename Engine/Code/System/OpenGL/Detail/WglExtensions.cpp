@@ -67,25 +67,25 @@ namespace System
 WglHandle System
 	::WglCreateBufferRegionARB(WglHDC hdc, int layerPlane, WglUInt type) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gwglCreateBufferRegionARB, hdc, layerPlane, type, WglHandle, nullptr);
+	SYSTEM_BODY_3_RESULT(gwglCreateBufferRegionARB, hdc, layerPlane, type, WglHandle, nullptr);
 }
 
 VOID System
 	::WglDeleteBufferRegionARB(WglHandle region) noexcept
 {
-	SYSTEM_BODY_A1(gwglDeleteBufferRegionARB, region);
+	SYSTEM_BODY_1(gwglDeleteBufferRegionARB, region);
 }
 
 WglBool System
 	::WglSaveBufferRegionARB(WglHandle region, int x, int y, int width, int height) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gwglSaveBufferRegionARB, region, x, y, width, height, WglBool, g_False);
+	SYSTEM_BODY_5_RESULT(gwglSaveBufferRegionARB, region, x, y, width, height, WglBool, g_False);
 }
 
 WglBool System
 	::WglRestoreBufferRegionARB(WglHandle region, int x, int y, int width, int height, int xSrc, int ySrc) noexcept
 {
-	SYSTEM_BODY_A7_RESULT(gwglRestoreBufferRegionARB, region, x, y, width, height, xSrc, ySrc, WglBool, g_False);
+	SYSTEM_BODY_7_RESULT(gwglRestoreBufferRegionARB, region, x, y, width, height, xSrc, ySrc, WglBool, g_False);
 }
 
 void System
@@ -166,7 +166,7 @@ namespace System
 const char* System
 	::WglGetExtensionsStringARB(WglHDC hdc) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gwglGetExtensionsStringARB, hdc, const char*, nullptr);
+	SYSTEM_BODY_1_RESULT(gwglGetExtensionsStringARB, hdc, const char*, nullptr);
 }
 
 void System
@@ -220,19 +220,19 @@ namespace System
 WglBool System
 	::WglGetPixelFormatAttribivARB(WglHDC hdc, int pixelFormat, int layerPlane, WglUInt numAttributes, const int* attribute, int* value) noexcept
 {
-	SYSTEM_BODY_A6_RESULT(gwglGetPixelFormatAttribivARB, hdc, pixelFormat, layerPlane, numAttributes, attribute, value, WglBool, g_False);
+	SYSTEM_BODY_6_RESULT(gwglGetPixelFormatAttribivARB, hdc, pixelFormat, layerPlane, numAttributes, attribute, value, WglBool, g_False);
 }
 
 WglBool System
 	::WglGetPixelFormatAttribfvARB(WglHDC hdc, int pixelFormat, int layerPlane, WglUInt numAttributes, const int* attribute, WglFloat* value) noexcept
 {
-	SYSTEM_BODY_A6_RESULT(gwglGetPixelFormatAttribfvARB, hdc, pixelFormat, layerPlane, numAttributes, attribute, value, WglBool, g_False);
+	SYSTEM_BODY_6_RESULT(gwglGetPixelFormatAttribfvARB, hdc, pixelFormat, layerPlane, numAttributes, attribute, value, WglBool, g_False);
 }
 
 WglBool System
 	::WglChoosePixelFormatARB(WglHDC hdc, const int* attribIList, const WglFloat* attribFList, WglUInt maxFormats, int* format, WglUInt* numFormats) noexcept
 {
-	SYSTEM_BODY_A6_RESULT(gwglChoosePixelFormatARB, hdc, attribIList, attribFList, maxFormats, format, numFormats, WglBool, g_False);
+	SYSTEM_BODY_6_RESULT(gwglChoosePixelFormatARB, hdc, attribIList, attribFList, maxFormats, format, numFormats, WglBool, g_False);
 }
 
 void System
@@ -284,13 +284,13 @@ namespace System
 WglBool System
 	::WglMakeContextCurrentARB(WglHDC drawDC, WglHDC readDC, WglHGLRC windowRC) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gwglMakeContextCurrentARB, drawDC, readDC, windowRC, WglBool, g_False);
+	SYSTEM_BODY_3_RESULT(gwglMakeContextCurrentARB, drawDC, readDC, windowRC, WglBool, g_False);
 }
 
 WglHDC System
 	::WglGetCurrentReadDCARB() noexcept
 {
-	SYSTEM_BODY_A0_RESULT(gwglGetCurrentReadDCARB, WglHDC, nullptr);
+	SYSTEM_BODY_0_RESULT(gwglGetCurrentReadDCARB, WglHDC, nullptr);
 }
 
 void System
@@ -347,31 +347,31 @@ namespace System
 WglHPBufferARB System
 	::WglCreatePbufferARB(WglHDC hdc, int pixelFormat, int width, int height, const int* attribList) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gwglCreatePbufferARB, hdc, pixelFormat, width, height, attribList, WglHPBufferARB, nullptr);
+	SYSTEM_BODY_5_RESULT(gwglCreatePbufferARB, hdc, pixelFormat, width, height, attribList, WglHPBufferARB, nullptr);
 }
 
 WglHDC System
 	::WglGetPbufferDCARB(WglHPBufferARB buffer) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gwglGetPbufferDCARB, buffer, WglHDC, nullptr);
+	SYSTEM_BODY_1_RESULT(gwglGetPbufferDCARB, buffer, WglHDC, nullptr);
 }
 
 int System
 	::WglReleasePbufferDCARB(WglHPBufferARB buffer, WglHDC hdc) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gwglReleasePbufferDCARB, buffer, hdc, int, -1);
+	SYSTEM_BODY_2_RESULT(gwglReleasePbufferDCARB, buffer, hdc, int, -1);
 }
 
 WglBool System
 	::WglDestroyPbufferARB(WglHPBufferARB buffer) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gwglDestroyPbufferARB, buffer, WglBool, g_False);
+	SYSTEM_BODY_1_RESULT(gwglDestroyPbufferARB, buffer, WglBool, g_False);
 }
 
 WglBool System
 	::WglQueryPbufferARB(WglHPBufferARB buffer, int attribute, int* value) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gwglQueryPbufferARB, buffer, attribute, value, WglBool, g_False);
+	SYSTEM_BODY_3_RESULT(gwglQueryPbufferARB, buffer, attribute, value, WglBool, g_False);
 }
 
 void System
@@ -427,19 +427,19 @@ namespace System
 WglBool System
 	::WglBindTexImageARB(WglHPBufferARB buffer, int bufferIndex) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gwglBindTexImageARB, buffer, bufferIndex, WglBool, g_False);
+	SYSTEM_BODY_2_RESULT(gwglBindTexImageARB, buffer, bufferIndex, WglBool, g_False);
 }
 
 WglBool System
 	::WglReleaseTexImageARB(WglHPBufferARB buffer, int bufferIndex) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gwglReleaseTexImageARB, buffer, bufferIndex, WglBool, g_False);
+	SYSTEM_BODY_2_RESULT(gwglReleaseTexImageARB, buffer, bufferIndex, WglBool, g_False);
 }
 
 WglBool System
 	::WglSetPbufferAttribARB(WglHPBufferARB buffer, const int* attribList) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gwglSetPbufferAttribARB, buffer, attribList, WglBool, g_False);
+	SYSTEM_BODY_2_RESULT(gwglSetPbufferAttribARB, buffer, attribList, WglBool, g_False);
 }
 
 void System
@@ -547,7 +547,7 @@ namespace System
 WglHGLRC System
 	::WglCreateContextAttribsARB(WglHDC hdc, WglHGLRC shareContext, const int* attribList) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gwglCreateContextAttribsARB, hdc, shareContext, attribList, WglHGLRC, nullptr);
+	SYSTEM_BODY_3_RESULT(gwglCreateContextAttribsARB, hdc, shareContext, attribList, WglHGLRC, nullptr);
 }
 
 void System
@@ -753,25 +753,25 @@ namespace System
 GLboolean System
 	::WglCreateDisplayColorTableEXT(GLushort id) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gwglCreateDisplayColorTableEXT, id, GLboolean, g_False);
+	SYSTEM_BODY_1_RESULT(gwglCreateDisplayColorTableEXT, id, GLboolean, g_False);
 }
 
 GLboolean System
 	::WglLoadDisplayColorTableEXT(const GLushort* table, GLuint length) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gwglLoadDisplayColorTableEXT, table, length, GLboolean, g_False);
+	SYSTEM_BODY_2_RESULT(gwglLoadDisplayColorTableEXT, table, length, GLboolean, g_False);
 }
 
 GLboolean System
 	::WglBindDisplayColorTableEXT(GLushort id) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gwglBindDisplayColorTableEXT, id, GLboolean, g_False);
+	SYSTEM_BODY_1_RESULT(gwglBindDisplayColorTableEXT, id, GLboolean, g_False);
 }
 
 void System
 	::WglDestroyDisplayColorTableEXT(GLushort id) noexcept
 {
-	SYSTEM_BODY_A1(gwglDestroyDisplayColorTableEXT, id);
+	SYSTEM_BODY_1(gwglDestroyDisplayColorTableEXT, id);
 }
 
 void System
@@ -822,7 +822,7 @@ namespace System
 const char* System
 	::WglGetExtensionsStringEXT() noexcept
 {
-	SYSTEM_BODY_A0_RESULT(gwglGetExtensionsStringEXT, const char*, nullptr);
+	SYSTEM_BODY_0_RESULT(gwglGetExtensionsStringEXT, const char*, nullptr);
 }
 
 void System
@@ -874,13 +874,13 @@ namespace System
 WglBool System
 	::WglMakeContextCurrentEXT(WglHDC drawDC, WglHDC readDC, WglHGLRC windowRC) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gwglMakeContextCurrentEXT, drawDC, readDC, windowRC, WglBool, g_False);
+	SYSTEM_BODY_3_RESULT(gwglMakeContextCurrentEXT, drawDC, readDC, windowRC, WglBool, g_False);
 }
 
 WglHDC System
 	::WglGetCurrentReadDCEXT() noexcept
 {
-	SYSTEM_BODY_A0_RESULT(gwglGetCurrentReadDCEXT, WglHDC, nullptr);
+	SYSTEM_BODY_0_RESULT(gwglGetCurrentReadDCEXT, WglHDC, nullptr);
 }
 
 void System
@@ -942,19 +942,19 @@ namespace System
 WglBool System
 	::WglGetPixelFormatAttribivEXT(WglHDC hdc, int pixelFormat, int layerPlane, WglUInt numAttributes, const int* attribute, int* value) noexcept
 {
-	SYSTEM_BODY_A6_RESULT(gwglGetPixelFormatAttribivEXT, hdc, pixelFormat, layerPlane, numAttributes, attribute, value, WglBool, g_False);
+	SYSTEM_BODY_6_RESULT(gwglGetPixelFormatAttribivEXT, hdc, pixelFormat, layerPlane, numAttributes, attribute, value, WglBool, g_False);
 }
 
 WglBool System
 	::WglGetPixelFormatAttribfvEXT(WglHDC hdc, int pixelFormat, int layerPlane, WglUInt numAttributes, const int* attribute, WglFloat* value) noexcept
 {
-	SYSTEM_BODY_A6_RESULT(gwglGetPixelFormatAttribfvEXT, hdc, pixelFormat, layerPlane, numAttributes, attribute, value, WglBool, g_False);
+	SYSTEM_BODY_6_RESULT(gwglGetPixelFormatAttribfvEXT, hdc, pixelFormat, layerPlane, numAttributes, attribute, value, WglBool, g_False);
 }
 
 WglBool System
 	::WglChoosePixelFormatEXT(WglHDC hdc, const int* attribIList, const WglFloat* attribFList, WglUInt maxFormats, int* format, WglUInt* numFormats) noexcept
 {
-	SYSTEM_BODY_A6_RESULT(gwglChoosePixelFormatEXT, hdc, attribIList, attribFList, maxFormats, format, numFormats, WglBool, g_False);
+	SYSTEM_BODY_6_RESULT(gwglChoosePixelFormatEXT, hdc, attribIList, attribFList, maxFormats, format, numFormats, WglBool, g_False);
 }
 
 void System
@@ -1026,31 +1026,31 @@ namespace System
 WglHPBufferEXT System
 	::WglCreatePbufferEXT(WglHDC hdc, int pixelFormat, int width, int height, const int* attribList) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gwglCreatePbufferEXT, hdc, pixelFormat, width, height, attribList, WglHPBufferEXT, nullptr);
+	SYSTEM_BODY_5_RESULT(gwglCreatePbufferEXT, hdc, pixelFormat, width, height, attribList, WglHPBufferEXT, nullptr);
 }
 
 WglHDC System
 	::WglGetPbufferDCEXT(WglHPBufferEXT buffer) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gwglGetPbufferDCEXT, buffer, WglHDC, nullptr);
+	SYSTEM_BODY_1_RESULT(gwglGetPbufferDCEXT, buffer, WglHDC, nullptr);
 }
 
 int System
 	::WglReleasePbufferDCEXT(WglHPBufferEXT buffer, WglHDC hdc) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gwglReleasePbufferDCEXT, buffer, hdc, int, -1);
+	SYSTEM_BODY_2_RESULT(gwglReleasePbufferDCEXT, buffer, hdc, int, -1);
 }
 
 WglBool System
 	::WglDestroyPbufferEXT(WglHPBufferEXT buffer) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gwglDestroyPbufferEXT, buffer, WglBool, g_False);
+	SYSTEM_BODY_1_RESULT(gwglDestroyPbufferEXT, buffer, WglBool, g_False);
 }
 
 WglBool System
 	::WglQueryPbufferEXT(WglHPBufferEXT buffer, int attribute, int* value) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gwglQueryPbufferEXT, buffer, attribute, value, WglBool, g_False);
+	SYSTEM_BODY_3_RESULT(gwglQueryPbufferEXT, buffer, attribute, value, WglBool, g_False);
 }
 
 void System
@@ -1150,7 +1150,7 @@ WglBool System
 int System
 	::WglGetSwapIntervalEXT() noexcept
 {
-	SYSTEM_BODY_A0_RESULT(gwglGetSwapIntervalEXT, int, -1);
+	SYSTEM_BODY_0_RESULT(gwglGetSwapIntervalEXT, int, -1);
 }
 
 void System

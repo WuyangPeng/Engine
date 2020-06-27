@@ -38,15 +38,18 @@ CORE_TOOLS_EXPORT_SHARED_PTR(UnitTestData);
 
 namespace CoreTools
 {
+	class OStreamShared;
+
 	class CORE_TOOLS_DEFAULT_DECLARE UnitTest : public UnitTestComposite
 	{
 	public:
 		using ClassType = UnitTest;
 		using ParentType = UnitTestComposite;
 		using ClassShareType = NonCopyClasses;
+		using OStreamShared = CoreTools::OStreamShared;
 
 	public:
-		explicit UnitTest(std::ostream* osPtr = &std::cout);
+		explicit UnitTest(const OStreamShared& osPtr);
 		virtual ~UnitTest();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
@@ -187,6 +190,9 @@ namespace CoreTools
 						 const std::string& errorMessage = "", bool failureThrow = false);
 		void AssertEqual(const wchar_t* lhs, const wchar_t* rhs, const FunctionDescribed& functionDescribed,
 						 const std::string& errorMessage = "", bool failureThrow = false);
+		
+		template <typename TestClass, typename Function>
+		void ExecuteLoopTesting(TestClass* test, Function function);
 
 	private:
 		void PrintFailReport(const FunctionDescribed& functionDescribed, const std::string& errorMessage);
@@ -208,7 +214,13 @@ namespace CoreTools
 
 	private:
 		using CpuTimerImplPtr = std::shared_ptr<CpuTimerData>;
-		using UnitTestDataPtr = std::shared_ptr<UnitTestData>;
+		using UnitTestDataPtr = std::shared_ptr<UnitTestData>;	
+
+	private:
+		static const std::string GetCorrectThrowExceptionDescribe();
+		static const std::string GetErrorThrowExceptionDescribe();
+		static const std::string GetCorrectNothrowExceptionDescribe();
+		static const std::string GetErrorNothrowExceptionDescribe();
 
 	private:
 		UnitTestDataPtr m_DataPtr;

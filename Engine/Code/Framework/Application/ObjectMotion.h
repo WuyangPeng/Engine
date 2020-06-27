@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:09)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:46)
 
 #ifndef FRAMEWORK_APPLICATION_OBJECT_MOTION_H
 #define FRAMEWORK_APPLICATION_OBJECT_MOTION_H
@@ -11,11 +11,9 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include "Rendering/SceneGraph/Spatial.h"
-#include "Rendering/SceneGraph/Camera.h"
 #include "Mathematics/Algebra/Matrix.h"
-
-#include <boost/shared_ptr.hpp>
+#include "Rendering/SceneGraph/Camera.h"
+#include "Rendering/SceneGraph/Spatial.h"
 
 FRAMEWORK_EXPORT_SHARED_PTR(ObjectMotionImpl);
 
@@ -25,30 +23,29 @@ namespace Framework
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(ObjectMotion);
-		using SpatialSmartPointer = Rendering::SpatialSmartPointer;
-		using ConstSpatialSmartPointer = Rendering::ConstSpatialSmartPointer;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
 		using Matrix = Mathematics::Matrixf;
 		using AVector = Mathematics::AVectorf;
 		using Transform = Rendering::Transform;
-		
+		using SpatialSmartPointer = Rendering::SpatialSmartPointer;
+		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
+
 	public:
 		explicit ObjectMotion(const SpatialSmartPointer& motionObject);
-	
+
 		CLASS_INVARIANT_DECLARE;
 
-		bool MoveObject (float rotationSpeed);
+		bool MoveObject(float rotationSpeed);
 		void RotateTrackBall(const ConstCameraSmartPointer& camera);
 
-        void SetDoRoll(int value);
-        void SetDoYaw(int value);
-        void SetDoPitch(int value);
-		void SetTrackBallDow(bool value);
-		bool GetTrackBallDow() const;
-   
-        void SetBeginTrack(float xTrack,float yTrack);
-        void SetEndTrack(float xTrack,float yTrack);
-		void SetSaveRotate();	     
+		void SetDoRoll(int value) noexcept;
+		void SetDoYaw(int value) noexcept;
+		void SetDoPitch(int value) noexcept;
+		void SetTrackBallDow(bool value) noexcept;
+		bool GetTrackBallDow() const noexcept;
+
+		void SetBeginTrack(float xTrack, float yTrack) noexcept;
+		void SetEndTrack(float xTrack, float yTrack) noexcept;
+		void SetSaveRotate();
 
 		const Transform GetMotionObjectLocalTransform() const;
 
@@ -61,4 +58,3 @@ namespace Framework
 
 
 
-	

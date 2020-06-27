@@ -18,11 +18,44 @@ using std::string;
 
 SINGLETON_MUTEX_DEFINE(CoreTools, ObjectManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_CoreToolsMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_ObjectManagerMutex }
+#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_ObjectManagerMutex } 
 
-SINGLETON_INITIALIZE_DEFINE(CoreTools, ObjectManager)
+SINGLETON_GET_PTR_DEFINE(CoreTools, ObjectManager);  
+
+void CoreTools::ObjectManager
+	::Create()
+{
+	MUTEX_ENTER_GLOBAL; 
+	try
+	{
+		DoCreate();
+	}
+	catch (...)
+	{
+		Destroy();
+		throw;
+	}
+} 
+void CoreTools::ObjectManager
+	::DoCreate()
+{
+	MUTEX_ENTER_GLOBAL; 
+
+	if ((sm_ObjectManagerMutex) == nullptr)
+		sm_ObjectManagerMutex = new CoreTools::Mutex;
+	if (sm_ObjectManager == nullptr)
+		sm_ObjectManager = new ObjectManager;
+}  
+void CoreTools::ObjectManager
+	::Destroy() noexcept
+{
+	delete sm_ObjectManager;
+	sm_ObjectManager = nullptr;
+	delete sm_ObjectManagerMutex;
+	sm_ObjectManagerMutex = nullptr; 
+}
 
 SINGLETON_DEFINE(CoreTools, ObjectManager)
 

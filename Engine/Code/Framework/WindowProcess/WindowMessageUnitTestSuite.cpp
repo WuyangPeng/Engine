@@ -1,175 +1,110 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 10:14)
+// 引擎版本：0.3.0.1 (2020/05/21 10:54)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMessageUnitTestSuite.h"
 #include "Detail/WindowMessageUnitTestSuiteImpl.h"
-#include "WindowMessageUnitTestSuiteOsPtr.h"
+#include "Detail/WindowMessageUnitTestSuiteStream.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/UnitTestSuite/Suite.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "System/Window/Flags/WindowsKeyCodesFlags.h"
 
-#include <iostream>
-
-using std::cout;
 using std::string;
-using std::ostream;
+using std::make_shared;
 
 Framework::WindowMessageUnitTestSuite
-	::WindowMessageUnitTestSuite()
-	:m_OsPtrTypePtr(new OsPtrType),
-	 m_Impl()
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-// private
-void Framework::WindowMessageUnitTestSuite
-	::GenerateSuite()
-{
-	m_Impl.reset(new ImplType(GetSuiteName(),m_OsPtrTypePtr->GetOsPtr()));
-}
-
-Framework::WindowMessageUnitTestSuite
-	::~WindowMessageUnitTestSuite()
+	::WindowMessageUnitTestSuite(int64_t delta,const string& suiteName)
+	:ParentType{ delta }, m_Stream{ make_shared<StreamType>(true) },  m_Impl{ make_shared<ImplType>(suiteName, m_Stream->GetStreamShared()) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Framework::WindowMessageUnitTestSuite
-    ::IsValid() const noexcept
+	::IsValid() const noexcept
 {
-	if(ParentType::IsValid() && 
-	   m_OsPtrTypePtr != nullptr)
-	    return true;
+	if (ParentType::IsValid() && m_Stream != nullptr && m_Impl != nullptr)
+		return true;
 	else
 		return false;
 }
-
 #endif // OPEN_CLASS_INVARIANT
 
 System::WindowLResult Framework::WindowMessageUnitTestSuite
-    ::CreateMessage( HWnd hwnd, WParam wParam, LParam lParam )
+	::CreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;	
-	ASSERTION_1(m_Impl != nullptr,"子类未调用GenerateSuite进行初始化");
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	if(GetHwnd() == nullptr)	
-		return AddSuiteOnCreateMessage(hwnd, wParam, lParam);	
-	else	
-		return ParentType::CreateMessage(hwnd,wParam,lParam);	
+	if (GetHwnd() == nullptr)
+		return AddSuiteOnCreateMessage(hwnd, wParam, lParam);
+	else
+		return ParentType::CreateMessage(hwnd, wParam, lParam);
 }
 
 System::WindowLResult Framework::WindowMessageUnitTestSuite
-	::KeyDownMessage( HWnd hwnd,WParam wParam,LParam lParam )
+	::KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
-	ASSERTION_1(m_Impl != nullptr,"子类未调用GenerateSuite进行初始化");
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	switch (static_cast<System::WindowsKeyCodes>(wParam))
-	{
-	case System::WindowsKeyCodes::F1:
-		{
-			ResetTestData();
-			break;
-		}
-		
-	case System::WindowsKeyCodes::F5:
-		{
-			RunUnitTest();
-			break;
-		}
+	auto windowsKeyCodes = boost::numeric_cast<int>(wParam);
 
-	default:
-		break;
-	}
+	m_Impl->KeyDownMessage(System::UnderlyingCastEnum<System::WindowsKeyCodes>(windowsKeyCodes));
 
-	return ParentType::KeyDownMessage(hwnd,wParam,lParam);  
+	return ParentType::KeyDownMessage(hwnd, wParam, lParam);
 }
 
 void Framework::WindowMessageUnitTestSuite
-	::Display( HWND hwnd,int64_t timeDelta )
+	::Display(HWnd hwnd, int64_t timeDelta)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;	
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return ParentType::Display(hwnd,timeDelta);  
+	return ParentType::Display(hwnd, timeDelta);
+} 
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowMessageUnitTestSuite, IsPrintRun, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowMessageUnitTestSuite, GetPassedNumber, int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, WindowMessageUnitTestSuite, AddSuite, Suite, void)
+
+// protected
+CoreTools::OStreamShared Framework::WindowMessageUnitTestSuite
+	::GetStreamShared() noexcept
+{
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	return m_Stream->GetStreamShared();
 }
 
+// protected
 void Framework::WindowMessageUnitTestSuite
-	::DoAddSuite( const Suite& suite )
+	::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestPtr& unitTest)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
-	ASSERTION_1(m_Impl != nullptr,"子类未调用GenerateSuite进行初始化");
-
-	return m_Impl->AddSuite(suite);
-}
-
-ostream* Framework::WindowMessageUnitTestSuite
-	::GetOStream()
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	return m_OsPtrTypePtr->GetOsPtr();
-}
-
-int Framework::WindowMessageUnitTestSuite
-	::GetPassedNumber() const
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-	ASSERTION_1(m_Impl != nullptr,"子类未调用GenerateSuite进行初始化");
-
-	return m_Impl->GetPassedNumber();
-}
-
-// private
-System::WindowLResult Framework::WindowMessageUnitTestSuite
-	::AddSuiteOnCreateMessage( HWnd hwnd, WParam wParam, LParam lParam )
-{
-	LResult result = ParentType::CreateMessage(hwnd,wParam,lParam);
-
-	AddSuite();
-
-	m_Impl->RunUnitTest();
-	m_Impl->PrintReport();
-
-	return result;
-}
-
-// private
-void Framework::WindowMessageUnitTestSuite
-	::ResetTestData()
-{
-	m_Impl->ResetTestData();
-	*GetOStream() << "测试数据已清零。\n";
-}
-
-// private
-void Framework::WindowMessageUnitTestSuite
-	::RunUnitTest()
-{
-	m_Impl->RunUnitTest();
-	m_Impl->PrintReport();
-}
-
-void Framework::WindowMessageUnitTestSuite
-	::AddTest(const std::string& suiteName, Suite& suite, 
-	          const std::string& testName, const UnitTestPtr& unitTest)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	m_Impl->AddTest(suiteName, suite, testName, unitTest);
 }
 
-bool Framework::WindowMessageUnitTestSuite
-	::IsPrintRun() const
+// private
+System::WindowLResult Framework::WindowMessageUnitTestSuite
+	::AddSuiteOnCreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+	const auto result = ParentType::CreateMessage(hwnd, wParam, lParam);
 
-	return true;
+	InitSuite();
+
+	m_Impl->RunUnitTestOnMessage(); 
+
+	return result;
 }
 
- 
+// protected
+CoreTools::Suite Framework::WindowMessageUnitTestSuite
+	::GenerateSuite(const string& name)
+{
+	return Suite{ name, GetStreamShared(), IsPrintRun() };
+}
+

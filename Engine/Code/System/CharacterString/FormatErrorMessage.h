@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 13:22)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/09 15:56)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
@@ -10,9 +10,9 @@
 #include "System/SystemDll.h"
 
 #include "Fwd/CharacterStringFlagsFwd.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Window/Fwd/WindowFlagsFwd.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/SystemOutput/Fwd/SystemOutputDataFwd.h"
 
@@ -25,7 +25,7 @@ namespace System
 	bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowHLocal& errorMessage, WindowError lastError) noexcept;
 	WindowDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowError lastError, TChar* buffer, WindowDWord size) noexcept;
 	bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowHLocal& errorMessage, DynamicLinkModule module, WindowError lastError) noexcept;
-	WindowDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowDWord size) noexcept;
+	WindowDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(const DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowDWord size) noexcept;
 	WindowDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowDWord size, WindowPtrDWord* arguments) noexcept;
 	WindowDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowDWord size, va_list* arguments) noexcept;
 	WindowDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowHLocal& resultMessage, WindowPtrDWord* arguments) noexcept;

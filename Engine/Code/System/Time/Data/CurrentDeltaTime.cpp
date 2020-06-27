@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 16:30)
+// 引擎版本：0.2.0.0 (2020/05/10 13:20)
 
 #include "System/SystemExport.h"
 
@@ -10,7 +10,7 @@
 
 System::CurrentDeltaTime
 	::CurrentDeltaTime() noexcept
-	:m_CurrentTime{}
+	:m_CurrentTime{ }
 {
 #ifdef SYSTEM_PLATFORM_MACOS
 	::gettimeofday(&m_CurrentTime, nullptr);

@@ -12,7 +12,7 @@
 
 #include "LogManagerFwd.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Base/SingletonDetail.h"
+ 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 

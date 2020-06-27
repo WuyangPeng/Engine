@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:36)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 14:45)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_MIDDLE_LAYER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_MIDDLE_LAYER_IMPL_H
@@ -19,16 +19,17 @@ namespace Framework
 		using ClassType = ModelMiddleLayerImpl;
 
 	public:
-		ModelMiddleLayerImpl(); 
-	
+		explicit ModelMiddleLayerImpl(int maxTimer);
+
 		CLASS_INVARIANT_DECLARE;
 
-		void ResetTime();
-		std::string GetFrameRateMessage() const;
-		void MeasureTime ();
-		void UpdateFrameCount ();
 		double GetFrameRate() const;
-		
+		std::string GetFrameRateMessage() const;
+
+		void ResetTime();
+		void MeasureTime();
+		void UpdateFrameCount();
+
 	private:
 		PerformanceMeasurements m_PerformanceMeasurements;
 	};

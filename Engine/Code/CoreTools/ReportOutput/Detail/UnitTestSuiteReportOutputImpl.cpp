@@ -21,7 +21,7 @@ using std::ostream;
 using std::make_shared;
 
 CoreTools::UnitTestSuiteReportOutputImpl
-	::UnitTestSuiteReportOutputImpl(const string& timeDescribe, int borderLineLength, ostream* osPtr)
+	::UnitTestSuiteReportOutputImpl(const string& timeDescribe, int borderLineLength, const OStreamShared& osPtr)
 	:ParentType{ timeDescribe,borderLineLength,osPtr }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -58,14 +58,9 @@ void CoreTools::UnitTestSuiteReportOutputImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	std::shared_ptr<LogConsoleTextColorsManager> managerPtr;
+	auto manager = GetLogConsoleTextColorsManager(failedNumber, errorNumber);
 
-	if (0 < errorNumber)
-		managerPtr = make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Fatal);
-	else if (0 < failedNumber)
-		managerPtr = make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Error);
-
-	*GetStream() << setw(characterWidth) << right << "通过："
+	GetStream() << setw(characterWidth) << right << "通过："
 				 << setw(characterWidth) << left << passedNumber
 				 << setw(characterWidth) << right << "失败: "
 				 << setw(characterWidth) << left << failedNumber
@@ -73,4 +68,14 @@ void CoreTools::UnitTestSuiteReportOutputImpl
 				 << setw(characterWidth) << left << errorNumber;
 }
 
+CoreTools::UnitTestSuiteReportOutputImpl::LogConsoleTextColorsManagerPtr CoreTools::UnitTestSuiteReportOutputImpl
+	::GetLogConsoleTextColorsManager(int failedNumber, int errorNumber)
+{
+	if (0 < errorNumber)
+		return make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Fatal);
+	else if (0 < failedNumber)
+		return make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Error);
+	else
+		return nullptr;
+}
 

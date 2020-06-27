@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 15:22)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 17:17)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_LINE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_LINE3_H 
@@ -11,12 +11,10 @@
 
 #include "Mathematics/Distance/DistanceBase.h"
 #include "Mathematics/Objects3D/Line3.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector3DTools;
-
 	template <typename Real>
 	class DistanceLine3Line3 : public DistanceBase<Real, Vector3D<Real> >
 	{
@@ -26,8 +24,7 @@ namespace Mathematics
 		using ParentType = DistanceBase<Real, Vector3D>;
 		using Line3 = Line3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
+		using DistanceResult = typename ParentType::DistanceResult; 
 		using Math = Math<Real>;
 
 	public:
@@ -37,17 +34,17 @@ namespace Mathematics
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		const Line3 GetLhsLine() const;
-		const Line3 GetRhsLine() const;		
+		const Line3 GetRhsLine() const;
 
 		// æ≤Ã¨æ‡¿Î≤È—Ø°£
 		virtual const DistanceResult GetSquared() const override;
 
 		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£	
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		Line3 m_LhsLine;
-		Line3 m_RhsLine;	
+		Line3 m_RhsLine;
 	};
 
 	using DistanceLine3Line3f = DistanceLine3Line3<float>;

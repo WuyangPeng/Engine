@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:15)
+// 引擎版本：0.3.0.1 (2020/05/21 13:50)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,46 +13,39 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
-Framework::FontInformationImpl
-	::FontInformationImpl()
+using std::make_shared;
+using namespace std::literals;
+
+CLASS_INVARIANT_STUB_DEFINE(Framework, FontInformationImpl)
+
+Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl
+	::CreateWindowFontInformation(HWnd hwnd)
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+	return make_shared<WindowFontInformation>(hwnd);
 }
 
-Framework::FontInformationImpl
-	::~FontInformationImpl()
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
-
-CLASS_INVARIANT_STUB_DEFINE(Framework,FontInformationImpl)
-
-Framework::FontInformationImpl::FontInformationImplPtr Framework::FontInformationImpl
-	::CreateWindowFontInformation( HWnd hwnd )
-{
-	return FontInformationImplPtr(new WindowFontInformation(hwnd));
-}
-
-Framework::FontInformationImpl::FontInformationImplPtr Framework::FontInformationImpl
+Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl
 	::CreateFontInformation(PlatformTypes type)
 {
-	switch(type)
-	{		
-	case PlatformTypesGlut:
-		{
-			return FontInformationImplPtr(new GlutFontInformation);
-		}
-		
-	case PlatformTypesWindow:
-		{
-			HWnd hwnd = WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
-			return CreateWindowFontInformation(hwnd);
-		}
+	switch (type)
+	{
+	case PlatformTypes::Glut:
+	{
+		return make_shared<GlutFontInformation>();
+	}
 
-	case PlatformTypesAndroid:
+	case PlatformTypes::Window:
+	{
+		auto hwnd = WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
+		return CreateWindowFontInformation(hwnd);
+	}
+
+	case PlatformTypes::Android:
+	case PlatformTypes::Linux:
+	case PlatformTypes::Macintosh:
 	default:
-		{
-			THROW_EXCEPTION(SYSTEM_TEXT("无法获取该平台的字体信息！"));
-		}
-	}	
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("无法获取该平台的字体信息！"s));
+	}
+	}
 }

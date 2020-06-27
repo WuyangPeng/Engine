@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 10:42)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 11:53)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_NAME_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_NAME_H
@@ -12,9 +12,6 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/shared_ptr.hpp>
-#include <string>
-
 FRAMEWORK_EXPORT_SHARED_PTR(WindowNameImpl);
 
 namespace Framework
@@ -22,17 +19,18 @@ namespace Framework
 	class FRAMEWORK_DEFAULT_DECLARE WindowName
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(WindowName);	
+		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(WindowName);
+		using String = System::String;
 
 	public:
-		explicit WindowName(const System::String& className, const System::String& menuName = System::String());			
+		explicit WindowName(const String& className, const String& menuName = String{ });
 
 		CLASS_INVARIANT_DECLARE;
 
-		const System::String& GetWindowClassName() const;
-		const System::String& GetWindowMenuName() const;	
+		const String GetWindowClassName() const;
+		const String GetWindowMenuName() const;
 
-	private:	
+	private:
 		IMPL_TYPE_DECLARE(WindowName);
 	};
 }

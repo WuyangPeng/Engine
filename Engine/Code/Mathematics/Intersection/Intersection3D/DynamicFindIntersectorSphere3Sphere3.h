@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 09:36)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:44)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_H
@@ -25,11 +25,11 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Circle3 = Circle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>; 
+		using Math = Math<Real>;
 
 	public:
-		DynamicFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, Real tmax, 
-											 const Vector3D& lhsVelocity,const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+		DynamicFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, Real tmax,
+											 const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
 
 		// Object access.
 		const Sphere3 GetSphere0() const;

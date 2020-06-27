@@ -1,21 +1,21 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 10:03)
+// 引擎版本：0.0.2.5 (2020/03/16 12:29)
 
 #include "Database/DatabaseExport.h"
 
 #include "ResultFactory.h"
 #include "ResultImpl.h"
 #include "NullResult.h"
-#include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorDocResult.h"
-#include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorResult.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
+#include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorResult.h"
+#include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorDocResult.h"
 
 using std::make_shared;
- 
+
 Database::ResultFactory
 	::ResultFactory()
 {
@@ -29,13 +29,13 @@ Database::ResultFactory::ImplTypePtr Database::ResultFactory
 {
 	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 	switch (wrappersStrategy)
-	{	
-#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
+	{
+	#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
 
 	case Database::WrappersStrategy::MysqlConnector:
 		THROW_EXCEPTION(SYSTEM_TEXT("无法在无参数的情况下创建MysqlConnectorResult。"));
 
-#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
+	#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 	case Database::WrappersStrategy::Null:
 	case Database::WrappersStrategy::Mysql:
@@ -49,7 +49,7 @@ Database::ResultFactory::ImplTypePtr Database::ResultFactory
 
 Database::ResultFactory::ImplTypePtr Database::ResultFactory
 	::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultPtr& mysqlxDocResult)
-{	
+{
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
 
 	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
@@ -65,7 +65,7 @@ Database::ResultFactory::ImplTypePtr Database::ResultFactory
 
 Database::ResultFactory::ImplTypePtr Database::ResultFactory
 	::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult)
-{	
+{
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
 
 	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();

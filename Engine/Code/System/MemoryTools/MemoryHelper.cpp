@@ -2,18 +2,18 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 15:24)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/10 0:11)
 
 #include "System/SystemExport.h"
 
 #include "MemoryHelper.h" 
 #include "Using/VirtualToolsUsing.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Window/WindowSystem.h"
 #include "System/Window/Using/WindowUsing.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
 #include <cstdlib>
 
@@ -126,7 +126,7 @@ bool System
 	::QueryMemoryResourceNotificationState(WindowHandle resourceNotificationHandle, bool* resourceState) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32	
-	WindowBool resourceStateResult{};
+	WindowBool resourceStateResult{ };
 	if (::QueryMemoryResourceNotification(resourceNotificationHandle, &resourceStateResult) != g_False)
 	{
 		BoolConversion(resourceStateResult, resourceState);
@@ -175,17 +175,17 @@ void System
 void* System
 	::MallocMemory(size_t size) noexcept
 {
-	#include STSTEM_WARNING_PUSH
-	#include SYSTEM_WARNING_DISABLE(26408)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26408)
 	return ::malloc(size);
-	#include STSTEM_WARNING_POP
+#include STSTEM_WARNING_POP
 }
 
 void System
 	::FreeMemory(void* memory) noexcept
 {
-	#include STSTEM_WARNING_PUSH
-	#include SYSTEM_WARNING_DISABLE(26408)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26408)
 	::free(memory);
-	#include STSTEM_WARNING_POP
+#include STSTEM_WARNING_POP
 }

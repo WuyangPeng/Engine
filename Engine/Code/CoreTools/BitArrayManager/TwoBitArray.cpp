@@ -9,7 +9,7 @@
 #include "TwoBitarray.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 CoreTools::TwoBitArray
 	::TwoBitArray(int size)
@@ -115,7 +115,10 @@ uint32_t CoreTools::TwoBitArray
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return (boost::numeric_cast<uint32_t>(m_Array.IsBitSet(2 * position)) | (boost::numeric_cast<uint32_t>(m_Array.IsBitSet(2 * position + 1)) << 1));
+	auto lhs = m_Array.IsBitSet(2 * position);
+	auto rhs = m_Array.IsBitSet(2 * position + 1);
+
+	return (lhs != 0 ? 1 : 0) | ((rhs != 0 ? 1 : 0) << 1);
 }
 
 bool CoreTools::TwoBitArray

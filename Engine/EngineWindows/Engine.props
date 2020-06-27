@@ -13,8 +13,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
-    <Link />
-  </ItemDefinitionGroup>
-  <ItemGroup />
+  </ItemDefinitionGroup> 
 </Project>

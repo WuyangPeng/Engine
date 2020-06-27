@@ -1,25 +1,25 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/02 10:24)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 16:32)
 
 #include "Network/NetworkExport.h" 
 
 #include "NetworkSockConnector.h"
+#include "System/Helper/UnusedMacro.h"
+#include "System/Network/SocketPrototypes.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/MessageEvent/EventInterface.h"
+#include "CoreTools/MessageEvent/CallbackParameters.h" 
 #include "Network/Interface/SockStream.h"
 #include "Network/Interface/SockAddress.h" 
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/MessageEvent/CallbackParameters.h" 
-#include "CoreTools/MessageEvent/EventInterface.h"
-#include "System/Network/SocketPrototypes.h"
-#include "System/Helper/UnusedMacro.h"
 
 using std::make_shared;
 
 Network::NetworkSockConnector
-	::NetworkSockConnector() 
+	::NetworkSockConnector()
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -29,7 +29,7 @@ Network::NetworkSockConnector
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
- 
+
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkSockConnector)
 
 bool Network::NetworkSockConnector
@@ -44,7 +44,7 @@ bool Network::NetworkSockConnector
 }
 
 void Network::NetworkSockConnector
-	::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream,const SockAddressSharedPtr& sockAddress)
+	::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

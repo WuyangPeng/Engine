@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 09:38)
+// 引擎版本：0.0.2.5 (2020/03/23 09:49)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_FILTERED_H
 #define MATHEMATICS_QUERY_QUERY3_FILTERED_H 
@@ -20,9 +20,7 @@ namespace Mathematics
 	public:
 		using ClassType = Query3Filtered<Real>;
 		using ParentType = Query3<Real>;
-		using typename ParentType::Vector3D;
-		using ParentType::GetNumVertices;
-		using ParentType::GetVertice;
+		using Vector3D = typename ParentType::Vector3D;
 
 	public:
 		// 基类处理浮点查询。每个查询涉及行列式和零进行比较。
@@ -33,8 +31,8 @@ namespace Mathematics
 		// uncertainty为1会导致类的行为就好像它是Query3Rational。
 		Query3Filtered(const std::vector<Vector3D>& vertices, Real uncertainty);
 		virtual ~Query3Filtered();
- 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; 
+
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		virtual QueryType GetType() const override;
 
@@ -42,12 +40,12 @@ namespace Mathematics
 
 		virtual PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
 		virtual PlaneQueryType ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const override;
-		
+
 		virtual CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
 		virtual CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const override;
 
 	private:
-		using Query3Rational =  Query3Rational<Real>;
+		using Query3Rational = Query3Rational<Real>;
 
 	private:
 		Query3Rational m_RationalQuery;
@@ -61,4 +59,4 @@ namespace Mathematics
 #endif // MATHEMATICS_QUERY_QUERY3_FILTERED_H
 
 
- 
+

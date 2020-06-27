@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 17:00)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 19:01)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_RESULT_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_RESULT_DETAIL_H
@@ -12,7 +12,7 @@
 
 template <typename Real, typename Vector>
 Mathematics::DistanceClosestPointsResult<Real, Vector>
-	::DistanceClosestPointsResult(Real distance, Real contactTime,const Vector& lhsClosestPoint, const Vector& rhsClosestPoint)
+	::DistanceClosestPointsResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint)
 	:ParentType{ distance, contactTime }, m_LhsClosestPoint{ lhsClosestPoint }, m_RhsClosestPoint{ rhsClosestPoint }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -30,7 +30,7 @@ template <typename Real, typename Vector>
 bool Mathematics::DistanceClosestPointsResult<Real, Vector>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
 	else
 		return false;
@@ -89,4 +89,3 @@ typename Mathematics::DistanceClosestPointsResult<Real, Vector>::ImplTypePtr Mat
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_RESULT_DETAIL_H
- 

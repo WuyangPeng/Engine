@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:11)
+// 引擎版本：0.0.2.5 (2020/03/23 12:29)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ITEM_H
 #define MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ITEM_H
@@ -12,16 +12,16 @@
 #include "Mathematics/Algebra/Vector3D.h"
 
 namespace Mathematics
-{ 
+{
 	template <typename Real>
 	class GreatArcFit3Item
 	{
-	public:		
+	public:
 		using ClassType = GreatArcFit3Item<Real>;
-		using Vector3D = Vector3D<Real>; 
+		using Vector3D = Vector3D<Real>;
 
 	public:
-		explicit GreatArcFit3Item(const Vector3D& uVector, const Vector3D& vVector,const Vector3D& point);
+		explicit GreatArcFit3Item(const Vector3D& uVector, const Vector3D& vVector, const Vector3D& point);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -32,8 +32,8 @@ namespace Mathematics
 	private:
 		Real m_UDot;
 		Real m_VDot;
-		Real m_Angle;       
-    };
+		Real m_Angle;
+	};
 
 	// 支持排序。
 	template <typename Real>

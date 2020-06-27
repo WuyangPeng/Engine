@@ -23,7 +23,7 @@ SINGLETON_GET_PTR_DEFINE(CoreTools, UniqueIDManager);
 
 CORE_TOOLS_MUTEX_EXTERN(CoreTools);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_CoreToolsMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
 
 void CoreTools::UniqueIDManager
 	::Create(int count)
@@ -40,6 +40,13 @@ void CoreTools::UniqueIDManager
 
 		throw;
 	}
+}
+
+void CoreTools::UniqueIDManager::Create()
+{
+	MUTEX_ENTER_GLOBAL;
+
+	 
 }
 
 void CoreTools::UniqueIDManager
@@ -73,14 +80,6 @@ void CoreTools::UniqueIDManager
 CoreTools::UniqueIDManager
 	::UniqueIDManager(int count)
 	:m_Impl{ make_shared<ImplType>(count) }
-{
-	MUTEX_ENTER_UNIQUEID_MANAGER_MEMBER;
-
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-CoreTools::UniqueIDManager
-	::~UniqueIDManager()
 {
 	MUTEX_ENTER_UNIQUEID_MANAGER_MEMBER;
 

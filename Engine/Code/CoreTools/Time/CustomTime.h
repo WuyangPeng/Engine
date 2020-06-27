@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.1 (2020/01/21 16:55)
+// 引擎版本：0.0.3.0 (2020/03/26 11:31)
 
 #ifndef CORE_TOOLS_TIME_CUSTOM_TIME_H 
 #define CORE_TOOLS_TIME_CUSTOM_TIME_H
@@ -22,7 +22,7 @@ namespace CoreTools
 		using String = System::String;
 
 	public:
-		CustomTime();
+		CustomTime() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -9,7 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/SceneGraph/Spatial.h"
+#include "Rendering/SceneGraph/Visual.h"
 
 #include <boost/noncopyable.hpp>
 #include <vector>
@@ -22,6 +22,8 @@ namespace Rendering
     {
     public:
         using ClassType = VisibleSetImpl;
+		using VisualContainer = std::vector<VisualSmartPointer>;
+		using VisualContainerIter = VisualContainer::iterator;
         
     public:
         VisibleSetImpl ();
@@ -31,17 +33,19 @@ namespace Rendering
 
         // 获得可见的元素集。
         int GetNumVisible () const;
-		const ConstSpatialSmartPointer& GetVisible(int index) const;
+		const ConstVisualSmartPointer GetVisible(int index) const;
 
         // 插入一个可见的对象。
-		void Insert(const ConstSpatialSmartPointer& visible);
+		void Insert(const VisualSmartPointer& visible);
 
         // 设置集合元素的个数为零。
         void Clear ();
 
-    private:
-        int m_NumVisible;
-		std::vector<ConstSpatialSmartPointer> m_Visible;
+		VisualContainerIter begin();
+		VisualContainerIter end();
+
+    private: 
+		std::vector<VisualSmartPointer> m_Visible;
     };
 }
 

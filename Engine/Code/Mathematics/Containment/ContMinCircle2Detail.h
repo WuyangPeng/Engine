@@ -120,14 +120,14 @@ bool Mathematics::MinCircle2<Real>
     // so the next line of code is not in error.
     distDiff = test - circle.GetRadius();
 
-    return distDiff <= Real{};
+    return distDiff <= Math<Real>::sm_Zero;
 }
 
 template <typename Real>
 Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 	::ExactCircle1(const Vector2D<Real>& P)
 {
-	Circle2<Real> minimal{ P, Real{} };
+	Circle2<Real> minimal{ P, Math<Real>::sm_Zero };
     return minimal;
 }
 
@@ -161,7 +161,7 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 	Real radius;
     if (Math<Real>::FAbs(det) > mEpsilon)
     {
-		auto invDet = ((Real)1)/det;
+		auto invDet = (static_cast<Real>(1))/det;
         Vector2D<Real> Q;
 		Q.SetXCoordinate((A[1][1] * B[0] - A[0][1] * B[1])*invDet);
 		Q.SetYCoordinate((A[0][0] * B[1] - A[1][0] * B[0])*invDet);

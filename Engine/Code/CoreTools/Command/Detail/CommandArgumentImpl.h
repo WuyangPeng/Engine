@@ -10,6 +10,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include <string>
+#include <memory>
 
 namespace CoreTools
 {

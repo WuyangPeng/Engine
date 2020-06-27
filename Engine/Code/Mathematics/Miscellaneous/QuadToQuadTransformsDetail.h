@@ -28,17 +28,17 @@ namespace Mathematics
 
 		// Compute homogeneous transform of quadrilateral
 		// {(0,0),(1,0),(a,b),(0,1)} to square {(0,0),(1,0),(1,1),(0,1)}.
-		mG[0] = (corner.GetYCoordinate() - (Real)1) / corner.GetXCoordinate();
-		mG[1] = (corner.GetXCoordinate() - (Real)1) / corner.GetYCoordinate();
-		mD[0] = (Real)1 + mG.GetXCoordinate();
-		mD[1] = (Real)1 + mG.GetYCoordinate();
+		mG[0] = (corner.GetYCoordinate() - static_cast<Real>(1)) / corner.GetXCoordinate();
+		mG[1] = (corner.GetXCoordinate() - static_cast<Real>(1)) / corner.GetYCoordinate();
+		mD[0] = static_cast<Real>(1) + mG.GetXCoordinate();
+		mD[1] = static_cast<Real>(1) + mG.GetYCoordinate();
 	}
 
 	template <typename Real>
 	Vector2D<Real> HmQuadToSqr<Real>::Transform(const Vector2D<Real>& P)
 	{
 		Vector2D<Real> prod = mM * (P - mT);
-		Real invDenom = ((Real)1) / ((Real)1 + Vector2DTools<Real>::DotProduct(mG, prod));
+		Real invDenom = (static_cast<Real>(1)) / (static_cast<Real>(1) + Vector2DTools<Real>::DotProduct(mG, prod));
 		Vector2D<Real> result = invDenom * prod;
 		result[0] *= mD[0];
 		result[1] *= mD[1];
@@ -62,9 +62,9 @@ namespace Mathematics
 
 		// Compute homogeneous transform of square {(0,0),(1,0),(1,1),(0,1)} to
 		// quadrilateral {(0,0),(1,0),(a,b),(0,1)}.
-		Real invDenom = ((Real)1) / (corner.GetXCoordinate() + corner.GetYCoordinate() - (Real)1);
-		mG[0] = invDenom * ((Real)1 - corner.GetYCoordinate());
-		mG[1] = invDenom * ((Real)1 - corner.GetXCoordinate());
+		Real invDenom = (static_cast<Real>(1)) / (corner.GetXCoordinate() + corner.GetYCoordinate() - static_cast<Real>(1));
+		mG[0] = invDenom * (static_cast<Real>(1) - corner.GetYCoordinate());
+		mG[1] = invDenom * (static_cast<Real>(1) - corner.GetXCoordinate());
 		mD[0] = invDenom * corner.GetXCoordinate();
 		mD[1] = invDenom * corner.GetYCoordinate();
 	}
@@ -72,7 +72,7 @@ namespace Mathematics
 	template <typename Real>
 	Vector2D<Real> HmSqrToQuad<Real>::Transform(const Vector2D<Real>& P)
 	{
-		Real invDenom = ((Real)1) / ((Real)1 + Vector2DTools<Real>::DotProduct(mG, P));
+		Real invDenom = (static_cast<Real>(1)) / (static_cast<Real>(1) + Vector2DTools<Real>::DotProduct(mG, P));
 		Vector2D<Real> result(mD.GetXCoordinate()*P.GetXCoordinate(), mD.GetYCoordinate()*P.GetYCoordinate());
 		Vector2D<Real> prod = mM * result;
 		result[0] = invDenom * prod.GetXCoordinate() + mT.GetXCoordinate();
@@ -107,7 +107,7 @@ namespace Mathematics
 		if (Math<Real>::FAbs(k2) >= Math<Real>::sm_ZeroTolerance)
 		{
 			// The s-equation is quadratic.
-			Real inv = (Real{ 0.5 }) / k2;
+			Real inv = (static_cast<Real>(0.5)) / k2;
 			Real discr = k1 * k1 - ((Real)4)*k0*k2;
 			Real root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
 
@@ -115,7 +115,7 @@ namespace Mathematics
 			result0[0] = (-k1 - root)*inv;
 			result0[1] = AB / (mBC + mBD * result0[0]);
 			Real deviation0 = Deviation(result0);
-			if (deviation0 == Real{})
+			if (deviation0 == Math<Real>::sm_Zero)
 			{
 				return result0;
 			}
@@ -124,7 +124,7 @@ namespace Mathematics
 			result1[0] = (-k1 + root)*inv;
 			result1[1] = AB / (mBC + mBD * result1.GetXCoordinate());
 			Real deviation1 = Deviation(result1);
-			if (deviation1 == Real{})
+			if (deviation1 == Math<Real>::sm_Zero)
 			{
 				return result1;
 			}
@@ -166,26 +166,26 @@ namespace Mathematics
 	Real BiQuadToSqr<Real>::Deviation(const Vector2D<Real>& SPoint)
 	{
 		// Deviation is the squared distance of the point from the unit square.
-		Real deviation = Real{};
+		Real deviation = Math<Real>::sm_Zero;
 		Real delta;
 
-		if (SPoint.GetXCoordinate() < Real{})
+		if (SPoint.GetXCoordinate() < Math<Real>::sm_Zero)
 		{
 			deviation += SPoint.GetXCoordinate()*SPoint.GetXCoordinate();
 		}
-		else if (SPoint.GetXCoordinate() > (Real)1)
+		else if (SPoint.GetXCoordinate() > static_cast<Real>(1))
 		{
-			delta = SPoint.GetXCoordinate() - (Real)1;
+			delta = SPoint.GetXCoordinate() - static_cast<Real>(1);
 			deviation += delta * delta;
 		}
 
-		if (SPoint.GetYCoordinate() < Real{})
+		if (SPoint.GetYCoordinate() < Math<Real>::sm_Zero)
 		{
 			deviation += SPoint.GetYCoordinate()*SPoint.GetYCoordinate();
 		}
-		else if (SPoint.GetYCoordinate() > (Real)1)
+		else if (SPoint.GetYCoordinate() > static_cast<Real>(1))
 		{
-			delta = SPoint.GetYCoordinate() - (Real)1;
+			delta = SPoint.GetYCoordinate() - static_cast<Real>(1);
 			deviation += delta * delta;
 		}
 
@@ -204,7 +204,7 @@ namespace Mathematics
 	template <typename Real>
 	Vector2D<Real> BiSqrToQuad<Real>::Transform(const Vector2D<Real>& P)
 	{
-		Vector2D<Real> oneMinusP((Real)1 - P.GetXCoordinate(), (Real)1 - P.GetYCoordinate());
+		Vector2D<Real> oneMinusP(static_cast<Real>(1) - P.GetXCoordinate(), static_cast<Real>(1) - P.GetYCoordinate());
 		Vector2D<Real> result;
 		result[0] = oneMinusP.GetYCoordinate()*(oneMinusP.GetXCoordinate()*mS00.GetXCoordinate() + P.GetXCoordinate()*mS10.GetXCoordinate()) +
 					P.GetYCoordinate()*(oneMinusP.GetXCoordinate()*mS01.GetXCoordinate() + P.GetXCoordinate()*mS11.GetXCoordinate());

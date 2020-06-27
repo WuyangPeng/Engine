@@ -10,7 +10,7 @@
 #include "Flags/WindowProcessFlags.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "System/SystemOutput/MessageBoxSelection.h"
 #include "System/SystemOutput/Data/MessageBoxFlagsData.h"
 #include "System/SystemOutput/Flags/MessageBoxFlags.h"

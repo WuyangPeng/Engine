@@ -40,32 +40,32 @@ void Mathematics::StaticTestIntersectorSegment3Plane3<Real>
 	auto sdistance0 = mPlane.DistanceTo(P0);
     if (Math::FAbs(sdistance0) <= Math::sm_ZeroTolerance)
     {
-        sdistance0 = Real{};
+        sdistance0 = Math<Real>::sm_Zero;
     }
 
 	auto P1 = mSegment.GetEndPoint();
 	auto sdistance1 = mPlane.DistanceTo(P1);
     if (Math::FAbs(sdistance1) <= Math::sm_ZeroTolerance)
     {
-        sdistance1 = Real{};
+        sdistance1 = Math<Real>::sm_Zero;
     }
 
 	auto prod = sdistance0*sdistance1;
-    if (prod < Real{})
+    if (prod < Math<Real>::sm_Zero)
     {
         // The segment passes through the plane.
 		this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    if (prod > Real{})
+    if (prod > Math<Real>::sm_Zero)
     {
         // The segment is on one side of the plane.
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    if (sdistance0 != Real{} || sdistance1 != Real{})
+    if (sdistance0 != Math<Real>::sm_Zero || sdistance1 != Math<Real>::sm_Zero)
     {
         // A segment end point touches the plane.
 		this->SetIntersectionType(IntersectionType::Point);

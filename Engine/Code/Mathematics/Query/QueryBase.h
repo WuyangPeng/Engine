@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 09:33)
+// 引擎版本：0.0.2.5 (2020/03/23 09:52)
 
 #ifndef MATHEMATICS_QUERY_QUERY_H
 #define MATHEMATICS_QUERY_QUERY_H
@@ -13,19 +13,19 @@
 
 namespace Mathematics
 {
-    class MATHEMATICS_DEFAULT_DECLARE QueryBase
-    {
-    public:
-        using ClassType = QueryBase;
-     
+	class MATHEMATICS_DEFAULT_DECLARE QueryBase
+	{
 	public:
-        QueryBase ();   
-        virtual ~QueryBase ();
- 
+		using ClassType = QueryBase;
+
+	public:
+		QueryBase();
+		virtual ~QueryBase();
+
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
-        
-        virtual QueryType GetType () const = 0;   
-    };
+
+		virtual QueryType GetType() const = 0;
+	};
 }
 
 #endif // MATHEMATICS_QUERY_QUERY_H

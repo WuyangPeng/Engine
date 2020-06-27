@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 11:38)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 13:26)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_DETAIL_H
@@ -20,7 +20,7 @@ Mathematics::CylinderFit3UpdateData<Real>
 	 m_DescentDirection{ CalculateDescentDirection(m_Delta,axis) }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-} 
+}
 
 // static
 // private
@@ -35,13 +35,13 @@ typename const Mathematics::CylinderFit3UpdateData<Real>::Vector3D Mathematics::
 					 axis.GetZCoordinate() *	(delta.GetXCoordinate() * delta.GetXCoordinate() + delta.GetYCoordinate() * delta.GetYCoordinate()) -
 					 delta.GetZCoordinate() * (axis.GetXCoordinate() * delta.GetXCoordinate() + axis.GetYCoordinate() * delta.GetYCoordinate()) };
 }
- 
+
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::CylinderFit3UpdateData<Real>
 	::IsValid() const noexcept
-{ 
-	return true;	
+{
+	return true;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -53,7 +53,7 @@ typename const Mathematics::CylinderFit3UpdateData<Real>::Vector3D Mathematics::
 
 	return m_Point;
 }
- 
+
 template <typename Real>
 typename const Mathematics::CylinderFit3UpdateData<Real>::Vector3D Mathematics::CylinderFit3UpdateData<Real>
 	::GetDelta() const
@@ -92,4 +92,3 @@ typename const Mathematics::CylinderFit3UpdateData<Real>::Vector3D Mathematics::
 
 #endif // MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_DETAIL_H
 
- 

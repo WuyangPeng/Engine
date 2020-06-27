@@ -12,7 +12,7 @@
 #include "SubclassSmartPointerTraits.h"
 #include "CoreTools/ImplHelper/ImplStaticAssertHelper.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <iosfwd>
 
 namespace CoreTools
@@ -30,11 +30,15 @@ namespace CoreTools
 
 	public:
 		explicit ConstFirstSubclassSmartPointer(uint64_t address, const BaseClassType* data = nullptr);
-		explicit ConstFirstSubclassSmartPointer(const BaseClassType* data = nullptr);
+		explicit ConstFirstSubclassSmartPointer(const BaseClassType* data);
+		ConstFirstSubclassSmartPointer() noexcept;
 		virtual ~ConstFirstSubclassSmartPointer();
 
-		ConstFirstSubclassSmartPointer(const ClassType& rhs);
-		ConstFirstSubclassSmartPointer& operator= (const ClassType& rhs);
+		ConstFirstSubclassSmartPointer(const ConstFirstSubclassSmartPointer& rhs);
+		ConstFirstSubclassSmartPointer& operator= (const ConstFirstSubclassSmartPointer& rhs);
+
+		ConstFirstSubclassSmartPointer(ConstFirstSubclassSmartPointer&& rhs) noexcept;
+		ConstFirstSubclassSmartPointer& operator= (ConstFirstSubclassSmartPointer&& rhs)noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 15:23)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/09 23:57)
 
 #ifndef SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_USING_H
 #define SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_USING_H
@@ -21,8 +21,8 @@ namespace System
 
 	struct MemoryProcessHeapEntry
 	{
-		WindowVoidPtr lpData;
-		WindowDWord cbData;
+		void* lpData;
+		uint32_t cbData;
 		uint8_t cbOverhead;
 		uint8_t iRegionIndex;
 		uint16_t wFlags;
@@ -31,14 +31,14 @@ namespace System
 			struct
 			{
 				WindowHandle hMem;
-				WindowDWord dwReserved[3];
+				uint32_t dwReserved[3];
 			} Block;
 			struct
 			{
-				WindowDWord dwCommittedSize;
-				WindowDWord dwUnCommittedSize;
-				WindowVoidPtr lpFirstBlock;
-				WindowVoidPtr lpLastBlock;
+				uint32_t dwCommittedSize;
+				uint32_t dwUnCommittedSize;
+				void* lpFirstBlock;
+				void* lpLastBlock;
 			} Region;
 		} DUMMYUNIONNAME;
 	};

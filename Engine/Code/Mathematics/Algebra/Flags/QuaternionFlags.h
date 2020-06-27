@@ -1,16 +1,16 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 11:40)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 09:48)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_FLAGS_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_FLAGS_H
 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 namespace Mathematics
-{	
+{
 	enum class QuaternionClosestAxis
 	{
 		X = 1,
@@ -18,9 +18,9 @@ namespace Mathematics
 		Z = 3
 	};
 
-	static_assert(System::EnumCastUnderlying(QuaternionClosestAxis::X) == 1 && 
+	static_assert(System::EnumCastUnderlying(QuaternionClosestAxis::X) == 1 &&
 				  System::EnumCastUnderlying(QuaternionClosestAxis::Y) == 2 &&
-				  System::EnumCastUnderlying(QuaternionClosestAxis::Z) == 3,"QuaternionClosestAxis is error.");
+				  System::EnumCastUnderlying(QuaternionClosestAxis::Z) == 3, "QuaternionClosestAxis is error.");
 
 	enum class QuaternionFactorFlags
 	{

@@ -1,0 +1,23 @@
+TODO Level 1
+ 
+0.0.0.2
+
+1.  （NetworkMessage）在消息类中使用shared_ptr代替子类智能指针系统。
+2.  （NetworkMessage）使用protobuf来解析消息。
+
+0.0.2.4
+
+1.  （Interface）完成基础主管理。
+2.  （Interface）完成网络地址。
+3.  （Interface）完成接受器。
+4.  （Interface）完成连接器。
+5.  （Interface）完成流。
+6.  （Interface）完成句柄集。
+7.  （Interface）完成发送套接字。
+8.  （Interface）完成客户端。
+9.  （Interface）完成服务器。
+10. （Interface）完成迭代式服务器。
+11. （Interface）完成反应式服务器。
+12. （Interface）完成前摄者服务器。
+13. （Interface）完成一进程一连接服务器。
+14. （Interface）完成一线程一连接服务器。 

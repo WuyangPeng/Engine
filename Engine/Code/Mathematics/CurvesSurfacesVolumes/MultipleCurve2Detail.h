@@ -48,7 +48,7 @@ void MultipleCurve2<Real>::GetKeyInfo (Real t, int& key, Real& dt) const
     if (t <= mTimes[0])
     { 
         key = 0;
-        dt = Real{};
+        dt = Math<Real>::sm_Zero;
     }
     else if (t >= mTimes[mNumSegments])
     {
@@ -87,7 +87,7 @@ void MultipleCurve2<Real>::InitializeLength () const
     int key;
     for (key = 0; key < mNumSegments; ++key)
     {
-        mLengths[key] = GetLengthKey(key, Real{}, mTimes[key + 1] - mTimes[key]);
+        mLengths[key] = GetLengthKey(key, Math<Real>::sm_Zero, mTimes[key + 1] - mTimes[key]);
     }
 
     // Accumulative arc length.
@@ -119,7 +119,7 @@ Real MultipleCurve2<Real>::GetLength (Real t0, Real t1) const
     if (key0 < key1)
     {
         // Accumulate full-segment lengths.
-        length = Real{};
+        length = Math<Real>::sm_Zero;
         for (int i = key0 + 1; i < key1; ++i)
         {
             length += mLengths[i];
@@ -129,7 +129,7 @@ Real MultipleCurve2<Real>::GetLength (Real t0, Real t1) const
         length += GetLengthKey(key0, dt0, mTimes[key0 + 1] - mTimes[key0]);
         
         // Add on partial last segment.
-        length += GetLengthKey(key1, Real{}, dt1);
+        length += GetLengthKey(key1, Math<Real>::sm_Zero, dt1);
     }
     else
     {
@@ -148,7 +148,7 @@ Real MultipleCurve2<Real>::GetTime (Real length, int iterations,
         InitializeLength();
     }
 
-    if (length <= Real{})
+    if (length <= Math<Real>::sm_Zero)
     {
         return mTMin;
     }
@@ -198,11 +198,11 @@ Real MultipleCurve2<Real>::GetTime (Real length, int iterations,
 	auto dt0 = dt1*len0/len1;
 
     // Initial root-bounding interval for bisection.
-    Real lower = Real{}, upper = dt1;
+    Real lower = Math<Real>::sm_Zero, upper = dt1;
 
     for (int i = 0; i < iterations; ++i)
     {
-		auto difference = GetLengthKey(key, Real{}, dt0) - len0;
+		auto difference = GetLengthKey(key, Math<Real>::sm_Zero, dt0) - len0;
         if (Math<Real>::FAbs(difference) <= tolerance)
         {
             // |L(mTimes[key]+dt0)-length| is close enough to zero, report
@@ -215,7 +215,7 @@ Real MultipleCurve2<Real>::GetTime (Real length, int iterations,
 
         // Update the root-bounding interval and test for containment of the
         // candidate.
-        if (difference > Real{})
+        if (difference > Math<Real>::sm_Zero)
         {
             upper = dt0;
             if (dt0Candidate <= lower)

@@ -20,8 +20,7 @@ namespace CoreTools
 		using ParentType = CommandArgumentImpl;
 
 	public:
-		StringCommandArgument(int index, const std::string& name, const std::string& value);
-		virtual ~StringCommandArgument();
+		StringCommandArgument(int index, const std::string& name, const std::string& value); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

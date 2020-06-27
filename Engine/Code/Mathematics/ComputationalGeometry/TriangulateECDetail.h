@@ -184,7 +184,7 @@ void Mathematics::TriangulateEC<Real>
 
     if (queryType == QueryType::Filtered)
     {
-        MATHEMATICS_ASSERTION_0(Real{} <= epsilon && epsilon <= (Real)1,"Epsilon must be in [0,1]\n");
+        MATHEMATICS_ASSERTION_0(Math<Real>::sm_Zero <= epsilon && epsilon <= static_cast<Real>(1),"Epsilon must be in [0,1]\n");
     }
 
     Vector2D<Real> minValue, maxValue, range;
@@ -479,7 +479,7 @@ void Mathematics::TriangulateEC<Real>
 	::CombinePolygons (QueryType queryType, Real epsilon, int nextElement, const Indices& outer,
                        const Indices& inner, IndexMap& indexMap, Indices& combined)
 {
-	auto numOuterVertices = boost::numeric_castouter.size();
+	auto numOuterVertices = boost::numeric_cast<int>(outer.size());
 	auto numInnerVertices = (int)inner.size();
 
     // Locate the inner-polygon vertex of maximum x-value, call this vertex M.
@@ -509,21 +509,21 @@ void Mathematics::TriangulateEC<Real>
         // Only consider edges for which the first vertex is below (or on)
         // the ray and the second vertex is above (or on) the ray.
 		auto diff0 = mSPositions[outer[i0]] - M;
-        if (diff0[1] > Real{})
+        if (diff0[1] > Math<Real>::sm_Zero)
         {
             continue;
         }
 		auto diff1 = mSPositions[outer[i1]] - M;
-        if (diff1[1] < Real{})
+        if (diff1[1] < Math<Real>::sm_Zero)
         {
             continue;
         }
 
         // At this time, diff0.y <= 0 and diff1.y >= 0.
         int currentEndMin = -1;
-        if (diff0[1] < Real{})
+        if (diff0[1] < Math<Real>::sm_Zero)
         {
-            if (diff1[1] > Real{})
+            if (diff1[1] > Math<Real>::sm_Zero)
             {
                 // The intersection of the edge and ray occurs at an interior
                 // edge point.
@@ -540,7 +540,7 @@ void Mathematics::TriangulateEC<Real>
         }
         else  // diff0.y == 0
         {
-            if (diff1[1] > Real{})
+            if (diff1[1] > Math<Real>::sm_Zero)
             {
                 // The vertex Outer[i0] is the intersection of the edge and
                 // the ray;
@@ -562,7 +562,7 @@ void Mathematics::TriangulateEC<Real>
             }
         }
 
-        if (Real{} <= t && t < intr[0])
+        if (Math<Real>::sm_Zero <= t && t < intr[0])
         {
             intr[0] = t;
             v0min = i0;
@@ -598,7 +598,7 @@ void Mathematics::TriangulateEC<Real>
             diff0 = mSPositions[outer[i0]] - shared;
             diff1 = mSPositions[outer[other]] - shared;
 			auto dotperp = Vector2DTools<Real>::DotPerp(diff0,diff1);
-            if (dotperp > Real{})
+            if (dotperp > Math<Real>::sm_Zero)
             {
                 // The new edge is closer to M.
                 v0min = i0;

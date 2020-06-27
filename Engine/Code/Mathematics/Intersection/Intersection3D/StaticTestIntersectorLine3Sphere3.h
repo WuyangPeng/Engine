@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 13:54)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:54)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_SPHERE3_H
@@ -16,7 +16,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class StaticTestIntersectorLine3Sphere3: public  StaticIntersector<Real, Vector3D>
+	class StaticTestIntersectorLine3Sphere3 : public  StaticIntersector<Real, Vector3D>
 	{
 	public:
 		using ClassType = StaticTestIntersectorLine3Sphere3<Real>;
@@ -25,24 +25,24 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Sphere3 = Sphere3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>; 		
-		
+		using Math = Math<Real>;
+
 	public:
-		StaticTestIntersectorLine3Sphere3 (const Line3& line, const Sphere3& sphere);
-		
+		StaticTestIntersectorLine3Sphere3(const Line3& line, const Sphere3& sphere);
+
 		// Object access.
-		const Line3 GetLine () const;
-		const Sphere3 GetSphere () const;
-		
+		const Line3 GetLine() const;
+		const Sphere3 GetSphere() const;
+
 	private:
 		// Static intersection queries.
-		void Test ();
+		void Test();
 
 		// The objects to intersect.
 		Line3 mLine;
 		Sphere3 mSphere;
 	};
-	
+
 	using StaticTestIntersectorLine3Sphere3f = StaticTestIntersectorLine3Sphere3<float>;
 	using StaticTestIntersectorLine3Sphere3d = StaticTestIntersectorLine3Sphere3<double>;
 }

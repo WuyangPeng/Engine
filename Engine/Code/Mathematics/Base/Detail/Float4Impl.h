@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 19:18)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/18 19:06)
 
 #ifndef MATHEMATICS_BASE_FLOAT_4_IMPL_H
 #define MATHEMATICS_BASE_FLOAT_4_IMPL_H
@@ -13,14 +13,14 @@
 
 namespace Mathematics
 {
-	class MATHEMATICS_HIDDEN_DECLARE Float4Impl 
+	class MATHEMATICS_HIDDEN_DECLARE Float4Impl
 	{
 	public:
 		using ClassType = Float4Impl;
 
-	public:				
-		Float4Impl();	
-		Float4Impl (float firstValue,float secondValue,float thirdValue,float fourValue);
+	public:
+		Float4Impl();
+		Float4Impl(float firstValue, float secondValue, float thirdValue, float fourValue);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -35,11 +35,11 @@ namespace Mathematics
 		void SetFourthValue(float value);
 
 	private:
-		using FloatTuple4 = CoreTools::Tuple<4,float>;
+		using FloatTuple4 = CoreTools::Tuple<4, float>;
 
 	private:
 		FloatTuple4 m_Tuple;
-	};	
+	};
 }
 
 #endif // MATHEMATICS_BASE_FLOAT_4_IMPL_H

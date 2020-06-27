@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/09 11:34)
+// 引擎版本：0.0.2.5 (2020/03/20 13:04)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -12,13 +12,13 @@
 #include <utility>
 
 Mathematics::SparseMatrixIndex
-	::SparseMatrixIndex(int row, int column) 
+	::SparseMatrixIndex(int row, int column)
 	:m_Row{ row }, m_Column{ column }
 {
 	if (m_Column < m_Row)
 	{
 		std::swap(m_Column, m_Row);
-	}		
+	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -32,7 +32,6 @@ bool Mathematics::SparseMatrixIndex
 	else
 		return false;
 }
-
 #endif // OPEN_CLASS_INVARIANT
 
 int Mathematics::SparseMatrixIndex

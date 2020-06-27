@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 17:34)
+// 引擎版本：0.0.2.5 (2020/03/23 19:05)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE2_LINE2_TOOL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE2_LINE2_TOOL_DETAIL_H 
@@ -13,7 +13,7 @@
 
 template <typename Real>
 Mathematics::DistanceLine2Line2Tool<Real>
-	::DistanceLine2Line2Tool(const Vector2D& lhsOrigin, const Vector2D& lhsDirection,const Vector2D& rhsOrigin, const Vector2D& rhsDirection)
+	::DistanceLine2Line2Tool(const Vector2D& lhsOrigin, const Vector2D& lhsDirection, const Vector2D& rhsOrigin, const Vector2D& rhsDirection)
 	:m_OriginDifference{ lhsOrigin - rhsOrigin },
 	 m_DirectionDot{ -Vector2DTools::DotProduct(lhsDirection, rhsDirection) },
 	 m_OriginDifferenceDotLhsDirection{ Vector2DTools::DotProduct(m_OriginDifference, lhsDirection) },
@@ -23,13 +23,13 @@ Mathematics::DistanceLine2Line2Tool<Real>
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
- 
+
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::DistanceLine2Line2Tool<Real>
 	::IsValid() const noexcept
 {
-	return true;	
+	return true;
 }
 #endif // OPEN_CLASS_INVARIANT 
 
@@ -58,7 +58,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return (m_DirectionDot * m_OriginDifferenceDotLhsDirection - m_OriginDifferenceDotRhsDirection);
-}	
+}
 
 template <typename Real>
 Real Mathematics::DistanceLine2Line2Tool<Real>
@@ -76,7 +76,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return (m_DirectionDot * extent - m_OriginDifferenceDotRhsDirection);
-}	
+}
 
 template <typename Real>
 Real Mathematics::DistanceLine2Line2Tool<Real>
@@ -114,7 +114,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>
 	auto squaredDistance = -m_OriginDifferenceDotLhsDirection * m_OriginDifferenceDotLhsDirection + m_OriginDifferenceSquaredLength;
 
 	// 计算数值舍入误差
-	return Math::GetNumericalRoundOffNonnegative(squaredDistance);	
+	return Math::GetNumericalRoundOffNonnegative(squaredDistance);
 }
 
 template <typename Real>
@@ -148,12 +148,12 @@ Real Mathematics::DistanceLine2Line2Tool<Real>
 }
 
 template <typename Real>
-Real  Mathematics::DistanceLine2Line2Tool<Real>
+Real Mathematics::DistanceLine2Line2Tool<Real>
 	::GetOriginDifferenceDotDirectionAverage() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto sign = (Real{} < m_DirectionDot ? static_cast<Real>(-1) : static_cast<Real>(1));
+	auto sign = (Math::sm_Zero < m_DirectionDot ? static_cast<Real>(-1) : static_cast<Real>(1));
 	auto average = static_cast<Real>(0.5) * (m_OriginDifferenceDotLhsDirection - sign * m_OriginDifferenceDotRhsDirection);
 
 	return average;

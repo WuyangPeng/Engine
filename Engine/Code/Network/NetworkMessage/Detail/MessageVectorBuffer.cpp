@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::make_shared;
 

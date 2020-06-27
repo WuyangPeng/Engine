@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/ObjectInterfaceLess.h"
 #include "CoreTools/MemoryTools/ConstFirstSubclassSmartPointerDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <algorithm>
 
 using std::make_pair;

@@ -18,6 +18,7 @@
 #include "CoreTools/ClassInvariant/ClassInvariantFwd.h"
 
 #include <boost/noncopyable.hpp>
+
 #include <boost/format/format_fwd.hpp>
 
 #include <string>

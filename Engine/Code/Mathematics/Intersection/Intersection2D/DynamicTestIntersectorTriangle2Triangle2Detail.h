@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 19:30)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:31)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
@@ -11,7 +11,7 @@
 
 template <typename Real>
 Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
-	::DynamicTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2D& velocity0,  const Vector2D& velocity1, const Real epsilon)
+	::DynamicTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2D& velocity0, const Vector2D& velocity1, const Real epsilon)
 	:ParentType{ tmax, velocity0, velocity1, epsilon }, mTriangle0{ triangle0 }, mTriangle1{ triangle1 }
 {
 	Test();
@@ -21,35 +21,37 @@ template <typename Real>
 const Mathematics::Triangle2<Real> Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 	::GetTriangle0() const
 {
-    return mTriangle0;
+	return mTriangle0;
 }
 
 template <typename Real>
 const Mathematics::Triangle2<Real> Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 	::GetTriangle1() const
 {
-    return mTriangle1;
+	return mTriangle1;
 }
-  
+
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 	::Test()
 {
-    // Process as if V0-triangle is stationary and V1-triangle is moving.
+	// Process as if V0-triangle is stationary and V1-triangle is moving.
 	auto W = this->GetRhsVelocity() - this->GetLhsVelocity();
-    int side = 0;  // 0 = NONE, -1 = LEFT, +1 = RIGHT
-    Real tfirst{};
+	auto side = 0;  // 0 = NONE, -1 = LEFT, +1 = RIGHT
+	auto tfirst = Math::sm_Zero;
 	auto tlast = Math::sm_MaxReal;
 
-    Configuration cfg0, cfg1, tcfg0, tcfg1;
-    int i0, i1, i2;
-    Vector2D D;
-    Real speed;
+	Configuration cfg0, cfg1, tcfg0, tcfg1;
+	auto i0 = 0;
+	auto i1 = 0;
+	auto i2 = 0;
+	Vector2D D;
+	Real speed = Math::sm_Zero;
 
-    // Process edges of V0-triangle.
-    for (i0 = 1, i1 = 2, i2 = 0; i2 < 3; i0 = i1, i1 = i2++)
-    {
-        // Test axis V0[i1] + t*perp(V0[i2]-V0[i1]), perp(x,y) = (y,-x).
+	// Process edges of V0-triangle.
+	for (i0 = 1, i1 = 2, i2 = 0; i2 < 3; i0 = i1, i1 = i2++)
+	{
+		// Test axis V0[i1] + t*perp(V0[i2]-V0[i1]), perp(x,y) = (y,-x).
 		D.SetXCoordinate(mTriangle0.GetVertex()[i2].GetYCoordinate() - mTriangle0.GetVertex()[i1].GetYCoordinate());
 		D.SetYCoordinate(mTriangle0.GetVertex()[i1].GetXCoordinate() - mTriangle0.GetVertex()[i2].GetXCoordinate());
 		speed = Vector2DTools::DotProduct(D, W);
@@ -57,17 +59,17 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 		ComputeTwo(cfg0, mTriangle0.GetVertex(), D, i0, i1, i2);
 		ComputeThree(cfg1, mTriangle1.GetVertex(), D, mTriangle0.GetVertex()[i1]);
 
-		if (NoIntersect(cfg0, cfg1, this->GetTMax(), speed, side, tcfg0, tcfg1,tfirst, tlast))
-        {
+		if (NoIntersect(cfg0, cfg1, this->GetTMax(), speed, side, tcfg0, tcfg1, tfirst, tlast))
+		{
 			this->SetIntersectionType(IntersectionType::Empty);
 			return;
-        }
-    }
+		}
+	}
 
-    // Process edges of V1-triangle.
-    for (i0 = 1, i1 = 2, i2 = 0; i2 < 3; i0 = i1, i1 = i2++)
-    {
-        // Test axis V1[i1] + t*perp(V1[i2]-V1[i1]), perp(x,y) = (y,-x).
+	// Process edges of V1-triangle.
+	for (i0 = 1, i1 = 2, i2 = 0; i2 < 3; i0 = i1, i1 = i2++)
+	{
+		// Test axis V1[i1] + t*perp(V1[i2]-V1[i1]), perp(x,y) = (y,-x).
 		D.SetXCoordinate(mTriangle1.GetVertex()[i2].GetYCoordinate() - mTriangle1.GetVertex()[i1].GetYCoordinate());
 		D.SetYCoordinate(mTriangle1.GetVertex()[i1].GetXCoordinate() - mTriangle1.GetVertex()[i2].GetXCoordinate());
 		speed = Vector2DTools::DotProduct(D, W);
@@ -75,35 +77,36 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 		ComputeTwo(cfg1, mTriangle1.GetVertex(), D, i0, i1, i2);
 		ComputeThree(cfg0, mTriangle0.GetVertex(), D, mTriangle1.GetVertex()[i1]);
 
-		if (NoIntersect(cfg0, cfg1, this->GetTMax(), speed, side, tcfg0, tcfg1,tfirst, tlast))
-        {
+		if (NoIntersect(cfg0, cfg1, this->GetTMax(), speed, side, tcfg0, tcfg1, tfirst, tlast))
+		{
 			this->SetIntersectionType(IntersectionType::Empty);
 			return;
-        }
-    }
+		}
+	}
 
-	SetContactTime(tfirst);	
+	SetContactTime(tfirst);
 	this->SetIntersectionType(IntersectionType::Point);
 }
- 
 
 template <typename Real>
 int Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
-::WhichSide(const Vector2D V[3], const Vector2D& P, const Vector2D& D)
+	::WhichSide(const Vector2D V[3], const Vector2D& P, const Vector2D& D)
 {
 	// Vertices are projected to the form P+t*D.  Return value is +1 if all
 	// t > 0, -1 if all t < 0, 0 otherwise, in which case the line splits the
 	// triangle.
 
-	int positive = 0, negative = 0, zero = 0;
+	auto positive = 0;
+	auto negative = 0;
+	auto zero = 0;
 	for (auto i = 0; i < 3; ++i)
 	{
 		auto t = Vector2DTools::DotProduct(D, (V[i] - P));
-		if (t >Real{})
+		if (t > Math<Real>::sm_Zero)
 		{
 			++positive;
 		}
-		else if (t < Real{})
+		else if (t < Math<Real>::sm_Zero)
 		{
 			++negative;
 		}
@@ -122,19 +125,21 @@ int Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
-::ClipConvexPolygonAgainstLine(const Vector2D& N, Real c, int& quantity, Vector2D V[6])
+	::ClipConvexPolygonAgainstLine(const Vector2D& N, Real c, int& quantity, Vector2D V[6])
 {
 	// The input vertices are assumed to be in counterclockwise order.  The
 	// ordering is an invariant of this function.
 
 	// Test on which side of line the vertices are.
-	int positive = 0, negative = 0, pIndex = -1;
-	Real test[6];
-	int i;
+	auto positive = 0;
+	auto negative = 0;
+	auto pIndex = -1;
+	Real test[6]{};
+	auto i = 0;
 	for (i = 0; i < quantity; ++i)
 	{
 		test[i] = Vector2DTools::DotProduct(N, V[i]) - c;
-		if (test[i] >Real{})
+		if (test[i] > Math<Real>::sm_Zero)
 		{
 			positive++;
 			if (pIndex < 0)
@@ -142,7 +147,7 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 				pIndex = i;
 			}
 		}
-		else if (test[i] < Real{})
+		else if (test[i] < Math<Real>::sm_Zero)
 		{
 			negative++;
 		}
@@ -154,8 +159,10 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 		{
 			// Line transversely intersects polygon.
 			Vector2D CV[6];
-			int cQuantity = 0, cur, prv;
-			Real t;
+			auto cQuantity = 0;
+			auto cur = 0;
+			auto prv = 0;
+			auto t = Math::sm_Zero;
 
 			if (pIndex > 0)
 			{
@@ -163,10 +170,10 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 				cur = pIndex;
 				prv = cur - 1;
 				t = test[cur] / (test[cur] - test[prv]);
-				CV[cQuantity++] = V[cur] + t*(V[prv] - V[cur]);
+				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 				// Vertices on positive side of line.
-				while (cur < quantity && test[cur] >Real{})
+				while (cur < quantity && test[cur] > Math<Real>::sm_Zero)
 				{
 					CV[cQuantity++] = V[cur++];
 				}
@@ -182,13 +189,13 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 					prv = quantity - 1;
 				}
 				t = test[cur] / (test[cur] - test[prv]);
-				CV[cQuantity++] = V[cur] + t*(V[prv] - V[cur]);
+				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 			}
 			else  // pIndex is 0
 			{
 				// Vertices on positive side of line.
 				cur = 0;
-				while (cur < quantity && test[cur] >Real{})
+				while (cur < quantity && test[cur] > Math<Real>::sm_Zero)
 				{
 					CV[cQuantity++] = V[cur++];
 				}
@@ -196,10 +203,10 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 				// Last clip vertex on line.
 				prv = cur - 1;
 				t = test[cur] / (test[cur] - test[prv]);
-				CV[cQuantity++] = V[cur] + t*(V[prv] - V[cur]);
+				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 				// Skip vertices on negative side.
-				while (cur < quantity && test[cur] <= Real{})
+				while (cur < quantity && test[cur] <= Math<Real>::sm_Zero)
 				{
 					++cur;
 				}
@@ -209,10 +216,10 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 				{
 					prv = cur - 1;
 					t = test[cur] / (test[cur] - test[prv]);
-					CV[cQuantity++] = V[cur] + t*(V[prv] - V[cur]);
+					CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 					// Vertices on positive side of line.
-					while (cur < quantity && test[cur] >Real{})
+					while (cur < quantity && test[cur] > Math<Real>::sm_Zero)
 					{
 						CV[cQuantity++] = V[cur++];
 					}
@@ -222,12 +229,12 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 					// cur = 0
 					prv = quantity - 1;
 					t = test[0] / (test[0] - test[prv]);
-					CV[cQuantity++] = V[0] + t*(V[prv] - V[0]);
+					CV[cQuantity++] = V[0] + t * (V[prv] - V[0]);
 				}
 			}
 
 			quantity = cQuantity;
-			memcpy(V, CV, cQuantity*sizeof(Vector2D));
+			memcpy(V, CV, cQuantity * sizeof(Vector2D));
 		}
 		// else polygon fully on positive side of line, nothing to do.
 	}
@@ -240,14 +247,14 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
-	::ComputeTwo(Configuration& cfg, const std::vector<Vector2D>& V,const Vector2D& D, int i0, int i1, int i2)
+	::ComputeTwo(Configuration& cfg, const std::vector<Vector2D>& V, const Vector2D& D, int i0, int i1, int i2)
 {
 	cfg.Map = M12;
 	cfg.Index[0] = i0;
 	cfg.Index[1] = i1;
 	cfg.Index[2] = i2;
 	cfg.Min = Vector2DTools::DotProduct(D, (V[i0] - V[i1]));
-	cfg.Max = Real{};
+	cfg.Max = Math<Real>::sm_Zero;
 }
 
 template <typename Real>
@@ -358,19 +365,20 @@ template <typename Real>
 bool Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 	::NoIntersect(const Configuration& cfg0, const Configuration& cfg1, Real tmax, Real speed, int& side, Configuration& tcfg0, Configuration& tcfg1, Real& tfirst, Real& tlast)
 {
-	Real invSpeed, t;
+	auto invSpeed = Math::sm_Zero;
+	auto t = Math::sm_Zero;
 
 	if (cfg1.Max < cfg0.Min)
 	{
 		// V1-interval initially on left of V0-interval.
-		if (speed <= Real{})
+		if (speed <= Math<Real>::sm_Zero)
 		{
 			// Intervals moving apart.
 			return true;
 		}
 
 		// Update first time.
-		invSpeed = ((Real)1) / speed;
+		invSpeed = (static_cast<Real>(1)) / speed;
 		t = (cfg0.Min - cfg1.Max)*invSpeed;
 		if (t > tfirst)
 		{
@@ -402,15 +410,15 @@ bool Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 	else if (cfg0.Max < cfg1.Min)
 	{
 		// V1-interval initially on right of V0-interval.
-		if (speed >= Real{})
+		if (speed >= Math<Real>::sm_Zero)
 		{
 			// Intervals moving apart.
 			return true;
 		}
 
 		// Update first time.
-		invSpeed = ((Real)1) / speed;
-		t = (cfg0.Max - cfg1.Min)*invSpeed;
+		invSpeed = (static_cast<Real>(1)) / speed;
+		t = (cfg0.Max - cfg1.Min) * invSpeed;
 		if (t > tfirst)
 		{
 			tfirst = t;
@@ -441,10 +449,10 @@ bool Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 	else
 	{
 		// V0-interval and V1-interval initially overlap.
-		if (speed > Real{})
+		if (speed > Math<Real>::sm_Zero)
 		{
 			// Update last time.
-			invSpeed = ((Real)1) / speed;
+			invSpeed = (static_cast<Real>(1)) / speed;
 			t = (cfg0.Max - cfg1.Min)*invSpeed;
 			if (t < tlast)
 			{
@@ -457,10 +465,10 @@ bool Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 				return true;
 			}
 		}
-		else if (speed < Real{})
+		else if (speed < Math<Real>::sm_Zero)
 		{
 			// Update last time.
-			invSpeed = ((Real)1) / speed;
+			invSpeed = (static_cast<Real>(1)) / speed;
 			t = (cfg0.Min - cfg1.Max)*invSpeed;
 			if (t < tlast)
 			{
@@ -482,10 +490,13 @@ template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 	::GetIntersection(const Configuration& cfg0, const Configuration& cfg1, int side, const Vector2D V0[3], const Vector2D V1[3], int& quantity, Vector2D vertex[6])
 {
-	Vector2D edge, diff;
-	const Vector2D* origin;
-	Real invEdE, emin, emax;
-	int i;
+	Vector2D edge;
+	Vector2D diff;
+	const Vector2D* origin{ nullptr };
+	auto invEdE = Math::sm_Zero;
+	auto emin = Math::sm_Zero; 
+	auto emax = Math::sm_Zero;
+	auto i = 0;
 
 	if (side == 1)  // V1-interval contacts V0-interval on right.
 	{
@@ -503,13 +514,13 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 		{
 			origin = &V0[cfg0.Index[1]];
 			edge = V0[cfg0.Index[2]] - *origin;
-			invEdE = ((Real)1) / Vector2DTools::DotProduct(edge, edge);
+			invEdE = (static_cast<Real>(1)) / Vector2DTools::DotProduct(edge, edge);
 			diff = V1[cfg1.Index[1]] - *origin;
-			emin = Vector2DTools::DotProduct(edge, diff)*invEdE;
+			emin = Vector2DTools::DotProduct(edge, diff) * invEdE;
 			diff = V1[cfg1.Index[0]] - *origin;
-			emax = Vector2DTools::DotProduct(edge, diff)*invEdE;
+			emax = Vector2DTools::DotProduct(edge, diff) * invEdE;
 			MATHEMATICS_ASSERTION_0(emin <= emax, "Unexpected condition\n");
-			StaticFindIntersector1<Real> intr{ Real{}, (Real)1, emin, emax };
+			StaticFindIntersector1<Real> intr{ Math<Real>::sm_Zero, static_cast<Real>(1), emin, emax };
 			quantity = intr.GetNumIntersections();
 			MATHEMATICS_ASSERTION_0(quantity > 0, "Unexpected condition\n");
 			for (i = 0; i < quantity; ++i)
@@ -534,18 +545,18 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 		{
 			origin = &V1[cfg1.Index[1]];
 			edge = V1[cfg1.Index[2]] - *origin;
-			invEdE = ((Real)1) / Vector2DTools::DotProduct(edge, edge);
+			invEdE = (static_cast<Real>(1)) / Vector2DTools::DotProduct(edge, edge);
 			diff = V0[cfg0.Index[1]] - *origin;
-			emin = Vector2DTools::DotProduct(edge, diff)*invEdE;
+			emin = Vector2DTools::DotProduct(edge, diff) * invEdE;
 			diff = V0[cfg0.Index[0]] - *origin;
-			emax = Vector2DTools::DotProduct(edge, diff)*invEdE;
+			emax = Vector2DTools::DotProduct(edge, diff) * invEdE;
 			MATHEMATICS_ASSERTION_0(emin <= emax, "Unexpected condition\n");
-			StaticFindIntersector1<Real> intr{ Real{}, (Real)1, emin, emax };
+			StaticFindIntersector1<Real> intr{ Math<Real>::sm_Zero, static_cast<Real>(1), emin, emax };
 			quantity = intr.GetNumIntersections();
 			MATHEMATICS_ASSERTION_0(quantity > 0, "Unexpected condition\n");
 			for (i = 0; i < quantity; ++i)
 			{
-				vertex[i] = *origin + intr.GetIntersection(i)*edge;
+				vertex[i] = *origin + intr.GetIntersection(i) * edge;
 			}
 		}
 	}
@@ -562,7 +573,5 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>
 		}
 	}
 }
-
-
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H

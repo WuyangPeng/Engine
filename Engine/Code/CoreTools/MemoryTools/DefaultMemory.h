@@ -38,7 +38,7 @@ namespace CoreTools
 
 		// 对单例
 		template <typename T>
-		static void DeleteSingle(T*& data);
+		static void DeleteSingle(T*& data) noexcept;
 
 		// 对 1D 数组:  data[bound1]
 		template <typename T>

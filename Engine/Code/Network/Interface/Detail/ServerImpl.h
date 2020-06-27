@@ -1,22 +1,21 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 16:55)
+// 引擎版本：0.0.2.4 (2020/03/11 10:12)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SERVER_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_SERVER_IMPL_H
 
 #include "Network/NetworkDll.h"
 
-#include "Network/Configuration/ConfigurationStrategy.h"
+#include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/NetworkMessage/SocketManager.h"
 #include "Network/NetworkMessage/MessageInterface.h"
+#include "Network/Configuration/ConfigurationStrategy.h"
 
 namespace Network
 {	
-	class ConfigurationStrategy;
-
 	class NETWORK_HIDDEN_DECLARE ServerImpl : public CoreTools::EventInterface
 	{
 	public:

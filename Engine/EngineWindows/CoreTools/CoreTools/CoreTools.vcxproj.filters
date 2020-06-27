@@ -2285,6 +2285,24 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.h">
       <Filter>TextParsing 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\Noexcept.h">
+      <Filter>ClassInvariant 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\NoexceptDetail.h">
+      <Filter>ClassInvariant 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.h">
+      <Filter>UnitTestSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\OStreamShared.h">
+      <Filter>UnitTestSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\DirectoryImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Directory.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -3072,6 +3090,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.cpp">
       <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.cpp">
+      <Filter>UnitTestSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\OStreamShared.cpp">
+      <Filter>UnitTestSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\DirectoryImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Directory.cpp">
+      <Filter>FileManager 源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

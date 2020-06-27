@@ -14,7 +14,7 @@ Mathematics::StaticTestIntersectorPlane3Triangle3<Real>
 	::StaticTestIntersectorPlane3Triangle3(const Plane3& plane,const Triangle3& triangle, Real epsilon)
 	: mPlane{ plane }, mTriangle{ triangle }
 {
-    mEpsilon = (epsilon >= Real{} ? epsilon : Real{});
+    mEpsilon = (epsilon >= Math<Real>::sm_Zero ? epsilon : Math<Real>::sm_Zero);
 	Test();
 }
 
@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorPlane3Triangle3<Real>
 	::Test()
 {
     // Compute the signed distances from the vertices to the plane.
-	auto zero = Real{};
+	auto zero = Math<Real>::sm_Zero;
     Real SD[3];
     for (auto i = 0; i < 3; ++i)
     {

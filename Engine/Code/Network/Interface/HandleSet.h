@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.1.0 (2019/11/29 10:25)
-
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 09:57)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_H
@@ -12,13 +11,12 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/ACEWrappers/Using/ACEUsing.h"
+#include "Network/Interface/NetworkInternalFwd.h"
 
 NETWORK_EXPORT_SHARED_PTR(HandleSetImpl);
 
 namespace Network
 {
-	class ConfigurationStrategy;
-
 	class NETWORK_DEFAULT_DECLARE HandleSet
 	{
 	public:
@@ -33,7 +31,7 @@ namespace Network
 		int64_t GetMaxSet() const;
 		SockFdSet* GetFdSet();
 		void Sync(ACEHandle maxHandle);
-		bool isSet(ACEHandle handle) const;
+		bool IsSet(ACEHandle handle) const;
 		void ClearBit(ACEHandle handle);
 
 		const ACEHandleSet& GetACEHandleSet() const;

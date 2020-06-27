@@ -14,8 +14,7 @@
 
 namespace System
 {
-	void AppDummy() noexcept;
-	WindowHWnd CreateVirtualWindow(AndroidApp* androidApp, const String& appName) noexcept;
+	
 }
 
 #endif // SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_FWD_H

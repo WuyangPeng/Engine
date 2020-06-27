@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 10:03)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 17:42)
 
 #ifndef MATHEMATICS_OBJECTS3D_LINE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_LINE3_DETAIL_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::Line3<Real>
-	::Line3( const Vector3D& origin, const Vector3D& direction ,const Real epsilon)
+	::Line3(const Vector3D& origin, const Vector3D& direction, const Real epsilon)
 	:m_Origin{ origin }, m_Direction{ direction }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -27,7 +27,7 @@ template <typename Real>
 bool Mathematics::Line3<Real>
 	::IsValid() const noexcept
 {
-	if(m_Direction.IsNormalize(m_Epsilon))
+	if (m_Direction.IsNormalize(m_Epsilon))
 		return true;
 	else
 		return false;
@@ -53,7 +53,6 @@ typename const Mathematics::Line3<Real>::Vector3D Mathematics::Line3<Real>
 	return m_Direction;
 }
 
-
 template <typename Real>
 const typename Mathematics::Line3<Real>::ClassType Mathematics::Line3<Real>
 	::GetMove(Real t, const Vector3D& velocity) const
@@ -67,8 +66,8 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Line3<Real>& lhs, const Line3<Real>& rhs, const Real epsilon)
 {
-	return Vector3DTools<Real>::Approximate(lhs.GetOrigin(),rhs.GetOrigin(),epsilon) &&
-		   Vector3DTools<Real>::Approximate(lhs.GetDirection(),rhs.GetDirection(),epsilon);
+	return Vector3DTools<Real>::Approximate(lhs.GetOrigin(), rhs.GetOrigin(), epsilon) &&
+		   Vector3DTools<Real>::Approximate(lhs.GetDirection(), rhs.GetDirection(), epsilon);
 }
 
 template <typename Real>
@@ -79,7 +78,6 @@ std::ostream&  Mathematics
 
 	return outFile;
 }
-
 
 #endif // MATHEMATICS_OBJECTS3D_LINE3_DETAIL_H
 

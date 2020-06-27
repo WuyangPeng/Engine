@@ -1,16 +1,16 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2019/12/30 10:15)
+// 引擎版本：0.3.0.0 (2020/05/11 21:29)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_IMPORT_H
 #define THREADING_CORE_RENDER_ENGINE_IMPORT_H
 
-#include "Framework/Macro/UserMacro.h"
+#include "Framework/Helper/UserMacro.h"
 
 #ifndef BUILDING_THREADING_CORE_RENDER_ENGINE_IMPORT
-  #define BUILDING_THREADING_CORE_RENDER_ENGINE_IMPORT
+	#define BUILDING_THREADING_CORE_RENDER_ENGINE_IMPORT
 #endif // BUILDING_THREADING_CORE_RENDER_ENGINE_IMPORT
 
 #endif // THREADING_CORE_RENDER_ENGINE_IMPORT_H

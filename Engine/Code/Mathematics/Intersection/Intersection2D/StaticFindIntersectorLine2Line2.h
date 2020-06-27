@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 16:27)
+// 引擎版本：0.0.2.5 (2020/03/24 14:36)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_LINE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_LINE2_H 
@@ -11,13 +11,11 @@
 
 #include "Mathematics/Objects2D/Line2.h"
 #include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Intersection/StaticIntersector.h" 
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-
 	template <typename Real>
 	class StaticFindIntersectorLine2Line2 : public StaticIntersector<Real, Vector2D>
 	{
@@ -27,8 +25,8 @@ namespace Mathematics
 		using Vector2D = Vector2D<Real>;
 		using Line2 = Line2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>; 
-		
+		using Math = Math<Real>;
+
 	public:
 		StaticFindIntersectorLine2Line2(const Line2& lhsLine, const Line2& rhsLine, const Real dotThreshold = Math::sm_ZeroTolerance);
 		virtual ~StaticFindIntersectorLine2Line2();
@@ -56,7 +54,7 @@ namespace Mathematics
 		// 相交集
 		int m_Quantity;
 		Vector2D m_Point;
-	}; 
+	};
 
 	using StaticFindIntersectorLine2Line2f = StaticFindIntersectorLine2Line2<float>;
 	using StaticFindIntersectorLine2Line2d = StaticFindIntersectorLine2Line2<double>;

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:48)
+// 引擎版本：0.0.2.5 (2020/03/23 14:59)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_FIT3_DETAIL_H
@@ -10,16 +10,16 @@
 #include "QuadraticFit3.h"
 #include "Mathematics/NumericalAnalysis/EigenDecompositionDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::QuadraticFit3<Real>
 	::QuadraticFit3(const std::vector<Vector3D>& points)
 	:m_Coeff{}, m_EigenValue{}
 {
-    Calculate(points);
-    
-    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+	Calculate(points);
+
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 // private
@@ -28,12 +28,12 @@ void Mathematics::QuadraticFit3<Real>
 	::Calculate(const std::vector<Vector3D>& points)
 {
 	EigenDecomposition<Real> eigenSystem{ sm_EigenSystemSize };
-    // EigenDecomposition需要保证初始化每个esystem(row,col)
-    
-    auto numPoints = points.size();
-    
-    for (auto i = 0u; i < numPoints; ++i)
-    {
+	// EigenDecomposition需要保证初始化每个esystem(row,col)
+
+	auto numPoints = points.size();
+
+	for (auto i = 0u; i < numPoints; ++i)
+	{
 		auto x = points[i].GetXCoordinate();
 		auto y = points[i].GetYCoordinate();
 		auto z = points[i].GetZCoordinate();
@@ -104,8 +104,8 @@ void Mathematics::QuadraticFit3<Real>
 		eigenSystem(6, 8) += xz3;
 		eigenSystem(6, 9) += yz3;
 		eigenSystem(9, 9) += y2z2;
-    }
-    
+	}
+
 	eigenSystem(0, 0) = boost::numeric_cast<Real>(numPoints);
 	eigenSystem(1, 1) = eigenSystem(0, 4);
 	eigenSystem(1, 2) = eigenSystem(0, 7);
@@ -146,11 +146,11 @@ void Mathematics::QuadraticFit3<Real>
 
 	eigenSystem.Solve(true);
 
-    m_Coeff = eigenSystem.GetEigenvector(0);
-    
-    // 对于精确配合，数字舍入误差可能使最小特征值仅仅略为负值。
-    // 返回的绝对值，因为应用程序可能依赖的返回值是非负数。	 
-	m_EigenValue = Math<Real>::FAbs(eigenSystem.GetEigenvalue(0)); 	 
+	m_Coeff = eigenSystem.GetEigenvector(0);
+
+	// 对于精确配合，数字舍入误差可能使最小特征值仅仅略为负值。
+	// 返回的绝对值，因为应用程序可能依赖的返回值是非负数。	 
+	m_EigenValue = Math<Real>::FAbs(eigenSystem.GetEigenvalue(0));
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -158,10 +158,10 @@ template <typename Real>
 bool Mathematics::QuadraticFit3<Real>
 	::IsValid() const noexcept
 {
-    if(Real{} <= m_EigenValue)
-        return true;
-    else
-        return false;
+	if (Math<Real>::sm_Zero <= m_EigenValue)
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -170,20 +170,19 @@ typename const Mathematics::QuadraticFit3<Real>::VariableLengthVector
 Mathematics::QuadraticFit3<Real>
 	::GetCoeff() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
-    return m_Coeff;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+	return m_Coeff;
 }
 
 template <typename Real>
 Real Mathematics::QuadraticFit3<Real>
 	::GetEigenValue() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
-    return m_EigenValue;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+	return m_EigenValue;
 }
 
 #endif // MATHEMATICS_APPROXIMATION_QUADRATIC_FIT3_DETAIL_H
 
- 

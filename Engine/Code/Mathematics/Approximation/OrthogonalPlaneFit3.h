@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 11:14)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 12:30)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_PLANE_FIT3_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_PLANE_FIT3_H
@@ -24,6 +24,7 @@ namespace Mathematics
 		using ClassType = OrthogonalPlaneFit3<Real>;
 		using Vector3D = Vector3D<Real>;
 		using Plane3 = Plane3<Real>;
+		using Math = Math<Real>;
 
 	public:
 		explicit OrthogonalPlaneFit3(const std::vector<Vector3D>& points);
@@ -31,13 +32,13 @@ namespace Mathematics
 		CLASS_INVARIANT_DECLARE;
 
 
-		Plane3 GetPlane3() const;	 
+		Plane3 GetPlane3() const;
 
 	private:
 		static Plane3 Calculate(const std::vector<Vector3D>& points);
 
 	private:
-		Plane3 m_Plane3; 
+		Plane3 m_Plane3;
 	};
 
 	using OrthogonalPlaneFit3d = OrthogonalPlaneFit3<double>;

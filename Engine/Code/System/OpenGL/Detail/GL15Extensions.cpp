@@ -49,116 +49,119 @@ System::PgglGetBufferPointerv System::gglGetBufferPointerv{ nullptr };
 void System
 	::GlGenQueries(GLsizei numQueries, GLuint* id) noexcept
 {
-	SYSTEM_BODY_A2(gglGenQueries, numQueries, id);
+	SYSTEM_BODY_2(gglGenQueries, numQueries, id);
 }
 
 void System
 	::GlDeleteQueries(GLsizei numQueries, const GLuint* id) noexcept
 {
-	SYSTEM_BODY_A2(gglDeleteQueries, numQueries, id);
+	SYSTEM_BODY_2(gglDeleteQueries, numQueries, id);
 }
 
 GLboolean System
 	::GlIsQuery(GLuint id) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglIsQuery, id, GLboolean, GL_FALSE);
+	SYSTEM_BODY_1_RESULT(gglIsQuery, id, GLboolean, GL_FALSE);
 }
 
 void System
 	::GlBeginQuery(GLenum target, GLuint id) noexcept
 {
-	SYSTEM_BODY_A2(gglBeginQuery, target, id);
+	SYSTEM_BODY_2(gglBeginQuery, target, id);
 }
 
 void System
 	::GlEndQuery(GLenum target) noexcept
 {
-	SYSTEM_BODY_A1(gglEndQuery, target);
+	SYSTEM_BODY_1(gglEndQuery, target);
 }
 
 void System
 	::GlGetQueryiv(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetQueryiv, target, name, param);
+	SYSTEM_BODY_3(gglGetQueryiv, target, name, param);
 }
 
 void System
 	::GlGetQueryObjectiv(GLuint id, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetQueryObjectiv, id, name, param);
+	SYSTEM_BODY_3(gglGetQueryObjectiv, id, name, param);
 }
 
 void System
 	::GlGetQueryObjectuiv(GLuint id, GLenum name, GLuint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetQueryObjectuiv, id, name, param);
+	SYSTEM_BODY_3(gglGetQueryObjectuiv, id, name, param);
 }
 
 void System
 	::GlBindBuffer(GLenum target, GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A2(gglBindBuffer, target, buffer);
+	SYSTEM_BODY_2(gglBindBuffer, target, buffer);
 }
 
 void System
 	::GlDeleteBuffers(GLsizei numBuffers, const GLuint* buffer) noexcept
 {
-	SYSTEM_BODY_A2(gglDeleteBuffers, numBuffers, buffer);
+	SYSTEM_BODY_2(gglDeleteBuffers, numBuffers, buffer);
 }
 
 void System
 	::GlGenBuffers(GLsizei numBuffers, GLuint* buffer) noexcept
 {
-	SYSTEM_BODY_A2(gglGenBuffers, numBuffers, buffer);
+	SYSTEM_BODY_2(gglGenBuffers, numBuffers, buffer);
 }
 
 GLboolean System
 	::GlIsBuffer(GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglIsBuffer, buffer, GLboolean, GL_FALSE);
+	SYSTEM_BODY_1_RESULT(gglIsBuffer, buffer, GLboolean, GL_FALSE);
 }
 
 void System
 	::GlBufferData(GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage) noexcept
 {
-	SYSTEM_BODY_A4(gglBufferData, target, size, data, usage);
+	SYSTEM_BODY_4(gglBufferData, target, size, data, usage);
 }
 
 void System
 	::GlBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A4(gglBufferSubData, target, offset, size, data);
+	SYSTEM_BODY_4(gglBufferSubData, target, offset, size, data);
 }
 
 void System
 	::GlGetBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A4(gglGetBufferSubData, target, offset, size, data);
+	SYSTEM_BODY_4(gglGetBufferSubData, target, offset, size, data);
 }
 
 GLvoid* System
 	::GlMapBuffer(GLenum target, GLenum access) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglMapBuffer, target, access, GLvoid*, nullptr);
+	SYSTEM_BODY_2_RESULT(gglMapBuffer, target, access, GLvoid*, nullptr);
 }
 
 GLboolean System
 	::GlUnmapBuffer(GLenum target) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglUnmapBuffer, target, GLboolean, GL_FALSE);
+	SYSTEM_BODY_1_RESULT(gglUnmapBuffer, target, GLboolean, GL_FALSE);
 }
 
 void System
 	::GlGetBufferParameteriv(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetBufferParameteriv, target, name, param);
+	SYSTEM_BODY_3(gglGetBufferParameteriv, target, name, param);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::GlGetBufferPointerv(GLenum target, GLenum name, GLvoid** param) noexcept
 {
-	SYSTEM_BODY_A3(gglGetBufferPointerv, target, name, param);
+	SYSTEM_BODY_3(gglGetBufferPointerv, target, name, param);
 }
+#include STSTEM_WARNING_POP
 
 void System
 	::InitOpenGL15() noexcept

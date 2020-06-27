@@ -25,7 +25,7 @@ Mathematics::ConformalMap<Real>
 	// Construct sparse matrix A nondiagonal entries.
 	typename LinearSystem<Real>::SparseMatrixType AMat(numEdges, numEdges);
 	int i, e, t, v0, v1, v2;
-	Real value = Real{};
+	Real value = Math<Real>::sm_Zero;
 	for (e = 0; e < numEdges; ++e)
 	{
 		const BasicMesh::Edge& edge = edges[e];
@@ -60,7 +60,7 @@ Mathematics::ConformalMap<Real>
 			}
 		}
 
-		value *= -Real{ 0.5 };
+		value *= -static_cast<Real>(0.5);
 		AMat(v0, v1) = value;
 	}
 
@@ -99,15 +99,15 @@ Mathematics::ConformalMap<Real>
 	Vector3D<Real> E12 = V1 - V2;
 	Vector3D<Real> cross = Vector3DTools<Real>::CrossProduct(E20, E10);
 	Real len10 = Vector3DTools<Real>::VectorMagnitude(E10);
-	Real invLen10 = ((Real)1) / len10;
+	Real invLen10 = (static_cast<Real>(1)) / len10;
 	Real twoArea = Vector3DTools<Real>::VectorMagnitude(cross);
-	Real invLenCross = ((Real)1) / twoArea;
+	Real invLenCross = (static_cast<Real>(1)) / twoArea;
 	Real invProd = invLen10 * invLenCross;
 	Real re0 = -invLen10;
 	Real im0 = invProd * Vector3DTools<Real>::DotProduct(E12, E10);
 	Real re1 = invLen10;
 	Real im1 = invProd * Vector3DTools<Real>::DotProduct(E20, E10);
-	Real re2 = Real{};
+	Real re2 = Math<Real>::sm_Zero;
 	Real im2 = -len10 * invLenCross;
 
 	// Solve sparse system for real parts.
@@ -177,12 +177,12 @@ Mathematics::ConformalMap<Real>
 			fmax = mPlanes[i].GetYCoordinate();
 		}
 	}
-	Real halfRange = (Real{ 0.5 })*(fmax - fmin);
-	Real invHalfRange = ((Real)1) / halfRange;
+	Real halfRange = (static_cast<Real>(0.5))*(fmax - fmin);
+	Real invHalfRange = (static_cast<Real>(1)) / halfRange;
 	for (i = 0; i < numPoints; ++i)
 	{
-		mPlanes[i].SetXCoordinate(-(Real)1 + invHalfRange * (mPlanes[i].GetXCoordinate() - fmin));
-		mPlanes[i].SetYCoordinate(-(Real)1 + invHalfRange * (mPlanes[i].GetYCoordinate() - fmin));
+		mPlanes[i].SetXCoordinate(-static_cast<Real>(1) + invHalfRange * (mPlanes[i].GetXCoordinate() - fmin));
+		mPlanes[i].SetYCoordinate(-static_cast<Real>(1) + invHalfRange * (mPlanes[i].GetYCoordinate() - fmin));
 	}
 
 	// Map plane points to sphere using inverse stereographic projection.
@@ -193,7 +193,7 @@ Mathematics::ConformalMap<Real>
 	// Use the average as the south pole.  The points tend to be clustered
 	// approximately in the middle of the conformally mapped punctured
 	// triangle, so the average is a good choice to place the pole.
-	Vector2D<Real> origin(Real{}, Real{});
+	Vector2D<Real> origin(Math<Real>::sm_Zero, Math<Real>::sm_Zero);
 	for (i = 0; i < numPoints; ++i)
 	{
 		origin += mPlanes[i];
@@ -231,7 +231,7 @@ Mathematics::ConformalMap<Real>
 	// triangle has an area whose fraction of total spherical area is the
 	// same fraction as the area of the punctured triangle to the total area
 	// of the original triangle mesh.
-	Real twoTotalArea = Real{};
+	Real twoTotalArea = Math<Real>::sm_Zero;
 	for (t = 0; t < numTriangles; ++t)
 	{
 		const BasicMesh::Triangle& T0 = triangles[t];
@@ -249,9 +249,9 @@ Mathematics::ConformalMap<Real>
 	for (i = 0; i < numPoints; i++)
 	{
 		Real rSqr = Vector3DTools<Real>::VectorMagnitudeSquared(mPlanes[i]);
-		Real mult = ((Real)1) / (rSqr + radiusSqr);
-		Real x = ((Real)2)*mult*radiusSqr*mPlanes[i].GetXCoordinate();
-		Real y = ((Real)2)*mult*radiusSqr*mPlanes[i].GetYCoordinate();
+		Real mult = (static_cast<Real>(1)) / (rSqr + radiusSqr);
+		Real x = (static_cast<Real>(2))*mult*radiusSqr*mPlanes[i].GetXCoordinate();
+		Real y = (static_cast<Real>(2))*mult*radiusSqr*mPlanes[i].GetYCoordinate();
 		Real z = mult * mRadius*(rSqr - radiusSqr);
 		mSpheres[i] = Vector3D<Real>(x, y, z) / mRadius;
 	}
@@ -327,21 +327,21 @@ Real Mathematics::ConformalMap<Real>
 	Real e2 = diffX10 * diffY20 - diffX20 * diffY10;
 
 	Polynomial<Real> poly0(6);
-	poly0[0] = Real{};
-	poly0[1] = Real{};
+	poly0[0] = Math<Real>::sm_Zero;
+	poly0[1] = Math<Real>::sm_Zero;
 	poly0[2] = e0 * e0;
-	poly0[3] = c0 * c0 + d0 * d0 + ((Real)2)*e0*e1;
-	poly0[4] = ((Real)2)*(c0*c1 + d0 * d1 + e0 * e1) + e1 * e1;
-	poly0[5] = c1 * c1 + d1 * d1 + ((Real)2)*e1*e2;
+	poly0[3] = c0 * c0 + d0 * d0 + (static_cast<Real>(2))*e0*e1;
+	poly0[4] = (static_cast<Real>(2))*(c0*c1 + d0 * d1 + e0 * e1) + e1 * e1;
+	poly0[5] = c1 * c1 + d1 * d1 + (static_cast<Real>(2))*e1*e2;
 	poly0[6] = e2 * e2;
 
 	Polynomial<Real> qpoly0(1), qpoly1(1), qpoly2(1);
 	qpoly0[0] = r0Sqr;
-	qpoly0[1] = (Real)1;
+	qpoly0[1] = static_cast<Real>(1);
 	qpoly1[0] = r1Sqr;
-	qpoly1[1] = (Real)1;
+	qpoly1[1] = static_cast<Real>(1);
 	qpoly2[0] = r2Sqr;
-	qpoly2[1] = (Real)1;
+	qpoly2[1] = static_cast<Real>(1);
 
 	Real tmp = areaFraction * Math<Real>::sm_PI;
 	Real amp = tmp * tmp;
@@ -359,23 +359,23 @@ Real Mathematics::ConformalMap<Real>
 	MATHEMATICS_ASSERTION_0(final.GetDegree() <= 8, "Unexpected condition\n");
 
 	// Bound a root near zero and apply bisection to find t.
-	Real tmin = Real{}, fmin = final(tmin);
-	Real tmax = (Real)1, fmax = final(tmax);
-	MATHEMATICS_ASSERTION_0(fmin > Real{} && fmax < Real{}, "Unexpected condition\n");
+	Real tmin = Math<Real>::sm_Zero, fmin = final(tmin);
+	Real tmax = static_cast<Real>(1), fmax = final(tmax);
+	MATHEMATICS_ASSERTION_0(fmin > Math<Real>::sm_Zero && fmax < Math<Real>::sm_Zero, "Unexpected condition\n");
 
 	// Determine the number of iterations to get 'digits' of accuracy.
 	const int digits = 6;
 	Real tmp0 = Math<Real>::Log(tmax - tmin);
-	Real tmp1 = ((Real)digits)*Math<Real>::Log((Real)10);
-	Real arg = (tmp0 + tmp1) / Math<Real>::Log((Real)2);
-	int maxIter = (int)(arg + Real{ 0.5 });
-	Real tmid = Real{}, fmid;
+	Real tmp1 = ((Real)digits)*Math<Real>::Log(static_cast<Real>(10));
+	Real arg = (tmp0 + tmp1) / Math<Real>::Log(static_cast<Real>(2));
+	int maxIter = (int)(arg + static_cast<Real>(0.5));
+	Real tmid = Math<Real>::sm_Zero, fmid;
 	for (int i = 0; i < maxIter; ++i)
 	{
-		tmid = (Real{ 0.5 })*(tmin + tmax);
+		tmid = (static_cast<Real>(0.5))*(tmin + tmax);
 		fmid = final(tmid);
 		Real product = fmid * fmin;
-		if (product < Real{})
+		if (product < Math<Real>::sm_Zero)
 		{
 			tmax = tmid;
 			fmax = fmid;

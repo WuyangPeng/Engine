@@ -2,6 +2,8 @@ TODO Level 4
 
 0.0.0.2
 
-1.  将Polyhedron3和ConvexPolyhedron3中的智能指针改成std::shared_ptr。
-2.  将基本BSP算法用于ConvexPolyhedron3的Contains函数。这是一个O(log n)的算法。
+1.  （Objects3D）将Polyhedron3和ConvexPolyhedron3中的智能指针改成std::shared_ptr。
+2.  （Objects3D）将基本BSP算法用于ConvexPolyhedron3的Contains函数。这是一个O(log n)的算法。
+
+0.0.2.5
  

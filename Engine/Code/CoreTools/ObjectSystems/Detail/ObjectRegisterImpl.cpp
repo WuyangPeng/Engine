@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MemoryTools/ConstFirstSubclassSmartPointerDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp> 
+#include "System/Helper/PragmaWarning/NumericCast.h" 
 
 CoreTools::ObjectRegisterImpl
 	::ObjectRegisterImpl()

@@ -74,11 +74,10 @@ void Rendering::ConvexRegionManager
         mCuller.ComputeVisibleSet(region);
 
         // Copy the unique list to the scene culler.
-		 
-        const int numVisible = mCuller.GetNumVisible();
-        for (int i = 0; i < numVisible; ++i)
+ 
+        for (auto& value : mCuller)
         {
-            culler.Insert(mCuller.GetVisible(i));
+            culler.Insert(value);
         } 
     }
     else

@@ -1,18 +1,18 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/10 10:09)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/23 09:58)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_INT64_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_INT64_DETAIL_H
- 
+
 #include "Query2Int64.h"
 #include "QueryDotToolsDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Query2Int64<Real>
@@ -34,10 +34,10 @@ template <typename Real>
 bool Mathematics::Query2Int64<Real>
 	::IsValid() const noexcept
 {
-    if(ParentType::IsValid())
-        return true;
-    else
-        return false;    
+	if (ParentType::IsValid())
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -46,7 +46,7 @@ Mathematics::QueryType Mathematics::Query2Int64<Real>
 	::GetType() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
+
 	return QueryType::Int64;
 }
 
@@ -55,7 +55,7 @@ Mathematics::LineQueryType Mathematics::Query2Int64<Real>
 	::ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
+
 	return ParentType::ToLine(index, lhsVerticesIndex, rhsVerticesIndex);
 }
 
@@ -64,17 +64,17 @@ Mathematics::LineQueryType Mathematics::Query2Int64<Real>
 	::ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
 
-	const auto vector0 = GetVertice(lhsVerticesIndex);
-	const auto vector1 = GetVertice(rhsVerticesIndex);
-    
+	const auto vector0 = this->GetVertice(lhsVerticesIndex);
+	const auto vector1 = this->GetVertice(rhsVerticesIndex);
+
 	int64_t x0{ boost::numeric_cast<int64_t>(testVector[0]) - boost::numeric_cast<int64_t>(vector0[0]) };
 	int64_t y0{ boost::numeric_cast<int64_t>(testVector[1]) - boost::numeric_cast<int64_t>(vector0[1]) };
 	int64_t x1{ boost::numeric_cast<int64_t>(vector1[0]) - boost::numeric_cast<int64_t>(vector0[0]) };
 	int64_t y1{ boost::numeric_cast<int64_t>(vector1[1]) - boost::numeric_cast<int64_t>(vector0[1]) };
-    
+
 	auto det = QueryDotTools<int64_t>::Det2(x0, y0, x1, y1);
 
 	if (0 < det)
@@ -90,22 +90,22 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Int64<Real>
 	::ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
+
 	return ParentType::ToCircumcircle(index, lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
 Mathematics::CircumcircleQueryType Mathematics::Query2Int64<Real>
-	::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex,int mhsVerticesIndex, int rhsVerticesIndex) const
+	::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
 
-	const Vector2D lhsVector{ GetVertice(lhsVerticesIndex) };
-	const Vector2D mhsVector{ GetVertice(mhsVerticesIndex) };
-	const Vector2D rhsVector{ GetVertice(rhsVerticesIndex) };
+	const Vector2D lhsVector{ this->GetVertice(lhsVerticesIndex) };
+	const Vector2D mhsVector{ this->GetVertice(mhsVerticesIndex) };
+	const Vector2D rhsVector{ this->GetVertice(rhsVerticesIndex) };
 
 	auto lhsPlusTestX = boost::numeric_cast<int64_t>(lhsVector[0] + testVector[0]);
 	auto lhsMinusTestX = boost::numeric_cast<int64_t>(lhsVector[0] - testVector[0]);
@@ -122,16 +122,15 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Int64<Real>
 	auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
 	auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
 	auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
-    
-	auto det = QueryDotTools<int64_t>::Det3(lhsMinusTestX, lhsMinusTestY, z0,mhsMinusTestX, mhsMinusTestY, z1,rhsMinusTestX, rhsMinusTestY, z2);
-    
+
+	auto det = QueryDotTools<int64_t>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
+
 	if (0 < det)
 		return CircumcircleQueryType::Inside;
 	else if (det < 0)
 		return CircumcircleQueryType::Outside;
 	else
-		return CircumcircleQueryType::OnCircumcircle;	
+		return CircumcircleQueryType::OnCircumcircle;
 }
 
 #endif // MATHEMATICS_QUERY_QUERY2_INT64_DETAIL_H
- 

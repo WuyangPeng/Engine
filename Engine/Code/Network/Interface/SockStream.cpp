@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.1.0 (2019/10/23 10:06)
-
+// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 10:56)
 
 #include "Network/NetworkExport.h" 
 
@@ -65,4 +64,4 @@ void Network::SockStream
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->AsyncReceive(eventInterface, messageBuffer);
-}  
+}

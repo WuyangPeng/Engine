@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 13:22)
+// 引擎版本：0.2.0.0 (2020/05/09 16:05)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_STRING_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_STRING_H
@@ -87,12 +87,12 @@ namespace System
 	bool StringPrintfUseCharactersSize(TChar* dest, size_t destCharactersSize, TChar** destEnd, size_t* remaining, StringSafe flag, const TChar* format, T... args);
 	template <typename... T>
 	bool StringPrintfUseBytesSize(TChar* dest, size_t destBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag, const TChar* format, T... args);
-	
+
 	// 返回存储在buffer中的字符，不包括终止null字符。
 	// 传入的sizeInBytes大小包括终止null字符，buffer的大小至少为sizeInBytes。错误返回-1。
 
 	template <typename... Types>
-	int SNPrintf(char* const buffer, const size_t sizeInBytes, const size_t maxCount, char const* const format, const Types&... args);
+	int SNPrintf(char* const buffer, const size_t sizeInBytes, const size_t maxCount, char const* const format, const Types&... args) noexcept;
 }
 
 #endif // SYSTEM_CHARACTER_STRING_FORMAT_STRING_H

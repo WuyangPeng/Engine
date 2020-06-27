@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 11:49)
+// 引擎版本：0.0.2.5 (2020/03/19 10:15)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H
@@ -14,17 +14,17 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class QuaternionSwingTwist  
+	class QuaternionSwingTwist
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = QuaternionSwingTwist<Real>;
 		using Quaternion = Quaternion<Real>;
 
 	public:
-		QuaternionSwingTwist(const Quaternion& swing,const Quaternion& twist);
-	
+		QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist);
+
 		CLASS_INVARIANT_DECLARE;
 
 		const Quaternion GetTwist() const;

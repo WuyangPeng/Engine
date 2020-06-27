@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
 {
     // Triangle is <P0,P1,P2>, edges are E0 = P1-P0, E1=P2-P0.
     int onConeSide = 0;
-    Real p0Test = Real{}, p1Test = Real{}, p2Test = Real{};
+    Real p0Test = Math<Real>::sm_Zero, p1Test = Math<Real>::sm_Zero, p2Test = Math<Real>::sm_Zero;
     Real AdE, EdE, EdD, c1, c2;
 
 	auto cosSqr = mCone.GetCosAngle()*mCone.GetCosAngle();
@@ -45,11 +45,11 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
     // Test vertex P0.
 	auto diff0 = mTriangle.GetVertex()[0] - mCone.GetVertex();
 	auto AdD0 = Vector3DTools::DotProduct(mCone.GetAxis(),diff0);
-    if (AdD0 >= Real{})
+    if (AdD0 >= Math<Real>::sm_Zero)
     {
         // P0 is on cone side of plane.
 		p0Test = AdD0*AdD0 - cosSqr*(Vector3DTools::DotProduct(diff0,diff0));
-        if (p0Test >= Real{})
+        if (p0Test >= Math<Real>::sm_Zero)
         {
             // P0 is inside the cone.
 			this->SetIntersectionType(IntersectionType::Other);
@@ -67,11 +67,11 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
 	auto edge0 = mTriangle.GetVertex()[1] - mTriangle.GetVertex()[0];
 	auto diff1 = diff0 + edge0;
 	auto AdD1 = Vector3DTools::DotProduct(mCone.GetAxis(),diff1);
-    if (AdD1 >= Real{})
+    if (AdD1 >= Math<Real>::sm_Zero)
     {
         // P1 is on cone side of plane.
 		p1Test = AdD1*AdD1 - cosSqr*(Vector3DTools::DotProduct(diff1,diff1));
-        if (p1Test >= Real{})
+        if (p1Test >= Math<Real>::sm_Zero)
         {
             // P1 is inside the cone.
 			this->SetIntersectionType(IntersectionType::Other);
@@ -89,11 +89,11 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
 	auto edge1 = mTriangle.GetVertex()[2] - mTriangle.GetVertex()[0];
 	auto diff2 = diff0 + edge1;
 	auto AdD2 = Vector3DTools::DotProduct(mCone.GetAxis(),diff2);
-    if (AdD2 >= Real{})
+    if (AdD2 >= Math<Real>::sm_Zero)
     {
         // P2 is on cone side of plane.
 		p2Test = AdD2*AdD2 - cosSqr*(Vector3DTools::DotProduct(diff2,diff2));
-        if (p2Test >= Real{})
+        if (p2Test >= Math<Real>::sm_Zero)
         {
             // P2 is inside the cone.
 			this->SetIntersectionType(IntersectionType::Other);
@@ -113,7 +113,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
         AdE = AdD1 - AdD0;
 		EdE = Vector3DTools::DotProduct(edge0,edge0);
         c2 = AdE*AdE - cosSqr*EdE;
-        if (c2 < Real{})
+        if (c2 < Math<Real>::sm_Zero)
         {
 			EdD = Vector3DTools::DotProduct(edge0,diff0);
             c1 = AdE*AdD0 - cosSqr*EdD;
@@ -122,7 +122,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
                 if (onConeSide & 2)
                 {
                     // <P0,P1> fully on cone side of plane, fC0 = p0Test.
-                    if (Real{} <= c1 && c1 <= -c2 && c1*c1 >= p0Test*c2)
+                    if (Math<Real>::sm_Zero <= c1 && c1 <= -c2 && c1*c1 >= p0Test*c2)
                     {
 						this->SetIntersectionType(IntersectionType::Other);
 						return;
@@ -133,7 +133,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
                     // P0 on cone side (Dot(A,P0-V) >= 0),
                     // P1 on opposite side (Dot(A,P1-V) <= 0)
                     // (Dot(A,E0) <= 0), fC0 = p0Test.
-                    if (Real{} <= c1 && c2*AdD0 <= c1*AdE &&  c1*c1 >= p0Test*c2)
+                    if (Math<Real>::sm_Zero <= c1 && c2*AdD0 <= c1*AdE &&  c1*c1 >= p0Test*c2)
                     {
 						this->SetIntersectionType(IntersectionType::Other);
 						return;
@@ -165,7 +165,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
         AdE = AdD2 - AdD0;
 		EdE = Vector3DTools::DotProduct(edge1,edge1);
         c2 = AdE*AdE - cosSqr*EdE;
-        if (c2 < Real{})
+        if (c2 < Math<Real>::sm_Zero)
         {
 			EdD = Vector3DTools::DotProduct(edge1,diff0);
             c1 = AdE*AdD0 - cosSqr*EdD;
@@ -278,12 +278,12 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
 		auto NcU = Vector3DTools::CrossProduct(N,U);
 
 		auto NcUdE0 = Vector3DTools::DotProduct(NcU,edge0), NcUdE1, NcUdE2, NdN;
-        if (NdA >= Real{})
+        if (NdA >= Math<Real>::sm_Zero)
         {
-            if (NcUdE0 <= Real{})
+            if (NcUdE0 <= Math<Real>::sm_Zero)
             {
 				NcUdE1 = Vector3DTools::DotProduct(NcU,edge1);
-                if (NcUdE1 >= Real{})
+                if (NcUdE1 >= Math<Real>::sm_Zero)
                 {
                     NcUdE2 = NcUdE1 - NcUdE0;
 					NdN = Vector3DTools::VectorMagnitudeSquared(N);
@@ -297,10 +297,10 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
         }
         else
         {
-            if (NcUdE0 >= Real{})
+            if (NcUdE0 >= Math<Real>::sm_Zero)
             {
 				NcUdE1 = Vector3DTools::DotProduct(NcU,edge1);
-                if (NcUdE1 <= Real{})
+                if (NcUdE1 <= Math<Real>::sm_Zero)
                 {
                     NcUdE2 = NcUdE1 - NcUdE0;
 					NdN = Vector3DTools::VectorMagnitudeSquared(N);

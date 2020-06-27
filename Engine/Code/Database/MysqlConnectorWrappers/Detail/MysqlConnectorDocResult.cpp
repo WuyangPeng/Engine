@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/03 10:25)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/16 12:49)
 
 #include "Database/DatabaseExport.h"
 
@@ -14,7 +14,7 @@ using std::make_shared;
 using std::make_unique;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
- 
+
 Database::MysqlConnectorDocResult
 	::MysqlConnectorDocResult(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultPtr& mysqlxDocResult)
 	: ParentType{ configurationStrategy }, m_MysqlxDocResult{ mysqlxDocResult }
@@ -46,7 +46,7 @@ Database::ResultImpl::ResultRowPtr Database::MysqlConnectorDocResult
 
 	auto result = m_MysqlxDocResult->fetchOne();
 
-	return make_unique<ResultRow>(GetConfigurationStrategy(),make_shared<MysqlxDbDoc>(result));
+	return make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxDbDoc>(result));
 }
 
 Database::ResultImpl::ResultRowContainer Database::MysqlConnectorDocResult
@@ -55,14 +55,14 @@ Database::ResultImpl::ResultRowContainer Database::MysqlConnectorDocResult
 	DATABASE_CLASS_IS_VALID_1;
 
 	ResultRowContainer container;
-	
+
 	auto result = m_MysqlxDocResult->fetchAll();
-	
-	for (const auto& value:result)
+
+	for (const auto& value : result)
 	{
 		container.push_back(make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxDbDoc>(value)));
 	}
-	
+
 	return container;
 }
 

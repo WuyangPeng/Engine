@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 14:36)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:00)
 
 #ifndef MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_H
 #define MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_H
@@ -16,7 +16,7 @@
 #include <array>
 
 namespace Mathematics
-{ 
+{
 	template <typename Real>
 	class TrianglePlaneRelations
 	{
@@ -26,9 +26,9 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 		using Plane3 = Plane3<Real>;
 		using Math = Math<Real>;
- 
+
 	public:
-		TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane,const Real epsilon  = Math::sm_ZeroTolerance);
+		TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, const Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -36,7 +36,7 @@ namespace Mathematics
 		NumericalValueSymbol GetSign(int index) const;
 		int GetPositive() const;
 		int GetNegative() const;
-		int GetZero() const;	 
+		int GetZero() const;
 
 	private:
 		void Relations(const Triangle3& triangle, const Plane3& plane, const Real epsilon);
@@ -49,7 +49,7 @@ namespace Mathematics
 		int m_Positive;
 		int m_Negative;
 		int m_Zero;
-	};	
+	};
 
 	using TrianglePlaneRelationsf = TrianglePlaneRelations<float>;
 	using TrianglePlaneRelationsd = TrianglePlaneRelations<double>;

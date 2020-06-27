@@ -16,6 +16,11 @@
 	    namespace namespaceName { class implClassName; } \
         template class exportName std::shared_ptr<namespaceName::implClassName>
 
+#define EXPORT_UNIQUE_PTR(namespaceName,implClassName,exportName) \
+	    namespace namespaceName { class implClassName; } \
+		template class exportName std::_Compressed_pair<std::default_delete<namespaceName::implClassName>, namespaceName::implClassName*>; \
+		template class exportName std::unique_ptr<namespaceName::implClassName> 
+
 #define EXPORT_CLASS(exportName,className) \
 	    class SYSTEM_CONCATENATOR(exportName,_DEFAULT_DECLARE) className
 
@@ -69,6 +74,54 @@
 
 #define FRAMEWORK_EXPORT_SHARED_PTR(implClassName) \
 	    EXPORT_SHARED_PTR(Framework,implClassName,FRAMEWORK_DEFAULT_DECLARE)
+
+#define CORE_TOOLS_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(CoreTools,implClassName,CORE_TOOLS_DEFAULT_DECLARE)
+
+#define NETWORK_EXPORT_UNIQUE_PTR(implClassName) \
+        EXPORT_UNIQUE_PTR(Network,implClassName,NETWORK_DEFAULT_DECLARE)
+
+#define DATABASE_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(Database,implClassName,DATABASE_DEFAULT_DECLARE)
+
+#define SCRIPT_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(Script,implClassName,SCRIPT_DEFAULT_DECLARE)
+
+#define MATHEMATICS_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(Mathematics,implClassName,MATHEMATICS_DEFAULT_DECLARE)
+
+#define SOUND_EFFECT_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(SoundEffect,implClassName,SOUND_EFFECT_DEFAULT_DECLARE)
+
+#define INPUT_OUTPUT_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(InputOutput,implClassName,INPUT_OUTPUT_DEFAULT_DECLARE)
+
+#define RESOURCE_MANAGER_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(ResourceManager,implClassName,RESOURCE_MANAGER_DEFAULT_DECLARE)
+
+#define RENDERING_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(Rendering,implClassName,RENDERING_DEFAULT_DECLARE)
+
+#define PHYSICS_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(Physics,implClassName,PHYSICS_DEFAULT_DECLARE)
+
+#define IMAGICS_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(Imagics,implClassName,IMAGICS_DEFAULT_DECLARE)
+
+#define ANIMATION_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(Animation,implClassName,ANIMATION_DEFAULT_DECLARE)
+
+#define ARTIFICIAL_INTELLEGENCE_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(ArtificialIntellegence,implClassName,ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE)
+
+#define USER_INTERFACE_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(UserInterface,implClassName,USER_INTERFACE_DEFAULT_DECLARE)
+
+#define ASSIST_TOOLS_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(AssistTools,implClassName,ASSIST_TOOLS_DEFAULT_DECLARE)
+
+#define FRAMEWORK_EXPORT_UNIQUE_PTR(implClassName) \
+	    EXPORT_UNIQUE_PTR(Framework,implClassName,FRAMEWORK_DEFAULT_DECLARE)
 
 #define TYPE_DECLARE(className) \
 	    using ClassType = className;using ImplType = SYSTEM_CONCATENATOR(className,Impl)

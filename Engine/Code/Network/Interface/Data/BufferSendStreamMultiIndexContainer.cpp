@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/11/29 10:23)
-
+// 引擎版本：0.0.2.4 (2020/03/11 10:52)
 
 #include "Network/NetworkExport.h" 
 
@@ -14,7 +13,7 @@
 using std::make_shared;
 
 Network::BufferSendStreamMultiIndexContainer
-	::BufferSendStreamMultiIndexContainer( )
+	::BufferSendStreamMultiIndexContainer()
 	:m_SocketIDContainer{}, m_HandleIDContainer{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
@@ -22,8 +21,8 @@ Network::BufferSendStreamMultiIndexContainer
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Network::BufferSendStreamMultiIndexContainer
-	::IsValid() const noexcept 
-{ 
+	::IsValid() const noexcept
+{
 	if (m_SocketIDContainer.size() == m_HandleIDContainer.size())
 		return true;
 	else
@@ -76,7 +75,7 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的handle"));	
+	THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的handle"));
 }
 
 void Network::BufferSendStreamMultiIndexContainer
@@ -90,7 +89,7 @@ void Network::BufferSendStreamMultiIndexContainer
 	{
 		m_HandleIDContainer.erase(iter->second->GetACEHandle());
 		m_SocketIDContainer.erase(iter);
-	}	
+	}
 }
 
 Network::BufferSendStreamMultiIndexContainer::SocketIDContainerConstIter Network::BufferSendStreamMultiIndexContainer

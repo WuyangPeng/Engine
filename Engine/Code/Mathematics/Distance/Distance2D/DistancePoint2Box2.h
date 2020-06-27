@@ -10,13 +10,11 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Distance/DistanceBase.h"
-#include "Mathematics/Objects2D/Box2.h"
+#include "Mathematics/Objects2D/Box2.h" 
+#include "Mathematics/Algebra/AlgebraFwd.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-
 	template <typename Real>
 	class DistancePoint2Box2 : public DistanceBase<Real, Vector2D<Real> >
 	{
@@ -26,8 +24,7 @@ namespace Mathematics
 		using ParentType = DistanceBase<Real, Vector2D>;
 		using Box2 = Box2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
+		using DistanceResult = typename ParentType::DistanceResult; 
 
 	public:
 		DistancePoint2Box2(const Vector2D& point, const Box2& ellipse);
@@ -35,14 +32,14 @@ namespace Mathematics
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-  		const Vector2D GetPoint () const;
+		const Vector2D GetPoint() const;
 		const Box2 GetBox() const;
 
 		// æ≤Ã¨æ‡¿Î≤È—Ø°£		 
 		virtual const DistanceResult GetSquared() const override;
 
 		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£		
-		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity,const Vector2D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
 	private:
 		Vector2D m_Point;
@@ -54,4 +51,3 @@ namespace Mathematics
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_POINT2_BOX2_H
- 

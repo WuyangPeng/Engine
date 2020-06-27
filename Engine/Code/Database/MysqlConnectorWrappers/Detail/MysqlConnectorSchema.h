@@ -1,33 +1,32 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 10:17)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 12:48)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_SCHEMA_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_SCHEMA_H
 
 #include "Database/DatabaseDll.h"
 
+#include "Database/SqlInterface/SqlInterfaceInternalFwd.h"
 #include "Database/SqlInterface/Detail/SchemaImpl.h" 
 #include "Database/MysqlConnectorWrappers/Using/MysqlConnectorUsing.h"
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
- 
+
 namespace Database
 {
-	class SessionImpl;
-
 	class DATABASE_HIDDEN_DECLARE MysqlConnectorSchema : public SchemaImpl
 	{
 	public:
 		using ClassType = MysqlConnectorSchema;
 		using ParentType = SchemaImpl;
-		using SessionWeakPtr = std::weak_ptr<SessionImpl>;	
+		using SessionWeakPtr = std::weak_ptr<SessionImpl>;
 
 	public:
 		explicit MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr);
-		MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr,int dbIndex);
+		MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr, int dbIndex);
 		MysqlConnectorSchema(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema);
 		virtual ~MysqlConnectorSchema();
 
@@ -42,10 +41,10 @@ namespace Database
 	private:
 		static ConfigurationStrategy GetConfigurationStrategy(const SessionWeakPtr& sessionWeakPtr);
 		static MysqlxSchemaPtr GetMysqlxSchemaPtr(const SessionWeakPtr& sessionWeakPtr);
-		static MysqlxSchemaPtr GetMysqlxSchemaPtr(const SessionWeakPtr& sessionWeakPtr,int dbIndex);
+		static MysqlxSchemaPtr GetMysqlxSchemaPtr(const SessionWeakPtr& sessionWeakPtr, int dbIndex);
 
 	private:
-		MysqlxSchemaPtr m_MysqlxSchema;		
+		MysqlxSchemaPtr m_MysqlxSchema;
 	};
 }
 

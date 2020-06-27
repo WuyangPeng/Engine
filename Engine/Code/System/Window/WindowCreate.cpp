@@ -9,7 +9,7 @@
 #include "WindowCreate.h"
 #include "Flags/WindowCreateFlags.h"
 #include "System/Helper/UnusedMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 #include <array>
 

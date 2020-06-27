@@ -21,15 +21,18 @@ namespace CoreTools
 		using ClassType = ArrayProxy;
 
 	public:
-		ArrayProxy(BitArray2D& arrayProxy, int position);
+		ArrayProxy(BitArray2D& arrayProxy, int position) noexcept;
 
 		BitProxy operator[](int position);
 
-		ArrayProxy(const ArrayProxy& rhs);
+		ArrayProxy(const ArrayProxy& rhs) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		ArrayProxy& operator=(const ArrayProxy& rhs) = delete;
+
+		ArrayProxy(ArrayProxy&& rhs) noexcept = delete;
+		ArrayProxy& operator=(ArrayProxy&& rhs) noexcept = delete;
 
 	private:
 		BitArray2D& m_Array;

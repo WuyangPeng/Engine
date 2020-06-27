@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:22)
+// 引擎版本：0.0.2.5 (2020/03/23 12:32)
 
 #ifndef MATHEMATICS_APPROXIMATION_SPHERE_FIT3_H
 #define MATHEMATICS_APPROXIMATION_SPHERE_FIT3_H
@@ -25,27 +25,27 @@ namespace Mathematics
 	// 这种做法往往会迅速收敛。 
 	template <typename Real>
 	class SphereFit3
-    {
-    public:
+	{
+	public:
 		using ClassType = SphereFit3<Real>;
-        using Vector3D = Vector3D<Real>;
+		using Vector3D = Vector3D<Real>;
 		using Sphere3 = Sphere3<Real>;
-        
-    public:
-		SphereFit3(const std::vector<Vector3D>& points,int maxIterations,bool initialCenterIsAverage);
 
-        CLASS_INVARIANT_DECLARE;
-        
+	public:
+		SphereFit3(const std::vector<Vector3D>& points, int maxIterations, bool initialCenterIsAverage);
+
+		CLASS_INVARIANT_DECLARE;
+
 		const Sphere3 GetSphere() const;
-        
-    private:
-        void Calculate(const std::vector<Vector3D>& points,int maxIterations,bool initialCenterIsAverage);
+
+	private:
+		void Calculate(const std::vector<Vector3D>& points, int maxIterations, bool initialCenterIsAverage);
 		const Vector3D GetAveragePoint(const std::vector<Vector3D>& points);
 		void Iteration(const std::vector<Vector3D>& points, const Vector3D& average);
 
-    private:
+	private:
 		Sphere3 m_Sphere;
-    };
+	};
 
 	using SphereFit3d = SphereFit3<double>;
 	using SphereFit3f = SphereFit3<float>;

@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 14:47)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/09 13:40)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H
@@ -22,7 +22,7 @@ namespace System
 
 	bool SYSTEM_DEFAULT_DECLARE EnumResourceLanguagesInLibrary(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name,
 															   EnumResourceLanguageProcess enumFunction, WindowPtrLong param) noexcept;
-	bool SYSTEM_DEFAULT_DECLARE EnumResourceLanguagesInLibrary(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name,EnumResourceLanguageProcess enumFunction, 
+	bool SYSTEM_DEFAULT_DECLARE EnumResourceLanguagesInLibrary(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, EnumResourceLanguageProcess enumFunction,
 															   WindowPtrLong param, ResourceEnum flags, const LanguageIDData& language) noexcept;
 
 	bool SYSTEM_DEFAULT_DECLARE EnumResourceNamesInLibrary(DynamicLinkModule module, const DynamicLinkCharType* type,

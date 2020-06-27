@@ -15,14 +15,14 @@ namespace Mathematics
 	IntpAkimaUniform1<Real>::IntpAkimaUniform1(int quantity, Real xMin,Real xSpacing, Real* F)
 		:IntpAkima1<Real>{ quantity, F }
 	{
-		MATHEMATICS_ASSERTION_0(xSpacing > Real{}, "Spacing must be positive\n");
+		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero, "Spacing must be positive\n");
 
 		mXMin = xMin;
 		mXMax = xMin + xSpacing * (quantity - 1);
 		mXSpacing = xSpacing;
 
 		// Compute slopes.
-		auto invDX = ((Real)1) / xSpacing;
+		auto invDX = (static_cast<Real>(1)) / xSpacing;
 		Real* slope = NEW1<Real>(quantity + 3);
 		int i, ip1, ip2;
 		for (i = 0, ip1 = 1, ip2 = 2; i < quantity - 1; ++i, ++ip1, ++ip2)
@@ -30,10 +30,10 @@ namespace Mathematics
 			slope[ip2] = (F[ip1] - F[i])*invDX;
 		}
 
-		slope[1] = ((Real)2)*slope[2] - slope[3];
-		slope[0] = ((Real)2)*slope[1] - slope[2];
-		slope[quantity + 1] = ((Real)2)*slope[quantity] - slope[quantity - 1];
-		slope[quantity + 2] = ((Real)2)*slope[quantity + 1] - slope[quantity];
+		slope[1] = (static_cast<Real>(2))*slope[2] - slope[3];
+		slope[0] = (static_cast<Real>(2))*slope[1] - slope[2];
+		slope[quantity + 1] = (static_cast<Real>(2))*slope[quantity] - slope[quantity - 1];
+		slope[quantity + 2] = (static_cast<Real>(2))*slope[quantity + 1] - slope[quantity];
 
 		// Construct derivatives.
 		Real* FDer = NEW1<Real>(quantity);
@@ -43,7 +43,7 @@ namespace Mathematics
 		}
 
 		// Construct polynomials.
-		auto invDX2 = ((Real)1) / (xSpacing*xSpacing);
+		auto invDX2 = (static_cast<Real>(1)) / (xSpacing*xSpacing);
 		auto invDX3 = invDX2 / xSpacing;
 		for (i = 0, ip1 = 1; i < quantity - 1; ++i, ++ip1)
 		{
@@ -57,8 +57,8 @@ namespace Mathematics
 
 			poly[0] = F0;
 			poly[1] = FDer0;
-			poly[2] = (((Real)3)*df - xSpacing * (FDer1 + ((Real)2)*FDer0))*invDX2;
-			poly[3] = (xSpacing*(FDer0 + FDer1) - ((Real)2)*df)*invDX3;
+			poly[2] = ((static_cast<Real>(3))*df - xSpacing * (FDer1 + (static_cast<Real>(2))*FDer0))*invDX2;
+			poly[3] = (xSpacing*(FDer0 + FDer1) - (static_cast<Real>(2))*df)*invDX3;
 		}
 
 		DELETE1(slope);

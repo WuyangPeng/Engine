@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 09:41)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:45)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_H
@@ -25,15 +25,15 @@ namespace Mathematics
 		using Triangle3 = Triangle3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>; 
+		using Math = Math<Real>;
 
 	public:
-		DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle,const Box3& box,Real tmax, 
-											const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon = Math::sm_ZeroTolerance);
-		
+		DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tmax,
+											const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+
 		// Object access.
-		const Triangle3 GetTriangle () const;
-		const Box3 GetBox () const;
+		const Triangle3 GetTriangle() const;
+		const Box3 GetBox() const;
 
 		// The intersection set.
 		int GetQuantity() const;
@@ -41,12 +41,12 @@ namespace Mathematics
 
 	private:
 		// Dynamic find-intersection query.
-		void Find ();
-    
+		void Find();
+
 		// The objects to intersect.
 		Triangle3 mTriangle;
 		Box3 mBox;
-		
+
 		// The intersections for static query.  A triangle can intersect a box
 		// in at most 7 vertices.
 		int mQuantity;

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:06)
+// 引擎版本：0.0.2.5 (2020/03/23 13:58)
 
 #ifndef MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_DETAIL_H
@@ -11,7 +11,7 @@
 #include "Mathematics/NumericalAnalysis/EigenDecompositionDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h" 
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::GaussPointsFit3<Real>
@@ -39,31 +39,30 @@ typename Mathematics::GaussPointsFit3<Real>::Box3 Mathematics::GaussPointsFit3<R
 	return m_Box;
 }
 
-
 template <typename Real>
 typename Mathematics::GaussPointsFit3<Real>::Box3 Mathematics::GaussPointsFit3<Real>
 	::Calculate(const std::vector<Vector3D>& points)
 {
 	auto numPoints = points.size();
 
-    // 计算点的平均值。
+	// 计算点的平均值。
 	Vector3D center;
-	for(const auto& point: points)
+	for (const auto& point : points)
 	{
 		center += point;
 	}
 
 	center /= static_cast<Real>(numPoints);
 
-    // 计算点的协方差矩阵。
-	Real sumXX { };
-	Real sumXY { };
-	Real sumYY { };
-	Real sumXZ { };
-	Real sumYZ { };
-	Real sumZZ { };
-	 
-	for (const auto& point: points)
+	// 计算点的协方差矩阵。
+	auto sumXX = Math<Real>::sm_Zero;
+	auto sumXY = Math<Real>::sm_Zero;
+	auto sumYY = Math<Real>::sm_Zero;
+	auto sumXZ = Math<Real>::sm_Zero;
+	auto sumYZ = Math<Real>::sm_Zero;
+	auto sumZZ = Math<Real>::sm_Zero;
+
+	for (const auto& point : points)
 	{
 		auto diff = point - center;
 		sumXX += diff[0] * diff[0];
@@ -81,7 +80,7 @@ typename Mathematics::GaussPointsFit3<Real>::Box3 Mathematics::GaussPointsFit3<R
 	sumYZ /= boost::numeric_cast<Real>(points.size());
 	sumZZ /= boost::numeric_cast<Real>(points.size());
 
-    // 建立 eigensolver.
+	// 建立 eigensolver.
 	EigenDecomposition<Real> eigenSystem{ 3 };
 
 	eigenSystem(0, 0) = sumXX;
@@ -94,19 +93,18 @@ typename Mathematics::GaussPointsFit3<Real>::Box3 Mathematics::GaussPointsFit3<R
 	eigenSystem(2, 1) = sumYZ;
 	eigenSystem(2, 2) = sumZZ;
 
-    eigenSystem.Solve(true);
+	eigenSystem.Solve(true);
 
 	Real extent[3]{};
 	Vector3D axis[3];
 
-    for (auto i = 0; i < 3; ++i)
-    {
+	for (auto i = 0; i < 3; ++i)
+	{
 		extent[i] = eigenSystem.GetEigenvalue(i);
 		axis[i] = eigenSystem.GetEigenvector3(i);
-    }
+	}
 
 	return Box3{ center, axis[0], axis[1], axis[2], extent[0], extent[1], extent[2] };
 }
-
 
 #endif // MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_DETAIL_H

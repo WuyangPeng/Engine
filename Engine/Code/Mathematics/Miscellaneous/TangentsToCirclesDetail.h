@@ -24,10 +24,10 @@ namespace Mathematics
 		if (Math<Real>::FAbs(W.GetXCoordinate()) >= Math<Real>::FAbs(W.GetYCoordinate()))
 		{
 			c0 = a2 - wx2;
-			c1 = -((Real)2)*a*W.GetYCoordinate();
+			c1 = -(static_cast<Real>(2))*a*W.GetYCoordinate();
 			discr = c1 * c1 - ((Real)4.0)*c0*c2;
 			root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
-			inv = ((Real)1) / W.GetXCoordinate();
+			inv = (static_cast<Real>(1)) / W.GetXCoordinate();
 			dir0[1] = (c1 + root)*minusHalfInvC2;
 			dir0[0] = (a - W.GetYCoordinate()*dir0.GetYCoordinate())*inv;
 			dir1[1] = (c1 - root)*minusHalfInvC2;
@@ -36,10 +36,10 @@ namespace Mathematics
 		else
 		{
 			c0 = a2 - wy2;
-			c1 = -((Real)2)*a*W.GetXCoordinate();
+			c1 = -(static_cast<Real>(2))*a*W.GetXCoordinate();
 			discr = c1 * c1 - ((Real)4.0)*c0*c2;
 			root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
-			inv = ((Real)1) / W.GetYCoordinate();
+			inv = (static_cast<Real>(1)) / W.GetYCoordinate();
 			dir0[0] = (c1 + root)*minusHalfInvC2;
 			dir0[1] = (a - W.GetXCoordinate()*dir0.GetXCoordinate())*inv;
 			dir1[0] = (c1 - root)*minusHalfInvC2;
@@ -68,7 +68,7 @@ namespace Mathematics
 			// Solve (R1^2-R0^2)*s^2 + 2*R0^2*s - R0^2 = 0..
 			Real r1Sqr = circle1.GetRadius() *circle1.GetRadius();
 			Real c0 = -r0Sqr;
-			Real c1 = ((Real)2)*r0Sqr;
+			Real c1 = (static_cast<Real>(2))*r0Sqr;
 			Real c2 = circle1.GetRadius() *circle1.GetRadius() - r0Sqr;
 			Real minusHalfInvC2 = ((Real)-0.5) / c2;
 			Real discr = Math<Real>::FAbs(c1*c1 - ((Real)4)*c0*c2);
@@ -79,14 +79,14 @@ namespace Mathematics
 			s = (c1 + root)*minusHalfInvC2;
 			line[0].SetOrigin(circle0.GetCenter() + s * W);
 			line[1].SetOrigin(line[0].GetOrigin());
-			if (s >= Real{ 0.5 })
+			if (s >= static_cast<Real>(0.5))
 			{
 				tmp = Math<Real>::FAbs(wLenSqr - r0Sqr / (s*s));
 				a = Math<Real>::Sqrt(tmp);
 			}
 			else
 			{
-				oneMinusS = (Real)1 - s;
+				oneMinusS = static_cast<Real>(1) - s;
 				tmp = Math<Real>::FAbs(wLenSqr - r1Sqr / (oneMinusS*oneMinusS));
 				a = Math<Real>::Sqrt(tmp);
 			}
@@ -100,14 +100,14 @@ namespace Mathematics
 			s = (c1 - root)*minusHalfInvC2;
 			line[2].SetOrigin(circle0.GetCenter() + s * W);
 			line[3].SetOrigin(line[2].GetOrigin());
-			if (s >= Real{ 0.5 })
+			if (s >= static_cast<Real>(0.5))
 			{
 				tmp = Math<Real>::FAbs(wLenSqr - r0Sqr / (s*s));
 				a = Math<Real>::Sqrt(tmp);
 			}
 			else
 			{
-				oneMinusS = (Real)1 - s;
+				oneMinusS = static_cast<Real>(1) - s;
 				tmp = Math<Real>::FAbs(wLenSqr - r1Sqr / (oneMinusS*oneMinusS));
 				a = Math<Real>::Sqrt(tmp);
 			}
@@ -123,7 +123,7 @@ namespace Mathematics
 			// Circles effectively have same radius.
 
 			// Midpoint of circle centers.
-			Vector2D<Real> mid = (Real{ 0.5 })*(circle0.GetCenter() + circle1.GetCenter());
+			Vector2D<Real> mid = (static_cast<Real>(0.5))*(circle0.GetCenter() + circle1.GetCenter());
 
 			// Tangent lines passing through midpoint.
 			tmp = Math<Real>::FAbs(wLenSqr - ((Real)4)*r0Sqr);

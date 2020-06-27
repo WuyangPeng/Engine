@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:38)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 14:47)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ARTIFICIAL_INTELLEGENCE_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_ARTIFICIAL_INTELLEGENCE_INTERFACE_H
@@ -11,33 +11,23 @@
 
 #include "CoreTools/Helper/ExportMacro.h" 
 #include "EngineMiddleLayerInterface.h"  
-#include "Framework/Macro/MiddleLayerMacro.h"
+#include "Framework/Helper/MiddleLayerMacro.h"
 
 FRAMEWORK_EXPORT_SHARED_PTR(EngineMiddleLayerInterfaceImpl);
 
 namespace Framework
-{	
+{
 	class FRAMEWORK_DEFAULT_DECLARE ArtificialIntellegenceInterface : public EngineMiddleLayerInterface
-	{	
+	{
 	public:
 		using ArtificialIntellegenceInterfaceImpl = EngineMiddleLayerInterfaceImpl;
 		NON_COPY_CLASSES_TYPE_DECLARE(ArtificialIntellegenceInterface);
 		using ParentType = EngineMiddleLayerInterface;
 
 	public:
-		ArtificialIntellegenceInterface();
-		virtual ~ArtificialIntellegenceInterface();
-	
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
-		
-		virtual bool PreCreate();
-		virtual bool Initialize();
-		virtual void PreIdle();
-		virtual void Terminate();
-		
-		virtual bool Create();
-		virtual bool Destroy();
-		virtual bool Idle(int64_t timeDelta);
+		explicit ArtificialIntellegenceInterface(MiddleLayerPlatform middleLayerPlatform);
+
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; 
 
 		ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input);
 		ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Network);
@@ -49,7 +39,8 @@ namespace Framework
 		IMPL_TYPE_DECLARE(ArtificialIntellegenceInterface);
 	};
 
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ArtificialIntellegenceInterface);
+	using ArtificialIntellegenceInterfaceSharedPtr = std::shared_ptr<ArtificialIntellegenceInterface>;
+	using ConstArtificialIntellegenceInterfaceSharedPtr = std::shared_ptr<const ArtificialIntellegenceInterface>;
 }
 
 #endif // FRAMEWORK_MIDDLE_LAYER_ARTIFICIAL_INTELLEGENCE_INTERFACE_H

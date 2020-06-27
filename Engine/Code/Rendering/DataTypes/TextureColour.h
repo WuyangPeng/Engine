@@ -9,7 +9,7 @@
 
 #include "ColourTextureFormatTraits.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits> 
 #include <array>
 

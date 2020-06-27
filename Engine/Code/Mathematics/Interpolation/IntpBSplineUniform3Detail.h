@@ -205,7 +205,7 @@ namespace Mathematics
 		// Compute and save the intermediate product.
 		for (int i = 0, j = 0; i < mDp1ToN; ++i)
 		{
-			Real sum = Real{};
+			Real sum = Math<Real>::sm_Zero;
 			for (k = 0; k < mDp1ToN; k += mSkip[j], j += mSkip[j])
 			{
 				sum += mProduct[j] * mCache[k];

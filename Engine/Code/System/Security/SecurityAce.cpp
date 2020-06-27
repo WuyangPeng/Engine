@@ -9,7 +9,7 @@
 #include "SecurityAce.h" 
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h" 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 bool System
 	::AddAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, WindowDWord startingAceIndex, WindowVoidPtr aceList, WindowDWord aceListLength) noexcept

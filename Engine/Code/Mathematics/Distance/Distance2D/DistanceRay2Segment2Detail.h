@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 18:56)
+// 引擎版本：0.0.2.5 (2020/03/23 19:24)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_DEATIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_DEATIL_H 
@@ -34,10 +34,10 @@ template <typename Real>
 bool Mathematics::DistanceRay2Segment2<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -70,32 +70,32 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 	auto det = tool.GetDet();
 	auto rhsExtent = m_Segment.GetExtent();
 
-	if (GetZeroThreshold() <= det)
+	if (this->GetZeroThreshold() <= det)
 	{
 		// 射线和线段不平行
 		auto lhsT = tool.GetLhsT();
 		auto rhsT = tool.GetRhsT();
 		auto rhsExtentMultiplyDet = rhsExtent * det;
 
-		if (Real{} <= lhsT)
+		if (Math::sm_Zero <= lhsT)
 		{
 			if (-rhsExtentMultiplyDet <= rhsT)
 			{
 				if (rhsT <= rhsExtentMultiplyDet)
 				{
 					// 区域 0			
-					
+
 					// 最小点为射线和线段内部点。
-					return DistanceResult{ Real{}, Real{}, m_Ray.GetOrigin() + lhsT / det * m_Ray.GetDirection(),
+					return DistanceResult{ Math::sm_Zero, Math::sm_Zero, m_Ray.GetOrigin() + lhsT / det * m_Ray.GetDirection(),
 										   m_Segment.GetCenterPoint() + rhsT / det * m_Segment.GetDirection() };
 				}
-				else 
+				else
 				{
 					// 区域 1
 					return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, rhsExtent);
 				}
 			}
-			else  
+			else
 			{
 				// 区域 5
 				return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, -rhsExtent);
@@ -103,17 +103,17 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 		}
 		else
 		{
-			if (rhsT <= -rhsExtentMultiplyDet)		
+			if (rhsT <= -rhsExtentMultiplyDet)
 			{
 				// 区域 4
 				return GetSquaredWithClosestPointsIsSegmentBeginPoint(tool, rhsExtent);
 			}
-			else if (rhsT <= rhsExtentMultiplyDet)		
+			else if (rhsT <= rhsExtentMultiplyDet)
 			{
 				// 区域 3
 				return GetSquaredWithClosestPointsIsRayOrigin(tool, rhsExtent);
 			}
-			else  
+			else
 			{
 				// 区域 2
 				return GetSquaredWithClosestPointsIsSegmentBeginPoint(tool, -rhsExtent);
@@ -123,37 +123,37 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 	else
 	{
 		// 射线和线段平行
-		if (Real{} < tool.GetDirectionDot())
+		if (Math::sm_Zero < tool.GetDirectionDot())
 		{
 			// 相反的方向向量。
-			return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, -rhsExtent);	
+			return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, -rhsExtent);
 		}
 		else
 		{
 			// 相同的方向向量
-			return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, rhsExtent);		
+			return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, rhsExtent);
 		}
-	}	
+	}
 }
 
 template <typename Real>
 const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>
-	::GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2Tool& tool,Real rhsExtent) const
+	::GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
 {
 	auto t = tool.GetLhsT(-rhsExtent);
 	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
-		             tool.GetOriginDifferenceSquaredLength();
+		tool.GetOriginDifferenceSquaredLength();
 
-	if (Real{} < t)
+	if (Math::sm_Zero < t)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-							   Real{}, m_Ray.GetOrigin() + t * m_Ray.GetDirection(),
+							   Math::sm_Zero, m_Ray.GetOrigin() + t * m_Ray.GetDirection(),
 							   m_Segment.GetCenterPoint() + rhsExtent * m_Segment.GetDirection() };
 	}
 	else
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(rhsSquare),
-							   Real{}, m_Ray.GetOrigin(),
+							   Math::sm_Zero, m_Ray.GetOrigin(),
 							   m_Segment.GetCenterPoint() + rhsExtent * m_Segment.GetDirection() };
 	}
 }
@@ -163,18 +163,18 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 	::GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
 {
 	auto t = tool.GetLhsT(rhsExtent);
-	if (Real{} < t)
+	if (Math::sm_Zero < t)
 	{
 		auto rhsSquare = -rhsExtent * (-rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
-		                 tool.GetOriginDifferenceSquaredLength();
+						 tool.GetOriginDifferenceSquaredLength();
 
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-							   Real{}, m_Ray.GetOrigin() + t * m_Ray.GetDirection(),
+							   Math::sm_Zero, m_Ray.GetOrigin() + t * m_Ray.GetDirection(),
 							   m_Segment.GetCenterPoint() - rhsExtent * m_Segment.GetDirection() };
 	}
 	else
-	{	
-		return GetSquaredWithClosestPointsIsRayOrigin(tool,Math::FAbs(rhsExtent));
+	{
+		return GetSquaredWithClosestPointsIsRayOrigin(tool, Math::FAbs(rhsExtent));
 	}
 }
 
@@ -191,23 +191,23 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 	{
 		dotRhsDirection = rhsExtent;
 	}
-	
+
 	return DistanceResult{ Math::GetNumericalRoundOffNonnegative(dotRhsDirection * (dotRhsDirection + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
-													             tool.GetOriginDifferenceSquaredLength()),
-						   Real{}, m_Ray.GetOrigin(), m_Segment.GetCenterPoint() + dotRhsDirection * m_Segment.GetDirection() };
-} 
+																 tool.GetOriginDifferenceSquaredLength()),
+						   Math::sm_Zero, m_Ray.GetOrigin(), m_Segment.GetCenterPoint() + dotRhsDirection * m_Segment.GetDirection() };
+}
 
 template <typename Real>
 const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>
 	::GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
- 	
+
 	auto movedRay = m_Ray.GetMove(t, lhsVelocity);
 	auto movedSegment = m_Segment.GetMove(t, rhsVelocity);
 
 	ClassType distance{ movedRay, movedSegment };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 

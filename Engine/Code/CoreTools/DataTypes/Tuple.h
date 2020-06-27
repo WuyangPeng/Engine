@@ -16,7 +16,7 @@
 
 #include "CoreTools/TemplateTools/ParamType.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <array>
 #include <iosfwd>
 
@@ -30,14 +30,13 @@ namespace CoreTools
 		using ParamType = typename ParamType<Type>::type;
 
 	public:
-		Tuple();
-		~Tuple();
+		Tuple(); 
 
 		Tuple(const Tuple& rhs);
 		Tuple& operator= (const Tuple& rhs);
 
 		explicit Tuple(ParamType firstParam);
-		Tuple(ParamType firstParam, ParamType secondParam);
+		Tuple(ParamType firstParam, ParamType secondParam) noexcept;
 		Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam);
 		Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam, ParamType fourthParam);
 

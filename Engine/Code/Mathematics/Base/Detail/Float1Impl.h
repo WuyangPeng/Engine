@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 19:16)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/18 19:05)
 
 #ifndef MATHEMATICS_BASE_FLOAT_1_IMPL_H
 #define MATHEMATICS_BASE_FLOAT_1_IMPL_H
@@ -13,14 +13,14 @@
 
 namespace Mathematics
 {
-	class MATHEMATICS_HIDDEN_DECLARE Float1Impl 
+	class MATHEMATICS_HIDDEN_DECLARE Float1Impl
 	{
 	public:
 		using ClassType = Float1Impl;
 
-	public:				
-		Float1Impl();	
-		explicit Float1Impl (float value);
+	public:
+		Float1Impl();
+		explicit Float1Impl(float value);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -28,11 +28,11 @@ namespace Mathematics
 		void SetValue(float value);
 
 	private:
-		using FloatTuple1 = CoreTools::Tuple<1,float>;
+		using FloatTuple1 = CoreTools::Tuple<1, float>;
 
 	private:
 		FloatTuple1 m_Tuple;
-	};	
+	};
 }
 
 #endif // MATHEMATICS_BASE_FLOAT_1_IMPL_H

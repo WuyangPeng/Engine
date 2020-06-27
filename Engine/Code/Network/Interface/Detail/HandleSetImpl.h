@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 16:54)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:04)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
@@ -14,24 +14,24 @@
 #include <memory>
 
 namespace Network
-{	
+{
 	class NETWORK_HIDDEN_DECLARE HandleSetImpl
 	{
 	public:
 		using ClassType = HandleSetImpl;
 		using ImplTypePtr = std::shared_ptr<ClassType>;
-		 
+
 	public:
-		HandleSetImpl ();	
+		HandleSetImpl();
 		virtual ~HandleSetImpl();
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
-		 	 
+
 		virtual void SetBit(ACEHandle handle);
 		virtual int64_t GetMaxSet() const;
 		virtual SockFdSet* GetFdSet();
 		virtual void Sync(ACEHandle maxHandle);
-		virtual bool isSet(ACEHandle handle) const;
+		virtual bool IsSet(ACEHandle handle) const;
 		virtual void ClearBit(ACEHandle handle);
 
 		virtual ImplTypePtr Clone() const;
@@ -44,7 +44,7 @@ namespace Network
 		virtual bool Select(int width);
 
 		bool IsFdSetCountIsOne() const;
-	};	
-} 
+	};
+}
 
 #endif // NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H

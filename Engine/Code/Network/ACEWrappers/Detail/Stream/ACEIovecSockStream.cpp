@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 20:21)
+// 引擎版本：0.0.2.4 (2020/03/11 13:48)
 
 #include "Network/NetworkExport.h" 
 
@@ -17,10 +17,10 @@
 #include "Network/NetworkMessage/BufferSendStream.h"
 #include "Network/NetworkMessage/MessageInterface.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
-
-#include <boost/numeric/conversion/cast.hpp>
-#include <array>
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include <array>
 
 using std::string;
 using std::array;
@@ -45,23 +45,23 @@ int Network::ACEIovecSockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	static const auto headSize = boost::numeric_cast<int>(MessageInterface::GetMessageHeadSize());
+	static const auto headSize = MessageInterface::GetMessageHeadSize();
 
-	if(messageBuffer->GetCurrentWriteIndex() <= headSize)
+	if (messageBuffer->GetCurrentWriteIndex() <= headSize)
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"));
 	}
 
-	array<iovec,2> iov;
+	array<iovec, 2> iov;
 	iov[0].iov_base = const_cast<char*>(messageBuffer->GetInitialBufferedPtr());
-	iov[0].iov_len  = headSize;
+	iov[0].iov_len = headSize;
 	iov[1].iov_base = const_cast<char*>(messageBuffer->GetInitialBufferedPtr()) + headSize;
-	iov[1].iov_len  = messageBuffer->GetCurrentWriteIndex() - headSize;
+	iov[1].iov_len = messageBuffer->GetCurrentWriteIndex() - headSize;
 
 	if (GetACESockStream().sendv_n(iov.data(), 2) != messageBuffer->GetCurrentWriteIndex())
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"));
-	}	 
+	}
 
 	return messageBuffer->GetCurrentWriteIndex();
 }

@@ -275,11 +275,11 @@ void Rendering::BoxSurface
 	{
 		auto mesh = GetChild(face).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
 
-		auto effect = mesh->GetEffectInstance();
+		auto effect = mesh->GetConstEffectInstance();
 		const auto numPasses = effect->GetNumPasses();
 		for (auto p = 0; p < numPasses; ++p)
 		{
-			const auto pass = effect->GetPass(p);
+			const auto pass = effect->GetConstPass(p);
 			CullState*  cstate = const_cast<CullState*>( pass->GetCullState().GetData());
 			cstate->SetEnabled ( false);
 			DepthState* dstate = const_cast<DepthState*>(pass->GetDepthState().GetData());
@@ -299,11 +299,11 @@ void Rendering::BoxSurface
 	for (auto face = 0; face < 6; face++)
 	{
 		auto mesh = GetChild(face).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
-		auto effect = mesh->GetEffectInstance();
+		auto effect = mesh->GetConstEffectInstance();
 		const auto numPasses = effect->GetNumPasses();
 		for (auto p = 0; p < numPasses; ++p)
 		{
-			const auto pass = effect->GetPass(p);
+			const auto pass = effect->GetConstPass(p);
 
 			CullState*  cstate = const_cast<CullState*>(pass->GetCullState().GetData());
 			cstate->SetEnabled(false);

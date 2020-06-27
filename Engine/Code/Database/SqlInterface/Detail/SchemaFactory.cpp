@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 10:05)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 12:30)
 
 #include "Database/DatabaseExport.h"
 
@@ -15,7 +15,7 @@
 #include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorSchema.h"
 
 using std::make_shared;
- 
+
 Database::SchemaFactory
 	::SchemaFactory()
 {
@@ -31,13 +31,13 @@ Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategy)
-	{	
-#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
+	{
+	#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 	case Database::WrappersStrategy::MysqlConnector:
 		return make_shared<MysqlConnectorSchema>(session.GetImplType());
 
-#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
+	#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 	case Database::WrappersStrategy::Null:
 	case Database::WrappersStrategy::Mysql:
@@ -56,13 +56,13 @@ Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategy)
-	{	
-#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
+	{
+	#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
 
 	case Database::WrappersStrategy::MysqlConnector:
 		return make_shared<MysqlConnectorSchema>(session.GetImplType(), dbIndex);
 
-#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
+	#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 	case Database::WrappersStrategy::Null:
 	case Database::WrappersStrategy::Mysql:
@@ -76,7 +76,7 @@ Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 
 Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 	::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema)
-{	
+{
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
 
 	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();

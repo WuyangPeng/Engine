@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:15)
+// 引擎版本：0.0.2.5 (2020/03/23 14:11)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_DETAIL_H
@@ -23,7 +23,6 @@ Mathematics::HeightPlaneFit3<Real>
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-
 template <typename Real>
 bool Mathematics::HeightPlaneFit3<Real>
 	::IsValid() const noexcept
@@ -31,7 +30,6 @@ bool Mathematics::HeightPlaneFit3<Real>
 	return true;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 bool Mathematics::HeightPlaneFit3<Real>
@@ -56,7 +54,6 @@ Real Mathematics::HeightPlaneFit3<Real>
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"));
 	}
-	
 }
 
 template <typename Real>
@@ -91,7 +88,6 @@ Real Mathematics::HeightPlaneFit3<Real>
 	}
 }
 
-
 template <typename Real>
 void Mathematics::HeightPlaneFit3<Real>
 	::Calculate(const std::vector<Vector3D>& points)
@@ -103,17 +99,17 @@ void Mathematics::HeightPlaneFit3<Real>
 	// 计算线性系统的总和。
 	try
 	{
-		Real sumX { };
-		Real sumY { };
-		Real sumZ { };
-		Real sumXX { }; 
-		Real sumXY { };
-		Real sumXZ { };
-		Real sumYY { };
-		Real sumYZ { };
-		
+		auto sumX = Math::sm_Zero;
+		auto sumY = Math::sm_Zero;
+		auto sumZ = Math::sm_Zero;
+		auto sumXX = Math::sm_Zero;
+		auto sumXY = Math::sm_Zero;
+		auto sumXZ = Math::sm_Zero;
+		auto sumYY = Math::sm_Zero;
+		auto sumYZ = Math::sm_Zero;
+
 		auto numPoints = points.size();
-		
+
 		for (auto i = 0u; i < numPoints; ++i)
 		{
 			sumX += points[i][0];
@@ -125,31 +121,30 @@ void Mathematics::HeightPlaneFit3<Real>
 			sumYY += points[i][1] * points[i][1];
 			sumYZ += points[i][1] * points[i][2];
 		}
-		
-		Real matrix[3][3]  
+
+		Real matrix[3][3]
 		{
 			{ sumXX, sumXY, sumX },
 			{ sumXY, sumYY, sumY },
 			{ sumX, sumY, static_cast<Real>(numPoints) }
 		};
-		
-		Real input[3]  
+
+		Real input[3]
 		{
 			sumXZ,
 			sumYZ,
 			sumZ
 		};
 
-		Real output[3]   {   };
+		Real output[3]{};
 
 		LinearSystem<Real>{}.Solve3(matrix, input, output);
-	
+
 		m_CoeffA = output[0];
 		m_CoeffB = output[1];
 		m_CoeffC = output[2];
-		
+
 		m_IsFit3Success = true;
-		
 	}
 	catch (CoreTools::Error&)
 	{
@@ -158,4 +153,3 @@ void Mathematics::HeightPlaneFit3<Real>
 }
 
 #endif // MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_DETAIL_H
- 

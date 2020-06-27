@@ -1,12 +1,13 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/11/29 09:43)
-
+// 引擎版本：0.0.2.4 (2020/03/11 09:54)
 
 #ifndef NETWORK_NETWORK_INTERFACE_FWD_H
 #define NETWORK_NETWORK_INTERFACE_FWD_H
+
+#include <memory>
 
 namespace Network
 {
@@ -19,7 +20,14 @@ namespace Network
 	class HandleSetIterator;
 	class SendSocket;
 	class Client;
-	class Server;	
+	class Server;
+	class SendSocketManager;
+
+	using SendSocketManagerSharedPtr = std::shared_ptr<SendSocketManager>;
+	using ConstSendSocketManagerSharedPtr = std::shared_ptr<const SendSocketManager>;
+
+	enum class StreamReceive;
+	enum class SocketType;
 }
- 
+
 #endif // NETWORK_NETWORK_INTERFACE_FWD_H

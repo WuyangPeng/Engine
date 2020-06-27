@@ -14,7 +14,7 @@
 #include "MessageContainerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template<typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 Network::MultipleMessage<E, ByteType, Types...>

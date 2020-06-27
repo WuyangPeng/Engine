@@ -1,29 +1,29 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 19:35)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 09:41)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "Float2Impl.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-Mathematics::Float2Impl	
-	::Float2Impl ()
+Mathematics::Float2Impl
+	::Float2Impl()
 	:m_Tuple{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::Float2Impl
-	::Float2Impl (float firstValue,float secondValue)
+	::Float2Impl(float firstValue, float secondValue)
 	:m_Tuple{ firstValue,secondValue }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Mathematics,Float2Impl)
+CLASS_INVARIANT_STUB_DEFINE(Mathematics, Float2Impl)
 
 float Mathematics::Float2Impl
 	::GetFirstValue() const
@@ -42,7 +42,7 @@ float Mathematics::Float2Impl
 }
 
 void Mathematics::Float2Impl
-	::SetFirstValue( float value )
+	::SetFirstValue(float value)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -50,7 +50,7 @@ void Mathematics::Float2Impl
 }
 
 void Mathematics::Float2Impl
-	::SetSecondValue( float value )
+	::SetSecondValue(float value)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 

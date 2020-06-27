@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:26)
+// 引擎版本：0.0.2.5 (2020/03/19 17:28)
 
 #ifndef MATHEMATICS_OBJECTS3D_BOX3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_BOX3_DETAIL_H
@@ -21,11 +21,10 @@ Mathematics::Box3<Real>
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-
 template <typename Real>
 Mathematics::Box3<Real>
-	::Box3( const Vector3D& center, const Vector3D& firstAxis, const Vector3D& secondAxis, const Vector3D& thirdAxis,
-			const Real firstExtent, const Real secondExtent, const Real thirdExtent, const Real epsilon )
+	::Box3(const Vector3D& center, const Vector3D& firstAxis, const Vector3D& secondAxis, const Vector3D& thirdAxis,
+		   const Real firstExtent, const Real secondExtent, const Real thirdExtent, const Real epsilon)
 	:m_Center{ center }, m_Epsilon{ epsilon }
 {
 	m_Axis[0] = firstAxis;
@@ -46,17 +45,16 @@ bool Mathematics::Box3<Real>
 	if (m_Axis[0].IsNormalize(m_Epsilon) && m_Axis[1].IsNormalize(m_Epsilon) &&
 		m_Axis[2].IsNormalize(m_Epsilon) && -m_Epsilon <= m_Extent[0] &&
 		-m_Epsilon <= m_Extent[1] && -m_Epsilon <= m_Extent[2] &&
-		Real{} <= m_Epsilon)
+		Math::sm_Zero <= m_Epsilon)
 	{
 		return true;
-	}		
+	}
 	else
 	{
 		return false;
-	}		
+	}
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 const std::vector<typename Mathematics::Box3<Real>::Vector3D> Mathematics::Box3<Real>
@@ -64,16 +62,16 @@ const std::vector<typename Mathematics::Box3<Real>::Vector3D> Mathematics::Box3<
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	Vector3D extAxis0 = m_Axis[0] * m_Extent[0];
-	Vector3D extAxis1 = m_Axis[1] * m_Extent[1];
-	Vector3D extAxis2 = m_Axis[2] * m_Extent[2];
+	auto extAxis0 = m_Axis[0] * m_Extent[0];
+	auto extAxis1 = m_Axis[1] * m_Extent[1];
+	auto extAxis2 = m_Axis[2] * m_Extent[2];
 
 	std::vector<Vector3D> vertex{ m_Center - extAxis0 - extAxis1 - extAxis2 ,m_Center + extAxis0 - extAxis1 - extAxis2 ,
 								  m_Center + extAxis0 + extAxis1 - extAxis2 ,m_Center - extAxis0 + extAxis1 - extAxis2 ,
 								  m_Center - extAxis0 - extAxis1 + extAxis2 ,m_Center + extAxis0 - extAxis1 + extAxis2 ,
-								  m_Center + extAxis0 + extAxis1 + extAxis2 ,m_Center - extAxis0 + extAxis1 + extAxis2 }; 
+								  m_Center + extAxis0 + extAxis1 + extAxis2 ,m_Center - extAxis0 + extAxis1 + extAxis2 };
 
-	MATHEMATICS_ASSERTION_1(vertex.size() == 8,"返回的顶点数目不正确！");
+	MATHEMATICS_ASSERTION_1(vertex.size() == 8, "返回的顶点数目不正确！");
 
 	return vertex;
 }
@@ -86,7 +84,6 @@ typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
 
 	return m_Center;
 }
-
 
 template <typename Real>
 typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
@@ -120,20 +117,31 @@ typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
 	::GetAxis(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"索引错误。");
 
-	return m_Axis[index];
+	if (0 <= index && index < 3)
+	{
+		return m_Axis[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"));
+	}
 }
-
 
 template <typename Real>
 Real Mathematics::Box3<Real>
 	::GetExtent(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"索引错误。");
 
-	return m_Extent[index];
+	if (0 <= index && index < 3)
+	{
+		return m_Extent[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"));
+	}
 }
 
 template <typename Real>
@@ -181,20 +189,18 @@ const Mathematics::Box3<Real> Mathematics::Box3<Real>
 	return ClassType{ m_Center * t + velocity, m_Axis[0], m_Axis[1], m_Axis[2], m_Extent[0], m_Extent[1], m_Extent[2], m_Epsilon };
 }
 
-
 template <typename Real>
 bool Mathematics
 	::Approximate(const Box3<Real>& lhs, const Box3<Real>& rhs, const Real epsilon)
 {
-	return Vector3DTools<Real>::Approximate(lhs.GetCenter(),rhs.GetCenter(),epsilon) &&
-		   Vector3DTools<Real>::Approximate(lhs.GetFirstAxis(),rhs.GetFirstAxis(),epsilon) &&
+	return Vector3DTools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
+		   Vector3DTools<Real>::Approximate(lhs.GetFirstAxis(), rhs.GetFirstAxis(), epsilon) &&
 		   Vector3DTools<Real>::Approximate(lhs.GetSecondAxis(), rhs.GetSecondAxis(), epsilon) &&
 		   Vector3DTools<Real>::Approximate(lhs.GetThirdAxis(), rhs.GetThirdAxis(), epsilon) &&
 		   Math<Real>::Approximate(lhs.GetFirstExtent(), rhs.GetFirstExtent(), epsilon) &&
 		   Math<Real>::Approximate(lhs.GetSecondExtent(), rhs.GetSecondExtent(), epsilon) &&
 		   Math<Real>::Approximate(lhs.GetThirdExtent(), rhs.GetThirdExtent(), epsilon);
 }
-
 
 template <typename Real>
 void Mathematics::Box3<Real>
@@ -217,8 +223,8 @@ std::ostream& Mathematics
 	::operator<<(std::ostream& outFile, const Box3<Real>& box)
 {
 	outFile << "center=" << box.GetCenter() << ",axis0=" << box.GetFirstAxis()
-		    << ",axis1=" << box.GetSecondAxis() << ",axis2=" << box.GetThirdAxis() 
-		    << "extent0=" << box.GetFirstExtent()
+			<< ",axis1=" << box.GetSecondAxis() << ",axis2=" << box.GetThirdAxis()
+			<< "extent0=" << box.GetFirstExtent()
 			<< "extent1=" << box.GetSecondExtent()
 			<< "extent2=" << box.GetThirdExtent();
 

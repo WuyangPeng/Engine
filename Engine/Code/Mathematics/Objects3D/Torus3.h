@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:17)
+// 引擎版本：0.0.2.5 (2020/03/19 17:24)
 
 #ifndef MATHEMATICS_OBJECTS3D_TORUS3_H
 #define MATHEMATICS_OBJECTS3D_TORUS3_H
@@ -21,16 +21,16 @@ namespace Mathematics
 	template <typename Real>
 	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Torus3
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Torus3<Real>;
 		using Vector3D = Vector3D<Real>;
-		using Tuple2 = CoreTools::Tuple<2,Real>;
+		using Tuple2 = CoreTools::Tuple<2, Real>;
 		using Math = Math<Real>;
 		using Torus3Parameters = Torus3Parameters<Real>;
 
-	public:	
+	public:
 		// 以z轴为对称轴，中心在（0,0,0）圆环的实现
 		// （轴为圈形转动以产生环面）。
 		//
@@ -46,18 +46,18 @@ namespace Mathematics
 		//      x = Rc*cos(2*PI*s)
 		//      y = Rc*sin(2*PI*s)
 		//      z = Ri*sin(2*PI*t)
-		Torus3 (Real outerRadius, Real innerRadius);
+		Torus3(Real outerRadius, Real innerRadius);
 
 		CLASS_INVARIANT_DECLARE;
 
 		Real GetOuterRadius() const;
 		Real GetInnerRadius() const;
 
-		const Vector3D GetPosition (Real s, Real t) const;
-		const Vector3D GetNormal (Real s, Real t) const;
+		const Vector3D GetPosition(Real s, Real t) const;
+		const Vector3D GetNormal(Real s, Real t) const;
 
 		// 返回值第一部分为s，第二部分为t
-		const Torus3Parameters GetParameters (const Vector3D& position) const;
+		const Torus3Parameters GetParameters(const Vector3D& position) const;
 
 	private:
 		Real m_OuterRadius;

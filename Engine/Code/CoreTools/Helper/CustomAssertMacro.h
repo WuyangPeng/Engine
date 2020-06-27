@@ -47,6 +47,20 @@
 	#define ASSERT_LEVEL 4
 #endif // ASSERT_LEVEL
 
+#if defined(_DEBUG) && 0 <= ASSERT_LEVEL
+
+	#define ASSERTION_DEBUG(condition, format, ...) \
+			ASSERTION(condition, format, __VA_ARGS__)
+	#define ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, ...) \
+			ASSERTION_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, __VA_ARGS__)
+
+#else // !defined(_DEBUG) || ASSERT_LEVEL < 0
+
+	#define ASSERTION_DEBUG(condition, format, ...) ((void)0)
+	#define ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, ...) ((void)0)
+
+#endif // defined(_DEBUG) && 0 <= ASSERT_LEVEL
+
 #if 0 <= ASSERT_LEVEL
 
 	#define ASSERTION_0(condition, format, ...) \

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.1.0 (2019/10/20 17:38)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:26)
 
 #include "Network/NetworkExport.h" 
 
@@ -25,14 +25,14 @@ Network::SockAcceptorFactory
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Network,SockAcceptorFactory)
- 
+CLASS_INVARIANT_STUB_DEFINE(Network, SockAcceptorFactory)
+
 // static
 const Network::SockAcceptorFactory::ImplTypePtr Network::SockAcceptorFactory
-	::Create(int port,const ConfigurationStrategy& configurationStrategy)
+	::Create(int port, const ConfigurationStrategy& configurationStrategy)
 {
 	auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-	
+
 	switch (wrappersStrategyFlag)
 	{
 
@@ -48,7 +48,7 @@ const Network::SockAcceptorFactory::ImplTypePtr Network::SockAcceptorFactory
 		return make_shared<NetworkSockAcceptor>(port);
 
 	case WrappersStrategy::Null:
-		return make_shared<NullSockAcceptor>();		
+		return make_shared<NullSockAcceptor>();
 
 	case WrappersStrategy::Socket:
 	case WrappersStrategy::Default:
@@ -68,7 +68,7 @@ const Network::SockAcceptorFactory::ImplTypePtr Network::SockAcceptorFactory
 
 #ifdef NETWORK_USE_ACE
 	case WrappersStrategy::ACE:
-		return make_shared<ACESockAcceptor>(hostName,port);
+		return make_shared<ACESockAcceptor>(hostName, port);
 #endif // NETWORK_USE_ACE
 
 	case WrappersStrategy::Boost:

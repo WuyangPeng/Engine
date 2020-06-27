@@ -10,7 +10,7 @@
 #include "MultipleMessageStreamingSave.h"  
 #include "MessageTargetDetail.h"
 #include "MultipleMessageContainer.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 

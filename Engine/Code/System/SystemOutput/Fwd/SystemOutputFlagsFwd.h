@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 16:03)
+// 引擎版本：0.2.0.0 (2020/05/08 23:44)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_SYSTEM_OUTPUT_FLAGS_FWD_H
 #define SYSTEM_SYSTEM_OUTPUT_SYSTEM_OUTPUT_FLAGS_FWD_H
@@ -12,7 +12,7 @@
 namespace System
 {	
 	// DialogBoxCommand
-	enum class DialogBoxCommand : uint32_t;
+	enum class DialogBoxCommand;
 
 	// MessageBox
 	enum class MessageBoxType;

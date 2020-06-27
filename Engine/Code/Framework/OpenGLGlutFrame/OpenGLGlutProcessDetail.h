@@ -1,36 +1,27 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:17)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 15:57)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_DETAIL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_DETAIL_H
 
 #include "OpenGLGlutProcess.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "OpenGLGlutProcessManager.h"
-
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+ 
 template <typename OpenGLGlutCallBack>
 Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::OpenGLGlutProcess()
+	::OpenGLGlutProcess(int64_t delta) 
 {
-	OpenGLGlutCallBackInterfacePtr ptr(new OpenGLGlutCallBack);
+	OpenGLGlutCallBackInterfaceSharedPtr openGLGlutCallBack{ std::make_shared<OpenGLGlutCallBack>(delta) };
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetOpenGLGlutCallBack(ptr);
+	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetOpenGLGlutCallBack(openGLGlutCallBack);
 
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
-
-template <typename OpenGLGlutCallBack>
-Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::~OpenGLGlutProcess()
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
-
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.ClearOpenGLGlutCallBack();
-}
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename OpenGLGlutCallBack>
 bool Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
@@ -41,27 +32,7 @@ bool Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::RenderSceneCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetRenderSceneCallback() const
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback();
-}
-
-template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ChangeSizeCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetChangeSizeCallback() const
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback();
-}
-
-template <typename OpenGLGlutCallBack>
-unsigned int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
 	::GetMillisecond() const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
@@ -71,7 +42,7 @@ unsigned int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
 
 template <typename OpenGLGlutCallBack>
 void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::SetMillisecond(unsigned millisecond)
+	::SetMillisecond(int millisecond)
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -79,9 +50,26 @@ void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TimerFunctionCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetTimerFunctionCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::RenderSceneCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetRenderSceneCallback() const noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback();
+}
+
+template <typename OpenGLGlutCallBack>
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ChangeSizeCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetChangeSizeCallback() const noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback();
+}
+
+template <typename OpenGLGlutCallBack>
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TimerFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetTimerFunctionCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -89,9 +77,8 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TimerFunctionCallback
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysDownCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetSpecialKeysDownCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysDownCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetSpecialKeysDownCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -99,20 +86,17 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysDownCallba
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardDownCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetKeyboardDownCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardDownCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetKeyboardDownCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
 	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardDownCallback();
 }
 
-
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysUpCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetSpecialKeysUpCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysUpCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetSpecialKeysUpCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -120,9 +104,8 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysUpCallback
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardUpCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetKeyboardUpCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardUpCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetKeyboardUpCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -130,9 +113,8 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardUpCallback
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MouseFunctionCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetMouseFunctionCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MouseFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetMouseFunctionCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -140,9 +122,8 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MouseFunctionCallback
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MotionFunctionCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetMotionFunctionCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MotionFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetMotionFunctionCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -150,9 +131,8 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MotionFunctionCallbac
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::PassiveMotionFunctionCallback
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetPassiveMotionCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::PassiveMotionFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetPassiveMotionCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -160,19 +140,17 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::PassiveMotionFunction
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::IdleFunctionCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetIdleFunctionCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::IdleFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetIdleFunctionCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
 	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetIdleFunctionCallback();
 }
-		
+
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ProcessMenuCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetProcessMenuCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ProcessMenuCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetProcessMenuCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -180,9 +158,8 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ProcessMenuCallback
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TerminateCallback 
-	Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetTerminateCallback() const
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TerminateCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
+	::GetTerminateCallback() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -191,7 +168,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TerminateCallback
 
 template <typename OpenGLGlutCallBack>
 void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::SetWindowID( int window )
+	::SetWindowID(int window)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
@@ -229,7 +206,7 @@ template <typename OpenGLGlutCallBack>
 void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
 	::PreIdle()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;	
+	FRAMEWORK_CLASS_IS_VALID_9;
 
 	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreIdle();
 }

@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/11/29 10:28)
-
+// 引擎版本：0.0.2.4 (2020/03/11 09:58)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SEND_SOCKET_H
 #define NETWORK_NETWORK_INTERFACE_SEND_SOCKET_H
@@ -13,8 +12,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "CoreTools/MessageEvent/EventInterface.h"
-#include "Network/NetworkMessage/MessageInterface.h"
-#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "Network/NetworkMessage/MessageInterface.h" 
 
 #include <boost/noncopyable.hpp>
 

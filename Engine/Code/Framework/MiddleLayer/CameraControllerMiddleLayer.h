@@ -1,16 +1,17 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:39)
+// 引擎版本：0.3.0.1 (2020/05/21 14:47)
 
-// 控制层类的声明
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_H
 
 #include "ControllerMiddleLayer.h"
 #include "CameraModelMiddleLayer.h"
 #include "CameraViewMiddleLayer.h"
+
+#include <map>
 
 namespace Framework
 {
@@ -22,31 +23,37 @@ namespace Framework
 		using ParentType = ControllerMiddleLayer<ApplicationTrait>;
 
 	public:
-		CameraControllerMiddleLayer();
-		virtual ~CameraControllerMiddleLayer();
-	
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		explicit CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
 
-		virtual bool Initialize();
-		virtual void Terminate();	
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool KeyDown(uint8_t key,const WindowPoint& point);
-		virtual bool KeyUp(uint8_t key, const WindowPoint& point);
-		virtual bool SpecialKeyDown (int key, const WindowPoint& point);
-		virtual bool SpecialKeyUp(int key, const WindowPoint& point);
-		virtual bool MouseClick(MouseButtonsTypes button,MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeysTypes);
-		virtual bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeysTypes);
+		bool KeyDown(int key, const WindowPoint& point) override;
+		bool SpecialKeyDown(int key, const WindowPoint& point) override;
+		bool SpecialKeyUp(int key, const WindowPoint& point) override;
+		bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+		bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+
+	private:	
+		const CameraModelMiddleLayerSharedPtr GetCameraModelMiddleLayer();
+		const CameraViewMiddleLayerSharedPtr GetCameraViewMiddleLayer();
+
+		void SpecialKey(int key, bool pressed);
+		void CameraSpecialKey(int key, bool pressed);
+		void ObjectSpecialKey(int key, bool pressed);
 
 	private:
-		void ChangeCameraSpeed(uint8_t key, CameraModelMiddleLayerSmartPointer& cameraModelMiddleLayer);
-		void ChangeCameraSpeedMoveStatus(int key, CameraModelMiddleLayerSmartPointer& cameraModelMiddleLayer, bool move);
-		void RotateTrackBall(const WindowPoint& point, CameraModelMiddleLayerSmartPointer& cameraModelMiddleLayer,
-			                 CameraViewMiddleLayerSmartPointer& cameraViewMiddleLayer);
-		void SetBeginTrack(const WindowPoint& point, CameraModelMiddleLayerSmartPointer& cameraModelMiddleLayer,
-			               CameraViewMiddleLayerSmartPointer& cameraViewMiddleLayer);
+		using KeyIdentifiers = typename ApplicationTrait::KeyIdentifiers;
+		using ChangeCameraSpeedFunction = void (CameraModelMiddleLayer::*)();
+		using ChangeCameraSpeedProcess = std::map<int, ChangeCameraSpeedFunction>;
+		using ChangeCameraMotionFunction = void (CameraModelMiddleLayer::*)(Mathematics::NumericalValueSymbol);
+		using ChangeCameraMotionProcess = std::map<int,std::pair<ChangeCameraMotionFunction,Mathematics::NumericalValueSymbol>>;
+		using ChangeObjectMotionFunction = void (CameraModelMiddleLayer::*)(bool);
+		using ChangeObjectMotionProcess = std::map<int, ChangeObjectMotionFunction>;
 
-		const CameraModelMiddleLayerSmartPointer GetCameraModelMiddleLayer();
-		const CameraViewMiddleLayerSmartPointer GetCameraViewMiddleLayer();
+	private:
+		ChangeCameraSpeedProcess m_ChangeCameraSpeed;
+		ChangeCameraMotionProcess m_ChangeCameraMotion;
+		ChangeObjectMotionProcess m_ChangeObjectMotion;
 	};
 }
 

@@ -18,7 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
 using std::vector;

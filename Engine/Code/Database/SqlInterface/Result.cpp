@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 10:07)
+// 引擎版本：0.0.2.5 (2020/03/16 12:34)
 
 #include "Database/DatabaseExport.h"
 
@@ -29,7 +29,7 @@ Database::Result
 }
 
 Database::Result
-	::Result(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult)
+::Result(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult)
 	: m_Impl{ ResultFactory::Create(configurationStrategy,mysqlxRowResult) }
 {
 	DATABASE_SELF_CLASS_IS_VALID_1;
@@ -44,4 +44,4 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Result, FetchOne, Database::Re
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Result, FetchAll, Database::Result::ResultRowContainer)
 
 
- 
+

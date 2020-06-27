@@ -8,7 +8,7 @@
 
 #include "AndroidInputKeyEvent.h"
 #include "System/Helper/UnusedMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 System::AndroidInputEventType System
 	::AndroidInputEventGetType(const AndroidInputEvent* event) noexcept

@@ -12,7 +12,7 @@
 
 template <typename T>
 CoreTools::ReferenceCast<T>
-	::ReferenceCast(T& value)
+	::ReferenceCast(T& value) noexcept
 	: m_Value{ value }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -29,7 +29,7 @@ bool CoreTools::ReferenceCast<T>
 
 template <typename T>
 CoreTools::ReferenceCast<T>
-	::operator T&() const
+	::operator T&() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -37,7 +37,7 @@ CoreTools::ReferenceCast<T>
 }
 
 CoreTools::ReferenceCast<int>
-	::ReferenceCast(int value)
+	::ReferenceCast(int value) noexcept
 	: m_Value{ value }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -52,7 +52,7 @@ bool CoreTools::ReferenceCast<int>
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::ReferenceCast<int>
-	::operator int() const
+	::operator int() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 

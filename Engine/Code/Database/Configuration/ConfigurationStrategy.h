@@ -9,17 +9,17 @@
 
 #include "Database/DatabaseDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
 #include "Flags/ConfigurationStrategyFlags.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 DATABASE_EXPORT_SHARED_PTR(ConfigurationStrategyImpl);
 
 namespace Database
-{	
+{
 	class DATABASE_DEFAULT_DECLARE ConfigurationStrategy
 	{
 	public:
@@ -32,20 +32,20 @@ namespace Database
 		using DBMapping = std::map<int, std::string>;
 
 	public:
-		ConfigurationStrategy(WrappersStrategy wrappersStrategy,const std::string& ip,uint32_t port,
-			                  const std::string& hostName,const std::string& userName,const std::string& password);
-		ConfigurationStrategy(WrappersStrategy wrappersStrategy,const std::string& ip,uint32_t port,
-			                  const std::string& hostName,const std::string& userName,const std::string& password,
-			                  bool pooling, int poolMaxSize, int poolQueueTimeout, int poolMaxIdleTime,
-			                  const FlagsOption& flagsOption, const StringOption& stringOption, const BooleanOption& booleanOption,
-			                  const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping);
+		ConfigurationStrategy(WrappersStrategy wrappersStrategy, const std::string& ip, int port,
+							  const std::string& hostName, const std::string& userName, const std::string& password);
+		ConfigurationStrategy(WrappersStrategy wrappersStrategy, const std::string& ip, int port,
+							  const std::string& hostName, const std::string& userName, const std::string& password,
+							  bool pooling, int poolMaxSize, int poolQueueTimeout, int poolMaxIdleTime,
+							  const FlagsOption& flagsOption, const StringOption& stringOption, const BooleanOption& booleanOption,
+							  const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping);
 
 		CLASS_INVARIANT_DECLARE;
-		 	 
+
 		WrappersStrategy GetWrappersStrategy() const;
 
 		std::string GetIP() const;
-		uint32_t GetPort() const;
+		int GetPort() const;
 		std::string GetDBHostName() const;
 		std::string GetDBUserName() const;
 		std::string GetDBPassword() const;
@@ -65,7 +65,7 @@ namespace Database
 
 	private:
 		IMPL_TYPE_DECLARE(ConfigurationStrategy);
-	};	
-} 
+	};
+}
 
 #endif // DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_H

@@ -1,143 +1,119 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:25)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 16:42)
 
 #include "Framework/FrameworkExport.h"
 
-#include "Detail/AndroidProcessManagerImpl.h"
-#include "AndroidCallBackInterface.h"
 #include "AndroidProcessManager.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Threading/Mutex.h"
+#include "AndroidCallBackInterface.h"
+#include "Detail/AndroidProcessManagerImpl.h"
 #include "CoreTools/Threading/ScopedMutex.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
+
+using std::shared_ptr;
+using std::make_shared;
+using namespace std::literals;
 
 CORE_TOOLS_MUTEX_EXTERN(Framework);
+SINGLETON_GET_PTR_DEFINE(Framework, AndroidProcessManager);
 
-Framework::AndroidProcessManager* Framework::AndroidProcessManager
-	::sm_AndroidProcessManager = nullptr;
-CoreTools::Mutex* Framework::AndroidProcessManager
-	::sm_AndroidProcessManagerMutex = nullptr;
-
-#define MUTEX_ENTER_GLOBAL \
-	    CoreTools::ScopedMutex holder(g_FrameworkMutex)
-
-#define MUTEX_ENTER_MEMBER \
-	    CoreTools::ScopedMutex holder(*sm_AndroidProcessManagerMutex)
-
-SINGLETON_GET_PTR_DEFINE(Framework,AndroidProcessManager)
+shared_ptr<Framework::AndroidProcessManager> Framework::AndroidProcessManager
+	::sm_AndroidProcessManager{ };
 
 void Framework::AndroidProcessManager
 	::Create()
 {
-	MUTEX_ENTER_GLOBAL;
+	SINGLETON_MUTEX_ENTER_GLOBAL(Framework);
 
-	try
+	if (sm_AndroidProcessManager == nullptr)
 	{
-		DoCreate();
+		sm_AndroidProcessManager = make_shared<Framework::AndroidProcessManager>(AndroidProcessManagerCreate::Init);
 	}
-	catch (...)
-	{
-		Destroy();
-		throw;
-	} 
-}
-
-void Framework::AndroidProcessManager
-	::DoCreate()
-{
-	MUTEX_ENTER_GLOBAL;
-
-	if(!sm_AndroidProcessManagerMutex)
-		sm_AndroidProcessManagerMutex = new CoreTools::Mutex;
-
-	if(!sm_AndroidProcessManager)	
-		sm_AndroidProcessManager = new AndroidProcessManager;	
 }
 
 void Framework::AndroidProcessManager
 	::Destroy()
 {
-	MUTEX_ENTER_GLOBAL;
+	SINGLETON_MUTEX_ENTER_GLOBAL(Framework);
 
-	delete sm_AndroidProcessManager;
-	sm_AndroidProcessManager = nullptr;
-
-	delete sm_AndroidProcessManagerMutex;
-	sm_AndroidProcessManagerMutex = nullptr;
+	sm_AndroidProcessManager.reset();
 }
 
 Framework::AndroidProcessManager
-	::AndroidProcessManager()
-	:m_Impl(new ImplType)
+	::AndroidProcessManager(AndroidProcessManagerCreate androidProcessManagerCreate)
+	:m_Impl{ make_shared<ImplType>() }
 {
-	MUTEX_ENTER_MEMBER;
+	SYSTEM_UNUSED_ARG(androidProcessManagerCreate);
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Framework::AndroidProcessManager
-	::~AndroidProcessManager()
+	::~AndroidProcessManager() noexcept
 {
-	MUTEX_ENTER_MEMBER;
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;	
+	CoreTools::NoexceptNoReturn(*this, &ClassType::DestroyImpl);
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Framework,AndroidProcessManager)
-
-Framework::AndroidProcessManager::AppCmd
-    Framework::AndroidProcessManager
-	::GetAppCmd() const
+// private
+void Framework::AndroidProcessManager
+	::DestroyImpl()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
+
+	m_Impl.reset();
+}
+
+CLASS_INVARIANT_STUB_DEFINE(Framework, AndroidProcessManager)
+
+Framework::AndroidProcessManager::AppCmd Framework::AndroidProcessManager
+	::GetAppCmd() noexcept
+{
+	return ImplType::HandleCmd;
+}
+
+Framework::AndroidProcessManager::InputEvent Framework::AndroidProcessManager
+	::GetInputEvent() noexcept
+{ 
+	return ImplType::HandleInput;
+}
+
+Framework::AndroidProcessManager::Display Framework::AndroidProcessManager
+	::GetDisplay() noexcept
+{ 
+	return ImplType::Display;
+}
+
+Framework::AndroidProcessManager::AndroidCallBackInterfaceSharedPtr Framework::AndroidProcessManager
+	::GetAndroidCallBackInterface() const
+{
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Impl->HandleCmd;
-}
-
-Framework::AndroidProcessManager::InputEvent 
-	Framework::AndroidProcessManager
-	::GetInputEvent() const
-{
-	MUTEX_ENTER_MEMBER;
-
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-	return m_Impl->HandleInput;
-}
-
-Framework::AndroidProcessManager::AndroidCallBackInterfacePtr 
-	Framework::AndroidProcessManager
-	::GetAndroidCallBackInterfacePtr() const
-{
-	MUTEX_ENTER_MEMBER;
-
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-	return m_Impl->GetAndroidCallBackInterfacePtr();
+	return m_Impl->GetAndroidCallBackInterface();
 }
 
 void Framework::AndroidProcessManager
-	::SetAndroidCallBack( AndroidCallBackInterfacePtr ptr )
+	::SetAndroidCallBack(const AndroidCallBackInterfaceSharedPtr& androidCallBack)
 {
-	 
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->SetAndroidCallBack(ptr);
+	return m_Impl->SetAndroidCallBack(androidCallBack);
 }
 
 void Framework::AndroidProcessManager
 	::ClearAndroidCallBack()
 {
-	 
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -147,8 +123,7 @@ void Framework::AndroidProcessManager
 bool Framework::AndroidProcessManager
 	::PreCreate()
 {
-	 
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -158,8 +133,7 @@ bool Framework::AndroidProcessManager
 bool Framework::AndroidProcessManager
 	::Initialize()
 {
-	 
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -169,8 +143,7 @@ bool Framework::AndroidProcessManager
 void Framework::AndroidProcessManager
 	::PreIdle()
 {
-	 
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -180,22 +153,12 @@ void Framework::AndroidProcessManager
 void Framework::AndroidProcessManager
 	::Terminate()
 {
-	 
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Terminate();
 }
 
-Framework::AndroidProcessManager::Display 
-	Framework::AndroidProcessManager
-	::GetDisplay() const
-{
-	MUTEX_ENTER_MEMBER;
 
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-	return m_Impl->Display;
-}
 

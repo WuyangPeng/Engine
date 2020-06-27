@@ -47,7 +47,7 @@ namespace Mathematics
 		Real GetTorsion (Real t) const;
 		
 		// Inverse mapping of s = Length(t) given by t = Length^{-1}(s).
-		virtual Real GetTime (Real length, int iterations = 32, Real tolerance = (Real)1e-06) const = 0;
+		virtual Real GetTime (Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const = 0;
 		
 		// Subdivision.
 		void SubdivideByTime (int numPoints, Vector3D<Real>*& points) const;

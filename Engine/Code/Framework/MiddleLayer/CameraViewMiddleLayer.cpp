@@ -1,59 +1,37 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/08/01 13:07)
+// ÒýÇæ°æ±¾£º0.3.0.1 (2020/05/21 14:54)
 
 #include "Framework/FrameworkExport.h"
- 
+
 #include "CameraViewMiddleLayer.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Framework/WindowCreate/WindowSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
+using std::min;
+using std::move;
+using namespace std::literals;
 
 Framework::CameraViewMiddleLayer
-	::CameraViewMiddleLayer()
-	:ParentType{},m_Multiplier(0.0f)
+	::CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
+	:ParentType{ middleLayerPlatform }, m_Multiplier{ 0.0f }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
-
-Framework::CameraViewMiddleLayer
-	::~CameraViewMiddleLayer()	
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework,CameraViewMiddleLayer)
-
-bool Framework::CameraViewMiddleLayer
-	::Initialize()
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	if(ParentType::Initialize())
-		return true;
-	else
-		return false;
-}
+ 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, CameraViewMiddleLayer)
 
 void Framework::CameraViewMiddleLayer
-	::Terminate()
+	::SetCamera(const CameraSmartPointer& camera)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::Terminate();
-}
+	auto renderer = GetRenderer();
 
-void Framework::CameraViewMiddleLayer
-	::SetCamera( const ConstCameraSmartPointer& camera )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	RendererSmartPointer renderer = GetRenderer();
-
-	if(renderer.IsValidPtr())
+	if (renderer)
 	{
 		renderer->SetCamera(camera);
 	}
@@ -64,37 +42,37 @@ const Framework::WindowSize Framework::CameraViewMiddleLayer
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	ConstRendererSmartPointer renderer = GetConstRenderer();
+	auto renderer = GetRenderer();
 
-	if (renderer.IsValidPtr())
+	if (renderer)
 	{
-		int width = renderer->GetWidth();
-		int height = renderer->GetHeight();
+		const auto width = renderer->GetWidth();
+		const auto height = renderer->GetHeight();
 
-		return WindowSize(width,height);
+		return WindowSize{ width, height };
 	}
 	else
 	{
-		return WindowSize();
+		THROW_EXCEPTION(SYSTEM_TEXT("äÖÈ¾Æ÷²»´æÔÚ£¡"s));
 	}
 }
 
 bool Framework::CameraViewMiddleLayer
-	::Resize( WindowDisplayFlags type, const WindowSize& size )
+	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	if(ParentType::Resize(type,size))
+	if (ParentType::Resize(windowDisplay, size))
 	{
-		int width = size.GetWindowWidth();
-		int height = size.GetWindowHeight();
+		const auto width = size.GetWindowWidth();
+		const auto height = size.GetWindowHeight();
 
-		int minValue = std::min(height, width);
+		const auto minValue = min(height, width);
 
 		if (0 < minValue)
 		{
 			m_Multiplier = 1.0f / minValue;
-		}		
+		}
 
 		return true;
 	}
@@ -109,13 +87,13 @@ float Framework::CameraViewMiddleLayer
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	ConstRendererSmartPointer renderer = GetConstRenderer();
+	auto renderer = GetRenderer();
 
-	if(renderer != nullptr)
-	{		
-		int width = renderer->GetWidth();
-		
-		return (2 * x - width) * m_Multiplier;	
+	if (renderer != nullptr)
+	{
+		const auto width = renderer->GetWidth();
+
+		return (2 * x - width) * m_Multiplier;
 	}
 	else
 	{
@@ -128,13 +106,13 @@ float Framework::CameraViewMiddleLayer
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	ConstRendererSmartPointer renderer = GetConstRenderer();
+	auto renderer = GetRenderer();
 
-	if(renderer != nullptr)
-	{		
-		int height = renderer->GetHeight();
-		
-		return (2 * (height - 1 - y) - height) * m_Multiplier;	
+	if (renderer != nullptr)
+	{
+		const auto height = renderer->GetHeight();
+
+		return (2 * (height - 1 - y) - height) * m_Multiplier;
 	}
 	else
 	{

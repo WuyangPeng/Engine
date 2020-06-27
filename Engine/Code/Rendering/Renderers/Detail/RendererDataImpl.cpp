@@ -21,6 +21,8 @@ Rendering::RendererDataImpl
 	::RendererDataImpl()
 	:m_Renderer{ make_shared<Renderer>(Rendering::RendererTypes::Default,RendererBasis()) }
 {
+	m_Renderer->Init();
+
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 

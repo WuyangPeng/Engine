@@ -1,17 +1,16 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒıÇæ°æ±¾£º0.0.1.0 (2019/11/29 10:31)
-
+// ÒıÇæ°æ±¾£º0.0.2.4 (2020/03/11 10:55)
 
 #include "Network/NetworkExport.h" 
 
 #include "HandleSetIterator.h"
 #include "Detail/HandleSetIteratorFactory.h"
 #include "Detail/HandleSetIteratorImpl.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 Network::HandleSetIterator
 	::HandleSetIterator(const ConfigurationStrategy& configurationStrategy, const HandleSet& handleSet)

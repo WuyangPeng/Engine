@@ -11,6 +11,7 @@
 #include "Rendering/Dx9Renderer/Dx9IndexBuffer.h"
 #include "Rendering/OpenGLRenderer/OpenGLIndexBuffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 
 using std::make_shared;
 

@@ -35,7 +35,7 @@ namespace Rendering
 		PlanarShadowEffect (int numPlanes, Node* shadowCaster);
 		virtual ~PlanarShadowEffect ();
 
-		virtual void Draw (Renderer* renderer, const VisibleSet& visibleSet);
+		virtual void Draw (std::shared_ptr<Renderer> renderer, VisibleSet& visibleSet) override;
 
 		// Member access.
 		  int GetNumPlanes () const;

@@ -1,21 +1,21 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 10:04)
+// 引擎版本：0.0.2.5 (2020/03/16 12:29)
 
 #include "Database/DatabaseExport.h"
 
 #include "ResultRowFactory.h"
 #include "ResultRowImpl.h"
 #include "NullResultRow.h"
-#include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorDocResultRow.h"
-#include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorResultRow.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
+#include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorResultRow.h"
+#include "Database/MysqlConnectorWrappers/Detail/MysqlConnectorDocResultRow.h"
 
 using std::make_shared;
- 
+
 Database::ResultRowFactory
 	::ResultRowFactory()
 {
@@ -29,13 +29,13 @@ Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
 {
 	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 	switch (wrappersStrategy)
-	{	
-#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
+	{
+	#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
 
 	case Database::WrappersStrategy::MysqlConnector:
 		THROW_EXCEPTION(SYSTEM_TEXT("无法在无参数的情况下创建MysqlConnectorResultRow。"));
 
-#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
+	#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 	case Database::WrappersStrategy::Null:
 	case Database::WrappersStrategy::Mysql:
@@ -64,7 +64,7 @@ Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
 
 Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
 	::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow)
-{	
+{
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();

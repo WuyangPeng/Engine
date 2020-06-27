@@ -35,7 +35,7 @@ Rendering::PlanarReflectionEffect
 }
 
 void Rendering::PlanarReflectionEffect
-	::Draw(Renderer* renderer,   const VisibleSet& visibleSet)
+	::Draw(std::shared_ptr<Renderer> renderer,    VisibleSet& visibleSet)
 {
     // Save the current global state overrides for restoration later.
     const auto saveDState = renderer->GetOverrideDepthState();
@@ -47,14 +47,14 @@ void Rendering::PlanarReflectionEffect
 
     // The depth range will be modified during drawing, so save the current
     // depth range for restoration later.
-    float minDepth, maxDepth;
-    renderer->GetDepthRange(minDepth, maxDepth);
+ 
+   auto depthRange =  renderer->GetDepthRange();
 
     // Get the camera to store post-world transformations.
     ConstCameraSmartPointer camera = renderer->GetCamera();
 
     const auto numVisible = visibleSet.GetNumVisible();
-    int i, j;
+    int i;
     for (i = 0; i < mNumPlanes; ++i)
     {
         // Render the mirror into the stencil plane.  All visible mirror
@@ -77,7 +77,7 @@ void Rendering::PlanarReflectionEffect
         // Disable color writes.
         renderer->SetColorMask(false, false, false, false);
 
-        renderer->Draw(mPlanes[i].GetData());
+        renderer->Draw(mPlanes[i]);
 
         // Enable color writes.
         renderer->SetColorMask(true, true, true, true);
@@ -110,16 +110,16 @@ void Rendering::PlanarReflectionEffect
 
         // Set the depth buffer to "infinity" at those pixels for which the
         // stencil buffer is the reference value i+1.
-        renderer->SetDepthRange(1.0f, 1.0f);
+		renderer->SetDepthRange(DepthRange{ 1.0f, 1.0f });
         mDepthState->SetEnabled ( true);
 		mDepthState->SetWritable ( true);
 		mDepthState->SetCompare(DepthStateFlags::CompareMode::Always);
 
-		renderer->Draw(mPlanes[i].GetData());
+		renderer->Draw(mPlanes[i]);
 
         // Restore the depth range and depth testing function.
 		mDepthState->SetCompare ( DepthStateFlags::CompareMode::LessEqual);
-        renderer->SetDepthRange(minDepth, maxDepth);
+		renderer->SetDepthRange(depthRange);
 
         // Compute the equation for the mirror plane in model coordinates
         // and get the reflection matrix in world coordinates.
@@ -145,9 +145,9 @@ void Rendering::PlanarReflectionEffect
 
         // Render the reflected object.  Only render where the stencil buffer
         // contains the reference value.
-        for (j = 0; j < numVisible; ++j)
+        for (auto& value: visibleSet)
         {
-			renderer->Draw((const Visual*)visibleSet.GetVisible(j).GetData());
+			renderer->Draw(value);
         }                       
 
         renderer->SetReverseCullOrder(false);
@@ -186,7 +186,7 @@ void Rendering::PlanarReflectionEffect
 		mStencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
 		mStencilState->SetOnZPass(StencilStateFlags::OperationType::Invert);
 
-		renderer->Draw(mPlanes[i].GetData());
+		renderer->Draw(mPlanes[i]);
 
         renderer->SetOverrideAlphaState(saveAState);
     }
@@ -197,9 +197,9 @@ void Rendering::PlanarReflectionEffect
 
     // Render the objects as usual, this time drawing only the potentially
     // visible objects.
-    for (j = 0; j < numVisible; ++j)
+    for (auto& value:visibleSet)
     {
-		renderer->Draw((const Visual*)visibleSet.GetVisible(j).GetData());
+		renderer->Draw(value);
     }
 }
 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/05 18:10)
+// 引擎版本：0.0.2.5 (2020/03/19 14:08)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DETAIL_H
@@ -12,28 +12,30 @@
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_POLYNOMIAL_DETAIL)
 
 #include "AlgebraTraits.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Math.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
-Mathematics::Polynomial<Real>	
-	::Polynomial( int degree )
+Mathematics::Polynomial<Real>
+	::Polynomial(int degree)
 	:m_Degree{ degree }, m_Coeff{ nullptr }
 {
 	if (0 <= m_Degree)
 	{
-		m_Coeff = NEW1<Real>(m_Degree + 1);
-		auto numBytes = (m_Degree + 1) * sizeof(Real);
+		m_Coeff = NEW1<Real>(m_Degree + 1);	 
+		auto numBytes = (m_Degree + 1) * CoreTools::StreamSize<Real>::GetStreamSize();
+
 		memset(m_Coeff, 0, numBytes);
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"构造的多项式degree为负数！");
+		MATHEMATICS_ASSERTION_1(false, "构造的多项式degree为负数！");
 	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -41,19 +43,19 @@ Mathematics::Polynomial<Real>
 
 template <typename Real>
 Mathematics::Polynomial<Real>
-	::Polynomial( const Polynomial& rhs )
+	::Polynomial(const Polynomial& rhs)
 	:m_Degree{ rhs.GetDegree() }, m_Coeff{ nullptr }
 {
 	if (0 <= m_Degree)
 	{
 		m_Coeff = NEW1<Real>(m_Degree + 1);
 
-		auto numBytes = (m_Degree + 1) * sizeof(Real);
+		auto numBytes = (m_Degree + 1) * CoreTools::StreamSize<Real>::GetStreamSize();
 		memcpy(m_Coeff, rhs.m_Coeff, numBytes);
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"构造的多项式degree为负数！");
+		MATHEMATICS_ASSERTION_1(false, "构造的多项式degree为负数！");
 	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -61,36 +63,36 @@ Mathematics::Polynomial<Real>
 
 template <typename Real>
 Mathematics::Polynomial<Real>
-	::Polynomial( const std::vector<Real>& tuple )
+	::Polynomial(const std::vector<Real>& tuple)
 	:m_Degree{ boost::numeric_cast<int>(tuple.size() - 1) }, m_Coeff{ NEW1<Real>(m_Degree + 1) }
 {
 	if (0 < tuple.size())
-	{	
-		auto numBytes = (m_Degree + 1) * sizeof(Real);
+	{
+		auto numBytes = (m_Degree + 1) * CoreTools::StreamSize<Real>::GetStreamSize();
 		memcpy(m_Coeff, &tuple[0], numBytes);
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"构造的多项式数组为空！");
-	}	
+		MATHEMATICS_ASSERTION_1(false, "构造的多项式数组为空！");
+	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Polynomial<Real>
-	::Polynomial( int size,const Real* data )
+	::Polynomial(int size, const Real* data)
 	:m_Degree{ size - 1 }, m_Coeff{ NEW1<Real>(m_Degree + 1) }
 {
 	if (0 < size)
-	{	
-		auto numBytes = (m_Degree + 1) * sizeof(Real);
+	{
+		auto numBytes = (m_Degree + 1) * CoreTools::StreamSize<Real>::GetStreamSize();
 		memcpy(m_Coeff, data, numBytes);
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"构造的多项式数组为空！");
-	}	
+		MATHEMATICS_ASSERTION_1(false, "构造的多项式数组为空！");
+	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -104,10 +106,9 @@ Mathematics::Polynomial<Real>
 	DELETE1(m_Coeff);
 }
 
-
 template <typename Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
-	::operator=( const Polynomial& rhs )
+	::operator=(const Polynomial& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -121,10 +122,10 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 // private
 template <typename Real>
 void Mathematics::Polynomial<Real>
-	::Swap( Polynomial& rhs )
+	::Swap(Polynomial& rhs)
 {
-	std::swap(m_Degree,rhs.m_Degree);
-	std::swap(m_Coeff,rhs.m_Coeff);
+	std::swap(m_Degree, rhs.m_Degree);
+	std::swap(m_Coeff, rhs.m_Coeff);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -132,20 +133,19 @@ template <typename Real>
 bool Mathematics::Polynomial<Real>
 	::IsValid() const noexcept
 {
-	if(0 <= m_Degree && m_Coeff != nullptr)
-	    return true;
+	if (0 <= m_Degree && m_Coeff != nullptr)
+		return true;
 	else
 		return false;
 }
 #endif	// OPEN_CLASS_INVARIANT
 
-
 template <typename Real>
 void Mathematics::Polynomial<Real>
-	::ResetDegree( int degree )
+	::ResetDegree(int degree)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_1(0 <= degree,"构造的多项式degree为负数！");
+	MATHEMATICS_ASSERTION_1(0 <= degree, "构造的多项式degree为负数！");
 
 	Polynomial<Real> temp{ degree };
 
@@ -181,7 +181,7 @@ Real* Mathematics::Polynomial<Real>
 
 template <typename Real>
 const Real& Mathematics::Polynomial<Real>
-	::operator[]( int index ) const
+	::operator[](int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index <= m_Degree, "索引无效\n");
@@ -191,17 +191,17 @@ const Real& Mathematics::Polynomial<Real>
 
 template <typename Real>
 Real& Mathematics::Polynomial<Real>
-	::operator[]( int index )
+	::operator[](int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index <= m_Degree, "索引无效\n");
 
-	return OPERATOR_SQUARE_BRACKETS(Real,index);
+	return OPERATOR_SQUARE_BRACKETS(Real, index);
 }
 
 template <typename Real>
 Real Mathematics::Polynomial<Real>
-	::operator()( Real value ) const
+	::operator()(Real value) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -214,7 +214,6 @@ Real Mathematics::Polynomial<Real>
 
 	return result;
 }
-
 
 template <typename Real>
 const Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>
@@ -232,10 +231,9 @@ const Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>
 	return result;
 }
 
-
 template <typename Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
-	::operator+=( const Polynomial& rhs )
+	::operator+=(const Polynomial& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -244,7 +242,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 		for (auto i = 0; i <= rhs.m_Degree; ++i)
 		{
 			m_Coeff[i] += rhs.m_Coeff[i];
-		}		
+		}
 	}
 	else
 	{
@@ -263,7 +261,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 
 template <typename Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
-	::operator-=( const Polynomial& rhs )
+	::operator-=(const Polynomial& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -272,7 +270,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 		for (auto i = 0; i <= rhs.m_Degree; ++i)
 		{
 			m_Coeff[i] -= rhs.m_Coeff[i];
-		}		
+		}
 	}
 	else
 	{
@@ -289,10 +287,9 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 	return *this;
 }
 
-
 template <typename Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
-	::operator*=( const Polynomial& rhs )
+	::operator*=(const Polynomial& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -301,10 +298,9 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 	return *this;
 }
 
-
 template <typename Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
-	::operator+=( Real scalar )
+	::operator+=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -315,7 +311,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 
 template <typename Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
-	::operator-=( Real scalar )
+	::operator-=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -326,11 +322,11 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 
 template <typename Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
-	::operator*=( Real scalar )
+	::operator*=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
-	for (int i = 0; i <= m_Degree; ++i)
+	for (auto i = 0; i <= m_Degree; ++i)
 	{
 		m_Coeff[i] *= scalar;
 	}
@@ -340,7 +336,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 
 template <typename Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
-	::operator/=( Real scalar )
+	::operator/=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -353,7 +349,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>
 	}
 	else
 	{
-	    MATHEMATICS_ASSERTION_1(false,"除零错误！");
+		MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
 		for (auto i = 0; i <= m_Degree; ++i)
 		{
@@ -375,16 +371,17 @@ const Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>
 		Polynomial result{ m_Degree - 1 };
 		for (auto index = 0; index < m_Degree; ++index)
 		{
-			result.m_Coeff[index] = (index + 1) * m_Coeff[index + 1];
+			auto nextIndex = index + 1;
+			result.m_Coeff[index] = nextIndex * m_Coeff[nextIndex];
 		}
 		return result;
 	}
-	else 
+	else
 	{
 		Polynomial result{ 0 };
-		result.m_Coeff[0] = Real{ };
+		result.m_Coeff[0] = Math::sm_Zero;
 		return result;
-	}	
+	}
 }
 
 template <typename Real>
@@ -412,7 +409,7 @@ const Mathematics::Polynomial<Real>	Mathematics::Polynomial<Real>
 
 template <typename Real>
 void Mathematics::Polynomial<Real>
-	::Compress( Real epsilon )
+	::Compress(Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -430,8 +427,8 @@ void Mathematics::Polynomial<Real>
 
 	if (0 <= m_Degree)
 	{
-		auto invLeading = AlgebraTraits::UnitValue / m_Coeff[m_Degree];
-		m_Coeff[m_Degree] = AlgebraTraits::UnitValue;
+		auto invLeading = Math::sm_One / m_Coeff[m_Degree];
+		m_Coeff[m_Degree] = Math::sm_One;
 		for (auto i = 0; i < m_Degree; ++i)
 		{
 			m_Coeff[i] *= invLeading;
@@ -441,18 +438,18 @@ void Mathematics::Polynomial<Real>
 
 template <typename Real>
 typename const Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Polynomial<Real>
-	::Divide( const Polynomial& divisor,Real epsilon ) const
+	::Divide(const Polynomial& divisor, Real epsilon) const
 {
 	auto quotientDegree = m_Degree - divisor.m_Degree;
 	if (0 <= quotientDegree)
 	{
 		Polynomial quotient{ quotientDegree };
-		
+
 		// 临时存储的余数。
 		Polynomial remainder{ *this };
 
 		// 做除法（欧几里得算法）。
-		auto inv = AlgebraTraits::UnitValue / divisor[divisor.m_Degree];
+		auto inv = Math::sm_One / divisor[divisor.m_Degree];
 		for (auto quotientIndex = quotientDegree; 0 <= quotientIndex; --quotientIndex)
 		{
 			auto divisorIndex = divisor.m_Degree + quotientIndex;
@@ -473,19 +470,20 @@ typename const Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Poly
 
 		if (remainderDegree == 0 && Math::FAbs(remainder[0]) < epsilon)
 		{
-			remainder[0] = Real{ };
+			remainder[0] = Math::sm_Zero;
 		}
 
 		Polynomial correctRemainder{ remainderDegree };
-		auto numBytes = (remainderDegree + 1) * sizeof(Real);
+		auto degree = remainderDegree + 1;
+		auto numBytes = degree * sizeof(Real);
 		memcpy(correctRemainder.m_Coeff, remainder.m_Coeff, numBytes);
 
-		return PolynomialDivide(quotient , correctRemainder);	
+		return PolynomialDivide{ quotient, correctRemainder };
 	}
 	else
 	{
 		Polynomial quotient{ 0 };
-		quotient[0] = Real{ };
+		quotient[0] = Math::sm_Zero;
 		Polynomial remainder{ *this };
 
 		return PolynomialDivide{ quotient , *this };
@@ -494,40 +492,39 @@ typename const Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Poly
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_POLYNOMIAL_DETAIL)
 
-
 template <typename T>
 bool Mathematics
-	::Approximate( const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon )
+	::Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon)
 {
-	if(lhs.GetDegree() != rhs.GetDegree())
+	if (lhs.GetDegree() != rhs.GetDegree())
 	{
 		return false;
 	}
 	else
 	{
-		for(auto i = 0;i <= rhs.GetDegree();++i)
+		for (auto i = 0; i <= rhs.GetDegree(); ++i)
 		{
 			if (!Math<T>::Approximate(lhs[i], rhs[i], epsilon))
 			{
 				return false;
-			}             
+			}
 		}
 
-        return true;
+		return true;
 	}
 }
 
 template <typename T>
 bool Mathematics
-	::Approximate( const Polynomial<T>& lhs, const Polynomial<T>& rhs )
+	::Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs)
 {
-	return Approximate(lhs,rhs,Math<T>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math<T>::sm_ZeroTolerance);
 }
 
 
 template <typename Real>
 const Mathematics::Polynomial<Real>	Mathematics
-	::operator*( const Polynomial<Real>& lhs, const Polynomial<Real>& rhs )
+	::operator*(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs)
 {
 	Polynomial<Real> result{ lhs.GetDegree() + rhs.GetDegree() };
 

@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:10)
+// 引擎版本：0.2.0.0 (2020/05/07 23:27)
 
 #ifndef SYSTEM_HELPER_EXPORT_MACRO_H
 #define SYSTEM_HELPER_EXPORT_MACRO_H
@@ -21,7 +21,7 @@
 
 	#define TCRE_SYMBOL_NO_EXPORT 		
 	#define TCRE_SYMBOL_VISIBLE
-   
+
 #else // !defined (SYSTEM_PLATFORM_WIN32) && !defined (SYSTEM_PLATFORM_CYGWIN)
 
 	#ifdef TCRE_USE_GCC
@@ -62,7 +62,7 @@
 		#define TCRE_SYMBOL_IMPORT
 		#define TCRE_SYMBOL_NO_EXPORT __attribute__ ((__visibility__("hidden")))
 		#define TCRE_SYMBOL_VISIBLE __attribute__ ((__visibility__("default")))
-	
+
 	#else // !defined(TCRE_USE_GCC) && !defined(TCRE_USE_SUNPRO_CC) && !defined(TCRE_USE_CLANG) && !defined(TCRE_USE_XLCPP)
 
 		#define TCRE_SYMBOL_EXPORT  

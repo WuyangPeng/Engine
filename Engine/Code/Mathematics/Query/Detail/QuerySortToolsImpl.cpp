@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 09:54)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 09:43)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::swap;
 
@@ -24,24 +24,24 @@ Mathematics::QuerySortToolsImpl
 }
 
 Mathematics::QuerySortToolsImpl
-	::QuerySortToolsImpl(int firstValue, int secondValue,int thirdValue)
+	::QuerySortToolsImpl(int firstValue, int secondValue, int thirdValue)
 	:m_SortValue{ firstValue,secondValue,thirdValue }, m_Symbol{ NumericalValueSymbol::Zero }
 {
-	 SortThreeValue();
+	SortThreeValue();
 
-	 MATHEMATICS_SELF_CLASS_IS_VALID_9;
+	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::QuerySortToolsImpl
 	::QuerySortToolsImpl(int firstValue, int secondValue, int thirdValue, int fourthValue)
 	:m_SortValue{ firstValue,secondValue,thirdValue,fourthValue }, m_Symbol{ NumericalValueSymbol::Zero }
 {
-	 SortFourValue();
+	SortFourValue();
 
-	 MATHEMATICS_SELF_CLASS_IS_VALID_9;
+	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Mathematics,QuerySortToolsImpl)
+CLASS_INVARIANT_STUB_DEFINE(Mathematics, QuerySortToolsImpl)
 
 Mathematics::NumericalValueSymbol Mathematics::QuerySortToolsImpl
 	::GetSymbol() const
@@ -71,7 +71,7 @@ void Mathematics::QuerySortToolsImpl
 	else
 	{
 		m_Symbol = NumericalValueSymbol::Positive;
-	}		 
+	}
 }
 
 void Mathematics::QuerySortToolsImpl
@@ -119,7 +119,7 @@ void Mathematics::QuerySortToolsImpl
 			swap(m_SortValue[0], m_SortValue[1]);
 			m_Symbol = NumericalValueSymbol::Negative;
 		}
-	}	
+	}
 }
 
 void Mathematics::QuerySortToolsImpl
@@ -215,7 +215,7 @@ void Mathematics::QuerySortToolsImpl
 				if (m_SortValue[2] < m_SortValue[1])
 				{
 					// 0 1 2 3 -> 0 3 2 1 
-					swap(m_SortValue[1], m_SortValue[3]);					 
+					swap(m_SortValue[1], m_SortValue[3]);
 					m_Symbol = NumericalValueSymbol::Negative;
 				}
 				else
@@ -334,4 +334,3 @@ void Mathematics::QuerySortToolsImpl
 		}
 	}
 }
- 

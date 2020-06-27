@@ -153,3 +153,86 @@ const Rendering::RendererBasis Rendering::RendererParameterImpl
 
 	return m_RendererBasis;
 }
+
+System::String Rendering::RendererParameterImpl
+	::GetWindowClassName() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_ClassName;
+}
+
+void Rendering::RendererParameterImpl
+	::SetWindowClassName(const System::String& className)
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	m_ClassName = className;
+}
+
+System::String Rendering::RendererParameterImpl
+	::GetWindowMenuName() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_MenuName;
+}
+
+void Rendering::RendererParameterImpl
+	::SetWindowMenuName(const System::String& menuName)
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	m_MenuName = menuName;
+}
+
+int Rendering::RendererParameterImpl
+	::GetIcon() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_Icon;
+}
+
+bool Rendering::RendererParameterImpl
+	::IsIconDefault() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_IsIconDefault;
+}
+
+int Rendering::RendererParameterImpl
+	::GetCursor() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_Cursor;
+}
+
+bool Rendering::RendererParameterImpl::IsCursorDefault() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_IsCursorDefault;
+}
+
+System::WindowBrushTypes Rendering::RendererParameterImpl
+	::GetBackground() const
+{
+	RENDERING_CLASS_IS_VALID_CONST_9;
+
+	return m_Background;
+}
+
+void Rendering::RendererParameterImpl
+	::SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, System::WindowBrushTypes background)
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	m_Icon = icon;
+	m_IsIconDefault = isIconDefault;
+	m_Cursor = cursor;
+	m_IsCursorDefault = isCursorDefault;
+	m_Background = background;
+}

@@ -20,6 +20,23 @@ CoreTools::TestingInformationHelper
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
+CoreTools::TestingInformationHelper
+	::TestingInformationHelper(TestingInformationHelper&& rhs) noexcept
+	:m_Impl{ std::move(rhs.m_Impl) }
+{
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::TestingInformationHelper& CoreTools::TestingInformationHelper
+	::operator=(TestingInformationHelper&& rhs) noexcept
+{
+	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	m_Impl = std::move(rhs.m_Impl);
+
+	return *this;
+}
+
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, TestingInformationHelper)
 
 int CoreTools::TestingInformationHelper
@@ -45,4 +62,3 @@ int CoreTools::TestingInformationHelper
 
 	return m_Impl->GetRandomSeed();
 }
-

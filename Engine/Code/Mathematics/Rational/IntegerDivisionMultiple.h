@@ -1,24 +1,20 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 11:05)
+// 引擎版本：0.0.2.5 (2020/03/20 09:48)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "RationalFwd.h"
+
 #include <boost/noncopyable.hpp>
 
 namespace Mathematics
 {
-	template <int N>
-	class IntegerData;
-
-	template <int N>
-	class IntegerDataAnalysis;
-
 	// 支持除法和取模。
 	template <int N>
 	class IntegerDivisionMultiple : private boost::noncopyable
@@ -31,13 +27,13 @@ namespace Mathematics
 	public:
 		IntegerDivisionMultiple(const IntegerData& absNumerator, const IntegerData& absDenominator);
 
-		CLASS_INVARIANT_DECLARE;		
+		CLASS_INVARIANT_DECLARE;
 
 		const IntegerData GetQuotient() const;
 		const IntegerData GetRemainder() const;
 
-	private: 
-		void Calculate();		
+	private:
+		void Calculate();
 		void Adjust();
 		void Recover();
 		void Calculate(int quotientInit);
@@ -48,7 +44,7 @@ namespace Mathematics
 		static constexpr uint32_t sm_Carry{ 0x00010000 };
 
 		const IntegerData& m_AbsNumerator;
-		const IntegerData& m_AbsDenominator;	
+		const IntegerData& m_AbsDenominator;
 		IntegerData m_AdjustNumerator;
 		IntegerData m_AdjustDenominator;
 		int m_NumeratorInit;
@@ -58,8 +54,8 @@ namespace Mathematics
 		uint32_t m_SecondDigit;
 		uint32_t m_RemainderHat;
 		IntegerData m_Quotient;
-		IntegerData m_Remainder; 		
-	};	
+		IntegerData m_Remainder;
+	};
 }
 
 #endif // MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H

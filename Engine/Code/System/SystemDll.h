@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2019/12/31 14:53)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/07 10:14)
 
 #ifndef SYSTEM_DLL_H
 #define SYSTEM_DLL_H
@@ -15,7 +15,7 @@
 	#define SYSTEM_VISIBLE
 
 	#if defined(BUILDING_SYSTEM_EXPORT)
- 
+
 		#define SYSTEM_HIDDEN_DECLARE 
 
 	#else // !defined(BUILDING_SYSTEM_EXPORT)
@@ -25,21 +25,21 @@
 	#endif // BUILDING_SYSTEM_EXPORT 
 
 #else // !defined(BUILDING_SYSTEM_NO_IMPORT) && !defined(BUILDING_SYSTEM_STATIC)
- 
+
 	#if defined(BUILDING_SYSTEM_EXPORT)
- 
-        #define SYSTEM_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
-        #define SYSTEM_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+		#define SYSTEM_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+		#define SYSTEM_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
 
 	#else // !defined(BUILDING_SYSTEM_EXPORT)
 
 		#define SYSTEM_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
-        #define SYSTEM_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+		#define SYSTEM_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
 
 	#endif // BUILDING_SYSTEM_EXPORT
 
 	#define SYSTEM_VISIBLE TCRE_SYMBOL_VISIBLE
 
 #endif // defined(BUILDING_SYSTEM_NO_IMPORT) || defined(BUILDING_SYSTEM_STATIC)
- 
+
 #endif // SYSTEM_DLL_H

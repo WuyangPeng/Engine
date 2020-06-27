@@ -31,6 +31,8 @@ EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
+	class OStreamShared;
+
 	class CORE_TOOLS_DEFAULT_DECLARE UnitTestSuiteReportOutput : private boost::noncopyable
 	{
 	public:
@@ -39,7 +41,7 @@ namespace CoreTools
 		using CpuTimerPtr = std::shared_ptr<CpuTimer>;
 
 	public:
-		UnitTestSuiteReportOutput(const std::string& timeDescribe, int borderLineLength, std::ostream* osPtr = &std::cout);
+		UnitTestSuiteReportOutput(const std::string& timeDescribe, int borderLineLength, const OStreamShared& osPtr);
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:05)
+// 引擎版本：0.3.0.1 (2020/05/21 13:42)
 
 #ifndef FRAMEWORK_APPLICATION_WINDOW_MOUSE_POSITION_H
 #define FRAMEWORK_APPLICATION_WINDOW_MOUSE_POSITION_H
@@ -11,22 +11,21 @@
 
 namespace Framework
 {
-	class WindowMousePosition : public MousePositionImpl
+	class FRAMEWORK_HIDDEN_DECLARE WindowMousePosition final : public MousePositionImpl
 	{
 	public:
 		using ClassType = WindowMousePosition;
 		using ParentType = MousePositionImpl;
 
 	public:
-		explicit WindowMousePosition(HWnd hwnd);
-		virtual ~WindowMousePosition();
+		explicit WindowMousePosition(HWnd hwnd) noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		// 鼠标位置
-		virtual const WindowPoint GetMousePosition() const;
-		virtual void SetMousePosition (const WindowPoint& windowPoint);
-		virtual MousePositionImplPtr Clone();  
+		const WindowPoint GetMousePosition() const noexcept final;
+		void SetMousePosition(const WindowPoint& windowPoint) noexcept final;
+		MousePositionImplSharedPtr Clone() final;
 
 	private:
 		HWnd m_Hwnd;

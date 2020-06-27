@@ -40,7 +40,7 @@ namespace CoreTools
 		void SetValue(int index, uint64_t value);
 		void SetValue(int index, float value);
 		void SetValue(int index, double value);
-		void SetValue(int index, const ConstParametersInterfaceSharedPtr& sharedPtr);
+		void SetValue(int index, const ParametersInterface& parameters);
 		void SetValue(int index, const std::string& value);
 		void SetValue(int index, const std::wstring& value);
 

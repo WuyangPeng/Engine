@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 10:00)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 17:41)
 
 #ifndef MATHEMATICS_OBJECTS3D_FRUSTUM3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_FRUSTUM3_DETAIL_H
@@ -14,8 +14,8 @@
 
 template <typename Real>
 Mathematics::Frustum3<Real>
-	::Frustum3( const Vector3D& origin, const Vector3D& directionVector,const Vector3D& upVector, const Vector3D& rightVector,Real directionMin,
-				Real directionMax,Real upBound, Real rightBound ,const Real epsilon)
+	::Frustum3(const Vector3D& origin, const Vector3D& directionVector, const Vector3D& upVector, const Vector3D& rightVector, Real directionMin,
+			   Real directionMax, Real upBound, Real rightBound, const Real epsilon)
 	:m_Origin{ origin }, m_DirectionVector{ directionVector }, m_UpVector{ upVector }, m_RightVector{ rightVector },
 	 m_DirectionMin{ directionMin }, m_DirectionMax{ directionMax }, m_UpBound{ upBound }, m_RightBound{ rightBound },
 	 m_DirectionRatio{ directionMax / directionMin }, m_MTwoUF{ static_cast<Real>(-2) * upBound * directionMax }, m_MTwoRF{ static_cast<Real>(-2) * rightBound * directionMax }, m_Epsilon{ epsilon }
@@ -24,13 +24,12 @@ Mathematics::Frustum3<Real>
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-
 template <typename Real>
 bool Mathematics::Frustum3<Real>
 	::IsValid() const noexcept
 {
 	if (m_DirectionVector.IsNormalize(m_Epsilon) && m_UpVector.IsNormalize(m_Epsilon) && m_RightVector.IsNormalize(m_Epsilon) &&
-		Real {} < m_DirectionMin && m_DirectionMin < m_DirectionMax && Real{} < m_RightBound && Real{} < m_UpBound)
+		Math::sm_Zero < m_DirectionMin && m_DirectionMin < m_DirectionMax && Math::sm_Zero < m_RightBound && Math::sm_Zero < m_UpBound)
 	{
 		return true;
 	}
@@ -40,7 +39,6 @@ bool Mathematics::Frustum3<Real>
 	}
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 typename const Mathematics::Frustum3<Real>::Vector3D Mathematics::Frustum3<Real>
@@ -60,7 +58,6 @@ typename const Mathematics::Frustum3<Real>::Vector3D Mathematics::Frustum3<Real>
 	return m_DirectionVector;
 }
 
-
 template <typename Real>
 typename const Mathematics::Frustum3<Real>::Vector3D  Mathematics::Frustum3<Real>
 	::GetUpVector() const
@@ -78,7 +75,6 @@ typename const Mathematics::Frustum3<Real>::Vector3D  Mathematics::Frustum3<Real
 
 	return m_RightVector;
 }
-
 
 template <typename Real>
 Real Mathematics::Frustum3<Real>
@@ -143,7 +139,6 @@ Real Mathematics::Frustum3<Real>
 	return m_MTwoRF;
 }
 
-
 template <typename Real>
 const std::vector<typename Mathematics::Frustum3<Real>::Vector3D> Mathematics::Frustum3<Real>
 	::ComputeVertices() const
@@ -163,7 +158,10 @@ const std::vector<typename Mathematics::Frustum3<Real>::Vector3D> Mathematics::F
 
 	for (auto i = 0; i < 4; ++i)
 	{
-		vertex[i + 4] = m_Origin + m_DirectionRatio * vertex[i];
+		auto temp1 = m_DirectionRatio * vertex[i];
+		auto temp2 = m_Origin + temp1;
+		auto temp = i + 4;
+		vertex[temp] = temp2;
 		vertex[i] += m_Origin;
 	}
 

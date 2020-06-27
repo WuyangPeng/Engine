@@ -91,10 +91,16 @@ CLASS_INVARIANT_STUB_DEFINE(Mathematics,TriangleKey)
 int Mathematics::TriangleKey
 	::GetKey(int index) const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"Ë÷Òý´íÎó£¡");
+    MATHEMATICS_CLASS_IS_VALID_CONST_9; 
     
-    return m_Vertex[index];
+	if (0 <= index && index < 3)
+	{
+		return m_Vertex[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	} 
 }
 
 int Mathematics::TriangleKey
@@ -114,20 +120,32 @@ int Mathematics::TriangleKey
 void Mathematics::TriangleKey
 	::SetKey(int index, int value)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3, "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_9; 
 
-	m_Vertex[index] = value;
+	if (0 <= index && index < 3)
+	{
+		m_Vertex[index] = value;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}
+	
 }
 
 void Mathematics::TriangleKey
 	::Swap(int lhsIndex,int rhsIndex)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= lhsIndex && lhsIndex < 3, "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= rhsIndex && rhsIndex < 3, "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_9; 
 
-	std::swap(m_Vertex[lhsIndex],m_Vertex[rhsIndex]);
+	if (0 <= lhsIndex && lhsIndex < 3 && 0 <= rhsIndex && rhsIndex < 3)
+	{
+		std::swap(m_Vertex[lhsIndex], m_Vertex[rhsIndex]);
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}
 }
 
 bool Mathematics

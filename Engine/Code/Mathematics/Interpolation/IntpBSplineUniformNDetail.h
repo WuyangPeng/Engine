@@ -95,7 +95,7 @@ namespace Mathematics
 			mOpI[dim] = 0;
 		}
 
-		Real result = Real{};
+		Real result = Math<Real>::sm_Zero;
 		int k;
 		for (k = 0; k < mDp1ToN; ++k)
 		{
@@ -167,7 +167,7 @@ namespace Mathematics
 			temp *= mDp1;
 		}
 
-		Real result = Real{};
+		Real result = Math<Real>::sm_Zero;
 		int k = mOpJ[mDims - 1];
 		for (dim = mDims - 2; dim >= 0; --dim)
 		{
@@ -253,7 +253,7 @@ namespace Mathematics
 		// Compute and save the intermediate product.
 		for (int i = 0, j = 0; i < mDp1ToN; ++i)
 		{
-			Real sum = Real{};
+			Real sum = Math<Real>::sm_Zero;
 			for (k = 0; k < mDp1ToN; k += mSkip[j], j += mSkip[j])
 			{
 				sum += mProduct[j] * mCache[k];

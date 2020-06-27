@@ -19,7 +19,7 @@ namespace CoreTools
 	// 静态和动态类型转换。
 
 	template <typename T>
-	T* StaticCast(ObjectPtr object)
+	T* StaticCast(ObjectPtr object) noexcept
 	{
 		static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
 
@@ -83,7 +83,7 @@ namespace CoreTools
 	{
 		static_assert(std::is_base_of_v<ObjectInterface, Target>, "T is not base of ObjectInterface");
 
-		CORE_TOOLS_ASSERTION_0(DynamicCast<Target>(object) == object, "向下转换类型失败！");
+		CORE_TOOLS_ASSERTION_DEBUG(DynamicCast<Target>(object) == object, "向下转换类型失败！");
 
 		return StaticCast<Target>(object);
 	}
@@ -93,7 +93,7 @@ namespace CoreTools
 	{
 		static_assert(std::is_base_of_v<ObjectInterface, Target>, "T is not base of ObjectInterface");
 
-		CORE_TOOLS_ASSERTION_0(DynamicCast<Target>(object) == object, "向下转换类型失败！");
+		CORE_TOOLS_ASSERTION_DEBUG(DynamicCast<Target>(object) == object, "向下转换类型失败！");
 
 		return StaticCast<Target>(object);
 	}
@@ -114,7 +114,7 @@ namespace CoreTools
 	template <typename Subclass, typename Base>
 	std::shared_ptr<Subclass> PolymorphicSharedPtrDowncast(const std::shared_ptr<Base>& ptr)
 	{
-		CORE_TOOLS_ASSERTION_0(std::dynamic_pointer_cast<Subclass>(ptr) == ptr, "向下转换类型失败！");
+		CORE_TOOLS_ASSERTION_DEBUG(std::dynamic_pointer_cast<Subclass>(ptr) == ptr, "向下转换类型失败！");
 
 		return std::static_pointer_cast<Subclass>(ptr);
 	}

@@ -9,12 +9,12 @@
 
 #include "MessageContainerGroup.h"  
 #include "MessageContainerDetail.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template<typename E, typename T>
 Network::MessageContainerGroup<E, T>

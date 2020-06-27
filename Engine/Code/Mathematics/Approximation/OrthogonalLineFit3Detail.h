@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:18)
+// 引擎版本：0.0.2.5 (2020/03/23 14:15)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_DETAIL_H
@@ -12,7 +12,7 @@
 #include "Mathematics/NumericalAnalysis/EigenDecompositionDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h" 
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::OrthogonalLineFit3<Real>
@@ -31,12 +31,11 @@ bool Mathematics::OrthogonalLineFit3<Real>
 }
 #endif // OPEN_CLASS_INVARIANT
 
-
 template <typename Real>
 typename Mathematics::OrthogonalLineFit3<Real>::Line3 Mathematics::OrthogonalLineFit3<Real>
 	::GetLine3() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;	
+	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Line;
 }
@@ -47,22 +46,22 @@ typename Mathematics::OrthogonalLineFit3<Real>::Line3  Mathematics::OrthogonalLi
 	::Calculate(const std::vector<Vector3D>& points)
 {
 	// 计算点的平均值。
-	Vector3D origin; 
-	for(const auto& point:points)
+	Vector3D origin;
+	for (const auto& point : points)
 	{
 		origin += point;
 	}
 
 	origin /= boost::numeric_cast<Real>(points.size());
-	
+
 	// 计算点的协方差矩阵。
-	Real sumXX { };
-	Real sumXY { };
-	Real sumXZ { };
-	Real sumYY { };
-	Real sumYZ { };
-	Real sumZZ { };	
- 
+	auto sumXX = Math::sm_Zero;
+	auto sumXY = Math::sm_Zero;
+	auto sumXZ = Math::sm_Zero;
+	auto sumYY = Math::sm_Zero;
+	auto sumYZ = Math::sm_Zero;
+	auto sumZZ = Math::sm_Zero;
+
 	for (const auto& point : points)
 	{
 		auto diff = point - origin;
@@ -73,7 +72,7 @@ typename Mathematics::OrthogonalLineFit3<Real>::Line3  Mathematics::OrthogonalLi
 		sumYZ += diff[1] * diff[2];
 		sumZZ += diff[2] * diff[2];
 	}
-	
+
 	sumXX /= boost::numeric_cast<Real>(points.size());
 	sumXY /= boost::numeric_cast<Real>(points.size());
 	sumXZ /= boost::numeric_cast<Real>(points.size());
@@ -92,14 +91,14 @@ typename Mathematics::OrthogonalLineFit3<Real>::Line3  Mathematics::OrthogonalLi
 	eigenSystem(2, 0) = eigenSystem(0, 2);
 	eigenSystem(2, 1) = eigenSystem(1, 2);
 	eigenSystem(2, 2) = sumXX + sumYY;
-	
+
 	// 计算特征值，最小的特征是在最后的位置。
 	eigenSystem.Solve(false);
-	
+
 	// 对于最佳拟合线的单位长度方向。
 	auto direction = eigenSystem.GetEigenvector3(2);
-	
+
 	return Line3{ origin, direction };
 }
- 
+
 #endif // MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_DETAIL_H

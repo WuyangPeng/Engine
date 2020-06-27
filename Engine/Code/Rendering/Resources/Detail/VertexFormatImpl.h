@@ -11,7 +11,7 @@
 
 #include "Rendering/Resources/Flags/VertexFormatFlags.h"
 #include "Rendering/Resources/VertexFormatElement.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 namespace CoreTools
 {

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:52)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 14:50)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_OBJECT_LOGIC_MANAGER_H
 #define FRAMEWORK_MIDDLE_LAYER_OBJECT_LOGIC_MANAGER_H
@@ -10,34 +10,34 @@
 #include "ObjectLogicManagerInterface.h"
 
 namespace Framework
-{	
+{
 	template<typename ObjectLogic, typename  ArtificialIntellegence>
 	class ObjectLogicManager : public ObjectLogicManagerInterface
-	{	
+	{
 	public:
 		using ClassType = ObjectLogicManager<ObjectLogic, ArtificialIntellegence>;
 		using ParentType = ObjectLogicManagerInterface;
+		using ClassShareType = CoreTools::NonCopyClasses;
 
 	public:
-		ObjectLogicManager();
-		virtual ~ObjectLogicManager();
-	
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
-		
-		virtual bool PreCreate();
-		virtual bool Initialize();
-		virtual void PreIdle();
-		virtual void Terminate();		
-		
-		virtual bool Create();
-		virtual bool Destroy();
-		virtual bool Idle(int64_t timeDelta);
+		explicit ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform);
 
-		virtual void SetNetworkManager(MiddleLayerInterfaceSmartPointer& networkManager);
-		virtual void SetInputManager(MiddleLayerInterfaceSmartPointer& inputManager);
-		virtual void SetMessageManager(MiddleLayerInterfaceSmartPointer& messageManager);
-		virtual void SetPhysicalModellingManager(MiddleLayerInterfaceSmartPointer& physicalModellingManager);
-		virtual void SetSystemManager(MiddleLayerInterfaceSmartPointer& systemManager);
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+
+		bool PreCreate(const EnvironmentDirectory& environmentDirectory) override;
+		bool Initialize() override;
+		void PreIdle() override;
+		void Terminate() override;
+
+		bool Create() override;
+		bool Destroy() override;
+		bool Idle(int64_t timeDelta) override;
+
+		void SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager) override;
+		void SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager) override;
+		void SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager) override;
+		void SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager) override;
+		void SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager) override;
 
 	private:
 		ObjectLogic m_ObjectLogic;

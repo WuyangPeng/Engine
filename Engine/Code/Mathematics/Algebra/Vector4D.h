@@ -1,8 +1,9 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 14:08)
+// 引擎版本：0.0.2.5 (2020/03/19 10:18)
+
 // 4D向量类的声明
 #ifndef MATHEMATICS_ALGEBRA_VECTOR_4D_H
 #define MATHEMATICS_ALGEBRA_VECTOR_4D_H
@@ -13,31 +14,28 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
 
 namespace Mathematics
 {
 	template <typename Real>
-	class Vector4DTools;
-
-	template <typename Real>
-	class Vector4D  : private boost::additive<Vector4D<Real>,		                          	
-		                      boost::multiplicative<Vector4D<Real>,Real,
-							  boost::totally_ordered<Vector4D<Real> > > > 
+	class Vector4D : private boost::additive<Vector4D<Real>,
+							 boost::multiplicative<Vector4D<Real>, Real,
+							 boost::totally_ordered<Vector4D<Real> > > >
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Vector4D<Real>;
-		using Tuple4 = CoreTools::Tuple<4,Real>;
-		using Math = Math<Real>;	
+		using Tuple4 = CoreTools::Tuple<4, Real>;
+		using Math = Math<Real>;
 		using ToolsType = Vector4DTools<Real>;
 
 	public:
-		Vector4D();	
+		Vector4D();
 		Vector4D(const Tuple4& tuple);
-		Vector4D(Real x, Real y, Real z,Real w);
+		Vector4D(Real x, Real y, Real z, Real w);
 
 		Vector4D& operator= (const Tuple4& tuple);
 
@@ -71,9 +69,9 @@ namespace Mathematics
 
 		Real& operator[] (unsigned int index);
 		ClassType& operator+= (const ClassType& rhs);
-		ClassType& operator-= (const ClassType& rhs);	
+		ClassType& operator-= (const ClassType& rhs);
 		ClassType& operator*= (Real rhs);
-		ClassType& operator/= (Real rhs);	
+		ClassType& operator/= (Real rhs);
 
 		// 特殊Vector4D
 		static const Vector4D sm_Zero; // (0,0,0,0)
@@ -87,10 +85,10 @@ namespace Mathematics
 
 	private:
 		using Vector4DTools = Vector4DTools<Real>;
-		using AlgebraTraits = AlgebraTraits<Real>;		
+		using AlgebraTraits = AlgebraTraits<Real>;
 
 	private:
-		 Tuple4 m_Tuple;
+		Tuple4 m_Tuple;
 	};
 
 	using Vector4Df = Vector4D<float>;

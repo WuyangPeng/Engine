@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 19:29)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/18 19:09)
 
 #ifndef MATHEMATICS_BASE_FLOAT_4_H
 #define MATHEMATICS_BASE_FLOAT_4_H
@@ -20,9 +20,9 @@ namespace Mathematics
 	public:
 		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Float4);
 
-	public:				
-		Float4();	
-		Float4(float firstValue,float secondValue,float thirdValue,float fourValue);
+	public:
+		Float4();
+		Float4(float firstValue, float secondValue, float thirdValue, float fourValue);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -36,9 +36,9 @@ namespace Mathematics
 		void SetThirdValue(float value);
 		void SetFourthValue(float value);
 
-	private:	
+	private:
 		IMPL_TYPE_DECLARE(Float4);
-	};	
+	};
 }
 
 #endif // MATHEMATICS_BASE_FLOAT_4_H

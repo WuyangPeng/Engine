@@ -1,21 +1,19 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:08)
+// 引擎版本：0.3.0.1 (2020/05/21 13:43)
 
 #ifndef FRAMEWORK_APPLICATION_FONT_INFORMATION_H
 #define FRAMEWORK_APPLICATION_FONT_INFORMATION_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
+#include "Flags/ApplicationTrait.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Window/Using/WindowUsing.h"
 #include "System/Window/Flags/WindowFlags.h"
-#include "ApplicationTrait.h"
- 
-#include <string>
+#include "CoreTools/Helper/ExportMacro.h"
 
 FRAMEWORK_EXPORT_SHARED_PTR(FontInformationImpl);
 
@@ -25,6 +23,8 @@ namespace Framework
 	{
 	public:
 		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(FontInformation);
+		using TChar = System::TChar;
+		using String = System::String;
 		using HWnd = System::WindowHWnd;
 
 	public:
@@ -37,14 +37,13 @@ namespace Framework
 		CLASS_INVARIANT_DECLARE;
 
 		// 字体信息。这些是特定于平台的。
-		int GetStringWidth (const System::String& text) const;
-		int GetCharacterWidth (const System::TChar character) const;
-		int GetFontHeight () const;
+		int GetStringWidth(const String& text) const;
+		int GetCharacterWidth(const TChar character) const;
+		int GetFontHeight() const;
 
 	private:
 		IMPL_TYPE_DECLARE(FontInformation);
 	};
-
 }
 
 #endif // FRAMEWORK_APPLICATION_FONT_INFORMATION_H

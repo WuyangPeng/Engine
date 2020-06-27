@@ -1,65 +1,70 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 10:43)
+// 引擎版本：0.3.0.1 (2020/05/21 11:53)
 
-// 注册窗口类（基类）的声明
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_H
 
-#include "WindowRegisterParameter.h"
-#include "WindowPictorial.h"
 #include "WindowName.h"
+#include "WindowPictorial.h"
+#include "WindowRegisterParameter.h"
 #include "System/Window/WindowProcess.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Command/CommandFwd.h"
+#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 
-#include <boost/noncopyable.hpp>
 #include <string>
 
-namespace CoreTools
+namespace Framework
 {
-	class CommandHandle;
-}
-
-namespace  Framework
-{
+	// 注册窗口类（基类）的声明
 	template <typename WindowProcessHandle>
-	class WindowRegisterHandle : private boost::noncopyable
+	class WindowRegisterHandle
 	{
 	public:
-		using ClassType = WindowRegisterHandle<WindowProcessHandle>;
 		using WindowProcessType = WindowProcessHandle;
+		using ClassType = WindowRegisterHandle<WindowProcessType>;
+		using String = System::String;
+		using Atom = System::WindowAtom;		
+		using HInstance = System::WindowHInstance;	
+		using DisplayFunction = System::DisplayFunction;
+		using WindowClassStyle = System::WindowClassStyle;
 		using Command = CoreTools::CommandHandle;
-		using CommandPtr = std::shared_ptr<CoreTools::CommandHandle>;
-        using HInstance = System::WindowHInstance;
-		using Atom = System::WindowAtom;
-		using WindowClassStyleFlags = System::WindowClassStyle;
+		using CommandSharedPtr = std::shared_ptr<CoreTools::CommandHandle>;
 
 	public:
-		WindowRegisterHandle(HInstance hInstance,char* lpCmdLine, const WindowPictorial& pictorial,
-							 const WindowName& name, WindowClassStyleFlags styles =  System::WindowClassStyle::CommonUse);	
-		virtual ~WindowRegisterHandle();
+		WindowRegisterHandle(const EnvironmentDirectory& environmentDirectory, HInstance instance,const char* commandLine, const WindowPictorial& pictorial,
+							 const WindowName& name, WindowClassStyle styles = WindowClassStyle::CommonUse);
+		virtual ~WindowRegisterHandle() = default;
+		WindowRegisterHandle(const WindowRegisterHandle& rhs) noexcept = delete;
+		WindowRegisterHandle& operator=(const WindowRegisterHandle& rhs) noexcept = delete;
+		WindowRegisterHandle(WindowRegisterHandle&& rhs) noexcept;
+		WindowRegisterHandle& operator=(WindowRegisterHandle&& rhs) noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		HInstance GetHInstance() const;
-		System::String GetWindowClassName() const;
-		System::String GetWindowMenuName() const;
-		System::DisplayPtr GetFunction() const;
-		const CommandPtr GetCommandPtr() const;
-		WindowProcessHandle GetWindowProcess() const;
+		HInstance GetHInstance() const noexcept;
+		String GetWindowClassName() const;
+		String GetWindowMenuName() const;
+		DisplayFunction GetFunction() const noexcept;
+		CommandSharedPtr GetCommand() const noexcept;
+		WindowProcessHandle GetWindowProcess() const noexcept;
 
 	private:
 		Atom InitApplication();
-	
-	private:	
+
+	private:
+		static constexpr auto sm_Interval = 60;
+
+		EnvironmentDirectory m_EnvironmentDirectory;
 		WindowProcessHandle m_WindowProcess;
-		CommandPtr m_CommandPtr;
+		CommandSharedPtr m_Command;
 		WindowRegisterParameter m_WindowRegisterParameter;
-		WindowPictorial m_WindowPictorial;		
+		WindowPictorial m_WindowPictorial;
 		WindowName m_WindowName;
-	};		
+	};
 }
 
 #endif // FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_H

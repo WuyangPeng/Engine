@@ -1,19 +1,19 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/02 10:18)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 16:31)
 
 #include "Network/NetworkExport.h" 
 
 #include "NetworkSockInetAddress.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
 #include "System/MemoryTools/MemoryHelperDetail.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
 using std::to_string;
@@ -22,7 +22,7 @@ using std::make_shared;
 Network::NetworkSockInetAddress
 	::NetworkSockInetAddress(const string& hostName, int port)
 	:m_InetAddress{}, m_AddressName{ hostName }
-{	
+{
 	System::FillMemoryToZero(m_InetAddress);
 
 	m_InetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
@@ -39,7 +39,7 @@ Network::NetworkSockInetAddress
 	System::FillMemoryToZero(m_InetAddress);
 
 	m_InetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
-	m_InetAddress.sin_port = System::GetHostToNetShort(0); 
+	m_InetAddress.sin_port = System::GetHostToNetShort(0);
 	m_InetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::g_InAddrAny);
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -54,7 +54,7 @@ Network::NetworkSockInetAddress
 	m_InetAddress.sin_family = boost::numeric_cast<int16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
 	m_InetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
 	m_InetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::g_InAddrAny);
- 
+
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 

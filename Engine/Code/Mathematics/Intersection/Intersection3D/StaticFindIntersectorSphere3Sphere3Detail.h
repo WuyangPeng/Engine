@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 	::StaticFindIntersectorSphere3Sphere3 (const Sphere3& rkSphere0,const Sphere3& rkSphere1)
-	: mSphere0{ rkSphere0 }, mSphere1{ rkSphere1 }, mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Real{} }
+	: mSphere0{ rkSphere0 }, mSphere1{ rkSphere1 }, mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Math<Real>::sm_Zero }
 {
 	Find();
 }
@@ -57,7 +57,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
         // does not test for intersection type.
         C1mC0.Normalize();
         mContactPoint = mSphere0.GetCenter() + r0*C1mC0;
-		mCircle = Circle3{ mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Real{} };
+		mCircle = Circle3{ mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::sm_Zero };
 		this->SetIntersectionType(IntersectionType::Point);
         return;
     }
@@ -74,10 +74,10 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
         // intersection type, but the choices are arbitrary.
         C1mC0.Normalize();
 		mContactPoint = (Real{0.5})*(mSphere0.GetCenter() + mSphere1.GetCenter());
-		mCircle = Circle3{ mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Real{} };
+		mCircle = Circle3{ mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::sm_Zero };
 
      
-		this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType> (rDif <= Real{} ? IT_SPHERE0 : IT_SPHERE1));
+		this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType> (rDif <= Math<Real>::sm_Zero ? IT_SPHERE0 : IT_SPHERE1));
         return;
     }
     if (sqrLen == rDifSqr)
@@ -89,7 +89,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
         // just in case the caller does not test for intersection type.
         C1mC0.Normalize();
       
-        if (rDif <= Real{})
+        if (rDif <= Math<Real>::sm_Zero)
         {
             mContactPoint = mSphere1.GetCenter() + r1*C1mC0;
 			this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType> ( IT_SPHERE0_POINT));
@@ -100,14 +100,14 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 			this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType> (IT_SPHERE1_POINT));
         }
          
-		mCircle = Circle3(mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Real{});
+		mCircle = Circle3(mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::sm_Zero);
 
         return;
     }
 
     // Compute t for which the circle of intersection has center
     // K = C0 + t*(C1 - C0).
-    auto t = (Real{0.5})*((Real)1 + rDif*rSum/sqrLen);
+    auto t = (Real{0.5})*(static_cast<Real>(1) + rDif*rSum/sqrLen);
 
     // Center and radius of circle of intersection.
  

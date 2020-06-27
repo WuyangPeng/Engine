@@ -1,8 +1,4 @@
 TODO Level 2
 
-0.0.2.0
+0.2.0.0
 
-1.  （Helper）ENUM_INCREMENTABLE_OPERATOR_DEFINE和ENUM_DECREMENTABLE_OPERATOR_DEFINE宏使用了reinterpret_cast，需要进行修正。
-2.  （EnumOperator）定义枚举的运算符目前使用宏的方式，考虑是否有其他解决方案。
-3.  （DynamicLink）完成DynamicLink模块非Windows平台的实现：LibraryDirectory、LibraryTools、LoadLibrary。
-4.  （CharacterString）完成CharacterString非Windows平台的实现：FormatErrorMessage、StringConversion、FormatString。

@@ -17,7 +17,7 @@
 #include "DataTypesFwd.h"
 #include "CoreTools/TemplateTools/ParamType.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <array>
 
 namespace CoreTools

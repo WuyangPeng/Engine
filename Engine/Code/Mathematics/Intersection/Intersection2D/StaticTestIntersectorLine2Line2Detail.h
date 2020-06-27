@@ -1,23 +1,23 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/13 10:26)
+// 引擎版本：0.0.2.5 (2020/03/24 15:58)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_LINE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_LINE2_DETAIL_H
 
 #include "StaticTestIntersectorLine2Line2.h"
 #include "StaticTestIntersectorLine2ClassifyDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "Mathematics/Intersection/StaticIntersectorDetail.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorLine2Line2<Real>
-	::StaticTestIntersectorLine2Line2(const Line2& lhsLine, const Line2& rhsLine,const Real dotThreshold)
+	::StaticTestIntersectorLine2Line2(const Line2& lhsLine, const Line2& rhsLine, const Real dotThreshold)
 	:ParentType{ dotThreshold }, m_LhsLine{ lhsLine }, m_RhsLine{ rhsLine }, m_Quantity{ 0 }
 {
 	Test();
@@ -45,11 +45,11 @@ void Mathematics::StaticTestIntersectorLine2Line2<Real>
 		break;
 	case IntersectionType::Line:
 		m_Quantity = std::numeric_limits<int>::max();
-		break;	
+		break;
 	default:
 		MATHEMATICS_ASSERTION_3(false, "相交类型计算错误！\n");
 		break;
-	} 
+	}
 }
 
 template <typename Real>
@@ -63,7 +63,7 @@ Mathematics::StaticTestIntersectorLine2Line2<Real>
 template <typename Real>
 bool Mathematics::StaticTestIntersectorLine2Line2<Real>
 	::IsValid() const noexcept
-{	
+{
 	if (ParentType::IsValid() && 0 <= m_Quantity)
 		return true;
 	else
@@ -97,5 +97,5 @@ int Mathematics::StaticTestIntersectorLine2Line2<Real>
 
 	return m_Quantity;
 }
- 
+
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_LINE2_DETAIL_H

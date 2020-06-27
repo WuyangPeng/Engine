@@ -12,6 +12,7 @@
 #include "Rendering/Resources/Buffer.h"
 
 #include <map>
+#include "../Shaders/ShaderParameters.h"
 
 namespace Rendering
 {
@@ -22,7 +23,7 @@ namespace Rendering
 	{
 	public:
 		using ClassType = ShaderManagement <TextureFlags, PdrTextureType>;
-		using TextureConstWeakPtr = std::weak_ptr<const TextureFlags>;
+		using TextureConstWeakPtr = CoreTools::ConstFourthSubclassSmartPointer<TextureFlags>;
 		using PdrTextureSharedPtr = std::shared_ptr<PdrTextureType>;
 	    using RendererWeakPtr = std::weak_ptr<Renderer>;
 
@@ -35,8 +36,8 @@ namespace Rendering
        void Bind (TextureConstWeakPtr texture); 
        void Unbind (TextureConstWeakPtr texture);
  
-       void Enable (TextureConstWeakPtr texture);
-       void Disable (TextureConstWeakPtr texture);
+       void Enable (TextureConstWeakPtr texture, const ConstShaderParametersSmartPointer& parameters);
+       void Disable (TextureConstWeakPtr texture, const ConstShaderParametersSmartPointer& parameters);
 
        void* Lock (TextureConstWeakPtr texture,int level, BufferLocking mode);
        void Unlock (TextureConstWeakPtr texture,int level);

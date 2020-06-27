@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
 {
 	auto sDistMM = mPlane.DistanceTo(mLozenge.GetRectangle().GetMMCorner());
 	auto sDistPM = mPlane.DistanceTo(mLozenge.GetRectangle().GetPMCorner());
-    if (sDistMM*sDistPM <= Real{})
+    if (sDistMM*sDistPM <= Math<Real>::sm_Zero)
     {
         // Two lozenge ends on opposite sides of the plane.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -45,7 +45,7 @@ void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
     }
 
 	Real sDistMP = mPlane.DistanceTo(mLozenge.GetRectangle().GetMPCorner());
-    if (sDistMM*sDistMP <= Real{})
+    if (sDistMM*sDistMP <= Math<Real>::sm_Zero)
     {
         // Two lozenge ends on opposite sides of the plane.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -53,7 +53,7 @@ void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
     }
 
 	auto sDistPP = mPlane.DistanceTo(mLozenge.GetRectangle().GetPPCorner());
-    if (sDistPM*sDistPP <= Real{})
+    if (sDistPM*sDistPP <= Math<Real>::sm_Zero)
     {
         // Two lozenge ends on opposite sides of the plane.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -78,16 +78,16 @@ bool Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
 	::LozengeIsCulled() const
 {
 	auto sDistMM = mPlane.DistanceTo(mLozenge.GetRectangle().GetMMCorner());
-    if (sDistMM < Real{})
+    if (sDistMM < Math<Real>::sm_Zero)
     {
 		auto sDistPM = mPlane.DistanceTo(mLozenge.GetRectangle().GetPMCorner());
-        if (sDistPM < Real{})
+        if (sDistPM < Math<Real>::sm_Zero)
         {
 			auto sDistMP = mPlane.DistanceTo(mLozenge.GetRectangle().GetMPCorner());
-            if (sDistMP < Real{})
+            if (sDistMP < Math<Real>::sm_Zero)
             {
 				auto sDistPP = mPlane.DistanceTo(mLozenge.GetRectangle().GetPPCorner());
-                if (sDistPP < Real{})
+                if (sDistPP < Math<Real>::sm_Zero)
                 {
                     // All four lozenge corners on negative side of plane.
                     if (sDistMM <= sDistPM)

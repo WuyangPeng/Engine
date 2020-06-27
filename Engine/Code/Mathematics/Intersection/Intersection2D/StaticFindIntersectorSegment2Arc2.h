@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/11 17:44)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:37)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_ARC2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_ARC2_H
@@ -25,32 +25,32 @@ namespace Mathematics
 		using Segment2 = Segment2<Real>;
 		using Arc2 = Arc2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>;		
-		
+		using Math = Math<Real>;
+
 	public:
 		StaticFindIntersectorSegment2Arc2(const Segment2& segment, const Arc2& arc);
-		
+
 		// Object access.
-		const Segment2 GetSegment () const;
-		const Arc2 GetArc () const;   
-		
+		const Segment2 GetSegment() const;
+		const Arc2 GetArc() const;
+
 		// The intersection set.
-		int GetQuantity () const;
-		const Vector2D GetPoint (int i) const;
-		
+		int GetQuantity() const;
+		const Vector2D GetPoint(int i) const;
+
 	private:
 		// Static intersection query.
 		void Find();
-		
+
 		// The objects to intersect.
 		Segment2 mSegment;
 		Arc2 mArc;
-		
+
 		// Information about the intersection set.
 		int mQuantity;
 		Vector2D mPoint[2];
 	};
-	
+
 	using StaticFindIntersectorSegment2Arc2f = StaticFindIntersectorSegment2Arc2<float>;
 	using StaticFindIntersectorSegment2Arc2d = StaticFindIntersectorSegment2Arc2<double>;
 }

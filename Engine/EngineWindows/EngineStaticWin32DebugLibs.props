@@ -9,14 +9,8 @@
     <Link>
       <AdditionalLibraryDirectories>$(LibsEnvironmentWin32DebugLib);$(EngineStaticWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
-    <ClCompile />
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup />
 </Project>

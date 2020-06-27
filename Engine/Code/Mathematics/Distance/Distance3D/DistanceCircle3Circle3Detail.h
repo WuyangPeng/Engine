@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 09:21)
+// 引擎版本：0.0.2.5 (2020/03/24 10:05)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_DETAIL_H 
@@ -110,12 +110,12 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 	// 计算系数 r0 = r00+r02*z^2.
 	Polynomial<Real> r0{ 2 };
 	r0[0] = b0 * b0;
-	r0[1] = Real{ };
+	r0[1] = Math::sm_Zero;
 	r0[2] = b3 * b3 - b0 * b0;
 
 	// 计算多项式 r1 = r11 * z.
 	Polynomial<Real> r1{ 1 };
-	r1[0] = Real{ };
+	r1[0] = Math::sm_Zero;
 	r1[1] = static_cast<Real>(2) * b0 * b3;
 
 	// 计算多项式 g0 = g00 + g01 * z + g02 * z^2 + g03 * z^3 + g04 * z^4.
@@ -124,7 +124,7 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 	g0[1] = static_cast<Real>(2) * (p0[0] * p0[1] + p1[0] * p1[1]) - q0[1] * r0[0] - q1[0] * r1[1];
 	g0[2] = p0[1] * p0[1] + static_cast<Real>(2) * p0[0] * p0[2] - p1[0] * p1[0] +
 		    p1[1] * p1[1] - q0[2] * r0[0] - q0[0] * r0[2] - q1[1] * r1[1];
-	g0[3] = static_cast<Real>(2) *( p0[1] * p0[2] - p1[0] * p1[1]) - q0[1] * r0[2] + q1[0] * r1[1];
+	g0[3] = static_cast<Real>(2) *(p0[1] * p0[2] - p1[0] * p1[1]) - q0[1] * r0[2] + q1[0] * r1[1];
 	g0[4] = p0[2] * p0[2] - p1[1] * p1[1] - q0[2] * r0[2] + q1[1] * r1[1];
 
 	// 计算多项式 g1 = g10 + g11 * z + g12 * z^2 + g13 * z^3.
@@ -141,27 +141,27 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 	h[2] = g0[1] * g0[1] + g1[0] * g1[0] - g1[1] * g1[1] +
 		   static_cast<Real>(2)*(g0[0] * g0[2] - g1[0] * g1[2]);
 	h[3] = static_cast<Real>(2)*(g0[1] * g0[2] + g0[0] * g0[3] + g1[0] * g1[1] -
-		   g1[1] * g1[2] - g1[0] * g1[3]);
+								 g1[1] * g1[2] - g1[0] * g1[3]);
 	h[4] = g0[2] * g0[2] + g1[1] * g1[1] - g1[2] * g1[2] +
 		   static_cast<Real>(2)*(g0[1] * g0[3] + g0[0] * g0[4] + g1[0] * g1[2] -
-		   g1[1] * g1[3]);
+							     g1[1] * g1[3]);
 	h[5] = static_cast<Real>(2)*(g0[2] * g0[3] + g0[1] * g0[4] + g1[1] * g1[2] +
-		   g1[0] * g1[3] - g1[2] * g1[3]);
+								 g1[0] * g1[3] - g1[2] * g1[3]);
 	h[6] = g0[3] * g0[3] + g1[2] * g1[2] - g1[3] * g1[3] +
 		   static_cast<Real>(2)*(g0[2] * g0[4] + g1[1] * g1[3]);
 	h[7] = static_cast<Real>(2)*(g0[3] * g0[4] + g1[2] * g1[3]);
 	h[8] = g0[4] * g0[4] + g1[3] * g1[3];
 
-	PolynomialRoots<Real> polyroots{ GetZeroThreshold() };
+	PolynomialRoots<Real> polyroots{ this->GetZeroThreshold() };
 	polyroots.FindBisection(h, static_cast<Real>(-1.01), static_cast<Real>(1.01), 6);
 	auto minSquaredDistance = Math::sm_MaxReal;
 	Vector3D lhsClosestPoint;
 	Vector3D rhsClosestPoint;
 
-	for (auto iter = polyroots.GetBegin(), end = polyroots.GetEnd();iter != end;++iter)
+	for (auto iter = polyroots.GetBegin(), end = polyroots.GetEnd(); iter != end; ++iter)
 	{
 		auto rhsCosValue = Math::GetNumericalRoundOff(*iter, static_cast<Real>(-1), static_cast<Real>(1));
-	
+
 		// 你也可以尝试rhsSinValue = -g0（rhsCosValue）/ g1（rhsCosValue）避免sqrt调用，
 		// 但要小心g1几乎为零。 现在我使用g0和g1来确定rhsSinValue的符号。
 		auto rhsSinValue = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - rhsCosValue * rhsCosValue));
@@ -169,21 +169,21 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 		auto g0cs1 = g0(rhsCosValue);
 		auto g1cs1 = g1(rhsCosValue);
 		auto product = g0cs1 * g1cs1;
-		if (Real{} < product)
+		if (Math::sm_Zero < product)
 		{
 			rhsSinValue = -rhsSinValue;
 		}
-		else if (product < Real{})
+		else if (product < Math::sm_Zero)
 		{
 			// rhsSinValue已经有正确的符号
 		}
-		else if (!Math::Approximate(g1cs1, Real{}, GetZeroThreshold()))
+		else if (!Math::Approximate(g1cs1, Math::sm_Zero, this->GetZeroThreshold()))
 		{
 			// g0 == 0.0
 			// assert( rhsSinValue == 0.0 );
 		}
 		else // g1 == 0.0
-		{			
+		{
 			// 当g1 = 0时，对rhsSinValue没有约束。 
 			// 这里应该做什么？ 在这种情况下，rhsSinValue是四次方程g0（rhsSinValue）= 0的根。
 			// 是否有几何意义？
@@ -195,8 +195,8 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 		auto m10 = b2 * rhsSinValue + b5 * rhsCosValue;
 		auto m11 = b1 * rhsSinValue + b4 * rhsCosValue;
 		auto det = m00 * m11 - m01 * m10;
-		if (GetZeroThreshold() <= Math::FAbs(det))
-		{ 
+		if (this->GetZeroThreshold() <= Math::FAbs(det))
+		{
 			auto lambda = -(b0 * rhsSinValue + b3 * rhsCosValue);
 			auto lhsCosValue = lambda * m00 / det;
 			auto lhsSinValue = -lambda * m01 / det;
@@ -208,7 +208,7 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 
 			auto closest0 = m_LhsCircle.GetCenter() + m_LhsCircle.GetRadius() * (lhsCosValue * m_LhsCircle.GetDirection0() + lhsSinValue * m_LhsCircle.GetDirection1());
 
-			auto closest1 = m_RhsCircle.GetCenter() + m_RhsCircle.GetRadius() * (rhsCosValue * m_RhsCircle.GetDirection0() +  rhsSinValue * m_RhsCircle.GetDirection1());		 
+			auto closest1 = m_RhsCircle.GetCenter() + m_RhsCircle.GetRadius() * (rhsCosValue * m_RhsCircle.GetDirection0() + rhsSinValue * m_RhsCircle.GetDirection1());
 
 			difference = closest1 - closest0;
 
@@ -226,9 +226,8 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 			MATHEMATICS_ASSERTION_2(false, "意外情况\n");
 		}
 	}
-	 
 
-	return DistanceResult{ minSquaredDistance, Real{}, lhsClosestPoint,rhsClosestPoint };
+	return DistanceResult{ minSquaredDistance, Math::sm_Zero, lhsClosestPoint,rhsClosestPoint };
 }
 
 template <typename Real>
@@ -241,7 +240,7 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 	auto rhsMovedCircle = m_RhsCircle.GetMove(t, rhsVelocity);
 
 	ClassType distance{ lhsMovedCircle, rhsMovedCircle };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 
@@ -249,4 +248,3 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_DETAIL_H
- 

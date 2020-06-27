@@ -11,7 +11,7 @@
 
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace Rendering
 {

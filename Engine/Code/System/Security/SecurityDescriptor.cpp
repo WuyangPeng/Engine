@@ -10,7 +10,7 @@
 #include "Flags/SecurityDescriptorFlags.h"
 #include "System/Window/WindowSystem.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 bool System
 	::InitializeSystemSecurityDescriptor(SecurityDescriptorPtr securityDescriptor) noexcept

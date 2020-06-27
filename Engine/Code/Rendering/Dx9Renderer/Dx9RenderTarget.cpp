@@ -9,6 +9,7 @@
 #include "Dx9RenderTarget.h" 
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
+#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 
 Rendering::Dx9RenderTarget
 	::Dx9RenderTarget (Renderer* renderer,const RenderTarget* renderTarget) 

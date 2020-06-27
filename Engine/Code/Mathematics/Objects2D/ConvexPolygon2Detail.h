@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/06 11:20)
+// 引擎版本：0.0.2.5 (2020/03/19 16:53)
 
 #ifndef MATHEMATICS_OBJECTS2D_CONVEX_POLYGON2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_CONVEX_POLYGON2_DETAIL_H
@@ -15,12 +15,11 @@
 
 template <typename Real>
 Mathematics::ConvexPolygon2<Real>
-	::ConvexPolygon2( int verticesNumber, Vector2DPtr verticesPtr, LinePtr lines )
-	:ParentType{ verticesNumber,verticesPtr },m_Lines{ lines }, m_SharingEdges{}
+	::ConvexPolygon2(int verticesNumber, Vector2DPtr verticesPtr, LinePtr lines)
+	:ParentType{ verticesNumber,verticesPtr }, m_Lines{ lines }, m_SharingEdges{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-
 
 template <typename Real>
 Mathematics::ConvexPolygon2<Real>
@@ -34,39 +33,37 @@ template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
 	else
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
-
 template <typename Real>
 typename const Mathematics::ConvexPolygon2<Real>::LinePtr Mathematics::ConvexPolygon2<Real>
 	::GetLines() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(),"需要更新线段！");
-	
+	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(), "需要更新线段！");
+
 	return m_Lines;
 }
 
 template <typename Real>
 typename const Mathematics::ConvexPolygon2<Real>::Line& Mathematics::ConvexPolygon2<Real>
-	::GetLine( int index ) const
+	::GetLine(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < GetNumVertices(),"索引错误！");
-	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(),"需要更新线段！");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < this->GetNumVertices(), "索引错误！");
+	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(), "需要更新线段！");
 
-	return m_Lines[index]; 
+	return m_Lines[index];
 }
-
 
 template <typename Real>
 void Mathematics::ConvexPolygon2<Real>
-	::SetVertex( int index, const Vector2D& vertex )
+	::SetVertex(int index, const Vector2D& vertex)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -76,7 +73,7 @@ void Mathematics::ConvexPolygon2<Real>
 	// 这些边会在稍后更新。
 	// 顶点索引相关联的边i是E[i] = <V[i],V[i+1]> 和 E[i-1] = <V[i-1],V[i]>，
 	// 其中i+1 和 i-1被计算为顶点数的模。
-	m_SharingEdges.insert((index - 1) % GetNumVertices());
+	m_SharingEdges.insert((index - 1) % this->GetNumVertices());
 	m_SharingEdges.insert(index);
 }
 
@@ -88,23 +85,23 @@ void Mathematics::ConvexPolygon2<Real>
 
 	if (IsUpdateLines())
 	{
-		auto average = ComputeVertexAverage();
-		for (auto i = 0; i < GetNumVertices(); ++i)
+		auto average = this->ComputeVertexAverage();
+		for (auto i = 0; i < this->GetNumVertices(); ++i)
 		{
 			UpdateLine(i, average);
 		}
 
 		m_SharingEdges.clear();
-	}	
+	}
 }
 
 // private
 template <typename Real>
 void Mathematics::ConvexPolygon2<Real>
-	::UpdateLine( int index, const Vector2D& average )
+	::UpdateLine(int index, const Vector2D& average)
 {
-	const auto& vertex0 = GetVertex(index);
-	const auto& vertex1 = GetVertex((index + 1) % GetNumVertices());
+	const auto& vertex0 = this->GetVertex(index);
+	const auto& vertex1 = this->GetVertex((index + 1) % this->GetNumVertices());
 
 	auto diff = average - vertex0;
 	auto edge = vertex1 - vertex0;
@@ -113,9 +110,9 @@ void Mathematics::ConvexPolygon2<Real>
 	if (Math::sm_ZeroTolerance < length)
 	{
 		normal /= length;
-		auto dot = Vector2DTools::DotProduct(normal,diff);
-		MATHEMATICS_ASSERTION_1(Real{} <= dot, "点积必须为非负数\n");
-		if (dot < Real{})
+		auto dot = Vector2DTools::DotProduct(normal, diff);
+		MATHEMATICS_ASSERTION_1(Math::sm_Zero <= dot, "点积必须为非负数\n");
+		if (dot < Math::sm_Zero)
 		{
 			normal = -normal;
 		}
@@ -129,9 +126,8 @@ void Mathematics::ConvexPolygon2<Real>
 
 	// 此线具有内指向的法线。
 	m_Lines[index].first = normal;
-	m_Lines[index].second = Vector2DTools::DotProduct(normal,vertex0);
+	m_Lines[index].second = Vector2DTools::DotProduct(normal, vertex0);
 }
-
 
 template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>
@@ -144,21 +140,21 @@ bool Mathematics::ConvexPolygon2<Real>
 
 template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>
-	::IsConvex( Real threshold ) const
+	::IsConvex(Real threshold) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(threshold <= Real{}, "threshold必须为负值！");
-	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(),"需要更新线段！");
+	MATHEMATICS_ASSERTION_1(threshold <= Math::sm_Zero, "threshold必须为负值！");
+	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(), "需要更新线段！");
 
 	auto maxDistance = -Math::sm_MaxReal;
 	auto minDistance = Math::sm_MaxReal;
 
-	for (auto j = 0; j < GetNumVertices(); ++j)
+	for (auto j = 0; j < this->GetNumVertices(); ++j)
 	{
 		const auto& line = m_Lines[j];
-		for (auto i = 0; i < GetNumVertices(); ++i)
+		for (auto i = 0; i < this->GetNumVertices(); ++i)
 		{
-			auto distance = Vector2DTools::DotProduct(line.first,GetVertex(i)) - line.second;
+			auto distance = Vector2DTools::DotProduct(line.first,this->GetVertex(i)) - line.second;
 			if (distance < minDistance)
 			{
 				minDistance = distance;
@@ -177,19 +173,18 @@ bool Mathematics::ConvexPolygon2<Real>
 	return true;
 }
 
-
 template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>
-	::Contains( const typename Vector2D& point, Real threshold ) const
+	::Contains(const typename Vector2D& point, Real threshold) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(threshold <= Real{}, "threshold必须为负值！");
-	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(),"需要更新线段！");
+	MATHEMATICS_ASSERTION_1(threshold <= Math::sm_Zero, "threshold必须为负值！");
+	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(), "需要更新线段！");
 
-	for (auto i = 0; i < GetNumVertices(); ++i)
+	for (auto i = 0; i < this->GetNumVertices(); ++i)
 	{
 		const auto& line = m_Lines[i];
-		auto distance = Vector2DTools::DotProduct(line.first,point) - line.second;
+		auto distance = Vector2DTools::DotProduct(line.first, point) - line.second;
 
 		if (distance < threshold)
 		{

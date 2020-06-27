@@ -2,15 +2,15 @@
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒıÇæ°æ±¾£º0.0.2.0 (2020/01/02 16:15)
+// ÒıÇæ°æ±¾£º0.2.0.0 (2020/05/10 12:53)
 
 #include "System/SystemExport.h"
 
 #include "HandleTools.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
 bool System
 	::SetThreadHandleInformation(ThreadHandle object, HandleInformation mask, HandleInformation flags) noexcept
@@ -50,7 +50,7 @@ bool System
 
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
-	}
+}
 
 bool System
 	::DuplicateThreadHandle(WindowHandle sourceProcessHandle, ThreadHandle sourceHandle, WindowHandle targetProcessHandle, ThreadHandlePtr targetHandle,

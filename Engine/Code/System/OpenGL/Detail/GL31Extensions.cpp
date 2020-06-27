@@ -34,25 +34,25 @@ System::PgglPrimitiveRestartIndex System::gglPrimitiveRestartIndex{ nullptr };
 void System
 	::GlDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei primcount) noexcept
 {
-	SYSTEM_BODY_A4(gglDrawArraysInstanced, mode, first, count, primcount);
+	SYSTEM_BODY_4(gglDrawArraysInstanced, mode, first, count, primcount);
 }
 
 void System
 	::GlDrawElementsInstanced(GLenum mode, GLsizei count, GLenum type, const GLvoid* indices, GLsizei primcount) noexcept
 {
-	SYSTEM_BODY_A5(gglDrawElementsInstanced, mode, count, type, indices, primcount);
+	SYSTEM_BODY_5(gglDrawElementsInstanced, mode, count, type, indices, primcount);
 }
 
 void System
 	::GlTexBuffer(GLenum target, GLenum internalformat, GLuint buffer) noexcept
 {
-	SYSTEM_BODY_A3(gglTexBuffer, target, internalformat, buffer);
+	SYSTEM_BODY_3(gglTexBuffer, target, internalformat, buffer);
 }
 
 void System
 	::GlPrimitiveRestartIndex(GLuint index) noexcept
 {
-	SYSTEM_BODY_A1(gglPrimitiveRestartIndex, index);
+	SYSTEM_BODY_1(gglPrimitiveRestartIndex, index);
 }
 
 void System

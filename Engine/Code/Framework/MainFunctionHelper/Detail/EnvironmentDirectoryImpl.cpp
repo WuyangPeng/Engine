@@ -1,39 +1,73 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 17:54)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/20 11:52)
 
 #include "Framework/FrameworkExport.h"
 
 #include "EnvironmentDirectoryImpl.h" 
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "DirectoryDefaultName.h"
+#include "AnalysisEngineDirectory.h"
 #include "CoreTools/FileManager/EnvironmentVariable.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-const System::String Framework::EnvironmentDirectoryImpl
-	::sm_Suffix(SYSTEM_TEXT("/"));
+using namespace std::literals;
 
 Framework::EnvironmentDirectoryImpl
-	::EnvironmentDirectoryImpl(const System::String& engineEnvironment)
-	:m_EngineEnvironment(engineEnvironment),
-	 m_EngineDirectory(GenerateEngineDirectory(engineEnvironment)),
-	 m_ResourcePath(SYSTEM_TEXT("Resource")),	
-	 m_ConfigurationPath(SYSTEM_TEXT("Configuration")),			
-	 m_ShaderPath(SYSTEM_TEXT("Shader")),		
-	 m_ScenePath(SYSTEM_TEXT("Scene")),	
-	 m_TexturePath(SYSTEM_TEXT("Texture")),			
-	 m_VertexPath(SYSTEM_TEXT("Vertex")),			
-	 m_ImagePath(SYSTEM_TEXT("Image"))
+	::EnvironmentDirectoryImpl(const String& engineEnvironment, const String& engineDirectory)
+	: m_EngineEnvironment{ engineEnvironment }, m_EngineDirectory{ GenerateEngineDirectory(engineEnvironment) }, m_EngineDirectoryPath{ GetEngineDirectoryPath(engineDirectory) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
+
+// static
+// private
+const System::String Framework::EnvironmentDirectoryImpl
+	::GenerateEngineDirectory(const String& engineEnvironment)
+{
+	CoreTools::EnvironmentVariable variable{ engineEnvironment };
+	auto engineInstallationDirectory = variable.GetVariable();
+
+	return engineInstallationDirectory;
+}
+
+// static
+// private
+const Framework::EngineDirectoryPath Framework::EnvironmentDirectoryImpl
+	::GetEngineDirectoryPath(const String& engineDirectory)
+{ 
+	auto jsonName = GetJsonName(engineDirectory);
+
+	AnalysisEngineDirectory analysisEngineDirectory{ jsonName };
+
+	return EngineDirectoryPath{ analysisEngineDirectory.GetEngineDirectoryResult() };		
+}
+
+// static
+// private
+const std::string Framework::EnvironmentDirectoryImpl
+	::GetJsonName(const String& variableName)
+{
+	if (variableName.empty() || variableName == SYSTEM_TEXT("Default"s))
+	{
+		return "";
+	}
+	else
+	{
+		CoreTools::EnvironmentVariable environmentVariable{ variableName };
+
+		return CoreTools::StringConversion::StandardConversionMultiByte(environmentVariable.GetVariable());
+	}
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Framework::EnvironmentDirectoryImpl
 	::IsValid() const noexcept
 {
-	if(!m_EngineEnvironment.empty())
+	if (!m_EngineEnvironment.empty())
 	{
 		return true;
 	}
@@ -57,133 +91,52 @@ const System::String Framework::EnvironmentDirectoryImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	if(!m_EngineDirectory.empty())
-		return m_EngineDirectory + sm_Suffix;
+	if (!m_EngineDirectory.empty())
+		return m_EngineDirectory + DirectoryDefaultName::GetSuffix();
 	else
-		return SYSTEM_TEXT("");
+		return DirectoryDefaultName::GetDefaultNullName();
 }
 
 const System::String Framework::EnvironmentDirectoryImpl
-	::GetResourcePath() const
+	::GetDirectory(UpperDirectory analysisDirectory) const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return GetEngineDirectory() + m_ResourcePath + sm_Suffix;
+	return GetEngineDirectory() + m_EngineDirectoryPath.GetDirectory(System::EnumCastUnderlying<AnalysisDirectory>(analysisDirectory)) + DirectoryDefaultName::GetSuffix();
 }
 
 const System::String Framework::EnvironmentDirectoryImpl
-	::GetConfigurationPath() const
+	::GetPath(RenderingAnalysisDirectory analysisDirectory) const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return GetEngineDirectory() + m_ConfigurationPath + sm_Suffix;
+	return GetPath(RenderingDirectory::Default, analysisDirectory);
 }
 
 const System::String Framework::EnvironmentDirectoryImpl
-	::GetShaderPath() const
+	::GetPath(RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return GetResourcePath() + m_ShaderPath + sm_Suffix;
+#ifdef SYSTEM_LITTLE_ENDIAN
+	return GetPath(EndianDirectory::LittleEndian, renderingDirectory, analysisDirectory);
+#else // !SYSTEM_LITTLE_ENDIAN
+	return GetPath(EndianDirectory::BigEndian, renderingDirectory, analysisDirectory);
+#endif // SYSTEM_LITTLE_ENDIAN 
 }
 
 const System::String Framework::EnvironmentDirectoryImpl
-	::GetScenePath() const
+	::GetPath(EndianDirectory endianDirectory, RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return GetResourcePath() + m_ScenePath + sm_Suffix;
-}
+	auto path = m_EngineDirectoryPath.GetPath(endianDirectory, renderingDirectory, System::EnumCastUnderlying<AnalysisDirectory>(analysisDirectory));
+	if (!path.empty())
+	{
+		path += DirectoryDefaultName::GetSuffix();
+	}
 
-const System::String Framework::EnvironmentDirectoryImpl
-	::GetTexturePath() const
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	return GetResourcePath() + m_TexturePath + sm_Suffix;
-}
-
-const System::String Framework::EnvironmentDirectoryImpl
-	::GetVertexPath() const
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	return GetResourcePath() + m_VertexPath + sm_Suffix;
-}
-
-const System::String Framework::EnvironmentDirectoryImpl
-	::GetImagePath() const
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	return GetResourcePath() + m_ImagePath + sm_Suffix;
-}
-
-void Framework::EnvironmentDirectoryImpl
-	::SetResourcePath(const System::String& resourcePath)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_ResourcePath = resourcePath;
-}
-
-void Framework::EnvironmentDirectoryImpl
-	::SetConfigurationPath(const System::String& configurationPath)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_ConfigurationPath = configurationPath;
-}
-
-void Framework::EnvironmentDirectoryImpl
-	::SetShaderPath(const System::String& shaderPath)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_ShaderPath = shaderPath;
-}
-
-void Framework::EnvironmentDirectoryImpl
-	::SetScenePath(const System::String& scenePath)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_ScenePath = scenePath;
-}
-
-void Framework::EnvironmentDirectoryImpl
-	::SetTexturePath(const System::String& texturePath)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_TexturePath = texturePath;
-}
-
-void Framework::EnvironmentDirectoryImpl
-	::SetVertexPath(const System::String& vertexPath)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_VertexPath = vertexPath;
-}
-
-void Framework::EnvironmentDirectoryImpl
-	::SetImagePath(const System::String& imagePath)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_ImagePath = imagePath;
-}
-
-// static
-// private
-const System::String Framework::EnvironmentDirectoryImpl
-	::GenerateEngineDirectory(const System::String& engineEnvironment)
-{
-	CoreTools::EnvironmentVariable variable(engineEnvironment);
-	System::String engineInstallationDirectory = variable.GetVariable(); 
-	 
-	return engineInstallationDirectory;
+	return GetDirectory(UpperDirectory::Resource) + path;
 }
 
 

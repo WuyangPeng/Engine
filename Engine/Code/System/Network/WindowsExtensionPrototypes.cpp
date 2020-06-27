@@ -9,7 +9,7 @@
 #include "WindowsExtensionPrototypes.h"
 #include "Using/SocketPrototypesUsing.h"
 #include "System/Helper/UnusedMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 System::WinSockStartUpReturn System
 	::WinSockStartUp(WindowWord versionRequired, WinSockDataPtr wSAData) noexcept

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 09:45)
+// 引擎版本：0.0.2.5 (2020/03/23 09:42)
 
 #ifndef MATHEMATICS_QUERY_FWD_H
 #define MATHEMATICS_QUERY_FWD_H
@@ -45,6 +45,14 @@ namespace Mathematics
 
 	template <typename Real>
 	class Query3Filtered;
+
+	enum class QueryType;
+	enum class LineQueryType;
+	enum class TriangleQueryType;
+	enum class CircumcircleQueryType;
+	enum class PlaneQueryType;
+	enum class TetrahedronQueryType;
+	enum class CircumsphereQueryType;
 }
 
 #endif // MATHEMATICS_QUERY_FWD_H

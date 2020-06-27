@@ -1,21 +1,21 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/13 09:58)
+// 引擎版本：0.0.2.5 (2020/03/24 15:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_RAY2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_RAY2_DETAIL_H
 
 #include "StaticFindIntersectorRay2Ray2.h"
 #include "StaticTestIntersectorLine2ClassifyDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "Mathematics/Intersection/StaticIntersectorDetail.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorRay2Ray2<Real>
@@ -32,7 +32,7 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorRay2Ray2<Real>
 	::Find()
 {
-	Real dotThreshold = this->GetEpsilon();
+	auto dotThreshold = this->GetEpsilon();
 	StaticTestIntersectorLine2Classify<Real> classify{ m_LhsRay.GetOrigin(), m_LhsRay.GetDirection(),m_RhsRay.GetOrigin(), m_RhsRay.GetDirection(),true, dotThreshold };
 
 	auto intersectionType = classify.GetIntersectionType();
@@ -40,7 +40,7 @@ void Mathematics::StaticFindIntersectorRay2Ray2<Real>
 	if (intersectionType == IntersectionType::Point)
 	{
 		// 测试直线交点是否在射线上。
-		if (Real{} <= classify.GetFirstParameter() && Real{} <= classify.GetSecondParameter())
+		if (Math::sm_Zero <= classify.GetFirstParameter() && Math::sm_Zero <= classify.GetSecondParameter())
 		{
 			m_Quantity = 1;
 			intersectionType = IntersectionType::Point;
@@ -56,15 +56,15 @@ void Mathematics::StaticFindIntersectorRay2Ray2<Real>
 	{
 		auto dotProduct = Vector2DTools::DotProduct(m_LhsRay.GetDirection(), m_RhsRay.GetOrigin() - m_LhsRay.GetOrigin());
 
-		if (Real{} < Vector2DTools::DotProduct(m_LhsRay.GetDirection(),m_RhsRay.GetDirection()))
-		{			
+		if (Math::sm_Zero < Vector2DTools::DotProduct(m_LhsRay.GetDirection(), m_RhsRay.GetDirection()))
+		{
 			// 射线是共线的并且在相同的方向，所以它们必须是重叠的。
 			m_Quantity = std::numeric_limits<int>::max();
 			intersectionType = IntersectionType::Ray;
-			m_Point[0] = (Real{} < dotProduct ? m_RhsRay.GetOrigin() : m_LhsRay.GetOrigin());
+			m_Point[0] = (Math::sm_Zero < dotProduct ? m_RhsRay.GetOrigin() : m_LhsRay.GetOrigin());
 		}
 		else
-		{	
+		{
 			// 射线是共线的，且方向相反。 测试它们是否重叠。
 			// m_LhsRay具有间隔[0，+无穷大），
 			// m_RhsRay具有相对于ray0方向的间隔（-infinity，dotProduct] 。
@@ -94,9 +94,8 @@ void Mathematics::StaticFindIntersectorRay2Ray2<Real>
 		intersectionType = IntersectionType::Empty;
 	}
 
-	ParentType::SetIntersectionType(intersectionType);  
+	ParentType::SetIntersectionType(intersectionType);
 }
-
 
 template <typename Real>
 Mathematics::StaticFindIntersectorRay2Ray2<Real>
@@ -109,7 +108,7 @@ Mathematics::StaticFindIntersectorRay2Ray2<Real>
 template <typename Real>
 bool Mathematics::StaticFindIntersectorRay2Ray2<Real>
 	::IsValid() const noexcept
-{	
+{
 	if (ParentType::IsValid() && 0 <= m_Quantity)
 		return true;
 	else
@@ -155,4 +154,3 @@ typename const Mathematics::StaticFindIntersectorRay2Ray2<Real>::Vector2D Mathem
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_RAY2_DETAIL_H
- 

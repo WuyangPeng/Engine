@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 17:19)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:09)
 
 #include "Network/NetworkExport.h" 
 
@@ -25,13 +25,13 @@ Network::HandleSetImpl
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Network,HandleSetImpl)
+CLASS_INVARIANT_STUB_DEFINE(Network, HandleSetImpl)
 
 void Network::HandleSetImpl
-	::SetBit( ACEHandle handle )
+	::SetBit(ACEHandle handle)
 {
 	NETWORK_CLASS_IS_VALID_9;
-	
+
 	SYSTEM_UNUSED_ARG(handle);
 }
 
@@ -52,7 +52,7 @@ Network::SockFdSet* Network::HandleSetImpl
 }
 
 void Network::HandleSetImpl
-	::Sync( ACEHandle maxHandle )
+	::Sync(ACEHandle maxHandle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -60,7 +60,7 @@ void Network::HandleSetImpl
 }
 
 bool Network::HandleSetImpl
-	::isSet( ACEHandle handle ) const
+	::IsSet(ACEHandle handle) const
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -70,7 +70,7 @@ bool Network::HandleSetImpl
 }
 
 void Network::HandleSetImpl
-	::ClearBit( ACEHandle handle )
+	::ClearBit(ACEHandle handle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 

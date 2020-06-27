@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 20:20)
+// 引擎版本：0.0.2.4 (2020/03/11 13:45)
 
 #include "Network/NetworkExport.h" 
 
@@ -13,11 +13,11 @@
 
 Network::SockACEHandleSetIterator
 	::SockACEHandleSetIterator(const ACEHandleSet& handleSet)
-	:ParentType{},m_ACEHandleSetIter{ handleSet }
+	:ParentType{}, m_ACEHandleSetIter{ handleSet }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
- 
+
 Network::SockACEHandleSetIterator
 	::~SockACEHandleSetIterator()
 {

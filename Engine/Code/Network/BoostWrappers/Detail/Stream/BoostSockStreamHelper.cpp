@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/31 14:09)
-
+// 引擎版本：0.0.2.4 (2020/03/11 16:00)
 
 #include "Network/NetworkExport.h" 
 
@@ -17,13 +16,14 @@
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
 using std::string;
+using namespace std::literals;
 
 namespace
 {
-	const System::String g_PortDescription{ SYSTEM_TEXT("，端口：") };
-	const System::String g_BytesTransferredDescription{ SYSTEM_TEXT("，字节数：") };
-	const System::String g_AsynchronousSendSuccessDescription{ SYSTEM_TEXT("异步发送消息成功，地址：") };
-	const System::String g_AsynchronousReceiveSuccessDescription{ SYSTEM_TEXT("异步接收消息成功，地址：") };
+	const auto g_PortDescription = SYSTEM_TEXT("，端口："s);
+	const auto g_BytesTransferredDescription = SYSTEM_TEXT("，字节数："s);
+	const auto g_AsynchronousSendSuccessDescription = SYSTEM_TEXT("异步发送消息成功，地址："s);
+	const auto g_AsynchronousReceiveSuccessDescription = SYSTEM_TEXT("异步接收消息成功，地址："s);
 }
 
 void Network::BoostSockStreamHelper
@@ -63,7 +63,7 @@ void Network::BoostSockStreamHelper
 {
 	if (0 < bytesTransferred)
 	{
-		LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName)
+		LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName.c_str())
 			<< prefix << addressData.GetAddress() << g_PortDescription << addressData.GetPort() << g_BytesTransferredDescription << bytesTransferred
 			<< CoreTools::LogAppenderIOManageSign::Refresh;
 	}

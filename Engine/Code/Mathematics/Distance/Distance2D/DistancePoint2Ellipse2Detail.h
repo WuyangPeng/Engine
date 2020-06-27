@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 17:52)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 19:20)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_DETAIL_H 
@@ -32,10 +32,10 @@ template <typename Real>
 bool Mathematics::DistancePoint2Ellipse2<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 
 #endif // OPEN_CLASS_INVARIANT
@@ -77,7 +77,7 @@ const typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathema
 	auto lhsClosestPoint = m_Point;
 	auto rhsClosestPoint = m_Ellipse.GetCenter() + outputVector[0] * m_Ellipse.GetAxis0() + outputVector[1] * m_Ellipse.GetAxis1();
 
-	return DistanceResult{ squaredDistance, Real{}, lhsClosestPoint, rhsClosestPoint };
+	return DistanceResult{ squaredDistance, Math<Real>::sm_Zero, lhsClosestPoint, rhsClosestPoint };
 }
 
 template <typename Real>
@@ -86,7 +86,7 @@ const typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathema
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	auto movedPoint = m_Point.GetMove(t , lhsVelocity);
+	auto movedPoint = m_Point.GetMove(t, lhsVelocity);
 	auto movedEllipse = m_Ellipse.GetMove(t, rhsVelocity);
 
 	ClassType distance{ movedPoint, movedEllipse };
@@ -98,4 +98,3 @@ const typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathema
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_DETAIL_H
- 

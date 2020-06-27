@@ -1,87 +1,72 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:18)
+// 引擎版本：0.3.0.1 (2020/05/21 15:58)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_WINDOW_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_WINDOW_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-#include "OpenGLGlutCallBackInterface.h"
 #include "OpenGLGlutProcess.h"
-#include "CoreTools/UnitTestSuite/UnitTestComposite.h"
+#include "OpenGLGlutCallBackInterface.h"
+#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h" 
 
-#include <boost/noncopyable.hpp>
+#include <string>
 
-namespace CoreTools
-{
-	class Suite;
-}
-
+FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteStream);
 FRAMEWORK_EXPORT_SHARED_PTR(OpenGLGlutCallBackUnitTestSuiteImpl);
-FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteOsPtr);
-EXPORT_NONCOPYABLE_CLASS(FRAMEWORK);
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE OpenGLGlutCallBackUnitTestSuite : 
-		public OpenGLGlutCallBackInterface, private boost::noncopyable
+	class FRAMEWORK_DEFAULT_DECLARE OpenGLGlutCallBackUnitTestSuite : public OpenGLGlutCallBackInterface 
 	{
-	public:	
-		typedef CoreTools::NonCopyClasses ClassShareType;
-		typedef OpenGLGlutCallBackUnitTestSuite ClassType;
-		typedef OpenGLGlutCallBackInterface ParentType;
-		typedef OpenGLGlutCallBackUnitTestSuiteImpl ImplType;
-		typedef WindowMessageUnitTestSuiteOsPtr OsPtrType;
-		typedef CoreTools::Suite Suite;
-		typedef std::shared_ptr<CoreTools::UnitTestComposite> UnitTestPtr;
+	public:		
+		using ClassType = OpenGLGlutCallBackUnitTestSuite;
+		using ParentType = OpenGLGlutCallBackInterface;
+		using ClassShareType = CoreTools::NonCopyClasses;
+		using ImplType = OpenGLGlutCallBackUnitTestSuiteImpl;
+		using StreamType = WindowMessageUnitTestSuiteStream;
+		using Suite = CoreTools::Suite;
+		using OStreamShared = CoreTools::OStreamShared;
+		using UnitTestSharedPtr = std::shared_ptr<CoreTools::UnitTestComposite>;
 
 	public:
-		OpenGLGlutCallBackUnitTestSuite();		
-		virtual ~OpenGLGlutCallBackUnitTestSuite();
-	
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		OpenGLGlutCallBackUnitTestSuite(int64_t delta, const std::string& suiteName);
+		~OpenGLGlutCallBackUnitTestSuite() noexcept = default;
+		OpenGLGlutCallBackUnitTestSuite(const OpenGLGlutCallBackUnitTestSuite&) noexcept = delete;
+		OpenGLGlutCallBackUnitTestSuite& operator=(const OpenGLGlutCallBackUnitTestSuite&) noexcept = delete;
+		OpenGLGlutCallBackUnitTestSuite(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept;
+		OpenGLGlutCallBackUnitTestSuite& operator=(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept;
 
-		virtual bool Initialize();
-	
-		virtual bool SpecialKeysDown(int key,int xCoordinate,int yCoordinate);
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool IdleFunction();
+		bool Initialize() override;
+		bool SpecialKeysDown(int key, int xCoordinate, int yCoordinate) override;
+		bool IdleFunction() override;
+		int GetPassedNumber() const noexcept;
 
-		int GetPassedNumber() const;
-
-	protected:	
-		std::ostream* GetOStream();		
-
-		void DoAddSuite(const Suite& suite);	
-
-		// 子类初始化必须调用。
-		void GenerateSuite();
-
-		void AddTest(const std::string& suiteName,Suite& suite, 
-			         const std::string& testName,const UnitTestPtr& unitTest);
-
-		bool IsPrintRun() const;
+	protected:
+		OStreamShared GetStreamShared() noexcept;
+		void DoAddSuite(const Suite& suite);
+		bool IsPrintRun() const noexcept;
+		void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);		
 
 	private:
-		typedef std::shared_ptr<ImplType> OpenGLGlutCallBackUnitTestSuiteImplPtr;
-		typedef std::shared_ptr<OsPtrType> OsPtrTypePtr;
+		using OpenGLGlutCallBackUnitTestSuiteImplPtr = std::shared_ptr<ImplType>;
+		using StreamTypeSharedPtr = std::shared_ptr<StreamType>;
 
-	private:	
+	private:
 		virtual void AddSuite() = 0;
-		virtual std::string GetSuiteName() const = 0;	
 
-		bool AddSuiteOnInitialize();
-		void RunUnitTest();
-		void ResetTestData();
+		bool AddSuiteOnInitialize();	 
 
-	private:		
-		OsPtrTypePtr m_OsPtrTypePtr;
+	private:
+		StreamTypeSharedPtr m_Stream;
 		OpenGLGlutCallBackUnitTestSuiteImplPtr m_Impl;
-	    bool m_IsInit;
+		bool m_IsInit;
 	};
 
 	using OpenGLGlutProcessUnitTestSuite = OpenGLGlutProcess<OpenGLGlutCallBackUnitTestSuite>;

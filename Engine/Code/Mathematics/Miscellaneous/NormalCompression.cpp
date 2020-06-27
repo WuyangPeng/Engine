@@ -10,9 +10,11 @@
 #include "Mathematics/Base/MathDetail.h"
 
 static int gsN = 127;  // N(N+1)/2 = 8128 < 2^{13}
-static double gsB = 2*gsN + 1;
+static auto temp1 = 2 * gsN + 1;
+static double gsB = temp1;
 static double gsB2 = gsB*gsB;
-static double gsFactor = (gsN - 1)*Mathematics::Mathd::Sqrt(0.5);
+static auto temp2 = (gsN - 1);
+static double gsFactor = temp2 *Mathematics::Mathd::Sqrt(0.5);
 static double gsInvFactor = 1.0/gsFactor;
 
 
@@ -52,7 +54,8 @@ void Mathematics
     unsigned short mantissa = index & 0x1FFF;
 
     // Extract triangular indices.
-    double temp = gsB2 - 8*mantissa;
+	auto a = 8 * mantissa;
+    double temp = gsB2 - a;
     unsigned short usY = (unsigned short) Mathd::Floor(0.5*(gsB - Mathd::Sqrt(Mathd::FAbs(temp))));
     unsigned short usX = mantissa - ((usY*(255 - usY)) >> 1);
 

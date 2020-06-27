@@ -8,9 +8,9 @@
 
 #include "ConsoleColours.h"
 #include "Flags/ConsoleColoursFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
 #include <gsl/gsl_util>
 

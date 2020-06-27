@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 09:17)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:43)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_H
@@ -28,37 +28,37 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		DynamicFindIntersectorBox3Sphere3(const Box3& box, const Sphere3& sphere,Real tmax, 
-										  const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon = Math::sm_ZeroTolerance);
-		
+		DynamicFindIntersectorBox3Sphere3(const Box3& box, const Sphere3& sphere, Real tmax,
+										  const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+
 		// Object access.
-		const Box3 GetBox () const;
-		const Sphere3 GetSphere () const;
+		const Box3 GetBox() const;
+		const Sphere3 GetSphere() const;
 
 		// Intersection set for dynamic find-intersection query.
 		const Vector3D& GetContactPoint() const;
-   
+
 	private:
 		// Find-intersection query.
-		void Find ();		
-		
+		void Find();
+
 		// Supporting functions for dynamic Find function.
-		static Real GetVertexIntersection (Real dx, Real dy, Real dz, Real vx, Real vy, Real vz, Real rsqr);
-		
-		static Real GetEdgeIntersection (Real dx, Real dz, Real vx, Real vz, Real vsqr, Real rsqr);
-		
-		int FindFaceRegionIntersection (Real ex, Real ey, Real ez, Real cx, Real cy, Real cz, Real vx, Real vy, Real vz, Real& ix, Real& iy, Real& iz, bool aboveFace);
-		
-		int FindJustEdgeIntersection (Real cy, Real ex, Real ey, Real ez, Real dx, Real dz, Real vx, Real vy, Real vz, Real& ix, Real& iy, Real& iz);
-		
-		int FindEdgeRegionIntersection (Real ex, Real ey, Real ez, Real cx,Real cy, Real cz, Real vx, Real vy, Real vz, Real& ix, Real& iy, Real& iz, bool aboveEdge);
-		
-		int FindVertexRegionIntersection (Real ex, Real ey, Real ez, Real cx, Real cy, Real cz, Real vx, Real vy, Real vz, Real& ix, Real& iy, Real& iz);
-		
+		static Real GetVertexIntersection(Real dx, Real dy, Real dz, Real vx, Real vy, Real vz, Real rsqr);
+
+		static Real GetEdgeIntersection(Real dx, Real dz, Real vx, Real vz, Real vsqr, Real rsqr);
+
+		int FindFaceRegionIntersection(Real ex, Real ey, Real ez, Real cx, Real cy, Real cz, Real vx, Real vy, Real vz, Real& ix, Real& iy, Real& iz, bool aboveFace);
+
+		int FindJustEdgeIntersection(Real cy, Real ex, Real ey, Real ez, Real dx, Real dz, Real vx, Real vy, Real vz, Real& ix, Real& iy, Real& iz);
+
+		int FindEdgeRegionIntersection(Real ex, Real ey, Real ez, Real cx, Real cy, Real cz, Real vx, Real vy, Real vz, Real& ix, Real& iy, Real& iz, bool aboveEdge);
+
+		int FindVertexRegionIntersection(Real ex, Real ey, Real ez, Real cx, Real cy, Real cz, Real vx, Real vy, Real vz, Real& ix, Real& iy, Real& iz);
+
 		// The objects to intersect.
 		Box3 mBox;
 		Sphere3 mSphere;
-		
+
 		// Point of intersection.
 		Vector3D mContactPoint;
 	};

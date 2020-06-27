@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/06 10:41)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 15:53)
 
 // 4DœÚ¡ø¿‡µƒ µœ÷
 #ifndef MATHEMATICS_ALGEBRA_VECTOR_4D_DETAIL_H
@@ -17,31 +17,31 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_Zero{ AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::NullValue };
+	::sm_Zero{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_UnitX{ AlgebraTraits::UnitValue, AlgebraTraits::NullValue, AlgebraTraits::NullValue, AlgebraTraits::NullValue };
+	::sm_UnitX{ Math::sm_One, Math::sm_Zero, Math::sm_Zero, Math::sm_Zero };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_UnitY{ AlgebraTraits::NullValue,  AlgebraTraits::UnitValue, AlgebraTraits::NullValue,AlgebraTraits::NullValue };
+	::sm_UnitY{ Math::sm_Zero,  Math::sm_One, Math::sm_Zero,Math::sm_Zero };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_UnitZ{ AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::UnitValue,AlgebraTraits::NullValue };
+	::sm_UnitZ{ Math::sm_Zero,Math::sm_Zero,Math::sm_One,Math::sm_Zero };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_UnitW{ AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::UnitValue };
+	::sm_UnitW{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_One };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_One{ AlgebraTraits::UnitValue,AlgebraTraits::UnitValue,AlgebraTraits::UnitValue,AlgebraTraits::UnitValue };
+	::sm_One{ Math::sm_One,Math::sm_One,Math::sm_One,Math::sm_One };
 
 template <typename Real>
 Mathematics::Vector4D<Real>
@@ -53,7 +53,7 @@ Mathematics::Vector4D<Real>
 
 template <typename Real>
 Mathematics::Vector4D<Real>
-	::Vector4D( const Tuple4& tuple )
+	::Vector4D(const Tuple4& tuple)
 	:m_Tuple{ tuple }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -61,7 +61,7 @@ Mathematics::Vector4D<Real>
 
 template <typename Real>
 Mathematics::Vector4D<Real>
-	::Vector4D( Real x, Real y, Real z , Real w)
+	::Vector4D(Real x, Real y, Real z, Real w)
 	:m_Tuple{ x,y,z,w }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -69,7 +69,7 @@ Mathematics::Vector4D<Real>
 
 template <typename Real>
 Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
-	::operator=( const Tuple4& tuple )
+	::operator=(const Tuple4& tuple)
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
@@ -81,7 +81,7 @@ Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
 template <typename Real>
 template <typename RhsType>
 Mathematics::Vector4D<Real>
-	::Vector4D( const Vector2D<RhsType>& vector )
+	::Vector4D(const Vector2D<RhsType>& vector)
 	:m_Tuple{ boost::numeric_cast<Real>(vector.GetXCoordinate()),boost::numeric_cast<Real>(vector.GetYCoordinate()),{},{} }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -90,20 +90,19 @@ Mathematics::Vector4D<Real>
 template <typename Real>
 template <typename RhsType>
 Mathematics::Vector4D<Real>
-	::Vector4D( const Vector3D<RhsType>& vector )
+	::Vector4D(const Vector3D<RhsType>& vector)
 	:m_Tuple{ boost::numeric_cast<Real>(vector.GetXCoordinate()),
 			  boost::numeric_cast<Real>(vector.GetYCoordinate()),
 			  boost::numeric_cast<Real>(vector.GetZCoordinate()),
-			  Real{} }
+			  Math::sm_Zero }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-
 template <typename Real>
 template <typename RhsType>
 Mathematics::Vector4D<Real>
-	::Vector4D( const Vector4D<RhsType>& vector )
+	::Vector4D(const Vector4D<RhsType>& vector)
 	:m_Tuple{ boost::numeric_cast<Real>(vector.GetXCoordinate()),
 			  boost::numeric_cast<Real>(vector.GetYCoordinate()),
 			  boost::numeric_cast<Real>(vector.GetZCoordinate()),
@@ -112,13 +111,12 @@ Mathematics::Vector4D<Real>
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::Vector4D<Real>
 	::IsValid() const noexcept
 {
-	return true;	
+	return true;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -160,7 +158,7 @@ Real Mathematics::Vector4D<Real>
 
 template <typename Real>
 bool Mathematics::Vector4D<Real>
-	::IsZero( const Real epsilon) const
+	::IsZero(const Real epsilon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -168,11 +166,11 @@ bool Mathematics::Vector4D<Real>
 		Math::FAbs(m_Tuple[2]) <= epsilon && Math::FAbs(m_Tuple[3]) <= epsilon)
 	{
 		return true;
-	}		
+	}
 	else
 	{
 		return false;
-	}		
+	}
 }
 
 template <typename Real>
@@ -186,7 +184,7 @@ void Mathematics::Vector4D<Real>
 
 template <typename Real>
 void Mathematics::Vector4D<Real>
-	::SetCoordinate( Real x, Real y, Real z, Real w )
+	::SetCoordinate(Real x, Real y, Real z, Real w)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -198,7 +196,7 @@ void Mathematics::Vector4D<Real>
 
 template <typename Real>
 void Mathematics::Vector4D<Real>
-	::SetXCoordinate( Real x )
+	::SetXCoordinate(Real x)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -207,7 +205,7 @@ void Mathematics::Vector4D<Real>
 
 template <typename Real>
 void Mathematics::Vector4D<Real>
-	::SetYCoordinate( Real y )
+	::SetYCoordinate(Real y)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -216,7 +214,7 @@ void Mathematics::Vector4D<Real>
 
 template <typename Real>
 void Mathematics::Vector4D<Real>
-	::SetZCoordinate( Real z )
+	::SetZCoordinate(Real z)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -225,7 +223,7 @@ void Mathematics::Vector4D<Real>
 
 template <typename Real>
 void Mathematics::Vector4D<Real>
-	::SetWCoordinate( Real w )
+	::SetWCoordinate(Real w)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -234,7 +232,7 @@ void Mathematics::Vector4D<Real>
 
 template <typename Real>
 void Mathematics::Vector4D<Real>
-	::Normalize( const Real epsilon)
+	::Normalize(const Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -246,28 +244,28 @@ void Mathematics::Vector4D<Real>
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"≥˝¡„¥ÌŒÛ£°");
+		MATHEMATICS_ASSERTION_1(false, "≥˝¡„¥ÌŒÛ£°");
 
 		ZeroOut();
-	}	
+	}
 }
 
 template <typename Real>
 void Mathematics::Vector4D<Real>
-	::ProjectionNormalization( const Real epsilon )
+	::ProjectionNormalization(const Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if(epsilon <= Math::FAbs(m_Tuple[3]))
+	if (epsilon <= Math::FAbs(m_Tuple[3]))
 	{
 		m_Tuple[0] /= m_Tuple[3];
 		m_Tuple[1] /= m_Tuple[3];
 		m_Tuple[2] /= m_Tuple[3];
-		m_Tuple[3] = AlgebraTraits::UnitValue;
+		m_Tuple[3] = Math::sm_One;
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"≥˝¡„¥ÌŒÛ£°");
+		MATHEMATICS_ASSERTION_1(false, "≥˝¡„¥ÌŒÛ£°");
 
 		ZeroOut();
 	}
@@ -284,27 +282,27 @@ const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
 
 template <typename Real>
 const Real& Mathematics::Vector4D<Real>
-	::operator[]( unsigned int index ) const
+	::operator[](unsigned int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(index < 4,"À˜“˝¥ÌŒÛ");
+	MATHEMATICS_ASSERTION_0(index < 4, "À˜“˝¥ÌŒÛ");
 
 	return m_Tuple[index];
 }
 
 template <typename Real>
 Real& Mathematics::Vector4D<Real>
-	::operator[]( unsigned int index )
+	::operator[](unsigned int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(index < 4,"À˜“˝¥ÌŒÛ");
+	MATHEMATICS_ASSERTION_0(index < 4, "À˜“˝¥ÌŒÛ");
 
-	return OPERATOR_SQUARE_BRACKETS(Real,index);
+	return OPERATOR_SQUARE_BRACKETS(Real, index);
 }
 
 template <typename Real>
 Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
-	::operator+=( const ClassType& rhs )
+	::operator+=(const ClassType& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -318,7 +316,7 @@ Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
 
 template <typename Real>
 Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
-	::operator-=( const ClassType& rhs )
+	::operator-=(const ClassType& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -332,7 +330,7 @@ Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
 
 template <typename Real>
 Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
-	::operator*=( Real rhs )
+	::operator*=(Real rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -346,7 +344,7 @@ Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
 
 template <typename Real>
 Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
-	::operator/=( Real rhs )
+	::operator/=(Real rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -359,7 +357,7 @@ Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"≥˝¡„¥ÌŒÛ£°");
+		MATHEMATICS_ASSERTION_1(false, "≥˝¡„¥ÌŒÛ£°");
 
 		ZeroOut();
 	}

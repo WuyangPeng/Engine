@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename T>
 CoreTools::HeapAllocate<T>
@@ -22,7 +22,9 @@ CoreTools::HeapAllocate<T>
 {
 	if (m_Point == nullptr)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("∑÷≈‰Heap ß∞‹°£"));
+		using namespace std::literals;
+
+		THROW_EXCEPTION(SYSTEM_TEXT("∑÷≈‰Heap ß∞‹°£"s));
 	}
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

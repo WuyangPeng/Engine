@@ -116,7 +116,7 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>
 	// 合并的包围盒的轴是输入包围盒轴的平均值。
 	// 如果需要的话，第二个包围盒的轴被取负，这样它们形成与第一个包围盒的轴线为锐角。
 	Vector2D firstAxis;
-	if (Real{} <= Vector2DTools<Real>::DotProduct(lhs.GetFirstAxis(),rhs.GetFirstAxis()))
+	if (Math<Real>::sm_Zero <= Vector2DTools<Real>::DotProduct(lhs.GetFirstAxis(),rhs.GetFirstAxis()))
     {
 		firstAxis = static_cast<Real>(0.5) * (lhs.GetFirstAxis() + rhs.GetFirstAxis());
 		firstAxis.Normalize();

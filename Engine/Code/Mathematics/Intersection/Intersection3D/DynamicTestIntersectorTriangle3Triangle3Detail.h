@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/13 13:42)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 16:49)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
@@ -11,125 +11,125 @@
 
 template <typename Real>
 Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::DynamicTestIntersectorTriangle3Triangle3 (const Triangle3& triangle0,const Triangle3& triangle1,Real tmax, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon )
+	::DynamicTestIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
 	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mTriangle0{ triangle0 }, mTriangle1{ triangle1 }
 {
-    mReportCoplanarIntersections = true;
-    Test();
+	mReportCoplanarIntersections = true;
+	Test();
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::GetTriangle0 () const
+	::GetTriangle0() const
 {
-    return mTriangle0;
+	return mTriangle0;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::GetTriangle1 () const
+	::GetTriangle1() const
 {
-    return mTriangle1;
+	return mTriangle1;
 }
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::Test ()
+	::Test()
 {
-    auto tfirst = Real{};
+	auto tfirst = Math::sm_Zero;
 	auto tlast = Math::sm_MaxReal;
 	auto tmax = this->GetTMax();
 	auto velocity0 = this->GetLhsVelocity();
 	auto velocity1 = this->GetRhsVelocity();
 
-    // Velocity relative to triangle0.
+	// Velocity relative to triangle0.
 	auto relVelocity = velocity1 - velocity0;
 
-    // Compute edge and normal directions for triangle0.
-    Vector3D E[3] {	mTriangle0.GetVertex()[1] - mTriangle0.GetVertex()[0],
-					mTriangle0.GetVertex()[2] - mTriangle0.GetVertex()[1],
-					mTriangle0.GetVertex()[0] - mTriangle0.GetVertex()[2] };
+	// Compute edge and normal directions for triangle0.
+	Vector3D E[3]{ mTriangle0.GetVertex()[1] - mTriangle0.GetVertex()[0],
+				   mTriangle0.GetVertex()[2] - mTriangle0.GetVertex()[1],
+				   mTriangle0.GetVertex()[0] - mTriangle0.GetVertex()[2] };
 
-     auto N = Vector3DTools::UnitCrossProduct(E[0],E[1]);
-    if (!TestOverlap(N,tmax,relVelocity,tfirst,tlast))
-    {
+	auto N = Vector3DTools::UnitCrossProduct(E[0], E[1]);
+	if (!TestOverlap(N, tmax, relVelocity, tfirst, tlast))
+	{
 		this->SetIntersectionType(IntersectionType::Empty);
 		return;
-    }
+	}
 
-    // Compute edge and normal directions for triangle1.
-    Vector3D F[3] { mTriangle1.GetVertex()[1] - mTriangle1.GetVertex()[0],
-					mTriangle1.GetVertex()[2] - mTriangle1.GetVertex()[1],
-					mTriangle1.GetVertex()[0] - mTriangle1.GetVertex()[2]};
-	auto M = Vector3DTools::UnitCrossProduct(F[0],F[1]);
+	// Compute edge and normal directions for triangle1.
+	Vector3D F[3]{ mTriangle1.GetVertex()[1] - mTriangle1.GetVertex()[0],
+				   mTriangle1.GetVertex()[2] - mTriangle1.GetVertex()[1],
+				   mTriangle1.GetVertex()[0] - mTriangle1.GetVertex()[2] };
+	auto M = Vector3DTools::UnitCrossProduct(F[0], F[1]);
 
-    Vector3D dir;
-    int i0, i1;
+	Vector3D dir;
+	auto i0 = 0;
+	auto i1 = 0;
 
-    if (Math::FAbs(Vector3DTools::DotProduct(N,M)) < (Real)1 - Math::sm_ZeroTolerance)
-    {
-        // Triangles are not parallel.
+	if (Math::FAbs(Vector3DTools::DotProduct(N, M)) < static_cast<Real>(1) - Math::sm_ZeroTolerance)
+	{
+		// Triangles are not parallel.
 
-        // Direction M.
-        if (!TestOverlap(M, tmax, relVelocity, tfirst, tlast))
-        {
+		// Direction M.
+		if (!TestOverlap(M, tmax, relVelocity, tfirst, tlast))
+		{
 			this->SetIntersectionType(IntersectionType::Empty);
 			return;
-        }
+		}
 
-        // Directions E[i0]xF[i1].
-        for (i1 = 0; i1 < 3; ++i1)
-        {
-            for (i0 = 0; i0 < 3; ++i0)
-            {
-                dir = Vector3DTools::UnitCrossProduct(E[i0],F[i1]);
-                if (!TestOverlap(dir, tmax, relVelocity, tfirst, tlast))
-                {
+		// Directions E[i0]xF[i1].
+		for (i1 = 0; i1 < 3; ++i1)
+		{
+			for (i0 = 0; i0 < 3; ++i0)
+			{
+				dir = Vector3DTools::UnitCrossProduct(E[i0], F[i1]);
+				if (!TestOverlap(dir, tmax, relVelocity, tfirst, tlast))
+				{
 					this->SetIntersectionType(IntersectionType::Empty);
 					return;
-                }
-            }
-        }
+				}
+			}
+		}
 		this->SetIntersectionType(IntersectionType::Other);
-    }
-    else  // Triangles are parallel (and, in fact, coplanar).
-    {
-        // Directions NxE[i0].
-        for (i0 = 0; i0 < 3; ++i0)
-        {
-            dir = Vector3DTools::UnitCrossProduct(N,E[i0]);
-            if (!TestOverlap(dir, tmax, relVelocity, tfirst, tlast))
-            {
+	}
+	else  // Triangles are parallel (and, in fact, coplanar).
+	{
+		// Directions NxE[i0].
+		for (i0 = 0; i0 < 3; ++i0)
+		{
+			dir = Vector3DTools::UnitCrossProduct(N, E[i0]);
+			if (!TestOverlap(dir, tmax, relVelocity, tfirst, tlast))
+			{
 				this->SetIntersectionType(IntersectionType::Empty);
 				return;
-            }
-        }
+			}
+		}
 
-        // directions NxF[i1]
-        for (i1 = 0; i1 < 3; ++i1)
-        {
-             dir = Vector3DTools::UnitCrossProduct(M,F[i1]);
-            if (!TestOverlap(dir, tmax, relVelocity, tfirst, tlast))
-            {
+		// directions NxF[i1]
+		for (i1 = 0; i1 < 3; ++i1)
+		{
+			dir = Vector3DTools::UnitCrossProduct(M, F[i1]);
+			if (!TestOverlap(dir, tmax, relVelocity, tfirst, tlast))
+			{
 				this->SetIntersectionType(IntersectionType::Empty);
 				return;
-            }
-        }
+			}
+		}
 		this->SetIntersectionType(IntersectionType::Plane);
-    }
+	}
 
-    SetContactTime( tfirst);
-    return;
-}
-
+	SetContactTime(tfirst);
+	return;
+} 
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::ProjectOntoAxis (const Triangle3& triangle, const Vector3D& axis, Real& fmin,Real& fmax)
+	::ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis, Real& fmin, Real& fmax)
 {
-	auto dot0 = Vector3DTools::DotProduct(axis,triangle.GetVertex()[0]);
-	auto dot1 = Vector3DTools::DotProduct(axis,triangle.GetVertex()[1]);
-	auto dot2 = Vector3DTools::DotProduct(axis,triangle.GetVertex()[2]);
+	auto dot0 = Vector3DTools::DotProduct(axis, triangle.GetVertex()[0]);
+	auto dot1 = Vector3DTools::DotProduct(axis, triangle.GetVertex()[1]);
+	auto dot2 = Vector3DTools::DotProduct(axis, triangle.GetVertex()[2]);
 
 	fmin = dot0;
 	fmax = fmin;
@@ -155,7 +155,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::TrianglePlaneRelations (const Triangle3& triangle, const Plane3& plane,Real distance[3], int sign[3], int& positive, int& negative, int& zero)
+	::TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, Real distance[3], int sign[3], int& positive, int& negative, int& zero)
 {
 	// Compute the signed distances of triangle vertices to the plane.  Use
 	// an epsilon-thick plane test.
@@ -177,7 +177,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		}
 		else
 		{
-			distance[i] = Real{};
+			distance[i] = Math::sm_Zero;
 			sign[i] = 0;
 			zero++;
 		}
@@ -186,29 +186,32 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::GetInterval (const Triangle3& triangle, const Line3& line,const Real distance[3], const int sign[3], Real param[2])
+	::GetInterval(const Triangle3& triangle, const Line3& line, const Real distance[3], const int sign[3], Real param[2])
 {
 	// Project triangle onto line.
-	Real proj[3];
-	int i;
+	Real proj[3]{};
+	auto i = 0;
 	for (i = 0; i < 3; i++)
 	{
 		auto diff = triangle.GetVertex()[i] - line.GetOrigin();
-		proj[i] = Vector3DTools::DotProduct(line.GetDirection(),diff);
+		proj[i] = Vector3DTools::DotProduct(line.GetDirection(), diff);
 	}
 
 	// Compute transverse intersections of triangle edges with line.
-	Real numer, denom;
-	int i0, i1, i2;
-	int quantity = 0;
+	auto numer = Math::sm_Zero;
+	auto denom = Math::sm_Zero;
+	auto i0 = 0;
+	auto i1 = 0;
+	auto i2 = 0;
+	auto quantity = 0;
 	for (i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
 	{
-		if (sign[i0]*sign[i1] < 0)
+		if (sign[i0] * sign[i1] < 0)
 		{
 			MATHEMATICS_ASSERTION_0(quantity < 2, "Unexpected condition\n");
-			numer = distance[i0]*proj[i1] - distance[i1]*proj[i0];
+			numer = distance[i0] * proj[i1] - distance[i1] * proj[i0];
 			denom = distance[i0] - distance[i1];
-			param[quantity++] = numer/denom;
+			param[quantity++] = numer / denom;
 		}
 	}
 
@@ -231,7 +234,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	{
 		if (param[0] > param[1])
 		{
-			Real save = param[0];
+			auto save = param[0];
 			param[0] = param[1];
 			param[1] = save;
 		}
@@ -244,7 +247,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 
 template <typename Real>
 bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::ContainsPoint (const Triangle3& triangle, const Plane3& plane,const Vector3D& point)
+	::ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3D& point)
 {
 	// Generate a coordinate system for the plane.  The incoming triangle has
 	// vertices <V0,V1,V2>.  The incoming plane has unit-length normal N.
@@ -253,8 +256,9 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	// constructed so that {U0,U1,N} is an orthonormal set.  Any point Q
 	// in the plane may be written as Q = V0 + x0*U0 + x1*U1.  The coordinates
 	// are computed as x0 = Dot(U0,Q-V0) and x1 = Dot(U1,Q-V0).
-	Vector3D U0, U1;
-	auto vector3DOrthonormalBasis =	Vector3DTools::GenerateComplementBasis(plane.GetNormal());
+	Vector3D U0;
+	Vector3D U1;
+	auto vector3DOrthonormalBasis = Vector3DTools::GenerateComplementBasis(plane.GetNormal());
 	U0 = vector3DOrthonormalBasis.GetUVector();
 	U1 = vector3DOrthonormalBasis.GetVVector();
 
@@ -272,12 +276,11 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	std::vector<Vector2D<Real> > ProjV;
 
 	ProjV.push_back(Vector2D<Real>::sm_Zero);
-	ProjV.push_back(Vector2D<Real>(Vector3DTools::DotProduct(U0,V1mV0),Vector3DTools::DotProduct(U1,V1mV0)));
-	ProjV.push_back(Vector2D<Real>(Vector3DTools::DotProduct(U0,V2mV0),Vector3DTools::DotProduct(U1,V2mV0)));
-
+	ProjV.push_back(Vector2D<Real>(Vector3DTools::DotProduct(U0, V1mV0), Vector3DTools::DotProduct(U1, V1mV0)));
+	ProjV.push_back(Vector2D<Real>(Vector3DTools::DotProduct(U0, V2mV0), Vector3DTools::DotProduct(U1, V2mV0))); 
 
 	// Test whether P-V0 is in the triangle <0,V1-V0,V2-V0>.
-	if (Query2<Real>(ProjV).ToTriangle(ProjP,0,1,2) <= 0)
+	if (Query2<Real>(ProjV).ToTriangle(ProjP, 0, 1, 2) <= 0)
 	{
 		// Report the point of intersection to the caller.
 		this->SetIntersectionType(IntersectionType::Point);
@@ -286,15 +289,14 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 
 	return false;
 }
- 
 
 template <typename Real>
 bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::GetCoplanarIntersection (const Plane3& plane, const Triangle3& tri0,const Triangle3& tri1)
+	::GetCoplanarIntersection(const Plane3& plane, const Triangle3& tri0, const Triangle3& tri1)
 {
 	// Project triangles onto coordinate plane most aligned with plane
 	// normal.
-	int maxNormal = 0;
+	auto maxNormal = 0;
 	auto fmax = Math::FAbs(plane.GetNormal().GetXCoordinate());
 	auto absMax = Math::FAbs(plane.GetNormal().GetYCoordinate());
 	if (absMax > fmax)
@@ -306,10 +308,9 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	if (absMax > fmax)
 	{
 		maxNormal = 2;
-	}
+	} 
 
-
-	int i;
+	auto i = 0;
 	Vector2D<Real> projTri0V[3];
 	Vector2D<Real> projTri1V[3];
 
@@ -319,8 +320,8 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		for (i = 0; i < 3; ++i)
 		{
 			projTri0V[i][0] = tri0.GetVertex()[i].GetYCoordinate();
-			projTri0V[i][1]  = tri0.GetVertex()[i].GetZCoordinate();
-			projTri1V[i][0]  = tri1.GetVertex()[i].GetYCoordinate();
+			projTri0V[i][1] = tri0.GetVertex()[i].GetZCoordinate();
+			projTri1V[i][0] = tri1.GetVertex()[i].GetYCoordinate();
 			projTri1V[i][1] = tri1.GetVertex()[i].GetZCoordinate();
 		}
 	}
@@ -354,48 +355,47 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	Vector2D<Real> save;
 	auto edge0 = projTri0.GetVertex()[1] - projTri0.GetVertex()[0];
 	auto edge1 = projTri0.GetVertex()[2] - projTri0.GetVertex()[0];
-	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Real{})
+	if (Vector2DTools<Real>::DotPerp(edge0, edge1) < Math::sm_Zero)
 	{
 		// Triangle is clockwise, reorder it.
-		projTri0 =  Triangle2<Real>(projTri0V[0],projTri0V[2],projTri0V[1]); 
+		projTri0 = Triangle2<Real>(projTri0V[0], projTri0V[2], projTri0V[1]);
 	}
 
 	edge0 = projTri1.GetVertex()[1] - projTri1.GetVertex()[0];
 	edge1 = projTri1.GetVertex()[2] - projTri1.GetVertex()[0];
-	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Real{})
+	if (Vector2DTools<Real>::DotPerp(edge0, edge1) < Math::sm_Zero)
 	{
 		// Triangle is clockwise, reorder it.
-		projTri1 =  Triangle2<Real>(projTri1V[0],projTri1V[2],projTri1V[1]);  
+		projTri1 = Triangle2<Real>(projTri1V[0], projTri1V[2], projTri1V[1]);
 	}
 
-	StaticFindIntersectorTriangle2Triangle2<Real> intr(projTri0,projTri1);
+	StaticFindIntersectorTriangle2Triangle2<Real> intr(projTri0, projTri1);
 	if (!intr.IsIntersection())
 	{
 		return false;
-	}
+	} 
 
-	 
 	this->SetIntersectionType(IntersectionType::Plane);
 	return true;
 }
 
 template <typename Real>
 bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::TestOverlap (Real tmax, Real speed,Real umin, Real umax, Real vmin, Real vmax, Real& tfirst, Real& tlast)
+	::TestOverlap(Real tmax, Real speed, Real umin, Real umax, Real vmin, Real vmax, Real& tfirst, Real& tlast)
 {
 	// Constant velocity separating axis test.
 
-	Real t;
+	auto t = Math::sm_Zero;
 
 	if (vmax < umin) // V on left of U
 	{
-		if (speed <= Real{}) // V moving away from U
+		if (speed <= Math::sm_Zero) // V moving away from U
 		{
 			return false;
 		}
 
 		// Find first time of contact on this axis.
-		t = (umin - vmax)/speed;
+		t = (umin - vmax) / speed;
 		if (t > tfirst)
 		{
 			tfirst = t;
@@ -404,11 +404,11 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		// Quick out: intersection after desired time interval.
 		if (tfirst > tmax)
 		{
-			return false;   
+			return false;
 		}
 
 		// Find last time of contact on this axis.
-		t = (umax - vmin)/speed;
+		t = (umax - vmin) / speed;
 		if (t < tlast)
 		{
 			tlast = t;
@@ -417,18 +417,18 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		// Quick out: intersection before desired time interval.
 		if (tfirst > tlast)
 		{
-			return false; 
+			return false;
 		}
 	}
 	else if (umax < vmin)   // V on right of U
 	{
-		if (speed >= Real{}) // V moving away from U
+		if (speed >= Math::sm_Zero) // V moving away from U
 		{
 			return false;
 		}
 
 		// Find first time of contact on this axis.
-		t = (umax - vmin)/speed;
+		t = (umax - vmin) / speed;
 		if (t > tfirst)
 		{
 			tfirst = t;
@@ -437,11 +437,11 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		// Quick out: intersection after desired time interval.
 		if (tfirst > tmax)
 		{
-			return false;   
+			return false;
 		}
 
 		// Find last time of contact on this axis.
-		t = (umin - vmax)/speed;
+		t = (umin - vmax) / speed;
 		if (t < tlast)
 		{
 			tlast = t;
@@ -450,16 +450,16 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		// Quick out: intersection before desired time interval.
 		if (tfirst > tlast)
 		{
-			return false; 
+			return false;
 		}
 
 	}
 	else // V and U on overlapping interval
 	{
-		if (speed > Real{})
+		if (speed > Math::sm_Zero)
 		{
 			// Find last time of contact on this axis.
-			t = (umax - vmin)/speed;
+			t = (umax - vmin) / speed;
 			if (t < tlast)
 			{
 				tlast = t;
@@ -468,13 +468,13 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 			// Quick out: intersection before desired interval.
 			if (tfirst > tlast)
 			{
-				return false; 
+				return false;
 			}
 		}
-		else if (speed < Real{})
+		else if (speed < Math::sm_Zero)
 		{
 			// Find last time of contact on this axis.
-			t = (umin - vmax)/speed;
+			t = (umin - vmax) / speed;
 			if (t < tlast)
 			{
 				tlast = t;
@@ -492,23 +492,23 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 
 template <typename Real>
 bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::FindOverlap (Real tmax, Real speed,const Configuration& UC, const Configuration& VC, ContactSide& side,Configuration& TUC, Configuration& TVC, Real& tfirst, Real& tlast)
+	::FindOverlap(Real tmax, Real speed, const Configuration& UC, const Configuration& VC, ContactSide& side, Configuration& TUC, Configuration& TVC, Real& tfirst, Real& tlast)
 {
 	// Constant velocity separating axis test.  UC and VC are the new
 	// potential configurations, and TUC and TVC are the best known
 	// configurations.
 
-	Real t;
+	auto t = Math::sm_Zero;
 
 	if (VC.mMax < UC.mMin) // V on left of U
 	{
-		if (speed <= Real{}) // V moving away from U
+		if (speed <= Math::sm_Zero) // V moving away from U
 		{
 			return false;
 		}
 
 		// Find first time of contact on this axis.
-		t = (UC.mMin - VC.mMax)/speed;
+		t = (UC.mMin - VC.mMax) / speed;
 
 		// If this is the new maximum first time of contact, set side and
 		// configuration.
@@ -527,7 +527,7 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		}
 
 		// Find last time of contact on this axis.
-		t = (UC.mMax - VC.mMin)/speed;
+		t = (UC.mMax - VC.mMin) / speed;
 		if (t < tlast)
 		{
 			tlast = t;
@@ -541,13 +541,13 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	}
 	else if (UC.mMax < VC.mMin)   // V on right of U
 	{
-		if (speed >= Real{}) // V moving away from U
+		if (speed >= Math::sm_Zero) // V moving away from U
 		{
 			return false;
 		}
 
 		// Find first time of contact on this axis.
-		t = (UC.mMax - VC.mMin)/speed;
+		t = (UC.mMax - VC.mMin) / speed;
 
 		// If this is the new maximum first time of contact, set side and
 		// configuration.
@@ -562,11 +562,11 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		// Quick out: intersection after desired interval.
 		if (tfirst > tmax)
 		{
-			return false;   
+			return false;
 		}
 
 		// Find last time of contact on this axis.
-		t = (UC.mMin - VC.mMax)/speed;
+		t = (UC.mMin - VC.mMax) / speed;
 		if (t < tlast)
 		{
 			tlast = t;
@@ -580,10 +580,10 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	}
 	else // V and U on overlapping interval
 	{
-		if (speed > Real{})
+		if (speed > Math::sm_Zero)
 		{
 			// Find last time of contact on this axis.
-			t = (UC.mMax - VC.mMin)/speed;
+			t = (UC.mMax - VC.mMin) / speed;
 			if (t < tlast)
 			{
 				tlast = t;
@@ -595,10 +595,10 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 				return false;
 			}
 		}
-		else if (speed < Real{})
+		else if (speed < Math::sm_Zero)
 		{
 			// Find last time of contact on this axis.
-			t = (UC.mMin - VC.mMax)/speed;
+			t = (UC.mMin - VC.mMax) / speed;
 			if (t < tlast)
 			{
 				tlast = t;
@@ -616,34 +616,38 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 
 template <typename Real>
 bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::TestOverlap (const Vector3D& axis,Real tmax, const Vector3D& velocity, Real& tfirst, Real& tlast)
+	::TestOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, Real& tfirst, Real& tlast)
 {
-	Real min0, max0, min1, max1;
+	auto min0 = Math::sm_Zero;
+	auto max0 = Math::sm_Zero;
+	auto min1 = Math::sm_Zero; 
+	auto max1 = Math::sm_Zero;
 	ProjectOntoAxis(mTriangle0, axis, min0, max0);
 	ProjectOntoAxis(mTriangle1, axis, min1, max1);
-	auto speed = Vector3DTools::DotProduct(velocity,axis);
+	auto speed = Vector3DTools::DotProduct(velocity, axis);
 	return TestOverlap(tmax, speed, min0, max0, min1, max1, tfirst, tlast);
 }
 
 template <typename Real>
 bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::FindOverlap (const Vector3D& axis,Real tmax, const Vector3D& velocity, ContactSide& side,Configuration& tcfg0, Configuration& tcfg1, Real& tfirst,Real& tlast)
+	::FindOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, ContactSide& side, Configuration& tcfg0, Configuration& tcfg1, Real& tfirst, Real& tlast)
 {
-	Configuration cfg0, cfg1;
+	Configuration cfg0;
+	Configuration cfg1;
 	ProjectOntoAxis(mTriangle0, axis, cfg0);
 	ProjectOntoAxis(mTriangle1, axis, cfg1);
-	auto speed = Vector3DTools::DotProduct(velocity,axis);
-	return FindOverlap(tmax, speed, cfg0, cfg1, side, tcfg0, tcfg1,	tfirst, tlast);
+	auto speed = Vector3DTools::DotProduct(velocity, axis);
+	return FindOverlap(tmax, speed, cfg0, cfg1, side, tcfg0, tcfg1, tfirst, tlast);
 }
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::ProjectOntoAxis (const Triangle3& triangle, const Vector3D& axis,Configuration& cfg)
+	::ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis, Configuration& cfg)
 {
 	// Find projections of vertices onto potential separating axis.
-	auto d0 = Vector3DTools::DotProduct(axis,triangle.GetVertex()[0]);
-	auto d1 = Vector3DTools::DotProduct(axis,triangle.GetVertex()[1]);
-	auto d2 = Vector3DTools::DotProduct(axis,triangle.GetVertex()[2]);
+	auto d0 = Vector3DTools::DotProduct(axis, triangle.GetVertex()[0]);
+	auto d1 = Vector3DTools::DotProduct(axis, triangle.GetVertex()[1]);
+	auto d2 = Vector3DTools::DotProduct(axis, triangle.GetVertex()[2]);
 
 	// Explicit sort of vertices to construct a Configuration object.
 	if (d0 <= d1)
@@ -737,7 +741,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	}
 	else if (d2 <= d0) // D1 < D2 <= D0
 	{
-		if (d2 != d0) 
+		if (d2 != d0)
 		{
 			cfg.mMap = M111;
 		}
@@ -765,7 +769,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::FindContactSet (const Triangle3& tri0, const Triangle3& tri1,ContactSide& side, Configuration& cfg0, Configuration& cfg1)
+	::FindContactSet(const Triangle3& tri0, const Triangle3& tri1, ContactSide& side, Configuration& cfg0, Configuration& cfg1)
 {
 	if (side == CS_RIGHT) // tri1 to the right of tri0
 	{
@@ -773,13 +777,13 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		{
 			// tri0 touching tri1 at a single point
 			this->SetIntersectionType(IntersectionType::Point);
-			
+
 		}
 		else if (cfg1.mMap == M12 || cfg1.mMap == M111)
 		{
 			// tri1 touching tri0 at a single point
 			this->SetIntersectionType(IntersectionType::Point);
-			
+
 		}
 		else if (cfg0.mMap == M12)
 		{
@@ -791,7 +795,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 			else // cfg1.mMap == m3
 			{
 				// uedge-vface intersection
-				GetEdgeFaceIntersection( tri0.GetVertex()[cfg0.mIndex[1]], tri0.GetVertex()[cfg0.mIndex[2]], tri1);
+				GetEdgeFaceIntersection(tri0.GetVertex()[cfg0.mIndex[1]], tri0.GetVertex()[cfg0.mIndex[2]], tri1);
 			}
 		}
 		else // cfg0.mMap == M3
@@ -799,8 +803,8 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 			if (cfg1.mMap == M21)
 			{
 				// face0-edge1 intersection
-				GetEdgeFaceIntersection( tri1.GetVertex()[cfg1.mIndex[0]], tri1.GetVertex()[cfg1.mIndex[1]], tri0);
-			} 
+				GetEdgeFaceIntersection(tri1.GetVertex()[cfg1.mIndex[0]], tri1.GetVertex()[cfg1.mIndex[1]], tri0);
+			}
 			else // cfg1.mMap == M3
 			{
 				// face0-face1 intersection
@@ -815,13 +819,13 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		{
 			// tri1 touching tri0 at a single point
 			this->SetIntersectionType(IntersectionType::Point);
-		
+
 		}
 		else if (cfg0.mMap == M12 || cfg0.mMap == M111)
 		{
 			// tri0 touching tri1 at a single point
 			this->SetIntersectionType(IntersectionType::Point);
-		
+
 		}
 		else if (cfg1.mMap == M12)
 		{
@@ -834,7 +838,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 			else // cfg0.mMap == M3
 			{
 				// edge1-face0 intersection
-				GetEdgeFaceIntersection(tri1.GetVertex()[cfg1.mIndex[1]], tri1.GetVertex()[cfg1.mIndex[2]],tri0);
+				GetEdgeFaceIntersection(tri1.GetVertex()[cfg1.mIndex[1]], tri1.GetVertex()[cfg1.mIndex[2]], tri0);
 			}
 		}
 		else // cfg1.mMap == M3
@@ -842,8 +846,8 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 			if (cfg0.mMap == M21)
 			{
 				// edge0-face1 intersection
-				GetEdgeFaceIntersection(tri0.GetVertex()[cfg0.mIndex[0]], tri0.GetVertex()[cfg0.mIndex[1]],tri1);
-			} 
+				GetEdgeFaceIntersection(tri0.GetVertex()[cfg0.mIndex[0]], tri0.GetVertex()[cfg0.mIndex[1]], tri1);
+			}
 			else // cfg0.mMap == M
 			{
 				// face0-face1 intersection
@@ -859,36 +863,35 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		auto result = calc.IsIntersection();
 		MATHEMATICS_ASSERTION_0(result, "Intersection must exist\n");
 		result;
-		
-		this->SetIntersectionType( calc.GetIntersectionType());
-		
+
+		this->SetIntersectionType(calc.GetIntersectionType());
 	}
 }
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::GetEdgeEdgeIntersection (const Vector3D& U0, const Vector3D& U1,const Vector3D& V0, const Vector3D& V1)
+	::GetEdgeEdgeIntersection(const Vector3D& U0, const Vector3D& U1, const Vector3D& V0, const Vector3D& V1)
 {
 	// Compute a normal to the plane of the two edges.
-	Vector3D edge0 = U1 - U0;
-	Vector3D edge1 = V1 - V0;
-	auto normal = Vector3DTools::CrossProduct(edge0,edge1);
+	auto edge0 = U1 - U0;
+	auto edge1 = V1 - V0;
+	auto normal = Vector3DTools::CrossProduct(edge0, edge1);
 
 	// Solve U0 + s*(U1 - U0) = V0 + t*(V1 - V0).  We know the edges
 	// intersect, so s in [0,1] and t in [0,1].  Thus, just solve for s.
 	// Note that s*E0 = D + t*E1, where D = V0 - U0. So s*N = s*E0xE1 = DxE1
 	// and s = N*DxE1/N*N.
 	auto delta = V0 - U0;
-	auto s = Vector3DTools::DotProduct(normal,(Vector3DTools::CrossProduct(delta,edge1)/Vector3DTools::VectorMagnitudeSquared( normal)));
-	if (s < Real{})
+	auto s = Vector3DTools::DotProduct(normal, (Vector3DTools::CrossProduct(delta, edge1) / Vector3DTools::VectorMagnitudeSquared(normal)));
+	if (s < Math::sm_Zero)
 	{
 		MATHEMATICS_ASSERTION_0(s >= -Math::sm_ZeroTolerance, "Unexpected s value.\n");
-		s = Real{};
+		s = Math::sm_Zero;
 	}
-	else if (s > (Real)1)
+	else if (s > static_cast<Real>(1))
 	{
-		MATHEMATICS_ASSERTION_0(s <= (Real)1 + Math::sm_ZeroTolerance, "Unexpected s value.\n");
-		s = (Real)1;
+		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::sm_ZeroTolerance, "Unexpected s value.\n");
+		s = static_cast<Real>(1);
 	}
 
 	this->SetIntersectionType(IntersectionType::Point);
@@ -899,49 +902,51 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
-	::GetEdgeFaceIntersection (const Vector3D& U0, const Vector3D& U1,const Triangle3& tri)
+	::GetEdgeFaceIntersection(const Vector3D& U0, const Vector3D& U1, const Triangle3& tri)
 {
 	// Compute a plane of the triangle.
 	auto point = tri.GetVertex()[0];
 	auto edge0 = tri.GetVertex()[1] - point;
 	auto edge1 = tri.GetVertex()[2] - point;
-	auto normal =Vector3DTools::UnitCrossProduct(edge0,edge1);
-	Vector3D dir0, dir1;
-	auto vector3DOrthonormalBasis =	Vector3DTools::GenerateComplementBasis( normal);
+	auto normal = Vector3DTools::UnitCrossProduct(edge0, edge1);
+	Vector3D dir0;
+	Vector3D dir1;
+	auto vector3DOrthonormalBasis = Vector3DTools::GenerateComplementBasis(normal);
 	dir0 = vector3DOrthonormalBasis.GetUVector();
 	dir1 = vector3DOrthonormalBasis.GetVVector();
 
 	// Project the edge endpoints onto the plane.
-	Vector2D<Real> projU0, projU1;
+	Vector2D<Real> projU0;
+	Vector2D<Real> projU1;
 	Vector3D diff;
 	diff = U0 - point;
-	projU0[0] = Vector3DTools::DotProduct(dir0,diff);
-	projU0[1]= Vector3DTools::DotProduct( dir1,diff);
+	projU0[0] = Vector3DTools::DotProduct(dir0, diff);
+	projU0[1] = Vector3DTools::DotProduct(dir1, diff);
 	diff = U1 - point;
-	projU1[0] = Vector3DTools::DotProduct(dir0,diff);
-	projU1[1] = Vector3DTools::DotProduct(dir1,diff);
+	projU1[0] = Vector3DTools::DotProduct(dir0, diff);
+	projU1[1] = Vector3DTools::DotProduct(dir1, diff);
 	Segment2<Real> projSeg{ projU0, projU1 };
 
 	// Compute the plane coordinates of the triangle.
 	Vector2D<Real> projTriV[3];
 	projTriV[0] = Vector2D<Real>::sm_Zero;
-	projTriV[1] = Vector2D<Real>(Vector2DTools<Real>::DotProduct(dir0,edge0), Vector2DTools<Real>::DotProduct(dir1,edge0));
-	projTriV[2] = Vector2D<Real>(Vector2DTools<Real>::DotProduct(dir0,edge1), Vector2DTools<Real>::DotProduct(dir1,edge1));
+	projTriV[1] = Vector2D<Real>(Vector2DTools<Real>::DotProduct(dir0, edge0), Vector2DTools<Real>::DotProduct(dir1, edge0));
+	projTriV[2] = Vector2D<Real>(Vector2DTools<Real>::DotProduct(dir0, edge1), Vector2DTools<Real>::DotProduct(dir1, edge1));
 	Triangle2<Real> projTri{ projTriV[0],projTriV[1],projTriV[2] };
 	// Compute the intersection.
-	int mQuantity = 0;
+	auto mQuantity = 0;
 	StaticFindIntersectorSegment2Triangle2<Real> calc{ projSeg, projTri };
 	if (calc.IsIntersection())
 	{
 		mQuantity = calc.GetQuantity();
-		 
+
 	}
 	else
-	{ 
-		mQuantity = 1;		 
+	{
+		mQuantity = 1;
 	}
 
-	SetIntersectionType ( (mQuantity == 2 ? IntersectionType::Segment : IntersectionType::Point));
+	this->SetIntersectionType((mQuantity == 2 ? IntersectionType::Segment : IntersectionType::Point));
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H

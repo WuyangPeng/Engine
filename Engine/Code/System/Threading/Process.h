@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 16:13)
+// 引擎版本：0.2.0.0 (2020/05/10 11:33)
 
 #ifndef SYSTEM_THREADING_PROCESS_H
 #define SYSTEM_THREADING_PROCESS_H
@@ -17,6 +17,7 @@
 namespace System
 {
 	// 进程的创建和销毁
+	bool SYSTEM_DEFAULT_DECLARE CreateSystemProcess(const String& applicationName);
 
 	bool SYSTEM_DEFAULT_DECLARE CreateSystemProcess(const TChar* applicationName, TChar* commandLine, WindowSecurityAttributesPtr processAttributes, WindowSecurityAttributesPtr threadAttributes,
 													bool inheritHandles, ProcessCreation creationFlags, WindowVoidPtr environment,

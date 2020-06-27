@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.1 (2020/01/21 16:58)
+// “˝«Ê∞Ê±æ£∫0.0.3.0 (2020/03/26 11:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,9 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CustomTime
-	::CustomTime()
-	:m_StartTime{ System::GetTimeInMicroseconds() },
-	m_CurrentTime{ 0 }, m_TimeLastTick{ 0 }
+	::CustomTime() noexcept
+	:m_StartTime{ System::GetTimeInMicroseconds() }, m_CurrentTime{ 0 }, m_TimeLastTick{ 0 }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -92,7 +91,7 @@ int64_t CoreTools::CustomTime
 
 	MarkTimeThisTick();
 
-	return m_TimeLastTick;
+	return m_TimeLastTick / System::g_Millisecond;
 }
 
 int64_t CoreTools::CustomTime
@@ -102,7 +101,7 @@ int64_t CoreTools::CustomTime
 
 	MarkTimeThisTick();
 
-	return m_CurrentTime;
+	return m_CurrentTime / System::g_Millisecond;
 }
 
 // private

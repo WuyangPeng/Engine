@@ -10,7 +10,7 @@
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 void System
 	::SystemSleep(WindowDWord milliseconds) noexcept

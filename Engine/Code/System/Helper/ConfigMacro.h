@@ -2,19 +2,12 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:10)
+// 引擎版本：0.2.0.0 (2020/05/07 13:25)
 
 #ifndef SYSTEM_HELPER_CONFIG_MACRO_H
 #define SYSTEM_HELPER_CONFIG_MACRO_H
 
-#define SYSTEM_STRINGIZE(x) SYSTEM_DO_STRINGIZE(x)
-#define SYSTEM_DO_STRINGIZE(x) #x
-
-#define SYSTEM_CONCATENATOR(lhs,rhs) SYSTEM_DO_CONCATENATOR(lhs,rhs)
-#define SYSTEM_DO_CONCATENATOR(lhs,rhs) SYSTEM_DO_CONCATENATOR_DETAIL(lhs,rhs)
-#define SYSTEM_DO_CONCATENATOR_DETAIL(lhs,rhs) lhs##rhs
-
-#define SYSTEM_MULTIPLE_CONCATENATOR(lhs,mhs,rhs) SYSTEM_CONCATENATOR(lhs,SYSTEM_CONCATENATOR(mhs,rhs))
+#include "StringizeMacro.h"
 
 // 特定于平台的信息。
 #include "SelectPlatformConfig.h"
@@ -62,5 +55,5 @@
 #endif // TCRE_SYSTEM_STDLIB
 
 #include "UserMacro.h"
-	  
+
 #endif // SYSTEM_HELPER_CONFIG_MACRO_H

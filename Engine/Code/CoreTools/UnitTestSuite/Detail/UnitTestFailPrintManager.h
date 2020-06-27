@@ -15,6 +15,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <string>
+#include <memory>
 
 namespace CoreTools
 { 

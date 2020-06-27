@@ -1,135 +1,66 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/08/01 10:14)
+// ÒýÇæ°æ±¾£º0.3.0.1 (2020/05/21 10:54)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowProcessManager.h"
 #include "Detail/WindowProcessManagerImpl.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/MainFunctionMacro.h"
-#include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Threading/ScopedMutex.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-SINGLETON_MUTEX_DEFINE(Framework,WindowProcessManager);
+using std::make_unique;
+using std::make_shared;
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder(g_FrameworkMutex)
+SINGLETON_GET_PTR_DEFINE(Framework, WindowProcessManager)
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder(*sm_WindowProcessManagerMutex)
+Framework::WindowProcessManager::WindowProcessManagerUniquePtr Framework::WindowProcessManager
+	::sm_WindowProcessManager{ };
 
-SINGLETON_INITIALIZE_DEFINE(Framework,WindowProcessManager)
-SINGLETON_DEFINE(Framework,WindowProcessManager)
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Framework::WindowProcessManager
-	::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-
-	if(m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
-
-System::WindowProc Framework::WindowProcessManager
-	::GetProcess() const
-{
-	MUTEX_ENTER_MEMBER;
-
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	return m_Impl->GetProcess();
-}
-
-System::DisplayPtr Framework::WindowProcessManager
-	::GetFunction() const
-{
-	MUTEX_ENTER_MEMBER;
-
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	return m_Impl->GetFunction();
-}
-
-Framework::ConstWindowMessageInterfaceSmartPointer Framework::WindowProcessManager
-	::GetWindowMessageInterface() const
-{
-	MUTEX_ENTER_MEMBER;
-
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	return m_Impl->GetWindowMessageInterface();
+void Framework::WindowProcessManager
+	::Create()
+{	
+	sm_WindowProcessManager = make_unique<Framework::WindowProcessManager>(WindowProcessManagerCreate::Init);
 }
 
 void Framework::WindowProcessManager
-	::SetWindowMessage( const WindowMessageInterfaceSmartPointer& smartPointer )
+	::Destroy() noexcept
 {
-	 MUTEX_ENTER_MEMBER;
-
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->SetWindowMessage(smartPointer);
+	sm_WindowProcessManager.reset();
 }
 
-void Framework::WindowProcessManager
-	::ClearWindowMessage()
-{ 
-	MUTEX_ENTER_MEMBER;
+Framework::WindowProcessManager
+	::WindowProcessManager(WindowProcessManagerCreate windowProcessManagerCreate)
+	:m_Impl{ make_shared<ImplType>() }
+{
+	SYSTEM_UNUSED_ARG(windowProcessManagerCreate);
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}  
 
-	return m_Impl->ClearWindowMessage();
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, WindowProcessManager)
+
+// static
+System::WindowProcess Framework::WindowProcessManager
+	::GetProcess() noexcept
+{
+	return ImplType::GetProcess();
 }
 
-bool Framework::WindowProcessManager
-	::PreCreate()
+// static
+System::DisplayFunction Framework::WindowProcessManager
+	::GetFunction() noexcept
 {
-	MUTEX_ENTER_MEMBER;
-
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->PreCreate();
-}
-
-bool Framework::WindowProcessManager
-	::Initialize()
-{
-	MUTEX_ENTER_MEMBER;
-
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->Initialize();
-}
-
-void Framework::WindowProcessManager
-	::PreIdle()
-{
-	MUTEX_ENTER_MEMBER;
-
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->PreIdle();
-}
-
-void Framework::WindowProcessManager
-	::Terminate()
-{
-	MUTEX_ENTER_MEMBER;
-
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->Terminate();
+	return ImplType::GetFunction();
 }
 
 bool Framework::WindowProcessManager
-	::IsClassNameExist( const System::String& className ) const
+	::IsClassNameExist(const String& className)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
@@ -137,32 +68,101 @@ bool Framework::WindowProcessManager
 }
 
 bool Framework::WindowProcessManager
-	::SetNewClassName( const System::String& className )
+	::SetNewClassName(const String& className)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->SetNewClassName(className);
 }
 
-void Framework::WindowProcessManager
-	::SetMainWindow( HWnd hwnd )
+Framework::ConstWindowMessageInterfaceSharedPtr Framework::WindowProcessManager
+	::GetWindowMessageInterface() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
+
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;		
+
+	return m_Impl->GetWindowMessageInterface();		
+}
+
+void Framework::WindowProcessManager
+	::SetWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage)
+{
+	SINGLETON_MUTEX_ENTER_MEMBER;
+
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;	
+
+	return m_Impl->SetWindowMessage(windowMessage);
+}
+
+void Framework::WindowProcessManager
+	::ClearWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage)
+{
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->SetMainWindow(hwnd);
+	return m_Impl->ClearWindowMessage(windowMessage);
+}
+
+bool Framework::WindowProcessManager
+	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+{
+	SINGLETON_MUTEX_ENTER_MEMBER;
+
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	return m_Impl->PreCreate(environmentDirectory);	 
+}
+
+bool Framework::WindowProcessManager
+	::Initialize()
+{
+	SINGLETON_MUTEX_ENTER_MEMBER;
+
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	return m_Impl->Initialize();	 
+}
+
+void Framework::WindowProcessManager
+	::PreIdle()
+{
+	SINGLETON_MUTEX_ENTER_MEMBER;
+
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	return m_Impl->PreIdle();	
+}
+
+void Framework::WindowProcessManager
+	::Terminate()
+{
+	SINGLETON_MUTEX_ENTER_MEMBER;
+
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	return m_Impl->Terminate();	
+}
+
+void Framework::WindowProcessManager
+	::SetMainWindowHwnd(HWnd hwnd)
+{
+	SINGLETON_MUTEX_ENTER_MEMBER;
+
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	return m_Impl->SetMainWindowHwnd(hwnd);	
 }
 
 Framework::WindowProcessManager::HWnd Framework::WindowProcessManager
 	::GetMainWindowHwnd() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
 	return m_Impl->GetMainWindowHwnd();
 }
-

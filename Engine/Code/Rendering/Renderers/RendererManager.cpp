@@ -20,7 +20,7 @@ using std::make_shared;
 
 SINGLETON_MUTEX_DEFINE(Rendering,RendererManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_RenderingMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetRenderingMutex() }
 
 #define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_RendererManagerMutex }
 
@@ -56,7 +56,7 @@ bool Rendering::RendererManager
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::RendererManager
+int64_t Rendering::RendererManager
     ::Insert( RendererPtr ptr )
 {
 	 MUTEX_ENTER_MEMBER;
@@ -66,14 +66,14 @@ void Rendering::RendererManager
 	return m_Impl->Insert(ptr);
 }
 
-void Rendering::RendererManager
-	::Erase( RendererPtr ptr )
+bool Rendering::RendererManager
+	::Erase(int64_t rendererID)
 {
 	 MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Erase(ptr);
+	return m_Impl->Erase(rendererID);
 }
 
 void Rendering::RendererManager

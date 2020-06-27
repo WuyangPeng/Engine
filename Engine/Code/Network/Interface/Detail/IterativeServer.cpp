@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 17:20)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:12)
 
 #include "Network/NetworkExport.h" 
 
@@ -16,8 +16,9 @@
 #include "Network/NetworkMessage/SocketManager.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <vector>
 
 using std::string;
@@ -30,8 +31,8 @@ Network::IterativeServer
 	:ParentType{ socketManager,configurationStrategy },
 	 m_SockAcceptor{ configurationStrategy.GetPort(), configurationStrategy },
 	 m_StreamContainer{},
-	m_Buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy())),
-	m_Buffer2(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
+	 m_ReceiveBuffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy())),
+	 m_SendBuffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
 {
 	m_SockAcceptor.EnableNonBlock();
 
@@ -52,7 +53,7 @@ bool Network::IterativeServer
 	SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(GetConfigurationStrategy()) };
 	SockStreamSharedPtr sockStreamSharedPtr{ make_shared<SockStream>(GetConfigurationStrategy()) };
 
-	if(m_SockAcceptor.Accept(sockStreamSharedPtr->shared_from_this(), sockAddress))
+	if (m_SockAcceptor.Accept(sockStreamSharedPtr->shared_from_this(), sockAddress))
 	{
 		auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
 		socketManager->Insert(socketID);
@@ -63,7 +64,7 @@ bool Network::IterativeServer
 		m_StreamContainer.insert({ socketID,streamContainer });
 
 		CoreTools::CallbackParameters callbackParameters{};
-		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor)); 
+		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), 0);
 
@@ -75,28 +76,28 @@ bool Network::IterativeServer
 
 bool Network::IterativeServer
 	::HandleData(const SocketManagerSharedPtr& socketManager)
-{ 
-	for (auto iter = m_StreamContainer.begin();iter != m_StreamContainer.end();)
+{
+	for (auto iter = m_StreamContainer.begin(); iter != m_StreamContainer.end();)
 	{
 		auto sockStreamSharedPtr = iter->second.GetSockStreamSharedPtr();
 
 		try
 		{
-			m_Buffer->ClearCurrentIndex();
-			auto result = sockStreamSharedPtr->Receive(m_Buffer);
+			m_ReceiveBuffer->ClearCurrentIndex();
+			auto result = sockStreamSharedPtr->Receive(m_ReceiveBuffer);
 			if (0 < result)
 			{
-				BufferReceiveStream bufferReceiveStream(m_Buffer, GetConfigurationStrategy().GetParserStrategy());
+				BufferReceiveStream bufferReceiveStream(m_ReceiveBuffer, GetConfigurationStrategy().GetParserStrategy());
 				bufferReceiveStream.OnEvent(iter->first, socketManager);
-				m_Buffer->ClearCurrentIndex();
+				m_ReceiveBuffer->ClearCurrentIndex();
 				++iter;
 			}
-			else if(result < 0)
+			else if (result < 0)
 			{
 				sockStreamSharedPtr->CloseHandle();
 				socketManager->Remove(iter->first);
 				m_StreamContainer.erase(iter++);
-			}		
+			}
 			else
 			{
 				++iter;
@@ -107,7 +108,7 @@ bool Network::IterativeServer
 			sockStreamSharedPtr->CloseHandle();
 			socketManager->Remove(iter->first);
 			m_StreamContainer.erase(iter++);
-		} 		 
+		}
 	}
 
 	return true;
@@ -124,22 +125,22 @@ void Network::IterativeServer
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto iter = m_StreamContainer.find(socketID); 
+	auto iter = m_StreamContainer.find(socketID);
 
-	if (iter != m_StreamContainer.end())
+	if (iter != m_StreamContainer.cend())
 	{
 		auto sockStreamSharedPtr = iter->second.GetSockStreamSharedPtr();
 		auto& bufferSendStream = iter->second.GetBufferSendStream();
 
 		if (bufferSendStream.Insert(message))
-		{ 
-			m_Buffer2->ClearCurrentIndex();
-			bufferSendStream.Save(m_Buffer2);
+		{
+			m_SendBuffer->ClearCurrentIndex();
+			bufferSendStream.Save(m_SendBuffer);
 
-			sockStreamSharedPtr->Send(m_Buffer2);
+			sockStreamSharedPtr->Send(m_SendBuffer);
 
-			bufferSendStream.Clear();			
-		}		
+			bufferSendStream.Clear();
+		}
 	}
 }
 
@@ -148,21 +149,21 @@ void Network::IterativeServer
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto iter = m_StreamContainer.find(socketID); 
+	auto iter = m_StreamContainer.find(socketID);
 
-	if (iter != m_StreamContainer.end())
+	if (iter != m_StreamContainer.cend())
 	{
 		auto sockStreamSharedPtr = iter->second.GetSockStreamSharedPtr();
 		auto& bufferSendStream = iter->second.GetBufferSendStream();
 
 		if (bufferSendStream.Insert(message))
 		{
-			m_Buffer2->ClearCurrentIndex();
-			bufferSendStream.Save(m_Buffer2);
+			m_SendBuffer->ClearCurrentIndex();
+			bufferSendStream.Save(m_SendBuffer);
 
-			sockStreamSharedPtr->AsyncSend(GetSocketManagerSharedPtr(), m_Buffer2);
+			sockStreamSharedPtr->AsyncSend(GetSocketManagerSharedPtr(), m_SendBuffer);
 
-			bufferSendStream.Clear();			
+			bufferSendStream.Clear();
 		}
 	}
 }

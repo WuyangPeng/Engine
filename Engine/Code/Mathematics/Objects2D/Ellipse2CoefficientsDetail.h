@@ -1,31 +1,30 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/06 11:26)
+// 引擎版本：0.0.2.5 (2020/03/19 16:54)
 
 #ifndef MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
 
 #include "Ellipse2Coefficients.h"
-#include "Mathematics/Algebra/Vector2DTools.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/Algebra/Vector2DTools.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 Mathematics::Ellipse2Coefficients<Real>
-	::Ellipse2Coefficients( const Matrix2& matrix,const Vector2D& vector, Real constants )
+	::Ellipse2Coefficients(const Matrix2& matrix, const Vector2D& vector, Real constants)
 	:m_Coefficients{ constants ,vector[0] ,vector[1] ,matrix(0,0),matrix(0,1) * static_cast<Real>(2),matrix(1,1) }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-
 template <typename Real>
 Mathematics::Ellipse2Coefficients<Real>
-	::Ellipse2Coefficients( const std::vector<Real>& coefficient )
+	::Ellipse2Coefficients(const std::vector<Real>& coefficient)
 	:m_Coefficients{ coefficient }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -36,7 +35,7 @@ template <typename Real>
 bool Mathematics::Ellipse2Coefficients<Real>
 	::IsValid() const noexcept
 {
-	if(m_Coefficients.size() == 6)
+	if (m_Coefficients.size() == 6)
 		return true;
 	else
 		return false;
@@ -60,7 +59,6 @@ typename const  Mathematics::Ellipse2Coefficients<Real>::Vector2D Mathematics::E
 
 	return Vector2D{ m_Coefficients[1],m_Coefficients[2] };
 }
-
 
 template <typename Real>
 Real Mathematics::Ellipse2Coefficients<Real>
@@ -105,27 +103,25 @@ typename const Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathema
 	return coefficients;
 }
 
-
 template <typename Real>
 bool Mathematics
-	::Approximate( const Ellipse2Coefficients<Real>& lhs,const Ellipse2Coefficients<Real>& rhs ,const Real epsilon)
+	::Approximate(const Ellipse2Coefficients<Real>& lhs, const Ellipse2Coefficients<Real>& rhs, const Real epsilon)
 {
 	auto lhsCoefficients = lhs.GetCoefficients();
 	auto rhsCoefficients = rhs.GetCoefficients();
 
-	MATHEMATICS_ASSERTION_1(lhsCoefficients.size() == 6 && rhsCoefficients.size() == 6,"GetCoefficients返回的数组大小错误！");
+	MATHEMATICS_ASSERTION_1(lhsCoefficients.size() == 6 && rhsCoefficients.size() == 6, "GetCoefficients返回的数组大小错误！");
 
-	for(auto i = 0;i < 6;++i)
+	for (auto i = 0; i < 6; ++i)
 	{
 		if (!Math<Real>::Approximate(lhsCoefficients[i], rhsCoefficients[i], epsilon))
 		{
 			return false;
-		}		
+		}
 	}
 
 	return true;
 }
-
 
 #endif // MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
 

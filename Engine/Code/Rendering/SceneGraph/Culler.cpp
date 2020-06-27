@@ -30,7 +30,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Culler,GetCamera,Rendering::ConstC
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Culler,SetFrustum,const float*,void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Culler,GetFrustum,const float*) 
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Culler,Insert,ConstSpatialSmartPointer,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Culler,Insert, VisualSmartPointer,void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Culler,GetPlaneQuantity,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Culler,GetPlanes,const Rendering::Culler::Plane*)
@@ -64,4 +64,7 @@ void Rendering::Culler
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Culler,GetNumVisible,int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Culler,GetVisible,int,const Rendering::ConstSpatialSmartPointer&)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Culler,GetVisible,int,const Rendering::ConstVisualSmartPointer)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Culler, begin,Rendering::Culler::VisualContainerIter)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Culler, end, Rendering::Culler::VisualContainerIter)

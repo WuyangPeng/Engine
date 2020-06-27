@@ -1,15 +1,16 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:09)
+// 引擎版本：0.0.2.5 (2020/03/19 17:22)
+
 #ifndef MATHEMATICS_OBJECTS3D_LINE3_H
 #define MATHEMATICS_OBJECTS3D_LINE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
 #include "Mathematics/Base/Math.h"
+#include "Mathematics/Algebra/Vector3D.h"
 
 #include <type_traits> 
 
@@ -18,17 +19,17 @@ namespace Mathematics
 	template <typename Real>
 	class Line3
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Line3<Real>;
-		using Vector3D = Vector3D<Real>;
 		using Math = Math<Real>;
+		using Vector3D = Vector3D<Real>;		
 
 	public:
 		// 线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t是任意实数。
 		// 用户必须确保D是单位长度。
-		Line3 (const Vector3D& origin, const Vector3D& direction,const Real epsilon = Math::sm_ZeroTolerance);
+		Line3(const Vector3D& origin, const Vector3D& direction, const Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
 

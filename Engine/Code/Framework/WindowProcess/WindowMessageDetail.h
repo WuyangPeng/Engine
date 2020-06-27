@@ -1,38 +1,32 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 09:45)
+// 引擎版本：0.3.0.1 (2020/05/21 09:48)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_DETAIL_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_DETAIL_H
 
 #include "WindowMessage.h"
 #include "VirtualKeysTypes.h"
+#include "Flags/MouseTypes.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
-#include "System/Time/Using/DeltaTimeUsing.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Window/WindowUser.h"
 #include "System/Window/WindowCreate.h"
 #include "System/Window/Flags/WindowMessagesFlags.h"
 #include "System/Window/Flags/WindowDisplayFlags.h"
 #include "System/Window/Flags/WindowsKeyCodesFlags.h"
-#include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "Framework/WindowCreate/WindowSize.h"
+#include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 
 template <typename MiddleLayer>
 Framework::WindowMessage<MiddleLayer>
-	::WindowMessage()
-	:m_MiddleLayerPtr(NEW0 MiddleLayerType), m_TimeDelta(System::g_Microseconds / 60)
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-template <typename MiddleLayer>
-Framework::WindowMessage<MiddleLayer>
-	::~WindowMessage()
+	::WindowMessage(int64_t delta)
+	:ParentType{ delta }, m_MiddleLayer{ std::make_shared<MiddleLayerType>(MiddleLayerPlatform::Windows) }, m_Accumulative{ delta }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -42,7 +36,7 @@ template <typename MiddleLayer>
 bool Framework::WindowMessage<MiddleLayer>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid() && m_MiddleLayerPtr != nullptr)
+	if (ParentType::IsValid() && m_MiddleLayer != nullptr && 0 <= m_Accumulative)
 		return true;
 	else
 		return false;
@@ -50,32 +44,72 @@ bool Framework::WindowMessage<MiddleLayer>
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::CreateMessage(HWnd hwnd, WParam wParam,LParam lParam)
+bool Framework::WindowMessage<MiddleLayer>
+	::PreCreate(const EnvironmentDirectory& environmentDirectory)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_MiddleLayerPtr->Create();
+	return m_MiddleLayer->PreCreate(environmentDirectory); 
+}
 
-	return ParentType::CreateMessage(hwnd,wParam,lParam);		
+template <typename MiddleLayer>
+bool Framework::WindowMessage<MiddleLayer>
+	::Initialize()
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	return m_MiddleLayer->Initialize();
+}
+
+template <typename MiddleLayer>
+void Framework::WindowMessage<MiddleLayer>
+	::PreIdle()
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	m_MiddleLayer->PreIdle();
+
+	return ParentType::PreIdle();
+}
+
+template <typename MiddleLayer>
+void Framework::WindowMessage<MiddleLayer>
+	::Terminate()
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	m_MiddleLayer->Terminate();
+
+	return ParentType::Terminate();
 }
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::SizeMessage(HWnd hwnd,WParam wParam,LParam lParam)
+	::CreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	WindowSize clientSize(lParam);	
-	System::WindowDisplay flag(static_cast<System::WindowDisplay>(wParam));	
-	m_MiddleLayerPtr->Resize(flag,clientSize);
+	m_MiddleLayer->Create();
 
-	return ParentType::SizeMessage(hwnd,wParam,lParam);		
+	return ParentType::CreateMessage(hwnd, wParam, lParam);
 }
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::CloseMessage(HWnd hwnd,WParam wParam,LParam lParam)
+	::SizeMessage(HWnd hwnd, WParam wParam, LParam lParam)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	const WindowSize clientSize{ lParam };
+
+	m_MiddleLayer->Resize(boost::numeric_cast<System::WindowDisplay>(wParam), clientSize);
+
+	return ParentType::SizeMessage(hwnd, wParam, lParam);
+}
+
+template <typename MiddleLayer>
+System::WindowLResult Framework::WindowMessage<MiddleLayer>
+	::CloseMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -84,19 +118,23 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 	SYSTEM_UNUSED_ARG(wParam);
 	SYSTEM_UNUSED_ARG(lParam);
 
-	return 0;  
+	return 0;
 }
 
 // private
 template <typename MiddleLayer>
 void Framework::WindowMessage<MiddleLayer>
-	::DoCloseMessage( HWnd hwnd ) const
+	::DoCloseMessage(HWnd hwnd) const
 {
-	System::String className(GetWindowsClassName(hwnd));
-	
-	System::String exitInformation = SYSTEM_TEXT("是否退出") + className + SYSTEM_TEXT("？");	
+	using namespace std::literals;
 
-	if(System::MessageBox(hwnd,exitInformation,className))
+	auto className = GetWindowsClassName(hwnd);
+
+	auto exitInformation = SYSTEM_TEXT("是否退出"s) + className + SYSTEM_TEXT("？"s);
+
+	System::SystemValidateRect(hwnd);
+
+	if (System::MessageBox(hwnd, exitInformation, className))
 	{
 		System::DestroySystemWindow(hwnd);
 	}
@@ -106,85 +144,102 @@ void Framework::WindowMessage<MiddleLayer>
 template <typename MiddleLayer>
 System::String Framework::WindowMessage<MiddleLayer>
 	::GetWindowsClassName(HWnd hwnd) const
-{	
-    System::String name;
+{
+	String name{ };
 
-	if(System::GetWindowTextString(hwnd,name))	
-		return name;	
-	else	
-		return SYSTEM_TEXT("程序");			
+	if (System::GetWindowTextString(hwnd, name))
+		return name;
+	else
+		return SYSTEM_TEXT("程序");
 }
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::CharMessage( HWnd hwnd,WParam wParam,LParam lParam )
+	::CharMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	uint8_t key = static_cast<uint8_t>(wParam);
+	auto key = boost::numeric_cast<int>(wParam);
 
 	// 当Terminate键被按下时退出应用程序。
 	if (key == GetTerminateKey())
 	{
-		System::SendSystemMessage(hwnd, System::WindowMessages::Close, 0, 0);		
+		System::SendSystemMessage(hwnd, System::WindowMessages::Close, 0, 0);
 	}
 	else
 	{
 		// 获取客户端光标的位置。
-		WindowPoint point = GetCursorPosition(hwnd);
+		const auto point = GetCursorPosition(hwnd);
 
-		m_MiddleLayerPtr->KeyDown(key,point);			
+		m_MiddleLayer->KeyDown(key, point);
 	}
 
 	SYSTEM_UNUSED_ARG(lParam);
 
-	return 0;	
+	return 0;
 }
 
 // private
 template <typename MiddleLayer>
 const Framework::WindowPoint Framework::WindowMessage<MiddleLayer>
-	::GetCursorPosition( HWnd hwnd ) const
+	::GetCursorPosition(HWnd hwnd) const noexcept
 {
-	System::WindowPoint point;
+	System::WindowPoint point{ };
 	System::GetCursorClientPos(hwnd, point);
 
-	return WindowPoint(point);
+	return WindowPoint{ point };
 }
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::KeyDownMessage(HWnd hwnd,WParam wParam,LParam lParam)
+	::MoveMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	int virtKey = static_cast<int>(wParam);
+	m_MiddleLayer->Move(WindowPoint{ lParam });
 
-	// 获取客户端光标的位置。
-	WindowPoint point = GetCursorPosition(hwnd);
+	SYSTEM_UNUSED_ARG(hwnd);
+	SYSTEM_UNUSED_ARG(wParam);
 
-	if (IsSpecialKey(virtKey))
-	{
-		m_MiddleLayerPtr->SpecialKeyDown(virtKey, point);
-	}
-
-	SYSTEM_UNUSED_ARG(lParam);
-
-	return 0;		
+	return 0;
 }
 
 template <typename MiddleLayer>
-bool Framework::WindowMessage<MiddleLayer>
-	::IsSpecialKey(int virtKey) const
+System::WindowLResult Framework::WindowMessage<MiddleLayer>
+	::KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
-	if ((static_cast<int>(System::WindowsKeyCodes::F1) <= virtKey &&
-		virtKey <= static_cast<int>(System::WindowsKeyCodes::F12)) ||
-		(static_cast<int>(System::WindowsKeyCodes::Prior) <= virtKey &&
-		virtKey <= static_cast<int>(System::WindowsKeyCodes::Down)) ||
-		(virtKey == static_cast<int>(System::WindowsKeyCodes::Insert)) ||
-		(virtKey == static_cast<int>(System::WindowsKeyCodes::Delete)) ||
-		(virtKey == static_cast<int>(System::WindowsKeyCodes::Shift)) ||
-		(virtKey == static_cast<int>(System::WindowsKeyCodes::Control)))
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	auto virtualKey = boost::numeric_cast<int>(wParam);
+
+	// 获取客户端光标的位置。
+	const auto point = GetCursorPosition(hwnd);
+
+	if (IsSpecialKey(virtualKey))
+	{
+		m_MiddleLayer->SpecialKeyDown(virtualKey, point);
+	}	
+
+	// KeyDown在CharMessage上监听。
+
+	SYSTEM_UNUSED_ARG(lParam);
+
+	return 0;
+}
+
+// private
+template <typename MiddleLayer>
+bool Framework::WindowMessage<MiddleLayer>
+	::IsSpecialKey(int virtualKey) const noexcept
+{
+	auto windowsKeyCodes = System::UnderlyingCastEnum<System::WindowsKeyCodes>(virtualKey);
+
+	if ((System::WindowsKeyCodes::F1 <= windowsKeyCodes) && (windowsKeyCodes <= System::WindowsKeyCodes::F12) ||
+		(System::WindowsKeyCodes::Prior <= windowsKeyCodes) && (windowsKeyCodes <= System::WindowsKeyCodes::Down) ||
+		(windowsKeyCodes == System::WindowsKeyCodes::Insert) ||
+		(windowsKeyCodes == System::WindowsKeyCodes::Delete) ||
+		(windowsKeyCodes == System::WindowsKeyCodes::Shift) ||
+		(windowsKeyCodes == System::WindowsKeyCodes::Control))
 	{
 		return true;
 	}
@@ -196,22 +251,22 @@ bool Framework::WindowMessage<MiddleLayer>
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::KeyUpMessage( HWnd hwnd,WParam wParam,LParam lParam )
+	::KeyUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	int virtKey = static_cast<int>(wParam);
+	auto virtualKey = boost::numeric_cast<int>(wParam);
 
 	// 获取客户端光标的位置。
-	WindowPoint point = GetCursorPosition(hwnd);
+	const auto point = GetCursorPosition(hwnd);
 
-	if (IsSpecialKey(virtKey))
+	if (IsSpecialKey(virtualKey))
 	{
-		m_MiddleLayerPtr->SpecialKeyUp(virtKey, point);
+		m_MiddleLayer->SpecialKeyUp(virtualKey, point);
 	}
 	else
 	{
-		m_MiddleLayerPtr->KeyUp(static_cast<unsigned char>(virtKey),   point);
+		m_MiddleLayer->KeyUp(virtualKey, point);
 	}
 
 	SYSTEM_UNUSED_ARG(lParam);
@@ -221,58 +276,14 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::LeftButtonDownMessage(HWnd hwnd,WParam wParam,LParam lParam)
+	::LeftButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	VirtualKeysTypes virtualKeys(wParam);
+	const WindowPoint windowPoint{ lParam };
+	const VirtualKeysTypes virtualKeys{ wParam };
 
-	m_MiddleLayerPtr->MouseClick(MouseButtonsTypesLeftButton,  MouseStateTypesMouseDown, WindowPoint(lParam), virtualKeys);
-	
-	SYSTEM_UNUSED_ARG(hwnd);
-
-	return 0;	
-}
-
-template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::LeftButtonUpMessage( HWnd hwnd,WParam wParam,LParam lParam )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	VirtualKeysTypes virtualKeys(wParam);
-
-	m_MiddleLayerPtr->MouseClick(MouseButtonsTypesLeftButton, MouseStateTypesMouseUp, WindowPoint(lParam), virtualKeys);
-	
-	SYSTEM_UNUSED_ARG(hwnd);
-
-	return 0;	
-}
-
-template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MiddleButtonDownMessage( HWnd hwnd,WParam wParam,LParam lParam )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-	
-	VirtualKeysTypes virtualKeys(wParam);
-
-	m_MiddleLayerPtr->MouseClick(MouseButtonsTypesMiddleButton, MouseStateTypesMouseDown, WindowPoint(lParam), virtualKeys);
-	
-	SYSTEM_UNUSED_ARG(hwnd);
-
-	return 0;
-}
-
-template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MiddleButtonUpMessage( HWnd hwnd,WParam wParam,LParam lParam )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	VirtualKeysTypes virtualKeys(wParam);
-
-	m_MiddleLayerPtr->MouseClick(MouseButtonsTypesMiddleButton,  MouseStateTypesMouseUp, WindowPoint(lParam), virtualKeys);
+	m_MiddleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, windowPoint, virtualKeys);
 
 	SYSTEM_UNUSED_ARG(hwnd);
 
@@ -281,118 +292,156 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::RightButtonDownMessage(HWnd hwnd,WParam wParam,LParam lParam)
+	::LeftButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	VirtualKeysTypes virtualKeys(wParam);
+	const WindowPoint windowPoint{ lParam };
+	const VirtualKeysTypes virtualKeys{ wParam };	
 
-	m_MiddleLayerPtr->MouseClick(MouseButtonsTypesRightButton, MouseStateTypesMouseDown, WindowPoint(lParam), virtualKeys);
-	
+	m_MiddleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, windowPoint, virtualKeys);
+
 	SYSTEM_UNUSED_ARG(hwnd);
 
-	return 0;	
+	return 0;
 }
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::RightButtonUpMessage( HWnd hwnd,WParam wParam,LParam lParam )
+	::MiddleButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	VirtualKeysTypes virtualKeys(wParam);
+	const WindowPoint windowPoint{ lParam };
+	const VirtualKeysTypes virtualKeys{ wParam };
 
-	m_MiddleLayerPtr->MouseClick(MouseButtonsTypesRightButton, MouseStateTypesMouseUp, WindowPoint(lParam), virtualKeys);
+	m_MiddleLayer->MouseClick(MouseButtonsTypes::MiddleButton, MouseStateTypes::MouseDown, windowPoint, virtualKeys);
 
 	SYSTEM_UNUSED_ARG(hwnd);
 
-	return 0;	
+	return 0;
 }
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MouseMoveMessage(HWnd hwnd,WParam wParam,LParam lParam)
+	::MiddleButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	VirtualKeysTypes virtualKeys(wParam);
+	const WindowPoint windowPoint{ lParam };
+	const VirtualKeysTypes virtualKeys{ wParam };
+
+	m_MiddleLayer->MouseClick(MouseButtonsTypes::MiddleButton, MouseStateTypes::MouseUp, windowPoint, virtualKeys);
+
+	SYSTEM_UNUSED_ARG(hwnd);
+
+	return 0;
+}
+
+template <typename MiddleLayer>
+System::WindowLResult Framework::WindowMessage<MiddleLayer>
+	::RightButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	const WindowPoint windowPoint{ lParam };
+	const VirtualKeysTypes virtualKeys{ wParam };
+
+	m_MiddleLayer->MouseClick(MouseButtonsTypes::RightButton, MouseStateTypes::MouseDown, windowPoint, virtualKeys);
+
+	SYSTEM_UNUSED_ARG(hwnd);
+
+	return 0;
+}
+
+template <typename MiddleLayer>
+System::WindowLResult Framework::WindowMessage<MiddleLayer>
+	::RightButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	const WindowPoint windowPoint{ lParam };
+	const VirtualKeysTypes virtualKeys{ wParam };
+
+	m_MiddleLayer->MouseClick(MouseButtonsTypes::RightButton, MouseStateTypes::MouseUp, windowPoint, virtualKeys);
+
+	SYSTEM_UNUSED_ARG(hwnd);
+
+	return 0;
+}
+
+template <typename MiddleLayer>
+System::WindowLResult Framework::WindowMessage<MiddleLayer>
+	::MouseMoveMessage(HWnd hwnd, WParam wParam, LParam lParam)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	const WindowPoint windowPoint{ lParam };
+	const VirtualKeysTypes virtualKeys{ wParam };
 
 	if (virtualKeys.IsMouseDown())
 	{
-		m_MiddleLayerPtr->Motion(WindowPoint(lParam),virtualKeys);
+		m_MiddleLayer->Motion(windowPoint, virtualKeys);
 	}
 	else
 	{
-		m_MiddleLayerPtr->PassiveMotion(WindowPoint(lParam));
-	}	
-	
-	SYSTEM_UNUSED_ARG(hwnd);
-
-	return 0;	
-}
-
-template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MouseWheelMessage( HWnd hwnd,WParam wParam,LParam lParam )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-	
-	VirtualKeysTypes virtualKeys(System::GetLowWord(wParam));
-
-	m_MiddleLayerPtr->MouseWheel(System::GetHighWord(wParam) / static_cast<int>(System::WindowMessages::MouseWheel), WindowPoint(lParam), virtualKeys);
+		m_MiddleLayer->PassiveMotion(windowPoint);
+	}
 
 	SYSTEM_UNUSED_ARG(hwnd);
-
-	return 0;	
-}
-
-template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::DestroyMessage(HWnd hwnd,WParam wParam,LParam lParam)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_MiddleLayerPtr->Destroy();
-
-	return ParentType::DestroyMessage(hwnd,wParam,lParam);	
-}
-
-template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::PaintMessage(HWnd hwnd,WParam wParam,LParam lParam)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	System::WindowPaintStruct ps;
-	System::SystemBeginPaint(hwnd, &ps);
-	m_MiddleLayerPtr->Paint();	
-	System::SystemEndPaint(hwnd, &ps);
-
-	SYSTEM_UNUSED_ARG(wParam);
-	SYSTEM_UNUSED_ARG(lParam);
-
-	return 0;	
-}
-
-template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MoveMessage( HWnd hwnd,WParam wParam,LParam lParam )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_MiddleLayerPtr->Move(WindowPoint(lParam));
-
-	SYSTEM_UNUSED_ARG(hwnd);
-	SYSTEM_UNUSED_ARG(wParam);
 
 	return 0;
 }
 
 template <typename MiddleLayer>
 System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::EraseBackgroundMessage( HWnd hwnd,WParam wParam, LParam lParam )
+	::MouseWheelMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
+
+	const WindowPoint windowPoint{ lParam };
+	const VirtualKeysTypes virtualKeys{ boost::numeric_cast<WParam>(System::GetLowWord(wParam)) };
+
+	m_MiddleLayer->MouseWheel(System::GetHighWord(wParam) / System::EnumCastUnderlying(System::WindowMessages::MouseWheel), windowPoint, virtualKeys);
+
+	SYSTEM_UNUSED_ARG(hwnd);
+
+	return 0;
+}
+
+template <typename MiddleLayer>
+System::WindowLResult Framework::WindowMessage<MiddleLayer>
+	::DestroyMessage(HWnd hwnd, WParam wParam, LParam lParam)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	m_MiddleLayer->Destroy();
+
+	return ParentType::DestroyMessage(hwnd, wParam, lParam);
+}
+
+template <typename MiddleLayer>
+System::WindowLResult Framework::WindowMessage<MiddleLayer>
+	::PaintMessage(HWnd hwnd, WParam wParam, LParam lParam)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	m_MiddleLayer->Paint();	 
+
+	SYSTEM_UNUSED_ARG(hwnd);
+	SYSTEM_UNUSED_ARG(wParam);
+	SYSTEM_UNUSED_ARG(lParam);
+
+	return 0;
+}
+
+template <typename MiddleLayer>
+System::WindowLResult Framework::WindowMessage<MiddleLayer>
+	::EraseBackgroundMessage(HWnd hwnd, WParam wParam, LParam lParam)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
 
 	// 这告诉Windows不擦除背景（由OpenGL或DirectX来完成）。
 	SYSTEM_UNUSED_ARG(hwnd);
@@ -404,24 +453,20 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 template <typename MiddleLayer>
 void Framework::WindowMessage<MiddleLayer>
-	::Display(HWnd hwnd,int64_t timeDelta)
+	::Display(HWnd hwnd, int64_t timeDelta)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_MiddleLayerPtr->Idle(timeDelta);
+	m_Accumulative += timeDelta;
 
-	m_TimeDelta -= timeDelta;
-
-	if (m_TimeDelta <= 0)
+	if (GetDelta() <= m_Accumulative)
 	{
-		// TODO 这里临时加上刷新窗口的语句。
-		System::SystemInvalidateRect(hwnd);
-		System::UpdateSystemWindows(hwnd);
+		m_MiddleLayer->Idle(m_Accumulative);		
 
-		m_TimeDelta += System::g_Microseconds / 60;
+		m_Accumulative = 0;
 	}
-	
-	return ParentType::Display(hwnd,timeDelta);
+
+	return ParentType::Display(hwnd, timeDelta);
 }
 
 #endif // FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_DETAIL_H

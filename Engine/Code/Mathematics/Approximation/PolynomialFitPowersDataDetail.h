@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:43)
+// 引擎版本：0.0.2.5 (2020/03/23 14:56)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_DETAIL_H
@@ -33,7 +33,6 @@ bool Mathematics::PolynomialFitPowersData<Real, S>
 }
 #endif // OPEN_CLASS_INVARIANT
 
-
 template <typename Real, int S>
 bool Mathematics::PolynomialFitPowersData<Real, S>
 	::IsSolveSucceed() const
@@ -57,9 +56,15 @@ int Mathematics::PolynomialFitPowersData<Real, S>
 	::GetMaxPower(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < Size - 1, "索引越界\n");
 
-	return m_MaxPower[index];
+	if (0 <= index && index < Size - 1)
+	{
+		return m_MaxPower[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"));
+	}
 }
 
 template <typename Real, int S>
@@ -67,9 +72,15 @@ Real Mathematics::PolynomialFitPowersData<Real, S>
 	::GetMin(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < Size, "索引越界\n");
 
-	return m_Min[index];
+	if (0 <= index && index < Size)
+	{
+		return m_Min[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"));
+	}
 }
 
 template <typename Real, int S>
@@ -77,9 +88,15 @@ Real Mathematics::PolynomialFitPowersData<Real, S>
 	::GetMax(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < Size, "索引越界\n");
 
-	return m_Max[index];
+	if (0 <= index && index < Size)
+	{
+		return m_Max[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"));
+	}
 }
 
 template <typename Real, int S>
@@ -87,9 +104,15 @@ Real Mathematics::PolynomialFitPowersData<Real, S>
 	::GetScale(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < Size, "索引越界\n");
 
-	return m_Scale[index];
+	if (0 <= index && index < Size)
+	{
+		return m_Scale[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"));
+	}
 }
 
 template <typename Real, int S>
@@ -100,7 +123,6 @@ Real Mathematics::PolynomialFitPowersData<Real, S>
 
 	return m_InvTwoWScale;
 }
-
 
 template <typename Real, int S>
 const std::vector<Real> Mathematics::PolynomialFitPowersData<Real, S>
@@ -116,19 +138,25 @@ Real Mathematics::PolynomialFitPowersData<Real, S>
 	::GetCoefficients(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < static_cast<int>(m_Coefficients.size()), "索引越界\n");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Coefficients.size()), "索引越界\n");
 
 	return m_Coefficients[index];
 }
 
 template <typename Real, int S>
 void Mathematics::PolynomialFitPowersData<Real, S>
-	::SetMaxPower(int index,int power)
+	::SetMaxPower(int index, int power)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < Size - 1, "索引越界\n");
 
-	m_MaxPower[index] = power;
+	if (0 <= index && index < Size - 1)
+	{
+		m_MaxPower[index] = power;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"));
+	}
 }
 
 template <typename Real, int S>
@@ -136,9 +164,15 @@ void Mathematics::PolynomialFitPowersData<Real, S>
 	::SetScale(int index, Real scale)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < Size, "索引越界\n");
 
-	m_Scale[index] = scale;
+	if (0 <= index && index < Size)
+	{
+		m_Scale[index] = scale;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"));
+	}
 
 	if (index == Size - 1)
 	{

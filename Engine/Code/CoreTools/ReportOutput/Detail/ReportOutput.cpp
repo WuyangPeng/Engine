@@ -13,7 +13,7 @@ using std::string;
 using std::ostream;
 
 CoreTools::ReportOutput
-	::ReportOutput(ostream* osPtr)
+	::ReportOutput(const OStreamShared& osPtr)
 	:m_OsPtr{ osPtr }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -29,10 +29,8 @@ CoreTools::ReportOutput
 bool CoreTools::ReportOutput
 	::IsValid() const noexcept
 {
-	if (m_OsPtr != nullptr && *m_OsPtr)
-		return true;
-	else
-		return false;
+ 
+		return true; 
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -41,7 +39,7 @@ void CoreTools::ReportOutput
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	*m_OsPtr << characterString;
+	m_OsPtr << characterString;
 }
 
 void CoreTools::ReportOutput
@@ -49,7 +47,7 @@ void CoreTools::ReportOutput
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	*m_OsPtr << '\n';
+	m_OsPtr << '\n';
 }
 
 void CoreTools::ReportOutput
@@ -57,12 +55,12 @@ void CoreTools::ReportOutput
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	*m_OsPtr << number;
+	m_OsPtr << number;
 }
 
 // protected
-ostream*  CoreTools::ReportOutput
-	::GetStream() noexcept
+CoreTools::OStreamShared  CoreTools::ReportOutput
+	::GetStream()  
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

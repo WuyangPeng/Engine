@@ -13,6 +13,7 @@
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26461)
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::AndroidInputQueueAttachLooper(AndroidInputQueue* queue, AndroidLooper* looper, LooperID ident, AndroidLooperCallbackFunc callback, void* data) noexcept
 {

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 11:14)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 09:53)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -27,39 +27,39 @@ Mathematics::Int64Vector2
 }
 
 Mathematics::Int64Vector2
-	::Int64Vector2( const Int64Vector<2>& rhs )
+	::Int64Vector2(const Int64Vector<2>& rhs)
 	:m_Impl{ make_shared<ImplType>(rhs) }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 Mathematics::Int64Vector2
-	::Int64Vector2( const int64_t& x, const int64_t& y )
+	::Int64Vector2(const int64_t& x, const int64_t& y)
 	:m_Impl{ make_shared<ImplType>(x,y) }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-} 
+}
 
 Mathematics::Int64Vector2& Mathematics::Int64Vector2
-	::operator=( const Int64Vector<2>& rhs )
+	::operator=(const Int64Vector<2>& rhs)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT; 
+	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	*m_Impl = rhs;
 
 	return *this;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Mathematics,Int64Vector2)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Mathematics, Int64Vector2)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics,Int64Vector2,GetX,int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics,Int64Vector2,GetY,int64_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Int64Vector2, GetX, int64_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Int64Vector2, GetY, int64_t)
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Mathematics,Int64Vector2,SetX,int64_t,void)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Mathematics, Int64Vector2, SetX, int64_t, void)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Mathematics, Int64Vector2, SetY, int64_t, void)
 
-const Mathematics::Int64Vector2 
-    Mathematics::Int64Vector2
+const Mathematics::Int64Vector2
+Mathematics::Int64Vector2
 	::Perp() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -80,17 +80,17 @@ const Mathematics::Int64Vector2 Mathematics::Int64Vector2
 }
 
 Mathematics::Int64Vector2& Mathematics::Int64Vector2
-	::operator+=( const Int64Vector2& rhs )
+	::operator+=(const Int64Vector2& rhs)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	*m_Impl += *rhs.m_Impl;	
+	*m_Impl += *rhs.m_Impl;
 
 	return *this;
 }
 
 Mathematics::Int64Vector2& Mathematics::Int64Vector2
-	::operator-=( const Int64Vector2& rhs )
+	::operator-=(const Int64Vector2& rhs)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -100,7 +100,7 @@ Mathematics::Int64Vector2& Mathematics::Int64Vector2
 }
 
 Mathematics::Int64Vector2& Mathematics::Int64Vector2
-	::operator*=( const int64_t& scalar )
+	::operator*=(const int64_t& scalar)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -110,7 +110,7 @@ Mathematics::Int64Vector2& Mathematics::Int64Vector2
 }
 
 Mathematics::Int64Vector2&	Mathematics::Int64Vector2
-	::operator/=( const int64_t& scalar )
+	::operator/=(const int64_t& scalar)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -119,26 +119,26 @@ Mathematics::Int64Vector2&	Mathematics::Int64Vector2
 	return *this;
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics,Int64Vector2,SquaredLength,int64_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Int64Vector2, SquaredLength, int64_t)
 
 int64_t Mathematics::Int64Vector2
-    ::Dot( const Int64Vector2& rhs ) const
+	::Dot(const Int64Vector2& rhs) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return Mathematics::Dot(*m_Impl,*rhs.m_Impl);
+	return Mathematics::Dot(*m_Impl, *rhs.m_Impl);
 }
 
 int64_t Mathematics::Int64Vector2
-	::DotPerp( const Int64Vector2& rhs ) const
+	::DotPerp(const Int64Vector2& rhs) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return Mathematics::DotPerp(*m_Impl,*rhs.m_Impl);
+	return Mathematics::DotPerp(*m_Impl, *rhs.m_Impl);
 }
 
 bool Mathematics::Int64Vector2
-	::operator==( const Int64Vector2& rhs ) const
+	::operator==(const Int64Vector2& rhs) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -146,7 +146,7 @@ bool Mathematics::Int64Vector2
 }
 
 bool Mathematics::Int64Vector2
-	::operator<( const Int64Vector2& rhs ) const
+	::operator<(const Int64Vector2& rhs) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -1,23 +1,24 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:22)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 16:39)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_DETAIL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_DETAIL_H
 
 #include "AndroidProcess.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "AndroidProcessManager.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 template <typename AndroidCallBack>
 Framework::AndroidProcess<AndroidCallBack>
-	::AndroidProcess()
+	::AndroidProcess(int64_t delta)
 {
-	AndroidCallBackInterfacePtr ptr(new AndroidCallBack);
+	AndroidCallBackInterfaceSharedPtr androidCallBack{ std::make_shared<AndroidCallBack>(delta) };
 
-	ANDROID_PROCESS_MANAGE_SINGLETON.SetAndroidCallBack(ptr);
+	ANDROID_PROCESS_MANAGE_SINGLETON.SetAndroidCallBack(androidCallBack);
 
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -28,6 +29,13 @@ Framework::AndroidProcess<AndroidCallBack>
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 
+	CoreTools::NoexceptNoReturn(*this, &ClassType::ClearAndroidCallBack);
+}
+
+template <typename AndroidCallBack>
+void Framework::AndroidProcess<AndroidCallBack>
+	::ClearAndroidCallBack()
+{
 	ANDROID_PROCESS_MANAGE_SINGLETON.ClearAndroidCallBack();
 }
 
@@ -76,11 +84,9 @@ void Framework::AndroidProcess<AndroidCallBack>
 	ANDROID_PROCESS_MANAGE_SINGLETON.Terminate();
 }
 
-
 template <typename AndroidCallBack>
-typename Framework::AndroidProcess<AndroidCallBack>::AppCmd
-	Framework::AndroidProcess<AndroidCallBack>
-	::GetAppCmd() const
+typename Framework::AndroidProcess<AndroidCallBack>::AppCmd Framework::AndroidProcess<AndroidCallBack>
+	::GetAppCmd() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -88,9 +94,8 @@ typename Framework::AndroidProcess<AndroidCallBack>::AppCmd
 }
 
 template <typename AndroidCallBack>
-typename Framework::AndroidProcess<AndroidCallBack>::InputEvent
-	Framework::AndroidProcess<AndroidCallBack>
-	::GetInputEvent() const
+typename Framework::AndroidProcess<AndroidCallBack>::InputEvent Framework::AndroidProcess<AndroidCallBack>
+	::GetInputEvent() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -98,9 +103,8 @@ typename Framework::AndroidProcess<AndroidCallBack>::InputEvent
 }
 
 template <typename AndroidCallBack>
-typename Framework::AndroidProcess<AndroidCallBack>::Display
-	Framework::AndroidProcess<AndroidCallBack>
-	::GetDisplay() const
+typename Framework::AndroidProcess<AndroidCallBack>::Display Framework::AndroidProcess<AndroidCallBack>
+	::GetDisplay() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

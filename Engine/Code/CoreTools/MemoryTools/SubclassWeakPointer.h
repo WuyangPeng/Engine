@@ -9,7 +9,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <iosfwd>
 
 namespace CoreTools

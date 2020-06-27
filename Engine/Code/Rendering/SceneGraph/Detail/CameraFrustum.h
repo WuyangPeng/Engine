@@ -9,7 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "Rendering/SceneGraph/Flags/CameraFlags.h"
 #include "Rendering/SceneGraph/CameraFrustumData.h"
 

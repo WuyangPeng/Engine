@@ -32,7 +32,7 @@ namespace Rendering
 		explicit PlanarReflectionEffect (int numPlanes);
 		virtual ~PlanarReflectionEffect ();
 		
-		virtual void Draw (Renderer* renderer, const VisibleSet& visibleSet);
+		virtual void Draw (std::shared_ptr<Renderer> renderer, VisibleSet& visibleSet) override;
 		
 		// Member access.
 		int GetNumPlanes () const;

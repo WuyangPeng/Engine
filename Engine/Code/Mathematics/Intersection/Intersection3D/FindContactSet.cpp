@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 14:18)
+// 引擎版本：0.0.2.5 (2020/03/24 15:00)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -17,10 +17,10 @@
 namespace Mathematics
 {
 	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
-	class FindContactSet<float>;	
-	
+	class FindContactSet<float>;
+
 	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
-	class FindContactSet<double>; 
+	class FindContactSet<double>;
 }
 
 #endif // MATHEMATICS_EXPORT_TEMPLATE

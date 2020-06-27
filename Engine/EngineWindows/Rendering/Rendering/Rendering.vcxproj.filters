@@ -1376,6 +1376,12 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTextureCube.cpp">
       <Filter>Renderers 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PickRayImpl.cpp">
+      <Filter>Renderers 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PickRay.cpp">
+      <Filter>Renderers 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingLib.h">
@@ -2856,6 +2862,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\WglRenderer.h">
       <Filter>WglRenderer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderersInternalFwd.h">
+      <Filter>Renderers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\DepthRange.h">
+      <Filter>Renderers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\PickRayImpl.h">
+      <Filter>Renderers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\PickRay.h">
+      <Filter>Renderers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Viewport.h">
+      <Filter>Renderers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererInternalFwd.h">
+      <Filter>OpenGLRenderer 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

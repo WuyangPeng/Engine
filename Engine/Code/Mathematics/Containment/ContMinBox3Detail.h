@@ -23,7 +23,7 @@ Mathematics::MinBox3<Real>
 
     if (hullDim == 0)
     {
-		mMinBox.Set(points[0], Vector3D<Real>::sm_UnitX, Vector3D<Real>::sm_UnitY, Vector3D<Real>::sm_UnitZ, Real{}, Real{}, Real{});
+		mMinBox.Set(points[0], Vector3D<Real>::sm_UnitX, Vector3D<Real>::sm_UnitY, Vector3D<Real>::sm_UnitZ, Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero);
        
         return;
     }
@@ -36,8 +36,8 @@ Mathematics::MinBox3<Real>
 		auto center = (Real{0.5})*(points[hullIndices[0]] + points[hullIndices[1]]);
 		auto diff = points[hullIndices[1]] - points[hullIndices[0]];
 		auto extent0 = (Real{0.5})*Vector3DTools<Real>::VectorMagnitude(diff);
-		auto extent1 = Real{};
-		auto extent2 = Real{};
+		auto extent1 = Math<Real>::sm_Zero;
+		auto extent2 = Math<Real>::sm_Zero;
 
 		diff.Normalize();
 	 
@@ -95,7 +95,7 @@ Mathematics::MinBox3<Real>
 					W,
 					box2.GetFirstExtent(),
 					box2.GetSecondExtent() ,
-					Real{}); 
+					Math<Real>::sm_Zero); 
 
         return;
     }
@@ -136,7 +136,7 @@ Mathematics::MinBox3<Real>
         edges.insert(EdgeKey(v2, v0));
 
         // Get 3D coordinate system relative to plane of triangle.
-        origin = (points[v0] + points[v1] + points[v2])/(Real)3.0;
+        origin = (points[v0] + points[v1] + points[v2])/static_cast<Real>(3.0);
 		auto edge1 = points[v1] - points[v0];
 		auto edge2 = points[v2] - points[v0];
 		W = Vector3DTools<Real>::UnitCrossProduct(edge2,edge1);  // inner-pointing normal
@@ -157,8 +157,8 @@ Mathematics::MinBox3<Real>
         // of counterclockwise when viewed from outside the hull).  The
         // height calculations here trap that problem (the incorrectly ordered
         // face will not affect the minimum volume box calculations).
-        minHeight = Real{};
-        maxHeight = Real{};
+        minHeight = Math<Real>::sm_Zero;
+        maxHeight = Math<Real>::sm_Zero;
         j = 0;
 		auto iter = uniqueIndices.begin();
         while (iter != uniqueIndices.end())
@@ -246,9 +246,9 @@ Mathematics::MinBox3<Real>
                 // The three edges are mutually orthogonal.  Project the
                 // hull points onto the lines containing the edges.  Use
                 // hull point zero as the origin.
-                Real umin = Real{}, umax = Real{};
-                Real vmin = Real{}, vmax = Real{};
-                Real wmin = Real{}, wmax = Real{};
+                Real umin = Math<Real>::sm_Zero, umax = Math<Real>::sm_Zero;
+                Real vmin = Math<Real>::sm_Zero, vmax = Math<Real>::sm_Zero;
+                Real wmin = Math<Real>::sm_Zero, wmax = Math<Real>::sm_Zero;
                 origin = points[hullIndices[0]];
 
                 std::set<int>::const_iterator iter = uniqueIndices.begin();

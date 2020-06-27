@@ -12,6 +12,7 @@
 #include "ObjectInterface.h"
 #include "ObjectName.h"
 #include "CoreTools/Helper/NameMacro.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/SubclassSmartPointerMacro.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointer.h"
 
@@ -50,8 +51,12 @@ namespace CoreTools
 	private:
 		ObjectName m_Name;
 	};
+#include STSTEM_WARNING_PUSH
 
+#include SYSTEM_WARNING_DISABLE(26426)  
 	CORE_TOOLS_STREAM_REGISTER(Object);
+#include STSTEM_WARNING_POP
+
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Second, Object);
 }
 

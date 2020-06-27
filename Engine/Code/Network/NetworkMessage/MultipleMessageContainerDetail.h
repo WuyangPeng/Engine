@@ -8,7 +8,7 @@
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_DETAIL_H
 
 #include "MultipleMessageContainer.h"   
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
@@ -17,7 +17,7 @@
 #include "Network/NetworkMessage/MultipleMessageStreamingSaveDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingLoadDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp> 
+#include "System/Helper/PragmaWarning/NumericCast.h" 
 
 template<typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 Network::MultipleMessageContainer<E, ByteType, Types...>

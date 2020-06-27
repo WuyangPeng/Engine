@@ -8,7 +8,7 @@
 #define CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H
 
 #include "UniqueIDManager.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Threading/ScopedMutex.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"

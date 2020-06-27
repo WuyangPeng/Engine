@@ -6,6 +6,7 @@
 *.dll
 *.exe
 *.exp
+*.FileListAbsolute.txt
 *.idb
 *.ilk
 *.iobj
@@ -19,12 +20,11 @@
 *.opendb
 *.pdb
 *.res
+*.sarif
 *.sbr
 *.suo
 *.tlog
 *.tmp
 *.user
 
-EngineWindows/*/*/Win32/*/*.xml
-EngineWindows/*/*/x64/*/*.xml
-
+CodeAnalysisResultManifest.txt

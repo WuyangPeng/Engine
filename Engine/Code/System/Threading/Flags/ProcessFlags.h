@@ -2,31 +2,31 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 16:06)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/10 11:00)
 
 #ifndef SYSTEM_THREADING_PROCESS_FLAGS_H
 #define SYSTEM_THREADING_PROCESS_FLAGS_H  
 
 #include "System/Helper/Platform.h" 
 #include "System/Helper/EnumMacro.h"
- 
+
 namespace System
-{	
+{
 #ifdef SYSTEM_PLATFORM_WIN32	
 
-	enum class ProcessCreation : uint32_t 
+	enum class ProcessCreation : uint32_t
 	{
-		DebugProcess = DEBUG_PROCESS,   
-		DebugOnlyThisProcess = DEBUG_ONLY_THIS_PROCESS, 
-		CreateSuspended = CREATE_SUSPENDED,                  
-		DetachedProcess = DETACHED_PROCESS,                  
+		DebugProcess = DEBUG_PROCESS,
+		DebugOnlyThisProcess = DEBUG_ONLY_THIS_PROCESS,
+		CreateSuspended = CREATE_SUSPENDED,
+		DetachedProcess = DETACHED_PROCESS,
 
-		CreateNewConsole = CREATE_NEW_CONSOLE,                
-		NormalPriorityClass = NORMAL_PRIORITY_CLASS,             
-		IdlePriorityClass = IDLE_PRIORITY_CLASS,               
-		HighPriorityClass = HIGH_PRIORITY_CLASS,               
+		CreateNewConsole = CREATE_NEW_CONSOLE,
+		NormalPriorityClass = NORMAL_PRIORITY_CLASS,
+		IdlePriorityClass = IDLE_PRIORITY_CLASS,
+		HighPriorityClass = HIGH_PRIORITY_CLASS,
 
-		RealTimePriorityClass = REALTIME_PRIORITY_CLASS,           
+		RealTimePriorityClass = REALTIME_PRIORITY_CLASS,
 		CreateNewProcessGroup = CREATE_NEW_PROCESS_GROUP,
 		CreateUnicodeEnvironment = CREATE_UNICODE_ENVIRONMENT,
 		CreateSeparateWowVdm = CREATE_SEPARATE_WOW_VDM,
@@ -54,38 +54,38 @@ namespace System
 		ProfileServer = PROFILE_SERVER,
 		CreateIgnoreSystemDefault = CREATE_IGNORE_SYSTEM_DEFAULT,
 	};
-	
+
 	enum class ProcessStandardAccess
 	{
-		Delete = DELETE,                          
-		ReadControl = READ_CONTROL,                   
-		WriteDac = WRITE_DAC,                      
-		WriteOwner = WRITE_OWNER,                   
-		Synchronize = SYNCHRONIZE,   
-	};		
+		Delete = DELETE,
+		ReadControl = READ_CONTROL,
+		WriteDac = WRITE_DAC,
+		WriteOwner = WRITE_OWNER,
+		Synchronize = SYNCHRONIZE,
+	};
 
-	enum class ProcessSpecificAccess 
-	{	
+	enum class ProcessSpecificAccess
+	{
 		Terminate = PROCESS_TERMINATE,
-		CreateThread = PROCESS_CREATE_THREAD,  
+		CreateThread = PROCESS_CREATE_THREAD,
 		SetSessionID = PROCESS_SET_SESSIONID,
-		VmOperation = PROCESS_VM_OPERATION, 
+		VmOperation = PROCESS_VM_OPERATION,
 		VmRead = PROCESS_VM_READ,
 		VmWrite = PROCESS_VM_WRITE,
 		DupHandle = PROCESS_DUP_HANDLE,
 		CreateProcess = PROCESS_CREATE_PROCESS,
-		SetQuota = PROCESS_SET_QUOTA, 
+		SetQuota = PROCESS_SET_QUOTA,
 		SetInformation = PROCESS_SET_INFORMATION,
 		QueryInformation = PROCESS_QUERY_INFORMATION,
-		SuspendResume = PROCESS_SUSPEND_RESUME, 
-		QueryLimitedInformation = PROCESS_QUERY_LIMITED_INFORMATION, 
- 
-		AllAccess = PROCESS_ALL_ACCESS, 
-	};	
-	
+		SuspendResume = PROCESS_SUSPEND_RESUME,
+		QueryLimitedInformation = PROCESS_QUERY_LIMITED_INFORMATION,
+
+		AllAccess = PROCESS_ALL_ACCESS,
+	};
+
 #else // !SYSTEM_PLATFORM_WIN32		
 
-	enum class ProcessCreation : uint32_t 
+	enum class ProcessCreation : uint32_t
 	{
 		DebugProcess = 0x00000001,
 		DebugOnlyThisProcess = 0x00000002,
@@ -125,35 +125,35 @@ namespace System
 		ProfileServer = 0x40000000,
 		CreateIgnoreSystemDefault = 0x80000000,
 	};
-	 
+
 	enum class ProcessStandardAccess
 	{
 		Delete = (0x00010000L),
 		ReadControl = (0x00020000L),
 		WriteDac = (0x00040000L),
 		WriteOwner = (0x00080000L),
-		Synchronize = (0x00100000L), 
-	};	
-	
-	enum class ProcessSpecificAccess 
-	{	
-		Terminate = (0x0001),
-		CreateThread = (0x0002),  
-		SetSessionID =  (0x0004),  
-		VmOperation = (0x0008),  
-		VmRead = (0x0010),  
-		VmWrite = (0x0020),  
-		DupHandle = (0x0040),  
-		CreateProcess = (0x0080),  
-		SetQuota = (0x0100),  
-		SetInformation = (0x0200),  
-		QueryInformation = (0x0400),  
-		SuspendResume =  (0x0800),  
-		QueryLimitedInformation = (0x1000),  
+		Synchronize = (0x00100000L),
+	};
 
-		AllAccess = (0x000F0000L | 0x00100000L | 0xFFFF), 
-	};	
-	
+	enum class ProcessSpecificAccess
+	{
+		Terminate = (0x0001),
+		CreateThread = (0x0002),
+		SetSessionID = (0x0004),
+		VmOperation = (0x0008),
+		VmRead = (0x0010),
+		VmWrite = (0x0020),
+		DupHandle = (0x0040),
+		CreateProcess = (0x0080),
+		SetQuota = (0x0100),
+		SetInformation = (0x0200),
+		QueryInformation = (0x0400),
+		SuspendResume = (0x0800),
+		QueryLimitedInformation = (0x1000),
+
+		AllAccess = (0x000F0000L | 0x00100000L | 0xFFFF),
+	};
+
 #endif // SYSTEM_PLATFORM_WIN32
 
 	ENUM_ORABLE_OPERATOR_DEFINE(ProcessCreation);

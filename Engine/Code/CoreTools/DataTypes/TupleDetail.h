@@ -21,12 +21,7 @@ CoreTools::Tuple<Dimension, Type>
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>
-	::~Tuple()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>
@@ -40,7 +35,7 @@ CoreTools::Tuple<Dimension, Type>
 
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>
-	::Tuple(ParamType firstParam, ParamType secondParam)
+	::Tuple(ParamType firstParam, ParamType secondParam) noexcept
 	:m_Tuple{ firstParam,secondParam }
 {
 	static_assert(Dimension == 2, "Dimension == 2");

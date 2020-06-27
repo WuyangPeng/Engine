@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 16:11)
+// 引擎版本：0.2.0.0 (2020/05/10 11:07)
 
 #ifndef SYSTEM_THREADING_FIBER_TOOLS_USING_H  
 #define SYSTEM_THREADING_FIBER_TOOLS_USING_H  
@@ -20,9 +20,9 @@ namespace System
 
 #else // !SYSTEM_PLATFORM_WIN32	
 
-	using FlsCallbackFunction = void(*) (WindowVoidPtr flsData);
+	using FlsCallbackFunction = void(*) (void* flsData);
 	constexpr WindowDWord g_FlsOutOfIndexes{ 0xFFFFFFFF };
-	using FiberStartRoutine = void(*)(WindowVoidPtr lpFiberParameter);
+	using FiberStartRoutine = void(*)(void* lpFiberParameter);
 
 #endif // SYSTEM_PLATFORM_WIN32
 }

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:05)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:42)
 
 #ifndef FRAMEWORK_APPLICATION_WINDOW_FONT_INFORMATION_H
 #define FRAMEWORK_APPLICATION_WINDOW_FONT_INFORMATION_H
@@ -11,24 +11,23 @@
 
 namespace Framework
 {
-	class WindowFontInformation : public FontInformationImpl
+	class FRAMEWORK_HIDDEN_DECLARE WindowFontInformation final : public FontInformationImpl
 	{
 	public:
 		using ClassType = WindowFontInformation;
 		using ParentType = FontInformationImpl;
 
 	public:
-		explicit WindowFontInformation(HWnd hwnd);
-		virtual ~WindowFontInformation();
+		explicit WindowFontInformation(HWnd hwnd) noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual int GetStringWidth (const System::String& text) const;
-		virtual int GetCharacterWidth (const System::TChar character) const;
-		virtual int GetFontHeight () const;
+		int GetStringWidth(const String& text) const noexcept final;
+		int GetCharacterWidth(const TChar character) const final;
+		int GetFontHeight() const noexcept final;
 
 	private:
-		HWND m_Hwnd;
+		HWnd m_Hwnd;
 	};
 }
 

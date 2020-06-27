@@ -30,8 +30,32 @@ using std::right;
 using std::exception;
 using std::make_shared;
 
+const string CoreTools::UnitTest
+	::GetCorrectThrowExceptionDescribe()
+{
+	return "正确的抛出异常：";
+}
+
+const string CoreTools::UnitTest
+	::GetErrorThrowExceptionDescribe()
+{ 
+	return "错误的抛出异常：";
+}
+	
+const string CoreTools::UnitTest
+	::GetCorrectNothrowExceptionDescribe()
+{ 
+	return "正确的未抛出异常：";
+}
+
+const string CoreTools::UnitTest
+	::GetErrorNothrowExceptionDescribe()
+{ 
+	return "错误的未抛出异常：";
+}
+ 
 CoreTools::UnitTest
-	::UnitTest(ostream* osPtr)
+	::UnitTest(const OStreamShared& osPtr)
 	:ParentType{ osPtr }, m_DataPtr{ make_shared<UnitTestData>() }, m_CpuTimerImplPtr{ make_shared<CpuTimerData>() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -223,13 +247,13 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-		<< g_CorrectThrowExceptionDescribe
+		<< GetCorrectThrowExceptionDescribe()
 		<< errorMessage
 		<< " "
 		<< error
 		<< LogAppenderIOManageSign::Refresh;
 
-	ErrorTest(true, error.GetFunctionDescribed(), g_CorrectThrowExceptionDescribe);
+	ErrorTest(true, error.GetFunctionDescribed(), GetCorrectThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest
@@ -238,13 +262,13 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, functionDescribed)
-		<< g_CorrectThrowExceptionDescribe
+		<< GetCorrectThrowExceptionDescribe()
 		<< errorMessage
 		<< " "
 		<< error.what()
 		<< LogAppenderIOManageSign::Refresh;
 
-	ErrorTest(true, functionDescribed, g_CorrectThrowExceptionDescribe);
+	ErrorTest(true, functionDescribed, GetCorrectThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest
@@ -253,11 +277,11 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Warn, CoreTools, functionDescribed)
-		<< g_CorrectThrowExceptionDescribe
+		<< GetCorrectThrowExceptionDescribe()
 		<< errorMessage
 		<< LogAppenderIOManageSign::Refresh;
 
-	ErrorTest(true, functionDescribed, g_CorrectThrowExceptionDescribe);
+	ErrorTest(true, functionDescribed, GetCorrectThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest
@@ -266,13 +290,13 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-		<< g_ErrorThrowExceptionDescribe
+		<< GetErrorThrowExceptionDescribe()
 		<< errorMessage
 		<< " "
 		<< error
 		<< LOG_SINGLETON_TRIGGER_ASSERT;
 
-	ErrorTest(false, error.GetFunctionDescribed(), g_ErrorThrowExceptionDescribe);
+	ErrorTest(false, error.GetFunctionDescribed(), GetErrorThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest
@@ -281,11 +305,11 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed)
-		<< g_ErrorNothrowExceptionDescribe
+		<< GetErrorNothrowExceptionDescribe()
 		<< errorMessage
 		<< LOG_SINGLETON_TRIGGER_ASSERT;
 
-	ErrorTest(false, functionDescribed, g_ErrorNothrowExceptionDescribe);
+	ErrorTest(false, functionDescribed, GetErrorNothrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest
@@ -294,13 +318,13 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed)
-		<< g_ErrorThrowExceptionDescribe
+		<< GetErrorThrowExceptionDescribe()
 		<< errorMessage
 		<< " "
 		<< error.what()
 		<< LOG_SINGLETON_TRIGGER_ASSERT;
 
-	ErrorTest(false, functionDescribed, g_ErrorThrowExceptionDescribe);
+	ErrorTest(false, functionDescribed, GetErrorThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest
@@ -309,11 +333,11 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Fatal, CoreTools, functionDescribed)
-		<< g_ErrorThrowExceptionDescribe
+		<< GetErrorThrowExceptionDescribe()
 		<< errorMessage
 		<< LOG_SINGLETON_TRIGGER_ASSERT;
 
-	ErrorTest(false, functionDescribed, g_ErrorThrowExceptionDescribe);
+	ErrorTest(false, functionDescribed, GetErrorThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest
@@ -407,7 +431,7 @@ void CoreTools::UnitTest
 
 	auto runUnitTest = "正在运行测试 \"" + GetName() + "\"。\n";
 
-	*GetStream() << runUnitTest;
+	GetStream() << runUnitTest;
 }
 
 

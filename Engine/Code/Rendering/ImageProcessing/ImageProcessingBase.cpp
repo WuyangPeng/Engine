@@ -180,9 +180,9 @@ void Rendering::ImageProcessingBase
 {
     // Initialize the image processing by copying the image to a render
     // target.
-    renderer->Bind(mTargets[0].GetData());
-	renderer->Bind(mTargets[1].GetData());
-	renderer->Bind(mMainTexture.GetData());
+    renderer->Bind(mTargets[0]);
+	renderer->Bind(mTargets[1]);
+	renderer->Bind(mMainTexture);
     if (renderer->PreDraw())
     {
         renderer->SetCamera(mCamera);
@@ -220,10 +220,10 @@ void Rendering::ImageProcessingBase
             mRectangle->SetEffectInstance(mDrawEffectInstance);
         }
 
-		renderer->Enable(mTargets[0].GetData());
+		renderer->Enable(mTargets[0]);
         renderer->ClearColorBuffer();
-		renderer->Draw(mRectangle.GetData());
-		renderer->Disable(mTargets[0].GetData());
+		renderer->Draw(mRectangle);
+		renderer->Disable(mTargets[0]);
         if (openglHack)
         {
             // See the coments above for OpenGL.
@@ -238,9 +238,9 @@ void Rendering::ImageProcessingBase
 
         // Set the boundary conditions.
         mRectangle->SetEffectInstance(mBoundaryEffectInstance);
-		renderer->Enable(mTargets[1].GetData());
-		renderer->Draw(mRectangle.GetData());
-		renderer->Disable(mTargets[1].GetData());
+		renderer->Enable(mTargets[1]);
+		renderer->Draw(mRectangle);
+		renderer->Disable(mTargets[1]);
 
         renderer->PostDraw();
     }
@@ -254,21 +254,21 @@ void Rendering::ImageProcessingBase
     {
         PreDraw();
         mRectangle->SetEffectInstance(mDrawEffectInstance);
-		renderer->Draw(mRectangle.GetData());
+		renderer->Draw(mRectangle);
         PostDraw();
     }
 
     // Take a step using the main effect.
     mRectangle->SetEffectInstance(mMainEffectInstance);
-    renderer->Enable(mTargets[0].GetData());
-	renderer->Draw(mRectangle.GetData());
-	renderer->Disable(mTargets[0].GetData());
+    renderer->Enable(mTargets[0]);
+	renderer->Draw(mRectangle);
+	renderer->Disable(mTargets[0]);
 
     // Set the boundary conditions.
     mRectangle->SetEffectInstance(mBoundaryEffectInstance);
-	renderer->Enable(mTargets[1].GetData());
-	renderer->Draw(mRectangle.GetData());
-	renderer->Disable(mTargets[1].GetData());
+	renderer->Enable(mTargets[1]);
+	renderer->Draw(mRectangle);
+	renderer->Disable(mTargets[1]);
 }
 
 void Rendering::ImageProcessingBase

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2019/12/30 10:16)
+// 引擎版本：0.3.0.0 (2020/05/11 21:28)
 
 #include "ThreadingCoreRenderEngineExport.h"
 
@@ -19,8 +19,9 @@
 // 第七层：框架（Framework）。
 
 // 关联的外部库：
-// 直接关联：boost、stlsoft、Visual Leak Detector（Debug）、zlib、freeType，
-// 通过宏控制是否关联：ACE、openssl、mysql connector c++、freealut、wxWidgets、opencv、openal、lua。
+// 直接关联：gsl、CppCoreGuidelines、boost、stlsoft、Visual Leak Detector（Debug）、zlib、freeType，
+// 通过宏控制是否关联：ACE、openssl、mysql、mysql connector c++、protobuf、freeglut、wxWidgets、opencv、openal、lua，
+// 辅助模块关联：Zthread、OIS、ogg、vorbis、freealut、OgreAL、FLTK。
 
 // 包含四个相关模块：工具箱（Toolset）、编辑器（Editor）、例子（Example）、库例子（LibExample）。
 

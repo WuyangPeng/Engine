@@ -1,15 +1,15 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒıÇæ°æ±¾£º0.0.0.2 (2019/07/03 10:05)
+// ÒıÇæ°æ±¾£º0.0.2.5 (2020/03/16 12:30)
 
 #include "Database/DatabaseExport.h"
 
 #include "ResultRowImpl.h"
+#include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
-#include "System/Helper/UnusedMacro.h"
 
 using std::ostream;
 using std::string;

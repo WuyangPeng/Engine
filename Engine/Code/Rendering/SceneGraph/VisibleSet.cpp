@@ -26,9 +26,12 @@ CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,VisibleSet)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VisibleSet,GetNumVisible,int)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,VisibleSet,Insert,ConstSpatialSmartPointer,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VisibleSet,GetVisible,int, const Rendering::ConstSpatialSmartPointer&)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,VisibleSet,Insert, VisualSmartPointer,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VisibleSet,GetVisible,int, const Rendering::ConstVisualSmartPointer)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VisibleSet,Clear,void)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisibleSet, begin, Rendering::VisibleSet::VisualContainerIter)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisibleSet, end, Rendering::VisibleSet::VisualContainerIter) 
 
 

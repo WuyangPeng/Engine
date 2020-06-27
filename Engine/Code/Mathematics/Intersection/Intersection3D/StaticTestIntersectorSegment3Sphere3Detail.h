@@ -41,23 +41,23 @@ void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
 	auto a1 = Vector3DTools::DotProduct(mSegment.GetDirection(),diff);
 	auto discr = a1*a1 - a0;
-    if (discr < Real{})
+    if (discr < Math<Real>::sm_Zero)
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
 	auto tmp0 = mSegment.GetExtent()*mSegment.GetExtent() + a0;
-	auto tmp1 = ((Real)2)*a1*mSegment.GetExtent();
+	auto tmp1 = (static_cast<Real>(2))*a1*mSegment.GetExtent();
 	auto qm = tmp0 - tmp1;
 	auto qp = tmp0 + tmp1;
-    if (qm*qp <= Real{})
+    if (qm*qp <= Math<Real>::sm_Zero)
     {
 		this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-	if (qm > Real{} && Math::FAbs(a1) < mSegment.GetExtent())
+	if (qm > Math<Real>::sm_Zero && Math::FAbs(a1) < mSegment.GetExtent())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}

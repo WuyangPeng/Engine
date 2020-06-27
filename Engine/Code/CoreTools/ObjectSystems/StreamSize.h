@@ -11,7 +11,7 @@
 #include "ObjectInterface.h"
 #include "System/Helper/UnusedMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <type_traits>
 #include <vector>
 
@@ -24,7 +24,7 @@ namespace CoreTools
 	template <typename T, typename Enable = void>
 	struct StreamSize
 	{
-		static int GetStreamSize(T value)
+		static int GetStreamSize(T value = T{}) noexcept
 		{
 			SYSTEM_UNUSED_ARG(value);
 
@@ -70,7 +70,7 @@ namespace CoreTools
 	template <>
 	struct StreamSize<bool>
 	{
-		static int GetStreamSize(bool value)
+		constexpr static int GetStreamSize(bool value) noexcept
 		{
 			SYSTEM_UNUSED_ARG(value);
 
@@ -136,7 +136,7 @@ namespace CoreTools
 			else
 			{
 				auto size = g_DefaultSize;
-				for (const auto& single : value)
+				for (auto single : value)
 				{
 					size += StreamSize<std::string>::GetStreamSize(single);
 				}

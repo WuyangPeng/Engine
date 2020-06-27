@@ -190,10 +190,10 @@ bool Mathematics::Delaunay1<Real>
         }
         else
         {
-            bary[0] = (Real)1;
+            bary[0] = static_cast<Real>(1);
         }
 
-        bary[1] = (Real)1 - bary[0];
+        bary[1] = static_cast<Real>(1) - bary[0];
         return true;
     }
     return false;
@@ -202,7 +202,7 @@ bool Mathematics::Delaunay1<Real>
 template <typename Real>
 Mathematics::Delaunay1<Real>
 	::Delaunay1(const System::TChar* filename)
-	:Delaunay<Real>{ 0, Real{}, false, QueryType::Real }
+	:Delaunay<Real>{ 0, Math<Real>::sm_Zero, false, QueryType::Real }
 {
     mVertices = 0;
 	auto loaded = Load(filename);

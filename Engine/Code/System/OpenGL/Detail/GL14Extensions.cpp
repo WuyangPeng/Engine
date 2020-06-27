@@ -75,271 +75,274 @@ System::PgglWindowPos3sv System::gglWindowPos3sv{ nullptr };
 void System
 	::GlBlendFuncSeparate(GLenum srcFactorRGB, GLenum dstFactorRGB, GLenum srcFactorA, GLenum dstFactorA) noexcept
 {
-	SYSTEM_BODY_A4(gglBlendFuncSeparate, srcFactorRGB, dstFactorRGB, srcFactorA, dstFactorA);
+	SYSTEM_BODY_4(gglBlendFuncSeparate, srcFactorRGB, dstFactorRGB, srcFactorA, dstFactorA);
 }
 
 void System
 	::GlFogCoordd(GLdouble coord) noexcept
 {
-	SYSTEM_BODY_A1(gglFogCoordd, coord);
+	SYSTEM_BODY_1(gglFogCoordd, coord);
 }
 
 void System
 	::GlFogCoorddv(const GLdouble* coord) noexcept
 {
-	SYSTEM_BODY_A1(gglFogCoorddv, coord);
+	SYSTEM_BODY_1(gglFogCoorddv, coord);
 }
 
 void System
 	::GlFogCoordf(GLfloat coord) noexcept
 {
-	SYSTEM_BODY_A1(gglFogCoordf, coord);
+	SYSTEM_BODY_1(gglFogCoordf, coord);
 }
 
 void System
 	::GlFogCoordfv(const GLfloat* coord) noexcept
 {
-	SYSTEM_BODY_A1(gglFogCoordfv, coord);
+	SYSTEM_BODY_1(gglFogCoordfv, coord);
 }
 
 void System
 	::GlFogCoordPointer(GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A3(gglFogCoordPointer, type, stride, pointer);
+	SYSTEM_BODY_3(gglFogCoordPointer, type, stride, pointer);
 }
 
 void System
 	::GlMultiDrawArrays(GLenum mode, GLint* first, GLsizei* count, GLsizei primitiveCount) noexcept
 {
-	SYSTEM_BODY_A4(gglMultiDrawArrays, mode, first, count, primitiveCount);
+	SYSTEM_BODY_4(gglMultiDrawArrays, mode, first, count, primitiveCount);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 void System
 	::GlMultiDrawElements(GLenum mode, const GLsizei* count, GLenum type, const GLvoid** indices, GLsizei primitiveCount) noexcept
 {
-	SYSTEM_BODY_A5(gglMultiDrawElements, mode, count, type, indices, primitiveCount);
+	SYSTEM_BODY_5(gglMultiDrawElements, mode, count, type, indices, primitiveCount);
 }
+#include STSTEM_WARNING_POP
 
 void System
 	::GlPointParameterf(GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_BODY_A2(gglPointParameterf, name, param);
+	SYSTEM_BODY_2(gglPointParameterf, name, param);
 }
 
 void System
 	::GlPointParameterfv(GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_A2(gglPointParameterfv, name, param);
+	SYSTEM_BODY_2(gglPointParameterfv, name, param);
 }
 
 void System
 	::GlPointParameteri(GLenum name, int param) noexcept
 {
-	SYSTEM_BODY_A2(gglPointParameteri, name, param);
+	SYSTEM_BODY_2(gglPointParameteri, name, param);
 }
 
 void System
 	::GlPointParameteriv(GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_BODY_A2(gglPointParameteriv, name, param);
+	SYSTEM_BODY_2(gglPointParameteriv, name, param);
 }
 
 void System
 	::GlSecondaryColor3b(GLbyte red, GLbyte green, GLbyte blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3b, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3b, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3bv(const GLbyte* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3bv, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3bv, rgb);
 }
 
 void System
 	::GlSecondaryColor3d(GLdouble red, GLdouble green, GLdouble blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3d, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3d, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3dv(const GLdouble* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3dv, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3dv, rgb);
 }
 
 void System
 	::GlSecondaryColor3f(GLfloat red, GLfloat green, GLfloat blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3f, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3f, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3fv(const GLfloat* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3fv, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3fv, rgb);
 }
 
 void System
 	::GlSecondaryColor3i(GLint red, GLint green, GLint blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3i, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3i, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3iv(const GLint* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3iv, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3iv, rgb);
 }
 
 void System
 	::GlSecondaryColor3s(GLshort red, GLshort green, GLshort blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3s, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3s, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3sv(const GLshort* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3sv, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3sv, rgb);
 }
 
 void System
 	::GlSecondaryColor3ub(GLubyte red, GLubyte green, GLubyte blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3ub, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3ub, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3ubv(const GLubyte* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3ubv, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3ubv, rgb);
 }
 
 void System
 	::GlSecondaryColor3ui(GLuint red, GLuint green, GLuint blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3ui, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3ui, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3uiv(const GLuint* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3uiv, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3uiv, rgb);
 }
 
 void System
 	::GlSecondaryColor3us(GLushort red, GLushort green, GLushort blue) noexcept
 {
-	SYSTEM_BODY_A3(gglSecondaryColor3us, red, green, blue);
+	SYSTEM_BODY_3(gglSecondaryColor3us, red, green, blue);
 }
 
 void System
 	::GlSecondaryColor3usv(const GLushort* rgb) noexcept
 {
-	SYSTEM_BODY_A1(gglSecondaryColor3usv, rgb);
+	SYSTEM_BODY_1(gglSecondaryColor3usv, rgb);
 }
 
 void System
 	::GlSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_A4(gglSecondaryColorPointer, size, type, stride, pointer);
+	SYSTEM_BODY_4(gglSecondaryColorPointer, size, type, stride, pointer);
 }
 
 void System
 	::GlWindowPos2d(GLdouble x, GLdouble y) noexcept
 {
-	SYSTEM_BODY_A2(gglWindowPos2d, x, y);
+	SYSTEM_BODY_2(gglWindowPos2d, x, y);
 }
 
 void System
 	::GlWindowPos2dv(const GLdouble* xy) noexcept
 {
-	SYSTEM_BODY_A1(gglWindowPos2dv, xy);
+	SYSTEM_BODY_1(gglWindowPos2dv, xy);
 }
 
 void System
 	::GlWindowPos2f(GLfloat x, GLfloat y) noexcept
 {
-	SYSTEM_BODY_A2(gglWindowPos2f, x, y);
+	SYSTEM_BODY_2(gglWindowPos2f, x, y);
 }
 
 void System
 	::GlWindowPos2fv(const GLfloat* xy) noexcept
 {
-	SYSTEM_BODY_A1(gglWindowPos2fv, xy);
+	SYSTEM_BODY_1(gglWindowPos2fv, xy);
 }
 
 void System
 	::GlWindowPos2i(GLint x, GLint y) noexcept
 {
-	SYSTEM_BODY_A2(gglWindowPos2i, x, y);
+	SYSTEM_BODY_2(gglWindowPos2i, x, y);
 }
 
 void System
 	::GlWindowPos2iv(const GLint* xy) noexcept
 {
-	SYSTEM_BODY_A1(gglWindowPos2iv, xy);
+	SYSTEM_BODY_1(gglWindowPos2iv, xy);
 }
 
 void System
 	::GlWindowPos2s(GLshort x, GLshort y) noexcept
 {
-	SYSTEM_BODY_A2(gglWindowPos2s, x, y);
+	SYSTEM_BODY_2(gglWindowPos2s, x, y);
 }
 
 void System
 	::GlWindowPos2sv(const GLshort* xy) noexcept
 {
-	SYSTEM_BODY_A1(gglWindowPos2sv, xy);
+	SYSTEM_BODY_1(gglWindowPos2sv, xy);
 }
 
 void System
 	::GlWindowPos3d(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_BODY_A3(gglWindowPos3d, x, y, z);
+	SYSTEM_BODY_3(gglWindowPos3d, x, y, z);
 }
 
 void System
 	::GlWindowPos3dv(const GLdouble* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglWindowPos3dv, xyz);
+	SYSTEM_BODY_1(gglWindowPos3dv, xyz);
 }
 
 void System
 	::GlWindowPos3f(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_BODY_A3(gglWindowPos3f, x, y, z);
+	SYSTEM_BODY_3(gglWindowPos3f, x, y, z);
 }
 
 void System
 	::GlWindowPos3fv(const GLfloat* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglWindowPos3fv, xyz);
+	SYSTEM_BODY_1(gglWindowPos3fv, xyz);
 }
 
 void System
 	::GlWindowPos3i(GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_BODY_A3(gglWindowPos3i, x, y, z);
+	SYSTEM_BODY_3(gglWindowPos3i, x, y, z);
 }
 
 void System
 	::GlWindowPos3iv(const GLint* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglWindowPos3iv, xyz);
+	SYSTEM_BODY_1(gglWindowPos3iv, xyz);
 }
 
 void System
 	::GlWindowPos3s(GLshort x, GLshort y, GLshort z) noexcept
 {
-	SYSTEM_BODY_A3(gglWindowPos3s, x, y, z);
+	SYSTEM_BODY_3(gglWindowPos3s, x, y, z);
 }
 
 void System
 	::GlWindowPos3sv(const GLshort* xyz) noexcept
 {
-	SYSTEM_BODY_A1(gglWindowPos3sv, xyz);
+	SYSTEM_BODY_1(gglWindowPos3sv, xyz);
 }
 
 void System

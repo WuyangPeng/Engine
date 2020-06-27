@@ -9,7 +9,7 @@
 #include "SecurityAcl.h" 
 #include "System/Helper/WindowsMacro.h"
 #include "System/Helper/UnusedMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 bool System
 	::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclRevisionInformationPtr aclInformation) noexcept

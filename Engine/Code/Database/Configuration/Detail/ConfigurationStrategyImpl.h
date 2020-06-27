@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 09:39)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 10:52)
 
 #ifndef DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
 #define DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
@@ -11,12 +11,12 @@
 
 #include "Database/Configuration/Flags/ConfigurationStrategyFlags.h" 
 
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 namespace Database
-{	
+{
 	class DATABASE_HIDDEN_DECLARE ConfigurationStrategyImpl
 	{
 	public:
@@ -26,23 +26,23 @@ namespace Database
 		using BooleanOption = std::map<std::string, bool>;
 		using IntOption = std::map<std::string, int>;
 		using SSLOption = std::map<std::string, std::string>;
-		using DBMapping = std::map<int,std::string>;
+		using DBMapping = std::map<int, std::string>;
 
 	public:
-		ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,const std::string& ip,uint32_t port,
-			                      const std::string& hostName,const std::string& userName,const std::string& password);
-		ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,const std::string& ip,uint32_t port,
-			                      const std::string& hostName,const std::string& userName,const std::string& password,
-			                      bool pooling, int poolMaxSize, int poolQueueTimeout, int poolMaxIdleTime,
-			                      const FlagsOption& flagsOption,const StringOption& stringOption,const BooleanOption& booleanOption,
-			                      const IntOption& intOption, const SSLOption& sslOption,const DBMapping& dbMapping);
+		ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy, const std::string& ip, int port,
+								  const std::string& hostName, const std::string& userName, const std::string& password);
+		ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy, const std::string& ip, int port,
+								  const std::string& hostName, const std::string& userName, const std::string& password,
+								  bool pooling, int poolMaxSize, int poolQueueTimeout, int poolMaxIdleTime,
+								  const FlagsOption& flagsOption, const StringOption& stringOption, const BooleanOption& booleanOption,
+								  const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping);
 
 		CLASS_INVARIANT_DECLARE;
-		 	 
+
 		WrappersStrategy GetWrappersStrategy() const;
 
 		std::string GetIP() const;
-		uint32_t GetPort() const;
+		int GetPort() const;
 		std::string GetDBHostName() const;
 		std::string GetDBUserName() const;
 		std::string GetDBPassword() const;
@@ -64,7 +64,7 @@ namespace Database
 	private:
 		WrappersStrategy m_WrappersStrategyFlag;
 		std::string m_IP;
-		uint32_t m_Port;
+		int m_Port;
 		std::string m_HostName;
 		std::string m_UserName;
 		std::string m_Password;
@@ -78,8 +78,8 @@ namespace Database
 		BooleanOption m_BooleanOptions;
 		IntOption m_IntOptions;
 		SSLOption m_SSLOptions;
-		DBMapping m_DBMapping;				
+		DBMapping m_DBMapping;
 	};
-} 
+}
 
 #endif // DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H

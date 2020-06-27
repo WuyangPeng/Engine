@@ -77,7 +77,7 @@ template <typename Real>
 Real QuadricSurface<Real>::FX (const Vector3D<Real>& pos) const
 {
     Real sum = mA[0][0]*pos[0] + mA[0][1]*pos[1] + mA[0][2]*pos[2];
-    Real fx = ((Real)2)*sum + mB[0];
+    Real fx = (static_cast<Real>(2))*sum + mB[0];
     return fx;
 }
 
@@ -85,7 +85,7 @@ template <typename Real>
 Real QuadricSurface<Real>::FY (const Vector3D<Real>& pos) const
 {
     Real sum = mA[1][0]*pos[0] + mA[1][1]*pos[1] + mA[1][2]*pos[2];
-    Real fy = ((Real)2)*sum + mB[1];
+    Real fy = (static_cast<Real>(2))*sum + mB[1];
     return fy;
 }
 
@@ -93,49 +93,49 @@ template <typename Real>
 Real QuadricSurface<Real>::FZ (const Vector3D<Real>& pos) const
 {
     Real sum = mA[2][0]*pos[0] + mA[2][1]*pos[1] + mA[2][2]*pos[2];
-    Real fz = ((Real)2)*sum + mB[2];
+    Real fz = (static_cast<Real>(2))*sum + mB[2];
     return fz;
 }
 
 template <typename Real>
 Real QuadricSurface<Real>::FXX (const Vector3D<Real>&) const
 {
-    Real fxx = ((Real)2)*mA[0][0];
+    Real fxx = (static_cast<Real>(2))*mA[0][0];
     return fxx;
 }
 
 template <typename Real>
 Real QuadricSurface<Real>::FXY (const Vector3D<Real>&) const
 {
-    Real fxy = ((Real)2)*mA[0][1];
+    Real fxy = (static_cast<Real>(2))*mA[0][1];
     return fxy;
 }
 
 template <typename Real>
 Real QuadricSurface<Real>::FXZ (const Vector3D<Real>&) const
 {
-    Real fxz = ((Real)2)*mA[0][2];
+    Real fxz = (static_cast<Real>(2))*mA[0][2];
     return fxz;
 }
 
 template <typename Real>
 Real QuadricSurface<Real>::FYY (const Vector3D<Real>&) const
 {
-    Real fyy = ((Real)2)*mA[1][1];
+    Real fyy = (static_cast<Real>(2))*mA[1][1];
     return fyy;
 }
 
 template <typename Real>
 Real QuadricSurface<Real>::FYZ (const Vector3D<Real>&) const
 {
-    Real fyz = ((Real)2)*mA[1][2];
+    Real fyz = (static_cast<Real>(2))*mA[1][2];
     return fyz;
 }
 
 template <typename Real>
 Real QuadricSurface<Real>::FZZ (const Vector3D<Real>&) const
 {
-    Real fzz = ((Real)2)*mA[2][2];
+    Real fzz = (static_cast<Real>(2))*mA[2][2];
     return fzz;
 }
 

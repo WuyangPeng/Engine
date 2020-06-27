@@ -8,14 +8,9 @@
   <ItemDefinitionGroup>
     <Link>
       <AdditionalLibraryDirectories>$(LibsEnvironmentWin32ReleaseLib);$(EngineStaticWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
+    </Link>   
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup />
 </Project>

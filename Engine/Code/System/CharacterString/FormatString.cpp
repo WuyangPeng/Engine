@@ -2,14 +2,14 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 13:27)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/09 16:32)
 
 #include "System/SystemExport.h"
 
 #include "FormatString.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
 #include <cstdio>
 #include <cstring>
@@ -54,7 +54,7 @@ size_t System
 }
 
 bool System
-	::StringCopyUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src)  
+	::StringCopyUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchCopy(dest, destCharactersSize, src)))
@@ -71,8 +71,7 @@ bool System
 }
 
 bool System
-	::StringCopyUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src,
-								  TChar** destEnd, size_t* remaining, StringSafe flag)  
+	::StringCopyUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchCopyEx(dest, destCharactersSize, src, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -92,7 +91,7 @@ bool System
 }
 
 bool System
-	::StringCopyUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src)  
+	::StringCopyUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbCopy(dest, destBytesSize, src)))
@@ -109,7 +108,7 @@ bool System
 }
 
 bool System
-	::StringCopyUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, TChar** destEnd, size_t* remaining, StringSafe flag)  
+	::StringCopyUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbCopyEx(dest, destBytesSize, src, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -129,7 +128,7 @@ bool System
 }
 
 bool System
-	::StringCopyUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, size_t srcCharactersSize)  
+	::StringCopyUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, size_t srcCharactersSize)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchCopyN(dest, destCharactersSize, src, srcCharactersSize)))
@@ -147,7 +146,7 @@ bool System
 }
 
 bool System
-	::StringCopyUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, size_t srcBytesSize)  
+	::StringCopyUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, size_t srcBytesSize)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbCopyN(dest, destBytesSize, src, srcBytesSize)))
@@ -166,7 +165,7 @@ bool System
 
 bool System
 	::StringCopyUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, size_t srcCharactersSize,
-								  TChar** destEnd, size_t* remaining, StringSafe flag)  
+								  TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchCopyNEx(dest, destCharactersSize, src, srcCharactersSize, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -187,7 +186,7 @@ bool System
 }
 
 bool System
-	::StringCopyUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, size_t srcBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag)  
+	::StringCopyUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, size_t srcBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbCopyNEx(dest, destBytesSize, src, srcBytesSize, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -208,7 +207,7 @@ bool System
 }
 
 bool System
-	::StringCatUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src)  
+	::StringCatUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchCat(dest, destCharactersSize, src)))
@@ -225,7 +224,7 @@ bool System
 }
 
 bool System
-	::StringCatUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, TChar** destEnd, size_t* remaining, StringSafe flag)  
+	::StringCatUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchCatEx(dest, destCharactersSize, src, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -245,7 +244,7 @@ bool System
 }
 
 bool System
-	::StringCatUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, size_t appendCharactersSize)  
+	::StringCatUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, size_t appendCharactersSize)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchCatN(dest, destCharactersSize, src, appendCharactersSize)))
@@ -263,7 +262,7 @@ bool System
 }
 
 bool System
-	::StringCatUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, size_t appendCharactersSize, TChar** destEnd, size_t* remaining, StringSafe flag) 
+	::StringCatUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* src, size_t appendCharactersSize, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchCatNEx(dest, destCharactersSize, src, appendCharactersSize, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -284,7 +283,7 @@ bool System
 }
 
 bool System
-	::StringCatUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src)  
+	::StringCatUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbCat(dest, destBytesSize, src)))
@@ -301,7 +300,7 @@ bool System
 }
 
 bool System
-	::StringCatUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, TChar** destEnd, size_t* remaining, StringSafe flag)  
+	::StringCatUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbCatEx(dest, destBytesSize, src, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -321,7 +320,7 @@ bool System
 }
 
 bool System
-	::StringCatUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, size_t appendBytesSize)  
+	::StringCatUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, size_t appendBytesSize)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbCatN(dest, destBytesSize, src, appendBytesSize)))
@@ -339,7 +338,7 @@ bool System
 }
 
 bool System
-	::StringCatUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, size_t appendBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag)  
+	::StringCatUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* src, size_t appendBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbCatNEx(dest, destBytesSize, src, appendBytesSize, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -360,7 +359,7 @@ bool System
 }
 
 bool System
-	::StringGetsUseCharactersSize(TChar* dest, size_t destCharactersSize)  
+	::StringGetsUseCharactersSize(TChar* dest, size_t destCharactersSize)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchGets(dest, destCharactersSize)))
@@ -376,7 +375,7 @@ bool System
 }
 
 bool System
-	::StringGetsUseCharactersSize(TChar* dest, size_t destCharactersSize, TChar** destEnd, size_t* remaining, StringSafe flag) 
+	::StringGetsUseCharactersSize(TChar* dest, size_t destCharactersSize, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchGetsEx(dest, destCharactersSize, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -395,7 +394,7 @@ bool System
 }
 
 bool System
-	::StringGetsUseBytesSize(TChar* dest, size_t destBytesSize)  
+	::StringGetsUseBytesSize(TChar* dest, size_t destBytesSize)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbGets(dest, destBytesSize)))
@@ -411,7 +410,7 @@ bool System
 }
 
 bool System
-	::StringGetsUseBytesSize(TChar* dest, size_t destBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag)  
+	::StringGetsUseBytesSize(TChar* dest, size_t destBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbGetsEx(dest, destBytesSize, destEnd, remaining, EnumCastUnderlying(flag))))
@@ -430,7 +429,7 @@ bool System
 }
 
 bool System
-	::StringLengthUseCharactersSize(const TChar* src, size_t maxCharactersSize, size_t* charactersLength)  
+	::StringLengthUseCharactersSize(const TChar* src, size_t maxCharactersSize, size_t* charactersLength)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchLength(src, maxCharactersSize, charactersLength)))
@@ -447,7 +446,7 @@ bool System
 }
 
 bool System
-	::StringLengthUseBytesSize(const TChar* src, size_t maxBytesSize, size_t* bytesLength)  
+	::StringLengthUseBytesSize(const TChar* src, size_t maxBytesSize, size_t* bytesLength)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbLength(src, maxBytesSize, bytesLength)))
@@ -464,7 +463,7 @@ bool System
 }
 
 bool System
-	::StringVPrintfUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* format, va_list argList)  
+	::StringVPrintfUseCharactersSize(TChar* dest, size_t destCharactersSize, const TChar* format, va_list argList)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchVPrintf(dest, destCharactersSize, format, argList)))
@@ -482,7 +481,7 @@ bool System
 }
 
 bool System
-	::StringVPrintfUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* format, va_list argList)  
+	::StringVPrintfUseBytesSize(TChar* dest, size_t destBytesSize, const TChar* format, va_list argList)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbVPrintf(dest, destBytesSize, format, argList)))
@@ -500,7 +499,7 @@ bool System
 }
 
 bool System
-	::StringVPrintfUseCharactersSize(TChar* dest, size_t destCharactersSize, TChar** destEnd, size_t* remaining, StringSafe flag, const TChar* format, va_list argList)  
+	::StringVPrintfUseCharactersSize(TChar* dest, size_t destCharactersSize, TChar** destEnd, size_t* remaining, StringSafe flag, const TChar* format, va_list argList)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCchVPrintfEx(dest, destCharactersSize, destEnd, remaining, EnumCastUnderlying(flag), format, argList)))
@@ -521,7 +520,7 @@ bool System
 }
 
 bool System
-	::StringVPrintfUseBytesSize(TChar* dest, size_t destBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag, const TChar* format, va_list argList)  
+	::StringVPrintfUseBytesSize(TChar* dest, size_t destBytesSize, TChar** destEnd, size_t* remaining, StringSafe flag, const TChar* format, va_list argList)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (IsFailed(::StringCbVPrintfEx(dest, destBytesSize, destEnd, remaining, EnumCastUnderlying(flag), format, argList)))

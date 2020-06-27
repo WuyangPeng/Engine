@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/09 11:33)
+// 引擎版本：0.0.2.5 (2020/03/20 13:03)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -16,7 +16,7 @@ void Mathematics::SolveSymmetricConjugateGradient<float, Mathematics::SparseMatr
 {
 	m_Product.assign(m_Size, 0.0f);
 
-	for (auto iter = m_Matrix.GetBegin(),  end = m_Matrix.GetEnd(); iter != end;++iter)
+	for (auto iter = m_Matrix.GetBegin(), end = m_Matrix.GetEnd(); iter != end; ++iter)
 	{
 		auto row = iter.GetKey().GetRow();
 		auto column = iter.GetKey().GetColumn();
@@ -35,8 +35,8 @@ void Mathematics::SolveSymmetricConjugateGradient<double, Mathematics::SparseMat
 	::Multiply()
 {
 	m_Product.assign(m_Size, 0.0);
-	
-	for (auto iter = m_Matrix.GetBegin(),  end = m_Matrix.GetEnd(); iter != end;++iter)
+
+	for (auto iter = m_Matrix.GetBegin(), end = m_Matrix.GetEnd(); iter != end; ++iter)
 	{
 		auto row = iter.GetKey().GetRow();
 		auto column = iter.GetKey().GetColumn();

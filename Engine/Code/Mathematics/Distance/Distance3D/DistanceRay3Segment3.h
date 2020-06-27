@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 15:56)
+// 引擎版本：0.0.2.5 (2020/03/23 17:18)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H 
@@ -11,16 +11,11 @@
 
 #include "Mathematics/Objects3D/Ray3.h"
 #include "Mathematics/Objects3D/Segment3.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Distance/DistanceBase.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector3DTools;
-
-	template <typename Real>
-	class DistanceLine3Line3Tool;
-
 	template <typename Real>
 	class DistanceRay3Segment3 : public DistanceBase<Real, Vector3D<Real> >
 	{
@@ -33,7 +28,6 @@ namespace Mathematics
 		using Vector3DTools = Vector3DTools<Real>;
 		using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
 		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
 		using Math = Math<Real>;
 
 	public:
@@ -49,7 +43,7 @@ namespace Mathematics
 		virtual const DistanceResult GetSquared() const override;
 
 		// 函数计算动态距离查询。	
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		const DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;

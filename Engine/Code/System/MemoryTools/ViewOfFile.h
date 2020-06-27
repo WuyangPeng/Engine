@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 15:23)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/10 0:08)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_H
 #define SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_H
@@ -27,7 +27,7 @@ namespace System
 	WindowVoidPtr SYSTEM_DEFAULT_DECLARE MapSystemViewOfFile(WindowHandle fileMappingObject, FileMapDesiredAccess desiredAccess, WindowDWord maximumSizeHigh,
 															 WindowDWord maximumSizeLow, WindowSize numberOfBytesToMap) noexcept;
 	WindowVoidPtr SYSTEM_DEFAULT_DECLARE MapSystemViewOfFile(WindowHandle fileMappingObject, FileMapDesiredAccess desiredAccess, WindowDWord maximumSizeHigh,
-														     WindowDWord maximumSizeLow, WindowSize numberOfBytesToMap, WindowVoidPtr baseAddress) noexcept;
+															 WindowDWord maximumSizeLow, WindowSize numberOfBytesToMap, WindowVoidPtr baseAddress) noexcept;
 
 	bool SYSTEM_DEFAULT_DECLARE FlushSystemViewOfFile(WindowVoidPtr baseAddress, WindowSize numberOfBytesToFlush) noexcept;
 	bool SYSTEM_DEFAULT_DECLARE UnmapSystemViewOfFile(WindowVoidPtr baseAddress) noexcept;

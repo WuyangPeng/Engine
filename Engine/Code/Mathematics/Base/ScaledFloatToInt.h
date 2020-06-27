@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 19:32)
+// 引擎版本：0.0.2.5 (2020/03/18 19:11)
 
 #ifndef MATHEMATICS_BASE_SCALED_FLOAT_TO_INT_H
 #define MATHEMATICS_BASE_SCALED_FLOAT_TO_INT_H
@@ -17,7 +17,7 @@ namespace Mathematics
 		using ClassType = ScaledFloatToInt;
 
 	public:
-		ScaledFloatToInt (float value, int power);	
+		ScaledFloatToInt(float value, int power);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -30,11 +30,11 @@ namespace Mathematics
 
 	private:
 		float m_FloatValue;
-		int m_IntegerValue;
+		int32_t m_IntegerValue;
 		int m_Power;
 		int m_Shift;
 		int m_Result;
-	};	
+	};
 }
 
 #endif // MATHEMATICS_BASE_SCALED_FLOAT_TO_INT_H

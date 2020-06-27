@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 10:40)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 10:11)
 
 #ifndef MATHEMATICS_ALGEBRA_EULER_H
 #define MATHEMATICS_ALGEBRA_EULER_H
@@ -19,19 +19,19 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Euler  
+	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Euler
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Euler<Real>;
 		using Math = Math<Real>;
 
 	public:
-		Euler (ExtractEulerResultType type, ExtractEulerResultOrder order,
-               Real x0Angle,Real y0Angle,Real z0Angle,
-               Real x1Angle,Real y1Angle,Real z1Angle);
-	
+		Euler(ExtractEulerResultType type, ExtractEulerResultOrder order,
+			  Real x0Angle, Real y0Angle, Real z0Angle,
+			  Real x1Angle, Real y1Angle, Real z1Angle);
+
 		CLASS_INVARIANT_DECLARE;
 
 		ExtractEulerResultType GetType() const;
@@ -43,8 +43,8 @@ namespace Mathematics
 		Real GetY1Angle() const;
 		Real GetZ1Angle() const;
 		Real GetAngle(MatrixRotationAxis axisIndex) const;
-		void SetAngle(MatrixRotationAxis axisIndex,Real angle);
-	
+		void SetAngle(MatrixRotationAxis axisIndex, Real angle);
+
 	private:
 		ExtractEulerResultType m_Type;
 		ExtractEulerResultOrder m_Order;

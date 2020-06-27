@@ -1,16 +1,17 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 09:32)
+// 引擎版本：0.0.2.5 (2020/03/16 10:15)
 
 #ifndef DATABASE_FWD_H
 #define DATABASE_FWD_H
  
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "Configuration/ConfigurationFwd.h"
 #include "Statement/StatementFwd.h"
 #include "SqlInterface/SqlInterfaceFwd.h"
+#include "MysqlWrappers/MysqlWrappersFwd.h"
 #include "MysqlConnectorWrappers/MysqlConnectorWrappersFwd.h"
 #include "SqlServerWrappers/SqlServerWrappersFwd.h"
 #include "SQLiteWrappers/SQLiteWrappersFwd.h"

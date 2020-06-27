@@ -11,7 +11,7 @@
 #include "Rendering/Dx9Renderer/Dx9VertexBuffer.h"
 #include "Rendering/OpenGLRenderer/OpenGLVertexBuffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 using std::make_shared;
 
 Rendering::PlatformVertexBufferImpl

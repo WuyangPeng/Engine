@@ -1,15 +1,15 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:23)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 16:40)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_INTERFACE_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_INTERFACE_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Android/Flags/AndroidNativeAppGlueFlags.h"
+#include "System/Android/Fwd/AndroidFlagsFwd.h"
 #include "System/Android/Using/AndroidNativeAppGlueUsing.h"
 
 namespace Framework
@@ -17,54 +17,51 @@ namespace Framework
 	class FRAMEWORK_DEFAULT_DECLARE AndroidCallBackInterface
 	{
 	public:
-		typedef AndroidCallBackInterface ClassType;
-		typedef System::AndroidApp AndroidApp;
-		typedef System::AndroidInputEvent AndroidInputEvent;
-		typedef void (ClassType::*HandleCmdFunctionPointer)
-			    (struct AndroidApp* state);
-		typedef int (ClassType::*HandleInputFunctionPointer)
-			    (struct AndroidApp* app, AndroidInputEvent* event);
-	
+		using ClassType = AndroidCallBackInterface;
+		using AndroidApp = System::AndroidApp;
+		using AndroidInputEvent = System::AndroidInputEvent;
+		using HandleCmdFunctionPointer = void (ClassType::*)(AndroidApp* androidApp);
+		using HandleInputFunctionPointer = int (ClassType::*)(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+
 	public:
-		AndroidCallBackInterface();
-		virtual ~AndroidCallBackInterface();
+		explicit AndroidCallBackInterface(int64_t delta) noexcept;
+		virtual ~AndroidCallBackInterface() noexcept = default;
+		AndroidCallBackInterface(const AndroidCallBackInterface&) noexcept = default;
+		AndroidCallBackInterface& operator=(const AndroidCallBackInterface&) noexcept = default;
+		AndroidCallBackInterface(AndroidCallBackInterface&&) noexcept = default;
+		AndroidCallBackInterface& operator=(AndroidCallBackInterface&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		void NotDealCmdMessage(struct AndroidApp* state);
+		virtual void NotDealCmdMessage(AndroidApp* androidApp);
+		virtual void InitMessage(AndroidApp* androidApp);
+		virtual void TermMessage(AndroidApp* androidApp);
+		virtual void ResizedMessage(AndroidApp* androidApp);
+		virtual void RedrawNeededMessage(AndroidApp* androidApp);
+		virtual void RectChanged(AndroidApp* androidApp);
 
-		virtual void InitMessage(struct AndroidApp* state);
-		virtual void TermMessage(struct AndroidApp* state);
-		virtual void ResizedMessage(struct AndroidApp* state);
-		virtual void RedrawNeededMessage(struct AndroidApp* state);
-		virtual void RectChanged(struct AndroidApp* state);
+		virtual int NotDealInputMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+		virtual int KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+		virtual int KeyUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+		virtual int ActionDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+		virtual int ActionUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+		virtual int ActionMoveMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
 
-		int NotDealInputMessage(struct AndroidApp* state, 
-			                        AndroidInputEvent* event);
-
-		virtual int KeyDownMessage(struct AndroidApp* state,
-			                           AndroidInputEvent* event);
-		virtual int KeyUpMessage(struct AndroidApp* state,
-			                         AndroidInputEvent* event);
-		virtual int ActionDownMessage(struct AndroidApp* state,
-			                              AndroidInputEvent* event);
-		virtual int ActionUpMessage(struct AndroidApp* state, 
-			                            AndroidInputEvent* event);
-		virtual int ActionMoveMessage(struct AndroidApp* state, 
-			                              AndroidInputEvent* event);	
-
-		virtual void Display(struct AndroidApp* state,int64_t timeDelta);
-		virtual unsigned char GetTerminateKey() const;
+		virtual void Display(AndroidApp* androidApp, int64_t timeDelta);
+		virtual int GetTerminateKey() const noexcept;
 
 		virtual bool PreCreate();
 		virtual bool Initialize();
 		virtual void PreIdle();
 		virtual void Terminate();
 
-		AndroidApp* GetAndroidApp();
+		AndroidApp* GetAndroidApp() noexcept;
+
+		int64_t GetDelta() const noexcept;
 
 	private:
 		AndroidApp* m_State;
+		int64_t m_Delta;
 	};
 }
 

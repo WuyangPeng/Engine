@@ -1,27 +1,28 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 09:44)
+// 引擎版本：0.0.2.5 (2020/03/16 11:03)
 
 #include "Database/DatabaseExport.h" 
 
 #include "AnalysisDatabaseConfigurationImpl.h" 
+#include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/CharacterString/CaseInsensitiveStringDetail.h" 
 
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
-using std::string; 
-using std::vector;
 using std::map;
+using std::string;
+using std::vector;
+using namespace std::literals;
 
 Database::AnalysisDatabaseConfigurationImpl
-	::AnalysisDatabaseConfigurationImpl( const string& fileName )
+	::AnalysisDatabaseConfigurationImpl(const string& fileName)
 	:m_Container{}, m_FileName{ fileName }, m_MainTree{}
 {
 	Analysis();
@@ -35,7 +36,7 @@ CLASS_INVARIANT_STUB_DEFINE(Database, AnalysisDatabaseConfigurationImpl)
 void Database::AnalysisDatabaseConfigurationImpl
 	::Analysis()
 {
-	AnalysisJson(); 
+	AnalysisJson();
 	AnalysisMain();
 }
 
@@ -43,7 +44,7 @@ void Database::AnalysisDatabaseConfigurationImpl
 void Database::AnalysisDatabaseConfigurationImpl
 	::AnalysisJson()
 {
-	read_json(m_FileName,m_MainTree);
+	read_json(m_FileName, m_MainTree);
 }
 
 // private
@@ -53,8 +54,8 @@ void Database::AnalysisDatabaseConfigurationImpl
 	for (const auto& ptree : m_MainTree)
 	{
 		try
-		{		
-			InsertStrategy(ptree.first, ptree.second);		
+		{
+			InsertStrategy(ptree.first, ptree.second);
 		}
 		catch (CoreTools::Error& error)
 		{
@@ -64,7 +65,7 @@ void Database::AnalysisDatabaseConfigurationImpl
 				<< SYSTEM_TEXT("配置值错误：")
 				<< error
 				<< CoreTools::LogAppenderIOManageSign::TriggerAssert;
-		}	
+		}
 	}
 }
 
@@ -72,19 +73,19 @@ void Database::AnalysisDatabaseConfigurationImpl
 void Database::AnalysisDatabaseConfigurationImpl
 	::InsertStrategy(const System::String& name, const BasicTree& basicTree)
 {
-	auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"), System::String{});
+	auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"), SYSTEM_TEXT(""s));
 
 	auto wrappersStrategy = GetWrappersStrategy(wrappers);
 
-	auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("IP"), System::String{}));
-	auto port = basicTree.get(SYSTEM_TEXT("Port"), 0u); 
-	auto hostName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("HostName"), System::String{}));
-	auto userName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("UserName"), System::String{}));
-	auto password = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("Password"), System::String{}));	
+	auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("IP"), SYSTEM_TEXT(""s)));
+	auto port = basicTree.get(SYSTEM_TEXT("Port"), 0);
+	auto hostName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("HostName"), SYSTEM_TEXT(""s)));
+	auto userName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("UserName"), SYSTEM_TEXT(""s)));
+	auto password = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("Password"), SYSTEM_TEXT(""s)));
 
 	auto pooling = basicTree.get(SYSTEM_TEXT("Pooling"), false);
 	auto poolMaxSize = basicTree.get(SYSTEM_TEXT("PoolMaxSize"), 0);
-	auto poolQueueTimeout = basicTree.get(SYSTEM_TEXT("PoolQueueTimeout"),0 );
+	auto poolQueueTimeout = basicTree.get(SYSTEM_TEXT("PoolQueueTimeout"), 0);
 	auto poolMaxIdleTime = basicTree.get(SYSTEM_TEXT("PoolMaxIdleTime"), 0);
 
 	auto useFlagsOption = (0 < basicTree.get(SYSTEM_TEXT("UseFlagsOption"), 0u));
@@ -93,25 +94,25 @@ void Database::AnalysisDatabaseConfigurationImpl
 	auto useIntOptions = (0 < basicTree.get(SYSTEM_TEXT("UseIntOption"), 0u));
 	auto useSSLOptions = (0 < basicTree.get(SYSTEM_TEXT("UseSSLOption"), 0u));
 	auto useDBMapping = (0 < basicTree.get(SYSTEM_TEXT("UseDBMapping"), 0u));
-	
-	auto flagsOption = GetFlagsOption(basicTree,useFlagsOption);
+
+	auto flagsOption = GetFlagsOption(basicTree, useFlagsOption);
 	auto stringOptions = GetStringOptions(basicTree, useStringOptions);
 	auto booleanOptions = GetBooleanOptions(basicTree, useBooleanOptions);
 	auto intOptions = GetIntOptions(basicTree, useIntOptions);
-	auto sslOptions = GetSSLOptions(basicTree, useSSLOptions); 
+	auto sslOptions = GetSSLOptions(basicTree, useSSLOptions);
 	auto dbMapping = GetDBMapping(basicTree, useDBMapping);
 
 	dbMapping.insert({ 0,hostName });
 
 	ConfigurationStrategy configurationStrategy{ wrappersStrategy ,ip,port,hostName,userName,password,pooling,poolMaxSize,
-		                                         poolQueueTimeout,poolMaxIdleTime,flagsOption,stringOptions,booleanOptions,intOptions,sslOptions,dbMapping };
+												 poolQueueTimeout,poolMaxIdleTime,flagsOption,stringOptions,booleanOptions,intOptions,sslOptions,dbMapping };
 
 	m_Container.insert({ name ,configurationStrategy });
 }
 
 // private
 Database::ConfigurationStrategy::FlagsOption Database::AnalysisDatabaseConfigurationImpl
-	::GetFlagsOption(const BasicTree& basicTree,bool useFlagsOption)
+	::GetFlagsOption(const BasicTree& basicTree, bool useFlagsOption)
 {
 	vector<string> result;
 
@@ -127,7 +128,7 @@ Database::ConfigurationStrategy::FlagsOption Database::AnalysisDatabaseConfigura
 			}
 		}
 	}
-	
+
 	return result;
 }
 
@@ -138,14 +139,14 @@ Database::ConfigurationStrategy Database::AnalysisDatabaseConfigurationImpl
 
 	auto iter = m_Container.find(name);
 
-	if (iter != m_Container.end())
+	if (iter != m_Container.cend())
 	{
 		return iter->second;
 	}
 	else
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定名字的配置。"));
-	}	 
+	}
 }
 
 Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl
@@ -180,10 +181,10 @@ Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl
 	else if (caseInsensitiveTString == SYSTEM_TEXT("FlatFile"))
 	{
 		return WrappersStrategy::FlatFile;
-	} 
+	}
 
 	THROW_EXCEPTION(SYSTEM_TEXT("数据库包装器类型不存在。"));
-} 
+}
 
 Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::AnalysisDatabaseConfigurationImpl
 	::GetBegin() const
@@ -219,9 +220,9 @@ Database::ConfigurationStrategy::StringOption Database::AnalysisDatabaseConfigur
 		auto stringOption = basicTree.get_child(SYSTEM_TEXT("StringOption"));
 
 		for (const auto& flags : stringOption)
-		{	
+		{
 			result.insert({ CoreTools::StringConversion::StandardConversionMultiByte(flags.first),
-							CoreTools::StringConversion::StandardConversionMultiByte(flags.second.get_value<System::String>()) });			
+							CoreTools::StringConversion::StandardConversionMultiByte(flags.second.get_value<System::String>()) });
 		}
 	}
 
@@ -294,7 +295,7 @@ Database::ConfigurationStrategy::DBMapping Database::AnalysisDatabaseConfigurati
 
 		for (const auto& flags : stringOption)
 		{
-			result.insert({ flags.second.get_value<int>(),CoreTools::StringConversion::StandardConversionMultiByte(flags.first)});
+			result.insert({ flags.second.get_value<int>(),CoreTools::StringConversion::StandardConversionMultiByte(flags.first) });
 		}
 	}
 

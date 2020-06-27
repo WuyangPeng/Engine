@@ -1,35 +1,32 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:25)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 16:41)
 
 #include "Framework/FrameworkExport.h"
 
 #include "AndroidCallBackInterface.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Framework/Application/ApplicationTrait.h"
 #include "System/Helper/UnusedMacro.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
 
 Framework::AndroidCallBackInterface
-	::AndroidCallBackInterface()
-	:m_State(nullptr)
+	::AndroidCallBackInterface(int64_t delta) noexcept
+	:m_State{ nullptr }, m_Delta{ delta }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::AndroidCallBackInterface
-	::~AndroidCallBackInterface()
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
-
-CLASS_INVARIANT_STUB_DEFINE(Framework,AndroidCallBackInterface)
+CLASS_INVARIANT_STUB_DEFINE(Framework, AndroidCallBackInterface) 
 
 bool Framework::AndroidCallBackInterface
 	::PreCreate()
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
+
+	CoreTools::DoNothing();
 
 	return true;
 }
@@ -39,6 +36,8 @@ bool Framework::AndroidCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
+	CoreTools::DoNothing();
+
 	return true;
 }
 
@@ -46,157 +45,192 @@ void Framework::AndroidCallBackInterface
 	::PreIdle()
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
+
+	CoreTools::DoNothing();
 }
 
 void Framework::AndroidCallBackInterface
 	::Terminate()
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
+
+	CoreTools::DoNothing();
 }
 
-unsigned char Framework::AndroidCallBackInterface
-	::GetTerminateKey() const
+int Framework::AndroidCallBackInterface
+	::GetTerminateKey() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return static_cast<unsigned char>
-		   (AndroidApplicationTrait::KeyIdentifiers::sm_KeyTerminate);
+	return AndroidApplicationTrait::KeyIdentifiers::sm_KeyTerminate;
 }
 
 void Framework::AndroidCallBackInterface
-	::InitMessage( struct AndroidApp* state )
+	::InitMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	m_State = state;
+	CoreTools::DoNothing();
+
+	m_State = androidApp;
 }
 
 void Framework::AndroidCallBackInterface
-	::ResizedMessage( struct AndroidApp* state )
+	::ResizedMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
+	SYSTEM_UNUSED_ARG(androidApp);
+
+	CoreTools::DoNothing();
 }
 
 void Framework::AndroidCallBackInterface
-	::TermMessage( struct AndroidApp* state )
+	::TermMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
+	SYSTEM_UNUSED_ARG(androidApp);
+
+	CoreTools::DoNothing();
 }
 
 void Framework::AndroidCallBackInterface
-	::RedrawNeededMessage( struct AndroidApp* state )
+	::RedrawNeededMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
+	SYSTEM_UNUSED_ARG(androidApp);
+
+	CoreTools::DoNothing();
 }
 
 void Framework::AndroidCallBackInterface
-	::Display( struct AndroidApp* state ,int64_t timeDelta )
+	::Display(AndroidApp* androidApp, int64_t timeDelta)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
+	SYSTEM_UNUSED_ARG(androidApp);
 	SYSTEM_UNUSED_ARG(timeDelta);
+
+	CoreTools::DoNothing();
 }
 
 void Framework::AndroidCallBackInterface
-	::NotDealCmdMessage( struct AndroidApp* state )
+	::NotDealCmdMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
+	SYSTEM_UNUSED_ARG(androidApp);
+
+	CoreTools::DoNothing();
 }
 
 int Framework::AndroidCallBackInterface
-	::NotDealInputMessage(struct AndroidApp* state,
-	                      AndroidInputEvent* event)
+	::NotDealInputMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(event);
+	SYSTEM_UNUSED_ARG(androidApp);
+	SYSTEM_UNUSED_ARG(androidInputEvent);
+
+	CoreTools::DoNothing();
 
 	return 0;
 }
 
 void Framework::AndroidCallBackInterface
-	::RectChanged( struct AndroidApp* state )
+	::RectChanged(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
+	SYSTEM_UNUSED_ARG(androidApp);
+
+	CoreTools::DoNothing();
 }
 
 int Framework::AndroidCallBackInterface
-	::KeyDownMessage( struct AndroidApp* state, AndroidInputEvent* event )
+	::KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(event);
+	SYSTEM_UNUSED_ARG(androidApp);
+	SYSTEM_UNUSED_ARG(androidInputEvent);
+
+	CoreTools::DoNothing();
 
 	return 0;
 }
 
 int Framework::AndroidCallBackInterface
-	::KeyUpMessage( struct AndroidApp* state, AndroidInputEvent* event )
+	::KeyUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(event);
+	SYSTEM_UNUSED_ARG(androidApp);
+	SYSTEM_UNUSED_ARG(androidInputEvent);
+
+	CoreTools::DoNothing();
 
 	return 0;
 }
 
 int Framework::AndroidCallBackInterface
-	::ActionDownMessage( struct AndroidApp* state, AndroidInputEvent* event )
+	::ActionDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(event);
+	SYSTEM_UNUSED_ARG(androidApp);
+	SYSTEM_UNUSED_ARG(androidInputEvent);
+
+	CoreTools::DoNothing();
 
 	return 0;
 }
 
 int Framework::AndroidCallBackInterface
-	::ActionUpMessage( struct AndroidApp* state, AndroidInputEvent* event )
+	::ActionUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(event);
+	SYSTEM_UNUSED_ARG(androidApp);
+	SYSTEM_UNUSED_ARG(androidInputEvent);
+
+	CoreTools::DoNothing();
 
 	return 0;
 }
 
 int Framework::AndroidCallBackInterface
-	::ActionMoveMessage( struct AndroidApp* state, AndroidInputEvent* event )
+	::ActionMoveMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(event);
+	SYSTEM_UNUSED_ARG(androidApp);
+	SYSTEM_UNUSED_ARG(androidInputEvent);
+
+	CoreTools::DoNothing();
 
 	return 0;
 }
 
 System::AndroidApp* Framework::AndroidCallBackInterface
-	::GetAndroidApp()
+	::GetAndroidApp() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
 	return m_State;
 }
 
+int64_t Framework::AndroidCallBackInterface
+	::GetDelta() const noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
+	return m_Delta;
+}
 
+ 
 
 
 

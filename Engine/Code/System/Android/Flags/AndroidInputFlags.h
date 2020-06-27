@@ -7,7 +7,7 @@
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/EnumMacro.h"
 
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -60,6 +60,7 @@ namespace System
 
 	enum class AndroidKeyEvent
 	{
+		Null = 0,
 		WokeHere = AKEY_EVENT_FLAG_WOKE_HERE,
 		SoftKeyboard = AKEY_EVENT_FLAG_SOFT_KEYBOARD,
 		KeepTouchMode = AKEY_EVENT_FLAG_KEEP_TOUCH_MODE,
@@ -208,7 +209,7 @@ namespace System
 
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Window/Flags/WindowMessagesFlags.h"
 #include "System/Android/Flags/AndroidKeyCodesFlags.h"
 
@@ -259,6 +260,7 @@ namespace System
 
 	enum class AndroidKeyEvent
 	{
+		Null = 0,
 		WokeHere = 0x1,
 		SoftKeyboard = 0x2,
 		KeepTouchMode = 0x4,
@@ -407,7 +409,7 @@ namespace System
 
 #else // !SYSTEM_PLATFORM_ANDROID && !SYSTEM_PLATFORM_WIN32
 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 namespace System
 {
@@ -456,6 +458,7 @@ namespace System
 
 	enum class AndroidKeyEvent
 	{
+		Null = 0,
 		WokeHere = 0x1,
 		SoftKeyboard = 0x2,
 		KeepTouchMode = 0x4,
@@ -603,5 +606,10 @@ namespace System
 }
 
 #endif // SYSTEM_PLATFORM_ANDROID
+
+namespace System
+{
+	ENUM_ANDABLE_OPERATOR_DEFINE(AndroidKeyEvent)
+}
 
 #endif // SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H

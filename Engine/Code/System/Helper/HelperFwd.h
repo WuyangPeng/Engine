@@ -2,25 +2,25 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:12)
+// 引擎版本：0.2.0.0 (2020/05/07 13:33)
 
 #ifndef SYSTEM_HELPER_FWD_H
 #define SYSTEM_HELPER_FWD_H
 
-#include "UnusedMacro.h"
 #include "ConfigMacro.h"
 #include "UserMacro.h"
+#include "StringizeMacro.h"
+#include "UnusedMacro.h"
 #include "UnicodeUsing.h"
-#include "DeprecatedMacro.h"
+#include "DeprecatedMacro.h"	
 #include "PragmaMessageMacro.h"
-#include "WindowsMacro.h"
 #include "Version.h"
 #include "ExportMacro.h"
-#include "SecuritySidMacro.h"
 #include "NetworkMacro.h"
 #include "GLExtensionsMacro.h"
+#include "PragmaWarning.h"
+#include "EnumCast.h"
 #include "EnumMacro.h"
-#include "Platform.h"
 #include "Noexcept.h"
 
 #endif // SYSTEM_HELPER_FWD_H

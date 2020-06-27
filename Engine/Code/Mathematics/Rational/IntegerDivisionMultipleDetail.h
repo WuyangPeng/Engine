@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 13:30)
+// 引擎版本：0.0.2.5 (2020/03/20 10:17)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_DETAIL_H
@@ -17,11 +17,11 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h" 
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <int N>
 Mathematics::IntegerDivisionMultiple<N>
-	::IntegerDivisionMultiple( const IntegerData& absNumerator, const IntegerData& absDenominator )
+	::IntegerDivisionMultiple(const IntegerData& absNumerator, const IntegerData& absDenominator)
 	:m_AbsNumerator{ absNumerator },
 	 m_AbsDenominator{ absDenominator },
 	 m_AdjustNumerator{},
@@ -45,7 +45,7 @@ Mathematics::IntegerDivisionMultiple<N>
 // private
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>
-	::Adjust() 
+	::Adjust()
 {
 	// 正则化，使商有良好估计。
 	// 分子足够大是可能的，正则化调整导致adjust * numerator乘积计算溢出。
@@ -63,7 +63,7 @@ void Mathematics::IntegerDivisionMultiple<N>
 	IntegerMultiplication<N> denominatorAdjust{ IntegerData{ m_Adjust }, m_AbsDenominator };
 	m_AdjustDenominator = denominatorAdjust.GetMultiplication();
 }
- 
+
 // private
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>
@@ -71,7 +71,7 @@ void Mathematics::IntegerDivisionMultiple<N>
 {
 	IntegerDataAnalysis adjustDenominatorAnalysis{ m_AdjustDenominator };
 
-	MATHEMATICS_ASSERTION_1(adjustDenominatorAnalysis.GetLeadingBlock() == m_DenominatorInit,  "异常的结果\n");
+	MATHEMATICS_ASSERTION_1(adjustDenominatorAnalysis.GetLeadingBlock() == m_DenominatorInit, "异常的结果\n");
 
 	// 获取分母两个最先的“数字”。
 	m_FirstDigit = adjustDenominatorAnalysis.ToUnsignedInt(m_DenominatorInit);
@@ -83,16 +83,16 @@ void Mathematics::IntegerDivisionMultiple<N>
 
 	MATHEMATICS_ASSERTION_1(m_DenominatorInit <= m_NumeratorInit, "异常的结果\n");
 
-	auto quotientInit = 0;	 
+	auto quotientInit = 0;
 	if (m_NumeratorInit != m_DenominatorInit)
 	{
 		quotientInit = m_NumeratorInit - m_DenominatorInit - 1;
 		m_RemainderHat = 1;
-	}	
+	}
 
 	for (; 0 <= quotientInit; --quotientInit)
 	{
-		Calculate( quotientInit );
+		Calculate(quotientInit);
 
 		if (m_AdjustDenominator <= m_AdjustNumerator)
 		{
@@ -104,12 +104,12 @@ void Mathematics::IntegerDivisionMultiple<N>
 			// 余数比除数小，完成除法。
 			break;
 		}
-	}	
+	}
 }
 
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>
-	::Calculate( int quotientInit)
+	::Calculate(int quotientInit)
 {
 	IntegerDataAnalysis adjustDenominatorAnalysis{ m_AdjustDenominator };
 	IntegerDataAnalysis adjustNumeratorAnalysis{ m_AdjustNumerator };
@@ -133,7 +133,7 @@ void Mathematics::IntegerDivisionMultiple<N>
 
 	// 估计商的值
 	auto numeratorFrontTwo = (numerator0 << 16) | numerator1;
-	auto quotientHat =  (numerator0 != m_FirstDigit ? numeratorFrontTwo / m_FirstDigit : sm_Low);
+	auto quotientHat = (numerator0 != m_FirstDigit ? numeratorFrontTwo / m_FirstDigit : sm_Low);
 	auto denominatorProduct = quotientHat * m_FirstDigit;
 
 	MATHEMATICS_ASSERTION_1(denominatorProduct <= numeratorFrontTwo, "异常的结果\n");
@@ -143,8 +143,8 @@ void Mathematics::IntegerDivisionMultiple<N>
 	{
 		--quotientHat;
 		m_RemainderHat += m_FirstDigit;
-		if (sm_Carry * m_RemainderHat + numerator2 < m_SecondDigit * quotientHat && (quotientHat & sm_Low) != 1 )
-		{			
+		if (sm_Carry * m_RemainderHat + numerator2 < m_SecondDigit * quotientHat && (quotientHat & sm_Low) != 1)
+		{
 			// 如果进入该块，我们对除法具有完全相同的商。
 			// 代码调整块以后也不会发生。
 			--quotientHat;
@@ -173,18 +173,18 @@ void Mathematics::IntegerDivisionMultiple<N>
 		adjustNumeratorOperator += m_AdjustDenominator;
 
 		// 正数或零
-		MATHEMATICS_ASSERTION_1(m_AdjustNumerator.GetSign() == NumericalValueSymbol::Positive,"异常的结果\n");
+		MATHEMATICS_ASSERTION_1(m_AdjustNumerator.GetSign() == NumericalValueSymbol::Positive, "异常的结果\n");
 	}
 
 	// 设置商的位。
 	IntegerDataAmend<N> quotientAmend{ m_Quotient };
-	quotientAmend.FromUnsignedInt(quotientInit, quotientHat);	
+	quotientAmend.FromUnsignedInt(quotientInit, quotientHat);
 }
 
 // private
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>
-	::Recover() 
+	::Recover()
 {
 	// 反正则化余数
 	if (IntegerData{ 0 } < m_AdjustNumerator)
@@ -194,23 +194,22 @@ void Mathematics::IntegerDivisionMultiple<N>
 		IntegerDivisionModulo<N> divisionSingle{ m_AdjustNumerator, IntegerData{ divisor } };
 		m_Remainder = divisionSingle.GetQuotient();
 
-		MATHEMATICS_ASSERTION_1(divisionSingle.GetRemainder().IsZero(), "余数必须为零");		
+		MATHEMATICS_ASSERTION_1(divisionSingle.GetRemainder().IsZero(), "余数必须为零");
 	}
 	else
 	{
 		m_Remainder.SetZero();
-	}	
+	}
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <int N>
 bool Mathematics::IntegerDivisionMultiple<N>
 	::IsValid() const noexcept
-{	
+{
 	return true;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <int N>
 typename const Mathematics::IntegerDivisionMultiple<N>::IntegerData	Mathematics::IntegerDivisionMultiple<N>

@@ -72,6 +72,26 @@ void Network::SocketManager
 	return m_Impl->Insert(socketID, messageID, smartPointer, priority);
 }
 
+void Network::SocketManager::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
+{
+	messageID; messageEvent;
+}
+
+void Network::SocketManager::Remove(int64_t messageID)
+{
+	messageID;
+}
+
+void Network::SocketManager::Remove(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
+{
+	messageID; messageEvent;
+}
+
+void Network::SocketManager::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
+{
+	messageID; messageEvent; priority;
+}
+
 void Network::SocketManager
 	::OnEvent(uint64_t socketID, int64_t messageID, const ConstMessageInterfaceSharedPtr& message)
 {

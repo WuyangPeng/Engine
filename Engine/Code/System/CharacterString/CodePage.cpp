@@ -2,22 +2,24 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 13:23)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/09 16:19)
 
 #include "System/SystemExport.h"
 
 #include "CodePage.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
 bool System
 	::IsCodePageValid(CodePage codePage) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
 	if (::IsValidCodePage(EnumCastUnderlying(codePage)) != g_False)
 		return true;
 	else
 		return false;
+
 #else // !SYSTEM_PLATFORM_WIN32
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -47,10 +49,12 @@ bool System
 	::GetCodePageInfo(CodePage codePage, CodePageInfoPtr codePageInfo) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
 	if (::GetCPInfo(EnumCastUnderlying(codePage), codePageInfo) != g_False)
 		return true;
 	else
 		return false;
+
 #else // !SYSTEM_PLATFORM_WIN32
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -60,10 +64,12 @@ bool System
 	::GetCodePageInfo(CodePage codePage, CodePageInfoExPtr codePageInfo) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
 	if (::GetCPInfoEx(EnumCastUnderlying(codePage), 0, codePageInfo) != g_False)
 		return true;
 	else
 		return false;
+
 #else // !SYSTEM_PLATFORM_WIN32
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32

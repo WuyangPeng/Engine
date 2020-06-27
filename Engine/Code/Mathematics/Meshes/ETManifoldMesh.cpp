@@ -11,6 +11,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 #include <fstream>
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 Mathematics::ETManifoldMesh
 	::ETManifoldMesh (ECreator eCreator, TCreator tCreator)
@@ -69,49 +70,62 @@ Mathematics::ETManifoldMesh::TPtr Mathematics::ETManifoldMesh
     // Add edges to mesh.
     for (int i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
     {
-        EdgeKey ekey(tri->V[i0], tri->V[i1]);
-        EPtr edge;
-        EMapIterator eiter = mEMap.find(ekey);
-        if (eiter == mEMap.end())
-        {
-            // First time edge encountered.
-            edge = mECreator(tri->V[i0], tri->V[i1]);
-            mEMap[ekey] = edge;
+		if (tri)
+		{
+			EdgeKey ekey(tri->V[i0], tri->V[i1]);
+			EPtr edge;
+			EMapIterator eiter = mEMap.find(ekey);
+			if (eiter == mEMap.end())
+			{
+				// First time edge encountered.
+				edge = mECreator(tri->V[i0], tri->V[i1]);
+				mEMap[ekey] = edge;
 
-            // Update edge and triangle.
-            edge->T[0] = tri;
-            tri->E[i0] = edge;
-        }
-        else
-        {
-            // Second time edge encountered.
-            edge = eiter->second;
-            MATHEMATICS_ASSERTION_0(edge != 0, "Unexpected condition\n");
+				// Update edge and triangle.
+				edge->T[0] = tri;
+				tri->E[i0] = edge;
+			}
+			else
+			{
+				// Second time edge encountered.
+				edge = eiter->second;
 
-            // Update edge.
-            if (edge->T[1])
-            {
-                MATHEMATICS_ASSERTION_0(false, "Mesh must be manifold\n");
-                return 0;
-            }
-            edge->T[1] = tri;
+				if (edge == 0)
+				{
+					THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"));
+				}
 
-            // Update adjacent triangles.
-            TPtr adjacent = edge->T[0];
-            MATHEMATICS_ASSERTION_0(adjacent != 0, "Unexpected condition\n");
-            for (int i = 0; i < 3; i++)
-            {
-                if (adjacent->E[i] == edge)
-                {
-                    adjacent->T[i] = tri;
-                    break;
-                }
-            }
+				// Update edge.
+				if (edge->T[1])
+				{
+					MATHEMATICS_ASSERTION_0(false, "Mesh must be manifold\n");
+					return 0;
+				}
+				edge->T[1] = tri;
 
-            // Update triangle.
-            tri->E[i0] = edge;
-            tri->T[i0] = adjacent;
-        }
+				// Update adjacent triangles.
+				TPtr adjacent = edge->T[0];
+				if (adjacent == 0)
+				{
+					THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"));
+				}
+				for (int i = 0; i < 3; i++)
+				{
+					if (adjacent->E[i] == edge)
+					{
+						adjacent->T[i] = tri;
+						break;
+					}
+				}
+
+				// Update triangle.
+
+				tri->E[i0] = edge;
+				tri->T[i0] = adjacent;
+
+
+			}
+		}
     }
 
     return tri;
@@ -133,7 +147,10 @@ bool Mathematics::ETManifoldMesh
     {
         // Inform edges you are going away.
         Edge* edge = tri->E[i];
-        MATHEMATICS_ASSERTION_0(edge != 0, "Unexpected condition\n");
+		if (edge == 0)
+		{
+			THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"));
+		}
         if (edge->T[0] == tri)
         {
             // One-triangle edges always have pointer in slot zero.
@@ -355,6 +372,7 @@ Mathematics::ETManifoldMesh::Edge
 
 Mathematics::ETManifoldMesh::Triangle
 	::Triangle (int v0, int v1, int v2)
+	:E{}, V{}, T{}
 {
     V[0] = v0;
     V[1] = v1;

@@ -245,7 +245,7 @@ namespace System
 
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Window/Flags/WindowsKeyCodesFlags.h"
 
 namespace System

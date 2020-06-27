@@ -8,31 +8,16 @@
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
 
 #include "UnitTest.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
+#include "System/Helper/PragmaWarning/TypeTraits.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
-#include <boost/type_traits/has_less.hpp>
-#include <boost/type_traits/has_minus.hpp> 
-#include <boost/type_traits/has_greater.hpp>
-#include <boost/type_traits/has_equal_to.hpp>
-#include <boost/type_traits/has_less_equal.hpp>
-#include <boost/type_traits/has_not_equal_to.hpp>
-#include <boost/type_traits/has_greater_equal.hpp>
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
 #include <sstream>
 #include <exception>
 #include <type_traits>
-
-namespace CoreTools
-{
-	const std::string g_CorrectThrowExceptionDescribe{ "正确的抛出异常：" };
-	const std::string g_ErrorThrowExceptionDescribe{ "错误的抛出异常：" };
-	const std::string g_CorrectNothrowExceptionDescribe{ "正确的未抛出异常：" };
-	const std::string g_ErrorNothrowExceptionDescribe{ "错误的未抛出异常：" };
-}
 
 // protected
 template <typename LhsType, typename RhsType>
@@ -42,7 +27,7 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 	static_assert(boost::has_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has equal to bool.");
 
-	auto condition = (lhs == rhs);
+	const auto condition = (lhs == rhs);
 
 	std::string described{};
 
@@ -80,7 +65,7 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 	static_assert(boost::has_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has equal to bool.");
 
-	auto condition = (lhs == rhs);
+	const auto condition = (lhs == rhs);
 	AssertTest(condition, functionDescribed, "", failureThrow);
 }
 
@@ -129,7 +114,7 @@ void CoreTools::UnitTest
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 	static_assert(boost::has_not_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has not equal to bool.");
 
-	auto condition = (lhs != rhs);
+	const auto condition = (lhs != rhs);
 
 	std::string described{};
 
@@ -183,8 +168,8 @@ void CoreTools::UnitTest
 
 	static_assert(boost::has_less_equal<EpsilonType, double, bool>::value, "EpsilonType and double has less equal bool.");
 
-	EpsilonType difference{ abs(lhs - rhs) };
-	auto condition = (difference <= epsilon);
+	const EpsilonType difference{ abs(lhs - rhs) };
+	const auto condition = (difference <= epsilon);
 
 	std::string described{};
 
@@ -211,7 +196,7 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto condition = function(lhs, rhs, epsilon);
+	const auto condition = function(lhs, rhs, epsilon);
 
 	std::string described{};
 
@@ -242,7 +227,7 @@ void CoreTools::UnitTest
 	// 为了支持智能指针，不使用
 	// static_assert(std::is_pointer_v<PtrType>, "PtrType is pointer.");
 
-	auto condition = (ptr == nullptr);
+	const auto condition = (ptr == nullptr);
 
 	std::string described{};
 
@@ -273,7 +258,7 @@ void CoreTools::UnitTest
 	// 为了支持智能指针，不使用
 	// static_assert(std::is_pointer_v<PtrType>, "PtrType is pointer.");
 
-	auto condition = ptr != nullptr;
+	const auto condition = ptr != nullptr;
 
 	std::string described{};
 
@@ -304,7 +289,7 @@ void CoreTools::UnitTest
 	static_assert(boost::has_less_equal<RangeType, TestType, bool>::value, "RangeType and TestType has less equal bool.");
 	static_assert(boost::has_less_equal<TestType, RangeType, bool>::value, "TestType and RangeType has less equal bool.");
 
-	auto condition = (lhs <= test && test <= rhs);
+	const auto condition = (lhs <= test && test <= rhs);
 
 	std::string described{};
 
@@ -334,7 +319,7 @@ void CoreTools::UnitTest
 
 	static_assert(boost::has_less<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-	auto condition = (lhs < rhs);
+	const auto condition = (lhs < rhs);
 
 	std::string described{};
 
@@ -373,7 +358,7 @@ void CoreTools::UnitTest
 
 	static_assert(boost::has_less_equal<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-	auto condition = (lhs <= rhs);
+	const auto condition = (lhs <= rhs);
 
 	std::string described{};
 
@@ -451,7 +436,7 @@ void CoreTools::UnitTest
 
 	static_assert(boost::has_greater_equal<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-	auto condition = lhs >= rhs;
+	const auto condition = lhs >= rhs;
 
 	std::string described{};
 
@@ -494,13 +479,13 @@ void CoreTools::UnitTest
 	{
 		(test->*function)();
 
-		ErrorTest(true, functionDescribed, g_CorrectNothrowExceptionDescribe);
+		ErrorTest(true, functionDescribed, GetCorrectNothrowExceptionDescribe());
 	}
-	catch (CoreTools::Error& error)
+	catch (const CoreTools::Error& error)
 	{
 		AssertExceptionErrorLog(error, errorMessage);
 	}
-	catch (std::exception& error)
+	catch (const std::exception& error)
 	{
 		AssertExceptionFatalLog(error, functionDescribed, errorMessage);
 	}
@@ -523,13 +508,13 @@ void CoreTools::UnitTest
 	{
 		(test->*function)(parameter);
 
-		ErrorTest(true, functionDescribed, g_CorrectNothrowExceptionDescribe);
+		ErrorTest(true, functionDescribed, GetCorrectNothrowExceptionDescribe());
 	}
-	catch (CoreTools::Error& error)
+	catch (const CoreTools::Error& error)
 	{
 		AssertExceptionErrorLog(error, errorMessage);
 	}
-	catch (std::exception& error)
+	catch (const std::exception& error)
 	{
 		AssertExceptionFatalLog(error, functionDescribed, errorMessage);
 	}
@@ -552,13 +537,13 @@ void CoreTools::UnitTest
 	{
 		(test->*function)(firstParameter, secondParameter);
 
-		ErrorTest(true, functionDescribed, g_CorrectNothrowExceptionDescribe);
+		ErrorTest(true, functionDescribed, GetCorrectNothrowExceptionDescribe());
 	}
-	catch (CoreTools::Error& error)
+	catch (const CoreTools::Error& error)
 	{
 		AssertExceptionErrorLog(error, errorMessage);
 	}
-	catch (std::exception& error)
+	catch (const std::exception& error)
 	{
 		AssertExceptionFatalLog(error, functionDescribed, errorMessage);
 	}
@@ -583,11 +568,11 @@ void CoreTools::UnitTest
 
 		AssertExceptionErrorLog(functionDescribed, errorMessage);
 	}
-	catch (CoreTools::Error& error)
+	catch (const CoreTools::Error& error)
 	{
 		AssertExceptionInfoLog(error, errorMessage);
 	}
-	catch (std::exception& error)
+	catch (const std::exception& error)
 	{
 		AssertExceptionInfoLog(error, functionDescribed, errorMessage);
 	}
@@ -612,11 +597,11 @@ void CoreTools::UnitTest
 
 		AssertExceptionErrorLog(functionDescribed, errorMessage);
 	}
-	catch (CoreTools::Error& error)
+	catch (const CoreTools::Error& error)
 	{
 		AssertExceptionInfoLog(error, errorMessage);
 	}
-	catch (std::exception& error)
+	catch (const std::exception& error)
 	{
 		AssertExceptionInfoLog(error, functionDescribed, errorMessage);
 	}
@@ -641,17 +626,35 @@ void CoreTools::UnitTest
 
 		AssertExceptionErrorLog(functionDescribed, errorMessage);
 	}
-	catch (CoreTools::Error& error)
+	catch (const CoreTools::Error& error)
 	{
 		AssertExceptionInfoLog(error, errorMessage);
 	}
-	catch (std::exception& error)
+	catch (const std::exception& error)
 	{
 		AssertExceptionInfoLog(error, functionDescribed, errorMessage);
 	}
 	catch (...)
 	{
 		AssertExceptionInfoLog(functionDescribed, errorMessage);
+	}
+}
+
+template <typename TestClass, typename Function>
+void CoreTools::UnitTest
+	::ExecuteLoopTesting(TestClass* test, Function function)
+{
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
+	static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
+
+	const auto testLoopCount = GetTestLoopCount();
+	for (auto i = 0; i < testLoopCount; ++i)
+	{
+		if (!(test->*function)())
+		{
+			break;
+		}
 	}
 }
 

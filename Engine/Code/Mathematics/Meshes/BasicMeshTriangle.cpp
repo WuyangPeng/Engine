@@ -10,9 +10,11 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 Mathematics::BasicMeshTriangle
 	::BasicMeshTriangle()
+	:m_Vertex{}, m_Edge{}, m_Triangle{}
 {
     for(int i = 0;i < 3;++i)
     {
@@ -26,6 +28,7 @@ Mathematics::BasicMeshTriangle
 
 Mathematics::BasicMeshTriangle
 	::BasicMeshTriangle (const BasicMeshTriangle& rhs)
+	:m_Vertex{}, m_Edge{}, m_Triangle{}
 {
     for(int i = 0;i < 3;++i)
     {
@@ -58,54 +61,90 @@ int Mathematics::BasicMeshTriangle
 	::GetVertex(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"Ë÷Òý´íÎó£¡");
     
-    return m_Vertex[index];
-    
+	if (0 <= index && index < 3)
+	{
+		return m_Vertex[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}    
 }
 
 int Mathematics::BasicMeshTriangle
 	::GetEdge(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_CONST_9; 
     
-    return m_Edge[index];
+	if (0 <= index && index < 3)
+	{
+		return m_Edge[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	} 
 }
 
 int Mathematics::BasicMeshTriangle
 	::GetTriangle(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_CONST_9; 
     
-    return m_Triangle[index];
+	if (0 <= index && index < 3)
+	{
+		return m_Triangle[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	} 
 }
 
 void Mathematics::BasicMeshTriangle
 	::SetVertex(int index,int vertex)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_9; 
     
-    m_Vertex[index] = vertex;
+	if (0 <= index && index < 3)
+	{
+		m_Vertex[index] = vertex;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}
+   
 }
 
 void Mathematics::BasicMeshTriangle
 	::SetEdge(int index,int edge)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_9; 
     
-    m_Edge[index] = edge;
+	if (0 <= index && index < 3)
+	{
+		m_Edge[index] = edge;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}    
 }
 
 void Mathematics::BasicMeshTriangle
 	::SetTriangle(int index,int triangle)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_9; 
     
-    m_Triangle[index] = triangle;
+	if (0 <= index && index < 3)
+	{
+		m_Triangle[index] = triangle;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}    
 }
 

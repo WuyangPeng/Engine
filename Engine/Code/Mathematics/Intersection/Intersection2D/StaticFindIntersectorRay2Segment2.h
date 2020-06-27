@@ -1,23 +1,21 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 17:33)
+// 引擎版本：0.0.2.5 (2020/03/24 14:37)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_SEGMENT2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_SEGMENT2_H 
 
 #include "Mathematics/Objects2D/Ray2.h"
 #include "Mathematics/Objects2D/Segment2.h" 
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Intersection/StaticIntersector.h" 
 
 #include <array>
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-
 	template <typename Real>
 	class StaticFindIntersectorRay2Segment2 : public StaticIntersector<Real, Vector2D>
 	{
@@ -28,16 +26,16 @@ namespace Mathematics
 		using Ray2 = Ray2<Real>;
 		using Segment2 = Segment2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>; 
-		
+		using Math = Math<Real>;
+
 	public:
-		StaticFindIntersectorRay2Segment2(const Ray2& ray, const Segment2& segment,const Real dotThreshold = Math::sm_ZeroTolerance,const Real intervalThreshold = Real{});
+		StaticFindIntersectorRay2Segment2(const Ray2& ray, const Segment2& segment, const Real dotThreshold = Math::sm_ZeroTolerance, const Real intervalThreshold = Math::sm_Zero);
 		virtual ~StaticFindIntersectorRay2Segment2();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
-		const Ray2 GetRay () const;
-		const Segment2 GetSegment () const;
+
+		const Ray2 GetRay() const;
+		const Segment2 GetSegment() const;
 
 		// 相交测试使用线段的中心-范围形式。 
 		// 如果从端点（Vector2D<Real>）开始并创建 Segment2<Real>对象，
@@ -58,7 +56,7 @@ namespace Mathematics
 
 	private:
 		// 静态查找相交查询。
-		void Find ();
+		void Find();
 
 	private:
 		// 要相交的对象。
@@ -68,7 +66,7 @@ namespace Mathematics
 		// 相交集
 		int m_Quantity;
 
-		Real m_IntervalThreshold;  
+		Real m_IntervalThreshold;
 		std::array<Vector2D, 2> m_Point;
 	};
 

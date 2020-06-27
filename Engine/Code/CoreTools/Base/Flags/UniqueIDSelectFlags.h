@@ -20,6 +20,7 @@ namespace CoreTools
 		Resource = 4,
 		Entity = 5,
 		Network = 6,
+		Renderer = 7,
 		Max,
 	};
 }

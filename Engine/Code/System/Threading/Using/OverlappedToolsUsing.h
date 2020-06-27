@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 16:11)
+// 引擎版本：0.2.0.0 (2020/05/10 11:17)
 
 #ifndef SYSTEM_THREADING_OVERLAPPED_TOOLS_USING_H  
 #define SYSTEM_THREADING_OVERLAPPED_TOOLS_USING_H  
@@ -43,11 +43,11 @@ namespace System
 
 	struct WindowOverlappedEntry
 	{
-		WindowPtrULong lpCompletionKey;
+		size_t lpCompletionKey;
 		WindowOverlappedPtr lpOverlapped;
-		WindowPtrULong Internal;
-		WindowDWord dwNumberOfBytesTransferred;
-	};
+		size_t Internal;
+		uint32_t dwNumberOfBytesTransferred;
+};
 	using WindowOverlappedEntryPtr = WindowOverlappedEntry*;
 
 #endif // SYSTEM_PLATFORM_WIN32

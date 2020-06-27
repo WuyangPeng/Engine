@@ -71,7 +71,8 @@ namespace Rendering
 	
 		// 存取绘制对象的视觉效果。
 		void SetEffectInstance (const VisualEffectInstanceSmartPointer& effect);
-		const ConstVisualEffectInstanceSmartPointer GetEffectInstance() const;
+		const ConstVisualEffectInstanceSmartPointer GetConstEffectInstance() const;
+		const VisualEffectInstanceSmartPointer GetEffectInstance();
 
 		// 对几何更新的支持。
 		const Bound GetWorldBound(const Transform& worldTransform);

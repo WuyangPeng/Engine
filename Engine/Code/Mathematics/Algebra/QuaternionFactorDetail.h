@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/05 19:13)
+// 引擎版本：0.0.2.5 (2020/03/19 14:49)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_DETAIL_H
@@ -16,10 +16,10 @@
 
 template <typename Real>
 Mathematics::QuaternionFactor<Real>
-	::QuaternionFactor( const Quaternion& quaternion,QuaternionFactorFlags flag )
+	::QuaternionFactor(const Quaternion& quaternion, QuaternionFactorFlags flag)
 	:m_Quaternion{ quaternion }, m_SinX{}, m_CosX{}, m_SinY{}, m_CosY{}, m_SinZ{}, m_CosZ{}
 {
-	switch(flag)
+	switch (flag)
 	{
 	case QuaternionFactorFlags::XYZ:
 		FactorXYZ();
@@ -40,8 +40,8 @@ Mathematics::QuaternionFactor<Real>
 		FactorZYX();
 		break;
 	default:
-		MATHEMATICS_ASSERTION_1(false,"错误的枚举值！");
-		break;		
+		MATHEMATICS_ASSERTION_1(false, "错误的枚举值！");
+		break;
 	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -110,13 +110,12 @@ Real Mathematics::QuaternionFactor<Real>
 	return m_CosZ;
 }
 
-
 template <typename Real>
 void Mathematics::QuaternionFactor<Real>
 	::FactorXYZ()
 {
 	auto a = m_Quaternion[0] * m_Quaternion[1] - m_Quaternion[2] * m_Quaternion[3];
-	auto b = static_cast<Real>(0.5) * (m_Quaternion[0] * m_Quaternion[0] -  m_Quaternion[1] * m_Quaternion[1] - m_Quaternion[2] * m_Quaternion[2] + m_Quaternion[3] * m_Quaternion[3]);
+	auto b = static_cast<Real>(0.5) * (m_Quaternion[0] * m_Quaternion[0] - m_Quaternion[1] * m_Quaternion[1] - m_Quaternion[2] * m_Quaternion[2] + m_Quaternion[3] * m_Quaternion[3]);
 
 	auto fLength = Math::Sqrt(a * a + b * b);
 
@@ -125,14 +124,14 @@ void Mathematics::QuaternionFactor<Real>
 		auto sigma0 = a / fLength;
 		auto gamma0 = b / fLength;
 
-		if (Real{} <= gamma0)
+		if (Math::sm_Zero <= gamma0)
 		{
-			m_CosX = Math::Sqrt(static_cast<Real>(0.5) * (static_cast<Real>(1) + gamma0));
+			m_CosX = Math::Sqrt(static_cast<Real>(0.5) * (Math::sm_One + gamma0));
 			m_SinX = static_cast<Real>(0.5) * sigma0 / m_CosX;
 		}
 		else
 		{
-			m_SinX = Math::Sqrt(static_cast<Real>(0.5) * (static_cast<Real>(1) - gamma0));
+			m_SinX = Math::Sqrt(static_cast<Real>(0.5) * (Math::sm_One - gamma0));
 			m_CosX = static_cast<Real>(0.5) * sigma0 / m_SinX;
 		}
 
@@ -142,7 +141,7 @@ void Mathematics::QuaternionFactor<Real>
 		m_CosZ = tmp0 * invLength;
 		m_SinZ = tmp1 * invLength;
 
-		if(Math::FAbs(m_SinZ) <= Math::FAbs(m_CosZ))
+		if (Math::FAbs(m_SinZ) <= Math::FAbs(m_CosZ))
 		{
 			m_CosY = tmp0 / m_CosZ;
 			m_SinY = (m_CosX * m_Quaternion[2] + m_SinX * m_Quaternion[3]) / m_CosZ;
@@ -156,11 +155,11 @@ void Mathematics::QuaternionFactor<Real>
 	else
 	{
 		// 无穷多解。选择其中之一。
-		if (Real{} < m_Quaternion[0] * m_Quaternion[2] + m_Quaternion[1] * m_Quaternion[3])
+		if (Math::sm_Zero < m_Quaternion[0] * m_Quaternion[2] + m_Quaternion[1] * m_Quaternion[3])
 		{
 			// p = (p0,p1,p0,p1)
-			m_CosX = static_cast<Real>(1);
-			m_SinX = Real{ };
+			m_CosX = Math::sm_One;
+			m_SinX = Math::sm_Zero;
 			m_CosY = Math::sm_InverseSqrt2;
 			m_SinY = Math::sm_InverseSqrt2;
 			m_CosZ = Math::sm_Sqrt2 * m_Quaternion[0];
@@ -169,8 +168,8 @@ void Mathematics::QuaternionFactor<Real>
 		else
 		{
 			// p = (p0,p1,-p0,-p1)
-			m_CosX = (Real)1;
-			m_SinX = Real{};
+			m_CosX = Math::sm_One;
+			m_SinX = Math::sm_Zero;
 			m_CosY = Math::sm_InverseSqrt2;
 			m_SinY = -Math::sm_InverseSqrt2;
 			m_CosZ = Math::sm_Sqrt2 * m_Quaternion[0];
@@ -185,14 +184,14 @@ void Mathematics::QuaternionFactor<Real>
 {
 	m_Quaternion = Quaternion{ m_Quaternion[0], m_Quaternion[1],m_Quaternion[3], -m_Quaternion[2] };
 
-	FactorXYZ();	
+	FactorXYZ();
 
-	Real temp = m_SinY;
+	auto temp = m_SinY;
 	m_SinY = -m_SinZ;
 	m_SinZ = temp;
 
 	temp = m_CosY;
-	m_CosY =  m_CosZ;
+	m_CosY = m_CosZ;
 	m_CosZ = temp;
 }
 
@@ -220,7 +219,7 @@ void Mathematics::QuaternionFactor<Real>
 	::FactorYXZ()
 {
 	m_Quaternion = Quaternion{ m_Quaternion[0], -m_Quaternion[2],m_Quaternion[1], m_Quaternion[3] };
-	
+
 	FactorXYZ();
 
 	auto temp = m_SinY;
@@ -248,7 +247,7 @@ void Mathematics::QuaternionFactor<Real>
 	temp = m_CosZ;
 	m_CosZ = m_CosX;
 	m_CosX = m_CosY;
-	m_CosY = temp;	
+	m_CosY = temp;
 }
 
 template <typename Real>

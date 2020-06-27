@@ -17,7 +17,7 @@
 template <typename Real>
 Mathematics::BSplineCurve3<Real>
 	::BSplineCurve3 (int numCtrlPoints,const Vector3D<Real>* ctrlPoint, int degree, bool loop, bool open)
-	:SingleCurve3<Real>{ Real{}, (Real)1 }, mLoop{ loop }
+	:SingleCurve3<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }, mLoop{ loop }, mCtrlPoint{}
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
@@ -31,7 +31,7 @@ Mathematics::BSplineCurve3<Real>
 template <typename Real>
 Mathematics::BSplineCurve3<Real>
 	::BSplineCurve3 (int numCtrlPoints, const Vector3D<Real>* ctrlPoint, int degree, bool loop,const Real* knot)
-	:SingleCurve3<Real>{ Real{}, (Real)1 }, mLoop{ loop }
+	:SingleCurve3<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }, mLoop{ loop }, mCtrlPoint{}
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");

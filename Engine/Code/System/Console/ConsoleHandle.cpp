@@ -2,14 +2,14 @@
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒıÇæ°æ±¾£º0.0.2.0 (2020/01/02 13:37)
+// ÒıÇæ°æ±¾£º0.2.0.0 (2020/05/09 21:37)
 
 #include "System/SystemExport.h"
 
 #include "ConsoleHandle.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
 System::WindowHandle System
 	::GetStandardHandle(StandardHandle standardhandle) noexcept

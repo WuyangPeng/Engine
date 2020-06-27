@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 16:12)
+// 引擎版本：0.2.0.0 (2020/05/10 11:18)
 
 #ifndef SYSTEM_THREADING_THREAD_POOL_USING_H
 #define SYSTEM_THREADING_THREAD_POOL_USING_H  
@@ -113,7 +113,7 @@ namespace System
 		uint32_t StackReserve;
 		uint32_t StackCommit;
 	};
-	using ThreadPoolPoolStackInformationPtr = ThreadPoolPoolStackInformation * ;
+	using ThreadPoolPoolStackInformationPtr = ThreadPoolPoolStackInformation*;
 
 	struct ThreadPoolTimer
 	{

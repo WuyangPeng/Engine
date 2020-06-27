@@ -7,7 +7,7 @@
 #include "System/SystemExport.h"
 
 #include "AndroidNativeWindowUsing.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Android/Flags/AndroidNativeWindowFlags.h"
 
 #ifndef SYSTEM_PLATFORM_ANDROID

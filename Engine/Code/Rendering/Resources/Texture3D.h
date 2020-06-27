@@ -64,8 +64,10 @@ namespace Rendering
     private:
 		IMPL_TYPE_DECLARE(Texture3D);
     };
-    
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)  
     CORE_TOOLS_STREAM_REGISTER(Texture3D);
+#include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, Texture3D); 
 }
 

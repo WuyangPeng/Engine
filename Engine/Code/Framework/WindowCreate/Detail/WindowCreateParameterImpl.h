@@ -1,45 +1,48 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 09:36)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 09:44)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_PARAMETER_IMPL_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_PARAMETER_IMPL_H
 
+#include "Framework/FrameworkDll.h"
+
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Window/Fwd/WindowFlagsFwd.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 
 #include <string>
 
 namespace Framework
 {
-	class WindowCreateParameterImpl
+	class FRAMEWORK_HIDDEN_DECLARE WindowCreateParameterImpl
 	{
 	public:
 		using ClassType = WindowCreateParameterImpl;
-        using WindowStylesFlags = System::WindowStyles;
-        using HWnd = System::WindowHWnd;
-        using HMenu = System::WindowHMenu;
+		using String = System::String;
+		using HWnd = System::WindowHWnd;
+		using HMenu = System::WindowHMenu;
+		using WindowStyles = System::WindowStyles;
 
 	public:
-		WindowCreateParameterImpl(const System::String& windowsName,WindowStylesFlags style, HWnd parent, HMenu menu,const WindowPoint& leftTopCorner);		
-		
+		WindowCreateParameterImpl(const String& windowsName, WindowStyles style, HWnd parent, HMenu menu, const WindowPoint& leftTopCorner);
+
 		CLASS_INVARIANT_DECLARE;
 
-		System::String GetWindowsName() const;
-	    WindowStylesFlags GetStyle() const;
-		WindowPoint GetLeftTopCorner() const;
-		HWnd GetParent() const;
-		HMenu GetMenu() const;
+		const String GetWindowsName() const;
+		WindowStyles GetStyle() const noexcept;
+		const WindowPoint GetLeftTopCorner() const noexcept;
+		HWnd GetParent() const noexcept;
+		HMenu GetMenu() const noexcept;
 
-	private:	
-		System::String m_WindowsName;	
-		WindowStylesFlags m_Style;	
+	private:
+		String m_WindowsName;
+		WindowStyles m_Style;
 		WindowPoint m_LeftTopCorner;
 		HWnd m_Parent;
-		HMenu m_Menu;		
+		HMenu m_Menu;
 	};
 }
 

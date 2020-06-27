@@ -7,6 +7,8 @@
 #ifndef RENDERING_RENDERERS_FWD_H
 #define RENDERING_RENDERERS_FWD_H
 
+#include <memory>
+
 namespace Rendering
 {
      class RendererBasis;
@@ -41,6 +43,12 @@ namespace Rendering
 
 	 class PlatformRenderTarget;
 	 class RenderTargetManagement;
+
+	 enum class RendererTypes;
+
+	 class Renderer;
+	 using RendererSharedPtr = std::shared_ptr<Renderer>; 
+	 using ConstRendererSharedPtr = std::shared_ptr<const Renderer>;
 }
 
 #endif // RENDERING_RENDERERS_FWD_H

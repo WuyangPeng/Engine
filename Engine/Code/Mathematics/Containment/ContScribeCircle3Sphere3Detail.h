@@ -41,11 +41,11 @@ bool Mathematics
 		 
 		direction0.SetXCoordinate(-normal.GetYCoordinate());
 		direction0.SetYCoordinate(normal.GetXCoordinate());
-		direction0.SetZCoordinate(Real{});
+		direction0.SetZCoordinate(Math<Real>::sm_Zero);
     }
     else
     {
-		direction0.SetXCoordinate(Real{});
+		direction0.SetXCoordinate(Math<Real>::sm_Zero);
 		direction0.SetYCoordinate(normal.GetZCoordinate());
 		direction0.SetZCoordinate(-normal.GetYCoordinate());        
     }
@@ -130,11 +130,11 @@ bool Mathematics
         return false;
     }
 
-	auto invA0 = ((Real)1)/a0;
-	auto invA1 = ((Real)1)/a1;
-	auto invA2 = ((Real)1)/a2;
+	auto invA0 = (static_cast<Real>(1))/a0;
+	auto invA1 = (static_cast<Real>(1))/a1;
+	auto invA2 = (static_cast<Real>(1))/a2;
 
-	auto radius = ((Real)1) / (invA0 + invA1 + invA2);
+	auto radius = (static_cast<Real>(1)) / (invA0 + invA1 + invA2);
 	auto center = circle.GetRadius()*(invA0*v0 + invA1*v1 + invA2*v2);
 
 	normal.Normalize();
@@ -194,8 +194,8 @@ bool Mathematics
 
     Real B[3] 
     {
-        Real{},
-        Real{},
+        Math<Real>::sm_Zero,
+        Math<Real>::sm_Zero,
 		-Vector3DTools<Real>::DotProduct(N3,E30)
     };
 

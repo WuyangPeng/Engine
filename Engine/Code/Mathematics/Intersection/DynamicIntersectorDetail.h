@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 18:06)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:17)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_DETAIL_H
@@ -14,7 +14,7 @@
 
 template <typename Real, template <typename> class Vector>
 Mathematics::DynamicIntersector<Real, Vector>
-	::DynamicIntersector(Real tMax, const VectorType& lhsVelocity,const VectorType& rhsVelocity, const Real epsilon)
+	::DynamicIntersector(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity, const Real epsilon)
 	:ParentType{ epsilon }, m_ContactTime{}, m_TMax{ tMax }, m_LhsVelocity{ lhsVelocity }, m_RhsVelocity{ rhsVelocity }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -22,7 +22,7 @@ Mathematics::DynamicIntersector<Real, Vector>
 
 template <typename Real, template <typename> class Vector>
 Mathematics::DynamicIntersector<Real, Vector>
-	::~DynamicIntersector() 
+	::~DynamicIntersector()
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -32,7 +32,7 @@ template <typename Real, template <typename> class Vector>
 bool Mathematics::DynamicIntersector<Real, Vector>
 	::IsValid() const  noexcept
 {
-	if(ParentType::IsValid() && Real{} <=  m_ContactTime)
+	if (ParentType::IsValid() && Math::sm_Zero <= m_ContactTime)
 		return true;
 	else
 		return false;
@@ -77,7 +77,7 @@ const typename Mathematics::DynamicIntersector<Real, Vector>::VectorType Mathema
 
 template <typename Real, template <typename> class Vector>
 void Mathematics::DynamicIntersector<Real, Vector>
-	::SetContactTime( Real contactTime )
+	::SetContactTime(Real contactTime)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 

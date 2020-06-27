@@ -1,16 +1,16 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:50)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 14:49)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
 #include "MiddleLayerInterface.h"
+#include "CoreTools/Helper/ExportMacro.h"
 
 FRAMEWORK_EXPORT_SHARED_PTR(ModelViewControllerMiddleLayerImpl);
 
@@ -21,31 +21,38 @@ namespace Framework
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(ModelViewControllerMiddleLayer);
 		using ParentType = MiddleLayerInterface;
+		using MiddleLayerSharedPtr = MiddleLayerInterfaceSharedPtr;
+		using ConstMiddleLayerSharedPtr = ConstMiddleLayerInterfaceSharedPtr;
 
 	public:
-		ModelViewControllerMiddleLayer();
-		virtual ~ModelViewControllerMiddleLayer();
-		
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
-		
-		void SetModelMiddleLayer(const MiddleLayerInterfaceSmartPointer& modelMiddleLayer);
-		void SetViewMiddleLayer(const MiddleLayerInterfaceSmartPointer& viewMiddleLayer);
-		void SetControllerMiddleLayer(const MiddleLayerInterfaceSmartPointer& controllerMiddleLayer);
+		explicit ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+		~ModelViewControllerMiddleLayer() noexcept = default;
+		ModelViewControllerMiddleLayer(const ModelViewControllerMiddleLayer& rhs) noexcept = delete;
+		ModelViewControllerMiddleLayer& operator=(const ModelViewControllerMiddleLayer& rhs) noexcept = delete;
+		ModelViewControllerMiddleLayer(ModelViewControllerMiddleLayer&& rhs) noexcept;
+		ModelViewControllerMiddleLayer& operator=(ModelViewControllerMiddleLayer&& rhs) noexcept;
+
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+
+		void SetModelMiddleLayer(const MiddleLayerSharedPtr& modelMiddleLayer) noexcept;
+		void SetViewMiddleLayer(const MiddleLayerSharedPtr& viewMiddleLayer) noexcept;
+		void SetControllerMiddleLayer(const MiddleLayerSharedPtr& controllerMiddleLayer) noexcept;
 
 	protected:
-		const MiddleLayerInterfaceSmartPointer GetModelMiddleLayer();
-		const MiddleLayerInterfaceSmartPointer GetViewMiddleLayer();
-		const MiddleLayerInterfaceSmartPointer GetControllerMiddleLayer();
+		const MiddleLayerSharedPtr GetModelMiddleLayer() noexcept;
+		const MiddleLayerSharedPtr GetViewMiddleLayer() noexcept;
+		const MiddleLayerSharedPtr GetControllerMiddleLayer() noexcept;
 
-		const ConstMiddleLayerInterfaceSmartPointer GetConstModelMiddleLayer() const;
-		const ConstMiddleLayerInterfaceSmartPointer GetConstViewMiddleLayer() const;
-		const ConstMiddleLayerInterfaceSmartPointer GetConstControllerMiddleLayer() const;
+		const ConstMiddleLayerSharedPtr GetConstModelMiddleLayer() const noexcept;
+		const ConstMiddleLayerSharedPtr GetConstViewMiddleLayer() const noexcept;
+		const ConstMiddleLayerSharedPtr GetConstControllerMiddleLayer() const noexcept;
 
-	private:		
+	private:
 		IMPL_TYPE_DECLARE(ModelViewControllerMiddleLayer);
 	};
 
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Second,ModelViewControllerMiddleLayer);
+	using ModelViewControllerMiddleLayerSharedPtr = std::shared_ptr<ModelViewControllerMiddleLayer>;
+	using ConstModelViewControllerMiddleLayerSharedPtr = std::shared_ptr<const ModelViewControllerMiddleLayer>;
 }
 
 #endif // FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_H

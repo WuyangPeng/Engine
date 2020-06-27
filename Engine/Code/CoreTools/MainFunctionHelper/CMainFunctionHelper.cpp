@@ -30,7 +30,7 @@ using std::exception;
 
 CoreTools::CMainFunctionHelper
 	::CMainFunctionHelper(int argc, char* argv[])
-	:m_Argc{ argc }, m_Argv{ argv }, m_OsPtr{ nullptr }, m_Schedule{ ScheduleType::Failure }
+	:m_Argc{ argc }, m_Argv{ argv }, m_OsPtr{ }, m_Schedule{ ScheduleType::Failure }
 {
 	try
 	{
@@ -53,6 +53,32 @@ CoreTools::CMainFunctionHelper
 }
 
 CoreTools::CMainFunctionHelper
+	::CMainFunctionHelper(CMainFunctionHelper&& rhs) noexcept
+	:m_Argc{ rhs.m_Argc }, m_Argv{ rhs.m_Argv }, m_OsPtr{ rhs.m_OsPtr }, m_Schedule{ rhs.m_Schedule }
+{
+	rhs.m_Argv = nullptr;
+	rhs.m_OsPtr = OStreamShared{ };
+
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::CMainFunctionHelper& CoreTools::CMainFunctionHelper
+	::operator=(CMainFunctionHelper&& rhs) noexcept
+{
+	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	m_Argc = rhs.m_Argc;
+	m_Argv = rhs.m_Argv;
+	m_OsPtr = rhs.m_OsPtr;
+	m_Schedule = rhs.m_Schedule; 
+
+	rhs.m_Argv = nullptr;
+	rhs.m_OsPtr = OStreamShared{ };
+
+	return *this;
+}
+
+CoreTools::CMainFunctionHelper
 	::~CMainFunctionHelper()
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -66,32 +92,11 @@ bool CoreTools::CMainFunctionHelper
 {
 	if (m_Schedule < ScheduleType::Max)
 		return true;
-	else if (m_Argc < 1 || m_Argv[0] == nullptr || m_OsPtr == nullptr)
+	else if (m_Argc < 1 || m_Argv[0] == nullptr)
 		return false;
-	else if (m_Argc == 1)
-		return ArgcEqualOneIsValid();
 	else
-		return ArgcUnequalOneIsValid();
-}
-
-bool CoreTools::CMainFunctionHelper
-	::ArgcEqualOneIsValid() const noexcept
-{
-	if (m_OsPtr == &cout)
 		return true;
-	else
-		return false;
-}
-
-bool CoreTools::CMainFunctionHelper
-	::ArgcUnequalOneIsValid() const noexcept
-{
-	if (m_OsPtr != &cout)
-		return true;
-	else
-		return false;
-}
-
+} 
 #endif // OPEN_CLASS_INVARIANT
 
 int CoreTools::CMainFunctionHelper
@@ -113,9 +118,9 @@ char** CoreTools::CMainFunctionHelper
 ostream* CoreTools::CMainFunctionHelper
 	::GetOStream() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	return m_OsPtr;
+	return &m_OsPtr.GetStream();
 }
 
 int CoreTools::CMainFunctionHelper
@@ -190,23 +195,20 @@ void CoreTools::CMainFunctionHelper
 {
 	if (m_Argc == 2)
 	{
-		m_OsPtr = NEW0 ofstream{ m_Argv[1],ofstream::out | ofstream::app };
+		m_OsPtr = OStreamShared{ std::string{ m_Argv[1] } };
 	}
 	else if (2 < m_Argc)
 	{
 		CommandHandle command{ m_Argc,m_Argv };
 
-		m_OsPtr = NEW0 ofstream{ command.GetFileName().c_str(),ofstream::out | ofstream::app };
+		m_OsPtr = OStreamShared{ command.GetFileName() }; 
 	}
 	else
 	{
-		m_OsPtr = &cout;
+		m_OsPtr = OStreamShared{ };
 	}
-
-	if (m_OsPtr != nullptr)
-	{
-		m_Schedule = ScheduleType::Max;
-	}
+	 
+	m_Schedule = ScheduleType::Max;	 
 }
 
 // private
@@ -224,11 +226,7 @@ void CoreTools::CMainFunctionHelper
 void CoreTools::CMainFunctionHelper
 	::DestroyOsPtr()
 {
-	if (1 < m_Argc)
-	{
-		// 在初始化失败的情况下，m_OsPtr可能是空指针，这里删除m_OsPtr是安全的。
-		DELETE0(m_OsPtr);
-	}
+	 
 }
 
 // private
@@ -288,6 +286,11 @@ void CoreTools::CMainFunctionHelper
 	CLOG.imbue(nullLocale);
 }
 
+CoreTools::OStreamShared CoreTools::CMainFunctionHelper
+	::GetStreamShared() const
+{
+	return m_OsPtr;
+}
 
 
 

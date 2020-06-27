@@ -22,7 +22,7 @@ CoreTools::LogConsoleTextColorsManager
 }
 
 CoreTools::LogConsoleTextColorsManager
-	::LogConsoleTextColorsManager(ostream* osPtr, LogLevel logLevel)
+	::LogConsoleTextColorsManager(const OStreamShared& osPtr, LogLevel logLevel)
 	:m_Impl{ LogConsoleTextColorsManagerFactory::Create(osPtr, logLevel) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

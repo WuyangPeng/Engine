@@ -22,11 +22,9 @@ namespace Mathematics
 		
 		// Length-from-time and time-from-length.
 		virtual Real GetLength (Real t0, Real t1) const;
-		virtual Real GetTime (Real length, int iterations = 32, Real tolerance = (Real)1e-06) const;
+		virtual Real GetTime (Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const;
 
-	protected:
-		using Curve3<Real>::mTMin;
-		using Curve3<Real>::mTMax;
+	protected: 
 		using Curve3<Real>::GetSpeed;
 		using Curve3<Real>::GetTotalLength;
 		

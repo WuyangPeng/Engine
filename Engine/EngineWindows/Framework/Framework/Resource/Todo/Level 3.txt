@@ -1,3 +1,8 @@
 TODO Level 3
 
-0.0.0.4
+0.3.0.1
+
+1.（LinuxFrame）实现LinuxFrame模块。
+2.（MacintoshFrame）实现MacintoshFrame模块。
+3.（ConsoleFrame）实现ConsoleFrame模块。
+4.（综合）渲染参数解析了两次，看是否通过传递减少重复。

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:27)
+// 引擎版本：0.0.2.5 (2020/03/23 14:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_DETAIL_H
@@ -16,10 +16,10 @@
 
 template <typename Real>
 Mathematics::PolynomialFit3<Real>
-	::PolynomialFit3(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples,int xDegree, int yDegree)
+	::PolynomialFit3(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, size_t xDegree, size_t yDegree)
 	:m_Coeff((xDegree + 1) * (yDegree + 1)), m_SolveSucceed{ false }
 {
-	Calculate(xSamples,ySamples, wSamples,xDegree,yDegree);
+	Calculate(xSamples, ySamples, wSamples,boost::numeric_cast<int>(xDegree), boost::numeric_cast<int>(yDegree));
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -27,7 +27,7 @@ Mathematics::PolynomialFit3<Real>
 // private
 template <typename Real>
 void Mathematics::PolynomialFit3<Real>
-	::Calculate(const Samples& xSamples, const Samples& ySamples,const Samples& wSamples, int xDegree, int yDegree)
+	::Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, int xDegree, int yDegree)
 {
 	MATHEMATICS_ASSERTION_2(xSamples.size() == ySamples.size(), "传入的样品大小不同！\n");
 	MATHEMATICS_ASSERTION_2(xSamples.size() == wSamples.size(), "传入的样品大小不同！\n");
@@ -46,31 +46,31 @@ void Mathematics::PolynomialFit3<Real>
 
 	auto numSamples = wSamples.size();
 
-    for (auto yDegreeIndex = 0; yDegreeIndex <= yDegree; ++yDegreeIndex)
-    {
-        for (auto xDegreeIndex = 0; xDegreeIndex <= xDegree; ++xDegreeIndex)
-        {
+	for (auto yDegreeIndex = 0; yDegreeIndex <= yDegree; ++yDegreeIndex)
+	{
+		for (auto xDegreeIndex = 0; xDegreeIndex <= xDegree; ++xDegreeIndex)
+		{
 			auto index = xDegreeIndex + xBound * yDegreeIndex;
-			inputVector[index] = Real{ };
-            for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
-            {
-				inputVector[index] += wSamples[samplesIndex] * xPower(samplesIndex,xDegreeIndex) * yPower(samplesIndex,yDegreeIndex);
-            }
-			    
-            for (auto innerYDegreeIndex = 0; innerYDegreeIndex <= yDegree; ++innerYDegreeIndex)
-            {
-                for (auto innerXDegreeIndex = 0; innerXDegreeIndex <= xDegree; ++innerXDegreeIndex)
-                {
+			inputVector[index] = Math<Real>::sm_Zero;
+			for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
+			{
+				inputVector[index] += wSamples[samplesIndex] * xPower(samplesIndex, xDegreeIndex) * yPower(samplesIndex, yDegreeIndex);
+			}
+
+			for (auto innerYDegreeIndex = 0; innerYDegreeIndex <= yDegree; ++innerYDegreeIndex)
+			{
+				for (auto innerXDegreeIndex = 0; innerXDegreeIndex <= xDegree; ++innerXDegreeIndex)
+				{
 					auto innerIndex = innerXDegreeIndex + xBound * innerYDegreeIndex;
-					matrix(index, innerIndex) = Real{ };
-                    for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
-                    {
-						matrix(index, innerIndex) += xPower(samplesIndex,xDegreeIndex + innerXDegreeIndex) * yPower(samplesIndex,yDegreeIndex + innerYDegreeIndex);
-                    } 
-                }
-            }
-        }
-    }
+					matrix(index, innerIndex) = Math<Real>::sm_Zero;
+					for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
+					{
+						matrix(index, innerIndex) += xPower(samplesIndex, xDegreeIndex + innerXDegreeIndex) * yPower(samplesIndex, yDegreeIndex + innerYDegreeIndex);
+					}
+				}
+			}
+		}
+	}
 
 	try
 	{
@@ -89,9 +89,8 @@ void Mathematics::PolynomialFit3<Real>
 			<< SYSTEM_TEXT("求解线性系统失败\n")
 			<< error
 			<< CoreTools::LogAppenderIOManageSign::Refresh;
-	} 
+	}
 }
-
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
@@ -120,6 +119,4 @@ bool Mathematics::PolynomialFit3<Real>
 	return m_SolveSucceed;
 }
 
-
 #endif // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_DETAIL_H
- 

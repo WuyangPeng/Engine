@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 14:46)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 10:20)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR_DETAIL_H
@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>
 	::RationalVector()
 {
@@ -24,10 +24,9 @@ Mathematics::RationalVector<VectorSize, IntSize>
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>
-	::RationalVector( const RationalVector& rhs )
+	::RationalVector(const RationalVector& rhs)
 {
 	for (auto i = 0; i < VectorSize; ++i)
 	{
@@ -37,10 +36,9 @@ Mathematics::RationalVector<VectorSize, IntSize>
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<VectorSize, IntSize>
-	::operator=( const RationalVector& rhs )
+	::operator=(const RationalVector& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -53,7 +51,7 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 bool Mathematics::RationalVector<VectorSize, IntSize>
 	::IsValid() const noexcept
 {
@@ -61,27 +59,33 @@ bool Mathematics::RationalVector<VectorSize, IntSize>
 }
 #endif // OPEN_CLASS_INVARIANT
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 typename const Mathematics::RationalVector<VectorSize, IntSize>::Rational& Mathematics::RationalVector<VectorSize, IntSize>
-	::operator[]( int index ) const
+	::operator[](int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < VectorSize,"À˜“˝¥ÌŒÛ£°");
 
-	return m_Tuple[index];
+	if (0 <= index && index < VectorSize)
+	{
+		return m_Tuple[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("À˜“˝¥ÌŒÛ£°"));
+	}
 }
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 typename Mathematics::RationalVector<VectorSize, IntSize>::Rational& Mathematics::RationalVector<VectorSize, IntSize>
-	::operator[]( int index ) 
+	::operator[](int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < VectorSize, "À˜“˝¥ÌŒÛ£°");
 
-	return OPERATOR_SQUARE_BRACKETS(Rational,index);
+	return OPERATOR_SQUARE_BRACKETS(Rational, index);
 }
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 const Mathematics::RationalVector<VectorSize, IntSize> Mathematics::RationalVector<VectorSize, IntSize>
 	::operator-() const
 {
@@ -95,9 +99,9 @@ const Mathematics::RationalVector<VectorSize, IntSize> Mathematics::RationalVect
 	return negative;
 }
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<VectorSize, IntSize>
-	::operator+=( const RationalVector& rhs )
+	::operator+=(const RationalVector& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -109,9 +113,9 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 	return *this;
 }
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<VectorSize, IntSize>
-	::operator-=( const RationalVector& rhs )
+	::operator-=(const RationalVector& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -123,9 +127,9 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 	return *this;
 }
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<VectorSize, IntSize>
-	::operator*=( const Rational& scalar )
+	::operator*=(const Rational& scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -137,9 +141,9 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 	return *this;
 }
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<VectorSize, IntSize>
-	::operator/=( const Rational& scalar )
+	::operator/=(const Rational& scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -151,7 +155,7 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 	return *this;
 }
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 typename Mathematics::RationalVector<VectorSize, IntSize>::Rational Mathematics::RationalVector<VectorSize, IntSize>
 	::SquaredLength() const
 {
@@ -166,10 +170,9 @@ typename Mathematics::RationalVector<VectorSize, IntSize>::Rational Mathematics:
 	return squaredLength;
 }
 
-
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 Mathematics::SignRational<IntSize> Mathematics
-	::Dot( const RationalVector<VectorSize,IntSize>& lhs,const RationalVector<VectorSize,IntSize>& rhs )
+	::Dot(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs)
 {
 	SignRational<IntSize> dot{ 0 };
 	for (auto i = 0; i < VectorSize; ++i)
@@ -180,10 +183,9 @@ Mathematics::SignRational<IntSize> Mathematics
 	return dot;
 }
 
-
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 bool Mathematics
-	::operator==( const RationalVector<VectorSize,IntSize>& lhs, const RationalVector<VectorSize,IntSize>& rhs )
+	::operator==(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs)
 {
 	for (auto i = 0; i < VectorSize; ++i)
 	{
@@ -195,9 +197,9 @@ bool Mathematics
 	return true;
 }
 
-template <int VectorSize,int IntSize>
+template <int VectorSize, int IntSize>
 bool Mathematics
-	::operator<( const RationalVector<VectorSize,IntSize>& lhs,   const RationalVector<VectorSize,IntSize>& rhs )
+	::operator<(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs)
 {
 	for (auto i = 0; i < VectorSize; ++i)
 	{
@@ -205,7 +207,7 @@ bool Mathematics
 		{
 			return true;
 		}
-		else if(rhs[i] < lhs[i])
+		else if (rhs[i] < lhs[i])
 		{
 			return false;
 		}

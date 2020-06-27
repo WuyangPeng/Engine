@@ -11,7 +11,7 @@
 
 #include "BitArrayManagerFwd.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 
 namespace CoreTools
 {

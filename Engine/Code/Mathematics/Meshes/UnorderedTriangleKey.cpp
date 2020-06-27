@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include <algorithm>
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 Mathematics::UnorderedTriangleKey
 ::UnorderedTriangleKey (int first, int second,int third)
@@ -83,10 +84,16 @@ CLASS_INVARIANT_STUB_DEFINE(Mathematics, UnorderedTriangleKey)
 int Mathematics::UnorderedTriangleKey
 	::GetKey(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < 3,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_CONST_9; 
     
-    return m_Vertex[index];
+	if (0 <= index && index < 3)
+	{
+		return m_Vertex[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}
 }
 
 bool Mathematics

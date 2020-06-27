@@ -43,7 +43,7 @@ void Mathematics::StaticTestIntersectorRay3Box3<Real>
     AWdU[0] = Math::FAbs(WdU[0]);
 	DdU[0] = Vector3DTools::DotProduct(diff, mBox.GetAxis(0));
     ADdU[0] = Math::FAbs(DdU[0]);
-    if (ADdU[0] > mBox.GetExtent(0) && DdU[0]*WdU[0] >= Real{})
+    if (ADdU[0] > mBox.GetExtent(0) && DdU[0]*WdU[0] >= Math<Real>::sm_Zero)
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -53,7 +53,7 @@ void Mathematics::StaticTestIntersectorRay3Box3<Real>
     AWdU[1] = Math::FAbs(WdU[1]);
 	DdU[1] = Vector3DTools::DotProduct(diff,mBox.GetAxis(1));
     ADdU[1] = Math::FAbs(DdU[1]);
-	if (ADdU[1] > mBox.GetExtent(1) && DdU[1] * WdU[1] >= Real{})
+	if (ADdU[1] > mBox.GetExtent(1) && DdU[1] * WdU[1] >= Math<Real>::sm_Zero)
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -63,7 +63,7 @@ void Mathematics::StaticTestIntersectorRay3Box3<Real>
     AWdU[2] = Math::FAbs(WdU[2]);
 	DdU[2] = Vector3DTools::DotProduct(diff, mBox.GetAxis(2));
     ADdU[2] = Math::FAbs(DdU[2]);
-	if (ADdU[2] > mBox.GetExtent(2) && DdU[2] * WdU[2] >= Real{})
+	if (ADdU[2] > mBox.GetExtent(2) && DdU[2] * WdU[2] >= Math<Real>::sm_Zero)
     {
 		this->SetIntersectionType(IntersectionType::Empty);
 		return;

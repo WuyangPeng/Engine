@@ -39,7 +39,7 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>
     auto diff = mRay.GetOrigin() - mSphere.GetCenter();
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
     Real a1, discr, root;
-    if (a0 <= Real{})
+    if (a0 <= Math<Real>::sm_Zero)
     {
         // P is inside the sphere
 		a1 = Vector3DTools::DotProduct(mRay.GetDirection(),diff);

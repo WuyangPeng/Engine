@@ -168,103 +168,103 @@ extern "C"
 GLXBool System
 	::GlXQueryExtension(Display* display, int* errorBase, int* eventBase) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glXQueryExtension, display, errorBase, eventBase, GLXBool);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glXQueryExtension, display, errorBase, eventBase, GLXBool);
 }
 
 GLXBool System
 	::GlXQueryVersion(Display* display, int* major, int* minor) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glXQueryVersion, display, major, minor, GLXBool);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glXQueryVersion, display, major, minor, GLXBool);
 }
 
 int System
 	::GlXGetConfig(Display* display, XVisualInfo* visualInfo, int attribute, int* value) noexcept
 {
-	SYSTEM_PRE_BODY_A4_RESULT(glXGetConfig, display, visualInfo, attribute, value, int);
+	SYSTEM_PREVIOUSLY_BODY_4_RESULT(glXGetConfig, display, visualInfo, attribute, value, int);
 }
 
 XVisualInfo* System
 	::GlXChooseVisual(Display* display, int screen, int* attributeList) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glXChooseVisual, display, screen, attributeList, XVisualInfo*);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glXChooseVisual, display, screen, attributeList, XVisualInfo*);
 }
 
 GLXPixmap System
 	::GlXCreateGLXPixmap(Display* display, XVisualInfo* visualInfo, Pixmap pixmap) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glXCreateGLXPixmap, display, visualInfo, pixmap, GLXPixmap);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glXCreateGLXPixmap, display, visualInfo, pixmap, GLXPixmap);
 }
 
 void System
 	::GlXDestroyGLXPixmap(Display* display, GLXPixmap pixmap) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glXDestroyGLXPixmap, display, pixmap);
+	SYSTEM_PREVIOUSLY_BODY_2(glXDestroyGLXPixmap, display, pixmap);
 }
 
 GLXContext System
 	::GlXCreateContext(Display* display, XVisualInfo* visualInfo, GLXContext shareList, GLXBool direct) noexcept
 {
-	SYSTEM_PRE_BODY_A4_RESULT(glXCreateContext, display, visualInfo, shareList, direct, GLXContext);
+	SYSTEM_PREVIOUSLY_BODY_4_RESULT(glXCreateContext, display, visualInfo, shareList, direct, GLXContext);
 }
 
 void System
 	::GlXDestroyContext(Display* display, GLXContext context) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glXDestroyContext, display, context);
+	SYSTEM_PREVIOUSLY_BODY_2(glXDestroyContext, display, context);
 }
 
 GLXBool System
 	::GlXIsDirect(Display* display, GLXContext context) noexcept
 {
-	SYSTEM_PRE_BODY_A2_RESULT(glXIsDirect, display, context, GLXBool);
+	SYSTEM_PREVIOUSLY_BODY_2_RESULT(glXIsDirect, display, context, GLXBool);
 }
 
 void System
 	::GlXCopyContext(Display* display, GLXContext srcContext, GLXContext dstContext, GLulong mask) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glXCopyContext, display, srcContext, dstContext, mask);
+	SYSTEM_PREVIOUSLY_BODY_4(glXCopyContext, display, srcContext, dstContext, mask);
 }
 
 GLXBool System
 	::GlXMakeCurrent(Display* display, GLXDrawable drawable, GLXContext context) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glXMakeCurrent, display, drawable, context, GLXBool);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glXMakeCurrent, display, drawable, context, GLXBool);
 }
 
 GLXContext System
 	::GlXGetCurrentContext() noexcept
 {
-	SYSTEM_PRE_BODY_A0_RESULT(glXGetCurrentContext, GLXContext);
+	SYSTEM_PREVIOUSLY_BODY_0_RESULT(glXGetCurrentContext, GLXContext);
 }
 
 GLXDrawable System
 	::GlXGetCurrentDrawable() noexcept
 {
-	SYSTEM_PRE_BODY_A0_RESULT(glXGetCurrentDrawable, GLXDrawable);
+	SYSTEM_PREVIOUSLY_BODY_0_RESULT(glXGetCurrentDrawable, GLXDrawable);
 }
 
 void System
 	::GlXWaitGL() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glXWaitGL);
+	SYSTEM_PREVIOUSLY_BODY_0(glXWaitGL);
 }
 
 void System
 	::GlXWaitX() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glXWaitX);
+	SYSTEM_PREVIOUSLY_BODY_0(glXWaitX);
 }
 
 void System
 	::GlXSwapBuffers(Display* display, GLXDrawable drawable) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glXSwapBuffers, display, drawable);
+	SYSTEM_PREVIOUSLY_BODY_2(glXSwapBuffers, display, drawable);
 }
 
 void System
 	::GlXUseXFont(Font font, int first, int count, int listBase) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glXUseXFont, font, first, count, listBase);
+	SYSTEM_PREVIOUSLY_BODY_4(glXUseXFont, font, first, count, listBase);
 }
 
 // GLX 1.1
@@ -318,19 +318,19 @@ extern "C"
 const char* System
 	::GlXQueryExtensionsString(Display* display, int screen) noexcept
 {
-	SYSTEM_PRE_BODY_A2_RESULT(glXQueryExtensionsString, display, screen, const char*);
+	SYSTEM_PREVIOUSLY_BODY_2_RESULT(glXQueryExtensionsString, display, screen, const char*);
 }
 
 const char* System
 	::GlXGetClientString(Display* display, int name) noexcept
 {
-	SYSTEM_PRE_BODY_A2_RESULT(glXGetClientString, display, name, const char*);
+	SYSTEM_PREVIOUSLY_BODY_2_RESULT(glXGetClientString, display, name, const char*);
 }
 
 const char* System
 	::GlXQueryServerString(Display* display, int screen, int name) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glXQueryServerString, display, screen, name, const char*);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glXQueryServerString, display, screen, name, const char*);
 }
 
 // GLX 1.2
@@ -370,7 +370,7 @@ extern "C"
 Display* System
 	::GlXGetCurrentDisplay() noexcept
 {
-	SYSTEM_PRE_BODY_A0_RESULT(glXGetCurrentDisplay, Display*);
+	SYSTEM_PREVIOUSLY_BODY_0_RESULT(glXGetCurrentDisplay, Display*);
 }
 
 // GLX 1.3
@@ -580,103 +580,103 @@ extern "C"
 GLXFBConfig* System
 	::GlXGetFBConfigs(Display* display, int screen, int* numElements) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glXGetFBConfigs, display, screen, numElements, GLXFBConfig*);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glXGetFBConfigs, display, screen, numElements, GLXFBConfig*);
 }
 
 GLXFBConfig* System
 	::GlXChooseFBConfig(Display* display, int screen, const int* attributeList, int* numElements) noexcept
 {
-	SYSTEM_PRE_BODY_A4_RESULT(glXChooseFBConfig, display, screen, attributeList, numElements, GLXFBConfig*);
+	SYSTEM_PREVIOUSLY_BODY_4_RESULT(glXChooseFBConfig, display, screen, attributeList, numElements, GLXFBConfig*);
 }
 
 int System
 	::GlXGetFBConfigAttrib(Display* display, GLXFBConfig config, int attribute, int* value) noexcept
 {
-	SYSTEM_PRE_BODY_A4_RESULT(glXGetFBConfigAttrib, display, config, attribute, value, int);
+	SYSTEM_PREVIOUSLY_BODY_4_RESULT(glXGetFBConfigAttrib, display, config, attribute, value, int);
 }
 
 XVisualInfo* System
 	::GlXGetVisualFromFBConfig(Display* display, GLXFBConfig config) noexcept
 {
-	SYSTEM_PRE_BODY_A2_RESULT(glXGetVisualFromFBConfig, display, config, XVisualInfo*);
+	SYSTEM_PREVIOUSLY_BODY_2_RESULT(glXGetVisualFromFBConfig, display, config, XVisualInfo*);
 }
 
 GLXWindow System
 	::GlXCreateWindow(Display* display, GLXFBConfig config, Window window, const int* attributeList) noexcept
 {
-	SYSTEM_PRE_BODY_A4_RESULT(glXCreateWindow, display, config, window, attributeList, GLXWindow);
+	SYSTEM_PREVIOUSLY_BODY_4_RESULT(glXCreateWindow, display, config, window, attributeList, GLXWindow);
 }
 
 void System
 	::GlXDestroyWindow(Display* display, GLXWindow window) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glXDestroyWindow, display, window);
+	SYSTEM_PREVIOUSLY_BODY_2(glXDestroyWindow, display, window);
 }
 
 GLXPixmap System
 	::GlXCreatePixmap(Display* display, GLXFBConfig config, Pixmap pixmap, const int* attributeList) noexcept
 {
-	SYSTEM_PRE_BODY_A4_RESULT(glXCreatePixmap, display, config, pixmap, attributeList, GLXPixmap);
+	SYSTEM_PREVIOUSLY_BODY_4_RESULT(glXCreatePixmap, display, config, pixmap, attributeList, GLXPixmap);
 }
 
 void System
 	::GlXDestroyPixmap(Display* display, GLXPixmap pixmap) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glXDestroyPixmap, display, pixmap);
+	SYSTEM_PREVIOUSLY_BODY_2(glXDestroyPixmap, display, pixmap);
 }
 
 GLXPbuffer System
 	::GlXCreatePbuffer(Display* display, GLXFBConfig config, const int* attributeList) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glXCreatePbuffer, display, config, attributeList, GLXPbuffer);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glXCreatePbuffer, display, config, attributeList, GLXPbuffer);
 }
 
 void System
 	::GlXDestroyPbuffer(Display* display, GLXPbuffer buffer) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glXDestroyPbuffer, display, buffer);
+	SYSTEM_PREVIOUSLY_BODY_2(glXDestroyPbuffer, display, buffer);
 }
 
 void System
 	::GlXQueryDrawable(Display* display, GLXDrawable drawable, int attribute, unsigned int* value) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glXQueryDrawable, display, drawable, attribute, value);
+	SYSTEM_PREVIOUSLY_BODY_4(glXQueryDrawable, display, drawable, attribute, value);
 }
 
 GLXContext System
 	::GlXCreateNewContext(Display* display, GLXFBConfig config, int renderType, GLXContext shareList, GLXBool direct) noexcept
 {
-	SYSTEM_PRE_BODY_A5_RESULT(glXCreateNewContext, display, config, renderType, shareList, direct, GLXContext);
+	SYSTEM_PREVIOUSLY_BODY_5_RESULT(glXCreateNewContext, display, config, renderType, shareList, direct, GLXContext);
 }
 
 GLXBool System
 	::GlXMakeContextCurrent(Display* display, GLXDrawable draw, GLXDrawable read, GLXContext context) noexcept
 {
-	SYSTEM_PRE_BODY_A4_RESULT(glXMakeContextCurrent, display, draw, read, context, GLXBool);
+	SYSTEM_PREVIOUSLY_BODY_4_RESULT(glXMakeContextCurrent, display, draw, read, context, GLXBool);
 }
 
 GLXDrawable System
 	::GlXGetCurrentReadDrawable() noexcept
 {
-	SYSTEM_PRE_BODY_A0_RESULT(glXGetCurrentReadDrawable, GLXDrawable);
+	SYSTEM_PREVIOUSLY_BODY_0_RESULT(glXGetCurrentReadDrawable, GLXDrawable);
 }
 
 int System
 	::GlXQueryContext(Display* display, GLXContext context, int attribute, int* value) noexcept
 {
-	SYSTEM_PRE_BODY_A4_RESULT(glXQueryContext, display, context, attribute, value, int);
+	SYSTEM_PREVIOUSLY_BODY_4_RESULT(glXQueryContext, display, context, attribute, value, int);
 }
 
 void System
 	::GlXSelectEvent(Display* display, GLXDrawable drawable, unsigned long eventMask) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glXSelectEvent, display, drawable, eventMask);
+	SYSTEM_PREVIOUSLY_BODY_3(glXSelectEvent, display, drawable, eventMask);
 }
 
 void System
 	::GlXGetSelectedEvent(Display* display, GLXDrawable drawable, unsigned long* eventMask) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glXGetSelectedEvent, display, drawable, eventMask);
+	SYSTEM_PREVIOUSLY_BODY_3(glXGetSelectedEvent, display, drawable, eventMask);
 }
 
 // GLX 1.4
@@ -870,7 +870,7 @@ namespace System
 GLXContext System
 	::GlXCreateContextAttribsARB(Display* dpy, GLXFBConfig config, GLXContext shareContext, GLXBool direct, const int* attribList) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gglxCreateContextAttribsARB, dpy, config, shareContext, direct, attribList, GLXContext, nullptr);
+	SYSTEM_BODY_5_RESULT(gglxCreateContextAttribsARB, dpy, config, shareContext, direct, attribList, GLXContext, nullptr);
 }
 
 void System
@@ -1101,7 +1101,7 @@ void System
 	::GlXSwapIntervalEXT(Display* dpy, GLXDrawable drawable, int interval) noexcept
 
 {
-	SYSTEM_BODY_A3(gglXSwapIntervalEXT, dpy, drawable, interval);
+	SYSTEM_BODY_3(gglXSwapIntervalEXT, dpy, drawable, interval);
 }
 
 void System
@@ -1187,31 +1187,31 @@ namespace System
 Display* System
 	::GlXGetCurrentDisplayEXT() noexcept
 {
-	SYSTEM_BODY_A0_RESULT(gglXGetCurrentDisplayEXT, Display*, nullptr);
+	SYSTEM_BODY_0_RESULT(gglXGetCurrentDisplayEXT, Display*, nullptr);
 }
 
 int System
 	::GlXQueryContextInfoEXT(Display* display, GLXContext context, int attribute, int* value) noexcept
 {
-	SYSTEM_BODY_A4_RESULT(gglXQueryContextInfoEXT, display, context, attribute, value, int, -1);
+	SYSTEM_BODY_4_RESULT(gglXQueryContextInfoEXT, display, context, attribute, value, int, -1);
 }
 
 GLXContextID System
 	::GlXGetContextIDEXT(const GLXContext context) noexcept
 {
-	SYSTEM_BODY_A1_RESULT(gglXGetContextIDEXT, context, GLXContextID, -1);
+	SYSTEM_BODY_1_RESULT(gglXGetContextIDEXT, context, GLXContextID, -1);
 }
 
 GLXContext System
 	::GlXImportContextEXT(Display* display, GLXContextID contextID) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglXImportContextEXT, display, contextID, GLXContext, nullptr);
+	SYSTEM_BODY_2_RESULT(gglXImportContextEXT, display, contextID, GLXContext, nullptr);
 }
 
 void System
 	::GlXFreeContextEXT(Display* display, GLXContext context) noexcept
 {
-	SYSTEM_BODY_A2(gglXFreeContextEXT, display, context);
+	SYSTEM_BODY_2(gglXFreeContextEXT, display, context);
 }
 
 void System
@@ -1355,13 +1355,13 @@ namespace System
 void System
 	::GlXBindTexImageEXT(Display* display, GLXDrawable drawable, int buffer, const int* attribList) noexcept
 {
-	SYSTEM_BODY_A4(gglXBindTexImageEXT, display, drawable, buffer, attribList);
+	SYSTEM_BODY_4(gglXBindTexImageEXT, display, drawable, buffer, attribList);
 }
 
 void System
 	::GlXReleaseTexImageEXT(Display* display, GLXDrawable drawable, int buffer) noexcept
 {
-	SYSTEM_BODY_A3(gglXReleaseTexImageEXT, display, drawable, buffer);
+	SYSTEM_BODY_3(gglXReleaseTexImageEXT, display, drawable, buffer);
 }
 
 void System
@@ -1572,37 +1572,37 @@ namespace System
 int System
 	::GlXGetFBConfigAttribSGIX(Display* display, GLXFBConfigSGIX config, int attribute, int* value) noexcept
 {
-	SYSTEM_BODY_A4_RESULT(gglXGetFBConfigAttribSGIX, display, config, attribute, value, int, -1);
+	SYSTEM_BODY_4_RESULT(gglXGetFBConfigAttribSGIX, display, config, attribute, value, int, -1);
 }
 
 GLXFBConfigSGIX* System
 	::GlXChooseFBConfigSGIX(Display* display, int screen, int* attributeList, int* numElements) noexcept
 {
-	SYSTEM_BODY_A4_RESULT(gglXChooseFBConfigSGIX, display, screen, attributeList, numElements, GLXFBConfigSGIX*, nullptr);
+	SYSTEM_BODY_4_RESULT(gglXChooseFBConfigSGIX, display, screen, attributeList, numElements, GLXFBConfigSGIX*, nullptr);
 }
 
 GLXPixmap System
 	::GlXCreateGLXPixmapWithConfigSGIX(Display* display, GLXFBConfigSGIX config, Pixmap pixmap) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gglXCreateGLXPixmapWithConfigSGIX, display, config, pixmap, GLXPixmap, -1);
+	SYSTEM_BODY_3_RESULT(gglXCreateGLXPixmapWithConfigSGIX, display, config, pixmap, GLXPixmap, -1);
 }
 
 GLXContext System
 	::GlXCreateContextWithConfigSGIX(Display* display, GLXFBConfigSGIX config, int renderType, GLXContext shareList, GLXBool direct) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gglXCreateContextWithConfigSGIX, display, config, renderType, shareList, direct, GLXContext, nullptr);
+	SYSTEM_BODY_5_RESULT(gglXCreateContextWithConfigSGIX, display, config, renderType, shareList, direct, GLXContext, nullptr);
 }
 
 XVisualInfo* System
 	::GlXGetVisualFromFBConfigSGIX(Display* display, GLXFBConfigSGIX config) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglXGetVisualFromFBConfigSGIX, display, config, XVisualInfo*, nullptr);
+	SYSTEM_BODY_2_RESULT(gglXGetVisualFromFBConfigSGIX, display, config, XVisualInfo*, nullptr);
 }
 
 GLXFBConfigSGIX System
 	::GlXGetFBConfigFromVisualSGIX(Display* display, XVisualInfo* visualInfo) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglXGetFBConfigFromVisualSGIX, display, visualInfo, GLXFBConfigSGIX, nullptr);
+	SYSTEM_BODY_2_RESULT(gglXGetFBConfigFromVisualSGIX, display, visualInfo, GLXFBConfigSGIX, nullptr);
 }
 
 void System
@@ -1666,31 +1666,31 @@ namespace System
 GLXPbufferSGIX System
 	::GlXCreateGLXPbufferSGIX(Display* display, GLXFBConfigSGIX config, unsigned int width, unsigned int height, int* attributeList) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gglXCreateGLXPbufferSGIX, display, config, width, height, attributeList, GLXPbufferSGIX, -1);
+	SYSTEM_BODY_5_RESULT(gglXCreateGLXPbufferSGIX, display, config, width, height, attributeList, GLXPbufferSGIX, -1);
 }
 
 void System
 	::GlXDestroyGLXPbufferSGIX(Display* display, GLXPbufferSGIX buffer) noexcept
 {
-	SYSTEM_BODY_A2(gglXDestroyGLXPbufferSGIX, display, buffer);
+	SYSTEM_BODY_2(gglXDestroyGLXPbufferSGIX, display, buffer);
 }
 
 int System
 	::GlXQueryGLXPbufferSGIX(Display* display, GLXPbufferSGIX buffer, int attribute, unsigned int* value) noexcept
 {
-	SYSTEM_BODY_A4_RESULT(gglXQueryGLXPbufferSGIX, display, buffer, attribute, value, int, -1);
+	SYSTEM_BODY_4_RESULT(gglXQueryGLXPbufferSGIX, display, buffer, attribute, value, int, -1);
 }
 
 void System
 	::GlXSelectEventSGIX(Display* display, GLXDrawable drawable, unsigned long mask) noexcept
 {
-	SYSTEM_BODY_A3(gglXSelectEventSGIX, display, drawable, mask);
+	SYSTEM_BODY_3(gglXSelectEventSGIX, display, drawable, mask);
 }
 
 void System
 	::GlXGetSelectedEventSGIX(Display* display, GLXDrawable drawable, unsigned long* mask) noexcept
 {
-	SYSTEM_BODY_A3(gglXGetSelectedEventSGIX, display, drawable, mask);
+	SYSTEM_BODY_3(gglXGetSelectedEventSGIX, display, drawable, mask);
 }
 
 void System
@@ -1749,31 +1749,31 @@ namespace System
 int System
 	::GlXBindChannelToWindowSGIX(Display* display, int screen, int channel, Window window) noexcept
 {
-	SYSTEM_BODY_A4_RESULT(gglxBindChannelToWindowSGIX, display, screen, channel, window, int, -1);
+	SYSTEM_BODY_4_RESULT(gglxBindChannelToWindowSGIX, display, screen, channel, window, int, -1);
 }
 
 int System
 	::GlXChannelRectSGIX(Display* display, int screen, int channel, int x, int y, int w, int h) noexcept
 {
-	SYSTEM_BODY_A7_RESULT(gglxChannelRectSGIX, display, screen, channel, x, y, w, h, int, -1);
+	SYSTEM_BODY_7_RESULT(gglxChannelRectSGIX, display, screen, channel, x, y, w, h, int, -1);
 }
 
 int System
 	::GlXChannelRectSyncSGIX(Display* display, int screen, int channel, GLenum synctype) noexcept
 {
-	SYSTEM_BODY_A4_RESULT(gglxChannelRectSyncSGIX, display, screen, channel, synctype, int, -1);
+	SYSTEM_BODY_4_RESULT(gglxChannelRectSyncSGIX, display, screen, channel, synctype, int, -1);
 }
 
 int System
 	::GlXQueryChannelDeltasSGIX(Display* display, int screen, int channel, int* x, int* y, int* w, int* h) noexcept
 {
-	SYSTEM_BODY_A7_RESULT(gglxQueryChannelDeltasSGIX, display, screen, channel, x, y, w, h, int, -1);
+	SYSTEM_BODY_7_RESULT(gglxQueryChannelDeltasSGIX, display, screen, channel, x, y, w, h, int, -1);
 }
 
 int System
 	::GlXQueryChannelRectSGIX(Display* display, int screen, int channel, int* dx, int* dy, int* dw, int* dh) noexcept
 {
-	SYSTEM_BODY_A7_RESULT(gglxQueryChannelRectSGIX, display, screen, channel, dx, dy, dw, dh, int, -1);
+	SYSTEM_BODY_7_RESULT(gglxQueryChannelRectSGIX, display, screen, channel, dx, dy, dw, dh, int, -1);
 }
 
 void System
@@ -1824,7 +1824,7 @@ namespace System
 void System
 	::GlXJoinSwapGroupSGIX(Display* dpy, GLXDrawable drawable, GLXDrawable member) noexcept
 {
-	SYSTEM_BODY_A3(gglXJoinSwapGroupSGIX, dpy, drawable, member);
+	SYSTEM_BODY_3(gglXJoinSwapGroupSGIX, dpy, drawable, member);
 }
 
 void System
@@ -1874,13 +1874,13 @@ namespace System
 void System
 	::GlXBindSwapBarrierSGIX(Display*  dpy, GLXDrawable drawable, int barrier) noexcept
 {
-	SYSTEM_BODY_A3(gglXBindSwapBarrierSGIX, dpy, drawable, barrier);
+	SYSTEM_BODY_3(gglXBindSwapBarrierSGIX, dpy, drawable, barrier);
 }
 
 GLXBool System
 	::GlXQueryMaxSwapBarriersSGIX(Display* dpy, int screen, int* max) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gglXQueryMaxSwapBarriersSGIX, dpy, screen, max, GLXBool, false);
+	SYSTEM_BODY_3_RESULT(gglXQueryMaxSwapBarriersSGIX, dpy, screen, max, GLXBool, false);
 }
 
 void System
@@ -1972,49 +1972,49 @@ namespace System
 int System
 	::GlXBindHyperpipeSGIX(Display* dpy, int hpID) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglXBindHyperpipeSGIX, dpy, hpID, int, 0);
+	SYSTEM_BODY_2_RESULT(gglXBindHyperpipeSGIX, dpy, hpID, int, 0);
 }
 
 int System
 	::GlXDestroyHyperpipeConfigSGIX(Display* dpy, int hpID) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglXDestroyHyperpipeConfigSGIX, dpy, hpID, int, 0);
+	SYSTEM_BODY_2_RESULT(gglXDestroyHyperpipeConfigSGIX, dpy, hpID, int, 0);
 }
 
 int System
 	::GlXHyperpipeAttribSGIX(Display* dpy, int timeSlice, int attrib, int size, void* attribList) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gglXHyperpipeAttribSGIX, dpy, timeSlice, attrib, size, attribList, int, -1);
+	SYSTEM_BODY_5_RESULT(gglXHyperpipeAttribSGIX, dpy, timeSlice, attrib, size, attribList, int, -1);
 }
 
 int System
 	::GlXHyperpipeConfigSGIX(Display* dpy, int networkId, int npipes, GLXHyperpipeConfigSGIX* cfg, int* hpID) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gglXHyperpipeConfigSGIX, dpy, networkId, npipes, cfg, hpID, int, -1);
+	SYSTEM_BODY_5_RESULT(gglXHyperpipeConfigSGIX, dpy, networkId, npipes, cfg, hpID, int, -1);
 }
 
 int System
 	::GlXQueryHyperpipeAttribSGIX(Display* dpy, int timeSlice, int attrib, int size, void* returnAttribList) noexcept
 {
-	SYSTEM_BODY_A5_RESULT(gglXQueryHyperpipeAttribSGIX, dpy, timeSlice, attrib, size, returnAttribList, int, -1);
+	SYSTEM_BODY_5_RESULT(gglXQueryHyperpipeAttribSGIX, dpy, timeSlice, attrib, size, returnAttribList, int, -1);
 }
 
 int System
 	::GlXQueryHyperpipeBestAttribSGIX(Display* dpy, int timeSlice, int attrib, int size, void* attribList, void* returnAttribList) noexcept
 {
-	SYSTEM_BODY_A6_RESULT(gglXQueryHyperpipeBestAttribSGIX, dpy, timeSlice, attrib, size, attribList, returnAttribList, int, -1);
+	SYSTEM_BODY_6_RESULT(gglXQueryHyperpipeBestAttribSGIX, dpy, timeSlice, attrib, size, attribList, returnAttribList, int, -1);
 }
 
 GLXHyperpipeConfigSGIX* System
 	::GlXQueryHyperpipeConfigSGIX(Display* dpy, int hpID, int* npipes) noexcept
 {
-	SYSTEM_BODY_A3_RESULT(gglXQueryHyperpipeConfigSGIX, dpy, hpID, npipes, GLXHyperpipeConfigSGIX*, nullptr);
+	SYSTEM_BODY_3_RESULT(gglXQueryHyperpipeConfigSGIX, dpy, hpID, npipes, GLXHyperpipeConfigSGIX*, nullptr);
 }
 
 GLXHyperpipeNetworkSGIX* System
 	::GlXQueryHyperpipeNetworkSGIX(Display* dpy, int* npipes) noexcept
 {
-	SYSTEM_BODY_A2_RESULT(gglXQueryHyperpipeNetworkSGIX, dpy, npipes, GLXHyperpipeNetworkSGIX*, nullptr);
+	SYSTEM_BODY_2_RESULT(gglXQueryHyperpipeNetworkSGIX, dpy, npipes, GLXHyperpipeNetworkSGIX*, nullptr);
 }
 
 void System

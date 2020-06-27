@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <type_traits> 
 
 template <Rendering::TextureFormat Format>

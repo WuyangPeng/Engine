@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/11 18:19)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:42)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_TRIANGLE2_H
@@ -25,22 +25,22 @@ namespace Mathematics
 		using Segment2 = Segment2<Real>;
 		using Triangle2 = Triangle2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>; 
-		
+		using Math = Math<Real>;
+
 	public:
-		StaticTestIntersectorSegment2Triangle2(const Segment2& segment,const Triangle2& triangle);
-		
+		StaticTestIntersectorSegment2Triangle2(const Segment2& segment, const Triangle2& triangle);
+
 		// Object access.
-		const Segment2 GetSegment () const;
-		const Triangle2 GetTriangle () const;
+		const Segment2 GetSegment() const;
+		const Triangle2 GetTriangle() const;
 
 	private:
 		// Static intersection query.
-		void Test ();		
-		
+		void Test();
+
 		// The objects to intersect.
 		Segment2 mSegment;
-		Triangle2 mTriangle;		
+		Triangle2 mTriangle;
 	};
 
 	using StaticTestIntersectorSegment2Triangle2f = StaticTestIntersectorSegment2Triangle2<float>;

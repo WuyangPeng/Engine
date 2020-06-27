@@ -1,18 +1,36 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.1.1 (2019/12/02 18:34)
-// ≥ı º∞Ê±æ£∫0.0.1.1
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/09 16:20)
 
 #include "System/SystemExport.h"
 
 #include "FormatErrorMessage.h"
 #include "Flags/FormatMessageFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 #include "System/Window/Flags/PlatformErrorFlags.h"
 #include "System/SystemOutput/Data/LanguageIDData.h"
+
+namespace System
+{
+	TChar* ReinterpretCast(WindowHLocal& errorMessage) noexcept
+	{
+	#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26490)
+		return reinterpret_cast<TChar*>(&errorMessage);
+	#include STSTEM_WARNING_POP
+	}
+
+	va_list* ReinterpretCast(WindowPtrDWord* arguments) noexcept
+	{
+	#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26490)
+		return reinterpret_cast<va_list*>(arguments);
+	#include STSTEM_WARNING_POP
+	}
+}
 
 System::WindowDWord	System
 	::FormatErrorMessage(FormatMessageOption flag, FormatMessageWidth widthFlag, WindowConstVoidPtr source, WindowError messageID,
@@ -28,14 +46,11 @@ System::WindowDWord	System
 bool System
 	::FormatErrorMessage(WindowHLocal& errorMessage, WindowError lastError) noexcept
 {
-	const LanguageIDData languageID{};
+	constexpr LanguageIDData languageID{ };
 	constexpr auto messageOption = FormatMessageOption::FromSystem | FormatMessageOption::IgnoreInserts | FormatMessageOption::AllocateBuffer;
 	constexpr auto messageWidth = FormatMessageWidth::NoRestrictions;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-	const auto size = FormatErrorMessage(messageOption, messageWidth, nullptr, lastError, languageID, reinterpret_cast<TChar*>(&errorMessage), 0, nullptr);
-#include STSTEM_WARNING_POP
+ 
+	const auto size = FormatErrorMessage(messageOption, messageWidth, nullptr, lastError, languageID, ReinterpretCast(errorMessage), 0, nullptr); 
 
 	return size != 0;
 }
@@ -55,22 +70,19 @@ System::WindowDWord System
 bool System
 	::FormatErrorMessage(WindowHLocal& errorMessage, DynamicLinkModule module, WindowError lastError) noexcept
 {
-	const LanguageIDData languageID{};
+	constexpr LanguageIDData languageID{ };
 	constexpr auto messageOption = FormatMessageOption::FromHModule | FormatMessageOption::IgnoreInserts | FormatMessageOption::AllocateBuffer;
 	constexpr auto messageWidth = FormatMessageWidth::NoRestrictions;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-	const auto size = FormatErrorMessage(messageOption, messageWidth, module, lastError, languageID, reinterpret_cast<TChar*>(&errorMessage), 0, nullptr);
-#include STSTEM_WARNING_POP
+	const auto size = FormatErrorMessage(messageOption, messageWidth, module, lastError, languageID, ReinterpretCast(errorMessage), 0, nullptr);
 
 	return size != 0;
 }
 
 System::WindowDWord System
-	::FormatErrorMessage(DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowDWord size) noexcept
+	::FormatErrorMessage(const DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowDWord size) noexcept
 {
-	const LanguageIDData languageID{};
+	constexpr LanguageIDData languageID{ };
 	constexpr auto messageOption = FormatMessageOption::FromHModule | FormatMessageOption::IgnoreInserts;
 	constexpr auto messageWidth = FormatMessageWidth::NoRestrictions;
 
@@ -81,21 +93,18 @@ System::WindowDWord System
 System::WindowDWord System
 	::FormatStringMessage(const TChar* message, TChar* buffer, WindowDWord size, WindowPtrDWord* arguments) noexcept
 {
-	const LanguageIDData languageID{};
+	constexpr LanguageIDData languageID{ };
 	constexpr auto messageOption = FormatMessageOption::FromString | FormatMessageOption::ArgumentArray;
 	constexpr auto messageWidth = FormatMessageWidth::NoRestrictions;
 	constexpr auto windowError = WindowError::Success;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-	return FormatErrorMessage(messageOption, messageWidth, message, windowError, languageID, buffer, size, reinterpret_cast<va_list*>(arguments));
-#include STSTEM_WARNING_POP 
+	return FormatErrorMessage(messageOption, messageWidth, message, windowError, languageID, buffer, size, ReinterpretCast(arguments));
 }
 
 System::WindowDWord System
 	::FormatStringMessage(const TChar* message, TChar* buffer, WindowDWord size, va_list* arguments) noexcept
 {
-	const LanguageIDData languageID{};
+	constexpr LanguageIDData languageID{ };
 	constexpr auto messageOption = FormatMessageOption::FromString;
 	constexpr auto messageWidth = FormatMessageWidth::NoRestrictions;
 	constexpr auto windowError = WindowError::Success;
@@ -106,27 +115,21 @@ System::WindowDWord System
 System::WindowDWord System
 	::FormatStringMessage(const TChar* message, WindowHLocal& resultMessage, WindowPtrDWord* arguments) noexcept
 {
-	const LanguageIDData languageID{};
+	constexpr LanguageIDData languageID{ };
 	constexpr auto messageOption = FormatMessageOption::FromString | FormatMessageOption::ArgumentArray | FormatMessageOption::AllocateBuffer;
 	constexpr auto messageWidth = FormatMessageWidth::NoRestrictions;
 	constexpr auto windowError = WindowError::Success;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-	return FormatErrorMessage(messageOption, messageWidth, message, windowError, languageID, reinterpret_cast<TChar*>(&resultMessage), 0, reinterpret_cast<va_list*>(arguments));
-#include STSTEM_WARNING_POP 
+	return FormatErrorMessage(messageOption, messageWidth, message, windowError, languageID, ReinterpretCast(resultMessage), 0, ReinterpretCast(arguments));
 }
 
 System::WindowDWord System
 	::FormatStringMessage(const TChar* message, WindowHLocal& resultMessage, va_list* arguments) noexcept
 {
-	const LanguageIDData languageID{};
+	constexpr LanguageIDData languageID{ };
 	constexpr auto messageOption = FormatMessageOption::FromString | FormatMessageOption::AllocateBuffer;
 	constexpr auto messageWidth = FormatMessageWidth::NoRestrictions;
 	constexpr auto windowError = WindowError::Success;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-	return FormatErrorMessage(messageOption, messageWidth, message, windowError, languageID, reinterpret_cast<TChar*>(&resultMessage), 0, arguments);
-#include STSTEM_WARNING_POP 
+	return FormatErrorMessage(messageOption, messageWidth, message, windowError, languageID, ReinterpretCast(resultMessage), 0, arguments);
 }

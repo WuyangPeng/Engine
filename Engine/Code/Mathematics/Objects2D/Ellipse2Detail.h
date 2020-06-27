@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/06 11:27)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 16:54)
 
 #ifndef MATHEMATICS_OBJECTS2D_ELLIPSE2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_ELLIPSE2_DETAIL_H
@@ -15,8 +15,8 @@
 
 template <typename Real>
 Mathematics::Ellipse2<Real>
-	::Ellipse2( const Vector2D& center, const Vector2D& axis0, const Vector2D& axis1, 
-				const Real extent0,const Real extent1,const Real epsilon)
+	::Ellipse2(const Vector2D& center, const Vector2D& axis0, const Vector2D& axis1,
+			   const Real extent0, const Real extent1, const Real epsilon)
 	:m_Center{ center }, m_Epsilon{ epsilon }
 {
 	m_Axis[0] = axis0;
@@ -29,27 +29,26 @@ Mathematics::Ellipse2<Real>
 
 template <typename Real>
 Mathematics::Ellipse2<Real>
-	::Ellipse2( const Ellipse2Coefficients& coefficients,const Real epsilon )
+	::Ellipse2(const Ellipse2Coefficients& coefficients, const Real epsilon)
 	:m_Center{}, m_Epsilon{ epsilon }
 {
 	m_Axis[0] = Vector2D::sm_UnitX;
 	m_Axis[1] = Vector2D::sm_UnitY;
-	m_Extent[0] = Real{ };
-	m_Extent[1] = Real{ };
+	m_Extent[0] = Math::sm_Zero;
+	m_Extent[1] = Math::sm_Zero;
 
 	FromCoefficients(coefficients, m_Epsilon);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::Ellipse2<Real>
 	::IsValid() const noexcept
 {
-	if(m_Axis[0].IsNormalize(m_Epsilon) && m_Axis[1].IsNormalize(m_Epsilon) && -m_Epsilon <= m_Extent[0] && -m_Epsilon <= m_Extent[1])
-	    return true;
+	if (m_Axis[0].IsNormalize(m_Epsilon) && m_Axis[1].IsNormalize(m_Epsilon) && -m_Epsilon <= m_Extent[0] && -m_Epsilon <= m_Extent[1])
+		return true;
 	else
 		return false;
 }
@@ -81,7 +80,6 @@ typename const Mathematics::Ellipse2<Real>::Vector2D Mathematics::Ellipse2<Real>
 
 	return m_Axis[1];
 }
-
 
 template <typename Real>
 Real Mathematics::Ellipse2<Real>
@@ -140,7 +138,7 @@ typename const Mathematics::Ellipse2<Real>::Ellipse2Coefficients Mathematics::El
 
 template <typename Real>
 void Mathematics::Ellipse2<Real>
-	::FromCoefficients( const Ellipse2Coefficients& coefficients,const Real epsilon )
+	::FromCoefficients(const Ellipse2Coefficients& coefficients, const Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -154,7 +152,7 @@ void Mathematics::Ellipse2<Real>
 	m_Center = static_cast<Real>(-0.5) * (invMatrix * vector);
 
 	// º∆À„ B^T*A^{-1}*B/4 - C = K^T*A*K - C = -K^T*B/2 - C.
-	auto rightSide = -static_cast<Real>(0.5) * Vector2DTools::DotProduct(m_Center,vector) - constants;
+	auto rightSide = -static_cast<Real>(0.5) * Vector2DTools::DotProduct(m_Center, vector) - constants;
 	if (Math::FAbs(rightSide) < epsilon)
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("≥˝¡„¥ÌŒÛ£°"));
@@ -171,7 +169,7 @@ void Mathematics::Ellipse2<Real>
 
 	for (auto i = 0; i < 2; ++i)
 	{
-		auto eigenValue = diagonal(i,i);
+		auto eigenValue = diagonal(i, i);
 
 		if (eigenValue <= epsilon)
 		{
@@ -180,22 +178,21 @@ void Mathematics::Ellipse2<Real>
 
 		m_Extent[i] = Math::InvSqrt(eigenValue);
 
-		m_Axis[i] = Vector2D(rotation(0,i),rotation(1,i));
+		m_Axis[i] = Vector2D(rotation(0, i), rotation(1, i));
 	}
 
-    m_Epsilon = epsilon;
+	m_Epsilon = epsilon;
 }
-
 
 template <typename Real>
 Real Mathematics::Ellipse2<Real>
-	::Evaluate( const Vector2D& point ) const
+	::Evaluate(const Vector2D& point) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	auto diff = point - m_Center;
-	auto ratio0 = Vector2DTools::DotProduct(m_Axis[0],diff) / m_Extent[0];
-	auto ratio1 = Vector2DTools::DotProduct(m_Axis[1],diff) / m_Extent[1];
+	auto ratio0 = Vector2DTools::DotProduct(m_Axis[0], diff) / m_Extent[0];
+	auto ratio1 = Vector2DTools::DotProduct(m_Axis[1], diff) / m_Extent[1];
 	auto value = ratio0 * ratio0 + ratio1 * ratio1 - static_cast<Real>(1);
 
 	return value;
@@ -203,7 +200,7 @@ Real Mathematics::Ellipse2<Real>
 
 template <typename Real>
 bool Mathematics::Ellipse2<Real>
-	::Contains( const Vector2D& point ) const
+	::Contains(const Vector2D& point) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -226,19 +223,19 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Ellipse2<Real>& lhs, const Ellipse2<Real>& rhs, const Real epsilon)
 {
-	return Vector2DTools<Real>::Approximate(lhs.GetCenter(),rhs.GetCenter(),epsilon) &&
-		   Vector2DTools<Real>::Approximate(lhs.GetAxis0(),rhs.GetAxis0(),epsilon) &&
+	return Vector2DTools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
+		   Vector2DTools<Real>::Approximate(lhs.GetAxis0(), rhs.GetAxis0(), epsilon) &&
 		   Vector2DTools<Real>::Approximate(lhs.GetAxis1(), rhs.GetAxis1(), epsilon) &&
-		   Math<Real>::Approximate(lhs.GetExtent0(),rhs.GetExtent0(),epsilon) &&
+		   Math<Real>::Approximate(lhs.GetExtent0(), rhs.GetExtent0(), epsilon) &&
 		   Math<Real>::Approximate(lhs.GetExtent1(), rhs.GetExtent1(), epsilon);
 }
 
 template <typename Real>
-std::ostream&  Mathematics
+std::ostream& Mathematics
 	::operator<<(std::ostream& outFile, const Ellipse2<Real>& ellipse)
 {
 	outFile << "center=" << ellipse.GetCenter() << ",axis0=" << ellipse.GetAxis0()
-		    << ",axis1=" << ellipse.GetAxis1() << "extent0=" << ellipse.GetExtent0()
+			<< ",axis1=" << ellipse.GetAxis1() << "extent0=" << ellipse.GetExtent0()
 			<< "extent1=" << ellipse.GetExtent1();
 
 	return outFile;

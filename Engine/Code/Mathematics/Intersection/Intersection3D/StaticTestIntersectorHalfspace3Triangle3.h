@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 13:46)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_H
 
 #include "Mathematics/MathematicsDll.h"
- 
+
 #include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Triangle3.h" 
 #include "Mathematics/Intersection/StaticIntersector.h"
@@ -22,7 +22,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class StaticTestIntersectorHalfspace3Triangle3: public  StaticIntersector<Real, Vector3D>
+	class StaticTestIntersectorHalfspace3Triangle3 : public  StaticIntersector<Real, Vector3D>
 	{
 	public:
 		using ClassType = StaticTestIntersectorHalfspace3Triangle3<Real>;
@@ -31,19 +31,19 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;   		
-				
+		using Math = Math<Real>;
+
 	public:
-		StaticTestIntersectorHalfspace3Triangle3 (const Plane3& halfspace,const Triangle3& triangle);
-		
+		StaticTestIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle);
+
 		// Object access.
-		const Plane3 GetHalfspace () const;
-		const Triangle3 GetTriangle () const;
+		const Plane3 GetHalfspace() const;
+		const Triangle3 GetTriangle() const;
 
 	private:
 		// Static queries.
-		void Test ();		
-		
+		void Test();
+
 		// The objects to intersect.
 		Plane3 mHalfspace;
 		Triangle3 mTriangle;

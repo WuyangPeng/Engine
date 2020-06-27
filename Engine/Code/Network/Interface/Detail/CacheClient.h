@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 16:53)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:01)
 
 #ifndef NETWORK_NETWORK_INTERFACE_CACHE_CLIENT_H
 #define NETWORK_NETWORK_INTERFACE_CACHE_CLIENT_H
@@ -12,14 +12,12 @@
 #include "ClientImpl.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/Interface/SockConnector.h"
+#include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/NetworkMessage/MessageInterface.h"
-#include "Network/NetworkMessage/BufferSendStream.h" 
-#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "Network/NetworkMessage/BufferSendStream.h"  
 
 namespace Network
-{	
-	class SockAddress;
-
+{
 	class NETWORK_HIDDEN_DECLARE CacheClient : public ClientImpl
 	{
 	public:
@@ -32,7 +30,7 @@ namespace Network
 		virtual ~CacheClient();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
- 
+
 		virtual uint64_t Connect() override;
 		virtual void AsyncConnect() override;
 
@@ -51,16 +49,16 @@ namespace Network
 
 	private:
 		virtual bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
-		 	 
-	private:	
+
+	private:
 		SockConnector m_SockConnector;
 		SockStreamSharedPtr m_SockStream;
 		BufferSendStream m_BufferSendStream;
 		SockAddressSharedPtr m_SockAddress;
 		uint64_t m_SocketID;
-		MessageBufferSharedPtr m_Buffer;
-		MessageBufferSharedPtr m_Buffer2;
+		MessageBufferSharedPtr m_SendBuffer;
+		MessageBufferSharedPtr m_ReceiveBuffer;
 	};
-} 
+}
 
 #endif // NETWORK_NETWORK_INTERFACE_CACHE_CLIENT_H

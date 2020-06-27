@@ -11,7 +11,7 @@
 
 #include <map>
 #include <memory>
-
+#include "CoreTools/MemoryTools/SubclassSmartPointer.h"
 namespace Rendering
 {
 	class Renderer;
@@ -22,9 +22,9 @@ namespace Rendering
 	public:
 		using ClassType = TextureManagement <PlatformTextureType>;
 		using TextureType = typename PlatformTextureType::TextureType;
-		using TextureConstPtr = const TextureType*;
+		using TextureConstPtr = CoreTools::ConstFourthSubclassSmartPointer<TextureType>;
 		using PlatformTextureSharedPtr = std::shared_ptr<PlatformTextureType>;
-	    using RendererPtr = Renderer*;
+	    using RendererPtr = std::shared_ptr<Renderer>;
 
 	public:
 		explicit TextureManagement(RendererPtr ptr);
@@ -56,7 +56,7 @@ namespace Rendering
        using TextureMap = std::map<TextureConstPtr, PlatformTextureSharedPtr>;
 
 	private:
-	   RendererPtr m_Renderer;
+		std::weak_ptr<Renderer> m_Renderer;
 	   TextureMap m_Textures;	 
 	};
 }

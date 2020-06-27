@@ -134,12 +134,12 @@ void CoreTools::CallbackParameters
 }
 
 void CoreTools::CallbackParameters
-	::SetValue(int index, const ConstParametersInterfaceSharedPtr& smartPointer)
+	::SetValue(int index, const ParametersInterface& parameters)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	// 复制一份，确保CallbackParameters内保存的smartPointer无法被二次修改。
-	return m_Impl->SetValue<ConstParametersInterfaceSharedPtr>(index, smartPointer->Clone());
+	return m_Impl->SetValue<ConstParametersInterfaceSharedPtr>(index, parameters.Clone());
 }
 
 void CoreTools::CallbackParameters

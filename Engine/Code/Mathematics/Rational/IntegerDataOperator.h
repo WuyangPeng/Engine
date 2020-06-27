@@ -1,45 +1,36 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 11:03)
+// 引擎版本：0.0.2.5 (2020/03/20 09:48)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "RationalFwd.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <vector>
 
 namespace Mathematics
 {
-	template <int N>
-	class IntegerDataAmend;
-
-	template <int N>
-	class IntegerData;
-
-	template <int N>
-	class IntegerDataAnalysis;
-
 	// N是你想要元整数的32位字节的数目。
-	
 	template <int N>
 	class IntegerDataOperator
 	{
-	public:		
+	public:
 		using ClassType = IntegerDataOperator<N>;
 		using IntegerDataAmend = IntegerDataAmend<N>;
-		using IntegerData =	IntegerData<N>;
+		using IntegerData = IntegerData<N>;
 		using IntegerDataAnalysis = IntegerDataAnalysis<N>;
 
 	public:
-		explicit IntegerDataOperator(IntegerData& master); 
+		explicit IntegerDataOperator(IntegerData& master);
 
-		CLASS_INVARIANT_DECLARE;	
+		CLASS_INVARIANT_DECLARE;
 
 		// 算术更新。
 		IntegerDataOperator& operator+= (const IntegerData& rhs);
@@ -55,7 +46,7 @@ namespace Mathematics
 		IntegerDataOperator& operator<<= (int shift);
 		IntegerDataOperator& operator>>= (int shift);
 
-	private:	
+	private:
 		static constexpr uint32_t sm_IntSize{ 2 * N };
 		static constexpr uint32_t sm_IntLast{ sm_IntSize - 1 };
 		static constexpr uint32_t sm_Carry{ 0x00010000 };
@@ -67,12 +58,12 @@ namespace Mathematics
 		IntegerData& m_Master;
 		IntegerDataAmend m_Amend;
 		IntegerDataAnalysis m_Analysis;
-	};	
+	};
 
 	template <int N>
 	IntegerData<N> operator+ (const IntegerData<N>& lhs, const IntegerData<N>& rhs);
 
-    template <int N>
+	template <int N>
 	IntegerData<N> operator- (const IntegerData<N>& lhs, const IntegerData<N>& rhs);
 }
 

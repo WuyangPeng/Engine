@@ -19,7 +19,7 @@ using std::make_shared;
 
 SINGLETON_MUTEX_DEFINE(Network, MessageManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_NetworkMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetNetworkMutex() }
 
 #define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_MessageManagerMutex }
 

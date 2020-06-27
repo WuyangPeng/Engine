@@ -2,15 +2,17 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 16:03)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/08 23:28)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_LANGUAGE_ID_DATA_H
 #define SYSTEM_SYSTEM_OUTPUT_LANGUAGE_ID_DATA_H
 
 #include "System/SystemDll.h"
 
-#include "System/Window/Using/WindowUsing.h"
-#include "System/SystemOutput/Fwd/SystemOutputFlagsFwd.h"
+#include "System/Helper/EnumCast.h"
+#include "System/Helper/WindowsMacro.h"
+#include "System/SystemOutput/Flags/SubLanguageFlags.h"
+#include "System/SystemOutput/Flags/PrimaryLanguageFlags.h"
 
 namespace System
 {
@@ -20,13 +22,30 @@ namespace System
 		using ClassType = LanguageIDData;
 
 	public:
-		LanguageIDData() noexcept;
-		LanguageIDData(PrimaryLanguage primaryLanguage, SubLanguage subLanguage) noexcept;
+		constexpr LanguageIDData() noexcept 
+			:m_PrimaryLanguage{ PrimaryLanguage::Neutral }, m_SubLanguage{ SubLanguage::Neutral }
+		{
+		}
 
-		PrimaryLanguage GetPrimaryLanguage() const noexcept;
-		SubLanguage GetSubLanguage() const noexcept;
+		constexpr LanguageIDData(PrimaryLanguage primaryLanguage, SubLanguage subLanguage) noexcept
+			:m_PrimaryLanguage{ primaryLanguage }, m_SubLanguage{ subLanguage }
+		{
+		}
 
-		WindowWord GetLanguageID() const noexcept;
+		constexpr auto GetPrimaryLanguage() const noexcept
+		{
+			return m_PrimaryLanguage;
+		}
+
+		constexpr auto GetSubLanguage() const noexcept
+		{
+			return m_SubLanguage;
+		}
+
+		constexpr auto GetLanguageID() const noexcept
+		{
+			return MakeLanguageID(EnumCastUnderlying<WindowWord>(m_PrimaryLanguage), EnumCastUnderlying<WindowWord>(m_SubLanguage));
+		}
 
 	private:
 		PrimaryLanguage m_PrimaryLanguage;

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 11:20)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 12:32)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_SAMPLES_POWER_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_SAMPLES_POWER_H
@@ -12,16 +12,16 @@
 #include <vector>
 
 namespace Mathematics
-{	
+{
 	template <typename Real>
 	class PolynomialSamplesPower
 	{
-	public:		
+	public:
 		using ClassType = PolynomialSamplesPower<Real>;
 		using Samples = std::vector<Real>;
 
 	public:
-		PolynomialSamplesPower(const Samples& samples,int degree);
+		PolynomialSamplesPower(const Samples& samples, int degree);
 		~PolynomialSamplesPower();
 
 		PolynomialSamplesPower(const PolynomialSamplesPower& rhs);
@@ -37,11 +37,11 @@ namespace Mathematics
 		void Swap(PolynomialSamplesPower& rhs);
 		void Calculate(const Samples& samples);
 
-	private:			
+	private:
 		int m_NumDegree;
 		int m_NumSamples;
 		Real** m_Power;
-	};	 
+	};
 }
 
 #endif // MATHEMATICS_APPROXIMATION_POLYNOMIAL_SAMPLES_POWER_H

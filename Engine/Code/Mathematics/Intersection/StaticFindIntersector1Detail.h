@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 18:08)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:18)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_DETAIL_H
@@ -12,11 +12,11 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersector1<Real>
-	::StaticFindIntersector1(Real u0, Real u1, Real v0, Real v1,const Real epsilon)
+	::StaticFindIntersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon)
 	:ParentType{ u0, u1, v0, v1,epsilon }, m_Intersections{}
 {
 	Find();
@@ -42,8 +42,8 @@ void Mathematics::StaticFindIntersector1<Real>
 			{
 				auto lhsIntersection = (u0 < v0 ? v0 : u0);
 				auto rhsIntersection = (v1 < u1 ? v1 : u1);
-			 
-				if (Math::Approximate(lhsIntersection,rhsIntersection,epsilon))
+
+				if (Math::Approximate(lhsIntersection, rhsIntersection, epsilon))
 				{
 					m_Intersections.push_back((lhsIntersection + rhsIntersection) / static_cast<Real>(2));
 				}
@@ -55,16 +55,15 @@ void Mathematics::StaticFindIntersector1<Real>
 			}
 			else  // u0 == v1
 			{
-				m_Intersections.push_back((u0 + v1) / static_cast<Real>(2));			
+				m_Intersections.push_back((u0 + v1) / static_cast<Real>(2));
 			}
 		}
 		else  // v0 == u1
 		{
 			m_Intersections.push_back((v0 + u1) / static_cast<Real>(2));
 		}
-	}	 
+	}
 }
-
 
 template <typename Real>
 Mathematics::StaticFindIntersector1<Real>
@@ -83,7 +82,6 @@ bool Mathematics::StaticFindIntersector1<Real>
 	else
 		return false;
 }
-
 #endif // OPEN_CLASS_INVARIANT	
 
 template <typename Real>
@@ -94,7 +92,6 @@ bool Mathematics::StaticFindIntersector1<Real>
 
 	return !m_Intersections.empty();
 }
-
 
 template <typename Real>
 int Mathematics::StaticFindIntersector1<Real>
@@ -117,4 +114,3 @@ Real Mathematics::StaticFindIntersector1<Real>
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_DETAIL_H
 
- 

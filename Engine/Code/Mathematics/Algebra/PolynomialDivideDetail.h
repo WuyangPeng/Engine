@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/05 18:15)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 14:15)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H
@@ -16,8 +16,8 @@
 #include "Mathematics/Base/Math.h"
 
 template <typename Real>
-Mathematics:: PolynomialDivide <Real>	
-	:: PolynomialDivide( const Polynomial& quotient,const Polynomial& remainder )
+Mathematics::PolynomialDivide <Real>
+	::PolynomialDivide(const Polynomial& quotient, const Polynomial& remainder)
 	: m_Quotient{ quotient }, m_Remainder{ remainder }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -25,13 +25,13 @@ Mathematics:: PolynomialDivide <Real>
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
-bool Mathematics:: PolynomialDivide <Real>
+bool Mathematics::PolynomialDivide <Real>
 	::IsValid() const noexcept
 {
-     return true;
+	return true;
 }
 #endif	// OPEN_CLASS_INVARIANT
- 
+
 template <typename Real>
 typename const Mathematics::PolynomialDivide<Real>::Polynomial Mathematics::PolynomialDivide<Real>
 	::GetQuotient() const
@@ -48,6 +48,6 @@ typename const Mathematics::PolynomialDivide<Real>::Polynomial Mathematics::Poly
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Remainder;
-} 
+}
 
 #endif // MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H

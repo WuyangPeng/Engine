@@ -315,7 +315,7 @@ void CoreTools::Memory
 	{
 		CORE_TOOLS_ASSERTION_2(MEMORY_MANAGER_SINGLETON.GetMemBlockDimensions(data) == 1, "Œ¨∂»≤ª∆•≈‰£°");
 		
-		auto bytesNumber = MEMORY_MANAGER_SINGLETON.GetBytesNumber(data) / sizeof(T);
+		const auto bytesNumber = MEMORY_MANAGER_SINGLETON.GetBytesNumber(data) / sizeof(T);
 
 		DeleteArray(data, bytesNumber);
 

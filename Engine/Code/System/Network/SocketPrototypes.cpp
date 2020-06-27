@@ -11,7 +11,7 @@
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/NetworkMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
 	#include <Ws2tcpip.h> 
@@ -423,6 +423,7 @@ void System
 #ifdef SYSTEM_PLATFORM_WIN32
 
 	#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26446)
 	#include SYSTEM_WARNING_DISABLE(26482)
 	SYSTEM_FD_CLRER(winSocket, fds);
 	#include STSTEM_WARNING_POP
@@ -456,6 +457,7 @@ void System
 
 	#include STSTEM_WARNING_PUSH
 	#include SYSTEM_WARNING_DISABLE(26482)
+	#include SYSTEM_WARNING_DISABLE(26446)
 		SYSTEM_FD_SET(winSocket, fds);
 	#include STSTEM_WARNING_POP 
 

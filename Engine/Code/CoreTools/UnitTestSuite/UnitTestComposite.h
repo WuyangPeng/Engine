@@ -17,6 +17,8 @@
 
 namespace CoreTools
 {
+	class OStreamShared;
+
 	class CORE_TOOLS_DEFAULT_DECLARE UnitTestComposite : public UnitTestStream, public UnitTestInterface
 	{
 	public:
@@ -27,7 +29,7 @@ namespace CoreTools
 		using UnitTestCompositePtr = std::shared_ptr<UnitTestComposite>;
 
 	public:
-		explicit UnitTestComposite(std::ostream* osPtr);
+		explicit UnitTestComposite(const OStreamShared& osPtr);
 		virtual ~UnitTestComposite();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
@@ -40,6 +42,7 @@ namespace CoreTools
 
 		int GetEngineeringOffsetValue() const noexcept;
 		int GetRandomSeed() const noexcept;
+		uint32_t GetEngineRandomSeed() const;
 
 	protected:
 		int GetTestLoopCount() const noexcept;

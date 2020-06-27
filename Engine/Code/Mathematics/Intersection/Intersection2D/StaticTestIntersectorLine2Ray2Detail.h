@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/13 10:29)
+// 引擎版本：0.0.2.5 (2020/03/24 15:59)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_RAY2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_RAY2_DETAIL_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticTestIntersectorLine2Ray2<Real>
-	::StaticTestIntersectorLine2Ray2(const Line2& line, const Ray2& ray,const Real dotThreshold)
+	::StaticTestIntersectorLine2Ray2(const Line2& line, const Ray2& ray, const Real dotThreshold)
 	:ParentType{ dotThreshold }, m_Line{ line }, m_Ray{ ray }, m_Quantity{ 0 }
 {
 	Test();
@@ -36,7 +36,7 @@ void Mathematics::StaticTestIntersectorLine2Ray2<Real>
 	if (intersectionType == IntersectionType::Point)
 	{
 		// 测试线-线相交的点是否在射线上。
-		if (Real{} <= classify.GetSecondParameter())
+		if (Math::sm_Zero <= classify.GetSecondParameter())
 		{
 			m_Quantity = 1;
 		}

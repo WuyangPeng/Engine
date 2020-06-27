@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.4 (2020/03/09 19:30)
+// 引擎版本：0.0.2.4 (2020/03/11 13:43)
 
 #ifndef NETWORK_ACE_WRAPPERS_STRING_CONVERSION_H
 #define NETWORK_ACE_WRAPPERS_STRING_CONVERSION_H
@@ -20,15 +20,15 @@ namespace Network
 	class NETWORK_HIDDEN_DECLARE StringConversion
 	{
 	public:
-		using ClassType = StringConversion; 
+		using ClassType = StringConversion;
 
 	public:
-		StringConversion(); 
+		StringConversion();
 
 		CLASS_INVARIANT_DECLARE;
 
 		static std::string ACEStringConversionMultiByte(const ACEString& character);
-	};	
+	};
 }
 
 #endif // NETWORK_USE_ACE

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 17:25)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:26)
 
 #include "Network/NetworkExport.h" 
 
@@ -13,7 +13,7 @@
 
 Network::ServerImpl
 	::ServerImpl(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
-	:ParentType{},m_ConfigurationStrategy{ configurationStrategy }, m_SocketManagerWeakPtr{ socketManager }
+	:ParentType{}, m_ConfigurationStrategy{ configurationStrategy }, m_SocketManagerWeakPtr{ socketManager }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -24,7 +24,7 @@ Network::ServerImpl
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Network,ServerImpl)
+CLASS_INVARIANT_STUB_DEFINE(Network, ServerImpl)
 
 Network::ConfigurationStrategy Network::ServerImpl
 	::GetConfigurationStrategy() const
@@ -42,14 +42,14 @@ bool Network::ServerImpl
 	return WaitForMultipleEvents() && HandleConnections(m_SocketManagerWeakPtr.lock()) &&
 		   HandleData(m_SocketManagerWeakPtr.lock()) && ImmediatelySend();
 }
- 
+
 void Network::ServerImpl
-	::Send( uint64_t socketID,const MessageInterfaceSharedPtr& message )
+	::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	SYSTEM_UNUSED_ARG(socketID);
-	SYSTEM_UNUSED_ARG(message); 
+	SYSTEM_UNUSED_ARG(message);
 }
 
 bool Network::ServerImpl

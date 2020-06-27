@@ -69,7 +69,7 @@ void Mathematics::StaticTestIntersectorCircle3Plane3<Real>
 
     // Real-valued roots imply an intersection.
 	auto discr = a1*a1 - a0*a2;
-	this->SetIntersectionType(discr >= Real{} ? IntersectionType::Point : IntersectionType::Empty); 
+	this->SetIntersectionType(discr >= Math<Real>::sm_Zero ? IntersectionType::Point : IntersectionType::Empty); 
 } 
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CIRCLE3_PLANE3_DETAIL_H

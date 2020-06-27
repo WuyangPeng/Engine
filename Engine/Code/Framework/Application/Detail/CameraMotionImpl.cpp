@@ -1,13 +1,13 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:14)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:49)
 
 #include "Framework/FrameworkExport.h"
 
 #include "CameraMotionImpl.h"
-#include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
@@ -16,27 +16,12 @@
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 Framework::CameraMotionImpl
-	::CameraMotionImpl(float translationSpeed, float rotationSpeed, float translationSpeedFactor,  float rotationSpeedFactor)
-	:m_Camera(NEW0 Camera),
-	 m_TranslationSpeed(translationSpeed),
-	 m_TranslationSpeedFactor(translationSpeedFactor),
-	 m_RotationSpeed(rotationSpeed),
-	 m_RotationSpeedFactor(rotationSpeedFactor),
-	 m_MoveForwardPressed(false),
-	 m_MoveBackwardPressed(false),
-	 m_TurnLeftPressed(false),
-	 m_TurnRightPressed(false),
-	 m_LookUpPressed(false),
-	 m_LookDownPressed(false),
-	 m_MoveUpPressed(false),
-	 m_MoveDownPressed(false),
-	 m_MoveRightPressed(false),
-	 m_MoveLeftPressed(false)
+	::CameraMotionImpl(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
+	:m_Camera{ CoreTools::New0<Camera>() }, m_WorldDirection{ m_Camera->GetDirectionVector() }, m_WorldUp{ m_Camera->GetUpVector() }, m_WorldRight{ m_Camera->GetRightVector() },
+	 m_TranslationSpeed{ translationSpeed }, m_TranslationSpeedFactor{ translationSpeedFactor }, m_RotationSpeed{ rotationSpeed }, m_RotationSpeedFactor{ rotationSpeedFactor },
+	 m_MoveForwardPressed{ false }, m_MoveBackwardPressed{ false }, m_TurnLeftPressed{ false }, m_TurnRightPressed{ false }, m_LookUpPressed{ false },
+	 m_LookDownPressed{ false }, m_MoveUpPressed{ false }, m_MoveDownPressed{ false }, m_MoveRightPressed{ false }, m_MoveLeftPressed{ false }
 {
-    m_WorldAxis[0] = m_Camera->GetDirectionVector();
-    m_WorldAxis[1] = m_Camera->GetUpVector();
-    m_WorldAxis[2] = m_Camera->GetRightVector();
-
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -44,341 +29,329 @@ Framework::CameraMotionImpl
 bool Framework::CameraMotionImpl
 	::IsValid() const noexcept
 {
-    if(!m_Camera.IsNullPtr() && 0 < m_TranslationSpeed &&
-       0 < m_TranslationSpeedFactor && 0 < m_RotationSpeed &&
-       0 < m_RotationSpeedFactor)
-        return true;
-    else
-        return false;
+	if (m_Camera.IsValidPtr() && 0 < m_TranslationSpeed &&	0 < m_TranslationSpeedFactor && 0 < m_RotationSpeed && 0 < m_RotationSpeedFactor)
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
-const Framework::CameraMotionImpl::ConstCameraSmartPointer Framework::CameraMotionImpl
-	::GetCameraPtr() const
+const Framework::CameraMotionImpl::CameraSmartPointer Framework::CameraMotionImpl
+	::GetCameraPtr()
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-	return m_Camera.PolymorphicCastConstObjectSmartPointer<ConstCameraSmartPointer>();
+	return m_Camera;
 }
 
 bool Framework::CameraMotionImpl
-	::MoveCamera ()
+	::MoveCamera()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-    bool moved = false;
+	auto moved = false;
 
-    if (m_MoveForwardPressed)
-    {
-        MoveForward();
-        moved = true;
-    }
+	if (m_MoveForwardPressed)
+	{
+		MoveForward();
+		moved = true;
+	}
 
-    if (m_MoveBackwardPressed)
-    {
-        MoveBackward();
-        moved = true;
-    }
+	if (m_MoveBackwardPressed)
+	{
+		MoveBackward();
+		moved = true;
+	}
 
-    if (m_MoveUpPressed)
-    {
-        MoveUp();
-        moved = true;
-    }
+	if (m_MoveUpPressed)
+	{
+		MoveUp();
+		moved = true;
+	}
 
-    if (m_MoveDownPressed)
-    {
-        MoveDown();
-        moved = true;
-    }
+	if (m_MoveDownPressed)
+	{
+		MoveDown();
+		moved = true;
+	}
 
-    if (m_TurnLeftPressed)
-    {
-        TurnLeft();
-        moved = true;
-    }
+	if (m_TurnLeftPressed)
+	{
+		TurnLeft();
+		moved = true;
+	}
 
-    if (m_TurnRightPressed)
-    {
-        TurnRight();
-        moved = true;
-    }
+	if (m_TurnRightPressed)
+	{
+		TurnRight();
+		moved = true;
+	}
 
-    if (m_LookUpPressed)
-    {
-        LookUp();
-        moved = true;
-    }
+	if (m_LookUpPressed)
+	{
+		LookUp();
+		moved = true;
+	}
 
-    if (m_LookDownPressed)
-    {
-        LookDown();
-        moved = true;
-    }
+	if (m_LookDownPressed)
+	{
+		LookDown();
+		moved = true;
+	}
 
-    if (m_MoveRightPressed)
-    {
-        MoveRight();
-        moved = true;
-    }
+	if (m_MoveRightPressed)
+	{
+		MoveRight();
+		moved = true;
+	}
 
-    if (m_MoveLeftPressed)
-    {
-        MoveLeft();
-        moved = true;
-    }
+	if (m_MoveLeftPressed)
+	{
+		MoveLeft();
+		moved = true;
+	}
 
-    return moved;
+	return moved;
 }
 
 void Framework::CameraMotionImpl
-	::MoveForward ()
+	::MoveForward()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-	APoint position = m_Camera->GetPosition();
-	position += m_TranslationSpeed * m_WorldAxis[0];
+	auto position = m_Camera->GetPosition();
+	position += m_TranslationSpeed * m_WorldDirection;
 	m_Camera->SetPosition(position);
 }
 
 void Framework::CameraMotionImpl
-	::MoveBackward ()
+	::MoveBackward()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-	APoint position = m_Camera->GetPosition();
-	position -= m_TranslationSpeed * m_WorldAxis[0];
+	auto position = m_Camera->GetPosition();
+	position -= m_TranslationSpeed * m_WorldDirection;
 	m_Camera->SetPosition(position);
 }
 
 void Framework::CameraMotionImpl
-	::MoveUp ()
+	::MoveUp()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-	APoint position = m_Camera->GetPosition();
-	position += m_TranslationSpeed * m_WorldAxis[1];
-	m_Camera->SetPosition(position);
-}
-
-
-void Framework::CameraMotionImpl
-	::MoveDown ()
-{
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-	APoint position = m_Camera->GetPosition();
-	position -= m_TranslationSpeed * m_WorldAxis[1];
+	auto position = m_Camera->GetPosition();
+	position += m_TranslationSpeed * m_WorldUp;
 	m_Camera->SetPosition(position);
 }
 
 void Framework::CameraMotionImpl
-	::MoveLeft ()
+	::MoveDown()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-	APoint position = m_Camera->GetPosition();
-	position -= m_TranslationSpeed * m_WorldAxis[2];
+	auto position = m_Camera->GetPosition();
+	position -= m_TranslationSpeed * m_WorldUp;
 	m_Camera->SetPosition(position);
 }
 
 void Framework::CameraMotionImpl
-	::MoveRight ()
+	::MoveLeft()
 {
-    APoint position = m_Camera->GetPosition();
-	position += m_TranslationSpeed * m_WorldAxis[2];
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	auto position = m_Camera->GetPosition();
+	position -= m_TranslationSpeed * m_WorldRight;
 	m_Camera->SetPosition(position);
 }
 
 void Framework::CameraMotionImpl
-	::TurnLeft ()
+	::MoveRight()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-	Matrix rotation(m_WorldAxis[1], m_RotationSpeed);
-	m_WorldAxis[0] = rotation * m_WorldAxis[0];
-	m_WorldAxis[2] = rotation * m_WorldAxis[2];
-
-	AVector directionVector = rotation * m_Camera->GetDirectionVector();
-	AVector upVector = rotation * m_Camera->GetUpVector();
-	AVector rightVector = rotation * m_Camera->GetRightVector();
-    m_Camera->SetAxes(directionVector, upVector, rightVector);
+	auto position = m_Camera->GetPosition();
+	position += m_TranslationSpeed * m_WorldRight;
+	m_Camera->SetPosition(position);
 }
 
 void Framework::CameraMotionImpl
-	::TurnRight ()
+	::TurnLeft()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-    Matrix rotation(m_WorldAxis[1], -m_RotationSpeed);
-    m_WorldAxis[0] = rotation * m_WorldAxis[0];
-    m_WorldAxis[2] = rotation * m_WorldAxis[2];
+	const Matrix rotation{ m_WorldUp, m_RotationSpeed };
+	m_WorldDirection = rotation * m_WorldDirection;
+	m_WorldRight = rotation * m_WorldRight;
 
-    AVector directionVector = rotation * m_Camera->GetDirectionVector();
-    AVector upVector = rotation * m_Camera->GetUpVector();
-    AVector rightVector = rotation * m_Camera->GetRightVector();
-    m_Camera->SetAxes(directionVector, upVector, rightVector);
+	auto directionVector = rotation * m_Camera->GetDirectionVector();
+	auto upVector = rotation * m_Camera->GetUpVector();
+	auto rightVector = rotation * m_Camera->GetRightVector();
+	m_Camera->SetAxes(directionVector, upVector, rightVector);
 }
 
 void Framework::CameraMotionImpl
-	::LookUp ()
+	::TurnRight()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-    Matrix rotation(m_WorldAxis[2], m_RotationSpeed);
+	const Matrix rotation{ m_WorldUp, -m_RotationSpeed };
+	m_WorldDirection = rotation * m_WorldDirection;
+	m_WorldRight = rotation * m_WorldRight;
 
-    AVector directionVector = rotation * m_Camera->GetDirectionVector();
-    AVector upVector = rotation * m_Camera->GetUpVector();
-    AVector rightVector = rotation * m_Camera->GetRightVector();
-    m_Camera->SetAxes(directionVector, upVector, rightVector);
+	auto directionVector = rotation * m_Camera->GetDirectionVector();
+	auto upVector = rotation * m_Camera->GetUpVector();
+	auto rightVector = rotation * m_Camera->GetRightVector();
+	m_Camera->SetAxes(directionVector, upVector, rightVector);
 }
 
 void Framework::CameraMotionImpl
-	::LookDown ()
+	::LookUp()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-    Matrix rotation(m_WorldAxis[2],-m_RotationSpeed);
+	const Matrix rotation{ m_WorldRight, m_RotationSpeed };
 
-    AVector directionVector = rotation * m_Camera->GetDirectionVector();
-    AVector upVector = rotation * m_Camera->GetUpVector();
-    AVector rightVector = rotation * m_Camera->GetRightVector();
-    m_Camera->SetAxes(directionVector, upVector, rightVector);
+	auto directionVector = rotation * m_Camera->GetDirectionVector();
+	auto upVector = rotation * m_Camera->GetUpVector();
+	auto rightVector = rotation * m_Camera->GetRightVector();
+	m_Camera->SetAxes(directionVector, upVector, rightVector);
 }
 
 void Framework::CameraMotionImpl
-	::SlowerCameraTranslation ()
+	::LookDown()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	const Matrix rotation{ m_WorldRight, -m_RotationSpeed };
+
+	auto directionVector = rotation * m_Camera->GetDirectionVector();
+	auto upVector = rotation * m_Camera->GetUpVector();
+	auto rightVector = rotation * m_Camera->GetRightVector();
+	m_Camera->SetAxes(directionVector, upVector, rightVector);
+}
+
+void Framework::CameraMotionImpl
+	::SlowerCameraTranslation() noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_TranslationSpeed /= m_TranslationSpeedFactor;
 }
 
 void Framework::CameraMotionImpl
-	::FasterCameraTranslation ()
+	::FasterCameraTranslation() noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
 	m_TranslationSpeed *= m_TranslationSpeedFactor;
 }
 
 void Framework::CameraMotionImpl
-	::SlowerCameraRotation ()
+	::SlowerCameraRotation() noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_RotationSpeed /= m_RotationSpeedFactor;
 }
 
-
 void Framework::CameraMotionImpl
-	::FasterCameraRotation ()
+	::FasterCameraRotation() noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_RotationSpeed *= m_RotationSpeedFactor;
 }
 
 void Framework::CameraMotionImpl
-	::SetMoveForward(bool pressed)
+	::SetMoveForward(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;   
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_MoveForwardPressed = pressed;
 }
 
 void Framework::CameraMotionImpl
-	::SetMoveBackward(bool pressed)
+	::SetMoveBackward(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
 	m_MoveBackwardPressed = pressed;
 }
 
-
 void Framework::CameraMotionImpl
-	::SetTurnLeft(bool pressed)
+	::SetTurnLeft(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-   
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_TurnLeftPressed = pressed;
 }
 
-
 void Framework::CameraMotionImpl
-	::SetTurnRight(bool pressed)
+	::SetTurnRight(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-	   
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_TurnRightPressed = pressed;
 }
 
-
 void Framework::CameraMotionImpl
-	::SetLookUp(bool pressed)
+	::SetLookUp(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_LookUpPressed = pressed;
 }
 
-
 void Framework::CameraMotionImpl
-	::SetLookDown(bool pressed)
+	::SetLookDown(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_LookDownPressed = pressed;
 }
 
-
 void Framework::CameraMotionImpl
-	::SetMoveUp(bool pressed)
+	::SetMoveUp(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_MoveUpPressed = pressed;
 }
 
-
 void Framework::CameraMotionImpl
-	::SetMoveDown(bool pressed)
+	::SetMoveDown(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_MoveDownPressed = pressed;
 }
 
-
 void Framework::CameraMotionImpl
-	::SetMoveRight(bool pressed)
+	::SetMoveRight(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;  
-	
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_MoveRightPressed = pressed;
 }
 
-
 void Framework::CameraMotionImpl
-	::SetMoveLeft(bool pressed)
+	::SetMoveLeft(bool pressed) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
-		
+	FRAMEWORK_CLASS_IS_VALID_1;
+
 	m_MoveLeftPressed = pressed;
 }
 
 float Framework::CameraMotionImpl
-	::GetRotationSpeed() const
+	::GetRotationSpeed() const noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_RotationSpeed;
+	return m_RotationSpeed;
 }
 
 float Framework::CameraMotionImpl
-	::GetTranslationSpeed() const 
+	::GetTranslationSpeed() const  noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_TranslationSpeed;
+	return m_TranslationSpeed;
 }

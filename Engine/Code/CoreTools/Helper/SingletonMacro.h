@@ -17,23 +17,23 @@
 
 	#define SINGLETON_GET_PTR_DECLARE(className)
 	#define SINGLETON_GET_PTR_DEFINE(namespaceName,className)
-
+	
 #else // TCRE_USE_GCC
 
 	#define SINGLETON_GET_PTR_DECLARE(className) \
-			public: static className* GetSingletonPtr(); \
-			public: static className& GetSingleton()
+			public: static className* GetSingletonPtr() noexcept; \
+			public: static className& GetSingleton() noexcept
 	#define SINGLETON_GET_PTR_DEFINE(namespaceName,className) \
-			namespaceName::className* namespaceName::className::GetSingletonPtr() { \
+			namespaceName::className* namespaceName::className::GetSingletonPtr() noexcept { \
 			return ParentType::GetSingletonPtr(); }\
-			namespaceName::className& namespaceName::className::GetSingleton() { \
-			 return ParentType::GetSingleton(); }
+			namespaceName::className& namespaceName::className::GetSingleton() noexcept { \
+			return ParentType::GetSingleton(); } 
 
 #endif // !TCRE_USE_GCC
 
 #define SINGLETON_CREATE_AND_DESTROY_DECLARE(className) \
 	    public: using ParentType = Singleton<className>; \
-		public:	static void Create(); static void Destroy(); \
+		public:	static void Create(); static void Destroy() noexcept; \
 		private: static void DoCreate(); className(); ~className()
 
 #define SINGLETON_INITIALIZE_DECLARE(className) \
@@ -46,7 +46,7 @@
         void namespaceName::className::DoCreate() { MUTEX_ENTER_GLOBAL; if(SYSTEM_MULTIPLE_CONCATENATOR(sm_,className,Mutex) == nullptr) \
 		SYSTEM_MULTIPLE_CONCATENATOR(sm_,className,Mutex) = new mutexType; \
 		if(SYSTEM_CONCATENATOR(sm_,className) == nullptr) SYSTEM_CONCATENATOR(sm_,className) = new className; } \
-		void namespaceName::className::Destroy() { MUTEX_ENTER_GLOBAL; delete SYSTEM_CONCATENATOR(sm_,className); \
+		void namespaceName::className::Destroy() noexcept { delete SYSTEM_CONCATENATOR(sm_,className); \
 		SYSTEM_CONCATENATOR(sm_,className) = nullptr; delete SYSTEM_MULTIPLE_CONCATENATOR(sm_,className,Mutex); \
 		SYSTEM_MULTIPLE_CONCATENATOR(sm_,className,Mutex) = nullptr; }  
 
@@ -91,5 +91,8 @@
 
 #define SINGLETON_INITIALIZE_DEFINE_USE_SHARED(namespaceName,className) \
 		SINGLETON_CREATE_AND_DESTROY_INTERNAL_DEFINE(namespaceName,className,std::shared_mutex) 
+
+#define SINGLETON_MUTEX_ENTER_GLOBAL(namespaceName) const CoreTools::ScopedMutex holder{ SYSTEM_MULTIPLE_CONCATENATOR(Get,namespaceName,Mutex)() }
+#define SINGLETON_MUTEX_ENTER_MEMBER const CoreTools::ScopedMutex holder{ GetMutex() }
 
 #endif // CORE_TOOLS_HELPER_SINGLETON_MACRO_H

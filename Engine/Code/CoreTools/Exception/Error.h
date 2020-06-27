@@ -10,13 +10,13 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+
 #include "System/Window/Fwd/WindowFlagsFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
 #include "CoreTools/ClassInvariant/ClassInvariantFwd.h"
-
+ 
 #include <boost/format/format_fwd.hpp>
-
 #include <string>
 
 CORE_TOOLS_EXPORT_SHARED_PTR(ErrorImpl);

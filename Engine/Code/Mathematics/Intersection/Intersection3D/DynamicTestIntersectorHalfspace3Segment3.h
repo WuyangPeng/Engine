@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 09:50)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_H
@@ -31,23 +31,23 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;   
-		
+		using Math = Math<Real>;
+
 	public:
-		DynamicTestIntersectorHalfspace3Segment3 (const Plane3& halfspace,const Segment3& segment,Real tmax, 
-												  const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon = Math::sm_ZeroTolerance);
-		
+		DynamicTestIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, Real tmax,
+												 const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+
 		// Object access.
-		const Plane3 GetHalfspace () const;
-		const Segment3 GetSegment () const;
+		const Plane3 GetHalfspace() const;
+		const Segment3 GetSegment() const;
 
 	private:
 		// Dynamic queries.
-		void Test ();	
-		
+		void Test();
+
 		// The objects to intersect.
 		Plane3 mHalfspace;
-		Segment3 mSegment;		
+		Segment3 mSegment;
 	};
 
 	using DynamicTestIntersectorHalfspace3Segment3f = DynamicTestIntersectorHalfspace3Segment3<float>;

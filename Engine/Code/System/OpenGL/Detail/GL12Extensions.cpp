@@ -35,25 +35,25 @@ System::PgglTexSubImage3D System::gglTexSubImage3D{ nullptr };
 void System
 	::GlDrawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid* indices) noexcept
 {
-	SYSTEM_BODY_A6(gglDrawRangeElements, mode, start, end, count, type, indices);
+	SYSTEM_BODY_6(gglDrawRangeElements, mode, start, end, count, type, indices);
 }
 
 void System
 	::GlTexImage3D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A10(gglTexImage3D, target, level, internalFormat, width, height, depth, border, format, type, data);
+	SYSTEM_BODY_10(gglTexImage3D, target, level, internalFormat, width, height, depth, border, format, type, data);
 }
 
 void System
 	::GlTexSubImage3D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_A11(gglTexSubImage3D, target, level, xOffset, yOffset, zOffset, width, height, depth, format, type, data);
+	SYSTEM_BODY_11(gglTexSubImage3D, target, level, xOffset, yOffset, zOffset, width, height, depth, format, type, data);
 }
 
 void System
 	::GlCopyTexSubImage3D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_A9(gglCopyTexSubImage3D, target, level, xOffset, yOffset, zOffset, x, y, width, height);
+	SYSTEM_BODY_9(gglCopyTexSubImage3D, target, level, xOffset, yOffset, zOffset, x, y, width, height);
 }
 
 void System

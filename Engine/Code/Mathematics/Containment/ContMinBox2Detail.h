@@ -29,7 +29,7 @@ Mathematics::MinBox2<Real>
 
         if (hullDim == 0)
         {
-			mMinBox = Box2<Real>{ points[0],Vector2D<Real>::sm_UnitX,Vector2D<Real>::sm_UnitY, Real{},Real{} };
+			mMinBox = Box2<Real>{ points[0],Vector2D<Real>::sm_UnitX,Vector2D<Real>::sm_UnitY, Math<Real>::sm_Zero,Math<Real>::sm_Zero };
             return;
         }
 
@@ -44,7 +44,7 @@ Mathematics::MinBox2<Real>
 			auto length = Vector2DTools<Real>::VectorMagnitude(diff);
 			diff.Normalize();
 
-			mMinBox = Box2<Real>{ center,diff,Vector2DTools<Real>::GetPerp(mMinBox.GetFirstAxis()), (Real{0.5})*length,Real{} };
+			mMinBox = Box2<Real>{ center,diff,Vector2DTools<Real>::GetPerp(mMinBox.GetFirstAxis()), (Real{0.5})*length,Math<Real>::sm_Zero };
 
             DELETE0(hull1);
             return;
@@ -169,7 +169,7 @@ Mathematics::MinBox2<Real>
         // Determine the edge that forms the smallest angle with the current
         // box edges.
         int flag = F_NONE;
-		auto maxDot = Real{};
+		auto maxDot = Math<Real>::sm_Zero;
 
 		auto dot = Vector2DTools<Real>::DotProduct(U, edges[BIndex]);
         if (dot > maxDot)

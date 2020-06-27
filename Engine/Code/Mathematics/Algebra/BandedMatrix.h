@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 10:34)
+// 引擎版本：0.0.2.5 (2020/03/19 10:10)
 
 // 所谓的带状矩阵即：在矩阵A中，
 // 所有的非零元素都集中在以主对角线为中心的带状区域中。
@@ -21,7 +21,7 @@
 #include "Flags/MatrixFlags.h"
 #include "Mathematics/Base/Math.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
 #include <vector>
 
@@ -30,7 +30,7 @@ namespace Mathematics
 	template <typename Real>
 	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrix
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = BandedMatrix<Real>;
@@ -39,54 +39,54 @@ namespace Mathematics
 		using AlgebraTraits = AlgebraTraits<Real>;
 
 	public:
-		BandedMatrix (int size, int lowerBandsNumber, int upperBandsNumber);
-		BandedMatrix (const BandedMatrix& rhs);
-		~BandedMatrix ();
-	
+		BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber);
+		BandedMatrix(const BandedMatrix& rhs);
+		~BandedMatrix();
+
 		BandedMatrix& operator= (const BandedMatrix& rhs);
 
 		CLASS_INVARIANT_DECLARE;
 
 		// 成员访问
-		int GetSize () const;
-		int GetLowerBandsNumber () const;
-		int GetUpperBandsNumber () const; 
-		int GetStreamSize() const; 
+		int GetSize() const;
+		int GetLowerBandsNumber() const;
+		int GetUpperBandsNumber() const;
+		int GetStreamSize() const;
 
 		// 重设大小会清空原有数据。
 		void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber);
 
 		// 对角线
-		Real* GetDiagonalBand ();
-		const Real* GetDiagonalBand () const;
+		Real* GetDiagonalBand();
+		const Real* GetDiagonalBand() const;
 
 		// 下三角
 		// GetLowerBand(index):  0 <= index < LowerBandMax
-		int GetLowerBandMax (int index) const; 
-		Real* GetLowerBand (int index);
-		const Real* GetLowerBand (int index) const;
+		int GetLowerBandMax(int index) const;
+		Real* GetLowerBand(int index);
+		const Real* GetLowerBand(int index) const;
 
 		// 上三角
 		// GetUupperBand(index):  0 <= index < UpperBandMax
-		int GetUpperBandMax (int index) const; 
-		Real* GetUpperBand (int index);
-		const Real* GetUpperBand (int index) const;
+		int GetUpperBandMax(int index) const;
+		Real* GetUpperBand(int index);
+		const Real* GetUpperBand(int index) const;
 
 		Real& operator() (int row, int column);
 		const Real& operator() (int row, int column) const;
 
 		// 便利函数用于初始化矩阵
-		void SetZero ();
-		void SetIdentity ();	
+		void SetZero();
+		void SetIdentity();
 
-		const VariableMatrix ToVariableMatrix() const;		
+		const VariableMatrix ToVariableMatrix() const;
 
 	private:
-		void Swap(BandedMatrix& rhs);			
+		void Swap(BandedMatrix& rhs);
 
-		void Allocate ();
-		void Allocate (const BandedMatrix& rhs);
-		void Deallocate ();
+		void Allocate();
+		void Allocate(const BandedMatrix& rhs);
+		void Deallocate();
 
 	private:
 		int m_Size;

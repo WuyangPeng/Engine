@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 11:25)
+// 引擎版本：0.0.2.5 (2020/03/20 10:04)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
@@ -15,14 +15,14 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <type_traits> 
 
 template <typename T>
 Mathematics::ConversionRational<T>
-	::ConversionRational( T value )
-	:m_NumeratorShifting{ 0 }, m_DenominatorShifting{ 0 },m_NumeratorMantissa{ 0 }, m_DenominatorMantissa{ 0 },
-	 m_Symbol{ NumericalValueSymbol::Zero },m_MaxShifting{ 0 },m_ReducibilityShifting{ 0 }
+	::ConversionRational(T value)
+	:m_NumeratorShifting{ 0 }, m_DenominatorShifting{ 0 }, m_NumeratorMantissa{ 0 }, m_DenominatorMantissa{ 0 },
+	m_Symbol{ NumericalValueSymbol::Zero }, m_MaxShifting{ 0 }, m_ReducibilityShifting{ 0 }
 {
 	Init(value, TraitsType{});
 
@@ -37,7 +37,7 @@ void Mathematics::ConversionRational<T>
 	static_assert(std::is_integral_v<T>, "T isn't integral.");
 
 	if (0 <= value)
-	{		 
+	{
 		m_NumeratorMantissa = value;
 		m_DenominatorMantissa = 1;
 		m_Symbol = NumericalValueSymbol::Positive;
@@ -45,13 +45,13 @@ void Mathematics::ConversionRational<T>
 		m_DenominatorShifting = 0;
 	}
 	else
-	{	 
+	{
 		m_NumeratorMantissa = -value;
 		m_DenominatorMantissa = 1;
 		m_Symbol = NumericalValueSymbol::Negative;
 		m_NumeratorShifting = 0;
 		m_DenominatorShifting = 0;
-	}	
+	}
 
 	FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(m_NumeratorMantissa) };
 	m_MaxShifting = floatingPointAnalysis.GetRealExponent();
@@ -104,20 +104,19 @@ void Mathematics::ConversionRational<T>
 	InitFloatingPoint(value);
 }
 
-
 template <typename T>
 void Mathematics::ConversionRational<T>
-	::InitFloatingPoint( T value )
+	::InitFloatingPoint(T value)
 {
 	static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
 	FloatingPointAnalysis<T> floatingPointAnalysis{ value };
 
 	if (floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Valid || floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Zero)
-	{		
+	{
 		m_NumeratorMantissa = floatingPointAnalysis.GetRealMantissa();
 		m_DenominatorMantissa = uint64_t(1) << TraitsType::g_ExponentShifting;
-		m_Symbol = floatingPointAnalysis.GetSymbol();	
+		m_Symbol = floatingPointAnalysis.GetSymbol();
 
 		auto shifting = floatingPointAnalysis.GetRealExponent();
 
@@ -126,7 +125,7 @@ void Mathematics::ConversionRational<T>
 			m_ReducibilityShifting = TraitsType::g_ExponentShifting - shifting;
 
 			if (0 < m_ReducibilityShifting)
-			{				
+			{
 				m_DenominatorMantissa >>= shifting;
 				shifting = 0;
 			}
@@ -148,7 +147,7 @@ void Mathematics::ConversionRational<T>
 		if (floatingPointAnalysis.GetExponent() == 0)
 		{
 			--m_DenominatorShifting;
-			--m_MaxShifting;			 		
+			--m_MaxShifting;
 		}
 	}
 	else
@@ -213,7 +212,7 @@ int Mathematics::ConversionRational<T>
 
 template <typename T>
 int Mathematics::ConversionRational<T>
-	::GetMaxShifting() const 
+	::GetMaxShifting() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -239,12 +238,12 @@ bool Mathematics::ConversionRational<T>
 	auto bit = m_MaxShifting - N * 32 - 1;
 
 	if (0 < bit && 0 <= m_ReducibilityShifting && m_ReducibilityShifting < bit)
-	{		
+	{
 		return false;
 	}
 	else
 	{
-		return true;		 
+		return true;
 	}
 }
 
@@ -288,9 +287,9 @@ const Mathematics::Integer<N> Mathematics::ConversionRational<T>
 	auto denominatorMantissa = m_DenominatorMantissa;
 
 	if (0 < bit)
-	{	
+	{
 		denominatorShifting = GetAssignmentDenominatorShifting(bit);
-		denominatorMantissa = GetAssignmentDenominatorMantissa(bit);		
+		denominatorMantissa = GetAssignmentDenominatorMantissa(bit);
 	}
 
 	auto denominator = Integer<N>{ denominatorMantissa };
@@ -302,12 +301,12 @@ const Mathematics::Integer<N> Mathematics::ConversionRational<T>
 // private
 template <typename T>
 int Mathematics::ConversionRational<T>
-	::GetAssignmentNumeratorShifting( int bit ) const
+	::GetAssignmentNumeratorShifting(int bit) const
 {
-	MATHEMATICS_ASSERTION_0(0 < bit,"需要移位的字节数应该为正数");
+	MATHEMATICS_ASSERTION_0(0 < bit, "需要移位的字节数应该为正数");
 
 	if (bit <= m_ReducibilityShifting)
-	{		 
+	{
 		auto shifting = m_NumeratorShifting - m_ReducibilityShifting;
 
 		if (0 <= shifting)
@@ -316,15 +315,15 @@ int Mathematics::ConversionRational<T>
 		}
 		else
 		{
-			return m_NumeratorShifting >> (-shifting);		
+			return m_NumeratorShifting >> (-shifting);
 		}
 	}
 	else if (m_ReducibilityShifting < 0)
 	{
 		if (-m_ReducibilityShifting <= bit)
 		{
-			return 0;				
-		}	
+			return 0;
+		}
 		else
 		{
 			return m_NumeratorShifting;
@@ -339,9 +338,9 @@ int Mathematics::ConversionRational<T>
 // private
 template <typename T>
 int Mathematics::ConversionRational<T>
-	::GetAssignmentDenominatorShifting( int bit ) const
+	::GetAssignmentDenominatorShifting(int bit) const
 {
-	MATHEMATICS_ASSERTION_0(0 < bit,"需要移位的字节数应该为正数");
+	MATHEMATICS_ASSERTION_0(0 < bit, "需要移位的字节数应该为正数");
 
 	if (bit <= m_ReducibilityShifting)
 	{
@@ -351,7 +350,7 @@ int Mathematics::ConversionRational<T>
 	{
 		if (-m_ReducibilityShifting <= bit)
 		{
-			return 0;		
+			return 0;
 		}
 		else
 		{
@@ -363,7 +362,7 @@ int Mathematics::ConversionRational<T>
 			}
 			else
 			{
-				return m_DenominatorShifting >> (-shifting);				
+				return m_DenominatorShifting >> (-shifting);
 			}
 		}
 	}
@@ -376,12 +375,12 @@ int Mathematics::ConversionRational<T>
 // private
 template <typename T>
 uint64_t Mathematics::ConversionRational<T>
-	::GetAssignmentNumeratorMantissa( int bit ) const
+	::GetAssignmentNumeratorMantissa(int bit) const
 {
-	MATHEMATICS_ASSERTION_0(0 < bit,"需要移位的字节数应该为正数");
+	MATHEMATICS_ASSERTION_0(0 < bit, "需要移位的字节数应该为正数");
 
 	if (bit <= m_ReducibilityShifting)
-	{		 
+	{
 		auto shifting = m_NumeratorShifting - m_ReducibilityShifting;
 
 		if (0 <= shifting)
@@ -397,11 +396,11 @@ uint64_t Mathematics::ConversionRational<T>
 	{
 		if (-m_ReducibilityShifting <= bit)
 		{
-			return 0;		
+			return 0;
 		}
 		else
 		{
-			return m_NumeratorMantissa >> (-m_ReducibilityShifting);				
+			return m_NumeratorMantissa >> (-m_ReducibilityShifting);
 		}
 	}
 	else
@@ -413,19 +412,19 @@ uint64_t Mathematics::ConversionRational<T>
 // private
 template <typename T>
 uint64_t Mathematics::ConversionRational<T>
-	::GetAssignmentDenominatorMantissa( int bit ) const
+	::GetAssignmentDenominatorMantissa(int bit) const
 {
-	MATHEMATICS_ASSERTION_0(0 < bit,"需要移位的字节数应该为正数");
+	MATHEMATICS_ASSERTION_0(0 < bit, "需要移位的字节数应该为正数");
 
 	if (bit <= m_ReducibilityShifting)
 	{
-		return m_DenominatorMantissa >> m_ReducibilityShifting;			
+		return m_DenominatorMantissa >> m_ReducibilityShifting;
 	}
 	else if (m_ReducibilityShifting < 0)
 	{
 		if (-m_ReducibilityShifting <= bit)
 		{
-			return 1;		
+			return 1;
 		}
 		else
 		{
@@ -436,7 +435,7 @@ uint64_t Mathematics::ConversionRational<T>
 				return m_DenominatorMantissa;
 			}
 			else
-			{				
+			{
 				return m_DenominatorMantissa >> (-m_ReducibilityShifting + shifting);
 			}
 		}

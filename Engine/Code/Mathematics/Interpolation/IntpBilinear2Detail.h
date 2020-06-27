@@ -17,7 +17,7 @@ IntpBilinear2<Real>::IntpBilinear2 (int xBound, int yBound, Real xMin,  Real xSp
 {
     // At least a 2x2 block of data points are needed.
     MATHEMATICS_ASSERTION_0(xBound >= 2 && yBound >= 2 && F, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(xSpacing > Real{} && ySpacing > Real{}, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero && ySpacing > Math<Real>::sm_Zero, "Invalid input\n");
 
     mXBound = xBound;
     mYBound = yBound;
@@ -25,10 +25,10 @@ IntpBilinear2<Real>::IntpBilinear2 (int xBound, int yBound, Real xMin,  Real xSp
 
     mXMin = xMin;
     mXSpacing = xSpacing;
-    mInvXSpacing = ((Real)1)/xSpacing;
+    mInvXSpacing = (static_cast<Real>(1))/xSpacing;
     mYMin = yMin;
     mYSpacing = ySpacing;
-    mInvYSpacing = ((Real)1)/ySpacing;
+    mInvYSpacing = (static_cast<Real>(1))/ySpacing;
     mXMax = xMin + xSpacing*(xBound - 1);
     mYMax = yMin + ySpacing*(yBound - 1);
 
@@ -129,11 +129,11 @@ Real IntpBilinear2<Real>::operator() (Real x, Real y) const
     }
 
     Real U[2];
-    U[0] = (Real)1.0;
+    U[0] = static_cast<Real>(1.0);
     U[1] = xIndex - ix;
 
     Real V[2];
-    V[0] = (Real)1.0;
+    V[0] = static_cast<Real>(1.0);
     V[1] = yIndex - iy;
 
     // Compute P = M*U and Q = M*V.
@@ -141,8 +141,8 @@ Real IntpBilinear2<Real>::operator() (Real x, Real y) const
     int row, col;
     for (row = 0; row < 2; ++row)
     {
-        P[row] = Real{};
-        Q[row] = Real{};
+        P[row] = Math<Real>::sm_Zero;
+        Q[row] = Math<Real>::sm_Zero;
         for (col = 0; col < 2; ++col)
         {
             P[row] += msBlend[row][col]*U[col];
@@ -151,7 +151,7 @@ Real IntpBilinear2<Real>::operator() (Real x, Real y) const
     }
 
     // Compute (M*U)^t D (M*V) where D is the 2x2 subimage containing (x,y).
-    Real result = Real{};
+    Real result = Math<Real>::sm_Zero;
     for (row = 0; row < 2; ++row)
     {
         int yClamp = iy + row;
@@ -214,18 +214,18 @@ Real IntpBilinear2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)
     {
     case 0:
         dx = xIndex - ix;
-        U[0] = (Real)1;
+        U[0] = static_cast<Real>(1);
         U[1] = dx;
-        xMult = (Real)1;
+        xMult = static_cast<Real>(1);
         break;
     case 1:
         dx = xIndex - ix;
-        U[0] = Real{};
-        U[1] = (Real)1;
+        U[0] = Math<Real>::sm_Zero;
+        U[1] = static_cast<Real>(1);
         xMult = mInvXSpacing;
         break;
     default:
-        return Real{};
+        return Math<Real>::sm_Zero;
     }
 
     Real V[2], dy, yMult;
@@ -233,18 +233,18 @@ Real IntpBilinear2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)
     {
     case 0:
         dy = yIndex - iy;
-        V[0] = (Real)1;
+        V[0] = static_cast<Real>(1);
         V[1] = dy;
-        yMult = (Real)1;
+        yMult = static_cast<Real>(1);
         break;
     case 1:
         dy = yIndex - iy;
-        V[0] = Real{};
-        V[1] = (Real)1;
+        V[0] = Math<Real>::sm_Zero;
+        V[1] = static_cast<Real>(1);
         yMult = mInvYSpacing;
         break;
     default:
-        return Real{};
+        return Math<Real>::sm_Zero;
     }
 
     // Compute P = M*U and Q = M*V.
@@ -252,8 +252,8 @@ Real IntpBilinear2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)
     int row, col;
     for (row = 0; row < 2; ++row)
     {
-        P[row] = Real{};
-        Q[row] = Real{};
+        P[row] = Math<Real>::sm_Zero;
+        Q[row] = Math<Real>::sm_Zero;
         for (col = 0; col < 2; ++col)
         {
             P[row] += msBlend[row][col]*U[col];
@@ -262,7 +262,7 @@ Real IntpBilinear2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)
     }
 
     // Compute (M*U)^t D (M*V) where D is the 2x2 subimage containing (x,y).
-    Real result = Real{};
+    Real result = Math<Real>::sm_Zero;
     for (row = 0; row < 2; ++row)
     {
         int yClamp = iy + row;

@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:13)
+// 引擎版本：0.2.0.0 (2020/05/07 23:11)
 
 #ifndef SYSTEM_HELPER_USER_MACRO_H
 #define SYSTEM_HELPER_USER_MACRO_H
@@ -75,5 +75,5 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 #endif //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX) != CLOSE_DIRECTX
 
 #include "PragmaWarning/EngineDisable.h"
-	  
+
 #endif // SYSTEM_HELPER_USER_MACRO_H

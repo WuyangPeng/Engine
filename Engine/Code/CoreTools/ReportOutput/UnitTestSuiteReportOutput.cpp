@@ -16,7 +16,7 @@ using std::ostream;
 using std::make_shared;
 
 CoreTools::UnitTestSuiteReportOutput
-	::UnitTestSuiteReportOutput(const string& timeDescribe, int borderLineLength, ostream* osPtr)
+	::UnitTestSuiteReportOutput(const string& timeDescribe, int borderLineLength, const OStreamShared& osPtr)
 	:m_Impl{ make_shared<ImplType>(timeDescribe,borderLineLength,osPtr) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

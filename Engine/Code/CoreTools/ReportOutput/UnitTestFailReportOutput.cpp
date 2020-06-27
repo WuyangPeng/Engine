@@ -16,7 +16,7 @@ using std::ostream;
 using std::make_shared;
 
 CoreTools::UnitTestFailReportOutput
-	::UnitTestFailReportOutput(const string& failClassName, const string& fileName, int lineNumber, const string& errorMessage, ostream* osPtr)
+	::UnitTestFailReportOutput(const string& failClassName, const string& fileName, int lineNumber, const string& errorMessage, const OStreamShared& osPtr)
 	:m_Impl{ make_shared<ImplType>(failClassName,fileName, lineNumber,errorMessage,osPtr) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

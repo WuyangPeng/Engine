@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 14:03)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 17:07)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESULT_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESULT_H
@@ -32,9 +32,9 @@ namespace Mathematics
 	public:
 		explicit DistanceResult(Real distance);
 		DistanceResult(Real distance, Real contactTime);
-		DistanceResult(Real distance, Real contactTime,const Vector& lhsClosestPoint,const Vector& rhsClosestPoint);
-		DistanceResult(Real distance, Real contactTime,const ClosestPoints& lhsClosestPoints,const ClosestPoints& rhsClosestPoints);
-		DistanceResult(Real distance, Real contactTime,const Vector& lhsClosestPoint, const Vector& rhsClosestPoint,Real lhsParameter, Real rhsParameter);
+		DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint);
+		DistanceResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints);
+		DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -65,8 +65,8 @@ namespace Mathematics
 		void Copy();
 
 	private:
-		IMPL_TYPE_DECLARE(DistanceResult);	 
-	};	 
+		IMPL_TYPE_DECLARE(DistanceResult);
+	};
 
 	using DistanceResult2f = DistanceResult<float, Vector2Df>;
 	using DistanceResult3f = DistanceResult<float, Vector3Df>;

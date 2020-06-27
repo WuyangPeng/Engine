@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 13:53)
+// 引擎版本：0.0.2.5 (2020/03/24 14:54)
 
 #ifndef MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_LINE3_PLANE3_H
 #define MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_LINE3_PLANE3_H
@@ -15,7 +15,6 @@
 
 namespace Mathematics
 {
-
 	template <typename Real>
 	class StaticTestIntersectorLine3Plane3 : public StaticIntersector<Real, Vector3D>
 	{
@@ -26,21 +25,21 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;   		
-		
+		using Math = Math<Real>;
+
 	public:
-		StaticTestIntersectorLine3Plane3(const Line3& line, const Plane3& plane,const Real epsilon = Math::sm_ZeroTolerance);
+		StaticTestIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon = Math::sm_ZeroTolerance);
 		virtual ~StaticTestIntersectorLine3Plane3();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
+
 		const Line3 GetLine() const;
 		const Plane3 GetPlane() const;
 
 	private:
 		void Test();
-		
-	private: 
+
+	private:
 		// 相交对象
 		Line3 m_Line;
 		Plane3 m_Plane;

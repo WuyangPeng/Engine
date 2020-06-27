@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 14:31)
+// 引擎版本：0.0.2.5 (2020/03/24 14:32)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTION_TYPE_H
 #define MATHEMATICS_INTERSECTION_INTERSECTION_TYPE_H 
@@ -23,7 +23,7 @@ namespace Mathematics
 		Plane,
 		Polyhedron,
 		Other
-	}; 
+	};
 
 	ENUM_INCREMENTABLE_OPERATOR_DEFINE(IntersectionType);
 }

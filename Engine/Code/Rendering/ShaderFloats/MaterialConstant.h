@@ -14,7 +14,7 @@
 #include "Rendering/SceneGraph/Material.h"
 #include "ShaderFloat.h"
 
-#include <boost/shared_ptr.hpp>
+
 
 RENDERING_EXPORT_SHARED_PTR(MaterialConstantImpl);
 
@@ -47,8 +47,10 @@ namespace Rendering
 	private:
 		IMPL_TYPE_DECLARE(MaterialConstant);
 	};
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(MaterialConstant);
+#include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, MaterialConstant);
 }
 

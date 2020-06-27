@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.1.0 (2019/10/17 09:48)
-
+// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 10:55)
 
 #include "Network/NetworkExport.h" 
 
@@ -14,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 using std::string;
- 
+
 Network::SockAcceptor
 	::SockAcceptor(int port, const ConfigurationStrategy& configurationStrategy)
 	:m_Impl{ SockAcceptorFactory::Create(port,configurationStrategy) }
@@ -30,19 +29,19 @@ Network::SockAcceptor
 }
 
 Network::SockAcceptor
-	::SockAcceptor(const ConfigurationStrategy& configurationStrategy)
+::SockAcceptor(const ConfigurationStrategy& configurationStrategy)
 	: m_Impl{ SockAcceptorFactory::Create(configurationStrategy) }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, SockAcceptor) 
+IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, SockAcceptor)
 
 bool Network::SockAcceptor
 	::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-	
+
 	return m_Impl->Accept(sockStream, sockAddress);
 }
 
@@ -55,7 +54,7 @@ void Network::SockAcceptor
 }
 
 void Network::SockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream,  const SockAddressSharedPtr& sockAddress)
+	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -69,4 +68,3 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetWinSocket, Net
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, EnableNonBlock, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetAddress, const string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetPort, int)
- 

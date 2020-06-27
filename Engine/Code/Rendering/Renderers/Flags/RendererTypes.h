@@ -18,7 +18,8 @@ namespace Rendering
 		Glut = 2,
 		OpenGL = 3,
 		OpenGLES = 4,
-		Dx9 = 5,		
+		Dx9 = 5,	
+		Non,
 
 		Max,
     };

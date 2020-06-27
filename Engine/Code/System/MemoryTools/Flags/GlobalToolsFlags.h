@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:22)
+// 引擎版本：0.2.0.0 (2020/05/09 23:55)
 
 #ifndef SYSTEM_MEMORY_TOOLS_GLOBAL_TOOLS_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_GLOBAL_TOOLS_FLAGS_H
@@ -10,7 +10,7 @@
 #include "System/Helper/Platform.h" 
 
 namespace System
-{	 
+{
 #ifdef SYSTEM_PLATFORM_WIN32 
 
 	enum class GlobalMemory
@@ -26,7 +26,7 @@ namespace System
 		Share = GMEM_SHARE,
 		Ddeshare = GMEM_DDESHARE,
 		Notify = GMEM_NOTIFY,
-		Lower  = GMEM_LOWER,
+		Lower = GMEM_LOWER,
 		ValidFlags = GMEM_VALID_FLAGS,
 		InvalidHandle = GMEM_INVALID_HANDLE,
 		Ghnd = GHND,
@@ -58,7 +58,7 @@ namespace System
 		Discarded = 0x4000,
 		LockCount = 0x00FF,
 	};
-		
+
 #endif // SYSTEM_PLATFORM_WIN32	 
 }
 

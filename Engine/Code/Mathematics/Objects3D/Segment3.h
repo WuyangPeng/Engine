@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:15)
+// 引擎版本：0.0.2.5 (2020/03/19 17:24)
 
 #ifndef MATHEMATICS_OBJECTS3D_SEGMENT3_H
 #define MATHEMATICS_OBJECTS3D_SEGMENT3_H
@@ -20,7 +20,7 @@ namespace Mathematics
 	template <typename Real>
 	class Segment3
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Segment3<Real>;
@@ -28,19 +28,19 @@ namespace Mathematics
 		using Vector3DTools = Vector3DTools<Real>;
 		using Math = Math<Real>;
 
-	public:		
+	public:
 		// 线段被表示为(1-s) * P0 + s * P1，其中P0和P1是线段的端点和0 <= s <= 1。
 		//		
 		// 一些算法涉及线段可能更喜欢定义一个中点的表示和面向包围盒的方向。
 		// 此表示为C + t * D，其中C = (P0 + P1) / 2是该线段的中心，
 		// D = (P1-P0)/Length(P1-P0)是一个单位长度方向的矢量，
 		// 且|t| <= e。值 e = Length(P1-P0)/2是该线段的“范围”（半径或半长）。
-    
+
 		// 构造函数计算center、direction和extent从beginPoint和endPoint
-		Segment3 (const Vector3D& beginPoint, const Vector3D& endPoint,const Real epsilon = Math::sm_ZeroTolerance);
+		Segment3(const Vector3D& beginPoint, const Vector3D& endPoint, const Real epsilon = Math::sm_ZeroTolerance);
 
 		// 构造函数计算beginPoint和endPoint从center、direction和extent
-		Segment3 (Real extent,const Vector3D& center, const Vector3D& direction,const Real epsilon = Math::sm_ZeroTolerance);
+		Segment3(Real extent, const Vector3D& center, const Vector3D& direction, const Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -50,15 +50,14 @@ namespace Mathematics
 		const Vector3D GetDirection() const;
 		Real GetExtent() const;
 
-	
 		const ClassType GetMove(Real t, const Vector3D& velocity) const;
 
 	private:
 		// 当你改变beginPoint或endPoint时调用 
-		void ComputeCenterDirectionExtent ();
+		void ComputeCenterDirectionExtent();
 
 		// 当你改变center或direction或extent时调用 
-		void ComputeEndPoints ();	
+		void ComputeEndPoints();
 
 	private:
 		// 终点表示。
@@ -68,9 +67,9 @@ namespace Mathematics
 		// 中心—方向—范围表示。
 		Vector3D m_Center;
 		Vector3D m_Direction;
-		Real m_Extent;	
+		Real m_Extent;
 
-		Real m_Epsilon;	
+		Real m_Epsilon;
 	};
 
 	using Segment3f = Segment3<float>;

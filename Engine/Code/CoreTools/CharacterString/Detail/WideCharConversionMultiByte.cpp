@@ -13,11 +13,12 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MemoryTools/HeapAllocateDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
 using std::wstring;
 using std::make_shared;
+using namespace std::literals;
 
 CoreTools::WideCharConversionMultiByte
 	::WideCharConversionMultiByte(const wstring& character, bool isUTF8)
@@ -78,7 +79,7 @@ void CoreTools::WideCharConversionMultiByte
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Wide Char 转换为 Multi Byte 失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Wide Char 转换为 Multi Byte 失败！"s));
 	}
 }
 
@@ -90,7 +91,7 @@ void CoreTools::WideCharConversionMultiByte
 
 	if (m_ReadSize <= 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Wide Char 转换为 Multi Byte 失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Wide Char 转换为 Multi Byte 失败！"s));
 	}
 }
 

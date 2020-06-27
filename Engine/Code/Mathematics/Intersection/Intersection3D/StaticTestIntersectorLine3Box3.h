@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 13:47)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_BOX3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_BOX3_H
@@ -16,7 +16,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class StaticTestIntersectorLine3Box3: public  StaticIntersector<Real, Vector3D>
+	class StaticTestIntersectorLine3Box3 : public  StaticIntersector<Real, Vector3D>
 	{
 	public:
 		using ClassType = StaticTestIntersectorLine3Box3<Real>;
@@ -25,22 +25,22 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;		
- 
+		using Math = Math<Real>;
+
 	public:
-		StaticTestIntersectorLine3Box3 (const Line3& line, const Box3& box);
-		
+		StaticTestIntersectorLine3Box3(const Line3& line, const Box3& box);
+
 		// Object access.
-		const Line3 GetLine () const;
-		const Box3 GetBox () const;
+		const Line3 GetLine() const;
+		const Box3 GetBox() const;
 
 	private:
 		// Static intersection queries.
-		void Test ();
-		
+		void Test();
+
 		// The objects to intersect.
 		Line3 mLine;
-		Box3 mBox;		
+		Box3 mBox;
 	};
 
 	using StaticTestIntersectorLine3Box3f = StaticTestIntersectorLine3Box3<float>;

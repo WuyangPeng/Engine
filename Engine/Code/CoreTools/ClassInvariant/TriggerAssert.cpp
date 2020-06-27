@@ -74,12 +74,6 @@ void CoreTools::TriggerAssert
 
 	AppendUserArguments(format, arguments);
 
-	if (m_TriggerAssertCheck == TriggerAssertCheck::Assertion)
-	{
-		// 断言失败，写入日志。类不变式不处理，以避免递归调用。
-		WriteToLog();
-	}
-
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 	WriteToOutputDebug();
 #endif // CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
@@ -116,15 +110,6 @@ void CoreTools::TriggerAssert
 	// 添加指定的参数。
 	auto length = System::Strlen(m_Message.data());
 	System::VsnPrintf(m_Message.data() + length, sm_MaxPrefixBytes - length, format, arguments);
-}
-
-// private
-void CoreTools::TriggerAssert
-	::WriteToLog()
-{
-	LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Assert"))
-		<< m_Message.data()
-		<< LogAppenderIOManageSign::Refresh;
 }
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW

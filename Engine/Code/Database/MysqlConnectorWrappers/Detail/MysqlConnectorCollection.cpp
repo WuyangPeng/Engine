@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/03 10:24)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/16 12:48)
 
 #include "Database/DatabaseExport.h"
 
@@ -12,11 +12,11 @@
 #include "Database/SqlInterface/Schema.h"
 #include "Database/SqlInterface/Detail/SchemaImpl.h"
 
-using std::make_shared;
 using std::string;
+using std::make_shared;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
- 
+
 Database::MysqlConnectorCollection
 	::MysqlConnectorCollection(const Schema& schema, const string& collectionName)
 	: ParentType{ schema.GetConfigurationStrategy() }, m_MysqlxCollection{ GetMysqlxCollectionPtr(schema,collectionName) }
@@ -45,7 +45,7 @@ Database::MysqlConnectorCollection::MysqlxCollectionPtr Database::MysqlConnector
 	::GetMysqlxCollectionPtr(const Schema& schema, const string& collectionName)
 {
 	auto implPtr = schema.GetImplType().lock();
-	 
+
 	if (implPtr)
 	{
 		return implPtr->GetCollection(collectionName);
@@ -70,7 +70,7 @@ Database::MysqlConnectorCollection::ResultPtr Database::MysqlConnectorCollection
 		statement = statement.limit(limitStatement);
 	}
 
-	for (const auto& value:bindStatement)
+	for (const auto& value : bindStatement)
 	{
 		statement = statement.bind(value.first, value.second);
 	}

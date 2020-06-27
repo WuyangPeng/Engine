@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 10:54)
+// 引擎版本：0.0.2.5 (2020/03/20 09:47)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_H
@@ -11,7 +11,7 @@
 
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <vector>
 #include <iosfwd>
 
@@ -21,13 +21,13 @@ namespace Mathematics
 	template <int N>
 	class IntegerData : private boost::totally_ordered<IntegerData<N>>
 	{
-	public:		
+	public:
 		using ClassType = IntegerData<N>;
 
 	public:
 		IntegerData();
 		explicit IntegerData(const std::vector<uint16_t>& data);
-		IntegerData(int count,const uint16_t* data);
+		IntegerData(int count, const uint16_t* data);
 
 		template<typename T>
 		explicit IntegerData(T value);
@@ -42,7 +42,7 @@ namespace Mathematics
 
 		bool IsZero() const;
 		void SetZero();
-		NumericalValueSymbol GetSign () const;	
+		NumericalValueSymbol GetSign() const;
 
 		void SwapBigEndian();
 
@@ -57,10 +57,10 @@ namespace Mathematics
 		//    0 当 lhs == rhs,
 		//   +1 当 lhs > rhs.
 		// 这个比较仅用于==和<使用，使用无符号数比较。
-		static NumericalValueSymbol UnsignedDataCompare(const IntegerData& lhs,const IntegerData& rhs);
+		static NumericalValueSymbol UnsignedDataCompare(const IntegerData& lhs, const IntegerData& rhs);
 
-	private:		
-		void Init(int count,const uint16_t* data);
+	private:
+		void Init(int count, const uint16_t* data);
 
 		template<typename T>
 		void Init(T value);
@@ -72,7 +72,7 @@ namespace Mathematics
 
 		// 最低位储存在索引0。
 		uint16_t m_Buffer[sm_IntSize];
-	};		
+	};
 
 	// 比较
 	template <int N>
@@ -82,7 +82,7 @@ namespace Mathematics
 	bool operator< (const IntegerData<N>& lhs, const IntegerData<N>& rhs);
 
 	template <int N>
-	std::ostream& operator<< (std::ostream& os,const IntegerData<N>& integerData);
+	std::ostream& operator<< (std::ostream& os, const IntegerData<N>& integerData);
 }
 
 #endif // MATHEMATICS_RATIONAL_INTEGER_DATA_H

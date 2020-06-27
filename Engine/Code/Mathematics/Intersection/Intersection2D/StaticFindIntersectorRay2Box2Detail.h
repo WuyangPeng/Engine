@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/13 09:57)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:52)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_BOX2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_BOX2_DETAIL_H
@@ -22,39 +22,39 @@ template <typename Real>
 const Mathematics::Ray2<Real> Mathematics::StaticFindIntersectorRay2Box2<Real>
 	::GetRay() const
 {
-    return mRay;
+	return mRay;
 }
 
 template <typename Real>
 const Mathematics::Box2<Real> Mathematics::StaticFindIntersectorRay2Box2<Real>
 	::GetBox() const
 {
-    return mBox;
+	return mBox;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorRay2Box2<Real>
 	::Find()
 {
-	Real t0{};
-	Real t1{ Math::sm_MaxReal };
+	auto t0 = Math::sm_Zero;
+	auto t1 = Math::sm_MaxReal;
 	auto mIntersectionType = 0;
-	StaticFindIntersectorLine2Box2<Real>::DoClipping(t0, t1, mRay.GetOrigin(),mRay.GetDirection(), mBox, true, mQuantity, mPoint, mIntersectionType);
-	SetIntersectionType(static_cast<IntersectionType>(mIntersectionType));
+	StaticFindIntersectorLine2Box2<Real>::DoClipping(t0, t1, mRay.GetOrigin(), mRay.GetDirection(), mBox, true, mQuantity, mPoint, mIntersectionType);
+	this->SetIntersectionType(static_cast<IntersectionType>(mIntersectionType));
 }
 
 template <typename Real>
 int Mathematics::StaticFindIntersectorRay2Box2<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+	return mQuantity;
 }
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::StaticFindIntersectorRay2Box2<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+	return mPoint[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_BOX2_DETAIL_H

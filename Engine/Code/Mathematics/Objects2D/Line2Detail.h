@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/06 11:30)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 16:55) 
 
 #ifndef MATHEMATICS_OBJECTS2D_LINE2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_LINE2_DETAIL_H
@@ -14,7 +14,7 @@
 
 template <typename Real>
 Mathematics::Line2<Real>
-	::Line2( const Vector2D& origin, const Vector2D& direction ,const Real epsilon)
+	::Line2(const Vector2D& origin, const Vector2D& direction, const Real epsilon)
 	:m_Origin{ origin }, m_Direction{ direction }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -25,10 +25,10 @@ template <typename Real>
 bool Mathematics::Line2<Real>
 	::IsValid() const noexcept
 {
-	if(m_Direction.IsNormalize(m_Epsilon))	
-		return true;	
-	else	
-		return false;	
+	if (m_Direction.IsNormalize(m_Epsilon))
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -81,8 +81,8 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Line2<Real>& lhs, const Line2<Real>& rhs, const Real epsilon)
 {
-	return Vector2DTools<Real>::Approximate(lhs.GetOrigin(),rhs.GetOrigin(),epsilon) &&
-		   Vector2DTools<Real>::Approximate(lhs.GetDirection(),rhs.GetDirection(),epsilon);
+	return Vector2DTools<Real>::Approximate(lhs.GetOrigin(), rhs.GetOrigin(), epsilon) &&
+		   Vector2DTools<Real>::Approximate(lhs.GetDirection(), rhs.GetDirection(), epsilon);
 }
 
 template <typename Real>

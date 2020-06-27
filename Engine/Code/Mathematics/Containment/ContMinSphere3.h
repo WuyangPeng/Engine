@@ -23,7 +23,7 @@ namespace Mathematics
 	public:
 		// The epsilon value is a floating-point tolerance used for various
 		// computations.
-		MinSphere3 (int numPoints, const Vector3D<Real>* points,Sphere3<Real>& minimal, Real epsilon = (Real)1e-03);
+		MinSphere3 (int numPoints, const Vector3D<Real>* points,Sphere3<Real>& minimal, Real epsilon = static_cast<Real>(1e-03));
 		
 	private:
 		// Indices of points that support current minimum volume sphere.

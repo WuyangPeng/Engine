@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 17:45)
+// 引擎版本：0.0.2.5 (2020/03/23 19:18)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE2_RAY2_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE2_RAY2_DETAIL_H 
@@ -34,10 +34,10 @@ template <typename Real>
 bool Mathematics::DistanceLine2Ray2<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -72,16 +72,16 @@ const typename Mathematics::DistanceLine2Ray2<Real>::DistanceResult Mathematics:
 	if (this->GetZeroThreshold() <= det)
 	{
 		auto rhsT = tool.GetRhsT();
-	
-		if (Real{} <= rhsT)
+
+		if (Math<Real>::sm_Zero <= rhsT)
 		{
 			// 两个内部点最接近，一个在直线上，一个在射线上。
 			auto lhsT = tool.GetLhsT();
 
-			return DistanceResult{ Real{}, Real{}, m_Line.GetOrigin() + lhsT / det * m_Line.GetDirection(),m_Ray.GetOrigin() + rhsT / det * m_Ray.GetDirection() };
+			return DistanceResult{ Math<Real>::sm_Zero,Math<Real>::sm_Zero, m_Line.GetOrigin() + lhsT / det * m_Line.GetDirection(),m_Ray.GetOrigin() + rhsT / det * m_Ray.GetDirection() };
 		}
 		else
-		{		
+		{
 			// 射线的原点同直线的某一点最接近。
 			return GetSquaredWithClosestPoints(tool);
 		}
@@ -90,16 +90,16 @@ const typename Mathematics::DistanceLine2Ray2<Real>::DistanceResult Mathematics:
 	{
 		// 线是平行的，最接近的一对点在射线原点。
 		return GetSquaredWithClosestPoints(tool);
-	}	
+	}
 }
-	
+
 template <typename Real>
 const typename Mathematics::DistanceLine2Ray2<Real>::DistanceResult Mathematics::DistanceLine2Ray2<Real>
 	::GetSquaredWithClosestPoints(const DistanceLine2Line2Tool& tool) const
 {
 	auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
-	return DistanceResult{ squaredDistance,Real{},m_Line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * m_Line.GetDirection(),m_Ray.GetOrigin() };
+	return DistanceResult{ squaredDistance,Math<Real>::sm_Zero,m_Line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * m_Line.GetDirection(),m_Ray.GetOrigin() };
 }
 
 template <typename Real>
@@ -107,7 +107,7 @@ const typename Mathematics::DistanceLine2Ray2<Real>::DistanceResult Mathematics:
 	::GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
- 
+
 	auto movedLine = m_Line.GetMove(t, lhsVelocity);
 	auto movedRay = m_Ray.GetMove(t, rhsVelocity);
 

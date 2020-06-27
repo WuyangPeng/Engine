@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 19:00)
+// 引擎版本：0.0.2.5 (2020/03/23 19:25)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_SEGMENT2_SEGMENT2_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_SEGMENT2_SEGMENT2_DETAIL_H 
@@ -15,12 +15,11 @@
 
 template <typename Real>
 Mathematics::DistanceSegment2Segment2<Real>
-	::DistanceSegment2Segment2( const Segment2& lhsSegment, const Segment2& rhsSegment )
+	::DistanceSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment)
 	:m_LhsSegment{ lhsSegment }, m_RhsSegment{ rhsSegment }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-
 
 template <typename Real>
 Mathematics::DistanceSegment2Segment2<Real>
@@ -34,10 +33,10 @@ template <typename Real>
 bool Mathematics::DistanceSegment2Segment2<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -71,7 +70,7 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 	auto lhsExtent = m_LhsSegment.GetExtent();
 	auto rhsExtent = m_RhsSegment.GetExtent();
 
-	if (GetZeroThreshold() <= det)
+	if (this->GetZeroThreshold() <= det)
 	{
 		// 线段不平行。
 		auto lhsT = tool.GetLhsT();
@@ -86,11 +85,11 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 			{
 				if (-rhsExtentMultiplyDet <= rhsT)
 				{
-					if (rhsT <= rhsExtentMultiplyDet) 
+					if (rhsT <= rhsExtentMultiplyDet)
 					{
 						// 区域0（内部）
 						// 最小值为两个线段内部点。
-						return DistanceResult{ Real{}, Real{}, m_LhsSegment.GetCenterPoint() + lhsT / det * m_LhsSegment.GetDirection(),
+						return DistanceResult{ Math::sm_Zero, Math::sm_Zero, m_LhsSegment.GetCenterPoint() + lhsT / det * m_LhsSegment.GetDirection(),
 											   m_RhsSegment.GetCenterPoint() + rhsT / det * m_RhsSegment.GetDirection() };
 					}
 					else
@@ -99,10 +98,10 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 						return GetSquaredWithClosestPointsIsLhsSide(tool, lhsExtent, rhsExtent);
 					}
 				}
-				else  
+				else
 				{
 					// 区域7（边）
-					return GetSquaredWithClosestPointsIsLhsSide(tool, lhsExtent, -rhsExtent); 
+					return GetSquaredWithClosestPointsIsLhsSide(tool, lhsExtent, -rhsExtent);
 				}
 			}
 			else
@@ -112,18 +111,18 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 					if (rhsT <= rhsExtentMultiplyDet)
 					{
 						// 区域1（边）
-						return GetSquaredWithClosestPointsIsRhsSide(tool, lhsExtent, rhsExtent);						
+						return GetSquaredWithClosestPointsIsRhsSide(tool, lhsExtent, rhsExtent);
 					}
-					else  
+					else
 					{
 						// 区域2（角）
 						return GetSquaredWithClosestPointsIsLhsCorner(tool, lhsExtent, rhsExtent);
 					}
 				}
-				else  
+				else
 				{
 					// 区域8（角）
-					return GetSquaredWithClosestPointsIsLhsCorner(tool, lhsExtent, -rhsExtent);			
+					return GetSquaredWithClosestPointsIsLhsCorner(tool, lhsExtent, -rhsExtent);
 				}
 			}
 		}
@@ -131,21 +130,21 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 		{
 			if (-rhsExtentMultiplyDet <= rhsT)
 			{
-				if (rhsT <= rhsExtentMultiplyDet)  
+				if (rhsT <= rhsExtentMultiplyDet)
 				{
 					// 区域5（边）
 					return GetSquaredWithClosestPointsIsRhsSide(tool, -lhsExtent, rhsExtent);
 				}
-				else  
+				else
 				{
 					// 区域4（角）
 					return GetSquaredWithClosestPointsIsRhsCorner(tool, lhsExtent, rhsExtent);
 				}
 			}
-			else   
+			else
 			{
 				// 区域6（角）
-				return GetSquaredWithClosestPointsIsRhsCorner(tool, lhsExtent, -rhsExtent);			
+				return GetSquaredWithClosestPointsIsRhsCorner(tool, lhsExtent, -rhsExtent);
 			}
 		}
 	}
@@ -155,7 +154,7 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 		// 平均项originDifferenceDotLhsDirection被设计为确保函数的对称性。 
 		// 也就是说，DistanceSegment2Segment2（seg0，seg1）和DistanceSegment2Segment2（seg1，seg0）应该产生相同的数。
 		auto extentSum = lhsExtent + rhsExtent;
-		auto sign = (Real{} < tool.GetDirectionDot() ? static_cast<Real>(-1) : static_cast<Real>(1));
+		auto sign = (Math::sm_Zero < tool.GetDirectionDot() ? static_cast<Real>(-1) : static_cast<Real>(1));
 		auto originDifferenceDotLhsDirectionAverage = tool.GetOriginDifferenceDotDirectionAverage();
 		auto lambda = -originDifferenceDotLhsDirectionAverage;
 		if (lambda < -extentSum)
@@ -171,7 +170,7 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 		auto lhsT = lambda + sign * rhsT;
 
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(lambda * (lambda + static_cast<Real>(2) * originDifferenceDotLhsDirectionAverage) + tool.GetOriginDifferenceSquaredLength()),
-							   Real{},
+							   Math::sm_Zero,
 							   m_LhsSegment.GetCenterPoint() + lhsT * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + rhsT * m_RhsSegment.GetDirection() };
 	}
@@ -184,24 +183,24 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 {
 	auto t = tool.GetLhsT(-rhsExtent);
 	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
-		             tool.GetOriginDifferenceSquaredLength();
+				     tool.GetOriginDifferenceSquaredLength();
 
 	if (t < -lhsExtent)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-lhsExtent * (-lhsExtent - static_cast<Real>(2) * t) + rhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() - lhsExtent * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() - lhsExtent * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
 	}
 	else if (t <= lhsExtent)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() + t * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() + t * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
 	}
 	else
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(lhsExtent * (lhsExtent - static_cast<Real>(2) * t) + rhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
 	}
 }
@@ -213,24 +212,24 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 {
 	auto t = tool.GetRhsT(-lhsExtent);
 	auto lhsSquare = lhsExtent * (lhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-		             tool.GetOriginDifferenceSquaredLength();
+					 tool.GetOriginDifferenceSquaredLength();
 
 	if (t < -rhsExtent)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-rhsExtent * (-rhsExtent - static_cast<Real>(2) * t) + lhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() - rhsExtent * m_RhsSegment.GetDirection() };
 	}
 	else if (t <= rhsExtent)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + lhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + t * m_RhsSegment.GetDirection() };
 	}
 	else
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(rhsExtent * (rhsExtent - static_cast<Real>(2) * t) + lhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
 	}
 }
@@ -242,23 +241,23 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 {
 	auto t = tool.GetLhsT(-rhsExtent);
 	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
-		             tool.GetOriginDifferenceSquaredLength();
+					 tool.GetOriginDifferenceSquaredLength();
 
 	if (t < -lhsExtent)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-lhsExtent * (-lhsExtent - static_cast<Real>(2) * t) + rhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() - lhsExtent * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() - lhsExtent * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
 	}
 	else if (t <= lhsExtent)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() + t * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() + t * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
 	}
 	else
 	{
-		return GetSquaredWithClosestPointsIsRhsSide(tool, lhsExtent,Math::FAbs(rhsExtent));
+		return GetSquaredWithClosestPointsIsRhsSide(tool, lhsExtent, Math::FAbs(rhsExtent));
 	}
 }
 
@@ -266,32 +265,32 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 template <typename Real>
 const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathematics::DistanceSegment2Segment2<Real>
 	::GetSquaredWithClosestPointsIsRhsCorner(const DistanceLine2Line2Tool& tool, Real lhsExtent, Real rhsExtent) const
-{	
+{
 	auto t = tool.GetLhsT(-rhsExtent);
 	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
-		             tool.GetOriginDifferenceSquaredLength();
+					 tool.GetOriginDifferenceSquaredLength();
 
 	if (lhsExtent < t)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(lhsExtent * (lhsExtent - static_cast<Real>(2) * t) + rhsSquare),
-							   Real{}, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() + lhsExtent * m_LhsSegment.GetDirection(),
 							   m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
 	}
 	else if (-lhsExtent <= t)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-							  Real{}, m_LhsSegment.GetCenterPoint() + t * m_LhsSegment.GetDirection(),
-							  m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
+							   Math::sm_Zero, m_LhsSegment.GetCenterPoint() + t * m_LhsSegment.GetDirection(),
+							   m_RhsSegment.GetCenterPoint() + rhsExtent * m_RhsSegment.GetDirection() };
 	}
 	else
 	{
 		return GetSquaredWithClosestPointsIsRhsSide(tool, -lhsExtent, Math::FAbs(rhsExtent));
-	}		
+	}
 }
 
 template <typename Real>
 const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathematics::DistanceSegment2Segment2<Real>
-	::GetSquared( Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity ) const
+	::GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -299,7 +298,7 @@ const typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathe
 	auto rhsMovedSegment = m_RhsSegment.GetMove(t, rhsVelocity);
 
 	ClassType distance{ lhsMovedSegment, rhsMovedSegment };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 

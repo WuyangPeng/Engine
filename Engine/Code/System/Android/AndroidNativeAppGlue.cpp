@@ -57,7 +57,7 @@ void System
 namespace System
 {
 	AndroidApp* g_MainAndroidApp;
-	WindowLResult SYSTEM_CALL_BACK WindowProcess(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam) noexcept;
+	WindowLResult SYSTEM_CALL_BACK AndroidProcess(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam) noexcept;
 	void InitWndClassEx(WindowClassEx& wndclassex, const String& appName) noexcept;
 	WindowHWnd CreateSystemWindow(const String& appName) noexcept;
 
@@ -72,7 +72,7 @@ void System
 {
 	wndclassex.cbSize = sizeof(WindowClassEx);
 	wndclassex.style = EnumCastUnderlying(WindowClassStyle::CommonUse);
-	wndclassex.lpfnWndProc = WindowProcess;
+	wndclassex.lpfnWndProc = AndroidProcess;
 	wndclassex.cbClsExtra = 0;
 	wndclassex.cbWndExtra = 0;
 	wndclassex.hInstance = GetHInstance();
@@ -93,9 +93,9 @@ namespace System
 		auto hwnd = CreateSystemWindow(appName.c_str(), SYSTEM_TEXT("WindowTitle"), WindowStyles::Default, EnumCastUnderlying(WindowPointUse::Default),
 									   EnumCastUnderlying(WindowPointUse::Default), rect, nullptr, nullptr, GetHInstance());
 
-		if (g_MainAndroidApp->running == nullptr)
+		if (g_MainAndroidApp->GetRunning() == nullptr)
 		{
-			g_MainAndroidApp->running = hwnd;
+			g_MainAndroidApp->SetRunning(hwnd);
 		}
 		return hwnd;
 	}
@@ -104,7 +104,7 @@ namespace System
 System::WindowHWnd System
 	::CreateSystemWindow(const String& appName) noexcept
 {	 
-	return Disable26447<WindowHWnd>(DoCreateSystemWindow,appName, nullptr);
+	return Noexcept<WindowHWnd, String>(DoCreateSystemWindow,appName, nullptr);
 }
 
 System::WindowHWnd System
@@ -125,7 +125,7 @@ System::WindowHWnd System
 }
 
 System::WindowLResult SYSTEM_CALL_BACK System
-	::WindowProcess(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam) noexcept
+	::AndroidProcess(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam) noexcept
 {
 	switch (message)
 	{
@@ -162,7 +162,7 @@ System::WindowLResult SYSTEM_CALL_BACK System
 System::WindowLResult System
 	::AppCmd(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam) noexcept
 {
-	g_MainAndroidApp->onAppCmd(g_MainAndroidApp, message);
+	g_MainAndroidApp->OnAppCmd(g_MainAndroidApp, message);
 
 	return DefSystemWindowProc(hwnd, UnderlyingCastEnum<WindowMessages>(message), wParam, lParam);
 }
@@ -170,13 +170,13 @@ System::WindowLResult System
 System::WindowLResult System
 	::KeyInputEvent(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam) noexcept
 {
-	AndroidInputEvent event{};
+	AndroidInputEvent event{ };
 
 	event.m_AndroidInputEventType = AndroidInputEventType::Key;
 	event.m_AndroidKeyEventAction = UnderlyingCastEnum<AndroidKeyEventAction>(message);
 	event.m_AndroidKeyCodes = UnderlyingCastEnum<AndroidKeyCodes>(gsl::narrow_cast<uint32_t>(wParam));
 
-	g_MainAndroidApp->onInputEvent(g_MainAndroidApp, &event);
+	g_MainAndroidApp->OnInputEvent(g_MainAndroidApp, &event);
 
 	SYSTEM_UNUSED_ARG(hwnd);
 	SYSTEM_UNUSED_ARG(lParam);
@@ -187,12 +187,12 @@ System::WindowLResult System
 System::WindowLResult System
 	::MotionInputEvent(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam) noexcept
 {
-	AndroidInputEvent event{};
+	AndroidInputEvent event{ };
 
 	event.m_AndroidInputEventType = AndroidInputEventType::Motion;
 	event.m_AndroidMotionEventAction = UnderlyingCastEnum<AndroidMotionEventAction>(message);
 
-	g_MainAndroidApp->onInputEvent(g_MainAndroidApp, &event);
+	g_MainAndroidApp->OnInputEvent(g_MainAndroidApp, &event);
 
 	SYSTEM_UNUSED_ARG(hwnd);
 	SYSTEM_UNUSED_ARG(wParam);
@@ -204,7 +204,7 @@ System::WindowLResult System
 System::WindowLResult System
 	::Destory(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam) noexcept
 {
-	if (g_MainAndroidApp->running == hwnd)
+	if (g_MainAndroidApp->GetRunning() == hwnd)
 	{
 		PostSystemQuitMessage();
 

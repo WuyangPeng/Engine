@@ -1,14 +1,15 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 20:18)
+// 引擎版本：0.0.2.4 (2020/03/11 13:44)
 
 #include "Network/NetworkExport.h" 
 
 #ifdef NETWORK_USE_ACE
- 
+
 #include "ACESockAcceptor.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
@@ -19,10 +20,8 @@
 #include "Network/ACEWrappers/Detail/Address/ACESockInetAddress.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
-
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
 
@@ -65,7 +64,7 @@ Network::ACESockAcceptor
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ACESockAcceptor)
 
 bool Network::ACESockAcceptor
-	::Accept(const SockStreamSharedPtr& sockStream,const SockAddressSharedPtr& sockAddress)
+	::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -119,8 +118,8 @@ void Network::ACESockAcceptor
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
 
-		eventInterface->EventFunction(callbackParameters); 
-	}	
+		eventInterface->EventFunction(callbackParameters);
+	}
 }
 
 void Network::ACESockAcceptor
@@ -137,7 +136,7 @@ void Network::ACESockAcceptor
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
 
-		eventInterface->EventFunction(callbackParameters); 
+		eventInterface->EventFunction(callbackParameters);
 	}
 }
 

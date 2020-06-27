@@ -1,23 +1,23 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/13 10:42)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:59)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_DETAIL_H
 
 #include "StaticTestIntersectorLine2Segment2.h"
 #include "StaticTestIntersectorLine2ClassifyDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h" 
-#include "Mathematics/Intersection/StaticIntersectorDetail.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2DToolsDetail.h" 
+#include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorLine2Segment2<Real>
-	::StaticTestIntersectorLine2Segment2(const Line2& line, const Segment2& segment,const Real dotThreshold,const Real intervalThreshold)
+	::StaticTestIntersectorLine2Segment2(const Line2& line, const Segment2& segment, const Real dotThreshold, const Real intervalThreshold)
 	:ParentType{ dotThreshold }, m_Line{ line }, m_Segment{ segment }, m_Quantity{ 0 }, m_IntervalThreshold{ intervalThreshold }
 {
 	Test();
@@ -72,7 +72,7 @@ Mathematics::StaticTestIntersectorLine2Segment2<Real>
 template <typename Real>
 bool Mathematics::StaticTestIntersectorLine2Segment2<Real>
 	::IsValid() const noexcept
-{	
+{
 	if (ParentType::IsValid() && 0 <= m_Quantity)
 		return true;
 	else
@@ -118,4 +118,3 @@ Real Mathematics::StaticTestIntersectorLine2Segment2<Real>
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_DETAIL_H
- 

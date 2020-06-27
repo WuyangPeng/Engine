@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:13)
+// 引擎版本：0.2.0.0 (2020/05/07 13:34)
 
 #ifndef SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
 #define SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
@@ -11,7 +11,7 @@
 // 各个头文件中定义宏TCRE_SYSTEM_PLATFORM表示平台名称。
 
 #if (defined(linux) || defined(__linux) || defined(__linux__) || defined(__GNU__) || defined(__GLIBC__)) && !defined(_CRAYC)
-	 
+
 	// linux，还有使用GLIBC的其他平台（Hurd等）
 	#define TCRE_PLATFORM_CONFIG "Platform/Linux.h"
 
@@ -111,5 +111,5 @@
 
 #endif // SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
 
- 
+
 

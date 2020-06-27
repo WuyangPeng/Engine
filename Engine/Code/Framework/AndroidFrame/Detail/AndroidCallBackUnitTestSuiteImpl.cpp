@@ -1,25 +1,24 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:24)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 16:41)
 
 #include "Framework/FrameworkExport.h"
 
 #include "AndroidCallBackUnitTestSuiteImpl.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/UnitTestSuite/Suite.h"
-#include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 using std::string;
-using std::ostream;
+using std::make_shared;
 
 Framework::AndroidCallBackUnitTestSuiteImpl
-	::AndroidCallBackUnitTestSuiteImpl(const string& name, ostream* osPtr)
-	:m_SuitePtr(new Suite(name, osPtr)), m_TestingInformationHelper{}
+	::AndroidCallBackUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
+	:m_TestingInformationHelper{ }, m_Suite{ make_shared<Suite>(name, streamShared, m_TestingInformationHelper.IsPrintRun()) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -28,19 +27,19 @@ Framework::AndroidCallBackUnitTestSuiteImpl
 bool Framework::AndroidCallBackUnitTestSuiteImpl
 	::IsValid() const noexcept
 {
-	if(m_SuitePtr != nullptr)
-	    return true;
+	if (m_Suite != nullptr)
+		return true;
 	else
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
 void Framework::AndroidCallBackUnitTestSuiteImpl
-	::AddSuite( const Suite& suite )
+	::AddSuite(const Suite& suite)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_SuitePtr->AddSuite(suite);
+	m_Suite->AddSuite(suite);
 }
 
 void Framework::AndroidCallBackUnitTestSuiteImpl
@@ -48,7 +47,7 @@ void Framework::AndroidCallBackUnitTestSuiteImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_SuitePtr->RunUnitTest();
+	m_Suite->RunUnitTest();
 }
 
 void Framework::AndroidCallBackUnitTestSuiteImpl
@@ -56,7 +55,7 @@ void Framework::AndroidCallBackUnitTestSuiteImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_SuitePtr->PrintReport();
+	m_Suite->PrintReport();
 }
 
 void Framework::AndroidCallBackUnitTestSuiteImpl
@@ -64,23 +63,23 @@ void Framework::AndroidCallBackUnitTestSuiteImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_SuitePtr->ResetTestData();
+	m_Suite->ResetTestData();
 }
 
 int Framework::AndroidCallBackUnitTestSuiteImpl
-	::GetPassedNumber() const
+	::GetPassedNumber() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	return m_SuitePtr->GetPassedNumber();
+	return m_Suite->GetPassedNumber();
 }
 
 void Framework::AndroidCallBackUnitTestSuiteImpl
-	::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestPtr& unitTest)
+	::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
 {
 	try
 	{
-		int testLoopCount = m_TestingInformationHelper.GetLoopCount(suiteName, testName);
+		const auto testLoopCount = m_TestingInformationHelper.GetLoopCount(suiteName, testName);
 
 		if (0 < testLoopCount)
 		{
@@ -91,16 +90,26 @@ void Framework::AndroidCallBackUnitTestSuiteImpl
 		else if (testLoopCount < 0)
 		{
 			LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-				<< "≤‚ ‘Œ¥≈‰÷√"
-				<< CoreTools::LogAppenderIOManageSign::TriggerAssert
-				<< CoreTools::LogAppenderIOManageSign::Refresh;
+				<< SYSTEM_TEXT("≤‚ ‘")
+				<< testName
+				<< SYSTEM_TEXT("Œ¥≈‰÷√£°‘⁄≤‚ ‘Ã◊º˛£∫")
+				<< suite.GetName()
+				<< SYSTEM_TEXT("°£")
+				<< LOG_SINGLETON_TRIGGER_ASSERT;
 		}
 	}
-	catch (CoreTools::Error& error)
+	catch (const CoreTools::Error& error)
 	{
 		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
 			<< error
-			<< CoreTools::LogAppenderIOManageSign::TriggerAssert
-			<< CoreTools::LogAppenderIOManageSign::Refresh;
+			<< LOG_SINGLETON_TRIGGER_ASSERT;
 	}
+}
+
+bool Framework::AndroidCallBackUnitTestSuiteImpl
+	::IsPrintRun() const noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+	return m_TestingInformationHelper.IsPrintRun();
 }

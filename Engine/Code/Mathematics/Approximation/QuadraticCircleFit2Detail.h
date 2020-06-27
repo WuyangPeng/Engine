@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:45)
+// 引擎版本：0.0.2.5 (2020/03/23 14:58)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_DETAIL_H
@@ -17,9 +17,9 @@ Mathematics::QuadraticCircleFit2<Real>
 	::QuadraticCircleFit2(const std::vector<Vector2D>& points)
 	:m_Center{}, m_Radius{}, m_EigenValue{}
 {
-    Calculate(points);
-    
-    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+	Calculate(points);
+
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 // private
@@ -28,12 +28,12 @@ void Mathematics::QuadraticCircleFit2<Real>
 	::Calculate(const std::vector<Vector2D>& points)
 {
 	EigenDecomposition<Real> eigenSystem{ sm_EigenSystemSize };
-    // EigenDecomposition需要保证初始化每个esystem(row,col)
-    
-    auto numPoints = points.size();
-    
-    for (auto i = 0u; i < numPoints; ++i)
-    {
+	// EigenDecomposition需要保证初始化每个esystem(row,col)
+
+	auto numPoints = points.size();
+
+	for (auto i = 0u; i < numPoints; ++i)
+	{
 		auto x = points[i].GetXCoordinate();
 		auto y = points[i].GetYCoordinate();
 		auto xSquare = x * x;
@@ -43,45 +43,45 @@ void Mathematics::QuadraticCircleFit2<Real>
 		auto xMultiplyRSquare = x * rSquare;
 		auto yMultiplyRSquare = y * rSquare;
 		auto rQuadruplicate = rSquare * rSquare;
-        
-        eigenSystem(0,1) += x;
-        eigenSystem(0,2) += y;
-        eigenSystem(0,3) += rSquare;
-        eigenSystem(1,1) += xSquare;
-        eigenSystem(1,2) += xMultiplyY;
-        eigenSystem(1,3) += xMultiplyRSquare;
-        eigenSystem(2,2) += ySquare;
-        eigenSystem(2,3) += yMultiplyRSquare;
-        eigenSystem(3,3) += rQuadruplicate;
-    }
-    
-    eigenSystem(0,0) = static_cast<Real>(numPoints);
-    
+
+		eigenSystem(0, 1) += x;
+		eigenSystem(0, 2) += y;
+		eigenSystem(0, 3) += rSquare;
+		eigenSystem(1, 1) += xSquare;
+		eigenSystem(1, 2) += xMultiplyY;
+		eigenSystem(1, 3) += xMultiplyRSquare;
+		eigenSystem(2, 2) += ySquare;
+		eigenSystem(2, 3) += yMultiplyRSquare;
+		eigenSystem(3, 3) += rQuadruplicate;
+	}
+
+	eigenSystem(0, 0) = static_cast<Real>(numPoints);
+
 	for (auto row = 0; row < sm_EigenSystemSize; ++row)
-    {
-        for (auto column = 0; column < row; ++column)
-        {
-            eigenSystem(row,column) = eigenSystem(column,row);
-        }
-    }
-    
+	{
+		for (auto column = 0; column < row; ++column)
+		{
+			eigenSystem(row, column) = eigenSystem(column, row);
+		}
+	}
+
 	for (auto row = 0; row < sm_EigenSystemSize; ++row)
-    {
+	{
 		for (auto column = 0; column < sm_EigenSystemSize; ++column)
-        {
-            eigenSystem(row,column) /= static_cast<Real>(numPoints);
-        }
-    }
-    
-    eigenSystem.Solve(true);
-    
+		{
+			eigenSystem(row, column) /= static_cast<Real>(numPoints);
+		}
+	}
+
+	eigenSystem.Solve(true);
+
 	auto eigenVector = eigenSystem.GetEigenvector(0);
-    // 当心除零
+	// 当心除零
 	if (Math<Real>::sm_ZeroTolerance < Math<Real>::FAbs(eigenVector[3]))
 	{
 		auto inv = static_cast<Real>(1) / eigenVector[3];
 
-		Real coeff[3] { };
+		Real coeff[3]{ };
 		for (auto row = 0; row < 3; ++row)
 		{
 			coeff[row] = inv * eigenVector[row];
@@ -106,10 +106,10 @@ template <typename Real>
 bool Mathematics::QuadraticCircleFit2<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} < m_Radius && Real{} <= m_EigenValue)
-        return true;
-    else
-        return false;
+	if (Math<Real>::sm_Zero < m_Radius && Math<Real>::sm_Zero <= m_EigenValue)
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -117,27 +117,27 @@ template <typename Real>
 typename const Mathematics::QuadraticCircleFit2<Real>::Vector2D Mathematics::QuadraticCircleFit2<Real>
 	::GetCenter() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
-    return m_Center;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+	return m_Center;
 }
 
 template <typename Real>
 Real Mathematics::QuadraticCircleFit2<Real>
 	::GetRadius() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
-    return m_Radius;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+	return m_Radius;
 }
-    
+
 template <typename Real>
 Real Mathematics::QuadraticCircleFit2<Real>
-    ::GetEigenValue() const
+	::GetEigenValue() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
-    return m_EigenValue;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+	return m_EigenValue;
 }
 
 #endif // MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_DETAIL_H

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:15)
+// 引擎版本：0.0.2.5 (2020/03/23 12:30)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_H
@@ -34,7 +34,7 @@ namespace Mathematics
 	template <typename Real>
 	class PolynomialFit2
 	{
-	public:		
+	public:
 		using ClassType = PolynomialFit2<Real>;
 		using Samples = std::vector<Real>;
 		using Polynomial = Polynomial<Real>;

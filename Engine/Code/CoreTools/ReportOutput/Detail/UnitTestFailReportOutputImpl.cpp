@@ -13,7 +13,7 @@ using std::string;
 using std::ostream;
 
 CoreTools::UnitTestFailReportOutputImpl
-	::UnitTestFailReportOutputImpl(const string& failClassName, const string& fileName, int lineNumber, const string& errorMessage, ostream* osPtr)
+	::UnitTestFailReportOutputImpl(const string& failClassName, const string& fileName, int lineNumber, const string& errorMessage, const OStreamShared& osPtr)
 	:ParentType{ osPtr }, m_FailClassName{ failClassName }, m_FileName{ fileName }, m_LineNumber{ lineNumber }, m_ErrorMessage{ errorMessage }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

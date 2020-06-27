@@ -1,42 +1,58 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:04)
+// 引擎版本：0.3.0.1 (2020/05/21 14:51)
 
 #include "Framework/FrameworkExport.h"
- 
+
 #include "CameraModelMiddleLayerImpl.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Mathematics/Algebra/APointDetail.h"
 #include "Rendering/SceneGraph/Node.h" 
 #include "Rendering/SceneGraph/Camera.h"
 #include "Framework/Application/CameraMotion.h"
 #include "Framework/Application/ObjectMotion.h"
-#include "Mathematics/Algebra/APointDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+
+using std::move;
+using std::make_shared;
+using namespace std::literals;
 
 Framework::CameraModelMiddleLayerImpl
-	::CameraModelMiddleLayerImpl()
-	:m_CameraMotion(),m_ObjectMotion()
+	::CameraModelMiddleLayerImpl() noexcept
+	:m_CameraMotion{ }, m_ObjectMotion{ }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::CameraModelMiddleLayerImpl
-	::~CameraModelMiddleLayerImpl()	
+	::CameraModelMiddleLayerImpl(CameraModelMiddleLayerImpl&& rhs) noexcept
+	:m_CameraMotion{ move(rhs.m_CameraMotion) }, m_ObjectMotion{ move(rhs.m_ObjectMotion) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Framework, CameraModelMiddleLayerImpl) 
-
-void Framework::CameraModelMiddleLayerImpl
-	::InitializeCameraMotion( float translationSpeed,  float rotationSpeed,float translationSpeedFactor,float rotationSpeedFactor )
+Framework::CameraModelMiddleLayerImpl& Framework::CameraModelMiddleLayerImpl
+	::operator=(CameraModelMiddleLayerImpl&& rhs) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	m_CameraMotion.reset(new CameraMotion(translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor));
+	m_CameraMotion = move(rhs.m_CameraMotion);
+	m_ObjectMotion = move(rhs.m_ObjectMotion);
+
+	return *this;
+}
+
+CLASS_INVARIANT_STUB_DEFINE(Framework, CameraModelMiddleLayerImpl)
+
+void Framework::CameraModelMiddleLayerImpl
+	::InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
+{
+	FRAMEWORK_CLASS_IS_VALID_9;
+
+	m_CameraMotion = make_shared<CameraMotion>(translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor);
 }
 
 void Framework::CameraModelMiddleLayerImpl
@@ -44,8 +60,9 @@ void Framework::CameraModelMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	Rendering::SpatialSmartPointer spatial(NEW0 Rendering::Node);
-	m_ObjectMotion.reset(new ObjectMotion(spatial));
+	Rendering::SpatialSmartPointer spatial{ CoreTools::New0<Rendering::Node>() };
+
+	m_ObjectMotion = make_shared<ObjectMotion>(spatial);
 }
 
 bool Framework::CameraModelMiddleLayerImpl
@@ -53,7 +70,7 @@ bool Framework::CameraModelMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		return m_CameraMotion->MoveCamera();
 	}
@@ -64,154 +81,154 @@ bool Framework::CameraModelMiddleLayerImpl
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SlowerCameraTranslation ()
+	::SlowerCameraTranslation() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SlowerCameraTranslation();
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::FasterCameraTranslation ()
+	::FasterCameraTranslation() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->FasterCameraTranslation();
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SlowerCameraRotation ()
+	::SlowerCameraRotation() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SlowerCameraRotation();
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::FasterCameraRotation ()
+	::FasterCameraRotation() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->FasterCameraRotation();
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetMoveForward(bool pressed)
+	::SetMoveForward(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetMoveForward(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetMoveBackward(bool pressed)
+	::SetMoveBackward(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetMoveBackward(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetTurnLeft(bool pressed)
+	::SetTurnLeft(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetTurnLeft(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetTurnRight(bool pressed)
+	::SetTurnRight(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetTurnRight(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetLookUp(bool pressed)
+	::SetLookUp(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetLookUp(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetLookDown(bool pressed)
+	::SetLookDown(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetLookDown(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetMoveUp(bool pressed)
+	::SetMoveUp(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetMoveUp(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetMoveDown(bool pressed)
+	::SetMoveDown(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetMoveDown(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetMoveRight(bool pressed)
+	::SetMoveRight(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetMoveRight(pressed);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetMoveLeft(bool pressed)
+	::SetMoveLeft(bool pressed) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_CameraMotion != nullptr)
+	if (m_CameraMotion != nullptr)
 	{
 		m_CameraMotion->SetMoveLeft(pressed);
 	}
@@ -222,11 +239,11 @@ bool Framework::CameraModelMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr && m_CameraMotion != nullptr)
+	if (m_ObjectMotion != nullptr && m_CameraMotion != nullptr)
 	{
-		float rotationSpeed = m_CameraMotion->GetRotationSpeed();
+		const auto rotationSpeed = m_CameraMotion->GetRotationSpeed();
 
-		return m_ObjectMotion->MoveObject(rotationSpeed);	
+		return m_ObjectMotion->MoveObject(rotationSpeed);
 	}
 	else
 	{
@@ -239,20 +256,20 @@ void Framework::CameraModelMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr && m_CameraMotion != nullptr)
+	if (m_ObjectMotion != nullptr && m_CameraMotion != nullptr)
 	{
-		Rendering::ConstCameraSmartPointer camera = m_CameraMotion->GetCameraPtr();
+		auto camera = m_CameraMotion->GetCameraPtr();
 
 		m_ObjectMotion->RotateTrackBall(camera);
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetTrackBallDow( bool value )
+	::SetTrackBallDow(bool value) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr)
+	if (m_ObjectMotion != nullptr)
 	{
 		m_ObjectMotion->SetTrackBallDow(value);
 	}
@@ -263,79 +280,94 @@ void Framework::CameraModelMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr)
+	if (m_ObjectMotion != nullptr)
 	{
 		m_ObjectMotion->SetSaveRotate();
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetDoRoll( Mathematics::NumericalValueSymbol doRoll )
+	::SetDoRoll(NumericalValueSymbol doRoll) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr)
+	if (m_ObjectMotion != nullptr)
 	{
-		m_ObjectMotion->SetDoRoll(System::EnumCastUnderlying(doRoll));		
+		m_ObjectMotion->SetDoRoll(System::EnumCastUnderlying(doRoll));
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetDoYaw( Mathematics::NumericalValueSymbol doYaw )
+	::SetDoYaw(NumericalValueSymbol doYaw) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr)
+	if (m_ObjectMotion != nullptr)
 	{
 		m_ObjectMotion->SetDoYaw(System::EnumCastUnderlying(doYaw));
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetDoPitch( Mathematics::NumericalValueSymbol doPitch )
+	::SetDoPitch(NumericalValueSymbol doPitch) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr)
+	if (m_ObjectMotion != nullptr)
 	{
 		m_ObjectMotion->SetDoPitch(System::EnumCastUnderlying(doPitch));
 	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetBeginTrack( float xTrack,float yTrack )
+	::SetBeginTrack(float xTrack, float yTrack) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr)
+	if (m_ObjectMotion != nullptr)
 	{
-		m_ObjectMotion->SetBeginTrack(xTrack,yTrack);
-	}		
+		m_ObjectMotion->SetBeginTrack(xTrack, yTrack);
+	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::SetEndTrack( float xTrack,float yTrack )
+	::SetEndTrack(float xTrack, float yTrack) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_ObjectMotion != nullptr)
+	if (m_ObjectMotion != nullptr)
 	{
-		m_ObjectMotion->SetEndTrack(xTrack,yTrack);
+		m_ObjectMotion->SetEndTrack(xTrack, yTrack);
 	}
 }
 
 bool Framework::CameraModelMiddleLayerImpl
-	::GetTrackBallDow() const
+	::GetTrackBallDow() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	if(m_ObjectMotion != nullptr)
+	if (m_ObjectMotion != nullptr)
 	{
 		return m_ObjectMotion->GetTrackBallDow();
 	}
 	else
 	{
 		return false;
+	}
+}
+
+Framework::CameraModelMiddleLayerImpl::CameraSmartPointer Framework::CameraModelMiddleLayerImpl
+	::GetCamera()
+{
+	FRAMEWORK_CLASS_IS_VALID_9;
+
+	if (m_CameraMotion != nullptr)
+	{
+		return m_CameraMotion->GetCameraPtr();
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s));
 	}
 }
 
@@ -350,12 +382,12 @@ Framework::CameraModelMiddleLayerImpl::ConstCameraSmartPointer Framework::Camera
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"));
-	}	
+		THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s));
+	}
 }
 
 void Framework::CameraModelMiddleLayerImpl
-	::Terminate()
+	::Terminate() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
@@ -368,9 +400,9 @@ const Framework::CameraModelMiddleLayerImpl::APoint Framework::CameraModelMiddle
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	ConstCameraSmartPointer camera = GetCamera();
-	 
-	return camera->GetPosition();	 
+	auto camera = GetCamera();
+
+	return camera->GetPosition();
 }
 
 const Framework::CameraModelMiddleLayerImpl::AVector Framework::CameraModelMiddleLayerImpl
@@ -378,7 +410,7 @@ const Framework::CameraModelMiddleLayerImpl::AVector Framework::CameraModelMiddl
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	ConstCameraSmartPointer camera = GetCamera();
+	auto camera = GetCamera();
 
 	return camera->GetDirectionVector();
 }
@@ -388,7 +420,7 @@ const Framework::CameraModelMiddleLayerImpl::AVector Framework::CameraModelMiddl
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	ConstCameraSmartPointer camera = GetCamera();
+	auto camera = GetCamera();
 
 	return camera->GetUpVector();
 }
@@ -398,7 +430,7 @@ const Framework::CameraModelMiddleLayerImpl::AVector Framework::CameraModelMiddl
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	ConstCameraSmartPointer camera = GetCamera();
+	auto camera = GetCamera();
 
 	return camera->GetRightVector();
 }
@@ -414,7 +446,7 @@ float Framework::CameraModelMiddleLayerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"));
+		THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s));
 	}
 }
 
@@ -429,7 +461,7 @@ float Framework::CameraModelMiddleLayerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"));
+		THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s));
 	}
 }
 
@@ -444,6 +476,6 @@ const Framework::CameraModelMiddleLayerImpl::Transform Framework::CameraModelMid
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("ObjectMotion 未初始化"));
+		THROW_EXCEPTION(SYSTEM_TEXT("ObjectMotion 未初始化"s));
 	}
 }

@@ -12,6 +12,7 @@
 #include "Rendering/Resources/Texture2D.h"
 
 #include <map>
+#include "../../Resources/RenderTarget.h"
 
 namespace Rendering
 {
@@ -23,12 +24,12 @@ namespace Rendering
 	{
 	public:
 		using ClassType = RenderTargetManagementImpl;
-		using RenderTargetConstPtr = const RenderTarget*;
+		using RenderTargetConstPtr = ConstRenderTargetSmartPointer;
 		using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
-	    using RendererPtr = Renderer*;
+	    using RendererPtr = std::shared_ptr<Renderer>;
 		
 	public:
-		explicit RenderTargetManagementImpl(RendererPtr ptr);
+		explicit RenderTargetManagementImpl(std::shared_ptr<Renderer> ptr);
 
 		CLASS_INVARIANT_DECLARE;
         
@@ -44,7 +45,7 @@ namespace Rendering
        using RenderTargetMap = std::map<RenderTargetConstPtr, PlatformRenderTargetSharedPtr>;
 
 	private:
-	   RendererPtr m_Renderer;
+		std::weak_ptr<Renderer> m_Renderer;
 	   RenderTargetMap m_RenderTargets;
 	};
 }

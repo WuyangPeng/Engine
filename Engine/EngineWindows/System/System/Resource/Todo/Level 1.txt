@@ -1,14 +1,4 @@
 TODO Level 1
  
-0.0.2.0
+0.2.0.0
 
-1.  （SystemOutput）完成SystemOutput模块非Windows平台的实现：OutputDebugString、MessageBoxSelection。
-2.  （SystemOutput）完成SystemOutput模块非Windows平台的实现：LanguageIDData、MessageBoxFlagsData相关的枚举定义。
-3.  （Window）完成Window非Windows平台的实现：LastWindowError。
-4.  （综合）实现移殖到Linux平台。
-5.  （综合）实现移殖到Android平台。
-6.  （综合）实现移殖到Macintosh平台。
-
-0.0.2.3
-
-1.  （综合）其他库引用系统库的Fwd文件存在问题，改成系统库内部使用。

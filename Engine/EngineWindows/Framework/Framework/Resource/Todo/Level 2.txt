@@ -1,4 +1,7 @@
 TODO Level 2
 
-0.0.0.4
+0.3.0.2
+
+1.（Application） PixelScreen debug版本的GetPixel和比较PixelScreen::Colour效率很低，改成迭代器。
+2.（Application） PixelScreenDrawLine的返回改成迭代器代替operator[]。
  

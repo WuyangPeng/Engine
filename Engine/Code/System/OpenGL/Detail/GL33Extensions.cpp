@@ -30,7 +30,7 @@ System::PgglVertexAttribDivisor System::gglVertexAttribDivisor{ nullptr };
 void System
 	::GlVertexAttribDivisor(GLuint index, GLuint divisor) noexcept
 {
-	SYSTEM_BODY_A2(gglVertexAttribDivisor, index, divisor);
+	SYSTEM_BODY_2(gglVertexAttribDivisor, index, divisor);
 }
 
 void System

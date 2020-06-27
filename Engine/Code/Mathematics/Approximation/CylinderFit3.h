@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:05)
+// 引擎版本：0.0.2.5 (2020/03/23 12:27)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_H
@@ -17,7 +17,7 @@
 // 点X在底盘C + (h / 2) * U上，
 // 如果Dot(U,X - C) = -h/2和(X - C)^T * (I - U * U^T) * (X - C) <= r^2，
 // 点X在底盘C - (h / 2) * U 上。
-  
+
 // 输入是点Vector3D的数组。
 // 输出为中心C，单位长度轴方向U，半径Real和高度H。
 // 可以提供初始猜测的C和U。在这种情况下，m_InputsAreInitialGuess被设置为“真”。
@@ -42,8 +42,8 @@
 //     axis = fit1.GetAxis(); 
 //  }
 
-#include "Mathematics/Algebra/Vector3D.h"
 #include "Mathematics/Base/Math.h"
+#include "Mathematics/Algebra/Vector3D.h"
 
 #include <vector>
 
@@ -59,11 +59,11 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		explicit CylinderFit3 (const Points& points,const Real epsilon = Math::sm_ZeroTolerance);
-		CylinderFit3 (const Points& points,const Vector3D& guessCenter,const Vector3D& guessAxis,const Real epsilon = Math::sm_ZeroTolerance);
+		explicit CylinderFit3(const Points& points, const Real epsilon = Math::sm_ZeroTolerance);
+		CylinderFit3(const Points& points, const Vector3D& guessCenter, const Vector3D& guessAxis, const Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
-		
+
 		// 返回准确度
 		Real GetExactly() const;
 
@@ -75,18 +75,18 @@ namespace Mathematics
 	private:
 		void Fit3(const Points& points);
 		void InitialGuess(const Points& points);
-		void Update(const Points& points);	 
+		void Update(const Points& points);
 		Real ComputeHeight(const Points& points);
-		void ComputeCenter(Real  average); 
+		void ComputeCenter(Real  average);
 
-	private:	
-		Vector3D m_Center;	
-		Vector3D m_Axis; 
+	private:
+		Vector3D m_Center;
+		Vector3D m_Axis;
 		Real m_Radius;
 		Real m_Height;
 		Real m_Exactly;
 		bool m_InputsAreInitialGuess;
-		Real m_Epsilon;	
+		Real m_Epsilon;
 	};
 
 	using CylinderFit3f = CylinderFit3<float>;

@@ -95,6 +95,28 @@ namespace Network
 		FrameCache,// Ö¡»º´æ
 	};
 
+	enum class SocketType
+	{
+		GameClient,
+		RobotClient,
+		MessageClient,
+		BackgroundClient,
+
+		GatewayServer,
+		LoginServer,
+		GameServer,
+		FightingServer,
+		WorldServer,
+		OfflineServer,
+		LeaderboardServer,
+		RechargeServer,
+		LogServer,
+		GameMasterServer,
+		ServerManager,
+		BackgroundServer,
+		UpdateServer,
+	};
+
 	ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(ServerStrategy);
 	ENUM_RIGHT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(ServerStrategy);
 

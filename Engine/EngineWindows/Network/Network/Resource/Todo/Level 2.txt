@@ -1,0 +1,16 @@
+TODO Level 2
+ 
+0.0.0.2
+
+1.  （综合）BufferSendStreamContainer、BufferSendStreamMultiIndexContainer目前只有ACE的实现，使用Impl惯用法进行封装，但不导出以减少复杂度。
+
+0.0.1.0
+
+1.  （综合）SockConnector增加一个链接多个地址的接口。
+         
+0.0.2.4
+
+1.  （NetworkMessage）简单化消息类的设计。 
+
+
+	 

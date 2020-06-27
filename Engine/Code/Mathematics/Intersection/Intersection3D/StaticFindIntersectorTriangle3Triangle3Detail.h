@@ -422,7 +422,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	// Unproject the segment of intersection.
 	if (maxNormal == 0)
 	{
-		Real invNX = ((Real)1)/plane.GetNormal().GetXCoordinate();
+		Real invNX = (static_cast<Real>(1))/plane.GetNormal().GetXCoordinate();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][1] = intr[i].GetXCoordinate();
@@ -432,7 +432,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (maxNormal == 1)
 	{
-		Real invNY = ((Real)1)/plane.GetNormal().GetYCoordinate();
+		Real invNY = (static_cast<Real>(1))/plane.GetNormal().GetYCoordinate();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][0] = intr[i].GetXCoordinate();
@@ -442,7 +442,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else
 	{
-		Real invNZ = ((Real)1)/plane.GetNormal().GetZCoordinate();
+		Real invNZ = (static_cast<Real>(1))/plane.GetNormal().GetZCoordinate();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][0] = intr[i].GetXCoordinate();
@@ -520,7 +520,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	Vector2D<Real> save;
 	auto edge0 = projTri0.GetVertex()[1] - projTri0.GetVertex()[0];
 	auto edge1 = projTri0.GetVertex()[2] - projTri0.GetVertex()[0];
-	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Real{})
+	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Math<Real>::sm_Zero)
 	{
 		// Triangle is clockwise, reorder it.
 		projTri0 = Triangle2<Real>{ projTri0V[0],projTri0V[2],projTri0V[1] };
@@ -528,7 +528,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 
 	edge0 = projTri1.GetVertex()[1] - projTri1.GetVertex()[0];
 	edge1 = projTri1.GetVertex()[2] - projTri1.GetVertex()[0];
-	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Real{})
+	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Math<Real>::sm_Zero)
 	{
 		// Triangle is clockwise, reorder it.
 		projTri1 = Triangle2<Real>{ projTri1V[0],projTri1V[2],projTri1V[1] };
@@ -544,7 +544,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	mQuantity = intr.GetQuantity();
 	if (maxNormal == 0)
 	{
-		auto invNX = ((Real)1)/plane.GetNormal().GetXCoordinate();
+		auto invNX = (static_cast<Real>(1))/plane.GetNormal().GetXCoordinate();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][1] = intr.GetPoint(i).GetXCoordinate();
@@ -554,7 +554,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (maxNormal == 1)
 	{
-		auto invNY = ((Real)1)/plane.GetNormal().GetYCoordinate();
+		auto invNY = (static_cast<Real>(1))/plane.GetNormal().GetYCoordinate();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][0] = intr.GetPoint(i).GetXCoordinate();
@@ -564,7 +564,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else
 	{
-		auto invNZ = ((Real)1)/plane.GetNormal().GetZCoordinate();
+		auto invNZ = (static_cast<Real>(1))/plane.GetNormal().GetZCoordinate();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][0] = intr.GetPoint(i).GetXCoordinate();
@@ -587,7 +587,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 
 	if (vmax < umin) // V on left of U
 	{
-		if (speed <= Real{}) // V moving away from U
+		if (speed <= Math<Real>::sm_Zero) // V moving away from U
 		{
 			return false;
 		}
@@ -620,7 +620,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (umax < vmin)   // V on right of U
 	{
-		if (speed >= Real{}) // V moving away from U
+		if (speed >= Math<Real>::sm_Zero) // V moving away from U
 		{
 			return false;
 		}
@@ -654,7 +654,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else // V and U on overlapping interval
 	{
-		if (speed > Real{})
+		if (speed > Math<Real>::sm_Zero)
 		{
 			// Find last time of contact on this axis.
 			t = (umax - vmin)/speed;
@@ -669,7 +669,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 				return false; 
 			}
 		}
-		else if (speed < Real{})
+		else if (speed < Math<Real>::sm_Zero)
 		{
 			// Find last time of contact on this axis.
 			t = (umin - vmax)/speed;
@@ -700,7 +700,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 
 	if (VC.mMax < UC.mMin) // V on left of U
 	{
-		if (speed <= Real{}) // V moving away from U
+		if (speed <= Math<Real>::sm_Zero) // V moving away from U
 		{
 			return false;
 		}
@@ -739,7 +739,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (UC.mMax < VC.mMin)   // V on right of U
 	{
-		if (speed >= Real{}) // V moving away from U
+		if (speed >= Math<Real>::sm_Zero) // V moving away from U
 		{
 			return false;
 		}
@@ -778,7 +778,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else // V and U on overlapping interval
 	{
-		if (speed > Real{})
+		if (speed > Math<Real>::sm_Zero)
 		{
 			// Find last time of contact on this axis.
 			t = (UC.mMax - VC.mMin)/speed;
@@ -793,7 +793,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 				return false;
 			}
 		}
-		else if (speed < Real{})
+		else if (speed < Math<Real>::sm_Zero)
 		{
 			// Find last time of contact on this axis.
 			t = (UC.mMin - VC.mMax)/speed;
@@ -1084,15 +1084,15 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	// and s = N*DxE1/N*N.
 	auto delta = V0 - U0;
 	auto s = Vector3DTools::DotProduct(normal,(Vector3DTools::CrossProduct(delta,edge1)/Vector3DTools::VectorMagnitudeSquared( normal)));
-	if (s < Real{})
+	if (s < Math<Real>::sm_Zero)
 	{
 		MATHEMATICS_ASSERTION_0(s >= -Math::sm_ZeroTolerance,"Unexpected s value.\n");
-		s = Real{};
+		s = Math<Real>::sm_Zero;
 	}
-	else if (s > (Real)1)
+	else if (s > static_cast<Real>(1))
 	{
-		MATHEMATICS_ASSERTION_0(s <= (Real)1 + Math::sm_ZeroTolerance,"Unexpected s value.\n");
-		s = (Real)1;
+		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::sm_ZeroTolerance,"Unexpected s value.\n");
+		s = static_cast<Real>(1);
 	}
 
 	this->SetIntersectionType(IntersectionType::Point);

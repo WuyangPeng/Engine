@@ -83,11 +83,11 @@ void  Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>
     for (i = 0; i < 4; ++i)
     {
         C[i] = plane.DistanceTo(tetra.GetVertex(i));
-        if (C[i] > Real{})
+        if (C[i] > Math<Real>::sm_Zero)
         {
             pos[positive++] = i;
         }
-        else if (C[i] < Real{})
+        else if (C[i] < Math<Real>::sm_Zero)
         {
             neg[negative++] = i;
         }
@@ -123,7 +123,7 @@ void  Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>
         // +++-
         for (i = 0; i < positive; ++i)
         {
-            invCDiff = ((Real)1)/(C[pos[i]] - C[neg[0]]);
+            invCDiff = (static_cast<Real>(1))/(C[pos[i]] - C[neg[0]]);
             w0 = -C[neg[0]]*invCDiff;
             w1 = +C[pos[i]]*invCDiff;
             tetra.SetVertex(pos[i], w0*tetra.GetVertex(pos[i]) + w1*tetra.GetVertex(neg[0]));
@@ -137,14 +137,14 @@ void  Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>
             // ++--
             for (i = 0; i < positive; ++i)
             {
-                invCDiff = ((Real)1)/(C[pos[i]] - C[neg[0]]);
+                invCDiff = (static_cast<Real>(1))/(C[pos[i]] - C[neg[0]]);
                 w0 = -C[neg[0]]*invCDiff;
                 w1 = +C[pos[i]]*invCDiff;
 				intp[i] = w0*tetra.GetVertex(pos[i]) + w1*tetra.GetVertex(neg[0]);
             }
             for (i = 0; i < negative; ++i)
             {
-                invCDiff = ((Real)1)/(C[pos[i]] - C[neg[1]]);
+                invCDiff = (static_cast<Real>(1))/(C[pos[i]] - C[neg[1]]);
                 w0 = -C[neg[1]]*invCDiff;
                 w1 = +C[pos[i]]*invCDiff;
 				intp[i + 2] = w0*tetra.GetVertex(pos[i]) + w1*tetra.GetVertex(neg[1]);
@@ -163,7 +163,7 @@ void  Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>
             // ++-0
             for (i = 0; i < positive; ++i)
             {
-                invCDiff = ((Real)1)/(C[pos[i]] - C[neg[0]]);
+                invCDiff = (static_cast<Real>(1))/(C[pos[i]] - C[neg[0]]);
                 w0 = -C[neg[0]]*invCDiff;
                 w1 = +C[pos[i]]*invCDiff;
 				tetra.SetVertex(pos[i], w0*tetra.GetVertex(pos[i]) + w1*tetra.GetVertex(neg[0]));
@@ -178,7 +178,7 @@ void  Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>
             // +---
             for (i = 0; i < negative; ++i)
             {
-                invCDiff = ((Real)1)/(C[pos[0]] - C[neg[i]]);
+                invCDiff = (static_cast<Real>(1))/(C[pos[0]] - C[neg[i]]);
                 w0 = -C[neg[i]]*invCDiff;
                 w1 = +C[pos[0]]*invCDiff;
 				intp[i] = w0*tetra.GetVertex(pos[0]) + w1*tetra.GetVertex(neg[i]);
@@ -196,7 +196,7 @@ void  Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>
             // +--0
             for (i = 0; i < negative; ++i)
             {
-                invCDiff = ((Real)1)/(C[pos[0]] - C[neg[i]]);
+                invCDiff = (static_cast<Real>(1))/(C[pos[0]] - C[neg[i]]);
                 w0 = -C[neg[i]]*invCDiff;
                 w1 = +C[pos[0]]*invCDiff;
 				intp[i] = w0*tetra.GetVertex(pos[0]) + w1*tetra.GetVertex(neg[i]);
@@ -210,7 +210,7 @@ void  Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>
         else
         {
             // +-00
-            invCDiff = ((Real)1)/(C[pos[0]] - C[neg[0]]);
+            invCDiff = (static_cast<Real>(1))/(C[pos[0]] - C[neg[0]]);
             w0 = -C[neg[0]]*invCDiff;
             w1 = +C[pos[0]]*invCDiff;
 			tetra.SetVertex(pos[0], w0*tetra.GetVertex(pos[0]) + w1*tetra.GetVertex(neg[0]));

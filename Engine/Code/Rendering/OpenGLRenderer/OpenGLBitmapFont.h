@@ -14,7 +14,7 @@ namespace Rendering
 	class BitmapFontChar
 	{
 	public:
-		BitmapFontChar(int xOrigin, int yOrigin, int xSize, int ySize,const unsigned char* bitmap)
+		BitmapFontChar(int xOrigin, int yOrigin, int xSize, int ySize,const unsigned char* bitmap) noexcept
 		{
 			mXOrigin = xOrigin;
 			mYOrigin = yOrigin;
@@ -30,7 +30,7 @@ namespace Rendering
 	class BitmapFont
 	{
 	public:
-		BitmapFont(const char* name, int numCharacters,const BitmapFontChar* const* characters)
+		BitmapFont(const char* name, int numCharacters,const BitmapFontChar* const* characters) noexcept
 		{
 			mName = name;
 			mNumCharacters = numCharacters;

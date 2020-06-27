@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:13)
+// 引擎版本：0.2.0.0 (2020/05/07 13:33)
 
 #ifndef SYSTEM_HELPER_SELECT_COMPILER_CONFIG_H
 #define SYSTEM_HELPER_SELECT_COMPILER_CONFIG_H
@@ -63,7 +63,7 @@
 
 #elif defined(__sgi)
 
-	//  SGI MIPSpro C++
+	// SGI MIPSpro C++
 	#define TCRE_COMPILER_CONFIG "Compiler/SgiMipspro.h"
 
 #elif defined(__DECCXX)
@@ -84,7 +84,7 @@
 #elif defined(__BORLANDC__)
 
 	// Borland
-	# define TCRE_COMPILER_CONFIG "Compiler/Borland.h"
+	#define TCRE_COMPILER_CONFIG "Compiler/Borland.h"
 
 #elif defined(__MWERKS__)
 
@@ -97,7 +97,7 @@
 	#define TCRE_COMPILER_CONFIG "Compiler/SunproCc.h"
 
 #elif defined(__HP_aCC)
-	
+
 	// HP aCC
 	#define TCRE_COMPILER_CONFIG "Compiler/HpAcc.h"
 
@@ -107,13 +107,13 @@
 	#define TCRE_COMPILER_CONFIG "Compiler/Mpw.h"
 
 #elif defined(__ibmxl__)
-		
+
 	// 用于Linux的IBM XL C/C++（小端）
 	#define TCRE_COMPILER_CONFIG "Compiler/Xlcpp.h"
 
 #elif defined(__IBMCPP__)
 
-	// IBM Visual Age 或 用于Linux的IBM XL C/C++（大端）
+	// IBM Visual Age 或用于Linux的IBM XL C/C++（大端）
 	#define TCRE_COMPILER_CONFIG "Compiler/Vacpp.h"
 
 #elif defined(__PGI)
@@ -123,7 +123,7 @@
 
 #elif defined _MSC_VER
 
-	// 微软 Visual C++，必须保持在最后一个#elif，因为一些其他供应商（例如Metrowerks），也定义 _MSC_VER
+	// 微软 Visual C++，必须保持在最后一个#elif，因为一些其他供应商（例如Metrowerks），也定义_MSC_VER
 	#define TCRE_COMPILER_CONFIG "Compiler/Visualc.h" 
 
 #else // !defined(ALL_COMPILER)

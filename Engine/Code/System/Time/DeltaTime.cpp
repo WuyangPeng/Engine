@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 16:30)
+// 引擎版本：0.2.0.0 (2020/05/10 13:22)
 
 #include "System/SystemExport.h"
 
@@ -19,7 +19,7 @@ int64_t System
 int64_t System
 	::GetTimeInMicroseconds() noexcept
 {
-	const CurrentDeltaTime currentTime{};
+	const CurrentDeltaTime currentTime{ };
 
 	const DeltaTimeValueData deltaTimeValueData{ currentTime.GetDeltaTimeValueData() };
 

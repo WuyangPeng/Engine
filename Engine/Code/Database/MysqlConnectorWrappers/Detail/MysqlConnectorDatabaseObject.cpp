@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 10:24)
+// 引擎版本：0.0.2.5 (2020/03/16 12:49)
 
 #include "Database/DatabaseExport.h"
 
@@ -14,21 +14,21 @@ using std::make_shared;
 using std::make_unique;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
- 
+
 Database::MysqlConnectorDatabaseObject
 	::MysqlConnectorDatabaseObject(const ConfigurationStrategy& configurationStrategy)
 	: ParentType{ configurationStrategy },
 	  m_MysqlxClient{ make_unique<MysqlxClient>(mysqlx::SessionOption::USER, configurationStrategy.GetDBUserName(),
-											    mysqlx::SessionOption::PWD,  configurationStrategy.GetDBPassword(),
-		                                        mysqlx::SessionOption::HOST, configurationStrategy.GetIP(),
+												mysqlx::SessionOption::PWD,  configurationStrategy.GetDBPassword(),
+												mysqlx::SessionOption::HOST, configurationStrategy.GetIP(),
 												mysqlx::SessionOption::PORT, configurationStrategy.GetPort(),
 												mysqlx::SessionOption::DB,   configurationStrategy.GetDBHostName(),
 												mysqlx::SessionOption::SSL_MODE,
 												configurationStrategy.IsUseSSL() ? mysqlx::SSLMode::VERIFY_CA : mysqlx::SSLMode::REQUIRED,
-		                                        mysqlx::ClientOption::POOLING, configurationStrategy.GetPooling(),
-	                                            mysqlx::ClientOption::POOL_MAX_SIZE, configurationStrategy.GetPoolMaxSize(),
-	                                            mysqlx::ClientOption::POOL_QUEUE_TIMEOUT, configurationStrategy.GetPoolQueueTimeout(),
-	                                            mysqlx::ClientOption::POOL_MAX_IDLE_TIME, configurationStrategy.GetPoolMaxIdleTime()) }
+												mysqlx::ClientOption::POOLING, configurationStrategy.GetPooling(),
+												mysqlx::ClientOption::POOL_MAX_SIZE, configurationStrategy.GetPoolMaxSize(),
+												mysqlx::ClientOption::POOL_QUEUE_TIMEOUT, configurationStrategy.GetPoolQueueTimeout(),
+												mysqlx::ClientOption::POOL_MAX_IDLE_TIME, configurationStrategy.GetPoolMaxIdleTime()) }
 {
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
@@ -37,7 +37,7 @@ Database::MysqlConnectorDatabaseObject
 	::~MysqlConnectorDatabaseObject()
 {
 	m_MysqlxClient->close();
-	 
+
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
 

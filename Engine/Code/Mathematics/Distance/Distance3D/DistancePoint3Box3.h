@@ -1,22 +1,20 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 15:32)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 17:17)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_H 
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Distance/DistanceBase.h"
 #include "Mathematics/Objects3D/Box3.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
+#include "Mathematics/Distance/DistanceBase.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector3DTools;
-
 	template <typename Real>
 	class DistancePoint3Box3 : public DistanceBase<Real, Vector3D<Real> >
 	{
@@ -25,24 +23,24 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 		using ParentType = DistanceBase<Real, Vector3D>;
 		using Box3 = Box3<Real>;
+		using Math = Math<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
 		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
 
 	public:
-		DistancePoint3Box3(const Vector3D& point,const Box3& ellipse);
+		DistancePoint3Box3(const Vector3D& point, const Box3& ellipse);
 		virtual ~DistancePoint3Box3();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-  		const Vector3D GetPoint () const;
+		const Vector3D GetPoint() const;
 		const Box3 GetBox() const;
 
 		// æ≤Ã¨æ‡¿Î≤È—Ø°£		 
 		virtual const DistanceResult GetSquared() const override;
 
 		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£		
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		Vector3D m_Point;
@@ -54,5 +52,4 @@ namespace Mathematics
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_H
- 
- 
+

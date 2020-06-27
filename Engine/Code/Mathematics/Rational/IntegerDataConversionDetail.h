@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 11:38)
+// 引擎版本：0.0.2.5 (2020/03/20 10:11)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_DETAIL_H
@@ -15,33 +15,33 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
-#include <boost/limits.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
+ 
 #include <type_traits>
 
-template <int N,typename T>
-Mathematics::IntegerDataConversion<N,T>
-	::IntegerDataConversion( const IntegerData& data )
-	:m_AbsData{ IntegerDataAnalysis<N>(data).GetAbsoluteValue() },m_Shifting{ m_AbsData.IsZero() ? 0 : IntegerDataAnalysis<N>(m_AbsData).GetLeadingBit() },
-	 m_Mantissa{ 0 },m_Symbol{ data.GetSign() }, m_Value{}
+template <int N, typename T>
+Mathematics::IntegerDataConversion<N, T>
+	::IntegerDataConversion(const IntegerData& data)
+	:m_AbsData{ IntegerDataAnalysis<N>(data).GetAbsoluteValue() }, m_Shifting{ m_AbsData.IsZero() ? 0 : IntegerDataAnalysis<N>(m_AbsData).GetLeadingBit() },
+	 m_Mantissa{ 0 }, m_Symbol{ data.GetSign() }, m_Value{}
 {
 	if (!m_AbsData.IsZero())
 	{
 		Init(TraitsType{});
-	}	
+	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-} 
+}
 
 // private
-template <int N,typename T>
+template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
-	::Init( const SignedIntegerType& )
+	::Init(const SignedIntegerType&)
 {
 	static_assert(std::is_integral_v<T>, "T isn't integral.");
 
-	if(m_Shifting <= sizeof(T) * 8 - 1)
-	{	
+	if (m_Shifting <= sizeof(T) * 8 - 1)
+	{
 		auto copySize = m_Shifting / 8 + 1;
 		memcpy(&m_Mantissa, &m_AbsData[0], copySize);
 		m_Value = boost::numeric_cast<T>(m_Mantissa);
@@ -51,13 +51,13 @@ void Mathematics::IntegerDataConversion<N, T>
 	else
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("转换溢出！"));
-	}	
+	}
 }
 
 // private
-template <int N,typename T>
+template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
-	::Init( const UnsignedIntegerType& )
+	::Init(const UnsignedIntegerType&)
 {
 	static_assert(std::is_integral_v<T>, "T isn't integral.");
 
@@ -74,9 +74,9 @@ void Mathematics::IntegerDataConversion<N, T>
 }
 
 // private
-template <int N,typename T>
+template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
-	::Init( const FloatType& )
+	::Init(const FloatType&)
 {
 	static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
@@ -84,9 +84,9 @@ void Mathematics::IntegerDataConversion<N, T>
 }
 
 // private
-template <int N,typename T>
+template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
-	::Init( const DoubleType& )
+	::Init(const DoubleType&)
 {
 	static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
@@ -94,16 +94,16 @@ void Mathematics::IntegerDataConversion<N, T>
 }
 
 // private
-template <int N,typename T>
+template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
 	::InitToFloatingPoint()
 {
 	static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
- 	if (m_Shifting <= TraitsType::g_RealExponentDifference)
-	{	
+	if (m_Shifting <= TraitsType::g_RealExponentDifference)
+	{
 		CalculateMantissa();
-		CalculateConversionValue();			
+		CalculateConversionValue();
 		Negative();
 	}
 	else
@@ -112,32 +112,31 @@ void Mathematics::IntegerDataConversion<N, T>
 	}
 }
 
-
 // private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
 	::CalculateConversionValue()
-{	
+{
 	using IntegerType = typename TraitsType::IntegerType;
 
 	IntegerType mantissa = (TraitsType::g_Mantissa & m_Mantissa);
-	
+
 	// 去掉mantissa的最高位
 	IntegerType highest{ 1 };
 	highest <<= TraitsType::g_ExponentShifting;
-		  
+
 	mantissa &= ~highest;
-	
+
 	auto exponent = ((static_cast<IntegerType>(m_Shifting) + TraitsType::g_RealExponentDifference) << TraitsType::g_ExponentShifting);
 	exponent &= TraitsType::g_Exponent;
-	
+
 	auto conversion = exponent | mantissa;
-		
+
 	m_Value = *(reinterpret_cast<const T*>(&conversion));
 }
 
 // private
-template <int N,typename T>
+template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
 	::CalculateMantissa()
 {
@@ -159,60 +158,60 @@ void Mathematics::IntegerDataConversion<N, T>
 		integerDataOperator <<= difference;
 	}
 
-	int index = IntegerDataAnalysis<N>(m_AbsData).GetLeadingBlock();
+	auto index = IntegerDataAnalysis<N>(m_AbsData).GetLeadingBlock();
 
 	index -= (sizeof(IntegerType) / sizeof(uint16_t) - 1);
 
-	memcpy(&m_Mantissa, &m_AbsData[index], sizeof(IntegerType));	
+	memcpy(&m_Mantissa, &m_AbsData[index], sizeof(IntegerType));
 }
 
 // private
-template <int N,typename T>
+template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
 	::Negative()
 {
 	if (m_Symbol == NumericalValueSymbol::Negative)
 	{
 		m_Value = -m_Value;
-	}		
+	}
 }
 
 // private
-template <int N,typename T>
+template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>
 	::SignedIntegerNegative()
 {
-	if(m_Symbol == NumericalValueSymbol::Negative) 
+	if (m_Symbol == NumericalValueSymbol::Negative)
 	{
-		if(m_Value <= std::numeric_limits<T>::max())
+		if (m_Value <= std::numeric_limits<T>::max())
 		{
 			m_Value = -m_Value;
 		}
 		else
 		{
 			THROW_EXCEPTION(SYSTEM_TEXT("转换溢出！"));
-		}		
+		}
 	}
 }
- 
+
 #ifdef OPEN_CLASS_INVARIANT
-template <int N,typename T>
-bool Mathematics::IntegerDataConversion<N,T>
+template <int N, typename T>
+bool Mathematics::IntegerDataConversion<N, T>
 	::IsValid() const noexcept
 {
 	return true;
 }
 #endif // OPEN_CLASS_INVARIANT
 
-template <int N,typename T>
-T Mathematics::IntegerDataConversion<N,T>
+template <int N, typename T>
+T Mathematics::IntegerDataConversion<N, T>
 	::GetValue() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Value;
 }
- 
+
 #endif // MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_DETAIL_H
 
 

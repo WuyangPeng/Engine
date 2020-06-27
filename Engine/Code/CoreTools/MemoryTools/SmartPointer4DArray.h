@@ -7,7 +7,7 @@
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_4D_ARRAY_H
 #define CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_4D_ARRAY_H
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 
 namespace CoreTools
 {

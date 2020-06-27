@@ -35,7 +35,7 @@ namespace CoreTools
 	public:
 		// 初始化和终止函数在main函数中调用。要指定自己的分配函数和释放函数，修改Memory::Create调用在main。
 		static void Create(Allocator allocator = &DefaultAllocator, Deallocator deallocator = &DefaultDeallocator);
-		static void Destroy();
+		static void Destroy();		
 
 	private:
 		static void DoCreate(Allocator allocator, Deallocator deallocator);

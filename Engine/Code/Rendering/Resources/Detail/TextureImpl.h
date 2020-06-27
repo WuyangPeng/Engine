@@ -15,7 +15,7 @@
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/TextureFlags.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 namespace CoreTools
 {

@@ -12,7 +12,7 @@
 #include "VertexBuffer.h"
 #include "VertexFormat.h"
 
-#include <boost/shared_ptr.hpp>
+
 
 RENDERING_EXPORT_SHARED_PTR(VertexBufferAccessorImpl);
 

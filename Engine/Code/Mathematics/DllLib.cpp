@@ -1,15 +1,15 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 14:24)
+// 引擎版本：0.0.2.5 (2020/03/18 19:02)
 
 // 数学库（Mathematics）封装了引擎的数学功能。
 // 数学库位于引擎的第三层，只允许调用引擎中的CoreTools库，
 // 并使用boost、stlsoft工具库。数学库封装了线性代数相关的计算。
 
 // 数学库包含以下模块：
-// 1.	Macro（宏）
+// 1.	Helper（帮助）
 // 2.	Base（基础）	
 // 3.	Algebra（代数）
 // 4.	Objects2D（2D对象）

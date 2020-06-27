@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 11:04)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:50)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_BOX3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_BOX3_H
@@ -16,7 +16,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class StaticFindIntersectorRay3Box3: public  StaticIntersector<Real, Vector3D>
+	class StaticFindIntersectorRay3Box3 : public  StaticIntersector<Real, Vector3D>
 	{
 	public:
 		using ClassType = StaticFindIntersectorRay3Box3<Real>;
@@ -25,32 +25,32 @@ namespace Mathematics
 		using Ray3 = Ray3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;   		
-		
+		using Math = Math<Real>;
+
 	public:
-		StaticFindIntersectorRay3Box3 (const Ray3& ray, const Box3& box);
-		
+		StaticFindIntersectorRay3Box3(const Ray3& ray, const Box3& box);
+
 		// Object access.
-		const Ray3 GetRay () const;
-		const Box3 GetBox () const;
+		const Ray3 GetRay() const;
+		const Box3 GetBox() const;
 
 		// The intersection set.
-		int GetQuantity () const;
-		const Vector3D GetPoint (int i) const;
+		int GetQuantity() const;
+		const Vector3D GetPoint(int i) const;
 
 	private:
 		// Static intersection queries.
-		void Find ();
-		
+		void Find();
+
 		// The objects to intersect.
 		Ray3 mRay;
 		Box3 mBox;
-		
+
 		// Information about the intersection set.
 		int mQuantity;
 		Vector3D mPoint[2];
 	};
-	
+
 	using StaticFindIntersectorRay3Box3f = StaticFindIntersectorRay3Box3<float>;
 	using StaticFindIntersectorRay3Box3d = StaticFindIntersectorRay3Box3<double>;
 }

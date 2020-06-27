@@ -10,7 +10,7 @@
 #include "Network/NetworkDll.h" 
 
 #include "MessageBufferImpl.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 #include <array>
 

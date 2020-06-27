@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 15:03)
+// 引擎版本：0.0.2.5 (2020/03/23 17:12)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_RAY2_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_RAY2_H 
@@ -11,13 +11,11 @@
 
 #include "Mathematics/Objects2D/Ray2.h"
 #include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Distance/DistanceBase.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-
 	template <typename Real>
 	class DistancePoint2Ray2 : public DistanceBase<Real, Vector2D<Real> >
 	{
@@ -27,8 +25,7 @@ namespace Mathematics
 		using ParentType = DistanceBase<Real, Vector2D>;
 		using Ray2 = Ray2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
+		using DistanceResult = typename ParentType::DistanceResult; 
 
 	public:
 		DistancePoint2Ray2(const Vector2D& point, const Ray2& ray);
@@ -43,7 +40,7 @@ namespace Mathematics
 		virtual const DistanceResult GetSquared() const override;
 
 		// 函数计算动态距离查询。	
-		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity,const Vector2D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
 	private:
 		Vector2D m_Point;
@@ -55,5 +52,5 @@ namespace Mathematics
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_POINT2_RAY2_H
- 
+
 

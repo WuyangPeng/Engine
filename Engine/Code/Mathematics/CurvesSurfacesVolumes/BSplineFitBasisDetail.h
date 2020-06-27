@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Assert/Assert.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
 Mathematics::BSplineFitBasis<Real>
@@ -53,20 +54,21 @@ template <typename Real>
 void Mathematics::BSplineFitBasis<Real>
 	::Compute (Real t, int& imin, int& imax) const
 {
-    MATHEMATICS_ASSERTION_0(Real{} <= t && t <= (Real)1, "Invalid input.\n");
+    MATHEMATICS_ASSERTION_0(Math<Real>::sm_Zero <= t && t <= static_cast<Real>(1), "Invalid input.\n");
 
     // Use scaled time and scaled knots so that 1/(Q-D) does not need to
     // be explicitly stored by the class object.  Determine the extreme
     // indices affected by local control.
-	auto QmD = (Real)(mQuantity - mDegree);
+	auto temp = mQuantity - mDegree;
+	auto QmD = (Real)(temp);
     Real tValue;
-    if (t <= Real{})
+    if (t <= Math<Real>::sm_Zero)
     {
-        tValue = Real{};
+        tValue = Math<Real>::sm_Zero;
         imin = 0;
         imax = mDegree;
     }
-    else if (t >= (Real)1)
+    else if (t >= static_cast<Real>(1))
     {
         tValue = QmD;
         imax = mQuantity - 1;
@@ -84,7 +86,7 @@ void Mathematics::BSplineFitBasis<Real>
     {
         if (i1 <= mDegree)
         {
-            mKnot[i0] = Real{};
+            mKnot[i0] = Math<Real>::sm_Zero;
         }
         else if (i1 >= mQuantity)
         {
@@ -92,13 +94,14 @@ void Mathematics::BSplineFitBasis<Real>
         }
         else
         {
-            mKnot[i0] = (Real)(i1 - mDegree);
+			auto temp2 = i1 - mDegree;
+            mKnot[i0] = (Real)(temp2);
         }
     }
 
     // Initialize the basis function evaluation table.  The first degree-1
     // entries are zero, but they do not have to be set explicitly.
-    mValue[mDegree] = (Real)1;
+    mValue[mDegree] = static_cast<Real>(1);
 
     // Update the basis function evaluation table, each iteration overwriting
     // the results from the previous iteration.
@@ -106,7 +109,7 @@ void Mathematics::BSplineFitBasis<Real>
     {
 		auto k0 = mDegree, k1 = row;
 		auto knot0 = mKnot[k0], knot1 = mKnot[k1];
-		auto invDenom = ((Real)1)/(knot0 - knot1);
+		auto invDenom = (static_cast<Real>(1))/(knot0 - knot1);
 		Real c1 = (knot0 - tValue)*invDenom, c0;
         mValue[row] = c1*mValue[row + 1];
 
@@ -117,7 +120,7 @@ void Mathematics::BSplineFitBasis<Real>
 
             knot0 = mKnot[++k0];
             knot1 = mKnot[++k1];
-            invDenom = ((Real)1)/(knot0 - knot1);
+            invDenom = (static_cast<Real>(1))/(knot0 - knot1);
             c1 = (knot0 - tValue)*invDenom;
             mValue[col] += c1*mValue[col + 1];
         }

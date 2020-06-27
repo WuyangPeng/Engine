@@ -77,18 +77,22 @@ static_assert(COMPILE_CORE_TOOLS_CLOSE <= CLOSE_CORE_TOOLS_MAX, "COMPILE_CORE_TO
 	// 基类
 	#define CLASS_INVARIANT_VIRTUAL_DECLARE virtual bool IsValid() const noexcept
 	// 子类
-	#define CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE virtual bool IsValid() const noexcept override 
+	#define CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE bool IsValid() const noexcept override 
+	// 最终子类
+	#define CLASS_INVARIANT_VIRTUAL_FINAL_DECLARE bool IsValid() const noexcept final 
 
 #else // !OPEN_CLASS_INVARIANT
 
 	#define CLASS_INVARIANT_DECLARE 
 	#define CLASS_INVARIANT_VIRTUAL_DECLARE
 	#define CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE
+	#define CLASS_INVARIANT_VIRTUAL_FINAL_DECLARE
 
 #endif // OPEN_CLASS_INVARIANT
 
 #define BOOST_LIB_DIAGNOSTIC
 
 #include "System/Helper/PragmaWarning/Disable26444.h"
+#include "System/Helper/PragmaWarning/Disable26456.h"
 
 #endif // CORE_TOOLS_HELPER_USER_MACRO_H

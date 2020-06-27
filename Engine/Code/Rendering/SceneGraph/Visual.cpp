@@ -18,6 +18,7 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/UnusedMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 using std::string;
 using std::vector;
@@ -144,9 +145,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetIndexBuffer,Renderi
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetIndexBuffer,IndexBufferSmartPointer,void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetEffectInstance,const Rendering::ConstVisualEffectInstanceSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetConstEffectInstance,const Rendering::ConstVisualEffectInstanceSmartPointer)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetEffectInstance,VisualEffectInstanceSmartPointer,void)
-
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetEffectInstance, const Rendering::VisualEffectInstanceSmartPointer)
  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetModelBound,const Rendering::Bound&)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetModelBound,Rendering::Bound&)
@@ -178,22 +179,30 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,ComputeBounding, ve
 
 void Rendering::Visual
 	::GetVisibleSet(Culler& culler, bool noCull)
-{		
-	auto smartPointer = GetSmartPointer();
-
-	if(!smartPointer.IsNullPtr())
-		culler.Insert(smartPointer);
+{		 
+	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
+	{
+		culler.Insert(VisualSmartPointer{ this });
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"));
+	}
 
 	SYSTEM_UNUSED_ARG(noCull);
 }
 
-Rendering::ConstSpatialSmartPointer Rendering::Visual
+Rendering::ConstVisualSmartPointer Rendering::Visual
 	::GetSmartPointer() const
 {
-	if(SMART_POINTER_SINGLETON.IsSmartPointer(this))
-		return ConstSpatialSmartPointer{ this };
-	else 
-		return Clone().PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
+	{
+		return ConstVisualSmartPointer{ this };
+	}		
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"));
+	}		
 }
 
 Rendering::Visual

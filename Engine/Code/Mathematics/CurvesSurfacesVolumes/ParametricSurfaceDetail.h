@@ -124,7 +124,7 @@ void ParametricSurface<Real>::ComputePrincipalCurvatureInfo (Real u, Real v,Real
 
     // Characteristic polynomial is 0 = det(B-kG) = c2*k^2+c1*k+c0.
 	auto c0 = curvatureTensor.Determinant();
-	auto c1 = ((Real)2)*curvatureTensor[0][1]* metricTensor[0][1] -  curvatureTensor[0][0]*metricTensor[1][1] - curvatureTensor[1][1]*metricTensor[0][0];
+	auto c1 = (static_cast<Real>(2))*curvatureTensor[0][1]* metricTensor[0][1] -  curvatureTensor[0][0]*metricTensor[1][1] - curvatureTensor[1][1]*metricTensor[0][0];
 	auto c2 = metricTensor.Determinant();
 
     // Principal curvatures are roots of characteristic polynomial.

@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include <ostream>
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 Mathematics::EdgeKey
 	::EdgeKey (int first, int second)
@@ -67,19 +68,32 @@ CLASS_INVARIANT_STUB_DEFINE(Mathematics, EdgeKey)
 int Mathematics::EdgeKey
 	::GetKey(int index) const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < 2,"Ë÷Òý´íÎó£¡");
+    MATHEMATICS_CLASS_IS_VALID_CONST_9; 
     
-    return m_Vertex[index];
+	if (0 <= index && index < 2)
+	{
+		return m_Vertex[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}
 }
 
 void Mathematics::EdgeKey
 	::SetKey(int index,int value)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 2,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_9; 
 
-	m_Vertex[index] = value;
+	if (0 <= index && index < 2)
+	{
+		m_Vertex[index] = value;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}
+	
 }
 
 bool Mathematics

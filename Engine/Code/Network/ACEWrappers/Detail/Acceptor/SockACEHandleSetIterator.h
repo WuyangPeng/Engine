@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 20:14)
+// 引擎版本：0.0.2.4 (2020/03/11 13:41)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_ITERATOR_H
 #define NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_ITERATOR_H
@@ -14,7 +14,7 @@
 #include "Network/Interface/Detail/HandleSetIteratorImpl.h" 
 
 namespace Network
-{	
+{
 	class NETWORK_HIDDEN_DECLARE SockACEHandleSetIterator : public HandleSetIteratorImpl
 	{
 	public:
@@ -28,11 +28,11 @@ namespace Network
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		virtual ACEHandle operator()() override;
-		 	 
-	private:	 
+
+	private:
 		ACE_Handle_Set_Iterator m_ACEHandleSetIter;
-	};	
-} 
+	};
+}
 
 #endif // NETWORK_USE_ACE
 

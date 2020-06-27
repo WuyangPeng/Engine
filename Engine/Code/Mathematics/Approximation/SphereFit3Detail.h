@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:51)
+// 引擎版本：0.0.2.5 (2020/03/23 15:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_SPHERE_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_SPHERE_FIT3_DETAIL_H
@@ -13,14 +13,14 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::SphereFit3<Real>
-	::SphereFit3(const std::vector<Vector3D>& points,int maxIterations, bool initialCenterIsAverage)
+	::SphereFit3(const std::vector<Vector3D>& points, int maxIterations, bool initialCenterIsAverage)
 	:m_Sphere{}
 {
-	Calculate(points,maxIterations,initialCenterIsAverage);
+	Calculate(points, maxIterations, initialCenterIsAverage);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -34,7 +34,6 @@ bool Mathematics::SphereFit3<Real>
 }
 #endif // OPEN_CLASS_INVARIANT
 
-
 template <typename Real>
 const typename Mathematics::SphereFit3<Real>::Sphere3 Mathematics::SphereFit3<Real>
 	::GetSphere() const
@@ -44,17 +43,16 @@ const typename Mathematics::SphereFit3<Real>::Sphere3 Mathematics::SphereFit3<Re
 	return m_Sphere;
 }
 
-
 template <typename Real>
 void Mathematics::SphereFit3<Real>
-	::Calculate(const std::vector<Vector3D>& points,int maxIterations, bool initialCenterIsAverage)
+	::Calculate(const std::vector<Vector3D>& points, int maxIterations, bool initialCenterIsAverage)
 {
 	auto average = GetAveragePoint(points);
 
 	// 猜测初始中心。
 	if (initialCenterIsAverage)
 	{
-		m_Sphere.SetSphere(average, Real{});
+		m_Sphere.SetSphere(average, Math<Real>::sm_Zero);
 	}
 	else
 	{
@@ -80,8 +78,7 @@ void Mathematics::SphereFit3<Real>
 
 		MATHEMATICS_ASSERTION_4(loop + 1 != maxIterations, "迭代超出次数。");
 	}
-}   
-
+}
 
 template <typename Real>
 const typename Mathematics::SphereFit3<Real>::Vector3D Mathematics::SphereFit3<Real>
@@ -104,21 +101,20 @@ const typename Mathematics::SphereFit3<Real>::Vector3D Mathematics::SphereFit3<R
 	return average;
 }
 
-
 template <typename Real>
 void Mathematics::SphereFit3<Real>
-	::Iteration(const std::vector<Vector3D>& points, const Vector3D& average)
+::Iteration(const std::vector<Vector3D>& points, const Vector3D& average)
 {
 	auto numPoints = points.size();
 
 	// 计算平均值L, dL/da, dL/db, dL/dc。
-	Real lengthAverage { };
+	auto lengthAverage = Math<Real>::sm_Zero;
 	Vector3D derLenghtAverage;
-	
+
 	for (auto i = 0u; i < numPoints; ++i)
 	{
 		auto difference = points[i] - m_Sphere.GetCenter();
-		
+
 		auto length = Vector3DTools<Real>::VectorMagnitude(difference);
 		if (Math<Real>::sm_ZeroTolerance < length)
 		{
@@ -126,13 +122,12 @@ void Mathematics::SphereFit3<Real>
 			derLenghtAverage -= difference / length;
 		}
 	}
-	
+
 	lengthAverage /= boost::numeric_cast<Real>(numPoints);
 	derLenghtAverage /= boost::numeric_cast<Real>(numPoints);
-	
+
 	m_Sphere.SetSphere(average + lengthAverage * derLenghtAverage, lengthAverage);
 }
 
 #endif // MATHEMATICS_APPROXIMATION_SPHERE_FIT3_DETAIL_H
 
- 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 10:25)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 12:50)
 
 #include "Database/DatabaseExport.h"
 
@@ -14,7 +14,7 @@ using std::make_shared;
 using std::make_unique;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
- 
+
 Database::MysqlConnectorResult
 	::MysqlConnectorResult(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult)
 	: ParentType{ configurationStrategy }, m_MysqlxRowResult{ mysqlxRowResult }
@@ -60,7 +60,7 @@ Database::ResultImpl::ResultRowContainer Database::MysqlConnectorResult
 
 	for (const auto& value : result)
 	{
-		container.push_back(make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxRow>(value)));
+		container.emplace_back(make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxRow>(value)));
 	}
 
 	return container;

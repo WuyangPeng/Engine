@@ -10,13 +10,11 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Objects2D/Line2.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Distance/DistanceBase.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-
 	template <typename Real>
 	class DistanceLine2Line2 : public DistanceBase<Real, Vector2D<Real>>
 	{
@@ -27,7 +25,6 @@ namespace Mathematics
 		using Line2 = Line2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
 		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
 
 	public:
 		DistanceLine2Line2(const Line2& lhsLine, const Line2& rhsLine);
@@ -42,7 +39,7 @@ namespace Mathematics
 		virtual const DistanceResult GetSquared() const override;
 
 		// 函数计算动态距离查询。	
-		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity,const Vector2D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
 	private:
 		Line2 m_LhsLine;

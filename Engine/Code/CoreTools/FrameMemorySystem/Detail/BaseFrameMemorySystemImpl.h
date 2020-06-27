@@ -9,7 +9,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/FrameMemorySystem/FrameMemorySystemPointerShare.h"
 #include "CoreTools/FrameMemorySystem/Flags/FrameMemorySystemFlags.h"
 

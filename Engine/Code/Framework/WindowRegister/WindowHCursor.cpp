@@ -1,64 +1,72 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 10:46)
+// 引擎版本：0.3.0.1 (2020/05/21 13:34)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowHCursor.h"
+#include "System/Window/WindowRegister.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "System/Window/WindowRegister.h"
 
 Framework::WindowHCursor
-	::WindowHCursor(const System::TChar* cursor)
-	:m_HCursor(System::LoadSystemCursor(nullptr,cursor))
+	::WindowHCursor(const TChar* cursor) noexcept
+	:m_HCursor{ System::LoadSystemCursor(nullptr, cursor) }
 {
 	CheckUpHCursor();
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowHCursor
-	::WindowHCursor(HInstance hInstance,int cursor)
-	:m_HCursor(System::LoadSystemCursor(hInstance,MAKEINTRESOURCE(cursor)))
+	::WindowHCursor(HInstance instance, int cursor)
+	:m_HCursor{ System::LoadSystemCursor(instance, System::MakeIntreSource(boost::numeric_cast<System::WindowWord>(cursor))) }
 {
 	CheckUpHCursor();
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 // private
 void Framework::WindowHCursor
-	::CheckUpHCursor()
+	::CheckUpHCursor() noexcept
 {
-	if(m_HCursor == nullptr)
+	if (m_HCursor == nullptr)
 	{
-		m_HCursor = System::LoadSystemCursor(nullptr,IDC_ARROW);
+		m_HCursor = System::LoadSystemCursor(nullptr, System::g_Arrow);
+
 		LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
 			<< SYSTEM_TEXT("加载光标失败！")
-			<< CoreTools::LogAppenderIOManageSign::TriggerAssert
-			<< CoreTools::LogAppenderIOManageSign::Refresh;
+			<< LOG_SINGLETON_TRIGGER_ASSERT;
 	}
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-bool Framework::WindowHCursor
-	::IsValid() const noexcept
-{
-	if(m_HCursor != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_STUB_DEFINE(Framework, WindowHCursor)
 
 System::WindowHCursor Framework::WindowHCursor
-	::GetHCursor() const
+	::GetHCursor() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
 	return m_HCursor;
+}
+
+Framework::WindowHCursor Framework::WindowHCursor
+	::Create(HInstance instance, bool isDefaultCursor, int cursor)
+{
+	if (isDefaultCursor)
+	{
+		if (cursor == 0)
+			return WindowHCursor{ };
+		else
+			return WindowHCursor{ nullptr, cursor };
+	}
+	else
+	{
+		return WindowHCursor{ instance,cursor };
+	}
 }
 

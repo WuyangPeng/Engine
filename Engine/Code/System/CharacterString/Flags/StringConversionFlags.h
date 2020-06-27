@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 13:16)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/09 15:38)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
@@ -232,18 +232,18 @@ namespace System
 
 	enum class LanguageLocale
 	{
-		SystemDefault = MakeLCID(g_LanguageSystemDefault, LocaleSort::Default),
-		UserDefault = MakeLCID(g_LanguageUserDefault, LocaleSort::Default),
+		SystemDefault = MakeLanguageCID(g_LanguageSystemDefault, LocaleSort::Default),
+		UserDefault = MakeLanguageCID(g_LanguageUserDefault, LocaleSort::Default),
 
-		CustomDefault = MakeLCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::CustomDefault), LocaleSort::Default),
+		CustomDefault = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::CustomDefault), LocaleSort::Default),
 
-		CustomUnspecified = MakeLCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::CustomUnspecified), LocaleSort::Default),
+		CustomUnspecified = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::CustomUnspecified), LocaleSort::Default),
 
-		CustomUIDefault = MakeLCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::UICustomDefault), LocaleSort::Default),
+		CustomUIDefault = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::UICustomDefault), LocaleSort::Default),
 
-		Neutral = MakeLCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::Neutral), LocaleSort::Default),
+		Neutral = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::Neutral), LocaleSort::Default),
 
-		Invariant = MakeLCID(MakeLanguageID(PrimaryLanguage::Invariant, SubLanguage::Neutral), LocaleSort::Default),
+		Invariant = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Invariant, SubLanguage::Neutral), LocaleSort::Default),
 	};
 
 	enum class Compares

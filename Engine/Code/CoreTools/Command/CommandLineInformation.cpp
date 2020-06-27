@@ -25,7 +25,7 @@ CoreTools::CommandLineInformation
 }
 
 CoreTools::CommandLineInformation
-	::CommandLineInformation(char* commandLine)
+	::CommandLineInformation(const char* commandLine)
 	:m_Impl{ make_shared<ImplType>(commandLine) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

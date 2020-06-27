@@ -58,7 +58,7 @@ const Real* Mathematics::ConvexHull1<Real>
 template <typename Real>
 Mathematics::ConvexHull1<Real>
 	::ConvexHull1(const System::TChar* filename)
-	:ConvexHull<Real>{ 0, Real{}, false, QueryType::Real }, mVertices{ 0 }
+	:ConvexHull<Real>{ 0, Math<Real>::sm_Zero, false, QueryType::Real }, mVertices{ 0 }
 {
     bool loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Failed to load file\n");

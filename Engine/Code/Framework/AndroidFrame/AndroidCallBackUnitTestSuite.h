@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:23)
+// 引擎版本：0.3.0.1 (2020/05/21 16:40)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_UNIT_TEST_SUITE_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_UNIT_TEST_SUITE_H
@@ -12,74 +12,63 @@
 #include "AndroidCallBackInterface.h"
 #include "AndroidProcess.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
-
-namespace CoreTools
-{
-	class Suite;
-	class UnitTestComposite;
-}
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 FRAMEWORK_EXPORT_SHARED_PTR(AndroidCallBackUnitTestSuiteImpl);
-FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteOsPtr);
-EXPORT_NONCOPYABLE_CLASS(FRAMEWORK);
+FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteStream);
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE AndroidCallBackUnitTestSuite :	public AndroidCallBackInterface, private boost::noncopyable
+	class FRAMEWORK_DEFAULT_DECLARE AndroidCallBackUnitTestSuite : public AndroidCallBackInterface
 	{
-	public:
-		typedef CoreTools::NonCopyClasses ClassShareType;
-		typedef AndroidCallBackUnitTestSuite ClassType;
-		typedef AndroidCallBackInterface ParentType;
-		typedef AndroidCallBackUnitTestSuiteImpl ImplType;
-		typedef WindowMessageUnitTestSuiteOsPtr OsPtrType;
-		typedef CoreTools::Suite Suite;
-		typedef std::shared_ptr<CoreTools::UnitTestComposite> UnitTestPtr;
+	public:		
+		using ClassType = AndroidCallBackUnitTestSuite;
+		using ParentType = AndroidCallBackInterface;
+		using ClassShareType = CoreTools::NonCopyClasses;
+		using ImplType = AndroidCallBackUnitTestSuiteImpl;
+		using StreamType = WindowMessageUnitTestSuiteStream;
+		using Suite = CoreTools::Suite;
+		using OStreamShared = CoreTools::OStreamShared;
+		using UnitTestSharedPtr = std::shared_ptr<CoreTools::UnitTestComposite>;
 
 	public:
-		AndroidCallBackUnitTestSuite();
-		virtual ~AndroidCallBackUnitTestSuite();
+		AndroidCallBackUnitTestSuite(int64_t delta, const std::string& suiteName);
+		~AndroidCallBackUnitTestSuite() noexcept = default;
+		AndroidCallBackUnitTestSuite(const AndroidCallBackUnitTestSuite&) noexcept = delete;
+		AndroidCallBackUnitTestSuite& operator=(const AndroidCallBackUnitTestSuite&) noexcept = delete;
+		AndroidCallBackUnitTestSuite(AndroidCallBackUnitTestSuite&& rhs) noexcept;
+		AndroidCallBackUnitTestSuite& operator=(AndroidCallBackUnitTestSuite&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool Initialize();
+		bool Initialize() override;
 
-		virtual int KeyDownMessage(struct AndroidApp* state,
-			                           AndroidInputEvent* event);
+		int KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent) override;
+		void Display(AndroidApp* androidApp, int64_t timeDelta) override;
 
-		virtual void Display(struct AndroidApp* state,int64_t timeDelta);
+		int GetPassedNumber() const noexcept;
+		bool IsPrintRun() const noexcept;
 
-		int GetPassedNumber() const;
-
-		void AddTest(const std::string& suiteName,Suite& suite, 
-			         const std::string& testName,const UnitTestPtr& unitTest);
+		void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
 
 	protected:
-		std::ostream* GetOStream() const;
+		OStreamShared GetStreamShared() const noexcept;
 
-		void DoAddSuite(const Suite& suite);
-
-		// 子类初始化必须调用。
-		void GenerateSuite();
-
-		bool IsPrintRun() const;
+		void DoAddSuite(const Suite& suite);	
 
 	private:
-		typedef std::shared_ptr<ImplType> AndroidCallBackUnitTestSuiteImplPtr;
-		typedef std::shared_ptr<OsPtrType> OsPtrTypePtr;
+		using AndroidCallBackUnitTestSuiteImplPtr = std::shared_ptr<ImplType> ;
+		using StreamTypeSharedPtr = std::shared_ptr<StreamType>;
 
 	private:
 		virtual void AddSuite() = 0;
-		virtual std::string GetSuiteName() const = 0;
 
 		bool AddSuiteOnInitialize();
 		void RunUnitTest();
 		void ResetTestData();
 
 	private:
-		OsPtrTypePtr m_OsPtrTypePtr;
+		StreamTypeSharedPtr m_StreamType;
 		AndroidCallBackUnitTestSuiteImplPtr m_Impl;
 		bool m_IsInit;
 	};

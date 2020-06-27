@@ -9,7 +9,7 @@
 #include "CommonCopyFileTools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 CoreTools::CommonCopyFileTools
 	::CommonCopyFileTools(const String& inFileName, const String& outFileName)

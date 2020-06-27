@@ -1,0 +1,1202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 头文件">
+      <UniqueIdentifier>{0e6fa60e-2270-4727-9c96-83e990eb5a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 源文件">
+      <UniqueIdentifier>{93194aa4-54a5-4530-b761-451a332c6d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 头文件\Using">
+      <UniqueIdentifier>{31e9e605-0451-4580-9bfa-eafa1354df81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 头文件\Detail">
+      <UniqueIdentifier>{acd72c7f-4220-4f50-a0f8-c9e9597be77b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 源文件\Detail">
+      <UniqueIdentifier>{d15eebb2-04e1-4e89-a065-6c5cf9c39a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 头文件\Detail\Acceptor">
+      <UniqueIdentifier>{c0c0c6ce-c715-4dbb-828a-814b8187b6ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 源文件\Detail\Acceptor">
+      <UniqueIdentifier>{8d25242d-9323-445a-af0f-34a83bd96349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 头文件\Detail\Address">
+      <UniqueIdentifier>{018793bd-45f1-4a1b-996b-0d0d106010cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 头文件\Detail\BaseMainManager">
+      <UniqueIdentifier>{1d72b16c-ede1-4b6a-aada-662eb625d1b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 头文件\Detail\Connector">
+      <UniqueIdentifier>{2f57394e-596a-458e-9d24-951a29604bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 头文件\Detail\Stream">
+      <UniqueIdentifier>{40bc5ae6-509e-4c61-9985-65a7a0725893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 源文件\Detail\Address">
+      <UniqueIdentifier>{12826a0c-7298-4078-b921-091418fb6de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 源文件\Detail\BaseMainManager">
+      <UniqueIdentifier>{f9e891ee-e88d-48ad-926f-409e60b7edab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 源文件\Detail\Connector">
+      <UniqueIdentifier>{38d4960e-e048-41a8-add1-87edff9ca388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappers 源文件\Detail\Stream">
+      <UniqueIdentifier>{072f72fa-4391-49ed-80bc-98e12c660865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 头文件">
+      <UniqueIdentifier>{97b1fb56-3962-48d9-a461-2d7bf2724f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 源文件">
+      <UniqueIdentifier>{9dfe900a-7b2c-4310-ba69-ac881303c7c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 头文件\Detail">
+      <UniqueIdentifier>{3247aa34-9ef8-49d8-9ed9-f27ced36a3a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 源文件\Detail">
+      <UniqueIdentifier>{f825d093-ee94-4068-8914-c15675f901ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 头文件\Detail\Acceptor">
+      <UniqueIdentifier>{5f4b9705-75a1-4f97-b07b-6357a0c6545b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 源文件\Detail\Acceptor">
+      <UniqueIdentifier>{d562783e-6767-4b00-b76c-e8438d284d4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 头文件\Detail\Address">
+      <UniqueIdentifier>{f0fd43e5-b1bb-416e-96bc-80f344c6b836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 源文件\Detail\Address">
+      <UniqueIdentifier>{f612fe78-d508-49b4-9f59-da5486f10512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 头文件\Detail\BaseMainManager">
+      <UniqueIdentifier>{b50ed362-6e66-4fda-beaf-20f2cb839254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 源文件\Detail\BaseMainManager">
+      <UniqueIdentifier>{9a84a424-fe5e-4ced-985d-f0b01747db12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 头文件\Detail\Connector">
+      <UniqueIdentifier>{cc539495-b01c-4b88-bda0-b5a088166422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 源文件\Detail\Connector">
+      <UniqueIdentifier>{056f9031-7b83-489f-a715-ead68ae14d73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 头文件\Detail\Stream">
+      <UniqueIdentifier>{62f6839f-2f2e-4009-8967-ce722fa23efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappers 源文件\Detail\Stream">
+      <UniqueIdentifier>{88ab3370-353d-4368-ac85-6718967ac06f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration 头文件">
+      <UniqueIdentifier>{047ab4a4-787c-4b89-b9a9-e0922a46c519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration 源文件">
+      <UniqueIdentifier>{92441fe6-748e-4227-833c-ce39fe24b605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration 头文件\Detail">
+      <UniqueIdentifier>{cbbfa1d1-60d3-4652-8610-c49cd3b66b85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration 源文件\Detail">
+      <UniqueIdentifier>{db2e0911-2404-402b-ae37-04e4e10aa402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration 头文件\Flags">
+      <UniqueIdentifier>{1f1ec6a1-41f5-42bd-8b56-ea16c76f3f6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 头文件">
+      <UniqueIdentifier>{3813f113-c7a6-4ae4-a08e-cf2dd0d2d501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 源文件">
+      <UniqueIdentifier>{e3e99b1d-7544-4c04-aa7b-97bc1b60d836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 头文件\Data">
+      <UniqueIdentifier>{ca9d1f0d-41d4-41ae-942e-353a817ef205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 源文件\Data">
+      <UniqueIdentifier>{f6d29370-fc31-4519-a87a-0bef9b2f29c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 头文件\Detail">
+      <UniqueIdentifier>{dbbe9284-7b10-4dfc-a2d3-e60dbfc74311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 源文件\Detail">
+      <UniqueIdentifier>{c1b1b2a5-f0cb-467c-97b1-4787e6fa94f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessage 头文件">
+      <UniqueIdentifier>{33f8b1bf-12bc-41c0-bde4-140a17750877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessage 源文件">
+      <UniqueIdentifier>{3f4a11c2-d4a1-46f0-8027-d79092c28d0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessage 模板文件">
+      <UniqueIdentifier>{49781d83-e56f-4110-86e8-543fd9e8a352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessage 头文件\Detail">
+      <UniqueIdentifier>{b69d65d9-05e8-49dd-8b85-314605d2aadd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessage 源文件\Detail">
+      <UniqueIdentifier>{485c2dd5-a7f9-4e23-9403-9e97f7805ac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessage 头文件\Flags">
+      <UniqueIdentifier>{68288bae-3e1c-454c-af0d-84c560afa3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 头文件">
+      <UniqueIdentifier>{982bfa7c-4831-430a-9330-8612151b504b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 源文件">
+      <UniqueIdentifier>{ceb56c71-8b0d-4a74-ae30-27437e91dc18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 头文件\Detail">
+      <UniqueIdentifier>{1a1ed63c-95b0-4e66-a75b-7acce0d100d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 源文件\Detail">
+      <UniqueIdentifier>{dcbbc0a7-a3f0-4595-9b71-4d0a3d1eff1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 头文件\Detail\Acceptor">
+      <UniqueIdentifier>{778d191a-06dd-4898-89bf-9d5cef01c305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 源文件\Detail\Acceptor">
+      <UniqueIdentifier>{bd922276-52b5-4c4a-8e82-7916401e69ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 头文件\Detail\Address">
+      <UniqueIdentifier>{1adffc26-75da-4c2a-bc70-ef5ad6d03f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 源文件\Detail\Address">
+      <UniqueIdentifier>{64743820-5ba7-43f4-8dd8-ba152a74323c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 头文件\Detail\BaseMainManager">
+      <UniqueIdentifier>{3f96d82f-8c76-42fc-b195-5787fb367916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 源文件\Detail\BaseMainManager">
+      <UniqueIdentifier>{df351d5e-796d-4ca7-87fe-d0c28c3ce51e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 头文件\Detail\Connector">
+      <UniqueIdentifier>{175bd039-32c8-4cfd-bb8c-30180d9aab27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 源文件\Detail\Connector">
+      <UniqueIdentifier>{3c55114b-d99e-47ac-bbf8-ad42ed03e838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 头文件\Detail\Stream">
+      <UniqueIdentifier>{fc4ef14b-3e17-42ba-92c3-a3b331f82f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappers 源文件\Detail\Stream">
+      <UniqueIdentifier>{52d50b18-b4a9-4239-a008-44cd7f64a544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Openssl 头文件">
+      <UniqueIdentifier>{17599d27-70d6-412f-afb7-cbbd9251ff75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SocketWrappers 头文件">
+      <UniqueIdentifier>{5ea37813-4fc2-4f84-b426-b64a81594ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessage 模板文件\Detail">
+      <UniqueIdentifier>{431eab48-5b1d-4b48-9be8-846b89a309cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface 头文件\Flags">
+      <UniqueIdentifier>{97c9deea-4c69-4005-87e6-a7ccd2aeb284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{7ae87740-d62a-4b09-80ed-ae560520dd91}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Network\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Acceptor\ACESockAcceptor.cpp">
+      <Filter>ACEWrappers 源文件\Detail\Acceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Acceptor\SockACEHandleSet.cpp">
+      <Filter>ACEWrappers 源文件\Detail\Acceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Acceptor\SockACEHandleSetIterator.cpp">
+      <Filter>ACEWrappers 源文件\Detail\Acceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Address\ACESockInetAddress.cpp">
+      <Filter>ACEWrappers 源文件\Detail\Address</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\BaseMainManager\ACEMainManager.cpp">
+      <Filter>ACEWrappers 源文件\Detail\BaseMainManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Connector\ACESockConnector.cpp">
+      <Filter>ACEWrappers 源文件\Detail\Connector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Stream\ACEIovecSockStream.cpp">
+      <Filter>ACEWrappers 源文件\Detail\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Stream\ACESockStream.cpp">
+      <Filter>ACEWrappers 源文件\Detail\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Acceptor\BoostSockAcceptor.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Acceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Address\BoostSockInetAddress.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Address</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\BoostMainManager.cpp">
+      <Filter>BoostWrappers 源文件\Detail\BaseMainManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\BoostMainManagerUseThreads.cpp">
+      <Filter>BoostWrappers 源文件\Detail\BaseMainManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\ExecutorWorkGuardContext.cpp">
+      <Filter>BoostWrappers 源文件\Detail\BaseMainManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\ExecutorWorkGuardContextThread.cpp">
+      <Filter>BoostWrappers 源文件\Detail\BaseMainManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Connector\BoostSockConnector.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Connector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Stream\BoostSockStream.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\AnalysisNetworkConfiguration.cpp">
+      <Filter>Configuration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\ConfigurationParameter.cpp">
+      <Filter>Configuration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\ConfigurationStrategy.cpp">
+      <Filter>Configuration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\ConfigurationSubStrategy.cpp">
+      <Filter>Configuration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\AnalysisNetworkConfigurationImpl.cpp">
+      <Filter>Configuration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationIPPort.cpp">
+      <Filter>Configuration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationParameterImpl.cpp">
+      <Filter>Configuration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationStrategyFactory.cpp">
+      <Filter>Configuration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationStrategyImpl.cpp">
+      <Filter>Configuration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationSubStrategyImpl.cpp">
+      <Filter>Configuration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\BaseMainManager.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Client.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\HandleSet.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\HandleSetIterator.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\SendSocket.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Server.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\SockAcceptor.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\SockAddress.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\SockConnector.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\SockStream.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Data\BufferSendStreamContainer.cpp">
+      <Filter>Interface 源文件\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Data\BufferSendStreamMultiIndexContainer.cpp">
+      <Filter>Interface 源文件\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\BaseMainManagerFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\BaseMainManagerImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\CacheClient.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\ClientFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\ClientImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\HandleSetContainer.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\HandleSetFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\HandleSetImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\HandleSetIteratorFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\HandleSetIteratorImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\IterativeServer.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullMainManager.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullSockAcceptor.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullSockAddress.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullSockConnector.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullSockStream.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\OnlySendingClient.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\ReactiveServer.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\ServerFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\ServerImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockAcceptorFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockAcceptorImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockAddressFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockAddressImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockConnectorFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockConnectorImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockStreamFactory.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockStreamImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\StreamContainer.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\BufferReceiveStream.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\BufferSendStream.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageEventContainer.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageEventManager.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageInterface.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageSource.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageTarget.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageTypeCondition.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\NetworkMessageEvent.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\NullMessage.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\ReceiveMessageLevel.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\SendMessageLevel.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\SocketManager.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageEventContainerImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageEventManagerImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageManagerImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionAll.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionCompare.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionRange.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionSpecific.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MultiMessageEventContainer.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MultiMessageEventContainerImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\NetworkMessageEventLess.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\PriorityMessageEventContainer.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\ReceiveMessageLevelImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\SendMessageLevelImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\SingleMessageEventContainer.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\SocketManagerImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Acceptor\NetworkSockAcceptor.cpp">
+      <Filter>NetworkWrappers 源文件\Detail\Acceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Address\NetworkSockInetAddress.cpp">
+      <Filter>NetworkWrappers 源文件\Detail\Address</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\BaseMainManager\NetworkMainManager.cpp">
+      <Filter>NetworkWrappers 源文件\Detail\BaseMainManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Connector\NetworkSockConnector.cpp">
+      <Filter>NetworkWrappers 源文件\Detail\Connector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Stream\NetworkSockStream.cpp">
+      <Filter>NetworkWrappers 源文件\Detail\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\BoostMainManagerUseMultiContext.cpp">
+      <Filter>BoostWrappers 源文件\Detail\BaseMainManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Acceptor\BoostSockAcceptorHelper.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Acceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Connector\BoostSockConnectorHelper.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Connector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Stream\BoostFixedSockStream.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Stream\BoostSegmentationSockStream.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Stream\BoostSockStreamHelper.cpp">
+      <Filter>BoostWrappers 源文件\Detail\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageBufferImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageVectorBuffer.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageBufferFactory.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageBuffer.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Data\AddressData.cpp">
+      <Filter>Interface 源文件\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageInterfaceSharedPtrLess.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageManager.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageTypeConditionOperating.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\DoubleMessage.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\NullDoubleMessage.cpp">
+      <Filter>NetworkMessage 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\BufferReceiveStreamImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\BufferSendStreamImpl.cpp">
+      <Filter>NetworkMessage 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\BaseMainManager\StringConversion.cpp">
+      <Filter>ACEWrappers 源文件\Detail\BaseMainManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\SendSocketManager.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Network\NetworkDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Network.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\ACEWrappers.h">
+      <Filter>ACEWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\ACEWrappersFwd.h">
+      <Filter>ACEWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Using\ACEUsing.h">
+      <Filter>ACEWrappers 头文件\Using</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Acceptor\ACESockAcceptor.h">
+      <Filter>ACEWrappers 头文件\Detail\Acceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Acceptor\SockACEHandleSet.h">
+      <Filter>ACEWrappers 头文件\Detail\Acceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Acceptor\SockACEHandleSetIterator.h">
+      <Filter>ACEWrappers 头文件\Detail\Acceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Address\ACESockInetAddress.h">
+      <Filter>ACEWrappers 头文件\Detail\Address</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\BaseMainManager\ACEMainManager.h">
+      <Filter>ACEWrappers 头文件\Detail\BaseMainManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Connector\ACESockConnector.h">
+      <Filter>ACEWrappers 头文件\Detail\Connector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Stream\ACEIovecSockStream.h">
+      <Filter>ACEWrappers 头文件\Detail\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Stream\ACESockStream.h">
+      <Filter>ACEWrappers 头文件\Detail\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\BoostWrappers.h">
+      <Filter>BoostWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\BoostWrappersFwd.h">
+      <Filter>BoostWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Acceptor\BoostSockAcceptor.h">
+      <Filter>BoostWrappers 头文件\Detail\Acceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Address\BoostSockInetAddress.h">
+      <Filter>BoostWrappers 头文件\Detail\Address</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\BoostMainManager.h">
+      <Filter>BoostWrappers 头文件\Detail\BaseMainManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\BoostMainManagerUseThreads.h">
+      <Filter>BoostWrappers 头文件\Detail\BaseMainManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\ExecutorWorkGuardContext.h">
+      <Filter>BoostWrappers 头文件\Detail\BaseMainManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\ExecutorWorkGuardContextThread.h">
+      <Filter>BoostWrappers 头文件\Detail\BaseMainManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Connector\BoostSockConnector.h">
+      <Filter>BoostWrappers 头文件\Detail\Connector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Stream\BoostSockStream.h">
+      <Filter>BoostWrappers 头文件\Detail\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\AnalysisNetworkConfiguration.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Configuration.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationFwd.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationParameter.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationStrategy.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationSubStrategy.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\AnalysisNetworkConfigurationImpl.h">
+      <Filter>Configuration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationIPPort.h">
+      <Filter>Configuration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationParameterImpl.h">
+      <Filter>Configuration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationStrategyFactory.h">
+      <Filter>Configuration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationStrategyImpl.h">
+      <Filter>Configuration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationSubStrategyImpl.h">
+      <Filter>Configuration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Flags\ConfigurationStrategyFlags.h">
+      <Filter>Configuration 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\SockConnector.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\SockStream.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\BaseMainManager.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Client.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\HandleSet.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\HandleSetIterator.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Interface.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\InterfaceFwd.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\SendSocket.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Server.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\SockAcceptor.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\SockAddress.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Data\BufferSendStreamContainer.h">
+      <Filter>Interface 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Data\BufferSendStreamMultiIndexContainer.h">
+      <Filter>Interface 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\CacheClient.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\ClientFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\ClientImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\HandleSetContainer.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\HandleSetFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\HandleSetImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\HandleSetIteratorFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\HandleSetIteratorImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\IterativeServer.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullMainManager.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullSockAcceptor.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullSockAddress.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullSockConnector.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullSockStream.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\OnlySendingClient.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\ReactiveServer.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\ServerFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\ServerImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockAcceptorFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockAcceptorImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockAddressFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockAddressImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockConnectorFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockConnectorImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockStreamFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockStreamImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\StreamContainer.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\BaseMainManagerFactory.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\BaseMainManagerImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\ReceiveMessageLevel.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\SendMessageLevel.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\SocketManager.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\BufferReceiveStream.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\BufferSendStream.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageEventContainer.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageEventManager.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageInterface.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageManager.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageSource.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageTarget.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageTypeCondition.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NetworkMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NetworkMessageEvent.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NetworkMessageFwd.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NullMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageSourceDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageTargetDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageEventManagerImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageManagerImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionAll.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionCompare.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionRange.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageTypeConditionSpecific.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MultiMessageEventContainer.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MultiMessageEventContainerImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\NetworkMessageEventLess.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\PriorityMessageEventContainer.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\ReceiveMessageLevelImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\SendMessageLevelImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\SingleMessageEventContainer.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\SocketManagerImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageEventContainerImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Flags\MessageTypeFlags.h">
+      <Filter>NetworkMessage 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Flags\MessageEventFlags.h">
+      <Filter>NetworkMessage 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\NetworkWrappers.h">
+      <Filter>NetworkWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\NetworkWrappersFwd.h">
+      <Filter>NetworkWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\Acceptor\NetworkSockAcceptor.h">
+      <Filter>NetworkWrappers 头文件\Detail\Acceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\Address\NetworkSockInetAddress.h">
+      <Filter>NetworkWrappers 头文件\Detail\Address</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\BaseMainManager\NetworkMainManager.h">
+      <Filter>NetworkWrappers 头文件\Detail\BaseMainManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\Connector\NetworkSockConnector.h">
+      <Filter>NetworkWrappers 头文件\Detail\Connector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\Stream\NetworkSockStream.h">
+      <Filter>NetworkWrappers 头文件\Detail\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Openssl\Openssl.h">
+      <Filter>Openssl 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Openssl\OpensslFwd.h">
+      <Filter>Openssl 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\SocketWrappers\SocketWrappers.h">
+      <Filter>SocketWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\SocketWrappers\SocketWrappersFwd.h">
+      <Filter>SocketWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\BoostMainManagerUseMultiContext.h">
+      <Filter>BoostWrappers 头文件\Detail\BaseMainManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\NetworkInternalFwd.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Acceptor\BoostSockAcceptorHelper.h">
+      <Filter>BoostWrappers 头文件\Detail\Acceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Connector\BoostSockConnectorHelper.h">
+      <Filter>BoostWrappers 头文件\Detail\Connector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Flags\MessageLengthFlags.h">
+      <Filter>NetworkMessage 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Stream\BoostFixedSockStream.h">
+      <Filter>BoostWrappers 头文件\Detail\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Stream\BoostSegmentationSockStream.h">
+      <Filter>BoostWrappers 头文件\Detail\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Stream\BoostSockStreamHelper.h">
+      <Filter>BoostWrappers 头文件\Detail\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageBufferImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageArrayBuffer.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageVectorBuffer.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageArrayBufferDetail.h">
+      <Filter>NetworkMessage 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageBufferFactory.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageBuffer.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Flags\StreamFlags.h">
+      <Filter>Interface 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Data\AddressData.h">
+      <Filter>Interface 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NetworkMessageInternalFwd.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageInterfaceSharedPtrLess.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageTypeConditionOperating.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerMessageDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\DoubleMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NullDoubleMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringMessageDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageCast.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageContainer.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageContainerDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageElement.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageSize.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageInitValueDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageInitValue.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageStreamingSize.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageStreamingSizeDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageStreamingSave.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageStreamingSaveDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageStreamingLoadDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageStreamingLoad.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageContainer.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageContainerDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerDoubleMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerDoubleMessageDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringDoubleMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringDoubleMessageDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleDoubleMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleDoubleMessageDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageContainerGroup.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageContainerGroupDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageContainerGroup.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageContainerGroupDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\BufferReceiveStreamImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\BufferSendStreamImpl.h">
+      <Filter>NetworkMessage 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Helper\StreamMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\BaseMainManager\StringConversion.h">
+      <Filter>ACEWrappers 头文件\Detail\BaseMainManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\SendSocketManager.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

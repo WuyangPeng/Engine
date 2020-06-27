@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 16:49)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 14:32)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
@@ -14,7 +14,7 @@
 
 template <typename ResultConstIter>
 Mathematics::EquationResultConstIterator<ResultConstIter>
-	::EquationResultConstIterator() 
+	::EquationResultConstIterator()
 	:m_Iter{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -22,7 +22,7 @@ Mathematics::EquationResultConstIterator<ResultConstIter>
 
 template <typename ResultConstIter>
 Mathematics::EquationResultConstIterator<ResultConstIter>
-	::EquationResultConstIterator(const ResultConstIter& iter) 
+	::EquationResultConstIterator(const ResultConstIter& iter)
 	:m_Iter{ iter }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -48,7 +48,7 @@ void Mathematics::EquationResultConstIterator<ResultConstIter>
 
 template <typename ResultConstIter>
 bool Mathematics::EquationResultConstIterator<ResultConstIter>
-	::equal( const ClassType& other ) const
+	::equal(const ClassType& other) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -65,7 +65,7 @@ const ResultConstIter& Mathematics::EquationResultConstIterator<ResultConstIter>
 }
 
 template <typename ResultConstIter>
-typename const ResultConstIter::value_type Mathematics::EquationResultConstIterator<ResultConstIter>
+const typename ResultConstIter::value_type Mathematics::EquationResultConstIterator<ResultConstIter>
 	::operator*() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -75,7 +75,7 @@ typename const ResultConstIter::value_type Mathematics::EquationResultConstItera
 
 template <typename ResultConstIter>
 std::ostream& Mathematics
-	::operator<<( std::ostream& os,  const EquationResultConstIterator<ResultConstIter>& iter )
+	::operator<<(std::ostream& os, const EquationResultConstIterator<ResultConstIter>& iter)
 {
 	os << *iter;
 

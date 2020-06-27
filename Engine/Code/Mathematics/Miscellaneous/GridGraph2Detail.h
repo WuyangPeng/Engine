@@ -96,7 +96,7 @@ namespace Mathematics
 			vertex.Predecessor = -1;
 			mPending[i] = i;
 		}
-		mVertices[GetIndex(x0, y0)].Estimate = Real{};
+		mVertices[GetIndex(x0, y0)].Estimate = Math<Real>::sm_Zero;
 
 		mNumProcessed = 0;
 		if (RelaxationCallback)

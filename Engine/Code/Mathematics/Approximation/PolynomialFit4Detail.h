@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 13:33)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 14:30)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_DETAIL_H
@@ -17,19 +17,18 @@
 template <typename Real>
 Mathematics::PolynomialFit4<Real>
 	::PolynomialFit4(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples,
-			         const Samples& wSamples, int xDegree, int yDegree, int zDegree)
+					 const Samples& wSamples, size_t xDegree, size_t yDegree, size_t zDegree)
 	:m_Coeff((xDegree + 1) * (yDegree + 1) * (zDegree + 1)), m_SolveSucceed{ false }
 {
-	Calculate(xSamples, ySamples, zSamples, wSamples, xDegree, yDegree, zDegree);
+	Calculate(xSamples, ySamples, zSamples, wSamples,boost::numeric_cast<int>(xDegree), boost::numeric_cast<int>(yDegree), boost::numeric_cast<int>(zDegree));
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-
 template <typename Real>
 void Mathematics::PolynomialFit4<Real>
-	::Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples, 
-	            const Samples& wSamples, int xDegree, int yDegree, int zDegree)
+	::Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples,
+				const Samples& wSamples, int xDegree, int yDegree, int zDegree)
 {
 	auto xBound = xDegree + 1;
 	auto yBound = yDegree + 1;
@@ -47,41 +46,41 @@ void Mathematics::PolynomialFit4<Real>
 
 	auto numSamples = wSamples.size();
 
-    for (auto zDegreeIndex = 0; zDegreeIndex <= zDegree; ++zDegreeIndex)
-    {
+	for (auto zDegreeIndex = 0; zDegreeIndex <= zDegree; ++zDegreeIndex)
+	{
 		for (auto yDegreeIndex = 0; yDegreeIndex <= yDegree; ++yDegreeIndex)
-        {
+		{
 			for (auto xDegreeIndex = 0; xDegreeIndex <= xDegree; ++xDegreeIndex)
-            {
+			{
 				auto index = xDegreeIndex + xBound * (yDegreeIndex + yBound * zDegreeIndex);
-				inputVector[index] = Real{ };
-                for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
-                {
-					inputVector[index] += wSamples[samplesIndex] *  xPower(samplesIndex,xDegreeIndex) *  yPower(samplesIndex, yDegreeIndex) * zPower(samplesIndex, zDegreeIndex);
-                } 
+				inputVector[index] = Math<Real>::sm_Zero;
+				for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
+				{
+					inputVector[index] += wSamples[samplesIndex] * xPower(samplesIndex, xDegreeIndex) *  yPower(samplesIndex, yDegreeIndex) * zPower(samplesIndex, zDegreeIndex);
+				}
 
-                for (auto innerZDegreeIndex = 0; innerZDegreeIndex <= zDegree; ++innerZDegreeIndex)
-                {
+				for (auto innerZDegreeIndex = 0; innerZDegreeIndex <= zDegree; ++innerZDegreeIndex)
+				{
 					for (auto innerYDegreeIndex = 0; innerYDegreeIndex <= yDegree; ++innerYDegreeIndex)
-                    {
+					{
 						for (auto innerXDegreeIndex = 0; innerXDegreeIndex <= xDegree; ++innerXDegreeIndex)
-                        {
+						{
 							auto innerIndex = innerXDegreeIndex + xBound * (innerYDegreeIndex + yBound * innerZDegreeIndex);
-							Real sum { };
-                            for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
-                            {
+							auto sum = Math<Real>::sm_Zero;
+							for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
+							{
 								sum += xPower(samplesIndex, xDegreeIndex + innerXDegreeIndex) *
-									   yPower(samplesIndex,yDegreeIndex + innerYDegreeIndex) *
+									   yPower(samplesIndex, yDegreeIndex + innerYDegreeIndex) *
 									   zPower(samplesIndex, zDegreeIndex + innerZDegreeIndex);
-                            }
+							}
 
 							matrix(index, innerIndex) = sum;
-                        }
-                    }
-                }
-            }
-        }
-    }
+						}
+					}
+				}
+			}
+		}
+	}
 
 	try
 	{
@@ -101,7 +100,7 @@ void Mathematics::PolynomialFit4<Real>
 			<< error
 			<< CoreTools::LogAppenderIOManageSign::Refresh;
 	}
-} 
+}
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>

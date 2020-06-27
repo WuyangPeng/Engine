@@ -15,7 +15,7 @@ using std::ostream;
 using std::make_shared;
 
 CoreTools::EquilongReportOutput
-	::EquilongReportOutput(int borderLineLength, ostream* osPtr)
+	::EquilongReportOutput(int borderLineLength, const OStreamShared& osPtr)
 	:m_Impl{ make_shared<ImplType>(borderLineLength,osPtr) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

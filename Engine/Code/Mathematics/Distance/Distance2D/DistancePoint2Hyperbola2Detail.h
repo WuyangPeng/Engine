@@ -1,21 +1,21 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 17:54)
+// 引擎版本：0.0.2.5 (2020/03/23 19:21)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_DETAIL_H
 
 #include "DistancePoint2Hyperbola2.h"
+#include "System/Helper/UnusedMacro.h"
 #include "Mathematics/Algebra/Vector2DDetail.h"
 #include "Mathematics/Algebra/Vector2DToolsDetail.h" 
 #include "Mathematics/Distance/DistanceBaseDetail.h"
-#include "System/Helper/UnusedMacro.h"
 
 template <typename Real>
 Mathematics::DistancePoint2Hyperbola2<Real>
-	::DistancePoint2Hyperbola2(const Vector2D& point,  const Vector2D& extent)
+	::DistancePoint2Hyperbola2(const Vector2D& point, const Vector2D& extent)
 	:ParentType{}, m_Point{ point }, m_Extent{ extent }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -33,10 +33,10 @@ template <typename Real>
 bool Mathematics::DistancePoint2Hyperbola2<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Real {} < m_Extent.GetXCoordinate() && Real {} < m_Extent.GetYCoordinate())
+	if (ParentType::IsValid() && Math::sm_Zero < m_Extent.GetXCoordinate() && Math::sm_Zero < m_Extent.GetYCoordinate())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -72,26 +72,26 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 	auto t0 = -extentSquared[0];
 	auto t1 = extentSquared[1];
 	auto tRoot = static_cast<Real>(0.5) * (t0 + t1);
-	auto hyperbolaRoot = GetHyperbola(tRoot,reciprocalExtentSquared);
+	auto hyperbolaRoot = GetHyperbola(tRoot, reciprocalExtentSquared);
 
 	// 迭代直到 H(troot)正好为零或直到一个浮点端点不再改变。 
 	// 后一条件利用IEEE浮点数的性质，因此循环必须以有限数量的步骤终止。
-	auto maximumIterations = GetMaximumIterations();
+	auto maximumIterations = this->GetMaximumIterations();
 	for (auto loop = 0; loop < maximumIterations; ++loop)
 	{
-		if (!Math::Approximate(hyperbolaRoot, Real{}, GetZeroThreshold()) && 
-			!Math::Approximate(tRoot, t0, GetZeroThreshold()) &&
-			!Math::Approximate(tRoot, t1, GetZeroThreshold()))
+		if (!Math::Approximate(hyperbolaRoot, Math::sm_Zero, this->GetZeroThreshold()) &&
+			!Math::Approximate(tRoot, t0, this->GetZeroThreshold()) &&
+			!Math::Approximate(tRoot, t1, this->GetZeroThreshold()))
 		{
 			break;
 		}
 
-		if (Real{} < hyperbolaRoot)
+		if (Math::sm_Zero < hyperbolaRoot)
 		{
 			t0 = tRoot;
 			tRoot = static_cast<Real>(0.5) * (t0 + t1);
 		}
-		else // hyperbolaRoot < Real{}
+		else // hyperbolaRoot < Math<Real>::sm_Zero
 		{
 			t1 = tRoot;
 		}
@@ -101,16 +101,16 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 
 		if (loop + 1 == maximumIterations)
 		{
-			MATHEMATICS_ASSERTION_2(false, "未能迭代所需次数内收敛");			
+			MATHEMATICS_ASSERTION_2(false, "未能迭代所需次数内收敛");
 		}
-	}	 
+	}
 
 	Vector2D closest{ m_Point[0] / (static_cast<Real>(1) + tRoot * reciprocalExtentSquared[0]),
 					  m_Point[1] / (static_cast<Real>(1) - tRoot * reciprocalExtentSquared[1]) };
 
 	auto diff = m_Point - closest;
-	 	
-	return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(diff), Real{}, m_Point, closest };
+
+	return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(diff), Math::sm_Zero, m_Point, closest };
 }
 
 // private
@@ -129,11 +129,11 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 	::GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
- 
+
 	auto movePoint = m_Point.GetMove(t, lhsVelocity);
 
 	ClassType distance{ movePoint, m_Extent };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 
@@ -143,4 +143,3 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_DETAIL_H
- 

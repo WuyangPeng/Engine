@@ -9,15 +9,14 @@
 
 #include "CoreTools/CoreToolsDll.h" 
 
-#include <boost/noncopyable.hpp>
 #include <functional>
 
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-	template<typename T = std::function<void(void)>>
-	class ScopeExit : private boost::noncopyable
+	template<typename T = std::function<void(void)> >
+	class ScopeExit 
 	{
 	public:
 		using ClassType = ScopeExit;
@@ -25,6 +24,11 @@ namespace CoreTools
 	public:
 		explicit ScopeExit(T function) noexcept;
 		~ScopeExit() noexcept;
+
+		ScopeExit(const ScopeExit&) = delete;
+		ScopeExit& operator=(const ScopeExit&) = delete;
+		ScopeExit(ScopeExit&&) noexcept = delete;
+		ScopeExit& operator=(ScopeExit&&) noexcept = delete;
 
 	private:
 		T m_Function;

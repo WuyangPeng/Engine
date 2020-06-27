@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/06 11:13)
+// 引擎版本：0.0.2.5 (2020/03/19 16:47)
 
 #ifndef MATHEMATICS_OBJECTS2D_RAY2_H
 #define MATHEMATICS_OBJECTS2D_RAY2_H
@@ -19,7 +19,7 @@ namespace Mathematics
 	template <typename Real>
 	class Ray2
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Ray2<Real>;
@@ -30,7 +30,7 @@ namespace Mathematics
 		// 射线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t >= 0。
 		// 用户必须确保D是单位长度。
 
-		Ray2 (const Vector2D& origin, const Vector2D& direction,const Real epsilon = Math::sm_ZeroTolerance);
+		Ray2(const Vector2D& origin, const Vector2D& direction, const Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
 

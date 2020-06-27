@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:01)
+// 引擎版本：0.2.0.0 (2020/05/07 15:20)
 
 #ifndef SYSTEM_HELPER_HP_ACC_H
 #define SYSTEM_HELPER_HP_ACC_H
@@ -26,7 +26,7 @@
 			#error "编译器选项“+hpxstd98”是正确支持所必需的"
 		#endif // PA-RISC
 	#endif // 30000 < __HP_aCC && __HP_aCC < 50000
- 
+
 	// HP-UX/ia64的最后已的版本为61300，PA-RISC的最后已的版本为38000 
 	#if ((61300 < __HP_aCC) || ((38000 < __HP_aCC) && defined(__hpxstd98)))
 		#error "未知编译器版本"

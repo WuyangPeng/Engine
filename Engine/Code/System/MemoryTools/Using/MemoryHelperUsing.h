@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:23)
+// 引擎版本：0.2.0.0 (2020/05/09 23:58)
 
 #ifndef SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_USING_H
 #define SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_USING_H
@@ -10,14 +10,14 @@
 #include "System/Helper/Platform.h" 
 
 namespace System
-{	
+{
 #ifdef SYSTEM_PLATFORM_WIN32	
 
-	using MemoryResourceNotificationType = MEMORY_RESOURCE_NOTIFICATION_TYPE; 
+	using MemoryResourceNotificationType = MEMORY_RESOURCE_NOTIFICATION_TYPE;
 
 #else // !SYSTEM_PLATFORM_WIN32	
 
-	enum MemoryResourceNotificationType 
+	enum MemoryResourceNotificationType
 	{
 		LowMemoryResourceNotification,
 		HighMemoryResourceNotification,

@@ -22,7 +22,7 @@ using std::ostream;
 using std::for_each;
 
 CoreTools::SuiteImpl
-	::SuiteImpl(const string& name, ostream* osPtr, bool printRunUnitTest)
+	::SuiteImpl(const string& name, const OStreamShared& osPtr, bool printRunUnitTest)
 	:ParentType{ osPtr }, m_SuiteName{ name }, m_UnitTestCollection{}, m_PrintRunUnitTest{ printRunUnitTest }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_3;
@@ -144,18 +144,7 @@ void CoreTools::SuiteImpl
 	CORE_TOOLS_CLASS_IS_VALID_3;
 
 	for_each(m_UnitTestCollection.begin(), m_UnitTestCollection.end(), std::mem_fn(&UnitTestComposite::ResetTestData));
-}
-
-void CoreTools::SuiteImpl
-	::SetStream(ostream* osPtr)
-{
-	CORE_TOOLS_CLASS_IS_VALID_3;
-	CORE_TOOLS_ASSERTION_0(osPtr != nullptr, "指针无效");
-
-	ParentType::SetStream(osPtr);
-
-	for_each(m_UnitTestCollection.begin(), m_UnitTestCollection.end(), std::bind(&UnitTestComposite::SetStream, std::placeholders::_1, osPtr));
-}
+} 
 
 void CoreTools::SuiteImpl
 	::AddUnitTest(UnitTestPtr unitTest)
@@ -198,7 +187,7 @@ void CoreTools::SuiteImpl
 
 	auto runSuite = "正在运行测试套件 \"" + GetName() + "\"。\n";
 
-	*GetStream() << runSuite;
+	GetStream().GetStream() << runSuite;
 }
 
 

@@ -1,25 +1,23 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:17)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:54)
 
 #include "Framework/FrameworkExport.h"
 
 #include "PerformanceMeasurementsImpl.h"
-#include "System/CharacterString/FormatStringDetail.h"
-#include "System/Time/Using/DeltaTimeUsing.h"
-#include "System/CharacterString/FormatString.h"
+#include "System/Time/Using/DeltaTimeUsing.h" 
+#include "System/Helper/PragmaWarning/Format.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
+using std::array;
+using std::string;
+
 Framework::PerformanceMeasurementsImpl
-	::PerformanceMeasurementsImpl(int maxTimer)
-	:m_CustomTime(),
-	 m_AccumulatedTime(0),
-	 m_FrameCount(0),
-	 m_AccumulatedFrameCount(0),
-	 m_Timer(maxTimer),
-	 m_MaxTimer(maxTimer)
+	::PerformanceMeasurementsImpl(int maxTimer) noexcept
+	:m_CustomTime{ }, m_AccumulatedTime{ 0 }, m_FrameCount{ 0 }, m_AccumulatedFrameCount{ 0 }, m_Timer{ maxTimer }, m_MaxTimer{ maxTimer }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -28,16 +26,11 @@ Framework::PerformanceMeasurementsImpl
 bool Framework::PerformanceMeasurementsImpl
 	::IsValid() const noexcept
 {
-	if(0 <= m_AccumulatedTime &&
-	   0 <= m_FrameCount &&
-	   0 <= m_AccumulatedFrameCount &&
-	   0 <= m_Timer &&
-	   0 <= m_MaxTimer)
-	    return true;
+	if (0 <= m_AccumulatedTime && 0 <= m_FrameCount && 0 <= m_AccumulatedFrameCount && 0 <= m_Timer && 0 <= m_MaxTimer)
+		return true;
 	else
 		return false;
 }
-
 #endif // OPEN_CLASS_INVARIANT
 
 double Framework::PerformanceMeasurementsImpl
@@ -45,14 +38,25 @@ double Framework::PerformanceMeasurementsImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	if (0 < m_AccumulatedTime)	
-		return m_AccumulatedFrameCount / static_cast<double>(m_AccumulatedTime) * System::g_Microseconds;
-	else	
-		return  0.0;	
+	if (0 < m_AccumulatedTime)
+		return m_AccumulatedFrameCount / boost::numeric_cast<double>(m_AccumulatedTime) * System::g_Millisecond;
+	else
+		return 0.0;
+}
+
+string Framework::PerformanceMeasurementsImpl
+	::GetFrameRateMessage() const
+{
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+	boost::format message{ "fps: %.2lf" };
+	message % GetFrameRate();
+
+	return message.str();
 }
 
 void Framework::PerformanceMeasurementsImpl
-	::ResetTime()
+	::ResetTime() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -65,13 +69,13 @@ void Framework::PerformanceMeasurementsImpl
 }
 
 void Framework::PerformanceMeasurementsImpl
-	::MeasureTime()
+	::MeasureTime() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	if (--m_Timer == 0)
-	{		
-		int64_t delta = m_CustomTime.GetThisElapsedMillisecondTime();
+	{
+		const auto delta = m_CustomTime.GetThisElapsedMillisecondTime();
 		m_AccumulatedTime += delta;
 		m_AccumulatedFrameCount += m_FrameCount;
 		m_FrameCount = 0;
@@ -80,24 +84,13 @@ void Framework::PerformanceMeasurementsImpl
 }
 
 void Framework::PerformanceMeasurementsImpl
-	::UpdateFrameCount()
+	::UpdateFrameCount() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	 ++m_FrameCount;
+	++m_FrameCount;
 }
 
-std::string Framework::PerformanceMeasurementsImpl
-	::GetFrameRateMessage() const
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	const int size = 256;
-
-	char message[size];
-	System::SNPrintf(message, size, size, "fps: %.1lf", GetFrameRate());
-
-	return message;
-}
 
 

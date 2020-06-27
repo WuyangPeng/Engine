@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/05 11:22)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 13:04)
 
 #ifndef MATHEMATICS_ALGEBRA_EULER_DETAIL_H
 #define MATHEMATICS_ALGEBRA_EULER_DETAIL_H
@@ -18,8 +18,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Euler<Real>	
-	::Euler(ExtractEulerResultType type, ExtractEulerResultOrder order,Real x0Angle,Real y0Angle,Real z0Angle,Real x1Angle,Real y1Angle,Real z1Angle)
+Mathematics::Euler<Real>
+	::Euler(ExtractEulerResultType type, ExtractEulerResultOrder order, Real x0Angle, Real y0Angle, Real z0Angle, Real x1Angle, Real y1Angle, Real z1Angle)
 	:m_Type{ type }, m_Order{ order }, m_X0Angle{ x0Angle }, m_Y0Angle{ y0Angle },
 	 m_Z0Angle{ z0Angle }, m_X1Angle{ x1Angle }, m_Y1Angle{ y1Angle }, m_Z1Angle{ z1Angle }
 {
@@ -46,82 +46,82 @@ bool Mathematics::Euler<Real>
 	}
 }
 #endif	// OPEN_CLASS_INVARIANT
- 
+
 template <typename Real>
 Mathematics::ExtractEulerResultType Mathematics::Euler<Real>
 	::GetType() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Type;
+	return m_Type;
 }
 
 template <typename Real>
 Mathematics::ExtractEulerResultOrder Mathematics::Euler<Real>
 	::GetOrder() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Order;
+	return m_Order;
 }
- 
+
 template <typename Real>
 Real Mathematics::Euler<Real>
 	::GetX0Angle() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_X0Angle;
+	return m_X0Angle;
 }
 
 template <typename Real>
 Real Mathematics::Euler<Real>
-	:: GetY0Angle() const
+	::GetY0Angle() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Y0Angle;
+	return m_Y0Angle;
 }
 
 template <typename Real>
 Real Mathematics::Euler<Real>
 	::GetZ0Angle() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Z0Angle;
+	return m_Z0Angle;
 }
 
 template <typename Real>
 Real Mathematics::Euler<Real>
 	::GetX1Angle() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_X1Angle;
+	return m_X1Angle;
 }
 
 template <typename Real>
 Real Mathematics::Euler<Real>
 	::GetY1Angle() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Y1Angle;
+	return m_Y1Angle;
 }
 
 template <typename Real>
 Real Mathematics::Euler<Real>
 	::GetZ1Angle() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Z1Angle;
+	return m_Z1Angle;
 }
 
 template <typename Real>
 Real Mathematics::Euler<Real>
-	::GetAngle(MatrixRotationAxis axisIndex) const 
+	::GetAngle(MatrixRotationAxis axisIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -130,7 +130,7 @@ Real Mathematics::Euler<Real>
 	case Mathematics::MatrixRotationAxis::X:
 		return m_X0Angle;
 	case Mathematics::MatrixRotationAxis::Y:
-		return m_Y0Angle;	 
+		return m_Y0Angle;
 	default:
 		return m_Z0Angle;
 	}
@@ -138,7 +138,7 @@ Real Mathematics::Euler<Real>
 
 template <typename Real>
 void Mathematics::Euler<Real>
-	::SetAngle(MatrixRotationAxis axisIndex, Real angle) 
+	::SetAngle(MatrixRotationAxis axisIndex, Real angle)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -149,7 +149,7 @@ void Mathematics::Euler<Real>
 		break;
 	case Mathematics::MatrixRotationAxis::Y:
 		m_Y0Angle = angle;
-		break; 
+		break;
 	default:
 		m_Z0Angle = angle;
 		break;

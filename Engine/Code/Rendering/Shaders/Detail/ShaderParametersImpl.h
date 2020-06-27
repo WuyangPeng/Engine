@@ -12,6 +12,8 @@
 #include "Rendering/Resources/Texture.h"
 #include "Rendering/Shaders/ShaderBase.h"
 #include "Rendering/ShaderFloats/ShaderFloat.h"
+#include "Rendering/SceneGraph/Camera.h"
+#include "Rendering/SceneGraph/Visual.h"
 
 #include <vector>
 #include <string>
@@ -83,7 +85,7 @@ namespace Rendering
 		const ConstTextureSmartPointer GetTexture(int handle) const;
 		
 		// 更新着色器常量在绘制调用期间。
-		void UpdateConstants (const Visual* visual, const Camera* camera);
+		void UpdateConstants (const VisualSmartPointer& visual, const CameraSmartPointer& camera);
 
 	private:
 		void Swap(ShaderParametersImpl& rhs);

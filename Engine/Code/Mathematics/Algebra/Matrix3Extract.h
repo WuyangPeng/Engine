@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 11:06)
+// 引擎版本：0.0.2.5 (2020/03/19 10:13)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_EXTRACT_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_EXTRACT_H
@@ -16,17 +16,17 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class Matrix3Extract  
+	class Matrix3Extract
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Matrix3Extract<Real>;
-		using Vector3D = Vector3D<Real>;	
+		using Vector3D = Vector3D<Real>;
 
 	public:
-		Matrix3Extract (Real angle,const Vector3D& axis);
-	
+		Matrix3Extract(Real angle, const Vector3D& axis);
+
 		CLASS_INVARIANT_DECLARE;
 
 		Real GetAngle() const;

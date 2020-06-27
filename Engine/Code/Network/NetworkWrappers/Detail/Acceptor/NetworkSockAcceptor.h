@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/02 10:16)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 16:28)
 
 #ifndef NETWORK_NETWORK_WRAPPERS_NETWORK_SOCK_ACCEPTOR_H
 #define NETWORK_NETWORK_WRAPPERS_NETWORK_SOCK_ACCEPTOR_H
@@ -12,7 +12,7 @@
 #include "Network/Interface/Detail/SockAcceptorImpl.h"
 
 namespace Network
-{	
+{
 	class NETWORK_HIDDEN_DECLARE NetworkSockAcceptor : public SockAcceptorImpl
 	{
 	public:
@@ -25,13 +25,13 @@ namespace Network
 		virtual ~NetworkSockAcceptor();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
+
 		virtual bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 		virtual bool Accept(const SockStreamSharedPtr& sockStream) override;
 
 		virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
 		virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
-		
+
 		virtual bool EnableNonBlock() override;
 
 		virtual WinSocketType GetWinSocket() override;
@@ -41,7 +41,7 @@ namespace Network
 
 	private:
 		WinSocketType m_SocketHandle;
-	};	
-} 
+	};
+}
 
 #endif // NETWORK_NETWORK_WRAPPERS_NETWORK_SOCK_ACCEPTOR_H

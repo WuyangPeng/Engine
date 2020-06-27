@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 18:07)
+// 引擎版本：0.0.2.5 (2020/03/24 15:17)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR1_DETAIL_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR1_DETAIL_H
@@ -13,7 +13,7 @@
 
 template <typename Real>
 Mathematics::Intersector1<Real>
-	::Intersector1( Real u0, Real u1, Real v0, Real v1 ,const Real epsilon)
+	::Intersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon)
 	:m_U{}, m_V{}, m_Epsilon{ epsilon }
 {
 	m_U[0] = u0;
@@ -23,7 +23,6 @@ Mathematics::Intersector1<Real>
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-
 
 template <typename Real>
 Mathematics::Intersector1<Real>
@@ -37,32 +36,41 @@ template <typename Real>
 bool Mathematics::Intersector1<Real>
 	::IsValid() const noexcept
 {
-	if(m_U[0] <= m_U[1] && m_V[0] <= m_V[1] && Real{} <= m_Epsilon)
+	if (m_U[0] <= m_U[1] && m_V[0] <= m_V[1] && Math::sm_Zero <= m_Epsilon)
 		return true;
 	else
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
- 
 
 template <typename Real>
 Real Mathematics::Intersector1<Real>
-	::GetU( int index ) const
+	::GetU(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < sm_Size,"索引越界！\n");
-
-	return m_U[index];
+	if (0 <= index && index < sm_Size)
+	{
+		return m_U[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"));
+	}
 }
- 
+
 template <typename Real>
 Real Mathematics::Intersector1<Real>
-	::GetV( int index ) const
+	::GetV(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < sm_Size,"索引越界！\n");
-
-	return m_V[index];
+	if (0 <= index && index < sm_Size)
+	{
+		return m_V[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"));
+	}
 }
 
 template <typename Real>

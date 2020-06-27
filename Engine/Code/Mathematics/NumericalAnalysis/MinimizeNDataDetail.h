@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/09 17:20)
+// 引擎版本：0.0.2.5 (2020/03/20 14:50)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_DETAIL_H
@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::MinimizeNData<Real>
@@ -68,7 +68,7 @@ Real Mathematics::MinimizeNData<Real>
 
 template <typename Real>
 Real Mathematics::MinimizeNData<Real>
-	::GetMinLocation(int index) const 
+	::GetMinLocation(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < static_cast<int>(m_MinLocation.size()), "索引错误");

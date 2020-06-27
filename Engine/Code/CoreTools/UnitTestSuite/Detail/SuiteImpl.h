@@ -18,6 +18,8 @@
 
 namespace CoreTools
 {
+	class OStreamShared;
+
 	class CORE_TOOLS_HIDDEN_DECLARE SuiteImpl : public UnitTestComposite
 	{
 	public:
@@ -26,7 +28,7 @@ namespace CoreTools
 		using UnitTestPtr = std::shared_ptr<UnitTestComposite>;
 
 	public:
-		explicit SuiteImpl(const std::string& name, std::ostream* osPtr = &std::cout, bool printRunUnitTest = false);
+		explicit SuiteImpl(const std::string& name, const OStreamShared& osPtr, bool printRunUnitTest);
 
 #ifdef OPEN_CLASS_INVARIANT
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
@@ -41,8 +43,7 @@ namespace CoreTools
 		virtual int GetErrorNumber() const noexcept override;
 		virtual const std::string GetName() const override;
 
-		virtual void ClearUnitTestCollection() override;
-		virtual void SetStream(std::ostream* osPtr) override;
+		virtual void ClearUnitTestCollection() override; 
 		virtual void AddUnitTest(UnitTestPtr unitTest) override;
 		virtual void RunUnitTest() override;
 

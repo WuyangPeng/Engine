@@ -1,36 +1,36 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/31 14:30)
-
+// 引擎版本：0.0.2.4 (2020/03/11 15:51)
 
 #include "Network/NetworkExport.h" 
 
 #include "BoostSockAcceptor.h"
 #include "BoostSockAcceptorHelper.h" 
-#include "CoreTools/MessageEvent/EventInterface.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/Interface/Data/AddressData.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::move;
 using std::string;
 using std::to_string;
+using namespace std::literals;
 using boost::numeric_cast;
 using boost::asio::ip::make_address;
-using TcpType = boost::asio::ip::tcp; 
+using TcpType = boost::asio::ip::tcp;
 
 namespace
 {
-	const System::String g_SynchronizeAcceptDescription{ SYSTEM_TEXT("准备进行同步接受，地址：") };
-	const System::String g_AsynchronousAcceptDescription{ SYSTEM_TEXT("准备进行异步接受，地址：") };
-	const System::String g_SynchronizeAcceptSuccessDescription{ SYSTEM_TEXT("同步接受成功，地址：") };
+	const auto g_SynchronizeAcceptDescription = SYSTEM_TEXT("准备进行同步接受，地址："s);
+	const auto g_AsynchronousAcceptDescription = SYSTEM_TEXT("准备进行异步接受，地址："s);
+	const auto g_SynchronizeAcceptSuccessDescription = SYSTEM_TEXT("同步接受成功，地址："s);
 }
 
 Network::BoostSockAcceptor

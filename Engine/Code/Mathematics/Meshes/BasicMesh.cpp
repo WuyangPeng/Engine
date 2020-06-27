@@ -40,7 +40,7 @@ Mathematics::BasicMesh
     mIsValid = true;
 
     // Dynamically construct triangle mesh from input.
-    mVertices = NEW1<Vertex>(mNumVertices);
+    mVertices = NEW1<Vertex>(mNumVertices);	
     mEdges = NEW1<Edge>(3*mNumTriangles);
     mTriangles = NEW1<Triangle>(mNumTriangles);
     std::map<EdgeKey,int> edgeMap;
@@ -54,73 +54,80 @@ Mathematics::BasicMesh
 
         // Add edges to mesh.
         for (int i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
-        {
-            // Update vertices.
-            mVertices[tri.V[i1]].InsertTriangle(t);
+        {            
+			if (mVertices != nullptr && mTriangles != nullptr)
+			{
+				// Update vertices.
+				mVertices[tri.V[i1]].InsertTriangle(t);
 
-            EdgeKey key(tri.V[i0], tri.V[i1]);
-            std::map<EdgeKey,int>::iterator eiter = edgeMap.find(key);
-            if (eiter == edgeMap.end())
-            {
-                // First time edge encountered.
-                edgeMap[key] = mNumEdges;
+				EdgeKey key(tri.V[i0], tri.V[i1]);
+				std::map<EdgeKey, int>::iterator eiter = edgeMap.find(key);
+				if (eiter == edgeMap.end())
+				{
+					// First time edge encountered.
+					edgeMap[key] = mNumEdges;
 
-                // Update edge.
-                Edge& edge = mEdges[mNumEdges];
-                edge.V[0] = tri.V[i0];
-                edge.V[1] = tri.V[i1];
-                edge.T[0] = t;
+					// Update edge.
+					Edge& edge = mEdges[mNumEdges];
+					edge.V[0] = tri.V[i0];
+					edge.V[1] = tri.V[i1];
+					edge.T[0] = t;
 
-                // Update vertices.
-                mVertices[edge.V[0]].InsertEdge(edge.V[1],
-                    mNumEdges);
-                mVertices[edge.V[1]].InsertEdge(edge.V[0],
-                    mNumEdges);
+					// Update vertices.
+					mVertices[edge.V[0]].InsertEdge(edge.V[1],
+													mNumEdges);
+					mVertices[edge.V[1]].InsertEdge(edge.V[0],
+													mNumEdges);
 
-                // Update triangle.
-                tri.E[i0] = mNumEdges;
+					// Update triangle.
+					tri.E[i0] = mNumEdges;
 
-                ++mNumEdges;
-            }
-            else
-            {
-                // Second time edge encountered.
-                int e = eiter->second;
-                Edge& edge = mEdges[e];
+					++mNumEdges;
+				}
+				else
+				{
+					// Second time edge encountered.
+					int e = eiter->second;
+					Edge& edge = mEdges[e];
 
-                // update edge
-                MATHEMATICS_ASSERTION_0(edge.T[1] == -1, "Mesh must be manifold\n");
-                if (edge.T[1] != -1)
-                {
-                    DELETE1(mVertices);
-                    DELETE1(mEdges);
-                    DELETE1(mTriangles);
-                    mNumVertices = 0;
-                    mNumEdges = 0;
-                    mNumTriangles = 0;
-                    mVertices = 0;
-                    mEdges = 0;
-                    mTriangles = 0;
-                    mPoints = 0;
-                    mIndices = 0;
-                    mIsValid = false;
-                }
-                edge.T[1] = t;
+					// update edge
+					MATHEMATICS_ASSERTION_0(edge.T[1] == -1, "Mesh must be manifold\n");
+					if (edge.T[1] != -1)
+					{
+						DELETE1(mVertices);
+						DELETE1(mEdges);
+						DELETE1(mTriangles);
+						mNumVertices = 0;
+						mNumEdges = 0;
+						mNumTriangles = 0;
+						mVertices = 0;
+						mEdges = 0;
+						mTriangles = 0;
+						mPoints = 0;
+						mIndices = 0;
+						mIsValid = false;
+					}
+					edge.T[1] = t;
 
-                // Update triangles.
-                int a = edge.T[0];
-                Triangle& adj = mTriangles[a];
-                for (int j = 0; j < 3; ++j)
-                {
-                    if (adj.E[j] == e)
-                    {
-                        adj.T[j] = t;
-                        break;
-                    }
-                }
-                tri.E[i0] = e;
-                tri.T[i0] = a;
-            }
+					// Update triangles.
+					int a = edge.T[0];
+					if (mTriangles != nullptr)
+					{
+						Triangle& adj = mTriangles[a];
+						for (int j = 0; j < 3; ++j)
+						{
+							if (adj.E[j] == e)
+							{
+								adj.T[j] = t;
+								break;
+							}
+						}
+						tri.E[i0] = e;
+						tri.T[i0] = a;
+					}
+					
+				}
+			}                
         }
     }
 }
@@ -221,6 +228,7 @@ void Mathematics::BasicMesh::Vertex
 
 Mathematics::BasicMesh::Edge
 	::Edge ()
+	:V{}, T{}
 {
     for (int i = 0; i < 2; ++i)
     {
@@ -235,6 +243,7 @@ Mathematics::BasicMesh::Edge
 
 Mathematics::BasicMesh::Triangle
 	::Triangle ()
+	:E{}, V{}, T{}
 {
     for (int i = 0; i < 3; ++i)
     {

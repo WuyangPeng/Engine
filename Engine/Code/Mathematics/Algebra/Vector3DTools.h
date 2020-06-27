@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 14:06)
+// 引擎版本：0.0.2.5 (2020/03/19 10:18)
 
 // 3D向量工具类的声明
 // 当向量存储的值为浮点数时，比较两向量相等，
@@ -17,8 +17,8 @@
 #include "AxesAlignBoundingBox3D.h"
 #include "Vector3DOrthonormalize.h"
 #include "Vector3DOrthonormalBasis.h"
-#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/DataTypes/Tuple.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
 #include <iosfwd>
@@ -34,74 +34,74 @@ namespace Mathematics
 
 		using ClassType = Vector3DTools<Real>;
 		using Vector3D = Vector3D<Real>;
-		using Function = Real (*)(Real);
+		using Function = Real(*)(Real);
 		using Math = Math<Real>;
-		using Vector3DTuple = CoreTools::Tuple<3,Vector3D>;
+		using Vector3DTuple = CoreTools::Tuple<3, Vector3D>;
 		using AxesAlignBoundingBox3D = AxesAlignBoundingBox3D<Real>;
 		using Vector3DOrthonormalize = Vector3DOrthonormalize<Real>;
 		using Vector3DOrthonormalBasis = Vector3DOrthonormalBasis<Real>;
 
 	public:
-		static bool Approximate(const Vector3D& lhs,const Vector3D& rhs,
+		static bool Approximate(const Vector3D& lhs, const Vector3D& rhs,
 								const Real epsilon = Math::sm_ZeroTolerance) noexcept;
 
 		static Real VectorMagnitude(const Vector3D& vector) noexcept;
 		static Real VectorMagnitudeSquared(const Vector3D& vector) noexcept;
-		static Real DotProduct(const Vector3D& lhs,const Vector3D& rhs);
+		static Real DotProduct(const Vector3D& lhs, const Vector3D& rhs);
 
 		// 叉积使用的是右手的规则计算。 
 		// 请注意，某些图形API使用左手的规则。 
 		// 如果你计算叉积使用这些函数，并将结果发送给一个期望用左手的API，
 		// 您将需要更改的矢量符号（替换每个组件值c为-c）。
-		static const Vector3D CrossProduct(const Vector3D& lhs,const Vector3D& rhs) noexcept;
-		static const Vector3D CrossProductWithReduceMultiplication(const Vector3D& lhs,const Vector3D& rhs);
-		static const Vector3D UnitCrossProduct(const Vector3D& lhs,const Vector3D& rhs,
-								               const Real epsilon = Math::sm_ZeroTolerance);		
+		static const Vector3D CrossProduct(const Vector3D& lhs, const Vector3D& rhs) noexcept;
+		static const Vector3D CrossProductWithReduceMultiplication(const Vector3D& lhs, const Vector3D& rhs);
+		static const Vector3D UnitCrossProduct(const Vector3D& lhs, const Vector3D& rhs,
+											   const Real epsilon = Math::sm_ZeroTolerance);
 
 		static Real Distance(const Vector3D& lhs, const Vector3D& rhs);
 		static Real DistanceSquared(const Vector3D& lhs, const Vector3D& rhs);
-		static const Vector3D ParallelVectorLhsToRhs (const Vector3D& lhs, const Vector3D& rhs,const Real epsilon = Math::sm_ZeroTolerance);
-		static const Vector3D ApeakVectorLhsToRhs(const Vector3D& lhs, const Vector3D& rhs,const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector3D ParallelVectorLhsToRhs(const Vector3D& lhs, const Vector3D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector3D ApeakVectorLhsToRhs(const Vector3D& lhs, const Vector3D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
 		static const Vector3D ReflectionVector(const Vector3D& ray, const Vector3D& normal);
-		static const Vector3D RefractionVector(const Vector3D& ray, const Vector3D& normal,Real consistencyRatio);
-		static const Vector3D FeatheringOutZAxes(const Vector3D& vector,Function function);
-		static const Vector3D TwistZAxes(const Vector3D& vector,Function function);
-		static const Vector3D BendYAxes(const Vector3D& vector,Real curvatureRadius,Real bendCenter,Real bendAreaMin,Real bendAreaMax);
-		static Real ScalarTripleProduct(const Vector3D& lhs,const Vector3D& mhs,const Vector3D& rhs);
-		static Real GetVectorIncludedAngle(const Vector3D& lhs,const Vector3D& rhs);
+		static const Vector3D RefractionVector(const Vector3D& ray, const Vector3D& normal, Real consistencyRatio);
+		static const Vector3D FeatheringOutZAxes(const Vector3D& vector, Function function);
+		static const Vector3D TwistZAxes(const Vector3D& vector, Function function);
+		static const Vector3D BendYAxes(const Vector3D& vector, Real curvatureRadius, Real bendCenter, Real bendAreaMin, Real bendAreaMax);
+		static Real ScalarTripleProduct(const Vector3D& lhs, const Vector3D& mhs, const Vector3D& rhs);
+		static Real GetVectorIncludedAngle(const Vector3D& lhs, const Vector3D& rhs);
 
 		// 计算点的轴对齐包围盒。
-		static const AxesAlignBoundingBox3D	ComputeExtremes (const std::vector<Vector3D>& vectors);
+		static const AxesAlignBoundingBox3D	ComputeExtremes(const std::vector<Vector3D>& vectors);
 
 		// Gram-Schmidt正交化. 
 		// 以线性无关的向量U、V和W，来计算一个正交组（单位长度，相互垂直）。
 		static const Vector3DOrthonormalize Orthonormalize(const Vector3D& lhs, const Vector3D& mhs, const Vector3D& rhs,
 														   const Real epsilon = Math::sm_ZeroTolerance);
-		static const Vector3DOrthonormalize Orthonormalize(const std::vector<Vector3D> vectors,const Real epsilon = Math::sm_ZeroTolerance);
-	
+		static const Vector3DOrthonormalize Orthonormalize(const std::vector<Vector3D> vectors, const Real epsilon = Math::sm_ZeroTolerance);
+
 		// 输入值nonzeroVector（W）必须是一个非零向量。
 		// 返回值是一个标准正交基{U，V, W}。
 		// 返回的W为通过此函数正则化的nonzeroVector。
 		// 如果你已知W是单位长度，使用GenerateComplementBasis来计算U和V。
-		static const Vector3DOrthonormalBasis  GenerateOrthonormalBasis (const Vector3D& nonzeroVector,const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector3DOrthonormalBasis  GenerateOrthonormalBasis(const Vector3D& nonzeroVector, const Real epsilon = Math::sm_ZeroTolerance);
 
 		// 输入值nonzeroVector（W）必须是一个单位向量。
 		// 返回值中的向量{U,V}是单位长度且互相垂直，
 		// 且{U,V,W}是一个标准正交基。
-		static const Vector3DOrthonormalBasis GenerateComplementBasis (const Vector3D& unitVector,const Real epsilon = Math::sm_ZeroTolerance);		
+		static const Vector3DOrthonormalBasis GenerateComplementBasis(const Vector3D& unitVector, const Real epsilon = Math::sm_ZeroTolerance);
 	};
 
 	// STL
 	template <typename Real>
-	bool operator== (const Vector3D<Real>& lhs,const Vector3D<Real>& rhs);	
+	bool operator== (const Vector3D<Real>& lhs, const Vector3D<Real>& rhs);
 
 	template <typename Real>
-	bool operator< (const Vector3D<Real>& lhs,const Vector3D<Real>& rhs);	
+	bool operator< (const Vector3D<Real>& lhs, const Vector3D<Real>& rhs);
 
 	// 调试输出。
 	template <typename Real>
 	std::ostream& operator<< (std::ostream& outFile, const Vector3D<Real>& vector);
-	
+
 	using Vector3DToolsf = Vector3DTools<float>;
 	using Vector3DToolsd = Vector3DTools<double>;
 }

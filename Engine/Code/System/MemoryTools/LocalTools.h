@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:23)
+// 引擎版本：0.2.0.0 (2020/05/10 0:08)
 
 #ifndef SYSTEM_MEMORY_TOOLS_LOCAL_TOOLS_H
 #define SYSTEM_MEMORY_TOOLS_LOCAL_TOOLS_H
@@ -18,7 +18,7 @@ namespace System
 	// Local函数具有更大的开销并且提供比其他存储器管理函数更少的特征。
 
 	bool SYSTEM_DEFAULT_DECLARE LocalMemoryFree(WindowHLocal& memory) noexcept;
-	WindowHLocal SYSTEM_DEFAULT_DECLARE LocalMemoryAlloc(LocalMemory flags, WindowSize bytes) noexcept; 
+	WindowHLocal SYSTEM_DEFAULT_DECLARE LocalMemoryAlloc(LocalMemory flags, WindowSize bytes) noexcept;
 	WindowVoidPtr SYSTEM_DEFAULT_DECLARE LocalMemoryLock(WindowHLocal& memory) noexcept;
 	bool SYSTEM_DEFAULT_DECLARE LocalMemoryUnlock(WindowHLocal& memory) noexcept;
 	WindowHLocal SYSTEM_DEFAULT_DECLARE GetLocalMemoryHandle(WindowConstVoidPtr memory) noexcept;

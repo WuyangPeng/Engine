@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 13:26)
+// 引擎版本：0.0.2.5 (2020/03/20 10:16)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H
@@ -14,21 +14,21 @@
 #include "IntegerDataOperatorDetail.h"
 #include "IntegerMultiplicationDetail.h"
 #include "IntegerDivisionMultipleDetail.h"
+#include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "System/Helper/UnusedMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <int N>
 Mathematics::IntegerDivisionModulo<N>
-	::IntegerDivisionModulo( const IntegerData& division,const IntegerData& modulo )
+	::IntegerDivisionModulo(const IntegerData& division, const IntegerData& modulo)
 	:m_Numerator{ division }, m_Denominator{ modulo }, m_AbsNumerator{ IntegerDataAnalysis(m_Numerator).GetAbsoluteValue() },
 	 m_AbsDenominator{ IntegerDataAnalysis(m_Denominator).GetAbsoluteValue() }, m_Quotient{}, m_Remainder{}
 {
 	if (!m_Numerator.IsZero() && !m_Denominator.IsZero())
-	{	
+	{
 		Calculate();
 	}
 
@@ -39,14 +39,14 @@ Mathematics::IntegerDivisionModulo<N>
 template <int N>
 void Mathematics::IntegerDivisionModulo<N>
 	::Calculate()
-{	
+{
 	// 计算中使用绝对值的分子值和分母值。	
-	auto compare = IntegerData::UnsignedDataCompare(m_AbsNumerator,m_AbsDenominator);
+	auto compare = IntegerData::UnsignedDataCompare(m_AbsNumerator, m_AbsDenominator);
 	if (compare == NumericalValueSymbol::Negative)
 	{
 		// 分子 < 分母:  numerator = 0 * denominator + numerator
 		m_Quotient.SetZero();
-		m_Remainder = m_Numerator;		
+		m_Remainder = m_Numerator;
 	}
 	else if (compare == NumericalValueSymbol::Zero)
 	{
@@ -59,26 +59,26 @@ void Mathematics::IntegerDivisionModulo<N>
 		// 分子 > 分母, 使用除法计算商和余数
 		if (IntegerData{ sm_Low } < m_AbsDenominator)
 		{
-			DivisionMultiple();			
+			DivisionMultiple();
 		}
 		else
 		{
-			DivisionSingle();			
+			DivisionSingle();
 		}
 
 		// 应用分子和分母的原始符号。
-		if(m_Numerator.GetSign() != m_Denominator.GetSign())
+		if (m_Numerator.GetSign() != m_Denominator.GetSign())
 		{
 			IntegerDataAmend<N> integerDataAmend{ m_Quotient };
 			integerDataAmend.Negative();
 		}
 
-		if(m_Numerator.GetSign() == NumericalValueSymbol::Negative)
+		if (m_Numerator.GetSign() == NumericalValueSymbol::Negative)
 		{
 			IntegerDataAmend<N> integerDataAmend{ m_Remainder };
-			integerDataAmend.Negative();			
-		}		
-	}	
+			integerDataAmend.Negative();
+		}
+	}
 }
 
 // private
@@ -109,7 +109,7 @@ void Mathematics::IntegerDivisionModulo<N>
 		if (lastNonZero == -1 && 0 < quotient)
 		{
 			lastNonZero = index;
-		}	
+		}
 	}
 
 	MATHEMATICS_ASSERTION_1(0 <= lastNonZero, "异常的结果\n");
@@ -168,8 +168,8 @@ void Mathematics::IntegerDivisionModulo<N>
 			m_Remainder = divisionMultiple.GetRemainder();
 		}
 
-		++loop;		
-	}	
+		++loop;
+	}
 
 	SYSTEM_UNUSED_ARG(maxLoop);
 }
@@ -184,7 +184,7 @@ bool Mathematics::IntegerDivisionModulo<N>
 		if (!m_Denominator.IsZero() &&
 			m_AbsNumerator == IntegerDataAnalysis(m_Numerator).GetAbsoluteValue() &&
 			m_AbsDenominator == IntegerDataAnalysis(m_Denominator).GetAbsoluteValue() &&
-			IntegerDataAnalysis{ m_Remainder }.GetAbsoluteValue() < IntegerDataAnalysis{ m_Denominator }.GetAbsoluteValue() &&
+			IntegerDataAnalysis { m_Remainder }.GetAbsoluteValue() < IntegerDataAnalysis{ m_Denominator }.GetAbsoluteValue() &&
 			IsCorrect())
 		{
 			return true;
@@ -197,17 +197,17 @@ bool Mathematics::IntegerDivisionModulo<N>
 	catch (...)
 	{
 		return false;
-	}	
+	}
 }
 
 template <int N>
 bool Mathematics::IntegerDivisionModulo<N>
-	::IsCorrect() const  
+	::IsCorrect() const
 {
 	IntegerMultiplication<N> multiplication{ m_Denominator , m_Quotient };
 	auto correct = m_Numerator - multiplication.GetMultiplication() - m_Remainder;
- 
-	if(correct.IsZero())
+
+	if (correct.IsZero())
 		return true;
 	else
 		return false;
@@ -215,10 +215,9 @@ bool Mathematics::IntegerDivisionModulo<N>
 
 #endif // OPEN_CLASS_INVARIANT
 
-
 template <int N>
 typename const Mathematics::IntegerDivisionModulo<N>::IntegerData
-	Mathematics::IntegerDivisionModulo<N>
+Mathematics::IntegerDivisionModulo<N>
 	::GetQuotient() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -227,8 +226,8 @@ typename const Mathematics::IntegerDivisionModulo<N>::IntegerData
 }
 
 template <int N>
-typename const Mathematics::IntegerDivisionModulo<N>::IntegerData 
-	Mathematics::IntegerDivisionModulo<N>
+typename const Mathematics::IntegerDivisionModulo<N>::IntegerData
+Mathematics::IntegerDivisionModulo<N>
 	::GetRemainder() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;

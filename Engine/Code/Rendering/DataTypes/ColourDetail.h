@@ -12,16 +12,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <type_traits> 
-
-template <typename T>
-Rendering::Colour<T>
-	::Colour()
-	:m_Colour{ sm_MinValue, sm_MinValue, sm_MinValue, sm_MaxValue }
-{
-	RENDERING_SELF_CLASS_IS_VALID_4;
-}
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 template <typename T>
 Rendering::Colour<T>
@@ -36,12 +29,12 @@ Rendering::Colour<T>
 // private
 template <typename T>
 void Rendering::Colour<T>
-	::InitColour(T red,T green,T blue,T alpha)
+	::InitColour(T red,T green,T blue,T alpha) noexcept
 {
-	m_Colour[Red] = red;
-	m_Colour[Green] = green;
-	m_Colour[Blue] = blue;
-	m_Colour[Alpha] = alpha;
+	m_Colour.at(Red) = red;
+	m_Colour.at(Green) = green;
+	m_Colour.at(Blue) = blue;
+	m_Colour.at(Alpha) = alpha;
 }
 
 // private
@@ -58,9 +51,11 @@ void Rendering::Colour<T>
 // private
 template <typename T>
 void Rendering::Colour<T>
-	::StandardizationRed()
+	::StandardizationRed() 
 {
-	m_Colour[Red] = Clamp(m_Colour[Red]);
+	m_Colour.at(Red) = Clamp(m_Colour.at(Red));
+
+	CoreTools::DoNothing();
 }
 
 // private
@@ -68,7 +63,9 @@ template <typename T>
 void Rendering::Colour<T>
 	::StandardizationGreen()
 {
-	m_Colour[Green] = Clamp(m_Colour[Green]);
+	m_Colour.at(Green) = Clamp(m_Colour.at(Green));
+
+	CoreTools::DoNothing();
 }
 
 // private
@@ -76,7 +73,9 @@ template <typename T>
 void Rendering::Colour<T>
 	::StandardizationBlue()
 {
-	m_Colour[Blue] = Clamp(m_Colour[Blue]);
+	m_Colour.at(Blue) = Clamp(m_Colour.at(Blue));
+
+	CoreTools::DoNothing();
 }
 
 // private
@@ -84,14 +83,16 @@ template <typename T>
 void Rendering::Colour<T>
 	::StandardizationAlpha()
 {
-	m_Colour[Alpha] = Clamp(m_Colour[Alpha]);
+	m_Colour.at(Alpha) = Clamp(m_Colour.at(Alpha));
+
+	CoreTools::DoNothing();
 }
 
 // static 
 // private
 template <typename T>
 T Rendering::Colour<T>
-	::Clamp(T colour)
+	::Clamp(T colour) noexcept
 {
 	if(colour < sm_MinValue)
 		return sm_MinValue;
@@ -105,6 +106,7 @@ template <typename T>
 template <typename RhsType>
 Rendering::Colour<T>
 	::Colour(const Colour<RhsType>& colour)
+	:m_Colour{}
 {
 	try
 	{
@@ -112,7 +114,8 @@ Rendering::Colour<T>
 	}
 	catch(boost::bad_numeric_cast&)
 	{
-        THROW_EXCEPTION(SYSTEM_TEXT("颜色数据转换失败。"));
+		using namespace std::literals;
+        THROW_EXCEPTION(SYSTEM_TEXT("颜色数据转换失败。"s));
 	}
 
 	SELF_CLASS_IS_VALID_4;
@@ -217,6 +220,10 @@ template <typename T>
 bool Rendering::Colour<T>
 	::IsValid() const noexcept
 {
+#include STSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26482)   
+#include SYSTEM_WARNING_DISABLE(26446) 
 	for(int i = Red;i < ColourSize;++i)
 	{
 		if (m_Colour[i] < sm_MinValue || sm_MaxValue < m_Colour[i])
@@ -226,48 +233,49 @@ bool Rendering::Colour<T>
 	}
 
 	return true;
+#include STSTEM_WARNING_POP
 }
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename T>
 T Rendering::Colour<T>
-	::GetRed() const
+	::GetRed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
 
-	return m_Colour[Red];
+	return m_Colour.at(Red);
 }
 
 template <typename T>
 T Rendering::Colour<T>
-	::GetGreen() const
+	::GetGreen() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
 
-	return m_Colour[Green];
+	return m_Colour.at(Green);  
 }
 
 template <typename T>
 T Rendering::Colour<T>
-	::GetBlue() const
+	::GetBlue() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
 
-	return m_Colour[Blue];
+	return m_Colour.at(Blue);
 }
 
 template <typename T>
 T Rendering::Colour<T>
-	::GetAlpha() const
+	::GetAlpha() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
 
-	return m_Colour[Alpha];
+	return m_Colour.at(Alpha);
 }
 
 template <typename T>
 const T* Rendering::Colour<T>
-	::GetPoint() const
+	::GetPoint() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
 
@@ -460,7 +468,7 @@ void Rendering::Colour<T>
 
 template <typename T>
 bool Rendering
-	::Approximate(const Colour<T>& lhs,const Colour<T>& rhs,T epsilon)
+	::Approximate(const Colour<T>& lhs,const Colour<T>& rhs,T epsilon) noexcept
 {
 	static_assert(std::is_floating_point<T>::value, "T isn't floating point!");
 
@@ -472,7 +480,7 @@ bool Rendering
 
 template <typename T>
 bool Rendering
-	::operator== (const Rendering::Colour<T>& lhs,const Rendering::Colour<T>& rhs)
+	::operator== (const Rendering::Colour<T>& lhs,const Rendering::Colour<T>& rhs) noexcept
 {
 	static_assert(std::is_integral<T>::value, "T isn't integral!"); 
 

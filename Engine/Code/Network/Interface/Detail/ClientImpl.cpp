@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 17:17)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:02)
 
 #include "Network/NetworkExport.h" 
 
@@ -19,7 +19,7 @@ using std::vector;
 
 Network::ClientImpl
 	::ClientImpl(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager)
-	:ParentType{},m_ConfigurationStrategy{ configurationStrategy }, m_SocketManager{ socketManager }
+	:ParentType{}, m_ConfigurationStrategy{ configurationStrategy }, m_SocketManager{ socketManager }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -30,7 +30,7 @@ Network::ClientImpl
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network,ClientImpl)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ClientImpl)
 
 uint64_t Network::ClientImpl
 	::Connect()
@@ -53,12 +53,12 @@ void Network::ClientImpl
 }
 
 void Network::ClientImpl
-	::Send(uint64_t socketID,const MessageInterfaceSharedPtr& message )
+	::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	SYSTEM_UNUSED_ARG(socketID);
-	SYSTEM_UNUSED_ARG(message); 
+	SYSTEM_UNUSED_ARG(message);
 }
 
 void Network::ClientImpl
@@ -81,7 +81,7 @@ Network::ConfigurationStrategy Network::ClientImpl
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
 	return m_ConfigurationStrategy;
-} 
+}
 
 void Network::ClientImpl
 	::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
@@ -123,7 +123,7 @@ Network::SocketManagerSharedPtr Network::ClientImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto result =  m_SocketManager.lock();
+	auto result = m_SocketManager.lock();
 
 	if (result)
 	{

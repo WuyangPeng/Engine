@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/21 17:25)
-
+// 引擎版本：0.0.2.4 (2020/03/11 15:57)
 
 #include "Network/NetworkExport.h" 
 
@@ -17,11 +16,12 @@
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
 using std::string;
+using namespace std::literals;
 
 namespace
 {
-	const System::String g_PortDescription{ SYSTEM_TEXT("，端口：") };
-	const System::String g_AsynchronousConnectorSuccessDescription{ SYSTEM_TEXT("异步连接成功，地址：") };
+	const auto g_PortDescription = SYSTEM_TEXT("，端口："s);
+	const auto g_AsynchronousConnectorSuccessDescription = SYSTEM_TEXT("异步连接成功，地址："s);
 }
 
 void Network::BoostSockConnectorHelper
@@ -44,7 +44,7 @@ void Network::BoostSockConnectorHelper
 void Network::BoostSockConnectorHelper
 	::PrintConnectorLog(const String& prefix, const AddressData& addressData)
 {
-	LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName)
+	LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName.c_str())
 		<< prefix << addressData.GetAddress() << g_PortDescription << addressData.GetPort()
 		<< CoreTools::LogAppenderIOManageSign::Refresh;
 }
@@ -52,7 +52,7 @@ void Network::BoostSockConnectorHelper
 void Network::BoostSockConnectorHelper
 	::PrintConnectorSuccessLog(const String& prefix, const AddressData& addressData)
 {
-	LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Info, Network, g_BoostLogName)
+	LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Info, Network, g_BoostLogName.c_str())
 		<< prefix << addressData.GetAddress() << g_PortDescription << addressData.GetPort()
 		<< CoreTools::LogAppenderIOManageSign::Refresh;
 }

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 09:40)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 09:46)
 
 #include "Framework/FrameworkExport.h"
 
@@ -11,19 +11,33 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
+using std::make_shared;
+
 Framework::WindowCreateParameter
-	::WindowCreateParameter(const System::String& windowsName,
-	                        WindowStylesFlags style, HWnd parent, HMenu menu,
-							const WindowPoint& leftTopCorner)
-	:m_Impl(new ImplType(windowsName,style,parent,menu,leftTopCorner))
+	::WindowCreateParameter(const String& windowsName,WindowStyles style, HWnd parent, HMenu menu,const WindowPoint& leftTopCorner)
+	:m_Impl{ make_shared<ImplType>(windowsName, style, parent, menu, leftTopCorner) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework,WindowCreateParameter)
+Framework::WindowCreateParameter
+	::WindowCreateParameter(const String& windowsName)
+	:WindowCreateParameter{ windowsName, WindowStyles::OverlappedWindow | WindowStyles::Visible }
+{
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,WindowCreateParameter,GetWindowsName,System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,WindowCreateParameter,GetStyle,System::WindowStyles)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,WindowCreateParameter,GetLeftTopCorner,Framework::WindowPoint)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,WindowCreateParameter,GetParent,Framework::WindowCreateParameter::HWnd)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,WindowCreateParameter,GetMenu,Framework::WindowCreateParameter::HMenu)
+Framework::WindowCreateParameter
+	::WindowCreateParameter(const String& windowsName, WindowStyles style)
+	:WindowCreateParameter{ windowsName, style, nullptr, nullptr, WindowPoint{ System::WindowPointUse::Default } }
+{
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, WindowCreateParameter)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowCreateParameter, GetWindowsName, const System::String)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateParameter, GetStyle, System::WindowStyles)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateParameter, GetLeftTopCorner, const Framework::WindowPoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateParameter, GetParent, Framework::WindowCreateParameter::HWnd)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateParameter, GetMenu, Framework::WindowCreateParameter::HMenu)

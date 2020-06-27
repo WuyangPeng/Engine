@@ -1,20 +1,20 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/10 10:31)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/23 10:03)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_RATIONAL_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_INTEGER_DETAIL_H
 
 #include "Query3Rational.h"
 #include "QueryDotToolsDetail.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/SignRationalDetail.h"
 #include "Mathematics/Rational/RationalVector3Detail.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Query3Rational<Real>
@@ -31,18 +31,18 @@ template <typename Real>
 void Mathematics::Query3Rational<Real>
 	::Convert()
 {
-	auto  numVertices = GetNumVertices();
+	auto numVertices = this->GetNumVertices();
 
 	for (auto index = 0; index < numVertices; ++index)
 	{
-		const auto vertice = GetVertice(index);
+		const auto vertice = this->GetVertice(index);
 
 		QueryRational firstRational{ vertice[0] };
 		QueryRational secondRational{ vertice[1] };
 		QueryRational thirdRational{ vertice[2] };
 
 		m_RationalVertices.emplace_back(firstRational, secondRational, thirdRational);
-	}		
+	}
 }
 
 template <typename Real>
@@ -57,20 +57,19 @@ template <typename Real>
 bool Mathematics::Query3Rational<Real>
 	::IsValid() const noexcept
 {
-    if(ParentType::IsValid())
-        return true;
-    else
-        return false;    
+	if (ParentType::IsValid())
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 Mathematics::QueryType Mathematics::Query3Rational<Real>
 	::GetType() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
 	return QueryType::Rational;
 }
 
@@ -81,15 +80,14 @@ Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_RationalVertices.size()), "Ë÷Òý´íÎó£¡");
 
-	return ToPlane(m_RationalVertices[index], v0, v1,v2);
+	return ToPlane(m_RationalVertices[index], v0, v1, v2);
 }
-
 
 template <typename Real>
 Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>
 	::ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1; 
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	QueryRational firstRational{ testVector[0] };
 	QueryRational secondRational{ testVector[1] };
@@ -105,9 +103,9 @@ Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>
 	::ToPlane(const QueryRationalVector& rationalTest, int v0, int v1, int v2) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
 
 	auto x0 = rationalTest.GetX() - m_RationalVertices[v0].GetX();
 	auto y0 = rationalTest.GetY() - m_RationalVertices[v0].GetY();
@@ -126,13 +124,12 @@ Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>
 	else if (det < QueryRational{})
 		return PlaneQueryType::NegativeSide;
 	else
-		return PlaneQueryType::OnPlane; 
+		return PlaneQueryType::OnPlane;
 }
-
 
 template <typename Real>
 Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>
-	::ToTetrahedron(int index, int v0, int v1, int v2, int v3) const
+::ToTetrahedron(int index, int v0, int v1, int v2, int v3) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_RationalVertices.size()), "Ë÷Òý´íÎó£¡");
@@ -140,12 +137,11 @@ Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>
 	return ToTetrahedron(m_RationalVertices[index], v0, v1, v2, v3);
 }
 
-
 template <typename Real>
 Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>
 	::ToTetrahedron(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1; 
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	QueryRational firstRational{ testVector[0] };
 	QueryRational secondRational{ testVector[1] };
@@ -161,11 +157,11 @@ Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>
 	::ToTetrahedron(const QueryRationalVector& rationalTest, int v0, int v1, int v2, int v3) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	 
+	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+
 	auto sign0 = ToPlane(rationalTest, v1, v2, v3);
 	if (sign0 == PlaneQueryType::PositiveSide)
 	{
@@ -190,8 +186,8 @@ Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>
 		return TetrahedronQueryType::Outside;
 	}
 
-	if (sign0 == PlaneQueryType::OnPlane ||	sign1 == PlaneQueryType::OnPlane ||
-		sign2 == PlaneQueryType::OnPlane ||	sign3 == PlaneQueryType::OnPlane)
+	if (sign0 == PlaneQueryType::OnPlane || sign1 == PlaneQueryType::OnPlane ||
+		sign2 == PlaneQueryType::OnPlane || sign3 == PlaneQueryType::OnPlane)
 	{
 		return  TetrahedronQueryType::OnTetrahedron;
 	}
@@ -211,12 +207,11 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>
 	return ToCircumsphere(m_RationalVertices[index], v0, v1, v2, v3);
 }
 
-
 template <typename Real>
 Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>
 	::ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1; 
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	QueryRational firstRational{ testVector[0] };
 	QueryRational secondRational{ testVector[1] };
@@ -227,16 +222,15 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>
 	return ToCircumsphere(queryRationalVector, v0, v1, v2, v3);
 }
 
-
 template <typename Real>
 Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>
 	::ToCircumsphere(const QueryRationalVector& rationalTest, int v0, int v1, int v2, int v3) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
 
 	const auto& vector0 = m_RationalVertices[v0];
 	const auto& vector1 = m_RationalVertices[v1];
@@ -272,8 +266,8 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>
 	auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
 	auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
 
-	auto det = QueryDotTools<QueryRational>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z,  w2, d3x, d3y, d3z, w3);
-    
+	auto det = QueryDotTools<QueryRational>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
+
 	if (QueryRational{} < det)
 		return CircumsphereQueryType::Outside;
 	else if (det < QueryRational{})
@@ -281,6 +275,5 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>
 	else
 		return CircumsphereQueryType::OnCircumsphere;
 }
-
 
 #endif // MATHEMATICS_QUERY_QUERY3_RATIONAL_DETAIL_H

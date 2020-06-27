@@ -1,5 +1,28 @@
 TODO Level 5
 
-0.0.0.2
+0.0.2.5
  
-
+1.  （Helper）完成帮助模块。
+2.  （Configuration）完成配置策略。 
+3.  （Configuration）完成配置解析。 
+4.  （SqlInterface）完成数据对象的接口。
+5.  （SqlInterface）完成会话的接口。
+6.  （SqlInterface）完成架构的接口。
+7.  （SqlInterface）完成采集的接口。
+8.  （SqlInterface）完成结果的接口。
+9.  （SqlInterface）完成表的接口。
+10. （Statement）完成封装sql语句的实现。
+11. （PostgreSQL）完成PostgreSQL模块。
+23. （PostgreSQL）完成PostgreSQL模块的数据对象。
+24. （PostgreSQL）完成PostgreSQL模块的会话。
+25. （PostgreSQL）完成PostgreSQL模块的架构。
+26. （PostgreSQL）完成PostgreSQL模块的采集。
+27. （PostgreSQL）完成PostgreSQL模块的结果。
+28. （PostgreSQL）完成PostgreSQL模块的表。 
+29. （Oracle）完成Oracle模块。
+30. （Oracle）完成Oracle模块的数据对象。
+31. （Oracle）完成Oracle模块的会话。
+32. （Oracle）完成Oracle模块的架构。
+33. （Oracle）完成Oracle模块的采集。
+34. （Oracle）完成Oracle模块的结果。
+35. （Oracle）完成Oracle模块的表。 

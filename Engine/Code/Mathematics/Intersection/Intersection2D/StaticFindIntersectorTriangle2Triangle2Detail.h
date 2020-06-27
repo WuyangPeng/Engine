@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/13 10:12)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:56)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
@@ -11,10 +11,10 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
-	::StaticFindIntersectorTriangle2Triangle2( const Triangle2& triangle0, const Triangle2& triangle1)
+	::StaticFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1)
 	:mTriangle0{ triangle0 }, mTriangle1{ triangle1 }
 {
-    mQuantity = 0;
+	mQuantity = 0;
 
 	Find();
 }
@@ -23,44 +23,44 @@ template <typename Real>
 const Mathematics::Triangle2<Real> Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 	::GetTriangle0() const
 {
-    return mTriangle0;
+	return mTriangle0;
 }
 
 template <typename Real>
 const Mathematics::Triangle2<Real> Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 	::GetTriangle1() const
 {
-    return mTriangle1;
+	return mTriangle1;
 }
- 
+
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 	::Find()
 {
-    // The potential intersection is initialized to triangle1.  The set of
-    // vertices is refined based on clipping against each edge of triangle0.
-    mQuantity = 3;
-    for (auto i = 0; i < 3; ++i)
-    {
-        mPoint[i] = mTriangle1.GetVertex()[i];
-    }
+	// The potential intersection is initialized to triangle1.  The set of
+	// vertices is refined based on clipping against each edge of triangle0.
+	mQuantity = 3;
+	for (auto i = 0; i < 3; ++i)
+	{
+		mPoint[i] = mTriangle1.GetVertex()[i];
+	}
 
-    for (auto i1 = 2, i0 = 0; i0 < 3; i1 = i0++)
-    {
-        // Clip against edge <V0[i1],V0[i0]>.
+	for (auto i1 = 2, i0 = 0; i0 < 3; i1 = i0++)
+	{
+		// Clip against edge <V0[i1],V0[i0]>.
 		Vector2D N{ mTriangle0.GetVertex()[i1].GetYCoordinate() - mTriangle0.GetVertex()[i0].GetYCoordinate(),
 					mTriangle0.GetVertex()[i0].GetXCoordinate() - mTriangle0.GetVertex()[i1].GetXCoordinate() };
 		auto c = Vector2DTools::DotProduct(N, mTriangle0.GetVertex()[i1]);
-        ClipConvexPolygonAgainstLine(N, c, mQuantity, mPoint);
-        if (mQuantity == 0)
-        {
-            // Triangle completely clipped, no intersection occurs.
+		ClipConvexPolygonAgainstLine(N, c, mQuantity, mPoint);
+		if (mQuantity == 0)
+		{
+			// Triangle completely clipped, no intersection occurs.
 			this->SetIntersectionType(IntersectionType::Empty);
-            return;
-        }
-    }
+			return;
+		}
+	}
 	this->SetIntersectionType(IntersectionType::Point);
-    return;
+	return;
 }
 
 template <typename Real>
@@ -89,11 +89,11 @@ int Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 	for (auto i = 0; i < 3; ++i)
 	{
 		auto t = Vector2DTools::DotProduct(D, (V[i] - P));
-		if (t >Real{})
+		if (t > Math<Real>::sm_Zero)
 		{
 			++positive;
 		}
-		else if (t < Real{})
+		else if (t < Math<Real>::sm_Zero)
 		{
 			++negative;
 		}
@@ -118,13 +118,15 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 	// ordering is an invariant of this function.
 
 	// Test on which side of line the vertices are.
-	int positive = 0, negative = 0, pIndex = -1;
-	Real test[6];
-	int i;
+	auto positive = 0;
+	auto negative = 0;
+	auto pIndex = -1;
+	Real test[6]{};
+	auto i = 0;
 	for (i = 0; i < quantity; ++i)
 	{
 		test[i] = Vector2DTools::DotProduct(N, V[i]) - c;
-		if (test[i] >Real{})
+		if (test[i] > Math<Real>::sm_Zero)
 		{
 			positive++;
 			if (pIndex < 0)
@@ -132,7 +134,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 				pIndex = i;
 			}
 		}
-		else if (test[i] < Real{})
+		else if (test[i] < Math<Real>::sm_Zero)
 		{
 			negative++;
 		}
@@ -144,8 +146,10 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 		{
 			// Line transversely intersects polygon.
 			Vector2D CV[6];
-			int cQuantity = 0, cur, prv;
-			Real t;
+			auto cQuantity = 0;
+			auto cur = 0;
+			auto prv = 0;
+			auto t = Math::sm_Zero;
 
 			if (pIndex > 0)
 			{
@@ -153,10 +157,10 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 				cur = pIndex;
 				prv = cur - 1;
 				t = test[cur] / (test[cur] - test[prv]);
-				CV[cQuantity++] = V[cur] + t*(V[prv] - V[cur]);
+				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 				// Vertices on positive side of line.
-				while (cur < quantity && test[cur] >Real{})
+				while (cur < quantity && test[cur] >Math<Real>::sm_Zero)
 				{
 					CV[cQuantity++] = V[cur++];
 				}
@@ -172,13 +176,13 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 					prv = quantity - 1;
 				}
 				t = test[cur] / (test[cur] - test[prv]);
-				CV[cQuantity++] = V[cur] + t*(V[prv] - V[cur]);
+				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 			}
 			else  // pIndex is 0
 			{
 				// Vertices on positive side of line.
 				cur = 0;
-				while (cur < quantity && test[cur] >Real{})
+				while (cur < quantity && test[cur] >Math<Real>::sm_Zero)
 				{
 					CV[cQuantity++] = V[cur++];
 				}
@@ -186,10 +190,10 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 				// Last clip vertex on line.
 				prv = cur - 1;
 				t = test[cur] / (test[cur] - test[prv]);
-				CV[cQuantity++] = V[cur] + t*(V[prv] - V[cur]);
+				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 				// Skip vertices on negative side.
-				while (cur < quantity && test[cur] <= Real{})
+				while (cur < quantity && test[cur] <= Math<Real>::sm_Zero)
 				{
 					++cur;
 				}
@@ -199,10 +203,10 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 				{
 					prv = cur - 1;
 					t = test[cur] / (test[cur] - test[prv]);
-					CV[cQuantity++] = V[cur] + t*(V[prv] - V[cur]);
+					CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 					// Vertices on positive side of line.
-					while (cur < quantity && test[cur] >Real{})
+					while (cur < quantity && test[cur] >Math<Real>::sm_Zero)
 					{
 						CV[cQuantity++] = V[cur++];
 					}
@@ -212,12 +216,12 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 					// cur = 0
 					prv = quantity - 1;
 					t = test[0] / (test[0] - test[prv]);
-					CV[cQuantity++] = V[0] + t*(V[prv] - V[0]);
+					CV[cQuantity++] = V[0] + t * (V[prv] - V[0]);
 				}
 			}
 
 			quantity = cQuantity;
-			memcpy(V, CV, cQuantity*sizeof(Vector2D));
+			memcpy(V, CV, cQuantity * sizeof(Vector2D));
 		}
 		// else polygon fully on positive side of line, nothing to do.
 	}

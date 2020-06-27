@@ -2,19 +2,19 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 16:16)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/10 13:07)
 
 #include "System/SystemExport.h"
 
 #include "Semaphore.h"  
 #include "Flags/SemaphoreFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 
 System::WindowHandle System
-    ::CreateSystemSemaphore(WindowSecurityAttributesPtr semaphoreAttributes,WindowLong initialCount,WindowLong maximumCount,const TChar* name) noexcept
+	::CreateSystemSemaphore(WindowSecurityAttributesPtr semaphoreAttributes, WindowLong initialCount, WindowLong maximumCount, const TChar* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	return ::CreateSemaphore(semaphoreAttributes, initialCount, maximumCount, name);
@@ -35,7 +35,7 @@ System::WindowHandle System
 }
 
 bool System
-    ::WaitForSystemSemaphore(WindowHandle handle) noexcept
+	::WaitForSystemSemaphore(WindowHandle handle) noexcept
 {
 	return MutexWaitReturn::Failed != WaitForSystemSemaphore(handle, EnumCastUnderlying(MutexWait::Infinite));
 }
@@ -57,7 +57,7 @@ System::MutexWaitReturn System
 	::WaitForSystemSemaphore(WindowHandle handle, WindowDWord milliseconds, bool alertable) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObjectEx(handle, milliseconds,BoolConversion(alertable)));
+	return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObjectEx(handle, milliseconds, BoolConversion(alertable)));
 #else // !SYSTEM_PLATFORM_WIN32
 	SYSTEM_UNUSED_ARG(handle);
 	SYSTEM_UNUSED_ARG(milliseconds);
@@ -69,9 +69,9 @@ System::MutexWaitReturn System
 
 System::MutexWaitReturn System
 	::WaitForSystemSemaphore(WindowDWord count, const WindowHandle* handle, bool waitAll, WindowDWord milliseconds, bool alertable) noexcept
-{	
+{
 #ifdef SYSTEM_PLATFORM_WIN32
-	return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjectsEx(count, handle, BoolConversion(waitAll),milliseconds, BoolConversion(alertable)));
+	return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjectsEx(count, handle, BoolConversion(waitAll), milliseconds, BoolConversion(alertable)));
 #else // !SYSTEM_PLATFORM_WIN32
 	SYSTEM_UNUSED_ARG(count);
 	SYSTEM_UNUSED_ARG(handle);
@@ -92,20 +92,20 @@ System::MutexWaitReturn System
 	SYSTEM_UNUSED_ARG(count);
 	SYSTEM_UNUSED_ARG(handle);
 	SYSTEM_UNUSED_ARG(waitAll);
-	SYSTEM_UNUSED_ARG(milliseconds); 
+	SYSTEM_UNUSED_ARG(milliseconds);
 
 	return MutexWaitReturn::Failed;
 #endif // SYSTEM_PLATFORM_WIN32
 }
 
 bool System
-    ::ReleaseSystemSemaphore(WindowHandle handle,WindowLong releaseCount,WindowLongPtr previousCount) noexcept
+	::ReleaseSystemSemaphore(WindowHandle handle, WindowLong releaseCount, WindowLongPtr previousCount) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-     if(::ReleaseSemaphore(handle, releaseCount, previousCount) != g_False)
-        return true;
-     else
-        return false;
+	if (::ReleaseSemaphore(handle, releaseCount, previousCount) != g_False)
+		return true;
+	else
+		return false;
 #else // !SYSTEM_PLATFORM_WIN32
 	SYSTEM_UNUSED_ARG(handle);
 	SYSTEM_UNUSED_ARG(releaseCount);
@@ -116,15 +116,15 @@ bool System
 }
 
 bool System
-    ::CloseSystemSemaphore(WindowHandle handle) noexcept
+	::CloseSystemSemaphore(WindowHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 	if (::CloseHandle(handle) != g_False)
 		return true;
-    else
+	else
 		return false;
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(handle); 
+	SYSTEM_UNUSED_ARG(handle);
 
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -134,7 +134,7 @@ System::WindowHandle System
 	::OpenSystemSemaphore(MutexStandardAccess desiredAccess, SemaphoreSpecificAccess specificAccess, bool inheritHandle, const TChar* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::OpenSemaphore(EnumCastUnderlying(desiredAccess) | EnumCastUnderlying(specificAccess),BoolConversion(inheritHandle), name);
+	return ::OpenSemaphore(EnumCastUnderlying(desiredAccess) | EnumCastUnderlying(specificAccess), BoolConversion(inheritHandle), name);
 #else // !SYSTEM_PLATFORM_WIN32
 	SYSTEM_UNUSED_ARG(desiredAccess);
 	SYSTEM_UNUSED_ARG(specificAccess);
@@ -152,4 +152,4 @@ bool System
 		return true;
 	else
 		return false;
-} 
+}

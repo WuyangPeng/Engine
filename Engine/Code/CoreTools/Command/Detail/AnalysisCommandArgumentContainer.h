@@ -24,7 +24,7 @@ namespace CoreTools
 
 	public:
 		AnalysisCommandArgumentContainer(int argumentsNumber, char** arguments);
-		explicit AnalysisCommandArgumentContainer(char* commandLine);
+		explicit AnalysisCommandArgumentContainer(const char* commandLine);
 
 		CommandArgumentContainerSharedPtr GetCommandArgumentContainer();
 
@@ -40,7 +40,7 @@ namespace CoreTools
 
 	private:
 		void Init(char** arguments);
-		void Init(char* commandLine);
+		void Init(const char* commandLine);
 
 		void AddCommandArguments();
 

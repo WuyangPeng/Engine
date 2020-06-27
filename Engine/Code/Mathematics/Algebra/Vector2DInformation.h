@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 13:55)
+// 引擎版本：0.0.2.5 (2020/03/19 10:16)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR_2D_INFORMATION_H
 #define MATHEMATICS_ALGEBRA_VECTOR_2D_INFORMATION_H
@@ -29,13 +29,13 @@ namespace Mathematics
 		using Math = Math<Real>;
 		using AxesAlignBoundingBox2D = AxesAlignBoundingBox2D<Real>;
 		using AxesAlignBoundingBox2DPtr = std::shared_ptr<AxesAlignBoundingBox2D>;
-	
+
 	public:
 		// 值epsilon被使用在计算点集的维度时，作为相对误差。
-		Vector2DInformation(const std::vector<Vector2D>& points,Real epsilon = Math::sm_ZeroTolerance);
+		Vector2DInformation(const std::vector<Vector2D>& points, Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
-		
+
 		int GetDimension() const;
 		AxesAlignBoundingBox2DPtr GetAABBPtr() const;
 		Real GetMaxRange() const;
@@ -64,12 +64,12 @@ namespace Mathematics
 
 		// 输入集的固有维度。
 		// 其中，参数“epsilon”被用于确定尺寸时提供容差。 
-		int m_Dimension;		
+		int m_Dimension;
 
 		// 输入集的轴对齐包围盒。
 		// 最大范围是aabb.max.x - aabb.min.x 和 aabb.max.y - aabb.min.y的最大值。
-		AxesAlignBoundingBox2DPtr m_AABBPtr;		
-		Real m_MaxRange;	
+		AxesAlignBoundingBox2DPtr m_AABBPtr;
+		Real m_MaxRange;
 
 		// 坐标系。原点是对任何维度d都有效。
 		// 单位长度的方向向量只适用于0 <= i < d。
@@ -81,7 +81,7 @@ namespace Mathematics
 		Vector2D m_Origin;
 		Vector2D m_DirectionX;
 		Vector2D m_DirectionY;
-	
+
 		// 定义最大空间范围的索引。 
 		// 值m_MinExtreme和m_MaxExtreme是用于定义在坐标轴各个方向中的一个最大范围的索引数。
 		// 如果维度是2，则m_PerpendicularExtreme是
@@ -95,10 +95,10 @@ namespace Mathematics
 		int m_PerpendicularExtreme;
 		bool m_ExtremeCCW; // 是否是逆时针
 
-        // 最小点和最大点索引
-        int m_IndexMin[2];
-        int m_IndexMax[2];
-	};	
+		// 最小点和最大点索引
+		int m_IndexMin[2];
+		int m_IndexMax[2];
+	};
 
 	using Vector2DInformationf = Vector2DInformation<float>;
 	using Vector2DInformationd = Vector2DInformation<double>;

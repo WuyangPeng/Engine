@@ -20,6 +20,7 @@ EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 namespace CoreTools
 {
 	enum class LogLevel;
+	class OStreamShared;
 
 	class CORE_TOOLS_DEFAULT_DECLARE LogConsoleTextColorsManager : private boost::noncopyable
 	{
@@ -28,7 +29,7 @@ namespace CoreTools
 
 	public:
 		explicit LogConsoleTextColorsManager(LogLevel logLevel);
-		LogConsoleTextColorsManager(std::ostream* osPtr,LogLevel logLevel);
+		LogConsoleTextColorsManager(const OStreamShared& osPtr,LogLevel logLevel);
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -11,7 +11,7 @@
 #include "Rendering/Dx9Renderer/Dx9Texture3D.h"
 #include "Rendering/OpenGLRenderer/OpenGLTexture3D.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 using std::make_shared;
 
 Rendering::PlatformTexture3DImpl

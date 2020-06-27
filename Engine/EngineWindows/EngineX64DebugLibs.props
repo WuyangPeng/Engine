@@ -13,5 +13,4 @@
       <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup />
 </Project>

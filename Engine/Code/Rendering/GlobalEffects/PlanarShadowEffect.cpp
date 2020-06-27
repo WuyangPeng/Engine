@@ -50,14 +50,14 @@ Rendering::PlanarShadowEffect
 }
 
 void Rendering::PlanarShadowEffect
-	::Draw (Renderer* renderer,const VisibleSet& visibleSet)
+	::Draw (std::shared_ptr<Renderer> renderer,VisibleSet& visibleSet)
 {
     // Draw the potentially visible portions of the shadow caster.
     const int numVisible = visibleSet.GetNumVisible();
-    int j;
-    for (j = 0; j < numVisible; ++j)
+    
+    for (auto& value: visibleSet)
     {
-        renderer->Draw((const Visual*)visibleSet.GetVisible(j).GetData());
+        renderer->Draw(value);
     }
 
     // Save the current global state overrides for restoration later.
@@ -90,7 +90,7 @@ void Rendering::PlanarShadowEffect
         mStencilState->SetOnZPass ( StencilStateFlags::OperationType::Replace);  // visible to i+1
 
         // Draw the plane.
-        renderer->Draw(mPlanes[i].GetData());
+        renderer->Draw(mPlanes[i]);
 
         // Blend the shadow color with the pixels drawn on the projection
         // plane.  The blending equation is
@@ -132,11 +132,11 @@ void Rendering::PlanarShadowEffect
         // drawing pass should use a VisibleSet relative to the projector so
         // that objects that are out of view (i.e. culled relative to the
         // camera and not in the camera's VisibleSet) can cast shadows.
-        for (j = 0; j < numVisible; ++j)
+        for (auto& visual : visibleSet)
         {
-            Visual* visual = (Visual*)visibleSet.GetVisible(j).GetData();
-            ConstVisualEffectInstanceSmartPointer save = visual->GetEffectInstance();
-            visual->SetEffectInstance(mMaterialEffectInstance);
+            
+            ConstVisualEffectInstanceSmartPointer save = visual->GetConstEffectInstance();
+           // visual->SetEffectInstance(mMaterialEffectInstance);
             renderer->Draw(visual);
 			// ÏÈÍ¨¹ý±àÒë
            // visual->SetEffectInstance(save);

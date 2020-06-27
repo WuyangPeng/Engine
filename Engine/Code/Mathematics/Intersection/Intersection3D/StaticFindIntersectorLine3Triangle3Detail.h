@@ -93,11 +93,11 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>
     }
 
 	auto directionDotOriginCrossEdge2 = (Real)sign * Vector3DTools::DotProduct(m_Line.GetDirection(),data.GetOriginCrossEdge2());
-    if (Real{} <= directionDotOriginCrossEdge2)
+    if (Math::sm_Zero <= directionDotOriginCrossEdge2)
     {
 		auto directionDotEdge1CrossOrigin = (Real)sign * Vector3DTools::DotProduct(m_Line.GetDirection(), data.GetEdge1CrossOrigin());
 
-        if (Real{} <= directionDotEdge1CrossOrigin)
+        if (Math::sm_Zero <= directionDotEdge1CrossOrigin)
         {
             if (directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin <= directionDotNormal)
             {

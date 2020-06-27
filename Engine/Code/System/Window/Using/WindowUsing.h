@@ -69,7 +69,7 @@ namespace System
 	using WindowHAccel = HACCEL;
 	using WindowHLocal = HLOCAL;
 	using WindowLResult = LRESULT;
-	using WindowProc = WNDPROC;
+	using WindowProcess = WNDPROC;
 	using WindowHdc = HDC;
 	using WindowPaintStruct = PAINTSTRUCT;
 	using WindowAtom = ATOM;
@@ -94,6 +94,8 @@ namespace System
 	using WindowImageImportDescriptor = IMAGE_IMPORT_DESCRIPTOR;
 	using WindowImageImportDescriptorPtr = PIMAGE_IMPORT_DESCRIPTOR;
 	using WindowTextMetric = TEXTMETRIC;
+
+	constexpr WindowDWord g_MaxPath{ MAX_PATH };
 
 #else // !SYSTEM_PLATFORM_WIN32
 
@@ -219,7 +221,7 @@ namespace System
 
 	using WindowHLocal = void*;
 	using WindowLResult = int;
-	using WindowProc = WindowLResult(*)(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam);
+	using WindowProcess = WindowLResult(*)(WindowHWnd hwnd, WindowUInt message, WindowWParam wParam, WindowLParam lParam);
 
 	struct WindowHDCDeclare
 	{
@@ -244,7 +246,7 @@ namespace System
 	{
 		WindowUInt cbSize;
 		WindowUInt style;
-		WindowProc lpfnWndProc;
+		WindowProcess lpfnWndProc;
 		int cbClsExtra;
 		int cbWndExtra;
 		WindowHInstance hInstance;
@@ -398,9 +400,11 @@ namespace System
 		uint8_t tmCharSet;
 	};	
 
+	constexpr WindowDWord g_MaxPath{ 260 };
+
 #endif // SYSTEM_PLATFORM_WIN32
 
-	using DisplayPtr = void(*)(WindowHWnd hwnd, int64_t timeDelta);
+	using DisplayFunction = void(*)(WindowHWnd hwnd, int64_t timeDelta);
 }
 
 #endif // SYSTEM_WINDOW_WINDOW_USING_H

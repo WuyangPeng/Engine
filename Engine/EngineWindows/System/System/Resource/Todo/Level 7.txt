@@ -1,7 +1,8 @@
 TODO Level 7
 
-0.0.2.0
+0.2.0.0
 
-1.  （Helper）考虑是否添加不同类型枚举之间的数学运算符。
-2.  （DynamicLink）完成DynamicLink模块非Windows平台的实现：EnumResourceTools、LoadResourceTools。
-3.  （CharacterString）完成CharacterString非Windows平台的实现：CodePage。
+1.（Helper）使用最新版本的boost库增加Compiler、Platform和StdLib里的设置
+2.（MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、ViewOfFile、MemoryHelper、GlobalTools、LocalTools。
+3.（Threading）完成Threading非Windows平台的实现： CriticalSection、Semaphore、Event、Mutex、SlimReaderWriter、ConditionVariable、InitOnce、WaitableTimer、SyncTools、Interlocked、
+			   Thread、ThreadTools、ThreadLocalStorage、Process、ProcessTools、HandleTools、ThreadPool、OverlappedTools、FiberTools。

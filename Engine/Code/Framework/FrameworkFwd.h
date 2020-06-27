@@ -1,23 +1,24 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 17:37)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/20 0:12)
 
 #ifndef FRAMEWORK_FWD_H
 #define FRAMEWORK_FWD_H
 
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "MainFunctionHelper/MainFunctionHelperFwd.h"
 #include "WindowCreate/WindowCreateFwd.h"
 #include "WindowProcess/WindowProcessFwd.h"
 #include "WindowRegister/WindowRegisterFwd.h"
+#include "Application/ApplicationFwd.h"
+#include "MiddleLayer/MiddleLayerFwd.h"
 #include "WindowsAPIFrame/WindowsAPIFrameFwd.h"
 #include "OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
 #include "AndroidFrame/AndroidFrameFwd.h"
-#include "Application/ApplicationFwd.h"
-#include "MiddleLayer/MiddleLayerFwd.h"
 #include "LinuxFrame/LinuxFrameFwd.h"
-#include "MacintosFrame/MacintosFrameFwd.h"
+#include "MacintoshFrame/MacintoshFrameFwd.h"
+#include "ConsoleFrame/ConsoleFrameFwd.h"
 
 #endif // FRAMEWORK_FWD_H

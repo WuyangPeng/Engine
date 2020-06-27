@@ -11,7 +11,7 @@
 
 #include "CameraFrustum.h"
 #include "Rendering/SceneGraph/Camera.h"
-#include "Rendering/SceneGraph/Spatial.h"
+#include "Rendering/SceneGraph/Visual.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
 #include "Mathematics/Algebra/Plane.h"
 #include "Mathematics/Algebra/APoint.h"
@@ -30,7 +30,9 @@ namespace Rendering
         using Math = Mathematics::Math<float>;
 		using AVector = Mathematics::AVector<float>;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-        
+		using VisualContainer = std::vector<VisualSmartPointer>;
+		using VisualContainerIter = VisualContainer::iterator;
+
     public:
         // 裁剪需要相机模型。如果需要修改相机，
         // 你应该在使用ComputeVisibleSet之前，调用SetCamera。
@@ -46,10 +48,10 @@ namespace Rendering
         const float* GetFrustum () const;
 
         // 基类的行为是可见的对象附加到可见集(存储为一个数组)。
-		void Insert(const ConstSpatialSmartPointer& visible);
+		void Insert(const VisualSmartPointer& visible);
 
         int GetNumVisible () const;
-		const ConstSpatialSmartPointer& GetVisible(int index) const;
+		const ConstVisualSmartPointer GetVisible(int index) const;
         
         int GetPlaneQuantity () const;
         const Plane* GetPlanes () const;
@@ -76,6 +78,9 @@ namespace Rendering
         // 这是你应该使用的主要函数中使用的在场景图裁剪。
         // 遍历场景图,构建潜在可见集相对于世界平面。
         void Clear ();
+
+		VisualContainerIter begin();
+		VisualContainerIter end();
 
     private:
         // 输入相机信息,可能需要裁剪场景。

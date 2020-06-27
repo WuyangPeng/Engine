@@ -10,12 +10,10 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include <boost/noncopyable.hpp>
-
 namespace CoreTools
 {
 	template <typename T>
-	class HeapAllocate : private boost::noncopyable
+	class HeapAllocate 
 	{
 	public:
 		using ClassType = HeapAllocate;
@@ -28,6 +26,11 @@ namespace CoreTools
 	public:
 		explicit HeapAllocate(int length);
 		~HeapAllocate();
+
+		HeapAllocate(const HeapAllocate&) = delete;
+		HeapAllocate& operator=(const HeapAllocate&) = delete;
+		HeapAllocate(HeapAllocate&&) noexcept = delete;
+		HeapAllocate& operator=(HeapAllocate&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

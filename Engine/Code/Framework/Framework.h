@@ -1,23 +1,24 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 17:37)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/20 0:12)
 
 #ifndef FRAMEWORK_H
 #define FRAMEWORK_H
 
-#include "Macro/Macro.h"
+#include "Helper/Helper.h"
 #include "MainFunctionHelper/MainFunctionHelper.h"
 #include "WindowCreate/WindowCreate.h"
 #include "WindowProcess/WindowProcess.h"
 #include "WindowRegister/WindowRegister.h"
+#include "Application/Application.h"
+#include "MiddleLayer/MiddleLayer.h"
 #include "WindowsAPIFrame/WindowsAPIFrame.h"
 #include "OpenGLGlutFrame/OpenGLGlutFrame.h"
 #include "AndroidFrame/AndroidFrame.h"
-#include "Application/Application.h"
-#include "MiddleLayer/MiddleLayer.h"
 #include "LinuxFrame/LinuxFrame.h"
-#include "MacintosFrame/MacintosFrame.h"
+#include "MacintoshFrame/MacintoshFrame.h"
+#include "ConsoleFrame/ConsoleFrame.h"
 
 #endif // FRAMEWORK_H

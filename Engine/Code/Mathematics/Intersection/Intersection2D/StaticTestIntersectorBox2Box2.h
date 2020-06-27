@@ -1,20 +1,18 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 17:54)
+// 引擎版本：0.0.2.5 (2020/03/24 14:39)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_BOX2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_BOX2_H 
 
 #include "Mathematics/Objects2D/Box2.h" 
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Intersection/StaticIntersector.h" 
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-
 	template <typename Real>
 	class StaticTestIntersectorBox2Box2 : public StaticIntersector<Real, Vector2D>
 	{
@@ -24,8 +22,8 @@ namespace Mathematics
 		using Vector2D = Vector2D<Real>;
 		using Box2 = Box2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>; 
-		
+		using Math = Math<Real>;
+
 	public:
 		StaticTestIntersectorBox2Box2(const Box2& lhsBox, const Box2& rhsBox, const Real epsilon = Math::sm_ZeroTolerance);
 		virtual ~StaticTestIntersectorBox2Box2();
@@ -34,7 +32,7 @@ namespace Mathematics
 
 		const Box2 GetLhsBox() const;
 		const Box2 GetRhsBox() const;
- 
+
 	private:
 		// 静态查找相交查询。
 		void Test();

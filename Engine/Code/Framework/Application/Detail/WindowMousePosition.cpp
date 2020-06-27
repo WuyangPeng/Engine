@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:20)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:57)
 
 #include "Framework/FrameworkExport.h"
 
@@ -10,15 +10,11 @@
 #include "System/Window/WindowProcess.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::WindowMousePosition
-	::WindowMousePosition(HWnd hwnd)
-	:m_Hwnd(hwnd)
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
+using std::make_shared;
 
 Framework::WindowMousePosition
-	::~WindowMousePosition()
+	::WindowMousePosition(HWnd hwnd) noexcept
+	:m_Hwnd{ hwnd }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -27,7 +23,7 @@ Framework::WindowMousePosition
 bool Framework::WindowMousePosition
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid() && m_Hwnd != nullptr)
+	if (ParentType::IsValid() && m_Hwnd != nullptr)
 		return true;
 	else
 		return false;
@@ -35,31 +31,31 @@ bool Framework::WindowMousePosition
 #endif // OPEN_CLASS_INVARIANT
 
 const Framework::WindowPoint Framework::WindowMousePosition
-	::GetMousePosition() const
+	::GetMousePosition() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	System::WindowPoint point;
+	System::WindowPoint point{ };
 
 	System::GetCursorClientPos(m_Hwnd, point);
 
-	return WindowPoint(point);
+	return WindowPoint{ point };
 }
 
 void Framework::WindowMousePosition
-	::SetMousePosition( const WindowPoint& windowPoint )
+	::SetMousePosition(const WindowPoint& windowPoint) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	System::WindowPoint point = { windowPoint.GetWindowX(), windowPoint.GetWindowY() };
+	System::WindowPoint point{ windowPoint.GetWindowX(), windowPoint.GetWindowY() };
 
 	System::SetCursorClientPos(m_Hwnd, point);
 }
 
-Framework::WindowMousePosition::MousePositionImplPtr Framework::WindowMousePosition
+Framework::WindowMousePosition::MousePositionImplSharedPtr Framework::WindowMousePosition
 	::Clone()
 {
-	return MousePositionImplPtr(new ClassType(m_Hwnd));
+	return make_shared<ClassType>(m_Hwnd);
 }
 
 

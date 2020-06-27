@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/10 10:21)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/23 10:01)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_DETAIL_H
@@ -13,19 +13,19 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Query3<Real>
-	::Query3 (const std::vector<Vector3D>& vertices)
+	::Query3(const std::vector<Vector3D>& vertices)
 	:ParentType{}, m_Vertices{ vertices }
 {
-    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Query3<Real>
-	::~Query3 ()
+	::~Query3()
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -35,46 +35,46 @@ template <typename Real>
 bool Mathematics::Query3<Real>
 	::IsValid() const noexcept
 {
-    if(!m_Vertices.empty())
-        return true;
-    else
-        return false;    
+	if (!m_Vertices.empty())
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename Real>
 Mathematics::QueryType Mathematics::Query3<Real>
-	::GetType () const
+	::GetType() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
-    return QueryType::Real;    
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+	return QueryType::Real;
 }
 
 template <typename Real>
 int Mathematics::Query3<Real>
-	::GetNumVertices () const
+	::GetNumVertices() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
-    return boost::numeric_cast<int>(m_Vertices.size());
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+	return boost::numeric_cast<int>(m_Vertices.size());
 }
 
 template <typename Real>
 typename const Mathematics::Query3<Real>::Vector3D Mathematics::Query3<Real>
-	::GetVertice (int index) const
+	::GetVertice(int index) const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
-    
-    return m_Vertices[index];
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
+
+	return m_Vertices[index];
 }
 
 template <typename Real>
 Mathematics::PlaneQueryType Mathematics::Query3<Real>
 	::ToPlane(int index, int v0, int v1, int v2) const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 
 	return ToPlane(m_Vertices[index], v0, v1, v2);
@@ -84,7 +84,7 @@ template <typename Real>
 Mathematics::PlaneQueryType Mathematics::Query3<Real>
 	::ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
@@ -115,53 +115,51 @@ Mathematics::PlaneQueryType Mathematics::Query3<Real>
 
 	if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
 		return PlaneQueryType::OnPlane;
-	else if (Real{} < det)
+	else if (Math<Real>::sm_Zero < det)
 		return PlaneQueryType::PositiveSide;
 	else
 		return PlaneQueryType::NegativeSide;
 }
 
-
 template <typename Real>
 Mathematics::TetrahedronQueryType Mathematics::Query3<Real>
-	::ToTetrahedron( int index, int v0, int v1, int v2, int v3 ) const
+	::ToTetrahedron(int index, int v0, int v1, int v2, int v3) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 
-	return ToTetrahedron(m_Vertices[index], v0, v1, v2,v3);
+	return ToTetrahedron(m_Vertices[index], v0, v1, v2, v3);
 }
-
 
 template <typename Real>
 Mathematics::TetrahedronQueryType Mathematics::Query3<Real>
-	::ToTetrahedron( const Vector3D& testVector, int v0, int v1, int v2, int v3 ) const
+	::ToTetrahedron(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 	MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
-	 
-	auto sign0 = ToPlane(testVector,  v1, v2, v3);
+
+	auto sign0 = ToPlane(testVector, v1, v2, v3);
 	if (sign0 == PlaneQueryType::PositiveSide)
 	{
 		return TetrahedronQueryType::Outside;
 	}
 
-	auto sign1 = ToPlane(testVector,  v0, v2, v3);
+	auto sign1 = ToPlane(testVector, v0, v2, v3);
 	if (sign1 == PlaneQueryType::NegativeSide)
 	{
 		return TetrahedronQueryType::Outside;
 	}
 
-	auto sign2 = ToPlane(testVector,  v0, v1, v3);
+	auto sign2 = ToPlane(testVector, v0, v1, v3);
 	if (sign2 == PlaneQueryType::PositiveSide)
 	{
 		return TetrahedronQueryType::Outside;
 	}
 
-	auto sign3 = ToPlane(testVector,  v0, v1, v2);
+	auto sign3 = ToPlane(testVector, v0, v1, v2);
 	if (sign3 == PlaneQueryType::NegativeSide)
 	{
 		return TetrahedronQueryType::Outside;
@@ -178,20 +176,19 @@ Mathematics::TetrahedronQueryType Mathematics::Query3<Real>
 	}
 }
 
-
 template <typename Real>
 Mathematics::CircumsphereQueryType Mathematics::Query3<Real>
-	::ToCircumsphere( int index, int v0, int v1, int v2, int v3 ) const
+	::ToCircumsphere(int index, int v0, int v1, int v2, int v3) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 
-	return ToCircumsphere(m_Vertices[index], v0, v1, v2,v3);
+	return ToCircumsphere(m_Vertices[index], v0, v1, v2, v3);
 }
 
 template <typename Real>
 Mathematics::CircumsphereQueryType Mathematics::Query3<Real>
-	::ToCircumsphere( const Vector3D& testVector, int v0, int v1, int v2, int v3 ) const
+	::ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
@@ -235,21 +232,19 @@ Mathematics::CircumsphereQueryType Mathematics::Query3<Real>
 	auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
 	auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
 
-	auto det = QueryDotTools<Real>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x,d3y,d3z,w3);
+	auto det = QueryDotTools<Real>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
 	auto positive = querySortTools.GetSymbol();
 	if (positive == NumericalValueSymbol::Negative)
 	{
 		det = -det;
 	}
 
-	if(Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
 		return CircumsphereQueryType::OnCircumsphere;
-	else if (det < Real{})
+	else if (det < Math<Real>::sm_Zero)
 		return CircumsphereQueryType::Inside;
 	else
-		return CircumsphereQueryType::Outside; 
+		return CircumsphereQueryType::Outside;
 }
 
-
 #endif // MATHEMATICS_QUERY_QUERY3_DETAIL_H
- 

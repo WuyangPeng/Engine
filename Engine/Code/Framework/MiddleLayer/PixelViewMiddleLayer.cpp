@@ -1,51 +1,73 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:08)
+// 引擎版本：0.3.0.1 (2020/05/21 14:56)
 
 #include "Framework/FrameworkExport.h"
 
 #include "PixelViewMiddleLayer.h"
 #include "Detail/PixelViewMiddleLayerImpl.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"  
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
+#include "Rendering/Renderers/Renderer.h"
 #include "Framework/WindowCreate/WindowSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
+using std::move;
+using std::make_shared;
+
+namespace Framework
+{
+	static constexpr auto g_DefaultWidth = 1024;
+	static constexpr auto g_DefaultHeight = 768;
+}
 
 Framework::PixelViewMiddleLayer
-	::PixelViewMiddleLayer()
-	:ParentType{},m_Impl(new ImplType)
+	::PixelViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
+	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(g_DefaultWidth,g_DefaultHeight) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Framework::PixelViewMiddleLayer
-	::~PixelViewMiddleLayer()
+	::PixelViewMiddleLayer(PixelViewMiddleLayer&& rhs) noexcept
+	:ParentType{ move(rhs) }, m_Impl{ move(rhs.m_Impl) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
+ 
+Framework::PixelViewMiddleLayer& Framework::PixelViewMiddleLayer
+	::operator=(PixelViewMiddleLayer&& rhs) noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
 
+	ParentType::operator=(move(rhs));
+
+	m_Impl = move(rhs.m_Impl);
+
+	return *this;
+}
+ 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Framework, PixelViewMiddleLayer)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, PixelViewMiddleLayer, IsDoFlip, bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelViewMiddleLayer, IsDoFlip, bool);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, PixelViewMiddleLayer, DoFlip, bool, void);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelViewMiddleLayer, GetScreenWidth, int);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelViewMiddleLayer, GetScreenHeight, int); 
 
 bool Framework::PixelViewMiddleLayer
 	::Initialize()
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	if(ParentType::Initialize())
-	{	
-		ConstRendererSmartPointer renderer = GetConstRenderer();
+	auto renderer = GetRenderer();
 
-		if (renderer.IsValidPtr())
-		{
-			WindowSize windowSize(renderer->GetWidth(), renderer->GetHeight());
+	if (ParentType::Initialize() && renderer)
+	{
+		const WindowSize windowSize{ renderer->GetWidth(), renderer->GetHeight() };
 
-			m_Impl->Resize(windowSize, GetClearColor());
-		}	
+		m_Impl->Resize(windowSize, GetClearColor());
 
 		return true;
 	}
@@ -53,30 +75,25 @@ bool Framework::PixelViewMiddleLayer
 	{
 		return false;
 	}
-} 
-
-void Framework::PixelViewMiddleLayer
-	::Terminate()
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	ParentType::Terminate();
-} 
+}
 
 bool Framework::PixelViewMiddleLayer
-	::Display( int64_t timeDelta )
+	::Idle(int64_t timeDelta)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	RendererSmartPointer renderer = GetRenderer();
+	auto renderer = GetRenderer();
 
-	if(ParentType::Idle(timeDelta) && renderer.IsValidPtr() && renderer->PreDraw())
+	if (ParentType::Idle(timeDelta) && renderer)
 	{
-        renderer->ClearBuffers();
-        m_Impl->Draw(renderer);
-        ScreenOverlay();
-        renderer->PostDraw();
-        renderer->DisplayColorBuffer();
+		if (renderer->PreDraw())
+		{
+			renderer->ClearBuffers();
+			m_Impl->Draw(renderer);
+			ScreenOverlay();
+			renderer->PostDraw();
+			renderer->DisplayColorBuffer();
+		}
 
 		return true;
 	}
@@ -86,26 +103,25 @@ bool Framework::PixelViewMiddleLayer
 	}
 }
 
-bool Framework:: PixelViewMiddleLayer
-	::Resize( WindowDisplayFlags type, const WindowSize& size )
+bool Framework::PixelViewMiddleLayer
+	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	int width = size.GetWindowWidth();
-	int height = size.GetWindowHeight();
+	const auto width = size.GetWindowWidth();
+	const auto height = size.GetWindowHeight();
+	auto renderer = GetRenderer();
 
-	if(ParentType::Resize(type,size) && 0 < width * height)
+	if (ParentType::Resize(windowDisplay, size))
 	{
-		RendererSmartPointer renderer = GetRenderer();
-
-		if (renderer.IsValidPtr())
+		if (0 < width * height && renderer)
 		{
 			renderer->Resize(width, height);
+
+			const auto colour = GetClearColor();
+
+			m_Impl->Resize(size, colour);
 		}		
-
-		Colour colour = GetClearColor();
-
-		m_Impl->Resize(size,colour);
 
 		return true;
 	}
@@ -113,27 +129,29 @@ bool Framework:: PixelViewMiddleLayer
 	{
 		return false;
 	}
-}
-
-void Framework::PixelViewMiddleLayer
-	::ScreenOverlay ()
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-     // 存根在派生类.
-}
-
-void Framework::PixelViewMiddleLayer
-	::ClearScreen ()
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;	
-
-	Colour colour = GetClearColor();
-
-	return m_Impl->ClearScreen(colour);
 }
  
 void Framework::PixelViewMiddleLayer
-	::SetPixel (int x, int y, const Colour& colour)
+	::ScreenOverlay()
+{
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	// 存根在派生类。
+	CoreTools::DoNothing();
+}
+ 
+void Framework::PixelViewMiddleLayer
+	::ClearScreen()
+{
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	const auto colour = GetClearColor();
+
+	return m_Impl->ClearScreen(colour);
+}
+
+void Framework::PixelViewMiddleLayer
+	::SetPixel(int x, int y, const Colour& colour)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -141,7 +159,7 @@ void Framework::PixelViewMiddleLayer
 }
 
 void Framework::PixelViewMiddleLayer
-	::SetThickPixel (int x, int y, int thick, const Colour& colour)
+	::SetThickPixel(int x, int y, int thick, const Colour& colour)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -149,7 +167,7 @@ void Framework::PixelViewMiddleLayer
 }
 
 const Framework::PixelViewMiddleLayer::Colour Framework::PixelViewMiddleLayer
-	::GetPixel (int x, int y) const
+	::GetPixel(int x, int y) const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -157,15 +175,15 @@ const Framework::PixelViewMiddleLayer::Colour Framework::PixelViewMiddleLayer
 }
 
 void  Framework::PixelViewMiddleLayer
-	::DrawLine (int beginX, int beginY, int endX, int endY, const Colour& colour)
+	::DrawLine(int xMin, int yMin, int xMax, int yMax, const Colour& colour)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->DrawLine(beginX, beginY, endX, endY, colour);
+	return m_Impl->DrawLine(xMin, yMin, xMax, yMax, colour);
 }
 
 void  Framework::PixelViewMiddleLayer
-	::DrawRectangle (int xMin, int yMin, int xMax, int yMax, const Colour& colour, bool solid)
+	::DrawRectangle(int xMin, int yMin, int xMax, int yMax, const Colour& colour, bool solid)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -173,7 +191,7 @@ void  Framework::PixelViewMiddleLayer
 }
 
 void  Framework::PixelViewMiddleLayer
-	::DrawCircle (int xCenter, int yCenter, int radius, const Colour& colour, bool solid)
+	::DrawCircle(int xCenter, int yCenter, int radius, const Colour& colour, bool solid)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -181,7 +199,7 @@ void  Framework::PixelViewMiddleLayer
 }
 
 void  Framework::PixelViewMiddleLayer
-	::Fill (int x, int y, const Colour& foreColour, const Colour& backColour)
+	::Fill(int x, int y, const Colour& foreColour, const Colour& backColour)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

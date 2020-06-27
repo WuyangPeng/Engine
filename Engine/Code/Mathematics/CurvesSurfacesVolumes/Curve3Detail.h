@@ -18,9 +18,9 @@
 template <typename Real>
 Mathematics::Curve3<Real>
 	::Curve3(Real tmin, Real tmax)
+	:mTMin{ tmin }, mTMax{ tmax }
 {
-    mTMin = tmin;
-    mTMax = tmax;
+    
 }
 
 template <typename Real>
@@ -133,13 +133,13 @@ Real Mathematics::Curve3<Real>
 		auto acceleration = GetSecondDerivative(t);
 		auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
 		auto numer = Vector3DTools<Real>::VectorMagnitude(cross);
-		auto denom = Math<Real>::Pow(speedSqr, (Real)1.5);
+		auto denom = Math<Real>::Pow(speedSqr, static_cast<Real>(1.5));
         return numer/denom;
     }
     else
     {
         // Curvature is indeterminate, just return 0.
-        return Real{};
+        return Math<Real>::sm_Zero;
     }
 }
 
@@ -161,7 +161,7 @@ Real Mathematics::Curve3<Real>
     else
     {
         // Torsion is indeterminate, just return 0.
-        return Real{};
+        return Math<Real>::sm_Zero;
     }
 }
 
@@ -172,7 +172,9 @@ void Mathematics::Curve3<Real>
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
     points = NEW1<Vector3D<Real> >(numPoints);
 
-	auto delta = (mTMax - mTMin)/(numPoints - 1);
+	auto temp1 = mTMax - mTMin;
+	auto temp2 = numPoints - 1;
+	auto delta = (temp1 )/(temp2);
 
     for (auto i = 0; i < numPoints; ++i)
     {
@@ -188,7 +190,8 @@ void Mathematics::Curve3<Real>
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
     points = NEW1<Vector3D<Real> >(numPoints);
 
-	auto delta = GetTotalLength()/(numPoints - 1);
+	auto temp = numPoints - 1;
+	auto delta = GetTotalLength()/(temp);
 
     for (auto i = 0; i < numPoints; ++i)
     {

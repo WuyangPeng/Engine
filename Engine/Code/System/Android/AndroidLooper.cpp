@@ -11,10 +11,11 @@
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Window/WindowProcess.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26461)
+#include SYSTEM_WARNING_DISABLE(26487)
 System::AndroidLooper* System
 	::AndroidLooperForThread() noexcept
 {

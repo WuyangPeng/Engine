@@ -61,7 +61,8 @@ namespace Rendering
 	
 		// 存取绘制对象的视觉效果。
 		void SetEffectInstance (const VisualEffectInstanceSmartPointer& effect);
-		const ConstVisualEffectInstanceSmartPointer GetEffectInstance() const;
+		const ConstVisualEffectInstanceSmartPointer GetConstEffectInstance() const;
+		const VisualEffectInstanceSmartPointer GetEffectInstance();
 
 		virtual void UpdateModelSpace(VisualUpdateType type);
 
@@ -76,7 +77,7 @@ namespace Rendering
 		// 对几何更新的支持。
 		virtual void UpdateWorldBound() override;
 
-		ConstSpatialSmartPointer GetSmartPointer() const;
+		ConstVisualSmartPointer GetSmartPointer() const;
 
 		void CloneData(const Visual& rhs);
 		void CloneIndexBuffer( const Visual &rhs );
@@ -86,9 +87,11 @@ namespace Rendering
 	private:
 		IMPL_TYPE_DECLARE(Visual);
 	};
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(Visual);
+#include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Sixth, Visual); 
 }
 
-#endif // RENDERING_SCENE_GRAPH_VISUAL_IMPL_H
+#endif // RENDERING_SCENE_GRAPH_VISUAL_H

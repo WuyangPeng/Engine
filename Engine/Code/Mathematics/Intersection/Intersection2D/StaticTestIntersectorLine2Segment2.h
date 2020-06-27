@@ -1,21 +1,19 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 18:07)
+// 引擎版本：0.0.2.5 (2020/03/24 14:40)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_H 
 
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Objects2D/Line2.h"
 #include "Mathematics/Objects2D/Segment2.h"  
 #include "Mathematics/Intersection/StaticIntersector.h" 
 
 namespace Mathematics
-{
-	template <typename Real>
-	class Vector2DTools;
-
+{ 
 	template <typename Real>
 	class StaticTestIntersectorLine2Segment2 : public StaticIntersector<Real, Vector2D>
 	{
@@ -27,18 +25,16 @@ namespace Mathematics
 		using Segment2 = Segment2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
 		using Math = Math<Real>;
-		  
-		
-		
+
 	public:
-		StaticTestIntersectorLine2Segment2(const Line2& line, const Segment2& segment,const Real dotThreshold = Math::sm_ZeroTolerance,const Real intervalThreshold = Real{});
+		StaticTestIntersectorLine2Segment2(const Line2& line, const Segment2& segment, const Real dotThreshold = Math::sm_ZeroTolerance, const Real intervalThreshold = Math::sm_Zero);
 		virtual ~StaticTestIntersectorLine2Segment2();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		const Line2 GetLine() const;
 		const Segment2 GetSegment() const;
-		 
+
 		// 相交测试使用线段的中心-范围形式。 
 		// 如果从端点（Vector2D<Real>）开始并创建 Segment2<Real>对象，
 		// 则到中心-范围格式的转换可能包含小的数字舍入误差。
@@ -55,7 +51,7 @@ namespace Mathematics
 
 	private:
 		// 静态查找相交查询。
-		void Test ();   
+		void Test();
 
 	private:
 		// 要相交的对象。
@@ -64,8 +60,8 @@ namespace Mathematics
 
 		// 相交集
 		int m_Quantity;
- 
-		Real m_IntervalThreshold; 
+
+		Real m_IntervalThreshold;
 	};
 
 	using StaticTestIntersectorLine2Segment2f = StaticTestIntersectorLine2Segment2<float>;

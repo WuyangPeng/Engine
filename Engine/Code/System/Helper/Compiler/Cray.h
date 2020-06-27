@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:01)
+// 引擎版本：0.2.0.0 (2020/05/07 13:43)
 
 #ifndef SYSTEM_HELPER_COMPAQ_CXX_H
 #define SYSTEM_HELPER_COMPAQ_CXX_H
@@ -55,7 +55,7 @@
 	#if CRAY_VERSION < 80000
 		#error "在版本8之前没有为Cray编译器配置——请重新配置脚本。" 
 	#endif // CRAY_VERSION < 80000
-	
+
 	// 这些常量应该由编译器提供，至少在命令行上声明-hgnu时。
 	#ifndef __ATOMIC_RELAXED
 		#define __ATOMIC_RELAXED 0
@@ -70,9 +70,9 @@
 
 #endif // SYSTEM_HELPER_COMPAQ_CXX_H
 
- 
 
- 
+
+
 
 
 

@@ -143,49 +143,49 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -197,7 +197,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -209,7 +209,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -221,7 +221,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -235,7 +235,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -251,7 +251,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -267,7 +267,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -283,7 +283,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -452,6 +452,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ClassInvariantFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\Flags\CheckInvariantFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\FunctionDescribed.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\Noexcept.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\NoexceptDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ScopeExit.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ScopeExitDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\TriggerAssert.h" />
@@ -551,6 +553,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CReadFileManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CWriteFileManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\DeleteFileToolsImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\DirectoryImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentVariableImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileBufferImpl.h" />
@@ -568,6 +571,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteBufferIOImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileHandleImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Directory.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Endian.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Environment.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\EnvironmentVariable.h" />
@@ -998,11 +1002,13 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Time\Time.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\TimeFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\CpuTimerData.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuiteImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuitePrintManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestData.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestFailPrintManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestPrintManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\OStreamShared.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Suite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTest.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestComposite.h" />
@@ -1098,6 +1104,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CReadFileManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\CWriteFileManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\DeleteFileToolsImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\DirectoryImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\EnvironmentVariableImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileBufferImpl.cpp" />
@@ -1115,6 +1122,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteBufferIOImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileHandleImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileManagerInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Directory.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Endian.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Environment.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\EnvironmentVariable.cpp" />
@@ -1278,11 +1286,13 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Time\MillisecondTimer.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Time\SecondTimer.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\CpuTimerData.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuiteImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\SuitePrintManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestData.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestFailPrintManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\UnitTestPrintManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\OStreamShared.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Suite.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTest.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestComposite.cpp" />

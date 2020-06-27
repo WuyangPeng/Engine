@@ -10,7 +10,7 @@
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 System::ThreadHandle System
 	::CreateSystemRemoteThread(WindowHandle process, WindowSecurityAttributesPtr threadAttributes, WindowSize stackSize, ThreadStartRoutine startAddress,
@@ -25,7 +25,7 @@ System::ThreadHandle System
 	SYSTEM_UNUSED_ARG(startAddress);
 	SYSTEM_UNUSED_ARG(parameter);
 	SYSTEM_UNUSED_ARG(creationFlags);
-	SYSTEM_UNUSED_ARG(threadId);
+	SYSTEM_UNUSED_ARG(threadID);
 
 	return nullptr;
 #endif // SYSTEM_PLATFORM_WIN32

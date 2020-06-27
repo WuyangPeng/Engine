@@ -13,7 +13,7 @@
 #include "System/Helper/PragmaWarning.h"
 #include "System/Window/WindowSystem.h"
 #include "System/Window/Using/WindowUsing.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
 	#include <process.h>
@@ -199,7 +199,8 @@ System::ThreadHandle System
 #ifdef SYSTEM_PLATFORM_WIN32
 
 	#include STSTEM_WARNING_PUSH
-	#include SYSTEM_WARNING_DISABLE(26490)
+	#include SYSTEM_WARNING_DISABLE(26490) 
+	#include SYSTEM_WARNING_DISABLE(26487)
 	return  reinterpret_cast<ThreadHandle>(::_beginthreadex(security, stacksize, startAddress, argument, createFlag, threadAddress));
 	#include STSTEM_WARNING_POP
 

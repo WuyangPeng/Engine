@@ -32,13 +32,13 @@ RiemannianGeodesic<Real>::RiemannianGeodesic (int dimension)
 
     IntegralSamples = 16;
     SearchSamples = 32;
-    DerivativeStep = (Real)1e-04;
+    DerivativeStep = static_cast<Real>(1e-04);
     Subdivisions = 7;
     Refinements = 8;
-    SearchRadius = (Real)1;
+    SearchRadius = static_cast<Real>(1);
 
-    mIntegralStep = ((Real)1)/(Real)(IntegralSamples - 1);
-    mSearchStep = ((Real)1)/(Real)SearchSamples;
+    mIntegralStep = (static_cast<Real>(1))/(Real)(IntegralSamples - 1);
+    mSearchStep = (static_cast<Real>(1))/(Real)SearchSamples;
     mDerivativeFactor = (Real{0.5})/DerivativeStep;
 
     RefineCallback = 0;
@@ -72,13 +72,13 @@ Real RiemannianGeodesic<Real>::ComputeSegmentLength (const VariableLengthVector<
     // Evaluate the integrand at point0.
     ComputeMetric(point0);
     Real qForm = mMetric.QuadraticForm(diff, diff);
-    MATHEMATICS_ASSERTION_0(qForm > Real{}, "Unexpected condition\n");
+    MATHEMATICS_ASSERTION_0(qForm > Math<Real>::sm_Zero, "Unexpected condition\n");
     Real length = Math<Real>::Sqrt(qForm);
 
     // Evaluate the integrand at point1.
     ComputeMetric(point1);
     qForm = mMetric.QuadraticForm(diff, diff);
-    MATHEMATICS_ASSERTION_0(qForm > Real{}, "Unexpected condition\n");
+    MATHEMATICS_ASSERTION_0(qForm > Math<Real>::sm_Zero, "Unexpected condition\n");
     length += Math<Real>::Sqrt(qForm);
     length *= Real{0.5};
 
@@ -90,7 +90,7 @@ Real RiemannianGeodesic<Real>::ComputeSegmentLength (const VariableLengthVector<
         temp = point0 + t*diff;
         ComputeMetric(temp);
         qForm = mMetric.QuadraticForm(diff,diff);
-        MATHEMATICS_ASSERTION_0(qForm > Real{}, "Unexpected condition\n");
+        MATHEMATICS_ASSERTION_0(qForm > Math<Real>::sm_Zero, "Unexpected condition\n");
         length += Math<Real>::Sqrt(qForm);
     }
     length *= mIntegralStep;
@@ -303,7 +303,7 @@ Real RiemannianGeodesic<Real>::ComputeIntegrand (const VariableLengthVector<Real
 
     // g_{ij}*der_{i}*der_{j}
     Real qForm0 = mMetric.QuadraticForm(der, der);
-    MATHEMATICS_ASSERTION_0(qForm0 > Real{}, "Unexpected condition\n");
+    MATHEMATICS_ASSERTION_0(qForm0 > Math<Real>::sm_Zero, "Unexpected condition\n");
 
     // gamma_{kij}*der_{k}*der_{i}*der_{j}
     VariableMatrix<Real> mat(mDimension, mDimension);

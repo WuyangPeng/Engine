@@ -28,9 +28,6 @@
     <Filter Include="FlatFileWrappers 源文件">
       <UniqueIdentifier>{15efd295-3555-4084-b098-32aa91d29d99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{43782e5c-1b91-4fbe-b84b-3acdd736098d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MysqlConnectorWrappers 头文件">
       <UniqueIdentifier>{8c15987a-0013-4ba1-803c-bc50842330ff}</UniqueIdentifier>
     </Filter>
@@ -94,6 +91,12 @@
     <Filter Include="OracleWrappers 头文件">
       <UniqueIdentifier>{5b092647-767f-420c-a837-abcbccea51b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{43782e5c-1b91-4fbe-b84b-3acdd736098d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MysqlWrappers 头文件">
+      <UniqueIdentifier>{5a12f0ed-cfe6-47d1-b32e-96317298bc8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -113,6 +116,24 @@
     </Text>
     <Text Include="Resource\ReadMe.txt">
       <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -295,15 +316,6 @@
     <ClInclude Include="..\..\..\Code\Database\FlatFileWrappers\FlatFileWrappers.h">
       <Filter>FlatFileWrappers 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\MysqlConnectorWrappers.h">
       <Filter>MysqlConnectorWrappers 头文件</Filter>
     </ClInclude>
@@ -465,6 +477,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\OracleWrappers\OracleWrappers.h">
       <Filter>OracleWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\SqlInterface\SqlInterfaceInternalFwd.h">
+      <Filter>SqlInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MysqlWrappers\MysqlWrappersFwd.h">
+      <Filter>MysqlWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MysqlWrappers\MysqlWrappers.h">
+      <Filter>MysqlWrappers 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

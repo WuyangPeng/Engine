@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 09:12)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:43)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
@@ -23,10 +23,10 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>; 
+		using Math = Math<Real>;
 
 	public:
-		DynamicFindIntersectorBox3Box3(const Box3& box0, const Box3& box1,Real tmax,
+		DynamicFindIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax,
 									   const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
 
 		// Object access.
@@ -39,7 +39,7 @@ namespace Mathematics
 
 	private:
 		// Dynamic find-intersection query.  The contact set is computed.
-		void Find ();  
+		void Find();
 
 		// The objects to intersect.
 		Box3 mBox0;

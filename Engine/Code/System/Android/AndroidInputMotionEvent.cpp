@@ -8,7 +8,7 @@
 
 #include "AndroidInputMotionEvent.h"
 #include "System/Helper/UnusedMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 System::AndroidMotionEventAction System
 	::AndroidMotionEventGetAction(const AndroidInputEvent* motionEvent) noexcept

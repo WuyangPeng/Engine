@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:11)
+// 引擎版本：0.0.2.5 (2020/03/23 12:29)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_H
 #define MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_H 
@@ -22,7 +22,7 @@ namespace Mathematics
 	template <typename Real>
 	class GreatArcFit3
 	{
-	public:		
+	public:
 		using ClassType = GreatArcFit3<Real>;
 		using Vector3D = Vector3D<Real>;
 		using Points = std::vector<Vector3D>;
@@ -40,7 +40,7 @@ namespace Mathematics
 		void Calculate(const Points& points);
 
 	private:
-		Vector3D m_Normal; 
+		Vector3D m_Normal;
 		Vector3D m_ArcEnd0;
 		Vector3D m_ArcEnd1;
 	};

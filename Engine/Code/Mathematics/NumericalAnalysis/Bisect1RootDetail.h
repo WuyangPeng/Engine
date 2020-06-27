@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 13:42)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 13:34)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ROOT_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ROOT_DETAIL_H
@@ -14,15 +14,15 @@
 
 template <typename Real>
 Mathematics::Bisect1Root<Real>
-	::Bisect1Root ()
+	::Bisect1Root()
 	:m_Root{}, m_Bisect1RootType{ BisectRootType::NoSolution }
 {
-    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::Bisect1Root<Real>
-	::Bisect1Root (Real root,BisectRootType type)
+	::Bisect1Root(Real root, BisectRootType type)
 	:m_Root{ root }, m_Bisect1RootType{ type }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -33,16 +33,16 @@ template <typename Real>
 bool Mathematics::Bisect1Root<Real>
 	::IsValid() const noexcept
 {
-    return true;
+	return true;
 }
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename Real>
 Real Mathematics::Bisect1Root<Real>
-	::GetRoot () const
+	::GetRoot() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    
+	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
 	if (m_Bisect1RootType != BisectRootType::NoSolution)
 	{
 		return m_Root;
@@ -55,11 +55,11 @@ Real Mathematics::Bisect1Root<Real>
 
 template <typename Real>
 Mathematics::BisectRootType Mathematics::Bisect1Root<Real>
-	::GetBisect1RootType () const
+	::GetBisect1RootType() const
 {
-    CLASS_IS_VALID_CONST;
-    
-    return m_Bisect1RootType;
+	CLASS_IS_VALID_CONST;
+
+	return m_Bisect1RootType;
 }
 
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ROOT_DETAIL_H

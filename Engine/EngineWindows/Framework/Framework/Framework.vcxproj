@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="StaticDebug|Win32">
       <Configuration>StaticDebug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticDebug|x64">
-      <Configuration>StaticDebug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="StaticRelease|Win32">
       <Configuration>StaticRelease</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticRelease|x64">
-      <Configuration>StaticRelease</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{3FFB9584-1FA8-4535-9A8E-CAD6EE7B99BF}</ProjectGuid>
+    <ProjectGuid>{AF1625D7-9AE0-42CA-9D7C-65016F61E488}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Framework</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
@@ -140,207 +140,408 @@
     <Import Project="..\..\EngineStaticX64ReleaseLibs.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;Framework_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>
-      </EnforceTypeConversionRules>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubFramework>Windows</SubFramework>
-    </Link>
-    <PostBuildEvent />
-    <PostBuildEvent />
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubFramework>Windows</SubFramework>
-    </Link>
-    <PostBuildEvent />
-    <PostBuildEvent />
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;Framework_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;FRAMEWORK_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubFramework>Windows</SubFramework>
+      <EnableUAC>false</EnableUAC>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubFramework>Windows</SubFramework>
+      <EnableUAC>false</EnableUAC>
     </Link>
-    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;FRAMEWORK_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;Framework_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;FRAMEWORK_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubFramework>Windows</SubFramework>
+      <EnableUAC>false</EnableUAC>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubFramework>Windows</SubFramework>
+      <EnableUAC>false</EnableUAC>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;Framework_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;FRAMEWORK_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubFramework>Windows</SubFramework>
+      <EnableUAC>false</EnableUAC>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubFramework>Windows</SubFramework>
+      <EnableUAC>false</EnableUAC>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBack.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackUnitTestSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrame.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrameBuild.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrameBuildDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrameFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidMessageLoop.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidProcess.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidProcessDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidProcessManager.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\Detail\AndroidCallBackUnitTestSuiteImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\Detail\AndroidProcessManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Application.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\ApplicationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\CameraMotion.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\CameraMotionImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\EngineTestingNameImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\FontInformationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\GLUTApplicationInformationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\GlutFontInformation.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\MousePositionImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\ObjectMotionImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\ObjectMotionMove.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\ObjectMotionRotateTrackBall.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\PerformanceMeasurementsImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\PixelScreenDrawLine.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\PixelScreenImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\WindowApplicationInformationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\WindowFontInformation.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\WindowMousePosition.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\EngineTestingName.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Flags\ApplicationTrait.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Flags\KeyboardModifiers.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Flags\KeyIdentifiers.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Flags\MouseButtons.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Flags\MouseModifiers.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\Flags\MouseState.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\FontInformation.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\GLUTApplicationInformation.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\MousePosition.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\ObjectMotion.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\PerformanceMeasurements.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\PixelScreen.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Application\WindowApplicationInformation.h" />
+    <ClInclude Include="..\..\..\Code\Framework\ConsoleFrame\ConsoleCallBackInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\ConsoleFrame\ConsoleFrame.h" />
+    <ClInclude Include="..\..\..\Code\Framework\ConsoleFrame\ConsoleFrameBuild.h" />
+    <ClInclude Include="..\..\..\Code\Framework\ConsoleFrame\ConsoleFrameBuildDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\ConsoleFrame\ConsoleFrameFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\ConsoleFrame\ConsoleProcess.h" />
+    <ClInclude Include="..\..\..\Code\Framework\ConsoleFrame\ConsoleProcessDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Framework.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkDll.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkExport.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkImport.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkLib.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkNoImport.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Helper\MainFunctionEntryPoint.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Helper\MainFunctionMacro.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Helper\MiddleLayerMacro.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Helper\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxCallBackInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxFrame.h" />
+    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxFrameBuild.h" />
+    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxFrameBuildDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxFrameFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxProcess.h" />
+    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxProcessDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MacintoshFrame\MacintoshCallBackInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MacintoshFrame\MacintoshFrame.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MacintoshFrame\MacintoshFrameBuild.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MacintoshFrame\MacintoshFrameBuildDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MacintoshFrame\MacintoshFrameFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MacintoshFrame\MacintoshProcess.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MacintoshFrame\MacintoshProcessDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\AndroidMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\AndroidMainFunctionHelperDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\ConsoleMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\ConsoleMainFunctionHelperBase.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\ConsoleMainFunctionHelperDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\AnalysisEngineDirectory.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\ConsoleMainFunctionHelperBaseImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\DirectoryDefaultName.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\EngineDirectoryPath.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\EngineDirectoryResult.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\EnvironmentDirectoryImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\MainFunctionHelperBaseImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\EnvironmentDirectory.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Flags\Directory.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Flags\MainFunctionSchedule.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\MacintoshMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\MacintoshMainFunctionHelperDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\MainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\MainFunctionHelperBase.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\MainFunctionHelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\OpenGLGlutMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\OpenGLGlutMainFunctionHelperDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\WindowMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\WindowMainFunctionHelperDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ArtificialIntellegenceInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\AudioManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraControllerMiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraControllerMiddleLayerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraModelMiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraSystemsManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraViewMiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ControllerMiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ControllerMiddleLayerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\CameraModelMiddleLayerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\EngineMiddleLayerInterfaceImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ModelMiddleLayerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ModelViewControllerMiddleLayerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\NetworkManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\PixelViewMiddleLayerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ViewMiddleLayerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerContainer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EventManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\AudioMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\CameraSystemsMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\EventMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\GUIMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\InputMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\MessageMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\MiddleLayerPlatformFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\NetworkMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\ObjectLogicManagerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\PhysicalModellingMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\RenderingMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\ResourceMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\SystemMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\GUIManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\InputManager.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\InputManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\InputManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MessageManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MiddleLayerFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MiddleLayerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MiddleLayerInternalFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ModelMiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ModelViewControllerMiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ModelViewControllerMiddleLayerContainer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ModelViewControllerMiddleLayerContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\NetworkManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicManager.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicManagerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\PhysicalModellingManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\PixelViewMiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\RenderingManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ResourceManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\SystemManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ViewMiddleLayer.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\Detail\OpenGLGlutCallBackUnitTestSuiteImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\Detail\OpenGLGlutProcessManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\Flags\FrameParameter.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBack.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackUnitTestSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrame.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrameBuild.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrameBuildDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrameFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutProcess.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutProcessDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutProcessManager.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\Detail\WindowCreateHandleImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\Detail\WindowCreateParameterImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\Detail\WindowInstanceParameterImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowCreate.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowCreateFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowCreateHandle.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowCreateParameter.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowInstanceParameter.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowPoint.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowSize.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowMessageLoopImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowMessageUnitTestSuiteImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowMessageUnitTestSuiteStream.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowProcessManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\Flags\MouseTypes.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\VirtualKeysTypes.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessage.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageLoop.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageUnitTestSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageUnitTestSuiteDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcess.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcessFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcessHandle.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcessHandleDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcessManager.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\Detail\WindowNameImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\Detail\WindowPictorialImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowHBrush.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowHCursor.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowHIcon.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowName.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowPictorial.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegister.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterFwd.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterHandle.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterHandleDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterParameter.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowsAPIFrame\WindowsAPIFrame.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowsAPIFrame\WindowsAPIFrameBuild.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowsAPIFrame\WindowsAPIFrameBuildDetail.h" />
+    <ClInclude Include="..\..\..\Code\Framework\WindowsAPIFrame\WindowsAPIFrameFwd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackInterface.cpp" />
@@ -351,6 +552,7 @@
     <ClCompile Include="..\..\..\Code\Framework\AndroidFrame\Detail\AndroidProcessManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\CameraMotion.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\Detail\CameraMotionImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\Application\Detail\EngineTestingNameImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\Detail\FontInformationImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\Detail\GLUTApplicationInformationImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\Detail\GlutFontInformation.cpp" />
@@ -364,40 +566,25 @@
     <ClCompile Include="..\..\..\Code\Framework\Application\Detail\WindowApplicationInformationImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\Detail\WindowFontInformation.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\Detail\WindowMousePosition.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\Application\EngineTestingName.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\FontInformation.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\GLUTApplicationInformation.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\Application\KeyboardModifiers.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\Application\KeyIdentifiers.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\Application\MouseButtons.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\Application\MouseModifiers.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\MousePosition.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\Application\MouseState.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\ObjectMotion.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\PerformanceMeasurements.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\PixelScreen.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Application\WindowApplicationInformation.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\DllLib.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-      </ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Framework\DllMain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-      </ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\ConsoleMainFunctionHelper.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\ConsoleMainFunctionHelperImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\ConsoleFrame\ConsoleCallBackInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\DllLib.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\DllMain.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\LinuxFrame\LinuxCallBackInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MacintoshFrame\MacintoshCallBackInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\ConsoleMainFunctionHelperBase.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\AnalysisEngineDirectory.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\ConsoleMainFunctionHelperBaseImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\DirectoryDefaultName.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\EngineDirectoryPath.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\EngineDirectoryResult.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\EnvironmentDirectoryImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\MainFunctionHelperBaseImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MainFunctionHelper\EnvironmentDirectory.cpp" />
@@ -411,6 +598,7 @@
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\EngineMiddleLayerInterfaceImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\ModelMiddleLayerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\ModelViewControllerMiddleLayerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\NetworkManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\PixelViewMiddleLayerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\ViewMiddleLayerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerInterface.cpp" />
@@ -445,12 +633,12 @@
     <ClCompile Include="..\..\..\Code\Framework\WindowCreate\WindowSize.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowMessageLoopImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowMessageUnitTestSuiteImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowMessageUnitTestSuiteStream.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowProcessManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\VirtualKeysTypes.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\WindowMessageInterface.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\WindowMessageLoop.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\WindowMessageUnitTestSuite.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\WindowProcess\WindowMessageUnitTestSuiteOsPtr.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\WindowProcessManager.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowRegister\Detail\WindowNameImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowRegister\Detail\WindowPictorialImpl.cpp" />
@@ -460,195 +648,6 @@
     <ClCompile Include="..\..\..\Code\Framework\WindowRegister\WindowName.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowRegister\WindowPictorial.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterParameter.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBack.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackUnitTestSuite.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrame.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrameBuild.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrameBuildDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrameFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidMessageLoop.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidProcess.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidProcessDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidProcessManager.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\Detail\AndroidCallBackUnitTestSuiteImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\Detail\AndroidProcessManagerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Application.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\ApplicationFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\ApplicationTrait.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\CameraMotion.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\CameraMotionImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\FontInformationImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\GLUTApplicationInformationImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\GlutFontInformation.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\MousePositionImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\ObjectMotionImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\ObjectMotionMove.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\ObjectMotionRotateTrackBall.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\PerformanceMeasurementsImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\PixelScreenDrawLine.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\PixelScreenImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\WindowApplicationInformationImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\WindowFontInformation.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\Detail\WindowMousePosition.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\FontInformation.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\GLUTApplicationInformation.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\KeyboardModifiers.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\KeyIdentifiers.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\MouseButtons.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\MouseModifiers.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\MousePosition.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\MouseState.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\ObjectMotion.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\PerformanceMeasurements.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\PixelScreen.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Application\WindowApplicationInformation.h" />
-    <ClInclude Include="..\..\..\Code\Framework\DllLib.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Framework.h" />
-    <ClInclude Include="..\..\..\Code\Framework\FrameworkDll.h" />
-    <ClInclude Include="..\..\..\Code\Framework\FrameworkExport.h" />
-    <ClInclude Include="..\..\..\Code\Framework\FrameworkFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\FrameworkImport.h" />
-    <ClInclude Include="..\..\..\Code\Framework\FrameworkLib.h" />
-    <ClInclude Include="..\..\..\Code\Framework\FrameworkNoImport.h" />
-    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxFrame.h" />
-    <ClInclude Include="..\..\..\Code\Framework\LinuxFrame\LinuxFrameFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MacintosFrame\MacintosFrame.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MacintosFrame\MacintosFrameFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Macro\MainFunctionMacro.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Macro\MiddleLayerMacro.h" />
-    <ClInclude Include="..\..\..\Code\Framework\Macro\UserMacro.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\AndroidMainFunctionHelper.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\AndroidMainFunctionHelperDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\ConsoleMainFunctionHelper.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\ConsoleMainFunctionHelperImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\EnvironmentDirectoryImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\Detail\MainFunctionHelperBaseImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\EnvironmentDirectory.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\MainFunctionHelper.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\MainFunctionHelperBase.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\MainFunctionHelperFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\OpenGLGlutMainFunctionHelper.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\OpenGLGlutMainFunctionHelperDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\WindowMainFunctionHelper.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MainFunctionHelper\WindowMainFunctionHelperDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ArtificialIntellegenceInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\AudioManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraControllerMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraControllerMiddleLayerDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraModelMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraSystemsManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\CameraViewMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ControllerMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ControllerMiddleLayerDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\CameraModelMiddleLayerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\EngineMiddleLayerInterfaceImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ModelMiddleLayerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ModelViewControllerMiddleLayerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\PixelViewMiddleLayerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ViewMiddleLayerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerContainer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerContainerDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EventManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\AudioMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\CameraSystemsMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\EventMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\GUIMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\InputMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\MessageMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\NetworkMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\ObjectLogicManagerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\PhysicalModellingMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\RenderingMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\ResourceMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Flags\SystemMiddleLayerFlags.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\GUIManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\InputManager.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\InputManagerDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\InputManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MessageManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MiddleLayerFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MiddleLayerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\MiddleLayerInterfaceDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ModelMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ModelViewControllerMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ModelViewControllerMiddleLayerContainer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ModelViewControllerMiddleLayerContainerDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\NetworkManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicManager.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicManagerDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\PhysicalModellingManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\PixelViewMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\RenderingManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ResourceManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\SystemManagerInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ViewMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\Detail\OpenGLGlutCallBackUnitTestSuiteImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\Detail\OpenGLGlutProcessManagerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\FrameParameter.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBack.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackUnitTestSuite.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrame.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrameBuild.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrameBuildDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrameFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutProcess.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutProcessDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutProcessManager.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\Detail\WindowCreateHandleImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\Detail\WindowCreateParameterImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\Detail\WindowInstanceParameterImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowCreate.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowCreateFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowCreateHandle.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowCreateParameter.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowInstanceParameter.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowPoint.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowSize.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowCreate\WindowStyles.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowMessageLoopImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowMessageUnitTestSuiteImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\Detail\WindowProcessManagerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\MouseTypes.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\VirtualKeysTypes.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessage.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageInterface.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageLoop.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageUnitTestSuite.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageUnitTestSuiteOsPtr.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcess.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcessFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcessHandle.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcessHandleDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowProcessManager.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\Detail\WindowNameImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\Detail\WindowPictorialImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowHBrush.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowHCursor.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowHIcon.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowName.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowPictorial.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegister.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterFwd.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterHandle.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterHandleDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowRegister\WindowRegisterParameter.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowsAPIFrame\WindowsAPIFrame.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowsAPIFrame\WindowsAPIFrameBuild.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowsAPIFrame\WindowsAPIFrameBuildDetail.h" />
-    <ClInclude Include="..\..\..\Code\Framework\WindowsAPIFrame\WindowsAPIFrameFwd.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

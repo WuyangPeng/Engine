@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 15:06)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 12:41)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H
 
 namespace Mathematics
-{	
+{
 	template <typename ResultConstIter>
 	class EquationResultConstIterator;
 
@@ -18,7 +18,7 @@ namespace Mathematics
 	class Bisect1Root;
 
 	template <typename Real>
-	class Bisect1;	
+	class Bisect1;
 
 	template <typename Real>
 	class Bisect2Root;
@@ -53,10 +53,10 @@ namespace Mathematics
 	template <typename Real>
 	class BrentsMethodRoot;
 
-	template <typename Real,typename UserDataType>
+	template <typename Real, typename UserDataType>
 	class BrentsMethodCalculate;
 
-	template <typename Real,typename UserDataType>
+	template <typename Real, typename UserDataType>
 	class BrentsMethod;
 
 	template <typename Real>
@@ -85,13 +85,13 @@ namespace Mathematics
 	template <typename Real>
 	class Minimize1Data;
 
-	template <typename Real,typename UserDataType>
+	template <typename Real, typename UserDataType>
 	class Minimize1;
 
 	template <typename Real>
 	class MinimizeNData;
 
-	template <typename Real,typename UserDataType>
+	template <typename Real, typename UserDataType>
 	class MinimizeN;
 
 	template <typename Real>
@@ -138,6 +138,12 @@ namespace Mathematics
 
 	template <typename Real>
 	class QDUDecompositionValue;
+
+	enum class Bisect2StorageType;
+	enum class Bisect3StorageType;
+	enum class QuantityType;
+	enum class BisectRootType;
+	enum class BrentsMethodRootType;
 }
 
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 15:09)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 12:44)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_H
@@ -16,11 +16,11 @@
 #include <complex>
 
 namespace Mathematics
-{	
-    class MATHEMATICS_HIDDEN_DECLARE EquationResult
-    {
-    public:
-        using ClassType = EquationResult;
+{
+	class MATHEMATICS_HIDDEN_DECLARE EquationResult
+	{
+	public:
+		using ClassType = EquationResult;
 		using Imaginary = std::complex<double>;
 		using ImaginaryVector = std::vector<Imaginary>;
 		using RealVector = std::vector<double>;
@@ -28,11 +28,11 @@ namespace Mathematics
 		using RealResultConstIter = RealVector::const_iterator;
 		using RealConstIterator = EquationResultConstIterator<RealResultConstIter>;
 		using ImaginaryConstIterator = EquationResultConstIterator<ImaginaryResultConstIter>;
-        
-    public:
+
+	public:
 		EquationResult();
-        
-        CLASS_INVARIANT_DECLARE;
+
+		CLASS_INVARIANT_DECLARE;
 
 		bool IsRealResult() const;
 		int GetRealResultCount() const;
@@ -43,7 +43,7 @@ namespace Mathematics
 		void CleanSolution();
 
 		const RealConstIterator GetRealBegin() const;
-		const RealConstIterator GetRealEnd() const;	
+		const RealConstIterator GetRealEnd() const;
 		const ImaginaryConstIterator GetImaginaryBegin() const;
 		const ImaginaryConstIterator GetImaginaryEnd() const;
 

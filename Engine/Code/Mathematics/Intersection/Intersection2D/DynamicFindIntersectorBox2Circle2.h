@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 15:25)
+// 引擎版本：0.0.2.5 (2020/03/24 14:34)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX2_CIRCLE2_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX2_CIRCLE2_H 
@@ -18,7 +18,7 @@ namespace Mathematics
 	template <typename Real>
 	class DynamicFindIntersectorBox2Circle2 : public DynamicIntersector<Real, Vector2D>
 	{
-	public:		
+	public:
 		using ClassType = DynamicFindIntersectorBox2Circle2<Real>;
 		using ParentType = DynamicIntersector<Real, Vector2D>;
 		using Vector2D = Vector2D<Real>;
@@ -27,15 +27,15 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		DynamicFindIntersectorBox2Circle2(const Box2& box, const Circle2& circle,Real tmax, 
-										  const Vector2D& lhsVelocity,const Vector2D& rhsVelocity,const Real epsilon = Math::sm_ZeroTolerance); 
-		
+		DynamicFindIntersectorBox2Circle2(const Box2& box, const Circle2& circle, Real tmax,
+										  const Vector2D& lhsVelocity, const Vector2D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+
 		// Object access.
-		const Box2 GetBox () const;
-		const Circle2 GetCircle () const;
+		const Box2 GetBox() const;
+		const Circle2 GetCircle() const;
 
 		// Intersection set for dynamic find-intersection query.
-		const Vector2D& GetContactPoint () const;
+		const Vector2D& GetContactPoint() const;
 
 	private:
 		// Dynamic find-intersection query.
@@ -44,9 +44,9 @@ namespace Mathematics
 		// Support for dynamic Find.  Both functions return -1 if the objects are
 		// initially intersecting, 0 if no intersection, or +1 if they intersect
 		// at some positive time.
-		int TestVertexRegion (Real cx, Real cy, Real vx, Real vy, Real ex,Real ey, Real& ix, Real& iy);
+		int TestVertexRegion(Real cx, Real cy, Real vx, Real vy, Real ex, Real ey, Real& ix, Real& iy);
 
-		int TestEdgeRegion (Real cx, Real cy, Real vx, Real vy, Real ex, Real ey,Real& ix, Real& iy);
+		int TestEdgeRegion(Real cx, Real cy, Real vx, Real vy, Real ex, Real ey, Real& ix, Real& iy);
 
 	private:
 		// 要相交的对象。

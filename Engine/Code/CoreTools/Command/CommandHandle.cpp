@@ -29,7 +29,7 @@ CoreTools::CommandHandle
 }
 
 CoreTools::CommandHandle
-	::CommandHandle(char* commandLine)
+	::CommandHandle(const char* commandLine)
 	:m_CommandLineInformation{ commandLine },
 	 m_Small{ 0.0 }, m_Large{ 0.0 }, m_MinSet{ false },
 	 m_MaxSet{ false }, m_InfSet{ false }, m_SupSet{ false }
@@ -48,7 +48,7 @@ const string CoreTools::CommandHandle
 }
 
 CoreTools::CommandHandle& CoreTools::CommandHandle
-	::SetMinValue(double value)
+	::SetMinValue(double value) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -59,7 +59,7 @@ CoreTools::CommandHandle& CoreTools::CommandHandle
 }
 
 CoreTools::CommandHandle& CoreTools::CommandHandle
-	::SetMaxValue(double value)
+	::SetMaxValue(double value) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -70,7 +70,7 @@ CoreTools::CommandHandle& CoreTools::CommandHandle
 }
 
 CoreTools::CommandHandle& CoreTools::CommandHandle
-	::SetInfValue(double value)
+	::SetInfValue(double value) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -81,7 +81,7 @@ CoreTools::CommandHandle& CoreTools::CommandHandle
 }
 
 CoreTools::CommandHandle& CoreTools::CommandHandle
-	::SetSupValue(double value)
+	::SetSupValue(double value) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -104,7 +104,7 @@ int CoreTools::CommandHandle
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	auto value = m_CommandLineInformation.GetInteger(name);
+	const auto value = m_CommandLineInformation.GetInteger(name);
 
 	if (IsArgumentOutOfRange(value))
 	{
@@ -119,7 +119,7 @@ float CoreTools::CommandHandle
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	auto value = m_CommandLineInformation.GetFloat(name);
+	const auto value = m_CommandLineInformation.GetFloat(name);
 
 	if (IsArgumentOutOfRange(value))
 	{
@@ -134,7 +134,7 @@ double CoreTools::CommandHandle
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	auto value = m_CommandLineInformation.GetDouble(name);
+	const auto value = m_CommandLineInformation.GetDouble(name);
 
 	if (IsArgumentOutOfRange(value))
 	{
@@ -162,7 +162,7 @@ const string CoreTools::CommandHandle
 
 // private
 bool CoreTools::CommandHandle
-	::IsArgumentOutOfRange(double value) const
+	::IsArgumentOutOfRange(double value) const noexcept
 {
 	if ((m_MinSet && value < m_Small) || (m_MaxSet && m_Large < value) || (m_InfSet && value <= m_Small) || (m_SupSet && m_Large <= value))
 	{
@@ -175,7 +175,7 @@ bool CoreTools::CommandHandle
 }
 
 void CoreTools::CommandHandle
-	::ClearBoundary()
+	::ClearBoundary() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 

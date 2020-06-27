@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/23 10:02)
-
+// 引擎版本：0.0.2.4 (2020/03/11 09:59)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_STREAM_H
@@ -23,9 +22,7 @@ NETWORK_EXPORT_SHARED_PTR(SockStreamImpl);
 EXPORT_NONCOPYABLE_CLASS(NETWORK);
 
 namespace Network
-{
-	class ConfigurationStrategy;
-
+{ 
 	class NETWORK_DEFAULT_DECLARE SockStream : private boost::noncopyable, public std::enable_shared_from_this<SockStream>
 	{
 	public:

@@ -7,7 +7,7 @@
 #include "System/SystemExport.h"
 
 #include "CFile.h" 
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
 	#include <tchar.h>

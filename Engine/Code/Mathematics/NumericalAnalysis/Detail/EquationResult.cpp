@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 11:22)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 13:01)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -12,21 +12,21 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <algorithm>
 
 Mathematics::EquationResult
 	::EquationResult()
 	:m_RealResult{}, m_ImaginaryResult{}
 {
-    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Mathematics::EquationResult
 	::IsValid() const noexcept
 {
-    return true;
+	return true;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -41,24 +41,24 @@ bool Mathematics::EquationResult
 int Mathematics::EquationResult
 	::GetRealResultCount() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    
+	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
 	return boost::numeric_cast<int>(m_RealResult.size());
 }
 
 int Mathematics::EquationResult
 	::GetImaginaryResultCount() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    
+	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
 	return boost::numeric_cast<int>(m_ImaginaryResult.size());
 }
 
 void Mathematics::EquationResult
 	::AddRealResult(double solution, double epsilon)
 {
-    MATHEMATICS_CLASS_IS_VALID_9;
-    
+	MATHEMATICS_CLASS_IS_VALID_9;
+
 	if (!FindSolution(solution, epsilon))
 	{
 		m_RealResult.push_back(solution);
@@ -68,8 +68,8 @@ void Mathematics::EquationResult
 void Mathematics::EquationResult
 	::AddImaginaryResult(const Imaginary& solution, double epsilon)
 {
-    MATHEMATICS_CLASS_IS_VALID_9;
-    
+	MATHEMATICS_CLASS_IS_VALID_9;
+
 	if (!FindSolution(solution, epsilon))
 	{
 		m_ImaginaryResult.push_back(solution);
@@ -79,8 +79,8 @@ void Mathematics::EquationResult
 void Mathematics::EquationResult
 	::CleanSolution()
 {
-    MATHEMATICS_CLASS_IS_VALID_9;
-    
+	MATHEMATICS_CLASS_IS_VALID_9;
+
 	m_RealResult.clear();
 	m_ImaginaryResult.clear();
 }
@@ -89,29 +89,29 @@ void Mathematics::EquationResult
 bool Mathematics::EquationResult
 	::FindSolution(double solution, double epsilon) const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    
-	for (const auto& value:m_RealResult) 
+	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+	for (const auto& value : m_RealResult)
 	{
 		if (Mathd::FAbs(solution - value) <= epsilon)
 		{
 			return true;
-		}			
+		}
 	}
 
-	return false;	
+	return false;
 }
 
 // private
 bool Mathematics::EquationResult
 	::FindSolution(const Imaginary& solution, double epsilon) const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    
+	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
 	for (const auto& value : m_ImaginaryResult)
 	{
 		if (!((0 < value.imag()) ^ (0 < solution.imag())))
-		{	
+		{
 			if (Mathd::FAbs(solution.real() - value.real()) <= epsilon &&
 				Mathd::FAbs(solution.imag() - value.imag()) <= epsilon)
 			{
@@ -120,15 +120,15 @@ bool Mathematics::EquationResult
 		}
 	}
 
-	return false;		
+	return false;
 }
 
 const Mathematics::EquationResult::RealConstIterator Mathematics::EquationResult
 	::GetRealBegin() const
 {
-	 MATHEMATICS_CLASS_IS_VALID_CONST_9;
+	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	 return RealConstIterator{ m_RealResult.begin() };
+	return RealConstIterator{ m_RealResult.begin() };
 }
 
 const Mathematics::EquationResult::RealConstIterator Mathematics::EquationResult
@@ -158,14 +158,14 @@ const Mathematics::EquationResult::ImaginaryConstIterator Mathematics::EquationR
 void Mathematics::EquationResult
 	::SortResult()
 {
-	MATHEMATICS_CLASS_IS_VALID_9;	
+	MATHEMATICS_CLASS_IS_VALID_9;
 
 	sort(m_RealResult.begin(), m_RealResult.end());
 	sort(m_ImaginaryResult.begin(), m_ImaginaryResult.end(), ImaginaryLess{});
 }
 
 bool Mathematics::EquationResult::ImaginaryLess
-	::operator()(const Imaginary& lhs, const Imaginary& rhs) const 
+	::operator()(const Imaginary& lhs, const Imaginary& rhs) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

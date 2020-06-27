@@ -9,7 +9,7 @@
 #include "WindowSystem.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
 	#include <ImageHlp.h>

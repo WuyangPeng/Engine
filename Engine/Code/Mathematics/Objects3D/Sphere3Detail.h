@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 10:14)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 17:46)
 
 #ifndef MATHEMATICS_OBJECTS3D_SPHERE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_SPHERE3_DETAIL_H
@@ -14,12 +14,11 @@
 
 template <typename Real>
 Mathematics::Sphere3<Real>
-	::Sphere3( const Vector3D& center, Real radius )
+	::Sphere3(const Vector3D& center, Real radius)
 	:m_Center{ center }, m_Radius{ radius }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-
 
 template <typename Real>
 Mathematics::Sphere3<Real>
@@ -29,19 +28,17 @@ Mathematics::Sphere3<Real>
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::Sphere3<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_Radius)
-	   return true;
+	if (Math::sm_Zero <= m_Radius)
+		return true;
 	else
-	   return false;
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 typename const Mathematics::Sphere3<Real>::Vector3D Mathematics::Sphere3<Real>
@@ -51,7 +48,6 @@ typename const Mathematics::Sphere3<Real>::Vector3D Mathematics::Sphere3<Real>
 
 	return m_Center;
 }
-
 
 template <typename Real>
 Real Mathematics::Sphere3<Real>
@@ -71,6 +67,5 @@ void Mathematics::Sphere3<Real>
 	m_Center = center;
 	m_Radius = radius;
 }
-
 
 #endif // MATHEMATICS_OBJECTS3D_SPHERE3_DETAIL_H

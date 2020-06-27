@@ -24,6 +24,9 @@ namespace CoreTools
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(TestingInformationHelper);
 
+		TestingInformationHelper(TestingInformationHelper&& rhs) noexcept;
+		TestingInformationHelper& operator=(TestingInformationHelper&& rhs) noexcept;
+
 	public:
 		TestingInformationHelper();
 

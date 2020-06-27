@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 20:13)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 13:41)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
 #define NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
@@ -14,7 +14,7 @@
 #include "Network/Interface/Detail/HandleSetImpl.h"  
 
 namespace Network
-{	
+{
 	class NETWORK_HIDDEN_DECLARE SockACEHandleSet : public HandleSetImpl
 	{
 	public:
@@ -22,7 +22,7 @@ namespace Network
 		using ParentType = HandleSetImpl;
 
 	public:
-		SockACEHandleSet ();	
+		SockACEHandleSet();
 		virtual ~SockACEHandleSet();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
@@ -31,7 +31,7 @@ namespace Network
 		virtual int64_t GetMaxSet() const override;
 		virtual SockFdSet* GetFdSet() override;
 		virtual void Sync(ACEHandle maxHandle) override;
-		virtual bool isSet(ACEHandle handle) const override;
+		virtual bool IsSet(ACEHandle handle) const override;
 		virtual void ClearBit(ACEHandle handle) override;
 		virtual bool IsFdSetFull() const override;
 		virtual int IsFdSetCount() const override;
@@ -41,11 +41,11 @@ namespace Network
 		virtual const ACEHandleSet& GetACEHandleSet() const override;
 
 		virtual bool Select(int width) override;
-		 	 
+
 	private:
 		ACEHandleSet m_ACEHandleSet;
-	};	
-} 
+	};
+}
 
 #endif // NETWORK_USE_ACE
 

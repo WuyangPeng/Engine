@@ -1,50 +1,89 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 09:38)
+// 引擎版本：0.3.0.2 (2020/06/03 13:58)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_POINT_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_POINT_H
 
 #include "Framework/FrameworkDll.h"
 
+#include "System/Window/WindowCreate.h"
 #include "System/Window/Using/WindowUsing.h"
+#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Helper/EnumCast.h"
+#include "System/Helper/PragmaWarning/Operators.h"
 
-#include <boost/operators.hpp>
+#include <gsl/gsl_util>
 #include <iosfwd>
 
 namespace Framework
 {
-	// 窗口点类的声明
-	// 没有使用Impl模式。只定义了==、!=、<<操作运算符。
+	// 窗口点类的声明，没有使用Impl模式。只定义了==、!=、<<操作运算符。
 	class FRAMEWORK_DEFAULT_DECLARE WindowPoint : private boost::equality_comparable<WindowPoint>
 	{
 	public:
 		using ClassType = WindowPoint;
 		using Point = System::WindowPoint;
 		using LParam = System::WindowLParam;
+		using WindowPointUse = System::WindowPointUse;
 
 	public:
-		WindowPoint();
-		explicit WindowPoint(const Point& point);
-		explicit WindowPoint(LParam lParam);
-		WindowPoint(int x,int y);
-		
+		constexpr WindowPoint() noexcept
+			:WindowPoint{ 0 , 0 }
+		{
+		}
+
+		explicit constexpr WindowPoint(WindowPointUse windowPointUse) noexcept
+			:WindowPoint{ System::EnumCastUnderlying(windowPointUse), System::EnumCastUnderlying(windowPointUse) }
+		{
+		}
+
+		explicit constexpr WindowPoint(LParam lParam) noexcept
+			:WindowPoint{ System::GetLowWord(lParam) , System::GetHighWord(lParam) }
+		{
+		}
+
+		explicit constexpr WindowPoint(const Point& point)
+			: WindowPoint{ gsl::narrow_cast<int>(point.x), gsl::narrow_cast<int>(point.y) }
+		{
+		}
+		 
+		constexpr WindowPoint(int x, int y) noexcept
+			:m_X{ x }, m_Y{ y }
+		{
+		}
+
 		CLASS_INVARIANT_DECLARE;
 
-		int GetWindowX() const;
-		int GetWindowY() const;
+		constexpr int GetWindowX() const noexcept
+		{
+			return m_X;
+		}
 
-		void SetWindowPoint(int x,int y);
+		constexpr int GetWindowY() const noexcept
+		{
+			return m_Y;
+		}
+
+		constexpr void SetWindowPoint(int x, int y) noexcept
+		{
+			m_X = x;
+			m_Y = y;
+		}
 
 	private:
 		int m_X;
 		int m_Y;
 	};
 
-	bool FRAMEWORK_DEFAULT_DECLARE operator == (const WindowPoint& lhs,const WindowPoint& rhs);
-	FRAMEWORK_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& os,const WindowPoint& windowPoint);
+	constexpr bool operator == (const WindowPoint& lhs, const WindowPoint& rhs) noexcept
+	{
+		return lhs.GetWindowX() == rhs.GetWindowX() && lhs.GetWindowY() == rhs.GetWindowY();
+	}
+
+	FRAMEWORK_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& os, const WindowPoint& windowPoint);
 }
 
 #endif // FRAMEWORK_WINDOW_CREATE_WINDOW_POINT_H

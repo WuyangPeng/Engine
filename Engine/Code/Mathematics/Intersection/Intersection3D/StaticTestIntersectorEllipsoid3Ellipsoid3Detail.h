@@ -48,20 +48,20 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
     // Get the parameters of ellipsoid0.
 	auto K0 = mEllipsoid0.GetCenter();
 	Matrix3<Real> R0{ mEllipsoid0.GetAxis0(),mEllipsoid0.GetAxis1(),mEllipsoid0.GetAxis2(), MatrixMajorFlags::Row };
-	Matrix3<Real> D0{ ((Real)1) / (mEllipsoid0.GetExtent0()*mEllipsoid0.GetExtent0()),
-					  ((Real)1) / (mEllipsoid0.GetExtent1()*mEllipsoid0.GetExtent1()),
-					  ((Real)1) / (mEllipsoid0.GetExtent2()*mEllipsoid0.GetExtent2()) };
+	Matrix3<Real> D0{ (static_cast<Real>(1)) / (mEllipsoid0.GetExtent0()*mEllipsoid0.GetExtent0()),
+					  (static_cast<Real>(1)) / (mEllipsoid0.GetExtent1()*mEllipsoid0.GetExtent1()),
+					  (static_cast<Real>(1)) / (mEllipsoid0.GetExtent2()*mEllipsoid0.GetExtent2()) };
 
     // Get the parameters of ellipsoid1.
 	auto K1 = mEllipsoid1.GetCenter();
 	Matrix3<Real> R1{ mEllipsoid1.GetAxis0(),mEllipsoid1.GetAxis1(),mEllipsoid1.GetAxis2(), MatrixMajorFlags::Row };
-	Matrix3<Real> D1{ ((Real)1) / (mEllipsoid1.GetExtent0()*mEllipsoid1.GetExtent0()),
-					  ((Real)1) / (mEllipsoid1.GetExtent1()*mEllipsoid1.GetExtent1()),
-					  ((Real)1) / (mEllipsoid1.GetExtent2()*mEllipsoid1.GetExtent2()) };
+	Matrix3<Real> D1{ (static_cast<Real>(1)) / (mEllipsoid1.GetExtent0()*mEllipsoid1.GetExtent0()),
+					  (static_cast<Real>(1)) / (mEllipsoid1.GetExtent1()*mEllipsoid1.GetExtent1()),
+					  (static_cast<Real>(1)) / (mEllipsoid1.GetExtent2()*mEllipsoid1.GetExtent2()) };
 
     // Compute K2.
 	Matrix3<Real> D0NegHalf{ mEllipsoid0.GetExtent0(),mEllipsoid0.GetExtent1(),mEllipsoid0.GetExtent2() };
-	Matrix3<Real> D0Half{((Real)1) / mEllipsoid0.GetExtent0(),((Real)1) / mEllipsoid0.GetExtent1(),	((Real)1) / mEllipsoid0.GetExtent2() };
+	Matrix3<Real> D0Half{(static_cast<Real>(1)) / mEllipsoid0.GetExtent0(),(static_cast<Real>(1)) / mEllipsoid0.GetExtent1(),	(static_cast<Real>(1)) / mEllipsoid0.GetExtent2() };
 	auto K2 = D0Half*((K1 - K0)*R0);
 
     // Compute M2.
@@ -84,7 +84,7 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
     // transformed ellipsoid1 are used to determine whether the ellipsoids
     // intersect, are separated, or one contains the other.
 	auto minSqrDistance = Math::sm_MaxReal;
-	auto maxSqrDistance = Real{};
+	auto maxSqrDistance = Math<Real>::sm_Zero;
     int i;
 
     if (K == Vector3D::sm_Zero)
@@ -93,7 +93,7 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         // is not possible for the ellipsoids to be separated.
         for (i = 0; i < 3; ++i)
         {
-			auto invD = ((Real)1)/D[i][i];
+			auto invD = (static_cast<Real>(1))/D[i][i];
             if (invD < minSqrDistance)
             {
                 minSqrDistance = invD;
@@ -104,12 +104,12 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
             }
         }
 
-        if (maxSqrDistance < (Real)1)
+        if (maxSqrDistance < static_cast<Real>(1))
         {
             m_Classification = EC_ELLIPSOID0_CONTAINS_ELLIPSOID1;
 			return;
         }
-        else if (minSqrDistance > (Real)1)
+        else if (minSqrDistance > static_cast<Real>(1))
         {
             m_Classification =  EC_ELLIPSOID1_CONTAINS_ELLIPSOID0;
 			return;
@@ -146,7 +146,7 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
             // d0 > d1 > d2
             for (i = 0; i < 3; ++i)
             {
-                if (param[i].second > Real{})
+                if (param[i].second > Math<Real>::sm_Zero)
                 {
                     valid.push_back(param[i]);
                 }
@@ -155,12 +155,12 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         else
         {
             // d0 > d1 = d2
-            if (param[0].second > Real{})
+            if (param[0].second > Math<Real>::sm_Zero)
             {
                 valid.push_back(param[0]);
             }
             param[1].second += param[0].second;
-            if (param[1].second > Real{})
+            if (param[1].second > Math<Real>::sm_Zero)
             {
                 valid.push_back(param[1]);
             }
@@ -172,11 +172,11 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         {
             // d0 = d1 > d2
             param[0].second += param[1].second;
-            if (param[0].second > Real{})
+            if (param[0].second > Math<Real>::sm_Zero)
             {
                 valid.push_back(param[0]);
             }
-            if (param[2].second > Real{})
+            if (param[2].second > Math<Real>::sm_Zero)
             {
                 valid.push_back(param[2]);
             }
@@ -185,7 +185,7 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         {
             // d0 = d1 = d2
             param[0].second += param[1].second + param[2].second;
-            if (param[0].second > Real{})
+            if (param[0].second > Math<Real>::sm_Zero)
             {
                 valid.push_back(param[0]);
             }
@@ -218,9 +218,9 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
     for (i = 0; i < numRoots; ++i)
     {
 		auto s = roots[i];
-		auto p0 = d0*K[0]*s/(d0*s - (Real)1);
-		auto p1 = d1*K[1]*s/(d1*s - (Real)1);
-		auto p2 = d2*K[2]*s/(d2*s - (Real)1);
+		auto p0 = d0*K[0]*s/(d0*s - static_cast<Real>(1));
+		auto p1 = d1*K[1]*s/(d1*s - static_cast<Real>(1));
+		auto p2 = d2*K[2]*s/(d2*s - static_cast<Real>(1));
 		auto sqrDistance = p0*p0 + p1*p1 + p2*p2;
         if (sqrDistance < minSqrDistance)
         {
@@ -232,15 +232,15 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         }
     }
 
-    if (maxSqrDistance < (Real)1)
+    if (maxSqrDistance < static_cast<Real>(1))
     {
         m_Classification =  EC_ELLIPSOID0_CONTAINS_ELLIPSOID1;
 		return;
     }
 
-    if (minSqrDistance > (Real)1)
+    if (minSqrDistance > static_cast<Real>(1))
     {
-        if (d0*c0 + d1*c1 + d2*c2 > (Real)1)
+        if (d0*c0 + d1*c1 + d2*c2 > static_cast<Real>(1))
         {
             m_Classification =  EC_ELLIPSOIDS_SEPARATED;
 			return;
@@ -259,7 +259,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
 	::BisectF (Real d0, Real d1, Real d2,Real d0c0, Real d1c1, Real d2c2, Real smin, Real fmin, Real smax,Real fmax, Real& s, Real& f)
 {
-	auto increasing = (fmin < Real{});
+	auto increasing = (fmin < Math<Real>::sm_Zero);
 
     constexpr auto maxIterations = 256;
     for (auto i = 0; i < maxIterations; ++i)
@@ -269,14 +269,14 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         {
             if (s < smax)
             {
-				auto invN0 = ((Real)1)/(d0*s - (Real)1);
-				auto invN1 = ((Real)1)/(d1*s - (Real)1);
-				auto invN2 = ((Real)1)/(d2*s - (Real)1);
+				auto invN0 = (static_cast<Real>(1))/(d0*s - static_cast<Real>(1));
+				auto invN1 = (static_cast<Real>(1))/(d1*s - static_cast<Real>(1));
+				auto invN2 = (static_cast<Real>(1))/(d2*s - static_cast<Real>(1));
 				auto invN0Sqr = invN0*invN0;
 				auto invN1Sqr = invN1*invN1;
 				auto invN2Sqr = invN2*invN2;
-                f = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - (Real)1;
-                if (f < Real{})
+                f = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - static_cast<Real>(1);
+                if (f < Math<Real>::sm_Zero)
                 {
                     if (increasing)
                     {
@@ -289,7 +289,7 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
                         fmax = f;
                     }
                 }
-                else if (f > Real{})
+                else if (f > Math<Real>::sm_Zero)
                 {
                     if (increasing)
                     {
@@ -333,19 +333,19 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         {
             if (s < smax)
             {
-				auto invN0 = ((Real)1)/(d0*s - (Real)1);
-				auto invN1 = ((Real)1)/(d1*s - (Real)1);
-				auto invN2 = ((Real)1)/(d2*s - (Real)1);
+				auto invN0 = (static_cast<Real>(1))/(d0*s - static_cast<Real>(1));
+				auto invN1 = (static_cast<Real>(1))/(d1*s - static_cast<Real>(1));
+				auto invN2 = (static_cast<Real>(1))/(d2*s - static_cast<Real>(1));
 				auto invN0Cub = invN0*invN0*invN0;
 				auto invN1Cub = invN1*invN1*invN1;
 				auto invN2Cub = invN2*invN2*invN2;
                 df = ((Real)-2)*(d0*d0c0*invN0Cub + d1*d1c1*invN1Cub +  d2*d2c2*invN2Cub);
-                if (df < Real{})
+                if (df < Math<Real>::sm_Zero)
                 {
                     smin = s;
                     dfmin = df;
                 }
-                else if (df > Real{})
+                else if (df > Math<Real>::sm_Zero)
                 {
                     smax = s;
                     dfmax = df;
@@ -381,57 +381,57 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
     // f(s) = d0*c0/(d0*s-1)^2 + d1*c1/(d1*s-1)^2 - 1
     // with d0 > d1
 	auto epsilon = Real{0.001};
-	auto multiplier0 = Math::Sqrt(((Real)3)/((Real)1 - epsilon));
-	auto multiplier1 = Math::Sqrt(((Real)1)/((Real)1 + epsilon));
+	auto multiplier0 = Math::Sqrt((static_cast<Real>(3))/(static_cast<Real>(1) - epsilon));
+	auto multiplier1 = Math::Sqrt((static_cast<Real>(1))/(static_cast<Real>(1) + epsilon));
 	auto d0c0 = d0*c0;
 	auto d1c1 = d1*c1;
 	auto d2c2 = d2*c2;
 	auto sqrtd0c0 = Math::Sqrt(d0c0);
 	auto sqrtd1c1 = Math::Sqrt(d1c1);
 	auto sqrtd2c2 = Math::Sqrt(d2c2);
-	auto invD0 = ((Real)1)/d0;
-	auto invD1 = ((Real)1)/d1;
-	auto invD2 = ((Real)1)/d2;
+	auto invD0 = (static_cast<Real>(1))/d0;
+	auto invD1 = (static_cast<Real>(1))/d1;
+	auto invD2 = (static_cast<Real>(1))/d2;
     Real temp0, temp1, temp2, smin, smax, s, fmin, fmax, f;
     Real invN0, invN1, invN2, invN0Sqr, invN1Sqr, invN2Sqr;
 
     // Compute root in (-infinity,1/d0).
-    temp0 = ((Real)1 - multiplier0*sqrtd0c0)*invD0;
-    temp1 = ((Real)1 - multiplier0*sqrtd1c1)*invD1;
-    temp2 = ((Real)1 - multiplier0*sqrtd2c2)*invD2;
+    temp0 = (static_cast<Real>(1) - multiplier0*sqrtd0c0)*invD0;
+    temp1 = (static_cast<Real>(1) - multiplier0*sqrtd1c1)*invD1;
+    temp2 = (static_cast<Real>(1) - multiplier0*sqrtd2c2)*invD2;
     smin = (temp0 < temp1 ? temp0 : temp1);
     smin = (temp2 < smin ? temp2 : smin);
-    invN0 = ((Real)1)/(d0*smin - (Real)1);
-    invN1 = ((Real)1)/(d1*smin - (Real)1);
-    invN2 = ((Real)1)/(d2*smin - (Real)1);
+    invN0 = (static_cast<Real>(1))/(d0*smin - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smin - static_cast<Real>(1));
+    invN2 = (static_cast<Real>(1))/(d2*smin - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
     invN2Sqr = invN2*invN2;
-    fmin = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - (Real)1;
-    MATHEMATICS_ASSERTION_0(fmin < Real{}, "Unexpected condition.\n");
-    smax = ((Real)1 - multiplier1*sqrtd0c0)*invD0;
-    invN0 = ((Real)1)/(d0*smax - (Real)1);
-    invN1 = ((Real)1)/(d1*smax - (Real)1);
-    invN2 = ((Real)1)/(d2*smax - (Real)1);
+    fmin = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - static_cast<Real>(1);
+    MATHEMATICS_ASSERTION_0(fmin < Math<Real>::sm_Zero, "Unexpected condition.\n");
+    smax = (static_cast<Real>(1) - multiplier1*sqrtd0c0)*invD0;
+    invN0 = (static_cast<Real>(1))/(d0*smax - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smax - static_cast<Real>(1));
+    invN2 = (static_cast<Real>(1))/(d2*smax - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
     invN2Sqr = invN2*invN2;
-    fmax = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - (Real)1;
-    MATHEMATICS_ASSERTION_0(fmax > Real{}, "Unexpected condition.\n");
+    fmax = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - static_cast<Real>(1);
+    MATHEMATICS_ASSERTION_0(fmax > Math<Real>::sm_Zero, "Unexpected condition.\n");
     BisectF(d0, d1, d2, d0c0, d1c1, d2c2, smin, fmin, smax, fmax, s, f);
     roots[numRoots++] = s;
 
     // Compute roots (if any) in (1/d0,1/d1).
     Real smid, fmid, df;
     BisectDF(d0, d1, d2, d0c0, d1c1, d2c2, invD0, -Math::sm_MaxReal, invD1, Math::sm_MaxReal, smid, df);
-    invN0 = ((Real)1)/(d0*smid - (Real)1);
-    invN1 = ((Real)1)/(d1*smid - (Real)1);
-    invN2 = ((Real)1)/(d2*smid - (Real)1);
+    invN0 = (static_cast<Real>(1))/(d0*smid - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smid - static_cast<Real>(1));
+    invN2 = (static_cast<Real>(1))/(d2*smid - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
     invN2Sqr = invN2*invN2;
-    fmid = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - (Real)1;
-    if (fmid < Real{})
+    fmid = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - static_cast<Real>(1);
+    if (fmid < Math<Real>::sm_Zero)
     {
         BisectF(d0, d1, d2, d0c0, d1c1, d2c2, invD0, Math::sm_MaxReal, smid, fmid, s, f);
         roots[numRoots++] = s;
@@ -441,14 +441,14 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
 
     // Compute roots (if any) in (1/d1,1/d2).
     BisectDF(d0, d1, d2, d0c0, d1c1, d2c2, invD1, -Math::sm_MaxReal, invD2, Math::sm_MaxReal, smid, df);
-    invN0 = ((Real)1)/(d0*smid - (Real)1);
-    invN1 = ((Real)1)/(d1*smid - (Real)1);
-    invN2 = ((Real)1)/(d2*smid - (Real)1);
+    invN0 = (static_cast<Real>(1))/(d0*smid - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smid - static_cast<Real>(1));
+    invN2 = (static_cast<Real>(1))/(d2*smid - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
     invN2Sqr = invN2*invN2;
-    fmid = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - (Real)1;
-    if (fmid < Real{})
+    fmid = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - static_cast<Real>(1);
+    if (fmid < Math<Real>::sm_Zero)
     {
         BisectF(d0, d1, d2, d0c0, d1c1, d2c2, invD1, Math::sm_MaxReal, smid, fmid, s, f);
         roots[numRoots++] = s;
@@ -457,28 +457,28 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
     }
 
     // Compute root in (1/d2,+infinity).
-    temp0 = ((Real)1 + multiplier0*sqrtd0c0)*invD0;
-    temp1 = ((Real)1 + multiplier0*sqrtd1c1)*invD1;
-    temp2 = ((Real)1 + multiplier0*sqrtd2c2)*invD2;
+    temp0 = (static_cast<Real>(1) + multiplier0*sqrtd0c0)*invD0;
+    temp1 = (static_cast<Real>(1) + multiplier0*sqrtd1c1)*invD1;
+    temp2 = (static_cast<Real>(1) + multiplier0*sqrtd2c2)*invD2;
     smax = (temp0 > temp1 ? temp0 : temp1);
     smax = (temp2 > smax ? temp2 : smax);
-    invN0 = ((Real)1)/(d0*smax - (Real)1);
-    invN1 = ((Real)1)/(d1*smax - (Real)1);
-    invN2 = ((Real)1)/(d2*smax - (Real)1);
+    invN0 = (static_cast<Real>(1))/(d0*smax - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smax - static_cast<Real>(1));
+    invN2 = (static_cast<Real>(1))/(d2*smax - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
     invN2Sqr = invN2*invN2;
-    fmax = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - (Real)1;
-    MATHEMATICS_ASSERTION_0(fmax < Real{}, "Unexpected condition.\n");
-    smin = ((Real)1 + multiplier1*sqrtd2c2)*invD2;
-    invN0 = ((Real)1)/(d0*smin - (Real)1);
-    invN1 = ((Real)1)/(d1*smin - (Real)1);
-    invN2 = ((Real)1)/(d2*smin - (Real)1);
+    fmax = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - static_cast<Real>(1);
+    MATHEMATICS_ASSERTION_0(fmax < Math<Real>::sm_Zero, "Unexpected condition.\n");
+    smin = (static_cast<Real>(1) + multiplier1*sqrtd2c2)*invD2;
+    invN0 = (static_cast<Real>(1))/(d0*smin - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smin - static_cast<Real>(1));
+    invN2 = (static_cast<Real>(1))/(d2*smin - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
     invN2Sqr = invN2*invN2;
-    fmin = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - (Real)1;
-    MATHEMATICS_ASSERTION_0(fmin > Real{}, "Unexpected condition.\n");
+    fmin = d0c0*invN0Sqr + d1c1*invN1Sqr + d2c2*invN2Sqr - static_cast<Real>(1);
+    MATHEMATICS_ASSERTION_0(fmin > Math<Real>::sm_Zero, "Unexpected condition.\n");
     BisectF(d0, d1, d2, d0c0, d1c1, d2c2, smin, fmin, smax, fmax, s, f);
     roots[numRoots++] = s;
 }
@@ -487,7 +487,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
 	::BisectF (Real d0, Real d1, Real d0c0, Real d1c1, Real smin, Real fmin, Real smax, Real fmax, Real& s, Real& f)
 {
-	auto increasing = (fmin < Real{});
+	auto increasing = (fmin < Math<Real>::sm_Zero);
 
     constexpr auto maxIterations = 256;
     for (auto i = 0; i < maxIterations; ++i)
@@ -497,12 +497,12 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         {
             if (s < smax)
             {
-				auto invN0 = ((Real)1)/(d0*s - (Real)1);
-				auto invN1 = ((Real)1)/(d1*s - (Real)1);
+				auto invN0 = (static_cast<Real>(1))/(d0*s - static_cast<Real>(1));
+				auto invN1 = (static_cast<Real>(1))/(d1*s - static_cast<Real>(1));
 				auto invN0Sqr = invN0*invN0;
 				auto invN1Sqr = invN1*invN1;
-                f = d0c0*invN0Sqr + d1c1*invN1Sqr - (Real)1;
-                if (f < Real{})
+                f = d0c0*invN0Sqr + d1c1*invN1Sqr - static_cast<Real>(1);
+                if (f < Math<Real>::sm_Zero)
                 {
                     if (increasing)
                     {
@@ -515,7 +515,7 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
                         fmax = f;
                     }
                 }
-                else if (f > Real{})
+                else if (f > Math<Real>::sm_Zero)
                 {
                     if (increasing)
                     {
@@ -559,17 +559,17 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
         {
             if (s < smax)
             {
-				auto invN0 = ((Real)1)/(d0*s - (Real)1);
-				auto invN1 = ((Real)1)/(d1*s - (Real)1);
+				auto invN0 = (static_cast<Real>(1))/(d0*s - static_cast<Real>(1));
+				auto invN1 = (static_cast<Real>(1))/(d1*s - static_cast<Real>(1));
 				auto invN0Cub = invN0*invN0*invN0;
 				auto invN1Cub = invN1*invN1*invN1;
                 df = ((Real)-2)*(d0*d0c0*invN0Cub + d1*d1c1*invN1Cub);
-                if (df < Real{})
+                if (df < Math<Real>::sm_Zero)
                 {
                     smin = s;
                     dfmin = df;
                 }
-                else if (df > Real{})
+                else if (df > Math<Real>::sm_Zero)
                 {
                     smax = s;
                     dfmax = df;
@@ -603,46 +603,46 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
     numRoots = 0;
 
 	auto epsilon = Real{0.001};
-	auto multiplier0 = Math::Sqrt(((Real)2)/((Real)1 - epsilon));
-	auto multiplier1 = Math::Sqrt(((Real)1)/((Real)1 + epsilon));
+	auto multiplier0 = Math::Sqrt((static_cast<Real>(2))/(static_cast<Real>(1) - epsilon));
+	auto multiplier1 = Math::Sqrt((static_cast<Real>(1))/(static_cast<Real>(1) + epsilon));
 	auto d0c0 = d0*c0;
 	auto d1c1 = d1*c1;
 	auto sqrtd0c0 = Math::Sqrt(d0c0);
 	auto sqrtd1c1 = Math::Sqrt(d1c1);
-	auto invD0 = ((Real)1)/d0;
-	auto invD1 = ((Real)1)/d1;
+	auto invD0 = (static_cast<Real>(1))/d0;
+	auto invD1 = (static_cast<Real>(1))/d1;
     Real temp0, temp1, smin, smax, s, fmin, fmax, f;
     Real invN0, invN1, invN0Sqr, invN1Sqr;
 
     // Compute root in (-infinity,1/d0).
-    temp0 = ((Real)1 - multiplier0*sqrtd0c0)*invD0;
-    temp1 = ((Real)1 - multiplier0*sqrtd1c1)*invD1;
+    temp0 = (static_cast<Real>(1) - multiplier0*sqrtd0c0)*invD0;
+    temp1 = (static_cast<Real>(1) - multiplier0*sqrtd1c1)*invD1;
     smin = (temp0 < temp1 ? temp0 : temp1);
-    invN0 = ((Real)1)/(d0*smin - (Real)1);
-    invN1 = ((Real)1)/(d1*smin - (Real)1);
+    invN0 = (static_cast<Real>(1))/(d0*smin - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smin - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
-    fmin = d0c0*invN0Sqr + d1c1*invN1Sqr - (Real)1;
-    MATHEMATICS_ASSERTION_0(fmin < Real{}, "Unexpected condition.\n");
-    smax = ((Real)1 - multiplier1*sqrtd0c0)*invD0;
-    invN0 = ((Real)1)/(d0*smax - (Real)1);
-    invN1 = ((Real)1)/(d1*smax - (Real)1);
+    fmin = d0c0*invN0Sqr + d1c1*invN1Sqr - static_cast<Real>(1);
+    MATHEMATICS_ASSERTION_0(fmin < Math<Real>::sm_Zero, "Unexpected condition.\n");
+    smax = (static_cast<Real>(1) - multiplier1*sqrtd0c0)*invD0;
+    invN0 = (static_cast<Real>(1))/(d0*smax - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smax - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
-    fmax = d0c0*invN0Sqr + d1c1*invN1Sqr - (Real)1;
-    MATHEMATICS_ASSERTION_0(fmax > Real{}, "Unexpected condition.\n");
+    fmax = d0c0*invN0Sqr + d1c1*invN1Sqr - static_cast<Real>(1);
+    MATHEMATICS_ASSERTION_0(fmax > Math<Real>::sm_Zero, "Unexpected condition.\n");
     BisectF(d0, d1, d0c0, d1c1, smin, fmin, smax, fmax, s, f);
     roots[numRoots++] = s;
 
     // Compute roots (if any) in (1/d0,1/d1).
     Real smid, fmid, df;
     BisectDF(d0, d1, d0c0, d1c1, invD0, -Math::sm_MaxReal, invD1, Math::sm_MaxReal, smid, df);
-    invN0 = ((Real)1)/(d0*smid - (Real)1);
-    invN1 = ((Real)1)/(d1*smid - (Real)1);
+    invN0 = (static_cast<Real>(1))/(d0*smid - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smid - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
-    fmid = d0c0*invN0Sqr + d1c1*invN1Sqr - (Real)1;
-    if (fmid < Real{})
+    fmid = d0c0*invN0Sqr + d1c1*invN1Sqr - static_cast<Real>(1);
+    if (fmid < Math<Real>::sm_Zero)
     {
         BisectF(d0, d1, d0c0, d1c1, invD0, Math::sm_MaxReal, smid, fmid, s, f);
         roots[numRoots++] = s;
@@ -651,22 +651,22 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
     }
 
     // Compute root in (1/d1,+infinity).
-    temp0 = ((Real)1 + multiplier0*sqrtd0c0)*invD0;
-    temp1 = ((Real)1 + multiplier0*sqrtd1c1)*invD1;
+    temp0 = (static_cast<Real>(1) + multiplier0*sqrtd0c0)*invD0;
+    temp1 = (static_cast<Real>(1) + multiplier0*sqrtd1c1)*invD1;
     smax = (temp0 > temp1 ? temp0 : temp1);
-    invN0 = ((Real)1)/(d0*smax - (Real)1);
-    invN1 = ((Real)1)/(d1*smax - (Real)1);
+    invN0 = (static_cast<Real>(1))/(d0*smax - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smax - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
-    fmax = d0c0*invN0Sqr + d1c1*invN1Sqr - (Real)1;
-    MATHEMATICS_ASSERTION_0(fmax < Real{}, "Unexpected condition.\n");
-    smin = ((Real)1 + multiplier1*sqrtd1c1)*invD1;
-    invN0 = ((Real)1)/(d0*smin - (Real)1);
-    invN1 = ((Real)1)/(d1*smin - (Real)1);
+    fmax = d0c0*invN0Sqr + d1c1*invN1Sqr - static_cast<Real>(1);
+    MATHEMATICS_ASSERTION_0(fmax < Math<Real>::sm_Zero, "Unexpected condition.\n");
+    smin = (static_cast<Real>(1) + multiplier1*sqrtd1c1)*invD1;
+    invN0 = (static_cast<Real>(1))/(d0*smin - static_cast<Real>(1));
+    invN1 = (static_cast<Real>(1))/(d1*smin - static_cast<Real>(1));
     invN0Sqr = invN0*invN0;
     invN1Sqr = invN1*invN1;
-    fmin = d0c0*invN0Sqr + d1c1*invN1Sqr - (Real)1;
-    MATHEMATICS_ASSERTION_0(fmin > Real{}, "Unexpected condition.\n");
+    fmin = d0c0*invN0Sqr + d1c1*invN1Sqr - static_cast<Real>(1);
+    MATHEMATICS_ASSERTION_0(fmin > Math<Real>::sm_Zero, "Unexpected condition.\n");
     BisectF(d0, d1, d0c0, d1c1, smin, fmin, smax, fmax, s, f);
     roots[numRoots++] = s;
 }
@@ -677,10 +677,10 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>
 {
     // f(s) = d0*c0/(d0*s-1)^2 - 1
 	auto temp = Math::Sqrt(d0*c0);
-	auto inv = ((Real)1)/d0;
+	auto inv = (static_cast<Real>(1))/d0;
     numRoots = 2;
-    roots[0] = ((Real)1 - temp)*inv;
-    roots[1] = ((Real)1 + temp)*inv;
+    roots[0] = (static_cast<Real>(1) - temp)*inv;
+    roots[1] = (static_cast<Real>(1) + temp)*inv;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_DETAIL_H

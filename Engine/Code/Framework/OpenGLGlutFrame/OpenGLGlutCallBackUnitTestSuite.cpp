@@ -1,52 +1,58 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:20)
+// 引擎版本：0.3.0.1 (2020/05/21 15:59)
 
 #include "Framework/FrameworkExport.h"
 
 #include "OpenGLGlutCallBackUnitTestSuite.h"
 #include "Detail/OpenGLGlutCallBackUnitTestSuiteImpl.h"
-#include "Framework/WindowProcess/WindowMessageUnitTestSuiteOsPtr.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
+#include "System/Helper/EnumCast.h"
+#include "System/Window/Fwd/WindowFlagsFwd.h"
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h" 
+#include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 
-#include <iostream>
-
-using std::cout;
-using std::string;
-using std::ostream;
+using std::move;
+using std::string; 
+using std::make_shared;
 
 Framework::OpenGLGlutCallBackUnitTestSuite
-	::OpenGLGlutCallBackUnitTestSuite()
-	:m_OsPtrTypePtr(new OsPtrType),
-	 m_Impl(),m_IsInit(false)
+	::OpenGLGlutCallBackUnitTestSuite(int64_t delta, const string& suiteName)
+	:ParentType{ delta }, m_Stream{ make_shared<StreamType>(true) }, m_Impl{ make_shared<ImplType>(suiteName, m_Stream->GetStreamShared()) }, m_IsInit{ false }
+{
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+} 
+
+Framework::OpenGLGlutCallBackUnitTestSuite
+	::OpenGLGlutCallBackUnitTestSuite(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept
+	:ParentType{ move(rhs) }, m_Stream{ move(rhs.m_Stream) }, m_Impl{ move(rhs.m_Impl) }, m_IsInit{ rhs.m_IsInit }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-// private
-void Framework::OpenGLGlutCallBackUnitTestSuite
-	::GenerateSuite()
+Framework::OpenGLGlutCallBackUnitTestSuite& Framework::OpenGLGlutCallBackUnitTestSuite
+	::operator=(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept
 {
-	m_Impl.reset(new ImplType(GetSuiteName(),m_OsPtrTypePtr->GetOsPtr()));
-}
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-Framework::OpenGLGlutCallBackUnitTestSuite
-	::~OpenGLGlutCallBackUnitTestSuite()
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+	ParentType::operator=(move(rhs));
+
+	m_Stream = move(rhs.m_Stream);
+	m_Impl = move(rhs.m_Impl);
+	m_IsInit = rhs.m_IsInit;
+
+	return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Framework::OpenGLGlutCallBackUnitTestSuite
-    ::IsValid() const noexcept
+	::IsValid() const noexcept
 {
-	if(ParentType::IsValid() && 
-	   m_OsPtrTypePtr != nullptr)
-	    return true;
+	if (ParentType::IsValid() && m_Stream != nullptr && m_Impl != nullptr)
+		return true;
 	else
 		return false;
 }
@@ -54,93 +60,84 @@ bool Framework::OpenGLGlutCallBackUnitTestSuite
 #endif // OPEN_CLASS_INVARIANT
 
 bool Framework::OpenGLGlutCallBackUnitTestSuite
-    ::Initialize()
+	::Initialize()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;	
-	FRAMEWORK_ASSERTION_1(m_Impl != nullptr,"子类未调用GenerateSuite进行初始化");
+	FRAMEWORK_CLASS_IS_VALID_1; 
 
-	if(!m_IsInit)
+	if (!m_IsInit)
 	{
 		m_IsInit = true;
-		return AddSuiteOnInitialize();	
+		return AddSuiteOnInitialize();
 	}
+
 	return true;
 }
 
 bool Framework::OpenGLGlutCallBackUnitTestSuite
-	::SpecialKeysDown(int key,int xCoordinate,int yCoordinate)
+	::SpecialKeysDown(int key, int xCoordinate, int yCoordinate)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
-	FRAMEWORK_ASSERTION_1(m_Impl != nullptr,"子类未调用GenerateSuite进行初始化");
+	FRAMEWORK_CLASS_IS_VALID_1;	  
 
-	switch (static_cast<System::GlutKeyCodes>(key))
-	{
-	case System::GlutKeyCodes::F1:
-		{
-			ResetTestData(); 
-			break;
-		}
-		
-	case System::GlutKeyCodes::F5:
-		{
-			RunUnitTest();
-			break;
-		}
+	m_Impl->KeyDownMessage(System::UnderlyingCastEnum<System::WindowsKeyCodes>(key));
 
-	default:
-		break;
-	}
-
-	return ParentType::SpecialKeysDown(key, xCoordinate, yCoordinate);  
+	return ParentType::SpecialKeysDown(key, xCoordinate, yCoordinate);
 }
 
 bool Framework::OpenGLGlutCallBackUnitTestSuite
 	::IdleFunction()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;	
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::IdleFunction();  
+	return ParentType::IdleFunction();
 }
 
+// protected
 void Framework::OpenGLGlutCallBackUnitTestSuite
-	::DoAddSuite( const Suite& suite )
+	::DoAddSuite(const Suite& suite)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
-	FRAMEWORK_ASSERTION_1(m_Impl != nullptr,"子类未调用GenerateSuite进行初始化");
+	FRAMEWORK_CLASS_IS_VALID_1; 
 
 	return m_Impl->AddSuite(suite);
 }
 
-ostream* Framework::OpenGLGlutCallBackUnitTestSuite
-	::GetOStream()
+// protected
+CoreTools::OStreamShared Framework::OpenGLGlutCallBackUnitTestSuite
+	::GetStreamShared() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	return m_OsPtrTypePtr->GetOsPtr();
+	return m_Stream->GetStreamShared();
 }
 
 int Framework::OpenGLGlutCallBackUnitTestSuite
-	::GetPassedNumber() const
+	::GetPassedNumber() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
-	FRAMEWORK_ASSERTION_1(m_Impl != nullptr,"子类未调用GenerateSuite进行初始化");
+	FRAMEWORK_CLASS_IS_VALID_CONST_1; 
 
 	return m_Impl->GetPassedNumber();
 }
 
+// protected
 bool  Framework::OpenGLGlutCallBackUnitTestSuite
-	::IsPrintRun() const
+	::IsPrintRun() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return true;
+	return m_Impl->IsPrintRun();
+}
+
+// protected
+void Framework::OpenGLGlutCallBackUnitTestSuite
+	::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
+{
+	m_Impl->AddTest(suiteName, suite, testName, unitTest);
 }
 
 // private
 bool Framework::OpenGLGlutCallBackUnitTestSuite
-	:: AddSuiteOnInitialize()
+	::AddSuiteOnInitialize()
 {
-	bool result = ParentType::Initialize();
+	const auto result = ParentType::Initialize();
 
 	AddSuite();
 
@@ -149,27 +146,3 @@ bool Framework::OpenGLGlutCallBackUnitTestSuite
 
 	return result;
 }
-
-// private
-void Framework::OpenGLGlutCallBackUnitTestSuite
-	::ResetTestData()
-{
-	m_Impl->ResetTestData();
-	*GetOStream() << "测试数据已清零。\n";
-}
-
-// private
-void Framework::OpenGLGlutCallBackUnitTestSuite
-	::RunUnitTest()
-{
-	m_Impl->RunUnitTest();
-	m_Impl->PrintReport();
-}
-
-void Framework::OpenGLGlutCallBackUnitTestSuite
-	::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestPtr& unitTest)
-{
-	m_Impl->AddTest(suiteName,suite,testName, unitTest);
-}
-
- 

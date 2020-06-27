@@ -50,11 +50,11 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>
     // where det = 1 - d^2.
 
 	auto dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), mPlane1.GetNormal());
-    if (Math::FAbs(dot) >= (Real)1 - Math::sm_ZeroTolerance)
+    if (Math::FAbs(dot) >= static_cast<Real>(1) - Math::sm_ZeroTolerance)
     {
         // The planes are parallel.  Check if they are coplanar.
         Real cDiff;
-        if (dot >= Real{})
+        if (dot >= Math<Real>::sm_Zero)
         {
             // Normals are in same direction, need to look at c0-c1.
 			cDiff = mPlane0.GetConstant() - mPlane1.GetConstant();
@@ -78,7 +78,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>
         return;
     }
 
-	auto invDet = ((Real)1)/((Real)1 - dot*dot);
+	auto invDet = (static_cast<Real>(1))/(static_cast<Real>(1) - dot*dot);
 	auto c0 = (mPlane0.GetConstant() - dot*mPlane1.GetConstant())*invDet;
 	auto c1 = (mPlane1.GetConstant() - dot*mPlane0.GetConstant())*invDet;
 	this->SetIntersectionType(IntersectionType::Line);

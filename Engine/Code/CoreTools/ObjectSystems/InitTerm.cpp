@@ -21,7 +21,7 @@ CoreTools::InitTerm::Terminator CoreTools::InitTerm
 
 CORE_TOOLS_MUTEX_EXTERN(CoreTools);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder(g_CoreToolsMutex)
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder(GetCoreToolsMutex())
 
 void CoreTools::InitTerm
 	::AddInitializer(Initializer function)

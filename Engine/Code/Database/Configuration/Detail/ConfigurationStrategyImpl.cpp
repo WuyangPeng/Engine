@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 09:46)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 11:05)
 
 #include "Database/DatabaseExport.h" 
 
@@ -10,60 +10,39 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 
-using std::string;  
-using std::vector;
 using std::map;
+using std::string;
+using std::vector;
 
 Database::ConfigurationStrategyImpl
-	::ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy, const string& ip, uint32_t port,
-		                        const string& hostName, const string& userName, const string& password)
-	:m_WrappersStrategyFlag{ wrappersStrategy },
-	 m_IP{ ip },
-	 m_Port{ port },
-	 m_HostName{ hostName },
-	 m_UserName{ userName },
-	 m_Password{ password },
-	 m_Pooling{ false },
-     m_PoolMaxSize{ 0 },
-     m_PoolQueueTimeout{ 0 },
-     m_PoolMaxIdleTime{ 0 },
-	 m_FlagsOptions{ },
-	 m_StringOptions{},
-	 m_BooleanOptions{},
-	 m_IntOptions{},
-	 m_SSLOptions{},
-	 m_DBMapping{}
+	::ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy, const string& ip, int port,
+								const string& hostName, const string& userName, const string& password)
+	:m_WrappersStrategyFlag{ wrappersStrategy }, m_IP{ ip }, m_Port{ port },
+	 m_HostName{ hostName }, m_UserName{ userName }, m_Password{ password },
+	 m_Pooling{ false }, m_PoolMaxSize{ 0 }, m_PoolQueueTimeout{ 0 },
+	 m_PoolMaxIdleTime{ 0 }, m_FlagsOptions{ }, m_StringOptions{},
+	 m_BooleanOptions{}, m_IntOptions{}, m_SSLOptions{}, m_DBMapping{}
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
 Database::ConfigurationStrategyImpl
-	::ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy, const string& ip, uint32_t port,
-		                        const string& hostName, const string& userName, const string& password,	
-		                        bool pooling, int poolMaxSize, int poolQueueTimeout, int poolMaxIdleTime,
-		                        const FlagsOption& flagsOption, const StringOption& stringOption, const BooleanOption& booleanOption,
-		                        const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping)
-	:m_WrappersStrategyFlag{ wrappersStrategy },
-	 m_IP{ ip },
-	 m_Port{ port },
-	 m_HostName{ hostName },
-	 m_UserName{ userName },
-	 m_Password{ password },
-	 m_Pooling{ pooling },
-	 m_PoolMaxSize{ poolMaxSize },
-	 m_PoolQueueTimeout{ poolQueueTimeout },
-	 m_PoolMaxIdleTime{ poolMaxIdleTime },
-	 m_FlagsOptions{ flagsOption },
-	 m_StringOptions{ stringOption },
-	 m_BooleanOptions{ booleanOption },
-	 m_IntOptions{ intOption },
-	 m_SSLOptions{ sslOption },
-	 m_DBMapping{ dbMapping }
+	::ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy, const string& ip, int port,
+								const string& hostName, const string& userName, const string& password,
+								bool pooling, int poolMaxSize, int poolQueueTimeout, int poolMaxIdleTime,
+								const FlagsOption& flagsOption, const StringOption& stringOption, const BooleanOption& booleanOption,
+								const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping)
+	:m_WrappersStrategyFlag{ wrappersStrategy }, m_IP{ ip },
+	 m_Port{ port }, m_HostName{ hostName }, m_UserName{ userName },
+	 m_Password{ password }, m_Pooling{ pooling }, m_PoolMaxSize{ poolMaxSize },
+	 m_PoolQueueTimeout{ poolQueueTimeout }, m_PoolMaxIdleTime{ poolMaxIdleTime }, m_FlagsOptions{ flagsOption },
+	 m_StringOptions{ stringOption }, m_BooleanOptions{ booleanOption }, m_IntOptions{ intOption },
+	 m_SSLOptions{ sslOption }, m_DBMapping{ dbMapping }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Database,ConfigurationStrategyImpl)
+CLASS_INVARIANT_STUB_DEFINE(Database, ConfigurationStrategyImpl)
 
 Database::WrappersStrategy Database::ConfigurationStrategyImpl
 	::GetWrappersStrategy() const
@@ -81,7 +60,7 @@ string Database::ConfigurationStrategyImpl
 	return m_IP;
 }
 
-uint32_t Database::ConfigurationStrategyImpl
+int Database::ConfigurationStrategyImpl
 	::GetPort() const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;

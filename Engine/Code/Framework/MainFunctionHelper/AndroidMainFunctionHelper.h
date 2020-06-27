@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 17:51)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/20 11:46)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_H
@@ -12,38 +12,50 @@
 
 namespace Framework
 {
-	template <template<typename > class Build, typename Process>
+	template <template<typename> class Build, typename Process>
 	class AndroidMainFunctionHelper : public MainFunctionHelperBase
 	{
 	public:
 		using ClassType = AndroidMainFunctionHelper<Build, Process>;
 		using ParentType = MainFunctionHelperBase;
+		using ClassShareType = CoreTools::NonCopyClasses;
 		using BuildType = Build<Process>;
-	    using AndroidApp = System::AndroidApp;
+		using AndroidApp = System::AndroidApp;
 
 	public:
-		AndroidMainFunctionHelper(AndroidApp* state,const EnvironmentDirectory& environmentDirectory);
-		virtual ~AndroidMainFunctionHelper();
+		AndroidMainFunctionHelper(AndroidApp* androidApp, const EnvironmentDirectory& environmentDirectory);
+		~AndroidMainFunctionHelper() noexcept;
+		AndroidMainFunctionHelper(const AndroidMainFunctionHelper& rhs) noexcept = delete;
+		AndroidMainFunctionHelper& operator=(const AndroidMainFunctionHelper& rhs) noexcept = delete;
+		AndroidMainFunctionHelper(AndroidMainFunctionHelper&& rhs) noexcept;
+		AndroidMainFunctionHelper& operator=(AndroidMainFunctionHelper&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
-		
-		virtual void Destroy();
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+
+		void Destroy() override;
 
 	protected:
 		AndroidApp* GetAndroidApp();
 
 	private:
-		typedef std::shared_ptr<BuildType> BuildTypePtr;
+		using BuildSharedPtr = std::shared_ptr<BuildType>;
 
 	private:
-		virtual int DoRun();
+		int DoRun() override;
 		virtual int RunAndroidMainLoop();
 
-        void Initializers(AndroidApp* state);
-        void Terminators();	
+		void Initializers(AndroidApp* androidApp);
+		void Terminators();
+
+		void InitAndroidProcess();
+		void InitImpl(AndroidApp* androidApp);
+
+		void DestroyImpl() noexcept;
+		void DestroyAndroidProcess();
 
 	private:
-		BuildTypePtr m_Build;
+		BuildSharedPtr m_Build;
+		AndroidMainFunctionSchedule m_AndroidMainFunctionSchedule;
 	};
 }
 

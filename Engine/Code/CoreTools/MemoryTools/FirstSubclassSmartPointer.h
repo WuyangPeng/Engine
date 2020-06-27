@@ -24,18 +24,18 @@ namespace CoreTools
 
 	public:
 		explicit FirstSubclassSmartPointer(uint64_t address, BaseClassType* data = nullptr);
-		explicit FirstSubclassSmartPointer(BaseClassType* data = nullptr);
-		virtual ~FirstSubclassSmartPointer();
+		explicit FirstSubclassSmartPointer(BaseClassType* data) ;
+		FirstSubclassSmartPointer() noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-
+		 
 		virtual BaseClassType* GetData();
 		virtual BaseClassType& operator* ();
 		virtual BaseClassType* operator-> ();
 
-		virtual const BaseClassType* GetData() const;
-		virtual const BaseClassType& operator* () const;
-		virtual const BaseClassType* operator-> () const;
+		const BaseClassType* GetData() const override;
+		const BaseClassType& operator* () const override;
+		const BaseClassType* operator-> () const override;
 
 		// 向下转型，失败抛出异常。
 		template<typename SubclassSmartPointer>

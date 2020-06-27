@@ -1,16 +1,16 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 09:57)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 11:26)
 
 #ifndef DATABASE_SQL_INTERFACE_DOC_RESULT_IMPL_H
 #define DATABASE_SQL_INTERFACE_DOC_RESULT_IMPL_H
 
 #include "Database/DatabaseDll.h"
 
-#include "Database/Configuration/ConfigurationStrategy.h"
 #include "Database/SqlInterface/ResultRow.h"
+#include "Database/Configuration/ConfigurationStrategy.h"
 
 namespace Database
 {
@@ -26,11 +26,11 @@ namespace Database
 		explicit ResultImpl(const ConfigurationStrategy& configurationStrategy);
 		virtual ~ResultImpl();
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;	
+		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		virtual ResultRowPtr FetchOne();
-		virtual ResultRowContainer FetchAll(); 
-		ConfigurationStrategy GetConfigurationStrategy() const; 
+		virtual ResultRowContainer FetchAll();
+		ConfigurationStrategy GetConfigurationStrategy() const;
 
 	private:
 		ConfigurationStrategy m_ConfigurationStrategy;

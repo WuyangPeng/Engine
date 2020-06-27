@@ -1,29 +1,29 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 19:36)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 09:42)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "Float4Impl.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-Mathematics::Float4Impl	
-	::Float4Impl ()
+Mathematics::Float4Impl
+	::Float4Impl()
 	:m_Tuple{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::Float4Impl
-	::Float4Impl (float firstValue,float secondValue,float thirdValue,float fourValue)
+	::Float4Impl(float firstValue, float secondValue, float thirdValue, float fourValue)
 	:m_Tuple{ firstValue,secondValue,thirdValue,fourValue }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Mathematics,Float4Impl)
+CLASS_INVARIANT_STUB_DEFINE(Mathematics, Float4Impl)
 
 float Mathematics::Float4Impl
 	::GetFirstValue() const
@@ -58,7 +58,7 @@ float Mathematics::Float4Impl
 }
 
 void Mathematics::Float4Impl
-	::SetFirstValue( float value )
+	::SetFirstValue(float value)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -66,7 +66,7 @@ void Mathematics::Float4Impl
 }
 
 void Mathematics::Float4Impl
-	::SetSecondValue( float value )
+	::SetSecondValue(float value)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -74,7 +74,7 @@ void Mathematics::Float4Impl
 }
 
 void Mathematics::Float4Impl
-	::SetThirdValue( float value )
+	::SetThirdValue(float value)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -82,7 +82,7 @@ void Mathematics::Float4Impl
 }
 
 void Mathematics::Float4Impl
-	::SetFourthValue( float value )
+	::SetFourthValue(float value)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 

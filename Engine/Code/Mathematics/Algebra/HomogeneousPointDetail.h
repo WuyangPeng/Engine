@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/05 11:36)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 13:05)
 
 #ifndef MATHEMATICS_ALGEBRA_POINT_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POINT_DETAIL_H
@@ -11,42 +11,44 @@
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_HOMOGENEOUS_POINT_DETAIL)
 
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename T>
 Mathematics::HomogeneousPoint<T>
-	::HomogeneousPoint ()
+	::HomogeneousPoint() noexcept
 	:m_Tuple{}
-{ 
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-template <typename T>
-Mathematics::HomogeneousPoint<T>
-	::HomogeneousPoint (const HomogeneousPoint& rhs)
 {
-	memcpy(m_Tuple,rhs.m_Tuple, GetPointByte());	
-
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename T>
 Mathematics::HomogeneousPoint<T>
-	::HomogeneousPoint (T x, T y, T z, T w)
+	::HomogeneousPoint(const HomogeneousPoint& rhs)
 {
-    m_Tuple[0] = x;
-    m_Tuple[1] = y;
-    m_Tuple[2] = z;
-    m_Tuple[3] = w;
+	memcpy(m_Tuple, rhs.m_Tuple, GetPointByte());
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename T>
 Mathematics::HomogeneousPoint<T>
-	::~HomogeneousPoint ()
+	::HomogeneousPoint(T x, T y, T z, T w)
+{
+	m_Tuple[0] = x;
+	m_Tuple[1] = y;
+	m_Tuple[2] = z;
+	m_Tuple[3] = w;
+
+	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename T>
+Mathematics::HomogeneousPoint<T>
+	::~HomogeneousPoint()
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -57,9 +59,9 @@ Mathematics::HomogeneousPoint<T>& Mathematics::HomogeneousPoint<T>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	memcpy(m_Tuple,rhs.m_Tuple, GetPointByte());	
+	memcpy(m_Tuple, rhs.m_Tuple, GetPointByte());
 
-    return *this;
+	return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -89,31 +91,29 @@ T* Mathematics::HomogeneousPoint<T>
 	return NON_CONST_MEMBER_CALL_CONST_MEMBER(T*, GetCoordinate);
 }
 
- template <typename T>
+template <typename T>
 const T& Mathematics::HomogeneousPoint<T>
-	::operator[] (int index) const noexcept
+	::operator[] (int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	try
+	if (0 <= index && index < GetPointSize())
 	{
-		MATHEMATICS_ASSERTION_0(0 <= index && index < GetPointSize(), "À˜“˝¥ÌŒÛ£°");
+		return m_Tuple[index];
 	}
-	catch (...)
+	else
 	{
-		
-	}	 
-
-	return m_Tuple[index];
+		THROW_EXCEPTION(SYSTEM_TEXT("À˜“˝¥ÌŒÛ£°"));
+	}
 }
 
 template <typename T>
 T& Mathematics::HomogeneousPoint<T>
-	::operator[] (int index) noexcept
+	::operator[] (int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	return OPERATOR_SQUARE_BRACKETS(T,index);
+	return OPERATOR_SQUARE_BRACKETS(T, index);
 }
 
 template <typename T>
@@ -127,7 +127,7 @@ T Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 void Mathematics::HomogeneousPoint<T>
-	::SetX( T x )
+	::SetX(T x)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -145,7 +145,7 @@ T Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 void Mathematics::HomogeneousPoint<T>
-	::SetY( T y )
+	::SetY(T y)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -163,7 +163,7 @@ T Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 void Mathematics::HomogeneousPoint<T>
-	::SetZ( T z )
+	::SetZ(T z)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -181,7 +181,7 @@ T Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 void Mathematics::HomogeneousPoint<T>
-	::SetW( T w )
+	::SetW(T w)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -191,10 +191,10 @@ void Mathematics::HomogeneousPoint<T>
 // static
 template <typename T>
 int Mathematics::HomogeneousPoint<T>
-	:: GetPointByte()
+	::GetPointByte()
 {
 	return GetPointSize() * sizeof(T);
-}	
+}
 
 template <typename T>
 int Mathematics::HomogeneousPoint<T>
@@ -207,29 +207,29 @@ int Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 bool Mathematics
-	::operator==( const HomogeneousPoint<T>& lhs,const HomogeneousPoint<T>& rhs )
+	::operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs)
 {
-	 return memcmp(lhs.GetCoordinate(), rhs.GetCoordinate(),HomogeneousPoint<T>::GetPointByte()) == 0;
+	return memcmp(lhs.GetCoordinate(), rhs.GetCoordinate(), HomogeneousPoint<T>::GetPointByte()) == 0;
 }
 
 template <typename T>
 bool Mathematics
-	::operator<( const HomogeneousPoint<T>& lhs,const HomogeneousPoint<T>& rhs )
+	::operator<(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs)
 {
-	return memcmp(lhs.GetCoordinate(), rhs.GetCoordinate(),HomogeneousPoint<T>::GetPointByte()) < 0;
+	return memcmp(lhs.GetCoordinate(), rhs.GetCoordinate(), HomogeneousPoint<T>::GetPointByte()) < 0;
 }
 
 template <typename T>
 bool Mathematics
-	::Approximate( const HomogeneousPoint<T>& lhs,const HomogeneousPoint<T>& rhs,const T epsilon)
+	::Approximate(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs, const T epsilon)
 {
-	for (auto i = 0;i < HomogeneousPoint<T>::GetPointSize();++i)
+	for (auto i = 0; i < HomogeneousPoint<T>::GetPointSize(); ++i)
 	{
-		if(epsilon < Math<T>::FAbs(lhs[i] - rhs[i]))
+		if (epsilon < Math<T>::FAbs(lhs[i] - rhs[i]))
 			return false;
 	}
 
-	return true;	
+	return true;
 }
 
 #endif // MATHEMATICS_ALGEBRA_POINT_DETAIL_H

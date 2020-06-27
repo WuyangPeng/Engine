@@ -18,10 +18,17 @@ using std::string;
 
 CoreTools::CMainFunctionTestingHelper
 	::CMainFunctionTestingHelper(int argc, char* argv[])
-	:ParentType{ argc, argv }, m_TestingInformationHelper{}
+	:ParentType{ argc, argv }, m_TestingInformationHelper{}, m_Suite{ "",GetStreamShared(),IsPrintRun() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+} 
+
+CoreTools::CMainFunctionTestingHelper
+	::CMainFunctionTestingHelper(int argc, char* argv[], const string& suiteName)
+	:ParentType{ argc, argv }, m_TestingInformationHelper{  }, m_Suite{ suiteName,GetStreamShared(),IsPrintRun() }
+{
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+} 
 
 CoreTools::CMainFunctionTestingHelper
 	::~CMainFunctionTestingHelper()
@@ -59,4 +66,33 @@ bool CoreTools::CMainFunctionTestingHelper
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	return m_TestingInformationHelper.IsPrintRun();
+}
+
+int CoreTools::CMainFunctionTestingHelper
+	::RunSuite()
+{
+	m_Suite.RunUnitTest();
+	SystemPause();
+	m_Suite.PrintReport();
+	SystemPause();
+
+	return m_Suite.GetFailedNumber();
+}
+
+void CoreTools::CMainFunctionTestingHelper
+	::AddSuite(const Suite& suite)
+{
+	m_Suite.AddSuite(suite);
+}
+
+int CoreTools::CMainFunctionTestingHelper
+	::DoRun()
+{
+	return RunSuite();
+}
+
+CoreTools::Suite CoreTools::CMainFunctionTestingHelper
+	::GenerateSuite(const std::string& name)
+{
+	return Suite{ name, GetStreamShared(), IsPrintRun() };
 }

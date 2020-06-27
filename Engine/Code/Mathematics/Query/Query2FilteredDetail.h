@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/10 10:07)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/23 09:58)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_FILTERED_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_FILTERED_DETAIL_H
@@ -32,20 +32,19 @@ template <typename Real>
 bool Mathematics::Query2Filtered<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Real {} <= m_Uncertainty && m_Uncertainty <= static_cast<Real>(1))
-        return true;
-    else
-        return false;    
+	if (ParentType::IsValid() && Math<Real>::sm_Zero <= m_Uncertainty && m_Uncertainty <= static_cast<Real>(1))
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 Mathematics::QueryType Mathematics::Query2Filtered<Real>
 	::GetType() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
 	return QueryType::Filtered;
 }
 
@@ -54,7 +53,7 @@ Mathematics::LineQueryType Mathematics::Query2Filtered<Real>
 	::ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
+
 	return ParentType::ToLine(index, lhsVerticesIndex, rhsVerticesIndex);
 }
 
@@ -63,11 +62,11 @@ Mathematics::LineQueryType Mathematics::Query2Filtered<Real>
 	::ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
 
-	const auto vector0 = GetVertice(lhsVerticesIndex);
-	const auto vector1 = GetVertice(rhsVerticesIndex);
+	const auto vector0 = this->GetVertice(lhsVerticesIndex);
+	const auto vector1 = this->GetVertice(rhsVerticesIndex);
 
 	auto x0 = testVector[0] - vector0[0];
 	auto y0 = testVector[1] - vector0[1];
@@ -90,7 +89,7 @@ Mathematics::LineQueryType Mathematics::Query2Filtered<Real>
 			return LineQueryType::OnLine;
 	}
 
-	return m_RationalQuery.ToLine(testVector, lhsVerticesIndex, rhsVerticesIndex); 	
+	return m_RationalQuery.ToLine(testVector, lhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
@@ -98,22 +97,22 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>
 	::ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
+
 	return ParentType::ToCircumcircle(index, lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
 Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>
-	::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex,int mhsVerticesIndex, int rhsVerticesIndex) const
+	::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
 
-	const Vector2D lhsVector{ GetVertice(lhsVerticesIndex) };
-	const Vector2D mhsVector{ GetVertice(mhsVerticesIndex) };
-	const Vector2D rhsVector{ GetVertice(rhsVerticesIndex) };
+	const Vector2D lhsVector{ this->GetVertice(lhsVerticesIndex) };
+	const Vector2D mhsVector{ this->GetVertice(mhsVerticesIndex) };
+	const Vector2D rhsVector{ this->GetVertice(rhsVerticesIndex) };
 
 	auto lhsPlusTestX = lhsVector[0] + testVector[0];
 	auto lhsMinusTestX = lhsVector[0] - testVector[0];
@@ -135,7 +134,7 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>
 	auto len1 = Math<Real>::Sqrt(mhsMinusTestX * mhsMinusTestX + mhsMinusTestY * mhsMinusTestY + z1 * z1);
 	auto len2 = Math<Real>::Sqrt(rhsMinusTestX * rhsMinusTestX + rhsMinusTestY * rhsMinusTestY + z2 * z2);
 	auto scaledUncertainty = m_Uncertainty * len0 * len1 * len2;
-    
+
 	auto det = QueryDotTools<Real>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
 	if (scaledUncertainty <= Math<Real>::FAbs(det))
 	{
@@ -150,6 +149,4 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>
 	return m_RationalQuery.ToCircumcircle(testVector, lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
 }
 
-
 #endif // MATHEMATICS_QUERY_QUERY2_FILTERED_DETAIL_H
- 

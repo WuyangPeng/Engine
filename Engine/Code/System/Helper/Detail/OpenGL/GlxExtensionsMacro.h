@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:05)
+// 引擎版本：0.2.0.0 (2020/05/07 23:44)
 
 #ifndef SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H
@@ -11,15 +11,15 @@
 
 #if defined(SYSTEM_PLATFORM_LINUX)
 
-#ifdef __glxext_h_
-	#error "glxext.h包含在GLExtensionsMacro.h之前"
-#endif // __glxext_h_
+	#ifdef __glxext_h_
+		#error "glxext.h包含在GLExtensionsMacro.h之前"
+	#endif // __glxext_h_
 
-#define __glxext_h_
+	#define __glxext_h_
 
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/Xmd.h>
+	#include <X11/Xlib.h>
+	#include <X11/Xutil.h>
+	#include <X11/Xmd.h>
 
 #endif // SYSTEM_PLATFORM_LINUX
 
@@ -408,7 +408,7 @@
 
  // (SGIX 234) GLX_SGIX_visual_select_group
 
- #define GLX_VISUAL_SELECT_GROUP_SGIX 0x8028
+#define GLX_VISUAL_SELECT_GROUP_SGIX 0x8028
 
 // (SGIX 307) GLX_SGIX_hyperpipe
 

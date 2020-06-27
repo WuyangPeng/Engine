@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 17:24)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 11:24)
 
 #include "Network/NetworkExport.h" 
 
@@ -17,8 +17,9 @@
 #include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/SocketManager.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
-#include <boost/numeric/conversion/cast.hpp> 
+#include "System/Helper/PragmaWarning/NumericCast.h" 
 #include <vector>
 
 using std::vector;
@@ -27,13 +28,10 @@ using std::make_shared;
 
 Network::ReactiveServer
 	::ReactiveServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
-	:ParentType{ socketManager,configurationStrategy },
-	 m_SockAcceptor{ configurationStrategy.GetPort(), configurationStrategy },
-	 m_SockStream{ make_shared<SockStream>(configurationStrategy) },
-	 m_BufferSendStream{},
-	 m_MasterHandleSet{ configurationStrategy, m_SockAcceptor.GetACEHandle() },
-	 m_ActiveHandles{ configurationStrategy },
-	m_Buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
+	:ParentType{ socketManager,configurationStrategy }, m_SockAcceptor{ configurationStrategy.GetPort(), configurationStrategy },
+	 m_SockStream{ make_shared<SockStream>(configurationStrategy) }, m_BufferSendStream{},
+	 m_MasterHandleSet{ configurationStrategy, m_SockAcceptor.GetACEHandle() }, m_ActiveHandles{ configurationStrategy },
+	 m_Buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
 {
 	Init();
 
@@ -43,8 +41,8 @@ Network::ReactiveServer
 // private
 void Network::ReactiveServer
 	::Init()
-{	
-	if(!m_SockAcceptor.EnableNonBlock())
+{
+	if (!m_SockAcceptor.EnableNonBlock())
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("∆Ù”√∑«◊Ë»˚ ß∞‹£°"));
 	}
@@ -55,7 +53,7 @@ Network::ReactiveServer
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 
-	for (const auto& stream: m_BufferSendStream)
+	for (const auto& stream : m_BufferSendStream)
 	{
 		m_SockStream->SetACEHandle(stream.second->GetACEHandle());
 		m_SockStream->CloseHandle();
@@ -70,7 +68,7 @@ bool Network::ReactiveServer
 {
 	m_ActiveHandles = m_MasterHandleSet.GetCurrentHandleSet();
 
-	auto width = boost::numeric_cast<int> (m_ActiveHandles.GetMaxSet ()) + 1;
+	auto width = boost::numeric_cast<int>(m_ActiveHandles.GetMaxSet()) + 1;
 	if (!m_ActiveHandles.Select(width))
 	{
 		return false;
@@ -83,21 +81,21 @@ bool Network::ReactiveServer
 
 bool Network::ReactiveServer
 	::HandleConnections(const SocketManagerSharedPtr& socketManager)
-{ 
-	if(m_ActiveHandles.isSet(m_SockAcceptor.GetACEHandle()))
+{
+	if (m_ActiveHandles.IsSet(m_SockAcceptor.GetACEHandle()))
 	{
-		while(m_SockAcceptor.Accept(m_SockStream))
+		while (m_SockAcceptor.Accept(m_SockStream))
 		{
 			m_MasterHandleSet.SetBit(m_SockStream->GetACEHandle());
 
 			auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
 			socketManager->Insert(socketID);
-	
-			m_BufferSendStream.Insert(socketID,m_SockStream->GetACEHandle(),1024, GetConfigurationStrategy().GetParserStrategy());
+
+			m_BufferSendStream.Insert(socketID, m_SockStream->GetACEHandle(), 1024, GetConfigurationStrategy().GetParserStrategy());
 		}
 
 		m_ActiveHandles.ClearBit(m_SockAcceptor.GetACEHandle());
-	} 
+	}
 	return true;
 }
 
@@ -108,9 +106,9 @@ bool Network::ReactiveServer
 
 	auto handle = handleSetIterator();
 
-	while(System::IsSocketValid(reinterpret_cast<System::WinSocket>(handle)))
+	while (System::IsSocketValid(reinterpret_cast<System::WinSocket>(handle)))
 	{
-		m_SockStream->SetACEHandle(handle); 
+		m_SockStream->SetACEHandle(handle);
 
 		auto ptr = m_BufferSendStream.GetBufferSendStreamContainerPtrByHandle(handle);
 
@@ -127,30 +125,30 @@ bool Network::ReactiveServer
 				m_MasterHandleSet.ClearBit(handle);
 				m_SockStream->CloseHandle();
 				m_BufferSendStream.Erase(ptr->GetSocketID());
-			}		
+			}
 		}
 		catch (CoreTools::Error&)
 		{
 			m_MasterHandleSet.ClearBit(handle);
 			m_SockStream->CloseHandle();
 			m_BufferSendStream.Erase(ptr->GetSocketID());
-		}						
+		}
 
 		handle = handleSetIterator();
 	}
 
-	m_MasterHandleSet.ToNextIndex(); 
+	m_MasterHandleSet.ToNextIndex();
 
 	return true;
 }
 
 void Network::ReactiveServer
-	::Send(uint64_t socketID,const MessageInterfaceSharedPtr& message)
-{ 
+	::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+{
 	NETWORK_CLASS_IS_VALID_9;
 
 	auto ptr = m_BufferSendStream.GetBufferSendStreamContainerPtrBySocketID(socketID);
-	 	 
+
 	if (ptr->Insert(message))
 	{
 		if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Immediately)
@@ -168,16 +166,16 @@ void Network::ReactiveServer
 		{
 			ImmediatelySend(socketID);
 		}
-	}	
+	}
 }
 
 bool Network::ReactiveServer
 	::ImmediatelySend(uint64_t socketID)
 {
 	auto ptr = m_BufferSendStream.GetBufferSendStreamContainerPtrBySocketID(socketID);
-		 
+
 	if (!ptr->IsEmpty())
-	{ 
+	{
 		m_SockStream->SetACEHandle(ptr->GetACEHandle());
 
 		ptr->Save(m_Buffer);
@@ -186,7 +184,6 @@ bool Network::ReactiveServer
 
 		ptr->Clear();
 	}
-		
 
 	return true;
 }

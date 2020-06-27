@@ -1,0 +1,19 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/07 23:16)
+
+#ifndef SYSTEM_HELPER_STRINGIZE_MACRO_H
+#define SYSTEM_HELPER_STRINGIZE_MACRO_H
+
+#define SYSTEM_STRINGIZE(x) SYSTEM_DO_STRINGIZE(x)
+#define SYSTEM_DO_STRINGIZE(x) #x
+
+#define SYSTEM_CONCATENATOR(lhs,rhs) SYSTEM_DO_CONCATENATOR(lhs,rhs)
+#define SYSTEM_DO_CONCATENATOR(lhs,rhs) SYSTEM_DO_CONCATENATOR_DETAIL(lhs,rhs)
+#define SYSTEM_DO_CONCATENATOR_DETAIL(lhs,rhs) lhs##rhs
+
+#define SYSTEM_MULTIPLE_CONCATENATOR(lhs,mhs,rhs) SYSTEM_CONCATENATOR(lhs,SYSTEM_CONCATENATOR(mhs,rhs))
+	  
+#endif // SYSTEM_HELPER_STRINGIZE_MACRO_H

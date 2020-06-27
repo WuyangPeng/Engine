@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/03 10:08)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/16 12:35)
 
 #include "Database/DatabaseExport.h"
 
@@ -31,7 +31,7 @@ Database::Session
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, Session)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Session, GetConfigurationStrategy, Database::ConfigurationStrategy) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Session, GetConfigurationStrategy, Database::ConfigurationStrategy)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Session, GetSchemaContainer, Database::Session::SchemaContainer)
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
@@ -62,7 +62,7 @@ Database::Session::ResultPtr Database::Session
 	return m_Impl->ExecuteResult(findStatement, bindStatement);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Database, Session, Execute, string, void) 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Database, Session, Execute, string, void)
 
 void Database::Session
 	::Execute(const string& findStatement, const string& bindStatement)
@@ -78,5 +78,5 @@ void Database::Session
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Execute(findStatement, bindStatement);
-} 
+}
 

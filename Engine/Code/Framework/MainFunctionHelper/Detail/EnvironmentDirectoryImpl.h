@@ -1,16 +1,19 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 17:50)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/29 11:29)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ENVIRONMENT_DIRECTORY_IMPL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ENVIRONMENT_DIRECTORY_IMPL_H
 
 #include "Framework/FrameworkDll.h" 
 
+#include "EngineDirectoryPath.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 
+#include <map>
 #include <string>
 
 namespace Framework
@@ -19,45 +22,31 @@ namespace Framework
 	{
 	public:
 		using ClassType = EnvironmentDirectoryImpl;
+		using String = System::String;
 
 	public:
-		explicit EnvironmentDirectoryImpl(const System::String& engineEnvironment);
+		EnvironmentDirectoryImpl(const String& engineEnvironment, const String& engineDirectory);
 
 		CLASS_INVARIANT_DECLARE;
 
-		const System::String GetEngineEnvironment() const;
-		const System::String GetEngineDirectory() const;
-		const System::String GetResourcePath() const;		
-		const System::String GetConfigurationPath() const;		
-		const System::String GetShaderPath() const;	
-		const System::String GetScenePath() const;		
-		const System::String GetTexturePath() const;		
-		const System::String GetVertexPath() const;		
-		const System::String GetImagePath() const;		
+		const String GetEngineEnvironment() const;
+		const String GetEngineDirectory() const;
 
-		void SetResourcePath(const System::String& resourcePath);
-		void SetConfigurationPath(const System::String& configurationPath);
-		void SetShaderPath(const System::String& shaderPath);
-		void SetScenePath(const System::String& scenePath);
-		void SetTexturePath(const System::String& texturePath);
-		void SetVertexPath(const System::String& vertexPath);
-		void SetImagePath(const System::String& imagePath);
+		const String GetDirectory(UpperDirectory analysisDirectory) const;
+
+		const String GetPath(RenderingAnalysisDirectory analysisDirectory) const;
+		const String GetPath(RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;
+		const String GetPath(EndianDirectory endianDirectory, RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;
 
 	private:
-		static const System::String GenerateEngineDirectory(const System::String& engineEnvironment);
+		static const String GenerateEngineDirectory(const String& engineEnvironment);
+		static const EngineDirectoryPath GetEngineDirectoryPath(const String& engineDirectory);
+		static const std::string GetJsonName(const String& variableName);
 
 	private:
-		System::String m_EngineEnvironment;
-		System::String m_EngineDirectory;		 
-		System::String m_ResourcePath;		
-		System::String m_ConfigurationPath;		
-		System::String m_ShaderPath;		
-		System::String m_ScenePath;	
-		System::String m_TexturePath;		
-		System::String m_VertexPath;		
-		System::String m_ImagePath;	
-
-		static const System::String sm_Suffix;
+		String m_EngineEnvironment;
+		String m_EngineDirectory;
+		EngineDirectoryPath m_EngineDirectoryPath;
 	};
 }
 

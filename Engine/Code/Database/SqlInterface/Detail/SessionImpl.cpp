@@ -1,15 +1,15 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 10:06)
+// 引擎版本：0.0.2.5 (2020/03/16 12:31)
 
 #include "Database/DatabaseExport.h"
 
 #include "SessionImpl.h"
-#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "System/Helper/UnusedMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
 using std::string;
 
@@ -57,7 +57,7 @@ Database::SessionImpl::MysqlxSchemaPtr Database::SessionImpl
 Database::SessionImpl::SchemaContainer Database::SessionImpl
 	::GetSchemaContainer()
 {
-	DATABASE_CLASS_IS_VALID_9; 
+	DATABASE_CLASS_IS_VALID_9;
 
 	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetSchemaContainer未实现。"));
 }

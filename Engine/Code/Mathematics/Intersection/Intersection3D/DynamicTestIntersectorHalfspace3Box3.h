@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 09:48)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_BOX3_H
 
 #include "Mathematics/MathematicsDll.h"
- 
+
 #include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Objects3D/Plane3.h" 
 #include "Mathematics/Intersection/DynamicIntersector.h"
@@ -31,20 +31,20 @@ namespace Mathematics
 		using Box3 = Box3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;   
+		using Math = Math<Real>;
 
 	public:
-		DynamicTestIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box,Real tmax, 
-											 const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon = Math::sm_ZeroTolerance);
-		
+		DynamicTestIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, Real tmax,
+											 const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+
 		// Object access.
-		const Plane3 GetHalfspace () const;
-		const Box3 GetBox () const;	
-		
+		const Plane3 GetHalfspace() const;
+		const Box3 GetBox() const;
+
 	private:
 		// Dynamic queries
-		void Test ();	
-		
+		void Test();
+
 		// The objects to intersect.
 		Plane3 mHalfspace;
 		Box3 mBox;

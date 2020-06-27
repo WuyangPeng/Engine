@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:18)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 15:57)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_H
@@ -13,45 +13,46 @@
 
 namespace Framework
 {
-	template <typename ModelViewControllerMiddleLayerContainer>
+	template <typename MiddleLayer>
 	class OpenGLGlutCallBack : public OpenGLGlutCallBackInterface
 	{
 	public:
-		typedef ModelViewControllerMiddleLayerContainer MiddleLayerType;
-		typedef OpenGLGlutCallBack<MiddleLayerType> ClassType;
-		typedef OpenGLGlutCallBackInterface ParentType;
+		using MiddleLayerType = MiddleLayer;
+		using ClassType = OpenGLGlutCallBack<MiddleLayerType>;
+		using ParentType = OpenGLGlutCallBackInterface;
+		using CustomTime = CoreTools::CustomTime;
 
 	public:
-		OpenGLGlutCallBack();
-		virtual ~OpenGLGlutCallBack();
+		explicit OpenGLGlutCallBack(int64_t delta);
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool RenderScene();
-		virtual bool ChangeSize(int width, int height);
-		virtual bool SpecialKeysDown(int key,int xCoordinate,int yCoordinate);
-		virtual bool KeyboardDown(unsigned char key,int xCoordinate,int yCoordinate);
-		virtual bool SpecialKeysUp(int key,int xCoordinate,int yCoordinate);
-		virtual bool KeyboardUp(unsigned char key,int xCoordinate,int yCoordinate);
-		virtual bool MotionFunction(int xCoordinate,int yCoordinate);
-		virtual bool PassiveMotion(int xCoordinate,int yCoordinate);
-		virtual bool MouseClick(int button,int state,int xCoordinate,int yCoordinate);
-		virtual bool TimerFunction(TimerFunctionCallback callback);
-		virtual bool IdleFunction();
-		virtual bool ProcessMenu(int menuValue);
-		virtual void DestroyWindow();
-
-	private:
-		typedef std::shared_ptr<MiddleLayerType> MiddleLayerTypePtr;
+		bool RenderScene() override;
+		bool ChangeSize(int width, int height) override;
+		bool SpecialKeysDown(int key, int xCoordinate, int yCoordinate) override;
+		bool KeyboardDown(int key, int xCoordinate, int yCoordinate) override;
+		bool SpecialKeysUp(int key, int xCoordinate, int yCoordinate) override;
+		bool KeyboardUp(int key, int xCoordinate, int yCoordinate) override;
+		bool MotionFunction(int xCoordinate, int yCoordinate) override;
+		bool PassiveMotion(int xCoordinate, int yCoordinate) override;
+		bool MouseClick(int button, int state, int xCoordinate, int yCoordinate) override;
+		bool IdleFunction() override;
+		bool TimerFunction(TimerFunctionCallback callback) override;
+		bool ProcessMenu(int menuValue) override;
+		void DestroyWindow() override;
 
 	private:
-		void SetGLUTModifiers(int button,int state);
+		using MiddleLayerTypeSharedPtr = std::shared_ptr<MiddleLayerType>;
 
 	private:
-		MiddleLayerTypePtr m_MiddleLayerPtr;
-		CoreTools::CustomTime m_LastTime;
+		void SetGLUTModifiers(int button, int state) noexcept;
+
+	private:
+		MiddleLayerTypeSharedPtr m_MiddleLayer;
+		CustomTime m_LastTime;
 		VirtualKeysTypes m_GLUTModifiers;
 		MouseButtonsTypes m_Button;
+		int64_t m_Accumulative;
 	};
 }
 

@@ -141,7 +141,7 @@ bool System
 {
 	if (printInfo)
 	{
-		Disable26447NoReturn(PrintOpenGLInfo);
+		NoexceptNoReturn(PrintOpenGLInfo);
 	}
 
 	InitOpenGL12();

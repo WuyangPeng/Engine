@@ -16,7 +16,7 @@
 #include "Mathematics/Algebra/APoint.h"
 
 #include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
+
 
 RENDERING_EXPORT_SHARED_PTR(CullerImpl);
 EXPORT_NONCOPYABLE_CLASS(RENDERING);
@@ -30,7 +30,9 @@ namespace Rendering
         using Plane = Mathematics::Plane<float>;
         using APoint = Mathematics::APoint<float>;
 		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-  
+		using VisualContainer = std::vector<VisualSmartPointer>;
+		using VisualContainerIter = VisualContainer::iterator;
+
     public:
         // 裁剪需要相机模型。如果需要修改相机，
         // 你应该在使用ComputeVisibleSet之前，调用SetCamera。
@@ -48,10 +50,10 @@ namespace Rendering
         // 派生类可能会覆盖此行为。
         // 例如,数组排序数组可能保持最小化渲染状态改变或者
         // 也可能是/维护作为一个独特的门户系统的对象列表。
-		virtual void Insert(const ConstSpatialSmartPointer& visible);
+		virtual void Insert(const VisualSmartPointer& visible);
 
         int GetNumVisible () const;
-		const ConstSpatialSmartPointer& GetVisible(int index) const;
+		const ConstVisualSmartPointer GetVisible(int index) const;
 
         int GetPlaneQuantity () const;
         const Plane* GetPlanes () const;
@@ -78,6 +80,9 @@ namespace Rendering
         // 这是你应该使用的主要函数中使用的在场景图裁剪。
         // 遍历场景图,构建潜在可见集相对于世界平面。
 		void ComputeVisibleSet(SpatialSmartPointer& scene);
+
+		VisualContainerIter begin();
+		VisualContainerIter end();
 
     private:
         IMPL_TYPE_DECLARE(VisibleSet);

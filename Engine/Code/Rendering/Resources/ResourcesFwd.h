@@ -23,6 +23,9 @@ namespace Rendering
 	class VertexFormatElement;
 	class VertexFormat;
 	class VertexBufferAccessor;
+
+	enum class BufferUsage;
+	enum class BufferLocking;
 }
 
 #endif // RENDERING_RENDERING_RESOURCES_FWD_H

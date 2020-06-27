@@ -1,0 +1,23 @@
+数据库
+ 
+Database
+	
+工程类型
+	dll/lib。
+
+状态
+	未完成。
+
+实现内容
+	1.  帮助
+	2.  配置
+	3.  Sql接口
+	4.  语句
+	5.  Mysql 包装器
+	6.  Mysql Connector 包装器
+	7.  Sql Server 包装器
+	8.  SQLite 包装器
+	9.  PostgreSQL 包装器
+	10. Oracle 包装器
+	11. 平面文件包装器 
+	12. 复制工程dll到测试工程运行目录。 

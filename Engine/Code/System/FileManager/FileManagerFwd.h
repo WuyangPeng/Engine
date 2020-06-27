@@ -7,11 +7,6 @@
 #ifndef SYSTEM_FILE_MANAGER_FWD_H
 #define SYSTEM_FILE_MANAGER_FWD_H
 
-#include "Fwd/CFileFwd.h"
-#include "Fwd/FileFwd.h"
-#include "Fwd/FileToolsFwd.h"
-#include "Fwd/FileTimeFwd.h"
-#include "Fwd/FindFileFwd.h"
-#include "Fwd/EnvironmentVariableFwd.h" 
+#include "Fwd/FileFlagsFwd.h" 
 
 #endif // SYSTEM_FILE_MANAGER_FWD_H

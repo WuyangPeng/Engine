@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 13:22)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 14:18)
 
 #ifndef MATHEMATICS_APPROXIMATION_PARABOLOID_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_PARABOLOID_FIT3_DETAIL_H
@@ -15,7 +15,7 @@
 template <typename Real>
 Mathematics::ParaboloidFit3<Real>
 	::ParaboloidFit3(const std::vector<Vector3D>& points)
-	:m_Coeff{}
+	:m_Coeff{}, m_IsFitSuccess{ false }
 {
 	Calculate(points);
 
@@ -47,7 +47,6 @@ typename Mathematics::ParaboloidFit3<Real>::VariableLengthVector Mathematics::Pa
 	}
 }
 
-
 template <typename Real>
 bool Mathematics::ParaboloidFit3<Real>
 	::GetIsFitSuccess() const
@@ -56,7 +55,6 @@ bool Mathematics::ParaboloidFit3<Real>
 
 	return m_IsFitSuccess;
 }
-
 
 template <typename Real>
 void Mathematics::ParaboloidFit3<Real>
@@ -67,9 +65,9 @@ void Mathematics::ParaboloidFit3<Real>
 	{
 		VariableMatrix<Real> matrix{ sm_VariableMatrixSize, sm_VariableMatrixSize };
 		std::vector<Real> rhs(sm_VariableMatrixSize);
-		
+
 		auto numPoints = points.size();
-		
+
 		for (auto i = 0u; i < numPoints; i++)
 		{
 			auto x2 = points[i][0] * points[i][0];
@@ -89,7 +87,7 @@ void Mathematics::ParaboloidFit3<Real>
 			auto x2y2 = x2 * y2;
 			auto xy3 = points[i][0] * y3;
 			auto y4 = y2 * y2;
-			
+
 			matrix[0][0] += x4;
 			matrix[0][1] += x3y;
 			matrix[0][2] += x2y2;
@@ -105,7 +103,7 @@ void Mathematics::ParaboloidFit3<Real>
 			matrix[3][3] += x2;
 			matrix[3][5] += points[i][0];
 			matrix[4][5] += points[i][1];
-			
+
 			rhs[0] += zx2;
 			rhs[1] += zxy;
 			rhs[2] += zy2;
@@ -113,7 +111,7 @@ void Mathematics::ParaboloidFit3<Real>
 			rhs[4] += zy;
 			rhs[5] += points[i][2];
 		}
-		
+
 		matrix[1][0] = matrix[0][1];
 		matrix[1][1] = matrix[0][2];
 		matrix[1][3] = matrix[0][4];
@@ -134,7 +132,7 @@ void Mathematics::ParaboloidFit3<Real>
 		matrix[5][2] = matrix[2][5];
 		matrix[5][3] = matrix[3][5];
 		matrix[5][4] = matrix[4][5];
-		matrix[5][5] = static_cast<Real>(numPoints);	
+		matrix[5][5] = static_cast<Real>(numPoints);
 
 		std::vector<Real> coeff(sm_VariableMatrixSize);
 
@@ -151,6 +149,4 @@ void Mathematics::ParaboloidFit3<Real>
 	}
 }
 
-
 #endif // MATHEMATICS_APPROXIMATION_PARABOLOID_FIT3_DETAIL_H
- 

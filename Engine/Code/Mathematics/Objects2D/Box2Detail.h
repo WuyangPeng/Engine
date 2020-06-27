@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/06 11:18)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 16:50)
 
 #ifndef MATHEMATICS_OBJECTS2D_BOX2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_BOX2_DETAIL_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::Box2<Real>
-	::Box2( const Vector2D& center, const Vector2D& firstAxis,const Vector2D& secondAxis, const Real firstExtent,const Real secondExtent,const Real epsilon )
+	::Box2(const Vector2D& center, const Vector2D& firstAxis, const Vector2D& secondAxis, const Real firstExtent, const Real secondExtent, const Real epsilon)
 	:m_Center{ center }, m_Epsilon{ epsilon }
 {
 	m_Axis[0] = firstAxis;
@@ -30,10 +30,10 @@ Mathematics::Box2<Real>
 template <typename Real>
 Mathematics::Box2<Real>
 	::Box2()
-	:m_Center{}, m_Epsilon{ Real{} }
+	:m_Center{}, m_Epsilon{}
 {
-	m_Extent[0] = Real{ };
-	m_Extent[1] = Real{ };
+	m_Extent[0] = Math::sm_Zero;
+	m_Extent[1] = Math::sm_Zero;
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -47,11 +47,11 @@ bool Mathematics::Box2<Real>
 		-m_Epsilon <= m_Extent[0] && -m_Epsilon <= m_Extent[1])
 	{
 		return true;
-	}		
+	}
 	else
 	{
 		return false;
-	}		
+	}
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -138,8 +138,8 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Box2<Real>& lhs, const Box2<Real>& rhs, const Real epsilon)
 {
-	return Vector2DTools<Real>::Approximate(lhs.GetCenter(),rhs.GetCenter(),epsilon) &&
-		   Vector2DTools<Real>::Approximate(lhs.GetFirstAxis(),rhs.GetFirstAxis(),epsilon) &&
+	return Vector2DTools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
+		   Vector2DTools<Real>::Approximate(lhs.GetFirstAxis(), rhs.GetFirstAxis(), epsilon) &&
 		   Vector2DTools<Real>::Approximate(lhs.GetSecondAxis(), rhs.GetSecondAxis(), epsilon) &&
 		   Math<Real>::Approximate(lhs.GetFirstExtent(), rhs.GetFirstExtent(), epsilon) &&
 		   Math<Real>::Approximate(lhs.GetSecondExtent(), rhs.GetSecondExtent(), epsilon);
@@ -151,7 +151,7 @@ std::ostream& Mathematics
 {
 	outFile << "center=" << box.GetCenter() << ",axis0=" << box.GetFirstAxis()
 		    << ",axis1=" << box.GetSecondAxis() << "extent0=" << box.GetFirstExtent()
-			<< "extent1=" << box.GetSecondExtent();
+		    << "extent1=" << box.GetSecondExtent();
 
 	return outFile;
 }

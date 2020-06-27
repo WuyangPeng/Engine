@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 11:05)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 10:12)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_H
@@ -17,19 +17,19 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class Matrix3EigenDecomposition  
+	class Matrix3EigenDecomposition
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Matrix3EigenDecomposition <Real>;
 		using Matrix3 = Matrix3<Real>;
-		using Math = Math<Real>;	
-		using AlgebraTraits = AlgebraTraits<Real>;		
+		using Math = Math<Real>;
+		using AlgebraTraits = AlgebraTraits<Real>;
 
 	public:
-		Matrix3EigenDecomposition (const Matrix3& rotation,const Matrix3& diagonal,const Real epsilon);
-	
+		Matrix3EigenDecomposition(const Matrix3& rotation, const Matrix3& diagonal, const Real epsilon);
+
 		CLASS_INVARIANT_DECLARE;
 
 		const Matrix3 GetRotation() const;

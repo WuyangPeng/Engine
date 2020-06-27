@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 18:08)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:18)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_DETAIL_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_DETAIL_H
@@ -21,7 +21,7 @@ Mathematics::Intersector<Real, Vector>
 
 template <typename Real, template <typename> class Vector>
 Mathematics::Intersector<Real, Vector>
-	::~Intersector() 
+	::~Intersector()
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -31,7 +31,7 @@ template <typename Real, template <typename> class Vector>
 bool Mathematics::Intersector<Real, Vector>
 	::IsValid() const  noexcept
 {
-	if (Real{} <= m_Epsilon)
+	if (Math::sm_Zero <= m_Epsilon)
 		return true;
 	else
 		return false;
@@ -54,11 +54,11 @@ Real Mathematics::Intersector<Real, Vector>
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	return m_Epsilon;
-} 
+}
 
 template <typename Real, template <typename> class Vector>
 bool Mathematics::Intersector<Real, Vector>
-	::IsIntersection() const 
+	::IsIntersection() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -67,7 +67,7 @@ bool Mathematics::Intersector<Real, Vector>
 
 template <typename Real, template <typename> class Vector>
 void Mathematics::Intersector<Real, Vector>
-	::SetIntersectionType(IntersectionType intersectionType) 
+	::SetIntersectionType(IntersectionType intersectionType)
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

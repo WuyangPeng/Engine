@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 10:05)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_BOX3_H
@@ -25,26 +25,26 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;   
+		using Math = Math<Real>;
 
 	public:
-		DynamicTestIntersectorSegment3Box3 (const Segment3& segment, const Box3& box,bool solid,Real tmax,
-										    const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon = Math::sm_ZeroTolerance);
-		
+		DynamicTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tmax,
+										   const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+
 		// Object access.
-		const Segment3 GetSegment () const;
-		const Box3 GetBox () const;
+		const Segment3 GetSegment() const;
+		const Box3 GetBox() const;
 
 	private:
 		// Dynamic test-intersection query.
-		void Test ();
-    
+		void Test();
+
 		// The objects to intersect.
 		Segment3 mSegment;
 		Box3 mBox;
-		bool mSolid;		
+		bool mSolid;
 	};
-	
+
 	using DynamicTestIntersectorSegment3Box3f = DynamicTestIntersectorSegment3Box3<float>;
 	using DynamicTestIntersectorSegment3Box3d = DynamicTestIntersectorSegment3Box3<double>;
 }

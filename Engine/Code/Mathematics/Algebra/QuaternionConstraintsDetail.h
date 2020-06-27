@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/05 18:16)
+// 引擎版本：0.0.2.5 (2020/03/19 14:15)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_DETAIL_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_DETAIL_H
@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::QuaternionConstraints<Real>
-	::QuaternionConstraints( Real minAngle, Real maxAngle )
+	::QuaternionConstraints(Real minAngle, Real maxAngle)
 	:m_MinAngle{ minAngle }, m_MaxAngle{ maxAngle }, m_CosMinAngle{ Math::Cos(m_MinAngle) }, m_SinMinAngle{ Math::Sin(m_MinAngle) },
 	 m_CosMaxAngle{ Math::Cos(m_MaxAngle) }, m_SinMaxAngle{ Math::Sin(m_MaxAngle) }, m_DiffCosMaxMin{ m_CosMaxAngle - m_CosMinAngle }, m_DiffSinMaxMin{ m_SinMaxAngle - m_SinMinAngle },
 	 m_AvrAngle{ static_cast<Real>(0.5) * (m_MinAngle + m_MaxAngle) }, m_CosAvrAngle{ Math::Cos(m_AvrAngle) }, m_SinAvrAngle{ Math::Sin(m_AvrAngle) }
@@ -31,8 +31,8 @@ template <typename Real>
 bool Mathematics::QuaternionConstraints<Real>
 	::IsValid() const noexcept
 {
-	if(-Math::sm_HalfPI <= m_MinAngle && m_MinAngle <= Math::sm_HalfPI && m_MinAngle <= m_MaxAngle && m_MaxAngle <= Math::sm_HalfPI)
-	    return true;
+	if (-Math::sm_HalfPI <= m_MinAngle && m_MinAngle <= Math::sm_HalfPI && m_MinAngle <= m_MaxAngle && m_MaxAngle <= Math::sm_HalfPI)
+		return true;
 	else
 		return false;
 }
@@ -40,15 +40,15 @@ bool Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 bool Mathematics::QuaternionConstraints<Real>
-	::IsValid( Real x, Real y ) const
+	::IsValid(Real x, Real y) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y),static_cast<Real>(1)),"(x,y)必须是单位长度！");
+	MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::sm_One), "(x,y)必须是单位长度！");
 
 	// 测试(x,y)是否满足约束条件。
 	auto xm = x - m_CosMinAngle;
 	auto ym = y - m_SinMinAngle;
-	if (ym * m_DiffCosMaxMin <= xm * m_DiffSinMaxMin )
+	if (ym * m_DiffCosMaxMin <= xm * m_DiffSinMaxMin)
 	{
 		return true;
 	}
@@ -63,7 +63,6 @@ bool Mathematics::QuaternionConstraints<Real>
 
 	return false;
 }
-
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>

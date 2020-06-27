@@ -1,28 +1,26 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:20)
+// 引擎版本：0.3.0.1 (2020/05/21 15:59)
 
 #include "Framework/FrameworkExport.h"
 
 #include "OpenGLGlutCallBackInterface.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
-#include "Framework/Application/ApplicationTrait.h"
 #include "System/OpenGL/OpenGLAPI.h"
 #include "System/OpenGL/OpenGLGlut.h"
 #include "System/Helper/UnusedMacro.h"
+#include "System/Helper/EnumCast.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
+#include "Framework/WindowProcess/Flags/MouseTypes.h"
 
 Framework::OpenGLGlutCallBackInterface
-	::OpenGLGlutCallBackInterface()
-	:m_WindowID(0), m_Millisecond(0)
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::OpenGLGlutCallBackInterface
-	::~OpenGLGlutCallBackInterface()
+	::OpenGLGlutCallBackInterface(int64_t delta) noexcept
+	:m_WindowID { 0 }, m_Millisecond{ 0 }, m_Delta{ delta }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -31,15 +29,15 @@ Framework::OpenGLGlutCallBackInterface
 bool Framework::OpenGLGlutCallBackInterface
 	::IsValid() const noexcept
 {
-	if(0 <= m_WindowID)
-         return true;
-    else
-         return false;
+	if (0 <= m_WindowID)
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
 int Framework::OpenGLGlutCallBackInterface
-    ::GetWindowID() const
+	::GetWindowID() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
@@ -47,69 +45,198 @@ int Framework::OpenGLGlutCallBackInterface
 }
 
 void Framework::OpenGLGlutCallBackInterface
-    ::SetWindowID( int window )
+	::SetWindowID(int window)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
-	FRAMEWORK_ASSERTION_2(window != 0,"设置的窗口ID为零！");
-	FRAMEWORK_ASSERTION_2(m_WindowID == 0 || m_WindowID == window,"不允许重复设置窗口ID!");
+	FRAMEWORK_ASSERTION_0(window != 0, "设置的窗口ID为零！");
+	FRAMEWORK_ASSERTION_2(m_WindowID == 0 || m_WindowID == window, "不允许重复设置窗口ID!");
 
 	m_WindowID = window;
 }
 
 void Framework::OpenGLGlutCallBackInterface
-	::DestroyWindow()
+	::SetMillisecond(int millisecond) noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
-	FRAMEWORK_ASSERTION_2(m_WindowID != 0,"窗口ID为零！");
 
-	int window = m_WindowID;
-	m_WindowID = 0;
+	m_Millisecond = millisecond;
+} 
 
-	System::GlutDestroyWindow(window);
+int64_t Framework::OpenGLGlutCallBackInterface
+	::GetDelta() const noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+	return m_Delta;
 }
 
 bool Framework::OpenGLGlutCallBackInterface
-    ::RenderScene()
+	::PreCreate()
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
+
+	return true;
+}
+
+bool Framework::OpenGLGlutCallBackInterface
+	::Initialize()
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
+
+	return true;
+}
+
+void Framework::OpenGLGlutCallBackInterface
+	::PreIdle()
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
+}
+
+void Framework::OpenGLGlutCallBackInterface
+	::Terminate()
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
+}
+ 
+bool Framework::OpenGLGlutCallBackInterface
+	::RenderScene()
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	System::ClearAllGlBufferBit();
 
-    System::GlutSwapBuffers();
+	System::GlutSwapBuffers();
+
+	CoreTools::DoNothing();
 
 	return true;
 }
 
 bool Framework::OpenGLGlutCallBackInterface
-	::ChangeSize( int width, int height )
+	::ChangeSize(int width, int height)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	System::GlutPostWindowRedisplay(m_WindowID);
-	System::SetGlViewport(0, 0, static_cast<GLsizei>(width),
-		               static_cast<GLsizei>(height));
+	System::SetGlViewport(0, 0, boost::numeric_cast<System::OpenGLSize>(width), boost::numeric_cast<System::OpenGLSize>(height));
+
+	CoreTools::DoNothing();
 
 	return true;
 }
 
 bool Framework::OpenGLGlutCallBackInterface
-	::TimerFunction(TimerFunctionCallback callback)
+	::SpecialKeysDown(int key, int xCoordinate, int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
-	FRAMEWORK_ASSERTION_1(callback != nullptr,"函数指针不能为空！");
 
 	System::GlutPostWindowRedisplay(m_WindowID);
-	System::GlutTimerFunc(GetMillisecond(),callback, 1);
+
+	CoreTools::DoNothing();
+
+	SYSTEM_UNUSED_ARG(key);
+	SYSTEM_UNUSED_ARG(xCoordinate);
+	SYSTEM_UNUSED_ARG(yCoordinate);
 
 	return true;
 }
 
 bool Framework::OpenGLGlutCallBackInterface
-	::MotionFunction( int xCoordinate,int yCoordinate )
+	::KeyboardDown(int key, int xCoordinate, int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	System::GlutPostWindowRedisplay(m_WindowID);
+
+	CoreTools::DoNothing();
+
+	SYSTEM_UNUSED_ARG(key);
+	SYSTEM_UNUSED_ARG(xCoordinate);
+	SYSTEM_UNUSED_ARG(yCoordinate);
+
+	return true;
+}
+
+bool Framework::OpenGLGlutCallBackInterface
+	::SpecialKeysUp(int key, int xCoordinate, int yCoordinate)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	System::GlutPostWindowRedisplay(m_WindowID);
+
+	CoreTools::DoNothing();
+
+	SYSTEM_UNUSED_ARG(key);
+	SYSTEM_UNUSED_ARG(xCoordinate);
+	SYSTEM_UNUSED_ARG(yCoordinate);
+
+	return true;
+}
+
+bool Framework::OpenGLGlutCallBackInterface
+	::KeyboardUp(int key, int xCoordinate, int yCoordinate)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	System::GlutPostWindowRedisplay(m_WindowID);
+
+	CoreTools::DoNothing();
+
+	SYSTEM_UNUSED_ARG(key);
+	SYSTEM_UNUSED_ARG(xCoordinate);
+	SYSTEM_UNUSED_ARG(yCoordinate);
+
+	return true;
+}
+
+bool Framework::OpenGLGlutCallBackInterface
+	::PassiveMotion(int xCoordinate, int yCoordinate)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	System::GlutPostWindowRedisplay(m_WindowID);
+
+	CoreTools::DoNothing();
+
+	SYSTEM_UNUSED_ARG(xCoordinate);
+	SYSTEM_UNUSED_ARG(yCoordinate);
+
+	return true;
+}
+
+bool Framework::OpenGLGlutCallBackInterface
+	::MouseClick(int button, int state, int xCoordinate, int yCoordinate)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	System::GlutPostWindowRedisplay(m_WindowID);
+
+	CoreTools::DoNothing();
+
+	SYSTEM_UNUSED_ARG(button);
+	SYSTEM_UNUSED_ARG(state);
+	SYSTEM_UNUSED_ARG(xCoordinate);
+	SYSTEM_UNUSED_ARG(yCoordinate);
+
+	return true;
+}
+
+bool Framework::OpenGLGlutCallBackInterface
+	::MotionFunction(int xCoordinate, int yCoordinate)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	System::GlutPostWindowRedisplay(m_WindowID);
+
+	CoreTools::DoNothing();
 
 	SYSTEM_UNUSED_ARG(xCoordinate);
 	SYSTEM_UNUSED_ARG(yCoordinate);
@@ -124,181 +251,93 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
+	CoreTools::DoNothing();
+
 	return true;
 }
 
 bool Framework::OpenGLGlutCallBackInterface
-	::ProcessMenu( int menuValue )
+	::TimerFunction(TimerFunctionCallback callback)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_ASSERTION_1(callback != nullptr, "函数指针不能为空！");
+
+	System::GlutPostWindowRedisplay(m_WindowID);
+	System::GlutTimerFunc(GetMillisecond(), callback, 1);
+
+	CoreTools::DoNothing();
+
+	return true;
+}
+
+bool Framework::OpenGLGlutCallBackInterface
+	::ProcessMenu(int menuValue)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	SYSTEM_UNUSED_ARG(menuValue);
 
+	CoreTools::DoNothing();
+
 	return true;
 }
 
-unsigned Framework::OpenGLGlutCallBackInterface
-	::GetMillisecond() const
+void Framework::OpenGLGlutCallBackInterface
+	::DestroyWindow()
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+	FRAMEWORK_ASSERTION_0(m_WindowID != 0, "窗口ID为零！");
+
+	const auto window = m_WindowID;
+	m_WindowID = 0;
+
+	System::GlutDestroyWindow(window);
+}
+
+int Framework::OpenGLGlutCallBackInterface
+	::GetMillisecond() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
 	return m_Millisecond;
 }
 
-void Framework::OpenGLGlutCallBackInterface
-	::SetMillisecond(unsigned millisecond)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	m_Millisecond = millisecond;
-}
-
-bool Framework::OpenGLGlutCallBackInterface
-	::PreCreate()
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	return true;
-}
-
-bool Framework::OpenGLGlutCallBackInterface
-	::Initialize()
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	return true;
-}
-
-void Framework::OpenGLGlutCallBackInterface
-	::PreIdle()
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-}
-
-void Framework::OpenGLGlutCallBackInterface
-	::Terminate()
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-}
-
-bool Framework::OpenGLGlutCallBackInterface
-	::SpecialKeysDown( int key,int xCoordinate,int yCoordinate )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	System::GlutPostWindowRedisplay(m_WindowID);
-
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
-
-	return true;
-}
-
-bool Framework::OpenGLGlutCallBackInterface
-	::KeyboardDown( unsigned char key,int xCoordinate,int yCoordinate )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	System::GlutPostWindowRedisplay(m_WindowID);
-
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
-
-	return true;
-}
-
-bool Framework::OpenGLGlutCallBackInterface
-	::SpecialKeysUp( int key,int xCoordinate,int yCoordinate )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	System::GlutPostWindowRedisplay(m_WindowID);
-
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
-
-	return true;
-}
-
-bool Framework::OpenGLGlutCallBackInterface
-	::KeyboardUp( unsigned char key,int xCoordinate,int yCoordinate )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	System::GlutPostWindowRedisplay(m_WindowID);
-
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
-
-	return true;
-}
-
-unsigned char Framework::OpenGLGlutCallBackInterface
-	::GetTerminateKey() const
+int Framework::OpenGLGlutCallBackInterface
+	::GetTerminateKey() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return static_cast<unsigned char>
-		   (GlutApplicationTrait::KeyIdentifiers::sm_KeyTerminate);
+	return GlutApplicationTrait::KeyIdentifiers::sm_KeyTerminate;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::PassiveMotion( int xCoordinate,int yCoordinate )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	System::GlutPostWindowRedisplay(m_WindowID);
-
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
-
-	return true;
-}
-
-bool Framework::OpenGLGlutCallBackInterface
-	::MouseClick( int button,int state,
-	              int xCoordinate,int yCoordinate )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	System::GlutPostWindowRedisplay(m_WindowID);
-
-	SYSTEM_UNUSED_ARG(button);
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
-
-	return true;
-}
-
+// protected
 Framework::MouseButtonsTypes Framework::OpenGLGlutCallBackInterface
-	::GetMouseButtonsTypes( int button )
+	::GetMouseButtonsTypes(int button) noexcept
 {
-	if(button == GlutApplicationTrait::MouseButtons::sm_MouseLeftButton)
-		return MouseButtonsTypesLeftButton;
-	else if(button == GlutApplicationTrait::MouseButtons::sm_MouseMiddleButton)
-		return MouseButtonsTypesMiddleButton;
-	else if(button == GlutApplicationTrait::MouseButtons::sm_MouseRightButton)
-		return MouseButtonsTypesRightButton;
-	else
-		return MouseButtonsTypesNullButton;
+	switch (button)
+	{
+	case GlutApplicationTrait::MouseButtons::sm_MouseLeftButton:
+		return MouseButtonsTypes::LeftButton;
+	case GlutApplicationTrait::MouseButtons::sm_MouseMiddleButton:
+		return MouseButtonsTypes::MiddleButton;
+	case GlutApplicationTrait::MouseButtons::sm_MouseRightButton:
+		return MouseButtonsTypes::RightButton;
+	default:
+		return MouseButtonsTypes::NullButton;
+	}		
 }
 
+// protected
 Framework::MouseStateTypes Framework::OpenGLGlutCallBackInterface
-	::GetMouseStateTypes( int state )
+	::GetMouseStateTypes(int state) noexcept
 {
-	if(state == GlutApplicationTrait::MouseState::sm_MouseUp)
-		return MouseStateTypesMouseUp;
-	else if(state == GlutApplicationTrait::MouseState::sm_MouseDown)
-		return MouseStateTypesMouseDown;
-	else
-		return MouseStateTypesMouseNull;
+	switch (state)
+	{
+	case GlutApplicationTrait::MouseState::sm_MouseUp:
+		return MouseStateTypes::MouseUp;
+	case GlutApplicationTrait::MouseState::sm_MouseDown:
+		return MouseStateTypes::MouseDown; 
+	default:
+		return MouseStateTypes::MouseNull;
+	} 
 }
-
-
-
-

@@ -9,18 +9,14 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Objects2D/Ray2.h"
 #include "Mathematics/Objects2D/Segment2.h"
+#include "Mathematics/Distance/DistanceFwd.h"
 #include "Mathematics/Distance/DistanceBase.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-
-	template <typename Real>
-	class DistanceLine2Line2Tool;
-
 	template <typename Real>
 	class DistanceRay2Segment2 : public DistanceBase<Real, Vector2D<Real>>
 	{
@@ -32,8 +28,7 @@ namespace Mathematics
 		using Segment2 = Segment2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
 		using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
+		using DistanceResult = typename ParentType::DistanceResult; 
 		using Math = Math<Real>;
 
 	public:
@@ -49,13 +44,13 @@ namespace Mathematics
 		virtual const DistanceResult GetSquared() const override;
 
 		// 函数计算动态距离查询。	
-		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity,const Vector2D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
 	private:
 		const DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
 		const DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
 		const DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
-	 
+
 	private:
 		Ray2 m_Ray;
 		Segment2 m_Segment;

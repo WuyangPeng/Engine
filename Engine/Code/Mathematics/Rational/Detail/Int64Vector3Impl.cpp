@@ -1,16 +1,16 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 11:13)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 09:51)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "Int64Vector3Impl.h"
-#include "Mathematics/Rational/Int64VectorDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Rational/Int64VectorDetail.h"
 
 Mathematics::Int64Vector3Impl
 	::Int64Vector3Impl()
@@ -20,14 +20,14 @@ Mathematics::Int64Vector3Impl
 }
 
 Mathematics::Int64Vector3Impl
-	::Int64Vector3Impl( const Int64Vector<3>& rhs )
+	::Int64Vector3Impl(const Int64Vector<3>& rhs)
 	:m_Tuple{ rhs }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::Int64Vector3Impl
-	::Int64Vector3Impl( const int64_t& x, const int64_t& y , const int64_t& z )
+	::Int64Vector3Impl(const int64_t& x, const int64_t& y, const int64_t& z)
 	:m_Tuple{}
 {
 	m_Tuple[0] = x;
@@ -37,9 +37,8 @@ Mathematics::Int64Vector3Impl
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-Mathematics::Int64Vector3Impl& 
-	Mathematics::Int64Vector3Impl
-	::operator=( const Int64Vector<3>& rhs )
+Mathematics::Int64Vector3Impl& Mathematics::Int64Vector3Impl
+	::operator=(const Int64Vector<3>& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -75,7 +74,7 @@ int64_t Mathematics::Int64Vector3Impl
 }
 
 void Mathematics::Int64Vector3Impl
-	::SetX( const int64_t& x )
+	::SetX(const int64_t& x)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -83,7 +82,7 @@ void Mathematics::Int64Vector3Impl
 }
 
 void Mathematics::Int64Vector3Impl
-	::SetY( const int64_t& y )
+	::SetY(const int64_t& y)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -91,7 +90,7 @@ void Mathematics::Int64Vector3Impl
 }
 
 void Mathematics::Int64Vector3Impl
-	::SetZ( const int64_t& z )
+	::SetZ(const int64_t& z)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -107,7 +106,7 @@ const Mathematics::Int64Vector3Impl Mathematics::Int64Vector3Impl
 }
 
 Mathematics::Int64Vector3Impl& 	Mathematics::Int64Vector3Impl
-	::operator+=( const Int64Vector3Impl& rhs )
+	::operator+=(const Int64Vector3Impl& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -117,7 +116,7 @@ Mathematics::Int64Vector3Impl& 	Mathematics::Int64Vector3Impl
 }
 
 Mathematics::Int64Vector3Impl& Mathematics::Int64Vector3Impl
-	::operator-=( const Int64Vector3Impl& rhs )
+	::operator-=(const Int64Vector3Impl& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -127,7 +126,7 @@ Mathematics::Int64Vector3Impl& Mathematics::Int64Vector3Impl
 }
 
 Mathematics::Int64Vector3Impl&	Mathematics::Int64Vector3Impl
-	::operator*=( const int64_t& scalar )
+	::operator*=(const int64_t& scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -137,7 +136,7 @@ Mathematics::Int64Vector3Impl&	Mathematics::Int64Vector3Impl
 }
 
 Mathematics::Int64Vector3Impl&	Mathematics::Int64Vector3Impl
-	::operator/=( const int64_t& scalar )
+	::operator/=(const int64_t& scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -155,13 +154,13 @@ int64_t Mathematics::Int64Vector3Impl
 }
 
 int64_t Mathematics
-	::Dot( const Int64Vector3Impl& lhs,const Int64Vector3Impl& rhs )
+	::Dot(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs)
 {
 	return lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY() + lhs.GetZ() * rhs.GetZ();
 }
 
 Mathematics::Int64Vector3Impl Mathematics
-	::Cross( const Int64Vector3Impl& lhs,const Int64Vector3Impl& rhs )
+	::Cross(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs)
 {
 	return Int64Vector3Impl{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(),
 							 lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(),
@@ -169,30 +168,29 @@ Mathematics::Int64Vector3Impl Mathematics
 }
 
 int64_t Mathematics
-	::TripleScalar( const Int64Vector3Impl& lhs,const Int64Vector3Impl& mhs,const Int64Vector3Impl& rhs )
+	::TripleScalar(const Int64Vector3Impl& lhs, const Int64Vector3Impl& mhs, const Int64Vector3Impl& rhs)
 {
-	return Dot(lhs,Cross(mhs,rhs));
+	return Dot(lhs, Cross(mhs, rhs));
 }
 
-
 bool Mathematics
-	::operator==( const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs )
+	::operator==(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs)
 {
 	return lhs.GetX() == rhs.GetX() && lhs.GetY() == rhs.GetY() && lhs.GetZ() == rhs.GetZ();
 }
 
 bool Mathematics
-	::operator<( const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs )
+	::operator<(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs)
 {
-	if(lhs.GetX() < rhs.GetX())
+	if (lhs.GetX() < rhs.GetX())
 		return true;
-	else if(rhs.GetX() < lhs.GetX())
+	else if (rhs.GetX() < lhs.GetX())
 		return false;
-	else if(lhs.GetY() < rhs.GetY())
+	else if (lhs.GetY() < rhs.GetY())
 		return true;
-	else if(rhs.GetY() < lhs.GetY())
+	else if (rhs.GetY() < lhs.GetY())
 		return false;
-	else if(lhs.GetZ() < rhs.GetZ())
+	else if (lhs.GetZ() < rhs.GetZ())
 		return true;
 	else
 		return false;

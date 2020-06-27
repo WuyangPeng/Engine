@@ -130,7 +130,7 @@ const float* Rendering::CullerImpl
 } 
 
 void Rendering::CullerImpl
-    ::Insert(const ConstSpatialSmartPointer& visible)
+    ::Insert(const VisualSmartPointer& visible)
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -435,11 +435,27 @@ int  Rendering::CullerImpl
     return m_VisibleSet.GetNumVisible ();
 }
 
-const Rendering::ConstSpatialSmartPointer&  Rendering::CullerImpl
+const Rendering::ConstVisualSmartPointer  Rendering::CullerImpl
     ::GetVisible (int index) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return m_VisibleSet.GetVisible (index);
 
+}
+
+Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl
+	::begin()
+{
+	RENDERING_CLASS_IS_VALID_1;
+
+	return m_VisibleSet.begin();
+}
+
+Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl
+	::end()
+{
+	RENDERING_CLASS_IS_VALID_1;
+
+	return m_VisibleSet.end();
 }

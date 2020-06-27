@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 10:16)
+// 引擎版本：0.0.2.5 (2020/03/19 17:47)
 
 #ifndef MATHEMATICS_OBJECTS3D_TORUS3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_TORUS3_DETAIL_H
@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::Torus3<Real>
-	::Torus3( Real outerRadius, Real innerRadius )
+	::Torus3(Real outerRadius, Real innerRadius)
 	:m_OuterRadius{ outerRadius }, m_InnerRadius{ innerRadius }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -29,8 +29,8 @@ template <typename Real>
 bool Mathematics::Torus3<Real>
 	::IsValid() const noexcept
 {
-	if(Real{} < m_InnerRadius && m_InnerRadius < m_OuterRadius)
-	    return true;
+	if (Math::sm_Zero < m_InnerRadius && m_InnerRadius < m_OuterRadius)
+		return true;
 	else
 		return false;
 }
@@ -54,13 +54,12 @@ Real Mathematics::Torus3<Real>
 	return m_InnerRadius;
 }
 
-
 template <typename Real>
 typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
-	::GetPosition( Real s, Real t ) const
+	::GetPosition(Real s, Real t) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(Real{} <= s && s <= static_cast<Real>(1) && Real {} <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
+	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= s && s <= static_cast<Real>(1) && Math::sm_Zero <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
 
 	auto twoPiS = Math::sm_TwoPI * s;
 	auto twoPiT = Math::sm_TwoPI * t;
@@ -71,15 +70,14 @@ typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
 	auto maxRadius = m_OuterRadius + m_InnerRadius * cosTwoPiT;
 
 	return Vector3D{ maxRadius * cosTwoPiS,maxRadius * sinTwoPiS,m_InnerRadius * sinTwoPiT };
-
 }
 
 template <typename Real>
 typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
-	::GetNormal( Real s, Real t ) const
+	::GetNormal(Real s, Real t) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(Real{} <= s && s <= static_cast<Real>(1) && Real {} <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
+	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= s && s <= static_cast<Real>(1) && Math::sm_Zero <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
 
 	auto twoPiS = Math::sm_TwoPI * s;
 	auto cosTwoPiS = Math::Cos(twoPiS);
@@ -94,21 +92,20 @@ typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
 	return normal;
 }
 
-
 template <typename Real>
 typename const Mathematics::Torus3<Real>::Torus3Parameters Mathematics::Torus3<Real>
-	::GetParameters( const Vector3D& position ) const
+	::GetParameters(const Vector3D& position) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	auto radius = Math::Sqrt(position.GetXCoordinate() * position.GetXCoordinate() + position.GetYCoordinate() * position.GetYCoordinate());
 
-	Real s { };
+	auto s = Math::sm_Zero;
 
 	if (Math::sm_ZeroTolerance < radius)
 	{
-		auto angle = Math::ATan2(position.GetYCoordinate(),  position.GetXCoordinate());
-		if (Real{} <= angle)
+		auto angle = Math::ATan2(position.GetYCoordinate(), position.GetXCoordinate());
+		if (Math::sm_Zero <= angle)
 		{
 			s = angle * Math::sm_InverseTwoPI;
 		}
@@ -120,26 +117,26 @@ typename const Mathematics::Torus3<Real>::Torus3Parameters Mathematics::Torus3<R
 
 	auto diff = radius - m_OuterRadius;
 
-	Real t { };
+	auto t = Math::sm_Zero;
 
 	if (Math::FAbs(diff) < Math::sm_ZeroTolerance &&  Math::FAbs(position.GetZCoordinate()) < Math::sm_ZeroTolerance)
 	{
-		t = Real{ };
+		t = Math::sm_Zero;
 	}
 	else
 	{
 		auto angle = Math::ATan2(position.GetZCoordinate(), diff);
-		if (Real{} <= angle)
+		if (Math::sm_Zero <= angle)
 		{
-			t = angle * Math::sm_InverseTwoPI;			
+			t = angle * Math::sm_InverseTwoPI;
 		}
 		else
 		{
-			t = static_cast<Real>(1) + angle * Math::sm_InverseTwoPI;			
+			t = static_cast<Real>(1) + angle * Math::sm_InverseTwoPI;
 		}
 	}
 
-	return Torus3Parameters(s,t);
+	return Torus3Parameters(s, t);
 }
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_TORUS3_DETAIL)

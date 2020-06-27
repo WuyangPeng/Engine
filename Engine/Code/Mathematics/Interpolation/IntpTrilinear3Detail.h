@@ -17,7 +17,7 @@ namespace Mathematics
 		// At least a 2x2x2 block of data points are needed to construct the
 		// trilinear interpolation.
 		MATHEMATICS_ASSERTION_0(xBound >= 2 && yBound >= 2 && zBound >= 2 && F,"Invalid input\n");
-		MATHEMATICS_ASSERTION_0(xSpacing > Real{} && ySpacing > Real{} && zSpacing > Real{},"Invalid input\n");
+		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero && ySpacing > Math<Real>::sm_Zero && zSpacing > Math<Real>::sm_Zero,"Invalid input\n");
 
 		mXBound = xBound;
 		mYBound = yBound;
@@ -26,17 +26,17 @@ namespace Mathematics
 
 		mXMin = xMin;
 		mXSpacing = xSpacing;
-		mInvXSpacing = ((Real)1) / xSpacing;
+		mInvXSpacing = (static_cast<Real>(1)) / xSpacing;
 		mXMax = xMin + xSpacing * (xBound - 1);
 
 		mYMin = yMin;
 		mYSpacing = ySpacing;
-		mInvYSpacing = ((Real)1) / ySpacing;
+		mInvYSpacing = (static_cast<Real>(1)) / ySpacing;
 		mYMax = yMin + ySpacing * (yBound - 1);
 
 		mZMin = zMin;
 		mZSpacing = zSpacing;
-		mInvZSpacing = ((Real)1) / zSpacing;
+		mInvZSpacing = (static_cast<Real>(1)) / zSpacing;
 		mZMax = yMin + zSpacing * (zBound - 1);
 
 		mF = F;
@@ -174,15 +174,15 @@ namespace Mathematics
 		}
 
 		Real U[2];
-		U[0] = (Real)1;
+		U[0] = static_cast<Real>(1);
 		U[1] = xIndex - ix;
 
 		Real V[2];
-		V[0] = (Real)1;
+		V[0] = static_cast<Real>(1);
 		V[1] = yIndex - iy;
 
 		Real W[2];
-		W[0] = (Real)1;
+		W[0] = static_cast<Real>(1);
 		W[1] = zIndex - iz;
 
 		// Compute P = M*U, Q = M*V, Real = M*W.
@@ -190,9 +190,9 @@ namespace Mathematics
 		int row, col;
 		for (row = 0; row < 2; ++row)
 		{
-			P[row] = Real{};
-			Q[row] = Real{};
-			r[row] = Real{};
+			P[row] = Math<Real>::sm_Zero;
+			Q[row] = Math<Real>::sm_Zero;
+			r[row] = Math<Real>::sm_Zero;
 			for (col = 0; col < 2; ++col)
 			{
 				P[row] += msBlend[row][col] * U[col];
@@ -203,7 +203,7 @@ namespace Mathematics
 
 		// compute the tensor product (M*U)(M*V)(M*W)*D where D is the 2x2x2
 		// subimage containing (x,y,z)
-		Real result = Real{};
+		Real result = Math<Real>::sm_Zero;
 		for (int slice = 0; slice < 2; ++slice)
 		{
 			int zClamp = iz + slice;
@@ -288,18 +288,18 @@ namespace Mathematics
 		{
 		case 0:
 			dx = xIndex - ix;
-			U[0] = (Real)1;
+			U[0] = static_cast<Real>(1);
 			U[1] = dx;
-			xMult = (Real)1;
+			xMult = static_cast<Real>(1);
 			break;
 		case 1:
 			dx = xIndex - ix;
-			U[0] = Real{};
-			U[1] = (Real)1;
+			U[0] = Math<Real>::sm_Zero;
+			U[1] = static_cast<Real>(1);
 			xMult = mInvXSpacing;
 			break;
 		default:
-			return Real{};
+			return Math<Real>::sm_Zero;
 		}
 
 		Real V[2], dy, yMult;
@@ -307,18 +307,18 @@ namespace Mathematics
 		{
 		case 0:
 			dy = yIndex - iy;
-			V[0] = (Real)1;
+			V[0] = static_cast<Real>(1);
 			V[1] = dy;
-			yMult = (Real)1;
+			yMult = static_cast<Real>(1);
 			break;
 		case 1:
 			dy = yIndex - iy;
-			V[0] = Real{};
-			V[1] = (Real)1;
+			V[0] = Math<Real>::sm_Zero;
+			V[1] = static_cast<Real>(1);
 			yMult = mInvYSpacing;
 			break;
 		default:
-			return Real{};
+			return Math<Real>::sm_Zero;
 		}
 
 		Real W[2], dz, zMult;
@@ -326,18 +326,18 @@ namespace Mathematics
 		{
 		case 0:
 			dz = zIndex - iz;
-			W[0] = (Real)1;
+			W[0] = static_cast<Real>(1);
 			W[1] = dz;
-			zMult = (Real)1;
+			zMult = static_cast<Real>(1);
 			break;
 		case 1:
 			dz = zIndex - iz;
-			W[0] = Real{};
-			W[1] = (Real)1;
+			W[0] = Math<Real>::sm_Zero;
+			W[1] = static_cast<Real>(1);
 			zMult = mInvZSpacing;
 			break;
 		default:
-			return Real{};
+			return Math<Real>::sm_Zero;
 		}
 
 		// Compute P = M*U, Q = M*V, and Real = M*W.
@@ -345,9 +345,9 @@ namespace Mathematics
 		int row, col;
 		for (row = 0; row < 2; ++row)
 		{
-			P[row] = Real{};
-			Q[row] = Real{};
-			r[row] = Real{};
+			P[row] = Math<Real>::sm_Zero;
+			Q[row] = Math<Real>::sm_Zero;
+			r[row] = Math<Real>::sm_Zero;
 			for (col = 0; col < 2; ++col)
 			{
 				P[row] += msBlend[row][col] * U[col];
@@ -358,7 +358,7 @@ namespace Mathematics
 
 		// Compute the tensor product (M*U)(M*V)(M*W)*D where D is the 2x2x2
 		// subimage containing (x,y,z).
-		Real result = Real{};
+		Real result = Math<Real>::sm_Zero;
 		for (int slice = 0; slice < 2; ++slice)
 		{
 			int zClamp = iz + slice;

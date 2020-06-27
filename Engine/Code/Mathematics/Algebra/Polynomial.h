@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 11:34)
+// 引擎版本：0.0.2.5 (2020/03/19 10:13)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_H
@@ -10,21 +10,21 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
-#include "CoreTools/DataTypes/TupleDetail.h"
 #include "PolynomialDivideDetail.h"
+#include "CoreTools/DataTypes/TupleDetail.h"
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
 #include <vector>
 
 namespace Mathematics
 {
 	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Polynomial : private boost::additive<Polynomial<Real>,		
-		                                                            boost::additive<Polynomial<Real>,Real,							   
-		                                                            boost::multiplicative<Polynomial<Real>,Real> > > 
+	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Polynomial : private boost::additive<Polynomial<Real>,
+																	boost::additive<Polynomial<Real>, Real,
+																	boost::multiplicative<Polynomial<Real>, Real> > >
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Polynomial<Real>;
@@ -33,11 +33,11 @@ namespace Mathematics
 		using AlgebraTraits = AlgebraTraits<Real>;
 
 	public:
-		explicit Polynomial (int degree = 0);
-		Polynomial (const Polynomial& rhs);
-		explicit Polynomial (const std::vector<Real>& tuple);
-		Polynomial (int size,const Real* data);
-		~Polynomial ();
+		explicit Polynomial(int degree = 0);
+		Polynomial(const Polynomial& rhs);
+		explicit Polynomial(const std::vector<Real>& tuple);
+		Polynomial(int size, const Real* data);
+		~Polynomial();
 
 		Polynomial& operator= (const Polynomial& rhs);
 
@@ -46,19 +46,19 @@ namespace Mathematics
 		// 成员访问
 
 		// 重新设置会清空旧数据。
-		void ResetDegree (int degree);
+		void ResetDegree(int degree);
 
-		int GetDegree () const;
+		int GetDegree() const;
 		const Real* GetElements() const;
 		Real* GetElements();
 		const Real& operator[] (int index) const;
-		Real& operator[] (int index);	
+		Real& operator[] (int index);
 		Real GetEnd() const;
-		
+
 		// 计算多项式，p(t)。
 		Real operator() (Real value) const;
 
-		const Polynomial operator- () const;		
+		const Polynomial operator- () const;
 
 		Polynomial& operator += (const Polynomial& rhs);
 		Polynomial& operator -= (const Polynomial& rhs);
@@ -69,14 +69,14 @@ namespace Mathematics
 		Polynomial& operator /= (Real scalar);
 
 		// 计算多项式的导数。
-		const Polynomial GetDerivative () const;
+		const Polynomial GetDerivative() const;
 
 		// 反转( invpoly[i] = poly[degree-i] for 0 <= i <= degree ).
-		const Polynomial GetInversion () const;
-		
+		const Polynomial GetInversion() const;
+
 		// 通过消除所有的（接近）零的系数和使主导系数减少1阶。
 		// 输入参数是阈值，用于指定一个系数实际上为零。
-		void Compress (Real epsilon);
+		void Compress(Real epsilon);
 
 		// 如果'this'为P（t）和除数（divisor）为D(t)使degree(P) >= degree(D)，
 		// 则P(t) = Q(t) * D(t) + Real(t) 其中Q(t)是quotient
@@ -85,7 +85,7 @@ namespace Mathematics
 		// 值epsilon被用作剩余多项式系统的阈值。
 		// 如果比epsilon小，则系数被假设为零。
 		// 返回值第一个部分为quotient，第二部分为remainder。
-		const PolynomialDivide Divide (const Polynomial& divisor,Real epsilon) const;
+		const PolynomialDivide Divide(const Polynomial& divisor, Real epsilon) const;
 
 	private:
 		void Swap(Polynomial& rhs);
@@ -96,13 +96,13 @@ namespace Mathematics
 	};
 
 	template <typename Real>
-	const Polynomial<Real> operator * (const Polynomial<Real>& lhs,const Polynomial<Real>& rhs);
+	const Polynomial<Real> operator * (const Polynomial<Real>& lhs, const Polynomial<Real>& rhs);
 
 	template <typename T>
-	bool Approximate(const Polynomial<T>& lhs,const Polynomial<T>& rhs,const T epsilon);
+	bool Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon);
 
 	template <typename T>
-	bool Approximate(const Polynomial<T>& lhs,const Polynomial<T>& rhs);
+	bool Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs);
 
 	using Polynomialf = Polynomial<float>;
 	using Polynomiald = Polynomial<double>;

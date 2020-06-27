@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/31 13:49)
-
+// 引擎版本：0.0.2.4 (2020/03/11 15:33)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
@@ -40,7 +39,7 @@ namespace Network
 
 		virtual BoostHandleType GetBoostHandle() override;
 
-		virtual bool EnableNonBlock() override;	
+		virtual bool EnableNonBlock() override;
 
 		virtual const std::string GetAddress() const override;
 		virtual int GetPort() const override;

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 10:25)
+// 引擎版本：0.0.2.5 (2020/03/16 12:50)
 
 #include "Database/DatabaseExport.h"
 
@@ -15,7 +15,7 @@ using std::wstring;
 using std::string;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
- 
+
 Database::MysqlConnectorResultRow
 	::MysqlConnectorResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow)
 	: ParentType{ configurationStrategy }, m_MysqlxRow{ mysqlxRow }

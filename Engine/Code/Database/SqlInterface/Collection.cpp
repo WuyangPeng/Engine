@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 10:07)
+// 引擎版本：0.0.2.5 (2020/03/16 12:32)
 
 #include "Database/DatabaseExport.h"
 
@@ -16,11 +16,11 @@
 using std::string;
 
 Database::Collection
-	::Collection(const Schema& schema,const string& collectionName)
+	::Collection(const Schema& schema, const string& collectionName)
 	: m_Impl{ CollectionFactory::Create(schema,collectionName) }
 {
 	DATABASE_SELF_CLASS_IS_VALID_1;
-} 
+}
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, Collection)
 

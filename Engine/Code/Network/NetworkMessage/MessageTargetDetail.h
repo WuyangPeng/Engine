@@ -15,7 +15,8 @@
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/EnumCast.h"
 
 template <typename T>
 void Network::MessageTarget

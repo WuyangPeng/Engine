@@ -11,6 +11,7 @@
 
 #include <map>
 #include <memory>
+#include "../../Resources/VertexFormat.h"
 
 namespace Rendering
 {
@@ -22,30 +23,30 @@ namespace Rendering
 	{
 	public:
 		using  ClassType = VertexFormatManagementImpl;
-		using VertexFormatConstPtr = const VertexFormat*;
+	 
 		using PlatformVertexFormatSharedPtr = std::shared_ptr<PlatformVertexFormat>;
-	    using RendererPtr = Renderer*;
+	    using RendererPtr = std::shared_ptr<Renderer>;
 
 	public:
 		explicit VertexFormatManagementImpl(RendererPtr ptr);
 
 		CLASS_INVARIANT_DECLARE;
-	
+		 
        // 顶点格式管理。顶点格式对象必须是已经分配，
        // 它的属性和跨距由应用程序代码进行设置。
-       void Bind (VertexFormatConstPtr vertexFormat); 
-       void Unbind (VertexFormatConstPtr vertexFormat);
+       void Bind (ConstVertexFormatSmartPointer vertexFormat); 
+       void Unbind (ConstVertexFormatSmartPointer vertexFormat);
  
-       void Enable (VertexFormatConstPtr vertexFormat);
-       void Disable (VertexFormatConstPtr vertexFormat);
+       void Enable (ConstVertexFormatSmartPointer vertexFormat);
+       void Disable (ConstVertexFormatSmartPointer vertexFormat);
 
-       PlatformVertexFormatSharedPtr GetResource (VertexFormatConstPtr vertexFormat);
-
-	private:
-       using VertexFormatMap = std::map<VertexFormatConstPtr, PlatformVertexFormatSharedPtr>;
+       PlatformVertexFormatSharedPtr GetResource (ConstVertexFormatSmartPointer vertexFormat);
 
 	private:
-	   RendererPtr m_Renderer;
+       using VertexFormatMap = std::map<ConstVertexFormatSmartPointer, PlatformVertexFormatSharedPtr>;
+
+	private:
+		std::weak_ptr<Renderer> m_Renderer;
 	   VertexFormatMap m_VertexFormats;	 
 	};
 }

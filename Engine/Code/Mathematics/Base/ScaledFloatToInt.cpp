@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 19:43)
+// 引擎版本：0.0.2.5 (2020/03/19 09:43)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -15,8 +15,8 @@
 using std::pow;
 
 Mathematics::ScaledFloatToInt
-	::ScaledFloatToInt( float value, int power )
-	:m_FloatValue{ value }, m_IntegerValue{ *reinterpret_cast<int*>(&m_FloatValue) },
+	::ScaledFloatToInt(float value, int power)
+	:m_FloatValue{ value }, m_IntegerValue{ *reinterpret_cast<int32_t*>(&m_FloatValue) },
 	 m_Power{ power }, m_Shift{ 150 - m_Power - ((m_IntegerValue >> 23) & 0xFF) }, m_Result{ 0 }
 {
 	Scaled();
@@ -40,10 +40,10 @@ void Mathematics::ScaledFloatToInt
 	::ShiftIntegerValue()
 {
 	// 当将浮点数1.0f传入时，m_Shift可能会等于-1。
-	if(0 <= m_Shift)
+	if (0 <= m_Shift)
 		m_Result = ((m_IntegerValue & 0x007FFFFF) | 0x00800000) >> m_Shift;
 	else
-		m_Result = ((m_IntegerValue & 0x007FFFFF) | 0x00800000) << -m_Shift;	
+		m_Result = ((m_IntegerValue & 0x007FFFFF) | 0x00800000) << -m_Shift;
 }
 
 void Mathematics::ScaledFloatToInt
@@ -52,7 +52,7 @@ void Mathematics::ScaledFloatToInt
 	if (m_Result == (1 << m_Power))
 	{
 		--m_Result;
-	}		
+	}
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -62,7 +62,7 @@ void Mathematics::ScaledFloatToInt
 bool Mathematics::ScaledFloatToInt
 	::IsValid() const noexcept
 {
-	if(0 <= m_FloatValue && m_FloatValue <= 1 && 0 <= m_Power && m_Power <= 24 && 0 <= m_Result && m_Result <= pow(2.0,m_Power) - 1)
+	if (0 <= m_FloatValue && m_FloatValue <= 1 && 0 <= m_Power && m_Power <= 24 && 0 <= m_Result && m_Result <= pow(2.0, m_Power) - 1)
 		return true;
 	else
 		return false;

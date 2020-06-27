@@ -50,6 +50,15 @@ namespace Rendering
 
 		const RendererBasis GetRendererBasis() const;
 
+		System::String GetWindowMenuName() const; 
+		System::String GetWindowClassName() const;
+
+		int GetIcon() const;
+		bool IsIconDefault() const;
+		int GetCursor() const;
+		bool IsCursorDefault() const;
+		System::WindowBrushTypes GetBackground() const;
+
 	private:		
 		void DoLoadConfiguration(const std::string& fileName);
 

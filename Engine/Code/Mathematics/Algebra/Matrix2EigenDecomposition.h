@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 11:01)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 10:12)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_EIGEN_DECOMPOSITION_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_EIGEN_DECOMPOSITION_H
@@ -14,19 +14,19 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class Matrix2EigenDecomposition  
+	class Matrix2EigenDecomposition
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Matrix2EigenDecomposition<Real>;
 		using Matrix2 = Matrix2<Real>;
-		using Math = Math<Real>;	
+		using Math = Math<Real>;
 		using AlgebraTraits = AlgebraTraits<Real>;
 
 	public:
-		Matrix2EigenDecomposition (const Matrix2& rotation,const Matrix2& diagonal,const Real epsilon);
-	
+		Matrix2EigenDecomposition(const Matrix2& rotation, const Matrix2& diagonal, const Real epsilon);
+
 		CLASS_INVARIANT_DECLARE;
 
 		const Matrix2 GetRotation() const;

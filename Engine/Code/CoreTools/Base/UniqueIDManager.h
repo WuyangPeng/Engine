@@ -32,13 +32,13 @@ namespace CoreTools
 		using ParentType = Singleton<UniqueIDManager>;
 
 	public:	
+		static void Create();
 		static void Create(int count);
 		static void Destroy(); 
 
 	private: 
 		static void DoCreate(int count);
-		explicit UniqueIDManager(int count);
-		~UniqueIDManager();
+		explicit UniqueIDManager(int count); 
 		
 	public:	 
 		CLASS_INVARIANT_DECLARE;

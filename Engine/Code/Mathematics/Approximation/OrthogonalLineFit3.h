@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:13)
+// 引擎版本：0.0.2.5 (2020/03/23 12:30)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_H
@@ -23,6 +23,7 @@ namespace Mathematics
 		using ClassType = OrthogonalLineFit3<Real>;
 		using Vector3D = Vector3D<Real>;
 		using Line3 = Line3<Real>;
+		using Math = Math<Real>;
 
 	public:
 		explicit OrthogonalLineFit3(const std::vector<Vector3D>& points);

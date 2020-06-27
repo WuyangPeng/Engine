@@ -35,19 +35,19 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorSphere3Cone3<Real>
 	::Test()
 {
-	auto invSin = ((Real)1)/mCone.GetSinAngle();
+	auto invSin = (static_cast<Real>(1))/mCone.GetSinAngle();
 	auto cosSqr = mCone.GetCosAngle()*mCone.GetCosAngle();
 
 	auto CmV = mSphere.GetCenter() - mCone.GetVertex();
 	auto D = CmV + (mSphere.GetRadius()*invSin)*mCone.GetAxis();
 	auto DSqrLen = Vector3DTools::VectorMagnitudeSquared(D);
 	auto e = Vector3DTools::DotProduct(D, mCone.GetAxis());
-    if (e > Real{} && e*e >= DSqrLen*cosSqr)
+    if (e > Math<Real>::sm_Zero && e*e >= DSqrLen*cosSqr)
     {
 		auto sinSqr = mCone.GetSinAngle()*mCone.GetSinAngle();
 		DSqrLen = Vector3DTools::VectorMagnitudeSquared(CmV);
 		e = -Vector3DTools::DotProduct(CmV,mCone.GetAxis());
-        if (e > Real{} && e*e >= DSqrLen*sinSqr)
+        if (e > Math<Real>::sm_Zero && e*e >= DSqrLen*sinSqr)
         {
 			auto rSqr = mSphere.GetRadius()*mSphere.GetRadius();
 			if (DSqrLen <= rSqr)

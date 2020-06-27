@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 18:51)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 19:22)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_SEGMENT2_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_SEGMENT2_DETAIL_H
@@ -33,10 +33,10 @@ template <typename Real>
 bool Mathematics::DistancePoint2Segment2<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -86,7 +86,7 @@ const typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathema
 
 	difference = rhsClosestPoint - m_Point;
 
-	return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(difference), Real{},m_Point,rhsClosestPoint };
+	return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(difference), Math<Real>::sm_Zero,m_Point,rhsClosestPoint };
 }
 
 template <typename Real>
@@ -94,7 +94,7 @@ const typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathema
 	::GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
- 
+
 	auto movePoint = m_Point.GetMove(t, lhsVelocity);
 	auto movedSegment = m_Segment.GetMove(t, rhsVelocity);
 

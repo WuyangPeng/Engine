@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp> 
+#include "System/Helper/PragmaWarning/NumericCast.h" 
 
 using std::string;
 using std::make_pair;
@@ -46,7 +46,7 @@ void CoreTools::AnalysisCommandArgumentContainer
 }
 
 CoreTools::AnalysisCommandArgumentContainer
-	::AnalysisCommandArgumentContainer(char* commandLine)
+	::AnalysisCommandArgumentContainer(const char* commandLine)
 	:m_Argument{}, m_CommandArgumentContainer{}
 {
 	Init(commandLine);
@@ -57,7 +57,7 @@ CoreTools::AnalysisCommandArgumentContainer
 
 // private
 void CoreTools::AnalysisCommandArgumentContainer
-	::Init(char* commandLine)
+	::Init(const char* commandLine)
 {
 	string trimCommandLine{ commandLine };
 	boost::algorithm::trim(trimCommandLine);

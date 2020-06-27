@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/13 13:03)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 16:31)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H
@@ -12,120 +12,120 @@
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorSegment3Box3<Real>
-	::DynamicFindIntersectorSegment3Box3 (const Segment3& segment, const Box3& box,bool solid,Real tmax, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity,const Real epsilon)
+	::DynamicFindIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
 	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mSegment{ segment }, mBox{ box }
 {
-    mQuantity = 0;
-    mSolid = solid;
+	mQuantity = 0;
+	mSolid = solid;
 	Find();
 }
 
 template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::DynamicFindIntersectorSegment3Box3<Real>
-	::GetSegment () const
+	::GetSegment() const
 {
-    return mSegment;
+	return mSegment;
 }
 
 template <typename Real>
 const Mathematics::Box3<Real> Mathematics::DynamicFindIntersectorSegment3Box3<Real>
-	::GetBox () const
+	::GetBox() const
 {
-    return mBox;
+	return mBox;
 }
 
 template <typename Real>
 void Mathematics::DynamicFindIntersectorSegment3Box3<Real>
-	::Find ()
+	::Find()
 {
-    mQuantity = 0;
+	mQuantity = 0;
 	this->SetIntersectionType(IntersectionType::Empty);
 
-    // Get the endpoints of the segment.
-    Vector3D segment[2] { mSegment.GetBeginPoint(), mSegment.GetEndPoint() };
+	// Get the endpoints of the segment.
+	Vector3D segment[2]{ mSegment.GetBeginPoint(), mSegment.GetEndPoint() };
 
-    // Get the box velocity relative to the segment.
-	auto relVelocity = this-> GetRhsVelocity() - this->GetLhsVelocity();
+	// Get the box velocity relative to the segment.
+	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    SetContactTime(Real{});
-    Real tlast = Math::sm_MaxReal;
+	SetContactTime(Math<Real>::sm_Zero);
+	auto tlast = Math::sm_MaxReal;
 
-    int i;
-    Vector3D axis;
+	auto i = 0;
+	Vector3D axis;
 	auto side = IntersectorConfiguration<Real>::NONE;
-    IntersectorConfiguration<Real> segContact, boxContact;
-	auto mContactTime= this->GetContactTime();
-    // Test box normals.
-    for (i = 0; i < 3; ++i)
-    {
-        axis = mBox.GetAxis(i);
-        if (!IntersectorAxis<Real>::Find(axis, segment, mBox, relVelocity, this->GetTMax(),mContactTime, tlast, side, segContact, boxContact))
-        {
+	IntersectorConfiguration<Real> segContact, boxContact;
+	auto mContactTime = this->GetContactTime();
+	// Test box normals.
+	for (i = 0; i < 3; ++i)
+	{
+		axis = mBox.GetAxis(i);
+		if (!IntersectorAxis<Real>::Find(axis, segment, mBox, relVelocity, this->GetTMax(), mContactTime, tlast, side, segContact, boxContact))
+		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);
-            return;
-        }
-    }
+			return;
+		}
+	}
 
-    // Test seg-direction cross box-edges.
-    for (i = 0; i < 3; i++)
-    {
-        axis = Vector3DTools::CrossProduct(mBox.GetAxis(i),mSegment.GetDirection());
-        if (!IntersectorAxis<Real>::Find(axis, segment, mBox, relVelocity, this->GetTMax(),mContactTime, tlast, side, segContact, boxContact))
-        {
+	// Test seg-direction cross box-edges.
+	for (i = 0; i < 3; i++)
+	{
+		axis = Vector3DTools::CrossProduct(mBox.GetAxis(i), mSegment.GetDirection());
+		if (!IntersectorAxis<Real>::Find(axis, segment, mBox, relVelocity, this->GetTMax(), mContactTime, tlast, side, segContact, boxContact))
+		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);
-            return;
-        }
-    }
+			return;
+		}
+	}
 
-    // Test velocity cross box-faces.
-    for (i = 0; i < 3; i++)
-    {
-        axis = Vector3DTools::CrossProduct(relVelocity,mBox.GetAxis(i));
-        if (!IntersectorAxis<Real>::Find(axis, segment, mBox, relVelocity, this->GetTMax(),mContactTime, tlast, side, segContact, boxContact))
-        {
+	// Test velocity cross box-faces.
+	for (i = 0; i < 3; i++)
+	{
+		axis = Vector3DTools::CrossProduct(relVelocity, mBox.GetAxis(i));
+		if (!IntersectorAxis<Real>::Find(axis, segment, mBox, relVelocity, this->GetTMax(), mContactTime, tlast, side, segContact, boxContact))
+		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);
-            return;
-        }
-    }
+			return;
+		}
+	}
 
-    if (mContactTime < Real{} || side == IntersectorConfiguration<Real>::NONE)
-    {
-        // intersecting now
+	if (mContactTime < Math<Real>::sm_Zero || side == IntersectorConfiguration<Real>::NONE)
+	{
+		// intersecting now
 		SetContactTime(mContactTime);
 		this->SetIntersectionType(IntersectionType::Empty);
-        return;
-    }
+		return;
+	}
 
-    FindContactSet<Real>(segment, mBox, side, segContact, boxContact,this->GetLhsVelocity(), this->GetRhsVelocity(), mContactTime, mQuantity, mPoint);
+	FindContactSet<Real>(segment, mBox, side, segContact, boxContact, this->GetLhsVelocity(), this->GetRhsVelocity(), mContactTime, mQuantity, mPoint);
 
 	SetContactTime(mContactTime);
-    if (mQuantity == 1)
-    {
+	if (mQuantity == 1)
+	{
 		this->SetIntersectionType(IntersectionType::Point);
-    }
-    else
-    {
+	}
+	else
+	{
 		this->SetIntersectionType(IntersectionType::Segment);
-    }
+	}
 
-    return;
+	return;
 }
 
 template <typename Real>
 int Mathematics::DynamicFindIntersectorSegment3Box3<Real>
-	::GetQuantity () const
+	::GetQuantity() const
 {
-    return mQuantity;
+	return mQuantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorSegment3Box3<Real>
-	::GetPoint (int i) const
+	::GetPoint(int i) const
 {
-    return mPoint[i];
+	return mPoint[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H

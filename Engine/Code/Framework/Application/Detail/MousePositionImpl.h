@@ -1,37 +1,43 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:00)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:39)
 
 #ifndef FRAMEWORK_APPLICATION_MOUSE_POSITION_IMPL_H
 #define FRAMEWORK_APPLICATION_MOUSE_POSITION_IMPL_H
 
-#include "Framework/WindowCreate/WindowPoint.h"
 #include "System/Window/Flags/WindowFlags.h"
+#include "Framework/WindowCreate/WindowPoint.h"
+
+#include <memory>
 
 namespace Framework
 {
-	class MousePositionImpl
+	class FRAMEWORK_HIDDEN_DECLARE MousePositionImpl
 	{
 	public:
 		using ClassType = MousePositionImpl;
-		using MousePositionImplPtr = std::shared_ptr<ClassType>;
+		using MousePositionImplSharedPtr = std::shared_ptr<ClassType>;
 		using HWnd = System::WindowHWnd;
 
 	public:
-		MousePositionImpl();
-		virtual ~MousePositionImpl();
+		MousePositionImpl() noexcept = default;
+		virtual ~MousePositionImpl() = default;
+		MousePositionImpl(const MousePositionImpl&) noexcept = default;
+		MousePositionImpl(MousePositionImpl&&) noexcept = default;
+		MousePositionImpl& operator=(const MousePositionImpl&) noexcept = default;
+		MousePositionImpl& operator=(MousePositionImpl&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		static MousePositionImplPtr CreateWindowMousePositionPtr(HWnd hwnd);
+		static MousePositionImplSharedPtr CreateWindowMousePosition(HWnd hwnd);
 
 		//  Û±ÍŒª÷√
 		virtual const WindowPoint GetMousePosition() const = 0;
-		virtual void SetMousePosition (const WindowPoint& windowPoint) = 0;
+		virtual void SetMousePosition(const WindowPoint& windowPoint) = 0;
 
-		virtual MousePositionImplPtr Clone()  = 0;
+		virtual MousePositionImplSharedPtr Clone() = 0;
 	};
 }
 

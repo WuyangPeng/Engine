@@ -16,13 +16,15 @@
 
 SINGLETON_MUTEX_DEFINE_USE_SHARED(CoreTools, Environment);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ g_CoreToolsMutex }
+#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
 #define MUTEX_ENTER_MEMBER std::unique_lock<std::shared_mutex> holder{ *sm_EnvironmentMutex }
 #define MUTEX_ENTER_MEMBER_SHARED std::shared_lock<std::shared_mutex> holder{ *sm_EnvironmentMutex }
 
 SINGLETON_INITIALIZE_DEFINE_USE_SHARED(CoreTools, Environment);
 
 SINGLETON_DEFINE(CoreTools, Environment);
+
+SINGLETON_GET_PTR_DEFINE(CoreTools, Environment);
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Environment)
 

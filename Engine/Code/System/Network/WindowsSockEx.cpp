@@ -12,7 +12,7 @@
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 System::WinSocket System
 	::WinSocketAccept(WinSocket winSocket, WinSockAddr* addr, WindowIntPtr addrlen, WinSockConditionProc condition, WindowPtrDWord callbackData) noexcept

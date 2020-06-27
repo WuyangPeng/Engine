@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/06 10:19)
+// 引擎版本：0.0.2.5 (2020/03/19 15:48)
 
 // 2D向量工具类的实现
 #ifndef MATHEMATICS_ALGEBRA_VECTOR_2D_TOOLS_DETAIL_H
@@ -24,9 +24,9 @@
 
 template <typename Real>
 bool Mathematics::Vector2DTools<Real>
-	::Approximate(const Vector2D& lhs, const Vector2D& rhs,const Real epsilon)
+	::Approximate(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon)
 {
-	MATHEMATICS_ASSERTION_1(Real{} <= epsilon,"epsilon必须大于或等于0！");
+	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= epsilon, "epsilon必须大于或等于0！");
 
 	return Math::FAbs(lhs.GetXCoordinate() - rhs.GetXCoordinate()) < epsilon &&
 		   Math::FAbs(lhs.GetYCoordinate() - rhs.GetYCoordinate()) < epsilon;
@@ -34,14 +34,14 @@ bool Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::VectorMagnitude( const Vector2D& vector ) noexcept
+	::VectorMagnitude(const Vector2D& vector) noexcept
 {
 	return Math::Sqrt(VectorMagnitudeSquared(vector));
 }
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::VectorMagnitudeSquared( const Vector2D& vector ) noexcept
+	::VectorMagnitudeSquared(const Vector2D& vector) noexcept
 {
 
 	return vector.GetXCoordinate() * vector.GetXCoordinate() + vector.GetYCoordinate() * vector.GetYCoordinate();
@@ -49,14 +49,14 @@ Real Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::Distance( const Vector2D& lhs,const Vector2D& rhs ) noexcept
+	::Distance(const Vector2D& lhs, const Vector2D& rhs) noexcept
 {
-	return Math::Sqrt(DistanceSquared(lhs,rhs));	
+	return Math::Sqrt(DistanceSquared(lhs, rhs));
 }
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::DistanceSquared( const Vector2D& lhs,const Vector2D& rhs ) noexcept
+	::DistanceSquared(const Vector2D& lhs, const Vector2D& rhs) noexcept
 {
 	auto distanceX = lhs.GetXCoordinate() - rhs.GetXCoordinate();
 	auto distanceY = lhs.GetYCoordinate() - rhs.GetYCoordinate();
@@ -66,62 +66,62 @@ Real Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::DotProduct( const Vector2D& lhs,const Vector2D& rhs ) noexcept
+	::DotProduct(const Vector2D& lhs, const Vector2D& rhs) noexcept
 {
 	return (lhs.GetXCoordinate() * rhs.GetXCoordinate() + lhs.GetYCoordinate() * rhs.GetYCoordinate());
 }
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::PseudoCrossProduct( const Vector2D& lhs,const Vector2D& rhs )
+	::PseudoCrossProduct(const Vector2D& lhs, const Vector2D& rhs)
 {
-    return DotPerp(lhs,rhs);
+	return DotPerp(lhs, rhs);
 }
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
-	::ParallelVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs,const Real epsilon)
+	::ParallelVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon)
 {
-	MATHEMATICS_ASSERTION_1(Real{} <= epsilon,"epsilon必须大于或等于0！");
+	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= epsilon, "epsilon必须大于或等于0！");
 
 	auto moduleSquare = VectorMagnitudeSquared(rhs);
 
 	if (epsilon < moduleSquare)
 	{
-		return rhs * (DotProduct(lhs , rhs) / moduleSquare);
+		return rhs * (DotProduct(lhs, rhs) / moduleSquare);
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"除零错误！");
+		MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-		return Vector2D();
+		return Vector2D{};
 	}
 }
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
-	::ApeakVectorLhsToRhs(const Vector2D& lhs,const Vector2D& rhs,const Real epsilon)
+	::ApeakVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon)
 {
-	return lhs - ParallelVectorLhsToRhs(lhs,rhs,epsilon);
+	return lhs - ParallelVectorLhsToRhs(lhs, rhs, epsilon);
 }
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::GetVectorIncludedAngle(const Vector2D& lhs,const Vector2D& rhs)
+	::GetVectorIncludedAngle(const Vector2D& lhs, const Vector2D& rhs)
 {
-	return Math::ACos(DotProduct(lhs,rhs) / (VectorMagnitude(lhs) * VectorMagnitude(rhs)));
+	return Math::ACos(DotProduct(lhs, rhs) / (VectorMagnitude(lhs) * VectorMagnitude(rhs)));
 }
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
-	::GetPerp( const Vector2D& vector )
+	::GetPerp(const Vector2D& vector)
 {
-	return Vector2D(vector.GetYCoordinate(),-vector.GetXCoordinate());
+	return Vector2D{ vector.GetYCoordinate(), -vector.GetXCoordinate() };
 }
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
-	::GetUnitPerp( const Vector2D& vector,const Real epsilon)
+	::GetUnitPerp(const Vector2D& vector, const Real epsilon)
 {
 	auto perp = GetPerp(vector);
 	perp.Normalize(epsilon);
@@ -131,21 +131,21 @@ const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::DotPerp( const Vector2D& lhs,const Vector2D& rhs )
+	::DotPerp(const Vector2D& lhs, const Vector2D& rhs)
 {
-	return DotProduct(Vector2D(-lhs.GetYCoordinate(),lhs.GetXCoordinate()),rhs);
+	return DotProduct(Vector2D(-lhs.GetYCoordinate(), lhs.GetXCoordinate()), rhs);
 }
 
 template <typename Real>
 const typename Mathematics::Vector2DTools<Real>::AxesAlignBoundingBox2D	Mathematics::Vector2DTools<Real>
-	::ComputeExtremes( const std::vector<Vector2D>& vectors )
+	::ComputeExtremes(const std::vector<Vector2D>& vectors)
 {
-	MATHEMATICS_ASSERTION_0(0 < vectors.size(),"在ComputeExtremes中的输入无效！\n");
+	MATHEMATICS_ASSERTION_0(0 < vectors.size(), "在ComputeExtremes中的输入无效！\n");
 
 	auto min = vectors[0];
 	auto max = min;
 
-	for(const auto& eachVector:vectors)
+	for (const auto& eachVector : vectors)
 	{
 		for (auto i = 0; i < 2; ++i)
 		{
@@ -159,27 +159,27 @@ const typename Mathematics::Vector2DTools<Real>::AxesAlignBoundingBox2D	Mathemat
 			}
 		}
 	}
-	
+
 	return AxesAlignBoundingBox2D{ min,max };
 }
 
 template <typename Real>
-const typename Mathematics::Vector2DTools<Real>:: Vector2DOrthonormalize Mathematics::Vector2DTools<Real>
-	::Orthonormalize( const Vector2D& lhs, const Vector2D& rhs ,const Real epsilon)
+const typename Mathematics::Vector2DTools<Real>::Vector2DOrthonormalize Mathematics::Vector2DTools<Real>
+	::Orthonormalize(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon)
 {
 	// 如果输入向量v0和v1，则Gram-Schmidt正交向量产生矢量u0和u1如下，
 	//
 	//   u0 = v0 / |v0|
 	//   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
 	//
-    // 其中|A|表示向量A的长度和A * B表示向量A和B的点积
+	// 其中|A|表示向量A的长度和A * B表示向量A和B的点积
 
 	return Vector2DOrthonormalize{ lhs, rhs,epsilon };
 }
 
 template <typename Real>
 const typename Mathematics::Vector2DTools<Real>::Vector2DOrthonormalBasis Mathematics::Vector2DTools<Real>
-	::GenerateOrthonormalBasis(const Vector2D& nonzeroVector,const Real epsilon)
+	::GenerateOrthonormalBasis(const Vector2D& nonzeroVector, const Real epsilon)
 {
 	return Vector2DOrthonormalBasis{ nonzeroVector,epsilon };
 }
@@ -188,14 +188,14 @@ const typename Mathematics::Vector2DTools<Real>::Vector2DOrthonormalBasis Mathem
 
 template <typename Real>
 bool Mathematics
-	::operator==( const Vector2D<Real>& lhs,const Vector2D<Real>& rhs )
+	::operator==(const Vector2D<Real>& lhs, const Vector2D<Real>& rhs)
 {
 	return memcmp(&lhs[0], &rhs[0], 2 * sizeof(Real)) == 0;
 }
 
 template <typename Real>
 bool Mathematics
-	::operator<( const Vector2D<Real>& lhs,const Vector2D<Real>& rhs )
+	::operator<(const Vector2D<Real>& lhs, const Vector2D<Real>& rhs)
 {
 	return memcmp(&lhs[0], &rhs[0], 2 * sizeof(Real)) < 0;
 }
@@ -204,7 +204,7 @@ template <typename Real>
 std::ostream& Mathematics
 	::operator<< (std::ostream& outFile, const Vector2D<Real>& vector)
 {
-	return outFile << "x=" << vector.GetXCoordinate() << "　y=" << vector.GetYCoordinate(); 
+	return outFile << "x=" << vector.GetXCoordinate() << "　y=" << vector.GetYCoordinate();
 }
 
 #endif // MATHEMATICS_ALGEBRA_VECTOR_2D_TOOLS_DETAIL_H

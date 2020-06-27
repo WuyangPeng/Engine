@@ -57,10 +57,10 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl
     for (int index = 0; index < m_NumTargets; ++index)
     {
         ConstTexture2DSmartPointer colorTexture = renderTarget->GetColorTexture(index);
-        RENDERING_ASSERTION_1(!renderer->InTexture2DMap(colorTexture.GetData()), "纹理不应该存在。\n");
+        RENDERING_ASSERTION_1(!renderer->InTexture2DMap(colorTexture), "纹理不应该存在。\n");
         
 		std::shared_ptr<PlatformTexture2D> platformColorTexture(new PlatformTexture2D(renderer,colorTexture.GetData()));
-        renderer->InsertInTexture2DMap(colorTexture.GetData(), platformColorTexture);
+        renderer->InsertInTexture2DMap(colorTexture, platformColorTexture);
         m_ColorTextures[index] = platformColorTexture->GetTexture();
 		m_DrawBuffers[index] = static_cast<GLenum>(System::ColorAttachent::Color0) + index;
         
@@ -80,11 +80,11 @@ void Rendering::OpenGLRenderTargetDataImpl
     ConstTexture2DSmartPointer depthStencilTexture = renderTarget->GetDepthStencilTexture();
     if (depthStencilTexture.IsValidPtr())
     {
-        RENDERING_ASSERTION_1(!renderer->InTexture2DMap(depthStencilTexture.GetData()),"纹理不应该存在。\n");
+        RENDERING_ASSERTION_1(!renderer->InTexture2DMap(depthStencilTexture),"纹理不应该存在。\n");
         
 		std::shared_ptr<PlatformTexture2D> platformDepthStencilTexture{ make_shared<PlatformTexture2D>(renderer,depthStencilTexture.GetData()) };
    
-		renderer->InsertInTexture2DMap(depthStencilTexture.GetData(),platformDepthStencilTexture);
+		renderer->InsertInTexture2DMap(depthStencilTexture,platformDepthStencilTexture);
         m_DepthStencilTexture = platformDepthStencilTexture->GetTexture();
         
 		// 绑定深度和模板纹理。

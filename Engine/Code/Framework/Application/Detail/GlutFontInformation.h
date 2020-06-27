@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:00)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:39)
 
 #ifndef FRAMEWORK_APPLICATION_GLUT_FONT_INFORMATION_H
 #define FRAMEWORK_APPLICATION_GLUT_FONT_INFORMATION_H
@@ -11,21 +11,18 @@
 
 namespace Framework
 {
-	class GlutFontInformation : public FontInformationImpl
+	class FRAMEWORK_HIDDEN_DECLARE GlutFontInformation final : public FontInformationImpl
 	{
 	public:
-		typedef GlutFontInformation ClassType;
-		typedef FontInformationImpl ParentType;
+		using ClassType = GlutFontInformation;
+		using ParentType = FontInformationImpl;
 
-	public:
-		explicit GlutFontInformation();
-		virtual ~GlutFontInformation();
+	public: 
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
-
-		virtual int GetStringWidth (const System::String& text) const;
-		virtual int GetCharacterWidth (const System::TChar character) const;
-		virtual int GetFontHeight () const;
+		int GetStringWidth(const String& text) const final;
+		int GetCharacterWidth(const TChar character) const noexcept final;
+		int GetFontHeight() const noexcept final;
 	};
 }
 

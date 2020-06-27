@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/07/31 17:39)
+// 引擎版本：0.3.0.1 (2020/05/19 23:45)
 
 #include "Framework/FrameworkExport.h"
 

@@ -2,17 +2,17 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 16:16)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/10 13:04)	
 
 #include "System/SystemExport.h"
 
 #include "ProcessTools.h"
 #include "Process.h"
 #include "Flags/ProcessFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h" 
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
 #include "System/MemoryTools/MemoryHelperDetail.h"
 
 bool System
@@ -449,7 +449,7 @@ bool System
 								const TChar* currentDirectory, ProcessStartupinfoPtr startupInfo, ProcessInformationPtr processInformation) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::CreateProcessAsUser(token, applicationName, commandLine, processAttributes, threadAttributes, BoolConversion(inheritHandles), 
+	if (::CreateProcessAsUser(token, applicationName, commandLine, processAttributes, threadAttributes, BoolConversion(inheritHandles),
 							  EnumCastUnderlying(creationFlags), environment, currentDirectory, startupInfo, processInformation) != g_False)
 	{
 		return true;

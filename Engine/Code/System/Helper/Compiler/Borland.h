@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:01)
+// 引擎版本：0.2.0.0 (2020/05/07 13:36)
 
 #ifndef SYSTEM_HELPER_BORLAND_H
 #define SYSTEM_HELPER_BORLAND_H
@@ -59,14 +59,14 @@
 		// 缺少WCHAR_MAX/WCHAR_MIN的解决方法  
 		#include <climits>
 		#include <cwchar>
-	
+
 		#ifndef WCHAR_MAX
 			#define WCHAR_MAX 0xFFFF
 		#endif // WCHAR_MAX
 
 		#ifndef WCHAR_MIN
 			#define WCHAR_MIN 0
-		#endif // WCHAR_MIN
+		endif // WCHAR_MIN
 
 	#endif // (__BORLANDC__ <= 0x551)
 
@@ -90,7 +90,7 @@
 
 	// Borland C ++ Builder 2006 Update 2及更高版本：
 	#if (__BORLANDC__ <= 0x582)
- 
+
 		#ifdef defined(linux) || defined(__linux__) || defined(__linux) 
 			// _CPPUNWIND由于某种原因未自动设置
 			#pragma defineonoption CPPUNWIND -x

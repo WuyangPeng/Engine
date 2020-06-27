@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 17:23)
+// 引擎版本：0.0.2.4 (2020/03/11 11:23)
 
 #include "Network/NetworkExport.h" 
 
@@ -18,8 +18,9 @@
 #include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/BufferReceiveStream.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <vector>
 
 using std::string;
@@ -28,11 +29,10 @@ using std::make_shared;
 
 Network::OnlySendingClient
 	::OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager)
-	:ParentType{ configurationStrategy,socketManager },
-	 m_SockConnector{ configurationStrategy },
+	:ParentType{ configurationStrategy,socketManager }, m_SockConnector{ configurationStrategy },
 	 m_SockStream{ make_shared<SockStream>(configurationStrategy) },
 	 m_BufferSendStream{ configurationStrategy.GetBufferSize(),configurationStrategy.GetParserStrategy() },
-	m_Buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
+	 m_Buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -43,7 +43,7 @@ Network::OnlySendingClient
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, OnlySendingClient) 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, OnlySendingClient)
 
 uint64_t Network::OnlySendingClient
 	::Connect()
@@ -52,7 +52,7 @@ uint64_t Network::OnlySendingClient
 
 	auto configurationStrategy = GetConfigurationStrategy();
 
-	SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(),boost::numeric_cast<int>(configurationStrategy.GetPort()),GetConfigurationStrategy()) };
+	SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(),configurationStrategy.GetPort(),GetConfigurationStrategy()) };
 
 	if (m_SockConnector.Connect(m_SockStream, sockAddress))
 	{
@@ -71,13 +71,13 @@ void Network::OnlySendingClient
 
 	auto configurationStrategy = GetConfigurationStrategy();
 
-	SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), boost::numeric_cast<int>(configurationStrategy.GetPort()), GetConfigurationStrategy()) };
+	SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(),configurationStrategy.GetPort(), GetConfigurationStrategy()) };
 
 	m_SockConnector.AsyncConnect(GetSocketManagerSharedPtr(), m_SockStream, sockAddress);
-} 
+}
 
 void Network::OnlySendingClient
-	::Send(uint64_t socketID,const MessageInterfaceSharedPtr& message)
+	::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -91,15 +91,14 @@ void Network::OnlySendingClient
 	}
 
 	if (m_BufferSendStream.Insert(message))
-	{		
+	{
 		ImmediatelySend(socketID);
 	}
 	else
-	{		 
+	{
 		THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"));
 	}
 }
-
 
 void Network::OnlySendingClient
 	::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
@@ -159,7 +158,7 @@ void Network::OnlySendingClient
 	::Receive()
 {
 	NETWORK_CLASS_IS_VALID_9;
-	 
+
 	LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
 		<< SYSTEM_TEXT("当前客户端策略不支持接收数据。")
 		<< LOG_SINGLETON_TRIGGER_ASSERT;
@@ -195,7 +194,7 @@ bool Network::OnlySendingClient
 			return true;
 		}
 	}
-	break;	 
+	break;
 
 	default:
 		break;

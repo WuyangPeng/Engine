@@ -8,13 +8,14 @@
 
 #include "UnitTestComposite.h"
 #include "System/Helper/UnusedMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 using std::ostream;
 
 CoreTools::UnitTestComposite
-	::UnitTestComposite(ostream* osPtr)
+	::UnitTestComposite(const OStreamShared& osPtr)
 	:ParentType{ osPtr }, InterfaceType{}, m_TestLoopCount{ 0 }, m_RandomSeed{ 0 }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -98,9 +99,15 @@ int CoreTools::UnitTestComposite
 
 	return offsetValue;
 }
-
+ 
 int CoreTools::UnitTestComposite
 	::GetRandomSeed() const noexcept
 {
 	return m_RandomSeed + GetEngineeringOffsetValue();
+}
+
+uint32_t CoreTools::UnitTestComposite
+	::GetEngineRandomSeed() const
+{
+	return boost::numeric_cast<uint32_t>(GetRandomSeed());
 }

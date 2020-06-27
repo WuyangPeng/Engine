@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/11 16:19)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:35)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ARC2_CIRCLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ARC2_CIRCLE2_H
@@ -18,7 +18,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class StaticFindIntersectorArc2Circle2 : public StaticIntersector<Real, Vector2D>		
+	class StaticFindIntersectorArc2Circle2 : public StaticIntersector<Real, Vector2D>
 	{
 	public:
 		using ClassType = StaticFindIntersectorArc2Circle2<Real>;
@@ -27,10 +27,10 @@ namespace Mathematics
 		using Circle2 = Circle2<Real>;
 		using Arc2 = Arc2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>; 
-		
+		using Math = Math<Real>;
+
 	public:
-		StaticFindIntersectorArc2Circle2(const Arc2& arc, const Circle2& circle,const Real epsilon = Math::sm_ZeroTolerance);
+		StaticFindIntersectorArc2Circle2(const Arc2& arc, const Circle2& circle, const Real epsilon = Math::sm_ZeroTolerance);
 		virtual ~StaticFindIntersectorArc2Circle2();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;

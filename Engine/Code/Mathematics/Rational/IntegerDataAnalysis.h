@@ -1,14 +1,15 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 11:00)
+// 引擎版本：0.0.2.5 (2020/03/20 09:47)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "RationalFwd.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 
 #include <boost/noncopyable.hpp>
@@ -19,23 +20,17 @@ namespace Mathematics
 {
 	// N是你想要元整数的32位字节的数目。
 	template <int N>
-	class IntegerData;
-
-	template <int N>
-	class IntegerDivisionModulo;
-
-	template <int N>
 	class IntegerDataAnalysis : boost::noncopyable
 	{
-	public:		
+	public:
 		using ClassType = IntegerDataAnalysis<N>;
 		using IntegerData = IntegerData<N>;
 
 	public:
 		explicit IntegerDataAnalysis(const IntegerData& master);
-	 
-		CLASS_INVARIANT_DECLARE;		
-		
+
+		CLASS_INVARIANT_DECLARE;
+
 		const IntegerData GetAbsoluteValue() const;
 
 		// 其他实用程序。
@@ -53,9 +48,9 @@ namespace Mathematics
 		// 算术运算。
 		const IntegerData operator- () const;
 
-		const IntegerDivisionModulo<N> GetDivisionModulo(const IntegerData& rhs) const;		
+		const IntegerDivisionModulo<N> GetDivisionModulo(const IntegerData& rhs) const;
 
-	private:	
+	private:
 		static constexpr int sm_MaskSize{ 4 };
 		static const uint16_t sm_LeadingMask[sm_MaskSize];
 		static const uint16_t sm_TrailingMask[sm_MaskSize];
@@ -65,10 +60,10 @@ namespace Mathematics
 
 		// 最低位储存在索引0。
 		const IntegerData& m_Master;
-	};	
+	};
 
-    template <int N>
-	std::ostream& operator<< (std::ostream& os,const IntegerDataAnalysis<N>& integerDataAnalysis);
+	template <int N>
+	std::ostream& operator<< (std::ostream& os, const IntegerDataAnalysis<N>& integerDataAnalysis);
 }
 
 #endif // MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_H

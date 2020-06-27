@@ -44,36 +44,36 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 
     // Build quadratic Q'(t) = (d/dt)(x(t)y(t)z(t)) = a0+a1*t+a2*t^2.
 	auto a0 = D[0]*D[1]*zDir + D[0]*D[2]*yDir + D[1]*D[2]*xDir;
-	auto a1 = ((Real)2)*(D[2]*xDir*yDir + D[1]*xDir*zDir + D[0]*yDir*zDir);
-	auto a2 = ((Real)3)*(xDir*yDir*zDir);
+	auto a1 = (static_cast<Real>(2))*(D[2]*xDir*yDir + D[1]*xDir*zDir + D[0]*yDir*zDir);
+	auto a2 = (static_cast<Real>(3))*(xDir*yDir*zDir);
 
     // Find root to Q'(t) = 0 corresponding to maximum.
     Real tFinal;
-    if (a2 != Real{})
+    if (a2 != Math<Real>::sm_Zero)
     {
-		auto invA2 = ((Real)1)/a2;
+		auto invA2 = (static_cast<Real>(1))/a2;
 		auto discr = a1*a1 - ((Real)4)*a0*a2;
         discr = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
         tFinal = -(Real{0.5})*(a1 + discr)*invA2;
-        if (a1 + ((Real)2)*a2*tFinal > Real{})
+        if (a1 + (static_cast<Real>(2))*a2*tFinal > Math<Real>::sm_Zero)
         {
             tFinal = (Real{0.5})*(-a1 + discr)*invA2;
         }
     }
-    else if (a1 != Real{})
+    else if (a1 != Math<Real>::sm_Zero)
     {
         tFinal = -a0/a1;
     }
-    else if (a0 != Real{})
+    else if (a0 != Math<Real>::sm_Zero)
     {
-        tFinal = (a0 >= Real{} ? Math<Real>::sm_MaxReal : -Math<Real>::sm_MaxReal);
+        tFinal = (a0 >= Math<Real>::sm_Zero ? Math<Real>::sm_MaxReal : -Math<Real>::sm_MaxReal);
     }
     else
     {
         return;
     }
 
-    if (tFinal < Real{})
+    if (tFinal < Math<Real>::sm_Zero)
     {
         // Make (xDir,yDir,zDir) point in direction of increase of Q.
         tFinal = -tFinal;
@@ -94,7 +94,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         }
 
 		auto norDotDir = A[i][0]*xDir + A[i][1]*yDir + A[i][2]*zDir;
-        if (norDotDir <= Real{})
+        if (norDotDir <= Math<Real>::sm_Zero)
         {
             continue;
         }
@@ -104,13 +104,13 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         // constraints.  However, some numerical error may make this a small
         // negative number.  In that case set tmax = 0 (no change in
         // position).
-		auto numer = (Real)1 - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
-        if (numer < Real{})
+		auto numer = static_cast<Real>(1) - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
+        if (numer < Math<Real>::sm_Zero)
         {
             MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::sm_ZeroTolerance, "Unexpected condition\n");
 
             plane2 = i;
-            tMax = Real{};
+            tMax = Math<Real>::sm_Zero;
             break;
         }
 
@@ -156,7 +156,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 		auto zMax = oneThird/A[plane0][2];
 
         // Compute direction to local maximum point on plane.
-        tFinal = (Real)1;
+        tFinal = static_cast<Real>(1);
         xDir = xMax - D[0];
         yDir = yMax - D[1];
         zDir = zMax - D[2];
@@ -167,29 +167,29 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 
 		if (A[plane0][0] > Math<Real>::sm_ZeroTolerance)
         {
-            xDir = Real{};
+            xDir = Math<Real>::sm_Zero;
         }
         else
         {
-            xDir = (Real)1;
+            xDir = static_cast<Real>(1);
         }
 
 		if (A[plane0][1] > Math<Real>::sm_ZeroTolerance)
         {
-            yDir = Real{};
+            yDir = Math<Real>::sm_Zero;
         }
         else
         {
-            yDir = (Real)1;
+            yDir = static_cast<Real>(1);
         }
 
 		if (A[plane0][2] > Math<Real>::sm_ZeroTolerance)
         {
-            zDir = Real{};
+            zDir = Math<Real>::sm_Zero;
         }
         else
         {
-            zDir = (Real)1;
+            zDir = static_cast<Real>(1);
         }
     }
     
@@ -205,7 +205,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         }
 
 		auto norDotDir = A[i][0]*xDir + A[i][1]*yDir + A[i][2]*zDir;
-        if (norDotDir <= Real{})
+        if (norDotDir <= Math<Real>::sm_Zero)
         {
             continue;
         }
@@ -215,13 +215,13 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         // constraints.  However, some numerical error may make this a small
         // negative number.  In that case, set tmax = 0 (no change in
         // position).
-		auto numer = (Real)1 - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
-        if (numer < Real{})
+		auto numer = static_cast<Real>(1) - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
+        if (numer < Math<Real>::sm_Zero)
         {
 			MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::sm_ZeroTolerance,  "Unexpected condition\n");
 
             plane1 = i;
-            tMax = Real{};
+            tMax = Math<Real>::sm_Zero;
             break;
         }
 
@@ -237,7 +237,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
     D[1] += tMax*yDir;
     D[2] += tMax*zDir;
 
-    if (tMax == (Real)1)
+    if (tMax == static_cast<Real>(1))
     {
         return;
     }
@@ -263,7 +263,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
     // Jitter the lines to avoid cases where more than three planes
     // intersect at the same point.  Should also break parallelism
     // and planes parallel to the coordinate planes.
-    const auto maxJitter = (Real)1e-12;
+    const auto maxJitter = static_cast<Real>(1e-12);
     const auto numPoints = boost::numeric_cast<int>(A.size());
     int i;
     for (i = 0; i < numPoints; ++i)
@@ -275,7 +275,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 
     // Sort lines along the z-axis (x = 0 and y = 0).
     int plane = -1;
-    Real zmax = Real{};
+    Real zmax = Math<Real>::sm_Zero;
     for (i = 0; i < numPoints; ++i)
     {
         if (A[i][2] > zmax)
@@ -287,9 +287,9 @@ void Mathematics::ContEllipsoid3MinCR<Real>
     MATHEMATICS_ASSERTION_0(plane != -1, "Unexpected condition\n");
 
     // Walk along convex hull searching for maximum.
-    D[0] = Real{};
-    D[1] = Real{};
-    D[2] = ((Real)1)/zmax;
+    D[0] = Math<Real>::sm_Zero;
+    D[1] = Math<Real>::sm_Zero;
+    D[2] = (static_cast<Real>(1))/zmax;
     FindFacetMax(A, plane, D);
 }
 

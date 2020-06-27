@@ -11,6 +11,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include <string>
+#include <memory>
 
 namespace CoreTools
 {
@@ -23,7 +24,7 @@ namespace CoreTools
 
 	public:
 		CommandLineInformationImpl(int argumentsNumber, char** arguments);
-		explicit CommandLineInformationImpl(char* commandLine);
+		explicit CommandLineInformationImpl(const char* commandLine);
 		~CommandLineInformationImpl();
 
 		CLASS_INVARIANT_DECLARE;

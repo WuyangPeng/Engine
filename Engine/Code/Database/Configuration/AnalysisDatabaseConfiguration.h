@@ -1,17 +1,17 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 09:40)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 11:02)
 
 #ifndef DATABASE_DATABASE_CONFIGURATION_ANALYSIS_DATABASE_CONFIGURATION_H
 #define DATABASE_DATABASE_CONFIGURATION_ANALYSIS_DATABASE_CONFIGURATION_H
 
 #include "Database/DatabaseDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
-#include "System/Helper/UnicodeUsing.h"
 #include "ConfigurationStrategy.h"
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ExportMacro.h" 
 
 #include <string>
 #include <map>
@@ -19,7 +19,7 @@
 DATABASE_EXPORT_SHARED_PTR(AnalysisDatabaseConfigurationImpl);
 
 namespace Database
-{	
+{
 	class DATABASE_DEFAULT_DECLARE AnalysisDatabaseConfiguration
 	{
 	public:
@@ -30,7 +30,7 @@ namespace Database
 	public:
 		explicit AnalysisDatabaseConfiguration(const std::string& fileName);
 
-		CLASS_INVARIANT_DECLARE; 
+		CLASS_INVARIANT_DECLARE;
 
 		ConfigurationStrategy GetConfigurationStrategy(const System::String& name) const;
 		ContainerConstIter GetBegin() const;
@@ -39,7 +39,7 @@ namespace Database
 
 	private:
 		IMPL_TYPE_DECLARE(AnalysisDatabaseConfiguration);
-	};	
-} 
+	};
+}
 
 #endif // DATABASE_DATABASE_CONFIGURATION_ANALYSIS_DATABASE_CONFIGURATION_H

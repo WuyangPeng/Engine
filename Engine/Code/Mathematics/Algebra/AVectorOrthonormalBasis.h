@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 10:21)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 10:08)
 
 #ifndef MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMA_BASIS_H
 #define MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMA_BASIS_H
@@ -27,26 +27,26 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		explicit AVectorOrthonormalBasis(const AVector& nonzeroVector,bool isUnit, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit AVectorOrthonormalBasis(const AVector& nonzeroVector, bool isUnit, const Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
 
-	    const AVector GetUVector() const;
-	    const AVector GetVVector() const;
-	    const AVector GetWVector() const;
+		const AVector GetUVector() const;
+		const AVector GetVVector() const;
+		const AVector GetWVector() const;
 
 	private:
-	    void Generate();
-	    void GenerateOnXOrZIsMax();
-	    void GenerateOnYOrZIsMax();
+		void Generate();
+		void GenerateOnXOrZIsMax();
+		void GenerateOnYOrZIsMax();
 
 	private:
-        bool m_IsUnit;
-	    AVector m_UVector;
-	    AVector m_VVector; 
-	    AVector m_WVector; 
-		Real m_Epsilon;			
-	};		 	
+		bool m_IsUnit;
+		AVector m_UVector;
+		AVector m_VVector;
+		AVector m_WVector;
+		Real m_Epsilon;
+	};
 
 	using AVectorOrthonormalBasisf = AVectorOrthonormalBasis<float>;
 	using AVectorOrthonormalBasisd = AVectorOrthonormalBasis<double>;

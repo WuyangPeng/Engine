@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:53)
+// 引擎版本：0.3.0.1 (2020/05/21 14:50)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_PIXEL_VIEW_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_PIXEL_VIEW_MIDDLE_LAYER_H
@@ -16,9 +16,7 @@ FRAMEWORK_EXPORT_SHARED_PTR(PixelViewMiddleLayerImpl);
 
 namespace Framework
 {
-	class WindowPoint;
-
-	class FRAMEWORK_DEFAULT_DECLARE PixelViewMiddleLayer: public ViewMiddleLayer
+	class FRAMEWORK_DEFAULT_DECLARE PixelViewMiddleLayer : public ViewMiddleLayer
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(PixelViewMiddleLayer);
@@ -26,25 +24,27 @@ namespace Framework
 		using Colour = Rendering::Colour<uint8_t>;
 
 	public:
-		PixelViewMiddleLayer();
-		virtual ~PixelViewMiddleLayer();
-	
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		explicit PixelViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+		~PixelViewMiddleLayer() noexcept = default;
+		PixelViewMiddleLayer(const PixelViewMiddleLayer& rhs) noexcept = delete;
+		PixelViewMiddleLayer& operator=(const PixelViewMiddleLayer& rhs) noexcept = delete;
+		PixelViewMiddleLayer(PixelViewMiddleLayer&& rhs) noexcept;
+		PixelViewMiddleLayer& operator=(PixelViewMiddleLayer&& rhs) noexcept;
 
-		virtual bool Initialize();
-		virtual void Terminate();
-		virtual bool Display(int64_t timeDelta);	
-		virtual bool Resize(WindowDisplayFlags type,const WindowSize& size);
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-        // 可以让你在渲染屏幕多边形后做更多的渲染。
-        // 屏幕覆盖应使用渲染器调用，而不是直接访问m_Screen数组。
+		bool Initialize() override;
+		bool Idle(int64_t timeDelta) override;
+		bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;	
+
+		// 可以让你在渲染屏幕多边形后做更多的渲染。屏幕覆盖应使用渲染器调用，而不是直接访问m_Screen数组。
 		virtual void ScreenOverlay();
 
-		bool IsDoFlip() const;
+		bool IsDoFlip() const noexcept;
 
-		void ClearScreen ();
+		void ClearScreen();
 
-		void DoFlip (bool doFlip);
+		void DoFlip(bool doFlip);
 
 		void SetPixel(int x, int y, const Colour& colour);
 
@@ -52,13 +52,16 @@ namespace Framework
 
 		const Colour GetPixel(int x, int y) const;
 
-		void DrawLine(int beginX, int beginY, int endX, int endY, const Colour& colour);
+		void DrawLine(int xMin, int yMin, int xMax, int yMax, const Colour& colour);
 
-		void DrawRectangle(int xMin, int yMin, int xMax, int yMax,const Colour& colour, bool solid = false);
+		void DrawRectangle(int xMin, int yMin, int xMax, int yMax, const Colour& colour, bool solid = false);
 
-		void DrawCircle(int xCenter, int yCenter, int radius,const Colour& colour, bool solid = false);
+		void DrawCircle(int xCenter, int yCenter, int radius, const Colour& colour, bool solid = false);
 
 		void Fill(int x, int y, const Colour& foreColour, const Colour& backColour);
+
+		int GetScreenWidth() const noexcept;
+		int GetScreenHeight() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(PixelViewMiddleLayer);
@@ -69,4 +72,3 @@ namespace Framework
 
 
 
-	

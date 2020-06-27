@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:03)
+// 引擎版本：0.3.0.1 (2020/05/21 13:40)
 
 #ifndef FRAMEWORK_APPLICATION_PIXEL_SCREEN_DRAW_LINE_H
 #define FRAMEWORK_APPLICATION_PIXEL_SCREEN_DRAW_LINE_H
@@ -22,15 +22,19 @@ namespace Framework
 		using ClassType = PixelScreenDrawLine;
 
 	public:
-		PixelScreenDrawLine(int beginX, int beginY,int endX, int endY);
-	
+		PixelScreenDrawLine(int xMin, int yMin, int xMax, int yMax);
+
 		CLASS_INVARIANT_DECLARE;
 
-	    int GetSize() const;
-        const WindowPoint& operator[](int index) const;		 
+#ifdef OPEN_CLASS_INVARIANT
+		bool IsEndpointCorrect() const;
+#endif // OPEN_CLASS_INVARIANT
+
+		int GetSize() const;
+		const WindowPoint& operator[](int index) const;
 
 	private:
-	    using WindowPointVector = std::vector<WindowPoint>;
+		using WindowPointContainer = std::vector<WindowPoint>;
 
 	private:
 		void Calculate();
@@ -38,20 +42,20 @@ namespace Framework
 		void DrawLineOnY();
 
 	private:
-		int m_BeginX;
-		int m_BeginY;
-		int m_EndX;
-		int m_EndY;
+		int m_XMin;
+		int m_YMin;
+		int m_XMax;
+		int m_YMax;
 
-        // 线段的方向。
+		// 线段的方向。
 		int m_DistanceX;
 		int m_DistanceY;
 
-        // 增量或减量取决于线的方向。
+		// 增量或减量取决于线的方向。
 		int m_StepX;
 		int m_StepY;
 
-		WindowPointVector m_Line;
+		WindowPointContainer m_Line;
 	};
 }
 
@@ -59,4 +63,3 @@ namespace Framework
 
 
 
-	

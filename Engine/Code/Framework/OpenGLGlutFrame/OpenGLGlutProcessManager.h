@@ -1,93 +1,104 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:19)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 15:58)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SingletonMacro.h"
-#include "CoreTools/Base/SingletonDetail.h"
 #include "System/OpenGL/Using/GlutUsing.h"
+#include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/SingletonMacro.h" 
+#include "Framework/OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
+#include "Framework/MainFunctionHelper/MainFunctionHelperBase.h"
 
+FRAMEWORK_EXPORT_UNIQUE_PTR(OpenGLGlutProcessManager);
 FRAMEWORK_EXPORT_SHARED_PTR(OpenGLGlutProcessManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(FRAMEWORK);
-
-namespace CoreTools
-{
-	class Mutex;	
-}
 
 namespace Framework
 {
-	class OpenGLGlutCallBackInterface;
-	class MainFunctionHelperBase;
-
 	class FRAMEWORK_DEFAULT_DECLARE OpenGLGlutProcessManager : public CoreTools::Singleton<OpenGLGlutProcessManager>
 	{
-		SINGLETON_INITIALIZE_DECLARE(OpenGLGlutProcessManager);	 
+	public:
+		NON_COPY_CLASSES_TYPE_DECLARE(OpenGLGlutProcessManager);
+		using ParentType = Singleton<OpenGLGlutProcessManager>;		
+		using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;
+		using RenderSceneCallback = System::RenderSceneCallback;
+		using ChangeSizeCallback = System::ChangeSizeCallback;
+		using TimerFunctionCallback = System::TimerFunctionCallback;
+		using SpecialKeysDownCallback = System::SpecialKeysDownCallback;
+		using KeyboardDownCallback = System::KeyboardDownCallback;
+		using SpecialKeysUpCallback = System::SpecialKeysUpCallback;
+		using KeyboardUpCallback = System::KeyboardUpCallback;
+		using MouseFunctionCallback = System::MouseFunctionCallback;
+		using MotionFunctionCallback = System::MotionFunctionCallback;
+		using PassiveMotionFunctionCallback = System::PassiveMotionFunctionCallback;
+		using IdleFunctionCallback = System::IdleFunctionCallback;
+		using ProcessMenuCallback = System::ProcessMenuCallback;
+		using TerminateCallback = System::TerminateCallback;
+		using MainFunctionHelperBaseSharedPtr = std::shared_ptr<MainFunctionHelperBase>;
 
-	public:	
-		typedef std::shared_ptr<OpenGLGlutCallBackInterface> OpenGLGlutCallBackInterfacePtr;	
-		typedef System::RenderSceneCallback RenderSceneCallback;
-		typedef System::ChangeSizeCallback ChangeSizeCallback;
-		typedef System::TimerFunctionCallback TimerFunctionCallback;
-		typedef System::SpecialKeysDownCallback SpecialKeysDownCallback;
-		typedef System::KeyboardDownCallback KeyboardDownCallback; 
- 		typedef System::SpecialKeysUpCallback SpecialKeysUpCallback; 
- 		typedef System::KeyboardUpCallback KeyboardUpCallback; 
- 		typedef System::MouseFunctionCallback MouseFunctionCallback;
-  		typedef System::MotionFunctionCallback MotionFunctionCallback;
-  		typedef System::PassiveMotionFunctionCallback PassiveMotionFunctionCallback;   
-  		typedef System::IdleFunctionCallback IdleFunctionCallback; 
-  		typedef System::ProcessMenuCallback ProcessMenuCallback;  
-  		typedef System::TerminateCallback TerminateCallback; 
+	private:
+		enum class OpenGLGlutProcessManagerCreate
+		{
+			Init,
+		};
+
+	public:
+		static void Create();
+		static void Destroy() noexcept;		
+
+		explicit OpenGLGlutProcessManager(OpenGLGlutProcessManagerCreate openGLGlutProcessManagerCreate); 
 
 		CLASS_INVARIANT_DECLARE;
 
-	public:
-		RenderSceneCallback GetRenderSceneCallback() const; 
-		ChangeSizeCallback GetChangeSizeCallback() const; 
-		TimerFunctionCallback GetTimerFunctionCallback() const; 
-		SpecialKeysDownCallback GetSpecialKeysDownCallback() const; 
-		KeyboardDownCallback GetKeyboardDownCallback() const;
-		SpecialKeysUpCallback GetSpecialKeysUpCallback() const; 
-		KeyboardUpCallback GetKeyboardUpCallback() const;
-		MouseFunctionCallback GetMouseFunctionCallback() const;	
-		MotionFunctionCallback GetMotionFunctionCallback() const;
-		PassiveMotionFunctionCallback GetPassiveMotionCallback() const;
-		IdleFunctionCallback GetIdleFunctionCallback() const;
-		ProcessMenuCallback GetProcessMenuCallback() const;
-		TerminateCallback GetTerminateCallback() const;
+		SINGLETON_GET_PTR_DECLARE(OpenGLGlutProcessManager);
 
-		OpenGLGlutCallBackInterfacePtr GetOpenGLGlutCallBackInterfacePtr() const;
-		void SetOpenGLGlutCallBack(OpenGLGlutCallBackInterfacePtr ptr);
+	public:
+		static RenderSceneCallback GetRenderSceneCallback() noexcept;
+		static ChangeSizeCallback GetChangeSizeCallback() noexcept;
+		static TimerFunctionCallback GetTimerFunctionCallback() noexcept;
+		static SpecialKeysDownCallback GetSpecialKeysDownCallback() noexcept;
+		static KeyboardDownCallback GetKeyboardDownCallback() noexcept;
+		static SpecialKeysUpCallback GetSpecialKeysUpCallback() noexcept;
+		static KeyboardUpCallback GetKeyboardUpCallback() noexcept;
+		static MouseFunctionCallback GetMouseFunctionCallback() noexcept;
+		static MotionFunctionCallback GetMotionFunctionCallback() noexcept;
+		static PassiveMotionFunctionCallback GetPassiveMotionCallback() noexcept;
+		static IdleFunctionCallback GetIdleFunctionCallback() noexcept;
+		static ProcessMenuCallback GetProcessMenuCallback() noexcept;
+		static TerminateCallback GetTerminateCallback() noexcept;
+
+		OpenGLGlutCallBackInterfaceSharedPtr GetOpenGLGlutCallBackInterface() const;
+		void SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& openGLGlutCallBack);
 		void ClearOpenGLGlutCallBack();
 
 		void SetWindowID(int window);
 		int GetWindowID() const;
-		void SetMillisecond(unsigned millisecond);
-		unsigned int GetMillisecond() const;
+		void SetMillisecond(int millisecond);
+		int GetMillisecond() const;
 
-		void SetMainFunctionHelperPtr(MainFunctionHelperBase* ptr);
-		void ClearMainFunctionHelperPtr();	
-		MainFunctionHelperBase* GetMainFunctionHelperPtr();
+		void SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase);
+		void ClearMainFunctionHelper();
+		MainFunctionHelperBaseSharedPtr GetMainFunctionHelper();
 
 		bool PreCreate();
 		bool Initialize();
 		void PreIdle();
 		void Terminate();
 
-		SINGLETON_INSTANCE_DECLARE(OpenGLGlutProcessManager);		
-		SINGLETON_IMPL_DECLARE(OpenGLGlutProcessManager);
+	private:
+		using OpenGLGlutProcessManagerUniquePtr = std::unique_ptr<OpenGLGlutProcessManager>;
+
+	private:
+		static OpenGLGlutProcessManagerUniquePtr sm_OpenGLGlutProcessManager;
+		IMPL_TYPE_DECLARE(OpenGLGlutProcessManager);
 	};
 }
 
-#define OPENGL_GLUT_PROCESS_MANAGER_SINGLETON \
-	    Framework::OpenGLGlutProcessManager::GetSingleton()
+#define OPENGL_GLUT_PROCESS_MANAGER_SINGLETON Framework::OpenGLGlutProcessManager::GetSingleton()
 
 #endif // FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_H

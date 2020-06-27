@@ -10,9 +10,11 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 Mathematics::BasicMeshEdge
 	::BasicMeshEdge()
+	:m_Triangle{}, m_Vertex{}
 {
     for(int i = 0;i < 2;++i)
     {
@@ -25,6 +27,7 @@ Mathematics::BasicMeshEdge
 
 Mathematics::BasicMeshEdge
 	::BasicMeshEdge (const BasicMeshEdge& rhs)
+	:m_Triangle{}, m_Vertex{}
 {
     for(int i = 0;i < 2;++i)
     {
@@ -57,36 +60,59 @@ int Mathematics::BasicMeshEdge
 	::GetVertex(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 2,"Ë÷Òý´íÎó£¡");
     
-    return m_Vertex[index];
-    
+	if (0 <= index && index < 2)
+	{
+		return m_Vertex[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}    
 }
 
 int Mathematics::BasicMeshEdge
 	::GetTriangle(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 2,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_CONST_9; 
     
-    return m_Triangle[index];
+	if (0 <= index && index < 2)
+	{
+		return m_Triangle[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	} 
 }
 
 void Mathematics::BasicMeshEdge
 	::SetVertex(int index,int vertex)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 2,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_9; 
     
-    m_Vertex[index] = vertex;
+	if (0 <= index && index < 2)
+	{
+		m_Vertex[index] = vertex;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}    
 }
 
 void Mathematics::BasicMeshEdge
 	::SetTriangle(int index,int triangle)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 2,"Ë÷Òý´íÎó£¡");
+	MATHEMATICS_CLASS_IS_VALID_9; 
     
-    m_Triangle[index] = triangle;
+	if (0 <= index && index < 2)
+	{
+		m_Triangle[index] = triangle;
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	} 
 }
 

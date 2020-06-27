@@ -13,7 +13,7 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::vector;
 

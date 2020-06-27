@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 10:45)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:28)
 
 #include "Framework/FrameworkExport.h"
 
@@ -10,90 +10,88 @@
 #include "Framework/WindowRegister/WindowHBrush.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
+using std::make_unique;
+
 Framework::WindowPictorialImpl
-	::WindowPictorialImpl(System::WindowBrushTypes background)
-	:m_WindowsHIcon(),
-	 m_WindowsHCursor(),
-	 m_WindowsHBrushPtr(CreateWindowsHBrushPtr(background))
+	::WindowPictorialImpl(WindowBrushTypes background)
+	:m_WindowsHIcon{ }, m_WindowsHCursor{ }, m_WindowsHBrush{ CreateWindowsHBrush(background) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowPictorialImpl
-	::WindowPictorialImpl(const System::TChar* icon,const System::TChar* cursor, System::WindowBrushTypes background)
-	:m_WindowsHIcon(icon),
-	 m_WindowsHCursor(cursor),
-	 m_WindowsHBrushPtr(CreateWindowsHBrushPtr(background))
+	::WindowPictorialImpl(const TChar* icon, const TChar* cursor, WindowBrushTypes background)
+	:m_WindowsHIcon{ icon }, m_WindowsHCursor{ cursor }, m_WindowsHBrush{ CreateWindowsHBrush(background) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowPictorialImpl
-	::WindowPictorialImpl(HInstance hInstance,int icon, int cursor,System::WindowBrushTypes background)
-	:m_WindowsHIcon(hInstance,icon),
-	 m_WindowsHCursor(hInstance,cursor),
-	 m_WindowsHBrushPtr(CreateWindowsHBrushPtr(background))
+	::WindowPictorialImpl(HInstance instance, int icon, int cursor, WindowBrushTypes background)
+	:m_WindowsHIcon{ instance, icon }, m_WindowsHCursor{ instance, cursor }, m_WindowsHBrush{ CreateWindowsHBrush(background) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowPictorialImpl
-	::WindowPictorialImpl(HInstance hInstance,int icon, const System::TChar* cursor,System::WindowBrushTypes background)
-	:m_WindowsHIcon(hInstance,icon),
-	 m_WindowsHCursor(cursor),
-	 m_WindowsHBrushPtr(CreateWindowsHBrushPtr(background))
+	::WindowPictorialImpl(HInstance instance, int icon, const TChar* cursor, WindowBrushTypes background)
+	:m_WindowsHIcon{ instance, icon }, m_WindowsHCursor{ cursor }, m_WindowsHBrush{ CreateWindowsHBrush(background) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowPictorialImpl
-	::WindowPictorialImpl(HInstance hInstance,const System::TChar* icon, int cursor,System::WindowBrushTypes background)
-	:m_WindowsHIcon(icon),
-	 m_WindowsHCursor(hInstance,cursor),
-	 m_WindowsHBrushPtr(CreateWindowsHBrushPtr(background))
+	::WindowPictorialImpl(HInstance instance, const TChar* icon, int cursor, WindowBrushTypes background)
+	:m_WindowsHIcon{ icon }, m_WindowsHCursor{ instance, cursor }, m_WindowsHBrush{ CreateWindowsHBrush(background) }
+{
+	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+}
+
+Framework::WindowPictorialImpl
+	::WindowPictorialImpl(HInstance instance, bool isDefaultIcon, int icon, bool isDefaultCursor, int cursor, WindowBrushTypes background)
+	:m_WindowsHIcon{ WindowHIcon::Create(instance,isDefaultIcon,icon) },
+	 m_WindowsHCursor{ WindowHCursor::Create(instance,isDefaultCursor,cursor) },
+	 m_WindowsHBrush{ CreateWindowsHBrush(background) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 // static
-Framework::WindowPictorialImpl::WindowHBrushPtr Framework::WindowPictorialImpl
-	::CreateWindowsHBrushPtr(System::WindowBrushTypes background)
+Framework::WindowPictorialImpl::WindowHBrushUniquePtr Framework::WindowPictorialImpl
+	::CreateWindowsHBrush(WindowBrushTypes background)
 {
-	if(background != System::WindowBrushTypes::Null)
-		return WindowHBrushPtr(new WindowHBrush(background));
+	if (background != WindowBrushTypes::Null)
+		return make_unique<WindowHBrush>(background);
 	else
-		return WindowHBrushPtr();
+		return nullptr;
 }
 
- 
-CLASS_INVARIANT_STUB_DEFINE(Framework,WindowPictorialImpl)
- 
+CLASS_INVARIANT_STUB_DEFINE(Framework, WindowPictorialImpl)
 
 System::WindowHIcon Framework::WindowPictorialImpl
-    ::GetHIcon() const
+	::GetHIcon() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
 	return m_WindowsHIcon.GetHIcon();
 }
 
 System::WindowHCursor Framework::WindowPictorialImpl
-	::GetHCursor() const
+	::GetHCursor() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
 	return m_WindowsHCursor.GetHCursor();
 }
 
 System::WindowHBrush Framework::WindowPictorialImpl
-	::GetHBrush() const
+	::GetHBrush() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	if(m_WindowsHBrushPtr != nullptr &&  m_WindowsHBrushPtr != WindowHBrushPtr())
-		return m_WindowsHBrushPtr->GetHBrush();
+	if (m_WindowsHBrush != nullptr)
+		return m_WindowsHBrush->GetHBrush();
 	else
 		return nullptr;
 }
-
  

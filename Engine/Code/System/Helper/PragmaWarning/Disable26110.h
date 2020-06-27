@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.2 (2020/02/16 22:05)
+// 引擎版本：0.2.0.0 (2020/05/08 19:19)
 
 // 调用函数ReleaseSRWLockExclusive之前，调用者未能持有锁slimReaderWriterLock。
 

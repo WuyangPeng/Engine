@@ -703,613 +703,613 @@ extern "C"
 void System
 	::GLAccum(GLenum operation, GLfloat value) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glAccum, operation, value);
+	SYSTEM_PREVIOUSLY_BODY_2(glAccum, operation, value);
 }
 
 void System
 	::GLAlphaFunc(GLenum function, GLclampf reference) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glAlphaFunc, function, reference);
+	SYSTEM_PREVIOUSLY_BODY_2(glAlphaFunc, function, reference);
 }
 
 GLboolean System
 	::GLAreTexturesResident(GLsizei numTextures, const GLuint* textures, GLboolean* residences) noexcept
 {
-	SYSTEM_PRE_BODY_A3_RESULT(glAreTexturesResident, numTextures, textures, residences, GLboolean);
+	SYSTEM_PREVIOUSLY_BODY_3_RESULT(glAreTexturesResident, numTextures, textures, residences, GLboolean);
 }
 
 void System
 	::GLArrayElement(GLint i) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glArrayElement, i);
+	SYSTEM_PREVIOUSLY_BODY_1(glArrayElement, i);
 }
 
 void System
 	::GLBegin(GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glBegin, mode);
+	SYSTEM_PREVIOUSLY_BODY_1(glBegin, mode);
 }
 
 void System
 	::GLBindTexture(GLenum target, GLuint texture) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glBindTexture, target, texture);
+	SYSTEM_PREVIOUSLY_BODY_2(glBindTexture, target, texture);
 }
 
 void System
 	::GLBitmap(GLsizei width, GLsizei height, GLfloat xOrigin, GLfloat yOrigin, GLfloat xMove, GLfloat yMove, const GLubyte* bitmap) noexcept
 {
-	SYSTEM_PRE_BODY_A7(glBitmap, width, height, xOrigin, yOrigin, xMove, yMove, bitmap);
+	SYSTEM_PREVIOUSLY_BODY_7(glBitmap, width, height, xOrigin, yOrigin, xMove, yMove, bitmap);
 }
 
 void System
 	::GLBlendFunc(GLenum srcFunction, GLenum dstFunction) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glBlendFunc, srcFunction, dstFunction);
+	SYSTEM_PREVIOUSLY_BODY_2(glBlendFunc, srcFunction, dstFunction);
 }
 
 void System
 	::GLCallList(GLuint callList) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glCallList, callList);
+	SYSTEM_PREVIOUSLY_BODY_1(glCallList, callList);
 }
 
 void System
 	::GLCallLists(GLsizei numLists, GLenum type, const GLvoid* listsPtr) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glCallLists, numLists, type, listsPtr);
+	SYSTEM_PREVIOUSLY_BODY_3(glCallLists, numLists, type, listsPtr);
 }
 
 void System
 	::GLClear(GLbitfield mask) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glClear, mask);
+	SYSTEM_PREVIOUSLY_BODY_1(glClear, mask);
 }
 
 void System
 	::GLClearAccum(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glClearAccum, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glClearAccum, red, green, blue, alpha);
 }
 
 void System
 	::GLClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glClearColor, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glClearColor, red, green, blue, alpha);
 }
 
 void System
 	::GLClearDepth(GLclampd depth) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glClearDepth, depth);
+	SYSTEM_PREVIOUSLY_BODY_1(glClearDepth, depth);
 }
 
 void System
 	::GLClearIndex(GLfloat index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glClearIndex, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glClearIndex, index);
 }
 
 void System
 	::GLClearStencil(GLint stencil) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glClearStencil, stencil);
+	SYSTEM_PREVIOUSLY_BODY_1(glClearStencil, stencil);
 }
 
 void System
 	::GLClipPlane(GLenum plane, const GLdouble* equation) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glClipPlane, plane, equation);
+	SYSTEM_PREVIOUSLY_BODY_2(glClipPlane, plane, equation);
 }
 
 void System
 	::GLColor3b(GLbyte red, GLbyte green, GLbyte blue) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glColor3b, red, green, blue);
+	SYSTEM_PREVIOUSLY_BODY_3(glColor3b, red, green, blue);
 }
 
 void System
 	::GLColor3bv(const GLbyte* rgb) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor3bv, rgb);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor3bv, rgb);
 }
 
 void System
 	::GLColor3d(GLdouble red, GLdouble green, GLdouble blue) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glColor3d, red, green, blue);
+	SYSTEM_PREVIOUSLY_BODY_3(glColor3d, red, green, blue);
 }
 
 void System
 	::GLColor3dv(const GLdouble* rgb) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor3dv, rgb);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor3dv, rgb);
 }
 
 void System
 	::GLColor3f(GLfloat red, GLfloat green, GLfloat blue) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glColor3f, red, green, blue);
+	SYSTEM_PREVIOUSLY_BODY_3(glColor3f, red, green, blue);
 }
 
 void System
 	::GLColor3fv(const GLfloat* rgb) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor3fv, rgb);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor3fv, rgb);
 }
 
 void System
 	::GLColor3i(GLint red, GLint green, GLint blue) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glColor3i, red, green, blue);
+	SYSTEM_PREVIOUSLY_BODY_3(glColor3i, red, green, blue);
 }
 
 void System
 	::GLColor3iv(const GLint* rgb) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor3iv, rgb);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor3iv, rgb);
 }
 
 void System
 	::GLColor3s(GLshort red, GLshort green, GLshort blue) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glColor3s, red, green, blue);
+	SYSTEM_PREVIOUSLY_BODY_3(glColor3s, red, green, blue);
 }
 
 void System
 	::GLColor3sv(const GLshort* asColor) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor3sv, asColor);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor3sv, asColor);
 }
 
 void System
 	::GLColor3ub(GLubyte red, GLubyte green, GLubyte blue) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glColor3ub, red, green, blue);
+	SYSTEM_PREVIOUSLY_BODY_3(glColor3ub, red, green, blue);
 }
 
 void System
 	::GLColor3ubv(const GLubyte* rgb) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor3ubv, rgb);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor3ubv, rgb);
 }
 
 void System
 	::GLColor3ui(GLuint red, GLuint green, GLuint blue) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glColor3ui, red, green, blue);
+	SYSTEM_PREVIOUSLY_BODY_3(glColor3ui, red, green, blue);
 }
 
 void System
 	::GLColor3uiv(const GLuint* rgb) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor3uiv, rgb);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor3uiv, rgb);
 }
 
 void System
 	::GLColor3us(GLushort red, GLushort green, GLushort blue) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glColor3us, red, green, blue);
+	SYSTEM_PREVIOUSLY_BODY_3(glColor3us, red, green, blue);
 }
 
 void System
 	::GLColor3usv(const GLushort* rgb) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor3usv, rgb);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor3usv, rgb);
 }
 
 void System
 	::GLColor4b(GLbyte red, GLbyte green, GLbyte blue, GLbyte alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColor4b, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColor4b, red, green, blue, alpha);
 }
 
 void System
 	::GLColor4bv(const GLbyte* rgba) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor4bv, rgba);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor4bv, rgba);
 }
 
 void System
 	::GLColor4d(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColor4d, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColor4d, red, green, blue, alpha);
 }
 
 void System
 	::GLColor4dv(const GLdouble* rgba) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor4dv, rgba);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor4dv, rgba);
 }
 
 void System
 	::GLColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColor4f, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColor4f, red, green, blue, alpha);
 }
 
 void System
 	::GLColor4fv(const GLfloat* rgba) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor4fv, rgba);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor4fv, rgba);
 }
 
 void System
 	::GLColor4i(GLint red, GLint green, GLint blue, GLint alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColor4i, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColor4i, red, green, blue, alpha);
 }
 
 void System
 	::GLColor4iv(const GLint* rgba) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor4iv, rgba);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor4iv, rgba);
 }
 
 void System
 	::GLColor4s(GLshort red, GLshort green, GLshort blue, GLshort alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColor4s, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColor4s, red, green, blue, alpha);
 }
 
 void System
 	::GLColor4sv(const GLshort* rgba) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor4sv, rgba);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor4sv, rgba);
 }
 
 void System
 	::GLColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColor4ub, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColor4ub, red, green, blue, alpha);
 }
 
 void System
 	::GLColor4ubv(const GLubyte* rgba) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor4ubv, rgba);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor4ubv, rgba);
 }
 
 void System
 	::GLColor4ui(GLuint red, GLuint green, GLuint blue, GLuint alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColor4ui, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColor4ui, red, green, blue, alpha);
 }
 
 void System
 	::GLColor4uiv(const GLuint* rgba) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor4uiv, rgba);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor4uiv, rgba);
 }
 
 void System
 	::GLColor4us(GLushort red, GLushort green, GLushort blue, GLushort alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColor4us, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColor4us, red, green, blue, alpha);
 }
 
 void System
 	::GLColor4usv(const GLushort* rgba) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glColor4usv, rgba);
+	SYSTEM_PREVIOUSLY_BODY_1(glColor4usv, rgba);
 }
 
 void System
 	::GLColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColorMask, red, green, blue, alpha);
+	SYSTEM_PREVIOUSLY_BODY_4(glColorMask, red, green, blue, alpha);
 }
 
 void System
 	::GLColorMaterial(GLenum face, GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glColorMaterial, face, mode);
+	SYSTEM_PREVIOUSLY_BODY_2(glColorMaterial, face, mode);
 }
 
 void System
 	::GLColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glColorPointer, size, type, stride, pointer);
+	SYSTEM_PREVIOUSLY_BODY_4(glColorPointer, size, type, stride, pointer);
 }
 
 void System
 	::GLCopyPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum type) noexcept
 {
-	SYSTEM_PRE_BODY_A5(glCopyPixels, x, y, width, height, type);
+	SYSTEM_PREVIOUSLY_BODY_5(glCopyPixels, x, y, width, height, type);
 }
 
 void System
 	::GLCopyTexImage1D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLint border) noexcept
 {
-	SYSTEM_PRE_BODY_A7(glCopyTexImage1D, target, level, internalFormat, x, y, width, border);
+	SYSTEM_PREVIOUSLY_BODY_7(glCopyTexImage1D, target, level, internalFormat, x, y, width, border);
 }
 
 void System
 	::GLCopyTexImage2D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) noexcept
 {
-	SYSTEM_PRE_BODY_A8(glCopyTexImage2D, target, level, internalFormat, x, y, width, height, border);
+	SYSTEM_PREVIOUSLY_BODY_8(glCopyTexImage2D, target, level, internalFormat, x, y, width, height, border);
 }
 
 void System
 	::GLCopyTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_PRE_BODY_A6(glCopyTexSubImage1D, target, level, xOffset, x, y, width);
+	SYSTEM_PREVIOUSLY_BODY_6(glCopyTexSubImage1D, target, level, xOffset, x, y, width);
 }
 
 void System
 	::GLCopyTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_PRE_BODY_A8(glCopyTexSubImage2D, target, level, xOffset, yOffset, x, y, width, height);
+	SYSTEM_PREVIOUSLY_BODY_8(glCopyTexSubImage2D, target, level, xOffset, yOffset, x, y, width, height);
 }
 
 void System
 	::GLCullFace(GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glCullFace, mode);
+	SYSTEM_PREVIOUSLY_BODY_1(glCullFace, mode);
 }
 
 void System
 	::GLDeleteLists(GLuint callList, GLsizei range) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glDeleteLists, callList, range);
+	SYSTEM_PREVIOUSLY_BODY_2(glDeleteLists, callList, range);
 }
 
 void System
 	::GLDeleteTextures(GLsizei numTextures, const GLuint* textures) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glDeleteTextures, numTextures, textures);
+	SYSTEM_PREVIOUSLY_BODY_2(glDeleteTextures, numTextures, textures);
 }
 
 void System
 	::GLDepthFunc(GLenum function) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glDepthFunc, function);
+	SYSTEM_PREVIOUSLY_BODY_1(glDepthFunc, function);
 }
 
 void System
 	::GLDepthMask(GLboolean mask) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glDepthMask, mask);
+	SYSTEM_PREVIOUSLY_BODY_1(glDepthMask, mask);
 }
 
 void System
 	::GLDepthRange(GLclampd near, GLclampd far) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glDepthRange, near, far);
+	SYSTEM_PREVIOUSLY_BODY_2(glDepthRange, near, far);
 }
 
 void System
 	::GLDisable(GLenum capability) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glDisable, capability);
+	SYSTEM_PREVIOUSLY_BODY_1(glDisable, capability);
 }
 
 void System
 	::GLDisableClientState(GLenum glArray) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glDisableClientState, glArray);
+	SYSTEM_PREVIOUSLY_BODY_1(glDisableClientState, glArray);
 }
 
 void System
 	::GLDrawArrays(GLenum mode, GLint first, GLsizei count) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glDrawArrays, mode, first, count);
+	SYSTEM_PREVIOUSLY_BODY_3(glDrawArrays, mode, first, count);
 }
 
 void System
 	::GLDrawBuffer(GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glDrawBuffer, mode);
+	SYSTEM_PREVIOUSLY_BODY_1(glDrawBuffer, mode);
 }
 
 void System
 	::GLDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid* indices) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glDrawElements, mode, count, type, indices);
+	SYSTEM_PREVIOUSLY_BODY_4(glDrawElements, mode, count, type, indices);
 }
 
 void System
 	::GLDrawPixels(GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels) noexcept
 {
-	SYSTEM_PRE_BODY_A5(glDrawPixels, width, height, format, type, pixels);
+	SYSTEM_PREVIOUSLY_BODY_5(glDrawPixels, width, height, format, type, pixels);
 }
 
 void System
 	::GLEdgeFlag(GLboolean flag) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEdgeFlag, flag);
+	SYSTEM_PREVIOUSLY_BODY_1(glEdgeFlag, flag);
 }
 
 void System
 	::GLEdgeFlagv(const GLboolean* flag) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEdgeFlagv, flag);
+	SYSTEM_PREVIOUSLY_BODY_1(glEdgeFlagv, flag);
 }
 
 void System
 	::GLEdgeFlagPointer(GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glEdgeFlagPointer, stride, pointer);
+	SYSTEM_PREVIOUSLY_BODY_2(glEdgeFlagPointer, stride, pointer);
 }
 
 void System
 	::GLEnable(GLenum capability) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEnable, capability);
+	SYSTEM_PREVIOUSLY_BODY_1(glEnable, capability);
 }
 
 void System
 	::GLEnableClientState(GLenum glArray) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEnableClientState, glArray);
+	SYSTEM_PREVIOUSLY_BODY_1(glEnableClientState, glArray);
 }
 
 void System
 	::GLEnd() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glEnd);
+	SYSTEM_PREVIOUSLY_BODY_0(glEnd);
 }
 
 void System
 	::GLEndList() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glEndList);
+	SYSTEM_PREVIOUSLY_BODY_0(glEndList);
 }
 
 void System
 	::GLEvalCoord1f(GLfloat u) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEvalCoord1f, u);
+	SYSTEM_PREVIOUSLY_BODY_1(glEvalCoord1f, u);
 }
 
 void System
 	::GLEvalCoord1fv(const GLfloat* u) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEvalCoord1fv, u);
+	SYSTEM_PREVIOUSLY_BODY_1(glEvalCoord1fv, u);
 }
 
 void System
 	::GLEvalCoord1d(GLdouble u) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEvalCoord1d, u);
+	SYSTEM_PREVIOUSLY_BODY_1(glEvalCoord1d, u);
 }
 
 void System
 	::GLEvalCoord1dv(const GLdouble* u) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEvalCoord1dv, u);
+	SYSTEM_PREVIOUSLY_BODY_1(glEvalCoord1dv, u);
 }
 
 void System
 	::GLEvalCoord2f(GLfloat u, GLfloat v) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glEvalCoord2f, u, v);
+	SYSTEM_PREVIOUSLY_BODY_2(glEvalCoord2f, u, v);
 }
 
 void System
 	::GLEvalCoord2fv(const GLfloat* v) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEvalCoord2fv, v);
+	SYSTEM_PREVIOUSLY_BODY_1(glEvalCoord2fv, v);
 }
 
 void System
 	::GLEvalCoord2d(GLdouble u, GLdouble v) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glEvalCoord2d, u, v);
+	SYSTEM_PREVIOUSLY_BODY_2(glEvalCoord2d, u, v);
 }
 
 void System
 	::GLEvalCoord2dv(const GLdouble* v) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEvalCoord2dv, v);
+	SYSTEM_PREVIOUSLY_BODY_1(glEvalCoord2dv, v);
 }
 
 void System
 	::GLEvalMesh1(GLenum mode, GLint i1, GLint i2) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glEvalMesh1, mode, i1, i2);
+	SYSTEM_PREVIOUSLY_BODY_3(glEvalMesh1, mode, i1, i2);
 }
 
 void System
 	::GLEvalMesh2(GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2) noexcept
 {
-	SYSTEM_PRE_BODY_A5(glEvalMesh2, mode, i1, i2, j1, j2);
+	SYSTEM_PREVIOUSLY_BODY_5(glEvalMesh2, mode, i1, i2, j1, j2);
 }
 
 void System
 	::GLEvalPoint1(GLint i) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glEvalPoint1, i);
+	SYSTEM_PREVIOUSLY_BODY_1(glEvalPoint1, i);
 }
 
 void System
 	::GLEvalPoint2(GLint i, GLint j) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glEvalPoint2, i, j);
+	SYSTEM_PREVIOUSLY_BODY_2(glEvalPoint2, i, j);
 }
 
 void System
 	::GLFeedbackBuffer(GLsizei size, GLenum type, GLfloat* buffer) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glFeedbackBuffer, size, type, buffer);
+	SYSTEM_PREVIOUSLY_BODY_3(glFeedbackBuffer, size, type, buffer);
 }
 
 void System
 	::GLFinish() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glFinish);
+	SYSTEM_PREVIOUSLY_BODY_0(glFinish);
 }
 
 void System
 	::GLFlush() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glFlush);
+	SYSTEM_PREVIOUSLY_BODY_0(glFlush);
 }
 
 void System
 	::GLFogf(GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glFogf, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glFogf, name, param);
 }
 
 void System
 	::GLFogfv(GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glFogfv, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glFogfv, name, param);
 }
 
 void System
 	::GLFogi(GLenum name, GLint param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glFogi, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glFogi, name, param);
 }
 
 void System
 	::GLFogiv(GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glFogiv, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glFogiv, name, param);
 }
 
 void System
 	::GLFrontFace(GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glFrontFace, mode);
+	SYSTEM_PREVIOUSLY_BODY_1(glFrontFace, mode);
 }
 
 void System
 	::GLFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble near, GLdouble far) noexcept
 {
-	SYSTEM_PRE_BODY_A6(glFrustum, left, right, bottom, top, near, far);
+	SYSTEM_PREVIOUSLY_BODY_6(glFrustum, left, right, bottom, top, near, far);
 }
 
 GLuint System
 	::GLGenLists(GLsizei range) noexcept
 {
-	SYSTEM_PRE_BODY_A1_RESULT(glGenLists, range, GLuint);
+	SYSTEM_PREVIOUSLY_BODY_1_RESULT(glGenLists, range, GLuint);
 }
 
 void System
 	::GLGenTextures(GLsizei numTextures, GLuint* texture) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGenTextures, numTextures, texture);
+	SYSTEM_PREVIOUSLY_BODY_2(glGenTextures, numTextures, texture);
 }
 
 void System
 	::GLGetBooleanv(GLenum name, GLboolean* param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetBooleanv, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetBooleanv, name, param);
 }
 
 void System
 	::GLGetClipPlane(GLenum plane, GLdouble* equation) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetClipPlane, plane, equation);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetClipPlane, plane, equation);
 }
 
 void System
 	::GLGetDoublev(GLenum name, GLdouble* param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetDoublev, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetDoublev, name, param);
 }
 
 GLenum System
@@ -1321,1397 +1321,1397 @@ GLenum System
 void System
 	::GLGetFloatv(GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetFloatv, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetFloatv, name, param);
 }
 
 void System
 	::GLGetIntegerv(GLenum name, GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetIntegerv, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetIntegerv, name, param);
 }
 
 void System
 	::GLGetLightfv(GLenum light, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetLightfv, light, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetLightfv, light, name, param);
 }
 
 void System
 	::GLGetLightiv(GLenum light, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetLightiv, light, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetLightiv, light, name, param);
 }
 
 void System
 	::GLGetMapdv(GLenum target, GLenum query, GLdouble* value) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetMapdv, target, query, value);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetMapdv, target, query, value);
 }
 
 void System
 	::GLGetMapfv(GLenum target, GLenum query, GLfloat* value) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetMapfv, target, query, value);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetMapfv, target, query, value);
 }
 
 void System
 	::GLGetMapiv(GLenum target, GLenum query, GLint* value) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetMapiv, target, query, value);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetMapiv, target, query, value);
 }
 
 void System
 	::GLGetMaterialfv(GLenum face, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetMaterialfv, face, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetMaterialfv, face, name, param);
 }
 
 void System
 	::GLGetMaterialiv(GLenum face, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetMaterialiv, face, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetMaterialiv, face, name, param);
 }
 
 void System
 	::GLGetPixelMapfv(GLenum pixelMap, GLfloat* value) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetPixelMapfv, pixelMap, value);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetPixelMapfv, pixelMap, value);
 }
 
 void System
 	::GLGetPixelMapuiv(GLenum pixelMap, GLuint* value) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetPixelMapuiv, pixelMap, value);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetPixelMapuiv, pixelMap, value);
 }
 
 void System
 	::GLGetPixelMapusv(GLenum pixelMap, GLushort* value) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetPixelMapusv, pixelMap, value);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetPixelMapusv, pixelMap, value);
 }
 
 void System
 	::GLGetPointerv(GLenum name, GLvoid** param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glGetPointerv, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glGetPointerv, name, param);
 }
 
 void System
 	::GLGetPolygonStipple(GLubyte* pattern) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glGetPolygonStipple, pattern);
+	SYSTEM_PREVIOUSLY_BODY_1(glGetPolygonStipple, pattern);
 }
 
 const GLubyte* System
 	::GLGetString(GLenum name) noexcept
 {
-	SYSTEM_PRE_BODY_A1_RESULT(glGetString, name, const GLubyte*);
+	SYSTEM_PREVIOUSLY_BODY_1_RESULT(glGetString, name, const GLubyte*);
 }
 
 void System
 	::GLGetTexEnvfv(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetTexEnvfv, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetTexEnvfv, target, name, param);
 }
 
 void System
 	::GLGetTexEnviv(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetTexEnviv, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetTexEnviv, target, name, param);
 }
 
 void System
 	::GLGetTexGendv(GLenum coord, GLenum name, GLdouble* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetTexGendv, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetTexGendv, coord, name, param);
 }
 
 void System
 	::GLGetTexGenfv(GLenum coord, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetTexGenfv, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetTexGenfv, coord, name, param);
 }
 
 void System
 	::GLGetTexGeniv(GLenum coord, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetTexGeniv, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetTexGeniv, coord, name, param);
 }
 
 void System
 	::GLGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, GLvoid* pixels) noexcept
 {
-	SYSTEM_PRE_BODY_A5(glGetTexImage, target, level, format, type, pixels);
+	SYSTEM_PREVIOUSLY_BODY_5(glGetTexImage, target, level, format, type, pixels);
 }
 
 void System
 	::GLGetTexLevelParameterfv(GLenum target, GLint level, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glGetTexLevelParameterfv, target, level, name, param);
+	SYSTEM_PREVIOUSLY_BODY_4(glGetTexLevelParameterfv, target, level, name, param);
 }
 
 void System
 	::GLGetTexLevelParameteriv(GLenum target, GLint level, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glGetTexLevelParameteriv, target, level, name, param);
+	SYSTEM_PREVIOUSLY_BODY_4(glGetTexLevelParameteriv, target, level, name, param);
 }
 
 void System
 	::GLGetTexParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetTexParameterfv, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetTexParameterfv, target, name, param);
 }
 
 void System
 	::GLGetTexParameteriv(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glGetTexParameteriv, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glGetTexParameteriv, target, name, param);
 }
 
 void System
 	::GLHint(GLenum target, GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glHint, target, mode);
+	SYSTEM_PREVIOUSLY_BODY_2(glHint, target, mode);
 }
 
 void System
 	::GLIndexMask(GLuint mask) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexMask, mask);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexMask, mask);
 }
 
 void System
 	::GLIndexPointer(GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glIndexPointer, type, stride, pointer);
+	SYSTEM_PREVIOUSLY_BODY_3(glIndexPointer, type, stride, pointer);
 }
 
 void System
 	::GLIndexd(GLdouble index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexd, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexd, index);
 }
 
 void System
 	::GLIndexdv(const GLdouble* index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexdv, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexdv, index);
 }
 
 void System
 	::GLIndexf(GLfloat index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexf, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexf, index);
 }
 
 void System
 	::GLIndexfv(const GLfloat* index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexfv, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexfv, index);
 }
 
 void System
 	::GLIndexi(GLint index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexi, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexi, index);
 }
 
 void System
 	::GLIndexiv(const GLint* index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexiv, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexiv, index);
 }
 
 void System
 	::GLIndexs(GLshort index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexs, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexs, index);
 }
 
 void System
 	::GLIndexsv(const GLshort* index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexsv, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexsv, index);
 }
 
 void System
 	::GLIndexub(GLubyte index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexub, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexub, index);
 }
 
 void System
 	::GLIndexubv(const GLubyte* index) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glIndexubv, index);
+	SYSTEM_PREVIOUSLY_BODY_1(glIndexubv, index);
 }
 
 void System
 	::GLInitNames() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glInitNames);
+	SYSTEM_PREVIOUSLY_BODY_0(glInitNames);
 }
 
 void System
 	::GLInterleavedArrays(GLenum format, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glInterleavedArrays, format, stride, pointer);
+	SYSTEM_PREVIOUSLY_BODY_3(glInterleavedArrays, format, stride, pointer);
 }
 
 GLboolean System
 	::GLIsEnabled(GLenum capability) noexcept
 {
-	SYSTEM_PRE_BODY_A1_RESULT(glIsEnabled, capability, GLboolean);
+	SYSTEM_PREVIOUSLY_BODY_1_RESULT(glIsEnabled, capability, GLboolean);
 }
 
 GLboolean System
 	::GLIsList(GLuint callList) noexcept
 {
-	SYSTEM_PRE_BODY_A1_RESULT(glIsList, callList, GLboolean);
+	SYSTEM_PREVIOUSLY_BODY_1_RESULT(glIsList, callList, GLboolean);
 }
 
 GLboolean System
 	::GLIsTexture(GLuint texture) noexcept
 {
-	SYSTEM_PRE_BODY_A1_RESULT(glIsTexture, texture, GLboolean);
+	SYSTEM_PREVIOUSLY_BODY_1_RESULT(glIsTexture, texture, GLboolean);
 }
 
 void System
 	::GLLightModelf(GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glLightModelf, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glLightModelf, name, param);
 }
 
 void System
 	::GLLightModelfv(GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glLightModelfv, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glLightModelfv, name, param);
 }
 
 void System
 	::GLLightModeli(GLenum name, GLint param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glLightModeli, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glLightModeli, name, param);
 }
 
 void System
 	::GLLightModeliv(GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glLightModeliv, name, param);
+	SYSTEM_PREVIOUSLY_BODY_2(glLightModeliv, name, param);
 }
 
 void System
 	::GLLightf(GLenum light, GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glLightf, light, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glLightf, light, name, param);
 }
 
 void System
 	::GLLightfv(GLenum light, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glLightfv, light, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glLightfv, light, name, param);
 }
 
 void System
 	::GLLighti(GLenum light, GLenum name, GLint param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glLighti, light, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glLighti, light, name, param);
 }
 
 void System
 	::GLLightiv(GLenum light, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glLightiv, light, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glLightiv, light, name, param);
 }
 
 void System
 	::GLLineStipple(GLint factor, GLushort pattern) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glLineStipple, factor, pattern);
+	SYSTEM_PREVIOUSLY_BODY_2(glLineStipple, factor, pattern);
 }
 
 void System
 	::GLLineWidth(GLfloat width) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glLineWidth, width);
+	SYSTEM_PREVIOUSLY_BODY_1(glLineWidth, width);
 }
 
 void System
 	::GLListBase(GLuint base) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glListBase, base);
+	SYSTEM_PREVIOUSLY_BODY_1(glListBase, base);
 }
 
 void System
 	::GLLoadIdentity() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glLoadIdentity);
+	SYSTEM_PREVIOUSLY_BODY_0(glLoadIdentity);
 }
 
 void System
 	::GLLoadMatrixd(const GLdouble* matrix) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glLoadMatrixd, matrix);
+	SYSTEM_PREVIOUSLY_BODY_1(glLoadMatrixd, matrix);
 }
 
 void System
 	::GLLoadMatrixf(const GLfloat* matrix) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glLoadMatrixf, matrix);
+	SYSTEM_PREVIOUSLY_BODY_1(glLoadMatrixf, matrix);
 }
 
 void System
 	::GLLoadName(GLuint name) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glLoadName, name);
+	SYSTEM_PREVIOUSLY_BODY_1(glLoadName, name);
 }
 
 void System
 	::GLLogicOp(GLenum code) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glLogicOp, code);
+	SYSTEM_PREVIOUSLY_BODY_1(glLogicOp, code);
 }
 
 void System
 	::GLMap1d(GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble* points) noexcept
 {
-	SYSTEM_PRE_BODY_A6(glMap1d, target, u1, u2, stride, order, points);
+	SYSTEM_PREVIOUSLY_BODY_6(glMap1d, target, u1, u2, stride, order, points);
 }
 
 void System
 	::GLMap1f(GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat* points) noexcept
 {
-	SYSTEM_PRE_BODY_A6(glMap1f, target, u1, u2, stride, order, points);
+	SYSTEM_PREVIOUSLY_BODY_6(glMap1f, target, u1, u2, stride, order, points);
 }
 
 void System
 	::GLMap2d(GLenum target, GLdouble u1, GLdouble u2, GLint uStride, GLint uOrder, GLdouble v1, GLdouble v2, GLint vStride, GLint vOrder, const GLdouble* points) noexcept
 {
-	SYSTEM_PRE_BODY_A10(glMap2d, target, u1, u2, uStride, uOrder, v1, v2, vStride, vOrder, points);
+	SYSTEM_PREVIOUSLY_BODY_10(glMap2d, target, u1, u2, uStride, uOrder, v1, v2, vStride, vOrder, points);
 }
 
 void System
 	::GLMap2f(GLenum target, GLfloat u1, GLfloat u2, GLint uStride, GLint uOrder, GLfloat v1, GLfloat v2, GLint vStride, GLint vOrder, const GLfloat* points) noexcept
 {
-	SYSTEM_PRE_BODY_A10(glMap2f, target, u1, u2, uStride, uOrder, v1, v2, vStride, vOrder, points);
+	SYSTEM_PREVIOUSLY_BODY_10(glMap2f, target, u1, u2, uStride, uOrder, v1, v2, vStride, vOrder, points);
 }
 
 void System
 	::GLMapGrid1d(GLint numUPartitions, GLdouble u1, GLdouble u2) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glMapGrid1d, numUPartitions, u1, u2);
+	SYSTEM_PREVIOUSLY_BODY_3(glMapGrid1d, numUPartitions, u1, u2);
 }
 
 void System
 	::GLMapGrid1f(GLint numUPartitions, GLfloat u1, GLfloat u2) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glMapGrid1f, numUPartitions, u1, u2);
+	SYSTEM_PREVIOUSLY_BODY_3(glMapGrid1f, numUPartitions, u1, u2);
 }
 
 void System
 	::GLMapGrid2d(GLint numUPartitions, GLdouble u1, GLdouble u2, GLint numVPartitions, GLdouble v1, GLdouble v2) noexcept
 {
-	SYSTEM_PRE_BODY_A6(glMapGrid2d, numUPartitions, u1, u2, numVPartitions, v1, v2);
+	SYSTEM_PREVIOUSLY_BODY_6(glMapGrid2d, numUPartitions, u1, u2, numVPartitions, v1, v2);
 }
 
 void System
 	::GLMapGrid2f(GLint numUPartitions, GLfloat u1, GLfloat u2, GLint numVPartitions, GLfloat v1, GLfloat v2) noexcept
 {
-	SYSTEM_PRE_BODY_A6(glMapGrid2f, numUPartitions, u1, u2, numVPartitions, v1, v2);
+	SYSTEM_PREVIOUSLY_BODY_6(glMapGrid2f, numUPartitions, u1, u2, numVPartitions, v1, v2);
 }
 
 void System
 	::GLMaterialf(GLenum face, GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glMaterialf, face, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glMaterialf, face, name, param);
 }
 
 void System
 	::GLMaterialfv(GLenum face, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glMaterialfv, face, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glMaterialfv, face, name, param);
 }
 
 void System
 	::GLMateriali(GLenum face, GLenum name, GLint param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glMateriali, face, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glMateriali, face, name, param);
 }
 
 void System
 	::GLMaterialiv(GLenum face, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glMaterialiv, face, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glMaterialiv, face, name, param);
 }
 
 void System
 	::GLMatrixMode(GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glMatrixMode, mode);
+	SYSTEM_PREVIOUSLY_BODY_1(glMatrixMode, mode);
 }
 
 void System
 	::GLMultMatrixd(const GLdouble* matrix) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glMultMatrixd, matrix);
+	SYSTEM_PREVIOUSLY_BODY_1(glMultMatrixd, matrix);
 }
 
 void System
 	::GLMultMatrixf(const GLfloat* matrix) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glMultMatrixf, matrix);
+	SYSTEM_PREVIOUSLY_BODY_1(glMultMatrixf, matrix);
 }
 
 void System
 	::GLNewList(GLuint callList, GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glNewList, callList, mode);
+	SYSTEM_PREVIOUSLY_BODY_2(glNewList, callList, mode);
 }
 
 void System
 	::GLNormal3b(GLbyte bX, GLbyte bY, GLbyte bZ) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glNormal3b, bX, bY, bZ);
+	SYSTEM_PREVIOUSLY_BODY_3(glNormal3b, bX, bY, bZ);
 }
 
 void System
 	::GLNormal3bv(const GLbyte* abXYZ) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glNormal3bv, abXYZ);
+	SYSTEM_PREVIOUSLY_BODY_1(glNormal3bv, abXYZ);
 }
 
 void System
 	::GLNormal3d(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glNormal3d, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glNormal3d, x, y, z);
 }
 
 void System
 	::GLNormal3dv(const GLdouble* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glNormal3dv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glNormal3dv, xyz);
 }
 
 void System
 	::GLNormal3f(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glNormal3f, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glNormal3f, x, y, z);
 }
 
 void System
 	::GLNormal3fv(const GLfloat* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glNormal3fv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glNormal3fv, xyz);
 }
 
 void System
 	::GLNormal3i(GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glNormal3i, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glNormal3i, x, y, z);
 }
 
 void System
 	::GLNormal3iv(const GLint* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glNormal3iv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glNormal3iv, xyz);
 }
 
 void System
 	::GLNormal3s(GLshort x, GLshort y, GLshort z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glNormal3s, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glNormal3s, x, y, z);
 }
 
 void System
 	::GLNormal3sv(const GLshort* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glNormal3sv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glNormal3sv, xyz);
 }
 
 void System
 	::GLNormalPointer(GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glNormalPointer, type, stride, pointer);
+	SYSTEM_PREVIOUSLY_BODY_3(glNormalPointer, type, stride, pointer);
 }
 
 void System
 	::GLOrtho(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble near, GLdouble far) noexcept
 {
-	SYSTEM_PRE_BODY_A6(glOrtho, left, right, bottom, top, near, far);
+	SYSTEM_PREVIOUSLY_BODY_6(glOrtho, left, right, bottom, top, near, far);
 }
 
 void System
 	::GLPassThrough(GLfloat token) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glPassThrough, token);
+	SYSTEM_PREVIOUSLY_BODY_1(glPassThrough, token);
 }
 
 void System
 	::GLPixelMapfv(GLenum pixelMap, GLsizei size, const GLfloat* value) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glPixelMapfv, pixelMap, size, value);
+	SYSTEM_PREVIOUSLY_BODY_3(glPixelMapfv, pixelMap, size, value);
 }
 
 void System
 	::GLPixelMapuiv(GLenum pixelMap, GLsizei size, const GLuint* value) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glPixelMapuiv, pixelMap, size, value);
+	SYSTEM_PREVIOUSLY_BODY_3(glPixelMapuiv, pixelMap, size, value);
 }
 
 void System
 	::GLPixelMapusv(GLenum pixelMap, GLsizei size, const GLushort* value) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glPixelMapusv, pixelMap, size, value);
+	SYSTEM_PREVIOUSLY_BODY_3(glPixelMapusv, pixelMap, size, value);
 }
 
 void System
 	::GLPixelStoref(GLenum name, GLfloat value) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glPixelStoref, name, value);
+	SYSTEM_PREVIOUSLY_BODY_2(glPixelStoref, name, value);
 }
 
 void System
 	::GLPixelStorei(GLenum name, GLint value) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glPixelStorei, name, value);
+	SYSTEM_PREVIOUSLY_BODY_2(glPixelStorei, name, value);
 }
 
 void System
 	::GLPixelTransferf(GLenum name, GLfloat value) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glPixelTransferf, name, value);
+	SYSTEM_PREVIOUSLY_BODY_2(glPixelTransferf, name, value);
 }
 
 void System
 	::GLPixelTransferi(GLenum name, GLint value) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glPixelTransferi, name, value);
+	SYSTEM_PREVIOUSLY_BODY_2(glPixelTransferi, name, value);
 }
 
 void System
 	::GLPixelZoom(GLfloat xFactor, GLfloat yFactor) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glPixelZoom, xFactor, yFactor);
+	SYSTEM_PREVIOUSLY_BODY_2(glPixelZoom, xFactor, yFactor);
 }
 
 void System
 	::GLPointSize(GLfloat size) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glPointSize, size);
+	SYSTEM_PREVIOUSLY_BODY_1(glPointSize, size);
 }
 
 void System
 	::GLPolygonMode(GLenum face, GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glPolygonMode, face, mode);
+	SYSTEM_PREVIOUSLY_BODY_2(glPolygonMode, face, mode);
 }
 
 void System
 	::GLPolygonOffset(GLfloat scale, GLfloat bias) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glPolygonOffset, scale, bias);
+	SYSTEM_PREVIOUSLY_BODY_2(glPolygonOffset, scale, bias);
 }
 
 void System
 	::GLPolygonStipple(const GLubyte* amask) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glPolygonStipple, amask);
+	SYSTEM_PREVIOUSLY_BODY_1(glPolygonStipple, amask);
 }
 
 void System
 	::GLPopAttrib() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glPopAttrib);
+	SYSTEM_PREVIOUSLY_BODY_0(glPopAttrib);
 }
 
 void System
 	::GLPopClientAttrib() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glPopClientAttrib);
+	SYSTEM_PREVIOUSLY_BODY_0(glPopClientAttrib);
 }
 
 void System
 	::GLPopMatrix() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glPopMatrix);
+	SYSTEM_PREVIOUSLY_BODY_0(glPopMatrix);
 }
 
 void System
 	::GLPopName() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glPopName);
+	SYSTEM_PREVIOUSLY_BODY_0(glPopName);
 }
 
 void System
 	::GLPrioritizeTextures(GLsizei numTextures, const GLuint* textures, const GLclampf* priorities) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glPrioritizeTextures, numTextures, textures, priorities);
+	SYSTEM_PREVIOUSLY_BODY_3(glPrioritizeTextures, numTextures, textures, priorities);
 }
 
 void System
 	::GLPushAttrib(GLbitfield mask) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glPushAttrib, mask);
+	SYSTEM_PREVIOUSLY_BODY_1(glPushAttrib, mask);
 }
 
 void System
 	::GLPushClientAttrib(GLbitfield mask) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glPushClientAttrib, mask);
+	SYSTEM_PREVIOUSLY_BODY_1(glPushClientAttrib, mask);
 }
 
 void System
 	::GLPushMatrix() noexcept
 {
-	SYSTEM_PRE_BODY_A0(glPushMatrix);
+	SYSTEM_PREVIOUSLY_BODY_0(glPushMatrix);
 }
 
 void System
 	::GLPushName(GLuint name) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glPushName, name);
+	SYSTEM_PREVIOUSLY_BODY_1(glPushName, name);
 }
 
 void System
 	::GLRasterPos2d(GLdouble x, GLdouble y) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glRasterPos2d, x, y);
+	SYSTEM_PREVIOUSLY_BODY_2(glRasterPos2d, x, y);
 }
 
 void System
 	::GLRasterPos2dv(const GLdouble* xy) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos2dv, xy);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos2dv, xy);
 }
 
 void System
 	::GLRasterPos2f(GLfloat x, GLfloat y) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glRasterPos2f, x, y);
+	SYSTEM_PREVIOUSLY_BODY_2(glRasterPos2f, x, y);
 }
 
 void System
 	::GLRasterPos2fv(const GLfloat* xy) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos2fv, xy);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos2fv, xy);
 }
 
 void System
 	::GLRasterPos2i(GLint x, GLint y) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glRasterPos2i, x, y);
+	SYSTEM_PREVIOUSLY_BODY_2(glRasterPos2i, x, y);
 }
 
 void System
 	::GLRasterPos2iv(const GLint* xy) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos2iv, xy);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos2iv, xy);
 }
 
 void System
 	::GLRasterPos2s(GLshort x, GLshort y) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glRasterPos2s, x, y);
+	SYSTEM_PREVIOUSLY_BODY_2(glRasterPos2s, x, y);
 }
 
 void System
 	::GLRasterPos2sv(const GLshort* xy) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos2sv, xy);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos2sv, xy);
 }
 
 void System
 	::GLRasterPos3d(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glRasterPos3d, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glRasterPos3d, x, y, z);
 }
 
 void System
 	::GLRasterPos3dv(const GLdouble* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos3dv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos3dv, xyz);
 }
 
 void System
 	::GLRasterPos3f(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glRasterPos3f, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glRasterPos3f, x, y, z);
 }
 
 void System
 	::GLRasterPos3fv(const GLfloat* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos3fv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos3fv, xyz);
 }
 
 void System
 	::GLRasterPos3i(GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glRasterPos3i, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glRasterPos3i, x, y, z);
 }
 
 void System
 	::GLRasterPos3iv(const GLint* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos3iv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos3iv, xyz);
 }
 
 void System
 	::GLRasterPos3s(GLshort x, GLshort y, GLshort z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glRasterPos3s, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glRasterPos3s, x, y, z);
 }
 
 void System
 	::GLRasterPos3sv(const GLshort* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos3sv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos3sv, xyz);
 }
 
 void System
 	::GLRasterPos4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRasterPos4d, x, y, z, w);
+	SYSTEM_PREVIOUSLY_BODY_4(glRasterPos4d, x, y, z, w);
 }
 
 void System
 	::GLRasterPos4dv(const GLdouble* xyzw) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos4dv, xyzw);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos4dv, xyzw);
 }
 
 void System
 	::GLRasterPos4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRasterPos4f, x, y, z, w);
+	SYSTEM_PREVIOUSLY_BODY_4(glRasterPos4f, x, y, z, w);
 }
 
 void System
 	::GLRasterPos4fv(const GLfloat* xyzw) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos4fv, xyzw);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos4fv, xyzw);
 }
 
 void System
 	::GLRasterPos4i(GLint x, GLint y, GLint z, GLint w) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRasterPos4i, x, y, z, w);
+	SYSTEM_PREVIOUSLY_BODY_4(glRasterPos4i, x, y, z, w);
 }
 
 void System
 	::GLRasterPos4iv(const GLint* xyzw) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos4iv, xyzw);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos4iv, xyzw);
 }
 
 void System
 	::GLRasterPos4s(GLshort x, GLshort y, GLshort z, GLshort w) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRasterPos4s, x, y, z, w);
+	SYSTEM_PREVIOUSLY_BODY_4(glRasterPos4s, x, y, z, w);
 }
 
 void System
 	::GLRasterPos4sv(const GLshort* xyzw) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glRasterPos4sv, xyzw);
+	SYSTEM_PREVIOUSLY_BODY_1(glRasterPos4sv, xyzw);
 }
 
 void System
 	::GLReadBuffer(GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glReadBuffer, mode);
+	SYSTEM_PREVIOUSLY_BODY_1(glReadBuffer, mode);
 }
 
 void System
 	::GLReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid* pixels) noexcept
 {
-	SYSTEM_PRE_BODY_A7(glReadPixels, x, y, width, height, format, type, pixels);
+	SYSTEM_PREVIOUSLY_BODY_7(glReadPixels, x, y, width, height, format, type, pixels);
 }
 
 void System
 	::GLRectd(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRectd, x1, y1, x2, y2);
+	SYSTEM_PREVIOUSLY_BODY_4(glRectd, x1, y1, x2, y2);
 }
 
 void System
 	::GLRectdv(const GLdouble* x1Y1, const GLdouble* x2Y2) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glRectdv, x1Y1, x2Y2);
+	SYSTEM_PREVIOUSLY_BODY_2(glRectdv, x1Y1, x2Y2);
 }
 
 void System
 	::GLRectf(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRectf, x1, y1, x2, y2);
+	SYSTEM_PREVIOUSLY_BODY_4(glRectf, x1, y1, x2, y2);
 }
 
 void System
 	::GLRectfv(const GLfloat* x1Y1, const GLfloat* x2Y2) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glRectfv, x1Y1, x2Y2);
+	SYSTEM_PREVIOUSLY_BODY_2(glRectfv, x1Y1, x2Y2);
 }
 
 void System
 	::GLRecti(GLint x1, GLint y1, GLint x2, GLint y2) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRecti, x1, y1, x2, y2);
+	SYSTEM_PREVIOUSLY_BODY_4(glRecti, x1, y1, x2, y2);
 }
 
 void System
 	::GLRectiv(const GLint* x1Y1, const GLint* x2Y2) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glRectiv, x1Y1, x2Y2);
+	SYSTEM_PREVIOUSLY_BODY_2(glRectiv, x1Y1, x2Y2);
 }
 
 void System
 	::GLRects(GLshort x1, GLshort y1, GLshort x2, GLshort sY2) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRects, x1, y1, x2, sY2);
+	SYSTEM_PREVIOUSLY_BODY_4(glRects, x1, y1, x2, sY2);
 }
 
 void System
 	::GLRectsv(const GLshort* x1Y1, const GLshort* x2Y2) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glRectsv, x1Y1, x2Y2);
+	SYSTEM_PREVIOUSLY_BODY_2(glRectsv, x1Y1, x2Y2);
 }
 
 GLint System
 	::GLRenderMode(GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A1_RESULT(glRenderMode, mode, GLint);
+	SYSTEM_PREVIOUSLY_BODY_1_RESULT(glRenderMode, mode, GLint);
 }
 
 void System
 	::GLRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRotated, angle, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_4(glRotated, angle, x, y, z);
 }
 
 void System
 	::GLRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glRotatef, angle, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_4(glRotatef, angle, x, y, z);
 }
 
 void System
 	::GLScaled(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glScaled, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glScaled, x, y, z);
 }
 
 void System
 	::GLScalef(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glScalef, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glScalef, x, y, z);
 }
 
 void System
 	::GLScissor(GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glScissor, x, y, width, height);
+	SYSTEM_PREVIOUSLY_BODY_4(glScissor, x, y, width, height);
 }
 
 void System
 	::GLSelectBuffer(GLsizei size, GLuint* buffer) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glSelectBuffer, size, buffer);
+	SYSTEM_PREVIOUSLY_BODY_2(glSelectBuffer, size, buffer);
 }
 
 void System
 	::GLShadeModel(GLenum mode) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glShadeModel, mode);
+	SYSTEM_PREVIOUSLY_BODY_1(glShadeModel, mode);
 }
 
 void System
 	::GLStencilFunc(GLenum function, GLint reference, GLuint mask) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glStencilFunc, function, reference, mask);
+	SYSTEM_PREVIOUSLY_BODY_3(glStencilFunc, function, reference, mask);
 }
 
 void System
 	::GLStencilMask(GLuint mask) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glStencilMask, mask);
+	SYSTEM_PREVIOUSLY_BODY_1(glStencilMask, mask);
 }
 
 void System
 	::GLStencilOp(GLenum fail, GLenum zFail, GLenum zPass) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glStencilOp, fail, zFail, zPass);
+	SYSTEM_PREVIOUSLY_BODY_3(glStencilOp, fail, zFail, zPass);
 }
 
 void System
 	::GLTexCoord1d(GLdouble s) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord1d, s);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord1d, s);
 }
 
 void System
 	::GLTexCoord1dv(const GLdouble* s) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord1dv, s);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord1dv, s);
 }
 
 void System
 	::GLTexCoord1f(GLfloat s) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord1f, s);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord1f, s);
 }
 
 void System
 	::GLTexCoord1fv(const GLfloat* s) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord1fv, s);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord1fv, s);
 }
 
 void System
 	::GLTexCoord1i(GLint s) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord1i, s);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord1i, s);
 }
 
 void System
 	::GLTexCoord1iv(const GLint* s) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord1iv, s);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord1iv, s);
 }
 
 void System
 	::GLTexCoord1s(GLshort s) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord1s, s);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord1s, s);
 }
 
 void System
 	::GLTexCoord1sv(const GLshort* s) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord1sv, s);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord1sv, s);
 }
 
 void System
 	::GLTexCoord2d(GLdouble s, GLdouble t) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glTexCoord2d, s, t);
+	SYSTEM_PREVIOUSLY_BODY_2(glTexCoord2d, s, t);
 }
 
 void System
 	::GLTexCoord2dv(const GLdouble* st) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord2dv, st);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord2dv, st);
 }
 
 void System
 	::GLTexCoord2f(GLfloat s, GLfloat t) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glTexCoord2f, s, t);
+	SYSTEM_PREVIOUSLY_BODY_2(glTexCoord2f, s, t);
 }
 
 void System
 	::GLTexCoord2fv(const GLfloat* st) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord2fv, st);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord2fv, st);
 }
 
 void System
 	::GLTexCoord2i(GLint s, GLint t) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glTexCoord2i, s, t);
+	SYSTEM_PREVIOUSLY_BODY_2(glTexCoord2i, s, t);
 }
 
 void System
 	::GLTexCoord2iv(const GLint* st) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord2iv, st);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord2iv, st);
 }
 
 void System
 	::GLTexCoord2s(GLshort s, GLshort st) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glTexCoord2s, s, st);
+	SYSTEM_PREVIOUSLY_BODY_2(glTexCoord2s, s, st);
 }
 
 void System
 	::GLTexCoord2sv(const GLshort* st) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord2sv, st);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord2sv, st);
 }
 
 void System
 	::GLTexCoord3d(GLdouble s, GLdouble t, GLdouble r) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexCoord3d, s, t, r);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexCoord3d, s, t, r);
 }
 
 void System
 	::GLTexCoord3dv(const GLdouble* str) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord3dv, str);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord3dv, str);
 }
 
 void System
 	::GLTexCoord3f(GLfloat s, GLfloat t, GLfloat r) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexCoord3f, s, t, r);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexCoord3f, s, t, r);
 }
 
 void System
 	::GLTexCoord3fv(const GLfloat* str) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord3fv, str);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord3fv, str);
 }
 
 void System
 	::GLTexCoord3i(GLint s, GLint t, GLint r) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexCoord3i, s, t, r);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexCoord3i, s, t, r);
 }
 
 void System
 	::GLTexCoord3iv(const GLint* str) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord3iv, str);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord3iv, str);
 }
 
 void System
 	::GLTexCoord3s(GLshort s, GLshort st, GLshort r) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexCoord3s, s, st, r);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexCoord3s, s, st, r);
 }
 
 void System
 	::GLTexCoord3sv(const GLshort* str) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord3sv, str);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord3sv, str);
 }
 
 void System
 	::GLTexCoord4d(GLdouble s, GLdouble t, GLdouble r, GLdouble q) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glTexCoord4d, s, t, r, q);
+	SYSTEM_PREVIOUSLY_BODY_4(glTexCoord4d, s, t, r, q);
 }
 
 void System
 	::GLTexCoord4dv(const GLdouble* strq) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord4dv, strq);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord4dv, strq);
 }
 
 void System
 	::GLTexCoord4f(GLfloat s, GLfloat t, GLfloat r, GLfloat q) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glTexCoord4f, s, t, r, q);
+	SYSTEM_PREVIOUSLY_BODY_4(glTexCoord4f, s, t, r, q);
 }
 
 void System
 	::GLTexCoord4fv(const GLfloat* strq) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord4fv, strq);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord4fv, strq);
 }
 
 void System
 	::GLTexCoord4i(GLint s, GLint t, GLint r, GLint q) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glTexCoord4i, s, t, r, q);
+	SYSTEM_PREVIOUSLY_BODY_4(glTexCoord4i, s, t, r, q);
 }
 
 void System
 	::GLTexCoord4iv(const GLint* strq) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord4iv, strq);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord4iv, strq);
 }
 
 void System
 	::GLTexCoord4s(GLshort s, GLshort st, GLshort r, GLshort q) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glTexCoord4s, s, st, r, q);
+	SYSTEM_PREVIOUSLY_BODY_4(glTexCoord4s, s, st, r, q);
 }
 
 void System
 	::GLTexCoord4sv(const GLshort* strq) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glTexCoord4sv, strq);
+	SYSTEM_PREVIOUSLY_BODY_1(glTexCoord4sv, strq);
 }
 
 void System
 	::GLTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glTexCoordPointer, size, type, stride, pointer);
+	SYSTEM_PREVIOUSLY_BODY_4(glTexCoordPointer, size, type, stride, pointer);
 }
 
 void System
 	::GLTexEnvf(GLenum target, GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexEnvf, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexEnvf, target, name, param);
 }
 
 void System
 	::GLTexEnvfv(GLenum target, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexEnvfv, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexEnvfv, target, name, param);
 }
 
 void System
 	::GLTexEnvi(GLenum target, GLenum name, GLint param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexEnvi, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexEnvi, target, name, param);
 }
 
 void System
 	::GLTexEnviv(GLenum target, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexEnviv, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexEnviv, target, name, param);
 }
 
 void System
 	::GLTexGend(GLenum coord, GLenum name, GLdouble param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexGend, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexGend, coord, name, param);
 }
 
 void System
 	::GLTexGendv(GLenum coord, GLenum name, const GLdouble* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexGendv, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexGendv, coord, name, param);
 }
 
 void System
 	::GLTexGenf(GLenum coord, GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexGenf, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexGenf, coord, name, param);
 }
 
 void System
 	::GLTexGenfv(GLenum coord, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexGenfv, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexGenfv, coord, name, param);
 }
 
 void System
 	::GLTexGeni(GLenum coord, GLenum name, GLint param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexGeni, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexGeni, coord, name, param);
 }
 
 void System
 	::GLTexGeniv(GLenum coord, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexGeniv, coord, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexGeniv, coord, name, param);
 }
 
 void System
 	::GLTexImage1D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid* pixels) noexcept
 {
-	SYSTEM_PRE_BODY_A8(glTexImage1D, target, level, internalFormat, width, border, format, type, pixels);
+	SYSTEM_PREVIOUSLY_BODY_8(glTexImage1D, target, level, internalFormat, width, border, format, type, pixels);
 }
 
 void System
 	::GLTexImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid* pixels) noexcept
 {
-	SYSTEM_PRE_BODY_A9(glTexImage2D, target, level, internalFormat, width, height, border, format, type, pixels);
+	SYSTEM_PREVIOUSLY_BODY_9(glTexImage2D, target, level, internalFormat, width, height, border, format, type, pixels);
 }
 
 void System
 	::GLTexParameterf(GLenum target, GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexParameterf, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexParameterf, target, name, param);
 }
 
 void System
 	::GLTexParameterfv(GLenum target, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexParameterfv, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexParameterfv, target, name, param);
 }
 
 void System
 	::GLTexParameteri(GLenum target, GLenum name, GLint param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexParameteri, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexParameteri, target, name, param);
 }
 
 void System
 	::GLTexParameteriv(GLenum target, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTexParameteriv, target, name, param);
+	SYSTEM_PREVIOUSLY_BODY_3(glTexParameteriv, target, name, param);
 }
 
 void System
 	::GLTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLsizei width, GLenum format, GLenum type, const GLvoid* pixels) noexcept
 {
-	SYSTEM_PRE_BODY_A7(glTexSubImage1D, target, level, xOffset, width, format, type, pixels);
+	SYSTEM_PREVIOUSLY_BODY_7(glTexSubImage1D, target, level, xOffset, width, format, type, pixels);
 }
 
 void System
 	::GLTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels) noexcept
 {
-	SYSTEM_PRE_BODY_A9(glTexSubImage2D, target, level, xOffset, yOffset, width, height, format, type, pixels);
+	SYSTEM_PREVIOUSLY_BODY_9(glTexSubImage2D, target, level, xOffset, yOffset, width, height, format, type, pixels);
 }
 
 void System
 	::GLTranslated(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTranslated, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glTranslated, x, y, z);
 }
 
 void System
 	::GLTranslatef(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glTranslatef, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glTranslatef, x, y, z);
 }
 
 void System
 	::GLVertex2d(GLdouble x, GLdouble y) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glVertex2d, x, y);
+	SYSTEM_PREVIOUSLY_BODY_2(glVertex2d, x, y);
 }
 
 void System
 	::GLVertex2dv(const GLdouble* xy) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex2dv, xy);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex2dv, xy);
 }
 
 void System
 	::GLVertex2f(GLfloat x, GLfloat y) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glVertex2f, x, y);
+	SYSTEM_PREVIOUSLY_BODY_2(glVertex2f, x, y);
 }
 
 void System
 	::GLVertex2fv(const GLfloat* xy) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex2fv, xy);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex2fv, xy);
 }
 
 void System
 	::GLVertex2i(GLint x, GLint y) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glVertex2i, x, y);
+	SYSTEM_PREVIOUSLY_BODY_2(glVertex2i, x, y);
 }
 
 void System
 	::GLVertex2iv(const GLint* xy) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex2iv, xy);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex2iv, xy);
 }
 
 void System
 	::GLVertex2s(GLshort x, GLshort y) noexcept
 {
-	SYSTEM_PRE_BODY_A2(glVertex2s, x, y);
+	SYSTEM_PREVIOUSLY_BODY_2(glVertex2s, x, y);
 }
 
 void System
 	::GLVertex2sv(const GLshort* xy) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex2sv, xy);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex2sv, xy);
 }
 
 void System
 	::GLVertex3d(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glVertex3d, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glVertex3d, x, y, z);
 }
 
 void System
 	::GLVertex3dv(const GLdouble* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex3dv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex3dv, xyz);
 }
 
 void System
 	::GLVertex3f(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glVertex3f, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glVertex3f, x, y, z);
 }
 
 void System
 	::GLVertex3fv(const GLfloat* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex3fv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex3fv, xyz);
 }
 
 void System
 	::GLVertex3i(GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glVertex3i, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glVertex3i, x, y, z);
 }
 
 void System
 	::GLVertex3iv(const GLint* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex3iv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex3iv, xyz);
 }
 
 void System
 	::GLVertex3s(GLshort x, GLshort y, GLshort z) noexcept
 {
-	SYSTEM_PRE_BODY_A3(glVertex3s, x, y, z);
+	SYSTEM_PREVIOUSLY_BODY_3(glVertex3s, x, y, z);
 }
 
 void System
 	::GLVertex3sv(const GLshort* xyz) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex3sv, xyz);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex3sv, xyz);
 }
 
 void System
 	::GLVertex4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glVertex4d, x, y, z, w);
+	SYSTEM_PREVIOUSLY_BODY_4(glVertex4d, x, y, z, w);
 }
 
 void System
 	::GLVertex4dv(const GLdouble* xyzw) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex4dv, xyzw);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex4dv, xyzw);
 }
 
 void System
 	::GLVertex4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glVertex4f, x, y, z, w);
+	SYSTEM_PREVIOUSLY_BODY_4(glVertex4f, x, y, z, w);
 }
 
 void System
 	::GLVertex4fv(const GLfloat* xyzw) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex4fv, xyzw);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex4fv, xyzw);
 }
 
 void System
 	::GLVertex4i(GLint x, GLint y, GLint z, GLint w) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glVertex4i, x, y, z, w);
+	SYSTEM_PREVIOUSLY_BODY_4(glVertex4i, x, y, z, w);
 }
 
 void System
 	::GLVertex4iv(const GLint* xyzw) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex4iv, xyzw);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex4iv, xyzw);
 }
 
 void System
 	::GLVertex4s(GLshort x, GLshort y, GLshort z, GLshort w) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glVertex4s, x, y, z, w);
+	SYSTEM_PREVIOUSLY_BODY_4(glVertex4s, x, y, z, w);
 }
 
 void System
 	::GLVertex4sv(const GLshort* xyzw) noexcept
 {
-	SYSTEM_PRE_BODY_A1(glVertex4sv, xyzw);
+	SYSTEM_PREVIOUSLY_BODY_1(glVertex4sv, xyzw);
 }
 
 void System
 	::GLVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glVertexPointer, size, type, stride, pointer);
+	SYSTEM_PREVIOUSLY_BODY_4(glVertexPointer, size, type, stride, pointer);
 }
 
 void System
 	::GLViewport(GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_PRE_BODY_A4(glViewport, x, y, width, height);
+	SYSTEM_PREVIOUSLY_BODY_4(glViewport, x, y, width, height);
 }

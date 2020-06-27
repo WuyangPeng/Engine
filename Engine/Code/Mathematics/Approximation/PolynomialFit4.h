@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 11:18)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 12:31)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_H
@@ -40,14 +40,14 @@ namespace Mathematics
 	template <typename Real>
 	class PolynomialFit4
 	{
-	public:		
+	public:
 		using ClassType = PolynomialFit4<Real>;
 		using Samples = std::vector<Real>;
 		using Polynomial = Polynomial<Real>;
 
 	public:
 		PolynomialFit4(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples,
-			           const Samples& wSamples, int xDegree, int yDegree, int zDegree);
+					   const Samples& wSamples, size_t xDegree, size_t yDegree, size_t zDegree);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -56,7 +56,7 @@ namespace Mathematics
 
 	private:
 		void Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples,
-			           const Samples& wSamples, int xDegree, int yDegree, int zDegree);
+					   const Samples& wSamples, int xDegree, int yDegree, int zDegree);
 
 	private:
 		std::vector<Real> m_Coeff;

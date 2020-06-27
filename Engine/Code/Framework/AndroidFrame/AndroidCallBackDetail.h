@@ -1,266 +1,251 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:22)
+// 引擎版本：0.3.0.1 (2020/05/21 16:38)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_DETAIL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_DETAIL_H
 
 #include "AndroidCallBack.h"
+#include "System/Window/Flags/WindowDisplayFlags.h"
+#include "System/Android/AndroidNativeWindow.h"
+#include "System/Android/AndroidInputKeyEvent.h"
+#include "System/Android/AndroidInputMotionEvent.h" 
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowCreate/WindowPoint.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
-#include "System/Android/AndroidInputMotionEvent.h"
-#include "System/Android/AndroidInputKeyEvent.h"
-#include "System/Android/AndroidNativeWindow.h"
-#include "System/Android/Flags/AndroidNativeAppGlueFlags.h"
+#include "Framework/WindowProcess/Flags/MouseTypes.h"
+#include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 
-template <typename ModelViewControllerMiddleLayerContainer>
-Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::AndroidCallBack()
-	:ParentType{},m_MiddleLayerPtr(new ModelViewControllerMiddleLayerContainer)
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-template <typename ModelViewControllerMiddleLayerContainer>
-Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::~AndroidCallBack()
+template <typename MiddleLayer>
+Framework::AndroidCallBack<MiddleLayer>
+	::AndroidCallBack(int64_t delta)
+	:ParentType{ delta }, m_MiddleLayer{ std::make_shared<MiddleLayer>(MiddleLayerPlatform::Android) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename ModelViewControllerMiddleLayerContainer>
-bool Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
+template <typename MiddleLayer>
+bool Framework::AndroidCallBack<MiddleLayer>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid() &&
-	   m_MiddleLayerPtr != nullptr)
+	if (ParentType::IsValid() && m_MiddleLayer != nullptr)
 		return true;
 	else
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
-template <typename ModelViewControllerMiddleLayerContainer>
-void Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::RedrawNeededMessage( struct AndroidApp* state )
+template <typename MiddleLayer>
+void Framework::AndroidCallBack<MiddleLayer>
+	::RedrawNeededMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::RedrawNeededMessage(state);
+	ParentType::RedrawNeededMessage(androidApp);
 
-	if(!m_MiddleLayerPtr->Paint())
+	if (!m_MiddleLayer->Paint())
 	{
-		state->destroyRequested = 1;
+		androidApp->destroyRequested = 1;
 	}
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-void Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::ResizedMessage( struct AndroidApp* state )
+template <typename MiddleLayer>
+void Framework::AndroidCallBack<MiddleLayer>
+	::ResizedMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::ResizedMessage(state);
-
-	System::AndroidNativeWindow* nativeWindow = state->window;
-
-	if(nativeWindow != nullptr)
+	if (androidApp != nullptr)
 	{
-		int width = System::AndroidNativeWindowGetWidth(nativeWindow);
-		int height = System::AndroidNativeWindowGetHeight(nativeWindow);
+		ParentType::ResizedMessage(androidApp);
 
-		if(!m_MiddleLayerPtr->Resize(System::WindowDisplay::AndroidUnDefinition,
-			                         WindowSize(width,height)))
+		auto nativeWindow = androidApp->GetAndroidNativeWindow();
+
+		if (nativeWindow != nullptr)
 		{
-			state->destroyRequested = 1;
+			const auto width = System::AndroidNativeWindowGetWidth(nativeWindow);
+			const auto height = System::AndroidNativeWindowGetHeight(nativeWindow);
+
+			if (!m_MiddleLayer->Resize(System::WindowDisplay::AndroidUnDefinition, WindowSize{ width, height }))
+			{
+				androidApp->destroyRequested = 1;
+			}
 		}
-	}
+	}	
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-void Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::RectChanged( struct AndroidApp* state )
+template <typename MiddleLayer>
+void Framework::AndroidCallBack<MiddleLayer>
+	::RectChanged(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::RectChanged(state);
+	ParentType::RectChanged(androidApp);
 
-	System::AndroidRect contentRect = state->contentRect;
-	int width = abs(contentRect.GetRight() - contentRect.GetLeft());
-	int height = abs(contentRect.GetTop() - contentRect.GetBottom());
+	const auto contentRect = androidApp->contentRect;
+	const auto width = abs(contentRect.GetRight() - contentRect.GetLeft());
+	const auto height = abs(contentRect.GetTop() - contentRect.GetBottom());
 
-	if(!m_MiddleLayerPtr->Resize(System::WindowDisplay::AndroidUnDefinition,
-			                     WindowSize(width,height)))
+	if (!m_MiddleLayer->Resize(System::WindowDisplay::AndroidUnDefinition, WindowSize{ width, height }))
 	{
-		state->destroyRequested = 1;
+		androidApp->destroyRequested = 1;
 	}
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-void Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::InitMessage( struct AndroidApp* state )
+template <typename MiddleLayer>
+void Framework::AndroidCallBack<MiddleLayer>
+	::InitMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::InitMessage(state);
+	ParentType::InitMessage(androidApp);
 
-	if(!m_MiddleLayerPtr->Create())
+	if (!m_MiddleLayer->Create())
 	{
-		state->destroyRequested = 1;
+		androidApp->destroyRequested = 1;
 	}
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-void Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::TermMessage( struct AndroidApp* state )
+template <typename MiddleLayer>
+void Framework::AndroidCallBack<MiddleLayer>
+	::TermMessage(AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	if(state != nullptr)
+	if (androidApp != nullptr)
 	{
-		ParentType::TermMessage(state);
-		
-		m_MiddleLayerPtr->Destroy();		
-		
-		state->destroyRequested = 1;
+		ParentType::TermMessage(androidApp);
+
+		m_MiddleLayer->Destroy();
+
+		androidApp->destroyRequested = 1;
 	}
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-void Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::Display( struct AndroidApp* state ,int64_t timeDelta )
+template <typename MiddleLayer>
+void Framework::AndroidCallBack<MiddleLayer>
+	::Display(AndroidApp* androidApp, int64_t timeDelta)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::Display(state,timeDelta);
+	ParentType::Display(androidApp, timeDelta);
 
-	if(!m_MiddleLayerPtr->Idle(timeDelta))
+	if (!m_MiddleLayer->Idle(timeDelta))
 	{
-		state->destroyRequested = 1;
+		androidApp->destroyRequested = 1;
 	}
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-int Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::KeyDownMessage( struct AndroidApp* state, AndroidInputEvent* event )
+template <typename MiddleLayer>
+int Framework::AndroidCallBack<MiddleLayer>
+	::KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	int flags = static_cast<int>( System::AndroidKeyEventGetFlags(event));
-	int keyCode = static_cast<int>(System::AndroidKeyEventGetKeyCode(event));
+	const auto flags = System::AndroidKeyEventGetFlags(androidInputEvent);
+	const auto keyCode = System::EnumCastUnderlying(System::AndroidKeyEventGetKeyCode(androidInputEvent));
 
-	if ((flags & static_cast<int>( System::AndroidKeyEvent::SoftKeyboard)) != 0)
+	if ((flags & System::AndroidKeyEvent::SoftKeyboard) != System::AndroidKeyEvent::Null)
 	{
-		if(!m_MiddleLayerPtr->KeyDown(static_cast<unsigned char>(keyCode),
-			                          WindowPoint()))
+		if (!m_MiddleLayer->KeyDown(keyCode, WindowPoint{ }))
 		{
-			state->destroyRequested = 1;
-		}
-	}
-	else
-	{
-		if(!m_MiddleLayerPtr->SpecialKeyDown(keyCode,WindowPoint()))
-		{
-			state->destroyRequested = 1;
-		}
-	}
-
-	return ParentType::KeyDownMessage(state,event);
-}
-
-template <typename ModelViewControllerMiddleLayerContainer>
-int Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::KeyUpMessage( struct AndroidApp* state, AndroidInputEvent* event )
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	int flags = static_cast<int>(System::AndroidKeyEventGetFlags(event));
-	int keyCode = static_cast<int>(System::AndroidKeyEventGetKeyCode(event));
-
-	if ((flags & static_cast<int>(System::AndroidKeyEvent::SoftKeyboard)) != 0)
-	{
-		if(!m_MiddleLayerPtr->KeyUp(static_cast<unsigned char>(keyCode),
-			                        WindowPoint()))
-		{
-			state->destroyRequested = 1;
+			androidApp->destroyRequested = 1;
 		}
 	}
 	else
 	{
-		if(!m_MiddleLayerPtr->SpecialKeyUp(keyCode,WindowPoint()))
+		if (!m_MiddleLayer->SpecialKeyDown(keyCode, WindowPoint{ }))
 		{
-			state->destroyRequested = 1;
+			androidApp->destroyRequested = 1;
 		}
 	}
 
-	return ParentType::KeyUpMessage(state,event);
+	return ParentType::KeyDownMessage(androidApp, androidInputEvent);
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-int Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::ActionDownMessage( struct AndroidApp* state, AndroidInputEvent* event )
+template <typename MiddleLayer>
+int Framework::AndroidCallBack<MiddleLayer>
+	::KeyUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	int xOffset = static_cast<int>(System::AndroidMotionEventGetXOffset(event));
-	int yOffset = static_cast<int>(System::AndroidMotionEventGetYOffset(event));
+	const auto flags = System::AndroidKeyEventGetFlags(androidInputEvent);
+	const auto keyCode = System::EnumCastUnderlying(System::AndroidKeyEventGetKeyCode(androidInputEvent));
+
+	if ((flags & System::AndroidKeyEvent::SoftKeyboard) != System::AndroidKeyEvent::Null)
+	{
+		if (!m_MiddleLayer->KeyUp(keyCode, WindowPoint{ }))
+		{
+			androidApp->destroyRequested = 1;
+		}
+	}
+	else
+	{
+		if (!m_MiddleLayer->SpecialKeyUp(keyCode, WindowPoint{ }))
+		{
+			androidApp->destroyRequested = 1;
+		}
+	}
+
+	return ParentType::KeyUpMessage(androidApp, androidInputEvent);
+}
+
+template <typename MiddleLayer>
+int Framework::AndroidCallBack<MiddleLayer>
+	::ActionDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	const auto xOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetXOffset(androidInputEvent));
+	const auto yOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetYOffset(androidInputEvent));
 
 	// 可以通过使用AndroidMotionEventGetMetaState和AndroidMotionEventGetButtonState
-	// 获取VirtualKeysTypes的值，
-	// 但对于Android而言，没有太多实际的意义。
-	if(!m_MiddleLayerPtr->MouseClick(MouseButtonsTypesLeftButton,
-		                             MouseStateTypesMouseDown,
-									 WindowPoint(xOffset,yOffset),
-									 VirtualKeysTypes()))
+	// 获取VirtualKeysTypes的值，但对于Android而言，没有太多实际的意义。
+	if (!m_MiddleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, WindowPoint{ xOffset, yOffset }, VirtualKeysTypes{ }))
 	{
-		state->destroyRequested = 1;
+		androidApp->destroyRequested = 1;
 	}
 
-	return ParentType::ActionDownMessage(state,event);
+	return ParentType::ActionDownMessage(androidApp, androidInputEvent);
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-int Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::ActionUpMessage( struct AndroidApp* state, AndroidInputEvent* event )
+template <typename MiddleLayer>
+int Framework::AndroidCallBack<MiddleLayer>
+	::ActionUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	int xOffset = static_cast<int>(System::AndroidMotionEventGetXOffset(event));
-	int yOffset = static_cast<int>(System::AndroidMotionEventGetYOffset(event));
+	const auto xOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetXOffset(androidInputEvent));
+	const auto yOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetYOffset(androidInputEvent));
 
-	if(!m_MiddleLayerPtr->MouseClick(MouseButtonsTypesLeftButton,
-		                             MouseStateTypesMouseUp,
-									 WindowPoint(xOffset,yOffset),
-									 VirtualKeysTypes()))
+	if (!m_MiddleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, WindowPoint{ xOffset, yOffset }, VirtualKeysTypes{ }))
 	{
-		state->destroyRequested = 1;
+		androidApp->destroyRequested = 1;
 	}
 
-	return ParentType::ActionUpMessage(state,event);
+	return ParentType::ActionUpMessage(androidApp, androidInputEvent);
 }
 
-template <typename ModelViewControllerMiddleLayerContainer>
-int Framework::AndroidCallBack<ModelViewControllerMiddleLayerContainer>
-	::ActionMoveMessage( struct AndroidApp* state, AndroidInputEvent* event )
+template <typename MiddleLayer>
+int Framework::AndroidCallBack<MiddleLayer>
+	::ActionMoveMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	int xOffset = static_cast<int>(System::AndroidMotionEventGetXOffset(event));
-	int yOffset = static_cast<int>(System::AndroidMotionEventGetYOffset(event));
+	const auto xOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetXOffset(androidInputEvent));
+	const auto yOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetYOffset(androidInputEvent));
 
-	if(!m_MiddleLayerPtr->Motion(WindowPoint(xOffset,yOffset),
-								 VirtualKeysTypes()))
+	if (!m_MiddleLayer->Motion(WindowPoint{ xOffset, yOffset }, VirtualKeysTypes{ }))
 	{
-		state->destroyRequested = 1;
+		androidApp->destroyRequested = 1;
 	}
 
-	return ParentType::ActionMoveMessage(state,event);
+	return ParentType::ActionMoveMessage(androidApp, androidInputEvent);
 }
 
 #endif // FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_DETAIL_H

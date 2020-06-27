@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 13:13)
+// 引擎版本：0.0.2.5 (2020/03/23 14:09)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_DETAIL_H
@@ -24,17 +24,17 @@ Mathematics::HeightLineFit2<Real>
 
 template <typename Real>
 void Mathematics::HeightLineFit2<Real>
-	::Calculate( const std::vector<Vector2D>& points )
+	::Calculate(const std::vector<Vector2D>& points)
 {
 	// 你至少需要两个点确定线就行了
 	// 即使这样，如果点在一条垂直线，没有最小平方拟合的“高度”的感觉。
 	// 这将陷入由系数矩阵存在（几乎）零的行列式。
 
 	// 计算线性系统的总和。
-	Real sumX { };
-	Real sumY { };
-	Real sumXX { };
-	Real sumXY { };
+	auto sumX = Math::sm_Zero;
+	auto sumY = Math::sm_Zero;
+	auto sumXX = Math::sm_Zero;
+	auto sumXY = Math::sm_Zero;
 
 	auto numPoints = points.size();
 	for (auto i = 0u; i < numPoints; ++i)
@@ -45,25 +45,25 @@ void Mathematics::HeightLineFit2<Real>
 		sumXY += points[i].GetXCoordinate() * points[i].GetYCoordinate();
 	}
 
-	Real matrix[2][2] 
+	Real matrix[2][2]
 	{
 		{ sumXX, sumX },
 		{ sumX, static_cast<Real>(numPoints) }
 	};
 
-	Real inputVector[2] 
+	Real inputVector[2]
 	{
 		sumXY,
 		sumY
-	}; 
+	};
 
 	try
 	{
-		Real outputVector[2] {};
+		Real outputVector[2]{};
 
 		LinearSystem<Real> linearSystem;
 
-		linearSystem.Solve2(matrix,inputVector,outputVector);
+		linearSystem.Solve2(matrix, inputVector, outputVector);
 
 		m_CoeffA = outputVector[0];
 		m_CoeffB = outputVector[1];
@@ -72,7 +72,7 @@ void Mathematics::HeightLineFit2<Real>
 	catch (CoreTools::Error&)
 	{
 		m_IsFit2Success = false;
-	}	 
+	}
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -93,14 +93,13 @@ bool Mathematics::HeightLineFit2<Real>
 	return m_IsFit2Success;
 }
 
-
 template <typename Real>
 Real Mathematics::HeightLineFit2<Real>
 	::GetCoeffA() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	if(IsFit2Success())
+	if (IsFit2Success())
 	{
 		return m_CoeffA;
 	}
@@ -116,7 +115,7 @@ Real Mathematics::HeightLineFit2<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	if(IsFit2Success())
+	if (IsFit2Success())
 	{
 		return m_CoeffB;
 	}
@@ -124,7 +123,6 @@ Real Mathematics::HeightLineFit2<Real>
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("拟合失败"));
 	}
-} 
- 
- 
+}
+
 #endif // MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_DETAIL_H

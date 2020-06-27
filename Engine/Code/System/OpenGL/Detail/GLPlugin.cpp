@@ -9,7 +9,7 @@
 #include "GLPlugin.h"
 #include "GLUtility.h"
 #include "System/Helper/Noexcept.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "System/OpenGL/Detail/GL11Extensions.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/Using/GL11ExtensionsUsing.h"
@@ -33,15 +33,8 @@ namespace System
 
 void System
 	::ReportNullFunction(const char* glFunction) noexcept
-{
-	try
-	{
-		Disable26447NoReturn(ReportNullFunction, glFunction);
-	}
-	catch (...)
-	{
-		
-	} 
+{	
+	NoexceptNoReturn<const char*>(ReportNullFunction, glFunction);
 }
 
 namespace System
@@ -61,14 +54,7 @@ namespace System
 
 void System
 	::ReportGLError(const char* glFunction) noexcept
-{
-	try
-	{
-		Disable26447NoReturn(DoReportGLError, glFunction);
-	}
-	catch (...)
-	{
-
-	}
+{	
+	NoexceptNoReturn<const char*>(DoReportGLError, glFunction);	
 }
 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 10:21)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 10:04)
 
 #ifndef MATHEMATICS_QUERY_QUERY_DOT_TOOLS_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY_DOT_TOOLS_DETAIL_H
@@ -21,27 +21,27 @@ bool Mathematics::QueryDotTools<Real>
 
 template <typename Real>
 Real Mathematics::QueryDotTools<Real>
-	::Dot (Real x0, Real y0, Real x1, Real y1)
+	::Dot(Real x0, Real y0, Real x1, Real y1)
 {
-     return x0 * x1 + y0 * y1;
+	return x0 * x1 + y0 * y1;
 }
 
 template <typename Real>
 Real Mathematics::QueryDotTools<Real>
-	::Det2 (Real x0, Real y0, Real x1, Real y1)
+	::Det2(Real x0, Real y0, Real x1, Real y1)
 {
-    return x0 * y1 - x1 * y0;
+	return x0 * y1 - x1 * y0;
 }
 
 template <typename Real>
 Real Mathematics::QueryDotTools<Real>
-	::Det3 (Real x0, Real y0, Real z0, Real x1, Real y1, Real z1, Real x2, Real y2, Real z2)
+	::Det3(Real x0, Real y0, Real z0, Real x1, Real y1, Real z1, Real x2, Real y2, Real z2)
 {
-    auto c00 = y1 * z2 - y2 * z1;
+	auto c00 = y1 * z2 - y2 * z1;
 	auto c01 = y2 * z0 - y0 * z2;
 	auto c02 = y0 * z1 - y1 * z0;
-    
-    return x0 * c00 + x1 * c01 + x2 * c02;
+
+	return x0 * c00 + x1 * c01 + x2 * c02;
 }
 
 template <typename Real>
@@ -53,8 +53,8 @@ Real Mathematics::QueryDotTools<Real>
 
 template <typename Real>
 Real Mathematics::QueryDotTools<Real>
-	::Det4(Real x0, Real y0, Real z0, Real w0, Real x1, Real y1, Real z1, Real w1, 
-		   Real x2, Real y2, Real z2, Real w2,Real x3, Real y3, Real z3, Real w3)
+	::Det4(Real x0, Real y0, Real z0, Real w0, Real x1, Real y1, Real z1, Real w1,
+		   Real x2, Real y2, Real z2, Real w2, Real x3, Real y3, Real z3, Real w3)
 {
 	auto a0 = x0 * y1 - x1 * y0;
 	auto a1 = x0 * y2 - x2 * y0;
@@ -69,7 +69,7 @@ Real Mathematics::QueryDotTools<Real>
 	auto b4 = z1 * w3 - z3 * w1;
 	auto b5 = z2 * w3 - z3 * w2;
 
-    return a0 * b5 - a1 * b4 + a2 * b3 + a3 * b2 - a4 * b1 + a5 * b0;
+	return a0 * b5 - a1 * b4 + a2 * b3 + a3 * b2 - a4 * b1 + a5 * b0;
 }
 
 #endif // MATHEMATICS_QUERY_QUERY_DOT_TOOLS_DETAIL_H

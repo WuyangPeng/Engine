@@ -156,7 +156,7 @@ void CoreTools::DefaultMemory
 // static
 template <typename T>
 void CoreTools::DefaultMemory
-	::DeleteSingle(T*& data)
+	::DeleteSingle(T*& data) noexcept
 {
 	delete data;
 	data = nullptr;

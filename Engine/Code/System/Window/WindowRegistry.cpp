@@ -9,7 +9,7 @@
 #include "WindowRegistry.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Window/Flags/PlatformErrorFlags.h"
 
 bool System

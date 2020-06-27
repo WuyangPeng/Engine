@@ -1,56 +1,58 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 10:40)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 11:52)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_PICTORIAL_IMPL_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_PICTORIAL_IMPL_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/Flags/WindowPictorialFlags.h"
+#include "System/Window/Fwd/WindowFlagsFwd.h"
 #include "Framework/WindowRegister/WindowHIcon.h"
 #include "Framework/WindowRegister/WindowHCursor.h"
+#include "Framework/WindowRegister/WindowRegisterFwd.h"
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace Framework
 {
-	class WindowHBrush;
-
 	class FRAMEWORK_HIDDEN_DECLARE WindowPictorialImpl
 	{
 	public:
 		using ClassType = WindowPictorialImpl;
-		using HInstance = System::WindowHInstance;
+		using TChar = System::TChar;
 		using HIcon = System::WindowHIcon;
-		using HCursor = System::WindowHCursor;
 		using HBrush = System::WindowHBrush;
+		using HCursor = System::WindowHCursor;
+		using HInstance = System::WindowHInstance;
+		using WindowBrushTypes = System::WindowBrushTypes;
 
 	public:
-		explicit WindowPictorialImpl(System::WindowBrushTypes background);
-		WindowPictorialImpl(const System::TChar* icon,const System::TChar* cursor,System::WindowBrushTypes background);
-		WindowPictorialImpl(HInstance hInstance,int icon,int cursor,System::WindowBrushTypes background);
-		WindowPictorialImpl(HInstance hInstance,int icon,const System::TChar* cursor,System::WindowBrushTypes background);
-		WindowPictorialImpl(HInstance hInstance,const System::TChar* icon,int cursor,System::WindowBrushTypes background);
+		explicit WindowPictorialImpl(WindowBrushTypes background);
+		WindowPictorialImpl(const TChar* icon, const TChar* cursor, WindowBrushTypes background);
+		WindowPictorialImpl(HInstance instance, int icon, int cursor, WindowBrushTypes background);
+		WindowPictorialImpl(HInstance instance, int icon, const TChar* cursor, WindowBrushTypes background);
+		WindowPictorialImpl(HInstance instance, const TChar* icon, int cursor, WindowBrushTypes background);
+		WindowPictorialImpl(HInstance instance, bool isDefaultIcon, int icon, bool isDefaultCursor, int cursor, WindowBrushTypes background);
 
 		CLASS_INVARIANT_DECLARE;
 
-        HIcon GetHIcon() const;
-		HCursor GetHCursor() const;
-		HBrush GetHBrush() const;
+		HIcon GetHIcon() const noexcept;
+		HCursor GetHCursor() const noexcept;
+		HBrush GetHBrush() const noexcept;	 
 
 	private:
-		using WindowHBrushPtr = std::shared_ptr<WindowHBrush>;
-
+		using WindowHBrushUniquePtr = std::unique_ptr<WindowHBrush>;
+		
 	private:
-		static WindowHBrushPtr CreateWindowsHBrushPtr(System::WindowBrushTypes background);
+		static WindowHBrushUniquePtr CreateWindowsHBrush(WindowBrushTypes background);		
 
 	private:
 		WindowHIcon m_WindowsHIcon;
 		WindowHCursor m_WindowsHCursor;
-		WindowHBrushPtr m_WindowsHBrushPtr;
+		WindowHBrushUniquePtr m_WindowsHBrush;
 	};
 }
 

@@ -12,6 +12,8 @@
 #if defined(SYSTEM_USE_GLUT) && defined(WIN32)
 
 #include "System/Helper/Platform.h"
+#include "System/Helper/GLExtensionsMacro.h"
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "System/Helper/PragmaWarning/Freeglut.h"
 
 namespace System
@@ -51,12 +53,19 @@ namespace System
 	{
 		Shift = GLUT_ACTIVE_SHIFT,
 		Control = GLUT_ACTIVE_CTRL,
+		Alt = GLUT_ACTIVE_ALT,
 		LeftButton = GLUT_LEFT_BUTTON,
 		MiddleButton = GLUT_MIDDLE_BUTTON,
 		RightButton = GLUT_RIGHT_BUTTON,
 		Up = GLUT_UP,
 		Down = GLUT_DOWN,
 	};
+
+	enum class GlutExtension
+	{
+		WindowClose = GLUT_ACTION_ON_WINDOW_CLOSE,
+		GlutMainLoopReturns = GLUT_ACTION_GLUTMAINLOOP_RETURNS,
+	};	
 }
 
 #else // !defined(SYSTEM_USE_GLUT) || !defined(WIN32)

@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"  
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 Rendering::ClodMeshVertexEdgeTriangleGraph
 	::ClodMeshVertexEdgeTriangleGraph(int numVertices, int numIndices)

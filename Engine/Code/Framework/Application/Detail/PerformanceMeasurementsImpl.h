@@ -1,11 +1,13 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:03)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:40)
 
 #ifndef FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_IMPL_H
 #define FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_IMPL_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "CoreTools/Time/CustomTime.h"
 
@@ -13,24 +15,23 @@
 
 namespace Framework
 {
-	class PerformanceMeasurementsImpl
+	class FRAMEWORK_HIDDEN_DECLARE PerformanceMeasurementsImpl
 	{
 	public:
 		using ClassType = PerformanceMeasurementsImpl;
 		using CustomTime = CoreTools::CustomTime;
 
-	public:	
-		explicit PerformanceMeasurementsImpl(int maxTimer);
-		
+	public:
+		explicit PerformanceMeasurementsImpl(int maxTimer) noexcept;
+
 		CLASS_INVARIANT_DECLARE;
 
-		double GetFrameRate () const;
-
-		void ResetTime ();
-		void MeasureTime ();
-		void UpdateFrameCount ();	
-
+		double GetFrameRate() const;
 		std::string GetFrameRateMessage() const;
+
+		void ResetTime() noexcept;
+		void MeasureTime() noexcept;
+		void UpdateFrameCount() noexcept;
 
 	private:
 		CustomTime m_CustomTime;

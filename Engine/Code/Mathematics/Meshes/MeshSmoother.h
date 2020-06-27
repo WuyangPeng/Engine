@@ -39,7 +39,7 @@ namespace Mathematics
 		
 		// Apply one iteration of the smoother.  The input time is supported for
 		// applications where the surface evolution is time-dependent.
-		void Update (Real t = Real{});
+		void Update (Real t = Math<Real>::sm_Zero);
 		
 	protected:
 		virtual bool VertexInfluenced (int i, Real t);

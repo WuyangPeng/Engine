@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 10:57)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 12:58)
 
 // NOTE: This code was written for the upcoming Geometric Tools Engine but
 // has been back-ported to Wild Magic 5 because it has better quality than
@@ -103,8 +103,14 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class   SymmetricEigensolverGTE
+	class SymmetricEigensolverGTE
 	{
+	public:
+		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+		using ClassType = SymmetricEigensolverGTE<Real>;
+		using Math = Math<Real>;
+
 	public:
 		// The solver processes NxN symmetric matrices, where N > 1 ('size' is N)
 		// and the matrix is stored in row-major order.  The maximum number of
@@ -112,6 +118,8 @@ namespace Mathematics
 		// tridiagonal matrix to a diagonal matrix.  The goal is to compute
 		// NxN orthogonal Q and NxN diagonal D for which Q^T*A*Q = D.
 		SymmetricEigensolverGTE(int size, unsigned maxIterations);
+
+		CLASS_INVARIANT_DECLARE;
 
 		// A copy of the NxN symmetric input is made internally.  The order of
 		// the eigenvalues is specified by sortType: -1 (decreasing), 0 (no

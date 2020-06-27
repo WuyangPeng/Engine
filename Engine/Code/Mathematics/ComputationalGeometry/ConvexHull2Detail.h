@@ -51,7 +51,7 @@ Mathematics::ConvexHull2<Real>
     {
         // Transform the vertices to the square [0,1]^2.
 		auto minValue = info.GetMinExtreme();
-		auto scale = ((Real)1)/info.GetMaxRange();
+		auto scale = (static_cast<Real>(1))/info.GetMaxRange();
         for (i = 0; i < mNumVertices; ++i)
         {
             mSVertices[i] = (mVertices[i] - minValue)*scale;
@@ -75,7 +75,7 @@ Mathematics::ConvexHull2<Real>
         else  // queryType == Query::QT_REAL
         {
             // No scaling for floating point.
-            expand = (Real)1;
+            expand = static_cast<Real>(1);
 			mQuery = NEW0 Query2<Real>(mSVertices);
         }
 
@@ -179,7 +179,7 @@ Mathematics::ConvexHull1<Real>* Mathematics::ConvexHull2<Real>
 template <typename Real>
 Mathematics::ConvexHull2<Real>
 	::ConvexHull2(const System::TChar* filename)
-	:ConvexHull <Real>{ Real{ 0}, Real{}, false, QueryType::Real }, mVertices{ 0 }, mSVertices{}, mQuery{ 0 }
+	:ConvexHull <Real>{ Real{ 0}, Math<Real>::sm_Zero, false, QueryType::Real }, mVertices{ 0 }, mSVertices{}, mQuery{ 0 }
 {
 	auto loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);

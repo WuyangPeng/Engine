@@ -1,5 +1,6 @@
 TODO Level 2
 
-0.0.2.0  
+0.3.0.0  
 
-	 
+1.  （综合）判断辅助模块关联的库，引擎是否需要关联：
+			Zthread、OIS、ogg、vorbis、freealut、OgreAL、FLTK。 

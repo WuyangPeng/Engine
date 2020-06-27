@@ -28,9 +28,6 @@
     <Filter Include="Lua 头文件">
       <UniqueIdentifier>{c0ca4b19-7e3a-4d43-a2ab-f29207c95a81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{9f67c3b5-d757-46eb-b93f-c432c22a217f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TCREScript 头文件">
       <UniqueIdentifier>{2ed232d9-daa3-4eba-8824-6e5dfc31034e}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="Perl 头文件">
       <UniqueIdentifier>{e89675dc-22a7-416a-958d-ff3ef5cb4ffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{9f67c3b5-d757-46eb-b93f-c432c22a217f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +59,24 @@
     </Text>
     <Text Include="Resource\ReadMe.txt">
       <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -118,15 +136,6 @@
     <ClInclude Include="..\..\..\Code\Script\Lua\LuaFwd.h">
       <Filter>Lua 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Script\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Script\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Script\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Script\Perl\Perl.h">
       <Filter>Perl 头文件</Filter>
     </ClInclude>
@@ -147,6 +156,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Script\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

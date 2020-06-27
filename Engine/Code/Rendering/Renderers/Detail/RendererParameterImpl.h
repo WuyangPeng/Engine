@@ -52,6 +52,20 @@ namespace Rendering
 
 		const RendererBasis GetRendererBasis() const;
 
+		System::String GetWindowClassName() const;
+		void SetWindowClassName(const System::String& className);
+
+		System::String GetWindowMenuName() const;
+		void SetWindowMenuName(const System::String& menuName);
+
+		int GetIcon() const;
+		bool IsIconDefault() const;
+		int GetCursor() const;
+		bool IsCursorDefault() const;
+		System::WindowBrushTypes GetBackground() const;
+
+		void SetWindowPictorialParameter(int icon,bool isIconDefault,int cursor,bool isCursorDefault,System::WindowBrushTypes background);
+
 	private:		
 		RendererTypes m_Type;
 		RendererBasis m_RendererBasis;
@@ -59,7 +73,14 @@ namespace Rendering
 		std::string m_WindowTitle;	
 		int m_WindowX;
 		int m_WindowY;
-		bool m_IsAllowResize;
+		bool m_IsAllowResize;		
+		System::String m_ClassName;
+		System::String m_MenuName;	
+		int m_Icon;
+		bool m_IsIconDefault;
+		int m_Cursor;
+		bool m_IsCursorDefault;
+		System::WindowBrushTypes m_Background;
 	};
 }
 

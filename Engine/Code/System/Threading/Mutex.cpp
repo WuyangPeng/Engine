@@ -2,18 +2,22 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 16:15)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/10 12:54)
 
 #include "System/SystemExport.h"
 
 #include "Mutex.h"
 #include "Flags/MutexFlags.h"
 #include "Flags/SemaphoreFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26487)
 
 System::WindowHandle System
 	::CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes, bool initialOwner, const TChar* name) noexcept
@@ -225,6 +229,24 @@ System::PthreadResult System
 }
 
 System::PthreadResult System
+	::PthreadMutexAttributeDestroy(PthreadMutexattrT* attribute) noexcept
+{
+#if defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
+	return UnderlyingCastEnum<PthreadResultFlags>(::pthread_mutexattr_destroy(attribute));
+#elif defined(SYSTEM_PLATFORM_WIN32) 
+	if (attribute != nullptr)
+		return PthreadResult::Successful;
+	else
+		return PthreadResult::EInval;
+#else // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
+	SYSTEM_UNUSED_ARG(attribute);
+
+	return PthreadResult::EInval;
+#endif // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
+}
+#include STSTEM_WARNING_POP
+
+System::PthreadResult System
 	::PthreadMutexDestroy(PthreadMutexT* mutex) noexcept
 {
 #if defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
@@ -244,24 +266,6 @@ System::PthreadResult System
 	return PthreadResult::EInval;
 #endif // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
-
-System::PthreadResult System
-	::PthreadMutexAttributeDestroy(PthreadMutexattrT* attribute) noexcept
-{
-#if defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
-	return UnderlyingCastEnum<PthreadResultFlags>(::pthread_mutexattr_destroy(attribute));
-#elif defined(SYSTEM_PLATFORM_WIN32) 
-	if (attribute != nullptr)
-		return PthreadResult::Successful;
-	else
-		return PthreadResult::EInval;
-#else // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(attribute);
-
-	return PthreadResult::EInval;
-#endif // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
-}
-#include STSTEM_WARNING_POP
 
 System::PthreadResult System
 	::PthreadMutexLock(PthreadMutexT* mutex) noexcept
@@ -335,3 +339,4 @@ bool System
 		return false;
 }
 
+#include STSTEM_WARNING_POP

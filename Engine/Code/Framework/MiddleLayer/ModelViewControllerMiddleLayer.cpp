@@ -1,40 +1,59 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:08)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 14:55)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ModelViewControllerMiddleLayer.h"
-#include "Detail/ModelViewControllerMiddleLayerImpl.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Detail/ModelViewControllerMiddleLayerImpl.h" 
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+
+using std::move;
+using std::make_shared;
+ 
+Framework::ModelViewControllerMiddleLayer
+	::ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
+	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>() }
+{
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+} 
 
 Framework::ModelViewControllerMiddleLayer
-	::ModelViewControllerMiddleLayer()
-	:m_Impl(new ImplType)
+	::ModelViewControllerMiddleLayer(ModelViewControllerMiddleLayer&& rhs) noexcept
+	:ParentType{ move(rhs) }, m_Impl{ move(rhs.m_Impl) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
-
-Framework::ModelViewControllerMiddleLayer
-	::~ModelViewControllerMiddleLayer()
+ 
+Framework::ModelViewControllerMiddleLayer& Framework::ModelViewControllerMiddleLayer
+	::operator=(ModelViewControllerMiddleLayer&& rhs) noexcept
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Framework,ModelViewControllerMiddleLayer)
-	 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework,ModelViewControllerMiddleLayer,SetModelMiddleLayer,MiddleLayerInterfaceSmartPointer,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework,ModelViewControllerMiddleLayer,SetViewMiddleLayer,MiddleLayerInterfaceSmartPointer,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework,ModelViewControllerMiddleLayer,SetControllerMiddleLayer,MiddleLayerInterfaceSmartPointer,void)
+	ParentType::operator=(move(rhs));
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,ModelViewControllerMiddleLayer,GetModelMiddleLayer,const Framework::MiddleLayerInterfaceSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,ModelViewControllerMiddleLayer,GetViewMiddleLayer,const Framework::MiddleLayerInterfaceSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,ModelViewControllerMiddleLayer,GetControllerMiddleLayer,const Framework::MiddleLayerInterfaceSmartPointer)
+	m_Impl = move(rhs.m_Impl);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,ModelViewControllerMiddleLayer,GetConstModelMiddleLayer,const Framework::ConstMiddleLayerInterfaceSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,ModelViewControllerMiddleLayer,GetConstViewMiddleLayer,const Framework::ConstMiddleLayerInterfaceSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,ModelViewControllerMiddleLayer,GetConstControllerMiddleLayer,const Framework::ConstMiddleLayerInterfaceSmartPointer)
+	return *this;
+} 
+
+CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Framework, ModelViewControllerMiddleLayer)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, SetModelMiddleLayer, MiddleLayerSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, SetViewMiddleLayer, MiddleLayerSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, SetControllerMiddleLayer, MiddleLayerSharedPtr, void)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetModelMiddleLayer, const Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetViewMiddleLayer, const Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetControllerMiddleLayer, const Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetConstModelMiddleLayer, const Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetConstViewMiddleLayer, const Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetConstControllerMiddleLayer, const Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr)
+
+ 
+
  

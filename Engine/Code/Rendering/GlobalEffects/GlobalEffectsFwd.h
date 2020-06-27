@@ -9,7 +9,7 @@
 
 namespace Rendering
 {
-	 
+	class GlobalEffect;
 }
 
 #endif // RENDERING_GLOBAL_EFFECTS_FWD_H

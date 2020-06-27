@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:01)
+// 引擎版本：0.2.0.0 (2020/05/07 15:17)
 
 #ifndef SYSTEM_HELPER_GCC_H
 #define SYSTEM_HELPER_GCC_H
@@ -18,7 +18,7 @@
 	#ifndef GCC_VERSION
 		#define GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) 
 	#endif // GCC_VERSION
-  
+
 	// 版本检查：
 	#if (GCC_VERSION < 30300)
 		#error "编译器未配置"
@@ -32,7 +32,7 @@
 
 	#ifndef TCRE_SYSTEM_COMPILER
 		#ifdef __GXX_CONCEPTS__ 
-			// ConceptGCC 编译器:http://www.generic-programming.org/software/ConceptGCC/
+			// ConceptGCC 编译器：http://www.generic-programming.org/software/ConceptGCC/
 			#define TCRE_SYSTEM_COMPILER "ConceptGCC 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 		#else // !__GXX_CONCEPTS__
 			#define TCRE_SYSTEM_COMPILER "GNU C++ 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
@@ -46,7 +46,7 @@
 			#define SYSTEM_CPP_STANDARD 3
 		#endif // defined(__GXX_EXPERIMENTAL_CXX0X__) || (201103L <= __cplusplus)
 	#endif // SYSTEM_CPP_STANDARD
- 
+
 	#include <cstddef>
 
 	#if 4 <= __GNUC__

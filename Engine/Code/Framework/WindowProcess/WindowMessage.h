@@ -1,64 +1,66 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 09:54)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 10:47)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_H
 
 #include "WindowMessageInterface.h"
 #include "Framework/WindowCreate/WindowPoint.h"
-#include "Framework/MiddleLayer/MiddleLayerInterface.h"
+#include "Framework/MiddleLayer/MiddleLayerInternalFwd.h"
 
 namespace Framework
 {
 	template <typename MiddleLayer>
 	class WindowMessage : public WindowMessageInterface
 	{
-	public:	
+	public:
 		using MiddleLayerType = MiddleLayer;
 		using ClassType = WindowMessage<MiddleLayerType>;
-	    using ParentType = WindowMessageInterface;
-		
+		using ParentType = WindowMessageInterface;
+		using String = System::String;
+
 	public:
-		WindowMessage();		
-		virtual ~WindowMessage();
-	
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;	
+		explicit WindowMessage(int64_t delta);
 
-		virtual LResult CreateMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult SizeMessage(HWnd hwnd,WParam wParam,LParam lParam);	
-		virtual LResult CloseMessage(HWnd hwnd,WParam wParam,LParam lParam);	
-		virtual LResult CharMessage(HWnd hwnd,WParam wParam,LParam lParam);	
-		virtual LResult MoveMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult KeyDownMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult KeyUpMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult LeftButtonDownMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult LeftButtonUpMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult MiddleButtonDownMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult MiddleButtonUpMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult RightButtonDownMessage(HWnd hwnd,WParam wParam,LParam lParam);	
-		virtual LResult RightButtonUpMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult MouseMoveMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult MouseWheelMessage(HWnd hwnd,WParam wParam,LParam lParam);	
-		virtual LResult DestroyMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult PaintMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual LResult EraseBackgroundMessage(HWnd hwnd,WParam wParam,LParam lParam);
-		virtual void Display(HWnd hwnd,int64_t timeDelta);
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-	private:
-		using MiddleLayerTypePtr = MiddleLayerInterfaceSmartPointer;
+		bool PreCreate(const EnvironmentDirectory& environmentDirectory) override;
+		bool Initialize() override;
+		void PreIdle() override;
+		void Terminate() override;
 
-	private:
-		void DoCloseMessage(HWnd hwnd) const;	
-		System::String GetWindowsClassName(HWnd hwnd) const;	
-		const WindowPoint GetCursorPosition( HWnd hwnd ) const; 
-		bool IsSpecialKey(int virtKey) const;
+		LResult CreateMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult SizeMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult CloseMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult CharMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult MoveMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult KeyUpMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult LeftButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult LeftButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult MiddleButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult MiddleButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult RightButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult RightButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult MouseMoveMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult MouseWheelMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult DestroyMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult PaintMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		LResult EraseBackgroundMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
+		void Display(HWnd hwnd, int64_t timeDelta) override;
 
 	private:
-		MiddleLayerTypePtr m_MiddleLayerPtr;
-		int64_t m_TimeDelta;
+		void DoCloseMessage(HWnd hwnd) const;
+		String GetWindowsClassName(HWnd hwnd) const;
+		const WindowPoint GetCursorPosition(HWnd hwnd) const noexcept;
+		bool IsSpecialKey(int virtualKey) const noexcept;
+
+	private:
+		MiddleLayerInterfaceSharedPtr m_MiddleLayer;
+		int64_t m_Accumulative;
 	};
 }
 

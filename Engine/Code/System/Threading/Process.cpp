@@ -2,15 +2,38 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 16:16)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/10 13:00)
 
 #include "System/SystemExport.h"
 
 #include "Process.h"
+#include "Thread.h"
+#include "Flags/ProcessFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h" 
+#include "System/Window/Engineering.h"
 #include "System/Window/WindowSystem.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+
+bool System
+	::CreateSystemProcess(const String& applicationName)
+{
+	ProcessStartupinfo startupInfo{ };
+	ProcessInformation processInformation{ };
+
+	auto fullName = GetEngineeringDirectory() + applicationName + GetEngineeringSuffix() + GetEngineeringExeSuffix();
+
+	const auto result = CreateSystemProcess(fullName.c_str(), nullptr, nullptr, nullptr, true,
+											ProcessCreation::CreateNewConsole, nullptr, nullptr, &startupInfo, &processInformation);
+
+	if (result)
+	{
+		CloseSystemThread(processInformation.hThread);
+		CloseSystemProcess(processInformation.hProcess);
+	}
+
+	return result;
+}
 
 bool System
 	::CreateSystemProcess(const TChar* applicationName, TChar* commandLine, WindowSecurityAttributesPtr processAttributes, WindowSecurityAttributesPtr threadAttributes,

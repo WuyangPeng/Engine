@@ -11,7 +11,7 @@
 #include "Rendering/Dx9Renderer/Dx9VertexFormat.h"
 #include "Rendering/OpenGLRenderer/OpenGLVertexFormat.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 using std::make_shared;
 
 Rendering::PlatformVertexFormatImpl

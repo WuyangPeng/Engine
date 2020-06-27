@@ -1,19 +1,19 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/01 20:20)
+// 引擎版本：0.0.2.4 (2020/03/11 13:46)
 
 #include "Network/NetworkExport.h"
 
 #ifdef NETWORK_USE_ACE
 
 #include "ACEMainManager.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 #include "System/Helper/UnusedMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 Network::ACEMainManager
-	::ACEMainManager() 
+	::ACEMainManager()
 	:ParentType{}, InterfaceType{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -34,7 +34,7 @@ void Network::ACEMainManager
 }
 
 int Network::ACEMainManager
-	::run_i(int argc , ACE_TCHAR** argv)
+	::run_i(int argc, ACE_TCHAR** argv)
 {
 	NETWORK_CLASS_IS_VALID_9;
 

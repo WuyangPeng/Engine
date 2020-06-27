@@ -14,7 +14,7 @@ Mathematics::StaticFindIntersectorPlane3Triangle3<Real>
 	::StaticFindIntersectorPlane3Triangle3(const Plane3& plane,const Triangle3& triangle, Real epsilon)
 	:mPlane{ plane }, mTriangle{ triangle }
 {
-    mEpsilon = (epsilon >= Real{} ? epsilon : Real{});
+    mEpsilon = (epsilon >= Math<Real>::sm_Zero ? epsilon : Math<Real>::sm_Zero);
 }
 
 template <typename Real>
@@ -36,7 +36,7 @@ void Mathematics::StaticFindIntersectorPlane3Triangle3<Real>
 	::Find()
 {
     // Compute the signed distances from the vertices to the plane.
-	auto zero = Real{};
+	auto zero = Math<Real>::sm_Zero;
     Real SD[3];
     for (int i = 0; i < 3; ++i)
     {

@@ -36,8 +36,6 @@ namespace CoreTools
 		void GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const char* triggerAssertCheck);
 		void AppendUserArguments(const char* format, va_list arguments);
 
-		void WriteToLog();
-
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 		void WriteToOutputDebug();
 #endif // CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW

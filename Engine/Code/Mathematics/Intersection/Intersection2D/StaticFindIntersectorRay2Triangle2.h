@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/11 17:41)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:37)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_TRIANGLE2_H
@@ -26,13 +26,13 @@ namespace Mathematics
 		using Triangle2 = Triangle2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
 		using Math = Math<Real>;
-		
+
 	public:
 		StaticFindIntersectorRay2Triangle2(const Ray2& ray, const Triangle2& triangle);
-		
+
 		// Object access.
-		const Ray2 GetRay () const;
-		const Triangle2 GetTriangle () const;
+		const Ray2 GetRay() const;
+		const Triangle2 GetTriangle() const;
 
 		// The intersection set.  If the ray and triangle do not intersect,
 		// GetQuantity() returns 0, in which case the intersection type is
@@ -42,17 +42,17 @@ namespace Mathematics
 		// and triangle intersect in a segment, GetQuantity() returns 2, in which
 		// case the intersection type is IT_SEGMENT and GetPoint() returns the
 		// segment endpoints.
-		int GetQuantity () const;
-		const Vector2D GetPoint (int i) const;
-		
+		int GetQuantity() const;
+		const Vector2D GetPoint(int i) const;
+
 	private:
 		// Static intersection query.
 		void Find();
-		
+
 		// The objects to intersect.
 		Ray2 mRay;
 		Triangle2 mTriangle;
-		
+
 		// Information about the intersection set.
 		int mQuantity;
 		Vector2D mPoint[2];

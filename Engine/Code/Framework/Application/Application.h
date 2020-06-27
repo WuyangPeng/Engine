@@ -1,18 +1,18 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:05)
+// 引擎版本：0.3.0.1 (2020/05/21 13:42)
 
 #ifndef FRAMEWORK_APPLICATION_H
 #define FRAMEWORK_APPLICATION_H
 
-#include "KeyIdentifiers.h"
-#include "KeyboardModifiers.h"
-#include "MouseButtons.h"
-#include "MouseState.h"
-#include "MouseModifiers.h"
-#include "ApplicationTrait.h"
+#include "Flags/KeyIdentifiers.h"
+#include "Flags/KeyboardModifiers.h"
+#include "Flags/MouseButtons.h"
+#include "Flags/MouseState.h"
+#include "Flags/MouseModifiers.h"
+#include "Flags/ApplicationTrait.h"
 #include "FontInformation.h"
 #include "MousePosition.h"
 #include "PerformanceMeasurements.h"

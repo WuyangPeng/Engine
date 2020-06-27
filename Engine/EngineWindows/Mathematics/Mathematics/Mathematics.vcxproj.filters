@@ -40,9 +40,6 @@
     <Filter Include="Intersection 头文件">
       <UniqueIdentifier>{8caad3e9-2cbb-452e-a3c1-9da9d6fa4236}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{9755c861-5088-4782-83bd-cc2cb7f6c3fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Meshes 头文件">
       <UniqueIdentifier>{e39fa574-9b22-4603-a3c1-9f3f2d186cf0}</UniqueIdentifier>
     </Filter>
@@ -238,6 +235,9 @@
     <Filter Include="Intersection 头文件\Flags">
       <UniqueIdentifier>{349af209-45ff-4eea-870b-47b671838dd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{9755c861-5088-4782-83bd-cc2cb7f6c3fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -257,6 +257,24 @@
     </Text>
     <Text Include="Resource\ReadMe.txt">
       <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -2914,15 +2932,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TriangleProjectOntoAxis.h">
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Meshes\Detail\BasicMeshVertexImpl.h">
       <Filter>Meshes 模板文件\Detail</Filter>
     </ClInclude>
@@ -3864,6 +3873,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\PerspProjEllipsoid.h">
       <Filter>Miscellaneous 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

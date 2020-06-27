@@ -1,22 +1,20 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 15:19)
+// 引擎版本：0.0.2.5 (2020/03/23 17:17)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_H 
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Distance/DistanceBase.h"
 #include "Mathematics/Objects3D/Circle3.h"
- 
+#include "Mathematics/Algebra/AlgebraFwd.h"
+#include "Mathematics/Distance/DistanceBase.h"
+
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector3DTools;
-
 	template <typename Real>
 	class DistanceCircle3Circle3 : public DistanceBase<Real, Vector3D<Real> >
 	{
@@ -26,8 +24,7 @@ namespace Mathematics
 		using ParentType = DistanceBase<Real, Vector3D>;
 		using Circle3 = Circle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
+		using DistanceResult = typename ParentType::DistanceResult; 
 		using Math = Math<Real>;
 
 	public:
@@ -43,7 +40,7 @@ namespace Mathematics
 		virtual const DistanceResult GetSquared() const override;
 
 		// 函数计算动态距离查询。	
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		Circle3 m_LhsCircle;

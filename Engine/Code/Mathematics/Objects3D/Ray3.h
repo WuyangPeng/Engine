@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:12)
+// 引擎版本：0.0.2.5 (2020/03/19 17:23)
 
 #ifndef MATHEMATICS_OBJECTS3D_RAY3_H
 #define MATHEMATICS_OBJECTS3D_RAY3_H
@@ -19,7 +19,7 @@ namespace Mathematics
 	template <typename Real>
 	class Ray3
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Ray3<Real>;
@@ -29,7 +29,7 @@ namespace Mathematics
 	public:
 		// 射线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t >= 0。
 		// 用户必须确保D是单位长度。
-		Ray3 (const Vector3D& origin, const Vector3D& direction,const Real epsilon = Math::sm_ZeroTolerance);
+		Ray3(const Vector3D& origin, const Vector3D& direction, const Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
 

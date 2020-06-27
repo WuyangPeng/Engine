@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 09:30)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 17:29)
 
 #ifndef MATHEMATICS_OBJECTS3D_CIRCLE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_CIRCLE3_DETAIL_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::Circle3<Real>
-	::Circle3( const Vector3D& center, const Vector3D& direction0,const Vector3D& direction1, const Vector3D& normal,const Real radius , const Real epsilon)
+	::Circle3(const Vector3D& center, const Vector3D& direction0, const Vector3D& direction1, const Vector3D& normal, const Real radius, const Real epsilon)
 	:m_Center{ center }, m_Direction0{ direction0 }, m_Direction1{ direction1 }, m_Normal{ normal }, m_Radius{ radius }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -27,9 +27,9 @@ template <typename Real>
 bool Mathematics::Circle3<Real>
 	::IsValid() const noexcept
 {
-	if(Vector3DTools::Approximate(Vector3DTools::CrossProduct(m_Direction0,m_Direction1),m_Normal, m_Epsilon) &&
-	   Vector3DTools::Approximate(Vector3DTools::CrossProduct(m_Direction1,m_Normal),m_Direction0, m_Epsilon) &&
-	   Vector3DTools::Approximate(Vector3DTools::CrossProduct(m_Normal,m_Direction0),m_Direction1, m_Epsilon))
+	if (Vector3DTools::Approximate(Vector3DTools::CrossProduct(m_Direction0, m_Direction1), m_Normal, m_Epsilon) &&
+		Vector3DTools::Approximate(Vector3DTools::CrossProduct(m_Direction1, m_Normal), m_Direction0, m_Epsilon) &&
+		Vector3DTools::Approximate(Vector3DTools::CrossProduct(m_Normal, m_Direction0), m_Direction1, m_Epsilon))
 	{
 		return true;
 	}
@@ -48,7 +48,6 @@ typename const Mathematics::Circle3<Real>::Vector3D Mathematics::Circle3<Real>
 
 	return m_Center;
 }
-
 
 template <typename Real>
 typename const Mathematics::Circle3<Real>::Vector3D Mathematics::Circle3<Real>
@@ -99,8 +98,8 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Circle3<Real>& lhs, const Circle3<Real>& rhs, const Real epsilon)
 {
-	return Vector3DTools<Real>::Approximate(lhs.GetCenter(),rhs.GetCenter(),epsilon) &&
-		   Vector3DTools<Real>::Approximate(lhs.GetDirection0(),rhs.GetDirection0(),epsilon) &&
+	return Vector3DTools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
+		   Vector3DTools<Real>::Approximate(lhs.GetDirection0(), rhs.GetDirection0(), epsilon) &&
 		   Vector3DTools<Real>::Approximate(lhs.GetDirection1(), rhs.GetDirection1(), epsilon) &&
 		   Vector3DTools<Real>::Approximate(lhs.GetNormal(), rhs.GetNormal(), epsilon) &&
 		   Math<Real>::Approximate(lhs.GetRadius(), rhs.GetRadius(), epsilon);
@@ -111,8 +110,8 @@ std::ostream& Mathematics
 	::operator<<(std::ostream& outFile, const Circle3<Real>& circle)
 {
 	outFile << "center=" << circle.GetCenter() << ",direction0=" << circle.GetDirection0()
-		    << ",direction1=" << circle.GetDirection1() << ",normal=" << circle.GetNormal() 
-			<< "radius=" << circle.GetRadius();
+		    << ",direction1=" << circle.GetDirection1() << ",normal=" << circle.GetNormal()
+		    << "radius=" << circle.GetRadius();
 
 	return outFile;
 }

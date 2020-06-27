@@ -17,7 +17,7 @@
 template <typename Real>
 Mathematics::BezierCurve2<Real>
 	::BezierCurve2 (int degree, Vector2D<Real>* ctrlPoint)
-	:SingleCurve2<Real>{ Real{}, (Real)1 }
+	:SingleCurve2<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }
 {
     MATHEMATICS_ASSERTION_0(degree >= 2, "The degree must be three or larger\n");
 
@@ -61,13 +61,13 @@ Mathematics::BezierCurve2<Real>
     // entries for r >= c).
     mChoose = NEW2<Real>(mNumCtrlPoints, mNumCtrlPoints);
 
-    mChoose[0][0] = (Real)1;
-    mChoose[1][0] = (Real)1;
-    mChoose[1][1] = (Real)1;
+    mChoose[0][0] = static_cast<Real>(1);
+    mChoose[1][0] = static_cast<Real>(1);
+    mChoose[1][1] = static_cast<Real>(1);
     for (auto i = 2; i <= mDegree; ++i)
     {
-        mChoose[i][0] = (Real)1;
-        mChoose[i][i] = (Real)1;
+        mChoose[i][0] = static_cast<Real>(1);
+        mChoose[i][i] = static_cast<Real>(1);
         for (j = 1; j < i; ++j)
         {
             mChoose[i][j] = mChoose[i-1][j-1] + mChoose[i-1][j];
@@ -104,7 +104,7 @@ template <typename Real>
 Mathematics::Vector2D<Real> Mathematics::BezierCurve2<Real>
 	::GetPosition (Real t) const
 {
-    auto oneMinusT = (Real)1 - t;
+    auto oneMinusT = static_cast<Real>(1) - t;
 	auto powT = t;
 	auto result = oneMinusT*mCtrlPoint[0];
 
@@ -124,7 +124,7 @@ template <typename Real>
 Mathematics::Vector2D<Real> Mathematics::BezierCurve2<Real>
 	::GetFirstDerivative (Real t) const
 {
-	auto oneMinusT = (Real)1 - t;
+	auto oneMinusT = static_cast<Real>(1) - t;
 	auto powT = t;
 	auto result = oneMinusT*mDer1CtrlPoint[0];
 
@@ -146,7 +146,7 @@ template <typename Real>
 Mathematics::Vector2D<Real> Mathematics::BezierCurve2<Real>
 	::GetSecondDerivative (Real t) const
 {
-	auto oneMinusT = (Real)1 - t;
+	auto oneMinusT = static_cast<Real>(1) - t;
 	auto powT = t;
 	auto result = oneMinusT*mDer2CtrlPoint[0];
 
@@ -159,7 +159,9 @@ Mathematics::Vector2D<Real> Mathematics::BezierCurve2<Real>
     }
 
     result += mDer2CtrlPoint[degreeM2]*powT;
-    result *= Real(mDegree*(mDegree-1));
+	auto temp = mDegree - 1;
+	auto temp2 = mDegree * temp;
+    result *= Real(temp2);
 
     return result;
 }
@@ -173,7 +175,7 @@ Mathematics::Vector2D<Real> Mathematics::BezierCurve2<Real>
         return Vector2D<Real>::sm_Zero;
     }
 
-	auto oneMinusT = (Real)1 - t;
+	auto oneMinusT = static_cast<Real>(1) - t;
 	auto powT = t;
 	auto result = oneMinusT*mDer3CtrlPoint[0];
 
@@ -186,7 +188,10 @@ Mathematics::Vector2D<Real> Mathematics::BezierCurve2<Real>
     }
 
     result += mDer3CtrlPoint[degreeM3]*powT;
-    result *= Real(mDegree*(mDegree-1)*(mDegree-2));
+	auto temp1 = mDegree - 1;
+	auto temp2 = mDegree - 2;
+	auto temp3 = mDegree * temp1*temp2;
+    result *= Real(temp3);
 
     return result;
 }

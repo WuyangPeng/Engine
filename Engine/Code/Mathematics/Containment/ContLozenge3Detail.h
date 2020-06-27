@@ -171,7 +171,7 @@ Mathematics::Lozenge3<Real> Mathematics
 			// Container is a capsule.
 			center = box.GetCenter() + aMin*box.GetAxis(2) + ((Real{0.5})*(bMin + bMax))*box.GetAxis(1);
 			extent[0] = (Real{0.5})*(aMax - aMin);
-			extent[1] = Real{};
+			extent[1] = Math<Real>::sm_Zero;
 		}
 	}
 	else
@@ -180,7 +180,7 @@ Mathematics::Lozenge3<Real> Mathematics
 		{
 			// Container is a capsule.
 			center = box.GetCenter() + bMin*box.GetAxis(1) + ((Real{0.5})*(aMin + aMax))*box.GetAxis(2);
-			extent[0] = Real{};
+			extent[0] = Math<Real>::sm_Zero;
 			extent[1] = (Real{0.5})*(bMax - bMin);
 		}
 		else
@@ -189,8 +189,8 @@ Mathematics::Lozenge3<Real> Mathematics
 			center = box.GetCenter() +
 				((Real{0.5})*(aMin + aMax))*box.GetAxis(2) +
 				((Real{0.5})*(bMin + bMax))*box.GetAxis(1);
-			extent[0] = Real{};
-			extent[1] = Real{};
+			extent[0] = Math<Real>::sm_Zero;
+			extent[1] = Math<Real>::sm_Zero;
 		}
 	}
 	Rectangle3<Real> rectangle{ center,axis[0],axis[1],extent[0],extent[1] };

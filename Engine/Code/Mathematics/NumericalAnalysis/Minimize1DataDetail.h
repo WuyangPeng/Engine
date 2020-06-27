@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/09 17:17)
+// 引擎版本：0.0.2.5 (2020/03/20 14:48)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_DETAIL_H
@@ -74,8 +74,8 @@ void Mathematics::Minimize1Data<Real>
 }
 
 template <typename Real>
-void Mathematics::Minimize1Data<Real>	
-	::SetInitValue() 
+void Mathematics::Minimize1Data<Real>
+	::SetInitValue()
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 

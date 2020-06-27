@@ -1,80 +1,112 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 09:50)
+// 引擎版本：0.3.0.1 (2020/05/21 10:36)
 
-// 窗口过程类的实现
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_DETAIL_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_DETAIL_H
 
 #include "WindowProcessHandle.h"
 #include "WindowProcessManager.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 template <typename WindowMessage>
 Framework::WindowProcessHandle<WindowMessage>
-	::WindowProcessHandle()
-{
-	WindowMessageInterfaceSmartPointer ptr(NEW0 MessageType);
+	::WindowProcessHandle(int64_t delta)
+	:m_WindowMessage{ std::make_shared<MessageType>(delta) }
+{  
+	WINDOW_PROCESS_MANAGER_SINGLETON.SetWindowMessage(m_WindowMessage);
 
-	WINDOW_PROCESS_MANAGER_SINGLETON.SetWindowMessage(ptr);
-
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename WindowMessage>
 Framework::WindowProcessHandle<WindowMessage>
 	::~WindowProcessHandle()
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 
-	WINDOW_PROCESS_MANAGER_SINGLETON.ClearWindowMessage();	
+	CoreTools::NoexceptNoReturn(*this, &ClassType::ClearWindowMessage);
+}
+
+// private
+template <typename WindowMessage>
+void Framework::WindowProcessHandle<WindowMessage>
+	::ClearWindowMessage()
+{
+	WINDOW_PROCESS_MANAGER_SINGLETON.ClearWindowMessage(m_WindowMessage);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename WindowMessage>
 bool Framework::WindowProcessHandle<WindowMessage>
-	::IsValid() const noexcept  
+	::IsValid() const noexcept
 {
-	return true;
+	if (m_WindowMessage != nullptr)
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
+// static
 template <typename WindowMessage>
-System::WindowProc Framework::WindowProcessHandle<WindowMessage>
-	::GetProcess() const
+typename Framework::WindowProcessHandle<WindowMessage>::WindowProcess Framework::WindowProcessHandle<WindowMessage>
+	::GetProcess() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
 	return WINDOW_PROCESS_MANAGER_SINGLETON.GetProcess();
 }
 
+// static
 template <typename WindowMessage>
-System::DisplayPtr 
-	Framework::WindowProcessHandle<WindowMessage>
-	::GetFunction() const
+typename Framework::WindowProcessHandle<WindowMessage>::DisplayFunction Framework::WindowProcessHandle<WindowMessage>
+	::GetFunction() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
 	return WINDOW_PROCESS_MANAGER_SINGLETON.GetFunction();
 }
 
+// static
 template <typename WindowMessage>
 bool Framework::WindowProcessHandle<WindowMessage>
-	::PreCreate()
+	::IsClassNameExist(const System::String& className)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+	return WINDOW_PROCESS_MANAGER_SINGLETON.IsClassNameExist(className);
+}
 
-	return WINDOW_PROCESS_MANAGER_SINGLETON.PreCreate();
+// static
+template <typename WindowMessage>
+bool Framework::WindowProcessHandle<WindowMessage>
+	::SetNewClassName(const System::String& className)
+{
+	return WINDOW_PROCESS_MANAGER_SINGLETON.SetNewClassName(className);
+}
+
+// static
+template <typename WindowMessage>
+System::WindowHWnd Framework::WindowProcessHandle<WindowMessage>
+	::GetMainWindowHwnd()
+{
+	return WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
+}
+
+template <typename WindowMessage>
+bool Framework::WindowProcessHandle<WindowMessage>
+	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
+
+	return WINDOW_PROCESS_MANAGER_SINGLETON.PreCreate(environmentDirectory);
 }
 
 template <typename WindowMessage>
 bool Framework::WindowProcessHandle<WindowMessage>
 	::Initialize()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
 	return WINDOW_PROCESS_MANAGER_SINGLETON.Initialize();
 }
@@ -83,46 +115,18 @@ template <typename WindowMessage>
 void Framework::WindowProcessHandle<WindowMessage>
 	::PreIdle()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
 	return WINDOW_PROCESS_MANAGER_SINGLETON.PreIdle();
 }
-
 
 template <typename WindowMessage>
 void Framework::WindowProcessHandle<WindowMessage>
 	::Terminate()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+	FRAMEWORK_CLASS_IS_VALID_1;
 
 	return WINDOW_PROCESS_MANAGER_SINGLETON.Terminate();
-}
-
-template <typename WindowMessage>
-bool Framework::WindowProcessHandle<WindowMessage>
-	::IsClassNameExist( const System::String& className ) const
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-	return WINDOW_PROCESS_MANAGER_SINGLETON.IsClassNameExist(className);
-}
-
-template <typename WindowMessage>
-bool Framework::WindowProcessHandle<WindowMessage>
-	::SetNewClassName( const System::String& className )
-{
-	FRAMEWORK_CLASS_IS_VALID_9;
-
-	return WINDOW_PROCESS_MANAGER_SINGLETON.SetNewClassName(className);
-}
-
-template <typename WindowMessage>
-System::WindowHWnd Framework::WindowProcessHandle<WindowMessage>
-	::GetMainWindowHwnd() const
-{
-	FRAMEWORK_CLASS_IS_VALID_9;
-
-	return WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
 }
 
 #endif // FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_DETAIL_H

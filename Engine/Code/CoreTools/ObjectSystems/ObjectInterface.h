@@ -10,6 +10,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "ObjectSystemsFwd.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/RttiMacro.h"
 #include "CoreTools/MemoryTools/FirstSubclassSmartPointer.h" 
 
@@ -90,7 +91,12 @@ namespace CoreTools
 
 namespace CoreTools
 {
+#include STSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26426)  
 	CORE_TOOLS_STREAM_REGISTER(ObjectInterface);
+
+#include STSTEM_WARNING_POP
 }
 
 #endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H

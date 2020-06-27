@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 16:19)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 12:53)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLAR_DECOMPOSITION_VALUE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLAR_DECOMPOSITION_VALUE_H
@@ -11,31 +11,31 @@
 
 namespace Mathematics
 {
-    template <typename Real>
+	template <typename Real>
 	class PolarDecompositionValue
-    {
-    public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-        
+	{
+	public:
+		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
 		using ClassType = PolarDecompositionValue<Real>;
 		using Matrix3 = Matrix3<Real>;
-        
-    public:
+
+	public:
 		explicit PolarDecompositionValue(const Matrix3& matrix);
-        
+
 		CLASS_INVARIANT_DECLARE;
-        
-    public:
+
+	public:
 		const Matrix3 GeOrthogonalMatrix() const;
 		const Matrix3 GetSymmetryMatrix() const;
-	
+
 	private:
 		void Calculate(const Matrix3& matrix);
 
-    private:
+	private:
 		Matrix3 m_Orthogonal;
-		Matrix3 m_Symmetry;	
-    };
+		Matrix3 m_Symmetry;
+	};
 
 	using PolarDecompositionValuef = PolarDecompositionValue<float>;
 	using PolarDecompositionValued = PolarDecompositionValue<double>;

@@ -1,65 +1,72 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 10:46)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:36)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowHIcon.h"
+#include "System/Window/WindowRegister.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "System/Window/WindowRegister.h"
 
 Framework::WindowHIcon
-	::WindowHIcon(const System::TChar* icon)
-	:m_HIcon(System::LoadSystemIcon(nullptr,icon))
+	::WindowHIcon(const TChar* icon) noexcept
+	:m_HIcon{ System::LoadSystemIcon(nullptr, icon) }
 {
 	CheckUpHIcon();
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowHIcon
-	::WindowHIcon(HInstance hInstance,int icon)
-	:m_HIcon(System::LoadSystemIcon(hInstance,MAKEINTRESOURCE(icon)))
+	::WindowHIcon(HInstance instance, int icon)
+	:m_HIcon{ System::LoadSystemIcon(instance, System::MakeIntreSource(boost::numeric_cast<System::WindowWord>(icon))) }
 {
 	CheckUpHIcon();
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
+	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+} 
 
 // private
 void Framework::WindowHIcon
-	::CheckUpHIcon()
+	::CheckUpHIcon() noexcept
 {
-	if(m_HIcon == nullptr)
+	if (m_HIcon == nullptr)
 	{
-		m_HIcon = System::LoadSystemIcon(nullptr, IDI_APPLICATION);
+		m_HIcon = System::LoadSystemIcon(nullptr, System::g_Application);
+
 		LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
 			<< SYSTEM_TEXT("º”‘ÿÕº±Í ß∞‹£°")
-			<< CoreTools::LogAppenderIOManageSign::TriggerAssert
-			<< CoreTools::LogAppenderIOManageSign::Refresh;
+			<< LOG_SINGLETON_TRIGGER_ASSERT;
 	}
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-bool Framework::WindowHIcon
-	::IsValid() const noexcept
-{
-	if(m_HIcon != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_STUB_DEFINE(Framework, WindowHIcon) 
 
 System::WindowHIcon Framework::WindowHIcon
-	::GetHIcon() const
+	::GetHIcon() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
 	return m_HIcon;
 }
 
+Framework::WindowHIcon Framework::WindowHIcon
+	::Create(HInstance instance, bool isDefaultIcon, int icon)
+{
+	if (isDefaultIcon)
+	{
+		if(icon == 0)
+			return WindowHIcon{ };
+		else
+			return WindowHIcon{ nullptr, icon };
+	}
+	else
+	{
+		return WindowHIcon{ instance,icon };
+	}
+}
 

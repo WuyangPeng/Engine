@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:10)
+// 引擎版本：0.2.0.0 (2020/05/07 17:59)
 
 #ifndef SYSTEM_HELPER_SGI_H
 #define SYSTEM_HELPER_SGI_H 
@@ -10,7 +10,7 @@
 #if defined(__STL_CONFIG_H)
 
 	//  通用 SGI STL:
- 
+
 	#ifndef TCRE_CPPLIB_VERSION
 		#define TCRE_CPPLIB_VERSION 1
 	#endif // TCRE_CPPLIB_VERSION
@@ -19,8 +19,7 @@
 		#define TCRE_SYSTEM_STDLIB "SGI 标准库版本 "
 	#endif // !TCRE_STDLIB 
 
-	#if !defined(CYGWIN) && \
-		(defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__APPLE) || defined(APPLE))
+	#if !defined(CYGWIN) && (defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__APPLE) || defined(APPLE))
 		#include <unistd.h>
 	#endif // !defined(CYGWIN) && (  defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__APPLE) || defined(APPLE))
 

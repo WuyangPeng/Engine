@@ -46,31 +46,31 @@ namespace System
 void System
 	::GlClearDepthf(GLclampf d) noexcept
 {
-	SYSTEM_BODY_A1(gglClearDepthf, d);
+	SYSTEM_BODY_1(gglClearDepthf, d);
 }
 
 void System
 	::GlDepthRangef(GLclampf n, GLclampf f) noexcept
 {
-	SYSTEM_BODY_A2(gglDepthRangef, n, f);
+	SYSTEM_BODY_2(gglDepthRangef, n, f);
 }
 
 void System
 	::GlGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint* range, GLint* precision) noexcept
 {
-	SYSTEM_BODY_A4(gglGetShaderPrecisionFormat, shadertype, precisiontype, range, precision);
+	SYSTEM_BODY_4(gglGetShaderPrecisionFormat, shadertype, precisiontype, range, precision);
 }
 
 void System
 	::GlReleaseShaderCompiler() noexcept
 {
-	SYSTEM_BODY_A0(gglReleaseShaderCompiler);
+	SYSTEM_BODY_0(gglReleaseShaderCompiler);
 }
 
 void System
 	::GlShaderBinary(GLsizei count, const GLuint* shaders, GLenum binaryformat, const void* binary, GLsizei length) noexcept
 {
-	SYSTEM_BODY_A5(gglShaderBinary, count, shaders, binaryformat, binary, length);
+	SYSTEM_BODY_5(gglShaderBinary, count, shaders, binaryformat, binary, length);
 }
 
 // GL_ARB_ES3_1_compatibility
@@ -99,7 +99,7 @@ namespace System
 void System
 	::GlMemoryBarrierByRegion(GLbitfield barriers) noexcept
 {
-	SYSTEM_BODY_A1(gglMemoryBarrierByRegion, barriers);
+	SYSTEM_BODY_1(gglMemoryBarrierByRegion, barriers);
 }
 
 // GL_ARB_ES3_compatibility

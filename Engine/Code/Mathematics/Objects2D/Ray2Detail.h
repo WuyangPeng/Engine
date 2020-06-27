@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/06 11:32)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 16:56)
 
 #ifndef MATHEMATICS_OBJECTS2D_RAY2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_RAY2_DETAIL_H
@@ -15,7 +15,7 @@
 
 template <typename Real>
 Mathematics::Ray2<Real>
-	::Ray2( const Vector2D& origin, const Vector2D& direction,const Real epsilon )
+	::Ray2(const Vector2D& origin, const Vector2D& direction, const Real epsilon)
 	:m_Origin{ origin }, m_Direction{ direction }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -26,13 +26,12 @@ template <typename Real>
 bool Mathematics::Ray2<Real>
 	::IsValid() const noexcept
 {
-	if(m_Direction.IsNormalize(m_Epsilon))	
-		return true;	
-	else	
-		return false;	
+	if (m_Direction.IsNormalize(m_Epsilon))
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 typename const Mathematics::Ray2<Real>::Vector2D Mathematics::Ray2<Real>
@@ -65,12 +64,12 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Ray2<Real>& lhs, const Ray2<Real>& rhs, const Real epsilon)
 {
-	return Vector2DTools<Real>::Approximate(lhs.GetOrigin(),rhs.GetOrigin(),epsilon) &&
-		   Vector2DTools<Real>::Approximate(lhs.GetDirection(),rhs.GetDirection(),epsilon);
+	return Vector2DTools<Real>::Approximate(lhs.GetOrigin(), rhs.GetOrigin(), epsilon) &&
+		   Vector2DTools<Real>::Approximate(lhs.GetDirection(), rhs.GetDirection(), epsilon);
 }
 
 template <typename Real>
-std::ostream&  Mathematics
+std::ostream& Mathematics
 	::operator<<(std::ostream& outFile, const Ray2<Real>& ray)
 {
 	outFile << "origin=" << ray.GetOrigin() << ",direction=" << ray.GetDirection();

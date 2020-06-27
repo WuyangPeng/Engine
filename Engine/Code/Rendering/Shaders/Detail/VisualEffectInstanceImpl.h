@@ -55,9 +55,12 @@ namespace Rendering
 		const ConstVisualEffectSmartPointer GetEffect() const;
 		int GetTechniqueIndex() const;
 		int GetNumPasses() const;
-		const ConstVisualPassSmartPointer GetPass(int pass) const;
-		const ConstShaderParametersSmartPointer GetVertexParameters(int pass) const;
-		const ConstShaderParametersSmartPointer GetPixelParameters(int pass) const;
+		const ConstVisualPassSmartPointer GetConstPass(int pass) const;
+		const ConstShaderParametersSmartPointer GetConstVertexParameters(int pass) const;
+		const ConstShaderParametersSmartPointer GetConstPixelParameters(int pass) const;
+	 
+		const ShaderParametersSmartPointer GetVertexParameters(int pass);
+		const ShaderParametersSmartPointer GetPixelParameters(int pass);
 
 		// 这些函数设定常数/纹理。
 		// 如果成功，返回值是非负值，并且该索引指向相应的数组。

@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-#include <boost/property_tree/json_parser.hpp>
+#include "System/Helper/PragmaWarning/PropertyTree.h"
 
 using std::string;
 using boost::property_tree::ptree;
@@ -41,7 +41,7 @@ void Rendering::AnalysisRendererManager
 
 	if (Rendering::RendererTypes::First <= m_RendererType && m_RendererType < Rendering::RendererTypes::Max)
 	{
-		m_RendererPtr = std::make_shared<Rendering::Renderer>(m_RendererType, m_RendererBasis);
+		m_RendererPtr = std::make_shared<Rendering::Renderer>(m_RendererType, m_RendererBasis);		
 	}
 	else
 	{
@@ -51,6 +51,8 @@ void Rendering::AnalysisRendererManager
 			<< SYSTEM_TEXT("初始化渲染器类型失败！")
 			<< CoreTools::LogAppenderIOManageSign::TriggerAssert;
 	}	
+
+	m_RendererPtr->Init();
 }
 
 // private

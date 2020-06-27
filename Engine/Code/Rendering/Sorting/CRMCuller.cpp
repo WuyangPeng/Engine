@@ -21,7 +21,7 @@ Rendering::CRMCuller
 }
 
 void Rendering::CRMCuller
-	::Insert(const ConstSpatialSmartPointer& visible)
+	::Insert(const VisualSmartPointer& visible)
 {
     if (mUnique.find(visible) == mUnique.end())
     {

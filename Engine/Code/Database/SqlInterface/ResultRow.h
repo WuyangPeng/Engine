@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 09:59)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 11:31)
 
 #ifndef DATABASE_SQL_INTERFACE_DOC_RESULT_ROW_H
 #define DATABASE_SQL_INTERFACE_DOC_RESULT_ROW_H
@@ -10,6 +10,7 @@
 #include "Database/DatabaseDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"  
+#include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/MysqlConnectorWrappers/Fwd/MysqlConnectorFwd.h"
 
 #include <string>
@@ -19,8 +20,6 @@ EXPORT_NONCOPYABLE_CLASS(DATABASE);
 
 namespace Database
 {
-	class ConfigurationStrategy;
-
 	class DATABASE_DEFAULT_DECLARE ResultRow : private boost::noncopyable
 	{
 	public:
@@ -48,7 +47,7 @@ namespace Database
 	private:
 		IMPL_TYPE_DECLARE(ResultRow);
 
-#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+	#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 	public:
 		using MysqlxDbDocPtr = std::shared_ptr<MysqlxDbDoc>;
 		using MysqlxRowPtr = std::shared_ptr<MysqlxRow>;
@@ -56,7 +55,7 @@ namespace Database
 	public:
 		ResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc);
 		ResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow);
-#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+	#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 	};
 
 	DATABASE_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& out, const ResultRow& docResultRow);

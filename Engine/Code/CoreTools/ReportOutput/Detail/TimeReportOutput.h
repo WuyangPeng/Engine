@@ -30,7 +30,7 @@ namespace CoreTools
 		using CpuTimerPtr = std::shared_ptr<CpuTimer>;
 
 	public:
-		TimeReportOutput(const std::string& timeDescribe, int borderLineLength, std::ostream* osPtr = &std::cout);
+		TimeReportOutput(const std::string& timeDescribe, int borderLineLength, const OStreamShared& osPtr );
 		virtual ~TimeReportOutput();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;

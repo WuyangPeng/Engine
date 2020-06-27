@@ -11,12 +11,15 @@
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
+#include "CoreTools/CharacterString/StringConversion.h"
 
-#include <boost/property_tree/json_parser.hpp>
+#include "System/Helper/PragmaWarning/PropertyTree.h"
+#include "System/Window/Flags/WindowPictorialFlags.h"
 
 using std::string;
 using boost::property_tree::ptree;
 using boost::property_tree::ptree_error;
+using namespace std::literals;
 
 Rendering::AnalysisRendererParameterManager
 	::AnalysisRendererParameterManager( const string& fileName )
@@ -141,6 +144,21 @@ void Rendering::AnalysisRendererParameterManager
 			 << SYSTEM_TEXT("初始化窗口参数失败！")
 			 << CoreTools::LogAppenderIOManageSign::TriggerAssert;
 	}
+
+	auto className = m_WindowParameterTree.get("ClassName", ""s);
+	auto menuName = m_WindowParameterTree.get("MenuName", ""s);
+
+	m_RendererParameterPtr->SetWindowClassName(CoreTools::StringConversion::MultiByteConversionStandard(className));
+	m_RendererParameterPtr->SetWindowMenuName(CoreTools::StringConversion::MultiByteConversionStandard(menuName));
+
+
+	int icon = m_WindowParameterTree.get("Icon", 0);
+	bool isIconDefault = m_WindowParameterTree.get("IconDefault",true);
+	int cursor = m_WindowParameterTree.get("Cursor", 0);
+	bool isCursorDefault = m_WindowParameterTree.get("CursorDefault", true);
+	System::WindowBrushTypes background = System::UnderlyingCastEnum<System::WindowBrushTypes>(m_WindowParameterTree.get("Background", 0));
+
+	m_RendererParameterPtr->SetWindowPictorialParameter(icon, isIconDefault, cursor, isCursorDefault, background);
 }
 
 #ifdef OPEN_CLASS_INVARIANT

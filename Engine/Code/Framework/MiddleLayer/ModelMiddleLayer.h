@@ -1,10 +1,9 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:50)
+// 引擎版本：0.3.0.1 (2020/05/21 14:49)
 
-// 模型层类的声明
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_MIDDLE_LAYER_H
 
@@ -13,12 +12,13 @@
 #include "ModelViewControllerMiddleLayer.h"
 #include "CoreTools/Helper/ExportMacro.h" 
 
-#include <boost/shared_ptr.hpp>
+#include <string>
 
 FRAMEWORK_EXPORT_SHARED_PTR(ModelMiddleLayerImpl);
 
 namespace Framework
 {
+	// 模型层类
 	class FRAMEWORK_DEFAULT_DECLARE ModelMiddleLayer : public ModelViewControllerMiddleLayer
 	{
 	public:
@@ -26,30 +26,47 @@ namespace Framework
 		using ParentType = ModelViewControllerMiddleLayer;
 
 	public:
-		ModelMiddleLayer();
-		virtual ~ModelMiddleLayer();
-	
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		explicit ModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+		~ModelMiddleLayer() noexcept = default;
+		ModelMiddleLayer(const ModelMiddleLayer& rhs) noexcept = delete;
+		ModelMiddleLayer& operator=(const ModelMiddleLayer& rhs) noexcept = delete;
+		ModelMiddleLayer(ModelMiddleLayer&& rhs) noexcept;
+		ModelMiddleLayer& operator=(ModelMiddleLayer&& rhs) noexcept;
 
-		virtual bool PreCreate();
-		virtual bool Initialize();
-		virtual void PreIdle();
-		virtual void Terminate();		
-		virtual bool Create();
-		virtual bool Destroy();
-		virtual bool Idle(int64_t timeDelta);	 		
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; 
+		 
+		bool Idle(int64_t timeDelta) override;
+
+		double GetFrameRate() const;
+		std::string GetFrameRateMessage() const;
 
 		void ResetTime();
-		std::string GetFrameRateMessage() const;
-		void MeasureTime ();
-		void UpdateFrameCount ();
-		double GetFrameRate() const;
-		
+		void MeasureTime();
+		void UpdateFrameCount();		
+
+		// 渲染中间层处理
+		bool Paint() final;
+		bool Move(const WindowPoint& point) final;
+		bool Resize(WindowDisplay windowDisplay, const WindowSize& size) final;
+
+		// 按键消息中间层处理
+		bool KeyUp(int key, const WindowPoint& point) final;
+		bool KeyDown(int key, const WindowPoint& point) final;
+		bool SpecialKeyUp(int key, const WindowPoint& point) final;
+		bool SpecialKeyDown(int key, const WindowPoint& point) final;
+
+		// 鼠标消息中间层处理
+		bool PassiveMotion(const WindowPoint& point) final;
+		bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
+		bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
+		bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
+
 	private:
 		IMPL_TYPE_DECLARE(ModelMiddleLayer);
 	};
 
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ModelMiddleLayer);
+	using ModelMiddleLayerSharedPtr = std::shared_ptr<ModelMiddleLayer>;
+	using ConstModelMiddleLayerSharedPtr = std::shared_ptr<const ModelMiddleLayer>;
 }
 
 #endif // FRAMEWORK_MIDDLE_LAYER_MODEL_MIDDLE_LAYER_H

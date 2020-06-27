@@ -9,11 +9,14 @@
 
 #include "CoreTools/CoreToolsDll.h" 
 
-#include <iosfwd>
+#include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/UnitTestSuite/OStreamShared.h"
+
+#include <iosfwd> 
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE CMainFunctionHelper
+	class CORE_TOOLS_DEFAULT_DECLARE CMainFunctionHelper  
 	{
 	public:
 		using ClassType = CMainFunctionHelper;
@@ -22,20 +25,22 @@ namespace CoreTools
 		CMainFunctionHelper(int argc, char* argv[]);
 		virtual ~CMainFunctionHelper();
 
-#ifdef OPEN_CLASS_INVARIANT
+		CMainFunctionHelper(const CMainFunctionHelper& rhs) = delete;
+		CMainFunctionHelper& operator=(const CMainFunctionHelper& rhs) = delete;
+		CMainFunctionHelper(CMainFunctionHelper&& rhs) noexcept;
+		CMainFunctionHelper& operator=(CMainFunctionHelper&& rhs) noexcept;
+
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
-		bool ArgcEqualOneIsValid() const noexcept;
-		bool ArgcUnequalOneIsValid() const noexcept;
-#endif // OPEN_CLASS_INVARIANT	
 
 		int GetArgc() const noexcept;
 		char** GetArgv() noexcept;
 
-		int Run();
+		int Run();		
 
 	protected:
 		std::ostream* GetOStream() noexcept;
 		void SystemPause();
+		OStreamShared GetStreamShared() const;
 
 	private:
 		void InitSingleton();
@@ -69,7 +74,7 @@ namespace CoreTools
 	private:
 		int m_Argc;
 		char** m_Argv;
-		std::ostream* m_OsPtr;
+		OStreamShared m_OsPtr;
 		ScheduleType m_Schedule;
 	};
 }

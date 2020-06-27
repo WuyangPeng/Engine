@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/13 09:51)
+// 引擎版本：0.0.2.5 (2020/03/24 15:49)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_LINE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_LINE2_DETAIL_H
@@ -37,28 +37,27 @@ void Mathematics::StaticFindIntersectorLine2Line2<Real>
 
 	switch (intersectionType)
 	{
-		case IntersectionType::Empty:
-		{
-			m_Quantity = 0;
-			break;
-		}
-		case IntersectionType::Point:
-		{
-			m_Quantity = 1;
-			m_Point = m_LhsLine.GetOrigin() + classify.GetFirstParameter() * m_LhsLine.GetDirection();
-			break;
-		}
-		case IntersectionType::Line:
-		{
-			m_Quantity = std::numeric_limits<int>::max();
-			break;	
-		}
-		default:
-			MATHEMATICS_ASSERTION_3(false, "相交类型计算错误！\n");
-			break;
-	} 
+	case IntersectionType::Empty:
+	{
+		m_Quantity = 0;
+		break;
+	}
+	case IntersectionType::Point:
+	{
+		m_Quantity = 1;
+		m_Point = m_LhsLine.GetOrigin() + classify.GetFirstParameter() * m_LhsLine.GetDirection();
+		break;
+	}
+	case IntersectionType::Line:
+	{
+		m_Quantity = std::numeric_limits<int>::max();
+		break;
+	}
+	default:
+		MATHEMATICS_ASSERTION_3(false, "相交类型计算错误！\n");
+		break;
+	}
 }
-
 
 template <typename Real>
 Mathematics::StaticFindIntersectorLine2Line2<Real>
@@ -71,7 +70,7 @@ Mathematics::StaticFindIntersectorLine2Line2<Real>
 template <typename Real>
 bool Mathematics::StaticFindIntersectorLine2Line2<Real>
 	::IsValid() const noexcept
-{	
+{
 	if (ParentType::IsValid() && 0 <= m_Quantity)
 		return true;
 	else

@@ -41,7 +41,7 @@ namespace Rendering
 	{
 	public:
 		SINGLETON_INITIALIZE_DECLARE(RendererManager); 
-		using RendererPtr = Renderer*;
+		using RendererPtr = std::shared_ptr<Renderer>;
 		using VertexFormatConstPtr = const VertexFormat*;
 		using VertexBufferConstPtr = const VertexBuffer*;
 		using IndexBufferConstPtr = const IndexBuffer*;
@@ -56,8 +56,8 @@ namespace Rendering
 	public:	
 		CLASS_INVARIANT_DECLARE;
 
- 		void Insert(RendererPtr ptr);
-		void Erase(RendererPtr ptr);
+ 		int64_t Insert(RendererPtr ptr);
+		bool Erase(int64_t rendererID);
 		
 		// 资源管理。该资源被定义为顶点格式，顶点缓冲区，索引缓冲区，
 		// 纹理（1D，2D，3D，立方体），

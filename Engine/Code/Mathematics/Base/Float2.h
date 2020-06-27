@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/03 19:22)
+// 引擎版本：0.0.2.5 (2020/03/18 19:09)
 
 #ifndef MATHEMATICS_BASE_FLOAT_2_H
 #define MATHEMATICS_BASE_FLOAT_2_H
@@ -20,9 +20,9 @@ namespace Mathematics
 	public:
 		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Float2);
 
-	public:				
-		Float2();	
-		Float2(float firstValue,float secondValue);
+	public:
+		Float2();
+		Float2(float firstValue, float secondValue);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -32,9 +32,9 @@ namespace Mathematics
 		void SetFirstValue(float value);
 		void SetSecondValue(float value);
 
-	private:	
+	private:
 		IMPL_TYPE_DECLARE(Float2);
-	};	
+	};
 }
 
 #endif // MATHEMATICS_BASE_FLOAT_2_H

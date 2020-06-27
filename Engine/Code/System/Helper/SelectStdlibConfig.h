@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:13)
+// 引擎版本：0.2.0.0 (2020/05/07 13:34)
 
 #ifndef SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
 #define SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
@@ -12,8 +12,8 @@
 #include <cstddef>
 
 #if defined(__SGI_STL_PORT) || defined(_STLPORT_VERSION)
- 
-    // 这个必须放在第一个，否则由于STLport通常位于一些其他库的顶部，我们可能最终检测到第一个而不是STLport：
+
+	// 这个必须放在第一个，否则由于STLport通常位于一些其他库的顶部，我们可能最终检测到第一个而不是STLport。
 	#define TCRE_STDLIB_CONFIG "StdLib/STLPort.h"
 
 #else // !defined(__SGI_STL_PORT) && !defined(_STLPORT_VERSION)
@@ -22,10 +22,10 @@
 	// 一些std库不包含他们的C++相关的宏在<cstddef>，所以这个额外的包含确保我们得到这些定义。
 	// 注意：不要依赖于包含这个头文件，因为用户可以短路这个#include，如果他们知道他们的std lib正在使用。
 	#if !defined(__LIBCOMO__) && !defined(__STD_RWCOMPILER_H__) && !defined(_RWSTD_VER) && !defined(_LIBCPP_VERSION) && !defined(__GLIBCPP__) && \
-        !defined(__GLIBCXX__) && !defined(__STL_CONFIG_H) && !defined(__MSL_CPP__) && !defined(__IBMCPP__) && !defined(MSIPL_COMPILE_H) && !defined(_YVALS) && \
-        !defined(_CPPLIB_VER)
+        !defined(__GLIBCXX__) && !defined(__STL_CONFIG_H) && !defined(__MSL_CPP__) && !defined(__IBMCPP__) && !defined(MSIPL_COMPILE_H) && \
+		!defined(_YVALS) && !defined(_CPPLIB_VER)
 
-		#include <utility>
+	#include <utility>
 
 	#endif // !defined(ALL_STDLIB)
 
@@ -76,7 +76,7 @@
 
 	#else // !defined(ALL_STDLIB)
 
-        // 这必须是放在最后，生成一个错误，如果我们无法识别库
+		// 这必须是放在最后，生成一个错误，如果我们无法识别库
 		#error "标准库无法被正确识别。"
 
 	#endif // defined(ALL_STDLIB)

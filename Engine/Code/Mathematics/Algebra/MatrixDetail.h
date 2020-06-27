@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/05 16:54)
+// 引擎版本：0.0.2.5 (2020/03/19 13:59)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
@@ -12,6 +12,8 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+#include <iostream>
+
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_MATRIX_DETAIL)
 
 #include "Vector4D.h"
@@ -19,8 +21,6 @@
 #include "APoint.h"
 #include "AVector.h"
 #include "AlgebraTraits.h"
-
-#include <boost/foreach.hpp> 
 
 template <typename Real>
 const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
@@ -33,32 +33,34 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 template <typename Real>
 Mathematics::Matrix<Real>
 	::Matrix(const Matrix& rhs)
-{ 
+	:m_Entry{}
+{
 	memcpy(m_Entry, rhs.m_Entry, 16 * sizeof(Real));
- 
+
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::Matrix<Real>
 	::Matrix(const Matrix3& rhs)
+	:m_Entry{}
 {
-	m_Entry[0] = rhs(0,0);
-	m_Entry[1] = rhs(0,1);
-	m_Entry[2] = rhs(0,2);
-	m_Entry[3] = Real{ };
-	m_Entry[4] = rhs(1,0);
-	m_Entry[5] = rhs(1,1);
-	m_Entry[6] = rhs(1,2);
-	m_Entry[7] = Real{ };
-	m_Entry[8] = rhs(2,0);
-	m_Entry[9] = rhs(2,1);
-	m_Entry[10] = rhs(2,2);
-	m_Entry[11] = Real{ };
-	m_Entry[12] = Real{ };
-	m_Entry[13] = Real{ };
-	m_Entry[14] = Real{ };
-	m_Entry[15] = AlgebraTraits::UnitValue;
+	m_Entry[0] = rhs(0, 0);
+	m_Entry[1] = rhs(0, 1);
+	m_Entry[2] = rhs(0, 2);
+	m_Entry[3] = Math::sm_Zero;
+	m_Entry[4] = rhs(1, 0);
+	m_Entry[5] = rhs(1, 1);
+	m_Entry[6] = rhs(1, 2);
+	m_Entry[7] = Math::sm_Zero;
+	m_Entry[8] = rhs(2, 0);
+	m_Entry[9] = rhs(2, 1);
+	m_Entry[10] = rhs(2, 2);
+	m_Entry[11] = Math::sm_Zero;
+	m_Entry[12] = Math::sm_Zero;
+	m_Entry[13] = Math::sm_Zero;
+	m_Entry[14] = Math::sm_Zero;
+	m_Entry[15] = Math::sm_One;
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -66,14 +68,15 @@ Mathematics::Matrix<Real>
 template <typename Real>
 Mathematics::Matrix<Real>
 	::Matrix(MatrixTypeFlags flag)
+	:m_Entry{}
 {
-	if(flag == MatrixTypeFlags::Identity)
+	if (flag == MatrixTypeFlags::Identity)
 	{
-	    MakeIdentity();
+		MakeIdentity();
 	}
 	else
-	{   
-	     MakeZero();
+	{
+		MakeZero();
 	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -81,10 +84,10 @@ Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>
-	::Matrix(Real member00, Real member01, Real member02, Real member03, 
-			 Real member10, Real member11, Real member12, Real member13, 
+	::Matrix(Real member00, Real member01, Real member02, Real member03,
+			 Real member10, Real member11, Real member12, Real member13,
 			 Real member20, Real member21, Real member22, Real member23,
-		     Real member30, Real member31, Real member32, Real member33)
+			 Real member30, Real member31, Real member32, Real member33)
 {
 	m_Entry[0] = member00;
 	m_Entry[1] = member01;
@@ -108,11 +111,11 @@ Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>
-	::Matrix( const std::vector<Real>& entry,MatrixMajorFlags majorFlag )
+	::Matrix(const std::vector<Real>& entry, MatrixMajorFlags majorFlag)
 {
-	MATHEMATICS_ASSERTION_0(entry.size() == 16,"数据大小错误！");
+	MATHEMATICS_ASSERTION_0(entry.size() == 16, "数据大小错误！");
 
-	if(majorFlag == MatrixMajorFlags::Row)
+	if (majorFlag == MatrixMajorFlags::Row)
 	{
 		m_Entry[0] = entry[0];
 		m_Entry[1] = entry[1];
@@ -129,7 +132,7 @@ Mathematics::Matrix<Real>
 		m_Entry[12] = entry[12];
 		m_Entry[13] = entry[13];
 		m_Entry[14] = entry[14];
-		m_Entry[15] = entry[15]; 
+		m_Entry[15] = entry[15];
 	}
 	else
 	{
@@ -148,17 +151,17 @@ Mathematics::Matrix<Real>
 		m_Entry[12] = entry[3];
 		m_Entry[13] = entry[7];
 		m_Entry[14] = entry[11];
-		m_Entry[15] = entry[15];  
-	}	
+		m_Entry[15] = entry[15];
+	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::Matrix<Real>
-	::Matrix( const Vector4D& firstVector,const Vector4D& secondVector,const Vector4D& thirdVector,const Vector4D& fourthVector,MatrixMajorFlags majorFlag )
+	::Matrix(const Vector4D& firstVector, const Vector4D& secondVector, const Vector4D& thirdVector, const Vector4D& fourthVector, MatrixMajorFlags majorFlag)
 {
-	if(majorFlag == MatrixMajorFlags::Row)
+	if (majorFlag == MatrixMajorFlags::Row)
 	{
 		m_Entry[0] = firstVector[0];
 		m_Entry[1] = firstVector[1];
@@ -194,34 +197,34 @@ Mathematics::Matrix<Real>
 		m_Entry[12] = firstVector[3];
 		m_Entry[13] = secondVector[3];
 		m_Entry[14] = thirdVector[3];
-		m_Entry[15] = fourthVector[3]; 
-	}	
+		m_Entry[15] = fourthVector[3];
+	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::Matrix<Real>
-	::Matrix( const AVector& firstVector,const AVector& secondVector,const AVector& thirdVector,const APoint& point,MatrixMajorFlags majorFlag )
+	::Matrix(const AVector& firstVector, const AVector& secondVector, const AVector& thirdVector, const APoint& point, MatrixMajorFlags majorFlag)
 {
-	if(majorFlag == MatrixMajorFlags::Row)
+	if (majorFlag == MatrixMajorFlags::Row)
 	{
 		m_Entry[0] = firstVector[0];
 		m_Entry[1] = firstVector[1];
 		m_Entry[2] = firstVector[2];
-		m_Entry[3] = Real{ };
+		m_Entry[3] = Math::sm_Zero;
 		m_Entry[4] = secondVector[0];
 		m_Entry[5] = secondVector[1];
 		m_Entry[6] = secondVector[2];
-		m_Entry[7] = Real{ };
+		m_Entry[7] = Math::sm_Zero;
 		m_Entry[8] = thirdVector[0];
 		m_Entry[9] = thirdVector[1];
 		m_Entry[10] = thirdVector[2];
-		m_Entry[11] = Real{ };
+		m_Entry[11] = Math::sm_Zero;
 		m_Entry[12] = point[0];
 		m_Entry[13] = point[1];
 		m_Entry[14] = point[2];
-		m_Entry[15] = static_cast<Real>(1);
+		m_Entry[15] = Math::sm_One;
 	}
 	else
 	{
@@ -237,11 +240,11 @@ Mathematics::Matrix<Real>
 		m_Entry[9] = secondVector[2];
 		m_Entry[10] = thirdVector[2];
 		m_Entry[11] = point[2];
-		m_Entry[12] = Real{ };
-		m_Entry[13] = Real{ };
-		m_Entry[14] = Real{ };
-		m_Entry[15] = static_cast<Real>(1); 
-	}	
+		m_Entry[12] = Math::sm_Zero;
+		m_Entry[13] = Math::sm_Zero;
+		m_Entry[14] = Math::sm_Zero;
+		m_Entry[15] = Math::sm_One;
+	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -249,8 +252,9 @@ Mathematics::Matrix<Real>
 template <typename Real>
 Mathematics::Matrix<Real>
 	::Matrix(Real member00, Real member11, Real member22)
+	:m_Entry{}
 {
-	MakeDiagonal(member00,member11,member22);
+	MakeDiagonal(member00, member11, member22);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -258,15 +262,16 @@ Mathematics::Matrix<Real>
 template <typename Real>
 Mathematics::Matrix<Real>
 	::Matrix(const AVector& axis, Real angle)
+	:m_Entry{}
 {
-	MakeRotation(axis,angle);
+	MakeRotation(axis, angle);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator=( const Matrix& rhs )
+	::operator=(const Matrix& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -277,26 +282,26 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator=( const Matrix3& rhs )
+	::operator=(const Matrix3& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Entry[0] = rhs(0,0);
-	m_Entry[1] = rhs(0,1);
-	m_Entry[2] = rhs(0,2);
-	m_Entry[3] = Real{ };
-	m_Entry[4] = rhs(1,0);
-	m_Entry[5] = rhs(1,1);
-	m_Entry[6] = rhs(1,2);
-	m_Entry[7] = Real{ };
-	m_Entry[8] = rhs(2,0);
-	m_Entry[9] = rhs(2,1);
-	m_Entry[10] = rhs(2,2);
-	m_Entry[11] = Real{ };
-	m_Entry[12] = Real{ };
-	m_Entry[13] = Real{ };
-	m_Entry[14] = Real{ };
-	m_Entry[15] = AlgebraTraits::UnitValue;
+	m_Entry[0] = rhs(0, 0);
+	m_Entry[1] = rhs(0, 1);
+	m_Entry[2] = rhs(0, 2);
+	m_Entry[3] = Math::sm_Zero;
+	m_Entry[4] = rhs(1, 0);
+	m_Entry[5] = rhs(1, 1);
+	m_Entry[6] = rhs(1, 2);
+	m_Entry[7] = Math::sm_Zero;
+	m_Entry[8] = rhs(2, 0);
+	m_Entry[9] = rhs(2, 1);
+	m_Entry[10] = rhs(2, 2);
+	m_Entry[11] = Math::sm_Zero;
+	m_Entry[12] = Math::sm_Zero;
+	m_Entry[13] = Math::sm_Zero;
+	m_Entry[14] = Math::sm_Zero;
+	m_Entry[15] = Math::sm_One;
 
 	return *this;
 }
@@ -311,8 +316,8 @@ bool Mathematics::Matrix<Real>
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::Matrix<Real>::Matrix3 
-	Mathematics::Matrix<Real>
+typename const Mathematics::Matrix<Real>::Matrix3
+Mathematics::Matrix<Real>
 	::GetMatrix3() const
 {
 	CLASS_IS_VALID;
@@ -322,88 +327,112 @@ typename const Mathematics::Matrix<Real>::Matrix3
 
 template <typename Real>
 const Real* Mathematics::Matrix<Real>
-	::operator[]( int row ) const
+	::operator[](int row) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < 4,"索引错误！");
+	MATHEMATICS_ASSERTION_0(0 <= row && row < 4, "索引错误！");
 
 	return &m_Entry[4 * row];
 }
 
 template <typename Real>
 Real* Mathematics::Matrix<Real>
-	::operator[]( int row )
+	::operator[](int row)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < 4,"索引错误！");
+	MATHEMATICS_ASSERTION_0(0 <= row && row < 4, "索引错误！");
 
 	return const_cast<Real*>(static_cast<const ClassType&>(*this)[row]);
 }
 
 template <typename Real>
 const Real& Mathematics::Matrix<Real>
-	::operator()( int row, int column ) const
+	::operator()(int row, int column) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < 4 && 0 <= column && column < 4,"索引错误！");
+	MATHEMATICS_ASSERTION_0(0 <= row && row < 4 && 0 <= column && column < 4, "索引错误！");
 
 	return m_Entry[column + 4 * row];
 }
 
 template <typename Real>
 Real& Mathematics::Matrix<Real>
-	::operator()( int row, int column )
+	::operator()(int row, int column)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < 4 && 0 <= column && column < 4,"索引错误！");
+	MATHEMATICS_ASSERTION_0(0 <= row && row < 4 && 0 <= column && column < 4, "索引错误！");
 
-	return const_cast<Real&>(static_cast<const ClassType&>(*this)(row,column));
+	return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 }
 
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::SetRow( int row, const HomogeneousPoint& point )
+	::SetRow(int row, const HomogeneousPoint& point)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < 4,"索引错误！");
 
-	m_Entry[4 * row] = point[0];
-	m_Entry[4 * row + 1] = point[1];
-	m_Entry[4 * row + 2] = point[2];
-	m_Entry[4 * row + 3] = point[3];
+	if (0 <= row && row < 4)
+	{
+		m_Entry[4 * row] = point[0];
+		m_Entry[4 * row + 1] = point[1];
+		m_Entry[4 * row + 2] = point[2];
+		m_Entry[4 * row + 3] = point[3];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
 
 template <typename Real>
 typename const Mathematics::Matrix<Real>::HomogeneousPoint Mathematics::Matrix<Real>
-	::GetRow( int row ) const
+	::GetRow(int row) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < 4,"索引错误！");
 
-	return HomogeneousPoint{ m_Entry[4 * row],m_Entry[4 * row + 1],m_Entry[4 * row + 2],m_Entry[4 * row + 3] };
+	if (0 <= row && row < 4)
+	{
+		return HomogeneousPoint{ m_Entry[4 * row],m_Entry[4 * row + 1],m_Entry[4 * row + 2],m_Entry[4 * row + 3] };
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
 
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::SetColumn( int column, const HomogeneousPoint& point )
+	::SetColumn(int column, const HomogeneousPoint& point)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= column && column < 4,"索引错误！");
 
-	m_Entry[column] = point[0];
-	m_Entry[4 + column] = point[1];
-	m_Entry[8 + column] = point[2];
-	m_Entry[12 + column] = point[3];
+	if (0 <= column && column < 4)
+	{
+		m_Entry[column] = point[0];
+		m_Entry[4 + column] = point[1];
+		m_Entry[8 + column] = point[2];
+		m_Entry[12 + column] = point[3];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
 
 template <typename Real>
 typename const Mathematics::Matrix<Real>::HomogeneousPoint Mathematics::Matrix<Real>
-	::GetColumn( int column ) const
+	::GetColumn(int column) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= column && column < 4,"索引错误！");
 
-	return HomogeneousPoint{ m_Entry[column],m_Entry[4 + column], m_Entry[8 + column],m_Entry[12 + column] };
+	if (0 <= column && column < 4)
+	{
+		return HomogeneousPoint{ m_Entry[column],m_Entry[4 + column], m_Entry[8 + column],m_Entry[12 + column] };
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
 
 template <typename Real>
@@ -413,11 +442,11 @@ const std::vector<Real> Mathematics::Matrix<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	std::vector<Real> columnMatrix{ m_Entry[0] ,m_Entry[4] ,m_Entry[8],m_Entry[12],
-								    m_Entry[1] ,m_Entry[5] ,m_Entry[9] ,m_Entry[13] ,
-								    m_Entry[2] ,m_Entry[6] ,m_Entry[10] ,m_Entry[14] ,
-									m_Entry[3] ,m_Entry[7] ,m_Entry[11] ,m_Entry[15] }; 
+									m_Entry[1] ,m_Entry[5] ,m_Entry[9] ,m_Entry[13] ,
+									m_Entry[2] ,m_Entry[6] ,m_Entry[10] ,m_Entry[14] ,
+									m_Entry[3] ,m_Entry[7] ,m_Entry[11] ,m_Entry[15] };
 
-	MATHEMATICS_ASSERTION_0(columnMatrix.size() == 16,"数据大小错误！");
+	MATHEMATICS_ASSERTION_0(columnMatrix.size() == 16, "数据大小错误！");
 
 	return columnMatrix;
 }
@@ -436,7 +465,7 @@ const  Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator+=( const Matrix& rhs )
+	::operator+=(const Matrix& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -450,7 +479,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator-=( const Matrix& rhs )
+	::operator-=(const Matrix& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -461,10 +490,9 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 	return *this;
 }
 
-
 template <typename Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator*=( Real scalar )
+	::operator*=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -478,11 +506,11 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator/=( Real scalar )
+	::operator/=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if(Math::sm_ZeroTolerance < Math::FAbs(scalar))
+	if (Math::sm_ZeroTolerance < Math::FAbs(scalar))
 	{
 		for (auto i = 0; i < 16; ++i)
 		{
@@ -500,7 +528,6 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 	return *this;
 }
 
-
 template <typename Real>
 void Mathematics::Matrix<Real>
 	::MakeZero()
@@ -516,57 +543,57 @@ void Mathematics::Matrix<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Entry[0] = AlgebraTraits::UnitValue;
-	m_Entry[1] = Real{ };
-	m_Entry[2] = Real{ };
-	m_Entry[3] = Real{ };
-	m_Entry[4] = Real{ };
-	m_Entry[5] = AlgebraTraits::UnitValue;
-	m_Entry[6] = Real{ };
-	m_Entry[7] = Real{ };
-	m_Entry[8] = Real{ };
-	m_Entry[9] = Real{ };
-	m_Entry[10] = AlgebraTraits::UnitValue;
-	m_Entry[11] = Real{ };
-	m_Entry[12] = Real{ };
-	m_Entry[13] = Real{ };
-	m_Entry[14] = Real{ };
-	m_Entry[15] = AlgebraTraits::UnitValue;
+	m_Entry[0] = Math::sm_One;
+	m_Entry[1] = Math::sm_Zero;
+	m_Entry[2] = Math::sm_Zero;
+	m_Entry[3] = Math::sm_Zero;
+	m_Entry[4] = Math::sm_Zero;
+	m_Entry[5] = Math::sm_One;
+	m_Entry[6] = Math::sm_Zero;
+	m_Entry[7] = Math::sm_Zero;
+	m_Entry[8] = Math::sm_Zero;
+	m_Entry[9] = Math::sm_Zero;
+	m_Entry[10] = Math::sm_One;
+	m_Entry[11] = Math::sm_Zero;
+	m_Entry[12] = Math::sm_Zero;
+	m_Entry[13] = Math::sm_Zero;
+	m_Entry[14] = Math::sm_Zero;
+	m_Entry[15] = Math::sm_One;
 }
 
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::MakeDiagonal( Real member00, Real member11, Real member22 )
+	::MakeDiagonal(Real member00, Real member11, Real member22)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	m_Entry[0] = member00;
-	m_Entry[1] = Real{ };
-	m_Entry[2] = Real{ };
-	m_Entry[3] = Real{ };
-	m_Entry[4] = Real{ };
+	m_Entry[1] = Math::sm_Zero;
+	m_Entry[2] = Math::sm_Zero;
+	m_Entry[3] = Math::sm_Zero;
+	m_Entry[4] = Math::sm_Zero;
 	m_Entry[5] = member11;
-	m_Entry[6] = Real{ };
-	m_Entry[7] = Real{ };
-	m_Entry[8] = Real{ };
-	m_Entry[9] = Real{ };
+	m_Entry[6] = Math::sm_Zero;
+	m_Entry[7] = Math::sm_Zero;
+	m_Entry[8] = Math::sm_Zero;
+	m_Entry[9] = Math::sm_Zero;
 	m_Entry[10] = member22;
-	m_Entry[11] = Real{ };
-	m_Entry[12] = Real{ };
-	m_Entry[13] = Real{ };
-	m_Entry[14] = Real{ };
-	m_Entry[15] = AlgebraTraits::UnitValue;
+	m_Entry[11] = Math::sm_Zero;
+	m_Entry[12] = Math::sm_Zero;
+	m_Entry[13] = Math::sm_Zero;
+	m_Entry[14] = Math::sm_Zero;
+	m_Entry[15] = Math::sm_One;
 }
 
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::MakeRotation( const AVector& axis, Real angle )
+	::MakeRotation(const AVector& axis, Real angle)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	auto cosValue = Math::Cos(angle);
 	auto sinValue = Math::Sin(angle);
-	auto oneMinusCos = AlgebraTraits::UnitValue - cosValue;
+	auto oneMinusCos = Math::sm_One - cosValue;
 
 	auto xAxisSquare = axis[0] * axis[0];
 	auto yAxisSquare = axis[1] * axis[1];
@@ -587,19 +614,19 @@ void Mathematics::Matrix<Real>
 	m_Entry[0] = xAxisSquareMultipliedOneMinusCos + cosValue;
 	m_Entry[1] = xym - zSin;
 	m_Entry[2] = xzm + ySin;
-	m_Entry[3] = Real{ };
+	m_Entry[3] = Math::sm_Zero;
 	m_Entry[4] = xym + zSin;
 	m_Entry[5] = yAxisSquareMultipliedOneMinusCos + cosValue;
 	m_Entry[6] = yzm - xSin;
-	m_Entry[7] = Real{ };
+	m_Entry[7] = Math::sm_Zero;
 	m_Entry[8] = xzm - ySin;
-	m_Entry[9] =  yzm + xSin;
+	m_Entry[9] = yzm + xSin;
 	m_Entry[10] = zAxisSquareMultipliedOneMinusCos + cosValue;
-	m_Entry[11] = Real{ };
-	m_Entry[12] = Real{ };
-	m_Entry[13] = Real{ };
-	m_Entry[14] = Real{ };
-	m_Entry[15] = AlgebraTraits::UnitValue;
+	m_Entry[11] = Math::sm_Zero;
+	m_Entry[12] = Math::sm_Zero;
+	m_Entry[13] = Math::sm_Zero;
+	m_Entry[14] = Math::sm_Zero;
+	m_Entry[15] = Math::sm_One;
 }
 
 template <typename Real>
@@ -616,7 +643,7 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 
 template <typename Real>
 const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
-	::Inverse( const Real epsilon  ) const
+	::Inverse(const Real epsilon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -653,27 +680,27 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 						-m_Entry[12] * a3 + m_Entry[13] * a1 - m_Entry[14] * a0,
 						+m_Entry[8] * a3 - m_Entry[9] * a1 + m_Entry[10] * a0 };
 
-		adjoint /= det;		
+		adjoint /= det;
 
 		return adjoint;
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"该矩阵不存在逆矩阵！");
-		
+		MATHEMATICS_ASSERTION_1(false, "该矩阵不存在逆矩阵！");
+
 		return sm_Zero;
 	}
 }
 
 template <typename Real>
 const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
-	::Invert3x3( const Real epsilon  ) const
+	::Invert3x3(const Real epsilon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	// 计算M (3x3)的伴随矩阵。
 	Matrix adjoint{ (*this)(1,1) * (*this)(2,2) - (*this)(1,2) * (*this)(2,1),
-				    (*this)(0,2) * (*this)(2,1) - (*this)(0,1) * (*this)(2,2),
+					(*this)(0,2) * (*this)(2,1) - (*this)(0,1) * (*this)(2,2),
 					(*this)(0,1) * (*this)(1,2) - (*this)(0,2) * (*this)(1,1),
 					(*this)(0,3),
 					(*this)(1,2) * (*this)(2,0) - (*this)(1,0) * (*this)(2,2),
@@ -681,36 +708,36 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 					(*this)(0,2) * (*this)(1,0) - (*this)(0,0) * (*this)(1,2),
 					(*this)(1,3),
 					(*this)(1,0) * (*this)(2,1) - (*this)(1,1) * (*this)(2,0),
-				    (*this)(0,1) * (*this)(2,0) - (*this)(0,0) * (*this)(2,1),
+					(*this)(0,1) * (*this)(2,0) - (*this)(0,0) * (*this)(2,1),
 					(*this)(0,0) * (*this)(1,1) - (*this)(0,1) * (*this)(1,0),
-				    (*this)(2,3),
-		            (*this)(3,0),
-		            (*this)(3,1),
-		            (*this)(3,2),
-		            (*this)(3,3) };
+					(*this)(2,3),
+					(*this)(3,0),
+					(*this)(3,1),
+					(*this)(3,2),
+					(*this)(3,3) };
 
 	// 计算M的行列式。
-	auto det = (*this)(0,0) * adjoint(0,0) + (*this)(0,1) * adjoint(1,0) + (*this)(0,2) * adjoint(2,0);
+	auto det = (*this)(0, 0) * adjoint(0, 0) + (*this)(0, 1) * adjoint(1, 0) + (*this)(0, 2) * adjoint(2, 0);
 
 	if (epsilon < Math::FAbs(det))
 	{
 		// inverse(M) = adjoint(M) / determinant(M).
-		adjoint(0,0) /= det;
-		adjoint(0,1) /= det;
-		adjoint(0,2) /= det;
-		adjoint(1,0) /= det;
-		adjoint(1,1) /= det;
-		adjoint(1,2) /= det;
-		adjoint(2,0) /= det;
-		adjoint(2,1) /= det;
-		adjoint(2,2) /= det;
+		adjoint(0, 0) /= det;
+		adjoint(0, 1) /= det;
+		adjoint(0, 2) /= det;
+		adjoint(1, 0) /= det;
+		adjoint(1, 1) /= det;
+		adjoint(1, 2) /= det;
+		adjoint(2, 0) /= det;
+		adjoint(2, 1) /= det;
+		adjoint(2, 2) /= det;
 
 		return adjoint;
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"该矩阵不存在逆矩阵！");
-		
+		MATHEMATICS_ASSERTION_1(false, "该矩阵不存在逆矩阵！");
+
 		return sm_Zero;
 	}
 }
@@ -778,7 +805,7 @@ Real Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator*=( const Matrix& rhs )
+	::operator*=(const Matrix& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -789,7 +816,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 
 template <typename Real>
 const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
-	::TimesDiagonal( const APoint& diag ) const
+	::TimesDiagonal(const APoint& diag) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -805,7 +832,7 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 
 template <typename Real>
 const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
-	::DiagonalTimes( const APoint& diag ) const
+	::DiagonalTimes(const APoint& diag) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -832,43 +859,42 @@ void Mathematics::Matrix<Real>
 	// 计算 q0.
 	auto invLength = Math::InvSqrt(m_Entry[0] * m_Entry[0] + m_Entry[4] * m_Entry[4] + m_Entry[8] * m_Entry[8]);
 
-    m_Entry[0] *= invLength;
-    m_Entry[4] *= invLength;
-    m_Entry[8] *= invLength;
+	m_Entry[0] *= invLength;
+	m_Entry[4] *= invLength;
+	m_Entry[8] *= invLength;
 
-    // 计算 q1.
+	// 计算 q1.
 	auto dot0 = m_Entry[0] * m_Entry[1] + m_Entry[4] * m_Entry[5] + m_Entry[8] * m_Entry[9];
 
-    m_Entry[1] -= dot0 * m_Entry[0];
-    m_Entry[5] -= dot0 * m_Entry[4];
-    m_Entry[9] -= dot0 * m_Entry[8];
+	m_Entry[1] -= dot0 * m_Entry[0];
+	m_Entry[5] -= dot0 * m_Entry[4];
+	m_Entry[9] -= dot0 * m_Entry[8];
 
-    invLength = Math::InvSqrt(m_Entry[1] * m_Entry[1] + m_Entry[5] * m_Entry[5] + m_Entry[9] * m_Entry[9]);
+	invLength = Math::InvSqrt(m_Entry[1] * m_Entry[1] + m_Entry[5] * m_Entry[5] + m_Entry[9] * m_Entry[9]);
 
-    m_Entry[1] *= invLength;
-    m_Entry[5] *= invLength;
-    m_Entry[9] *= invLength;
+	m_Entry[1] *= invLength;
+	m_Entry[5] *= invLength;
+	m_Entry[9] *= invLength;
 
-    // 计算 q2.
+	// 计算 q2.
 	auto dot1 = m_Entry[1] * m_Entry[2] + m_Entry[5] * m_Entry[6] + m_Entry[9] * m_Entry[10];
 
-    dot0 = m_Entry[0] * m_Entry[2] + m_Entry[4] * m_Entry[6] + m_Entry[8] * m_Entry[10];
+	dot0 = m_Entry[0] * m_Entry[2] + m_Entry[4] * m_Entry[6] + m_Entry[8] * m_Entry[10];
 
-    m_Entry[2] -= dot0 * m_Entry[0] + dot1 * m_Entry[1];
-    m_Entry[6] -= dot0 * m_Entry[4] + dot1 * m_Entry[5];
-    m_Entry[10] -= dot0 * m_Entry[8] + dot1 * m_Entry[9];
+	m_Entry[2] -= dot0 * m_Entry[0] + dot1 * m_Entry[1];
+	m_Entry[6] -= dot0 * m_Entry[4] + dot1 * m_Entry[5];
+	m_Entry[10] -= dot0 * m_Entry[8] + dot1 * m_Entry[9];
 
-    invLength = Math::InvSqrt(m_Entry[2] * m_Entry[2] +  m_Entry[6] * m_Entry[6] + m_Entry[10] * m_Entry[10]);
+	invLength = Math::InvSqrt(m_Entry[2] * m_Entry[2] + m_Entry[6] * m_Entry[6] + m_Entry[10] * m_Entry[10]);
 
-    m_Entry[2] *= invLength;
-    m_Entry[6] *= invLength;
-    m_Entry[10] *= invLength;
+	m_Entry[2] *= invLength;
+	m_Entry[6] *= invLength;
+	m_Entry[10] *= invLength;
 }
 
 template <typename Real>
 Real Mathematics::Matrix<Real>
-	::QuadraticForm( const HomogeneousPoint& firstPoint, 
-	                 const HomogeneousPoint& secondPoint ) const
+	::QuadraticForm(const HomogeneousPoint& firstPoint, const HomogeneousPoint& secondPoint) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -877,18 +903,17 @@ Real Mathematics::Matrix<Real>
 										   m_Entry[8] * secondPoint[0] + m_Entry[9] * secondPoint[1] + m_Entry[10] * secondPoint[2] + m_Entry[11] * secondPoint[3],
 										   m_Entry[12] * secondPoint[0] + m_Entry[13] * secondPoint[1] + m_Entry[14] * secondPoint[2] + m_Entry[15] * secondPoint[3] };
 
-    auto dot = firstPoint[0] * secondPointTransform[0] + firstPoint[1] * secondPointTransform[1] + firstPoint[2] * secondPointTransform[2] + firstPoint[3] * secondPointTransform[3];
-    
+	auto dot = firstPoint[0] * secondPointTransform[0] + firstPoint[1] * secondPointTransform[1] + firstPoint[2] * secondPointTransform[2] + firstPoint[3] * secondPointTransform[3];
+
 	return dot;
 }
 
-
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::MakeObliqueProjection( const APoint& origin, const AVector& normal, const AVector& direction )
+	::MakeObliqueProjection(const APoint& origin, const AVector& normal, const AVector& direction)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_1(normal.IsNormalize() && direction.IsNormalize(),"normal和direction必须是单位向量！"); 
+	MATHEMATICS_ASSERTION_1(normal.IsNormalize() && direction.IsNormalize(), "normal和direction必须是单位向量！");
 
 	// 投影平面是Dot(N,X-P) = 0 ，
 	// 其中N是一个3×1个单位长度的法线向量，
@@ -911,8 +936,8 @@ void Mathematics::Matrix<Real>
 	// 该矩阵被选择为每当Dot(N,D) < 0使得M[3][3] > 0
 	// （投影到平面上的“正面侧”）。
 
-	auto dotNormalDirection = Dot(normal,direction);
-	auto dotNormalOrigin = Dot(origin,normal);
+	auto dotNormalDirection = Dot(normal, direction);
+	auto dotNormalOrigin = Dot(origin, normal);
 
 	m_Entry[0] = direction[0] * normal[0] - dotNormalDirection;
 	m_Entry[1] = direction[0] * normal[1];
@@ -926,18 +951,18 @@ void Mathematics::Matrix<Real>
 	m_Entry[9] = direction[2] * normal[1];
 	m_Entry[10] = direction[2] * normal[2] - dotNormalDirection;
 	m_Entry[11] = -dotNormalOrigin * direction[2];
-	m_Entry[12] = Real{ };
-	m_Entry[13] = Real{ };
-	m_Entry[14] = Real{ };
+	m_Entry[12] = Math::sm_Zero;
+	m_Entry[13] = Math::sm_Zero;
+	m_Entry[14] = Math::sm_Zero;
 	m_Entry[15] = -dotNormalDirection;
 }
 
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::MakePerspectiveProjection( const APoint& origin, const AVector& normal,const APoint& eye )
+	::MakePerspectiveProjection(const APoint& origin, const AVector& normal, const APoint& eye)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_1(normal.IsNormalize() ,"normal必须是单位向量！"); 
+	MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal必须是单位向量！");
 	//     +-                                                 -+
 	// M = | Dot(N,E-P)*I - E*N^T    -(Dot(N,E-P)*I - E*N^T)*E |
 	//     |        -N^t                      Dot(N,E)         |
@@ -945,7 +970,7 @@ void Mathematics::Matrix<Real>
 	//
 	// 其中E为眼点，P为平面上的一个点，而N是单位长度的平面法线。
 
-	auto dotNormalDirection = Dot(normal,eye - origin);
+	auto dotNormalDirection = Dot(normal, eye - origin);
 
 	m_Entry[0] = dotNormalDirection - eye[0] * normal[0];
 	m_Entry[1] = -eye[0] * normal[1];
@@ -954,7 +979,7 @@ void Mathematics::Matrix<Real>
 	m_Entry[4] = -eye[1] * normal[0];
 	m_Entry[5] = dotNormalDirection - eye[1] * normal[1];
 	m_Entry[6] = -eye[1] * normal[2];
-	m_Entry[7] = -(m_Entry[4] * eye[0] + m_Entry[5] * eye[1] +  m_Entry[6] * eye[2]);
+	m_Entry[7] = -(m_Entry[4] * eye[0] + m_Entry[5] * eye[1] + m_Entry[6] * eye[2]);
 	m_Entry[8] = -eye[2] * normal[0];
 	m_Entry[9] = -eye[2] * normal[1];
 	m_Entry[10] = dotNormalDirection - eye[2] * normal[2];
@@ -962,15 +987,15 @@ void Mathematics::Matrix<Real>
 	m_Entry[12] = -normal[0];
 	m_Entry[13] = -normal[1];
 	m_Entry[14] = -normal[2];
-	m_Entry[15] = Dot(eye,normal);
+	m_Entry[15] = Dot(eye, normal);
 }
 
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::MakeReflection( const APoint& origin, const AVector& normal )
+	::MakeReflection(const APoint& origin, const AVector& normal)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_1(normal.IsNormalize() , "normal必须是单位向量！"); 
+	MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal必须是单位向量！");
 
 	//     +-                         -+
 	// M = | I-2*N*N^T    2*Dot(N,P)*N |
@@ -979,89 +1004,89 @@ void Mathematics::Matrix<Real>
 	//
 	// 其中P是平面上的点，N是一个单位长度的平面法线。
 
-	auto twoDotNormalOrigin = static_cast<Real>(2) * Dot(origin,normal);
+	auto twoDotNormalOrigin = Math::sm_Two * Dot(origin, normal);
 
-	m_Entry[0] = AlgebraTraits::UnitValue - static_cast<Real>(2) * normal[0] * normal[0];
-	m_Entry[1] = -static_cast<Real>(2) * normal[0] * normal[1];
-	m_Entry[2] = -static_cast<Real>(2) * normal[0] * normal[2];
+	m_Entry[0] = Math::sm_One - Math::sm_Two * normal[0] * normal[0];
+	m_Entry[1] = -Math::sm_Two * normal[0] * normal[1];
+	m_Entry[2] = -Math::sm_Two * normal[0] * normal[2];
 	m_Entry[3] = twoDotNormalOrigin * normal[0];
-	m_Entry[4] = -static_cast<Real>(2) * normal[1] * normal[0];
-	m_Entry[5] = AlgebraTraits::UnitValue - static_cast<Real>(2) * normal[1] * normal[1];
-	m_Entry[6] = -static_cast<Real>(2) * normal[1] * normal[2];
+	m_Entry[4] = -Math::sm_Two * normal[1] * normal[0];
+	m_Entry[5] = Math::sm_One - Math::sm_Two * normal[1] * normal[1];
+	m_Entry[6] = -Math::sm_Two * normal[1] * normal[2];
 	m_Entry[7] = twoDotNormalOrigin * normal[1];
-	m_Entry[8] = -static_cast<Real>(2) * normal[2] * normal[0];
-	m_Entry[9] = -static_cast<Real>(2) * normal[2] * normal[1];
-	m_Entry[10] = static_cast<Real>(1) - static_cast<Real>(2) * normal[2] * normal[2];
+	m_Entry[8] = -Math::sm_Two * normal[2] * normal[0];
+	m_Entry[9] = -Math::sm_Two * normal[2] * normal[1];
+	m_Entry[10] = Math::sm_One - Math::sm_Two * normal[2] * normal[2];
 	m_Entry[11] = twoDotNormalOrigin * normal[2];
-	m_Entry[12] = Real{ };
-	m_Entry[13] = Real{ };
-	m_Entry[14] = Real{ };
-	m_Entry[15] = AlgebraTraits::UnitValue;
+	m_Entry[12] = Math::sm_Zero;
+	m_Entry[13] = Math::sm_Zero;
+	m_Entry[14] = Math::sm_Zero;
+	m_Entry[15] = Math::sm_One;
 }
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_MATRIX_DETAIL)
 
 template <typename Real>
 bool Mathematics
-	::operator==( const Matrix<Real>& lhs,const Matrix<Real>& rhs )
+	::operator==(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
 	return memcmp(lhs[0], rhs[0], 16 * sizeof(Real)) == 0;
 }
 
 template <typename Real>
 bool Mathematics
-	::operator<( const Matrix<Real>& lhs,const Matrix<Real>& rhs )
+	::operator<(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
-	return  memcmp(lhs[0], rhs[0], 16 * sizeof(Real)) < 0;	
+	return  memcmp(lhs[0], rhs[0], 16 * sizeof(Real)) < 0;
 }
 
 template <typename Real>
 const Mathematics::Matrix<Real>	Mathematics
-	::operator*( const Matrix<Real>& lhs, const Matrix<Real>& rhs )
+	::operator*(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
-	return Matrix<Real>{ lhs(0, 0) * rhs(0, 0) +	lhs(0, 1) * rhs(1, 0) +	lhs(0, 2) * rhs(2, 0) +	lhs(0, 3) * rhs(3, 0),
-					     lhs(0, 0) * rhs(0, 1) +	lhs(0, 1) * rhs(1, 1) +	lhs(0, 2) * rhs(2, 1) +	lhs(0, 3) * rhs(3, 1),
-						 lhs(0, 0) * rhs(0, 2) +	lhs(0, 1) * rhs(1, 2) +	lhs(0, 2) * rhs(2, 2) +	lhs(0, 3) * rhs(3, 2),
-						 lhs(0, 0) * rhs(0, 3) +	lhs(0, 1) * rhs(1, 3) +	lhs(0, 2) * rhs(2, 3) +	lhs(0, 3) * rhs(3, 3),
-						 lhs(1, 0) * rhs(0, 0) +	lhs(1, 1) * rhs(1, 0) +	lhs(1, 2) * rhs(2, 0) +	lhs(1, 3) * rhs(3, 0),
-						 lhs(1, 0) * rhs(0, 1) +	lhs(1, 1) * rhs(1, 1) +	lhs(1, 2) * rhs(2, 1) +	lhs(1, 3) * rhs(3, 1),
-						 lhs(1, 0) * rhs(0, 2) +	lhs(1, 1) * rhs(1, 2) +	lhs(1, 2) * rhs(2, 2) +	lhs(1, 3) * rhs(3, 2),
-						 lhs(1, 0) * rhs(0, 3) +	lhs(1, 1) * rhs(1, 3) +	lhs(1, 2) * rhs(2, 3) +	lhs(1, 3) * rhs(3, 3),
-						 lhs(2, 0) * rhs(0, 0) +	lhs(2, 1) * rhs(1, 0) +	lhs(2, 2) * rhs(2, 0) +	lhs(2, 3) * rhs(3, 0),
-						 lhs(2, 0) * rhs(0, 1) +	lhs(2, 1) * rhs(1, 1) +	lhs(2, 2) * rhs(2, 1) +	lhs(2, 3) * rhs(3, 1),
-						 lhs(2, 0) * rhs(0, 2) +	lhs(2, 1) * rhs(1, 2) +	lhs(2, 2) * rhs(2, 2) +	lhs(2, 3) * rhs(3, 2),
-						 lhs(2, 0) * rhs(0, 3) +	lhs(2, 1) * rhs(1, 3) +	lhs(2, 2) * rhs(2, 3) +	lhs(2, 3) * rhs(3, 3),
-						 lhs(3, 0) * rhs(0, 0) +	lhs(3, 1) * rhs(1, 0) +	lhs(3, 2) * rhs(2, 0) +	lhs(3, 3) * rhs(3, 0),
-						 lhs(3, 0) * rhs(0, 1) +	lhs(3, 1) * rhs(1, 1) +	lhs(3, 2) * rhs(2, 1) +	lhs(3, 3) * rhs(3, 1),
-						 lhs(3, 0) * rhs(0, 2) +	lhs(3, 1) * rhs(1, 2) +	lhs(3, 2) * rhs(2, 2) +	lhs(3, 3) * rhs(3, 2),
-						 lhs(3, 0) * rhs(0, 3) +	lhs(3, 1) * rhs(1, 3) +	lhs(3, 2) * rhs(2, 3) +	lhs(3, 3) * rhs(3, 3) };
+	return Matrix<Real>{ lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0) + lhs(0, 3) * rhs(3, 0),
+					     lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1) + lhs(0, 3) * rhs(3, 1),
+						 lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2) + lhs(0, 2) * rhs(2, 2) + lhs(0, 3) * rhs(3, 2),
+						 lhs(0, 0) * rhs(0, 3) + lhs(0, 1) * rhs(1, 3) + lhs(0, 2) * rhs(2, 3) + lhs(0, 3) * rhs(3, 3),
+						 lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0) + lhs(1, 3) * rhs(3, 0),
+						 lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1) + lhs(1, 3) * rhs(3, 1),
+						 lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2) + lhs(1, 3) * rhs(3, 2),
+						 lhs(1, 0) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3) + lhs(1, 2) * rhs(2, 3) + lhs(1, 3) * rhs(3, 3),
+						 lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0) + lhs(2, 2) * rhs(2, 0) + lhs(2, 3) * rhs(3, 0),
+						 lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1) + lhs(2, 2) * rhs(2, 1) + lhs(2, 3) * rhs(3, 1),
+						 lhs(2, 0) * rhs(0, 2) + lhs(2, 1) * rhs(1, 2) + lhs(2, 2) * rhs(2, 2) + lhs(2, 3) * rhs(3, 2),
+						 lhs(2, 0) * rhs(0, 3) + lhs(2, 1) * rhs(1, 3) + lhs(2, 2) * rhs(2, 3) + lhs(2, 3) * rhs(3, 3),
+						 lhs(3, 0) * rhs(0, 0) + lhs(3, 1) * rhs(1, 0) + lhs(3, 2) * rhs(2, 0) + lhs(3, 3) * rhs(3, 0),
+						 lhs(3, 0) * rhs(0, 1) + lhs(3, 1) * rhs(1, 1) + lhs(3, 2) * rhs(2, 1) + lhs(3, 3) * rhs(3, 1),
+						 lhs(3, 0) * rhs(0, 2) + lhs(3, 1) * rhs(1, 2) + lhs(3, 2) * rhs(2, 2) + lhs(3, 3) * rhs(3, 2),
+						 lhs(3, 0) * rhs(0, 3) + lhs(3, 1) * rhs(1, 3) + lhs(3, 2) * rhs(2, 3) + lhs(3, 3) * rhs(3, 3) };
 }
 
 template <typename Real>
 const Mathematics::Matrix<Real>	Mathematics
-	::TransposeTimes( const Matrix<Real>& lhs, const Matrix<Real>& rhs )
+	::TransposeTimes(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
 	return Matrix<Real>{ lhs(0, 0) * rhs(0, 0) + lhs(1, 0) * rhs(1, 0) + lhs(2, 0) * rhs(2, 0) + lhs(3, 0) * rhs(3, 0),
-					     lhs(0, 0) * rhs(0, 1) + lhs(1, 0) * rhs(1, 1) +	lhs(2, 0) * rhs(2, 1) +	lhs(3, 0) * rhs(3, 1),
-						 lhs(0, 0) * rhs(0, 2) + lhs(1, 0) * rhs(1, 2) +	lhs(2, 0) * rhs(2, 2) +	lhs(3, 0) * rhs(3, 2),
-						 lhs(0, 0) * rhs(0, 3) + lhs(1, 0) * rhs(1, 3) +	lhs(2, 0) * rhs(2, 3) +	lhs(3, 0) * rhs(3, 3),
-						 lhs(0, 1) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) +	lhs(2, 1) * rhs(2, 0) +	lhs(3, 1) * rhs(3, 0),
-						 lhs(0, 1) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) +	lhs(2, 1) * rhs(2, 1) +	lhs(3, 1) * rhs(3, 1),
-						 lhs(0, 1) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) +	lhs(2, 1) * rhs(2, 2) +	lhs(3, 1) * rhs(3, 2),
-						 lhs(0, 1) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3) +	lhs(2, 1) * rhs(2, 3) +	lhs(3, 1) * rhs(3, 3),
-						 lhs(0, 2) * rhs(0, 0) + lhs(1, 2) * rhs(1, 0) +	lhs(2, 2) * rhs(2, 0) +	lhs(3, 2) * rhs(3, 0),
-						 lhs(0, 2) * rhs(0, 1) + lhs(1, 2) * rhs(1, 1) +	lhs(2, 2) * rhs(2, 1) +	lhs(3, 2) * rhs(3, 1),
-						 lhs(0, 2) * rhs(0, 2) + lhs(1, 2) * rhs(1, 2) +	lhs(2, 2) * rhs(2, 2) +	lhs(3, 2) * rhs(3, 2),
-						 lhs(0, 2) * rhs(0, 3) + lhs(1, 2) * rhs(1, 3) +	lhs(2, 2) * rhs(2, 3) +	lhs(3, 2) * rhs(3, 3),
-						 lhs(0, 3) * rhs(0, 0) + lhs(1, 3) * rhs(1, 0) +	lhs(2, 3) * rhs(2, 0) +	lhs(3, 3) * rhs(3, 0),
-						 lhs(0, 3) * rhs(0, 1) + lhs(1, 3) * rhs(1, 1) +	lhs(2, 3) * rhs(2, 1) +	lhs(3, 3) * rhs(3, 1),
-						 lhs(0, 3) * rhs(0, 2) + lhs(1, 3) * rhs(1, 2) +	lhs(2, 3) * rhs(2, 2) +	lhs(3, 3) * rhs(3, 2),
-						 lhs(0, 3) * rhs(0, 3) + lhs(1, 3) * rhs(1, 3) +	lhs(2, 3) * rhs(2, 3) +	lhs(3, 3) * rhs(3, 3) };
+						 lhs(0, 0) * rhs(0, 1) + lhs(1, 0) * rhs(1, 1) + lhs(2, 0) * rhs(2, 1) + lhs(3, 0) * rhs(3, 1),
+						 lhs(0, 0) * rhs(0, 2) + lhs(1, 0) * rhs(1, 2) + lhs(2, 0) * rhs(2, 2) + lhs(3, 0) * rhs(3, 2),
+						 lhs(0, 0) * rhs(0, 3) + lhs(1, 0) * rhs(1, 3) + lhs(2, 0) * rhs(2, 3) + lhs(3, 0) * rhs(3, 3),
+						 lhs(0, 1) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(2, 1) * rhs(2, 0) + lhs(3, 1) * rhs(3, 0),
+						 lhs(0, 1) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(2, 1) * rhs(2, 1) + lhs(3, 1) * rhs(3, 1),
+						 lhs(0, 1) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(2, 1) * rhs(2, 2) + lhs(3, 1) * rhs(3, 2),
+						 lhs(0, 1) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3) + lhs(2, 1) * rhs(2, 3) + lhs(3, 1) * rhs(3, 3),
+						 lhs(0, 2) * rhs(0, 0) + lhs(1, 2) * rhs(1, 0) + lhs(2, 2) * rhs(2, 0) + lhs(3, 2) * rhs(3, 0),
+						 lhs(0, 2) * rhs(0, 1) + lhs(1, 2) * rhs(1, 1) + lhs(2, 2) * rhs(2, 1) + lhs(3, 2) * rhs(3, 1),
+						 lhs(0, 2) * rhs(0, 2) + lhs(1, 2) * rhs(1, 2) + lhs(2, 2) * rhs(2, 2) + lhs(3, 2) * rhs(3, 2),
+						 lhs(0, 2) * rhs(0, 3) + lhs(1, 2) * rhs(1, 3) + lhs(2, 2) * rhs(2, 3) + lhs(3, 2) * rhs(3, 3),
+						 lhs(0, 3) * rhs(0, 0) + lhs(1, 3) * rhs(1, 0) + lhs(2, 3) * rhs(2, 0) + lhs(3, 3) * rhs(3, 0),
+						 lhs(0, 3) * rhs(0, 1) + lhs(1, 3) * rhs(1, 1) + lhs(2, 3) * rhs(2, 1) + lhs(3, 3) * rhs(3, 1),
+						 lhs(0, 3) * rhs(0, 2) + lhs(1, 3) * rhs(1, 2) + lhs(2, 3) * rhs(2, 2) + lhs(3, 3) * rhs(3, 2),
+						 lhs(0, 3) * rhs(0, 3) + lhs(1, 3) * rhs(1, 3) + lhs(2, 3) * rhs(2, 3) + lhs(3, 3) * rhs(3, 3) };
 }
 
 template <typename Real>
 const Mathematics::Matrix<Real> Mathematics
-	::TimesTranspose( const Matrix<Real>& lhs, const Matrix<Real>& rhs )
+	::TimesTranspose(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
 	return Matrix<Real>{ lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(0, 1) + lhs(0, 2) * rhs(0, 2) + lhs(0, 3) * rhs(0, 3),
 						 lhs(0, 0) * rhs(1, 0) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(1, 2) + lhs(0, 3) * rhs(1, 3),
@@ -1072,42 +1097,41 @@ const Mathematics::Matrix<Real> Mathematics
 						 lhs(1, 0) * rhs(2, 0) + lhs(1, 1) * rhs(2, 1) + lhs(1, 2) * rhs(2, 2) + lhs(1, 3) * rhs(2, 3),
 						 lhs(1, 0) * rhs(3, 0) + lhs(1, 1) * rhs(3, 1) + lhs(1, 2) * rhs(3, 2) + lhs(1, 3) * rhs(3, 3),
 						 lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(0, 1) + lhs(2, 2) * rhs(0, 2) + lhs(2, 3) * rhs(0, 3),
-						 lhs(2, 0) * rhs(1, 0) + lhs(2, 1) * rhs(1, 1) + lhs(2, 2) * rhs(1, 2) +	lhs(2, 3) * rhs(1, 3),
-						 lhs(2, 0) * rhs(2, 0) + lhs(2, 1) * rhs(2, 1) +	lhs(2, 2) * rhs(2, 2) +	lhs(2, 3) * rhs(2, 3),
-						 lhs(2, 0) * rhs(3, 0) + lhs(2, 1) * rhs(3, 1) +	lhs(2, 2) * rhs(3, 2) +	lhs(2, 3) * rhs(3, 3),
-						 lhs(3, 0) * rhs(0, 0) + lhs(3, 1) * rhs(0, 1) +	lhs(3, 2) * rhs(0, 2) +	lhs(3, 3) * rhs(0, 3),
-						 lhs(3, 0) * rhs(1, 0) + lhs(3, 1) * rhs(1, 1) +	lhs(3, 2) * rhs(1, 2) +	lhs(3, 3) * rhs(1, 3),
-						 lhs(3, 0) * rhs(2, 0) + lhs(3, 1) * rhs(2, 1) +	lhs(3, 2) * rhs(2, 2) +	lhs(3, 3) * rhs(2, 3),
-						 lhs(3, 0) * rhs(3, 0) + lhs(3, 1) * rhs(3, 1) +	lhs(3, 2) * rhs(3, 2) +	lhs(3, 3) * rhs(3, 3) };
+						 lhs(2, 0) * rhs(1, 0) + lhs(2, 1) * rhs(1, 1) + lhs(2, 2) * rhs(1, 2) + lhs(2, 3) * rhs(1, 3),
+						 lhs(2, 0) * rhs(2, 0) + lhs(2, 1) * rhs(2, 1) + lhs(2, 2) * rhs(2, 2) + lhs(2, 3) * rhs(2, 3),
+						 lhs(2, 0) * rhs(3, 0) + lhs(2, 1) * rhs(3, 1) + lhs(2, 2) * rhs(3, 2) + lhs(2, 3) * rhs(3, 3),
+						 lhs(3, 0) * rhs(0, 0) + lhs(3, 1) * rhs(0, 1) + lhs(3, 2) * rhs(0, 2) + lhs(3, 3) * rhs(0, 3),
+						 lhs(3, 0) * rhs(1, 0) + lhs(3, 1) * rhs(1, 1) + lhs(3, 2) * rhs(1, 2) + lhs(3, 3) * rhs(1, 3),
+						 lhs(3, 0) * rhs(2, 0) + lhs(3, 1) * rhs(2, 1) + lhs(3, 2) * rhs(2, 2) + lhs(3, 3) * rhs(2, 3),
+						 lhs(3, 0) * rhs(3, 0) + lhs(3, 1) * rhs(3, 1) + lhs(3, 2) * rhs(3, 2) + lhs(3, 3) * rhs(3, 3) };
 }
-
 
 template <typename Real>
 const Mathematics::Matrix<Real>	Mathematics
-	::TransposeTimesTranspose( const Matrix<Real>& lhs,const Matrix<Real>& rhs )
+	::TransposeTimesTranspose(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
 	// A^T * B^T
 	return Matrix<Real>{ lhs(0, 0) * rhs(0, 0) + lhs(1, 0) * rhs(0, 1) + lhs(2, 0) * rhs(0, 2) + lhs(3, 0) * rhs(0, 3),
-						 lhs(0, 0) * rhs(1, 0) +	lhs(1, 0) * rhs(1, 1) +	lhs(2, 0) * rhs(1, 2) +	lhs(3, 0) * rhs(1, 3),
-						 lhs(0, 0) * rhs(2, 0) +	lhs(1, 0) * rhs(2, 1) +	lhs(2, 0) * rhs(2, 2) +	lhs(3, 0) * rhs(2, 3),
-						 lhs(0, 0) * rhs(3, 0) +	lhs(1, 0) * rhs(3, 1) +	lhs(2, 0) * rhs(3, 2) +	lhs(3, 0) * rhs(3, 3),
-						 lhs(0, 1) * rhs(0, 0) +	lhs(1, 1) * rhs(0, 1) +	lhs(2, 1) * rhs(0, 2) +	lhs(3, 1) * rhs(0, 3),
-						 lhs(0, 1) * rhs(1, 0) +	lhs(1, 1) * rhs(1, 1) +	lhs(2, 1) * rhs(1, 2) +	lhs(3, 1) * rhs(1, 3),
-						 lhs(0, 1) * rhs(2, 0) +	lhs(1, 1) * rhs(2, 1) +	lhs(2, 1) * rhs(2, 2) +	lhs(3, 1) * rhs(2, 3),
-					     lhs(0, 1) * rhs(3, 0) +	lhs(1, 1) * rhs(3, 1) +	lhs(2, 1) * rhs(3, 2) +	lhs(3, 1) * rhs(3, 3),
-						 lhs(0, 2) * rhs(0, 0) +	lhs(1, 2) * rhs(0, 1) +	lhs(2, 2) * rhs(0, 2) +	lhs(3, 2) * rhs(0, 3),
-						 lhs(0, 2) * rhs(1, 0) +	lhs(1, 2) * rhs(1, 1) +	lhs(2, 2) * rhs(1, 2) +	lhs(3, 2) * rhs(1, 3),
-						 lhs(0, 2) * rhs(2, 0) +	lhs(1, 2) * rhs(2, 1) +	lhs(2, 2) * rhs(2, 2) +	lhs(3, 2) * rhs(2, 3),
-						 lhs(0, 2) * rhs(3, 0) +	lhs(1, 2) * rhs(3, 1) +	lhs(2, 2) * rhs(3, 2) +	lhs(3, 2) * rhs(3, 3),
-						 lhs(0, 3) * rhs(0, 0) +	lhs(1, 3) * rhs(0, 1) +	lhs(2, 3) * rhs(0, 2) +	lhs(3, 3) * rhs(0, 3),
-						 lhs(0, 3) * rhs(1, 0) +	lhs(1, 3) * rhs(1, 1) +	lhs(2, 3) * rhs(1, 2) +	lhs(3, 3) * rhs(1, 3),
-						 lhs(0, 3) * rhs(2, 0) +	lhs(1, 3) * rhs(2, 1) +	lhs(2, 3) * rhs(2, 2) +	lhs(3, 3) * rhs(2, 3),
-						 lhs(0, 3) * rhs(3, 0) +	lhs(1, 3) * rhs(3, 1) +	lhs(2, 3) * rhs(3, 2) +	lhs(3, 3) * rhs(3, 3) };
+						 lhs(0, 0) * rhs(1, 0) + lhs(1, 0) * rhs(1, 1) + lhs(2, 0) * rhs(1, 2) + lhs(3, 0) * rhs(1, 3),
+						 lhs(0, 0) * rhs(2, 0) + lhs(1, 0) * rhs(2, 1) + lhs(2, 0) * rhs(2, 2) + lhs(3, 0) * rhs(2, 3),
+						 lhs(0, 0) * rhs(3, 0) + lhs(1, 0) * rhs(3, 1) + lhs(2, 0) * rhs(3, 2) + lhs(3, 0) * rhs(3, 3),
+						 lhs(0, 1) * rhs(0, 0) + lhs(1, 1) * rhs(0, 1) + lhs(2, 1) * rhs(0, 2) + lhs(3, 1) * rhs(0, 3),
+						 lhs(0, 1) * rhs(1, 0) + lhs(1, 1) * rhs(1, 1) + lhs(2, 1) * rhs(1, 2) + lhs(3, 1) * rhs(1, 3),
+						 lhs(0, 1) * rhs(2, 0) + lhs(1, 1) * rhs(2, 1) + lhs(2, 1) * rhs(2, 2) + lhs(3, 1) * rhs(2, 3),
+						 lhs(0, 1) * rhs(3, 0) + lhs(1, 1) * rhs(3, 1) + lhs(2, 1) * rhs(3, 2) + lhs(3, 1) * rhs(3, 3),
+						 lhs(0, 2) * rhs(0, 0) + lhs(1, 2) * rhs(0, 1) + lhs(2, 2) * rhs(0, 2) + lhs(3, 2) * rhs(0, 3),
+						 lhs(0, 2) * rhs(1, 0) + lhs(1, 2) * rhs(1, 1) + lhs(2, 2) * rhs(1, 2) + lhs(3, 2) * rhs(1, 3),
+						 lhs(0, 2) * rhs(2, 0) + lhs(1, 2) * rhs(2, 1) + lhs(2, 2) * rhs(2, 2) + lhs(3, 2) * rhs(2, 3),
+						 lhs(0, 2) * rhs(3, 0) + lhs(1, 2) * rhs(3, 1) + lhs(2, 2) * rhs(3, 2) + lhs(3, 2) * rhs(3, 3),
+						 lhs(0, 3) * rhs(0, 0) + lhs(1, 3) * rhs(0, 1) + lhs(2, 3) * rhs(0, 2) + lhs(3, 3) * rhs(0, 3),
+						 lhs(0, 3) * rhs(1, 0) + lhs(1, 3) * rhs(1, 1) + lhs(2, 3) * rhs(1, 2) + lhs(3, 3) * rhs(1, 3),
+						 lhs(0, 3) * rhs(2, 0) + lhs(1, 3) * rhs(2, 1) + lhs(2, 3) * rhs(2, 2) + lhs(3, 3) * rhs(2, 3),
+						 lhs(0, 3) * rhs(3, 0) + lhs(1, 3) * rhs(3, 1) + lhs(2, 3) * rhs(3, 2) + lhs(3, 3) * rhs(3, 3) };
 }
 
 template <typename Real>
 const Mathematics::HomogeneousPoint<Real> Mathematics
-	::operator*( const Matrix<Real>& matrix,const HomogeneousPoint<Real>& point )
+	::operator*(const Matrix<Real>& matrix, const HomogeneousPoint<Real>& point)
 {
 	return HomogeneousPoint<Real>{ matrix(0, 0) * point[0] + matrix(0, 1) * point[1] + matrix(0, 2) * point[2] + matrix(0, 3) * point[3],
 								   matrix(1, 0) * point[0] + matrix(1, 1) * point[1] + matrix(1, 2) * point[2] + matrix(1, 3) * point[3],
@@ -1117,7 +1141,7 @@ const Mathematics::HomogeneousPoint<Real> Mathematics
 
 template <typename Real>
 const Mathematics::HomogeneousPoint<Real> Mathematics
-	::operator*( const HomogeneousPoint<Real>& point,const Matrix<Real>& matrix )
+	::operator*(const HomogeneousPoint<Real>& point, const Matrix<Real>& matrix)
 {
 	return HomogeneousPoint<Real>{ point[0] * matrix(0, 0) + point[1] * matrix(1, 0) + point[2] * matrix(2, 0) + point[3] * matrix(3, 0),
 								   point[0] * matrix(0, 1) + point[1] * matrix(1, 1) + point[2] * matrix(2, 1) + point[3] * matrix(3, 1),
@@ -1127,58 +1151,57 @@ const Mathematics::HomogeneousPoint<Real> Mathematics
 
 template <typename Real>
 const std::vector<Mathematics::HomogeneousPoint<Real>> Mathematics
-	::BatchMultiply( const Matrix<Real>& matrix,const std::vector<HomogeneousPoint<Real> >& inputPoints )
+	::BatchMultiply(const Matrix<Real>& matrix, const std::vector<HomogeneousPoint<Real> >& inputPoints)
 {
-	std::vector<HomogeneousPoint<Real>> outputPoints; 
-
-	for(const auto& point: inputPoints)
-	{
-		outputPoints.push_back(matrix * point);
-	}
-
-	MATHEMATICS_ASSERTION_1(outputPoints.size() ==  inputPoints.size(),"输入和输出数组大小不相等！"); 
-
-	return outputPoints;
-}
-
-
-template <typename Real>
-const Mathematics::APoint<Real>	Mathematics
-	::operator*( const Matrix<Real>& matrix, const APoint<Real>& point )
-{
-	return APoint<Real>{ matrix(0, 0) * point[0] + matrix(0, 1) * point[1] + matrix(0, 2) * point[2] + matrix(0, 3),
-						 matrix(1, 0) * point[0] + matrix(1, 1) * point[1] +	matrix(1, 2) * point[2] + matrix(1, 3),
-						 matrix(2, 0) * point[0] + matrix(2, 1) * point[1] +	matrix(2, 2) * point[2] + matrix(2, 3) };
-}
-
-template <typename Real>
-const std::vector<Mathematics::APoint<Real>> Mathematics
-	::BatchMultiply( const Matrix<Real>& matrix,const std::vector<APoint<Real> >& inputPoints )
-{
-	std::vector<APoint<Real> > outputPoints;
+	std::vector<HomogeneousPoint<Real>> outputPoints;
 
 	for (const auto& point : inputPoints)
 	{
 		outputPoints.push_back(matrix * point);
 	}
 
-	MATHEMATICS_ASSERTION_1(outputPoints.size() ==  inputPoints.size(),"输入和输出数组大小不相等！"); 
+	MATHEMATICS_ASSERTION_1(outputPoints.size() == inputPoints.size(), "输入和输出数组大小不相等！");
 
 	return outputPoints;
 }
 
 template <typename Real>
-const Mathematics::AVector<Real>
-	Mathematics::operator*( const Matrix<Real>& matrix,const AVector<Real>& point )
+const Mathematics::APoint<Real>	Mathematics
+	::operator*(const Matrix<Real>& matrix, const APoint<Real>& point)
+{
+	return APoint<Real>{ matrix(0, 0) * point[0] + matrix(0, 1) * point[1] + matrix(0, 2) * point[2] + matrix(0, 3),
+						 matrix(1, 0) * point[0] + matrix(1, 1) * point[1] + matrix(1, 2) * point[2] + matrix(1, 3),
+						 matrix(2, 0) * point[0] + matrix(2, 1) * point[1] + matrix(2, 2) * point[2] + matrix(2, 3) };
+}
+
+template <typename Real>
+const std::vector<Mathematics::APoint<Real>> Mathematics
+	::BatchMultiply(const Matrix<Real>& matrix, const std::vector<APoint<Real>>& inputPoints)
+{
+	std::vector<APoint<Real>> outputPoints;
+
+	for (const auto& point : inputPoints)
+	{
+		outputPoints.push_back(matrix * point);
+	}
+
+	MATHEMATICS_ASSERTION_1(outputPoints.size() == inputPoints.size(), "输入和输出数组大小不相等！");
+
+	return outputPoints;
+}
+
+template <typename Real>
+const Mathematics::AVector<Real> Mathematics
+	::operator*(const Matrix<Real>& matrix, const AVector<Real>& point)
 {
 	return AVector<Real>{ matrix(0, 0) * point[0] + matrix(0, 1) * point[1] + matrix(0, 2) * point[2],
-						  matrix(1, 0) * point[0] + matrix(1, 1) * point[1] +	matrix(1, 2) * point[2],
-						  matrix(2, 0) * point[0] + matrix(2, 1) * point[1] +	matrix(2, 2) * point[2] };
+						  matrix(1, 0) * point[0] + matrix(1, 1) * point[1] + matrix(1, 2) * point[2],
+						  matrix(2, 0) * point[0] + matrix(2, 1) * point[1] + matrix(2, 2) * point[2] };
 }
 
 template <typename Real>
 const std::vector<Mathematics::AVector<Real>> Mathematics
-	::BatchMultiply( const Matrix<Real>& matrix,const std::vector<AVector<Real> >& inputPoints )
+	::BatchMultiply(const Matrix<Real>& matrix, const std::vector<AVector<Real> >& inputPoints)
 {
 	std::vector<AVector<Real> > outputPoints;
 
@@ -1187,43 +1210,43 @@ const std::vector<Mathematics::AVector<Real>> Mathematics
 		outputPoints.push_back(matrix * point);
 	}
 
-	MATHEMATICS_ASSERTION_1(outputPoints.size() ==  inputPoints.size(),"输入和输出数组大小不相等！"); 
+	MATHEMATICS_ASSERTION_1(outputPoints.size() == inputPoints.size(), "输入和输出数组大小不相等！");
 
 	return outputPoints;
 }
 
 template <typename Real>
-bool Mathematics	
-	::Approximate( const Matrix<Real>& lhs, const Matrix<Real>& rhs,const Real epsilon )
+bool Mathematics
+	::Approximate(const Matrix<Real>& lhs, const Matrix<Real>& rhs, const Real epsilon)
 {
-	for(int row = 0;row < 4;++row)
+	for (int row = 0; row < 4; ++row)
 	{
-	     for(int column = 0; column < 4;++ column)
-	     {
-			 if (epsilon < Math<Real>::FAbs(lhs(row, column) - rhs(row, column)))
-			 {
-				 return false;
-			 }                 
-	     }
+		for (int column = 0; column < 4; ++column)
+		{
+			if (epsilon < Math<Real>::FAbs(lhs(row, column) - rhs(row, column)))
+			{
+				return false;
+			}
+		}
 	}
 
-	return true; 
+	return true;
 }
-
 
 template <typename Real>
 bool Mathematics
-	::Approximate( const Matrix<Real>& lhs, const Matrix<Real>& rhs )
+	::Approximate(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
-	return Approximate(lhs,rhs,Math<Real>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math<Real>::sm_ZeroTolerance);
 }
 
 template <typename Real>
-std::ostream& Mathematics::operator<<( std::ostream& outFile,const Matrix<Real>& matrix )
+std::ostream& Mathematics
+	::operator<<(std::ostream& outFile, const Matrix<Real>& matrix)
 {
-	for(int row = 0;row < 4;++row)
+	for (int row = 0; row < 4; ++row)
 	{
-		for(int column = 0; column < 4;++ column)
+		for (int column = 0; column < 4; ++column)
 		{
 			outFile << "(" << row << "," << column << ")　=　" << matrix(row, column) << "　";
 		}

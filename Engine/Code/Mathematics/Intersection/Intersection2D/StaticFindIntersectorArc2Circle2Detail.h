@@ -1,20 +1,20 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 19:35)
+// 引擎版本：0.0.2.5 (2020/03/24 15:36)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ARC2_CIRCLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ARC2_CIRCLE2_DETAIL_H
 
 #include "StaticFindIntersectorArc2Circle2.h"
 #include "StaticFindIntersectorCircle2Circle2Detail.h"
-#include "Mathematics/Objects2D/Arc2Detail.h"
-#include "Mathematics/Intersection/StaticIntersectorDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Objects2D/Arc2Detail.h"
+#include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorArc2Circle2<Real>
@@ -34,12 +34,12 @@ void Mathematics::StaticFindIntersectorArc2Circle2<Real>
 	Circle2 circleOfArc{ m_Arc.GetCenter(), m_Arc.GetRadius() };
 	StaticFindIntersectorCircle2Circle2<Real> intersector{ circleOfArc, m_Circle };
 
-    if (!intersector.IsIntersection())
-    {
-        // 圆和圆弧不相交。
+	if (!intersector.IsIntersection())
+	{
+		// 圆和圆弧不相交。
 		this->SetIntersectionType(IntersectionType::Empty);
 		return;
-    }
+	}
 
 	if (intersector.GetIntersectionType() == IntersectionType::Other)
 	{

@@ -1,0 +1,49 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.1.1.0 (2020/05/02 13:36)
+
+#include "CoreTools/CoreToolsExport.h"
+
+#include "DirectoryImpl.h" 
+#include "System/Window/WindowSystem.h"
+#include "System/DynamicLink/Using/LoadLibraryUsing.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
+
+#include <array>
+
+using std::array;
+
+CoreTools::DirectoryImpl
+	::DirectoryImpl(const String& directoryName)
+	:m_DirectoryName{ }
+{
+	array<System::TChar, System::g_MaxPath> systemCurrentDirectory{ };
+	auto result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
+	if (0 < result && directoryName != systemCurrentDirectory.data())
+	{
+		m_DirectoryName = systemCurrentDirectory.data();
+		System::SetSystemCurrentDirectory(directoryName.c_str());
+	}
+}
+
+CoreTools::DirectoryImpl
+	::~DirectoryImpl()
+{
+	if (!m_DirectoryName.empty())
+	{
+		System::SetSystemCurrentDirectory(m_DirectoryName.c_str());
+	}
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+bool CoreTools::DirectoryImpl
+	::IsValid() const noexcept
+{
+	 
+		return true;
+ 
+}
+#endif // OPEN_CLASS_INVARIANT
+ 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 09:37)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 09:45)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_PARAMETER_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_PARAMETER_H
@@ -10,8 +10,8 @@
 #include "Framework/FrameworkDll.h"
 
 #include "WindowPoint.h"
-#include "WindowStyles.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "System/Window/Flags/WindowFlags.h"
 #include "CoreTools/Helper/ExportMacro.h" 
 
 #include <string>
@@ -24,22 +24,23 @@ namespace Framework
 	{
 	public:
 		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(WindowCreateParameter);
-        using HWnd = System::WindowHWnd;
-        using HMenu = System::WindowHMenu;
+		using String = System::String;
+		using HWnd = System::WindowHWnd;
+		using HMenu = System::WindowHMenu;
+		using WindowStyles = System::WindowStyles;
 
 	public:
-		explicit WindowCreateParameter(const System::String& windowsName,
-			                           WindowStylesFlags style = System::WindowStyles::OverlappedWindow | System::WindowStyles::Visible,
-									   HWnd parent = nullptr, HMenu menu = nullptr,
-									   const WindowPoint& leftTopCorner = WindowPoint(static_cast<int>(System::WindowPointUse::Default), static_cast<int>(System::WindowPointUse::Default)));
-		
+		WindowCreateParameter(const String& windowsName, WindowStyles style, HWnd parent, HMenu menu, const WindowPoint& leftTopCorner);
+		explicit WindowCreateParameter(const String& windowsName);
+		WindowCreateParameter(const String& windowsName, WindowStyles style);
+
 		CLASS_INVARIANT_DECLARE;
 
-		System::String GetWindowsName() const;
-		WindowStylesFlags GetStyle() const;
-		WindowPoint GetLeftTopCorner() const;
-		HWnd GetParent() const;
-		HMenu GetMenu() const;
+		const String GetWindowsName() const;
+		WindowStyles GetStyle() const noexcept;
+		const WindowPoint GetLeftTopCorner() const noexcept;
+		HWnd GetParent() const noexcept;
+		HMenu GetMenu() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(WindowCreateParameter);

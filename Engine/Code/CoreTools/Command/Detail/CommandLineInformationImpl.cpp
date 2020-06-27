@@ -32,7 +32,7 @@ CoreTools::CommandLineInformationImpl
 }
 
 CoreTools::CommandLineInformationImpl
-	::CommandLineInformationImpl(char* commandLine)
+	::CommandLineInformationImpl(const char* commandLine)
 	:m_CommandArgumentContainer{}
 {
 	AnalysisCommandArgumentContainer analysisCommandArgumentContainer{ commandLine };

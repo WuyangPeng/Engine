@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 17:13)
+// 引擎版本：0.0.2.5 (2020/03/19 11:38)
 
 #ifndef MATHEMATICS_ALGEBRA_HQUATERNION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_HQUATERNION_DETAIL_H
@@ -15,23 +15,24 @@
 #include "Matrix.h"
 #include "AlgebraTraits.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
 const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
-	::sm_Zero = AQuaternion<Real>{ AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::NullValue,AlgebraTraits::NullValue };
+	::sm_Zero = AQuaternion<Real>{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
 
 template <typename Real>
 const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
-	::sm_Identity = AQuaternion<Real>{ AlgebraTraits::UnitValue, AlgebraTraits::NullValue, AlgebraTraits::NullValue, AlgebraTraits::NullValue };
+	::sm_Identity = AQuaternion<Real>{ Math::sm_One, Math::sm_Zero, Math::sm_Zero, Math::sm_Zero };
 
 template <typename Real>
 Mathematics::AQuaternion<Real>
 	::AQuaternion()
 	:m_Tuple{}
-{ 
+{
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -54,6 +55,7 @@ Mathematics::AQuaternion<Real>
 template <typename Real>
 Mathematics::AQuaternion<Real>
 	::AQuaternion(const Matrix& matrix)
+	:m_Tuple{}
 {
 	FromRotationMatrix(matrix);
 
@@ -62,7 +64,7 @@ Mathematics::AQuaternion<Real>
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::FromRotationMatrix( const Matrix& matrix )
+	::FromRotationMatrix(const Matrix& matrix)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -71,62 +73,63 @@ void Mathematics::AQuaternion<Real>
 
 	const int next[3]{ 1, 2, 0 };
 
-	auto trace = matrix(0,0) + matrix(1,1) + matrix(2,2);
+	auto trace = matrix(0, 0) + matrix(1, 1) + matrix(2, 2);
 
-	if (Real{} < trace)
+	if (Math::sm_Zero < trace)
 	{
 		// |w| > 1/2, 可能选择 w > 1/2
-		auto root = Math::Sqrt(trace + AlgebraTraits::UnitValue);  // 2w
+		auto root = Math::Sqrt(trace + Math::sm_One);  // 2w
 
 		m_Tuple[0] = static_cast<Real>(0.5) * root;
 		root = static_cast<Real>(0.5) / root;  // 1 / (4w)
-		m_Tuple[1] = (matrix(2,1) - matrix(1,2)) * root;
-		m_Tuple[2] = (matrix(0,2) - matrix(2,0)) * root;
-		m_Tuple[3] = (matrix(1,0) - matrix(0,1)) * root;
+		m_Tuple[1] = (matrix(2, 1) - matrix(1, 2)) * root;
+		m_Tuple[2] = (matrix(0, 2) - matrix(2, 0)) * root;
+		m_Tuple[3] = (matrix(1, 0) - matrix(0, 1)) * root;
 	}
 	else
 	{
 		// |w| <= 1/2
-		int i{ 0 };
-		if(matrix(0,0) < matrix(1,1))
+		auto i = 0;
+		if (matrix(0, 0) < matrix(1, 1))
 		{
 			i = 1;
 		}
-		if(matrix(i,i) < matrix(2,2))
+		if (matrix(i, i) < matrix(2, 2))
 		{
 			i = 2;
-		}		
-		
+		}
+
 		auto j = next[i];
 		auto k = next[j];
 
-		auto root = Math::Sqrt(matrix(i,i) - matrix(j,j) - matrix(k,k) + AlgebraTraits::UnitValue);
-		Real* quat[3] { &m_Tuple[1], &m_Tuple[2], &m_Tuple[3] };
+		auto root = Math::Sqrt(matrix(i, i) - matrix(j, j) - matrix(k, k) + Math::sm_One);
+		Real* quat[3]{ &m_Tuple[1], &m_Tuple[2], &m_Tuple[3] };
 		*quat[i] = static_cast<Real>(0.5) * root;
 		root = static_cast<Real>(0.5) / root;
-		m_Tuple[0] = (matrix(k,j) - matrix(j,k)) * root;
-		*quat[j] = (matrix(j,i) + matrix(i,j) ) * root;
-		*quat[k] = (matrix(k,i)  + matrix(i,k) ) * root;
+		m_Tuple[0] = (matrix(k, j) - matrix(j, k)) * root;
+		*quat[j] = (matrix(j, i) + matrix(i, j)) * root;
+		*quat[k] = (matrix(k, i) + matrix(i, k)) * root;
 	}
 }
 
 template <typename Real>
 Mathematics::AQuaternion<Real>
 	::AQuaternion(const AVector& axis, Real angle)
+	:m_Tuple{}
 {
-	MATHEMATICS_ASSERTION_1(axis.IsNormalize(),"axis必须是单位向量！");
+	MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
 
-	FromAxisAngle(axis,angle);
+	FromAxisAngle(axis, angle);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::FromAxisAngle( const AVector& axis, Real angle )
+	::FromAxisAngle(const AVector& axis, Real angle)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_1(axis.IsNormalize(),"axis必须是单位向量！");
+	MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
 
 	// 代表旋转的四元数是
 	//   q = cos(A/2) + sin(A/2) * (x * i + y * j + z * k)
@@ -143,7 +146,7 @@ void Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator=( const AQuaternion& rhs )
+	::operator=(const AQuaternion& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -166,22 +169,28 @@ bool Mathematics::AQuaternion<Real>
 
 template <typename Real>
 const Real& Mathematics::AQuaternion<Real>
-	::operator[]( int index ) const
+	::operator[](int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 4,"索引错误！");
 
-	return m_Tuple[index];
+	if (0 <= index && index < 4)
+	{
+		return m_Tuple[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
 
 template <typename Real>
 Real& Mathematics::AQuaternion<Real>
-	::operator[]( int index ) 
+	::operator[](int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 4,"索引错误！");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < 4, "索引错误！");
 
-	return OPERATOR_SQUARE_BRACKETS(Real,index);
+	return OPERATOR_SQUARE_BRACKETS(Real, index);
 }
 
 template <typename Real>
@@ -222,7 +231,7 @@ Real Mathematics::AQuaternion<Real>
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::SetW( Real w )
+	::SetW(Real w)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -231,7 +240,7 @@ void Mathematics::AQuaternion<Real>
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::SetX( Real x )
+	::SetX(Real x)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -240,7 +249,7 @@ void Mathematics::AQuaternion<Real>
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::SetY( Real y )
+	::SetY(Real y)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -249,7 +258,7 @@ void Mathematics::AQuaternion<Real>
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::SetZ( Real z )
+	::SetZ(Real z)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -258,7 +267,7 @@ void Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator*=( const AQuaternion& rhs )
+	::operator*=(const AQuaternion& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -278,7 +287,7 @@ const  Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator+=( const AQuaternion& rhs )
+	::operator+=(const AQuaternion& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -292,7 +301,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator-=( const AQuaternion& rhs )
+	::operator-=(const AQuaternion& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -306,7 +315,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator*=( Real scalar )
+	::operator*=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -320,11 +329,11 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator/=( Real scalar )
+	::operator/=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if(Math::FAbs(scalar) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(scalar) <= Math::sm_ZeroTolerance)
 	{
 		for (auto i = 0; i < 4; ++i)
 		{
@@ -348,9 +357,9 @@ typename const Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<R
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto twoX  = static_cast<Real>(2) * m_Tuple[1];
-	auto twoY  = static_cast<Real>(2) * m_Tuple[2];
-	auto twoZ  = static_cast<Real>(2) * m_Tuple[3];
+	auto twoX = static_cast<Real>(2) * m_Tuple[1];
+	auto twoY = static_cast<Real>(2) * m_Tuple[2];
+	auto twoZ = static_cast<Real>(2) * m_Tuple[3];
 	auto twoWX = twoX * m_Tuple[0];
 	auto twoWY = twoY * m_Tuple[0];
 	auto twoWZ = twoZ * m_Tuple[0];
@@ -361,10 +370,10 @@ typename const Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<R
 	auto twoYZ = twoZ * m_Tuple[2];
 	auto twoZZ = twoZ * m_Tuple[3];
 
-	return Matrix{ AlgebraTraits::UnitValue - (twoYY + twoZZ),twoXY - twoWZ,twoXZ + twoWY,Real{},
-				   twoXY + twoWZ,AlgebraTraits::UnitValue - (twoXX + twoZZ),twoYZ - twoWX,Real{},
-				   twoXZ - twoWY,twoYZ + twoWX,AlgebraTraits::UnitValue - (twoXX + twoYY),Real{},
-				   Real{},Real{},Real{},AlgebraTraits::UnitValue };
+	return Matrix{ Math::sm_One - (twoYY + twoZZ),twoXY - twoWZ,twoXZ + twoWY,Math::sm_Zero,
+				   twoXY + twoWZ,Math::sm_One - (twoXX + twoZZ),twoYZ - twoWX,Math::sm_Zero,
+				   twoXZ - twoWY,twoYZ + twoWX,Math::sm_One - (twoXX + twoYY),Math::sm_Zero,
+				   Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_One };
 }
 
 template <typename Real>
@@ -386,7 +395,7 @@ typename const Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<
 	else
 	{
 		// 角度是 0 (2 * pi的模), 所以任何轴都行。
-		return AVector{ AlgebraTraits::UnitValue,Real{},Real{} };
+		return AVector{ Math::sm_One,Math::sm_Zero,Math::sm_Zero };
 	}
 }
 
@@ -404,7 +413,7 @@ Real Mathematics
 	}
 	else
 	{
-		return Real{};
+		return Math::sm_Zero;
 	}
 }
 
@@ -428,7 +437,7 @@ Real Mathematics::AQuaternion<Real>
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::Normalize( Real epsilon )
+	::Normalize(Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -443,18 +452,18 @@ void Mathematics::AQuaternion<Real>
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"四元数正则化错误！");
+		MATHEMATICS_ASSERTION_1(false, "四元数正则化错误！");
 
-		m_Tuple[0] = Real{ };
-		m_Tuple[1] = Real{ };
-		m_Tuple[2] = Real{ };
-		m_Tuple[3] = Real{ };
+		m_Tuple[0] = Math::sm_Zero;
+		m_Tuple[1] = Math::sm_Zero;
+		m_Tuple[2] = Math::sm_Zero;
+		m_Tuple[3] = Math::sm_Zero;
 	}
 }
 
 template <typename Real>
 bool Mathematics::AQuaternion<Real>
-	::IsNormalize (Real epsilon) const
+	::IsNormalize(Real epsilon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -483,8 +492,8 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 		return AQuaternion{ m_Tuple[0] / norm,-m_Tuple[1] / norm,-m_Tuple[2] / norm,-m_Tuple[3] / norm };
 	}
 	else
-	{	
-		MATHEMATICS_ASSERTION_1(false,"返回一个无效的结果来标记错误！");
+	{
+		MATHEMATICS_ASSERTION_1(false, "返回一个无效的结果来标记错误！");
 
 		return AQuaternion{};
 	}
@@ -495,7 +504,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 	::Conjugate() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	
+
 	return AQuaternion{ m_Tuple[0], -m_Tuple[1], -m_Tuple[2], -m_Tuple[3] };
 }
 
@@ -504,7 +513,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 	::Exp() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Tuple[0]) <= Math::sm_ZeroTolerance,"四元数w必须等于0！");
+	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Tuple[0]) <= Math::sm_ZeroTolerance, "四元数w必须等于0！");
 
 	// 如果 q = A * (x*i+y*j+z*k) 这里 (x,y,z) 是单位长度，然后
 	// exp(q) = cos(A) + sin(A)*(x*i+y*j+z*k)。
@@ -550,9 +559,9 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 	// 因为 A/sin(A) 趋向于 1。
 
 	AQuaternion result;
-	result.m_Tuple[0] = Real{ };
+	result.m_Tuple[0] = Math::sm_Zero;
 
-	if (Math::FAbs(m_Tuple[0]) < AlgebraTraits::UnitValue)
+	if (Math::FAbs(m_Tuple[0]) < Math::sm_One)
 	{
 		auto angle = Math::ACos(m_Tuple[0]);
 		auto sinValue = Math::Sin(angle);
@@ -578,10 +587,10 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 
 template <typename Real>
 typename const Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>
-	::Rotate( const AVector& vector ) const
+	::Rotate(const AVector& vector) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	
+
 	// 给定一个向量u = (x0,y0,z0)和单位长度的四元数q = <w,x,y,z>
 	// 向量v = (x1,y1,z1)，它代表u使用q旋转为v = q*u*q^{-1}，
 	// 其中*表示四元数乘法和其中u被视为四元数<0,x0,y0,z0>。
@@ -606,11 +615,11 @@ typename const Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::Slerp( Real t, const AQuaternion& firstQuaternion, const AQuaternion& secondQuaternion )
+	::Slerp(Real t, const AQuaternion& firstQuaternion, const AQuaternion& secondQuaternion)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;	
+	MATHEMATICS_CLASS_IS_VALID_9;
 
-	auto cosValue = Dot(firstQuaternion,secondQuaternion);
+	auto cosValue = Dot(firstQuaternion, secondQuaternion);
 	auto angle = Math::ACos(cosValue);
 
 	if (Math::sm_ZeroTolerance <= Math::FAbs(angle))
@@ -628,12 +637,12 @@ void Mathematics::AQuaternion<Real>
 	else
 	{
 		*this = firstQuaternion;
-	}	
+	}
 }
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::Intermediate( const AQuaternion& firstQuaternion, const AQuaternion& secondQuaternion, const AQuaternion& thirdQuaternion )
+	::Intermediate(const AQuaternion& firstQuaternion, const AQuaternion& secondQuaternion, const AQuaternion& thirdQuaternion)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 	MATHEMATICS_ASSERTION_1(firstQuaternion.IsNormalize() && secondQuaternion.IsNormalize() && thirdQuaternion.IsNormalize(),
@@ -649,11 +658,11 @@ void Mathematics::AQuaternion<Real>
 
 template <typename Real>
 void Mathematics::AQuaternion<Real>
-	::Squad( Real t, const AQuaternion& q0,const AQuaternion& a0, const AQuaternion& a1, const AQuaternion& q1 )
+	::Squad(Real t, const AQuaternion& q0, const AQuaternion& a0, const AQuaternion& a1, const AQuaternion& q1)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	
-	auto slerpT = static_cast<Real>(2) * t * (AlgebraTraits::UnitValue - t);
+
+	auto slerpT = static_cast<Real>(2) * t * (Math::sm_One - t);
 
 	AQuaternion slerpP;
 	slerpP.Slerp(t, q0, q1);
@@ -668,40 +677,40 @@ void Mathematics::AQuaternion<Real>
 
 template <typename Real>
 bool Mathematics
-	::operator==( const AQuaternion<Real>& lhs,const AQuaternion<Real>& rhs )
+	::operator==(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs)
 {
 	return memcmp(&lhs[0], &rhs[0], 4 * sizeof(Real)) == 0;
 }
 
 template <typename Real>
 bool Mathematics
-	::operator<( const AQuaternion<Real>& lhs,const AQuaternion<Real>& rhs )
+	::operator<(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs)
 {
 	return memcmp(&lhs[0], &rhs[0], 4 * sizeof(Real)) < 0;
 }
 
 template <typename Real>
 const Mathematics::AQuaternion<Real> Mathematics
-	::operator*( const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs )
+	::operator*(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs)
 {
 	// 注意:  乘法一般不是可交换的，所以在大多数情况下，
 	// p * q != q * p
 
 	return AQuaternion<Real>{ lhs[0] * rhs[0] -
-		                      lhs[1] * rhs[1] -
+							  lhs[1] * rhs[1] -
 							  lhs[2] * rhs[2] -
 							  lhs[3] * rhs[3],
-							 
+
 							  lhs[0] * rhs[1] +
 							  lhs[1] * rhs[0] +
 							  lhs[2] * rhs[3] -
 							  lhs[3] * rhs[2],
-							 
+
 							  lhs[0] * rhs[2] +
 							  lhs[2] * rhs[0] +
 							  lhs[3] * rhs[1] -
 							  lhs[1] * rhs[3],
-					   
+
 							  lhs[0] * rhs[3] +
 							  lhs[3] * rhs[0] +
 							  lhs[1] * rhs[2] -
@@ -710,15 +719,14 @@ const Mathematics::AQuaternion<Real> Mathematics
 
 template <typename Real>
 Real Mathematics
-	::Dot( const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs )
+	::Dot(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs)
 {
 	return lhs[0] * rhs[0] + lhs[1] * rhs[1] + lhs[2] * rhs[2] + lhs[3] * rhs[3];
 }
 
-
 template <typename Real>
-bool Mathematics	
-	::Approximate( const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs,const Real epsilon )
+bool Mathematics
+	::Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs, const Real epsilon)
 {
 	return Math<Real>::FAbs(lhs[0] - rhs[0]) <= epsilon &&
 		   Math<Real>::FAbs(lhs[1] - rhs[1]) <= epsilon &&
@@ -726,21 +734,20 @@ bool Mathematics
 		   Math<Real>::FAbs(lhs[3] - rhs[3]) <= epsilon;
 }
 
-
 template <typename Real>
 bool Mathematics
-	::Approximate( const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs )
+	::Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs)
 {
-	return Approximate(lhs,rhs,Math<Real>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math<Real>::sm_ZeroTolerance);
 }
 
 template <typename Real>
 std::ostream& Mathematics
 	::operator<<(std::ostream& outFile, const AQuaternion<Real>& quaternion)
 {
-	outFile << "w = " << quaternion.GetW() 
-		    << "x = " << quaternion.GetX() 
-			<< "y = " << quaternion.GetY() 
+	outFile << "w = " << quaternion.GetW()
+			<< "x = " << quaternion.GetX()
+			<< "y = " << quaternion.GetY()
 			<< "z = " << quaternion.GetZ();
 
 	return outFile;

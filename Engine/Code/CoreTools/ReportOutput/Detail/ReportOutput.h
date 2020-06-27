@@ -13,6 +13,7 @@
 #include <boost/noncopyable.hpp>
 #include <string>
 #include <iostream>
+#include "CoreTools/UnitTestSuite/OStreamShared.h"
 
 namespace CoreTools
 {
@@ -22,7 +23,7 @@ namespace CoreTools
 		using ClassType = ReportOutput;
 
 	public:
-		explicit ReportOutput(std::ostream* osPtr = &std::cout);
+		explicit ReportOutput(const OStreamShared& osPtr);
 		virtual ~ReportOutput();
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
@@ -32,10 +33,10 @@ namespace CoreTools
 		void PrintNumber(int number);
 
 	protected:
-		std::ostream* GetStream() noexcept;
+		OStreamShared GetStream();
 
 	private:
-		std::ostream* m_OsPtr;
+		OStreamShared m_OsPtr;
 	};
 }
 

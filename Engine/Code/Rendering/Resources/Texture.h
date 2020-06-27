@@ -79,8 +79,10 @@ namespace Rendering
 
 		virtual TextureSmartPointer Clone() const = 0;
 	};
-    
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)     
 	CORE_TOOLS_STREAM_REGISTER(Texture);
+#include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, Texture); 
 }
 

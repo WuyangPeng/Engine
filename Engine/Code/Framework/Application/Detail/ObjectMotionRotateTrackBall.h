@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:02)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:40)
 
 #ifndef FRAMEWORK_APPLICATION_OBJECT_MOTION_ROTATE_TRACK_BALL_H
 #define FRAMEWORK_APPLICATION_OBJECT_MOTION_ROTATE_TRACK_BALL_H
@@ -11,10 +11,10 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include "Rendering/SceneGraph/Spatial.h"
-#include "Rendering/SceneGraph/Camera.h"
-#include "Rendering/DataTypes/Transform.h"
 #include "Mathematics/Algebra/Matrix.h"
+#include "Rendering/SceneGraph/Camera.h"
+#include "Rendering/SceneGraph/Spatial.h"
+#include "Rendering/DataTypes/Transform.h"
 
 namespace Framework
 {
@@ -22,17 +22,16 @@ namespace Framework
 	{
 	public:
 		using ClassType = ObjectMotionRotateTrackBall;
-		using SpatialSmartPointer = Rendering::SpatialSmartPointer;
-		using ConstSpatialSmartPointer = Rendering::ConstSpatialSmartPointer;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
 		using Matrix = Mathematics::Matrixf;
 		using AVector = Mathematics::AVectorf;
 		using Transform = Rendering::Transform;
-		
+		using SpatialSmartPointer = Rendering::SpatialSmartPointer;
+		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
+
 	public:
-		explicit ObjectMotionRotateTrackBall(const SpatialSmartPointer& motionObject,const ConstCameraSmartPointer& camera,float m_BeginXTrack,
-											 float m_BeginYTrack,float m_EndXTrack,float m_EndYTrack,const Matrix& m_SaveRotate);
-	
+		explicit ObjectMotionRotateTrackBall(const SpatialSmartPointer& motionObject, const ConstCameraSmartPointer& camera, float beginXTrack,
+											 float beginYTrack, float endXTrack, float endYTrack, const Matrix& saveRotate);
+
 		CLASS_INVARIANT_DECLARE;
 
 		const Transform GetTransform() const;
@@ -43,8 +42,8 @@ namespace Framework
 	private:
 		SpatialSmartPointer m_MotionObject;
 		ConstCameraSmartPointer m_Camera;
-		float m_BeginXTrack; 
-		float m_BeginYTrack; 
+		float m_BeginXTrack;
+		float m_BeginYTrack;
 		float m_EndXTrack;
 		float m_EndYTrack;
 		Matrix m_SaveRotate;
@@ -56,4 +55,3 @@ namespace Framework
 
 
 
-	

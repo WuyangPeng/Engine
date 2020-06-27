@@ -12,65 +12,52 @@
 #include "CoreTools/MemoryTools/ThirdSubclassSmartPointerDetail.h"
 #include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointerDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::vector;
 
 Rendering::VisibleSetImpl
     ::VisibleSetImpl ()
-	: m_NumVisible{ 0 }, m_Visible{}
+	: m_Visible{}
 {
-    RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::VisibleSetImpl
      ::~VisibleSetImpl ()
 {
-    RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::VisibleSetImpl
     ::IsValid() const noexcept
-{
-    if(m_NumVisible <= static_cast<int>(m_Visible.size()))
-        return true;
-    else
-        return false;
+{	
+	return true; 
 }
 #endif // OPEN_CLASS_INVARIANT
 
 int Rendering::VisibleSetImpl
     ::GetNumVisible () const
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
     
-    return m_NumVisible;
+    return boost::numeric_cast<int>(m_Visible.size());
 }
 
 void Rendering::VisibleSetImpl
-	::Insert(const ConstSpatialSmartPointer& visible)
+	::Insert(const VisualSmartPointer& visible)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_9;
     
-    auto size = boost::numeric_cast<int>(m_Visible.size());
-    if (m_NumVisible < size)
-    {
-        m_Visible[m_NumVisible] = visible;
-    }
-    else
-    {
-        m_Visible.push_back(visible);
-    }
-    
-    ++m_NumVisible;
+	m_Visible.push_back(visible);
 }
 
-const Rendering::ConstSpatialSmartPointer& Rendering::VisibleSetImpl
+const Rendering::ConstVisualSmartPointer Rendering::VisibleSetImpl
     ::GetVisible (int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_1(0 <= index && index < m_NumVisible,"索引无效在GetVisible\n");
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumVisible(),"索引无效在GetVisible\n");
     
     return m_Visible[index];
 }
@@ -80,5 +67,21 @@ void Rendering::VisibleSetImpl
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    m_NumVisible = 0;
+	m_Visible.clear();
+}
+
+Rendering::VisibleSetImpl::VisualContainerIter Rendering::VisibleSetImpl
+	::begin()
+{
+	RENDERING_CLASS_IS_VALID_1;
+
+	return m_Visible.begin();
+}
+
+Rendering::VisibleSetImpl::VisualContainerIter Rendering::VisibleSetImpl
+	::end()
+{
+	RENDERING_CLASS_IS_VALID_1;
+
+	return m_Visible.end();
 }

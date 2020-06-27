@@ -1,8 +1,8 @@
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// Copyright (c) 2011-2017
-//
-// “˝«Ê∞Ê±æ£∫1.0.0.0 (2017/11/30 11:28)
+// 
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 16:52)
 
 #ifndef MATHEMATICS_OBJECTS2D_CIRCLE2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_CIRCLE2_DETAIL_H
@@ -14,7 +14,7 @@
 
 template <typename Real>
 Mathematics::Circle2<Real>
-	::Circle2( const Vector2D& center, Real radius )
+	::Circle2(const Vector2D& center, Real radius)
 	:m_Center{ center }, m_Radius{ radius }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -34,13 +34,12 @@ template <typename Real>
 bool Mathematics::Circle2<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_Radius)
-	    return true;
+	if (Math<Real>::sm_Zero <= m_Radius)
+		return true;
 	else
-	    return false;
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 typename const Mathematics::Circle2<Real>::Vector2D Mathematics::Circle2<Real>
@@ -72,11 +71,12 @@ Real Mathematics::Circle2<Real>
 
 template <typename Real>
 bool Mathematics
-	::Approximate(const Circle2<Real>& lhs, const Circle2<Real>& rhs,const Real epsilon)
+	::Approximate(const Circle2<Real>& lhs, const Circle2<Real>& rhs, const Real epsilon)
 {
-	return Vector2DTools<Real>::Approximate(lhs.GetCenter(),rhs.GetCenter(),epsilon) &&
-		   Math<Real>::Approximate(lhs.GetRadius(),rhs.GetRadius(),epsilon);
+	return Vector2DTools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
+		   Math<Real>::Approximate(lhs.GetRadius(), rhs.GetRadius(), epsilon);
 }
+
 template <typename Real>
 std::ostream& Mathematics
 	::operator<<(std::ostream& out, const Circle2<Real>& circle2)

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/06 10:58)
+// 引擎版本：0.0.2.5 (2020/03/19 16:45)
 
 #ifndef MATHEMATICS_OBJECTS2D_CIRCLE2_H
 #define MATHEMATICS_OBJECTS2D_CIRCLE2_H
@@ -19,14 +19,14 @@ namespace Mathematics
 	template <typename Real>
 	class Circle2
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-		
-		using ClassType= Circle2<Real>;
+
+		using ClassType = Circle2<Real>;
 		using Vector2D = Vector2D<Real>;
 
-	public:	
-		Circle2 (const Vector2D& center, Real radius);
+	public:
+		Circle2(const Vector2D& center, Real radius);
 		Circle2();
 
 		CLASS_INVARIANT_DECLARE;
@@ -42,7 +42,7 @@ namespace Mathematics
 	};
 
 	template <typename Real>
-	bool Approximate(const Circle2<Real>& lhs, const Circle2<Real>& rhs,const Real epsilon);
+	bool Approximate(const Circle2<Real>& lhs, const Circle2<Real>& rhs, const Real epsilon);
 
 	// 调试输出
 	template <typename Real>

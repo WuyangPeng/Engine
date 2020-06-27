@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/11/29 10:27)
-
+// 引擎版本：0.0.2.4 (2020/03/11 09:57)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_ITERATOR_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_ITERATOR_H
@@ -12,6 +11,7 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/ACEWrappers/Using/ACEUsing.h"
+#include "Network/Interface/NetworkInternalFwd.h"
 
 #include <boost/noncopyable.hpp> 
 
@@ -19,10 +19,7 @@ NETWORK_EXPORT_SHARED_PTR(HandleSetIteratorImpl);
 EXPORT_NONCOPYABLE_CLASS(NETWORK);
 
 namespace Network
-{
-	class ConfigurationStrategy;
-	class HandleSet;
-
+{ 
 	class NETWORK_DEFAULT_DECLARE HandleSetIterator : private boost::noncopyable
 	{
 	public:

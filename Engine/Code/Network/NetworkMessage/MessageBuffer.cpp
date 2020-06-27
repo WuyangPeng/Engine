@@ -9,7 +9,7 @@
 #include "MessageBuffer.h"
 #include "Detail/MessageBufferImpl.h" 
 #include "Detail/MessageBufferFactory.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 

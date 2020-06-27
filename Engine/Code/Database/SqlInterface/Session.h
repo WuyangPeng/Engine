@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 09:59)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 11:31)
 
 #ifndef DATABASE_SQL_INTERFACE_SESSION_H
 #define DATABASE_SQL_INTERFACE_SESSION_H
@@ -10,8 +10,10 @@
 #include "Database/DatabaseDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"  
+
 #include "Schema.h"
-#include "Result.h"
+#include "Result.h" 
+#include "Database/SqlInterface/SqlInterfaceFwd.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
 
 #include <boost/noncopyable.hpp>
@@ -20,9 +22,6 @@ DATABASE_EXPORT_SHARED_PTR(SessionImpl);
 
 namespace Database
 {
-	class ConfigurationStrategy;
-	class DatabaseObject;
-
 	class DATABASE_DEFAULT_DECLARE Session : private boost::noncopyable
 	{
 	public:
@@ -51,13 +50,13 @@ namespace Database
 	private:
 		IMPL_TYPE_DECLARE(Session);
 
-#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+	#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 	public:
 		using SessionWeakPtr = std::weak_ptr<ImplType>;
 
 	public:
 		SessionWeakPtr GetImplType() const;
-#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+	#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 	};
 }
 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:20)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:56)
 
 #include "Framework/FrameworkExport.h"
 
@@ -11,47 +11,41 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 Framework::WindowFontInformation
-	::WindowFontInformation(HWnd hwnd)
-	:m_Hwnd(hwnd)
+	::WindowFontInformation(HWnd hwnd) noexcept
+	:m_Hwnd{ hwnd }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::WindowFontInformation
-	::~WindowFontInformation()
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
 #ifdef OPEN_CLASS_INVARIANT
 bool Framework::WindowFontInformation
-    ::IsValid() const noexcept
+	::IsValid() const noexcept
 {
-    if(ParentType::IsValid() && m_Hwnd != nullptr)
-        return true;
-    else
-        return false;
+	if (ParentType::IsValid() && m_Hwnd != nullptr)
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
 int Framework::WindowFontInformation
-    ::GetStringWidth( const System::String& text ) const
+	::GetStringWidth(const String& text) const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return System::GetStringWidth(m_Hwnd,text);
+	return System::GetStringWidth(m_Hwnd, text);
 }
 
 int Framework::WindowFontInformation
-	::GetCharacterWidth( const TCHAR character ) const
+	::GetCharacterWidth(const TChar character) const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return System::GetCharacterWidth(m_Hwnd,character);
+	return System::GetCharacterWidth(m_Hwnd, character);
 }
 
 int Framework::WindowFontInformation
-	::GetFontHeight() const
+	::GetFontHeight() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

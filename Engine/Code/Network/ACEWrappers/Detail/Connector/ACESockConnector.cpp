@@ -1,23 +1,23 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/01 20:20)
+// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 13:47)
 
 #include "Network/NetworkExport.h" 
 
 #ifdef NETWORK_USE_ACE
 
 #include "ACESockConnector.h"
-#include "Network/Interface/SockStream.h"
-#include "Network/Interface/SockAddress.h"
-#include "Network/NetworkMessage/Flags/MessageEventFlags.h"
-#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "Network/Interface/SockStream.h"
+#include "Network/Interface/SockAddress.h"
+#include "Network/NetworkMessage/Flags/MessageEventFlags.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
 using std::make_shared;
 
@@ -33,7 +33,7 @@ Network::ACESockConnector
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
- 
+
 CLASS_INVARIANT_STUB_DEFINE(Network, ACESockConnector)
 
 bool Network::ACESockConnector
@@ -44,11 +44,11 @@ bool Network::ACESockConnector
 	if (m_ACESockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress()) == 0)
 		return true;
 	else
-		return false;	
+		return false;
 }
 
 void Network::ACESockConnector
-	::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream,const SockAddressSharedPtr& sockAddress)
+	::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -57,13 +57,13 @@ void Network::ACESockConnector
 
 	auto result = m_ACESockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress());
 
-	if(result == 0)
+	if (result == 0)
 	{
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
 
 		eventInterface->EventFunction(callbackParameters);
-	}	
+	}
 }
 
 const Network::ACESockConnector::SockConnectorPtr Network::ACESockConnector

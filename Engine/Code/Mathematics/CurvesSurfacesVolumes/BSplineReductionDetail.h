@@ -57,10 +57,10 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
         int i;
         for (i = 0; i <= mDegree; ++i)
         {
-            mKnot[j][i] = Real{};
+            mKnot[j][i] = Math<Real>::sm_Zero;
         }
 
-		auto factor = ((Real)1)/(Real)(mQuantity[j] - mDegree);
+		auto factor = (static_cast<Real>(1))/(Real)(mQuantity[j] - mDegree);
         for (/**/; i < mQuantity[j]; ++i)
         {
             mKnot[j][i] = (i-mDegree)*factor;
@@ -68,7 +68,7 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
 
         for (/**/; i < mNumKnots[j]; i++)
         {
-            mKnot[j][i] = (Real)1;
+            mKnot[j][i] = static_cast<Real>(1);
         }
     }
 
@@ -128,7 +128,7 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
             }
             else
             {
-                B[i0][i1] = Real{};
+                B[i0][i1] = Math<Real>::sm_Zero;
             }
         }
     }
@@ -171,16 +171,16 @@ Real BSplineReduction<Real,TVector>::F (int basis, int i, int j, Real t)
 {
     if (j > 0)
     {
-		auto result = Real{};
+		auto result = Math<Real>::sm_Zero;
 
 		auto denom = mKnot[basis][i + j] - mKnot[basis][i];
-        if (denom > Real{})
+        if (denom > Math<Real>::sm_Zero)
         {
             result += (t - mKnot[basis][i])*F(basis, i, j - 1, t)/denom;
         }
 
         denom = mKnot[basis][i + j + 1] - mKnot[basis][i + 1];
-        if (denom > Real{})
+        if (denom > Math<Real>::sm_Zero)
         {
             result += (mKnot[basis][i + j + 1] - t) * F(basis, i + 1, j - 1, t)/denom;
         }
@@ -190,11 +190,11 @@ Real BSplineReduction<Real,TVector>::F (int basis, int i, int j, Real t)
 
     if (mKnot[basis][i] <= t && t < mKnot[basis][i + 1])
     {
-        return (Real)1;
+        return static_cast<Real>(1);
     }
     else
     {
-        return Real{};
+        return Math<Real>::sm_Zero;
     }
 }
 

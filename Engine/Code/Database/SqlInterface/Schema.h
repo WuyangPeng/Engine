@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 09:59)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 11:31)
 
 #ifndef DATABASE_SQL_INTERFACE_SCHEMA_H
 #define DATABASE_SQL_INTERFACE_SCHEMA_H
@@ -10,6 +10,7 @@
 #include "Database/DatabaseDll.h" 
 
 #include "CoreTools/Helper/ExportMacro.h"  
+#include "Database/SqlInterface/SqlInterfaceFwd.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
 #include "Database/MysqlConnectorWrappers/Fwd/MysqlConnectorFwd.h"
 
@@ -18,8 +19,6 @@ EXPORT_NONCOPYABLE_CLASS(DATABASE);
 
 namespace Database
 {
-	class Session;
-
 	class DATABASE_DEFAULT_DECLARE Schema : private boost::noncopyable
 	{
 	public:
@@ -27,7 +26,7 @@ namespace Database
 
 	public:
 		explicit Schema(const Session& session);
-		Schema(const Session& session,int dbIndex);
+		Schema(const Session& session, int dbIndex);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -36,14 +35,14 @@ namespace Database
 	private:
 		IMPL_TYPE_DECLARE(Schema);
 
-#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+	#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 	public:
 		using SchemaWeakPtr = std::weak_ptr<ImplType>;
 
 	public:
 		SchemaWeakPtr GetImplType() const;
-		Schema(const ConfigurationStrategy& configurationStrategy,const MysqlxSchema& mysqlxSchema);
-#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+		Schema(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema);
+	#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 	};
 }
 

@@ -22,7 +22,7 @@ namespace System
 #else // !SYSTEM_PLATFORM_ANDROID
 
 #include "AndroidNativeWindowUsing.h"
-#include "System/Window/Using/WindowUsing.h" 
+#include "System/Window/Using/WindowUsing.h"  
 
 #include <memory>
 
@@ -77,37 +77,51 @@ namespace System
 		using InputEvent = int(*)(struct AndroidApp* app, AndroidInputEvent* event);
 
 		void SetDestroyRequested(int isDestroyRequested) noexcept;
-		int GetDestroyRequested() const noexcept;
+		int GetDestroyRequested() const noexcept;	
 
-	public:
+		System::WindowHWnd GetRunning() const noexcept;
+		void SetRunning(System::WindowHWnd val) noexcept;
+
+		void OnAppCmd(struct AndroidApp* app, int cmd) noexcept;
+		void OnInputEvent(struct AndroidApp* app, AndroidInputEvent* event) noexcept;
+
+		void SetOnAppCmd(System::AndroidApp::AppCmd value) noexcept;
+		void SetOnInputEvent(System::AndroidApp::InputEvent value) noexcept;
+
+		AndroidNativeWindow* GetAndroidNativeWindow() noexcept
+		{
+			return window.get();
+		}
+
+	private:
 		void* userData;
 		AndroidNativeActivity* activity;
 		AndroidConfiguration* config;
 		void* savedState;
 		size_t savedStateSize;
-		AndroidLooper* looper;
-		AndroidInputQueue* inputQueue;
-		AndroidNativeWindow* window;
+		AndroidLooper* looper;  
+	public:
 		AndroidRect contentRect;
-		int activityState;
-		int destroyRequested;
+		int activityState;	
+		int destroyRequested; 
 		int msgread;
 		int msgwrite;
 		AndroidPollSource cmdPollSource;
-		AndroidPollSource inputPollSource;
+		AndroidPollSource inputPollSource;	
+	private:
 		WindowHWnd running;
+	public:
 		int stateSaved;
 		int destroyed;
 		int redrawNeeded;
+	private:
 		AndroidInputQueue* pendingInputQueue;
 		AndroidNativeWindow* pendingWindow;
-		AndroidRect pendingContentRect;
 		AppCmd onAppCmd;
-		InputEvent onInputEvent; 
-
-	private:
-		std::shared_ptr<AndroidInputQueue> m_InputQueue;
-		std::shared_ptr<AndroidNativeWindow> m_Window;
+		InputEvent onInputEvent;	
+		AndroidRect pendingContentRect;		
+		std::shared_ptr<AndroidInputQueue> inputQueue;
+		std::shared_ptr<AndroidNativeWindow> window;		
 	};
 }
 

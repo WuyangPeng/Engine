@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 10:38)
+// “˝«Ê∞Ê±æ£∫0.1.0.1 (2020/04/22 15:57)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_NAME_IMPL_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_NAME_IMPL_H
@@ -11,26 +11,25 @@
 
 #include "System/Helper/UnicodeUsing.h"
 
-#include <string>
-
 namespace Framework
 {
 	class FRAMEWORK_HIDDEN_DECLARE WindowNameImpl
 	{
 	public:
 		using ClassType = WindowNameImpl;
+		using String = System::String;
 
 	public:
-		explicit WindowNameImpl(const System::String& className,const System::String& menuName);		
+		explicit WindowNameImpl(const String& className,const String& menuName);		
 
 		CLASS_INVARIANT_DECLARE;
 
-		const System::String& GetWindowClassName() const;
-		const System::String& GetWindowMenuName() const;		
+		const String GetWindowClassName() const;
+		const String GetWindowMenuName() const;		
 
 	private:
-		System::String m_ClassName;
-		System::String m_MenuName;		
+		String m_ClassName;
+		String m_MenuName;		
 	};
 }
 

@@ -25,7 +25,19 @@ namespace CoreTools
 	class CORE_TOOLS_DEFAULT_DECLARE ObjectManager : public CoreTools::Singleton<ObjectManager>
 	{
 	public:
-		SINGLETON_INITIALIZE_DECLARE(ObjectManager);
+		NON_COPY_CLASSES_TYPE_DECLARE(ObjectManager); 
+		SINGLETON_GET_PTR_DECLARE(ObjectManager); 
+	public: 
+		using ParentType = Singleton<ObjectManager>;  
+
+	public:	
+		static void Create();
+		static void Destroy() noexcept;  
+
+	private: 
+		static void DoCreate(); 
+		ObjectManager(); 
+		~ObjectManager();
 
 	public:
 		using FactoryFunction = ObjectInterface::FactoryFunction;

@@ -8,7 +8,7 @@
 
 #include "LastPlatformError.h"
 #include "System/Helper/Platform.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 System::WindowError System
 	::GetPlatformLastError() noexcept

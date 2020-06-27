@@ -18,11 +18,11 @@ namespace CoreTools
 		using ClassType = ReferenceCast<T>;
 
 	public:
-		explicit ReferenceCast(T& value);
+		explicit ReferenceCast(T& value) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		operator T&() const;
+		operator T&() const noexcept;
 
 	private:
 		T& m_Value;
@@ -37,11 +37,11 @@ namespace CoreTools
 		using ClassType = ReferenceCast<int>;
 
 	public:
-		explicit ReferenceCast(int value);
+		explicit ReferenceCast(int value) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		operator int() const;
+		operator int() const noexcept;
 
 	private:
 		int m_Value;

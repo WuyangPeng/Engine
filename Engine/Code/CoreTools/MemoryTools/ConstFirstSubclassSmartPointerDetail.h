@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <boost/polymorphic_cast.hpp>
+#include "System/Helper/PragmaWarning/PolymorphicCast.h"
 
 template <typename BaseClass>
 CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
@@ -28,10 +28,23 @@ CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
+
 template <typename BaseClass>
 CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
-	::ConstFirstSubclassSmartPointer(const BaseClassType* data)
+	::ConstFirstSubclassSmartPointer() noexcept
+	:m_Data{ }, m_Address{  }
+{
+	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename BaseClass>
+CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
+	::ConstFirstSubclassSmartPointer(const BaseClassType* data) 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)  
+#include SYSTEM_WARNING_DISABLE(26465) 
 	:m_Data{ const_cast<BaseClassType*>(data) }, m_Address{ reinterpret_cast<size_t>(m_Data) }
+#include STSTEM_WARNING_POP
 {
 	if (m_Data != nullptr)
 	{
@@ -47,35 +60,70 @@ CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-	if (m_Data != nullptr)
+	try
 	{
-		auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
-
-		if (reference == 0)
+	#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26447) 
+		if (m_Data != nullptr)
 		{
-			DELETE0(m_Data);
+			const auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
+
+			if (reference == 0)
+			{
+				DELETE0(m_Data);
+			}
 		}
+	#include STSTEM_WARNING_POP
 	}
+	catch (...)
+	{
+		
+	}
+	 
+	
 }
 
 template <typename BaseClass>
 CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
-	::ConstFirstSubclassSmartPointer(const ClassType& rhs)
+	::ConstFirstSubclassSmartPointer(const ConstFirstSubclassSmartPointer& rhs)
 	:m_Data{ rhs.m_Data }, m_Address{ rhs.m_Address }
 {
 	SMART_POINTER_SINGLETON.CopyIncreaseReference(m_Data);
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
+ 
 template <typename BaseClass>
 CoreTools::ConstFirstSubclassSmartPointer<BaseClass>& CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
-	::operator=(const ClassType& rhs)
+	::operator=(const ConstFirstSubclassSmartPointer& rhs)
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
 	ClassType temp{ rhs };
 	Swap(temp);
+
+	return *this;
+}
+
+template <typename BaseClass>
+CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
+	::ConstFirstSubclassSmartPointer(ConstFirstSubclassSmartPointer&& rhs) noexcept
+	:m_Data{ std::move(rhs.m_Data) }, m_Address{ rhs.m_Address }
+{
+	rhs.m_Data = nullptr;
+
+	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+ 
+template <typename BaseClass>
+CoreTools::ConstFirstSubclassSmartPointer<BaseClass>& CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
+	::operator=(ConstFirstSubclassSmartPointer&& rhs) noexcept
+{
+	CORE_TOOLS_CLASS_IS_VALID_9;
+
+	m_Data = rhs.m_Data;
+	rhs.m_Data = nullptr;
+	m_Address = rhs.m_Address;
 
 	return *this;
 }
@@ -108,14 +156,17 @@ bool CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
 }
 #endif // OPEN_CLASS_INVARIANT
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440) 
 template <typename BaseClass>
 const typename CoreTools::ConstFirstSubclassSmartPointer<BaseClass>::BaseClassType* CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
-	::GetData() const
+	::GetData() const 
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 	return m_Data;
 }
+#include STSTEM_WARNING_POP
 
 template <typename BaseClass>
 const typename CoreTools::ConstFirstSubclassSmartPointer<BaseClass>::BaseClassType& CoreTools::ConstFirstSubclassSmartPointer<BaseClass>

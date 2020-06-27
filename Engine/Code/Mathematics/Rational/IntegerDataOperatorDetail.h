@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 11:55)
+// 引擎版本：0.0.2.5 (2020/03/20 10:13)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
@@ -13,12 +13,11 @@
 #include "ConversionIntegerDetail.h"
 #include "IntegerDataAmendDetail.h"
 #include "IntegerMultiplicationDetail.h"
+#include "System/Helper/PragmaWarning/Format.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
-#include <boost/format.hpp>
 
 template <int N>
 Mathematics::IntegerDataOperator<N>
@@ -39,7 +38,7 @@ bool Mathematics::IntegerDataOperator<N>
 
 template <int N>
 Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
-	::operator+=(const IntegerData& rhs) 
+	::operator+=(const IntegerData& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -61,7 +60,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 		THROW_EXCEPTION(SYSTEM_TEXT("IntegerData加减溢出\n"));
 	}
 
-	return *this;	
+	return *this;
 }
 
 template <int N>
@@ -76,13 +75,12 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 	return *this;
 }
 
-
 template <int N>
 Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
-	::operator<<=( int shift )
+	::operator<<=(int shift)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_1(0 <=  shift,"shift必须大于或等于零");
+	MATHEMATICS_ASSERTION_1(0 <= shift, "shift必须大于或等于零");
 
 	// 16位块要移位的数目。
 	auto blocks = shift / 16;
@@ -93,9 +91,9 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 
 	if (0 < blocks)
 	{
-		int shiftLaterIndex = sm_IntLast;
-		int shiftBeforeIndex = sm_IntLast - blocks;
-		while(0 <= shiftBeforeIndex)
+		auto shiftLaterIndex = boost::numeric_cast<int>(sm_IntLast);
+		auto shiftBeforeIndex = boost::numeric_cast<int>(sm_IntLast - blocks);
+		while (0 <= shiftBeforeIndex)
 		{
 			m_Master[shiftLaterIndex] = m_Master[shiftBeforeIndex];
 
@@ -103,7 +101,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 			--shiftLaterIndex;
 		}
 
-		m_Amend.SetValue(0,shiftLaterIndex + 1,0);
+		m_Amend.SetValue(0, shiftLaterIndex + 1, 0);
 	}
 
 	// 遗留的位要移位的数量
@@ -127,11 +125,11 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 
 template <int N>
 Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
-	::operator>>=( int shift )
+	::operator>>=(int shift)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;	
-	MATHEMATICS_ASSERTION_1(0 <=  shift,"shift必须大于或等于零");
-	
+	MATHEMATICS_CLASS_IS_VALID_9;
+	MATHEMATICS_ASSERTION_1(0 <= shift, "shift必须大于或等于零");
+
 	// 16位块要移位的数目。
 	auto blocks = shift / 16;
 	if (sm_IntLast < blocks)
@@ -143,7 +141,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 	{
 		auto shiftLaterIndex = 0;
 		auto shiftBeforeIndex = blocks;
-		while(shiftBeforeIndex <= sm_IntLast)
+		while (shiftBeforeIndex <= sm_IntLast)
 		{
 			m_Master[shiftLaterIndex] = m_Master[shiftBeforeIndex];
 
@@ -153,12 +151,12 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 
 		if (m_Master.GetSign() == NumericalValueSymbol::Positive)
 		{
-			m_Amend.SetValue(shiftLaterIndex,sm_IntSize,0);
+			m_Amend.SetValue(shiftLaterIndex, sm_IntSize, 0);
 		}
 		else
 		{
-			m_Amend.SetValue(shiftLaterIndex,sm_IntSize,sm_Positive);			
-		}		
+			m_Amend.SetValue(shiftLaterIndex, sm_IntSize, sm_Positive);
+		}
 	}
 
 	// 遗留的位要移位的数量
@@ -184,7 +182,6 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 	return *this;
 }
 
-
 template <int N>
 Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 	::operator*=(const IntegerData& rhs)
@@ -192,16 +189,15 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	IntegerMultiplication<N> multiplication{ m_Master,rhs };
-	
+
 	m_Master = multiplication.GetMultiplication();
 
 	return *this;
 }
 
-
 template <int N>
 Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
-	::operator/=( const IntegerData& rhs )
+	::operator/=(const IntegerData& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -214,7 +210,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 
 template <int N>
 Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
-	::operator%=( const IntegerData& rhs )
+	::operator%=(const IntegerData& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -227,7 +223,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>
 
 template <int N>
 Mathematics::IntegerData<N> Mathematics
-	::operator+(const IntegerData<N>& lhs, const IntegerData<N>& rhs) 
+	::operator+(const IntegerData<N>& lhs, const IntegerData<N>& rhs)
 {
 	IntegerData<N> sum{ lhs };
 	IntegerDataOperator<N> dataOperator{ sum };
@@ -238,7 +234,7 @@ Mathematics::IntegerData<N> Mathematics
 
 template <int N>
 Mathematics::IntegerData<N> Mathematics
-	::operator-(const IntegerData<N>& lhs, const IntegerData<N>& rhs) 
+	::operator-(const IntegerData<N>& lhs, const IntegerData<N>& rhs)
 {
 	IntegerData<N> sum{ lhs };
 	IntegerDataOperator<N> dataOperator{ sum };

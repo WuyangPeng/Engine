@@ -2,13 +2,11 @@
 
 GSL（引擎直接关联）
 
-1. 版本：2.1.0。
-2. 官方网站：https://github.com/microsoft/GSL。
+1. 官方网站：https://github.com/microsoft/GSL。
 
 CppCoreGuidelines（引擎直接关联）
 
-1. 版本：0.8。
-2. 官方网站：https://github.com/isocpp/CppCoreGuidelines。
+1. 官方网站：https://github.com/isocpp/CppCoreGuidelines。
 
 boost（引擎直接关联）
 
@@ -37,7 +35,7 @@ ACE（引擎通过宏NETWORK_USE_ACE关联）
    #ifndef ACE_CONFIG_H
    #define ACE_CONFIG_H
 
-   #include "config-win32.h"
+       #include "config-win32.h"
 
    #endif /* ACE_CONFIG_H */
    可使用ACE下的批处理文件CopyACEConfig执行。
@@ -47,49 +45,56 @@ ACE（引擎通过宏NETWORK_USE_ACE关联）
 
 openssl（引擎通过宏NETWORK_USE_OPENSSL关联）
 
-1.  版本：1.1.1d。
-2.  官方网站：https://www.openssl.org/。
-3.  下载并安装 ActivePerl。下载地址：http://www.activestate.com/activeperl/downloads 
-4.  打开命令提示符，定位到 ($Perl64)\eg 目录，执行 perl example.pl，
-    若提示 Hello from ActivePerl! 则说明 Perl 安装成功。
-5.  下载并安装 Nasm 汇编器，并将 ($NASM)\ 目录 添加到系统环境变量 Path 中。
-    下载地址：http://www.nasm.us/ 
-6.  通过管理员身份运行VS，并打开命令提示符，定位至 ($openssl)目录
-7.  输入 perl Configure VC-WIN32 --prefix=($openssl)\Win32\release（编译release版本），
-    perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\debug（编译debug版），
-	会出现错误，可忽视。
-8.  编译X64，转到目录Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build下运行vcvars64.bat，
-    然后输入 perl Configure VC-WIN64A --debug --prefix=($openssl)\X64\debug（编译debug版）。
-	perl Configure VC-WIN64A --prefix=($openssl)\X64\release（编译release版）。    
-9.  编译四个版本中需要执行 nmake clean，再输入perl语句。然后
-	执行 nmake、nmake test、nmake install。
+1. 版本：1.1.1d。
+2. 官方网站：https://www.openssl.org/。
+3. 下载并安装 ActivePerl。下载地址：http://www.activestate.com/activeperl/downloads 
+4. 打开命令提示符，定位到 ($Perl64)\eg 目录，执行 perl example.pl，
+   若提示 Hello from ActivePerl! 则说明 Perl 安装成功。
+5. 下载并安装 Nasm 汇编器，并将 ($NASM)\ 目录 添加到系统环境变量 Path 中。
+   下载地址：http://www.nasm.us/ 
+6. 通过管理员身份运行VS，并打开命令提示符，定位至 ($openssl)目录
+7. 输入perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\debug（编译debug版），
+   perl Configure VC-WIN32 --prefix=($openssl)\Win32\release（编译release版本），    
+   会出现错误，可忽视。
+8. 编译X64，转到目录Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build下运行vcvars64.bat，
+   然后输入 perl Configure VC-WIN64A --debug --prefix=($openssl)\X64\debug（编译debug版）。
+   perl Configure VC-WIN64A --prefix=($openssl)\X64\release（编译release版）。    
+9. 编译四个版本中需要执行 nmake clean，再输入perl语句。然后
+   执行 nmake、nmake test、nmake install。
 
-mysql （引擎不关联）
-1.  版本：8.0.16。
+mysql （引擎通过宏DATABASE_USE_MYSQL_C_API关联）
+1.  版本：8.0.19。
 2.  官方网站：https://www.mysql.com/。
 3.  编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。如果编译的是x64版本，需要链接x64的openssl。
 4.  Windows.cmake 66行FATAL_ERROR改成WARNING。
 5.  定义正确的BOOST_INCLUDE_DIR到($boost)。
-6.  boost.cmake 41行、287行、289行、297行改成当前使用的boost库版本。
+6.  boost.cmake 41行、300行、302行、310行改成当前使用的boost库版本。
 7.  定义正确的OPENSSL_ROOT_DIR到($openssl)。
-8.  定义正确的OPENSSL_INCLUDE_DIR到($openssl)/include。
-9.  定义正确的OPENSSL_LIBRARY为全路径的($openssl)/lib/libssl.lib。
-10. 定义正确的CRYPTO_LIBRARY为全路径的($openssl)/lib/libcrypto.lib。
-11. sql_locale.cc、test_string_service_charset.cc、http_client.cc另存为ANSI编码。
-12. mysqld链接前事件命令行x64改成x86（两处）。
+8.  可能需要定义正确的OPENSSL_INCLUDE_DIR到($openssl)/include。
+9.  可能需要定义正确的OPENSSL_LIBRARY为全路径的($openssl)/lib/libssl.lib。
+10. 可能需要定义正确的CRYPTO_LIBRARY为全路径的($openssl)/lib/libcrypto.lib。
+11. sql_locale.cc、test_string_service_charset.cc、sql_commands_help_data.h另存为ANSI编码。
+12. Win32版本的mysqld链接前事件命令行x64改成x86（两处）。
 13. 文件crc32.cc（在storage\innobase\ut下）
     第227行开始改成
+	#if defined(_M_X64)  
+		crc_64bit = _mm_crc32_u64(crc_64bit, data);   
+	#else // !_M_X64 
+		ulint len = 8;  
+		const byte* buf = reinterpret_cast<byte*>(&data);
+		while (len > 0 && (reinterpret_cast<uintptr_t>(buf) & 7) != 0) {   
+			ut_crc32_8_hw(&crc_64bit, &buf, &len); 
+		}
+	#endif /* defined (_M_X64) */
+14. 文件tables_contained_in.h（在include下）
+    第67行开始改成
     #if defined(_M_X64)  
-        crc_64bit = _mm_crc32_u64(crc_64bit, data);   
-    #else // !_M_X64 
-        ulint len = 8;  
-        const byte* buf = reinterpret_cast<byte*>(&data);
-        while (len > 0 && (reinterpret_cast<uintptr_t>(buf) & 7) != 0) {   
-           ut_crc32_8_hw(&crc_64bit, &buf, &len); 
-        }
-    #endif /* defined (_M_X64) */
-14. 由于boost库版本不一致，导致编译不过时，使用mysql指定的boost版本。
-	复制到include\boost下（只需要boost下文件）。
+		_BitScanForward64(&idx, m_bits_left);  
+	#else // !_M_X64 
+		_BitScanForward(&idx, m_bits_left);
+	#endif /* defined (_M_X64) */
+15. 由于boost库版本不一致，导致编译不过时，使用mysql指定的boost版本。
+    复制到include\boost下（只需要boost下文件）。
  
 mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）
 1. 版本：8.0.16。
@@ -113,6 +118,7 @@ mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）
 protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）
 1. 版本：3.11.4。
 2. 官方网站：https://github.com/protocolbuffers/protobuf。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ogre（引擎不关联）
 

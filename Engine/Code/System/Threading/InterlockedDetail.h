@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.2.0 (2020/01/02 16:04)
+// “˝«Ê∞Ê±æ£∫0.2.0.0 (2020/05/10 11:31)
 
 #ifndef SYSTEM_THREADING_INTERLOCKED_DETAIL_H
 #define SYSTEM_THREADING_INTERLOCKED_DETAIL_H
@@ -15,7 +15,7 @@ T System
 	::SystemInterlockedIncrement(T* addend) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    return ::InterlockedIncrement(addend);
+	return ::InterlockedIncrement(addend);
 #else // !SYSTEM_PLATFORM_WIN32
 	return ++(*addend);
 #endif // SYSTEM_PLATFORM_WIN32
@@ -37,7 +37,7 @@ T System
 	::SystemInterlockedExchangeAdd(T* addend, T value) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    return ::InterlockedExchangeAdd(addend, value);
+	return ::InterlockedExchangeAdd(addend, value);
 #else // !SYSTEM_PLATFORM_WIN32
 	return (*addend) += value;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -50,7 +50,7 @@ T System
 #ifdef SYSTEM_PLATFORM_WIN32
 	return ::InterlockedExchange(target, value);
 #else // !SYSTEM_PLATFORM_WIN32
-	T old = *target;
+	auto old = *target;
 	*target = value;
 	return old;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -72,14 +72,14 @@ T System
 	::SystemInterlockedCompareExchange(T* destination, T exchange, T comperand) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::InterlockedCompareExchange(destination, exchange,comperand);
+	return ::InterlockedCompareExchange(destination, exchange, comperand);
 #else // !SYSTEM_PLATFORM_WIN32
 	auto old = *destination;
 	if (old == comperand)
 	{
 		*destination = exchange;
 	}
-	
+
 	return old;
 #endif // SYSTEM_PLATFORM_WIN32
 }

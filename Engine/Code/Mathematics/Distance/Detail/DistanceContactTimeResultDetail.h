@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 17:05)
+// 引擎版本：0.0.2.5 (2020/03/23 19:00)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_DETAIL_H
@@ -15,7 +15,7 @@ Mathematics::DistanceContactTimeResult<Real, Vector>
 	::DistanceContactTimeResult(Real distance, Real contactTime)
 	:ParentType{ distance }, m_ContactTime{ contactTime }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;	
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
@@ -74,4 +74,3 @@ bool Mathematics::DistanceContactTimeResult<Real, Vector>
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_DETAIL_H
- 

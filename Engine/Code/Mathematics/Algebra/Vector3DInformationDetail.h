@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/06 10:29)
+// 引擎版本：0.0.2.5 (2020/03/19 15:50)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR_3D_TOOLS_INFORMATION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VECTOR_3D_TOOLS_INFORMATION_DETAIL_H
@@ -16,17 +16,17 @@
 template <typename Real>
 Mathematics::Vector3DInformation<Real>
 	::Vector3DInformation(const std::vector<Vector3D>& points, Real epsilon)
-	:m_Points{ points }, m_Epsilon{ epsilon }, m_Dimension{ -1 }, m_AABBPtr{}, m_MaxRange{ Real{} }, m_Origin{}, m_DirectionX{},
+	:m_Points{ points }, m_Epsilon{ epsilon }, m_Dimension{ -1 }, m_AABBPtr{}, m_MaxRange{ Math::sm_Zero }, m_Origin{}, m_DirectionX{},
 	 m_DirectionY{}, m_DirectionZ{}, m_MinExtreme{ -1 }, m_MaxExtreme{ -1 }, m_PerpendicularExtreme{ -1 }, m_TetrahedronExtreme{ -1 }, m_ExtremeCCW{ false }
 {
-	MATHEMATICS_ASSERTION_0(0 < m_Points.size() && Real {} <= m_Epsilon, "无效输入在Vector3DInformation\n");
+	MATHEMATICS_ASSERTION_0(0 < m_Points.size() && Math::sm_Zero <= m_Epsilon, "无效输入在Vector3DInformation\n");
 
-    m_IndexMin[0] = 0;
-    m_IndexMin[1] = 0;
-    m_IndexMin[2] = 0;
-    m_IndexMax[0] = 0;
-    m_IndexMax[1] = 0;
-    m_IndexMax[2] = 0;
+	m_IndexMin[0] = 0;
+	m_IndexMin[1] = 0;
+	m_IndexMin[2] = 0;
+	m_IndexMax[0] = 0;
+	m_IndexMax[1] = 0;
+	m_IndexMax[2] = 0;
 
 	Init();
 
@@ -42,15 +42,15 @@ void Mathematics::Vector3DInformation<Real>
 	ComputeAxisAlignedBoundingBox();
 
 	// 确定边界框的最大范围。
-	DetermineMaximumRange();	
+	DetermineMaximumRange();
 
 	// 原点是最小x值的点或最小y值或最小z值的点。
 	m_Origin = m_Points[m_MinExtreme];
 
 	// 测试点集是否是（几乎）一个点或一个线段或一个平面多边形
-	if(!(TestPointSetIsNearlyAPoint() || TestPointSetIsNearlyALineSegment() || TestPointSetIsNearlyAPlanarPolygon()))
+	if (!(TestPointSetIsNearlyAPoint() || TestPointSetIsNearlyALineSegment() || TestPointSetIsNearlyAPlanarPolygon()))
 	{
-		m_Dimension = 3;	
+		m_Dimension = 3;
 	}
 }
 
@@ -62,7 +62,7 @@ void Mathematics::Vector3DInformation<Real>
 	auto min = m_Points[0];
 	auto max = min;
 
-	for(auto pointsIndex = 1u;pointsIndex < m_Points.size();++pointsIndex)
+	for (auto pointsIndex = 1u; pointsIndex < m_Points.size(); ++pointsIndex)
 	{
 		const auto& eachVector = m_Points[pointsIndex];
 
@@ -80,8 +80,8 @@ void Mathematics::Vector3DInformation<Real>
 			}
 		}
 	}
-	
-	m_AABBPtr = std::make_shared<AxesAlignBoundingBox3D>(min,max);
+
+	m_AABBPtr = std::make_shared<AxesAlignBoundingBox3D>(min, max);
 }
 
 // private
@@ -96,7 +96,7 @@ void Mathematics::Vector3DInformation<Real>
 	m_MinExtreme = m_IndexMin[0];
 	m_MaxExtreme = m_IndexMax[0];
 
-	for (auto i = 1;i < 3;++i)
+	for (auto i = 1; i < 3; ++i)
 	{
 		auto range = maxPoint[i] - minPoint[i];
 
@@ -106,7 +106,7 @@ void Mathematics::Vector3DInformation<Real>
 			m_MinExtreme = m_IndexMin[i];
 			m_MaxExtreme = m_IndexMax[i];
 		}
-	}	
+	}
 }
 
 // private
@@ -122,9 +122,9 @@ bool Mathematics::Vector3DInformation<Real>
 		m_PerpendicularExtreme = m_MinExtreme;
 		m_PerpendicularExtreme = m_MinExtreme;
 
-		m_DirectionX[0] = Real{ };
-		m_DirectionY[1] = Real{ };
-		m_DirectionY[2] = Real{ };
+		m_DirectionX[0] = Math::sm_Zero;
+		m_DirectionY[1] = Math::sm_Zero;
+		m_DirectionY[2] = Math::sm_Zero;
 
 		return true;
 	}
@@ -139,15 +139,15 @@ bool Mathematics::Vector3DInformation<Real>
 	m_DirectionX = m_Points[m_MaxExtreme] - m_Origin;
 	m_DirectionX.Normalize(m_Epsilon);
 
-	Real maxDistance { };
-    m_PerpendicularExtreme = m_MinExtreme;
+	auto maxDistance = Math::sm_Zero;
+	m_PerpendicularExtreme = m_MinExtreme;
 	for (auto index = 0u; index < m_Points.size(); ++index)
 	{
 		auto difference = m_Points[index] - m_Origin;
 		auto dot = Vector3DTools::DotProduct(m_DirectionX, difference);
 		auto proj = difference - dot * m_DirectionX;
 		auto distance = Vector3DTools::VectorMagnitude(proj);
-		
+
 		if (maxDistance < distance)
 		{
 			maxDistance = distance;
@@ -163,7 +163,7 @@ bool Mathematics::Vector3DInformation<Real>
 
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -172,18 +172,18 @@ bool Mathematics::Vector3DInformation<Real>
 	::TestPointSetIsNearlyAPlanarPolygon()
 {
 	m_DirectionY = m_Points[m_PerpendicularExtreme] - m_Origin;
-	auto dot = Vector3DTools::DotProduct(m_DirectionX,m_DirectionY);
+	auto dot = Vector3DTools::DotProduct(m_DirectionX, m_DirectionY);
 	m_DirectionY -= dot * m_DirectionX;
 	m_DirectionY.Normalize(m_Epsilon);
-	m_DirectionZ = Vector3DTools::CrossProduct(m_DirectionX,m_DirectionY);
-	Real maxDistance { };
+	m_DirectionZ = Vector3DTools::CrossProduct(m_DirectionX, m_DirectionY);
+	auto maxDistance = Math::sm_Zero;
 	auto maxSign = NumericalValueSymbol::Zero;
 	m_TetrahedronExtreme = m_MinExtreme;
 
 	for (auto index = 0u; index < m_Points.size(); ++index)
 	{
 		auto diff = m_Points[index] - m_Origin;
-		auto distance = Vector3DTools::DotProduct(m_DirectionZ,diff);
+		auto distance = Vector3DTools::DotProduct(m_DirectionZ, diff);
 		auto sign = Math::Sign(distance);
 		distance = Math::FAbs(distance);
 		if (maxDistance < distance)
@@ -201,7 +201,7 @@ bool Mathematics::Vector3DInformation<Real>
 		return true;
 	}
 
-	m_ExtremeCCW = (maxSign == NumericalValueSymbol::Positive);	
+	m_ExtremeCCW = (maxSign == NumericalValueSymbol::Positive);
 
 	return false;
 }
@@ -218,11 +218,11 @@ bool Mathematics::Vector3DInformation<Real>
 		m_MinExtreme < pointsSize && m_MaxExtreme < pointsSize && m_PerpendicularExtreme < pointsSize && m_TetrahedronExtreme < pointsSize)
 	{
 		return true;
-	}	    
+	}
 	else
 	{
 		return false;
-	}		
+	}
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -271,7 +271,6 @@ typename const Mathematics::Vector3DInformation<Real>::Vector3D Mathematics::Vec
 	return m_DirectionX;
 }
 
-
 template <typename Real>
 typename const Mathematics::Vector3DInformation<Real>::Vector3D Mathematics::Vector3DInformation<Real>
 	::GetDirectionY() const
@@ -281,7 +280,6 @@ typename const Mathematics::Vector3DInformation<Real>::Vector3D Mathematics::Vec
 	return m_DirectionY;
 }
 
-
 template <typename Real>
 typename const Mathematics::Vector3DInformation<Real>::Vector3D Mathematics::Vector3DInformation<Real>
 	::GetDirectionZ() const
@@ -290,7 +288,6 @@ typename const Mathematics::Vector3DInformation<Real>::Vector3D Mathematics::Vec
 
 	return m_DirectionZ;
 }
-
 
 template <typename Real>
 typename const Mathematics::Vector3DInformation<Real>::Vector3D Mathematics::Vector3DInformation<Real>

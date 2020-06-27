@@ -8,7 +8,7 @@
 
 #include "PriorityMessageEventContainer.h"
 #include "System/Helper/UnusedMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 

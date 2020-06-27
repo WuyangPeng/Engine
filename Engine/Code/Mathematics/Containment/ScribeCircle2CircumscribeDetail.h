@@ -47,7 +47,7 @@ void Mathematics::ScribeCircle2Circumscribe<Real>
 
 	try
 	{
-		Real outputVector[2]   { Real{} ,Real{} };
+		Real outputVector[2]   { Math<Real>::sm_Zero ,Math<Real>::sm_Zero };
 
 		LinearSystem<Real> linearSystem;
 

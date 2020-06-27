@@ -1,25 +1,25 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/09 17:12)
+// 引擎版本：0.0.2.5 (2020/03/20 14:38)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H
 
 #include "LinearSystemInverse.h"
-#include "Mathematics/Base/MathDetail.h"
+#include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "System/Helper/UnicodeUsing.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
 Mathematics::LinearSystemInverse<Real>
-	::LinearSystemInverse (const VariableMatrix& matrix,Real zeroTolerance,const Real* inputVector)
-	:m_ZeroTolerance{ zeroTolerance }, m_Inverse{ matrix },	m_Size{ m_Inverse.GetRowsNumber() },m_ColumnsIndex(m_Size), m_RowIndex(m_Size),
-	m_Pivoted(m_Size, false), m_CurrentRow{ 0 }, m_CurrentColumn{ 0 }, m_CurrentMaxValue{}, m_OutputVector(inputVector != nullptr ? m_Size : 0)
+	::LinearSystemInverse(const VariableMatrix& matrix, Real zeroTolerance, const Real* inputVector)
+	:m_ZeroTolerance{ zeroTolerance }, m_Inverse{ matrix }, m_Size{ m_Inverse.GetRowsNumber() }, m_ColumnsIndex(m_Size), m_RowIndex(m_Size),
+	 m_Pivoted(m_Size, false), m_CurrentRow{ 0 }, m_CurrentColumn{ 0 }, m_CurrentMaxValue{}, m_OutputVector(inputVector != nullptr ? m_Size : 0)
 {
 	CopyInputVector(inputVector);
 	Inverse();
@@ -32,14 +32,14 @@ template <typename Real>
 bool Mathematics::LinearSystemInverse<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_ZeroTolerance && m_Inverse.GetRowsNumber() == m_Inverse.GetColumnsNumber() && static_cast<size_t>(m_Size) == m_ColumnsIndex.size() &&
-	   m_ColumnsIndex.size() == m_RowIndex.size() && m_RowIndex.size() == m_Pivoted.size() && (m_OutputVector.empty() || m_OutputVector.size() == static_cast<size_t>(m_Size)))
+	if (Math::sm_Zero <= m_ZeroTolerance && m_Inverse.GetRowsNumber() == m_Inverse.GetColumnsNumber() && static_cast<size_t>(m_Size) == m_ColumnsIndex.size() &&
+		m_ColumnsIndex.size() == m_RowIndex.size() && m_RowIndex.size() == m_Pivoted.size() && (m_OutputVector.empty() || m_OutputVector.size() == static_cast<size_t>(m_Size)))
 	{
 		return true;
 	}
-    else
+	else
 	{
-        return false;
+		return false;
 	}
 }
 #endif // OPEN_CLASS_INVARIANT
@@ -50,7 +50,7 @@ void Mathematics::LinearSystemInverse<Real>
 {
 	if (inputVector != nullptr)
 	{
-		for (auto i = 0; i < m_Size;++i)
+		for (auto i = 0; i < m_Size; ++i)
 		{
 			m_OutputVector[i] = inputVector[i];
 		}
@@ -61,16 +61,15 @@ void Mathematics::LinearSystemInverse<Real>
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
 	::Inverse()
-{    
-    // 消除了完全旋转。
-    for (auto index = 0; index < m_Size; ++index)
-    {
-        Inverse(index);
-    }
+{
+	// 消除了完全旋转。
+	for (auto index = 0; index < m_Size; ++index)
+	{
+		Inverse(index);
+	}
 
-	Rearrangement();    
+	Rearrangement();
 }
-
 
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
@@ -78,19 +77,19 @@ void Mathematics::LinearSystemInverse<Real>
 {
 	// 搜索矩阵（不含枢转行）的最大绝对值项。
 	CalculateCurrentMaxValue();
-        
-    m_Pivoted[m_CurrentColumn] = true;
-        
-    // 交换行使A[col][col]包含枢转项。
+
+	m_Pivoted[m_CurrentColumn] = true;
+
+	// 交换行使A[col][col]包含枢转项。
 	SwapRows();
-        
+
 	// 跟踪行的排列。
 	m_RowIndex[index] = m_CurrentRow;
 	m_ColumnsIndex[index] = m_CurrentColumn;
-     
+
 	// 缩放行，以便枢轴项是1
 	ScaleRow();
-        
+
 	// 清零在其他行的枢轴列位置。
 	ZeroOutPivotColumnLocations();
 }
@@ -100,12 +99,12 @@ template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
 	::ScaleRow()
 {
-	auto inverse = static_cast<Real>(1) / m_Inverse(m_CurrentColumn,m_CurrentColumn);
-        
+	auto inverse = static_cast<Real>(1) / m_Inverse(m_CurrentColumn, m_CurrentColumn);
+
 	m_Inverse(m_CurrentColumn, m_CurrentColumn) = static_cast<Real>(1);
 	for (auto index = 0; index < m_Size; index++)
 	{
-		m_Inverse(m_CurrentColumn,index) *= inverse;
+		m_Inverse(m_CurrentColumn, index) *= inverse;
 	}
 
 	if (!m_OutputVector.empty())
@@ -116,12 +115,12 @@ void Mathematics::LinearSystemInverse<Real>
 
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
-	::SwapRows() 
+	::SwapRows()
 {
 	if (m_CurrentRow != m_CurrentColumn)
 	{
-		m_Inverse.SwapRows(m_CurrentRow,m_CurrentColumn);
-		
+		m_Inverse.SwapRows(m_CurrentRow, m_CurrentColumn);
+
 		if (!m_OutputVector.empty())
 		{
 			std::swap(m_OutputVector[m_CurrentColumn], m_OutputVector[m_CurrentRow]);
@@ -131,9 +130,9 @@ void Mathematics::LinearSystemInverse<Real>
 
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
-	::CalculateCurrentMaxValue() 
+	::CalculateCurrentMaxValue()
 {
-	m_CurrentMaxValue = Real{ };
+	m_CurrentMaxValue = Math::sm_Zero;
 
 	for (auto outerIndex = 0; outerIndex < m_Size; ++outerIndex)
 	{
@@ -143,7 +142,7 @@ void Mathematics::LinearSystemInverse<Real>
 			{
 				if (!m_Pivoted[innerIndex])
 				{
-					auto absValue = Math<Real>::FAbs(m_Inverse(outerIndex,innerIndex));
+					auto absValue = Math::FAbs(m_Inverse(outerIndex, innerIndex));
 					if (m_CurrentMaxValue < absValue)
 					{
 						m_CurrentMaxValue = absValue;
@@ -154,7 +153,7 @@ void Mathematics::LinearSystemInverse<Real>
 			}
 		}
 	}
-       
+
 	if (m_CurrentMaxValue <= m_ZeroTolerance)
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("矩阵是不可逆的。"));
@@ -164,7 +163,7 @@ void Mathematics::LinearSystemInverse<Real>
 // private
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
-	::ZeroOutPivotColumnLocations() 
+	::ZeroOutPivotColumnLocations()
 {
 	for (auto outerIndex = 0; outerIndex < m_Size; ++outerIndex)
 	{
@@ -177,13 +176,13 @@ void Mathematics::LinearSystemInverse<Real>
 
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
-	::ZeroOutPivotColumnLocations(int outerIndex)
+::ZeroOutPivotColumnLocations(int outerIndex)
 {
-	auto save = m_Inverse(outerIndex,m_CurrentColumn);
-	m_Inverse(outerIndex, m_CurrentColumn) = Real{ };
+	auto save = m_Inverse(outerIndex, m_CurrentColumn);
+	m_Inverse(outerIndex, m_CurrentColumn) = Math::sm_Zero;
 	for (int innerIndex = 0; innerIndex < m_Size; ++innerIndex)
 	{
-		m_Inverse(outerIndex,innerIndex) -= m_Inverse(m_CurrentColumn,innerIndex) * save;
+		m_Inverse(outerIndex, innerIndex) -= m_Inverse(m_CurrentColumn, innerIndex) * save;
 	}
 
 	if (!m_OutputVector.empty())
@@ -207,12 +206,12 @@ void Mathematics::LinearSystemInverse<Real>
 		{
 			for (auto innerIndex = 0; innerIndex < m_Size; ++innerIndex)
 			{
-				std::swap(m_Inverse(innerIndex,swapRowIndex),m_Inverse(innerIndex,swapColumnsIndex));           
-			}			
+				std::swap(m_Inverse(innerIndex, swapRowIndex), m_Inverse(innerIndex, swapColumnsIndex));
+			}
 		}
 	}
 }
-	
+
 template <typename Real>
 typename const Mathematics::LinearSystemInverse<Real>::VariableMatrix Mathematics::LinearSystemInverse<Real>
 	::GetInverse() const
@@ -222,10 +221,9 @@ typename const Mathematics::LinearSystemInverse<Real>::VariableMatrix Mathematic
 	return m_Inverse;
 }
 
-
 template <typename Real>
 typename const Mathematics::LinearSystemInverse<Real>::OutputConstIterator Mathematics::LinearSystemInverse<Real>
-	::GetBegin() const 
+	::GetBegin() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -234,7 +232,7 @@ typename const Mathematics::LinearSystemInverse<Real>::OutputConstIterator Mathe
 
 template <typename Real>
 typename const Mathematics::LinearSystemInverse<Real>::OutputConstIterator Mathematics::LinearSystemInverse<Real>
-	::GetEnd() const 
+	::GetEnd() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

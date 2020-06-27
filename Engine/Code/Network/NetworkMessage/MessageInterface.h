@@ -51,7 +51,7 @@ namespace Network
 		// int64_t Ê±¼ä´Á	
 		static constexpr int GetMessageHeadSize()
 		{
-			return static_cast<int>(sizeof(int32_t) + sizeof(int32_t) + sizeof(int64_t));
+			return sizeof(int32_t) + sizeof(int32_t) + sizeof(int64_t);
 		}
 
 	protected:

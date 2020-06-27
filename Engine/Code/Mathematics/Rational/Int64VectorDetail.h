@@ -1,13 +1,15 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/08 11:32)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/20 10:08)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR_DETAIL_H
 
 #include "Int64Vector.h"
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -17,8 +19,9 @@
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>
 	::Int64Vector()
+	:m_Tuple{}
 {
-	for(auto i = 0;i < VectorSize;++i)
+	for (auto i = 0; i < VectorSize; ++i)
 	{
 		m_Tuple[i] = 0;
 	}
@@ -28,7 +31,8 @@ Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>
-	::Int64Vector( const Int64Vector& rhs )
+	::Int64Vector(const Int64Vector& rhs)
+	:m_Tuple{}
 {
 	for (auto i = 0; i < VectorSize; ++i)
 	{
@@ -40,7 +44,7 @@ Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator=( const Int64Vector& rhs )
+	::operator=(const Int64Vector& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -61,28 +65,31 @@ bool Mathematics::Int64Vector<VectorSize>
 }
 #endif // OPEN_CLASS_INVARIANT
 
-
 template <int VectorSize>
 const int64_t& Mathematics::Int64Vector<VectorSize>
-	::operator[]( int index ) const
+	::operator[](int index) const
 {
-	MATHEMATICS_ASSERTION_0(0 <= index && index < VectorSize,"Ë÷Òý´íÎó£¡");
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Tuple[index];
+	if (0 <= index && index < VectorSize)
+	{
+		return m_Tuple[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+	}
 }
-
 
 template <int VectorSize>
 int64_t& Mathematics::Int64Vector<VectorSize>
-	::operator[]( int index )
+	::operator[](int index)
 {
 	MATHEMATICS_ASSERTION_0(0 <= index && index < VectorSize, "Ë÷Òý´íÎó£¡");
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	return OPERATOR_SQUARE_BRACKETS(int64_t,index);
+	return OPERATOR_SQUARE_BRACKETS(int64_t, index);
 }
-
 
 template <int VectorSize>
 const Mathematics::Int64Vector<VectorSize> 	Mathematics::Int64Vector<VectorSize>
@@ -99,10 +106,9 @@ const Mathematics::Int64Vector<VectorSize> 	Mathematics::Int64Vector<VectorSize>
 	return negative;
 }
 
-
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator+=( const Int64Vector& rhs )
+	::operator+=(const Int64Vector& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -116,7 +122,7 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator-=( const Int64Vector& rhs )
+	::operator-=(const Int64Vector& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -128,10 +134,9 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
 	return *this;
 }
 
-
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator*=( const int64_t& scalar )
+	::operator*=(const int64_t& scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -145,7 +150,7 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator/=( const int64_t& scalar )
+	::operator/=(const int64_t& scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 	MATHEMATICS_ASSERTION_0(scalar != 0, "³ýÊý²»ÄÜÎªÁã\n");
@@ -172,10 +177,9 @@ int64_t Mathematics::Int64Vector<VectorSize>
 	return squaredLength;
 }
 
-
 template <int VectorSize>
 bool Mathematics
-	::operator==( const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs )
+	::operator==(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs)
 {
 	for (auto i = 0; i < VectorSize; ++i)
 	{
@@ -190,7 +194,7 @@ bool Mathematics
 
 template <int VectorSize>
 bool Mathematics
-	::operator<( const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs )
+	::operator<(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs)
 {
 	for (auto i = 0; i < VectorSize; ++i)
 	{
@@ -207,10 +211,9 @@ bool Mathematics
 	return false;
 }
 
-
 template <int VectorSize>
 int64_t Mathematics
-	::Dot( const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs )
+	::Dot(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs)
 {
 	int64_t dot{ 0 };
 	for (auto i = 0; i < VectorSize; ++i)
@@ -222,7 +225,7 @@ int64_t Mathematics
 
 template <int VectorSize>
 std::ostream& Mathematics
-	::operator<<(std::ostream& os, const Int64Vector<VectorSize>& rhs) 
+	::operator<<(std::ostream& os, const Int64Vector<VectorSize>& rhs)
 {
 	for (auto i = 0; i < VectorSize; ++i)
 	{

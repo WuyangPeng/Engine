@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 19:07)
+// 引擎版本：0.0.2.5 (2020/03/24 09:55)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_DETAIL_H 
@@ -12,8 +12,8 @@
 
 template <typename Real>
 Mathematics::DistancePoint3Ellipsoid3Tool<Real>
-	::DistancePoint3Ellipsoid3Tool(Real firstExtent, Real secondExtent, Real thirdExtent,const Vector3D& vector, Real zeroThreshold)
-	:m_Extent{ firstExtent,secondExtent,thirdExtent }, m_InputVector{ vector }, m_OutputVector{}, m_SquaredDistance{ Real{} }, m_ZeroThreshold{ zeroThreshold }
+	::DistancePoint3Ellipsoid3Tool(Real firstExtent, Real secondExtent, Real thirdExtent, const Vector3D& vector, Real zeroThreshold)
+	:m_Extent{ firstExtent,secondExtent,thirdExtent }, m_InputVector{ vector }, m_OutputVector{}, m_SquaredDistance{ Math<Real>::sm_Zero }, m_ZeroThreshold{ zeroThreshold }
 {
 	ComputeSquaredDistance();
 
@@ -26,28 +26,28 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 	::ComputeSquaredDistance()
 {
 	// 确定m_InputVector的反射到第一象限。
-	bool reflect[3]{ m_InputVector.GetXCoordinate() < Real{},m_InputVector.GetYCoordinate() < Real{},m_InputVector.GetZCoordinate() < Real{} };
-	
+	bool reflect[3]{ m_InputVector.GetXCoordinate() < Math<Real>::sm_Zero,m_InputVector.GetYCoordinate() < Math<Real>::sm_Zero,m_InputVector.GetZCoordinate() < Math<Real>::sm_Zero };
+
 	// 确定递减辐度轴顺序。
 	int permute[3]{};
 	if (m_Extent[0] < m_Extent[1])
 	{
 		if (m_Extent[2] < m_Extent[0])
 		{
-			permute[0] = 1;  
-			permute[1] = 0;  
+			permute[0] = 1;
+			permute[1] = 0;
 			permute[2] = 2;
 		}
 		else if (m_Extent[2] < m_Extent[1])
 		{
-			permute[0] = 1; 
-			permute[1] = 2; 
+			permute[0] = 1;
+			permute[1] = 2;
 			permute[2] = 0;
 		}
 		else
 		{
-			permute[0] = 2; 
-			permute[1] = 1; 
+			permute[0] = 2;
+			permute[1] = 1;
 			permute[2] = 0;
 		}
 	}
@@ -55,25 +55,25 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 	{
 		if (m_Extent[2] < m_Extent[1])
 		{
-			permute[0] = 0; 
-			permute[1] = 1; 
+			permute[0] = 0;
+			permute[1] = 1;
 			permute[2] = 2;
 		}
 		else if (m_Extent[2] < m_Extent[0])
 		{
-			permute[0] = 0;  
-			permute[1] = 2;  
+			permute[0] = 0;
+			permute[1] = 2;
 			permute[2] = 1;
 		}
 		else
 		{
-			permute[0] = 2; 
-			permute[1] = 0; 
+			permute[0] = 2;
+			permute[1] = 0;
 			permute[2] = 1;
 		}
 	}
 
-	int invPermute[3] { };
+	int invPermute[3]{ };
 	for (auto index = 0; index < 3; ++index)
 	{
 		invPermute[permute[index]] = index;
@@ -105,7 +105,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 			local[invPermuteIndex] = -local[invPermuteIndex];
 		}
 		m_OutputVector[index] = local[invPermuteIndex];
-	}	 
+	}
 }
 
 // private
@@ -116,7 +116,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 	std::vector<Real> extentPos;
 	std::vector<Real> queryPointPos;
 	std::vector<Real> outputPos;
- 
+
 	for (auto i = 0; i < 3; ++i)
 	{
 		if (m_ZeroThreshold < queryPoint[i])
@@ -126,7 +126,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 		}
 		else
 		{
-			m_OutputVector[i] = Real{ };
+			m_OutputVector[i] = Math<Real>::sm_Zero;
 		}
 	}
 
@@ -141,8 +141,8 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 		MATHEMATICS_ASSERTION_2(extentPos.size() == queryPointPos.size(), "两个数组大小不相等\n");
 
 		auto numPos = extentPos.size();
-		Real denom[3] { };
-		Real extentMultiplyQueryPoint[3] { };
+		Real denom[3]{ };
+		Real extentMultiplyQueryPoint[3]{ };
 		for (auto i = 0u; i < numPos; ++i)
 		{
 			denom[i] = extentPos[i] * extentPos[i] - extent2Squared;
@@ -159,14 +159,14 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 			}
 		}
 
-		m_SquaredDistance = Real{ };
+		m_SquaredDistance = Math<Real>::sm_Zero;
 
 		auto inSubEllipse = false;
 		if (inAABBSubEllipse)
-		{			
+		{
 			// queryPoint[]在轴对齐包围盒的子椭圆边界框。
 			// 这中间测试旨在防范除零错误，当对一些i，extentPos[i] == extent[N - 1]。
-			Real xde[3]  {  };
+			Real xde[3]{ };
 			auto discriminant = static_cast<Real>(1);
 			for (auto i = 0u; i < numPos; ++i)
 			{
@@ -174,9 +174,9 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 				discriminant -= xde[i] * xde[i];
 			}
 			if (m_ZeroThreshold < discriminant)
-			{			
+			{
 				// queryPoint[]在子椭圆内，最接近椭圆点有outputPos[2] > 0.
-				m_SquaredDistance = Real { };
+				m_SquaredDistance = Math<Real>::sm_Zero;
 				for (auto i = 0u; i < numPos; ++i)
 				{
 					outputPos.push_back(extentPos[i] * xde[i]);
@@ -192,7 +192,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 		if (!inSubEllipse)
 		{
 			// queryPoint[]在子椭圆之外。最近的椭球点有x[2] == 0，是在域边界椭圆。
-			m_OutputVector[2] = Real{ };
+			m_OutputVector[2] = Math<Real>::sm_Zero;
 			outputPos = Bisector(extentPos, queryPointPos);
 		}
 	}
@@ -208,27 +208,33 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 			m_OutputVector[i] = outputPos[outputVectorIndex];
 			++outputVectorIndex;
 		}
-	} 
+	}
 }
 
 template <typename Real>
 const std::vector<Real> Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 	::Bisector(const std::vector<Real>& extent, const std::vector<Real>& queryPoint)
-{	
+{
 	auto numComponents = extent.size();
-	Real extentSquared[3]  {  };
-	Real extentMultiplyQueryPoint[3]{  };
-	Real argument { };
-	
+	auto temp = numComponents - 1;
+	if (!(0 <= temp && temp < 3))
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"));
+	}
+
+	Real extentSquared[3]{ };
+	Real extentMultiplyQueryPoint[3]{ };
+	auto argument = Math<Real>::sm_Zero;
+
 	for (auto i = 0u; i < numComponents; ++i)
 	{
 		extentSquared[i] = extent[i] * extent[i];
 		extentMultiplyQueryPoint[i] = extent[i] * queryPoint[i];
 		argument += extentMultiplyQueryPoint[i] * extentMultiplyQueryPoint[i];
 	}
-	
-	auto beginT = -extentSquared[numComponents - 1] + extentMultiplyQueryPoint[numComponents - 1];
-	auto endT = -extentSquared[numComponents - 1] + Math<Real>::Sqrt(argument);
+
+	auto beginT = -extentSquared[temp] + extentMultiplyQueryPoint[temp];
+	auto endT = -extentSquared[temp] + Math<Real>::Sqrt(argument);
 	auto middleT = beginT;
 	const auto max = 2 * std::numeric_limits<Real>::max_exponent;
 	for (auto index = 0; index < max; ++index)
@@ -238,14 +244,14 @@ const std::vector<Real> Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 		{
 			break;
 		}
-		
+
 		auto sum = static_cast<Real>(-1);
 		for (auto i = 0u; i < numComponents; ++i)
 		{
 			auto r = extentMultiplyQueryPoint[i] / (middleT + extentSquared[i]);
 			sum += r * r;
 		}
-		if (m_ZeroThreshold < sum )
+		if (m_ZeroThreshold < sum)
 		{
 			beginT = middleT;
 		}
@@ -260,31 +266,29 @@ const std::vector<Real> Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 	}
 
 	std::vector<Real> outputVector;
-	
-	m_SquaredDistance = Real { };
+
+	m_SquaredDistance = Math<Real>::sm_Zero;
 	for (auto i = 0u; i < numComponents; ++i)
 	{
 		outputVector.push_back(extentSquared[i] * queryPoint[i] / (middleT + extentSquared[i]));
 		auto diff = outputVector[i] - queryPoint[i];
 		m_SquaredDistance += diff * diff;
-	}	
+	}
 
 	return  outputVector;
 }
-
 
 #ifdef OPEN_CLASS_INVARIANT 
 template <typename Real>
 bool Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_SquaredDistance)
+	if (Math<Real>::sm_Zero <= m_SquaredDistance)
 		return true;
-	else 
+	else
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 Real Mathematics::DistancePoint3Ellipsoid3Tool<Real>
@@ -303,6 +307,5 @@ typename const Mathematics::DistancePoint3Ellipsoid3Tool<Real>::Vector3D Mathema
 
 	return m_OutputVector;
 }
- 
+
 #endif // MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_DETAIL_H
- 

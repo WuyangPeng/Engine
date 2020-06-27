@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 17:50)
+// 引擎版本：0.0.2.5 (2020/03/23 19:19)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_BOX2_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_BOX2_DETAIL_H
@@ -33,10 +33,10 @@ template <typename Real>
 bool Mathematics::DistancePoint2Box2<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -70,8 +70,8 @@ const typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics
 	// 计算平方距离和包围盒上的最近点。
 	Vector2D closest{ Vector2DTools::DotProduct(difference,m_Box.GetFirstAxis()),
 					  Vector2DTools::DotProduct(difference,m_Box.GetSecondAxis()) };
-	Real squaredDistance { };
-	Real delta { };
+	auto squaredDistance = Math<Real>::sm_Zero;
+	auto delta = Math<Real>::sm_Zero;
 
 	if (closest.GetXCoordinate() < -m_Box.GetFirstExtent())
 	{
@@ -99,7 +99,7 @@ const typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics
 		closest.SetYCoordinate(m_Box.GetSecondExtent());
 	}
 
-	return DistanceResult{ squaredDistance, Real{}, m_Point,
+	return DistanceResult{ squaredDistance, Math<Real>::sm_Zero, m_Point,
 						   m_Box.GetCenter() + closest.GetXCoordinate() * m_Box.GetFirstAxis() +
 						   closest.GetYCoordinate() * m_Box.GetSecondAxis() };
 }
@@ -109,12 +109,12 @@ const typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics
 	::GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
- 
+
 	auto movePoint = m_Point.GetMove(t, lhsVelocity);
 	auto movedBox = m_Box.GetMove(t, rhsVelocity);
 
 	ClassType distance{ movePoint, movedBox };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 
@@ -122,4 +122,3 @@ const typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_POINT2_BOX2_DETAIL_H
- 

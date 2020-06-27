@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/21 13:10)
-
+// 引擎版本：0.0.2.4 (2020/03/11 15:45)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_USE_THREADS_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_USE_THREADS_H
@@ -11,15 +10,14 @@
 #include "Network/NetworkDll.h"
 
 #include "BoostMainManager.h"
+#include "Network/Configuration/ConfigurationFwd.h"
 
-#include <boost/ptr_container/ptr_vector.hpp>
+#include "System/Helper/PragmaWarning/PtrVector.h"
 #include <vector>
 #include <thread>
 
 namespace Network
 {
-	class ConfigurationSubStrategy;
-
 	class NETWORK_HIDDEN_DECLARE BoostMainManagerUseThreads : public BoostMainManager
 	{
 	public:

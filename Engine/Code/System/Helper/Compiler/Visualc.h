@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:02)
+// 引擎版本：0.2.0.0 (2020/05/07 15:37)
 
 #ifndef SYSTEM_HELPER_VISUALC_H
 #define SYSTEM_HELPER_VISUALC_H 
@@ -10,7 +10,7 @@
 #ifdef _MSC_VER
 
 	// Microsoft Visual C++ 编译器设置：
- 
+
 	// 我们需要小心这个文件中的检查，因为与通常的理论相反，
 	// 存在具有_MSC_VER的最终数字非零的版本（主要是MIPS交叉编译器）。
 
@@ -30,7 +30,7 @@
 	#endif // TCRE_USE_MSVC
 
 	#ifndef MSVC_FULL_VERSION 
- 
+
 		#if 100000000 < _MSC_FULL_VER
 			#define MSVC_FULL_VERSION _MSC_FULL_VER
 		#else // _MSC_FULL_VER <= 100000000
@@ -46,7 +46,7 @@
 	#ifndef TCRE_SYSTEM_COMPILER
 		#define TCRE_SYSTEM_COMPILER "Microsoft Visual C++ 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 	#endif // TCRE_SYSTEM_COMPILER
- 
+
 	#if _MSC_FULL_VER < 180020827
 		#define SYSTEM_CPP_STANDARD 3
 	#else // 180020827 <= _MSC_FULL_VER
@@ -57,7 +57,7 @@
 
 		#if defined(UNDER_CE)
 			#if _MSC_VER < 1400
- 
+
 				// 注意：我不知道任何CE编译器13xx版本
 				#error "未知的EVC++编译器版本"
 
@@ -143,7 +143,7 @@
 		typedef unsigned __int16 uint16_t;
 		typedef unsigned __int32 uint32_t;
 		typedef unsigned __int64 uint64_t;
-   
+
 		#define INT8_MIN _I8_MIN
 		#define INT8_MAX _I8_MAX
 		#define INT16_MIN _I16_MIN

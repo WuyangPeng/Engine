@@ -52,8 +52,16 @@ Rendering::ConstVertexFormatSmartPointer
 	return m_VisualData.GetConstVertexFormat();
 }
 
+const Rendering::VisualEffectInstanceSmartPointer Rendering::VisualImpl
+	::GetEffectInstance()
+{
+	RENDERING_CLASS_IS_VALID_9;
+
+	return m_Effect;
+}
+
 const Rendering::ConstVisualEffectInstanceSmartPointer Rendering::VisualImpl
-	::GetEffectInstance() const
+	::GetConstEffectInstance() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

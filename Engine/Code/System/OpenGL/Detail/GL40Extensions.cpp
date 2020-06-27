@@ -34,31 +34,31 @@ System::PgglMinSampleShading System::gglMinSampleShading{ nullptr };
 void System
 	::GlBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha) noexcept
 {
-	SYSTEM_BODY_A3(gglBlendEquationSeparatei, buf, modeRGB, modeAlpha);
+	SYSTEM_BODY_3(gglBlendEquationSeparatei, buf, modeRGB, modeAlpha);
 }
 
 void System
 	::GlBlendEquationi(GLuint buf, GLenum mode) noexcept
 {
-	SYSTEM_BODY_A2(gglBlendEquationi, buf, mode);
+	SYSTEM_BODY_2(gglBlendEquationi, buf, mode);
 }
 
 void System
 	::GlBlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) noexcept
 {
-	SYSTEM_BODY_A5(gglBlendFuncSeparatei, buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
+	SYSTEM_BODY_5(gglBlendFuncSeparatei, buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
 }
 
 void System
 	::GlBlendFunci(GLuint buf, GLenum src, GLenum dst) noexcept
 {
-	SYSTEM_BODY_A3(gglBlendFunci, buf, src, dst);
+	SYSTEM_BODY_3(gglBlendFunci, buf, src, dst);
 }
 
 void System
 	::GlMinSampleShading(GLclampf value) noexcept
 {
-	SYSTEM_BODY_A1(gglMinSampleShading, value);
+	SYSTEM_BODY_1(gglMinSampleShading, value);
 }
 
 void System

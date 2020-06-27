@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 11:34)
+// 引擎版本：0.0.2.5 (2020/03/20 10:09)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_AMEND_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_AMEND_DETAIL_H
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <int N>
 Mathematics::IntegerDataAmend<N>
@@ -62,7 +62,7 @@ void Mathematics::IntegerDataAmend<N>
 
 template <int N>
 void Mathematics::IntegerDataAmend<N>
-	::FromUnsignedInt( int index, uint32_t value )
+	::FromUnsignedInt(int index, uint32_t value)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < sm_IntSize, "索引错误！");
@@ -72,7 +72,7 @@ void Mathematics::IntegerDataAmend<N>
 
 template <int N>
 void Mathematics::IntegerDataAmend<N>
-	::SetValue( int beginIndex,int endIndex,uint32_t value )
+	::SetValue(int beginIndex, int endIndex, uint32_t value)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 	MATHEMATICS_ASSERTION_0(0 <= beginIndex && beginIndex <= sm_IntSize, "begin索引错误！");
@@ -80,8 +80,8 @@ void Mathematics::IntegerDataAmend<N>
 	MATHEMATICS_ASSERTION_1(beginIndex <= endIndex, "begin索引大于end索引！");
 
 	for (auto index = beginIndex; index < endIndex; ++index)
-	{	
-		FromUnsignedInt(index,value);
+	{
+		FromUnsignedInt(index, value);
 	}
 }
 

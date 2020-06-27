@@ -1,0 +1,28 @@
+TODO Level 9
+ 
+0.0.2.5
+
+1.  （Base）定义类ScaledFloatToInt中的常量。
+2.  （Algebra）定义类AlgebraStreamSize中的常量和using声明。
+3.  （Algebra）删除AlgebraTraits类，改用Math中的常量。
+4.  （Algebra）导出APoint、AVector、AVectorOrthonormalBasis、AVectorOrthonormalize、AxesAlignBoundingBox2D、
+			   AxesAlignBoundingBox3D、AxesAlignBoundingBox4D、BandedMatrixSolve、Matrix2EigenDecomposition、
+			   Matrix3、Matrix3EigenDecomposition、Matrix3Extract、Matrix4、Plane、PolynomialDivide、QuaternionFactor、
+			   QuaternionSwingTwist、Tridiagonalize、Vector2D、Vector2DInformation、Vector2DOrthonormalBasis、
+			   Vector2DOrthonormalize、Vector3D、Vector3DOrthonormalize、Vector4D类。
+5.  （Algebra）对有实现operator[]的类实现data函数。
+6.  （Algebra）修改部分函数返回int，但AlgebraAggregate需要int32_t。  
+7.  （Algebra）使用array或vector代替原来的数据结构。
+8.  （Algebra）使用Impl惯用法修改Algebra模块。
+9.  （Algebra）修改BandedMatrix、Polynomial、VariableLengthVector、VariableMatrix，废弃NEW。
+10. （Algebra）明确宏MATHEMATICS_ASSERT_VARIABLE_VECTOR_OUT_OF_RANGE和MATHEMATICS_ASSERT_VARIABLE_MATRIX_OUT_OF_RANGE的用处，没用就删掉。
+11. （Algebra）明确宏MATHEMATICS_ASSERT_ON_BARYCENTRIC2_DEGENERATE、MATHEMATICS_ASSERT_ON_BARYCENTRIC3_DEGENERATE的用处，没用就删掉。
+12. （Rational）明确宏MATHEMATICS_ASSERT_ON_RATIONAL_CONVERT_NAN的用处，没用就删掉。
+13. （Rational）重构Rational模块。
+14. （Rational）将Rational模块的数组改成array。
+15. （NumericalAnalysis）重构NumericalAnalysis模块。
+16. （NumericalAnalysis）导出NumericalAnalysis模块。
+17. （NumericalAnalysis）将内部类ImaginaryLess提出。
+18. （NumericalAnalysis）修改NumericalAnalysis迭代器的设计，看能否改成std。
+19. （NumericalAnalysis）将NumericalAnalysis模块的数组改成array。
+20. （NumericalAnalysis）完成SingularValueDecompositionGTE、SymmetricEigensolverGTE类。

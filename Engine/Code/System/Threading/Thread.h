@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 16:13)
+// 引擎版本：0.2.0.0 (2020/05/10 11:33)
 
 #ifndef SYSTEM_THREADING_THREAD_H
 #define SYSTEM_THREADING_THREAD_H
@@ -17,9 +17,9 @@ namespace System
 {
 	// 创建和销毁线程
 
-	ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowSecurityAttributesPtr threadAttributes,WindowSize stackSize,ThreadStartRoutine startAddress,
-														   WindowVoidPtr parameter,ThreadCreation creationFlags,WindowDWordPtr threadID) noexcept;
-	ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowSize stackSize, ThreadStartRoutine startAddress,WindowVoidPtr parameter,WindowDWordPtr threadID) noexcept;
+	ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowSecurityAttributesPtr threadAttributes, WindowSize stackSize, ThreadStartRoutine startAddress,
+														   WindowVoidPtr parameter, ThreadCreation creationFlags, WindowDWordPtr threadID) noexcept;
+	ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowSize stackSize, ThreadStartRoutine startAddress, WindowVoidPtr parameter, WindowDWordPtr threadID) noexcept;
 	bool SYSTEM_DEFAULT_DECLARE CloseSystemThread(ThreadHandle thread) noexcept;
 	WindowDWord SYSTEM_DEFAULT_DECLARE ResumeSystemThread(ThreadHandle thread) noexcept;
 	WindowDWord SYSTEM_DEFAULT_DECLARE SuspendSystemThread(ThreadHandle thread) noexcept;
@@ -31,7 +31,7 @@ namespace System
 	bool SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle) noexcept;
 	MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle, WindowDWord milliseconds) noexcept;
 	MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle, WindowDWord milliseconds, bool alertable) noexcept;
-	MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(WindowDWord count, const ThreadHandle* handle, bool waitAll, WindowDWord milliseconds,bool alertable) noexcept;
+	MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(WindowDWord count, const ThreadHandle* handle, bool waitAll, WindowDWord milliseconds, bool alertable) noexcept;
 	MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(WindowDWord count, const ThreadHandle* handle, bool waitAll, WindowDWord milliseconds) noexcept;
 
 	ThreadHandle SYSTEM_DEFAULT_DECLARE BeginSystemThread(void* security, unsigned stacksize, StartAddress startAddress,

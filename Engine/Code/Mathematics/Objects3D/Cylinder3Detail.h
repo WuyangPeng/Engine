@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:47)
+// 引擎版本：0.0.2.5 (2020/03/19 17:38)
 
 #ifndef MATHEMATICS_OBJECTS3D_CYLINDER3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_CYLINDER3_DETAIL_H
@@ -14,7 +14,7 @@
 
 template <typename Real>
 Mathematics::Cylinder3<Real>
-	::Cylinder3( const Line3& axis, Real radius, Real height )
+	::Cylinder3(const Line3& axis, Real radius, Real height)
 	:m_Axis{ axis }, m_Radius{ radius }, m_Height{ height }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -25,8 +25,8 @@ template <typename Real>
 bool Mathematics::Cylinder3<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_Radius && Real{}  <= m_Height)
-	    return true;
+	if (Math::sm_Zero <= m_Radius && Math::sm_Zero <= m_Height)
+		return true;
 	else
 		return false;
 }

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/11 14:35)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:33)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_H
@@ -20,28 +20,28 @@ namespace Mathematics
 	class Intersector
 	{
 	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");	 
-		
+		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
 		using ClassType = Intersector<Real, Vector>;
-		using Math = Math<Real>;	
+		using Math = Math<Real>;
 		using VectorType = Vector<Real>;
-		
+
 	public:
 		explicit Intersector(const Real epsilon = Math::sm_ZeroTolerance);
-		virtual ~Intersector () = 0;
+		virtual ~Intersector() = 0;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
-				
-		Real GetEpsilon() const;			
+
+		Real GetEpsilon() const;
 		IntersectionType GetIntersectionType() const;
 		bool IsIntersection() const;
 
 	protected:
 		void SetIntersectionType(IntersectionType intersectionType);
-		
+
 	private:
 		IntersectionType m_IntersectionType;
-		Real m_Epsilon;		
+		Real m_Epsilon;
 	};
 
 	using Intersector2f = Intersector<float, Vector2D>;

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:04)
+// 引擎版本：0.0.2.5 (2020/03/23 11:54)
 
 #ifndef MATHEMATICS_APPROXIMATION_FWD_H
 #define MATHEMATICS_APPROXIMATION_FWD_H
@@ -52,7 +52,7 @@ namespace Mathematics
 	class HeightPlaneFit3;
 
 	template <typename Real>
-	class OrthogonalPlaneFit3;	
+	class OrthogonalPlaneFit3;
 
 	template <typename Real>
 	class CylinderFit3;

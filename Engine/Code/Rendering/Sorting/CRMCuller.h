@@ -25,7 +25,7 @@ namespace Rendering
 		// Two portals leading into the room can be visible to the camera.  The
 		// Culler would store visible objects twice.  CRMCuller maintains a set
 		// of unique objects.
-		virtual void Insert(const ConstSpatialSmartPointer& visible);
+		virtual void Insert(const VisualSmartPointer& visible) override;
 
 	protected:
 		std::set<ConstSpatialSmartPointer> mUnique;

@@ -18,8 +18,8 @@ void Imagics
     {
         double rxp = x + scale;
         double rxm = x - scale;
-        int xp = (int)Mathd::Floor(rxp);
-        int xm = (int)Mathd::Ceil(rxm);
+        int xp = (int)Mathematics::Mathd::Floor(rxp);
+        int xm = (int)Mathematics::Mathd::Ceil(rxm);
 
         double xsum = -2.0*image[x];
 
@@ -59,15 +59,15 @@ void Imagics
     {
         double ryp = y + scale;
         double rym = y - scale;
-        int yp = (int)Mathd::Floor(ryp);
-        int ym = (int)Mathd::Ceil(rym);
+        int yp = (int)Mathematics::Mathd::Floor(ryp);
+        int ym = (int)Mathematics::Mathd::Ceil(rym);
 
         for (x = 0; x < xBound; ++x) 
         {
             double rxp = x + scale;
             double rxm = x - scale;
-            int xp = (int)Mathd::Floor(rxp);
-            int xm = (int)Mathd::Ceil(rxm);
+            int xp = (int)Mathematics::Mathd::Floor(rxp);
+            int xm = (int)Mathematics::Mathd::Ceil(rxm);
 
             // x portion of second central difference
             double xsum = -2.0*image[y][x];
@@ -131,22 +131,22 @@ void Imagics
     {
         double rzp = z + scale;
         double rzm = z - scale;
-        int zp = (int)Mathd::Floor(rzp);
-        int zm = (int)Mathd::Ceil(rzm);
+        int zp = (int)Mathematics::Mathd::Floor(rzp);
+        int zm = (int)Mathematics::Mathd::Ceil(rzm);
 
         for (y = 0; y < yBound; ++y) 
         {
             double ryp = y + scale;
             double rym = y - scale;
-            int yp = (int)Mathd::Floor(ryp);
-            int ym = (int)Mathd::Ceil(rym);
+            int yp = (int)Mathematics::Mathd::Floor(ryp);
+            int ym = (int)Mathematics::Mathd::Ceil(rym);
 
             for (x = 0; x < xBound; ++x) 
             {
                 double rxp = x + scale;
                 double rxm = x - scale;
-                int xp = (int)Mathd::Floor(rxp);
-                int xm = (int)Mathd::Ceil(rxm);
+                int xp = (int)Mathematics::Mathd::Floor(rxp);
+                int xm = (int)Mathematics::Mathd::Ceil(rxm);
 
                 // x portion of second central difference
                 double xsum = -2.0*image[z][y][x];

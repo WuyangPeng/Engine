@@ -18,7 +18,7 @@ namespace Mathematics
 		// At least a 3x3 block of data points are needed to construct the
 		// estimates of the boundary derivatives.
 		MATHEMATICS_ASSERTION_0(xBound >= 3 && yBound >= 3 && F, "Invalid input\n");
-		MATHEMATICS_ASSERTION_0(xSpacing > Real{} && ySpacing > Real{}, "Invalid input\n");
+		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero && ySpacing > Math<Real>::sm_Zero, "Invalid input\n");
 
 		mXBound = xBound;
 		mYBound = yBound;
@@ -34,8 +34,8 @@ namespace Mathematics
 		mYMax = yMin + ySpacing * yBoundM1;
 
 		// Compute slopes.
-		auto invDX = ((Real)1) / xSpacing;
-		auto invDY = ((Real)1) / ySpacing;
+		auto invDX = (static_cast<Real>(1)) / xSpacing;
+		auto invDY = (static_cast<Real>(1)) / ySpacing;
 		auto invDXDY = invDX * invDY;
 		Real** xSlope = NEW2<Real>(xBound + 3, yBound);  //xslope[y][x]
 		Real** ySlope = NEW2<Real>(yBound + 3, xBound);  //yslope[x][y]
@@ -48,10 +48,10 @@ namespace Mathematics
 				xSlope[iy][ix + 2] = (F[iy][ix + 1] - F[iy][ix])*invDX;
 			}
 
-			xSlope[iy][1] = ((Real)2)*xSlope[iy][2] - xSlope[iy][3];
-			xSlope[iy][0] = ((Real)2)*xSlope[iy][1] - xSlope[iy][2];
-			xSlope[iy][xBound + 1] = ((Real)2)*xSlope[iy][xBound] - xSlope[iy][xBound - 1];
-			xSlope[iy][xBound + 2] = ((Real)2)*xSlope[iy][xBound + 1] - xSlope[iy][xBound];
+			xSlope[iy][1] = (static_cast<Real>(2))*xSlope[iy][2] - xSlope[iy][3];
+			xSlope[iy][0] = (static_cast<Real>(2))*xSlope[iy][1] - xSlope[iy][2];
+			xSlope[iy][xBound + 1] = (static_cast<Real>(2))*xSlope[iy][xBound] - xSlope[iy][xBound - 1];
+			xSlope[iy][xBound + 2] = (static_cast<Real>(2))*xSlope[iy][xBound + 1] - xSlope[iy][xBound];
 		}
 
 		for (ix = 0; ix < xBound; ++ix)
@@ -61,10 +61,10 @@ namespace Mathematics
 				ySlope[ix][iy + 2] = (F[iy + 1][ix] - F[iy][ix])*invDY;
 			}
 
-			ySlope[ix][1] = ((Real)2)*ySlope[ix][2] - ySlope[ix][3];
-			ySlope[ix][0] = ((Real)2)*ySlope[ix][1] - ySlope[ix][2];
-			ySlope[ix][yBound + 1] = ((Real)2)*ySlope[ix][yBound] - ySlope[ix][yBound - 1];
-			ySlope[ix][yBound + 2] = ((Real)2)*ySlope[ix][yBound + 1] - ySlope[ix][yBound];
+			ySlope[ix][1] = (static_cast<Real>(2))*ySlope[ix][2] - ySlope[ix][3];
+			ySlope[ix][0] = (static_cast<Real>(2))*ySlope[ix][1] - ySlope[ix][2];
+			ySlope[ix][yBound + 1] = (static_cast<Real>(2))*ySlope[ix][yBound] - ySlope[ix][yBound - 1];
+			ySlope[ix][yBound + 2] = (static_cast<Real>(2))*ySlope[ix][yBound + 1] - ySlope[ix][yBound];
 		}
 
 		// Construct first-order derivatives.
@@ -94,35 +94,35 @@ namespace Mathematics
 		unsigned int iy0 = yBoundM1, iy1 = iy0 - 1, iy2 = iy1 - 1;
 
 		// corners
-		FXY[0][0] = (Real{ 0.25 })*invDXDY*(((Real)9)*F[0][0]- ((Real)12)*F[0][1]+ ((Real)3)*F[0][2]- 
-					((Real)12)*F[1][0]+ ((Real)16)*F[1][1]- ((Real)4)*F[1][2]
-					+ ((Real)3)*F[2][0]	- ((Real)4)*F[2][1]	+ F[2][2]);
+		FXY[0][0] = (Real{ 0.25 })*invDXDY*(((Real)9)*F[0][0]- (static_cast<Real>(12))*F[0][1]+ (static_cast<Real>(3))*F[0][2]- 
+					(static_cast<Real>(12))*F[1][0]+ (static_cast<Real>(16))*F[1][1]- ((Real)4)*F[1][2]
+					+ (static_cast<Real>(3))*F[2][0]	- ((Real)4)*F[2][1]	+ F[2][2]);
 
-		FXY[0][xBoundM1] = (Real{ 0.25 })*invDXDY*(((Real)9)*F[0][ix0]	- ((Real)12)*F[0][ix1]+ ((Real)3)*F[0][ix2]
-							- ((Real)12)*F[1][ix0]+ ((Real)16)*F[1][ix1]- ((Real)4)*F[1][ix2]
-							+ ((Real)3)*F[2][ix0]- ((Real)4)*F[2][ix1]+ F[2][ix2]);
+		FXY[0][xBoundM1] = (Real{ 0.25 })*invDXDY*(((Real)9)*F[0][ix0]	- (static_cast<Real>(12))*F[0][ix1]+ (static_cast<Real>(3))*F[0][ix2]
+							- (static_cast<Real>(12))*F[1][ix0]+ (static_cast<Real>(16))*F[1][ix1]- ((Real)4)*F[1][ix2]
+							+ (static_cast<Real>(3))*F[2][ix0]- ((Real)4)*F[2][ix1]+ F[2][ix2]);
 
-		FXY[yBoundM1][0] = (Real{ 0.25 })*invDXDY*(((Real)9)*F[iy0][0]- ((Real)12)*F[iy0][1]+ ((Real)3)*F[iy0][2]- ((Real)12)*F[iy1][0]
-			+ ((Real)16)*F[iy1][1]- ((Real)4)*F[iy1][2]+ ((Real)3)*F[iy2][0]- ((Real)4)*F[iy2][1]+ F[iy2][2]);
+		FXY[yBoundM1][0] = (Real{ 0.25 })*invDXDY*(((Real)9)*F[iy0][0]- (static_cast<Real>(12))*F[iy0][1]+ (static_cast<Real>(3))*F[iy0][2]- (static_cast<Real>(12))*F[iy1][0]
+			+ (static_cast<Real>(16))*F[iy1][1]- ((Real)4)*F[iy1][2]+ (static_cast<Real>(3))*F[iy2][0]- ((Real)4)*F[iy2][1]+ F[iy2][2]);
 
-		FXY[yBoundM1][xBoundM1] = (Real{ 0.25 })*invDXDY*(	((Real)9)*F[iy0][ix0]- ((Real)12)*F[iy0][ix1]+ ((Real)3)*F[iy0][ix2]
-			- ((Real)12)*F[iy1][ix0]+ ((Real)16)*F[iy1][ix1]- ((Real)4)*F[iy1][ix2]
-			+ ((Real)3)*F[iy2][ix0]- ((Real)4)*F[iy2][ix1]	+ F[iy2][ix2]);
+		FXY[yBoundM1][xBoundM1] = (Real{ 0.25 })*invDXDY*(	((Real)9)*F[iy0][ix0]- (static_cast<Real>(12))*F[iy0][ix1]+ (static_cast<Real>(3))*F[iy0][ix2]
+			- (static_cast<Real>(12))*F[iy1][ix0]+ (static_cast<Real>(16))*F[iy1][ix1]- ((Real)4)*F[iy1][ix2]
+			+ (static_cast<Real>(3))*F[iy2][ix0]- ((Real)4)*F[iy2][ix1]	+ F[iy2][ix2]);
 
 		// x-edges
 		for (ix = 1; ix < xBoundM1; ++ix)
 		{
-			FXY[0][ix] = (Real{ 0.25 })*invDXDY*(((Real)3)*(F[0][ix - 1] - F[0][ix + 1])- ((Real)4)*(F[1][ix - 1] - F[1][ix + 1])+ (F[2][ix - 1] - F[2][ix + 1]));
+			FXY[0][ix] = (Real{ 0.25 })*invDXDY*((static_cast<Real>(3))*(F[0][ix - 1] - F[0][ix + 1])- ((Real)4)*(F[1][ix - 1] - F[1][ix + 1])+ (F[2][ix - 1] - F[2][ix + 1]));
 
-			FXY[yBoundM1][ix] = (Real{ 0.25 })*invDXDY*(((Real)3)*(F[iy0][ix - 1] - F[iy0][ix + 1])	- ((Real)4)*(F[iy1][ix - 1] - F[iy1][ix + 1])+ (F[iy2][ix - 1] - F[iy2][ix + 1]));
+			FXY[yBoundM1][ix] = (Real{ 0.25 })*invDXDY*((static_cast<Real>(3))*(F[iy0][ix - 1] - F[iy0][ix + 1])	- ((Real)4)*(F[iy1][ix - 1] - F[iy1][ix + 1])+ (F[iy2][ix - 1] - F[iy2][ix + 1]));
 		}
 
 		// y-edges
 		for (iy = 1; iy < yBoundM1; ++iy)
 		{
-			FXY[iy][0] = (Real{ 0.25 })*invDXDY*(((Real)3)*(F[iy - 1][0] - F[iy + 1][0])- ((Real)4)*(F[iy - 1][1] - F[iy + 1][1])+ (F[iy - 1][2] - F[iy + 1][2]));
+			FXY[iy][0] = (Real{ 0.25 })*invDXDY*((static_cast<Real>(3))*(F[iy - 1][0] - F[iy + 1][0])- ((Real)4)*(F[iy - 1][1] - F[iy + 1][1])+ (F[iy - 1][2] - F[iy + 1][2]));
 
-			FXY[iy][xBoundM1] = (Real{ 0.25 })*invDXDY*(((Real)3)*(F[iy - 1][ix0] - F[iy + 1][ix0])	- ((Real)4)*(F[iy - 1][ix1] - F[iy + 1][ix1])	+ (F[iy - 1][ix2] - F[iy + 1][ix2]));
+			FXY[iy][xBoundM1] = (Real{ 0.25 })*invDXDY*((static_cast<Real>(3))*(F[iy - 1][ix0] - F[iy + 1][ix0])	- ((Real)4)*(F[iy - 1][ix1] - F[iy + 1][ix1])	+ (F[iy - 1][ix2] - F[iy + 1][ix2]));
 		}
 
 		// interior
@@ -281,7 +281,7 @@ namespace Mathematics
 				}
 				else
 				{
-					return (Real{ 0.5 })*(slope[1] + slope[2]);
+					return (static_cast<Real>(0.5))*(slope[1] + slope[2]);
 				}
 			}
 		}
@@ -296,8 +296,8 @@ namespace Mathematics
 	{
 		auto dx = mXSpacing;
 		auto dy = mYSpacing;
-		auto invDX = ((Real)1) / dx, fInvDX2 = invDX * invDX;
-		auto invDY = ((Real)1) / dy, fInvDY2 = invDY * invDY;
+		auto invDX = (static_cast<Real>(1)) / dx, fInvDX2 = invDX * invDX;
+		auto invDY = (static_cast<Real>(1)) / dy, fInvDY2 = invDY * invDY;
 		Real b0, b1, b2, b3;
 
 		poly.A(0, 0) = F[0][0];
@@ -305,34 +305,34 @@ namespace Mathematics
 		poly.A(0, 1) = FY[0][0];
 		poly.A(1, 1) = FXY[0][0];
 
-		b0 = (F[1][0] - poly(0, 0, dx, Real{}))*fInvDX2;
-		b1 = (FX[1][0] - poly(1, 0, dx, Real{}))*invDX;
-		poly.A(2, 0) = ((Real)3)*b0 - b1;
-		poly.A(3, 0) = (-((Real)2)*b0 + b1)*invDX;
+		b0 = (F[1][0] - poly(0, 0, dx, Math<Real>::sm_Zero))*fInvDX2;
+		b1 = (FX[1][0] - poly(1, 0, dx, Math<Real>::sm_Zero))*invDX;
+		poly.A(2, 0) = (static_cast<Real>(3))*b0 - b1;
+		poly.A(3, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
 
-		b0 = (F[0][1] - poly(0, 0, Real{}, dy))*fInvDY2;
-		b1 = (FY[0][1] - poly(0, 1, Real{}, dy))*invDY;
-		poly.A(0, 2) = ((Real)3)*b0 - b1;
-		poly.A(0, 3) = (-((Real)2)*b0 + b1)*invDY;
+		b0 = (F[0][1] - poly(0, 0, Math<Real>::sm_Zero, dy))*fInvDY2;
+		b1 = (FY[0][1] - poly(0, 1, Math<Real>::sm_Zero, dy))*invDY;
+		poly.A(0, 2) = (static_cast<Real>(3))*b0 - b1;
+		poly.A(0, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
 
-		b0 = (FY[1][0] - poly(0, 1, dx, Real{}))*fInvDX2;
-		b1 = (FXY[1][0] - poly(1, 1, dx, Real{}))*invDX;
-		poly.A(2, 1) = ((Real)3)*b0 - b1;
-		poly.A(3, 1) = (-((Real)2)*b0 + b1)*invDX;
+		b0 = (FY[1][0] - poly(0, 1, dx, Math<Real>::sm_Zero))*fInvDX2;
+		b1 = (FXY[1][0] - poly(1, 1, dx, Math<Real>::sm_Zero))*invDX;
+		poly.A(2, 1) = (static_cast<Real>(3))*b0 - b1;
+		poly.A(3, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
 
-		b0 = (FX[0][1] - poly(1, 0, Real{}, dy))*fInvDY2;
-		b1 = (FXY[0][1] - poly(1, 1, Real{}, dy))*invDY;
-		poly.A(1, 2) = ((Real)3)*b0 - b1;
-		poly.A(1, 3) = (-((Real)2)*b0 + b1)*invDY;
+		b0 = (FX[0][1] - poly(1, 0, Math<Real>::sm_Zero, dy))*fInvDY2;
+		b1 = (FXY[0][1] - poly(1, 1, Math<Real>::sm_Zero, dy))*invDY;
+		poly.A(1, 2) = (static_cast<Real>(3))*b0 - b1;
+		poly.A(1, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
 
 		b0 = (F[1][1] - poly(0, 0, dx, dy))*fInvDX2*fInvDY2;
 		b1 = (FX[1][1] - poly(1, 0, dx, dy))*invDX*fInvDY2;
 		b2 = (FY[1][1] - poly(0, 1, dx, dy))*fInvDX2*invDY;
 		b3 = (FXY[1][1] - poly(1, 1, dx, dy))*invDX*invDY;
-		poly.A(2, 2) = ((Real)9)*b0 - ((Real)3)*b1 - ((Real)3)*b2 + b3;
-		poly.A(3, 2) = (-((Real)6)*b0 + ((Real)3)*b1 + ((Real)2)*b2 - b3)*invDX;
-		poly.A(2, 3) = (-((Real)6)*b0 + ((Real)2)*b1 + ((Real)3)*b2 - b3)*invDY;
-		poly.A(3, 3) = (((Real)4)*b0 - ((Real)2)*b1 - ((Real)2)*b2 + b3)*	invDX*invDY;
+		poly.A(2, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
+		poly.A(3, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
+		poly.A(2, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDY;
+		poly.A(3, 3) = (((Real)4)*b0 - (static_cast<Real>(2))*b1 - (static_cast<Real>(2))*b2 + b3)*	invDX*invDY;
 	}
 
 	template <typename Real>
@@ -448,65 +448,65 @@ namespace Mathematics
 		switch (xOrder)
 		{
 		case 0:
-			xPow[0] = (Real)1;
+			xPow[0] = static_cast<Real>(1);
 			xPow[1] = x;
 			xPow[2] = x * x;
 			xPow[3] = x * x*x;
 			break;
 		case 1:
-			xPow[0] = Real{};
-			xPow[1] = (Real)1;
-			xPow[2] = ((Real)2)*x;
-			xPow[3] = ((Real)3)*x*x;
+			xPow[0] = Math<Real>::sm_Zero;
+			xPow[1] = static_cast<Real>(1);
+			xPow[2] = (static_cast<Real>(2))*x;
+			xPow[3] = (static_cast<Real>(3))*x*x;
 			break;
 		case 2:
-			xPow[0] = Real{};
-			xPow[1] = Real{};
-			xPow[2] = (Real)2;
+			xPow[0] = Math<Real>::sm_Zero;
+			xPow[1] = Math<Real>::sm_Zero;
+			xPow[2] = static_cast<Real>(2);
 			xPow[3] = ((Real)6)*x;
 			break;
 		case 3:
-			xPow[0] = Real{};
-			xPow[1] = Real{};
-			xPow[2] = Real{};
+			xPow[0] = Math<Real>::sm_Zero;
+			xPow[1] = Math<Real>::sm_Zero;
+			xPow[2] = Math<Real>::sm_Zero;
 			xPow[3] = (Real)6;
 			break;
 		default:
-			return Real{};
+			return Math<Real>::sm_Zero;
 		}
 
 		Real yPow[4];
 		switch (yOrder)
 		{
 		case 0:
-			yPow[0] = (Real)1;
+			yPow[0] = static_cast<Real>(1);
 			yPow[1] = y;
 			yPow[2] = y * y;
 			yPow[3] = y * y*y;
 			break;
 		case 1:
-			yPow[0] = Real{};
-			yPow[1] = (Real)1;
-			yPow[2] = ((Real)2)*y;
-			yPow[3] = ((Real)3)*y*y;
+			yPow[0] = Math<Real>::sm_Zero;
+			yPow[1] = static_cast<Real>(1);
+			yPow[2] = (static_cast<Real>(2))*y;
+			yPow[3] = (static_cast<Real>(3))*y*y;
 			break;
 		case 2:
-			yPow[0] = Real{};
-			yPow[1] = Real{};
-			yPow[2] = (Real)2;
+			yPow[0] = Math<Real>::sm_Zero;
+			yPow[1] = Math<Real>::sm_Zero;
+			yPow[2] = static_cast<Real>(2);
 			yPow[3] = ((Real)6)*y;
 			break;
 		case 3:
-			yPow[0] = Real{};
-			yPow[1] = Real{};
-			yPow[2] = Real{};
+			yPow[0] = Math<Real>::sm_Zero;
+			yPow[1] = Math<Real>::sm_Zero;
+			yPow[2] = Math<Real>::sm_Zero;
 			yPow[3] = (Real)6;
 			break;
 		default:
-			return Real{};
+			return Math<Real>::sm_Zero;
 		}
 
-		Real p = Real{};
+		Real p = Math<Real>::sm_Zero;
 		for (int iy = 0; iy <= 3; ++iy)
 		{
 			for (int ix = 0; ix <= 3; ++ix)

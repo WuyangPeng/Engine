@@ -1,33 +1,34 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 10:04)
+// 引擎版本：0.3.0.1 (2020/05/21 10:50)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMessageLoopImpl.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Window/Flags/WindowMessagesFlags.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
+using namespace std::literals;
+
 Framework::WindowMessageLoopImpl
-	::WindowMessageLoopImpl(System::DisplayPtr function)
-	:m_Function(function),
-	 m_LastTime(),
-     m_Msg()
+	::WindowMessageLoopImpl(DisplayFunction function) noexcept
+	:m_Function{ function }, m_LastTime{ }, m_Msg{ }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Framework,WindowMessageLoopImpl)
+CLASS_INVARIANT_STUB_DEFINE(Framework, WindowMessageLoopImpl)
 
 System::WindowWParam Framework::WindowMessageLoopImpl
 	::EnterMessageLoop(HWnd hwnd)
 {
-    FRAMEWORK_CLASS_IS_VALID_9;
+	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if(m_Function != nullptr)
+	if (m_Function != nullptr)
 	{
 		return EnterNewMessageLoop(hwnd);
 	}
@@ -39,9 +40,9 @@ System::WindowWParam Framework::WindowMessageLoopImpl
 
 // private
 System::WindowWParam Framework::WindowMessageLoopImpl
-	::EnterOldMessageLoop()
+	::EnterOldMessageLoop() noexcept
 {
-	while(System::GetSystemMessage(&m_Msg))
+	while (System::GetSystemMessage(&m_Msg))
 	{
 		System::TranslateSystemMessage(&m_Msg);
 		System::DispatchSystemMessage(&m_Msg);
@@ -55,17 +56,17 @@ System::WindowWParam Framework::WindowMessageLoopImpl
 	::EnterNewMessageLoop(HWnd hwnd)
 {
 	// 启动消息循环。
-    bool applicationRunning = true;
+	auto applicationRunning = true;
 
-	do 
+	do
 	{
 		if (System::PeekSystemMessage(&m_Msg))
 		{
-			if(!ProcessingMessage(hwnd))
-            {
-               applicationRunning = false;
-               continue;
-            }
+			if (!ProcessingMessage(hwnd))
+			{
+				applicationRunning = false;
+				continue;
+			}
 		}
 		else
 		{
@@ -79,19 +80,19 @@ System::WindowWParam Framework::WindowMessageLoopImpl
 
 // private
 bool Framework::WindowMessageLoopImpl
-	::ProcessingMessage(HWnd hwnd)
+	::ProcessingMessage(HWnd hwnd) noexcept
 {
-	if (static_cast<System::WindowMessages>(m_Msg.message) == System::WindowMessages::Quit)
-    { 
-	    return false;
-    }
-			
-    System::WindowHAccel accel = 0;
-    if (!System::SystemTranslateAccelerator(hwnd, accel, &m_Msg))
-    {
-        System::TranslateSystemMessage(&m_Msg);
-        System::DispatchSystemMessage(&m_Msg);
-    }
+	if (System::UnderlyingCastEnum<System::WindowMessages>(m_Msg.message) == System::WindowMessages::Quit)
+	{
+		return false;
+	}
+
+	System::WindowHAccel accel{ nullptr };
+	if (!System::SystemTranslateAccelerator(hwnd, accel, &m_Msg))
+	{
+		System::TranslateSystemMessage(&m_Msg);
+		System::DispatchSystemMessage(&m_Msg);
+	}
 
 	return true;
 }
@@ -100,11 +101,12 @@ bool Framework::WindowMessageLoopImpl
 void Framework::WindowMessageLoopImpl
 	::Idle(HWnd hwnd)
 {
-	FRAMEWORK_ASSERTION_0(m_Function != nullptr,"空闲函数指针为空！");
+	FRAMEWORK_ASSERTION_0(m_Function != nullptr, "空闲函数指针为空！");
 
-	int64_t timeDelta = m_LastTime.GetThisElapsedMillisecondTime();
-			
-    m_Function(hwnd,timeDelta);
-			
-    System::SystemValidateRect(hwnd);
+	const auto timeDelta = m_LastTime.GetThisElapsedMillisecondTime();
+
+	if (m_Function)
+	{
+		m_Function(hwnd, timeDelta);
+	}
 }

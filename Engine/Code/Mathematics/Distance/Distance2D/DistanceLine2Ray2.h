@@ -10,17 +10,13 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Distance/DistanceBase.h"
+#include "Mathematics/Distance/DistanceFwd.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Objects2D/Line2.h"
 #include "Mathematics/Objects2D/Ray2.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-
-	template <typename Real>
-	class DistanceLine2Line2Tool;
-
 	template <typename Real>
 	class DistanceLine2Ray2 : public DistanceBase<Real, Vector2D<Real>>
 	{
@@ -32,7 +28,7 @@ namespace Mathematics
 		using Ray2 = Ray2<Real>;
 		using Vector2DTools = Vector2DTools<Real>;
 		using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
-		using DistanceResult = typename ParentType::DistanceResult; 
+		using DistanceResult = typename ParentType::DistanceResult;
 
 	public:
 		DistanceLine2Ray2(const Line2& line, const Ray2& ray);
@@ -47,7 +43,7 @@ namespace Mathematics
 		virtual const DistanceResult GetSquared() const override;
 
 		// 函数计算动态距离查询。	
-		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity,const Vector2D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
 	private:
 		const DistanceResult GetSquaredWithClosestPoints(const DistanceLine2Line2Tool& tool) const;

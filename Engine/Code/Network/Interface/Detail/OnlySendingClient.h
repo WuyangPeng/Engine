@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 16:55)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:08)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SENDING_A_TRIP_CLIENT_H
 #define NETWORK_NETWORK_INTERFACE_SENDING_A_TRIP_CLIENT_H
@@ -13,11 +13,10 @@
 #include "Network/Interface/SockStream.h"
 #include "Network/Interface/SockConnector.h"
 #include "Network/NetworkMessage/MessageInterface.h"
-#include "Network/NetworkMessage/BufferSendStream.h" 
-#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "Network/NetworkMessage/BufferSendStream.h"  
 
 namespace Network
-{	
+{
 	class NETWORK_HIDDEN_DECLARE OnlySendingClient : public ClientImpl
 	{
 	public:
@@ -46,13 +45,13 @@ namespace Network
 
 	private:
 		virtual bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
-		 	 
-	private:	
+
+	private:
 		SockConnector m_SockConnector;
 		SockStreamSharedPtr m_SockStream;
 		BufferSendStream m_BufferSendStream;
 		MessageBufferSharedPtr m_Buffer;
 	};
-} 
+}
 
 #endif // NETWORK_NETWORK_INTERFACE_SENDING_A_TRIP_CLIENT_H

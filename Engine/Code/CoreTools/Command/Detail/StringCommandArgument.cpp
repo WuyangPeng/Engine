@@ -19,13 +19,7 @@ CoreTools::StringCommandArgument
 	:ParentType{ index,name }, m_String{ value }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-CoreTools::StringCommandArgument
-	::~StringCommandArgument()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+} 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StringCommandArgument)
 

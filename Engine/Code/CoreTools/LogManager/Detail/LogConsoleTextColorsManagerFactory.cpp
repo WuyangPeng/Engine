@@ -10,6 +10,7 @@
 #include "LogConsoleTextColorsManagerImpl.h"
 #include "ErrorConsoleTextColorsManager.h"
 #include "OutputConsoleTextColorsManager.h"  
+#include "CoreTools/UnitTestSuite/OStreamShared.h"
 
 #include <iostream>
 
@@ -28,11 +29,11 @@ CoreTools::LogConsoleTextColorsManagerFactory::LogConsoleTextColorsManagerPtr Co
 }
 
 CoreTools::LogConsoleTextColorsManagerFactory::LogConsoleTextColorsManagerPtr CoreTools::LogConsoleTextColorsManagerFactory
-	::Create(ostream* osPtr, LogLevel logLevel)
+	::Create(const OStreamShared& osPtr, LogLevel logLevel)
 {
-	if (osPtr == &cout)
+	if (osPtr.IsCout())
 		return make_shared<OutputConsoleTextColorsManager>(logLevel);
-	else if (osPtr == &cerr)
+	else if (osPtr.IsCerr())
 		return make_shared<ErrorConsoleTextColorsManager>(logLevel);
 	else
 		return make_shared<LogConsoleTextColorsManagerImpl>(logLevel);

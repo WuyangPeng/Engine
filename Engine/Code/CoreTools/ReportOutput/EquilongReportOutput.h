@@ -21,13 +21,15 @@ EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
+	class OStreamShared;
+
 	class CORE_TOOLS_DEFAULT_DECLARE EquilongReportOutput : private boost::noncopyable
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(EquilongReportOutput);
 
 	public:
-		explicit EquilongReportOutput(int borderLineLength, std::ostream* osPtr = &std::cout);
+		explicit EquilongReportOutput(int borderLineLength, const OStreamShared& osPtr );
 
 		CLASS_INVARIANT_DECLARE;
 

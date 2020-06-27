@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:10)
+// 引擎版本：0.2.0.0 (2020/05/07 17:58)
 
 #ifndef SYSTEM_HELPER_ROGUEWAVE_H
 #define SYSTEM_HELPER_ROGUEWAVE_H 
@@ -38,7 +38,7 @@
 	#endif // _RWSTD_VER
 
 	#define TCRE_USE_ROGUEWAVE
- 
+
 #endif // defined(__STD_RWCOMPILER_H__) || defined(_RWSTD_VER)
 
 #endif // SYSTEM_HELPER_ROGUEWAVE_H

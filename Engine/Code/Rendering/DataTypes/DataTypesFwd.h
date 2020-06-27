@@ -31,6 +31,8 @@ namespace Rendering
 	class Utility;
 	class Transform;
 	class Bound;
+
+	enum class TextureFormat;
 }
 
 #endif // RENDERING_DATA_TYPES_FWD_H

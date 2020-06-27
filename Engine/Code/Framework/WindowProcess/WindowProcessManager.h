@@ -1,63 +1,76 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 10:02)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 10:50)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_MANAGER_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_MANAGER_H
 
 #include "Framework/FrameworkDll.h"
 
+#include "WindowMessageInterface.h"
+#include "System/Helper/UnicodeUsing.h" 
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SingletonMacro.h"
-#include "CoreTools/Base/SingletonDetail.h"
-#include "System/Helper/UnicodeUsing.h"
-#include "System/Window/WindowProcess.h"
-#include "WindowMessageInterface.h" 
+#include "CoreTools/Helper/SingletonMacro.h" 
 
+FRAMEWORK_EXPORT_UNIQUE_PTR(WindowProcessManager);
 FRAMEWORK_EXPORT_SHARED_PTR(WindowProcessManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(FRAMEWORK);
-
-namespace CoreTools
-{
-	class Mutex;	
-}
 
 namespace Framework
-{	
+{
 	class FRAMEWORK_DEFAULT_DECLARE WindowProcessManager : public CoreTools::Singleton<WindowProcessManager>
-	{	
-		SINGLETON_INITIALIZE_DECLARE(WindowProcessManager);	 
+	{
+	public:
+		NON_COPY_CLASSES_TYPE_DECLARE(WindowProcessManager);
+		using ParentType = Singleton<WindowProcessManager>;
+		using MessageFunctionPointer = WindowMessageInterface::FunctionPointer;
+		using String = System::String;
+		using HWnd = System::WindowHWnd;
+		using WindowProcess = System::WindowProcess;
+		using DisplayFunction = System::DisplayFunction;
+
+	private:
+		enum class WindowProcessManagerCreate
+		{
+			Init,
+		};
 
 	public:
-		using MessageFunctionPointer = WindowMessageInterface::FunctionPointer;
-		using WndProc = System::WindowProc;
-		using HWnd = System::WindowHWnd;
-		
-		CLASS_INVARIANT_VIRTUAL_DECLARE;	
+		explicit WindowProcessManager(WindowProcessManagerCreate windowProcessManagerCreate);
 
-	public:			
-		WndProc GetProcess() const;
-		System::DisplayPtr GetFunction() const;
-		ConstWindowMessageInterfaceSmartPointer GetWindowMessageInterface() const;
+		static void Create();
+		static void Destroy() noexcept;
 
-		void SetWindowMessage(const WindowMessageInterfaceSmartPointer& smartPointer);
-		void ClearWindowMessage();	
+		SINGLETON_GET_PTR_DECLARE(WindowProcessManager);
 
-		bool PreCreate();
+		CLASS_INVARIANT_DECLARE;
+
+	public:
+		static WindowProcess GetProcess() noexcept;
+		static DisplayFunction GetFunction() noexcept;
+		bool IsClassNameExist(const String& className);
+		bool SetNewClassName(const String& className);
+
+		ConstWindowMessageInterfaceSharedPtr GetWindowMessageInterface() const;
+
+		void SetWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage);
+		void ClearWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage);
+
+		bool PreCreate(const EnvironmentDirectory& environmentDirectory);
 		bool Initialize();
 		void PreIdle();
 		void Terminate();
 
-		bool IsClassNameExist(const System::String& className) const;
-		bool SetNewClassName(const System::String& className);
-		
-		void SetMainWindow(HWnd hwnd);
+		void SetMainWindowHwnd(HWnd hwnd);
 		HWnd GetMainWindowHwnd() const;
 
 	private:
-		SINGLETON_MEMBER_DECLARE(WindowProcessManager); 
+		using WindowProcessManagerUniquePtr = std::unique_ptr<WindowProcessManager>;
+
+	private:
+		static WindowProcessManagerUniquePtr sm_WindowProcessManager;
+		IMPL_TYPE_DECLARE(WindowProcessManager);
 	};
 }
 

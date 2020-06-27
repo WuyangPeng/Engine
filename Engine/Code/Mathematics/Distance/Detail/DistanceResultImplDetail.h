@@ -1,23 +1,23 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 17:13)
+// 引擎版本：0.0.2.5 (2020/03/23 19:02)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESLUT_IMPL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESLUT_IMPL_DETAIL_H
 
 #include "DistanceResultImpl.h"
+#include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "System/Helper/UnusedMacro.h"
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResultImpl<Real, Vector>
 	::DistanceResultImpl(Real distance)
 	:m_Distance{ distance }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;	
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
@@ -32,7 +32,7 @@ template <typename Real, typename Vector>
 bool Mathematics::DistanceResultImpl<Real, Vector>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_Distance)
+	if (Math::sm_Zero <= m_Distance)
 		return true;
 	else
 		return false;
@@ -54,7 +54,7 @@ Real  Mathematics::DistanceResultImpl<Real, Vector>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return Real{};
+	return Math::sm_Zero;
 }
 
 template <typename Real, typename Vector>
@@ -80,7 +80,7 @@ const Vector Mathematics::DistanceResultImpl<Real, Vector>
 	::GetLhsClosestPoint(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < GetLhsClosestPointSize(),"距离结果不包含最近相交点！\n");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < GetLhsClosestPointSize(), "距离结果不包含最近相交点！\n");
 
 	SYSTEM_UNUSED_ARG(index);
 
@@ -92,7 +92,7 @@ const Vector Mathematics::DistanceResultImpl<Real, Vector>
 	::GetRhsClosestPoint(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < GetRhsClosestPointSize(),"距离结果不包含最近相交点！\n");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < GetRhsClosestPointSize(), "距离结果不包含最近相交点！\n");
 
 	SYSTEM_UNUSED_ARG(index);
 
@@ -140,9 +140,9 @@ void Mathematics::DistanceResultImpl<Real, Vector>
 	::SetContactTime(Real contactTime)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_2(false,"距离结果不包含接触时间！\n");
+	MATHEMATICS_ASSERTION_2(false, "距离结果不包含接触时间！\n");
 
-	SYSTEM_UNUSED_ARG(contactTime);	
+	SYSTEM_UNUSED_ARG(contactTime);
 }
 
 template <typename Real, typename Vector>
@@ -150,7 +150,7 @@ Real Mathematics::DistanceResultImpl<Real, Vector>
 	::GetLhsParameter() const
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_2(false,"距离结果不包含接触参数！\n");
+	MATHEMATICS_ASSERTION_2(false, "距离结果不包含接触参数！\n");
 
 	return 0;
 }
@@ -160,7 +160,7 @@ Real Mathematics::DistanceResultImpl<Real, Vector>
 	::GetRhsParameter() const
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_2(false,"距离结果不包含接触参数！\n");
+	MATHEMATICS_ASSERTION_2(false, "距离结果不包含接触参数！\n");
 
 	return 0;
 }
@@ -184,4 +184,3 @@ typename Mathematics::DistanceResultImpl<Real, Vector>::ImplTypePtr Mathematics:
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_RESLUT_DETAIL_H
- 

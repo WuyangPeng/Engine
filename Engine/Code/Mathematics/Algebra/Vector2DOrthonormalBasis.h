@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/04 13:57)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 10:16)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR_2D_ORTHONORMA_BASIS_H
 #define MATHEMATICS_ALGEBRA_VECTOR_2D_ORTHONORMA_BASIS_H
@@ -33,17 +33,17 @@ namespace Mathematics
 
 		CLASS_INVARIANT_DECLARE;
 
-	    const Vector2D GetUVector() const;
-	    const Vector2D GetVVector() const;
+		const Vector2D GetUVector() const;
+		const Vector2D GetVVector() const;
 
 	private:
-	    void Generate();
+		void Generate();
 
 	private:
-	    Vector2D m_UVector;
-	    Vector2D m_VVector; 
+		Vector2D m_UVector;
+		Vector2D m_VVector;
 		Real m_Epsilon;
-	};		 	
+	};
 
 	using Vector2DOrthonormalBasisf = Vector2DOrthonormalBasis<float>;
 	using Vector2DOrthonormalBasisd = Vector2DOrthonormalBasis<double>;

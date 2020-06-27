@@ -21,6 +21,8 @@ EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
+	class OStreamShared;
+
 	class CORE_TOOLS_DEFAULT_DECLARE UnitTestFailReportOutput : private boost::noncopyable
 	{
 	public:
@@ -28,7 +30,7 @@ namespace CoreTools
 
 	public:
 		UnitTestFailReportOutput(const std::string& failClassName, const std::string& fileName, int lineNumber,
-								 const std::string& errorMessage, std::ostream* osPtr = &std::cout);
+								 const std::string& errorMessage, const OStreamShared& osPtr);
 
 		CLASS_INVARIANT_DECLARE;
 

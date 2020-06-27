@@ -2,19 +2,23 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.1 (2020/01/20 17:32)
+// 引擎版本：0.2.0.0 (2020/05/08 19:26)
 
-#ifndef SYSTEM_HELPER_PRAGMA_WARNING_TIMER_H
-#define SYSTEM_HELPER_PRAGMA_WARNING_TIMER_H 
+#ifndef SYSTEM_HELPER_PRAGMA_WARNING_FREEGLUT_H
+#define SYSTEM_HELPER_PRAGMA_WARNING_FREEGLUT_H 
 
-#include "System/Helper/PragmaWarning.h"
+#ifdef SYSTEM_USE_GLUT
 
-#include STSTEM_WARNING_PUSH
+	#include "System/Helper/PragmaWarning.h"
 
-#include SYSTEM_WARNING_DISABLE(4505) 
+	#include STSTEM_WARNING_PUSH
 
-	#include <gl/freeglut.h>
+		#include SYSTEM_WARNING_DISABLE(4505) 
 
-#include STSTEM_WARNING_POP
-	  
-#endif // SYSTEM_HELPER_PRAGMA_WARNING_TIMER_H
+		#include <gl/freeglut.h>
+
+	#include STSTEM_WARNING_POP
+
+#endif // SYSTEM_USE_GLUT
+
+#endif // SYSTEM_HELPER_PRAGMA_WARNING_FREEGLUT_H

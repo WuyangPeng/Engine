@@ -40,6 +40,12 @@ namespace Network
 
 		int GetSocketSize() const;
 
+		// 接口名字要换个，和上面的重复了。。。
+		void Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);
+		void Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority);
+		void Remove(int64_t messageID);
+		void Remove(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);
+
 	protected:
 		void Insert(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);
 		void Insert(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority);

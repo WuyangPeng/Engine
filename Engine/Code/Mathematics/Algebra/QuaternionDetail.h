@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/05 18:18)
+// 引擎版本：0.0.2.5 (2020/03/19 14:16)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
@@ -25,16 +25,16 @@ const Mathematics::Quaternion<Real>	Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real>	Mathematics::Quaternion<Real>
-	::sm_Identity{ AlgebraTraits::UnitValue,Real{},Real{},Real{} };
+	::sm_Identity{ Math::sm_One,Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
 
 template <typename Real>
 Mathematics::Quaternion<Real>
 	::Quaternion()
 {
-	m_Tuple[0] = Real{ };
-	m_Tuple[1] = Real{ };
-	m_Tuple[2] = Real{ };
-	m_Tuple[3] = Real{ };
+	m_Tuple[0] = Math::sm_Zero;
+	m_Tuple[1] = Math::sm_Zero;
+	m_Tuple[2] = Math::sm_Zero;
+	m_Tuple[3] = Math::sm_Zero;
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -66,6 +66,7 @@ Mathematics::Quaternion<Real>
 template <typename Real>
 Mathematics::Quaternion<Real>
 	::Quaternion(const Matrix3& matrix)
+	:m_Tuple{}
 {
 	FromRotationMatrix(matrix);
 
@@ -74,7 +75,7 @@ Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::FromRotationMatrix( const Matrix3& matrix )
+	::FromRotationMatrix(const Matrix3& matrix)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -82,59 +83,60 @@ void Mathematics::Quaternion<Real>
 
 	const int next[3]{ 1, 2, 0 };
 
-	auto trace = matrix(0,0) + matrix(1,1) + matrix(2,2);
+	auto trace = matrix(0, 0) + matrix(1, 1) + matrix(2, 2);
 
-	if (Real{} < trace)
+	if (Math::sm_Zero < trace)
 	{
 		// |w| > 1/2, 可能选择 w > 1/2
-		auto root = Math::Sqrt(trace + AlgebraTraits::UnitValue);  // 2w
+		auto root = Math::Sqrt(trace + Math::sm_One);  // 2w
 
 		m_Tuple[0] = static_cast<Real>(0.5) * root;
 		root = static_cast<Real>(0.5) / root;  // 1 / (4w)
-		m_Tuple[1] = (matrix(2,1) - matrix(1,2)) * root;
-		m_Tuple[2] = (matrix(0,2) - matrix(2,0)) * root;
-		m_Tuple[3] = (matrix(1,0) - matrix(0,1)) * root;
+		m_Tuple[1] = (matrix(2, 1) - matrix(1, 2)) * root;
+		m_Tuple[2] = (matrix(0, 2) - matrix(2, 0)) * root;
+		m_Tuple[3] = (matrix(1, 0) - matrix(0, 1)) * root;
 	}
 	else
 	{
 		// |w| <= 1/2
-		int i{ 0 };
-		if(matrix(0,0) < matrix(1,1))
+		auto i = 0;
+		if (matrix(0, 0) < matrix(1, 1))
 		{
 			i = 1;
 		}
-		if(matrix(i,i) < matrix(2,2))
+		if (matrix(i, i) < matrix(2, 2))
 		{
 			i = 2;
-		}		
-		
+		}
+
 		auto j = next[i];
 		auto k = next[j];
 
-		auto root = Math::Sqrt(matrix(i,i) - matrix(j,j) - matrix(k,k) + AlgebraTraits::UnitValue);
+		auto root = Math::Sqrt(matrix(i, i) - matrix(j, j) - matrix(k, k) + Math::sm_One);
 		Real* quat[3] = { &m_Tuple[1], &m_Tuple[2], &m_Tuple[3] };
 		*quat[i] = static_cast<Real>(0.5) * root;
 		root = static_cast<Real>(0.5) / root;
-		m_Tuple[0] = (matrix(k, j) - matrix(j,k)) * root;
-		*quat[j] = (matrix(j,i) + matrix(i ,j) ) * root;
-		*quat[k] = (matrix(k,i)  + matrix(i,k) ) * root;
+		m_Tuple[0] = (matrix(k, j) - matrix(j, k)) * root;
+		*quat[j] = (matrix(j, i) + matrix(i, j)) * root;
+		*quat[k] = (matrix(k, i) + matrix(i, k)) * root;
 	}
 }
 
 template <typename Real>
 Mathematics::Quaternion<Real>
 	::Quaternion(const Vector3D& axis, Real angle)
+	:m_Tuple{}
 {
-	MATHEMATICS_ASSERTION_1(axis.IsNormalize(),  "axis必须是单位向量！");
+	MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
 
-	FromAxisAngle(axis,angle);
+	FromAxisAngle(axis, angle);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::FromAxisAngle( const Vector3D& axis, Real angle )
+	::FromAxisAngle(const Vector3D& axis, Real angle)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 	MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -144,7 +146,7 @@ void Mathematics::Quaternion<Real>
 
 	auto halfAngle = static_cast<Real>(0.5) * angle;
 
-	Real sinValue = Math::Sin(halfAngle);
+	auto sinValue = Math::Sin(halfAngle);
 	m_Tuple[0] = Math::Cos(halfAngle);
 
 	m_Tuple[1] = sinValue * axis[0];
@@ -154,9 +156,10 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>
-	::Quaternion( const std::vector<Vector3D>& rotationColumn )
+	::Quaternion(const std::vector<Vector3D>& rotationColumn)
+	:m_Tuple{}
 {
-	MATHEMATICS_ASSERTION_1(rotationColumn.size() == 3,"数据大小错误！");
+	MATHEMATICS_ASSERTION_1(rotationColumn.size() == 3, "数据大小错误！");
 
 	FromRotationColumnVector3D(rotationColumn);
 
@@ -165,17 +168,17 @@ Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::FromRotationColumnVector3D( const std::vector<Vector3D>& rotationColumn )
+	::FromRotationColumnVector3D(const std::vector<Vector3D>& rotationColumn)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_1(rotationColumn.size() == 3,"数据大小错误！");
-	
-	FromRotationMatrix(Matrix3(rotationColumn,MatrixMajorFlags::Column));
+	MATHEMATICS_ASSERTION_1(rotationColumn.size() == 3, "数据大小错误！");
+
+	FromRotationMatrix(Matrix3(rotationColumn, MatrixMajorFlags::Column));
 }
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator=( const Quaternion& rhs )
+	::operator=(const Quaternion& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -198,22 +201,28 @@ bool Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Real& Mathematics::Quaternion<Real>
-	::operator[]( int index ) const
+	::operator[](int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 4,"索引错误！");
 
-	return m_Tuple[index];
+	if (0 <= index && index < 4)
+	{
+		return m_Tuple[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
 
 template <typename Real>
 Real& Mathematics::Quaternion<Real>
-	::operator[]( int index ) 
+	::operator[](int index)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 4,"索引错误！");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < 4, "索引错误！");
 
-	return OPERATOR_SQUARE_BRACKETS(Real,index);
+	return OPERATOR_SQUARE_BRACKETS(Real, index);
 }
 
 template <typename Real>
@@ -254,7 +263,7 @@ Real Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SetW( Real w )
+	::SetW(Real w)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -263,7 +272,7 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SetX( Real x )
+	::SetX(Real x)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -272,7 +281,7 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SetY( Real y )
+	::SetY(Real y)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -281,17 +290,16 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SetZ( Real z )
+	::SetZ(Real z)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	m_Tuple[3] = z;
 }
 
-
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator*=( const Quaternion& rhs )
+	::operator*=(const Quaternion& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -311,7 +319,7 @@ const  Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator+=( const Quaternion& rhs )
+	::operator+=(const Quaternion& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -325,7 +333,7 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator-=( const Quaternion& rhs )
+	::operator-=(const Quaternion& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -337,10 +345,9 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 	return *this;
 }
 
-
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator*=( Real scalar )
+	::operator*=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -354,11 +361,11 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator/=( Real scalar )
+	::operator/=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if(Math::FAbs(scalar) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(scalar) <= Math::sm_ZeroTolerance)
 	{
 		for (auto i = 0; i < 4; ++i)
 		{
@@ -376,16 +383,15 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 	return *this;
 }
 
-
 template <typename Real>
 typename const Mathematics::Quaternion<Real>::Matrix3 Mathematics::Quaternion<Real>
 	::ToRotationMatrix() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto twoX  = static_cast<Real>(2) * m_Tuple[1];
-	auto twoY  = static_cast<Real>(2) * m_Tuple[2];
-	auto twoZ  = static_cast<Real>(2) * m_Tuple[3];
+	auto twoX = Math::sm_Two * m_Tuple[1];
+	auto twoY = Math::sm_Two * m_Tuple[2];
+	auto twoZ = Math::sm_Two * m_Tuple[3];
 	auto twoWX = twoX * m_Tuple[0];
 	auto twoWY = twoY * m_Tuple[0];
 	auto twoWZ = twoZ * m_Tuple[0];
@@ -396,9 +402,9 @@ typename const Mathematics::Quaternion<Real>::Matrix3 Mathematics::Quaternion<Re
 	auto twoYZ = twoZ * m_Tuple[2];
 	auto twoZZ = twoZ * m_Tuple[3];
 
-	return Matrix3{ AlgebraTraits::UnitValue - (twoYY + twoZZ),twoXY - twoWZ,twoXZ + twoWY,
-				    twoXY + twoWZ,AlgebraTraits::UnitValue - (twoXX + twoZZ),twoYZ - twoWX,
-				    twoXZ - twoWY,twoYZ + twoWX,AlgebraTraits::UnitValue - (twoXX + twoYY) };
+	return Matrix3{ Math::sm_One - (twoYY + twoZZ),twoXY - twoWZ,twoXZ + twoWY,
+					twoXY + twoWZ,Math::sm_One - (twoXX + twoZZ),twoYZ - twoWX,
+					twoXZ - twoWY,twoYZ + twoWX,Math::sm_One - (twoXX + twoYY) };
 }
 
 template <typename Real>
@@ -413,10 +419,10 @@ const std::vector<typename Mathematics::Quaternion<Real>::Vector3D> Mathematics:
 
 	for (auto column = 0; column < 3; ++column)
 	{
-		columnVector3DVector.emplace_back(matrix(0,column),matrix(1,column),matrix(2,column));		
+		columnVector3DVector.emplace_back(matrix(0, column), matrix(1, column), matrix(2, column));
 	}
 
-	MATHEMATICS_ASSERTION_1(columnVector3DVector.size() == 3,"返回的向量大小错误！");
+	MATHEMATICS_ASSERTION_1(columnVector3DVector.size() == 3, "返回的向量大小错误！");
 
 	return columnVector3DVector;
 }
@@ -440,35 +446,35 @@ typename const Mathematics::Quaternion<Real>::Vector3D Mathematics::Quaternion<R
 	else
 	{
 		// 角度是 0 (2 * pi的模), 所以任何轴都行。
-		return Vector3D::sm_UnitX;		
+		return Vector3D::sm_UnitX;
 	}
 }
 
 template <typename Real>
 Real Mathematics::Quaternion<Real>
-    ::ToAngle() const
+	::ToAngle() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto sqrareLength = m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] +	m_Tuple[3] * m_Tuple[3];
+	auto sqrareLength = m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] + m_Tuple[3] * m_Tuple[3];
 
 	if (Math::sm_ZeroTolerance < sqrareLength)
 	{
-		return static_cast<Real>(2) * Math::ACos(m_Tuple[0]);
+		return Math::sm_Two * Math::ACos(m_Tuple[0]);
 	}
 	else
 	{
-		return Real{};
+		return Math::sm_Zero;
 	}
 }
 
 template <typename Real>
 typename const Mathematics::Quaternion<Real>::Matrix3Extract Mathematics::Quaternion<Real>
-	   ::ToAngleAxis() const
+	::ToAngleAxis() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return Matrix3Extract(ToAngle(),ToAxis());
+	return Matrix3Extract{ ToAngle(), ToAxis() };
 }
 
 template <typename Real>
@@ -489,10 +495,9 @@ Real Mathematics::Quaternion<Real>
 	return m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] + m_Tuple[3] * m_Tuple[3];
 }
 
-
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::Normalize( Real epsilon )
+	::Normalize(Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -507,12 +512,12 @@ void Mathematics::Quaternion<Real>
 	}
 	else
 	{
-		MATHEMATICS_ASSERTION_1(false,"四元数正则化错误！");
+		MATHEMATICS_ASSERTION_1(false, "四元数正则化错误！");
 
-		m_Tuple[0] = Real{ };
-		m_Tuple[1] = Real{ };
-		m_Tuple[2] = Real{ };
-		m_Tuple[3] = Real{ };
+		m_Tuple[0] = Math::sm_Zero;
+		m_Tuple[1] = Math::sm_Zero;
+		m_Tuple[2] = Math::sm_Zero;
+		m_Tuple[3] = Math::sm_Zero;
 	}
 }
 
@@ -529,20 +534,19 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		return Quaternion{ m_Tuple[0] / norm, -m_Tuple[1] / norm, -m_Tuple[2] / norm, -m_Tuple[3] / norm };
 	}
 	else
-	{	
-		MATHEMATICS_ASSERTION_1(false,"返回一个无效的结果来标记错误！");
+	{
+		MATHEMATICS_ASSERTION_1(false, "返回一个无效的结果来标记错误！");
 
 		return Quaternion{};
 	}
 }
-
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	::Conjugate() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	
+
 	return Quaternion{ m_Tuple[0], -m_Tuple[1], -m_Tuple[2], -m_Tuple[3] };
 }
 
@@ -551,7 +555,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	::Exp() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Tuple[0]) <= Math::sm_ZeroTolerance,"四元数w必须等于0！");
+	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Tuple[0]) <= Math::sm_ZeroTolerance, "四元数w必须等于0！");
 
 	// 如果 q = A * (x*i+y*j+z*k) 这里 (x,y,z) 是单位长度，然后
 	// exp(q) = cos(A) + sin(A)*(x*i+y*j+z*k)。
@@ -597,9 +601,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	// 因为 A/sin(A) 趋向于 1。
 
 	Quaternion result;
-	result.m_Tuple[0] = Real{ };
+	result.m_Tuple[0] = Math::sm_Zero;
 
-	if (Math::FAbs(m_Tuple[0]) < static_cast<Real>(1))
+	if (Math::FAbs(m_Tuple[0]) < Math::sm_One)
 	{
 		auto angle = Math::ACos(m_Tuple[0]);
 		auto sinValue = Math::Sin(angle);
@@ -623,13 +627,12 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	return result;
 }
 
-
 template <typename Real>
 typename const Mathematics::Quaternion<Real>::Vector3D Mathematics::Quaternion<Real>
-	::Rotate( const Vector3D& vector ) const
+	::Rotate(const Vector3D& vector) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	
+
 	// 给定一个向量u = (x0,y0,z0)和单位长度的四元数q = <w,x,y,z>
 	// 向量v = (x1,y1,z1)，它代表u使用q旋转为v = q*u*q^{-1}，
 	// 其中*表示四元数乘法和其中u被视为四元数<0,x0,y0,z0>。
@@ -652,14 +655,13 @@ typename const Mathematics::Quaternion<Real>::Vector3D Mathematics::Quaternion<R
 	return matrix * vector;
 }
 
-
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::Slerp( Real t, const Quaternion& firstQuaternion, const Quaternion& secondQuaternion )
+	::Slerp(Real t, const Quaternion& firstQuaternion, const Quaternion& secondQuaternion)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;	
+	MATHEMATICS_CLASS_IS_VALID_9;
 
-	auto cosValue = Dot(firstQuaternion,secondQuaternion);
+	auto cosValue = Dot(firstQuaternion, secondQuaternion);
 	auto angle = Math::ACos(cosValue);
 
 	if (Math::sm_ZeroTolerance <= Math::FAbs(angle))
@@ -677,16 +679,16 @@ void Mathematics::Quaternion<Real>
 	else
 	{
 		*this = firstQuaternion;
-	}	
+	}
 }
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SlerpExtraSpins( Real t, const Quaternion& firstQuaternion,const Quaternion& secondQuaternion, int extraSpins )
+	::SlerpExtraSpins(Real t, const Quaternion& firstQuaternion, const Quaternion& secondQuaternion, int extraSpins)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	auto cosValue = Dot(firstQuaternion,secondQuaternion);
+	auto cosValue = Dot(firstQuaternion, secondQuaternion);
 	auto angle = Math::ACos(cosValue);
 
 	if (Math::sm_ZeroTolerance <= Math::FAbs(angle))
@@ -694,7 +696,7 @@ void Mathematics::Quaternion<Real>
 		auto sinValue = Math::Sin(angle);
 		auto phase = Math::sm_PI * extraSpins * t;
 
-		auto coeff0 = Math::Sin((static_cast<Real>(1) - t) * angle - phase) / sinValue;
+		auto coeff0 = Math::Sin((Math::sm_One - t) * angle - phase) / sinValue;
 		auto coeff1 = Math::Sin(t * angle + phase) / sinValue;
 
 		m_Tuple[0] = coeff0 * firstQuaternion.m_Tuple[0] + coeff1 * secondQuaternion.m_Tuple[0];
@@ -710,7 +712,7 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 bool Mathematics::Quaternion<Real>
-	::IsNormalize (Real epsilon) const
+	::IsNormalize(Real epsilon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -728,10 +730,10 @@ bool Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::Intermediate( const Quaternion& firstQuaternion,const Quaternion& secondQuaternion,const Quaternion& thirdQuaternion )
+	::Intermediate(const Quaternion& firstQuaternion, const Quaternion& secondQuaternion, const Quaternion& thirdQuaternion)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_1(firstQuaternion.IsNormalize() && secondQuaternion.IsNormalize() && thirdQuaternion.IsNormalize(),"firstQuaternion、secondQuaternion、thirdQuaternion必须都是单位长度！");
+	MATHEMATICS_ASSERTION_1(firstQuaternion.IsNormalize() && secondQuaternion.IsNormalize() && thirdQuaternion.IsNormalize(), "firstQuaternion、secondQuaternion、thirdQuaternion必须都是单位长度！");
 
 	auto secondQuaternionConjugate = secondQuaternion.Conjugate();
 	auto p0 = secondQuaternionConjugate * firstQuaternion;
@@ -744,11 +746,11 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::Squad( Real t, const Quaternion& q0,const Quaternion& a0, const Quaternion& a1, const Quaternion& q1 )
+	::Squad(Real t, const Quaternion& q0, const Quaternion& a0, const Quaternion& a1, const Quaternion& q1)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	
-	auto slerpT = static_cast<Real>(2) * t * (static_cast<Real>(1) - t);
+
+	auto slerpT = Math::sm_Two * t * (Math::sm_One - t);
 
 	Quaternion slerpP;
 	slerpP.Slerp(t, q0, q1);
@@ -761,10 +763,10 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::Align( const Vector3D& firstVector, const Vector3D& secondVector,Real epsilon)
+	::Align(const Vector3D& firstVector, const Vector3D& secondVector, Real epsilon)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
-	MATHEMATICS_ASSERTION_1(firstVector.IsNormalize(epsilon) && secondVector.IsNormalize(epsilon),"firstVector和secondVector必须是单位向量！");
+	MATHEMATICS_ASSERTION_1(firstVector.IsNormalize(epsilon) && secondVector.IsNormalize(epsilon), "firstVector和secondVector必须是单位向量！");
 
 	// 如果firstVector和secondVector是不平行的，
 	// 旋转的轴是单位长度的向量
@@ -776,7 +778,7 @@ void Mathematics::Quaternion<Real>
 	// (1) 与其提取A = acos(Dot(firstVector,secondVector))，
 	//     乘以1/2，然后计算sin(A/2)和cos(A/2)，
 	//     我们减少计算成本去计算平分线
-    //     B = (firstVector+secondVector)/Length(firstVector+secondVector)，
+	//     B = (firstVector+secondVector)/Length(firstVector+secondVector)，
 	//     从而cos(A/2) =  Dot(firstVector,B)。
 	//
 	// (2) 旋转轴为U = Cross(firstVector,B)/Length(Cross(firstVector,B))，
@@ -791,7 +793,7 @@ void Mathematics::Quaternion<Real>
 	// 在这种情况下，A = pi和垂直于firstVector的任何轴都可以被用作旋转轴。
 
 	auto bisector = firstVector + secondVector;
-	if (Math::Approximate(Vector3DTools::VectorMagnitude(bisector), Real{}, epsilon))
+	if (Math::Approximate(Vector3DTools::VectorMagnitude(bisector), Math::sm_Zero, epsilon))
 	{
 		bisector.ZeroOut();
 	}
@@ -800,13 +802,13 @@ void Mathematics::Quaternion<Real>
 		bisector.Normalize(epsilon);
 	}
 
-	auto cosHalfAngle = Vector3DTools::DotProduct(firstVector,bisector);
+	auto cosHalfAngle = Vector3DTools::DotProduct(firstVector, bisector);
 
 	m_Tuple[0] = cosHalfAngle;
 
-	if (!Math::Approximate(cosHalfAngle, Real{}, epsilon))
+	if (!Math::Approximate(cosHalfAngle, Math::sm_Zero, epsilon))
 	{
-		auto cross = Vector3DTools::CrossProduct(firstVector,bisector);
+		auto cross = Vector3DTools::CrossProduct(firstVector, bisector);
 		m_Tuple[1] = cross.GetXCoordinate();
 		m_Tuple[2] = cross.GetYCoordinate();
 		m_Tuple[3] = cross.GetZCoordinate();
@@ -818,14 +820,14 @@ void Mathematics::Quaternion<Real>
 			// V1.x或V1.z是最大规模的组成部分。
 			auto invLength = Math::InvSqrt(firstVector[0] * firstVector[0] + firstVector[2] * firstVector[2]);
 			m_Tuple[1] = -firstVector[2] * invLength;
-			m_Tuple[2] = Real{ };
+			m_Tuple[2] = Math::sm_Zero;
 			m_Tuple[3] = +firstVector[0] * invLength;
 		}
 		else
 		{
 			// V1.y或V1.z是最大规模的组成部分。	
 			auto invLength = Math::InvSqrt(firstVector[1] * firstVector[1] + firstVector[2] * firstVector[2]);
-			m_Tuple[1] = Real{ };
+			m_Tuple[1] = Math::sm_Zero;
 			m_Tuple[2] = +firstVector[2] * invLength;
 			m_Tuple[3] = -firstVector[1] * invLength;
 		}
@@ -834,13 +836,13 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 typename const Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::Quaternion<Real>
-	::DecomposeTwistTimesSwing( const Vector3D& vector,Real epsilon) const
+	::DecomposeTwistTimesSwing(const Vector3D& vector, Real epsilon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	auto v2 = Rotate(vector);
 	Quaternion swing;
-	swing.Align(vector, v2,epsilon);
+	swing.Align(vector, v2, epsilon);
 	auto twist = (*this) * swing.Conjugate();
 
 	return QuaternionSwingTwist(swing, twist);
@@ -848,13 +850,13 @@ typename const Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::
 
 template <typename Real>
 typename const Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::Quaternion<Real>
-	::DecomposeSwingTimesTwist( const Vector3D& vector,Real epsilon ) const
+	::DecomposeSwingTimesTwist(const Vector3D& vector, Real epsilon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	auto v2 = Rotate(vector);
 	Quaternion swing;
-	swing.Align(vector, v2,epsilon);
+	swing.Align(vector, v2, epsilon);
 	auto twist = swing.Conjugate() * (*this);
 
 	return QuaternionSwingTwist(swing, twist);
@@ -890,9 +892,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 // private
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosest( QuaternionClosestAxis axis ) const
+	::GetClosest(QuaternionClosestAxis axis) const
 {
- 
+
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	auto axisIndex = System::EnumCastUnderlying(axis);
@@ -912,13 +914,12 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	else
 	{
 		// 无穷多解，选择theta = 0。
-		quaternion[0] = static_cast<Real>(1);
-		quaternion[axisIndex] = Real{ };
+		quaternion[0] = Math::sm_One;
+		quaternion[axisIndex] = Math::sm_Zero;
 	}
 
 	return quaternion;
 }
-
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
@@ -928,18 +929,18 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	auto det = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
 
-	if(Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
 	{
-		auto discr = static_cast<Real>(1) - static_cast<Real>(4) * det * det;
+		auto discr = Math::sm_One - static_cast<Real>(4) * det * det;
 		discr = Math::Sqrt(Math::FAbs(discr));
 
 		auto a = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
 		auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
-		Real c0 { };
-		Real s0 { };
+		auto c0 = Math::sm_Zero;
+		auto s0 = Math::sm_Zero;
 
-		if (Real{} <= b)
+		if (Math::sm_Zero <= b)
 		{
 			c0 = static_cast<Real>(0.5) * (discr + b);
 			s0 = a;
@@ -966,7 +967,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	{
 		auto invLength = Math::InvSqrt(Math::FAbs(det));
 
-		return Quaternion{ m_Tuple[0] * invLength,m_Tuple[1] * invLength,Real{},Real{} };
+		return Quaternion{ m_Tuple[0] * invLength,m_Tuple[1] * invLength,Math::sm_Zero,Math::sm_Zero };
 	}
 }
 
@@ -1034,7 +1035,6 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	return quaternion;
 }
 
-
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	::GetClosestZY() const
@@ -1051,7 +1051,6 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	return quaternion;
 }
-
 
 template <typename Real>
 typename const Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>
@@ -1107,10 +1106,9 @@ typename const Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quat
 	return QuaternionFactor{ *this,QuaternionFactorFlags::ZYX };
 }
 
-
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestX( const QuaternionConstraints& xCon ) const
+	::GetClosestX(const QuaternionConstraints& xCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1119,7 +1117,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestY( const QuaternionConstraints& yCon ) const
+	::GetClosestY(const QuaternionConstraints& yCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1128,7 +1126,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestZ( const QuaternionConstraints& zCon ) const
+	::GetClosestZ(const QuaternionConstraints& zCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1137,15 +1135,15 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosest( QuaternionClosestAxis axis, const QuaternionConstraints& con ) const
-{ 
+	::GetClosest(QuaternionClosestAxis axis, const QuaternionConstraints& con) const
+{
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	// 各元素初始化为零
 	Quaternion quaternion;
 
 	auto p0 = m_Tuple[0];
-	auto p1 = m_Tuple[(int)axis];
+	auto p1 = m_Tuple[System::EnumCastUnderlying(axis)];
 	auto sqrLength = p0 * p0 + p1 * p1;
 	if (Math::sm_ZeroTolerance < sqrLength)
 	{
@@ -1156,7 +1154,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		{
 			// 最大值出现在内部点
 			quaternion[0] = p0;
-			quaternion[(int)axis] = p1;
+			quaternion[System::EnumCastUnderlying(axis)] = p1;
 		}
 		else
 		{
@@ -1164,7 +1162,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto cosValueMin = con.GetCosMinAngle();
 			auto sinValueMin = con.GetSinMinAngle();
 			auto dotMinAngle = p0 * cosValueMin + p1 * sinValueMin;
-			if (dotMinAngle < Real{})
+			if (dotMinAngle < Math::sm_Zero)
 			{
 				cosValueMin = -cosValueMin;
 				sinValueMin = -sinValueMin;
@@ -1174,7 +1172,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto cosValueMax = con.GetCosMaxAngle();
 			auto sinValueMax = con.GetSinMaxAngle();
 			auto dotMaxAngle = p0 * cosValueMax + p1 * sinValueMax;
-			if (dotMaxAngle < Real{})
+			if (dotMaxAngle < Math::sm_Zero)
 			{
 				cosValueMax = -cosValueMax;
 				sinValueMax = -sinValueMax;
@@ -1184,20 +1182,20 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			if (dotMinAngle <= dotMaxAngle)
 			{
 				quaternion[0] = cosValueMax;
-				quaternion[(int)axis] = sinValueMax;
+				quaternion[System::EnumCastUnderlying(axis)] = sinValueMax;
 			}
 			else
 			{
 				quaternion[0] = cosValueMin;
-				quaternion[(int)axis] = sinValueMin;
+				quaternion[System::EnumCastUnderlying(axis)] = sinValueMin;
 			}
 		}
 	}
 	else
-	{		
+	{
 		// 无穷多解，选择一个满足的角度约束。
 		quaternion[0] = con.GetCosAvrAngle();
-		quaternion[(int)axis] = con.GetSinAvrAngle();
+		quaternion[System::EnumCastUnderlying(axis)] = con.GetSinAvrAngle();
 	}
 
 	return quaternion;
@@ -1205,7 +1203,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestXY( const QuaternionConstraints& xCon,const QuaternionConstraints& yCon ) const
+	::GetClosestXY(const QuaternionConstraints& xCon, const QuaternionConstraints& yCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1213,14 +1211,14 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
 	{
-		auto discr = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - (static_cast<Real>(4)) * det * det));
+		auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
 		auto a = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
 		auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
-		Real c0 { };
-		Real s0 { };
+		Real c0{ };
+		Real s0{ };
 
-		if (Real{} <= b)
+		if (Math::sm_Zero <= b)
 		{
 			c0 = static_cast<Real>(0.5) * (discr + b);
 			s0 = a;
@@ -1244,45 +1242,45 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		if (xCon.IsValid(c0, s0) && yCon.IsValid(c1, s1))
 		{
 			// 最大值发生在内部点。
-			return Quaternion(c0 * c1,s0 * c1,c0 * s1,s0 * s1);			
+			return Quaternion(c0 * c1, s0 * c1, c0 * s1, s0 * s1);
 		}
 		else
 		{
 			// 最大值出现在边界点。
-			Quaternion r{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(),Real{}, Real{} };
-			Quaternion rInv{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(),Real{}, Real{} };
+			Quaternion r{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(),Math::sm_Zero, Math::sm_Zero };
+			Quaternion rInv{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(),Math::sm_Zero, Math::sm_Zero };
 			auto prod = rInv * (*this);
 			auto tmp = prod.GetClosest(QuaternionClosestAxis::Y, yCon);
-			auto dotOptAngle = Dot(prod,tmp);
+			auto dotOptAngle = Dot(prod, tmp);
 			auto quaternion = r * tmp;
 
-			r = Quaternion(xCon.GetCosMaxAngle(), xCon.GetSinMaxAngle(), Real{}, Real{});
-			rInv = Quaternion(xCon.GetCosMaxAngle(), -xCon.GetSinMaxAngle(), Real{}, Real{});
+			r = Quaternion(xCon.GetCosMaxAngle(), xCon.GetSinMaxAngle(), Math::sm_Zero, Math::sm_Zero);
+			rInv = Quaternion(xCon.GetCosMaxAngle(), -xCon.GetSinMaxAngle(), Math::sm_Zero, Math::sm_Zero);
 			prod = rInv * (*this);
 			tmp = prod.GetClosest(QuaternionClosestAxis::Y, yCon);
-			auto dotAngle = Dot(prod,tmp);
+			auto dotAngle = Dot(prod, tmp);
 			if (dotOptAngle < dotAngle)
 			{
 				quaternion = r * tmp;
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ yCon.GetCosMinAngle(), Real{},yCon.GetSinMinAngle(), Real{} };
-			rInv = Quaternion{ yCon.GetCosMinAngle(), Real{},-yCon.GetSinMinAngle(), Real{} };
+			r = Quaternion{ yCon.GetCosMinAngle(), Math::sm_Zero,yCon.GetSinMinAngle(), Math::sm_Zero };
+			rInv = Quaternion{ yCon.GetCosMinAngle(), Math::sm_Zero,-yCon.GetSinMinAngle(), Math::sm_Zero };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::X, xCon);
-			dotAngle = Dot(prod,tmp);
+			dotAngle = Dot(prod, tmp);
 			if (dotOptAngle < dotAngle)
 			{
 				quaternion = tmp * r;
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ yCon.GetCosMaxAngle(), Real{},yCon.GetSinMaxAngle(), Real{} };
-			rInv = Quaternion{ yCon.GetCosMaxAngle(), Real{},-yCon.GetSinMaxAngle(), Real{} };
+			r = Quaternion{ yCon.GetCosMaxAngle(), Math::sm_Zero,yCon.GetSinMaxAngle(), Math::sm_Zero };
+			rInv = Quaternion{ yCon.GetCosMaxAngle(), Math::sm_Zero,-yCon.GetSinMaxAngle(), Math::sm_Zero };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::X, xCon);
-			dotAngle = Dot(prod,tmp);
+			dotAngle = Dot(prod, tmp);
 			if (dotOptAngle < dotAngle)
 			{
 				quaternion = tmp * r;
@@ -1293,14 +1291,14 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		}
 	}
 	else
-	{		
+	{
 		// 无穷多解，选择一个满足约束的角度。
-		Real c0 { };
-		Real s0 { };
-		Real c1 { };
-		Real s1 { };
+		auto c0 = Math::sm_Zero;
+		auto s0 = Math::sm_Zero;
+		auto c1 = Math::sm_Zero;
+		auto s1 = Math::sm_Zero;
 
-		if (Real{} < det)
+		if (Math::sm_Zero < det)
 		{
 			auto minAngle = xCon.GetMinAngle() - yCon.GetMaxAngle();
 			auto maxAngle = xCon.GetMaxAngle() - yCon.GetMinAngle();
@@ -1311,9 +1309,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Real{} <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
-				
-				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle,"angle的值必须在minAngle和maxAngle之间！");
+				angle -= (Math::sm_Zero <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
+
+				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
 
 			if (angle <= xCon.GetMaxAngle() - yCon.GetMaxAngle())
@@ -1344,9 +1342,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Real{} <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::sm_Zero <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
 
-				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle,"angle的值必须在minAngle和maxAngle之间！");
+				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
 
 			if (xCon.GetMinAngle() + yCon.GetMaxAngle() <= angle)
@@ -1369,18 +1367,18 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		Quaternion quaternion{ c0 * c1,s0 * c1,c0 * s1,s0 * s1 };
 
-		if (Dot(*this, quaternion) < Real{})
+		if (Dot(*this, quaternion) < Math::sm_Zero)
 		{
 			quaternion = -quaternion;
 		}
 
 		return quaternion;
-	}	
+	}
 }
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestYX( const QuaternionConstraints& yCon,const QuaternionConstraints& xCon ) const
+	::GetClosestYX(const QuaternionConstraints& yCon, const QuaternionConstraints& xCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1394,7 +1392,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestZX( const QuaternionConstraints& zCon,const QuaternionConstraints& xCon ) const
+	::GetClosestZX(const QuaternionConstraints& zCon, const QuaternionConstraints& xCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1402,15 +1400,15 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
 	{
-		auto discr = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - (static_cast<Real>(4)) * det * det));
+		auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
 
 		auto a = m_Tuple[0] * m_Tuple[3] + m_Tuple[1] * m_Tuple[2];
 		auto b = m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] - m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
-		Real c2 { };
-		Real s2 { };
+		auto c2 = Math::sm_Zero;
+		auto s2 = Math::sm_Zero;
 
-		if (Real{} <= b)
+		if (Math::sm_Zero <= b)
 		{
 			c2 = static_cast<Real>(0.5) * (discr + b);
 			s2 = a;
@@ -1439,40 +1437,40 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		else
 		{
 			// 最大值出现在边界点。
-			Quaternion r{ zCon.GetCosMinAngle(), Real{}, Real{},zCon.GetSinMinAngle() };
-			Quaternion rInv{ zCon.GetCosMinAngle(), Real{}, Real{},-zCon.GetSinMinAngle() };
+			Quaternion r{ zCon.GetCosMinAngle(), Math::sm_Zero, Math::sm_Zero,zCon.GetSinMinAngle() };
+			Quaternion rInv{ zCon.GetCosMinAngle(), Math::sm_Zero, Math::sm_Zero,-zCon.GetSinMinAngle() };
 			auto prod = rInv * (*this);
 			auto tmp = prod.GetClosest(QuaternionClosestAxis::X, xCon);
-			auto dotOptAngle = Dot(prod,tmp);
+			auto dotOptAngle = Dot(prod, tmp);
 			auto quaternion = r * tmp;
 
-			r = Quaternion{ zCon.GetCosMaxAngle(), Real{}, Real{},zCon.GetSinMaxAngle() };
-			rInv = Quaternion{ zCon.GetCosMaxAngle(), Real{}, Real{},-zCon.GetSinMaxAngle() };
+			r = Quaternion{ zCon.GetCosMaxAngle(), Math::sm_Zero, Math::sm_Zero,zCon.GetSinMaxAngle() };
+			rInv = Quaternion{ zCon.GetCosMaxAngle(), Math::sm_Zero, Math::sm_Zero,-zCon.GetSinMaxAngle() };
 			prod = rInv * (*this);
 			tmp = prod.GetClosest(QuaternionClosestAxis::X, xCon);
-			auto dotAngle = Dot(prod,tmp);
+			auto dotAngle = Dot(prod, tmp);
 			if (dotOptAngle < dotAngle)
 			{
 				quaternion = r * tmp;
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(),Real {}, Real{} };
-			rInv = Quaternion{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(), Real{},  Real{} };
+			r = Quaternion{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(),Math::sm_Zero, Math::sm_Zero };
+			rInv = Quaternion{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(), Math::sm_Zero,  Math::sm_Zero };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::Z, zCon);
-			dotAngle = Dot(prod,tmp);
+			dotAngle = Dot(prod, tmp);
 			if (dotAngle > dotOptAngle)
 			{
 				quaternion = tmp * r;
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ xCon.GetCosMaxAngle(), xCon.GetSinMaxAngle(), Real{}, Real{} };
-			rInv = Quaternion{ xCon.GetCosMaxAngle(), -xCon.GetSinMaxAngle(), Real{},  Real{} };
+			r = Quaternion{ xCon.GetCosMaxAngle(), xCon.GetSinMaxAngle(), Math::sm_Zero, Math::sm_Zero };
+			rInv = Quaternion{ xCon.GetCosMaxAngle(), -xCon.GetSinMaxAngle(), Math::sm_Zero,  Math::sm_Zero };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::Z, zCon);
-			dotAngle = Dot(prod,tmp);
+			dotAngle = Dot(prod, tmp);
 			if (dotOptAngle < dotAngle)
 			{
 				quaternion = tmp * r;
@@ -1483,14 +1481,14 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		}
 	}
 	else
-	{		
+	{
 		// 无穷多解，选择一个满足约束的角度。
-		Real c0 { };
-		Real s0 { };
-		Real c2 { };
-		Real s2 { };
+		auto c0 = Math::sm_Zero;
+		auto s0 = Math::sm_Zero;
+		auto c2 = Math::sm_Zero;
+		auto s2 = Math::sm_Zero;
 
-		if (Real{} < det)
+		if (Math::sm_Zero < det)
 		{
 			auto minAngle = xCon.GetMinAngle() - zCon.GetMaxAngle();
 			auto maxAngle = xCon.GetMaxAngle() - zCon.GetMinAngle();
@@ -1501,9 +1499,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Real{} <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::sm_Zero <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
 
-				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle,"angle的值必须在minAngle和maxAngle之间！");
+				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
 
 			if (angle <= xCon.GetMaxAngle() - zCon.GetMaxAngle())
@@ -1534,9 +1532,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Real{} <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::sm_Zero <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
 
-			    MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle,"angle的值必须在minAngle和maxAngle之间！");
+				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
 
 			if (xCon.GetMinAngle() + zCon.GetMaxAngle() <= angle)
@@ -1559,24 +1557,24 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		Quaternion quaternion{ c2 * c0,c2 * s0, s2 * s0,s2 * c0 };
 
-		if (Dot(*this, quaternion) < Real{})
+		if (Dot(*this, quaternion) < Math::sm_Zero)
 		{
 			quaternion = -quaternion;
 		}
 
-		return quaternion;		
+		return quaternion;
 	}
 }
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestXZ( const QuaternionConstraints& xCon,const QuaternionConstraints& zCon ) const
+	::GetClosestXZ(const QuaternionConstraints& xCon, const QuaternionConstraints& zCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	Quaternion alt{ m_Tuple[0], m_Tuple[1], -m_Tuple[2], m_Tuple[3] };
 
-	auto quaternion = alt.GetClosestZX(zCon,xCon);
+	auto quaternion = alt.GetClosestZX(zCon, xCon);
 	quaternion[2] = -quaternion[2];
 
 	return quaternion;
@@ -1584,7 +1582,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestZY( const QuaternionConstraints& zCon,const QuaternionConstraints& yCon ) const
+	::GetClosestZY(const QuaternionConstraints& zCon, const QuaternionConstraints& yCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1592,15 +1590,15 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
 	{
-		auto discr = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - (static_cast<Real>(4)) * det * det));
+		auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
 
 		auto a = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
 		auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
-		Real c2 { };
-		Real s2 { };
+		auto c2 = Math::sm_Zero;
+		auto s2 = Math::sm_Zero;
 
-		if (Real{} <= b)
+		if (Math::sm_Zero <= b)
 		{
 			c2 = static_cast<Real>(0.5) * (discr + b);
 			s2 = a;
@@ -1628,58 +1626,58 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		else
 		{
 			// 最大值出现在边界点。
-			Quaternion r{ zCon.GetCosMinAngle(), Real{}, Real{}, zCon.GetSinMinAngle() };
-			Quaternion rInv{ zCon.GetCosMinAngle(), Real{}, Real{},-zCon.GetSinMinAngle() };
+			Quaternion r{ zCon.GetCosMinAngle(), Math::sm_Zero, Math::sm_Zero, zCon.GetSinMinAngle() };
+			Quaternion rInv{ zCon.GetCosMinAngle(), Math::sm_Zero, Math::sm_Zero,-zCon.GetSinMinAngle() };
 			auto prod = rInv * (*this);
 			auto tmp = prod.GetClosest(QuaternionClosestAxis::Y, yCon);
-			auto dotOptAngle = Dot(prod,tmp);
+			auto dotOptAngle = Dot(prod, tmp);
 			auto quaternion = r * tmp;
 
-			r = Quaternion{ zCon.GetCosMaxAngle(), Real{}, Real{}, zCon.GetSinMaxAngle() };
-			rInv = Quaternion{ zCon.GetCosMaxAngle(), Real{}, Real{}, -zCon.GetSinMaxAngle() };
+			r = Quaternion{ zCon.GetCosMaxAngle(), Math::sm_Zero, Math::sm_Zero, zCon.GetSinMaxAngle() };
+			rInv = Quaternion{ zCon.GetCosMaxAngle(), Math::sm_Zero, Math::sm_Zero, -zCon.GetSinMaxAngle() };
 			prod = rInv * (*this);
 			tmp = prod.GetClosest(QuaternionClosestAxis::Y, yCon);
-			auto dotAngle = Dot(prod,tmp);
+			auto dotAngle = Dot(prod, tmp);
 			if (dotOptAngle < dotAngle)
 			{
 				quaternion = r * tmp;
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ yCon.GetCosMinAngle(), Real{},yCon.GetSinMinAngle(), Real{} };
-			rInv = Quaternion{ yCon.GetCosMinAngle(), Real{},-yCon.GetSinMinAngle(), Real{} };
+			r = Quaternion{ yCon.GetCosMinAngle(), Math::sm_Zero,yCon.GetSinMinAngle(), Math::sm_Zero };
+			rInv = Quaternion{ yCon.GetCosMinAngle(), Math::sm_Zero,-yCon.GetSinMinAngle(), Math::sm_Zero };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::Z, zCon);
-			dotAngle = Dot(prod,tmp);
+			dotAngle = Dot(prod, tmp);
 			if (dotOptAngle < dotAngle)
 			{
 				quaternion = tmp * r;
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ yCon.GetCosMaxAngle(), Real{},yCon.GetSinMaxAngle(), Real{} };
-			rInv = Quaternion{ yCon.GetCosMaxAngle(), Real{},-yCon.GetSinMaxAngle(), Real{} };
+			r = Quaternion{ yCon.GetCosMaxAngle(), Math::sm_Zero,yCon.GetSinMaxAngle(), Math::sm_Zero };
+			rInv = Quaternion{ yCon.GetCosMaxAngle(), Math::sm_Zero,-yCon.GetSinMaxAngle(), Math::sm_Zero };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::Z, zCon);
-			dotAngle = Dot(prod,tmp);
+			dotAngle = Dot(prod, tmp);
 			if (dotOptAngle < dotAngle)
 			{
 				quaternion = tmp * r;
 				dotOptAngle = dotAngle;
 			}
-			
+
 			return quaternion;
 		}
 	}
 	else
 	{
 		/// 无穷多解，选择一个满足约束的角度。
-		Real c1 { };
-		Real s1 { };
-		Real c2 { };
-		Real s2 { };
+		auto c1 = Math::sm_Zero;
+		auto s1 = Math::sm_Zero;
+		auto c2 = Math::sm_Zero;
+		auto s2 = Math::sm_Zero;
 
-		if (det < Real{})
+		if (det < Math::sm_Zero)
 		{
 			auto minAngle = yCon.GetMinAngle() - zCon.GetMaxAngle();
 			auto maxAngle = yCon.GetMaxAngle() - zCon.GetMinAngle();
@@ -1690,9 +1688,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[2], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Real{} <= tmp[2] ? Math::sm_PI : -Math::sm_PI);
-				
-				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle,"angle的值必须在minAngle和maxAngle之间！");
+				angle -= (Math::sm_Zero <= tmp[2] ? Math::sm_PI : -Math::sm_PI);
+
+				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
 
 			if (angle <= yCon.GetMaxAngle() - zCon.GetMaxAngle())
@@ -1723,9 +1721,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[2], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Real{} <= tmp[2] ? Math::sm_PI : -Math::sm_PI);
-				
-				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle,"angle的值必须在minAngle和maxAngle之间！");
+				angle -= (Math::sm_Zero <= tmp[2] ? Math::sm_PI : -Math::sm_PI);
+
+				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
 
 			if (yCon.GetMinAngle() + zCon.GetMaxAngle() <= angle)
@@ -1748,18 +1746,18 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		Quaternion quaternion{ c2 * c1,-s2 * s1, c2 * s1,s2 * c1 };
 
-		if (Dot(*this,quaternion) < Real{})
+		if (Dot(*this, quaternion) < Math::sm_Zero)
 		{
 			quaternion = -quaternion;
 		}
 
-		return quaternion;				
+		return quaternion;
 	}
 }
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::GetClosestYZ( const QuaternionConstraints& yCon,const QuaternionConstraints& zCon ) const
+	::GetClosestYZ(const QuaternionConstraints& yCon, const QuaternionConstraints& zCon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1775,65 +1773,62 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 bool Mathematics
-	::operator==( const Quaternion<Real>& lhs,const Quaternion<Real>& rhs )
+	::operator==(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs)
 {
 	return memcmp(&lhs[0], &rhs[0], 4 * sizeof(Real)) == 0;
 }
 
 template <typename Real>
 bool Mathematics
-	::operator<( const Quaternion<Real>& lhs,const Quaternion<Real>& rhs )
+	::operator<(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs)
 {
 	return memcmp(&lhs[0], &rhs[0], 4 * sizeof(Real)) < 0;
 }
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics
-	::operator*( const Quaternion<Real>& lhs, const Quaternion<Real>& rhs )
+	::operator*(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs)
 {
 	// 注意:  乘法一般不是可交换的，所以在大多数情况下，
 	// p * q != q * p
 
-	return  Quaternion<Real>{ lhs[0] * rhs[0] -	lhs[1] * rhs[1] -lhs[2] * rhs[2] - lhs[3] * rhs[3],
-						      lhs[0] * rhs[1] + lhs[1] * rhs[0] +	lhs[2] * rhs[3] - lhs[3] * rhs[2],
-							  lhs[0] * rhs[2] + lhs[2] * rhs[0] +	lhs[3] * rhs[1] - lhs[1] * rhs[3],
-						      lhs[0] * rhs[3] + lhs[3] * rhs[0] +	lhs[1] * rhs[2] - lhs[2] * rhs[1] };
+	return  Quaternion<Real>{ lhs[0] * rhs[0] - lhs[1] * rhs[1] - lhs[2] * rhs[2] - lhs[3] * rhs[3],
+							  lhs[0] * rhs[1] + lhs[1] * rhs[0] + lhs[2] * rhs[3] - lhs[3] * rhs[2],
+							  lhs[0] * rhs[2] + lhs[2] * rhs[0] + lhs[3] * rhs[1] - lhs[1] * rhs[3],
+							  lhs[0] * rhs[3] + lhs[3] * rhs[0] + lhs[1] * rhs[2] - lhs[2] * rhs[1] };
 }
 
 template <typename Real>
 Real Mathematics
-	::Dot( const Quaternion<Real>& lhs, const Quaternion<Real>& rhs )
+	::Dot(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs)
 {
 	return lhs[0] * rhs[0] + lhs[1] * rhs[1] + lhs[2] * rhs[2] + lhs[3] * rhs[3];
 }
 
 template <typename Real>
-bool Mathematics	
-	::Approximate( const Quaternion<Real>& lhs, const Quaternion<Real>& rhs,const Real epsilon )
+bool Mathematics
+	::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs, const Real epsilon)
 {
 	return Math<Real>::FAbs(lhs[0] - rhs[0]) <= epsilon && Math<Real>::FAbs(lhs[1] - rhs[1]) <= epsilon &&
 		   Math<Real>::FAbs(lhs[2] - rhs[2]) <= epsilon && Math<Real>::FAbs(lhs[3] - rhs[3]) <= epsilon;
 }
 
-
 template <typename Real>
 bool Mathematics
-	::Approximate( const Quaternion<Real>& lhs, const Quaternion<Real>& rhs )
+	::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs)
 {
-	return Approximate(lhs,rhs,Math<Real>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math::sm_ZeroTolerance);
 }
-
 
 template <typename Real>
 std::ostream& Mathematics
-	::operator<<( std::ostream& outFile,const Quaternion<Real>& quaternion )
+	::operator<<(std::ostream& outFile, const Quaternion<Real>& quaternion)
 {
 	return outFile << "w = " << quaternion.GetW()
-		           << " x = " << quaternion.GetX()
+				   << " x = " << quaternion.GetX()
 				   << " y = " << quaternion.GetY()
-				   << " z = " << quaternion.GetZ(); 
+				   << " z = " << quaternion.GetZ();
 }
 
 #endif // MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
 
-  

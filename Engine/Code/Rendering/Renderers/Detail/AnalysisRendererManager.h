@@ -12,7 +12,7 @@
 #include "Rendering/Renderers/RendererBasis.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
-#include <boost/property_tree/ptree.hpp> 
+#include "System/Helper/PragmaWarning/PropertyTree.h"
 #include <string>
 
 namespace Rendering

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 16:50)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 17:46)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESLUT_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESLUT_DETAIL_H
@@ -17,7 +17,7 @@ Mathematics::DistanceResult<Real, Vector>
 	::DistanceResult(Real distance)
 	:m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;	
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
@@ -25,7 +25,7 @@ Mathematics::DistanceResult<Real, Vector>
 	::DistanceResult(Real distance, Real contactTime)
 	:m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;	
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
@@ -33,23 +33,23 @@ Mathematics::DistanceResult<Real, Vector>
 	::DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint)
 	:m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoint, rhsClosestPoint) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;	
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResult<Real, Vector>
-	::DistanceResult(Real distance, Real contactTime,const ClosestPoints& lhsClosestPoints,const ClosestPoints& rhsClosestPoints)
+	::DistanceResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints)
 	:m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoints, rhsClosestPoints) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;	
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResult<Real, Vector>
-	::DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint,const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter)
+	::DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter)
 	:m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoint, rhsClosestPoint,lhsParameter,rhsParameter) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;	
+	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -57,7 +57,7 @@ template <typename Real, typename Vector>
 bool Mathematics::DistanceResult<Real, Vector>
 	::IsValid() const noexcept
 {
-	if(m_Impl != nullptr)
+	if (m_Impl != nullptr)
 		return true;
 	else
 		return false;
@@ -67,15 +67,15 @@ bool Mathematics::DistanceResult<Real, Vector>
 template <typename Real, typename Vector>
 void Mathematics::DistanceResult<Real, Vector>
 	::Copy()
-{ 
+{
 	static_assert((boost::is_same<ClassShareType::NonConstCopyMember, CoreTools::TrueType>::value), "It is not allowed to define the Copy function used for copy delayed.");
 
-	MATHEMATICS_CLASS_IS_VALID_1; 
+	MATHEMATICS_CLASS_IS_VALID_1;
 
 	if (m_Impl.use_count() != 1)
 	{
 		m_Impl = m_Impl->Clone();
-	}	
+	}
 }
 
 template <typename Real, typename Vector>
@@ -172,7 +172,7 @@ template <typename Real, typename Vector>
 void Mathematics::DistanceResult<Real, Vector>
 	::SetDistance(Real distance)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;  
+	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->SetDistance(distance);
 }
@@ -192,7 +192,7 @@ void Mathematics::DistanceResult<Real, Vector>
 {
 	static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "Non-const copy member functions are forbidden");
 
-	MATHEMATICS_CLASS_IS_VALID_1; 
+	MATHEMATICS_CLASS_IS_VALID_1;
 
 	if (m_Impl->isHaveContactTime())
 	{
@@ -205,7 +205,7 @@ void Mathematics::DistanceResult<Real, Vector>
 		auto distance = m_Impl->GetDistance();
 
 		m_Impl = DistanceResultFactory<Real, Vector>::Create(distance, contactTime);
-	}	
+	}
 }
 
 template <typename Real, typename Vector>
@@ -215,8 +215,7 @@ void Mathematics::DistanceResult<Real, Vector>
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	SetContactTime(contactTime);
-	SetDistance(distance);	 
+	SetDistance(distance);
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_RESLUT_DETAIL_H
- 

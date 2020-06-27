@@ -7,6 +7,8 @@
 #ifndef NETWORK_NETWORK_MESSAGE_FWD_H
 #define NETWORK_NETWORK_MESSAGE_FWD_H
 
+#include <memory>
+
 namespace Network
 {
 	class MessageInterface;
@@ -90,7 +92,10 @@ namespace Network
 	enum class BuffBlockSize;
 
 	enum class VersionsCondition;
-	enum class MultipleMessageByteType;
+	enum class MultipleMessageByteType; 
+
+	using MessageInterfaceSharedPtr = std::shared_ptr<MessageInterface>;
+	using NetworkMessageEventSharedPtr = std::shared_ptr<NetworkMessageEvent>;
 }
 
 #endif // NETWORK_NETWORK_MESSAGE_FWD_H

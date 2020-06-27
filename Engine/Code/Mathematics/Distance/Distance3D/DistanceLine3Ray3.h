@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 15:26)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 17:17)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_H 
@@ -11,16 +11,13 @@
 
 #include "Mathematics/Objects3D/Ray3.h"
 #include "Mathematics/Objects3D/Line3.h"
+#include "Mathematics/Distance/DistanceFwd.h"
 #include "Mathematics/Distance/DistanceBase.h"
+#include "Mathematics/Distance/Distance3D/Detail/DistanceLine3Line3Tool.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector3DTools;
-
-	template <typename Real>
-	class DistanceLine3Line3Tool;
-
 	template <typename Real>
 	class DistanceLine3Ray3 : public DistanceBase<Real, Vector3D<Real> >
 	{
@@ -32,8 +29,7 @@ namespace Mathematics
 		using Ray3 = Ray3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
 		using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetZeroThreshold;
+		using DistanceResult = typename ParentType::DistanceResult; 
 		using Math = Math<Real>;
 
 	public:
@@ -49,7 +45,7 @@ namespace Mathematics
 		virtual const DistanceResult GetSquared() const override;
 
 		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£	
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity,const Vector3D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		const DistanceResult GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool) const;
@@ -65,4 +61,4 @@ namespace Mathematics
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_H
 
- 
+

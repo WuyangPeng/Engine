@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 11:15)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:52)
 
 #include "Framework/FrameworkExport.h"
 
@@ -10,24 +10,14 @@
 #include "WindowMousePosition.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::MousePositionImpl
-	::MousePositionImpl()
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
+using std::make_shared;
 
-Framework::MousePositionImpl
-	::~MousePositionImpl()
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
+CLASS_INVARIANT_STUB_DEFINE(Framework, MousePositionImpl)
 
-CLASS_INVARIANT_STUB_DEFINE(Framework,MousePositionImpl)
-
-Framework::MousePositionImpl::MousePositionImplPtr  Framework::MousePositionImpl
-   ::CreateWindowMousePositionPtr(HWnd hwnd)
+Framework::MousePositionImpl::MousePositionImplSharedPtr Framework::MousePositionImpl
+	::CreateWindowMousePosition(HWnd hwnd)
 {
-	return MousePositionImplPtr(new WindowMousePosition(hwnd));
+	return make_shared<WindowMousePosition>(hwnd);
 }
 
 

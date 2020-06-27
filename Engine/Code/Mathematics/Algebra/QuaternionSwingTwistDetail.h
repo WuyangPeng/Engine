@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/05 19:16)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 14:53)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_DETAIL_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_DETAIL_H
@@ -16,8 +16,8 @@
 #include "Mathematics/Base/Math.h"
 
 template <typename Real>
-Mathematics:: QuaternionSwingTwist <Real>	
-	:: QuaternionSwingTwist(const Quaternion& swing,const Quaternion& twist)
+Mathematics::QuaternionSwingTwist <Real>
+	::QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist)
 	: m_Swing{ swing }, m_Twist{ twist }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -25,15 +25,15 @@ Mathematics:: QuaternionSwingTwist <Real>
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
-bool Mathematics:: QuaternionSwingTwist<Real>
+bool Mathematics::QuaternionSwingTwist<Real>
 	::IsValid() const noexcept
 {
-     return true;
+	return true;
 }
 #endif	// OPEN_CLASS_INVARIANT
- 
+
 template <typename Real>
-typename const Mathematics:: QuaternionSwingTwist<Real>::Quaternion Mathematics::QuaternionSwingTwist<Real>
+typename const Mathematics::QuaternionSwingTwist<Real>::Quaternion Mathematics::QuaternionSwingTwist<Real>
 	::GetTwist() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -42,12 +42,12 @@ typename const Mathematics:: QuaternionSwingTwist<Real>::Quaternion Mathematics:
 }
 
 template <typename Real>
-typename const Mathematics:: QuaternionSwingTwist<Real>::Quaternion Mathematics::QuaternionSwingTwist <Real>
+typename const Mathematics::QuaternionSwingTwist<Real>::Quaternion Mathematics::QuaternionSwingTwist<Real>
 	::GetSwing() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Swing;
-} 
+}
 
 #endif // MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_DETAIL_H

@@ -18,10 +18,27 @@ using std::ostream;
 using std::make_shared;
 
 CoreTools::Suite
-	::Suite(const string& name, ostream* osPtr, bool printRunUnitTest)
+	::Suite(const string& name, const OStreamShared& osPtr, bool printRunUnitTest)
 	:m_Impl{ make_shared<SuiteImpl>(name,osPtr,printRunUnitTest) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::Suite
+	::Suite(Suite&& rhs) noexcept
+	:m_Impl{ std::move(rhs.m_Impl) }
+{
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::Suite& CoreTools::Suite
+	::operator=(Suite&& rhs) noexcept
+{
+	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	m_Impl = std::move(rhs.m_Impl);
+
+	return *this;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Suite)
@@ -30,21 +47,13 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, GetName, const string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetPassedNumber, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetFailedNumber, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetErrorNumber, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, GetStream, ostream*)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, GetStream, CoreTools::OStreamShared&)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, PrintReport, void)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, ClearUnitTestCollection, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, RunUnitTest, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, ResetTestData, void)
-
-void CoreTools::Suite
-	::SetStream(ostream* osPtr)
-{
-	CORE_TOOLS_CLASS_IS_VALID_1;
-	CORE_TOOLS_ASSERTION_0(osPtr != nullptr, "Ö¸ÕëÎÞÐ§");
-
-	return m_Impl->SetStream(osPtr);
-}
+ 
 
 void CoreTools::Suite
 	::AddTest(const UnitTestPtr& unitTest)

@@ -17,7 +17,7 @@
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::make_shared;
 

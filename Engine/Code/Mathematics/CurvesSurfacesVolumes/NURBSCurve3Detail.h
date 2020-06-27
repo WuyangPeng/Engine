@@ -14,7 +14,7 @@ namespace Mathematics
 
 template <typename Real>
 NURBSCurve3<Real>::NURBSCurve3 (int numCtrlPoints, const Vector3D<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, bool open)
-	: SingleCurve3<Real>{ Real{}, (Real)1 }, mLoop{ loop }
+	: SingleCurve3<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }, mLoop{ loop }
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
@@ -27,7 +27,7 @@ NURBSCurve3<Real>::NURBSCurve3 (int numCtrlPoints, const Vector3D<Real>* ctrlPoi
 
 template <typename Real>
 NURBSCurve3<Real>::NURBSCurve3 (int numCtrlPoints, const Vector3D<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, const Real* knot)
-	: SingleCurve3<Real>{ Real{}, (Real)1 }, mLoop{ loop }
+	: SingleCurve3<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }, mLoop{ loop }
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
@@ -190,14 +190,14 @@ void NURBSCurve3<Real>::Get (Real t, Vector3D<Real>* pos, Vector3D<Real>* der1, 
 
     // Compute position.
 	auto X = Vector3D<Real>::sm_Zero;
-    Real w = Real{};
+    Real w = Math<Real>::sm_Zero;
     for (i = imin; i <= imax; ++i)
     {
         tmp = mBasis.GetD0(i)*mCtrlWeight[i];
         X += tmp*mCtrlPoint[i];
         w += tmp;
     }
-	auto invW = ((Real)1)/w;
+	auto invW = (static_cast<Real>(1))/w;
 	auto P = invW*X;
     if (pos)
     {
@@ -211,7 +211,7 @@ void NURBSCurve3<Real>::Get (Real t, Vector3D<Real>* pos, Vector3D<Real>* der1, 
 
     // Compute first derivative.
     Vector3D<Real> XDer1 = Vector3D<Real>::sm_Zero;
-    Real wDer1 = Real{};
+    Real wDer1 = Math<Real>::sm_Zero;
     for (i = imin; i <= imax; ++i)
     {
         tmp = mBasis.GetD1(i)*mCtrlWeight[i];
@@ -231,14 +231,14 @@ void NURBSCurve3<Real>::Get (Real t, Vector3D<Real>* pos, Vector3D<Real>* der1, 
 
     // Compute second derivative.
     Vector3D<Real> XDer2 = Vector3D<Real>::sm_Zero;
-    Real wDer2 = Real{};
+    Real wDer2 = Math<Real>::sm_Zero;
     for (i = imin; i <= imax; ++i)
     {
         tmp = mBasis.GetD2(i)*mCtrlWeight[i];
         XDer2 += tmp*mCtrlPoint[i];
         wDer2 += tmp;
     }
-    Vector3D<Real> PDer2 = invW*(XDer2 - ((Real)2)*wDer1*PDer1 - wDer2*P);
+    Vector3D<Real> PDer2 = invW*(XDer2 - (static_cast<Real>(2))*wDer1*PDer1 - wDer2*P);
     if (der2)
     {
         *der2 = PDer2;
@@ -251,7 +251,7 @@ void NURBSCurve3<Real>::Get (Real t, Vector3D<Real>* pos, Vector3D<Real>* der1, 
 
     // Compute third derivative.
     Vector3D<Real> XDer3 = Vector3D<Real>::sm_Zero;
-    Real wDer3 = Real{};
+    Real wDer3 = Math<Real>::sm_Zero;
     for (i = imin; i <= imax; ++i)
     {
         tmp = mBasis.GetD3(i)*mCtrlWeight[i];
@@ -260,7 +260,7 @@ void NURBSCurve3<Real>::Get (Real t, Vector3D<Real>* pos, Vector3D<Real>* der1, 
     }
     if (der3)
     {
-        *der3 = invW*(XDer3 - ((Real)3)*wDer1*PDer2 - ((Real)3)*wDer2*PDer1 - wDer3*P);
+        *der3 = invW*(XDer3 - (static_cast<Real>(3))*wDer1*PDer2 - (static_cast<Real>(3))*wDer2*PDer1 - wDer3*P);
     }
 }
 

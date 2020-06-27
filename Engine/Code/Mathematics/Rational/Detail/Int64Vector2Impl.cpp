@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 11:12)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 09:51)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -20,14 +20,14 @@ Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl
-	::Int64Vector2Impl( const Int64Vector<2>& rhs )
+	::Int64Vector2Impl(const Int64Vector<2>& rhs)
 	:m_Tuple{ rhs }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::Int64Vector2Impl
-	::Int64Vector2Impl( const int64_t& x, const int64_t& y )
+	::Int64Vector2Impl(const int64_t& x, const int64_t& y)
 	:m_Tuple{}
 {
 	m_Tuple[0] = x;
@@ -37,7 +37,7 @@ Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
-	::operator=( const Int64Vector<2>& rhs )
+	::operator=(const Int64Vector<2>& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -46,7 +46,7 @@ Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
 	return *this;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Mathematics,Int64Vector2Impl)
+CLASS_INVARIANT_STUB_DEFINE(Mathematics, Int64Vector2Impl)
 
 int64_t Mathematics::Int64Vector2Impl
 	::GetX() const
@@ -65,7 +65,7 @@ int64_t Mathematics::Int64Vector2Impl
 }
 
 void Mathematics::Int64Vector2Impl
-	::SetX( const int64_t& x )
+	::SetX(const int64_t& x)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -73,7 +73,7 @@ void Mathematics::Int64Vector2Impl
 }
 
 void Mathematics::Int64Vector2Impl
-	::SetY( const int64_t& y )
+	::SetY(const int64_t& y)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -84,7 +84,7 @@ const Mathematics::Int64Vector2Impl Mathematics::Int64Vector2Impl
 	::Perp() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	
+
 	return Int64Vector2Impl{ m_Tuple[1], -m_Tuple[0] };
 }
 
@@ -97,7 +97,7 @@ const Mathematics::Int64Vector2Impl Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
-	::operator+=( const Int64Vector2Impl& rhs )
+	::operator+=(const Int64Vector2Impl& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -107,7 +107,7 @@ Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
-	::operator-=( const Int64Vector2Impl& rhs )
+	::operator-=(const Int64Vector2Impl& rhs)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -117,7 +117,7 @@ Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
-	::operator*=( const int64_t& scalar )
+	::operator*=(const int64_t& scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -127,7 +127,7 @@ Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl&	Mathematics::Int64Vector2Impl
-	::operator/=( const int64_t& scalar )
+	::operator/=(const int64_t& scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -145,31 +145,31 @@ int64_t Mathematics::Int64Vector2Impl
 }
 
 int64_t Mathematics
-	::Dot( const Int64Vector2Impl& lhs,const Int64Vector2Impl& rhs )
+	::Dot(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs)
 {
 	return lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY();
 }
 
 int64_t Mathematics
-	::DotPerp( const Int64Vector2Impl& lhs,const Int64Vector2Impl& rhs )
+	::DotPerp(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs)
 {
 	return lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX();
 }
 
 bool Mathematics
-	::operator==( const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs )
+	::operator==(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs)
 {
 	return lhs.GetX() == rhs.GetX() && lhs.GetY() == rhs.GetY();
 }
 
 bool Mathematics
-	::operator<( const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs )
+	::operator<(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs)
 {
-	if(lhs.GetX() < rhs.GetX())
+	if (lhs.GetX() < rhs.GetX())
 		return true;
-	else if(rhs.GetX() < lhs.GetX())
+	else if (rhs.GetX() < lhs.GetX())
 		return false;
-	else if(lhs.GetY() < rhs.GetY())
+	else if (lhs.GetY() < rhs.GetY())
 		return true;
 	else
 		return false;

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/11 09:42)
+// 引擎版本：0.0.2.5 (2020/03/24 10:12)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_DETAIL_H 
@@ -34,10 +34,10 @@ template <typename Real>
 bool Mathematics::DistanceLine3Ray3<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
-	else	
-		return false;	
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -69,24 +69,24 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
 
 	auto det = tool.GetDet();
 
-	if (GetZeroThreshold() <= det)
+	if (this->GetZeroThreshold() <= det)
 	{
 		auto rhsT = tool.GetRhsT();
-	
-		if (Real{} <= rhsT)
+
+		if (Math::sm_Zero <= rhsT)
 		{
 			// 两个内部点最接近，一个在直线上，一个在射线上。
 			auto lhsT = tool.GetLhsT() / det;
 			rhsT /= det;
 			auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-			                       rhsT * (tool.GetDirectionDot() * lhsT + rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
-							       tool.GetOriginDifferenceSquaredLength();
-	 
-			return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Real{}, m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),
+								   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
+								   tool.GetOriginDifferenceSquaredLength();
+
+			return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::sm_Zero, m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),
 								   m_Ray.GetOrigin() + rhsT * m_Ray.GetDirection(),lhsT,rhsT };
 		}
 		else
-		{		
+		{
 			// 射线的原点同直线的某一点最接近。
 			return GetSquaredWithClosestPoints(tool);
 		}
@@ -95,18 +95,18 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
 	{
 		// 线是平行的，最接近的一对点在射线原点。
 		return GetSquaredWithClosestPoints(tool);
-	}	
+	}
 }
-	
+
 template <typename Real>
 const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>
 	::GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool) const
 {
 	auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
-	return DistanceResult{ squaredDistance, Real{},
+	return DistanceResult{ squaredDistance, Math::sm_Zero,
 						   m_Line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * m_Line.GetDirection(), m_Ray.GetOrigin(),
-						   -tool.GetOriginDifferenceDotLhsDirection(),Real{} };
+						   -tool.GetOriginDifferenceDotLhsDirection(),Math::sm_Zero };
 }
 
 template <typename Real>
@@ -114,16 +114,15 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
 	::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
- 
+
 	auto movedLine = m_Line.GetMove(t, lhsVelocity);
 	auto movedRay = m_Ray.GetMove(t, rhsVelocity);
 
 	ClassType distance{ movedLine, movedRay };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 
 	return distanceResult;
 }
 #endif // MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_DETAIL_H
- 

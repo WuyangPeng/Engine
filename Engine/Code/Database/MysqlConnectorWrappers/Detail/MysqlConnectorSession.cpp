@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 10:26)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 12:52)
 
 #include "Database/DatabaseExport.h"
 
@@ -18,17 +18,17 @@ using std::make_unique;
 using std::string;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
- 
+
 Database::MysqlConnectorSession
 	::MysqlConnectorSession(const ConfigurationStrategy& configurationStrategy)
-	: ParentType{ configurationStrategy }, 
+	: ParentType{ configurationStrategy },
 	  m_MysqlxSession{ make_unique<MysqlxSession>(mysqlx::SessionOption::USER, configurationStrategy.GetDBUserName(),
-	                                              mysqlx::SessionOption::PWD,  configurationStrategy.GetDBPassword(),
-		                                          mysqlx::SessionOption::HOST, configurationStrategy.GetIP(),
-		                                          mysqlx::SessionOption::PORT, configurationStrategy.GetPort(),
-		                                          mysqlx::SessionOption::DB,   configurationStrategy.GetDBHostName(),
-		                                          mysqlx::SessionOption::SSL_MODE,
-		                                          configurationStrategy.IsUseSSL() ? mysqlx::SSLMode::VERIFY_CA : mysqlx::SSLMode::REQUIRED) }
+												  mysqlx::SessionOption::PWD,  configurationStrategy.GetDBPassword(),
+												  mysqlx::SessionOption::HOST, configurationStrategy.GetIP(),
+												  mysqlx::SessionOption::PORT, configurationStrategy.GetPort(),
+												  mysqlx::SessionOption::DB,   configurationStrategy.GetDBHostName(),
+												  mysqlx::SessionOption::SSL_MODE,
+												  configurationStrategy.IsUseSSL() ? mysqlx::SSLMode::VERIFY_CA : mysqlx::SSLMode::REQUIRED) }
 {
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
@@ -50,10 +50,10 @@ Database::MysqlConnectorSession
 	}
 	catch (const std::exception& error)
 	{
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, Database) 
-			<< error.what()	 
+		LOG_SINGLETON_ENGINE_APPENDER(Warn, Database)
+			<< error.what()
 			<< LOG_SINGLETON_TRIGGER_ASSERT;
-	}	 
+	}
 
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
@@ -94,7 +94,7 @@ Database::MysqlConnectorSession::MysqlxSessionPtr Database::MysqlConnectorSessio
 
 	if (implPtr)
 	{
-		return implPtr->GetMysqlxSessionPtr(); 
+		return implPtr->GetMysqlxSessionPtr();
 	}
 	else
 	{
@@ -112,11 +112,11 @@ Database::SessionImpl::SchemaContainer Database::MysqlConnectorSession
 
 	auto schemas = m_MysqlxSession->getSchemas();
 
-	for (auto schema:schemas)
+	for (auto schema : schemas)
 	{
 		schemaContainer.push_back(make_unique<Schema>(GetConfigurationStrategy(), schema));
 	}
-	 
+
 	return schemaContainer;
 }
 
@@ -158,7 +158,7 @@ Database::SessionImpl::ResultPtr Database::MysqlConnectorSession
 	DATABASE_CLASS_IS_VALID_1;
 
 	return make_shared<Result>(GetConfigurationStrategy(), make_shared<MysqlxRowResult>(m_MysqlxSession->sql(findStatement).bind(bindStatement).execute()));
-} 
+}
 
 void Database::MysqlConnectorSession
 	::Execute(const string& findStatement, const string& bindStatement)

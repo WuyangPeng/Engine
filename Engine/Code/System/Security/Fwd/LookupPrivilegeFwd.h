@@ -11,9 +11,7 @@
 
 namespace System
 {
-	bool GetLookupPrivilegeValue(const TChar* systemName, const TChar* name, LookupPrivilegeLUIDPtr luid) noexcept;
-	bool GetLookupPrivilegeName(const TChar* systemName, LookupPrivilegeLUIDPtr luid, TChar* name, WindowDWordPtr nameSize) noexcept;
-	bool GetLookupPrivilegeDisplayName(const TChar* systemName, const TChar* name, TChar* displayName, WindowDWordPtr displayNameSize, WindowDWordPtr languageID) noexcept;
+	
 }
 
 #endif // SYSTEM_SECURITY_LOOKUP_PRIVILEGE_FWD_H

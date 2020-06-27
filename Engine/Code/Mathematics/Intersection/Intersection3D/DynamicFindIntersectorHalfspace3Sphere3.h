@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/12 09:23)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 14:43)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SPHERE3_H
@@ -32,15 +32,15 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>; 
-		
+		using Math = Math<Real>;
+
 	public:
-		DynamicFindIntersectorHalfspace3Sphere3(const Plane3& halfspace,const Sphere3& sphere, Real tmax,
-											    const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
-		
+		DynamicFindIntersectorHalfspace3Sphere3(const Plane3& halfspace, const Sphere3& sphere, Real tmax,
+												const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+
 		// Object access.
-		const Plane3 GetHalfspace () const;
-		const Sphere3 GetSphere () const;
+		const Plane3 GetHalfspace() const;
+		const Sphere3 GetSphere() const;
 
 		// The intersection set is empty or a point.  GetPoint() returns a
 		// valid result only when Find(...) returns 'true'.
@@ -48,12 +48,12 @@ namespace Mathematics
 
 	private:
 		// Dynamic queries.
-		void Find();		
+		void Find();
 
 		// The objects to intersect.
 		Plane3 mHalfspace;
 		Sphere3 mSphere;
-		
+
 		// Information about the intersection set.
 		Vector3D mPoint;
 	};

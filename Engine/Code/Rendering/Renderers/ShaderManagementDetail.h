@@ -24,7 +24,7 @@ Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 #ifdef OPEN_CLASS_INVARIANT
 template <typename TextureFlags,typename PdrTextureType>
 bool Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::IsValid() const
+	::IsValid() const noexcept
 {
 	if(m_Renderer.lock())
         return true;
@@ -41,7 +41,7 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 
     if (m_Textures.find(texture) == m_Textures.end())
     {
-		PdrTextureSharedPtr pdrTexture{ std::make_shared<PdrTextureType>(m_Renderer, texture) };
+		PdrTextureSharedPtr pdrTexture{ std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.GetData()) };
 		m_Textures.insert({ texture, pdrTexture });
     }
 }
@@ -57,10 +57,10 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
  
 template <typename TextureFlags,typename PdrTextureType>
 void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Enable (TextureConstWeakPtr texture)
+	::Enable (TextureConstWeakPtr texture, const ConstShaderParametersSmartPointer& parameters)
 {
 	RENDERING_CLASS_IS_VALID_1;
-
+	parameters;
     auto iter = m_Textures.find(texture);
     PdrTextureSharedPtr pdrTexture;
     if (iter != m_Textures.end())
@@ -70,26 +70,26 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
     else
     {
         // 延迟构造。
-        pdrTexture = std::make_shared<PdrTextureType>(m_Renderer, texture);
+        pdrTexture = std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.GetData());
 		m_Textures.insert({ texture,  pdrTexture });
     }
 
-     pdrTexture->Enable(m_Renderer);
+     pdrTexture->Enable(m_Renderer.lock().get(),texture.GetData(),parameters.GetData());
 }
 
 template <typename TextureFlags,typename PdrTextureType>
 void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Disable (TextureConstWeakPtr texture)
+	::Disable (TextureConstWeakPtr texture, const ConstShaderParametersSmartPointer& parameters)
 {
 	RENDERING_CLASS_IS_VALID_1;
-
+	parameters;
     auto iter = m_Textures.find(texture);
  
     if (iter != m_Textures.end())
     {
 		auto pdrTexture = iter->second;
 
-        pdrBuffer->Disable(m_Renderer);
+		pdrTexture->Disable(m_Renderer.lock().get(), texture.GetData(), parameters.GetData());
     }
 }
 
@@ -108,8 +108,8 @@ void* Rendering::ShaderManagement<TextureFlags, PdrTextureType>
     else
     {
         // 延迟构造。
-		pdrTexture = std::make_shared<PdrTextureType>(m_Renderer, texture);
-		m_Textures.insert({ buffer, pdrTexture });
+		pdrTexture = std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.GetData());
+		m_Textures.insert({ texture, pdrTexture });
     }
 
 	pdrTexture->Lock(level ,mode);
@@ -121,7 +121,7 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-    auto iter = m_Textures.find(buffer);
+    auto iter = m_Textures.find(texture);
  
     if (iter != m_Textures.end())
     {
@@ -137,15 +137,15 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-    auto numBytes = buffer->GetNumBytes(level);
-	auto srcData = buffer->GetData(level);
-	auto trgData = Lock(buffer, level ,Buffer::BL_WRITE_ONLY);
+    auto numBytes = texture->GetNumBytes(level);
+	auto srcData = texture->GetData(level);
+	auto trgData = Lock(texture, level , BufferLocking::WriteOnly);
     memcpy(trgData, srcData, numBytes);
-    Unlock(buffer, level);
+    Unlock(texture, level);
 }
 
 template <typename TextureFlags,typename PdrTextureType>
-Rendering::ShaderManagement<TextureFlags, PdrTextureType>::PdrTextureSharedPtr Rendering::ShaderManagement<TextureFlags, PdrTextureType>
+typename Rendering::ShaderManagement<TextureFlags, PdrTextureType>::PdrTextureSharedPtr Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 	::GetResource (TextureConstWeakPtr texture)
 {
 	RENDERING_CLASS_IS_VALID_1;

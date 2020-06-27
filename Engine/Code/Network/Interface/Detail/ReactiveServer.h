@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/01 16:55)
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:08)
 
 #ifndef NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H
 #define NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H
@@ -13,11 +13,10 @@
 #include "HandleSetContainer.h"
 #include "Network/Interface/HandleSet.h"
 #include "Network/Interface/Data/BufferSendStreamMultiIndexContainer.h"
+#include "Network/NetworkMessage/NetworkMessageFwd.h"
 
 namespace Network
-{	
-	class MessageEventManager;
-
+{ 
 	class NETWORK_HIDDEN_DECLARE ReactiveServer : public ServerImpl
 	{
 	public:
@@ -25,7 +24,7 @@ namespace Network
 		using ParentType = ServerImpl;
 
 	public:
-		explicit ReactiveServer(const SocketManagerSharedPtr& socketManager,  const ConfigurationStrategy& configurationStrategy);
+		explicit ReactiveServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
 		virtual ~ReactiveServer();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
@@ -34,7 +33,7 @@ namespace Network
 
 	private:
 		using BufferType = std::vector<char>;
-		 
+
 	private:
 		void Init();
 
@@ -49,9 +48,9 @@ namespace Network
 		SockStreamSharedPtr m_SockStream;
 		BufferSendStreamMultiIndexContainer m_BufferSendStream;
 		HandleSetContainer m_MasterHandleSet;
-		HandleSet m_ActiveHandles; 
+		HandleSet m_ActiveHandles;
 		MessageBufferSharedPtr m_Buffer;
-	};	
-} 
+	};
+}
 
 #endif // NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H

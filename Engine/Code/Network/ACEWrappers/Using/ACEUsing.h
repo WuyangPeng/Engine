@@ -1,34 +1,33 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.1.0 (2019/10/18 13:27)
-
+// 引擎版本：0.0.2.4 (2020/03/11 12:34)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_USING_H
 #define NETWORK_NETWORK_INTERFACE_ACE_USING_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/PragmaWarning.h"
 #include "System/Network/Using/SocketPrototypesUsing.h"
 #include "Network/Helper/UserMacro.h"
 
+#include <string>
+
 #ifdef NETWORK_USE_ACE	
 
-	#if defined(TCRE_USE_MSVC) && (1400 <= TCRE_USE_MSVC)  && defined(NDEBUG)	
-		#include "System/Helper/PragmaWarning/Push.h"
-		#include "System/Helper/PragmaWarning/Disable4996.h"
-		#include "System/Helper/PragmaWarning/Disable6387.h"
-		#include "System/Helper/PragmaWarning/Disable26451.h"	
-		#include "System/Helper/PragmaWarning/Disable26495.h"		
-	#endif // defined(TCRE_USE_MSVC) && (1400 <= TCRE_USE_MSVC)  
+	#if defined(NDEBUG)	
+		#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(4996)
+		#include SYSTEM_WARNING_DISABLE(6387)
+		#include SYSTEM_WARNING_DISABLE(26451)	
+		#include SYSTEM_WARNING_DISABLE(26495)	
+	#endif // defined(NDEBUG)  
 
-	#include <ace/INET_Addr.h>	
-	#include <ace/Handle_Set.h>
-	#include <ace/SOCK_Stream.h>
+	#include "System/Helper/PragmaWarning/ACE.h"
 
-	#if defined(TCRE_USE_MSVC) && (1400 <= TCRE_USE_MSVC)  && defined(NDEBUG)	
-		#include "System/Helper/PragmaWarning/Pop.h" 
-	#endif // defined(TCRE_USE_MSVC) && (1400 <= TCRE_USE_MSVC)  
+	#if defined(NDEBUG)	
+		#include STSTEM_WARNING_POP
+	#endif // defined(NDEBUG) 
 
 #else // !NETWORK_USE_ACE
 
@@ -46,7 +45,7 @@ namespace Network
 	using ACESockStreamNativeType = ACE_SOCK_Stream;
 	using ACEHandle = ACE_HANDLE;
 	using ACEHandleSet = ACE_Handle_Set;
-	constexpr int g_NonBlock{ ACE_NONBLOCK };
+	constexpr auto g_NonBlock = ACE_NONBLOCK;
 
 	#ifdef NETWORK_USES_ACE_WCHAR
 		#ifndef ACE_USES_WCHAR
@@ -86,7 +85,7 @@ namespace Network
 	{
 
 	};
-	constexpr int g_NonBlock{ 1 };
+	constexpr auto g_NonBlock = 1;
 
 #endif // NETWORK_USE_ACE
 } 

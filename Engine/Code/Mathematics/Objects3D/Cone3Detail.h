@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:33)
+// 引擎版本：0.0.2.5 (2020/03/19 17:32)
 
 #ifndef MATHEMATICS_OBJECTS3D_CONE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_CONE3_DETAIL_H
@@ -16,18 +16,18 @@
 
 template <typename Real>
 Mathematics::Cone3<Real>
-	::Cone3( const Vector3D& vertex, const Vector3D& axis,const Real angle, const Real height,const Real epsilon )
+	::Cone3(const Vector3D& vertex, const Vector3D& axis, const Real angle, const Real height, const Real epsilon)
 	:m_Vertex{ vertex }, m_Axis{ axis }, m_CosAngle{ Math::Cos(angle) },
 	 m_SinAngle{ Math::Sin(angle) }, m_Height{ height }, m_Epsilon{ epsilon }
 {
-	MATHEMATICS_ASSERTION_1(Real{} <= angle && angle <= Math::sm_HalfPI, "角度必须在第一象限！");
+	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "角度必须在第一象限！");
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Cone3<Real>
-	::Cone3( const Real cosAngle, const Real sinAngle,const Real height ,const Vector3D& vertex, const Vector3D& axis,const Real epsilon)
+	::Cone3(const Real cosAngle, const Real sinAngle, const Real height, const Vector3D& vertex, const Vector3D& axis, const Real epsilon)
 	:m_Vertex{ vertex }, m_Axis{ axis }, m_CosAngle{ cosAngle }, m_SinAngle{ sinAngle }, m_Height{ height }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -43,14 +43,13 @@ bool Mathematics::Cone3<Real>
 		m_Axis.IsNormalize(m_Epsilon))
 	{
 		return true;
-	}		 
+	}
 	else
 	{
 		return false;
-	}		
+	}
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 typename const Mathematics::Cone3<Real>::Vector3D Mathematics::Cone3<Real>
@@ -60,7 +59,6 @@ typename const Mathematics::Cone3<Real>::Vector3D Mathematics::Cone3<Real>
 
 	return m_Vertex;
 }
-
 
 template <typename Real>
 typename const Mathematics::Cone3<Real>::Vector3D Mathematics::Cone3<Real>

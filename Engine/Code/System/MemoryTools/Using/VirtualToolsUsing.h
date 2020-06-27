@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:23)
+// 引擎版本：0.2.0.0 (2020/05/09 23:58)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIRTUAL_TOOLS_USING_H
 #define SYSTEM_MEMORY_TOOLS_VIRTUAL_TOOLS_USING_H
@@ -22,11 +22,11 @@ namespace System
 	{
 		void* BaseAddress;
 		void* AllocationBase;
-		WindowDWord AllocationProtect;
-		WindowSize RegionSize;
-		WindowDWord State;
-		WindowDWord Protect;
-		WindowDWord Type;
+		uint32_t AllocationProtect;
+		size_t RegionSize;
+		uint32_t State;
+		uint32_t Protect;
+		uint32_t Type;
 	};
 
 	using MemoryBasicInformationPtr = MemoryBasicInformation*;

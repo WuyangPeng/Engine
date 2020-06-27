@@ -20,7 +20,7 @@
 #include "Rendering/Resources/TextureCube.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Texture>
 Rendering::OpenGLTextureData<Texture>

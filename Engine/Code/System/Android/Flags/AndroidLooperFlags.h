@@ -31,6 +31,8 @@ namespace System
 	// AndroidLooper
 	enum class AndroidLooperEvent
 	{
+		Null = 0,
+
 		Input = ALOOPER_EVENT_INPUT,
 		Output = ALOOPER_EVENT_OUTPUT,
 		Error = ALOOPER_EVENT_ERROR,
@@ -58,6 +60,8 @@ namespace System
 
 	enum class AndroidLooperEvent
 	{
+		Null = 0,
+
 		Input = 1 << 0,
 		Output = 1 << 1,
 		Error = 1 << 2,

@@ -48,7 +48,7 @@ void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	auto matDiff = M*diff;
 	auto a2 = Vector3DTools::DotProduct(mLine.GetDirection(),matDir);
 	auto a1 = Vector3DTools::DotProduct(mLine.GetDirection(),matDiff);
-	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - (Real)1;
+	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - static_cast<Real>(1);
 
     // Intersection occurs if Q(t) has real roots.
 	auto discr = a1*a1 - a0*a2;
@@ -66,7 +66,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	::SetNegativeThreshold(Real negThreshold)
 {
-    if (negThreshold <= Real{})
+    if (negThreshold <= Math<Real>::sm_Zero)
     {
         mNegativeThreshold = negThreshold;
         return;
@@ -86,7 +86,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	::SetPositiveThreshold(Real posThreshold)
 {
-    if (posThreshold >= Real{})
+    if (posThreshold >= Math<Real>::sm_Zero)
     {
         mPositiveThreshold = posThreshold;
         return;

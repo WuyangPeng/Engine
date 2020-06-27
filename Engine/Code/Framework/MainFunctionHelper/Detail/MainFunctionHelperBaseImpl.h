@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 17:50)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/20 11:45)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_MAIN_FUNCTION_HELPER_BASE_IMPL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_MAIN_FUNCTION_HELPER_BASE_IMPL_H
@@ -20,16 +20,15 @@ namespace Framework
 	{
 	public:
 		using ClassType = MainFunctionHelperBaseImpl;
+		using String = System::String;
 
 	public:
-		explicit MainFunctionHelperBaseImpl(const EnvironmentDirectory& environmentDirectory);		
-		
+		explicit MainFunctionHelperBaseImpl(const EnvironmentDirectory& environmentDirectory) noexcept;
+
 		CLASS_INVARIANT_DECLARE;
 
-		System::String GetEngineInstallationDirectory() const;		
-
-	private:
-		void GenerateEnvironment();
+		String GetEngineInstallationDirectory() const;
+		EnvironmentDirectory GetEnvironmentDirectory() const noexcept;
 
 	private:
 		EnvironmentDirectory m_EnvironmentDirectory;

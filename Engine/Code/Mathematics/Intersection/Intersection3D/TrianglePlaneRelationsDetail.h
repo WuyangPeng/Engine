@@ -48,7 +48,7 @@ void Mathematics::TrianglePlaneRelations<Real>
 		}
 		else
 		{
-			m_Distance[i] = Real{ };
+			m_Distance[i] = Math::sm_Zero;
 			m_Sign[i] = NumericalValueSymbol::Zero;
 			++m_Zero;
 		}

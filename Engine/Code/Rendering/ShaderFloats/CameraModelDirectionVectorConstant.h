@@ -39,7 +39,10 @@ namespace Rendering
 		static constexpr auto sm_NumRegisters = 1;
 	};
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(CameraModelDirectionVectorConstant);
+#include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, CameraModelDirectionVectorConstant);
 }
 

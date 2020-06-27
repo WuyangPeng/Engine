@@ -82,4 +82,11 @@ void Rendering::RendererParameter
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetRendererBasis,const Rendering::RendererBasis);  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowMenuName, System::String);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowClassName, System::String);
  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetIcon, int);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, IsIconDefault, bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetCursor, int);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, IsCursorDefault, bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetBackground, System::WindowBrushTypes); 

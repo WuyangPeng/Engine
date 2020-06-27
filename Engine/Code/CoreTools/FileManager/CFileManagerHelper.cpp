@@ -11,7 +11,7 @@
 #include "Detail/CFileManagerImpl.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h" 
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 // static
 const CoreTools::FileBuffer CoreTools::CFileManagerHelper

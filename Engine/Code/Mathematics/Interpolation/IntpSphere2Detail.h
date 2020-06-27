@@ -63,9 +63,9 @@ namespace Mathematics
 		// Assumes (x,y,z) is unit length.  Returns -PI <= theta <= PI and
 		// 0 <= phiAngle <= PI.
 
-		if (z < (Real)1)
+		if (z < static_cast<Real>(1))
 		{
-			if (z > -(Real)1)
+			if (z > -static_cast<Real>(1))
 			{
 				theta = Math<Real>::ATan2(y, x);
 				phi = Math<Real>::ACos(z);
@@ -79,7 +79,7 @@ namespace Mathematics
 		else
 		{
 			theta = -Math<Real>::sm_PI;
-			phi = Real{};
+			phi = Math<Real>::sm_Zero;
 		}
 	}
 

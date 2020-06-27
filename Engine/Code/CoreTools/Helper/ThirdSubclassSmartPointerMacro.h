@@ -7,7 +7,7 @@
 #ifndef CORE_TOOLS_HELPER_THIRD_SUBCLASS_SMART_PIINTER_MACRO_H
 #define CORE_TOOLS_HELPER_THIRD_SUBCLASS_SMART_PIINTER_MACRO_H
 
-#include <boost/polymorphic_cast.hpp>
+#include "System/Helper/PragmaWarning/PolymorphicCast.h"
 
 #define CONST_SUBCLASS_SMART_POINTER_STATEMENT(subclassIndex,baseClassIndex) \
 	    namespace CoreTools { template <typename SubClass,typename BaseClass = typename SubclassSmartPointerTraits<SubClass>::ParentType> \
@@ -17,9 +17,10 @@
 		using ClassType = SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)<SubclassType,BaseClassType>; \
 		using ParentType = SYSTEM_MULTIPLE_CONCATENATOR(Const,baseClassIndex,SubclassSmartPointer)<BaseClassType>; public: \
 		explicit SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)(uint64_t address,const SubclassType* data = nullptr); \
-		explicit SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)(const SubclassType* data = nullptr); \
-		virtual ~SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)();CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; \
-		virtual const SubclassType* GetData() const; virtual const SubclassType& operator* () const; virtual const SubclassType* operator-> () const; }; } 
+		explicit SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)(const SubclassType* data); \
+	    SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)() noexcept; \
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; \
+		const SubclassType* GetData() const override; const SubclassType& operator* () const override; const SubclassType* operator-> () const override; }; } 
 
 #define SUBCLASS_SMART_POINTER_STATEMENT(subclassIndex,baseClassIndex) \
         namespace CoreTools { template <typename SubClass,typename BaseClass = typename SubclassSmartPointerTraits<SubClass>::ParentType> \
@@ -30,10 +31,11 @@
 		using ParentType = SYSTEM_CONCATENATOR(baseClassIndex,SubclassSmartPointer)<BaseClassType>; \
 		using ConstType = SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)<SubclassType, BaseClassType>; \
 		public: explicit SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)(uint64_t address,SubclassType* data = nullptr); \
-		explicit SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)(SubclassType* data = nullptr); virtual ~SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)(); \
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; virtual SubclassType* GetData(); virtual SubclassType& operator* (); \
-		virtual SubclassType* operator-> (); virtual const SubclassType* GetData() const; virtual const SubclassType& operator* () const; \
-		virtual const SubclassType* operator-> () const; ConstType GetConstSmartPointer() const; operator ConstType () const; }; }	
+		explicit SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)(SubclassType* data); \
+		SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)() noexcept; \
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; SubclassType* GetData() override; SubclassType& operator* () override; \
+		SubclassType* operator-> () override; const SubclassType* GetData() const override; const SubclassType& operator* () const override; \
+		const SubclassType* operator-> () const override; ConstType GetConstSmartPointer() const; operator ConstType () const; }; }	
 
 #ifdef OPEN_CLASS_INVARIANT
 
@@ -58,9 +60,9 @@
 		::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)(uint64_t address,const SubclassType* data) \
 		:ParentType{ address,data } { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } \
         template <typename SubClass,typename BaseClass> CoreTools::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)<SubClass,BaseClass> \
-		::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)(const SubclassType* data):ParentType{ data } { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } \
-        template <typename SubClass,typename BaseClass>	CoreTools::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)<SubClass,BaseClass> \
-		::~SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)() { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } \
+		::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)(const SubclassType* data) :ParentType{ data } { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } \
+		template <typename SubClass,typename BaseClass> CoreTools::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)<SubClass,BaseClass> \
+		::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)() noexcept :ParentType{ } { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } \
 		CLASS_INVARIANT_CONST_SMART_POINTER_PARENT_IS_VALID_DEFINE(subclassIndex) \
 		template <typename SubClass,typename BaseClass> const typename CoreTools::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)<SubClass,BaseClass>::SubclassType* \
 		CoreTools::SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)<SubClass,BaseClass>::GetData() const { CORE_TOOLS_CLASS_IS_VALID_CONST_9; \
@@ -76,8 +78,9 @@
 		::SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)(uint64_t address, SubclassType* data):ParentType{ address, data } { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } \
 		template <typename SubClass, typename BaseClass> CoreTools::SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)<SubClass, BaseClass> \
 	    ::SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)(SubclassType* data):ParentType{ data } { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } \
-        template <typename SubClass, typename BaseClass> CoreTools::SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)<SubClass, BaseClass>:: \
-		~SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)() { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } CLASS_INVARIANT_SMART_POINTER_PARENT_IS_VALID_DEFINE(subclassIndex) \
+		template <typename SubClass, typename BaseClass> CoreTools::SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)<SubClass, BaseClass> \
+	    ::SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)() noexcept :ParentType{ } { CORE_TOOLS_SELF_CLASS_IS_VALID_9; } \
+		CLASS_INVARIANT_SMART_POINTER_PARENT_IS_VALID_DEFINE(subclassIndex) \
 		template <typename SubClass, typename BaseClass> const typename CoreTools::SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)<SubClass, BaseClass>::SubclassType* \
         CoreTools::SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)<SubClass, BaseClass>::GetData() const \
         { CORE_TOOLS_CLASS_IS_VALID_CONST_9; return boost::polymorphic_downcast<const SubclassType*>(ParentType::GetData()); } \

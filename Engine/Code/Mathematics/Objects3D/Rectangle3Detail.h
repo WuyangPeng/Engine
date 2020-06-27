@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 10:10)
+// 引擎版本：0.0.2.5 (2020/03/19 17:45)
 
 #ifndef MATHEMATICS_OBJECTS3D_RECTANGLE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_RECTANGLE3_DETAIL_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::Rectangle3<Real>
-	::Rectangle3( const Vector3D& center, const Vector3D& axis0,const Vector3D& axis1, Real extent0, Real extent1, const Real epsilon )
+	::Rectangle3(const Vector3D& center, const Vector3D& axis0, const Vector3D& axis1, Real extent0, Real extent1, const Real epsilon)
 	:m_Center{ center }, m_Epsilon{ epsilon }
 {
 	m_Axis[0] = axis0;
@@ -36,11 +36,11 @@ bool Mathematics::Rectangle3<Real>
 		-m_Epsilon < m_Extent[0] && -m_Epsilon < m_Extent[1])
 	{
 		return true;
-	}	   
+	}
 	else
 	{
 		return false;
-	}	
+	}
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -52,7 +52,6 @@ typename const Mathematics::Rectangle3<Real>::Vector3D Mathematics::Rectangle3<R
 
 	return m_Center;
 }
-
 
 template <typename Real>
 typename const Mathematics::Rectangle3<Real>::Vector3D Mathematics::Rectangle3<Real>
@@ -72,26 +71,36 @@ typename const Mathematics::Rectangle3<Real>::Vector3D	Mathematics::Rectangle3<R
 	return m_Axis[1];
 }
 
-
 template <typename Real>
 const typename Mathematics::Rectangle3<Real>::Vector3D Mathematics::Rectangle3<Real>
 	::GetAxis(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 2, "索引错误！");
 
-	return m_Axis[index];
+	if (0 <= index && index < 2)
+	{
+		return m_Axis[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
-
 
 template <typename Real>
 Real Mathematics::Rectangle3<Real>
 	::GetExtent(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 2, "索引错误！");
 
-	return m_Extent[index];
+	if (0 <= index && index < 2)
+	{
+		return m_Extent[index];
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+	}
 }
 
 template <typename Real>
@@ -112,7 +121,6 @@ Real Mathematics::Rectangle3<Real>
 	return m_Extent[1];
 }
 
-
 template <typename Real>
 const std::vector<typename Mathematics::Rectangle3<Real>::Vector3D> Mathematics::Rectangle3<Real>
 	::ComputeVertices() const
@@ -124,11 +132,10 @@ const std::vector<typename Mathematics::Rectangle3<Real>::Vector3D> Mathematics:
 
 	std::vector<Vector3D> vertex{ m_Center - extAxis0 - extAxis1 ,m_Center + extAxis0 - extAxis1 ,m_Center + extAxis0 + extAxis1 ,m_Center - extAxis0 + extAxis1 };
 
-	MATHEMATICS_ASSERTION_1(vertex.size() == 4,"返回的数组大小错误！");
+	MATHEMATICS_ASSERTION_1(vertex.size() == 4, "返回的数组大小错误！");
 
 	return vertex;
 }
-
 
 template <typename Real>
 typename const Mathematics::Rectangle3<Real>::Vector3D Mathematics::Rectangle3<Real>

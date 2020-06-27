@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 11:07)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 09:49)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_TRAITS_H
 #define MATHEMATICS_RATIONAL_INTEGER_TRAITS_H
@@ -13,16 +13,16 @@ namespace Mathematics
 {
 	struct SignedIntegerType
 	{
-		
+
 	};
 
 	struct UnsignedIntegerType
 	{
-		
+
 	};
 
 	struct FloatType
-	{		
+	{
 		using IntegerType = uint32_t;
 		static constexpr IntegerType g_Symbol{ 0x80000000 };
 		static constexpr uint32_t g_SymbolShifting{ 31 };
@@ -32,7 +32,7 @@ namespace Mathematics
 		static constexpr IntegerType g_Mantissa{ 0x007FFFFF };
 		static constexpr IntegerType g_QuietNaN{ 0x00400000 };
 
-		static_assert(g_Symbol + g_Exponent + g_Mantissa == 0xFFFFFFFF,"g_Symbol + g_Exponent + g_Mantissa != 0xFFFFFFFF");
+		static_assert(g_Symbol + g_Exponent + g_Mantissa == 0xFFFFFFFF, "g_Symbol + g_Exponent + g_Mantissa != 0xFFFFFFFF");
 	};
 
 	struct DoubleType
@@ -46,7 +46,7 @@ namespace Mathematics
 		static constexpr IntegerType g_Mantissa{ 0x000FFFFFFFFFFFFFULL };
 		static constexpr IntegerType g_QuietNaN{ 0x0008000000000000ULL };
 
-		static_assert(g_Symbol + g_Exponent + g_Mantissa == (0xFFFFFFFFFFFFFFFFULL),"g_Symbol + g_Exponent + g_Mantissa != (0xFFFFFFFFFFFFFFFFULL)");
+		static_assert(g_Symbol + g_Exponent + g_Mantissa == (0xFFFFFFFFFFFFFFFFULL), "g_Symbol + g_Exponent + g_Mantissa != (0xFFFFFFFFFFFFFFFFULL)");
 	};
 
 	template < typename T>
@@ -75,7 +75,7 @@ namespace Mathematics
 	{
 		using TraitsType = SignedIntegerType;
 	};
-	 
+
 	template<>
 	struct IntegerTraits<uint8_t>
 	{

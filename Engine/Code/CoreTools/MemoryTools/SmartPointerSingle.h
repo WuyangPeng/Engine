@@ -7,7 +7,7 @@
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_SINGLE_H
 #define CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_SINGLE_H
 
-#include <boost/operators.hpp>
+#include "System/Helper/PragmaWarning/Operators.h"
 
 namespace CoreTools
 {

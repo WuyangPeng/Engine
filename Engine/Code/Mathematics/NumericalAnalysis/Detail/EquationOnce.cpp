@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 11:14)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 13:00)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -14,21 +14,21 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 Mathematics::EquationOnce
-	::EquationOnce(double constant,double once, double epsilon)
+	::EquationOnce(double constant, double once, double epsilon)
 	:ParentType{ epsilon }, m_Constant{ constant }, m_Once{ once }
 {
 	Calculate();
-    
-    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+
+	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::EquationOnce
-  ::~EquationOnce()
+	::~EquationOnce()
 {
-    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics,EquationOnce)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EquationOnce)
 
 double Mathematics::EquationOnce
 	::Substitution(double value) const
@@ -42,13 +42,13 @@ const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce
 	::Substitution(const Imaginary& value) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    
+
 	return m_Constant + value * m_Once;
 }
 
 double Mathematics::EquationOnce
 	::SubstitutionTangent(double solution) const
-{   
+{
 	SYSTEM_UNUSED_ARG(solution);
 
 	return m_Once;
@@ -56,7 +56,7 @@ double Mathematics::EquationOnce
 
 const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce
 	::SubstitutionTangent(const Imaginary& solution) const
-{  
+{
 	SYSTEM_UNUSED_ARG(solution);
 
 	return m_Once;
@@ -64,17 +64,17 @@ const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce
 
 void Mathematics::EquationOnce
 	::Solving()
-{    
-    MATHEMATICS_ASSERTION_0(GetEpsilon() < Mathd::FAbs(m_Once),"≥˝¡„¥ÌŒÛ£°");
-    
-    double solution = -m_Constant / m_Once;
+{
+	MATHEMATICS_ASSERTION_0(GetEpsilon() < Mathd::FAbs(m_Once), "≥˝¡„¥ÌŒÛ£°");
 
-    SetRealResult(solution);
+	auto solution = -m_Constant / m_Once;
+
+	SetRealResult(solution);
 }
 
 bool Mathematics::EquationOnce
-   ::Predigest()
-{    
+	::Predigest()
+{
 	return false;
 }
 

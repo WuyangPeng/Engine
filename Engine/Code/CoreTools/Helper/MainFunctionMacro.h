@@ -10,7 +10,8 @@
 
 #include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/EnumCast.h"
 #include "System/DynamicLink/Flags/LoadLibraryFlags.h"
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/DynamicLink/Using/LoadResourceToolsUsing.h"
@@ -18,21 +19,23 @@
 #include "CoreTools/MainFunctionHelper/DllFunctionHelper.h"
 
 #define MAIN_FUNCTION(namespaceName,helperClassName) \
-		int main(int argc,char* argv[]) { namespaceName::helperClassName helper{ argc,argv }; return helper.Run(); }
+		int main(int argc,char** argv) { namespaceName::helperClassName helper{ argc,argv }; return helper.Run(); }
 
 #if defined(TCRE_USE_GCC) || defined(BUILDING_STATIC)
 
 	#define CORE_TOOLS_MUTEX_INIT(namespaceName) \
-          CoreTools::Mutex SYSTEM_MULTIPLE_CONCATENATOR(g_,namespaceName,Mutex)
+            CoreTools::Mutex& SYSTEM_MULTIPLE_CONCATENATOR(Get,namespaceName,Mutex)() { \
+			static CoreTools::Mutex mutex{ }; return mutex; }
 	#define CORE_TOOLS_MUTEX_EXTERN(namespaceName) \
-          extern CoreTools::Mutex SYSTEM_MULTIPLE_CONCATENATOR(g_,namespaceName,Mutex)
+            CoreTools::Mutex& SYSTEM_MULTIPLE_CONCATENATOR(Get,namespaceName,Mutex)()
 
 #else // !defined(TCRE_USE_GCC) && !defined(BUILDING_STATIC)
 
 	#define CORE_TOOLS_MUTEX_INIT(namespaceName) \
-          CoreTools::DllMutex SYSTEM_MULTIPLE_CONCATENATOR(g_,namespaceName,Mutex)
+            CoreTools::DllMutex& SYSTEM_MULTIPLE_CONCATENATOR(Get,namespaceName,Mutex)() { \
+			static CoreTools::DllMutex dllMutex{ }; return dllMutex; }
 	#define CORE_TOOLS_MUTEX_EXTERN(namespaceName) \
-          extern CoreTools::DllMutex SYSTEM_MULTIPLE_CONCATENATOR(g_,namespaceName,Mutex)
+            CoreTools::DllMutex& SYSTEM_MULTIPLE_CONCATENATOR(Get,namespaceName,Mutex)();
 
 #endif // defined(TCRE_USE_GCC) || defined(BUILDING_STATIC)
 
@@ -43,14 +46,31 @@
 
 #else // !TCRE_USE_GCC
 
+	#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26461)
+			inline void ExecuteDllMain(System::WindowHInstance instance, System::WindowDWord reason, System::WindowVoidPtr reserved, CoreTools::DllMutex& mutex)
+			{				
+				switch (System::UnderlyingCastEnum<System::DllMain>(reason))
+				{
+				case System::DllMain::ProcessAttach:
+					CoreTools::DllFunctionHelper::InitializeMutex(&mutex);
+					break;
+				case System::DllMain::ProcessDetach:
+					CoreTools::DllFunctionHelper::DeleteMutex(&mutex);
+					break;
+				default:
+					break;
+				}							
+
+				SYSTEM_UNUSED_ARG(instance);
+				SYSTEM_UNUSED_ARG(reserved);
+			}
+	#include STSTEM_WARNING_POP
+
 	#define DLL_MAIN_FUNCTION(namespaceName) \
-			int SYSTEM_WINAPI DllMain(System::WindowHInstance instance,System::WindowDWord reason,System::WindowVoidPtr reserved); \
 			CORE_TOOLS_MUTEX_INIT(namespaceName); \
 			int SYSTEM_WINAPI DllMain(System::WindowHInstance instance,System::WindowDWord reason,System::WindowVoidPtr reserved) { \
-			switch(System::UnderlyingCastEnum<System::DllMain>(reason)) { \
-			case System::DllMain::ProcessAttach:CoreTools::DllFunctionHelper::InitializeMutex(&SYSTEM_MULTIPLE_CONCATENATOR(g_,namespaceName,Mutex));break; \
-			case System::DllMain::ProcessDetach:CoreTools::DllFunctionHelper::DeleteMutex(&SYSTEM_MULTIPLE_CONCATENATOR(g_,namespaceName,Mutex)); break;\
-			default : break; } SYSTEM_UNUSED_ARG(instance); SYSTEM_UNUSED_ARG(reserved); return System::g_True; }
+			try { ExecuteDllMain(instance,reason,reserved,SYSTEM_MULTIPLE_CONCATENATOR(Get,namespaceName,Mutex)()); } catch(...){ } return System::g_True; }
 
 #endif // TCRE_USE_GCC
 

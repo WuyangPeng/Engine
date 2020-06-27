@@ -10,13 +10,11 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Distance/DistanceBase.h"
-#include "Mathematics/Algebra/Vector2D.h" 
+#include "Mathematics/Algebra/Vector2D.h"  
+#include "Mathematics/Algebra/AlgebraFwd.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Vector2DTools;
-	
 	// 计算(x0,y0)与标准双曲线F(x,y) = (x/a)^2 - (y/b)^2 - 1 = 0之间的距离
 	// 其中a> 0且b> 0。 考虑当(x0,y0)在第一象限中时的情况，所以x0 >= 0 和 y0 >= 0。
 	// 最近的点(x,y)也在第一象限中。 
@@ -37,7 +35,7 @@ namespace Mathematics
 	// 计算从 (x0,y0)到(r,s)的距离。 在从这样的(r,s)的所有距离中，
 	// 选择最小距离作为从(x0,y0)到双曲线的距离。
 	// 数值上，根查找不健壮，因此要谨慎使用此算法。
-	
+
 	// 解决方案2（稳健）：
 	// 因为D和N是平行的，所以必须存在D = t*N的标量t;
 	// 即(x0-x,y0-y) = t*(x/a^2,-y/b^2)。
@@ -62,9 +60,7 @@ namespace Mathematics
 		using Vector2D = Vector2D<Real>;
 		using ParentType = DistanceBase<Real, Vector2D>;
 		using Vector2DTools = Vector2DTools<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using ParentType::GetMaximumIterations;
-		using ParentType::GetZeroThreshold;
+		using DistanceResult = typename ParentType::DistanceResult; 
 		using Math = Math<Real>;
 
 	public:
@@ -80,7 +76,7 @@ namespace Mathematics
 		virtual const DistanceResult GetSquared() const override;
 
 		// 函数计算动态距离查询。	
-		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity,const Vector2D& rhsVelocity) const override;
+		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
 	private:
 		Real GetHyperbola(Real t, const Vector2D&  reciprocalExtentSquared) const;

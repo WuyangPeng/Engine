@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/04 11:35)
+// 引擎版本：0.0.2.5 (2020/03/19 10:14)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_H
@@ -14,17 +14,17 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class PolynomialDivide  
+	class PolynomialDivide
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = PolynomialDivide<Real>;
 		using Polynomial = Polynomial<Real>;
 
 	public:
-		PolynomialDivide (const Polynomial& quotient,const Polynomial& remainder);
-	
+		PolynomialDivide(const Polynomial& quotient, const Polynomial& remainder);
+
 		CLASS_INVARIANT_DECLARE;
 
 		const Polynomial GetQuotient() const;

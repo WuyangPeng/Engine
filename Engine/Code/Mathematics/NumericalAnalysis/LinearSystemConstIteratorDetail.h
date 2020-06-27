@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 17:01)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 14:34)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_CONST_ITERATOR_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_CONST_ITERATOR_DETAIL_H
@@ -14,7 +14,7 @@
 
 template <typename Real>
 Mathematics::LinearSystemConstIterator<Real>
-	::LinearSystemConstIterator() 
+	::LinearSystemConstIterator()
 	:m_Iter{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -48,7 +48,7 @@ void Mathematics::LinearSystemConstIterator<Real>
 
 template <typename Real>
 bool Mathematics::LinearSystemConstIterator<Real>
-	::equal( const ClassType& other ) const
+	::equal(const ClassType& other) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -65,7 +65,7 @@ typename const Mathematics::LinearSystemConstIterator<Real>::OutputConstIter& Ma
 }
 
 template <typename Real>
-typename const Mathematics::LinearSystemConstIterator<Real>::OutputConstIter::value_type Mathematics::LinearSystemConstIterator<Real>
+const typename Mathematics::LinearSystemConstIterator<Real>::OutputConstIter::value_type Mathematics::LinearSystemConstIterator<Real>
 	::operator*() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;

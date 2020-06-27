@@ -11,9 +11,9 @@
 #include "SmartPointerManager.h"
 #include "CoreTools/ObjectSystems/TypeCasting.h"
 #include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
-#include <boost/polymorphic_cast.hpp>
+#include "System/Helper/PragmaWarning/PolymorphicCast.h"
 
 template <typename BaseClass>
 CoreTools::FirstSubclassSmartPointer<BaseClass>
@@ -22,7 +22,9 @@ CoreTools::FirstSubclassSmartPointer<BaseClass>
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_PUSH
 
+#include SYSTEM_WARNING_DISABLE(26434) 
 template <typename BaseClass>
 CoreTools::FirstSubclassSmartPointer<BaseClass>
 	::FirstSubclassSmartPointer(BaseClassType* data)
@@ -31,12 +33,15 @@ CoreTools::FirstSubclassSmartPointer<BaseClass>
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
+
 template <typename BaseClass>
 CoreTools::FirstSubclassSmartPointer<BaseClass>
-	::~FirstSubclassSmartPointer()
+	::FirstSubclassSmartPointer() noexcept
+	:ParentType{ }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename BaseClass>
@@ -79,11 +84,14 @@ const typename CoreTools::FirstSubclassSmartPointer<BaseClass>::BaseClassType* C
 
 template <typename BaseClass>
 typename CoreTools::FirstSubclassSmartPointer<BaseClass>::BaseClassType* CoreTools::FirstSubclassSmartPointer<BaseClass>
-	::GetData()
+	::GetData()  
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26465) 
 	return const_cast<BaseClassType*>(ParentType::GetData());
+#include STSTEM_WARNING_POP
 }
 
 template <typename BaseClass>

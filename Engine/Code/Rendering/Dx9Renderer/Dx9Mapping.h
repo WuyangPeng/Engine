@@ -21,7 +21,7 @@
 #include "Rendering/Resources/Flags/VertexFormatFlags.h"
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 namespace Rendering
 {

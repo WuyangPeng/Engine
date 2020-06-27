@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:21)
+// 引擎版本：0.0.2.5 (2020/03/23 12:32)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_FIT3_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_FIT3_H
@@ -21,9 +21,9 @@ namespace Mathematics
 	// 最小化E(C) = C^t M C与 Length(C) = 1 和
 	// M = (sum_i V_i)(sum_i V_i)^t 其中 
 	// V = (1, X, Y, Z, X^2, Y^2, Z^2, X*Y, X*Z, Y*Z)
-	      
+
 	// 最小值为M的最小特征值和C是一个对应的单位长度的特征向量。	 
- 
+
 	// 输入:
 	//   n = 要拟合点的数量。
 	//   p[0..n-1] = 要拟合点的数组。
@@ -42,33 +42,33 @@ namespace Mathematics
 	// 以获得
 	//   d0 v0^2 + d1 v1^2 + d2 v^2 + e0 v0 + e1 v1 + e2 v2 + f = 0
 	// 特征值依赖于d_i的符号。      
-   
-    template <typename Real>
-    class QuadraticFit3
-    {
-    public:
+
+	template <typename Real>
+	class QuadraticFit3
+	{
+	public:
 		using ClassType = QuadraticFit3<Real>;
 		using Vector3D = Vector3D<Real>;
 		using VariableLengthVector = VariableLengthVector<Real>;
-        
-    public:
+
+	public:
 		explicit QuadraticFit3(const std::vector<Vector3D>& points);
 
-        CLASS_INVARIANT_DECLARE;
-        
+		CLASS_INVARIANT_DECLARE;
+
 		const VariableLengthVector GetCoeff() const;
-        Real GetEigenValue() const;
-        
-    private:
-        void Calculate(const std::vector<Vector3D>& points);
-        
-    private:
+		Real GetEigenValue() const;
+
+	private:
+		void Calculate(const std::vector<Vector3D>& points);
+
+	private:
 		constexpr static auto sm_EigenSystemSize = 10;
 
 	private:
 		VariableLengthVector m_Coeff;
-        Real m_EigenValue;
-    };
+		Real m_EigenValue;
+	};
 
 	using QuadraticFit3d = QuadraticFit3<double>;
 	using QuadraticFit3f = QuadraticFit3<float>;

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/13 10:18)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 15:57)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H 
@@ -20,31 +20,31 @@ Mathematics::StaticTestIntersectorBox2Circle2<Real>
 
 template <typename Real>
 typename const Mathematics::StaticTestIntersectorBox2Circle2<Real>::Box2 Mathematics::StaticTestIntersectorBox2Circle2<Real>
-	::GetBox () const
+	::GetBox() const
 {
-    return m_Box;
+	return m_Box;
 }
 
 template <typename Real>
 typename const Mathematics::StaticTestIntersectorBox2Circle2<Real>::Circle2 Mathematics::StaticTestIntersectorBox2Circle2<Real>
-	::GetCircle () const
+	::GetCircle() const
 {
-    return m_Circle;
+	return m_Circle;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorBox2Circle2<Real>
-	::Test ()
+	::Test()
 {
-    auto distance = DistancePoint2Box2<Real>(m_Circle.GetCenter(), m_Box).Get().GetDistance();
-    if(distance <= m_Circle.GetRadius())
+	auto distance = DistancePoint2Box2<Real>(m_Circle.GetCenter(), m_Box).Get().GetDistance();
+	if (distance <= m_Circle.GetRadius())
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}
 	else
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
-	}	
+	}
 }
- 
+
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H

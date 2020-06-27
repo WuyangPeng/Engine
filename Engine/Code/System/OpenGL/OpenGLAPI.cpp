@@ -18,7 +18,7 @@
 #include "Flags/OpenGLFlags.h"
 #include "Flags/GLExtensionsFlags.h"
 #include "System/Helper/UnusedMacro.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 
 void System
 	::ClearAllGlBufferBit() noexcept

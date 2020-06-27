@@ -20,7 +20,7 @@ namespace CoreTools
 
 	public:
 		CommandHandle(int argumentsNumber, char** arguments);
-		explicit CommandHandle(char* commandLine);
+		explicit CommandHandle(const char* commandLine);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -30,12 +30,12 @@ namespace CoreTools
 
 		// 设置数字参数的范围。
 		// 如果范围是必需的，他们必须为每个参数设置。
-		CommandHandle& SetMinValue(double value);
-		CommandHandle& SetMaxValue(double value);
-		CommandHandle& SetInfValue(double value);
-		CommandHandle& SetSupValue(double value);
+		CommandHandle& SetMinValue(double value) noexcept;
+		CommandHandle& SetMaxValue(double value) noexcept;
+		CommandHandle& SetInfValue(double value) noexcept;
+		CommandHandle& SetSupValue(double value) noexcept;
 
-		void ClearBoundary();
+		void ClearBoundary() noexcept;
 
 		// 下列方法每个的返回值是参数数组中的索引选项和值。
 
@@ -56,7 +56,7 @@ namespace CoreTools
 		void SetFileNmaeUsed();
 
 	private:
-		bool IsArgumentOutOfRange(double value) const;
+		bool IsArgumentOutOfRange(double value) const noexcept;
 
 	private:
 		// 命令行信息。

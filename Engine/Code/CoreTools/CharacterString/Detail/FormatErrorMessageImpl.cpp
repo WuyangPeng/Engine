@@ -9,7 +9,7 @@
 #include "FormatErrorMessageImpl.h"
 #include "System/MemoryTools/LocalTools.h"
 #include "System/DynamicLink/LoadLibrary.h"
-#include "System/EnumOperator/EnumCastDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "System/CharacterString/FormatErrorMessage.h"
 #include "CoreTools/DynamicLink/LoadingLibrary.h"
 #include "CoreTools/Helper/LogMacro.h"
@@ -88,7 +88,7 @@ void CoreTools::FormatErrorMessageImpl
 }
 
 CoreTools::FormatErrorMessageImpl
-	::~FormatErrorMessageImpl()
+	::~FormatErrorMessageImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
@@ -97,7 +97,7 @@ CoreTools::FormatErrorMessageImpl
 
 // private
 void CoreTools::FormatErrorMessageImpl
-	::ReleaseMemory()
+	::ReleaseMemory() noexcept
 {
 	if (m_ErrorMessage != nullptr && !System::LocalMemoryFree(m_ErrorMessage))
 	{

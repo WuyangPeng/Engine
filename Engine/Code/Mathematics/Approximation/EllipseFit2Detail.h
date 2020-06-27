@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/10 11:50)
+// 引擎版本：0.0.2.5 (2020/03/23 13:36)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_DETAIL_H
@@ -31,23 +31,23 @@ void Mathematics::EllipseFit2<Real>
 	::Fit2()
 {
 	// 能量函数为 E : Real^5 -> Real 其中
-    // V = (V0, V1, V2, V3, V4)
-    //   = (D[0], D[1], U.x, U.y, atan2(Real[1][0],Real[1][1])).
+	// V = (V0, V1, V2, V3, V4)
+	//   = (D[0], D[1], U.x, U.y, atan2(Real[1][0],Real[1][1])).
 
-	InitialGuess();    
+	InitialGuess();
 
-    auto angle = Math<Real>::ATan2(m_Rotate[0][1],m_Rotate[0][0]);
+	auto angle = Math<Real>::ATan2(m_Rotate[0][1], m_Rotate[0][0]);
 	auto firstExtent = m_FirstExtent * Math<Real>::FAbs(m_Rotate[0][0]) +
-		               m_SecondExtent * Math<Real>::FAbs(m_Rotate[1][0]);
+					   m_SecondExtent * Math<Real>::FAbs(m_Rotate[1][0]);
 	auto secondExtent = m_FirstExtent * Math<Real>::FAbs(m_Rotate[0][1]) +
-		                m_SecondExtent * Math<Real>::FAbs(m_Rotate[1][1]); 
+						m_SecondExtent * Math<Real>::FAbs(m_Rotate[1][1]);
 
 	std::vector<Real> begin{ static_cast<Real>(0.5) * m_FirstExtent,
 							 static_cast<Real>(0.5) * m_SecondExtent,
 							 m_Center.GetXCoordinate() - firstExtent,
 							 m_Center.GetYCoordinate() - secondExtent,
 							 -Math<Real>::sm_PI };
- 
+
 	std::vector<Real> end{ static_cast<Real>(2) * m_FirstExtent,
 						   static_cast<Real>(2) * m_SecondExtent,
 						   m_Center.GetXCoordinate() + firstExtent,
@@ -69,9 +69,8 @@ void Mathematics::EllipseFit2<Real>
 	m_SecondExtent = minLocation[1];
 	m_Center.SetCoordinate(minLocation[2], minLocation[3]);
 
-	m_Rotate.MakeRotation(-minLocation[4]);   
-}
-
+	m_Rotate.MakeRotation(-minLocation[4]);
+} 
 
 // private
 template <typename Real>
@@ -80,8 +79,8 @@ void Mathematics::EllipseFit2<Real>
 {
 	auto box = ContBox2<Real>::ContOrientedBox(m_Points);
 
-    m_Center = box.GetCenter();
-    m_Rotate[0][0] = box.GetFirstAxis().GetXCoordinate();
+	m_Center = box.GetCenter();
+	m_Rotate[0][0] = box.GetFirstAxis().GetXCoordinate();
 	m_Rotate[0][1] = box.GetFirstAxis().GetYCoordinate();
 	m_Rotate[1][0] = box.GetSecondAxis().GetXCoordinate();
 	m_Rotate[1][1] = box.GetSecondAxis().GetYCoordinate();
@@ -101,10 +100,10 @@ Real Mathematics::EllipseFit2<Real>
 	Matrix2 rotate{ -input[4] };
 
 	Ellipse2<Real> ellipse{ Vector2D::sm_Zero, Vector2D::sm_UnitX,
-						    Vector2D::sm_UnitY, input[0], input[1] };
+							Vector2D::sm_UnitY, input[0], input[1] };
 
 	// 变换点到中心C和旋转Real的列的坐标系统
-	Real energy { };
+	auto energy = Math<Real>::sm_Zero;
 
 	auto numPoints = userData->GetNumPoint();
 
@@ -129,7 +128,7 @@ template <typename Real>
 bool Mathematics::EllipseFit2<Real>
 	::IsValid() const noexcept
 {
-	if (Real{} <= m_Exactly)
+	if (Math<Real>::sm_Zero <= m_Exactly)
 		return true;
 	else
 		return false;
@@ -144,7 +143,6 @@ Real Mathematics::EllipseFit2<Real>
 
 	return m_Exactly;
 }
-
 
 template <typename Real>
 typename const Mathematics::EllipseFit2<Real>::Vector2D Mathematics::EllipseFit2<Real>
@@ -173,7 +171,6 @@ Real Mathematics::EllipseFit2<Real>
 	return m_FirstExtent;
 }
 
-
 template <typename Real>
 Real Mathematics::EllipseFit2<Real>
 	::GetSecondExtent() const
@@ -182,7 +179,6 @@ Real Mathematics::EllipseFit2<Real>
 
 	return m_SecondExtent;
 }
-
 
 template <typename Real>
 int Mathematics::EllipseFit2<Real>
@@ -193,16 +189,14 @@ int Mathematics::EllipseFit2<Real>
 	return boost::numeric_cast<int>(m_Points.size());
 }
 
-
 template <typename Real>
 typename const Mathematics::EllipseFit2<Real>::Vector2D Mathematics::EllipseFit2<Real>
 	::GetPoint(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < GetNumPoint(), "索引错误！");
-	
+
 	return m_Points[index];
 }
 
 #endif // MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_DETAIL_H
- 

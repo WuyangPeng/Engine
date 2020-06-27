@@ -13,6 +13,7 @@
 #include "Flags/GlutKeyCodesFlags.h"
 
 #include <string>
+#include "Using/GL11ExtensionsUsing.h"
 
 namespace System
 {

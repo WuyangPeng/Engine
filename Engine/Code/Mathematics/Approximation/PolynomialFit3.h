@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 11:16)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 12:31)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_H
@@ -38,13 +38,13 @@ namespace Mathematics
 	template <typename Real>
 	class PolynomialFit3
 	{
-	public:		
+	public:
 		using ClassType = PolynomialFit3<Real>;
 		using Samples = std::vector<Real>;
 		using Polynomial = Polynomial<Real>;
 
 	public:
-		PolynomialFit3(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples,int xDegree, int yDegree);
+		PolynomialFit3(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, size_t xDegree, size_t yDegree);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -52,7 +52,7 @@ namespace Mathematics
 		bool IsSolveSucceed() const;
 
 	private:
-		void Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples,int xDegree, int yDegree);
+		void Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, int xDegree, int yDegree);
 
 	private:
 		std::vector<Real> m_Coeff;

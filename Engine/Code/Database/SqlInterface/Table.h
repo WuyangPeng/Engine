@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/03 10:00)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/16 11:32)
 
 #ifndef DATABASE_SQL_INTERFACE_TABLE_H
 #define DATABASE_SQL_INTERFACE_TABLE_H
@@ -11,18 +11,17 @@
 
 #include "CoreTools/Helper/ExportMacro.h"  
 
-#include <string>
+#include "Database/SqlInterface/SqlInterfaceFwd.h"
+#include "Database/Configuration/ConfigurationFwd.h"
+
 #include <map>
+#include <string>
 
 DATABASE_EXPORT_SHARED_PTR(TableImpl);
 EXPORT_NONCOPYABLE_CLASS(DATABASE);
 
 namespace Database
 {
-	class ConfigurationStrategy;
-	class Schema;
-	class Result;
-
 	class DATABASE_DEFAULT_DECLARE Table : private boost::noncopyable
 	{
 	public:
@@ -31,14 +30,14 @@ namespace Database
 		using BindStatementType = std::map<std::string, std::string>;
 
 	public:
-		Table(const Schema& schema,const std::string& tableName);
+		Table(const Schema& schema, const std::string& tableName);
 
 		CLASS_INVARIANT_DECLARE;
 
 		ConfigurationStrategy GetConfigurationStrategy() const;
 
 		ResultPtr Select(std::initializer_list<std::string> selectStatement, const std::string& whereStatement,
-			             const std::string& orderByStatement, const BindStatementType& bindStatement);
+						 const std::string& orderByStatement, const BindStatementType& bindStatement);
 
 	private:
 		IMPL_TYPE_DECLARE(Table);

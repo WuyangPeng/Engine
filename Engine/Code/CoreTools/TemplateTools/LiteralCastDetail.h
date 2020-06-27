@@ -12,7 +12,7 @@
 #include "System/Helper/UnusedMacro.h"
 
 #include <boost/static_assert.hpp>
-#include <stlsoft/util/limit_traits.h>
+#include "System/Helper/PragmaWarning/LimitTraits.h"
 
 template<typename T, int64_t V>
 void CoreTools::LiteralCast<T, V>

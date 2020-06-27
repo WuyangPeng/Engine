@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 11:10)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 09:43)
 
 #ifndef MATHEMATICS_RATIONAL_FWD_H
 #define MATHEMATICS_RATIONAL_FWD_H
@@ -11,7 +11,7 @@ namespace Mathematics
 {
 	template <typename T>
 	class FloatingPointAnalysis;
-	
+
 	template<typename T>
 	class ConversionInteger;
 
@@ -19,10 +19,10 @@ namespace Mathematics
 	class IntegerData;
 
 	template <int N>
-	class IntegerDataAnalysis;	
+	class IntegerDataAnalysis;
 
 	template <int N>
-	class IntegerDataOperator;	
+	class IntegerDataOperator;
 
 	template <int N>
 	class IntegerDivisionModulo;
@@ -34,7 +34,7 @@ namespace Mathematics
 	class IntegerDataConversion;
 
 	template <int N>
-	class Integer;	
+	class Integer;
 
 	template <int N, typename T>
 	class RationalConversion;
@@ -51,7 +51,7 @@ namespace Mathematics
 	class Int64Vector2;
 	class Int64Vector3;
 
-	template <int VectorSize,int IntSize>
+	template <int VectorSize, int IntSize>
 	class RationalVector;
 
 	template <int IntSize>
@@ -59,6 +59,8 @@ namespace Mathematics
 
 	template <int IntSize>
 	class RationalVector3;
+
+	enum class FloatingPointAnalysisType;
 }
 
 #endif // MATHEMATICS_RATIONAL_FWD_H

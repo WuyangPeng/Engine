@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 09:25)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 17:28)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_DETAIL_H
@@ -14,7 +14,7 @@
 
 template <typename Real>
 Mathematics::SparseMatrixConstIterator<Real>
-	::SparseMatrixConstIterator() 
+	::SparseMatrixConstIterator()
 	:m_Iter{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -48,7 +48,7 @@ void Mathematics::SparseMatrixConstIterator<Real>
 
 template <typename Real>
 bool Mathematics::SparseMatrixConstIterator<Real>
-	::equal( const ClassType& other ) const
+	::equal(const ClassType& other) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -57,7 +57,7 @@ bool Mathematics::SparseMatrixConstIterator<Real>
 
 template <typename Real>
 typename const Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixConstIter&
-	Mathematics::SparseMatrixConstIterator<Real>
+Mathematics::SparseMatrixConstIterator<Real>
 	::dereference() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;

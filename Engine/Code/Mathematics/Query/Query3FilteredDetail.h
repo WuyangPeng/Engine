@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
-// ÒýÇæ°æ±¾£º0.0.0.2 (2019/07/10 10:24)
+// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/23 10:02)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_FILTERED_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_FILTERED_DETAIL_H
@@ -32,20 +32,19 @@ template <typename Real>
 bool Mathematics::Query3Filtered<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Real {} <= m_Uncertainty && m_Uncertainty <= static_cast<Real>(1))
-        return true;
-    else
-        return false;    
+	if (ParentType::IsValid() && Math<Real>::sm_Zero <= m_Uncertainty && m_Uncertainty <= static_cast<Real>(1))
+		return true;
+	else
+		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
-
 
 template <typename Real>
 Mathematics::QueryType Mathematics::Query3Filtered<Real>
 	::GetType() const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    
+	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
 	return QueryType::Filtered;
 }
 
@@ -63,14 +62,14 @@ Mathematics::PlaneQueryType Mathematics::Query3Filtered<Real>
 	::ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	
-	const auto vector0 = GetVertice(v0);
-	const auto vector1 = GetVertice(v1);
-	const auto vector2 = GetVertice(v2);
-	
+	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+
+	const auto vector0 = this->GetVertice(v0);
+	const auto vector1 = this->GetVertice(v1);
+	const auto vector2 = this->GetVertice(v2);
+
 	auto x0 = testVector[0] - vector0[0];
 	auto y0 = testVector[1] - vector0[1];
 	auto z0 = testVector[2] - vector0[2];
@@ -80,24 +79,24 @@ Mathematics::PlaneQueryType Mathematics::Query3Filtered<Real>
 	auto x2 = vector2[0] - vector0[0];
 	auto y2 = vector2[1] - vector0[1];
 	auto z2 = vector2[2] - vector0[2];
-	
+
 	auto len0 = Math<Real>::Sqrt(x0 * x0 + y0 * y0 + z0 * z0);
 	auto len1 = Math<Real>::Sqrt(x1 * x1 + y1 * y1 + z1 * z1);
 	auto len2 = Math<Real>::Sqrt(x2 * x2 + y2 * y2 + z2 * z2);
-	
+
 	auto scaledUncertainty = m_Uncertainty * len0 * len1 * len2;
-	
+
 	auto det = QueryDotTools<Real>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
 	if (scaledUncertainty <= Math<Real>::FAbs(det))
-	{		
+	{
 		if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
 			return PlaneQueryType::OnPlane;
-		else if (Real{} < det)
+		else if (Math<Real>::sm_Zero < det)
 			return PlaneQueryType::PositiveSide;
 		else
 			return PlaneQueryType::NegativeSide;
 	}
-	
+
 	return m_RationalQuery.ToPlane(testVector, v0, v1, v2);
 }
 
@@ -107,7 +106,7 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Filtered<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return ParentType::ToCircumsphere(index, v0, v1, v2,v3);
+	return ParentType::ToCircumsphere(index, v0, v1, v2, v3);
 }
 
 template <typename Real>
@@ -115,15 +114,15 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Filtered<Real>
 	::ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < this->GetNumVertices(), "Ë÷Òý´íÎó£¡");
 
-	const auto vector0 = GetVertice(v0);
-	const auto vector1 = GetVertice(v1);
-	const auto vector2 = GetVertice(v2);
-	const auto vector3 = GetVertice(v3);
+	const auto vector0 = this->GetVertice(v0);
+	const auto vector1 = this->GetVertice(v1);
+	const auto vector2 = this->GetVertice(v2);
+	const auto vector3 = this->GetVertice(v3);
 
 	auto s0x = vector0[0] + testVector[0];
 	auto d0x = vector0[0] - testVector[0];
@@ -166,7 +165,7 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Filtered<Real>
 	{
 		if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
 			return CircumsphereQueryType::OnCircumsphere;
-		else if (det < Real{})
+		else if (det < Math<Real>::sm_Zero)
 			return CircumsphereQueryType::Inside;
 		else
 			return CircumsphereQueryType::Outside;
@@ -175,6 +174,4 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Filtered<Real>
 	return m_RationalQuery.ToCircumsphere(testVector, v0, v1, v2, v3);
 }
 
-
 #endif // MATHEMATICS_QUERY_QUERY3_FILTERED_DETAIL_H
- 

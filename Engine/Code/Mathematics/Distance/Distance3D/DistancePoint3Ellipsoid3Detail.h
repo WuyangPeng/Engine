@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/11 10:03)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 10:19)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_DETAIL_H
@@ -32,12 +32,11 @@ template <typename Real>
 bool Mathematics::DistancePoint3Ellipsoid3<Real>
 	::IsValid() const noexcept
 {
-	if(ParentType::IsValid())
+	if (ParentType::IsValid())
 		return true;
 	else
 		return false;
 }
-
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -69,7 +68,7 @@ const typename  Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Math
 				  Vector3DTools::DotProduct(diff,m_Ellipsoid.GetAxis1()),
 				  Vector3DTools::DotProduct(diff, m_Ellipsoid.GetAxis2()) };
 
-	DistancePoint3Ellipsoid3Tool<Real> point3Ellipsoid3SquaredDistance{ m_Ellipsoid.GetExtent0(), m_Ellipsoid.GetExtent1(), m_Ellipsoid.GetExtent2(), dot, ParentType::GetZeroThreshold() };
+	DistancePoint3Ellipsoid3Tool<Real> point3Ellipsoid3SquaredDistance{ m_Ellipsoid.GetExtent0(), m_Ellipsoid.GetExtent1(), m_Ellipsoid.GetExtent2(), dot, this->GetZeroThreshold() };
 
 	auto squaredDistance = point3Ellipsoid3SquaredDistance.GetSquaredDistance();
 	auto outputVector = point3Ellipsoid3SquaredDistance.GetOutputVector();
@@ -77,7 +76,7 @@ const typename  Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Math
 	auto lhsClosestPoint = m_Point;
 	auto rhsClosestPoint = m_Ellipsoid.GetCenter() + outputVector[0] * m_Ellipsoid.GetAxis0() + outputVector[1] * m_Ellipsoid.GetAxis1() + outputVector[2] * m_Ellipsoid.GetAxis2();
 
-	return DistanceResult{ squaredDistance, Real{}, lhsClosestPoint, rhsClosestPoint };
+	return DistanceResult{ squaredDistance, Math<Real>::sm_Zero, lhsClosestPoint, rhsClosestPoint };
 }
 
 template <typename Real>
@@ -85,15 +84,15 @@ typename const Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Mathe
 	::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	
+
 	auto movedPoint = m_Point.GetMove(t, lhsVelocity);
 	auto movedEllipsoid = m_Ellipsoid.GetMove(t, rhsVelocity);
 
 	ClassType distance{ movedPoint, movedEllipsoid };
-	distance.SetZeroThreshold(GetZeroThreshold());
+	distance.SetZeroThreshold(this->GetZeroThreshold());
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
-	 
+
 	return distanceResult;
 }
 

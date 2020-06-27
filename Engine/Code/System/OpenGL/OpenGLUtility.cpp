@@ -27,6 +27,7 @@ System::OpenGLSystemVersion System
 		{
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26489)
 			++token;
 			if (token != nullptr && *token == '.')
 			{

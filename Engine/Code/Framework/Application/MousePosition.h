@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 11:09)
+// 引擎版本：0.3.0.1 (2020/05/21 13:46)
 
 #ifndef FRAMEWORK_APPLICATION_MOUSE_POSITION_H
 #define FRAMEWORK_APPLICATION_MOUSE_POSITION_H
@@ -10,9 +10,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-#include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Flags/WindowFlags.h"
-#include "Framework/WindowCreate/WindowPoint.h"
+#include "Framework/WindowCreate/WindowCreateFwd.h"
 
 FRAMEWORK_EXPORT_SHARED_PTR(MousePositionImpl);
 
@@ -31,10 +29,9 @@ namespace Framework
 
 		// 鼠标位置
 		const WindowPoint GetMousePosition() const;
-		void SetMousePosition (const WindowPoint& windowPoint);
+		void SetMousePosition(const WindowPoint& windowPoint);
 
-	private:
-		;
+	private:		
 		IMPL_TYPE_DECLARE(MousePosition);
 	};
 }

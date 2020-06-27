@@ -2,13 +2,14 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.1 (2020/01/18 17:59)
+// 引擎版本：0.1.0.0 (2020/04/02 15:09)
 
 #ifndef CORE_TOOLS_CLASS_INVARIANT_CHECK_INVARIANT_DETAIL_H
 #define CORE_TOOLS_CLASS_INVARIANT_CHECK_INVARIANT_DETAIL_H
 
 #include "CheckInvariant.h"
 #include "TriggerAssert.h"
+#include "NoexceptDetail.h"
 
 template <typename T>
 CoreTools::CheckInvariant<T>
@@ -17,7 +18,7 @@ CoreTools::CheckInvariant<T>
 {
 	if (m_Conditions != CheckInvariantConditions::OnlyPostconditions)
 	{
-		CheckIsValid("前置条件");
+		NoexceptNoReturn(*this, &ClassType::CheckIsValid, "前置条件");
 	}
 }
 
@@ -27,25 +28,18 @@ CoreTools::CheckInvariant<T>
 {
 	if (m_Conditions != CheckInvariantConditions::OnlyPreconditions)
 	{
-		CheckIsValid("后置条件");
+		NoexceptNoReturn(*this, &ClassType::CheckIsValid, "后置条件");
 	}
 }
 
 // private
 template <typename T>
 void CoreTools::CheckInvariant<T>
-	::CheckIsValid(const char* failLocationDescribe) noexcept
+	::CheckIsValid(const char* failLocationDescribe) const
 {
-	try
+	if (!m_Master.IsValid())
 	{
-		if (!m_Master.IsValid())
-		{
-			TriggerAssert triggerAssert{ TriggerAssertCheck::Invariant,m_FunctionDescribed,"%s", failLocationDescribe };
-		}
-	}
-	catch (...)
-	{
-		// 捕获所有异常，这里不能有任何逻辑，以免造成递归调用。
+		const TriggerAssert triggerAssert{ TriggerAssertCheck::Invariant,m_FunctionDescribed,"%s", failLocationDescribe };
 	}
 }
 

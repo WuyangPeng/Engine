@@ -9,7 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include <boost/shared_ptr.hpp>
+
 #include <map>
 
 namespace Rendering
@@ -22,9 +22,9 @@ namespace Rendering
 	public:
 		using ClassType = BufferManagement<PlatformBufferType>;
 		using BufferType = typename PlatformBufferType::BufferType;
-		using BufferConstPtr = const BufferType*;
+		using BufferConstPtr = CoreTools::ConstFourthSubclassSmartPointer<BufferType>;
 		using PlatformBufferTypeSharedPtr = std::shared_ptr<PlatformBufferType>;
-	    using RendererPtr = Renderer*;
+	    using RendererPtr = std::shared_ptr<Renderer>;
 
 	public:
 		explicit BufferManagement(RendererPtr ptr);
@@ -51,7 +51,7 @@ namespace Rendering
        using BufferMap = std::map<BufferConstPtr, PlatformBufferTypeSharedPtr>;
 
 	private:
-	   RendererPtr m_Renderer;
+		std::weak_ptr<Renderer> m_Renderer;
 	   BufferMap m_Buffers;	 
 	};
 }

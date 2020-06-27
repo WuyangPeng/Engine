@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/07/31 17:55)
+// 引擎版本：0.3.0.1 (2020/05/29 11:22)
 
 #include "Framework/FrameworkExport.h"
 
@@ -11,32 +11,34 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
+using std::make_shared;
+
 Framework::EnvironmentDirectory
-	::EnvironmentDirectory(const System::String& engineEnvironment)
-	:m_Impl(new ImplType(engineEnvironment))
+	::EnvironmentDirectory(const String& engineEnvironment, const String& engineDirectory)
+	:m_Impl{ make_shared<ImplType>(engineEnvironment,engineDirectory) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework,EnvironmentDirectory);
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, EnvironmentDirectory)
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Framework,EnvironmentDirectory);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, EnvironmentDirectory, GetEngineEnvironment, const System::String)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, EnvironmentDirectory, GetEngineDirectory, const System::String)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, EnvironmentDirectory, GetDirectory, UpperDirectory, const System::String)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, EnvironmentDirectory, GetPath, RenderingAnalysisDirectory, const System::String)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetEngineEnvironment,const System::String);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetEngineDirectory,const System::String);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetResourcePath,const System::String);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetConfigurationPath,const System::String);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetShaderPath,const System::String);	
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetScenePath,const System::String);	
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetTexturePath,const System::String);		
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetVertexPath,const System::String);		
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework,EnvironmentDirectory,GetImagePath,const System::String);				
+const System::String Framework::EnvironmentDirectory
+	::GetPath(RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const
+{
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework,EnvironmentDirectory,SetResourcePath,System::String,void)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework,EnvironmentDirectory,SetConfigurationPath,System::String,void)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework,EnvironmentDirectory,SetShaderPath,System::String,void)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework,EnvironmentDirectory,SetScenePath,System::String,void)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework,EnvironmentDirectory,SetTexturePath,System::String,void)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework,EnvironmentDirectory,SetVertexPath,System::String,void)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework,EnvironmentDirectory,SetImagePath,System::String,void)
+	return m_Impl->GetPath(renderingDirectory, analysisDirectory);
+}
 
+const System::String Framework::EnvironmentDirectory
+	::GetPath(EndianDirectory endianDirectory, RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const
+{
+	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+	return m_Impl->GetPath(endianDirectory, renderingDirectory, analysisDirectory);
+}

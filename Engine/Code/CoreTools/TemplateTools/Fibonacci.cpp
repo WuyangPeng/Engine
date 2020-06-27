@@ -8,7 +8,7 @@
 
 #include "Fibonacci.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 uint32_t CoreTools
 	::RecursiveFibonacci(uint32_t integer) noexcept

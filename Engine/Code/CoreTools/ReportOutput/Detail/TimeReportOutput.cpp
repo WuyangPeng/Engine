@@ -17,7 +17,7 @@ using std::string;
 using std::ostream;
 
 CoreTools::TimeReportOutput
-	::TimeReportOutput(const string& timeDescribe, int borderLineLength, ostream* osPtr)
+	::TimeReportOutput(const string& timeDescribe, int borderLineLength, const OStreamShared& osPtr)
 	:EquilongReportOutputImpl{ borderLineLength,osPtr }, m_TimeDescribe{ timeDescribe }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -39,7 +39,7 @@ void CoreTools::TimeReportOutput
 	auto nowTime = boost::posix_time::second_clock::local_time();
 	string formattingTime{ m_TimeDescribe + "ʱ�䣺" + boost::posix_time::to_simple_string(nowTime) };
 
-	*GetStream() << setw(GetBorderLineLength()) << right << formattingTime;
+	GetStream() << setw(GetBorderLineLength()) << right << formattingTime;
 }
 
 void CoreTools::TimeReportOutput

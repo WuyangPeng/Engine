@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/06 11:31)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/19 16:56)
 
 #ifndef MATHEMATICS_OBJECTS2D_POLYGON2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_POLYGON2_DETAIL_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::Polygon2<Real>
-	::Polygon2( int verticesNumber,Vector2DPtr verticesPtr )
+	::Polygon2(int verticesNumber, Vector2DPtr verticesPtr)
 	:m_VerticesNumber{ verticesNumber }, m_Vertices{ verticesPtr }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -34,7 +34,7 @@ template <typename Real>
 bool Mathematics::Polygon2<Real>
 	::IsValid() const noexcept
 {
-	if(4 <= m_VerticesNumber && m_Vertices != nullptr)
+	if (4 <= m_VerticesNumber && m_Vertices != nullptr)
 		return true;
 	else
 		return false;
@@ -61,20 +61,20 @@ const typename Mathematics::Polygon2<Real>::Vector2DPtr Mathematics::Polygon2<Re
 
 template <typename Real>
 const typename Mathematics::Polygon2<Real>::Vector2D& Mathematics::Polygon2<Real>
-	::GetVertex( int index ) const
+	::GetVertex(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < m_VerticesNumber,"À˜“˝¥ÌŒÛ£°");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < m_VerticesNumber, "À˜“˝¥ÌŒÛ£°");
 
 	return m_Vertices[index];
 }
 
 template <typename Real>
 void Mathematics::Polygon2<Real>
-	::SetVertex( int index, const Vector2D& vertex )
+	::SetVertex(int index, const Vector2D& vertex)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < m_VerticesNumber,"À˜“˝¥ÌŒÛ£°");
+	MATHEMATICS_ASSERTION_0(0 <= index && index < m_VerticesNumber, "À˜“˝¥ÌŒÛ£°");
 
 	m_Vertices[index] = vertex;
 }
@@ -86,7 +86,7 @@ const typename Mathematics::Polygon2<Real>::Vector2D Mathematics::Polygon2<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	auto average = m_Vertices[0];
-	for (auto  i = 1; i < m_VerticesNumber; ++i)
+	for (auto i = 1; i < m_VerticesNumber; ++i)
 	{
 		average += m_Vertices[i];
 	}
@@ -120,7 +120,7 @@ Real Mathematics::Polygon2<Real>
 	const auto last = m_VerticesNumber - 1;
 	auto area = m_Vertices[0][0] * (m_Vertices[1][1] - m_Vertices[last][1]) + m_Vertices[last][0] * (m_Vertices[0][1] - m_Vertices[last - 1][1]);
 
-	for (auto i = 1; i < last;++i)
+	for (auto i = 1; i < last; ++i)
 	{
 		area += m_Vertices[i][0] * (m_Vertices[i + 1][1] - m_Vertices[i - 1][1]);
 	}

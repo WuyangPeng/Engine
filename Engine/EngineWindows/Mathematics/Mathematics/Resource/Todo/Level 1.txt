@@ -2,12 +2,14 @@ TODO Level 1
 
 0.0.0.2
 
-1.  将数学库改成根据是否定义MATHEMATICS_EXPORT_TEMPLATE来决定是否实例化模板。
-2.  数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
-3.  修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
-4.  数学库的函数大部分要定义成noexcept。
-5.  修改数学库中使用的NEW1，有内存泄露的可能。
-6.  模板类的子类调用基类成员，之前使用using ParentType::GetZeroThreshold;这种方式，改成调用时改成this->GetZeroThreshold()。
+1.  （综合）将数学库改成根据是否定义MATHEMATICS_EXPORT_TEMPLATE来决定是否实例化模板。
+2.  （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
+3.  （综合）修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
+4.  （综合）数学库的函数大部分要定义成noexcept。
+5.  （综合）修改数学库中使用的NEW1，有内存泄露的可能。
+6.  （综合）模板类的子类调用基类成员，之前使用using ParentType::GetZeroThreshold;这种方式，改成调用时改成this->GetZeroThreshold()。
+
+0.0.2.5
      
 
  

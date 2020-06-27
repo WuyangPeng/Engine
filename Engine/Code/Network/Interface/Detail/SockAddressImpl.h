@@ -1,9 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.1.0 (2019/10/20 17:36)
-
+// “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:14)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_IMPL_H
@@ -13,19 +12,19 @@
 #include "Network/Interface/NetworkInternalFwd.h"
 
 namespace Network
-{	
+{
 	class NETWORK_HIDDEN_DECLARE SockAddressImpl
 	{
 	public:
-		using ClassType = SockAddressImpl;		
+		using ClassType = SockAddressImpl;
 		using SockAddressPtr = std::shared_ptr<ClassType>;
 
 	public:
-		SockAddressImpl ();	
+		SockAddressImpl();
 		virtual ~SockAddressImpl();
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
-		 	 
+
 		virtual const ACEInetAddressType& GetACEInetAddress() const;
 		virtual const BoostInetAddressType& GetBoostInetAddress() const;
 		virtual const WinSockInetAddressType& GetWinSockInetAddress() const;
@@ -38,7 +37,7 @@ namespace Network
 
 		virtual const std::string GetAddress() const = 0;
 		virtual int GetPort() const = 0;
-	};	
-} 
+	};
+}
 
 #endif // NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_IMPL_H

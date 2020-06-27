@@ -1,25 +1,55 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/08/01 13:06)
+// “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 14:53)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ViewMiddleLayerImpl.h" 
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 #include "Rendering/Renderers/Renderer.h" 
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 
+using std::move;
 using std::string;
+using std::make_shared;
+using std::const_pointer_cast;
+using namespace std::literals;
 
 Framework::ViewMiddleLayerImpl
-	::ViewMiddleLayerImpl()
-	:m_Renderer()
+	::ViewMiddleLayerImpl() noexcept
+	:m_Renderer{ }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
-} 
- 
+}
+
+Framework::ViewMiddleLayerImpl
+	::ViewMiddleLayerImpl(ViewMiddleLayerImpl&& rhs) noexcept
+	:m_Renderer{ move(rhs.m_Renderer) }
+{
+	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+}
+
+Framework::ViewMiddleLayerImpl& Framework::ViewMiddleLayerImpl
+	::operator=(ViewMiddleLayerImpl&& rhs) noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_9;
+
+	m_Renderer = move(rhs.m_Renderer);
+
+	return *this;
+}
+
+void Framework::ViewMiddleLayerImpl
+	::ResetRenderer(const string& fileName)
+{
+	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+
+	m_Renderer = make_shared<Renderer>(fileName);
+	m_Renderer->Init();
+}
+
 CLASS_INVARIANT_STUB_DEFINE(Framework, ViewMiddleLayerImpl)
 
 void Framework::ViewMiddleLayerImpl
@@ -27,9 +57,13 @@ void Framework::ViewMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (m_Renderer.IsValidPtr())
+	if (m_Renderer)
 	{
 		m_Renderer->Resize(width, height);
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("‰÷»æ∆˜Œ¥≥ı ºªØ£°"s));
 	}
 }
 
@@ -38,18 +72,18 @@ void Framework::ViewMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (m_Renderer.IsValidPtr())
+	if (m_Renderer)
 	{
-		m_Renderer->DrawMessage(x,y, color, message);
-	} 
-}
-
-void Framework::ViewMiddleLayerImpl
-	::ResetRenderer(const string& fileName)
-{
-	FRAMEWORK_CLASS_IS_VALID_9;
-
-	m_Renderer.Reset(NEW0 Renderer(fileName));
+		if (m_Renderer->PreDraw())
+		{
+			m_Renderer->Draw(x, y, color, message);
+			m_Renderer->PostDraw();
+		}
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("‰÷»æ∆˜Œ¥≥ı ºªØ£°"s));
+	}
 }
 
 void Framework::ViewMiddleLayerImpl
@@ -57,22 +91,29 @@ void Framework::ViewMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (m_Renderer.IsValidPtr())
+	if (m_Renderer)
 	{
 		m_Renderer->ClearColorBuffer();
 	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("‰÷»æ∆˜Œ¥≥ı ºªØ£°"s));
+	}
 }
 
-const Framework::ViewMiddleLayerImpl::RendererSmartPointer Framework::ViewMiddleLayerImpl
-	::GetRenderer()
+const Framework::ViewMiddleLayerImpl::RendererSharedPtr Framework::ViewMiddleLayerImpl
+	::GetRenderer() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	return m_Renderer;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)   
+	return const_pointer_cast<Renderer>(static_cast<const ClassType*>(this)->GetRenderer());
+#include STSTEM_WARNING_POP
 }
 
-const Framework::ViewMiddleLayerImpl::ConstRendererSmartPointer Framework::ViewMiddleLayerImpl
-	::GetConstRenderer() const
+const Framework::ViewMiddleLayerImpl::ConstRendererSharedPtr Framework::ViewMiddleLayerImpl
+	::GetRenderer() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -84,13 +125,28 @@ const Framework::ViewMiddleLayerImpl::Colour Framework::ViewMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	if (m_Renderer.IsValidPtr())
+	if (m_Renderer)
 	{
 		return m_Renderer->GetClearColor();
 	}
 	else
 	{
-		return Colour();
+		THROW_EXCEPTION(SYSTEM_TEXT("‰÷»æ∆˜Œ¥≥ı ºªØ£°"s));
+	}
+}
+
+void Framework::ViewMiddleLayerImpl
+	::SetClearColor(const Colour& colour)
+{
+	FRAMEWORK_CLASS_IS_VALID_9;
+
+	if (m_Renderer)
+	{
+		return m_Renderer->SetClearColor(colour);
+	}
+	else
+	{
+		THROW_EXCEPTION(SYSTEM_TEXT("‰÷»æ∆˜Œ¥≥ı ºªØ£°"s));
 	}
 }
 

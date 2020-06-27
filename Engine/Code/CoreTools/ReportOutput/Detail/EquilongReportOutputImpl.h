@@ -20,7 +20,7 @@ namespace CoreTools
 		using ParentType = ReportOutput;
 
 	public:
-		explicit EquilongReportOutputImpl(int borderLineLength, std::ostream* osPtr = &std::cout);
+		explicit EquilongReportOutputImpl(int borderLineLength, const OStreamShared& osPtr );
 		virtual ~EquilongReportOutputImpl();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;

@@ -26,10 +26,18 @@ static_assert(NETWORK_ASSERT_LEVEL <= ASSERT_LEVEL, "Network assert level defini
 	#define NETWORK_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, ...) \
 			ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, __VA_ARGS__)
 
+	#define NETWORK_ASSERTION_DEBUG(condition, format, ...) \
+			ASSERTION_DEBUG(condition, format, __VA_ARGS__)
+	#define NETWORK_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, ...) \
+			ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, __VA_ARGS__)
+
 #else // NETWORK_ASSERT_LEVEL < 0
 
 	#define NETWORK_ASSERTION_0(condition, format, ...) ((void)0)
 	#define NETWORK_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, ...) ((void)0)
+
+	#define NETWORK_ASSERTION_DEBUG(condition, format, ...) ((void)0)
+	#define NETWORK_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, ...) ((void)0)
 
 #endif //0 <= NETWORK_ASSERT_LEVEL
 

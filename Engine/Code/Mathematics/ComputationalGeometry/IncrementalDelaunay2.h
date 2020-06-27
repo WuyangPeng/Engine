@@ -27,7 +27,7 @@ namespace Mathematics
 		// 'uncertainty' is in (0,1), then filtered predicates are used to
 		// compute the signs of quantities of interest.  If 'uncertainty' is
 		// set to 1, then exact rational arithmetic is used.
-		IncrementalDelaunay2 (Real xmin, Real ymin, Real xmax, Real ymax, Real uncertainty = Real{});
+		IncrementalDelaunay2 (Real xmin, Real ymin, Real xmax, Real ymax, Real uncertainty = Math<Real>::sm_Zero);
 
 		~IncrementalDelaunay2 ();
 

@@ -1,58 +1,74 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/08/01 13:06)
+// 引擎版本：0.3.0.1 (2020/05/21 14:54)
 
 #include "Framework/FrameworkExport.h"
- 
+
 #include "CameraModelMiddleLayer.h"
-#include "Detail/CameraModelMiddleLayerImpl.h"
 #include "CameraViewMiddleLayer.h" 
-#include "MiddleLayerInterfaceDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+#include "MiddleLayerInterface.h"
+#include "Detail/CameraModelMiddleLayerImpl.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
+#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+#include "Framework/WindowCreate/WindowPoint.h"
 
+using std::move;
+using std::make_shared;
+ 
 Framework::CameraModelMiddleLayer
-	::CameraModelMiddleLayer()
-	:ParentType{}, m_Impl(new ImplType), m_TimeDelta(System::g_Microseconds)
+	::CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
+	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>() }, m_TimeDelta{ System::g_Microseconds }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
-
+ 
 Framework::CameraModelMiddleLayer
-	::~CameraModelMiddleLayer()	
+	::CameraModelMiddleLayer(CameraModelMiddleLayer&& rhs) noexcept
+	:ParentType{ move(rhs) }, m_Impl{ move(rhs.m_Impl) }, m_TimeDelta{ rhs.m_TimeDelta }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
+ 
+Framework::CameraModelMiddleLayer& Framework::CameraModelMiddleLayer
+	::operator=(CameraModelMiddleLayer&& rhs) noexcept
+{
+	FRAMEWORK_CLASS_IS_VALID_1;
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Framework,CameraModelMiddleLayer)
+	ParentType::operator=(move(rhs));
+
+	m_Impl = move(rhs.m_Impl);
+	m_TimeDelta = rhs.m_TimeDelta;
+
+	return *this;
+}
+ 
+CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Framework, CameraModelMiddleLayer)
 
 bool Framework::CameraModelMiddleLayer
 	::Initialize()
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	if(ParentType::Initialize())
+	if (ParentType::Initialize())
 	{
-		const float speed = 0.01f;
-		const float speedFactor = 2.0f;
+		constexpr auto speed = 0.01f;
+		constexpr auto speedFactor = 2.0f;
 
 		InitializeCameraMotion(speed, speed, speedFactor, speedFactor);
-		
-		InitializeObjectMotion();	
 
-		CameraViewMiddleLayerSmartPointer cameraViewMiddleLayer = GetSmartPointer<CameraViewMiddleLayerSmartPointer>(this, &ClassType::GetViewMiddleLayer);
+		InitializeObjectMotion();
 
-		Rendering::ConstCameraSmartPointer camera = m_Impl->GetCamera();
+		auto cameraViewMiddleLayer = boost::polymorphic_pointer_cast<CameraViewMiddleLayer>(GetViewMiddleLayer());
 
-		if (cameraViewMiddleLayer.IsValidPtr() && camera.IsValidPtr())
-		{
-			cameraViewMiddleLayer->SetCamera(camera);
-		}			
+		auto camera = m_Impl->GetCamera();
 	
+		cameraViewMiddleLayer->SetCamera(camera);		
+
 		return true;
 	}
 	else
@@ -66,12 +82,9 @@ void Framework::CameraModelMiddleLayer
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	CameraViewMiddleLayerSmartPointer cameraViewMiddleLayer = GetSmartPointer<CameraViewMiddleLayerSmartPointer>(this, &ClassType::GetViewMiddleLayer);
+	auto cameraViewMiddleLayer = boost::polymorphic_pointer_cast<CameraViewMiddleLayer>(GetViewMiddleLayer());
 
-	if (cameraViewMiddleLayer.IsValidPtr())
-	{
-		cameraViewMiddleLayer->SetCamera(Rendering::ConstCameraSmartPointer());
-	}		
+	cameraViewMiddleLayer->SetCamera(Rendering::CameraSmartPointer{ });
 
 	m_Impl->Terminate();
 }
@@ -96,15 +109,15 @@ bool Framework::CameraModelMiddleLayer
 	{
 		return false;
 	}
-	
+
 }
 
 void Framework::CameraModelMiddleLayer
-	::InitializeCameraMotion( float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor )
+	::InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	m_Impl->InitializeCameraMotion(translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor);
+	return m_Impl->InitializeCameraMotion(translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor);
 }
 
 void Framework::CameraModelMiddleLayer
@@ -112,62 +125,89 @@ void Framework::CameraModelMiddleLayer
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	m_Impl->InitializeObjectMotion();
+	return m_Impl->InitializeObjectMotion();
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, MoveCamera, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, SlowerCameraTranslation, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, FasterCameraTranslation, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, SlowerCameraRotation, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, FasterCameraRotation, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraModelMiddleLayer, SlowerCameraTranslation, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraModelMiddleLayer, FasterCameraTranslation, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraModelMiddleLayer, SlowerCameraRotation, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraModelMiddleLayer, FasterCameraRotation, void);
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetMoveForward, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetMoveBackward, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetTurnLeft, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetTurnRight, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetLookUp, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetLookDown, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetMoveUp, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetMoveDown, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetMoveRight, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetMoveLeft, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetMoveForward, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetMoveBackward, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetTurnLeft, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetTurnRight, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetLookUp, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetLookDown, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetMoveUp, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetMoveDown, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetMoveRight, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetMoveLeft, bool, void);
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, MoveObject, bool);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, RotateTrackBall, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetTrackBallDow, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, SetSaveRotate, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetDoRoll, Mathematics::NumericalValueSymbol, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetDoYaw, Mathematics::NumericalValueSymbol, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, CameraModelMiddleLayer, SetDoPitch, Mathematics::NumericalValueSymbol, void);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetTrackBallDow, bool);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetTrackBallDow, bool, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, SetSaveRotate, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetDoRoll, NumericalValueSymbol, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetDoYaw, NumericalValueSymbol, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetDoPitch, NumericalValueSymbol, void);
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraModelMiddleLayer, GetTrackBallDow, bool);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraPosition, const Framework::CameraModelMiddleLayer::APoint);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraDirectionVector, const Framework::CameraModelMiddleLayer::AVector);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraUpVector, const Framework::CameraModelMiddleLayer::AVector);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraRightVector, const Framework::CameraModelMiddleLayer::AVector);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetRotationSpeed, float);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetTranslationSpeed, float); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetTranslationSpeed, float);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetMotionObjectLocalTransform, const Framework::CameraModelMiddleLayer::Transform);
 
 void Framework::CameraModelMiddleLayer
-	::SetBeginTrack(float xTrack, float yTrack)
+	::SetBeginTrack(float xTrack, float yTrack) noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->SetBeginTrack(xTrack, yTrack);
 }
- 
+
 void Framework::CameraModelMiddleLayer
-	::SetEndTrack(float xTrack, float yTrack)
+	::SetEndTrack(float xTrack, float yTrack) noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->SetEndTrack(xTrack, yTrack);
 }
 
+void Framework::CameraModelMiddleLayer
+	::RotateTrackBall(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer)
+{
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
- 
- 
+	const auto xTrack = cameraViewMiddleLayer.GetXTrack(point.GetWindowX());
+	const auto yTrack = cameraViewMiddleLayer.GetYTrack(point.GetWindowY());
 
- 
+	SetEndTrack(xTrack, yTrack);
+
+	// 更新对象的局部旋转
+	RotateTrackBall();
+}
+
+void Framework::CameraModelMiddleLayer
+	::SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer)
+{
+	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	// 得到起点。
+	SetTrackBallDow(true);
+	SetSaveRotate();
+
+	const auto xTrack = cameraViewMiddleLayer.GetXTrack(point.GetWindowX());
+	const auto yTrack = cameraViewMiddleLayer.GetYTrack(point.GetWindowY());
+
+	SetBeginTrack(xTrack, yTrack);
+}
+
+
+

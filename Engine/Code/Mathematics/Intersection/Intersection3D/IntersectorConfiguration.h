@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/12 10:32)
+// 引擎版本：0.0.2.5 (2020/03/24 14:48)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_H
@@ -28,7 +28,7 @@ namespace Mathematics
 			RIGHT,
 			NONE
 		};
-		
+
 		// VertexProjectionMap (how the vertices are projected to the minimum
 		// and maximum points of the interval).
 		enum
@@ -37,13 +37,13 @@ namespace Mathematics
 			m3, m21, m12, m111,  // triangles
 			m44, m2_2, m1_1      // boxes
 		};
-		
+
 		// The VertexProjectionMap value for the configuration.
 		int mMap;
-		
+
 		// The order of the vertices.
 		int mIndex[8];
-		
+
 		// Projection interval.
 		Real mMin, mMax;
 	};

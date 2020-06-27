@@ -79,7 +79,7 @@ namespace Mathematics
 			Real nx = dy1 * dz2 - dy2 * dz1;
 			Real ny = dz1 * dx2 - dz2 * dx1;
 			Real nz = dx1 * dy2 - dx2 * dy1;
-			if (nz < Real{})
+			if (nz < Math<Real>::sm_Zero)
 			{
 				nx = -nx;
 				ny = -ny;
@@ -96,14 +96,14 @@ namespace Mathematics
 		{
 			if (Math<Real>::FAbs(FZ[i]) > Math<Real>::sm_ZeroTolerance)
 			{
-				Real inv = -((Real)1) / FZ[i];
+				Real inv = -(static_cast<Real>(1)) / FZ[i];
 				mFX[i] *= inv;
 				mFY[i] *= inv;
 			}
 			else
 			{
-				mFX[i] = Real{};
-				mFY[i] = Real{};
+				mFX[i] = Math<Real>::sm_Zero;
+				mFY[i] = Math<Real>::sm_Zero;
 			}
 		}
 
@@ -168,7 +168,7 @@ namespace Mathematics
 			else
 			{
 				// No adjacent triangle, use center of edge.
-				U[j] = (Real{ 0.5 })*(V[(j + 2) % 3] + V[(j + 1) % 3]);
+				U[j] = (static_cast<Real>(0.5))*(V[(j + 2) % 3] + V[(j + 1) % 3]);
 			}
 		}
 
@@ -181,7 +181,7 @@ namespace Mathematics
 		m11 = U[0].GetXCoordinate() - mTData[i].Center.GetXCoordinate();
 		r0 = m00 * V[0].GetXCoordinate() + m01 * V[0].GetYCoordinate();
 		r1 = m10 * mTData[i].Center.GetXCoordinate() + m11 * mTData[i].Center.GetYCoordinate();
-		invDet = ((Real)1) / (m00*m11 - m01 * m10);
+		invDet = (static_cast<Real>(1)) / (m00*m11 - m01 * m10);
 		mTData[i].Intersect[0][0] = (m11*r0 - m01 * r1)*invDet;
 		mTData[i].Intersect[0][1] = (m00*r1 - m10 * r0)*invDet;
 
@@ -192,7 +192,7 @@ namespace Mathematics
 		m11 = U[1].GetXCoordinate() - mTData[i].Center.GetXCoordinate();
 		r0 = m00 * V[1].GetXCoordinate() + m01 * V[1].GetYCoordinate();
 		r1 = m10 * mTData[i].Center.GetXCoordinate() + m11 * mTData[i].Center.GetYCoordinate();
-		invDet = ((Real)1) / (m00*m11 - m01 * m10);
+		invDet = (static_cast<Real>(1)) / (m00*m11 - m01 * m10);
 		mTData[i].Intersect[1][0] = (m11*r0 - m01 * r1)*invDet;
 		mTData[i].Intersect[1][1] = (m00*r1 - m10 * r0)*invDet;
 
@@ -203,7 +203,7 @@ namespace Mathematics
 		m11 = U[2].GetXCoordinate() - mTData[i].Center.GetXCoordinate();
 		r0 = m00 * V[0].GetXCoordinate() + m01 * V[0].GetYCoordinate();
 		r1 = m10 * mTData[i].Center.GetXCoordinate() + m11 * mTData[i].Center.GetYCoordinate();
-		invDet = ((Real)1) / (m00*m11 - m01 * m10);
+		invDet = (static_cast<Real>(1)) / (m00*m11 - m01 * m10);
 		mTData[i].Intersect[2][0] = (m11*r0 - m01 * r1)*invDet;
 		mTData[i].Intersect[2][1] = (m00*r1 - m10 * r0)*invDet;
 	}
@@ -248,7 +248,7 @@ namespace Mathematics
 			else
 			{
 				// No adjacent triangle, use center of edge.
-				U[j] = (Real{ 0.5 })*(V[(j + 2) % 3] + V[(j + 1) % 3]);
+				U[j] = (static_cast<Real>(0.5))*(V[(j + 2) % 3] + V[(j + 1) % 3]);
 			}
 		}
 
@@ -262,33 +262,33 @@ namespace Mathematics
 		Real alpha = (cenT[1] * cen1[0] - cenT[0] * cen1[1]) / (cen1[0] - cenT[0]);
 		Real beta = (cenT[2] * cen2[1] - cenT[1] * cen2[2]) / (cen2[1] - cenT[1]);
 		Real gamma = (cenT[0] * cen0[2] - cenT[2] * cen0[0]) / (cen0[2] - cenT[2]);
-		Real oneMinusAlpha = (Real)1 - alpha;
-		Real oneMinusBeta = (Real)1 - beta;
-		Real oneMinusGamma = (Real)1 - gamma;
+		Real oneMinusAlpha = static_cast<Real>(1) - alpha;
+		Real oneMinusBeta = static_cast<Real>(1) - beta;
+		Real oneMinusGamma = static_cast<Real>(1) - gamma;
 
 		Real tmp, A[9], B[9];
 
 		tmp = cenT[0] * V[0].GetXCoordinate() + cenT[1] * V[1].GetXCoordinate() + cenT[2] * V[2].GetXCoordinate();
-		A[0] = (Real{ 0.5 })*(tmp - V[0].GetXCoordinate());
-		A[1] = (Real{ 0.5 })*(tmp - V[1].GetXCoordinate());
-		A[2] = (Real{ 0.5 })*(tmp - V[2].GetXCoordinate());
-		A[3] = (Real{ 0.5 })*beta*(V[2].GetXCoordinate() - V[0].GetXCoordinate());
-		A[4] = (Real{ 0.5 })*oneMinusGamma*(V[1].GetXCoordinate() - V[0].GetXCoordinate());
-		A[5] = (Real{ 0.5 })*gamma*(V[0].GetXCoordinate() - V[1].GetXCoordinate());
-		A[6] = (Real{ 0.5 })*oneMinusAlpha*(V[2].GetXCoordinate() - V[1].GetXCoordinate());
-		A[7] = (Real{ 0.5 })*alpha*(V[1].GetXCoordinate() - V[2].GetXCoordinate());
-		A[8] = (Real{ 0.5 })*oneMinusBeta*(V[0].GetXCoordinate() - V[2].GetXCoordinate());
+		A[0] = (static_cast<Real>(0.5))*(tmp - V[0].GetXCoordinate());
+		A[1] = (static_cast<Real>(0.5))*(tmp - V[1].GetXCoordinate());
+		A[2] = (static_cast<Real>(0.5))*(tmp - V[2].GetXCoordinate());
+		A[3] = (static_cast<Real>(0.5))*beta*(V[2].GetXCoordinate() - V[0].GetXCoordinate());
+		A[4] = (static_cast<Real>(0.5))*oneMinusGamma*(V[1].GetXCoordinate() - V[0].GetXCoordinate());
+		A[5] = (static_cast<Real>(0.5))*gamma*(V[0].GetXCoordinate() - V[1].GetXCoordinate());
+		A[6] = (static_cast<Real>(0.5))*oneMinusAlpha*(V[2].GetXCoordinate() - V[1].GetXCoordinate());
+		A[7] = (static_cast<Real>(0.5))*alpha*(V[1].GetXCoordinate() - V[2].GetXCoordinate());
+		A[8] = (static_cast<Real>(0.5))*oneMinusBeta*(V[0].GetXCoordinate() - V[2].GetXCoordinate());
 
 		tmp = cenT[0] * V[0].GetYCoordinate() + cenT[1] * V[1].GetYCoordinate() + cenT[2] * V[2].GetYCoordinate();
-		B[0] = (Real{ 0.5 })*(tmp - V[0].GetYCoordinate());
-		B[1] = (Real{ 0.5 })*(tmp - V[1].GetYCoordinate());
-		B[2] = (Real{ 0.5 })*(tmp - V[2].GetYCoordinate());
-		B[3] = (Real{ 0.5 })*beta*(V[2].GetYCoordinate() - V[0].GetYCoordinate());
-		B[4] = (Real{ 0.5 })*oneMinusGamma*(V[1].GetYCoordinate() - V[0].GetYCoordinate());
-		B[5] = (Real{ 0.5 })*gamma*(V[0].GetYCoordinate() - V[1].GetYCoordinate());
-		B[6] = (Real{ 0.5 })*oneMinusAlpha*(V[2].GetYCoordinate() - V[1].GetYCoordinate());
-		B[7] = (Real{ 0.5 })*alpha*(V[1].GetYCoordinate() - V[2].GetYCoordinate());
-		B[8] = (Real{ 0.5 })*oneMinusBeta*(V[0].GetYCoordinate() - V[2].GetYCoordinate());
+		B[0] = (static_cast<Real>(0.5))*(tmp - V[0].GetYCoordinate());
+		B[1] = (static_cast<Real>(0.5))*(tmp - V[1].GetYCoordinate());
+		B[2] = (static_cast<Real>(0.5))*(tmp - V[2].GetYCoordinate());
+		B[3] = (static_cast<Real>(0.5))*beta*(V[2].GetYCoordinate() - V[0].GetYCoordinate());
+		B[4] = (static_cast<Real>(0.5))*oneMinusGamma*(V[1].GetYCoordinate() - V[0].GetYCoordinate());
+		B[5] = (static_cast<Real>(0.5))*gamma*(V[0].GetYCoordinate() - V[1].GetYCoordinate());
+		B[6] = (static_cast<Real>(0.5))*oneMinusAlpha*(V[2].GetYCoordinate() - V[1].GetYCoordinate());
+		B[7] = (static_cast<Real>(0.5))*alpha*(V[1].GetYCoordinate() - V[2].GetYCoordinate());
+		B[8] = (static_cast<Real>(0.5))*oneMinusBeta*(V[0].GetYCoordinate() - V[2].GetYCoordinate());
 
 		// Compute Bezier coefficients.
 		tData.Coeff[2] = jet[0].F;
@@ -352,7 +352,7 @@ namespace Mathematics
 			bary[0] = barycentricCoordinates[0];
 			bary[1] = barycentricCoordinates[1];
 			bary[2] = barycentricCoordinates[2];
-			if (bary[0] >= Real{} && bary[1] >= Real{} && bary[2] >= Real{})
+			if (bary[0] >= Math<Real>::sm_Zero && bary[1] >= Math<Real>::sm_Zero && bary[2] >= Math<Real>::sm_Zero)
 			{
 				// P is in triangle <Sub0,Sub1,Sub2>
 				break;
@@ -388,9 +388,9 @@ namespace Mathematics
 			bary[2] * (bez[2] * bary[0] + bez[4] * bary[1] + bez[5] * bary[2]);
 
 		// Evaluate barycentric derivatives of F.
-		Real FU = ((Real)2.0)*(bez[0] * bary[0] + bez[1] * bary[1] +bez[2] * bary[2]);
-		Real FV = ((Real)2.0)*(bez[1] * bary[0] + bez[3] * bary[1] +bez[4] * bary[2]);
-		Real FW = ((Real)2.0)*(bez[2] * bary[0] + bez[4] * bary[1] +bez[5] * bary[2]);
+		Real FU = (static_cast<Real>(2.0))*(bez[0] * bary[0] + bez[1] * bary[1] +bez[2] * bary[2]);
+		Real FV = (static_cast<Real>(2.0))*(bez[1] * bary[0] + bez[3] * bary[1] +bez[4] * bary[2]);
+		Real FW = (static_cast<Real>(2.0))*(bez[2] * bary[0] + bez[4] * bary[1] +bez[5] * bary[2]);
 		Real duw = FU - FW;
 		Real dvw = FV - FW;
 
@@ -399,7 +399,7 @@ namespace Mathematics
 		Real m10 = sub0.GetYCoordinate() - sub2.GetYCoordinate();
 		Real m01 = sub1.GetXCoordinate() - sub2.GetXCoordinate();
 		Real m11 = sub1.GetYCoordinate() - sub2.GetYCoordinate();
-		Real inv = ((Real)1) / (m00*m11 - m10 * m01);
+		Real inv = (static_cast<Real>(1)) / (m00*m11 - m10 * m01);
 
 		FX = inv * (m11*duw - m10 * dvw);
 		FY = inv * (m00*dvw - m01 * duw);

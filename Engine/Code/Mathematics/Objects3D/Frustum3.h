@@ -1,31 +1,31 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.2 (2019/07/08 09:08)
+// 引擎版本：0.0.2.5 (2020/03/19 17:22)
 
 #ifndef MATHEMATICS_OBJECTS3D_FRUSTUM3_H
 #define MATHEMATICS_OBJECTS3D_FRUSTUM3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
 #include "Mathematics/Base/Math.h"
+#include "Mathematics/Algebra/Vector3D.h"
 
-#include <type_traits> 
 #include <vector>
+#include <type_traits> 
 
 namespace Mathematics
 {
 	template <typename Real>
 	class Frustum3
 	{
-	public:		
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = Frustum3<Real>;
-		using Vector3D = Vector3D<Real>;
 		using Math = Math<Real>;
+		using Vector3D = Vector3D<Real>;		
 
 	public:
 		// 正交视锥体。
@@ -36,8 +36,8 @@ namespace Mathematics
 		// 其中|s0| =|s1| = 1（四个选项）。
 		// 四个角的远平面的截锥是 E + f*D + (f/n)*(s0*u*U + s1*r*Real)，
 		// 其中|s0| = |s1| = 1（四项选择）
-		Frustum3 (const Vector3D& origin, const Vector3D& directionVector,const Vector3D& upVector, const Vector3D& rightVector,Real directionMin,
-				  Real directionMax,Real upBound, Real rightBound,const Real epsilon = Math::sm_ZeroTolerance);
+		Frustum3(const Vector3D& origin, const Vector3D& directionVector, const Vector3D& upVector, const Vector3D& rightVector, Real directionMin,
+				 Real directionMax, Real upBound, Real rightBound, const Real epsilon = Math::sm_ZeroTolerance);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -49,19 +49,19 @@ namespace Mathematics
 		Real GetDirectionMax() const;
 		Real GetUpBound() const;
 		Real GetRightBound() const;
-		
-		Real GetDirectionRatio () const;
-		Real GetMTwoUF () const;
-		Real GetMTwoRF () const;
+
+		Real GetDirectionRatio() const;
+		Real GetMTwoUF() const;
+		Real GetMTwoRF() const;
 
 		// 返回8个顶点
-		const std::vector<Vector3D> ComputeVertices () const;
+		const std::vector<Vector3D> ComputeVertices() const;
 
 	private:
 		// Update()函数必须被调用在更改了m_DirectionMin，m_DirectionMax，
 		// m_UpBound，或m_RightBound时。
 		// 该值m_DirectionRatio，m_MTwoUF和m_MTwoRF都依赖于这些值的变化。
-		void Update ();
+		void Update();
 
 	private:
 		Vector3D m_Origin;

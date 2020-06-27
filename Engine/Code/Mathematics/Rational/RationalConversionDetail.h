@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/08 13:50)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 10:18)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
@@ -14,14 +14,14 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <boost/numeric/conversion/cast.hpp>
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <type_traits>
 
 template <int N, typename T>
 Mathematics::RationalConversion<N, T>
 	::RationalConversion(const Rational& rational)
 	:m_AbsNumerator{ rational.GetNumerator().GetAbsoluteValue() }, m_AbsDenominator{ rational.GetDenominator().GetAbsoluteValue() },
-	 m_Shifting{ m_AbsNumerator.IsZero()? 0 :( m_AbsNumerator.GetLeadingBit() - m_AbsDenominator.GetLeadingBit()) }, m_Symbol{ rational.GetSign() }, m_Value{}, m_Mantissa{}
+	 m_Shifting{ m_AbsNumerator.IsZero() ? 0 : (m_AbsNumerator.GetLeadingBit() - m_AbsDenominator.GetLeadingBit()) }, m_Symbol{ rational.GetSign() }, m_Value{}, m_Mantissa{}
 {
 	if (!m_AbsNumerator.IsZero())
 	{
@@ -29,12 +29,12 @@ Mathematics::RationalConversion<N, T>
 	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-} 
+}
 
 // private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>
-	::Init(const SignedIntegerType&) 
+	::Init(const SignedIntegerType&)
 {
 	static_assert(std::is_integral_v<T>, "T isn't integral.");
 
@@ -49,7 +49,7 @@ void Mathematics::RationalConversion<N, T>
 // private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>
-	::Init(const UnsignedIntegerType&) 
+	::Init(const UnsignedIntegerType&)
 {
 	static_assert(std::is_integral_v<T>, "T isn't integral.");
 
@@ -82,12 +82,12 @@ void Mathematics::RationalConversion<N, T>
 	::InitToFloatingPoint()
 {
 	using IntegerType = typename TraitsType::IntegerType;
-	
+
 	CorrectWithShifting();
 
 	if (m_Shifting <= static_cast<int>(TraitsType::g_RealExponentDifference))
 	{
-		CalculateMantissa();		
+		CalculateMantissa();
 	}
 	else
 	{
@@ -147,7 +147,8 @@ void Mathematics::RationalConversion<N, T>
 		if (-realExponentDifference < m_Shifting)
 		{
 			// normal_float, 1.c * 2^{e - 127}
-			exponent = m_Shifting + realExponentDifference;
+			auto temp = m_Shifting + realExponentDifference;
+			exponent = temp;
 			bit = 1;
 			shift = 0;
 		}
@@ -179,9 +180,10 @@ void Mathematics::RationalConversion<N, T>
 			{
 				bit = 0;
 			}
-		}		
+		}
 
-		m_Mantissa = (exponent << exponentShifting) | m_Mantissa;
+		auto temp = exponent << exponentShifting;
+		m_Mantissa = static_cast<uint64_t>(temp | m_Mantissa);
 	}
 	else
 	{
@@ -193,7 +195,7 @@ void Mathematics::RationalConversion<N, T>
 // private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>
-	::Negative() 
+	::Negative()
 {
 	if (m_Symbol == NumericalValueSymbol::Negative)
 	{
@@ -210,9 +212,9 @@ void Mathematics::RationalConversion<N, T>
 
 	m_Value = division.GetValue<T>();
 }
- 
+
 #ifdef OPEN_CLASS_INVARIANT
-template <int N,typename T>
+template <int N, typename T>
 bool Mathematics::RationalConversion<N, T>
 	::IsValid() const noexcept
 {
@@ -222,7 +224,7 @@ bool Mathematics::RationalConversion<N, T>
 
 template <int N, typename T>
 T Mathematics::RationalConversion<N, T>
-	::GetValue() const 
+	::GetValue() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

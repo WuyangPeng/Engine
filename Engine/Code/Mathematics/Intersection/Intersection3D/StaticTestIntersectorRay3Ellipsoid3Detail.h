@@ -48,18 +48,18 @@ void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
 	auto matDiff = M*diff;
 	auto a2 = Vector3DTools::DotProduct(mRay.GetDirection(),matDir);
 	auto a1 = Vector3DTools::DotProduct(mRay.GetDirection(),matDiff);
-	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - (Real)1;
+	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - static_cast<Real>(1);
 
     // No intersection if Q(t) has no real roots.
 	auto discr = a1*a1 - a0*a2;
-    if (discr < Real{})
+    if (discr < Math<Real>::sm_Zero)
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // Test whether ray origin is inside ellipsoid.
-    if (a0 <= Real{})
+    if (a0 <= Math<Real>::sm_Zero)
     {
 		this->SetIntersectionType(IntersectionType::Point);
         return;
@@ -69,7 +69,7 @@ void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
     // the case that a2 > 0, since M is positive definite, implying that
     // D^T*M*D > 0 for any nonzero vector D.  Thus, an intersection occurs
     // only when Q'(0) < 0.
-	if (a1 < Real{})
+	if (a1 < Math<Real>::sm_Zero)
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}

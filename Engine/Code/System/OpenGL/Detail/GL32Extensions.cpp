@@ -33,25 +33,25 @@ System::PgglFramebufferTexture System::gglFramebufferTexture{ nullptr };
 void System
 	::GlGetInteger64i_v(GLenum target, GLuint index, GLint64* data) noexcept
 {
-	SYSTEM_BODY_A3(gglGetInteger64i_v, target, index, data);
+	SYSTEM_BODY_3(gglGetInteger64i_v, target, index, data);
 }
 
 void System
 	::GlGetBufferParameteri64v(GLenum target, GLenum name, GLint64* params) noexcept
 {
-	SYSTEM_BODY_A3(gglGetBufferParameteri64v, target, name, params);
+	SYSTEM_BODY_3(gglGetBufferParameteri64v, target, name, params);
 }
 
 void System
 	::GlProgramParameteri(GLuint program, GLenum name, GLint value) noexcept
 {
-	SYSTEM_BODY_A3(gglProgramParameteri, program, name, value);
+	SYSTEM_BODY_3(gglProgramParameteri, program, name, value);
 }
 
 void System
 	::GlFramebufferTexture(GLenum target, GLenum attachment, GLuint texture, GLint level) noexcept
 {
-	SYSTEM_BODY_A4(gglFramebufferTexture, target, attachment, texture, level);
+	SYSTEM_BODY_4(gglFramebufferTexture, target, attachment, texture, level);
 }
 
 void System

@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.2.0 (2020/01/02 15:13)
+// 引擎版本：0.2.0.0 (2020/05/07 23:18)
 
 #ifndef SYSTEM_HELPER_UNICODE_MACRO_H
 #define SYSTEM_HELPER_UNICODE_MACRO_H
@@ -47,13 +47,13 @@ namespace System
 #endif // UNICODE
 
 	template<typename T>
-	std::basic_string<TChar> ToString(const T value)
+	String ToString(const T value)
 	{
-#ifdef UNICODE
+	#ifdef UNICODE
 		return  std::to_wstring(value);
-#else // !UNICODE 
+	#else // !UNICODE 
 		return  std::to_string(value);
-#endif // UNICODE
+	#endif // UNICODE
 	}
 }
 

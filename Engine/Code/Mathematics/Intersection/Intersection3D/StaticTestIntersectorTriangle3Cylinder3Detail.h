@@ -131,8 +131,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             {
                 numer0 = -hhalf - z[0];
                 numer1 = +hhalf - z[0];
-                invDenom0 = ((Real)1)/(z[1] - z[0]);
-                invDenom1 = ((Real)1)/(z[2] - z[0]);
+                invDenom0 = (static_cast<Real>(1))/(z[1] - z[0]);
+                invDenom1 = (static_cast<Real>(1))/(z[2] - z[0]);
                 t = numer0*invDenom1;
                 polygon[0] = Q[0] + t*(Q[2] - Q[0]);
                 t = numer0*invDenom0;
@@ -156,8 +156,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             {
                 numer0 = -hhalf - z[2];
                 numer1 = +hhalf - z[2];
-                invDenom0 = ((Real)1)/(z[1] - z[2]);
-                invDenom1 = ((Real)1)/(z[0] - z[2]);
+                invDenom0 = (static_cast<Real>(1))/(z[1] - z[2]);
+                invDenom1 = (static_cast<Real>(1))/(z[0] - z[2]);
                 t = numer0*invDenom1;
                 polygon[0] = Q[2] + t*(Q[0] - Q[2]);
                 t = numer0*invDenom0;
@@ -181,8 +181,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             {
                 numer0 = -hhalf - z[0];
                 numer1 = +hhalf - z[0];
-                invDenom0 = ((Real)1)/(z[1] - z[0]);
-                invDenom1 = ((Real)1)/(z[2] - z[0]);
+                invDenom0 = (static_cast<Real>(1))/(z[1] - z[0]);
+                invDenom1 = (static_cast<Real>(1))/(z[2] - z[0]);
                 t = numer0*invDenom1;
                 polygon[0] = Q[0] + t*(Q[2] - Q[0]);
                 t = numer0*invDenom0;
@@ -209,8 +209,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             if (z[1] <= -hhalf)
             {
                 numer0 = -hhalf - z[2];
-                invDenom0 = ((Real)1)/(z[1] - z[2]);
-                invDenom1 = ((Real)1)/(z[0] - z[2]);
+                invDenom0 = (static_cast<Real>(1))/(z[1] - z[2]);
+                invDenom1 = (static_cast<Real>(1))/(z[0] - z[2]);
                 t = numer0*invDenom0;
                 polygon[0] = Q[2] + t*(Q[1] - Q[2]);
                 t = numer0*invDenom1;
@@ -230,8 +230,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             else
             {
                 numer0 = -hhalf - z[0];
-                invDenom0 = ((Real)1)/(z[2] - z[0]);
-                invDenom1 = ((Real)1)/(z[1] - z[0]);
+                invDenom0 = (static_cast<Real>(1))/(z[2] - z[0]);
+                invDenom1 = (static_cast<Real>(1))/(z[1] - z[0]);
                 t = numer0*invDenom0;
                 polygon[0] = Q[0] + t*(Q[2] - Q[0]);
                 t = numer0*invDenom1;
@@ -285,8 +285,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
         if (z[1] >= hhalf)
         {
             numer0 = -hhalf - z[0];
-            invDenom0 = ((Real)1)/(z[2] - z[0]);
-            invDenom1 = ((Real)1)/(z[1] - z[0]);
+            invDenom0 = (static_cast<Real>(1))/(z[2] - z[0]);
+            invDenom1 = (static_cast<Real>(1))/(z[1] - z[0]);
             t = numer0*invDenom0;
             polygon[0] = Q[0] + t*(Q[2] - Q[0]);
             t = numer0*invDenom1;
@@ -306,8 +306,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
         else
         {
             numer0 = -hhalf - z[2];
-            invDenom0 = ((Real)1)/(z[1] - z[2]);
-            invDenom1 = ((Real)1)/(z[0] - z[2]);
+            invDenom0 = (static_cast<Real>(1))/(z[1] - z[2]);
+            invDenom1 = (static_cast<Real>(1))/(z[0] - z[2]);
             t = numer0*invDenom0;
             polygon[0] = Q[2] + t*(Q[1] - Q[2]);
             t = numer0*invDenom1;
@@ -371,7 +371,7 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
 	auto rSqr = mCylinder.GetRadius()*mCylinder.GetRadius();
 	auto D = Q0 - Q1;
 	auto dot = Vector2DTools<Real>::DotProduct(Q0,D);
-    if (dot <= Real{})
+    if (dot <= Math<Real>::sm_Zero)
     {
         return Vector2DTools<Real>::DotProduct(Q0,Q0) <= rSqr;
     }
@@ -396,11 +396,11 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
     for (i0 = numVertices-1, i1 = 0; i1 < numVertices; i0 = i1++)
     {
 		auto dot = Vector2DTools<Real>::DotPerp(Q[i0],(Q[i0] - Q[i1]));
-        if (dot > Real{})
+        if (dot > Math<Real>::sm_Zero)
         {
             ++positive;
         }
-        else if (dot < Real{})
+        else if (dot < Math<Real>::sm_Zero)
         {
             ++negative;
         }

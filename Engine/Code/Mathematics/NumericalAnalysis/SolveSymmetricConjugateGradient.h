@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/09 10:53)
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/20 12:55)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_H
@@ -19,23 +19,23 @@ namespace Mathematics
 {
 	template <typename Real, template <typename> class Matrix>
 	class SolveSymmetricConjugateGradient : private boost::noncopyable
-    {
-    public:
+	{
+	public:
 		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
 		using ClassType = SolveSymmetricConjugateGradient<Real, Matrix>;
 		using MatrixType = Matrix<Real>;
 		using OutputConstIterator = LinearSystemConstIterator<Real>;
-		 
-    public:
-		explicit SolveSymmetricConjugateGradient(const MatrixType& matrix, const Real* inputVector,Real zeroTolerance =  Math<Real>::sm_ZeroTolerance);
-        
+
+	public:
+		explicit SolveSymmetricConjugateGradient(const MatrixType& matrix, const Real* inputVector, Real zeroTolerance = Math<Real>::sm_ZeroTolerance);
+
 		CLASS_INVARIANT_DECLARE;
-      
+
 		const OutputConstIterator GetBegin() const;
 		const OutputConstIterator GetEnd() const;
 
-    private:
+	private:
 		using RealVector = std::vector<Real>;
 
 	private:
@@ -62,7 +62,7 @@ namespace Mathematics
 		Real m_FirstDot;
 		Real m_SecondDot;
 		Real m_Alpha;
-    };	     
+	};
 }
 
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_H
