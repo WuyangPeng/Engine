@@ -7,7 +7,7 @@
 #ifndef USER_INTERFACE_H
 #define USER_INTERFACE_H
 
-#include "Macro/Macro.h"
+#include "Helper/Helper.h"
 #include "Interface/Interface.h"
 #include "Configuration/Configuration.h"
 #include "WxWidgets/WxWidgets.h"

@@ -7,7 +7,7 @@
 #ifndef RENDERING_NO_IMPORT_H
 #define RENDERING_NO_IMPORT_H
 
-#include "Rendering/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_RENDERING_NO_IMPORT
   #define BUILDING_RENDERING_NO_IMPORT

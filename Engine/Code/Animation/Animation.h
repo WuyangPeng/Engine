@@ -1,21 +1,20 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
-// “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 09:44)
+// “˝«Ê∞Ê±æ£∫0.4.0.0 (2020/07/16 15:32)
 
 #ifndef ANIMATION_H
 #define ANIMATION_H
- 
-#include "Macro/Macro.h"
-#include "ConsoleGraph/ConsoleGraph.h"
-#include "ElfAnimation/ElfAnimation.h"
-#include "TextureAnimation/TextureAnimation.h"
-#include "RigidBodyHierarchyAnimation/RigidBodyHierarchyAnimation.h"
-#include "SkeletonAnimation/SkeletonAnimation.h"
-#include "PerVertexAnimation/PerVertexAnimation.h"
-#include "MorphTargetAnimation/MorphTargetAnimation.h"
-#include "GradientAnimation/GradientAnimation.h"
+
+#include "Helper/Helper.h"
+#include "Sprite/Sprite.h"
+#include "Texture/Texture.h"
+#include "RigidBodyHierarchy/RigidBodyHierarchy.h"
+#include "Skeleton/Skeleton.h"
+#include "PerVertex/PerVertex.h"
+#include "MorphTarget/MorphTarget.h"
+#include "Gradient/Gradient.h"
 #include "AnimationManager/AnimationManager.h"
 
 #endif // ANIMATION_H

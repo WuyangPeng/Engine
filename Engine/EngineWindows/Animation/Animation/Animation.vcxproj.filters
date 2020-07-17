@@ -3,51 +3,84 @@
   <ItemGroup>
     <Filter Include="源文件">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="头文件">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="资源文件\Todo">
-      <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
+      <UniqueIdentifier>{e3e24eec-6d59-4842-9c11-e4176871b97c}</UniqueIdentifier>
+    </Filter>    
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{0e3ca689-0a63-4901-ab71-3d999260e35d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AnimationManager 头文件">
-      <UniqueIdentifier>{97514778-42f6-4392-a7d1-06dfe051ab4a}</UniqueIdentifier>
+    <Filter Include="Sprite 源文件">
+      <UniqueIdentifier>{51305f95-3ef9-4cea-aef6-beb607eeed06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConsoleGraph 头文件">
-      <UniqueIdentifier>{eb92824e-1ba6-4906-9792-64f4b2c2abd4}</UniqueIdentifier>
+    <Filter Include="Sprite 头文件">
+      <UniqueIdentifier>{7d340af6-17d8-49ac-a53b-b619d38ba114}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ElfAnimation 头文件">
-      <UniqueIdentifier>{fb830dde-563e-4c4a-a484-ff189e54e078}</UniqueIdentifier>
+    <Filter Include="Texture 头文件">
+      <UniqueIdentifier>{be60b017-9803-4a6d-8035-2a5032efba04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GradientAnimation 头文件">
-      <UniqueIdentifier>{d22e31dd-30ff-4059-8d28-3a1ca60bb8d5}</UniqueIdentifier>
+    <Filter Include="Texture 源文件">
+      <UniqueIdentifier>{974d3ef8-469f-4bdd-9e54-e9e9c6e938e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{fad679ed-73a9-4c8a-88c2-c4849e90651d}</UniqueIdentifier>
+	 <Filter Include="RigidBodyHierarchy 头文件">
+      <UniqueIdentifier>{bb362603-32eb-4a89-a4ba-228f207c4694}</UniqueIdentifier>
+    </Filter>    
+    <Filter Include="RigidBodyHierarchy 源文件">
+      <UniqueIdentifier>{956ff74a-5cab-4b48-83e3-7499ed184dc9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MorphTargetAnimation 头文件">
-      <UniqueIdentifier>{64e5846f-a1dc-4fdd-ac3e-0d99505ed815}</UniqueIdentifier>
+	<Filter Include="Skeleton 头文件">
+      <UniqueIdentifier>{2cee2836-fc54-40b2-89e7-553b4a359711}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TextureAnimation 头文件">
-      <UniqueIdentifier>{b6033dab-f6ab-4f39-817f-411fd1453c91}</UniqueIdentifier>
+    <Filter Include="Skeleton 源文件">
+      <UniqueIdentifier>{16aef0dd-1695-450c-8023-0f7b8866c2b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SkeletonAnimation 头文件">
-      <UniqueIdentifier>{a0c1c71f-1fb7-4858-8f0c-3961db221ece}</UniqueIdentifier>
+	<Filter Include="PerVertex 头文件">
+      <UniqueIdentifier>{ad640f33-763c-4b1d-914e-af02ff2efcce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RigidBodyHierarchyAnimation 头文件">
-      <UniqueIdentifier>{54bfb786-b55f-4f9e-9992-d749acd0200e}</UniqueIdentifier>
+    <Filter Include="PerVertex 源文件">
+      <UniqueIdentifier>{16ba265c-5d0c-46b7-9f7f-8aae4e523021}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PerVertexAnimation 头文件">
-      <UniqueIdentifier>{d424644e-bfd3-4314-a5e1-0f81fc821e19}</UniqueIdentifier>
+	<Filter Include="MorphTarget 头文件">
+      <UniqueIdentifier>{492a5b2b-384a-446b-9153-54934025499b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MorphTarget 源文件">
+      <UniqueIdentifier>{5d40598b-b81e-4962-b2b7-a6e3e991c63a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gradient 头文件">
+      <UniqueIdentifier>{af38d49e-4804-42b6-809a-b2fff0f777a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gradient 源文件">
+      <UniqueIdentifier>{ce2f35b5-ddd2-4a71-8a07-76820f234aab}</UniqueIdentifier>
+    </Filter>   
+	<Filter Include="AnimationManager 头文件">
+      <UniqueIdentifier>{d97b24b7-d6fa-4796-9a21-7c793b1800b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimationManager 源文件">
+      <UniqueIdentifier>{fc57b596-a1bc-4019-863c-5cb6073d37a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup>   
+	<Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+	<Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>  
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
     <Text Include="Resource\Todo\Level 2.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -56,16 +89,294 @@
     </Text>
     <Text Include="Resource\Todo\Level 4.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>
+    </Text>    
     <Text Include="Resource\Todo\Level 5.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
+    <Text Include="Resource\Todo\Level 6.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>	
+  </ItemGroup>
+  <ItemGroup>
+	<ClInclude Include="..\..\..\Code\Animation\Animation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+	 <ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+	<ClInclude Include="..\..\..\Code\Animation\AnimationDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>   
+    <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>   
+    <ClInclude Include="..\..\..\Code\Animation\AnimationImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+	 <ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+	<ClInclude Include="..\..\..\Code\Animation\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+	<ClInclude Include="..\..\..\Code\Animation\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>    
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimationDef.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimationManager.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteDef.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteFwd.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteInstance.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteManager.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteTagPoint.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteTrack.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\Sprite.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimation.h">
+      <Filter>Sprite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\Texture.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureAnimation.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureAnimationDef.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureAnimationManager.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureDef.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureFwd.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureInstance.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureManager.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureTagPoint.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureTrack.h">
+      <Filter>Texture 头文件</Filter>
+    </ClInclude>
+	<ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationManager.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyDef.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyFwd.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyInstance.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyManager.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTagPoint.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTrack.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchy.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.h">
+      <Filter>RigidBodyHierarchy 头文件</Filter>
+    </ClInclude>
+	<ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationDef.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationManager.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonDef.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonFwd.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonInstance.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonManager.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonTagPoint.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonTrack.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\Skeleton.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimation.h">
+      <Filter>Skeleton 头文件</Filter>
+    </ClInclude>
+	 <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationManager.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexDef.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexFwd.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexInstance.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexManager.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexTagPoint.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexTrack.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertex.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.h">
+      <Filter>PerVertex 头文件</Filter>
+    </ClInclude>
+	<ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationDef.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationManager.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetDef.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetFwd.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetInstance.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetManager.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTagPoint.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTrack.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTarget.h">
+      <Filter>MorphTarget 头文件</Filter>
+    </ClInclude>	
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimation.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimationDef.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimationManager.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientDef.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientFwd.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientInstance.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientManager.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientTagPoint.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientTrack.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\Gradient.h">
+      <Filter>Gradient 头文件</Filter>
+    </ClInclude>    
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationContainer.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationController.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationManager.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationManagerFwd.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationState.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationTrack.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\Animable.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimableObject.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\Animation.h">
+      <Filter>AnimationManager 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Animation\DllLib.cpp">
@@ -74,97 +385,194 @@
     <ClCompile Include="..\..\..\Code\Animation\DllMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationImport.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationLib.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\Animation.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationDll.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationManagerFwd.h">
-      <Filter>AnimationManager 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationManager.h">
-      <Filter>AnimationManager 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\ConsoleGraph.h">
-      <Filter>ConsoleGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\ConsoleGraphFwd.h">
-      <Filter>ConsoleGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\Graph.h">
-      <Filter>ConsoleGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\ElfAnimation\ElfAnimation.h">
-      <Filter>ElfAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\ElfAnimation\ElfAnimationFwd.h">
-      <Filter>ElfAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\GradientAnimation\GradientAnimation.h">
-      <Filter>GradientAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\GradientAnimation\GradientAnimationFwd.h">
-      <Filter>GradientAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\MorphTargetAnimation\MorphTargetAnimation.h">
-      <Filter>MorphTargetAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\MorphTargetAnimation\MorphTargetAnimationFwd.h">
-      <Filter>MorphTargetAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\PerVertexAnimation\PerVertexAnimation.h">
-      <Filter>PerVertexAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\PerVertexAnimation\PerVertexAnimationFwd.h">
-      <Filter>PerVertexAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchyAnimation\RigidBodyHierarchyAnimationFwd.h">
-      <Filter>RigidBodyHierarchyAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchyAnimation\RigidBodyHierarchyAnimation.h">
-      <Filter>RigidBodyHierarchyAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\SkeletonAnimation\SkeletonAnimation.h">
-      <Filter>SkeletonAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\SkeletonAnimation\SkeletonAnimationFwd.h">
-      <Filter>SkeletonAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\TextureAnimation\TextureAnimation.h">
-      <Filter>TextureAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\TextureAnimation\TextureAnimationFwd.h">
-      <Filter>TextureAnimation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\DllLib.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimation.cpp">
+      <Filter>Sprite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimationDef.cpp">
+      <Filter>Sprite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimationManager.cpp">
+      <Filter>Sprite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteDef.cpp">
+      <Filter>Sprite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteInstance.cpp">
+      <Filter>Sprite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteManager.cpp">
+      <Filter>Sprite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteTagPoint.cpp">
+      <Filter>Sprite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteTrack.cpp">
+      <Filter>Sprite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureInstance.cpp">
+      <Filter>Texture 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureManager.cpp">
+      <Filter>Texture 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureTagPoint.cpp">
+      <Filter>Texture 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureTrack.cpp">
+      <Filter>Texture 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureAnimation.cpp">
+      <Filter>Texture 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureAnimationDef.cpp">
+      <Filter>Texture 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureAnimationManager.cpp">
+      <Filter>Texture 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureDef.cpp">
+      <Filter>Texture 源文件</Filter>
+    </ClCompile>
+	<ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.cpp">
+      <Filter>RigidBodyHierarchy 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.cpp">
+      <Filter>RigidBodyHierarchy 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationManager.cpp">
+      <Filter>RigidBodyHierarchy 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyDef.cpp">
+      <Filter>RigidBodyHierarchy 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyInstance.cpp">
+      <Filter>RigidBodyHierarchy 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyManager.cpp">
+      <Filter>RigidBodyHierarchy 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTagPoint.cpp">
+      <Filter>RigidBodyHierarchy 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTrack.cpp">
+      <Filter>RigidBodyHierarchy 源文件</Filter>
+    </ClCompile>
+	<ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimation.cpp">
+      <Filter>Skeleton 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationDef.cpp">
+      <Filter>Skeleton 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationManager.cpp">
+      <Filter>Skeleton 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonDef.cpp">
+      <Filter>Skeleton 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonInstance.cpp">
+      <Filter>Skeleton 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonManager.cpp">
+      <Filter>Skeleton 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonTagPoint.cpp">
+      <Filter>Skeleton 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonTrack.cpp">
+      <Filter>Skeleton 源文件</Filter>
+    </ClCompile>
+	 <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.cpp">
+      <Filter>PerVertex 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.cpp">
+      <Filter>PerVertex 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationManager.cpp">
+      <Filter>PerVertex 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexDef.cpp">
+      <Filter>PerVertex 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexInstance.cpp">
+      <Filter>PerVertex 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexManager.cpp">
+      <Filter>PerVertex 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexTagPoint.cpp">
+      <Filter>PerVertex 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexTrack.cpp">
+      <Filter>PerVertex 源文件</Filter>
+    </ClCompile>
+	<ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.cpp">
+      <Filter>MorphTarget 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationDef.cpp">
+      <Filter>MorphTarget 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationManager.cpp">
+      <Filter>MorphTarget 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetDef.cpp">
+      <Filter>MorphTarget 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetInstance.cpp">
+      <Filter>MorphTarget 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetManager.cpp">
+      <Filter>MorphTarget 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTagPoint.cpp">
+      <Filter>MorphTarget 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTrack.cpp">
+      <Filter>MorphTarget 源文件</Filter>
+    </ClCompile>	
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimation.cpp">
+      <Filter>Gradient 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimationDef.cpp">
+      <Filter>Gradient 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimationManager.cpp">
+      <Filter>Gradient 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientDef.cpp">
+      <Filter>Gradient 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientInstance.cpp">
+      <Filter>Gradient 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientManager.cpp">
+      <Filter>Gradient 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientTagPoint.cpp">
+      <Filter>Gradient 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientTrack.cpp">
+      <Filter>Gradient 源文件</Filter>
+    </ClCompile>    
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\Animable.cpp">
+      <Filter>AnimationManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimableObject.cpp">
+      <Filter>AnimationManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\Animation.cpp">
+      <Filter>AnimationManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationContainer.cpp">
+      <Filter>AnimationManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationController.cpp">
+      <Filter>AnimationManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationState.cpp">
+      <Filter>AnimationManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationTrack.cpp">
+      <Filter>AnimationManager 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

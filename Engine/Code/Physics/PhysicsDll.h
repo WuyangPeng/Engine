@@ -8,7 +8,7 @@
 #define PHYSICS_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "Physics/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
  
 #if defined(BUILDING_PHYSICS_NO_IMPORT) || defined(BUILDING_PHYSICS_STATIC)
 

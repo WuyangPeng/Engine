@@ -2,7 +2,7 @@
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.3.0.0 (2020/05/11 21:28)
+// 引擎版本：0.4.0.0 (2020/07/10 21:39)
 
 #include "ThreadingCoreRenderEngineExport.h"
 

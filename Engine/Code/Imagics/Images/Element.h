@@ -9,7 +9,7 @@
 
 #include "Imagics/ImagicsDll.h"
 
-#include "Imagics/Macro/ElementMacro.h"
+#include "Imagics/Helper/ElementMacro.h"
 
 namespace Imagics
 {

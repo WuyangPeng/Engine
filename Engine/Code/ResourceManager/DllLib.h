@@ -7,7 +7,7 @@
 #ifndef RESOURCE_MANAGER_DLL_LIB_H
 #define RESOURCE_MANAGER_DLL_LIB_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(TCRE_USE_MSVC) 
 

@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/07/31 09:47)
+// 引擎版本：0.4.0.0 (2020/07/15 14:43)
 
 #include "Animation/AnimationExport.h"
 

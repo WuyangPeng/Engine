@@ -8,7 +8,7 @@
 #define RESOURCE_MANAGER_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "ResourceManager/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(BUILDING_RESOURCE_MANAGER_NO_IMPORT) || defined(BUILDING_RESOURCE_MANAGER_STATIC)
 

@@ -1,13 +1,13 @@
-// Copyright (c) 2011-2019
+// Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
 // 
-// 引擎版本：0.0.0.4 (2019/07/31 09:45)
+// 引擎版本：0.4.0.0 (2020/07/15 14:32)
 
 #ifndef ANIMATION_LIB_H
 #define ANIMATION_LIB_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(TCRE_USE_MSVC) 
 
@@ -22,8 +22,6 @@
 	#else // !BUILDING_ANIMATION_STATIC
 
 		#include "DllLib.h"
-		#include "System/SystemLib.h"
-		#include "CoreTools/CoreToolsLib.h"
 
 		#ifdef _DEBUG 
 			#pragma comment(lib,"AnimationStaticD.lib")
@@ -34,5 +32,5 @@
 	#endif // BUILDING_ANIMATION_STATIC
 
 #endif // TCRE_USE_MSVC  
- 
+
 #endif // ANIMATION_LIB_H

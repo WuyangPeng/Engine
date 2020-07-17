@@ -7,7 +7,7 @@
 #ifndef ARTIFICIAL_INTELLEGENCE_LIB_H
 #define ARTIFICIAL_INTELLEGENCE_LIB_H
 
-#include "Macro/UserMacro.h" 
+#include "Helper/UserMacro.h" 
 
 #if defined(TCRE_USE_MSVC) 
 

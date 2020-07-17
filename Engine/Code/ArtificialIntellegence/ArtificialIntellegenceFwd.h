@@ -7,7 +7,7 @@
 #ifndef ARTIFICIAL_INTELLEGENCE_FWD_H
 #define ARTIFICIAL_INTELLEGENCE_FWD_H
 
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "Miscellaneous/MiscellaneousFwd.h"
 #include "PathSearch/PathSearchFwd.h"
 #include "FiniteStateMachine/FiniteStateMachineFwd.h"

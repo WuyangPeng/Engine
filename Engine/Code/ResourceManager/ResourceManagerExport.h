@@ -7,7 +7,7 @@
 #ifndef RESOURCE_MANAGER_EXPORT_H
 #define RESOURCE_MANAGER_EXPORT_H
 
-#include "ResourceManager/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_RESOURCE_MANAGER_EXPORT
   #define BUILDING_RESOURCE_MANAGER_EXPORT

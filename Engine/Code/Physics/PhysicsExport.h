@@ -7,7 +7,7 @@
 #ifndef PHYSICS_EXPORT_H
 #define PHYSICS_EXPORT_H
 
-#include "Physics/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_PHYSICS_EXPORT
 	#define BUILDING_PHYSICS_EXPORT

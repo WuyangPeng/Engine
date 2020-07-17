@@ -136,9 +136,6 @@
     <Filter Include="LocalEffects 源文件">
       <UniqueIdentifier>{eabe060d-057f-45bb-a58a-d1589eab9300}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{dd27412f-dade-49aa-b1cc-9c4fe73da646}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Nethack 头文件">
       <UniqueIdentifier>{d71c23f0-575b-4326-90e1-688c4a3ae960}</UniqueIdentifier>
     </Filter>
@@ -279,6 +276,9 @@
     </Filter>
     <Filter Include="Renderers 头文件\Flags">
       <UniqueIdentifier>{81a67d6c-73b6-40ee-9c62-f3ac89e49dd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{dd27412f-dade-49aa-b1cc-9c4fe73da646}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1897,15 +1897,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerVerEffect.h">
       <Filter>LocalEffects 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Nethack\Nethack.h">
       <Filter>Nethack 头文件</Filter>
     </ClInclude>
@@ -2880,6 +2871,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererInternalFwd.h">
       <Filter>OpenGLRenderer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Helper\PlatformMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

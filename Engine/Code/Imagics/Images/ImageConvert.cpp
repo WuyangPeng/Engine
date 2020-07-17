@@ -8,7 +8,7 @@
 
 #include "Element.h"
 #include "ImageConvert.h"
-#include "Imagics/Macro/ImageConvertMacro.h"
+#include "Imagics/Helper/ImageConvertMacro.h"
 
 namespace Imagics
 {

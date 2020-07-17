@@ -7,7 +7,7 @@
 #ifndef SOUND_EFFECT_FWD_H
 #define SOUND_EFFECT_FWD_H
 
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "Interface/InterfaceFwd.h"
 #include "Configuration/ConfigurationFwd.h"
 #include "CsynUtil/CsynUtilFwd.h"

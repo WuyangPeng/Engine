@@ -25,9 +25,6 @@
     <Filter Include="Vorbis 头文件">
       <UniqueIdentifier>{da2b2d17-9762-4e81-bdc1-17dc7f305a67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{9a2d23ab-4aab-4251-bdf8-6f0bca7e5c63}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface 头文件">
       <UniqueIdentifier>{246d9bc0-dff0-4add-93a0-b44a1189a270}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="Configuration 头文件">
       <UniqueIdentifier>{9edc33e1-b775-48e6-8efd-6d1b3d2c614b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{9a2d23ab-4aab-4251-bdf8-6f0bca7e5c63}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -127,15 +127,6 @@
     <ClInclude Include="..\..\..\Code\SoundEffect\Interface\User.h">
       <Filter>Interface 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\SoundEffect\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\SoundEffect\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\SoundEffect\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\SoundEffect\Ogg\Ogg.h">
       <Filter>Ogg 头文件</Filter>
     </ClInclude>
@@ -156,6 +147,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\SoundEffect\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

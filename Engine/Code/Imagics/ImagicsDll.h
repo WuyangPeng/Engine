@@ -8,7 +8,7 @@
 #define IMAGICS_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "Imagics/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
  
 #if defined(BUILDING_IMAGICS_NO_IMPORT) || defined(BUILDING_IMAGICS_STATIC)
 

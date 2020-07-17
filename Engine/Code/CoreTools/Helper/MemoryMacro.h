@@ -89,13 +89,13 @@
 #endif // defined(CORE_TOOLS_USE_MEMORY) || defined(CORE_TOOLS_MEMORY_ALWAYS_CREATE)
 	namespace CoreTools
 	{
-		template<typename T>
-		static T* New0()
+		template<typename T, typename... Types>
+		static T* New0(Types&&... args)
 		{
 		#include STSTEM_WARNING_PUSH
 
 		#include SYSTEM_WARNING_DISABLE(26409)  
-			return NEW0 T;
+			return NEW0 T(std::forward<Types>(args)...);
 
 		#include STSTEM_WARNING_POP
 		}

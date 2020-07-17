@@ -7,7 +7,7 @@
 #ifndef IMAGICS_FWD_H
 #define IMAGICS_FWD_H
 
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "BinaryOperations/BinaryOperationsFwd.h"
 #include "Extraction/ExtractionFwd.h"
 #include "Filters/FiltersFwd.h"

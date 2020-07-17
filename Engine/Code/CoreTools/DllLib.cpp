@@ -70,5 +70,3 @@
 	}
 
 #endif // BUILDING_CORE_TOOLS_STATIC
-
-

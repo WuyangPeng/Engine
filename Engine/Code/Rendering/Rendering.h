@@ -7,7 +7,7 @@
 #ifndef RENDERING_H
 #define RENDERING_H
 
-#include "Macro/Macro.h"
+#include "Helper/Helper.h"
 #include "DataTypes/DataTypes.h"
 #include "Resources/Resources.h"
 #include "SceneGraph/SceneGraph.h"

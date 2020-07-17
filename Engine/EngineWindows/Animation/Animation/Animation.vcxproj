@@ -1,96 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="StaticDebug|Win32">
       <Configuration>StaticDebug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticDebug|x64">
-      <Configuration>StaticDebug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="StaticRelease|Win32">
       <Configuration>StaticRelease</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticRelease|x64">
-      <Configuration>StaticRelease</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{298125D4-02AE-419C-A085-D416360AE2F4}</ProjectGuid>
+    <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{c5f05af9-e165-45de-9c7b-27e7d4518865}</ProjectGuid>
     <RootNamespace>Animation</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -104,7 +104,7 @@
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineWin32DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineStaticWin32DebugLibs.props" />
@@ -114,7 +114,7 @@
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineWin32ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineStaticWin32ReleaseLibs.props" />
@@ -124,7 +124,7 @@
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineX64DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineStaticX64DebugLibs.props" />
@@ -134,7 +134,7 @@
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineX64ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineStaticX64ReleaseLibs.props" />
@@ -142,79 +142,67 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <LinkIncremental>true</LinkIncremental>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;ANIMATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>
-      </EnforceTypeConversionRules>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubAnimation>Windows</SubAnimation>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubAnimation>Windows</SubAnimation>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
-    <PostBuildEvent />
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;ANIMATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubAnimation>Windows</SubAnimation>
-    </Link>
-    <PostBuildEvent />
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubAnimation>Windows</SubAnimation>
-    </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -223,14 +211,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;ANIMATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubAnimation>Windows</SubAnimation>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -239,15 +227,39 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubAnimation>Windows</SubAnimation>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;ANIMATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>  
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -255,14 +267,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;ANIMATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubAnimation>Windows</SubAnimation>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -271,130 +283,187 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubAnimation>Windows</SubAnimation>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\Code\Animation\DllLib.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-      </ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Animation\DllMain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-      </ExcludedFromBuild>
-    </ClCompile>
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Animation\Animation.h" />
+	<ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationDll.h" />
-    <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h" />
-    <ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h" />    
     <ClInclude Include="..\..\..\Code\Animation\AnimationImport.h" />
+	<ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h" />
+	<ClInclude Include="..\..\..\Code\Animation\DllLib.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationLib.h" />
+	<ClInclude Include="..\..\..\Code\Animation\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Helper\UserMacro.h" />
+	<ClInclude Include="..\..\..\Code\Animation\Sprite\Sprite.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimation.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimationDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimationManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteInstance.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteTagPoint.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteTrack.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\Texture.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureAnimation.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureAnimationDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureAnimationManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureInstance.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureTagPoint.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Texture\TextureTrack.h" />
+	<ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchy.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyInstance.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTagPoint.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTrack.h" />
+	<ClInclude Include="..\..\..\Code\Animation\Skeleton\Skeleton.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimation.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonInstance.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonTagPoint.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonTrack.h" />
+	 <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertex.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexInstance.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexTagPoint.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexTrack.h" />
+	<ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTarget.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetInstance.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTagPoint.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTrack.h" />
+	<ClInclude Include="..\..\..\Code\Animation\Gradient\Gradient.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimation.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimationDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimationManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientDef.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientInstance.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientManager.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientTagPoint.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientTrack.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\Animable.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimableObject.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\Animation.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationContainer.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationController.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationManagerFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h" />
-    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\ConsoleGraph.h" />
-    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\ConsoleGraphFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\ConsoleGraph\Graph.h" />
-    <ClInclude Include="..\..\..\Code\Animation\DllLib.h" />
-    <ClInclude Include="..\..\..\Code\Animation\ElfAnimation\ElfAnimation.h" />
-    <ClInclude Include="..\..\..\Code\Animation\ElfAnimation\ElfAnimationFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\GradientAnimation\GradientAnimation.h" />
-    <ClInclude Include="..\..\..\Code\Animation\GradientAnimation\GradientAnimationFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\Animation\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\Macro\UserMacro.h" />
-    <ClInclude Include="..\..\..\Code\Animation\MorphTargetAnimation\MorphTargetAnimation.h" />
-    <ClInclude Include="..\..\..\Code\Animation\MorphTargetAnimation\MorphTargetAnimationFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\PerVertexAnimation\PerVertexAnimation.h" />
-    <ClInclude Include="..\..\..\Code\Animation\PerVertexAnimation\PerVertexAnimationFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchyAnimation\RigidBodyHierarchyAnimation.h" />
-    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchyAnimation\RigidBodyHierarchyAnimationFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\SkeletonAnimation\SkeletonAnimation.h" />
-    <ClInclude Include="..\..\..\Code\Animation\SkeletonAnimation\SkeletonAnimationFwd.h" />
-    <ClInclude Include="..\..\..\Code\Animation\TextureAnimation\TextureAnimation.h" />
-    <ClInclude Include="..\..\..\Code\Animation\TextureAnimation\TextureAnimationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationState.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationTrack.h" />
+  </ItemGroup>
+  <ItemGroup>
+	<ClCompile Include="..\..\..\Code\Animation\DllLib.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\DllMain.cpp" />
+	<ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimationDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimationManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteInstance.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteTagPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteTrack.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureAnimationDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureAnimationManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureInstance.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureTagPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Texture\TextureTrack.cpp" />
+	<ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyInstance.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTagPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTrack.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonInstance.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonTagPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonTrack.cpp" />
+	<ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexInstance.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexTagPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexTrack.cpp" />
+	<ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetInstance.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTagPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTrack.cpp" />
+	<ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimationDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimationManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientDef.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientInstance.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientTagPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientTrack.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\Animable.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimableObject.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\Animation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationController.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationState.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationTrack.cpp" />   
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

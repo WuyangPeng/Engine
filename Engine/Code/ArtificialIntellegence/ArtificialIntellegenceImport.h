@@ -7,7 +7,7 @@
 #ifndef ARTIFICIAL_INTELLEGENCE_IMPORT_H
 #define ARTIFICIAL_INTELLEGENCE_IMPORT_H
 
-#include "ArtificialIntellegence/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_ARTIFICIAL_INTELLEGENCE_IMPORT
   #define BUILDING_ARTIFICIAL_INTELLEGENCE_IMPORT

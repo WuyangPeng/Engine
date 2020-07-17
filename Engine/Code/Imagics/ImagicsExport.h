@@ -7,7 +7,7 @@
 #ifndef IMAGICS_EXPORT_H
 #define IMAGICS_EXPORT_H
 
-#include "Imagics/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_IMAGICS_EXPORT
   #define BUILDING_IMAGICS_EXPORT

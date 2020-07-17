@@ -25,9 +25,6 @@
     <Filter Include="GameWorldMap 头文件">
       <UniqueIdentifier>{0f93409c-b7a6-407b-8ba9-3c1c509df7c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{557a84ff-58f4-4073-a3f1-406071d01157}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Material 头文件">
       <UniqueIdentifier>{179f116a-2e80-4b1f-909a-1a05ceb82bc8}</UniqueIdentifier>
     </Filter>
@@ -45,6 +42,9 @@
     </Filter>
     <Filter Include="PhysicalParameters 头文件">
       <UniqueIdentifier>{918402f0-dbcf-4e2c-a4bd-7f972c3fb17e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{557a84ff-58f4-4073-a3f1-406071d01157}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -118,15 +118,6 @@
     <ClInclude Include="..\..\..\Code\ResourceManager\GameWorldMap\GameWorldMap.h">
       <Filter>GameWorldMap 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\ResourceManager\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\ResourceManager\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\ResourceManager\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\ResourceManager\Material\Material.h">
       <Filter>Material 头文件</Filter>
     </ClInclude>
@@ -165,6 +156,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\ResourceManager\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

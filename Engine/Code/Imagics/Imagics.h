@@ -7,7 +7,7 @@
 #ifndef IMAGICS_H
 #define IMAGICS_H
 
-#include "Macro/Macro.h"
+#include "Helper/Helper.h"
 #include "BinaryOperations/BinaryOperations.h"
 #include "Extraction/Extraction.h"
 #include "Filters/Filters.h"

@@ -7,7 +7,7 @@
 #ifndef ARTIFICIAL_INTELLEGENCE_H
 #define ARTIFICIAL_INTELLEGENCE_H
  
-#include "Macro/Macro.h" 
+#include "Helper/Helper.h" 
 #include "Miscellaneous/Miscellaneous.h"
 #include "PathSearch/PathSearch.h"
 #include "FiniteStateMachine/FiniteStateMachine.h"

@@ -1,0 +1,32 @@
+C++ Primer
+
+官方网站 
+http://www.informit.com/store/product.aspx?isbn=0201721481 、
+http://www.informit.com/title/0321714113。
+
+第4版
+★★★
+作者：Stanley B.Lippman、Josee Lajoie、Barbara E.Moo。
+
+知识点 
+1. C++基础知识。
+2. C++基础知识练习。
+
+代码 
+1.  书籍代码。
+	编译方式：使用VS控制台执行nmake。
+
+要点 
+1.	删除0值的指针是安全的（5.11	new和delete表达式）。
+
+第5版
+★★★★
+作者：Stanley B.Lippman、Josee Lajoie、Barbara E.Moo。
+ 
+知识点 
+
+代码
+1.  书籍代码。
+	编译方式：使用VS控制台执行nmake。
+
+要点 

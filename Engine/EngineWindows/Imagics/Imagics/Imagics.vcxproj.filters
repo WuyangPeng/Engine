@@ -28,9 +28,6 @@
     <Filter Include="Images 头文件">
       <UniqueIdentifier>{852e30fe-3fde-47c1-b0d8-455fcc44a7eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{72372d09-362e-4af2-8044-663f379f95e7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Segmenters 头文件">
       <UniqueIdentifier>{ab25205c-095d-46ea-b5de-a5f982cd034f}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,9 @@
     </Filter>
     <Filter Include="Images 模板文件">
       <UniqueIdentifier>{01556103-c28d-40ca-bf19-8fed86d0ab52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{72372d09-362e-4af2-8044-663f379f95e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -292,21 +292,6 @@
     <ClInclude Include="..\..\..\Code\Imagics\Images\TImageDetail.h">
       <Filter>Images 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Imagics\Macro\ElementMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Imagics\Macro\ImageConvertMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Imagics\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Imagics\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Imagics\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Imagics\OpenCV\Interface.h">
       <Filter>OpenCV 头文件</Filter>
     </ClInclude>
@@ -342,6 +327,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Imagics\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Helper\ElementMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Helper\ImageConvertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

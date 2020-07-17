@@ -8,7 +8,7 @@
 #define SOUND_EFFECT_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "SoundEffect/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(BUILDING_SOUND_EFFECT_NO_IMPORT) || defined(BUILDING_SOUND_EFFECT_STATIC)
 

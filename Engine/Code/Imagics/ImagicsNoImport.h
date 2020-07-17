@@ -7,7 +7,7 @@
 #ifndef IMAGICS_NO_IMPORT_H
 #define IMAGICS_NO_IMPORT_H
 
-#include "Imagics/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_IMAGICS_NO_IMPORT
   #define BUILDING_IMAGICS_NO_IMPORT

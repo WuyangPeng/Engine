@@ -7,7 +7,7 @@
 #ifndef RESOURCE_MANAGER_NO_IMPORT_H
 #define RESOURCE_MANAGER_NO_IMPORT_H
 
-#include "ResourceManager/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_RESOURCE_MANAGER_NO_IMPORT
   #define BUILDING_RESOURCE_MANAGER_NO_IMPORT

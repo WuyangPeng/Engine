@@ -7,7 +7,7 @@
 #ifndef RESOURCE_MANAGER_FWD_H
 #define RESOURCE_MANAGER_FWD_H
 
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "ThreeDimensionalModel/ThreeDimensionalModelFwd.h"
 #include "Texture/TextureFwd.h"
 #include "Material/MaterialFwd.h"

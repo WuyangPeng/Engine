@@ -7,7 +7,7 @@
 #ifndef SOUND_RESOURCE_MANAGER_LIB_H
 #define SOUND_RESOURCE_MANAGER_LIB_H
  
-#include "Macro/UserMacro.h" 
+#include "Helper/UserMacro.h" 
 
 #if defined(TCRE_USE_MSVC) 
 

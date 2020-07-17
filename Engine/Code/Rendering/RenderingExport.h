@@ -7,7 +7,7 @@
 #ifndef RENDERING_EXPORT_H
 #define RENDERING_EXPORT_H
 
-#include "Rendering/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_RENDERING_EXPORT
   #define BUILDING_RENDERING_EXPORT

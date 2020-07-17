@@ -15,7 +15,7 @@
 
 #include <boost/lexical_cast.hpp>
 #include <boost/timer/timer.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include "System/Helper/PragmaWarning/PosixTime.h" 
 
 const System::String AssistTools::GenerateTemplateBaseImpl
 	::sm_DefaultEndYear(SYSTEM_TEXT("EndYear"));	

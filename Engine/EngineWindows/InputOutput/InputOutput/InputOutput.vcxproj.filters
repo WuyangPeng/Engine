@@ -22,11 +22,11 @@
     <Filter Include="InputInterface 头文件">
       <UniqueIdentifier>{cf13dc03-6818-42c5-82e3-ad3d8ade59c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{acc9c966-90e0-49bd-a68a-1032a8e2600a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="OutputInterface 头文件">
       <UniqueIdentifier>{84ce290d-fb0e-4837-9d6c-b88ee3678443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{acc9c966-90e0-49bd-a68a-1032a8e2600a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -94,15 +94,6 @@
     <ClInclude Include="..\..\..\Code\InputOutput\InputInterface\InputInterfaceFwd.h">
       <Filter>InputInterface 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\InputOutput\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\InputOutput\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\InputOutput\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\InputOutput\OutputInterface\OutputInterface.h">
       <Filter>OutputInterface 头文件</Filter>
     </ClInclude>
@@ -111,6 +102,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\InputOutput\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

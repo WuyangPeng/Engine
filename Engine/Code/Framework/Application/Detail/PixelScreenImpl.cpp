@@ -176,8 +176,11 @@ void  Framework::PixelScreenImpl
 	{
 		SetLineOnX(xMin, xMax, yMin, color);
 		SetLineOnX(xMin, xMax, yMax, color);
-		SetLineOnY(xMin, yMin + 1, yMax - 1, color);
-		SetLineOnY(xMax, yMin + 1, yMax - 1, color); 
+		if (yMin + 1 <= yMax - 1)
+		{
+			SetLineOnY(xMin, yMin + 1, yMax - 1, color);
+			SetLineOnY(xMax, yMin + 1, yMax - 1, color);
+		}		
 	}
 }
 

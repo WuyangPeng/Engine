@@ -36,6 +36,7 @@
 	#include SYSTEM_WARNING_DISABLE(26485) 
 	#include SYSTEM_WARNING_DISABLE(26486) 
 	#include SYSTEM_WARNING_DISABLE(26487)
+	#include SYSTEM_WARNING_DISABLE(26489)
 	#include SYSTEM_WARNING_DISABLE(26495)
 	#include SYSTEM_WARNING_DISABLE(26490)
 	#include SYSTEM_WARNING_DISABLE(26491)
@@ -43,6 +44,8 @@
 	#include SYSTEM_WARNING_DISABLE(26493)
 	#include SYSTEM_WARNING_DISABLE(26496) 
 	#include SYSTEM_WARNING_DISABLE(26497) 	
+	#include SYSTEM_WARNING_DISABLE(26812) 	
+	#include SYSTEM_WARNING_DISABLE(26814) 
 
 	#include <boost/property_tree/ptree.hpp>
 	#include <boost/property_tree/json_parser.hpp>

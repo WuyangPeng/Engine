@@ -8,7 +8,7 @@
 #define ARTIFICIAL_INTELLEGENCE_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "ArtificialIntellegence/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(BUILDING_ARTIFICIAL_INTELLEGENCE_NO_IMPORT) || defined(BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC)
 

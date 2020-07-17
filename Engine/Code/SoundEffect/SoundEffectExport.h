@@ -7,7 +7,7 @@
 #ifndef SOUND_EFFECT_EXPORT_H
 #define SOUND_EFFECT_EXPORT_H
 
-#include "SoundEffect/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_SOUND_EFFECT_EXPORT
   #define BUILDING_SOUND_EFFECT_EXPORT

@@ -1,0 +1,22 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∞Ê±æ£∫0.4.0.0 (2020/07/16 11:11)
+
+#ifndef ANIMATION_SKELETON_FWD_H
+#define ANIMATION_SKELETON_FWD_H 
+
+namespace Animation
+{
+	class SkeletonDef;
+	class SkeletonTrack;
+	class SkeletonManager;
+	class SkeletonInstance;
+	class SkeletonTagPoint;
+	class SkeletonAnimation;
+	class SkeletonAnimationDef;
+	class SkeletonAnimationManager;
+}
+
+#endif // ANIMATION_SKELETON_FWD_H

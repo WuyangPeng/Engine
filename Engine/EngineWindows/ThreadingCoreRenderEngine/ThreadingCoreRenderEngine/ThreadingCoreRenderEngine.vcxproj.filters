@@ -16,8 +16,44 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{cfbcc52a-1a05-434b-9f93-d3669d3d241b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\References">
+      <UniqueIdentifier>{6071b597-2ba1-4ddc-b8bb-281aa46f2d02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp">
+      <UniqueIdentifier>{3eb874fe-ea9f-4651-8cec-3679a1a760ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp\Primary">
+      <UniqueIdentifier>{85767d3f-8079-46eb-a7f1-efbd7e779d1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp\Intermediate">
+      <UniqueIdentifier>{0b21c87a-3847-462a-a424-ffc558a36368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp\Algorithm">
+      <UniqueIdentifier>{aaaa752a-7382-4a50-aa22-e6276279f3a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp\Experience">
+      <UniqueIdentifier>{d2ee9f99-fdf7-44e6-ac2a-9cbe99c28bc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp\StandardLibrary">
+      <UniqueIdentifier>{753d777f-8be8-4057-8947-a11a6bd08f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp\Template">
+      <UniqueIdentifier>{a7e98ec4-a140-4e37-bfc4-cb572468ae19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp\Advanced">
+      <UniqueIdentifier>{7f7a971a-154c-4891-8199-5be1210f6cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Cpp\Boost">
+      <UniqueIdentifier>{25651feb-7b31-43b7-9869-2bd8c73b8a00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+	<Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
     <Text Include="Resource\Todo\Level 2.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -41,55 +77,79 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
+    </Text>  
+	<Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>	
     <Text Include="Resource\Library.txt">
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="Resource\Project.txt">
       <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\ReadMe.txt">
+    </Text>    
+    <Text Include="Resource\LearningLibrary.txt">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
+	<Text Include="Resource\References\Cpp\Cpp.txt">
+      <Filter>资源文件\References\Cpp</Filter>
     </Text>
+    <Text Include="Resource\References\Cpp\Primary\Primary.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\Thinking in C++.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+	 <Text Include="Resource\References\Cpp\Primary\C++ Primer.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+	<Text Include="Resource\References\OperatingSystem.txt">
+      <Filter>资源文件\References</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign.txt">
+      <Filter>资源文件\References</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign.txt">
+      <Filter>资源文件\References</Filter>
+    </Text> 
+    <Text Include="Resource\References\OtherLanguages.txt">
+      <Filter>资源文件\References</Filter>
+    </Text>       
+    <Text Include="Resource\References\Libs.txt">
+      <Filter>资源文件\References</Filter>
+    </Text>   
   </ItemGroup>
   <ItemGroup>
+	<ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+	<ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineDll.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineExport.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineFwd.h">
+    </ClInclude>    
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineImport.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineImport.h">
+	<ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineNoImport.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineLib.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineNoImport.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    </ClInclude>    
   </ItemGroup>
   <ItemGroup>
+	<ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllMain.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllLib.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    </ClCompile>    
   </ItemGroup>
 </Project>

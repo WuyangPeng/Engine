@@ -10,13 +10,13 @@
 7.  外部类（导出类）前加XXX_DEFAULT_DECLARE，XXX为所在库名的全大写。
 8.  内部类（不导出类）前加XXX_HIDDEN_DECLARE，XXX为所在库名的全大写。
 9.  尽量不直接使用除0和1之外的整数值，避免使用文字量，应使用具名常量或具有适当作用域的变量代替。
-10. 不同平台或项目配置命名规则： Static + $(Platform) + $(Configuration) ，如StaticX64Debug。
+10. 不同平台或项目配置命名规则：Static + $(Platform) + $(Configuration)，如StaticX64Debug。
 
 设计规范
 
 1.  使用C++17标准。
 2.  所有在各个操作系统实现不同的函数，全转移到System库。
-3.  除System库外，尽量不使用参数返回值。与性能相关，需要使用参数返回时，转移到各个库的底层调用模块中，如Mathematics库增加MathematicsSystem模块。
+3.  除System库外，尽量不使用参数返回值。与性能相关，需要使用参数返回时，转移到各个库的底层调用模块中，如Mathematics库增加Underlying模块。
 4.  除Sysetm库外，所有类必须使用类不变式，并定义ClassType和必要的ParentType，且尽量使用ASSETRTION。
     由于调试性能原因，不直接调用内部类的类不变式，即调用“m_Impl->IsValid();”。
 5.  所有单例及静态数据调用必须使用锁。
@@ -28,14 +28,14 @@
 11. 使用using代替typedef。
 12. 只包含必须包含的头文件，头文件的包含顺序：从最特殊到最一般。本地目录中的任何头文件首先被包含，
     然后是我们自己的所用工具头文件，随后是第三方库头文件，接着是标准C++库头文件和C库头文件。
-13. 整型转换不使用static_cast，转换失败抛出可以异常使用boost::numeric_cast，不能抛出异常使用gsl::narrow_cast消除警告。
+13. 整型转换不使用static_cast，转换失败抛出异常使用boost::numeric_cast，不能抛出异常使用gsl::narrow_cast消除警告。
 14. 使用make_shared和make_unique来创建智能指针，而不是new。
 15. 使用必要的noexcept、final和override。
 16. 对直接抛出异常的函数使用[[noreturn]] 。
 17. 除非你确实需要共享所有权，否则别轻易使用shared_ptr，请使用unique_ptr。
     但由于unique_ptr析构函数需要知道指定类的大小，Impl模式不使用unique_ptr封装指针，而使用更容易编程的shared_ptr。
 18. 同时存在标准库和boost库实现时，使用标准库的实现。
-19. 对于内置类型，优先使用bool、char、int和double。需要使用其它类型时，尽量使用固定大小的整型。网络或系统相关调用必须使用固定大小的整型。
+19. 对于内置类型，优先使用bool、char、int、double和必要的size_t。需要使用其它类型时，尽量使用固定大小的整型。网络或系统相关调用必须使用固定大小的整型。
 20. 使用Impl模式封装类，通过定义ClassShareType来标识类是属于：
    （1）当类必须共享资源时，复制只是复制类的指针成员，需要在类前注释（共享类），构造函数和赋值运算符进行简单的复制指针。共享类必须以Share结尾。
    （2）类没有修改自身的成员函数，为了提高性能，复制只是复制类的指针成员，构造函数和赋值运算符进行简单的复制指针。

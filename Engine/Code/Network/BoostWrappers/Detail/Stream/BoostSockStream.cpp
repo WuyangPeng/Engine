@@ -16,7 +16,7 @@
 #include "Network/Interface/Data/AddressData.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;

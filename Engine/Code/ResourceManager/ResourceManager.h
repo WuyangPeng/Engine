@@ -7,7 +7,7 @@
 #ifndef RESOURCE_MANAGER_H
 #define RESOURCE_MANAGER_H
 
-#include "Macro/Macro.h"
+#include "Helper/Helper.h"
 #include "ThreeDimensionalModel/ThreeDimensionalModel.h"
 #include "Texture/Texture.h"
 #include "Material/Material.h"

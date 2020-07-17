@@ -7,7 +7,7 @@
 #ifndef PHYSICS_FWD_H
 #define PHYSICS_FWD_H
 
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "CollisionDetection/CollisionDetectionFwd.h"
 #include "Fluid/FluidFwd.h"
 #include "Intersection/IntersectionFwd.h"

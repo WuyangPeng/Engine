@@ -8,7 +8,7 @@
 #define RENDERING_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "Rendering/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
  
 #if defined(BUILDING_RENDERING_NO_IMPORT) || defined(BUILDING_RENDERING_STATIC)
 

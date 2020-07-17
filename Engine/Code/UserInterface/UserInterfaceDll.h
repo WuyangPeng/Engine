@@ -8,7 +8,7 @@
 #define USER_INTERFACE_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "UserInterface/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
  
 #if defined(BUILDING_USER_INTERFACE_NO_IMPORT) || defined(BUILDING_USER_INTERFACE_STATIC)
 

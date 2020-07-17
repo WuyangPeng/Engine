@@ -7,7 +7,7 @@
 #ifndef USER_INTERFACE_FWD_H
 #define USER_INTERFACE_FWD_H
  
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "Interface/InterfaceFwd.h"
 #include "Configuration/ConfigurationFwd.h"
 #include "WxWidgets/WxWidgetsFwd.h"

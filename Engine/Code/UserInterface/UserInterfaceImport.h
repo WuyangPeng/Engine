@@ -7,7 +7,7 @@
 #ifndef USER_INTERFACE_IMPORT_H
 #define USER_INTERFACE_IMPORT_H
 
-#include "UserInterface/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_USER_INTERFACE_IMPORT
   #define BUILDING_USER_INTERFACE_IMPORT

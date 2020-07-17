@@ -7,7 +7,7 @@
 #ifndef ASSIST_TOOLS_FWD_H
 #define ASSIST_TOOLS_FWD_H
 
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "GenerateProjects/GenerateProjectsFwd.h"
 #include "FeaturesImporter/FeaturesImporterFwd.h"
 #include "BmpColorToGray/BmpColorToGrayFwd.h"

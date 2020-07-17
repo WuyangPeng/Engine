@@ -7,7 +7,7 @@
 #ifndef INPUT_OUTPUT_FWD_H
 #define INPUT_OUTPUT_FWD_H
  
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "Configuration/ConfigurationFwd.h"
 #include "InputInterface/InputInterfaceFwd.h"
 #include "OutputInterface/OutputInterfaceFwd.h"

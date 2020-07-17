@@ -28,9 +28,6 @@
     <Filter Include="LCPSolver 头文件">
       <UniqueIdentifier>{779e60d0-8c7c-40cd-a359-bef52a3660f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{3f303636-8113-4d50-988a-0b95f23d8174}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Miscellaneous 头文件">
       <UniqueIdentifier>{8bd4e3d5-4ce7-4bd5-9162-6925c1ee55ff}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,9 @@
     </Filter>
     <Filter Include="RigidBody 模板文件">
       <UniqueIdentifier>{a0dfa660-137a-4bcb-8105-bfaae91b7b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{3f303636-8113-4d50-988a-0b95f23d8174}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -283,15 +283,6 @@
     <ClInclude Include="..\..\..\Code\Physics\LCPSolver\LCPPolyDistDetail.h">
       <Filter>LCPSolver 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Physics\Miscellaneous\MiscellaneousFwd.h">
       <Filter>Miscellaneous 头文件</Filter>
     </ClInclude>
@@ -357,6 +348,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeDetail.h">
       <Filter>CollisionDetection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

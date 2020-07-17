@@ -31,9 +31,6 @@
     <Filter Include="GenerateProjects 头文件">
       <UniqueIdentifier>{dbd184f0-0107-46c4-920b-094e35fa5b15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{89304fa0-1cf9-4935-8359-c1239f1ce551}</UniqueIdentifier>
-    </Filter>
     <Filter Include="BmpColorToGray 源文件">
       <UniqueIdentifier>{63b19399-1f13-458d-b14d-bc26f0b6724e}</UniqueIdentifier>
     </Filter>
@@ -58,8 +55,17 @@
     <Filter Include="GenerateProjects 源文件\Detail">
       <UniqueIdentifier>{126d6852-9b6d-4df0-8ce9-9660ee8e7dd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{89304fa0-1cf9-4935-8359-c1239f1ce551}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
     <Text Include="Resource\Todo\Level 2.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -72,12 +78,24 @@
     <Text Include="Resource\Todo\Level 5.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
+    <Text Include="Resource\Todo\Level 6.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\ReadMe.txt">
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>  
+	<Text Include="Resource\ReadMe.txt">
       <Filter>资源文件</Filter>
     </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>	
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\AssistTools\DllLib.cpp">
@@ -472,15 +490,6 @@
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.h">
       <Filter>GenerateProjects 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Flags\GenerateTemplateReplaceFlags.h">
       <Filter>GenerateProjects 头文件\Flags</Filter>
     </ClInclude>
@@ -579,6 +588,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

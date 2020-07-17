@@ -7,7 +7,7 @@
 #ifndef ASSIST_TOOLS_EXPORT_H
 #define ASSIST_TOOLS_EXPORT_H
 
-#include "AssistTools/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_ASSIST_TOOLS_EXPORT
   #define BUILDING_ASSIST_TOOLS_EXPORT

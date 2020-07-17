@@ -25,9 +25,6 @@
     <Filter Include="XFree86 头文件">
       <UniqueIdentifier>{37a14fcc-9efe-483f-a50d-84bc15a46063}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{7ac9c5ad-6e5c-4995-b66a-4a96d9e2fbd9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface 头文件">
       <UniqueIdentifier>{fab77a4a-3a3b-4a1a-b78f-c86c8aca0689}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,9 @@
     </Filter>
     <Filter Include="Configuration 头文件">
       <UniqueIdentifier>{0d77af15-ac56-4eca-b860-957da9e9d84a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{7ac9c5ad-6e5c-4995-b66a-4a96d9e2fbd9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,15 +109,6 @@
     <ClInclude Include="..\..\..\Code\UserInterface\Interface\User.h">
       <Filter>Interface 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\Trixul\Trixul.h">
       <Filter>Trixul 头文件</Filter>
     </ClInclude>
@@ -138,6 +129,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

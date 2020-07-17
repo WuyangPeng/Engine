@@ -7,7 +7,7 @@
 #ifndef ASSIST_TOOLS_H
 #define ASSIST_TOOLS_H
 
-#include "Macro/Macro.h" 
+#include "Helper/Helper.h" 
 #include "GenerateProjects/GenerateProjects.h"
 #include "FeaturesImporter/FeaturesImporter.h"
 #include "BmpColorToGray/BmpColorToGray.h"

@@ -8,7 +8,7 @@
 #define ASSIST_TOOLS_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "AssistTools/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) || defined(BUILDING_ASSIST_TOOLS_STATIC)
 

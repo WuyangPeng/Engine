@@ -8,7 +8,7 @@
 #define INPUT_OUTPUT_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "InputOutput/Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(BUILDING_INPUT_OUTPUT_NO_IMPORT) || defined(BUILDING_INPUT_OUTPUT_STATIC)
 

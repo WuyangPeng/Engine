@@ -5,7 +5,7 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-	<ProjectConfiguration Include="StaticDebug|Win32">
+    <ProjectConfiguration Include="StaticDebug|Win32">
       <Configuration>StaticDebug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
@@ -13,7 +13,7 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-	<ProjectConfiguration Include="StaticRelease|Win32">
+    <ProjectConfiguration Include="StaticRelease|Win32">
       <Configuration>StaticRelease</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
@@ -21,76 +21,76 @@
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-	<ProjectConfiguration Include="StaticDebug|x64">
+    <ProjectConfiguration Include="StaticDebug|x64">
       <Configuration>StaticDebug</Configuration>
       <Platform>x64</Platform>
-    </ProjectConfiguration>    
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
-    </ProjectConfiguration>        
+    </ProjectConfiguration>
     <ProjectConfiguration Include="StaticRelease|x64">
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
+    <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{F01D04EA-B95E-4025-B510-AE7C71537027}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ThreadingCoreRenderEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -104,7 +104,7 @@
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineWin32DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineStaticWin32DebugLibs.props" />
@@ -114,7 +114,7 @@
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineWin32ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineStaticWin32ReleaseLibs.props" />
@@ -124,7 +124,7 @@
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineX64DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineStaticX64DebugLibs.props" />
@@ -134,7 +134,7 @@
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineX64ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Engine.props" />
     <Import Project="..\..\EngineStaticX64ReleaseLibs.props" />
@@ -150,16 +150,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -170,6 +160,16 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -208,42 +208,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLas
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;THREADINGCORERENDERENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-    </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
-    </PreBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
@@ -296,6 +260,42 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;THREADINGCORERENDERENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup> 
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -341,10 +341,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\Library.txt" />
-    <Text Include="Resource\Project.txt" />
-    <Text Include="Resource\ReadMe.txt" />
-    <Text Include="Resource\Schedule.txt" />
+	<Text Include="Resource\ReadMe.txt" />
+	<Text Include="Resource\Schedule.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -354,16 +352,28 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
     <Text Include="Resource\Todo\Level 6.txt" />
     <Text Include="Resource\Todo\Level 7.txt" />
     <Text Include="Resource\Todo\Level 8.txt" />
-    <Text Include="Resource\Todo\Level 9.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />    
+    <Text Include="Resource\Project.txt" />  
+	<Text Include="Resource\Library.txt" />
+	<Text Include="Resource\LearningLibrary.txt" />	
+    <Text Include="Resource\References\Cpp\Cpp.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ Primer.txt" />
+    <Text Include="Resource\References\Cpp\Primary\Primary.txt" />
+    <Text Include="Resource\References\Cpp\Primary\Thinking in C++.txt" />
+	<Text Include="Resource\References\OperatingSystem.txt" />
+    <Text Include="Resource\References\GameDesign.txt" />    
+    <Text Include="Resource\References\SoftwareDesign.txt" />  
+    <Text Include="Resource\References\OtherLanguages.txt" />
+    <Text Include="Resource\References\Libs.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h" />
+	<ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineFwd.h" />
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineDll.h" />
-    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineExport.h" />
-    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineFwd.h" />
-    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineImport.h" />
-    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineLib.h" />
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineExport.h" />    
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineImport.h" />   
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineNoImport.h" />
+	<ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineLib.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllLib.cpp" />

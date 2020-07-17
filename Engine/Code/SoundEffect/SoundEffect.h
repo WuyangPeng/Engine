@@ -7,7 +7,7 @@
 #ifndef SOUND_EFFECT_H
 #define SOUND_EFFECT_H
 
-#include "Macro/Macro.h"
+#include "Helper/Helper.h"
 #include "Interface/Interface.h"
 #include "Configuration/Configuration.h"
 #include "CsynUtil/CsynUtil.h"

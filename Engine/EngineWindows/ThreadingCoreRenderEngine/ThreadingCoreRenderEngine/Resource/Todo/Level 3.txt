@@ -1,6 +1,3 @@
 TODO Level 3
 
-0.3.0.0 
-
-1.  （综合）判断以下库引擎是否需要关联：
-			perl、Pantheios、Openrj、FLTK、Trixul、XFree86。
+0.4.0.0 

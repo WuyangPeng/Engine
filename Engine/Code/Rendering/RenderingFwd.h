@@ -7,7 +7,7 @@
 #ifndef RENDERING_FWD_H
 #define RENDERING_FWD_H
  
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 #include "DataTypes/DataTypesFwd.h"
 #include "Resources/ResourcesFwd.h"
 #include "SceneGraph/SceneGraphFwd.h"
