@@ -30,14 +30,11 @@ namespace CoreTools
 		using ParamType = typename ParamType<Type>::type;
 
 	public:
-		Tuple(); 
-
-		Tuple(const Tuple& rhs);
-		Tuple& operator= (const Tuple& rhs);
+		Tuple() noexcept;
 
 		explicit Tuple(ParamType firstParam);
 		Tuple(ParamType firstParam, ParamType secondParam) noexcept;
-		Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam);
+		Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam) noexcept;
 		Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam, ParamType fourthParam);
 
 		CLASS_INVARIANT_DECLARE;
@@ -46,7 +43,7 @@ namespace CoreTools
 		Type& operator[] (int index);
 
 	private:
-		void Set(const Tuple& rhs);
+		void Set(const Tuple& rhs) noexcept;
 
 	private:
 		std::array<Type, Dimension> m_Tuple;

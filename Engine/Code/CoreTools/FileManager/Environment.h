@@ -16,6 +16,7 @@
 
 #include <shared_mutex>
 
+CORE_TOOLS_EXPORT_UNIQUE_PTR(Environment);
 CORE_TOOLS_EXPORT_SHARED_PTR(EnvironmentImpl);
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
@@ -24,10 +25,24 @@ namespace CoreTools
 	class CORE_TOOLS_DEFAULT_DECLARE Environment : public Singleton<Environment>
 	{
 	public:
-		SINGLETON_INITIALIZE_DECLARE(Environment);
+		NON_COPY_CLASSES_TYPE_DECLARE(Environment);
+		using ParentType = Singleton<Environment>;
 		using String = System::String;
 
+	private:
+		enum class EnvironmentCreate
+		{
+			Init,
+		};
+
 	public:
+		explicit Environment(EnvironmentCreate environmentCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(Environment);
+
 		CLASS_INVARIANT_DECLARE;
 
 		// 支持使用路径来定位文件。对于平台无关性，使用“/”作为路径分隔符。
@@ -50,7 +65,11 @@ namespace CoreTools
 		const String GetConfigurationPath() const;
 
 	private:
-		SINGLETON_MEMBER_DECLARE_USE_SHARED(Environment);
+		using EnvironmentUniquePtr = std::unique_ptr<Environment>;
+
+	private:
+		static EnvironmentUniquePtr sm_Environment;
+		IMPL_TYPE_DECLARE(Environment);
 	};
 }
 

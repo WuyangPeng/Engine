@@ -71,7 +71,7 @@ Rendering::VertexColor4Effect
 Rendering::VisualEffectInstance* Rendering::VertexColor4Effect
 	::CreateInstance () const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
 	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
     return instance;
 }
@@ -79,7 +79,7 @@ Rendering::VisualEffectInstance* Rendering::VertexColor4Effect
 Rendering::VisualEffectInstance* Rendering::VertexColor4Effect
 	::CreateUniqueInstance ()
 {
-    VertexColor4Effect* effect = NEW0 VertexColor4Effect();
+    VertexColor4Effect* effect = CoreTools::New0 < VertexColor4Effect>();
     return effect->CreateInstance();
 }
 

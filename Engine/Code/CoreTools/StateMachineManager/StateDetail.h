@@ -60,7 +60,7 @@ typename CoreTools::State<EntityType>::EntityTypePtr CoreTools::State<EntityType
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("实体已释放"));
+		THROW_EXCEPTION(SYSTEM_TEXT("实体已释放"s));
 	}
 }
 

@@ -24,7 +24,7 @@ namespace CoreTools
 		using EntityWeakPtr = std::weak_ptr<BaseEntity>;
 
 	public:
-		EntityManagerImpl();
+		EntityManagerImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

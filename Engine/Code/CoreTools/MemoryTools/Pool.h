@@ -27,8 +27,13 @@ namespace CoreTools
 		using ClassType = Pool;
 
 	public:
-		Pool();
-		virtual ~Pool();
+		Pool() noexcept;
+		virtual ~Pool() noexcept;
+
+		Pool(const Pool&) = delete;
+		Pool& operator=(const Pool&) = delete;
+		Pool(Pool&&) noexcept = delete;
+		Pool& operator=(Pool&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

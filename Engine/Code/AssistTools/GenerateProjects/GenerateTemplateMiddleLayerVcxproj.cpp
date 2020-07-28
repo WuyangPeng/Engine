@@ -12,7 +12,7 @@
  
 AssistTools::GenerateTemplateMiddleLayerVcxproj
 	::GenerateTemplateMiddleLayerVcxproj(const System::String& templateFileName, const System::String& projectName, const System::String& managerName, const System::String& includeName)
-	:m_Impl(new ImplType(templateFileName, projectName, managerName, includeName))
+	:m_Impl(std::make_shared<ImplType>(templateFileName, projectName, managerName, includeName))
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }

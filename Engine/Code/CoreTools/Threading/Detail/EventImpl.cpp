@@ -18,7 +18,7 @@ CoreTools::EventImpl
 {
 	if (!System::IsSystemEventValid(m_Handle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("初始化事件对象失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("初始化事件对象失败！"s));
 	}
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -55,7 +55,7 @@ void CoreTools::EventImpl
 
 	if (!System::SetSystemEvent(m_Handle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("SetEvent失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("SetEvent失败！"s));
 	}
 }
 
@@ -66,7 +66,7 @@ void CoreTools::EventImpl
 
 	if (!System::ResetSystemEvent(m_Handle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("ResetEvent失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("ResetEvent失败！"s));
 	}
 }
 
@@ -77,7 +77,7 @@ void CoreTools::EventImpl
 
 	if (!System::WaitForSystemEvent(m_Handle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("进入Event失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("进入Event失败！"s));
 	}
 }
 

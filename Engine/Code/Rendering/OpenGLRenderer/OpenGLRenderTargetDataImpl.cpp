@@ -59,7 +59,7 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl
         ConstTexture2DSmartPointer colorTexture = renderTarget->GetColorTexture(index);
         RENDERING_ASSERTION_1(!renderer->InTexture2DMap(colorTexture), "纹理不应该存在。\n");
         
-		std::shared_ptr<PlatformTexture2D> platformColorTexture(new PlatformTexture2D(renderer,colorTexture.GetData()));
+		std::shared_ptr<PlatformTexture2D> platformColorTexture(std::make_shared< PlatformTexture2D>(renderer,colorTexture.GetData()));
         renderer->InsertInTexture2DMap(colorTexture, platformColorTexture);
         m_ColorTextures[index] = platformColorTexture->GetTexture();
 		m_DrawBuffers[index] = static_cast<GLenum>(System::ColorAttachent::Color0) + index;

@@ -30,7 +30,7 @@ Rendering::TextureBuffer
 
 Rendering::TextureBuffer
 	::TextureBuffer(const TextureBuffer& rhs)
-	:m_Data{ 0 < rhs.m_Data->GetSize() ? new FileBuffer(*rhs.m_Data) : nullptr },m_ItemSize{ rhs.m_ItemSize }
+	:m_Data{ 0 < rhs.m_Data->GetSize() ? std::make_shared < FileBuffer>(*rhs.m_Data) : nullptr },m_ItemSize{ rhs.m_ItemSize }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }

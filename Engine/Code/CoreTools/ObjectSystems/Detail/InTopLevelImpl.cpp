@@ -15,7 +15,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 CoreTools::InTopLevelImpl
-	::InTopLevelImpl()
+	::InTopLevelImpl() noexcept
 	:m_TopLevel{}, m_UniqueID{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -77,7 +77,7 @@ void CoreTools::InTopLevelImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("一个object指针只可以被插入一次！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("一个object指针只可以被插入一次！"s));
 	}
 }
 

@@ -21,16 +21,18 @@ namespace CoreTools
 		using ClassType = OStreamImpl; 
 
 	public:
-		explicit OStreamImpl(bool isCout);
+		explicit OStreamImpl(bool isCout) noexcept;
 		explicit OStreamImpl(const std::string& fileName);
 		~OStreamImpl() = default;
 
+		OStreamImpl(const OStreamImpl& rhs) noexcept = delete;
+		OStreamImpl& operator=(const OStreamImpl& rhs) noexcept = delete;
 		OStreamImpl(OStreamImpl&& rhs) noexcept = delete;
 		OStreamImpl& operator=(OStreamImpl&& rhs) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 		 
-		std::ostream& GetStream();
+		std::ostream& GetStream() noexcept;
 
 		bool IsCout() const noexcept;
 		bool IsCerr() const noexcept;

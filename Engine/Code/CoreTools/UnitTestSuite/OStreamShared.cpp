@@ -14,14 +14,16 @@
 using std::string;
 using std::ostream;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::OStreamShared
 	::OStreamShared(bool isCout)
 	:m_Impl{ make_shared<ImplType>(isCout) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 CoreTools::OStreamShared
 	::OStreamShared(const string& fileName)
 	:m_Impl{ make_shared<ImplType>(fileName) }
@@ -31,7 +33,7 @@ CoreTools::OStreamShared
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, OStreamShared)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, OStreamShared, GetStream, ostream&) 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, OStreamShared, GetStream, ostream&)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, OStreamShared, IsCout, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, OStreamShared, IsCerr, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, OStreamShared, IsFile, bool)

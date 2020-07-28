@@ -14,12 +14,12 @@
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/DynamicLink/Fwd/DynamicLinkFlagsFwd.h"
 
-#include <boost/noncopyable.hpp>
+ 
 #include <string> 
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE LoadingLibraryImpl : private boost::noncopyable
+	class CORE_TOOLS_HIDDEN_DECLARE LoadingLibraryImpl  
 	{
 	public:
 		using ClassType = LoadingLibraryImpl;
@@ -31,7 +31,11 @@ namespace CoreTools
 
 	public:
 		LoadingLibraryImpl(const String& fileName, LoadLibrary flags);
-		~LoadingLibraryImpl();
+		~LoadingLibraryImpl() noexcept;
+		LoadingLibraryImpl(const LoadingLibraryImpl&) = delete;
+		LoadingLibraryImpl& operator=(const LoadingLibraryImpl&) = delete;
+		LoadingLibraryImpl(LoadingLibraryImpl&&) noexcept = delete;
+		LoadingLibraryImpl& operator=(LoadingLibraryImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

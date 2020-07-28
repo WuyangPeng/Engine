@@ -14,11 +14,11 @@
 #include <cstdio>
 
 AssistTools::SaveBmp
-	::SaveBmp (const char* name, int width, int height, unsigned char* data)
+	::SaveBmp (const char* name, int width, int height, unsigned char* data) noexcept
 {
     assert((width % 4) == 0);
-    int quantity = width*height;
-    int numBytes = 3*quantity;
+   const int quantity = width*height;
+   const int numBytes = 3*quantity;
 
     BITMAPFILEHEADER fileHeader;
     fileHeader.bfType = 0x4d42;  // "BM"

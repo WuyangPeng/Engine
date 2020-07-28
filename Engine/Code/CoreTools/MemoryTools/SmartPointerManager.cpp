@@ -14,33 +14,41 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-SINGLETON_MUTEX_DEFINE(CoreTools, SmartPointerManager);
+using std::make_shared;
+using std::make_unique;
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
+SINGLETON_GET_PTR_DEFINE(CoreTools, SmartPointerManager);
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_SmartPointerManagerMutex }
+CoreTools::SmartPointerManager::SmartPointerManagerUniquePtr CoreTools::SmartPointerManager
+::sm_SmartPointerManager{ };
 
-SINGLETON_INITIALIZE_DEFINE(CoreTools, SmartPointerManager)
-
-SINGLETON_DEFINE(CoreTools, SmartPointerManager)
-
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::SmartPointerManager
-	::IsValid() const noexcept
+void CoreTools::SmartPointerManager
+::Create()
 {
-	MUTEX_ENTER_MEMBER;
-
-	if (m_Impl != nullptr)
-		return true;
-	else
-		return false;
+	sm_SmartPointerManager = make_unique<CoreTools::SmartPointerManager>(SmartPointerManagerCreate::Init);
 }
-#endif // OPEN_CLASS_INVARIANT
+
+void CoreTools::SmartPointerManager
+::Destroy() noexcept
+{
+	sm_SmartPointerManager.reset();
+}
+
+CoreTools::SmartPointerManager
+::SmartPointerManager(SmartPointerManagerCreate smartPointerManagerCreate)
+	:m_Impl{ make_shared<ImplType>() }
+{
+	SYSTEM_UNUSED_ARG(smartPointerManagerCreate);
+
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, SmartPointerManager)
 
 int CoreTools::SmartPointerManager
 	::CopyIncreaseReference(const void* data)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -50,7 +58,7 @@ int CoreTools::SmartPointerManager
 int CoreTools::SmartPointerManager
 	::IncreaseReference(const void* data)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -60,7 +68,7 @@ int CoreTools::SmartPointerManager
 int CoreTools::SmartPointerManager
 	::DecreaseReference(const void* data)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -70,7 +78,7 @@ int CoreTools::SmartPointerManager
 bool CoreTools::SmartPointerManager
 	::IsSmartPointer(const void* data) const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

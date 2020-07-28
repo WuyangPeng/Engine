@@ -42,8 +42,8 @@ namespace CoreTools
 		void Write(size_t itemSize, const void* data);
 		void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
-		bool PutCharacter(int character) noexcept;
-		bool PutString(const std::string& str) noexcept;
+		bool PutCharacter(int character);
+		bool PutString(const std::string& str);
 		bool IsEOF() noexcept;
 		bool Flush() noexcept;
 		bool Seek(long offset, FileSeek whence) noexcept;
@@ -51,7 +51,7 @@ namespace CoreTools
 		bool SetPosition(PosType position) noexcept;
 		long Tell() noexcept;
 		void Rewind() noexcept;
-		bool Setvbuf(FileSetvBuf type, size_t size) noexcept;
+		bool Setvbuf(FileSetvBuf type, size_t size);
 
 	private:
 		IMPL_TYPE_DECLARE(CWriteFileManager);

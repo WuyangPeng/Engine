@@ -11,7 +11,7 @@
 #include "System/Time/DeltaTime.h"
 
 CoreTools::UnitTestData
-	::UnitTestData()
+	::UnitTestData() noexcept
 	:m_Pass{ 0 }, m_Fail{ 0 }, m_Error{ 0 }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

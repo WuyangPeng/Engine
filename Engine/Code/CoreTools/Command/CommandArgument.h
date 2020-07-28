@@ -36,11 +36,11 @@ namespace CoreTools
 		double GetDouble() const;
 		const std::string GetString() const;
 
-		bool IsInteger() const;
-		bool IsFloat() const;
-		bool IsDouble() const;
-		bool IsString() const;
-		bool IsNoValue() const;
+		bool IsInteger() const noexcept;
+		bool IsFloat() const noexcept;
+		bool IsDouble() const noexcept;
+		bool IsString() const noexcept;
+		bool IsNoValue() const noexcept;
 
 		bool IsUsed() const noexcept;
 		void SetUsed();

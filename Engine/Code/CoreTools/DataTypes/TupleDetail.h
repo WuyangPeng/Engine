@@ -15,7 +15,7 @@
 
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>
-	::Tuple()
+	::Tuple() noexcept
 	:m_Tuple{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -45,7 +45,7 @@ CoreTools::Tuple<Dimension, Type>
 
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>
-	::Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam)
+	::Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam) noexcept
 	:m_Tuple{ firstParam,secondParam,thirdParam }
 {
 	static_assert(Dimension == 3, "Dimension == 3");
@@ -63,29 +63,12 @@ CoreTools::Tuple<Dimension, Type>
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>
-	::Tuple(const Tuple& rhs)
-	:m_Tuple{ rhs.m_Tuple }
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
 
-template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>& CoreTools::Tuple<Dimension, Type>
-	::operator= (const Tuple& rhs)
-{
-	CORE_TOOLS_CLASS_IS_VALID_9;
-
-	Set(rhs);
-
-	return *this;
-}
 
 // private
 template <int Dimension, typename Type>
 void CoreTools::Tuple<Dimension, Type>
-	::Set(const Tuple& rhs)
+	::Set(const Tuple& rhs) noexcept
 {
 	m_Tuple = rhs.m_Tuple;
 }

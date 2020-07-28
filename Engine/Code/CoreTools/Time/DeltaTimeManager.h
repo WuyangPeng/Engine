@@ -25,10 +25,10 @@ namespace CoreTools
 		CLASS_INVARIANT_DECLARE;
 
 		void ResetCurrentTime();
-		uint64_t GetElapsedTimeInMicroseconds() const;
-		uint64_t GetElapsedTimeInSeconds() const;
-		uint64_t GetNowTimeInMicroseconds() const;
-		uint64_t GetNowTimeInSeconds() const;
+		uint64_t GetElapsedTimeInMicroseconds() const noexcept;
+		uint64_t GetElapsedTimeInSeconds() const noexcept;
+		uint64_t GetNowTimeInMicroseconds() const noexcept;
+		uint64_t GetNowTimeInSeconds() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(DeltaTimeManager);

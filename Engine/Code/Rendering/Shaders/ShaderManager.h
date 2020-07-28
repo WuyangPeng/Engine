@@ -15,7 +15,7 @@
 #include "CoreTools/Base/SingletonDetail.h"
 
 #include <boost/noncopyable.hpp>
-
+RENDERING_EXPORT_UNIQUE_PTR(ShaderManager);
 RENDERING_EXPORT_SHARED_PTR(ShaderManagerImpl);
 EXPORT_NONCOPYABLE_CLASS(RENDERING);
 
@@ -29,11 +29,25 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderManager : public CoreTools::Singleton<ShaderManager>
     {
     public:
-		SINGLETON_INITIALIZE_DECLARE(ShaderManager); 
+		NON_COPY_CLASSES_TYPE_DECLARE(ShaderManager);
+		using ParentType = Singleton<ShaderManager>;
         using VertexShaderProfile = ShaderFlags::VertexShaderProfile;
         using PixelShaderProfile = ShaderFlags::PixelShaderProfile;
         
-    public:
+	private:
+		enum class ShaderManagerCreate
+		{
+			Init,
+		};
+
+	public:
+		explicit ShaderManager(ShaderManagerCreate shaderManagerCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(ShaderManager);
+
 		CLASS_INVARIANT_DECLARE;
         
         void SetVertexProfile (VertexShaderProfile profile);
@@ -42,9 +56,12 @@ namespace Rendering
         void SetPixelProfile (PixelShaderProfile profile);
         PixelShaderProfile GetPixelProfile () const;
         
-    private:
-        SINGLETON_INSTANCE_DECLARE(ShaderManager);
-		SINGLETON_IMPL_DECLARE(ShaderManager);
+	private:
+		using ShaderManagerUniquePtr = std::unique_ptr<ShaderManager>;
+
+	private:
+		static ShaderManagerUniquePtr sm_ShaderManager;
+		IMPL_TYPE_DECLARE(ShaderManager);
     };
 }
 

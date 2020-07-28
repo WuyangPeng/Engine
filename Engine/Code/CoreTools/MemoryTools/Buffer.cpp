@@ -13,6 +13,10 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::Buffer
 	::Buffer()
 	:m_MemoryLength{ GetMaxSize() }, m_Memory{ NEW1<uint8_t>(m_MemoryLength) }
@@ -32,11 +36,18 @@ CoreTools::Buffer
 }
 
 CoreTools::Buffer
-	::~Buffer()
+	::~Buffer() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-	DELETE1<uint8_t>(m_Memory);
+	EXCEPTION_TRY
+	{
+		#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26477)
+		DELETE1<uint8_t>(m_Memory);
+	#include STSTEM_WARNING_POP
+	}
+	EXCEPTION_ALL_CATCH(CoreTools)	
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -92,3 +103,4 @@ const uint8_t* CoreTools::Buffer
 	return m_Memory;
 }
 
+#include STSTEM_WARNING_POP

@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"   
 
 CoreTools::CyclicRedundancyCheckHandleImpl
-	::CyclicRedundancyCheckHandleImpl()
+	::CyclicRedundancyCheckHandleImpl() noexcept
 	:m_CCITT{}, m_Table16{}, m_Table32{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;

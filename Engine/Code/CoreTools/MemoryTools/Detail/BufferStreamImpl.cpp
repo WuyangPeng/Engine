@@ -14,10 +14,19 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 
 using std::vector;
 using std::string;
 
+#include "System/Helper/PragmaWarning.h"
+#include <gsl/gsl_util>
+#include "../../ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26486)
 CoreTools::BufferStreamImpl
 	::BufferStreamImpl(BufferPool* pool, int minSize)
 	:m_Pool{ pool }, m_OriginalMemoryLength{ minSize }, m_Buffer{}, m_StartDataPosition{ 0 },
@@ -39,11 +48,11 @@ CoreTools::BufferStreamImpl
 }
 
 CoreTools::BufferStreamImpl
-	::~BufferStreamImpl()
+	::~BufferStreamImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-	Release();
+	CoreTools::NoexceptNoReturn(*this,&ClassType::Release);
 }
 
 // private
@@ -121,7 +130,7 @@ void CoreTools::BufferStreamImpl
 	}
 	else
 	{
-		auto appendTime = minSize / m_OriginalMemoryLength + 1;
+		const auto appendTime = minSize / m_OriginalMemoryLength + 1;
 		DoAppendBuffer(minSize, appendTime);
 	}
 }
@@ -132,9 +141,12 @@ void CoreTools::BufferStreamImpl
 {
 	auto buffer = m_Pool->GetBuffer(minSize);
 
-	m_Buffer.push_back(buffer);
+	if (buffer != nullptr)
+	{
+		m_Buffer.push_back(buffer);
 
-	m_TotalMemoryLength += buffer->GetSize();
+		m_TotalMemoryLength += buffer->GetSize();
+	}	
 }
 
 // private
@@ -168,7 +180,7 @@ void CoreTools::BufferStreamImpl
 void CoreTools::BufferStreamImpl
 	::ExceedAppend()
 {
-	auto exceedLength = m_StartDataPosition + m_DataLength - m_TotalMemoryLength + 1;
+	const auto exceedLength = m_StartDataPosition + m_DataLength - m_TotalMemoryLength + 1;
 
 	if (0 < exceedLength)
 	{
@@ -279,7 +291,7 @@ void CoreTools::BufferStreamImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto value = static_cast<uint8_t>(data ? 1 : 0);
+	const auto value = gsl::narrow_cast<uint8_t>(data ? 1 : 0);
 
 	return Set(index, &value, 1);
 }
@@ -295,10 +307,13 @@ void CoreTools::BufferStreamImpl
 
 	for (auto ptr : m_Buffer)
 	{
+		if(ptr == nullptr)
+			continue;
+
 		if (copyBufferLength <= 0)
 			break;
 
-		auto actualCopyBufferLength = DoSet(ptr, position, buffer, copyBufferLength);
+		const auto actualCopyBufferLength = DoSet(ptr, position, buffer, copyBufferLength);
 
 		if (0 < actualCopyBufferLength)
 		{
@@ -319,10 +334,12 @@ int CoreTools::BufferStreamImpl
 {
 	CORE_TOOLS_ASSERTION_2(0 < copyBufferLength, "要复制的数组大小小于或等于零！");
 
+	CoreTools::DoNothing();
+
 	if (0 <= position && position < ptr->GetSize())
 	{
 		auto actualCopyBufferLength = copyBufferLength;
-		auto remainBufferLength = ptr->GetSize() - position;
+		const auto remainBufferLength = ptr->GetSize() - position;
 
 		if (remainBufferLength < actualCopyBufferLength)
 		{
@@ -392,7 +409,7 @@ void CoreTools::BufferStreamImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto byteData = static_cast<uint8_t>(data ? 1 : 0);
+	const auto byteData = gsl::narrow_cast<uint8_t>(data ? 1 : 0);
 
 	return Add(&byteData, 1);
 }
@@ -423,9 +440,9 @@ void CoreTools::BufferStreamImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto position = m_StartDataPosition + m_DataLength;
+	const auto position = m_StartDataPosition + m_DataLength;
 
-	auto exceedLength = position + bufferLength + 1 - m_TotalMemoryLength;
+	const auto exceedLength = position + bufferLength + 1 - m_TotalMemoryLength;
 
 	if (0 < exceedLength)
 	{
@@ -448,7 +465,7 @@ void CoreTools::BufferStreamImpl
 }
 
 void CoreTools::BufferStreamImpl
-	::InitRead(int totalLength) noexcept
+	::InitRead(int totalLength)  
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 	CORE_TOOLS_ASSERTION_0(totalLength <= m_DataLength, "读长度越界！");
@@ -456,6 +473,8 @@ void CoreTools::BufferStreamImpl
 	m_ReadPosition = m_StartDataPosition;
 
 	m_ReadLength = totalLength;
+
+	CoreTools::DoNothing();
 }
 
 int CoreTools::BufferStreamImpl
@@ -482,6 +501,8 @@ void CoreTools::BufferStreamImpl
 
 	m_ReadLength -= (m_StartDataPosition + position - m_ReadPosition);
 	m_ReadPosition = m_StartDataPosition + position;
+
+	CoreTools::DoNothing();
 }
 
 uint32_t CoreTools::BufferStreamImpl
@@ -698,10 +719,12 @@ int CoreTools::BufferStreamImpl
 {
 	CORE_TOOLS_ASSERTION_2(0 < copyBufferLength, "要复制的数组大小小于或等于零！");
 
+	CoreTools::DoNothing();
+
 	if (0 <= position && position < ptr->GetSize())
 	{
 		auto actualCopyBufferLength = copyBufferLength;
-		auto remainBufferLength = ptr->GetSize() - position;
+		const auto remainBufferLength = ptr->GetSize() - position;
 
 		if (remainBufferLength < actualCopyBufferLength)
 		{
@@ -718,3 +741,4 @@ int CoreTools::BufferStreamImpl
 	}
 }
 
+#include STSTEM_WARNING_POP

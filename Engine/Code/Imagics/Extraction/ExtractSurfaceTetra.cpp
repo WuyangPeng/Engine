@@ -12,13 +12,18 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26493)
+
 typedef std::map<Mathematics::Vector3Df,int> VMap;
 typedef VMap::iterator VMapIterator;
 typedef std::map<Mathematics::TriangleKey,int> TMap;
 typedef TMap::iterator TMapIterator;
 
 Imagics::ExtractSurfaceTetra
-	::ExtractSurfaceTetra (int xBound, int yBound,int zBound, int* data)
+	::ExtractSurfaceTetra (int xBound, int yBound,int zBound, int* data) noexcept
     :mXBound(xBound),
      mYBound(yBound),
 	 mZBound(zBound),
@@ -29,21 +34,21 @@ Imagics::ExtractSurfaceTetra
 }
 
 float Imagics::ExtractSurfaceTetra
-	::GetFunction (const Mathematics::Vector3Df& P) const
+	::GetFunction (const Mathematics::Vector3Df& P) const noexcept
 {
-    int x = (int)P.GetXCoordinate();
+    const int x = (int)P.GetXCoordinate();
     if (x < 0 || x >= mXBound-1)
     {
         return 0.0f;
     }
 
-    int y = (int)P.GetYCoordinate();
+    const int y = (int)P.GetYCoordinate();
     if (y < 0 || y >= mYBound-1)
     {
         return 0.0f;
     }
 
-    int z = (int)P.GetZCoordinate();
+    const int z = (int)P.GetZCoordinate();
     if (z < 0 || z >= mZBound-1)
     {
         return 0.0f;
@@ -51,23 +56,23 @@ float Imagics::ExtractSurfaceTetra
 
     float dx = P.GetXCoordinate() - x, dy = P.GetYCoordinate() - y, dz = P.GetZCoordinate() - z;
 
-    int i000 = x + mXBound*(y + mYBound*z);
-    int i100 = i000 + 1;
-    int i010 = i000 + mXBound;
-    int i110 = i100 + mXBound;
-    int i001 = i000 + mXYBound;
-    int i101 = i100 + mXYBound;
-    int i011 = i010 + mXYBound;
-    int i111 = i110 + mXYBound;
-    float f000 = (float)mData[i000];
-    float f100 = (float)mData[i100];
-    float f010 = (float)mData[i010];
-    float f110 = (float)mData[i110];
-    float f001 = (float)mData[i001];
-    float f101 = (float)mData[i101];
-    float f011 = (float)mData[i011];
-    float f111 = (float)mData[i111];
-    float c0, c1, c2, interp;
+    const int i000 = x + mXBound*(y + mYBound*z);
+    const int i100 = i000 + 1;
+    const int i010 = i000 + mXBound;
+    const int i110 = i100 + mXBound;
+    const int i001 = i000 + mXYBound;
+    const int i101 = i100 + mXYBound;
+    const int i011 = i010 + mXYBound;
+    const int i111 = i110 + mXYBound;
+    const float f000 = (float)mData[i000];
+    const float f100 = (float)mData[i100];
+    const float f010 = (float)mData[i010];
+    const float f110 = (float)mData[i110];
+    const float f001 = (float)mData[i001];
+    const float f101 = (float)mData[i101];
+    const float f011 = (float)mData[i011];
+    const float f111 = (float)mData[i111];
+    float c0 = 0.0f, c1 = 0.0f, c2 = 0.0f, interp = 0.0f;
 
     if ((x & 1) ^ (y & 1) ^ (z & 1))
     {
@@ -178,42 +183,44 @@ float Imagics::ExtractSurfaceTetra
 Mathematics::Vector3Df Imagics::ExtractSurfaceTetra
 	::GetGradient (const Mathematics::Vector3Df& P) const
 {
-    int x = (int)P.GetXCoordinate();
+    const int x = (int)P.GetXCoordinate();
     if (x < 0 || x >= mXBound-1)
     {
         return Mathematics::Vector3Df::sm_Zero;
     }
 
-    int y = (int)P.GetYCoordinate();
+    const int y = (int)P.GetYCoordinate();
     if (y < 0 || y >= mYBound-1)
     {
         return Mathematics::Vector3Df::sm_Zero;
     }
 
-    int z = (int)P.GetZCoordinate();
+    const int z = (int)P.GetZCoordinate();
     if (z < 0 || z >= mZBound-1)
     {
         return Mathematics::Vector3Df::sm_Zero;
     }
 
-    float dx = P.GetXCoordinate() - x, dy = P.GetYCoordinate() - y, dz = P.GetZCoordinate() - z;
+    const float dx = P.GetXCoordinate() - x;
+    const auto dy = P.GetYCoordinate() - y;
+    const auto dz = P.GetZCoordinate() - z;
 
-    int i000 = x + mXBound*(y + mYBound*z);
-    int i100 = i000 + 1;
-    int i010 = i000 + mXBound;
-    int i110 = i100 + mXBound;
-    int i001 = i000 + mXYBound;
-    int i101 = i100 + mXYBound;
-    int i011 = i010 + mXYBound;
+    const int i000 = x + mXBound*(y + mYBound*z);
+    const int i100 = i000 + 1;
+    const int i010 = i000 + mXBound;
+    const int i110 = i100 + mXBound;
+    const int i001 = i000 + mXYBound;
+    const int i101 = i100 + mXYBound;
+    const int i011 = i010 + mXYBound;
     int i111 = i110 + mXYBound;
-    float f000 = (float)mData[i000];
-    float f100 = (float)mData[i100];
-    float f010 = (float)mData[i010];
-    float f110 = (float)mData[i110];
-    float f001 = (float)mData[i001];
-    float f101 = (float)mData[i101];
-    float f011 = (float)mData[i011];
-    float f111 = (float)mData[i111];
+    const float f000 = (float)mData[i000];
+    const float f100 = (float)mData[i100];
+    const float f010 = (float)mData[i010];
+    const float f110 = (float)mData[i110];
+    const float f001 = (float)mData[i001];
+    const float f101 = (float)mData[i101];
+    const float f011 = (float)mData[i011];
+    const float f111 = (float)mData[i111];
     Mathematics::Vector3Df interp;
 
     if ((x & 1) ^ (y & 1) ^ (z & 1))
@@ -1358,3 +1365,4 @@ void Imagics::ExtractSurfaceTetra::Vertex
     meshVertex.SetZCoordinate(float(ZNumer)/float(ZDenom));
 }
 
+#include STSTEM_WARNING_POP

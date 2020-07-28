@@ -33,7 +33,7 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		FileBufferPtr GetBufferOutStreamInformation() const;
+		FileBufferPtr GetBufferOutStreamInformation() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(BufferOutStream);

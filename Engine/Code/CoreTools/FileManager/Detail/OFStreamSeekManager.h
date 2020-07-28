@@ -27,6 +27,11 @@ namespace CoreTools
 		explicit OFStreamSeekManager(MasterTypeReference master);
 		~OFStreamSeekManager();
 
+		OFStreamSeekManager(const OFStreamSeekManager&) = delete;
+		OFStreamSeekManager operator=(const OFStreamSeekManager&) = delete;
+		OFStreamSeekManager(OFStreamSeekManager&&) = delete;
+		OFStreamSeekManager operator=(OFStreamSeekManager&&) = delete;
+
 		CLASS_INVARIANT_DECLARE;
 
 	private:

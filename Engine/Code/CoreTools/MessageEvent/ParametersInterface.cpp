@@ -11,17 +11,7 @@
 
 using std::make_shared;
 
-CoreTools::ParametersInterface
-	::ParametersInterface()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::ParametersInterface
-	::~ParametersInterface()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ParametersInterface)
 

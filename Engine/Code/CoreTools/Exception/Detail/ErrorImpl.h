@@ -23,6 +23,10 @@ namespace CoreTools
 	public:
 		ErrorImpl(const FunctionDescribed& functionDescribed, const String& message);
 		virtual ~ErrorImpl() = 0;
+		ErrorImpl(const ErrorImpl&) = default;
+		ErrorImpl& operator=(const ErrorImpl&) = default;
+		ErrorImpl(ErrorImpl&&) noexcept = default;
+		ErrorImpl& operator=(ErrorImpl&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

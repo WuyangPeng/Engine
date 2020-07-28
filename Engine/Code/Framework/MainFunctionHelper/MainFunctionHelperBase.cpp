@@ -262,7 +262,7 @@ void Framework::MainFunctionHelperBase
 }
 
 void Framework::MainFunctionHelperBase
-	::DestroyUniqueIDManager()
+	::DestroyUniqueIDManager() noexcept
 {
 	if (MainFunctionSchedule::UniqueID <= m_MainFunctionSchedule)
 	{

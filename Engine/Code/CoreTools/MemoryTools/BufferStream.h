@@ -44,7 +44,7 @@ namespace CoreTools
 		void Append(int minSize);
 		void SetDataLength(int newLength);
 		void AddDataLength(int length);
-		int GetDataLength() const;
+		int GetDataLength() const noexcept;
 		int GetTotalMemoryLength() const noexcept;
 		int GetRemainDataLength() const noexcept;
 
@@ -73,7 +73,7 @@ namespace CoreTools
 
 		// ¶ÁÊý¾Ý
 		void InitRead() noexcept;
-		void InitRead(int totalLength) noexcept;
+		void InitRead(int totalLength);
 
 		int GetReadableLength() const noexcept;
 		int GetReadPosition() const noexcept;

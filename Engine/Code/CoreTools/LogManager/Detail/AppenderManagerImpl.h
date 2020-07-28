@@ -36,7 +36,7 @@ namespace CoreTools
 		bool InsertAppender(const String& name, const Appender& appender);
 		bool InsertConsoleAppender(const Appender& appender);
 		bool RemoveAppender(const String& name);
-		void Clear();
+		void Clear() noexcept;
 
 		void Write(const LogMessage& message);
 		void Write(const String& name, const LogMessage& message);

@@ -12,7 +12,7 @@
  
 AssistTools::GenerateTemplateSolution
 	::GenerateTemplateSolution(const System::String& templateFileName, const System::String& projectName, const System::String& coreName)
-	:m_Impl(new ImplType(templateFileName,projectName,coreName))
+	:m_Impl(std::make_shared<ImplType>(templateFileName,projectName,coreName))
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }

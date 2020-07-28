@@ -87,7 +87,7 @@ Rendering::PixelShader* Rendering::VertexColor4TextureEffect
 Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect
 	::CreateInstance (Texture2D* texture) const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
 	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
     instance->SetPixelTexture(0, 0, TextureSmartPointer(texture));
 
@@ -104,7 +104,7 @@ Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect
 Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect
 	::CreateUniqueInstance ( Texture2D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
 {
-    VertexColor4TextureEffect* effect = NEW0 VertexColor4TextureEffect();
+    VertexColor4TextureEffect* effect = CoreTools::New0 < VertexColor4TextureEffect>();
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);

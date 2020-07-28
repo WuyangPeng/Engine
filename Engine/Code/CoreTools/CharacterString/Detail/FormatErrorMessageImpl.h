@@ -27,7 +27,7 @@ namespace CoreTools
 		using WindowError = System::WindowError;
 
 	public:
-		explicit FormatErrorMessageImpl(WindowError lastError);
+		explicit FormatErrorMessageImpl(WindowError lastError) noexcept;
 		~FormatErrorMessageImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
@@ -46,11 +46,11 @@ namespace CoreTools
 		using DynamicLinkModule = System::DynamicLinkModule;
 
 	private:
-		void InitMessage();
-		void AgainInitMessage();
-		void InitNetworkMessage(DynamicLinkModule module);
-		void LoadedModuleSucceed(DynamicLinkModule module);
-		void LoadedModuleFailure();
+		void InitMessage() noexcept;
+		void AgainInitMessage() noexcept;
+		void InitNetworkMessage(DynamicLinkModule module) noexcept;
+		void LoadedModuleSucceed(DynamicLinkModule module) noexcept;
+		void LoadedModuleFailure() noexcept;
 		void ReleaseMemory() noexcept;
 
 	private:

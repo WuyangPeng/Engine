@@ -21,9 +21,9 @@ namespace AssistTools
 
 	public:
 		GenerateTemplateDllMainImpl(const System::String& templateFileName, const Replace& replace);
-		virtual ~GenerateTemplateDllMainImpl();
+ 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		void GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, 
 			            const CopyrightData& copyrightData, const System::String& solutionName,

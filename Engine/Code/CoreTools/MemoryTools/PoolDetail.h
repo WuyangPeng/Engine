@@ -12,14 +12,22 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <functional>
 #include <algorithm>
+ 
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
+ 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26487)
 template<class T>
 CoreTools::Pool<T>
-	::Pool()
+	::Pool() noexcept
 	:m_Store{}, m_AllocatedCount{ 0 }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -27,13 +35,21 @@ CoreTools::Pool<T>
 
 template<class T>
 CoreTools::Pool<T>
-	::~Pool()
+	::~Pool() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-	CORE_TOOLS_ASSERTION_1(m_AllocatedCount == 0, "对象池析构时还有内存未释放！");
+	EXCEPTION_TRY
+	{
+		
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
+		CORE_TOOLS_ASSERTION_1(m_AllocatedCount == 0, "对象池析构时还有内存未释放！");
 
-	FreeAll();
+		FreeAll();
+		#include STSTEM_WARNING_POP
+	}
+	EXCEPTION_ALL_CATCH(CoreTools)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -74,8 +90,8 @@ T* CoreTools::Pool<T>
 template<class T>
 T* CoreTools::Pool<T>
 	::DoGet()
-{
-	return NEW0 T;
+{ 
+	return CoreTools::New0<T>();
 }
 
 // private
@@ -104,6 +120,8 @@ bool CoreTools::Pool<T>
 	::ConformCondition(T* ptr)
 {
 	SYSTEM_UNUSED_ARG(ptr);
+
+	CoreTools::DoNothing();
 
 	return true;
 }
@@ -160,5 +178,5 @@ int CoreTools::Pool<T>
 
 	return GetAvailableCount() + GetAllocatedCount();
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_MEMORY_TOOLS_POOL_DETAIL_H

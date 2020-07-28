@@ -10,13 +10,13 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::MutexImpl
-	::MutexImpl()
+	::MutexImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::MutexImpl
-	::~MutexImpl()
+	::~MutexImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

@@ -20,7 +20,7 @@ CoreTools::SemaphoreImpl
 {
 	if (!System::IsSystemSemaphoreValid(m_Handle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("初始化信号量失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("初始化信号量失败！"s));
 	}
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -58,7 +58,7 @@ void CoreTools::SemaphoreImpl
 
 	if (!System::ReleaseSystemSemaphore(m_Handle, releaseCount, nullptr))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("释放信号量失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("释放信号量失败！"s));
 	}
 
 	m_CurrentCount += releaseCount;
@@ -71,7 +71,7 @@ void CoreTools::SemaphoreImpl
 
 	if (!System::WaitForSystemSemaphore(m_Handle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("进入信号量失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("进入信号量失败！"s));
 	}
 
 	--m_CurrentCount;

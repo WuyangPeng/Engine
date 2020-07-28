@@ -26,21 +26,26 @@ namespace CoreTools
 
 	public:
 		explicit CReadFileManagerImpl(const String& fileName);
-		virtual ~CReadFileManagerImpl();
+		~CReadFileManagerImpl();
+
+		CReadFileManagerImpl(const CReadFileManagerImpl&) = delete;
+		CReadFileManagerImpl& operator=(const CReadFileManagerImpl&) = delete;
+		CReadFileManagerImpl(CReadFileManagerImpl&&) noexcept = delete;
+		CReadFileManagerImpl& operator=(CReadFileManagerImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual int GetFileByteSize() const override;
+		int GetFileByteSize() const override;
 
 		// 当且仅当读出的字节数等于data的大小，操作是成功的。否则抛出Error异常。
-		virtual void Read(size_t itemSize, void* data) override;
-		virtual void Read(size_t itemSize, size_t itemsNumber, void* data) override;
+		void Read(size_t itemSize, void* data) override;
+		void Read(size_t itemSize, size_t itemsNumber, void* data) override;
 
 	private:
 		// 禁止调用以下成员函数
-		virtual size_t WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept override;
-		virtual bool PutCharacter(int character) noexcept override;
-		virtual bool PutString(const std::string& str) noexcept override;
+		size_t WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) override;
+		bool PutCharacter(int character) override;
+		bool PutString(const std::string& str) override;
 	};
 }
 

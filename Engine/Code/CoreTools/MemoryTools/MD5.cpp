@@ -26,6 +26,13 @@ using std::hex;
 using std::uppercase;
 using std::array;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+
 CoreTools::MD5
 	::MD5()
 	:m_MD5Context{}
@@ -114,7 +121,8 @@ const string CoreTools::MD5
 }
 
 int CoreTools::MD5
-	::GetDigestSize()
+	::GetDigestSize() noexcept
 {
 	return sm_DigestSize;
 }
+#include STSTEM_WARNING_POP

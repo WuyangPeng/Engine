@@ -38,7 +38,7 @@ bool CoreTools::ArrayProxy
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::BitProxy	CoreTools::ArrayProxy
-	::operator[](int position)
+	::operator[](int position) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

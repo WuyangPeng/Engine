@@ -28,8 +28,12 @@ namespace CoreTools
 		using CallbackMemberFunction = bool (ClassType::*)(const CallbackParameters& callbackParameters);
 
 	public:
-		EventInterface();
-		virtual ~EventInterface();
+		EventInterface() noexcept = default;
+		virtual ~EventInterface() noexcept = default;
+		EventInterface(const EventInterface&) noexcept = default;
+		EventInterface& operator=(const EventInterface&) noexcept = default;
+		EventInterface(EventInterface&&) noexcept = default;
+		EventInterface& operator=(EventInterface&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

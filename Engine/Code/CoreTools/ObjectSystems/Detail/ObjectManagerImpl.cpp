@@ -37,7 +37,7 @@ CoreTools::ObjectManagerImpl::FactoryFunction CoreTools::ObjectManagerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"s));
 	}
 }
 

@@ -17,7 +17,7 @@
 #include "System/Window/Flags/WindowFlags.h"
 
 #include <boost/noncopyable.hpp>
-
+RENDERING_EXPORT_UNIQUE_PTR(RendererData);
 RENDERING_EXPORT_SHARED_PTR(RendererDataImpl);
 EXPORT_NONCOPYABLE_CLASS(RENDERING);
 
@@ -31,12 +31,26 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE RendererData : public CoreTools::Singleton<RendererData>
 	{
 	public:
-		SINGLETON_INITIALIZE_DECLARE(RendererData); 
+		NON_COPY_CLASSES_TYPE_DECLARE(RendererData);
+		using ParentType = Singleton<RendererData>;
 		using Colour = Rendering::Colour<float>;
 		using TextureFormat = Rendering::TextureFormat;
 		using WindowStyles = System::WindowStyles;
 
-	public:	
+	private:
+		enum class RendererDataCreate
+		{
+			Init,
+		};
+
+	public:
+		explicit RendererData(RendererDataCreate rendererDataCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(RendererData);
+
 		CLASS_INVARIANT_DECLARE;
 
 		void LoadConfiguration(const std::string& fileName);
@@ -58,9 +72,12 @@ namespace Rendering
 		int GetHeight () const;
 		bool IsAllowResize() const;
 
-	private:		
-		SINGLETON_INSTANCE_DECLARE(RendererData);
-		SINGLETON_IMPL_DECLARE(RendererData);
+	private:
+		using RendererDataUniquePtr = std::unique_ptr<RendererData>;
+
+	private:
+		static RendererDataUniquePtr sm_RendererData;
+		IMPL_TYPE_DECLARE(RendererData);
 	};
 }
 

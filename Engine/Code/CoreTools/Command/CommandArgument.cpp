@@ -39,11 +39,11 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetFloat, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetDouble, double)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetString, const string)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, IsInteger, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, IsFloat, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, IsDouble, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, IsString, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, IsNoValue, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsInteger, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsFloat, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsDouble, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsString, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsNoValue, bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsUsed, bool)
 

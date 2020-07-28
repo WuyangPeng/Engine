@@ -10,8 +10,14 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+
+using namespace std::literals;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const CoreTools::OFStreamSeekManager::MasterPosType CoreTools::OFStreamSeekManager
 	::sm_ErrorPosition{ -1 };
+#include STSTEM_WARNING_POP
 
 CoreTools::OFStreamSeekManager
 	::OFStreamSeekManager(MasterTypeReference master)
@@ -32,7 +38,7 @@ void CoreTools::OFStreamSeekManager
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取文件当前位置失败!"));
+		THROW_EXCEPTION(SYSTEM_TEXT("获取文件当前位置失败!"s));
 	}
 }
 
@@ -40,17 +46,35 @@ CoreTools::OFStreamSeekManager
 	::~OFStreamSeekManager()
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+	EXCEPTION_TRY
+	{
 
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
 	m_Master.seekp(m_CurrentPosition, MasterType::beg);
+#include STSTEM_WARNING_POP
+	}
+		EXCEPTION_ALL_CATCH(CoreTools)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::OFStreamSeekManager
 	::IsValid() const noexcept
 {
-	if (m_Master && m_CurrentPosition != sm_ErrorPosition)
-		return true;
-	else
+	try
+	{
+		
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
+		if (m_Master && m_CurrentPosition != sm_ErrorPosition)
+			return true;
+		else
+			return false;
+		#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
 		return false;
+	}	
 }
 #endif // OPEN_CLASS_INVARIANT

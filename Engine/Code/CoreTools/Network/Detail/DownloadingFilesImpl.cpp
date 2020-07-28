@@ -20,10 +20,12 @@
 
 #include <vector>
 #include <array>
+#include <gsl/gsl_util>
 
 using std::array;
 using std::vector;
 using std::string;
+using namespace std::literals;
 
 CoreTools::DownloadingFilesImpl
 	::DownloadingFilesImpl(const System::String& url, bool restart, const DownloadingFilesEventSharedPointer& downloadingFilesEvent)
@@ -54,7 +56,7 @@ void CoreTools::DownloadingFilesImpl
 	System::String fileName = GetFileName();
 	OFStreamManager manager{ fileName, !m_Restart };
 	manager.SetSimplifiedChinese();
-	auto fileLength = static_cast<uint32_t>(manager.GetOFStreamSize());
+	const auto fileLength = gsl::narrow_cast<uint32_t>(manager.GetOFStreamSize());
 
 	System::String header{ SYSTEM_TEXT("Range:bytes=") + System::ToString(fileLength) + SYSTEM_TEXT("-") };
 
@@ -62,11 +64,11 @@ void CoreTools::DownloadingFilesImpl
 
 	System::WindowDWord contentLength{ 79 };
 	System::WindowDWord length{ sizeof(contentLength) };
-	auto infoLevel = System::QueryInfo::Number | System::QueryInfo::ContentLength;
+	const auto infoLevel = System::QueryInfo::Number | System::QueryInfo::ContentLength;
 
 	if (!System::GetHttpQueryInfo(openUrlInternet.GetInternet(), infoLevel, &contentLength, &length, nullptr))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("未找到文件或内容长度。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("未找到文件或内容长度。"s));
 	}
 
 	// 如果现有文件（如果有）未完成，则完成下载。	
@@ -83,7 +85,7 @@ void CoreTools::DownloadingFilesImpl
 		{
 			if (!System::ReadFileInternet(openUrlInternet.GetInternet(), buffer.data(), bufferSize, &numberOfBytesRead))
 			{
-				THROW_EXCEPTION(SYSTEM_TEXT("下载时发生错误。"));
+				THROW_EXCEPTION(SYSTEM_TEXT("下载时发生错误。"s));
 			}
 
 			string writeToDisk{ buffer.data() };
@@ -118,7 +120,7 @@ void CoreTools::DownloadingFilesImpl
 
 	if (caseInsensitiveTString.find(SYSTEM_TEXT("http")) != 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("必须是 HTTP url"));
+		THROW_EXCEPTION(SYSTEM_TEXT("必须是 HTTP url"s));
 	}
 }
 
@@ -128,7 +130,7 @@ void CoreTools::DownloadingFilesImpl
 	// 查看是否有Internet连接可用。
 	if (!System::IsInternetAttemptConnect())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("无法连接。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("无法连接。"s));
 	}
 }
 
@@ -145,6 +147,6 @@ System::String CoreTools::DownloadingFilesImpl
 	}
 	else
 	{
-		return fileName[fileName.size() - 1];
+		return fileName.at(fileName.size() - 1);
 	}
 }

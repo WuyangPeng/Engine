@@ -22,8 +22,13 @@ namespace CoreTools
 		using String = System::String;
 
 	public:
-		CopyFileToolsImpl();
-		virtual ~CopyFileToolsImpl();
+		CopyFileToolsImpl() noexcept;
+		virtual ~CopyFileToolsImpl() noexcept = default;
+
+		CopyFileToolsImpl(const CopyFileToolsImpl&) = delete;
+		CopyFileToolsImpl& operator=(const CopyFileToolsImpl&) = delete;
+		CopyFileToolsImpl(CopyFileToolsImpl&&) noexcept = delete;
+		CopyFileToolsImpl& operator=(CopyFileToolsImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 	};

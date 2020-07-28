@@ -53,7 +53,12 @@ void CoreTools::StdRecursiveMutex
 
 	EXCEPTION_TRY
 	{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26110)
+
 		m_Mutex.unlock();
+
+#include STSTEM_WARNING_POP
 	}
 	EXCEPTION_STD_EXCEPTION_CATCH(CoreTools)
 }

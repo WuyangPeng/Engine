@@ -34,11 +34,11 @@ bool CoreTools::SecondTimer
 DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, SecondTimer)
 
 uint64_t CoreTools::SecondTimer
-	::GetRemain() const
+	::GetRemain() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto elapsedTime = GetElapsedTime();
+	const auto elapsedTime = GetElapsedTime();
 
 	if (elapsedTime <= m_Second)
 		return m_Second - elapsedTime;
@@ -47,7 +47,7 @@ uint64_t CoreTools::SecondTimer
 }
 
 uint64_t CoreTools::SecondTimer
-	::GetElapsedTime() const
+	::GetElapsedTime() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -55,11 +55,11 @@ uint64_t CoreTools::SecondTimer
 }
 
 bool CoreTools::SecondTimer
-	::IsElapsed() const
+	::IsElapsed() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto elapsedTime = GetElapsedTime();
+	const auto elapsedTime = GetElapsedTime();
 
 	if (m_Second <= elapsedTime)
 		return true;
@@ -68,7 +68,7 @@ bool CoreTools::SecondTimer
 }
 
 uint64_t CoreTools::SecondTimer
-	::GetNowTime() const
+	::GetNowTime() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

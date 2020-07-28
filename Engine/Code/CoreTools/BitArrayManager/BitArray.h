@@ -24,9 +24,12 @@ namespace CoreTools
 		explicit BitArray(int size);
 
 		BitArray(const BitArray& rhs);
-		~BitArray();
+		~BitArray() noexcept;
 
 		BitArray& operator=(const BitArray& rhs);
+
+		BitArray(BitArray&& rhs) = default;
+		BitArray& operator=(BitArray&& rhs) = default;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -68,10 +71,16 @@ namespace CoreTools
 
 	private:
 		// 对于一个给定的比特数获取索引和位偏移。索引。
-		static int GetIndex(int bitNum) noexcept;
+		constexpr static int GetIndex(int bitNum) noexcept
+		{
+			return bitNum / sm_CellSize;
+		}
 
 		// 位偏移。
-		static int GetOffset(int bitNum) noexcept;
+		constexpr static int GetOffset(int bitNum) noexcept
+		{			
+			return bitNum % sm_CellSize;			
+		}
 
 		void Init();
 

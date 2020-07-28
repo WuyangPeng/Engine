@@ -32,6 +32,11 @@ namespace CoreTools
 		FileHandleImpl(const System::String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode, FileHandleCreationDisposition creation);
 		virtual ~FileHandleImpl();
 
+		FileHandleImpl(const FileHandleImpl&) = delete;
+		FileHandleImpl operator=(const FileHandleImpl&) = delete;
+		FileHandleImpl(FileHandleImpl&&) = delete;
+		FileHandleImpl operator=(FileHandleImpl&&) = delete;
+
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		uint64_t GetFileLength() const;

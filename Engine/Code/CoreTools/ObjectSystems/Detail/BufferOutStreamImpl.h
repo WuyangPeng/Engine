@@ -28,7 +28,7 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		FileBufferPtr GetBufferOutStreamInformation() const;
+		FileBufferPtr GetBufferOutStreamInformation() const noexcept;
 
 	private:
 		using BufferTargetPtr = std::shared_ptr<BufferTarget>;

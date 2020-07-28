@@ -17,6 +17,7 @@
 #include <sstream>
 
 using std::locale;
+using namespace std::literals;
 
 CoreTools::IFStreamManagerImpl
 	::IFStreamManagerImpl(const String& fileName)
@@ -34,10 +35,21 @@ CoreTools::IFStreamManagerImpl
 bool CoreTools::IFStreamManagerImpl
 	::IsValid() const noexcept
 {
-	if (!m_FileName.empty() && m_IStream)
-		return true;
-	else
+	try
+	{
+		
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
+		if (!m_FileName.empty() && m_IStream)
+			return true;
+		else
+			return false;
+		#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
 		return false;
+	}	
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -55,7 +67,7 @@ System::String CoreTools::IFStreamManagerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("备份文件失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("备份文件失败！"s));
 	}
 
 	return newName;
@@ -83,6 +95,9 @@ System::String CoreTools::IFStreamManagerImpl
 void CoreTools::IFStreamManagerImpl
 	::CopyContentToStream(OStream* osPtr) const
 {
+
+#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26492)
 	CORE_TOOLS_ASSERTION_0(osPtr != nullptr, "指针无效");
 
 	auto thisImpl = const_cast<IFStreamManagerImpl*>(this);
@@ -93,6 +108,7 @@ void CoreTools::IFStreamManagerImpl
 	osPtr->imbue(loc);
 
 	*osPtr << m_IStream.rdbuf();
+	#include STSTEM_WARNING_POP
 }
 
 System::String CoreTools::IFStreamManagerImpl
@@ -109,7 +125,7 @@ System::String CoreTools::IFStreamManagerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取文件内容失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("获取文件内容失败！"s));
 	}
 }
 

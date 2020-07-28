@@ -71,7 +71,7 @@ Rendering::DefaultEffect
 Rendering::VisualEffectInstance* Rendering::DefaultEffect
 	::CreateInstance() const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	VisualEffectInstance* instance = CoreTools::New0<VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
 	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
     return instance;
 }

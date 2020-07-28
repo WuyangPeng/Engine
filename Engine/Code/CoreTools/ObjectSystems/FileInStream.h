@@ -26,7 +26,7 @@ namespace CoreTools
 
 	public:
 		explicit FileInStream(const String& fileName);
-		~FileInStream();
+ 
 
 		CLASS_INVARIANT_DECLARE;
 

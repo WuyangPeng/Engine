@@ -21,9 +21,9 @@ namespace AssistTools
 
 	public:
 		GenerateTestingTemplateEngineDirectoryImpl(const System::String& directory, const std::string& configurationFileName);
-		virtual ~GenerateTestingTemplateEngineDirectoryImpl();
+		 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		void GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, 
 			            const System::String& newIncludeName, const System::String& newTestingIncludeName,

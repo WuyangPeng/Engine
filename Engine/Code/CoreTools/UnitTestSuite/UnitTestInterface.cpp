@@ -10,16 +10,10 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::UnitTestInterface
-	::UnitTestInterface()
+	::UnitTestInterface() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::UnitTestInterface
-	::~UnitTestInterface()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+} 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, UnitTestInterface)
 

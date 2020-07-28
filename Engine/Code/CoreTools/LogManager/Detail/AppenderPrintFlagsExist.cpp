@@ -10,7 +10,7 @@
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 
 bool CoreTools::AppenderPrintFlagsExist
-	::IsExist(AppenderPrint lhsAppenderPrintFlags, AppenderPrint rhsAppenderPrint)
+	::IsExist(AppenderPrint lhsAppenderPrintFlags, AppenderPrint rhsAppenderPrint) noexcept
 {
 	if ((lhsAppenderPrintFlags & rhsAppenderPrint) != AppenderPrint::None)
 		return true;

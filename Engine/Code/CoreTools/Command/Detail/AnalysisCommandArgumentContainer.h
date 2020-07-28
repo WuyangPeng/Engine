@@ -26,7 +26,7 @@ namespace CoreTools
 		AnalysisCommandArgumentContainer(int argumentsNumber, char** arguments);
 		explicit AnalysisCommandArgumentContainer(const char* commandLine);
 
-		CommandArgumentContainerSharedPtr GetCommandArgumentContainer();
+		CommandArgumentContainerSharedPtr GetCommandArgumentContainer() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -22,7 +22,7 @@ using std::wstring;
 using std::make_shared;
 
 CoreTools::LogAppenderIOManagerImpl
-	::LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerPtr& appenderManager)
+	::LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerPtr& appenderManager) noexcept
 	:m_logLevel{ logLevel }, m_AppenderManager{ appenderManager }, m_FilterTypePtr{}, m_FunctionDescribedPtr{},
 	 m_LogFileNamePtr{}, m_Message{}, m_TriggerAssert{ false }, m_AlwaysConsole{ false }
 {
@@ -30,7 +30,7 @@ CoreTools::LogAppenderIOManagerImpl
 }
 
 CoreTools::LogAppenderIOManagerImpl
-	::LogAppenderIOManagerImpl()
+	::LogAppenderIOManagerImpl() noexcept
 	:m_logLevel{ LogLevel::Disabled }, m_AppenderManager{}, m_FilterTypePtr{}, m_FunctionDescribedPtr{},
 	 m_LogFileNamePtr{}, m_Message{}, m_TriggerAssert{ false }, m_AlwaysConsole{ false }
 {
@@ -38,7 +38,7 @@ CoreTools::LogAppenderIOManagerImpl
 }
 
 CoreTools::LogAppenderIOManagerImpl
-	::~LogAppenderIOManagerImpl()
+	::~LogAppenderIOManagerImpl() noexcept
 {
 	try
 	{
@@ -118,6 +118,24 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl
 
 	return *this;
 }
+
+CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl
+	::operator<<(const std::exception& error) noexcept
+{
+	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	try
+	{
+		m_Message += SYSTEM_TEXT("异常：") + StringConversion::MultiByteConversionStandard(error.what()); 
+	}
+	catch(...)
+	{
+		// 略过异常		
+		System::OutputDebugStringWithTChar(SYSTEM_TEXT("LogAppenderIOManagerImpl operator<<(const Error&) 抛出异常"));
+	}
+
+	return *this;
+} 
 
 CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl
 	::operator<<(LogFilter filterType) noexcept
@@ -333,7 +351,7 @@ void CoreTools::LogAppenderIOManagerImpl
 
 // private
 void CoreTools::LogAppenderIOManagerImpl
-	::Reset()
+	::Reset() noexcept
 {
 	m_Message.clear();
 	m_FilterTypePtr.reset();
@@ -344,7 +362,7 @@ void CoreTools::LogAppenderIOManagerImpl
 }
 
 void CoreTools::LogAppenderIOManagerImpl
-	::SetAppenderManager(const AppenderManagerPtr& appenderManager)
+	::SetAppenderManager(const AppenderManagerPtr& appenderManager) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

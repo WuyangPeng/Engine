@@ -17,10 +17,11 @@
 #include "CoreTools/MemoryTools/SmartPointerManager.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-
+#include "System/Helper/PragmaWarning.h"
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+ 
 
 using std::cout;
 using std::cerr;
@@ -29,18 +30,18 @@ using std::ofstream;
 using std::exception;
 
 CoreTools::CMainFunctionHelper
-	::CMainFunctionHelper(int argc, char* argv[])
+	::CMainFunctionHelper(int argc, char** argv)
 	:m_Argc{ argc }, m_Argv{ argv }, m_OsPtr{ }, m_Schedule{ ScheduleType::Failure }
 {
 	try
 	{
 		InitSingleton();
 	}
-	catch (Error& error)
+	catch (const Error& error)
 	{
 		CERR << error.GetError() << SYSTEM_TEXT('\n');
 	}
-	catch (exception& error)
+	catch (const exception& error)
 	{
 		cerr << error.what() << '\n';
 	}
@@ -92,7 +93,7 @@ bool CoreTools::CMainFunctionHelper
 {
 	if (m_Schedule < ScheduleType::Max)
 		return true;
-	else if (m_Argc < 1 || m_Argv[0] == nullptr)
+	else if (m_Argc < 1 || *m_Argv == nullptr)
 		return false;
 	else
 		return true;
@@ -173,7 +174,7 @@ void CoreTools::CMainFunctionHelper
 
 // private
 void CoreTools::CMainFunctionHelper
-	::InitMemory()
+	::InitMemory() noexcept(g_MemoryNoexcept)
 {
 	MEMORY_CREATE;
 
@@ -195,7 +196,11 @@ void CoreTools::CMainFunctionHelper
 {
 	if (m_Argc == 2)
 	{
+
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26481)
 		m_OsPtr = OStreamShared{ std::string{ m_Argv[1] } };
+		#include STSTEM_WARNING_POP
 	}
 	else if (2 < m_Argc)
 	{
@@ -213,7 +218,7 @@ void CoreTools::CMainFunctionHelper
 
 // private
 void CoreTools::CMainFunctionHelper
-	::DestroySingleton()
+	::DestroySingleton() noexcept
 {
 	DestroyOsPtr();
 	DestroySmartPointer();
@@ -224,14 +229,14 @@ void CoreTools::CMainFunctionHelper
 
 // private
 void CoreTools::CMainFunctionHelper
-	::DestroyOsPtr()
+	::DestroyOsPtr() noexcept
 {
 	 
 }
 
 // private
 void CoreTools::CMainFunctionHelper
-	::DestroySmartPointer()
+	::DestroySmartPointer() noexcept
 {
 	if (ScheduleType::SmartPointer <= m_Schedule)
 	{
@@ -241,7 +246,7 @@ void CoreTools::CMainFunctionHelper
 
 // private
 void CoreTools::CMainFunctionHelper
-	::DestroyMemory()
+	::DestroyMemory() noexcept
 {
 	if (ScheduleType::Memory <= m_Schedule)
 	{
@@ -251,7 +256,7 @@ void CoreTools::CMainFunctionHelper
 
 // private
 void CoreTools::CMainFunctionHelper
-	::DestroyLog()
+	::DestroyLog() noexcept
 {
 	if (ScheduleType::Log <= m_Schedule)
 	{
@@ -261,7 +266,7 @@ void CoreTools::CMainFunctionHelper
 
 // private
 void CoreTools::CMainFunctionHelper
-	::DestroyUniqueIDManager()
+	::DestroyUniqueIDManager() noexcept
 {
 	if (ScheduleType::UniqueIDManager <= m_Schedule)
 	{
@@ -270,7 +275,7 @@ void CoreTools::CMainFunctionHelper
 }
 
 void CoreTools::CMainFunctionHelper
-	::SystemPause()
+	::SystemPause() noexcept
 {
 	System::SystemPause();
 }
@@ -287,7 +292,7 @@ void CoreTools::CMainFunctionHelper
 }
 
 CoreTools::OStreamShared CoreTools::CMainFunctionHelper
-	::GetStreamShared() const
+	::GetStreamShared() const noexcept
 {
 	return m_OsPtr;
 }

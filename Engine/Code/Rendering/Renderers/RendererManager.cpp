@@ -17,49 +17,40 @@
 
 using std::string;
 using std::make_shared;
+using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(Rendering,RendererManager);
+SINGLETON_GET_PTR_DEFINE(Rendering, RendererManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetRenderingMutex() }
+Rendering::RendererManager::RendererManagerUniquePtr Rendering::RendererManager
+::sm_RendererManager{ };
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_RendererManagerMutex }
+void Rendering::RendererManager
+::Create()
+{
+	sm_RendererManager = make_unique<Rendering::RendererManager>(RendererManagerCreate::Init);
+}
 
-SINGLETON_INITIALIZE_DEFINE(Rendering, RendererManager)
+void Rendering::RendererManager
+::Destroy() noexcept
+{
+	sm_RendererManager.reset();
+}
 
 Rendering::RendererManager
-	::RendererManager()
+::RendererManager(RendererManagerCreate rendererManagerCreate)
 	:m_Impl{ make_shared<ImplType>() }
 {
-	MUTEX_ENTER_MEMBER;
+	SYSTEM_UNUSED_ARG(rendererManagerCreate);
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::RendererManager
-	::~RendererManager()
-{
-	MUTEX_ENTER_MEMBER;
-
-	RENDERING_SELF_CLASS_IS_VALID_1;	
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RendererManager
-	::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-
-	if(m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, RendererManager)
 
 int64_t Rendering::RendererManager
     ::Insert( RendererPtr ptr )
 {
-	 MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -69,7 +60,7 @@ int64_t Rendering::RendererManager
 bool Rendering::RendererManager
 	::Erase(int64_t rendererID)
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -79,7 +70,7 @@ bool Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( VertexFormatConstPtr vertexFormat )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -90,7 +81,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( VertexBufferConstPtr vertexBuffer )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -100,7 +91,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( IndexBufferConstPtr indexBuffer )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -111,7 +102,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( Texture1DConstPtr texture )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -121,7 +112,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( Texture2DConstPtr texture )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -131,7 +122,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( Texture3DConstPtr texture )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -141,7 +132,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( TextureCubeConstPtr texture )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -151,7 +142,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( RenderTargetConstPtr renderTarget )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -161,7 +152,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( VertexShaderConstPtr vertexShader )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -171,7 +162,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::BindAll( PixelShaderConstPtr pixelShader )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -181,7 +172,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( VertexFormatConstPtr vertexFormat )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -192,7 +183,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( VertexBufferConstPtr vertexBuffer )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -202,7 +193,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( IndexBufferConstPtr indexBuffer )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -212,7 +203,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( Texture1DConstPtr texture )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -222,7 +213,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( Texture2DConstPtr texture )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -232,7 +223,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( Texture3DConstPtr texture )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -242,7 +233,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( TextureCubeConstPtr texture )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -252,7 +243,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( RenderTargetConstPtr renderTarget )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -262,7 +253,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( VertexShaderConstPtr vertexShader )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -272,7 +263,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UnbindAll( PixelShaderConstPtr pixelShader )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -282,7 +273,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UpdateAll( VertexBufferConstPtr vertexBuffer )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -292,7 +283,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UpdateAll( IndexBufferConstPtr indexBuffer )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -302,7 +293,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UpdateAll( Texture1DConstPtr texture, int level )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -312,7 +303,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UpdateAll( Texture2DConstPtr texture, int level )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -322,7 +313,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UpdateAll( Texture3DConstPtr texture, int level )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -332,7 +323,7 @@ void Rendering::RendererManager
 void Rendering::RendererManager
 	::UpdateAll( TextureCubeConstPtr texture, int face, int level )
 {
-	 MUTEX_ENTER_MEMBER;
+	 SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

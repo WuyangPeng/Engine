@@ -18,6 +18,9 @@
 
 using std::string;
 using std::make_shared;
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 
 namespace CoreTools
 {
@@ -32,7 +35,11 @@ namespace CoreTools
 	const System::String g_Backup{ SYSTEM_TEXT("Backup") }; 
 	const System::String g_Extension{ SYSTEM_TEXT("Extension") }; 
 }
+#include STSTEM_WARNING_POP
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
 CoreTools::AnalysisAppenderManager
 	::AnalysisAppenderManager(const string& fileName)
 	:m_AppenderManager{ make_shared<AppenderManager>() }, m_FileName{ fileName }, m_MainTree{}, m_AppenderTree{}
@@ -64,7 +71,7 @@ void CoreTools::AnalysisAppenderManager
 {
 	for (const auto& loggerPtree : m_MainTree.get_child(g_Logger))
 	{
-		auto filterType = LogFilterManager::GetLogFilterType(loggerPtree.first);
+		const auto filterType = LogFilterManager::GetLogFilterType(loggerPtree.first);
 
 		if (LogFilter::System <= filterType && filterType < LogFilter::MaxLogFilter)
 		{
@@ -126,7 +133,7 @@ bool CoreTools::AnalysisAppenderManager
 {
 	bool result{ true };
 
-	auto assoc = m_AppenderTree.equal_range(g_AppenderFile);
+	const auto assoc = m_AppenderTree.equal_range(g_AppenderFile);
 
 	for (auto assocIter = assoc.first, endIter = assoc.second; assocIter != endIter; ++assocIter)
 	{
@@ -199,7 +206,7 @@ bool CoreTools::AnalysisAppenderManager
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::AnalysisAppenderManager::AppenderManagerPtr	CoreTools::AnalysisAppenderManager
-	::GetAppenderManager() const
+	::GetAppenderManager() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -208,3 +215,4 @@ CoreTools::AnalysisAppenderManager::AppenderManagerPtr	CoreTools::AnalysisAppend
 
 
 
+#include STSTEM_WARNING_POP

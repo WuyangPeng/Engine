@@ -26,10 +26,14 @@ namespace CoreTools
 	public:
 		explicit OpenUrlInternet(InternetHandle internet, const System::String& url, const System::String& header);
 		~OpenUrlInternet();
+		OpenUrlInternet(const OpenUrlInternet&) noexcept = delete;
+		OpenUrlInternet& operator=(const OpenUrlInternet&) noexcept = delete;
+		OpenUrlInternet(OpenUrlInternet&&) noexcept = delete;
+		OpenUrlInternet& operator=(OpenUrlInternet&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 
-		InternetHandle GetInternet() const;
+		InternetHandle GetInternet() const noexcept;
 
 	private:
 		// 如果HTTP版本为1.1或更高版本，则验证成功。

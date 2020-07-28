@@ -26,7 +26,12 @@ namespace CoreTools
     public:        
         Buffer();
         explicit Buffer(int minSize);
-        ~Buffer();
+        ~Buffer() noexcept;
+
+        Buffer(const Buffer&) = delete;
+        Buffer& operator=(const Buffer&) = delete;
+		Buffer(Buffer&&) noexcept = delete;
+		Buffer& operator=(Buffer&&) noexcept = delete;
         
 		CLASS_INVARIANT_DECLARE;
         

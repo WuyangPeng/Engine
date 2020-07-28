@@ -21,12 +21,16 @@ namespace CoreTools
 
 	public:
 		explicit Mutex(MutexCreate mutexCreate = MutexCreate::UseCriticalSection);
-		virtual ~Mutex();
+		~Mutex();
+		Mutex(const Mutex&) = delete;
+		Mutex& operator=(const Mutex&) = delete;
+		Mutex(Mutex&&) noexcept = delete;
+		Mutex& operator=(Mutex&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Initialize() override;
-		virtual void Delete() override;
+		void Initialize() override;
+		void Delete() override;
 	};
 }
 

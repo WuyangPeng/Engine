@@ -32,8 +32,8 @@ System::String CoreTools::CustomTime
 System::String CoreTools::CustomTime
 	::GetSystemTimeDescribe(const String& dateFormat)
 {
-	auto nowTime = boost::posix_time::second_clock::local_time();
-	auto data = nowTime.date();
+	const auto nowTime = boost::posix_time::second_clock::local_time();
+	const auto data = nowTime.date();
 	boost::basic_format<System::TChar> format{ dateFormat };
 
 	format % data.year();

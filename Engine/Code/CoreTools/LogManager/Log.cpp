@@ -16,34 +16,45 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 using std::string;
+using std::make_shared;
+using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(CoreTools, Log);
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26487)
+SINGLETON_GET_PTR_DEFINE(CoreTools, Log);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
+CoreTools::Log::LogUniquePtr CoreTools::Log
+::sm_Log{ };
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_LogMutex }
-
-SINGLETON_INITIALIZE_DEFINE(CoreTools, Log)
-
-SINGLETON_DEFINE(CoreTools, Log)
-
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::Log
-	::IsValid() const noexcept
+void CoreTools::Log
+::Create()
 {
-	MUTEX_ENTER_MEMBER;
-
-	if (m_Impl != nullptr)
-		return true;
-	else
-		return false;
+	sm_Log = make_unique<CoreTools::Log>(LogCreate::Init);
 }
-#endif // OPEN_CLASS_INVARIANT
+
+void CoreTools::Log
+::Destroy() noexcept
+{
+	sm_Log.reset();
+}
+
+CoreTools::Log
+::Log(LogCreate logCreate)
+	:m_Impl{ make_shared<ImplType>() }
+{
+	SYSTEM_UNUSED_ARG(logCreate);
+
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Log)
 
 void CoreTools::Log
 	::InsertAppender(const String& name, const Appender& appenderPtr)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -53,7 +64,7 @@ void CoreTools::Log
 void CoreTools::Log
 	::RemoveAppender(const String& name)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -63,7 +74,7 @@ void CoreTools::Log
 void CoreTools::Log
 	::LoadConfiguration(const string& fileName)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -73,7 +84,18 @@ void CoreTools::Log
 CoreTools::LogAppenderIOManager& CoreTools::Log
 	::OutTrace() noexcept
 {
-	MUTEX_ENTER_MEMBER;
+	try
+	{
+		 
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
+		SINGLETON_MUTEX_ENTER_MEMBER;
+		#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
+		 
+	}	
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -83,7 +105,17 @@ CoreTools::LogAppenderIOManager& CoreTools::Log
 CoreTools::LogAppenderIOManager& CoreTools::Log
 	::OutDebug() noexcept
 {
-	MUTEX_ENTER_MEMBER;
+	try
+	{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+		SINGLETON_MUTEX_ENTER_MEMBER;
+#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
+
+	}
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -93,7 +125,17 @@ CoreTools::LogAppenderIOManager& CoreTools::Log
 CoreTools::LogAppenderIOManager& CoreTools::Log
 	::OutInfo() noexcept
 {
-	MUTEX_ENTER_MEMBER;
+	try
+	{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+		SINGLETON_MUTEX_ENTER_MEMBER;
+#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
+
+	}
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -103,7 +145,17 @@ CoreTools::LogAppenderIOManager& CoreTools::Log
 CoreTools::LogAppenderIOManager& CoreTools::Log
 	::OutWarn() noexcept
 {
-	MUTEX_ENTER_MEMBER;
+	try
+	{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+		SINGLETON_MUTEX_ENTER_MEMBER;
+#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
+
+	}
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -113,7 +165,17 @@ CoreTools::LogAppenderIOManager& CoreTools::Log
 CoreTools::LogAppenderIOManager& CoreTools::Log
 	::OutError() noexcept
 {
-	MUTEX_ENTER_MEMBER;
+	try
+	{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+		SINGLETON_MUTEX_ENTER_MEMBER;
+#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
+
+	}
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -123,7 +185,17 @@ CoreTools::LogAppenderIOManager& CoreTools::Log
 CoreTools::LogAppenderIOManager& CoreTools::Log
 	::OutFatal() noexcept
 {
-	MUTEX_ENTER_MEMBER;
+	try
+	{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+		SINGLETON_MUTEX_ENTER_MEMBER;
+#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
+
+	}
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -133,9 +205,10 @@ CoreTools::LogAppenderIOManager& CoreTools::Log
 void CoreTools::Log
 	::ReloadAppenderFile()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->ReloadAppenderFile();
 }
+#include STSTEM_WARNING_POP

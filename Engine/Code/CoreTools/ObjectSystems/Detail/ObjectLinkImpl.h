@@ -22,7 +22,7 @@ namespace CoreTools
 		using ClassType = ObjectLinkImpl;
 
 	public:
-		ObjectLinkImpl();
+		ObjectLinkImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -16,6 +16,7 @@
 
 using std::string;
 using std::make_shared;
+using namespace std::literals;
 
 CoreTools::CommandArgumentFactory::CommandArgumentSharedPtr CoreTools::CommandArgumentFactory
 	::Create(int index, const string& arguments, const string& value)
@@ -32,7 +33,7 @@ CoreTools::CommandArgumentFactory::CommandArgumentSharedPtr CoreTools::CommandAr
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("命令行参数无效！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("命令行参数无效！"s));
 	}
 }
 

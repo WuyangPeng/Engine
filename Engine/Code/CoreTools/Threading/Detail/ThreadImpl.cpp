@@ -22,7 +22,7 @@ CoreTools::ThreadImpl
 {
 	if (m_Thread == nullptr)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("线程创建失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("线程创建失败！"s));
 	}
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -71,7 +71,7 @@ void CoreTools::ThreadImpl
 	auto result = System::ResumeSystemThread(m_Thread);
 	if (result == sm_FailResult)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("线程恢复失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("线程恢复失败！"s));
 	}
 }
 
@@ -83,7 +83,7 @@ void CoreTools::ThreadImpl
 	auto result = System::SuspendSystemThread(m_Thread);
 	if (result == sm_FailResult)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("线程挂起失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("线程挂起失败！"s));
 	}
 }
 
@@ -94,7 +94,7 @@ void CoreTools::ThreadImpl
 
 	if (!System::WaitForSystemThread(m_Thread))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("等待线程失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("等待线程失败！"s));
 	}
 }
 
@@ -113,7 +113,7 @@ void CoreTools::ThreadImpl
 
 	if (!System::SetSystemThreadPriority(m_Thread, priority))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("设置线程优先级失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("设置线程优先级失败！"s));
 	}
 }
 
@@ -126,7 +126,7 @@ int CoreTools::ThreadImpl
 
 	if (priority == EnumCastUnderlying(System::ThreadPriority::ErrorReturn))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取线程优先级失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("获取线程优先级失败！"s));
 	}
 	else
 	{

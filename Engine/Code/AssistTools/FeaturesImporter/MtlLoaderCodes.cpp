@@ -9,7 +9,7 @@
 #include "MtlLoader.h"
 
 const char* AssistTools::MtlLoader
-	::msCodeString[EC_MAX_ERROR_CODES] =
+	::msCodeString[System::EnumCastUnderlying(ErrorCode::EC_MAX_ERROR_CODES)] =
 {
     "Loaded successfully",          // EC_SUCCESSFUL
     "Logfile open failed",          // EC_LOGFILE_OPEN_FAILED

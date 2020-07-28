@@ -155,7 +155,7 @@ void CoreTools::BufferTarget
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要写入的指针不是由SmartPointer系统创建。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("要写入的指针不是由SmartPointer系统创建。"s));
 	}
 }
 

@@ -12,6 +12,10 @@
 
 using std::string;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
 const System::String AssistTools::GenerateTemplateDirectoryImpl
 	::sm_ForwardSlash(SYSTEM_TEXT("/"));
 
@@ -76,11 +80,7 @@ AssistTools::GenerateTemplateDirectoryImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 } 
 
-AssistTools::GenerateTemplateDirectoryImpl
-	::~GenerateTemplateDirectoryImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
  
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateDirectoryImpl)
 
@@ -221,3 +221,4 @@ const System::String AssistTools::GenerateTemplateDirectoryImpl
 }
 
 
+#include STSTEM_WARNING_POP

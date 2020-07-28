@@ -14,7 +14,7 @@ namespace AssistTools
 	class ASSIST_TOOLS_DEFAULT_DECLARE ColorToGray
 	{
 	public:
-		ColorToGray (int width, int height, unsigned char* data);
+		ColorToGray (int width, int height, unsigned char* data) noexcept;
 	};
 }
 

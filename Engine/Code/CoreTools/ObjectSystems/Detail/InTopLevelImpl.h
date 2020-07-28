@@ -20,7 +20,7 @@ namespace CoreTools
 		using ClassType = InTopLevelImpl;
 
 	public:
-		InTopLevelImpl();
+		InTopLevelImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

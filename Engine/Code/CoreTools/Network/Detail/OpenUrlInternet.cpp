@@ -15,17 +15,22 @@
 
 #include <vector>
 #include <array>
+#include <gsl/gsl_util>
 
 using std::vector;
 using std::array;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
 CoreTools::OpenUrlInternet
 	::OpenUrlInternet(InternetHandle internet, const System::String& url, const System::String& header)
-	:m_UrlInternet{ System::GetInternetOpenUrl(internet, url.c_str(),(header.empty() ? nullptr : header.c_str()), static_cast<System::WindowDWord>(-1), System::InternetType::NoCacheWrite, 0) }
+	:m_UrlInternet{ System::GetInternetOpenUrl(internet, url.c_str(),(header.empty() ? nullptr : header.c_str()), gsl::narrow_cast<System::WindowDWord>(-1), System::InternetType::NoCacheWrite, 0) }
 {
 	if (m_UrlInternet == nullptr)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("无法打开url。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("无法打开url。"s));
 	}
 
 	CheckHttpVersionsOK();
@@ -53,7 +58,7 @@ bool CoreTools::OpenUrlInternet
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::OpenUrlInternet::InternetHandle CoreTools::OpenUrlInternet
-	::GetInternet() const
+	::GetInternet() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -70,7 +75,7 @@ void CoreTools::OpenUrlInternet
 
 	if (!System::GetHttpQueryInfo(m_UrlInternet, System::QueryInfo::Version, buffer.data(), &bufferLength, nullptr))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取url版本失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("获取url版本失败。"s));
 	}
 
 	System::String queryInfo{ buffer.data() };
@@ -80,7 +85,7 @@ void CoreTools::OpenUrlInternet
 
 	if (majorVersion.size() <= 1)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取url主版本号失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("获取url主版本号失败。"s));
 	}
 
 	vector<System::String> minorVersion;
@@ -89,14 +94,15 @@ void CoreTools::OpenUrlInternet
 
 	if (minorVersion.size() <= 1)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取url次版本号失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("获取url次版本号失败。"s));
 	}
 
-	auto minorVersionNum = std::stoi(minorVersion[1]);
+	const auto minorVersionNum = std::stoi(minorVersion[1]);
 
 	if (minorVersionNum <= 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("url次版本号无效。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("url次版本号无效。"s));
 	}
 }
 
+#include STSTEM_WARNING_POP

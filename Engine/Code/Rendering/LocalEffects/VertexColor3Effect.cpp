@@ -69,15 +69,15 @@ Rendering::VertexColor3Effect
 Rendering::VisualEffectInstance* Rendering::VertexColor3Effect
 	::CreateInstance () const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(CoreTools::New0 < ProjectionViewMatrixConstant>()));
     return instance;
 }
 
 Rendering::VisualEffectInstance* Rendering::VertexColor3Effect
 	::CreateUniqueInstance ()
 {
-    VertexColor3Effect* effect = NEW0 VertexColor3Effect();
+    VertexColor3Effect* effect = CoreTools::New0 < VertexColor3Effect>();
     return effect->CreateInstance();
 }
 

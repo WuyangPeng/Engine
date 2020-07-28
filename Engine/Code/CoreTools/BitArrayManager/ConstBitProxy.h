@@ -19,15 +19,19 @@ namespace CoreTools
 		using ClassType = ConstBitProxy;
 
 	public:
-		ConstBitProxy(const BitArray& bitArray, int position);
+		ConstBitProxy(const BitArray& bitArray, int position) noexcept;
+		~ConstBitProxy() = default;
 
-		ConstBitProxy(const ConstBitProxy& bitProxy);
+		ConstBitProxy(const ConstBitProxy& bitProxy) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		operator bool() const noexcept;
 
 		ConstBitProxy& operator=(const ConstBitProxy& rhs) = delete;
+
+		ConstBitProxy& operator=(ConstBitProxy&& rhs) noexcept = default;
+		ConstBitProxy(ConstBitProxy&& bitProxy) noexcept = default;
 
 	private:
 		const BitArray& m_Array;

@@ -36,7 +36,7 @@ namespace Imagics
 		// an array of boundaries, each boundary containing a list of pixels
 		// in clockwise order in the right-handed (x,y) system [counterclockwise
 		// in the left-handed (x,y) system].
-		static void GetBoundaries (ImageInt2D& image, std::vector<IndexArray>& boundaries);
+		static void GetBoundaries (const ImageInt2D& image, std::vector<IndexArray>& boundaries);
 		
 		// Compute the 8-connected components of a binary image.  The input
 		// image is modified to avoid the cost of making a copy.  On output,
@@ -45,7 +45,7 @@ namespace Imagics
 		// otherwise, this array is empty.  When the background is large, the
 		// construction of components[0] is time consuming.  The array
 		// components[i], i >= 1, contains the indices for the i-th component.
-		static void GetComponents8 (ImageInt2D& image, bool storeZeros,std::vector<IndexArray>& components);
+		static void GetComponents8 (const ImageInt2D& image, bool storeZeros,std::vector<IndexArray>& components);
 		
 		// Compute the 4-connected components of a binary image.  The input
 		// image is modified to avoid the cost of making a copy.  On output,
@@ -54,47 +54,47 @@ namespace Imagics
 		// otherwise, this array is empty.  When the background is large, the
 		// construction of components[0] is time consuming.  The array
 		// components[i], i >= 1, contains the indices for the i-th component.
-		static void GetComponents4 (ImageInt2D& image, bool storeZeros,std::vector<IndexArray>& components);
+		static void GetComponents4 (const ImageInt2D& image, bool storeZeros,std::vector<IndexArray>& components);
 		
 		// Compute the L1 distance transform.  Given a pixel (x,y), the neighbors
 		// (x+1,y), (x-1,y), (x,y+1), and (x,y-1) are 1 unit of distance from
 		// (x,y).  The neighbors (x+1,y+1), (x+1,y-1), (x-1,y+1), and (x-1,y-1)
 		// are 2 units of distance from (x,y).  On output, the image is the
 		// distance transform.
-		static void GetL1Distance (ImageInt2D& image, int& maxDistance);
+		static void GetL1Distance (const ImageInt2D& image, int& maxDistance);
 		
 		// Compute the L2 distance transform (Euclidean distance transform).  The
 		// distances are exact as long as they are smaller than 100 (see the
 		// comments in the source code).  The 'transform' should be the same
 		// dimensions as 'image' and its values are all set in this function, so
 		// it does not matter what they are on input.
-		static void GetL2Distance (const ImageInt2D& image, double& maxDistance, ImageDouble2D& transform);
+		static void GetL2Distance (const ImageInt2D& image, double& maxDistance, const ImageDouble2D& transform);
 		
 		// Compute a skeleton of the image.  Pixels are trimmed from outside to
 		// inside using L1 distance.  Connectivity and cycles of the original
 		// blobs are preserved.  The 'skeleton' should be the same dimensions as
 		// 'image' and its values are all set in this function, so it does not
 		// matter what they are on input.  On output, the image is the skeleton.
-		static void GetSkeleton (ImageInt2D& image);
+		static void GetSkeleton (const ImageInt2D& image);
 		
 	protected:
 		// The heart of the boundary extraction.
-		static void ExtractBoundary (int x0, int y0, ImageInt2D& image, IndexArray& boundary);
+		static void ExtractBoundary (int x0, int y0,const ImageInt2D& image, IndexArray& boundary);
 		
 		// The heart of the component labeling.
-		static void GetComponents (const int numNeighbors, const int delta[], bool storeZeros, ImageInt2D& image, std::vector<IndexArray>& components);
+		static void GetComponents (const int numNeighbors, const int delta[], bool storeZeros, const ImageInt2D& image, std::vector<IndexArray>& components);
 		
 		// Helper for computing the L2 distance transform.
-		static void L2Check (int x, int y, int dx, int dy, ImageInt2D& xNear,ImageInt2D& yNear, ImageInt2D& dist);
+		static void L2Check (int x, int y, int dx, int dy, const ImageInt2D& xNear, const ImageInt2D& yNear, const ImageInt2D& dist);
 		
 		// Helpers for skeletonization.
-		typedef bool (*InteriorFunction)(ImageInt2D&,int,int);
-		static bool Interior4 (ImageInt2D& image, int x, int y);
-		static bool Interior3 (ImageInt2D& image, int x, int y);
-		static bool Interior2 (ImageInt2D& image, int x, int y);
-		static bool MarkInterior (ImageInt2D& image, int value,InteriorFunction function);
-		static bool IsArticulation (ImageInt2D& image, int x, int y);
-		static bool ClearInteriorAdjacent (ImageInt2D& image, int value);
+		typedef bool (*InteriorFunction)(const ImageInt2D&,int,int);
+		static bool Interior4 (const ImageInt2D& image, int x, int y);
+		static bool Interior3 (const ImageInt2D& image, int x, int y);
+		static bool Interior2 (const ImageInt2D& image, int x, int y);
+		static bool MarkInterior (const ImageInt2D& image, int value,InteriorFunction function);
+		static bool IsArticulation (const ImageInt2D& image, int x, int y);
+		static bool ClearInteriorAdjacent (const ImageInt2D& image, int value);
 		static const int msArticulation[256];
 	};
 }

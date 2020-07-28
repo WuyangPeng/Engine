@@ -29,11 +29,11 @@ void CoreTools::DllFunctionHelper
 	{
 		mutex->Initialize();
 	}
-	catch (Error& error)
+	catch (const Error& error)
 	{
 		JudgeUserSelectionWithTChar(error.GetError().c_str());
 	}
-	catch (runtime_error& error)
+	catch (const runtime_error& error)
 	{
 		JudgeUserSelectionWithChar(error.what());
 	}
@@ -52,15 +52,15 @@ void CoreTools::DllFunctionHelper
 }
 
 void CoreTools::DllFunctionHelper
-	::JudgeUserSelectionWithTChar(const System::String& message)
+	::JudgeUserSelectionWithTChar(const System::String& message) noexcept
 {
-	System::DialogBoxCommand type = System::MessageBoxSelectionWithTChar(message.c_str(), SYSTEM_TEXT("´íÎó"));
+	const System::DialogBoxCommand type = System::MessageBoxSelectionWithTChar(message.c_str(), SYSTEM_TEXT("´íÎó"));
 
 	JudgeSelection(type);
 }
 
 void CoreTools::DllFunctionHelper
-	::JudgeSelection(System::DialogBoxCommand selection)
+	::JudgeSelection(System::DialogBoxCommand selection) noexcept
 {
 	switch (selection)
 	{
@@ -87,9 +87,9 @@ void CoreTools::DllFunctionHelper
 }
 
 void CoreTools::DllFunctionHelper
-	::JudgeUserSelectionWithChar(const string& message)
+	::JudgeUserSelectionWithChar(const string& message) noexcept
 {
-	auto type = System::MessageBoxSelectionWithChar(message.c_str(), "´íÎó");
+	const auto type = System::MessageBoxSelectionWithChar(message.c_str(), "´íÎó");
 
 	JudgeSelection(type);
 }

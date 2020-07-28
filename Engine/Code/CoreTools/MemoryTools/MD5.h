@@ -40,7 +40,7 @@ namespace CoreTools
 		static const std::string GetHexDigestWithUppercase(const uint8_t* digest);
 		static const std::string GetHexDigestWithLowercase(const uint8_t* digest);
 
-		static int GetDigestSize();
+		static int GetDigestSize() noexcept;
 
 	private:
 		static constexpr int sm_DigestSize{ 16 };

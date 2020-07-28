@@ -10,11 +10,9 @@
 // Wrappers for native types.
 #define IMAGICS_DECL_ELEMENT(T) \
         class IMAGICS_DEFAULT_DECLARE E##T { public: \
-        E##T (T value = 0) { mValue = value; } \
-        E##T& operator= (E##T element) {  \
-        mValue = element.mValue; return *this; \
-		} operator T () { return mValue; } \
-        static int GetRTTI () { return msRTTI; } \
+        E##T (T value = 0) noexcept { mValue = value; } \
+        operator T () noexcept { return mValue; } \
+        static int GetRTTI () noexcept { return msRTTI; } \
         protected: T mValue; static const int msRTTI; }
 
 #define IMAGICS_IMPL_ELEMENT(T,rtti) \

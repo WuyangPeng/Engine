@@ -42,7 +42,7 @@ namespace CoreTools
 
 		// 对 1D 数组:  data[bound1]
 		template <typename T>
-		static void Delete1DArray(T*& data);
+		static void Delete1DArray(T*& data) noexcept;
 
 		// 对 2D 数组:  data[bound2][bound1]
 		template <typename T>

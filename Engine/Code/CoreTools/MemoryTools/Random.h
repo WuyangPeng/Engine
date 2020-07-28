@@ -23,22 +23,22 @@ namespace CoreTools
 		using ClassType = Random;
 
 	public:
-		Random();
-		explicit Random(uint32_t seed);
+		Random() noexcept;
+		explicit Random(uint32_t seed) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		// 生成一个完整的32位的随机数。
-		uint32_t Generate();
+		uint32_t Generate() noexcept;
 
 		// 生成一个正的32位随机数。
-		int GeneratePositive();
+		int GeneratePositive() noexcept;
 
 	private:
-		void GenerateSeeds();
+		void GenerateSeeds() noexcept;
 
 		// 返回一个新的数字由一个仅依赖于状态的简单生成器产生。
-		uint32_t GenerateSimple();
+		uint32_t GenerateSimple() noexcept;
 
 	private:
 		static constexpr auto sm_TableSize = 250;

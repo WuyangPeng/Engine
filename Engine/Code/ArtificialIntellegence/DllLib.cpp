@@ -32,9 +32,9 @@
 
 #else // BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
 
-	namespace Animation
+	namespace ArtificialIntellegence
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

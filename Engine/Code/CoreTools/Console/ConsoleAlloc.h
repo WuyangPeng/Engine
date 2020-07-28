@@ -19,14 +19,20 @@ namespace CoreTools
 		using ClassType = ConsoleAlloc;
 
 	public:
-		ConsoleAlloc();
+		ConsoleAlloc() noexcept;
 		~ConsoleAlloc();
+
+		ConsoleAlloc(const ConsoleAlloc&) = delete;
+		ConsoleAlloc& operator=(const ConsoleAlloc&) = delete;
+
+		ConsoleAlloc(ConsoleAlloc&&) noexcept = delete;
+		ConsoleAlloc& operator=(ConsoleAlloc&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 
 	private:
 		void OpenConsole();
-		void CloseConsole();
+		void CloseConsole() noexcept;
 
 	private:
 		FILE* m_OutPtr;

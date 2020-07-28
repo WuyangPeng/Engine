@@ -18,11 +18,7 @@ CoreTools::OutputConsoleTextColorsManager
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::OutputConsoleTextColorsManager
-	::~OutputConsoleTextColorsManager()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, OutputConsoleTextColorsManager)
 

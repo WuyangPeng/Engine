@@ -33,7 +33,7 @@ namespace CoreTools
 		LogLevel GetLogLevel() const noexcept;
 		LogFilter GetLogFilterType() const noexcept;
 		int GetMessageSize() const;
-		FunctionDescribed GetFunctionDescribed() const;
+		FunctionDescribed GetFunctionDescribed() const noexcept;
 
 	private:
 		LogLevel m_Level;

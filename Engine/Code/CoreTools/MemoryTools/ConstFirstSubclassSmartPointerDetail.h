@@ -43,6 +43,7 @@ CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)  
 #include SYSTEM_WARNING_DISABLE(26465) 
+#include SYSTEM_WARNING_DISABLE(26492) 
 	:m_Data{ const_cast<BaseClassType*>(data) }, m_Address{ reinterpret_cast<size_t>(m_Data) }
 #include STSTEM_WARNING_POP
 {

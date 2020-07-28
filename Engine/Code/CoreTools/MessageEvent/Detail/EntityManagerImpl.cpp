@@ -14,8 +14,10 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+using namespace std::literals;
+
 CoreTools::EntityManagerImpl
-	::EntityManagerImpl()
+	::EntityManagerImpl() noexcept
 	:m_Container{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -52,20 +54,20 @@ CoreTools::EntityManagerImpl::EntityPtr CoreTools::EntityManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	auto entity = m_Container.find(entityID);
+	const auto entity = m_Container.find(entityID);
 	if (entity != m_Container.cend())
 	{
 		auto ptr = entity->second.lock();
 
 		if (!ptr)
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("Entity已释放。"));
+			THROW_EXCEPTION(SYSTEM_TEXT("Entity已释放。"s));
 		}
 
 		return ptr;
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Entity不存在。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Entity不存在。"s));
 	}
 }

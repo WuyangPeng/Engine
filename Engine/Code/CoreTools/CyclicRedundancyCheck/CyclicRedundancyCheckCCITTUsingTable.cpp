@@ -9,7 +9,10 @@
 #include "CyclicRedundancyCheckCCITTUsingTable.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 #include "CyclicRedundancyCheckHandle.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 CoreTools::CyclicRedundancyCheckCCITTUsingTable
 	::CyclicRedundancyCheckCCITTUsingTable(const char* data, int length)
 	:m_CyclicRedundancyCheck{ 0 }
@@ -38,7 +41,7 @@ uint16_t CoreTools::CyclicRedundancyCheckCCITTUsingTable
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheckCCITTUsingTable)
 
 uint16_t CoreTools::CyclicRedundancyCheckCCITTUsingTable
-	::GetCyclicRedundancyCheck() const
+	::GetCyclicRedundancyCheck() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -46,3 +49,4 @@ uint16_t CoreTools::CyclicRedundancyCheckCCITTUsingTable
 }
 
 
+#include STSTEM_WARNING_POP

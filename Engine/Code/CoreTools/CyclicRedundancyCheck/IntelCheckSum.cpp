@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::IntelCheckSum
-	::IntelCheckSum(const char* data, int length)
+	::IntelCheckSum(const char* data, int length) noexcept
 	:m_IntelCheckSum{ 0 }
 {
 	Calculation(data, length);
@@ -21,16 +21,20 @@ CoreTools::IntelCheckSum
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, IntelCheckSum)
 
 int CoreTools::IntelCheckSum
-	::GetIntelCheckSum() const
+	::GetIntelCheckSum() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 	return m_IntelCheckSum;
 }
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 // private
 void CoreTools::IntelCheckSum
-	::Calculation(const char* data, int length)
+	::Calculation(const char* data, int length) noexcept
 {
 	auto sum = 0;
 	for (auto i = 0; i < length; ++i)
@@ -40,3 +44,4 @@ void CoreTools::IntelCheckSum
 
 	m_IntelCheckSum = -sum;
 }
+#include STSTEM_WARNING_POP

@@ -25,7 +25,7 @@ bool CoreTools::CommandArgumentType
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	if (!m_Argument.empty() && m_Argument[0] == '-' && 1 < m_Argument.size())
+	if (!m_Argument.empty() && m_Argument.at(0) == '-' && 1 < m_Argument.size())
 		return true;
 	else
 		return false;
@@ -36,10 +36,17 @@ bool CoreTools::CommandArgumentType
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	if (m_Argument.empty() || m_Argument[0] == '-' || !isdigit(m_Argument[0]))
-		return false;
-	else
-		return true;
+	if (!m_Argument.empty())
+	{
+		const auto argument = m_Argument.at(0);
+		if (argument != '-' && !isdigit(static_cast<int>(argument)))
+		{
+			return true;
+		}		
+	}
+	
+	return false; 
+		
 }
 
 bool CoreTools::CommandArgumentType
@@ -47,7 +54,7 @@ bool CoreTools::CommandArgumentType
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	if (!m_Argument.empty() && m_Argument[0] != '-')
+	if (!m_Argument.empty() && m_Argument.at(0) != '-')
 		return true;
 	else
 		return false;

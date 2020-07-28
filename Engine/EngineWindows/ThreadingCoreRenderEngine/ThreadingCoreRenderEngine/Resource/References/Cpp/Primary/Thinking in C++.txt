@@ -17,11 +17,8 @@ http://www.MindView.net/ （已失效）。
 
 代码
 1.  书籍代码。
-	编译方式：使用VS控制台执行nmake Microsoft和nmake makefile.bugs Microsoft。
 2.  练习代码。
-	编译方式：使用VS控制台执行nmake Microsoft。
 3.  Thinking in C代码。
-	编译方式：使用VS控制台执行nmake Microsoft。
 
 要点
 1.  不能把默认参数作为一个标志去决定执行函数的哪一块。
@@ -51,7 +48,6 @@ http://www.MindView.net/ （已失效）。
 
 代码
 1.  书籍代码。
-	编译方式：使用VS控制台执行nmake Microsoft。
 
 要点
 1.	什么时候避免异常：（1）不要在异步事件中使用异常。（2）不要在处理简单错误的时候使用异常。

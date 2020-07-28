@@ -12,19 +12,25 @@
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String CoreTools::AppenderManagerImpl
 	::sm_ConsoleAppenderName{ SYSTEM_TEXT("Console") };
 
 const System::String CoreTools::AppenderManagerImpl
 	::sm_DefaultAppenderName{ SYSTEM_TEXT("Default") };
+#include STSTEM_WARNING_POP
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::AppenderManagerImpl
 	::AppenderManagerImpl()
 	:m_Loggers{}, m_Appenders{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, AppenderManagerImpl)
 
 bool CoreTools::AppenderManagerImpl
@@ -68,7 +74,7 @@ bool CoreTools::AppenderManagerImpl
 }
 
 void CoreTools::AppenderManagerImpl
-	::Clear()
+	::Clear() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -81,7 +87,7 @@ void CoreTools::AppenderManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto level = GetLogLevelType(message);
+	const auto level = GetLogLevelType(message);
 
 	if (level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty())
 	{
@@ -94,7 +100,7 @@ void CoreTools::AppenderManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto level = GetLogLevelType(message);
+	const auto level = GetLogLevelType(message);
 
 	if (level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty() && sm_DefaultAppenderName != name)
 	{
@@ -114,7 +120,7 @@ void CoreTools::AppenderManagerImpl
 CoreTools::LogLevel CoreTools::AppenderManagerImpl
 	::GetLogLevelType(const LogMessage& message) const
 {
-	auto iter = m_Loggers.find(message.GetLogFilterType());
+	const auto iter = m_Loggers.find(message.GetLogFilterType());
 
 	if (iter != m_Loggers.cend())
 		return iter->second.GetLogLevel();
@@ -138,7 +144,7 @@ void CoreTools::AppenderManagerImpl
 void CoreTools::AppenderManagerImpl
 	::DoWrite(const System::String& name, const LogMessage& message)
 {
-	auto iter = m_Appenders.find(name);
+	const auto iter = m_Appenders.find(name);
 
 	if (iter != m_Appenders.cend())
 	{
@@ -180,7 +186,7 @@ bool CoreTools::AppenderManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto iter = m_Appenders.find(name);
+	const auto iter = m_Appenders.find(name);
 
 	if (iter != m_Appenders.cend())
 		return true;
@@ -191,17 +197,17 @@ bool CoreTools::AppenderManagerImpl
 bool CoreTools::AppenderManagerImpl
 	::CreateFileAppender(const String& fileName)
 {
-	auto iter = m_Appenders.find(sm_DefaultAppenderName);
+	const auto iter = m_Appenders.find(sm_DefaultAppenderName);
 
 	if (iter != m_Appenders.cend())
 	{
 		const auto& appender = iter->second;
 
 		auto directory = appender.GetDirectory();
-		auto flags = appender.GetFlags();
-		auto level = appender.GetLogLevel();
-		auto maxFileSize = appender.GetMaxFileSize();
-		auto backup = appender.IsBackup();
+		const auto flags = appender.GetFlags();
+		const auto level = appender.GetLogLevel();
+		const auto maxFileSize = appender.GetMaxFileSize();
+		const auto backup = appender.IsBackup();
 		auto extension = appender.GetExtensionName();
 
 		if (!fileName.empty() && LogLevel::Disabled <= level && level < LogLevel::MaxLogLevels)

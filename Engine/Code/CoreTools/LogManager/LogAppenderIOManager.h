@@ -54,11 +54,12 @@ namespace CoreTools
 		LogAppenderIOManager& operator << (const std::wstring& message) noexcept;
 		LogAppenderIOManager& operator << (const FunctionDescribed& functionDescribed) noexcept;
 		LogAppenderIOManager& operator << (const Error& error) noexcept;
+		LogAppenderIOManager& operator << (const std::exception& error) noexcept;
 		LogAppenderIOManager& operator << (LogFilter filterType) noexcept;
 		LogAppenderIOManager& operator << (LogAppenderIOManageSign sign) noexcept;
 		LogAppenderIOManager& operator << (const LogFileName& logFileName) noexcept;
 
-		void SetAppenderManager(const AppenderManagerPtr& appenderManager);
+		void SetAppenderManager(const AppenderManagerPtr& appenderManager) noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(LogAppenderIOManager);

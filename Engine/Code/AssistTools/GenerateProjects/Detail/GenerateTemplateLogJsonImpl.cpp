@@ -8,11 +8,14 @@
 
 #include "GenerateTemplateLogJsonImpl.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"  
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h" 
+#include "System/Helper/PragmaWarning.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTemplateLogJsonImpl
 	::sm_Extension(SYSTEM_TEXT(".json"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTemplateLogJsonImpl
 	::GenerateTemplateLogJsonImpl(const System::String& templateFileName, const System::String& projectName)
 	:ParentType(templateFileName, sm_Extension), m_ProjectName(projectName)
@@ -30,7 +33,7 @@ void AssistTools::GenerateTemplateLogJsonImpl
 	VariableType newVariable;
 	newVariable.insert(make_pair(m_ProjectName, solutionName));
 
-	return ParentType::GenerateTo(resourceDirectory, newFileName, newVariable);
+	return ParentType::Generate (resourceDirectory, newFileName, newVariable);
 }
  
 

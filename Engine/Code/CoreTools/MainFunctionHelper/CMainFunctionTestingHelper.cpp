@@ -17,14 +17,14 @@
 using std::string;
 
 CoreTools::CMainFunctionTestingHelper
-	::CMainFunctionTestingHelper(int argc, char* argv[])
+	::CMainFunctionTestingHelper(int argc, char** argv)
 	:ParentType{ argc, argv }, m_TestingInformationHelper{}, m_Suite{ "",GetStreamShared(),IsPrintRun() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 } 
 
 CoreTools::CMainFunctionTestingHelper
-	::CMainFunctionTestingHelper(int argc, char* argv[], const string& suiteName)
+	::CMainFunctionTestingHelper(int argc, char** argv, const string& suiteName)
 	:ParentType{ argc, argv }, m_TestingInformationHelper{  }, m_Suite{ suiteName,GetStreamShared(),IsPrintRun() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -43,7 +43,7 @@ void CoreTools::CMainFunctionTestingHelper
 {
 	try
 	{
-		auto testLoopCount = m_TestingInformationHelper.GetLoopCount(suiteName, testName);
+		const auto testLoopCount = m_TestingInformationHelper.GetLoopCount(suiteName, testName);
 
 		if (0 < testLoopCount)
 		{
@@ -52,7 +52,7 @@ void CoreTools::CMainFunctionTestingHelper
 			suite.AddTest(unitTest);
 		}
 	}
-	catch (Error& error)
+	catch (const Error& error)
 	{
 		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
 			<< error
@@ -61,7 +61,7 @@ void CoreTools::CMainFunctionTestingHelper
 }
 
 bool CoreTools::CMainFunctionTestingHelper
-	::IsPrintRun() const
+	::IsPrintRun() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

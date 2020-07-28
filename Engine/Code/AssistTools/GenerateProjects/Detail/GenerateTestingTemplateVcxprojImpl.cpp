@@ -9,10 +9,12 @@
 #include "GenerateTestingTemplateVcxprojImpl.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"  
 #include "System/Helper/UnicodeUsing.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTestingTemplateVcxprojImpl
 	::sm_Extension(SYSTEM_TEXT(".vcxproj"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTestingTemplateVcxprojImpl
 ::GenerateTestingTemplateVcxprojImpl(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName,
                                      const System::String& includeName, const System::String& testingIncludeName,
@@ -40,7 +42,7 @@ void AssistTools::GenerateTestingTemplateVcxprojImpl
 	newVariable.insert(make_pair(m_DebugLibName, newDebugLibName));
 	newVariable.insert(make_pair(m_ReleaseLibName, newReleaseLibName));
 
-	return ParentType::GenerateTo(resourceDirectory, solutionName + newModuleName + GetTesting(), newVariable);
+	return ParentType::Generate (resourceDirectory, solutionName + newModuleName + GetTesting(), newVariable);
 }
  
 /*

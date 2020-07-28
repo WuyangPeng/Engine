@@ -33,11 +33,11 @@ namespace CoreTools
 	private:
 		void Process(const FunctionDescribed& functionDescribed, const char* format, va_list arguments);
 
-		void GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const char* triggerAssertCheck);
-		void AppendUserArguments(const char* format, va_list arguments);
+		void GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const char* triggerAssertCheck) noexcept;
+		void AppendUserArguments(const char* format, va_list arguments) noexcept;
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
-		void WriteToOutputDebug();
+		void WriteToOutputDebug() noexcept;
 #endif // CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX

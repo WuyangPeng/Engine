@@ -15,14 +15,16 @@
 using std::string;
 using std::wstring;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::CallbackParameters
 	::CallbackParameters(int count)
 	:m_Impl(make_shared<ImplType>(count))
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, CallbackParameters)
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CallbackParameters)

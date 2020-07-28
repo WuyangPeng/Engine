@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::LoggerImpl
-	::LoggerImpl(LogFilter logFilter, LogLevel logLevel)
+	::LoggerImpl(LogFilter logFilter, LogLevel logLevel) noexcept
 	:m_LogFilter{ logFilter }, m_Level{ logLevel }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;

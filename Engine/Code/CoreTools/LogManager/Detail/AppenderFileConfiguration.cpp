@@ -24,11 +24,7 @@ CoreTools::AppenderFileConfiguration
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::AppenderFileConfiguration
-	::~AppenderFileConfiguration()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::AppenderFileConfiguration
@@ -51,7 +47,7 @@ CoreTools::AppenderType CoreTools::AppenderFileConfiguration
 
 // private
 void CoreTools::AppenderFileConfiguration
-	::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix)
+	::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) noexcept
 {
 	SYSTEM_UNUSED_ARG(message);
 	SYSTEM_UNUSED_ARG(prefix);

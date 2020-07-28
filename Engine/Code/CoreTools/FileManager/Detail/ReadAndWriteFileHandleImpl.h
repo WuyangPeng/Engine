@@ -18,8 +18,7 @@ namespace CoreTools
 		using ParentType = FileHandleImpl;
 
 	public:
-		explicit ReadAndWriteFileHandleImpl(const String& fileName);
-		virtual ~ReadAndWriteFileHandleImpl();
+		explicit ReadAndWriteFileHandleImpl(const String& fileName); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

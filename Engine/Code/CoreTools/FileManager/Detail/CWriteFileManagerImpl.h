@@ -25,15 +25,14 @@ namespace CoreTools
 
 	public:
 		explicit CWriteFileManagerImpl(const String& fileName);
-		virtual ~CWriteFileManagerImpl();
-
+		 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual int GetFileByteSize() const override;
+		int GetFileByteSize() const override;
 
 		// 当且仅当写入的字节数等于data的大小，操作是成功的。否则抛出Error异常。
-		virtual void Write(size_t itemSize, const void* data) override;
-		virtual void Write(size_t itemSize, size_t itemsNumber, const void* data) override;
+		void Write(size_t itemSize, const void* data) override;
+		void Write(size_t itemSize, size_t itemsNumber, const void* data) override;
 
 #ifdef SYSTEM_BIG_ENDIAN
 	private:
@@ -45,10 +44,10 @@ namespace CoreTools
 
 	private:
 		// 禁止调用以下成员函数
-		virtual size_t ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) noexcept override;
-		virtual int GetCharacter() noexcept override;
-		virtual bool UnGetCharacter(int character) noexcept override;
-		virtual std::string GetString(int count) override;
+		size_t ReadFromFile(size_t itemSize, size_t itemsNumber, void* data)   override;
+		int GetCharacter()    override;
+		bool UnGetCharacter(int character)   override;
+		std::string GetString(int count) override;
 	};
 }
 

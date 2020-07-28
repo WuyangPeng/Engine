@@ -9,8 +9,13 @@
 #include "Random.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+
 CoreTools::Random
-	::Random()
+	::Random() noexcept
 	:m_State{ 0 }, m_FirstIndex{ 0 }, m_SecondIndex{ 103 }, m_Table{}
 {
 	GenerateSeeds();
@@ -20,7 +25,7 @@ CoreTools::Random
 
 // private
 void CoreTools::Random
-	::GenerateSeeds()
+	::GenerateSeeds() noexcept
 {
 	for (auto n = sm_TableSize - 1; 0 <= n; --n)
 	{
@@ -44,12 +49,12 @@ void CoreTools::Random
 
 // private
 uint32_t CoreTools::Random
-	::GenerateSimple()
+	::GenerateSimple() noexcept
 {
 	uint32_t temp = m_State;
 	for (auto n = 0u; n < 32; ++n)
 	{
-		uint32_t bit{ ((temp >> 0) ^ (temp >> 1) ^ (temp >> 2) ^ (temp >> 3) ^ (temp >> 5) ^ (temp >> 7)) & 1 };
+		const uint32_t bit{ ((temp >> 0) ^ (temp >> 1) ^ (temp >> 2) ^ (temp >> 3) ^ (temp >> 5) ^ (temp >> 7)) & 1 };
 
 		temp = (((temp >> 1) | (temp << 31)) & ~1) | bit;
 	}
@@ -60,7 +65,7 @@ uint32_t CoreTools::Random
 }
 
 CoreTools::Random
-	::Random(uint32_t seed)
+	::Random(uint32_t seed) noexcept
 	:m_State{ seed }, m_FirstIndex{ 0 }, m_SecondIndex{ 103 }, m_Table{}
 {
 	GenerateSeeds();
@@ -71,7 +76,7 @@ CoreTools::Random
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Random)
 
 uint32_t CoreTools::Random
-	::Generate()
+	::Generate() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -94,7 +99,7 @@ uint32_t CoreTools::Random
 }
 
 int CoreTools::Random
-	::GeneratePositive()
+	::GeneratePositive() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -103,5 +108,5 @@ int CoreTools::Random
 
 
 
-
+#include STSTEM_WARNING_POP
 

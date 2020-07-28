@@ -63,9 +63,9 @@
 
 	namespace CoreTools
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
-
+			
 		}
 	}
 

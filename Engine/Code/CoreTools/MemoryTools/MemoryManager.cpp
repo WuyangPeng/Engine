@@ -20,95 +20,56 @@ using std::string;
 using std::make_shared;
 using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(CoreTools, MemoryManager);
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26492)
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
+SINGLETON_GET_PTR_DEFINE(CoreTools, MemoryManager);
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_MemoryManagerMutex }
+CoreTools::MemoryManager::MemoryManagerUniquePtr CoreTools::MemoryManager
+::sm_MemoryManager{ };
 
-SINGLETON_GET_PTR_DEFINE(CoreTools, MemoryManager)
+ 
+ 
 
 void CoreTools::MemoryManager
 	::Create(Allocator allocator, Deallocator deallocator)
 {
-	MUTEX_ENTER_GLOBAL;
-
-	try
-	{
-		DoCreate(allocator, deallocator);
-	}
-	catch (...)
-	{
-		Destroy();
-		throw;
-	}
+	sm_MemoryManager = make_unique<CoreTools::MemoryManager>(allocator, deallocator,MemoryManagerCreate::Init);
 }
+ 
 
 void CoreTools::MemoryManager
-	::DoCreate(Allocator allocator, Deallocator deallocator)
+::Destroy()noexcept
 {
-	MUTEX_ENTER_GLOBAL;
-
-	if (!sm_MemoryManagerMutex)
-	{
-		sm_MemoryManagerMutex = make_unique<Mutex>().release();
-	}
-
-	if (!sm_MemoryManager)
-	{
-		sm_MemoryManager = new MemoryManager{ allocator,deallocator };
-	}
-}
-
-void CoreTools::MemoryManager
-	::Destroy()
-{
-	MUTEX_ENTER_GLOBAL;
-
-	delete sm_MemoryManager;
-	sm_MemoryManager = nullptr;
-
-	delete sm_MemoryManagerMutex;
-	sm_MemoryManagerMutex = nullptr;
+	sm_MemoryManager.reset();
 }
 
 CoreTools::MemoryManager
-	::MemoryManager(Allocator allocator, Deallocator deallocator)
+	::MemoryManager(Allocator allocator, Deallocator deallocator, MemoryManagerCreate memoryManagerCreate)
 	:m_Impl{ make_shared<ImplType>(allocator,deallocator) }
 {
-	MUTEX_ENTER_MEMBER;
+	SYSTEM_UNUSED_ARG(memoryManagerCreate);
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::MemoryManager
-	::~MemoryManager()
+	::~MemoryManager() noexcept
 {
-	MUTEX_ENTER_MEMBER;
-
 	PrintMemoryLeakInformation();
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::MemoryManager
-	::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-
-	if (m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, MemoryManager)
 
 // static
 void* CoreTools::MemoryManager
 	::DefaultAllocator(size_t bytesNumber, const FunctionDescribed& functionDescribed) noexcept
 {
-	MUTEX_ENTER_GLOBAL;
+ 
 
 	SYSTEM_UNUSED_ARG(functionDescribed);
 
@@ -119,7 +80,7 @@ void* CoreTools::MemoryManager
 void CoreTools::MemoryManager
 	::DefaultDeallocator(const void* memBlock, const FunctionDescribed& functionDescribed) noexcept
 {
-	MUTEX_ENTER_GLOBAL;
+ 
 
 	System::FreeMemory(const_cast<void*>(memBlock));
 
@@ -127,19 +88,30 @@ void CoreTools::MemoryManager
 }
 
 void CoreTools::MemoryManager
-	::PrintMemoryLeakInformation() const
+	::PrintMemoryLeakInformation() const noexcept
 {
-	MUTEX_ENTER_MEMBER;
+	try
+	{
+	
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
+		SINGLETON_MUTEX_ENTER_MEMBER;
 
-	CLASS_IS_VALID_CONST_1;
+		CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->PrintMemoryLeakInformation();
+		return m_Impl->PrintMemoryLeakInformation();
+		#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
+		
+	}	
 }
 
 int CoreTools::MemoryManager
 	::GetMemBlockDimensions(const void* memBlock) const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -149,7 +121,7 @@ int CoreTools::MemoryManager
 size_t CoreTools::MemoryManager
 	::GetBytesNumber(const void* memBlock) const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -159,7 +131,7 @@ size_t CoreTools::MemoryManager
 void* CoreTools::MemoryManager
 	::CreateBlock(size_t bytesNumber, int dimensionsNumber, const FunctionDescribed& functionDescribed)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -169,7 +141,7 @@ void* CoreTools::MemoryManager
 void CoreTools::MemoryManager
 	::Delete(const void* memBlock)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -180,3 +152,4 @@ void CoreTools::MemoryManager
 
 
 
+#include STSTEM_WARNING_POP

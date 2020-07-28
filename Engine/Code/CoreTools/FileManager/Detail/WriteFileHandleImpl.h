@@ -23,16 +23,16 @@ namespace CoreTools
 
 	public:
 		explicit WriteFileHandleImpl(const String& fileName, FileHandleCreationDisposition creation = FileHandleCreationDisposition::CreateAlways);
-		virtual ~WriteFileHandleImpl();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual int GetFileByteSize() const override;
+		int GetFileByteSize() const override;
 
-		virtual void Write(size_t itemSize, const void* data) override;
-		virtual void Write(size_t itemSize, size_t itemsNumber, const void* data) override;
+		void Write(size_t itemSize, const void* data) override;
+		void Write(size_t itemSize, size_t itemsNumber, const void* data) override;
 
-		virtual void ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) override;
+		void ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) override;
 	};
 }
 

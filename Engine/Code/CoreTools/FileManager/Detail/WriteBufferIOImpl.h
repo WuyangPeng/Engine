@@ -20,12 +20,12 @@ namespace CoreTools
 		using ParentType = BufferIOImpl;
 
 	public:
-		WriteBufferIOImpl(int bytesTotal, char* buffer);
-		virtual ~WriteBufferIOImpl();
+		WriteBufferIOImpl(int bytesTotal, char* buffer) noexcept;
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const char* GetBuffer() const;
+		const char* GetBuffer() const noexcept override;
 
 		void Write(size_t itemSize, const void* data);
 		void Write(size_t itemSize, size_t itemsNumber, const void* data);

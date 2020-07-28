@@ -20,12 +20,12 @@ namespace CoreTools
 		using ParentType = BufferIOImpl;
 
 	public:
-		ReadBufferIOImpl(int bytesTotal, const char* buffer);
-		virtual ~ReadBufferIOImpl();
+		ReadBufferIOImpl(int bytesTotal, const char* buffer) noexcept;
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const char* GetBuffer() const override;
+		const char* GetBuffer() const noexcept override;
 
 		void Read(size_t itemSize, void* data);
 		void Read(size_t itemSize, size_t itemsNumber, void* data);

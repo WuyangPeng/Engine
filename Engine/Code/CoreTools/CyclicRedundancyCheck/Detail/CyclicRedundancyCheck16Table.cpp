@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
 CoreTools::CyclicRedundancyCheck16Table
-	::CyclicRedundancyCheck16Table()
+	::CyclicRedundancyCheck16Table() noexcept
 	:m_Table{ 0x0000,0xCC01,0xD801,0x1400,
 			  0xF001,0x3C00,0x2800,0xE401,
 			  0xA001,0x6C00,0x7800,0xB401,
@@ -28,5 +28,5 @@ uint16_t CoreTools::CyclicRedundancyCheck16Table
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < sm_TableSize, "Ë÷Òý´íÎó\n");
 
-	return m_Table[index];
+	return m_Table.at(index);
 }

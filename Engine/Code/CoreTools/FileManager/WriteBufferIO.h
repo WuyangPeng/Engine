@@ -30,7 +30,7 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		const char* GetBuffer() const;
+		const char* GetBuffer() const noexcept;
 		int GetBytesTotal() const noexcept;
 		int GetBytesProcessed() const noexcept;
 

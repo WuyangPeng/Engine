@@ -9,10 +9,12 @@
 #include "GenerateTemplateMiddleLayerVcxprojImpl.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"  
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTemplateMiddleLayerVcxprojImpl
 	::sm_Extension(SYSTEM_TEXT(".vcxproj"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTemplateMiddleLayerVcxprojImpl
 	::GenerateTemplateMiddleLayerVcxprojImpl(const System::String& templateFileName, const System::String& projectName, const System::String& managerName,  const System::String& includeName)
 	:ParentType(templateFileName, sm_Extension), m_ProjectName(projectName), m_ManagerName(managerName), m_IncludeName(includeName)
@@ -32,7 +34,7 @@ void AssistTools::GenerateTemplateMiddleLayerVcxprojImpl
 	newVariable.insert(make_pair(m_ManagerName, newManagerName));
 	newVariable.insert(make_pair(m_IncludeName, newIncludeName));
 
-	return ParentType::GenerateTo(resourceDirectory, solutionName + newManagerName, newVariable);
+	return ParentType::Generate (resourceDirectory, solutionName + newManagerName, newVariable);
 }
  
 

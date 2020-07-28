@@ -15,6 +15,11 @@
 
 using std::swap;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
 namespace
 {
 	int g_One{ 1 };
@@ -160,7 +165,7 @@ void CoreTools::Endian
 		CORE_TOOLS_ASSERTION_0(data != nullptr,"指针无效！");
 		CORE_TOOLS_ASSERTION_2(itemSize == 2 || itemSize == 4 || itemSize == 8,"大小必须为2，4或8\n");
 
-		auto halfSize = itemSize / 2;
+		const auto halfSize = itemSize / 2;
 		auto bytes = static_cast<char*>(data);
 
 		for (auto begin = 0,end = itemSize - 1; begin < halfSize; ++begin,--end)
@@ -242,3 +247,4 @@ void CoreTools::Endian
 	EXCEPTION_ALL_CATCH(CoreTools)
 }
 
+#include STSTEM_WARNING_POP

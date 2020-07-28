@@ -19,12 +19,12 @@
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{0e3ca689-0a63-4901-ab71-3d999260e35d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sprite 源文件">
-      <UniqueIdentifier>{51305f95-3ef9-4cea-aef6-beb607eeed06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sprite 头文件">
+	<Filter Include="Sprite 头文件">
       <UniqueIdentifier>{7d340af6-17d8-49ac-a53b-b619d38ba114}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprite 源文件">
+      <UniqueIdentifier>{51305f95-3ef9-4cea-aef6-beb607eeed06}</UniqueIdentifier>
+    </Filter>    
     <Filter Include="Texture 头文件">
       <UniqueIdentifier>{be60b017-9803-4a6d-8035-2a5032efba04}</UniqueIdentifier>
     </Filter>
@@ -68,13 +68,7 @@
       <UniqueIdentifier>{fc57b596-a1bc-4019-863c-5cb6073d37a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>   
-	<Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-	<Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>  
+  <ItemGroup>   	  
     <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -105,12 +99,18 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>	
+	<Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+	<Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
 	<ClInclude Include="..\..\..\Code\Animation\Animation.h">
       <Filter>头文件</Filter>
     </ClInclude>
-	 <ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h">
+	<ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h">
       <Filter>头文件</Filter>
     </ClInclude>
 	<ClInclude Include="..\..\..\Code\Animation\AnimationDll.h">

@@ -16,7 +16,7 @@
 #include "CoreTools/Threading/ThreadingFwd.h"
 
 #include <string>
-
+NETWORK_EXPORT_UNIQUE_PTR(MessageManager);
 NETWORK_EXPORT_SHARED_PTR(MessageManagerImpl);
 EXPORT_NONCOPYABLE_CLASS(NETWORK);
 
@@ -25,10 +25,24 @@ namespace Network
 	class NETWORK_DEFAULT_DECLARE MessageManager : public CoreTools::Singleton<MessageManager>
 	{
 	public:
-		SINGLETON_INITIALIZE_DECLARE(MessageManager);
+		NON_COPY_CLASSES_TYPE_DECLARE(MessageManager);
+		using ParentType = Singleton<MessageManager>;
 		using FactoryFunction = MessageInterface::FactoryFunction;
 
+	private:
+		enum class MessageManagerCreate
+		{
+			Init,
+		};
+
 	public:
+		explicit MessageManager(MessageManagerCreate messageManagerCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(MessageManager);
+
 		CLASS_INVARIANT_DECLARE;
 
 	public:
@@ -41,7 +55,11 @@ namespace Network
 		int GetFullVersion() const;
 
 	private:
-		SINGLETON_MEMBER_DECLARE(MessageManager);
+		using MessageManagerUniquePtr = std::unique_ptr<MessageManager>;
+
+	private:
+		static MessageManagerUniquePtr sm_MessageManager;
+		IMPL_TYPE_DECLARE(MessageManager);
 	};
 }
 

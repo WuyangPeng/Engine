@@ -79,7 +79,7 @@ Rendering::LightAmbEffect
 Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 	::CreateInstance(Light* light,  Material* material) const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
 	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
     instance->SetVertexConstant(0, 1,ShaderFloatSmartPointer(NEW0 MaterialEmissiveConstant(MaterialSmartPointer(material))));
     instance->SetVertexConstant(0, 2,ShaderFloatSmartPointer(NEW0 MaterialAmbientConstant(MaterialSmartPointer(material))));
@@ -92,7 +92,7 @@ Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 	::CreateUniqueInstance(Light* light, Material* material)
 {
-    LightAmbEffect* effect = NEW0 LightAmbEffect();
+    LightAmbEffect* effect = CoreTools::New0 < LightAmbEffect>();
     return effect->CreateInstance(light, material);
 }
 

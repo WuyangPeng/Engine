@@ -55,7 +55,7 @@ int CoreTools::LogMessageImpl
 }
 
 CoreTools::FunctionDescribed CoreTools::LogMessageImpl
-	::GetFunctionDescribed() const
+	::GetFunctionDescribed() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

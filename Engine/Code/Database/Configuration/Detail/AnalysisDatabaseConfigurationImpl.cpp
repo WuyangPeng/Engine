@@ -57,7 +57,7 @@ void Database::AnalysisDatabaseConfigurationImpl
 		{
 			InsertStrategy(ptree.first, ptree.second);
 		}
-		catch (CoreTools::Error& error)
+		catch (const CoreTools::Error& error)
 		{
 			LOG_SINGLETON_ENGINE_APPENDER(Warn, Database)
 				<< SYSTEM_TEXT("数据库策略")
@@ -75,7 +75,7 @@ void Database::AnalysisDatabaseConfigurationImpl
 {
 	auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"), SYSTEM_TEXT(""s));
 
-	auto wrappersStrategy = GetWrappersStrategy(wrappers);
+	const auto wrappersStrategy = GetWrappersStrategy(wrappers);
 
 	auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("IP"), SYSTEM_TEXT(""s)));
 	auto port = basicTree.get(SYSTEM_TEXT("Port"), 0);
@@ -145,7 +145,7 @@ Database::ConfigurationStrategy Database::AnalysisDatabaseConfigurationImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定名字的配置。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定名字的配置。"s));
 	}
 }
 
@@ -187,7 +187,7 @@ Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl
 }
 
 Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::AnalysisDatabaseConfigurationImpl
-	::GetBegin() const
+	::GetBegin() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -195,7 +195,7 @@ Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::Analys
 }
 
 Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::AnalysisDatabaseConfigurationImpl
-	::GetEnd() const
+	::GetEnd() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 

@@ -12,14 +12,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::TwoBitProxy
-	::TwoBitProxy(TwoBitArray& array, int position)
+	::TwoBitProxy(TwoBitArray& array, int position) noexcept
 	:m_Array{ array }, m_Position{ position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::TwoBitProxy&	CoreTools::TwoBitProxy
-	::operator=(const TwoBitProxy& rhs)
+	::operator=(const TwoBitProxy& rhs) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -29,7 +29,7 @@ CoreTools::TwoBitProxy&	CoreTools::TwoBitProxy
 }
 
 CoreTools::TwoBitProxy&	CoreTools::TwoBitProxy
-	::operator=(uint32_t value)
+	::operator=(uint32_t value) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

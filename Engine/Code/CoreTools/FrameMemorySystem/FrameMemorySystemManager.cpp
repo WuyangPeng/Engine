@@ -9,7 +9,8 @@
 #include "BaseFrameMemorySystem.h"
 #include "FrameMemorySystemManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning.h"
 CoreTools::FrameMemorySystemManager
 	::FrameMemorySystemManager(BaseFrameMemorySystem& frameMemorySystem, int bytes, FrameMemorySystemHeap heapType)
 	:m_FrameMemorySystem{ frameMemorySystem }, m_Pointer{ m_FrameMemorySystem.AllocFrameMemory(bytes,heapType) }
@@ -18,17 +19,25 @@ CoreTools::FrameMemorySystemManager
 }
 
 CoreTools::FrameMemorySystemManager
-	::~FrameMemorySystemManager()
+	::~FrameMemorySystemManager() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-	m_FrameMemorySystem.ReleaseFrame(m_Pointer);
+	EXCEPTION_TRY
+	{
+		
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
+		m_FrameMemorySystem.ReleaseFrame(m_Pointer);
+	#include STSTEM_WARNING_POP
+	}
+	EXCEPTION_ALL_CATCH(CoreTools)	
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, FrameMemorySystemManager)
 
 const CoreTools::FrameMemorySystemPointerShare CoreTools::FrameMemorySystemManager
-	::GetFrameMemorySystemPointer() const
+	::GetFrameMemorySystemPointer() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

@@ -16,49 +16,40 @@
 
 using std::string;
 using std::make_shared;
+using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(Rendering,RendererInputData);
+SINGLETON_GET_PTR_DEFINE(Rendering, RendererInputData);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetRenderingMutex() }
+Rendering::RendererInputData::RendererInputDataUniquePtr Rendering::RendererInputData
+::sm_RendererInputData{ };
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_RendererInputDataMutex }
+void Rendering::RendererInputData
+::Create()
+{
+	sm_RendererInputData = make_unique<Rendering::RendererInputData>(RendererInputDataCreate::Init);
+}
 
-SINGLETON_INITIALIZE_DEFINE(Rendering,RendererInputData)
+void Rendering::RendererInputData
+::Destroy() noexcept
+{
+	sm_RendererInputData.reset();
+}
 
 Rendering::RendererInputData
-	::RendererInputData()
+::RendererInputData(RendererInputDataCreate rendererInputDataCreate)
 	:m_Impl{ make_shared<ImplType>() }
 {
-	MUTEX_ENTER_MEMBER;
+	SYSTEM_UNUSED_ARG(rendererInputDataCreate);
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::RendererInputData
-	::~RendererInputData()
-{
-	MUTEX_ENTER_MEMBER;
-
-	RENDERING_SELF_CLASS_IS_VALID_1;	
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RendererInputData
-	::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-
-	if(m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, RendererInputData)
 
 void Rendering::RendererInputData
 	::Rebuild(RendererTypes type)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

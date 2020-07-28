@@ -13,14 +13,16 @@
 #include "System/Helper/PragmaWarning/Chrono.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::CpuTimerData
 	::CpuTimerData()
 	:m_CpuTimerPtr{ make_shared<CpuTimer>() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::CpuTimerData
 	::IsValid() const noexcept

@@ -12,18 +12,24 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 template <CoreTools::StandardHandle Handle>
 CoreTools::ConsoleInstance<Handle>
 	::ConsoleInstance()
 	:m_Handle{ System::GetStandardHandle(Handle) }
 {
+	using namespace std::literals;
+
 	if (!System::IsHandleValid(m_Handle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取标准设备的句柄失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("获取标准设备的句柄失败。"s));
 	}
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <CoreTools::StandardHandle Handle>

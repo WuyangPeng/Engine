@@ -21,20 +21,20 @@ namespace CoreTools
 		using ParentType = Pool<Buffer>;
 
 	public:
-		BufferPoolImpl();
-		virtual ~BufferPoolImpl();
+		BufferPoolImpl() noexcept;
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual Buffer* Get() override;
+		Buffer* Get() override;
 
-		virtual void Release(Buffer* ptr) override;
+		void Release(Buffer* ptr) override;
 
 		Buffer* GetBuffer(int minSize);
 
 	private:
-		virtual bool ConformCondition(Buffer* ptr) override;
-		virtual Buffer* DoGet() override;
+		bool ConformCondition(Buffer* ptr) noexcept override;
+		Buffer* DoGet() override;
 
 	private:
 		int m_MinSize;

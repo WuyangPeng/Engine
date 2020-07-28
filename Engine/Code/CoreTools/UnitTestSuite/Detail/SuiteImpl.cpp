@@ -131,7 +131,7 @@ void CoreTools::SuiteImpl
 }
 
 void CoreTools::SuiteImpl
-	::ClearUnitTestCollection()
+	::ClearUnitTestCollection() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_3;
 

@@ -14,8 +14,14 @@
 
 #include <map>
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26446)
 Imagics::ExtractCurveSquares
-	::ExtractCurveSquares (int xBound, int yBound, int* data)
+	::ExtractCurveSquares (int xBound, int yBound, int* data) noexcept
     :mXBound(xBound), mYBound(yBound), mQuantity(xBound*yBound), mData(data)
 {
 }
@@ -33,20 +39,21 @@ void Imagics::ExtractCurveSquares
     // The vertices are computed as rational numbers.
     std::vector<Vertex> ratVertices;
 
-    int xBoundM1 = mXBound - 1, yBoundM1 = mYBound - 1;
+    const int xBoundM1 = mXBound - 1;
+    const int yBoundM1 = mYBound - 1;
     for (int y = 0, yp = 1; y < yBoundM1; ++y, ++yp)
     {
         for (int x = 0, xp = 1; x < xBoundM1; ++x, ++xp)
         {
             // Get the image values at the corners of the square.
-            int i00 = x + mXBound*y;
-            int i10 = i00 + 1;
-            int i01 = i00 + mXBound;
-            int i11 = i10 + mXBound;
-            int f00 = mData[i00];
-            int f10 = mData[i10];
-            int f01 = mData[i01];
-            int f11 = mData[i11];
+            const int i00 = x + mXBound*y;
+            const int i10 = i00 + 1;
+            const int i01 = i00 + mXBound;
+            const int i11 = i10 + mXBound;
+            const int f00 = mData[i00];
+            const int f10 = mData[i10];
+            const int f01 = mData[i01];
+            const int f11 = mData[i11];
 
             // Construct the vertices and edges of the level curve in the
             // square.
@@ -97,13 +104,13 @@ void Imagics::ExtractCurveSquares
     typedef std::map<Mathematics::EdgeKey,int> EMap;
     typedef std::map<Mathematics::EdgeKey,int>::iterator EIterator;
     EMap* edgeMap = 0;
-    int e;
+    int e = 0;
     VIterator vIter;
 
     int numEdges = (int)edges.size();
     if (numEdges)
     {
-        edgeMap = NEW0 EMap();
+        edgeMap = CoreTools::New0 < EMap>();
         int nextEdge = 0;
         for (e = 0; e < numEdges; ++e)
         {
@@ -161,8 +168,8 @@ void Imagics::ExtractCurveSquares
 	::AddEdge (std::vector<Vertex>& vertices,std::vector<Mathematics::EdgeKey>& edges, int xNumer0, int xDenom0, int yNumer0,
 			   int yDenom0, int xNumer1, int xDenom1, int yNumer1, int yDenom1)
 {
-    int v0 = (int)vertices.size();
-    int v1 = v0 + 1;
+    const int v0 = (int)vertices.size();
+    const int v1 = v0 + 1;
     edges.push_back(Mathematics::EdgeKey(v0, v1));
     vertices.push_back(Vertex(xNumer0, xDenom0, yNumer0, yDenom0));
     vertices.push_back(Vertex(xNumer1, xDenom1, yNumer1, yDenom1));
@@ -172,7 +179,7 @@ void Imagics::ExtractCurveSquares
 	::ProcessSquare (std::vector<Vertex>& vertices,std::vector<Mathematics::EdgeKey>& edges, int x, int xp, int y, int yp, int f00,
                      int f10, int f11, int f01)
 {
-    int xn0, yn0, xn1, yn1, d0, d1, d2, d3, det;
+    int xn0 = 0, yn0 = 0, xn1 = 0, yn1 = 0, d0 = 0, d1 = 0, d2 = 0, d3 = 0, det = 0;
 
     if (f00 != 0)
     {
@@ -558,7 +565,7 @@ void Imagics::ExtractCurveSquares
 }
 
 Imagics::ExtractCurveSquares::Vertex
-	::Vertex (int xNumer, int xDenom, int yNumer,int yDenom)
+	::Vertex (int xNumer, int xDenom, int yNumer,int yDenom) noexcept
 {
     if (xDenom > 0)
     {
@@ -583,3 +590,4 @@ Imagics::ExtractCurveSquares::Vertex
     }
 }
 
+#include STSTEM_WARNING_POP

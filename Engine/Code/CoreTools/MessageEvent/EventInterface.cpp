@@ -8,18 +8,7 @@
 
 #include "EventInterface.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
-CoreTools::EventInterface
-	::EventInterface()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::EventInterface
-	::~EventInterface()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, EventInterface)
 

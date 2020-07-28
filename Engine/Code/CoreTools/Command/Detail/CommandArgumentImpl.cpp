@@ -16,13 +16,7 @@ CoreTools::CommandArgumentImpl
 	:m_Index{ index }, m_Name{ name }, m_Used{ false }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-CoreTools::CommandArgumentImpl
-	::~CommandArgumentImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+} 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::CommandArgumentImpl

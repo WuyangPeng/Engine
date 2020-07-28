@@ -18,11 +18,7 @@ AssistTools::GenerateTemplateHelperImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-AssistTools::GenerateTemplateHelperImpl
-	::~GenerateTemplateHelperImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateHelperImpl)
 
@@ -35,7 +31,7 @@ void AssistTools::GenerateTemplateHelperImpl
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital));
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName));
 
-	return ParentType::GenerateTo(resourceDirectory, newProjectName, newVariable);
+	return ParentType::Generate(resourceDirectory, newProjectName, newVariable);
 }
 
 

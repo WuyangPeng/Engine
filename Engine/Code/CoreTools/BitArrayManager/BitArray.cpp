@@ -9,6 +9,7 @@
 #include "BitProxy.h"
 #include "BitArray.h"
 #include "ConstBitProxy.h"
+#include "System/Helper/PragmaWarning.h"
 #include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -16,6 +17,11 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26481)
 using std::swap;
 
 CoreTools::BitArray
@@ -58,25 +64,17 @@ void CoreTools::BitArray
 void CoreTools::BitArray
 	::Trim() noexcept
 {
-	auto extraBits = m_NumBits % sm_CellSize;
+	const auto extraBits = m_NumBits % sm_CellSize;
 	if (0 < m_Length && extraBits != 0)
 	{
+		
+#include STSTEM_WARNING_PUSH
+
+	#include SYSTEM_WARNING_DISABLE(26481)
 		m_Store[m_Length - 1] &= ~((~uint32_t(0)) << extraBits);
+
+#include STSTEM_WARNING_POP
 	}
-}
-
-// private
-int CoreTools::BitArray
-	::GetIndex(int bitNum) noexcept
-{
-	return bitNum / sm_CellSize;
-}
-
-// private
-int CoreTools::BitArray
-	::GetOffset(int bitNum) noexcept
-{
-	return bitNum % sm_CellSize;
 }
 
 CoreTools::BitArray
@@ -92,14 +90,24 @@ CoreTools::BitArray
 }
 
 CoreTools::BitArray
-	::~BitArray()
+	::~BitArray() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+ 
+#include STSTEM_WARNING_PUSH
+	
+#include SYSTEM_WARNING_DISABLE(26447)
 
-	if (1 < m_Length)
+	EXCEPTION_TRY
 	{
-		DELETE1(m_Store);
+		if(1 < m_Length)
+		{
+			DELETE1(m_Store);
+		}
 	}
+	EXCEPTION_ALL_CATCH(CoreTools)		
+		
+#include STSTEM_WARNING_POP
 }
 
 CoreTools::BitArray& CoreTools::BitArray
@@ -353,8 +361,8 @@ int CoreTools::BitArray
 bool CoreTools
 	::operator==(const BitArray& lhs, const BitArray& rhs) noexcept
 {
-	auto lhsNumBits = lhs.GetNumBits();
-	auto rhsNumBits = rhs.GetNumBits();
+	const auto lhsNumBits = lhs.GetNumBits();
+	const auto rhsNumBits = rhs.GetNumBits();
 
 	if (lhsNumBits != rhsNumBits)
 	{
@@ -371,4 +379,4 @@ bool CoreTools
 }
 
 
-
+#include STSTEM_WARNING_POP

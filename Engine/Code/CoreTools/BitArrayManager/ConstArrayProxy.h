@@ -21,15 +21,19 @@ namespace CoreTools
 		using ClassType = ConstArrayProxy;
 
 	public:
-		ConstArrayProxy(const BitArray2D& bitArray2D, int position);
+		ConstArrayProxy(const BitArray2D& bitArray2D, int position) noexcept;
+		~ConstArrayProxy() = default;
 
-		ConstBitProxy operator[](int position) const;
+		ConstBitProxy operator[](int position) const noexcept;
 
-		ConstArrayProxy(const ConstArrayProxy& rhs);
+		ConstArrayProxy(const ConstArrayProxy& rhs) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		ConstArrayProxy& operator=(const ConstArrayProxy& rhs) = delete;
+
+		ConstArrayProxy& operator=(ConstArrayProxy&& rhs) noexcept = default;
+		ConstArrayProxy(ConstArrayProxy&& bitProxy) noexcept = default;
 
 	private:
 		const BitArray2D& m_Array;

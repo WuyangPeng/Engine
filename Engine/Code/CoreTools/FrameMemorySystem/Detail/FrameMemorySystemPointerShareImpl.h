@@ -21,7 +21,7 @@ namespace CoreTools
 		using ClassType = FrameMemorySystemPointerShareImpl;
 
 	public:
-		FrameMemorySystemPointerShareImpl(uint8_t* ptr, int size, uint8_t*& lowerFramePointer, uint8_t*& upperFramePointer, FrameMemorySystemHeap type);
+		FrameMemorySystemPointerShareImpl(uint8_t* ptr, int size, uint8_t*& lowerFramePointer, uint8_t*& upperFramePointer, FrameMemorySystemHeap type) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

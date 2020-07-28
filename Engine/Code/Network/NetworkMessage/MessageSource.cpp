@@ -89,7 +89,7 @@ string Network::MessageSource
 			padding = 4 - padding;
 		}
 
-		auto text = m_Source->GetCurrentReadBufferedPtr();
+		const auto text = m_Source->GetCurrentReadBufferedPtr();
 		string datum(text, length);
 
 		m_Source->AddCurrentReadIndex(length + padding);

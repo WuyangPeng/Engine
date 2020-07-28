@@ -27,7 +27,7 @@ namespace CoreTools
 
 		size_t GetBytesNumber() const noexcept;
 		int GetDimensionsNumber() const noexcept;
-		const FunctionDescribed& GetFunctionDescribed() const;
+		const FunctionDescribed& GetFunctionDescribed() const noexcept;
 		uint64_t GetUniqueID() const noexcept;
 
 	private:

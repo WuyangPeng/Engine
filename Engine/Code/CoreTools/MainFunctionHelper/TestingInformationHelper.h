@@ -29,6 +29,9 @@ namespace CoreTools
 
 	public:
 		TestingInformationHelper();
+		~TestingInformationHelper() = default;
+		TestingInformationHelper(const TestingInformationHelper& rhs) = delete;
+		TestingInformationHelper& operator=(const TestingInformationHelper& rhs) = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

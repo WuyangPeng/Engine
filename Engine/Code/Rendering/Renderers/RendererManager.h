@@ -14,7 +14,7 @@
 #include "CoreTools/Base/SingletonDetail.h"
 
 #include <boost/noncopyable.hpp>
-
+RENDERING_EXPORT_UNIQUE_PTR(RendererManager);
 RENDERING_EXPORT_SHARED_PTR(RendererManagerImpl);
 EXPORT_NONCOPYABLE_CLASS(RENDERING);
 
@@ -40,7 +40,8 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE RendererManager : public CoreTools::Singleton<RendererManager>
 	{
 	public:
-		SINGLETON_INITIALIZE_DECLARE(RendererManager); 
+		NON_COPY_CLASSES_TYPE_DECLARE(RendererManager);
+		using ParentType = Singleton<RendererManager>;
 		using RendererPtr = std::shared_ptr<Renderer>;
 		using VertexFormatConstPtr = const VertexFormat*;
 		using VertexBufferConstPtr = const VertexBuffer*;
@@ -53,7 +54,20 @@ namespace Rendering
 		using VertexShaderConstPtr = const VertexShader*;
 		using PixelShaderConstPtr = const PixelShader*;
 
-	public:	
+	private:
+		enum class RendererManagerCreate
+		{
+			Init,
+		};
+
+	public:
+		explicit RendererManager(RendererManagerCreate rendererManagerCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(RendererManager);
+
 		CLASS_INVARIANT_DECLARE;
 
  		int64_t Insert(RendererPtr ptr);
@@ -104,9 +118,12 @@ namespace Rendering
 		void BindAll(PixelShaderConstPtr pixelShader);
 		void UnbindAll(PixelShaderConstPtr pixelShader);
 		
-	private:		
-		SINGLETON_INSTANCE_DECLARE(RendererManager);
-		SINGLETON_IMPL_DECLARE(RendererManager);
+	private:
+		using RendererManagerUniquePtr = std::unique_ptr<RendererManager>;
+
+	private:
+		static RendererManagerUniquePtr sm_RendererManager;
+		IMPL_TYPE_DECLARE(RendererManager);
 	};
 }
 

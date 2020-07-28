@@ -13,17 +13,13 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::BufferPoolImpl
-	::BufferPoolImpl()
+	::BufferPoolImpl() noexcept
 	:ParentType{}, m_MinSize{ 0 }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::BufferPoolImpl
-	::~BufferPoolImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BufferPoolImpl)
 
@@ -40,9 +36,12 @@ void CoreTools::BufferPoolImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	ptr->ResetData();
+	if (ptr != nullptr)
+	{
+		ptr->ResetData();
 
-	ParentType::Release(ptr);
+		ParentType::Release(ptr);
+	}	
 }
 
 CoreTools::Buffer* CoreTools::BufferPoolImpl
@@ -59,13 +58,13 @@ CoreTools::Buffer* CoreTools::BufferPoolImpl
 	::DoGet()
 {
 	// 没有足够大的可用缓冲区，创建一个新的
-	return NEW0 Buffer(m_MinSize);
+	return CoreTools::New0<Buffer>(m_MinSize);
 }
 
 bool CoreTools::BufferPoolImpl
-	::ConformCondition(Buffer* ptr)
+	::ConformCondition(Buffer* ptr) noexcept
 {
-	if (m_MinSize <= ptr->GetSize())
+	if (ptr != nullptr && m_MinSize <= ptr->GetSize())
 		return true;
 	else
 		return false;

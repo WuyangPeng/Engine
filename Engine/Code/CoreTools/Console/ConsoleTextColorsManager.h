@@ -22,6 +22,12 @@ namespace CoreTools
 		explicit ConsoleTextColorsManager(TextColour textColor, bool intensified = false);
 		~ConsoleTextColorsManager();
 
+		ConsoleTextColorsManager(const ConsoleTextColorsManager&) = default;
+		ConsoleTextColorsManager& operator=(const ConsoleTextColorsManager&) = default;
+
+		ConsoleTextColorsManager(ConsoleTextColorsManager&&) noexcept = default;
+		ConsoleTextColorsManager& operator=(ConsoleTextColorsManager&&) noexcept = default;
+
 		CLASS_INVARIANT_DECLARE;
 
 	private:

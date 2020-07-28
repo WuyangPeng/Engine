@@ -19,7 +19,7 @@ namespace CoreTools
 		using ClassType = ConstTwoBitProxy;
 
 	public:
-		ConstTwoBitProxy(const TwoBitArray& array, int position);
+		ConstTwoBitProxy(const TwoBitArray& array, int position) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

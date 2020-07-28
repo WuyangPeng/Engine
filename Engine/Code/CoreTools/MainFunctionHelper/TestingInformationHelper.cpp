@@ -13,12 +13,16 @@
 using std::string;
 using std::make_shared;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::TestingInformationHelper
 	::TestingInformationHelper()
 	:m_Impl{ make_shared<ImplType>() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
+#include STSTEM_WARNING_POP
 
 CoreTools::TestingInformationHelper
 	::TestingInformationHelper(TestingInformationHelper&& rhs) noexcept

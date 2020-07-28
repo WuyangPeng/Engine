@@ -28,7 +28,7 @@ namespace AssistTools
 	public:
 		GenerateTestingTemplateCodeDirectory(const System::String& directory, const std::string& configurationFileName); 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_DECLARE;
 
 		void GenerateTo(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData,const System::String& projectCapital, const System::String& newCoreName, const System::String& CoreNameCapital) const;	 
 	

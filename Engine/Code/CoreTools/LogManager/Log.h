@@ -16,17 +16,33 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 
+CORE_TOOLS_EXPORT_UNIQUE_PTR(Log);
 CORE_TOOLS_EXPORT_SHARED_PTR(LogImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+ 
 
 namespace CoreTools
 {
 	class CORE_TOOLS_DEFAULT_DECLARE Log : public CoreTools::Singleton<Log>
 	{
-		SINGLETON_INITIALIZE_DECLARE(Log);
+	public:
+		NON_COPY_CLASSES_TYPE_DECLARE(Log);
+		using ParentType = Singleton<Log>; 
 		using String = System::String;
 
+	private:
+		enum class LogCreate
+		{
+			Init,
+		};
+
 	public:
+		explicit Log(LogCreate logCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(Log);
+
 		CLASS_INVARIANT_DECLARE;
 
 		void InsertAppender(const String& name, const Appender& appenderPtr);
@@ -42,7 +58,11 @@ namespace CoreTools
 		LogAppenderIOManager& OutFatal() noexcept;
 
 	private:
-		SINGLETON_MEMBER_DECLARE(Log);
+		using LogUniquePtr = std::unique_ptr<Log>;
+
+	private:
+		static LogUniquePtr sm_Log;
+		IMPL_TYPE_DECLARE(Log);
 	};
 }
 

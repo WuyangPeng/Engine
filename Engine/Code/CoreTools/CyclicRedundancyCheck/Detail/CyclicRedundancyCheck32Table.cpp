@@ -9,12 +9,12 @@
 #include "CyclicRedundancyCheck32Table.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
-
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 CoreTools::CyclicRedundancyCheck32Table
-	::CyclicRedundancyCheck32Table()
+	::CyclicRedundancyCheck32Table() noexcept
 	:m_Table{}
 {
-	Calculate();
+	CoreTools::NoexceptNoReturn(*this,&ClassType::Calculate);
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -26,12 +26,12 @@ void CoreTools::CyclicRedundancyCheck32Table
 {
 	for (auto index = 0; index < sm_TableSize; index++)
 	{
-		m_Table[index] = Calculate32(index);
+		m_Table.at(index) = Calculate32(index);
 	}
 }
 
 uint32_t CoreTools::CyclicRedundancyCheck32Table
-	::Calculate32(uint32_t index)
+	::Calculate32(uint32_t index) noexcept
 {
 	auto value = index;
 	constexpr uint32_t bitSize{ 8 };
@@ -53,5 +53,5 @@ uint32_t CoreTools::CyclicRedundancyCheck32Table
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < sm_TableSize, "Ë÷Òý´íÎó\n");
 
-	return m_Table[index];
+	return m_Table.at(index);
 }

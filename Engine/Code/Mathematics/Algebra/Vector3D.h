@@ -35,7 +35,7 @@ namespace Mathematics
 		using ToolsType = Vector3DTools<Real>;
 
 	public:
-		Vector3D();
+		Vector3D() noexcept;
 		Vector3D(const Tuple3& tuple);
 		Vector3D(Real x, Real y, Real z);
 
@@ -51,9 +51,9 @@ namespace Mathematics
 		CLASS_INVARIANT_DECLARE;
 
 		// ×ø±ê·ÃÎÊ
-		Real GetXCoordinate() const noexcept;
-		Real GetYCoordinate() const noexcept;
-		Real GetZCoordinate() const noexcept;
+		Real GetXCoordinate() const;
+		Real GetYCoordinate() const;
+		Real GetZCoordinate() const;
 		bool IsZero(const Real epsilon = Math::sm_ZeroTolerance) const;
 
 		void ZeroOut();

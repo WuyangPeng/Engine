@@ -17,18 +17,33 @@
 
 #include <string>
 
+CORE_TOOLS_EXPORT_UNIQUE_PTR(EntityManager);
 CORE_TOOLS_EXPORT_SHARED_PTR(EntityManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+ 
 
 namespace CoreTools
 {
 	class CORE_TOOLS_DEFAULT_DECLARE EntityManager : public CoreTools::Singleton<EntityManager>
 	{
 	public:
-		SINGLETON_INITIALIZE_DECLARE(EntityManager);
+		NON_COPY_CLASSES_TYPE_DECLARE(EntityManager);
+		using ParentType = Singleton<EntityManager>;
 		using EntityPtr = std::shared_ptr<BaseEntity>;
 
+	private:
+		enum class EntityManagerCreate
+		{
+			Init,
+		};
+
 	public:
+		explicit EntityManager(EntityManagerCreate entityManagerCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(EntityManager);
+
 		CLASS_INVARIANT_DECLARE;
 
 	public:
@@ -41,7 +56,11 @@ namespace CoreTools
 		std::shared_ptr<ResultType> MakeEntity(Args&&... args);
 
 	private:
-		SINGLETON_MEMBER_DECLARE(EntityManager);
+		using EntityManagerUniquePtr = std::unique_ptr<EntityManager>;
+
+	private:
+		static EntityManagerUniquePtr sm_EntityManager;
+		IMPL_TYPE_DECLARE(EntityManager);
 	};
 }
 

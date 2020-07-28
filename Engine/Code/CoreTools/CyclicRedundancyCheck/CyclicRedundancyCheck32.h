@@ -21,7 +21,7 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		uint32_t GetCyclicRedundancyCheck32() const;
+		uint32_t GetCyclicRedundancyCheck32() const noexcept;
 
 	private:
 		void Calculation(const char* data, int length);

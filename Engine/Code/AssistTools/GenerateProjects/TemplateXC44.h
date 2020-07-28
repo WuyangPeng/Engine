@@ -14,8 +14,7 @@ namespace AssistTools
 	class ASSIST_TOOLS_DEFAULT_DECLARE TemplateXC44
 	{
 	public:
-		TemplateXC44 (const char* projectName);
-		~TemplateXC44 ();
+		TemplateXC44 (const char* projectName); 
 
 	private:
 		enum { NUM_LINES = 574 };

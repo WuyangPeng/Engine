@@ -18,6 +18,9 @@ using std::string;
 using std::make_shared;
 using boost::property_tree::ptree_error;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::LogImpl
 	::LogImpl()
 	:m_AppenderManager{ make_shared<AppenderManager>() }, m_LogAppenderIOManagerContainer{}, m_ErrorLogAppenderIOManager{}
@@ -26,7 +29,12 @@ CoreTools::LogImpl
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
+#include STSTEM_WARNING_POP
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26487)
 // private
 void CoreTools::LogImpl
 	::InitIOManager()
@@ -52,6 +60,9 @@ bool CoreTools::LogImpl
 {
 	try
 	{
+ 
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
 		if (m_AppenderManager != nullptr &&	m_LogAppenderIOManagerContainer.find(LogLevel::Disabled) == m_LogAppenderIOManagerContainer.cend())
 		{
 			return true;
@@ -60,6 +71,7 @@ bool CoreTools::LogImpl
 		{
 			return false;
 		}
+		#include STSTEM_WARNING_POP
 	}
 	catch (...)
 	{
@@ -97,7 +109,7 @@ void CoreTools::LogImpl
 
 		ResetIOManager();
 	}
-	catch (ptree_error& error)
+	catch (const ptree_error& error)
 	{
 		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
 			<< error.what()
@@ -159,7 +171,7 @@ CoreTools::LogAppenderIOManager& CoreTools::LogImpl
 {
 	try
 	{
-		auto iter = m_LogAppenderIOManagerContainer.find(type);
+		const auto iter = m_LogAppenderIOManagerContainer.find(type);
 
 		if (iter != m_LogAppenderIOManagerContainer.cend())
 		{
@@ -172,7 +184,7 @@ CoreTools::LogAppenderIOManager& CoreTools::LogImpl
 	}
 	catch (...)
 	{
-		CORE_TOOLS_ASSERTION_0(false, "日志库出现了致命错误！");
+		 
 	}
 
 	return m_ErrorLogAppenderIOManager;
@@ -186,3 +198,4 @@ void CoreTools::LogImpl
 	m_AppenderManager->ReloadAppenderFile();
 }
 
+#include STSTEM_WARNING_POP

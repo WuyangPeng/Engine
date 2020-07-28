@@ -12,10 +12,14 @@
 #include <cassert>
 #include <cstdio>
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26451)
 AssistTools::LoadBmp
 	::LoadBmp (const System::TChar* name, int& width, int& height, unsigned char*& data)
 {
-    HBITMAP hImage = (HBITMAP) LoadImage(NULL, name, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    HBITMAP hImage = static_cast<HBITMAP>( LoadImage(NULL, name, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE | LR_CREATEDIBSECTION));
     assert(hImage);
 
     DIBSECTION dibSection;
@@ -29,3 +33,4 @@ AssistTools::LoadBmp
 
     DeleteObject(hImage);
 } 
+#include STSTEM_WARNING_POP

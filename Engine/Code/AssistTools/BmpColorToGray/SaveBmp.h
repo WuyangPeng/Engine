@@ -14,7 +14,7 @@ namespace AssistTools
 	class ASSIST_TOOLS_DEFAULT_DECLARE SaveBmp
 	{
 	public:
-		SaveBmp (const char* name, int width, int height, unsigned char* data);
+		SaveBmp (const char* name, int width, int height, unsigned char* data) noexcept;
 	};
 }
 

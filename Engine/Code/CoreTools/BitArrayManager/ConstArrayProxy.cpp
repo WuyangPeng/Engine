@@ -13,14 +13,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::ConstArrayProxy
-	::ConstArrayProxy(const BitArray2D& bitArray2D, int position)
+	::ConstArrayProxy(const BitArray2D& bitArray2D, int position) noexcept
 	:m_Array{ bitArray2D }, m_Position{ position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::ConstArrayProxy
-	::ConstArrayProxy(const ConstArrayProxy& rhs)
+	::ConstArrayProxy(const ConstArrayProxy& rhs) noexcept
 	:m_Array{ rhs.m_Array }, m_Position{ rhs.m_Position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -38,7 +38,7 @@ bool CoreTools::ConstArrayProxy
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::ConstBitProxy CoreTools::ConstArrayProxy
-	::operator[](int position) const
+	::operator[](int position) const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

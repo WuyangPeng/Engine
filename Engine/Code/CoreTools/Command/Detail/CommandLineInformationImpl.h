@@ -25,7 +25,7 @@ namespace CoreTools
 	public:
 		CommandLineInformationImpl(int argumentsNumber, char** arguments);
 		explicit CommandLineInformationImpl(const char* commandLine);
-		~CommandLineInformationImpl();
+	 
 
 		CLASS_INVARIANT_DECLARE;
 

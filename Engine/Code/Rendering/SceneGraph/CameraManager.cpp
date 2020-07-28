@@ -16,50 +16,40 @@
 
 using std::string;
 using std::make_shared;
+using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(Rendering, CameraManager);
+SINGLETON_GET_PTR_DEFINE(Rendering, CameraManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetRenderingMutex() }
+Rendering::CameraManager::CameraManagerUniquePtr Rendering::CameraManager
+::sm_CameraManager{ };
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_CameraManagerMutex }
+void Rendering::CameraManager
+::Create()
+{
+	sm_CameraManager = make_unique<Rendering::CameraManager>(CameraManagerCreate::Init);
+}
 
-SINGLETON_INITIALIZE_DEFINE(Rendering,CameraManager)
+void Rendering::CameraManager
+::Destroy() noexcept
+{
+	sm_CameraManager.reset();
+}
 
 Rendering::CameraManager
-	::CameraManager()
+::CameraManager(CameraManagerCreate cameraManagerCreate)
 	:m_Impl{ make_shared<ImplType>() }
 {
-	MUTEX_ENTER_MEMBER;
+	SYSTEM_UNUSED_ARG(cameraManagerCreate);
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::CameraManager
-	::~CameraManager()
-{
-	MUTEX_ENTER_MEMBER;
-
-	RENDERING_SELF_CLASS_IS_VALID_1;	
-}
-
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Rendering::CameraManager
-	::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-
-	if(m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, CameraManager)
 
 void Rendering::CameraManager
 	::SetDefaultDepthType(RendererTypes type)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -69,7 +59,7 @@ void Rendering::CameraManager
 Rendering::DepthType Rendering::CameraManager
 	::GetDepthType() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

@@ -28,11 +28,11 @@ namespace CoreTools
 		static void DeleteMutex(DllMutex* mutex);
 
 	private:
-		static void JudgeUserSelectionWithTChar(const System::String& message);
-		static void JudgeUserSelectionWithChar(const std::string& message);
+		static void JudgeUserSelectionWithTChar(const System::String& message) noexcept;
+		static void JudgeUserSelectionWithChar(const std::string& message) noexcept;
 
 	private:
-		static void JudgeSelection(System::DialogBoxCommand selection);
+		static void JudgeSelection(System::DialogBoxCommand selection) noexcept;
 	};
 }
 

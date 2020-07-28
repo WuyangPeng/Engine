@@ -26,7 +26,7 @@ namespace Imagics
 		// (x,y,z) stored in a linear array.  Voxel (x,y,z) is stored in the
 		// array at location x+xbound*(y+ybound*z).  The caller is responsible
 		// for deleting data if it was dynamically allocated.
-		ExtractSurfaceTetra (int xBound, int yBound, int zBound, int* data);
+		ExtractSurfaceTetra (int xBound, int yBound, int zBound, int* data) noexcept;
 		
 		// The extraction assumes linear interpolation (decomposition of image
 		// domain into tetrahedra).  The triangle ordering is selected so that
@@ -91,11 +91,11 @@ namespace Imagics
                                  int z1, int f1, int x2, int y2, int z2, int f2, int x3, int y3, int z3, int f3);
 		
 		// Function and gradient evaluated using trilinear interpolation.
-		float GetFunction (const Mathematics::Vector3Df& P) const;
+		float GetFunction (const Mathematics::Vector3Df& P) const noexcept;
 		Mathematics::Vector3Df GetGradient (const Mathematics::Vector3Df& P) const;
 		
 		// For unique indexing of vertices.
-		int mNextIndex;
+		int mNextIndex = 0;
 		
 		int mXBound, mYBound, mZBound, mXYBound, mXYZBound;
 		int* mData;

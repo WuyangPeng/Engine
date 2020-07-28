@@ -20,7 +20,7 @@
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Base/SingletonDetail.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
-
+CORE_TOOLS_EXPORT_UNIQUE_PTR(SmartPointerManager);
 CORE_TOOLS_EXPORT_SHARED_PTR(SmartPointerManagerImpl);
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
@@ -29,9 +29,23 @@ namespace CoreTools
 	class CORE_TOOLS_DEFAULT_DECLARE SmartPointerManager : public CoreTools::Singleton<SmartPointerManager>
 	{
 	public:
-		SINGLETON_INITIALIZE_DECLARE(SmartPointerManager);
+		NON_COPY_CLASSES_TYPE_DECLARE(SmartPointerManager);
+		using ParentType = Singleton<SmartPointerManager>;
+
+	private:
+		enum class SmartPointerManagerCreate
+		{
+			Init,
+		};
 
 	public:
+		explicit SmartPointerManager(SmartPointerManagerCreate smartPointerManagerCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(SmartPointerManager);
+
 		CLASS_INVARIANT_DECLARE;
 
 		int CopyIncreaseReference(const void* data);
@@ -41,7 +55,12 @@ namespace CoreTools
 		// 用于判断this指针是否为SmartPointerManager创建
 		bool IsSmartPointer(const void* data) const;
 
-		SINGLETON_MEMBER_DECLARE(SmartPointerManager);
+	private:
+		using SmartPointerManagerUniquePtr = std::unique_ptr<SmartPointerManager>;
+
+	private:
+		static SmartPointerManagerUniquePtr sm_SmartPointerManager;
+		IMPL_TYPE_DECLARE(SmartPointerManager);
 	};
 }
 

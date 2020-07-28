@@ -8,9 +8,13 @@
 
 #include "CyclicRedundancyCheckCCITT.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 
 CoreTools::CyclicRedundancyCheckCCITT
-	::CyclicRedundancyCheckCCITT(const char* data, int length)
+	::CyclicRedundancyCheckCCITT(const char* data, int length) noexcept
 	:m_CyclicRedundancyCheck{ 0 }
 {
 	Calculation(data, length);
@@ -20,7 +24,7 @@ CoreTools::CyclicRedundancyCheckCCITT
 
 // private
 void CoreTools::CyclicRedundancyCheckCCITT
-	::Calculation(const char* data, int length)
+	::Calculation(const char* data, int length) noexcept
 {
 	for (auto i = 0; i < length; ++i)
 	{
@@ -29,7 +33,7 @@ void CoreTools::CyclicRedundancyCheckCCITT
 }
 
 uint16_t CoreTools::CyclicRedundancyCheckCCITT
-	::GetCCITT(uint16_t cyclicRedundancyCheck, uint16_t value)
+	::GetCCITT(uint16_t cyclicRedundancyCheck, uint16_t value) noexcept
 {
 	constexpr uint32_t bitSize{ 8 };
 	value <<= bitSize;
@@ -50,7 +54,7 @@ uint16_t CoreTools::CyclicRedundancyCheckCCITT
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheckCCITT)
 
 uint16_t CoreTools::CyclicRedundancyCheckCCITT
-::GetCyclicRedundancyCheck() const
+::GetCyclicRedundancyCheck() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -58,3 +62,4 @@ uint16_t CoreTools::CyclicRedundancyCheckCCITT
 }
 
 
+#include STSTEM_WARNING_POP

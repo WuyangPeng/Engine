@@ -13,8 +13,18 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26489)
+
 CoreTools::MD5ContextImpl
-	::MD5ContextImpl()
+	::MD5ContextImpl()  
 	:m_Buffer{}, m_LowBits{ 0 }, m_HighBits{ 0 }, m_In{}, m_Source{ nullptr }, m_Length{ 0 }, m_Status{ MD5ContextStatus::Disabled }
 {
 	MD5Init();
@@ -70,7 +80,7 @@ void CoreTools::MD5ContextImpl
 	m_Length = length;
 
 	// 更新位计数      
-	auto originalLength = UpdateBitCount();
+	const auto originalLength = UpdateBitCount();
 
 	// 处理任何导致奇数大小的块
 	if (HandleOddSizedChunks(originalLength))
@@ -85,10 +95,10 @@ void CoreTools::MD5ContextImpl
 
 // private
 uint32_t CoreTools::MD5ContextImpl
-	::UpdateBitCount()
+	::UpdateBitCount() noexcept
 {
 	// 计算出信息位长，结果存储在m_LowBits和m_HighBits中。
-	auto originalLowBits = m_LowBits;
+	const auto originalLowBits = m_LowBits;
 	m_LowBits += (m_Length << 3);
 	if (m_LowBits < (static_cast<uint64_t>(m_Length) << 3))
 	{
@@ -105,14 +115,14 @@ uint32_t CoreTools::MD5ContextImpl
 
 // private
 bool CoreTools::MD5ContextImpl
-	::HandleOddSizedChunks(uint32_t originalLength)
+	::HandleOddSizedChunks(uint32_t originalLength) noexcept
 {
 	if (originalLength != 0)
 	{
 		// 上一个缓冲区还有未处理完的数据
 		auto ptr = reinterpret_cast<uint8_t*>(m_In.data()) + originalLength;
 
-		auto remainLength = sm_DealBufferByte - originalLength;
+		const auto remainLength = sm_DealBufferByte - originalLength;
 		if (m_Length < remainLength)
 		{
 			// 这个缓冲区还是没有填满数据，直接返回。
@@ -135,7 +145,7 @@ bool CoreTools::MD5ContextImpl
 
 // private
 void CoreTools::MD5ContextImpl
-	::ProcessDataIn64Byte()
+	::ProcessDataIn64Byte() noexcept
 {
 	while (sm_DealBufferByte <= m_Length)
 	{
@@ -151,7 +161,7 @@ void CoreTools::MD5ContextImpl
 
 // private
 void CoreTools::MD5ContextImpl
-	::InByteReverse()
+	::InByteReverse() noexcept
 {
 #ifdef SYSTEM_BIG_ENDIAN
 	Endian::SwapByteOrder(4, sm_DealBufferByte / 4, m_In.data());
@@ -160,7 +170,7 @@ void CoreTools::MD5ContextImpl
 
 // private
 void CoreTools::MD5ContextImpl
-	::BufferByteReverse()
+	::BufferByteReverse() noexcept
 {
 #ifdef SYSTEM_BIG_ENDIAN
 	Endian::SwapByteOrder(4, 1, m_Buffer.data());
@@ -169,7 +179,7 @@ void CoreTools::MD5ContextImpl
 
 // private
 void CoreTools::MD5ContextImpl
-	::MD5Transform()
+	::MD5Transform() noexcept
 {
 	auto a = m_Buffer[0];
 	auto b = m_Buffer[1];
@@ -251,36 +261,8 @@ void CoreTools::MD5ContextImpl
 }
 
 // private
-uint32_t CoreTools::MD5ContextImpl
-	::CoreFunction1(uint32_t x, uint32_t y, uint32_t z)
-{
-	return  (z ^ (x & (y ^ z)));
-}
-
-// private
-uint32_t CoreTools::MD5ContextImpl
-	::CoreFunction2(uint32_t x, uint32_t y, uint32_t z)
-{
-	return CoreFunction1(z, x, y);
-}
-
-// private
-uint32_t CoreTools::MD5ContextImpl
-	::CoreFunction3(uint32_t x, uint32_t y, uint32_t z)
-{
-	return (x ^ y ^ z);
-}
-
-// private
-uint32_t CoreTools::MD5ContextImpl
-	::CoreFunction4(uint32_t x, uint32_t y, uint32_t z)
-{
-	return (y ^ (x | ~z));
-}
-
-// private
 void CoreTools::MD5ContextImpl
-	::MD5Step(CoreFunction function, uint32_t& w, uint32_t x, uint32_t y, uint32_t z, uint32_t data, uint32_t s)
+	::MD5Step(CoreFunction function, uint32_t& w, uint32_t x, uint32_t y, uint32_t z, uint32_t data, uint32_t s) noexcept
 {
 	w += function(x, y, z) + data;
 	w = (w << s) | (w >> (32 - s));
@@ -335,3 +317,4 @@ void CoreTools::MD5ContextImpl
 	MD5Init();
 }
 
+#include STSTEM_WARNING_POP

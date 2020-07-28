@@ -30,8 +30,8 @@ namespace CoreTools
 		using Suite = CoreTools::Suite;
 
 	public:
-		CMainFunctionTestingHelper(int argc, char* argv[]);
-		CMainFunctionTestingHelper(int argc, char* argv[],const std::string& suiteName);
+		CMainFunctionTestingHelper(int argc, char** argv);
+		CMainFunctionTestingHelper(int argc, char** argv,const std::string& suiteName);
 		~CMainFunctionTestingHelper() = 0; 
 
 		CMainFunctionTestingHelper(const CMainFunctionTestingHelper& rhs) = delete;
@@ -47,7 +47,7 @@ namespace CoreTools
 	protected:
 		void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestPtr& unitTest);
 
-		bool IsPrintRun() const;
+		bool IsPrintRun() const noexcept;
 
 		int RunSuite();
 

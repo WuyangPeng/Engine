@@ -42,8 +42,8 @@ namespace CoreTools
 		void Read(size_t itemSize, void* data);
 		void Read(size_t itemSize, size_t itemsNumber, void* data);
 
-		int GetCharacter() noexcept;
-		bool UnGetCharacter(int character) noexcept;
+		int GetCharacter();
+		bool UnGetCharacter(int character);
 		std::string GetString(int count);
 		bool IsEOF() noexcept;
 		bool Flush() noexcept;

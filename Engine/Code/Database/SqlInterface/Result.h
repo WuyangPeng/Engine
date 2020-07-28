@@ -20,7 +20,7 @@ DATABASE_EXPORT_SHARED_PTR(ResultImpl);
 
 namespace Database
 {
-	class DATABASE_DEFAULT_DECLARE Result : private boost::noncopyable
+	class DATABASE_DEFAULT_DECLARE Result  
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(Result);
@@ -29,6 +29,11 @@ namespace Database
 
 	public:
 		explicit Result(const ConfigurationStrategy& configurationStrategy);
+		virtual ~Result() noexcept = default;
+		Result(const Result&) = delete;
+		Result& operator=(const Result&) = delete;
+		Result(Result&&) noexcept = default;
+		Result& operator=(Result&&) noexcept = default;
 
 		CLASS_INVARIANT_DECLARE;
 

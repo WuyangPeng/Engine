@@ -46,9 +46,24 @@
     <Filter Include="资源文件\References\Cpp\Boost">
       <UniqueIdentifier>{25651feb-7b31-43b7-9869-2bd8c73b8a00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\References\OperatingSystem">
+      <UniqueIdentifier>{b7d2903d-91eb-4303-9cc2-bd5a34d55b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign">
+      <UniqueIdentifier>{a24c8e95-2618-47f6-9791-1b4bedc272d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign">
+      <UniqueIdentifier>{afe14320-3e3d-4c8c-b017-c437ed6bcaee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages">
+      <UniqueIdentifier>{1e81bf70-b030-4254-9ca7-11bc469bf863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs">
+      <UniqueIdentifier>{9803534a-88d9-48d5-960e-774dc6d35e43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-	<Text Include="Resource\Todo\Level 0.txt">
+    <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 1.txt">
@@ -77,23 +92,23 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>  
-	<Text Include="Resource\ReadMe.txt">
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="Resource\Schedule.txt">
       <Filter>资源文件</Filter>
-    </Text>	
-    <Text Include="Resource\Library.txt">
-      <Filter>资源文件</Filter>
     </Text>
     <Text Include="Resource\Project.txt">
       <Filter>资源文件</Filter>
-    </Text>    
+    </Text>
+    <Text Include="Resource\Library.txt">
+      <Filter>资源文件</Filter>
+    </Text>
     <Text Include="Resource\LearningLibrary.txt">
       <Filter>资源文件</Filter>
     </Text>
-	<Text Include="Resource\References\Cpp\Cpp.txt">
+    <Text Include="Resource\References\Cpp\Cpp.txt">
       <Filter>资源文件\References\Cpp</Filter>
     </Text>
     <Text Include="Resource\References\Cpp\Primary\Primary.txt">
@@ -102,30 +117,36 @@
     <Text Include="Resource\References\Cpp\Primary\Thinking in C++.txt">
       <Filter>资源文件\References\Cpp\Primary</Filter>
     </Text>
-	 <Text Include="Resource\References\Cpp\Primary\C++ Primer.txt">
+    <Text Include="Resource\References\Cpp\Primary\C++ Primer.txt">
       <Filter>资源文件\References\Cpp\Primary</Filter>
     </Text>
-	<Text Include="Resource\References\OperatingSystem.txt">
-      <Filter>资源文件\References</Filter>
+    <Text Include="Resource\References\OperatingSystem\OperatingSystem.txt">
+      <Filter>资源文件\References\OperatingSystem</Filter>
     </Text>
-    <Text Include="Resource\References\GameDesign.txt">
-      <Filter>资源文件\References</Filter>
+    <Text Include="Resource\References\GameDesign\GameDesign.txt">
+      <Filter>资源文件\References\GameDesign</Filter>
     </Text>
-    <Text Include="Resource\References\SoftwareDesign.txt">
-      <Filter>资源文件\References</Filter>
-    </Text> 
-    <Text Include="Resource\References\OtherLanguages.txt">
-      <Filter>资源文件\References</Filter>
-    </Text>       
-    <Text Include="Resource\References\Libs.txt">
-      <Filter>资源文件\References</Filter>
-    </Text>   
+    <Text Include="Resource\References\SoftwareDesign\SoftwareDesign.txt">
+      <Filter>资源文件\References\SoftwareDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\OtherLanguages.txt">
+      <Filter>资源文件\References\OtherLanguages</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Libs.txt">
+      <Filter>资源文件\References\Libs</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ How to Program.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\Programming Principles and Practice Using C++.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-	<ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h">
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h">
       <Filter>头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineFwd.h">
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineFwd.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineDll.h">
@@ -133,23 +154,23 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineExport.h">
       <Filter>头文件</Filter>
-    </ClInclude>    
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineImport.h">
       <Filter>头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineNoImport.h">
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineNoImport.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngineLib.h">
       <Filter>头文件</Filter>
-    </ClInclude>    
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-	<ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllLib.cpp">
+    <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllLib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllMain.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>    
+    </ClCompile>
   </ItemGroup>
 </Project>

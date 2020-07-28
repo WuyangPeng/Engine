@@ -12,24 +12,40 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+
+using namespace std::literals;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::BaseEntity
-	::BaseEntity()
+::BaseEntity()
 	:m_EntityID{ ENTITY_MANAGER_SINGLETON.NextUniqueID() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::BaseEntity
-	::~BaseEntity()
+::~BaseEntity() noexcept
 {
-	if (!ENTITY_MANAGER_SINGLETON.Unregister(m_EntityID))
+	EXCEPTION_TRY
 	{
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			<< SYSTEM_TEXT("×¢ÏúEntityID = ")
-			<< m_EntityID
-			<< SYSTEM_TEXT(" Ê§°Ü¡£")
-			<< LOG_SINGLETON_TRIGGER_ASSERT;
+		
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26447)
+		if (!ENTITY_MANAGER_SINGLETON.Unregister(m_EntityID))
+		{
+			LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+				<< SYSTEM_TEXT("×¢ÏúEntityID = ")
+				<< m_EntityID
+				<< SYSTEM_TEXT(" Ê§°Ü¡£")
+				<< LOG_SINGLETON_TRIGGER_ASSERT;
+		}
+	#include STSTEM_WARNING_POP
 	}
+	EXCEPTION_ALL_CATCH(CoreTools)
+
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -37,7 +53,7 @@ CoreTools::BaseEntity
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BaseEntity)
 
 uint64_t CoreTools::BaseEntity
-	::GetEntityID() const
+::GetEntityID() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -45,11 +61,11 @@ uint64_t CoreTools::BaseEntity
 }
 
 void CoreTools::BaseEntity
-	::Register()
+::Register()
 {
 	if (!ENTITY_MANAGER_SINGLETON.Register(shared_from_this()))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("ÖØ¸´×¢²áEntity"));
+		THROW_EXCEPTION(SYSTEM_TEXT("ÖØ¸´×¢²áEntity"s));
 	}
 	else
 	{
@@ -58,8 +74,9 @@ void CoreTools::BaseEntity
 }
 
 void CoreTools::BaseEntity
-	::DoRegister()
+::DoRegister()
 {
-
+	CoreTools::DoNothing();
 }
 
+#include STSTEM_WARNING_POP

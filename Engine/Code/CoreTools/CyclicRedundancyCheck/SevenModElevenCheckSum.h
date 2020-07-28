@@ -21,7 +21,7 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetCheckSum() const;
+		int GetCheckSum() const noexcept;
 
 	private:
 		void Calculation(const char* data, int length);

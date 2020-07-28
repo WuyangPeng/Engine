@@ -106,7 +106,7 @@ uint64_t CoreTools::Object
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要注册的指针不是由SmartPointer系统创建。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("要注册的指针不是由SmartPointer系统创建。"s));
 	}
 }
 
@@ -129,7 +129,7 @@ void CoreTools::Object
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要写入的指针不是由SmartPointer系统创建。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("要写入的指针不是由SmartPointer系统创建。"s));
 	}
 
 	// 写入对象的名字。
@@ -174,7 +174,7 @@ void CoreTools::Object
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要载入的指针不是由SmartPointer系统创建。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("要载入的指针不是由SmartPointer系统创建。"s));
 	}
 
 	// 读取对象名字。

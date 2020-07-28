@@ -60,3 +60,4 @@
 7. 定义宏为空时，使用(void)0，可防止宏被用作右值。
 8. 声明一个类或函数时，使用包含头文件的方法。如果一个库很大，应该提供一个头文件的简写形式。
 9. 使用min和max表示[min,max]区间，使用begin和end表示[begin,end)区间。
+10.使用move和forward的代码应该使用std::move和std::forward而不使用using声明。这样做可以避免潜在的名字冲突。

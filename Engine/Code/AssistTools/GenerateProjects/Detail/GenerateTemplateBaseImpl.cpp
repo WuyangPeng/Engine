@@ -12,10 +12,16 @@
 #include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-
-#include <boost/lexical_cast.hpp>
-#include <boost/timer/timer.hpp>
+#include "System/Helper/PragmaWarning/LexicalCast.h"
+#include "System/Helper/PragmaWarning/Timer.h"
+ 
 #include "System/Helper/PragmaWarning/PosixTime.h" 
+
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
+using namespace std::literals;
 
 const System::String AssistTools::GenerateTemplateBaseImpl
 	::sm_DefaultEndYear(SYSTEM_TEXT("EndYear"));	
@@ -51,11 +57,7 @@ AssistTools::GenerateTemplateBaseImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-AssistTools::GenerateTemplateBaseImpl
-	::~GenerateTemplateBaseImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateBaseImpl)
 
@@ -71,8 +73,8 @@ const AssistTools::GenerateTemplateBaseImpl::VariableType AssistTools::GenerateT
 	System::String dateFormat(SYSTEM_TEXT("%1%/%2%/%3%"));
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::Date), CoreTools::CustomTime::GetSystemTimeDescribe(dateFormat)));
 
-	boost::posix_time::ptime nowTime = boost::posix_time::second_clock::local_time();
-	boost::posix_time::ptime::time_duration_type timeOfDay = nowTime.time_of_day();
+	const boost::posix_time::ptime nowTime = boost::posix_time::second_clock::local_time();
+	const boost::posix_time::ptime::time_duration_type timeOfDay = nowTime.time_of_day();
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::Hour), boost::lexical_cast<System::String>(timeOfDay.hours())));
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::Minute), boost::lexical_cast<System::String>(timeOfDay.minutes())));
 
@@ -82,7 +84,7 @@ const AssistTools::GenerateTemplateBaseImpl::VariableType AssistTools::GenerateT
 const System::String AssistTools::GenerateTemplateBaseImpl
 	::GetOriginal(GenerateTemplateReplace flag) const
 {
-	ReplaceConstIter iter = m_Replace.find(flag);
+	const ReplaceConstIter iter = m_Replace.find(flag);
 
 	if (iter != m_Replace.end())
 	{
@@ -119,10 +121,11 @@ const System::String AssistTools::GenerateTemplateBaseImpl
 		case AssistTools::GenerateTemplateReplace::InterfaceName:
 			return sm_DefaultInterfaceName;
 		default:
-			THROW_EXCEPTION(SYSTEM_TEXT("错误的版权信息标识。"));
+			THROW_EXCEPTION(SYSTEM_TEXT("错误的版权信息标识。"s));
 		}
 	}
 }
+#include STSTEM_WARNING_POP
 
 /*
 示例模板：

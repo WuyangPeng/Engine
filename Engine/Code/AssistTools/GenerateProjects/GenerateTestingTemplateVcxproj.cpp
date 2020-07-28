@@ -14,7 +14,7 @@ AssistTools::GenerateTestingTemplateVcxproj
 	::GenerateTestingTemplateVcxproj(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName,
                                      const System::String& includeName, const System::String& testingIncludeName,
 									 const System::String& debugLibName, const System::String& releaseLibName)
-	:m_Impl(new ImplType(templateFileName,projectName,moduleName,includeName,testingIncludeName,debugLibName,releaseLibName))
+	:m_Impl(std::make_shared<ImplType>(templateFileName,projectName,moduleName,includeName,testingIncludeName,debugLibName,releaseLibName))
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }

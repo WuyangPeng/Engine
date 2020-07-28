@@ -14,18 +14,21 @@ template<typename R>
 R CoreTools::CommandArgumentContainer
 	::Find(const std::string& argumentsName, R(CommandArgument::*function)() const) const
 {
-	auto iter = m_CommandArgument.find(argumentsName);
+	using namespace std::literals;
 
-	if (iter != m_CommandArgument.cend())
+	if (function != nullptr)
 	{
-		const auto& commandArgument = iter->second;
+		const auto iter = m_CommandArgument.find(argumentsName);
 
-		return (commandArgument.*function)();
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("未找到命令行索引！"));
-	}
+		if (iter != m_CommandArgument.cend())
+		{
+			const auto& commandArgument = iter->second;
+
+			return (commandArgument.*function)();
+		}
+	}	
+	
+	THROW_EXCEPTION(SYSTEM_TEXT("未找到命令行索引！"s));	
 }
 
 #endif // CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_DETAIL_H

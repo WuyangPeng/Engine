@@ -19,13 +19,7 @@ CoreTools::CommonCopyFileTools
 	m_OutFile.Write(m_Buffer.size(), m_Buffer.data());
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::CommonCopyFileTools
-	::~CommonCopyFileTools()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+} 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CommonCopyFileTools)
 

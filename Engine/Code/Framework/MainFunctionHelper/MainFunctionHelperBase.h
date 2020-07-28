@@ -66,7 +66,7 @@ namespace Framework
 		void DestroyInitTerm();
 		void DestroyMemory() noexcept(CoreTools::g_MemoryNoexcept);
 		void DestroyLog() noexcept;
-		void DestroyUniqueIDManager();
+		void DestroyUniqueIDManager() noexcept;
 
 		virtual int DoRun() = 0;
 		virtual void MemoryCreate() noexcept(CoreTools::g_MemoryNoexcept);

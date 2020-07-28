@@ -19,19 +19,22 @@
 
 #include "CoreTools/FileManager/Flags/BufferIOFlags.h"
 
-#include <boost/noncopyable.hpp> 
-
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE BufferIOImpl : private boost::noncopyable
+	class CORE_TOOLS_HIDDEN_DECLARE BufferIOImpl 
 	{
 	public:
 		using ClassType = BufferIOImpl;
 
 	public:
 		// 调用者提供缓冲区的内存，以及是否读取或写入，并负责管理内存。缓冲器不必进行动态分配。
-		BufferIOImpl(int bytesTotal, BufferIO type);
-		virtual ~BufferIOImpl();
+		BufferIOImpl(int bytesTotal, BufferIO type) noexcept;
+		virtual ~BufferIOImpl() noexcept = default;
+
+		BufferIOImpl(const BufferIOImpl&) = delete;
+		BufferIOImpl& operator=(const BufferIOImpl&) = delete;
+		BufferIOImpl(BufferIOImpl&&) noexcept = delete;
+		BufferIOImpl& operator=(BufferIOImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

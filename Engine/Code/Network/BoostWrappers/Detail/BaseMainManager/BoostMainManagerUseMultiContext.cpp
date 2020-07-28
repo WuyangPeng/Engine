@@ -41,7 +41,7 @@ void Network::BoostMainManagerUseMultiContext
 
 	if (m_Container.empty())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("boost 多环境数量为零！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("boost 多环境数量为零！"s));
 	}
 }
 

@@ -15,6 +15,7 @@
 
 using std::string;
 using std::make_shared;
+using namespace std::literals;
 
 CoreTools::NumberCommandArgument
 	::NumberCommandArgument(int index, const string& name, const string& value)
@@ -22,12 +23,7 @@ CoreTools::NumberCommandArgument
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
-CoreTools::NumberCommandArgument
-	::~NumberCommandArgument()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, NumberCommandArgument)
 
@@ -60,11 +56,11 @@ const string CoreTools::NumberCommandArgument
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不是字符串！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不是字符串！"s));
 }
 
 bool CoreTools::NumberCommandArgument
-	::IsInteger() const
+	::IsInteger() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -72,7 +68,7 @@ bool CoreTools::NumberCommandArgument
 }
 
 bool CoreTools::NumberCommandArgument
-	::IsFloat() const
+	::IsFloat() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -80,7 +76,7 @@ bool CoreTools::NumberCommandArgument
 }
 
 bool CoreTools::NumberCommandArgument
-	::IsDouble() const
+	::IsDouble() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -88,7 +84,7 @@ bool CoreTools::NumberCommandArgument
 }
 
 bool CoreTools::NumberCommandArgument
-	::IsString() const
+	::IsString() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -96,7 +92,7 @@ bool CoreTools::NumberCommandArgument
 }
 
 bool CoreTools::NumberCommandArgument
-	::IsNoValue() const
+	::IsNoValue() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -118,5 +114,5 @@ void CoreTools::NumberCommandArgument
 
 	SYSTEM_UNUSED_ARG(value);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不能添加值！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不能添加值！"s));
 }

@@ -10,6 +10,7 @@
 #include "Memory.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning.h"
 
 template <typename T>
 T* CoreTools::Memory
@@ -30,6 +31,8 @@ template <typename T>
 void CoreTools::Memory
 	::CallConstructor(T*& data, int bound)
 {
+	#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26481)
 	size_t constructorSuccess{ 0 };
 	try
 	{
@@ -47,6 +50,7 @@ void CoreTools::Memory
 		DeleteArray(data, constructorSuccess);
 		throw;
 	}
+	#include STSTEM_WARNING_POP
 }
 
 template <typename T>
@@ -295,8 +299,12 @@ void CoreTools::Memory
 	{
 		CORE_TOOLS_ASSERTION_2(MEMORY_MANAGER_SINGLETON.GetMemBlockDimensions(data) == 0, "维度不匹配！");
 
+		
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26486)
 		// 调用T的析构函数。如果T是指针类型，编译器不会对析构函数的调用生成任何代码。
 		data->~T();
+#include STSTEM_WARNING_POP
 
 		// 从内存映射中移除T
 		MEMORY_MANAGER_SINGLETON.Delete(data);
@@ -328,6 +336,9 @@ template <typename T>
 void CoreTools::Memory
 	::DeleteArray(T*& data, size_t constructorSuccess)
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26493)
 	// 调用T的析构函数。如果T是指针类型，编译器不会对析构函数的调用生成任何代码。
 	if (0 < constructorSuccess)
 	{	 
@@ -338,6 +349,7 @@ void CoreTools::Memory
 			++object;
 		}
 	}
+#include STSTEM_WARNING_POP
 
 	// 从内存映射中移除T[]
 	MEMORY_MANAGER_SINGLETON.Delete(data);

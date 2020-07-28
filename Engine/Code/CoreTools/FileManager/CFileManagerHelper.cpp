@@ -13,11 +13,13 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+using namespace std::literals;
+
 // static
 const CoreTools::FileBuffer CoreTools::CFileManagerHelper
 	::LoadFromFile(const String& fileName, bool binaryFile)
 {
-	String mode{ binaryFile ? SYSTEM_TEXT("rb") : SYSTEM_TEXT("rt") };
+	String mode{ binaryFile ? SYSTEM_TEXT("rb"s) : SYSTEM_TEXT("rt"s) };
 
 	CFileManagerImpl manager{ fileName,mode };
 
@@ -37,7 +39,7 @@ void CoreTools::CFileManagerHelper
 	CORE_TOOLS_ASSERTION_0(buffer != nullptr, "传入的指针为空！");
 	CORE_TOOLS_ASSERTION_2(0 < bufferSize, "传入的缓冲区大小小于或等于零！");
 
-	String mode{ binaryFile ? SYSTEM_TEXT("wb") : SYSTEM_TEXT("wt") };
+	String mode{ binaryFile ? SYSTEM_TEXT("wb"s) : SYSTEM_TEXT("wt"s) };
 
 	CFileManagerImpl manager{ fileName,mode };
 
@@ -52,7 +54,7 @@ void CoreTools::CFileManagerHelper
 	CORE_TOOLS_ASSERTION_0(buffer != nullptr, "传入的指针为空！");
 	CORE_TOOLS_ASSERTION_2(0 < bufferSize, "传入的缓冲区大小小于或等于零！");
 
-	String mode{ binaryFile ? SYSTEM_TEXT("ab") : SYSTEM_TEXT("at") };
+	String mode{ binaryFile ? SYSTEM_TEXT("ab"s) : SYSTEM_TEXT("at"s) };
 
 	CFileManagerImpl manager{ fileName,mode };
 

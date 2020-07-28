@@ -42,7 +42,7 @@ void CoreTools::FileInStream
 	// 获取该文件的版本。
 	auto version = Version::GetVersion();
 
-	auto length = version.length();
+	const auto length = version.length();
 	if (readSize < boost::numeric_cast<int>(length + 1))
 	{
 		THROW_EXCEPTION(fileName + SYSTEM_TEXT("版本字符串不存在或者存储的版本字符串不够大"));
@@ -57,7 +57,7 @@ void CoreTools::FileInStream
 	// 比较所需的文件版本。
 	if (fileVersion != version)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("版本字符串不匹配！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("版本字符串不匹配！"s));
 	}
 
 	// 从缓冲区重构场景图。
@@ -66,11 +66,7 @@ void CoreTools::FileInStream
 	m_InTopLevel = stream.GetTopLevel();
 }
 
-CoreTools::FileInStream
-	::~FileInStream()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, FileInStream)
 

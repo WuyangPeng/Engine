@@ -83,7 +83,7 @@ namespace CoreTools
 		using ClassType = CyclicRedundancyCheck32Table;
 
 	public:
-		CyclicRedundancyCheck32Table();
+		CyclicRedundancyCheck32Table() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -94,7 +94,7 @@ namespace CoreTools
 
 	private:
 		void Calculate();
-		uint32_t Calculate32(uint32_t index);
+		uint32_t Calculate32(uint32_t index) noexcept;
 
 	private:
 		std::array<uint32_t, sm_TableSize> m_Table;

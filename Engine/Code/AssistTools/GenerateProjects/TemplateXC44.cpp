@@ -10,12 +10,22 @@
 #include "System/Helper/PragmaWarning/Disable4996.h"
 
 #include <fstream>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26461)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
 AssistTools::TemplateXC44
 	::TemplateXC44 (const char* projectName)
 {
-    char projectFile[128];
-    char currentLine[512];
+    char projectFile[128]{};
+    char currentLine[512]{};
 
     sprintf(projectFile, "mkdir %s.xcodeproj", projectName);
     system(projectFile);
@@ -31,8 +41,8 @@ AssistTools::TemplateXC44
     {
         strcpy(currentLine, msLines[line]);
 
-        char* sub;
-        int index, i;
+        char* sub = nullptr;
+        int index = 0, i = 0;
 
         sub = strstr(currentLine, "PROJECTNAME");
         if (sub)
@@ -68,10 +78,7 @@ AssistTools::TemplateXC44
     outFile.close();
 }
 
-AssistTools::TemplateXC44
-	::~TemplateXC44 ()
-{
-}
+ 
 
 const char* AssistTools::TemplateXC44
 	::msLines[NUM_LINES] =
@@ -652,3 +659,4 @@ const char* AssistTools::TemplateXC44
 ""
 };
 
+#include STSTEM_WARNING_POP

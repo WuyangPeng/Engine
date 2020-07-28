@@ -23,7 +23,11 @@ namespace AssistTools
 
 	public:
 		GenerateTemplateDirectoryImpl(const System::String& directory, const std::string& configurationFileName);
-		virtual ~GenerateTemplateDirectoryImpl();
+		virtual ~GenerateTemplateDirectoryImpl() = default;
+		GenerateTemplateDirectoryImpl(const GenerateTemplateDirectoryImpl& rhs) = default;
+		GenerateTemplateDirectoryImpl& operator=(const GenerateTemplateDirectoryImpl& rhs) = default;
+		GenerateTemplateDirectoryImpl(GenerateTemplateDirectoryImpl&& rhs) noexcept = default;
+		GenerateTemplateDirectoryImpl& operator=(GenerateTemplateDirectoryImpl && rhs) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;	
 

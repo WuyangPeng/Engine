@@ -19,7 +19,7 @@
 using std::make_shared;
 
 CoreTools::FormatErrorMessageImpl
-	::FormatErrorMessageImpl(WindowError lastError)
+	::FormatErrorMessageImpl(WindowError lastError) noexcept
 	:m_LastError{ lastError }, m_ErrorMessage{ nullptr } 
 {
 	InitMessage();
@@ -29,7 +29,7 @@ CoreTools::FormatErrorMessageImpl
 
 // private
 void CoreTools::FormatErrorMessageImpl
-	::InitMessage()
+	::InitMessage() noexcept
 {
 	EXCEPTION_TRY
 	{
@@ -43,7 +43,7 @@ void CoreTools::FormatErrorMessageImpl
 
 // private
 void CoreTools::FormatErrorMessageImpl
-	::AgainInitMessage()
+	::AgainInitMessage() noexcept
 {
 	auto dynamicLinkModule = System::LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibrary::DontResolveDllReferences);	 
 
@@ -52,7 +52,7 @@ void CoreTools::FormatErrorMessageImpl
 
 // private
 void CoreTools::FormatErrorMessageImpl
-	::InitNetworkMessage(DynamicLinkModule module)
+	::InitNetworkMessage(DynamicLinkModule module) noexcept
 {
 	if (module != nullptr)
 	{
@@ -66,7 +66,7 @@ void CoreTools::FormatErrorMessageImpl
 
 // private
 void CoreTools::FormatErrorMessageImpl
-	::LoadedModuleSucceed(DynamicLinkModule module)
+	::LoadedModuleSucceed(DynamicLinkModule module) noexcept
 {
 	if (!System::FormatErrorMessage(m_ErrorMessage, module, m_LastError))
 	{
@@ -80,7 +80,7 @@ void CoreTools::FormatErrorMessageImpl
 
 // private
 void CoreTools::FormatErrorMessageImpl
-	::LoadedModuleFailure()
+	::LoadedModuleFailure() noexcept
 {
 	LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
 		<< SYSTEM_TEXT("´ò¿ªnetmsg.dllÊ§°Ü")

@@ -9,7 +9,8 @@
 #include "ScopedMutex.h"
 #include "DllMutex.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "../Helper/ExceptionMacro.h"
 CoreTools::ScopedMutex
 	::ScopedMutex(MasterType& mutex)
 	:m_Mutex{ mutex }
@@ -24,7 +25,16 @@ CoreTools::ScopedMutex
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-	m_Mutex.Leave();
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+	 
+		EXCEPTION_TRY
+		{
+			m_Mutex.Leave();
+		}
+		EXCEPTION_ALL_CATCH(CoreTools)	 
+
+#include STSTEM_WARNING_POP 
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ScopedMutex)

@@ -19,7 +19,7 @@ namespace CoreTools
 		using ClassType = SmartPointerManagerImpl;
 
 	public:
-		SmartPointerManagerImpl();
+		SmartPointerManagerImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -31,7 +31,7 @@ namespace CoreTools
 		bool IsSmartPointer(const void* data) const;
 
 	private:
-		bool IsNullPtr(const void* data) const;
+		bool IsNullPtr(const void* data) const noexcept;
 
 	private:
 		using ReferenceContainer = std::map<const void*, int>;

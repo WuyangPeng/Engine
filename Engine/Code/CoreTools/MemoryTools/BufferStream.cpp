@@ -36,7 +36,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferStream, GetOrigina
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, BufferStream, Append, int, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, BufferStream, SetDataLength, int, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, BufferStream, AddDataLength, int, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, BufferStream, GetDataLength, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferStream, GetDataLength, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferStream, GetTotalMemoryLength, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferStream, GetRemainDataLength, int)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, BufferStream, AdvanceDataStartPosition, int, void)
@@ -124,7 +124,7 @@ void CoreTools::BufferStream
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferStream, InitRead, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(CoreTools, BufferStream, InitRead, int, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, BufferStream, InitRead, int, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferStream, GetReadPosition, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferStream, GetReadableLength, int)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, BufferStream, SetReadPosition, int, void)

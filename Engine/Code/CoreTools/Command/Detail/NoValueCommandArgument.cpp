@@ -14,6 +14,7 @@
 
 using std::string;
 using std::make_shared;
+using namespace std::literals;
 
 CoreTools::NoValueCommandArgument
 	::NoValueCommandArgument(int index, const string& name)
@@ -22,11 +23,7 @@ CoreTools::NoValueCommandArgument
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::NoValueCommandArgument
-	::~NoValueCommandArgument()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, NoValueCommandArgument)
 
@@ -35,7 +32,7 @@ int CoreTools::NoValueCommandArgument
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是整数！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是整数！"s));
 }
 
 float CoreTools::NoValueCommandArgument
@@ -43,7 +40,7 @@ float CoreTools::NoValueCommandArgument
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s));
 }
 
 double CoreTools::NoValueCommandArgument
@@ -51,7 +48,7 @@ double CoreTools::NoValueCommandArgument
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s));
 }
 
 const string CoreTools::NoValueCommandArgument
@@ -59,11 +56,11 @@ const string CoreTools::NoValueCommandArgument
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是字符串！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是字符串！"s));
 }
 
 bool CoreTools::NoValueCommandArgument
-	::IsInteger() const
+	::IsInteger() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -71,7 +68,7 @@ bool CoreTools::NoValueCommandArgument
 }
 
 bool CoreTools::NoValueCommandArgument
-	::IsFloat() const
+	::IsFloat() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -79,7 +76,7 @@ bool CoreTools::NoValueCommandArgument
 }
 
 bool CoreTools::NoValueCommandArgument
-	::IsDouble() const
+	::IsDouble() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -87,7 +84,7 @@ bool CoreTools::NoValueCommandArgument
 }
 
 bool CoreTools::NoValueCommandArgument
-	::IsString() const
+	::IsString() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -95,7 +92,7 @@ bool CoreTools::NoValueCommandArgument
 }
 
 bool CoreTools::NoValueCommandArgument
-	::IsNoValue() const
+	::IsNoValue() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -117,6 +114,6 @@ void CoreTools::NoValueCommandArgument
 
 	SYSTEM_UNUSED_ARG(value);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument没有值！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument没有值！"s));
 }
 

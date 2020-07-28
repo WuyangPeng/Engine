@@ -23,13 +23,13 @@ namespace CoreTools
 		using String = System::String;
 
 	public:
-		EnvironmentImpl();
+		EnvironmentImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		// 支持使用路径来定位文件。 对于平台无关性，使用“/”作为路径分隔符。 
 		// 并以“/”结束输入“目录”的值。 插入/删除函数返回“真”当且仅当操作成功。
-		int GetNumDirectories() const noexcept;
+		int GetNumDirectories() const;
 		bool InsertDirectory(const String& directory);
 		bool EraseDirectory(const String& directory);
 		void EraseAllDirectories() noexcept;

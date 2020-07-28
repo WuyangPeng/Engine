@@ -14,51 +14,41 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-using std::string;
 using std::make_shared;
+using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(Network, MessageManager);
+SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetNetworkMutex() }
+Network::MessageManager::MessageManagerUniquePtr Network::MessageManager
+::sm_MessageManager{ };
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_MessageManagerMutex }
+void Network::MessageManager
+::Create()
+{
+	sm_MessageManager = make_unique<Network::MessageManager>(MessageManagerCreate::Init);
+}
 
-SINGLETON_INITIALIZE_DEFINE(Network, MessageManager)
+void Network::MessageManager
+::Destroy() noexcept
+{
+	sm_MessageManager.reset();
+}
 
 Network::MessageManager
-	::MessageManager()
+::MessageManager(MessageManagerCreate messageManagerCreate)
 	:m_Impl{ make_shared<ImplType>() }
 {
-	MUTEX_ENTER_MEMBER;
+	SYSTEM_UNUSED_ARG(messageManagerCreate);
 
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::MessageManager
-	::~MessageManager()
-{
-	MUTEX_ENTER_MEMBER;
-
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Network::MessageManager
-	::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-
-	if (m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, MessageManager)
 
 Network::MessageManager::FactoryFunction Network::MessageManager
 	::Find(int64_t messageID, int version) const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -68,7 +58,7 @@ Network::MessageManager::FactoryFunction Network::MessageManager
 void Network::MessageManager
 	::Insert(int64_t messageID, const MessageTypeCondition& messageTypeCondition, FactoryFunction function)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -78,7 +68,7 @@ void Network::MessageManager
 void Network::MessageManager
 	::Remove(int64_t messageID, const MessageTypeCondition& messageTypeCondition)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -88,7 +78,7 @@ void Network::MessageManager
 void Network::MessageManager
 	::Remove(int64_t messageID)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -98,7 +88,7 @@ void Network::MessageManager
 void Network::MessageManager
 	::SetFullVersion(int fullVersion)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -108,7 +98,7 @@ void Network::MessageManager
 int Network::MessageManager
 	::GetFullVersion() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	NETWORK_CLASS_IS_VALID_CONST_1;
 

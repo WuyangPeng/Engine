@@ -43,7 +43,7 @@ namespace CoreTools
 
 		void PrintTestName();
 		void PrintTestResult(int characterWidth);
-		void PrintCostTime(CpuTimerPtr timePtr);
+		void PrintCostTime(const CpuTimer& timePtr);
 
 	private:
 		using UnitTestSuiteReportOutputPtr = std::shared_ptr<UnitTestSuiteReportOutput>;

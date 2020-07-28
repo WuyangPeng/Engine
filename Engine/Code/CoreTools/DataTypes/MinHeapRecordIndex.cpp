@@ -25,6 +25,13 @@ using std::swap;
 using std::move;
 using std::vector;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26446)
+
 CoreTools::MinHeapRecordIndex
 	::MinHeapRecordIndex(int maxElements)
 	:m_MaxElements{ maxElements }, m_RecordIndexs{ NEW1<int>(m_MaxElements) }
@@ -41,10 +48,10 @@ CoreTools::MinHeapRecordIndex
 	::MinHeapRecordIndex(int newMaxElements, const ClassType& oldIndex)
 	:m_MaxElements{ newMaxElements }, m_RecordIndexs{ NEW1<int>(m_MaxElements) }
 {
-	auto oldMaxElements = oldIndex.GetMaxElements();
-	auto minElements = m_MaxElements < oldMaxElements ? m_MaxElements : oldMaxElements;
+	const auto oldMaxElements = oldIndex.GetMaxElements();
+	const auto minElements = m_MaxElements < oldMaxElements ? m_MaxElements : oldMaxElements;
 
-	auto size = minElements * sizeof(int);
+	const auto size = minElements * sizeof(int);
 	System::MemoryCopy(m_RecordIndexs, oldIndex.m_RecordIndexs, boost::numeric_cast<uint32_t>(size));
 
 	for (auto index = oldMaxElements; index < m_MaxElements; ++index)
@@ -56,18 +63,25 @@ CoreTools::MinHeapRecordIndex
 }
 
 CoreTools::MinHeapRecordIndex
-	::~MinHeapRecordIndex()
+	::~MinHeapRecordIndex() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
 
-	DELETE1(m_RecordIndexs);
+	EXCEPTION_TRY
+	{		
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+		DELETE1(m_RecordIndexs);
+#include STSTEM_WARNING_POP
+	}
+	EXCEPTION_ALL_CATCH(CoreTools);
 }
 
 CoreTools::MinHeapRecordIndex
 	::MinHeapRecordIndex(const MinHeapRecordIndex& rhs)
 	:m_MaxElements{ rhs.m_MaxElements }, m_RecordIndexs{ NEW1<int>(m_MaxElements) }
 {
-	auto size = m_MaxElements * sizeof(int);
+	const auto size = m_MaxElements * sizeof(int);
 	System::MemoryCopy(m_RecordIndexs, rhs.m_RecordIndexs, boost::numeric_cast<uint32_t>(size));
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
@@ -116,7 +130,7 @@ bool CoreTools::MinHeapRecordIndex
 
 		for (int i = 0; i < m_MaxElements; ++i)
 		{
-			int index = m_RecordIndexs[i];
+			const int index = m_RecordIndexs[i];
 
 			if (index < 0 || m_MaxElements <= index || indexVector[index] != -1)
 				return false;
@@ -180,3 +194,4 @@ void CoreTools::MinHeapRecordIndex
 
 	swap(m_RecordIndexs[lhsIndex], m_RecordIndexs[rhsIndex]);
 }
+#include STSTEM_WARNING_POP

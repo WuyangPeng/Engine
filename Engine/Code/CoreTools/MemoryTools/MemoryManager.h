@@ -15,7 +15,7 @@
 #include "CoreTools/Threading/ThreadingFwd.h"
 
 #include <string>
-
+CORE_TOOLS_EXPORT_UNIQUE_PTR(MemoryManager);
 CORE_TOOLS_EXPORT_SHARED_PTR(MemoryManagerImpl);
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
@@ -24,28 +24,38 @@ namespace CoreTools
 	class CORE_TOOLS_DEFAULT_DECLARE MemoryManager : public CoreTools::Singleton<MemoryManager>
 	{
 	public:
-		SINGLETON_GET_PTR_DECLARE(MemoryManager);
 		NON_COPY_CLASSES_TYPE_DECLARE(MemoryManager);
+		 
 		using ParentType = Singleton<MemoryManager>;
 
 		// 让用户提供他们自己的分配函数和释放函数。
 		using Allocator = void* (*)(size_t bytesNumber, const FunctionDescribed& functionDescribed);
 		using Deallocator = void(*)(const void* memBlock, const FunctionDescribed& functionDescribed);
 
+	private:
+		enum class MemoryManagerCreate
+		{
+			Init,
+		};
+
+	public:
+		explicit MemoryManager(Allocator allocator, Deallocator deallocator,MemoryManagerCreate memoryManagerCreate);
+		~MemoryManager() noexcept;
+		MemoryManager(const MemoryManager&) = delete;
+		MemoryManager& operator=(const MemoryManager&) = delete;
+		MemoryManager(MemoryManager&&) noexcept = delete;
+		MemoryManager& operator=(MemoryManager&&) noexcept = delete; 
+
+		SINGLETON_GET_PTR_DECLARE(MemoryManager);
+
+		CLASS_INVARIANT_DECLARE;
+
 	public:
 		// 初始化和终止函数在main函数中调用。要指定自己的分配函数和释放函数，修改Memory::Create调用在main。
 		static void Create(Allocator allocator = &DefaultAllocator, Deallocator deallocator = &DefaultDeallocator);
-		static void Destroy();		
+		static void Destroy() noexcept; 
 
-	private:
-		static void DoCreate(Allocator allocator, Deallocator deallocator);
-		MemoryManager(Allocator allocator, Deallocator deallocator);
-		virtual ~MemoryManager();
-
-	public:
-		CLASS_INVARIANT_DECLARE;
-
-		void PrintMemoryLeakInformation() const;
+		void PrintMemoryLeakInformation() const noexcept;
 		int GetMemBlockDimensions(const void* memBlock) const;
 		size_t GetBytesNumber(const void* memBlock) const;
 
@@ -56,7 +66,12 @@ namespace CoreTools
 		static void* DefaultAllocator(size_t bytesNumber, const FunctionDescribed& functionDescribed) noexcept;
 		static void DefaultDeallocator(const void* memBlock, const FunctionDescribed& functionDescribed) noexcept;
 
-		SINGLETON_MEMBER_DECLARE(MemoryManager);
+	private:
+		using MemoryManagerUniquePtr = std::unique_ptr<MemoryManager>;
+
+	private:
+		static MemoryManagerUniquePtr sm_MemoryManager;
+		IMPL_TYPE_DECLARE(MemoryManager);
 	};
 }
 

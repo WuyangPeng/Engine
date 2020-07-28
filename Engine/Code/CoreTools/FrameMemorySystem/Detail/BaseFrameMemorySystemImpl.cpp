@@ -14,6 +14,14 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26490)
+using namespace std::literals;
 // m_ByteAlignment必须是2的幂。
 CoreTools::BaseFrameMemorySystemImpl
 	::BaseFrameMemorySystemImpl(int sizeInBytes, int byteAlignment)
@@ -25,7 +33,7 @@ CoreTools::BaseFrameMemorySystemImpl
 }
 
 CoreTools::BaseFrameMemorySystemImpl
-	::~BaseFrameMemorySystemImpl()
+	::~BaseFrameMemorySystemImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
@@ -51,7 +59,7 @@ bool CoreTools::BaseFrameMemorySystemImpl
 #endif // OPEN_CLASS_INVARIANT
 
 int CoreTools::BaseFrameMemorySystemImpl
-	::AlignUp(int sizeInBytes, int byteAlignment) noexcept
+	::AlignUp(int sizeInBytes, int byteAlignment)  
 {
 	return (boost::numeric_cast<uint32_t>(sizeInBytes) + byteAlignment - 1) & (~(byteAlignment - 1));
 }
@@ -68,7 +76,7 @@ const CoreTools::FrameMemorySystemPointerShare CoreTools::BaseFrameMemorySystemI
 	// 检查可用内存：
 	if (m_FramePointer[sm_Upper] < m_FramePointer[sm_Lower] + bytes)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("内存不足"));
+		THROW_EXCEPTION(SYSTEM_TEXT("内存不足"s));
 	}
 
 	// 现在执行的内存分配：
@@ -112,12 +120,12 @@ void CoreTools::BaseFrameMemorySystemImpl
 	m_SizeInBytes = AlignUp(m_SizeInBytes, m_ByteAlignment);
 
 	// 首先我们分配内存块：
-	auto size = m_SizeInBytes + m_ByteAlignment;
+	const auto size = m_SizeInBytes + m_ByteAlignment;
 	m_MemoryBlock = static_cast<uint8_t*>(System::MallocMemory(size));
 
 	if (m_MemoryBlock == nullptr)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("没有足够的内存。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("没有足够的内存。"s));
 	}
 
 	// 设置基指针：
@@ -132,3 +140,4 @@ void CoreTools::BaseFrameMemorySystemImpl
 }
 
 
+#include STSTEM_WARNING_POP

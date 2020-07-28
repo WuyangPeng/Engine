@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::Memory
-	::Memory(const FunctionDescribed& functionDescribe)
+	::Memory(const FunctionDescribed& functionDescribe) noexcept
 	:m_FunctionDescribed{ functionDescribe }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -19,7 +19,7 @@ CoreTools::Memory
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Memory)
 
 const CoreTools::FunctionDescribed& CoreTools::Memory
-	::GetFunctionDescribed() const
+	::GetFunctionDescribed() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

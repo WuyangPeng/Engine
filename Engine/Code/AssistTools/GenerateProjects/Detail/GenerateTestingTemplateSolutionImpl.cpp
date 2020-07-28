@@ -9,10 +9,12 @@
 #include "GenerateTestingTemplateSolutionImpl.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTestingTemplateSolutionImpl
 	::sm_Extension(SYSTEM_TEXT(".sln"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTestingTemplateSolutionImpl
 	::GenerateTestingTemplateSolutionImpl(const System::String& templateFileName, const System::String& solutionName, const System::String& coreName)
 	:ParentType(templateFileName, sm_Extension), m_SolutionName(solutionName), m_CoreName(coreName)
@@ -20,11 +22,7 @@ AssistTools::GenerateTestingTemplateSolutionImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-AssistTools::GenerateTestingTemplateSolutionImpl
-	::~GenerateTestingTemplateSolutionImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
  
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateSolutionImpl)
 
@@ -37,7 +35,7 @@ void AssistTools::GenerateTestingTemplateSolutionImpl
 	newVariable.insert(make_pair(m_SolutionName, newSolutionName));
 	newVariable.insert(make_pair(m_CoreName, newCoreName)); 
 
-	return ParentType::GenerateTo(resourceDirectory, newSolutionName + GetTesting(), newVariable);
+	return ParentType::Generate (resourceDirectory, newSolutionName + GetTesting(), newVariable);
 }
 
 /*

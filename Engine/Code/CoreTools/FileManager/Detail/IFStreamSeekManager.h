@@ -25,7 +25,12 @@ namespace CoreTools
 
 	public:
 		explicit IFStreamSeekManager(MasterTypeReference master);
-		~IFStreamSeekManager();
+		~IFStreamSeekManager() noexcept;
+
+		IFStreamSeekManager(const IFStreamSeekManager&) = delete;
+		IFStreamSeekManager operator=(const IFStreamSeekManager&) = delete;
+		IFStreamSeekManager(IFStreamSeekManager&&) = delete;
+		IFStreamSeekManager operator=(IFStreamSeekManager&&) = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

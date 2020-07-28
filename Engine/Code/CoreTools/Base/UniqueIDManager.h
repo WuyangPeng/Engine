@@ -15,33 +15,32 @@
 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(UniqueIDManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_EXPORT_UNIQUE_PTR(UniqueIDManager);
+CORE_TOOLS_EXPORT_SHARED_PTR(UniqueIDManagerImpl); 
 
 namespace CoreTools
 {
-	class Mutex;
-
 	class CORE_TOOLS_DEFAULT_DECLARE UniqueIDManager : public CoreTools::Singleton<UniqueIDManager>
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(UniqueIDManager); 
-		SINGLETON_GET_PTR_DECLARE(UniqueIDManager);  
-
-	public: 
+		NON_COPY_CLASSES_TYPE_DECLARE(UniqueIDManager);  
 		using ParentType = Singleton<UniqueIDManager>;
 
-	public:	
-		static void Create();
-		static void Create(int count);
-		static void Destroy(); 
+	private:
+		enum class UniqueIDManagerCreate
+		{
+			Init,
+		};
 
-	private: 
-		static void DoCreate(int count);
-		explicit UniqueIDManager(int count); 
-		
-	public:	 
-		CLASS_INVARIANT_DECLARE;
+	public: 
+		explicit UniqueIDManager(int count,UniqueIDManagerCreate uniqueIDManagerCreate);
+
+		static void Create(int count);
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(WindowProcessManager);
+
+		CLASS_INVARIANT_DECLARE; 
 
 	public:
 		uint64_t NextUniqueID(int index);
@@ -54,7 +53,11 @@ namespace CoreTools
 		uint64_t NextUniqueID(E index);
 
 	private:
-		SINGLETON_MEMBER_DECLARE(UniqueIDManager);
+		using UniqueIDManagerUniquePtr = std::unique_ptr<UniqueIDManager>;
+
+	private:
+		static UniqueIDManagerUniquePtr sm_UniqueIDManager;
+		IMPL_TYPE_DECLARE(UniqueIDManager);
 	};
 }
 

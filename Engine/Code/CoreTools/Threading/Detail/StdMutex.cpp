@@ -14,14 +14,14 @@
 using std::exception;
 
 CoreTools::StdMutex
-	::StdMutex()
+	::StdMutex() noexcept
 	:m_Mutex{}
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+	CORE_TOOLS_SELF_CLASS_IS_VALID_9; 
 }
 
 CoreTools::StdMutex
-	::~StdMutex()
+	::~StdMutex() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -54,8 +54,13 @@ void CoreTools::StdMutex
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
 	EXCEPTION_TRY
-	{
-		m_Mutex.unlock();
+	{		
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26110)
+
+		m_Mutex.unlock();	
+
+#include STSTEM_WARNING_POP
 	}
 	EXCEPTION_STD_EXCEPTION_CATCH(CoreTools)
 }

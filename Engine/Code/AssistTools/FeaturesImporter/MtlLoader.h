@@ -12,6 +12,7 @@
 #include <cstdio>
 #include <string>
 #include <vector>
+#include "System/Helper/EnumCast.h"
  
 namespace AssistTools
 {
@@ -19,9 +20,9 @@ namespace AssistTools
 	{
 	public:
 		MtlLoader(const std::string& path, const std::string& filename);
-		~MtlLoader();
+ 
 
-		enum ErrorCode
+		enum class ErrorCode
 		{
 			EC_SUCCESSFUL,
 			EC_LOGFILE_OPEN_FAILED,
@@ -42,7 +43,7 @@ namespace AssistTools
 		class Texture
 		{
 		public:
-			Texture();
+			Texture() noexcept;
 
 			std::string Filename;
 			bool BlendU;            // -blendv          on|off
@@ -62,7 +63,7 @@ namespace AssistTools
 		class Material
 		{
 		public:
-			Material();
+			Material() noexcept;
 
 			std::string Name;
 			int IlluminationModel;          // illum
@@ -77,17 +78,17 @@ namespace AssistTools
 			Texture SpecularMap;            // map_Ks
 		};
 
-		ErrorCode GetCode() const;
-		const std::vector<Material>& GetMaterials() const;
+		ErrorCode GetCode() const noexcept;
+		const std::vector<Material>& GetMaterials() const noexcept;
 
 	private:
 		void GetTokens(const std::string& line, std::vector<std::string>& tokens);
 		bool GetColor(const std::vector<std::string>& tokens, float color[3]);
 		bool GetTexture(const std::vector<std::string>& tokens, Texture& texture);
 		bool GetBoolArg(const std::vector<std::string>& tokens, int imax, int& i, bool& value);
-		bool GetCharArg(const std::vector<std::string>& tokens, int imax, const char* valid, int& i, char& value);
-		bool GetFloatArg(const std::vector<std::string>& tokens, int imax, float vmin, float vmax, int& i, float& value);
-		bool GetFloatArg2(const std::vector<std::string>& tokens, int imax, float vmin0, float vmax0, float vmin1, float vmax1, int& i, float& value0,float& value1);
+		bool GetCharArg(const std::vector<std::string>& tokens, int imax, const char* valid, int& i, char& value) noexcept;
+		bool GetFloatArg(const std::vector<std::string>& tokens, int imax, float vmin, float vmax, int& i, float& value) noexcept;
+		bool GetFloatArg2(const std::vector<std::string>& tokens, int imax, float vmin0, float vmax0, float vmin1, float vmax1, int& i, float& value0,float& value1) noexcept;
 		bool GetFloatArg3Opt2(const std::vector<std::string>& tokens, int imax, float vmin0, float vmax0, float vmin1, float vmax1, float vmin2, float vmax2, int& i, float values[3]);
 		bool GetNewMaterial(const std::vector<std::string>& tokens);
 		bool GetIlluminationModel(const std::vector<std::string>& tokens);
@@ -105,7 +106,7 @@ namespace AssistTools
 		FILE* mLogFile;
 		int mCurrent;
 		std::vector<Material> mMaterials;
-		static const char* msCodeString[EC_MAX_ERROR_CODES];
+		static const char* msCodeString[System::EnumCastUnderlying(ErrorCode::EC_MAX_ERROR_CODES)];
 	};
 }
 

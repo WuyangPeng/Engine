@@ -35,8 +35,8 @@ uint64_t CoreTools::UniqueIDManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_UniqueID.size()), "索引越界。");
-	CORE_TOOLS_ASSERTION_3(m_UniqueID[index] < m_UniqueID[index] + 1, "数值溢出。");
+	CORE_TOOLS_ASSERTION_3(m_UniqueID.at(index) < m_UniqueID.at(index) + 1, "数值溢出。");
 
-	return ++m_UniqueID[index];
+	return ++m_UniqueID.at(index);
 }
 

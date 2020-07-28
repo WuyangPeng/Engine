@@ -12,21 +12,21 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::BitProxy
-	::BitProxy(BitArray& bitArray, int position)
+	::BitProxy(BitArray& bitArray, int position) noexcept
 	:m_Array{ bitArray }, m_Position{ position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::BitProxy
-	::BitProxy(const BitProxy& bitProxy)
+	::BitProxy(const BitProxy& bitProxy) noexcept
 	:m_Array{ bitProxy.m_Array }, m_Position{ bitProxy.m_Position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::BitProxy& CoreTools::BitProxy
-	::operator=(bool value)
+	::operator=(bool value) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -36,7 +36,7 @@ CoreTools::BitProxy& CoreTools::BitProxy
 }
 
 CoreTools::BitProxy& CoreTools::BitProxy
-	::operator=(const BitProxy& rhs)
+	::operator=(const BitProxy& rhs) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

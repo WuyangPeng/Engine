@@ -24,7 +24,7 @@ namespace AssistTools
 			                               const System::String& includeName, const System::String& testingIncludeName,
 										   const System::String& debugLibName, const System::String& releaseLibName);
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		void GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newModuleName, 
 			            const System::String& newIncludeName, const System::String& newTestingIncludeName,

@@ -10,17 +10,10 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CopyFileToolsImpl
-	::CopyFileToolsImpl()
+	::CopyFileToolsImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::CopyFileToolsImpl
-	::~CopyFileToolsImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-
-}
+} 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CopyFileToolsImpl)
 

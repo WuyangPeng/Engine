@@ -14,13 +14,22 @@
 
 #include <map>
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(6385)
+
 typedef std::map<Mathematics::Vector3Df,int> VMap;
 typedef VMap::iterator VMapIterator;
 typedef std::map<Mathematics::TriangleKey,int> TMap;
 typedef TMap::iterator TMapIterator;
 
 Imagics::ExtractSurfaceCubes
-	::ExtractSurfaceCubes(int xBound, int yBound,int zBound, int* data)
+	::ExtractSurfaceCubes(int xBound, int yBound,int zBound, int* data) noexcept
     : mXBound(xBound),
       mYBound(yBound),
 	  mZBound(zBound),
@@ -43,7 +52,7 @@ void Imagics::ExtractSurfaceCubes
             {
                 // Get vertices on edges of box (if any).
                 VETable table;
-                int type = GetVertices(level, x, y, z, table);
+                const int type = GetVertices(level, x, y, z, table);
                 if (type != 0)
                 {
                     // Get edges on faces of box.
@@ -65,8 +74,8 @@ void Imagics::ExtractSurfaceCubes
 void Imagics::ExtractSurfaceCubes
 	::MakeUnique (std::vector<Mathematics::Vector3Df>& vertices,std::vector<Mathematics::TriangleKey>& triangles)
 {
-    int numVertices = (int)vertices.size();
-    int numTriangles = (int)triangles.size();
+    const int numVertices = (int)vertices.size();
+    const int numTriangles = (int)triangles.size();
     if (numVertices == 0 || numTriangles == 0)
     {
         return;
@@ -136,28 +145,28 @@ void Imagics::ExtractSurfaceCubes
         Mathematics::TriangleKey& tri = triangles[i];
 
         // Get triangle vertices.
-        Mathematics::Vector3Df v0 = vertices[tri.GetKey(0)];
-        Mathematics::Vector3Df v1 = vertices[tri.GetKey(1)];
-        Mathematics::Vector3Df v2 = vertices[tri.GetKey(2)];
+        const Mathematics::Vector3Df v0 = vertices[tri.GetKey(0)];
+        const Mathematics::Vector3Df v1 = vertices[tri.GetKey(1)];
+        const Mathematics::Vector3Df v2 = vertices[tri.GetKey(2)];
         
         // Construct triangle normal based on current orientation.
-        Mathematics::Vector3Df edge1 = v1 - v0;
-        Mathematics::Vector3Df edge2 = v2 - v0;
-		Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
+        const Mathematics::Vector3Df edge1 = v1 - v0;
+        const Mathematics::Vector3Df edge2 = v2 - v0;
+        const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
 
         // Get the image gradient at the vertices.
-        Mathematics::Vector3Df grad0 = GetGradient(v0);
-        Mathematics::Vector3Df grad1 = GetGradient(v1);
-        Mathematics::Vector3Df grad2 = GetGradient(v2);
+        const Mathematics::Vector3Df grad0 = GetGradient(v0);
+        const Mathematics::Vector3Df grad1 = GetGradient(v1);
+        const Mathematics::Vector3Df grad2 = GetGradient(v2);
 
         // Compute the average gradient.
-        Mathematics::Vector3Df gradAvr = (grad0 + grad1 + grad2)/3.0f;
+        const Mathematics::Vector3Df gradAvr = (grad0 + grad1 + grad2)/3.0f;
         
         // Compute the dot product of normal and average gradient.
-		float dot = Mathematics::Vector3DToolsf::DotProduct(gradAvr, normal);
+        const float dot = Mathematics::Vector3DToolsf::DotProduct(gradAvr, normal);
 
         // Choose triangle orientation based on gradient direction.
-        int save;
+        int save = 0;
         if (sameDir)
         {
             if (dot < 0.0f)
@@ -185,8 +194,8 @@ void Imagics::ExtractSurfaceCubes
 	::ComputeNormals ( const std::vector<Mathematics::Vector3Df>& vertices,const std::vector<Mathematics::TriangleKey>& triangles, std::vector<Mathematics::Vector3Df>& normals)
 {
     // Maintain a running sum of triangle normals at each vertex.
-    int numVertices = (int)vertices.size();
-    int numTriangles = (int)triangles.size();
+    const int numVertices = (int)vertices.size();
+    const int numTriangles = (int)triangles.size();
     normals.resize(numVertices);
     int i;
     for (i = 0; i < numVertices; ++i)
@@ -197,14 +206,14 @@ void Imagics::ExtractSurfaceCubes
     for (i = 0; i < numTriangles; ++i)
     {
         const Mathematics::TriangleKey& key = triangles[i];
-        Mathematics::Vector3Df v0 = vertices[key.GetKey(0)];
-        Mathematics::Vector3Df v1 = vertices[key.GetKey(1)];
-        Mathematics::Vector3Df v2 = vertices[key.GetKey(2)];
+        const Mathematics::Vector3Df v0 = vertices[key.GetKey(0)];
+        const Mathematics::Vector3Df v1 = vertices[key.GetKey(1)];
+        const Mathematics::Vector3Df v2 = vertices[key.GetKey(2)];
 
         // Construct triangle normal.
-        Mathematics::Vector3Df edge1 = v1 - v0;
-        Mathematics::Vector3Df edge2 = v2 - v0;
-		Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
+        const Mathematics::Vector3Df edge1 = v1 - v0;
+        const Mathematics::Vector3Df edge2 = v2 - v0;
+        const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
 
         // Maintain the sum of normals at each vertex.
         normals[key.GetKey(0)] += normal;
@@ -226,25 +235,29 @@ int Imagics::
     int type = 0;
 
     // get image values at corners of voxel
-    int i000 = x + mXBound*(y + mYBound*z);
-    int i100 = i000 + 1;
-    int i010 = i000 + mXBound;
-    int i110 = i010 + 1;
-    int i001 = i000 + mXYBound;
-    int i101 = i001 + 1;
-    int i011 = i001 + mXBound;
-    int i111 = i011 + 1;
-    float f000 = (float)mData[i000];
-    float f100 = (float)mData[i100];
-    float f010 = (float)mData[i010];
-    float f110 = (float)mData[i110];
-    float f001 = (float)mData[i001];
-    float f101 = (float)mData[i101];
-    float f011 = (float)mData[i011];
-    float f111 = (float)mData[i111];
+    const int i000 = x + mXBound*(y + mYBound*z);
+    const int i100 = i000 + 1;
+    const int i010 = i000 + mXBound;
+    const int i110 = i010 + 1;
+    const int i001 = i000 + mXYBound;
+    const int i101 = i001 + 1;
+    const int i011 = i001 + mXBound;
+    const int i111 = i011 + 1;
+    const  float f000 = (float)mData[i000];
+    const float f100 = (float)mData[i100];
+    const float f010 = (float)mData[i010];
+    const float f110 = (float)mData[i110];
+    const float f001 = (float)mData[i001];
+    const float f101 = (float)mData[i101];
+    const float f011 = (float)mData[i011];
+    const float f111 = (float)mData[i111];
 
-    float x0 = (float)x, y0 = (float)y, z0 = (float)z;
-    float x1 = x0 + 1.0f, y1 = y0 + 1.0f, z1 = z0 + 1.0f;
+    const float x0 = (float)x;
+    const float y0 = (float)y;
+    const float z0 = (float)z;
+    const  float x1 = x0 + 1.0f;
+    const float y1 = y0 + 1.0f;
+    const float z1 = z0 + 1.0f;
 
     // xmin-ymin edge
     float diff0 = level - f000;
@@ -393,14 +406,14 @@ void Imagics::ExtractSurfaceCubes
     {
         // Four vertices, one per edge, need to disambiguate.
         int i = x + mXBound*(y + mYBound*z);
-        int f00 = mData[i];  // F(x,y,z)
+        const int f00 = mData[i];  // F(x,y,z)
         i += mXBound;
-        int f10 = mData[i];  // F(x,y+1,z)
+        const int f10 = mData[i];  // F(x,y+1,z)
         i += mXYBound;
-        int f11 = mData[i];  // F(x,y+1,z+1)
+        const int f11 = mData[i];  // F(x,y+1,z+1)
         i -= mXBound;
-        int f01 = mData[i];  // F(x,y,z+1)
-        int det = f00*f11 - f01*f10;
+        const int f01 = mData[i];  // F(x,y,z+1)
+        const int det = f00*f11 - f01*f10;
 
         if (det > 0)
         {
@@ -468,14 +481,14 @@ void Imagics::ExtractSurfaceCubes
     {
         // Four vertices, one per edge, need to disambiguate.
         int i = (x+1) + mXBound*(y + mYBound*z);
-        int f00 = mData[i];  // F(x,y,z)
+        const int f00 = mData[i];  // F(x,y,z)
         i += mXBound;
-        int f10 = mData[i];  // F(x,y+1,z)
+        const int f10 = mData[i];  // F(x,y+1,z)
         i += mXYBound;
-        int f11 = mData[i];  // F(x,y+1,z+1)
+        const int f11 = mData[i];  // F(x,y+1,z+1)
         i -= mXBound;
-        int f01 = mData[i];  // F(x,y,z+1)
-        int det = f00*f11 - f01*f10;
+        const int f01 = mData[i];  // F(x,y,z+1)
+        const int det = f00*f11 - f01*f10;
 
         if (det > 0)
         {
@@ -543,14 +556,14 @@ void Imagics::ExtractSurfaceCubes
     {
         // Four vertices, one per edge, need to disambiguate.
         int i = x + mXBound*(y + mYBound*z);
-        int f00 = mData[i];  // F(x,y,z)
+        const int f00 = mData[i];  // F(x,y,z)
         i++;
-        int f10 = mData[i];  // F(x+1,y,z)
+        const int f10 = mData[i];  // F(x+1,y,z)
         i += mXYBound;
-        int f11 = mData[i];  // F(x+1,y,z+1)
+        const int f11 = mData[i];  // F(x+1,y,z+1)
         i--;
-        int f01 = mData[i];  // F(x,y,z+1)
-        int det = f00*f11 - f01*f10;
+        const int f01 = mData[i];  // F(x,y,z+1)
+        const int det = f00*f11 - f01*f10;
 
         if (det > 0)
         {
@@ -618,14 +631,14 @@ void Imagics::ExtractSurfaceCubes
     {
         // Four vertices, one per edge, need to disambiguate.
         int i = x + mXBound*((y+1) + mYBound*z);
-        int f00 = mData[i];  // F(x,y,z)
+        const int f00 = mData[i];  // F(x,y,z)
         i++;
-        int f10 = mData[i];  // F(x+1,y,z)
+        const int f10 = mData[i];  // F(x+1,y,z)
         i += mXYBound;
-        int f11 = mData[i];  // F(x+1,y,z+1)
+        const int f11 = mData[i];  // F(x+1,y,z+1)
         i--;
-        int f01 = mData[i];  // F(x,y,z+1)
-        int det = f00*f11 - f01*f10;
+        const int f01 = mData[i];  // F(x,y,z+1)
+        const int det = f00*f11 - f01*f10;
 
         if (det > 0)
         {
@@ -692,14 +705,14 @@ void Imagics::ExtractSurfaceCubes
     {
         // Four vertices, one per edge, need to disambiguate.
         int i = x + mXBound*(y + mYBound*z);
-        int f00 = mData[i];  // F(x,y,z)
+        const int f00 = mData[i];  // F(x,y,z)
         i++;
-        int f10 = mData[i];  // F(x+1,y,z)
+        const int f10 = mData[i];  // F(x+1,y,z)
         i += mXBound;
-        int f11 = mData[i];  // F(x+1,y+1,z)
+        const int f11 = mData[i];  // F(x+1,y+1,z)
         i--;
-        int f01 = mData[i];  // F(x,y+1,z)
-        int det = f00*f11 - f01*f10;
+        const int f01 = mData[i];  // F(x,y+1,z)
+        const int det = f00*f11 - f01*f10;
 
         if (det > 0)
         {
@@ -767,14 +780,14 @@ void Imagics::ExtractSurfaceCubes
     {
         // Four vertices, one per edge, need to disambiguate.
         int i = x + mXBound*(y + mYBound*(z+1));
-        int f00 = mData[i];  // F(x,y,z)
+        const int f00 = mData[i];  // F(x,y,z)
         i++;
-        int f10 = mData[i];  // F(x+1,y,z)
+        const int f10 = mData[i];  // F(x+1,y,z)
         i += mXBound;
-        int f11 = mData[i];  // F(x+1,y+1,z)
+        const int f11 = mData[i];  // F(x+1,y+1,z)
         i--;
-        int f01 = mData[i];  // F(x,y+1,z)
-        int det = f00*f11 - f01*f10;
+        const int f01 = mData[i];  // F(x,y+1,z)
+        const int det = f00*f11 - f01*f10;
 
         if (det > 0)
         {
@@ -811,48 +824,48 @@ void Imagics::ExtractSurfaceCubes
 Mathematics::Vector3Df Imagics::ExtractSurfaceCubes
 	::GetGradient (Mathematics::Vector3Df P)
 {
-    int x = (int)P.GetXCoordinate();
+    const int x = (int)P.GetXCoordinate();
     if (x < 0 || x >= mXBound-1)
     {
         return Mathematics::Vector3Df::sm_Zero;
     }
 
-    int y = (int)P.GetYCoordinate();
+    const int y = (int)P.GetYCoordinate();
     if (y < 0 || y >= mYBound-1)
     {
         return Mathematics::Vector3Df::sm_Zero;
     }
 
-    int z = (int)P.GetZCoordinate();
+    const int z = (int)P.GetZCoordinate();
     if (z < 0 || z >= mZBound-1)
     {
         return Mathematics::Vector3Df::sm_Zero;
     }
 
     // Get image values at corners of voxel.
-    int i000 = x + mXBound*(y + mYBound*z);
-    int i100 = i000 + 1;
-    int i010 = i000 + mXBound;
-    int i110 = i010 + 1;
-    int i001 = i000 + mXYBound;
-    int i101 = i001 + 1;
-    int i011 = i001 + mXBound;
-    int i111 = i011 + 1;
-    float f000 = (float)mData[i000];
-    float f100 = (float)mData[i100];
-    float f010 = (float)mData[i010];
-    float f110 = (float)mData[i110];
-    float f001 = (float)mData[i001];
-    float f101 = (float)mData[i101];
-    float f011 = (float)mData[i011];
-    float f111 = (float)mData[i111];
+    const int i000 = x + mXBound*(y + mYBound*z);
+    const int i100 = i000 + 1;
+    const int i010 = i000 + mXBound;
+    const int i110 = i010 + 1;
+    const int i001 = i000 + mXYBound;
+    const int i101 = i001 + 1;
+    const int i011 = i001 + mXBound;
+    const  int i111 = i011 + 1;
+    const float f000 = (float)mData[i000];
+    const float f100 = (float)mData[i100];
+    const  float f010 = (float)mData[i010];
+    const float f110 = (float)mData[i110];
+    const  float f001 = (float)mData[i001];
+    const float f101 = (float)mData[i101];
+    const float f011 = (float)mData[i011];
+    const float f111 = (float)mData[i111];
 
 	P.SetXCoordinate(P.GetXCoordinate() - x); 
 	P.SetYCoordinate(P.GetYCoordinate() - y);
 	P.SetZCoordinate(P.GetZCoordinate() - z); 
-    float oneMX = 1.0f - P.GetXCoordinate();
-    float oneMY = 1.0f - P.GetYCoordinate();
-    float oneMZ = 1.0f - P.GetZCoordinate();
+    const float oneMX = 1.0f - P.GetXCoordinate();
+    const float oneMY = 1.0f - P.GetYCoordinate();
+    const float oneMZ = 1.0f - P.GetZCoordinate();
 
     Mathematics::Vector3Df grad;
 
@@ -876,7 +889,7 @@ Mathematics::Vector3Df Imagics::ExtractSurfaceCubes
 // ExtractSurfaceCubes::VETable
 
 Imagics::ExtractSurfaceCubes::VETable
-	::VETable ()
+	::VETable () noexcept
 {
 }
 
@@ -937,7 +950,9 @@ void Imagics::ExtractSurfaceCubes::VETable
     Mathematics::TriangleKey tri(0,0,0);
     while (Remove(tri))
     {
-        int v0 = (int)vertices.size(), v1 = v0 + 1, v2 = v1 + 1;
+        const int v0 = (int)vertices.size();
+        const auto v1 = v0 + 1;
+        const auto v2 = v1 + 1;
         triangles.push_back(Mathematics::TriangleKey(v0, v1, v2));
         vertices.push_back(mVertex[tri.GetKey(0)].P);
         vertices.push_back(mVertex[tri.GetKey(1)].P);
@@ -1002,7 +1017,7 @@ bool Imagics::ExtractSurfaceCubes::VETable
 {
     for (int i = 0; i < 18; ++i)
     {
-        Vertex& vertex = mVertex[i];
+        const Vertex& vertex = mVertex[i];
         if (vertex.Valid && vertex.NumAdjacents == 2)
         {
             tri.SetKey(0,i);
@@ -1021,8 +1036,9 @@ bool Imagics::ExtractSurfaceCubes::VETable
 // ExtractSurfaceCubes::VETable::Vertex
 
 Imagics::ExtractSurfaceCubes::VETable::Vertex
-	::Vertex ()
+	::Vertex () noexcept
     :NumAdjacents(0),Valid(false)
 {
 }
 
+#include STSTEM_WARNING_POP

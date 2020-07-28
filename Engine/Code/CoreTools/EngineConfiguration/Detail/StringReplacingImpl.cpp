@@ -41,7 +41,7 @@ const System::String CoreTools::StringReplacingImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Replacing.find(original);
+	const auto iter = m_Replacing.find(original);
 
 	if (iter != m_Replacing.cend())
 		return iter->second;

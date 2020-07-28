@@ -12,13 +12,15 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"  
 
+using namespace std::literals;
+
 CoreTools::InternetConnection
 	::InternetConnection(const System::String& agent)
 	:m_Internet{ System::GetInternetOpenHandle(agent.c_str(), System::InternetOpenType::Direct, nullptr, nullptr, System::InternetType::Zero) }
 {
 	if (m_Internet == nullptr)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("无法打开连接。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("无法打开连接。"s));
 	}
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -44,7 +46,7 @@ bool CoreTools::InternetConnection
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::InternetConnection::InternetHandle CoreTools::InternetConnection
-	::GetInternet() const
+	::GetInternet() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

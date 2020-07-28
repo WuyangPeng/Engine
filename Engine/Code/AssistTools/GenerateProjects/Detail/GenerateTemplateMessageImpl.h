@@ -21,9 +21,9 @@ namespace AssistTools
 
 	public:
 		GenerateTemplateMessageImpl(const System::String& templateFileName, const System::String& extension, const Replace& replace);
-		virtual ~GenerateTemplateMessageImpl();
+	 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		void GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData,
 			            const System::String& projectCapital,const System::String& solutionName) const; 

@@ -362,7 +362,7 @@ void Network::MessageBufferImpl
 		THROW_EXCEPTION(SYSTEM_TEXT("可读取的缓冲区大小不足！"));
 	}
 
-	auto currentReadPtr = GetCurrentReadBufferedPtr();
+	const auto currentReadPtr = GetCurrentReadBufferedPtr();
 
 	System::MemoryCopy(data, currentReadPtr, numberToCopy);
 

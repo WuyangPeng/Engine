@@ -14,6 +14,7 @@
 #include "AssistTools/GenerateProjects/GenerateTestingTemplateEngine.h"
 
 using  std::string;
+using namespace std::literals;
  
 AssistTools::GenerateTestingTemplateCodeDirectoryImpl
 	::GenerateTestingTemplateCodeDirectoryImpl(const System::String& directory, const string& configurationFileName)
@@ -22,11 +23,7 @@ AssistTools::GenerateTestingTemplateCodeDirectoryImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-AssistTools::GenerateTestingTemplateCodeDirectoryImpl
-	::~GenerateTestingTemplateCodeDirectoryImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateCodeDirectoryImpl)
 
@@ -43,7 +40,7 @@ void AssistTools::GenerateTestingTemplateCodeDirectoryImpl
 void AssistTools::GenerateTestingTemplateCodeDirectoryImpl
 	::GenerateToManager(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& projectCapital, const System::String& managerCapital) const
 {
-	System::String libFileName = (managerName.empty() ? SYSTEM_TEXT("GameTemplateTestingExeLibCpp.txt") : SYSTEM_TEXT("GameTemplateTestingLibCpp.txt"));
+	System::String libFileName = (managerName.empty() ? SYSTEM_TEXT("GameTemplateTestingExeLibCpp.txt"s) : SYSTEM_TEXT("GameTemplateTestingLibCpp.txt"s));
 
 	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, projectCapital, managerCapital, SYSTEM_TEXT(".h"), SYSTEM_TEXT("GameTemplateTestingH.txt"), SYSTEM_TEXT("Testing"));
 	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, projectCapital, managerCapital, SYSTEM_TEXT(".h"), SYSTEM_TEXT("GameTemplateTestingHelperH.txt"), SYSTEM_TEXT("TestingHelper"));

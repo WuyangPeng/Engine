@@ -43,10 +43,10 @@ void CoreTools::TimeReportOutput
 }
 
 void CoreTools::TimeReportOutput
-	::PrintCostTime(const CpuTimerPtr& cpuTime)
+	::PrintCostTime(const CpuTimer& cpuTime)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	string costTime{ m_TimeDescribe + "时间：\n" + cpuTime->format() };
+	string costTime{ m_TimeDescribe + "时间：\n" + cpuTime.format() };
 	PrintString(costTime);
 }

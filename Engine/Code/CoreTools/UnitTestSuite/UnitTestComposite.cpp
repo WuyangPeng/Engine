@@ -15,17 +15,13 @@
 using std::ostream;
 
 CoreTools::UnitTestComposite
-	::UnitTestComposite(const OStreamShared& osPtr)
+	::UnitTestComposite(const OStreamShared& osPtr) noexcept
 	:ParentType{ osPtr }, InterfaceType{}, m_TestLoopCount{ 0 }, m_RandomSeed{ 0 }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::UnitTestComposite
-	::~UnitTestComposite()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::UnitTestComposite
@@ -46,6 +42,9 @@ void CoreTools::UnitTestComposite
 	CORE_TOOLS_ASSERTION_4(false, "½ûÖ¹µ÷ÓÃUnitTestComposite::ClearUnitTestCollection()£¡");
 }
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
 void CoreTools::UnitTestComposite
 	::AddUnitTest(UnitTestCompositePtr unitTest)
 {
@@ -55,7 +54,7 @@ void CoreTools::UnitTestComposite
 
 	SYSTEM_UNUSED_ARG(unitTest);
 }
-
+#include STSTEM_WARNING_POP
 int CoreTools::UnitTestComposite
 	::GetTestLoopCount() const noexcept
 {

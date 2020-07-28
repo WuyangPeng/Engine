@@ -21,7 +21,7 @@ namespace CoreTools
 		using ClassType = Memory;
 
 	public:
-		explicit Memory(const FunctionDescribed& functionDescribed);
+		explicit Memory(const FunctionDescribed& functionDescribed) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -61,7 +61,7 @@ namespace CoreTools
 		template <typename T>
 		void Delete4DArray(T****& data);
 
-		const FunctionDescribed& GetFunctionDescribed() const;
+		const FunctionDescribed& GetFunctionDescribed() const noexcept;
 
 	private:
 		template <typename T>

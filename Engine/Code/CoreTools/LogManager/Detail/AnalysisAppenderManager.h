@@ -28,7 +28,7 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		AppenderManagerPtr GetAppenderManager() const;
+		AppenderManagerPtr GetAppenderManager() const noexcept;
 
 	private:
 		using String = System::String;

@@ -20,7 +20,7 @@ namespace CoreTools
 		using ClassType = TestingInformation;
 
 	public:
-		TestingInformation();
+		TestingInformation() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

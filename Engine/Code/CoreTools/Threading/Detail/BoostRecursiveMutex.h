@@ -26,11 +26,11 @@ namespace CoreTools
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Initialize() override;
-		virtual void Delete() override;
-		virtual void Enter() override;
-		virtual bool TryEnter() override;
-		virtual void Leave() override;
+		void Initialize() override;
+		void Delete() override;
+		void Enter() override;
+		bool TryEnter() override;
+		void Leave() override;
 
 	private:
 		boost::recursive_mutex m_Mutex;

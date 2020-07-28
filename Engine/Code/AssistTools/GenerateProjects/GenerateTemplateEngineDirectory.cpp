@@ -14,7 +14,7 @@ using std::string;
  
 AssistTools::GenerateTemplateEngineDirectory
 	::GenerateTemplateEngineDirectory(const System::String& directory, const string& configurationFileName)	 
-	:m_Impl(new ImplType(directory, configurationFileName))
+	:m_Impl(std::make_shared<ImplType>(directory, configurationFileName))
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 } 

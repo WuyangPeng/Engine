@@ -15,7 +15,7 @@
 Rendering::SurfacePatchFrame
 	::SurfacePatchFrame(const APoint& position, const AVector& tangent0,
 			            const AVector& tangent1, const  AVector& normal )
-	:m_Impl(new ImplType(position,tangent0,tangent1,normal))
+	:m_Impl(std::make_shared<ImplType>(position,tangent0,tangent1,normal))
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }

@@ -12,14 +12,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::LastError
-	::LastError()
+	::LastError() noexcept
 	:m_LastError{ System::GetPlatformLastError() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::LastError
-	::~LastError()
+	::~LastError() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 

@@ -40,7 +40,7 @@ namespace Database
 		using SchemaWeakPtr = std::weak_ptr<ImplType>;
 
 	public:
-		SchemaWeakPtr GetImplType() const;
+		SchemaWeakPtr GetImplType() const noexcept;
 		Schema(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema);
 	#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 	};

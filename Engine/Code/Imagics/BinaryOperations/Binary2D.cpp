@@ -8,6 +8,14 @@
 
 #include "Binary2D.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26429)
 // Extraction of boundary from binary objects in image.
 //
 // Directions are:  W=0, NW=1, N=2, NE=3, E=4, SE=5, S=6, SW=7.  If a pixel
@@ -36,7 +44,7 @@
 // sense that they are traversed twice, once per "side".
 
 void Imagics::Binary2D
-	::GetBoundaries(ImageInt2D& image, std::vector<IndexArray>& boundaries)
+	::GetBoundaries(const ImageInt2D& image, std::vector<IndexArray>& boundaries)
 {
     // Background pixels are 0 and foreground pixels are 1.  Set the interior
     // foreground pixels to 2 and the boundary pixels to 3.  A 3 indicates
@@ -45,7 +53,7 @@ void Imagics::Binary2D
     const int bound1 = image.GetBound(1);
     const int bound0m1 = bound0 - 1;
     const int bound1m1 = bound1 - 1;
-    int x, y;
+    int x = 0, y = 0;
     for (y = 1; y < bound1m1; ++y)
     {
         for (x = 1; x < bound0m1; ++x)
@@ -80,7 +88,7 @@ void Imagics::Binary2D
 }
 
 void Imagics::Binary2D
-	::ExtractBoundary(int x0, int y0, ImageInt2D& image,  IndexArray& boundary)
+	::ExtractBoundary(int x0, int y0,const ImageInt2D& image,  IndexArray& boundary)
 {
     // Incremental 2D offsets for 8-connected neighborhood of (x,y).
     const int dx[8] = { -1,  0, +1, +1, +1,  0, -1, -1 };
@@ -108,7 +116,7 @@ void Imagics::Binary2D
     bool notDone = true;
     while (notDone)
     {
-        int i, nbr;
+        int i = 0, nbr = 0;
         for (i = 0, nbr = dir; i < 8; ++i, nbr = (nbr + 1) % 8)
         {
             nx = cx + dx[nbr];
@@ -153,7 +161,7 @@ void Imagics::Binary2D
 // depth-first search of the graph.
 
 void Imagics::Binary2D
-	::GetComponents8(ImageInt2D& image, bool storeZeros,std::vector<IndexArray>& components)
+	::GetComponents8(const ImageInt2D& image, bool storeZeros,std::vector<IndexArray>& components)
 {
     // Incremental 1D offsets for 8-connected neighbors.  Store +1 and -1
     // first to be cache friendly during the depth-first search.
@@ -174,7 +182,7 @@ void Imagics::Binary2D
 }
 
 void Imagics::Binary2D
-	::GetComponents4(ImageInt2D& image, bool storeZeros,  std::vector<IndexArray>& components)
+	::GetComponents4(const ImageInt2D& image, bool storeZeros,  std::vector<IndexArray>& components)
 {
     // Incremental 1D offsets for 8-connected neighbors.  Store +1 and -1
     // first to be cache friendly during the depth-first search.
@@ -191,11 +199,11 @@ void Imagics::Binary2D
 }
 
 void Imagics::Binary2D
-	::GetComponents(const int numNeighbors, const int delta[], bool storeZeros, ImageInt2D& image, std::vector<IndexArray>& components)
+	::GetComponents(const int numNeighbors, const int delta[], bool storeZeros, const ImageInt2D& image, std::vector<IndexArray>& components)
 {
     const int numPixels = image.GetQuantity();
     int* numElements = NEW1<int>(numPixels);
-    int i, numComponents = 0, label = 2;
+    int i = 0, numComponents = 0, label = 2;
 	int* vstack = NEW1<int>(numPixels);
     for (i = 0; i < numPixels; ++i)
     {
@@ -208,12 +216,12 @@ void Imagics::Binary2D
             count = 0;
             while (top >= 0)
             {
-                int v = vstack[top];
+                const int v = vstack[top];
                 image[v] = -1;
                 int j;
                 for (j = 0; j < numNeighbors; ++j)
                 {
-                    int adj = v + delta[j];
+                    const int adj = v + delta[j];
                     if (image[adj] == 1)
                     {
                         vstack[++top] = adj;
@@ -242,7 +250,7 @@ void Imagics::Binary2D
             components.resize(numComponents + 1);
             for (i = 1; i <= numComponents; ++i)
             {
-                int count = numElements[i];
+                const int count = numElements[i];
                 components[i].resize(count);
                 numZeros -= count;
                 numElements[i] = 0;
@@ -316,7 +324,7 @@ void Imagics::Binary2D
 // NorthEast, SouthWest, and SouthEast neighbors are 2 units away.
 
 void Imagics::Binary2D
-	::GetL1Distance(ImageInt2D& image, int& maxDistance)
+	::GetL1Distance(const ImageInt2D& image, int& maxDistance)
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -330,7 +338,7 @@ void Imagics::Binary2D
     for (distance = 1; changeMade; ++distance)
     {
         changeMade = false;
-        int distanceP1 = distance + 1;
+        const int distanceP1 = distance + 1;
         for (int y = 1; y < bound1m1; ++y)
         {
             for (int x = 1; x < bound0m1; ++x)
@@ -372,13 +380,13 @@ void Imagics::Binary2D
 // have implemented the algorithm to get all distances < 100 to be exact. 
 
 void Imagics::Binary2D
-	::GetL2Distance(const ImageInt2D& image, double& maxDistance,  ImageDouble2D& transform)
+	::GetL2Distance(const ImageInt2D& image, double& maxDistance, const  ImageDouble2D& transform)
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
     const int bound0m1 = bound0 - 1;
     const int bound1m1 = bound1 - 1;
-    int x, y, distance;
+    int x = 0, y = 0, distance = 0;
 
     // Create and initialize intermediate images.
     ImageInt2D xNear(bound0, bound1);
@@ -403,11 +411,11 @@ void Imagics::Binary2D
         }
     }
 
-    const int K1 = 1;
-    const int K2 = 169;   // 13^2
-    const int K3 = 961;   // 31^2
-    const int K4 = 2401;  // 49^2
-    const int K5 = 5184;  // 72^2
+    constexpr int K1 = 1;
+    constexpr int K2 = 169;   // 13^2
+    constexpr int K3 = 961;   // 31^2
+    constexpr int K4 = 2401;  // 49^2
+    constexpr int K5 = 5184;  // 72^2
 
     // Pass in the ++ direction.
     for (y = 0; y < bound1; ++y)
@@ -605,18 +613,19 @@ void Imagics::Binary2D
 }
 
 void Imagics::Binary2D
-	::L2Check(int x, int y, int dx, int dy, ImageInt2D& xNear, ImageInt2D& yNear, ImageInt2D& dist)
+	::L2Check(int x, int y, int dx, int dy,const ImageInt2D& xNear, const ImageInt2D& yNear, const ImageInt2D& dist)
 {
     const int bound0 = dist.GetBound(0);
     const int bound1 = dist.GetBound(1);
-    int xp = x + dx, yp = y + dy;
+    const int xp = x + dx;
+        const int yp = y + dy;
     if (0 <= xp && xp < bound0 && 0 <= yp && yp < bound1)
     {
         if (dist(xp, yp) < dist(x, y))
         {
-            int dx0 = xNear(xp, yp) - x;
-            int dy0 = yNear(xp, yp) - y;
-            int newDist = dx0*dx0 + dy0*dy0;
+            const int dx0 = xNear(xp, yp) - x;
+            const int dy0 = yNear(xp, yp) - y;
+            const int newDist = dx0*dx0 + dy0*dy0;
             if (newDist < dist(x, y))
             {
                 xNear(x, y) = xNear(xp, yp);
@@ -636,7 +645,7 @@ void Imagics::Binary2D
 // cycles of the object are preserved.
 
 void Imagics::Binary2D
-	::GetSkeleton(ImageInt2D& image)
+	::GetSkeleton(const ImageInt2D& image)
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -753,13 +762,13 @@ void Imagics::Binary2D
 }
 
 bool Imagics::Binary2D
-	::Interior4(ImageInt2D& image, int x, int y)
+	::Interior4(const ImageInt2D& image, int x, int y)
 {
     return image(x-1, y) != 0  && image(x+1, y) != 0  && image(x, y-1) != 0 && image(x, y+1) != 0;
 }
 
 bool Imagics::Binary2D
-	::Interior3(ImageInt2D& image, int x, int y)
+	::Interior3(const ImageInt2D& image, int x, int y)
 {
     int numNeighbors = 0;
     if (image(x-1, y) != 0)
@@ -782,17 +791,17 @@ bool Imagics::Binary2D
 }
 
 bool Imagics::Binary2D
-	::Interior2(ImageInt2D& image, int x, int y)
+	::Interior2(const ImageInt2D& image, int x, int y)
 {
-    bool b1 = (image(x, y-1) != 0);
-    bool b3 = (image(x+1, y) != 0);
-    bool b5 = (image(x, y+1) != 0);
-    bool b7 = (image(x-1, y) != 0);
+    const bool b1 = (image(x, y-1) != 0);
+    const bool b3 = (image(x+1, y) != 0);
+    const bool b5 = (image(x, y+1) != 0);
+    const bool b7 = (image(x-1, y) != 0);
     return (b1 && b3) || (b3 && b5) || (b5 && b7) || (b7 && b1);
 }
 
 bool Imagics::Binary2D
-	::MarkInterior(ImageInt2D& image, int value, InteriorFunction function)
+	::MarkInterior(const ImageInt2D& image, int value, InteriorFunction function)
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -819,7 +828,7 @@ bool Imagics::Binary2D
 }
 
 bool Imagics::Binary2D
-	::IsArticulation(ImageInt2D& image, int x, int y)
+	::IsArticulation(const ImageInt2D& image, int x, int y)
 {
     // Converts 8 neighbors of pixel (x,y) to an 8-bit value, bit = 1 iff
     // pixel is set.
@@ -861,7 +870,7 @@ bool Imagics::Binary2D
 }
 
 bool Imagics::Binary2D
-	::ClearInteriorAdjacent(ImageInt2D& image, int value)
+	::ClearInteriorAdjacent(const ImageInt2D& image, int value)
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -872,7 +881,7 @@ bool Imagics::Binary2D
         {
             if (image(x,y) == 1)
             {
-                bool interiorAdjacent =  image(x-1, y-1) == value || image(x  , y-1) == value || image(x+1, y-1) == value ||
+                const bool interiorAdjacent =  image(x-1, y-1) == value || image(x  , y-1) == value || image(x+1, y-1) == value ||
 										 image(x+1, y  ) == value || image(x+1, y+1) == value || image(x  , y+1) == value ||
 										 image(x-1, y+1) == value || image(x-1, y  ) == value;
 
@@ -908,3 +917,4 @@ const int Imagics::Binary2D
     0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
 };
 
+#include STSTEM_WARNING_POP

@@ -30,6 +30,11 @@ using std::right;
 using std::exception;
 using std::make_shared;
 
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
 const string CoreTools::UnitTest
 	::GetCorrectThrowExceptionDescribe()
 {
@@ -61,11 +66,7 @@ CoreTools::UnitTest
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::UnitTest
-	::~UnitTest()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::UnitTest
@@ -113,7 +114,7 @@ void CoreTools::UnitTest
 
 	manager.PrintTestName();
 	manager.PrintTestResult(characterWidth);
-	manager.PrintCostTime(m_CpuTimerImplPtr->GetCpuTimerPtr());
+	manager.PrintCostTime(*m_CpuTimerImplPtr->GetCpuTimerPtr());
 }
 
 // private
@@ -138,6 +139,7 @@ void CoreTools::UnitTest
 void CoreTools::UnitTest
 	::ResetOtherData()
 {
+	CoreTools::DoNothing();
 }
 
 void CoreTools::UnitTest
@@ -156,6 +158,8 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
+	CoreTools::DoNothing();
+
 	if (m_DataPtr->IsEmpty())
 		m_CpuTimerImplPtr->Start();
 	else
@@ -167,6 +171,8 @@ void CoreTools::UnitTest
 	::TestTimingEnd()
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	CoreTools::DoNothing();
 
 	m_CpuTimerImplPtr->Stop();
 }
@@ -345,8 +351,8 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto completeLhs = *reinterpret_cast<uint32_t*>(&lhs);
-	auto completeRhs = *reinterpret_cast<uint32_t*>(&rhs);
+	const auto completeLhs = *reinterpret_cast<uint32_t*>(&lhs);
+	const auto completeRhs = *reinterpret_cast<uint32_t*>(&rhs);
 
 	AssertEqual(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }
@@ -356,8 +362,8 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto completeLhs = *reinterpret_cast<uint64_t*>(&lhs);
-	auto completeRhs = *reinterpret_cast<uint64_t*>(&rhs);
+	const auto completeLhs = *reinterpret_cast<uint64_t*>(&lhs);
+	const auto completeRhs = *reinterpret_cast<uint64_t*>(&rhs);
 
 	AssertEqual(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }
@@ -367,8 +373,8 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto completeLhs = *reinterpret_cast<uint32_t*>(&lhs);
-	auto completeRhs = *reinterpret_cast<uint32_t*>(&rhs);
+	const auto completeLhs = *reinterpret_cast<uint32_t*>(&lhs);
+	const auto completeRhs = *reinterpret_cast<uint32_t*>(&rhs);
 
 	AssertUnequal(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }
@@ -378,8 +384,8 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto completeLhs = *reinterpret_cast<uint64_t*>(&lhs);
-	auto completeRhs = *reinterpret_cast<uint64_t*>(&rhs);
+	const auto completeLhs = *reinterpret_cast<uint64_t*>(&lhs);
+	const auto completeRhs = *reinterpret_cast<uint64_t*>(&rhs);
 
 	AssertUnequal(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }
@@ -389,7 +395,7 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto condition = (lhs == rhs);
+	const auto condition = (lhs == rhs);
 
 	std::string described{};
 
@@ -436,3 +442,4 @@ void CoreTools::UnitTest
 
 
 
+#include STSTEM_WARNING_POP

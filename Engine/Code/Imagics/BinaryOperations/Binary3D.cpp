@@ -8,8 +8,14 @@
 
 #include "Binary3D.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
 void Imagics::Binary3D
-	::GetComponents26(ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components)
+	::GetComponents26(const ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components)
 {
     // Incremental 1D offsets for 26-connected neighbors.  Store +1 and -1
     // first, the xy-offsets second, to be cache friendly during the
@@ -50,7 +56,7 @@ void Imagics::Binary3D
 }
 
 void Imagics::Binary3D
-	::GetComponents18(ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components)
+	::GetComponents18(const ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components)
 {
     // Incremental 1D offsets for 18-connected neighbors.  Store +1 and -1
     // first, the xy-offsets second, to be cache friendly during the
@@ -83,7 +89,7 @@ void Imagics::Binary3D
 }
 
 void Imagics::Binary3D
-	::GetComponents6(ImageInt3D& image, bool storeZeros,  std::vector<IndexArray>& components)
+	::GetComponents6(const ImageInt3D& image, bool storeZeros,  std::vector<IndexArray>& components)
 {
     // Incremental 1D offsets for 6-connected neighbors.  Store +1 and -1
     // first to be cache friendly during the depth-first search.
@@ -103,11 +109,11 @@ void Imagics::Binary3D
 }
 
 void Imagics::Binary3D
-	::GetComponents(const int numNeighbors, const int delta[], bool storeZeros, ImageInt3D& image, std::vector<IndexArray>& components)
+	::GetComponents(const int numNeighbors, const int delta[], bool storeZeros, const ImageInt3D& image, std::vector<IndexArray>& components)
 {
     const int numVoxels = image.GetQuantity();
     int* numElements = NEW1<int>(numVoxels);
-    int i, numComponents = 0, label = 2;
+    int i = 0, numComponents = 0, label = 2;
 	int* vstack = NEW1<int>(numVoxels);
     for (i = 0; i < numVoxels; ++i)
     {
@@ -120,12 +126,12 @@ void Imagics::Binary3D
             count = 0;
             while (top >= 0)
             {
-                int v = vstack[top];
+                const int v = vstack[top];
                 image[v] = -1;
                 int j;
                 for (j = 0; j < numNeighbors; ++j)
                 {
-                    int adj = v + delta[j];
+                    const int adj = v + delta[j];
                     if (image[adj] == 1)
                     {
                         vstack[++top] = adj;
@@ -154,7 +160,7 @@ void Imagics::Binary3D
             components.resize(numComponents + 1);
             for (i = 1; i <= numComponents; ++i)
             {
-                int count = numElements[i];
+                const int count = numElements[i];
                 components[i].resize(count);
                 numZeros -= count;
                 numElements[i] = 0;
@@ -219,3 +225,4 @@ void Imagics::Binary3D
 	DELETE1(numElements);
 }
 
+#include STSTEM_WARNING_POP

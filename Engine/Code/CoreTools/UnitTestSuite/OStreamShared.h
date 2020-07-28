@@ -38,7 +38,7 @@ namespace CoreTools
 			return *this;
 		}
 		 
-		std::ostream& GetStream(); 
+		std::ostream& GetStream() noexcept;
 
 		bool IsCout() const noexcept;
 		bool IsCerr() const noexcept;

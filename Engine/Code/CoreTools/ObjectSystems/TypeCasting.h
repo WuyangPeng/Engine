@@ -23,7 +23,12 @@ namespace CoreTools
 	{
 		static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
 
+		
+#include STSTEM_WARNING_PUSH
+	
+		#include SYSTEM_WARNING_DISABLE(26466)
 		return static_cast<T*>(object);
+		#include STSTEM_WARNING_POP
 	}
 
 	template <typename T>
@@ -58,7 +63,7 @@ namespace CoreTools
 		auto target = DynamicCast<Target>(object);
 		if (target == nullptr)
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("向下转换类型失败！"));
+			THROW_EXCEPTION(SYSTEM_TEXT("向下转换类型失败！"s));
 		}
 
 		return target;
@@ -79,7 +84,7 @@ namespace CoreTools
 	}
 
 	template <typename Target>
-	Target* PolymorphicDowncast(ObjectPtr object)
+	Target* PolymorphicDowncast(ObjectPtr object) noexcept((0 <= CORE_TOOLS_ASSERT_LEVEL) && !g_AssertDebug)
 	{
 		static_assert(std::is_base_of_v<ObjectInterface, Target>, "T is not base of ObjectInterface");
 
@@ -105,7 +110,7 @@ namespace CoreTools
 
 		if (!subclass)
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("向下转换类型失败！"));
+			THROW_EXCEPTION(SYSTEM_TEXT("向下转换类型失败！"s));
 		}
 
 		return subclass;

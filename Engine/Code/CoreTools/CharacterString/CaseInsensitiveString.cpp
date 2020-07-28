@@ -15,6 +15,11 @@ using std::ostream;
 using std::string;
 using std::wstring;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26487)
+
 std::ostream& CoreTools
 	::operator<<(std::ostream& os, const CaseInsensitiveString& str)
 {
@@ -26,3 +31,5 @@ std::ostream& CoreTools
 {
 	return os << StringConversion::WideCharConversionMultiByte(wstring{ str.c_str(), str.size() });
 }
+
+#include STSTEM_WARNING_POP

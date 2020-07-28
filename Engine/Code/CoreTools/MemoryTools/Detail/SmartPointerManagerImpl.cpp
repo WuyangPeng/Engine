@@ -9,9 +9,10 @@
 #include "SmartPointerManagerImpl.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
+#include "System/Helper/PragmaWarning.h"
 
 CoreTools::SmartPointerManagerImpl
-	::SmartPointerManagerImpl()
+	::SmartPointerManagerImpl() noexcept
 	:m_ReferenceContainer{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_3;
@@ -21,6 +22,10 @@ CoreTools::SmartPointerManagerImpl
 bool CoreTools::SmartPointerManagerImpl
 	::IsValid() const noexcept
 {
+	try
+	{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 	for (const auto& value : m_ReferenceContainer)
 	{
 		if (value.first == nullptr || value.second <= 0)
@@ -30,6 +35,13 @@ bool CoreTools::SmartPointerManagerImpl
 	}
 
 	return true;
+	
+#include STSTEM_WARNING_POP
+	}
+	catch(...)
+	{
+		return false;
+	}	
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -43,7 +55,7 @@ int CoreTools::SmartPointerManagerImpl
 		return 0;
 	}
 
-	auto iter = m_ReferenceContainer.find(data);
+	const auto iter = m_ReferenceContainer.find(data);
 
 	if (iter != m_ReferenceContainer.cend())
 	{
@@ -66,7 +78,7 @@ int CoreTools::SmartPointerManagerImpl
 		return 0;
 	}
 
-	auto iter = m_ReferenceContainer.find(data);
+	const auto iter = m_ReferenceContainer.find(data);
 
 	if (iter != m_ReferenceContainer.cend())
 	{
@@ -91,7 +103,7 @@ int CoreTools::SmartPointerManagerImpl
 		return 0;
 	}
 
-	auto iter = m_ReferenceContainer.find(data);
+	const auto iter = m_ReferenceContainer.find(data);
 
 	if (iter != m_ReferenceContainer.cend())
 	{
@@ -122,7 +134,7 @@ bool CoreTools::SmartPointerManagerImpl
 		return false;
 	}
 
-	auto iter = m_ReferenceContainer.find(data);
+	const auto iter = m_ReferenceContainer.find(data);
 
 	if (iter != m_ReferenceContainer.cend())
 		return true;
@@ -131,7 +143,7 @@ bool CoreTools::SmartPointerManagerImpl
 }
 
 bool CoreTools::SmartPointerManagerImpl
-	::IsNullPtr(const void* data) const
+	::IsNullPtr(const void* data) const noexcept
 {
 	if (data == nullptr)
 		return true;

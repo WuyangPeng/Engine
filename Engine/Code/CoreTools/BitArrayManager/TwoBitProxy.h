@@ -19,10 +19,16 @@ namespace CoreTools
 		using ClassType = TwoBitProxy;
 
 	public:
-		TwoBitProxy(TwoBitArray& array, int position);
+		TwoBitProxy(TwoBitArray& array, int position) noexcept;
+		~TwoBitProxy() noexcept = default;
 
-		TwoBitProxy& operator=(const TwoBitProxy& rhs);
-		TwoBitProxy& operator=(uint32_t value);
+		TwoBitProxy& operator=(const TwoBitProxy& rhs) noexcept;
+		TwoBitProxy& operator=(uint32_t value) noexcept;
+
+		TwoBitProxy(const TwoBitProxy& rhs) = delete;
+
+		TwoBitProxy& operator=(TwoBitProxy&& rhs) noexcept = default;
+		TwoBitProxy(TwoBitProxy&& rhs) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

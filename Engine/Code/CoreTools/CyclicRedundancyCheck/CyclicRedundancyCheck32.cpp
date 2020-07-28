@@ -10,6 +10,11 @@
 #include "CyclicRedundancyCheckHandle.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+
 CoreTools::CyclicRedundancyCheck32
 	::CyclicRedundancyCheck32(const char* data, int length)
 	:m_CyclicRedundancyCheck{ 0 }
@@ -25,7 +30,7 @@ void CoreTools::CyclicRedundancyCheck32
 {
 	for (auto i = 0; i < length; ++i)
 	{
-		auto value = (m_CyclicRedundancyCheck ^ data[i]) & 0x000000FFL;
+		const auto value = (m_CyclicRedundancyCheck ^ data[i]) & 0x000000FFL;
 		m_CyclicRedundancyCheck = ((m_CyclicRedundancyCheck >> 8) & 0x00FFFFFFL) ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get32Table(value);
 	}
 }
@@ -33,7 +38,7 @@ void CoreTools::CyclicRedundancyCheck32
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheck32)
 
 uint32_t CoreTools::CyclicRedundancyCheck32
-	::GetCyclicRedundancyCheck32() const
+	::GetCyclicRedundancyCheck32() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -41,3 +46,4 @@ uint32_t CoreTools::CyclicRedundancyCheck32
 }
 
 
+#include STSTEM_WARNING_POP

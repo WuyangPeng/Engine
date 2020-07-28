@@ -12,8 +12,10 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 using std::string;
+using namespace std::literals;
 
 CoreTools::CReadFileManagerImpl
 	::CReadFileManagerImpl(const String& fileName)
@@ -66,11 +68,11 @@ void CoreTools::CReadFileManagerImpl
 	CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
 	CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
 
-	auto readNumber = ReadFromFile(itemSize, itemsNumber, data);
+	const auto readNumber = ReadFromFile(itemSize, itemsNumber, data);
 
 	if (readNumber != itemsNumber)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"s));
 	}
 
 #ifdef SYSTEM_BIG_ENDIAN
@@ -82,7 +84,7 @@ void CoreTools::CReadFileManagerImpl
 }
 
 size_t CoreTools::CReadFileManagerImpl
-	::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept
+	::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data)  
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -92,11 +94,13 @@ size_t CoreTools::CReadFileManagerImpl
 	SYSTEM_UNUSED_ARG(itemsNumber);
 	SYSTEM_UNUSED_ARG(data);
 
+	CoreTools::DoNothing();
+
 	return 0;
 }
 
 bool CoreTools::CReadFileManagerImpl
-	::PutCharacter(int character) noexcept
+	::PutCharacter(int character)  
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -104,17 +108,21 @@ bool CoreTools::CReadFileManagerImpl
 
 	SYSTEM_UNUSED_ARG(character);
 
+	CoreTools::DoNothing();
+
 	return false;
 }
 
 bool CoreTools::CReadFileManagerImpl
-	::PutString(const string& str) noexcept
+	::PutString(const string& str)  
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CReadFileManageImpl禁止调用PutString！");
 
 	SYSTEM_UNUSED_ARG(str);
+
+	CoreTools::DoNothing();
 
 	return false;
 }

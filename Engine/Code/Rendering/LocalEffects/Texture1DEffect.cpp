@@ -87,7 +87,7 @@ Rendering::PixelShader* Rendering
 Rendering::VisualEffectInstance* Rendering::Texture1DEffect
 	::CreateInstance (Texture1D* texture) const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
 	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
 	instance->SetPixelTexture(0, 0, TextureSmartPointer(texture));
 
@@ -103,7 +103,7 @@ Rendering::VisualEffectInstance* Rendering::Texture1DEffect
 Rendering::VisualEffectInstance* Rendering::Texture1DEffect
 	::CreateUniqueInstance (Texture1D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
 {
-    Texture1DEffect* effect = NEW0 Texture1DEffect();
+    Texture1DEffect* effect = CoreTools::New0 < Texture1DEffect>();
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate);

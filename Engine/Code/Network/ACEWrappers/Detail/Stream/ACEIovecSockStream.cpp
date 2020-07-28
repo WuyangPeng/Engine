@@ -49,7 +49,7 @@ int Network::ACEIovecSockStream
 
 	if (messageBuffer->GetCurrentWriteIndex() <= headSize)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
 	}
 
 	array<iovec, 2> iov;
@@ -60,7 +60,7 @@ int Network::ACEIovecSockStream
 
 	if (GetACESockStream().sendv_n(iov.data(), 2) != messageBuffer->GetCurrentWriteIndex())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"s));
 	}
 
 	return messageBuffer->GetCurrentWriteIndex();

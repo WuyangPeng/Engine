@@ -9,14 +9,41 @@
 
 #include "System/Helper/PragmaWarning.h"
 
-#include STSTEM_WARNING_PUSH
-	
+#include STSTEM_WARNING_PUSH	
+
+	#include SYSTEM_WARNING_DISABLE(26400)
 	#include SYSTEM_WARNING_DISABLE(26401)
+	#include SYSTEM_WARNING_DISABLE(26409)
+	#include SYSTEM_WARNING_DISABLE(26429)
+	#include SYSTEM_WARNING_DISABLE(26432)
+	#include SYSTEM_WARNING_DISABLE(26433)
+	#include SYSTEM_WARNING_DISABLE(26434)
+	#include SYSTEM_WARNING_DISABLE(26436)
+	#include SYSTEM_WARNING_DISABLE(26440)
+	#include SYSTEM_WARNING_DISABLE(26447)
+	#include SYSTEM_WARNING_DISABLE(26455)
+	#include SYSTEM_WARNING_DISABLE(26459)
+	#include SYSTEM_WARNING_DISABLE(26462)
+	#include SYSTEM_WARNING_DISABLE(26471)
+	#include SYSTEM_WARNING_DISABLE(26472)
+	#include SYSTEM_WARNING_DISABLE(26476)
+	#include SYSTEM_WARNING_DISABLE(26481)
+	#include SYSTEM_WARNING_DISABLE(26485)
+	#include SYSTEM_WARNING_DISABLE(26486)
+	#include SYSTEM_WARNING_DISABLE(26487)
+	#include SYSTEM_WARNING_DISABLE(26489)
+	#include SYSTEM_WARNING_DISABLE(26490)
+	#include SYSTEM_WARNING_DISABLE(26491)
+	#include SYSTEM_WARNING_DISABLE(26493)
 	#include SYSTEM_WARNING_DISABLE(26495)
+	#include SYSTEM_WARNING_DISABLE(26496)
+	#include SYSTEM_WARNING_DISABLE(26497)
+	#include SYSTEM_WARNING_DISABLE(26812)
 
 	#include <boost/algorithm/string/trim.hpp>
 	#include <boost/algorithm/string/split.hpp>
 	#include <boost/algorithm/string/predicate.hpp>
+	#include <boost/algorithm/string/replace.hpp>
 	#include <boost/algorithm/string/classification.hpp>
 
 #include STSTEM_WARNING_POP

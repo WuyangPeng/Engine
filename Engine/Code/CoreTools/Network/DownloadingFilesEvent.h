@@ -26,8 +26,12 @@ namespace CoreTools
 		using ClassType = DownloadingFilesEvent;
 
 	public:
-		DownloadingFilesEvent();
-		virtual ~DownloadingFilesEvent();
+		DownloadingFilesEvent() noexcept = default;
+		virtual ~DownloadingFilesEvent() noexcept = default;
+		DownloadingFilesEvent(const DownloadingFilesEvent&) noexcept = default;
+		DownloadingFilesEvent& operator=(const DownloadingFilesEvent&) noexcept = default;
+		DownloadingFilesEvent(DownloadingFilesEvent&&) noexcept = default;
+		DownloadingFilesEvent& operator=(DownloadingFilesEvent&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

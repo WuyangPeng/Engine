@@ -35,9 +35,9 @@ namespace CoreTools
 
 		void FreeAll();
 
-		int GetAvailableCount() const noexcept;
+		int GetAvailableCount() const;
 		int GetAllocatedCount() const noexcept;
-		int GetTotalCount() const noexcept;
+		int GetTotalCount() const;
 
 	private:
 		IMPL_TYPE_DECLARE(BufferPool);

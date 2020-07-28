@@ -17,8 +17,14 @@
 using std::string;
 using std::pair; 
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
 const string CoreTools::CommandLineInformationImpl
 	::sm_FileName{ "fileName" };
+
+#include STSTEM_WARNING_POP
 
 CoreTools::CommandLineInformationImpl
 	::CommandLineInformationImpl(int argumentsNumber, char** arguments)
@@ -41,12 +47,7 @@ CoreTools::CommandLineInformationImpl
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
-CoreTools::CommandLineInformationImpl
-	::~CommandLineInformationImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::CommandLineInformationImpl

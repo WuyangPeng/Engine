@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::ConstTwoBitProxy
-	::ConstTwoBitProxy(const TwoBitArray& array, int position)
+	::ConstTwoBitProxy(const TwoBitArray& array, int position) noexcept
 	:m_Array{ array }, m_Position{ position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

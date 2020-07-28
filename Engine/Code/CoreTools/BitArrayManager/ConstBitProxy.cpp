@@ -12,14 +12,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::ConstBitProxy
-	::ConstBitProxy(const BitArray& bitArray, int position)
+	::ConstBitProxy(const BitArray& bitArray, int position) noexcept
 	:m_Array{ bitArray }, m_Position{ position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::ConstBitProxy
-	::ConstBitProxy(const ConstBitProxy& bitProxy)
+	::ConstBitProxy(const ConstBitProxy& bitProxy) noexcept
 	:m_Array{ bitProxy.m_Array }, m_Position{ bitProxy.m_Position }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

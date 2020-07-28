@@ -15,7 +15,7 @@
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
 #include <boost/noncopyable.hpp>
-
+RENDERING_EXPORT_UNIQUE_PTR(RendererInputData);
 RENDERING_EXPORT_SHARED_PTR(RendererInputDataImpl);
 EXPORT_NONCOPYABLE_CLASS(RENDERING);
 
@@ -29,17 +29,35 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE RendererInputData : public CoreTools::Singleton<RendererInputData>
 	{
 	public:
-		SINGLETON_INITIALIZE_DECLARE(RendererInputData); 
+	public:
+		NON_COPY_CLASSES_TYPE_DECLARE(RendererInputData);
+		using ParentType = Singleton<RendererInputData>;
 		using RendererTypes = Rendering::RendererTypes;
 
-	public:	
+	private:
+		enum class RendererInputDataCreate
+		{
+			Init,
+		};
+
+	public:
+		explicit RendererInputData(RendererInputDataCreate rendererInputDataCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(RendererInputData);
+
 		CLASS_INVARIANT_DECLARE;
 
 		void Rebuild(RendererTypes type);
 
-	private:		
-		SINGLETON_INSTANCE_DECLARE(RendererInputData);
-		SINGLETON_IMPL_DECLARE(RendererInputData);
+	private:
+		using RendererInputDataUniquePtr = std::unique_ptr<RendererInputData>;
+
+	private:
+		static RendererInputDataUniquePtr sm_RendererInputData;
+		IMPL_TYPE_DECLARE(RendererInputData);
 	};
 }
 

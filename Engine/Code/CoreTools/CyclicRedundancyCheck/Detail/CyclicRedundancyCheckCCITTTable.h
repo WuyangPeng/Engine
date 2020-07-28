@@ -51,7 +51,7 @@ namespace CoreTools
 		using ClassType = CyclicRedundancyCheckCCITTTable;
 
 	public:
-		CyclicRedundancyCheckCCITTTable();
+		CyclicRedundancyCheckCCITTTable() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -62,7 +62,7 @@ namespace CoreTools
 
 	private:
 		void Calculate();
-		uint16_t CalculateCCITT(uint32_t index);
+		uint16_t CalculateCCITT(uint32_t index) noexcept;
 
 	private:
 		std::array<uint16_t, sm_TableSize> m_Table;

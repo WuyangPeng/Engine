@@ -20,8 +20,15 @@ CoreTools::Assertion
 {
 	if (!condition)
 	{
+		 
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26492)
+
 		va_list arguments{};
 		va_start(arguments, format);
+
+		#include STSTEM_WARNING_POP
 
 		ScopeExit<> onExit{ [&arguments]()
 		{

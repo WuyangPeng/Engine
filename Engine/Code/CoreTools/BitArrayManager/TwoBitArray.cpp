@@ -21,7 +21,7 @@ CoreTools::TwoBitArray
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, TwoBitArray)
 
 CoreTools::TwoBitProxy CoreTools::TwoBitArray
-	::operator[](int position)
+	::operator[](int position) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -29,7 +29,7 @@ CoreTools::TwoBitProxy CoreTools::TwoBitArray
 }
 
 CoreTools::ConstTwoBitProxy	CoreTools::TwoBitArray
-	::operator[](int pos) const
+	::operator[](int pos) const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -115,8 +115,8 @@ uint32_t CoreTools::TwoBitArray
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	auto lhs = m_Array.IsBitSet(2 * position);
-	auto rhs = m_Array.IsBitSet(2 * position + 1);
+	const auto lhs = m_Array.IsBitSet(2 * position);
+	const auto rhs = m_Array.IsBitSet(2 * position + 1);
 
 	return (lhs != 0 ? 1 : 0) | ((rhs != 0 ? 1 : 0) << 1);
 }

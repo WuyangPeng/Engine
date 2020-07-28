@@ -33,7 +33,7 @@
 
 	namespace Animation
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

@@ -14,19 +14,19 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+using namespace std::literals;
+
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
 CoreTools::ReadBufferIOImpl
-	::ReadBufferIOImpl(int bytesTotal, const char* buffer)
+	::ReadBufferIOImpl(int bytesTotal, const char* buffer) noexcept
 	:ParentType{ bytesTotal,BufferIO::Read }, m_Buffer{ buffer }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
-CoreTools::ReadBufferIOImpl
-	::~ReadBufferIOImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::ReadBufferIOImpl
 	::IsValid() const noexcept
@@ -39,7 +39,7 @@ bool CoreTools::ReadBufferIOImpl
 #endif // OPEN_CLASS_INVARIANT
 
 const char* CoreTools::ReadBufferIOImpl
-	::GetBuffer() const
+	::GetBuffer() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -99,8 +99,9 @@ int CoreTools::ReadBufferIOImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要读取的字节数超过了缓冲区大小！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("要读取的字节数超过了缓冲区大小！"s));
 	}
 }
 
 
+#include STSTEM_WARNING_POP

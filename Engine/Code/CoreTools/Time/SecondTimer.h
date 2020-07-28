@@ -25,10 +25,10 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		uint64_t GetRemain() const;
-		uint64_t GetElapsedTime() const;
-		bool IsElapsed() const;
-		uint64_t GetNowTime() const;
+		uint64_t GetRemain() const noexcept;
+		uint64_t GetElapsedTime() const noexcept;
+		bool IsElapsed() const noexcept;
+		uint64_t GetNowTime() const noexcept;
 
 		void ReTiming(uint64_t second);
 

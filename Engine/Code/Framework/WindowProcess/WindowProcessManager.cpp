@@ -164,5 +164,10 @@ Framework::WindowProcessManager::HWnd Framework::WindowProcessManager
 
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetMainWindowHwnd();
+	#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26487)
+
+	return m_Impl->GetMainWindowHwnd(); 
+
+	#include STSTEM_WARNING_POP
 }

@@ -9,7 +9,8 @@
 #include "TryScopedMutex.h"
 #include "DllMutex.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 CoreTools::TryScopedMutex
 	::TryScopedMutex(MasterType& mutex)
 	:m_Mutex{ mutex }, m_IsSuccess{ m_Mutex.TryEnter() }
@@ -22,10 +23,20 @@ CoreTools::TryScopedMutex
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+
 	if (m_IsSuccess)
 	{
-		m_Mutex.Leave();
+		EXCEPTION_TRY
+		{
+			m_Mutex.Leave();
+		}
+		EXCEPTION_ALL_CATCH(CoreTools)		
 	}
+
+#include STSTEM_WARNING_POP
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, TryScopedMutex)

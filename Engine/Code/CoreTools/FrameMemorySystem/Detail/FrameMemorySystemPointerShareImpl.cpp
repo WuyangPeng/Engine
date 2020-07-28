@@ -11,8 +11,10 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+using namespace std::literals;
+
 CoreTools::FrameMemorySystemPointerShareImpl
-	::FrameMemorySystemPointerShareImpl(uint8_t* ptr, int size, uint8_t*& lowerFramePointer, uint8_t*& upperFramePointer, FrameMemorySystemHeap type)
+	::FrameMemorySystemPointerShareImpl(uint8_t* ptr, int size, uint8_t*& lowerFramePointer, uint8_t*& upperFramePointer, FrameMemorySystemHeap type) noexcept
 	:m_Ptr{ ptr }, m_Size{ size }, m_LowerFramePointer{ lowerFramePointer }, m_UpperFramePointer{ upperFramePointer }, m_Type{ type }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -57,7 +59,7 @@ const uint8_t* CoreTools::FrameMemorySystemPointerShareImpl
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("获取帧指针失败"));
+	THROW_EXCEPTION(SYSTEM_TEXT("获取帧指针失败"s));
 }
 
 int CoreTools::FrameMemorySystemPointerShareImpl

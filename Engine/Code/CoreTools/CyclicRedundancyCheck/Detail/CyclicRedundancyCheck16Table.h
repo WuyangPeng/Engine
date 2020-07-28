@@ -23,7 +23,7 @@ namespace CoreTools
 		using ClassType = CyclicRedundancyCheck16Table;
 
 	public:
-		CyclicRedundancyCheck16Table();
+		CyclicRedundancyCheck16Table() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

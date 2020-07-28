@@ -23,7 +23,7 @@ namespace Imagics
 		// (x,y,z) stored in a linear array.  Voxel (x,y,z) is stored in the
 		// array at location x+xbound*(y+ybound*z).  The caller is responsible
 		// for deleting data if it was dynamically allocated.
-		ExtractSurfaceCubes (int xBound, int yBound, int zBound, int* data);
+		ExtractSurfaceCubes (int xBound, int yBound, int zBound, int* data) noexcept;
 		
 		// The level value *must* not be exactly an integer.  This simplifies the
 		// level surface construction immensely.
@@ -94,7 +94,7 @@ namespace Imagics
 		class VETable
 		{
 		public:
-			VETable ();
+			VETable () noexcept;
 			
 			bool IsValidVertex (int i) const;
 			float GetX (int i) const;
@@ -111,11 +111,11 @@ namespace Imagics
 			class Vertex
 			{
 			public:
-				Vertex ();
+				Vertex () noexcept;
 				
 				Mathematics::Vector3Df P;
 				int NumAdjacents;
-				int Adj[4];
+				int Adj[4]{ };
 				bool Valid;
 			};
 			

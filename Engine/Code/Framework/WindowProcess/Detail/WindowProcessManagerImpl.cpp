@@ -131,12 +131,14 @@ bool Framework::WindowProcessManagerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	const auto& classNameContainer = *GetClassNameContainer();
+	auto classNameContainer = GetClassNameContainer();
 
-	if (classNameContainer.find(className) != classNameContainer.cend())
-		return true;
-	else
-		return false;
+	const auto iter = classNameContainer->find(className);
+	
+	if(iter != classNameContainer->cend())
+		return true;	
+		
+	return false;
 }
 
 // static
@@ -145,9 +147,9 @@ bool Framework::WindowProcessManagerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	auto& classNameContainer = *GetClassNameContainer();
+	auto classNameContainer = GetClassNameContainer();
 
-	if (classNameContainer.insert(className).second)
+	if (classNameContainer->insert(className).second)
 		return true;
 	else
 		return false;
@@ -168,9 +170,9 @@ void Framework::WindowProcessManagerImpl
 
 	if (sm_WindowMessage != nullptr)
 	{
-		auto& windowMessageContainer = *GetWindowMessageContainer();
+		auto windowMessageContainer = GetWindowMessageContainer();
 
-		windowMessageContainer.insert({ sm_WindowMessageIndex++,sm_WindowMessage });
+		windowMessageContainer->insert({ sm_WindowMessageIndex++,sm_WindowMessage });
 	}
 
 	sm_WindowMessage = windowMessage;	
@@ -196,15 +198,15 @@ void Framework::WindowProcessManagerImpl
 {
 	sm_WindowMessage.reset();
 
-	auto& windowMessageContainer = *GetWindowMessageContainer();	
+	auto windowMessageContainer = GetWindowMessageContainer();	
 
-	for (auto iter = windowMessageContainer.begin(); iter != windowMessageContainer.end(); ++iter)
+	for (auto iter = windowMessageContainer->begin(); iter != windowMessageContainer->end(); ++iter)
 	{
 		auto nextWindowMessage = iter->second.lock();
 		if (nextWindowMessage != nullptr)
 		{
 			sm_WindowMessage = nextWindowMessage;
-			windowMessageContainer.erase(iter);
+			windowMessageContainer->erase(iter);
 			break;
 		}
 	}
@@ -213,14 +215,14 @@ void Framework::WindowProcessManagerImpl
 void Framework::WindowProcessManagerImpl
 	::ClearWindowMessageContainer(const WindowMessageInterfaceSharedPtr& windowMessage)
 {
-	auto& windowMessageContainer = *GetWindowMessageContainer();
+	auto windowMessageContainer = GetWindowMessageContainer();
 
-	for (auto iter = windowMessageContainer.begin(); iter != windowMessageContainer.end();)
+	for (auto iter = windowMessageContainer->begin(); iter != windowMessageContainer->end();)
 	{
 		auto nextWindowMessage = iter->second.lock();
 		if (nextWindowMessage == nullptr || nextWindowMessage == windowMessage)
 		{
-			windowMessageContainer.erase(iter++);
+			windowMessageContainer->erase(iter++);
 		}
 		else
 		{

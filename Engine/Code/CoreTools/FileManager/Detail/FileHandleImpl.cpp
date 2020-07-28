@@ -16,6 +16,8 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+using namespace std::literals;
+
 CoreTools::FileHandleImpl
 	::FileHandleImpl(const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode, FileHandleCreationDisposition creation)
 	:m_FileName{ fileName }, m_File{ System::CreateSystemFile(fileName,access, shareMode,creation) }
@@ -84,7 +86,7 @@ void CoreTools::FileHandleImpl
 
 	if (!System::ReadSystemFile(m_File, data, readNumber, &in) || in != readNumber)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"s));
 	}
 }
 
@@ -101,7 +103,7 @@ void CoreTools::FileHandleImpl
 
 	if (!System::WriteSystemFile(m_File, data, writeNumber, &out) || out != writeNumber)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"s));
 	}
 }
 
@@ -118,6 +120,6 @@ void CoreTools::FileHandleImpl
 
 	if (!System::AppendSystemFile(m_File, data, writeNumber, &out) || out != writeNumber)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"s));
 	}
 }

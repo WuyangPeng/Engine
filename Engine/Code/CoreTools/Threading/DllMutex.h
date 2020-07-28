@@ -29,7 +29,11 @@ namespace CoreTools
 		// 参数UseCriticalSection只对Windows平台有效，非Windows平台会自动转换成UseDefault。
 		explicit DllMutex(MutexCreate mutexCreate = MutexCreate::UseCriticalSection);
 		virtual ~DllMutex ();
-		
+		DllMutex(const DllMutex&) = delete;
+		DllMutex& operator=(const DllMutex&) = delete;
+		DllMutex(DllMutex&&) noexcept = delete;
+		DllMutex& operator=(DllMutex&&) noexcept = delete;
+
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		bool TryEnter();

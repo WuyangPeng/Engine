@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using std::string;
 
@@ -37,7 +38,7 @@ void CoreTools::CFileManagerImpl
 }
 
 CoreTools::CFileManagerImpl
-	::~CFileManagerImpl()
+	::~CFileManagerImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
@@ -70,32 +71,26 @@ bool CoreTools::CFileManagerImpl
 #endif // OPEN_CLASS_INVARIANT
 
 size_t CoreTools::CFileManagerImpl
-	::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) noexcept
+	::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data)  
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	EXCEPTION_TRY
-	{
+	 
 		CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8,"大小必须为1，2，4或8\n");
 		CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "准备写入的数据无效！");
-	}
-	EXCEPTION_ALL_CATCH(CoreTools)
+	 
 
 	return System::ReadCFile(data, itemSize, itemsNumber, m_File);
 }
 
 size_t CoreTools::CFileManagerImpl
-	::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept
+	::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
-
-	EXCEPTION_TRY
-	{
-		CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8,"大小必须为1，2，4或8\n");
-		CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr,"准备读取的数据无效！");
-	}
-	EXCEPTION_ALL_CATCH(CoreTools)
-
+	
+	CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8,"大小必须为1，2，4或8\n");
+	CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr,"准备读取的数据无效！");
+	
 	return System::WriteCFile(data, itemSize, itemsNumber, m_File);
 }
 
@@ -114,33 +109,41 @@ CoreTools::CFileManagerImpl::OffType CoreTools::CFileManagerImpl
 }
 
 int CoreTools::CFileManagerImpl
-	::GetCharacter() noexcept
+	::GetCharacter()  
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
 
 	return System::GetCharacter(m_File);
 }
 
 bool CoreTools::CFileManagerImpl
-	::UnGetCharacter(int character) noexcept
+	::UnGetCharacter(int character)  
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
 
 	return System::UnGetCharacter(m_File, character);
 }
 
 bool CoreTools::CFileManagerImpl
-	::PutCharacter(int character) noexcept
+	::PutCharacter(int character)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
 
 	return System::PutCharacter(m_File, character);
 }
 
 bool CoreTools::CFileManagerImpl
-	::PutString(const string& str) noexcept
+	::PutString(const string& str)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
 
 	return System::PutString(m_File, str.c_str());
 }
@@ -182,7 +185,7 @@ CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto position = System::GetPosition(m_File);
+	const auto position = System::GetPosition(m_File);
 
 	constexpr PosType errorPosition{ -1 };
 

@@ -7,13 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ReadFileManagerInterface.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
-CoreTools::ReadFileManagerInterface
-	::~ReadFileManagerInterface()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ReadFileManagerInterface)
 

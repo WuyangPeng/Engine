@@ -61,7 +61,7 @@ int Network::ACESockStream
 
 	if (bytesTotal <= headSize)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("接收消息头容量不足！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("接收消息头容量不足！"s));
 	}
 
 	auto buffer = messageBuffer->GetCurrentWriteBufferedPtr();
@@ -101,7 +101,7 @@ int Network::ACESockStream
 
 	if (m_ACESockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"s));
 	}
 
 	return  messageBuffer->GetSize();
@@ -147,7 +147,7 @@ void Network::ACESockStream
 
 	if (m_ACESockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"s));
 	}
 
 	CoreTools::CallbackParameters callbackParameters{};

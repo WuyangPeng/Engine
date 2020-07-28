@@ -11,20 +11,21 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include <string>
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 
 using std::string;
 
 CoreTools::ConsoleAlloc
-	::ConsoleAlloc()
+	::ConsoleAlloc() noexcept
 	:m_OutPtr{ nullptr }, m_InPtr{ nullptr }, m_ErrPtr{ nullptr }
 {
-	OpenConsole();
+	CoreTools::NoexceptNoReturn(*this,&ClassType::OpenConsole);
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::ConsoleAlloc
-	::~ConsoleAlloc()
+	::~ConsoleAlloc() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
@@ -60,7 +61,7 @@ void CoreTools::ConsoleAlloc
 }
 
 void CoreTools::ConsoleAlloc
-	::CloseConsole()
+	::CloseConsole() noexcept
 {
 	System::FCloseConsole(m_OutPtr);
 	System::FCloseConsole(m_InPtr);

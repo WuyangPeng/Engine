@@ -15,17 +15,13 @@
 using std::ostream;
 
 CoreTools::UnitTestStream
-	::UnitTestStream(const OStreamShared& osPtr)
+	::UnitTestStream(const OStreamShared& osPtr) noexcept
 	:m_OsPtr{ osPtr }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::UnitTestStream
-	::~UnitTestStream()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::UnitTestStream
@@ -36,7 +32,7 @@ bool CoreTools::UnitTestStream
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::OStreamShared& CoreTools::UnitTestStream
-	::GetStream()
+	::GetStream() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

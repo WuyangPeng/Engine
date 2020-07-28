@@ -36,7 +36,7 @@ namespace Imagics
 		// otherwise, this array is empty.  When the background is large, the
 		// construction of components[0] is time consuming.  The array
 		// components[i], i >= 1, contains the indices for the i-th component.
-		static void GetComponents26 (ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components);
+		static void GetComponents26 (const ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components);
 		
 		// Compute the 18-connected components of a binary image.  The input
 		// image is modified to avoid the cost of making a copy.  On output,
@@ -45,7 +45,7 @@ namespace Imagics
 		// otherwise, this array is empty.  When the background is large, the
 		// construction of components[0] is time consuming.  The array
 		// components[i], i >= 1, contains the indices for the i-th component.
-		static void GetComponents18 (ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components);
+		static void GetComponents18 (const ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components);
 		
 		// Compute the 6-connected components of a binary image.  The input
 		// image is modified to avoid the cost of making a copy.  On output,
@@ -54,11 +54,11 @@ namespace Imagics
 		// otherwise, this array is empty.  When the background is large, the
 		// construction of components[0] is time consuming.  The array
 		// components[i], i >= 1, contains the indices for the i-th component.
-		static void GetComponents6 (ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components);
+		static void GetComponents6 (const ImageInt3D& image, bool storeZeros, std::vector<IndexArray>& components);
 		
 	private:
 		// The heart of the component labeling.
-		static void GetComponents (const int numNeighbors, const int delta[], bool storeZeros, ImageInt3D& image, std::vector<IndexArray>& components);
+		static void GetComponents (const int numNeighbors, const int delta[], bool storeZeros, const ImageInt3D& image, std::vector<IndexArray>& components);
 	};
 }
 

@@ -22,7 +22,7 @@ CoreTools::WriteBufferIO
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, WriteBufferIO)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, WriteBufferIO, GetBuffer, const char*);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, WriteBufferIO, GetBuffer, const char*);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, WriteBufferIO, GetBytesTotal, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, WriteBufferIO, GetBytesProcessed, int);
 

@@ -20,10 +20,13 @@ namespace CoreTools
 	public:
 		explicit MinHeapRecordIndex(int maxElements);
 		MinHeapRecordIndex(int newMaxElements, const ClassType& oldIndex);
-		~MinHeapRecordIndex();
+		~MinHeapRecordIndex() noexcept;
 
 		MinHeapRecordIndex(const MinHeapRecordIndex& rhs);
 		MinHeapRecordIndex& operator= (const MinHeapRecordIndex& rhs);
+
+		MinHeapRecordIndex(MinHeapRecordIndex&& rhs) noexcept = default;
+		MinHeapRecordIndex& operator= (MinHeapRecordIndex&& rhs) noexcept = default;
 
 #ifdef OPEN_CLASS_INVARIANT		
 		CLASS_INVARIANT_DECLARE;

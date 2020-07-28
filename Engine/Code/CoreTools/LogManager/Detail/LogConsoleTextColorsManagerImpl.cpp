@@ -13,14 +13,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::LogConsoleTextColorsManagerImpl
-	::LogConsoleTextColorsManagerImpl(LogLevel logLevel)
+	::LogConsoleTextColorsManagerImpl(LogLevel logLevel) noexcept
 	:m_LogLevel{ logLevel }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::LogConsoleTextColorsManagerImpl
-	::~LogConsoleTextColorsManagerImpl()
+	::~LogConsoleTextColorsManagerImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -37,7 +37,7 @@ CoreTools::LogLevel CoreTools::LogConsoleTextColorsManagerImpl
 
 // static
 CoreTools::TextColour CoreTools::LogConsoleTextColorsManagerImpl
-	::GetTextColor(LogLevel logLevel)
+	::GetTextColor(LogLevel logLevel) noexcept
 {
 	switch (logLevel)
 	{
@@ -60,7 +60,7 @@ CoreTools::TextColour CoreTools::LogConsoleTextColorsManagerImpl
 
 // static
 bool CoreTools::LogConsoleTextColorsManagerImpl
-	::GetIntensified(LogLevel logLevel)
+	::GetIntensified(LogLevel logLevel) noexcept
 {
 	if (logLevel == LogLevel::Fatal)
 		return true;

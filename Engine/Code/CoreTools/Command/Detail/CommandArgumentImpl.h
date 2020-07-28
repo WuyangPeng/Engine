@@ -22,7 +22,11 @@ namespace CoreTools
 
 	public:
 		CommandArgumentImpl(int index, const std::string& name);
-		virtual ~CommandArgumentImpl();
+		virtual ~CommandArgumentImpl() = default;
+		CommandArgumentImpl(const CommandArgumentImpl& rhs) = default;
+		CommandArgumentImpl& operator=(const CommandArgumentImpl& rhs) = default;
+		CommandArgumentImpl(CommandArgumentImpl&& rhs) noexcept = default;
+		CommandArgumentImpl& operator=(CommandArgumentImpl&& rhs) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -34,11 +38,11 @@ namespace CoreTools
 		virtual double GetDouble() const = 0;
 		virtual const std::string GetString() const = 0;
 
-		virtual bool IsInteger() const = 0;
-		virtual bool IsFloat() const = 0;
-		virtual bool IsDouble() const = 0;
-		virtual bool IsString() const = 0;
-		virtual bool IsNoValue() const = 0;
+		virtual bool IsInteger() const noexcept = 0;
+		virtual bool IsFloat() const noexcept = 0;
+		virtual bool IsDouble() const noexcept = 0;
+		virtual bool IsString() const noexcept = 0;
+		virtual bool IsNoValue() const noexcept = 0;
 
 		bool IsUsed() const noexcept;
 		void SetUsed() noexcept;

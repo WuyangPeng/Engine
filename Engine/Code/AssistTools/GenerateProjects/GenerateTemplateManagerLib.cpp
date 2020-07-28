@@ -14,7 +14,7 @@
  
 AssistTools::GenerateTemplateManagerLib
 	::GenerateTemplateManagerLib(const System::String& templateFileName, const Replace& replace)
-	:m_Impl(new ImplType(templateFileName,replace))
+	:m_Impl(std::make_shared<ImplType>(templateFileName,replace))
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }

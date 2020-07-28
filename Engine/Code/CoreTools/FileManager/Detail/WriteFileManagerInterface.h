@@ -21,7 +21,13 @@ namespace CoreTools
 		using ClassType = WriteFileManagerInterface;
 
 	public:
-		virtual ~WriteFileManagerInterface();
+		WriteFileManagerInterface() = default;
+		virtual ~WriteFileManagerInterface() noexcept = default;
+
+		WriteFileManagerInterface(const WriteFileManagerInterface&) = default;
+		WriteFileManagerInterface& operator=(const WriteFileManagerInterface&) = default;
+		WriteFileManagerInterface(WriteFileManagerInterface&&) = default;
+		WriteFileManagerInterface& operator=(WriteFileManagerInterface&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

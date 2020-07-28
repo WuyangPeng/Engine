@@ -19,7 +19,7 @@ using std::ofstream;
 using std::make_shared;
 
 CoreTools::OStreamImpl
-	::OStreamImpl(bool isCout)
+	::OStreamImpl(bool isCout) noexcept
 	:m_OStream{ }, m_IsCout{ isCout }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -35,7 +35,7 @@ CoreTools::OStreamImpl
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, OStreamImpl)
 
 ostream& CoreTools::OStreamImpl
-	::GetStream()
+	::GetStream() noexcept
 {
 	if (m_OStream)
 	{

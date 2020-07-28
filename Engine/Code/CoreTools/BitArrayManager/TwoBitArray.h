@@ -27,8 +27,8 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		TwoBitProxy operator[](int position);
-		ConstTwoBitProxy operator[](int position) const;
+		TwoBitProxy operator[](int position) noexcept;
+		ConstTwoBitProxy operator[](int position) const noexcept;
 
 		bool operator==(const TwoBitArray& rhs) const noexcept;
 

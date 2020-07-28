@@ -13,17 +13,11 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::BufferIOImpl
-	::BufferIOImpl(int bytesTotal, BufferIO type)
+	::BufferIOImpl(int bytesTotal, BufferIO type) noexcept
 	:m_BytesTotal{ bytesTotal }, m_BytesProcessed{ 0 }, m_BufferIOType{ type }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-CoreTools::BufferIOImpl
-	::~BufferIOImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+} 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::BufferIOImpl
@@ -61,7 +55,7 @@ void CoreTools::BufferIOImpl
 	{
 		CORE_TOOLS_ASSERTION_2(0 < bytesNumber, "增量必须是正数！\n");
 
-		auto nextBytesProcessed = m_BytesProcessed + bytesNumber;
+		const auto nextBytesProcessed = m_BytesProcessed + bytesNumber;
 
 		CORE_TOOLS_ASSERTION_2(nextBytesProcessed <= m_BytesTotal, "增量超过了缓冲区大小！\n");
 

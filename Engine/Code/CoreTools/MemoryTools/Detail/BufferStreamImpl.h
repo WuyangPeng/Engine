@@ -29,7 +29,12 @@ namespace CoreTools
 		// 禁止使用除BufferPool外的方式创建BufferStreamImpl
 		explicit BufferStreamImpl(BufferPool* pool);
 		BufferStreamImpl(BufferPool* pool, int minSize);
-		~BufferStreamImpl();
+		~BufferStreamImpl() noexcept;
+
+		BufferStreamImpl(const BufferStreamImpl&) = delete;
+		BufferStreamImpl& operator=(const BufferStreamImpl&) = delete;
+		BufferStreamImpl(BufferStreamImpl&&) noexcept = delete;
+		BufferStreamImpl& operator=(BufferStreamImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -70,7 +75,7 @@ namespace CoreTools
 
 		// 读数据
 		void InitRead() noexcept;
-		void InitRead(int totalLength) noexcept;
+		void InitRead(int totalLength);
 
 		int GetReadableLength() const noexcept;
 		int GetReadPosition() const noexcept;

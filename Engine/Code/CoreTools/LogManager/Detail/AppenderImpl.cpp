@@ -13,6 +13,7 @@
 #include "CoreTools/LogManager/LogMessagePrefix.h"
 #include "CoreTools/LogManager/LogMessagePostfix.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using std::make_shared;
 
@@ -31,7 +32,7 @@ CoreTools::AppenderImpl
 }
 
 CoreTools::AppenderImpl& CoreTools::AppenderImpl
-	::operator=(const AppenderImpl& rhs)
+	::operator=(const AppenderImpl& rhs) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -94,6 +95,8 @@ void CoreTools::AppenderImpl
 	::Reload()
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
+
+	CoreTools::DoNothing();
 }
 
 System::String CoreTools::AppenderImpl

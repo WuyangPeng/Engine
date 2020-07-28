@@ -34,7 +34,7 @@ void CoreTools::BufferOutStreamImpl
 {
 	Register();
 
-	auto bufferSize = GetBufferSize();
+	const auto bufferSize = GetBufferSize();
 
 	if (0 < bufferSize)
 	{
@@ -54,7 +54,7 @@ void CoreTools::BufferOutStreamImpl
 	// 使我们可以创建用于写入缓冲区所需的数据流的字节数的确切大小。
 	for (auto index = 0; index < m_TopLevel.GetTopLevelSize(); ++index)
 	{
-		auto uniqueID = m_TopLevel[index]->Register(m_ObjectRegister);
+		const auto uniqueID = m_TopLevel[index]->Register(m_ObjectRegister);
 		m_TopLevel.SetUniqueID(index, uniqueID);
 	}
 }
@@ -116,7 +116,7 @@ bool CoreTools::BufferOutStreamImpl
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::BufferOutStreamImpl::FileBufferPtr CoreTools::BufferOutStreamImpl
-	::GetBufferOutStreamInformation() const
+	::GetBufferOutStreamInformation() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

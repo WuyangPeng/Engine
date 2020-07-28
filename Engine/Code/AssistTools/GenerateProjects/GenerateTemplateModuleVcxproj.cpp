@@ -12,7 +12,7 @@
  
 AssistTools::GenerateTemplateModuleVcxproj
 	::GenerateTemplateModuleVcxproj(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName, const System::String& includeName)
-	:m_Impl(new ImplType(templateFileName, projectName, moduleName, includeName))
+	:m_Impl(std::make_shared<ImplType>(templateFileName, projectName, moduleName, includeName))
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }

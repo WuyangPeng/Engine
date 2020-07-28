@@ -13,6 +13,7 @@
 
 using std::string;
 using std::initializer_list;
+using namespace std::literals;
 
 Database::TableImpl
 	::TableImpl(const ConfigurationStrategy& configurationStrategy)
@@ -30,7 +31,7 @@ Database::TableImpl
 CLASS_INVARIANT_STUB_DEFINE(Database, TableImpl)
 
 Database::ConfigurationStrategy Database::TableImpl
-	::GetConfigurationStrategy() const
+	::GetConfigurationStrategy() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_1;
 
@@ -48,6 +49,6 @@ Database::TableImpl::ResultPtr Database::TableImpl
 	SYSTEM_UNUSED_ARG(orderByStatement);
 	SYSTEM_UNUSED_ARG(bindStatement);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("TableImpl未实现Select"));
+	THROW_EXCEPTION(SYSTEM_TEXT("TableImpl未实现Select"s));
 }
 

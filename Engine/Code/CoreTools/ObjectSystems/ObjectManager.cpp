@@ -16,66 +16,41 @@
 
 using std::string;
 
-SINGLETON_MUTEX_DEFINE(CoreTools, ObjectManager);
+using std::make_shared;
+using std::make_unique;
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
+SINGLETON_GET_PTR_DEFINE(CoreTools, ObjectManager);
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_ObjectManagerMutex } 
-
-SINGLETON_GET_PTR_DEFINE(CoreTools, ObjectManager);  
+CoreTools::ObjectManager::ObjectManagerUniquePtr CoreTools::ObjectManager
+::sm_ObjectManager{ };
 
 void CoreTools::ObjectManager
-	::Create()
+::Create()
 {
-	MUTEX_ENTER_GLOBAL; 
-	try
-	{
-		DoCreate();
-	}
-	catch (...)
-	{
-		Destroy();
-		throw;
-	}
-} 
-void CoreTools::ObjectManager
-	::DoCreate()
-{
-	MUTEX_ENTER_GLOBAL; 
-
-	if ((sm_ObjectManagerMutex) == nullptr)
-		sm_ObjectManagerMutex = new CoreTools::Mutex;
-	if (sm_ObjectManager == nullptr)
-		sm_ObjectManager = new ObjectManager;
-}  
-void CoreTools::ObjectManager
-	::Destroy() noexcept
-{
-	delete sm_ObjectManager;
-	sm_ObjectManager = nullptr;
-	delete sm_ObjectManagerMutex;
-	sm_ObjectManagerMutex = nullptr; 
+	sm_ObjectManager = make_unique<CoreTools::ObjectManager>(ObjectManagerCreate::Init);
 }
 
-SINGLETON_DEFINE(CoreTools, ObjectManager)
-
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::ObjectManager
-	::IsValid() const noexcept
+void CoreTools::ObjectManager
+::Destroy() noexcept
 {
-	MUTEX_ENTER_MEMBER;
-
-	if (m_Impl != nullptr)
-		return true;
-	else
-		return false;
+	sm_ObjectManager.reset();
 }
-#endif // OPEN_CLASS_INVARIANT
+
+CoreTools::ObjectManager
+::ObjectManager(ObjectManagerCreate objectManagerCreate)
+	:m_Impl{ make_shared<ImplType>() }
+{
+	SYSTEM_UNUSED_ARG(objectManagerCreate);
+
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, ObjectManager)
 
 CoreTools::ObjectManager::FactoryFunction CoreTools::ObjectManager
 	::Find(const string& name) const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -85,7 +60,7 @@ CoreTools::ObjectManager::FactoryFunction CoreTools::ObjectManager
 void CoreTools::ObjectManager
 	::Insert(const string& name, FactoryFunction function)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -95,7 +70,7 @@ void CoreTools::ObjectManager
 void CoreTools::ObjectManager
 	::Remove(const string& name)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -105,7 +80,7 @@ void CoreTools::ObjectManager
 uint64_t CoreTools::ObjectManager
 	::NextUniqueID()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

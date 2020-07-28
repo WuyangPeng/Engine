@@ -9,7 +9,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include <boost/any.hpp> 
+#include "System/Helper/PragmaWarning/Any.h"
 #include <boost/call_traits.hpp>
 #include <vector>
 

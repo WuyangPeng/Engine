@@ -29,7 +29,7 @@ bool CoreTools::BitArray2D
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::ArrayProxy CoreTools::BitArray2D
-	::operator[](int position)
+	::operator[](int position) noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -37,7 +37,7 @@ CoreTools::ArrayProxy CoreTools::BitArray2D
 }
 
 CoreTools::ConstArrayProxy CoreTools::BitArray2D
-	::operator[](int position) const
+	::operator[](int position) const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -166,7 +166,7 @@ int CoreTools::BitArray2D
 }
 
 const CoreTools::BitArray& CoreTools::BitArray2D
-	::GetBitArray() const
+	::GetBitArray() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -174,7 +174,7 @@ const CoreTools::BitArray& CoreTools::BitArray2D
 }
 
 CoreTools::BitArray& CoreTools::BitArray2D
-	::GetBitArray()
+	::GetBitArray() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

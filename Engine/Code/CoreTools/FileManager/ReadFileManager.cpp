@@ -64,7 +64,7 @@ const string CoreTools::ReadFileManager
 		padding = alignedLength - padding;
 	}
 
-	auto numBytes = length + padding;
+	const auto numBytes = length + padding;
 	vector<char> text(numBytes);
 	Read(sizeof(char), numBytes, text.data());
 

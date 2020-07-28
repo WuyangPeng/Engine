@@ -26,6 +26,11 @@ namespace CoreTools
 	public:
 		explicit BaseResource(PriorityType priority);
 		virtual ~BaseResource();
+		
+		BaseResource(const BaseResource&) = default;
+		BaseResource& operator=(const BaseResource&) = default;
+		BaseResource(BaseResource&&) noexcept = default;
+		BaseResource& operator=(BaseResource&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

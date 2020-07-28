@@ -15,9 +15,11 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <vector>
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using std::vector;
 using std::string;
+using namespace std::literals;
 
 CoreTools::CWriteFileManagerImpl
 	::CWriteFileManagerImpl(const String& fileName)
@@ -26,11 +28,7 @@ CoreTools::CWriteFileManagerImpl
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::CWriteFileManagerImpl
-	::~CWriteFileManagerImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::CWriteFileManagerImpl
@@ -71,14 +69,14 @@ void CoreTools::CWriteFileManagerImpl
 	CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
 
 #ifdef SYSTEM_BIG_ENDIAN
-	auto writeNumber = WriteToFileWithBigEndian(itemSize, itemsNumber, data);
+	const auto writeNumber = WriteToFileWithBigEndian(itemSize, itemsNumber, data);
 #else // !SYSTEM_BIG_ENDIAN
-	auto writeNumber = WriteToFile(itemSize, itemsNumber, data);
+	const auto writeNumber = WriteToFile(itemSize, itemsNumber, data);
 #endif // SYSTEM_BIG_ENDIAN
 
 	if (writeNumber != itemsNumber)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"s));
 	}
 }
 
@@ -139,7 +137,7 @@ size_t CoreTools::CWriteFileManagerImpl
 #endif // SYSTEM_BIG_ENDIAN
 
 size_t CoreTools::CWriteFileManagerImpl
-	::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) noexcept
+	::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) 
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -149,27 +147,33 @@ size_t CoreTools::CWriteFileManagerImpl
 	SYSTEM_UNUSED_ARG(itemsNumber);
 	SYSTEM_UNUSED_ARG(data);
 
+	CoreTools::DoNothing();
+
 	return 0;
 }
 
 int CoreTools::CWriteFileManagerImpl
-	::GetCharacter() noexcept
+	::GetCharacter() 
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用GetCharacter！");
 
+	CoreTools::DoNothing();
+
 	return System::g_CFileError;
 }
 
 bool CoreTools::CWriteFileManagerImpl
-	::UnGetCharacter(int character) noexcept
+	::UnGetCharacter(int character) 
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用UnGetCharacter！");
 
 	SYSTEM_UNUSED_ARG(character);
+
+	CoreTools::DoNothing();
 
 	return false;
 }

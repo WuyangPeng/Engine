@@ -18,17 +18,24 @@
 using std::string;
 using std::vector;
 using std::ifstream;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26493)
 AssistTools::MtlLoader
 	::MtlLoader(const string& path, const string& filename)
-    :mCode(EC_SUCCESSFUL),
+    :mCode(ErrorCode::EC_SUCCESSFUL),
      mCurrent(-1)
 {
     mLogFile = fopen("MtlLogFile.txt", "wt");
     if (!mLogFile)
     {
         assert(false);
-        mCode = EC_LOGFILE_OPEN_FAILED;
+        mCode = ErrorCode::EC_LOGFILE_OPEN_FAILED;
         return;
     }
 
@@ -37,8 +44,8 @@ AssistTools::MtlLoader
     if (!inFile)
     {
         assert(false);
-        mCode = EC_FILE_OPEN_FAILED;
-        fprintf(mLogFile, "%s: %s\n", msCodeString[mCode], filePath.c_str());
+        mCode = ErrorCode::EC_FILE_OPEN_FAILED;
+        fprintf(mLogFile, "%s: %s\n", msCodeString[System::EnumCastUnderlying(mCode)], filePath.c_str());
         fclose(mLogFile);
         return;
     }
@@ -60,74 +67,71 @@ AssistTools::MtlLoader
         if (tokens.size() == 0)
         {
             assert(false);
-            mCode = EC_NO_TOKENS;
+            mCode = ErrorCode::EC_NO_TOKENS;
             break;
         }
 
         // newmtl
         if (GetNewMaterial(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // illum
         if (GetIlluminationModel(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // Ka
         if (GetAmbientColor(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // Kd
         if (GetDiffuseColor(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // Ks
         if (GetSpecularColor(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // Tf
         if (GetTransmissionFilter(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // Ni
         if (GetOpticalDensity(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // Ni
         if (GetSpecularExponent(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // map_Kd
         if (GetDiffuseTexture(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         assert(false);
-        mCode = EC_UNEXPECTED_TOKEN;
+        mCode = ErrorCode::EC_UNEXPECTED_TOKEN;
         break;
     }
 
-    if (mCode != EC_SUCCESSFUL)
+    if (mCode != ErrorCode::EC_SUCCESSFUL)
     {
-        fprintf(mLogFile, "%s: %s\n", msCodeString[mCode], line.c_str());
+        fprintf(mLogFile, "%s: %s\n", msCodeString[System::EnumCastUnderlying(mCode)], line.c_str());
     }
     else
     {
-        fprintf(mLogFile, "%s\n", msCodeString[EC_SUCCESSFUL]);
+        fprintf(mLogFile, "%s\n", msCodeString[System::EnumCastUnderlying(ErrorCode::EC_SUCCESSFUL)]);
     }
     fclose(mLogFile);
     inFile.close();
 }
 
-AssistTools::MtlLoader
-	::~MtlLoader()
-{
-}
+ 
 
 void AssistTools::MtlLoader
 	::GetTokens(const string & line, vector<string>& tokens)
 {
     tokens.clear();
 
-    string::size_type begin, end = 0;
+    string::size_type begin = 0, end = 0;
     string token;
 
     while ((begin = line.find_first_not_of(" \t", end)) != string::npos)
@@ -144,7 +148,7 @@ bool AssistTools::MtlLoader
     if (tokens[1] == "spectral" || tokens[1] == "xyz")
     {
         assert(false);
-        mCode = EC_NOT_YET_IMPLEMENTED;
+        mCode = ErrorCode::EC_NOT_YET_IMPLEMENTED;
         return false;
     }
 
@@ -153,7 +157,7 @@ bool AssistTools::MtlLoader
     if (fvalue < 0.0f || fvalue > 1.0f)
     {
         assert(false);
-        mCode = EC_VALUE_OUT_OF_RANGE;
+        mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
         return false;
     }
     color[0] = fvalue;
@@ -169,13 +173,13 @@ bool AssistTools::MtlLoader
     if (tokens.size() == 3)
     {
         assert(false);
-        mCode = EC_TOO_FEW_TOKENS;
+        mCode = ErrorCode::EC_TOO_FEW_TOKENS;
         return false;
     }
     if (tokens.size() >= 5)
     {
         assert(false);
-        mCode = EC_TOO_MANY_TOKENS;
+        mCode = ErrorCode::EC_TOO_MANY_TOKENS;
         return false;
     }
 
@@ -184,7 +188,7 @@ bool AssistTools::MtlLoader
     if (fvalue < 0.0f || fvalue > 1.0f)
     {
         assert(false);
-        mCode = EC_VALUE_OUT_OF_RANGE;
+        mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
         return false;
     }
     color[1] = fvalue;
@@ -194,7 +198,7 @@ bool AssistTools::MtlLoader
     if (fvalue < 0.0f || fvalue > 1.0f)
     {
         assert(false);
-        mCode = EC_VALUE_OUT_OF_RANGE;
+        mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
         return false;
     }
     color[2] = fvalue;
@@ -208,14 +212,14 @@ bool AssistTools::MtlLoader
     if (texture.Filename[0] == '-')
     {
         assert(false);
-        mCode = EC_MISSING_MAP_FILENAME;
+        mCode = ErrorCode::EC_MISSING_MAP_FILENAME;
         return false;
     }
 
     if (tokens.size() >= 3)
     {
         // At least one option has been specified.
-        const int imin = 1;
+        constexpr int imin = 1;
         const int imax = (int)tokens.size() - 2;
         for (int i = imin; i <= imax; ++i)
         {
@@ -223,7 +227,7 @@ bool AssistTools::MtlLoader
             if (token[0] != '-')
             {
                 assert(false);
-                mCode = EC_INVALID_OPTION;
+                mCode = ErrorCode::EC_INVALID_OPTION;
                 return false;
             }
             token = token.substr(1);
@@ -354,7 +358,7 @@ bool AssistTools::MtlLoader
     if (++i > imax)
     {
         assert(false);
-        mCode = EC_TOO_FEW_OPTION_TOKENS;
+        mCode = ErrorCode::EC_TOO_FEW_OPTION_TOKENS;
         return false;
     }
 
@@ -371,24 +375,24 @@ bool AssistTools::MtlLoader
     }
 
     assert(false);
-    mCode = EC_INVALID_OPTION_ARGUMENT;
+    mCode = ErrorCode::EC_INVALID_OPTION_ARGUMENT;
     return false;
 }
 
 bool AssistTools::MtlLoader
-	::GetCharArg(const vector<string>& tokens, int imax, const char* valid, int& i, char& value)
+	::GetCharArg(const vector<string>& tokens, int imax, const char* valid, int& i, char& value) noexcept
 {
     if (++i > imax)
     {
         assert(false);
-        mCode = EC_TOO_FEW_OPTION_TOKENS;
+        mCode = ErrorCode::EC_TOO_FEW_OPTION_TOKENS;
         return false;
     }
 
     if (tokens[i].length() != 0)
     {
         assert(false);
-        mCode = EC_INVALID_OPTION_ARGUMENT;
+        mCode = ErrorCode::EC_INVALID_OPTION_ARGUMENT;
         return false;
     }
 
@@ -406,26 +410,26 @@ bool AssistTools::MtlLoader
     if (!isValid)
     {
         assert(false);
-        mCode = EC_VALUE_OUT_OF_RANGE;
+        mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
         return false;
     }
     return true;
 }
 
 bool AssistTools::MtlLoader
-	::GetFloatArg(const vector<string>& tokens, int imax, float vmin, float vmax, int& i, float& value)
+	::GetFloatArg(const vector<string>& tokens, int imax, float vmin, float vmax, int& i, float& value) noexcept
 {
     if (++i > imax)
     {
         assert(false);
-        mCode = EC_TOO_FEW_OPTION_TOKENS;
+        mCode = ErrorCode::EC_TOO_FEW_OPTION_TOKENS;
         return false;
     }
     value = (float)atof(tokens[i].c_str());
     if ((vmin > -FLT_MAX && value < vmin) || (vmax < FLT_MAX && value > vmax))
     {
         assert(false);
-        mCode = EC_VALUE_OUT_OF_RANGE;
+        mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
         return false;
     }
     return true;
@@ -434,12 +438,12 @@ bool AssistTools::MtlLoader
 bool AssistTools::MtlLoader
 	::GetFloatArg2(const vector<string>& tokens, int imax,
                    float vmin0, float vmax0, float vmin1, float vmax1, int& i, float& value0,
-				   float& value1)
+				   float& value1) noexcept
 {
     if (++i > imax)
     {
         assert(false);
-        mCode = EC_TOO_FEW_OPTION_TOKENS;
+        mCode = ErrorCode::EC_TOO_FEW_OPTION_TOKENS;
         return false;
     }
 
@@ -448,14 +452,14 @@ bool AssistTools::MtlLoader
     ||  (vmax0 <  FLT_MAX && value0 > vmax0))
     {
         assert(false);
-        mCode = EC_VALUE_OUT_OF_RANGE;
+        mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
         return false;
     }
 
     if (++i > imax)
     {
         assert(false);
-        mCode = EC_TOO_FEW_OPTION_TOKENS;
+        mCode = ErrorCode::EC_TOO_FEW_OPTION_TOKENS;
         return false;
     }
     value1 = (float)atof(tokens[i].c_str());
@@ -463,7 +467,7 @@ bool AssistTools::MtlLoader
     ||  (vmax1 <  FLT_MAX && value1 > vmax1))
     {
         assert(false);
-        mCode = EC_VALUE_OUT_OF_RANGE;
+        mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
         return false;
     }
     return true;
@@ -480,7 +484,7 @@ bool AssistTools::MtlLoader
     if (++i > imax)
     {
         assert(false);
-        mCode = EC_TOO_FEW_OPTION_TOKENS;
+        mCode = ErrorCode::EC_TOO_FEW_OPTION_TOKENS;
         return false;
     }
 
@@ -490,7 +494,7 @@ bool AssistTools::MtlLoader
     ||  (vmax0 <  FLT_MAX && values[0] > vmax0))
     {
         assert(false);
-        mCode = EC_VALUE_OUT_OF_RANGE;
+        mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
         return false;
     }
 
@@ -518,11 +522,11 @@ bool AssistTools::MtlLoader
             if (token.length() == 1)
             {
                 assert(false);
-                mCode = EC_UNEXPECTED_TOKEN;
+                mCode = ErrorCode::EC_UNEXPECTED_TOKEN;
                 return false;
             }
 
-            string::size_type begin = token.find_first_of("0123456789.", 1);
+            const string::size_type begin = token.find_first_of("0123456789.", 1);
             if (begin != 0)
             {
                 // The token is the next option.
@@ -539,7 +543,7 @@ bool AssistTools::MtlLoader
         ||  (vmax1 <  FLT_MAX && values[j] > vmax1))
         {
             assert(false);
-            mCode = EC_VALUE_OUT_OF_RANGE;
+            mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
             return false;
         }
     }
@@ -565,7 +569,7 @@ bool AssistTools::MtlLoader
         }
 
         assert(false);
-        mCode = EC_TOO_FEW_TOKENS;
+        mCode = ErrorCode::EC_TOO_FEW_TOKENS;
     }
     return false;
 }
@@ -582,21 +586,21 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 2)
         {
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
-        int illum = atoi(tokens[1].c_str());
+        const int illum = atoi(tokens[1].c_str());
         if ((illum == 0 && tokens[1][0] != '0') || illum > 10)
         {
             assert(false);
-            mCode = EC_VALUE_OUT_OF_RANGE;
+            mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
             return false;
         }
         mMaterials[mCurrent].IlluminationModel = illum;
@@ -619,7 +623,7 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         return GetColor(tokens, mMaterials[mCurrent].AmbientColor);
@@ -641,7 +645,7 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         return GetColor(tokens, mMaterials[mCurrent].DiffuseColor);
@@ -663,7 +667,7 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         return GetColor(tokens, mMaterials[mCurrent].SpecularColor);
@@ -685,7 +689,7 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         return GetColor(tokens, mMaterials[mCurrent].TransmissionFilter);
@@ -705,21 +709,21 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 2)
         {
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
-        float density = (float)atof(tokens[1].c_str());
+        const float density = (float)atof(tokens[1].c_str());
         if (density < 0.001f || density > 10.0f)
         {
             assert(false);
-            mCode = EC_VALUE_OUT_OF_RANGE;
+            mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
             return false;
         }
         mMaterials[mCurrent].OpticalDensity = density;
@@ -740,21 +744,21 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 2)
         {
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
-        float exponent = (float)atof(tokens[1].c_str());
+        const float exponent = (float)atof(tokens[1].c_str());
         if (exponent < 0.0f || exponent > 1000.0f)
         {
             assert(false);
-            mCode = EC_VALUE_OUT_OF_RANGE;
+            mCode = ErrorCode::EC_VALUE_OUT_OF_RANGE;
             return false;
         }
         mMaterials[mCurrent].SpecularExponent = exponent;
@@ -786,7 +790,7 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         return GetTexture(tokens, mMaterials[mCurrent].AmbientMap);
@@ -817,7 +821,7 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         return GetTexture(tokens, mMaterials[mCurrent].DiffuseMap);
@@ -848,7 +852,7 @@ bool AssistTools::MtlLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         return GetTexture(tokens, mMaterials[mCurrent].SpecularMap);
@@ -861,8 +865,8 @@ bool AssistTools::MtlLoader
 // MtlLoader::Texture
 
 AssistTools::MtlLoader::Texture
-	::Texture()
-    :Filename(""),
+	::Texture() noexcept
+    :Filename{},
 	 BlendU(true),
 	 BlendV(true),
 	 BumpMultiplier(1.0f),
@@ -890,11 +894,15 @@ AssistTools::MtlLoader::Texture
 // MtlLoader::Material
 
 AssistTools::MtlLoader::Material
-	::Material()
-    : Name(""),
+	::Material() noexcept
+    : Name{},
       IlluminationModel(-1),
 	  OpticalDensity(0.0f),
-	  SpecularExponent(0.0f)
+	  SpecularExponent(0.0f),
+    AmbientColor{},
+    DiffuseColor{},
+    SpecularColor{ },
+    TransmissionFilter{}
 {
     for (int i = 0; i < 3; ++i)
     {
@@ -906,13 +914,14 @@ AssistTools::MtlLoader::Material
 }
 
 AssistTools::MtlLoader::ErrorCode AssistTools::MtlLoader
-	::GetCode() const
+	::GetCode() const noexcept
 {
 	return mCode;
 }
 
 const vector<AssistTools::MtlLoader::Material>& AssistTools::MtlLoader
-	::GetMaterials() const
+	::GetMaterials() const noexcept
 {
 	return mMaterials;
 }
+#include STSTEM_WARNING_POP

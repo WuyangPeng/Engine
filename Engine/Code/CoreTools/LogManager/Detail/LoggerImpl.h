@@ -20,7 +20,7 @@ namespace CoreTools
 		using ClassType = LoggerImpl;
 
 	public:
-		LoggerImpl(LogFilter logFilter, LogLevel logLevel);
+		LoggerImpl(LogFilter logFilter, LogLevel logLevel) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

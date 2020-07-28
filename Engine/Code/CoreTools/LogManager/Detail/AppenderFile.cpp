@@ -46,11 +46,7 @@ void CoreTools::AppenderFile
 	}
 }
 
-CoreTools::AppenderFile
-	::~AppenderFile()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::AppenderFile
@@ -91,7 +87,7 @@ void CoreTools::AppenderFile
 bool CoreTools::AppenderFile
 	::IsExceedMaxSize(System::OFileStream::pos_type increaseSize)
 {
-	auto fileSize = m_OStreamManager->GetOFStreamSize();
+	const auto fileSize = m_OStreamManager->GetOFStreamSize();
 
 	return (m_MaxFileSize < fileSize + increaseSize);
 }
@@ -141,7 +137,7 @@ System::String CoreTools::AppenderFile
 }
 
 void CoreTools::AppenderFile
-	::NewDirectory(const String& directory)
+	::NewDirectory(const String& directory) noexcept
 {
 	System::CreateFileDirectory(directory, nullptr);
 }

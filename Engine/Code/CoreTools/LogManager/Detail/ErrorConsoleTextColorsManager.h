@@ -20,8 +20,7 @@ namespace CoreTools
 		using ParentType = LogConsoleTextColorsManagerImpl;
 
 	public:
-		explicit ErrorConsoleTextColorsManager(LogLevel logLevel);
-		virtual ~ErrorConsoleTextColorsManager();
+		explicit ErrorConsoleTextColorsManager(LogLevel logLevel); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

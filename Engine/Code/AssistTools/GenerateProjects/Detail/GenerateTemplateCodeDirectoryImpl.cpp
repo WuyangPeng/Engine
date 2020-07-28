@@ -31,11 +31,7 @@ AssistTools::GenerateTemplateCodeDirectoryImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-AssistTools::GenerateTemplateCodeDirectoryImpl
-	::~GenerateTemplateCodeDirectoryImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateCodeDirectoryImpl)
 

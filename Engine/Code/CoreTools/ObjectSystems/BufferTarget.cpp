@@ -16,7 +16,10 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <array>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 using std::array;
 using std::string;
 
@@ -40,7 +43,7 @@ void CoreTools::BufferTarget
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
+	const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
 	m_Target.Write(sizeof(uint32_t), &value);
 }
 
@@ -120,9 +123,10 @@ void CoreTools::BufferTarget
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto uniqueID = m_ObjectRegister.GetUniqueID(object);
+	const auto uniqueID = m_ObjectRegister.GetUniqueID(object);
 	m_Target.Write(sizeof(uint64_t), &uniqueID);
 }
 
 
 
+#include STSTEM_WARNING_POP

@@ -24,7 +24,11 @@ namespace CoreTools
 
 	public:
 		BaseFrameMemorySystemImpl(int sizeInBytes, int byteAlignment);
-		~BaseFrameMemorySystemImpl();
+		~BaseFrameMemorySystemImpl() noexcept;
+		BaseFrameMemorySystemImpl(const BaseFrameMemorySystemImpl&) = delete;
+		BaseFrameMemorySystemImpl operator=(const BaseFrameMemorySystemImpl&) = delete;
+		BaseFrameMemorySystemImpl(BaseFrameMemorySystemImpl&&) = delete;
+		BaseFrameMemorySystemImpl operator=(BaseFrameMemorySystemImpl&&) = delete;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -36,7 +40,7 @@ namespace CoreTools
 		template<typename T>
 		static int AlignUp(T sizeInBytes, int byteAlignment) noexcept;
 
-		static int AlignUp(int sizeInBytes, int byteAlignment) noexcept;
+		static int AlignUp(int sizeInBytes, int byteAlignment);
 		void Init();
 
 	private:

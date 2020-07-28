@@ -21,17 +21,17 @@ namespace CoreTools
 
 	public:
 		explicit ReadFileHandleImpl(const String& fileName);
-		virtual ~ReadFileHandleImpl();
+		 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual int GetFileByteSize() const;
+		  int GetFileByteSize() const override;
 
-		virtual void Read(size_t itemSize, void* data) override;
-		virtual void Read(size_t itemSize, size_t itemsNumber, void* data) override;
+		  void Read(size_t itemSize, void* data) override;
+		  void Read(size_t itemSize, size_t itemsNumber, void* data) override;
 
-		virtual void WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) override;
-		virtual void AppendToFile(size_t itemSize, size_t itemsNumber, const void* data) override;
+		  void WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) override;
+		  void AppendToFile(size_t itemSize, size_t itemsNumber, const void* data) override;
 	};
 }
 

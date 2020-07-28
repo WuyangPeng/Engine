@@ -37,20 +37,20 @@ void CoreTools::ThreadMutex
 	// 错误 = ENOMEM
 	if (System::PthreadMutexAttributeInit(&m_Mutex.m_Attribute) != System::PthreadResult::Successful)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrInit初始化Mutex失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrInit初始化Mutex失败。"s));
 	}
 
 	// 成功 = 0
 	if (System::PthreadMutexAttributeSetType(&m_Mutex.m_Attribute) != System::PthreadResult::Successful)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrSettype初始化Mutex失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrSettype初始化Mutex失败。"s));
 	}
 
 	// 成功 = 0
 	// 错误 = EAGAIN, ENOMEM, EPERM, EBUSY, EINVAL
 	if (System::PthreadMutexInit(&m_Mutex.m_Attribute, &m_Mutex.m_Mutex) != System::PthreadResult::Successful)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexInit初始化Mutex失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexInit初始化Mutex失败。"s));
 	}
 }
 
@@ -87,7 +87,7 @@ void CoreTools::ThreadMutex
 	// 错误 = EINVAL, EDEADLK
 	if (System::PthreadMutexLock(&m_Mutex.m_Mutex) != System::PthreadResult::Successful)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s));
 	}
 }
 

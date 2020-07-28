@@ -26,10 +26,14 @@ namespace CoreTools
 	public:
 		explicit InternetConnection(const System::String& agent);
 		~InternetConnection();
- 
+		InternetConnection(const InternetConnection&) noexcept = delete;
+		InternetConnection& operator=(const InternetConnection&) noexcept = delete;
+		InternetConnection(InternetConnection&&) noexcept = delete;
+		InternetConnection& operator=(InternetConnection&&) noexcept = delete;
+
 		CLASS_INVARIANT_DECLARE;
 
-		InternetHandle GetInternet() const;
+		InternetHandle GetInternet() const noexcept;
 
 	private:
 		InternetHandle m_Internet;

@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h" 
-
+#include <gsl/gsl_util>
 using std::string;
 using std::make_pair;
 using std::make_shared;
@@ -29,6 +29,15 @@ CoreTools::AnalysisCommandArgumentContainer
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
+#include "System/Helper/PragmaWarning.h"
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26461)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26481)
 // private
 void CoreTools::AnalysisCommandArgumentContainer
 	::Init(char** arguments)
@@ -44,6 +53,7 @@ void CoreTools::AnalysisCommandArgumentContainer
 		m_Argument.push_back(argument);
 	}
 }
+#include STSTEM_WARNING_POP
 
 CoreTools::AnalysisCommandArgumentContainer
 	::AnalysisCommandArgumentContainer(const char* commandLine)
@@ -77,7 +87,7 @@ void CoreTools::AnalysisCommandArgumentContainer
 	auto argumentsNumber = boost::numeric_cast<int>(m_Argument.size());
 	while (index < argumentsNumber)
 	{
-		auto argumentsType = GetArgumentsType(index);
+		const auto argumentsType = GetArgumentsType(index);
 
 		switch (argumentsType)
 		{
@@ -102,7 +112,7 @@ void CoreTools::AnalysisCommandArgumentContainer
 CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCommandArgumentContainer
 	::GetArgumentsType(int index)
 {
-	const auto& argumentsName = m_Argument[index];
+	const auto& argumentsName = m_Argument.at(index);
 
 	CommandArgumentType argumentsNameType{ argumentsName };
 
@@ -121,11 +131,11 @@ CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCo
 {
 	auto argumentsNumber = boost::numeric_cast<int>(m_Argument.size());
 
-	auto nextIndex = index + 1;
+	const auto nextIndex = index + 1;
 
 	if (nextIndex < argumentsNumber)
 	{
-		const auto& argumentsValue = m_Argument[nextIndex];
+		const auto& argumentsValue = m_Argument.at(nextIndex);
 
 		CommandArgumentType argumentsValueType{ argumentsValue };
 
@@ -141,11 +151,11 @@ CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCo
 void CoreTools::AnalysisCommandArgumentContainer
 	::AddArgumentValue(int index)
 {
-	auto argumentsName = m_Argument[index].substr(1, m_Argument[index].size() - 1);
+	auto argumentsName = m_Argument.at(index).substr(1, m_Argument.at(index).size() - 1);
 
-	auto nextIndex = index + 1;
+	const auto nextIndex = index + 1;
 
-	string argumentsValue{ m_Argument[nextIndex] };
+	string argumentsValue{ m_Argument.at(nextIndex) };
 
 	m_CommandArgumentContainer->AddArgument(index, argumentsName, argumentsValue);
 }
@@ -153,11 +163,11 @@ void CoreTools::AnalysisCommandArgumentContainer
 void CoreTools::AnalysisCommandArgumentContainer
 	::AddNoValueArgument(int index)
 {
-	CommandArgumentType commandArgumentType{ m_Argument[index] };
+	CommandArgumentType commandArgumentType{ m_Argument.at(index) };
 
 	if (commandArgumentType.IsArgumentsName())
 	{
-		auto argumentsName = m_Argument[index].substr(1, m_Argument[index].size() - 1);
+		auto argumentsName = m_Argument.at(index).substr(1, m_Argument.at(index).size() - 1);
 		m_CommandArgumentContainer->AddArgument(index, argumentsName);
 	}
 }
@@ -165,7 +175,7 @@ void CoreTools::AnalysisCommandArgumentContainer
 void CoreTools::AnalysisCommandArgumentContainer
 	::AddEndArgumentValue(int index)
 {
-	const auto& argumentsName = m_Argument[index];
+	const auto& argumentsName = m_Argument.at(index);
 
 	m_CommandArgumentContainer->AddEndArgumentValue(argumentsName);
 }
@@ -174,7 +184,7 @@ void CoreTools::AnalysisCommandArgumentContainer
 bool CoreTools::AnalysisCommandArgumentContainer
 	::IsValid() const noexcept
 {
-	if (m_CommandArgumentContainer != nullptr && m_CommandArgumentContainer->GetArgumentsNumber() == static_cast<int>(m_Argument.size()))
+	if (m_CommandArgumentContainer != nullptr && m_CommandArgumentContainer->GetArgumentsNumber() == gsl::narrow_cast<int>(m_Argument.size()))
 	{
 		return true;
 	}
@@ -186,7 +196,7 @@ bool CoreTools::AnalysisCommandArgumentContainer
 #endif // OPEN_CLASS_INVARIANT
 
 CoreTools::AnalysisCommandArgumentContainer::CommandArgumentContainerSharedPtr CoreTools::AnalysisCommandArgumentContainer
-	::GetCommandArgumentContainer()
+	::GetCommandArgumentContainer() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

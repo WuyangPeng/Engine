@@ -12,6 +12,14 @@
 #include <windows.h>
 #include <cassert>
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26489)
+
 AssistTools::LoadBmpUseAlpha
 	::LoadBmpUseAlpha(const System::TChar* name, unsigned char alpha, int& width, int& height, unsigned char*& texels)
 {
@@ -35,7 +43,7 @@ AssistTools::LoadBmpUseAlpha
 	if (dibSection.dsBm.bmBitsPixel == 24)
 	{
 		// Pad with an alpha channel.
-		int numBytes = 4 * width*height;
+		const int numBytes = 4 * width*height;
 		texels = NEW1<unsigned char>(numBytes);
 		unsigned char* src = (unsigned char*)dibSection.dsBm.bmBits;
 		unsigned char* trg = texels;
@@ -67,4 +75,4 @@ AssistTools::LoadBmpUseAlpha
 	DeleteObject(hImage); 
 }
 
- 
+ #include STSTEM_WARNING_POP

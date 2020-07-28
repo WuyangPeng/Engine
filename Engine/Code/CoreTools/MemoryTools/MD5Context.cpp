@@ -13,13 +13,16 @@
 
 using std::make_shared;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::MD5Context
 	::MD5Context()
 	:m_Impl{ make_shared<ImplType>() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, MD5Context)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, MD5Context, MD5Init, void);

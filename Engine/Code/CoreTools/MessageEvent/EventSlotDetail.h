@@ -48,7 +48,7 @@ bool CoreTools::EventSlot<T, PriorityType>
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("事件未被正确移除。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("事件未被正确移除。"s));
 	}
 }
 

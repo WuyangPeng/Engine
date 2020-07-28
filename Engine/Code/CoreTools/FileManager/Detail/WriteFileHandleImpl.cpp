@@ -23,12 +23,7 @@ CoreTools::WriteFileHandleImpl
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::WriteFileHandleImpl
-	::~WriteFileHandleImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::WriteFileHandleImpl
 	::IsValid() const noexcept

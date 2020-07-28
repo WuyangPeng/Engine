@@ -17,12 +17,7 @@ AssistTools::GenerateTemplateMessageImpl
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
-AssistTools::GenerateTemplateMessageImpl
-	::~GenerateTemplateMessageImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateMessageImpl)
 
@@ -35,7 +30,7 @@ void AssistTools::GenerateTemplateMessageImpl
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital));
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName));
 
-	return ParentType::GenerateTo(resourceDirectory, newProjectName, newVariable);
+	return ParentType::Generate (resourceDirectory, newProjectName, newVariable);
 }
 
 

@@ -17,6 +17,7 @@
 
 using std::string;
 using std::ostringstream;
+using namespace std::literals;
 
 CoreTools::MemoryManagerImpl
 	::MemoryManagerImpl(Allocator allocator, Deallocator deallocator)
@@ -86,7 +87,7 @@ int CoreTools::MemoryManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto iter = m_MemoryContainer.find(memBlock);
+	const auto iter = m_MemoryContainer.find(memBlock);
 	if (iter != m_MemoryContainer.cend())
 	{
 		return iter->second.GetDimensionsNumber();
@@ -103,7 +104,7 @@ size_t CoreTools::MemoryManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto iter = m_MemoryContainer.find(memBlock);
+	const auto iter = m_MemoryContainer.find(memBlock);
 	if (iter != m_MemoryContainer.end())
 	{
 		return iter->second.GetBytesNumber();
@@ -123,7 +124,7 @@ void* CoreTools::MemoryManagerImpl
 	auto memBlock = m_Allocator(bytesNumber, functionDescribed);
 	if (memBlock == nullptr)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("内存不足！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("内存不足！"s));
 	}
 
 	try
@@ -149,7 +150,7 @@ void CoreTools::MemoryManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto iter = m_MemoryContainer.find(memBlock);
+	const auto iter = m_MemoryContainer.find(memBlock);
 	if (iter != m_MemoryContainer.cend())
 	{
 		m_Deallocator(iter->first, iter->second.GetFunctionDescribed());

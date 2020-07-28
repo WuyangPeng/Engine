@@ -20,6 +20,10 @@
 #include <cstdio>
 #include <cstdarg> 
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
 const char* CoreTools::TriggerAssert
 	::sm_DebugPrompt{ "内部程序错误，是否要进行调试？" };
 const size_t CoreTools::TriggerAssert
@@ -38,6 +42,8 @@ const char* CoreTools::TriggerAssert
 	::sm_MessageBoxTitle{ "断言失败！" };
 #endif // CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX
 
+#include STSTEM_WARNING_POP
+
 CoreTools::TriggerAssert
 	::TriggerAssert(TriggerAssertCheck triggerAssertCheck, const FunctionDescribed& functionDescribed, const char* format, va_list arguments)
 	:m_TriggerAssertCheck{ triggerAssertCheck }, m_Message{ }
@@ -49,8 +55,12 @@ CoreTools::TriggerAssert
 	::TriggerAssert(TriggerAssertCheck triggerAssertCheck, const FunctionDescribed& functionDescribed, const char* format, ...)
 	:m_TriggerAssertCheck{ triggerAssertCheck }, m_Message{ }
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26492)
 	va_list arguments{};
 	va_start(arguments, format);
+#include STSTEM_WARNING_POP
 
 	ScopeExit<> onExit{ [&arguments]()
 	{
@@ -96,26 +106,30 @@ void CoreTools::TriggerAssert
 
 // private
 void CoreTools::TriggerAssert
-	::GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const char* triggerAssertCheck)
+	::GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const char* triggerAssertCheck) noexcept
 {
 	// 消息前缀。
 	System::SNPrintf(m_Message.data(), sm_MaxPrefixBytes, sm_MaxPrefixBytes, sm_MessagePrefix,
 					 triggerAssertCheck, functionDescribed.GetFileName(), functionDescribed.GetCurrentFunction(), functionDescribed.GetLine());
 }
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 // private
 void CoreTools::TriggerAssert
-	::AppendUserArguments(const char* format, va_list arguments)
+	::AppendUserArguments(const char* format, va_list arguments) noexcept
 {
 	// 添加指定的参数。
 	auto length = System::Strlen(m_Message.data());
 	System::VsnPrintf(m_Message.data() + length, sm_MaxPrefixBytes - length, format, arguments);
 }
+#include STSTEM_WARNING_POP
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 // private
 void CoreTools::TriggerAssert
-	::WriteToOutputDebug()
+	::WriteToOutputDebug() noexcept
 {
 	// 消息输出到调试窗口。
 	System::OutputDebugStringWithChar(m_Message.data());
@@ -130,7 +144,7 @@ void CoreTools::TriggerAssert
 	// 给用户一个机会调试断点，继续，或终止执行。
 	System::Strcat(m_Message.data(), sm_MaxMessageBytes, sm_DebugPrompt);
 
-	auto type = System::MessageBoxSelectionWithChar(m_Message.data(), sm_MessageBoxTitle);
+	const auto type = System::MessageBoxSelectionWithChar(m_Message.data(), sm_MessageBoxTitle);
 
 	JudgeSelection(type);
 }

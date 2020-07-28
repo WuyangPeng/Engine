@@ -8,7 +8,11 @@
 
 #include "Mutex.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::Mutex
 	::Mutex(MutexCreate mutexCreate)
 	:ParentType{ mutexCreate }
@@ -17,13 +21,22 @@ CoreTools::Mutex
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 CoreTools::Mutex
 	::~Mutex()
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-	ParentType::Delete();
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+
+	EXCEPTION_TRY
+	{
+		ParentType::Delete();
+	}
+	EXCEPTION_ALL_CATCH(CoreTools)
+
+#include STSTEM_WARNING_POP 	
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, Mutex)
@@ -32,10 +45,14 @@ void CoreTools::Mutex
 	::Initialize()
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
 }
 
 void CoreTools::Mutex
 	::Delete()
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
 }

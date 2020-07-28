@@ -26,8 +26,7 @@ namespace CoreTools
 		using ParentType = CopyFileToolsImpl;
 
 	public:
-		CommonCopyFileTools(const String& inFileName, const String& outFileName);
-		virtual ~CommonCopyFileTools();
+		CommonCopyFileTools(const String& inFileName, const String& outFileName); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

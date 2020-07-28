@@ -49,21 +49,20 @@ namespace CoreTools
 		using OStreamShared = CoreTools::OStreamShared;
 
 	public:
-		explicit UnitTest(const OStreamShared& osPtr);
-		virtual ~UnitTest();
+		explicit UnitTest(const OStreamShared& osPtr); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const std::string GetName() const override;
-		virtual int GetPassedNumber() const noexcept override;
-		virtual int GetFailedNumber() const noexcept override;
-		virtual int GetErrorNumber() const noexcept override;
+		const std::string GetName() const override;
+		int GetPassedNumber() const noexcept override;
+		int GetFailedNumber() const noexcept override;
+		int GetErrorNumber() const noexcept override;
 
-		virtual void PrintReport() override;
-		virtual void ResetTestData() override;
-		virtual void RunUnitTest() override;
+		void PrintReport() override;
+		void ResetTestData() override;
+		void RunUnitTest() override;
 
-		virtual void PrintRunUnitTest() override;
+		void PrintRunUnitTest() override;
 
 	protected:
 		// Assert用来测试对象的值是否符合预期。Error用来测试是否正确抛出异常。

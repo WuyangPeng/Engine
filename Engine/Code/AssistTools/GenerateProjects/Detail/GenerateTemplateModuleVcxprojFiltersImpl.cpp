@@ -9,10 +9,12 @@
 #include "GenerateTemplateModuleVcxprojFiltersImpl.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTemplateModuleVcxprojFiltersImpl
 	::sm_Extension(SYSTEM_TEXT(".vcxproj.filters"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTemplateModuleVcxprojFiltersImpl
 ::GenerateTemplateModuleVcxprojFiltersImpl(const System::String& templateFileName, const System::String& solutionName, const System::String& moduleName)
 	:ParentType(templateFileName, sm_Extension), m_SolutionName(solutionName), m_ModuleName(moduleName)
@@ -20,11 +22,7 @@ AssistTools::GenerateTemplateModuleVcxprojFiltersImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-AssistTools::GenerateTemplateModuleVcxprojFiltersImpl
-	::~GenerateTemplateModuleVcxprojFiltersImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateModuleVcxprojFiltersImpl)
 
@@ -37,7 +35,7 @@ void AssistTools::GenerateTemplateModuleVcxprojFiltersImpl
 	newVariable.insert(make_pair(m_SolutionName, newSolutionName));
 	newVariable.insert(make_pair(m_ModuleName, newModuleName));
 
-	return ParentType::GenerateTo(resourceDirectory, newSolutionName + newModuleName, newVariable);
+	return ParentType::Generate (resourceDirectory, newSolutionName + newModuleName, newVariable);
 }
 
 /*

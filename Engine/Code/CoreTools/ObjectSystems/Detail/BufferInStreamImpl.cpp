@@ -15,7 +15,9 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
 CoreTools::BufferInStreamImpl
 	::BufferInStreamImpl(const FileBufferPtr& bufferInformation, int startPoint)
 	:m_StartPoint{ startPoint }, m_TopLevel{}, m_Source{ bufferInformation }, m_ObjectLink{}
@@ -45,7 +47,7 @@ void CoreTools::BufferInStreamImpl
 
 // private
 void CoreTools::BufferInStreamImpl
-	::IncrementBytesProcessed()
+	::IncrementBytesProcessed() noexcept
 {
 	if (0 < m_StartPoint)
 	{
@@ -79,7 +81,7 @@ void CoreTools::BufferInStreamImpl
 	{
 		DoCreateObject(isTopLevel, name);
 	}
-	catch (Error& error)
+	catch (const Error& error)
 	{
 		// 请确定您已经添加CORE_TOOLS_REGISTER_STREAM(someclass)到每一个'someclass'的头文件中。这个宏会对每个类注册工厂函数。
 		LOG_SINGLETON_ENGINE_APPENDER(Fatal, CoreTools)
@@ -111,7 +113,7 @@ void CoreTools::BufferInStreamImpl
 {
 	// 链接对象。这个程序会取代存储的任意Object*的数据成员的旧地址，
 	// 新地址会在当前运用程序运行时创建。
-	auto orderedSize = m_ObjectLink.GetOrderedSize();
+	const auto orderedSize = m_ObjectLink.GetOrderedSize();
 
 	for (auto i = 0; i < orderedSize; ++i)
 	{
@@ -126,7 +128,7 @@ void CoreTools::BufferInStreamImpl
 	// 允许对象执行链接后的语义。在读取——链接的模式中，
 	// 默认构造函数用于创建一个对象，其中的数据再加载。链接器连接创建的对象。
 	// 后链接函数在应用程序运行时创建对象时可以做一些非默认构造函数所做的工作。
-	auto orderedSize = m_ObjectLink.GetOrderedSize();
+	const auto orderedSize = m_ObjectLink.GetOrderedSize();
 
 	for (auto i = 0; i < orderedSize; ++i)
 	{
@@ -134,11 +136,7 @@ void CoreTools::BufferInStreamImpl
 	}
 }
 
-CoreTools::BufferInStreamImpl
-	::~BufferInStreamImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::BufferInStreamImpl
@@ -152,10 +150,11 @@ bool CoreTools::BufferInStreamImpl
 #endif // OPEN_CLASS_INVARIANT
 
 const CoreTools::InTopLevel CoreTools::BufferInStreamImpl
-	::GetTopLevel() const
+	::GetTopLevel() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
 	return m_TopLevel;
 }
 
+#include STSTEM_WARNING_POP

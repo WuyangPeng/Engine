@@ -110,6 +110,9 @@ bool CoreTools::WideCharConversionMultiByte
 }
 #endif // OPEN_CLASS_INVARIANT
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 const string CoreTools::WideCharConversionMultiByte
 	::GetMultiByteRepresentation() const
 {
@@ -117,4 +120,4 @@ const string CoreTools::WideCharConversionMultiByte
 
 	return string{ m_Heap->GetPoint(), m_Heap->GetPoint() + m_ReadSize - 1 };
 }
-
+#include STSTEM_WARNING_POP

@@ -49,7 +49,7 @@ int CoreTools::MemoryInformation
 }
 
 const CoreTools::FunctionDescribed& CoreTools::MemoryInformation
-	::GetFunctionDescribed() const
+	::GetFunctionDescribed() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

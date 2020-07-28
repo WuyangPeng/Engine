@@ -29,8 +29,8 @@ namespace CoreTools
 		using UnitTestCompositePtr = std::shared_ptr<UnitTestComposite>;
 
 	public:
-		explicit UnitTestComposite(const OStreamShared& osPtr);
-		virtual ~UnitTestComposite();
+		explicit UnitTestComposite(const OStreamShared& osPtr) noexcept;
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

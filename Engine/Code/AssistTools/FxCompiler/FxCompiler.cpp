@@ -14,7 +14,16 @@
 #include "System/Helper/PragmaWarning/Disable4996.h"
 
 #include <fstream>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26409)
 const std::string AssistTools::FxCompiler
 	::msVProfileName[Rendering::ShaderFlags::MaxProfiles] =
 {
@@ -143,7 +152,7 @@ AssistTools::FxCompiler
             }
             command += " -entry v_" + fxName + " -o " + fxName + ".";
             command += msVProfileName[i] + ".txt " + fxName + ".fx";
-            int cgVStatus = system(command.c_str());
+            const int cgVStatus = system(command.c_str());
 
             // Delete the old pixel shader output (if it exists).
             command = "del " + fxName + "." + msPProfileName[i] + ".txt";
@@ -153,7 +162,7 @@ AssistTools::FxCompiler
             command = "cgc -profile " + msPProfileName[i];
             command += " -entry p_" + fxName + " -o " + fxName + ".";
             command += msPProfileName[i] + ".txt " + fxName + ".fx";
-            int cgPStatus = system(command.c_str());
+            const int cgPStatus = system(command.c_str());
 
             if (cgVStatus == 0 && cgPStatus == 0)
             {
@@ -214,10 +223,10 @@ AssistTools::FxCompiler
         mActiveProfile = i;
 
         std::string inVName = fxName + "." + msVProfileName[i] + ".txt";
-        bool hasVProfile = Parse(inVName, msVProfileName[i], vProgram[i]);
+        const bool hasVProfile = Parse(inVName, msVProfileName[i], vProgram[i]);
 
         std::string inPName = fxName + "." + msPProfileName[i] + ".txt";
-        bool hasPProfile = Parse(inPName, msPProfileName[i], pProgram[i]);
+        const bool hasPProfile = Parse(inPName, msPProfileName[i], pProgram[i]);
 
         if (hasVProfile && hasPProfile)
         {
@@ -246,9 +255,13 @@ AssistTools::FxCompiler
 }
 
 AssistTools::FxCompiler
-	::~FxCompiler()
+	::~FxCompiler()   noexcept
 {
+
+#include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26447)
     DELETE0(mEffect);
+    #include STSTEM_WARNING_POP
 }
 
 void AssistTools::FxCompiler
@@ -499,7 +512,7 @@ void AssistTools::FxCompiler
     while (begin != std::string::npos)
     {
         // Skip over the token.
-        std::string::size_type end = line.find(" ", begin);
+       const  std::string::size_type end = line.find(" ", begin);
 
         // Extract the token.
         std::string token = line.substr(begin, end - begin);
@@ -605,7 +618,7 @@ bool AssistTools::FxCompiler
     // all-capitals identifiers are needed by the Wild Magic FX system.
 
     TokenArrays::const_iterator iter = program.Variables.begin();
-    TokenArrays::const_iterator end = program.Variables.end();
+    const TokenArrays::const_iterator end = program.Variables.end();
     for (/**/; iter != end; ++iter)
     {
         const TokenArray& tokens = *iter;
@@ -623,7 +636,7 @@ bool AssistTools::FxCompiler
         std::string::size_type begin = tokens[1].find("sampler", 0);
         if (begin != std::string::npos)
         {
-            SamplerTypeMap::iterator iter2 = mSamplerTypes.find(tokens[1]);
+            const SamplerTypeMap::iterator iter2 = mSamplerTypes.find(tokens[1]);
             if (iter2 == mSamplerTypes.end())
             {
                 ReportError("Invalid sampler type", &tokens);
@@ -633,7 +646,7 @@ bool AssistTools::FxCompiler
         }
         else
         {
-            VariableTypeMap::iterator iter2 = mVariableTypes.find(tokens[1]);
+            const VariableTypeMap::iterator iter2 = mVariableTypes.find(tokens[1]);
             if (iter2 == mVariableTypes.end())
             {
                 ReportError("Invalid variable type", &tokens);
@@ -649,7 +662,7 @@ bool AssistTools::FxCompiler
         // array.  If it is an array, we need to determine how many registers
         // it uses.  This requires processing variable lines with the same
         // variable index.
-        bool varArray;
+        bool varArray = false;
         begin = name.find("[", 0);
         if (begin != std::string::npos)
         {
@@ -745,9 +758,9 @@ bool AssistTools::FxCompiler
 	::GetInput(const TokenArray& tokens, const std::string& name,
                Rendering::ShaderFlags::VariableType type, InputArray& inputs)
 {
-    std::string::size_type begin = 5;  // skip over "$vin."
+    constexpr std::string::size_type begin = 5;  // skip over "$vin."
     std::string semanticName = tokens[4].substr(begin, std::string::npos);
-    SemanticMap::iterator siter = mSemantics.find(semanticName);
+    const SemanticMap::iterator siter = mSemantics.find(semanticName);
     if (siter == mSemantics.end())
     {
         ReportError("Invalid $vin classifier", &tokens);
@@ -766,9 +779,9 @@ bool AssistTools::FxCompiler
 	::GetOutput(const TokenArray& tokens, const std::string& name,
                 Rendering::ShaderFlags::VariableType type, OutputArray& outputs)
 {
-    std::string::size_type begin = 6;  // skip over "$vout."
+    constexpr std::string::size_type begin = 6;  // skip over "$vout."
     std::string semanticName = tokens[4].substr(begin, std::string::npos);
-    SemanticMap::iterator siter = mSemantics.find(semanticName);
+    const SemanticMap::iterator siter = mSemantics.find(semanticName);
     if (siter == mSemantics.end())
     {
         ReportError("Invalid $vout classifier", &tokens);
@@ -788,7 +801,7 @@ bool AssistTools::FxCompiler
                   const std::string& name, Rendering::ShaderFlags::VariableType type,
 				  ConstantArray& constants)
 {
-    std::string::size_type begin, end;
+    std::string::size_type begin = 0, end = 0;
 
     if (tokens[5].size() < 4
     ||  tokens[5][0] != 'c'
@@ -802,7 +815,7 @@ bool AssistTools::FxCompiler
     // Get the base register for the constant.
     begin = 2; // character after '['
     std::string number = tokens[5].substr(begin, end - begin);
-    int baseRegister = atoi(number.c_str());
+    const int baseRegister = atoi(number.c_str());
     if (baseRegister == 0 && number != "0")
     {
         ReportError("Invalid base register", &tokens);
@@ -810,7 +823,7 @@ bool AssistTools::FxCompiler
     }
 
     // Get the number of registers used by the constant.
-    int numRegistersUsed;
+    int numRegistersUsed = 0;
     if (tokens[5].find(",", 0) == std::string::npos)
     {
         // The constant uses one register.
@@ -840,7 +853,7 @@ bool AssistTools::FxCompiler
 	::GetSampler(const TokenArray& tokens,
                  const std::string& name, Rendering::ShaderFlags::SamplerType type, SamplerArray& samplers)
 {
-    int unit;
+    int unit = 0;
 
     if (mActiveProfile != 1)
     {
@@ -889,10 +902,10 @@ Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
                    InputArray& inputs, OutputArray& outputs, ConstantArray& constants,
 				   SamplerArray& samplers)
 {
-    int numInputs = (int)inputs.size();
-    int numOutputs = (int)outputs.size();
-    int numConstants = (int)constants.size();
-    int numSamplers = (int)samplers.size();
+    const int numInputs = (int)inputs.size();
+    const  int numOutputs = (int)outputs.size();
+    const int numConstants = (int)constants.size();
+    const int numSamplers = (int)samplers.size();
 
     Rendering::ShaderBaseSmartPointer shader;
     if (isVShader)
@@ -909,13 +922,13 @@ Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
     int i;
     for (i = 0; i < numInputs; ++i)
     {
-        Input& input = inputs[i];
+        const Input& input = inputs[i];
         shader->SetInput(i, input.Name, input.Type, input.Semantic);
     }
 
     for (i = 0; i < numOutputs; ++i)
     {
-        Output& output = outputs[i];
+        const Output& output = outputs[i];
         shader->SetOutput(i, output.Name, output.Type, output.Semantic);
     }
 
@@ -924,7 +937,7 @@ Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
 
     for (i = 0; i < numConstants; ++i)
     {
-        Constant& constant = constants[i];
+        const Constant& constant = constants[i];
         shader->SetConstant(i, constant.Name, constant.NumRegistersUsed);
 
 		
@@ -933,7 +946,7 @@ Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
 
     for (i = 0; i < numSamplers; ++i)
     {
-        Sampler& sampler = samplers[i];
+        const Sampler& sampler = samplers[i];
         shader->SetSampler(i, sampler.Name, sampler.Type);
         shader->SetFilter(i, sampler.Filter);
         shader->SetCoordinate(i, 0, sampler.Coordinate[0]);
@@ -941,7 +954,7 @@ Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
         shader->SetCoordinate(i, 2, sampler.Coordinate[2]);
         shader->SetLodBias(i, sampler.LodBias);
         shader->SetAnisotropy(i, sampler.Anisotropy);
-		Rendering::Colour<float> borderColor(sampler.BorderColor.GetFirstValue(),
+        const Rendering::Colour<float> borderColor(sampler.BorderColor.GetFirstValue(),
 			sampler.BorderColor.GetSecondValue(),sampler.BorderColor.GetThirdValue(),
 			sampler.BorderColor.GetFourthValue());
 
@@ -960,28 +973,28 @@ bool AssistTools::FxCompiler
                    InputArray& inputs, OutputArray& outputs, ConstantArray& constants,
 				   SamplerArray& samplers)
 {
-    int numInputs = (int)inputs.size();
+    const int numInputs = (int)inputs.size();
     if (numInputs != shader->GetNumInputs())
     {
         ReportError("Mismatch in number of inputs.\n");
         return false;
     }
 
-    int numOutputs = (int)outputs.size();
+    const int numOutputs = (int)outputs.size();
     if (numOutputs != shader->GetNumOutputs())
     {
         ReportError("Mismatch in number of outputs.\n");
         return false;
     }
 
-    int numConstants = (int)constants.size();
+    const int numConstants = (int)constants.size();
     if (numConstants != shader->GetNumConstants())
     {
         ReportError("Mismatch in number of constants.\n");
         return false;
     }
 
-    int numSamplers = (int)samplers.size();
+    const int numSamplers = (int)samplers.size();
     if (numSamplers != shader->GetNumSamplers())
     {
         ReportError("Mismatch in number of samplers.\n");
@@ -992,7 +1005,7 @@ bool AssistTools::FxCompiler
     int i;
     for (i = 0; i < numInputs; ++i)
     {
-        Input& input = inputs[i];
+        const Input& input = inputs[i];
         if (input.Name != shader->GetInputName(i))
         {
             message =  "Mismatch in input names '" +
@@ -1027,7 +1040,7 @@ bool AssistTools::FxCompiler
 
     for (i = 0; i < numOutputs; ++i)
     {
-        Output& output = outputs[i];
+        const Output& output = outputs[i];
         if (output.Name != shader->GetOutputName(i))
         {
             message =  "Mismatch in output names '" +
@@ -1065,7 +1078,7 @@ bool AssistTools::FxCompiler
 
     for (i = 0; i < numConstants; ++i)
     {
-        Constant& constant = constants[i];
+        const  Constant& constant = constants[i];
         if (constant.Name != shader->GetConstantName(i))
         {
             message =  "Mismatch in constant names '" +
@@ -1094,7 +1107,7 @@ bool AssistTools::FxCompiler
 
     for (i = 0; i < numSamplers; ++i)
     {
-        Sampler& sampler = samplers[i];
+        const Sampler& sampler = samplers[i];
         if (sampler.Name != shader->GetSamplerName(i))
         {
             message =  "Mismatch in sampler names '" +
@@ -1147,9 +1160,10 @@ void AssistTools::FxCompiler
 // FxCompiler::Program
 
 AssistTools::FxCompiler::Program
-	::Program()
-    :Name(""),
-     Text("")
+	::Program() noexcept
+    :Name{},
+    Text{}
 {
 }
 
+#include STSTEM_WARNING_POP

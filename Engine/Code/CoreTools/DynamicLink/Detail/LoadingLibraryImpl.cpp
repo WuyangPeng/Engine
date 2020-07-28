@@ -29,7 +29,7 @@ CoreTools::LoadingLibraryImpl
 }
 
 CoreTools::LoadingLibraryImpl
-	::~LoadingLibraryImpl()
+	::~LoadingLibraryImpl() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 

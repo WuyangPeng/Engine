@@ -12,7 +12,7 @@
  
 AssistTools::GenerateTemplateVcxprojFilters
 	::GenerateTemplateVcxprojFilters(const System::String& templateFileName, const System::String& solutionName)
-	:m_Impl(new ImplType(templateFileName, solutionName))
+	:m_Impl(std::make_shared<ImplType>(templateFileName, solutionName))
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }

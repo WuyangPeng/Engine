@@ -22,7 +22,7 @@ CoreTools::ReadBufferIO
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, ReadBufferIO)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ReadBufferIO, GetBuffer, const char*);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ReadBufferIO, GetBuffer, const char*);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ReadBufferIO, GetBytesTotal, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ReadBufferIO, GetBytesProcessed, int);
 

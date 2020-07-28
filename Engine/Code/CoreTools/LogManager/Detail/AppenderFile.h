@@ -28,26 +28,26 @@ namespace CoreTools
 		AppenderFile(const String& directory, const String& fileName, AppenderPrint appenderFlags, LogLevel logLevel,
 					 int maxFileSize, bool backup, const String& extensionName);
 
-		virtual ~AppenderFile();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual AppenderType GetAppenderType() const noexcept override;
+		AppenderType GetAppenderType() const noexcept override;
 
-		virtual const AppenderImplPtr Clone() const override;
+		const AppenderImplPtr Clone() const override;
 
-		virtual void Reload() override;
+		void Reload() override;
 
-		virtual String GetDirectory() const override;
-		virtual String GetExtensionName() const override;
-		virtual int GetMaxFileSize() const noexcept override;
-		virtual bool IsBackup() const noexcept override;
+		String GetDirectory() const override;
+		String GetExtensionName() const override;
+		int GetMaxFileSize() const noexcept override;
+		bool IsBackup() const noexcept override;
 
 	private:
 		bool IsExceedMaxSize(PosType increaseSize);
 		void BackupFile();
 
-		virtual void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) override;
+		void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) override;
 
 	private:
 		using OStreamManagerPtr = std::shared_ptr<OFStreamManager>;
@@ -55,7 +55,7 @@ namespace CoreTools
 	private:
 		static String GetPrefixName(const String& directory, const String& fileName);
 		static String GetFullName(const String& prefixName, const String& extensionName);
-		static void NewDirectory(const String& directory);
+		static void NewDirectory(const String& directory) noexcept;
 
 		void Init(const String& directory);
 

@@ -28,7 +28,7 @@ namespace AssistTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetEndYear() const;
+		int GetEndYear() const noexcept;
 		const System::String GetVersions() const;
 		const System::String GetProjectChineseName() const;
 

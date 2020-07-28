@@ -248,7 +248,7 @@ void Rendering::IKJointImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto parent = m_Object->GetParent();
+	const auto parent = m_Object->GetParent();
 	if (parent != nullptr)
 	{
 		m_Object->SetWorldTransform(parent->GetWorldTransform() * m_Object->GetLocalTransform());		
@@ -264,7 +264,7 @@ void Rendering::IKJointImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto parent = m_Object->GetParent();
+	const auto parent = m_Object->GetParent();
 	if (parent != nullptr)
 	{
 		auto transform = m_Object->GetWorldTransform();

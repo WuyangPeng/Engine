@@ -16,6 +16,10 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 using std::string;
 
 CoreTools::BufferSource
@@ -24,12 +28,7 @@ CoreTools::BufferSource
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
-CoreTools::BufferSource
-	::~BufferSource()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferSource)
 
@@ -113,7 +112,7 @@ int CoreTools::BufferSource
 }
 
 void CoreTools::BufferSource
-	::IncrementBytesProcessed(int bytesNumber)
+	::IncrementBytesProcessed(int bytesNumber) noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -130,3 +129,4 @@ void CoreTools::BufferSource
 	object->SetUniqueID(uniqueID);
 }
 
+#include STSTEM_WARNING_POP

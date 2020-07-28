@@ -18,49 +18,40 @@
 
 using std::string;
 using std::make_shared;
+using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(Rendering,RendererData);
+SINGLETON_GET_PTR_DEFINE(Rendering, RendererData);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetRenderingMutex() }
+Rendering::RendererData::RendererDataUniquePtr Rendering::RendererData
+::sm_RendererData{ };
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_RendererDataMutex }
+void Rendering::RendererData
+::Create()
+{
+	sm_RendererData = make_unique<Rendering::RendererData>(RendererDataCreate::Init);
+}
 
-SINGLETON_INITIALIZE_DEFINE(Rendering,RendererData)
+void Rendering::RendererData
+::Destroy() noexcept
+{
+	sm_RendererData.reset();
+}
 
 Rendering::RendererData
-	::RendererData()
+::RendererData(RendererDataCreate rendererDataCreate)
 	:m_Impl{ make_shared<ImplType>() }
 {
-	MUTEX_ENTER_MEMBER;
+	SYSTEM_UNUSED_ARG(rendererDataCreate);
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::RendererData
-	::~RendererData()
-{
-	MUTEX_ENTER_MEMBER;
-
-	RENDERING_SELF_CLASS_IS_VALID_1;	
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RendererData
-	::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-
-	if(m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, RendererData)
 
 void Rendering::RendererData
 	::LoadConfiguration(const string& fileName)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -72,7 +63,7 @@ void Rendering::RendererData
 void Rendering::RendererData
 	::ClearColor()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -82,7 +73,7 @@ void Rendering::RendererData
 void Rendering::RendererData
 	::Resize(int width,int height)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -92,7 +83,7 @@ void Rendering::RendererData
 void Rendering::RendererData
 	::DrawMessage( int x,int y, const Colour& color,const std::string& message)
 {	
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -102,7 +93,7 @@ void Rendering::RendererData
 Rendering::TextureFormat Rendering::RendererData
 	::GetColorFormat() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -112,7 +103,7 @@ Rendering::TextureFormat Rendering::RendererData
 Rendering::TextureFormat Rendering::RendererData
 	::GetDepthStencilFormat() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -122,7 +113,7 @@ Rendering::TextureFormat Rendering::RendererData
 int Rendering::RendererData
 	::GetNumMultisamples() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -132,7 +123,7 @@ int Rendering::RendererData
 Rendering::RendererData::Colour Rendering::RendererData
 	::GetClearColor() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -142,7 +133,7 @@ Rendering::RendererData::Colour Rendering::RendererData
 const std::string Rendering::RendererData
 	::GetWindowTitle() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -152,7 +143,7 @@ const std::string Rendering::RendererData
 int Rendering::RendererData
 	::GetXPosition() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -162,7 +153,7 @@ int Rendering::RendererData
 int Rendering::RendererData
 	::GetYPosition() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -172,7 +163,7 @@ int Rendering::RendererData
 int Rendering::RendererData
 	::GetWidth() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -182,7 +173,7 @@ int Rendering::RendererData
 int Rendering::RendererData
 	::GetHeight() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -192,7 +183,7 @@ int Rendering::RendererData
 bool Rendering::RendererData
 	::IsAllowResize() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

@@ -132,7 +132,7 @@ const CoreTools::BaseResourceManagerImpl::ResourceWeakPtr CoreTools::BaseResourc
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("提取当前资源错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("提取当前资源错误！"s));
 	}
 }
 
@@ -147,7 +147,7 @@ void CoreTools::BaseResourceManagerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("当前资源已到数组末！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("当前资源已到数组末！"s));
 	}
 }
 
@@ -192,7 +192,7 @@ void CoreTools::BaseResourceManagerImpl
 	auto iter = m_ResourceContainer.find(uniqueID);
 	if (iter == m_ResourceContainer.end())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID不存在！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID不存在！"s));
 	}
 
 	auto originalSize = iter->second->GetSize();
@@ -264,13 +264,13 @@ void CoreTools::BaseResourceManagerImpl
 
 	if (!IsValidResourceHandle(uniqueID))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID不是有效的。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID不是有效的。"s));
 	}
 
 	auto iter = m_ResourceContainer.find(uniqueID);
 	if (iter == m_ResourceContainer.cend())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("无法找到要删除的资源。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("无法找到要删除的资源。"s));
 	}
 
 	auto resource = iter->second;
@@ -301,7 +301,7 @@ const CoreTools::BaseResourceManagerImpl::ResourceWeakPtr CoreTools::BaseResourc
 
 	if (iter == m_ResourceContainer.cend())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("资源未找到！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("资源未找到！"s));
 	}
 
 	auto resource = iter->second;
@@ -329,7 +329,7 @@ const CoreTools::BaseResourceManagerImpl::ResourceSharedPtr CoreTools::BaseResou
 	auto iter = m_ResourceContainer.find(uniqueID);
 	if (iter == m_ResourceContainer.cend())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("资源未找到！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("资源未找到！"s));
 	}
 
 	auto resource = iter->second;
@@ -353,13 +353,13 @@ void CoreTools::BaseResourceManagerImpl
 
 	if (!IsValidResourceHandle(uniqueID))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID无效！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID无效！"s));
 	}
 
 	auto iter = m_ResourceContainer.find(uniqueID);
 	if (iter == m_ResourceContainer.cend())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("资源未找到！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("资源未找到！"s));
 	}
 
 	auto resource = iter->second;

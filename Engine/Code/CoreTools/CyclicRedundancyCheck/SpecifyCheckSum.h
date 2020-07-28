@@ -25,8 +25,8 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetOriginalCheckSum() const;
-		int GetCollisions() const;
+		int GetOriginalCheckSum() const noexcept;
+		int GetCollisions() const noexcept;
 
 	private:
 		void Calculation(const char* data, int length);

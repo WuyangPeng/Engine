@@ -28,6 +28,11 @@ namespace CoreTools
 		explicit DeleteFileToolsImpl(const String& fileName);
 		~DeleteFileToolsImpl();
 
+		DeleteFileToolsImpl(const DeleteFileToolsImpl&) = delete;
+		DeleteFileToolsImpl& operator=(const DeleteFileToolsImpl&) = delete;
+		DeleteFileToolsImpl(DeleteFileToolsImpl&&) noexcept = delete;
+		DeleteFileToolsImpl& operator=(DeleteFileToolsImpl&&) noexcept = delete;
+
 		CLASS_INVARIANT_DECLARE;
 
 	private:

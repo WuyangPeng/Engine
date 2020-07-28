@@ -28,6 +28,11 @@ namespace CoreTools
 		explicit TryScopedMutex(MasterType& mutex);
 		~TryScopedMutex();
 
+		TryScopedMutex(const TryScopedMutex&) = delete;
+		TryScopedMutex& operator=(const TryScopedMutex&) = delete;
+		TryScopedMutex(TryScopedMutex&&) noexcept = delete;
+		TryScopedMutex& operator=(TryScopedMutex&&) noexcept = delete;
+
 		CLASS_INVARIANT_DECLARE;
 
 		bool IsSuccess() const noexcept;

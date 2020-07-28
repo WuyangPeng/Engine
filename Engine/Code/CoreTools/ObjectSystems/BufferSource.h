@@ -28,7 +28,7 @@ namespace CoreTools
 
 	public:
 		explicit BufferSource(const FileBufferPtr& fileBufferPtr);
-		~BufferSource();
+ 
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -77,7 +77,7 @@ namespace CoreTools
 		// °ïÖúº¯Êý
 		int GetBytesRead() const noexcept;
 		int GetBytesTotal() const noexcept;
-		void IncrementBytesProcessed(int bytesNumber);
+		void IncrementBytesProcessed(int bytesNumber) noexcept;
 		void ReadUniqueID(ObjectInterfaceSmartPointer& object);
 
 	private:

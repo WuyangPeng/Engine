@@ -14,18 +14,20 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+using namespace std::literals;
+
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
 CoreTools::WriteBufferIOImpl
-	::WriteBufferIOImpl(int bytesTotal, char* buffer)
+	::WriteBufferIOImpl(int bytesTotal, char* buffer) noexcept
 	:ParentType{ bytesTotal,BufferIO::Write }, m_Buffer{ buffer }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::WriteBufferIOImpl
-	::~WriteBufferIOImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::WriteBufferIOImpl
@@ -39,7 +41,7 @@ bool CoreTools::WriteBufferIOImpl
 #endif // OPEN_CLASS_INVARIANT
 
 const char* CoreTools::WriteBufferIOImpl
-	::GetBuffer() const
+	::GetBuffer() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -98,6 +100,7 @@ uint32_t CoreTools::WriteBufferIOImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要写入的字节数超过了缓冲区大小！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("要写入的字节数超过了缓冲区大小！"s));
 	}
 }
+#include STSTEM_WARNING_POP

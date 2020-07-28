@@ -33,7 +33,7 @@ Network::ACESockAcceptor
 
 	if (inetAddress.set(boost::numeric_cast<uint16_t>(port)) != 0 || m_ACESockAcceptor.open(inetAddress) != 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("…Ë÷√µÿ÷∑ ß∞‹£°"));
+		THROW_EXCEPTION(SYSTEM_TEXT("…Ë÷√µÿ÷∑ ß∞‹£°"s));
 	}
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -47,7 +47,7 @@ Network::ACESockAcceptor
 
 	if (inetAddress.set(boost::numeric_cast<uint16_t>(port), hostName.c_str()) != 0 || m_ACESockAcceptor.open(inetAddress) != 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("…Ë÷√µÿ÷∑ ß∞‹£°"));
+		THROW_EXCEPTION(SYSTEM_TEXT("…Ë÷√µÿ÷∑ ß∞‹£°"s));
 	}
 
 	NETWORK_SELF_CLASS_IS_VALID_9;

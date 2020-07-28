@@ -19,7 +19,7 @@ namespace CoreTools
 
 	public:
 		explicit NormalError(const FunctionDescribed& functionDescribed, const String& message);
-		virtual ~NormalError();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 	};

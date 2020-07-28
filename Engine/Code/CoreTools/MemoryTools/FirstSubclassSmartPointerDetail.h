@@ -90,6 +90,7 @@ typename CoreTools::FirstSubclassSmartPointer<BaseClass>::BaseClassType* CoreToo
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465) 
+#include SYSTEM_WARNING_DISABLE(26492) 
 	return const_cast<BaseClassType*>(ParentType::GetData());
 #include STSTEM_WARNING_POP
 }

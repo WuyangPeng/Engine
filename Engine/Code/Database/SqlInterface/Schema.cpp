@@ -33,7 +33,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Schema, GetConfigurationStrategy, 
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 Database::Schema::SchemaWeakPtr Database::Schema
-	::GetImplType() const
+	::GetImplType() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_1;
 

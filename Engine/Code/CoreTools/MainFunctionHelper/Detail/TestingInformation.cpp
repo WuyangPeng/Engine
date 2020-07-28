@@ -13,9 +13,10 @@
 #include <utility>
 
 using std::string;
+using namespace std::literals;
 
 CoreTools::TestingInformation
-	::TestingInformation()
+	::TestingInformation() noexcept
 	:m_SuiteContainer{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -23,6 +24,9 @@ CoreTools::TestingInformation
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, TestingInformation)
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 void CoreTools::TestingInformation
 	::Insert(const string& suiteName, const string& testingName, int testLoopCount)
 {
@@ -30,17 +34,17 @@ void CoreTools::TestingInformation
 
 	m_SuiteContainer[suiteName].insert({ testingName, testLoopCount });
 }
-
+#include STSTEM_WARNING_POP
 int CoreTools::TestingInformation
 	::GetLoopCount(const string& suiteName, const string& testingName) const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_SuiteContainer.find(suiteName);
+	const auto iter = m_SuiteContainer.find(suiteName);
 
 	if (iter != m_SuiteContainer.cend())
 	{
-		auto testingIter = iter->second.find(testingName);
+		const auto testingIter = iter->second.find(testingName);
 
 		if (testingIter != iter->second.cend())
 		{
@@ -48,12 +52,12 @@ int CoreTools::TestingInformation
 		}
 		else
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("≤‚ ‘Œ¥≈‰÷√"));
+			THROW_EXCEPTION(SYSTEM_TEXT("≤‚ ‘Œ¥≈‰÷√"s));
 		}
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("≤‚ ‘Ã◊º˛Œ¥≈‰÷√"));
+		THROW_EXCEPTION(SYSTEM_TEXT("≤‚ ‘Ã◊º˛Œ¥≈‰÷√"s));
 	}
 }
 

@@ -31,8 +31,8 @@ namespace Database
 		CLASS_INVARIANT_DECLARE;
 
 		ConfigurationStrategy GetConfigurationStrategy(const System::String& name) const;
-		ContainerConstIter GetBegin() const;
-		ContainerConstIter GetEnd() const;
+		ContainerConstIter GetBegin() const noexcept;
+		ContainerConstIter GetEnd() const noexcept;
 		int GetSize() const;
 
 	private:

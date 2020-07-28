@@ -13,17 +13,19 @@
 #include "CoreTools/FileManager/OFStreamManager.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+ 
+#include "System/Helper/PragmaWarning/Algorithm.h" 
 
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/algorithm/string.hpp> 
-#include <boost/foreach.hpp>
 #include <vector>
 
 using std::vector;
-
+using namespace std::literals;
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTemplateImpl
 	::sm_ForwardSlash(SYSTEM_TEXT("/"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTemplateImpl
 	::GenerateTemplateImpl(const System::String& templateFileName, const System::String& extension)
 	:m_FileContent(ReadFile(templateFileName)), m_Extension(extension)
@@ -31,11 +33,7 @@ AssistTools::GenerateTemplateImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-AssistTools::GenerateTemplateImpl
-	::~GenerateTemplateImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool AssistTools::GenerateTemplateImpl
@@ -49,7 +47,7 @@ bool AssistTools::GenerateTemplateImpl
 #endif // OPEN_CLASS_INVARIANT
 
 void AssistTools::GenerateTemplateImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName,const VariableType& newVariable) const
+	::Generate (const System::String& resourceDirectory, const System::String& newProjectName,const VariableType& newVariable) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_1;
 
@@ -61,7 +59,7 @@ void AssistTools::GenerateTemplateImpl
 
 	System::String fileContent = m_FileContent;
 
-	BOOST_FOREACH(const VariableValueType& value, newVariable)
+	for(const VariableValueType& value: newVariable)
 	{	 
 		boost::replace_all(fileContent, percent + value.first + percent, value.second);		 		
 	} 
@@ -80,7 +78,7 @@ const System::String AssistTools::GenerateTemplateImpl
 
 	if (fileContent.empty())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("读取的工程解决方案模板不合法。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("读取的工程解决方案模板不合法。"s));
 	}
 
 	return fileContent;
@@ -94,7 +92,7 @@ void AssistTools::GenerateTemplateImpl
 	boost::split(splitDirectory, directory, boost::is_any_of(sm_ForwardSlash));
 
 	System::String createDiectory;
-	BOOST_FOREACH(const vector<System::String>::value_type& value, splitDirectory)
+	for(const vector<System::String>::value_type& value:splitDirectory)
 	{
 		createDiectory += value;
 

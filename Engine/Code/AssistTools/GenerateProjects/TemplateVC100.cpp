@@ -9,7 +9,17 @@
 #include "TemplateVC100.h"
 
 #include <fstream>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26461)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26487)
 void AssistTools::TemplateVC100
 	::GenerateDx9 (const char* projectName)
 {
@@ -29,8 +39,8 @@ void AssistTools::TemplateVC100
 void AssistTools::TemplateVC100
 	::Generate (const char* projectName, const char* prefix, const char* projectLines[])
 {
-    char projectFile[128];
-    char currentLine[512];
+    char projectFile[128]{};
+    char currentLine[512]{};
 
     // Create the project file.
     sprintf_s(projectFile, 128, "%s.vcxproj", prefix);
@@ -44,8 +54,8 @@ void AssistTools::TemplateVC100
     {
         strcpy_s(currentLine, 512, projectLines[line]);
 
-        char* sub;
-        int index, i;
+        char* sub = nullptr;
+        int index = 0, i = 0;
 
         sub = strstr(currentLine, "PROJECTNAME");
         if (sub)
@@ -79,10 +89,10 @@ void AssistTools::TemplateVC100
     {
         strcpy_s(currentLine, 512, msFilterLines[line]);
 
-        char* sub;
-        int index, i;
+        char* sub = strstr(currentLine, "PROJECTNAME"); 
+        int index = 0, i = 0;
 
-        sub = strstr(currentLine, "PROJECTNAME");
+      
         if (sub)
         {
             index = (int)(sub - currentLine);
@@ -801,3 +811,4 @@ const char* AssistTools::TemplateVC100
 "</Project>"
 };
 
+#include STSTEM_WARNING_POP

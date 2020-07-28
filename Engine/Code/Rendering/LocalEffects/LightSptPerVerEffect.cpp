@@ -96,7 +96,7 @@ Rendering::LightSptPerVerEffect
 Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect
 	::CreateInstance (Light* light, Material* material) const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0,ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
     instance->SetVertexConstant(0, 1,ShaderFloatSmartPointer(NEW0 WorldMatrixConstant()));
     instance->SetVertexConstant(0, 2,ShaderFloatSmartPointer(NEW0 CameraModelPositionConstant()));
@@ -118,7 +118,7 @@ Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect
 Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect
 	::CreateUniqueInstance ( Light* light, Material* material)
 {
-    LightSptPerVerEffect* effect = NEW0 LightSptPerVerEffect();
+    LightSptPerVerEffect* effect = CoreTools::New0 < LightSptPerVerEffect>();
     return effect->CreateInstance(light, material);
 }
 

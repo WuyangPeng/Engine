@@ -13,16 +13,17 @@
 #include "CoreTools/FileManager/EnvironmentVariable.h" 
 
 #include <iostream>
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 
 using boost::property_tree::ptree;
 using std::cerr;
 using std::string; 
 
 CoreTools::TestingInformationHelperImpl
-	::TestingInformationHelperImpl()
+	::TestingInformationHelperImpl() noexcept
 	:m_TestingInformation{}, m_File{}, m_IsPrintRun{ false }, m_RandomSeed{ 0 }
 {
-	Analysis();
+    CoreTools::NoexceptNoReturn(*this,&ClassType::Analysis);
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

@@ -54,7 +54,7 @@ void CoreTools::EventSlotManager<EventSlot>
 
 	if (m_EventSlotRelationContainer.erase(index) == 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("事件不存在。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("事件不存在。"s));
 	}
 	else
 	{

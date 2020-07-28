@@ -21,7 +21,7 @@ namespace CoreTools
 		using ClassType = CyclicRedundancyCheckHandleImpl;
 
 	public:
-		CyclicRedundancyCheckHandleImpl();
+		CyclicRedundancyCheckHandleImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -13,21 +13,28 @@
 
 #include <windows.h>
 
+#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/EnumCast.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
 AssistTools::SaveWmtf
 	::SaveWmtf(const char* name, int width, int height, const unsigned char* texels)
 {
-	Rendering::Texture2D* texture = NEW0 Rendering::Texture2D(Rendering::TextureFormat::A8R8G8B8, width,	height, 1);
+	Rendering::Texture2D* texture = CoreTools::New0< Rendering::Texture2D>(Rendering::TextureFormat::A8R8G8B8, width,	height, 1);
 
-	int format = (int)texture->GetFormat();
-	int type = (int)texture->GetTextureType();
-	int usage = (int)texture->GetUsage();
-	int numLevels = texture->GetNumLevels();
-	int numDimensions = texture->GetNumDimensions();
-	int numTotalBytes = texture->GetNumTotalBytes();
+const	int format = System::EnumCastUnderlying(texture->GetFormat());
+const int type = System::EnumCastUnderlying(texture->GetTextureType());
+const int usage = System::EnumCastUnderlying(texture->GetUsage());
+const int numLevels = texture->GetNumLevels();
+const int numDimensions = texture->GetNumDimensions();
+const int numTotalBytes = texture->GetNumTotalBytes();
 
-	int dimension[3][Rendering::TextureMaximumMipmapLevels];
-	int numLevelBytes[Rendering::TextureMaximumMipmapLevels];
-	int levelOffsets[Rendering::TextureMaximumMipmapLevels];
+int dimension[3][Rendering::TextureMaximumMipmapLevels]{ };
+  int numLevelBytes[Rendering::TextureMaximumMipmapLevels]{ };
+  int levelOffsets[Rendering::TextureMaximumMipmapLevels]{ };
 	for (int level = 0; level < Rendering::TextureMaximumMipmapLevels; ++level)
 	{
 		dimension[0][level] = texture->GetDimension(0, level);
@@ -37,7 +44,7 @@ AssistTools::SaveWmtf
 		levelOffsets[level] = texture->GetLevelOffset(level);
 	}
 
-	int userField[Rendering::TextureMaxUserFields];
+	int userField[Rendering::TextureMaxUserFields]{ };
 	for (int i = 0; i < Rendering::TextureMaxUserFields; ++i)
 	{
 		userField[i] = 0;
@@ -69,4 +76,4 @@ AssistTools::SaveWmtf
 //	DELETE1(texels);
 	DELETE0(texture);
 }
- 
+ #include STSTEM_WARNING_POP

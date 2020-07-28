@@ -82,7 +82,7 @@ int Network::BoostSegmentationSockStream
 	}
 	else if (receiveSize != 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("接收消息头错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("接收消息头错误！"s));
 	}
 
 	return receiveSize;

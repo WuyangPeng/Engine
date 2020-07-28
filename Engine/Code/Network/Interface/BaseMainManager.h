@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
 
+NETWORK_EXPORT_UNIQUE_PTR(BaseMainManager);
 NETWORK_EXPORT_SHARED_PTR(BaseMainManagerImpl);
 EXPORT_NONCOPYABLE_CLASS(NETWORK);
 
@@ -23,23 +24,22 @@ namespace Network
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(BaseMainManager);
-		SINGLETON_GET_PTR_DECLARE(BaseMainManager);
-
-	public:
-		using ParentType = Singleton<BaseMainManager>;
-
-	public:
-		static void Create();
-		static void Create(const ConfigurationStrategy& configurationStrategy);
-		static void Destroy();
+		using ParentType = Singleton<BaseMainManager>; 
 
 	private:
-		static void DoCreate(const ConfigurationStrategy& configurationStrategy);
-
-		explicit BaseMainManager(const ConfigurationStrategy& configurationStrategy);
-		~BaseMainManager();
+		enum class BaseMainManagerCreate
+		{
+			Init,
+		};
 
 	public:
+		explicit BaseMainManager(const ConfigurationStrategy& configurationStrategy, BaseMainManagerCreate baseMainManagerCreate);
+
+		static void Create(const ConfigurationStrategy& configurationStrategy);
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(BaseMainManager);
+
 		CLASS_INVARIANT_DECLARE;
 
 	public:
@@ -52,7 +52,11 @@ namespace Network
 		void RestartContext();
 
 	private:
-		SINGLETON_MEMBER_DECLARE(BaseMainManager);
+		using BaseMainManagerUniquePtr = std::unique_ptr<BaseMainManager>;
+
+	private:
+		static BaseMainManagerUniquePtr sm_BaseMainManager;
+		IMPL_TYPE_DECLARE(BaseMainManager);
 	};
 }
 

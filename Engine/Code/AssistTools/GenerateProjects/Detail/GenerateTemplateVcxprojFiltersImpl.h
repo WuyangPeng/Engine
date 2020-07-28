@@ -21,9 +21,9 @@ namespace AssistTools
 
 	public:
 		GenerateTemplateVcxprojFiltersImpl(const System::String& templateFileName, const System::String& projectName);
-		virtual ~GenerateTemplateVcxprojFiltersImpl();
+	 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		void GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName) const;
 

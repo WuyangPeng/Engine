@@ -17,12 +17,15 @@
 using std::string;
 using std::make_shared;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 Framework::WindowMessageUnitTestSuite
 	::WindowMessageUnitTestSuite(int64_t delta,const string& suiteName)
 	:ParentType{ delta }, m_Stream{ make_shared<StreamType>(true) },  m_Impl{ make_shared<ImplType>(suiteName, m_Stream->GetStreamShared()) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Framework::WindowMessageUnitTestSuite

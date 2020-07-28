@@ -20,8 +20,12 @@ namespace CoreTools
 		using WindowError = System::WindowError;
 
 	public:
-		LastError();
-		~LastError();
+		LastError() noexcept;
+		~LastError() noexcept;
+		LastError(const LastError&) = delete;
+		LastError& operator=(const LastError&) = delete;
+		LastError(LastError&&) noexcept = delete;
+		LastError& operator=(LastError&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

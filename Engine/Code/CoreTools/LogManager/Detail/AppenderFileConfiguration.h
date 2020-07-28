@@ -27,21 +27,21 @@ namespace CoreTools
 		AppenderFileConfiguration(const String& directory, AppenderPrint appenderFlags, LogLevel logLevel,
 								  int maxFileSize, bool backup, const String& extensionName);
 
-		virtual ~AppenderFileConfiguration();
+		
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual AppenderType GetAppenderType() const noexcept override;
+		  AppenderType GetAppenderType() const noexcept override;
+ 
+		  const AppenderImplPtr Clone() const override;
 
-		virtual const AppenderImplPtr Clone() const override;
-
-		virtual String GetDirectory() const override;
-		virtual String GetExtensionName() const override;
-		virtual int GetMaxFileSize() const noexcept override;
-		virtual bool IsBackup() const noexcept override;
+		  String GetDirectory() const override;
+		  String GetExtensionName() const override;
+		  int GetMaxFileSize() const noexcept override;
+		  bool IsBackup() const noexcept override;
 
 	private:
-		virtual void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) override;
+		  void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) noexcept override;
 
 	private:
 		String m_Directory;

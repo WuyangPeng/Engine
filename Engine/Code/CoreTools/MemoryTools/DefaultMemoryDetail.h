@@ -9,13 +9,18 @@
 
 #include "DefaultMemory.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+#include "System/Helper/PragmaWarning.h"
 
 // static
 template <typename T>
 T* CoreTools::DefaultMemory
 	::New1DArray(const int bound)
 {
+	
+#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26409)
 	return new T[bound];
+	#include STSTEM_WARNING_POP
 }
 
 // static
@@ -165,10 +170,14 @@ void CoreTools::DefaultMemory
 // static
 template <typename T>
 void CoreTools::DefaultMemory
-	::Delete1DArray(T*& data)
+	::Delete1DArray(T*& data) noexcept
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26401)
+#include SYSTEM_WARNING_DISABLE(26409)
 	delete[] data;
 	data = nullptr;
+	#include STSTEM_WARNING_POP
 }
 
 // static

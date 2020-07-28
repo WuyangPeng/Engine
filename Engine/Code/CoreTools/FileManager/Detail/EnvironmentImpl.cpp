@@ -15,8 +15,10 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+using namespace std::literals;
+
 CoreTools::EnvironmentImpl
-	::EnvironmentImpl()
+	::EnvironmentImpl() noexcept
 	:m_Directories{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -25,7 +27,7 @@ CoreTools::EnvironmentImpl
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, EnvironmentImpl)
 
 int CoreTools::EnvironmentImpl
-	::GetNumDirectories() const noexcept
+	::GetNumDirectories() const  
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -37,7 +39,7 @@ bool CoreTools::EnvironmentImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	auto returnValue = m_Directories.insert(directory);
+	const auto returnValue = m_Directories.insert(directory);
 
 	return returnValue.second;
 }
@@ -47,7 +49,7 @@ bool CoreTools::EnvironmentImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	auto eraseNumber = m_Directories.erase(directory);
+	const auto eraseNumber = m_Directories.erase(directory);
 
 	return (eraseNumber != 0);
 }
@@ -97,7 +99,7 @@ System::String CoreTools::EnvironmentImpl
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("未找符合条件的文件名！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("未找符合条件的文件名！"s));
 }
 
 // private

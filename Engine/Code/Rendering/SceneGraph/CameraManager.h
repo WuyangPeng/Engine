@@ -16,7 +16,7 @@
 #include "CoreTools/Base/SingletonDetail.h"
 
 #include <boost/noncopyable.hpp>
-
+RENDERING_EXPORT_UNIQUE_PTR(CameraManager);
 RENDERING_EXPORT_SHARED_PTR(CameraManagerImpl);
 EXPORT_NONCOPYABLE_CLASS(RENDERING);
 
@@ -29,18 +29,37 @@ namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE CameraManager : public CoreTools::Singleton<CameraManager>
 	{
+ 
 	public:
-		SINGLETON_INITIALIZE_DECLARE(CameraManager); 
+		NON_COPY_CLASSES_TYPE_DECLARE(CameraManager);
+		using ParentType = Singleton<CameraManager>;
 
-	public:	
+	private:
+		enum class CameraManagerCreate
+		{
+			Init,
+		};
+
+	public:
+		explicit CameraManager(CameraManagerCreate cameraManagerCreate);
+
+		static void Create();
+		static void Destroy() noexcept;
+
+		SINGLETON_GET_PTR_DECLARE(CameraManager);
+
 		CLASS_INVARIANT_DECLARE;
 
 		void SetDefaultDepthType(RendererTypes type);
 		DepthType GetDepthType() const;
 
 	private:		
-		SINGLETON_INSTANCE_DECLARE(CameraManager);
-		SINGLETON_IMPL_DECLARE(CameraManager);
+	private:
+		using CameraManagerUniquePtr = std::unique_ptr<CameraManager>;
+
+	private:
+		static CameraManagerUniquePtr sm_CameraManager;
+		IMPL_TYPE_DECLARE(CameraManager);
 	};
 }
 

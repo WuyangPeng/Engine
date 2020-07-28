@@ -19,7 +19,7 @@
 using std::make_pair;
 
 CoreTools::ObjectLinkImpl
-	::ObjectLinkImpl()
+	::ObjectLinkImpl() noexcept
 	:m_Linked{}, m_Ordered{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -49,7 +49,7 @@ CoreTools::ObjectInterfaceSmartPointer CoreTools::ObjectLinkImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("准备读取的object指针没有链接！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("准备读取的object指针没有链接！"s));
 	}
 }
 

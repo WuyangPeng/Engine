@@ -89,7 +89,7 @@ Rendering::LightDirPerVerEffect::~LightDirPerVerEffect()
 Rendering::VisualEffectInstance* Rendering::LightDirPerVerEffect::CreateInstance(
     Light* light, Material* material) const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0,ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
     instance->SetVertexConstant(0, 1,ShaderFloatSmartPointer(NEW0 CameraModelPositionConstant()));
     instance->SetVertexConstant(0, 2,ShaderFloatSmartPointer(NEW0 MaterialEmissiveConstant(MaterialSmartPointer(material))));
@@ -107,7 +107,7 @@ Rendering::VisualEffectInstance* Rendering::LightDirPerVerEffect::CreateInstance
 Rendering::VisualEffectInstance* Rendering::LightDirPerVerEffect::CreateUniqueInstance(
     Light* light, Material* material)
 {
-    LightDirPerVerEffect* effect = NEW0 LightDirPerVerEffect();
+    LightDirPerVerEffect* effect = CoreTools::New0 < LightDirPerVerEffect>();
     return effect->CreateInstance(light, material);
 }
 

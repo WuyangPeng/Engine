@@ -31,7 +31,11 @@ namespace AssistTools
 		// so that FxCompiler skips the compilation phase.  It will still load
 		// the compiled files and create a *.wmfx file.
 		FxCompiler(const std::string& fxName, bool alreadyCompiled = false);
-		~FxCompiler();
+		~FxCompiler() noexcept;
+		FxCompiler(const FxCompiler&) = delete;
+		FxCompiler& operator=(const FxCompiler&) = delete;
+		FxCompiler(FxCompiler&&) noexcept = delete;
+		FxCompiler& operator=(FxCompiler&&) noexcept = delete;
 
 		std::vector<std::string> Messages;
 
@@ -42,7 +46,7 @@ namespace AssistTools
 		class Program
 		{
 		public:
-			Program();
+			Program() noexcept;
 
 			std::string Name;
 			std::string Text;
@@ -53,8 +57,8 @@ namespace AssistTools
 		{
 		public:
 			std::string Name;
-			Rendering::ShaderFlags::VariableType Type;
-			Rendering::ShaderFlags::VariableSemantic Semantic;
+			Rendering::ShaderFlags::VariableType Type = Rendering::ShaderFlags::VariableType::None;
+			Rendering::ShaderFlags::VariableSemantic Semantic = Rendering::ShaderFlags::VariableSemantic::None;
 		};
 		typedef std::vector<Input> InputArray;
 
@@ -62,8 +66,8 @@ namespace AssistTools
 		{
 		public:
 			std::string Name;
-			Rendering::ShaderFlags::VariableType Type;
-			Rendering::ShaderFlags::VariableSemantic Semantic;
+			Rendering::ShaderFlags::VariableType Type = Rendering::ShaderFlags::VariableType::None;
+			Rendering::ShaderFlags::VariableSemantic Semantic = Rendering::ShaderFlags::VariableSemantic::None;
 		};
 		typedef std::vector<Output> OutputArray;
 
@@ -71,9 +75,9 @@ namespace AssistTools
 		{
 		public:
 			std::string Name;
-			Rendering::ShaderFlags::VariableType Type;
-			int BaseRegister;
-			int NumRegistersUsed;
+			Rendering::ShaderFlags::VariableType Type = Rendering::ShaderFlags::VariableType::None;
+			int BaseRegister = 0;
+			int NumRegistersUsed = 0;
 		};
 		typedef std::vector<Constant> ConstantArray;
 
@@ -81,12 +85,12 @@ namespace AssistTools
 		{
 		public:
 			std::string Name;
-			Rendering::ShaderFlags::SamplerType Type;
-			int Unit;
-			Rendering::ShaderFlags::SamplerFilter Filter;
-			Rendering::ShaderFlags::SamplerCoordinate Coordinate[3];
-			float LodBias;
-			float Anisotropy;
+			Rendering::ShaderFlags::SamplerType Type = Rendering::ShaderFlags::SamplerType::None;
+			int Unit = 0;
+			Rendering::ShaderFlags::SamplerFilter Filter = Rendering::ShaderFlags::SamplerFilter::None;
+			Rendering::ShaderFlags::SamplerCoordinate Coordinate[3]{ };
+			float LodBias = 0.0f;
+			float Anisotropy = 0.0f;
 			Mathematics::Float4 BorderColor;
 		};
 		typedef std::vector<Sampler> SamplerArray;

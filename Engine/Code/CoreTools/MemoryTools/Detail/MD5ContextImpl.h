@@ -36,21 +36,36 @@ namespace CoreTools
 		using CoreFunction = uint32_t(*)(uint32_t x, uint32_t y, uint32_t z);
 
 	private:
-		uint32_t UpdateBitCount();
-		bool HandleOddSizedChunks(uint32_t originalLength);
-		void ProcessDataIn64Byte();
-		void InByteReverse();
-		void BufferByteReverse();
-		void MD5Transform();
+		uint32_t UpdateBitCount() noexcept;
+		bool HandleOddSizedChunks(uint32_t originalLength) noexcept;
+		void ProcessDataIn64Byte() noexcept;
+		void InByteReverse() noexcept;
+		void BufferByteReverse() noexcept;
+		void MD5Transform() noexcept;
 
 		// 四大核心函数——CoreFunction1有所优化
-		static uint32_t CoreFunction1(uint32_t x, uint32_t y, uint32_t z);
-		static uint32_t CoreFunction2(uint32_t x, uint32_t y, uint32_t z);
-		static uint32_t CoreFunction3(uint32_t x, uint32_t y, uint32_t z);
-		static uint32_t CoreFunction4(uint32_t x, uint32_t y, uint32_t z);
+		static constexpr uint32_t CoreFunction1(uint32_t x, uint32_t y, uint32_t z) noexcept
+		{
+			return  (z ^ (x & (y ^ z)));
+		}
+		
+		static constexpr uint32_t CoreFunction2(uint32_t x, uint32_t y, uint32_t z) noexcept
+		{
+			return CoreFunction1(z, x, y);
+		}
+		
+		static constexpr uint32_t CoreFunction3(uint32_t x, uint32_t y, uint32_t z) noexcept
+		{
+			return (x ^ y ^ z);
+		}
+		
+		static constexpr uint32_t CoreFunction4(uint32_t x, uint32_t y, uint32_t z) noexcept
+		{
+			return (y ^ (x | ~z));
+		}
 
 		// 这是MD5主要的算法步骤
-		static void MD5Step(CoreFunction function, uint32_t& w, uint32_t x, uint32_t y, uint32_t z, uint32_t data, uint32_t s);
+		static void MD5Step(CoreFunction function, uint32_t& w, uint32_t x, uint32_t y, uint32_t z, uint32_t data, uint32_t s) noexcept;
 
 	private:
 		static constexpr auto sm_DealBufferByte = 64;

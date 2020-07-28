@@ -35,6 +35,10 @@ namespace CoreTools
 		Error(const FunctionDescribed& functionDescribed, const LastError& lastError, const String& message);
 		Error(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message);
 		virtual ~Error();
+		Error(const Error&) = default;
+		Error& operator=(const Error&) = default;
+		Error(Error&&) noexcept = default;
+		Error& operator=(Error&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

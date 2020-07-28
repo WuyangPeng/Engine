@@ -15,50 +15,41 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
+using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(Rendering, ShaderManager);
+SINGLETON_GET_PTR_DEFINE(Rendering, ShaderManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetRenderingMutex() }
+Rendering::ShaderManager::ShaderManagerUniquePtr Rendering::ShaderManager
+::sm_ShaderManager{ };
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_ShaderManagerMutex }
+void Rendering::ShaderManager
+::Create()
+{
+	sm_ShaderManager = make_unique<Rendering::ShaderManager>(ShaderManagerCreate::Init);
+}
 
-SINGLETON_INITIALIZE_DEFINE(Rendering,ShaderManager)
+void Rendering::ShaderManager
+::Destroy() noexcept
+{
+	sm_ShaderManager.reset();
+}
 
 Rendering::ShaderManager
-    ::ShaderManager()
+::ShaderManager(ShaderManagerCreate shaderManagerCreate)
 	:m_Impl{ make_shared<ImplType>() }
 {
-	MUTEX_ENTER_MEMBER;
-    
-	RENDERING_SELF_CLASS_IS_VALID_1;
+	SYSTEM_UNUSED_ARG(shaderManagerCreate);
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ShaderManager
-    ::~ShaderManager()
-{
-	MUTEX_ENTER_MEMBER;
-    
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, ShaderManager)
 
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Rendering::ShaderManager
-    ::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-    
-	if(m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
 void Rendering::ShaderManager
     ::SetVertexProfile (VertexShaderProfile profile)
 {    
-	MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -68,7 +59,7 @@ void Rendering::ShaderManager
 Rendering::ShaderManager::VertexShaderProfile Rendering::ShaderManager
     ::GetVertexProfile () const
 {
-    MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
     
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -78,7 +69,7 @@ Rendering::ShaderManager::VertexShaderProfile Rendering::ShaderManager
 void Rendering::ShaderManager
     ::SetPixelProfile (PixelShaderProfile profile)
 {    
-	MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
     
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -88,7 +79,7 @@ void Rendering::ShaderManager
 Rendering::ShaderManager::PixelShaderProfile Rendering::ShaderManager
     ::GetPixelProfile () const
 {
-    MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
     
 	RENDERING_CLASS_IS_VALID_CONST_1;
     

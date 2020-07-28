@@ -15,94 +15,37 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
+using std::make_shared;
 using std::make_unique;
 
-SINGLETON_MUTEX_DEFINE(Network, BaseMainManager);
+SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetNetworkMutex() }
-
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_BaseMainManagerMutex }
-
-SINGLETON_GET_PTR_DEFINE(Network, BaseMainManager)
+Network::BaseMainManager::BaseMainManagerUniquePtr Network::BaseMainManager
+::sm_BaseMainManager{ };
 
 void Network::BaseMainManager
-	::Create(const ConfigurationStrategy& configurationStrategy)
+::Create(const ConfigurationStrategy& configurationStrategy)
 {
-	MUTEX_ENTER_GLOBAL;
-
-	try
-	{
-		DoCreate(configurationStrategy);
-	}
-	catch (...)
-	{
-		Destroy();
-		throw;
-	}
-}
-
-void Network::BaseMainManager::Create()
-{
-	MUTEX_ENTER_GLOBAL;
+	sm_BaseMainManager = make_unique<Network::BaseMainManager>(configurationStrategy,BaseMainManagerCreate::Init);
 }
 
 void Network::BaseMainManager
-	::DoCreate(const ConfigurationStrategy& configurationStrategy)
+::Destroy() noexcept
 {
-	MUTEX_ENTER_GLOBAL;
-
-	if (sm_BaseMainManagerMutex == nullptr)
-	{
-		sm_BaseMainManagerMutex = make_unique<CoreTools::Mutex>().release();
-	}
-
-	if (sm_BaseMainManager == nullptr)
-	{
-		sm_BaseMainManager = new BaseMainManager(configurationStrategy);
-	}
-}
-
-void Network::BaseMainManager
-	::Destroy()
-{
-	MUTEX_ENTER_GLOBAL;
-
-	delete sm_BaseMainManager;
-	sm_BaseMainManager = nullptr;
-
-	delete sm_BaseMainManagerMutex;
-	sm_BaseMainManagerMutex = nullptr;
+	sm_BaseMainManager.reset();
 }
 
 Network::BaseMainManager
-	::BaseMainManager(const ConfigurationStrategy& configurationStrategy)
+::BaseMainManager(const ConfigurationStrategy& configurationStrategy, BaseMainManagerCreate baseMainManagerCreate)
 	:m_Impl{ BaseMainManagerFactory::Create(configurationStrategy) }
 {
-	MUTEX_ENTER_MEMBER;
+	SYSTEM_UNUSED_ARG(baseMainManagerCreate);
 
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::BaseMainManager
-	::~BaseMainManager()
-{
-	MUTEX_ENTER_MEMBER;
-
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Network::BaseMainManager
-	::IsValid() const noexcept
-{
-	MUTEX_ENTER_MEMBER;
-
-	if (m_Impl != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, BaseMainManager)
+ 
 
 void Network::BaseMainManager
 	::Run()
@@ -117,7 +60,7 @@ void Network::BaseMainManager
 Network::IOContextType& Network::BaseMainManager
 	::GetIOContext()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -127,7 +70,7 @@ Network::IOContextType& Network::BaseMainManager
 void Network::BaseMainManager
 	::StopContext()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -137,7 +80,7 @@ void Network::BaseMainManager
 bool Network::BaseMainManager
 	::IsContextStop() const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -147,7 +90,7 @@ bool Network::BaseMainManager
 void Network::BaseMainManager
 	::RestartContext()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

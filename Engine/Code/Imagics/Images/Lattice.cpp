@@ -19,7 +19,7 @@ Imagics::Lattice
 	IMAGICS_ASSERTION_0(numDimensions > 0 && bounds, "Invalid inputs\n");
     for (int i = 0; i < numDimensions; ++i)
     {
-		IMAGICS_ASSERTION_0(bounds[i] > 0, "Bounds must be positive\n");
+		IMAGICS_ASSERTION_0(bounds && bounds[i] > 0, "Bounds must be positive\n");
     } 
 
     mNumDimensions = numDimensions;

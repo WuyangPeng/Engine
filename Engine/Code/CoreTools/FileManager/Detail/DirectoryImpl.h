@@ -24,6 +24,11 @@ namespace CoreTools
 		explicit DirectoryImpl(const String& directoryName);
 		~DirectoryImpl();
 
+		DirectoryImpl(const DirectoryImpl&) = delete;
+		DirectoryImpl& operator=(const DirectoryImpl&) = delete;
+		DirectoryImpl(DirectoryImpl&&) noexcept = delete;
+		DirectoryImpl& operator=(DirectoryImpl&&) noexcept = delete;
+
 		CLASS_INVARIANT_DECLARE;
 
 	private:

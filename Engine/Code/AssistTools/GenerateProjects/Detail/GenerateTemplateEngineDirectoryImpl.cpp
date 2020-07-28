@@ -30,11 +30,7 @@ AssistTools::GenerateTemplateEngineDirectoryImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 } 
 
-AssistTools::GenerateTemplateEngineDirectoryImpl
-	::~GenerateTemplateEngineDirectoryImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
  
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateEngineDirectoryImpl)
 

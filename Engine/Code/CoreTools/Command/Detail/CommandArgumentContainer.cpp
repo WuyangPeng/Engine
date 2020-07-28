@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 using std::string;
+using namespace std::literals;
 
 CoreTools::CommandArgumentContainer
 	::CommandArgumentContainer(int argumentsNumber)
@@ -73,7 +74,7 @@ void CoreTools::CommandArgumentContainer
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto iter = m_CommandArgument.find(argumentsName);
+	const auto iter = m_CommandArgument.find(argumentsName);
 
 	if (iter != m_CommandArgument.cend())
 	{
@@ -83,7 +84,7 @@ void CoreTools::CommandArgumentContainer
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("未找到命令行索引！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("未找到命令行索引！"s));
 	}
 }
 
@@ -164,7 +165,7 @@ bool CoreTools::CommandArgumentContainer
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto iter = m_CommandArgument.find(argumentsName);
+	const auto iter = m_CommandArgument.find(argumentsName);
 
 	if (iter != m_CommandArgument.cend())
 	{
@@ -192,7 +193,7 @@ void CoreTools::CommandArgumentContainer
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("命令行不允许以字符串打头！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("命令行不允许以字符串打头！"s));
 	}
 }
 
@@ -210,7 +211,7 @@ const string CoreTools::CommandArgumentContainer
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("命令行没有未处理的参数！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("命令行没有未处理的参数！"s));
 }
 
 int CoreTools::CommandArgumentContainer

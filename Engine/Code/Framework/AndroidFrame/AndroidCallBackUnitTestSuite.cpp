@@ -7,6 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "AndroidCallBackUnitTestSuite.h"
+#include "System/Helper/PragmaWarning.h"
 #include "Detail/AndroidCallBackUnitTestSuiteImpl.h"
 #include "Detail/AndroidCallBackUnitTestSuiteImpl.h"
 #include "System/Android/AndroidInputKeyEvent.h"
@@ -18,13 +19,15 @@ using std::move;
 using std::string;
 using std::make_shared;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 Framework::AndroidCallBackUnitTestSuite
 	::AndroidCallBackUnitTestSuite(int64_t delta, const string& suiteName)
-	:ParentType{ delta }, m_StreamType{ make_shared<StreamType>(true) },
-	 m_Impl{ make_shared<ImplType>(suiteName, m_StreamType->GetStreamShared()) }, m_IsInit{ false }
+	:ParentType{ delta }, m_StreamType{ make_shared<StreamType>(true) },m_Impl{ make_shared<ImplType>(suiteName, m_StreamType->GetStreamShared())}, m_IsInit{ false }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
+#include STSTEM_WARNING_POP
 
 Framework::AndroidCallBackUnitTestSuite
 	::AndroidCallBackUnitTestSuite(AndroidCallBackUnitTestSuite&& rhs) noexcept

@@ -24,15 +24,14 @@ namespace CoreTools
 
 	public:
 		explicit BufferInStreamImpl(const FileBufferPtr& bufferInformation, int startPoint = 0);
-		~BufferInStreamImpl();
-
+ 
 		CLASS_INVARIANT_DECLARE;
 
-		const InTopLevel GetTopLevel() const;
+		const InTopLevel GetTopLevel() const noexcept;
 
 	private:
 		void AnalysisBuffer();
-		void IncrementBytesProcessed();
+		void IncrementBytesProcessed() noexcept;
 		void ReadObject();
 		void CreateObject(bool isTopLevel, const std::string& name);
 		void DoCreateObject(bool isTopLevel, const std::string& name);

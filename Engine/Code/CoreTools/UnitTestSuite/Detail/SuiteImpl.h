@@ -35,19 +35,19 @@ namespace CoreTools
 		bool IsUnitTestValid() const noexcept;
 #endif // OPEN_CLASS_INVARIANT
 
-		void PrintReport();
-		void ResetTestData();
+		void PrintReport() override;
+		void ResetTestData() override;
 
-		virtual int GetPassedNumber() const noexcept override;
-		virtual int GetFailedNumber() const noexcept override;
-		virtual int GetErrorNumber() const noexcept override;
-		virtual const std::string GetName() const override;
+		int GetPassedNumber() const noexcept override;
+		int GetFailedNumber() const noexcept override;
+		int GetErrorNumber() const noexcept override;
+		const std::string GetName() const override;
 
-		virtual void ClearUnitTestCollection() override; 
-		virtual void AddUnitTest(UnitTestPtr unitTest) override;
-		virtual void RunUnitTest() override;
+		void ClearUnitTestCollection() noexcept override;
+		void AddUnitTest(UnitTestPtr unitTest) override;
+		void RunUnitTest() override;
 
-		virtual void PrintRunUnitTest() override;
+		void PrintRunUnitTest() override;
 
 	private:
 		using UnitTestPtrContainer = std::vector<UnitTestPtr>;

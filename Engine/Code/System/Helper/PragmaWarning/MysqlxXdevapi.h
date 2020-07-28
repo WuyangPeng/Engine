@@ -15,7 +15,9 @@
 
 		#include SYSTEM_WARNING_DISABLE(4244) 
 		#include SYSTEM_WARNING_DISABLE(4996) 
+		#include SYSTEM_WARNING_DISABLE(26416) 
 		#include SYSTEM_WARNING_DISABLE(26439) 
+		#include SYSTEM_WARNING_DISABLE(26474) 
 		#include SYSTEM_WARNING_DISABLE(26495)  
 
 		#include <mysqlx/xdevapi.h>

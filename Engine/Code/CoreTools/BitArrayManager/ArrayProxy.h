@@ -22,8 +22,9 @@ namespace CoreTools
 
 	public:
 		ArrayProxy(BitArray2D& arrayProxy, int position) noexcept;
+		~ArrayProxy() noexcept = default;
 
-		BitProxy operator[](int position);
+		BitProxy operator[](int position) noexcept;
 
 		ArrayProxy(const ArrayProxy& rhs) noexcept;
 

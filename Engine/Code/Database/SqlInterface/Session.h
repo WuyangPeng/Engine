@@ -55,7 +55,7 @@ namespace Database
 		using SessionWeakPtr = std::weak_ptr<ImplType>;
 
 	public:
-		SessionWeakPtr GetImplType() const;
+		SessionWeakPtr GetImplType() const noexcept;
 	#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 	};
 }

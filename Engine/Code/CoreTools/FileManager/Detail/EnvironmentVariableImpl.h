@@ -28,6 +28,12 @@ namespace CoreTools
 		explicit EnvironmentVariableImpl(const String& variableName);
 		~EnvironmentVariableImpl();
 
+
+		EnvironmentVariableImpl(const EnvironmentVariableImpl&) = delete;
+		EnvironmentVariableImpl& operator=(const EnvironmentVariableImpl&) = delete;
+		EnvironmentVariableImpl(EnvironmentVariableImpl&&) noexcept = delete;
+		EnvironmentVariableImpl& operator=(EnvironmentVariableImpl&&) noexcept = delete;
+
 		CLASS_INVARIANT_DECLARE;
 
 		String GetVariable() const;

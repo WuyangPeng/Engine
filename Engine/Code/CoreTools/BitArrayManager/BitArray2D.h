@@ -27,8 +27,8 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		ArrayProxy operator[](int position);
-		ConstArrayProxy operator[](int position) const;
+		ArrayProxy operator[](int position) noexcept;
+		ConstArrayProxy operator[](int position) const noexcept;
 
 		bool operator==(const BitArray2D& rhs) const noexcept;
 
@@ -56,8 +56,8 @@ namespace CoreTools
 
 		int GetWidth() const noexcept;
 
-		const BitArray& GetBitArray() const;
-		BitArray& GetBitArray();
+		const BitArray& GetBitArray() const noexcept;
+		BitArray& GetBitArray() noexcept;
 
 	private:
 		BitArray m_BitArray;

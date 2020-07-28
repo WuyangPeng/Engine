@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 using std::locale;
+using namespace std::literals;
 
 CoreTools::OFStreamManagerImpl
 	::OFStreamManagerImpl(const String& fileName, bool addition)
@@ -25,7 +26,7 @@ CoreTools::OFStreamManagerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("文件名为空！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("文件名为空！"s));
 	}
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -53,13 +54,28 @@ void CoreTools::OFStreamManagerImpl
 bool CoreTools::OFStreamManagerImpl
 	::IsValid() const noexcept
 {
-	if (!m_FileName.empty() && m_OStream)
-		return true;
-	else
+	try
+	{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+		if (!m_FileName.empty() && m_OStream)
+			return true;
+		else
+			return false;
+		#include STSTEM_WARNING_POP
+	}
+	catch (...)
+	{
 		return false;
+	}
 }
 #endif // OPEN_CLASS_INVARIANT
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26492)
 CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl
 	::GetOFStreamSize() const
 {
@@ -73,13 +89,14 @@ CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl
 
 	thisImpl->SeekEnd();
 
-	auto endPosition = thisImpl->m_OStream.tellp();
+	const auto endPosition = thisImpl->m_OStream.tellp();
 
 	if (endPosition != errorPosition)
 		return endPosition;
 	else
 		return 0;
 }
+#include STSTEM_WARNING_POP
 
 // private
 void CoreTools::OFStreamManagerImpl

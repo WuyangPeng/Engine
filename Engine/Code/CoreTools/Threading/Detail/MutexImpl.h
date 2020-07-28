@@ -17,8 +17,8 @@ namespace CoreTools
 		using ClassType = MutexImpl;
 
 	public:
-		MutexImpl();
-		virtual ~MutexImpl();
+		MutexImpl() noexcept;
+		virtual ~MutexImpl() noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

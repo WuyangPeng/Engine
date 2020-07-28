@@ -17,7 +17,7 @@ namespace CoreTools
 		using ClassType = UnitTestData;
 
 	public:
-		UnitTestData();
+		UnitTestData() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

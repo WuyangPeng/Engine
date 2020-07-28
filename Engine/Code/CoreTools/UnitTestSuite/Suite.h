@@ -33,6 +33,9 @@ namespace CoreTools
 	public:
 		explicit Suite(const std::string& name, const OStreamShared& osPtr, bool printRunUnitTest);
 
+		~Suite() = default;
+		Suite(const Suite& rhs) noexcept = delete;
+		Suite& operator=(const Suite& rhs) noexcept = delete;
 		Suite(Suite&& rhs) noexcept;
 		Suite& operator=(Suite&& rhs) noexcept;
 
@@ -43,7 +46,7 @@ namespace CoreTools
 		int GetFailedNumber() const noexcept;
 		int GetErrorNumber() const noexcept;
 
-		OStreamShared& GetStream();
+		OStreamShared& GetStream() noexcept;
 		void PrintReport();
 		void RunUnitTest();
 		void ClearUnitTestCollection();

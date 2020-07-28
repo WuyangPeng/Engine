@@ -70,16 +70,16 @@ Rendering::MaterialEffect
 Rendering::VisualEffectInstance* Rendering::MaterialEffect
 	::CreateInstance (Material* material) const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, "PVWMatrix", ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
-    instance->SetVertexConstant(0, "MaterialDiffuse",ShaderFloatSmartPointer(NEW0 MaterialDiffuseConstant(MaterialSmartPointer(material))));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	instance->SetVertexConstant(0, "PVWMatrix", ShaderFloatSmartPointer(CoreTools::New0 < ProjectionViewMatrixConstant>()));
+    instance->SetVertexConstant(0, "MaterialDiffuse",ShaderFloatSmartPointer(CoreTools::New0 < MaterialDiffuseConstant>(MaterialSmartPointer(material))));
     return instance;
 }
 
 Rendering::VisualEffectInstance* Rendering::MaterialEffect
 	::CreateUniqueInstance ( Material* material)
 {
-    MaterialEffect* effect = NEW0 MaterialEffect();
+    MaterialEffect* effect = CoreTools::New0 < MaterialEffect>();
     return effect->CreateInstance(material);
 }
 

@@ -49,7 +49,7 @@ namespace CoreTools
 		void PrintNewLine();
 		void PrintBorderLine(char character);
 		void PrintCurrentTime();
-		void PrintCostTime(const CpuTimerPtr& cpuTime);
+		void PrintCostTime(const CpuTimer& cpuTime);
 		void PrintSuiteName(const std::string& suiteName);
 		void PrintTestName(const std::string& testName);
 		void PrintTestResult(int passedNumber, int failedNumber, int errorNumber, int characterWidth);

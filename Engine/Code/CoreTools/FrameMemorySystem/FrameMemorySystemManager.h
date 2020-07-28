@@ -26,11 +26,16 @@ namespace CoreTools
 
 	public:
 		FrameMemorySystemManager(BaseFrameMemorySystem& frameMemorySystem, int bytes, FrameMemorySystemHeap heapType);
-		~FrameMemorySystemManager();
+		~FrameMemorySystemManager() noexcept;
+
+		FrameMemorySystemManager(const FrameMemorySystemManager&) = delete;
+		FrameMemorySystemManager operator=(const FrameMemorySystemManager&) = delete;
+		FrameMemorySystemManager(FrameMemorySystemManager&&) noexcept = delete;
+		FrameMemorySystemManager operator=(FrameMemorySystemManager&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 
-		const FrameMemorySystemPointerShare GetFrameMemorySystemPointer() const;
+		const FrameMemorySystemPointerShare GetFrameMemorySystemPointer() const noexcept;
 
 	private:
 		BaseFrameMemorySystem& m_FrameMemorySystem;

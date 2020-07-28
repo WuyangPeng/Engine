@@ -105,7 +105,7 @@ void Network::BoostMainManagerUseThreads
 
 	if (m_Thread.empty())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("boost 线程数量为零！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("boost 线程数量为零！"s));
 	}
 }
 

@@ -36,24 +36,29 @@ namespace CoreTools
 
 	public:
 		CFileManagerImpl(const String& fileName, const String& mode);
-		virtual ~CFileManagerImpl();
+		virtual ~CFileManagerImpl() noexcept;
+
+		CFileManagerImpl(const CFileManagerImpl&) = delete;
+		CFileManagerImpl& operator=(const CFileManagerImpl&) = delete;
+		CFileManagerImpl(CFileManagerImpl&&) noexcept = delete;
+		CFileManagerImpl& operator=(CFileManagerImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		OffType GetFileLength() const;
 
 		// 输入
-		virtual size_t ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) noexcept;
+		virtual size_t ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) ;
 		// 输出 
-		virtual size_t WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept;
+		virtual size_t WriteToFile(size_t itemSize, size_t itemsNumber, const void* data);
 		// 输入
-		virtual int GetCharacter() noexcept;
+		virtual int GetCharacter() ;
 		// 输入
-		virtual bool UnGetCharacter(int character) noexcept;
+		virtual bool UnGetCharacter(int character) ;
 		// 输出 
-		virtual bool PutCharacter(int character) noexcept;
+		virtual bool PutCharacter(int character);
 		// 输出 
-		virtual bool PutString(const std::string& str) noexcept;
+		virtual bool PutString(const std::string& str);
 		// 输入
 		virtual std::string GetString(int count);
 

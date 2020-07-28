@@ -14,24 +14,41 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-SINGLETON_MUTEX_DEFINE_USE_SHARED(CoreTools, Environment);
-
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
-#define MUTEX_ENTER_MEMBER std::unique_lock<std::shared_mutex> holder{ *sm_EnvironmentMutex }
-#define MUTEX_ENTER_MEMBER_SHARED std::shared_lock<std::shared_mutex> holder{ *sm_EnvironmentMutex }
-
-SINGLETON_INITIALIZE_DEFINE_USE_SHARED(CoreTools, Environment);
-
-SINGLETON_DEFINE(CoreTools, Environment);
+using std::make_shared;
+using std::make_unique;
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, Environment);
+
+CoreTools::Environment::EnvironmentUniquePtr CoreTools::Environment
+::sm_Environment{ };
+
+void CoreTools::Environment
+::Create()
+{
+	sm_Environment = make_unique<CoreTools::Environment>(EnvironmentCreate::Init);
+}
+
+void CoreTools::Environment
+::Destroy() noexcept
+{
+	sm_Environment.reset();
+}
+
+CoreTools::Environment
+::Environment(EnvironmentCreate environmentCreate)
+	:m_Impl{ make_shared<ImplType>() }
+{
+	SYSTEM_UNUSED_ARG(environmentCreate);
+
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Environment)
 
 int CoreTools::Environment
 	::GetNumDirectories() const
 {
-	MUTEX_ENTER_MEMBER_SHARED;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -41,7 +58,7 @@ int CoreTools::Environment
 bool CoreTools::Environment
 	::InsertDirectory(const String& directory)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -51,7 +68,7 @@ bool CoreTools::Environment
 bool CoreTools::Environment
 	::EraseDirectory(const String& directory)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -61,7 +78,7 @@ bool CoreTools::Environment
 void CoreTools::Environment
 	::EraseAllDirectories()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -71,7 +88,7 @@ void CoreTools::Environment
 System::String CoreTools::Environment
 	::GetPathReading(const String& fileName) const
 {
-	MUTEX_ENTER_MEMBER_SHARED;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -81,7 +98,7 @@ System::String CoreTools::Environment
 System::String CoreTools::Environment
 	::GetPathWriting(const String& fileName) const
 {
-	MUTEX_ENTER_MEMBER_SHARED;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -91,7 +108,7 @@ System::String CoreTools::Environment
 System::String CoreTools::Environment
 	::GetPathReadingAndWriting(const String& fileName) const
 {
-	MUTEX_ENTER_MEMBER_SHARED;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -101,7 +118,7 @@ System::String CoreTools::Environment
 void CoreTools::Environment
 	::SetConfigurationPath(const String& configurationPath)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -111,7 +128,7 @@ void CoreTools::Environment
 const System::String CoreTools::Environment
 	::GetConfigurationPath() const
 {
-	MUTEX_ENTER_MEMBER_SHARED;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

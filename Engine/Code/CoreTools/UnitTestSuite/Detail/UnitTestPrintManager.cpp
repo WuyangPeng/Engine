@@ -55,7 +55,7 @@ void CoreTools::UnitTestPrintManager
 }
 
 void CoreTools::UnitTestPrintManager
-	::PrintCostTime(CpuTimerPtr timePtr)
+	::PrintCostTime(const CpuTimer& timePtr)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

@@ -20,16 +20,21 @@ namespace CoreTools
 		using ClassType = LogConsoleTextColorsManagerImpl;
 
 	public:
-		explicit LogConsoleTextColorsManagerImpl(LogLevel logLevel);
-		virtual ~LogConsoleTextColorsManagerImpl();
+		explicit LogConsoleTextColorsManagerImpl(LogLevel logLevel) noexcept;
+		virtual ~LogConsoleTextColorsManagerImpl() noexcept;
+
+		LogConsoleTextColorsManagerImpl(const LogConsoleTextColorsManagerImpl&) = delete;
+		LogConsoleTextColorsManagerImpl& operator=(const LogConsoleTextColorsManagerImpl&) = delete;
+		LogConsoleTextColorsManagerImpl(LogConsoleTextColorsManagerImpl&&) noexcept = delete;
+		LogConsoleTextColorsManagerImpl& operator=(LogConsoleTextColorsManagerImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		LogLevel GetLogLevel() const noexcept;
 
 	protected:
-		static TextColour GetTextColor(LogLevel logLevel);
-		static bool GetIntensified(LogLevel logLevel);
+		static TextColour GetTextColor(LogLevel logLevel) noexcept;
+		static bool GetIntensified(LogLevel logLevel) noexcept;
 
 	private:
 		LogLevel m_LogLevel;

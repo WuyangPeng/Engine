@@ -20,7 +20,7 @@ CoreTools::DirectoryImpl
 	:m_DirectoryName{ }
 {
 	array<System::TChar, System::g_MaxPath> systemCurrentDirectory{ };
-	auto result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
+	const auto result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
 	if (0 < result && directoryName != systemCurrentDirectory.data())
 	{
 		m_DirectoryName = systemCurrentDirectory.data();

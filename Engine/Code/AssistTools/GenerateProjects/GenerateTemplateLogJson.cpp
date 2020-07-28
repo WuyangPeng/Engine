@@ -12,7 +12,7 @@
  
 AssistTools::GenerateTemplateLogJson
 	::GenerateTemplateLogJson(const System::String& templateFileName, const System::String& projectName)
-	:m_Impl(new ImplType(templateFileName, projectName))
+	:m_Impl(std::make_shared<ImplType>(templateFileName, projectName))
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }

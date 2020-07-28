@@ -34,11 +34,11 @@ bool CoreTools::MillisecondTimer
 DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, MillisecondTimer)
 
 uint64_t CoreTools::MillisecondTimer
-	::GetRemain() const
+	::GetRemain() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto elapsedTime = GetElapsedTime();
+	const auto elapsedTime = GetElapsedTime();
 
 	if (elapsedTime <= m_Millisecond)
 		return m_Millisecond - elapsedTime;
@@ -47,7 +47,7 @@ uint64_t CoreTools::MillisecondTimer
 }
 
 uint64_t CoreTools::MillisecondTimer
-	::GetElapsedTime() const
+	::GetElapsedTime() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -55,11 +55,11 @@ uint64_t CoreTools::MillisecondTimer
 }
 
 bool CoreTools::MillisecondTimer
-	::IsElapsed() const
+	::IsElapsed() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto elapsedTime = GetElapsedTime();
+	const auto elapsedTime = GetElapsedTime();
 
 	if (m_Millisecond <= elapsedTime)
 		return true;
@@ -68,7 +68,7 @@ bool CoreTools::MillisecondTimer
 }
 
 uint64_t CoreTools::MillisecondTimer
-	::GetNowTime() const
+	::GetNowTime() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

@@ -21,7 +21,7 @@ namespace CoreTools
 
 	public:
 		explicit OutputConsoleTextColorsManager(LogLevel logLevel);
-		virtual ~OutputConsoleTextColorsManager();
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

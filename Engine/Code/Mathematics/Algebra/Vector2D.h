@@ -38,7 +38,7 @@ namespace Mathematics
 		using ToolsType = Vector2DTools<Real>;
 
 	public:
-		Vector2D();
+		Vector2D() noexcept;
 		Vector2D(const Tuple2& tuple);
 		Vector2D(Real x, Real y) noexcept;
 

@@ -33,7 +33,7 @@
 
 	namespace Imagics
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

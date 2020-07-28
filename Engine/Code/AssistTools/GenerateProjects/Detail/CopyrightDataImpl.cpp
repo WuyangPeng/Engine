@@ -19,7 +19,7 @@ AssistTools::CopyrightDataImpl
 CLASS_INVARIANT_STUB_DEFINE(AssistTools,CopyrightDataImpl)
 
 int AssistTools::CopyrightDataImpl
-	::GetEndYear() const
+	::GetEndYear() const noexcept
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 

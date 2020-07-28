@@ -17,14 +17,14 @@ namespace CoreTools
 		using ClassType = IntelCheckSum;
 
 	public:
-		IntelCheckSum(const char* data, int length);
+		IntelCheckSum(const char* data, int length) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetIntelCheckSum() const;
+		int GetIntelCheckSum() const noexcept;
 
 	private:
-		void Calculation(const char* data, int length);
+		void Calculation(const char* data, int length) noexcept;
 
 	private:
 		int m_IntelCheckSum;

@@ -24,7 +24,7 @@ namespace Imagics
 		// stored in a linear array.  Pixel (x,y) is stored in the array at
 		// location x+xbound*y.  The caller is responsible for deleting data if
 		// it was dynamically allocated.
-		ExtractCurveSquares (int xBound, int yBound, int* data);
+		ExtractCurveSquares (int xBound, int yBound, int* data) noexcept;
 		
 		// Extract a level curve of the specified level value.
 		void ExtractContour (int level, std::vector<Mathematics::Vector2Df>& vertices,std::vector<Mathematics::EdgeKey>& edges);
@@ -39,7 +39,7 @@ namespace Imagics
 		class Vertex
 		{
 		public:
-			Vertex (int xNumer = 0, int xDenom = 0, int yNumer = 0,int yDenom = 0);
+			Vertex (int xNumer = 0, int xDenom = 0, int yNumer = 0,int yDenom = 0) noexcept;
 			
 			int XNumer, XDenom, YNumer, YDenom;
 		};

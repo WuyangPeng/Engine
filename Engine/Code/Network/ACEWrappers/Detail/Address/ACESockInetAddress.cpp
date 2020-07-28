@@ -26,7 +26,7 @@ Network::ACESockInetAddress
 {
 	if (m_ACEInetAddress.set(boost::numeric_cast<uint16_t>(port), hostName.c_str()) != 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("网络地址设置无效！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("网络地址设置无效！"s));
 	}
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -45,7 +45,7 @@ Network::ACESockInetAddress
 {
 	if (m_ACEInetAddress.set(boost::numeric_cast<uint16_t>(port)) != 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("网络地址设置无效！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("网络地址设置无效！"s));
 	}
 
 	NETWORK_SELF_CLASS_IS_VALID_9;

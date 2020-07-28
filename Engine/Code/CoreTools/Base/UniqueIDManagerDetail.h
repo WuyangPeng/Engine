@@ -33,7 +33,7 @@ uint64_t CoreTools::UniqueIDManager
 {
 	static_assert(std::is_enum_v<E>, "E must be an enum.");
 
-	MUTEX_ENTER_UNIQUEID_MANAGER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

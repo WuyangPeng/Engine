@@ -10,10 +10,11 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTemplateManagerLibImpl
 	::sm_Extension(SYSTEM_TEXT(".h"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTemplateManagerLibImpl
 	::GenerateTemplateManagerLibImpl(const System::String& templateFileName,  const Replace& replace)
 	:ParentType(templateFileName, sm_Extension,replace) 
@@ -21,11 +22,7 @@ AssistTools::GenerateTemplateManagerLibImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-AssistTools::GenerateTemplateManagerLibImpl
-	::~GenerateTemplateManagerLibImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateManagerLibImpl)
 
@@ -40,7 +37,7 @@ void AssistTools::GenerateTemplateManagerLibImpl
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital)); 
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName));
 
-	return ParentType::GenerateTo(resourceDirectory, newProjectName, newVariable);
+	return ParentType::Generate (resourceDirectory, newProjectName, newVariable);
 }
 
 /*

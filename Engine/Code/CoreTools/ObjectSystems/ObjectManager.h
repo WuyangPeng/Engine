@@ -16,7 +16,7 @@
 #include "CoreTools/Threading/ThreadingFwd.h"
 
 #include <string>
-
+CORE_TOOLS_EXPORT_UNIQUE_PTR(ObjectManager);
 CORE_TOOLS_EXPORT_SHARED_PTR(ObjectManagerImpl);
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
@@ -25,24 +25,29 @@ namespace CoreTools
 	class CORE_TOOLS_DEFAULT_DECLARE ObjectManager : public CoreTools::Singleton<ObjectManager>
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(ObjectManager); 
-		SINGLETON_GET_PTR_DECLARE(ObjectManager); 
-	public: 
-		using ParentType = Singleton<ObjectManager>;  
+		NON_COPY_CLASSES_TYPE_DECLARE(ObjectManager);
+		using ParentType = Singleton<ObjectManager>; 
 
-	public:	
+	private:
+		enum class ObjectManagerCreate
+		{
+			Init,
+		};
+
+	public:
+		explicit ObjectManager(ObjectManagerCreate objectManagerCreate);
+
 		static void Create();
-		static void Destroy() noexcept;  
+		static void Destroy() noexcept;
 
-	private: 
-		static void DoCreate(); 
-		ObjectManager(); 
-		~ObjectManager();
+		SINGLETON_GET_PTR_DECLARE(ObjectManager);
+
+		CLASS_INVARIANT_DECLARE;
 
 	public:
 		using FactoryFunction = ObjectInterface::FactoryFunction;
 
-		CLASS_INVARIANT_DECLARE;
+ 
 
 	public:
 		FactoryFunction Find(const std::string& name) const;
@@ -52,7 +57,11 @@ namespace CoreTools
 		uint64_t NextUniqueID();
 
 	private:
-		SINGLETON_MEMBER_DECLARE(ObjectManager);
+		using ObjectManagerUniquePtr = std::unique_ptr<ObjectManager>;
+
+	private:
+		static ObjectManagerUniquePtr sm_ObjectManager;
+		IMPL_TYPE_DECLARE(ObjectManager);
 	};
 }
 

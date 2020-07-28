@@ -33,7 +33,7 @@ void CoreTools::CriticalSection
 
 	if (!System::InitializeSystemCriticalSection(&m_CriticalSection))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("初始化临界区失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("初始化临界区失败。"s));
 	}
 }
 

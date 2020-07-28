@@ -33,7 +33,9 @@ namespace CoreTools
 		virtual ~AppenderImpl();
 
 		AppenderImpl(const AppenderImpl& rhs);
-		AppenderImpl& operator=(const AppenderImpl& rhs); 
+		AppenderImpl& operator=(const AppenderImpl& rhs) noexcept;
+		AppenderImpl(AppenderImpl&& rhs) noexcept = default;
+		AppenderImpl& operator=(AppenderImpl&& rhs) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

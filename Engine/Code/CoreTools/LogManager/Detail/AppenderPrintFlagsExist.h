@@ -16,7 +16,7 @@ namespace CoreTools
 	class CORE_TOOLS_HIDDEN_DECLARE AppenderPrintFlagsExist
 	{
 	public:
-		static bool IsExist(AppenderPrint lhsAppenderPrintFlags, AppenderPrint rhsAppenderPrintFlags);
+		static bool IsExist(AppenderPrint lhsAppenderPrintFlags, AppenderPrint rhsAppenderPrintFlags) noexcept;
 	};
 }
 

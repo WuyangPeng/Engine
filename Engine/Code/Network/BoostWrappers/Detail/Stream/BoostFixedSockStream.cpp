@@ -41,7 +41,7 @@ int Network::BoostFixedSockStream
 
 	if (receiveSize != 0 && messageBuffer->GetMessageLength() != receiveSize)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("接收消息错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("接收消息错误！"s));
 	}
 
 	return receiveSize;

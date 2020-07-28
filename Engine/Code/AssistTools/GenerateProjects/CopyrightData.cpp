@@ -22,6 +22,6 @@ AssistTools::CopyrightData
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, CopyrightData)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(AssistTools, CopyrightData, GetEndYear,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(AssistTools, CopyrightData, GetEndYear,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(AssistTools, CopyrightData, GetVersions, const System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(AssistTools, CopyrightData, GetProjectChineseName, const System::String) 

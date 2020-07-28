@@ -14,10 +14,15 @@
 using std::pair;
 using std::string;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
 namespace
 {
 	const System::String g_ArgumentOutOfRange{ SYSTEM_TEXT("²ÎÊý³¬³ö·¶Î§£¡") };
 }
+#include STSTEM_WARNING_POP
 
 CoreTools::CommandHandle
 	::CommandHandle(int argumentsNumber, char** arguments)

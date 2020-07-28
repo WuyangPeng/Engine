@@ -25,12 +25,12 @@ namespace CoreTools
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual AppenderType GetAppenderType() const noexcept override;
+		AppenderType GetAppenderType() const noexcept override;
 
-		virtual const AppenderImplPtr Clone() const override;
+		const AppenderImplPtr Clone() const override;
 
 	private:
-		virtual void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) override;
+		void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) override;
 	};
 }
 

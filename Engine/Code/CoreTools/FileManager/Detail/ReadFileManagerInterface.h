@@ -17,7 +17,12 @@ namespace CoreTools
 		using ClassType = ReadFileManagerInterface;
 
 	public:
-		virtual ~ReadFileManagerInterface();
+		ReadFileManagerInterface() = default;
+		virtual ~ReadFileManagerInterface() noexcept = default;
+		ReadFileManagerInterface(const ReadFileManagerInterface&) = default;
+		ReadFileManagerInterface& operator=(const ReadFileManagerInterface&) = default;
+		ReadFileManagerInterface(ReadFileManagerInterface&&) noexcept = default;
+		ReadFileManagerInterface& operator=(ReadFileManagerInterface&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

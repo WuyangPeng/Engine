@@ -10,7 +10,7 @@
 #include "System/Helper/PragmaWarning.h"
 
 #include STSTEM_WARNING_PUSH
-
+	
 	#include SYSTEM_WARNING_DISABLE(26440) 
 	#include SYSTEM_WARNING_DISABLE(26471) 
 	#include SYSTEM_WARNING_DISABLE(26485)	

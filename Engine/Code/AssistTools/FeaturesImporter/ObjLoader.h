@@ -17,9 +17,9 @@ namespace AssistTools
 	{
 	public:
 		ObjLoader(const std::string& path, const std::string& filename);
-		~ObjLoader();
 
-		enum ErrorCode
+
+		enum class ErrorCode
 		{
 			EC_SUCCESSFUL,
 			EC_LOGFILE_OPEN_FAILED,
@@ -50,7 +50,7 @@ namespace AssistTools
 		class Vertex
 		{
 		public:
-			Vertex()
+			Vertex() noexcept
 				:
 				PosIndex(-1),
 				TcdIndex(-1),
@@ -58,7 +58,7 @@ namespace AssistTools
 			{
 			}
 
-			bool operator< (const Vertex& vertex) const
+			bool operator< (const Vertex& vertex) const noexcept
 			{
 				if (PosIndex < vertex.PosIndex)
 				{
@@ -95,7 +95,7 @@ namespace AssistTools
 		class Mesh
 		{
 		public:
-			int MtlIndex;
+			int MtlIndex = 0;
 			std::vector<Face> Faces;
 		};
 
@@ -103,16 +103,16 @@ namespace AssistTools
 		{
 		public:
 			std::string Name;
-			int PosStart, TcdStart, NorStart;
+			int PosStart = 0, TcdStart = 0, NorStart = 0;
 			std::vector<Mesh> Meshes;
 		};
 
-		 ErrorCode GetCode() const;
-		 const std::vector<MtlLoader::Material>& GetMaterials() const;
-		 const std::vector<Group>& GetGroups() const;
-		 const std::vector<Float3>& GetPositions() const;
-		 const std::vector<Float2>& GetTCoords() const;
-		 const std::vector<Float3>& GetNormals() const;
+		 ErrorCode GetCode() const noexcept;
+		 const std::vector<MtlLoader::Material>& GetMaterials() const noexcept;
+		 const std::vector<Group>& GetGroups() const noexcept;
+		 const std::vector<Float3>& GetPositions() const noexcept;
+		 const std::vector<Float2>& GetTCoords() const noexcept;
+		 const std::vector<Float3>& GetNormals() const noexcept;
 
 	private:
 		void GetTokens(const std::string& line, std::vector<std::string>& tokens);
@@ -134,7 +134,7 @@ namespace AssistTools
 		std::vector<Float3> mPositions;
 		std::vector<Float2> mTCoords;
 		std::vector<Float3> mNormals;
-		static const char* msCodeString[EC_MAX_ERROR_CODES];
+		static const char* msCodeString[System::EnumCastUnderlying(ErrorCode::EC_MAX_ERROR_CODES)];
 	};
 
 }

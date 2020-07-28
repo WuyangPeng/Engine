@@ -19,15 +19,15 @@ namespace CoreTools
 		using ClassType = DeltaTimeManagerImpl;
 
 	public:
-		DeltaTimeManagerImpl();
+		DeltaTimeManagerImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		void ResetCurrentTime();
-		uint64_t GetElapsedTimeInMicroseconds() const;
-		uint64_t GetElapsedTimeInSeconds() const;
-		uint64_t GetNowTimeInMicroseconds() const;
-		uint64_t GetNowTimeInSeconds() const;
+		void ResetCurrentTime() noexcept;
+		uint64_t GetElapsedTimeInMicroseconds() const noexcept;
+		uint64_t GetElapsedTimeInSeconds() const noexcept;
+		uint64_t GetNowTimeInMicroseconds() const noexcept;
+		uint64_t GetNowTimeInSeconds() const noexcept;
 
 	private:
 		System::DeltaTimeValueData m_Initial;

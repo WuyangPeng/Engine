@@ -9,10 +9,12 @@
 #include "GenerateTemplateModuleVcxprojImpl.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"  
 #include "System/Helper/UnicodeUsing.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTemplateModuleVcxprojImpl
 	::sm_Extension(SYSTEM_TEXT(".vcxproj"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTemplateModuleVcxprojImpl
 	::GenerateTemplateModuleVcxprojImpl(const System::String& templateFileName, const System::String& solutionName, const System::String& moduleName,  const System::String& includeName)
 	:ParentType(templateFileName, sm_Extension), m_SolutionName(solutionName), m_ModuleName(moduleName), m_IncludeName(includeName)
@@ -32,7 +34,7 @@ void AssistTools::GenerateTemplateModuleVcxprojImpl
 	newVariable.insert(make_pair(m_ModuleName, newModuleName));
 	newVariable.insert(make_pair(m_IncludeName, newIncludeName));
 
-	return ParentType::GenerateTo(resourceDirectory, newSolutionName + newModuleName, newVariable);
+	return ParentType::Generate (resourceDirectory, newSolutionName + newModuleName, newVariable);
 } 
 
 /*

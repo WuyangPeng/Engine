@@ -4,12 +4,11 @@
 // 
 // ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:17)
 
+#include "System/Helper/PragmaWarning.h"
+#include SYSTEM_WARNING_DISABLE(26446)
 #include "AssistTools/AssistToolsExport.h"
 
 #include "ObjLoader.h"
-
-// Disable Microsoft warning about unsafe functions (security).
-#include "System/Helper/PragmaWarning/Disable4996.h"
 
 #include <cassert>
 #include <fstream>
@@ -18,9 +17,19 @@ using std::string;
 using std::vector;
 using std::ifstream;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+
+// Disable Microsoft warning about unsafe functions (security).
+#include "System/Helper/PragmaWarning/Disable4996.h"
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26472)
 AssistTools::ObjLoader
 	::ObjLoader(const string& path, const string& filename)
-    :mCode(EC_SUCCESSFUL),
+    :mCode(ErrorCode::EC_SUCCESSFUL),
      mCurrentGroup(-1),
 	 mCurrentPos(-1),
 	 mCurrentTcd(-1),
@@ -32,7 +41,7 @@ AssistTools::ObjLoader
     if (!mLogFile)
     {
         assert(false);
-        mCode = EC_LOGFILE_OPEN_FAILED;
+        mCode = ErrorCode::EC_LOGFILE_OPEN_FAILED;
         return;
     }
 
@@ -41,8 +50,8 @@ AssistTools::ObjLoader
     if (!inFile)
     {
         assert(false);
-        mCode = EC_FILE_OPEN_FAILED;
-        fprintf(mLogFile, "%s: %s\n", msCodeString[mCode], filePath.c_str());
+        mCode = ErrorCode::EC_FILE_OPEN_FAILED;
+        fprintf(mLogFile, "%s: %s\n", msCodeString[System::EnumCastUnderlying(mCode)], filePath.c_str());
         fclose(mLogFile);
         return;
     }
@@ -64,73 +73,70 @@ AssistTools::ObjLoader
         if (tokens.size() == 0)
         {
             assert(false);
-            mCode = EC_NO_TOKENS;
+            mCode = ErrorCode::EC_NO_TOKENS;
             break;
         }
 
         // mtllib
         if (GetMaterialLibrary(path, tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // g default
         if (GetDefaultGroup(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // v x y z
         if (GetPosition(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // vt x y
         if (GetTCoord(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // vn x y z
         if (GetNormal(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // Ignore smoothing groups for now (syntax:  's number').
         if (tokens[0] == "s") { continue; }
 
         // g groupname
         if (GetGroup(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // usemtl mtlname
         if (GetMaterialAndMesh(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         // f vertexList
         if (GetFace(tokens)) { continue; }
-        if (mCode != EC_SUCCESSFUL) { break; }
+        if (mCode != ErrorCode::EC_SUCCESSFUL) { break; }
 
         assert(false);
-        mCode = EC_UNEXPECTED_TOKEN;
+        mCode = ErrorCode::EC_UNEXPECTED_TOKEN;
         break;
     }
 
-    if (mCode != EC_SUCCESSFUL)
+    if (mCode != ErrorCode::EC_SUCCESSFUL)
     {
-        fprintf(mLogFile, "%s: %s\n", msCodeString[mCode], line.c_str());
+        fprintf(mLogFile, "%s: %s\n", msCodeString[System::EnumCastUnderlying(mCode)], line.c_str());
     }
     else
     {
-        fprintf(mLogFile, "%s\n", msCodeString[EC_SUCCESSFUL]);
+        fprintf(mLogFile, "%s\n", msCodeString[System::EnumCastUnderlying(ErrorCode::EC_SUCCESSFUL)]);
     }
     fclose(mLogFile);
     inFile.close();
 }
 
-AssistTools::ObjLoader
-	::~ObjLoader()
-{
-}
+ 
 
 void AssistTools::ObjLoader
 	::GetTokens(const string & line, vector<string>& tokens)
 {
     tokens.clear();
 
-    string::size_type begin, end = 0;
+    string::size_type begin = 0, end = 0;
     string token;
 
     while ((begin = line.find_first_not_of(" \t", end)) != string::npos)
@@ -149,21 +155,21 @@ bool AssistTools::ObjLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 2)
         {
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
         MtlLoader loader(path, tokens[1]);
-        if (loader.GetCode() != MtlLoader::EC_SUCCESSFUL)
+        if (loader.GetCode() != MtlLoader::ErrorCode::EC_SUCCESSFUL)
         {
             assert(false);
-            mCode = EC_FAILED_TO_LOAD_MATERIALS;
+            mCode = ErrorCode::EC_FAILED_TO_LOAD_MATERIALS;
             return false;
         }
 
@@ -181,13 +187,13 @@ bool AssistTools::ObjLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 2)
         {
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
@@ -210,13 +216,13 @@ bool AssistTools::ObjLoader
         if (tokens.size() < 4)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 4)
         {
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
@@ -238,14 +244,14 @@ bool AssistTools::ObjLoader
         if (tokens.size() < 3)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 3)
         {
             // TODO.  Need to handle 3D texture coordinates.
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
@@ -266,13 +272,13 @@ bool AssistTools::ObjLoader
         if (tokens.size() < 4)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 4)
         {
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
@@ -294,14 +300,14 @@ bool AssistTools::ObjLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
 
         if (tokens[1] == "default")
         {
             assert(false);
-            mCode = EC_UNEXPECTED_TOKEN;
+            mCode = ErrorCode::EC_UNEXPECTED_TOKEN;
             return false;
         }
 
@@ -332,13 +338,13 @@ bool AssistTools::ObjLoader
         if (tokens.size() == 1)
         {
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
         if (tokens.size() > 2)
         {
             assert(false);
-            mCode = EC_TOO_MANY_TOKENS;
+            mCode = ErrorCode::EC_TOO_MANY_TOKENS;
             return false;
         }
 
@@ -353,7 +359,7 @@ bool AssistTools::ObjLoader
         if (i == (int)mMaterials.size())
         {
             assert(false);
-            mCode = EC_FAILED_TO_FIND_MATERIAL;
+            mCode = ErrorCode::EC_FAILED_TO_FIND_MATERIAL;
             return false;
         }
         mCurrentMtl = i;
@@ -388,7 +394,7 @@ bool AssistTools::ObjLoader
         {
             // A face must have at least three vertices.
             assert(false);
-            mCode = EC_TOO_FEW_TOKENS;
+            mCode = ErrorCode::EC_TOO_FEW_TOKENS;
             return false;
         }
 
@@ -407,20 +413,20 @@ bool AssistTools::ObjLoader
         for (int i = 0; i < numVertices; ++i)
         {
             string token = tokens[i+1];
-            string::size_type slash1 = token.find_first_of("/");
-            string::size_type slash2 = token.find_last_of("/");
+            const string::size_type slash1 = token.find_first_of("/");
+            const string::size_type slash2 = token.find_last_of("/");
             if (slash1 == 0 || slash1 == string::npos
             ||  slash2 == 0 || slash2 == string::npos
             ||  slash1 == slash2)
             {
                 assert(false);
-                mCode = EC_INVALID_VERTEX;
+                mCode = ErrorCode::EC_INVALID_VERTEX;
                 return false;
             }
 
             string pos = token.substr(0, slash1);
             face.Vertices[i].PosIndex = atoi(pos.c_str()) - 1;
-            int numDigits = static_cast<int>(slash2 - slash1 - 1);
+            const int numDigits = static_cast<int>(slash2 - slash1 - 1);
             if (numDigits > 0)
             {
                 string tcd = token.substr(slash1 + 1, numDigits);
@@ -439,37 +445,38 @@ bool AssistTools::ObjLoader
 
 
  AssistTools::ObjLoader::ErrorCode AssistTools::ObjLoader
-	::GetCode() const
+	::GetCode() const noexcept
 {
 	return mCode;
 }
 
  const vector<AssistTools::MtlLoader::Material>& AssistTools::ObjLoader
-	::GetMaterials() const
+	::GetMaterials() const noexcept
 {
 	return mMaterials;
 }
 
  const vector<AssistTools::ObjLoader::Group>& AssistTools::ObjLoader
-	::GetGroups() const
+	::GetGroups() const noexcept
 {
 	return mGroups;
 }
 
  const vector<AssistTools::ObjLoader::Float3>& AssistTools::ObjLoader
-	::GetPositions() const
+	::GetPositions() const noexcept
 {
 	return mPositions;
 }
 
  const vector<AssistTools::ObjLoader::Float2>& AssistTools::ObjLoader
-	::GetTCoords() const
+	::GetTCoords() const noexcept
 {
 	return mTCoords;
 }
 
  const vector<AssistTools::ObjLoader::Float3>& AssistTools::ObjLoader
-	::GetNormals() const
+	::GetNormals() const noexcept
 {
 	return mNormals;
 }
+ #include STSTEM_WARNING_POP

@@ -19,12 +19,7 @@ CoreTools::ReadAndWriteFileHandleImpl
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::ReadAndWriteFileHandleImpl
-	::~ReadAndWriteFileHandleImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ReadAndWriteFileHandleImpl)
 
 void CoreTools::ReadAndWriteFileHandleImpl

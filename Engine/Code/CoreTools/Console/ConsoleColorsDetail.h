@@ -13,6 +13,9 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 template <CoreTools::StandardHandle Handle>
 CoreTools::ConsoleColors<Handle>
 	::ConsoleColors()
@@ -20,6 +23,7 @@ CoreTools::ConsoleColors<Handle>
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <CoreTools::StandardHandle Handle>
@@ -34,6 +38,8 @@ template <CoreTools::StandardHandle Handle>
 void CoreTools::ConsoleColors<Handle>
 	::ResetColor()
 {
+	using namespace std::literals;
+
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
 	auto handle = m_Console.GetHandle();
@@ -43,7 +49,7 @@ void CoreTools::ConsoleColors<Handle>
 
 	if (!System::SetSystemConsoleTextAttribute(handle, defaultTextColour, defaultBackgroundColour, System::ConsoleCommon::Default))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("初始化控制台颜色失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("初始化控制台颜色失败。"s));
 	}
 	else
 	{
@@ -56,13 +62,15 @@ template <CoreTools::StandardHandle Handle>
 void CoreTools::ConsoleColors<Handle>
 	::SetTextColor(TextColour textColor)
 {
+	using namespace std::literals;
+
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
 	auto handle = m_Console.GetHandle();
 
 	if (!System::SetSystemConsoleTextAttribute(handle, textColor, m_BackgroundColor, System::ConsoleCommon::Default))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("设置控制台文本颜色失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("设置控制台文本颜色失败。"s));
 	}
 	else
 	{

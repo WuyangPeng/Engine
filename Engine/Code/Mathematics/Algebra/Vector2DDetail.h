@@ -37,7 +37,7 @@ const Mathematics::Vector2D<Real> Mathematics::Vector2D<Real>
 
 template <typename Real>
 Mathematics::Vector2D<Real>
-	::Vector2D()
+	::Vector2D() noexcept
 	:m_Tuple{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;

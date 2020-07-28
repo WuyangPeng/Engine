@@ -14,9 +14,12 @@
 using std::string;
 using std::make_shared;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const string CoreTools::SuitePrintManager
 	::sm_TimeDescribe{ "≤‚ ‘" };
-
+#include STSTEM_WARNING_POP
 CoreTools::SuitePrintManager
 	::SuitePrintManager(MasterType& suite, int borderLineLength)
 	:m_Suite{ suite },

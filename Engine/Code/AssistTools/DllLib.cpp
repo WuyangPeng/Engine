@@ -48,7 +48,7 @@
 
 	namespace AssistTools
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

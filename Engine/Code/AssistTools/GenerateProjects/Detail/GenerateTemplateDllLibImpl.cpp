@@ -11,9 +11,12 @@
 #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTemplateDllLibImpl
 	::sm_Extension(SYSTEM_TEXT(".cpp"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTemplateDllLibImpl
 	::GenerateTemplateDllLibImpl(const System::String& templateFileName,  const Replace& replace)
 	:ParentType(templateFileName, sm_Extension,replace) 
@@ -21,11 +24,7 @@ AssistTools::GenerateTemplateDllLibImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-AssistTools::GenerateTemplateDllLibImpl
-	::~GenerateTemplateDllLibImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateDllLibImpl)
 
@@ -39,7 +38,7 @@ void AssistTools::GenerateTemplateDllLibImpl
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerName), managerName));
 	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerChineseName), managerChineseName));
 
-	return ParentType::GenerateTo(exportDirectory, newProjectName, newVariable);
+	return ParentType::Generate(exportDirectory, newProjectName, newVariable);
 }
 
 /*

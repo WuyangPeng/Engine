@@ -19,18 +19,23 @@ EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE UnitTestStream : private boost::noncopyable
+	class CORE_TOOLS_DEFAULT_DECLARE UnitTestStream  
 	{
 	public:
 		using ClassType = UnitTestStream;
 
 	public:
-		explicit UnitTestStream(const OStreamShared& osPtr);
-		virtual ~UnitTestStream();
+		explicit UnitTestStream(const OStreamShared& osPtr) noexcept;
+		virtual ~UnitTestStream() = default;
+
+		UnitTestStream(const UnitTestStream&) = delete;
+		UnitTestStream& operator=(const UnitTestStream&) = delete;
+		UnitTestStream(UnitTestStream&&) noexcept = default;
+		UnitTestStream& operator=(UnitTestStream&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		OStreamShared& GetStream();
+		OStreamShared& GetStream() noexcept;
 		bool IsStreamSharedFile() const noexcept;
 
 	private:

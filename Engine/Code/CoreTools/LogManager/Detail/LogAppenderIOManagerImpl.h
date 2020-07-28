@@ -30,9 +30,14 @@ namespace CoreTools
 		using String = System::String;
 
 	public:
-		LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerPtr& appenderManager);
-		LogAppenderIOManagerImpl();
-		~LogAppenderIOManagerImpl();
+		LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerPtr& appenderManager) noexcept;
+		LogAppenderIOManagerImpl() noexcept;
+		~LogAppenderIOManagerImpl() noexcept;
+
+		LogAppenderIOManagerImpl(const LogAppenderIOManagerImpl&) = delete;
+		LogAppenderIOManagerImpl operator=(const LogAppenderIOManagerImpl&) = delete;
+		LogAppenderIOManagerImpl(LogAppenderIOManagerImpl&&) noexcept = delete;
+		LogAppenderIOManagerImpl operator=(LogAppenderIOManagerImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -45,11 +50,12 @@ namespace CoreTools
 		LogAppenderIOManagerImpl& operator<<(const std::wstring& message) noexcept;
 		LogAppenderIOManagerImpl& operator<<(const FunctionDescribed& functionDescribed) noexcept;
 		LogAppenderIOManagerImpl& operator<<(const Error& error) noexcept;
+		LogAppenderIOManagerImpl& operator << (const std::exception& error) noexcept;
 		LogAppenderIOManagerImpl& operator<<(LogFilter filterType) noexcept;
 		LogAppenderIOManagerImpl& operator<<(LogAppenderIOManageSign sign) noexcept;
 		LogAppenderIOManagerImpl& operator<<(const LogFileName& logFileName) noexcept;
 
-		void SetAppenderManager(const AppenderManagerPtr& appenderManager);
+		void SetAppenderManager(const AppenderManagerPtr& appenderManager) noexcept;
 
 	private:
 		using LogFilterTypePtr = std::shared_ptr<LogFilter>;
@@ -60,7 +66,7 @@ namespace CoreTools
 		void Refresh();
 		bool Write();
 		void TriggerAssert();
-		void Reset();
+		void Reset() noexcept;
 
 	private:
 		LogLevel m_logLevel;

@@ -102,7 +102,7 @@ Rendering::LightPntPerPixEffect
 Rendering::VisualEffectInstance* Rendering::LightPntPerPixEffect
 	::CreateInstance (Light* light, Material* material) const
 {
-	VisualEffectInstance* instance = NEW0 VisualEffectInstance(VisualEffectSmartPointer((VisualEffect*)this), 0);
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
     instance->SetPixelConstant(0, 0, ShaderFloatSmartPointer(NEW0 WorldMatrixConstant()));
     instance->SetPixelConstant(0, 1, ShaderFloatSmartPointer(NEW0 CameraModelPositionConstant()));
@@ -121,7 +121,7 @@ Rendering::VisualEffectInstance* Rendering::LightPntPerPixEffect
 Rendering::VisualEffectInstance* Rendering::LightPntPerPixEffect
 	::CreateUniqueInstance (Light* light, Material* material)
 {
-    LightPntPerPixEffect* effect = NEW0 LightPntPerPixEffect();
+    LightPntPerPixEffect* effect = CoreTools::New0 < LightPntPerPixEffect>();
     return effect->CreateInstance(light, material);
 }
 

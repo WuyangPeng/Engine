@@ -11,14 +11,16 @@
 #include "Detail/MutexFactory.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::DllMutex
 	::DllMutex(MutexCreate mutexCreate)
 	:m_Impl{ MutexFactory::GenerateMutex(mutexCreate) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 CoreTools::DllMutex
 	::~DllMutex()
 {

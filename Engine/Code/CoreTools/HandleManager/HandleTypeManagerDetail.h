@@ -42,7 +42,7 @@ void CoreTools::HandleTypeManager<Data, ResourceHandle, ManagerTag>
 
 	if (m_NameIndex.find(handleTag) != m_NameIndex.cend())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Acquire已存在的资源"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Acquire已存在的资源"s));
 	}
 
 	if (m_FreeSlots.empty())
@@ -123,7 +123,7 @@ typename CoreTools::HandleTypeManager<Data, ResourceHandle, ManagerTag>::DataTyp
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("提取不存在的资源！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("提取不存在的资源！"s));
 	}
 }
 

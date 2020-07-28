@@ -10,6 +10,7 @@
 #include "CoreTools/CoreToolsDll.h" 
 
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/UnitTestSuite/OStreamShared.h"
 
 #include <iosfwd> 
@@ -22,7 +23,7 @@ namespace CoreTools
 		using ClassType = CMainFunctionHelper;
 
 	public:
-		CMainFunctionHelper(int argc, char* argv[]);
+		CMainFunctionHelper(int argc, char** argv);
 		virtual ~CMainFunctionHelper();
 
 		CMainFunctionHelper(const CMainFunctionHelper& rhs) = delete;
@@ -39,24 +40,24 @@ namespace CoreTools
 
 	protected:
 		std::ostream* GetOStream() noexcept;
-		void SystemPause();
-		OStreamShared GetStreamShared() const;
+		void SystemPause() noexcept;
+		OStreamShared GetStreamShared() const noexcept;
 
 	private:
 		void InitSingleton();
 		void InitUniqueIDManager();
 		void InitLog();
-		void InitMemory();
+		void InitMemory() noexcept(g_MemoryNoexcept);
 		void InitSmartPointer();
 		void GenerateOsPtr();
 		void InitStreamLocale();
 
-		void DestroySingleton();
-		void DestroyOsPtr();
-		void DestroySmartPointer();
-		void DestroyMemory();
-		void DestroyLog();
-		void DestroyUniqueIDManager();
+		void DestroySingleton() noexcept;
+		void DestroyOsPtr() noexcept;
+		void DestroySmartPointer() noexcept;
+		void DestroyMemory() noexcept;
+		void DestroyLog() noexcept;
+		void DestroyUniqueIDManager() noexcept;
 
 		virtual int DoRun() = 0;
 

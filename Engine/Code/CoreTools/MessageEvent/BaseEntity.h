@@ -24,11 +24,15 @@ namespace CoreTools
 
 	public:
 		BaseEntity();
-		virtual ~BaseEntity() = 0;
+		virtual ~BaseEntity() noexcept = 0;
+		BaseEntity(const BaseEntity&) = default;
+		BaseEntity& operator= (const BaseEntity&) = default;
+		BaseEntity(BaseEntity&&) noexcept = default;
+		BaseEntity& operator= (BaseEntity&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		uint64_t GetEntityID() const;  
+		uint64_t GetEntityID() const noexcept;
  
 		void Register();
 

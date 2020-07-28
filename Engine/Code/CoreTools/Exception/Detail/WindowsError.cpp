@@ -18,11 +18,7 @@ CoreTools::WindowsError
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::WindowsError
-	::~WindowsError()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, WindowsError)
 

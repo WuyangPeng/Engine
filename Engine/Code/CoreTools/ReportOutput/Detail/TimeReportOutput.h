@@ -36,7 +36,7 @@ namespace CoreTools
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		void PrintCurrentTime();
-		void PrintCostTime(const CpuTimerPtr& cpuTime);
+		void PrintCostTime(const CpuTimer& cpuTime);
 
 	private:
 		std::string m_TimeDescribe;

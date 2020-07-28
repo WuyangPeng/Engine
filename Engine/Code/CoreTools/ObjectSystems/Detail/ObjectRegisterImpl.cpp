@@ -45,7 +45,7 @@ uint64_t CoreTools::ObjectRegisterImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("object指针没有注册！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("object指针没有注册！"s));
 	}
 }
 

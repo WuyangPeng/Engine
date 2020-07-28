@@ -308,17 +308,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Animation\Animation.h" />
-	<ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationDll.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h" />    
     <ClInclude Include="..\..\..\Code\Animation\AnimationImport.h" />
-	<ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h" />
-	<ClInclude Include="..\..\..\Code\Animation\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h" />
+    <ClInclude Include="..\..\..\Code\Animation\DllLib.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationLib.h" />
-	<ClInclude Include="..\..\..\Code\Animation\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\Animation\Helper\HelperFwd.h" />
     <ClInclude Include="..\..\..\Code\Animation\Helper\UserMacro.h" />
-	<ClInclude Include="..\..\..\Code\Animation\Sprite\Sprite.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Sprite\Sprite.h" />
     <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimation.h" />
     <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimationDef.h" />
     <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimationManager.h" />
@@ -338,7 +338,7 @@
     <ClInclude Include="..\..\..\Code\Animation\Texture\TextureManager.h" />
     <ClInclude Include="..\..\..\Code\Animation\Texture\TextureTagPoint.h" />
     <ClInclude Include="..\..\..\Code\Animation\Texture\TextureTrack.h" />
-	<ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchy.h" />
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchy.h" />
     <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.h" />
     <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.h" />
     <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationManager.h" />
@@ -348,7 +348,7 @@
     <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyManager.h" />
     <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTagPoint.h" />
     <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTrack.h" />
-	<ClInclude Include="..\..\..\Code\Animation\Skeleton\Skeleton.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\Skeleton.h" />
     <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimation.h" />
     <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationDef.h" />
     <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationManager.h" />
@@ -358,7 +358,7 @@
     <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonManager.h" />
     <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonTagPoint.h" />
     <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonTrack.h" />
-	 <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertex.h" />
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertex.h" />
     <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.h" />
     <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.h" />
     <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationManager.h" />
@@ -368,7 +368,7 @@
     <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexManager.h" />
     <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexTagPoint.h" />
     <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexTrack.h" />
-	<ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTarget.h" />
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTarget.h" />
     <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.h" />
     <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationDef.h" />
     <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationManager.h" />
@@ -378,7 +378,7 @@
     <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetManager.h" />
     <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTagPoint.h" />
     <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTrack.h" />
-	<ClInclude Include="..\..\..\Code\Animation\Gradient\Gradient.h" />
+    <ClInclude Include="..\..\..\Code\Animation\Gradient\Gradient.h" />
     <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimation.h" />
     <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimationDef.h" />
     <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimationManager.h" />
@@ -399,9 +399,9 @@
     <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationTrack.h" />
   </ItemGroup>
   <ItemGroup>
-	<ClCompile Include="..\..\..\Code\Animation\DllLib.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\DllMain.cpp" />
-	<ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimation.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimationDef.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteAnimationManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Sprite\SpriteDef.cpp" />
@@ -417,7 +417,7 @@
     <ClCompile Include="..\..\..\Code\Animation\Texture\TextureManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Texture\TextureTagPoint.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Texture\TextureTrack.cpp" />
-	<ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyDef.cpp" />
@@ -433,7 +433,7 @@
     <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonTagPoint.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonTrack.cpp" />
-	<ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexDef.cpp" />
@@ -441,7 +441,7 @@
     <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexTagPoint.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexTrack.cpp" />
-	<ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationDef.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetDef.cpp" />
@@ -449,7 +449,7 @@
     <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTagPoint.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTrack.cpp" />
-	<ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimation.cpp" />
+    <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimation.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimationDef.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimationManager.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientDef.cpp" />

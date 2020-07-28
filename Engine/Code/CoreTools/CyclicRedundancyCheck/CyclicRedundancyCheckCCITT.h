@@ -17,15 +17,15 @@ namespace CoreTools
 		using ClassType = CyclicRedundancyCheckCCITT;
 
 	public:
-		CyclicRedundancyCheckCCITT(const char* data, int length);
+		CyclicRedundancyCheckCCITT(const char* data, int length) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		uint16_t GetCyclicRedundancyCheck() const;
+		uint16_t GetCyclicRedundancyCheck() const noexcept;
 
 	private:
-		void Calculation(const char* data, int length);
-		uint16_t GetCCITT(uint16_t cyclicRedundancyCheck, uint16_t value);
+		void Calculation(const char* data, int length) noexcept;
+		uint16_t GetCCITT(uint16_t cyclicRedundancyCheck, uint16_t value) noexcept;
 
 	private:
 		uint16_t m_CyclicRedundancyCheck;

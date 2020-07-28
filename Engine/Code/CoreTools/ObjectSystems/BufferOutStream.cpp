@@ -22,6 +22,6 @@ CoreTools::BufferOutStream
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, BufferOutStream)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, BufferOutStream, GetBufferOutStreamInformation, CoreTools::BufferOutStream::FileBufferPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferOutStream, GetBufferOutStreamInformation, CoreTools::BufferOutStream::FileBufferPtr)
 
 

@@ -8,6 +8,7 @@
 
 #include "WindowMessageUnitTestSuiteStream.h"
 #include "System/Helper/UnicodeUsing.h" 
+#include "System/Helper/PragmaWarning.h"
 #include "System/Window/WindowProcess.h"
 #include "CoreTools/Command/CommandHandle.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -45,6 +46,8 @@ Framework::WindowMessageUnitTestSuiteStream::CommandSharedPtr Framework::WindowM
 Framework::WindowMessageUnitTestSuiteStream::OStreamShared Framework::WindowMessageUnitTestSuiteStream
 	::GenerateStreamShared(bool usecommand)
 {
+	#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26486)
 	auto command = GenerateCommandSharedPtr(usecommand);
 
 	const auto isFile = (command != nullptr) && (command->GetExcessArgumentsCount() != 0);
@@ -57,6 +60,7 @@ Framework::WindowMessageUnitTestSuiteStream::OStreamShared Framework::WindowMess
 	{
 		return OStreamShared{ true };
 	}
+	#include STSTEM_WARNING_POP
 }
 
 // static

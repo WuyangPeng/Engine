@@ -36,7 +36,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Session, GetSchemaContainer, D
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 Database::Session::SessionWeakPtr Database::Session
-	::GetImplType() const
+	::GetImplType() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_1;
 

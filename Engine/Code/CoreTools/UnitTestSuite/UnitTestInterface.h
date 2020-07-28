@@ -19,8 +19,13 @@ namespace CoreTools
 		using ClassType = UnitTestInterface;
 
 	public:
-		UnitTestInterface();
-		virtual ~UnitTestInterface();
+		UnitTestInterface() noexcept;
+		virtual ~UnitTestInterface() = default;
+
+		UnitTestInterface(const UnitTestInterface& rhs) = default;
+		UnitTestInterface& operator=(const UnitTestInterface& rhs) = default;
+		UnitTestInterface(UnitTestInterface&& rhs) noexcept = default;
+		UnitTestInterface& operator=(UnitTestInterface&& rhs) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

@@ -21,11 +21,11 @@ namespace CoreTools
 
 	public:
 		WindowsError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message);
-		virtual ~WindowsError();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const String GetError() const override;
+		const String GetError() const override;
 
 	private:
 		WindowError m_LastError;

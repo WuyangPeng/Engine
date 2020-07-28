@@ -9,10 +9,13 @@
 #include "GenerateTemplateMiddleLayerVcxprojFiltersImpl.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+ 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const System::String AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl
 	::sm_Extension(SYSTEM_TEXT(".vcxproj.filters"));
- 
+ #include STSTEM_WARNING_POP
 AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl
 	::GenerateTemplateMiddleLayerVcxprojFiltersImpl(const System::String& templateFileName, const System::String& projectName, const System::String& managerName)
 	:ParentType(templateFileName, sm_Extension), m_ProjectName(projectName), m_ManagerName(managerName)
@@ -20,11 +23,7 @@ AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl
-	::~GenerateTemplateMiddleLayerVcxprojFiltersImpl()
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateMiddleLayerVcxprojFiltersImpl)
 
@@ -37,7 +36,7 @@ void AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl
 	newVariable.insert(make_pair(m_ProjectName, solutionName));
 	newVariable.insert(make_pair(m_ManagerName, newManagerName));
 
-	return ParentType::GenerateTo(resourceDirectory, solutionName + newManagerName, newVariable);
+	return ParentType::Generate (resourceDirectory, solutionName + newManagerName, newVariable);
 }
 
 /*

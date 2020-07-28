@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using boost::numeric_cast;
 
@@ -24,11 +25,7 @@ CoreTools::ReadFileHandleImpl
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::ReadFileHandleImpl
-	::~ReadFileHandleImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::ReadFileHandleImpl
@@ -42,7 +39,7 @@ bool CoreTools::ReadFileHandleImpl
 #endif // OPEN_CLASS_INVARIANT
 
 int CoreTools::ReadFileHandleImpl
-	::GetFileByteSize() const
+ 	::GetFileByteSize() const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -78,6 +75,8 @@ void CoreTools::ReadFileHandleImpl
 
 	CORE_TOOLS_ASSERTION_4(false, "ReadFileHandleImpl禁止调用WriteToFile！");
 
+	CoreTools::DoNothing();
+
 	SYSTEM_UNUSED_ARG(itemSize);
 	SYSTEM_UNUSED_ARG(itemsNumber);
 	SYSTEM_UNUSED_ARG(data);
@@ -89,6 +88,7 @@ void CoreTools::ReadFileHandleImpl
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "ReadFileHandleImpl禁止调用AppendToFile！");
+	CoreTools::DoNothing();
 
 	SYSTEM_UNUSED_ARG(itemSize);
 	SYSTEM_UNUSED_ARG(itemsNumber);

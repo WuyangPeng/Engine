@@ -13,33 +13,41 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-SINGLETON_MUTEX_DEFINE(CoreTools, EntityManager);
+using std::make_shared;
+using std::make_unique;
 
-#define MUTEX_ENTER_GLOBAL CoreTools::ScopedMutex holder{ GetCoreToolsMutex() }
+SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *sm_EntityManagerMutex }
+CoreTools::EntityManager::EntityManagerUniquePtr CoreTools::EntityManager
+	::sm_EntityManager{ };
 
-SINGLETON_INITIALIZE_DEFINE(CoreTools, EntityManager)
-
-SINGLETON_DEFINE(CoreTools, EntityManager)
-
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::EntityManager
-	::IsValid() const noexcept
+void CoreTools::EntityManager
+	::Create()
 {
-	MUTEX_ENTER_MEMBER;
-
-	if (m_Impl != nullptr)
-		return true;
-	else
-		return false;
+	sm_EntityManager = make_unique<CoreTools::EntityManager>(EntityManagerCreate::Init);
 }
-#endif // OPEN_CLASS_INVARIANT
+
+void CoreTools::EntityManager
+	::Destroy() noexcept
+{
+	sm_EntityManager.reset();
+}
+
+CoreTools::EntityManager
+	::EntityManager(EntityManagerCreate entityManagerCreate)
+	:m_Impl{ make_shared<ImplType>() }
+{
+	SYSTEM_UNUSED_ARG(entityManagerCreate);
+
+	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, EntityManager)
 
 uint64_t CoreTools::EntityManager
 	::NextUniqueID()
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -49,7 +57,7 @@ uint64_t CoreTools::EntityManager
 bool CoreTools::EntityManager
 	::Register(const EntityPtr& entity)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -59,7 +67,7 @@ bool CoreTools::EntityManager
 bool CoreTools::EntityManager
 	::Unregister(uint64_t entityID)
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -69,7 +77,7 @@ bool CoreTools::EntityManager
 CoreTools::EntityManager::EntityPtr CoreTools::EntityManager
 	::GetEntity(uint64_t entityID) const
 {
-	MUTEX_ENTER_MEMBER;
+	SINGLETON_MUTEX_ENTER_MEMBER;
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

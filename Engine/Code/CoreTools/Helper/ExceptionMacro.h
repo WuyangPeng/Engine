@@ -16,13 +16,15 @@
 #include <stdexcept>
 
 #define THROW_EXCEPTION(error) \
+		using namespace std::literals; \
 		CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED),(error))
 
 #define THROW_WINDOWS_EXCEPTION \
-		CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED),System::String{}) 
+		CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED),System::String{ }) 
 
 #define THROW_LAST_ERROR_EXCEPTION(lastError,error) \
-        CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED),lastError,(error))
+		using namespace std::literals; \
+		CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED),lastError,(error))
 
 #define EXCEPTION_TRY try
 
@@ -32,7 +34,7 @@
 
 #define EXCEPTION_STD_EXCEPTION_CATCH(filterType) \
 		catch (const std::exception& error) {	LOG_SINGLETON_ENGINE_APPENDER(Error, filterType) \
-        << error.what() << LOG_SINGLETON_TRIGGER_ASSERT; }
+        << error << LOG_SINGLETON_TRIGGER_ASSERT; }
 
 #define EXCEPTION_UNKOWN_CATCH(filterType) \
 		catch (...) { LOG_SINGLETON_ENGINE_APPENDER(Fatal, filterType) << SYSTEM_TEXT("Î´Öª´íÎó¡£") \

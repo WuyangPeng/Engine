@@ -24,14 +24,18 @@ namespace AssistTools
 
 	public:
 		GenerateTemplateImpl(const System::String& templateFileName, const System::String& extension);
-		virtual ~GenerateTemplateImpl();
+		virtual ~GenerateTemplateImpl() noexcept = default;
+		GenerateTemplateImpl(const GenerateTemplateImpl& rhs) = default;
+		GenerateTemplateImpl& operator=(const GenerateTemplateImpl& rhs) = default;
+		GenerateTemplateImpl(GenerateTemplateImpl&& rhs) noexcept = default;
+		GenerateTemplateImpl& operator=(GenerateTemplateImpl&& rhs) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;		
 
 	protected:
 		static const System::String GetTesting();
 
-		void GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, 
+		void Generate (const System::String& resourceDirectory, const System::String& newProjectName, 
 			            const VariableType& newVariable) const;
 
 	private:

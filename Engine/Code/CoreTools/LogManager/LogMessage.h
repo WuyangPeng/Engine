@@ -36,7 +36,7 @@ namespace CoreTools
 		LogLevel GetLogLevel() const noexcept;
 		LogFilter GetLogFilterType() const noexcept;
 		int GetMessageSize() const;
-		FunctionDescribed GetFunctionDescribed() const;
+		FunctionDescribed GetFunctionDescribed() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(LogMessage);
