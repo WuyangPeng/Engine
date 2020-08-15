@@ -12,7 +12,12 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h" 
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 template <typename T>
 Mathematics::Log2OfPowerOfTwo<T>
 	::Log2OfPowerOfTwo(T powerOfTwo) noexcept
@@ -122,5 +127,5 @@ T Mathematics::Log2OfPowerOfTwo<T>
 
 	return boost::numeric_cast<T>(m_Log2);
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_BASE_LOG2_OF_POWER_OF_TWO_DETAIL_H

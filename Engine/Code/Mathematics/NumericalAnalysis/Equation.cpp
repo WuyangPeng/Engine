@@ -21,7 +21,7 @@ Mathematics::Equation
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Mathematics, Equation)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, IsRealResult, bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, IsRealResult, bool);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Equation, Substitution, double, double);
 
@@ -31,8 +31,8 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetRealResultCount, i
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetImaginaryResultCount, int);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetRealBegin, const Mathematics::Equation::RealConstIterator);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetRealEnd, const Mathematics::Equation::RealConstIterator);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetImaginaryBegin, const Mathematics::Equation::ImaginaryConstIterator);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetImaginaryEnd, const Mathematics::Equation::ImaginaryConstIterator);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetRealBegin, const Mathematics::Equation::RealConstIterator);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetRealEnd, const Mathematics::Equation::RealConstIterator);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetImaginaryBegin, const Mathematics::Equation::ImaginaryConstIterator);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetImaginaryEnd, const Mathematics::Equation::ImaginaryConstIterator);
 

@@ -8,10 +8,13 @@
 
 #include "Dx9RendererInput.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26472)
 // Create the device for rendering.
 Rendering::Dx9RendererInput
-	::Dx9RendererInput()
+	::Dx9RendererInput() noexcept
 	:ParentType{}, m_WindowHandle{ nullptr }, m_Driver(nullptr/*Direct3DCreate9(D3D_SDK_VERSION)*/)
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -32,21 +35,22 @@ Rendering::Dx9RendererInput
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9RendererInput)
 
 void Rendering::Dx9RendererInput
-	::SetWindowID(int windowID)
+	::SetWindowID(int windowID) noexcept
 {
 	SetWindowHandle(reinterpret_cast<HWnd>(static_cast<size_t>(windowID)));
 
 }
 
 void Rendering::Dx9RendererInput
-	::SetWindowHandle(HWnd windowID)
+	::SetWindowHandle(HWnd windowID) noexcept
 {
 	m_WindowHandle = windowID;
 }
 
 Rendering::RendererTypes Rendering::Dx9RendererInput
-	::GetRendererType() const
+	::GetRendererType() const noexcept
 {
 	return RendererTypes::Dx9;
 }
 
+#include STSTEM_WARNING_POP

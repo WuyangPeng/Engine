@@ -13,9 +13,11 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
 Rendering::DepthStateImpl
-	::DepthStateImpl()
+	::DepthStateImpl() noexcept
 	:m_Enabled{ true },m_Writable{ true },m_Compare{ DepthStateFlags::CompareMode::LessEqual }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -108,9 +110,9 @@ void Rendering::DepthStateImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto enabled = m_Enabled ? 1 : 0;
-	auto writable = m_Writable ? 1 : 0;
-	auto compare = System::EnumCastUnderlying(m_Compare);
+const auto enabled = m_Enabled ? 1 : 0;
+        const auto writable = m_Writable ? 1 : 0;
+        const	auto compare = System::EnumCastUnderlying(m_Compare);
 
 	manager.Write(sizeof(int), &enabled);
 	manager.Write(sizeof(int), &writable);
@@ -131,6 +133,7 @@ void Rendering::DepthStateImpl
 
 	m_Enabled = (enabled == 1) ? true : false;
 	m_Writable = (writable == 1) ? true : false; 
-	m_Compare = CompareMode(compare);
+	m_Compare = System::UnderlyingCastEnum<CompareMode>(compare);
 }
 
+#include STSTEM_WARNING_POP

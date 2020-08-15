@@ -25,23 +25,26 @@ namespace Rendering
         
     public:
         ControlledObject();
-        virtual ~ControlledObject();
+         ~ControlledObject();
+
+         ControlledObject(ControlledObject&&) = default;
+         ControlledObject& operator=(ControlledObject&&) = default;
         
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ControlledObject);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
        
-        virtual const ControllerInterface* GetControllerObject () const override;
-		virtual ControllerInterface* GetControllerObject () override;
-		virtual bool Update (double applicationTime) override;
-		virtual void SetObject (ControllerInterface* object) override;
+         const ControllerInterface* GetControllerObject () const noexcept override;
+                ControllerInterface* GetControllerObject() noexcept override;
+		 bool Update (double applicationTime) override;
+                void SetObject(ControllerInterface* object) noexcept override;
     
-        virtual int GetNumControllers () const override;
+          int GetNumControllers () const override;
         ConstControllerInterfaceSmartPointer GetConstController (int index) const;
 		ControllerInterfaceSmartPointer GetController (int index);
-        virtual void AttachController (ControllerInterfaceSmartPointer& controller) override;
-        virtual void DetachController (ControllerInterfaceSmartPointer& controller) override;
+         void AttachController (ControllerInterfaceSmartPointer  controller) override;
+         void DetachController (ControllerInterfaceSmartPointer  controller) override;
         void DetachAllControllers ();
         bool UpdateControllers (double applicationTime);
 

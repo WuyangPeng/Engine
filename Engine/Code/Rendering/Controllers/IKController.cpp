@@ -21,7 +21,11 @@
 using std::vector;
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+ 
 CORE_TOOLS_RTTI_DEFINE(Rendering, IKController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IKController);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IKController);
@@ -49,7 +53,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::IKController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 										  
 Rendering::IKController
@@ -76,7 +80,7 @@ uint64_t Rendering::IKController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 
-	auto uniqueID = ParentType::Register(target);
+	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
 		m_Impl->Register(target);
@@ -131,10 +135,10 @@ void Rendering::IKController
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKController,GetIterations, int)									
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKController,IsOrderEndToRoot, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKController,SetIterations, int,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKController,SetOrderEndToRoot, bool,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKController,GetIterations, int)									
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKController, IsOrderEndToRoot, bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, IKController, SetIterations, int, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, IKController, SetOrderEndToRoot, bool, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKController,GetJointsSmartPointer, int,const Rendering::IKJointSmartPointer)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKController,GetJointsNum, int)
 
@@ -146,7 +150,7 @@ bool Rendering::IKController
 		// 确保效果都在当前世界空间。
 		// 假设joints形成一个链，使joints I的世界变换是joint I + 1的父变换。
 		
-		auto mNumJoints = m_Impl->GetJointsNum();
+		const auto mNumJoints = m_Impl->GetJointsNum();
 
 		for (auto index = 0; index < mNumJoints; ++index)
 		{
@@ -207,4 +211,4 @@ bool Rendering::IKController
 
 	return false;    
 }
- 
+ #include STSTEM_WARNING_POP

@@ -10,16 +10,18 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26485)
 template <> 
 void CoreTools::BufferSource
 	::ReadAggregate(Rendering::Transform& datum)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;	;
 
-	auto isIdentity = ReadBool();  
-	auto isRotationOrScaleMatrix = ReadBool();
-	auto isUniformScale = ReadBool();
+	const auto isIdentity = ReadBool();  
+	const auto isRotationOrScaleMatrix = ReadBool();
+	const auto isUniformScale = ReadBool();
 
 	if(isIdentity)
 	{
@@ -75,9 +77,9 @@ void CoreTools::BufferTarget
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto isIdentity = datum.IsIdentity ();  
-	auto isRotationOrScaleMatrix = datum.IsRotationOrScaleMatrix ();
-	auto isUniformScale = datum.IsUniformScale ();
+	const auto isIdentity = datum.IsIdentity ();  
+	const auto isRotationOrScaleMatrix = datum.IsRotationOrScaleMatrix ();
+	const auto isUniformScale = datum.IsUniformScale ();
 
 	WriteBool(isIdentity);
 	WriteBool(isRotationOrScaleMatrix);
@@ -179,3 +181,4 @@ void CoreTools::BufferTarget
 	WriteWithoutNumber(4, datum.GetPoint());
 } 
 
+#include STSTEM_WARNING_POP

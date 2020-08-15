@@ -12,18 +12,19 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::ConfigurationSubStrategy
 	::ConfigurationSubStrategy()
 	:m_Impl{ make_shared<ImplType>() }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+	NETWORK_SELF_CLASS_IS_VALID_1; 
 }
+#include STSTEM_WARNING_POP
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, ConfigurationSubStrategy)
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, ConfigurationSubStrategy)
-
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, ConfigurationSubStrategy)
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, ConfigurationSubStrategy)
+DELAY_COPY_CONSTRUCTION_DEFINE(Network, ConfigurationSubStrategy) 
 
 void Network::ConfigurationSubStrategy
 	::Insert(WrappersSubStrategy wrappersSubStrategy, int value)

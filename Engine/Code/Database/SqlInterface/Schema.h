@@ -30,7 +30,7 @@ namespace Database
 
 		CLASS_INVARIANT_DECLARE;
 
-		ConfigurationStrategy GetConfigurationStrategy() const;
+		ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(Schema);

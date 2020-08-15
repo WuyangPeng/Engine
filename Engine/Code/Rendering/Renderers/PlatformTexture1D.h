@@ -31,7 +31,13 @@ namespace Rendering
 
 	public:
 		PlatformTexture1D(Renderer* renderer, const Texture1D* texture1D);
+		virtual ~PlatformTexture1D () = default;
+		PlatformTexture1D(const PlatformTexture1D&) = delete;
+		PlatformTexture1D& operator=(const PlatformTexture1D&) = delete;
+		PlatformTexture1D( PlatformTexture1D&&) = delete;
+		PlatformTexture1D& operator=( PlatformTexture1D&&) = delete;
 
+		
 		CLASS_INVARIANT_DECLARE;
 
 		// ÎÆÀí²Ù×÷

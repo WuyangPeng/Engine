@@ -13,18 +13,17 @@
 
 using std::string;
 using std::make_shared;
-
+ 
 Network::AnalysisNetworkConfiguration
 	::AnalysisNetworkConfiguration(const string& fileName)
 	:m_Impl{ make_shared<ImplType>(fileName) }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
-
-PERFORMANCE_COPY_CONSTRUCTION_DEFINE(Network, AnalysisNetworkConfiguration)
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, AnalysisNetworkConfiguration)
+ 
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, AnalysisNetworkConfiguration)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, AnalysisNetworkConfiguration, GetConfigurationStrategy, String, Network::ConfigurationStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, AnalysisNetworkConfiguration, GetBegin, Network::AnalysisNetworkConfiguration::ContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, AnalysisNetworkConfiguration, GetEnd, Network::AnalysisNetworkConfiguration::ContainerConstIter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, AnalysisNetworkConfiguration, GetBegin, Network::AnalysisNetworkConfiguration::ContainerConstIter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, AnalysisNetworkConfiguration, GetEnd, Network::AnalysisNetworkConfiguration::ContainerConstIter)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, AnalysisNetworkConfiguration, GetSize, int)

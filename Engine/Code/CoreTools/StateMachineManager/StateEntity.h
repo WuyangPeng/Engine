@@ -42,7 +42,7 @@ namespace CoreTools
 		StatePtr GetPossiblePreviousState();
 
 	private:
-		virtual void DoRegister() override;
+		  void DoRegister() override;
 
 	private:
 		StateMachineBase m_StateMachineBase;

@@ -14,7 +14,14 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446) 
+#include SYSTEM_WARNING_DISABLE(26481) 
+#include SYSTEM_WARNING_DISABLE(26426) 
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26493)
 CORE_TOOLS_RTTI_DEFINE(Rendering, PlanarShadowEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PlanarShadowEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PlanarShadowEffect);
@@ -27,26 +34,31 @@ Rendering::PlanarShadowEffect
     mProjectors = NEW1<LightSmartPointer>(mNumPlanes);
     mShadowColors = NEW1<Mathematics::Float4>(mNumPlanes);
 
-    mAlphaState.Reset(NEW0 AlphaState());
-    mDepthState.Reset(NEW0 DepthState());
-    mStencilState.Reset(NEW0 StencilState());
+    mAlphaState = std::make_shared < AlphaState>();
+    mDepthState =std::make_shared < DepthState>();
+    mStencilState=std::make_shared < StencilState>();
 
-    mMaterial.Reset(NEW0 Material());
-    mMaterialEffect.Reset(NEW0 MaterialEffect());
-    mMaterialEffectInstance.Reset( mMaterialEffect->CreateInstance(mMaterial.GetData()));
+    mMaterial= std::make_shared< Material>();
+    mMaterialEffect =  std::make_shared<  MaterialEffect>();
+    mMaterialEffectInstance.reset(mMaterialEffect->CreateInstance(mMaterial.get()));
 
     // The material diffuse color changes per plane on every draw call.
     ConstShaderFloatSmartPointer sfloat = mMaterialEffectInstance->GetVertexConstant(0,"MaterialDiffuse");
 
-    const_cast<ShaderFloat*>(sfloat.GetData())->EnableUpdater();
+    const_cast<ShaderFloat*>(sfloat.get())->EnableUpdater();
 }
 
 Rendering::PlanarShadowEffect
 	::~PlanarShadowEffect ()
 {
-    DELETE1(mPlanes);
-    DELETE1(mProjectors);
-    DELETE1(mShadowColors);
+    EXCEPTION_TRY
+    {
+        DELETE1(mPlanes);
+        DELETE1(mProjectors);
+        DELETE1(mShadowColors);
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
+    
 }
 
 void Rendering::PlanarShadowEffect
@@ -212,7 +224,7 @@ const CoreTools::ObjectSmartPointer Rendering::PlanarShadowEffect::
 	GetObjectByName(const std::string& name)
 {
 	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -220,11 +232,11 @@ const CoreTools::ObjectSmartPointer Rendering::PlanarShadowEffect::
 	for (int i = 0; i < mNumPlanes; ++i)
 	{
 		CoreTools::ObjectSmartPointer found2 = mPlanes[i]->GetObjectByName(name);
-		if (found2.IsValidPtr())
+		if (found2 )
 			return found2;
 
 		found2 = mProjectors[i]->GetObjectByName(name);
-		if (found2.IsValidPtr())
+		if (found2 )
 			return found2;
 	}
 		// Avoid the cycle by not checking mShadowCaster.
@@ -236,7 +248,7 @@ const std::vector<CoreTools::ObjectSmartPointer> Rendering::PlanarShadowEffect
 {
 	std::vector<CoreTools::ObjectSmartPointer> objects;
 	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		objects.push_back(found);
 	}
@@ -259,7 +271,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::PlanarShadowEffect
 	::GetConstObjectByName(const std::string& name) const
 {
 		CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -267,11 +279,11 @@ const CoreTools::ConstObjectSmartPointer Rendering::PlanarShadowEffect
 	for (int i = 0; i < mNumPlanes; ++i)
 	{
 		CoreTools::ConstObjectSmartPointer found2 = mPlanes[i]->GetConstObjectByName(name);
-		if (found2.IsValidPtr())
+		if (found2 )
 			return found2;
 
 		found2 = mProjectors[i]->GetObjectByName(name);
-		if (found2.IsValidPtr())
+		if (found2 )
 			return found2;
 	}
 		// Avoid the cycle by not checking mShadowCaster.
@@ -314,9 +326,9 @@ void Rendering::PlanarShadowEffect
     GlobalEffect::Load(source);
 
     source.ReadAggregate(mNumPlanes, mShadowColors);
-    source.ReadSmartPointer(mNumPlanes, mPlanes);
-    source.ReadSmartPointer(mNumPlanes, mProjectors);
-    source.ReadSmartPointer(mShadowCaster);
+   // source.ReadSmartPointer(mNumPlanes, mPlanes);
+   // source.ReadSmartPointer(mNumPlanes, mProjectors);
+   // source.ReadSmartPointer(mShadowCaster);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -326,9 +338,9 @@ void Rendering::PlanarShadowEffect
 {
     GlobalEffect::Link(source);
 
-    source.ResolveObjectSmartPointerLink(mNumPlanes, mPlanes);
-    source.ResolveObjectSmartPointerLink(mNumPlanes, mProjectors);
-    source.ResolveObjectSmartPointerLink(mShadowCaster);
+ //   source.ResolveObjectSmartPointerLink(mNumPlanes, mPlanes);
+   // source.ResolveObjectSmartPointerLink(mNumPlanes, mProjectors);
+  //  source.ResolveObjectSmartPointerLink(mShadowCaster);
 }
 
 void Rendering::PlanarShadowEffect
@@ -336,23 +348,23 @@ void Rendering::PlanarShadowEffect
 {
     GlobalEffect::PostLink();
 
-    mAlphaState .Reset( NEW0 AlphaState());
-    mDepthState .Reset( NEW0 DepthState());
-    mStencilState .Reset( NEW0 StencilState());
-    mMaterial .Reset( NEW0 Material());
-    mMaterialEffect .Reset( NEW0 MaterialEffect());
-    mMaterialEffectInstance .Reset( mMaterialEffect->CreateInstance(mMaterial.GetData()));
+    mAlphaState=std::make_shared < AlphaState>();
+    mDepthState=std::make_shared < DepthState>();
+    mStencilState=std::make_shared < StencilState>();
+    mMaterial=std::make_shared < Material>();
+    mMaterialEffect=std::make_shared < MaterialEffect>();
+    mMaterialEffectInstance.reset(mMaterialEffect->CreateInstance(mMaterial.get()));
 }
 
 uint64_t Rendering::PlanarShadowEffect
 	::Register(CoreTools::ObjectRegister& target) const
 {
-    uint64_t id = GlobalEffect::Register(target);
+   const  uint64_t id = GlobalEffect::Register(target);
 	if(0 < id)
     {
-        target.RegisterSmartPointer(mNumPlanes, mPlanes);
-        target.RegisterSmartPointer(mNumPlanes, mProjectors);
-        target.RegisterSmartPointer(mShadowCaster);
+      //  target.RegisterSmartPointer(mNumPlanes, mPlanes);
+      //  target.RegisterSmartPointer(mNumPlanes, mProjectors);
+      //  target.RegisterSmartPointer(mShadowCaster);
         return id;
     }
     return id;
@@ -366,9 +378,9 @@ void Rendering::PlanarShadowEffect
     GlobalEffect::Save(target);
 
     target.WriteAggregateWithNumber(mNumPlanes, mShadowColors);
-    target.WriteSmartPointerWithNumber(mNumPlanes, mPlanes);
-    target.WriteSmartPointerWithNumber(mNumPlanes, mProjectors);
-    target.WriteSmartPointer(mShadowCaster);
+  //  target.WriteSmartPointerWithNumber(mNumPlanes, mPlanes);
+  //  target.WriteSmartPointerWithNumber(mNumPlanes, mProjectors);
+  //  target.WriteSmartPointer(mShadowCaster);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -388,7 +400,7 @@ int Rendering::PlanarShadowEffect
 
 
 int Rendering::PlanarShadowEffect
-	::GetNumPlanes () const
+	::GetNumPlanes () const noexcept
 {
 	return mNumPlanes;
 }
@@ -403,8 +415,7 @@ void Rendering::PlanarShadowEffect
 	mPlanes[i]->SetCullingMode(CullingMode::Always);
 }
 
-Rendering::TrianglesMeshSmartPointer Rendering::PlanarShadowEffect
-	::GetPlane (int i) const
+Rendering::TrianglesMeshSmartPointer Rendering::PlanarShadowEffect ::GetPlane(int i) const noexcept
 {
 	return mPlanes[i];
 }
@@ -412,23 +423,21 @@ Rendering::TrianglesMeshSmartPointer Rendering::PlanarShadowEffect
   void Rendering::PlanarShadowEffect
 	  ::SetProjector (int i, Light* projector)
 {
-	mProjectors[i] .Reset( projector);
+      mProjectors[i].reset(projector);
+  }
+
+  Rendering::Light* Rendering::PlanarShadowEffect ::GetProjector(int i) const noexcept
+  {
+	return mProjectors[i].get();
 }
 
-  Rendering::Light* Rendering::PlanarShadowEffect
-	  ::GetProjector (int i) const
-{
-	return mProjectors[i].GetData();
-}
-
-  void Rendering::PlanarShadowEffect
-	  ::SetShadowColor (int i,const Mathematics::Float4& shadowColor)
+  void Rendering::PlanarShadowEffect ::SetShadowColor(int i, const Mathematics::Float4& shadowColor) noexcept
 {
 	mShadowColors[i] = shadowColor;
 }
 
-  const Mathematics::Float4& Rendering::PlanarShadowEffect
-	  ::GetShadowColor (int i) const
+  const Mathematics::Float4& Rendering::PlanarShadowEffect ::GetShadowColor(int i) const noexcept
 {
 	return mShadowColors[i];
 }
+  #include STSTEM_WARNING_POP

@@ -19,8 +19,8 @@ namespace Mathematics
 		using ClassType = Float3Impl;
 
 	public:
-		Float3Impl();
-		Float3Impl(float firstValue, float secondValue, float thirdValue);
+		Float3Impl() noexcept;
+		Float3Impl(float firstValue, float secondValue, float thirdValue) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

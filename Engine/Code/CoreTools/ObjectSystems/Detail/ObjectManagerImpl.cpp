@@ -16,8 +16,12 @@
 using std::string;
 using std::make_pair;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
+
 CoreTools::ObjectManagerImpl
-	::ObjectManagerImpl()
+	::ObjectManagerImpl() noexcept
 	:m_Factories{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -30,7 +34,7 @@ CoreTools::ObjectManagerImpl::FactoryFunction CoreTools::ObjectManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Factories.find(name);
+	const auto iter = m_Factories.find(name);
 	if (iter != m_Factories.cend())
 	{
 		return iter->second;
@@ -65,3 +69,4 @@ uint64_t CoreTools::ObjectManagerImpl
 	return UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Object);
 }
 
+#include STSTEM_WARNING_POP

@@ -20,7 +20,11 @@ namespace Rendering
         
     public:
         VertexShader (const std::string& programName,int numInputs,int numOutputs,int numConstants,int numSamplers);
-        virtual ~VertexShader ();
+          ~VertexShader ();
+        VertexShader(const VertexShader&) = default;
+          VertexShader& operator=(const VertexShader&) = default;
+        VertexShader( VertexShader&&) noexcept = default;
+          VertexShader& operator=(VertexShader&&) noexcept = default;
         
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
         

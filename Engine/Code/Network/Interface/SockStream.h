@@ -33,12 +33,12 @@ namespace Network
 
 		CLASS_INVARIANT_DECLARE;
 
-		virtual int Send(const MessageBufferSharedPtr& messageBuffer);
-		virtual int Receive(const MessageBufferSharedPtr& messageBuffer);
+		int Send(const MessageBufferSharedPtr& messageBuffer);
+		int Receive(const MessageBufferSharedPtr& messageBuffer);
 
 		// 异步回调，必须保证this、EventInterface和MessageBuffer的生命周期和线程安全。
-		virtual void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
-		virtual void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
+		void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
+		void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
 
 		ACESockStreamType& GetACESockStream();
 		BoostSockStreamType& GetBoostSockStream();

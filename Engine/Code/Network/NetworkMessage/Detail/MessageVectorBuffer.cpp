@@ -25,12 +25,7 @@ Network::MessageVectorBuffer
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::MessageVectorBuffer
-	::~MessageVectorBuffer()
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageVectorBuffer)
 
 Network::MessageVectorBuffer::ImplPtr Network::MessageVectorBuffer
@@ -42,7 +37,7 @@ Network::MessageVectorBuffer::ImplPtr Network::MessageVectorBuffer
 }
 
 Network::BuffBlockSize Network::MessageVectorBuffer
-	::GetBuffBlockSize() const
+	::GetBuffBlockSize() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -58,7 +53,7 @@ int Network::MessageVectorBuffer
 }
 
 const char* Network::MessageVectorBuffer
-	::GetInitialBufferedPtr() const
+	::GetInitialBufferedPtr() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -66,7 +61,7 @@ const char* Network::MessageVectorBuffer
 }
 
 char* Network::MessageVectorBuffer
-	::GetInitialBufferedPtr()
+	::GetInitialBufferedPtr() noexcept
 {
 	NETWORK_CLASS_IS_VALID_1;
 
@@ -80,7 +75,7 @@ Network::MessageVectorBuffer::ImplPtr Network::MessageVectorBuffer
 
 	if (count <= GetSize())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"));
+		THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"s));
 	}
 
 	auto messageVectorBuffer = make_shared<ClassType>(*this);

@@ -48,7 +48,7 @@ void Mathematics::ConversionInteger<T>
 		m_Symbol = NumericalValueSymbol::Negative;
 	}
 
-	FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(m_Mantissa) };
+	const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(m_Mantissa) };
 	m_Shifting = floatingPointAnalysis.GetRealExponent();
 
 	m_MaxMantissaBit = m_Shifting;
@@ -121,7 +121,7 @@ void Mathematics::ConversionInteger<T>
 // private
 template <typename T>
 void Mathematics::ConversionInteger<T>
-	::Amendment()
+	::Amendment() noexcept
 {
 	// 对于（-1，1）之间的数，截断为0
 	if (m_Shifting < 0)
@@ -133,7 +133,7 @@ void Mathematics::ConversionInteger<T>
 	}
 
 	// 截断小数点后的数值
-	auto difference = m_MaxMantissaBit - m_Shifting;
+	const auto difference = m_MaxMantissaBit - m_Shifting;
 
 	if (0 < difference)
 	{
@@ -144,11 +144,11 @@ void Mathematics::ConversionInteger<T>
 
 template<typename T>
 void Mathematics::ConversionInteger<T>
-	::ShiftingMantissa()
+	::ShiftingMantissa() noexcept
 {
 	// 对齐个位的数值
-	auto difference = m_Shifting - m_MaxMantissaBit;
-	auto newShifting = difference % 16;
+	const auto difference = m_Shifting - m_MaxMantissaBit;
+	const auto newShifting = difference % 16;
 
 	// uint64_t存在溢出的问题
 	m_ShiftingMantissa = m_Mantissa << newShifting;
@@ -165,7 +165,7 @@ bool Mathematics::ConversionInteger<T>
 
 template <typename T>
 int Mathematics::ConversionInteger<T>
-	::GetShifting() const
+	::GetShifting() const 
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -192,7 +192,7 @@ int Mathematics::ConversionInteger<T>
 
 template<typename T>
 int Mathematics::ConversionInteger<T>
-	::GetMantissaSize() const
+	::GetMantissaSize() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -201,7 +201,7 @@ int Mathematics::ConversionInteger<T>
 
 template<typename T>
 int Mathematics::ConversionInteger<T>
-	::GetCopySize() const
+	::GetCopySize() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -220,7 +220,7 @@ int Mathematics::ConversionInteger<T>
 
 template <typename T>
 Mathematics::NumericalValueSymbol Mathematics::ConversionInteger<T>
-	::GetSymbol() const
+	::GetSymbol() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -229,7 +229,7 @@ Mathematics::NumericalValueSymbol Mathematics::ConversionInteger<T>
 
 template<typename T>
 uint64_t Mathematics::ConversionInteger<T>
-	::GetShiftingMantissa() const
+	::GetShiftingMantissa() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -238,11 +238,11 @@ uint64_t Mathematics::ConversionInteger<T>
 
 template<typename T>
 int Mathematics::ConversionInteger<T>
-	::GetBeginBlock() const
+	::GetBeginBlock() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto difference = m_Shifting - m_MaxMantissaBit;
+	const auto difference = m_Shifting - m_MaxMantissaBit;
 
 	return difference / 16;
 }

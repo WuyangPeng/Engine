@@ -13,7 +13,9 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 using std::make_shared;
 using boost::property_tree::ptree_error;
 
@@ -26,11 +28,7 @@ Rendering::RendererDataImpl
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::RendererDataImpl
-	::~RendererDataImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::RendererDataImpl
@@ -53,7 +51,7 @@ void Rendering::RendererDataImpl
 		AnalysisRendererManager manager{ fileName };
 	    m_Renderer = manager.GetRendererPtr();
 	}
-	catch (ptree_error& error)
+	catch (const ptree_error& error)
 	{
 		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
 			<< error.what()
@@ -127,7 +125,7 @@ const std::string Rendering::RendererDataImpl
 }
 
 int Rendering::RendererDataImpl
-	::GetXPosition () const
+	::GetXPosition () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -135,7 +133,7 @@ int Rendering::RendererDataImpl
 }
 
 int Rendering::RendererDataImpl
-	::GetYPosition () const
+	::GetYPosition () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -159,7 +157,7 @@ int Rendering::RendererDataImpl
 }
 
 bool Rendering::RendererDataImpl
-	::IsAllowResize() const
+	::IsAllowResize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -173,3 +171,4 @@ Rendering::RendererTypes Rendering::RendererDataImpl
 
 	return m_Renderer->GetRendererType();
 }	
+#include STSTEM_WARNING_POP

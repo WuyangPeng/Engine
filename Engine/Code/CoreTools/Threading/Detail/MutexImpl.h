@@ -19,6 +19,10 @@ namespace CoreTools
 	public:
 		MutexImpl() noexcept;
 		virtual ~MutexImpl() noexcept;
+		MutexImpl(const MutexImpl&) = delete;
+		MutexImpl& operator=(const MutexImpl&) = delete;
+		MutexImpl(MutexImpl&&) noexcept = delete;
+		MutexImpl& operator=(MutexImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

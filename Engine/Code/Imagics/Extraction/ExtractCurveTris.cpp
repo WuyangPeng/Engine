@@ -18,6 +18,7 @@
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26429)
 #include <map>
 
 Imagics::ExtractCurveTris
@@ -106,7 +107,7 @@ void Imagics::ExtractCurveTris
     VMap vertexMap;
     for (int v = 0,  nextVertex = 0; v < numVertices; ++v)
     {
-        std::pair<VIterator, bool> result = vertexMap.insert(std::make_pair(vertices[v],  nextVertex));
+        const std::pair<VIterator, bool> result = vertexMap.insert(std::make_pair(vertices[v],  nextVertex));
 
         if (result.second == true)
         {
@@ -136,7 +137,7 @@ void Imagics::ExtractCurveTris
             edges[e].SetKey(1,vIter->second);
 
             // Keep only unique edges.
-            std::pair<EIterator, bool> result = edgeMap->insert(std::make_pair(edges[e],  nextEdge));
+            const std::pair<EIterator, bool> result = edgeMap->insert(std::make_pair(edges[e],  nextEdge));
 
             if (result.second == true)
             {

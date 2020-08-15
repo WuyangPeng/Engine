@@ -15,7 +15,9 @@
 
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::SingleShaderBaseData
 	::SingleShaderBaseData( const string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic )
 	:m_Impl{ make_shared<ImplType>(name,type,semantic) }
@@ -43,10 +45,10 @@ void Rendering::SingleShaderBaseData
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,SingleShaderBaseData,GetName,const string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,SingleShaderBaseData,GetType,Rendering::ShaderFlags::VariableType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,SingleShaderBaseData,GetSemantic,Rendering::ShaderFlags::VariableSemantic) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,SingleShaderBaseData,GetType,Rendering::ShaderFlags::VariableType)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderBaseData, GetSemantic, Rendering::ShaderFlags::VariableSemantic) 
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,SingleShaderBaseData,Load,BufferSource&,void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,SingleShaderBaseData,Save,BufferTarget&,void)  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,SingleShaderBaseData,GetStreamingSize,int) 
- 
+ #include STSTEM_WARNING_POP

@@ -43,10 +43,10 @@ namespace Rendering
 		void Insert(const VisualSmartPointer& visible);
 
         // 设置集合元素的个数为零。
-        void Clear ();
+        void Clear () noexcept;
 
-		VisualContainerIter begin();
-		VisualContainerIter end();
+		VisualContainerIter begin() noexcept;
+        VisualContainerIter end() noexcept;
 
     private:
         IMPL_TYPE_DECLARE(VisibleSet);

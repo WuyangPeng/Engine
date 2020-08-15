@@ -37,10 +37,10 @@ namespace Mathematics
 		const Ellipse2 GetEllipse() const;
 
 		// æ≤Ã¨æ‡¿Î≤È—Ø°£		 
-		virtual const DistanceResult GetSquared() const override;
+		  const DistanceResult GetSquared() const override;
 
 		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£		
-		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
+		  const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
 	private:
 		Vector2D m_Point;

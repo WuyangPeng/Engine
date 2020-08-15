@@ -13,7 +13,9 @@
 #include "CoreTools/DataTypes/TupleDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 template <typename Real>
 Mathematics::Vector3DOrthonormalize <Real>
 	::Vector3DOrthonormalize(const Vector3D& lhs, const Vector3D& mhs, const Vector3D& rhs, const Real epsilon)
@@ -70,6 +72,7 @@ template <typename Real>
 bool Mathematics::Vector3DOrthonormalize<Real>
 	::IsValid() const noexcept
 {
+	try{
 	if (Math::FAbs(Vector3DTools::DotProduct(m_UVector, m_VVector)) <= m_Epsilon &&
 		Math::FAbs(Vector3DTools::DotProduct(m_UVector, m_WVector)) <= m_Epsilon &&
 		Math::FAbs(Vector3DTools::DotProduct(m_VVector, m_WVector)) <= m_Epsilon &&
@@ -79,6 +82,11 @@ bool Mathematics::Vector3DOrthonormalize<Real>
 		return true;
 	}
 	else
+	{
+		return false;
+	}
+	}
+	catch(...)
 	{
 		return false;
 	}
@@ -111,5 +119,5 @@ const typename Mathematics::Vector3DOrthonormalize<Real>::Vector3D Mathematics::
 
 	return m_WVector;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_VECTOR_3D_ORTHONORMALIZE_DETAIL_H

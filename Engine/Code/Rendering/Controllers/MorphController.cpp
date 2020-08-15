@@ -24,7 +24,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486) 
 CORE_TOOLS_RTTI_DEFINE(Rendering, MorphController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MorphController); 
 CORE_TOOLS_FACTORY_DEFINE(Rendering, MorphController);
@@ -46,11 +49,11 @@ COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, MorphController)
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, MorphController) 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, MorphController,GetNumVertices, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, MorphController,GetNumVertices, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, MorphController,GetNumTargets, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, MorphController,GetNumTargets, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, MorphController,GetNumKeys, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, MorphController,GetNumKeys, int)
 
 
 const Rendering::MorphController::APoint Rendering::MorphController
@@ -123,13 +126,13 @@ bool Rendering::MorphController
 			// 查找边界键。
 			auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
 			 
-			auto info = GetKeyInfo(ctrlTime);
+			const auto info = GetKeyInfo(ctrlTime);
  
 			// 加入剩余的组分在凸状组合
 			for (auto i = 1; i < m_Impl->GetNumTargets(); ++i)
 			{
 				// 添加target[i]在三角形顶点。
-				auto coeff = (1.0f - info.GetNormTime()) * m_Impl->GetWeights(info.GetFirstIndex(),i - 1) + info.GetNormTime() * m_Impl->GetWeights(info.GetSecondIndex(), i - 1);
+				const auto coeff = (1.0f - info.GetNormTime()) * m_Impl->GetWeights(info.GetFirstIndex(),i - 1) + info.GetNormTime() * m_Impl->GetWeights(info.GetSecondIndex(), i - 1);
 				 
 				for (auto j = 0; j < m_Impl->GetNumVertices(); ++j)
 				{
@@ -140,7 +143,7 @@ bool Rendering::MorphController
 			}
 
 			visual->UpdateModelSpace(VisualUpdateType::Normals);
-			RENDERER_MANAGE_SINGLETON.UpdateAll(visual->GetConstVertexBuffer().GetData());
+			RENDERER_MANAGE_SINGLETON.UpdateAll(visual->GetConstVertexBuffer().get());
  
 			return true;
 		}		
@@ -171,10 +174,10 @@ Rendering::ControllerInterfaceSmartPointer Rendering::MorphController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, MorphController,GetKeyInfo, float,const Rendering::ControllerKeyInfo)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, MorphController,GetKeyInfo, float,const Rendering::ControllerKeyInfo)
 
 										  
 Rendering::MorphController
@@ -250,4 +253,4 @@ void Rendering::MorphController
 
 
  
- 
+#include STSTEM_WARNING_POP

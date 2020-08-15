@@ -10,10 +10,11 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446) 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A1R5G5B5>
-    ::SetColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Rendering::TextureFormat::A1R5G5B5>::SetColour(BitType red, BitType green, BitType blue) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A1R5G5B5>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A1R5G5B5>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -32,8 +33,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A1R5G5B5>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A4R4G4B4>
-    ::SetColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Rendering::TextureFormat::A4R4G4B4>::SetColour(BitType red, BitType green, BitType blue) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A4R4G4B4>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A4R4G4B4>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -52,8 +52,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A4R4G4B4>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A8R8G8B8>
-    ::SetColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Rendering::TextureFormat::A8R8G8B8>::SetColour(BitType red, BitType green, BitType blue) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A8R8G8B8>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A8R8G8B8>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -72,8 +71,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8R8G8B8>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A8B8G8R8>
-    ::SetColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Rendering::TextureFormat::A8B8G8R8>::SetColour(BitType red, BitType green, BitType blue) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A8B8G8R8>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A8B8G8R8>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -92,8 +90,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8B8G8R8>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16>
-    ::SetColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16>::SetColour(BitType red, BitType green, BitType blue) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -112,8 +109,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16F>
-    ::SetColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16F>::SetColour(BitType red, BitType green, BitType blue) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A16B16G16R16F>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A16B16G16R16F>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -132,8 +128,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16F>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A32B32G32R32F>
-    ::SetColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Rendering::TextureFormat::A32B32G32R32F>::SetColour(BitType red, BitType green, BitType blue) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A32B32G32R32F>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::A32B32G32R32F>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -152,8 +147,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A32B32G32R32F>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A8>
-    ::SetColour(BitType alpha)
+void Rendering::TextureColour<Rendering::TextureFormat::A8>::SetColour(BitType alpha) noexcept
 {
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::A8>::RedType, Rendering::TrueType>::value, "RedType isn't TrueType!");
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::A8>::GreenType, Rendering::TrueType>::value, "GreenType isn't TrueType!");
@@ -169,8 +163,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::L8>
-    ::SetColour(BitType luminance)
+void Rendering::TextureColour<Rendering::TextureFormat::L8>::SetColour(BitType luminance) noexcept
 {
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::L8>::RedType, Rendering::TrueType>::value, "RedType isn't TrueType!");
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::L8>::GreenType, Rendering::TrueType>::value, "GreenType isn't TrueType!");
@@ -187,8 +180,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::L8>
 
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::L16>
-    ::SetColour(BitType luminance)
+void Rendering::TextureColour<Rendering::TextureFormat::L16>::SetColour(BitType luminance) noexcept 
 {    
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::L16>::RedType, Rendering::TrueType>::value, "RedType isn't TrueType!");
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::L16>::GreenType, Rendering::TrueType>::value, "GreenType isn't TrueType!");
@@ -205,8 +197,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::L16>
 
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::R16F>
-    ::SetColour(BitType red)
+void Rendering::TextureColour<Rendering::TextureFormat::R16F>::SetColour(BitType red) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::R16F>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::R16F>::GreenType, Rendering::TrueType>::value, "GreenType isn't TrueType!");
@@ -223,8 +214,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::R16F>
 
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::R32F>
-    ::SetColour(BitType red)
+void Rendering::TextureColour<Rendering::TextureFormat::R32F>::SetColour(BitType red) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::R32F>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::R32F>::GreenType, Rendering::TrueType>::value, "GreenType isn't TrueType!");
@@ -240,8 +230,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::R32F>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::A8L8>
-    ::SetColour(BitType alpha, BitType luminance)
+void Rendering::TextureColour<Rendering::TextureFormat::A8L8>::SetColour(BitType alpha, BitType luminance) noexcept
 {
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::A8L8>::RedType, Rendering::TrueType>::value, "RedType isn't TrueType!");
 	static_assert(!std::is_same<ColourTextureFormatTraits<TextureFormat::A8L8>::GreenType, Rendering::TrueType>::value, "GreenType isn't TrueType!");
@@ -258,8 +247,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8L8>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::G16R16>
-    ::SetColour(BitType green, BitType red)
+void Rendering::TextureColour<Rendering::TextureFormat::G16R16>::SetColour(BitType green, BitType red) noexcept
 
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::G16R16>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
@@ -277,8 +265,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::G16R16>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>
-    ::SetColour(BitType green, BitType red)
+void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>::SetColour(BitType green, BitType red) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::G16R16F>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::G16R16F>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -295,8 +282,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>
 }
 
 template <>
-void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>
-    ::SetColour(BitType green, BitType red)
+void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>::SetColour(BitType green, BitType red) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::G32R32F>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<TextureFormat::G32R32F>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -311,3 +297,4 @@ void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>
     
 	Standardization();
 }
+#include STSTEM_WARNING_POP

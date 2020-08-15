@@ -13,7 +13,10 @@
 #endif // MATHEMATICS_INCLUDED_HOMOGENEOUS_POINT_DETAIL
 
 #include "HomogeneousPointDetail.h" 
-
+ #include "System/Helper/PragmaWarning.h"
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26446)
+    #include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
 	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
@@ -22,7 +25,7 @@ namespace Mathematics
 	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
 	class HomogeneousPoint<double>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_EXPORT_TEMPLATE
 
 

@@ -13,9 +13,12 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26487)
 Network::MessageManagerImpl
-	::MessageManagerImpl()
+	::MessageManagerImpl() noexcept
 	:m_Factories{}, m_FullVersion{ CoreTools::Version::GetTCREFullVersion() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -28,7 +31,7 @@ Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Factories.find(messageID);
+	const auto iter = m_Factories.find(messageID);
 	if (iter != m_Factories.cend())
 	{
 		for (const auto& value : iter->second)
@@ -40,7 +43,7 @@ Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"s));
 }
 
 void Network::MessageManagerImpl
@@ -89,3 +92,4 @@ int Network::MessageManagerImpl
 }
 
 
+#include STSTEM_WARNING_POP

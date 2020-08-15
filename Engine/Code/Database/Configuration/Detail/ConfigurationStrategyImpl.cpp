@@ -44,8 +44,7 @@ Database::ConfigurationStrategyImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Database, ConfigurationStrategyImpl)
 
-Database::WrappersStrategy Database::ConfigurationStrategyImpl
-	::GetWrappersStrategy() const
+Database::WrappersStrategy Database::ConfigurationStrategyImpl ::GetWrappersStrategy() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -53,15 +52,14 @@ Database::WrappersStrategy Database::ConfigurationStrategyImpl
 }
 
 string Database::ConfigurationStrategyImpl
-	::GetIP() const
+	::GetIP() const 
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
 	return m_IP;
 }
 
-int Database::ConfigurationStrategyImpl
-	::GetPort() const
+int Database::ConfigurationStrategyImpl ::GetPort() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -132,8 +130,7 @@ Database::ConfigurationStrategyImpl::SSLOption Database::ConfigurationStrategyIm
 	return m_SSLOptions;
 }
 
-bool Database::ConfigurationStrategyImpl
-	::IsUseSSL() const
+bool Database::ConfigurationStrategyImpl ::IsUseSSL() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -141,7 +138,7 @@ bool Database::ConfigurationStrategyImpl
 }
 
 Database::ConfigurationStrategyImpl::DBMapping Database::ConfigurationStrategyImpl
-	::GetDBMapping() const
+	::GetDBMapping() const  
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -153,43 +150,39 @@ std::string Database::ConfigurationStrategyImpl
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_DBMapping.find(dbIndex);
+	const auto iter = m_DBMapping.find(dbIndex);
 	if (iter != m_DBMapping.cend())
 	{
 		return iter->second;
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的数据库索引。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的数据库索引。"s));
 	}
 }
 
-bool Database::ConfigurationStrategyImpl
-	::GetPooling() const
+bool Database::ConfigurationStrategyImpl ::GetPooling() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
 	return m_Pooling;
 }
 
-int Database::ConfigurationStrategyImpl
-	::GetPoolMaxSize() const
+int Database::ConfigurationStrategyImpl ::GetPoolMaxSize() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
 	return m_PoolMaxSize;
 }
 
-int Database::ConfigurationStrategyImpl
-	::GetPoolQueueTimeout() const
+int Database::ConfigurationStrategyImpl ::GetPoolQueueTimeout() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
 	return m_PoolQueueTimeout;
 }
 
-int Database::ConfigurationStrategyImpl
-	::GetPoolMaxIdleTime() const
+int Database::ConfigurationStrategyImpl ::GetPoolMaxIdleTime() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 

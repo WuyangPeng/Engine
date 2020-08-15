@@ -15,7 +15,10 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26440)
 Rendering::MaterialImpl
     ::MaterialImpl()
 	:m_Emissive{ 0.0f, 0.0f, 0.0f, 1.0f }, m_Ambient{ 0.0f, 0.0f, 0.0f, 1.0f }, m_Diffuse{ 0.0f, 0.0f, 0.0f, 1.0f }, m_Specular{ 0.0f, 0.0f, 0.0f, 0.0f }
@@ -148,4 +151,4 @@ float Rendering::MaterialImpl
 }
 
 
- 
+ #include STSTEM_WARNING_POP

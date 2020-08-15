@@ -33,7 +33,7 @@ namespace Network
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Load(MultipleMessageContainer& container, const MessageSourceSharedPtr& source) const override;
+		 void Load(MultipleMessageContainer& container, const MessageSourceSharedPtr& source) const override;
 	};
 
 	template<typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>

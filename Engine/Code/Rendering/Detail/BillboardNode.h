@@ -25,7 +25,9 @@ namespace Rendering
 
 	public:
 		explicit BillboardNode(const CameraSmartPointer& camera);
-		virtual ~BillboardNode();
+		~BillboardNode() = default;
+		BillboardNode(BillboardNode&&) noexcept = default;
+		BillboardNode& operator=(BillboardNode&&) noexcept= default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
@@ -35,13 +37,13 @@ namespace Rendering
 		// 广告牌对齐的摄像头。
 		void AlignTo(const CameraSmartPointer& camera);
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSmartPointer Clone() const override;
 
 		const ConstCameraSmartPointer GetCamera() const;
 		
 	private:
 		// 对几何更新的支持。
-		virtual bool UpdateWorldData(double applicationTime);
+		  bool UpdateWorldData(double applicationTime) override;
 
 	private:
 		IMPL_TYPE_DECLARE(BillboardNode);

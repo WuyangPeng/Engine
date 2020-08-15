@@ -28,7 +28,7 @@ namespace Rendering
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(RenderTargetManagement);
-		using RenderTargetConstPtr = CoreTools::ConstThirdSubclassSmartPointer<RenderTarget>;
+		using RenderTargetConstPtr = std::shared_ptr<const RenderTarget>;
 		using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
 	    using RendererPtr = std::shared_ptr<Renderer>;
 

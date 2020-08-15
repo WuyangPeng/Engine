@@ -10,15 +10,16 @@
 #include "OpenGLMapping.h"
 
 using namespace Rendering;
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
 
-
-OpenGLShader::OpenGLShader()
+OpenGLShader::OpenGLShader() noexcept
 {
 }
 
-OpenGLShader::~OpenGLShader()
-{
-}
+ 
 
 void OpenGLShader::SetSamplerState(Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, int maxSamplers,RendererData::SamplerState* currentSS)
 {
@@ -183,6 +184,7 @@ void OpenGLShader::SetSamplerState(Renderer* renderer, const ShaderBase* shader,
         }
     }
 	*/
+    CoreTools::DoNothing();
 }
 
 void OpenGLShader::DisableTextures(Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, int maxSamplers)
@@ -229,5 +231,7 @@ void OpenGLShader::DisableTextures(Renderer* renderer, const ShaderBase* shader,
         }
     }
 	*/
+    CoreTools::DoNothing();
 }
 
+#include STSTEM_WARNING_POP

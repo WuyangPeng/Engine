@@ -39,7 +39,7 @@ CoreTools::PriorityType CoreTools::BaseResourceImpl
 }
 
 boost::posix_time::ptime CoreTools::BaseResourceImpl
-	::GetLastAccessTime() const
+	::GetLastAccessTime() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

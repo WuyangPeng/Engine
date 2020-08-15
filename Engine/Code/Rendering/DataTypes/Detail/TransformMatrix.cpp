@@ -15,12 +15,14 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Algebra/Flags/MatrixFlags.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const Rendering::TransformMatrix Rendering::TransformMatrix
 	::sm_Identity;
 
 Rendering::TransformMatrix
-    ::TransformMatrix()
+    ::TransformMatrix() noexcept
 	:m_Matrix{ Mathematics::MatrixTypeFlags::Identity }, m_IsIdentity{ true }, m_IsRotationOrScaleMatrix{ true }, m_IsUniformScale{ true }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -28,8 +30,7 @@ Rendering::TransformMatrix
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,TransformMatrix)
 
-void Rendering::TransformMatrix
-    ::MakeIdentity ()
+void Rendering::TransformMatrix ::MakeIdentity() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;    
  
@@ -91,24 +92,21 @@ void Rendering::TransformMatrix
 	m_Matrix(2,2) = rotate(2,2) * scale[2];
 }
 
-bool Rendering::TransformMatrix
-    ::IsIdentity () const
+bool Rendering::TransformMatrix ::IsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_IsIdentity;
 }
 
-bool Rendering::TransformMatrix
-    ::IsRotationOrScaleMatrix () const
+bool Rendering::TransformMatrix ::IsRotationOrScaleMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_IsRotationOrScaleMatrix;
 }
 
-bool Rendering::TransformMatrix
-    ::IsUniformScale () const
+bool Rendering::TransformMatrix ::IsUniformScale() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -172,8 +170,7 @@ void Rendering::TransformMatrix
 	Modification(rotate, APoint{ scale, scale, scale });
 }
 
-const Rendering::TransformMatrix::Matrix Rendering::TransformMatrix
-    ::GetMatrix () const
+const Rendering::TransformMatrix::Matrix Rendering::TransformMatrix ::GetMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -186,3 +183,4 @@ int Rendering::TransformMatrix
     return MATHEMATICS_STREAM_SIZE(m_Matrix) + CORE_TOOLS_STREAM_SIZE(m_IsIdentity) * 3;
 }
 
+#include STSTEM_WARNING_POP

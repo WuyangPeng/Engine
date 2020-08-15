@@ -22,8 +22,8 @@ Physics::BoundTreeSplitTriangles
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Physics,BoundTreeSplitTriangles)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Physics, BoundTreeSplitTriangles, GetFirstOutSplitIndex, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Physics, BoundTreeSplitTriangles, GetSecondOutSplitIndex, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Physics, BoundTreeSplitTriangles, GetFirstOutSplitIndex, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Physics, BoundTreeSplitTriangles, GetSecondOutSplitIndex, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Physics, BoundTreeSplitTriangles, GetOutSplit, const Physics::BoundTreeSplitTriangles::Split)
 
  

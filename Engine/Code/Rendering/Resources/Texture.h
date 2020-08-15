@@ -38,12 +38,12 @@ namespace Rendering
 		using ReadFileManager = CoreTools::ReadFileManager;
 		using FileBuffer = CoreTools::FileBuffer;
         using FileBufferPtr = std::shared_ptr<FileBuffer>;
-		using TextureSmartPointer = CoreTools::ThirdSubclassSmartPointer<ClassType>;
-		using ConstTextureSmartPointer = CoreTools::ConstThirdSubclassSmartPointer<ClassType>;
+		using TextureSmartPointer = std::shared_ptr<ClassType>;
+		using ConstTextureSmartPointer = std::shared_ptr<const ClassType>;
 
  	public:
         Texture ();
-        virtual ~Texture ();
+     
         
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         

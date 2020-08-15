@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::RendererBasis
-	::RendererBasis(int width,int height,TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples)
+	::RendererBasis(int width,int height,TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept
 	: m_WindowWidth{ width }, m_WindowHeight{ height }, m_ColorFormat{ colorFormat },
 	  m_DepthStencilFormat{ depthStencilFormat }, m_MultisamplesNumber{ numMultisamples }
 {
@@ -18,7 +18,7 @@ Rendering::RendererBasis
 }
 
 Rendering::RendererBasis
-	::RendererBasis()
+	::RendererBasis() noexcept
 	: m_WindowWidth{ 0 }, m_WindowHeight{},m_ColorFormat{ TextureFormat::DefaultColour },
 	  m_DepthStencilFormat{ TextureFormat::DefaultDepth }, m_MultisamplesNumber{ 0 }
 {
@@ -37,7 +37,7 @@ bool Rendering::RendererBasis
 #endif // OPEN_CLASS_INVARIANT
 
 Rendering::TextureFormat Rendering::RendererBasis
-	::GetColorFormat() const
+	::GetColorFormat() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -45,7 +45,7 @@ Rendering::TextureFormat Rendering::RendererBasis
 }
 
 Rendering::TextureFormat Rendering::RendererBasis
-	::GetDepthStencilFormat() const
+	::GetDepthStencilFormat() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -53,7 +53,7 @@ Rendering::TextureFormat Rendering::RendererBasis
 }
 
 int Rendering::RendererBasis
-	::GetNumMultisamples() const
+	::GetNumMultisamples() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -61,7 +61,7 @@ int Rendering::RendererBasis
 }
 
 int Rendering::RendererBasis
-	::GetWidth () const
+	::GetWidth () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -69,7 +69,7 @@ int Rendering::RendererBasis
 }
 
 int Rendering::RendererBasis
-	::GetHeight () const
+	::GetHeight () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -77,7 +77,7 @@ int Rendering::RendererBasis
 }
 
 void Rendering::RendererBasis
-	::SetSize(int width,int height)
+	::SetSize(int width,int height) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -86,7 +86,7 @@ void Rendering::RendererBasis
 }
 
 void Rendering::RendererBasis
-	::SetTextureFormat(TextureFormat colorFormat, TextureFormat depthStencilFormat)
+	::SetTextureFormat(TextureFormat colorFormat, TextureFormat depthStencilFormat) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -95,7 +95,7 @@ void Rendering::RendererBasis
 }
 
 void Rendering::RendererBasis
-	::SetMultisamplesNumber(int numMultisamples) 
+	::SetMultisamplesNumber(int numMultisamples)  noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 

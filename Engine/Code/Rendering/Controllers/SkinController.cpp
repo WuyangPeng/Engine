@@ -24,7 +24,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, SkinController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SkinController); 
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SkinController);
@@ -46,8 +49,8 @@ COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, SkinController)
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, SkinController) 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SkinController,GetNumVertices,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SkinController,GetNumBones,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SkinController,GetNumVertices,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SkinController,GetNumBones,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SkinController,GetBones,int,const Rendering::ConstNodeSmartPointer)
 
 
@@ -114,7 +117,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::SkinController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 bool Rendering::SkinController
@@ -130,7 +133,7 @@ bool Rendering::SkinController
 		{
 			auto vertexBuffer = visual->GetVertexBuffer();
 
-			if (!vertexBuffer.IsNullPtr())
+			if (vertexBuffer)
 			{
 				RENDERING_ASSERTION_2(m_Impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "控制器必须和缓冲器具有相同数量的顶点\n");
 				VertexBufferAccessor vba{ visual };
@@ -144,7 +147,7 @@ bool Rendering::SkinController
 					auto position = APoint::sm_Origin;
 					for (auto bone = 0; bone < m_Impl->GetNumBones(); ++bone)
 					{
-						auto weight = m_Impl->GetWeights(bone, vertex);
+						const auto weight = m_Impl->GetWeights(bone, vertex);
 						if (Mathematics::Mathf::sm_ZeroTolerance < Mathematics::Mathf::FAbs(weight))
 						{
 							auto offset = m_Impl->GetOffsets(bone, vertex);
@@ -156,7 +159,7 @@ bool Rendering::SkinController
 				}
 
 				visual->UpdateModelSpace(VisualUpdateType::Normals);
-				RENDERER_MANAGE_SINGLETON.UpdateAll(visual->GetConstVertexBuffer().GetData());
+				RENDERER_MANAGE_SINGLETON.UpdateAll(visual->GetConstVertexBuffer().get());
 
 				return true;
 			}			
@@ -207,7 +210,7 @@ uint64_t Rendering::SkinController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
 		m_Impl->Register(target);	 
@@ -263,4 +266,4 @@ void Rendering::SkinController
 }
 
 
- 
+ #include STSTEM_WARNING_POP

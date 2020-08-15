@@ -39,20 +39,20 @@ namespace Rendering
         // 正转换是{Y,1} = H * {X,1}和逆转换是 {X,1} = H^{-1} * {Y,1}。
  
         // 默认构造函数产生单位转换。
-        TransformImpl ();
+        TransformImpl() noexcept;
         
 		CLASS_INVARIANT_DECLARE;
         
         // 设置转换为单位矩阵
-        void MakeIdentity ();
+                void MakeIdentity() noexcept;
 
          // 设置转换的缩放值为1
         void MakeUnitScale ();
 
         // 转换结构的提示
-        bool IsIdentity () const; // I
-        bool IsRotationOrScaleMatrix () const; // R * S
-        bool IsUniformScale () const; // R * S, S = c * I
+        bool IsIdentity() const noexcept;  // I
+        bool IsRotationOrScaleMatrix() const noexcept;  // R * S
+        bool IsUniformScale() const noexcept;  // R * S, S = c * I
 
         // 成员访问
         // (1) Set* 函数设置Is Identity提示为false。
@@ -73,8 +73,8 @@ namespace Rendering
         void SetScale (const APoint& scale);
         void SetUniformScale (float scale);
         const Matrix GetRotate () const;
-        const Matrix GetMatrix () const;
-        const APoint GetTranslate () const;
+        const Matrix GetMatrix() const noexcept;
+        const APoint GetTranslate() const noexcept;
         const APoint GetScale () const;
         float GetUniformScale () const;
 
@@ -93,7 +93,7 @@ namespace Rendering
         TransformImpl& operator*= (const TransformImpl& transform);
 
         // 获取齐次矩阵。
-        const Matrix GetHomogeneousMatrix () const;
+        const Matrix GetHomogeneousMatrix() const noexcept;
 
         // 获取齐次矩阵的逆，当需要时重新计算。
         // H = {{M,T},{0,1}}, 这里 H^{-1} = {{M^{-1},-M^{-1}*T},{0,1}}。

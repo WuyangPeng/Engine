@@ -24,20 +24,19 @@ namespace Network
 		using ParentType = MessageBufferImpl;
 
 	public:
-		explicit MessageArrayBuffer(ParserStrategy parserStrategy);
-		virtual ~MessageArrayBuffer();
+		explicit MessageArrayBuffer(ParserStrategy parserStrategy) noexcept;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const char* GetInitialBufferedPtr() const override;
-		virtual char* GetInitialBufferedPtr() override;
+		const char* GetInitialBufferedPtr() const noexcept override;
+		char* GetInitialBufferedPtr() noexcept override;
 
-		virtual ImplPtr Clone() const override;
+		ImplPtr Clone() const override;
 
-		virtual BuffBlockSize GetBuffBlockSize() const override;
-		virtual int GetSize() const override;
+		BuffBlockSize GetBuffBlockSize() const noexcept override;
+		int GetSize() const noexcept override;
 
-		virtual ImplPtr Expansion(int count) const override;
+		ImplPtr Expansion(int count) const override;
 
 	private:
 		std::array<char, System::EnumCastUnderlying(buffBlockSize)> m_Buffer;

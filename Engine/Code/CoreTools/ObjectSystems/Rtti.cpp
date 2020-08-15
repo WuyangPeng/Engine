@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::Rtti
-	::Rtti(const char* name, const Rtti* baseType)
+	::Rtti(const char* name, const Rtti* baseType) noexcept
 	:m_Name{ name }, m_BaseType{ baseType }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

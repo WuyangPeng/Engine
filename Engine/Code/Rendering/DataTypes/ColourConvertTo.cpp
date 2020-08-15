@@ -11,9 +11,15 @@
 #include "HalfFloat.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "Rendering/DataTypes/ColourTextureFormatTraits.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26429)
 void Rendering::ColourConvertTo
-    ::ConvertToR5G6B5 (int numInTexels, const FloatColour* inTexels, char* outTexels)
+    ::ConvertToR5G6B5 (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
 {
     auto source = inTexels;
 	auto target = reinterpret_cast<unsigned short*>(outTexels);
@@ -31,7 +37,7 @@ void Rendering::ColourConvertTo
 }
 
 void Rendering::ColourConvertTo
-    ::ConvertToA1R5G5B5 (int numInTexels, const FloatColour* inTexels,char* outTexels)
+    ::ConvertToA1R5G5B5 (int numInTexels, const FloatColour* inTexels,char* outTexels) noexcept
 {
 	auto source = inTexels;
 	auto target = reinterpret_cast<unsigned short*>(outTexels);
@@ -50,7 +56,7 @@ void Rendering::ColourConvertTo
 }
 
 void Rendering::ColourConvertTo
-    ::ConvertToA4R4G4B4 (int numInTexels, const FloatColour* inTexels, char* outTexels)
+    ::ConvertToA4R4G4B4 (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
 {
 	auto source = inTexels;
 	auto target = reinterpret_cast<unsigned short*>(outTexels);
@@ -75,7 +81,7 @@ void Rendering::ColourConvertTo
 	auto target = reinterpret_cast<unsigned char*>(outTexels);
     for (auto i = 0; i < numInTexels; ++i)
     {
-		ByteColour colour{ *source };
+		const ByteColour colour{ *source };
         
         *target = colour.GetAlpha();
         
@@ -91,7 +97,7 @@ void Rendering::ColourConvertTo
 	auto target = reinterpret_cast<unsigned char*>(outTexels);
     for (auto i = 0; i < numInTexels; ++i)
     {
-		ByteColour colour{ *source };
+		const ByteColour colour{ *source };
         
         *target = colour.GetRed();
         
@@ -107,7 +113,7 @@ void Rendering::ColourConvertTo
 	auto target = reinterpret_cast<unsigned char*>(outTexels);
     for (auto i = 0; i < numInTexels; ++i)
     {
-		ByteColour colour{ *source };
+		const ByteColour colour{ *source };
         
         *target++ = colour.GetRed();
         *target++ = colour.GetAlpha();
@@ -123,7 +129,7 @@ void Rendering::ColourConvertTo
 	auto target = reinterpret_cast<unsigned char*>(outTexels);
     for (auto i = 0; i < numInTexels; ++i)
     {
-		ByteColour colour{ *source };
+		const ByteColour colour{ *source };
         
         *target++ = colour.GetBlue();
         *target++ = colour.GetGreen();
@@ -140,7 +146,7 @@ void Rendering::ColourConvertTo
 	auto target = reinterpret_cast<unsigned char*>(outTexels);
     for (auto i = 0; i < numInTexels; ++i)
     {
-		ByteColour colour{ *source };
+		const ByteColour colour{ *source };
         
         *target++ = colour.GetBlue();
         *target++ = colour.GetGreen();
@@ -158,7 +164,7 @@ void Rendering::ColourConvertTo
 	auto target = reinterpret_cast<unsigned char*>(outTexels);
     for (auto i = 0; i < numInTexels; ++i)
     {
-		ByteColour colour{ *source };
+		const ByteColour colour{ *source };
         
         *target++ = colour.GetRed();
         *target++ = colour.GetGreen();
@@ -170,7 +176,7 @@ void Rendering::ColourConvertTo
 }
 
 void Rendering::ColourConvertTo
-    ::ConvertToL16 (int numInTexels, const FloatColour* inTexels,char* outTexels)
+    ::ConvertToL16 (int numInTexels, const FloatColour* inTexels,char* outTexels) noexcept
 {
 	auto source = inTexels;
 	auto target = reinterpret_cast<unsigned short*>(outTexels);
@@ -187,7 +193,7 @@ void Rendering::ColourConvertTo
 
 
 void Rendering::ColourConvertTo
-    ::ConvertToG16R16 (int numInTexels, const FloatColour* inTexels, char* outTexels)
+    ::ConvertToG16R16 (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
 {
 	auto source = inTexels;
 	auto target = reinterpret_cast<unsigned short*>(outTexels);
@@ -206,7 +212,7 @@ void Rendering::ColourConvertTo
 }
 
 void Rendering::ColourConvertTo
-    ::ConvertToA16B16G16R16 (int numInTexels, const FloatColour* inTexels, char* outTexels)
+    ::ConvertToA16B16G16R16 (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
 {
 	auto source = inTexels;
 	auto target = reinterpret_cast<unsigned short*>(outTexels);
@@ -278,7 +284,7 @@ void Rendering::ColourConvertTo
 
 
 void Rendering::ColourConvertTo
-    ::ConvertToR32F (int numInTexels, const FloatColour* inTexels,char* outTexels)
+    ::ConvertToR32F (int numInTexels, const FloatColour* inTexels,char* outTexels) noexcept
 {
 	auto source = inTexels;
 	auto target = reinterpret_cast<float*>(outTexels);
@@ -292,7 +298,7 @@ void Rendering::ColourConvertTo
 }
 
 void Rendering::ColourConvertTo
-    ::ConvertToG32R32F (int numInTexels, const FloatColour* inTexels, char* outTexels)
+    ::ConvertToG32R32F (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
 {
 	auto source = inTexels;
 	auto target = reinterpret_cast<float*>(outTexels);
@@ -307,7 +313,7 @@ void Rendering::ColourConvertTo
 
 
 void Rendering::ColourConvertTo
-    ::ConvertToA32B32G32R32F (int numInTexels, const FloatColour* inTexels, char* outTexels)
+    ::ConvertToA32B32G32R32F (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
 {
 	auto source = inTexels;
 	auto target = reinterpret_cast<float*>(outTexels);
@@ -349,3 +355,4 @@ Rendering::ColourConvertTo::ConvertToFunction
     nullptr,
     nullptr
 };
+#include STSTEM_WARNING_POP

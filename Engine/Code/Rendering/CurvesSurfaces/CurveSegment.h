@@ -30,8 +30,7 @@ namespace Rendering
 		// Construction.
 		CurveSegment(float umin, float umax);
 	public:
-		// Abstract base class.
-		virtual ~CurveSegment();
+		 
 
 		// The parametric domain is umin <= u <= umax.
 		float GetUMin() const noexcept;
@@ -54,10 +53,12 @@ namespace Rendering
 	protected:
 		float mUMin, mUMax;
 	};
-
+	#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(CurveSegment);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, CurveSegment);
-
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_CURVES_SURFACES_CURVE_SEGMENT_H

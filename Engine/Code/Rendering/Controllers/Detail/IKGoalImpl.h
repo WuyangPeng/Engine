@@ -34,8 +34,8 @@ namespace Rendering
 		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
 
 	public:
-		IKGoalImpl();
-		IKGoalImpl(const SpatialSmartPointer& target,const SpatialSmartPointer& effector,float weight = 1.0f);
+                IKGoalImpl() noexcept;
+            IKGoalImpl(const SpatialSmartPointer& target, const SpatialSmartPointer& effector, float weight = 1.0f) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -50,13 +50,13 @@ namespace Rendering
 		const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const;
 		const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;
 
-		const ConstSpatialSmartPointer GetTarget() const;
-		const ConstSpatialSmartPointer GetEffector() const;
+		const ConstSpatialSmartPointer GetTarget() const noexcept;
+                const ConstSpatialSmartPointer GetEffector() const noexcept;
 		const APoint GetTargetPosition() const;
 		const APoint GetEffectorPosition() const;
 
-		void SetWeight(float weight);
-		float GetWeight() const;
+		void SetWeight(float weight) noexcept;
+                float GetWeight() const noexcept;
 
 	private:
 		float m_Weight;  // д╛хо = 1

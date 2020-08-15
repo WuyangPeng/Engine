@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::LoadVisualEffect
-	::LoadVisualEffect()
+	::LoadVisualEffect() noexcept
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

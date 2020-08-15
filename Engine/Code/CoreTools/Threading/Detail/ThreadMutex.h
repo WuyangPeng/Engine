@@ -22,16 +22,15 @@ namespace CoreTools
 		using MutexType = System::MutexType;
 
 	public:
-		ThreadMutex();
-		virtual ~ThreadMutex();
+		ThreadMutex() noexcept; 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Initialize() override;
-		virtual void Delete() override;
-		virtual void Enter() override;
-		virtual bool TryEnter() override;
-		virtual void Leave() override;
+		void Initialize() override;
+		void Delete() noexcept override;
+		void Enter() override;
+		bool TryEnter() noexcept override;
+		void Leave() noexcept override;
 
 	private:
 		MutexType m_Mutex;

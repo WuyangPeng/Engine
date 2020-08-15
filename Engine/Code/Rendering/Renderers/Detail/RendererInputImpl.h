@@ -21,8 +21,12 @@ namespace Rendering
 		using HWnd = System::WindowHWnd;
         
     public:
-        RendererInputImpl();
+        RendererInputImpl() noexcept;
         virtual ~RendererInputImpl();
+		RendererInputImpl(const RendererInputImpl&) = default;
+		RendererInputImpl& operator=(const RendererInputImpl&) = default;
+		RendererInputImpl( RendererInputImpl&&) = default;
+		RendererInputImpl& operator=( RendererInputImpl&&) = default;
         
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

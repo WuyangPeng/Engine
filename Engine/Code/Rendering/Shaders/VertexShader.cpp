@@ -15,7 +15,11 @@
 #include "CoreTools/MemoryTools/FirstSubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering,VertexShader);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,VertexShader);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,VertexShader); 
@@ -35,9 +39,14 @@ Rendering::VertexShader
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
     
-    RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+    EXCEPTION_TRY
+    {
+        RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
+    
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,VertexShader)
 
- 
+ #include STSTEM_WARNING_POP

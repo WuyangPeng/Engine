@@ -36,26 +36,29 @@ namespace Rendering
 		using BufferSource = CoreTools::BufferSource;
 		using ObjectRegister = CoreTools::ObjectRegister;
 		using ObjectLink = CoreTools::ObjectLink;
-		using ConstTexture2DSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<Texture2D>;
-		using Texture2DSmartPointer = CoreTools::FourthSubclassSmartPointer<Texture2D>;
+		using ConstTexture2DSmartPointer = std::shared_ptr<const Texture2D>;
+		using Texture2DSmartPointer = std::shared_ptr<Texture2D>;
 
     public:
  		// 支持目标的数量取决于图形硬件和驱动程序。“numTargets”必须至少1。
-		RenderTargetImpl();
+        RenderTargetImpl()  ;
         RenderTargetImpl (int numTargets, TextureFormat format,int width,int height, bool hasMipmaps,bool hasDepthStencil);
 		RenderTargetImpl(const RenderTargetImpl& rhs);
 		RenderTargetImpl& operator= (const RenderTargetImpl& rhs);
+                RenderTargetImpl( RenderTargetImpl&& rhs) = default;
+                RenderTargetImpl& operator=(RenderTargetImpl&& rhs) = default;
+                ~RenderTargetImpl() = default;
         
 		CLASS_INVARIANT_DECLARE;
     
-        int GetNumTargets () const;
+        int GetNumTargets () const ;
         TextureFormat GetFormat () const;
         int GetWidth () const;
         int GetHeight () const;
         ConstTexture2DSmartPointer GetColorTexture (int index) const;
-		ConstTexture2DSmartPointer GetDepthStencilTexture() const;
-        bool HasMipmaps () const;
-        bool HasDepthStencil () const;
+        ConstTexture2DSmartPointer GetDepthStencilTexture() const noexcept;
+        bool HasMipmaps() const noexcept;
+        bool HasDepthStencil() const noexcept;
         
         int GetStreamingSize () const;
 		void Save (BufferTarget& target) const;
@@ -66,7 +69,7 @@ namespace Rendering
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 
 	private:
-		void Swap(RenderTargetImpl& rhs);
+        void Swap(RenderTargetImpl& rhs) noexcept;
 
     private:
         std::vector<Texture2DSmartPointer> m_ColorTextures;

@@ -17,19 +17,13 @@
 
 template<Network::BuffBlockSize buffBlockSize>
 Network::MessageArrayBuffer<buffBlockSize>
-	::MessageArrayBuffer(ParserStrategy parserStrategy)
+	::MessageArrayBuffer(ParserStrategy parserStrategy) noexcept
 	:ParentType{ parserStrategy }, m_Buffer{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-template<Network::BuffBlockSize buffBlockSize>
-Network::MessageArrayBuffer<buffBlockSize>
-	::~MessageArrayBuffer()
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 template<Network::BuffBlockSize buffBlockSize>
 bool Network::MessageArrayBuffer<buffBlockSize>
@@ -44,7 +38,7 @@ bool Network::MessageArrayBuffer<buffBlockSize>
 
 template<Network::BuffBlockSize buffBlockSize>
 char* Network::MessageArrayBuffer<buffBlockSize>
-	::GetInitialBufferedPtr()
+	::GetInitialBufferedPtr() noexcept
 {
 	NETWORK_CLASS_IS_VALID_1;
 
@@ -53,7 +47,7 @@ char* Network::MessageArrayBuffer<buffBlockSize>
 
 template<Network::BuffBlockSize buffBlockSize>
 const char* Network::MessageArrayBuffer<buffBlockSize>
-	::GetInitialBufferedPtr() const
+	::GetInitialBufferedPtr() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -62,7 +56,7 @@ const char* Network::MessageArrayBuffer<buffBlockSize>
 
 template<Network::BuffBlockSize buffBlockSize>
 Network::BuffBlockSize Network::MessageArrayBuffer<buffBlockSize>
-	::GetBuffBlockSize() const
+	::GetBuffBlockSize() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -71,7 +65,7 @@ Network::BuffBlockSize Network::MessageArrayBuffer<buffBlockSize>
 
 template<Network::BuffBlockSize buffBlockSize>
 int Network::MessageArrayBuffer<buffBlockSize>
-	::GetSize() const
+	::GetSize() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -93,7 +87,7 @@ typename Network::MessageArrayBuffer<buffBlockSize>::ImplPtr Network::MessageArr
 {
 	if (count <= GetSize())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"));
+		THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"s));
 	}
 
 	auto messageVectorBuffer = std::make_shared<MessageVectorBuffer>(count, GetParserStrategy());

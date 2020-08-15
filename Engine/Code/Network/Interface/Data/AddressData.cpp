@@ -14,7 +14,10 @@
 #include "Network/BoostWrappers/Detail/Acceptor/BoostSockAcceptor.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Network::AddressData
 	::AddressData(const string& address, int port)
 	:m_Address{ address }, m_Port{ port }
@@ -61,10 +64,11 @@ string Network::AddressData
 }
 
 int Network::AddressData
-	::GetPort() const
+	::GetPort() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
 	return m_Port;
 }
 
+#include STSTEM_WARNING_POP

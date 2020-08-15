@@ -22,8 +22,12 @@ namespace Rendering
 		using PlatformVertexShaderPtr = std::shared_ptr<ClassType>;
 
     public:
-		PlatformVertexShaderImpl();
+		PlatformVertexShaderImpl() noexcept;
 		virtual ~PlatformVertexShaderImpl();
+		PlatformVertexShaderImpl(const PlatformVertexShaderImpl&) = default;
+		PlatformVertexShaderImpl& operator=(const PlatformVertexShaderImpl&) = default;
+		PlatformVertexShaderImpl(PlatformVertexShaderImpl&&) = default;
+		PlatformVertexShaderImpl& operator=(PlatformVertexShaderImpl&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

@@ -26,7 +26,7 @@ namespace Network
 
 		CLASS_INVARIANT_DECLARE;
 
-		const HandleSet GetCurrentHandleSet() const;
+		const HandleSet GetCurrentHandleSet() const noexcept;
 		void SetBit(ACEHandle sockStreamHandle);
 		void ClearBit(ACEHandle sockStreamHandle);
 		void ToNextIndex();

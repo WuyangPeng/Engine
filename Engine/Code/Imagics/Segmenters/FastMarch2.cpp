@@ -8,7 +8,10 @@
 
 #include "FastMarch2.h"
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26481)
 Imagics::FastMarch2
 	::FastMarch2(int xBound, int yBound, float xSpacing,
                  float ySpacing, const float* speeds, const std::vector<int>& seeds)
@@ -25,10 +28,7 @@ Imagics::FastMarch2
     Initialize(xBound, yBound, xSpacing, ySpacing);
 }
 
-Imagics::FastMarch2
-	::~FastMarch2()
-{
-}
+ 
 
 void Imagics::FastMarch2
 	::Initialize(int xBound, int yBound, float xSpacing, float ySpacing)
@@ -44,7 +44,7 @@ void Imagics::FastMarch2
 
     // Boundary pixels are marked as zero speed to allow us to avoid having
     // to process the boundary pixels separately during the iteration.
-    int x, y, i;
+    int x  =0 , y  =0 , i  =0 ;
 
     // vertex (0,0)
     i = Index(0,0);
@@ -128,8 +128,7 @@ void Imagics::FastMarch2
     }
 }
 
-bool Imagics::FastMarch2
-	::IsBoundary(int i) const
+bool Imagics::FastMarch2 ::IsBoundary(int i) const noexcept
 {
     if (IsValid(i) && !IsTrial(i))
     {
@@ -148,7 +147,7 @@ void Imagics::FastMarch2
 	::Iterate()
 {
     // Remove the minimum trial value from the heap.   
-	CoreTools::MinHeapRecord<int, float> record = mHeap.Remove();
+	const CoreTools::MinHeapRecord<int, float> record = mHeap.Remove();
 	int i = record.GetUniqueIndex();
 	//float value = record.GetValue();
 
@@ -211,8 +210,8 @@ void Imagics::FastMarch2
 void Imagics::FastMarch2
 	::ComputeTime(int i)
 {
-    bool hasXTerm;
-    float xConst;
+    bool hasXTerm = false;
+    float xConst= 0.0f;
     if (IsValid(i-1))
     {
         hasXTerm = true;
@@ -236,8 +235,8 @@ void Imagics::FastMarch2
         xConst = 0.0f;
     }
 
-    bool hasYTerm;
-    float yConst;
+    bool hasYTerm = false;
+    float yConst= 0.0f;
     if (IsValid(i-mXBound))
     {
         hasYTerm = true;
@@ -265,9 +264,9 @@ void Imagics::FastMarch2
     {
         if (hasYTerm)
         {
-            float sum = xConst + yConst;
-            float diff = xConst - yConst;
-            float discr = 2.0f*mInvSpeeds[i]*mInvSpeeds[i] - diff*diff;
+            const float sum = xConst + yConst;
+            const float diff = xConst - yConst;
+            const float discr = 2.0f*mInvSpeeds[i]*mInvSpeeds[i] - diff*diff;
             if (discr >= 0.0f)
             {
                 // The quadratic equation has a real-valued solution.  Choose
@@ -305,31 +304,32 @@ void Imagics::FastMarch2
 
 
 int Imagics::FastMarch2
-	::GetXBound() const
+	::GetXBound() const noexcept
 {
 	return mXBound;
 }
 
 int Imagics::FastMarch2
-	::GetYBound() const
+	::GetYBound() const noexcept
 {
 	return mYBound;
 }
 
 float Imagics::FastMarch2
-	::GetXSpacing() const
+	::GetXSpacing() const noexcept
 {
 	return mXSpacing;
 }
 
 float Imagics::FastMarch2
-	::GetYSpacing() const
+	::GetYSpacing() const noexcept
 {
 	return mYSpacing;
 }
 
 int Imagics::FastMarch2
-	::Index(int x, int y) const
+	::Index(int x, int y) const noexcept
 {
 	return x + mXBound*y;
 }
+#include STSTEM_WARNING_POP

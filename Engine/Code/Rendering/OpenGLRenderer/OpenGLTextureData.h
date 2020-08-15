@@ -33,24 +33,28 @@ namespace Rendering
 	public:
 		explicit OpenGLTextureData (const Texture* texture);
 		~OpenGLTextureData();
+		OpenGLTextureData(const OpenGLTextureData&) =delete;
+		OpenGLTextureData& operator=(const OpenGLTextureData&) =delete;
+		OpenGLTextureData( OpenGLTextureData&&) =delete;
+		OpenGLTextureData& operator=( OpenGLTextureData&&) =delete;
 
 		CLASS_INVARIANT_DECLARE;
 
-		void Enable (int textureUnit);
-		void Disable (int textureUnit);
-		void* Lock (int level, BufferLocking mode);
-		void Unlock (int level);
-		void* Lock (int face, int level, BufferLocking mode);
-		void Unlock (int face, int level);
+		void Enable (int textureUnit) noexcept;
+		void Disable (int textureUnit) noexcept;
+		void* Lock (int level, BufferLocking mode) noexcept;
+		void Unlock (int level) noexcept;
+		void* Lock (int face, int level, BufferLocking mode) noexcept;
+		void Unlock (int face, int level) noexcept;
 
-		UInt GetTexture () const;
+		UInt GetTexture () const noexcept;
 
 	private:
-		void CreatePixelBufferObjects(const Texture* texture);
-		void InitRemainData();
-		UInt CreateTextureStructure();
+		void CreatePixelBufferObjects(const Texture* texture) ;
+		void InitRemainData() noexcept;
+		UInt CreateTextureStructure() noexcept;
 		void CreateMipmapLevelStructures(const Texture* texture,UInt previousBind);
-		void TextureImage(int level);
+		void TextureImage(int level) noexcept;
 
 	private:
 		static constexpr int sm_Dimension = TextureDataTraits<Texture>::sm_Dimension;

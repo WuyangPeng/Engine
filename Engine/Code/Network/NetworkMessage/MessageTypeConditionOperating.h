@@ -21,7 +21,7 @@ namespace Network
 		using ClassType = MessageTypeConditionOperating;
 
 	public:
-		MessageTypeConditionOperating();
+		MessageTypeConditionOperating() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

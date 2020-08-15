@@ -12,14 +12,16 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Mathematics::BasicMeshVertex
 	::BasicMeshVertex ()
 	:m_Impl{ make_shared<ImplType>() }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Mathematics, BasicMeshVertex)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics,BasicMeshVertex,GetVertex,int,int);

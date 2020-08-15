@@ -23,6 +23,10 @@
 using std::string;
 using std::vector;
 using std::make_shared;
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Visual);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Visual);
@@ -93,7 +97,7 @@ void Rendering::Visual
 {
 	auto vertexFormat = rhs.GetConstVertexFormat();	
 
-	if(!vertexFormat.IsNullPtr())
+	if(vertexFormat)
 		SetVertexFormat(vertexFormat->Clone());
 	else
 		SetVertexFormat(VertexFormatSmartPointer{});
@@ -105,7 +109,7 @@ void Rendering::Visual
 {
 	auto vertexBuffer = rhs.GetConstVertexBuffer();
 
-	if(!vertexBuffer.IsNullPtr())
+	if(vertexBuffer)
 		SetVertexBuffer(vertexBuffer->Clone());
 	else
 		SetVertexBuffer(VertexBufferSmartPointer{});
@@ -117,7 +121,7 @@ void Rendering::Visual
 {
 	auto indexBuffer = rhs.GetConstIndexBuffer();
 
-	if(!indexBuffer.IsNullPtr())
+	if(indexBuffer)
 		SetIndexBuffer(indexBuffer->Clone());
 	else
 		SetIndexBuffer(IndexBufferSmartPointer{});
@@ -145,12 +149,12 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetIndexBuffer,Renderi
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetIndexBuffer,IndexBufferSmartPointer,void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetConstEffectInstance,const Rendering::ConstVisualEffectInstanceSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetEffectInstance,VisualEffectInstanceSmartPointer,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetEffectInstance, const Rendering::VisualEffectInstanceSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstEffectInstance,const Rendering::ConstVisualEffectInstanceSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetEffectInstance, VisualEffectInstanceSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetEffectInstance, const Rendering::VisualEffectInstanceSmartPointer)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetModelBound,const Rendering::Bound&)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetModelBound,Rendering::Bound&)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, const Rendering::Bound&)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, Rendering::Bound&)
 
 void Rendering::Visual
 	::UpdateModelSpace(VisualUpdateType type)
@@ -186,7 +190,7 @@ void Rendering::Visual
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
 	}
 
 	SYSTEM_UNUSED_ARG(noCull);
@@ -201,7 +205,7 @@ Rendering::ConstVisualSmartPointer Rendering::Visual
 	}		
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
 	}		
 }
 
@@ -229,7 +233,7 @@ uint64_t Rendering::Visual
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+const	auto uniqueID = ParentType::Register(target);
     
 	if (uniqueID != 0)
 	{
@@ -286,3 +290,4 @@ void Rendering::Visual
 }
 
 
+#include STSTEM_WARNING_POP

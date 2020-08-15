@@ -32,7 +32,7 @@ namespace Database
 
 		CLASS_INVARIANT_DECLARE;
 
-		virtual DocResultPtr ExecuteDoc(const std::string& findStatement, const BindStatementType& bindStatement, int limitStatement);
+		  DocResultPtr ExecuteDoc(const std::string& findStatement, const BindStatementType& bindStatement, int limitStatement);
 
 	private:
 		IMPL_TYPE_DECLARE(Collection);

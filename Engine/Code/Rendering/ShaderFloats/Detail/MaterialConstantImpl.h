@@ -38,8 +38,8 @@ namespace Rendering
 		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
 
 	public: 
-		explicit MaterialConstantImpl(const MaterialSmartPointer& material);
-		MaterialConstantImpl();
+		explicit MaterialConstantImpl(const MaterialSmartPointer& material) noexcept;
+            MaterialConstantImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 	

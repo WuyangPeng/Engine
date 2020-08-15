@@ -13,7 +13,7 @@
 
 template <typename Real>
 Mathematics::IntersectorConfiguration<Real>
-	::IntersectorConfiguration()
+	::IntersectorConfiguration() noexcept
 	:mMap{}, mIndex{}, mMin{}, mMax{}
 {
 

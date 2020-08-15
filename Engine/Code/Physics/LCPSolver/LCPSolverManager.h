@@ -59,7 +59,7 @@ namespace Physics
 	private:
 		void AllocateEquations ();
 		void DeallocateEquations ();
-		bool InitializeEquations ();
+                bool InitializeEquations() noexcept;
 		bool SelectEquation (int& equation);
 		bool FindEquation (int& equation);
 		bool EquationAlgorithm (int& equation);

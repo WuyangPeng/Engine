@@ -32,32 +32,32 @@ namespace Rendering
 
 		void LoadConfiguration(const std::string& fileName);
 
-		RendererTypes GetRendererType() const;
+		RendererTypes GetRendererType() const noexcept;
 
-		TextureFormat GetColorFormat() const;
-		TextureFormat GetDepthStencilFormat() const;
-		int GetNumMultisamples() const;
-		Colour GetClearColor() const;
+		TextureFormat GetColorFormat() const noexcept;
+                TextureFormat GetDepthStencilFormat() const noexcept;
+                int GetNumMultisamples() const noexcept;
+		Colour GetClearColor() const noexcept;
 
 		const std::string GetWindowTitle() const;
-		int GetXPosition () const;
-		int GetYPosition () const;
-		int GetWidth () const;
-		int GetHeight () const;
-		bool IsAllowResize() const;
+		int GetXPosition () const noexcept;
+		int GetYPosition () const noexcept;
+		int GetWidth () const noexcept;
+		int GetHeight () const noexcept;
+		bool IsAllowResize() const noexcept;
 
 		void Resize(int width,int height);
 
-		const RendererBasis GetRendererBasis() const;
+		const RendererBasis GetRendererBasis() const noexcept;
 
 		System::String GetWindowMenuName() const; 
 		System::String GetWindowClassName() const;
 
-		int GetIcon() const;
-		bool IsIconDefault() const;
-		int GetCursor() const;
-		bool IsCursorDefault() const;
-		System::WindowBrushTypes GetBackground() const;
+		int GetIcon() const noexcept;
+		bool IsIconDefault() const noexcept;
+		int GetCursor() const noexcept;
+		bool IsCursorDefault() const noexcept;
+		System::WindowBrushTypes GetBackground() const noexcept;
 
 	private:		
 		void DoLoadConfiguration(const std::string& fileName);

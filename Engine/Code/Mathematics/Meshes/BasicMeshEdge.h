@@ -8,7 +8,10 @@
 #define MATHEMATICS_MESHES_BASIC_BESH_EDGE_H
 
 #include "Mathematics/MathematicsDll.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE BasicMeshEdge
@@ -17,10 +20,14 @@ namespace Mathematics
         using ClassType = BasicMeshEdge;
         
     public:
-        BasicMeshEdge ();
+        BasicMeshEdge () noexcept;
         
-        BasicMeshEdge (const BasicMeshEdge& rhs);
-        BasicMeshEdge& operator = (const BasicMeshEdge& rhs);
+        BasicMeshEdge (const BasicMeshEdge& rhs) noexcept;
+        BasicMeshEdge& operator = (const BasicMeshEdge& rhs) noexcept;
+		
+		~BasicMeshEdge() noexcept = default;
+		 BasicMeshEdge (BasicMeshEdge&& rhs) = default;
+        BasicMeshEdge& operator = (BasicMeshEdge&& rhs)= default;
 
         CLASS_INVARIANT_DECLARE;
         
@@ -36,6 +43,6 @@ namespace Mathematics
         int m_Triangle[2];
     };
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_MESHES_BASIC_BESH_EDGE_H
 

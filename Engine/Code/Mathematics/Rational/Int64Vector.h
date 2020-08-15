@@ -23,25 +23,27 @@ namespace Mathematics
 		using ClassType = Int64Vector<VectorSize>;
 
 	public:
-		Int64Vector();
-		Int64Vector(const Int64Vector& rhs);
+		Int64Vector() noexcept;
+		Int64Vector(const Int64Vector& rhs) noexcept;
 
-		Int64Vector& operator= (const Int64Vector& rhs);
-
+		Int64Vector& operator= (const Int64Vector& rhs) noexcept;
+		~Int64Vector() noexcept = default;
+		Int64Vector(Int64Vector&& rhs) = default;
+		Int64Vector& operator= (Int64Vector&& rhs) = default;
 		CLASS_INVARIANT_DECLARE;
 
 		// ×ø±ê·ÃÎÊ
 		const int64_t& operator[] (int index) const;
 		int64_t& operator[] (int index);
 
-		const Int64Vector operator- () const;
+		const Int64Vector operator- () const noexcept;
 
-		Int64Vector& operator+= (const Int64Vector& rhs);
-		Int64Vector& operator-= (const Int64Vector& rhs);
-		Int64Vector& operator*= (const int64_t& scalar);
+		Int64Vector& operator+= (const Int64Vector& rhs) noexcept;
+		Int64Vector& operator-= (const Int64Vector& rhs) noexcept;
+		Int64Vector& operator*= (const int64_t& scalar) noexcept;
 		Int64Vector& operator/= (const int64_t& scalar);
 
-		int64_t SquaredLength() const;
+		int64_t SquaredLength() const noexcept;
 
 	private:
 		int64_t m_Tuple[VectorSize];

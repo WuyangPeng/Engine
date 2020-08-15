@@ -28,39 +28,42 @@ namespace Rendering
     
     public:
         Controller();
-        virtual ~Controller();
+          ~Controller();
+
+          Controller(Controller&&) = default;
+          Controller& operator=(Controller&&) = default;
     
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Controller);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
         
-        virtual const ControllerInterface* GetControllerObject () const;
-		virtual ControllerInterface* GetControllerObject ();
+          const ControllerInterface* GetControllerObject() const noexcept override;
+                ControllerInterface* GetControllerObject() noexcept override;
         
-		virtual bool Update (double applicationTime);
+		  bool Update(double applicationTime)   override;
         
         // 这个函数是公有的,因为类ControlledObject需要设置对象在调用AttachController。
         // 派生类管理一组控制器时还需要在调用AttachController设置对象。
- 		virtual void SetObject (ControllerInterface* object);
+                  void SetObject(ControllerInterface* object)   override;
         
-        void SetApplicationTime (double applicationTime);
-        double GetApplicationTime () const;
+        void SetApplicationTime(double applicationTime) noexcept;
+                  double GetApplicationTime() const noexcept;
 
         double GetControlTime (double applicationTime);
         
-        ControllerRepeatType GetRepeat() const;
-        double GetMinTime() const;
-        double GetMaxTime() const;
-        double GetPhase() const;
-        double GetFrequency() const;
-        bool IsActive() const;
+        ControllerRepeatType GetRepeat() const noexcept;
+        double GetMinTime() const noexcept;
+        double GetMaxTime() const noexcept;
+        double GetPhase() const noexcept;
+        double GetFrequency() const noexcept;
+        bool IsActive() const noexcept;
         
-        void SetRepeat(ControllerRepeatType repeat);
-        void SetTime(double minTime,double maxTime);
-        void SetPhase(double phase);
-        void SetFrequency(double frequency);
-        void SetActive(bool active);
+        void SetRepeat(ControllerRepeatType repeat) noexcept;
+        void SetTime(double minTime, double maxTime) noexcept;
+        void SetPhase(double phase) noexcept;
+        void SetFrequency(double frequency) noexcept;
+        void SetActive(bool active) noexcept;
         
     private:
 		IMPL_TYPE_DECLARE(Controller);

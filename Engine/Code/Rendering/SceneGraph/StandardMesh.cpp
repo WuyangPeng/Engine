@@ -26,7 +26,7 @@ Rendering::StandardMesh
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, StandardMesh)
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, StandardMesh,SetTransform, Transform,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, StandardMesh,GetTransform, const Rendering::Transform&)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, StandardMesh,GetTransform, const Rendering::Transform&)
 
 const Rendering::TrianglesMeshSmartPointer Rendering::StandardMesh
 	::Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const

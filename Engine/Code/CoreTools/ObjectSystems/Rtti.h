@@ -19,7 +19,7 @@ namespace CoreTools
 	public:
 		// 该名称必须在系统中必须是独特的。在CoreTools命名空间，类Foo应该使用“CoreTools.Foo”。
 		// 如果一个应用程序有另一个命名空间SomeName，然后的名称应为“SomeName.Foo”。
-		Rtti(const char* name, const Rtti* baseType);
+		Rtti(const char* name, const Rtti* baseType) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

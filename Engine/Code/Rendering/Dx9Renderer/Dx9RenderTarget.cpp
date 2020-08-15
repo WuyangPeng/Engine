@@ -10,6 +10,7 @@
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 Rendering::Dx9RenderTarget
 	::Dx9RenderTarget (Renderer* renderer,const RenderTarget* renderTarget) 
@@ -17,15 +18,11 @@ Rendering::Dx9RenderTarget
 {
 	SYSTEM_UNUSED_ARG(renderTarget);
 	SYSTEM_UNUSED_ARG(renderer);
-
+CoreTools::DoNothing();
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::Dx9RenderTarget
-	::~Dx9RenderTarget ()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;     
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, Dx9RenderTarget)
 
@@ -35,6 +32,8 @@ void Rendering::Dx9RenderTarget
 	RENDERING_CLASS_IS_VALID_9; 
 
 	SYSTEM_UNUSED_ARG(renderer);
+
+	CoreTools::DoNothing();
 }
 
 void Rendering::Dx9RenderTarget
@@ -43,6 +42,8 @@ void Rendering::Dx9RenderTarget
 	RENDERING_CLASS_IS_VALID_9;  
 
 	 SYSTEM_UNUSED_ARG(renderer);
+
+	 CoreTools::DoNothing();
 }
 
 Rendering::ConstTexture2DSmartPointer Rendering::Dx9RenderTarget
@@ -52,6 +53,8 @@ Rendering::ConstTexture2DSmartPointer Rendering::Dx9RenderTarget
 
 	SYSTEM_UNUSED_ARG(index);
 	SYSTEM_UNUSED_ARG(renderer);
+
+	CoreTools::DoNothing();
 
 	return ConstTexture2DSmartPointer();
 }

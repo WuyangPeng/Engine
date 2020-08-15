@@ -28,16 +28,18 @@ namespace Rendering
 
 	public:
 		explicit MaterialConstant(const MaterialSmartPointer& Material);
-		virtual ~MaterialConstant();
+            ~MaterialConstant() = default;
+                MaterialConstant(MaterialConstant&&) noexcept = default;
+            MaterialConstant& operator=(MaterialConstant&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(MaterialConstant);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-		virtual void Update(const Visual* visual, const Camera* camera) = 0;
+		  void Update(const Visual* visual, const Camera* camera) = 0;
 
-		virtual void SetNumRegisters(int numRegisters) override;
+		  void SetNumRegisters(int numRegisters) override;
 
 		const ConstMaterialSmartPointer GetMaterial() const;
 

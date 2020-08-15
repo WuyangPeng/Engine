@@ -26,15 +26,20 @@ namespace Mathematics
 		BSplineVolume(int numUCtrlPoints, int numVCtrlPoints, int numWCtrlPoints, int uDegree, int vDegree, int wDegree);
 
 		~BSplineVolume();
+		
+		BSplineVolume(const BSplineVolume&)= default;
+		BSplineVolume& operator=(const BSplineVolume&)= default;
+		BSplineVolume(BSplineVolume&&)= default;
+		BSplineVolume& operator=(BSplineVolume&&)= default;
 
-		int GetNumCtrlPoints(int dim) const;
-		int GetDegree(int dim) const;
+		int GetNumCtrlPoints(int dim) const noexcept;
+		int GetDegree(int dim) const noexcept;
 
 		// Control points may be changed at any time.  If any input index is
 		// invalid, the returned point is a vector whose components are all
 		// MAX_REAL.
-		void SetControlPoint(int uIndex, int vIndex, int wIndex, const Vector3D<Real>& ctrlPoint);
-		Vector3D<Real> GetControlPoint(int uIndex, int vIndex, int wIndex) const;
+		void SetControlPoint(int uIndex, int vIndex, int wIndex, const Vector3D<Real>& ctrlPoint) noexcept;
+		Vector3D<Real> GetControlPoint(int uIndex, int vIndex, int wIndex) const noexcept;
 
 		// The spline is defined for 0 <= u <= 1, 0 <= v <= 1, and 0 <= w <= 1.
 		// The input values should be in this domain.  Any inputs smaller than 0

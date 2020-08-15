@@ -12,7 +12,7 @@ const int Mathematics::TetrahedronKey
 	::oppositeFace[4][3] = { { 1, 2, 3 }, { 0, 3, 2 }, { 0, 1, 3 }, { 0, 2, 1 } };
 
 Mathematics::TetrahedronKey
-	::TetrahedronKey(int v0, int v1, int v2, int v3)
+	::TetrahedronKey(int v0, int v1, int v2, int v3) noexcept
 {
     int imin = 0;
     V[0] = v0;
@@ -51,7 +51,7 @@ Mathematics::TetrahedronKey
 }
 
 bool Mathematics::TetrahedronKey
-	::operator< (const TetrahedronKey& key) const
+	::operator< (const TetrahedronKey& key) const noexcept
 {
     if (V[3] < key.V[3])
     {
@@ -86,8 +86,8 @@ bool Mathematics::TetrahedronKey
     return V[0] < key.V[0];
 }
 
-void Mathematics::TetrahedronKey
-	::Permute(int u0, int u1, int u2)
+void Mathematics::TetrahedronKey 
+	::Permute(int u0, int u1, int u2) noexcept
 {
     // Once V[0] is determined, create a permutation (V[1],V[2],V[3]) so
     // that (V[0],V[1],V[2],V[3]) is a positive permutation of (v0,v1,v2,v3).

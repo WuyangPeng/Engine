@@ -21,7 +21,7 @@ CoreTools::ObjectNameImpl
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectNameImpl)
 
 const string& CoreTools::ObjectNameImpl
-	::GetName() const
+	::GetName() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -29,7 +29,7 @@ const string& CoreTools::ObjectNameImpl
 }
 
 bool CoreTools::ObjectNameImpl
-	::IsExactly(const ClassType& name) const
+	::IsExactly(const ClassType& name) const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

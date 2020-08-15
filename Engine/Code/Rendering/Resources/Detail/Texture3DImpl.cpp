@@ -17,7 +17,16 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 
 #include <vector>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26473)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+ #include SYSTEM_WARNING_DISABLE(26455)
 using std::vector;
 
 Rendering::Texture3DImpl
@@ -51,8 +60,8 @@ void Rendering::Texture3DImpl
     m_TextureLevelData.SetDimension(1,0,dimension1);
     m_TextureLevelData.SetDimension(2,0,dimension2);
     
-    auto maxLevels = GetMaxLevels();
-	auto numLevels = GetNumLevels();
+ const auto maxLevels = GetMaxLevels();
+    const auto numLevels = GetNumLevels();
     
     RENDERING_ASSERTION_0(0 <= numLevels && numLevels <= maxLevels, "numLevels无效！\n");
     
@@ -88,11 +97,11 @@ int Rendering::Texture3DImpl
 void Rendering::Texture3DImpl
     ::ComputeNumLevelBytes ()
 {
-	auto type = GetTextureType();
+const	auto type = GetTextureType();
 	auto dimension0 = GetWidth ();
 	auto dimension1 = GetHeight ();
 	auto dimension2 = GetThickness ();
-	auto numLevels = GetNumLevels();
+        const auto numLevels = GetNumLevels();
     
     for (auto level = 0; level < numLevels; ++level)
     {
@@ -125,7 +134,7 @@ void Rendering::Texture3DImpl
 int  Rendering::Texture3DImpl
     ::CalculateNumLevelBytes(int dimension0,int dimension1,int dimension2)
 {
-	auto format = GetFormat();
+	const auto format = GetFormat();
     
     return  GetPixelSize(format) * dimension0 * dimension1 * dimension2;
 }
@@ -134,8 +143,9 @@ int  Rendering::Texture3DImpl
 void Rendering::Texture3DImpl
     ::VerifyNumLevels()
 {
-	auto format = GetFormat();
-	auto numLevels = GetNumLevels();
+    CoreTools::DoNothing();
+	const auto format = GetFormat();
+const	auto numLevels = GetNumLevels();
     
     if (format == TextureFormat::R32F || format == TextureFormat::G32R32F || format == TextureFormat::A32B32G32R32F)
     {
@@ -157,16 +167,12 @@ void Rendering::Texture3DImpl
     }
 }
 
-Rendering::Texture3DImpl
-    ::~Texture3DImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Texture3DImpl)
 
 int Rendering::Texture3DImpl
-    ::GetNumDimensions () const
+    ::GetNumDimensions () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -190,7 +196,7 @@ int Rendering::Texture3DImpl
 }
 
 int Rendering::Texture3DImpl
-    ::GetNumTotalBytes () const
+    ::GetNumTotalBytes () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -232,7 +238,7 @@ int Rendering::Texture3DImpl
 void Rendering::Texture3DImpl
     ::DoGenerateMipmaps ()
 {
-	auto numLevels = GetNumLevels();
+	const auto numLevels = GetNumLevels();
 	auto width = GetWidth();
 	auto height = GetHeight();
 	auto thickness = GetThickness();
@@ -240,9 +246,9 @@ void Rendering::Texture3DImpl
     for (auto level = 1; level < numLevels; ++level)
     {
 		auto texelsNext = GetTextureData(level);
-		auto widthNext = GetDimension(0,level);
-		auto heightNext = GetDimension(1,level);
-		auto thicknessNext = GetDimension(2,level);
+	const	auto widthNext = GetDimension(0,level);
+	const	auto heightNext = GetDimension(1,level);
+	const	auto thicknessNext = GetDimension(2,level);
         
         GenerateNextMipmap(width, height,thickness,texels, widthNext,heightNext, thicknessNext,texelsNext);
 
@@ -274,12 +280,12 @@ const char* Rendering::Texture3DImpl
 void Rendering::Texture3DImpl
     ::GenerateNextMipmap (int width, int height,int thickness,const char* texels,int widthNext, int heightNext,int thicknessNext, char* texelsNext)
 {
-	auto widthHeight = width * height;
+const	auto widthHeight = width * height;
     
 	// 用于临时存储生成的mipmaps。
     vector<FloatColour> colour(widthHeight * thickness);
     
-	auto format = GetFormat();
+const	auto format = GetFormat();
     
 	// 像素从原生格式转换为32位RGBA。
 	auto fromFunction = ColourConvertFrom::sm_FromFunction[System::EnumCastUnderlying(format)];
@@ -289,7 +295,7 @@ void Rendering::Texture3DImpl
     
     if(fromFunction != nullptr && toFunction != nullptr)
     {
-		auto numTexels = widthHeight * thickness;
+	const	auto numTexels = widthHeight * thickness;
         
         fromFunction(numTexels, texels, &colour[0]);
         
@@ -300,10 +306,10 @@ void Rendering::Texture3DImpl
             {
                 for (auto widthIndex = 0; widthIndex < widthNext; ++widthIndex)
                 {
-					auto index = widthIndex + widthNext * (heightIndex + heightNext * thicknessIndex);
-					auto base = 2 * (widthIndex + width *  (heightIndex + height * thicknessIndex));
-					auto fourthIndex = base + width + 1;
-					auto eighthIndex = base + width + widthHeight + 1;
+				const	auto index = widthIndex + widthNext * (heightIndex + heightNext * thicknessIndex);
+				const	auto base = 2 * (widthIndex + width *  (heightIndex + height * thicknessIndex));
+				const	auto fourthIndex = base + width + 1;
+				const	auto eighthIndex = base + width + widthHeight + 1;
                     
 					if(eighthIndex < boost::numeric_cast<int>(colour.size()))
 					{
@@ -332,7 +338,7 @@ void Rendering::Texture3DImpl
             }
         }
 
-		auto numTexelsNext = widthNext * heightNext * thicknessNext;
+	const	auto numTexelsNext = widthNext * heightNext * thicknessNext;
         
         toFunction(numTexelsNext,  &colour[0], texelsNext);
     }
@@ -372,3 +378,4 @@ void Rendering::Texture3DImpl
 	m_TextureLevelData.ReadFromFile(inFile);
 }
 
+#include STSTEM_WARNING_POP

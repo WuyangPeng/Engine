@@ -10,15 +10,14 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::PickRayImpl
-	::PickRayImpl(bool result, const Mathematics::APointf& origin, const Mathematics::AVectorf& direction)
+	::PickRayImpl(bool result, const Mathematics::APointf& origin, const Mathematics::AVectorf& direction) noexcept
 	:m_Result{ result }, m_Origin{ origin }, m_Direction{ direction }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::PickRayImpl
-	::PickRayImpl()
-	:m_Result{ false }, m_Origin{ }, m_Direction{ }
+Rendering::PickRayImpl ::PickRayImpl() noexcept
+    : m_Result{ false }, m_Origin{}, m_Direction{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -33,16 +32,14 @@ bool Rendering::PickRayImpl
 	return m_Result;
 }
 
-Mathematics::APointf Rendering::PickRayImpl
-	::GetOrigin() const
+Mathematics::APointf Rendering::PickRayImpl ::GetOrigin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Origin;
 }
 
-Mathematics::AVectorf Rendering::PickRayImpl
-	::GetDirection() const
+Mathematics::AVectorf Rendering::PickRayImpl ::GetDirection() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

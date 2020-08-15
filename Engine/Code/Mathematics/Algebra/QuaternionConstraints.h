@@ -28,20 +28,20 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		QuaternionConstraints(Real minAngle, Real maxAngle);
+		QuaternionConstraints(Real minAngle, Real maxAngle) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		bool IsValid(Real x, Real y) const;
 
-		Real GetCosMinAngle() const;
-		Real GetSinMinAngle() const;
-		Real GetCosMaxAngle() const;
-		Real GetSinMaxAngle() const;
-		Real GetCosAvrAngle() const;
-		Real GetSinAvrAngle() const;
-		Real GetMinAngle() const;
-		Real GetMaxAngle() const;
+		Real GetCosMinAngle() const noexcept;
+		Real GetSinMinAngle() const noexcept;
+		Real GetCosMaxAngle() const noexcept;
+		Real GetSinMaxAngle() const noexcept;
+		Real GetCosAvrAngle() const noexcept;
+		Real GetSinAvrAngle() const noexcept;
+		Real GetMinAngle() const noexcept;
+		Real GetMaxAngle() const noexcept;
 
 	private:
 		Real m_MinAngle;       // дк [-PI/2,PI/2]

@@ -24,7 +24,9 @@ namespace Rendering
         
     public:
         Node ();
-        virtual ~Node ();
+        ~Node() ;
+        Node(Node&&) noexcept = default;
+        Node& operator=(Node&&) noexcept = default;
         
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
@@ -33,25 +35,25 @@ namespace Rendering
         
         int GetNumChildren () const;
         
-		int AttachChild(SpatialSmartPointer& child);
-		int DetachChild(SpatialSmartPointer& child);
+		int AttachChild(SpatialSmartPointer  child);
+        int DetachChild(SpatialSmartPointer child) noexcept;
 		SpatialSmartPointer DetachChildAt(int index);
 		SpatialSmartPointer GetChild(int index);
 		ConstSpatialSmartPointer GetConstChild(int index) const;
         
-        virtual void GetVisibleSet (Culler& culler, bool noCull);
+          void GetVisibleSet(Culler& culler, bool noCull) override;
         
-        virtual ControllerInterfaceSmartPointer Clone() const;
+          ControllerInterfaceSmartPointer Clone() const override;
 
-		virtual const PickRecordContainer ExecuteRecursive(const APoint& origin,const AVector& direction, float tMin, float tMax) const;
+		  const PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
 
     protected:
-		virtual bool UpdateWorldData(double applicationTime);
+		  bool UpdateWorldData(double applicationTime) override;
 
 		bool UpdateImplWorldData(double applicationTime);
         
     private:
-        virtual void UpdateWorldBound ();
+                void UpdateWorldBound() override;
 
     private:
 		IMPL_TYPE_DECLARE(Node);

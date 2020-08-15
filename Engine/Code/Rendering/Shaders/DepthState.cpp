@@ -15,7 +15,11 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, DepthState);
@@ -53,3 +57,4 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DepthState,SetCompare, Comp
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DepthState,SaveState, WriteFileManager&, void)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DepthState,LoadState, ReadFileManager&, void)
+#include STSTEM_WARNING_POP

@@ -36,10 +36,10 @@ namespace Mathematics
 		const Box3 GetBox() const;
 
 		// Static distance queries.
-		virtual const DistanceResult GetSquared() const override;
+		 const DistanceResult GetSquared() const override;
 
 		// Function calculations for dynamic distance queries.	 
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 		// Access to the line parameter for the closest point.  This is used by
 		// the ray-box and segment-box distance calculators.

@@ -20,6 +20,13 @@
 
 using std::string;
 using std::vector; 
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26455)
+
+#include SYSTEM_WARNING_DISABLE(26440)
 
 Rendering::VisualEffectImpl
 	::VisualEffectImpl()
@@ -42,26 +49,26 @@ void Rendering::VisualEffectImpl
 	::Save( BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.WriteSmartPointer(m_Techniques);
+    target;
+    //	target.WriteSmartPointer(m_Techniques);
 }
 
 void Rendering::VisualEffectImpl
 	::Load( BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ReadSmartPointer(m_Techniques);
+    source;
+    //	source.ReadSmartPointer(m_Techniques);
 }
 
 void Rendering::VisualEffectImpl
 	::Link( ObjectLink& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    source;
 	if (!m_Techniques.empty())
 	{
-		source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Techniques.size()), &m_Techniques[0]);
+		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Techniques.size()), &m_Techniques[0]);
 	} 
 }
 
@@ -69,10 +76,10 @@ void Rendering::VisualEffectImpl
 	::Register( ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
+    target;
 	if (!m_Techniques.empty())
 	{
-		target.RegisterSmartPointer(boost::numeric_cast<int>(m_Techniques.size()), &m_Techniques[0]);
+		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Techniques.size()), &m_Techniques[0]);
 	} 
 }
 
@@ -166,7 +173,7 @@ const Rendering::ConstVisualTechniqueSmartPointer Rendering::VisualEffectImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-	return m_Techniques[techniqueIndex].PolymorphicCastConstObjectSmartPointer<ConstVisualTechniqueSmartPointer>();
+	return m_Techniques[techniqueIndex];
 }
 
 int Rendering::VisualEffectImpl
@@ -265,7 +272,7 @@ void Rendering::VisualEffectImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	
-	auto numTechniques = GetNumTechniques();
+	const auto numTechniques = GetNumTechniques();
 	manager.Write(sizeof(int), &numTechniques);
 
 	for (auto i = 0; i < numTechniques; ++i)
@@ -284,10 +291,12 @@ void Rendering::VisualEffectImpl
 
 	for (auto i = 0; i < numTechniques; ++i)
 	{
-		VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique };
+		VisualTechniqueSmartPointer technique{ std::make_shared< VisualTechnique>() };
 
 		 technique->LoadVisualPass(manager);
 
 		 InsertTechnique(technique);
 	}
 }
+ 
+#include STSTEM_WARNING_POP

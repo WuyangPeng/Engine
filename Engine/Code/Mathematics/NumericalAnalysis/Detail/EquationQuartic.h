@@ -20,24 +20,24 @@ namespace Mathematics
 		using ParentType = EquationImpl;
 
 	public:
-		EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon = Mathd::sm_ZeroTolerance);
-		virtual ~EquationQuartic();
+		EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon = Mathd::sm_ZeroTolerance)  ;
+	 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual double Substitution(double value) const override;
-		virtual const Imaginary Substitution(const Imaginary& value) const override;
+		  double Substitution(double value) const noexcept override;
+		  const Imaginary Substitution(const Imaginary& value) const override;
 
 	private:
-		virtual double SubstitutionTangent(double solution) const override;
-		virtual const Imaginary SubstitutionTangent(const Imaginary& solution) const override;
+		  double SubstitutionTangent(double solution) const noexcept override;
+		  const Imaginary SubstitutionTangent(const Imaginary& solution) const override;
 
-		virtual void Solving() override;
-		virtual bool Predigest() override;
+		  void Solving() override;
+		  bool Predigest() override;
 
-		double CalculateP() const;
-		double CalculateQ() const;
-		double CalculateR()const;
+		double CalculateP()  const noexcept;
+		double CalculateQ()   const noexcept;
+		double CalculateR()   const noexcept;
 		void CalculateThriceEquation(double p, double q, double r);
 
 		void CalculateResult(double solution, double p, double q, double r);

@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::RendererInputImpl
-	::RendererInputImpl()
+	::RendererInputImpl() noexcept
 {	
    RENDERING_SELF_CLASS_IS_VALID_9;
 }

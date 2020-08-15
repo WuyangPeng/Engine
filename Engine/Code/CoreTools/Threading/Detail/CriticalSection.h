@@ -23,16 +23,15 @@ namespace CoreTools
 		using ThreadingCriticalSection = System::ThreadingCriticalSection;
 
 	public:
-		CriticalSection();
-		virtual ~CriticalSection();
+		CriticalSection() noexcept; 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		void Initialize() override;
-		void Delete() override;
-		void Enter() override;
-		bool TryEnter() override;
-		void Leave() override;
+		void Delete() noexcept override;
+		void Enter() noexcept override;
+		bool TryEnter() noexcept override;
+		void Leave() noexcept override;
 
 	private:
 		ThreadingCriticalSection m_CriticalSection;

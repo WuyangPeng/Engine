@@ -19,16 +19,11 @@ Rendering::OpenGLRenderTarget
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::OpenGLRenderTarget
-    ::~OpenGLRenderTarget ()
-{
-    RENDERING_SELF_CLASS_IS_VALID_9;     
-}
-
+ 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, OpenGLRenderTarget)
 
 void Rendering::OpenGLRenderTarget
-    ::Enable (Renderer* renderer)
+    ::Enable (Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_9; 
 
@@ -36,7 +31,7 @@ void Rendering::OpenGLRenderTarget
 }
 
 void Rendering::OpenGLRenderTarget
-    ::Disable (Renderer* renderer)
+    ::Disable (Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;  
 

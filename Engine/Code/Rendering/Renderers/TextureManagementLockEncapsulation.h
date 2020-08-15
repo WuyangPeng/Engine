@@ -23,8 +23,12 @@ namespace Rendering
 		using TextureConstPtr = typename TextureManagementType::TextureConstPtr;
 
 	public:
-		explicit TextureManagementLockEncapsulation(TextureManagementType& manager);
+		explicit TextureManagementLockEncapsulation(TextureManagementType& manager) noexcept;
 		~TextureManagementLockEncapsulation();
+		TextureManagementLockEncapsulation(const TextureManagementLockEncapsulation&) = delete;
+		TextureManagementLockEncapsulation& operator=(const TextureManagementLockEncapsulation&) = delete;
+		TextureManagementLockEncapsulation(TextureManagementLockEncapsulation&&) = delete;
+		TextureManagementLockEncapsulation& operator=(TextureManagementLockEncapsulation&&) = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

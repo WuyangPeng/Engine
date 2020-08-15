@@ -34,8 +34,9 @@ namespace Rendering
 
 	public:
 		VisualEffect();
-		virtual ~VisualEffect();
-
+		  ~VisualEffect();
+                VisualEffect(VisualEffect&&) noexcept = default;
+                  VisualEffect& operator=(VisualEffect&&) noexcept = default;
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualEffect);

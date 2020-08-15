@@ -32,7 +32,7 @@ namespace Rendering
 
 	public:
 		RendererDataImpl();
-		~RendererDataImpl();
+ 
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -49,11 +49,11 @@ namespace Rendering
 		Colour GetClearColor() const;
 
 		const std::string GetWindowTitle() const;
-		int GetXPosition () const;
-		int GetYPosition () const;
+		int GetXPosition () const noexcept;
+		int GetYPosition () const noexcept;
 		int GetWidth () const;
 		int GetHeight () const;
-		bool IsAllowResize() const;
+		bool IsAllowResize() const noexcept;
 		RendererTypes GetRendererType() const;
 
 	private:		

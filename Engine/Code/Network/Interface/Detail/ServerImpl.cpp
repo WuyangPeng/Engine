@@ -11,8 +11,14 @@
 #include "Network/Interface/BaseMainManager.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26418)
+
 Network::ServerImpl
-	::ServerImpl(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
+	::ServerImpl(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept
 	:ParentType{}, m_ConfigurationStrategy{ configurationStrategy }, m_SocketManagerWeakPtr{ socketManager }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -26,8 +32,7 @@ Network::ServerImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServerImpl)
 
-Network::ConfigurationStrategy Network::ServerImpl
-	::GetConfigurationStrategy() const
+Network::ConfigurationStrategy Network::ServerImpl ::GetConfigurationStrategy() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -50,11 +55,15 @@ void Network::ServerImpl
 
 	SYSTEM_UNUSED_ARG(socketID);
 	SYSTEM_UNUSED_ARG(message);
+
+	CoreTools::DoNothing();
 }
 
 bool Network::ServerImpl
 	::WaitForMultipleEvents()
 {
+    CoreTools::DoNothing();
+
 	return true;
 }
 
@@ -62,6 +71,8 @@ bool Network::ServerImpl
 	::HandleConnections(const SocketManagerSharedPtr& socketManager)
 {
 	SYSTEM_UNUSED_ARG(socketManager);
+
+	CoreTools::DoNothing();
 
 	return true;
 }
@@ -71,18 +82,24 @@ bool Network::ServerImpl
 {
 	SYSTEM_UNUSED_ARG(socketManager);
 
+	CoreTools::DoNothing();
+
 	return true;
 }
 
 bool Network::ServerImpl
 	::ImmediatelySend()
 {
+    CoreTools::DoNothing();
+
 	return true;
 }
 
 bool Network::ServerImpl
 	::ImmediatelySend(uint64_t socketID)
 {
+    CoreTools::DoNothing();
+
 	SYSTEM_UNUSED_ARG(socketID);
 
 	return true;
@@ -93,6 +110,8 @@ void Network::ServerImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
+	CoreTools::DoNothing();
+
 	SYSTEM_UNUSED_ARG(socketID);
 	SYSTEM_UNUSED_ARG(message);
 }
@@ -101,6 +120,8 @@ void Network::ServerImpl
 	::ImmediatelyAsyncSend(uint64_t socketID)
 {
 	NETWORK_CLASS_IS_VALID_9;
+
+	CoreTools::DoNothing();
 
 	SYSTEM_UNUSED_ARG(socketID);
 }
@@ -118,7 +139,7 @@ Network::SocketManagerSharedPtr Network::ServerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Socket 管理器已失效。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Socket 管理器已失效。"s));
 	}
 }
 
@@ -127,7 +148,10 @@ bool Network::ServerImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
+	CoreTools::DoNothing();
+
 	SYSTEM_UNUSED_ARG(callbackParameters);
 
 	return true;
 }
+#include STSTEM_WARNING_POP

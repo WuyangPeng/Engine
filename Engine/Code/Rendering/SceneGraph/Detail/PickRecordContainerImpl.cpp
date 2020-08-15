@@ -13,9 +13,8 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
-Rendering::PickRecordContainerImpl
-	::PickRecordContainerImpl()
-	:m_PickRecord{}
+Rendering::PickRecordContainerImpl ::PickRecordContainerImpl() noexcept
+    : m_PickRecord{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -44,7 +43,7 @@ const Rendering::PickRecord Rendering::PickRecordContainerImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= index && index < GetSize(), "Ë÷Òý´íÎó£¡");
 
-	return m_PickRecord[index];
+	return m_PickRecord.at(index);
 }
 
 void Rendering::PickRecordContainerImpl
@@ -55,8 +54,7 @@ void Rendering::PickRecordContainerImpl
 	m_PickRecord.insert(m_PickRecord.end(), pickRecordContainerImpl.m_PickRecord.begin(), pickRecordContainerImpl.m_PickRecord.end());
 }
 
-bool Rendering::PickRecordContainerImpl
-	::IsEmpty() const 
+bool Rendering::PickRecordContainerImpl ::IsEmpty() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

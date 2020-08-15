@@ -34,6 +34,10 @@ bool CoreTools::UnitTestComposite
 }
 #endif // OPEN_CLASS_INVARIANT
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26440)
 void CoreTools::UnitTestComposite
 	::ClearUnitTestCollection()
 {
@@ -42,9 +46,6 @@ void CoreTools::UnitTestComposite
 	CORE_TOOLS_ASSERTION_4(false, "½ûÖ¹µ÷ÓÃUnitTestComposite::ClearUnitTestCollection()£¡");
 }
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
 void CoreTools::UnitTestComposite
 	::AddUnitTest(UnitTestCompositePtr unitTest)
 {
@@ -83,6 +84,8 @@ int CoreTools::UnitTestComposite
 	::GetEngineeringOffsetValue() const noexcept
 {
 	int offsetValue{ 0 };
+
+	++offsetValue;
 
 #ifdef _DEBUG
 	offsetValue += 4;

@@ -18,12 +18,12 @@ namespace Imagics
 	public:
 		GaussianBlur3 (int xBound, int yBound, int zBound, float xSpacing,float ySpacing, float zSpacing, const float* data,const bool* mask, float borderValue, ScaleType scaleType);
 		
-		virtual ~GaussianBlur3 ();
+	 
 		
-		float GetMaximumTimeStep () const;
+		float GetMaximumTimeStep () const noexcept;
 
 	protected:
-		virtual void OnUpdate (int x, int y, int z) override;
+                void OnUpdate(int x, int y, int z) noexcept override;
 		
 		float mMaximumTimeStep;
 	};

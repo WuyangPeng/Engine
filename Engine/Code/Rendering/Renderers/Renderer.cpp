@@ -15,7 +15,7 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "Rendering/Renderers/RendererManager.h" 
 #include "Rendering/DataTypes/ColourDetail.h"
-
+#include "CoreTools/Helper/ExceptionMacro.h" 
 using std::move;
 using std::string;
 
@@ -65,13 +65,17 @@ Rendering::Renderer
 	::~Renderer()
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
-
-	if (!RENDERER_MANAGE_SINGLETON.Erase(m_RendererID))
+EXCEPTION_TRY
+{
+if (!RENDERER_MANAGE_SINGLETON.Erase(m_RendererID))
 	{
 		LOG_SINGLETON_ENGINE_APPENDER(Error, Rendering)
 			<< SYSTEM_TEXT("Renderer没有调用Init。") 
 			<< LOG_SINGLETON_TRIGGER_ASSERT;
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 }
 
 #ifdef OPEN_CLASS_INVARIANT

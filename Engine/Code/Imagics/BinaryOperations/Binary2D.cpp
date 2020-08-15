@@ -324,7 +324,7 @@ void Imagics::Binary2D
 // NorthEast, SouthWest, and SouthEast neighbors are 2 units away.
 
 void Imagics::Binary2D
-	::GetL1Distance(const ImageInt2D& image, int& maxDistance)
+	::GetL1Distance(const ImageInt2D& image, int& maxDistance) noexcept
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -612,8 +612,7 @@ void Imagics::Binary2D
     }
 }
 
-void Imagics::Binary2D
-	::L2Check(int x, int y, int dx, int dy,const ImageInt2D& xNear, const ImageInt2D& yNear, const ImageInt2D& dist)
+void Imagics::Binary2D ::L2Check(int x, int y, int dx, int dy, const ImageInt2D& xNear, const ImageInt2D& yNear, const ImageInt2D& dist) noexcept
 {
     const int bound0 = dist.GetBound(0);
     const int bound1 = dist.GetBound(1);
@@ -645,7 +644,7 @@ void Imagics::Binary2D
 // cycles of the object are preserved.
 
 void Imagics::Binary2D
-	::GetSkeleton(const ImageInt2D& image)
+	::GetSkeleton(const ImageInt2D& image) noexcept
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -761,14 +760,12 @@ void Imagics::Binary2D
     }
 }
 
-bool Imagics::Binary2D
-	::Interior4(const ImageInt2D& image, int x, int y)
+bool Imagics::Binary2D ::Interior4(const ImageInt2D& image, int x, int y) noexcept
 {
     return image(x-1, y) != 0  && image(x+1, y) != 0  && image(x, y-1) != 0 && image(x, y+1) != 0;
 }
 
-bool Imagics::Binary2D
-	::Interior3(const ImageInt2D& image, int x, int y)
+bool Imagics::Binary2D ::Interior3(const ImageInt2D& image, int x, int y) noexcept
 {
     int numNeighbors = 0;
     if (image(x-1, y) != 0)
@@ -790,8 +787,7 @@ bool Imagics::Binary2D
     return numNeighbors == 3;
 }
 
-bool Imagics::Binary2D
-	::Interior2(const ImageInt2D& image, int x, int y)
+bool Imagics::Binary2D ::Interior2(const ImageInt2D& image, int x, int y) noexcept
 {
     const bool b1 = (image(x, y-1) != 0);
     const bool b3 = (image(x+1, y) != 0);
@@ -800,8 +796,7 @@ bool Imagics::Binary2D
     return (b1 && b3) || (b3 && b5) || (b5 && b7) || (b7 && b1);
 }
 
-bool Imagics::Binary2D
-	::MarkInterior(const ImageInt2D& image, int value, InteriorFunction function)
+bool Imagics::Binary2D ::MarkInterior(const ImageInt2D& image, int value, InteriorFunction function) noexcept
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -827,8 +822,7 @@ bool Imagics::Binary2D
     return noInterior;
 }
 
-bool Imagics::Binary2D
-	::IsArticulation(const ImageInt2D& image, int x, int y)
+bool Imagics::Binary2D ::IsArticulation(const ImageInt2D& image, int x, int y) noexcept
 {
     // Converts 8 neighbors of pixel (x,y) to an 8-bit value, bit = 1 iff
     // pixel is set.
@@ -869,8 +863,7 @@ bool Imagics::Binary2D
     return msArticulation[byteMask] == 1;
 }
 
-bool Imagics::Binary2D
-	::ClearInteriorAdjacent(const ImageInt2D& image, int value)
+bool Imagics::Binary2D ::ClearInteriorAdjacent(const ImageInt2D& image, int value) noexcept
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);

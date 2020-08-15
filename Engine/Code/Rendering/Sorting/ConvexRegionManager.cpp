@@ -10,7 +10,12 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455) 
 CORE_TOOLS_RTTI_DEFINE(Rendering, ConvexRegionManager);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConvexRegionManager);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConvexRegionManager);  
@@ -27,10 +32,7 @@ Rendering::ConvexRegionManager
 {
 }
 
-Rendering::ConvexRegionManager
-	::~ConvexRegionManager ()
-{
-}
+ 
 
 Rendering::SpatialSmartPointer Rendering::ConvexRegionManager
 	::AttachOutside(SpatialSmartPointer outside)
@@ -56,7 +58,7 @@ Rendering::SpatialSmartPointer Rendering::ConvexRegionManager
 Rendering::ConvexRegionSmartPointer Rendering::ConvexRegionManager
 	::GetContainingRegion(const  Mathematics::APointf& point)
 {
-	return 	GetContainingNode(point).PolymorphicCastObjectSmartPointer<ConvexRegionSmartPointer>();
+    return boost::polymorphic_pointer_cast<ConvexRegion>(GetContainingNode(point));
 }
 
 void Rendering::ConvexRegionManager
@@ -64,7 +66,7 @@ void Rendering::ConvexRegionManager
 {
 	ConvexRegionSmartPointer region = GetContainingRegion(culler.GetCamera()->GetPosition());
 
-    if (region.IsValidPtr())
+    if (region )
     {
         // Accumulate visible objects starting in the region containing the
         // camera.  Use the CRMCuller to maintain a list of unique objects.
@@ -84,10 +86,11 @@ void Rendering::ConvexRegionManager
     {
         // The camera is outside the set of regions.  Accumulate visible
         // objects for the outside scene (if it exists).
-        if (GetOutside().IsValidPtr())
+        if (GetOutside() )
         {
             GetOutside()->GetVisibleSet(culler, noCull);
         }
     }
 }
 
+#include STSTEM_WARNING_POP

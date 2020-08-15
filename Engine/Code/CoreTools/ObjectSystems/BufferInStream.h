@@ -27,11 +27,11 @@ namespace CoreTools
 		using FileBufferPtr = std::shared_ptr<FileBuffer>;
 
 	public:
-		explicit BufferInStream(const FileBufferPtr& bufferInformation, int startPoint = 0);
+		explicit BufferInStream(const FileBuffer& bufferInformation, int startPoint = 0);
 
 		CLASS_INVARIANT_DECLARE;
 
-		const InTopLevel GetTopLevel() const;
+		const InTopLevel GetTopLevel() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(BufferInStream);

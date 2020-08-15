@@ -14,7 +14,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 Rendering::FloatArrayImpl
 	::FloatArrayImpl( const FloatVector& elements )
 	:m_Elements{ elements }
@@ -23,7 +25,7 @@ Rendering::FloatArrayImpl
 }
 
 Rendering::FloatArrayImpl
-	::FloatArrayImpl()
+	::FloatArrayImpl() noexcept
 	:m_Elements{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -64,7 +66,7 @@ int Rendering::FloatArrayImpl
 }
 
 const float* Rendering::FloatArrayImpl
-	::GetData() const
+	::GetData() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -88,3 +90,4 @@ float& Rendering::FloatArrayImpl
 	return OPERATOR_SQUARE_BRACKETS(float,index);
 }
 
+#include STSTEM_WARNING_POP

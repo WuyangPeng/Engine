@@ -12,7 +12,10 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include <type_traits>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
 template <typename T>
 void CoreTools::ObjectRegister
 	::Register(const T* object)
@@ -68,5 +71,5 @@ void CoreTools::ObjectRegister
 		RegisterSmartPointer(objects[i]);
 	}
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_DETAIL_H

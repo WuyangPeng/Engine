@@ -21,13 +21,7 @@ CoreTools::TimeReportOutput
 	:EquilongReportOutputImpl{ borderLineLength,osPtr }, m_TimeDescribe{ timeDescribe }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-CoreTools::TimeReportOutput
-	::~TimeReportOutput()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+} 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TimeReportOutput)
 

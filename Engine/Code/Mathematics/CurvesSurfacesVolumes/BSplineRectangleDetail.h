@@ -11,7 +11,14 @@
 
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
 namespace Mathematics
 {
 
@@ -110,14 +117,19 @@ BSplineRectangle<Real>
 template <typename Real>
 BSplineRectangle<Real>::~BSplineRectangle ()
 {
-    DELETE2(mCtrlPoint);
+    EXCEPTION_TRY
+    {
+        DELETE2(mCtrlPoint);
+    }
+    EXCEPTION_ALL_CATCH(Mathematics)
+    
 }
 
 template <typename Real>
 void BSplineRectangle<Real>::CreateControl (Vector3D<Real>** ctrlPoint)
 {
-	auto newNumUCtrlPoints = mNumUCtrlPoints + mUReplicate;
-	auto newNumVCtrlPoints = mNumVCtrlPoints + mVReplicate;
+	const auto newNumUCtrlPoints = mNumUCtrlPoints + mUReplicate;
+    const auto newNumVCtrlPoints = mNumVCtrlPoints + mVReplicate;
     mCtrlPoint = NEW2<Vector3D<Real> >(newNumVCtrlPoints,newNumUCtrlPoints);
 
     for (auto u = 0; u < newNumUCtrlPoints; ++u)
@@ -132,19 +144,19 @@ void BSplineRectangle<Real>::CreateControl (Vector3D<Real>** ctrlPoint)
 }
 
 template <typename Real>
-int BSplineRectangle<Real>::GetNumCtrlPoints (int dim) const
+int BSplineRectangle<Real>::GetNumCtrlPoints (int dim) const noexcept
 {
     return mBasis[dim].GetNumCtrlPoints();
 }
 
 template <typename Real>
-int BSplineRectangle<Real>::GetDegree (int dim) const
+int BSplineRectangle<Real>::GetDegree(int dim) const noexcept
 {
     return mBasis[dim].GetDegree();
 }
 
 template <typename Real>
-bool BSplineRectangle<Real>::IsOpen (int dim) const
+bool BSplineRectangle<Real>::IsOpen(int dim) const noexcept
 {
     return mBasis[dim].IsOpen();
 }
@@ -156,7 +168,7 @@ bool BSplineRectangle<Real>::IsUniform (int dim) const
 }
 
 template <typename Real>
-bool BSplineRectangle<Real>::IsLoop (int dim) const
+bool BSplineRectangle<Real>::IsLoop(int dim) const noexcept
 {
     return mLoop[dim];
 }
@@ -192,7 +204,7 @@ void BSplineRectangle<Real>::SetControlPoint (int uIndex, int vIndex,const Vecto
 }
 
 template <typename Real>
-Vector3D<Real> BSplineRectangle<Real>::GetControlPoint (int uIndex, int vIndex) const
+Vector3D<Real> BSplineRectangle<Real>::GetControlPoint(int uIndex, int vIndex) const noexcept
 {
     if (0 <= uIndex && uIndex < mNumUCtrlPoints &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
     {
@@ -225,7 +237,7 @@ Real BSplineRectangle<Real>::GetKnot (int dim, int i) const
 template <typename Real>
 void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<Real>* derU, Vector3D<Real>* derV, Vector3D<Real>* derUU,Vector3D<Real>* derUV, Vector3D<Real>* derVV) const
 {
-    int iu, iumin, iumax;
+    int iu = 0, iumin = 0, iumax = 0;
     if (derUU)
     {
         mBasis[0].Compute(u, 0, iumin, iumax);
@@ -242,7 +254,7 @@ void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<R
         mBasis[0].Compute(u, 0, iumin, iumax);
     }
 
-    int iv, ivmin, ivmax;
+    int iv = 0, ivmin = 0, ivmax = 0;
     if (derVV)
     {
         mBasis[1].Compute(v, 0, ivmin, ivmax);
@@ -259,7 +271,7 @@ void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<R
         mBasis[1].Compute(v, 0, ivmin, ivmax);
     }
 
-    Real tmp;
+    Real tmp{};
 
     if (pos)
     {
@@ -390,5 +402,5 @@ Vector3D<Real> BSplineRectangle<Real>::PVV (Real u, Real v) const
 
 }
 
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_RECTANGLE_DETAIL_H

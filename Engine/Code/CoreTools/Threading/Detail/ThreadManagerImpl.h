@@ -24,7 +24,7 @@ namespace CoreTools
 		using ThreadHandle = System::ThreadHandle;		
 
 	public:
-		ThreadManagerImpl();
+		ThreadManagerImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

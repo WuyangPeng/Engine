@@ -16,14 +16,14 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 
 Rendering::TextureData
-    ::TextureData (TextureFormat format, TextureFlags type,BufferUsage usage, int numLevels)
+    ::TextureData (TextureFormat format, TextureFlags type,BufferUsage usage, int numLevels) noexcept
 	: m_Format{ format }, m_Type{ type }, m_Usage{ usage }, m_NumLevels{ numLevels }
 {
    	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::TextureData
-	::TextureData()
+	::TextureData() noexcept
 	: m_Format{ TextureFormat::Quantity }, m_Type{ TextureFlags::Quantity }, m_Usage{ BufferUsage::Quantity }, m_NumLevels{ 0 }
 {
    	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -41,7 +41,7 @@ bool Rendering::TextureData
 #endif // OPEN_CLASS_INVARIANT
 
 Rendering::TextureFormat Rendering::TextureData
-    ::GetFormat () const
+    ::GetFormat () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -49,7 +49,7 @@ Rendering::TextureFormat Rendering::TextureData
 }
 
 Rendering::TextureFlags Rendering::TextureData
-    ::GetTextureType () const
+    ::GetTextureType () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -57,7 +57,7 @@ Rendering::TextureFlags Rendering::TextureData
 }
 
 Rendering::BufferUsage Rendering::TextureData
-    ::GetUsage () const
+    ::GetUsage () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -65,7 +65,7 @@ Rendering::BufferUsage Rendering::TextureData
 }
 
 int Rendering::TextureData
-    ::GetNumLevels () const
+    ::GetNumLevels () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -73,7 +73,7 @@ int Rendering::TextureData
 }
 
 bool Rendering::TextureData
-    ::IsCompressed () const
+    ::IsCompressed () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -81,7 +81,7 @@ bool Rendering::TextureData
 }
 
 void Rendering::TextureData
-	::SetNumLevels( int numLevels )
+	::SetNumLevels( int numLevels ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -101,7 +101,7 @@ void Rendering::TextureData
 	if (m_Format < TextureFormat::First && TextureFormat::Max <= m_Format && m_Type < TextureFlags::Texture1D &&
 		TextureFlags::Quantity <= m_Type && m_Usage < BufferUsage::Static && BufferUsage::Quantity <= m_Usage && m_NumLevels < 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("读取的纹理数据不正确。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("读取的纹理数据不正确。\n"s));
 	} 
 }
 
@@ -135,13 +135,13 @@ void Rendering::TextureData
 {
 	RENDERING_CLASS_IS_VALID_CONST_1; 
 
-	auto format = System::EnumCastUnderlying(m_Format);
+const	auto format = System::EnumCastUnderlying(m_Format);
 	outFile.Write(sizeof(int), &format);
 
-	auto type = System::EnumCastUnderlying(m_Type);
+	const auto type = System::EnumCastUnderlying(m_Type);
 	outFile.Write(sizeof(int), &type);
 
-	auto usage = System::EnumCastUnderlying(m_Usage);
+const	auto usage = System::EnumCastUnderlying(m_Usage);
 	outFile.Write(sizeof(int), &usage);
 
 	outFile.Write(sizeof(int), &m_NumLevels);
@@ -171,7 +171,7 @@ void Rendering::TextureData
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("读取的纹理数据不正确。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("读取的纹理数据不正确。\n"s));
 	}
 }
 

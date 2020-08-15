@@ -11,9 +11,13 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 Mathematics::BasicMeshTriangle
-	::BasicMeshTriangle()
+   
+::BasicMeshTriangle() noexcept
 	:m_Vertex{}, m_Edge{}, m_Triangle{}
 {
     for(int i = 0;i < 3;++i)
@@ -27,7 +31,7 @@ Mathematics::BasicMeshTriangle
 }
 
 Mathematics::BasicMeshTriangle
-	::BasicMeshTriangle (const BasicMeshTriangle& rhs)
+	::BasicMeshTriangle (const BasicMeshTriangle& rhs) noexcept
 	:m_Vertex{}, m_Edge{}, m_Triangle{}
 {
     for(int i = 0;i < 3;++i)
@@ -42,7 +46,7 @@ Mathematics::BasicMeshTriangle
 }
 
 Mathematics::BasicMeshTriangle& Mathematics::BasicMeshTriangle
-	::operator = (const BasicMeshTriangle& rhs)
+	::operator = (const BasicMeshTriangle& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
     
@@ -68,7 +72,7 @@ int Mathematics::BasicMeshTriangle
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}    
 }
 
@@ -83,7 +87,7 @@ int Mathematics::BasicMeshTriangle
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	} 
 }
 
@@ -98,7 +102,7 @@ int Mathematics::BasicMeshTriangle
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	} 
 }
 
@@ -113,7 +117,7 @@ void Mathematics::BasicMeshTriangle
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
    
 }
@@ -129,7 +133,7 @@ void Mathematics::BasicMeshTriangle
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}    
 }
 
@@ -144,7 +148,7 @@ void Mathematics::BasicMeshTriangle
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}    
 }
-
+#include STSTEM_WARNING_POP

@@ -35,6 +35,10 @@ namespace Rendering
 	public:
 		PlatformTexture2D(Renderer* renderer, const Texture2D* texture2D);
 		virtual ~PlatformTexture2D ();
+		PlatformTexture2D(const PlatformTexture2D&) = delete;
+		PlatformTexture2D& operator=(const PlatformTexture2D&) = delete;
+		PlatformTexture2D( PlatformTexture2D&&) = delete;
+		PlatformTexture2D& operator=( PlatformTexture2D&&) = delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

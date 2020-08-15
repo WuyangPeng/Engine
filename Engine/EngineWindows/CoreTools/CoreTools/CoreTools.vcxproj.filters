@@ -2303,6 +2303,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Directory.h">
       <Filter>FileManager 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\WeakPtrDetail.h">
+      <Filter>ObjectSystems 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\WeakPtr.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">

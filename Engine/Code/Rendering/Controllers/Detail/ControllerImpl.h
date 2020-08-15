@@ -31,32 +31,32 @@ namespace Rendering
         using Math = Mathematics::Math<double>;
         
     public:
-        ControllerImpl();
-        ~ControllerImpl();
+        ControllerImpl() noexcept;
+ 
     
         CLASS_INVARIANT_DECLARE;
         
-        void SetApplicationTime (double applicationTime);
-        double GetApplicationTime () const;
+        void SetApplicationTime(double applicationTime) noexcept;
+        double GetApplicationTime() const noexcept;
 
          // 动画更新。以毫秒为单位的应用程序时间。
-        bool Update (double applicationTime);
+        bool Update(double applicationTime) noexcept;
         
         // 从应用程序单位时间转换控制器单位时间。派生类可以使用此更新程序。
         double GetControlTime (double applicationTime);
         
-        ControllerRepeatType GetRepeat() const;
-        double GetMinTime() const;
-        double GetMaxTime() const;
-        double GetPhase() const;
-        double GetFrequency() const;
-        bool IsActive() const;
+        ControllerRepeatType GetRepeat() const noexcept;
+        double GetMinTime() const noexcept;
+        double GetMaxTime() const noexcept;
+        double GetPhase() const noexcept;
+        double GetFrequency() const noexcept;
+        bool IsActive() const noexcept;
         
-        void SetRepeat(ControllerRepeatType repeat);
-        void SetTime(double minTime,double maxTime);
-        void SetPhase(double phase);
-        void SetFrequency(double frequency);
-        void SetActive(bool active);
+        void SetRepeat(ControllerRepeatType repeat) noexcept;
+        void SetTime(double minTime, double maxTime) noexcept;
+        void SetPhase(double phase) noexcept;
+        void SetFrequency(double frequency) noexcept;
+        void SetActive(bool active) noexcept;
         
         void Load (BufferSource& source);
 		void Save (BufferTarget& target) const;

@@ -15,7 +15,11 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, RenderTarget);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RenderTarget);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RenderTarget);
@@ -38,8 +42,12 @@ Rendering::RenderTarget
     ::~RenderTarget()
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
+    EXCEPTION_TRY
+{
+RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+}
+EXCEPTION_ALL_CATCH(Rendering)  
     
-    RENDERER_MANAGE_SINGLETON.UnbindAll(this);
 }
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,RenderTarget)
@@ -49,9 +57,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetFormat,Rendering::
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetWidth,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetHeight,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,RenderTarget,GetColorTexture,int,Rendering::RenderTarget::ConstTexture2DSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetDepthStencilTexture,Rendering::RenderTarget::ConstTexture2DSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,HasMipmaps,bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,HasDepthStencil,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RenderTarget,GetDepthStencilTexture,Rendering::RenderTarget::ConstTexture2DSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RenderTarget,HasMipmaps,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RenderTarget,HasDepthStencil,bool)
 
 Rendering::RenderTarget
    ::RenderTarget (LoadConstructor value)
@@ -77,7 +85,7 @@ uint64_t Rendering::RenderTarget
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
 		m_Impl->Register(target);
@@ -131,4 +139,4 @@ void Rendering::RenderTarget
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
-
+#include STSTEM_WARNING_POP

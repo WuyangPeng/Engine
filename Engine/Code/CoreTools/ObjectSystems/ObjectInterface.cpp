@@ -14,15 +14,19 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
 CoreTools::ObjectInterface
-	::ObjectInterface()
+	::ObjectInterface() noexcept
 	:m_UniqueID{ 0 }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::ObjectInterface
-	::ObjectInterface(LoadConstructor value)
+	::ObjectInterface(LoadConstructor value) noexcept
 	:m_UniqueID{ 0 }
 {
 	SYSTEM_UNUSED_ARG(value);
@@ -90,7 +94,7 @@ void CoreTools::ObjectInterface
 }
 
 bool CoreTools::ObjectInterface
-	::IsExactly(const Rtti& type) const
+	::IsExactly(const Rtti& type) const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -98,7 +102,7 @@ bool CoreTools::ObjectInterface
 }
 
 bool CoreTools::ObjectInterface
-	::IsDerived(const Rtti& type) const
+	::IsDerived(const Rtti& type) const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -106,7 +110,7 @@ bool CoreTools::ObjectInterface
 }
 
 bool CoreTools::ObjectInterface
-	::IsExactlyTypeOf(const ObjectInterface* object) const
+	::IsExactlyTypeOf(const ObjectInterface* object) const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -114,10 +118,11 @@ bool CoreTools::ObjectInterface
 }
 
 bool CoreTools::ObjectInterface
-	::IsDerivedTypeOf(const ObjectInterface* object) const
+	::IsDerivedTypeOf(const ObjectInterface* object) const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 	return object != nullptr && GetRttiType().IsDerived(object->GetRttiType());
 }
 
+#include STSTEM_WARNING_POP

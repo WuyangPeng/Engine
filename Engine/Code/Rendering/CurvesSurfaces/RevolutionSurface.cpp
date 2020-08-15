@@ -15,7 +15,15 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26493)
 CORE_TOOLS_RTTI_DEFINE(Rendering, RevolutionSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RevolutionSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RevolutionSurface); 
@@ -34,17 +42,17 @@ Rendering::RevolutionSurface
    TrianglesMeshSmartPointer mesh;
     switch (mTopology)
     {
-    case REV_DISK_TOPOLOGY:
+    case TopologyType::REV_DISK_TOPOLOGY:
         mesh = stdmesh.Disk(mNumCurveSamples, mNumRadialSamples, 1.0f);
         break;
-    case REV_CYLINDER_TOPOLOGY:
+    case TopologyType::REV_CYLINDER_TOPOLOGY:
 		mesh = stdmesh.CylinderIncludedEndDisks(mNumCurveSamples, mNumRadialSamples, 1.0f,
             1.0f);
         break;
-    case REV_SPHERE_TOPOLOGY:
+    case TopologyType::REV_SPHERE_TOPOLOGY:
         mesh = stdmesh.Sphere(mNumCurveSamples, mNumRadialSamples, 1.0f);
         break;
-    case REV_TORUS_TOPOLOGY:
+    case TopologyType::REV_TORUS_TOPOLOGY:
         mesh = stdmesh.Torus(mNumCurveSamples, mNumRadialSamples, 1.0f,
             0.25f);
         break;
@@ -70,9 +78,14 @@ Rendering::RevolutionSurface
 Rendering::RevolutionSurface
 	::~RevolutionSurface ()
 {
-    DELETE1(mSin);
+	EXCEPTION_TRY
+{
+  DELETE1(mSin);
     DELETE1(mCos);
     DELETE1(mSamples);
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+   
 }
 
 void Rendering::RevolutionSurface
@@ -83,10 +96,10 @@ void Rendering::RevolutionSurface
     // pairs of texture coordinates at the shared vertex.
     mSin = NEW1<float>(mNumRadialSamples + 1);
     mCos = NEW1<float>(mNumRadialSamples + 1);
-    float invNumRadialSamples = 1.0f/(float)mNumRadialSamples;
+    const float invNumRadialSamples = 1.0f/(float)mNumRadialSamples;
     for (int i = 0; i < mNumRadialSamples; ++i)
     {
-        float angle = Mathematics:: Mathf::sm_TwoPI*invNumRadialSamples*i;
+       const float angle = Mathematics:: Mathf::sm_TwoPI*invNumRadialSamples*i;
 		mCos[i] = Mathematics::Mathf::Cos(angle);
 		mSin[i] = Mathematics::Mathf::Sin(angle);
     }
@@ -101,11 +114,11 @@ void Rendering::RevolutionSurface
 	::UpdateSurface ()
 {
     // Parameters for evaluating curve.
-    float tMin = mCurve->GetMinTime();
-    float tRange = mCurve->GetMaxTime() - tMin;
+   const float tMin = mCurve->GetMinTime();
+   const float tRange = mCurve->GetMaxTime() - tMin;
 
     // Sampling by arc length requires the total length of the curve.
-    float totalLength;
+    float totalLength = 0.0f;
     if (mSampleByArcLength)
     {
         totalLength = mCurve->GetTotalLength();
@@ -116,10 +129,10 @@ void Rendering::RevolutionSurface
     }
 
     // Sample the curve of revolution.
-    float invNumCurveSamplesM1 = 1.0f/(float)(mNumCurveSamples - 1);
+    const float invNumCurveSamplesM1 = 1.0f/(float)(mNumCurveSamples - 1);
     for (int i = 0; i < mNumCurveSamples; ++i)
     {
-        float t;
+        float t= 0.0f;
         if (mSampleByArcLength)
         {
             t = mCurve->GetTime(i*totalLength*invNumCurveSamplesM1);
@@ -129,7 +142,7 @@ void Rendering::RevolutionSurface
             t = tMin + i*tRange*invNumCurveSamplesM1;
         }
 
-		Mathematics::Vector2Df position = mCurve->GetPosition(t);
+		const Mathematics::Vector2Df position = mCurve->GetPosition(t);
         mSamples[i].SetFirstValue(position.GetXCoordinate());
         mSamples[i].SetSecondValue(0.0f);
         mSamples[i].SetThirdValue(position.GetYCoordinate());
@@ -139,16 +152,16 @@ void Rendering::RevolutionSurface
     // is dependent on the topology of the mesh.
     switch (mTopology)
     {
-    case REV_DISK_TOPOLOGY:
+    case TopologyType::REV_DISK_TOPOLOGY:
         UpdateDisk();
         break;
-    case REV_CYLINDER_TOPOLOGY:
+    case TopologyType::REV_CYLINDER_TOPOLOGY:
         UpdateCylinder();
         break;
-    case REV_SPHERE_TOPOLOGY:
+    case TopologyType::REV_SPHERE_TOPOLOGY:
         UpdateSphere();
         break;
-    case REV_TORUS_TOPOLOGY:
+    case TopologyType::REV_TORUS_TOPOLOGY:
         UpdateTorus();
         break;
     default:
@@ -160,9 +173,9 @@ void Rendering::RevolutionSurface
 
     // See the comments in the constructor about mIBuffer and the vertex
     // buffer update.
-    if (GetIndexBuffer().IsValidPtr())
+    if (GetIndexBuffer().get())
     {
-    	RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer().GetData());
+    	RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer().get());
     }
 }
 
@@ -171,14 +184,14 @@ void Rendering::RevolutionSurface::UpdateDisk ()
     VertexBufferAccessor vba(this);
 
     // Get the initial ray.
-    int c;
+    int c = 0;
     for (c = 0; c < mNumCurveSamples; c++)
     {
 		GetVertexBuffer()->SetPosition(vba, c, mSamples[c]); 
     }
 
     // The remaining rays are obtained by revolution.
-     int numCurveSamplesM1 = mNumCurveSamples - 1;
+    const int numCurveSamplesM1 = mNumCurveSamples - 1;
     for (int r = 1; r < mNumRadialSamples; ++r)
     {
         for (c = 1; c < mNumCurveSamples; ++c)
@@ -188,7 +201,7 @@ void Rendering::RevolutionSurface::UpdateDisk ()
             {
                 radius = 0.0f;
             }
-            int i = c + numCurveSamplesM1*r;
+            const int i = c + numCurveSamplesM1*r;
 			
 			
 			Mathematics::Float3 position{ mXCenter + radius * mCos[r], radius*mSin[r],mSamples[c].GetThirdValue() };
@@ -211,7 +224,7 @@ void Rendering::RevolutionSurface::UpdateSphere ()
 	GetVertexBuffer()->SetPosition(vba, numVertices - 1, mSamples[mNumCurveSamples - 1]); 
 
     // Set the initial and final ray.
-    int c, i;
+    int c = 0, i = 0;
     for (c = 1; c <= mNumCurveSamples - 2; ++c)
     {
         i = (c-1)*(mNumRadialSamples + 1);
@@ -249,7 +262,7 @@ void Rendering::RevolutionSurface
     VertexBufferAccessor vba(this);
 
     // Set the initial and final ray.
-    int c, i;
+    int c = 0, i = 0;
     for (c = 0; c < mNumCurveSamples; ++c)
     {
         i = c*(mNumRadialSamples + 1);
@@ -288,7 +301,7 @@ void Rendering::RevolutionSurface
 
     // Set the initial and final ray.
     int numVertices = GetVertexBuffer()->GetNumElements();
-    int c, i;
+    int c = 0, i = 0;
     for (c = 0; c < mNumCurveSamples; ++c)
     {
         i = c*(mNumRadialSamples + 1);
@@ -333,7 +346,7 @@ void Rendering::RevolutionSurface
 
 Rendering::RevolutionSurface
 	::RevolutionSurface (LoadConstructor value)
-    : ParentType(value), mCurve(0), mXCenter(0.0f), mTopology(MAX_TOPOLOGY_TYPES), mNumCurveSamples(0),
+    : ParentType(value), mCurve(0), mXCenter(0.0f), mTopology(TopologyType::MAX_TOPOLOGY_TYPES), mNumCurveSamples(0),
 	  mNumRadialSamples(0), mSin(0), mCos(0), mSamples(0), mSampleByArcLength(false)
 {
 }
@@ -419,44 +432,45 @@ int Rendering::RevolutionSurface
 
 
  int Rendering::RevolutionSurface
-	 ::GetCurveSamples() const
+	 ::GetCurveSamples() const noexcept
 {
 	return mNumCurveSamples;
 }
 
  int Rendering::RevolutionSurface
-	 ::GetRadialSamples() const
+	 ::GetRadialSamples() const noexcept
 {
 	return mNumRadialSamples;
 }
 
  void Rendering::RevolutionSurface
-	 ::SetCurve(Mathematics::Curve2f* curve)
+	 ::SetCurve(Mathematics::Curve2f* curve) noexcept
 {
 	mCurve = curve;
 }
 
  const  Mathematics::Curve2f* Rendering::RevolutionSurface
-	 ::GetCurve() const
+	 ::GetCurve() const noexcept
 {
 	return mCurve;
 }
 
  Rendering::RevolutionSurface::TopologyType Rendering::RevolutionSurface
-	 ::GetTopology() const
+	 ::GetTopology() const noexcept
 {
 	return mTopology;
 }
 
  void Rendering::RevolutionSurface
-	 ::SetSampleByArcLength(bool sampleByArcLength)
+	 ::SetSampleByArcLength(bool sampleByArcLength) noexcept
 {
 	mSampleByArcLength = sampleByArcLength;
 }
 
  bool Rendering::RevolutionSurface
-	 ::GetSampleByArcLength() const
+	 ::GetSampleByArcLength() const noexcept
 {
 	return mSampleByArcLength;
 }
 
+ #include STSTEM_WARNING_POP

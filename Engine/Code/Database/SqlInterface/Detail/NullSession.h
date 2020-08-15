@@ -20,8 +20,8 @@ namespace Database
 		using ParentType = SessionImpl;
 
 	public:
-		explicit NullSession(const ConfigurationStrategy& configurationStrategy);
-		virtual ~NullSession();
+                explicit NullSession(const ConfigurationStrategy& configurationStrategy) noexcept;
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 	};

@@ -23,7 +23,7 @@ namespace Mathematics
 		//   knot[i] = 1, n+1 <= i <= n+d+1
 		// BSplineBasis enforces these conditions by not exposing SetKnot for the
 		// relevant values of i.
-		BSplineBasis ();
+		BSplineBasis () noexcept;
 		
 		// Open uniform or periodic uniform.  The knot array is internally
 		// generated with equally spaced elements.  It is required that
@@ -44,11 +44,16 @@ namespace Mathematics
 		void Create (int numCtrlPoints, int degree, const Real* interiorKnot);
 
 		virtual ~BSplineBasis ();
+		
+		BSplineBasis(const BSplineBasis&) = default;
+		BSplineBasis& operator=(const BSplineBasis&) = default;
+		BSplineBasis(BSplineBasis&&) = default;
+		BSplineBasis& operator=(BSplineBasis&&) = default;
 
-		int GetNumCtrlPoints () const;
-		int GetDegree () const;
-		bool IsOpen () const;
-		bool IsUniform () const;
+		int GetNumCtrlPoints () const noexcept;
+		int GetDegree () const noexcept;
+		bool IsOpen () const noexcept;
+		bool IsUniform () const noexcept;
 
 		// For a nonuniform spline, the knot[i] are modified by SetKnot(j,value)
 		// for j = i+d+1.  That is, you specify j with 0 <= j <= n-d-1, i = j+d+1,
@@ -59,10 +64,10 @@ namespace Mathematics
 		Real GetKnot (int j) const;
 
 		// Access basis functions and their derivatives.
-		Real GetD0 (int i) const;
-		Real GetD1 (int i) const;
-		Real GetD2 (int i) const;
-		Real GetD3 (int i) const;
+		Real GetD0 (int i) const noexcept;
+		Real GetD1 (int i) const noexcept;
+		Real GetD2 (int i) const noexcept;
+		Real GetD3 (int i) const noexcept;
 
 		// Evaluate basis functions and their derivatives.
 		void Compute (Real t, unsigned int order, int& minIndex,int& maxIndex) const;
@@ -73,7 +78,7 @@ namespace Mathematics
 		void Deallocate (Real** data);
 		
 		// Determine knot index i for which knot[i] <= rfTime < knot[i+1].
-		int GetKey (Real& t) const;
+                int GetKey(Real& t) const noexcept;
 
 		int mNumCtrlPoints;   // n+1
 		int mDegree;          // d

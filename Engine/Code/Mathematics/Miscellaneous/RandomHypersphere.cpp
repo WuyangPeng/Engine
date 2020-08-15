@@ -9,18 +9,25 @@
 #include "RandomHypersphere.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Base/RandomDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26461)
 static void RecurseRandomPoint (int dimension, double* point)
 {
     // Select random point on circle.
-    double angle = Mathematics::Randomd::IntervalRandom(0.0,Mathematics::Mathd::sm_TwoPI);
-    double cs = Mathematics::Mathd::Cos(angle);
-    double sn = Mathematics::Mathd::Sin(angle);
+    const double angle = Mathematics::Randomd::IntervalRandom(0.0,Mathematics::Mathd::sm_TwoPI);
+    const double cs = Mathematics::Mathd::Cos(angle);
+   const  double sn = Mathematics::Mathd::Sin(angle);
 
     if (dimension > 3)
     {
         // Split components into two sets and adjust values.
-        int i, half = dimension/2;
+        int i = 0;
+		int half = dimension/2;
         for (i = 0; i < half; ++i)
         {
             point[i] *= cs;
@@ -36,8 +43,8 @@ static void RecurseRandomPoint (int dimension, double* point)
     }
     else if (dimension == 3)
     {
-        double value = Mathematics::Randomd::SymmetricRandom();
-        double complement = Mathematics::Mathd::Sqrt(Mathematics::Mathd::FAbs(1.0 - value*value));
+        const double value = Mathematics::Randomd::SymmetricRandom();
+        const double complement = Mathematics::Mathd::Sqrt(Mathematics::Mathd::FAbs(1.0 - value*value));
         point[0] *= value;
         point[1] *= complement*cs;
         point[2] *= complement*sn;
@@ -59,11 +66,11 @@ void Mathematics::RandomPointOnHypersphere (int dimension, double* point)
     RecurseRandomPoint(dimension, point);
 }
 
-void Mathematics::Histogram (int dimension, double angle, int numPoints,double** points, int* histogram)
+void Mathematics::Histogram (int dimension, double angle, int numPoints,double** points, int* histogram) noexcept
 {
     // Count the number of points located in the cone of specified angle
     // about each of the samples.
-    double cs = Mathd::Cos(angle);
+    const double cs = Mathd::Cos(angle);
 
     for (int i = 0; i < numPoints; ++i)
     {
@@ -84,3 +91,4 @@ void Mathematics::Histogram (int dimension, double angle, int numPoints,double**
     }
 }
 
+#include STSTEM_WARNING_POP

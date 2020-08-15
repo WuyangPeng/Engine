@@ -17,7 +17,7 @@
 using std::make_shared;
 
 Database::SchemaFactory
-	::SchemaFactory()
+	::SchemaFactory() noexcept
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -27,8 +27,8 @@ CLASS_INVARIANT_STUB_DEFINE(Database, SchemaFactory)
 Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 	::Create(const Session& session)
 {
-	auto configurationStrategy = session.GetConfigurationStrategy();
-	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+    const auto configurationStrategy = session.GetConfigurationStrategy();
+    const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategy)
 	{
@@ -52,8 +52,8 @@ Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 	::Create(const Session& session, int dbIndex)
 {
-	auto configurationStrategy = session.GetConfigurationStrategy();
-	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+    const auto configurationStrategy = session.GetConfigurationStrategy();
+    const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategy)
 	{
@@ -79,7 +79,7 @@ Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 {
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
 
-	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+	const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 	if (wrappersStrategy == Database::WrappersStrategy::MysqlConnector)
 	{
 		return std::make_shared<MysqlConnectorSchema>(configurationStrategy, mysqlxSchema);
@@ -87,6 +87,6 @@ Database::SchemaFactory::ImplTypePtr Database::SchemaFactory
 
 #endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-	THROW_EXCEPTION(SYSTEM_TEXT("无法在非MysqlConnector环境下创建Schema。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("无法在非MysqlConnector环境下创建Schema。"s));
 }
 

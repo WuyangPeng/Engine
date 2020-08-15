@@ -48,13 +48,13 @@ int CoreTools::InTopLevelImpl
 	return boost::numeric_cast<int>(m_TopLevel.size());
 }
 
-const CoreTools::ConstObjectInterfaceSmartPointer& CoreTools::InTopLevelImpl
+CoreTools::ConstObjectInterfaceSmartPointer CoreTools::InTopLevelImpl
 	::operator[](int index) const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetTopLevelSize(), "Ë÷Òý´íÎó£¡");
 
-	return m_TopLevel[index];
+	return m_TopLevel.at(index);
 }
 
 CoreTools::ObjectInterfaceSmartPointer& CoreTools::InTopLevelImpl
@@ -63,7 +63,7 @@ CoreTools::ObjectInterfaceSmartPointer& CoreTools::InTopLevelImpl
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetTopLevelSize(), "Ë÷Òý´íÎó£¡");
 
-	return m_TopLevel[index];
+	return m_TopLevel.at(index);
 }
 
 void CoreTools::InTopLevelImpl

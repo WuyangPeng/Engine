@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.2.4 (2020/03/11 15:33)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
@@ -13,43 +13,46 @@
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE BoostSockAcceptor : public SockAcceptorImpl
-	{
-	public:
-		using ClassType = BoostSockAcceptor;
-		using ParentType = SockAcceptorImpl;
+    class NETWORK_HIDDEN_DECLARE BoostSockAcceptor : public SockAcceptorImpl
+    {
+    public:
+        using ClassType = BoostSockAcceptor;
+        using ParentType = SockAcceptorImpl;
 
-	public:
-		// hostName默认为"0.0.0.0"。
-		explicit BoostSockAcceptor(int port);
-		BoostSockAcceptor(const std::string& hostName, int port);
-		virtual ~BoostSockAcceptor();
+    public:
+        // hostName默认为"0.0.0.0"。
+        explicit BoostSockAcceptor(int port);
+        BoostSockAcceptor(const std::string& hostName, int port);
+        ~BoostSockAcceptor();
 
-		BoostSockAcceptor(BoostSockAcceptor&& rhs) noexcept;
-		BoostSockAcceptor& operator=(BoostSockAcceptor&& rhs) noexcept;
+        BoostSockAcceptor(const BoostSockAcceptor& rhs) = delete;
+        BoostSockAcceptor& operator=(const BoostSockAcceptor& rhs) = delete;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        BoostSockAcceptor(BoostSockAcceptor&& rhs) noexcept;
+        BoostSockAcceptor& operator=(BoostSockAcceptor&& rhs) noexcept;
 
-		virtual bool Accept(const SockStreamSharedPtr& sockStream) override;
-		virtual bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		// 异步回调来自另一个线程，需要对事件管理进行加锁处理。
-		virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
-		virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        bool Accept(const SockStreamSharedPtr& sockStream) override;
+        bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-		virtual BoostHandleType GetBoostHandle() override;
+        // 异步回调来自另一个线程，需要对事件管理进行加锁处理。
+        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
+        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-		virtual bool EnableNonBlock() override;
+        BoostHandleType GetBoostHandle() override;
 
-		virtual const std::string GetAddress() const override;
-		virtual int GetPort() const override;
+        bool EnableNonBlock() override;
 
-	private:
-		using AcceptorType = boost::asio::ip::tcp::acceptor;
+        const std::string GetAddress() const override;
+        int GetPort() const override;
 
-	private:
-		AcceptorType m_Acceptor;
-	};
+    private:
+        using AcceptorType = boost::asio::ip::tcp::acceptor;
+
+    private:
+        AcceptorType m_Acceptor;
+    };
 }
 
-#endif // NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
+#endif  // NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H

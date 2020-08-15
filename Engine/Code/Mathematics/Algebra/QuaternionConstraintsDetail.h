@@ -15,10 +15,11 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 template <typename Real>
 Mathematics::QuaternionConstraints<Real>
-	::QuaternionConstraints(Real minAngle, Real maxAngle)
+	::QuaternionConstraints(Real minAngle, Real maxAngle) noexcept
 	:m_MinAngle{ minAngle }, m_MaxAngle{ maxAngle }, m_CosMinAngle{ Math::Cos(m_MinAngle) }, m_SinMinAngle{ Math::Sin(m_MinAngle) },
 	 m_CosMaxAngle{ Math::Cos(m_MaxAngle) }, m_SinMaxAngle{ Math::Sin(m_MaxAngle) }, m_DiffCosMaxMin{ m_CosMaxAngle - m_CosMinAngle }, m_DiffSinMaxMin{ m_SinMaxAngle - m_SinMinAngle },
 	 m_AvrAngle{ static_cast<Real>(0.5) * (m_MinAngle + m_MaxAngle) }, m_CosAvrAngle{ Math::Cos(m_AvrAngle) }, m_SinAvrAngle{ Math::Sin(m_AvrAngle) }
@@ -44,6 +45,8 @@ bool Mathematics::QuaternionConstraints<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::sm_One), "(x,y)必须是单位长度！");
+	
+	CoreTools::DoNothing();
 
 	// 测试(x,y)是否满足约束条件。
 	auto xm = x - m_CosMinAngle;
@@ -66,7 +69,7 @@ bool Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>
-	::GetCosMinAngle() const
+	::GetCosMinAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -75,7 +78,7 @@ Real Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>
-	::GetSinMinAngle() const
+	::GetSinMinAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -84,7 +87,7 @@ Real Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>
-	::GetCosMaxAngle() const
+	::GetCosMaxAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -93,7 +96,7 @@ Real Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>
-	::GetSinMaxAngle() const
+	::GetSinMaxAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -102,7 +105,7 @@ Real Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>
-	::GetCosAvrAngle() const
+	::GetCosAvrAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -111,7 +114,7 @@ Real Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>
-	::GetSinAvrAngle() const
+	::GetSinAvrAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -120,7 +123,7 @@ Real Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>
-	::GetMinAngle() const
+	::GetMinAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -129,7 +132,7 @@ Real Mathematics::QuaternionConstraints<Real>
 
 template <typename Real>
 Real Mathematics::QuaternionConstraints<Real>
-	::GetMaxAngle() const
+	::GetMaxAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

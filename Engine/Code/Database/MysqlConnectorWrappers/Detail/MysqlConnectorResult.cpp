@@ -15,19 +15,12 @@ using std::make_unique;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-Database::MysqlConnectorResult
-	::MysqlConnectorResult(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult)
-	: ParentType{ configurationStrategy }, m_MysqlxRowResult{ mysqlxRowResult }
+Database::MysqlConnectorResult ::MysqlConnectorResult(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult) noexcept
+    : ParentType{ configurationStrategy }, m_MysqlxRowResult{ mysqlxRowResult }
 {
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
-
-Database::MysqlConnectorResult
-	::~MysqlConnectorResult()
-{
-	DATABASE_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 bool Database::MysqlConnectorResult
 	::IsValid() const noexcept

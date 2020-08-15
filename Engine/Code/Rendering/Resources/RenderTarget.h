@@ -23,17 +23,20 @@ namespace Rendering
     public:
 		COPY_UNSHARE_CLASSES_TYPE_DECLARE(RenderTarget);
 		using ParentType = Object;
-     	using Texture2DSmartPointer = CoreTools::FourthSubclassSmartPointer<Texture2D>;
-		using ConstTexture2DSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<Texture2D>;
-		using RenderTargetSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
-		using ConstRenderTargetSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>; 
+     	using Texture2DSmartPointer = std::shared_ptr<Texture2D>;
+		using ConstTexture2DSmartPointer = std::shared_ptr< const Texture2D>;
+		using RenderTargetSmartPointer = std::shared_ptr<ClassType>;
+		using ConstRenderTargetSmartPointer =std::shared_ptr<const ClassType>; 
 
     public:
 		// 支持目标的数量取决于图形硬件和驱动程序。“numTargets”必须至少1。
         RenderTarget (int numTargets, TextureFormat format,int width,int height, bool hasMipmaps,bool hasDepthStencil);
         
-        virtual ~RenderTarget ();
-        
+          ~RenderTarget ();
+ 
+		   RenderTarget( RenderTarget&&) = default;
+		  RenderTarget& operator=( RenderTarget&&) = default;
+		  
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(RenderTarget);
@@ -43,10 +46,10 @@ namespace Rendering
         TextureFormat GetFormat () const;
         int GetWidth () const;
         int GetHeight () const;
-		ConstTexture2DSmartPointer GetColorTexture(int index) const;
-		ConstTexture2DSmartPointer GetDepthStencilTexture() const;
-        bool HasMipmaps () const;
-        bool HasDepthStencil () const;
+		ConstTexture2DSmartPointer GetColorTexture(int index) const ;
+		ConstTexture2DSmartPointer GetDepthStencilTexture() const noexcept;
+        bool HasMipmaps () const noexcept;
+        bool HasDepthStencil () const noexcept;
 
     private:
 		IMPL_TYPE_DECLARE(RenderTarget);

@@ -13,9 +13,12 @@
 
 #include <ostream>
 #include "CoreTools/Helper/ExceptionMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 Mathematics::EdgeKey
-	::EdgeKey (int first, int second)
+	::EdgeKey (int first, int second) noexcept
 {
     if (first < second)
     {
@@ -35,7 +38,7 @@ Mathematics::EdgeKey
 
 
 Mathematics::EdgeKey
-	::EdgeKey(const EdgeKey& rhs)
+	::EdgeKey(const EdgeKey& rhs) noexcept
 {
     m_Vertex[0] = rhs.m_Vertex[0];
     m_Vertex[1] = rhs.m_Vertex[1];
@@ -44,7 +47,7 @@ Mathematics::EdgeKey
 }
 
 Mathematics::EdgeKey
-	::EdgeKey()
+	::EdgeKey() noexcept
 {
     m_Vertex[0] = -1;
 	m_Vertex[1] = -1;
@@ -53,8 +56,8 @@ Mathematics::EdgeKey
 }
 
 Mathematics::EdgeKey& Mathematics::EdgeKey
-	::operator = (const EdgeKey& rhs)
-{
+	::operator = (const EdgeKey& rhs) noexcept
+{ 
     MATHEMATICS_CLASS_IS_VALID_9;
     
     m_Vertex[0] = rhs.m_Vertex[0];
@@ -76,7 +79,7 @@ int Mathematics::EdgeKey
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
 }
 
@@ -91,7 +94,7 @@ void Mathematics::EdgeKey
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
 	
 }
@@ -114,4 +117,4 @@ System::OStream& Mathematics
 
 	return os;
 }
-
+#include STSTEM_WARNING_POP

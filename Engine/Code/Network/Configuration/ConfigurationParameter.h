@@ -29,7 +29,7 @@ namespace Network
 	public:
 		ConfigurationParameter();
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(ConfigurationParameter);
+		CLASS_INVARIANT_DECLARE;
 
 		void AddParameter(const String& key, const String& parameter);
 		bool IsParameterExist(const String& key, const String& parameter) const;

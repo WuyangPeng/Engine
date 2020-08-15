@@ -13,16 +13,4 @@ uint32_t CoreTools
 {
 	return ((integer <= 1) ? 1 : (integer * RecursiveFactorial(integer - 1)));
 }
-
-uint32_t CoreTools
-	::NonRecursiveFactorial(uint32_t integer) noexcept
-{
-	auto result = 1u;
-
-	for (auto index = 1u; index <= integer; ++index)
-	{
-		result *= index;
-	}
-
-	return result;
-}
+ 

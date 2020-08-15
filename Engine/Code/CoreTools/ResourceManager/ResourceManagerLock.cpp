@@ -22,6 +22,6 @@ CoreTools::ResourceManagerLock
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, ResourceManagerLock)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ResourceManagerLock, GetResourceSharedPtr, const CoreTools::ResourceManagerLock::ResourceSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ResourceManagerLock, GetResourceSharedPtr, const CoreTools::ResourceManagerLock::ResourceSharedPtr)
 
 

@@ -12,7 +12,13 @@
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_INTERSECTOR_UTILITY3_DETAIL) 
 
 #include "Mathematics/Algebra/Vector3DToolsDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
 template <typename Real>
 void Mathematics
 	::ClipConvexPolygonAgainstPlane(const Vector3D<Real>& normal, Real constant, int& quantity, Vector3D<Real>* P)
@@ -64,7 +70,7 @@ void Mathematics
 		{
 			if (negative > 0)
 			{
-				int clip;
+				int clip = 0;
 
 				if (pIndex == 0)
 				{
@@ -99,8 +105,10 @@ void Mathematics
 			{
 				// plane transversely intersects polygon
 				Vector3D<Real> CV[8];
-				int cQuantity = 0, cur, prv;
-				Real t;
+				int cQuantity = 0; 
+				int  cur= 0; 
+				int prv= 0; 
+				Real t { };
 
 				if (pIndex > 0)
 				{
@@ -223,6 +231,8 @@ Mathematics::Vector3D<Real> Mathematics
 
 	return point;
 }
+
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_INTERSECTOR_UTILITY3_DETAIL)
 
 #endif // MATHEMATICS_INTERSECTION_INTERSECTOR_UTILITY3_DETAIL_H

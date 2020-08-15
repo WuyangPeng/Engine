@@ -11,15 +11,18 @@
 #include <algorithm>
 
 using std::swap;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 void Rendering::Utility
-    ::ReflectX (int xSize, int ySize,int numBytesPerPixel,char* pixels)
+    ::ReflectX (int xSize, int ySize,int numBytesPerPixel,char* pixels) noexcept
 {
     const auto xMax = xSize / 2;
     const auto xSizeMinus1 = xSize - 1;
     for (auto x = 0; x < xMax; ++x)
     {
-		auto reflectX = xSizeMinus1 - x;
+		const auto reflectX = xSizeMinus1 - x;
         for (auto y = 0; y < ySize; ++y)
         {
 			auto source = numBytesPerPixel * (x + xSize * y);
@@ -33,13 +36,13 @@ void Rendering::Utility
 }
 
 void Rendering::Utility
-    ::ReflectY (int xSize, int ySize, int numBytesPerPixel,  char* pixels)
+    ::ReflectY (int xSize, int ySize, int numBytesPerPixel,  char* pixels) noexcept
 {
     const auto yMax = ySize/2;
     const auto ySizeMinus1 = ySize - 1;
     for (auto y = 0; y < yMax; ++y)
     {
-		auto reflectY = ySizeMinus1 - y;
+		const auto reflectY = ySizeMinus1 - y;
         for (auto x = 0; x < xSize; ++x)
         {
 			auto source = numBytesPerPixel * (x + xSize * y);
@@ -51,4 +54,4 @@ void Rendering::Utility
         }
     }
 }
-
+#include STSTEM_WARNING_POP

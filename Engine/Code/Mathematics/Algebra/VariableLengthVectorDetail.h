@@ -12,12 +12,25 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <iostream>
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_VARIABLE_LENGTH_VECTOR_DETAIL)
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
+
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+ 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26434)
+
 
 template <typename Real>
 Mathematics::VariableLengthVector<Real>
@@ -26,7 +39,7 @@ Mathematics::VariableLengthVector<Real>
 {
 	if (0 < m_Size)
 	{
-		auto numBytes = m_Size * sizeof(Real);
+		const auto numBytes = m_Size * sizeof(Real);
 		memset(m_Tuple, 0, numBytes);
 	}
 
@@ -40,7 +53,7 @@ Mathematics::VariableLengthVector<Real>
 {
 	if (0 < m_Size)
 	{
-		auto numBytes = m_Size * sizeof(Real);
+		const auto numBytes = m_Size * sizeof(Real);
 		memcpy(m_Tuple, &tuple[0], numBytes);
 	}
 
@@ -54,7 +67,7 @@ Mathematics::VariableLengthVector<Real>
 {
 	if (0 < m_Size)
 	{
-		auto numBytes = m_Size * sizeof(Real);
+		const auto numBytes = m_Size * sizeof(Real);
 		memcpy(m_Tuple, data, numBytes);
 	}
 
@@ -68,7 +81,7 @@ Mathematics::VariableLengthVector<Real>
 {
 	if (0 < m_Size)
 	{
-		auto numBytes = m_Size * sizeof(Real);
+		const auto numBytes = m_Size * sizeof(Real);
 		memcpy(m_Tuple, rhs.m_Tuple, numBytes);
 	}
 
@@ -91,7 +104,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 // private
 template <typename Real>
 void Mathematics::VariableLengthVector<Real>
-	::Swap(VariableLengthVector& rhs)
+	::Swap(VariableLengthVector& rhs) noexcept
 {
 	std::swap(m_Size, rhs.m_Size);
 	std::swap(m_Tuple, rhs.m_Tuple);
@@ -102,8 +115,15 @@ Mathematics::VariableLengthVector<Real>
 	::~VariableLengthVector()
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-
-	DELETE1<Real>(m_Tuple);
+	
+	EXCEPTION_TRY
+    {
+        #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26447)
+        DELETE1<Real>(m_Tuple);
+        #include STSTEM_WARNING_POP
+    }
+    EXCEPTION_ALL_CATCH(Mathematics)	
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -122,7 +142,7 @@ bool Mathematics::VariableLengthVector<Real>
 
 template <typename Real>
 int Mathematics::VariableLengthVector<Real>
-	::GetSize() const
+	::GetSize() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -188,7 +208,7 @@ void Mathematics::VariableLengthVector<Real>
 
 template <typename Real>
 const Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>
-	::operator-() const
+	::operator-() const 
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -208,6 +228,8 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 	MATHEMATICS_ASSERTION_1(m_Size == rhs.GetSize(), "向量大小不同！");
+	
+	CoreTools::DoNothing();
 
 	for (auto i = 0; i < m_Size; ++i)
 	{
@@ -223,6 +245,8 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 	MATHEMATICS_ASSERTION_1(m_Size == rhs.GetSize(), "向量大小不同！");
+	
+	CoreTools::DoNothing();
 
 	for (auto i = 0; i < m_Size; ++i)
 	{
@@ -234,7 +258,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
 template <typename Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
-	::operator*=(Real scalar)
+	::operator*=(Real scalar) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -251,6 +275,8 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 	::operator/=(Real scalar)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
+	
+	CoreTools::DoNothing();
 
 	if (Math::sm_Epsilon < Math::FAbs(scalar))
 	{
@@ -286,6 +312,8 @@ Real Mathematics::VariableLengthVector<Real>
 	::SquaredLength() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+	CoreTools::DoNothing();
 
 	auto squaredLength = Math::sm_Zero;
 
@@ -335,6 +363,8 @@ const std::vector<Real> Mathematics::VariableLengthVector<Real>
 
 	return result;
 }
+
+#include STSTEM_WARNING_POP
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_VARIABLE_LENGTH_VECTOR_DETAIL)
 

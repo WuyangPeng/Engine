@@ -16,7 +16,7 @@
 using std::make_shared;
 
 Network::MessageBufferFactory
-	::MessageBufferFactory()
+	::MessageBufferFactory() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -30,7 +30,7 @@ const Network::MessageBufferFactory::ImplTypePtr Network::MessageBufferFactory
 	constexpr auto maxCount = (System::EnumCastUnderlying(BuffBlockSize::Size512K) << 2);
 	if (maxCount < count)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("分配的缓冲区大小过大！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("分配的缓冲区大小过大！"s));
 	}
 
 	switch (buffBlockSize)

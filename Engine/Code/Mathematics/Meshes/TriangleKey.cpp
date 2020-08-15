@@ -11,9 +11,12 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 Mathematics::TriangleKey
-	::TriangleKey (int first, int second, int third)
+	::TriangleKey (int first, int second, int third) noexcept
 {
     if (first < second)
     {
@@ -55,7 +58,7 @@ Mathematics::TriangleKey
 
 
 Mathematics::TriangleKey
-	::TriangleKey(const TriangleKey& rhs)
+	::TriangleKey(const TriangleKey& rhs) noexcept
 {
     m_Vertex[0] = rhs.m_Vertex[0];
     m_Vertex[1] = rhs.m_Vertex[1];
@@ -65,7 +68,7 @@ Mathematics::TriangleKey
 }
 
 Mathematics::TriangleKey
-	::TriangleKey()
+	::TriangleKey() noexcept
 {
 	m_Vertex[0] = 0;
 	m_Vertex[1] = 0;
@@ -75,7 +78,7 @@ Mathematics::TriangleKey
 }
 
 Mathematics::TriangleKey& Mathematics::TriangleKey
-	::operator = (const TriangleKey& rhs)
+	::operator = (const TriangleKey& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     
@@ -99,7 +102,7 @@ int Mathematics::TriangleKey
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
 	} 
 }
 
@@ -114,7 +117,7 @@ int Mathematics::TriangleKey
 			return index;
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的值。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的值。"s));
 }
 
 void Mathematics::TriangleKey
@@ -128,7 +131,7 @@ void Mathematics::TriangleKey
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
 	}
 	
 }
@@ -144,7 +147,7 @@ void Mathematics::TriangleKey
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
 	}
 }
 
@@ -162,3 +165,4 @@ bool Mathematics
 	else
 		return lhs.GetKey(0) < rhs.GetKey(0);
 }
+#include STSTEM_WARNING_POP

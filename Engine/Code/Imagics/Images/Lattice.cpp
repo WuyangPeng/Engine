@@ -9,7 +9,13 @@
 #include "Lattice.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26451)
 const char* Imagics::Lattice
 	::msHeader = "Magic Image";
 
@@ -37,7 +43,7 @@ Imagics::Lattice
 	mBounds = NEW1<int>(mNumDimensions);
 	mOffsets = NEW1<int>(mNumDimensions);
 
-    size_t numBytes = mNumDimensions*sizeof(int);
+    const size_t numBytes = mNumDimensions*sizeof(int);
     memcpy(mBounds, lattice.mBounds, numBytes);
     memcpy(mOffsets, lattice.mOffsets, numBytes);
 }
@@ -55,7 +61,7 @@ Imagics::Lattice
 }
 
 Imagics::Lattice
-	::Lattice()
+	::Lattice() noexcept
 {
     mNumDimensions = 0;
     mBounds = 0;
@@ -66,14 +72,23 @@ Imagics::Lattice
 Imagics::Lattice
 	::~Lattice()
 {
-    DELETE1(mBounds);
+EXCEPTION_TRY
+{
+	DELETE1(mBounds);
 	DELETE1(mOffsets);
+}
+EXCEPTION_ALL_CATCH(Mathematics)  
+    
 }
 
 void Imagics::Lattice
 	::SetBounds(int* bounds)
 {
- 
+	if(bounds == nullptr)
+	{
+		return;
+	}
+	
 	IMAGICS_ASSERTION_0(bounds != 0, "Bounds must be specified\n");
     for (int i = 0; i < mNumDimensions; i++)
     {
@@ -86,9 +101,9 @@ void Imagics::Lattice
 }
 
 void Imagics::Lattice
-	::ComputeQuantityAndOffsets()
+	::ComputeQuantityAndOffsets() noexcept
 {
-    int i;
+    int i = 0;
 
     // Calculate number of lattice points.
     mQuantity = 1;
@@ -118,7 +133,7 @@ Imagics::Lattice& Imagics::Lattice
 		mOffsets = NEW1<int>(mNumDimensions);
     }
 
-    size_t numBytes = mNumDimensions*sizeof(int);
+    const size_t numBytes = mNumDimensions*sizeof(int);
     memcpy(mBounds, lattice.mBounds, numBytes);
     memcpy(mOffsets, lattice.mOffsets, numBytes);
     mQuantity = lattice.mQuantity;
@@ -127,25 +142,25 @@ Imagics::Lattice& Imagics::Lattice
 }
 
 bool Imagics::Lattice
-	::operator== (const Imagics::Lattice& lattice) const
+	::operator== (const Imagics::Lattice& lattice) const noexcept
 {
     if (mNumDimensions != lattice.mNumDimensions)
     {
         return false;
     }
 
-    int numBytes = mNumDimensions*sizeof(int);
+   const  int numBytes = mNumDimensions*sizeof(int);
     return memcmp(mBounds, lattice.mBounds, numBytes) == 0;
 }
 
 bool Imagics::Lattice
-	::operator!= (const Lattice& lattice) const
+	::operator!= (const Lattice& lattice) const noexcept
 {
     return !operator==(lattice);
 }
 
 int Imagics::Lattice
-	::GetIndex(const int* coord) const
+	::GetIndex(const int* coord) const noexcept
 {
     // assert:  coord is array of mNumDimensions elements
     int index = coord[0];
@@ -157,7 +172,7 @@ int Imagics::Lattice
 }
 
 void Imagics::Lattice
-	::GetCoordinates(int index, int* coord) const
+	::GetCoordinates(int index, int* coord) const noexcept
 {
     // assert:  coord is array of mNumDimensions elements
     for (int i = 0; i < mNumDimensions; ++i)
@@ -247,38 +262,39 @@ bool Imagics::Lattice
 
 
 int Imagics::Lattice
-	::GetDimensions() const
+	::GetDimensions() const noexcept
 {
 	return mNumDimensions;
 }
 
 const int* Imagics::Lattice
-	::GetBounds() const
+	::GetBounds() const noexcept
 {
 	return mBounds;
 }
 
 int Imagics::Lattice
-	::GetBound(int i) const
+	::GetBound(int i) const noexcept
 {
 	return mBounds[i];
 }
 
 int Imagics::Lattice
-	::GetQuantity() const
+	::GetQuantity() const noexcept
 {
 	return mQuantity;
 }
 
 const int* Imagics::Lattice
-	::GetOffsets() const
+	::GetOffsets() const noexcept
 {
 	return mOffsets;
 }
 
 int Imagics::Lattice
-	::GetOffset(int i) const
+	::GetOffset(int i) const noexcept
 {
 	return mOffsets[i];
 }
 
+#include STSTEM_WARNING_POP

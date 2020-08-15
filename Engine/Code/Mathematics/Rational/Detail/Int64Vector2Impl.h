@@ -20,11 +20,11 @@ namespace Mathematics
 		using ClassType = Int64Vector2Impl;
 
 	public:
-		Int64Vector2Impl();
-		Int64Vector2Impl(const Int64Vector<2>& rhs);
+		Int64Vector2Impl() noexcept;
+		Int64Vector2Impl(const Int64Vector<2>& rhs) noexcept;
 		Int64Vector2Impl(const int64_t& x, const int64_t& y);
 
-		Int64Vector2Impl& operator= (const Int64Vector<2>& rhs);
+		Int64Vector2Impl& operator= (const Int64Vector<2>& rhs) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -36,14 +36,14 @@ namespace Mathematics
 		// ·µ»Ø (y,-x).
 		const Int64Vector2Impl Perp() const;
 
-		const Int64Vector2Impl operator- () const;
+		const Int64Vector2Impl operator-() const noexcept;
 
-		Int64Vector2Impl& operator+= (const Int64Vector2Impl& rhs);
-		Int64Vector2Impl& operator-= (const Int64Vector2Impl& rhs);
-		Int64Vector2Impl& operator*= (const int64_t& scalar);
+		Int64Vector2Impl& operator+= (const Int64Vector2Impl& rhs) noexcept;
+		Int64Vector2Impl& operator-= (const Int64Vector2Impl& rhs) noexcept ;
+		Int64Vector2Impl& operator*= (const int64_t& scalar) noexcept;
 		Int64Vector2Impl& operator/= (const int64_t& scalar);
 
-		int64_t SquaredLength() const;
+		int64_t SquaredLength() const noexcept;
 
 	private:
 		Int64Vector<2> m_Tuple;

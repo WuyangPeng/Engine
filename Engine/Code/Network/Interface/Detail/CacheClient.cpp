@@ -38,11 +38,7 @@ Network::CacheClient
 	NETWORK_CLASS_IS_VALID_9;
 }
 
-Network::CacheClient
-	::~CacheClient()
-{
-	NETWORK_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, CacheClient)
 
@@ -189,7 +185,7 @@ void Network::CacheClient
 }
 
 uint64_t Network::CacheClient
-	::GetSocketID() const
+	::GetSocketID() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -205,7 +201,7 @@ bool Network::CacheClient
 	{
 	case SocketManagerEvent::AsyncConnect:
 	{
-		auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::Error));
+		const auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::Error));
 		if (result == 0)
 		{
 			m_SocketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);

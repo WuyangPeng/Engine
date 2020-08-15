@@ -19,7 +19,9 @@
 using std::string;
 using std::array;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455) 
 Network::ACESockInetAddress
 	::ACESockInetAddress(const string& hostName, int port)
 	:m_ACEInetAddress{}
@@ -51,16 +53,12 @@ Network::ACESockInetAddress
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockInetAddress
-	::~ACESockInetAddress()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ACESockInetAddress)
 
 const Network::ACEInetAddressType& Network::ACESockInetAddress
-	::GetACEInetAddress() const
+	::GetACEInetAddress() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -68,7 +66,7 @@ const Network::ACEInetAddressType& Network::ACESockInetAddress
 }
 
 Network::ACEInetAddressType& Network::ACESockInetAddress
-	::GetACEInetAddress()
+	::GetACEInetAddress() 
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -105,5 +103,5 @@ int Network::ACESockInetAddress
 
 	return m_ACEInetAddress.get_port_number();
 }
-
+#include STSTEM_WARNING_POP
 #endif // NETWORK_USE_ACE

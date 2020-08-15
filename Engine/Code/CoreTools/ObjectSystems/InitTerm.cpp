@@ -11,6 +11,11 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+
 int CoreTools::InitTerm::sm_NumInitializers{ 0 };
 CoreTools::InitTerm::Initializer CoreTools::InitTerm
 	::sm_Initializers[sm_MaxElements];
@@ -75,3 +80,4 @@ void CoreTools::InitTerm
 	ObjectManager::Destroy();
 }
 
+#include STSTEM_WARNING_POP

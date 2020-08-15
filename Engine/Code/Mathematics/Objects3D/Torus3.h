@@ -46,12 +46,12 @@ namespace Mathematics
 		//      x = Rc*cos(2*PI*s)
 		//      y = Rc*sin(2*PI*s)
 		//      z = Ri*sin(2*PI*t)
-		Torus3(Real outerRadius, Real innerRadius);
+		Torus3(Real outerRadius, Real innerRadius) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		Real GetOuterRadius() const;
-		Real GetInnerRadius() const;
+		Real GetOuterRadius() const noexcept;
+		Real GetInnerRadius() const noexcept;
 
 		const Vector3D GetPosition(Real s, Real t) const;
 		const Vector3D GetNormal(Real s, Real t) const;

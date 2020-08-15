@@ -22,16 +22,12 @@ Mathematics::EquationOnce
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-Mathematics::EquationOnce
-	::~EquationOnce()
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EquationOnce)
 
 double Mathematics::EquationOnce
-	::Substitution(double value) const
+	::Substitution(double value) const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -47,7 +43,7 @@ const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce
 }
 
 double Mathematics::EquationOnce
-	::SubstitutionTangent(double solution) const
+	::SubstitutionTangent(double solution) const noexcept
 {
 	SYSTEM_UNUSED_ARG(solution);
 
@@ -67,13 +63,13 @@ void Mathematics::EquationOnce
 {
 	MATHEMATICS_ASSERTION_0(GetEpsilon() < Mathd::FAbs(m_Once), "³ýÁã´íÎó£¡");
 
-	auto solution = -m_Constant / m_Once;
+	const auto solution = -m_Constant / m_Once;
 
 	SetRealResult(solution);
 }
 
 bool Mathematics::EquationOnce
-	::Predigest()
+	::Predigest() noexcept
 {
 	return false;
 }

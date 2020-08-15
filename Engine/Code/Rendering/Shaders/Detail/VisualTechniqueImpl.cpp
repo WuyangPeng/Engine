@@ -18,7 +18,12 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26440)
 using std::string;
 using std::vector;
 
@@ -43,26 +48,26 @@ void Rendering::VisualTechniqueImpl
 	::Save( BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.WriteSmartPointer(m_Passes);
+    target;
+	//target.WriteSmartPointer(m_Passes);
 }
 
 void Rendering::VisualTechniqueImpl
 	::Load( BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ReadSmartPointer(m_Passes);
+    source;
+	//source.ReadSmartPointer(m_Passes);
 }
 
 void Rendering::VisualTechniqueImpl
 	::Link( ObjectLink& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    source;
 	if (!m_Passes.empty())
 	{
-		source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
+		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
 	} 
 }
 
@@ -70,10 +75,10 @@ void Rendering::VisualTechniqueImpl
 	::Register( ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
+    target;
 	if (!m_Passes.empty())
 	{
-		target.RegisterSmartPointer(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
+		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
 	} 
 }
 
@@ -81,7 +86,7 @@ void Rendering::VisualTechniqueImpl
 	::InsertPass( const VisualPassSmartPointer& pass )
 {
 	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_2(pass.IsValidPtr(),"输入的pass必须是有效的。");
+	RENDERING_ASSERTION_2(pass!=nullptr ,"输入的pass必须是有效的。");
 	
 	m_Passes.push_back(pass);		
 }
@@ -100,7 +105,7 @@ const Rendering::ConstVisualPassSmartPointer Rendering::VisualTechniqueImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(),"索引错误！");
 
-	return m_Passes[passIndex].PolymorphicCastConstObjectSmartPointer<ConstVisualPassSmartPointer>();
+	return m_Passes[passIndex];
 }
 
 const Rendering::ConstVertexShaderSmartPointer Rendering::VisualTechniqueImpl
@@ -248,7 +253,7 @@ void Rendering::VisualTechniqueImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto numPasses = GetNumPasses();
+const	auto numPasses = GetNumPasses();
 	manager.Write(sizeof(int), &numPasses);
 	for (auto i = 0; i < numPasses; ++i)
 	{
@@ -267,7 +272,7 @@ void Rendering::VisualTechniqueImpl
 
 	for (auto i = 0; i < numPasses; ++i)
 	{
-		VisualPassSmartPointer pass{ NEW0 VisualPass };
+		VisualPassSmartPointer pass{ std::make_shared< VisualPass>() };
 
 		pass->LoadShader(manager);
 		pass->LoadState(manager);
@@ -275,5 +280,5 @@ void Rendering::VisualTechniqueImpl
 		InsertPass(pass);
 	}
 }
-
+#include STSTEM_WARNING_POP
  

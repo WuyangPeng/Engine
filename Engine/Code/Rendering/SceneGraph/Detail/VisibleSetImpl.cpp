@@ -16,18 +16,12 @@
 
 using std::vector;
 
-Rendering::VisibleSetImpl
-    ::VisibleSetImpl ()
-	: m_Visible{}
+Rendering::VisibleSetImpl ::VisibleSetImpl() noexcept
+    : m_Visible{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
-
-Rendering::VisibleSetImpl
-     ::~VisibleSetImpl ()
-{
-    RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::VisibleSetImpl
@@ -59,27 +53,25 @@ const Rendering::ConstVisualSmartPointer Rendering::VisibleSetImpl
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= index && index < GetNumVisible(),"索引无效在GetVisible\n");
     
-    return m_Visible[index];
+    return m_Visible.at(index);
 }
 
 void Rendering::VisibleSetImpl
-    ::Clear ()
+    ::Clear () noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
 	m_Visible.clear();
 }
 
-Rendering::VisibleSetImpl::VisualContainerIter Rendering::VisibleSetImpl
-	::begin()
+Rendering::VisibleSetImpl::VisualContainerIter Rendering::VisibleSetImpl ::begin() noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	return m_Visible.begin();
 }
 
-Rendering::VisibleSetImpl::VisualContainerIter Rendering::VisibleSetImpl
-	::end()
+Rendering::VisibleSetImpl::VisualContainerIter Rendering::VisibleSetImpl ::end() noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 

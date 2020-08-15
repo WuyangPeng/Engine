@@ -21,7 +21,13 @@
 
 using std::vector;
 using std::make_shared;
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Particles);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Particles);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Particles);
@@ -47,12 +53,12 @@ void Rendering::Particles
 	RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "无效索引大小。\n");
 
 	auto numVertices = GetVertexBuffer()->GetNumElements();
-	auto numParticles = numVertices / 4;
+const	auto numParticles = numVertices / 4;
 
 	RENDERING_ASSERTION_1(numVertices % 4 == 0, "顶点数必须是4的倍数。\n");
 	RENDERING_ASSERTION_1(numParticles == m_Impl->GetNumParticles(), "粒子数必须和位置数组大小相等。\n");
 
-	IndexBufferSmartPointer indexBuffer{ NEW0 IndexBuffer(6 * numParticles, indexSize) };
+	IndexBufferSmartPointer indexBuffer{ std::make_shared< IndexBuffer>(6 * numParticles, indexSize) };
 	indexBuffer->InitIndexBufferInParticles();
 	SetIndexBuffer(indexBuffer);	
 }
@@ -84,15 +90,15 @@ Rendering::ControllerInterfaceSmartPointer Rendering::Particles
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 } 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Particles,GetNumParticles, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Particles,GetPosition,int, const Rendering::Particles::APoint)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Particles,GetSize,int,float)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Particles,SetSizeAdjust, float,void)										  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Particles,GetSizeAdjust, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Particles,GetNumActive, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Particles,GetSizeAdjust, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Particles, GetNumActive, int)
 
 									
 void Rendering::Particles
@@ -138,11 +144,11 @@ void Rendering::Particles
 	auto upMinusRight = transform * (camera->GetUpVector() - camera->GetRightVector());
 
 	// 生成四边形像一对三角形。
-	auto numActive = m_Impl->GetNumActive();
+        const auto numActive = m_Impl->GetNumActive();
 	for (auto index = 0; index < numActive; index += 4)
 	{
 		auto position = m_Impl->GetPosition(index);
-		auto trueSize = m_Impl->GetTrueSize(index);
+            const auto trueSize = m_Impl->GetTrueSize(index);
 		auto scaledUpPlusRight = trueSize * upPlusRight;
 		auto scaledUpMinusRight = trueSize * upMinusRight;
 
@@ -154,7 +160,7 @@ void Rendering::Particles
 
 	UpdateModelSpace(VisualUpdateType::Normals);
 	 
-	RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer().GetData());
+	RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer().get());
 }
 
 void Rendering::Particles
@@ -234,3 +240,4 @@ void Rendering::Particles
         
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
+#include STSTEM_WARNING_POP

@@ -14,6 +14,10 @@
 
 using std::swap;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
 Mathematics::QuerySortToolsImpl
 	::QuerySortToolsImpl(int firstValue, int secondValue)
 	:m_SortValue{ firstValue,secondValue }, m_Symbol{ NumericalValueSymbol::Zero }
@@ -44,7 +48,7 @@ Mathematics::QuerySortToolsImpl
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, QuerySortToolsImpl)
 
 Mathematics::NumericalValueSymbol Mathematics::QuerySortToolsImpl
-	::GetSymbol() const
+	::GetSymbol() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -61,7 +65,7 @@ int Mathematics::QuerySortToolsImpl
 }
 
 void Mathematics::QuerySortToolsImpl
-	::SortTwoValue()
+	::SortTwoValue() noexcept
 {
 	if (m_SortValue[1] < m_SortValue[0])
 	{
@@ -75,7 +79,7 @@ void Mathematics::QuerySortToolsImpl
 }
 
 void Mathematics::QuerySortToolsImpl
-	::SortThreeValue()
+	::SortThreeValue() noexcept
 {
 	if (m_SortValue[0] <= m_SortValue[1])
 	{
@@ -123,7 +127,7 @@ void Mathematics::QuerySortToolsImpl
 }
 
 void Mathematics::QuerySortToolsImpl
-	::SortFourValue()
+	::SortFourValue() noexcept
 {
 	if (m_SortValue[0] <= m_SortValue[1])
 	{
@@ -334,3 +338,4 @@ void Mathematics::QuerySortToolsImpl
 		}
 	}
 }
+#include STSTEM_WARNING_POP

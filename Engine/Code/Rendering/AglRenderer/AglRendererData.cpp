@@ -10,7 +10,9 @@
 
 using namespace Rendering;
 
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
 void AglRendererData
 	::LoadFont (const char* face, int size, bool fontBold, bool fontItalic)
 {
@@ -134,3 +136,4 @@ void AglRendererData::FatalErrorMessage (const char* message)
     ExitToShell();*/
 }
 
+#include STSTEM_WARNING_POP

@@ -11,10 +11,10 @@
 
 #include "BufferLockManager.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-
+#include "CoreTools/Helper/ExceptionMacro.h" 
 template <typename PlatformBufferType>
 Rendering::BufferLockManager<PlatformBufferType>
-	::BufferLockManager(PlatformBufferType& manager)
+	::BufferLockManager(PlatformBufferType& manager) noexcept
 	:m_Manager{ manager }, m_Lock{ false }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -24,10 +24,17 @@ template <typename PlatformBufferType>
 Rendering::BufferLockManager<PlatformBufferType>
 	::~BufferLockManager()
 {
-	if (m_Lock)
+	
+
+EXCEPTION_TRY
+{
+if (m_Lock)
 	{
 		m_Manager.Unlock();
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -43,7 +50,7 @@ bool Rendering::BufferLockManager< PlatformBufferType>
 
 template <typename PlatformBufferType>
 void* Rendering::BufferLockManager<PlatformBufferType>
-	::Lock(BufferLocking mode) 
+	::Lock(BufferLocking mode)  noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

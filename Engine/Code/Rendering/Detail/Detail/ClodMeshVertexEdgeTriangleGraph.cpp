@@ -14,7 +14,13 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"  
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
 Rendering::ClodMeshVertexEdgeTriangleGraph
 	::ClodMeshVertexEdgeTriangleGraph(int numVertices, int numIndices)
 	: m_Vertices{ numVertices }, m_Edges{}, m_Triangles{},
@@ -30,12 +36,12 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto triangleKey0 = triangleKey.GetKey(0);
-	auto triangleKey1 = triangleKey.GetKey(1);
-	auto triangleKey2 = triangleKey.GetKey(2);
-	EdgeKey firstEdgeKey{ triangleKey0, triangleKey1 };
-	EdgeKey secondEdgeKey{ triangleKey1, triangleKey2 };
-	EdgeKey thirdEdgeKey{ triangleKey2, triangleKey0 };
+	const auto triangleKey0 = triangleKey.GetKey(0);
+	const auto triangleKey1 = triangleKey.GetKey(1);
+	const auto triangleKey2 = triangleKey.GetKey(2);
+	const EdgeKey firstEdgeKey{ triangleKey0, triangleKey1 };
+	const EdgeKey secondEdgeKey{ triangleKey1, triangleKey2 };
+	const EdgeKey thirdEdgeKey{ triangleKey2, triangleKey0 };
 
 	// 将每一个边缘到插入它的终点连接链表
     m_Vertices[triangleKey0].InsertEdgeKey(firstEdgeKey);
@@ -62,7 +68,7 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 void Rendering::ClodMeshVertexEdgeTriangleGraph
 	::InsertEdgeAndTriangle(const EdgeKey& edgeKey, const TriangleKey& triangleKey)
 {
-	auto iter = m_Edges.find(edgeKey);
+    const auto iter = m_Edges.find(edgeKey);
 	if (iter == m_Edges.end())
 	{
 		// 边是第一次遇到。将其插入图形并加入堆。将三角形插入到其链接表。
@@ -83,12 +89,12 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto triangleKey0 = triangleKey.GetKey(0);
-	auto triangleKey1 = triangleKey.GetKey(1);
-	auto triangleKey2 = triangleKey.GetKey(2);
-	EdgeKey firstEdgeKey{ triangleKey0, triangleKey1 };
-	EdgeKey secondEdgeKey{ triangleKey1, triangleKey2 };
-	EdgeKey thirdEdgeKey{ triangleKey2, triangleKey0 };
+	const auto triangleKey0 = triangleKey.GetKey(0);
+	const auto triangleKey1 = triangleKey.GetKey(1);
+	const auto triangleKey2 = triangleKey.GetKey(2);
+	const EdgeKey firstEdgeKey{ triangleKey0, triangleKey1 };
+	const EdgeKey secondEdgeKey{ triangleKey1, triangleKey2 };
+	const EdgeKey thirdEdgeKey{ triangleKey2, triangleKey0 };
 
   	// 删除顶点连接表的三角形。
 	m_Vertices[triangleKey0].EraseTriangleKey(triangleKey);
@@ -107,7 +113,7 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 void Rendering::ClodMeshVertexEdgeTriangleGraph
 	::RemoveEdgeAndTriangle(const EdgeKey& edgeKey, const TriangleKey& triangleKey)
 {
-	auto iter = m_Edges.find(edgeKey);
+    const auto iter = m_Edges.find(edgeKey);
 	if (iter != m_Edges.end())
 	{
 		auto& edge = iter->second;
@@ -119,7 +125,7 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 
 			m_Heap.Update(iter->second.GetMinHeapRecordIndex(), -1.0f);
 
-			auto record = m_Heap.Remove();
+			const auto record = m_Heap.Remove();
 			auto ekey = record.GetGenerator();
 			auto metric = record.GetValue();
 
@@ -155,9 +161,10 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
  	// 测试顶点，以确定它们是否在网格的边的边界的端点。
 	for(auto& vertex:m_Vertices)
     {     		 
-		for (auto outerIter = vertex.GetEdgeKeyBegin(), end = vertex.GetEdgeKeyEnd(); outerIter != end;++outerIter)
+		const auto end = vertex.GetEdgeKeyEnd();
+		for (auto outerIter = vertex.GetEdgeKeyBegin() ; outerIter != end;++outerIter)
         {
-			auto innerIter = m_Edges.find(*outerIter);
+			const auto innerIter = m_Edges.find(*outerIter);
             if (innerIter->second.GetTriangleKeySize() != 2)
             {
                 vertex.SetCollapsible(false);
@@ -172,7 +179,7 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto edge = m_Edges.find(edgeKey);
+	const auto edge = m_Edges.find(edgeKey);
 	RENDERING_ASSERTION_2(m_Heap.IsUniqueIndexValid(edge->second.GetMinHeapRecordIndex()), "意外情况\n");
 
 	m_Heap.Update(edge->second.GetMinHeapRecordIndex(), Mathematics::Mathf::sm_MaxReal);
@@ -199,8 +206,8 @@ bool Rendering::ClodMeshVertexEdgeTriangleGraph
 	int i = 0;
 	for (const auto& clodMeshVertex : m_Vertices)
 	{
-		auto hasEdges = (0 < clodMeshVertex.GetEdgeKeySize());
-		auto hasTriangles = (0 < clodMeshVertex.GetTriangleKeySize());
+		const auto hasEdges = (0 < clodMeshVertex.GetEdgeKeySize());
+		const auto hasTriangles = (0 < clodMeshVertex.GetTriangleKeySize());
 		if (hasEdges != hasTriangles)
 		{
 			RENDERING_ASSERTION_2(false, "不一致的边三角形连接。\n");
@@ -229,7 +236,7 @@ const Rendering::ClodMeshEdge& Rendering::ClodMeshVertexEdgeTriangleGraph
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Edges.find(edgeKey);
+	const auto iter = m_Edges.find(edgeKey);
 
 	if (iter != m_Edges.end())
 	{
@@ -237,7 +244,7 @@ const Rendering::ClodMeshEdge& Rendering::ClodMeshVertexEdgeTriangleGraph
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到边的数据"));
+		THROW_EXCEPTION(SYSTEM_TEXT("找不到边的数据"s));
 	}	 
 }
 
@@ -255,7 +262,7 @@ Rendering::ClodMeshVertexEdgeTriangleGraph::Triangle Rendering::ClodMeshVertexEd
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Triangles.find(triangleKey);
+	const auto iter = m_Triangles.find(triangleKey);
 
 	if (iter != m_Triangles.end())
 	{
@@ -263,12 +270,12 @@ Rendering::ClodMeshVertexEdgeTriangleGraph::Triangle Rendering::ClodMeshVertexEd
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到三角形的数据"));
+		THROW_EXCEPTION(SYSTEM_TEXT("找不到三角形的数据"s));
 	}
 }
 
 Rendering::ClodMeshVertexEdgeTriangleGraph::EdgeMapConstIter Rendering::ClodMeshVertexEdgeTriangleGraph
-	::GetEdgeMapBegin() const
+	::GetEdgeMapBegin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -276,7 +283,7 @@ Rendering::ClodMeshVertexEdgeTriangleGraph::EdgeMapConstIter Rendering::ClodMesh
 }
 
 Rendering::ClodMeshVertexEdgeTriangleGraph::EdgeMapConstIter Rendering::ClodMeshVertexEdgeTriangleGraph
-	::GetEdgeMapEnd() const
+	::GetEdgeMapEnd() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -284,7 +291,7 @@ Rendering::ClodMeshVertexEdgeTriangleGraph::EdgeMapConstIter Rendering::ClodMesh
 }
 
 int Rendering::ClodMeshVertexEdgeTriangleGraph
-	::GetMinHeapElementsNumber() const
+	::GetMinHeapElementsNumber() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -308,7 +315,7 @@ const Rendering::ClodMeshVertexEdgeTriangleGraph::MinHeapRecord Rendering::ClodM
 }
 
 Rendering::ClodMeshVertexEdgeTriangleGraph::RemainingConstIter Rendering::ClodMeshVertexEdgeTriangleGraph
-	::GetVerticesRemainingBegin() const
+	::GetVerticesRemainingBegin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -316,7 +323,7 @@ Rendering::ClodMeshVertexEdgeTriangleGraph::RemainingConstIter Rendering::ClodMe
 }
 
 Rendering::ClodMeshVertexEdgeTriangleGraph::RemainingConstIter Rendering::ClodMeshVertexEdgeTriangleGraph
-	::GetVerticesRemainingEnd() const
+	::GetVerticesRemainingEnd() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -324,7 +331,7 @@ Rendering::ClodMeshVertexEdgeTriangleGraph::RemainingConstIter Rendering::ClodMe
 }
 
 Rendering::ClodMeshVertexEdgeTriangleGraph::RemainingConstIter Rendering::ClodMeshVertexEdgeTriangleGraph
-	::GetTrianglesRemainingBegin() const
+	::GetTrianglesRemainingBegin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -332,7 +339,7 @@ Rendering::ClodMeshVertexEdgeTriangleGraph::RemainingConstIter Rendering::ClodMe
 }
 
 Rendering::ClodMeshVertexEdgeTriangleGraph::RemainingConstIter Rendering::ClodMeshVertexEdgeTriangleGraph
-	::GetTrianglesRemainingEnd() const
+	::GetTrianglesRemainingEnd() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -346,3 +353,4 @@ bool Rendering::ClodMeshVertexEdgeTriangleGraph
 
 	return m_Heap.IsUniqueIndexValid(minHeapRecordIndex);
 }
+#include STSTEM_WARNING_POP

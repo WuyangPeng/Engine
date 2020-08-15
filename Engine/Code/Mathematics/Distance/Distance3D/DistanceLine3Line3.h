@@ -37,10 +37,10 @@ namespace Mathematics
 		const Line3 GetRhsLine() const;
 
 		// æ≤Ã¨æ‡¿Î≤È—Ø°£
-		virtual const DistanceResult GetSquared() const override;
+		 const DistanceResult GetSquared() const override;
 
 		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£	
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		Line3 m_LhsLine;

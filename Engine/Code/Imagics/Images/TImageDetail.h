@@ -10,7 +10,12 @@
 #include "TImage.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26481)
 template <typename T>
 Imagics::TImage<T>
 	::TImage(int numDimensions, int* bounds, T* data)
@@ -46,7 +51,11 @@ template <typename T>
 Imagics::TImage<T>
 	::~TImage()
 {
-    DELETE1(mData);
+    EXCEPTION_TRY
+    {
+        DELETE1(mData);
+    }
+    EXCEPTION_ALL_CATCH(Imagics)
 }
 
 template <typename T>
@@ -67,14 +76,14 @@ void Imagics::TImage<T>
 
 template <typename T>
 T* Imagics::TImage<T>
-	::GetData() const
+	::GetData() const noexcept
 {
     return mData;
 }
 
 template <typename T>
 T& Imagics::TImage<T>
-	::operator[] (int i) const
+	::operator[] (int i) const noexcept
 {
     return mData[i];
 }
@@ -84,6 +93,7 @@ Imagics::TImage<T>& Imagics
 	::TImage<T>::operator= (const TImage& image)
 {
     Lattice::operator=(image);
+    CoreTools::DoNothing();
 
     DELETE1(mData);
     mData = NEW1<T>(mQuantity);
@@ -94,7 +104,7 @@ Imagics::TImage<T>& Imagics
 
 template <typename T>
 Imagics::TImage<T>& Imagics::TImage<T>
-	::operator= (T value)
+	::operator= (T value) noexcept
 {
     for (int i = 0; i < mQuantity; ++i)
     {
@@ -105,8 +115,7 @@ Imagics::TImage<T>& Imagics::TImage<T>
 }
 
 template <typename T>
-bool Imagics::TImage<T>
-	::operator== (const TImage& image) const
+bool Imagics::TImage<T>::operator==(const TImage& image) const noexcept
 {
     if (Lattice::operator!=(image))
     {
@@ -117,8 +126,7 @@ bool Imagics::TImage<T>
 }
 
 template <typename T>
-bool Imagics::TImage<T>
-	::operator!= (const TImage& image) const
+bool Imagics::TImage<T>::operator!=(const TImage& image) const noexcept
 {
     return !operator==(image);
 }
@@ -136,7 +144,7 @@ bool Imagics::TImage<T>
         return false;
     }
 
-    int rtti, sizeOf;
+    int rtti = 0, sizeOf = 0;
     inFile.Read(sizeof(int), &rtti);
     inFile.Read(sizeof(int), &sizeOf);
 
@@ -167,15 +175,15 @@ bool Imagics::TImage<T>
         return false;
     }
 
-    int rtti = T::GetRTTI();
+    const int rtti = T::GetRTTI();
     outFile.Write(sizeof(int), &rtti);
 
-    int sizeOf = (int)(sizeof(T));
+    constexpr int sizeOf = (int)(sizeof(T));
     outFile.Write(sizeof(int), &sizeOf);
 
     outFile.Write(sizeof(T), mQuantity, mData);
  
     return true;
 }
-
+#include STSTEM_WARNING_POP
 #endif // IMAGICS_IMAGICS_TIMAGE_DETAIL_H

@@ -12,8 +12,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"      
 
 CoreTools::ResourceManagerPriorityQueue
-	::ResourceManagerPriorityQueue()
-	:m_PriorityQueue{}
+	::ResourceManagerPriorityQueue() noexcept
+	:m_PriorityQueue{} 
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -47,7 +47,7 @@ uint32_t CoreTools::ResourceManagerPriorityQueue
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 	CORE_TOOLS_ASSERTION_0(!m_PriorityQueue.empty(), "集合是空的！");
 
-	auto disposalSize = m_PriorityQueue.top()->GetSize();
+	const auto disposalSize = m_PriorityQueue.top()->GetSize();
 
 	m_PriorityQueue.top()->Dispose();
 	m_PriorityQueue.pop();

@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::Torus3Parameters <Real>
-	::Torus3Parameters(Real s, Real t)
+	::Torus3Parameters(Real s, Real t) noexcept
 	: m_S{ s }, m_T{ t }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -38,7 +38,7 @@ bool Mathematics::Torus3Parameters<Real>
 
 template <typename Real>
 Real Mathematics::Torus3Parameters<Real>
-	::GetS() const
+	::GetS() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -47,7 +47,7 @@ Real Mathematics::Torus3Parameters<Real>
 
 template <typename Real>
 Real Mathematics::Torus3Parameters<Real>
-	::GetT() const
+	::GetT() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

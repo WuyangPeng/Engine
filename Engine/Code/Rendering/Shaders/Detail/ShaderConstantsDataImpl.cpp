@@ -17,7 +17,9 @@
 #include <algorithm>
 
 using std::string;
-
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 Rendering::ShaderConstantsDataImpl
 	::ShaderConstantsDataImpl( int number )
 	:m_SingleShaderConstantsData{ number }
@@ -26,7 +28,7 @@ Rendering::ShaderConstantsDataImpl
 }
 
 Rendering::ShaderConstantsDataImpl
-	::ShaderConstantsDataImpl()
+	::ShaderConstantsDataImpl() noexcept
 	:m_SingleShaderConstantsData()
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -96,7 +98,7 @@ void Rendering::ShaderConstantsDataImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	uint32_t size = boost::numeric_cast<uint32_t>(m_SingleShaderConstantsData.size());
+	const uint32_t size = boost::numeric_cast<uint32_t>(m_SingleShaderConstantsData.size());
 	target.Write(size);
 
 	for_each(m_SingleShaderConstantsData.begin(), m_SingleShaderConstantsData.end(),std::bind(&SingleShaderConstantsData::Save, std::placeholders::_1,std::ref(target)));
@@ -124,3 +126,4 @@ void Rendering::ShaderConstantsDataImpl
 	m_SingleShaderConstantsData.resize(number);
 }
 
+#include STSTEM_WARNING_POP

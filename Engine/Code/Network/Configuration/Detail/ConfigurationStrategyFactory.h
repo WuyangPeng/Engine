@@ -25,7 +25,7 @@ namespace Network
 		using ImplTypePtr = std::shared_ptr<ImplType>;
 
 	public:
-		ConfigurationStrategyFactory();
+		ConfigurationStrategyFactory() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

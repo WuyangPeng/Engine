@@ -26,15 +26,14 @@ Network::BufferSendStream
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, BufferSendStream)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, BufferSendStream)
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, BufferSendStream)
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, BufferSendStream)
+DELAY_COPY_CONSTRUCTION_DEFINE(Network, BufferSendStream) 
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Network, BufferSendStream, Insert, MessageInterfaceSharedPtr, bool)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Network, BufferSendStream, Save, MessageBufferSharedPtr, void)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(Network, BufferSendStream, Clear, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, BufferSendStream, IsEmpty, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, BufferSendStream, IsEmpty, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, BufferSendStream, GetCurrentSize, int)
 
 

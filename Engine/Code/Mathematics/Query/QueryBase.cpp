@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 Mathematics::QueryBase
-	::QueryBase()
+	::QueryBase() noexcept
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

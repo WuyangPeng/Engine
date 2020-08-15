@@ -22,7 +22,7 @@ Rendering::SingleShaderBaseDataImpl
 }
 
 Rendering::SingleShaderBaseDataImpl
-	::SingleShaderBaseDataImpl()
+	::SingleShaderBaseDataImpl() noexcept
 	:m_Name{},m_Type{ ShaderFlags::VariableType::None },m_Semantic{ ShaderFlags::VariableSemantic::None }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -48,16 +48,14 @@ const string Rendering::SingleShaderBaseDataImpl
 	return m_Name;
 }
 
-Rendering::ShaderFlags::VariableType Rendering::SingleShaderBaseDataImpl
-	::GetType() const
+Rendering::ShaderFlags::VariableType Rendering::SingleShaderBaseDataImpl ::GetType() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Type;
 }
 
-Rendering::ShaderFlags::VariableSemantic Rendering::SingleShaderBaseDataImpl
-	::GetSemantic() const
+Rendering::ShaderFlags::VariableSemantic Rendering::SingleShaderBaseDataImpl ::GetSemantic() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

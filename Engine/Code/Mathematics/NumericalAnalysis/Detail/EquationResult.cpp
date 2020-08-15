@@ -16,7 +16,7 @@
 #include <algorithm>
 
 Mathematics::EquationResult
-	::EquationResult()
+	::EquationResult() noexcept
 	:m_RealResult{}, m_ImaginaryResult{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -31,7 +31,7 @@ bool Mathematics::EquationResult
 #endif // OPEN_CLASS_INVARIANT
 
 bool Mathematics::EquationResult
-	::IsRealResult() const
+	::IsRealResult() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -77,7 +77,7 @@ void Mathematics::EquationResult
 }
 
 void Mathematics::EquationResult
-	::CleanSolution()
+	::CleanSolution() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -87,7 +87,7 @@ void Mathematics::EquationResult
 
 // private
 bool Mathematics::EquationResult
-	::FindSolution(double solution, double epsilon) const
+	::FindSolution(double solution, double epsilon) const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -124,7 +124,7 @@ bool Mathematics::EquationResult
 }
 
 const Mathematics::EquationResult::RealConstIterator Mathematics::EquationResult
-	::GetRealBegin() const
+	::GetRealBegin() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -132,7 +132,7 @@ const Mathematics::EquationResult::RealConstIterator Mathematics::EquationResult
 }
 
 const Mathematics::EquationResult::RealConstIterator Mathematics::EquationResult
-	::GetRealEnd() const
+	::GetRealEnd() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -140,7 +140,7 @@ const Mathematics::EquationResult::RealConstIterator Mathematics::EquationResult
 }
 
 const Mathematics::EquationResult::ImaginaryConstIterator Mathematics::EquationResult
-	::GetImaginaryBegin() const
+	::GetImaginaryBegin() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -148,7 +148,7 @@ const Mathematics::EquationResult::ImaginaryConstIterator Mathematics::EquationR
 }
 
 const Mathematics::EquationResult::ImaginaryConstIterator Mathematics::EquationResult
-	::GetImaginaryEnd() const
+	::GetImaginaryEnd() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

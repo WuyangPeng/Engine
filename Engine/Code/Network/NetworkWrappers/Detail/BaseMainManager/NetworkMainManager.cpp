@@ -15,18 +15,20 @@
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
-
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::NetworkMainManager
-	::NetworkMainManager()
-	:ParentType{}
+	::NetworkMainManager()  
+	:ParentType{} 
 {
 	Init();
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 Network::NetworkMainManager
-	::~NetworkMainManager()
+	::~NetworkMainManager() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 
@@ -36,19 +38,19 @@ Network::NetworkMainManager
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkMainManager)
 
 void Network::NetworkMainManager
-	::Run()
+	::Run() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 }
 
 void Network::NetworkMainManager
-	::Init()
+	::Init()  
 {
 	System::WinSockData wsaData{};
 	System::FillMemoryToZero(wsaData);
 
 	constexpr auto versionRequested = System::MakeWord(2, 2);
-	auto startUp = System::WinSockStartUp(versionRequested, &wsaData);
+	const auto startUp = System::WinSockStartUp(versionRequested, &wsaData);
 
 	if (startUp != System::WinSockStartUpReturn::Successful)
 	{
@@ -57,9 +59,9 @@ void Network::NetworkMainManager
 }
 
 void Network::NetworkMainManager
-	::Release()
+	::Release() noexcept
 {
-	auto cleanup = System::WinSockCleanup();
+	const auto cleanup = System::WinSockCleanup();
 
 	if (cleanup != System::WinSockCleanupReturn::Successful)
 	{

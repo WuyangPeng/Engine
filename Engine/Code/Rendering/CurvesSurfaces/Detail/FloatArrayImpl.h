@@ -28,7 +28,7 @@ namespace Rendering
 		using BufferTarget = CoreTools::BufferTarget;
 
 	public:
-		FloatArrayImpl();
+                FloatArrayImpl() noexcept;
 		explicit FloatArrayImpl (const FloatVector& elements);	 
 
 		CLASS_INVARIANT_DECLARE;
@@ -38,7 +38,7 @@ namespace Rendering
 		int GetStreamingSize () const;
 				
 		int GetNumElements () const;
-		const float* GetData () const;
+                const float* GetData() const noexcept;
   
 		const float& operator[] (int index) const;
 		float& operator[] (int index);

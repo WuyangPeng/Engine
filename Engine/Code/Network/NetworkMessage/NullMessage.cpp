@@ -15,20 +15,20 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 Network::NullMessage
-	::NullMessage(int64_t messageID)
+	::NullMessage(int64_t messageID) noexcept
 	:ParentType{ messageID }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::NullMessage
-	::~NullMessage()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullMessage);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Network, NullMessage);
 NETWORK_DEFAULT_STREAM_DEFINE(Network, NullMessage);
 NETWORK_FACTORY_DEFINE(Network, NullMessage);
+#include STSTEM_WARNING_POP

@@ -28,6 +28,10 @@ namespace CoreTools
 	public:
 		ThreadImpl(void* function, void* userData, int processorNumber = 0, ThreadSize stackSize = 0);
 		~ThreadImpl();
+		ThreadImpl(const ThreadImpl&) = delete;
+		ThreadImpl& operator=(const ThreadImpl&) = delete;
+		ThreadImpl(ThreadImpl&&) noexcept = delete;
+		ThreadImpl& operator=(ThreadImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

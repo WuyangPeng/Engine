@@ -11,9 +11,12 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 Mathematics::BasicMeshEdge
-	::BasicMeshEdge()
+	::BasicMeshEdge() noexcept
 	:m_Triangle{}, m_Vertex{}
 {
     for(int i = 0;i < 2;++i)
@@ -26,7 +29,7 @@ Mathematics::BasicMeshEdge
 }
 
 Mathematics::BasicMeshEdge
-	::BasicMeshEdge (const BasicMeshEdge& rhs)
+	::BasicMeshEdge (const BasicMeshEdge& rhs) noexcept
 	:m_Triangle{}, m_Vertex{}
 {
     for(int i = 0;i < 2;++i)
@@ -40,7 +43,7 @@ Mathematics::BasicMeshEdge
 }
 
 Mathematics::BasicMeshEdge& Mathematics::BasicMeshEdge
-	::operator = (const BasicMeshEdge& rhs)
+	::operator = (const BasicMeshEdge& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
     
@@ -67,7 +70,7 @@ int Mathematics::BasicMeshEdge
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}    
 }
 
@@ -82,7 +85,7 @@ int Mathematics::BasicMeshEdge
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	} 
 }
 
@@ -97,7 +100,7 @@ void Mathematics::BasicMeshEdge
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}    
 }
 
@@ -112,7 +115,8 @@ void Mathematics::BasicMeshEdge
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	} 
 }
 
+#include STSTEM_WARNING_POP

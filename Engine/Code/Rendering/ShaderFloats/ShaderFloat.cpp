@@ -15,7 +15,12 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ShaderFloat);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ShaderFloat);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ShaderFloat); 
@@ -116,6 +121,8 @@ void Rendering::ShaderFloat
     // ≈……˙¿‡¥Ê∏˘°£
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
+	CoreTools::DoNothing();
+
 	SYSTEM_UNUSED_ARG(visual);
 	SYSTEM_UNUSED_ARG(camera);
 }
@@ -125,5 +132,6 @@ Rendering::ShaderFloat::ShaderFloatSmartPointer Rendering::ShaderFloat
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ NEW0 ClassType(*this) };
+	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
 }
+#include STSTEM_WARNING_POP

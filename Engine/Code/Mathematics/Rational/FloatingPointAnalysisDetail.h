@@ -13,10 +13,12 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
 template <typename T>
 Mathematics::FloatingPointAnalysis<T>
-	::FloatingPointAnalysis(T value)
+	::FloatingPointAnalysis(T value) noexcept
 	:m_Value{ value }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -34,43 +36,43 @@ bool Mathematics::FloatingPointAnalysis<T>
 template <typename T>
 typename Mathematics::FloatingPointAnalysis<T>::IntegerType
 Mathematics::FloatingPointAnalysis<T>
-	::GetSymbolValue() const
+	::GetSymbolValue() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto bits = *(reinterpret_cast<const IntegerType*>(&m_Value));
-	auto sign = ((sm_Symbol & bits) >> sm_SymbolShifting);
+	const auto bits = *(reinterpret_cast<const IntegerType*>(&m_Value));
+	const auto sign = ((sm_Symbol & bits) >> sm_SymbolShifting);
 
 	return sign;
 }
 
 template <typename T>
 typename Mathematics::FloatingPointAnalysis<T>::IntegerType  Mathematics::FloatingPointAnalysis<T>
-	::GetExponent() const
+	::GetExponent() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto bits = *(reinterpret_cast<const IntegerType*>(&m_Value));
-	auto exponent = ((sm_Exponent & bits) >> sm_ExponentShifting);
+	const auto bits = *(reinterpret_cast<const IntegerType*>(&m_Value));
+	const auto exponent = ((sm_Exponent & bits) >> sm_ExponentShifting);
 
 	return exponent;
 }
 
 template <typename T>
 typename Mathematics::FloatingPointAnalysis<T>::IntegerType  Mathematics::FloatingPointAnalysis<T>
-	::GetMantissa() const
+	::GetMantissa() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto bits = *(reinterpret_cast<const IntegerType*>(&m_Value));
-	auto mantissa = (sm_Mantissa & bits);
+	const auto bits = *(reinterpret_cast<const IntegerType*>(&m_Value));
+	const auto mantissa = (sm_Mantissa & bits);
 
 	return mantissa;
 }
 
 template <typename T>
 Mathematics::NumericalValueSymbol Mathematics::FloatingPointAnalysis<T>
-	::GetSymbol() const
+	::GetSymbol() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -84,7 +86,7 @@ Mathematics::NumericalValueSymbol Mathematics::FloatingPointAnalysis<T>
 
 template <typename T>
 Mathematics::FloatingPointAnalysisType Mathematics::FloatingPointAnalysis<T>
-	::GetType() const
+	::GetType() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -129,7 +131,7 @@ int Mathematics::FloatingPointAnalysis<T>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto exponent = GetExponent();
+	const auto exponent = GetExponent();
 
 	return boost::numeric_cast<int>(exponent) - sm_RealExponentDifference;
 }
@@ -137,7 +139,7 @@ int Mathematics::FloatingPointAnalysis<T>
 template <typename T>
 typename Mathematics::FloatingPointAnalysis<T>::IntegerType
 Mathematics::FloatingPointAnalysis<T>
-	::GetRealMantissa() const
+	::GetRealMantissa() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -153,5 +155,5 @@ Mathematics::FloatingPointAnalysis<T>
 		return mantissa;
 	}
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_DETAIL_H

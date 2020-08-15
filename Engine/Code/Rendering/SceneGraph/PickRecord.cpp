@@ -13,7 +13,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26440)
 DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, PickRecord) 
 
 Rendering::PickRecord
@@ -60,4 +63,4 @@ bool Rendering::PickRecord
 }
 
 
- 
+ #include STSTEM_WARNING_POP

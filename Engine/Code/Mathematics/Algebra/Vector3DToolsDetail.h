@@ -22,9 +22,14 @@
 
 #include <iostream>
 
+#include "System/Helper/PragmaWarning.h" 
+
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26446)
+
 template <typename Real>
 bool Mathematics::Vector3DTools<Real>
-	::Approximate(const Vector3D& lhs, const Vector3D& rhs, const Real epsilon) noexcept
+	::Approximate(const Vector3D& lhs, const Vector3D& rhs, const Real epsilon)  
 {
 	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= epsilon, "epsilon必须大于或等于0！");
 
@@ -35,14 +40,14 @@ bool Mathematics::Vector3DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector3DTools<Real>
-	::VectorMagnitude(const Vector3D& vector) noexcept
+	::VectorMagnitude(const Vector3D& vector)  
 {
 	return Math::Sqrt(VectorMagnitudeSquared(vector));
 }
 
 template <typename Real>
 Real Mathematics::Vector3DTools<Real>
-	::VectorMagnitudeSquared(const Vector3D& vector) noexcept
+	::VectorMagnitudeSquared(const Vector3D& vector)  
 {
 	return vector.GetXCoordinate() * vector.GetXCoordinate() + vector.GetYCoordinate() * vector.GetYCoordinate() + vector.GetZCoordinate() * vector.GetZCoordinate();
 }
@@ -57,7 +62,7 @@ Real Mathematics::Vector3DTools<Real>
 template <typename Real>
 typename const Mathematics::Vector3DTools<Real>::Vector3D
 Mathematics::Vector3DTools<Real>
-	::CrossProduct(const Vector3D& lhs, const Vector3D& rhs) noexcept
+	::CrossProduct(const Vector3D& lhs, const Vector3D& rhs) 
 {
 	return Vector3D{ lhs.GetYCoordinate() * rhs.GetZCoordinate() - lhs.GetZCoordinate() * rhs.GetYCoordinate(),
 					 lhs.GetZCoordinate() * rhs.GetXCoordinate() - lhs.GetXCoordinate() * rhs.GetZCoordinate(),
@@ -164,7 +169,7 @@ typename const Mathematics::Vector3DTools<Real>::Vector3D Mathematics::Vector3DT
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("函数指针为空！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("函数指针为空！"s));
 	}
 }
 
@@ -182,7 +187,7 @@ typename const Mathematics::Vector3DTools<Real>::Vector3D Mathematics::Vector3DT
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("函数指针为空！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("函数指针为空！"s));
 	}
 }
 
@@ -308,7 +313,7 @@ typename const Mathematics::Vector3DTools<Real>::Vector3DOrthonormalBasis Mathem
 
 	return Vector3DOrthonormalBasis{ unitVector,true,epsilon };
 }
-
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_VECTOR3D_TOOLS_DETAIL)
 
 
@@ -332,5 +337,7 @@ std::ostream& Mathematics
 {
 	return outFile << "x=" << vector.GetXCoordinate() << "　y=" << vector.GetYCoordinate() << "　z=" << vector.GetZCoordinate();
 }
+
+
 
 #endif // MATHEMATICS_ALGEBRA_VECTOR_3D_TOOLS_DETAIL_H

@@ -16,7 +16,10 @@
 
 using std::ostream;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26455)
 DELAY_COPY_CONSTRUCTION_DEFINE(Mathematics, Int64Vector2)
 
 Mathematics::Int64Vector2
@@ -64,7 +67,7 @@ Mathematics::Int64Vector2
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	auto impl = m_Impl->Perp();
+	const auto impl = m_Impl->Perp();
 
 	return Int64Vector2{ impl.GetX(),impl.GetY() };
 }
@@ -74,7 +77,7 @@ const Mathematics::Int64Vector2 Mathematics::Int64Vector2
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	auto impl = -(*m_Impl);
+	const auto impl = -(*m_Impl);
 
 	return Int64Vector2{ impl.GetX(),impl.GetY() };
 }
@@ -119,7 +122,7 @@ Mathematics::Int64Vector2&	Mathematics::Int64Vector2
 	return *this;
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Int64Vector2, SquaredLength, int64_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Int64Vector2, SquaredLength, int64_t)
 
 int64_t Mathematics::Int64Vector2
 	::Dot(const Int64Vector2& rhs) const
@@ -162,3 +165,4 @@ ostream& Mathematics
 }
 
 
+#include STSTEM_WARNING_POP

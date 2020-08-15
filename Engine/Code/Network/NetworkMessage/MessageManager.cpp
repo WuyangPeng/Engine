@@ -16,7 +16,9 @@
 
 using std::make_shared;
 using std::make_unique;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
 
 Network::MessageManager::MessageManagerUniquePtr Network::MessageManager
@@ -105,3 +107,4 @@ int Network::MessageManager
 	return m_Impl->GetFullVersion();
 }
 
+#include STSTEM_WARNING_POP

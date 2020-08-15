@@ -20,15 +20,20 @@ namespace Mathematics
 		// Construction and destruction.  BezierCurve2 accepts responsibility for
 		// deleting the input array.
 		BezierCurve2 (int degree, Vector2D<Real>* ctrlPoint);
-		virtual ~BezierCurve2 ();
+		  ~BezierCurve2 ();
+		  
+		  BezierCurve2(const BezierCurve2&) = default;
+		  BezierCurve2& operator=(const BezierCurve2&) = default;
+		  BezierCurve2(BezierCurve2&&) = default;
+		  BezierCurve2& operator=(BezierCurve2&&) = default;
 		
-		int GetDegree () const;
-		const Vector2D<Real>* GetControlPoints () const;
+		int GetDegree () const noexcept;
+		const Vector2D<Real>* GetControlPoints () const noexcept;
 		
-		virtual Vector2D<Real> GetPosition (Real t) const;
-		virtual Vector2D<Real> GetFirstDerivative (Real t) const;
-		virtual Vector2D<Real> GetSecondDerivative (Real t) const;
-		virtual Vector2D<Real> GetThirdDerivative (Real t) const;
+		 Vector2D<Real> GetPosition (Real t) const override;
+		 Vector2D<Real> GetFirstDerivative (Real t) const override;
+		 Vector2D<Real> GetSecondDerivative (Real t) const override;
+		 Vector2D<Real> GetThirdDerivative (Real t) const override;
 
 	protected:
 		int mDegree;

@@ -23,13 +23,17 @@ namespace Rendering
 		// Construction and destruction
 		Dx9VertexShader(Renderer* renderer, const VertexShader* vshader);
 		~Dx9VertexShader();
+                Dx9VertexShader(const Dx9VertexShader&) = default;
+                Dx9VertexShader& operator=(const Dx9VertexShader&) = default;
+                Dx9VertexShader( Dx9VertexShader&&) = default;
+                Dx9VertexShader& operator=( Dx9VertexShader&&) = default;
 
 		// Vertex shader operations.
 		void Enable (Renderer* renderer, const VertexShader* vshader,const ShaderParameters* parameters);
 		void Disable (Renderer* renderer, const VertexShader* vshader,const ShaderParameters* parameters);
 
 	private:
-		IDirect3DVertexShader9* mShader;
+		IDirect3DVertexShader9* mShader = nullptr;
 	};
 
 }

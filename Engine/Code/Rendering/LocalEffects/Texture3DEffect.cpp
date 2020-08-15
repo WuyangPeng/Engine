@@ -11,7 +11,21 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
- 
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26815)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Texture3DEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture3DEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture3DEffect);
@@ -19,7 +33,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture3DEffect);
 Rendering::Texture3DEffect
 	::Texture3DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1, ShaderFlags::SamplerCoordinate coordinate2)
 {	 
-	VertexShaderSmartPointer vshader{ NEW0 VertexShader{ "Wm5.Texture2D",2, 2, 1, 0 } };
+	VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>( "Wm5.Texture2D", 2, 2, 1, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord0);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
@@ -27,7 +41,7 @@ Rendering::Texture3DEffect
     vshader->SetConstant(0, "PVWMatrix", 4);
 	auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -37,7 +51,7 @@ Rendering::Texture3DEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	PixelShaderSmartPointer pshader{ NEW0 PixelShader{"Wm5.Texture2D",1, 1, 0, 1} };
+	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.Texture2D",1, 1, 0, 1) };
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
     pshader->SetSampler(0, "BaseSampler", ShaderFlags::SamplerType::Sampler2D);
@@ -45,7 +59,7 @@ Rendering::Texture3DEffect
     pshader->SetCoordinate(0, 0, coordinate0);
     pshader->SetCoordinate(0, 1, coordinate1);
     pshader->SetCoordinate(0, 2, coordinate2);
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -55,30 +69,26 @@ Rendering::Texture3DEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{ NEW0 VisualPass{} };
+	VisualPassSmartPointer pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSmartPointer{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSmartPointer{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSmartPointer{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSmartPointer{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSmartPointer{ NEW0 WireState{} });
+	pass->SetAlphaState(AlphaStateSmartPointer{  });
+	pass->SetCullState(CullStateSmartPointer{  });
+	pass->SetDepthState(DepthStateSmartPointer{   });
+	pass->SetOffsetState(OffsetStateSmartPointer{   });
+	pass->SetStencilState(StencilStateSmartPointer{   });
+	pass->SetWireState(WireStateSmartPointer{     });
 
-	VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique{} };
+	VisualTechniqueSmartPointer technique{   };
 	technique->InsertPass(pass);
 	InsertTechnique(technique);
 }
-
-Rendering::Texture3DEffect
-	::~Texture3DEffect ()
-{
-}
+ 
 
 Rendering::PixelShader* Rendering::Texture3DEffect
 	::GetPixelShader () const
 {
-	return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().GetData());
+	return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
 
 }
 
@@ -86,10 +96,10 @@ Rendering::VisualEffectInstance* Rendering::Texture3DEffect
 	::CreateInstance (Texture3D* texture) const
 {
 	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
+    instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared < ProjectionViewMatrixConstant>()));
 	instance->SetPixelTexture(0, 0, TextureSmartPointer(texture));
 
-	ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
+	const ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
 	if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::Linear
     &&  !texture->HasMipmaps())
     {
@@ -103,7 +113,7 @@ Rendering::VisualEffectInstance* Rendering::Texture3DEffect
 	::CreateUniqueInstance (Texture3D* texture, ShaderFlags::SamplerFilter filter,ShaderFlags::SamplerCoordinate coordinate0,
 							ShaderFlags::SamplerCoordinate coordinate1,ShaderFlags::SamplerCoordinate coordinate2)
 {
-    Texture3DEffect* effect = CoreTools::New0 < Texture3DEffect>();
+    const Texture3DEffect* effect = CoreTools::New0 < Texture3DEffect>();
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
@@ -144,9 +154,9 @@ void Rendering::Texture3DEffect
 	auto pass = GetTechnique(0)->GetPass(0);
 	auto vshader = pass->GetVertexShader();
 	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().GetData());
+	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -156,9 +166,9 @@ void Rendering::Texture3DEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().GetData());
+	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -197,7 +207,7 @@ int Rendering::Texture3DEffect
 
 int Rendering::Texture3DEffect::msDx9VRegisters[1]  { 0 };
 int Rendering::Texture3DEffect::msOglVRegisters[1]  { 1 };
-int* Rendering::Texture3DEffect::msVRegisters[ShaderFlags::MaxProfiles] 
+int* Rendering::Texture3DEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msDx9VRegisters,
@@ -206,7 +216,7 @@ int* Rendering::Texture3DEffect::msVRegisters[ShaderFlags::MaxProfiles]
     msOglVRegisters
 };
 
-std::string Rendering::Texture3DEffect::msVPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::Texture3DEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // VP_NONE
     "",
@@ -267,7 +277,7 @@ std::string Rendering::Texture3DEffect::msVPrograms[ShaderFlags::MaxProfiles]
 };
 
 int Rendering::Texture3DEffect::msAllPTextureUnits[1] = { 0 };
-int* Rendering::Texture3DEffect::msPTextureUnits[ShaderFlags::MaxProfiles]  
+int* Rendering::Texture3DEffect::msPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]  
 {
     0,
     msAllPTextureUnits,
@@ -276,7 +286,7 @@ int* Rendering::Texture3DEffect::msPTextureUnits[ShaderFlags::MaxProfiles]
     msAllPTextureUnits
 };
 
-std::string Rendering::Texture3DEffect::msPPrograms[ShaderFlags::MaxProfiles]  
+std::string Rendering::Texture3DEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]  
 {
     // PP_NONE
     "",
@@ -306,3 +316,4 @@ std::string Rendering::Texture3DEffect::msPPrograms[ShaderFlags::MaxProfiles]
     "END\n"
 };
 
+#include STSTEM_WARNING_POP

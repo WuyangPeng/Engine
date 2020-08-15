@@ -20,7 +20,12 @@
 using std::string;
 using std::vector;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26473)
 CORE_TOOLS_RTTI_DEFINE(Rendering,Spatial);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Spatial);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Spatial);
@@ -71,7 +76,7 @@ bool Rendering::Spatial
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::Spatial
-	::SetParent(Spatial* parent)
+	::SetParent(Spatial* parent) noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -91,7 +96,7 @@ bool Rendering::Spatial
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
-    auto result = UpdateWorldData(applicationTime);
+const auto result = UpdateWorldData(applicationTime);
     UpdateWorldBound();
     if (initiator)
     {
@@ -135,8 +140,7 @@ void Rendering::Spatial
     }
 }
 
-Rendering::Spatial* Rendering::Spatial
-    ::GetParent ()
+Rendering::Spatial* Rendering::Spatial ::GetParent() noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -144,7 +148,7 @@ Rendering::Spatial* Rendering::Spatial
 }
 
 const Rendering::Spatial* Rendering::Spatial
-	::GetParent() const
+	::GetParent() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -156,7 +160,7 @@ void Rendering::Spatial
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
-    auto cullingMode = m_SpatialDataPtr->GetCullingMode();
+ const auto cullingMode = m_SpatialDataPtr->GetCullingMode();
     
     if (cullingMode == CullingMode::Always)
     {
@@ -168,7 +172,7 @@ void Rendering::Spatial
         noCull = true;
     }
 
-	auto savePlaneState = culler.GetPlaneState();
+const auto savePlaneState = culler.GetPlaneState();
     if (noCull || culler.IsVisible(m_SpatialDataPtr->GetWorldBound()))
     {
         GetVisibleSet(culler, noCull);
@@ -292,7 +296,7 @@ uint64_t Rendering::Spatial
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+const auto uniqueID = ParentType::Register(target);
     
     // m_Parent不需要注册，由于parent本身必须发起注册调用其孩子,“this”就是其中之一。
     return uniqueID;
@@ -390,3 +394,4 @@ void Rendering::Spatial
 	m_SpatialDataPtr->SetWorldTransformOnUpdate(transform);
 }
 
+#include STSTEM_WARNING_POP

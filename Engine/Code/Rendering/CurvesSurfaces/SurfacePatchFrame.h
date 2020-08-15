@@ -29,10 +29,10 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 
-		const APoint GetPosition() const;
-		const AVector GetTangent0() const;
-		const AVector GetTangent1() const;
-		const AVector GetNormal() const;
+		const APoint GetPosition() const noexcept;
+		const AVector GetTangent0() const noexcept;
+		const AVector GetTangent1() const noexcept;
+		const AVector GetNormal() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(SurfacePatchFrame);

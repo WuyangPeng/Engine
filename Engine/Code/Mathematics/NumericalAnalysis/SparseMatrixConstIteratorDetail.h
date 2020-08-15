@@ -11,10 +11,12 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 template <typename Real>
 Mathematics::SparseMatrixConstIterator<Real>
-	::SparseMatrixConstIterator()
+	::SparseMatrixConstIterator() noexcept
 	:m_Iter{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -22,7 +24,7 @@ Mathematics::SparseMatrixConstIterator<Real>
 
 template <typename Real>
 Mathematics::SparseMatrixConstIterator<Real>
-	::SparseMatrixConstIterator(const SparseMatrixConstIter& iter)
+	::SparseMatrixConstIterator(const SparseMatrixConstIter& iter) noexcept
 	:m_Iter{ iter }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -82,5 +84,5 @@ const typename  Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixIndexM
 
 	return m_Iter->second;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_DETAIL_H

@@ -15,7 +15,9 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <type_traits> 
 #include "CoreTools/ClassInvariant/Noexcept.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 template <typename T>
 Rendering::Colour<T>
 	::Colour(T red,T green,T blue,T alpha)
@@ -134,7 +136,7 @@ Rendering::Colour<T>& Rendering::Colour<T>
 	}
 	catch(boost::bad_numeric_cast&)
 	{
-        THROW_EXCEPTION(SYSTEM_TEXT("颜色数据转换失败。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("颜色数据转换失败。"s));
 	}
 
     return *this;
@@ -526,5 +528,5 @@ std::ostream& Rendering
 
 	return os;
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_DATA_TYPES_COLOUR_DETAIL_H

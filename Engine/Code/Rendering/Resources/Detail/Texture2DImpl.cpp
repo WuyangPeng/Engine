@@ -18,7 +18,16 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include <vector>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26473)
+#include SYSTEM_WARNING_DISABLE(26492)
 using std::vector;
 
 Rendering::Texture2DImpl
@@ -50,8 +59,8 @@ void Rendering::Texture2DImpl
     m_TextureLevelData.SetDimension(0,0,dimension0);
     m_TextureLevelData.SetDimension(1,0,dimension1);
     
-    auto maxLevels = GetMaxLevels();
-	auto numLevels = GetNumLevels();
+   const auto maxLevels = GetMaxLevels();
+    const auto numLevels = GetNumLevels();
     
     RENDERING_ASSERTION_0(0 <= numLevels && numLevels <= maxLevels, "numLevels无效！\n");
     
@@ -67,7 +76,7 @@ int Rendering::Texture2DImpl
 {
 	auto logDimension0 = Mathematics::BitHacks::Log2OfPowerOfTwo(GetWidth());
 	auto logDimension1 = Mathematics::BitHacks::Log2OfPowerOfTwo(GetHeight());
-	auto maxLevels = logDimension0 <= logDimension1 ? logDimension1 + 1 :  logDimension0 + 1;
+        const auto maxLevels = logDimension0 <= logDimension1 ? logDimension1 + 1 : logDimension0 + 1;
     
     return maxLevels;
 }
@@ -76,10 +85,10 @@ int Rendering::Texture2DImpl
 void Rendering::Texture2DImpl
     ::ComputeNumLevelBytes ()
 {
-	auto type = GetTextureType();
+    const auto type = GetTextureType();
 	auto dimension0 = GetWidth ();
 	auto dimension1 = GetHeight ();
-	auto numLevels = GetNumLevels();
+        const auto numLevels = GetNumLevels();
     
     for (auto level = 0; level < numLevels; ++level)
     {
@@ -106,7 +115,7 @@ void Rendering::Texture2DImpl
 int Rendering::Texture2DImpl
     ::CalculateNumLevelBytes(int dimension0,int dimension1)
 {
-	auto format = GetFormat();
+    const auto format = GetFormat();
     
     if (format == TextureFormat::DXT1)
     {
@@ -148,8 +157,9 @@ int Rendering::Texture2DImpl
 void Rendering::Texture2DImpl
     ::VerifyNumLevels()
 {
-	auto format = GetFormat();
-	auto numLevels = GetNumLevels();
+    CoreTools::DoNothing();
+    const auto format = GetFormat();
+    const auto numLevels = GetNumLevels();
     
     if (format == TextureFormat::R32F || format == TextureFormat::G32R32F || format == TextureFormat::A32B32G32R32F)
     {
@@ -169,16 +179,12 @@ void Rendering::Texture2DImpl
     }
 }
 
-Rendering::Texture2DImpl
-    ::~Texture2DImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Texture2DImpl)
 
 int Rendering::Texture2DImpl
-    ::GetNumDimensions () const
+    ::GetNumDimensions () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -201,8 +207,7 @@ int Rendering::Texture2DImpl
     return m_TextureLevelData.GetNumLevelBytes (level);
 }
 
-int Rendering::Texture2DImpl
-    ::GetNumTotalBytes () const
+int Rendering::Texture2DImpl ::GetNumTotalBytes() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -236,15 +241,15 @@ int Rendering::Texture2DImpl
 void Rendering::Texture2DImpl
 	::DoGenerateMipmaps()
 {
-	auto numLevels = GetNumLevels();
+const	auto numLevels = GetNumLevels();
 	auto width = GetWidth();
 	auto height = GetHeight();
 	auto texels = GetWriteData();
     for (auto level = 1; level < numLevels; ++level)
     {
 		auto texelsNext = GetTextureData(level);
-		auto widthNext = GetDimension(0,level);
-		auto heightNext = GetDimension(1,level);
+        const auto widthNext = GetDimension(0, level);
+                const auto heightNext = GetDimension(1, level);
 
         GenerateNextMipmap(width, height,texels, widthNext,heightNext, texelsNext);
 
@@ -278,7 +283,7 @@ void Rendering::Texture2DImpl
     // 用于临时存储生成的mipmaps。
 	vector<FloatColour> colour(width * height);
     
-	auto format = GetFormat();
+const	auto format = GetFormat();
     
 	// 像素从原生格式转换为32位RGBA。
 	auto fromFunction = ColourConvertFrom::sm_FromFunction[System::EnumCastUnderlying(format)];
@@ -288,7 +293,7 @@ void Rendering::Texture2DImpl
     
     if(fromFunction != nullptr && toFunction != nullptr)
     {
-		auto numTexels = width * height;
+        const auto numTexels = width * height;
         
         fromFunction(numTexels, texels, &colour[0]);
         
@@ -297,9 +302,9 @@ void Rendering::Texture2DImpl
         {
             for (auto widthIndex = 0; widthIndex < widthNext; ++widthIndex)
             {
-				auto index = widthIndex + widthNext * heightIndex;
-				auto base = 2 * (widthIndex + width * heightIndex);
-				size_t fourthIndex = boost::numeric_cast<size_t>( base + width + 1);
+                const auto index = widthIndex + widthNext * heightIndex;
+                const auto base = 2 * (widthIndex + width * heightIndex);
+                const size_t fourthIndex = boost::numeric_cast<size_t>(base + width + 1);
                 
 				if(fourthIndex < colour.size())
 				{
@@ -313,7 +318,7 @@ void Rendering::Texture2DImpl
         }
 
 
-		auto numTexelsNext = widthNext * heightNext;
+	const auto numTexelsNext = widthNext * heightNext;
         
         toFunction(numTexelsNext,  &colour[0], texelsNext);
     }  
@@ -353,3 +358,4 @@ void Rendering::Texture2DImpl
 	m_TextureLevelData.ReadFromFile(inFile);
 }
 
+#include STSTEM_WARNING_POP

@@ -22,11 +22,11 @@ Rendering::PrincipalCurvatureInfo
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, PrincipalCurvatureInfo)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PrincipalCurvatureInfo,GetPrincipalCurvature0, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PrincipalCurvatureInfo,GetPrincipalCurvature0, float)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PrincipalCurvatureInfo,GetPrincipalCurvature1,float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PrincipalCurvatureInfo, GetPrincipalCurvature1, float)
  
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PrincipalCurvatureInfo,GetPrincipalDirection0,const Rendering::PrincipalCurvatureInfo::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PrincipalCurvatureInfo, GetPrincipalDirection0, const Rendering::PrincipalCurvatureInfo::AVector)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PrincipalCurvatureInfo,GetPrincipalDirection1,const Rendering::PrincipalCurvatureInfo::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PrincipalCurvatureInfo, GetPrincipalDirection1, const Rendering::PrincipalCurvatureInfo::AVector)

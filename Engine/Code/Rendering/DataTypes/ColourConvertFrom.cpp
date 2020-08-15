@@ -10,7 +10,14 @@
 #include "ColourDetail.h"
 #include "HalfFloat.h"
 #include "ColourTextureFormatTraits.h" 
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26472)
 void Rendering::ColourConvertFrom
     ::ConvertFromR5G6B5 (int numOutTexels, const char* inTexels,FloatColour* outTexels)
 {
@@ -69,8 +76,8 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto alpha = *source;
-		ByteColour colour{ 0,0,0,alpha };
+		const auto alpha = *source;
+		const ByteColour colour{ 0,0,0,alpha };
         *target = colour;
         
         ++source;
@@ -85,8 +92,8 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto luminance = *source;
-		ByteColour colour{ luminance,luminance,luminance,static_cast<unsigned char>( ColourTextureFormatTraits<TextureFormat::L8>::sm_AlphaMaxValue) };
+		const auto luminance = *source;
+		const ByteColour colour{ luminance,luminance,luminance,static_cast<unsigned char>( ColourTextureFormatTraits<TextureFormat::L8>::sm_AlphaMaxValue) };
         *target = colour;
         
         ++source;
@@ -101,9 +108,9 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto luminance = *source++;
-		auto alpha = *source++;
-		ByteColour colour{ luminance,luminance, luminance,alpha };
+		const auto luminance = *source++;
+		const auto alpha = *source++;
+		const ByteColour colour{ luminance,luminance, luminance,alpha };
         *target = colour;
         
         ++target;
@@ -118,10 +125,10 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto blue = *source++;
-		auto green = *source++;
-		auto red = *source++;
-		ByteColour colour{ red,green,blue,0 };
+		const auto blue = *source++;
+		const auto green = *source++;
+		const auto red = *source++;
+		const ByteColour colour{ red,green,blue,0 };
         *target = colour;
         
         ++target;
@@ -135,11 +142,11 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto blue = *source++;
-		auto green = *source++;
-		auto red = *source++;
-		auto alpha = *source++;
-		ByteColour colour{ red,green,blue,alpha };
+		const auto blue = *source++;
+		const auto green = *source++;
+		const auto red = *source++;
+		const auto alpha = *source++;
+		const ByteColour colour{ red,green,blue,alpha };
         *target = colour;
         
         ++target;
@@ -153,11 +160,11 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto red = *source++;
-		auto green = *source++;
-		auto blue = *source++;
-		auto alpha = *source++;
-		ByteColour colour{ red,green,blue,alpha };
+		const auto red = *source++;
+		const auto green = *source++;
+		const auto blue = *source++;
+		const auto alpha = *source++;
+		const ByteColour colour{ red,green,blue,alpha };
         *target = colour;
         
         ++target;
@@ -171,7 +178,7 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto luminance = static_cast<float>(*source) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::L16>::sm_LuminanceMaxValue);
+		const auto luminance = static_cast<float>(*source) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::L16>::sm_LuminanceMaxValue);
         
         target->SetRed(luminance);
         target->SetGreen(luminance);
@@ -190,8 +197,8 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto red = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::G16R16>::sm_RedMaxValue);
-		auto green = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::G16R16>::sm_GreenMaxValue);
+		const auto red = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::G16R16>::sm_RedMaxValue);
+		const auto green = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::G16R16>::sm_GreenMaxValue);
         
         target->SetRed(red);
         target->SetGreen(green);
@@ -209,10 +216,10 @@ void Rendering::ColourConvertFrom
 	auto target = outTexels;
     for (auto i = 0; i < numOutTexels; ++i)
     {
-		auto red = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_RedMaxValue);
-		auto green = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_GreenMaxValue);
-		auto blue = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_BlueMaxValue);
-		auto alpha = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_AlphaMaxValue);
+		const auto red = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_RedMaxValue);
+		const auto green = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_GreenMaxValue);
+		const auto blue = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_BlueMaxValue);
+		const auto alpha = static_cast<float>(*source++) / static_cast<float>(ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_AlphaMaxValue);
         
         target->SetRed(red);
         target->SetGreen(green);
@@ -232,7 +239,7 @@ void Rendering::ColourConvertFrom
     {
         HalfFloat halfFloat;
 		halfFloat.FromHalfFloatType(*source);
-		auto red = halfFloat.ToFloat();
+		const auto red = halfFloat.ToFloat();
         
         target->SetRed(red);
         target->SetGreen(0.0f);
@@ -253,10 +260,10 @@ void Rendering::ColourConvertFrom
     {
 		HalfFloat halfFloat;
 		halfFloat.FromHalfFloatType(*source++);
-		auto red = halfFloat.ToFloat();
+		const auto red = halfFloat.ToFloat();
 
 		halfFloat.FromHalfFloatType(*source++);
-		auto green = halfFloat.ToFloat();
+		const auto green = halfFloat.ToFloat();
 
         target->SetRed(red);
         target->SetGreen(green);
@@ -276,16 +283,16 @@ void Rendering::ColourConvertFrom
     {
 		HalfFloat halfFloat;
 		halfFloat.FromHalfFloatType(*source++);
-		auto red = halfFloat.ToFloat();
+		const auto red = halfFloat.ToFloat();
 
 		halfFloat.FromHalfFloatType(*source++);
-		auto green = halfFloat.ToFloat();
+		const auto green = halfFloat.ToFloat();
 
 		halfFloat.FromHalfFloatType(*source++);
-		auto blue = halfFloat.ToFloat();
+		const auto blue = halfFloat.ToFloat();
 
 		halfFloat.FromHalfFloatType(*source++);
-		auto alpha = halfFloat.ToFloat();
+		const auto alpha = halfFloat.ToFloat();
 
         target->SetRed(red);
         target->SetGreen(green);
@@ -372,3 +379,4 @@ Rendering::ColourConvertFrom::ConvertFromFunction
     nullptr,
     nullptr
 };
+#include STSTEM_WARNING_POP

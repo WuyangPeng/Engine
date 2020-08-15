@@ -13,7 +13,11 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446) 
+#include SYSTEM_WARNING_DISABLE(26455) 
+#include SYSTEM_WARNING_DISABLE(26472) 
 Rendering::DlodNodeImpl
 	::DlodNodeImpl()
 	: m_ModelLodCenter{}, m_WorldLodCenter{}, m_NumLevelsOfDetail{ 0 }, m_ModelMinDistance{}, m_ModelMaxDistance{}, m_WorldMinDistance{}, m_WorldMaxDistance{}
@@ -93,7 +97,7 @@ int Rendering::DlodNodeImpl
 }
 
 const Rendering::DlodNodeImpl::APoint Rendering::DlodNodeImpl
-	::GetModelCenter() const
+	::GetModelCenter() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	
@@ -101,7 +105,7 @@ const Rendering::DlodNodeImpl::APoint Rendering::DlodNodeImpl
 }
 
 const Rendering::DlodNodeImpl::APoint Rendering::DlodNodeImpl
-	::GetWorldCenter() const
+	::GetWorldCenter() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -109,7 +113,7 @@ const Rendering::DlodNodeImpl::APoint Rendering::DlodNodeImpl
 }
 
 void Rendering::DlodNodeImpl
-	::SetModelCenter(const APoint& modelCenter)
+	::SetModelCenter(const APoint& modelCenter) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -117,7 +121,7 @@ void Rendering::DlodNodeImpl
 }
 
 int Rendering::DlodNodeImpl
-	::GetNumLevelsOfDetail() const
+	::GetNumLevelsOfDetail() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -181,7 +185,7 @@ void Rendering::DlodNodeImpl
 }
 
 void Rendering::DlodNodeImpl
-	::SetWorldDistance( float uniformScale )
+	::SetWorldDistance( float uniformScale ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -191,3 +195,4 @@ void Rendering::DlodNodeImpl
 		m_WorldMaxDistance[i] = uniformScale * m_ModelMaxDistance[i];
 	}
 }
+#include STSTEM_WARNING_POP

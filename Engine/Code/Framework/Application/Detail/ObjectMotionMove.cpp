@@ -25,8 +25,7 @@ Framework::ObjectMotionMove
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, ObjectMotionMove)
 
-const Framework::ObjectMotionMove::AVector Framework::ObjectMotionMove
-	::GetAxis() const
+const Framework::ObjectMotionMove::AVector Framework::ObjectMotionMove ::GetAxis() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
@@ -41,8 +40,7 @@ float Framework::ObjectMotionMove
 	return m_Angle;
 }
 
-const Framework::ObjectMotionMove::Matrix Framework::ObjectMotionMove
-	::GetRotate() const
+const Framework::ObjectMotionMove::Matrix Framework::ObjectMotionMove ::GetRotate() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

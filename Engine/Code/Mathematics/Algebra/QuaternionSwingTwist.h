@@ -23,7 +23,7 @@ namespace Mathematics
 		using Quaternion = Quaternion<Real>;
 
 	public:
-		QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist);
+		QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

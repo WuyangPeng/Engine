@@ -19,12 +19,12 @@ namespace Rendering
 	public:
 		using ClassType = ControllerInterface;
         using ParentType = Object;
-		using ControllerInterfaceSmartPointer = CoreTools::ThirdSubclassSmartPointer<ClassType>;
-	    using ConstControllerInterfaceSmartPointer = CoreTools::ConstThirdSubclassSmartPointer<ClassType>;
+		using ControllerInterfaceSmartPointer = std::shared_ptr<ClassType>;
+	    using ConstControllerInterfaceSmartPointer = std::shared_ptr<const ClassType>;
 
 	public:
 		ControllerInterface();
-		virtual ~ControllerInterface();
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
                 
@@ -37,8 +37,8 @@ namespace Rendering
 
 		virtual bool Update (double applicationTime) = 0;
 
-		virtual void AttachController (ControllerInterfaceSmartPointer& controller);
-		virtual void DetachController (ControllerInterfaceSmartPointer& controller);
+		virtual void AttachController (ControllerInterfaceSmartPointer  controller);
+		virtual void DetachController (ControllerInterfaceSmartPointer  controller);
 
 		virtual ControllerInterfaceSmartPointer Clone() const = 0;
 

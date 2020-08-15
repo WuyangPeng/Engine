@@ -15,7 +15,9 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 template <typename Real>
 Mathematics::Polyhedron3<Real>
 	::Polyhedron3(int numVertices, Vector3DPtr vertices, int numTriangles, IntPtr indices)
@@ -37,16 +39,25 @@ template <typename Real>
 bool Mathematics::Polyhedron3<Real>
 	::IsValid() const noexcept
 {
-	if (4 <= m_NumVertices && m_Vertices != nullptr &&
-		4 <= m_NumTriangles && m_NumIndices == m_NumTriangles * 3 &&
-		m_Indices != nullptr && IndicesIsValid())
+	try
 	{
-		return true;
+            if (4 <= m_NumVertices && m_Vertices != nullptr &&
+                4 <= m_NumTriangles && m_NumIndices == m_NumTriangles * 3 &&
+                m_Indices != nullptr && IndicesIsValid())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 	}
-	else
+	catch (...)
 	{
-		return false;
+            return false;
 	}
+	 
+	
 }
 
 template <typename Real>
@@ -68,7 +79,7 @@ bool Mathematics::Polyhedron3<Real>
 
 template <typename Real>
 int Mathematics::Polyhedron3<Real>
-	::GetNumVertices() const
+	::GetNumVertices() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
@@ -96,7 +107,7 @@ const typename Mathematics::Polyhedron3<Real>::Vector3D& Mathematics::Polyhedron
 
 template <typename Real>
 int Mathematics::Polyhedron3<Real>
-	::GetNumTriangles() const
+	::GetNumTriangles() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
@@ -205,7 +216,7 @@ Real Mathematics::Polyhedron3<Real>
 
 	return volume;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_OBJECTS3D_POLYHEDRON3_DETAIL_H
 
 

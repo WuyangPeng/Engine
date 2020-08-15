@@ -12,7 +12,10 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 template <typename Real>
 Mathematics::Triangle3<Real>
 	::Triangle3(const Vector3D& firstVector, const Vector3D& secondVector, const Vector3D& thirdVector)
@@ -76,7 +79,7 @@ typename const Mathematics::Triangle3<Real>::Vector3D Mathematics::Triangle3<Rea
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"s));
 	}
 }
 
@@ -280,6 +283,6 @@ Real Mathematics::Triangle3<Real>
 
 	return Math::Sqrt(Math::FAbs(sqrDistance));
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_OBJECTS3D_TRIANGLE3_DETAIL_H
 

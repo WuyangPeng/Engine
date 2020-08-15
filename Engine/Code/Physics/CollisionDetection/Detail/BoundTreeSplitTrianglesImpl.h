@@ -30,8 +30,8 @@ namespace Physics
 
 		CLASS_INVARIANT_DECLARE;
 	
-		int GetFirstOutSplitIndex() const;
-		int GetSecondOutSplitIndex() const;
+		int GetFirstOutSplitIndex() const noexcept;
+                int GetSecondOutSplitIndex() const noexcept;
 		const Split GetOutSplit() const;
 
 	private:

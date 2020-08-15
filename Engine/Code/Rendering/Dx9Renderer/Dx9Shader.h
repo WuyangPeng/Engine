@@ -24,8 +24,8 @@ namespace Rendering
 		// and PdrPixelShader.  Both classes hide the base-class destructor.  This
 		// is not a problem because the derived-class destructors are called
 		// explicitly when the shaders are destroyed by Renderer.
-		Dx9Shader();
-		~Dx9Shader();
+            Dx9Shader() noexcept;
+ ;
 
 	protected:
 		void SetSamplerState(Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, 

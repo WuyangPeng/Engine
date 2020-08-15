@@ -32,21 +32,21 @@ namespace Mathematics
 
 		int GetShifting() const;
 		uint64_t GetMantissa() const;
-		NumericalValueSymbol GetSymbol() const;
+		NumericalValueSymbol GetSymbol() const noexcept;
 		int GetMaxMantissaBit() const;
-		uint64_t GetShiftingMantissa() const;
-		int GetBeginBlock() const;
+		uint64_t GetShiftingMantissa() const noexcept;
+		int GetBeginBlock() const noexcept;
 
-		int GetMantissaSize() const;
-		int GetCopySize() const;
+		int GetMantissaSize() const noexcept;
+		int GetCopySize() const noexcept;
 
 	private:
 		void Init(T value, const SignedIntegerType&);
 		void Init(T value, const UnsignedIntegerType&);
 		void Init(T value, const FloatType&);
 		void Init(T value, const DoubleType&);
-		void Amendment();
-		void ShiftingMantissa();
+		void Amendment() noexcept;
+		void ShiftingMantissa() noexcept;
 
 	private:
 		int m_Shifting;

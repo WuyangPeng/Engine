@@ -29,7 +29,11 @@ namespace Rendering
     public:
         PlatformVertexFormat (Renderer* renderer, const VertexFormat* vertexFormat);
         ~PlatformVertexFormat ();
-
+		PlatformVertexFormat(const PlatformVertexFormat&) = delete;
+		PlatformVertexFormat& operator=(const PlatformVertexFormat&) = delete;
+		PlatformVertexFormat( PlatformVertexFormat&&) = delete;
+		PlatformVertexFormat& operator=( PlatformVertexFormat&&) = delete;
+		
 		CLASS_INVARIANT_DECLARE;
 
         // 顶点格式操作。

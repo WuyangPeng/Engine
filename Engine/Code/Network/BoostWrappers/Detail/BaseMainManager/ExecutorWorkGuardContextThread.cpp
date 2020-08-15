@@ -11,6 +11,10 @@
 
 using std::make_unique;
 
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::ExecutorWorkGuardContextThread
 	::ExecutorWorkGuardContextThread()
 	:m_ExecutorWorkGuardContext{}, m_Thread{}
@@ -19,19 +23,19 @@ Network::ExecutorWorkGuardContextThread
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_POP
 
 Network::ExecutorWorkGuardContextThread
 	::~ExecutorWorkGuardContextThread()
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 
-	JoinThreads();
+	CoreTools::NoexceptNoReturn(*this,&ClassType::JoinThreads);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ExecutorWorkGuardContextThread)
 
-Network::IOContextType& Network::ExecutorWorkGuardContextThread
-	::GetIOContext()
+Network::IOContextType& Network::ExecutorWorkGuardContextThread ::GetIOContext() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 

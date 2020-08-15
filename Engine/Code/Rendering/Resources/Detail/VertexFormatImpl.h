@@ -48,7 +48,7 @@ namespace Rendering
 		
 		void SetStride (int stride);		
 		
-		int GetNumAttributes () const;
+		int GetNumAttributes () const noexcept;
 		
 		unsigned int GetStreamIndex (int attribute) const;
 		unsigned int GetOffset (int attribute) const;
@@ -56,13 +56,13 @@ namespace Rendering
 		AttributeUsage GetAttributeUsage (int attribute) const;
 		unsigned int GetUsageIndex (int attribute) const;		
 		
-		int GetStride () const;	
+		int GetStride () const noexcept;	
 
-		int GetIndex (AttributeUsage usage, unsigned int usageIndex = 0) const;
+		int GetIndex(AttributeUsage usage, unsigned int usageIndex = 0) const noexcept;
 		
-		static int GetComponentSize (AttributeType type);
-		static int GetNumComponents (AttributeType type);
-		static int GetTypeSize (AttributeType type);
+		static int GetComponentSize (AttributeType type) noexcept;
+		static int GetNumComponents (AttributeType type) noexcept;
+		static int GetTypeSize (AttributeType type) noexcept;
 
 		int GetStreamingSize () const;
 		void Save (BufferTarget& target) const;

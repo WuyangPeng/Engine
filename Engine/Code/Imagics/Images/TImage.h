@@ -31,19 +31,22 @@ namespace Imagics
 		TImage (int numDimensions, int* bounds, T* data = 0);
 		TImage (const TImage& image);
 		TImage (const char* filename);
-		virtual ~TImage ();
+		  ~TImage ();
 		
 		// Data access.
-		T* GetData () const;
-		T& operator[] (int i) const;
+		T* GetData () const noexcept;
+		T& operator[] (int i) const noexcept;
 		
 		// Assignment.
 		TImage& operator= (const TImage& image);
-		TImage& operator= (T value);
+		TImage& operator= (T value) noexcept;
+
+		TImage& operator=(TImage&& image) = default;
+        TImage(TImage&& image) = default;
 		
 		// Comparison.
-		bool operator== (const TImage& image) const;
-		bool operator!= (const TImage& image) const;
+        bool operator==(const TImage& image) const noexcept;
+        bool operator!=(const TImage& image) const noexcept;
 		
 		// Streaming.
 		bool Load (const char* filename);
@@ -54,7 +57,7 @@ namespace Imagics
 		TImage (int numDimensions);
 		void SetData (T* data);
 		
-		T* mData;
+		T* mData = nullptr;
 	};
 }
 

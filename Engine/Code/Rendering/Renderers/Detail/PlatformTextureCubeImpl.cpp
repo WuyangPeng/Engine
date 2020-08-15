@@ -13,9 +13,11 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
 Rendering::PlatformTextureCubeImpl
-	::PlatformTextureCubeImpl()	
+	::PlatformTextureCubeImpl()	noexcept
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -57,3 +59,5 @@ Rendering::PlatformTextureCubeImpl::PlatformTextureCubePtr Rendering::PlatformTe
 {
     return make_shared <OpenGLTextureCube>(renderer, textureCube);
 }
+
+#include STSTEM_WARNING_POP

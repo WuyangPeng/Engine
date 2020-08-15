@@ -10,6 +10,10 @@
 #include "MessageInterface.h"
 
 using std::string;
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 
 bool Network::MessageInterfaceSharedPtrLess
 	::operator()(const ConstMessageInterfaceSharedPtr& lhs, const ConstMessageInterfaceSharedPtr& rhs)
@@ -25,3 +29,4 @@ bool Network::MessageInterfaceSharedPtrLess
 	else
 		return string{ lhs->GetRttiType().GetName() } < string{ rhs->GetRttiType().GetName() };
 }
+#include STSTEM_WARNING_POP

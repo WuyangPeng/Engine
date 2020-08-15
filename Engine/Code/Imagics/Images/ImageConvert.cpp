@@ -9,7 +9,14 @@
 #include "Element.h"
 #include "ImageConvert.h"
 #include "Imagics/Helper/ImageConvertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26440)
 namespace Imagics
 {
 	IMAGICS_IMAGE_CONVERTER(char, uchar)
@@ -349,3 +356,4 @@ void Imagics
 }
 
  
+#include STSTEM_WARNING_POP

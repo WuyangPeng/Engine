@@ -33,7 +33,7 @@ void Rendering::RendererParameter
 		AnalysisRendererParameterManager manager{ fileName };
 	    m_Impl = manager.GetRendererParameterPtr();
 	}
-	catch (ptree_error& error)
+	catch (const ptree_error& error)
 	{
 		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
 			<< error.what()
@@ -54,22 +54,22 @@ void Rendering::RendererParameter
 	DoLoadConfiguration(fileName);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetColorFormat,Rendering::TextureFormat)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetColorFormat, Rendering::TextureFormat)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetDepthStencilFormat,Rendering::TextureFormat)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetNumMultisamples,int); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetDepthStencilFormat, Rendering::TextureFormat)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetNumMultisamples, int); 
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetClearColor,Rendering::RendererParameter::Colour);  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,GetClearColor,Rendering::RendererParameter::Colour);  
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetWindowTitle,const string); 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetXPosition,int);  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetYPosition,int);  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetWidth,int); 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetHeight,int); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,GetXPosition,int);  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,GetYPosition,int);  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,GetWidth,int); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,GetHeight,int); 
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,IsAllowResize,bool); 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetRendererType,Rendering::RendererTypes);  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,IsAllowResize,bool); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,GetRendererType,Rendering::RendererTypes);  
 
  
 
@@ -81,12 +81,12 @@ void Rendering::RendererParameter
 	return m_Impl->Resize(width,height);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RendererParameter,GetRendererBasis,const Rendering::RendererBasis);  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,GetRendererBasis,const Rendering::RendererBasis);  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowMenuName, System::String);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowClassName, System::String);
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetIcon, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, IsIconDefault, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetCursor, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, IsCursorDefault, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetBackground, System::WindowBrushTypes); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetIcon, int);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, IsIconDefault, bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetCursor, int);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, IsCursorDefault, bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetBackground, System::WindowBrushTypes); 

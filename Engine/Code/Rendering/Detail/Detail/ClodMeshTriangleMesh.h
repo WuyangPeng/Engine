@@ -25,17 +25,17 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetNumVertices() const;
-		int GetNumIndices() const;
-		int GetNumTriangles() const;
+		int GetNumVertices() const noexcept;
+		int GetNumIndices() const noexcept;
+		int GetNumTriangles() const noexcept;
 
 		bool ValidBuffers() const;
-		const int* GetIndexBufferReadOnlyData() const;
+                const int* GetIndexBufferReadOnlyData() const noexcept;
 
-		const Mathematics::Vector3Df GetPosition(int index) const;
+		const Mathematics::Vector3Df GetPosition(int index) const noexcept;
 
-		const char* GetVertexBufferReadOnlyData() const;
-		int GetStride() const;
+		const char* GetVertexBufferReadOnlyData() const noexcept;
+                int GetStride() const noexcept;
 
 		void SetNewVertexBufferData(const std::vector<char>& newData);
 		void SetNewIndexBufferData(const std::vector<char>& newData);

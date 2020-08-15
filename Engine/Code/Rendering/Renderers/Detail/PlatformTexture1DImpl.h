@@ -25,8 +25,12 @@ namespace Rendering
 		using PlatformTexture1DPtr = std::shared_ptr<ClassType>;
 
 	public:
-		PlatformTexture1DImpl();
+		PlatformTexture1DImpl() noexcept;
 		virtual ~PlatformTexture1DImpl();
+                PlatformTexture1DImpl(const PlatformTexture1DImpl&) = default;
+                PlatformTexture1DImpl& operator=(const PlatformTexture1DImpl&) = default;
+                PlatformTexture1DImpl(PlatformTexture1DImpl&&) = default;
+                PlatformTexture1DImpl& operator=(PlatformTexture1DImpl&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

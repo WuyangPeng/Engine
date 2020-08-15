@@ -22,7 +22,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TransformController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TransformController); 
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TransformController);
@@ -44,9 +47,9 @@ COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering,TransformController)
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, TransformController) 
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetTransform,Transform,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController,SetTransform,Transform,void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TransformController,GetTransform,const Rendering::Transform)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TransformController,GetTransform,const Rendering::Transform)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetTranslate, APoint,void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetRotate, Matrix,void)
@@ -97,7 +100,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::TransformController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
  
 Rendering::TransformController
@@ -175,3 +178,4 @@ void Rendering::TransformController
 
 
 
+#include STSTEM_WARNING_POP

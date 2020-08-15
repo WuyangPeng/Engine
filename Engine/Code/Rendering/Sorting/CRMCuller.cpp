@@ -8,17 +8,17 @@
 
 #include "CRMCuller.h" 
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+ #include SYSTEM_WARNING_DISABLE(26455)
 Rendering::CRMCuller
-	::CRMCuller(const ConstCameraSmartPointer& camera )
+	::CRMCuller(const ConstCameraSmartPointer& camera )  
     :Culler(camera)
 {
 }
 
-Rendering::CRMCuller
-	::~CRMCuller ()
-{
-}
+ 
 
 void Rendering::CRMCuller
 	::Insert(const VisualSmartPointer& visible)
@@ -30,3 +30,4 @@ void Rendering::CRMCuller
     }
 }
 
+#include STSTEM_WARNING_POP

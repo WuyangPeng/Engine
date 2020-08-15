@@ -41,10 +41,10 @@ namespace Mathematics
 		const Segment2 GetSegment() const;
 
 		// æ≤Ã¨æ‡¿Î≤È—Ø°£
-		virtual const DistanceResult GetSquared() const override;
+		  const DistanceResult GetSquared() const override;
 
 		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£	
-		virtual const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
+		  const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
 	private:
 		const DistanceResult GetSquaredWithClosestPoints(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;

@@ -20,10 +20,10 @@
         virtual const ConstObjectSmartPointerContainer GetAllConstObjectsByName(const std::string& name) const
 
 #define CORE_TOOLS_NAMES_OVERRIDE_DECLARE \
-        virtual const ObjectSmartPointer GetObjectByName(const std::string& name) override; \
-		virtual const ObjectSmartPointerContainer GetAllObjectsByName(const std::string& name) override; \
-		virtual const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const override; \
-        virtual const ConstObjectSmartPointerContainer GetAllConstObjectsByName(const std::string& name) const override
+        const ObjectSmartPointer GetObjectByName(const std::string& name) override; \
+		const ObjectSmartPointerContainer GetAllObjectsByName(const std::string& name) override; \
+		const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const override; \
+        const ConstObjectSmartPointerContainer GetAllConstObjectsByName(const std::string& name) const override
 
 #define CORE_TOOLS_NAMES_IMPL_DECLARE \
         public: using ObjectSmartPointerContainer = std::vector<CoreTools::ObjectSmartPointer>; \
@@ -36,14 +36,14 @@
 #define CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(namespaceName,className) \
 	    const CoreTools::ObjectSmartPointer namespaceName::className::GetObjectByName(const std::string& name) { \
         IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT; auto found = ParentType::GetObjectByName(name); \
-        if (found.IsValidPtr()) { return found; } else { return m_Impl->GetObjectByName(name); } } \
+        if (found) { return found; } else { return m_Impl->GetObjectByName(name); } } \
 		const namespaceName::className::ObjectSmartPointerContainer namespaceName::className::GetAllObjectsByName(const std::string& name) { \
 		IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT; auto parentObjects = ParentType::GetAllObjectsByName(name); \
         auto implObjects = m_Impl->GetAllObjectsByName(name); \
         parentObjects.insert(parentObjects.end(),implObjects.begin(), implObjects.end()); return parentObjects; } \
 		const CoreTools::ConstObjectSmartPointer namespaceName::className::GetConstObjectByName(const std::string& name) const { \
 		CLASS_IS_VALID_CONST_0; auto found = ParentType::GetConstObjectByName(name); \
-		if (found.IsValidPtr()) { return found; } else { return m_Impl->GetConstObjectByName(name); } } \
+		if (found) { return found; } else { return m_Impl->GetConstObjectByName(name); } } \
 		const namespaceName::className::ConstObjectSmartPointerContainer namespaceName::className::GetAllConstObjectsByName(const std::string& name) const { \
 		CLASS_IS_VALID_CONST_0; auto parentObjects = ParentType::GetAllConstObjectsByName(name); \
 		auto implObjects = m_Impl->GetAllConstObjectsByName(name); \

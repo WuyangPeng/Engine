@@ -29,7 +29,7 @@ namespace Framework
 
 		CLASS_INVARIANT_DECLARE;
 
-		const CameraSmartPointer GetCameraPtr();
+		const CameraSmartPointer GetCameraPtr() noexcept;
 
 		bool MoveCamera();
 

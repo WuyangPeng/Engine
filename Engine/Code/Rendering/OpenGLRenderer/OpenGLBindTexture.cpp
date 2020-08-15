@@ -9,9 +9,14 @@
 #include "OpenGLBindTexture.h"
 #include "OpenGLMapping.h"
 #include "System/OpenGL/OpenGLAPI.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26472)
 Rendering::UInt Rendering
-    ::BindTexture (ShaderFlags::SamplerType target, UInt texture)
+    ::BindTexture (ShaderFlags::SamplerType target, UInt texture) noexcept
 {
     Int current = 0;
 	System::GetGlIntegerv(System::OpenGLQuery(g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]),&current);
@@ -21,7 +26,7 @@ Rendering::UInt Rendering
 }
 
 Rendering::UInt Rendering
-    ::GetBoundTexture (ShaderFlags::SamplerType target)
+    ::GetBoundTexture (ShaderFlags::SamplerType target) noexcept
 {
     Int current = 0;
 	System::GetGlIntegerv(System::OpenGLQuery(g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]),&current);
@@ -29,3 +34,4 @@ Rendering::UInt Rendering
     return static_cast<UInt>(current);
 }
 
+#include STSTEM_WARNING_POP

@@ -21,7 +21,7 @@ namespace Network
 		using ClassType = ConfigurationSubStrategyImpl;
 
 	public:
-		ConfigurationSubStrategyImpl();
+		ConfigurationSubStrategyImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

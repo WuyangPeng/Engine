@@ -8,7 +8,12 @@
 #define IMAGICS_IMAGICS_TIMAGE2D_DETAIL_H
 
 #include "TImage2D.h"
-
+#include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+ #include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26429)
 template <typename T>
 Imagics::TImage2D<T>
 	::TImage2D(int xBound, int yBound, T* data)
@@ -37,21 +42,21 @@ Imagics::TImage2D<T>
 
 template <typename T>
 T& Imagics::TImage2D<T>
-	::operator() (int x, int y) const
+	::operator() (int x, int y) const noexcept
 {
     return mData[x + mBounds[0]*y];
 }
 
 template <typename T>
 int Imagics::TImage2D<T>
-	::GetIndex(int x, int y) const
+	::GetIndex(int x, int y) const noexcept
 {
     return x + mBounds[0]*y;
 }
 
 template <typename T>
 void Imagics::TImage2D<T>
-	::GetCoordinates(int index, int& x, int& y) const
+	::GetCoordinates(int index, int& x, int& y) const noexcept
 {
     x = index % mBounds[0];
     y = index / mBounds[0];
@@ -65,10 +70,9 @@ Imagics::TImage2D<T>& Imagics::TImage2D<T>
 }
 
 template <typename T>
-Imagics::TImage2D<T>& Imagics::TImage2D<T>
-	::operator= (T value)
+Imagics::TImage2D<T>& Imagics::TImage2D<T>::operator=(T value) noexcept
 {
     return (TImage2D<T>&) TImage<T>::operator=(value);
 }
-
+#include STSTEM_WARNING_POP
 #endif // IMAGICS_IMAGICS_TIMAGE2D_DETAIL_H

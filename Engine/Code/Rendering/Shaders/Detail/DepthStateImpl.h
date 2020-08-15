@@ -32,7 +32,7 @@ namespace Rendering
 		using ReadFileManager = CoreTools::ReadFileManager;
 
 	public:
-		DepthStateImpl(); 
+                DepthStateImpl() noexcept; 
 
 		CLASS_INVARIANT_DECLARE;
 

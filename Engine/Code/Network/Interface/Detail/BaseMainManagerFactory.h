@@ -22,7 +22,7 @@ namespace Network
 		using ImplTypePtr = std::shared_ptr<ImplType>;
 
 	public:
-		BaseMainManagerFactory();
+		BaseMainManagerFactory() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

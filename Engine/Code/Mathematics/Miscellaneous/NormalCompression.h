@@ -16,7 +16,7 @@ namespace Mathematics
 	// are used to identify the octant containing the vector, the other 13 bits
 	// are used for the mantissa.
 
-	MATHEMATICS_TEMPLATE_DEFAULT_DECLARE void CompressNormal(double x, double y, double z, unsigned short& index);
+	MATHEMATICS_TEMPLATE_DEFAULT_DECLARE void CompressNormal(double x, double y, double z, unsigned short& index) noexcept;
 
 	MATHEMATICS_TEMPLATE_DEFAULT_DECLARE void UncompressNormal(unsigned short index, double& x, double& y, double& z);
 

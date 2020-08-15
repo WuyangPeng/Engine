@@ -80,6 +80,10 @@ namespace Rendering
 	public:
 		explicit RendererImpl(const RendererBasis& basis);
 		virtual ~RendererImpl();
+		RendererImpl(const RendererImpl&) =delete;
+		RendererImpl& operator=(const RendererImpl&) =delete;
+		RendererImpl(RendererImpl&&) =delete;
+		RendererImpl& operator=(RendererImpl&&) =delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

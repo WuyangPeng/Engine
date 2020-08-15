@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
+//
 // ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/26 14:14)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_IMPL_H
@@ -15,32 +15,36 @@
 
 namespace Rendering
 {
-	class Renderer;
-	class IndexBuffer;
-	
-	class RENDERING_HIDDEN_DECLARE PlatformIndexBufferImpl
-	{
-	public:
-		using ClassType = PlatformIndexBufferImpl;
-		using PlatformIndexBufferPtr = std::shared_ptr<ClassType>;
+    class Renderer;
+    class IndexBuffer;
 
-	public:
-		PlatformIndexBufferImpl ();
-		virtual ~PlatformIndexBufferImpl ();
+    class RENDERING_HIDDEN_DECLARE PlatformIndexBufferImpl
+    {
+    public:
+        using ClassType = PlatformIndexBufferImpl;
+        using PlatformIndexBufferPtr = std::shared_ptr<ClassType>;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE; 
-		
-		// »º³åÇø²Ù×÷
-		virtual void Enable (Renderer* renderer) = 0;
-		virtual void Disable (Renderer* renderer) = 0;
-		virtual void* Lock (BufferLocking mode) = 0;
-		virtual void Unlock () = 0;		
+    public:
+        PlatformIndexBufferImpl() noexcept;
+        virtual ~PlatformIndexBufferImpl();
+        PlatformIndexBufferImpl(const PlatformIndexBufferImpl&) = default;
+        PlatformIndexBufferImpl& operator=(const PlatformIndexBufferImpl&) = default;
+        PlatformIndexBufferImpl( PlatformIndexBufferImpl&&) = default;
+        PlatformIndexBufferImpl& operator=( PlatformIndexBufferImpl&&) = default;
 
-		static PlatformIndexBufferPtr Create(Renderer* renderer,const IndexBuffer* indexBuffer);
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
+
+        // »º³åÇø²Ù×÷
+        virtual void Enable(Renderer* renderer) = 0;
+        virtual void Disable(Renderer* renderer) = 0;
+        virtual void* Lock(BufferLocking mode) = 0;
+        virtual void Unlock() = 0;
+
+        static PlatformIndexBufferPtr Create(Renderer* renderer, const IndexBuffer* indexBuffer);
 
     private:
-        static PlatformIndexBufferPtr CreateDefault(Renderer* renderer,const IndexBuffer* indexBuffer);
-	};
+        static PlatformIndexBufferPtr CreateDefault(Renderer* renderer, const IndexBuffer* indexBuffer);
+    };
 }
 
-#endif // RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_IMPL_H
+#endif  // RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_IMPL_H

@@ -14,17 +14,18 @@
 
 using std::make_shared;
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, MessageEventManager)
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, MessageEventManager)
-
+DELAY_COPY_CONSTRUCTION_DEFINE(Network, MessageEventManager) 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::MessageEventManager
 	::MessageEventManager()
 	:m_Impl{ make_shared<ImplType>() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
-
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, MessageEventManager)
+#include STSTEM_WARNING_POP
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, MessageEventManager)
 
 void Network::MessageEventManager
 	::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)

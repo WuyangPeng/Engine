@@ -7,20 +7,19 @@
 #include "Imagics/ImagicsExport.h"
 
 #include "CurvatureFlow2.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 Imagics::CurvatureFlow2
 	::CurvatureFlow2 (int xBound, int yBound, float xSpacing, float ySpacing, const float* data, const bool* mask, float borderValue, ScaleType scaleType)
     : PdeFilter2(xBound, yBound, xSpacing, ySpacing, data, mask, borderValue, scaleType)
 {
 }
 
-Imagics::CurvatureFlow2
-	::~CurvatureFlow2 ()
-{
-}
+ 
 
 void Imagics::CurvatureFlow2
-	::OnUpdate (int x, int y)
+	::OnUpdate (int x, int y) noexcept
 {
     LookUp9(x, y);
 
@@ -36,3 +35,4 @@ void Imagics::CurvatureFlow2
     mDst[y][x] = mUzz + mTimeStep*(uxx*sqrUy + uyy*sqrUx - 0.5f*uxy*ux*uy)/sqrLength;
 }
 
+#include STSTEM_WARNING_POP

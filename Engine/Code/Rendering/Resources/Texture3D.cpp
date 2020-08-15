@@ -16,7 +16,11 @@
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering,Texture3D);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Texture3D);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,Texture3D); 
@@ -32,22 +36,24 @@ Rendering::Texture3D
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Texture3D
-    ::~Texture3D()
+Rendering::Texture3D ::~Texture3D()
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
-    
-    RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+    RENDERING_SELF_CLASS_IS_VALID_1;
+    EXCEPTION_TRY
+    {
+        RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
 }
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Texture3D)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,GetFormat,Rendering::TextureFormat)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,GetTextureType,Rendering::TextureFlags)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,GetUsage,Rendering::BufferUsage)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,GetNumLevels,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, GetFormat, Rendering::TextureFormat)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, GetTextureType, Rendering::TextureFlags)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, GetUsage, Rendering::BufferUsage)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, GetNumLevels, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,GetNumDimensions,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, GetNumDimensions, int)
 
 
 int Rendering::Texture3D
@@ -59,12 +65,12 @@ int Rendering::Texture3D
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture3D,GetNumLevelBytes,int,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,GetNumTotalBytes,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, GetNumTotalBytes, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture3D,GetLevelOffset,int,int)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,GetPixelSize,int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,IsCompressed,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, IsCompressed, bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture3D,IsMipmapable,bool)
 
@@ -100,7 +106,7 @@ void Rendering::Texture3D
         
         m_Impl->GenerateMipmaps();
         
-        auto numLevels = m_Impl->GetNumLevels();
+      const  auto numLevels = m_Impl->GetNumLevels();
         
         for (auto level = 0; level < numLevels; ++level)
         {
@@ -190,7 +196,8 @@ Rendering::TextureSmartPointer Rendering::Texture3D
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return TextureSmartPointer{ NEW0 ClassType(*this) };
+	return TextureSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 
+#include STSTEM_WARNING_POP

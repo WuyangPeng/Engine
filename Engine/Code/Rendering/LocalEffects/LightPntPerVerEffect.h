@@ -26,8 +26,7 @@ namespace Rendering
 
 	public:
 		// Construction and destruction.
-		LightPntPerVerEffect();
-		virtual ~LightPntPerVerEffect();
+		LightPntPerVerEffect(); 
 
 		// Create an instance of the effect with unique parameters.
 		VisualEffectInstance* CreateInstance(Light* light,	Material* material) const;
@@ -39,14 +38,16 @@ namespace Rendering
 	private:
 		static int msDx9VRegisters[12];
 		static int msOglVRegisters[12];
-		static int* msVRegisters[ShaderFlags::MaxProfiles];
-		static std::string msVPrograms[ShaderFlags::MaxProfiles];
-		static std::string msPPrograms[ShaderFlags::MaxProfiles];
+		static int* msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+		static std::string msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+		static std::string msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
 	};
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(LightPntPerVerEffect);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, LightPntPerVerEffect);
-
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_LOCAL_EFFECTS_LIGHT_PNT_PER_VER_EFFECT_H

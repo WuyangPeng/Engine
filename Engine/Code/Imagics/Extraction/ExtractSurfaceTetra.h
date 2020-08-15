@@ -58,10 +58,10 @@ namespace Imagics
 		class Vertex
 		{
 		public:
-			Vertex (int xNumer = 0, int xDenom = 0, int yNumer = 0, int yDenom = 0, int zNumer = 0, int zDenom = 0);
+			Vertex (int xNumer = 0, int xDenom = 0, int yNumer = 0, int yDenom = 0, int zNumer = 0, int zDenom = 0) noexcept;
 			
 			// For STL maps.
-			bool operator< (const Vertex& vertex) const;
+			bool operator< (const Vertex& vertex) const noexcept;
 			
 			void GetTriple(Mathematics::Vector3Df& meshVertex) const;
 			
@@ -91,7 +91,7 @@ namespace Imagics
                                  int z1, int f1, int x2, int y2, int z2, int f2, int x3, int y3, int z3, int f3);
 		
 		// Function and gradient evaluated using trilinear interpolation.
-		float GetFunction (const Mathematics::Vector3Df& P) const noexcept;
+		float GetFunction (const Mathematics::Vector3Df& P) const;
 		Mathematics::Vector3Df GetGradient (const Mathematics::Vector3Df& P) const;
 		
 		// For unique indexing of vertices.

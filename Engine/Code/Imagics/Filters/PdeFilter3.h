@@ -19,7 +19,11 @@ namespace Imagics
 		// Abstract base class.
 		PdeFilter3 (int xBound, int yBound, int zBound, float xSpacing,float ySpacing, float zSpacing, const float* data,const bool* mask, float borderValue, ScaleType scaleType);
 		
-		virtual ~PdeFilter3 ();
+		  ~PdeFilter3 ();
+		PdeFilter3(const PdeFilter3&) = default;
+		PdeFilter3& operator=(const PdeFilter3&) = default;
+		PdeFilter3(PdeFilter3&&) = default;
+		PdeFilter3& operator=(PdeFilter3&&) = default;
 		
 		// Member access.  The internal 2D images for "data" and "mask" are
 		// copies of the inputs to the constructor but padded with a 1-pixel
@@ -28,12 +32,12 @@ namespace Imagics
 		// to GetData and GetMask are constrained to 0 <= x < xbound,
 		// 0 <= y < ybound, and 0 <= z < zbound.  The correct lookups into the
 		// padded arrays are handled internally.
-		int GetXBound () const;
-		int GetYBound () const;
-		int GetZBound () const;
-		float GetXSpacing () const;
-		float GetYSpacing () const;
-		float GetZSpacing () const;
+		int GetXBound () const noexcept;
+		int GetYBound () const noexcept;
+		int GetZBound () const noexcept;
+		float GetXSpacing () const noexcept;
+		float GetYSpacing () const noexcept;
+		float GetZSpacing () const noexcept;
 		
 		// Voxel access and derivative estimation.  The lookups into the padded
 		// data are handled correctly.  The estimation involves only the
@@ -41,40 +45,40 @@ namespace Imagics
 		// 0 <= y < ybound, and 0 <= z < zbound.  [If larger neighborhoods are
 		// desired at a later date, the padding and associated code must be
 		// adjusted accordingly.]
-		float GetU (int x, int y, int z) const;
-		float GetUx (int x, int y, int z) const;
-		float GetUy (int x, int y, int z) const;
-		float GetUz (int x, int y, int z) const;
-		float GetUxx (int x, int y, int z) const;
-		float GetUxy (int x, int y, int z) const;
-		float GetUxz (int x, int y, int z) const;
-		float GetUyy (int x, int y, int z) const;
-		float GetUyz (int x, int y, int z) const;
-		float GetUzz (int x, int y, int z) const;
-		bool GetMask (int x, int y, int z) const;
+		float GetU (int x, int y, int z) const noexcept;
+		float GetUx (int x, int y, int z) const noexcept;
+		float GetUy (int x, int y, int z) const noexcept;
+		float GetUz (int x, int y, int z) const noexcept;
+		float GetUxx (int x, int y, int z) const noexcept;
+		float GetUxy (int x, int y, int z) const noexcept;
+		float GetUxz (int x, int y, int z) const noexcept;
+		float GetUyy (int x, int y, int z) const noexcept;
+		float GetUyz (int x, int y, int z) const noexcept;
+		float GetUzz (int x, int y, int z) const noexcept;
+		bool GetMask (int x, int y, int z) const noexcept;
 		
 	protected:
 		// Assign values to the 1-voxel image border.
-		void AssignDirichletImageBorder ();
-		void AssignNeumannImageBorder ();
+		void AssignDirichletImageBorder () noexcept;
+		void AssignNeumannImageBorder () noexcept;
 		
 		// Assign values to the 1-voxel mask border.
-		void AssignDirichletMaskBorder ();
-		void AssignNeumannMaskBorder ();
+		void AssignDirichletMaskBorder () ;
+		void AssignNeumannMaskBorder () noexcept;
 		
 		// This function recomputes the boundary values when Neumann conditions
 		// are used.  If a derived class overrides this, it must call the
 		// base-class OnPreUpdate first.
-		virtual void OnPreUpdate ();
+		  void OnPreUpdate () noexcept override;
 		
 		// Iterate over all the pixels and call OnUpdate(x,y,z) for each voxel
 		// that is not masked out.
-		virtual void OnUpdate ();
+		  void OnUpdate () override;
 		
 		// If a derived class overrides this, it must call the base-class
 		// OnPostUpdate last.  The base-class function swaps the buffers for the
 		// next pass.
-		virtual void OnPostUpdate ();
+                  void OnPostUpdate() noexcept override;
 		
 		// The per-pixel processing depends on the PDE algorithm.  The (x,y,z)
 		// must be in padded coordinates: 1 <= x <= xbound, 1 <= y <= ybound, and
@@ -82,8 +86,8 @@ namespace Imagics
 		virtual void OnUpdate (int x, int y, int z) = 0;
 		
 		// Copy source data to temporary storage.
-		void LookUp7 (int x, int y, int z);
-		void LookUp27 (int x, int y, int z);
+		void LookUp7 (int x, int y, int z) noexcept;
+		void LookUp27 (int x, int y, int z) noexcept;
 		
 		// Image parameters.
 		int mXBound, mYBound, mZBound;

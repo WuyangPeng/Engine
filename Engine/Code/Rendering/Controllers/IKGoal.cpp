@@ -23,7 +23,10 @@
 using std::string;
 using std::vector;
 using std::make_shared;
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, IKGoal);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IKGoal);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IKGoal);
@@ -46,13 +49,13 @@ COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, IKGoal)
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, IKGoal)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetTarget, const Rendering::ConstSpatialSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetEffector, const Rendering::ConstSpatialSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal,GetTarget, const Rendering::ConstSpatialSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetEffector, const Rendering::ConstSpatialSmartPointer)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetTargetPosition, const Rendering::IKGoal::APoint)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetEffectorPosition, const Rendering::IKGoal::APoint)
  
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKGoal,SetWeight, float,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetWeight,float)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, IKGoal, SetWeight, float, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetWeight, float)
 										  
 Rendering::IKGoal
 	::IKGoal(LoadConstructor value)
@@ -78,7 +81,7 @@ uint64_t Rendering::IKGoal
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
 		m_Impl->Register(target);
@@ -132,3 +135,4 @@ void Rendering::IKGoal
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
+#include STSTEM_WARNING_POP

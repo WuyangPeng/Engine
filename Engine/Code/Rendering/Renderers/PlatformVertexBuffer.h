@@ -31,7 +31,11 @@ namespace Rendering
 	public:
 		PlatformVertexBuffer (Renderer* renderer, const VertexBuffer* vertexBuffer);
 		~PlatformVertexBuffer ();
-
+		PlatformVertexBuffer(const PlatformVertexBuffer&) = delete;
+		PlatformVertexBuffer& operator=(const PlatformVertexBuffer&) = delete;
+		PlatformVertexBuffer( PlatformVertexBuffer&&) = delete;
+		PlatformVertexBuffer& operator=( PlatformVertexBuffer&&) = delete;
+		
 		CLASS_INVARIANT_DECLARE;
 		
 		// ¶¥µã»º³åÇø²Ù×÷¡£

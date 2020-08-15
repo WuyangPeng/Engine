@@ -21,8 +21,12 @@ namespace CoreTools
 		using ClassType = BaseResourceLockManager;
 
 	public:
-		explicit BaseResourceLockManager(BaseResource& manager);
+		explicit BaseResourceLockManager(BaseResource& manager) noexcept;
 		~BaseResourceLockManager();
+		BaseResourceLockManager(const BaseResourceLockManager&) = delete;
+		BaseResourceLockManager& operator=(const BaseResourceLockManager&) = delete;
+		BaseResourceLockManager(BaseResourceLockManager&&) noexcept = delete;
+		BaseResourceLockManager& operator=(BaseResourceLockManager&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -40,7 +40,7 @@ namespace Rendering
 
 		// 访问网格创造者的转换
 		void SetTransform(const Transform& transform);
-		const Transform& GetTransform() const;
+		const Transform& GetTransform() const noexcept;
 	
 		// 下面各种对象的注释是当输入“transform”是nullptr(单位transform)。
 

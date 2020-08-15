@@ -12,12 +12,12 @@
 #include "ReactiveServer.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-
+ 
 using std::string;
 using std::make_shared;
 
 Network::ServerFactory
-	::ServerFactory()
+	::ServerFactory() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -28,7 +28,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, ServerFactory)
 const Network::ServerFactory::ImplTypePtr Network::ServerFactory
 	::Create(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
 {
-	auto patternStrategyFlag = configurationStrategy.GetPatternStrategy();
+	const auto patternStrategyFlag = configurationStrategy.GetPatternStrategy();
 
 	switch (patternStrategyFlag)
 	{

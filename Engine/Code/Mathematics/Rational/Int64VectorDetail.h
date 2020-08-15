@@ -15,11 +15,13 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include <iostream>
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 template <int VectorSize>
-Mathematics::Int64Vector<VectorSize>
-	::Int64Vector()
-	:m_Tuple{}
+Mathematics::Int64Vector<VectorSize>::Int64Vector() noexcept
+    : m_Tuple{}
 {
 	for (auto i = 0; i < VectorSize; ++i)
 	{
@@ -31,7 +33,7 @@ Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>
-	::Int64Vector(const Int64Vector& rhs)
+	::Int64Vector(const Int64Vector& rhs) noexcept
 	:m_Tuple{}
 {
 	for (auto i = 0; i < VectorSize; ++i)
@@ -44,7 +46,7 @@ Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator=(const Int64Vector& rhs)
+	::operator=(const Int64Vector& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -77,7 +79,7 @@ const int64_t& Mathematics::Int64Vector<VectorSize>
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
 }
 
@@ -93,7 +95,7 @@ int64_t& Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 const Mathematics::Int64Vector<VectorSize> 	Mathematics::Int64Vector<VectorSize>
-	::operator-() const
+	::operator-() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -108,7 +110,7 @@ const Mathematics::Int64Vector<VectorSize> 	Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator+=(const Int64Vector& rhs)
+	::operator+=(const Int64Vector& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -122,7 +124,7 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator-=(const Int64Vector& rhs)
+	::operator-=(const Int64Vector& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -136,7 +138,7 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
 
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
-	::operator*=(const int64_t& scalar)
+	::operator*=(const int64_t& scalar) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -159,13 +161,13 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>
 	{
 		m_Tuple[i] /= scalar;
 	}
-
+	 
 	return *this;
 }
 
 template <int VectorSize>
 int64_t Mathematics::Int64Vector<VectorSize>
-	::SquaredLength() const
+	::SquaredLength() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -234,5 +236,5 @@ std::ostream& Mathematics
 
 	return os;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_RATIONAL_INT64_VECTOR_DETAIL_H

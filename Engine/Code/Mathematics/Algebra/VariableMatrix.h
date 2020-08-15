@@ -56,6 +56,8 @@ namespace Mathematics
 		~VariableMatrix();
 
 		VariableMatrix& operator= (const VariableMatrix& rhs);
+		VariableMatrix(VariableMatrix&& rhs) = default;
+                VariableMatrix& operator=(VariableMatrix&& rhs) = default;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -95,8 +97,8 @@ namespace Mathematics
 		// 对于矩阵的加法和减法运算。
 		VariableMatrix& operator+= (const VariableMatrix& rhs);
 		VariableMatrix& operator-= (const VariableMatrix& rhs);
-		VariableMatrix& operator*= (Real scalar);
-		VariableMatrix& operator/= (Real scalar);
+		VariableMatrix& operator*= (Real scalar) noexcept;
+                VariableMatrix& operator/=(Real scalar) noexcept;
 
 		// firstVector^T * M * secondVector 
 		// （numColumns(M) = size(secondVector) 和
@@ -108,7 +110,7 @@ namespace Mathematics
 
 		const Matrix3 GetMatrix3() const;
 
-		void Swap(VariableMatrix& rhs);
+		void Swap(VariableMatrix& rhs) noexcept;
 
 	private:
 		// 该矩阵存储在列主序来自二维数组。

@@ -18,7 +18,9 @@
 
 using std::string;
 using std::for_each;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 Rendering::ShaderBaseDataImpl
 	::ShaderBaseDataImpl( int number )
 	:m_SingleShaderBaseData(number)
@@ -26,9 +28,8 @@ Rendering::ShaderBaseDataImpl
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ShaderBaseDataImpl
-	::ShaderBaseDataImpl()
-	:m_SingleShaderBaseData() 
+Rendering::ShaderBaseDataImpl ::ShaderBaseDataImpl() noexcept
+    : m_SingleShaderBaseData()
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -106,7 +107,7 @@ void Rendering::ShaderBaseDataImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	uint32_t size = boost::numeric_cast<uint32_t>(m_SingleShaderBaseData.size());
+const uint32_t size = boost::numeric_cast<uint32_t>(m_SingleShaderBaseData.size());
 	target.Write(size);
 
 	for_each(m_SingleShaderBaseData.begin(),m_SingleShaderBaseData.end(),std::bind(&SingleShaderBaseData::Save, std::placeholders::_1, std::ref(target)));
@@ -134,3 +135,4 @@ void Rendering::ShaderBaseDataImpl
 	m_SingleShaderBaseData.resize(number);
 }
 
+#include STSTEM_WARNING_POP

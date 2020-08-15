@@ -20,7 +20,15 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
 Rendering::OpenGLRenderTargetDataImpl
     ::OpenGLRenderTargetDataImpl (Renderer* renderer,const RenderTarget* renderTarget)
 	:m_NumTargets{ renderTarget->GetNumTargets() }, m_Width{ renderTarget->GetWidth() }, m_Height{ renderTarget->GetHeight() },
@@ -35,7 +43,7 @@ Rendering::OpenGLRenderTargetDataImpl
     m_PrevDepthRange[1] = 0.0;
     
     CreateFramebufferObject();
-    UInt previousBind = CreateDrawBuffers(renderer,renderTarget);
+  const  UInt previousBind = CreateDrawBuffers(renderer,renderTarget);
     CreateDepthStencilTexture(renderer,renderTarget,previousBind);
     CheckFramebufferStatus();
     
@@ -43,7 +51,7 @@ Rendering::OpenGLRenderTargetDataImpl
 }
 
 void Rendering::OpenGLRenderTargetDataImpl
-    ::CreateFramebufferObject()
+    ::CreateFramebufferObject() noexcept
 {
     // 创建帧缓冲区对象。
     m_FrameBuffer = System::GlGenFramebuffers();
@@ -52,14 +60,14 @@ void Rendering::OpenGLRenderTargetDataImpl
 System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl
     ::CreateDrawBuffers(Renderer* renderer,const RenderTarget* renderTarget)
 {
-    UInt previousBind = GetBoundTexture(ShaderFlags::SamplerType::Sampler2D);
+   const  UInt previousBind = GetBoundTexture(ShaderFlags::SamplerType::Sampler2D);
  
     for (int index = 0; index < m_NumTargets; ++index)
     {
         ConstTexture2DSmartPointer colorTexture = renderTarget->GetColorTexture(index);
         RENDERING_ASSERTION_1(!renderer->InTexture2DMap(colorTexture), "纹理不应该存在。\n");
         
-		std::shared_ptr<PlatformTexture2D> platformColorTexture(std::make_shared< PlatformTexture2D>(renderer,colorTexture.GetData()));
+		std::shared_ptr<PlatformTexture2D> platformColorTexture(std::make_shared< PlatformTexture2D>(renderer,colorTexture.get()));
         renderer->InsertInTexture2DMap(colorTexture, platformColorTexture);
         m_ColorTextures[index] = platformColorTexture->GetTexture();
 		m_DrawBuffers[index] = static_cast<GLenum>(System::ColorAttachent::Color0) + index;
@@ -78,11 +86,11 @@ void Rendering::OpenGLRenderTargetDataImpl
     ::CreateDepthStencilTexture(Renderer* renderer,const RenderTarget* renderTarget,UInt previousBind)
 {
     ConstTexture2DSmartPointer depthStencilTexture = renderTarget->GetDepthStencilTexture();
-    if (depthStencilTexture.IsValidPtr())
+    if (depthStencilTexture )
     {
         RENDERING_ASSERTION_1(!renderer->InTexture2DMap(depthStencilTexture),"纹理不应该存在。\n");
         
-		std::shared_ptr<PlatformTexture2D> platformDepthStencilTexture{ make_shared<PlatformTexture2D>(renderer,depthStencilTexture.GetData()) };
+		std::shared_ptr<PlatformTexture2D> platformDepthStencilTexture{ make_shared<PlatformTexture2D>(renderer,depthStencilTexture.get()) };
    
 		renderer->InsertInTexture2DMap(depthStencilTexture,platformDepthStencilTexture);
         m_DepthStencilTexture = platformDepthStencilTexture->GetTexture();
@@ -103,6 +111,7 @@ void Rendering::OpenGLRenderTargetDataImpl
 void Rendering::OpenGLRenderTargetDataImpl
     ::CheckFramebufferStatus()
 {
+    CoreTools::DoNothing();
     switch (System::GlCheckFramebufferStatus())
     {
 		case System::CheckFrambufferStatus::Complete:
@@ -161,7 +170,7 @@ bool Rendering::OpenGLRenderTargetDataImpl
 
 
 void Rendering::OpenGLRenderTargetDataImpl
-    ::Enable (Renderer* renderer)
+    ::Enable (Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -177,7 +186,7 @@ void Rendering::OpenGLRenderTargetDataImpl
 }
 
 void Rendering::OpenGLRenderTargetDataImpl
-   ::Disable (Renderer* renderer)
+   ::Disable (Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -185,7 +194,7 @@ void Rendering::OpenGLRenderTargetDataImpl
 
     if (m_HasMipmaps)
     {
-        UInt previousBind = GetBoundTexture(ShaderFlags::SamplerType::Sampler2D);
+       const UInt previousBind = GetBoundTexture(ShaderFlags::SamplerType::Sampler2D);
   
         for (int i = 0; i < m_NumTargets; ++i)
         {
@@ -209,7 +218,7 @@ Rendering::ConstTexture2DSmartPointer
 
     Enable(renderer);
     
-    Texture2DSmartPointer texture(NEW0 Texture2D(m_Format, m_Width, m_Height, 1));
+    Texture2DSmartPointer texture(std::make_shared<Texture2D>(m_Format, m_Width, m_Height, 1));
 
 	System::SetGlReadBuffer(static_cast<GLenum>(System::ColorAttachent::Color0) + index);
 
@@ -218,6 +227,7 @@ Rendering::ConstTexture2DSmartPointer
 
     Disable(renderer);
 
-	return texture.PolymorphicCastConstObjectSmartPointer<ConstTexture2DSmartPointer>();
+	return texture;
 }
 
+#include STSTEM_WARNING_POP

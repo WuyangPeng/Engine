@@ -13,9 +13,12 @@
 
 using std::string;
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 Network::MessageSource
-	::MessageSource(const MessageBufferSharedPtr& messageBuffer)
+	::MessageSource(const MessageBufferSharedPtr& messageBuffer) noexcept
 	:m_Source{ messageBuffer }, m_ParserStrategy{ messageBuffer->GetParserStrategy() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
@@ -89,7 +92,7 @@ string Network::MessageSource
 			padding = 4 - padding;
 		}
 
-		const auto text = m_Source->GetCurrentReadBufferedPtr();
+		const char* const text = m_Source->GetCurrentReadBufferedPtr();
 		string datum(text, length);
 
 		m_Source->AddCurrentReadIndex(length + padding);
@@ -113,8 +116,7 @@ void Network::MessageSource
 	}
 }
 
-int Network::MessageSource
-	::GetBytesRead() const
+int Network::MessageSource ::GetBytesRead() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -122,7 +124,7 @@ int Network::MessageSource
 }
 
 int Network::MessageSource
-	::GetBytesTotal() const
+	::GetBytesTotal() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -163,6 +165,6 @@ void Network::MessageSource
 
 
 
-
+#include STSTEM_WARNING_POP
 
 

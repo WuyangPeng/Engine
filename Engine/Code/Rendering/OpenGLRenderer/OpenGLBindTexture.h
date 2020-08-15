@@ -19,8 +19,8 @@ namespace Rendering
  
 	// 支持绑定和重新绑定。 BindTexture结合输入纹理到指定的目标并返回以前绑定的目标纹理。 
 	// GetBoundTexture返回指定目标的当前绑定的纹理。
-	RENDERING_DEFAULT_DECLARE UInt BindTexture(ShaderFlags::SamplerType target, UInt texture);
-	RENDERING_DEFAULT_DECLARE UInt GetBoundTexture(ShaderFlags::SamplerType target);
+	RENDERING_DEFAULT_DECLARE UInt BindTexture(ShaderFlags::SamplerType target, UInt texture) noexcept;
+	RENDERING_DEFAULT_DECLARE UInt GetBoundTexture(ShaderFlags::SamplerType target) noexcept;
 }
 
 #endif // RENDERING_RENDERERS_OPENGL_BIND_TEXTURE_H

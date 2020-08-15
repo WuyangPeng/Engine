@@ -53,13 +53,13 @@ namespace Rendering
 		const BitType* GetPoint() const;
 		BitType operator[](int index) const;
 
-		void SetColour(BitType red, BitType green, BitType blue, BitType alpha);
+		void SetColour(BitType red, BitType green, BitType blue, BitType alpha) noexcept;
 
 		// 如果存在alpha，则设为最大值。
-		void SetColour(BitType red, BitType green, BitType blue);
+                void SetColour(BitType red, BitType green, BitType blue) noexcept;
 
-		void SetColour(BitType value);
-		void SetColour(BitType firstValue, BitType secondValue);
+		void SetColour(BitType value) noexcept;
+                void SetColour(BitType firstValue, BitType secondValue) noexcept;
 
 		void SetRed(BitType red);
 		void SetGreen (BitType green);
@@ -77,14 +77,14 @@ namespace Rendering
 		TextureColour& operator/= (RhsType rhs);	
 
 	private:
-		static BitType Clamp(BitType colour, BitType maxValue);
+		static BitType Clamp(BitType colour, BitType maxValue) noexcept;
 
-		void Standardization();
+		void Standardization() noexcept;
 
 		template <int Index>
-		void Standardization(const std::false_type&,BitType maxValue);
+		void Standardization(const std::false_type&,BitType maxValue) noexcept;
 		template <int Index>
-		void Standardization(const std::true_type&,BitType maxValue);
+		void Standardization(const std::true_type&,BitType maxValue) noexcept;
 
 		template <TextureFormat RhsFormat>
 		void ConvertingColourFormat(const TextureColour<RhsFormat>& colour);

@@ -10,9 +10,14 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
-
+#include "CoreTools/Helper/ExceptionMacro.h" 
 #include <memory>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26429)
 Imagics::PdeFilter3
 	::PdeFilter3 (int xBound, int yBound, int zBound,float xSpacing, float ySpacing, float zSpacing, const float* data,const bool* mask, float borderValue, ScaleType scaleType)
     :PdeFilter(xBound*yBound*zBound, data, borderValue, scaleType),
@@ -38,7 +43,9 @@ Imagics::PdeFilter3
     // Create two buffers for filtering, one a source buffer and one a
     // destination buffer.  Their roles are reversed on each iteration of
     // the filter.
-    int xBp2 = mXBound + 2, yBp2 = mYBound + 2, zBp2 = mZBound + 2;
+    const int xBp2 = mXBound + 2;
+	const int yBp2 = mYBound + 2;
+	const int zBp2 = mZBound + 2;
     mSrc = NEW3<float>(xBp2, yBp2, zBp2);
     mDst = NEW3<float>(xBp2, yBp2, zBp2);
     if (mask)
@@ -57,7 +64,7 @@ Imagics::PdeFilter3
 
     // Copy the inputs data and mask to the interior elements of
     // mSrc and mMask.
-    int x, y, z, xp, yp, zp, i;
+    int x = 0, y= 0, z= 0, xp= 0, yp= 0, zp= 0, i= 0;
     for (z = 0, zp = 1, i = 0; z < mZBound; ++z, ++zp)
     {
         for (y = 0, yp = 1; y < mYBound; ++y, ++yp)
@@ -101,17 +108,21 @@ Imagics::PdeFilter3
 
 Imagics::PdeFilter3
 	::~PdeFilter3 ()
+{EXCEPTION_TRY
 {
-    DELETE3(mSrc);
+ DELETE3(mSrc);
     DELETE3(mDst);
     DELETE3(mMask);
 }
+EXCEPTION_ALL_CATCH(Mathematics) 
+    
+}
 
 void Imagics::PdeFilter3
-	::AssignDirichletImageBorder ()
+	::AssignDirichletImageBorder () noexcept
 {
     int xBp1 = mXBound + 1, yBp1 = mYBound + 1, zBp1 = mZBound + 1;
-    int x, y, z;
+    int x = 0, y= 0, z= 0;
 
     // vertex (0,0,0)
     mSrc[0][0][0] = mBorderValue;
@@ -350,10 +361,10 @@ void Imagics::PdeFilter3
 }
 
 void Imagics::PdeFilter3
-	::AssignNeumannImageBorder ()
+	::AssignNeumannImageBorder () noexcept
 {
     int xBp1 = mXBound + 1, yBp1 = mYBound + 1, zBp1 = mZBound + 1;
-    int x, y, z;
+    int x = 0, y = 0, z = 0;
     float duplicate;
 
     // vertex (0,0,0)
@@ -635,7 +646,7 @@ void Imagics::PdeFilter3
                     }
 
                     bool found = false;
-                    int i0, i1, i2, j0, j1, j2;
+                    int i0 = 0, i1 = 0, i2 = 0, j0 = 0, j1 = 0, j2 = 0;
                     for (i2 = 0, j2 = z-1; i2 < 3 && !found; ++i2, ++j2)
                     {
                         for (i1 = 0, j1 = y-1; i1 < 3 && !found; ++i1, ++j1)
@@ -663,7 +674,7 @@ void Imagics::PdeFilter3
 }
 
 void Imagics::PdeFilter3
-	::AssignNeumannMaskBorder ()
+	::AssignNeumannMaskBorder () noexcept
 {
     // Recompute the values just outside the masked region.  This guarantees
     // that derivative estimations use the current values around the boundary.
@@ -680,7 +691,7 @@ void Imagics::PdeFilter3
 
                 int count = 0;
                 float average = 0.0f;
-                int i0, i1, i2, j0, j1, j2;
+                int i0 = 0, i1 = 0, i2 = 0, j0 = 0, j1 = 0, j2 = 0;
                 for (i2 = 0, j2 = z-1; i2 < 3; ++i2, ++j2)
                 {
                     for (i1 = 0, j1 = y-1; i1 < 3; ++i1, ++j1)
@@ -698,7 +709,7 @@ void Imagics::PdeFilter3
 
                 if (count > 0)
                 {
-                    average /= (float)count;
+                    average /= static_cast<float>(count);
                     mSrc[z][y][x] = average;
                     mDst[z][y][x] = average;
                 }
@@ -708,7 +719,7 @@ void Imagics::PdeFilter3
 }
 
 void Imagics::PdeFilter3
-	::OnPreUpdate ()
+	::OnPreUpdate () noexcept
 {
     if (mMask && mBorderValue == Mathematics::Mathf::sm_MaxReal)
     {
@@ -738,8 +749,7 @@ void Imagics::PdeFilter3
     }
 }
 
-void Imagics::PdeFilter3
-	::OnPostUpdate ()
+void Imagics::PdeFilter3 ::OnPostUpdate() noexcept
 {
     // Swap the buffers for the next pass.
     float*** save = mSrc;
@@ -748,11 +758,11 @@ void Imagics::PdeFilter3
 }
 
 void Imagics::PdeFilter3
-	::LookUp7 (int x, int y, int z)
+	::LookUp7 (int x, int y, int z) noexcept
 {
-    int xm = x - 1, xp = x + 1;
-    int ym = y - 1, yp = y + 1;
-    int zm = z - 1, zp = z + 1;
+    const int xm = x - 1, xp = x + 1;
+    const int ym = y - 1, yp = y + 1;
+    const int zm = z - 1, zp = z + 1;
     mUzzm = mSrc[zm][y ][x ];
     mUzmz = mSrc[z ][ym][x ];
     mUmzz = mSrc[z ][y ][xm];
@@ -763,11 +773,11 @@ void Imagics::PdeFilter3
 }
 
 void Imagics::PdeFilter3
-	::LookUp27 (int x, int y, int z)
+	::LookUp27 (int x, int y, int z) noexcept
 {
-    int xm = x - 1, xp = x + 1;
-    int ym = y - 1, yp = y + 1;
-    int zm = z - 1, zp = z + 1;
+    const int xm = x - 1, xp = x + 1;
+    const int ym = y - 1, yp = y + 1;
+   const  int zm = z - 1, zp = z + 1;
     mUmmm = mSrc[zm][ym][xm];
     mUzmm = mSrc[zm][ym][x ];
     mUpmm = mSrc[zm][ym][xp];
@@ -799,113 +809,122 @@ void Imagics::PdeFilter3
 
 
 int Imagics::PdeFilter3
-	::GetXBound () const
+	::GetXBound () const noexcept
 {
 	return mXBound;
 }
 
 int Imagics::PdeFilter3
-	::GetYBound () const
+	::GetYBound () const noexcept
 {
 	return mYBound;
 }
 
 int Imagics::PdeFilter3
-	::GetZBound () const
+	::GetZBound () const noexcept
 {
 	return mZBound;
 }
 
 float Imagics::PdeFilter3
-	::GetXSpacing () const
+	::GetXSpacing () const noexcept
 {
 	return mXSpacing;
 }
 
 float Imagics::PdeFilter3
-	::GetYSpacing () const
+	::GetYSpacing () const noexcept
 {
 	return mYSpacing;
 }
 
 float Imagics::PdeFilter3
-	::GetZSpacing () const
+	::GetZSpacing () const noexcept
 {
 	return mZSpacing;
 }
 
 float Imagics::PdeFilter3
-	::GetU (int x, int y, int z) const
+	::GetU (int x, int y, int z) const noexcept
 {
 	return mSrc[z+1][y+1][x+1];
 }
 
 float Imagics::PdeFilter3
-	::GetUx (int x, int y, int z) const
+	::GetUx (int x, int y, int z) const noexcept
 {
-	int iYp1 = y + 1, iZp1 = z + 1;
+	const int iYp1 = y + 1;
+	const int iZp1 = z + 1;
 	return mHalfInvDx*(mSrc[iZp1][iYp1][x+2] - mSrc[iZp1][iYp1][x]);
 }
 
 float Imagics::PdeFilter3
-	::GetUy (int x, int y, int z) const
+	::GetUy (int x, int y, int z) const noexcept
 {
-	int iXp1 = x + 1, iZp1 = z + 1;
+	const int iXp1 = x + 1;
+	const int iZp1 = z + 1;
 	return mHalfInvDy*(mSrc[iZp1][y+2][iXp1] - mSrc[iZp1][y][iXp1]);
 }
 
 float Imagics::PdeFilter3
-	::GetUz (int x, int y, int z) const
+	::GetUz (int x, int y, int z) const noexcept
 {
-	int iXp1 = x + 1, iYp1 = y + 1;
+	const int iXp1 = x + 1;
+	const int iYp1 = y + 1;
 	return mHalfInvDz*(mSrc[z+2][iYp1][iXp1] - mSrc[z][iYp1][iXp1]);
 }
 
 float Imagics::PdeFilter3
-	::GetUxx (int x, int y, int z) const
+	::GetUxx (int x, int y, int z) const noexcept
 {
-	int iYp1 = y + 1, iZp1 = z + 1;
+	const int iYp1 = y + 1;
+const int	iZp1 = z + 1;
 	return mInvDxDx*(mSrc[iZp1][iYp1][x+2] - 2.0f*mSrc[iZp1][iYp1][x+1] + mSrc[iZp1][iYp1][x]);
 }
 
 float Imagics::PdeFilter3
-	::GetUxy (int x, int y, int z) const
+	::GetUxy (int x, int y, int z) const noexcept
 {
-	int iXp2 = x + 2, iYp2 = y + 2, iZp1 = z + 1;
+	const int iXp2 = x + 2;
+const int	iYp2 = y + 2;
+const int iZp1 = z + 1;
 	return mFourthInvDxDy*(mSrc[iZp1][y][x] - mSrc[iZp1][y][iXp2] + mSrc[iZp1][iYp2][iXp2] - mSrc[iZp1][iYp2][x]);
 }
 
 float Imagics::PdeFilter3
-	::GetUxz (int x, int y, int z) const
+	::GetUxz (int x, int y, int z) const noexcept
 {
-	int iXp2 = x + 2, iYp1 = y + 1, iZp2 = z + 2;
+	const int iXp2 = x + 2;
+	const int iYp1 = y + 1;
+const int	iZp2 = z + 2;
 	return mFourthInvDxDz*(mSrc[z][iYp1][x] - mSrc[z][iYp1][iXp2] + mSrc[iZp2][iYp1][iXp2] - mSrc[iZp2][iYp1][x]);
 }
 
 float Imagics::PdeFilter3
-	::GetUyy (int x, int y, int z) const
+	::GetUyy (int x, int y, int z) const noexcept
 {
-	int iXp1 = x + 1, iZp1 = z + 1;
+	const int iXp1 = x + 1, iZp1 = z + 1;
 	return mInvDyDy*(mSrc[iZp1][y+2][iXp1] - 2.0f*mSrc[iZp1][y+1][iXp1] + mSrc[iZp1][y][iXp1]);
 }
 
 float Imagics::PdeFilter3
-	::GetUyz (int x, int y, int z) const
+	::GetUyz (int x, int y, int z) const noexcept
 {
-	int iXp1 = x + 1, iYp2 = y + 2, iZp2 = z + 2;
+	const int iXp1 = x + 1, iYp2 = y + 2, iZp2 = z + 2;
 	return mFourthInvDyDz*(mSrc[z][y][iXp1] - mSrc[z][iYp2][iXp1] + mSrc[iZp2][iYp2][iXp1] - mSrc[iZp2][y][iXp1]);
 }
 
 float Imagics::PdeFilter3
-	::GetUzz (int x, int y, int z) const
+	::GetUzz (int x, int y, int z) const noexcept
 {
-	int iXp1 = x + 1, iYp1 = y + 1;
+	const int iXp1 = x + 1, iYp1 = y + 1;
 	return mInvDzDz*(mSrc[z+2][iYp1][iXp1] - 2.0f*mSrc[z+1][iYp1][iXp1] + mSrc[z][iYp1][iXp1]);
 }
 
 bool Imagics::PdeFilter3
-	::GetMask (int x, int y, int z) const
+	::GetMask (int x, int y, int z) const noexcept
 {
 	return (mMask ? mMask[z+1][y+1][x+1] : true);
 }
 
+#include STSTEM_WARNING_POP

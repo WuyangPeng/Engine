@@ -15,17 +15,13 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::ControllerImpl
-    ::ControllerImpl ()
+    ::ControllerImpl () noexcept
 	:m_Repeat{ ControllerRepeatType::Clamp }, m_MinTime{ 0.0 }, m_MaxTime{ 0.0 }, m_Phase{ 0.0 }, m_Frequency{ 1.0 }, m_Active{ true }, m_ApplicationTime{ -Mathematics::Mathd::sm_MaxReal }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ControllerImpl
-    ::~ControllerImpl()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;    
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::ControllerImpl
@@ -38,24 +34,22 @@ bool Rendering::ControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::ControllerImpl
-    ::SetApplicationTime (double applicationTime)
+void Rendering::ControllerImpl 
+    ::SetApplicationTime(double applicationTime) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_ApplicationTime = applicationTime;
 }
 
-double Rendering::ControllerImpl
-    ::GetApplicationTime () const
+double Rendering::ControllerImpl ::GetApplicationTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_ApplicationTime;
 }
 
-bool Rendering::ControllerImpl
-    ::Update (double applicationTime)
+bool Rendering::ControllerImpl ::Update(double applicationTime) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -73,7 +67,7 @@ double Rendering::ControllerImpl
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    auto controlTime = m_Frequency * applicationTime + m_Phase;
+   const  auto controlTime = m_Frequency * applicationTime + m_Phase;
 
     if (m_Repeat == ControllerRepeatType::Clamp)
     {
@@ -89,12 +83,12 @@ double Rendering::ControllerImpl
         return controlTime;
     }
 
-	auto timeRange = m_MaxTime - m_MinTime;
+	const auto timeRange = m_MaxTime - m_MinTime;
     if (0.0 < timeRange)
     {
-		auto multiples = (controlTime - m_MinTime) / timeRange;
+        const auto multiples = (controlTime - m_MinTime) / timeRange;
 		auto integerTime = Math::Floor(multiples);
-		auto fractionTime = multiples - integerTime;
+        const auto fractionTime = multiples - integerTime;
         if (m_Repeat == ControllerRepeatType::Wrap)
         {
             return m_MinTime + fractionTime * timeRange;
@@ -119,63 +113,56 @@ double Rendering::ControllerImpl
 }
             
 Rendering::ControllerRepeatType  Rendering::ControllerImpl
-      ::GetRepeat() const
+      ::GetRepeat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Repeat;
 }
 
-double Rendering::ControllerImpl
-   ::GetMinTime() const
+double Rendering::ControllerImpl ::GetMinTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_MinTime;
 }
 
-double Rendering::ControllerImpl
-   ::GetMaxTime() const
+double Rendering::ControllerImpl ::GetMaxTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_MaxTime;
 }
 
-double Rendering::ControllerImpl
-    ::GetPhase() const
+double Rendering::ControllerImpl ::GetPhase() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Phase;
 }
 
-double Rendering::ControllerImpl
-    ::GetFrequency() const
+double Rendering::ControllerImpl ::GetFrequency() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Frequency;
 }
 
-bool Rendering::ControllerImpl
-    ::IsActive() const
+bool Rendering::ControllerImpl ::IsActive() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Active;
 }
             
-void Rendering::ControllerImpl
-    ::SetRepeat(ControllerRepeatType repeat)
+void Rendering::ControllerImpl ::SetRepeat(ControllerRepeatType repeat) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Repeat = repeat;
 }
 
-void Rendering::ControllerImpl
-  ::SetTime(double minTime,double maxTime)
+void Rendering::ControllerImpl ::SetTime(double minTime, double maxTime) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -183,24 +170,21 @@ void Rendering::ControllerImpl
 	m_MaxTime = maxTime;
 }
 
-void Rendering::ControllerImpl
-    ::SetPhase(double phase)
+void Rendering::ControllerImpl ::SetPhase(double phase) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Phase = phase;
 }
 
-void Rendering::ControllerImpl
-    ::SetFrequency(double frequency)
+void Rendering::ControllerImpl ::SetFrequency(double frequency) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Frequency = frequency;
 }
 
-void Rendering::ControllerImpl
-   ::SetActive(bool active)
+void Rendering::ControllerImpl ::SetActive(bool active) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     

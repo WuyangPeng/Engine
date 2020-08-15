@@ -18,7 +18,9 @@
 using std::vector;
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering, LightConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightConstant);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, LightConstant); 
@@ -34,11 +36,7 @@ Rendering::LightConstant
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::LightConstant
-	::~LightConstant()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, LightConstant)
 
@@ -56,3 +54,4 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, LightConstant,GetLight, const Ren
 
 
 
+#include STSTEM_WARNING_POP

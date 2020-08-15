@@ -31,17 +31,21 @@ namespace Rendering
 
     public:
         OpenGLRenderTargetDataImpl (Renderer* renderer,const RenderTarget* renderTarget); 
-		~OpenGLRenderTargetDataImpl();
+		virtual ~OpenGLRenderTargetDataImpl();
+		OpenGLRenderTargetDataImpl(const OpenGLRenderTargetDataImpl&) = default;
+		OpenGLRenderTargetDataImpl& operator=(const OpenGLRenderTargetDataImpl&) = default;
+		OpenGLRenderTargetDataImpl( OpenGLRenderTargetDataImpl&&) = default;
+		OpenGLRenderTargetDataImpl& operator=( OpenGLRenderTargetDataImpl&&) = default;
         
 		CLASS_INVARIANT_DECLARE;
 
         // 渲染目标的操作。
-        virtual void Enable (Renderer* renderer);
-		virtual void Disable (Renderer* renderer);
+        virtual void Enable (Renderer* renderer) noexcept;
+		virtual void Disable (Renderer* renderer) noexcept;
         virtual ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer);
         
     private:
-        void CreateFramebufferObject();
+        void CreateFramebufferObject() noexcept;
         UInt CreateDrawBuffers(Renderer* renderer, const RenderTarget* renderTarget);
         void CreateDepthStencilTexture(Renderer* renderer,const RenderTarget* renderTarget,UInt previousBind);
         void CheckFramebufferStatus();

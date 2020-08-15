@@ -27,23 +27,26 @@ namespace Rendering
 
 	public:
 		explicit ProjectorWorldPositionConstant(const ProjectorSmartPointer& projector);
-		virtual ~ProjectorWorldPositionConstant();
+		 
 
 		ProjectorWorldPositionConstant(const ProjectorWorldPositionConstant& rhs);
 		ProjectorWorldPositionConstant& operator=(const ProjectorWorldPositionConstant& rhs);
+                ~ProjectorWorldPositionConstant() = default;
+                ProjectorWorldPositionConstant( ProjectorWorldPositionConstant&& rhs) noexcept = default;
+                ProjectorWorldPositionConstant& operator=(ProjectorWorldPositionConstant&& rhs) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ProjectorWorldPositionConstant);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-		virtual void Update(const Visual* visual, const Camera* camera) override;
+		  void Update(const Visual* visual, const Camera* camera) override;
 
-		virtual void SetNumRegisters(int numRegisters) override;
+		  void SetNumRegisters(int numRegisters) override;
 
 		const ConstProjectorSmartPointer GetProjector() const;
 
-		virtual ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSmartPointer Clone() const override;
 
 	private:
 		constexpr static auto sm_NumRegisters = 1;

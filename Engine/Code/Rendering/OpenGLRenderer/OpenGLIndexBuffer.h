@@ -27,15 +27,19 @@ namespace Rendering
         
 	public:
         OpenGLIndexBuffer (Renderer* renderer,const IndexBuffer* indexBuffer);
-        virtual ~OpenGLIndexBuffer ();
+          ~OpenGLIndexBuffer ();
+		  OpenGLIndexBuffer(const OpenGLIndexBuffer&) = default;
+		  OpenGLIndexBuffer& operator=(const OpenGLIndexBuffer&) = default;
+		  OpenGLIndexBuffer(OpenGLIndexBuffer&&) = default;
+		  OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&&) = default;
         
-        CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		// »º³åÇø²Ù×÷
-		virtual void Enable(Renderer* renderer) override;
-		virtual void Disable(Renderer* renderer) override;
-		virtual void* Lock(BufferLocking mode) override;
-		virtual void Unlock() override;
+		 void Enable(Renderer* renderer) noexcept override;
+		 void Disable(Renderer* renderer) noexcept override;
+		 void* Lock(BufferLocking mode) noexcept override;
+		 void Unlock() noexcept override;
         
     private:
 		void Init(const IndexBuffer* indexBuffer);

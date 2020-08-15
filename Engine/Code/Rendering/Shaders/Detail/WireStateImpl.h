@@ -29,7 +29,7 @@ namespace Rendering
 		using ReadFileManager = CoreTools::ReadFileManager;
 
 	public:
-		WireStateImpl();
+                WireStateImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -37,8 +37,8 @@ namespace Rendering
 		void Save(BufferTarget& target) const;
 		int GetStreamingSize() const;
 
-		bool IsEnabled() const;
-		void SetEnabled(bool enabled);
+		bool IsEnabled() const noexcept;
+                void SetEnabled(bool enabled) noexcept;
 
 		void SaveState(WriteFileManager& manager) const;
 		void LoadState(ReadFileManager& manager);

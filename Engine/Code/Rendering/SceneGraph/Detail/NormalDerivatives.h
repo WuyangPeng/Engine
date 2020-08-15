@@ -37,8 +37,8 @@ namespace Rendering
 		void ComputeNormalDerivativesMatrix();
 		void ComputeTangentAndBinormal();
 
-		const AVector GetTangent(int index) const;
-		const AVector GetBinormal(int index) const;
+		const AVector GetTangent(int index) const noexcept;
+                const AVector GetBinormal(int index) const noexcept;
 
 	private:
 		void ComputeEdge(int firstIndex,int secondIndex,int thirdIndex);

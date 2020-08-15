@@ -19,19 +19,23 @@ namespace Imagics
 	public:
 		// Abstract base class.
 		virtual ~FastMarch ();
+		FastMarch(const FastMarch&) = default;
+		FastMarch& operator=(const FastMarch&) = default;
+		FastMarch(FastMarch&&) = default;
+		FastMarch& operator=(FastMarch&&) = default;
 		
 		// Member access.
-		 void SetTime (int i, float time);
-		 float GetTime (int i) const;
-		 int GetQuantity () const;
+		 void SetTime (int i, float time) noexcept;
+		 float GetTime (int i) const noexcept;
+		 int GetQuantity () const noexcept;
 		void GetTimeExtremes (float& minValue, float& maxValue) const;
 		
 		// Image element classification.
-		bool IsValid (int i) const;
-		bool IsTrial (int i) const;
-		bool IsFar (int i) const;
-		bool IsZeroSpeed (int i) const;
-		bool IsInterior (int i) const;
+		bool IsValid (int i) const noexcept;
+		bool IsTrial (int i) const noexcept;
+		bool IsFar (int i) const noexcept;
+		bool IsZeroSpeed (int i) const noexcept;
+                bool IsInterior(int i) const noexcept;
 		void GetInterior (std::vector<int>& interior) const;
 		virtual void GetBoundary (std::vector<int>& boundary) const = 0;
 		virtual bool IsBoundary (int i) const = 0;

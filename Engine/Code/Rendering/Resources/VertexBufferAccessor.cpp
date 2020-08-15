@@ -11,7 +11,11 @@
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
 using std::make_shared;
 
 DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, VertexBufferAccessor)
@@ -40,44 +44,44 @@ void Rendering::VertexBufferAccessor
 	return m_Impl->ApplyTo(vertexformat, vertexbuffer);
 }
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexBufferAccessor,ApplyTo,Visual*,void)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexBufferAccessor,ApplyTo,const Visual*,void)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor,GetData,const char*)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor,GetNumVertices,int) 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor,GetStride,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,VertexBufferAccessor,GetData,const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, GetNumVertices, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, GetStride, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor,GetPosition,int,const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetPosition, int, const char*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor,HasPosition,bool)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, HasPosition, bool)	
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VertexBufferAccessor,GetPositionChannels, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, GetPositionChannels, int)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor, GetPositionTuple,int,const float*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetPositionTuple, int, const float*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor,GetNormal,int,const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetNormal, int, const char*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor, HasNormal,bool)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, HasNormal, bool)	
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VertexBufferAccessor,GetNormalChannels, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, GetNormalChannels, int)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor,GetNormalTuple,int,const float*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetNormalTuple, int, const float*)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexBufferAccessor,GetNormalExcursion, int, int)									 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor, GetTangent,int,const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetTangent, int, const char*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor,HasTangent,bool)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, HasTangent, bool)	
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VertexBufferAccessor,GetTangentChannels, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, GetTangentChannels, int)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor,GetTangentTuple,int,const float*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetTangentTuple, int, const float*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor,GetBinormal,int,const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetBinormal, int, const char*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor,HasBinormal,bool)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, HasBinormal, bool)	
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VertexBufferAccessor,GetBinormalChannels, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, GetBinormalChannels, int)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor,GetBinormalTuple,int,const float*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetBinormalTuple, int, const float*)
 
 const char* Rendering::VertexBufferAccessor
 	::GetTextureCoord(int unit, int index) const
@@ -120,21 +124,20 @@ const float* Rendering::VertexBufferAccessor
 	return m_Impl->GetColorTuple(unit, index);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor,GetBlendIndices,int,const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetBlendIndices, int, const char*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor,HasBlendIndices,bool)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, HasBlendIndices, bool)	
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexBufferAccessor,GetBlendWeight, int, const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, VertexBufferAccessor, GetBlendWeight, int, const char*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexBufferAccessor,HasBlendWeight, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBufferAccessor, HasBlendWeight, bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexBufferAccessor,GetBinormalExcursion, int, int)									  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexBufferAccessor,GetTangentExcursion, int, int)	
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexBufferAccessor,GetPositionExcursion, int, int)									  
  
 template <>
-Mathematics::APointf Rendering::VertexBufferAccessor
-	::GetPosition(int index) const
+Mathematics::APointf Rendering::VertexBufferAccessor ::GetPosition(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -148,8 +151,7 @@ Mathematics::APointf Rendering::VertexBufferAccessor
 }
 
 template <>
-Mathematics::AVectorf Rendering::VertexBufferAccessor
-	::GetNormal(int index) const
+Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -163,8 +165,7 @@ Mathematics::AVectorf Rendering::VertexBufferAccessor
 }
 
 template <>
-Mathematics::AVectorf Rendering::VertexBufferAccessor
-	::GetTangent(int index) const
+Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -178,8 +179,7 @@ Mathematics::AVectorf Rendering::VertexBufferAccessor
 }
 
 template <>
-Mathematics::AVectorf Rendering::VertexBufferAccessor
-	::GetBinormal(int index) const
+Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -213,3 +213,4 @@ int Rendering::VertexBufferAccessor
 
 	return m_Impl->GetTextureCoordExcursion(unit, index);
 }
+#include STSTEM_WARNING_POP

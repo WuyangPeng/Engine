@@ -31,7 +31,7 @@ namespace Rendering
 		// Abstract base class.  Construction and destruction.
 		GlobalEffect ();
 	public:
-		virtual ~GlobalEffect ();
+ 
 		
 		// This function is called in Renderer::Draw(visibleSet,globalEffect)
 		// when the globalEffect is nonnull.

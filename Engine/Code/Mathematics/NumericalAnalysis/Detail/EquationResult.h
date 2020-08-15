@@ -30,27 +30,27 @@ namespace Mathematics
 		using ImaginaryConstIterator = EquationResultConstIterator<ImaginaryResultConstIter>;
 
 	public:
-		EquationResult();
+		EquationResult() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		bool IsRealResult() const;
+		bool IsRealResult() const noexcept;
 		int GetRealResultCount() const;
 		int GetImaginaryResultCount() const;
 
 		void AddRealResult(double solution, double epsilon = Mathd::sm_ZeroTolerance);
 		void AddImaginaryResult(const Imaginary& solution, double epsilon = Mathd::sm_ZeroTolerance);
-		void CleanSolution();
+		void CleanSolution() noexcept;
 
-		const RealConstIterator GetRealBegin() const;
-		const RealConstIterator GetRealEnd() const;
-		const ImaginaryConstIterator GetImaginaryBegin() const;
-		const ImaginaryConstIterator GetImaginaryEnd() const;
+		const RealConstIterator GetRealBegin() const noexcept;
+		const RealConstIterator GetRealEnd() const noexcept;
+		const ImaginaryConstIterator GetImaginaryBegin() const noexcept;
+		const ImaginaryConstIterator GetImaginaryEnd() const noexcept;
 
 		void SortResult();
 
 	private:
-		bool FindSolution(double solution, double epsilon) const;
+		bool FindSolution(double solution, double epsilon) const noexcept;
 		bool FindSolution(const Imaginary& solution, double epsilon) const;
 
 		class ImaginaryLess

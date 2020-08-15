@@ -24,6 +24,11 @@ using std::string;
 using std::vector;
 using std::swap;
 
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
 CORE_TOOLS_RTTI_DEFINE(CoreTools, Object);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, Object);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(CoreTools, Object);
@@ -56,7 +61,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, Object);
 
 // 名字
 const string& CoreTools::Object
-	::GetName() const
+	::GetName() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -146,6 +151,8 @@ void CoreTools::Object
 	// Object没有Object*成员。
 
 	SYSTEM_UNUSED_ARG(source);
+
+	CoreTools::DoNothing();
 }
 
 void CoreTools::Object
@@ -154,6 +161,8 @@ void CoreTools::Object
 	// Object 没有后链接语义。
 
 	CORE_TOOLS_CLASS_IS_VALID_9;
+
+	CoreTools::DoNothing();
 }
 
 void CoreTools::Object
@@ -236,3 +245,4 @@ const vector<CoreTools::ConstObjectSmartPointer> CoreTools::Object
 
 	return objects;
 }
+#include STSTEM_WARNING_POP

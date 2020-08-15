@@ -28,7 +28,7 @@ namespace Network
 	public:
 		ReceiveMessageLevel();
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(ReceiveMessageLevel);
+		CLASS_INVARIANT_DECLARE;
 
 		int GetTopLevelSize() const;
 		const ConstMessageInterfaceSharedPtr operator [](int index) const;
@@ -36,8 +36,8 @@ namespace Network
 		// 对顶层的对象进行保存。
 		void Insert(const MessageInterfaceSharedPtr& message);
 
-		MessageContainerConstIter begin() const;
-		MessageContainerConstIter end() const;
+		MessageContainerConstIter begin() const noexcept;
+		MessageContainerConstIter end() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(ReceiveMessageLevel);

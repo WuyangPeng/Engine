@@ -24,13 +24,13 @@ namespace Rendering
 	public: 
 		ProjectorMatrixConstantImpl(const ProjectorSmartPointer& projector,bool biased, int biasScaleMatrixIndex);
 		ProjectorMatrixConstantImpl();
-		virtual ~ProjectorMatrixConstantImpl();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 	
-		virtual void Load(BufferSource& source) override;
-		virtual void Save(BufferTarget& target) const override;
-		virtual int GetStreamingSize() const override;
+		  void Load(BufferSource& source) override;
+		  void Save(BufferTarget& target) const override;
+		  int GetStreamingSize() const override;
 
 		const Matrix GetProjectionViewWorldMatrix(const Matrix& projectionViewWorldMatrix) const;
    

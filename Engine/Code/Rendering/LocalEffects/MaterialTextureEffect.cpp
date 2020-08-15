@@ -12,7 +12,21 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
- 
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26815)
+#include SYSTEM_WARNING_DISABLE(26487)
 CORE_TOOLS_RTTI_DEFINE(Rendering, MaterialTextureEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MaterialTextureEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialTextureEffect);
@@ -20,7 +34,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialTextureEffect);
 Rendering::MaterialTextureEffect
 	::MaterialTextureEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
 { 
-	VertexShaderSmartPointer vshader{ NEW0 VertexShader{ "Wm5.MaterialTexture",  2, 3, 2, 0 } };
+	VertexShaderSmartPointer vshader{ std::make_shared< VertexShader>( "Wm5.MaterialTexture",  2, 3, 2, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,  ShaderFlags::VariableSemantic::Position);
@@ -31,7 +45,7 @@ Rendering::MaterialTextureEffect
 
 	auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 2; ++j)
 		{
@@ -42,7 +56,7 @@ Rendering::MaterialTextureEffect
 	}
  
 
-	PixelShaderSmartPointer pshader{ NEW0 PixelShader("Wm5.MaterialTexture",  2, 1, 0, 1) };
+	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.MaterialTexture",  2, 1, 0, 1) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
     pshader->SetInput(1, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
@@ -53,7 +67,7 @@ Rendering::MaterialTextureEffect
 
 	profile = pshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -63,40 +77,37 @@ Rendering::MaterialTextureEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	} 
 
-	VisualPassSmartPointer pass{ NEW0 VisualPass{} };
+	VisualPassSmartPointer pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSmartPointer{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSmartPointer{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSmartPointer{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSmartPointer{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSmartPointer{ NEW0 WireState{} });
+	pass->SetAlphaState(AlphaStateSmartPointer{   });
+	pass->SetCullState(CullStateSmartPointer{   });
+	pass->SetDepthState(DepthStateSmartPointer{    });
+	pass->SetOffsetState(OffsetStateSmartPointer{   });
+	pass->SetStencilState(StencilStateSmartPointer{   });
+	pass->SetWireState(WireStateSmartPointer{   });
 
-	VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique{} };
+	VisualTechniqueSmartPointer technique{   };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
-
-Rendering::MaterialTextureEffect::~MaterialTextureEffect ()
-{
-}
+ 
 
 Rendering::PixelShader* Rendering::MaterialTextureEffect
 	::GetPixelShader () const
 {
-	return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().GetData());
+	return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
 }
 
 Rendering::VisualEffectInstance* Rendering::MaterialTextureEffect
 	::CreateInstance ( Material* material, Texture2D* texture) const
 {
 	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
-    instance->SetVertexConstant(0, 1,ShaderFloatSmartPointer(NEW0 MaterialDiffuseConstant(MaterialSmartPointer(material))));
+	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared< ProjectionViewMatrixConstant>()));
+        instance->SetVertexConstant(0, 1, ShaderFloatSmartPointer(std::make_shared < MaterialDiffuseConstant>(MaterialSmartPointer(material))));
 	instance->SetPixelTexture(0, 0, TextureSmartPointer(texture));
 
-	ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
+	const ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
 	if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::NearesLinear &&  !texture->HasMipmaps())
     {
         texture->GenerateMipmaps();
@@ -108,7 +119,7 @@ Rendering::VisualEffectInstance* Rendering::MaterialTextureEffect
 Rendering::VisualEffectInstance* Rendering::MaterialTextureEffect
 	::CreateUniqueInstance (Material* material, Texture2D* texture, ShaderFlags::SamplerFilter filter,ShaderFlags::SamplerCoordinate coordinate0,ShaderFlags::SamplerCoordinate coordinate1)
 {
-    MaterialTextureEffect* effect = CoreTools::New0 < MaterialTextureEffect>();
+    const MaterialTextureEffect* effect = CoreTools::New0 < MaterialTextureEffect>();
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
@@ -150,9 +161,9 @@ void Rendering::MaterialTextureEffect
 	auto pass = GetTechnique(0)->GetPass(0);
 	auto vshader = pass->GetVertexShader();
 	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().GetData());
+	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 2; ++j)
 		{
@@ -162,9 +173,9 @@ void Rendering::MaterialTextureEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().GetData());
+	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -203,7 +214,7 @@ int Rendering::MaterialTextureEffect
 
 int Rendering::MaterialTextureEffect::msDx9VRegisters[2]  { 0, 4 };
 int Rendering::MaterialTextureEffect::msOglVRegisters[2] { 1, 5 };
-int* Rendering::MaterialTextureEffect::msVRegisters[ShaderFlags::MaxProfiles] 
+int* Rendering::MaterialTextureEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msDx9VRegisters,
@@ -212,7 +223,7 @@ int* Rendering::MaterialTextureEffect::msVRegisters[ShaderFlags::MaxProfiles]
     msOglVRegisters
 };
 
-std::string Rendering::MaterialTextureEffect::msVPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::MaterialTextureEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // VP_NONE
     "",
@@ -278,7 +289,7 @@ std::string Rendering::MaterialTextureEffect::msVPrograms[ShaderFlags::MaxProfil
 };
 
 int Rendering::MaterialTextureEffect::msAllPTextureUnits[1]  { 0 };
-int* Rendering::MaterialTextureEffect::msPTextureUnits[ShaderFlags::MaxProfiles] 
+int* Rendering::MaterialTextureEffect::msPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msAllPTextureUnits,
@@ -287,7 +298,7 @@ int* Rendering::MaterialTextureEffect::msPTextureUnits[ShaderFlags::MaxProfiles]
     msAllPTextureUnits
 };
 
-std::string Rendering::MaterialTextureEffect::msPPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::MaterialTextureEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // PP_NONE
     "",
@@ -325,4 +336,4 @@ std::string Rendering::MaterialTextureEffect::msPPrograms[ShaderFlags::MaxProfil
     "ADD_SAT result.color.xyz, R0, fragment.color.primary;\n"
     "END\n"
 };
-
+#include STSTEM_WARNING_POP

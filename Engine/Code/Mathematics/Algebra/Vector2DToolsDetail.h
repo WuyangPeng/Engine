@@ -20,6 +20,11 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+    #include "System/Helper/PragmaWarning.h" 
+
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26446)
+
 #include <iostream>
 
 template <typename Real>
@@ -34,14 +39,14 @@ bool Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::VectorMagnitude(const Vector2D& vector) noexcept
+	::VectorMagnitude(const Vector2D& vector)  
 {
 	return Math::Sqrt(VectorMagnitudeSquared(vector));
 }
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::VectorMagnitudeSquared(const Vector2D& vector) noexcept
+	::VectorMagnitudeSquared(const Vector2D& vector)  
 {
 
 	return vector.GetXCoordinate() * vector.GetXCoordinate() + vector.GetYCoordinate() * vector.GetYCoordinate();
@@ -49,14 +54,14 @@ Real Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::Distance(const Vector2D& lhs, const Vector2D& rhs) noexcept
+	::Distance(const Vector2D& lhs, const Vector2D& rhs)  
 {
 	return Math::Sqrt(DistanceSquared(lhs, rhs));
 }
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::DistanceSquared(const Vector2D& lhs, const Vector2D& rhs) noexcept
+	::DistanceSquared(const Vector2D& lhs, const Vector2D& rhs)  
 {
 	auto distanceX = lhs.GetXCoordinate() - rhs.GetXCoordinate();
 	auto distanceY = lhs.GetYCoordinate() - rhs.GetYCoordinate();
@@ -66,7 +71,7 @@ Real Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::DotProduct(const Vector2D& lhs, const Vector2D& rhs) noexcept
+	::DotProduct(const Vector2D& lhs, const Vector2D& rhs)  
 {
 	return (lhs.GetXCoordinate() * rhs.GetXCoordinate() + lhs.GetYCoordinate() * rhs.GetYCoordinate());
 }
@@ -107,14 +112,14 @@ const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::GetVectorIncludedAngle(const Vector2D& lhs, const Vector2D& rhs)
+	::GetVectorIncludedAngle(const Vector2D& lhs, const Vector2D& rhs)  
 {
 	return Math::ACos(DotProduct(lhs, rhs) / (VectorMagnitude(lhs) * VectorMagnitude(rhs)));
 }
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
-	::GetPerp(const Vector2D& vector)
+	::GetPerp(const Vector2D& vector)  
 {
 	return Vector2D{ vector.GetYCoordinate(), -vector.GetXCoordinate() };
 }
@@ -131,7 +136,7 @@ const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
 
 template <typename Real>
 Real Mathematics::Vector2DTools<Real>
-	::DotPerp(const Vector2D& lhs, const Vector2D& rhs)
+	::DotPerp(const Vector2D& lhs, const Vector2D& rhs)  
 {
 	return DotProduct(Vector2D(-lhs.GetYCoordinate(), lhs.GetXCoordinate()), rhs);
 }
@@ -183,6 +188,8 @@ const typename Mathematics::Vector2DTools<Real>::Vector2DOrthonormalBasis Mathem
 {
 	return Vector2DOrthonormalBasis{ nonzeroVector,epsilon };
 }
+
+#include STSTEM_WARNING_POP
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_VECTOR2D_TOOLS_DETAIL)
 

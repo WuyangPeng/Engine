@@ -24,12 +24,12 @@ namespace Database
 		using MysqlxDbDocPtr = std::shared_ptr<MysqlxDbDoc>;
 
 	public:
-		MysqlConnectorDocResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc);
-		virtual ~MysqlConnectorDocResultRow();
+                MysqlConnectorDocResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc) noexcept;
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Print(std::ostream& os) const override;
+		  void Print(std::ostream& os) const override;
 
 	private:
 		MysqlxDbDocPtr m_MysqlxDbDoc;

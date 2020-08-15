@@ -13,7 +13,7 @@
 using std::make_shared;
 
 Network::BufferSendStreamMultiIndexContainer
-	::BufferSendStreamMultiIndexContainer()
+	::BufferSendStreamMultiIndexContainer() noexcept
 	:m_SocketIDContainer{}, m_HandleIDContainer{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
@@ -46,7 +46,7 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr
 {
 	NETWORK_CLASS_IS_VALID_1;
 
-	auto iter = m_SocketIDContainer.find(socketID);
+	const auto iter = m_SocketIDContainer.find(socketID);
 
 	if (iter != m_SocketIDContainer.cend())
 	{
@@ -54,7 +54,7 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的socketID"));
+		THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的socketID"s));
 	}
 }
 
@@ -63,7 +63,7 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr
 {
 	NETWORK_CLASS_IS_VALID_1;
 
-	auto iter = m_HandleIDContainer.find(handle);
+	const auto iter = m_HandleIDContainer.find(handle);
 
 	if (iter != m_HandleIDContainer.cend())
 	{
@@ -75,7 +75,7 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的handle"));
+	THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的handle"s));
 }
 
 void Network::BufferSendStreamMultiIndexContainer
@@ -83,7 +83,7 @@ void Network::BufferSendStreamMultiIndexContainer
 {
 	NETWORK_CLASS_IS_VALID_1;
 
-	auto iter = m_SocketIDContainer.find(socketID);
+	const auto iter = m_SocketIDContainer.find(socketID);
 
 	if (iter != m_SocketIDContainer.cend())
 	{
@@ -93,7 +93,7 @@ void Network::BufferSendStreamMultiIndexContainer
 }
 
 Network::BufferSendStreamMultiIndexContainer::SocketIDContainerConstIter Network::BufferSendStreamMultiIndexContainer
-	::begin() const
+	::begin() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -101,7 +101,7 @@ Network::BufferSendStreamMultiIndexContainer::SocketIDContainerConstIter Network
 }
 
 Network::BufferSendStreamMultiIndexContainer::SocketIDContainerConstIter Network::BufferSendStreamMultiIndexContainer
-	::end() const
+	::end() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 

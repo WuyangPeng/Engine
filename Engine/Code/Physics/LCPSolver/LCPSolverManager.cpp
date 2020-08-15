@@ -13,6 +13,10 @@
 
 #include <ctime>
 #include <iostream>
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26429)
 
 namespace Physics
 {
@@ -42,7 +46,7 @@ namespace Physics
 					break;
 				}
 
-				int eqM1 = equation - 1;
+				const int eqM1 = equation - 1;
 				Solve(mEquations[eqM1].Var, mEquations[eqM1].VarIndex);
 
 				PHYSICS_LCPSOLVER_FUNCTION(PrintEquations());
@@ -62,7 +66,7 @@ namespace Physics
 				if (!z0Basic)
 				{
 					// Solution found when z0 is removed from the basic set.
-					size_t numBytes = mNumEquations * sizeof(double);
+                                    const size_t numBytes = mNumEquations * sizeof(double);
 					memset(Z, 0, numBytes);
 					memset(W, 0, numBytes);
 					for (i = 0; i < mNumEquations; ++i)
@@ -90,7 +94,7 @@ namespace Physics
 		else
 		{
 			PHYSICS_LCPSOLVER_FUNCTION(PrintImmediateSolution());
-			size_t numBytes = mNumEquations * sizeof(double);
+                    const size_t numBytes = mNumEquations * sizeof(double);
 			memset(Z, 0, numBytes);
 			memcpy(W, Q, numBytes);
 			status = SC_FOUND_TRIVIAL_SOLUTION;
@@ -103,7 +107,7 @@ namespace Physics
 	void LCPSolverManager::AllocateEquations()
 	{
 		mEquations = NEW1<Equation>(mNumEquations);
-		int numEquationsP1 = mNumEquations + 1;
+            const int numEquationsP1 = mNumEquations + 1;
 		for (int i = 0; i < mNumEquations; ++i)
 		{
 			mEquations[i].C = NEW1<double>(numEquationsP1);
@@ -114,6 +118,8 @@ namespace Physics
 
 	void LCPSolverManager::DeallocateEquations()
 	{
+		CoreTools::DoNothing();
+		
 		for (int i = 0; i < mNumEquations; ++i)
 		{
 			DELETE1(mEquations[i].C);
@@ -123,10 +129,10 @@ namespace Physics
 		DELETE1(mEquations);
 	}
 
-	bool LCPSolverManager::InitializeEquations()
+	bool LCPSolverManager::InitializeEquations() noexcept
 	{
-		int numEquationsP1 = mNumEquations + 1;
-		int numBytes = numEquationsP1 * sizeof(double);
+            const int numEquationsP1 = mNumEquations + 1;
+            const int numBytes = numEquationsP1 * sizeof(double);
 		int i;
 		for (i = 0; i < mNumEquations; ++i)
 		{
@@ -162,14 +168,14 @@ namespace Physics
 		}
 
 		// Enter Z terms.
-		int j;
+		int j = 0;
 		for (i = 0; i < mNumEquations; ++i)
 		{
 			// Set equations Z[0] to 0.0 for any row in which all mM are 0.0.
 			double rowOfZeros = 0.0;
 			for (j = 0; j < mNumEquations; ++j)
 			{
-				double temp = mM[i][j];
+                            const double temp = mM[i][j];
 				mEquations[i].Z[j + 1] = temp;
 				if (temp != 0.0)
 				{
@@ -205,7 +211,7 @@ namespace Physics
 				}
 			}
 
-			double invMaxAbsValue = 1.0 / maxAbsValue;
+			const double invMaxAbsValue = 1.0 / maxAbsValue;
 			for (j = 0; j < numEquationsP1; ++j)
 			{
 				mEquations[i].C[j] *= invMaxAbsValue;
@@ -251,10 +257,10 @@ namespace Physics
 			mNonBasicVariable = (mDepartingVariable == 'w' ? 'z' : 'w');
 		}
 
-		bool found = FindEquation(equation);
+		const bool found = FindEquation(equation);
 		if (found)
 		{
-			int eqM1 = equation - 1;
+                    const int eqM1 = equation - 1;
 			mNonBasicVariableIndex = mDepartingVariableIndex;
 			mDepartingVariable = mEquations[eqM1].Var;
 			mDepartingVariableIndex = mEquations[eqM1].VarIndex;
@@ -292,7 +298,7 @@ namespace Physics
 		{
 			if (mEquations[i].Z[0] != 0.0)
 			{
-				double quot = mEquations[i].C[0] / mEquations[i].Z[0];
+				const double quot = mEquations[i].C[0] / mEquations[i].Z[0];
 				if (quot <= minValue || minValue == 0.0)
 				{
 					minValue = quot;
@@ -316,8 +322,8 @@ namespace Physics
 		int** found = NEW2<int>(2, mNumEquations + 1);
 
 		// Find equations with negative coefficients for selected index.
-		double temp;
-		int i, j;
+                double temp = 0.0;
+                int i = 0, j = 0;
 		for (i = 0, j = 0; i < mNumEquations; ++i)
 		{
 			if (mNonBasicVariable == 'z')
@@ -358,7 +364,8 @@ namespace Physics
 						break;
 					}
 
-					double denom1, denom2;
+					double denom1 = 0.0;
+					auto denom2 = 0.0;
 					if (mNonBasicVariable == 'z')
 					{
 						denom1 = mEquations[j1].Z[mDepartingVariableIndex];
@@ -411,7 +418,9 @@ namespace Physics
 
 	void LCPSolverManager::Solve(char basicVariable, int basicVariableIndex)
 	{
-		int found = -1, i, j;
+		int found = -1;
+		int i = 0;
+		int j = 0;
 		for (i = 0; i < mNumEquations; ++i)
 		{
 			if (mEquations[i].Var == basicVariable)
@@ -430,7 +439,7 @@ namespace Physics
 		}
 
 		// The equation for the replacement variable in this cycle.
-		int numEquationsP1 = mNumEquations + 1;
+                const int numEquationsP1 = mNumEquations + 1;
 		Equation replacement;
 		replacement.Var = mNonBasicVariable;
 		replacement.VarIndex = mNonBasicVariableIndex;
@@ -438,7 +447,7 @@ namespace Physics
 		replacement.W = NEW1<double>(numEquationsP1);
 		replacement.Z = NEW1<double>(numEquationsP1);
 
-		double denom;
+		double denom = 0.0;
 		if (mNonBasicVariable == 'z')
 		{
 			denom = -mEquations[found].Z[mNonBasicVariableIndex];
@@ -448,7 +457,7 @@ namespace Physics
 			denom = -mEquations[found].W[mNonBasicVariableIndex];
 		}
 
-		double invDenom = 1.0 / denom;
+		const double invDenom = 1.0 / denom;
 		for (i = 0; i <= mNumEquations; ++i)
 		{
 			replacement.C[i] = mEquations[found].C[i] * invDenom;
@@ -478,7 +487,7 @@ namespace Physics
 		{
 			if (i != found)
 			{
-				double coeff;
+				double coeff = 0.0;
 				if (replacement.Var == 'z')
 				{
 					coeff = mEquations[i].Z[mNonBasicVariableIndex];
@@ -526,7 +535,7 @@ namespace Physics
 		// Replace the row corresponding to this equation.
 		mEquations[found].Var = replacement.Var;
 		mEquations[found].VarIndex = replacement.VarIndex;
-		size_t numBytes = numEquationsP1 * sizeof(double);
+		const size_t numBytes = numEquationsP1 * sizeof(double);
 		memcpy(mEquations[found].C, replacement.C, numBytes);
 		memcpy(mEquations[found].W, replacement.W, numBytes);
 		memcpy(mEquations[found].Z, replacement.Z, numBytes);
@@ -693,3 +702,4 @@ namespace Physics
 #endif // PHYSICS_LCPSOLVER_LOG
 
 }
+#include STSTEM_WARNING_POP

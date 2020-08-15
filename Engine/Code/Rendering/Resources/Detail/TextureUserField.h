@@ -29,7 +29,7 @@ namespace Rendering
 		using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        TextureUserField ();
+        TextureUserField () noexcept;
         
 		CLASS_INVARIANT_DECLARE;
 
@@ -46,7 +46,7 @@ namespace Rendering
         
     private:
 		// 用户字段用来存储特定于应用程序的数据。
-		int m_UserField[TextureMaxUserFields];  
+		int m_UserField[TextureMaxUserFields]{};  
     };
 }
 

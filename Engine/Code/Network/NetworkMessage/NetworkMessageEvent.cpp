@@ -10,8 +10,7 @@
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 
-Network::NetworkMessageEvent
-	::NetworkMessageEvent()
+Network::NetworkMessageEvent ::NetworkMessageEvent() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }

@@ -12,7 +12,19 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
- 
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26815)
 CORE_TOOLS_RTTI_DEFINE(Rendering, MaterialEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MaterialEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialEffect);
@@ -20,7 +32,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialEffect);
 Rendering::MaterialEffect
 	::MaterialEffect ()
 {
-	VertexShaderSmartPointer vshader{ NEW0 VertexShader{ "Wm5.Material",1, 2, 2, 0 } };
+	VertexShaderSmartPointer vshader{ std::make_shared< VertexShader>( "Wm5.Material",1, 2, 2, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -29,7 +41,7 @@ Rendering::MaterialEffect
 
 	auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 2; ++j)
 		{
@@ -39,33 +51,30 @@ Rendering::MaterialEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	PixelShaderSmartPointer pshader{ NEW0 PixelShader{ "Wm5.Material",1, 1, 0, 0 } };
+	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>( "Wm5.Material",1, 1, 0, 0 ) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{ NEW0 VisualPass{} };
+	VisualPassSmartPointer pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSmartPointer{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSmartPointer{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSmartPointer{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSmartPointer{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSmartPointer{ NEW0 WireState{} });
+	pass->SetAlphaState(AlphaStateSmartPointer{   });
+	pass->SetCullState(CullStateSmartPointer{   });
+	pass->SetDepthState(DepthStateSmartPointer{   });
+	pass->SetOffsetState(OffsetStateSmartPointer{   });
+	pass->SetStencilState(StencilStateSmartPointer{   });
+	pass->SetWireState(WireStateSmartPointer{   });
 
-	VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique{} };
+	VisualTechniqueSmartPointer technique{   };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
 
-Rendering::MaterialEffect
-	::~MaterialEffect ()
-{
-}
+ 
 
 Rendering::VisualEffectInstance* Rendering::MaterialEffect
 	::CreateInstance (Material* material) const
@@ -79,7 +88,7 @@ Rendering::VisualEffectInstance* Rendering::MaterialEffect
 Rendering::VisualEffectInstance* Rendering::MaterialEffect
 	::CreateUniqueInstance ( Material* material)
 {
-    MaterialEffect* effect = CoreTools::New0 < MaterialEffect>();
+    const MaterialEffect* effect = CoreTools::New0 < MaterialEffect>();
     return effect->CreateInstance(material);
 }
 
@@ -116,9 +125,9 @@ void Rendering::MaterialEffect::PostLink ()
 	auto pass = GetTechnique(0)->GetPass(0);
 	auto vshader = pass->GetVertexShader();
 	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().GetData());
+	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 2; ++j)
 		{
@@ -128,9 +137,9 @@ void Rendering::MaterialEffect::PostLink ()
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().GetData());
+	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		profile->SetProgram(i, msPPrograms[i]);
 	}
@@ -164,7 +173,7 @@ int Rendering::MaterialEffect
 
 int Rendering::MaterialEffect::msDx9VRegisters[2]  { 0, 4 };
 int Rendering::MaterialEffect::msOglVRegisters[2]  { 1, 5 };
-int* Rendering::MaterialEffect::msVRegisters[ShaderFlags::MaxProfiles] 
+int* Rendering::MaterialEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msDx9VRegisters,
@@ -173,7 +182,7 @@ int* Rendering::MaterialEffect::msVRegisters[ShaderFlags::MaxProfiles]
     msOglVRegisters
 };
 
-std::string Rendering::MaterialEffect::msVPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::MaterialEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // VP_NONE
     "",
@@ -230,7 +239,7 @@ std::string Rendering::MaterialEffect::msVPrograms[ShaderFlags::MaxProfiles]
     "END\n"
 };
 
-std::string Rendering::MaterialEffect::msPPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::MaterialEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // PP_NONE
     "",
@@ -254,4 +263,4 @@ std::string Rendering::MaterialEffect::msPPrograms[ShaderFlags::MaxProfiles]
     "MOV result.color, fragment.color.primary;\n"
     "END\n"
 };
-
+#include STSTEM_WARNING_POP

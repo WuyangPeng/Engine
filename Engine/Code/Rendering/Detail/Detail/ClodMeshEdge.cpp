@@ -9,9 +9,11 @@
 #include "ClodMeshEdge.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26472)
 Rendering::ClodMeshEdge
-	::ClodMeshEdge()
+	::ClodMeshEdge() noexcept
 	:m_AdjTriangles{}, m_MinHeapRecordIndex{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -28,7 +30,7 @@ void Rendering::ClodMeshEdge
 }
 
 int Rendering::ClodMeshEdge
-	::GetTriangleKeySize() const
+	::GetTriangleKeySize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -36,7 +38,7 @@ int Rendering::ClodMeshEdge
 }
 
 Rendering::ClodMeshEdge::TriangleKeySetConstIter Rendering::ClodMeshEdge
-	::GetTriangleKeyBegin() const
+	::GetTriangleKeyBegin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -44,7 +46,7 @@ Rendering::ClodMeshEdge::TriangleKeySetConstIter Rendering::ClodMeshEdge
 }
 
 Rendering::ClodMeshEdge::TriangleKeySetConstIter Rendering::ClodMeshEdge
-	::GetTriangleKeyEnd() const
+	::GetTriangleKeyEnd() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -52,7 +54,7 @@ Rendering::ClodMeshEdge::TriangleKeySetConstIter Rendering::ClodMeshEdge
 }
 
 int Rendering::ClodMeshEdge
-	::GetMinHeapRecordIndex() const
+	::GetMinHeapRecordIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -60,7 +62,7 @@ int Rendering::ClodMeshEdge
 }
 
 void Rendering::ClodMeshEdge
-	::SetMinHeapRecordIndex(int index)
+	::SetMinHeapRecordIndex(int index) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -92,3 +94,4 @@ const Rendering::ClodMeshEdge::TriangleKey Rendering::ClodMeshEdge
 
 	return *m_AdjTriangles.rbegin();
 }
+#include STSTEM_WARNING_POP

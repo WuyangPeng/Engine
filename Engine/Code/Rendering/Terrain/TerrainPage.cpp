@@ -12,7 +12,14 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26493)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TerrainPage);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainPage);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainPage); 
@@ -29,7 +36,7 @@ Rendering::TerrainPage
     mMultiplier = (mMaxElevation - mMinElevation)/65535.0f;
 
     // Create a mesh for the page.
-    float ext = mSpacing*mSizeM1;
+    const float ext = mSpacing*mSizeM1;
     TrianglesMeshSmartPointer mesh = StandardMesh(vformat).Rectangle(mSize, mSize, ext, ext);
     SetVertexFormat(vformat);
     SetVertexBuffer( mesh->GetVertexBuffer());
@@ -40,8 +47,8 @@ Rendering::TerrainPage
 	int numVertices = GetVertexBuffer()->GetNumElements();
     for (int i = 0; i < numVertices; ++i)
     {
-         int x = i % mSize;
-         int y = i / mSize;
+         const int x = i % mSize;
+         const int y = i / mSize;
 
 		 GetVertexBuffer()->SetPosition(vba, i, Mathematics::Float3(GetX(x), GetY(y), GetHeight(i)));       
     }
@@ -52,39 +59,44 @@ Rendering::TerrainPage
 Rendering::TerrainPage
 	::~TerrainPage ()
 {
-    DELETE1(mHeights);
+	EXCEPTION_TRY
+{
+ DELETE1(mHeights);
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+    
 }
 
 float Rendering::TerrainPage
 	::GetHeight (float x, float y) const
 {
-    float xGrid = (x - mOrigin.GetFirstValue())*mInvSpacing;
+    const float xGrid = (x - mOrigin.GetFirstValue())*mInvSpacing;
     if (xGrid < 0.0f || xGrid >= (float)mSizeM1)
     {
         // Location not in page.
         return Mathematics::Mathf::sm_MaxReal;
     }
 
-    float yGrid = (y - mOrigin.GetSecondValue())*mInvSpacing;
+    const float yGrid = (y - mOrigin.GetSecondValue())*mInvSpacing;
     if (yGrid < 0.0f || yGrid >= (float)mSizeM1)
     {
         // Location not in page.
         return Mathematics::Mathf::sm_MaxReal;
     }
 
-	float fCol = Mathematics::Mathf::Floor(xGrid);
-    int iCol = (int)fCol;
-	float fRow = Mathematics::Mathf::Floor(yGrid);
-    int iRow = (int)fRow;
+	const float fCol = Mathematics::Mathf::Floor(xGrid);
+    const int iCol = (int)fCol;
+	const float fRow = Mathematics::Mathf::Floor(yGrid);
+    const int iRow = (int)fRow;
 
-    int index = iCol + mSize*iRow;
-    float dx = xGrid - fCol;
-    float dy = yGrid - fRow;
-    float h00, h10, h01, h11, height;
+   const int index = iCol + mSize*iRow;
+  const  float dx = xGrid - fCol;
+  const float dy = yGrid - fRow;
+    float h00 = 0.0f, h10= 0.0f, h01= 0.0f, h11= 0.0f, height= 0.0f;
 
     if ((iCol & 1) == (iRow & 1))
     {
-        float diff = dx - dy;
+        const float diff = dx - dy;
         h00 = mMinElevation + mMultiplier*mHeights[index];
         h11 = mMinElevation + mMultiplier*mHeights[index + 1 + mSize];
         if (diff > 0.0f)
@@ -100,7 +112,7 @@ float Rendering::TerrainPage
     }
     else
     {
-        float sum = dx + dy;
+        const float sum = dx + dy;
         h10 = mMinElevation + mMultiplier*mHeights[index + 1];
         h01 = mMinElevation + mMultiplier*mHeights[index + mSize];
         if (sum <= 1.0f)
@@ -137,7 +149,7 @@ void Rendering::TerrainPage
 	ParentType::Load(source);
 
     source.Read(mSize);
-    int numVertices = mSize*mSize;
+    const int numVertices = mSize*mSize;
     source.Read(numVertices, mHeights);
     source.ReadAggregate(mOrigin);
     source.Read(mMinElevation);
@@ -177,7 +189,7 @@ void Rendering::TerrainPage
 	ParentType::Save(target);
 
     target.Write(mSize);
-    int numVertices = mSize*mSize;
+    const int numVertices = mSize*mSize;
     target.WriteWithNumber(numVertices, mHeights);
     target.WriteAggregate(mOrigin);
     target.Write(mMinElevation);
@@ -202,37 +214,37 @@ int Rendering::TerrainPage
 
 
  int Rendering::TerrainPage
-	 ::GetSize () const
+	 ::GetSize () const noexcept
 {
 	return mSize;
 }
 
  const unsigned short* Rendering::TerrainPage
-	 ::GetHeights () const
+	 ::GetHeights () const noexcept
 {
 	return mHeights;
 }
 
  const Mathematics:: Float2& Rendering::TerrainPage
-	 ::GetOrigin () const
+	 ::GetOrigin () const noexcept
 {
 	return mOrigin;
 }
 
  float Rendering::TerrainPage
-	 ::GetMinElevation () const
+	 ::GetMinElevation () const noexcept
 {
 	return mMinElevation;
 }
 
  float Rendering::TerrainPage
-	 ::GetMaxElevation () const
+	 ::GetMaxElevation () const noexcept
 {
 	return mMaxElevation;
 }
 
  float Rendering::TerrainPage
-	 ::GetSpacing () const
+	 ::GetSpacing () const noexcept
 {
 	return mSpacing;
 }
@@ -250,8 +262,9 @@ int Rendering::TerrainPage
 }
 
  float Rendering::TerrainPage
-	 ::GetHeight (int index) const
+	 ::GetHeight (int index) const noexcept
 {
 	return mMinElevation + mMultiplier*(float)mHeights[index];
 }
 
+#include STSTEM_WARNING_POP

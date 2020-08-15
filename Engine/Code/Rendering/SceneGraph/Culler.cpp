@@ -15,7 +15,9 @@
 #include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointerDetail.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
 Rendering::Culler
     ::Culler(const ConstCameraSmartPointer& camera)
 	: m_Impl{ make_shared<ImplType>(camera) }
@@ -52,7 +54,7 @@ bool Rendering::Culler
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Culler,WhichSide,Plane,Rendering::Culler::NumericalValueSymbol)
 
 void Rendering::Culler
-    ::ComputeVisibleSet(SpatialSmartPointer& scene)
+    ::ComputeVisibleSet(SpatialSmartPointer scene)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(scene != SpatialSmartPointer(), "裁剪需要一个场景\n");
@@ -68,3 +70,4 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Culler,GetVisible,int,const Rend
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Culler, begin,Rendering::Culler::VisualContainerIter)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Culler, end, Rendering::Culler::VisualContainerIter)
+#include STSTEM_WARNING_POP

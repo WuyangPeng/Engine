@@ -17,7 +17,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering,Buffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Buffer);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Buffer); 
@@ -46,13 +49,13 @@ Rendering::Buffer
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,Buffer)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Buffer,GetNumElements,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Buffer,GetElementSize,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Buffer,GetUsage,Rendering::BufferUsage)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Buffer,GetNumElements,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Buffer, GetElementSize, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Buffer, GetUsage, Rendering::BufferUsage)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Buffer,SetNumElements,int,void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Buffer,GetNumBytes,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Buffer,GetReadOnlyData,const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Buffer, GetReadOnlyData, const char*)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Buffer,GetReadOnlyData, int,const char*)
 
 Rendering::Buffer
@@ -168,3 +171,4 @@ void Rendering::Buffer
  
 
 
+#include STSTEM_WARNING_POP

@@ -14,9 +14,15 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(6386)
+#include SYSTEM_WARNING_DISABLE(6385)
 Rendering::TextureUserField
-    ::TextureUserField ()    
+    ::TextureUserField ()     noexcept
 {
 	for (auto i = 0; i < TextureMaxUserFields; ++i)
 	{
@@ -85,3 +91,4 @@ void Rendering::TextureUserField
 
 	inFile.Read(sizeof(int),TextureMaxUserFields,m_UserField);
 }
+#include STSTEM_WARNING_POP

@@ -21,7 +21,9 @@
  
 using std::make_shared;
 using CoreTools::ReadFileManager;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26409)
 Rendering::LoadVisual
 	::LoadVisual(const System::String& name)
 	:m_Data{ make_shared<VisualData>() }
@@ -87,11 +89,11 @@ void Rendering::LoadVisual
 	{	
 		auto vertexFormat =	VertexFormat::LoadFromFile(manager);
 
-		VertexBufferSmartPointer vertexBuffer{ NEW0 VertexBuffer };
+		VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>() };
 
-		vertexBuffer->ReadFromFile(manager,vertexFormat.PolymorphicCastConstObjectSmartPointer<ConstVertexFormatSmartPointer>());
+		vertexBuffer->ReadFromFile(manager,vertexFormat);
 
-		IndexBufferSmartPointer indexBuffer{ NEW0 IndexBuffer };
+		IndexBufferSmartPointer indexBuffer{ std::make_shared<IndexBuffer>() };
 		indexBuffer->ReadFromFile(manager);
 
 		m_Data->SetPrimitiveType(System::UnderlyingCastEnum<VisualPrimitiveType>(type));
@@ -123,7 +125,7 @@ Rendering::VisualSmartPointer Rendering::LoadVisual
 	case VisualPrimitiveType::TriangleStrip:
 	    {
 			auto indexBuffer = loadVisual.GetIndexBuffer();					
-			if (indexBuffer.IsNullPtr())
+			if (!indexBuffer)
 			{
 				return VisualSmartPointer{ NEW0 TrianglesStrip(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2) };
 			}
@@ -135,7 +137,7 @@ Rendering::VisualSmartPointer Rendering::LoadVisual
 	case VisualPrimitiveType::TriangleFan:
 	    {
 		auto indexBuffer = loadVisual.GetIndexBuffer();
-			if (indexBuffer.IsNullPtr())
+			if (!indexBuffer )
 			{
 				return VisualSmartPointer{ NEW0 TrianglesFan(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2) };
 			}
@@ -147,7 +149,7 @@ Rendering::VisualSmartPointer Rendering::LoadVisual
 				 
 	default:
 	    {
-		     THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"));
+		     THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"s));
 	    }
 	}
 }
@@ -165,9 +167,9 @@ Rendering::VisualSmartPointer
 		return VisualSmartPointer{ NEW0 TrianglesFan(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize) };
 	default:
 	    {
-		     THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"));
+		     THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"s));
 	    }
 	}
 }
 
- 
+ #include STSTEM_WARNING_POP

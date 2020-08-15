@@ -13,13 +13,20 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <set>
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26490)
 using std::set;
 
 Rendering::ClodMeshTriangleMesh
 	::ClodMeshTriangleMesh(TrianglesMeshSmartPointer mesh)
 	: m_NumVertices{ mesh->GetVertexBuffer()->GetNumElements() },m_NumIndices{ mesh->GetIndexBuffer()->GetNumElements() },m_NumTriangles{ m_NumIndices / 3 },
-	  m_IndixBuffer{ mesh->GetIndexBuffer() },m_VertexBuffer{ mesh->GetVertexBuffer() },m_VertexBufferAccessor{ mesh.GetData() }
+	  m_IndixBuffer{ mesh->GetIndexBuffer() },m_VertexBuffer{ mesh->GetVertexBuffer() },m_VertexBufferAccessor{ mesh.get() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -27,7 +34,7 @@ Rendering::ClodMeshTriangleMesh
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ClodMeshTriangleMesh)
 
 int Rendering::ClodMeshTriangleMesh
-	::GetNumVertices() const
+	::GetNumVertices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -35,7 +42,7 @@ int Rendering::ClodMeshTriangleMesh
 }
 
 int Rendering::ClodMeshTriangleMesh
-	::GetNumIndices() const
+	::GetNumIndices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -54,9 +61,9 @@ bool Rendering::ClodMeshTriangleMesh
 
 	for (auto trianglesIndex = 0; trianglesIndex < m_NumTriangles; ++trianglesIndex)
 	{
-		auto firstIndex = *currentIndex++;
-		auto secondIndex = *currentIndex++;
-		auto thirdIndex = *currentIndex++;
+		const auto firstIndex = *currentIndex++;
+		const auto secondIndex = *currentIndex++;
+		const auto thirdIndex = *currentIndex++;
 		if (firstIndex == secondIndex || firstIndex == thirdIndex || secondIndex == thirdIndex)
 		{
 			// 现在，输入应该来自三角网格或三角扇。
@@ -69,7 +76,7 @@ bool Rendering::ClodMeshTriangleMesh
 		vertexIndices.insert(secondIndex);
 		vertexIndices.insert(thirdIndex);
 
-		auto result = triangles.insert(Mathematics::TriangleKey(firstIndex, secondIndex, thirdIndex));
+		const auto result = triangles.insert(Mathematics::TriangleKey(firstIndex, secondIndex, thirdIndex));
 
 		if (result.second == false)
 		{
@@ -93,7 +100,7 @@ bool Rendering::ClodMeshTriangleMesh
 }
 
 const int* Rendering::ClodMeshTriangleMesh
-	::GetIndexBufferReadOnlyData() const
+	::GetIndexBufferReadOnlyData() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -101,31 +108,28 @@ const int* Rendering::ClodMeshTriangleMesh
 }
 
 int Rendering::ClodMeshTriangleMesh
-	::GetNumTriangles() const
+	::GetNumTriangles() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_NumTriangles;
 }
 
-const Mathematics::Vector3Df Rendering::ClodMeshTriangleMesh
-	::GetPosition(int index) const
+const Mathematics::Vector3Df Rendering::ClodMeshTriangleMesh ::GetPosition(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_VertexBufferAccessor.GetPosition<Mathematics::Vector3Df>(index);
 }
 
-const char* Rendering::ClodMeshTriangleMesh
-	::GetVertexBufferReadOnlyData() const
+const char* Rendering::ClodMeshTriangleMesh ::GetVertexBufferReadOnlyData() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return  m_VertexBufferAccessor.GetData();
 }
 
-int Rendering::ClodMeshTriangleMesh
-	::GetStride() const
+int Rendering::ClodMeshTriangleMesh ::GetStride() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -148,3 +152,4 @@ void Rendering::ClodMeshTriangleMesh
 	m_IndixBuffer->SetNewData(newData);
 }
 
+#include STSTEM_WARNING_POP

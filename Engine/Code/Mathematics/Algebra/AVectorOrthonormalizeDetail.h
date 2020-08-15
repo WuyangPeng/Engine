@@ -65,23 +65,31 @@ template <typename Real>
 bool Mathematics::AVectorOrthonormalize <Real>
 	::IsValid() const noexcept
 {
-	if (Math::FAbs(Dot(m_UVector, m_VVector)) <= m_Epsilon &&
-		Math::FAbs(Dot(m_UVector, m_WVector)) <= m_Epsilon &&
-		Math::FAbs(Dot(m_VVector, m_WVector)) <= m_Epsilon &&
-		m_UVector.IsNormalize(m_Epsilon) && m_VVector.IsNormalize(m_Epsilon) && m_WVector.IsNormalize(m_Epsilon))
-	{
-		return true;
+	try
+    {
+        if (Math::FAbs(Dot(m_UVector, m_VVector)) <= m_Epsilon &&
+            Math::FAbs(Dot(m_UVector, m_WVector)) <= m_Epsilon &&
+            Math::FAbs(Dot(m_VVector, m_WVector)) <= m_Epsilon &&
+            m_UVector.IsNormalize(m_Epsilon) && m_VVector.IsNormalize(m_Epsilon) && m_WVector.IsNormalize(m_Epsilon))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 	}
-	else
+	catch (...)
 	{
-		return false;
+            return false;
 	}
+	 
+
 }
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize <Real>
-	::GetUVector() const
+const typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetUVector() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -89,8 +97,7 @@ const typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AV
 }
 
 template <typename Real>
-const typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize <Real>
-	::GetVVector() const
+const typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetVVector() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -98,8 +105,7 @@ const typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AV
 }
 
 template <typename Real>
-const typename Mathematics::AVectorOrthonormalize <Real>::AVector Mathematics::AVectorOrthonormalize <Real>
-	::GetWVector() const
+const typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetWVector() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

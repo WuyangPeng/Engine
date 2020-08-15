@@ -23,7 +23,11 @@
 using std::string;
 using std::vector;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering,Controller);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Controller);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Controller);
@@ -65,48 +69,48 @@ Rendering::Controller& Rendering::Controller
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Controller)
 
 const Rendering::ControllerInterface* Rendering::Controller
-    ::GetControllerObject () const
+    ::GetControllerObject () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_Object;
 }
 		
-Rendering::ControllerInterface* Rendering::Controller
-    ::GetControllerObject ()
+Rendering::ControllerInterface* Rendering::Controller ::GetControllerObject() noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
 	return m_Object;
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Controller,Update,double,bool)
+ 
 
-void Rendering::Controller
-    ::SetObject (ControllerInterface* object)
+void Rendering::Controller ::SetObject(ControllerInterface* object)  
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+	CoreTools::DoNothing();
 
 	m_Object = object;
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Controller,SetApplicationTime,double,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetApplicationTime, double, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Controller,GetApplicationTime,double)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetApplicationTime, double)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Controller,GetControlTime,double,double)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Controller,GetRepeat,Rendering::ControllerRepeatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Controller,GetMinTime,double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Controller,GetMaxTime,double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Controller,GetPhase,double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Controller,GetFrequency,double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Controller,IsActive,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetRepeat, Rendering::ControllerRepeatType)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetMinTime, double)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetMaxTime, double)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetPhase, double)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetFrequency, double)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, IsActive, bool)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Controller,SetRepeat,ControllerRepeatType,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetRepeat, ControllerRepeatType, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Controller,SetPhase,double,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Controller,SetFrequency,double,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Controller,SetActive,bool,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetPhase, double, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetFrequency, double, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetActive, bool, void)
 
 const CoreTools::ObjectSmartPointer Rendering::Controller
     ::GetObjectByName(const string& name)
@@ -146,7 +150,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::Controller
 
 Rendering::Controller
     ::Controller(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared <ImplType>() }
+    : ParentType{ value }, m_Impl{ make_shared<ImplType>() }, m_Object{nullptr}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -170,7 +174,7 @@ uint64_t Rendering::Controller
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+	const auto uniqueID = ParentType::Register(target);
 
 	if(uniqueID != 0)
 	{
@@ -203,11 +207,11 @@ void Rendering::Controller
     
 	ParentType::Link(source); 
 
-	ControllerInterfaceSmartPointer object{ m_ObjectID,nullptr };
+/*	ControllerInterfaceSmartPointer object{ m_ObjectID,nullptr };
 	
     source.ResolveObjectSmartPointerLink(object);
 
-	m_Object = object.GetData();
+	m_Object = object.GetData();*/
 }
 
 void Rendering::Controller
@@ -231,19 +235,28 @@ void Rendering::Controller
 
 	ControllerInterfaceSmartPointer object;
 
-	source.ReadSmartPointer(object);
+	//source.ReadSmartPointer(object);
 
-	m_ObjectID = object.GetAddress();
+	//m_ObjectID = object.GetAddress();
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::Controller
-	::SetTime( double minTime,double maxTime )
+	::SetTime( double minTime,double maxTime ) noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->SetTime(minTime,maxTime);
 }
 
+bool Rendering::Controller::Update(double applicationTime)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
+    CoreTools::DoNothing();
+
+    return m_Impl->Update(applicationTime);
+}
+
+#include STSTEM_WARNING_POP

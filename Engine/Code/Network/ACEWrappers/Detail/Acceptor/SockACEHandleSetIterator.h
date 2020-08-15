@@ -22,12 +22,11 @@ namespace Network
 		using ParentType = HandleSetIteratorImpl;
 
 	public:
-		explicit SockACEHandleSetIterator(const ACEHandleSet& handleSet);
-		virtual ~SockACEHandleSetIterator();
+		explicit SockACEHandleSetIterator(const ACEHandleSet& handleSet); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual ACEHandle operator()() override;
+		ACEHandle operator()() override;
 
 	private:
 		ACE_Handle_Set_Iterator m_ACEHandleSetIter;

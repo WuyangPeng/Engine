@@ -55,7 +55,7 @@ void Network::AnalysisNetworkConfigurationImpl
 		{
 			InsertStrategy(ptree.first, ptree.second);
 		}
-		catch (CoreTools::Error& error)
+		catch (const CoreTools::Error& error)
 		{
 			LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
 				<< SYSTEM_TEXT("网络策略")
@@ -74,8 +74,8 @@ void Network::AnalysisNetworkConfigurationImpl
 	auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"), String{});
 	auto connect = basicTree.get(SYSTEM_TEXT("Connect"), String{});
 
-	auto wrappersStrategy = GetWrappersStrategy(wrappers);
-	auto connectStrategy = GetConnectStrategy(connect);
+	const auto wrappersStrategy = GetWrappersStrategy(wrappers);
+	const auto connectStrategy = GetConnectStrategy(connect);
 
 	auto client = basicTree.get(SYSTEM_TEXT("Client"), ClientStrategy::Disable);
 	auto server = basicTree.get(SYSTEM_TEXT("Server"), ServerStrategy::Disable);
@@ -107,12 +107,12 @@ void Network::AnalysisNetworkConfigurationImpl
 		}
 		else
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("服务器和客户端策略都不存在。"));
+			THROW_EXCEPTION(SYSTEM_TEXT("服务器和客户端策略都不存在。"s));
 		}
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("服务器和客户端策略无效。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("服务器和客户端策略无效。"s));
 	}
 }
 
@@ -121,7 +121,7 @@ Network::ConfigurationStrategy Network::AnalysisNetworkConfigurationImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Container.find(name);
+	const auto iter = m_Container.find(name);
 
 	if (iter != m_Container.cend())
 	{
@@ -129,7 +129,7 @@ Network::ConfigurationStrategy Network::AnalysisNetworkConfigurationImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定名字的配置。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定名字的配置。"s));
 	}
 }
 
@@ -155,7 +155,7 @@ Network::WrappersStrategy Network::AnalysisNetworkConfigurationImpl
 		return WrappersStrategy::Socket;
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("网络包装器类型不存在。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("网络包装器类型不存在。"s));
 }
 
 Network::ConnectStrategy Network::AnalysisNetworkConfigurationImpl
@@ -180,7 +180,7 @@ Network::ConnectStrategy Network::AnalysisNetworkConfigurationImpl
 		return ConnectStrategy::WebSocket;
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("网络链接类型不存在。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("网络链接类型不存在。"s));
 }
 
 Network::ConfigurationSubStrategy Network::AnalysisNetworkConfigurationImpl
@@ -220,7 +220,7 @@ Network::ConfigurationParameter Network::AnalysisNetworkConfigurationImpl
 }
 
 Network::AnalysisNetworkConfigurationImpl::ContainerConstIter Network::AnalysisNetworkConfigurationImpl
-	::GetBegin() const
+	::GetBegin() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -228,7 +228,7 @@ Network::AnalysisNetworkConfigurationImpl::ContainerConstIter Network::AnalysisN
 }
 
 Network::AnalysisNetworkConfigurationImpl::ContainerConstIter Network::AnalysisNetworkConfigurationImpl
-	::GetEnd() const
+	::GetEnd() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -236,7 +236,7 @@ Network::AnalysisNetworkConfigurationImpl::ContainerConstIter Network::AnalysisN
 }
 
 int Network::AnalysisNetworkConfigurationImpl
-	::GetSize() const
+	::GetSize() const 
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

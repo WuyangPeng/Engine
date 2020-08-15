@@ -23,6 +23,7 @@ namespace Network
 
 	public:
 		SocketManagerImpl();
+		~SocketManagerImpl() = default;
 
 		SocketManagerImpl(const SocketManagerImpl& rhs);
 		SocketManagerImpl& operator=(const SocketManagerImpl& rhs);

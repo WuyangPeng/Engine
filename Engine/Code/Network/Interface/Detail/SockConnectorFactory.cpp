@@ -18,7 +18,7 @@
 using std::make_shared;
 
 Network::SockConnectorFactory
-	::SockConnectorFactory()
+	::SockConnectorFactory() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -29,7 +29,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, SockConnectorFactory)
 const Network::SockConnectorFactory::ImplTypePtr Network::SockConnectorFactory
 	::Create(const ConfigurationStrategy& configurationStrategy)
 {
-	auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
+	const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategyFlag)
 	{

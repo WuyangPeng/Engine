@@ -19,6 +19,14 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::string;
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26812)
 
 Rendering::ShaderBaseImpl
 	::ShaderBaseImpl(int numInputs,int numOutputs,int numConstants,int numSamplers)
@@ -270,7 +278,7 @@ void Rendering::ShaderBaseImpl
 	m_Output.Load(source);
 	m_Constants.Load(source);
 	m_Sampler.Load(source);
-	source.ReadSmartPointer(m_Profile);
+	//source.ReadSmartPointer(m_Profile);
 }
 
 void Rendering::ShaderBaseImpl
@@ -282,7 +290,7 @@ void Rendering::ShaderBaseImpl
 	m_Output.Save(target);
 	m_Constants.Save(target);
 	m_Sampler.Save(target);
-	target.WriteSmartPointer(m_Profile);
+	//target.WriteSmartPointer(m_Profile);
 }
 
 int Rendering::ShaderBaseImpl
@@ -300,24 +308,21 @@ int Rendering::ShaderBaseImpl
 	return size;
 }
 
-void Rendering::ShaderBaseImpl
-	::SetProfile( const ShaderProfileDataSmartPointer& profile )
+void Rendering::ShaderBaseImpl ::SetProfile(const ShaderProfileDataSmartPointer& profile) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Profile = profile;
 }
 
-const Rendering::ConstShaderProfileDataSmartPointer Rendering::ShaderBaseImpl
-	::GetProfile() const
+const Rendering::ConstShaderProfileDataSmartPointer Rendering::ShaderBaseImpl ::GetProfile() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Profile;
 }
 
-Rendering::ShaderProfileDataSmartPointer Rendering::ShaderBaseImpl
-	::GetProfile()
+Rendering::ShaderProfileDataSmartPointer Rendering::ShaderBaseImpl ::GetProfile() noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -328,16 +333,16 @@ void Rendering::ShaderBaseImpl
 	::Link( ObjectLink& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ResolveObjectSmartPointerLink(m_Profile);
+    source;
+	//source.ResolveObjectSmartPointerLink(m_Profile);
 }
 
 void Rendering::ShaderBaseImpl
 	::Register( ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_Profile);
+    target;
+	//target.RegisterSmartPointer(m_Profile);
 }
 
 void Rendering::ShaderBaseImpl
@@ -349,7 +354,7 @@ void Rendering::ShaderBaseImpl
 	auto numOutputs = GetNumOutputs();
 	auto numConstants = GetNumConstants();
 	auto numSamplers = GetNumSamplers();
-	auto numProfiles = ShaderFlags::MaxProfiles;
+	auto numProfiles = System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles);
 
 	manager.Write(sizeof(int), &numInputs);
 	manager.Write(sizeof(int), &numOutputs);
@@ -495,9 +500,9 @@ void Rendering::ShaderBaseImpl
 	{
 		auto type = 0;
 		manager.Read(sizeof(int), &type);
-		RENDERING_ASSERTION_0(0 <= type && type < ShaderFlags::MaxProfiles, "无效profile");
+		RENDERING_ASSERTION_0(0 <= type && type < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles), "无效profile");
 
-		if (0 <= type && type < ShaderFlags::MaxProfiles)
+		if (0 <= type && type < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles))
 		{
 			auto programName = manager.LoadStdString();
 			profile->SetProgram(profileIndex, programName);
@@ -523,3 +528,4 @@ void Rendering::ShaderBaseImpl
 
 	SetProfile(profile);
 }
+#include STSTEM_WARNING_POP

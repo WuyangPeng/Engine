@@ -47,9 +47,9 @@ namespace Rendering
         void MakeIdentity ();
         void MakeUnitScale ();
 
-        bool IsIdentity () const; 
-        bool IsRotationOrScaleMatrix () const; 
-        bool IsUniformScale () const; 
+        bool IsIdentity () const noexcept; 
+        bool IsRotationOrScaleMatrix () const noexcept; 
+        bool IsUniformScale () const noexcept; 
 
 		void SetRotate (const Matrix& rotate);
         void SetMatrix (const Matrix& matrix);
@@ -57,8 +57,8 @@ namespace Rendering
         void SetScale (const APoint& scale);
         void SetUniformScale (float scale);
         const Matrix GetRotate () const;
-        const Matrix GetMatrix () const;
-        const APoint GetTranslate () const;
+        const Matrix GetMatrix () const noexcept;
+        const APoint GetTranslate () const noexcept;
         const APoint GetScale () const;
         float GetUniformScale () const;
 
@@ -68,7 +68,7 @@ namespace Rendering
         AVector operator* (const AVector& vector) const;
         Transform& operator*= (const Transform& transform);
 
-        const Matrix GetHomogeneousMatrix () const;
+        const Matrix GetHomogeneousMatrix () const noexcept;
         const Matrix GetInverseMatrix (float epsilon = Math::sm_ZeroTolerance) const;
         const Transform GetInverseTransform (float epsilon = Math::sm_ZeroTolerance) const;
 

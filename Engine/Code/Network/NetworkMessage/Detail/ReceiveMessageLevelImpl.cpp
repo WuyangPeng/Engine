@@ -16,7 +16,7 @@
 using std::make_pair;
 
 Network::ReceiveMessageLevelImpl
-	::ReceiveMessageLevelImpl()
+	::ReceiveMessageLevelImpl() noexcept
 	:m_TopLevel{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -38,7 +38,7 @@ const Network::ConstMessageInterfaceSharedPtr Network::ReceiveMessageLevelImpl
 	NETWORK_CLASS_IS_VALID_CONST_9;
 	NETWORK_ASSERTION_0(0 <= index && index < GetTopLevelSize(), "Ë÷Òý´íÎó£¡");
 
-	return m_TopLevel[index];
+	return m_TopLevel.at(index);
 }
 
 void Network::ReceiveMessageLevelImpl
@@ -50,7 +50,7 @@ void Network::ReceiveMessageLevelImpl
 }
 
 Network::ReceiveMessageLevelImpl::MessageContainerConstIter Network::ReceiveMessageLevelImpl
-	::begin() const
+	::begin() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -58,7 +58,7 @@ Network::ReceiveMessageLevelImpl::MessageContainerConstIter Network::ReceiveMess
 }
 
 Network::ReceiveMessageLevelImpl::MessageContainerConstIter Network::ReceiveMessageLevelImpl
-	::end() const
+	::end() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

@@ -25,7 +25,7 @@ namespace Network
 	public:
 		MessageEventContainer();
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(MessageEventContainer);
+		CLASS_INVARIANT_DECLARE ;
 
 		void Insert(const NetworkMessageEventSharedPtr& messageEvent);
 		void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority);

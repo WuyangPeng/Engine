@@ -11,6 +11,12 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <functional>
+#include <gsl/gsl_util>
+
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26486)
 
 using std::placeholders::_1;
 using std::bind;
@@ -35,7 +41,7 @@ void Network::HandleSetContainer
 bool Network::HandleSetContainer
 	::IsValid() const noexcept
 {
-	if (0 <= m_CurrentIndex && m_CurrentIndex < static_cast<int>(m_HandleSetGroup.size()))
+	if (0 <= m_CurrentIndex && m_CurrentIndex < gsl::narrow_cast<int>(m_HandleSetGroup.size()))
 		return true;
 	else
 		return false;
@@ -44,7 +50,7 @@ bool Network::HandleSetContainer
 #endif // OPEN_CLASS_INVARIANT	
 
 const  Network::HandleSet Network::HandleSetContainer
-	::GetCurrentHandleSet() const
+	::GetCurrentHandleSet() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -106,3 +112,4 @@ void Network::HandleSetContainer
 	}
 }
 
+#include STSTEM_WARNING_POP

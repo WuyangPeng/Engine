@@ -169,7 +169,7 @@
     <LinkIncremental>true</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -259,7 +259,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -304,7 +304,7 @@
     <Text Include="Resource\Todo\Level 6.txt" />
     <Text Include="Resource\Todo\Level 7.txt" />
     <Text Include="Resource\Todo\Level 8.txt" />
-    <Text Include="Resource\Todo\Level 9.txt" /> 
+    <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\Assert\Assert.h" />
@@ -730,6 +730,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\StreamDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\StreamSize.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\TypeCasting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\WeakPtr.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\WeakPtrDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\PerformanceProfiler\PerformanceProfiler.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\PerformanceProfiler\PerformanceProfilerFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Properties\DirectPropertyGetInternal.h" />

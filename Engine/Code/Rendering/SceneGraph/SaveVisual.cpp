@@ -16,24 +16,24 @@ using CoreTools::WriteFileManager;
 void Rendering::SaveVisual
 	::SaveToFile(const Visual& visual, const System::String& name)
 {
-	RENDERING_ASSERTION_0(!visual.GetConstVertexFormat().IsNullPtr(), "VertexFormat是空指针！");
-	RENDERING_ASSERTION_0(!visual.GetConstVertexBuffer().IsNullPtr(), "VertexBuffer是空指针！");
+	RENDERING_ASSERTION_0(visual.GetConstVertexFormat() != nullptr, "VertexFormat是空指针！");
+    RENDERING_ASSERTION_0(visual.GetConstVertexBuffer() != nullptr, "VertexBuffer是空指针！");
 
 	WriteFileManager manager{ name };
 
-	auto type = System::EnumCastUnderlying(visual.GetPrimitiveType());
+const auto type = System::EnumCastUnderlying(visual.GetPrimitiveType());
 	manager.Write(sizeof(int), &type);
 
 	visual.GetConstVertexFormat()->SaveToFile(manager);
 	visual.GetConstVertexBuffer()->SaveToFile(manager, visual.GetConstVertexFormat());
 
-	if (!visual.GetConstIndexBuffer().IsNullPtr())
+	if ( visual.GetConstIndexBuffer() )
 	{
 		visual.GetConstIndexBuffer()->SaveToFile(manager);
 	}
 	else
 	{
-		int numElements{ 0 };
+            constexpr int numElements{ 0 };
 		manager.Write(sizeof(int), &numElements);
 	}
 }

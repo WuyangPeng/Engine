@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 Network::SockAcceptorImpl
-	::SockAcceptorImpl()
+	::SockAcceptorImpl() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -29,7 +29,7 @@ Network::ACEHandleType Network::SockAcceptorImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Acceptor类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Acceptor类！"s));
 }
 
 Network::BoostHandleType Network::SockAcceptorImpl
@@ -37,7 +37,7 @@ Network::BoostHandleType Network::SockAcceptorImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是boost Acceptor类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是boost Acceptor类！"s));
 }
 
 Network::WinSocketType Network::SockAcceptorImpl
@@ -45,6 +45,6 @@ Network::WinSocketType Network::SockAcceptorImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是Network Acceptor类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是Network Acceptor类！"s));
 }
 

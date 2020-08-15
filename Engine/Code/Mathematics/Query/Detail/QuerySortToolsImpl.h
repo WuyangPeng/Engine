@@ -35,13 +35,13 @@ namespace Mathematics
 		// 输出索引要么带正排序（排序期间发生偶数换位）
 		// 或带负排序（排序期间发生奇数换位）。
 		// 该函数返回排序的符号，“正”表示一个正的排序和“负”为负的排序。
-		NumericalValueSymbol GetSymbol() const;
+		NumericalValueSymbol GetSymbol() const noexcept;
 		int GetValue(int index) const;
 
 	private:
-		void SortTwoValue();
-		void SortThreeValue();
-		void SortFourValue();
+		void SortTwoValue() noexcept;
+		void SortThreeValue() noexcept;
+		void SortFourValue() noexcept;
 
 	private:
 		std::vector<int> m_SortValue;

@@ -14,19 +14,17 @@
 #include "Network/NetworkMessage/MessageBuffer.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Network::NetworkSockStream
-	::NetworkSockStream()
+	::NetworkSockStream() noexcept
 	:ParentType{}, m_WinSocket{ 0 }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
-
-Network::NetworkSockStream
-	::~NetworkSockStream()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkSockStream)
 
@@ -67,7 +65,7 @@ void Network::NetworkSockStream
 }
 
 Network::WinSocketStreamType& Network::NetworkSockStream
-	::GetNetworkSockStream()
+	::GetNetworkSockStream() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -75,7 +73,7 @@ Network::WinSocketStreamType& Network::NetworkSockStream
 }
 
 bool Network::NetworkSockStream
-	::CloseHandle()
+	::CloseHandle() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -85,7 +83,7 @@ bool Network::NetworkSockStream
 }
 
 void Network::NetworkSockStream
-	::SetNetworkHandle(WinSocketStreamType winSocket)
+	::SetNetworkHandle(WinSocketStreamType winSocket) noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -93,7 +91,7 @@ void Network::NetworkSockStream
 }
 
 bool Network::NetworkSockStream
-	::EnableNonBlock()
+	::EnableNonBlock() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -102,7 +100,7 @@ bool Network::NetworkSockStream
 }
 
 const std::string Network::NetworkSockStream
-	::GetRemoteAddress() const
+	::GetRemoteAddress() const 
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -110,10 +108,10 @@ const std::string Network::NetworkSockStream
 }
 
 int Network::NetworkSockStream
-	::GetRemotePort() const
+	::GetRemotePort() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
 	return 0;
 }
-
+#include STSTEM_WARNING_POP

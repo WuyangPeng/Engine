@@ -14,24 +14,20 @@
 
 using std::min;
 using std::max;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26489)
 Network::MessageTypeConditionCompare
-	::MessageTypeConditionCompare(VersionsCondition condition, int version)
+	::MessageTypeConditionCompare(VersionsCondition condition, int version) noexcept
 	:ParentType{}, m_Condition{ condition }, m_Version{ version }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageTypeConditionCompare
-	::~MessageTypeConditionCompare()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageTypeConditionCompare)
 
-bool Network::MessageTypeConditionCompare
-	::IsVersionsConform(int version) const
+bool Network::MessageTypeConditionCompare ::IsVersionsConform(int version) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -108,3 +104,4 @@ int Network::MessageTypeConditionCompare
 	return max(minVersion, 0);
 }
 
+#include STSTEM_WARNING_POP

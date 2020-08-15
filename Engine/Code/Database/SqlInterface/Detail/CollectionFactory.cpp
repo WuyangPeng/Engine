@@ -18,7 +18,7 @@ using std::make_shared;
 using std::string;
 
 Database::CollectionFactory
-	::CollectionFactory()
+	::CollectionFactory() noexcept
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -28,8 +28,8 @@ CLASS_INVARIANT_STUB_DEFINE(Database, CollectionFactory)
 Database::CollectionFactory::ImplTypePtr Database::CollectionFactory
 	::Create(const Schema& schema, const string& collectionName)
 {
-	auto configurationStrategy = schema.GetConfigurationStrategy();
-	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+    const auto configurationStrategy = schema.GetConfigurationStrategy();
+	const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 	switch (wrappersStrategy)
 	{
 	#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 

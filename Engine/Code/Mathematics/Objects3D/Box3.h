@@ -40,17 +40,17 @@ namespace Mathematics
 
 		// 返回的顶点数为8
 		const std::vector<Vector3D> ComputeVertices() const;
-		const Vector3D GetCenter() const;
-		const Vector3D GetFirstAxis() const;
-		const Vector3D GetSecondAxis() const;
-		const Vector3D GetThirdAxis() const;
-		Real GetFirstExtent() const;
-		Real GetSecondExtent() const;
-		Real GetThirdExtent() const;
+		const Vector3D GetCenter() const noexcept;
+		const Vector3D GetFirstAxis() const noexcept;
+		const Vector3D GetSecondAxis() const noexcept;
+		const Vector3D GetThirdAxis() const noexcept;
+		Real GetFirstExtent() const noexcept;
+		Real GetSecondExtent() const noexcept;
+		Real GetThirdExtent() const noexcept;
 		const Vector3D GetAxis(int index) const;
 		Real GetExtent(int index) const;
 
-		Real GetEpsilon() const;
+		Real GetEpsilon() const noexcept;
 
 		const ClassType GetMove(Real t, const Vector3D& velocity) const;
 

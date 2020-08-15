@@ -12,18 +12,13 @@
 
 using std::make_shared;
 
-Database::NullResultRow
-	::NullResultRow(const ConfigurationStrategy& configurationStrategy)
-	: ParentType{ configurationStrategy }
+Database::NullResultRow ::NullResultRow(const ConfigurationStrategy& configurationStrategy) noexcept
+    : ParentType{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-Database::NullResultRow
-	::~NullResultRow()
-{
-	DATABASE_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, NullResultRow)
 

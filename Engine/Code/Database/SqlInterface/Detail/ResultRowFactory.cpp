@@ -17,7 +17,7 @@
 using std::make_shared;
 
 Database::ResultRowFactory
-	::ResultRowFactory()
+	::ResultRowFactory() noexcept
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -27,13 +27,13 @@ CLASS_INVARIANT_STUB_DEFINE(Database, ResultRowFactory)
 Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
 	::Create(const ConfigurationStrategy& configurationStrategy)
 {
-	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+    const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 	switch (wrappersStrategy)
 	{
 	#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
 
 	case Database::WrappersStrategy::MysqlConnector:
-		THROW_EXCEPTION(SYSTEM_TEXT("无法在无参数的情况下创建MysqlConnectorResultRow。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("无法在无参数的情况下创建MysqlConnectorResultRow。"s));
 
 	#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
@@ -51,7 +51,7 @@ Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
 	::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc)
 {
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
-	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+	const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 
 	if (wrappersStrategy == Database::WrappersStrategy::MysqlConnector)
 	{
@@ -59,7 +59,7 @@ Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
 	}
 #endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-	THROW_EXCEPTION(SYSTEM_TEXT("无法在非MysqlConnector环境下创建ResultRow。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("无法在非MysqlConnector环境下创建ResultRow。"s));
 }
 
 Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
@@ -67,7 +67,7 @@ Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
 {
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+	const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 
 	if (wrappersStrategy == Database::WrappersStrategy::MysqlConnector)
 	{
@@ -76,6 +76,6 @@ Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory
 
 #endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-	THROW_EXCEPTION(SYSTEM_TEXT("无法在非MysqlConnector环境下创建ResultRow。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("无法在非MysqlConnector环境下创建ResultRow。"s));
 }
 

@@ -17,7 +17,13 @@
 
 using std::string;
 using std::for_each;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#if defined(TCRE_USE_MSVC)
+    #pragma warning(disable : 28020)
+#endif  // TCRE_USE_MSVC
 Rendering::ShaderProfileDataImpl
 	::ShaderProfileDataImpl(int numConstants,int numSamplers)	
 	:m_ShaderProfileData{}, m_NumConstants{ numConstants },m_NumSamplers{ numSamplers }
@@ -28,7 +34,7 @@ Rendering::ShaderProfileDataImpl
 }
 
 Rendering::ShaderProfileDataImpl
-	::ShaderProfileDataImpl()
+	::ShaderProfileDataImpl() noexcept
 	:m_ShaderProfileData{}, m_NumConstants{ 0 }, m_NumSamplers{ 0 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -40,7 +46,7 @@ void Rendering::ShaderProfileDataImpl
     ::SetBaseRegister( int profile, int index, int baseRegister )
 {
 	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= profile && profile < ShaderFlags::MaxProfiles,"索引错误");
+	RENDERING_ASSERTION_0(0 <= profile && profile < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"索引错误");
 
 	m_ShaderProfileData[profile].SetBaseRegister(index, baseRegister);
 }
@@ -49,7 +55,7 @@ void Rendering::ShaderProfileDataImpl
 	::SetTextureUnit( int profile, int index, int textureUnit )
 {
 	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= profile && profile < ShaderFlags::MaxProfiles,"索引错误");
+	RENDERING_ASSERTION_0(0 <= profile && profile < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"索引错误");
 
 	m_ShaderProfileData[profile].SetTextureUnit(index, textureUnit);
 }
@@ -58,7 +64,7 @@ void Rendering::ShaderProfileDataImpl
 	::SetProgram( int profile, const std::string& program )
 {
 	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= profile && profile < ShaderFlags::MaxProfiles,"索引错误");
+	RENDERING_ASSERTION_0(0 <= profile && profile < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"索引错误");
 
 	m_ShaderProfileData[profile].SetProgram(program);
 }
@@ -67,7 +73,7 @@ int Rendering::ShaderProfileDataImpl
 	::GetBaseRegister( int profile, int index ) const
 {
 	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= profile && profile < ShaderFlags::MaxProfiles,"索引错误");
+	RENDERING_ASSERTION_0(0 <= profile && profile < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"索引错误");
 
 	return m_ShaderProfileData[profile].GetBaseRegister(index);
 }
@@ -76,7 +82,7 @@ int Rendering::ShaderProfileDataImpl
 	::GetTextureUnit( int profile, int index ) const
 {
 	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= profile && profile < ShaderFlags::MaxProfiles,"索引错误");
+	RENDERING_ASSERTION_0(0 <= profile && profile < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"索引错误");
 
 	return m_ShaderProfileData[profile].GetTextureUnit(index);
 }
@@ -85,21 +91,19 @@ const std::string Rendering::ShaderProfileDataImpl
 	::GetProgram( int profile ) const
 {
 	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= profile && profile < ShaderFlags::MaxProfiles,"索引错误");
+	RENDERING_ASSERTION_0(0 <= profile && profile < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"索引错误");
 
 	return m_ShaderProfileData[profile].GetProgram();
 }
 
-int Rendering::ShaderProfileDataImpl
-	::GetBaseRegisterSize() const
+int Rendering::ShaderProfileDataImpl ::GetBaseRegisterSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_NumConstants;
 }
 
-int Rendering::ShaderProfileDataImpl
-	::GetTextureUnitSize() const
+int Rendering::ShaderProfileDataImpl ::GetTextureUnitSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -115,7 +119,7 @@ void Rendering::ShaderProfileDataImpl
 	int maxProfiles{ 0 };
 	source.Read(maxProfiles);
 
-	RENDERING_ASSERTION_2(maxProfiles == ShaderFlags::MaxProfiles,"你改变了MaxProfiles的值，并加载了旧的数据集。");
+	RENDERING_ASSERTION_2(maxProfiles == System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"你改变了MaxProfiles的值，并加载了旧的数据集。");
 
 	for (auto i = 0; i < maxProfiles; ++i)
 	{
@@ -131,9 +135,9 @@ void Rendering::ShaderProfileDataImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(System::EnumCastUnderlying(ShaderFlags::MaxProfiles));
+	target.Write(System::EnumCastUnderlying(System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)));
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		m_ShaderProfileData[i].Save(target);
 	}
@@ -147,9 +151,9 @@ int Rendering::ShaderProfileDataImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(ShaderFlags::MaxProfiles);
+	auto size = CORE_TOOLS_STREAM_SIZE(System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles));
 	 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		 size += m_ShaderProfileData[i].GetStreamingSize();
 	}
@@ -160,3 +164,4 @@ int Rendering::ShaderProfileDataImpl
 	return size;
 }
 
+#include STSTEM_WARNING_POP

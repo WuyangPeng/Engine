@@ -15,7 +15,9 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 template <int N>
 Mathematics::IntegerMultiplication<N>
 	::IntegerMultiplication(const IntegerData& lhs, const IntegerData& rhs)
@@ -45,11 +47,11 @@ void Mathematics::IntegerMultiplication<N>
 {
 	for (auto lhsIndex = 0u; lhsIndex < sm_IntSize; ++lhsIndex)
 	{
-		auto lhsBit = m_AbsLhsData[lhsIndex];
+		const auto lhsBit = m_AbsLhsData[lhsIndex];
 		if (0 < lhsBit)
 		{
 			CalculateProduct(lhsBit, lhsIndex);
-			auto carry = CalculateResult(lhsIndex);
+			const auto carry = CalculateResult(lhsIndex);
 			DetermineCarry(carry, lhsIndex + sm_IntSize + 1);
 		}
 	}
@@ -66,8 +68,8 @@ void Mathematics::IntegerMultiplication<N>
 	auto carry = 0;
 	for (auto rhsIndex = 0u; rhsIndex < sm_IntSize; ++rhsIndex)
 	{
-		auto rhsBit = m_AbsRhsData[rhsIndex];
-		auto productBit = lhsBit * rhsBit + carry;
+		const auto rhsBit = m_AbsRhsData[rhsIndex];
+		const auto productBit = lhsBit * rhsBit + carry;
 		m_Product[productBufferIndex] = boost::numeric_cast<uint16_t>(productBit & sm_Low);
 		carry = (productBit & sm_High) >> 16;
 		++productBufferIndex;
@@ -133,7 +135,7 @@ void Mathematics::IntegerMultiplication<N>
 
 	if ((m_Result[sm_IntLast] & sm_Symbol) != 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("IntegerÒç³ö\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("IntegerÒç³ö\n"s));
 	}
 
 	m_Multiplication = IntegerData{ boost::numeric_cast<int>(sm_IntSize),&m_Result[0] };
@@ -162,12 +164,12 @@ bool Mathematics::IntegerMultiplication<N>
 
 template <int N>
 const Mathematics::IntegerData<N> Mathematics::IntegerMultiplication<N>
-	::GetMultiplication() const
+	::GetMultiplication() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Multiplication;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
 

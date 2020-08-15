@@ -14,17 +14,13 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::WindowsMutex
-	::WindowsMutex()
+	::WindowsMutex() noexcept
 	:m_Mutex{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::WindowsMutex
-	::~WindowsMutex()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, WindowsMutex)
 
@@ -37,12 +33,12 @@ void CoreTools::WindowsMutex
 
 	if (m_Mutex == nullptr)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("初始化Mutex失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("初始化Mutex失败。"s));
 	}
 }
 
 void CoreTools::WindowsMutex
-	::Delete()
+	::Delete() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -61,7 +57,7 @@ void CoreTools::WindowsMutex
 
 	if (!System::WaitForSystemMutex(m_Mutex))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s));
 	}
 
 	// 结果:
@@ -72,7 +68,7 @@ void CoreTools::WindowsMutex
 }
 
 void CoreTools::WindowsMutex
-	::Leave()
+	::Leave() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -85,11 +81,11 @@ void CoreTools::WindowsMutex
 }
 
 bool CoreTools::WindowsMutex
-	::TryEnter()
+	::TryEnter() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	auto result = System::WaitForSystemMutex(m_Mutex, 0);
+	const auto result = System::WaitForSystemMutex(m_Mutex, 0);
 	if (result == System::MutexWaitReturn::Object0)
 		return true;
 	else

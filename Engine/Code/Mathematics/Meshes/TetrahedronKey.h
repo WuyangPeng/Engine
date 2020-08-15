@@ -8,7 +8,9 @@
 #define MATHEMATICS_MESHES_TETRAHEDRON_KEY_H
 
 #include "Mathematics/MathematicsDll.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 namespace Mathematics
 {
 	class MATHEMATICS_DEFAULT_DECLARE TetrahedronKey
@@ -28,9 +30,9 @@ namespace Mathematics
 		// matrix I; the rows are the specified 4-tuples.  The permutation
 		// (V[0],V[1],V[2],V[3]) induces a permutation of the rows of the identity
 		// matrix to form a permutation matrix P with det(P) = 1 = det(I).
-		TetrahedronKey(int v0 = -1, int v1 = -1, int v2 = -1, int v3 = -1);
+		TetrahedronKey(int v0 = -1, int v1 = -1, int v2 = -1, int v3 = -1) noexcept;
 
-		bool operator< (const TetrahedronKey& key) const;
+		bool operator< (const TetrahedronKey& key) const noexcept;
 
 		int V[4];
 
@@ -42,8 +44,8 @@ namespace Mathematics
 		static const int oppositeFace[4][3];
 
 	private:
-		void Permute (int u0, int u1, int u2);
+		void Permute (int u0, int u1, int u2) noexcept;
 	};
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_MESHES_TETRAHEDRON_KEY_H

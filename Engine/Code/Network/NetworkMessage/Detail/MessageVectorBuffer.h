@@ -23,19 +23,19 @@ namespace Network
 
 	public:
 		MessageVectorBuffer(int count, ParserStrategy parserStrategy);
-		virtual ~MessageVectorBuffer();
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const char* GetInitialBufferedPtr() const override;
-		virtual char* GetInitialBufferedPtr() override;
+		  const char* GetInitialBufferedPtr() const noexcept override;
+		  char* GetInitialBufferedPtr() noexcept override;
 
-		virtual ImplPtr Clone() const override;
+		  ImplPtr Clone() const override;
 
-		virtual BuffBlockSize GetBuffBlockSize() const override;
-		virtual int GetSize() const override;
+		  BuffBlockSize GetBuffBlockSize() const noexcept override;
+		  int GetSize() const override;
 
-		virtual ImplPtr Expansion(int count) const override;
+		  ImplPtr Expansion(int count) const override;
 
 	private:
 		void Resize(int count);

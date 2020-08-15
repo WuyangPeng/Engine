@@ -18,7 +18,9 @@
 using std::vector;
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering, MaterialConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MaterialConstant);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, MaterialConstant); 
@@ -34,12 +36,7 @@ Rendering::MaterialConstant
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::MaterialConstant
-	::~MaterialConstant()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, MaterialConstant)
 
 void Rendering::MaterialConstant
@@ -52,3 +49,5 @@ void Rendering::MaterialConstant
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, MaterialConstant,GetMaterial, const Rendering::ConstMaterialSmartPointer )
+
+#include STSTEM_WARNING_POP

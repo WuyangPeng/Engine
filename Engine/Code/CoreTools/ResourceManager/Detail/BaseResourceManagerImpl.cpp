@@ -89,7 +89,7 @@ void CoreTools::BaseResourceManagerImpl
 
 		while ((!priorityQueue.IsEmpty()) && (m_MaximumMemory < m_CurrentUsedMemory) && (0 < memoryToPurge))
 		{
-			auto disposalSize = priorityQueue.Dispose();
+			const auto disposalSize = priorityQueue.Dispose();
 
 			RemoveMemory(disposalSize);
 			memoryToPurge -= disposalSize;
@@ -114,7 +114,7 @@ uint32_t CoreTools::BaseResourceManagerImpl
 }
 
 void CoreTools::BaseResourceManagerImpl
-	::GotoBegin()
+	::GotoBegin() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_2;
 
@@ -170,7 +170,7 @@ uint32_t CoreTools::BaseResourceManagerImpl
 
 // private
 uint32_t CoreTools::BaseResourceManagerImpl
-	::GetNextResourceHandle() noexcept
+	::GetNextResourceHandle() 
 {
 	return UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Resource) % sm_InvalidResourceHandle;
 }
@@ -189,18 +189,18 @@ void CoreTools::BaseResourceManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_2;
 
-	auto iter = m_ResourceContainer.find(uniqueID);
+	const auto iter = m_ResourceContainer.find(uniqueID);
 	if (iter == m_ResourceContainer.end())
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID不存在！"s));
 	}
 
-	auto originalSize = iter->second->GetSize();
+	const auto originalSize = iter->second->GetSize();
 
 	// 修改资源到当前类别的map。
 	iter->second = resource;
 
-	auto nowSize = resource->GetSize();
+	const auto nowSize = resource->GetSize();
 
 	if (originalSize < nowSize)
 	{
@@ -217,7 +217,7 @@ void CoreTools::BaseResourceManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_2;
 
-	auto uniqueID = FindResourceHandle(resource);
+	const auto uniqueID = FindResourceHandle(resource);
 
 	RemoveResource(uniqueID);
 }
@@ -267,7 +267,7 @@ void CoreTools::BaseResourceManagerImpl
 		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID不是有效的。"s));
 	}
 
-	auto iter = m_ResourceContainer.find(uniqueID);
+	const auto iter = m_ResourceContainer.find(uniqueID);
 	if (iter == m_ResourceContainer.cend())
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("无法找到要删除的资源。"s));
@@ -278,7 +278,7 @@ void CoreTools::BaseResourceManagerImpl
 	// 如果资源被找到，检查看它有没有被锁定
 	if (resource->IsLocked())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("无法删除被锁住的资源。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("无法删除被锁住的资源。"s));
 	}
 
 	if (m_CurrentResource != m_ResourceContainer.end() && iter == m_CurrentResource)
@@ -297,7 +297,7 @@ const CoreTools::BaseResourceManagerImpl::ResourceWeakPtr CoreTools::BaseResourc
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_2;
 
-	auto iter = m_ResourceContainer.find(uniqueID);
+	const auto iter = m_ResourceContainer.find(uniqueID);
 
 	if (iter == m_ResourceContainer.cend())
 	{
@@ -326,7 +326,7 @@ const CoreTools::BaseResourceManagerImpl::ResourceSharedPtr CoreTools::BaseResou
 {
 	CORE_TOOLS_CLASS_IS_VALID_2;
 
-	auto iter = m_ResourceContainer.find(uniqueID);
+	const auto iter = m_ResourceContainer.find(uniqueID);
 	if (iter == m_ResourceContainer.cend())
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("资源未找到！"s));
@@ -356,7 +356,7 @@ void CoreTools::BaseResourceManagerImpl
 		THROW_EXCEPTION(SYSTEM_TEXT("uniqueID无效！"s));
 	}
 
-	auto iter = m_ResourceContainer.find(uniqueID);
+	const auto iter = m_ResourceContainer.find(uniqueID);
 	if (iter == m_ResourceContainer.cend())
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("资源未找到！"s));
@@ -372,7 +372,7 @@ void CoreTools::BaseResourceManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_2;
 
-	auto uniqueID = FindResourceHandle(resource);
+	const auto uniqueID = FindResourceHandle(resource);
 
 	Unlock(uniqueID);
 }

@@ -19,8 +19,12 @@ namespace Network
 		using ClassType = BaseMainManagerImpl;
 
 	public:
-		BaseMainManagerImpl();
+		BaseMainManagerImpl() noexcept;
 		virtual ~BaseMainManagerImpl();
+		BaseMainManagerImpl(const BaseMainManagerImpl&) = default;
+		BaseMainManagerImpl& operator=(const BaseMainManagerImpl&) = default;
+		BaseMainManagerImpl(BaseMainManagerImpl&&) noexcept = default;
+		BaseMainManagerImpl& operator=(BaseMainManagerImpl&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

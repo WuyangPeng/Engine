@@ -25,7 +25,7 @@ namespace Rendering
 	public:
 		// Construction and destruction.
 		DefaultEffect ();
-		virtual ~DefaultEffect ();
+ 
 		
 		// Create an instance of the effect with unique parameters.
 		VisualEffectInstance* CreateInstance () const;
@@ -33,13 +33,16 @@ namespace Rendering
 	private:
 		static int msDx9VRegisters[1];
 		static int msOglVRegisters[1];
-		static int* msVRegisters[ShaderFlags::MaxProfiles];
-		static std::string msVPrograms[ShaderFlags::MaxProfiles];
-		static std::string msPPrograms[ShaderFlags::MaxProfiles];
+		static int* msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+		static std::string msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+		static std::string msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
 	};
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(DefaultEffect);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, DefaultEffect);
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_LOCAL_EFFECTS_DEFAULT_EFFECT_H

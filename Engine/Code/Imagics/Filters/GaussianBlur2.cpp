@@ -7,7 +7,9 @@
 #include "Imagics/ImagicsExport.h"
 
 #include "GaussianBlur2.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 Imagics::GaussianBlur2
 	::GaussianBlur2 (int xBound, int yBound, float xSpacing,float ySpacing, const float* data, const bool* mask, float borderValue,ScaleType scaleType)
     :PdeFilter2(xBound, yBound, xSpacing, ySpacing, data, mask, borderValue,scaleType)
@@ -15,19 +17,16 @@ Imagics::GaussianBlur2
     mMaximumTimeStep = 0.5f/(mInvDxDx + mInvDyDy);
 }
 
-Imagics::GaussianBlur2
-	::~GaussianBlur2 ()
-{
-}
+ 
 
 float Imagics::GaussianBlur2
-	::GetMaximumTimeStep () const
+	::GetMaximumTimeStep () const noexcept
 {
     return mMaximumTimeStep;
 }
 
 void Imagics::GaussianBlur2
-	::OnUpdate (int x, int y)
+	::OnUpdate (int x, int y) noexcept
 {
     LookUp5(x, y);
 
@@ -37,3 +36,4 @@ void Imagics::GaussianBlur2
     mDst[y][x] = mUzz + mTimeStep*(uxx + uyy);
 }
 
+#include STSTEM_WARNING_POP

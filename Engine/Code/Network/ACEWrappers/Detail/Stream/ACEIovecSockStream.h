@@ -22,13 +22,12 @@ namespace Network
 		using ParentType = ACESockStream;
 
 	public:
-		ACEIovecSockStream();
-		virtual ~ACEIovecSockStream();
+		ACEIovecSockStream(); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual int Send(const MessageBufferSharedPtr& messageBuffer) override;
-		virtual void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
+		int Send(const MessageBufferSharedPtr& messageBuffer) override;
+		void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 	};
 }
 

@@ -19,19 +19,19 @@ namespace Mathematics
 		using ClassType = SparseMatrixIndex;
 
 	public:
-		SparseMatrixIndex(int row, int column);
+		SparseMatrixIndex(int row, int column) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetRow() const;
-		int GetColumn() const;
+		int GetRow() const noexcept; 
+		int GetColumn() const noexcept;
 
 	private:
 		int m_Row;
 		int m_Column;
 	};
 
-	bool MATHEMATICS_DEFAULT_DECLARE operator < (const SparseMatrixIndex& lhs, const SparseMatrixIndex& rhs);
+	bool MATHEMATICS_DEFAULT_DECLARE operator < (const SparseMatrixIndex& lhs, const SparseMatrixIndex& rhs) noexcept;
 }
 
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_INDEX_H

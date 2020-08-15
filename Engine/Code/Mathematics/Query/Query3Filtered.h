@@ -30,19 +30,19 @@ namespace Mathematics
 		// uncertainty为0会导致类的行为就好像它是Query3。
 		// uncertainty为1会导致类的行为就好像它是Query3Rational。
 		Query3Filtered(const std::vector<Vector3D>& vertices, Real uncertainty);
-		virtual ~Query3Filtered();
+		 ~Query3Filtered();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual QueryType GetType() const override;
+		 QueryType GetType() const override;
 
 		// 关于一个点的各种几何对象之间的关系查询。
 
-		virtual PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
-		virtual PlaneQueryType ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const override;
+		 PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
+		 PlaneQueryType ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const override;
 
-		virtual CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
-		virtual CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const override;
+		 CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
+		 CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const override;
 
 	private:
 		using Query3Rational = Query3Rational<Real>;

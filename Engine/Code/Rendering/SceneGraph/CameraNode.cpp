@@ -21,7 +21,10 @@
 using std::string;
 using std::vector;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering,CameraNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,CameraNode);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,CameraNode);
@@ -67,20 +70,20 @@ void Rendering::CameraNode
 	}    
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CameraNode,GetCamera,const Rendering::ConstCameraSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CameraNode,GetCamera,const Rendering::ConstCameraSmartPointer)
 
 bool Rendering::CameraNode
     ::UpdateWorldData (double applicationTime)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
-    auto result = ParentType::UpdateWorldData(applicationTime);
+  const  auto result = ParentType::UpdateWorldData(applicationTime);
 
 	if (!m_Impl->IsNullPtr())
     {
 		auto worldTransform = GetWorldTransform();
 		auto cameraPosition = worldTransform.GetTranslate();
-		auto rotate = worldTransform.GetRotate();
+                const auto rotate = worldTransform.GetRotate();
         
 		auto cameraDirectionVector = rotate.GetColumn(0);
 		auto cameraUpVector = rotate.GetColumn(1);
@@ -194,7 +197,7 @@ uint64_t Rendering::CameraNode
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+const	auto uniqueID = ParentType::Register(target);
 	if(uniqueID != 0)
 	{
 		m_Impl->Register(target);
@@ -254,6 +257,7 @@ Rendering::CameraNode::ControllerInterfaceSmartPointer Rendering::CameraNode
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
+#include STSTEM_WARNING_POP

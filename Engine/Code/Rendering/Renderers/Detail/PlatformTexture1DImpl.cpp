@@ -13,9 +13,11 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
 Rendering::PlatformTexture1DImpl
-	::PlatformTexture1DImpl()	
+	::PlatformTexture1DImpl()	noexcept
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -57,3 +59,4 @@ Rendering::PlatformTexture1DImpl::PlatformTexture1DPtr Rendering::PlatformTextur
 {
     return make_shared<OpenGLTexture1D>(renderer, texture1D);
 }
+#include STSTEM_WARNING_POP

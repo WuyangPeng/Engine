@@ -13,7 +13,7 @@ using std::string;
 using std::ostream;
 
 CoreTools::ReportOutput
-	::ReportOutput(const OStreamShared& osPtr)
+	::ReportOutput(const OStreamShared& osPtr) noexcept
 	:m_OsPtr{ osPtr }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -60,7 +60,7 @@ void CoreTools::ReportOutput
 
 // protected
 CoreTools::OStreamShared  CoreTools::ReportOutput
-	::GetStream()  
+	::GetStream() noexcept   
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

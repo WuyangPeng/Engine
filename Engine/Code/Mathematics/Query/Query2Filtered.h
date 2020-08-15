@@ -30,19 +30,19 @@ namespace Mathematics
 		// uncertainty为0会导致类的行为就好像它是Query2。
 		// uncertainty为1会导致类的行为就好像它是Query2Rational。
 		Query2Filtered(const std::vector<Vector2D>& vertices, Real uncertainty);
-		virtual ~Query2Filtered();
+		 ~Query2Filtered();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual QueryType GetType() const override;
+		 QueryType GetType() const override;
 
 		// 关于一个点的各种几何对象之间的关系查询。
 
-		virtual LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const override;
-		virtual LineQueryType ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const override;
+		 LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const override;
+		 LineQueryType ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const override;
 
-		virtual CircumcircleQueryType ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
-		virtual CircumcircleQueryType ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
+		 CircumcircleQueryType ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
+		 CircumcircleQueryType ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
 
 	private:
 		using Query2Rational = Query2Rational<Real>;

@@ -1,0 +1,18 @@
+写给大忙人看的C++（C++ for the Impatient）
+
+官方网站 
+http://informit.com/title/9780321888020、 http://brianoverland.com。
+
+●
+作者：Brian Overland
+
+知识点 
+1.	C++基础知识。 
+2.	C++基础知识练习。
+3.	C++11基础知识。 
+4.	预处理器指令知识（第8章）。
+
+代码 
+1.  书籍代码。
+2.  书籍练习代码。
+  

@@ -22,7 +22,9 @@
 #include "Rendering/OpenGLRenderer/TextureDataTraits.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 template <typename PlatformTextureType>
 Rendering::TextureManagement<PlatformTextureType>
 	::TextureManagement(RendererPtr ptr)
@@ -51,7 +53,7 @@ void Rendering::TextureManagement <PlatformTextureType>
 
     if (m_Textures.find(texture) == m_Textures.end())
     {
-		PlatformTextureSharedPtr platformTexture{ std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.GetData()) };
+		PlatformTextureSharedPtr platformTexture{ std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.get()) };
 		m_Textures.insert({ texture, platformTexture });
     }
 }
@@ -71,7 +73,7 @@ void Rendering::TextureManagement <PlatformTextureType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-    auto iter = m_Textures.find(texture);
+const auto iter = m_Textures.find(texture);
     PlatformTextureSharedPtr platformTexture;
     if (iter != m_Textures.end())
     {
@@ -80,7 +82,7 @@ void Rendering::TextureManagement <PlatformTextureType>
     else
     {
         // 延迟构造。
-		platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.GetData());
+		platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.get());
 		m_Textures.insert({ texture,  platformTexture });
     }
 
@@ -93,7 +95,7 @@ void Rendering::TextureManagement <PlatformTextureType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Textures.find(texture);
+const auto iter = m_Textures.find(texture);
  
     if (iter != m_Textures.end())
     {
@@ -111,7 +113,7 @@ void* Rendering::TextureManagement <PlatformTextureType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Textures.find(texture);
+const auto iter = m_Textures.find(texture);
     PlatformTextureSharedPtr platformTexture;
     if (iter != m_Textures.end())
     {
@@ -120,7 +122,7 @@ void* Rendering::TextureManagement <PlatformTextureType>
     else
     {
         // 延迟构造。
-        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.GetData());
+        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.get());
         m_Textures.insert(std::make_pair(texture, platformTexture));
     }
 
@@ -135,7 +137,7 @@ void Rendering::TextureManagement <PlatformTextureType>
 	
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Textures.find(texture);
+const auto iter = m_Textures.find(texture);
  
     if (iter != m_Textures.end())
     {
@@ -153,7 +155,7 @@ void Rendering::TextureManagement <PlatformTextureType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto numBytes = texture->GetNumLevelBytes(level);
+	const auto numBytes = texture->GetNumLevelBytes(level);
 	auto srcData = texture->GetTextureData(level);
 
 	TextureManagementLockEncapsulation<ClassType> encapsulation{ *this };
@@ -168,14 +170,14 @@ typename Rendering::TextureManagement<PlatformTextureType>::PlatformTextureShare
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Textures.find(texture);
+const auto iter = m_Textures.find(texture);
     if (iter != m_Textures.end())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的纹理资源！"));
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的纹理资源！"s));
     }
 }
 
@@ -187,7 +189,7 @@ void* Rendering::TextureManagement <PlatformTextureType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Textures.find(texture);
+const auto iter = m_Textures.find(texture);
     PlatformTextureSharedPtr platformTexture;
     if (iter != m_Textures.end())
     {
@@ -196,7 +198,7 @@ void* Rendering::TextureManagement <PlatformTextureType>
     else
     {
         // 延迟构造。
-        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.GetData());
+        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.get());
 		m_Textures.insert({ texture, platformTexture });
     }
 
@@ -211,7 +213,7 @@ void Rendering::TextureManagement <PlatformTextureType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Textures.find(texture);
+const auto iter = m_Textures.find(texture);
  
     if (iter != m_Textures.end())
     {
@@ -229,7 +231,7 @@ void Rendering::TextureManagement < PlatformTextureType>
 
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto numBytes = texture->GetNumLevelBytes(level);
+	const auto numBytes = texture->GetNumLevelBytes(level);
 	auto srcData = texture->GetTextureData(face,level);
 
 	TextureManagementLockEncapsulation<ClassType> encapsulation{ *this };
@@ -264,5 +266,5 @@ void Rendering::TextureManagement<PlatformTextureType>
 
 	m_Textures.erase(texture);
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RENDERERS_TEXTURE_MANAGEMENT_DETAIL_H

@@ -15,12 +15,14 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+ #include SYSTEM_WARNING_DISABLE(26440)
 using std::string;
 using std::vector;
 
 Rendering::BillboardNodeImpl
-	::BillboardNodeImpl()
+	::BillboardNodeImpl() noexcept
 	:m_Camera{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -28,7 +30,7 @@ Rendering::BillboardNodeImpl
 
 
 Rendering::BillboardNodeImpl
-	::BillboardNodeImpl(const CameraSmartPointer& camera)
+	::BillboardNodeImpl(const CameraSmartPointer& camera) noexcept
 	:m_Camera{ camera }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -41,7 +43,7 @@ int Rendering::BillboardNodeImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Camera); 
+	const auto size = CORE_TOOLS_STREAM_SIZE(m_Camera); 
 
 	return size;
 }
@@ -50,32 +52,32 @@ void Rendering::BillboardNodeImpl
 	::Save(CoreTools::BufferTarget& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-	
-	target.WriteSmartPointer(m_Camera); 
+    target;
+	//target.WriteSmartPointer(m_Camera); 
 }
 
 void Rendering::BillboardNodeImpl
 	::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
-	
-	source.ReadSmartPointer(m_Camera); 
+    source;
+	//source.ReadSmartPointer(m_Camera); 
 }
 
 void Rendering::BillboardNodeImpl
 	::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	 
-
-	source.ResolveObjectSmartPointerLink(m_Camera); 
+	source;
+	//source.ResolveObjectSmartPointerLink(m_Camera); 
 }
 
 void Rendering::BillboardNodeImpl
 	::Register(CoreTools::ObjectRegister& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_Camera); 
+    target;
+	//target.RegisterSmartPointer(m_Camera); 
 }
 
 const CoreTools::ConstObjectSmartPointer Rendering::BillboardNodeImpl
@@ -123,8 +125,8 @@ const Rendering::ConstCameraSmartPointer Rendering::BillboardNodeImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Camera.PolymorphicCastConstObjectSmartPointer<ConstCameraSmartPointer>();
+	return m_Camera ;
 }
 
-
+#include STSTEM_WARNING_POP
  

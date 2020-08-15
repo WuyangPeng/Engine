@@ -28,7 +28,7 @@ namespace Framework
 		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;	
 
 	public:
-		explicit ObjectMotionImpl(const SpatialSmartPointer& motionObject);
+                explicit ObjectMotionImpl(const SpatialSmartPointer& motionObject) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

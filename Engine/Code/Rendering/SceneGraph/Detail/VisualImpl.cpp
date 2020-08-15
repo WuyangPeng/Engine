@@ -19,7 +19,11 @@
 
 using std::string;
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26473)
 Rendering::VisualImpl
     ::VisualImpl(VisualPrimitiveType type)
 	:m_VisualData{ type }, m_ModelBound{}, m_Effect{}
@@ -53,31 +57,28 @@ Rendering::ConstVertexFormatSmartPointer
 }
 
 const Rendering::VisualEffectInstanceSmartPointer Rendering::VisualImpl
-	::GetEffectInstance()
+	::GetEffectInstance() noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	return m_Effect;
 }
 
-const Rendering::ConstVisualEffectInstanceSmartPointer Rendering::VisualImpl
-	::GetConstEffectInstance() const
+const Rendering::ConstVisualEffectInstanceSmartPointer Rendering::VisualImpl ::GetConstEffectInstance() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Effect.GetConstSmartPointer();
+	return m_Effect ;
 }
 
-void Rendering::VisualImpl
-	::SetEffectInstance(const VisualEffectInstanceSmartPointer& effect)
+void Rendering::VisualImpl ::SetEffectInstance(const VisualEffectInstanceSmartPointer& effect) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Effect = effect;
 }
 
-Rendering::Bound& Rendering::VisualImpl
-	::GetModelBound() 
+Rendering::Bound& Rendering::VisualImpl ::GetModelBound() noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -85,7 +86,7 @@ Rendering::Bound& Rendering::VisualImpl
 }
 
 const Rendering::Bound& Rendering::VisualImpl
-	::GetModelBound() const 
+	::GetModelBound() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -192,10 +193,10 @@ void Rendering::VisualImpl
 void Rendering::VisualImpl
 	::DoUpdateModelBound()
 {
-	auto numVertices = m_VisualData.GetVertexBufferNumElements();
-	auto stride = m_VisualData.GetVertexFormatStride();
+const	auto numVertices = m_VisualData.GetVertexBufferNumElements();
+    const auto stride = m_VisualData.GetVertexFormatStride();
 	auto data = m_VisualData.GetVertexBufferReadOnlyData();
-	auto positionOffset = m_VisualData.GetPositionOffset();
+    const auto positionOffset = m_VisualData.GetPositionOffset();
 
 	m_ModelBound.ComputeFromData(numVertices, stride, data + positionOffset);
 }
@@ -207,7 +208,7 @@ void Rendering::VisualImpl
 
 	m_VisualData.Load(source);
 	source.ReadAggregate(m_ModelBound);
-	source.ReadSmartPointer(m_Effect);
+	//source.ReadSmartPointer(m_Effect);
 }
 
 void Rendering::VisualImpl
@@ -217,7 +218,7 @@ void Rendering::VisualImpl
 
 	m_VisualData.Save(target);
 	target.WriteAggregate(m_ModelBound); 
-	target.WriteSmartPointer(m_Effect);
+//	target.WriteSmartPointer(m_Effect);
 }
 
 int Rendering::VisualImpl
@@ -239,7 +240,7 @@ void Rendering::VisualImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	m_VisualData.Register(target);
-	target.RegisterSmartPointer(m_Effect);
+//	target.RegisterSmartPointer(m_Effect);
 }
 
 void Rendering::VisualImpl
@@ -248,7 +249,7 @@ void Rendering::VisualImpl
 	RENDERING_CLASS_IS_VALID_9;	
 
 	m_VisualData.Link(source);
-	source.ResolveObjectSmartPointerLink(m_Effect);
+	//source.ResolveObjectSmartPointerLink(m_Effect);
 }
 
 const CoreTools::ObjectSmartPointer Rendering::VisualImpl
@@ -317,3 +318,4 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualImpl
 	return entirelyObjects;
 }
 
+#include STSTEM_WARNING_POP

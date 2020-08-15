@@ -1,0 +1,16 @@
+Accelerated C++
+
+官方网站 
+http://www.acceleratedcpp.com。
+
+●
+作者：Andrew Koenig、Barbara E.Moo
+
+知识点 
+1.	C++基础知识。 
+2.	C++基础知识练习。
+
+代码 
+1.  书籍代码。
+
+  

@@ -21,9 +21,13 @@ namespace Rendering
 		using BufferConstPtr = typename BufferManagementType::BufferConstPtr;
 
 	public:
-		explicit BufferManagementLockEncapsulation(BufferManagementType& manager);
+		explicit BufferManagementLockEncapsulation(BufferManagementType& manager) noexcept;
 		~BufferManagementLockEncapsulation();
-
+		BufferManagementLockEncapsulation(const BufferManagementLockEncapsulation&) = delete;
+		BufferManagementLockEncapsulation& operator=(const BufferManagementLockEncapsulation&) = delete;
+		BufferManagementLockEncapsulation(BufferManagementLockEncapsulation&&) = delete;
+		BufferManagementLockEncapsulation& operator=(BufferManagementLockEncapsulation&&) = delete;
+		
 		CLASS_INVARIANT_DECLARE;
 
 		void* Lock(BufferConstPtr buffer,BufferLocking mode);

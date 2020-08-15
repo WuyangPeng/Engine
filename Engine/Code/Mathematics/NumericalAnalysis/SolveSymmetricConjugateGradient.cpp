@@ -8,18 +8,20 @@
 
 #include "SolveSymmetricConjugateGradientDetail.h"
 #include "SparseMatrixDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 // private
 template <>
 void Mathematics::SolveSymmetricConjugateGradient<float, Mathematics::SparseMatrix>
 	::Multiply()
 {
 	m_Product.assign(m_Size, 0.0f);
-
-	for (auto iter = m_Matrix.GetBegin(), end = m_Matrix.GetEnd(); iter != end; ++iter)
+const auto end = m_Matrix.GetEnd();
+	for (auto iter = m_Matrix.GetBegin() ; iter != end; ++iter)
 	{
-		auto row = iter.GetKey().GetRow();
-		auto column = iter.GetKey().GetColumn();
+		const auto row = iter.GetKey().GetRow();
+		const auto column = iter.GetKey().GetColumn();
 		auto value = iter.GetMapped();
 		m_Product[row] += value * m_InputSecondAmend[column];
 		if (row != column)
@@ -35,11 +37,11 @@ void Mathematics::SolveSymmetricConjugateGradient<double, Mathematics::SparseMat
 	::Multiply()
 {
 	m_Product.assign(m_Size, 0.0);
-
-	for (auto iter = m_Matrix.GetBegin(), end = m_Matrix.GetEnd(); iter != end; ++iter)
+const auto end = m_Matrix.GetEnd();
+	for (auto iter = m_Matrix.GetBegin() ; iter != end; ++iter)
 	{
-		auto row = iter.GetKey().GetRow();
-		auto column = iter.GetKey().GetColumn();
+		const auto row = iter.GetKey().GetRow();
+		const auto column = iter.GetKey().GetColumn();
 		auto value = iter.GetMapped();
 		m_Product[row] += value * m_InputSecondAmend[column];
 		if (row != column)
@@ -48,3 +50,4 @@ void Mathematics::SolveSymmetricConjugateGradient<double, Mathematics::SparseMat
 		}
 	}
 }
+#include STSTEM_WARNING_POP

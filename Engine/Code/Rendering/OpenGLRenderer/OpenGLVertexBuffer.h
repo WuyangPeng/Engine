@@ -26,15 +26,19 @@ namespace Rendering
 
 	public:
         OpenGLVertexBuffer (Renderer* renderer, const VertexBuffer* vertexBuffer);
-        virtual ~OpenGLVertexBuffer ();
+          ~OpenGLVertexBuffer ();
+		  OpenGLVertexBuffer(const OpenGLVertexBuffer&) =default;
+		  OpenGLVertexBuffer& operator=(const OpenGLVertexBuffer&) =default;
+		   OpenGLVertexBuffer( OpenGLVertexBuffer&&) =default;
+		  OpenGLVertexBuffer& operator=( OpenGLVertexBuffer&&) =default;
 
 	   CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 	    // ¶¥µã»º³åÇø²Ù×÷¡£
-		virtual void Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) override;
-		virtual void Disable (Renderer* renderer, unsigned int streamIndex) override;
-		virtual void* Lock (BufferLocking mode) override;
-		virtual void Unlock () override;
+		  void Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) noexcept override;
+		  void Disable (Renderer* renderer, unsigned int streamIndex) noexcept override;
+		  void* Lock (BufferLocking mode) noexcept override;
+		  void Unlock () noexcept override;
         
     private:
 		void Init(const VertexBuffer* vertexBuffer);

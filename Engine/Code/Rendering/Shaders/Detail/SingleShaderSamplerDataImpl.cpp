@@ -14,7 +14,15 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26482)
+#if defined(TCRE_USE_MSVC)
+    #pragma warning(disable : 28020)
+#endif  // TCRE_USE_MSVC
 Rendering::SingleShaderSamplerDataImpl
 	::SingleShaderSamplerDataImpl()
 	:m_SamplerName{},m_SamplerType{ ShaderFlags::SamplerType::None },m_Filter{ ShaderFlags::SamplerFilter::Nearest },
@@ -185,3 +193,4 @@ int Rendering::SingleShaderSamplerDataImpl
 }
 
 
+#include STSTEM_WARNING_POP

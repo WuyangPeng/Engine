@@ -15,6 +15,10 @@
 
 using std::vector;
 using std::string;
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26455)
 
 Rendering::LightConstantImpl
 	::LightConstantImpl(const LightSmartPointer& light)
@@ -37,8 +41,8 @@ const Rendering::ConstLightSmartPointer Rendering::LightConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;	
 
-	if (m_Light.IsValidPtr())
-		return m_Light.PolymorphicCastConstObjectSmartPointer<ConstLightSmartPointer>();
+	if (m_Light )
+		return m_Light ;
 	else
 		return ConstLightSmartPointer{};
 }
@@ -47,16 +51,16 @@ void Rendering::LightConstantImpl
 	::Load(BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	source.ReadSmartPointer(m_Light);
+    source;
+    //	source.ReadSmartPointer(m_Light);
 }
 
 void Rendering::LightConstantImpl
 	::Save(BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	target.WriteSmartPointer(m_Light);
+    target;
+	//target.WriteSmartPointer(m_Light);
 }
 
 int Rendering::LightConstantImpl
@@ -72,7 +76,7 @@ const CoreTools::ObjectSmartPointer Rendering::LightConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	if (m_Light.IsValidPtr())
+	if (m_Light )
 		return m_Light->GetObjectByName(name);
 	else
 		return CoreTools::ObjectSmartPointer{};
@@ -83,7 +87,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::LightConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	if (m_Light.IsValidPtr())
+	if (m_Light )
 		return m_Light->GetAllObjectsByName(name);
 	else
 		return vector<CoreTools::ObjectSmartPointer>{};
@@ -94,7 +98,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::LightConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Light.IsValidPtr())
+	if (m_Light )
 		return m_Light->GetConstObjectByName(name);
 	else
 		return CoreTools::ConstObjectSmartPointer{};
@@ -105,7 +109,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::LightConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Light.IsValidPtr())
+	if (m_Light )
 		return m_Light->GetAllConstObjectsByName(name);
 	else
 		return vector<CoreTools::ConstObjectSmartPointer>{};
@@ -115,15 +119,16 @@ void Rendering::LightConstantImpl
 	::Link( ObjectLink& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	source.ResolveObjectSmartPointerLink(m_Light);
+    source;
+    //	source.ResolveObjectSmartPointerLink(m_Light);
 }
 
 void Rendering::LightConstantImpl
 	::Register( ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	target.RegisterSmartPointer(m_Light);
+    target;
+    //	target.RegisterSmartPointer(m_Light);
 }
 
+#include STSTEM_WARNING_POP

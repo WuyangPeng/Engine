@@ -40,7 +40,7 @@ namespace CoreTools
 	}
 
 	template <typename T>
-	T* DynamicCast(ObjectPtr object)
+	T* DynamicCast(ObjectPtr object) noexcept
 	{
 		static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
 

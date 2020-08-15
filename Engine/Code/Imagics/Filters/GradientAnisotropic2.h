@@ -18,12 +18,12 @@ namespace Imagics
 	public:
 		GradientAnisotropic2 (int xBound, int yBound, float xSpacing,float ySpacing, const float* data, const bool* mask,float borderValue, ScaleType scaleType, float K);
 		
-		virtual ~GradientAnisotropic2 ();
+ 
 		
 	protected:
-		void ComputeParam ();
-		virtual void OnPreUpdate () override;
-		virtual void OnUpdate (int x, int y) override;
+		void ComputeParam () noexcept;
+		  void OnPreUpdate () noexcept override;
+		  void OnUpdate (int x, int y) override;
 		
 		float mK;           // k
 		

@@ -30,7 +30,7 @@ namespace CoreTools
 		using ResourceAssociatedContainerValueType = ResourceAssociatedContainer::value_type;
 
 	public:
-		ResourceManagerPriorityQueue();
+		ResourceManagerPriorityQueue() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

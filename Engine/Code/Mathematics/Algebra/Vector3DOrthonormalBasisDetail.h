@@ -74,6 +74,7 @@ template <typename Real>
 bool Mathematics::Vector3DOrthonormalBasis<Real>
 	::IsValid() const noexcept
 {
+	try{
 	if (Math::FAbs(Vector3DTools::DotProduct(m_UVector, m_VVector)) <= m_Epsilon &&
 		Math::FAbs(Vector3DTools::DotProduct(m_UVector, m_WVector)) <= m_Epsilon &&
 		Math::FAbs(Vector3DTools::DotProduct(m_VVector, m_WVector)) <= m_Epsilon &&
@@ -83,6 +84,11 @@ bool Mathematics::Vector3DOrthonormalBasis<Real>
 		return true;
 	}
 	else
+	{
+		return false;
+	}
+	}
+	catch(...)
 	{
 		return false;
 	}

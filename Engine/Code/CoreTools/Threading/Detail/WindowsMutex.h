@@ -23,16 +23,15 @@ namespace CoreTools
 		using MutexHandle = System::WindowHandle;
 
 	public:
-		WindowsMutex();
-		virtual ~WindowsMutex();
+		WindowsMutex() noexcept; 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		void Initialize() override;
-		void Delete() override;
+		void Delete() noexcept override;
 		void Enter() override;
-		bool TryEnter() override;
-		void Leave() override;
+		bool TryEnter() noexcept override;
+		void Leave()  noexcept override;
 
 	private:
 		MutexHandle m_Mutex;

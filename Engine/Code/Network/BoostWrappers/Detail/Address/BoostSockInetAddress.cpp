@@ -28,7 +28,7 @@ Network::BoostSockInetAddress
 }
 
 Network::BoostSockInetAddress
-	::BoostSockInetAddress()
+	::BoostSockInetAddress() noexcept
 	:m_Endpoint{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -48,15 +48,14 @@ Network::BoostSockInetAddress
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::BoostSockInetAddress
-	::BoostSockInetAddress(const BoostSockInetAddress& rhs)
-	:m_Endpoint{ rhs.m_Endpoint }
+Network::BoostSockInetAddress ::BoostSockInetAddress(const BoostSockInetAddress& rhs) noexcept
+    : m_Endpoint{ rhs.m_Endpoint }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::BoostSockInetAddress& Network::BoostSockInetAddress
-	::operator=(const BoostSockInetAddress& rhs)
+	::operator=(const BoostSockInetAddress& rhs) noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -83,8 +82,7 @@ Network::BoostSockInetAddress
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostSockInetAddress)
 
-const Network::BoostInetAddressType& Network::BoostSockInetAddress
-	::GetBoostInetAddress() const
+const Network::BoostInetAddressType& Network::BoostSockInetAddress ::GetBoostInetAddress() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -92,7 +90,7 @@ const Network::BoostInetAddressType& Network::BoostSockInetAddress
 }
 
 Network::BoostInetAddressType& Network::BoostSockInetAddress
-	::GetBoostInetAddress()
+	::GetBoostInetAddress() 
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -115,8 +113,7 @@ const std::string Network::BoostSockInetAddress
 	return m_Endpoint.address().to_string() + ":" + to_string(GetPort());
 }
 
-int Network::BoostSockInetAddress
-	::GetPort() const
+int Network::BoostSockInetAddress ::GetPort() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

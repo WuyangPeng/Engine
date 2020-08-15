@@ -22,7 +22,7 @@ namespace Rendering
 	public:
 		using ClassType = BufferManagement<PlatformBufferType>;
 		using BufferType = typename PlatformBufferType::BufferType;
-		using BufferConstPtr = CoreTools::ConstFourthSubclassSmartPointer<BufferType>;
+		using BufferConstPtr = std::shared_ptr<const BufferType>;
 		using PlatformBufferTypeSharedPtr = std::shared_ptr<PlatformBufferType>;
 	    using RendererPtr = std::shared_ptr<Renderer>;
 

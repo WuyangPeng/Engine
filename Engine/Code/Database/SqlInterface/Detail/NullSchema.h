@@ -20,8 +20,8 @@ namespace Database
 		using ParentType = SchemaImpl;
 
 	public:
-		explicit NullSchema(const ConfigurationStrategy& configurationStrategy);
-		virtual ~NullSchema();
+                explicit NullSchema(const ConfigurationStrategy& configurationStrategy) noexcept;
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 	};

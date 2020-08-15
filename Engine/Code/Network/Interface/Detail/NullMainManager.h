@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:06)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_MAIN_MANAGER_H
@@ -13,24 +13,23 @@
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE NullMainManager : public BaseMainManagerImpl
-	{
-	public:
-		using ClassType = NullMainManager;
-		using ParentType = BaseMainManagerImpl;
+    class NETWORK_HIDDEN_DECLARE NullMainManager : public BaseMainManagerImpl
+    {
+    public:
+        using ClassType = NullMainManager;
+        using ParentType = BaseMainManagerImpl;
 
-	public:
-		NullMainManager();
-		virtual ~NullMainManager();
+    public:
+        NullMainManager() noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Run() override;
+        void Run() noexcept override;
 
-		virtual void StopContext() override;
-		virtual bool IsContextStop() const override;
-		virtual void RestartContext() override;
-	};
+        void StopContext() noexcept override;
+        bool IsContextStop() const noexcept override;
+        void RestartContext() noexcept override;
+    };
 }
 
-#endif // NETWORK_NETWORK_INTERFACE_NULL_MAIN_MANAGER_H
+#endif  // NETWORK_NETWORK_INTERFACE_NULL_MAIN_MANAGER_H

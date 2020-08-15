@@ -41,7 +41,7 @@ namespace Mathematics
 
 	public:
 		// 如果标志为MatrixFlagsZero，创建零矩阵，否则创建单位矩阵。
-		explicit Matrix2(MatrixTypeFlags flag = MatrixTypeFlags::Zero);
+		explicit Matrix2(MatrixTypeFlags flag = MatrixTypeFlags::Zero) noexcept;
 
 		// 输入矩阵在行r和列c
 		Matrix2(Real member00, Real member01, Real member10, Real member11);
@@ -71,7 +71,7 @@ namespace Mathematics
 
 		// 创建各种矩阵。
 		void MakeZero();
-		void MakeIdentity();
+		void MakeIdentity() noexcept;
 		void MakeDiagonal(Real member00, Real member11);
 		void MakeRotation(Real angle);
 		void MakeTensorProduct(const Vector2D& lhs, const Vector2D& rhs);

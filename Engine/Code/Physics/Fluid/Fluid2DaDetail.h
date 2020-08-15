@@ -14,7 +14,12 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector2DDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26487)
 template <typename Real>
 Physics::Fluid2Da<Real>
 	::Fluid2Da(Real x0, Real y0, Real x1, Real y1, Real dt,
@@ -86,14 +91,19 @@ template <typename Real>
 Physics::Fluid2Da<Real>
 	::~Fluid2Da()
 {
-	DELETE1(mX);
-	DELETE1(mY);
-	DELETE2(mDensity0);
-	DELETE2(mDensity1);
-	DELETE2(mVelocity0);
-	DELETE2(mVelocity1);
-	DELETE2(mDivergence);
-	DELETE2(mPoisson);
+	EXCEPTION_TRY
+    {
+            DELETE1(mX);
+            DELETE1(mY);
+            DELETE2(mDensity0);
+            DELETE2(mDensity1);
+            DELETE2(mVelocity0);
+            DELETE2(mVelocity1);
+            DELETE2(mDivergence);
+            DELETE2(mPoisson);
+	}
+    EXCEPTION_ALL_CATCH(Physics)
+	
 }
 
 template <typename Real>
@@ -113,7 +123,7 @@ void Physics::Fluid2Da<Real>
 	UpdateVelocityBoundary();
 	AdjustVelocity();
 
-	size_t numBytes = mNumPixels*sizeof(Real);
+	const size_t numBytes = mNumPixels*sizeof(Real);
 	memcpy(mDensity0[0], mDensity1[0], numBytes);
  
 	for (int i = 0; i < mNumPixels;++i)
@@ -160,8 +170,7 @@ void Physics::Fluid2Da<Real>
 }
 
 template <typename Real>
-void Physics::Fluid2Da<Real>
-	::UpdateDensityDiffusion()
+void Physics::Fluid2Da<Real>::UpdateDensityDiffusion() noexcept
 {
 	for (int iter = 0; iter < mNumGaussSeidelIterations; ++iter)
 	{
@@ -254,10 +263,10 @@ void Physics::Fluid2Da<Real>
 			Real a0, a1, b0, b1;
 			GetLerpInfo(i, j, i0, i1, a0, a1, j0, j1, b0, b1);
 
-			Vector2D v00 = mVelocity0[j0][i0];
-			Vector2D v10 = mVelocity0[j0][i1];
-			Vector2D v01 = mVelocity0[j1][i0];
-			Vector2D v11 = mVelocity0[j1][i1];
+			const Vector2D v00 = mVelocity0[j0][i0];
+                        const Vector2D v10 = mVelocity0[j0][i1];
+                        const Vector2D v01 = mVelocity0[j1][i0];
+                        const Vector2D v11 = mVelocity0[j1][i1];
 
 			mVelocity1[j][i] = b0*(a0*v00 + a1*v10) + b1*(a0*v01 + a1*v11);
 		}
@@ -306,7 +315,7 @@ template <typename Real>
 void Physics::Fluid2Da<Real>
 	::AdjustVelocity()
 {
-	int i, j;
+    int i = 0, j = 0;
 
 	// Approximate the divergence of velocity.
 	for (j = 1; j < mJMax; ++j)
@@ -360,7 +369,7 @@ void Physics::Fluid2Da<Real>
 
 template <typename Real>
 void Physics::Fluid2Da<Real>
-	::DirichletBoundaryZero(Real** data)
+	::DirichletBoundaryZero(Real** data) noexcept
 {
 	// x-edge-interior
 	for (int j = 1; j < mJMax; ++j)
@@ -396,8 +405,7 @@ void Physics::Fluid2Da<Real>
 }
 
 template <typename Real>
-void Physics::Fluid2Da<Real>
-	::NeumannBoundaryZero(Real** data)
+void Physics::Fluid2Da<Real>::NeumannBoundaryZero(Real** data) noexcept
 {
 	// x-edge-interior
 	for (int j = 1; j < mJMax; ++j)
@@ -434,7 +442,7 @@ void Physics::Fluid2Da<Real>
 
 template <typename Real>
 void Physics::Fluid2Da<Real>
-	::UpdateDensityBoundary()
+	::UpdateDensityBoundary() noexcept
 {
 	if (mDensityDirichlet)
 	{
@@ -486,8 +494,7 @@ void Physics::Fluid2Da<Real>
 }
 
 template <typename Real>
-void Physics::Fluid2Da<Real>
-	::SwapDensityBuffers()
+void Physics::Fluid2Da<Real>::SwapDensityBuffers() noexcept
 {
 	Real** save = mDensity0;
 	mDensity0 = mDensity1;
@@ -495,8 +502,7 @@ void Physics::Fluid2Da<Real>
 }
 
 template <typename Real>
-void Physics::Fluid2Da<Real>
-	::SwapVelocityBuffers()
+void Physics::Fluid2Da<Real>::SwapVelocityBuffers() noexcept
 {
 	Vector2D** save = mVelocity0;
 	mVelocity0 = mVelocity1;
@@ -504,103 +510,89 @@ void Physics::Fluid2Da<Real>
 }
 
 template <typename Real>
-Real Physics::Fluid2Da<Real>
-	::GetX0() const
+Real Physics::Fluid2Da<Real>::GetX0() const noexcept
 {
     return mX0;
 }
 
 template <typename Real>
-Real Physics::Fluid2Da<Real>
-	::GetY0() const
+Real Physics::Fluid2Da<Real>::GetY0() const noexcept
 {
     return mY0;
 }
 
 template <typename Real>
-Real Physics::Fluid2Da<Real>
-	::GetX1() const
+Real Physics::Fluid2Da<Real>::GetX1() const noexcept
 {
     return mX1;
 }
 
 template <typename Real>
-Real Physics::Fluid2Da<Real>
-	::GetY1() const
+Real Physics::Fluid2Da<Real>::GetY1() const noexcept
 {
     return mY1;
 }
 
 template <typename Real>
-Real Physics::Fluid2Da<Real>
-	::GetDt() const
+Real Physics::Fluid2Da<Real>::GetDt() const noexcept
 {
     return mDt;
 }
 
 template <typename Real>
-Real Physics::Fluid2Da<Real>
-	::GetDx() const
+Real Physics::Fluid2Da<Real>::GetDx() const noexcept
 {
     return mDx;
 }
 
 template <typename Real>
-Real Physics::Fluid2Da<Real>
-	::GetDy() const
+Real Physics::Fluid2Da<Real>::GetDy() const noexcept
 {
     return mDy;
 }
 
 template <typename Real>
-Real Physics::Fluid2Da<Real>
-	::GetTime() const
+Real Physics::Fluid2Da<Real>::GetTime() const noexcept
 {
     return mTime;
 }
 
 template <typename Real>
-int Physics::Fluid2Da<Real>
-	::GetIMax() const
+int Physics::Fluid2Da<Real>::GetIMax() const noexcept
 {
     return mIMax;
 }
 
 template <typename Real>
-int Physics::Fluid2Da<Real>
-	::GetJMax() const
+int Physics::Fluid2Da<Real>::GetJMax() const noexcept
 {
     return mJMax;
 }
 
 template <typename Real>
-const Real* Physics::Fluid2Da<Real>
-	::GetX() const
+const Real* Physics::Fluid2Da<Real>::GetX() const noexcept
 {
     return mX;
 }
 
 template <typename Real>
-const Real* Physics::Fluid2Da<Real>
-	::GetY() const
+const Real* Physics::Fluid2Da<Real>::GetY() const noexcept
 {
     return mY;
 }
 
 template <typename Real>
-Real** Physics::Fluid2Da<Real>
-	::GetDensity() const
+Real** Physics::Fluid2Da<Real>::GetDensity() const noexcept
 {
     return mDensity0;
 }
 
 template <typename Real>
-Mathematics::Vector2D<Real>** Physics::Fluid2Da<Real>
-	::GetVelocity() const
+Mathematics::Vector2D<Real>** Physics::Fluid2Da<Real>::GetVelocity() const noexcept
 {
     return mVelocity0;
 }
-
+#include STSTEM_WARNING_POP
 #endif //  !defined(PHYSICS_EXPORT_TEMPLATE) || defined(PHYSICS_INCLUDED_FLUID2DA_DETAIL)
 
 #endif // PHYSICS_FLUID_FLUID2DA_DETAIL_H

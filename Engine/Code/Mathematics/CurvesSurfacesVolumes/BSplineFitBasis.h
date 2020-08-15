@@ -20,10 +20,13 @@ namespace Mathematics
 		// for a B-spline curve using this basis and the degree of that curve.
 		BSplineFitBasis (int quantity, int degree);
 		~BSplineFitBasis ();
-		
+		BSplineFitBasis(const BSplineFitBasis&) = default;
+		BSplineFitBasis& operator=(const BSplineFitBasis&) = default;
+		BSplineFitBasis(BSplineFitBasis&&) = default;
+		BSplineFitBasis& operator=(BSplineFitBasis&&) = default;
 		// Data member access.
-		int GetQuantity () const;
-		int GetDegree () const;
+		int GetQuantity () const noexcept;
+		int GetDegree () const noexcept;
 		
 		// Evaluate the basis functions.  This function fills in the values
 		// returned by GetValue(i) for 0 <= i <= degree.  The return indices iMin

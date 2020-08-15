@@ -14,7 +14,11 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+ #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+ #include SYSTEM_WARNING_DISABLE(26418)
 using std::vector;
 
 const Rendering::CameraSmartPointer Rendering::ScreenTarget
@@ -22,7 +26,7 @@ const Rendering::CameraSmartPointer Rendering::ScreenTarget
 {
 	// 场景摄像机映射  (x,y,z)  [0,1]^3 到 (x',y,'z') 在
     // [-1,1]^2 x [0,1].
-	CameraSmartPointer camera{ NEW0 Camera(false) };
+	CameraSmartPointer camera{ std::make_shared<Camera>(false) };
     camera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
     camera->SetFrame(APoint::sm_Origin, AVector::sm_UnitZ, AVector::sm_UnitY,AVector::sm_UnitX);
 
@@ -36,9 +40,9 @@ const Rendering::TrianglesMeshSmartPointer Rendering::ScreenTarget
 	if (ValidFormat(vertexFormat) && ValidSizes(renderTargetWidth, renderTargetHeight))
     {
 		int vstride = vertexFormat->GetStride();
-		VertexBufferSmartPointer vertexBuffer{ NEW0 VertexBuffer(4, vstride) };
-		VertexBufferAccessor vertexBufferAccessor{ vertexFormat.PolymorphicCastConstObjectSmartPointer<ConstVertexFormatSmartPointer>(),
-												   vertexBuffer.PolymorphicCastConstObjectSmartPointer<ConstVertexBufferSmartPointer>() };
+		VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(4, vstride) };
+		VertexBufferAccessor vertexBufferAccessor{ vertexFormat ,
+												   vertexBuffer  };
 
 		if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
         {
@@ -49,8 +53,8 @@ const Rendering::TrianglesMeshSmartPointer Rendering::ScreenTarget
         }
         else
         {
-			auto dx = 0.5f * (xMax - xMin) / static_cast<float>(renderTargetWidth - 1);
-			auto dy = 0.5f * (yMax - yMin) / static_cast<float>(renderTargetHeight - 1);
+            const auto dx = 0.5f * (xMax - xMin) / static_cast<float>(renderTargetWidth - 1);
+            const auto dy = 0.5f * (yMax - yMin) / static_cast<float>(renderTargetHeight - 1);
             xMin -= dx;
             xMax -= dx;
             yMin += dy;
@@ -68,10 +72,10 @@ const Rendering::TrianglesMeshSmartPointer Rendering::ScreenTarget
 		vertexBuffer->SetPosition(vertexBufferAccessor, 3, APoint(xMin, yMax, zValue)); 
 
    		// 创建正方形的索引缓冲区
-		IndexBufferSmartPointer indexBuffer{ NEW0 IndexBuffer(6, sizeof(int)) };
+		IndexBufferSmartPointer indexBuffer{ std::make_shared< IndexBuffer>(6, (int)sizeof(int)) };
 		indexBuffer->InitIndexBufferInParticles();      
 
-		return TrianglesMeshSmartPointer{ NEW0 TrianglesMesh(vertexFormat, vertexBuffer, indexBuffer) };
+		return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>(vertexFormat, vertexBuffer, indexBuffer) };
     }
 
 	return TrianglesMeshSmartPointer();
@@ -85,6 +89,8 @@ bool Rendering::ScreenTarget
 	{
 		return true;
 	}
+
+	CoreTools::DoNothing();
 
 	RENDERING_ASSERTION_1(false, "无效的维度。\n");
 
@@ -141,8 +147,8 @@ vector<Rendering::ScreenTarget::APoint>	Rendering::ScreenTarget
         }
         else
         {
-			auto dx = 0.5f * (xMax - xMin) / boost::numeric_cast<float>(renderTargetWidth - 1);
-			auto dy = 0.5f * (yMax - yMin) / boost::numeric_cast<float>(renderTargetHeight - 1);
+            const auto dx = 0.5f * (xMax - xMin) / boost::numeric_cast<float>(renderTargetWidth - 1);
+            const auto dy = 0.5f * (yMax - yMin) / boost::numeric_cast<float>(renderTargetHeight - 1);
 			xMin -= dx;
 			xMax -= dx;
 			yMin += dy;
@@ -187,3 +193,4 @@ vector<Rendering::ScreenTarget::Vector2D> Rendering::ScreenTarget
 
  
 
+#include STSTEM_WARNING_POP

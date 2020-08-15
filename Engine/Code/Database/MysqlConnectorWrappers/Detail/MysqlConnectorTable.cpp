@@ -17,7 +17,9 @@ using std::string;
 using std::initializer_list;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 Database::MysqlConnectorTable
 	::MysqlConnectorTable(const Schema& schema, const string& tableName)
 	: ParentType{ schema.GetConfigurationStrategy() }, m_MysqlxTable{ GetMysqlxTablePtr(schema,tableName) }
@@ -25,11 +27,7 @@ Database::MysqlConnectorTable
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::MysqlConnectorTable
-	::~MysqlConnectorTable()
-{
-	DATABASE_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Database::MysqlConnectorTable
@@ -53,7 +51,7 @@ Database::MysqlConnectorTable::MysqlxTablePtr Database::MysqlConnectorTable
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取schema失败。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("获取schema失败。"s));
 	}
 }
 
@@ -83,5 +81,5 @@ Database::MysqlConnectorTable::ResultPtr Database::MysqlConnectorTable
 
 	return make_shared<Result>(GetConfigurationStrategy(), make_shared<MysqlxRowResult>(statement.execute()));
 }
-
+#include STSTEM_WARNING_POP
 #endif // DATABASE_USE_MYSQL_CPP_CONNECTOR

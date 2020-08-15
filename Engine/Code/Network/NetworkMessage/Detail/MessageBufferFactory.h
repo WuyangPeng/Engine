@@ -23,7 +23,7 @@ namespace Network
 		using ImplTypePtr = std::shared_ptr<ImplType>;
 
 	public:
-		MessageBufferFactory();
+		MessageBufferFactory() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

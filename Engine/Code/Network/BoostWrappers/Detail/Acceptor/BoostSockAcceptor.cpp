@@ -1,20 +1,20 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.2.4 (2020/03/11 15:51)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "BoostSockAcceptor.h"
-#include "BoostSockAcceptorHelper.h" 
-#include "CoreTools/Helper/LogMacro.h"
+#include "BoostSockAcceptorHelper.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
-#include "Network/Interface/SockStream.h"
-#include "Network/Interface/SockAddress.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/Interface/Data/AddressData.h"
+#include "Network/Interface/SockAddress.h"
+#include "Network/Interface/SockStream.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
@@ -26,161 +26,152 @@ using boost::numeric_cast;
 using boost::asio::ip::make_address;
 using TcpType = boost::asio::ip::tcp;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 namespace
 {
-	const auto g_SynchronizeAcceptDescription = SYSTEM_TEXT("准备进行同步接受，地址："s);
-	const auto g_AsynchronousAcceptDescription = SYSTEM_TEXT("准备进行异步接受，地址："s);
-	const auto g_SynchronizeAcceptSuccessDescription = SYSTEM_TEXT("同步接受成功，地址："s);
+    const auto g_SynchronizeAcceptDescription = SYSTEM_TEXT("准备进行同步接受，地址："s);
+    const auto g_AsynchronousAcceptDescription = SYSTEM_TEXT("准备进行异步接受，地址："s);
+    const auto g_SynchronizeAcceptSuccessDescription = SYSTEM_TEXT("同步接受成功，地址："s);
 }
 
-Network::BoostSockAcceptor
-	::BoostSockAcceptor(int port)
-	:ParentType{}, m_Acceptor{ BASE_MAIN_MANAGER_SINGLETON.GetIOContext(), BoostInetAddressType{ TcpType::v4(), numeric_cast<uint16_t>(port) } }
+Network::BoostSockAcceptor ::BoostSockAcceptor(int port)
+    : ParentType{}, m_Acceptor{ BASE_MAIN_MANAGER_SINGLETON.GetIOContext(), BoostInetAddressType{ TcpType::v4(), numeric_cast<uint16_t>(port) } }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::BoostSockAcceptor
-	::BoostSockAcceptor(const string& hostName, int port)
-	:ParentType{}, m_Acceptor{ BASE_MAIN_MANAGER_SINGLETON.GetIOContext(), BoostInetAddressType{ make_address(hostName), numeric_cast<uint16_t>(port) } }
+Network::BoostSockAcceptor ::BoostSockAcceptor(const string& hostName, int port)
+    : ParentType{}, m_Acceptor{ BASE_MAIN_MANAGER_SINGLETON.GetIOContext(), BoostInetAddressType{ make_address(hostName), numeric_cast<uint16_t>(port) } }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::BoostSockAcceptor
-	::BoostSockAcceptor(BoostSockAcceptor&& rhs) noexcept
-	:ParentType{}, m_Acceptor{ move(rhs.m_Acceptor) }
+Network::BoostSockAcceptor ::BoostSockAcceptor(BoostSockAcceptor&& rhs) noexcept
+    : ParentType{}, m_Acceptor{ move(rhs.m_Acceptor) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::BoostSockAcceptor& Network::BoostSockAcceptor
-	::operator=(BoostSockAcceptor&& rhs) noexcept
+Network::BoostSockAcceptor& Network::BoostSockAcceptor ::operator=(BoostSockAcceptor&& rhs) noexcept
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	rhs.m_Acceptor = move(rhs.m_Acceptor);
+    rhs.m_Acceptor = move(rhs.m_Acceptor);
 
-	return *this;
+    return *this;
 }
 
-Network::BoostSockAcceptor
-	::~BoostSockAcceptor()
+Network::BoostSockAcceptor ::~BoostSockAcceptor()
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockAcceptor)
 
-bool Network::BoostSockAcceptor
-	::Accept(const SockStreamSharedPtr& sockStream)
+bool Network::BoostSockAcceptor ::Accept(const SockStreamSharedPtr& sockStream)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	BoostSockAcceptorHelper::PrintAcceptLog(g_SynchronizeAcceptDescription, AddressData{ *this });
+    BoostSockAcceptorHelper::PrintAcceptLog(g_SynchronizeAcceptDescription, AddressData{ *this });
 
-	ErrorCodeType errorCode{};
+    ErrorCodeType errorCode{};
 
-	m_Acceptor.accept(sockStream->GetBoostSockStream(), errorCode);
+    m_Acceptor.accept(sockStream->GetBoostSockStream(), errorCode);
 
-	if (errorCode == ErrorCodeType{})
-	{
-		BoostSockAcceptorHelper::PrintAcceptSuccessLog(g_SynchronizeAcceptSuccessDescription, AddressData{ sockStream });
+    if (errorCode == ErrorCodeType{})
+        {
+            BoostSockAcceptorHelper::PrintAcceptSuccessLog(g_SynchronizeAcceptSuccessDescription, AddressData{ sockStream });
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+            return true;
+        }
+    else
+        {
+            return false;
+        }
 }
 
-bool Network::BoostSockAcceptor
-	::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+bool Network::BoostSockAcceptor ::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	BoostSockAcceptorHelper::PrintAcceptLog(g_SynchronizeAcceptDescription, AddressData{ *this });
+    BoostSockAcceptorHelper::PrintAcceptLog(g_SynchronizeAcceptDescription, AddressData{ *this });
 
-	ErrorCodeType errorCode{};
+    ErrorCodeType errorCode{};
 
-	m_Acceptor.accept(sockStream->GetBoostSockStream(), sockAddress->GetBoostInetAddress(), errorCode);
+    m_Acceptor.accept(sockStream->GetBoostSockStream(), sockAddress->GetBoostInetAddress(), errorCode);
 
-	if (errorCode == ErrorCodeType{})
-	{
-		BoostSockAcceptorHelper::PrintAcceptSuccessLog(g_SynchronizeAcceptSuccessDescription, AddressData{ sockAddress });
+    if (errorCode == ErrorCodeType{})
+        {
+            BoostSockAcceptorHelper::PrintAcceptSuccessLog(g_SynchronizeAcceptSuccessDescription, AddressData{ sockAddress });
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+            return true;
+        }
+    else
+        {
+            return false;
+        }
 }
 
-void Network::BoostSockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
+void Network::BoostSockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	BoostSockAcceptorHelper::PrintAcceptLog(g_AsynchronousAcceptDescription, AddressData{ *this });
+    BoostSockAcceptorHelper::PrintAcceptLog(g_AsynchronousAcceptDescription, AddressData{ *this });
 
-	m_Acceptor.async_accept(sockStream->GetBoostSockStream(), [eventInterface, sockStream](const ErrorCodeType& errorCode)
-	{
-		BoostSockAcceptorHelper::EventFunction(errorCode, eventInterface, AddressData{ sockStream });
-	});
+    m_Acceptor.async_accept(sockStream->GetBoostSockStream(), [eventInterface, sockStream](const ErrorCodeType& errorCode) {
+        BoostSockAcceptorHelper::EventFunction(errorCode, eventInterface, AddressData{ sockStream });
+    });
 }
 
-void Network::BoostSockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::BoostSockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	BoostSockAcceptorHelper::PrintAcceptLog(g_AsynchronousAcceptDescription, AddressData{ *this });
+    BoostSockAcceptorHelper::PrintAcceptLog(g_AsynchronousAcceptDescription, AddressData{ *this });
 
-	m_Acceptor.async_accept(sockStream->GetBoostSockStream(), sockAddress->GetBoostInetAddress(), [eventInterface, sockAddress](const ErrorCodeType& errorCode)
-	{
-		BoostSockAcceptorHelper::EventFunction(errorCode, eventInterface, AddressData{ sockAddress });
-	});
+    m_Acceptor.async_accept(sockStream->GetBoostSockStream(), sockAddress->GetBoostInetAddress(), [eventInterface, sockAddress](const ErrorCodeType& errorCode) {
+        BoostSockAcceptorHelper::EventFunction(errorCode, eventInterface, AddressData{ sockAddress });
+    });
 }
 
-bool Network::BoostSockAcceptor
-	::EnableNonBlock()
+bool Network::BoostSockAcceptor ::EnableNonBlock()
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	ErrorCodeType errorCode{};
+    ErrorCodeType errorCode{};
 
-	m_Acceptor.non_blocking(true, errorCode);
+    m_Acceptor.non_blocking(true, errorCode);
 
-	if (errorCode == ErrorCodeType{})
-		return true;
-	else
-		return false;
+    if (errorCode == ErrorCodeType{})
+        return true;
+    else
+        return false;
 }
 
-Network::BoostHandleType Network::BoostSockAcceptor
-	::GetBoostHandle()
+Network::BoostHandleType Network::BoostSockAcceptor ::GetBoostHandle()
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	return m_Acceptor.native_handle();
+    return m_Acceptor.native_handle();
 }
 
-const string Network::BoostSockAcceptor
-	::GetAddress() const
+const string Network::BoostSockAcceptor ::GetAddress() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Acceptor.local_endpoint().address().to_string() + ":" + to_string(GetPort());
+    return m_Acceptor.local_endpoint().address().to_string() + ":" + to_string(GetPort());
 }
 
-int Network::BoostSockAcceptor
-	::GetPort() const
+int Network::BoostSockAcceptor ::GetPort() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Acceptor.local_endpoint().port();
+    return m_Acceptor.local_endpoint().port();
 }
 
-
+#include STSTEM_WARNING_POP

@@ -25,7 +25,7 @@ namespace CoreTools
 		CLASS_INVARIANT_DECLARE;
 
 		PriorityType GetPriority() const noexcept;
-		boost::posix_time::ptime GetLastAccessTime() const;
+		boost::posix_time::ptime GetLastAccessTime() const noexcept;
 		bool IsLocked() const noexcept;
 
 		void SetPriority(PriorityType priority) noexcept;

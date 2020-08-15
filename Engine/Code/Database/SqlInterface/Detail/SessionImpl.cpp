@@ -14,7 +14,7 @@
 using std::string;
 
 Database::SessionImpl
-	::SessionImpl(const ConfigurationStrategy& configurationStrategy)
+	::SessionImpl(const ConfigurationStrategy& configurationStrategy) noexcept
 	: m_ConfigurationStrategy{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
@@ -29,7 +29,7 @@ Database::SessionImpl
 CLASS_INVARIANT_STUB_DEFINE(Database, SessionImpl)
 
 Database::ConfigurationStrategy Database::SessionImpl
-	::GetConfigurationStrategy() const
+	::GetConfigurationStrategy() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -41,7 +41,7 @@ Database::SessionImpl::MysqlxSchemaPtr Database::SessionImpl
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetMysqlxSchemaPtr未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetMysqlxSchemaPtr未实现。"s));
 }
 
 Database::SessionImpl::MysqlxSchemaPtr Database::SessionImpl
@@ -51,7 +51,7 @@ Database::SessionImpl::MysqlxSchemaPtr Database::SessionImpl
 
 	SYSTEM_UNUSED_ARG(dbIndex);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetMysqlxSchemaPtr未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetMysqlxSchemaPtr未实现。"s));
 }
 
 Database::SessionImpl::SchemaContainer Database::SessionImpl
@@ -59,7 +59,7 @@ Database::SessionImpl::SchemaContainer Database::SessionImpl
 {
 	DATABASE_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetSchemaContainer未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetSchemaContainer未实现。"s));
 }
 
 Database::SessionImpl::ResultPtr Database::SessionImpl
@@ -70,7 +70,7 @@ Database::SessionImpl::ResultPtr Database::SessionImpl
 	SYSTEM_UNUSED_ARG(findStatement);
 	SYSTEM_UNUSED_ARG(bindStatement);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"s));
 }
 
 Database::SessionImpl::ResultPtr Database::SessionImpl
@@ -80,7 +80,7 @@ Database::SessionImpl::ResultPtr Database::SessionImpl
 
 	SYSTEM_UNUSED_ARG(findStatement);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"s));
 }
 
 Database::SessionImpl::ResultPtr Database::SessionImpl
@@ -91,7 +91,7 @@ Database::SessionImpl::ResultPtr Database::SessionImpl
 	SYSTEM_UNUSED_ARG(findStatement);
 	SYSTEM_UNUSED_ARG(bindStatement);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"s));
 }
 
 void Database::SessionImpl
@@ -102,7 +102,7 @@ void Database::SessionImpl
 	SYSTEM_UNUSED_ARG(findStatement);
 	SYSTEM_UNUSED_ARG(bindStatement);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的Execute未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的Execute未实现。"s));
 }
 
 void Database::SessionImpl
@@ -113,7 +113,7 @@ void Database::SessionImpl
 	SYSTEM_UNUSED_ARG(findStatement);
 	SYSTEM_UNUSED_ARG(bindStatement);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的Execute未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的Execute未实现。"s));
 }
 
 void Database::SessionImpl
@@ -123,5 +123,5 @@ void Database::SessionImpl
 
 	SYSTEM_UNUSED_ARG(findStatement);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的Execute未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的Execute未实现。"s));
 }

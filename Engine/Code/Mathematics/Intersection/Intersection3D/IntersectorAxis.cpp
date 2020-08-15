@@ -11,9 +11,11 @@
 #ifndef MATHEMATICS_INCLUDED_INTERSECTOR_AXIS_DETAIL
 	#define MATHEMATICS_INCLUDED_INTERSECTOR_AXIS_DETAIL
 #endif // MATHEMATICS_INCLUDED_INTERSECTOR_AXIS_DETAIL
-
-#include "IntersectorAxisDetail.h"
-
+    #include "System/Helper/PragmaWarning.h"
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26446)
+    #include "IntersectorAxisDetail.h"
+ 
 namespace Mathematics
 {
 	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
@@ -22,5 +24,5 @@ namespace Mathematics
 	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
 	class IntersectorAxis<double>; 
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_EXPORT_TEMPLATE

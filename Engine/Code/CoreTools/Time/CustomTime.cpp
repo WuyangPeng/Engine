@@ -108,7 +108,7 @@ int64_t CoreTools::CustomTime
 void CoreTools::CustomTime
 	::MarkTimeThisTick() noexcept
 {
-	auto newTime = System::GetTimeInMicroseconds() - m_StartTime;
+	const auto newTime = System::GetTimeInMicroseconds() - m_StartTime;
 
 	m_TimeLastTick = newTime - m_CurrentTime;
 	m_CurrentTime = newTime;

@@ -28,7 +28,6 @@ template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
 	::sm_Zero{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
 
-#include STSTEM_WARNING_POP
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
@@ -45,6 +44,9 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
 	::sm_One{ Math::sm_One,Math::sm_One,Math::sm_One };
+	
+	#include STSTEM_WARNING_POP
+
 
 template <typename Real>
 Mathematics::Vector3D<Real>
@@ -64,7 +66,7 @@ Mathematics::Vector3D<Real>
 
 template <typename Real>
 Mathematics::Vector3D<Real>
-	::Vector3D(Real x, Real y, Real z)
+	::Vector3D(Real x, Real y, Real z) noexcept
 	:m_Tuple{ x,y,z }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -158,7 +160,7 @@ bool Mathematics::Vector3D<Real>
 
 template <typename Real>
 void Mathematics::Vector3D<Real>
-	::ZeroOut()
+	::ZeroOut() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -225,7 +227,7 @@ void Mathematics::Vector3D<Real>
 
 template <typename Real>
 bool Mathematics::Vector3D<Real>
-	::IsNormalize(const Real epsilon) const noexcept
+	::IsNormalize(const Real epsilon) const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

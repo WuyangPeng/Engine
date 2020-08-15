@@ -20,7 +20,9 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 Network::BufferSendStreamImpl
 	::BufferSendStreamImpl(int bytesTotal, ParserStrategy parserStrategy)
 	:m_TopLevel{ bytesTotal - MessageInterface::GetMessageHeadSize() }, m_ParserStrategy{ parserStrategy }
@@ -52,8 +54,8 @@ void Network::BufferSendStreamImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto currentSize = m_TopLevel.GetCurrentSize();
-	auto messageLength = currentSize + MessageInterface::GetMessageHeadSize();
+	const auto currentSize = m_TopLevel.GetCurrentSize();
+	const auto messageLength = currentSize + MessageInterface::GetMessageHeadSize();
 
 	if (messageLength <= messageBuffer->GetSize())
 	{
@@ -70,7 +72,7 @@ void Network::BufferSendStreamImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s));
 	}
 }
 
@@ -83,7 +85,7 @@ void Network::BufferSendStreamImpl
 }
 
 bool Network::BufferSendStreamImpl
-	::IsEmpty() const
+	::IsEmpty() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -101,4 +103,4 @@ int Network::BufferSendStreamImpl
 	return m_TopLevel.GetCurrentSize() + MessageInterface::GetMessageHeadSize();
 }
 
-
+#include STSTEM_WARNING_POP

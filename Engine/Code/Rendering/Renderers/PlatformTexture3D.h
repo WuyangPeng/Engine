@@ -32,7 +32,11 @@ namespace Rendering
 	public:
 		PlatformTexture3D(Renderer* renderer, const Texture3D* texture3D);
 		virtual ~PlatformTexture3D ();
-
+		PlatformTexture3D(const PlatformTexture3D&) = delete;
+		PlatformTexture3D& operator=(const PlatformTexture3D&) = delete;
+		PlatformTexture3D( PlatformTexture3D&&) = delete;
+		PlatformTexture3D& operator=( PlatformTexture3D&&) = delete;
+		
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		// ÎÆÀí²Ù×÷

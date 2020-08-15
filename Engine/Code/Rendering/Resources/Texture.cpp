@@ -14,7 +14,10 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering,Texture);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Texture);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Texture); 
@@ -26,12 +29,7 @@ Rendering::Texture
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
-
-Rendering::Texture
-    ::~Texture()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Texture)
 
@@ -43,4 +41,4 @@ int Rendering::Texture
 }
 
 
-
+#include STSTEM_WARNING_POP

@@ -19,9 +19,11 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446) 
 Rendering::KeyframeControllerImpl
-	::KeyframeControllerImpl()
+	::KeyframeControllerImpl() noexcept
 	: m_NumCommonTimes{ 0 }, m_CommonTimes{},	  
 	  m_NumTranslations{ 0 },m_TranslationTimes{},m_Translations{},	  
 	  m_NumRotations{ 0 },m_RotationTimes{},m_Rotations{},	  
@@ -257,7 +259,7 @@ void Rendering::KeyframeControllerImpl
 }
 
 int Rendering::KeyframeControllerImpl
-	::GetNumCommonTimes() const 
+	::GetNumCommonTimes() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -282,8 +284,7 @@ void Rendering::KeyframeControllerImpl
 	m_CommonTimes[index] = commonTimes;
 }
 
-int Rendering::KeyframeControllerImpl
-	::GetNumTranslations() const 
+int Rendering::KeyframeControllerImpl ::GetNumTranslations() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -326,8 +327,7 @@ void Rendering::KeyframeControllerImpl
 	m_Translations[index] = translations;
 }
 
-int Rendering::KeyframeControllerImpl
-	::GetNumRotations() const 
+int Rendering::KeyframeControllerImpl ::GetNumRotations() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -370,8 +370,7 @@ void Rendering::KeyframeControllerImpl
 	m_Rotations[index] = rotations;
 }
 
-int Rendering::KeyframeControllerImpl
-	::GetNumScales() const 
+int Rendering::KeyframeControllerImpl ::GetNumScales() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -442,7 +441,7 @@ const Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl
 			++nextIndex;
 		}
 
-		auto normTime = (ctrlTime - times[lastIndex]) / (times[nextIndex] - times[lastIndex]);
+		const auto normTime = (ctrlTime - times[lastIndex]) / (times[nextIndex] - times[lastIndex]);
 
 		return ControllerKeyInfo{ normTime, lastIndex, nextIndex };
 	}
@@ -455,7 +454,7 @@ const Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl
 			--nextIndex;
 		}
 
-		auto normTime = (ctrlTime - times[nextIndex]) / (times[lastIndex] - times[nextIndex]);
+		const auto normTime = (ctrlTime - times[nextIndex]) / (times[lastIndex] - times[nextIndex]);
 
 		return ControllerKeyInfo{ normTime, nextIndex, lastIndex };
 	}
@@ -486,7 +485,7 @@ const Rendering::KeyframeControllerImpl::Matrix Rendering::KeyframeControllerImp
 }
 
 float Rendering::KeyframeControllerImpl
-	::GetScale(const ControllerKeyInfo& keyInfo) const
+	::GetScale(const ControllerKeyInfo& keyInfo) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -524,3 +523,4 @@ const Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl
 
 	return GetKeyInfo(ctrlTime,m_CommonTimes,m_CommonLastIndex);
 }
+#include STSTEM_WARNING_POP

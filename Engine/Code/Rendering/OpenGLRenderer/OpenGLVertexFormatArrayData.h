@@ -36,8 +36,8 @@ namespace Rendering
 		UInt GetType(int index) const;
 		UInt GetOffset(int index) const;
 
-		void Enable(int stride);
-		void Disable();
+		void Enable(int stride) noexcept;
+		void Disable() noexcept;
 
 	private:
 		OpenGLVertexFormatData<usage> m_Data[System::EnumCastUnderlying(number)];

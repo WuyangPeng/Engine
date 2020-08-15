@@ -28,8 +28,11 @@ namespace Rendering
 
 	public:		
 		explicit CollapseRecordArray(const std::vector<CollapseRecord>& collapseRecord);
-		virtual ~CollapseRecordArray();
-
+ 
+		~CollapseRecordArray() = default;
+		CollapseRecordArray(CollapseRecordArray&&)= default;
+		CollapseRecordArray& operator=(CollapseRecordArray&&)= default;
+		
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CollapseRecordArray); 

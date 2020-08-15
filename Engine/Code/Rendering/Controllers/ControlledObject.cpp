@@ -22,7 +22,11 @@
 using std::string;
 using std::vector;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering,ControlledObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ControlledObject);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ControlledObject);
@@ -74,7 +78,7 @@ Rendering::ControlledObject& Rendering::ControlledObject
 void Rendering::ControlledObject
 	::AttachControllerInCopy(const ControlledObject& rhs)
 {
-	auto count = rhs.GetNumControllers ();
+	const auto count = rhs.GetNumControllers ();
 	
 	for(int index = 0; index < count;++ index)
 	{
@@ -86,16 +90,14 @@ void Rendering::ControlledObject
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,ControlledObject)
 
-const Rendering::ControllerInterface* Rendering::ControlledObject
-    ::GetControllerObject () const
+const Rendering::ControllerInterface* Rendering::ControlledObject ::GetControllerObject() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_Object;
 }
 
-Rendering::ControllerInterface* Rendering::ControlledObject
-    ::GetControllerObject ()
+Rendering::ControllerInterface* Rendering::ControlledObject ::GetControllerObject() noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -104,8 +106,7 @@ Rendering::ControllerInterface* Rendering::ControlledObject
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,  Update, double,bool)
 
-void Rendering::ControlledObject
-    ::SetObject (ControllerInterface* object)
+void Rendering::ControlledObject ::SetObject(ControllerInterface* object) noexcept
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -116,8 +117,8 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ControlledObject,GetNumControllers
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,GetConstController,int,Rendering::ConstControllerInterfaceSmartPointer)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,GetController,int,Rendering::ControllerInterfaceSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,AttachController,ControllerInterfaceSmartPointer&,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,DetachController,ControllerInterfaceSmartPointer&,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,AttachController,ControllerInterfaceSmartPointer ,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,DetachController,ControllerInterfaceSmartPointer ,void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ControlledObject,DetachAllControllers,void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,UpdateControllers,double,bool)
 
@@ -150,7 +151,7 @@ uint64_t Rendering::ControlledObject
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+	const auto uniqueID = ParentType::Register(target);
 	if(uniqueID != 0)
 	{
 		m_Impl->Register(target);
@@ -186,11 +187,11 @@ void Rendering::ControlledObject
 
     m_Impl->Link(source);
 
-	ControllerInterfaceSmartPointer object { m_ObjectID, nullptr };
+	/*ControllerInterfaceSmartPointer object { m_ObjectID, nullptr };
 	  
     source.ResolveObjectSmartPointerLink(object);
 
-	m_Object = object.GetData();
+	m_Object = object.GetData();*/
 }
 
 void Rendering::ControlledObject
@@ -214,13 +215,13 @@ void Rendering::ControlledObject
 
 	ControllerInterfaceSmartPointer object;
 
-    source.ReadSmartPointer(object);
+//    source.ReadSmartPointer(object);
 
-	m_ObjectID = object.GetAddress();
+	//m_ObjectID = object.GetAddress();
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-
+#include STSTEM_WARNING_POP
 
 

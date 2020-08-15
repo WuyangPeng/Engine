@@ -11,11 +11,23 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 #include <fstream>
-
+#include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26402)
 Mathematics::TSManifoldMesh
 	::~TSManifoldMesh()
 {
-    TMapIterator telement;
+	
+EXCEPTION_TRY
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+ TMapIterator telement;
     for (telement = mTMap.begin(); telement != mTMap.end(); ++telement)
     {
         DELETE0(telement->second);
@@ -26,23 +38,27 @@ Mathematics::TSManifoldMesh
     {
         DELETE0(selement->second);
     }
+#include STSTEM_WARNING_POP
+}
+    EXCEPTION_ALL_CATCH(Mathematics)
+    
 }
 
 Mathematics::TSManifoldMesh
-	::TSManifoldMesh(TCreator tCreator, SCreator sCreator)
+	::TSManifoldMesh(TCreator tCreator, SCreator sCreator) noexcept
 {
     mTCreator = (tCreator ? tCreator : CreateTriangle);
     mSCreator = (sCreator ? sCreator : CreateTetrahedron);
 }
 
 const Mathematics::TSManifoldMesh::TMap& Mathematics::TSManifoldMesh
-	::GetTriangles() const
+	::GetTriangles() const noexcept
 {
     return mTMap;
 }
 
 const Mathematics::TSManifoldMesh::SMap& Mathematics::TSManifoldMesh
-	::GetTetrahedra() const
+	::GetTetrahedra() const noexcept
 {
     return mSMap;
 }
@@ -62,7 +78,7 @@ Mathematics::TSManifoldMesh::Tetrahedron* Mathematics::TSManifoldMesh
 Mathematics::TSManifoldMesh::Tetrahedron* Mathematics::TSManifoldMesh
 	::Insert(int v0, int v1, int v2, int v3)
 {
-    TetrahedronKey skey(v0, v1, v2, v3);
+    const TetrahedronKey skey(v0, v1, v2, v3);
     if (mSMap.find(skey) != mSMap.end())
     {
         // The tetrahedron already exists.  Return a null pointer as a signal
@@ -79,10 +95,10 @@ Mathematics::TSManifoldMesh::Tetrahedron* Mathematics::TSManifoldMesh
 	{
 		if (tetra)
 		{
-		int opposite[3]{ TetrahedronKey::oppositeFace[i][0],   TetrahedronKey::oppositeFace[i][1],TetrahedronKey::oppositeFace[i][2] };
-		UnorderedTriangleKey tkey{tetra->V[opposite[0]],tetra->V[opposite[1]],tetra->V[opposite[2]]};
-        Triangle* face;
-        TMapIterator titer = mTMap.find(tkey);
+		const int opposite[3]{ TetrahedronKey::oppositeFace[i][0],   TetrahedronKey::oppositeFace[i][1],TetrahedronKey::oppositeFace[i][2] };
+		const UnorderedTriangleKey tkey{tetra->V[opposite[0]],tetra->V[opposite[1]],tetra->V[opposite[2]]};
+        Triangle* face = nullptr;
+        const TMapIterator titer = mTMap.find(tkey);
         if (titer == mTMap.end())
         {
             // This is the first time the face is encountered.
@@ -142,8 +158,8 @@ Mathematics::TSManifoldMesh::Tetrahedron* Mathematics::TSManifoldMesh
 bool Mathematics::TSManifoldMesh
 	::Remove(int v0, int v1, int v2, int v3)
 {
-    TetrahedronKey skey(v0, v1, v2, v3);
-    SMapIterator siter = mSMap.find(skey);
+    const TetrahedronKey skey(v0, v1, v2, v3);
+    const SMapIterator siter = mSMap.find(skey);
     if (siter == mSMap.end())
     {
         // The tetrahedron does not exist.
@@ -184,7 +200,7 @@ bool Mathematics::TSManifoldMesh
         // Remove the face if you have the last reference to it.
         if (!face->T[0] && !face->T[1])
         {
-            UnorderedTriangleKey tkey(face->V[0], face->V[1], face->V[2]);
+            const UnorderedTriangleKey tkey(face->V[0], face->V[1], face->V[2]);
             mTMap.erase(tkey);
             DELETE0(face);
         }
@@ -329,7 +345,7 @@ Mathematics::TSManifoldMesh::Triangle
 }
 
 Mathematics::TSManifoldMesh::Triangle
-	::Triangle(int v0, int v1, int v2)
+	::Triangle(int v0, int v1, int v2) noexcept
 {
     V[0] = v0;
     V[1] = v1;
@@ -344,7 +360,7 @@ Mathematics::TSManifoldMesh::Tetrahedron
 }
 
 Mathematics::TSManifoldMesh::Tetrahedron
-	::Tetrahedron(int v0, int v1, int v2, int v3)
+	::Tetrahedron(int v0, int v1, int v2, int v3) noexcept
 	:V{}, T{}, S{}
 {
     V[0] = v0;
@@ -358,3 +374,4 @@ Mathematics::TSManifoldMesh::Tetrahedron
     }
 }
 
+#include STSTEM_WARNING_POP

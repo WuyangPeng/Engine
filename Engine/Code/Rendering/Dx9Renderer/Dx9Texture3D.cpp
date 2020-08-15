@@ -9,11 +9,13 @@
 #include "Dx9Texture3D.h" 
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 Rendering::Dx9Texture3D
 	::Dx9Texture3D( Renderer* renderer, const Texture3D* texture )
  
-{	
+{
+    CoreTools::DoNothing();
 	SYSTEM_UNUSED_ARG(renderer);
 	SYSTEM_UNUSED_ARG(texture);
 
@@ -54,7 +56,7 @@ void Rendering::Dx9Texture3D
 	::Enable( Renderer* renderer, int textureUnit )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    CoreTools::DoNothing();
 	/*
 	  IDirect3DDevice9* device = renderer->mData->mDevice;
 
@@ -71,7 +73,7 @@ void Rendering::Dx9Texture3D
 	::Disable( Renderer* renderer, int textureUnit )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    CoreTools::DoNothing();
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
 	HRESULT hr;
@@ -100,7 +102,7 @@ void* Rendering::Dx9Texture3D
 	::Lock( int level, BufferLocking mode )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    CoreTools::DoNothing();
 	/*
 	 D3DLOCKED_BOX box;
 	 HRESULT hr = mTexture->LockBox((UINT)level, &box, 0,
@@ -120,7 +122,7 @@ void Rendering::Dx9Texture3D
 	::Unlock( int level )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    CoreTools::DoNothing();
 	/*
 	 HRESULT hr = mTexture->UnlockBox((UINT)level);
 	 WM5_UNUSED(hr);

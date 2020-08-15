@@ -15,7 +15,14 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26440)
 using std::string;
 using std::vector;
 using std::swap;
@@ -118,11 +125,11 @@ void Rendering::VisualEffectInstanceImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.WriteSmartPointer(m_Effect);
+	//target.WriteSmartPointer(m_Effect);
 	target.Write(m_TechniqueIndex);
 	target.Write(m_NumPasses);
-	target.WriteSmartPointer(m_VertexParameters);
-	target.WriteSmartPointer(m_PixelParameters);
+	//target.WriteSmartPointer(m_VertexParameters);
+	//target.WriteSmartPointer(m_PixelParameters);
 }
 
 void Rendering::VisualEffectInstanceImpl
@@ -130,28 +137,28 @@ void Rendering::VisualEffectInstanceImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.ReadSmartPointer(m_Effect);
+	//source.ReadSmartPointer(m_Effect);
 	source.Read(m_TechniqueIndex);
 	source.Read(m_NumPasses);
-	source.ReadSmartPointer(m_VertexParameters);
-	source.ReadSmartPointer(m_PixelParameters);
+	//source.ReadSmartPointer(m_VertexParameters);
+	//source.ReadSmartPointer(m_PixelParameters);
 }
 
 void Rendering::VisualEffectInstanceImpl
 	::Link(ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	source.ResolveObjectSmartPointerLink(m_Effect);
+    source;
+	//source.ResolveObjectSmartPointerLink(m_Effect);
 
 	if (!m_VertexParameters.empty())
 	{
-		source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_VertexParameters.size()), &m_VertexParameters[0]);
+		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_VertexParameters.size()), &m_VertexParameters[0]);
 	}		
 	
 	if (!m_PixelParameters.empty())
 	{
-		source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_PixelParameters.size()), &m_PixelParameters[0]);
+		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_PixelParameters.size()), &m_PixelParameters[0]);
 	}		
 }
 
@@ -159,17 +166,17 @@ void Rendering::VisualEffectInstanceImpl
 	::Register(ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	target.RegisterSmartPointer(m_Effect);
+    target;
+	//target.RegisterSmartPointer(m_Effect);
 
 	if (!m_VertexParameters.empty())
 	{
-		target.RegisterSmartPointer(boost::numeric_cast<int>(m_VertexParameters.size()), &m_VertexParameters[0]);
+		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_VertexParameters.size()), &m_VertexParameters[0]);
 	}		
 
 	if (!m_PixelParameters.empty())
 	{
-		target.RegisterSmartPointer(boost::numeric_cast<int>(m_PixelParameters.size()), &m_PixelParameters[0]);
+		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_PixelParameters.size()), &m_PixelParameters[0]);
 	}		
 }
 
@@ -285,7 +292,7 @@ const Rendering::ConstVisualEffectSmartPointer Rendering::VisualEffectInstanceIm
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Effect.PolymorphicCastConstObjectSmartPointer<ConstVisualEffectSmartPointer>();
+	return m_Effect ;
 }
 
 int Rendering::VisualEffectInstanceImpl
@@ -318,7 +325,7 @@ const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstan
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
 
-	return m_VertexParameters[pass].PolymorphicCastConstObjectSmartPointer<ConstShaderParametersSmartPointer>();
+	return m_VertexParameters[pass] ;
 }
 
 const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
@@ -327,7 +334,7 @@ const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstan
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
 
-	return m_PixelParameters[pass].PolymorphicCastConstObjectSmartPointer<ConstShaderParametersSmartPointer>();
+	return m_PixelParameters[pass] ;
 }
 
 int Rendering::VisualEffectInstanceImpl
@@ -491,5 +498,6 @@ const Rendering::ShaderParametersSmartPointer Rendering::VisualEffectInstanceImp
 
 	return m_PixelParameters[pass];
 }
+#include STSTEM_WARNING_POP
 
  

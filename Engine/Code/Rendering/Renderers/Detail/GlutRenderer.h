@@ -24,84 +24,84 @@ namespace Rendering
         
         CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual RendererTypes GetRendererType() const override;
+		  RendererTypes GetRendererType() const override;
 
-		virtual void SetAlphaState(const ConstAlphaStateSmartPointer& alphaState) override;
-
-
-		virtual void SetCullState(const ConstCullStateSmartPointer& cullState) override;
+		  void SetAlphaState(const ConstAlphaStateSmartPointer& alphaState) override;
 
 
-		virtual void SetDepthState(const ConstDepthStateSmartPointer& depthState) override;
+		  void SetCullState(const ConstCullStateSmartPointer& cullState) override;
 
 
-		virtual void SetOffsetState(const ConstOffsetStateSmartPointer& offsetState) override;
+		  void SetDepthState(const ConstDepthStateSmartPointer& depthState) override;
 
 
-		virtual void SetStencilState(const ConstStencilStateSmartPointer& stencilState) override;
+		  void SetOffsetState(const ConstOffsetStateSmartPointer& offsetState) override;
 
 
-		virtual void SetWireState(const ConstWireStateSmartPointer& wireState) override;
+		  void SetStencilState(const ConstStencilStateSmartPointer& stencilState) override;
 
 
-		virtual void SetViewport(const Viewport& viewport) override;
+		  void SetWireState(const ConstWireStateSmartPointer& wireState) override;
 
 
-		virtual Viewport GetViewport() const override;
+		  void SetViewport(const Viewport& viewport) override;
 
 
-		virtual void SetDepthRange(const DepthRange& depthRange) override;
+		  Viewport GetViewport() const override;
 
 
-		virtual DepthRange GetDepthRange() const override;
+		  void SetDepthRange(const DepthRange& depthRange) override;
 
 
-		virtual void Resize(int width, int height) override;
+		  DepthRange GetDepthRange() const override;
 
 
-		virtual void ClearColorBuffer() override;
+		  void Resize(int width, int height) override;
 
 
-		virtual void ClearDepthBuffer() override;
+		  void ClearColorBuffer() override;
 
 
-		virtual void ClearStencilBuffer() override;
+		  void ClearDepthBuffer() override;
 
 
-		virtual void ClearBuffers() override;
+		  void ClearStencilBuffer() override;
 
 
-		virtual void ClearColorBuffer(int x, int y, int w, int h) override;
+		  void ClearBuffers() override;
 
 
-		virtual void ClearDepthBuffer(int x, int y, int w, int h) override;
+		  void ClearColorBuffer(int x, int y, int w, int h) override;
 
 
-		virtual void ClearStencilBuffer(int x, int y, int w, int h) override;
+		  void ClearDepthBuffer(int x, int y, int w, int h) override;
 
 
-		virtual void ClearBuffers(int x, int y, int w, int h) override;
+		  void ClearStencilBuffer(int x, int y, int w, int h) override;
 
 
-		virtual void DisplayColorBuffer() override;
+		  void ClearBuffers(int x, int y, int w, int h) override;
 
 
-		virtual void SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha) override;
+		  void DisplayColorBuffer() override;
 
 
-		virtual bool PreDraw() override;
+		  void SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha) override;
 
 
-		virtual void PostDraw() override;
+		  bool PreDraw() override;
 
 
-		virtual void Draw(const uint8_t* screenBuffer, bool reflectY) override;
+		  void PostDraw() override;
 
 
-		virtual void Draw(int x, int y, const Colour& color, const std::string& message) override;
+		  void Draw(const uint8_t* screenBuffer, bool reflectY) override;
+
+
+		  void Draw(int x, int y, const Colour& color, const std::string& message) override;
 
 	private:
-		virtual void DrawPrimitive(const ConstVisualSmartPointer& visual) override;
+		  void DrawPrimitive(const ConstVisualSmartPointer& visual) override;
 
 	};
 }

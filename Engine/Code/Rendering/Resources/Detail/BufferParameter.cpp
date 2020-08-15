@@ -9,24 +9,21 @@
 #include "BufferParameter.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
 
-Rendering::BufferParameter
-	::BufferParameter()
-	:m_Offset{ 0 }, m_ComponentSize{ 0 }, m_NumComponents{ 0 }
+Rendering::BufferParameter ::BufferParameter() noexcept
+    : m_Offset{ 0 }, m_ComponentSize{ 0 }, m_NumComponents{ 0 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::BufferParameter
-	::BufferParameter(int offset, int componentSize, int numComponents)
-	:m_Offset{ offset }, m_ComponentSize{ componentSize }, m_NumComponents{ numComponents }
+Rendering::BufferParameter ::BufferParameter(int offset, int componentSize, int numComponents) noexcept
+    : m_Offset{ offset }, m_ComponentSize{ componentSize }, m_NumComponents{ numComponents }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BufferParameter)
 
-void Rendering::BufferParameter
-	::Set(int offset, int componentSize, int numComponents)
+void Rendering::BufferParameter ::Set(int offset, int componentSize, int numComponents) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -35,24 +32,21 @@ void Rendering::BufferParameter
 	m_NumComponents = numComponents;
 }
 
-int Rendering::BufferParameter
-	::GetOffset() const
+int Rendering::BufferParameter ::GetOffset() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;	
 
 	return m_Offset;
 }
 
-int Rendering::BufferParameter
-	::GetComponentSize() const 
+int Rendering::BufferParameter ::GetComponentSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_ComponentSize;
 }
 
-int Rendering::BufferParameter
-	::GetNumComponents() const 
+int Rendering::BufferParameter ::GetNumComponents() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

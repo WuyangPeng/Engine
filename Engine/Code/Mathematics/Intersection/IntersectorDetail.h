@@ -12,9 +12,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real, template <typename> class Vector>
-Mathematics::Intersector<Real, Vector>
-	::Intersector(const Real epsilon)
-	:m_IntersectionType{ IntersectionType::Empty }, m_Epsilon{ epsilon }
+Mathematics::Intersector<Real, Vector>::Intersector(const Real epsilon) noexcept
+    : m_IntersectionType{ IntersectionType::Empty }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -48,8 +47,7 @@ Mathematics::IntersectionType Mathematics::Intersector<Real, Vector>
 }
 
 template <typename Real, template <typename> class Vector>
-Real Mathematics::Intersector<Real, Vector>
-	::GetEpsilon() const
+Real Mathematics::Intersector<Real, Vector>::GetEpsilon() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -58,7 +56,7 @@ Real Mathematics::Intersector<Real, Vector>
 
 template <typename Real, template <typename> class Vector>
 bool Mathematics::Intersector<Real, Vector>
-	::IsIntersection() const
+	::IsIntersection() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -66,8 +64,7 @@ bool Mathematics::Intersector<Real, Vector>
 }
 
 template <typename Real, template <typename> class Vector>
-void Mathematics::Intersector<Real, Vector>
-	::SetIntersectionType(IntersectionType intersectionType)
+void Mathematics::Intersector<Real, Vector>::SetIntersectionType(IntersectionType intersectionType) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

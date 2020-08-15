@@ -34,7 +34,7 @@ namespace Rendering
 
 		int GetSize() const;
 		const PickRecord GetPickRecord(int index) const;
-		bool IsEmpty() const;
+		bool IsEmpty() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(PickRecordContainer);

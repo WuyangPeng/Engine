@@ -11,13 +11,14 @@
 #include "AVector.h"
 #include "APoint.h"
 #include "AlgebraTraits.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename T>
 Mathematics::Plane<T>
-	::Plane(const T epsilon)
+	::Plane(const T epsilon) noexcept
 	:m_Tuple{ Math::sm_One, Math::sm_Zero, Math::sm_Zero, Math::sm_Zero }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -96,10 +97,21 @@ template <typename T>
 bool Mathematics::Plane<T>
 	::IsValid() const noexcept
 {
-	if (Math::Sqrt(m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2]) - Math::sm_One <= m_Epsilon)
-		return true;
-	else
+	try
+	{	
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)	
+		if (Math::Sqrt(m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2]) - Math::sm_One <= m_Epsilon)
+			return true;
+		else
+			return false;
+#include STSTEM_WARNING_POP
+	}
+	catch(...)
+	{
 		return false;
+	}	
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -113,8 +125,7 @@ const Mathematics::HomogeneousPoint<T> Mathematics::Plane<T>
 }
 
 template <typename T>
-const T* Mathematics::Plane<T>
-	::GetElements() const
+const T* Mathematics::Plane<T>::GetElements() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -123,7 +134,7 @@ const T* Mathematics::Plane<T>
 
 template <typename T>
 T* Mathematics::Plane<T>
-	::GetElements()
+	::GetElements() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -172,7 +183,7 @@ void Mathematics::Plane<T>
 
 template <typename T>
 void Mathematics::Plane<T>
-	::SetEpsilon(T epsilon)
+	::SetEpsilon(T epsilon) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -180,8 +191,7 @@ void Mathematics::Plane<T>
 }
 
 template <typename T>
-T Mathematics::Plane<T>
-	::GetEpsilon() const
+T Mathematics::Plane<T>::GetEpsilon() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

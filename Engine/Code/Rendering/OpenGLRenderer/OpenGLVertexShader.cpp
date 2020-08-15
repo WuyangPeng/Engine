@@ -9,7 +9,9 @@
 #include "OpenGLVertexShader.h"
 
 using namespace Rendering;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
 
 PdrVertexShader::PdrVertexShader (Renderer*, const VertexShader* vshader)
 {
@@ -69,3 +71,4 @@ void PdrVertexShader::Disable (Renderer* renderer,
         renderer->mData->mMaxVShaderImages);*/
 }
 
+#include STSTEM_WARNING_POP

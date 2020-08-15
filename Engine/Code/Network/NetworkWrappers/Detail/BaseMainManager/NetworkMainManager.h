@@ -20,17 +20,22 @@ namespace Network
 		using ParentType = BaseMainManagerImpl;
 
 	public:
-		NetworkMainManager();
-		virtual ~NetworkMainManager();
+                NetworkMainManager()  ;
+		  ~NetworkMainManager() noexcept;
+		  
+		  NetworkMainManager(const NetworkMainManager&) = default;
+		NetworkMainManager& operator=(const NetworkMainManager&) = default;
+		NetworkMainManager(NetworkMainManager&&) = default;
+		NetworkMainManager& operator=(NetworkMainManager&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 	public:
-		virtual void Run() override;
+		  void Run() noexcept override;
 
 	private:
-		void Init();
-		void Release();
+		void Init()  ;
+		void Release() noexcept;
 	};
 }
 

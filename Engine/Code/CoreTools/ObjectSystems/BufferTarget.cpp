@@ -20,6 +20,9 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26486)
 using std::array;
 using std::string;
 
@@ -30,11 +33,7 @@ CoreTools::BufferTarget
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::BufferTarget
-	::~BufferTarget()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferTarget)
 

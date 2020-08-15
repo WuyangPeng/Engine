@@ -16,18 +16,13 @@ using std::string;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-Database::MysqlConnectorResultRow
-	::MysqlConnectorResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow)
-	: ParentType{ configurationStrategy }, m_MysqlxRow{ mysqlxRow }
+Database::MysqlConnectorResultRow ::MysqlConnectorResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow) noexcept
+    : ParentType{ configurationStrategy }, m_MysqlxRow{ mysqlxRow }
 {
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::MysqlConnectorResultRow
-	::~MysqlConnectorResultRow()
-{
-	DATABASE_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Database::MysqlConnectorResultRow

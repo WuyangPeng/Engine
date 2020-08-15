@@ -20,9 +20,12 @@
 #include "Network/ACEWrappers/Detail/Address/ACESockInetAddress.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 
 Network::ACESockAcceptor
@@ -56,7 +59,16 @@ Network::ACESockAcceptor
 Network::ACESockAcceptor
 	::~ACESockAcceptor()
 {
-	m_ACESockAcceptor.close();
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+
+	EXCEPTION_TRY
+	{
+		m_ACESockAcceptor.close();
+	}
+	EXCEPTION_ALL_CATCH(Network)
+
+#include STSTEM_WARNING_POP	
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -109,7 +121,7 @@ void Network::ACESockAcceptor
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto result = m_ACESockAcceptor.accept(sockStream->GetACESockStream());
+	const auto result = m_ACESockAcceptor.accept(sockStream->GetACESockStream());
 
 	if (result == 0)
 	{
@@ -127,7 +139,7 @@ void Network::ACESockAcceptor
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto result = m_ACESockAcceptor.accept(sockStream->GetACESockStream(), &sockAddress->GetACEInetAddress());
+	const auto result = m_ACESockAcceptor.accept(sockStream->GetACESockStream(), &sockAddress->GetACEInetAddress());
 
 	if (result == 0)
 	{
@@ -173,5 +185,5 @@ int Network::ACESockAcceptor
 		return 0;
 	}
 }
-
+#include STSTEM_WARNING_POP
 #endif // NETWORK_USE_ACE

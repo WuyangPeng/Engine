@@ -27,7 +27,7 @@ namespace Network
 	public:
 		explicit SockConnector(const ConfigurationStrategy& configurationStrategy);
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(SockConnector);
+		CLASS_INVARIANT_DECLARE;
 
 		bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress);
 

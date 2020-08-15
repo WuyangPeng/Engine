@@ -12,7 +12,11 @@
 #include "ShaderManagement.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26486)
 template <typename TextureFlags,typename PdrTextureType>
 Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 	::ShaderManagement(RendererWeakPtr ptr)
@@ -41,7 +45,7 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 
     if (m_Textures.find(texture) == m_Textures.end())
     {
-		PdrTextureSharedPtr pdrTexture{ std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.GetData()) };
+		PdrTextureSharedPtr pdrTexture{ std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.get()) };
 		m_Textures.insert({ texture, pdrTexture });
     }
 }
@@ -61,7 +65,7 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 	parameters;
-    auto iter = m_Textures.find(texture);
+        const auto iter = m_Textures.find(texture);
     PdrTextureSharedPtr pdrTexture;
     if (iter != m_Textures.end())
     {
@@ -70,11 +74,11 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
     else
     {
         // 延迟构造。
-        pdrTexture = std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.GetData());
+        pdrTexture = std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.get());
 		m_Textures.insert({ texture,  pdrTexture });
     }
 
-     pdrTexture->Enable(m_Renderer.lock().get(),texture.GetData(),parameters.GetData());
+     pdrTexture->Enable(m_Renderer.lock().get(),texture.get(),parameters.get());
 }
 
 template <typename TextureFlags,typename PdrTextureType>
@@ -83,13 +87,13 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 	parameters;
-    auto iter = m_Textures.find(texture);
+        const auto iter = m_Textures.find(texture);
  
     if (iter != m_Textures.end())
     {
 		auto pdrTexture = iter->second;
 
-		pdrTexture->Disable(m_Renderer.lock().get(), texture.GetData(), parameters.GetData());
+		pdrTexture->Disable(m_Renderer.lock().get(), texture.get(), parameters.get());
     }
 }
 
@@ -108,7 +112,7 @@ void* Rendering::ShaderManagement<TextureFlags, PdrTextureType>
     else
     {
         // 延迟构造。
-		pdrTexture = std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.GetData());
+		pdrTexture = std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.get());
 		m_Textures.insert({ texture, pdrTexture });
     }
 
@@ -150,15 +154,15 @@ typename Rendering::ShaderManagement<TextureFlags, PdrTextureType>::PdrTextureSh
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-    auto iter = m_Textures.find(texture);
+const auto iter = m_Textures.find(texture);
     if (iter != m_Textures.end())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的顶点缓冲区资源！"));
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的顶点缓冲区资源！"s));
     }
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RENDERERS_NON_CUBE_TEXTURE_MANAGEMENT_DETAIL_H

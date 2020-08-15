@@ -31,7 +31,6 @@ namespace CoreTools
 
 	public:
 		TimeReportOutput(const std::string& timeDescribe, int borderLineLength, const OStreamShared& osPtr );
-		virtual ~TimeReportOutput();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

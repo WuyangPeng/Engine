@@ -8,7 +8,10 @@
 #define MATHEMATICS_MESHES_TRIANGLE_KEY_H
 
 #include "Mathematics/MathematicsDll.h"
-
+ #include "System/Helper/PragmaWarning.h"
+    #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE TriangleKey
@@ -17,11 +20,15 @@ namespace Mathematics
         using ClassType = TriangleKey;
         
     public:
-		TriangleKey();
-        TriangleKey (int first, int second, int third);
+		TriangleKey() noexcept;
+        TriangleKey (int first, int second, int third) noexcept;
         
-        TriangleKey(const TriangleKey& rhs);
-        TriangleKey& operator = (const TriangleKey& rhs);
+        TriangleKey(const TriangleKey& rhs) noexcept;
+        TriangleKey& operator = (const TriangleKey& rhs) noexcept;
+		
+		~TriangleKey() = default;
+		TriangleKey(TriangleKey&& rhs) noexcept = default;
+        TriangleKey& operator = (TriangleKey&& rhs) noexcept= default;
     
 		CLASS_INVARIANT_DECLARE;
         
@@ -39,5 +46,5 @@ namespace Mathematics
     
      bool MATHEMATICS_DEFAULT_DECLARE operator< (const TriangleKey& lhs,  const TriangleKey& rhs);
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_MESHES_TRIANGLE_KEY_H

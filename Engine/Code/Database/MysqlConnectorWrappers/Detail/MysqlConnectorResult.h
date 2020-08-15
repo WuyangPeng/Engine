@@ -24,13 +24,13 @@ namespace Database
 		using MysqlxRowResultPtr = std::shared_ptr<MysqlxRowResult>;
 
 	public:
-		MysqlConnectorResult(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult);
-		virtual ~MysqlConnectorResult();
+                MysqlConnectorResult(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult) noexcept;
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual ResultRowPtr FetchOne() override;
-		virtual ResultRowContainer FetchAll() override;
+		  ResultRowPtr FetchOne() override;
+		  ResultRowContainer FetchAll() override;
 
 	private:
 		MysqlxRowResultPtr m_MysqlxRowResult;

@@ -9,11 +9,13 @@
 #include "Dx9Texture1D.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/UnusedMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 Rendering::Dx9Texture1D
 	::Dx9Texture1D( Renderer* renderer, const Texture1D* texture )
  
 {	
+	CoreTools::DoNothing();
 	SYSTEM_UNUSED_ARG(renderer);
 	SYSTEM_UNUSED_ARG(texture);
 
@@ -56,6 +58,7 @@ void Rendering::Dx9Texture1D
 
 	SYSTEM_UNUSED_ARG(textureUnit);
 	SYSTEM_UNUSED_ARG(renderer);
+        CoreTools::DoNothing();
 
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
@@ -73,7 +76,7 @@ void Rendering::Dx9Texture1D
 
 	SYSTEM_UNUSED_ARG(textureUnit);
 	SYSTEM_UNUSED_ARG(renderer);
-
+        CoreTools::DoNothing();
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
 	HRESULT hr;
@@ -102,7 +105,7 @@ void* Rendering::Dx9Texture1D
 
 	SYSTEM_UNUSED_ARG(level);
 	SYSTEM_UNUSED_ARG(mode);
-
+        CoreTools::DoNothing();
 	/*
 	 D3DLOCKED_RECT rect;
 	 HRESULT hr = mTexture->LockRect((UINT)level, &rect, 0,
@@ -125,7 +128,7 @@ void Rendering::Dx9Texture1D
 	WM5_UNUSED(hr);
 	RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to unlock level %u of 1D texture: %s\n",
 	level, DXGetErrorString(hr));*/
-
+        CoreTools::DoNothing();
 	SYSTEM_UNUSED_ARG(level);
 }
 

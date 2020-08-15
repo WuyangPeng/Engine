@@ -16,19 +16,23 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 using std::vector;
 
 Rendering::ClodMeshImpl
-	::ClodMeshImpl()
+	::ClodMeshImpl() noexcept
 	:m_CurrentRecord{ 0 }, m_TargetRecord{ 0 }, m_RecordArray{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::ClodMeshImpl
-	::ClodMeshImpl(const CollapseRecordArraySmartPointer& recordArray)
+	::ClodMeshImpl(const CollapseRecordArraySmartPointer& recordArray) noexcept
 	:m_CurrentRecord{ 0 }, m_TargetRecord{ 0 }, m_RecordArray{ recordArray }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -43,7 +47,7 @@ void Rendering::ClodMeshImpl
 
 	source.Read(m_CurrentRecord);
 	source.Read(m_TargetRecord);
-	source.ReadSmartPointer(m_RecordArray);
+	//source.ReadSmartPointer(m_RecordArray);
 }
 
 void Rendering::ClodMeshImpl
@@ -53,7 +57,7 @@ void Rendering::ClodMeshImpl
 
 	target.Write(m_CurrentRecord);
 	target.Write(m_TargetRecord);
-	target.WriteSmartPointer(m_RecordArray);
+//	target.WriteSmartPointer(m_RecordArray);
 }
 
 int Rendering::ClodMeshImpl
@@ -73,16 +77,16 @@ void Rendering::ClodMeshImpl
 	::Link(ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ResolveObjectSmartPointerLink(m_RecordArray);
+    source;
+	//source.ResolveObjectSmartPointerLink(m_RecordArray);
 }
 
 void Rendering::ClodMeshImpl
 	::Register(ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_RecordArray);
+    target;
+	//target.RegisterSmartPointer(m_RecordArray);
 }
 
 int Rendering::ClodMeshImpl
@@ -94,7 +98,7 @@ int Rendering::ClodMeshImpl
 }
 
 int Rendering::ClodMeshImpl
-	::GetTargetRecord() const
+	::GetTargetRecord() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -102,7 +106,7 @@ int Rendering::ClodMeshImpl
 }
 
 void Rendering::ClodMeshImpl
-	::SetTargetRecord(int targetRecord)
+	::SetTargetRecord(int targetRecord) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -115,7 +119,7 @@ void Rendering::ClodMeshImpl
 	RENDERING_CLASS_IS_VALID_9; 	
 
 	// 如果必要的话，塌陷网格。
-	auto bufferChanged = (m_CurrentRecord != targetRecord);
+	const auto bufferChanged = (m_CurrentRecord != targetRecord);
  
 	while (m_CurrentRecord < targetRecord)
 	{
@@ -125,7 +129,7 @@ void Rendering::ClodMeshImpl
 		auto record = m_RecordArray->GetRecord(m_CurrentRecord);
 		for (auto i = 0; i < record.GetIndicesSize(); ++i)
 		{
-			auto recordIndex = record.GetIndex(i);
+			const auto recordIndex = record.GetIndex(i);
 			indexbuffer->SetIndexBuffer(recordIndex, record.GetVThrow(), record.GetVKeep());
 		}
 
@@ -143,7 +147,7 @@ void Rendering::ClodMeshImpl
 		auto record = m_RecordArray->GetRecord(m_CurrentRecord);
 		for (auto i = 0; i < record.GetIndicesSize(); ++i)
 		{
-			auto recordIndex = record.GetIndex(i);
+			const auto recordIndex = record.GetIndex(i);
 			indexbuffer->SetIndexBuffer(recordIndex, record.GetVKeep(), record.GetVThrow());
 		}
 
@@ -159,7 +163,7 @@ void Rendering::ClodMeshImpl
 
 	if (bufferChanged)
 	{
-		RENDERER_MANAGE_SINGLETON.UpdateAll(indexbuffer.GetData());
+		RENDERER_MANAGE_SINGLETON.UpdateAll(indexbuffer.get());
 	}
 }
 
@@ -195,3 +199,4 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::ClodMeshImpl
 
 	return m_RecordArray->GetAllConstObjectsByName(name);
 }
+#include STSTEM_WARNING_POP

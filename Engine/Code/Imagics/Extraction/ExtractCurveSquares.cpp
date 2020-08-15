@@ -20,6 +20,7 @@
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26429)
 Imagics::ExtractCurveSquares
 	::ExtractCurveSquares (int xBound, int yBound, int* data) noexcept
     :mXBound(xBound), mYBound(yBound), mQuantity(xBound*yBound), mData(data)
@@ -93,7 +94,7 @@ void Imagics::ExtractCurveSquares
     VMap vertexMap;
     for (int v = 0, nextVertex = 0; v < numVertices; ++v)
     {
-        std::pair<VIterator,bool> result = vertexMap.insert(std::make_pair(vertices[v], nextVertex));
+        const std::pair<VIterator,bool> result = vertexMap.insert(std::make_pair(vertices[v], nextVertex));
 
         if (result.second == true)
         {
@@ -123,7 +124,7 @@ void Imagics::ExtractCurveSquares
             edges[e].SetKey(1, vIter->second);
 
             // Keep only unique edges.
-            std::pair<EIterator,bool> result = edgeMap->insert(std::make_pair(edges[e], nextEdge));
+            const std::pair<EIterator, bool> result = edgeMap->insert(std::make_pair(edges[e], nextEdge));
 
             if (result.second == true)
             {

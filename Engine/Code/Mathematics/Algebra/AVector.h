@@ -37,15 +37,15 @@ namespace Mathematics
 		// AVector表示仿射坐标 (x,y,z,0)。默认 (0,0,0,0)。
 		AVector() noexcept;
 	 
-		AVector(T x, T y, T z);
+		AVector(T x, T y, T z) noexcept;
 		AVector(const Float3& tuple);
 		AVector(const Vector3D& rhs);
-		AVector(const HomogeneousPoint& homogeneousPoint);
+                AVector(const HomogeneousPoint& homogeneousPoint) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		const Float3 GetFloat3() const;
-		const Vector3D GetVector3D() const;
+                const Vector3D GetVector3D() const noexcept;
 
 		const T& operator[] (int index) const;
 		T& operator[] (int index);

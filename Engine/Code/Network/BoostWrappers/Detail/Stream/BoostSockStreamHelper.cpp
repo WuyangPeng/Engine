@@ -17,7 +17,11 @@
 
 using std::string;
 using namespace std::literals;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26426)
 namespace
 {
 	const auto g_PortDescription = SYSTEM_TEXT("£¬¶Ë¿Ú£º"s);
@@ -68,3 +72,4 @@ void Network::BoostSockStreamHelper
 			<< CoreTools::LogAppenderIOManageSign::Refresh;
 	}
 }
+#include STSTEM_WARNING_POP

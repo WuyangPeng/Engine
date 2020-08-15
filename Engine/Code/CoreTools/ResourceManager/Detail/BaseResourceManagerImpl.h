@@ -36,7 +36,7 @@ namespace CoreTools
 		uint32_t GetMaximumMemory() const noexcept;
 
 		// ¿ØÖÆCurrentResource
-		void GotoBegin();
+		void GotoBegin() noexcept;
 		const ResourceWeakPtr GetCurrentResource() const;
 		void GotoNext();
 
@@ -66,7 +66,7 @@ namespace CoreTools
 
 		void AddMemory(uint32_t size);
 		void RemoveMemory(uint32_t size) noexcept;
-		uint32_t GetNextResourceHandle() noexcept;
+		uint32_t GetNextResourceHandle();
 
 	private:
 		static constexpr uint32_t sm_InvalidResourceHandle{ 0xFFFFFFFF };

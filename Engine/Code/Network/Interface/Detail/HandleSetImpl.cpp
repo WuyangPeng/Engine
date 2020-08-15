@@ -10,11 +10,12 @@
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using std::make_shared;
 
 Network::HandleSetImpl
-	::HandleSetImpl()
+	::HandleSetImpl() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -33,12 +34,16 @@ void Network::HandleSetImpl
 	NETWORK_CLASS_IS_VALID_9;
 
 	SYSTEM_UNUSED_ARG(handle);
+
+	CoreTools::DoNothing();
 }
 
 int64_t Network::HandleSetImpl
 	::GetMaxSet() const
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
+
+	CoreTools::DoNothing();
 
 	return 0;
 }
@@ -48,13 +53,15 @@ Network::SockFdSet* Network::HandleSetImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("获取fdset失败！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("获取fdset失败！"s));
 }
 
 void Network::HandleSetImpl
 	::Sync(ACEHandle maxHandle)
 {
 	NETWORK_CLASS_IS_VALID_9;
+
+	CoreTools::DoNothing();
 
 	SYSTEM_UNUSED_ARG(maxHandle);
 }
@@ -66,6 +73,8 @@ bool Network::HandleSetImpl
 
 	SYSTEM_UNUSED_ARG(handle);
 
+	CoreTools::DoNothing();
+
 	return false;
 }
 
@@ -73,6 +82,8 @@ void Network::HandleSetImpl
 	::ClearBit(ACEHandle handle)
 {
 	NETWORK_CLASS_IS_VALID_9;
+
+	CoreTools::DoNothing();
 
 	SYSTEM_UNUSED_ARG(handle);
 }
@@ -90,13 +101,15 @@ const Network::ACEHandleSet& Network::HandleSetImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("获取ACEHandleSet失败！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("获取ACEHandleSet失败！"s));
 }
 
 bool Network::HandleSetImpl
 	::IsFdSetFull() const
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
+
+	CoreTools::DoNothing();
 
 	return true;
 }
@@ -105,6 +118,8 @@ int Network::HandleSetImpl
 	::IsFdSetCount() const
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
+
+	CoreTools::DoNothing();
 
 	return 0;
 }
@@ -115,6 +130,8 @@ bool Network::HandleSetImpl
 	NETWORK_CLASS_IS_VALID_9;
 
 	SYSTEM_UNUSED_ARG(width);
+
+	CoreTools::DoNothing();
 
 	return false;
 }

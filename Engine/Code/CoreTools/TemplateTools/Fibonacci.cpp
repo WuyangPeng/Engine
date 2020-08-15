@@ -20,13 +20,13 @@ uint32_t CoreTools
 }
 
 uint32_t CoreTools
-	::NonRecursiveFibonacci(uint32_t integer) noexcept
+	::NonRecursiveFibonacci(uint32_t integer)  
 {
 	auto previous = -1;
 	auto result = 1;
 	for (auto i = 0u; i <= integer; ++i)
 	{
-		auto sum = result + previous;
+		const auto sum = result + previous;
 		previous = result;
 		result = sum;
 	}

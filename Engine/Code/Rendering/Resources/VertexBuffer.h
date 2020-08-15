@@ -24,17 +24,21 @@ namespace Rendering
 	public:
 		using ClassType = VertexBuffer;
 		using ParentType = Buffer;
-		using VertexBufferSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
-		using ConstVertexBufferSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>;
+		using VertexBufferSmartPointer = std::shared_ptr<ClassType>;
+		using ConstVertexBufferSmartPointer = std::shared_ptr<const ClassType>;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 		using AVector = Mathematics::AVectorf;
 		using APoint = Mathematics::APointf;
 		using Vector2D = Mathematics::Vector2Df;
 
 	public:
-		VertexBuffer ();
+                VertexBuffer() noexcept;
 		VertexBuffer (int numVertices, int vertexSize,BufferUsage usage = BufferUsage::Static);
-		virtual ~VertexBuffer ();
+		  ~VertexBuffer ();
+                VertexBuffer(const VertexBuffer&) = default;
+                  VertexBuffer& operator=(const VertexBuffer&) = default;
+                VertexBuffer(VertexBuffer&&) = default;
+                VertexBuffer& operator=(VertexBuffer&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 				

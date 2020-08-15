@@ -17,6 +17,10 @@ using std::make_unique;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+
 Database::MysqlConnectorSchema
 	::MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr)
 	: ParentType{ GetConfigurationStrategy(sessionWeakPtr) }, m_MysqlxSchema{ GetMysqlxSchemaPtr(sessionWeakPtr) }
@@ -48,7 +52,7 @@ Database::ConfigurationStrategy Database::MysqlConnectorSchema
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Session 已无效。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Session 已无效。"s));
 	}
 }
 
@@ -62,7 +66,7 @@ Database::MysqlConnectorSchema::MysqlxSchemaPtr Database::MysqlConnectorSchema
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Session 已无效。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Session 已无效。"s));
 	}
 }
 
@@ -76,15 +80,11 @@ Database::MysqlConnectorSchema::MysqlxSchemaPtr Database::MysqlConnectorSchema
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Session 已无效。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Session 已无效。"s));
 	}
 }
 
-Database::MysqlConnectorSchema
-	::~MysqlConnectorSchema()
-{
-	DATABASE_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Database::MysqlConnectorSchema
@@ -116,5 +116,5 @@ Database::SchemaImpl::MysqlxTablePtr Database::MysqlConnectorSchema
 
 	return make_unique<MysqlxTable>(m_MysqlxSchema->getTable(tableonName));
 }
-
+#include STSTEM_WARNING_POP
 #endif // DATABASE_USE_MYSQL_CPP_CONNECTOR

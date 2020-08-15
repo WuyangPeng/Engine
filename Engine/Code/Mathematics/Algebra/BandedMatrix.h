@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.2.5 (2020/03/19 10:10)
 
 // 所谓的带状矩阵即：在矩阵A中，
@@ -27,78 +27,81 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrix
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrix
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		using ClassType = BandedMatrix<Real>;
-		using Math = Math<Real>;
-		using VariableMatrix = VariableMatrix<Real>;
-		using AlgebraTraits = AlgebraTraits<Real>;
+        using ClassType = BandedMatrix<Real>;
+        using Math = Math<Real>;
+        using VariableMatrix = VariableMatrix<Real>;
+        using AlgebraTraits = AlgebraTraits<Real>;
 
-	public:
-		BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber);
-		BandedMatrix(const BandedMatrix& rhs);
-		~BandedMatrix();
+    public:
+        BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber);
+        BandedMatrix(const BandedMatrix& rhs);
+        ~BandedMatrix();
 
-		BandedMatrix& operator= (const BandedMatrix& rhs);
+        BandedMatrix& operator=(const BandedMatrix& rhs);
 
-		CLASS_INVARIANT_DECLARE;
+        BandedMatrix(BandedMatrix&& rhs) = default;
+        BandedMatrix& operator=(BandedMatrix&& rhs) = default;
 
-		// 成员访问
-		int GetSize() const;
-		int GetLowerBandsNumber() const;
-		int GetUpperBandsNumber() const;
-		int GetStreamSize() const;
+        CLASS_INVARIANT_DECLARE;
 
-		// 重设大小会清空原有数据。
-		void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber);
+        // 成员访问
+        int GetSize() const noexcept;
+        int GetLowerBandsNumber() const noexcept;
+        int GetUpperBandsNumber() const noexcept;
+        int GetStreamSize() const;
 
-		// 对角线
-		Real* GetDiagonalBand();
-		const Real* GetDiagonalBand() const;
+        // 重设大小会清空原有数据。
+        void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber);
 
-		// 下三角
-		// GetLowerBand(index):  0 <= index < LowerBandMax
-		int GetLowerBandMax(int index) const;
-		Real* GetLowerBand(int index);
-		const Real* GetLowerBand(int index) const;
+        // 对角线
+        Real* GetDiagonalBand() noexcept;
+        const Real* GetDiagonalBand() const noexcept;
 
-		// 上三角
-		// GetUupperBand(index):  0 <= index < UpperBandMax
-		int GetUpperBandMax(int index) const;
-		Real* GetUpperBand(int index);
-		const Real* GetUpperBand(int index) const;
+        // 下三角
+        // GetLowerBand(index):  0 <= index < LowerBandMax
+        int GetLowerBandMax(int index) const;
+        Real* GetLowerBand(int index);
+        const Real* GetLowerBand(int index) const;
 
-		Real& operator() (int row, int column);
-		const Real& operator() (int row, int column) const;
+        // 上三角
+        // GetUupperBand(index):  0 <= index < UpperBandMax
+        int GetUpperBandMax(int index) const;
+        Real* GetUpperBand(int index);
+        const Real* GetUpperBand(int index) const;
 
-		// 便利函数用于初始化矩阵
-		void SetZero();
-		void SetIdentity();
+        Real& operator()(int row, int column);
+        const Real& operator()(int row, int column) const;
 
-		const VariableMatrix ToVariableMatrix() const;
+        // 便利函数用于初始化矩阵
+        void SetZero() noexcept;
+        void SetIdentity() noexcept;
 
-	private:
-		void Swap(BandedMatrix& rhs);
+        const VariableMatrix ToVariableMatrix() const;
 
-		void Allocate();
-		void Allocate(const BandedMatrix& rhs);
-		void Deallocate();
+    private:
+        void Swap(BandedMatrix& rhs) noexcept;
 
-	private:
-		int m_Size;
-		int m_LowerBandsNumber;
-		int m_UpperBandsNumber;
-		Real* m_DiagonalBand; // 对角线
-		Real** m_LowerBand; // 下三角
-		Real** m_UpperBand; // 上三角
-	};
+        void Allocate();
+        void Allocate(const BandedMatrix& rhs);
+        void Deallocate();
 
-	using BandedMatrixf = BandedMatrix<float>;
-	using BandedMatrixd = BandedMatrix<double>;
+    private:
+        int m_Size;
+        int m_LowerBandsNumber;
+        int m_UpperBandsNumber;
+        Real* m_DiagonalBand;  // 对角线
+        Real** m_LowerBand;  // 下三角
+        Real** m_UpperBand;  // 上三角
+    };
+
+    using BandedMatrixf = BandedMatrix<float>;
+    using BandedMatrixd = BandedMatrix<double>;
 }
 
-#endif // MATHEMATICS_ALGEBRA_BANDED_MATRIX_H
+#endif  // MATHEMATICS_ALGEBRA_BANDED_MATRIX_H

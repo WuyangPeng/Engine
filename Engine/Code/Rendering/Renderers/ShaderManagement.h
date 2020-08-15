@@ -23,7 +23,7 @@ namespace Rendering
 	{
 	public:
 		using ClassType = ShaderManagement <TextureFlags, PdrTextureType>;
-		using TextureConstWeakPtr = CoreTools::ConstFourthSubclassSmartPointer<TextureFlags>;
+		using TextureConstWeakPtr = std::shared_ptr<const TextureFlags>;
 		using PdrTextureSharedPtr = std::shared_ptr<PdrTextureType>;
 	    using RendererWeakPtr = std::weak_ptr<Renderer>;
 

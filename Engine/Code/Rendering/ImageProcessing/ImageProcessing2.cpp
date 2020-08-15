@@ -8,7 +8,17 @@
 
 #include "ImageProcessing2.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
 Rendering::ImageProcessing2
 	::ImageProcessing2 (int bound0, int bound1, Mathematics::Float4* imageData,PixelShaderSmartPointer mainPShader, bool useDirichlet)
     :ImageProcessingBase(bound0, bound1, 2), mBound0(bound0), mBound1(bound1)
@@ -62,15 +72,11 @@ Rendering::ImageProcessing2
     mDy = 1.0f/(float)mBound1M1;
 }
 
-Rendering::ImageProcessing2
-	::~ImageProcessing2 ()
-{
-}
+ 
 
-Rendering::Texture2DSmartPointer Rendering::ImageProcessing2
-	::CreateImage (Mathematics::Float4* imageData)
+Rendering::Texture2DSmartPointer Rendering::ImageProcessing2 ::CreateImage(const Mathematics::Float4* imageData)
 {
-    Texture2DSmartPointer reflected ( NEW0 Texture2D(TextureFormat( System::TextureInternalFormat::A32B32G32R32F),  mBound0, mBound1, 1));
+    Texture2DSmartPointer reflected(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
     memcpy(reflected->GetTextureData(0), imageData, mBound0*mBound1*sizeof(Mathematics::Float4));
     return reflected;
@@ -104,7 +110,7 @@ void Rendering::ImageProcessing2
     //     pixelColor = mask*state;
     // }
 
-    PixelShaderSmartPointer pshader ( NEW0 PixelShader("Wm5.BoundaryDirichlet2",1, 1, 0, 2)); 
+    PixelShaderSmartPointer pshader(std::make_shared < PixelShader>("Wm5.BoundaryDirichlet2", 1, 1, 0, 2)); 
 	 
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
@@ -113,7 +119,7 @@ void Rendering::ImageProcessing2
 	
 	auto profile = pshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 2; ++j)
 		{
@@ -126,12 +132,12 @@ void Rendering::ImageProcessing2
     CreateEffect(pshader, effect, instance);
 
     // Create the mask texture.
-    Texture2DSmartPointer maskTexture ( NEW0 Texture2D(TextureFormat( System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
+    Texture2DSmartPointer maskTexture(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
     Mathematics::Float4* mask = (Mathematics::Float4*)maskTexture->GetTextureData(0);
     Mathematics::Float4 one(1.0f, 1.0f, 1.0f, 1.0f);
     Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
-    int x, y;
+    int x = 0, y = 0;
 
     // Interior.
     for (y = 1; y < mBound1M1; ++y)
@@ -193,7 +199,7 @@ void Rendering::ImageProcessing2
     //     pixelColor = state;
     // }
 
-    PixelShaderSmartPointer pshader (NEW0 PixelShader("Wm5.BoundaryNeumann2", 1, 1, 0, 2));
+    PixelShaderSmartPointer pshader(std::make_shared < PixelShader>("Wm5.BoundaryNeumann2", 1, 1, 0, 2));
 	 
 	 
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
@@ -203,7 +209,7 @@ void Rendering::ImageProcessing2
 
 	auto profile = pshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 2; ++j)
 		{
@@ -216,7 +222,7 @@ void Rendering::ImageProcessing2
     CreateEffect(pshader, effect, instance);
 
     // Create the offset texture.
-    Texture2DSmartPointer offsetTexture ( NEW0 Texture2D(TextureFormat( System::TextureInternalFormat::A32B32G32R32F),  mBound0, mBound1, 1));
+    Texture2DSmartPointer offsetTexture(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
     Mathematics::Float4* offset = (Mathematics::Float4*)offsetTexture->GetTextureData(0);
     Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
@@ -224,7 +230,7 @@ void Rendering::ImageProcessing2
     Mathematics::Float4 x1EdgeOffset(-mDx, 0.0f, 0.0f, 0.0f);
     Mathematics::Float4 y0EdgeOffset(0.0f, +mDy, 0.0f, 0.0f);
     Mathematics::Float4 y1EdgeOffset(0.0f, -mDy, 0.0f, 0.0f);
-    int x, y;
+    int x = 0, y = 0;
 
     // Interior.
     for (y = 1; y < mBound1M1; ++y)
@@ -275,7 +281,7 @@ void Rendering::ImageProcessing2
     //     pixelColor = tex2D(StateSampler, vertexTCoord);
     // }
 
-    PixelShaderSmartPointer pshader ( NEW0 PixelShader("Wm5.DrawImage2",  1, 1, 0, 1));
+    PixelShaderSmartPointer pshader ( std::make_shared<PixelShader>("Wm5.DrawImage2",  1, 1, 0, 1));
 	// ÏÈÍ¨¹ý±àÒë
 	 
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
@@ -284,7 +290,7 @@ void Rendering::ImageProcessing2
 
 	auto profile = pshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 2; ++j)
 		{
@@ -298,7 +304,7 @@ void Rendering::ImageProcessing2
 }
 
 int Rendering::ImageProcessing2::msAllDirichletPTextureUnits[2]  { 0, 1 };
-int* Rendering::ImageProcessing2::msDirichletPTextureUnits[ShaderFlags::MaxProfiles] 
+int* Rendering::ImageProcessing2::msDirichletPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msAllDirichletPTextureUnits,
@@ -307,7 +313,7 @@ int* Rendering::ImageProcessing2::msDirichletPTextureUnits[ShaderFlags::MaxProfi
     msAllDirichletPTextureUnits
 };
 
-std::string Rendering::ImageProcessing2::msDirichletPPrograms[ShaderFlags::MaxProfiles]
+std::string Rendering::ImageProcessing2::msDirichletPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]
 {
     // PP_NONE
     "",
@@ -345,7 +351,7 @@ std::string Rendering::ImageProcessing2::msDirichletPPrograms[ShaderFlags::MaxPr
 };
 
 int Rendering::ImageProcessing2::msAllNeumannPTextureUnits[2] { 0, 1 };
-int* Rendering::ImageProcessing2::msNeumannPTextureUnits[ShaderFlags::MaxProfiles] 
+int* Rendering::ImageProcessing2::msNeumannPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msAllNeumannPTextureUnits,
@@ -354,7 +360,7 @@ int* Rendering::ImageProcessing2::msNeumannPTextureUnits[ShaderFlags::MaxProfile
     msAllNeumannPTextureUnits
 };
 
-std::string Rendering::ImageProcessing2::msNeumannPPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::ImageProcessing2::msNeumannPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // PP_NONE
     "",
@@ -392,7 +398,7 @@ std::string Rendering::ImageProcessing2::msNeumannPPrograms[ShaderFlags::MaxProf
 };
 
 int Rendering::ImageProcessing2::msAllDrawPTextureUnits[2] { 0, 1 };
-int* Rendering::ImageProcessing2::msDrawPTextureUnits[ShaderFlags::MaxProfiles] 
+int* Rendering::ImageProcessing2::msDrawPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msAllDrawPTextureUnits,
@@ -401,7 +407,7 @@ int* Rendering::ImageProcessing2::msDrawPTextureUnits[ShaderFlags::MaxProfiles]
     msAllDrawPTextureUnits
 };
 
-std::string Rendering::ImageProcessing2::msDrawPPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::ImageProcessing2::msDrawPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // PP_NONE
     "",
@@ -431,26 +437,24 @@ std::string Rendering::ImageProcessing2::msDrawPPrograms[ShaderFlags::MaxProfile
 
 
  int Rendering::ImageProcessing2
-	 ::GetBound0() const
+	 ::GetBound0() const noexcept
 {
 	return mBound0;
 }
 
- int Rendering::ImageProcessing2
-	 ::GetBound1() const
+ int Rendering::ImageProcessing2 ::GetBound1() const noexcept
 {
 	return mBound1;
 }
 
- float Rendering::ImageProcessing2
-	 ::GetDx() const
+ float Rendering::ImageProcessing2 ::GetDx() const noexcept
 {
 	return mDx;
 }
 
- float Rendering::ImageProcessing2
-	 ::GetDy() const
+ float Rendering::ImageProcessing2 ::GetDy() const noexcept
 {
 	return mDy;
 }
 
+ #include STSTEM_WARNING_POP

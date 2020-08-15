@@ -19,8 +19,8 @@ namespace Mathematics
 		using ClassType = Float2Impl;
 
 	public:
-		Float2Impl();
-		Float2Impl(float firstValue, float secondValue);
+		Float2Impl() noexcept;
+		Float2Impl(float firstValue, float secondValue) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

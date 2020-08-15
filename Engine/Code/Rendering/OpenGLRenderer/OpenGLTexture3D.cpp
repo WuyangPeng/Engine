@@ -20,16 +20,12 @@ Rendering::OpenGLTexture3D
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::OpenGLTexture3D
-	::~OpenGLTexture3D()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTexture3D)
 
 void Rendering::OpenGLTexture3D
-	::Enable( Renderer* renderer, int textureUnit )
+	::Enable( Renderer* renderer, int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -39,7 +35,7 @@ void Rendering::OpenGLTexture3D
 }
 
 void Rendering::OpenGLTexture3D
-	::Disable( Renderer* renderer, int textureUnit )
+	::Disable( Renderer* renderer, int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -49,7 +45,7 @@ void Rendering::OpenGLTexture3D
 }
 
 void* Rendering::OpenGLTexture3D
-	::Lock( int level, BufferLocking mode )
+	::Lock( int level, BufferLocking mode ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -57,7 +53,7 @@ void* Rendering::OpenGLTexture3D
 }
 
 void Rendering::OpenGLTexture3D
-	::Unlock( int level )
+	::Unlock( int level ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

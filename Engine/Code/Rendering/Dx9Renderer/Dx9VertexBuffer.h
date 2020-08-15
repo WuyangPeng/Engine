@@ -25,16 +25,16 @@ namespace Rendering
 		using UInt = System::OpenGLUInt;
 
 	public:
-        Dx9VertexBuffer (Renderer* renderer,const VertexBuffer* vertexBuffer);
-        virtual ~Dx9VertexBuffer ();
+        Dx9VertexBuffer (Renderer* renderer,const VertexBuffer* vertexBuffer) noexcept;
+ 
 
 	   CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 	    // ¶¥µã»º³åÇø²Ù×÷¡£
-		virtual void Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) override;
-		virtual void Disable (Renderer* renderer, unsigned int streamIndex) override;
-		virtual void* Lock (BufferLocking mode) override;
-		virtual void Unlock () override;
+		 void Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) override;
+		 void Disable (Renderer* renderer, unsigned int streamIndex) override;
+		 void* Lock (BufferLocking mode) override;
+		 void Unlock () override;
  
     };
 }

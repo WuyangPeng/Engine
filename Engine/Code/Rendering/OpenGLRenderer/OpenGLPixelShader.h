@@ -23,13 +23,17 @@ namespace Rendering
 		// Construction and destruction.
 		PdrPixelShader (Renderer* renderer, const PixelShader* pshader);
 		~PdrPixelShader ();
-
+		PdrPixelShader(const PdrPixelShader&) = default;
+		  PdrPixelShader& operator=(const PdrPixelShader&) = default;
+		  PdrPixelShader(PdrPixelShader&&) = default;
+		  PdrPixelShader& operator=(PdrPixelShader&&) = default;
+		  
 		// Pixel shader operations.
 		void Enable (Renderer* renderer, const PixelShader* pshader,const ShaderParameters* parameters);
 		void Disable (Renderer* renderer, const PixelShader* pshader,const ShaderParameters* parameters);
 
 	private:
-		GLuint mShader;
+		GLuint mShader = 0;
 	};
 
 }

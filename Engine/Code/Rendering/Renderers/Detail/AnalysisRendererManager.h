@@ -33,7 +33,7 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 
-		RendererPtr GetRendererPtr() const;
+		RendererPtr GetRendererPtr() const noexcept;
 
 	private:
 		void Analysis();

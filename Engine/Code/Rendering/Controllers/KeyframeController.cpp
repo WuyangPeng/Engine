@@ -22,7 +22,11 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26429)
 CORE_TOOLS_RTTI_DEFINE(Rendering, KeyframeController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, KeyframeController);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, KeyframeController);
@@ -34,18 +38,13 @@ Rendering::KeyframeController
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-Rendering::KeyframeController
-	::~KeyframeController()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, KeyframeController)
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, KeyframeController)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, KeyframeController,GetNumCommonTimes, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, KeyframeController,GetNumCommonTimes, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetCommonTimes, int,float)
 
 void Rendering::KeyframeController
@@ -56,7 +55,7 @@ void Rendering::KeyframeController
 	return m_Impl->SetCommonTimes(index, commonTimes);
 }
 								
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, KeyframeController,GetNumTranslations, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, KeyframeController,GetNumTranslations, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetTranslationTimes, int,float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetTranslations, int,const Rendering::KeyframeController::APoint)
  
@@ -76,7 +75,7 @@ void Rendering::KeyframeController
 	return m_Impl->SetTranslations(index, translations);
 }
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, KeyframeController,GetNumRotations, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, KeyframeController,GetNumRotations, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetRotationTimes, int,float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetRotations, int,const Rendering::KeyframeController::AQuaternion)
  
@@ -96,7 +95,7 @@ void Rendering::KeyframeController
 	return m_Impl->SetRotations(index, rotations);
 }
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, KeyframeController,GetNumScales, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, KeyframeController,GetNumScales, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetScaleTimes, int,float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetScales, int,float)
  
@@ -138,12 +137,12 @@ Rendering::ControllerInterfaceSmartPointer Rendering::KeyframeController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, KeyframeController,GetTranslate, ControllerKeyInfo,const Rendering::KeyframeController::APoint)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, KeyframeController,GetRotate, ControllerKeyInfo,const Rendering::KeyframeController::Matrix)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, KeyframeController,GetScale, ControllerKeyInfo,float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, KeyframeController,GetScale, ControllerKeyInfo,float)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetTranslateKeyInfo,float,const Rendering::ControllerKeyInfo)
 
@@ -174,13 +173,13 @@ bool Rendering::KeyframeController
 
 			if (0 < GetNumRotations()) 
 			{
-				auto rotate = GetRotate(controllerKeyInfo);
+				const auto rotate = GetRotate(controllerKeyInfo);
 				SetRotate(rotate);
 			}
 
 			if (0 < GetNumScales()) 
 			{
-				auto scale = GetScale(controllerKeyInfo);
+				const auto scale = GetScale(controllerKeyInfo);
 				SetUniformScale(scale);
 			}
 		}
@@ -197,14 +196,14 @@ bool Rendering::KeyframeController
 			if (0 < GetNumRotations())
 			{
 				const auto controllerKeyInfo = GetRotateKeyInfo(ctrlTime);
-				auto rotate = GetRotate(controllerKeyInfo);
+				const auto rotate = GetRotate(controllerKeyInfo);
 				SetRotate(rotate);
 			}
 
 			if (0 < GetNumScales())
 			{
 				const auto controllerKeyInfo = GetScaleKeyInfo(ctrlTime);
-				auto scale = GetScale(controllerKeyInfo);
+				const auto scale = GetScale(controllerKeyInfo);
 				SetUniformScale(scale);
 			} 
 		}
@@ -288,3 +287,4 @@ void Rendering::KeyframeController
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
+#include STSTEM_WARNING_POP

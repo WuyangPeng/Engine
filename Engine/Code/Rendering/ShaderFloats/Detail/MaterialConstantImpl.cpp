@@ -15,17 +15,18 @@
 
 using std::vector;
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
 Rendering::MaterialConstantImpl
-	::MaterialConstantImpl(const MaterialSmartPointer& material)
+	::MaterialConstantImpl(const MaterialSmartPointer& material) noexcept
 	:m_Material{ material }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::MaterialConstantImpl
-	::MaterialConstantImpl()
-	:m_Material{}
+Rendering::MaterialConstantImpl ::MaterialConstantImpl() noexcept
+    : m_Material{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -37,8 +38,8 @@ const Rendering::ConstMaterialSmartPointer Rendering::MaterialConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;	
 
-	if (m_Material.IsValidPtr())
-		return m_Material.PolymorphicCastConstObjectSmartPointer<ConstMaterialSmartPointer>();
+	if (m_Material )
+		return m_Material ;
 	else
 		return ConstMaterialSmartPointer{};
 }
@@ -47,16 +48,16 @@ void Rendering::MaterialConstantImpl
 	::Load(BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	source.ReadSmartPointer(m_Material);
+    source;
+	//source.ReadSmartPointer(m_Material);
 }
 
 void Rendering::MaterialConstantImpl
 	::Save(BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	target.WriteSmartPointer(m_Material);
+    target;
+	//target.WriteSmartPointer(m_Material);
 }
 
 int Rendering::MaterialConstantImpl
@@ -72,7 +73,7 @@ const CoreTools::ObjectSmartPointer Rendering::MaterialConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	if (m_Material.IsValidPtr())
+	if (m_Material )
 		return m_Material->GetObjectByName(name);
 	else
 		return CoreTools::ObjectSmartPointer{};
@@ -83,7 +84,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::MaterialConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	if (m_Material.IsValidPtr())
+	if (m_Material )
 		return m_Material->GetAllObjectsByName(name);
 	else
 		return vector<CoreTools::ObjectSmartPointer>{};
@@ -94,7 +95,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::MaterialConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	if (m_Material.IsValidPtr())
+	if (m_Material )
 		return m_Material->GetConstObjectByName(name);
 	else
 		return CoreTools::ConstObjectSmartPointer{};
@@ -105,7 +106,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::MaterialConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	if (m_Material.IsValidPtr())
+	if (m_Material )
 		return m_Material->GetAllConstObjectsByName(name);
 	else
 		return vector<CoreTools::ConstObjectSmartPointer>{};
@@ -115,15 +116,16 @@ void Rendering::MaterialConstantImpl
 	::Link( ObjectLink& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	source.ResolveObjectSmartPointerLink(m_Material);
+    source;
+	//source.ResolveObjectSmartPointerLink(m_Material);
 }
 
 void Rendering::MaterialConstantImpl
 	::Register( ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	target.RegisterSmartPointer(m_Material);
+    target;
+	//target.RegisterSmartPointer(m_Material);
 }
 
+#include STSTEM_WARNING_POP

@@ -13,6 +13,11 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include <gsl/gsl_util>
+
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 template <typename Generator, typename Scalar>
 CoreTools::MinHeapRecordStored<Generator, Scalar>
 	::MinHeapRecordStored(int maxElements, Scalar initialValue)
@@ -32,8 +37,8 @@ CoreTools::MinHeapRecordStored<Generator, Scalar>
 	:m_MaxElements{ 0 < newMaxElements ? newMaxElements : 1 }, m_InitialValue{ oldRecordStored.m_InitialValue }, m_Records{}
 {
 	// 复制旧记录信息到新的存储位置。
-	auto oldMaxElements = oldRecordStored.GetMaxElements();
-	auto minElements = m_MaxElements < oldMaxElements ? m_MaxElements : oldMaxElements;
+	const auto oldMaxElements = oldRecordStored.GetMaxElements();
+	const auto minElements = m_MaxElements < oldMaxElements ? m_MaxElements : oldMaxElements;
 
 	for (auto i = 0; i < minElements; ++i)
 	{
@@ -61,7 +66,7 @@ template <typename Generator, typename Scalar>
 bool CoreTools::MinHeapRecordStored<Generator, Scalar>
 	::IsValid() const noexcept
 {
-	if (0 < m_MaxElements && static_cast<int>(m_Records.size()) == m_MaxElements && IndexIsValid())
+	if (0 < m_MaxElements && gsl::narrow_cast<int>(m_Records.size()) == m_MaxElements && IndexIsValid())
 		return true;
 	else
 		return false;
@@ -77,7 +82,7 @@ bool CoreTools::MinHeapRecordStored<Generator, Scalar>
 
 		for (auto i = 0; i < m_MaxElements; ++i)
 		{
-			int index = m_Records[i].GetUniqueIndex();
+			const int index = m_Records[i].GetUniqueIndex();
 
 			if (index < 0 || m_MaxElements <= index || indexVector[index] != -1)
 				return false;
@@ -169,5 +174,5 @@ void CoreTools::MinHeapRecordStored<Generator, Scalar>
 
 	std::swap(m_Records[lhsIndex], m_Records[rhsIndex]);
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_DETAIL_H

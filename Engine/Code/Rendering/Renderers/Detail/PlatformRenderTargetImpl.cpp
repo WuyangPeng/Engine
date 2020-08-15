@@ -14,9 +14,11 @@
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
 Rendering::PlatformRenderTargetImpl
-	::PlatformRenderTargetImpl()
+	::PlatformRenderTargetImpl() noexcept
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -58,3 +60,4 @@ Rendering::PlatformRenderTargetImpl::PlatformRenderTargetPtr Rendering::Platform
 {
     return make_shared < OpenGLRenderTarget>(renderer, renderTarget);
 }
+#include STSTEM_WARNING_POP

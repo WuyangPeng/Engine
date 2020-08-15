@@ -10,7 +10,10 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include <map>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
 	class  VEManifoldMesh
@@ -38,9 +41,12 @@ namespace Mathematics
 		class MATHEMATICS_DEFAULT_DECLARE Vertex
 		{
 		public:
-			Vertex (int v);
+			Vertex (int v) noexcept;
 			virtual ~Vertex ();
-			
+			Vertex(const Vertex&) = default;
+		Vertex& operator=(const Vertex&) = default;
+		Vertex(Vertex&&) = default;
+		Vertex& operator=(Vertex&&) = default;
 			int V;
 			EPtr E[2];
 		};
@@ -49,9 +55,12 @@ namespace Mathematics
 		class MATHEMATICS_DEFAULT_DECLARE Edge
 		{
 		public:
-			Edge (int v0, int v1);
+			Edge (int v0, int v1) noexcept;
 			virtual ~Edge ();
-			
+			Edge(const Edge&) = default;
+		Edge& operator=(const Edge&) = default;
+		Edge(Edge&&) = default;
+		Edge& operator=(Edge&&) = default;
 			// Vertices, listed as a directed edge <V[0],V[1]>.
 			int V[2];
 
@@ -63,12 +72,15 @@ namespace Mathematics
 
 		
 		// Construction and destruction.
-		VEManifoldMesh (VCreator vCreator = 0, ECreator eCreator = 0);
+		VEManifoldMesh (VCreator vCreator = 0, ECreator eCreator = 0) noexcept;
 		virtual ~VEManifoldMesh ();
-		
+		VEManifoldMesh(const VEManifoldMesh&) = default;
+		VEManifoldMesh& operator=(const VEManifoldMesh&) = default;
+		VEManifoldMesh(VEManifoldMesh&&) = default;
+		VEManifoldMesh& operator=(VEManifoldMesh&&) = default;
 		// Member access.
-		const VMap& GetVertices () const;
-		const EMap& GetEdges () const;
+		const VMap& GetVertices () const noexcept;
+		const EMap& GetEdges () const noexcept;
 		
 		// Mesh manipulation.
 		EPtr InsertEdge (int v0, int v1);
@@ -92,5 +104,5 @@ namespace Mathematics
 		EMap mEMap;
 	};
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_MESHES_VE_MANIFOLD_MESH_H

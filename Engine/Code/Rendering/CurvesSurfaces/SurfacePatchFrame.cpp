@@ -24,11 +24,11 @@ Rendering::SurfacePatchFrame
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, SurfacePatchFrame)
 #endif // OPEN_CLASS_INVARIANT
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatchFrame,GetPosition, const Rendering::SurfacePatchFrame::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatchFrame,GetPosition, const Rendering::SurfacePatchFrame::APoint)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatchFrame,GetTangent0,const Rendering::SurfacePatchFrame::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatchFrame,GetTangent0,const Rendering::SurfacePatchFrame::AVector)
  
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatchFrame,GetTangent1,const Rendering::SurfacePatchFrame::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatchFrame,GetTangent1,const Rendering::SurfacePatchFrame::AVector)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatchFrame,GetNormal,const Rendering::SurfacePatchFrame::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatchFrame,GetNormal,const Rendering::SurfacePatchFrame::AVector)

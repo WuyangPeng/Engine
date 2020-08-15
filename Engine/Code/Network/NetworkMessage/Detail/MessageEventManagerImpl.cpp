@@ -13,13 +13,17 @@
 using std::make_unique;
 
 #define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *m_Mutex }
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26486)
 Network::MessageEventManagerImpl
 	::MessageEventManagerImpl()
 	:m_EventContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
+
 
 Network::MessageEventManagerImpl
 	::MessageEventManagerImpl(const MessageEventManagerImpl& rhs)
@@ -109,3 +113,4 @@ void Network::MessageEventManagerImpl
 	m_EventContainer[messageID].OnEvent(socketID, message);
 }
 
+#include STSTEM_WARNING_POP

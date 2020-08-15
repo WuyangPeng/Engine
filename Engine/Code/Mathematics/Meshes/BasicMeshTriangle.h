@@ -8,7 +8,10 @@
 #define MATHEMATICS_MESHES_BASIC_BESH_TRIANGLE_H
 
 #include "Mathematics/MathematicsDll.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE BasicMeshTriangle
@@ -17,11 +20,14 @@ namespace Mathematics
         using ClassType = BasicMeshTriangle;
         
     public:
-        BasicMeshTriangle ();
+        BasicMeshTriangle () noexcept;
         
-        BasicMeshTriangle (const BasicMeshTriangle& rhs);
-        BasicMeshTriangle& operator =(const BasicMeshTriangle& rhs);
-        
+        BasicMeshTriangle (const BasicMeshTriangle& rhs) noexcept;
+        BasicMeshTriangle& operator =(const BasicMeshTriangle& rhs) noexcept;
+        ~BasicMeshTriangle() noexcept = default;
+		 BasicMeshTriangle (BasicMeshTriangle&& rhs) = default;
+        BasicMeshTriangle& operator = (BasicMeshTriangle&& rhs)= default;
+		
         CLASS_INVARIANT_DECLARE;
         
         int GetVertex(int index) const;
@@ -38,6 +44,6 @@ namespace Mathematics
         int m_Triangle[3];
     };
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_MESHES_BASIC_BESH_TRIANGLE_H
 

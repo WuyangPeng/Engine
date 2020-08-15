@@ -26,11 +26,15 @@ namespace CoreTools
 
 	public:
 		ResourceManagerLockImpl(BaseResourceManager& manager, uint32_t uniqueID);
-		~ResourceManagerLockImpl();
-
+		~ResourceManagerLockImpl() noexcept;
+		ResourceManagerLockImpl(const ResourceManagerLockImpl&) = delete;
+		ResourceManagerLockImpl& operator=(const ResourceManagerLockImpl&) = delete;
+		ResourceManagerLockImpl(ResourceManagerLockImpl&&) noexcept = delete;
+		ResourceManagerLockImpl& operator=(ResourceManagerLockImpl&&) noexcept = delete;
+		
 		CLASS_INVARIANT_DECLARE;
 
-		const ResourceSharedPtr GetResourceSharedPtr() const;
+		const ResourceSharedPtr GetResourceSharedPtr() const noexcept;
 
 	private:
 		BaseResourceManager& m_ResourceManager;

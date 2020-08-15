@@ -16,7 +16,7 @@
 using std::make_shared;
 
 Database::DatabaseObjectFactory
-	::DatabaseObjectFactory()
+	::DatabaseObjectFactory() noexcept
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -26,7 +26,7 @@ CLASS_INVARIANT_STUB_DEFINE(Database, DatabaseObjectFactory)
 Database::DatabaseObjectFactory::ImplTypePtr Database::DatabaseObjectFactory
 	::Create(const ConfigurationStrategy& configurationStrategy)
 {
-	auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+	const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
 	switch (wrappersStrategy)
 	{
 	#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 

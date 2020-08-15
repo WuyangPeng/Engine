@@ -41,8 +41,12 @@ namespace Mathematics
 		class  Edge
 		{
 		public:
-			Edge (int v0, int v1);
-			virtual ~Edge ();
+			Edge (int v0, int v1) noexcept;
+			virtual ~Edge () noexcept;
+			Edge(const Edge&) = default;
+		Edge& operator=(const Edge&) = default;
+		Edge(Edge&&) = default;
+		Edge& operator=(Edge&&) = default;
 			
 			int V[2];
 			TPtr T[2];
@@ -52,8 +56,12 @@ namespace Mathematics
 		class  Triangle
 		{
 		public:
-			Triangle (int v0, int v1, int v2);
-			virtual ~Triangle ();
+			Triangle (int v0, int v1, int v2) noexcept;
+			virtual ~Triangle () noexcept;
+			Triangle(const Triangle&) = default;
+		Triangle& operator=(const Triangle&) = default;
+		Triangle(Triangle&&) = default;
+		Triangle& operator=(Triangle&&) = default;
 			
 			// Vertices, listed in counterclockwise order (V[0],V[1],V[2]).
 			int V[3];
@@ -73,12 +81,17 @@ namespace Mathematics
 
 		
 		// Construction and destruction.
-		ETManifoldMesh (ECreator eCreator = 0, TCreator tCreator = 0);
+		ETManifoldMesh (ECreator eCreator = 0, TCreator tCreator = 0) noexcept;
 		virtual ~ETManifoldMesh ();
 		
+		ETManifoldMesh(const ETManifoldMesh&) = default;
+		ETManifoldMesh& operator=(const ETManifoldMesh&) = default;
+		ETManifoldMesh(ETManifoldMesh&&) = default;
+		ETManifoldMesh& operator=(ETManifoldMesh&&) = default;
+		
 		// Member access.
-		const EMap& GetEdges () const;
-		const TMap& GetTriangles () const;
+		const EMap& GetEdges () const noexcept;
+		const TMap& GetTriangles () const noexcept;
 		
 		// Mesh manipulation.   
 		TPtr InsertTriangle (int v0, int v1, int v2);

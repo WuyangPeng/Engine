@@ -13,6 +13,7 @@
 
 #include "MathDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 template <typename Real>
 Real Mathematics::FastNegativeExp<Real>
@@ -31,6 +32,8 @@ Real Mathematics::FastNegativeExp<Real>
 	result *= result;
 	result *= result;
 	result = Math::sm_One / result;
+
+	CoreTools::DoNothing();
 
 	return result;
 }
@@ -55,6 +58,8 @@ Real Mathematics::FastNegativeExp<Real>
 	result *= result;
 	result = Math::sm_One / result;
 
+	CoreTools::DoNothing();
+
 	return result;
 }
 
@@ -78,7 +83,10 @@ Real Mathematics::FastNegativeExp<Real>
 	result += Math::sm_One;
 	result *= result;
 	result *= result;
+
 	result = Math::sm_One / result;
+
+	CoreTools::DoNothing();
 
 	return result;
 }
@@ -106,6 +114,8 @@ Real Mathematics::FastNegativeExp<Real>
 	result *= result;
 	result *= result;
 	result = Math::sm_One / result;
+
+	CoreTools::DoNothing();
 
 	return result;
 }

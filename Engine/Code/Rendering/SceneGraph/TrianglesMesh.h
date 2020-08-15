@@ -22,7 +22,7 @@ namespace Rendering
 
 	public:
 		TrianglesMesh(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer);
-		virtual ~TrianglesMesh();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
@@ -31,10 +31,10 @@ namespace Rendering
 		
 	public:
 		// 索引缓冲区数据的解释。
-		virtual int GetNumTriangles() const override;
-		virtual const TriangleIndex GetTriangle(int index) const override;
+		  int GetNumTriangles() const override;
+		  const TriangleIndex GetTriangle(int index) const override;
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSmartPointer Clone() const override;
 	};
 
 #include STSTEM_WARNING_PUSH

@@ -12,7 +12,10 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::SpatialData
    ::SpatialData ()
 	: m_LocalTransform{},m_WorldTransform{},m_WorldTransformIsCurrent{ false },
@@ -205,3 +208,4 @@ void Rendering::SpatialData
 	m_WorldTransform = transform;
 }
 
+#include STSTEM_WARNING_POP

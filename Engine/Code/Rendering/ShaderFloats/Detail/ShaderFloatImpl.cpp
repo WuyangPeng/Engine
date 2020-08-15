@@ -16,7 +16,13 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26446)
 
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26440)
 Rendering::ShaderFloatImpl
 	::ShaderFloatImpl()
 	:m_Data{},m_AllowUpdater{ true }
@@ -252,3 +258,4 @@ int Rendering::ShaderFloatImpl
 
 	return size;
 }
+#include STSTEM_WARNING_POP

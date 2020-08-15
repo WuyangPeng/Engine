@@ -9,7 +9,6 @@
 #include "StreamContainer.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 #include "Network/Configuration/ConfigurationStrategy.h"
-
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::make_shared;
@@ -24,23 +23,21 @@ Network::StreamContainer
 CLASS_INVARIANT_STUB_DEFINE(Network, StreamContainer)
 
 void Network::StreamContainer
-	::SetSockStream(const SockStreamSharedPtr& sockStream)
+	::SetSockStream(const SockStreamSharedPtr& sockStream) noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	m_SockStream = sockStream;
 }
 
-Network::SockStreamSharedPtr Network::StreamContainer
-	::GetSockStreamSharedPtr()
+Network::SockStreamSharedPtr Network::StreamContainer ::GetSockStreamSharedPtr() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	return m_SockStream;
 }
 
-Network::BufferSendStream& Network::StreamContainer
-	::GetBufferSendStream()
+Network::BufferSendStream& Network::StreamContainer ::GetBufferSendStream() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 

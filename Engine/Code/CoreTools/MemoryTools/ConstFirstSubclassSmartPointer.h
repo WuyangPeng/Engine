@@ -83,7 +83,7 @@ namespace CoreTools
 	bool operator== (const ConstFirstSubclassSmartPointer<BaseClass>& lhs, const ConstFirstSubclassSmartPointer<BaseClass>& rhs);
 
 	template <typename BaseClass>
-	bool operator< (const ConstFirstSubclassSmartPointer<BaseClass>& lhs, const ConstFirstSubclassSmartPointer<BaseClass>& rhs);
+	bool operator< (const ConstFirstSubclassSmartPointer<BaseClass>& lhs, const ConstFirstSubclassSmartPointer<BaseClass>& rhs) noexcept;
 
 	template <typename BaseClass>
 	std::ostream& operator<<(std::ostream& os, const ConstFirstSubclassSmartPointer<BaseClass>& rhs);

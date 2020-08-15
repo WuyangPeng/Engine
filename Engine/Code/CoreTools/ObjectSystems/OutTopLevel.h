@@ -29,7 +29,7 @@ namespace CoreTools
 
 		bool IsTopLevel(uint64_t uniqueID) const;
 		int GetTopLevelSize() const;
-		const ConstObjectInterfaceSmartPointer& operator [](int index) const;
+		ConstObjectInterfaceSmartPointer operator [](int index) const;
 
 		// 对顶层的对象进行保存。
 		void Insert(const ObjectInterfaceSmartPointer& objectPtr);

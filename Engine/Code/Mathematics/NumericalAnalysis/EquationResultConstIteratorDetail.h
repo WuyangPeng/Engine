@@ -11,7 +11,10 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26487) 
 template <typename ResultConstIter>
 Mathematics::EquationResultConstIterator<ResultConstIter>
 	::EquationResultConstIterator()
@@ -22,7 +25,7 @@ Mathematics::EquationResultConstIterator<ResultConstIter>
 
 template <typename ResultConstIter>
 Mathematics::EquationResultConstIterator<ResultConstIter>
-	::EquationResultConstIterator(const ResultConstIter& iter)
+	::EquationResultConstIterator(const ResultConstIter& iter) noexcept
 	:m_Iter{ iter }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -81,5 +84,5 @@ std::ostream& Mathematics
 
 	return os;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H

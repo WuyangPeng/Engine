@@ -11,9 +11,12 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 Mathematics::OrderedEdgeKey
-	::OrderedEdgeKey (int first, int second)
+	::OrderedEdgeKey (int first, int second) noexcept
 {
     m_Vertex[0] = first;
     m_Vertex[1] = second;
@@ -23,8 +26,8 @@ Mathematics::OrderedEdgeKey
 
 
 Mathematics::OrderedEdgeKey
-	::OrderedEdgeKey(const OrderedEdgeKey& rhs)
-{
+	::OrderedEdgeKey(const OrderedEdgeKey& rhs) noexcept
+{ 
     m_Vertex[0] = rhs.m_Vertex[0];
     m_Vertex[1] = rhs.m_Vertex[1];
     
@@ -32,7 +35,7 @@ Mathematics::OrderedEdgeKey
 }
 
 Mathematics::OrderedEdgeKey& Mathematics::OrderedEdgeKey
-	::operator = (const OrderedEdgeKey& rhs)
+	::operator = (const OrderedEdgeKey& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
     
@@ -55,7 +58,7 @@ int Mathematics::OrderedEdgeKey
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
     
 }
@@ -77,6 +80,6 @@ bool Mathematics
     return lhs.GetKey(0) < rhs.GetKey(0);
 }
 
-
+#include STSTEM_WARNING_POP
 
 

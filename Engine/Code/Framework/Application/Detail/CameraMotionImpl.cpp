@@ -29,7 +29,7 @@ Framework::CameraMotionImpl
 bool Framework::CameraMotionImpl
 	::IsValid() const noexcept
 {
-	if (m_Camera.IsValidPtr() && 0 < m_TranslationSpeed &&	0 < m_TranslationSpeedFactor && 0 < m_RotationSpeed && 0 < m_RotationSpeedFactor)
+	if (m_Camera && 0 < m_TranslationSpeed &&	0 < m_TranslationSpeedFactor && 0 < m_RotationSpeed && 0 < m_RotationSpeedFactor)
 		return true;
 	else
 		return false;
@@ -37,7 +37,7 @@ bool Framework::CameraMotionImpl
 #endif // OPEN_CLASS_INVARIANT
 
 const Framework::CameraMotionImpl::CameraSmartPointer Framework::CameraMotionImpl
-	::GetCameraPtr()
+	::GetCameraPtr() noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 

@@ -40,17 +40,22 @@ namespace Rendering
 					 bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin,
 					 const Mathematics::Float2* tcoordMax, VertexFormatSmartPointer vformat);
 
-		virtual ~TubeSurface ();
+		  ~TubeSurface ();
+		  
+		  TubeSurface(const TubeSurface&) = default;
+		  TubeSurface& operator=(const TubeSurface&) = default;
+		  TubeSurface(TubeSurface&&) = default;
+		  TubeSurface& operator=(TubeSurface&&) = default;
 
 		// Member access.
-		void SetMedial (Mathematics::Curve3f* medial);
-		const Mathematics::Curve3f* GetMedial () const;
-		void SetRadial (RadialFunction radial);
-		RadialFunction GetRadial () const;
-		void SetUpVector (const Mathematics::Vector3Df& upVector);
-		const Mathematics::Vector3Df& GetUpVector () const;
-		int GetNumMedialSamples () const;
-		int GetNumSliceSamples () const;
+		void SetMedial (Mathematics::Curve3f* medial) noexcept;
+		const Mathematics::Curve3f* GetMedial () const noexcept;
+		void SetRadial (RadialFunction radial) noexcept;
+		RadialFunction GetRadial () const noexcept;
+		void SetUpVector (const Mathematics::Vector3Df& upVector) noexcept;
+		const Mathematics::Vector3Df& GetUpVector () const noexcept;
+		int GetNumMedialSamples () const noexcept;
+		int GetNumSliceSamples () const noexcept;
 
 		// Generate vertices for the end slices.  These are useful when you build
 		// an open tube and want to attach meshes at the ends to close the tube.
@@ -69,7 +74,7 @@ namespace Rendering
 
 	protected:
 		// Tessellation support.
-		int Index (int s, int m);
+            int Index(int s, int m) noexcept;
 		void ComputeSinCos ();
 		void ComputeVertices ();
 		void ComputeNormals ();
@@ -84,9 +89,12 @@ namespace Rendering
 		float* mCos;
 		bool mClosed, mSampleByArcLength;
 	};
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(TubeSurface);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, TubeSurface); 
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_CURVES_SURFACES_TUBE_SURFACE_H

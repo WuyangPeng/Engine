@@ -19,7 +19,7 @@ using std::complex;
 using std::vector;
 
 Mathematics::EquationQuartic
-	::EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon)
+	::EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon)  
 	:ParentType{ epsilon }, m_Constant{ constant }, m_Once{ once },
 	 m_Secondary{ secondary }, m_Thrice{ thrice }, m_Quartic{ quartic }
 {
@@ -28,16 +28,12 @@ Mathematics::EquationQuartic
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-Mathematics::EquationQuartic
-	::~EquationQuartic()
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EquationQuartic)
 
 double Mathematics::EquationQuartic
-	::Substitution(double value) const
+	::Substitution(double value) const  noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -59,7 +55,7 @@ const Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic
 }
 
 double Mathematics::EquationQuartic
-	::SubstitutionTangent(double solution) const
+	::SubstitutionTangent(double solution) const noexcept
 {
 	return m_Once + solution * m_Secondary * 2.0 +
 		   Mathd::Square(solution) * m_Thrice * 3.0 +
@@ -83,9 +79,9 @@ void Mathematics::EquationQuartic
 	// p = -3a^2 / 8 + b
 	// q = a^3 / 8 - ab / 2 + c
 	// r = -3a^4 / 256 + ba^2 / 16 - ac / 4 + d
-	auto p = CalculateP();
-	auto q = CalculateQ();
-	auto r = CalculateR();
+	const auto p = CalculateP();
+	const auto q = CalculateQ();
+	const auto r = CalculateR();
 
 	CalculateThriceEquation(p, q, r);
 }
@@ -116,36 +112,36 @@ bool Mathematics::EquationQuartic
 }
 
 double Mathematics::EquationQuartic
-	::CalculateP() const
+	::CalculateP() const noexcept
 {
-	auto three = m_Thrice / m_Quartic;
-	auto two = m_Secondary / m_Quartic;
+	const auto three = m_Thrice / m_Quartic;
+	const auto two = m_Secondary / m_Quartic;
 
-	auto p = two - 3.0 * three * three / 8.0;
+	const auto p = two - 3.0 * three * three / 8.0;
 
 	return p;
 }
 
 double Mathematics::EquationQuartic
-	::CalculateQ() const
+	::CalculateQ() const noexcept
 {
-	auto three = m_Thrice / m_Quartic;
-	auto two = m_Secondary / m_Quartic;
-	auto one = m_Once / m_Quartic;
+	const auto three = m_Thrice / m_Quartic;
+	const auto two = m_Secondary / m_Quartic;
+	const auto one = m_Once / m_Quartic;
 
-	auto q = one - three * two / 2.0 + three * three * three / 8.0;
+	const auto q = one - three * two / 2.0 + three * three * three / 8.0;
 	return q;
 }
 
 double Mathematics::EquationQuartic
-	::CalculateR() const
+	::CalculateR() const noexcept
 {
-	auto three = m_Thrice / m_Quartic;
-	auto two = m_Secondary / m_Quartic;
-	auto one = m_Once / m_Quartic;
-	auto zero = m_Constant / m_Quartic;
+	const auto three = m_Thrice / m_Quartic;
+	const auto two = m_Secondary / m_Quartic;
+	const auto one = m_Once / m_Quartic;
+	const auto zero = m_Constant / m_Quartic;
 
-	auto r = zero - three * one / 4.0 +
+	const auto r = zero - three * one / 4.0 +
 			 three * three * two / 16.0 -
 			 three * three * three * three * 3.0 / 256.0;
 	return r;
@@ -154,16 +150,16 @@ double Mathematics::EquationQuartic
 void Mathematics::EquationQuartic
 	::CalculateThriceEquation(double p, double q, double r)
 {
-	auto two = -p / 2.0;
-	auto one = -r;
-	auto zero = (4.0 * r * p - q * q) / 8.0;
+	const auto two = -p / 2.0;
+	const auto one = -r;
+	const auto zero = (4.0 * r * p - q * q) / 8.0;
 
 	// 先求解一个三次方程。
 	EquationThrice thrice{ zero,one,two,1.0 };
 
 	MATHEMATICS_ASSERTION_1(thrice.IsRealResult(), "四次方程分解的三次方程无解！");
-
-	for (auto iter = thrice.GetRealBegin(), end = thrice.GetRealEnd(); iter != end; ++iter)
+const auto end = thrice.GetRealEnd();
+	for (auto iter = thrice.GetRealBegin(); iter != end; ++iter)
 	{
 		CalculateResult(*iter, p, q, r);
 	}
@@ -172,13 +168,13 @@ void Mathematics::EquationQuartic
 void Mathematics::EquationQuartic
 	::CalculateResult(double solution, double p, double q, double r)
 {
-	auto x1 = 2.0 * solution - p;
-	auto x0 = solution * solution - r;
+	const auto x1 = 2.0 * solution - p;
+	const auto x0 = solution * solution - r;
 
 	if (0.0 <= x1 && 0.0 <= x0)
 	{
-		auto x1sqrt = Mathd::Sqrt(x1);
-		auto x0sqrt = Mathd::Sqrt(x0);
+		const auto x1sqrt = Mathd::Sqrt(x1);
+		const auto x0sqrt = Mathd::Sqrt(x0);
 
 		if (0 <= q)
 		{
@@ -195,13 +191,13 @@ void Mathematics::EquationQuartic
 	::CalculateSecondaryEquation(double thriceSolution, double constant, double once)
 {
 	// 将四次方程分解为两个二次方程。
-	auto minConstant = thriceSolution - constant;
-	auto maxConstant = thriceSolution + constant;
+	const auto minConstant = thriceSolution - constant;
+	const auto maxConstant = thriceSolution + constant;
 
 	EquationSecondary firstEquation{ minConstant,once,1.0 };
 	EquationSecondary secondEquation{ maxConstant,-once,1.0 };
 
-	auto three = m_Thrice / m_Quartic;
+	const auto three = m_Thrice / m_Quartic;
 
 	AddResult(firstEquation, -three / 4.0);
 	AddResult(secondEquation, -three / 4.0);

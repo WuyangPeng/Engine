@@ -37,16 +37,18 @@ Network::MessageTypeCondition
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::MessageTypeCondition
 	::MessageTypeCondition()
 	:m_Impl{ make_shared<MessageTypeConditionAll>() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
-
-PERFORMANCE_COPY_CONSTRUCTION_DEFINE(Network, MessageTypeCondition)
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, MessageTypeCondition)
+#include STSTEM_WARNING_POP
+ 
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, MessageTypeCondition)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageTypeCondition, IsVersionsConform, int, bool)
 

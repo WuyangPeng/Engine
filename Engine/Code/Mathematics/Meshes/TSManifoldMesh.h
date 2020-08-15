@@ -14,7 +14,10 @@
 #include "UnorderedTriangleKey.h"
 
 #include <map>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
 	class TSManifoldMesh
@@ -39,8 +42,11 @@ namespace Mathematics
 		{
 		public:
 			virtual ~Triangle();
-			Triangle(int v0, int v1, int v2);
-			
+			Triangle(int v0, int v1, int v2) noexcept;
+			Triangle(const Triangle&) = default;
+		Triangle& operator=(const Triangle&) = default;
+		Triangle(Triangle&&) = default;
+		Triangle& operator=(Triangle&&) = default;
 			// Vertices of the face.
 			int V[3];
 			
@@ -53,8 +59,11 @@ namespace Mathematics
 		{
 		public:
 			virtual ~Tetrahedron();
-			Tetrahedron(int v0, int v1, int v2, int v3);
-			
+			Tetrahedron(int v0, int v1, int v2, int v3) noexcept;
+			Tetrahedron(const Tetrahedron&) = default;
+		Tetrahedron& operator=(const Tetrahedron&) = default;
+		Tetrahedron(Tetrahedron&&) = default;
+		Tetrahedron& operator=(Tetrahedron&&) = default;
 			// Vertices, listed in an order so that each face vertices in
 			// counterclockwise order when viewed from outside the tetrahedron.
 			int V[4];
@@ -73,11 +82,16 @@ namespace Mathematics
 		
 		// Construction and destruction.
 		virtual ~TSManifoldMesh();
-		TSManifoldMesh(TCreator tCreator = 0, SCreator sCreator = 0);
+		TSManifoldMesh(TCreator tCreator = 0, SCreator sCreator = 0) noexcept;
+		
+		TSManifoldMesh(const TSManifoldMesh&) = default;
+		TSManifoldMesh& operator=(const TSManifoldMesh&) = default;
+		TSManifoldMesh(TSManifoldMesh&&) = default;
+		TSManifoldMesh& operator=(TSManifoldMesh&&) = default;
 		
 		// Member access.
-		const TMap& GetTriangles() const;
-		const SMap& GetTetrahedra() const;
+		const TMap& GetTriangles() const noexcept;
+		const SMap& GetTetrahedra() const noexcept;
 
 		// If <v0,v1,v2,v3> is not in the mesh, a Tetrahedron object is created
 		// and returned; otherwise, <v0,v1,v2,v3> is in the mesh and nullptr is
@@ -108,5 +122,5 @@ namespace Mathematics
 		SMap mSMap;
 	};
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_MESHES_TS_MANIFOLD_MESH_H

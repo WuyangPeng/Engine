@@ -14,7 +14,7 @@
 using std::make_shared;
 
 CoreTools::BufferInStream
-	::BufferInStream(const FileBufferPtr& bufferInformation, int startPoint)
+	::BufferInStream(const FileBuffer& bufferInformation, int startPoint)
 	:m_Impl{ make_shared<ImplType>(bufferInformation,startPoint) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -22,6 +22,6 @@ CoreTools::BufferInStream
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, BufferInStream)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, BufferInStream, GetTopLevel, const CoreTools::InTopLevel)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferInStream, GetTopLevel, const CoreTools::InTopLevel)
 
 

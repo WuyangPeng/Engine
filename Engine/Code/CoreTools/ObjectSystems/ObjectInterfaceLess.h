@@ -19,7 +19,7 @@ namespace CoreTools
 		using ClassType = ObjectInterfaceSmartPointerLess;
 
 	public:
-		bool operator()(const ConstObjectInterfaceSmartPointer& lhs, const ConstObjectInterfaceSmartPointer& rhs);
+                bool operator()(const ConstObjectInterfaceSmartPointer& lhs, const ConstObjectInterfaceSmartPointer& rhs) noexcept;
 	};
 }
 

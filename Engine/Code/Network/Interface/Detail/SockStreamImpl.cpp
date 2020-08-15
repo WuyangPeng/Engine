@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 Network::SockStreamImpl
-	::SockStreamImpl()
+	::SockStreamImpl() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -29,7 +29,7 @@ Network::ACESockStreamNativeType& Network::SockStreamImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"s));
 }
 
 Network::ACEHandleType Network::SockStreamImpl
@@ -37,7 +37,7 @@ Network::ACEHandleType Network::SockStreamImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"s));
 }
 
 void Network::SockStreamImpl
@@ -47,7 +47,7 @@ void Network::SockStreamImpl
 
 	SYSTEM_UNUSED_ARG(handle);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"s));
 }
 
 void Network::SockStreamImpl
@@ -57,7 +57,7 @@ void Network::SockStreamImpl
 
 	SYSTEM_UNUSED_ARG(winSocket);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是Network Stream类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是Network Stream类！"s));
 }
 
 Network::BoostSockStreamType& Network::SockStreamImpl
@@ -65,7 +65,7 @@ Network::BoostSockStreamType& Network::SockStreamImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是boost Stream类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是boost Stream类！"s));
 }
 
 Network::WinSocketStreamType& Network::SockStreamImpl
@@ -73,6 +73,6 @@ Network::WinSocketStreamType& Network::SockStreamImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是Network Stream类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是Network Stream类！"s));
 }
 

@@ -13,7 +13,7 @@
 using std::make_pair;
 
 Network::ConfigurationSubStrategyImpl
-	::ConfigurationSubStrategyImpl()
+	::ConfigurationSubStrategyImpl() noexcept
 	:m_Container{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -26,7 +26,7 @@ bool Network::ConfigurationSubStrategyImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Container.find(wrappersSubStrategy);
+	const auto iter = m_Container.find(wrappersSubStrategy);
 
 	return iter != m_Container.cend();
 }
@@ -36,7 +36,7 @@ int Network::ConfigurationSubStrategyImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Container.find(wrappersSubStrategy);
+	const auto iter = m_Container.find(wrappersSubStrategy);
 
 	if (iter != m_Container.cend())
 	{
@@ -44,7 +44,7 @@ int Network::ConfigurationSubStrategyImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的子策略。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的子策略。"s));
 	}
 }
 

@@ -22,7 +22,13 @@
 
 using std::string;
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::RenderTargetImpl
     ::RenderTargetImpl (int numTargets, TextureFormat format,int width, int height,bool hasMipmaps, bool hasDepthStencil)
 	:m_ColorTextures{ numTargets }, m_DepthStencilTexture{}, m_HasMipmaps{ hasMipmaps }
@@ -31,26 +37,25 @@ Rendering::RenderTargetImpl
 
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
-		m_ColorTextures[i].Reset(NEW0 Texture2D{ format, width,height,(hasMipmaps ? 0 : 1),BufferUsage::RenderTarget });
+		m_ColorTextures[i] =std::make_shared<Texture2D>( format, width,height,(hasMipmaps ? 0 : 1),BufferUsage::RenderTarget );
     }
 
 	if (hasDepthStencil)
     {
-		m_DepthStencilTexture.Reset(NEW0 Texture2D{ TextureFormat::D24S8,width, height, 1,BufferUsage::DepthStencil });
+		m_DepthStencilTexture=std::make_shared<Texture2D>( TextureFormat::D24S8,width, height, 1,BufferUsage::DepthStencil );
     }
     
 	RENDERING_SELF_CLASS_IS_VALID_4;
 }
 
-Rendering::RenderTargetImpl::RenderTargetImpl()
+Rendering::RenderTargetImpl::RenderTargetImpl()  
 	:m_ColorTextures{ 0 }, m_DepthStencilTexture{}, m_HasMipmaps{ false }
 {
 	RENDERING_SELF_CLASS_IS_VALID_4;
 }
 
 // private
-void Rendering::RenderTargetImpl
-	::Swap(RenderTargetImpl& rhs)
+void Rendering::RenderTargetImpl ::Swap(RenderTargetImpl& rhs) noexcept
 {
 	std::swap(m_ColorTextures, rhs.m_ColorTextures);
 	std::swap(m_DepthStencilTexture, rhs.m_DepthStencilTexture);
@@ -63,12 +68,12 @@ Rendering::RenderTargetImpl
 {
 	 for (auto i = 0u; i < rhs.m_ColorTextures.size(); ++i)
 	 {
-		 m_ColorTextures[i].Reset(NEW0 Texture2D(*rhs.m_ColorTextures[i]));
+		 m_ColorTextures[i] =std::make_shared<Texture2D>(*rhs.m_ColorTextures[i]);
 	 }
 	 
-	 if (!rhs.m_DepthStencilTexture.IsNullPtr())
+	 if ( rhs.m_DepthStencilTexture )
 	 {
-		 m_DepthStencilTexture.Reset(NEW0 Texture2D(*rhs.m_DepthStencilTexture));
+		 m_DepthStencilTexture=std::make_shared<Texture2D>(*rhs.m_DepthStencilTexture);
 	 }
 	  
 	 RENDERING_SELF_CLASS_IS_VALID_4;
@@ -90,15 +95,23 @@ Rendering::RenderTargetImpl& Rendering::RenderTargetImpl
 bool Rendering::RenderTargetImpl
     ::IsValid() const noexcept
 {
-    for (auto i = 0u; i < m_ColorTextures.size(); ++i)
+    try
     {
-		if (!m_ColorTextures[i].IsNullPtr() && m_ColorTextures[i]->HasMipmaps() != m_HasMipmaps)
-		{
-			return false;
-		}           
-    }    
-   
-	return true;   
+        for (auto i = 0u; i < m_ColorTextures.size(); ++i)
+        {
+            if (m_ColorTextures[i] && m_ColorTextures[i]->HasMipmaps() != m_HasMipmaps)
+            {
+                return false;
+            }
+        }
+
+        return true;  
+    }
+    catch (...)
+    {
+        return false;
+    }
+    
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -143,27 +156,25 @@ Rendering::RenderTargetImpl::ConstTexture2DSmartPointer Rendering::RenderTargetI
 	RENDERING_CLASS_IS_VALID_CONST_4;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_ColorTextures.size()), "Ë÷Òý´íÎó£¡\n");
     
-	return m_ColorTextures[index].PolymorphicCastConstObjectSmartPointer<ConstTexture2DSmartPointer>();
+	return m_ColorTextures[index] ;
 }
 
 Rendering::RenderTargetImpl::ConstTexture2DSmartPointer Rendering::RenderTargetImpl
-       ::GetDepthStencilTexture () const
+       ::GetDepthStencilTexture () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
     
-	return m_DepthStencilTexture.PolymorphicCastConstObjectSmartPointer<ConstTexture2DSmartPointer>();
+	return m_DepthStencilTexture ;
 }
 
-bool Rendering::RenderTargetImpl
-    ::HasMipmaps () const
+bool Rendering::RenderTargetImpl ::HasMipmaps() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
     
     return m_HasMipmaps;
 }
 
-bool Rendering::RenderTargetImpl
-    ::HasDepthStencil () const
+bool Rendering::RenderTargetImpl ::HasDepthStencil() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
     
@@ -174,7 +185,7 @@ const CoreTools::ObjectSmartPointer Rendering::RenderTargetImpl
     ::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_4;
-    
+    CoreTools::DoNothing();
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
 		if (m_ColorTextures[i]->GetName() == name)
@@ -195,7 +206,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::RenderTargetImpl
     ::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_4;
-    
+    CoreTools::DoNothing();
     vector<CoreTools::ObjectSmartPointer> objects;
     
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
@@ -218,18 +229,18 @@ const CoreTools::ConstObjectSmartPointer Rendering::RenderTargetImpl
     ::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_4;
-    
+    CoreTools::DoNothing();
     for (unsigned i = 0; i < m_ColorTextures.size(); ++i)
     {
 		if (m_ColorTextures[i]->GetName() == name)
 		{
-			return m_ColorTextures[i].PolymorphicCastConstObjectSmartPointer<CoreTools::ConstObjectSmartPointer>();
+			return m_ColorTextures[i] ;
 		}
 	}
     
 	if (m_DepthStencilTexture != nullptr && m_DepthStencilTexture->GetName() == name)
 	{
-		return m_DepthStencilTexture.PolymorphicCastConstObjectSmartPointer<CoreTools::ConstObjectSmartPointer>();
+		return m_DepthStencilTexture ;
 	}        
     
     return CoreTools::ConstObjectSmartPointer();
@@ -239,20 +250,20 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::RenderTargetImpl
     ::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_4;
-    
+    CoreTools::DoNothing();
     vector<CoreTools::ConstObjectSmartPointer> objects;
     
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
 		if (m_ColorTextures[i]->GetName() == name)
 		{
-			objects.push_back(m_ColorTextures[i].PolymorphicCastConstObjectSmartPointer<CoreTools::ConstObjectSmartPointer>());
+			objects.push_back(m_ColorTextures[i] );
 		}
 	}
     
     if(m_DepthStencilTexture != nullptr && m_DepthStencilTexture->GetName() == name)
     {
-        objects.push_back(m_DepthStencilTexture.PolymorphicCastConstObjectSmartPointer<CoreTools::ConstObjectSmartPointer>());
+        objects.push_back(m_DepthStencilTexture );
     }
     
     return objects;
@@ -276,8 +287,8 @@ void Rendering::RenderTargetImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
     
-    target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
-    target.WriteSmartPointer(m_DepthStencilTexture);
+ //   target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
+ //   target.WriteSmartPointer(m_DepthStencilTexture);
     target.WriteBool(m_HasMipmaps);
 }
 
@@ -291,34 +302,36 @@ void Rendering::RenderTargetImpl
     source.Read(numTargets);
     m_ColorTextures.resize(numTargets);
     
-    source.ReadSmartPointer(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
-    source.ReadSmartPointer(m_DepthStencilTexture);
+    //source.ReadSmartPointer(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
+   // source.ReadSmartPointer(m_DepthStencilTexture);
     m_HasMipmaps = source.ReadBool();
 }
 
 void Rendering::RenderTargetImpl
     ::Link (ObjectLink& source)
 {
-	RENDERING_CLASS_IS_VALID_4;
-    
+    RENDERING_CLASS_IS_VALID_4;
+    CoreTools::DoNothing();
+    source;
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
-        source.ResolveObjectSmartPointerLink(m_ColorTextures[i]);
+        //source.ResolveObjectSmartPointerLink(m_ColorTextures[i]);
     }
-    source.ResolveObjectSmartPointerLink(m_DepthStencilTexture);
+   // source.ResolveObjectSmartPointerLink(m_DepthStencilTexture);
 }
 
 void Rendering::RenderTargetImpl
     ::Register (ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_4;
-    
+    RENDERING_CLASS_IS_VALID_CONST_4;
+    CoreTools::DoNothing();
+    target;
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
-        target.RegisterSmartPointer(m_ColorTextures[i]);
+       // target.RegisterSmartPointer(m_ColorTextures[i]);
     }
     
-    target.RegisterSmartPointer(m_DepthStencilTexture);
+   // target.RegisterSmartPointer(m_DepthStencilTexture);
 }
 
- 
+ #include STSTEM_WARNING_POP

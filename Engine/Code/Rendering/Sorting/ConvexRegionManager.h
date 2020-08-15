@@ -30,7 +30,7 @@ namespace Rendering
 		// the leaf nodes are where the ConvexRegion objects are located.
 		ConvexRegionManager();
 		ConvexRegionManager(const Mathematics::Planef& modelPlane);
-		virtual ~ConvexRegionManager();
+	 
 
 		// The middle child of ConvexRegionManager is where the representation
 		// of the outside of the set of regions is stored.  This can be an
@@ -45,14 +45,16 @@ namespace Rendering
 
 	protected:
 		// Support for culling.
-		virtual void GetVisibleSet(Culler& culler, bool noCull);
+		  void GetVisibleSet(Culler& culler, bool noCull) override;
 
 		CRMCuller mCuller;
 	};
- 
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(ConvexRegionManager);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Eighth, ConvexRegionManager);
-
+#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_SORTING_CONVEX_REGION_MANAGER_H

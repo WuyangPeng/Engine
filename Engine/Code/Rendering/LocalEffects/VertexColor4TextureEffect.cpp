@@ -11,7 +11,21 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
- 
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26815)
 CORE_TOOLS_RTTI_DEFINE(Rendering, VertexColor4TextureEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexColor4TextureEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexColor4TextureEffect);
@@ -19,7 +33,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexColor4TextureEffect);
 Rendering::VertexColor4TextureEffect
 	::VertexColor4TextureEffect (ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0,ShaderFlags::SamplerCoordinate coordinate1)
 {
-	VertexShaderSmartPointer vshader{ NEW0 VertexShader("Wm5.VertexColorTexture",3, 3, 1, 0) };
+    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>("Wm5.VertexColorTexture", 3, 3, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float2,ShaderFlags::VariableSemantic::TextureCoord0);
     vshader->SetInput(2, "modelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -29,7 +43,7 @@ Rendering::VertexColor4TextureEffect
     vshader->SetConstant(0, "PVWMatrix", 4);
 	auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -39,7 +53,7 @@ Rendering::VertexColor4TextureEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	PixelShaderSmartPointer pshader{ NEW0 PixelShader{"Wm5.VertexColorTexture",2, 1, 0, 1} };
+	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.VertexColorTexture",2, 1, 0, 1) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
     pshader->SetInput(1, "vertexTCoord", ShaderFlags::VariableType::Float2,ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -47,7 +61,7 @@ Rendering::VertexColor4TextureEffect
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
     pshader->SetCoordinate(0, 1, coordinate1);
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -57,30 +71,27 @@ Rendering::VertexColor4TextureEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{ NEW0 VisualPass{} };
+	VisualPassSmartPointer pass{ std::make_shared < VisualPass>() };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSmartPointer{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSmartPointer{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSmartPointer{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSmartPointer{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSmartPointer{ NEW0 WireState{} });
+        pass->SetAlphaState(AlphaStateSmartPointer{ std::make_shared<AlphaState>() });
+        pass->SetCullState(CullStateSmartPointer{ std::make_shared<CullState>() });
+        pass->SetDepthState(DepthStateSmartPointer{ std::make_shared<DepthState>() });
+        pass->SetOffsetState(OffsetStateSmartPointer{ std::make_shared<OffsetState>() });
+        pass->SetStencilState(StencilStateSmartPointer{ std::make_shared<StencilState>   () });
+        pass->SetWireState(WireStateSmartPointer{ std::make_shared<WireState>() });
 
-	VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique{} };
+	VisualTechniqueSmartPointer technique{ std::make_shared<VisualTechnique>() };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
 
-Rendering::VertexColor4TextureEffect
-	::~VertexColor4TextureEffect ()
-{
-}
+ 
 
 Rendering::PixelShader* Rendering::VertexColor4TextureEffect
 	::GetPixelShader () const
 {
-	return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().GetData());
+	return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
 
 }
 
@@ -88,10 +99,10 @@ Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect
 	::CreateInstance (Texture2D* texture) const
 {
 	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
+	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared< ProjectionViewMatrixConstant>()));
     instance->SetPixelTexture(0, 0, TextureSmartPointer(texture));
 
-	ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
+	const ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
 	if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::Linear
     &&  !texture->HasMipmaps())
     {
@@ -104,7 +115,7 @@ Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect
 Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect
 	::CreateUniqueInstance ( Texture2D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
 {
-    VertexColor4TextureEffect* effect = CoreTools::New0 < VertexColor4TextureEffect>();
+   const VertexColor4TextureEffect* effect = CoreTools::New0 < VertexColor4TextureEffect>();
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
@@ -146,9 +157,9 @@ void Rendering::VertexColor4TextureEffect
 	auto pass = GetTechnique(0)->GetPass(0);
 	auto vshader = pass->GetVertexShader();
 	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().GetData());
+	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -158,9 +169,9 @@ void Rendering::VertexColor4TextureEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().GetData());
+	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -199,7 +210,7 @@ int Rendering::VertexColor4TextureEffect
 
 int Rendering::VertexColor4TextureEffect::msDx9VRegisters[1]  { 0 };
 int Rendering::VertexColor4TextureEffect::msOglVRegisters[1]  { 1 };
-int* Rendering::VertexColor4TextureEffect::msVRegisters[ShaderFlags::MaxProfiles] 
+int* Rendering::VertexColor4TextureEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msDx9VRegisters,
@@ -208,7 +219,7 @@ int* Rendering::VertexColor4TextureEffect::msVRegisters[ShaderFlags::MaxProfiles
     msOglVRegisters
 };
 
-std::string Rendering::VertexColor4TextureEffect::msVPrograms[ShaderFlags::MaxProfiles]
+std::string Rendering::VertexColor4TextureEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]
 {
     // VP_NONE
     "",
@@ -277,7 +288,7 @@ std::string Rendering::VertexColor4TextureEffect::msVPrograms[ShaderFlags::MaxPr
 };
 
 int Rendering::VertexColor4TextureEffect::msAllPTextureUnits[1]  { 0 };
-int* Rendering::VertexColor4TextureEffect::msPTextureUnits[ShaderFlags::MaxProfiles] 
+int* Rendering::VertexColor4TextureEffect::msPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msAllPTextureUnits,
@@ -286,7 +297,7 @@ int* Rendering::VertexColor4TextureEffect::msPTextureUnits[ShaderFlags::MaxProfi
     msAllPTextureUnits
 };
 
-std::string Rendering::VertexColor4TextureEffect::msPPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::VertexColor4TextureEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // PP_NONE
     "",
@@ -325,3 +336,4 @@ std::string Rendering::VertexColor4TextureEffect::msPPrograms[ShaderFlags::MaxPr
     "END\n"
 };
 
+#include STSTEM_WARNING_POP

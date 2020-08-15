@@ -13,7 +13,9 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, PickRecordContainer)
 
 Rendering::PickRecordContainer
@@ -28,7 +30,7 @@ CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, PickRecordContainer)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, PickRecordContainer,InsertPickRecord,PickRecord,void)
  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecordContainer,GetSize,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecordContainer,IsEmpty,bool)									
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRecordContainer,IsEmpty,bool)									
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecordContainer,GetPickRecord,int,const Rendering::PickRecord)
 
 void Rendering::PickRecordContainer
@@ -38,3 +40,4 @@ void Rendering::PickRecordContainer
 
 	return m_Impl->InsertPickRecord(*pickRecordContainerImpl.m_Impl);	 
 }
+#include STSTEM_WARNING_POP

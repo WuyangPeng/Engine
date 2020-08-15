@@ -22,9 +22,9 @@ Rendering::OpenGLRenderTargetData
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,OpenGLRenderTargetData)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,OpenGLRenderTargetData,Enable,Renderer*,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering,OpenGLRenderTargetData,Enable,Renderer*,void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, OpenGLRenderTargetData,Disable,Renderer*,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, OpenGLRenderTargetData,Disable,Renderer*,void)
 
 Rendering::ConstTexture2DSmartPointer Rendering::OpenGLRenderTargetData
 	::ReadColor( int index,Renderer* renderer )

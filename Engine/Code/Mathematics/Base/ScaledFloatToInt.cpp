@@ -13,9 +13,11 @@
 #include <algorithm>
 
 using std::pow;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
 Mathematics::ScaledFloatToInt
-	::ScaledFloatToInt(float value, int power)
+	::ScaledFloatToInt(float value, int power) noexcept
 	:m_FloatValue{ value }, m_IntegerValue{ *reinterpret_cast<int32_t*>(&m_FloatValue) },
 	 m_Power{ power }, m_Shift{ 150 - m_Power - ((m_IntegerValue >> 23) & 0xFF) }, m_Result{ 0 }
 {
@@ -26,7 +28,7 @@ Mathematics::ScaledFloatToInt
 
 // private
 void Mathematics::ScaledFloatToInt
-	::Scaled()
+	::Scaled() noexcept
 {
 	if (m_Shift < 24)
 	{
@@ -37,7 +39,7 @@ void Mathematics::ScaledFloatToInt
 
 // private
 void Mathematics::ScaledFloatToInt
-	::ShiftIntegerValue()
+	::ShiftIntegerValue() noexcept
 {
 	// 当将浮点数1.0f传入时，m_Shift可能会等于-1。
 	if (0 <= m_Shift)
@@ -47,7 +49,7 @@ void Mathematics::ScaledFloatToInt
 }
 
 void Mathematics::ScaledFloatToInt
-	::CorrectResult()
+	::CorrectResult() noexcept
 {
 	if (m_Result == (1 << m_Power))
 	{
@@ -70,10 +72,11 @@ bool Mathematics::ScaledFloatToInt
 #endif // OPEN_CLASS_INVARIANT
 
 int Mathematics::ScaledFloatToInt
-	::GetScaledResult() const
+	::GetScaledResult() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_5;
 
 	return m_Result;
 }
 
+#include STSTEM_WARNING_POP

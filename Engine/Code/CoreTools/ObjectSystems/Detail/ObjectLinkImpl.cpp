@@ -41,7 +41,7 @@ CoreTools::ObjectInterfaceSmartPointer CoreTools::ObjectLinkImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto iter = m_Linked.find(uniqueID);
+	const auto iter = m_Linked.find(uniqueID);
 
 	if (iter != m_Linked.cend())
 	{
@@ -67,7 +67,7 @@ CoreTools::ObjectInterfaceSmartPointer& CoreTools::ObjectLinkImpl
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetOrderedSize(), "Ë÷Òý´íÎó£¡");
 
-	return m_Ordered[index];
+	return m_Ordered.at(index);
 }
 
 void CoreTools::ObjectLinkImpl

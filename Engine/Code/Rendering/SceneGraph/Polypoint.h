@@ -24,18 +24,18 @@ namespace Rendering
 
 	public:
 		Polypoint(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer);
-		virtual ~Polypoint();
-
+	 
+                
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Polypoint);	
  
 		// 允许应用程序指定的数量小于最大值用于绘制。
-		int GetMaxNumPoints () const;
+                int GetMaxNumPoints() const ;
 		void SetNumPoints (int numPoints);
-		int GetNumPoints () const;
+                int GetNumPoints() const noexcept;
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSmartPointer Clone() const override;
 		
 	private:	
 		// 当前活动点的数量。

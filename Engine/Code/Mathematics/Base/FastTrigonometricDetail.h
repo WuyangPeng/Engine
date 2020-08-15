@@ -13,12 +13,15 @@
 
 #include "MathDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastSinRoughCalculation(Real angle)
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+
+	CoreTools::DoNothing();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -37,6 +40,8 @@ Real Mathematics::FastTrigonometric<Real>
 	::FastSinPreciseCalculation(Real angle)
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+
+	CoreTools::DoNothing();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -62,6 +67,8 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
 
+	CoreTools::DoNothing();
+
 	auto angleSqrare = Math::Square(angle);
 
 	return angle * (Math::sm_One - angleSqrare / static_cast<Real>(2.0) / static_cast<Real>(3.0) *
@@ -82,6 +89,8 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
 
+	CoreTools::DoNothing();
+
 	auto angleSquare = Math::Square(angle);
 
 	auto result = static_cast<Real>(3.705e-02);
@@ -98,6 +107,8 @@ Real Mathematics::FastTrigonometric<Real>
 	::FastCosPreciseCalculation(Real angle)
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+
+	CoreTools::DoNothing();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -122,6 +133,8 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
 
+	CoreTools::DoNothing();
+
 	auto angleSqrare = Math::Square(angle);
 
 	return  (Math::sm_One - angleSqrare / static_cast<Real>(2.0) *
@@ -143,6 +156,8 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_QuarterPI, "输入值必须在范围[0,pi/4]！\n");
 
+	CoreTools::DoNothing();
+
 	auto angleSquare = Math::Square(angle);
 
 	auto result = static_cast<Real>(2.033e-01);
@@ -160,6 +175,8 @@ Real Mathematics::FastTrigonometric<Real>
 	::FastTanPreciseCalculation(Real angle)
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_QuarterPI, "输入值必须在范围[0,pi/4]！\n");
+
+	CoreTools::DoNothing();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -292,6 +309,8 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_NegativeOne <= value && value <= Math::sm_One, "输入值必须在范围[-1,1]！\n");
 
+	CoreTools::DoNothing();
+
 	auto valueSquare = Math::Square(value);
 
 	auto result = static_cast<Real>(0.0208351);
@@ -313,6 +332,8 @@ Real Mathematics::FastTrigonometric<Real>
 	::FastInvTanPreciseCalculation(Real value)
 {
 	MATHEMATICS_ASSERTION_3(Math::sm_NegativeOne <= value && value <= Math::sm_One, "输入值必须在范围[-1,1]！\n");
+
+	CoreTools::DoNothing();
 
 	auto valueSquare = Math::Square(value);
 

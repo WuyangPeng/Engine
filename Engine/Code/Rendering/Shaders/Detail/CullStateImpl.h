@@ -1,56 +1,56 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
+//
 // ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 14:32)
 
 #ifndef RENDERING_SHADERS_CULL_STATE_IMPL_H
 #define RENDERING_SHADERS_CULL_STATE_IMPL_H
- 
+
 #include "Rendering/RenderingDll.h"
 
 namespace CoreTools
 {
-	class BufferSource;
-	class BufferTarget;
-	class WriteFileManager;
-	class ReadFileManager;
+    class BufferSource;
+    class BufferTarget;
+    class WriteFileManager;
+    class ReadFileManager;
 }
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE CullStateImpl
-	{
-	public:
-		typedef CullStateImpl ClassType;
-		typedef CoreTools::BufferSource BufferSource;
-		typedef CoreTools::BufferTarget BufferTarget;
-		typedef CoreTools::WriteFileManager WriteFileManager;
-		typedef CoreTools::ReadFileManager ReadFileManager;
+    class RENDERING_HIDDEN_DECLARE CullStateImpl
+    {
+    public:
+        typedef CullStateImpl ClassType;
+        typedef CoreTools::BufferSource BufferSource;
+        typedef CoreTools::BufferTarget BufferTarget;
+        typedef CoreTools::WriteFileManager WriteFileManager;
+        typedef CoreTools::ReadFileManager ReadFileManager;
 
-	public:
-		CullStateImpl();
+    public:
+        CullStateImpl() noexcept;
 
 #ifdef OPEN_CLASS_INVARIANT
-		CLASS_INVARIANT_DECLARE;
-#endif // OPEN_CLASS_INVARIANT
+        CLASS_INVARIANT_DECLARE;
+#endif  // OPEN_CLASS_INVARIANT
 
-		void Load(BufferSource& source);
-		void Save(BufferTarget& target) const;
-		int GetStreamingSize() const;
+        void Load(BufferSource& source);
+        void Save(BufferTarget& target) const;
+        int GetStreamingSize() const;
 
-		bool IsEnabled() const;
-		void SetEnabled(bool enabled);
-		bool IsCCWOrder() const;
-		void SetCCWOrder(bool cCWOrder);
+        bool IsEnabled() const noexcept;
+        void SetEnabled(bool enabled) noexcept;
+        bool IsCCWOrder() const noexcept;
+        void SetCCWOrder(bool cCWOrder) noexcept;
 
-		void SaveState(WriteFileManager& manager) const;
-		void LoadState(ReadFileManager& manager);
+        void SaveState(WriteFileManager& manager) const;
+        void LoadState(ReadFileManager& manager);
 
-	private:
-		bool m_Enabled; // Ä¬ÈÏ: true
-		bool m_CCWOrder; // Ä¬ÈÏ: true
-	};
+    private:
+        bool m_Enabled;  // Ä¬ÈÏ: true
+        bool m_CCWOrder;  // Ä¬ÈÏ: true
+    };
 }
 
-#endif // RENDERING_SHADERS_CULL_STATE_IMPL_H
+#endif  // RENDERING_SHADERS_CULL_STATE_IMPL_H

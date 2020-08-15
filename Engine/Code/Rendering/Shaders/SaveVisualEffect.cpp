@@ -9,7 +9,10 @@
 #include "SaveVisualEffect.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::SaveVisualEffect
 	::SaveVisualEffect(const VisualEffectSmartPointer& visualEffect, const System::String& fileName)
 {
@@ -23,3 +26,4 @@ Rendering::SaveVisualEffect
 CLASS_INVARIANT_STUB_DEFINE(Rendering,SaveVisualEffect)
 
 
+#include STSTEM_WARNING_POP

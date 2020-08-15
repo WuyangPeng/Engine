@@ -40,7 +40,7 @@ namespace Rendering
 		// having the surface object determine the type of curve, use the
 		// Topology enumerated values to provide this information.
 
-		enum /*RENDERING_DEFAULT_DECLARE*/ TopologyType
+		enum /*RENDERING_DEFAULT_DECLARE*/  class TopologyType
 		{
 			REV_DISK_TOPOLOGY,
 			REV_CYLINDER_TOPOLOGY,
@@ -55,16 +55,21 @@ namespace Rendering
 						  int numCurveSamples, int numRadialSamples, bool sampleByArcLength,
 						  bool outsideView, VertexFormatSmartPointer vformat);
 
-		virtual ~RevolutionSurface();
+		  ~RevolutionSurface();
+		  
+		  RevolutionSurface(const RevolutionSurface&) = default;
+		   RevolutionSurface& operator=(const RevolutionSurface&) = default;
+		   RevolutionSurface(RevolutionSurface&&) = default;
+		   RevolutionSurface& operator=(RevolutionSurface&&) = default;
 
 		// Mmber access.
-		int GetCurveSamples() const;
-		int GetRadialSamples() const;
-		void SetCurve(Mathematics::Curve2f* curve);
-		const Mathematics::Curve2f* GetCurve() const;
-		TopologyType GetTopology() const;
-		void SetSampleByArcLength(bool sampleByArcLength);
-		bool GetSampleByArcLength() const;
+		int GetCurveSamples() const noexcept;
+		int GetRadialSamples() const noexcept;
+		void SetCurve(Mathematics::Curve2f* curve) noexcept;
+		const Mathematics::Curve2f* GetCurve() const noexcept;
+		TopologyType GetTopology() const noexcept;
+		void SetSampleByArcLength(bool sampleByArcLength) noexcept;
+		bool GetSampleByArcLength() const noexcept;
 
 		// Modify vertices and normals when the curve itself changes over time.
 		// You are responsible for maintaining the topology of the curve.  For
@@ -88,10 +93,12 @@ namespace Rendering
 		Mathematics::Float3* mSamples;
 		bool mSampleByArcLength;
 	};
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+	#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(RevolutionSurface);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, RevolutionSurface);
-
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_CURVES_SURFACES_REVOLUTION_SURFACE_H

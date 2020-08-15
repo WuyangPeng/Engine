@@ -17,7 +17,12 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, OffsetState);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, OffsetState);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, OffsetState); 
@@ -60,3 +65,4 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, OffsetState,SetBias, float,
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, OffsetState,SaveState, WriteFileManager&, void)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, OffsetState,LoadState, ReadFileManager&, void)
+#include STSTEM_WARNING_POP

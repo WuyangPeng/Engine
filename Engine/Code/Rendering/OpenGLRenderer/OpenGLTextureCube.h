@@ -26,15 +26,15 @@ namespace Rendering
 
 	public:		
 		OpenGLTextureCube (Renderer* renderer, const TextureCube* texture);
-		virtual ~OpenGLTextureCube ();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		// ÎÆÀí²Ù×÷
-		virtual void Enable (Renderer* renderer, int textureUnit) override;
-		virtual void Disable (Renderer* renderer, int textureUnit) override;
-		virtual void* Lock (int face,int level, BufferLocking mode) override;
-		virtual void Unlock (int face,int level) override;
+		  void Enable (Renderer* renderer, int textureUnit) noexcept override;
+           void Disable(Renderer* renderer, int textureUnit) noexcept override;
+		  void* Lock (int face,int level, BufferLocking mode) noexcept override;
+		  void Unlock (int face,int level) noexcept override;
 		
 	private:
 		OpenGLTextureData<TextureCube> m_OpenGLTextureData;

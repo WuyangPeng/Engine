@@ -12,7 +12,17 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26494)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26429)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Portal);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Portal);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Portal);
@@ -27,8 +37,13 @@ Rendering::Portal
 
 Rendering::Portal::~Portal ()
 {
-    DELETE1(mModelVertices);
+	EXCEPTION_TRY
+{
+  DELETE1(mModelVertices);
     DELETE1(mWorldVertices);
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+  
 }
 
 void Rendering::Portal
@@ -95,16 +110,16 @@ bool Rendering::Portal
 
     Mathematics::AVectorf diff;
 	Mathematics::APointf vertexCam;
-    int i;
+    int i = 0;
 
     if (camera->IsPerspective())
     {
-        const float epsilon = 1e-6f, invEpsilon = 1e+6f;
+        constexpr float epsilon = 1e-6f, invEpsilon = 1e+6f;
         int firstSign = 0, lastSign = 0;  // in {-1,0,1}
         bool signChange = false;
 		Mathematics::APointf firstVertex = Mathematics::APointf::sm_Origin;
 		Mathematics::APointf lastVertex = Mathematics::APointf::sm_Origin;
-        float NdD, UdD, RdD, t;
+        float NdD = 0.0f, UdD= 0.0f, RdD= 0.0f, t= 0.0f;
 
         for (i = 0; i < mNumVertices; i++)
         {
@@ -320,7 +335,7 @@ void Rendering::Portal
     }
 
     // Save the current frustum.
-    float saveFrustum[6];
+    float saveFrustum[6]{};
     const float* frustum = culler.GetFrustum();
     for (int j = 0; j < 6; ++j)
     {
@@ -351,13 +366,13 @@ const CoreTools::ObjectSmartPointer Rendering::Portal
 	::GetObjectByName(const std::string& name)
 {
 	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
 
 	found = AdjacentRegion->GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -383,13 +398,13 @@ const CoreTools::ConstObjectSmartPointer Rendering::Portal
 	::GetConstObjectByName(const std::string& name) const
 {
 	CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
 
 	found = AdjacentRegion->GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -443,7 +458,7 @@ void Rendering::Portal
 {
     Object::Link(source);
 
-	source.ResolveObjectLink(AdjacentRegion);
+	//source.ResolveObjectLink(AdjacentRegion);
 }
 
 void Rendering::Portal
@@ -494,3 +509,4 @@ int Rendering::Portal
     return size;
 }
 
+#include STSTEM_WARNING_POP

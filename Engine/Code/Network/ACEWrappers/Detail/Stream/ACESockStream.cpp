@@ -19,12 +19,19 @@
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h" 
 #include "Network/ACEWrappers/Detail/Address/ACESockInetAddress.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
 using std::array;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455) 
+#include SYSTEM_WARNING_DISABLE(26415) 
+#include SYSTEM_WARNING_DISABLE(26418) 
+#include SYSTEM_WARNING_DISABLE(26481) 
+#include SYSTEM_WARNING_DISABLE(26490) 
+#include SYSTEM_WARNING_DISABLE(26429) 
 Network::ACESockStream
 	::ACESockStream()
 	:ParentType{}, m_ACESockStream{}
@@ -35,7 +42,16 @@ Network::ACESockStream
 Network::ACESockStream
 	::~ACESockStream()
 {
-	m_ACESockStream.close();
+	#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+
+	EXCEPTION_TRY
+	{
+		m_ACESockStream.close();
+	}
+	EXCEPTION_ALL_CATCH(Network)
+
+#include STSTEM_WARNING_POP		
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -43,7 +59,7 @@ Network::ACESockStream
 CLASS_INVARIANT_STUB_DEFINE(Network, ACESockStream)
 
 Network::ACESockStreamNativeType& Network::ACESockStream
-	::GetACESockStream()
+	::GetACESockStream() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -55,9 +71,9 @@ int Network::ACESockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto bytesTotal = messageBuffer->GetSize();
+	const auto bytesTotal = messageBuffer->GetSize();
 
-	static const auto headSize = MessageInterface::GetMessageHeadSize();
+	static constexpr auto headSize = MessageInterface::GetMessageHeadSize();
 
 	if (bytesTotal <= headSize)
 	{
@@ -66,22 +82,22 @@ int Network::ACESockStream
 
 	auto buffer = messageBuffer->GetCurrentWriteBufferedPtr();
 
-	auto recvSize = m_ACESockStream.recv_n(buffer, headSize);
+	const auto recvSize = m_ACESockStream.recv_n(buffer, headSize);
 
 	if (recvSize == headSize)
 	{
 		messageBuffer->AddCurrentWriteIndex(headSize);
 
-		auto totalLength = *reinterpret_cast<int*>(buffer);
+		const auto totalLength = *reinterpret_cast<int*>(buffer);
 		if (bytesTotal < totalLength)
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("接收数据长度不足！"));
+			THROW_EXCEPTION(SYSTEM_TEXT("接收数据长度不足！"s));
 		}
 
-		auto remainLength = totalLength - headSize;
+		const auto remainLength = totalLength - headSize;
 		if (m_ACESockStream.recv_n(buffer + headSize, remainLength) != remainLength)
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("接收数据长度错误！"));
+			THROW_EXCEPTION(SYSTEM_TEXT("接收数据长度错误！"s));
 		}
 
 		messageBuffer->AddCurrentWriteIndex(remainLength);
@@ -161,9 +177,9 @@ void Network::ACESockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto bytesTotal = messageBuffer->GetSize();
+	const auto bytesTotal = messageBuffer->GetSize();
 
-	static const auto headSize = MessageInterface::GetMessageHeadSize();
+	static constexpr auto headSize = MessageInterface::GetMessageHeadSize();
 
 	if (bytesTotal <= headSize)
 	{
@@ -172,19 +188,19 @@ void Network::ACESockStream
 
 	auto buffer = messageBuffer->GetCurrentWriteBufferedPtr();
 
-	auto recvSize = m_ACESockStream.recv_n(buffer, headSize);
+	const auto recvSize = m_ACESockStream.recv_n(buffer, headSize);
 
 	if (recvSize == headSize)
 	{
 		messageBuffer->AddCurrentWriteIndex(headSize);
 
-		auto totalLength = *reinterpret_cast<int*>(buffer);
+		const auto totalLength = *reinterpret_cast<int*>(buffer);
 		if (bytesTotal < totalLength)
 		{
 			return;
 		}
 
-		auto remainLength = totalLength - headSize;
+		const auto remainLength = totalLength - headSize;
 		if (m_ACESockStream.recv_n(buffer + headSize, remainLength) != remainLength)
 		{
 			return;
@@ -247,5 +263,5 @@ bool Network::ACESockStream
 	else
 		return false;
 }
-
+#include STSTEM_WARNING_POP
 #endif // NETWORK_USE_ACE

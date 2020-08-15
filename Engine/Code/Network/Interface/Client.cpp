@@ -28,7 +28,7 @@ Network::Client
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, Client)
+CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Network, Client)
 
 void Network::Client
 	::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)

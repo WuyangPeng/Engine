@@ -17,7 +17,9 @@
 
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::ShaderSamplerData
 	::ShaderSamplerData( int numSamplers )
 	:m_Impl{ make_shared<ImplType>(numSamplers) }
@@ -115,3 +117,4 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderSamplerData,Save,BufferTar
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ShaderSamplerData,GetStreamingSize,int) 
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,Resize,int,void)
+#include STSTEM_WARNING_POP

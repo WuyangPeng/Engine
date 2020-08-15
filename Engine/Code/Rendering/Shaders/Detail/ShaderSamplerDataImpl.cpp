@@ -16,7 +16,9 @@
 #include <algorithm>
 
 using std::string;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 Rendering::ShaderSamplerDataImpl
 	::ShaderSamplerDataImpl( int numSamplers )
 	:m_SingleShaderSamplerData{ numSamplers }
@@ -25,7 +27,7 @@ Rendering::ShaderSamplerDataImpl
 }
 
 Rendering::ShaderSamplerDataImpl
-	::ShaderSamplerDataImpl()
+	::ShaderSamplerDataImpl() noexcept
 	:m_SingleShaderSamplerData{}
 { 
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -201,3 +203,4 @@ void Rendering::ShaderSamplerDataImpl
 	m_SingleShaderSamplerData.resize(number);
 }
 
+#include STSTEM_WARNING_POP

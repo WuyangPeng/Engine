@@ -44,11 +44,14 @@ namespace Rendering
 		using ConstTextureSmartPointerGather = std::vector<ConstTextureSmartPointer>;
 
 	public:
-		ShaderParametersImpl();
+                ShaderParametersImpl() noexcept;
 		explicit ShaderParametersImpl(const ConstShaderBaseSmartPointer& shader);
 
 		ShaderParametersImpl(const ShaderParametersImpl& rhs);
 		ShaderParametersImpl& operator=(const ShaderParametersImpl& rhs);
+                ShaderParametersImpl(ShaderParametersImpl&&) = default;
+                ShaderParametersImpl& operator=(ShaderParametersImpl&&) = default;
+                ~ShaderParametersImpl() = default;
 
 		CLASS_INVARIANT_DECLARE;
 

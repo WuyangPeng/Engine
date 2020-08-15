@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, SockConnector)
+ 
 DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(Network, SockConnector)
 
 Network::SockConnector
@@ -22,7 +22,7 @@ Network::SockConnector
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, SockConnector)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockConnector)
 
 bool Network::SockConnector
 	::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)

@@ -16,7 +16,9 @@
 
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::ShaderBaseData
 	::ShaderBaseData( int number )
 	:m_Impl{ make_shared<ImplType>(number) }
@@ -63,3 +65,4 @@ IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderBaseData,Load,Buf
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderBaseData,Save,BufferTarget&,void)  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ShaderBaseData,GetStreamingSize,int) 
 
+#include STSTEM_WARNING_POP

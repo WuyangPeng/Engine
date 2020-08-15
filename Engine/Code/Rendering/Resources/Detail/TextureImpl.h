@@ -39,13 +39,17 @@ namespace Rendering
     public:
         TextureImpl (TextureFormat format,TextureFlags type,BufferUsage usage,int numLevels);
         virtual ~TextureImpl();
+		TextureImpl(const TextureImpl&) = default;
+		TextureImpl& operator=(const TextureImpl&) = default;
+		TextureImpl( TextureImpl&&) = default;
+		TextureImpl& operator=( TextureImpl&&) = default;
         
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        TextureFormat GetFormat () const;
-        TextureFlags GetTextureType () const;
-        BufferUsage GetUsage () const;
-        int GetNumLevels () const;
+        TextureFormat GetFormat () const noexcept;
+        TextureFlags GetTextureType () const noexcept;
+        BufferUsage GetUsage () const noexcept;
+        int GetNumLevels () const noexcept;
         
         virtual int GetNumDimensions () const = 0;
         virtual int GetDimension (int index, int level) const  = 0;
@@ -58,7 +62,7 @@ namespace Rendering
         
         int GetPixelSize () const;
         static int GetPixelSize (TextureFormat format);
-        bool IsCompressed () const;
+        bool IsCompressed () const noexcept;
         bool IsMipmapable () const;
 
 		// 管理系统内存纹理的一个副本。字节数通过GetNumTotalBytes()查询。
@@ -83,7 +87,7 @@ namespace Rendering
 
     protected:        
 		char* GetWriteData();	
-		void SetNumLevels(int numLevels);
+		void SetNumLevels(int numLevels) noexcept;
 		void ExpandFileBufferSizeOnCube();	
 		void ResetTextureBufferNum();
 

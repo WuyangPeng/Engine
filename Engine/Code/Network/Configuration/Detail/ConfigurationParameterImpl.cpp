@@ -13,8 +13,12 @@
 using std::make_pair;
 using std::string;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+
 Network::ConfigurationParameterImpl
-	::ConfigurationParameterImpl()
+	::ConfigurationParameterImpl() noexcept
 	:m_Container{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -35,7 +39,7 @@ bool Network::ConfigurationParameterImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Container.find(key);
+	const auto iter = m_Container.find(key);
 
 	if (iter != m_Container.cend())
 	{
@@ -50,7 +54,7 @@ const Network::ConfigurationParameterImpl::Parameter Network::ConfigurationParam
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Container.find(key);
+	const auto iter = m_Container.find(key);
 
 	if (iter != m_Container.cend())
 	{
@@ -60,3 +64,4 @@ const Network::ConfigurationParameterImpl::Parameter Network::ConfigurationParam
 	return Parameter{};
 }
 
+#include STSTEM_WARNING_POP

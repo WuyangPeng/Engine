@@ -13,20 +13,17 @@
 #include "MessageTypeCondition.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 Network::DoubleMessage
-	::DoubleMessage(int64_t messageID)
+	::DoubleMessage(int64_t messageID) noexcept
 	:ParentType{ messageID }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::DoubleMessage
-	::~DoubleMessage()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, DoubleMessage);
 
 CORE_TOOLS_RTTI_DEFINE(Network, DoubleMessage);
@@ -48,3 +45,4 @@ int Network::DoubleMessage
 
 	return boost::numeric_cast<int>(GetFullMessageID() & sm_MaxMessageID);
 }
+#include STSTEM_WARNING_POP

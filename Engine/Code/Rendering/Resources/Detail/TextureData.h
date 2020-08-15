@@ -31,18 +31,18 @@ namespace Rendering
 		using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        TextureData (TextureFormat format, TextureFlags type,BufferUsage usage,int numLevels);
-		TextureData();
+        TextureData (TextureFormat format, TextureFlags type,BufferUsage usage,int numLevels) noexcept;
+		TextureData() noexcept;
         
 		CLASS_INVARIANT_DECLARE;
 
-        TextureFormat GetFormat () const;
-        TextureFlags GetTextureType () const;
-        BufferUsage GetUsage () const;
-        int GetNumLevels () const;       
-        bool IsCompressed () const;
+        TextureFormat GetFormat () const noexcept;
+        TextureFlags GetTextureType () const noexcept;
+        BufferUsage GetUsage () const noexcept;
+        int GetNumLevels () const noexcept;       
+        bool IsCompressed () const noexcept;
 
-		void SetNumLevels(int numLevels);
+		void SetNumLevels(int numLevels) noexcept;
 
 		void Load (CoreTools::BufferSource& source);
 		void Save (CoreTools::BufferTarget& target) const;

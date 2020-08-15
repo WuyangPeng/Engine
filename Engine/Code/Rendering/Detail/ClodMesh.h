@@ -29,7 +29,9 @@ namespace Rendering
 		// 或更多个ClodMesh对象共享相同的顶点缓冲器和折叠的记录。
 		explicit ClodMesh(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,
 			              const IndexBufferSmartPointer& indexbuffer,const CollapseRecordArraySmartPointer& recordArray);
-		virtual ~ClodMesh();
+		~ClodMesh() = default;
+		ClodMesh(ClodMesh&&) noexcept= default;
+		ClodMesh& operator=(ClodMesh&&) noexcept= default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
@@ -38,8 +40,8 @@ namespace Rendering
 		
 		int GetNumRecords () const;
 		
-		int GetTargetRecord() const;
-		void SetTargetRecord(int targetRecord);
+		int GetTargetRecord() const noexcept;
+		void SetTargetRecord(int targetRecord) noexcept;
 		
 		// LOD选择是基于应用手动选择。
 		// 要使用相机距离或屏幕空间的覆盖范围，
@@ -52,11 +54,11 @@ namespace Rendering
 		// 可以在不需要显示网格的应用程序手动调用。
 		void SelectLevelOfDetail ();
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSmartPointer Clone() const override;
 		
 	protected:
 		// 支持分级裁剪。
-		virtual void GetVisibleSet(Culler& culler, bool noCull) override;
+		 void GetVisibleSet(Culler& culler, bool noCull) override;
 
 	private:
 		IMPL_TYPE_DECLARE(ClodMesh);

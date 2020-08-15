@@ -30,7 +30,7 @@ namespace Rendering
 		using BufferTarget = CoreTools::BufferTarget;
 	
 	public:		
-		ShaderConstantsDataImpl();
+		ShaderConstantsDataImpl() noexcept;
 		explicit ShaderConstantsDataImpl(int number);
 
 		CLASS_INVARIANT_DECLARE;

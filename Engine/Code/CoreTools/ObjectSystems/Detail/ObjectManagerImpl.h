@@ -21,7 +21,7 @@ namespace CoreTools
 		using FactoryFunction = ObjectInterface::FactoryFunction;
 
 	public:
-		ObjectManagerImpl();
+		ObjectManagerImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

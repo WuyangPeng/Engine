@@ -24,6 +24,6 @@ Database::AnalysisDatabaseConfiguration
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, AnalysisDatabaseConfiguration)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Database, AnalysisDatabaseConfiguration, GetConfigurationStrategy, System::String, Database::ConfigurationStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, AnalysisDatabaseConfiguration, GetBegin, Database::AnalysisDatabaseConfiguration::ContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, AnalysisDatabaseConfiguration, GetEnd, Database::AnalysisDatabaseConfiguration::ContainerConstIter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, AnalysisDatabaseConfiguration, GetBegin, Database::AnalysisDatabaseConfiguration::ContainerConstIter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, AnalysisDatabaseConfiguration, GetEnd, Database::AnalysisDatabaseConfiguration::ContainerConstIter)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, AnalysisDatabaseConfiguration, GetSize, int)

@@ -20,9 +20,18 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26492)
 Rendering::BufferImpl
-	::BufferImpl()
+	::BufferImpl() noexcept
 	:m_NumElements{ 0 }, m_ElementSize{ 0 }, m_Usage{ BufferUsage::Quantity }, m_Data{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -46,8 +55,7 @@ bool Rendering::BufferImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-int Rendering::BufferImpl
-	::GetNumElements() const
+int Rendering::BufferImpl ::GetNumElements() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -55,15 +63,14 @@ int Rendering::BufferImpl
 }
 
 int Rendering::BufferImpl
-	::GetElementSize() const
+	::GetElementSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_ElementSize;
 }
 
-Rendering::BufferUsage Rendering::BufferImpl
-	::GetUsage() const
+Rendering::BufferUsage Rendering::BufferImpl ::GetUsage() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -76,6 +83,8 @@ void Rendering::BufferImpl
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(numElements <= boost::numeric_cast<int>(m_Data.size()) / m_ElementSize, "设置的长度溢出！");
 
+	CoreTools::DoNothing();
+
 	m_NumElements = numElements;
 }
 
@@ -87,8 +96,7 @@ int Rendering::BufferImpl
 	return boost::numeric_cast<int>(m_Data.size());
 }
 
-const char* Rendering::BufferImpl
-	::GetReadOnlyData() const
+const char* Rendering::BufferImpl ::GetReadOnlyData() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -106,7 +114,7 @@ const char* Rendering::BufferImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"s));
 	}
 }
 
@@ -160,7 +168,7 @@ void Rendering::BufferImpl
 
 	SaveHeadToFile(outFile);
 
-	auto numBytes = GetNumBytes();
+	const auto numBytes = GetNumBytes();
 	outFile.Write(sizeof(int), &numBytes);
 	 
 	outFile.Write(m_ElementSize, numBytes / m_ElementSize, &m_Data[0]);
@@ -171,7 +179,7 @@ void Rendering::BufferImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto stride = vertexformat->GetStride();
+	const auto stride = vertexformat->GetStride();
 
 	RENDERING_ASSERTION_1(stride == GetElementSize(), "格式步进值和顶点大小必须匹配。\n");
 
@@ -182,10 +190,10 @@ void Rendering::BufferImpl
 	const auto numAttributes = vertexformat->GetNumAttributes();
 	for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
     {
-		auto type = vertexformat->GetAttributeType(attributesIndex);
-		auto offset = vertexformat->GetOffset(attributesIndex);
-		auto componentSize = VertexFormat::GetComponentSize(type);
-		auto numComponents = VertexFormat::GetNumComponents(type);
+            const auto type = vertexformat->GetAttributeType(attributesIndex);
+        const auto offset = vertexformat->GetOffset(attributesIndex);
+            const auto componentSize = VertexFormat::GetComponentSize(type);
+        const auto numComponents = VertexFormat::GetNumComponents(type);
 
 		table[attributesIndex].Set(offset, componentSize, numComponents);
     }
@@ -239,7 +247,7 @@ void Rendering::BufferImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto stride = vertexformat->GetStride();
+	const auto stride = vertexformat->GetStride();
 
 	RENDERING_ASSERTION_1(stride == GetElementSize(), "格式步进值和顶点大小必须匹配。\n");
 
@@ -250,10 +258,10 @@ void Rendering::BufferImpl
 	const auto numAttributes = vertexformat->GetNumAttributes();
 	for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
     {
-		auto type = vertexformat->GetAttributeType(attributesIndex);
-		auto offset = vertexformat->GetOffset(attributesIndex);
-		auto componentSize = VertexFormat::GetComponentSize(type);
-		auto numComponents = VertexFormat::GetNumComponents(type);
+            const auto type = vertexformat->GetAttributeType(attributesIndex);
+        const auto offset = vertexformat->GetOffset(attributesIndex);
+            const auto componentSize = VertexFormat::GetComponentSize(type);
+        const auto numComponents = VertexFormat::GetNumComponents(type);
 
 		table[attributesIndex].Set(offset, componentSize, numComponents);
     }
@@ -300,3 +308,4 @@ void Rendering::BufferImpl
 	m_Data = newData;
 }
 
+#include STSTEM_WARNING_POP

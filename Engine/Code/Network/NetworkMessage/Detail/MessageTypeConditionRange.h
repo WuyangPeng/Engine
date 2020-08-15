@@ -21,14 +21,14 @@ namespace Network
 
 	public:
 		MessageTypeConditionRange(int beginVersion, int endVersion);
-		virtual ~MessageTypeConditionRange();
+		 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 	public:
-		virtual bool IsVersionsConform(int version) const override;
-		virtual int GetMinVersion() const override;
-		virtual int GetMaxVersion() const override;
+                bool IsVersionsConform(int version) const noexcept override;
+            int GetMinVersion() const noexcept override;
+                int GetMaxVersion() const noexcept override;
 
 	private:
 		int m_BeginVersion;

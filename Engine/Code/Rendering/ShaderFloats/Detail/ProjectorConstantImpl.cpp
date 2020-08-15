@@ -16,7 +16,10 @@
 
 using std::vector;
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26440)
 Rendering::ProjectorConstantImpl
 	::ProjectorConstantImpl(const ProjectorSmartPointer& projector)
 	:m_Projector{ projector }
@@ -44,8 +47,8 @@ const Rendering::ConstProjectorSmartPointer Rendering::ProjectorConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;	
 
-	if (m_Projector.IsValidPtr())
-		return m_Projector.PolymorphicCastConstObjectSmartPointer<ConstProjectorSmartPointer>();
+	if (m_Projector )
+		return m_Projector ;
 	else
 		return ConstProjectorSmartPointer{};
 }
@@ -54,16 +57,16 @@ void Rendering::ProjectorConstantImpl
 	::Load(BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ReadSmartPointer(m_Projector);
+    source;
+	//source.ReadSmartPointer(m_Projector);
 }
 
 void Rendering::ProjectorConstantImpl
 	::Save(BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.WriteSmartPointer(m_Projector);
+    target;
+	//target.WriteSmartPointer(m_Projector);
 }
 
 int Rendering::ProjectorConstantImpl
@@ -79,7 +82,7 @@ const CoreTools::ObjectSmartPointer Rendering::ProjectorConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	if (m_Projector.IsValidPtr())
+	if (m_Projector )
 		return m_Projector->GetObjectByName(name);
 	else
 		return CoreTools::ObjectSmartPointer{};
@@ -90,7 +93,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::ProjectorConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	if (m_Projector.IsValidPtr())
+	if (m_Projector )
 		return m_Projector->GetAllObjectsByName(name);
 	else
 		return vector<CoreTools::ObjectSmartPointer>{};
@@ -101,7 +104,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::ProjectorConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	if (m_Projector.IsValidPtr())
+	if (m_Projector )
 		return m_Projector->GetConstObjectByName(name);
 	else
 		return CoreTools::ConstObjectSmartPointer{};
@@ -112,7 +115,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::ProjectorConstantImp
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	if (m_Projector.IsValidPtr())
+	if (m_Projector )
 		return m_Projector->GetAllConstObjectsByName(name);
 	else
 		return vector<CoreTools::ConstObjectSmartPointer>{};
@@ -122,16 +125,17 @@ void Rendering::ProjectorConstantImpl
 	::Link( ObjectLink& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ResolveObjectSmartPointerLink(m_Projector);
+    source;
+	//source.ResolveObjectSmartPointerLink(m_Projector);
 }
 
 void Rendering::ProjectorConstantImpl
 	::Register( ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_Projector);
+    target;
+	//target.RegisterSmartPointer(m_Projector);
 }
 
 
+#include STSTEM_WARNING_POP

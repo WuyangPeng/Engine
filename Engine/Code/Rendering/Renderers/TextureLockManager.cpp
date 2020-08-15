@@ -8,15 +8,19 @@
 
 #include "TextureLockManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "CoreTools/Helper/ExceptionMacro.h" 
 template <>
 Rendering::TextureLockManager<Rendering::PlatformTexture1D>
 	::~TextureLockManager()
+{EXCEPTION_TRY
 {
-	if (m_Level != -1)
+if (m_Level != -1)
 	{		 
 		m_Manager.Unlock(m_Level);		 
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -25,10 +29,14 @@ template <>
 Rendering::TextureLockManager<Rendering::PlatformTexture2D>
 	::~TextureLockManager()
 {
-	if (m_Level != -1)
+	EXCEPTION_TRY
+{
+if (m_Level != -1)
 	{		 
 		m_Manager.Unlock(m_Level);		 
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -37,10 +45,14 @@ template <>
 Rendering::TextureLockManager<Rendering::PlatformTexture3D>
 	::~TextureLockManager()
 {
-	if (m_Level != -1)
+	EXCEPTION_TRY
+{
+if (m_Level != -1)
 	{		 
 		m_Manager.Unlock(m_Level);		 
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -48,11 +60,15 @@ Rendering::TextureLockManager<Rendering::PlatformTexture3D>
 template <>
 Rendering::TextureLockManager<Rendering::PlatformTextureCube>
 	::~TextureLockManager()
+{EXCEPTION_TRY
 {
-	if (m_Level != -1)
+if (m_Level != -1)
 	{		 
 		m_Manager.Unlock(m_Face, m_Level);		 
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

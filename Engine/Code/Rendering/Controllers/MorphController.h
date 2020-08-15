@@ -38,16 +38,18 @@ namespace Rendering
 		// numKeys:  键的数目，每个键发生在一个特定的时间。
 
 		MorphController(int numVertices, int numTargets, int numKeys);
-		virtual ~MorphController ();
+		  ~MorphController ();
+		  MorphController(MorphController&&) = default;
+		   MorphController& operator=(MorphController&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(MorphController); 
 
 		// 调用构造函数后，您必须使用这些函数设置顶点数组，时间和权重。
-		int GetNumVertices () const;
-		int GetNumTargets () const;
-		int GetNumKeys () const;
+		int GetNumVertices () const noexcept;
+		int GetNumTargets () const noexcept;
+		int GetNumKeys () const noexcept;
 		const APoint GetVertices(int target, int vertices) const;	 
 		float GetTimes(int key) const;
 		float GetWeights(int key, int target) const;
@@ -57,15 +59,15 @@ namespace Rendering
 		void SetWeights(int key, int target,float weights);
 
 		// 动画更新。应用程序时间以毫秒为单位。
-		virtual bool Update(double applicationTime) override;
-		virtual void SetObject(ControllerInterface* object) override;
-		virtual void SetObjectInCopy(ControllerInterface* object) override;
+		 bool Update(double applicationTime) override;
+		 void SetObject(ControllerInterface* object) override;
+		 void SetObjectInCopy(ControllerInterface* object) override;
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSmartPointer Clone() const override;
 
 	protected:
 		// 查找边界上的键。
-		const ControllerKeyInfo GetKeyInfo(float ctrlTime);
+		const ControllerKeyInfo GetKeyInfo(float ctrlTime) noexcept;
  
 	private:
 		IMPL_TYPE_DECLARE(MorphController);

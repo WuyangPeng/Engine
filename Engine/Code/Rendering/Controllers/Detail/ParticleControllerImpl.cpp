@@ -17,7 +17,9 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 Rendering::ParticleControllerImpl
 	::ParticleControllerImpl(int numParticles)
 	:m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ AVector::sm_UnitZ }, m_SystemAngularAxis{ AVector::sm_UnitZ }, m_SystemSizeChange{ 0.0f },
@@ -27,7 +29,7 @@ Rendering::ParticleControllerImpl
 }
 
 Rendering::ParticleControllerImpl
-	::ParticleControllerImpl()
+	::ParticleControllerImpl() noexcept
 	:m_SystemLinearSpeed{ 0.0f },m_SystemAngularSpeed{ 0.0f },m_SystemLinearAxis{ AVector::sm_UnitZ },m_SystemAngularAxis{ AVector::sm_UnitZ },m_SystemSizeChange{ 0.0f },
 	 m_NumParticles{ 0 },m_ParticleLinearSpeed{},m_ParticleLinearAxis{},m_ParticleSizeChange{}
 {
@@ -46,88 +48,77 @@ bool Rendering::ParticleControllerImpl
 #endif // OPEN_CLASS_INVARIANT	
 
 
-int Rendering::ParticleControllerImpl
-	::GetNumParticles() const 
+int Rendering::ParticleControllerImpl ::GetNumParticles() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumParticles;
 }
 
-float Rendering::ParticleControllerImpl
-	::GetSystemLinearSpeed() const 
+float Rendering::ParticleControllerImpl ::GetSystemLinearSpeed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemLinearSpeed;
 }
 
-void Rendering::ParticleControllerImpl
-	::SetSystemLinearSpeed(float systemLinearSpeed) 
+void Rendering::ParticleControllerImpl ::SetSystemLinearSpeed(float systemLinearSpeed) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemLinearSpeed = systemLinearSpeed;
 }
 
-float Rendering::ParticleControllerImpl
-	::GetSystemAngularSpeed() const 
+float Rendering::ParticleControllerImpl ::GetSystemAngularSpeed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemAngularSpeed;
 }
 
-void Rendering::ParticleControllerImpl
-	::SetSystemAngularSpeed(float systemAngularSpeed)
+void Rendering::ParticleControllerImpl ::SetSystemAngularSpeed(float systemAngularSpeed) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemAngularSpeed = systemAngularSpeed;
 }
 
-const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl
-	::GetSystemLinearAxis() const 
+const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl ::GetSystemLinearAxis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemLinearAxis;
 }
 
-void Rendering::ParticleControllerImpl
-	::SetSystemLinearAxis(const AVector& systemLinearAxis) 
+void Rendering::ParticleControllerImpl ::SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemLinearAxis = systemLinearAxis;
 }
 
-const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl
-	::GetSystemAngularAxis() const 
+const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl ::GetSystemAngularAxis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemAngularAxis;
 }
 
-void Rendering::ParticleControllerImpl
-	::SetSystemAngularAxis(const AVector& systemAngularAxis)
+void Rendering::ParticleControllerImpl ::SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemAngularAxis = systemAngularAxis;
 }
 
-float Rendering::ParticleControllerImpl
-	::GetSystemSizeChange() const 
+float Rendering::ParticleControllerImpl ::GetSystemSizeChange() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemSizeChange;
 }
 
-void Rendering::ParticleControllerImpl
-	::SetSystemSizeChange(float systemSizeChange) 
+void Rendering::ParticleControllerImpl ::SetSystemSizeChange(float systemSizeChange) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -248,3 +239,4 @@ void Rendering::ParticleControllerImpl
 
 
 
+#include STSTEM_WARNING_POP

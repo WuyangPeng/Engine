@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename T>
 CoreTools::SmartPointer1DArray<T>
@@ -28,13 +29,17 @@ CoreTools::SmartPointer1DArray<T>
 	::~SmartPointer1DArray()
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    EXCEPTION_TRY
+    {
+        const auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
 
-	auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
-
-	if (reference == 0)
-	{
-		DELETE1(m_Data);
-	}
+        if (reference == 0)
+        {
+            DELETE1(m_Data);
+        }
+    }
+    EXCEPTION_ALL_CATCH(CoreTools)		
+	
 }
 
 template <typename T>

@@ -25,13 +25,13 @@ namespace Rendering
         
     public:
         OpenGLRenderTarget (Renderer* renderer,const RenderTarget* renderTarget);
-        virtual ~OpenGLRenderTarget();
+ 
         
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-        virtual void Enable (Renderer* renderer) override;
-		virtual void Disable (Renderer* renderer) override;
-        virtual ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer) override;
+          void Enable (Renderer* renderer) noexcept override;
+		  void Disable (Renderer* renderer) noexcept override;
+          ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer) override;
    
     private:
         OpenGLRenderTargetData m_OpenGLRenderTargetData;

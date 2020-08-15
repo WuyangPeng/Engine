@@ -41,7 +41,7 @@ void Rendering::VertexFormatManagementImpl
 		auto ptr = m_Renderer.lock();
 		if (ptr)
 		{
-			PlatformVertexFormatSharedPtr platformVertexForma{ make_shared<PlatformVertexFormat>(ptr.get(),vertexFormat.GetData()) };
+			PlatformVertexFormatSharedPtr platformVertexForma{ make_shared<PlatformVertexFormat>(ptr.get(),vertexFormat.get()) };
 			m_VertexFormats.insert({ vertexFormat, platformVertexForma });
 		}		
     }
@@ -60,7 +60,7 @@ void Rendering::VertexFormatManagementImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-    auto iter = m_VertexFormats.find(vertexFormat);
+   const auto iter = m_VertexFormats.find(vertexFormat);
     PlatformVertexFormatSharedPtr platformVertexFormat;
     if (iter != m_VertexFormats.end())
     {
@@ -72,7 +72,7 @@ void Rendering::VertexFormatManagementImpl
 		auto ptr = m_Renderer.lock();
 		if (ptr)
 		{
-			platformVertexFormat = make_shared<PlatformVertexFormat>(ptr.get(), vertexFormat.GetData());
+			platformVertexFormat = make_shared<PlatformVertexFormat>(ptr.get(), vertexFormat.get());
 			m_VertexFormats.insert({ vertexFormat, platformVertexFormat });
 		}
     }
@@ -89,7 +89,7 @@ void Rendering::VertexFormatManagementImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_VertexFormats.find(vertexFormat);
+	const auto iter = m_VertexFormats.find(vertexFormat);
  
     if (iter != m_VertexFormats.end())
     {
@@ -108,14 +108,14 @@ Rendering::VertexFormatManagementImpl::PlatformVertexFormatSharedPtr Rendering::
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_VertexFormats.find(vertexFormat);
+const	auto iter = m_VertexFormats.find(vertexFormat);
     if (iter != m_VertexFormats.end())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的顶点格式资源！"));
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的顶点格式资源！"s));
     }
 }
 

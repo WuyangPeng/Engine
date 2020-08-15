@@ -25,16 +25,18 @@ namespace Rendering
 
 	public:
 		explicit LightConstant(const LightSmartPointer& light);
-		virtual ~LightConstant();
+            ~LightConstant() = default;
+                LightConstant(LightConstant&&) noexcept = default;
+            LightConstant& operator=(LightConstant&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(LightConstant);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-		virtual void Update(const Visual* visual, const Camera* camera) = 0;
+		  void Update(const Visual* visual, const Camera* camera) = 0;
 
-		virtual void SetNumRegisters(int numRegisters) override;
+		  void SetNumRegisters(int numRegisters) override;
 
 		const ConstLightSmartPointer GetLight() const;
 

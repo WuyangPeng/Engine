@@ -9,9 +9,9 @@
 #include "Dx9IndexBuffer.h"
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 Rendering::Dx9IndexBuffer
-	::Dx9IndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer)
+	::Dx9IndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer) noexcept
 	:ParentType{}
 {
 	SYSTEM_UNUSED_ARG(indexBuffer);
@@ -20,11 +20,7 @@ Rendering::Dx9IndexBuffer
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Dx9IndexBuffer
-	::~Dx9IndexBuffer()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::Dx9IndexBuffer
@@ -43,6 +39,8 @@ void Rendering::Dx9IndexBuffer
 	RENDERING_CLASS_IS_VALID_1;
 
 	SYSTEM_UNUSED_ARG(renderer);
+	
+	CoreTools::DoNothing();
 }
 
 void Rendering::Dx9IndexBuffer
@@ -51,6 +49,8 @@ void Rendering::Dx9IndexBuffer
 	RENDERING_CLASS_IS_VALID_1;
 
 	SYSTEM_UNUSED_ARG(renderer);
+	
+	CoreTools::DoNothing();
 }
 
 void* Rendering::Dx9IndexBuffer
@@ -59,6 +59,8 @@ void* Rendering::Dx9IndexBuffer
 	RENDERING_CLASS_IS_VALID_1;
 
 	SYSTEM_UNUSED_ARG(mode);
+	
+	CoreTools::DoNothing();
 
 	return nullptr;
 }
@@ -67,4 +69,6 @@ void Rendering::Dx9IndexBuffer
 	::Unlock() 
 {
 	RENDERING_CLASS_IS_VALID_1;
+	
+	CoreTools::DoNothing();
 }

@@ -29,8 +29,7 @@ namespace Rendering
 		using RendererTypes = Rendering::RendererTypes;
 
 	public:
-		RendererInputDataImpl();
-		~RendererInputDataImpl();
+		RendererInputDataImpl(); 
 	
 		CLASS_INVARIANT_DECLARE;
 

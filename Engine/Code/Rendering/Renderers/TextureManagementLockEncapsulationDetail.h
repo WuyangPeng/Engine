@@ -18,10 +18,12 @@
 #include "Rendering/OpenGLRenderer/TextureDataTraits.h"
 #include "Rendering/Resources/Flags/TextureFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 template <typename TextureManagementType>
 Rendering::TextureManagementLockEncapsulation<TextureManagementType>
-	::TextureManagementLockEncapsulation(TextureManagementType& manager)
+	::TextureManagementLockEncapsulation(TextureManagementType& manager) noexcept
 	:m_Manager{ manager }, m_Texture{ nullptr }, m_Level{ -1 }, m_Face{ -1 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -84,5 +86,5 @@ void* Rendering::TextureManagementLockEncapsulation<TextureManagementType>
 
 	return videoMemory;	
 }
- 
+ #include STSTEM_WARNING_POP
 #endif // RENDERING_RENDERERS_TEXTURE_MANAGEMENT_LOCK_ENCAPSULATION_DETAIL_H

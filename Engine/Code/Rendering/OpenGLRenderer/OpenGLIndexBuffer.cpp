@@ -13,7 +13,11 @@
 #include "Rendering/Resources/IndexBuffer.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 Rendering::OpenGLIndexBuffer
     ::OpenGLIndexBuffer (Renderer* renderer,const IndexBuffer* indexBuffer)
 	:ParentType{}, m_Buffer{ 0 }
@@ -57,7 +61,7 @@ bool Rendering::OpenGLIndexBuffer
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::OpenGLIndexBuffer
-    ::Enable (Renderer* renderer)
+    ::Enable (Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -67,7 +71,7 @@ void Rendering::OpenGLIndexBuffer
 }
 
 void Rendering::OpenGLIndexBuffer
-    ::Disable (Renderer* renderer)
+    ::Disable (Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -77,7 +81,7 @@ void Rendering::OpenGLIndexBuffer
 }
 
 void* Rendering::OpenGLIndexBuffer
-    ::Lock (BufferLocking mode)
+    ::Lock (BufferLocking mode) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -87,7 +91,7 @@ void* Rendering::OpenGLIndexBuffer
 }
 
 void Rendering::OpenGLIndexBuffer
-    ::Unlock ()
+    ::Unlock () noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -96,3 +100,4 @@ void Rendering::OpenGLIndexBuffer
 
 
 
+#include STSTEM_WARNING_POP

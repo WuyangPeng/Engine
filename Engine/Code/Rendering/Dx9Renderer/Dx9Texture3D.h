@@ -25,15 +25,19 @@ namespace Rendering
 
 	public:		
 		Dx9Texture3D(Renderer* renderer, const Texture3D* texture);
-		virtual ~Dx9Texture3D();
+            ~Dx9Texture3D();
+                Dx9Texture3D(const Dx9Texture3D&) = default;
+            Dx9Texture3D& operator=(const Dx9Texture3D&) = default;
+                Dx9Texture3D(Dx9Texture3D&&) = default;
+            Dx9Texture3D& operator=(Dx9Texture3D&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		// ÎÆÀí²Ù×÷
-		virtual void Enable (Renderer* renderer, int textureUnit) override;
-		virtual void Disable (Renderer* renderer, int textureUnit) override;
-		virtual void* Lock (int level, BufferLocking mode) override;
-		virtual void Unlock (int level) override;
+		 void Enable (Renderer* renderer, int textureUnit) override;
+		 void Disable (Renderer* renderer, int textureUnit) override;
+		 void* Lock (int level, BufferLocking mode) override;
+		 void Unlock (int level) override;
 
 	private:
 		//IDirect3DVolumeTexture9* mTexture;

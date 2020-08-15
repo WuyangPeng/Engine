@@ -9,6 +9,9 @@
 #include "OpenGLRenderer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "../Flags/RendererTypes.h"
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
 #include "System/Helper/PragmaWarning/Disable4100.h"
 Rendering::OpenGLRenderer
 	::OpenGLRenderer(const RendererBasis& basis)
@@ -154,3 +157,4 @@ void Rendering::OpenGLRenderer::ClearColorBuffer(int x, int y, int w, int h)
 {
 	x; y; w; h;
 }
+#include STSTEM_WARNING_POP

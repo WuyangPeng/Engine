@@ -17,7 +17,11 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include <vector>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26446)
 using std::vector;
 
 int Rendering::TextureImpl
@@ -129,7 +133,7 @@ Rendering::TextureImpl
 CLASS_INVARIANT_STUB_DEFINE(Rendering,TextureImpl)
 
 Rendering::TextureFormat Rendering::TextureImpl
-    ::GetFormat () const
+    ::GetFormat () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -137,7 +141,7 @@ Rendering::TextureFormat Rendering::TextureImpl
 }
 
 Rendering::TextureFlags Rendering::TextureImpl
-    ::GetTextureType () const
+    ::GetTextureType () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -145,7 +149,7 @@ Rendering::TextureFlags Rendering::TextureImpl
 }
 
 Rendering::BufferUsage Rendering::TextureImpl
-    ::GetUsage () const
+    ::GetUsage () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -153,7 +157,7 @@ Rendering::BufferUsage Rendering::TextureImpl
 }
 
 int Rendering::TextureImpl
-    ::GetNumLevels () const
+    ::GetNumLevels () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -165,7 +169,7 @@ int Rendering::TextureImpl
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
-    auto format = GetFormat();
+  const auto format = GetFormat();
     
     return GetPixelSize(format);
 }
@@ -180,12 +184,12 @@ int Rendering::TextureImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引越界。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界。\n"s));
 	}
 }
 
 bool Rendering::TextureImpl
-    ::IsCompressed () const
+    ::IsCompressed () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -197,7 +201,7 @@ bool Rendering::TextureImpl
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
-	auto format = GetFormat();
+const	auto format = GetFormat();
 
 	if (TextureFormat::First <= format && format < TextureFormat::Quantity)
 	{
@@ -205,7 +209,7 @@ bool Rendering::TextureImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引越界。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界。\n"s));
 	}  
 }
 
@@ -285,7 +289,7 @@ int Rendering::TextureImpl
 
 // protected
 void Rendering::TextureImpl
-    ::SetNumLevels(int numLevels)
+    ::SetNumLevels(int numLevels) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -302,7 +306,7 @@ int Rendering::TextureImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引越界。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界。\n"s));
 	}
 }
 
@@ -328,7 +332,7 @@ void Rendering::TextureImpl
 
 	m_TextureUserField.ReadFromFile(inFile);
 
-	auto numTotalBytes = GetNumTotalBytes();
+const	auto numTotalBytes = GetNumTotalBytes();
 	m_Data.Reset(numTotalBytes);
 	m_Data.ReadFromFile(inFile);
 }
@@ -336,16 +340,16 @@ void Rendering::TextureImpl
 void Rendering::TextureImpl
     ::ExpandFileBufferSize()
 {
-	auto numTotalBytes = GetNumTotalBytes();
-	auto numLevel0Bytes = GetNumLevelBytes(0);
+const	auto numTotalBytes = GetNumTotalBytes();
+	const auto numLevel0Bytes = GetNumLevelBytes(0);
 	m_Data.ExpandFileBufferSize(numTotalBytes, numLevel0Bytes);
 }
 
 void Rendering::TextureImpl
     ::ExpandFileBufferSizeOnCube()
 {
-	auto numTotalBytes = GetNumTotalBytes();
-	auto numLevel0Bytes = GetNumLevelBytes(0);
+	const auto numTotalBytes = GetNumTotalBytes();
+	const auto numLevel0Bytes = GetNumLevelBytes(0);
 	m_Data.ExpandFileBufferSizeOnCube(numTotalBytes, numLevel0Bytes);
 }
 
@@ -369,8 +373,8 @@ bool Rendering::TextureImpl
 void Rendering::TextureImpl
 	::RecomputationLevelBytes()
 {
-	auto maxLevels = GetMaxLevels();
-	auto numLevels = GetNumLevels();
+const	auto maxLevels = GetMaxLevels();
+const	auto numLevels = GetNumLevels();
 	if (numLevels != maxLevels)
 	{
 		SetNumLevels(maxLevels);
@@ -390,7 +394,7 @@ int Rendering::TextureImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("无效的纹理格式。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("无效的纹理格式。\n"s));
 	}	
 }
 
@@ -398,7 +402,8 @@ int Rendering::TextureImpl
 void Rendering::TextureImpl
 	::ResetTextureBufferNum()
 {
-	auto numTotalBytes = GetNumTotalBytes();
+const	auto numTotalBytes = GetNumTotalBytes();
 	m_Data.Reset(numTotalBytes);
 }
 
+#include STSTEM_WARNING_POP

@@ -26,12 +26,12 @@ namespace Mathematics
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		// 发生在动态查询其最小距离的时间。
-		virtual Real GetContactTime() const override;
-		virtual void SetContactTime(Real contactTime) override;
+		  Real GetContactTime() const override;
+		  void SetContactTime(Real contactTime) override;
 
-		virtual ImplTypePtr Clone() const override;
+		  ImplTypePtr Clone() const override;
 
-		virtual bool isHaveContactTime() const override;
+		  bool isHaveContactTime() const override;
 
 	private:
 		Real m_ContactTime;

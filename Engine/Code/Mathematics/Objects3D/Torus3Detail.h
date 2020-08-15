@@ -15,10 +15,11 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 template <typename Real>
 Mathematics::Torus3<Real>
-	::Torus3(Real outerRadius, Real innerRadius)
+	::Torus3(Real outerRadius, Real innerRadius) noexcept
 	:m_OuterRadius{ outerRadius }, m_InnerRadius{ innerRadius }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -38,7 +39,7 @@ bool Mathematics::Torus3<Real>
 
 template <typename Real>
 Real Mathematics::Torus3<Real>
-	::GetOuterRadius() const
+	::GetOuterRadius() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -47,7 +48,7 @@ Real Mathematics::Torus3<Real>
 
 template <typename Real>
 Real Mathematics::Torus3<Real>
-	::GetInnerRadius() const
+	::GetInnerRadius() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -60,6 +61,8 @@ typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= s && s <= static_cast<Real>(1) && Math::sm_Zero <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
+
+	CoreTools::DoNothing();
 
 	auto twoPiS = Math::sm_TwoPI * s;
 	auto twoPiT = Math::sm_TwoPI * t;
@@ -82,7 +85,7 @@ typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
 	auto twoPiS = Math::sm_TwoPI * s;
 	auto cosTwoPiS = Math::Cos(twoPiS);
 	auto sinTwoPiS = Math::Sin(twoPiS);
-	auto position = GetPosition(s, t);
+	const auto position = GetPosition(s, t);
 
 	Vector3D normal{ position.GetXCoordinate() - m_OuterRadius * cosTwoPiS,
 					 position.GetYCoordinate() - m_OuterRadius * sinTwoPiS,

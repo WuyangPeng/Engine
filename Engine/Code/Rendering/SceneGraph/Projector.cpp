@@ -13,7 +13,12 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Projector);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Projector);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Projector);
@@ -28,11 +33,7 @@ Rendering::Projector
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Projector
-    ::~Projector ()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Projector)
  
@@ -130,4 +131,4 @@ const Rendering::Projector::Matrix Rendering::Projector
 	return s_BiasScaleMatrix[index];
 }
 
- 
+ #include STSTEM_WARNING_POP

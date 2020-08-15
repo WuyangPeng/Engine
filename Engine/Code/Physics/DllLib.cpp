@@ -32,7 +32,7 @@
 
 	namespace Physics
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

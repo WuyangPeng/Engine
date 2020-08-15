@@ -12,14 +12,15 @@
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::APointf Rendering::VertexBufferAccessor
-	::GetPosition(int index) const;
+RENDERING_DEFAULT_DECLARE Mathematics::APointf Rendering::VertexBufferAccessor ::GetPosition(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor
-	::GetPosition(int index) const
+	::GetPosition(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -27,12 +28,10 @@ T Rendering::VertexBufferAccessor
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor
-	::GetNormal(int index) const;
+RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept;
 
 template <typename T>
-T Rendering::VertexBufferAccessor
-	::GetNormal(int index) const
+T Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -40,12 +39,10 @@ T Rendering::VertexBufferAccessor
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor
-	::GetTangent(int index) const;
+RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept;
 
 template <typename T>
-T Rendering::VertexBufferAccessor
-	::GetTangent(int index) const 
+T Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -53,12 +50,10 @@ T Rendering::VertexBufferAccessor
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor
-	::GetBinormal(int index) const;
+RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept;
 
 template <typename T>
-T Rendering::VertexBufferAccessor
-	::GetBinormal(int index) const 
+T Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -104,5 +99,5 @@ T Rendering::VertexBufferAccessor
 
 	return *(reinterpret_cast<const T*>(GetBlendWeight(index)));
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_VERTEX_BUFFER_ACCESSOR_DETAIL_H

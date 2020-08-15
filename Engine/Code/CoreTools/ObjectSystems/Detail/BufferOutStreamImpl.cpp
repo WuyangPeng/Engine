@@ -18,6 +18,9 @@
 using std::string;
 using std::make_pair;
 using std::make_shared;
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 
 CoreTools::BufferOutStreamImpl
 	::BufferOutStreamImpl(const OutTopLevel& topLevel)
@@ -123,3 +126,4 @@ CoreTools::BufferOutStreamImpl::FileBufferPtr CoreTools::BufferOutStreamImpl
 	return m_BufferPtr;
 }
 
+#include STSTEM_WARNING_POP

@@ -20,7 +20,10 @@
 
 using std::string;
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::VisualData
 	::VisualData(VisualPrimitiveType type)
 	:m_Type{ type }, m_VertexFormat{}, m_VertexBuffer{}, m_IndexBuffer{}
@@ -58,7 +61,7 @@ Rendering::ConstVertexFormatSmartPointer
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_VertexFormat.GetConstSmartPointer();
+	return m_VertexFormat;
 }
 
 const char* Rendering::VisualData
@@ -74,16 +77,16 @@ int Rendering::VisualData
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto positionIndex = m_VertexFormat->GetIndex(VertexFormatFlags::AttributeUsage::Position);
+const	auto positionIndex = m_VertexFormat->GetIndex(VertexFormatFlags::AttributeUsage::Position);
 	if (positionIndex == -1)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("更新需要顶点位置\n"));	
+		THROW_EXCEPTION(SYSTEM_TEXT("更新需要顶点位置\n"s));	
 	}
 
-	auto positionType = m_VertexFormat->GetAttributeType(positionIndex);
+const auto positionType = m_VertexFormat->GetAttributeType(positionIndex);
 	if (positionType != VertexFormatFlags::AttributeType::Float3 && positionType != VertexFormatFlags::AttributeType::Float4)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("顶点必须是3元组或4元组\n"));		 
+		THROW_EXCEPTION(SYSTEM_TEXT("顶点必须是3元组或4元组\n"s));		 
 	}
  
 	return m_VertexFormat->GetOffset(positionIndex);
@@ -110,7 +113,7 @@ bool Rendering::VisualData
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	if (!(m_VertexBuffer.IsNullPtr() || m_VertexFormat.IsNullPtr()))
+	if (!(!m_VertexBuffer || !m_VertexFormat ))
 	{
 		return true;
 	}
@@ -142,7 +145,7 @@ Rendering::ConstIndexBufferSmartPointer Rendering::VisualData
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_IndexBuffer.GetConstSmartPointer();
+	return m_IndexBuffer;
 }
 
 void Rendering::VisualData
@@ -158,7 +161,7 @@ Rendering::ConstVertexBufferSmartPointer Rendering::VisualData
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_VertexBuffer.GetConstSmartPointer();
+	return m_VertexBuffer;
 
 }
 
@@ -192,9 +195,9 @@ void Rendering::VisualData
 	RENDERING_CLASS_IS_VALID_9;
 
 	source.ReadEnum(m_Type);
-	source.ReadSmartPointer(m_VertexFormat);
-	source.ReadSmartPointer(m_VertexBuffer);
-	source.ReadSmartPointer(m_IndexBuffer);	
+	//source.ReadSmartPointer(m_VertexFormat);
+	//source.ReadSmartPointer(m_VertexBuffer);
+	//source.ReadSmartPointer(m_IndexBuffer);	
 }
 
 void Rendering::VisualData
@@ -203,9 +206,9 @@ void Rendering::VisualData
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	target.WriteEnum(m_Type);
-	target.WriteSmartPointer(m_VertexFormat);
-	target.WriteSmartPointer(m_VertexBuffer);
-	target.WriteSmartPointer(m_IndexBuffer);	
+	//target.WriteSmartPointer(m_VertexFormat);
+	//target.WriteSmartPointer(m_VertexBuffer);
+	//target.WriteSmartPointer(m_IndexBuffer);	
 }
 
 int Rendering::VisualData
@@ -226,10 +229,10 @@ void Rendering::VisualData
 	::Register(ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_VertexFormat);
-	target.RegisterSmartPointer(m_VertexBuffer);
-	target.RegisterSmartPointer(m_IndexBuffer);
+    target;
+	//target.RegisterSmartPointer(m_VertexFormat);
+	//target.RegisterSmartPointer(m_VertexBuffer);
+	//target.RegisterSmartPointer(m_IndexBuffer);
 }
 
 
@@ -237,10 +240,10 @@ void Rendering::VisualData
 	::Link(ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	
-
-	source.ResolveObjectSmartPointerLink(m_VertexFormat);
-	source.ResolveObjectSmartPointerLink(m_VertexBuffer);
-	source.ResolveObjectSmartPointerLink(m_IndexBuffer);	
+	source;
+	//source.ResolveObjectSmartPointerLink(m_VertexFormat);
+	//source.ResolveObjectSmartPointerLink(m_VertexBuffer);
+	//source.ResolveObjectSmartPointerLink(m_IndexBuffer);	
 }
 
 
@@ -323,3 +326,4 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualData
 
 	return entirelyObjects;
 }
+#include STSTEM_WARNING_POP

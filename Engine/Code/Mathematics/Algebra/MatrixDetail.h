@@ -6,7 +6,15 @@
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26426)
 #include "Matrix.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -22,6 +30,8 @@
 #include "AVector.h"
 #include "AlgebraTraits.h"
 
+
+
 template <typename Real>
 const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 	::sm_Zero{ MatrixTypeFlags::Zero };
@@ -32,7 +42,7 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>
-	::Matrix(const Matrix& rhs)
+	::Matrix(const Matrix& rhs) noexcept
 	:m_Entry{}
 {
 	memcpy(m_Entry, rhs.m_Entry, 16 * sizeof(Real));
@@ -67,7 +77,7 @@ Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>
-	::Matrix(MatrixTypeFlags flag)
+	::Matrix(MatrixTypeFlags flag) noexcept
 	:m_Entry{}
 {
 	if (flag == MatrixTypeFlags::Identity)
@@ -87,7 +97,7 @@ Mathematics::Matrix<Real>
 	::Matrix(Real member00, Real member01, Real member02, Real member03,
 			 Real member10, Real member11, Real member12, Real member13,
 			 Real member20, Real member21, Real member22, Real member23,
-			 Real member30, Real member31, Real member32, Real member33)
+			 Real member30, Real member31, Real member32, Real member33) noexcept
 {
 	m_Entry[0] = member00;
 	m_Entry[1] = member01;
@@ -251,7 +261,7 @@ Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>
-	::Matrix(Real member00, Real member11, Real member22)
+	::Matrix(Real member00, Real member11, Real member22) noexcept
 	:m_Entry{}
 {
 	MakeDiagonal(member00, member11, member22);
@@ -271,13 +281,23 @@ Mathematics::Matrix<Real>
 
 template <typename Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator=(const Matrix& rhs)
+	::operator=(const Matrix& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	memcpy(m_Entry, rhs.m_Entry, 16 * sizeof(Real));
 
 	return *this;
+}
+
+template <typename Real>
+Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator=(Matrix&& rhs) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    memcpy(m_Entry, rhs.m_Entry, 16 * sizeof(Real));
+
+    return *this;
 }
 
 template <typename Real>
@@ -318,7 +338,7 @@ bool Mathematics::Matrix<Real>
 template <typename Real>
 typename const Mathematics::Matrix<Real>::Matrix3
 Mathematics::Matrix<Real>
-	::GetMatrix3() const
+	::GetMatrix3() const noexcept
 {
 	CLASS_IS_VALID;
 
@@ -380,7 +400,7 @@ void Mathematics::Matrix<Real>
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
 }
 
@@ -396,7 +416,7 @@ typename const Mathematics::Matrix<Real>::HomogeneousPoint Mathematics::Matrix<R
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
 }
 
@@ -453,7 +473,7 @@ const std::vector<Real> Mathematics::Matrix<Real>
 
 template <typename Real>
 const  Mathematics::Matrix<Real> Mathematics::Matrix<Real>
-	::operator-() const
+	::operator-() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -464,8 +484,7 @@ const  Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator+=(const Matrix& rhs)
+Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator+=(const Matrix& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -478,8 +497,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator-=(const Matrix& rhs)
+Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator-=(const Matrix& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -491,8 +509,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator*=(Real scalar)
+Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator*=(Real scalar) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -505,8 +522,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
-	::operator/=(Real scalar)
+Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator/=(Real scalar) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -530,7 +546,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::MakeZero()
+	::MakeZero() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -539,7 +555,7 @@ void Mathematics::Matrix<Real>
 
 template <typename Real>
 void Mathematics::Matrix<Real>
-	::MakeIdentity()
+	::MakeIdentity() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -562,8 +578,7 @@ void Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-void Mathematics::Matrix<Real>
-	::MakeDiagonal(Real member00, Real member11, Real member22)
+void Mathematics::Matrix<Real>::MakeDiagonal(Real member00, Real member11, Real member22) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -630,8 +645,7 @@ void Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
-	::Transpose() const
+const Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Transpose() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -642,10 +656,11 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
-	::Inverse(const Real epsilon) const
+const Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Inverse(const Real epsilon) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+	CoreTools::DoNothing();
 
 	auto a0 = m_Entry[0] * m_Entry[5] - m_Entry[1] * m_Entry[4];
 	auto a1 = m_Entry[0] * m_Entry[6] - m_Entry[2] * m_Entry[4];
@@ -743,8 +758,7 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
-	::Adjoint() const
+const Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Adjoint() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -780,8 +794,7 @@ const Mathematics::Matrix<Real> Mathematics::Matrix<Real>
 }
 
 template <typename Real>
-Real Mathematics::Matrix<Real>
-	::Determinant() const
+Real Mathematics::Matrix<Real>::Determinant() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1024,6 +1037,8 @@ void Mathematics::Matrix<Real>
 	m_Entry[15] = Math::sm_One;
 }
 
+
+
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_MATRIX_DETAIL)
 
 template <typename Real>
@@ -1254,6 +1269,6 @@ std::ostream& Mathematics
 
 	return outFile;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
 

@@ -8,7 +8,9 @@
 
 #include "GradientAnisotropic2.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 Imagics::GradientAnisotropic2
 	::GradientAnisotropic2 (int xBound, int yBound,  float xSpacing, float ySpacing, const float* data, const bool* mask, float borderValue, ScaleType scaleType, float K)
     : PdeFilter2(xBound, yBound, xSpacing, ySpacing, data, mask, borderValue, scaleType)
@@ -17,32 +19,29 @@ Imagics::GradientAnisotropic2
     ComputeParam();
 }
 
-Imagics::GradientAnisotropic2
-	::~GradientAnisotropic2 ()
-{
-}
+ 
 
 void Imagics::GradientAnisotropic2
-	::ComputeParam ()
+	::ComputeParam () noexcept
 {
     float gradMagSqr = 0.0f;
     for (int y = 1; y <= mYBound; ++y)
     {
         for (int x = 1; x <= mXBound; ++x)
         {
-            float ux = GetUx(x, y);
-            float uy = GetUy(x, y);
+            const float ux = GetUx(x, y);
+            const float uy = GetUy(x, y);
             gradMagSqr += ux*ux + uy*uy;
         }
     }
-    gradMagSqr /= (float)mQuantity;
+    gradMagSqr /= static_cast<float>(mQuantity);
 
     mParam = 1.0f/(mK*mK*gradMagSqr);
     mMHalfParam = -0.5f*mParam;
 }
 
 void Imagics::GradientAnisotropic2
-	::OnPreUpdate ()
+	::OnPreUpdate () noexcept
 {
     ComputeParam();
 }
@@ -59,37 +58,38 @@ void Imagics::GradientAnisotropic2
     float uyBwd = mInvDy*(mUzz - mUzm);
 
     // centered U-derivative estimates
-    float uxCenM = mHalfInvDx*(mUpm - mUmm);
-    float uxCenZ = mHalfInvDx*(mUpz - mUmz);
-    float uxCenP = mHalfInvDx*(mUpp - mUmp);
-    float uyCenM = mHalfInvDy*(mUmp - mUmm);
-    float uyCenZ = mHalfInvDy*(mUzp - mUzm);
-    float uyCenP = mHalfInvDy*(mUpp - mUpm);
+   const float uxCenM = mHalfInvDx*(mUpm - mUmm);
+    const float uxCenZ = mHalfInvDx*(mUpz - mUmz);
+   const float uxCenP = mHalfInvDx*(mUpp - mUmp);
+   const float uyCenM = mHalfInvDy*(mUmp - mUmm);
+   const float uyCenZ = mHalfInvDy*(mUzp - mUzm);
+   const float uyCenP = mHalfInvDy*(mUpp - mUpm);
 
-    float uxCenZSqr = uxCenZ*uxCenZ;
-    float uyCenZSqr = uyCenZ*uyCenZ;
-    float gradMagSqr;
+  const  float uxCenZSqr = uxCenZ*uxCenZ;
+  const  float uyCenZSqr = uyCenZ*uyCenZ;
+    float gradMagSqr = 0.0f;
 
     // estimate for C(x+1,y)
-    float uyEstP = 0.5f*(uyCenZ + uyCenP);
+  const  float uyEstP = 0.5f*(uyCenZ + uyCenP);
     gradMagSqr = uxCenZSqr + uyEstP*uyEstP;
     float cxp = Mathematics::Mathf::Exp(mMHalfParam*gradMagSqr);
 
     // estimate for C(x-1,y)
-    float uyEstM = 0.5f*(uyCenZ + uyCenM);
+ const   float uyEstM = 0.5f*(uyCenZ + uyCenM);
     gradMagSqr = uxCenZSqr + uyEstM*uyEstM;
     float cxm = Mathematics::Mathf::Exp(mMHalfParam*gradMagSqr);
 
     // estimate for C(x,y+1)
-    float uxEstP = 0.5f*(uxCenZ + uxCenP);
+ const   float uxEstP = 0.5f*(uxCenZ + uxCenP);
     gradMagSqr = uyCenZSqr + uxEstP*uxEstP;
     float cyp = Mathematics::Mathf::Exp(mMHalfParam*gradMagSqr);
 
     // estimate for C(x,y-1)
-    float uxEstM = 0.5f*(uxCenZ + uxCenM);
+  const  float uxEstM = 0.5f*(uxCenZ + uxCenM);
     gradMagSqr = uyCenZSqr + uxEstM*uxEstM;
     float cym = Mathematics::Mathf::Exp(mMHalfParam*gradMagSqr);
 
     mDst[y][x] = mUzz + mTimeStep*(cxp*uxFwd - cxm*uxBwd + cyp*uyFwd - cym*uyBwd);
 }
 
+#include STSTEM_WARNING_POP

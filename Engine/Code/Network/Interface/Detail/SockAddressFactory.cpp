@@ -20,7 +20,7 @@ using std::string;
 using std::make_shared;
 
 Network::SockAddressFactory
-	::SockAddressFactory()
+	::SockAddressFactory() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -31,7 +31,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, SockAddressFactory)
 const Network::SockAddressFactory::ImplTypePtr Network::SockAddressFactory
 	::Create(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
 {
-	auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
+	const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategyFlag)
 	{
@@ -55,7 +55,7 @@ const Network::SockAddressFactory::ImplTypePtr Network::SockAddressFactory
 const Network::SockAddressFactory::ImplTypePtr Network::SockAddressFactory
 	::Create(const ConfigurationStrategy& configurationStrategy)
 {
-	auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
+    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategyFlag)
 	{
@@ -79,7 +79,7 @@ const Network::SockAddressFactory::ImplTypePtr Network::SockAddressFactory
 const Network::SockAddressFactory::ImplTypePtr Network::SockAddressFactory
 	::Create(int port, const ConfigurationStrategy& configurationStrategy)
 {
-	auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
+    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategyFlag)
 	{

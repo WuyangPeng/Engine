@@ -18,7 +18,12 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26426)
 template <typename Real>
 const Mathematics::Quaternion<Real>	Mathematics::Quaternion<Real>
 	::sm_Zero{};
@@ -29,7 +34,7 @@ const Mathematics::Quaternion<Real>	Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>
-	::Quaternion()
+	::Quaternion() noexcept
 {
 	m_Tuple[0] = Math::sm_Zero;
 	m_Tuple[1] = Math::sm_Zero;
@@ -41,7 +46,7 @@ Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>
-	::Quaternion(Real w, Real x, Real y, Real z)
+	::Quaternion(Real w, Real x, Real y, Real z) noexcept
 {
 	m_Tuple[0] = w;
 	m_Tuple[1] = x;
@@ -52,8 +57,8 @@ Mathematics::Quaternion<Real>
 }
 
 template <typename Real>
-Mathematics::Quaternion<Real>
-	::Quaternion(const Quaternion& rhs)
+Mathematics::Quaternion<Real> 
+	::Quaternion(const Quaternion& rhs) noexcept
 {
 	m_Tuple[0] = rhs.m_Tuple[0];
 	m_Tuple[1] = rhs.m_Tuple[1];
@@ -178,7 +183,7 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator=(const Quaternion& rhs)
+	::operator=(const Quaternion& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -211,7 +216,7 @@ const Real& Mathematics::Quaternion<Real>
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
 	}
 }
 
@@ -227,7 +232,7 @@ Real& Mathematics::Quaternion<Real>
 
 template <typename Real>
 Real Mathematics::Quaternion<Real>
-	::GetW() const
+	::GetW() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -236,7 +241,7 @@ Real Mathematics::Quaternion<Real>
 
 template <typename Real>
 Real Mathematics::Quaternion<Real>
-	::GetX() const
+	::GetX() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -245,7 +250,7 @@ Real Mathematics::Quaternion<Real>
 
 template <typename Real>
 Real Mathematics::Quaternion<Real>
-	::GetY() const
+	::GetY() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -254,7 +259,7 @@ Real Mathematics::Quaternion<Real>
 
 template <typename Real>
 Real Mathematics::Quaternion<Real>
-	::GetZ() const
+	::GetZ() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -263,7 +268,7 @@ Real Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SetW(Real w)
+	::SetW(Real w) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -272,7 +277,7 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SetX(Real x)
+	::SetX(Real x) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -281,7 +286,7 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SetY(Real y)
+	::SetY(Real y) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -290,7 +295,7 @@ void Mathematics::Quaternion<Real>
 
 template <typename Real>
 void Mathematics::Quaternion<Real>
-	::SetZ(Real z)
+	::SetZ(Real z) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -310,7 +315,7 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 
 template <typename Real>
 const  Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::operator-() const
+	::operator-() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -319,7 +324,7 @@ const  Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator+=(const Quaternion& rhs)
+	::operator+=(const Quaternion& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -333,7 +338,7 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator-=(const Quaternion& rhs)
+	::operator-=(const Quaternion& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -347,7 +352,7 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator*=(Real scalar)
+	::operator*=(Real scalar) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -361,7 +366,7 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 
 template <typename Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
-	::operator/=(Real scalar)
+	::operator/=(Real scalar) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -385,7 +390,7 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 
 template <typename Real>
 typename const Mathematics::Quaternion<Real>::Matrix3 Mathematics::Quaternion<Real>
-	::ToRotationMatrix() const
+	::ToRotationMatrix() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -452,7 +457,7 @@ typename const Mathematics::Quaternion<Real>::Vector3D Mathematics::Quaternion<R
 
 template <typename Real>
 Real Mathematics::Quaternion<Real>
-	::ToAngle() const
+	::ToAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -488,7 +493,7 @@ Real Mathematics::Quaternion<Real>
 
 template <typename Real>
 Real Mathematics::Quaternion<Real>
-	::SquaredLength() const
+	::SquaredLength() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -526,6 +531,8 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	::Inverse() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+	
+	CoreTools::DoNothing();
 
 	auto norm = SquaredLength();
 
@@ -543,7 +550,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::Conjugate() const
+	::Conjugate() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -590,7 +597,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 template <typename Real>
 const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
-	::Log() const
+	::Log() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -735,9 +742,9 @@ void Mathematics::Quaternion<Real>
 	MATHEMATICS_CLASS_IS_VALID_9;
 	MATHEMATICS_ASSERTION_1(firstQuaternion.IsNormalize() && secondQuaternion.IsNormalize() && thirdQuaternion.IsNormalize(), "firstQuaternion、secondQuaternion、thirdQuaternion必须都是单位长度！");
 
-	auto secondQuaternionConjugate = secondQuaternion.Conjugate();
-	auto p0 = secondQuaternionConjugate * firstQuaternion;
-	auto p2 = secondQuaternionConjugate * thirdQuaternion;
+	const auto secondQuaternionConjugate = secondQuaternion.Conjugate();
+	const auto p0 = secondQuaternionConjugate * firstQuaternion;
+	const auto p2 = secondQuaternionConjugate * thirdQuaternion;
 
 	auto arg = -static_cast<Real>(0.25) * (p0.Log() + p2.Log());
 
@@ -808,7 +815,7 @@ void Mathematics::Quaternion<Real>
 
 	if (!Math::Approximate(cosHalfAngle, Math::sm_Zero, epsilon))
 	{
-		auto cross = Vector3DTools::CrossProduct(firstVector, bisector);
+		const  auto cross = Vector3DTools::CrossProduct(firstVector, bisector);
 		m_Tuple[1] = cross.GetXCoordinate();
 		m_Tuple[2] = cross.GetYCoordinate();
 		m_Tuple[3] = cross.GetZCoordinate();
@@ -840,10 +847,10 @@ typename const Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto v2 = Rotate(vector);
+	const  auto v2 = Rotate(vector);
 	Quaternion swing;
 	swing.Align(vector, v2, epsilon);
-	auto twist = (*this) * swing.Conjugate();
+	const auto twist = (*this) * swing.Conjugate();
 
 	return QuaternionSwingTwist(swing, twist);
 }
@@ -854,10 +861,10 @@ typename const Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto v2 = Rotate(vector);
+	const auto v2 = Rotate(vector);
 	Quaternion swing;
 	swing.Align(vector, v2, epsilon);
-	auto twist = swing.Conjugate() * (*this);
+	const auto twist = swing.Conjugate() * (*this);
 
 	return QuaternionSwingTwist(swing, twist);
 }
@@ -897,13 +904,13 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto axisIndex = System::EnumCastUnderlying(axis);
+	const auto axisIndex = System::EnumCastUnderlying(axis);
 
 	// 适当的非零分量将在后面进行设置。
 	Quaternion quaternion;
-	auto p0 = m_Tuple[0];
-	auto p1 = m_Tuple[axisIndex];
-	auto sqrLength = p0 * p0 + p1 * p1;
+	const auto p0 = m_Tuple[0];
+	const auto p1 = m_Tuple[axisIndex];
+	const auto sqrLength = p0 * p0 + p1 * p1;
 	if (Math::sm_ZeroTolerance < sqrLength)
 	{
 		// 唯一的最近点。
@@ -927,15 +934,15 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto det = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
+	const auto det = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
 
 	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
 	{
 		auto discr = Math::sm_One - static_cast<Real>(4) * det * det;
 		discr = Math::Sqrt(Math::FAbs(discr));
 
-		auto a = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
-		auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
+		const auto a = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
+		const auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
 		auto c0 = Math::sm_Zero;
 		auto s0 = Math::sm_Zero;
@@ -965,7 +972,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	}
 	else
 	{
-		auto invLength = Math::InvSqrt(Math::FAbs(det));
+		const auto invLength = Math::InvSqrt(Math::FAbs(det));
 
 		return Quaternion{ m_Tuple[0] * invLength,m_Tuple[1] * invLength,Math::sm_Zero,Math::sm_Zero };
 	}
@@ -977,7 +984,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	Quaternion alt{ m_Tuple[0], m_Tuple[1], m_Tuple[2], -m_Tuple[3] };
+	const Quaternion alt{ m_Tuple[0], m_Tuple[1], m_Tuple[2], -m_Tuple[3] };
 
 	auto quaternion = alt.GetClosestXY();
 	quaternion[3] = -quaternion[3];
@@ -991,10 +998,10 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	Quaternion alt{ m_Tuple[0], m_Tuple[1], m_Tuple[3], m_Tuple[2] };
+	const Quaternion alt{ m_Tuple[0], m_Tuple[1], m_Tuple[3], m_Tuple[2] };
 
 	auto quaternion = alt.GetClosestXY();
-	auto save = quaternion[2];
+	const auto save = quaternion[2];
 	quaternion[2] = quaternion[3];
 	quaternion[3] = save;
 
@@ -1007,11 +1014,11 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	Quaternion alt{ m_Tuple[0], m_Tuple[1], -m_Tuple[3], m_Tuple[2] };
+	const Quaternion alt{ m_Tuple[0], m_Tuple[1], -m_Tuple[3], m_Tuple[2] };
 
 	auto quaternion = alt.GetClosestXY();
 
-	auto save = quaternion[2];
+	const auto save = quaternion[2];
 	quaternion[2] = quaternion[3];
 	quaternion[3] = -save;
 
@@ -1024,10 +1031,10 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	Quaternion alt{ m_Tuple[0], m_Tuple[2], m_Tuple[3], m_Tuple[1] };
+	const Quaternion alt{ m_Tuple[0], m_Tuple[2], m_Tuple[3], m_Tuple[1] };
 
 	auto quaternion = alt.GetClosestXY();
-	auto save = quaternion[3];
+	const auto save = quaternion[3];
 	quaternion[3] = quaternion[2];
 	quaternion[2] = quaternion[1];
 	quaternion[1] = save;
@@ -1041,10 +1048,10 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	Quaternion alt{ m_Tuple[0], m_Tuple[2], m_Tuple[3], -m_Tuple[1] };
+	const Quaternion alt{ m_Tuple[0], m_Tuple[2], m_Tuple[3], -m_Tuple[1] };
 
 	auto quaternion = alt.GetClosestXY();
-	auto save = quaternion[3];
+	const auto save = quaternion[3];
 	quaternion[3] = quaternion[2];
 	quaternion[2] = quaternion[1];
 	quaternion[1] = -save;
@@ -1144,10 +1151,10 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	auto p0 = m_Tuple[0];
 	auto p1 = m_Tuple[System::EnumCastUnderlying(axis)];
-	auto sqrLength = p0 * p0 + p1 * p1;
+	const auto sqrLength = p0 * p0 + p1 * p1;
 	if (Math::sm_ZeroTolerance < sqrLength)
 	{
-		auto invLength = Math::InvSqrt(sqrLength);
+		const auto invLength = Math::InvSqrt(sqrLength);
 		p0 *= invLength;
 		p1 *= invLength;
 		if (con.IsValid(p0, p1))
@@ -1207,13 +1214,13 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto det = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
+	const auto det = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
 
 	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
 	{
-		auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
-		auto a = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
-		auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
+		const auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
+		const auto a = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
+		const auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
 		Real c0{ };
 		Real s0{ };
@@ -1300,11 +1307,11 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		if (Math::sm_Zero < det)
 		{
-			auto minAngle = xCon.GetMinAngle() - yCon.GetMaxAngle();
-			auto maxAngle = xCon.GetMaxAngle() - yCon.GetMinAngle();
-			QuaternionConstraints con{ minAngle, maxAngle };
+			const auto minAngle = xCon.GetMinAngle() - yCon.GetMaxAngle();
+			const auto maxAngle = xCon.GetMaxAngle() - yCon.GetMinAngle();
+			const QuaternionConstraints con{ minAngle, maxAngle };
 
-			auto tmp = GetClosest(QuaternionClosestAxis::X, con);
+			const auto tmp = GetClosest(QuaternionClosestAxis::X, con);
 
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
@@ -1333,11 +1340,11 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		}
 		else
 		{
-			auto minAngle = xCon.GetMinAngle() + yCon.GetMinAngle();
-			auto maxAngle = xCon.GetMaxAngle() + yCon.GetMaxAngle();
-			QuaternionConstraints con{ minAngle, maxAngle };
+			const auto minAngle = xCon.GetMinAngle() + yCon.GetMinAngle();
+			const auto maxAngle = xCon.GetMaxAngle() + yCon.GetMaxAngle();
+			 const QuaternionConstraints con{ minAngle, maxAngle };
 
-			auto tmp = GetClosest(QuaternionClosestAxis::X, con);
+			const auto tmp = GetClosest(QuaternionClosestAxis::X, con);
 
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
@@ -1382,7 +1389,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	Quaternion alt{ m_Tuple[0], m_Tuple[1], m_Tuple[2], -m_Tuple[3] };
+	const Quaternion alt{ m_Tuple[0], m_Tuple[1], m_Tuple[2], -m_Tuple[3] };
 
 	auto quaternion = alt.GetClosestXY(xCon, yCon);
 	quaternion[3] = -quaternion[3];
@@ -1396,14 +1403,14 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto det = m_Tuple[0] * m_Tuple[2] - m_Tuple[1] * m_Tuple[3];
+	const auto det = m_Tuple[0] * m_Tuple[2] - m_Tuple[1] * m_Tuple[3];
 
 	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
 	{
-		auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
+		const auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
 
-		auto a = m_Tuple[0] * m_Tuple[3] + m_Tuple[1] * m_Tuple[2];
-		auto b = m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] - m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
+		const auto a = m_Tuple[0] * m_Tuple[3] + m_Tuple[1] * m_Tuple[2];
+		const auto b = m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] - m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
 		auto c2 = Math::sm_Zero;
 		auto s2 = Math::sm_Zero;
@@ -1490,11 +1497,11 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		if (Math::sm_Zero < det)
 		{
-			auto minAngle = xCon.GetMinAngle() - zCon.GetMaxAngle();
-			auto maxAngle = xCon.GetMaxAngle() - zCon.GetMinAngle();
-			QuaternionConstraints con{ minAngle, maxAngle };
+			const auto minAngle = xCon.GetMinAngle() - zCon.GetMaxAngle();
+			const auto maxAngle = xCon.GetMaxAngle() - zCon.GetMinAngle();
+			const QuaternionConstraints con{ minAngle, maxAngle };
 
-			auto tmp = GetClosest(QuaternionClosestAxis::X, con);
+			const auto tmp = GetClosest(QuaternionClosestAxis::X, con);
 
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
@@ -1523,11 +1530,11 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		}
 		else
 		{
-			auto minAngle = xCon.GetMinAngle() + zCon.GetMinAngle();
-			auto maxAngle = xCon.GetMaxAngle() + zCon.GetMaxAngle();
-			QuaternionConstraints con{ minAngle, maxAngle };
+			const auto minAngle = xCon.GetMinAngle() + zCon.GetMinAngle();
+			const auto maxAngle = xCon.GetMaxAngle() + zCon.GetMaxAngle();
+			const QuaternionConstraints con{ minAngle, maxAngle };
 
-			auto tmp = GetClosest(QuaternionClosestAxis::X, con);
+			const auto tmp = GetClosest(QuaternionClosestAxis::X, con);
 
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
@@ -1572,7 +1579,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	Quaternion alt{ m_Tuple[0], m_Tuple[1], -m_Tuple[2], m_Tuple[3] };
+	const Quaternion alt{ m_Tuple[0], m_Tuple[1], -m_Tuple[2], m_Tuple[3] };
 
 	auto quaternion = alt.GetClosestZX(zCon, xCon);
 	quaternion[2] = -quaternion[2];
@@ -1586,14 +1593,14 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto det = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
+	const auto det = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
 
 	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
 	{
-		auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
+		const auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
 
-		auto a = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
-		auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
+		const auto a = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
+		const auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
 		auto c2 = Math::sm_Zero;
 		auto s2 = Math::sm_Zero;
@@ -1679,9 +1686,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		if (det < Math::sm_Zero)
 		{
-			auto minAngle = yCon.GetMinAngle() - zCon.GetMaxAngle();
-			auto maxAngle = yCon.GetMaxAngle() - zCon.GetMinAngle();
-			QuaternionConstraints con{ minAngle, maxAngle };
+			const auto minAngle = yCon.GetMinAngle() - zCon.GetMaxAngle();
+			const auto maxAngle = yCon.GetMaxAngle() - zCon.GetMinAngle();
+			const QuaternionConstraints con{ minAngle, maxAngle };
 
 			auto tmp = GetClosest(QuaternionClosestAxis::Y, con);
 
@@ -1712,9 +1719,9 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		}
 		else
 		{
-			auto minAngle = yCon.GetMinAngle() + zCon.GetMinAngle();
-			auto maxAngle = yCon.GetMaxAngle() + zCon.GetMaxAngle();
-			QuaternionConstraints con{ minAngle, maxAngle };
+			const auto minAngle = yCon.GetMinAngle() + zCon.GetMinAngle();
+			const auto maxAngle = yCon.GetMaxAngle() + zCon.GetMaxAngle();
+			const QuaternionConstraints con{ minAngle, maxAngle };
 
 			auto tmp = GetClosest(QuaternionClosestAxis::Y, con);
 
@@ -1761,13 +1768,15 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	Quaternion alt{ m_Tuple[0], -m_Tuple[1], m_Tuple[2], m_Tuple[3] };
+	const Quaternion alt{ m_Tuple[0], -m_Tuple[1], m_Tuple[2], m_Tuple[3] };
 
 	auto quaternion = alt.GetClosestZY(zCon, yCon);
 	quaternion[1] = -quaternion[1];
 
 	return quaternion;
 }
+
+#include STSTEM_WARNING_POP
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_QUATERNION_DETAIL)
 

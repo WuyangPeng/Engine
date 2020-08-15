@@ -21,7 +21,12 @@
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering,Camera);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Camera);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,Camera); 
@@ -61,13 +66,13 @@ void Rendering::Camera
     return m_Impl->SetAxes(directionVector,upVector,rightVector);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetEpsilon,float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetPosition,const Rendering::Camera::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetEpsilon, float)
+    IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetPosition,const Rendering::Camera::APoint)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera, GetDirectionVector,const Rendering::Camera::AVector)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetUpVector,const Rendering::Camera::AVector)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetRightVector,const Rendering::Camera::AVector)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetViewMatrix,const Rendering::Camera::Matrix)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,IsPerspective,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, IsPerspective, bool)
 
 void Rendering::Camera
     ::SetFrustum (float directionMin, float directionMax,float upMin, float upMax,float rightMin, float rightMax)
@@ -89,17 +94,17 @@ void Rendering::Camera
 
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetFrustum,const float*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetFrustum, const float*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetFrustumData,const Rendering::CameraFrustumData)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetFrustumData, const Rendering::CameraFrustumData)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetDirectionMin,float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetDirectionMax, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetUpMin,float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetUpMax,float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetRightMin,float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetRightMax,float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetProjectionMatrix,const Rendering::Camera::Matrix)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetDirectionMin, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetDirectionMax, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetUpMin, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetUpMax, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetRightMin, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetRightMax, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetProjectionMatrix, const Rendering::Camera::Matrix)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetProjectionMatrix,Matrix,void)
 
@@ -111,17 +116,17 @@ void Rendering::Camera
     return m_Impl->SetProjectionMatrix(p00,p10,p11,p01,nearExtrude,farExtrude);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetDepthType,Rendering::DepthType)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetDepthType, Rendering::DepthType)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetProjectionViewMatrix,const Rendering::Camera::Matrix)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetProjectionViewMatrix, const Rendering::Camera::Matrix)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetPreViewMatrix,Matrix,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetPreViewMatrix,const Rendering::Camera::Matrix)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,PreViewIsIdentity,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetPreViewMatrix, const Rendering::Camera::Matrix)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, PreViewIsIdentity, bool)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetPostProjectionMatrix,Matrix,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetPostProjectionMatrix,const Rendering::Camera::Matrix)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,PostProjectionIsIdentity,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetPostProjectionMatrix, const Rendering::Camera::Matrix)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, PostProjectionIsIdentity, bool)
 
 const Rendering::Camera::AxesAlignBoundingBox2D Rendering::Camera
       ::ComputeBoundingAABB (int numVertices,const char* vertices,int stride,const Matrix& worldMatrix) const
@@ -208,3 +213,4 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Camera,SetDepthType,DepthTyp
  
 
 
+#include STSTEM_WARNING_POP

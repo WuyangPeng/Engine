@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
 
 Physics::BoundTreeProjectionInfo
-	::BoundTreeProjectionInfo(int triangle, float projection)
+	::BoundTreeProjectionInfo(int triangle, float projection) noexcept
 	:m_Triangle(triangle), m_Projection(projection)
 {
 	PHYSICS_SELF_CLASS_IS_VALID_9;
@@ -18,16 +18,14 @@ Physics::BoundTreeProjectionInfo
 
 CLASS_INVARIANT_STUB_DEFINE(Physics,BoundTreeProjectionInfo)
 
-int Physics::BoundTreeProjectionInfo
-	::GetTriangle() const
+int Physics::BoundTreeProjectionInfo ::GetTriangle() const noexcept
 {
 	PHYSICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Triangle;
 }
 
-float Physics::BoundTreeProjectionInfo
-	::GetProjection() const
+float Physics::BoundTreeProjectionInfo ::GetProjection() const noexcept
 {
 	PHYSICS_CLASS_IS_VALID_CONST_9;
 
@@ -35,7 +33,7 @@ float Physics::BoundTreeProjectionInfo
 }
 
 bool Physics
-	::operator<(const BoundTreeProjectionInfo& lhs, const BoundTreeProjectionInfo& rhs)
+	::operator<(const BoundTreeProjectionInfo& lhs, const BoundTreeProjectionInfo& rhs) noexcept
 {
 	return lhs.GetProjection() < rhs.GetProjection();
 }

@@ -12,7 +12,10 @@
 #include "OpenGLVertexFormatDataDetail.h"
 #include "OpenGLVertexFormatArrayDataDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+ 
 Rendering::OpenGLVertexFormat
     ::OpenGLVertexFormat (Renderer* renderer, const VertexFormat* vertexFormat)
 	:ParentType{},m_Stride(vertexFormat->GetStride()),m_Position(),m_Normal(),m_Tangent(),m_Binormal(),
@@ -42,12 +45,7 @@ void Rendering::OpenGLVertexFormat
 	m_FogCoord.Init(vertexFormat);
 	m_PSize.Init(vertexFormat);
 }
-
-Rendering::OpenGLVertexFormat
-	::~OpenGLVertexFormat ()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::OpenGLVertexFormat
@@ -61,7 +59,7 @@ bool Rendering::OpenGLVertexFormat
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::OpenGLVertexFormat
-	::Enable (Renderer* renderer)
+	::Enable (Renderer* renderer) noexcept
 {	
 	// 数据指针允许使用顶点缓冲
 	RENDERING_CLASS_IS_VALID_1;
@@ -83,7 +81,7 @@ void Rendering::OpenGLVertexFormat
 }
 
 void Rendering::OpenGLVertexFormat
-	::Disable (Renderer* renderer)
+	::Disable (Renderer* renderer) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -102,4 +100,4 @@ void Rendering::OpenGLVertexFormat
 
 	SYSTEM_UNUSED_ARG(renderer);	
 }
-
+#include STSTEM_WARNING_POP

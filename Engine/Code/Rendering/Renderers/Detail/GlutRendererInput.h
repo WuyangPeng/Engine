@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/26 14:10)
 
 #ifndef RENDERING_RENDERERS_GLUT_RENDERER_INPUT_H
@@ -18,21 +18,20 @@ namespace Rendering
     public:
         using ClassType = GlutRendererInput;
         using ParentType = RendererInputImpl;
-       
+
     public:
-        GlutRendererInput();
-        virtual ~GlutRendererInput();
-        
+        GlutRendererInput() noexcept;
+
         CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-        virtual RendererTypes GetRendererType() const override;    
-		virtual	void SetWindowID(int windowID) override;
-		virtual	void SetWindowHandle(HWnd windowID) override;
+        RendererTypes GetRendererType() const noexcept override;
+        void SetWindowID(int windowID) noexcept override;
+        void SetWindowHandle(HWnd windowID) noexcept override;
 
     private:
-    	int m_WindowID;
-    	bool m_DisableVerticalSync;
+        int m_WindowID;
+        bool m_DisableVerticalSync;
     };
 }
 
-#endif // RENDERING_RENDERERS_GLUT_RENDERER_INPUT_H
+#endif  // RENDERING_RENDERERS_GLUT_RENDERER_INPUT_H

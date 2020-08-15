@@ -19,8 +19,8 @@ namespace Mathematics
 		using ClassType = Float1Impl;
 
 	public:
-		Float1Impl();
-		explicit Float1Impl(float value);
+		Float1Impl() noexcept;
+		explicit Float1Impl(float value) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

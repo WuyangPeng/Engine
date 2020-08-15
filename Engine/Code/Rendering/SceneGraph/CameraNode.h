@@ -37,8 +37,10 @@ namespace Rendering
         //   local rotation column 1 = camera up
         //   local rotation column 2 = camera right
 		explicit CameraNode(const CameraSmartPointer& camera);
-        virtual ~CameraNode ();
-        
+          ~CameraNode ();
+                CameraNode(CameraNode&&) noexcept = default;
+          CameraNode& operator=(CameraNode&&) noexcept = default;
+
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CameraNode);
@@ -49,12 +51,12 @@ namespace Rendering
         // 节点的世界变换将被计算,
         // 和相机的坐标系使用节点的世界转换。
 		void SetCamera(const CameraSmartPointer& camera);
-		const ConstCameraSmartPointer GetCamera() const;
+		const ConstCameraSmartPointer GetCamera() const noexcept;
         
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSmartPointer Clone() const override;
         
     protected:
-        virtual bool UpdateWorldData (double applicationTime) override;
+          bool UpdateWorldData (double applicationTime) override;
         
 	private:
 		IMPL_TYPE_DECLARE(CameraNode);

@@ -33,7 +33,7 @@ namespace Mathematics
 		using ToolsType = Vector4DTools<Real>;
 
 	public:
-		Vector4D();
+		Vector4D() noexcept;
 		Vector4D(const Tuple4& tuple);
 		Vector4D(Real x, Real y, Real z, Real w);
 
@@ -49,10 +49,10 @@ namespace Mathematics
 		CLASS_INVARIANT_DECLARE;
 
 		// ×ø±ê·ÃÎÊ
-		Real GetXCoordinate() const noexcept;
-		Real GetYCoordinate() const noexcept;
-		Real GetZCoordinate() const noexcept;
-		Real GetWCoordinate() const noexcept;
+		Real GetXCoordinate() const;
+		Real GetYCoordinate() const;
+		Real GetZCoordinate() const;
+		Real GetWCoordinate() const;
 		bool IsZero(const Real epsilon = Math::sm_ZeroTolerance) const;
 
 		void ZeroOut();

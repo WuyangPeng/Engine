@@ -16,7 +16,10 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, BillboardNode);
@@ -35,11 +38,7 @@ Rendering::BillboardNode
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::BillboardNode
-	::~BillboardNode()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, BillboardNode)
 
@@ -48,7 +47,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::BillboardNode
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, BillboardNode,AlignTo,  CameraSmartPointer,void)
@@ -67,7 +66,7 @@ bool Rendering::BillboardNode
 
 	auto camera = m_Impl->GetCamera();
 
-	if (camera.IsValidPtr())
+	if (camera )
     {
        	// 相机逆变换到广告牌的模型空间。
 		auto modelPosition = GetWorldTransform().GetInverseTransform() * camera->GetPosition();
@@ -76,10 +75,10 @@ bool Rendering::BillboardNode
 		// 如果投影的照相机是在模型上的轴 (x = 0 和 z = 0)，
 		// ATan2返回零（而非NaN的），因此没有必要捕获此退化情况，并分别进行处理。
 		auto angle = Mathematics::Mathf::ATan2(modelPosition[0], modelPosition[2]);
-		Mathematics::Matrixf orient{ AVector::sm_UnitY, angle };
+		const Mathematics::Matrixf orient{ AVector::sm_UnitY, angle };
 
 		auto transform = GetWorldTransform();
-		auto rotate = transform.GetRotate() * orient;
+		const auto rotate = transform.GetRotate() * orient;
 		transform.SetRotate(rotate);
 		SetWorldTransformOnUpdate(transform);
     }
@@ -90,5 +89,5 @@ bool Rendering::BillboardNode
 
 
  
-
+#include STSTEM_WARNING_POP
  

@@ -31,7 +31,7 @@ T Mathematics::BitHacks
 	static_assert(std::is_integral<T>::value, "T must be integral.");
 	MATHEMATICS_ASSERTION_3(0 < powerOfTwo, "值powerOfTwo必须大于0");
 
-	Mathematics::Log2OfPowerOfTwo<T> log2OfPowerOfTwo{ powerOfTwo };
+const	Mathematics::Log2OfPowerOfTwo<T> log2OfPowerOfTwo{ powerOfTwo };
 
 	return log2OfPowerOfTwo.GetLog2();
 }

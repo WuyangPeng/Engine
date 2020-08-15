@@ -43,7 +43,7 @@ namespace Rendering
 		// 这个类的以前的行为是为了填补只能由关键帧代表的通道变换，
 		// 其中隐含依靠空间Spatial m_Object有它的应用程序适当地设置其他通道。
 		// 现在KeyframeController设置*所有*的通道。
-		KeyframeControllerImpl();
+            KeyframeControllerImpl() noexcept;
 		KeyframeControllerImpl(int numCommonTimes, int numTranslations,int numRotations, int numScales);
 
 		CLASS_INVARIANT_DECLARE;
@@ -54,27 +54,27 @@ namespace Rendering
  
 	public:		
 		// 调用构造函数后，您必须设置数据使用这些函数。
-		int GetNumCommonTimes () const;
+            int GetNumCommonTimes() const noexcept;
 		float GetCommonTimes (int index) const;
 		void SetCommonTimes(int index, float commonTimes);
 		
-		int GetNumTranslations () const;
+		int GetNumTranslations() const noexcept;
 		float GetTranslationTimes(int index) const;
 		const APoint GetTranslations(int index) const;
 
 		void SetTranslationTimes(int index, float translationTimes);
 		void SetTranslations(int index, const APoint& translations);
 		
-		int GetNumRotations () const;
+		int GetNumRotations() const noexcept;
 		float GetRotationTimes(int index) const;
 		const AQuaternion GetRotations(int index) const;
 
 		void SetRotationTimes(int index, float rotationTimes);
 		void SetRotations(int index, const AQuaternion& rotations);
 		
-		int GetNumScales () const;
+		int GetNumScales() const noexcept;
 		float GetScaleTimes(int index) const;
-		float GetScales(int index) const;
+		float GetScales(int index) const ;
 
 		void SetScaleTimes(int index, float scaleTimes);
 		void SetScales(int index, float scales);		
@@ -86,7 +86,7 @@ namespace Rendering
 		
 		const APoint GetTranslate(const ControllerKeyInfo& keyInfo) const;
 		const Matrix GetRotate(const ControllerKeyInfo& keyInfo) const;
-		float GetScale(const ControllerKeyInfo& keyInfo) const;
+                float GetScale(const ControllerKeyInfo& keyInfo) const noexcept;
 
 	private:
 		// 支持查找给出指定时间的关键帧。

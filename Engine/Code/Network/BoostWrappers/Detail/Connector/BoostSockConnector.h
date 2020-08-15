@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 15:47)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_CONNECTOR_H
@@ -13,23 +13,22 @@
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE BoostSockConnector : public SockConnectorImpl
-	{
-	public:
-		using ClassType = BoostSockConnector;
-		using ParentType = SockConnectorImpl;
+    class NETWORK_HIDDEN_DECLARE BoostSockConnector : public SockConnectorImpl
+    {
+    public:
+        using ClassType = BoostSockConnector;
+        using ParentType = SockConnectorImpl;
 
-	public:
-		BoostSockConnector();
-		virtual ~BoostSockConnector();
+    public:
+        BoostSockConnector() noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
-		virtual void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-		virtual const SockConnectorPtr Clone() const override;
-	};
+        const SockConnectorPtr Clone() const override;
+    };
 }
 
-#endif // NETWORK_BOOST_WRAPPERS_BOOST_SOCK_CONNECTOR_H
+#endif  // NETWORK_BOOST_WRAPPERS_BOOST_SOCK_CONNECTOR_H

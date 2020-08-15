@@ -20,22 +20,18 @@ CoreTools::StdMutex
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9; 
 }
 
-CoreTools::StdMutex
-	::~StdMutex() noexcept
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StdMutex)
 
 void CoreTools::StdMutex
-	::Initialize()
+	::Initialize() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
 
 void CoreTools::StdMutex
-	::Delete()
+	::Delete() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }

@@ -12,28 +12,23 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
 CoreTools::StdRecursiveMutex
-	::StdRecursiveMutex()
+	::StdRecursiveMutex() noexcept
 	:m_Mutex{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::StdRecursiveMutex
-	::~StdRecursiveMutex()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StdRecursiveMutex)
 
 void CoreTools::StdRecursiveMutex
-	::Initialize()
+	::Initialize() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
 
 void CoreTools::StdRecursiveMutex
-	::Delete()
+	::Delete() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
@@ -64,7 +59,7 @@ void CoreTools::StdRecursiveMutex
 }
 
 bool CoreTools::StdRecursiveMutex
-	::TryEnter()
+	::TryEnter() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 

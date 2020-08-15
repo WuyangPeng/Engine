@@ -16,12 +16,15 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Algebra/Flags/MatrixFlags.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 const Rendering::TransformImpl Rendering::TransformImpl
         ::sm_Identity;
 
 Rendering::TransformImpl
-    ::TransformImpl()
+    ::TransformImpl() noexcept
 	:m_TransformMatrix{}, m_RotationOrGeneralMatrix{ Mathematics::MatrixTypeFlags::Identity },
 	 m_Translate{ 0.0f, 0.0f, 0.0f }, m_Scale{ 1.0f, 1.0f, 1.0f },
 	 m_InverseMatrix{ Mathematics::MatrixTypeFlags::Identity }, m_InverseNeedsUpdate{ false }
@@ -32,7 +35,7 @@ Rendering::TransformImpl
 CLASS_INVARIANT_STUB_DEFINE(Rendering,TransformImpl)
 
 void Rendering::TransformImpl
-    ::MakeIdentity ()
+    ::MakeIdentity () noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -57,24 +60,21 @@ void Rendering::TransformImpl
     m_InverseNeedsUpdate = true;
 }
 
-bool Rendering::TransformImpl
-    ::IsIdentity () const
+bool Rendering::TransformImpl ::IsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_TransformMatrix.IsIdentity ();
 }
 
-bool Rendering::TransformImpl
-    ::IsRotationOrScaleMatrix () const
+bool Rendering::TransformImpl ::IsRotationOrScaleMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_TransformMatrix.IsRotationOrScaleMatrix();
 }
 
-bool Rendering::TransformImpl
-    ::IsUniformScale () const
+bool Rendering::TransformImpl ::IsUniformScale() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -146,20 +146,21 @@ const Rendering::TransformImpl::Matrix Rendering::TransformImpl
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(m_TransformMatrix.IsRotationOrScaleMatrix(),"Matrix不是旋转矩阵\n");
+
+    CoreTools::DoNothing();
     
     return m_RotationOrGeneralMatrix;
 }
 
 const Rendering::TransformImpl::Matrix Rendering::TransformImpl
-    ::GetMatrix () const
+    ::GetMatrix () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_RotationOrGeneralMatrix;
 }
 
-const Rendering::TransformImpl::APoint Rendering::TransformImpl
-    ::GetTranslate () const
+const Rendering::TransformImpl::APoint Rendering::TransformImpl ::GetTranslate() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -171,7 +172,7 @@ const Rendering::TransformImpl::APoint Rendering::TransformImpl
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(m_TransformMatrix.IsRotationOrScaleMatrix(),"Matrix不是旋转矩阵\n");
-    
+    CoreTools::DoNothing();
     return m_Scale;
 }
 
@@ -258,8 +259,7 @@ Rendering::TransformImpl& Rendering::TransformImpl
     return *this;
 }
 
-const Rendering::TransformImpl::Matrix Rendering::TransformImpl
-    ::GetHomogeneousMatrix () const
+const Rendering::TransformImpl::Matrix Rendering::TransformImpl ::GetHomogeneousMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -299,7 +299,7 @@ const Rendering::TransformImpl::Matrix Rendering::TransformImpl
 					auto scale01 = m_Scale[0] * m_Scale[1];
 					auto scale02 = m_Scale[0] * m_Scale[2];
 					auto scale12 = m_Scale[1] * m_Scale[2];
-					auto inverseScale012 = 1.0f / (scale01 * m_Scale[2]);
+					const auto inverseScale012 = 1.0f / (scale01 * m_Scale[2]);
 					auto inverseScale0 = scale12 * inverseScale012;
 					auto inverseScale1 = scale02 * inverseScale012;
 					auto inverseScale2 = scale01 * inverseScale012;
@@ -357,11 +357,11 @@ const Rendering::TransformImpl Rendering::TransformImpl
     APoint inverseTransform;
     if (m_TransformMatrix.IsRotationOrScaleMatrix())
     {
-		auto inverseRotation = m_RotationOrGeneralMatrix.Transpose();
+        const auto inverseRotation = m_RotationOrGeneralMatrix.Transpose();
         inverse.SetRotate(inverseRotation);
         if (m_TransformMatrix.IsUniformScale())
         {
-			auto inverseScale = 1.0f / m_Scale[0];
+            const auto inverseScale = 1.0f / m_Scale[0];
             inverse.SetUniformScale(inverseScale);
             inverseTransform = -inverseScale * (inverseRotation * m_Translate);
         }
@@ -372,8 +372,8 @@ const Rendering::TransformImpl Rendering::TransformImpl
 			// 无法表示为X = (R * S) * Y + T，
 			// 只能表示为X = (S * R) * Y + T
 
-			auto matrix = m_RotationOrGeneralMatrix * Matrix(m_Scale[0],m_Scale[1],m_Scale[2]);
-			auto inverseMatrix = matrix.Invert3x3(epsilon);
+			const auto matrix = m_RotationOrGeneralMatrix * Matrix(m_Scale[0], m_Scale[1], m_Scale[2]);
+                        const auto inverseMatrix = matrix.Invert3x3(epsilon);
 
 			inverse.SetMatrix(inverseMatrix);		
 
@@ -382,7 +382,7 @@ const Rendering::TransformImpl Rendering::TransformImpl
     }
     else
     {
-		auto inverseMatrix = m_RotationOrGeneralMatrix.Invert3x3(epsilon);
+        const auto inverseMatrix = m_RotationOrGeneralMatrix.Invert3x3(epsilon);
         
         inverse.SetMatrix(inverseMatrix);
         inverseTransform = -(inverseMatrix * m_Translate);
@@ -396,9 +396,9 @@ const Rendering::TransformImpl Rendering::TransformImpl
 int Rendering::TransformImpl
     ::GetStreamingSize () const
 {
-	auto isIdentity = m_TransformMatrix.IsIdentity();
-	auto isRotationOrScaleMatrix = m_TransformMatrix.IsRotationOrScaleMatrix();
-	auto isUniformScale = m_TransformMatrix.IsUniformScale();
+    const auto isIdentity = m_TransformMatrix.IsIdentity();
+    const auto isRotationOrScaleMatrix = m_TransformMatrix.IsRotationOrScaleMatrix();
+    const auto isUniformScale = m_TransformMatrix.IsUniformScale();
 	
 	auto size = CORE_TOOLS_STREAM_SIZE(isIdentity) * 3;
 
@@ -472,8 +472,8 @@ const Rendering::TransformImpl  Rendering
 
 
     // 在所有剩余的情况下,不能写成矩阵R * S * X+T。
-	auto matrixA = (lhs.IsRotationOrScaleMatrix () ? lhs.GetMatrix().TimesDiagonal(lhs.GetScale()) : lhs.GetMatrix());
-	auto matrixB = (rhs.IsRotationOrScaleMatrix () ? rhs.GetMatrix().TimesDiagonal(rhs.GetScale()) : rhs.GetMatrix());
+    const auto matrixA = (lhs.IsRotationOrScaleMatrix() ? lhs.GetMatrix().TimesDiagonal(lhs.GetScale()) : lhs.GetMatrix());
+    const auto matrixB = (rhs.IsRotationOrScaleMatrix() ? rhs.GetMatrix().TimesDiagonal(rhs.GetScale()) : rhs.GetMatrix());
 
     product.SetMatrix(matrixA * matrixB);
     product.SetTranslate(matrixA * rhs.GetTranslate () + lhs.GetTranslate ());
@@ -481,3 +481,4 @@ const Rendering::TransformImpl  Rendering
     return product;
 }
 
+#include STSTEM_WARNING_POP

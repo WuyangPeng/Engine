@@ -41,13 +41,18 @@ namespace Rendering
 
 		BoxSurface(Mathematics::BSplineVolumef* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSmartPointer vformat[6]);
 
-		virtual ~BoxSurface();
+		  ~BoxSurface();
+		  
+		  BoxSurface(const BoxSurface&) = default;
+		  BoxSurface& operator=(const BoxSurface&) = default;
+		  BoxSurface(BoxSurface&&) = default;
+		  BoxSurface& operator=(BoxSurface&&) = default;
 
 		// Member access.
-		const Mathematics::BSplineVolumef* GetVolume() const;
-		int GetNumUSamples() const;
-		int GetNumVSamples() const;
-		int GetNumWSamples() const;
+		const Mathematics::BSplineVolumef* GetVolume() const noexcept;
+		int GetNumUSamples() const noexcept;
+		int GetNumVSamples() const noexcept;
+		int GetNumWSamples() const noexcept;
 
 		// When the volume is modified, call this update function to recompute
 		// the box surface geometry.
@@ -72,9 +77,12 @@ namespace Rendering
 		int mNumUSamples, mNumVSamples, mNumWSamples;
 		bool mDoSort;
 	};
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(BoxSurface);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, BoxSurface);
+	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, BoxSurface)
+		#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_CURVES_SURFACES_BOX_SURFACE_H

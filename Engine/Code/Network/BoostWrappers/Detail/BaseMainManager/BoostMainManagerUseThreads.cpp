@@ -11,7 +11,12 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 #include "Network/Configuration/ConfigurationSubStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
 using std::move;
 using std::make_unique;
 
@@ -29,7 +34,7 @@ Network::BoostMainManagerUseThreads
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 
-	JoinThreads();
+	CoreTools::NoexceptNoReturn(*this,&ClassType::JoinThreads);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostMainManagerUseThreads)
@@ -69,7 +74,7 @@ void Network::BoostMainManagerUseThreads
 }
 
 void Network::BoostMainManagerUseThreads
-	::Run()
+	::Run() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 }
@@ -109,3 +114,4 @@ void Network::BoostMainManagerUseThreads
 	}
 }
 
+#include STSTEM_WARNING_POP

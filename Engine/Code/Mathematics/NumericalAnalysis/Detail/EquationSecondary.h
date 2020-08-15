@@ -20,23 +20,23 @@ namespace Mathematics
 		using ParentType = EquationImpl;
 
 	public:
-		EquationSecondary(double constant, double once, double secondary, double epsilon = Mathd::sm_ZeroTolerance);
-		virtual ~EquationSecondary();
+		EquationSecondary(double constant, double once, double secondary, double epsilon = Mathd::sm_ZeroTolerance)  ;
+	 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual double Substitution(double value) const override;
-		virtual const Imaginary Substitution(const Imaginary& value) const override;
+		  double Substitution(double value) const noexcept override;
+		  const Imaginary Substitution(const Imaginary& value) const override;
 
 	private:
-		virtual double SubstitutionTangent(double solution) const override;
-		virtual const Imaginary SubstitutionTangent(const Imaginary& solution) const override;
+		  double SubstitutionTangent(double solution) const noexcept override;
+		  const Imaginary SubstitutionTangent(const Imaginary& solution) const override;
 
-		virtual void Solving() override;
-		virtual bool Predigest() override;
+		  void Solving() override;
+		  bool Predigest() override;
 
-		double CalculateDiscriminant() const;
-		double CalculateLhs() const;
+		double CalculateDiscriminant() const noexcept;
+		double CalculateLhs() const noexcept;
 
 		void CalculateResult(double lhs, double discriminant);
 		void CalculateResultDiscriminantIsPlus(double lhs, double discriminant);

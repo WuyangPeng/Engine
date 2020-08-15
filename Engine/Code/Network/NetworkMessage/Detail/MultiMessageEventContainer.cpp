@@ -14,7 +14,9 @@
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::MultiMessageEventContainer
 	::MultiMessageEventContainer()
 	:ParentType{}, m_Impl{ make_shared<ImplType>() }, m_Priority{ MessageEventPriority::Count }
@@ -30,7 +32,7 @@ Network::MultiMessageEventContainer
 
 Network::MultiMessageEventContainer
 	::MultiMessageEventContainer(const MultiMessageEventContainer& rhs)
-	:ParentType{}, m_Impl{ rhs.m_Impl }, m_Priority{ rhs.m_Priority }
+	:ParentType{}, m_Impl{ make_shared<ImplType>(*rhs.m_Impl) }, m_Priority{ rhs.m_Priority }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -40,7 +42,7 @@ Network::MultiMessageEventContainer& Network::MultiMessageEventContainer
 {
 	NETWORK_CLASS_IS_VALID_1;
 
-	m_Impl = rhs.m_Impl;
+	m_Impl = make_shared<ImplType>(*rhs.m_Impl);
 	m_Priority = rhs.m_Priority;
 
 	return *this;
@@ -113,7 +115,7 @@ Network::MultiMessageEventContainer::ImplPtr Network::MultiMessageEventContainer
 }
 
 bool Network::MultiMessageEventContainer
-	::IsCanInsert() const
+	::IsCanInsert() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -121,7 +123,7 @@ bool Network::MultiMessageEventContainer
 }
 
 bool Network::MultiMessageEventContainer
-	::IsPrioritySame(MessageEventPriority priority) const
+	::IsPrioritySame(MessageEventPriority priority) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -140,3 +142,4 @@ void Network::MultiMessageEventContainer
 }
 
 
+#include STSTEM_WARNING_POP

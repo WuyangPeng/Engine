@@ -10,14 +10,14 @@
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using std::ostream;
 using std::string;
 using std::wstring;
 
-Database::ResultRowImpl
-	::ResultRowImpl(const ConfigurationStrategy& configurationStrategy)
-	: m_ConfigurationStrategy{ configurationStrategy }
+Database::ResultRowImpl ::ResultRowImpl(const ConfigurationStrategy& configurationStrategy) noexcept
+    : m_ConfigurationStrategy{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -35,6 +35,8 @@ void Database::ResultRowImpl
 {
 	DATABASE_CLASS_IS_VALID_9;
 
+	CoreTools::DoNothing();
+
 	SYSTEM_UNUSED_ARG(os);
 }
 
@@ -45,7 +47,7 @@ int Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetIntValue未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetIntValue未实现。"s));
 }
 
 uint32_t Database::ResultRowImpl
@@ -55,7 +57,7 @@ uint32_t Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetUIntValue未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetUIntValue未实现。"s));
 }
 
 int64_t Database::ResultRowImpl
@@ -65,7 +67,7 @@ int64_t Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetInt64Value未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetInt64Value未实现。"s));
 }
 
 uint64_t Database::ResultRowImpl
@@ -75,7 +77,7 @@ uint64_t Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetUInt64Value未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetUInt64Value未实现。"s));
 }
 
 float Database::ResultRowImpl
@@ -85,7 +87,7 @@ float Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetFloatValue未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetFloatValue未实现。"s));
 }
 
 double Database::ResultRowImpl
@@ -95,7 +97,7 @@ double Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetDoubleValue未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetDoubleValue未实现。"s));
 }
 
 bool Database::ResultRowImpl
@@ -105,7 +107,7 @@ bool Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetBoolValue未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetBoolValue未实现。"s));
 }
 
 string Database::ResultRowImpl
@@ -115,7 +117,7 @@ string Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetStringValue未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetStringValue未实现。"s));
 }
 
 wstring Database::ResultRowImpl
@@ -125,13 +127,15 @@ wstring Database::ResultRowImpl
 
 	SYSTEM_UNUSED_ARG(pos);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetWStringValue未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetWStringValue未实现。"s));
 }
 
 int Database::ResultRowImpl
 	::GetColCount() const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
+
+	CoreTools::DoNothing();
 
 	return 0;
 }

@@ -70,6 +70,9 @@ namespace Rendering
 
 		Renderer(Renderer&& rhs) noexcept;
 		Renderer& operator=(Renderer&& rhs) noexcept;
+                Renderer(const Renderer& rhs) noexcept = delete;
+                Renderer& operator=(const Renderer& rhs) noexcept = delete;
+		Renderer() = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

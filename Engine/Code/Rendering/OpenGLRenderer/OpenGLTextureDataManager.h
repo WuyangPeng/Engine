@@ -22,13 +22,17 @@ namespace Rendering
 		using ClassType = OpenGLTextureDataManager<ManageType>;
 
 	public:
-		explicit OpenGLTextureDataManager(ManageType& manager);
+                explicit OpenGLTextureDataManager(ManageType& manager) noexcept;
 		~OpenGLTextureDataManager();
+		OpenGLTextureDataManager(const OpenGLTextureDataManager&) =delete;
+		OpenGLTextureDataManager& operator=(const OpenGLTextureDataManager&) =delete;
+		OpenGLTextureDataManager( OpenGLTextureDataManager&&) =delete;
+		OpenGLTextureDataManager& operator=( OpenGLTextureDataManager&&) =delete;
 
 		CLASS_INVARIANT_DECLARE;
 	 
-		void* Lock (int level, BufferLocking mode);	 
-		void* Lock (int face, int level, BufferLocking mode);	
+		void* Lock (int level, BufferLocking mode) noexcept;	 
+		void* Lock (int face, int level, BufferLocking mode) noexcept;	
 
 	private:
 		ManageType& m_Manager;	

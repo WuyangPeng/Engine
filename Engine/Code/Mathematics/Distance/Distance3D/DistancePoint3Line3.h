@@ -37,10 +37,10 @@ namespace Mathematics
 		const Line3 GetLine() const;
 
 		// æ≤Ã¨æ‡¿Î≤È—Ø°£
-		virtual const DistanceResult GetSquared() const override;
+		 const DistanceResult GetSquared() const override;
 
 		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£	
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		Vector3D m_Point;

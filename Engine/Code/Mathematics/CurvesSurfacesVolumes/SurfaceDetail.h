@@ -13,7 +13,7 @@ namespace Mathematics
 {
 
 template <typename Real>
-Surface<Real>::Surface ()
+Surface<Real>::Surface () noexcept
 {
 }
 

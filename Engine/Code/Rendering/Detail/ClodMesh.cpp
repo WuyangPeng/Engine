@@ -15,7 +15,12 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, ClodMesh);
@@ -35,11 +40,7 @@ Rendering::ClodMesh
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ClodMesh
-	::~ClodMesh()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ClodMesh)
 
@@ -48,7 +49,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::ClodMesh
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 void Rendering::ClodMesh
@@ -59,8 +60,8 @@ void Rendering::ClodMesh
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ClodMesh,GetNumRecords,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ClodMesh,GetTargetRecord,int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ClodMesh,SetTargetRecord,int,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ClodMesh,GetTargetRecord,int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, ClodMesh,SetTargetRecord,int,void)
 										  
 int Rendering::ClodMesh
 	::GetAutomatedTargetRecord() const
@@ -75,8 +76,8 @@ void Rendering::ClodMesh
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	int targetRecord = GetAutomatedTargetRecord();
+	const int targetRecord = GetAutomatedTargetRecord();
 
 	m_Impl->SelectLevelOfDetail(GetVertexBuffer(), GetIndexBuffer(), targetRecord);
 }
- 
+ #include STSTEM_WARNING_POP

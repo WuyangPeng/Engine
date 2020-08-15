@@ -14,7 +14,10 @@
 
 #include <algorithm>
 #include <functional> 
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26446)
 using std::bind;
 using std::make_shared;
 using std::placeholders::_1;
@@ -26,11 +29,7 @@ Network::PriorityMessageEventContainer
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::PriorityMessageEventContainer
-	::~PriorityMessageEventContainer()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, PriorityMessageEventContainer)
 
@@ -93,7 +92,7 @@ Network::PriorityMessageEventContainer::ImplPtr Network::PriorityMessageEventCon
 }
 
 bool Network::PriorityMessageEventContainer
-	::IsCanInsert() const
+	::IsCanInsert() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -101,7 +100,7 @@ bool Network::PriorityMessageEventContainer
 }
 
 bool Network::PriorityMessageEventContainer
-	::IsPrioritySame(MessageEventPriority priority) const
+	::IsPrioritySame(MessageEventPriority priority) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -110,4 +109,4 @@ bool Network::PriorityMessageEventContainer
 	return true;
 }
 
-
+#include STSTEM_WARNING_POP

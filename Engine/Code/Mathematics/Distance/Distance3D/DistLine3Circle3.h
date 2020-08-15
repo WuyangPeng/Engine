@@ -40,13 +40,13 @@ namespace Mathematics
 		// center and N is the normal to the plane containing the circle, then
 		// all circle points are equidistant from P.  In this case the returned
 		// point is C+r*U, where U is a vector perpendicular to N.
-		virtual const DistanceResult GetSquared() const override;
+		 const DistanceResult GetSquared() const override;
 
 		// Member access.  The possible combinations for number of line-circle
 		// closest points is (1,1), (2,2), or (1,INT_MAX).		
 
 		// Function calculations for dynamic distance queries.
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		// The mClosestLine[i] is an input.  The mClosestCircle[i] is an output.

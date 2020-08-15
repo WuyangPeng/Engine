@@ -16,7 +16,7 @@
 #include "Network/Interface/Data/AddressData.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
 
-#include <boost/bind/bind.hpp>
+#include "System/Helper/PragmaWarning/Bind.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
@@ -25,7 +25,13 @@ using namespace std::literals;
 using boost::bind;
 using boost::numeric_cast;
 using boost::asio::detail::throw_error;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26455)
 namespace
 {
 	const auto g_SynchronizeSendSuccessDescription = SYSTEM_TEXT("同步发送消息成功，字节数："s);
@@ -52,7 +58,7 @@ int Network::BoostSockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto originalReadIndex = messageBuffer->GetCurrentReadIndex();
+	const auto originalReadIndex = messageBuffer->GetCurrentReadIndex();
 
 	while (0 < messageBuffer->GetRemainingReadCount())
 	{
@@ -77,7 +83,7 @@ int Network::BoostSockStream
 		messageBuffer->AddCurrentReadIndex(sendCount);
 	}
 
-	auto readCount = messageBuffer->GetCurrentReadIndex() - originalReadIndex;
+	const auto readCount = messageBuffer->GetCurrentReadIndex() - originalReadIndex;
 
 	BoostSockStreamHelper::PrintSuccessLog(g_SynchronizeSendSuccessDescription, AddressData{ *this }, readCount);
 
@@ -89,7 +95,7 @@ void Network::BoostSockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto originalReadIndex = messageBuffer->GetCurrentReadIndex();
+	const auto originalReadIndex = messageBuffer->GetCurrentReadIndex();
 
 	m_Socket.async_send(boost::asio::buffer(messageBuffer->GetCurrentReadBufferedPtr(), messageBuffer->GetRemainingReadCount()),
 						bind(&ClassType::AsyncSendEvent, this, eventInterface, messageBuffer, originalReadIndex, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
@@ -123,7 +129,7 @@ int Network::BoostSockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto originalWriteIndex = messageBuffer->GetCurrentWriteIndex();
+	const auto originalWriteIndex = messageBuffer->GetCurrentWriteIndex();
 
 	while (0 < messageBuffer->GetReceiveCount())
 	{
@@ -190,7 +196,7 @@ void Network::BoostSockStream
 }
 
 Network::BoostSockStreamType& Network::BoostSockStream
-	::GetBoostSockStream()
+	::GetBoostSockStream() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -238,3 +244,4 @@ int Network::BoostSockStream
 	return m_Socket.remote_endpoint().port();
 }
 
+#include STSTEM_WARNING_POP

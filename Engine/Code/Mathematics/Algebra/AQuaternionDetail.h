@@ -20,6 +20,12 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26426)
 template <typename Real>
 const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 	::sm_Zero = AQuaternion<Real>{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
@@ -30,7 +36,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Mathematics::AQuaternion<Real>
-	::AQuaternion()
+	::AQuaternion() noexcept
 	:m_Tuple{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -38,19 +44,13 @@ Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Mathematics::AQuaternion<Real>
-	::AQuaternion(Real w, Real x, Real y, Real z)
+	::AQuaternion(Real w, Real x, Real y, Real z) noexcept
 	:m_Tuple{ w,x,y,z }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename Real>
-Mathematics::AQuaternion<Real>
-	::AQuaternion(const AQuaternion& rhs)
-	:m_Tuple{ rhs.m_Tuple[0],rhs.m_Tuple[1],rhs.m_Tuple[2],rhs.m_Tuple[3] }
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 template <typename Real>
 Mathematics::AQuaternion<Real>
@@ -144,19 +144,7 @@ void Mathematics::AQuaternion<Real>
 	m_Tuple[3] = sinValue * axis[2];
 }
 
-template <typename Real>
-Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator=(const AQuaternion& rhs)
-{
-	MATHEMATICS_CLASS_IS_VALID_9;
-
-	m_Tuple[0] = rhs.m_Tuple[0];
-	m_Tuple[1] = rhs.m_Tuple[1];
-	m_Tuple[2] = rhs.m_Tuple[2];
-	m_Tuple[3] = rhs.m_Tuple[3];
-
-	return *this;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
@@ -179,7 +167,7 @@ const Real& Mathematics::AQuaternion<Real>
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
 	}
 }
 
@@ -195,7 +183,7 @@ Real& Mathematics::AQuaternion<Real>
 
 template <typename Real>
 Real Mathematics::AQuaternion<Real>
-	::GetW() const
+	::GetW() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -203,8 +191,7 @@ Real Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-Real Mathematics::AQuaternion<Real>
-	::GetX() const
+Real Mathematics::AQuaternion<Real>::GetX() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -212,8 +199,7 @@ Real Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-Real Mathematics::AQuaternion<Real>
-	::GetY() const
+Real Mathematics::AQuaternion<Real>::GetY() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -221,8 +207,7 @@ Real Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-Real Mathematics::AQuaternion<Real>
-	::GetZ() const
+Real Mathematics::AQuaternion<Real>::GetZ() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -230,8 +215,7 @@ Real Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>
-	::SetW(Real w)
+void Mathematics::AQuaternion<Real>::SetW(Real w) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -239,8 +223,7 @@ void Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>
-	::SetX(Real x)
+void Mathematics::AQuaternion<Real>::SetX(Real x) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -248,8 +231,7 @@ void Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>
-	::SetY(Real y)
+void Mathematics::AQuaternion<Real>::SetY(Real y) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -257,8 +239,7 @@ void Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>
-	::SetZ(Real z)
+void Mathematics::AQuaternion<Real>::SetZ(Real z) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -266,8 +247,7 @@ void Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator*=(const AQuaternion& rhs)
+Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator*=(const AQuaternion& rhs)  
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -277,8 +257,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-const  Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
-	::operator-() const
+const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::operator-() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -286,8 +265,7 @@ const  Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator+=(const AQuaternion& rhs)
+Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator+=(const AQuaternion& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -300,8 +278,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator-=(const AQuaternion& rhs)
+Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator-=(const AQuaternion& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -314,22 +291,25 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator*=(Real scalar)
+Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator*=(Real scalar) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	for (auto i = 0; i < 4; ++i)
 	{
+		 
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26482)
+		#include SYSTEM_WARNING_DISABLE(26446)
 		m_Tuple[i] *= scalar;
+		#include STSTEM_WARNING_POP
 	}
 
 	return *this;
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
-	::operator/=(Real scalar)
+Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real scalar) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -352,8 +332,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-typename const Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>
-	::ToRotationMatrix() const
+typename const Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::ToRotationMatrix() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -400,8 +379,7 @@ typename const Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<
 }
 
 template <typename Real>
-Real Mathematics
-	::AQuaternion<Real>::ToAngle() const
+Real Mathematics ::AQuaternion<Real>::ToAngle() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -427,8 +405,7 @@ Real Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-Real Mathematics::AQuaternion<Real>
-	::SquaredLength() const
+Real Mathematics::AQuaternion<Real>::SquaredLength() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -485,6 +462,8 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
+	CoreTools::DoNothing();
+
 	auto norm = SquaredLength();
 
 	if (Math::sm_ZeroTolerance < norm)
@@ -500,8 +479,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
-	::Conjugate() const
+const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Conjugate() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -547,8 +525,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 }
 
 template <typename Real>
-const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
-	::Log() const
+const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -608,7 +585,7 @@ typename const Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<
 	// 需要比矩阵较少的空间和更多的时间来计算旋转后的向量。
 	// 典型的空间——时间权衡……
 
-	auto matrix = ToRotationMatrix();
+	const auto matrix = ToRotationMatrix();
 
 	return matrix * vector;
 }
@@ -648,9 +625,9 @@ void Mathematics::AQuaternion<Real>
 	MATHEMATICS_ASSERTION_1(firstQuaternion.IsNormalize() && secondQuaternion.IsNormalize() && thirdQuaternion.IsNormalize(),
 							"firstQuaternion、secondQuaternion、thirdQuaternion必须都是单位长度！");
 
-	auto secondQuaternionConjugate = secondQuaternion.Conjugate();
-	auto p0 = secondQuaternionConjugate * firstQuaternion;
-	auto p2 = secondQuaternionConjugate * thirdQuaternion;
+	const auto secondQuaternionConjugate = secondQuaternion.Conjugate();
+        const auto p0 = secondQuaternionConjugate * firstQuaternion;
+        const auto p2 = secondQuaternionConjugate * thirdQuaternion;
 
 	auto arg = -static_cast<Real>(0.25) * (p0.Log() + p2.Log());
 	*this = secondQuaternion * arg.Exp();
@@ -672,6 +649,8 @@ void Mathematics::AQuaternion<Real>
 
 	Slerp(slerpT, slerpP, slerpQ);
 }
+
+#include STSTEM_WARNING_POP
 
 #endif //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AQUATERNION_DETAIL)
 

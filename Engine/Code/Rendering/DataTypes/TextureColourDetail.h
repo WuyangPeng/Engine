@@ -16,7 +16,12 @@
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <type_traits> 
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 template <Rendering::TextureFormat Format>
 const typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
 	::sm_MinValue{ static_cast<BitType>(ColourTextureFormatTraits<Format>::sm_MinValue) };
@@ -136,8 +141,7 @@ Rendering::TextureColour<Format>
 } 
 
 template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>
-	::SetColour(BitType red, BitType green, BitType blue, BitType alpha)
+void Rendering::TextureColour<Format>::SetColour(BitType red, BitType green, BitType blue, BitType alpha) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -156,8 +160,7 @@ void Rendering::TextureColour<Format>
 }
 
 template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>
-	::SetColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Format>::SetColour(BitType red, BitType green, BitType blue) noexcept
 {
 	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
 	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
@@ -175,30 +178,22 @@ void Rendering::TextureColour<Format>
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A1R5G5B5>
-	::SetColour(BitType red, BitType green, BitType blue);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A1R5G5B5>::SetColour(BitType red, BitType green, BitType blue) noexcept;
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A4R4G4B4>
-	::SetColour(BitType red, BitType green, BitType blue);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A4R4G4B4>::SetColour(BitType red, BitType green, BitType blue) noexcept;
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8R8G8B8>
-	::SetColour(BitType red, BitType green, BitType blue);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8R8G8B8>::SetColour(BitType red, BitType green, BitType blue) noexcept;
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8B8G8R8>
-	::SetColour(BitType red, BitType green, BitType blue);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8B8G8R8>::SetColour(BitType red, BitType green, BitType blue) noexcept;
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16>
-	::SetColour(BitType red, BitType green, BitType blue);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16>::SetColour(BitType red, BitType green, BitType blue) noexcept;
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16F>
-	::SetColour(BitType red, BitType green, BitType blue);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16F>::SetColour(BitType red, BitType green, BitType blue) noexcept;
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A32B32G32R32F>
-	::SetColour(BitType red, BitType green, BitType blue);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A32B32G32R32F>::SetColour(BitType red, BitType green, BitType blue) noexcept;
 
 template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>
-	::SetColour(BitType value)
+void Rendering::TextureColour<Format>::SetColour(BitType value) noexcept
 {
 	static_assert(false,"TextureFormat is error!");
 
@@ -208,28 +203,22 @@ void Rendering::TextureColour<Format>
 }  
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8>
-	::SetColour(BitType alpha);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8>::SetColour(BitType alpha) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::L8>
-	::SetColour(BitType luminance);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::L8>::SetColour(BitType luminance) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::L16>
-	::SetColour(BitType luminance);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::L16>::SetColour(BitType luminance) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::R16F>
-	::SetColour(BitType red);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::R16F>::SetColour(BitType red) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::R32F>
-	::SetColour(BitType red);
- 
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::R32F>::SetColour(BitType red) noexcept;
+
 template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>
-	::SetColour(BitType firstValue, BitType secondValue)
+void Rendering::TextureColour<Format>::SetColour(BitType firstValue, BitType secondValue) noexcept
 {
 	static_assert(false, "TextureFormat is error!");
 
@@ -241,25 +230,22 @@ void Rendering::TextureColour<Format>
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8L8>
-	::SetColour(BitType alpha, BitType luminance);
+	::SetColour(BitType alpha, BitType luminance) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G16R16>
-	::SetColour(BitType green, BitType red);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G16R16>::SetColour(BitType green, BitType red) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>
-	::SetColour(BitType green, BitType red);
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>::SetColour(BitType green, BitType red) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>
-	::SetColour(BitType green, BitType red); 
- 
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>::SetColour(BitType green, BitType red) noexcept;
+
 // static 
 // private
 template <Rendering::TextureFormat Format>
 typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::Clamp(BitType colour, BitType maxValue)
+	::Clamp(BitType colour, BitType maxValue) noexcept
 {
 	if(colour < sm_MinValue)
 		return sm_MinValue;
@@ -526,7 +512,7 @@ Rendering::TextureColour<Format>& Rendering::TextureColour<Format>
 
 template <Rendering::TextureFormat Format>
 void Rendering::TextureColour<Format>
-	::Standardization()
+	::Standardization() noexcept
 {
     Standardization<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsRed>(std::is_same<ColourTextureFormatTraits<Format>::RedType,TrueType>(),sm_RedMaxValue);
 	Standardization<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsGreen>(std::is_same<ColourTextureFormatTraits<Format>::GreenType,TrueType>(), sm_GreenMaxValue);
@@ -538,7 +524,7 @@ void Rendering::TextureColour<Format>
 template <Rendering::TextureFormat Format>
 template <int Index>
 void Rendering::TextureColour<Format>
-	::Standardization(const std::false_type&,BitType maxValue)
+	::Standardization(const std::false_type&,BitType maxValue) noexcept
 {
 	SYSTEM_UNUSED_ARG(maxValue);
 }
@@ -546,7 +532,7 @@ void Rendering::TextureColour<Format>
 template <Rendering::TextureFormat Format>
 template <int Index>
 void Rendering::TextureColour<Format>
-	::Standardization(const std::true_type&,BitType maxValue)
+	::Standardization(const std::true_type&,BitType maxValue) noexcept
 {
 	static_assert(0 <= Index && Index < sm_ArraySize,"index is crossing!");
 
@@ -738,5 +724,5 @@ const Rendering::TextureColour<LhsFormat> Rendering
 
 	return TextureColour<LhsFormat>(lhs) /= rhs;
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H

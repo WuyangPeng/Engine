@@ -86,7 +86,7 @@ static std::shared_ptr<ResultType> CoreTools::State<EventType>
 
 template <typename EntityType>
 const CoreTools::Rtti& CoreTools::State<EntityType>
-	::GetRttiType() const
+	::GetRttiType() const noexcept
 {
 	return sm_Type;
 }

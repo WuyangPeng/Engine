@@ -30,19 +30,24 @@ namespace Rendering
 		// Construction and destruction.
 		TerrainBase(const System::String& heightName, VertexFormatSmartPointer vformat, CameraSmartPointer camera );
 
-		virtual ~TerrainBase();
+		  ~TerrainBase();
+		  
+		  TerrainBase(const TerrainBase&) = default;
+		   TerrainBase& operator=(const TerrainBase&) = default;
+			TerrainBase(TerrainBase&&) = default;
+		   TerrainBase& operator=(TerrainBase&&) = default;
 
 		// Member access.
-		 int GetRowQuantity() const;
-		 int GetColQuantity() const;
-		 int GetSize() const;
-		 float GetMinElevation() const;
-		 float GetMaxElevation() const;
-		 float GetSpacing() const;
+		 int GetRowQuantity() const noexcept;
+		 int GetColQuantity() const noexcept;
+		 int GetSize() const noexcept;
+		 float GetMinElevation() const noexcept;
+		 float GetMaxElevation() const noexcept;
+		 float GetSpacing() const noexcept;
 
 		// Page management.
 		 TerrainPageSmartPointer GetPage(int row, int col);
-		 TerrainPageSmartPointer GetCurrentPage(float x, float y) const;
+		 TerrainPageSmartPointer GetCurrentPage(float x, float y) const noexcept;
 		float GetHeight(float x, float y) const;
 
 		// Estimate a normal vector at (x,y) by using the neighbors (x+dx,y+dy),
@@ -81,9 +86,11 @@ namespace Rendering
 		int mCameraRow, mCameraCol;
 		CameraSmartPointer mCamera;
 	};
-	
+	#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(TerrainBase);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, TerrainBase);
+		#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_TERRAIN_TERRAIN_BASE_H

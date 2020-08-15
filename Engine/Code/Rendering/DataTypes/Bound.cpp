@@ -16,7 +16,9 @@
 
 using std::vector;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::Bound
     ::Bound(const APoint& center,float radius)
 	:m_Impl{ make_shared<ImplType>(center,radius) }
@@ -38,9 +40,9 @@ DELAY_COPY_CONSTRUCTION_DEFINE(Rendering,Bound)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Bound,SetCenter,APoint,void);
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Bound,SetRadius,float,void);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Bound,GetCenter,const Rendering::Bound::APoint&);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Bound,GetCenter,const Rendering::Bound::APoint&);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Bound,GetRadius,float);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Bound, GetRadius, float);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Bound,GetStreamingSize,int);
 
@@ -97,7 +99,7 @@ bool Rendering
 
     // ≤‚ ‘æ≤Ã¨«Ú∫Õæ≤Ã¨«Úµƒœ‡Ωª°£
     auto difference = lhsBound.GetCenter() - rhsBound.GetCenter();
-	auto radiusSum = lhsBound.GetRadius() + rhsBound.GetRadius();
+	const auto radiusSum = lhsBound.GetRadius() + rhsBound.GetRadius();
 
     return difference.SquaredLength() <= radiusSum * radiusSum;
 }
@@ -117,8 +119,8 @@ bool Rendering
 	auto centerDifference = rhsBound.GetCenter() - lhsBound.GetCenter();;
 	auto realVelocitySquaredLength = realVelocity.SquaredLength();
 	auto centerDifferenceSquaredLength = centerDifference.SquaredLength();
-	auto radiusSum = lhsBound.GetRadius() + rhsBound.GetRadius();
-	auto radiusSumSquared = radiusSum * radiusSum;
+	const auto radiusSum = lhsBound.GetRadius() + rhsBound.GetRadius();
+	const auto radiusSumSquared = radiusSum * radiusSum;
 
     if (0.0f < realVelocitySquaredLength)
     {
@@ -149,3 +151,4 @@ bool Rendering
     else
          return false;
 }
+#include STSTEM_WARNING_POP

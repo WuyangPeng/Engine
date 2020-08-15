@@ -20,20 +20,16 @@ CoreTools::CommonDataResource
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::CommonDataResource
-	::~CommonDataResource()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(CoreTools, CommonDataResource)
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(CoreTools, CommonDataResource)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommonDataResource, GetSize, uint32_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommonDataResource, IsDisposed, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommonDataResource, GetSize, uint32_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommonDataResource, IsDisposed, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommonDataResource, Recreate, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommonDataResource, Dispose, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommonDataResource, Dispose, void)
 
 void CoreTools::CommonDataResource
 	::SetData(int index, uint8_t value)

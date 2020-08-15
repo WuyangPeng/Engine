@@ -37,11 +37,14 @@ namespace Mathematics
 		~VariableLengthVector();
 
 		VariableLengthVector& operator= (const VariableLengthVector& rhs);
+		
+		VariableLengthVector(VariableLengthVector&& rhs) = default;
+		VariableLengthVector& operator= (VariableLengthVector&& rhs)= default;
 
 		CLASS_INVARIANT_DECLARE;
 
 		// 坐标访问		
-		int GetSize() const;
+		int GetSize() const noexcept;
 
 		const Real* GetElements() const;
 		Real* GetElements();
@@ -55,7 +58,7 @@ namespace Mathematics
 
 		VariableLengthVector& operator+= (const VariableLengthVector& rhs);
 		VariableLengthVector& operator-= (const VariableLengthVector& rhs);
-		VariableLengthVector& operator*= (Real scalar);
+		VariableLengthVector& operator*= (Real scalar) noexcept;
 		VariableLengthVector& operator/= (Real scalar);
 
 		// 向量运算
@@ -66,7 +69,7 @@ namespace Mathematics
 		const std::vector<Real> GetValue() const;
 
 	private:
-		void Swap(VariableLengthVector& rhs);
+		void Swap(VariableLengthVector& rhs) noexcept;
 
 	private:
 		int m_Size;

@@ -19,12 +19,13 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using std::string;
 using std::vector;
 
 Rendering::BlendTransformControllerImpl
-	::BlendTransformControllerImpl()
+	::BlendTransformControllerImpl() noexcept
 	:m_FirstController{}, m_SecondController{}, m_Weight{ 0.0f }, m_RotationScaleMatrices{ false }, m_GeometricRotation{ false }, m_GeometricScale{ false }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -32,7 +33,7 @@ Rendering::BlendTransformControllerImpl
 
 Rendering::BlendTransformControllerImpl
 	::BlendTransformControllerImpl(const TransformControllerSmartPointer& firstController,const TransformControllerSmartPointer& secondController, 
-								   bool rotationScaleMatrices, bool geometricRotation,bool geometricScale) 
+								   bool rotationScaleMatrices, bool geometricRotation,bool geometricScale) noexcept
 	:m_FirstController{ firstController },m_SecondController{ secondController },m_Weight{ 0.0f },
 	 m_RotationScaleMatrices{ rotationScaleMatrices },m_GeometricRotation{ geometricRotation },m_GeometricScale{ geometricScale }
 {
@@ -70,8 +71,8 @@ void Rendering::BlendTransformControllerImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.WriteSmartPointer(m_FirstController);
-	target.WriteSmartPointer(m_SecondController);
+	//target.WriteSmartPointer(m_FirstController);
+	//target.WriteSmartPointer(m_SecondController);
 	target.Write(m_Weight);
 	target.WriteBool(m_RotationScaleMatrices);
 	target.WriteBool(m_GeometricRotation);
@@ -83,24 +84,22 @@ void Rendering::BlendTransformControllerImpl
 {
 	RENDERING_CLASS_IS_VALID_1;	 
 
-	source.ReadSmartPointer(m_FirstController);
-	source.ReadSmartPointer(m_SecondController);
+//	source.ReadSmartPointer(m_FirstController);
+//	source.ReadSmartPointer(m_SecondController);
 	source.Read(m_Weight);
 	m_RotationScaleMatrices = source.ReadBool();
 	m_GeometricRotation = source.ReadBool();
 	m_GeometricScale = source.ReadBool();	
 }
 
-bool Rendering::BlendTransformControllerImpl
-	::IsGeometricRotation() const
+bool Rendering::BlendTransformControllerImpl ::IsGeometricRotation() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_GeometricRotation;
 }
 
-bool Rendering::BlendTransformControllerImpl
-	::IsGeometricScale() const 
+bool Rendering::BlendTransformControllerImpl ::IsGeometricScale() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -111,18 +110,20 @@ void Rendering::BlendTransformControllerImpl
 	::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	source.ResolveObjectSmartPointerLink(m_FirstController);
-	source.ResolveObjectSmartPointerLink(m_SecondController);
+    CoreTools::DoNothing();
+    source;
+    //	source.ResolveObjectSmartPointerLink(m_FirstController);
+	//source.ResolveObjectSmartPointerLink(m_SecondController);
 }
 
 void Rendering::BlendTransformControllerImpl
 	::Register(CoreTools::ObjectRegister& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	target.RegisterSmartPointer(m_FirstController);
-	target.RegisterSmartPointer(m_SecondController);
+    target;
+        CoreTools::DoNothing();
+	//target.RegisterSmartPointer(m_FirstController);
+	//target.RegisterSmartPointer(m_SecondController);
 }
 
 const CoreTools::ObjectSmartPointer Rendering::BlendTransformControllerImpl
@@ -197,40 +198,35 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::BlendTransformContro
 	return firstObjects;
 }
 
-const Rendering::ConstTransformControllerSmartPointer Rendering::BlendTransformControllerImpl
-	::GetFirstController() const 
+const Rendering::ConstTransformControllerSmartPointer Rendering::BlendTransformControllerImpl ::GetFirstController() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_FirstController.PolymorphicCastConstObjectSmartPointer<ConstTransformControllerSmartPointer>();
+	return m_FirstController;
 }
 
-bool Rendering::BlendTransformControllerImpl
-	::IsRotationScaleMatrices() const
+bool Rendering::BlendTransformControllerImpl ::IsRotationScaleMatrices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_RotationScaleMatrices;
 }
 
-const Rendering::ConstTransformControllerSmartPointer Rendering::BlendTransformControllerImpl
-	::GetSecondController() const
+const Rendering::ConstTransformControllerSmartPointer Rendering::BlendTransformControllerImpl ::GetSecondController() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	
-	return m_SecondController.PolymorphicCastConstObjectSmartPointer<ConstTransformControllerSmartPointer>();
+	return m_SecondController;
 }
 
-void Rendering::BlendTransformControllerImpl
-	::SetWeight(float weight) 
+void Rendering::BlendTransformControllerImpl ::SetWeight(float weight) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_Weight = weight;
 }
 
-float Rendering::BlendTransformControllerImpl
-	::GetWeight() const 
+float Rendering::BlendTransformControllerImpl ::GetWeight() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -264,7 +260,7 @@ const Rendering::BlendTransformControllerImpl::APoint Rendering::BlendTransformC
 
 	const auto firstTransform = m_FirstController->GetTransform();
 	const auto secondTransform = m_SecondController->GetTransform();
-	auto oneMinusWeight = 1.0f - m_Weight;
+        const auto oneMinusWeight = 1.0f - m_Weight;
 
 	// ËãÊõ»ìºÏ×ª»»¡£
 	const auto firstTranslate = firstTransform.GetTranslate();
@@ -285,11 +281,11 @@ const Rendering::BlendTransformControllerImpl::Matrix Rendering::BlendTransformC
 	const auto firstRotate = firstTransform.GetRotate();
 	const auto secondRotate = secondTransform.GetRotate();
 
-	Mathematics::AQuaternionf firstQuaternion{ firstRotate };
-	Mathematics::AQuaternionf secondQuaternion{ secondRotate };
+	const Mathematics::AQuaternionf firstQuaternion{ firstRotate };
+        const Mathematics::AQuaternionf secondQuaternion{ secondRotate };
 	if (Dot(firstQuaternion,secondQuaternion) < 0.0f)
 	{
-		secondQuaternion = -secondQuaternion;
+		//secondQuaternion = -secondQuaternion;
 	}
 
 	Mathematics::AQuaternionf blendQuaternion;
@@ -300,7 +296,7 @@ const Rendering::BlendTransformControllerImpl::Matrix Rendering::BlendTransformC
 	}
 	else
 	{
-		auto oneMinusWeight = 1.0f - m_Weight;
+		const auto oneMinusWeight = 1.0f - m_Weight;
 		blendQuaternion = oneMinusWeight * firstQuaternion + m_Weight * secondQuaternion;
 		blendQuaternion.Normalize();
 	}
@@ -321,7 +317,7 @@ const Rendering::BlendTransformControllerImpl::APoint Rendering::BlendTransformC
  
 	APoint blendScale;
 
-	auto oneMinusWeight = 1.0f - m_Weight;
+	const auto oneMinusWeight = 1.0f - m_Weight;
 
 	if (m_GeometricScale)
 	{
@@ -334,8 +330,8 @@ const Rendering::BlendTransformControllerImpl::APoint Rendering::BlendTransformC
 
 			if (Mathematics::Mathf::sm_ZeroTolerance < absS0 && Mathematics::Mathf::sm_ZeroTolerance < absS1)
 			{
-				auto sign0 = Mathematics::Mathf::Sign(s0);
-				auto sign1 = Mathematics::Mathf::Sign(s1);
+                            const auto sign0 = Mathematics::Mathf::Sign(s0);
+                            const auto sign1 = Mathematics::Mathf::Sign(s1);
 			 
 				auto pow0 = Mathematics::Mathf::Pow(absS0, oneMinusWeight);
 				auto pow1 = Mathematics::Mathf::Pow(absS1, m_Weight);
@@ -367,7 +363,7 @@ const Rendering::BlendTransformControllerImpl::Matrix Rendering::BlendTransformC
 	const auto& firstMatrix = firstTransform.GetMatrix();
 	const auto& secondMatrix = secondTransform.GetMatrix();
 
-	auto oneMinusWeight = 1.0f - m_Weight;
+	 const auto oneMinusWeight = 1.0f - m_Weight;
 
 	return oneMinusWeight * firstMatrix + m_Weight * secondMatrix;
 }

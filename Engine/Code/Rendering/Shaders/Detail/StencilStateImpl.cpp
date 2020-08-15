@@ -13,7 +13,12 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::StencilStateImpl
 	::StencilStateImpl()
 	:m_Enabled{ false },m_Compare{ StencilStateFlags::CompareMode::Never },m_Reference{ 0 },m_Mask{ 0xFFFFFFFF },
@@ -255,3 +260,4 @@ void Rendering::StencilStateImpl
 	m_OnZFail = OperationType(onZFail);
 	m_OnZPass = OperationType(onZPass);
 }
+#include STSTEM_WARNING_POP

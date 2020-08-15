@@ -11,7 +11,9 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 template <typename Real, typename UserDataType>
 Mathematics::RombergIntegral<Real, UserDataType>
 	::RombergIntegral(int order, Real begin, Real end, Function function, const UserDataType* userData)
@@ -28,9 +30,16 @@ template <typename Real, typename UserDataType>
 Mathematics::RombergIntegral<Real, UserDataType>
 	::~RombergIntegral()
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-
-	DELETE2(m_Rom);
+ 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+EXCEPTION_TRY
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+ DELETE2(m_Rom);
+#include STSTEM_WARNING_POP
+}
+EXCEPTION_ALL_CATCH(Mathematics)  
+	
 }
 
 template <typename Real, typename UserDataType>
@@ -62,7 +71,7 @@ Mathematics::RombergIntegral<Real, UserDataType>& Mathematics::RombergIntegral<R
 // private
 template <typename Real, typename UserDataType>
 void Mathematics::RombergIntegral<Real, UserDataType>
-	::Calculate()
+	::Calculate() noexcept
 {
 	auto difference = m_End - m_Begin;
 
@@ -119,11 +128,11 @@ bool Mathematics::RombergIntegral<Real, UserDataType>
 
 template <typename Real, typename UserDataType>
 Real Mathematics::RombergIntegral<Real, UserDataType>
-	::GetValue() const
+	::GetValue() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	return m_Value;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_ROMBERG_INTEGRAL_DETAIL_H

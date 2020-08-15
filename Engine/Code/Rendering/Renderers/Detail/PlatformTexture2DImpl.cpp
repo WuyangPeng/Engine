@@ -13,9 +13,11 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
 Rendering::PlatformTexture2DImpl
-	::PlatformTexture2DImpl()	
+	::PlatformTexture2DImpl()	noexcept
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -52,8 +54,8 @@ Rendering::PlatformTexture2DImpl::PlatformTexture2DPtr Rendering::PlatformTextur
 }
 
 // static 
-Rendering::PlatformTexture2DImpl::PlatformTexture2DPtr Rendering::PlatformTexture2DImpl
-	:: CreateDefault(Renderer* renderer, const Texture2D* texture2D)
+Rendering::PlatformTexture2DImpl::PlatformTexture2DPtr Rendering::PlatformTexture2DImpl ::CreateDefault(Renderer* renderer, const Texture2D* texture2D)
 {
-    return make_shared <OpenGLTexture2D>(renderer, texture2D);
+    return make_shared<OpenGLTexture2D>(renderer, texture2D);
 }
+    #include STSTEM_WARNING_POP

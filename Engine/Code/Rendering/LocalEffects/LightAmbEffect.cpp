@@ -15,7 +15,19 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26815)
 CORE_TOOLS_RTTI_DEFINE(Rendering, LightAmbEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightAmbEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightAmbEffect);
@@ -23,7 +35,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightAmbEffect);
 Rendering::LightAmbEffect
 	::LightAmbEffect()
 {
-	VertexShaderSmartPointer vshader{ NEW0 VertexShader{"Wm5.LightAmb",1, 2, 5, 0 }};
+    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>( "Wm5.LightAmb", 1, 2, 5, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -35,7 +47,7 @@ Rendering::LightAmbEffect
 
 	auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 5; ++j)
 		{
@@ -45,46 +57,42 @@ Rendering::LightAmbEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	} 
 
-	PixelShaderSmartPointer pshader{ NEW0 PixelShader{"Wm5.LightAmb",1, 1, 0, 0} };
+	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.LightAmb",1, 1, 0, 0) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
 
 	profile = pshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{ NEW0 VisualPass{} };
+	VisualPassSmartPointer pass{ std::make_shared < VisualPass>() };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSmartPointer{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSmartPointer{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSmartPointer{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSmartPointer{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSmartPointer{ NEW0 WireState{} });
+        pass->SetAlphaState(AlphaStateSmartPointer{ std::make_shared<AlphaState>() });
+        pass->SetCullState(CullStateSmartPointer{ std::make_shared<CullState>() });
+        pass->SetDepthState(DepthStateSmartPointer{ std::make_shared<DepthState>() });
+        pass->SetOffsetState(OffsetStateSmartPointer{ std::make_shared<OffsetState>() });
+        pass->SetStencilState(StencilStateSmartPointer{ std::make_shared<StencilState>() });
+        pass->SetWireState(WireStateSmartPointer{ std::make_shared<WireState>() });
 
-	VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique{} };
+	VisualTechniqueSmartPointer technique{ std::make_shared<VisualTechnique>() };
 	technique->InsertPass(pass);
 	InsertTechnique(technique);
 }
-
-Rendering::LightAmbEffect
-	::~LightAmbEffect()
-{
-}
+ 
 
 Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 	::CreateInstance(Light* light,  Material* material) const
 {
 	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
-    instance->SetVertexConstant(0, 1,ShaderFloatSmartPointer(NEW0 MaterialEmissiveConstant(MaterialSmartPointer(material))));
-    instance->SetVertexConstant(0, 2,ShaderFloatSmartPointer(NEW0 MaterialAmbientConstant(MaterialSmartPointer(material))));
-    instance->SetVertexConstant(0, 3,ShaderFloatSmartPointer(NEW0 LightAmbientConstant(LightSmartPointer(light))));
-    instance->SetVertexConstant(0, 4,ShaderFloatSmartPointer(NEW0 LightAttenuationConstant(LightSmartPointer(light))));
+	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared< ProjectionViewMatrixConstant>()));
+        instance->SetVertexConstant(0, 1, ShaderFloatSmartPointer(std::make_shared < MaterialEmissiveConstant>(MaterialSmartPointer(material))));
+        instance->SetVertexConstant(0, 2, ShaderFloatSmartPointer(std::make_shared < MaterialAmbientConstant>(MaterialSmartPointer(material))));
+        instance->SetVertexConstant(0, 3, ShaderFloatSmartPointer(std::make_shared < LightAmbientConstant>(LightSmartPointer(light))));
+        instance->SetVertexConstant(0, 4, ShaderFloatSmartPointer(std::make_shared < LightAttenuationConstant>(LightSmartPointer(light))));
 
     return instance;
 }
@@ -92,7 +100,7 @@ Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 	::CreateUniqueInstance(Light* light, Material* material)
 {
-    LightAmbEffect* effect = CoreTools::New0 < LightAmbEffect>();
+   const LightAmbEffect* effect = CoreTools::New0 < LightAmbEffect>();
     return effect->CreateInstance(light, material);
 }
 
@@ -129,9 +137,9 @@ void Rendering::LightAmbEffect
 	auto pass = GetTechnique(0)->GetPass(0);
 	auto vshader = pass->GetVertexShader();
 	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().GetData());
+	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 5; ++j)
 		{
@@ -141,9 +149,9 @@ void Rendering::LightAmbEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().GetData());
+	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		profile->SetProgram(i, msPPrograms[i]);
 	}
@@ -175,7 +183,7 @@ int  Rendering::LightAmbEffect
 
 int  Rendering::LightAmbEffect::msDx9VRegisters[5]  { 0, 4, 5, 6, 7 };
 int  Rendering::LightAmbEffect::msOglVRegisters[5] { 1, 5, 6, 7, 8 };
-int*  Rendering::LightAmbEffect::msVRegisters[ShaderFlags::MaxProfiles] 
+int*  Rendering::LightAmbEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msDx9VRegisters,
@@ -184,7 +192,7 @@ int*  Rendering::LightAmbEffect::msVRegisters[ShaderFlags::MaxProfiles]
     msOglVRegisters
 };
 
-std::string  Rendering::LightAmbEffect::msVPrograms[ShaderFlags::MaxProfiles] 
+std::string  Rendering::LightAmbEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // VP_NONE
     "",
@@ -258,7 +266,7 @@ std::string  Rendering::LightAmbEffect::msVPrograms[ShaderFlags::MaxProfiles]
     "END\n"
 };
 
-std::string  Rendering::LightAmbEffect::msPPrograms[ShaderFlags::MaxProfiles] 
+std::string  Rendering::LightAmbEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // PP_NONE
     "",
@@ -283,3 +291,4 @@ std::string  Rendering::LightAmbEffect::msPPrograms[ShaderFlags::MaxProfiles]
     "END\n"
 };
 
+#include STSTEM_WARNING_POP

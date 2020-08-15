@@ -18,7 +18,9 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2D<Real>
 	::sm_Zero{ Math::sm_Zero,Math::sm_Zero };
@@ -108,7 +110,7 @@ bool Mathematics::Vector2D<Real>
 
 template <typename Real>
 Real Mathematics::Vector2D<Real>
-	::GetXCoordinate() const noexcept
+	::GetXCoordinate() const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -117,7 +119,7 @@ Real Mathematics::Vector2D<Real>
 
 template <typename Real>
 Real Mathematics::Vector2D<Real>
-	::GetYCoordinate() const noexcept
+	::GetYCoordinate() const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -138,7 +140,7 @@ bool Mathematics::Vector2D<Real>
 
 template <typename Real>
 void Mathematics::Vector2D<Real>
-	::ZeroOut()
+	::ZeroOut() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -195,7 +197,7 @@ void Mathematics::Vector2D<Real>
 
 template <typename Real>
 bool Mathematics::Vector2D<Real>
-	::IsNormalize(const Real epsilon) const noexcept
+	::IsNormalize(const Real epsilon) const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -331,5 +333,5 @@ const typename Mathematics::Vector2D<Real>::ClassType Mathematics::Vector2D<Real
 
 	return *this + t * velocity;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_VECTOR_2D_DETAIL_H

@@ -9,7 +9,11 @@
 #include "OpenGLTextureDataDetail.h"
 #include "OpenGLTextureDataManageDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 // private
 template <>
 void Rendering::OpenGLTextureData<Rendering::Texture1D>
@@ -134,7 +138,7 @@ void Rendering::OpenGLTextureData<Rendering::TextureCube>
 // private
 template <>
 void Rendering::OpenGLTextureData<Rendering::Texture1D>
-	::TextureImage(int level)
+	::TextureImage(int level) noexcept
 {
 	// TODO:  当创建只有0级纹理（不是一套完整的mipmaps贴图），
 	// 将下面的代码生成在AMD Radeon HD 7970
@@ -151,7 +155,7 @@ void Rendering::OpenGLTextureData<Rendering::Texture1D>
 // private
 template <>
 void Rendering::OpenGLTextureData<Rendering::Texture2D>
-	::TextureImage(int level)
+	::TextureImage(int level) noexcept
 { 	 
 	if (m_IsCompressed)
 	{
@@ -179,7 +183,7 @@ void Rendering::OpenGLTextureData<Rendering::Texture2D>
 // private
 template <>
 void Rendering::OpenGLTextureData<Rendering::Texture3D>
-	::TextureImage(int level)
+	::TextureImage(int level) noexcept
 { 
 	// TODO:  当创建只有0级纹理（不是一套完整的mipmaps贴图），
 	// 将下面的代码生成在AMD Radeon HD 7970
@@ -193,3 +197,4 @@ void Rendering::OpenGLTextureData<Rendering::Texture3D>
 	System::GetGlTexImage3D(level, m_InternalFormat,  m_Dimension[0][level], m_Dimension[1][level], m_Dimension[2][level], m_Format, m_Type);
 		 
 }
+#include STSTEM_WARNING_POP

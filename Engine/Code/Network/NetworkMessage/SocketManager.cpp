@@ -13,7 +13,10 @@
 
 using std::make_shared;
 using std::make_unique;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::SocketManager
 	::SocketManager()
 	:m_Impl{ make_shared<ImplType>() }
@@ -21,29 +24,10 @@ Network::SocketManager
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::SocketManager
-	::~SocketManager()
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
+ 
 
-Network::SocketManager
-	::SocketManager(SocketManager&& rhs) noexcept
-	:m_Impl{ move(rhs.m_Impl) }
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Network::SocketManager& Network::SocketManager
-	::operator =(SocketManager&& rhs) noexcept
-{
-	NETWORK_CLASS_IS_VALID_1;
-
-	m_Impl = move(rhs.m_Impl);
-
-	return *this;
-}
-
+ 
+ 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SocketManager)
 
 void Network::SocketManager
@@ -131,3 +115,4 @@ int Network::SocketManager
 
 	return m_Impl->GetSocketSize();
 }
+#include STSTEM_WARNING_POP

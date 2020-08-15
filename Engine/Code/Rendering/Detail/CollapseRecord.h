@@ -41,13 +41,13 @@ namespace Rendering
 	 int GetIndicesSize() const;
 	 void ClearIndices();
 
-	 int GetVKeep() const;
+	 int GetVKeep() const noexcept;
 	 void SetVKeep(int vKeep);
-	 int GetVThrow() const;
+	 int GetVThrow() const noexcept;
 	 void SetVThrow(int vThrow);
-	 int GetNumVertices() const;
+	 int GetNumVertices() const noexcept;
 	 void SetNumVertices(int numVertices);
-	 int GetNumTriangles() const;
+	 int GetNumTriangles() const noexcept;
 	 void SetNumTriangles(int numTriangles);
 
 	 void Load(BufferSource& source);

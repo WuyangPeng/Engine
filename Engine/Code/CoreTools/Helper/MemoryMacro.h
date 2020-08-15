@@ -95,6 +95,7 @@
 		#include STSTEM_WARNING_PUSH
 
 		#include SYSTEM_WARNING_DISABLE(26409)  
+		#include SYSTEM_WARNING_DISABLE(26402)  
 			return NEW0 T(std::forward<Types>(args)...);
 
 		#include STSTEM_WARNING_POP

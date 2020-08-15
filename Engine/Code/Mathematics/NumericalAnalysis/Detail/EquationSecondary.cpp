@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 Mathematics::EquationSecondary
-	::EquationSecondary(double constant, double once, double secondary, double epsilon)
+	::EquationSecondary(double constant, double once, double secondary, double epsilon)  
 	:ParentType{ epsilon }, m_Constant{ constant }, m_Once{ once }, m_Secondary{ secondary }
 {
 	Calculate();
@@ -21,16 +21,12 @@ Mathematics::EquationSecondary
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-Mathematics::EquationSecondary
-	::~EquationSecondary()
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EquationSecondary)
 
 double Mathematics::EquationSecondary
-	::Substitution(double value) const
+	::Substitution(double value) const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -46,7 +42,7 @@ const Mathematics::EquationSecondary::Imaginary Mathematics::EquationSecondary
 }
 
 double Mathematics::EquationSecondary
-	::SubstitutionTangent(double solution) const
+	::SubstitutionTangent(double solution) const noexcept
 {
 	return m_Once + solution * m_Secondary * 2.0;
 }
@@ -60,8 +56,8 @@ const Mathematics::EquationSecondary::Imaginary Mathematics::EquationSecondary
 void Mathematics::EquationSecondary
 	::Solving()
 {
-	auto discriminant = CalculateDiscriminant();
-	auto lhsTemporarily = CalculateLhs();
+	const auto discriminant = CalculateDiscriminant();
+	const auto lhsTemporarily = CalculateLhs();
 
 	CalculateResult(lhsTemporarily, discriminant);
 }
@@ -92,14 +88,14 @@ bool Mathematics::EquationSecondary
 }
 
 double Mathematics::EquationSecondary
-	::CalculateDiscriminant() const
+	::CalculateDiscriminant() const noexcept
 {
 	// º∆À„b^2 - 4ac
 	return  -m_Secondary * m_Constant * 4.0 + m_Once * m_Once;
 }
 
 double Mathematics::EquationSecondary
-	::CalculateLhs() const
+	::CalculateLhs() const noexcept
 {
 	// º∆À„-b / 2a
 	return -m_Once / m_Secondary / 2.0;
@@ -122,8 +118,8 @@ void Mathematics::EquationSecondary
 	// º∆À„sqrt(discriminant) / 2a
 	auto rhs = Mathd::Sqrt(discriminant) / m_Secondary / 2.0;
 
-	auto minResult = lhs - rhs;
-	auto maxResult = lhs + rhs;
+	const auto minResult = lhs - rhs;
+	const auto maxResult = lhs + rhs;
 
 	SetRealResult(minResult);
 	SetRealResult(maxResult);

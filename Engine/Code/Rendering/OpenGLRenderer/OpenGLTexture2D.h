@@ -27,17 +27,17 @@ namespace Rendering
 
 	public:		
 		OpenGLTexture2D (Renderer* renderer, const Texture2D* texture);
-		virtual ~OpenGLTexture2D ();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		// ÎÆÀí²Ù×÷
-		virtual void Enable (Renderer* renderer, int textureUnit) override;
-		virtual void Disable (Renderer* renderer, int textureUnit) override;
-		virtual void* Lock (int level, BufferLocking mode) override;
-		virtual void Unlock (int level) override;
+		  void Enable (Renderer* renderer, int textureUnit) noexcept override;
+		  void Disable (Renderer* renderer, int textureUnit) noexcept override;
+		  void* Lock (int level, BufferLocking mode) noexcept  override;
+		  void Unlock (int level) noexcept override;
 
-		virtual UInt GetTexture () const override;
+		  UInt GetTexture () const noexcept override;
 		
 	private:
 		OpenGLTextureData<Texture2D> m_OpenGLTextureData;

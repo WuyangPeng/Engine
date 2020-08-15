@@ -16,7 +16,9 @@
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 Rendering::Float2ArrayImpl
 	::Float2ArrayImpl( const Float2Vector& elements )
 	:m_Elements{ elements }
@@ -25,7 +27,7 @@ Rendering::Float2ArrayImpl
 }
 
 Rendering::Float2ArrayImpl
-	::Float2ArrayImpl()
+	::Float2ArrayImpl() noexcept
 	:m_Elements{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -66,7 +68,7 @@ int Rendering::Float2ArrayImpl
 }
 
 const Rendering::Float2ArrayImpl::Float2* Rendering::Float2ArrayImpl
-	::GetData() const
+	::GetData() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -90,3 +92,4 @@ Rendering::Float2ArrayImpl::Float2& Rendering::Float2ArrayImpl
 	return OPERATOR_SQUARE_BRACKETS(Float2, index);
 }
 
+#include STSTEM_WARNING_POP

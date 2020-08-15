@@ -16,7 +16,13 @@
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(6385)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(6386)
 int Rendering::VertexFormatImpl
 	::sm_ComponentSize[System::EnumCastUnderlying(VertexFormatFlags::AttributeType::Quantity)] 
 {
@@ -128,12 +134,12 @@ void Rendering::VertexFormatImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(0 < stride, "Stride必须是正数。\n");
-
+        CoreTools::DoNothing();
 	m_Stride = stride;
 }
 
 int Rendering::VertexFormatImpl
-	::GetNumAttributes() const
+	::GetNumAttributes() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -186,15 +192,14 @@ unsigned int Rendering::VertexFormatImpl
 }
 
 int Rendering::VertexFormatImpl
-	::GetStride() const
+	::GetStride() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_Stride;
 }
 
-int Rendering::VertexFormatImpl
-	::GetIndex( AttributeUsage usage, unsigned int usageIndex ) const
+int Rendering::VertexFormatImpl ::GetIndex(AttributeUsage usage, unsigned int usageIndex) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -210,19 +215,19 @@ int Rendering::VertexFormatImpl
 }
 
 int Rendering::VertexFormatImpl
-	::GetComponentSize( AttributeType type )
+	::GetComponentSize( AttributeType type ) noexcept
 {
 	return sm_ComponentSize[System::EnumCastUnderlying(type)];
 }
 
 int Rendering::VertexFormatImpl
-	::GetNumComponents( AttributeType type )
+	::GetNumComponents( AttributeType type ) noexcept
 {
 	 return sm_NumComponents[System::EnumCastUnderlying(type)];
 }
 
 int Rendering::VertexFormatImpl
-	::GetTypeSize( AttributeType type )
+	::GetTypeSize( AttributeType type ) noexcept
 {
 	return sm_TypeSize[System::EnumCastUnderlying(type)];
 }
@@ -306,4 +311,4 @@ void Rendering::VertexFormatImpl
 }
 
 
-
+#include STSTEM_WARNING_POP

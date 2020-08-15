@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::QuaternionSwingTwist <Real>
-	::QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist)
+	::QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist) noexcept
 	: m_Swing{ swing }, m_Twist{ twist }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;

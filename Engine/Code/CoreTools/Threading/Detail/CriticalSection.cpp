@@ -12,18 +12,13 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CriticalSection
-	::CriticalSection()
+	::CriticalSection() noexcept
 	:m_CriticalSection{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::CriticalSection
-	::~CriticalSection()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CriticalSection)
 
 void CoreTools::CriticalSection
@@ -38,7 +33,7 @@ void CoreTools::CriticalSection
 }
 
 void CoreTools::CriticalSection
-	::Delete()
+	::Delete() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -46,7 +41,7 @@ void CoreTools::CriticalSection
 }
 
 void CoreTools::CriticalSection
-	::Enter()
+	::Enter() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -54,7 +49,7 @@ void CoreTools::CriticalSection
 }
 
 void CoreTools::CriticalSection
-	::Leave()
+	::Leave() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -62,7 +57,7 @@ void CoreTools::CriticalSection
 }
 
 bool CoreTools::CriticalSection
-	::TryEnter()
+	::TryEnter() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 

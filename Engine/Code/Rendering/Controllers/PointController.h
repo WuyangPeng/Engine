@@ -28,8 +28,10 @@ namespace Rendering
 	public:
 		// 所连接的对象必须是Polypoint或Polypoint派生的类。
 		PointController();
-		virtual ~PointController();
-
+		  ~PointController();
+		PointController(PointController&&) = default;
+		  PointController& operator=(PointController&&) = default;
+		  
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(PointController); 
@@ -38,7 +40,7 @@ namespace Rendering
 		// 其中点代表一个刚体在应用程序，
 		// 你可以选择该系统的原点为点的质量中心和
 		// 坐标轴对应于惯性张量的主方向。
-		int GetNumPoints() const;
+		int GetNumPoints() const noexcept;
 		float GetPointLinearSpeed(int index) const;
 		float GetPointAngularSpeed(int index) const;
 		const AVector GetPointLinearAxis(int index) const;
@@ -49,19 +51,19 @@ namespace Rendering
 		void SetPointLinearAxis(int index, const AVector& pointLinearAxis);
 		void SetPointAngularAxis(int index, const AVector& pointAngularAxis);
 
-		float GetSystemLinearSpeed() const;
-		void SetSystemLinearSpeed(float systemLinearSpeed);
-		float GetSystemAngularSpeed() const;
-		void SetSystemAngularSpeed(float systemAngularSpeed);
-		const AVector GetSystemLinearAxis() const;
-		void SetSystemLinearAxis(const AVector& systemLinearAxis);
-		const AVector GetSystemAngularAxis() const;
-		void SetSystemAngularAxis(const AVector& systemAngularAxis);
+		float GetSystemLinearSpeed() const noexcept;
+		void SetSystemLinearSpeed(float systemLinearSpeed) noexcept;
+		float GetSystemAngularSpeed() const noexcept;
+		void SetSystemAngularSpeed(float systemAngularSpeed) noexcept;
+		const AVector GetSystemLinearAxis() const noexcept;
+		void SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept;
+		const AVector GetSystemAngularAxis() const noexcept;
+		void SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept;
 
 		// 动画更新。应用程序时间以毫秒为单位。
-		virtual bool Update(double applicationTime) override;
-		virtual void SetObject(ControllerInterface* object) override;
-		virtual void SetObjectInCopy(ControllerInterface* object) override;
+		 bool Update(double applicationTime) override;
+		 void SetObject(ControllerInterface* object) override;
+		 void SetObjectInCopy(ControllerInterface* object) override;
 
 	protected:
 		// 对于点运动数组的延迟分配。

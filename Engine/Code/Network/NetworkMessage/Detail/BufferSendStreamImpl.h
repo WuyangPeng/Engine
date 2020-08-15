@@ -30,7 +30,7 @@ namespace Network
 		void Save(const MessageBufferSharedPtr& messageBuffer);
 		void Clear();
 
-		bool IsEmpty() const;
+		bool IsEmpty() const noexcept;
 		int GetCurrentSize() const;
 
 	private:

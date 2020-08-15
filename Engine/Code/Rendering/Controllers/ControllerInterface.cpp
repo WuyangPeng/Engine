@@ -15,7 +15,11 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26418)
 CORE_TOOLS_RTTI_DEFINE(Rendering,ControllerInterface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ControllerInterface);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ControllerInterface);
@@ -28,28 +32,28 @@ Rendering::ControllerInterface
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ControllerInterface
-    ::~ControllerInterface()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ControllerInterface)
 
 void Rendering::ControllerInterface
-	::AttachController( ControllerInterfaceSmartPointer& controller )
+	::AttachController( ControllerInterfaceSmartPointer  controller )
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(false,"Controller禁止调用AttachController");
+
+	CoreTools::DoNothing();
 
 	SYSTEM_UNUSED_ARG(controller);
 }
 
 void Rendering::ControllerInterface
-	::DetachController( ControllerInterfaceSmartPointer& controller )
+	::DetachController( ControllerInterfaceSmartPointer  controller )
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(false,"Controller禁止调用DetachController");
+
+	CoreTools::DoNothing();
 
 	SYSTEM_UNUSED_ARG(controller);
 }
@@ -59,6 +63,8 @@ int Rendering::ControllerInterface
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
+	CoreTools::DoNothing();
+
 	return 0;
 }
 
@@ -66,6 +72,8 @@ void Rendering::ControllerInterface
 	::SetObjectInCopy(ControllerInterface* object) 
 {
 	RENDERING_CLASS_IS_VALID_1;
+
+	CoreTools::DoNothing();
 
 	SetObject(object);
 }

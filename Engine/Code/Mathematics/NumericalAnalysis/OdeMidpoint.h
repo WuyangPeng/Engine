@@ -30,8 +30,8 @@ namespace Mathematics
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut) override;
-		virtual void SetStepSize(Real step) override;
+		 void Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut) override;
+		 void SetStepSize(Real step) override;
 
 	private:
 		Real m_HalfStep;

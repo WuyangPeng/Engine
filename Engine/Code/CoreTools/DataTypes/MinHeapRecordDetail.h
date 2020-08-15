@@ -9,6 +9,7 @@
 
 #include "MinHeapRecord.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "../ClassInvariant/Noexcept.h"
 
 template <typename Generator, typename Scalar>
 CoreTools::MinHeapRecord<Generator, Scalar>
@@ -22,24 +23,23 @@ template <typename Generator, typename Scalar>
 CoreTools::MinHeapRecord<Generator, Scalar>
 	::MinHeapRecord(int uniqueIndex, Scalar initialValue)
 	:m_Generator{}, m_Value{ initialValue }, m_UniqueIndex{ uniqueIndex }
-{
+{	
+	CoreTools::DoNothing();
+	
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Generator, typename Scalar>
 CoreTools::MinHeapRecord<Generator, Scalar>
-	::MinHeapRecord(int uniqueIndex, Generator generator, Scalar initialValue)
+	::MinHeapRecord(int uniqueIndex, Generator generator, Scalar initialValue)  
 	:m_Generator{ generator }, m_Value{ initialValue }, m_UniqueIndex{ uniqueIndex }
 {
+	CoreTools::DoNothing();
+	
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecord<Generator, Scalar>
-	::~MinHeapRecord()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Generator, typename Scalar>
@@ -58,6 +58,8 @@ Generator CoreTools::MinHeapRecord<Generator, Scalar>
 	::GetGenerator() const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+	
+	CoreTools::DoNothing();
 
 	return m_Generator;
 }
@@ -85,6 +87,8 @@ void CoreTools::MinHeapRecord<Generator, Scalar>
 	::SetGenerator(Generator generator)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
+	
+	CoreTools::DoNothing();
 
 	m_Generator = generator;
 }

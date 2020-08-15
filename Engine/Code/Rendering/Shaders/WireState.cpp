@@ -17,6 +17,11 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, WireState);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, WireState);
@@ -33,18 +38,16 @@ Rendering::WireState
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::WireState
-	::~WireState()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, WireState)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, WireState,IsEnabled,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WireState, IsEnabled, bool)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, WireState, SetEnabled, bool, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, WireState, SetEnabled, bool, void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, WireState,SaveState, WriteFileManager&, void)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, WireState,LoadState, ReadFileManager&, void)
+
+#include STSTEM_WARNING_POP

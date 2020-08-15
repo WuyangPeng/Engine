@@ -10,17 +10,17 @@
 #include "CoreTools/ObjectSystems/Rtti.h"
 
 #define CORE_TOOLS_RTTI_DECLARE \
-		public: virtual const CoreTools::Rtti& GetRttiType() const; static const CoreTools::Rtti sm_Type; 
+		public: virtual const CoreTools::Rtti& GetRttiType() const noexcept; static const CoreTools::Rtti sm_Type; 
 
 #define CORE_TOOLS_RTTI_OVERRIDE_DECLARE \
-		public: virtual const CoreTools::Rtti& GetRttiType() const override; static const CoreTools::Rtti sm_Type; 
+		public: const CoreTools::Rtti& GetRttiType() const noexcept override; static const CoreTools::Rtti sm_Type; 
 
 #define CORE_TOOLS_RTTI_DEFINE(namespaceName,className) \
-		const CoreTools::Rtti& namespaceName::className::GetRttiType() const { return sm_Type; } \
+		const CoreTools::Rtti& namespaceName::className::GetRttiType() const noexcept { return sm_Type; } \
         const CoreTools::Rtti namespaceName::className::sm_Type{ #namespaceName"."#className,&ParentType::sm_Type };
 
 #define CORE_TOOLS_RTTI_BASE_DEFINE(namespaceName,className) \
-		const CoreTools::Rtti& namespaceName::className::GetRttiType() const { return sm_Type; } \
+		const CoreTools::Rtti& namespaceName::className::GetRttiType() const noexcept { return sm_Type; } \
         const CoreTools::Rtti namespaceName::className::sm_Type{ #namespaceName"."#className,nullptr };
 
 #endif // CORE_TOOLS_HELPER_RTTI_MACRO_H

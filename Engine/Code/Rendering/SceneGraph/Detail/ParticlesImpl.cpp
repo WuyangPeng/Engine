@@ -18,7 +18,12 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26472)
 Rendering::ParticlesImpl
 	::ParticlesImpl( const std::vector<APoint>& positions,const std::vector<float>& sizes,float sizeAdjust )
 	:m_Positions{ positions }, m_Sizes{ sizes }, m_SizeAdjust{ sizeAdjust }, m_NumActive{ boost::numeric_cast<int>(positions.size()) }
@@ -99,6 +104,8 @@ void Rendering::ParticlesImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
+	CoreTools::DoNothing();
+
 	if (0.0f < sizeAdjust)
 	{
 		m_SizeAdjust = sizeAdjust;
@@ -111,7 +118,7 @@ void Rendering::ParticlesImpl
 }
 
 float Rendering::ParticlesImpl
-	::GetSizeAdjust() const
+	::GetSizeAdjust() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -134,8 +141,7 @@ void Rendering::ParticlesImpl
 	}
 }
 
-int Rendering::ParticlesImpl
-	::GetNumActive() const
+int Rendering::ParticlesImpl ::GetNumActive() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -198,6 +204,6 @@ float Rendering::ParticlesImpl
 	return m_SizeAdjust * GetSize(index);
 }
 
-
+#include STSTEM_WARNING_POP
 
 

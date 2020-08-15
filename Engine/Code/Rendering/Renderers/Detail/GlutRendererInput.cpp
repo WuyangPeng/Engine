@@ -8,38 +8,35 @@
 
 #include "GlutRendererInput.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
-Rendering:: GlutRendererInput
-	:: GlutRendererInput()
-	:ParentType{}, m_WindowID{ 0 }, m_DisableVerticalSync{ true }
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26490)
+Rendering::GlutRendererInput ::GlutRendererInput() noexcept
+    : ParentType{}, m_WindowID{ 0 }, m_DisableVerticalSync{ true }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering:: GlutRendererInput
-	:: ~GlutRendererInput()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GlutRendererInput)
  
 void Rendering:: GlutRendererInput
-	::SetWindowID(int windowID)
+	::SetWindowID(int windowID) noexcept
 {
 	m_WindowID  = windowID;
 }
 
-void Rendering:: GlutRendererInput
-	::SetWindowHandle(HWnd windowID)
+void Rendering::GlutRendererInput ::SetWindowHandle(HWnd windowID) noexcept
 {
 	SetWindowID(static_cast<int>(reinterpret_cast<size_t>(windowID)));
 }
 
-Rendering::RendererTypes Rendering:: GlutRendererInput
-	::GetRendererType() const
+Rendering::RendererTypes Rendering::GlutRendererInput ::GetRendererType() const noexcept
 {
 	return RendererTypes::Glut;
 }
 
+#include STSTEM_WARNING_POP

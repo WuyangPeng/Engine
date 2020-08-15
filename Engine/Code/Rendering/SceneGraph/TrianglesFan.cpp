@@ -14,7 +14,13 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26490)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TrianglesFan);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TrianglesFan);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TrianglesFan);
@@ -33,20 +39,15 @@ Rendering::TrianglesFan
 	::TrianglesFan(const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer,int indexSize)
 	:ParentType{ VisualPrimitiveType::TriangleFan, vertexformat, vertexbuffer, IndexBufferSmartPointer() }
 {
-	auto numVertices = vertexbuffer->GetNumElements();
+    const auto numVertices = vertexbuffer->GetNumElements();
 
-	IndexBufferSmartPointer indexBuffer{ NEW0 IndexBuffer(numVertices, indexSize) };
+	IndexBufferSmartPointer indexBuffer{ std::make_shared< IndexBuffer>(numVertices, indexSize) };
 	indexBuffer->InitIndexBuffer();		
 	SetIndexBuffer(indexBuffer);
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-Rendering::TrianglesFan
-	::~TrianglesFan()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TrianglesFan)
 
@@ -67,15 +68,15 @@ const Rendering::TriangleIndex
 	if (0 <= index && index < GetNumTriangles())
 	{
 		auto indices = reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData());
-		auto firstIndex = indices[0];
-		auto secondIndex = indices[index + 1];
-		auto thirdIndex = indices[index + 2];
+            const auto firstIndex = indices[0];
+                const auto secondIndex = indices[index + 1];
+            const auto thirdIndex = indices[index + 2];
 
 		return TriangleIndex{ firstIndex,secondIndex,thirdIndex };
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("未找到三角形顶点索引"));
+		THROW_EXCEPTION(SYSTEM_TEXT("未找到三角形顶点索引"s));
 	}	 
 }
 
@@ -85,5 +86,6 @@ Rendering::ControllerInterfaceSmartPointer
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
-} 
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+}
+#include STSTEM_WARNING_POP

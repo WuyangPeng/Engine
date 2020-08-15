@@ -20,13 +20,13 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using std::string;
 using std::vector;
 
-Rendering::IKControllerImpl
-	::IKControllerImpl()
-	:m_Iterations{ 128 }, m_OrderEndToRoot{ true }, m_Joints{}
+Rendering::IKControllerImpl ::IKControllerImpl() noexcept
+    : m_Iterations{ 128 }, m_OrderEndToRoot{ true }, m_Joints{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -62,7 +62,7 @@ int Rendering::IKControllerImpl
 
 	if (0 < jointSize)
 	{
-		size += jointSize * CORE_TOOLS_STREAM_SIZE(m_Joints[0]);
+		size += jointSize * CORE_TOOLS_STREAM_SIZE(m_Joints.at(0));
 	}		
 
 	return size;
@@ -78,7 +78,7 @@ void Rendering::IKControllerImpl
 
 	if (!m_Joints.empty())
 	{
-		target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
+		//target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
 	}		
 }
 
@@ -96,7 +96,7 @@ void Rendering::IKControllerImpl
 	if (0 < size)
 	{
 		m_Joints.resize(size);
-		source.ReadSmartPointer(size, &m_Joints[0]);
+		//source.ReadSmartPointer(size, &m_Joints[0]);
 	}
 }
 
@@ -105,9 +105,12 @@ void Rendering::IKControllerImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
+	CoreTools::DoNothing();
+
 	if (0 < m_Joints.size())
-	{
-		source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
+        {
+            source;
+		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
 	}
 }
 
@@ -115,10 +118,11 @@ void Rendering::IKControllerImpl
 	::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
+    CoreTools::DoNothing();
 	if (0 < m_Joints.size())
-	{
-		target.RegisterSmartPointer(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
+        {
+            target;
+	//	target.RegisterSmartPointer(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
 	}
 }
 
@@ -191,31 +195,28 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::IKControllerImpl
 }
 
 int Rendering::IKControllerImpl
-	::GetIterations() const
+	::GetIterations() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_Iterations;
 }
 
-void Rendering::IKControllerImpl
-	::SetIterations(int iterations)
+void Rendering::IKControllerImpl ::SetIterations(int iterations) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_Iterations = iterations;
 }
 
-bool Rendering::IKControllerImpl
-	::IsOrderEndToRoot() const 
+bool Rendering::IKControllerImpl ::IsOrderEndToRoot() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_OrderEndToRoot;
 }
 
-void Rendering::IKControllerImpl
-	::SetOrderEndToRoot(bool orderEndToRoot) 
+void Rendering::IKControllerImpl ::SetOrderEndToRoot(bool orderEndToRoot) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -236,5 +237,5 @@ const Rendering::IKJointSmartPointer Rendering::IKControllerImpl
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Joints.size()), "Ë÷Òý´íÎó£¡");
 
-	return m_Joints[index];
+	return m_Joints.at(index);
 }

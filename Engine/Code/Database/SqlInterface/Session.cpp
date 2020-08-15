@@ -31,7 +31,7 @@ Database::Session
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, Session)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Session, GetConfigurationStrategy, Database::ConfigurationStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, Session, GetConfigurationStrategy, Database::ConfigurationStrategy)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Session, GetSchemaContainer, Database::Session::SchemaContainer)
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)

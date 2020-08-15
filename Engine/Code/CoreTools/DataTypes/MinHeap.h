@@ -31,6 +31,10 @@ namespace CoreTools
 	public:
 		MinHeap(int maxElements, int growBy, Scalar initialValue = Scalar{});
 		~MinHeap();
+		MinHeap(const MinHeap&) = default;
+		MinHeap& operator=(const MinHeap&) = default;
+		MinHeap(MinHeap&&) = default;
+		MinHeap& operator=(MinHeap&&) = default;
 
 #ifdef OPEN_CLASS_INVARIANT	
 		// 前两个函数检查记录数组确实形成一个堆。最后一个函数打印堆到一个日志中。

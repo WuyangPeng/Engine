@@ -24,8 +24,8 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		const std::string& GetName() const;
-		bool IsExactly(const ClassType& name) const;
+		const std::string& GetName() const noexcept;
+		bool IsExactly(const ClassType& name) const noexcept;
 
 		void SetName(const std::string& name);
 

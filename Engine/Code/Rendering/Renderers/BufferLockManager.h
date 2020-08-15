@@ -20,12 +20,16 @@ namespace Rendering
 		using ClassType = BufferLockManager<PlatformBufferType>;
 
 	public:
-		explicit BufferLockManager(PlatformBufferType& manager);
+		explicit BufferLockManager(PlatformBufferType& manager) noexcept;
 		~BufferLockManager();
+		BufferLockManager(const BufferLockManager&) = delete;
+		BufferLockManager& operator=(const BufferLockManager&) = delete;
+		BufferLockManager(BufferLockManager&&) = delete;
+		BufferLockManager& operator=(BufferLockManager&&) = delete;
 
 		CLASS_INVARIANT_DECLARE;
 
-		void* Lock(BufferLocking mode);
+		void* Lock(BufferLocking mode) noexcept;
 	
 	private:
 		PlatformBufferType& m_Manager;

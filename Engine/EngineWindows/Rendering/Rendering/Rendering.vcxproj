@@ -169,7 +169,7 @@
     <LinkIncremental>true</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -259,7 +259,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -466,7 +466,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture1DImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture2DImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTexture3DImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTextureCube.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTextureCubeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformVertexBufferImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformVertexFormatImpl.cpp" />
@@ -489,6 +488,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTexture1D.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTexture2D.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTexture3D.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTextureCube.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformVertexBuffer.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformVertexFormat.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Renderer.cpp" />

@@ -8,7 +8,10 @@
 #define MATHEMATICS_MESHES_ORDERED_EDGE_KEY_H
 
 #include "Mathematics/MathematicsDll.h"
-
+ #include "System/Helper/PragmaWarning.h"
+    #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
 	class MATHEMATICS_DEFAULT_DECLARE OrderedEdgeKey
@@ -17,10 +20,14 @@ namespace Mathematics
 		typedef OrderedEdgeKey ClassType;
 
 	public:
-		OrderedEdgeKey (int first, int second);
+		OrderedEdgeKey (int first, int second) noexcept;
 
-		OrderedEdgeKey(const OrderedEdgeKey& rhs);
-		OrderedEdgeKey& operator = (const OrderedEdgeKey& rhs);
+		OrderedEdgeKey(const OrderedEdgeKey& rhs) noexcept;
+		OrderedEdgeKey& operator = (const OrderedEdgeKey& rhs) noexcept;
+		
+		~OrderedEdgeKey() = default;
+		OrderedEdgeKey(OrderedEdgeKey&& rhs) noexcept= default;
+		OrderedEdgeKey& operator = (OrderedEdgeKey&& rhs) noexcept= default;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -32,5 +39,5 @@ namespace Mathematics
 
 	bool MATHEMATICS_DEFAULT_DECLARE operator< (const OrderedEdgeKey& lhs,const OrderedEdgeKey& rhs);
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_MESHES_ORDERED_EDGE_KEY_H

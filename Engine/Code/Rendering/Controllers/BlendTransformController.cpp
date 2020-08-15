@@ -23,7 +23,12 @@
 using std::vector;
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, BlendTransformController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BlendTransformController);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BlendTransformController);
@@ -37,11 +42,7 @@ Rendering::BlendTransformController
      RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::BlendTransformController
-	::~BlendTransformController()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, BlendTransformController)
 
@@ -52,7 +53,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::BlendTransformController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 									  
 Rendering::BlendTransformController
@@ -79,7 +80,7 @@ uint64_t Rendering::BlendTransformController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 
-	auto uniqueID = ParentType::Register(target);
+	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
 		m_Impl->Register(target);
@@ -134,19 +135,19 @@ void Rendering::BlendTransformController
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BlendTransformController,GetFirstController,const Rendering::ConstTransformControllerSmartPointer)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, GetFirstController, const Rendering::ConstTransformControllerSmartPointer)	
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BlendTransformController,GetSecondController,const Rendering::ConstTransformControllerSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, GetSecondController, const Rendering::ConstTransformControllerSmartPointer)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BlendTransformController,IsRotationScaleMatrices,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController,IsRotationScaleMatrices,bool)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, BlendTransformController,SetWeight, float,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BlendTransformController, SetWeight, float, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BlendTransformController,GetWeight,float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, GetWeight, float)
 									
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BlendTransformController,IsGeometricRotation,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, IsGeometricRotation, bool)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BlendTransformController,IsGeometricScale, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, IsGeometricScale, bool)
 
 
 void Rendering::BlendTransformController
@@ -183,7 +184,7 @@ bool Rendering::BlendTransformController
 
 		if (m_Impl->IsRotationScaleMatrices())
 		{
-			auto blendQuaternion = m_Impl->GetBlendQuaternion();
+			const auto blendQuaternion = m_Impl->GetBlendQuaternion();
 
 			SetRotate(blendQuaternion);
 
@@ -194,7 +195,7 @@ bool Rendering::BlendTransformController
 		else
 		{
 			// ËãÊõ»ìºÏ¾ØÕó¡£		
-			auto blendMatrix = m_Impl->GetMatrix();
+			const auto blendMatrix = m_Impl->GetMatrix();
 
 			SetMatrix(blendMatrix);
 		}
@@ -209,3 +210,4 @@ bool Rendering::BlendTransformController
 
 	return false;	 
 } 
+#include STSTEM_WARNING_POP

@@ -27,14 +27,13 @@ namespace Network
 
 	public:
 		Server(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
-		virtual ~Server();
-
-		IMPL_MOVE_OPERATOR_COMPLETE_DECLARE(Server);
+ 
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		bool RunServer();
 
-		virtual void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
-		virtual void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
+		 void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
+		 void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
 
 	private:
 		IMPL_TYPE_DECLARE(Server);

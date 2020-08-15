@@ -11,7 +11,7 @@
 
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 #include "Mathematics/Base/Float2.h"
-
+ #include "System/Helper/PragmaWarning.h" 
 namespace Rendering
 {
 	class   TerrainPage : public TrianglesMesh
@@ -29,15 +29,20 @@ namespace Rendering
 		TerrainPage(VertexFormatSmartPointer vformat, int size, unsigned short* heights, const Mathematics::Float2& origin,
 				    float minElevation, float maxElevation,float spacing);
 
-		virtual ~TerrainPage();
-
+		  ~TerrainPage();
+		  
+		  TerrainPage(const TerrainPage&) = default;
+		   TerrainPage& operator=(const TerrainPage&) = default;
+			TerrainPage(TerrainPage&&) = default;
+		   TerrainPage& operator=(TerrainPage&&) = default;
+		   
 		// Height field access.
-		 int GetSize() const;
-		 const unsigned short* GetHeights() const;
-		 const Mathematics::Float2& GetOrigin() const;
-		 float GetMinElevation() const;
-		 float GetMaxElevation() const;
-		 float GetSpacing() const;
+		 int GetSize() const noexcept;
+		 const unsigned short* GetHeights() const noexcept;
+		 const Mathematics::Float2& GetOrigin() const noexcept;
+		 float GetMinElevation() const noexcept;
+		 float GetMaxElevation() const noexcept;
+		 float GetSpacing() const noexcept;
 
 		// Height field measurements.  If the location is not in the page, the
 		// return value is MAX_REAL.
@@ -47,7 +52,7 @@ namespace Rendering
 		// Support for tessellation.
 		 float GetX(int x) const;
 		 float GetY(int y) const;
-		 float GetHeight(int index) const;
+		 float GetHeight(int index) const noexcept;
 
 		// Height field parameters.
 		int mSize, mSizeM1;
@@ -56,9 +61,12 @@ namespace Rendering
 		float mMinElevation, mMaxElevation, mSpacing;
 		float mInvSpacing, mMultiplier;
 	};
- 
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(TerrainPage);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, TerrainPage);
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_TERRAIN_TERRAIN_PAGE_H

@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -74,6 +75,8 @@ void CoreTools::MD5ContextImpl
 	CORE_TOOLS_CLASS_IS_VALID_1;
 	CORE_TOOLS_ASSERTION_2(m_Status == MD5ContextStatus::Update || m_Status == MD5ContextStatus::Init, "MD5×´Ì¬´íÎó£¡");
 
+	CoreTools::DoNothing();
+	
 	m_Status = MD5ContextStatus::Update;
 
 	m_Source = buffer;

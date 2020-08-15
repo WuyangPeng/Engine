@@ -17,6 +17,11 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26485)
+
 template <typename T>
 Mathematics::HomogeneousPoint<T>
 	::HomogeneousPoint() noexcept
@@ -27,7 +32,7 @@ Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 Mathematics::HomogeneousPoint<T>
-	::HomogeneousPoint(const HomogeneousPoint& rhs)
+	::HomogeneousPoint(const HomogeneousPoint& rhs) noexcept
 {
 	memcpy(m_Tuple, rhs.m_Tuple, GetPointByte());
 
@@ -36,7 +41,7 @@ Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 Mathematics::HomogeneousPoint<T>
-	::HomogeneousPoint(T x, T y, T z, T w)
+	::HomogeneousPoint(T x, T y, T z, T w) noexcept
 {
 	m_Tuple[0] = x;
 	m_Tuple[1] = y;
@@ -54,8 +59,7 @@ Mathematics::HomogeneousPoint<T>
 }
 
 template <typename T>
-Mathematics::HomogeneousPoint<T>& Mathematics::HomogeneousPoint<T>
-	::operator= (const HomogeneousPoint& rhs)
+Mathematics::HomogeneousPoint<T>& Mathematics::HomogeneousPoint<T>::operator=(const HomogeneousPoint& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -75,7 +79,7 @@ bool Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 const T* Mathematics::HomogeneousPoint<T>
-	::GetCoordinate() const
+	::GetCoordinate() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -84,7 +88,7 @@ const T* Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 T* Mathematics::HomogeneousPoint<T>
-	::GetCoordinate()
+	::GetCoordinate() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -99,11 +103,16 @@ const T& Mathematics::HomogeneousPoint<T>
 
 	if (0 <= index && index < GetPointSize())
 	{
+		 
+#include STSTEM_WARNING_PUSH
+		#include SYSTEM_WARNING_DISABLE(26482)
+		#include SYSTEM_WARNING_DISABLE(26446)
 		return m_Tuple[index];
+		#include STSTEM_WARNING_POP
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
 }
 
@@ -127,7 +136,7 @@ T Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 void Mathematics::HomogeneousPoint<T>
-	::SetX(T x)
+	::SetX(T x) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -145,7 +154,7 @@ T Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 void Mathematics::HomogeneousPoint<T>
-	::SetY(T y)
+	::SetY(T y) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -163,7 +172,7 @@ T Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 void Mathematics::HomogeneousPoint<T>
-	::SetZ(T z)
+	::SetZ(T z) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -181,7 +190,7 @@ T Mathematics::HomogeneousPoint<T>
 
 template <typename T>
 void Mathematics::HomogeneousPoint<T>
-	::SetW(T w)
+	::SetW(T w) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -190,31 +199,31 @@ void Mathematics::HomogeneousPoint<T>
 
 // static
 template <typename T>
-int Mathematics::HomogeneousPoint<T>
-	::GetPointByte()
-{
+int Mathematics::HomogeneousPoint<T>::GetPointByte() noexcept
+{ 
 	return GetPointSize() * sizeof(T);
 }
 
 template <typename T>
-int Mathematics::HomogeneousPoint<T>
-	::GetPointSize()
+int Mathematics::HomogeneousPoint<T>::GetPointSize() noexcept
 {
 	return sm_PointSize;
 }
+
+#include STSTEM_WARNING_POP
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_HOMOGENEOUS_POINT_DETAIL)
 
 template <typename T>
 bool Mathematics
-	::operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs)
+	::operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs) noexcept
 {
 	return memcmp(lhs.GetCoordinate(), rhs.GetCoordinate(), HomogeneousPoint<T>::GetPointByte()) == 0;
 }
 
 template <typename T>
 bool Mathematics
-	::operator<(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs)
+	::operator<(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs) noexcept
 {
 	return memcmp(lhs.GetCoordinate(), rhs.GetCoordinate(), HomogeneousPoint<T>::GetPointByte()) < 0;
 }

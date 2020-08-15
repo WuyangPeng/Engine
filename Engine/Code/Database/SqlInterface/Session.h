@@ -36,7 +36,7 @@ namespace Database
 
 		CLASS_INVARIANT_DECLARE;
 
-		ConfigurationStrategy GetConfigurationStrategy() const;
+		ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
 		SchemaContainer GetSchemaContainer();
 

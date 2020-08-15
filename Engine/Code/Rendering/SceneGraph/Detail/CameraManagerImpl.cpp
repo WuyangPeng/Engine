@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::CameraManagerImpl
-	::CameraManagerImpl()
+	::CameraManagerImpl() noexcept
 	:m_DepthType{ DepthType::Quantity }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -19,8 +19,7 @@ Rendering::CameraManagerImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,CameraManagerImpl)
 
-void Rendering::CameraManagerImpl
-    ::SetDefaultDepthType(RendererTypes type)
+void Rendering::CameraManagerImpl ::SetDefaultDepthType(RendererTypes type) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -49,8 +48,7 @@ void Rendering::CameraManagerImpl
 	}
 }
 
-Rendering::DepthType Rendering::CameraManagerImpl
-    ::GetDepthType() const
+Rendering::DepthType Rendering::CameraManagerImpl ::GetDepthType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

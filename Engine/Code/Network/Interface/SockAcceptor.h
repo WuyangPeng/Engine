@@ -32,7 +32,7 @@ namespace Network
 		SockAcceptor(int port, const ConfigurationStrategy& configurationStrategy);
 		SockAcceptor(const std::string& hostName, int port, const ConfigurationStrategy& configurationStrategy);
 
-		IMPL_MOVE_OPERATOR_COMPLETE_DECLARE(SockAcceptor);
+		CLASS_INVARIANT_DECLARE;
 
 		bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress);
 		bool Accept(const SockStreamSharedPtr& sockStream);

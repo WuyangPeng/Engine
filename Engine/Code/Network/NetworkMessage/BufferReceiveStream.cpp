@@ -28,10 +28,9 @@ Network::BufferReceiveStream
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, BufferReceiveStream)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, BufferReceiveStream)
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, BufferReceiveStream)
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, BufferReceiveStream)
+DELAY_COPY_CONSTRUCTION_DEFINE(Network, BufferReceiveStream) 
 
 void Network::BufferReceiveStream
 	::OnEvent(uint64_t socketID, const SocketManagerSharedPtr& socketManager)
@@ -41,5 +40,5 @@ void Network::BufferReceiveStream
 	return m_Impl->OnEvent(socketID, socketManager);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, BufferReceiveStream, IsFinish, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, BufferReceiveStream, IsFinish, bool)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Network, BufferReceiveStream, PushBack, MessageBufferSharedPtr, void)

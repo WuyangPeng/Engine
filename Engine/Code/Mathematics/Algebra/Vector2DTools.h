@@ -42,29 +42,29 @@ namespace Mathematics
 	public:
 		static bool Approximate(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
 
-		static Real VectorMagnitude(const Vector2D& vector) noexcept;
-		static Real VectorMagnitudeSquared(const Vector2D& vector) noexcept;
-		static Real Distance(const Vector2D& lhs, const Vector2D& rhs) noexcept;
-		static Real DistanceSquared(const Vector2D& lhs, const Vector2D& rhs) noexcept;
-		static Real DotProduct(const Vector2D& lhs, const Vector2D& rhs) noexcept;
+		static Real VectorMagnitude(const Vector2D& vector);
+		static Real VectorMagnitudeSquared(const Vector2D& vector)  ;
+		static Real Distance(const Vector2D& lhs, const Vector2D& rhs);
+		static Real DistanceSquared(const Vector2D& lhs, const Vector2D& rhs)  ;
+		static Real DotProduct(const Vector2D& lhs, const Vector2D& rhs)  ;
 
 		// 即DotPerp	
 		static Real PseudoCrossProduct(const Vector2D& lhs, const Vector2D& rhs);
 
 		static const Vector2D ParallelVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
 		static const Vector2D ApeakVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
-		static Real GetVectorIncludedAngle(const Vector2D& lhs, const Vector2D& rhs);
+		static Real GetVectorIncludedAngle(const Vector2D& lhs, const Vector2D& rhs)  ;
 
 		// 垂直线相关
 		// 返回 (y,-x).
-		static const Vector2D GetPerp(const Vector2D& vector);
+		static const Vector2D GetPerp(const Vector2D& vector)  ;
 
 		// 返回 (y,-x) / sqrt(x * x + y * y).
 		static const Vector2D GetUnitPerp(const Vector2D& vector, const Real epsilon = Math::sm_ZeroTolerance);
 
 		// 返回 DotPerp((lhs.x,lhs.y),(rhs.x,rhs.y)) = 
 		// lhs.x * rhs.y - lhs.y * rhs.x.
-		static Real DotPerp(const Vector2D& lhs, const Vector2D& rhs);
+		static Real DotPerp(const Vector2D& lhs, const Vector2D& rhs)  ;
 
 		// 计算点的轴对齐包围盒。
 		static const AxesAlignBoundingBox2D	ComputeExtremes(const std::vector<Vector2D>& vectors);

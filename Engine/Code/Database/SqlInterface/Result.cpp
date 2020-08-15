@@ -39,7 +39,7 @@ Database::Result
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, Result)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Result, GetConfigurationStrategy, Database::ConfigurationStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, Result, GetConfigurationStrategy, Database::ConfigurationStrategy)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Result, FetchOne, Database::Result::ResultRowPtr)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Result, FetchAll, Database::Result::ResultRowContainer)
 

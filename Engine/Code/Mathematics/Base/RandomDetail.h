@@ -15,11 +15,14 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 #include <algorithm>
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 template <typename Real>
 Real Mathematics::Random<Real>
 	::UnitRandom(uint32_t seed)
 {
+    CoreTools::DoNothing();
+
 	if (0 < seed)
 		srand(seed);
 

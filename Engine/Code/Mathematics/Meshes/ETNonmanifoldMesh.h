@@ -14,7 +14,10 @@
 
 #include <map>
 #include <set>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
 	class  ETNonmanifoldMesh
@@ -42,8 +45,12 @@ namespace Mathematics
 		class  Edge
 		{
 		public:
-			Edge (int v0, int v1);
+			Edge (int v0, int v1) noexcept;
 			virtual ~Edge ();
+			Edge(const Edge&) = default;
+		Edge& operator=(const Edge&) = default;
+		Edge(Edge&&) = default;
+		Edge& operator=(Edge&&) = default;
 
 			int V[2];
 			std::set<Triangle*> T;
@@ -52,8 +59,12 @@ namespace Mathematics
 		class MATHEMATICS_DEFAULT_DECLARE Triangle
 		{
 		public:
-			Triangle (int v0, int v1, int v2);
+			Triangle (int v0, int v1, int v2) noexcept;
 			virtual ~Triangle ();
+			Triangle(const Triangle&) = default;
+		Triangle& operator=(const Triangle&) = default;
+		Triangle(Triangle&&) = default;
+		Triangle& operator=(Triangle&&) = default;
 
 			// vertices (V[0],V[1],V[2])
 			int V[3];
@@ -66,14 +77,18 @@ namespace Mathematics
 		};
 
 
-		ETNonmanifoldMesh (ECreator eCreator = 0, TCreator tCreator = 0);
+		ETNonmanifoldMesh (ECreator eCreator = 0, TCreator tCreator = 0) noexcept;
 		virtual ~ETNonmanifoldMesh ();
+		ETNonmanifoldMesh(const ETNonmanifoldMesh&) = default;
+		ETNonmanifoldMesh& operator=(const ETNonmanifoldMesh&) = default;
+		ETNonmanifoldMesh(ETNonmanifoldMesh&&) = default;
+		ETNonmanifoldMesh& operator=(ETNonmanifoldMesh&&) = default;
 
 		// Member access.
-		int GetNumEdges () const;
-		const EMap& GetEdges () const;
-		int GetNumTriangles () const;
-		const TMap& GetTriangles () const;
+		int GetNumEdges () const noexcept;
+		const EMap& GetEdges () const noexcept;
+		int GetNumTriangles () const noexcept;
+		const TMap& GetTriangles () const noexcept;
 
 		// Mesh manipulation.
 		TPtr InsertTriangle (int v0, int v1, int v2);
@@ -114,5 +129,5 @@ namespace Mathematics
 		TMap mTMap;
 	};
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_MESHES_ET_NONMANIFOLD_MESH_H

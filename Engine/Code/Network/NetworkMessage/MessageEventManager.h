@@ -24,7 +24,7 @@ namespace Network
 	public:
 		MessageEventManager();
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(MessageEventManager);
+		CLASS_INVARIANT_DECLARE;
 
 	public:
 		void Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);

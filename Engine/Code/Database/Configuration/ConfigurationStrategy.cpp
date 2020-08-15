@@ -36,9 +36,9 @@ Database::ConfigurationStrategy
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, ConfigurationStrategy)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetWrappersStrategy, Database::WrappersStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetWrappersStrategy, Database::WrappersStrategy)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetIP, string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetPort, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPort, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBHostName, string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBUserName, string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBPassword, string)
@@ -48,11 +48,11 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetBooleanO
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetIntOptions, Database::ConfigurationStrategy::IntOption)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetSSLOptions, Database::ConfigurationStrategy::SSLOption)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBMapping, Database::ConfigurationStrategy::DBMapping)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, IsUseSSL, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, IsUseSSL, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ConfigurationStrategy, GetDBName, int, string)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetPooling, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetPoolMaxSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetPoolQueueTimeout, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetPoolMaxIdleTime, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPooling, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolMaxSize, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolQueueTimeout, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolMaxIdleTime, int)
 

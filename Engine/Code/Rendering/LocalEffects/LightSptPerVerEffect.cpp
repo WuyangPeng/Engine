@@ -1,42 +1,53 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/25 13:26)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LightSptPerVerEffect.h"
-#include "Rendering/ShaderFloats/MaterialEmissiveConstant.h"
-#include "Rendering/ShaderFloats/MaterialAmbientConstant.h"
-#include "Rendering/ShaderFloats/MaterialDiffuseConstant.h"
-#include "Rendering/ShaderFloats/MaterialSpecularConstant.h"
-#include "Rendering/ShaderFloats/LightSpotConstant.h"
-#include "Rendering/ShaderFloats/LightAmbientConstant.h"
-#include "Rendering/ShaderFloats/LightDiffuseConstant.h"
-#include "Rendering/ShaderFloats/LightSpecularConstant.h"
-#include "Rendering/ShaderFloats/LightAttenuationConstant.h"
-#include "Rendering/ShaderFloats/LightModelPositionConstant.h"
-#include "Rendering/ShaderFloats/LightModelDirectionVectorConstant.h"
-#include "Rendering/ShaderFloats/WorldMatrixConstant.h"
-#include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
-#include "Rendering/ShaderFloats/CameraModelPositionConstant.h"
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-
+#include "Rendering/ShaderFloats/CameraModelPositionConstant.h"
+#include "Rendering/ShaderFloats/LightAmbientConstant.h"
+#include "Rendering/ShaderFloats/LightAttenuationConstant.h"
+#include "Rendering/ShaderFloats/LightDiffuseConstant.h"
+#include "Rendering/ShaderFloats/LightModelDirectionVectorConstant.h"
+#include "Rendering/ShaderFloats/LightModelPositionConstant.h"
+#include "Rendering/ShaderFloats/LightSpecularConstant.h"
+#include "Rendering/ShaderFloats/LightSpotConstant.h"
+#include "Rendering/ShaderFloats/MaterialAmbientConstant.h"
+#include "Rendering/ShaderFloats/MaterialDiffuseConstant.h"
+#include "Rendering/ShaderFloats/MaterialEmissiveConstant.h"
+#include "Rendering/ShaderFloats/MaterialSpecularConstant.h"
+#include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
+#include "Rendering/ShaderFloats/WorldMatrixConstant.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26815)
 CORE_TOOLS_RTTI_DEFINE(Rendering, LightSptPerVerEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightSptPerVerEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightSptPerVerEffect);
 
-Rendering::LightSptPerVerEffect
-	::LightSptPerVerEffect ()
+Rendering::LightSptPerVerEffect ::LightSptPerVerEffect()
 {
-	VertexShaderSmartPointer vshader{ NEW0 VertexShader{ "Wm5.LightSptPerVer",2, 2, 14, 0 } };
+    VertexShaderSmartPointer vshader{ std::make_shared< VertexShader>( "Wm5.LightSptPerVer", 2, 2, 14, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4,  ShaderFlags::VariableSemantic::Color0);
+    vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
     vshader->SetConstant(0, "PVWMatrix", 4);
     vshader->SetConstant(1, "WMatrix", 4);
     vshader->SetConstant(2, "CameraModelPosition", 1);
@@ -52,163 +63,142 @@ Rendering::LightSptPerVerEffect
     vshader->SetConstant(12, "LightSpotCutoff", 1);
     vshader->SetConstant(13, "LightAttenuation", 1);
 
-	auto profile = vshader->GetProfile();
+    auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
-	{
-		for (auto j = 0; j < 14; ++j)
-		{
-			profile->SetBaseRegister(i, j, msVRegisters[i][j]);
-		}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 14; ++j)
+        {
+            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+        }
 
-		profile->SetProgram(i, msVPrograms[i]);
-	}
- 
+        profile->SetProgram(i, msVPrograms[i]);
+    }
 
-	PixelShaderSmartPointer pshader{ NEW0 PixelShader{ "Wm5.LightSptPerVer",1, 1, 0, 0 } };
+    PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.LightSptPerVer", 1, 1, 0, 0) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
-	{
-		profile->SetProgram(i, msPPrograms[i]);
-	}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        profile->SetProgram(i, msPPrograms[i]);
+    }
 
-	VisualPassSmartPointer pass{ NEW0 VisualPass{} };
-	pass->SetVertexShader(vshader);
-	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSmartPointer{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSmartPointer{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSmartPointer{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSmartPointer{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSmartPointer{ NEW0 WireState{} });
+    VisualPassSmartPointer pass{  };
+    pass->SetVertexShader(vshader);
+    pass->SetPixelShader(pshader);
+    pass->SetAlphaState(AlphaStateSmartPointer{   });
+    pass->SetCullState(CullStateSmartPointer{  });
+    pass->SetDepthState(DepthStateSmartPointer{  });
+    pass->SetOffsetState(OffsetStateSmartPointer{  });
+    pass->SetStencilState(StencilStateSmartPointer{  });
+    pass->SetWireState(WireStateSmartPointer{  });
 
-	VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique{} };
-	technique->InsertPass(pass);
-	InsertTechnique(technique);
+    VisualTechniqueSmartPointer technique{  };
+    technique->InsertPass(pass);
+    InsertTechnique(technique);
 }
 
-Rendering::LightSptPerVerEffect
-	::~LightSptPerVerEffect ()
+Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect ::CreateInstance(Light* light, Material* material) const
 {
-}
-
-Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect
-	::CreateInstance (Light* light, Material* material) const
-{
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0,ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
-    instance->SetVertexConstant(0, 1,ShaderFloatSmartPointer(NEW0 WorldMatrixConstant()));
-    instance->SetVertexConstant(0, 2,ShaderFloatSmartPointer(NEW0 CameraModelPositionConstant()));
-    instance->SetVertexConstant(0, 3,ShaderFloatSmartPointer(NEW0 MaterialEmissiveConstant(MaterialSmartPointer(material))));
-    instance->SetVertexConstant(0, 4,ShaderFloatSmartPointer(NEW0 MaterialAmbientConstant(MaterialSmartPointer(material))));
-    instance->SetVertexConstant(0, 5,ShaderFloatSmartPointer(NEW0 MaterialDiffuseConstant(MaterialSmartPointer(material))));
-    instance->SetVertexConstant(0, 6,ShaderFloatSmartPointer(NEW0 MaterialSpecularConstant(MaterialSmartPointer(material))));
-    instance->SetVertexConstant(0, 7,ShaderFloatSmartPointer(NEW0 LightModelPositionConstant(LightSmartPointer(light))));
-    instance->SetVertexConstant(0, 8,ShaderFloatSmartPointer(NEW0 LightModelDirectionVectorConstant(LightSmartPointer(light))));
-    instance->SetVertexConstant(0, 9,ShaderFloatSmartPointer(NEW0 LightAmbientConstant(LightSmartPointer(light))));
-    instance->SetVertexConstant(0, 10,ShaderFloatSmartPointer(NEW0 LightDiffuseConstant(LightSmartPointer(light))));
-    instance->SetVertexConstant(0, 11,ShaderFloatSmartPointer(NEW0 LightSpecularConstant(LightSmartPointer(light))));
-    instance->SetVertexConstant(0, 12,ShaderFloatSmartPointer(NEW0 LightSpotConstant(LightSmartPointer(light))));
-    instance->SetVertexConstant(0, 13,ShaderFloatSmartPointer(NEW0 LightAttenuationConstant(LightSmartPointer(light))));
+    VisualEffectInstance* instance = CoreTools::New0<VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
+    instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared<ProjectionViewMatrixConstant>()));
+    instance->SetVertexConstant(0, 1, ShaderFloatSmartPointer(std::make_shared<WorldMatrixConstant>()));
+    instance->SetVertexConstant(0, 2, ShaderFloatSmartPointer(std::make_shared<CameraModelPositionConstant>()));
+    instance->SetVertexConstant(0, 3, ShaderFloatSmartPointer(std::make_shared<MaterialEmissiveConstant>(MaterialSmartPointer(material))));
+    instance->SetVertexConstant(0, 4, ShaderFloatSmartPointer(std::make_shared<MaterialAmbientConstant>(MaterialSmartPointer(material))));
+    instance->SetVertexConstant(0, 5, ShaderFloatSmartPointer(std::make_shared<MaterialDiffuseConstant>(MaterialSmartPointer(material))));
+    instance->SetVertexConstant(0, 6, ShaderFloatSmartPointer(std::make_shared<MaterialSpecularConstant>(MaterialSmartPointer(material))));
+    instance->SetVertexConstant(0, 7, ShaderFloatSmartPointer(std::make_shared<LightModelPositionConstant>(LightSmartPointer(light))));
+    instance->SetVertexConstant(0, 8, ShaderFloatSmartPointer(std::make_shared<LightModelDirectionVectorConstant>(LightSmartPointer(light))));
+    instance->SetVertexConstant(0, 9, ShaderFloatSmartPointer(std::make_shared<LightAmbientConstant>(LightSmartPointer(light))));
+    instance->SetVertexConstant(0, 10, ShaderFloatSmartPointer(std::make_shared<LightDiffuseConstant>(LightSmartPointer(light))));
+    instance->SetVertexConstant(0, 11, ShaderFloatSmartPointer(std::make_shared<LightSpecularConstant>(LightSmartPointer(light))));
+    instance->SetVertexConstant(0, 12, ShaderFloatSmartPointer(std::make_shared<LightSpotConstant>(LightSmartPointer(light))));
+    instance->SetVertexConstant(0, 13, ShaderFloatSmartPointer(std::make_shared<LightAttenuationConstant>(LightSmartPointer(light))));
 
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect
-	::CreateUniqueInstance ( Light* light, Material* material)
+Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect ::CreateUniqueInstance(Light* light, Material* material)
 {
-    LightSptPerVerEffect* effect = CoreTools::New0 < LightSptPerVerEffect>();
+    const LightSptPerVerEffect* effect = CoreTools::New0<LightSptPerVerEffect>();
     return effect->CreateInstance(light, material);
 }
 
-
 // Streaming support.
 
-Rendering::LightSptPerVerEffect
-	::LightSptPerVerEffect (LoadConstructor value)
-	: VisualEffect{ value }
+Rendering::LightSptPerVerEffect ::LightSptPerVerEffect(LoadConstructor value)
+    : VisualEffect{ value }
 {
 }
 
-void Rendering::LightSptPerVerEffect
-	::Load(CoreTools::BufferSource& source)
+void Rendering::LightSptPerVerEffect ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     VisualEffect::Load(source);
 
-    CORE_TOOLS_END_DEBUG_STREAM_LOAD( source);
+    CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightSptPerVerEffect
-	::Link(CoreTools::ObjectLink& source)
+void Rendering::LightSptPerVerEffect ::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::LightSptPerVerEffect
-	::PostLink ()
+void Rendering::LightSptPerVerEffect ::PostLink()
 {
     VisualEffect::PostLink();
 
-	auto pass = GetTechnique(0)->GetPass(0);
-	auto vshader = pass->GetVertexShader();
-	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().GetData());
+    auto pass = GetTechnique(0)->GetPass(0);
+    auto vshader = pass->GetVertexShader();
+    auto pshader = pass->GetPixelShader();
+    auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
-	{
-		for (auto j = 0; j < 12; ++j)
-		{
-			profile->SetBaseRegister(i, j, msVRegisters[i][j]);
-		}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 12; ++j)
+        {
+            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+        }
 
-		profile->SetProgram(i, msVPrograms[i]);
-	}
+        profile->SetProgram(i, msVPrograms[i]);
+    }
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().GetData());
+    profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
-	{
-		profile->SetProgram(i, msPPrograms[i]);
-	}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        profile->SetProgram(i, msPPrograms[i]);
+    }
 }
 
-uint64_t Rendering::LightSptPerVerEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::LightSptPerVerEffect ::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightSptPerVerEffect
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightSptPerVerEffect ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     VisualEffect::Save(target);
 
-    CORE_TOOLS_END_DEBUG_STREAM_SAVE( target);
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::LightSptPerVerEffect
-	::GetStreamingSize () const
+int Rendering::LightSptPerVerEffect ::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }
 
-
-
 // Profiles.
 
-int Rendering::LightSptPerVerEffect::msDx9VRegisters[14] 
-    { 0, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
+int Rendering::LightSptPerVerEffect::msDx9VRegisters[14]{ 0, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
 
-int Rendering::LightSptPerVerEffect::msOglVRegisters[14] 
-    { 1, 5, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+int Rendering::LightSptPerVerEffect::msOglVRegisters[14]{ 1, 5, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
 
-int* Rendering::LightSptPerVerEffect::msVRegisters[ShaderFlags::MaxProfiles] 
-{
+int* Rendering::LightSptPerVerEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     0,
     msDx9VRegisters,
     msDx9VRegisters,
@@ -216,8 +206,7 @@ int* Rendering::LightSptPerVerEffect::msVRegisters[ShaderFlags::MaxProfiles]
     msOglVRegisters
 };
 
-std::string Rendering::LightSptPerVerEffect::msVPrograms[ShaderFlags::MaxProfiles] 
-{
+std::string Rendering::LightSptPerVerEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     // VP_NONE
     "",
 
@@ -449,8 +438,7 @@ std::string Rendering::LightSptPerVerEffect::msVPrograms[ShaderFlags::MaxProfile
     "END\n"
 };
 
-std::string Rendering::LightSptPerVerEffect::msPPrograms[ShaderFlags::MaxProfiles] 
-{
+std::string Rendering::LightSptPerVerEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     // PP_NONE
     "",
 
@@ -474,3 +462,4 @@ std::string Rendering::LightSptPerVerEffect::msPPrograms[ShaderFlags::MaxProfile
     "END\n"
 };
 
+#include STSTEM_WARNING_POP

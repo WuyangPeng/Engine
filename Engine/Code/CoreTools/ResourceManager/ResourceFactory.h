@@ -26,9 +26,13 @@ namespace CoreTools
 		using ClassType = ResourceFactory;
 
 	public:
-		explicit ResourceFactory(BaseResourceManager& resourceManager);
+		explicit ResourceFactory(BaseResourceManager& resourceManager) noexcept;
 		virtual ~ResourceFactory();
-
+		ResourceFactory(const ResourceFactory&) = delete;
+		ResourceFactory& operator=(const ResourceFactory&) = delete;
+		ResourceFactory(ResourceFactory&&) noexcept = delete;
+		ResourceFactory& operator=(ResourceFactory&&) noexcept = delete;
+		
 		virtual uint32_t CreateResource(PriorityType type, int size);
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;

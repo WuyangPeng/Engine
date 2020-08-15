@@ -17,18 +17,17 @@
 #include "Network/Interface/SockAddress.h" 
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Network::NetworkSockConnector
-	::NetworkSockConnector()
+	::NetworkSockConnector() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::NetworkSockConnector
-	::~NetworkSockConnector()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkSockConnector)
 
@@ -60,3 +59,5 @@ const Network::NetworkSockConnector::SockConnectorPtr Network::NetworkSockConnec
 
 	return make_shared<ClassType>(*this);
 }
+
+#include STSTEM_WARNING_POP

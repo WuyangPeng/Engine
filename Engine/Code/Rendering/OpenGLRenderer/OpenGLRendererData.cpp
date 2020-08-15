@@ -9,14 +9,19 @@
 #include "OpenGLRendererData.h"
 #include "OpenGLMapping.h"
 #include "Rendering/Shaders/AlphaState.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 using namespace Rendering;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+ 
 #ifndef RENDERING_USE_TEXT_DISPLAY_LIST
 
 // Support for non-display-list fonts.
 
 void RendererData::DrawCharacter (const BitmapFont& font, char c)
 {
+    CoreTools::DoNothing();
 	font; c;
 	/*
     const BitmapFontChar* bfc = font.mCharacters[(unsigned int)c];
@@ -53,7 +58,7 @@ void RendererData::DrawCharacter (const BitmapFont& font, char c)
 // Render state information to avoid redundant state changes.
 
 RendererData::RenderState
-	::RenderState ()
+	::RenderState () noexcept
 {
     // Initialization must be deferred until an OpenGL context has been
     // created.
@@ -63,6 +68,7 @@ void RendererData::RenderState
 	::Initialize (const AlphaState* astate,const CullState* cstate, const DepthState* dstate,
 				  const OffsetState* ostate, const StencilState* sstate,const WireState* wstate)
 {
+    CoreTools::DoNothing();
 	astate; cstate; dstate; ostate; sstate; wstate;
     // AlphaState
     /*mAlphaBlendEnabled = astate->BlendEnabled;
@@ -149,7 +155,8 @@ RendererData::SamplerState
 void RendererData::SamplerState
 	::GetCurrent (GLenum target)
 {
-	target;
+    target;
+    CoreTools::DoNothing();
    /* glGetTexParameterfv(target, GL_TEXTURE_MAX_ANISOTROPY_EXT, &mAnisotropy);
     glGetTexEnvfv(GL_TEXTURE_FILTER_CONTROL, GL_TEXTURE_LOD_BIAS, &mLodBias);
     glGetTexParameteriv(target, GL_TEXTURE_MAG_FILTER, &mMagFilter);
@@ -160,3 +167,4 @@ void RendererData::SamplerState
     glGetTexParameteriv(target, GL_TEXTURE_WRAP_R, &mWrap[2]);*/
 }
 
+#include STSTEM_WARNING_POP

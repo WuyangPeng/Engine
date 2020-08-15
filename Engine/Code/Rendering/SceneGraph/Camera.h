@@ -37,13 +37,17 @@ namespace Rendering
         
     public:
         Camera (bool isPerspective = true,float epsilon = Math::sm_ZeroTolerance);
-        virtual ~Camera ();
+          ~Camera ();
+
+          Camera(Camera&&) = default;
+          Camera& operator=(Camera&&) = default;
+
         
-		CLASS_INVARIANT_VIRTUAL_DECLARE;    
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;    
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Camera); 
 
-		float GetEpsilon() const;
+		float GetEpsilon() const noexcept;
 
         void SetFrame (const APoint& position,const AVector& directionVector,const AVector& upVector,const AVector& rightVector);
         
@@ -58,7 +62,7 @@ namespace Rendering
       
         const Matrix GetViewMatrix () const;
         
-        bool IsPerspective () const;
+        bool IsPerspective() const noexcept;
         
         void SetFrustum (float directionMin, float directionMax,float upMin, float upMax,float rightMin, float rightMax);
         
@@ -66,33 +70,33 @@ namespace Rendering
         
         void SetFrustum (float upFieldOfViewDegrees, float aspectRatio,float directionMin,float directionMax);
         
-        const float* GetFrustum () const;
+        const float* GetFrustum() const noexcept;
         
-        const CameraFrustumData GetFrustumData () const;
+        const CameraFrustumData GetFrustumData() const noexcept;
  
-        float GetDirectionMin () const;
-        float GetDirectionMax () const;
-        float GetUpMin () const;
-        float GetUpMax () const;
-        float GetRightMin () const;
-        float GetRightMax () const;
+        float GetDirectionMin() const noexcept;
+        float GetDirectionMax() const noexcept;
+        float GetUpMin() const noexcept;
+        float GetUpMax() const noexcept;
+        float GetRightMin() const noexcept;
+        float GetRightMax() const noexcept;
        
-        const Matrix GetProjectionMatrix () const;
+        const Matrix GetProjectionMatrix() const noexcept;
        
         void SetProjectionMatrix (const Matrix& projectionMatrix);
         void SetProjectionMatrix (const APoint& p00, const APoint& p10,const APoint& p11, const APoint& p01,float nearExtrude, float farExtrude);
         
-        DepthType GetDepthType () const;
+        DepthType GetDepthType() const noexcept;
 
-        const Matrix GetProjectionViewMatrix () const;
+        const Matrix GetProjectionViewMatrix() const noexcept;
         
-        void SetPreViewMatrix (const Matrix& preViewMatrix);
-        const Matrix GetPreViewMatrix () const;
-        bool PreViewIsIdentity () const;
+        void SetPreViewMatrix(const Matrix& preViewMatrix)  ;
+        const Matrix GetPreViewMatrix() const noexcept;
+        bool PreViewIsIdentity() const noexcept;
         
         void SetPostProjectionMatrix (const Matrix& postProjMatrix);
-        const Matrix GetPostProjectionMatrix () const;
-        bool PostProjectionIsIdentity () const;
+        const Matrix GetPostProjectionMatrix() const noexcept;
+        bool PostProjectionIsIdentity() const noexcept;
         
         const AxesAlignBoundingBox2D ComputeBoundingAABB (int numVertices,const char* vertices,int stride,const Matrix& worldMatrix) const;
 

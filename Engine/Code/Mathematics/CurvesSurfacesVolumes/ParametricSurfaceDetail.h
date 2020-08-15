@@ -24,37 +24,34 @@ ParametricSurface<Real>::ParametricSurface (Real umin, Real umax, Real vmin, Rea
     mRectangular = rectangular;
 }
 
-template <typename Real>
-ParametricSurface<Real>::~ParametricSurface ()
-{
-}
+ 
 
 template <typename Real>
-Real ParametricSurface<Real>::GetUMin () const
+Real ParametricSurface<Real>::GetUMin() const noexcept
 {
     return mUMin;
 }
 
 template <typename Real>
-Real ParametricSurface<Real>::GetUMax () const
+Real ParametricSurface<Real>::GetUMax() const noexcept
 {
     return mUMax;
 }
 
 template <typename Real>
-Real ParametricSurface<Real>::GetVMin () const
+Real ParametricSurface<Real>::GetVMin() const noexcept
 {
     return mVMin;
 }
 
 template <typename Real>
-Real ParametricSurface<Real>::GetVMax () const
+Real ParametricSurface<Real>::GetVMax() const noexcept
 {
     return mVMax;
 }
 
 template <typename Real>
-bool ParametricSurface<Real>::IsRectangular () const
+bool ParametricSurface<Real>::IsRectangular() const noexcept
 {
     return mRectangular;
 }

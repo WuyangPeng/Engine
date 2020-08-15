@@ -13,18 +13,19 @@
 
 using std::make_shared;
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::ConfigurationParameter
 	::ConfigurationParameter()
 	:m_Impl{ make_shared<ImplType>() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
-
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, ConfigurationParameter)
+#include STSTEM_WARNING_POP
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, ConfigurationParameter)
 
 DELAY_COPY_CONSTRUCTION_DEFINE(Network, ConfigurationParameter)
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, ConfigurationParameter)
 
 void Network::ConfigurationParameter
 	::AddParameter(const String& key, const String& parameter)

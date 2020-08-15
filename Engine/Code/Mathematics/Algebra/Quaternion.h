@@ -46,9 +46,9 @@ namespace Mathematics
 		// 四元数q = w + x * i + y * j + z * k
 		// 这里(w,x,y,z)不一定是单位长度的四维向量。
 
-		Quaternion();
-		Quaternion(Real w, Real x, Real y, Real z);
-		Quaternion(const Quaternion& rhs);
+		Quaternion() noexcept;
+		Quaternion(Real w, Real x, Real y, Real z) noexcept;
+		Quaternion(const Quaternion& rhs) noexcept;
 
 		// 输入为旋转矩阵构造四元数
 		Quaternion(const Matrix3& matrix);
@@ -59,49 +59,52 @@ namespace Mathematics
 		// 通过指定的列旋转矩阵构造四元数。
 		Quaternion(const std::vector<Vector3D>& rotationColumn);
 
-		Quaternion& operator= (const Quaternion& rhs);
+		Quaternion& operator= (const Quaternion& rhs) noexcept;
+		~Quaternion()= default;
+		Quaternion(Quaternion&& rhs) = default;
+		Quaternion& operator= (Quaternion&& rhs) = default;
 
 		CLASS_INVARIANT_DECLARE;
 
 		// 坐标访问类似于数组:  0 = w, 1 = x, 2 = y, 3 = z.
 		const Real& operator[] (int index) const;
 		Real& operator[] (int index);
-		Real GetW() const;
-		void SetW(Real w);
-		Real GetX() const;
-		void SetX(Real x);
-		Real GetY() const;
-		void SetY(Real y);
-		Real GetZ() const;
-		void SetZ(Real z);
+		Real GetW() const noexcept;
+		void SetW(Real w) noexcept;
+		Real GetX() const noexcept;
+		void SetX(Real x) noexcept;
+		Real GetY() const noexcept;
+		void SetY(Real y) noexcept;
+		Real GetZ() const noexcept;
+		void SetZ(Real z) noexcept;
 
 		// 算术运算
 		Quaternion& operator*= (const Quaternion& rhs);
 
-		const Quaternion operator- () const;
+		const Quaternion operator- () const noexcept;
 
-		Quaternion& operator+= (const Quaternion& rhs);
-		Quaternion& operator-= (const Quaternion& rhs);
-		Quaternion& operator*= (Real scalar);
-		Quaternion& operator/= (Real scalar);
+		Quaternion& operator+= (const Quaternion& rhs) noexcept;
+		Quaternion& operator-= (const Quaternion& rhs) noexcept;
+		Quaternion& operator*= (Real scalar) noexcept;
+		Quaternion& operator/= (Real scalar) noexcept;
 
 		// 四元数，矩阵和轴——角之间的转换。
 		void FromRotationMatrix(const Matrix3& matrix);
-		const Matrix3 ToRotationMatrix() const;
+		const Matrix3 ToRotationMatrix() const noexcept;
 		void FromRotationColumnVector3D(const std::vector<Vector3D>& rotationColumn);
 		const std::vector<Vector3D>	ToRotationColumnVector3D() const;
 		void FromAxisAngle(const Vector3D& axis, Real angle);
 		const Vector3D ToAxis() const;
-		Real ToAngle() const;
+		Real ToAngle() const noexcept;
 		const Matrix3Extract ToAngleAxis() const;
 
 		Real Length() const;  // 4-tuple的长度
-		Real SquaredLength() const;  // 4-tuple的长度的平方
+		Real SquaredLength() const noexcept;  // 4-tuple的长度的平方
 		void Normalize(Real epsilon = Math::sm_ZeroTolerance);
 		const Quaternion Inverse() const;  // 适用于非零四元数
-		const Quaternion Conjugate() const;  // 取负数在 x, y, 和 z 上
+		const Quaternion Conjugate() const noexcept;  // 取负数在 x, y, 和 z 上
 		const Quaternion Exp() const;  // 适用于四元数 w = 0
-		const Quaternion Log() const;  // 适用于单位长度四元数
+		const Quaternion Log() const noexcept;  // 适用于单位长度四元数
 		bool IsNormalize(Real epsilon = Math::sm_ZeroTolerance) const;
 
 		// 由四元数旋转向量。

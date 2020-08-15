@@ -23,27 +23,31 @@ namespace Network
 
 	public:
 		ACESockStream();
-		virtual ~ACESockStream();
+		~ACESockStream();
+		ACESockStream(const ACESockStream&) = delete;
+		ACESockStream& operator=(const ACESockStream&) = delete;
+		ACESockStream(ACESockStream&&) noexcept = delete;
+		ACESockStream& operator=(ACESockStream&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual ACESockStreamNativeType& GetACESockStream() override;
+		ACESockStreamNativeType& GetACESockStream() noexcept override;
 
-		virtual int Send(const MessageBufferSharedPtr& messageBuffer) override;
-		virtual int Receive(const MessageBufferSharedPtr& messageBuffer) override;
+		int Send(const MessageBufferSharedPtr& messageBuffer) override;
+		int Receive(const MessageBufferSharedPtr& messageBuffer) override;
 
-		virtual void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
-		virtual void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
+		void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
+		void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
-		virtual ACEHandle GetACEHandle() const override;
+		ACEHandle GetACEHandle() const override;
 
-		virtual void SetACEHandle(ACEHandle handle) override;
-		virtual bool CloseHandle() override;
+		void SetACEHandle(ACEHandle handle) override;
+		bool CloseHandle() override;
 
-		virtual const std::string GetRemoteAddress() const override;
-		virtual int GetRemotePort() const override;
+		const std::string GetRemoteAddress() const override;
+		int GetRemotePort() const override;
 
-		virtual bool EnableNonBlock() override;
+		bool EnableNonBlock() override;
 
 	private:
 		ACE_SOCK_Stream m_ACESockStream;

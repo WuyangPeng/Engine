@@ -35,7 +35,7 @@ Network::SockAcceptor
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, SockAcceptor)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockAcceptor)
 
 bool Network::SockAcceptor
 	::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)

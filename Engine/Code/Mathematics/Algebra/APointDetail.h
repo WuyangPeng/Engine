@@ -17,14 +17,16 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 template <typename T>
 const Mathematics::APoint<T> Mathematics::APoint<T>
 	::sm_Origin{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
 
 template <typename T>
 Mathematics::APoint<T>
-	::APoint()
+	::APoint() noexcept
 	:m_HomogeneousPoint{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_One }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -32,7 +34,7 @@ Mathematics::APoint<T>
 
 template <typename T>
 Mathematics::APoint<T>
-::APoint(T x, T y, T z)
+::APoint(T x, T y, T z) noexcept
 	:m_HomogeneousPoint{ x,y,z,Math::sm_One }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -77,7 +79,7 @@ const Mathematics::Float3 Mathematics::APoint<T>
 
 template <typename T>
 const Mathematics::Vector3D<T>Mathematics::APoint<T>
-	::GetVector3D() const
+	::GetVector3D() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -86,7 +88,7 @@ const Mathematics::Vector3D<T>Mathematics::APoint<T>
 
 template <typename T>
 const Mathematics::HomogeneousPoint<T> Mathematics::APoint<T>
-	::GetHomogeneousPoint() const
+	::GetHomogeneousPoint() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -309,5 +311,5 @@ std::ostream& Mathematics
 
 	return outFile;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_A_POINT_DETAIL_H

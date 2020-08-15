@@ -20,8 +20,8 @@ namespace Database
 		using ParentType = ResultRowImpl;
 
 	public:
-		explicit NullResultRow(const ConfigurationStrategy& configurationStrategy);
-		virtual ~NullResultRow();
+                explicit NullResultRow(const ConfigurationStrategy& configurationStrategy) noexcept;
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 	};

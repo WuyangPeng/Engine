@@ -22,14 +22,14 @@ namespace Rendering
         using ParentType = RendererInputImpl;
        
     public:
-        OpenGLRendererInput();
-        virtual ~ OpenGLRendererInput();
+        OpenGLRendererInput() noexcept;
+ 
         
         CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-        virtual RendererTypes GetRendererType() const override;    
-		virtual	void SetWindowID(int windowID) override;
-		virtual	void SetWindowHandle(HWnd windowID) override;
+          RendererTypes GetRendererType() const noexcept override;    
+		 	void SetWindowID(int windowID) noexcept override;
+          void SetWindowHandle(HWnd windowID) noexcept override;
 
     private:
     	HWnd m_WindowHandle; 

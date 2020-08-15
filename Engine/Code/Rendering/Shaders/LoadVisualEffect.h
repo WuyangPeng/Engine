@@ -20,7 +20,7 @@ namespace Rendering
 		using ClassType = LoadVisualEffect;
 
 	public:
-		LoadVisualEffect();		
+                LoadVisualEffect() noexcept;		
 
 		CLASS_INVARIANT_DECLARE;
 

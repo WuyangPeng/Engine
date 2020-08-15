@@ -38,24 +38,24 @@ namespace Network
 
 		CLASS_INVARIANT_DECLARE;
 
-		WrappersStrategy GetWrappersStrategy() const;
-		ServerStrategy GetPatternStrategy() const;
-		MessageStrategy GetMessageStrategy() const;
-		ClientStrategy GetClientStrategy() const;
-		ConnectStrategy GetConnectStrategy() const;
-		ParserStrategy GetParserStrategy() const;
-		OpenSSLStrategy GetOpenSSLStrategy() const;
-		SocketSendMessage GetSocketSendMessage() const;
+		WrappersStrategy GetWrappersStrategy() const noexcept;
+		ServerStrategy GetPatternStrategy() const noexcept;
+		MessageStrategy GetMessageStrategy() const noexcept;
+		ClientStrategy GetClientStrategy() const noexcept;
+		ConnectStrategy GetConnectStrategy() const noexcept;
+		ParserStrategy GetParserStrategy() const noexcept;
+		OpenSSLStrategy GetOpenSSLStrategy() const noexcept;
+		SocketSendMessage GetSocketSendMessage() const noexcept;
 
-		const ConfigurationSubStrategy GetConfigurationSubStrategy() const;
+		const ConfigurationSubStrategy GetConfigurationSubStrategy() const noexcept;
 		bool IsExist(WrappersSubStrategy wrappersSubStrategy) const;
 
-		const ConfigurationParameter GetConfigurationParameter() const;
+		const ConfigurationParameter GetConfigurationParameter() const noexcept;
 
 		int GetBufferSize() const;
 
 		std::string GetIP() const;
-		int GetPort() const;
+		int GetPort() const noexcept;
 
 	private:
 		WrappersStrategy m_WrappersStrategyFlag{ WrappersStrategy::Boost };

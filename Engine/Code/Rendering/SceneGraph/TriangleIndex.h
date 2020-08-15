@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/22 14:49)
 
 #ifndef RENDERING_SCENE_GRAPH_TRIANGLES_INDEX_H
@@ -11,27 +11,27 @@
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE TriangleIndex 
-	{
-	public:
-		using ClassType = TriangleIndex;
-			
-	public:		
-		TriangleIndex(int firstIndex,int secondIndex,int thirdIndex);
+    class RENDERING_DEFAULT_DECLARE TriangleIndex
+    {
+    public:
+        using ClassType = TriangleIndex;
 
-		CLASS_INVARIANT_DECLARE;
+    public:
+        TriangleIndex(int firstIndex, int secondIndex, int thirdIndex) noexcept;
 
-		int GetFirstIndex() const;
-		int GetSecondIndex() const;
-		int GetThirdIndex() const;
+        CLASS_INVARIANT_DECLARE;
 
-		int operator[](int index) const;
+        int GetFirstIndex() const noexcept;
+        int GetSecondIndex() const noexcept;
+        int GetThirdIndex() const noexcept;
 
-	private:
-		int m_FirstIndex;
-		int m_SecondIndex;
-		int m_ThirdIndex;
-	};	 
+        int operator[](int index) const;
+
+    private:
+        int m_FirstIndex;
+        int m_SecondIndex;
+        int m_ThirdIndex;
+    };
 }
 
-#endif // RENDERING_SCENE_GRAPH_TRIANGLES_INDEX_H
+#endif  // RENDERING_SCENE_GRAPH_TRIANGLES_INDEX_H

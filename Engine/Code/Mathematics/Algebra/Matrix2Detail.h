@@ -16,6 +16,10 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+ 
 template <typename Real>
 const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>
 	::sm_Zero{ MatrixTypeFlags::Zero };
@@ -26,7 +30,7 @@ const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>
 
 template <typename Real>
 Mathematics::Matrix2<Real>
-	::Matrix2(MatrixTypeFlags flag)
+	::Matrix2(MatrixTypeFlags flag) noexcept
 	:m_Entry{}
 {
 	if (flag == MatrixTypeFlags::Identity)
@@ -169,7 +173,7 @@ void Mathematics::Matrix2<Real>
 
 template <typename Real>
 void Mathematics::Matrix2<Real>
-	::MakeIdentity()
+	::MakeIdentity() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -577,5 +581,5 @@ bool Mathematics
 {
 	return Approximate(lhs, rhs, Math::sm_ZeroTolerance);
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H

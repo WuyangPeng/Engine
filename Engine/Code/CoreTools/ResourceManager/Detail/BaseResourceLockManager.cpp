@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::BaseResourceLockManager
-	::BaseResourceLockManager(BaseResource& manager)
+	::BaseResourceLockManager(BaseResource& manager) noexcept
 	:m_Manager{ manager }
 {
 	m_Manager.Lock();

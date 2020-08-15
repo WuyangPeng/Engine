@@ -28,12 +28,17 @@ namespace CoreTools
 	public:
 		using ClassType = Object;
 		using ParentType = ObjectInterface;
-		using ObjectSmartPointer = SecondSubclassSmartPointer<Object>;
-		using ConstObjectSmartPointer = ConstSecondSubclassSmartPointer<Object>;
+		using ObjectSmartPointer = std::shared_ptr<Object>;
+		using ConstObjectSmartPointer = std::shared_ptr<const Object>;
 
 	public:
 		explicit Object(const std::string& name);
-		virtual ~Object() = 0;
+		~Object() = 0;
+
+		Object(const Object&) = default;
+		Object& operator=(const Object&) = default;
+		Object(Object&&) noexcept = default;
+		Object& operator=(Object&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
@@ -42,7 +47,7 @@ namespace CoreTools
 
 	public:
 		// ¶ÔÏóÃû×Ö
-		const std::string& GetName() const;
+		const std::string& GetName() const noexcept;
 		void SetName(const std::string& name);
 
 	protected:

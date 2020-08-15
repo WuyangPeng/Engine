@@ -7,9 +7,12 @@
 #include "Imagics/ImagicsExport.h"
 
 #include "PdeFilter.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 Imagics::PdeFilter
-	::PdeFilter (int quantity, const float* data, float borderValue, ScaleType scaleType)
+	::PdeFilter (int quantity, const float* data, float borderValue, ScaleType scaleType) noexcept
 {
     mQuantity = quantity;
     mBorderValue = borderValue;
@@ -20,7 +23,7 @@ Imagics::PdeFilter
     mMin = maxValue;
     for (int i = 1; i < mQuantity; i++)
     {
-        float value = data[i];
+        const float value = data[i];
         if (value < mMin)
         {
             mMin = value;
@@ -35,19 +38,19 @@ Imagics::PdeFilter
     {
         switch (mScaleType)
         {
-        case ST_NONE:
+        case ScaleType::ST_NONE:
             mOffset = 0.0f;
             mScale = 1.0f;
             break;
-        case ST_UNIT:
+        case ScaleType::ST_UNIT:
             mOffset = 0.0f;
             mScale = 1.0f/(maxValue - mMin);
             break;
-        case ST_SYMMETRIC:
+        case ScaleType::ST_SYMMETRIC:
             mOffset = -1.0f;
             mScale = 2.0f/(maxValue - mMin);
             break;
-        case ST_PRESERVE_ZERO:
+        case ScaleType::ST_PRESERVE_ZERO:
             mOffset = 0.0f;
             mScale = (maxValue >= -mMin ? 1.0f/maxValue : -1.0f/mMin);
             mMin = 0.0f;
@@ -76,32 +79,33 @@ void Imagics::PdeFilter
 
 
 int Imagics::PdeFilter
-	::GetQuantity () const
+	::GetQuantity () const noexcept
 {
 	return mQuantity;
 }
 
 float Imagics::PdeFilter
-	::GetBorderValue () const
+	::GetBorderValue () const noexcept
 {
 	return mBorderValue;
 }
 
 Imagics::PdeFilter::ScaleType Imagics::PdeFilter
-	::GetScaleType () const
+	::GetScaleType () const noexcept
 {
 	return mScaleType;
 }
 
 void Imagics::PdeFilter
-	::SetTimeStep (float timeStep)
-{
+	::SetTimeStep (float timeStep) noexcept
+{ 
 	mTimeStep = timeStep;
 }
 
 float Imagics::PdeFilter
-	::GetTimeStep () const
+	::GetTimeStep () const noexcept
 {
 	return mTimeStep;
 }
 
+#include STSTEM_WARNING_POP

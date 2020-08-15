@@ -18,14 +18,9 @@ Network::Server
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
+ 
 
-Network::Server
-	::~Server()
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, Server)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, Server)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, Server, RunServer, bool)
 

@@ -16,10 +16,12 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
-Rendering::WorldCoordinateFrame
-    ::WorldCoordinateFrame (float epsilon)
-	:m_Position{ APoint::sm_Origin }, m_DirectionVector{ -AVector::sm_UnitZ }, m_UpVector{ AVector::sm_UnitY },
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26440)
+Rendering::WorldCoordinateFrame ::WorldCoordinateFrame(float epsilon)  
+    : m_Position{ APoint::sm_Origin }, m_DirectionVector{ -AVector::sm_UnitZ }, m_UpVector{ AVector::sm_UnitY },
 	m_RightVector{ AVector::sm_UnitX }, m_ViewMatrix{ Matrix::sm_Zero }, m_Epsilon{ epsilon }
 {
     OnFrameChange ();
@@ -31,17 +33,25 @@ Rendering::WorldCoordinateFrame
 bool Rendering::WorldCoordinateFrame
     ::IsValid() const noexcept
 {
-    if (m_DirectionVector.IsNormalize(m_Epsilon) && m_UpVector.IsNormalize(m_Epsilon) && m_RightVector.IsNormalize(m_Epsilon) &&
-        Math::FAbs(Dot(m_DirectionVector,m_UpVector)) <= m_Epsilon &&
-        Math::FAbs(Dot(m_UpVector,m_RightVector)) <= m_Epsilon &&
-        Math::FAbs(Dot(m_RightVector,m_DirectionVector)) <= m_Epsilon)
+    try
     {
-        return true;
+        if (m_DirectionVector.IsNormalize(m_Epsilon) && m_UpVector.IsNormalize(m_Epsilon) && m_RightVector.IsNormalize(m_Epsilon) &&
+            Math::FAbs(Dot(m_DirectionVector, m_UpVector)) <= m_Epsilon &&
+            Math::FAbs(Dot(m_UpVector, m_RightVector)) <= m_Epsilon &&
+            Math::FAbs(Dot(m_RightVector, m_DirectionVector)) <= m_Epsilon)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-    else
+    catch (...)
     {
         return false;
     }
+    
 }
 #endif // OPEN_CLASS_INVARIANT
 
@@ -129,8 +139,7 @@ const Rendering::WorldCoordinateFrame::Matrix Rendering::WorldCoordinateFrame
 }
 
 // private
-void Rendering::WorldCoordinateFrame
-    ::OnFrameChange ()
+void Rendering::WorldCoordinateFrame ::OnFrameChange()  
 {
     m_ViewMatrix(0,0) = m_RightVector[0];
     m_ViewMatrix(0,1) = m_RightVector[1];
@@ -191,4 +200,4 @@ int Rendering::WorldCoordinateFrame
     
     return size;
 }
- 
+ #include STSTEM_WARNING_POP

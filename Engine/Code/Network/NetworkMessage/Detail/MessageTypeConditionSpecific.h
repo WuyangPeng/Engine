@@ -24,14 +24,13 @@ namespace Network
 
 	public:
 		explicit MessageTypeConditionSpecific(const VersionType& version);
-		virtual ~MessageTypeConditionSpecific();
-
+ 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 	public:
-		virtual bool IsVersionsConform(int version) const override;
-		virtual int GetMinVersion() const override;
-		virtual int GetMaxVersion() const override;
+		  bool IsVersionsConform(int version) const override;
+		  int GetMinVersion() const override;
+		  int GetMaxVersion() const override;
 
 	private:
 		VersionType m_Version;

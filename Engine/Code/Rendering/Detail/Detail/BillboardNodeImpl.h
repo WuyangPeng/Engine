@@ -33,8 +33,8 @@ namespace Rendering
 		using Object = CoreTools::Object;
 
 	public:
-		BillboardNodeImpl();
-		explicit BillboardNodeImpl(const CameraSmartPointer& camera);
+		BillboardNodeImpl() noexcept;
+		explicit BillboardNodeImpl(const CameraSmartPointer& camera) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

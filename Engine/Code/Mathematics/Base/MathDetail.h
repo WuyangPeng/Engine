@@ -13,8 +13,11 @@
 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 #include <algorithm>
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 // Math<float>公用常数特化。
 template<>
@@ -278,6 +281,8 @@ Real Mathematics::Math<Real>
 {
 	MATHEMATICS_ASSERTION_3(sm_Epsilon < FAbs(y), "输入值为0！\n");
 
+	CoreTools::DoNothing();
+
 	return fmod(x, y);
 }
 
@@ -299,6 +304,8 @@ Real Mathematics::Math<Real>
 {
 	MATHEMATICS_ASSERTION_3(sm_Zero < value, "Log的输入值为非正数！\n");
 
+	CoreTools::DoNothing();
+
 	return log(value);
 }
 
@@ -307,6 +314,8 @@ Real Mathematics::Math<Real>
 	::Log2(Real value)
 {
 	MATHEMATICS_ASSERTION_3(sm_Zero < value, "Log2的输入值为非正数！\n");
+
+	CoreTools::DoNothing();
 
 	return sm_InverseLN2 * log(value);
 }
@@ -317,6 +326,8 @@ Real Mathematics::Math<Real>
 {
 	MATHEMATICS_ASSERTION_3(sm_Zero < value, "Log10的输入值为非正数！\n");
 
+	CoreTools::DoNothing();
+
 	return sm_InverseLN10 * log(value);
 }
 
@@ -325,6 +336,8 @@ Real Mathematics::Math<Real>
 	::Exp(Real value)
 {
 	MATHEMATICS_ASSERTION_3(value <= sm_Exponent, "输入值过大导致exp()计算溢出！\n");
+
+	CoreTools::DoNothing();
 
 	return exp(value);
 }
@@ -335,6 +348,8 @@ Real Mathematics::Math<Real>
 {
 	MATHEMATICS_ASSERTION_3(sm_Zero <= base, "Pow中base不允许为负数！\n");
 	MATHEMATICS_ASSERTION_3(sm_Epsilon < FAbs(base) || sm_Epsilon < exponent, "0的非正数次方不存在！\n");
+
+	CoreTools::DoNothing();
 
 	return pow(base, exponent);
 }
@@ -351,6 +366,8 @@ Real Mathematics::Math<Real>
 	::Sqrt(Real value)  
 {	 
 	MATHEMATICS_ASSERTION_3(sm_Zero <= value, "Sqrt的输入值不允许为负数！\n");	 
+
+	CoreTools::DoNothing();
 
 	return sqrt(value);
 }
@@ -404,6 +421,8 @@ bool Mathematics::Math<Real>
 {
 	MATHEMATICS_ASSERTION_3(sm_Zero <= epsilon, "epsilon必须大于0！");
 
+	CoreTools::DoNothing();
+
 	if (FAbs(lhs - rhs) <= epsilon)
 		return true;
 	else
@@ -416,8 +435,10 @@ bool Mathematics::Math<Real>
 {
 	MATHEMATICS_ASSERTION_3(0 < equalDigit && equalDigit <= IntegerTraits<Real>::TraitsType::g_ExponentShifting, "equalDigit必须大于0！");
 
-	FloatingPointAnalysis<Real> lhsAnalysis{ lhs };
-	FloatingPointAnalysis<Real> rhsAnalysis{ rhs };
+	CoreTools::DoNothing();
+
+	const FloatingPointAnalysis<Real> lhsAnalysis{ lhs };
+	const FloatingPointAnalysis<Real> rhsAnalysis{ rhs };
 
 	return (lhsAnalysis.GetSymbolValue() == rhsAnalysis.GetSymbolValue()) &&
 		   (lhsAnalysis.GetExponent() == rhsAnalysis.GetExponent()) &&
@@ -447,7 +468,7 @@ Real Mathematics::Math<Real>
 	else
 		return value;
 }
-
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_MATH_DETAIL)
 
 #endif // MATHEMATICS_BASE_MATH_DETAIL_H

@@ -28,7 +28,9 @@ namespace Rendering
 
 	public:		
 		IKJoint(const SpatialSmartPointer& object,const IKGoalSmartPointerVector& goals);
-		virtual ~IKJoint();
+		  ~IKJoint();
+                IKJoint(IKJoint&&) = default;
+                IKJoint& operator=(IKJoint&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
@@ -42,7 +44,7 @@ namespace Rendering
 		bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
 		bool UpdateLocalRotate(MatrixRotationAxis axisIndex);	
 
-		const ConstSpatialSmartPointer GetObjectSmartPointer() const;
+		const ConstSpatialSmartPointer GetObjectSmartPointer() const noexcept;
 		const ConstIKGoalSmartPointer GetGoalsSmartPointer(int index) const;
 		int GetGoalsNum() const;
 

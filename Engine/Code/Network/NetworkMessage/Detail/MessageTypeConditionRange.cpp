@@ -16,17 +16,13 @@ Network::MessageTypeConditionRange
 {
 	if (m_EndVersion < m_BeginVersion)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("起始版本号大于结束版本号。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("起始版本号大于结束版本号。"s));
 	}
 
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::MessageTypeConditionRange
-	::~MessageTypeConditionRange()
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Network::MessageTypeConditionRange
@@ -39,24 +35,21 @@ bool Network::MessageTypeConditionRange
 }
 #endif // OPEN_CLASS_INVARIANT
 
-bool Network::MessageTypeConditionRange
-	::IsVersionsConform(int version) const
+bool Network::MessageTypeConditionRange ::IsVersionsConform(int version) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
 	return m_BeginVersion <= version && version <= m_EndVersion;
 }
 
-int Network::MessageTypeConditionRange
-	::GetMinVersion() const
+int Network::MessageTypeConditionRange ::GetMinVersion() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
 	return m_BeginVersion;
 }
 
-int Network::MessageTypeConditionRange
-	::GetMaxVersion() const
+int Network::MessageTypeConditionRange ::GetMaxVersion() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 

@@ -34,7 +34,7 @@ namespace Rendering
 		using Math = Mathematics::Math<float>;
         
     public:
-        explicit WorldCoordinateFrame (float epsilon = Math::sm_ZeroTolerance);
+                explicit WorldCoordinateFrame(float epsilon = Math::sm_ZeroTolerance)  ;
         
 		CLASS_INVARIANT_DECLARE;
 

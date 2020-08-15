@@ -15,7 +15,7 @@
 #include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
 
 Mathematics::EquationImpl
-	::EquationImpl(double epsilon)
+	::EquationImpl(double epsilon) noexcept
 	:m_Result{}, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -30,7 +30,7 @@ Mathematics::EquationImpl
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, EquationImpl)
 
 double Mathematics::EquationImpl
-	::GetEpsilon() const
+	::GetEpsilon() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -38,7 +38,7 @@ double Mathematics::EquationImpl
 }
 
 bool Mathematics::EquationImpl
-	::IsRealResult() const
+	::IsRealResult() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -62,31 +62,28 @@ int Mathematics::EquationImpl
 }
 
 const Mathematics::EquationImpl::RealConstIterator Mathematics::EquationImpl
-	::GetRealBegin() const
+	::GetRealBegin() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Result.GetRealBegin();
 }
 
-const Mathematics::EquationImpl::RealConstIterator Mathematics::EquationImpl
-	::GetRealEnd() const
+const Mathematics::EquationImpl::RealConstIterator Mathematics::EquationImpl ::GetRealEnd() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Result.GetRealEnd();
 }
 
-const Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl
-	::GetImaginaryBegin() const
+const Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl ::GetImaginaryBegin() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Result.GetImaginaryBegin();
 }
 
-const Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl
-	::GetImaginaryEnd() const
+const Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl ::GetImaginaryEnd() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -135,15 +132,15 @@ double Mathematics::EquationImpl
 	// 没有使用无限循环，避免无法退出！
 	for (auto i = 0; i < sm_MaxTime; ++i)
 	{
-		auto validateValue = Substitution(amendSolution);
-		auto derivative = SubstitutionTangent(amendSolution);
+		const auto validateValue = Substitution(amendSolution);
+		const auto derivative = SubstitutionTangent(amendSolution);
 
 		if (Mathd::FAbs(derivative) <= m_Epsilon)
 		{
 			break;
 		}
 
-		auto adjustedValue = validateValue / derivative;
+		const auto adjustedValue = validateValue / derivative;
 
 		amendSolution -= adjustedValue;
 
@@ -165,9 +162,9 @@ const Mathematics::EquationImpl::Imaginary Mathematics::EquationImpl
 	// 没有使用无限循环，避免无法退出！
 	for (auto i = 0; i < sm_MaxTime; ++i)
 	{
-		auto validateValue = Substitution(amendSolution);
-		auto derivative = SubstitutionTangent(amendSolution);
-		auto adjustedValue = validateValue / derivative;
+		const auto validateValue = Substitution(amendSolution);
+		const auto derivative = SubstitutionTangent(amendSolution);
+		const auto adjustedValue = validateValue / derivative;
 
 		amendSolution -= adjustedValue;
 
@@ -187,8 +184,8 @@ const Mathematics::EquationImpl::RealVector Mathematics::EquationImpl
 	::NewRealResult() const
 {
 	RealVector newRealSolve;
-
-	for (auto iter = GetRealBegin(), end = GetRealEnd(); iter != end; ++iter)
+	const auto end = GetRealEnd();
+	for (auto iter = GetRealBegin(); iter != end; ++iter)
 	{
 		auto solve = *iter;
 		solve = NewtonMethod(solve);
@@ -204,7 +201,8 @@ const Mathematics::EquationImpl::ImaginaryVector Mathematics::EquationImpl
 {
 	ImaginaryVector newImaginarySolve;
 
-	for (auto iter = GetImaginaryBegin(), end = GetImaginaryEnd(); iter != end; ++iter)
+	const auto end = GetImaginaryEnd();
+	for (auto iter = GetImaginaryBegin(); iter != end; ++iter)
 	{
 		auto solve = *iter;
 		solve = NewtonMethod(solve);
@@ -216,7 +214,7 @@ const Mathematics::EquationImpl::ImaginaryVector Mathematics::EquationImpl
 
 // private
 void Mathematics::EquationImpl
-	::CleanSolution()
+	::CleanSolution() noexcept
 {
 	m_Result.CleanSolution();
 }
@@ -238,9 +236,10 @@ void Mathematics::EquationImpl
 void  Mathematics::EquationImpl
 	::AddRealResult(const EquationImpl& equation, double offset)
 {
-	for (auto iter = equation.GetRealBegin(), end = equation.GetRealEnd(); iter != end; ++iter)
+	const auto end = equation.GetRealEnd();
+	for (auto iter = equation.GetRealBegin(); iter != end; ++iter)
 	{
-		auto result = *iter + offset;
+		const auto result = *iter + offset;
 
 		SetRealResult(result);
 	}
@@ -250,9 +249,10 @@ void  Mathematics::EquationImpl
 void  Mathematics::EquationImpl
 	::AddImaginaryResult(const EquationImpl& equation, double offset)
 {
-	for (auto iter = equation.GetImaginaryBegin(), end = equation.GetImaginaryEnd(); iter != end; ++iter)
+	const auto end = equation.GetImaginaryEnd();
+	for (auto iter = equation.GetImaginaryBegin(); iter != end; ++iter)
 	{
-		auto result = *iter + offset;
+		const auto result = *iter + offset;
 
 		SetImaginaryResult(result);
 	}

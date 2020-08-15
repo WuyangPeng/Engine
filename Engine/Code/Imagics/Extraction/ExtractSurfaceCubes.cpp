@@ -87,7 +87,7 @@ void Imagics::ExtractSurfaceCubes
     for (int v = 0, nextVertex = 0; v < numVertices; ++v)
     {
         // Keep only unique vertices.
-        std::pair<VMapIterator,bool> result = vertexMap.insert(std::make_pair(vertices[v], nextVertex));
+        const std::pair<VMapIterator,bool> result = vertexMap.insert(std::make_pair(vertices[v], nextVertex));
 
         if (result.second == true)
         {
@@ -113,7 +113,7 @@ void Imagics::ExtractSurfaceCubes
 		tri.SetKey(2, vIter->second); 
 
         // Keep only unique triangles.
-        std::pair<TMapIterator,bool> result = triangleMap.insert(std::make_pair(tri, nextTriangle));
+        const std::pair<TMapIterator,bool> result = triangleMap.insert(std::make_pair(tri, nextTriangle));
 
         if (result.second == true)
         {
@@ -939,8 +939,15 @@ void Imagics::ExtractSurfaceCubes::VETable
 
     IMAGICS_ASSERTION_0(vertex0.NumAdjacents < 4 && vertex1.NumAdjacents < 4,
         "Invalid adjacent quantity\n");
-    vertex0.Adj[vertex0.NumAdjacents++] = i1;
-    vertex1.Adj[vertex1.NumAdjacents++] = i0;
+    if (vertex0.NumAdjacents < 4)
+    {
+        vertex0.Adj[vertex0.NumAdjacents++] = i1;
+    }
+
+    if (vertex1.NumAdjacents < 4)
+    {
+        vertex1.Adj[vertex1.NumAdjacents++] = i0;
+    }   
 }
 
 void Imagics::ExtractSurfaceCubes::VETable

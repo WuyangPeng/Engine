@@ -11,10 +11,13 @@
 
 #include "BufferManagementLockEncapsulation.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-
+#include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 template <typename BufferManagementType>
 Rendering::BufferManagementLockEncapsulation<BufferManagementType>
-	::BufferManagementLockEncapsulation(BufferManagementType& manager)
+	::BufferManagementLockEncapsulation(BufferManagementType& manager) noexcept
 	:m_Manager{ manager }, m_Buffer{ nullptr }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -23,11 +26,15 @@ Rendering::BufferManagementLockEncapsulation<BufferManagementType>
 template <typename BufferManagementType>
 Rendering::BufferManagementLockEncapsulation<BufferManagementType>
 	::~BufferManagementLockEncapsulation()
+{EXCEPTION_TRY
 {
-	if (m_Buffer != nullptr)
+if (m_Buffer != nullptr)
 	{
 		m_Manager.Unlock(m_Buffer);
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering) 
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -52,5 +59,5 @@ void* Rendering::BufferManagementLockEncapsulation<BufferManagementType>
 
 	return videoMemory;
 }
- 
+  #include STSTEM_WARNING_POP
 #endif // RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_DETAIL_H

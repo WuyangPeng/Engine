@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 15:45)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_H
@@ -14,32 +14,31 @@
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE BoostMainManager : public BaseMainManagerImpl
-	{
-	public:
-		using ClassType = BoostMainManager;
-		using ParentType = BaseMainManagerImpl;
+    class NETWORK_HIDDEN_DECLARE BoostMainManager : public BaseMainManagerImpl
+    {
+    public:
+        using ClassType = BoostMainManager;
+        using ParentType = BaseMainManagerImpl;
 
-	public:
-		BoostMainManager();
-		virtual ~BoostMainManager();
+    public:
+        BoostMainManager() noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-	public:
-		virtual void Run() override;
+    public:
+        void Run() override;
 
-		virtual IOContextType& GetIOContext() override;
-		virtual void StopContext() override;
-		virtual bool IsContextStop() const override;
-		virtual void RestartContext() override;
+        IOContextType& GetIOContext() noexcept override;
+        void StopContext() override;
+        bool IsContextStop() const override;
+        void RestartContext() override;
 
-	protected:
-		void DispatchStopContext();
+    protected:
+        void DispatchStopContext();
 
-	private:
-		ExecutorWorkGuardContext m_ExecutorWorkGuardContext;
-	};
+    private:
+        ExecutorWorkGuardContext m_ExecutorWorkGuardContext;
+    };
 }
 
-#endif // NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_H
+#endif  // NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_H

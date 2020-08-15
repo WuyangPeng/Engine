@@ -16,7 +16,9 @@
 
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::SingleShaderConstantsData
 	::SingleShaderConstantsData( const string& name,int numRegistersUsed )
 	:m_Impl{ make_shared<ImplType>(name,numRegistersUsed) }
@@ -44,8 +46,9 @@ void Rendering::SingleShaderConstantsData
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderConstantsData,GetConstantName,const string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderConstantsData,GetNumRegistersUsed,int) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderConstantsData,GetNumRegistersUsed,int) 
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderConstantsData,Load,BufferSource&,void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,SingleShaderConstantsData,Save,BufferTarget&,void)  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,SingleShaderConstantsData,GetStreamingSize,int) 
+#include STSTEM_WARNING_POP

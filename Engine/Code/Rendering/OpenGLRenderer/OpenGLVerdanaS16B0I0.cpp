@@ -7,7 +7,10 @@
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLBitmapFont.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26485)
 namespace Rendering
 {
 
@@ -2284,3 +2287,4 @@ static const BitmapFontChar* const gsBFChars[] =
 const BitmapFont gVerdanaS16B0I0("VerdanaS16B0I0", 256, gsBFChars);
 
 }
+#include STSTEM_WARNING_POP

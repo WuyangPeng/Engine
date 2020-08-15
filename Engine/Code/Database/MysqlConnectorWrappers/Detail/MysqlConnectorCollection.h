@@ -25,11 +25,11 @@ namespace Database
 
 	public:
 		explicit MysqlConnectorCollection(const Schema& schema, const std::string& collectionName);
-		virtual ~MysqlConnectorCollection();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual ResultPtr ExecuteDoc(const std::string& findStatement, const BindStatementType& bindStatement, int limitStatement) override;
+		  ResultPtr ExecuteDoc(const std::string& findStatement, const BindStatementType& bindStatement, int limitStatement) override;
 
 	private:
 		using MysqlxCollectionPtr = std::unique_ptr<MysqlxCollection>;

@@ -17,11 +17,10 @@ namespace Imagics
 	{
 	public:
 		CurvatureFlow2 (int xBound, int yBound, float xSpacing, float ySpacing, const float* data, const bool* mask, float borderValue, ScaleType scaleType);
-		
-		virtual ~CurvatureFlow2 ();
+ 
 		
 	protected:
-		virtual void OnUpdate (int x, int y) override;
+		  void OnUpdate (int x, int y) noexcept override;
 	};
 }
 

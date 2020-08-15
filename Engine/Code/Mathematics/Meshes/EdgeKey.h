@@ -12,7 +12,10 @@
 #include "System/Helper/UnicodeUsing.h"
 
 #include <iosfwd>
-
+ #include "System/Helper/PragmaWarning.h"
+    #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE EdgeKey
@@ -21,11 +24,15 @@ namespace Mathematics
         typedef EdgeKey ClassType;
         
     public:
-        EdgeKey (int first, int second);
-		EdgeKey();
+        EdgeKey (int first, int second) noexcept;
+		EdgeKey() noexcept;
         
-        EdgeKey(const EdgeKey& rhs);
-        EdgeKey& operator = (const EdgeKey& rhs);
+        EdgeKey(const EdgeKey& rhs) noexcept;
+        EdgeKey& operator = (const EdgeKey& rhs) noexcept;
+		
+		~EdgeKey() = default;
+		EdgeKey(EdgeKey&& rhs) = default;
+        EdgeKey& operator = (EdgeKey&& rhs) = default;
         
 		CLASS_INVARIANT_DECLARE;
         
@@ -40,5 +47,6 @@ namespace Mathematics
     
 	MATHEMATICS_DEFAULT_DECLARE System::OStream& operator<<(System::OStream& os, const EdgeKey& edgeKey);
 }
+#include STSTEM_WARNING_POP
 
 #endif // MATHEMATICS_MESHES_EDGE_KEY_H

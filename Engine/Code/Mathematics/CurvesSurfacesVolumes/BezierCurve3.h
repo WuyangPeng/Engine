@@ -20,15 +20,20 @@ namespace Mathematics
 		// Construction and destruction.  BezierCurve3 accepts responsibility for
 		// deleting the input arrays.
 		BezierCurve3 (int degree, Vector3D<Real>* ctrlPoint);
-		virtual ~BezierCurve3 ();
+		  ~BezierCurve3 ();
 		
-		int GetDegree () const;
-		const Vector3D<Real>* GetControlPoints () const;
+		BezierCurve3(const BezierCurve3&) = default;
+		BezierCurve3& operator=(const BezierCurve3&) = default;
+		BezierCurve3(BezierCurve3&&) = default;
+		BezierCurve3& operator=(BezierCurve3&&) = default;
 		
-		virtual Vector3D<Real> GetPosition (Real t) const;
-		virtual Vector3D<Real> GetFirstDerivative (Real t) const;
-		virtual Vector3D<Real> GetSecondDerivative (Real t) const;
-		virtual Vector3D<Real> GetThirdDerivative (Real t) const;
+		int GetDegree () const noexcept;
+		const Vector3D<Real>* GetControlPoints () const noexcept;
+		
+		  Vector3D<Real> GetPosition (Real t) const override;
+		  Vector3D<Real> GetFirstDerivative (Real t) const override;
+		  Vector3D<Real> GetSecondDerivative (Real t) const override;
+		  Vector3D<Real> GetThirdDerivative (Real t) const override;
 
 	protected:
 		int mDegree;

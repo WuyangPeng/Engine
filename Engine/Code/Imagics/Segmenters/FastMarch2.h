@@ -21,21 +21,21 @@ namespace Imagics
 		
 		FastMarch2 (int xBound, int yBound, float xSpacing, float ySpacing,const float speed, const std::vector<int>& seeds);
 		
-		virtual ~FastMarch2 ();
+	 
 		
 		// Member access.
-		int GetXBound () const;
-		int GetYBound () const;
-		float GetXSpacing () const;
-		float GetYSpacing () const;
-		int Index (int x, int y) const;
+		int GetXBound () const noexcept;
+		int GetYBound () const noexcept;
+		float GetXSpacing () const noexcept;
+		float GetYSpacing () const noexcept; 
+		int Index (int x, int y) const noexcept;
 		
 		// Pixel classification.
-		virtual void GetBoundary (std::vector<int>& boundary) const;
-		virtual bool IsBoundary (int i) const;
+		  void GetBoundary (std::vector<int>& boundary) const override;
+                bool IsBoundary(int i) const noexcept override;
 		
 		// Run one step of the fast marching algorithm.
-		virtual void Iterate ();
+		  void Iterate () override;
 		
 	protected:
 		// Called by the constructors.

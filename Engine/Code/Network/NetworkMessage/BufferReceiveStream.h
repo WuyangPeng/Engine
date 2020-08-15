@@ -24,13 +24,13 @@ namespace Network
 
 	public:
 		explicit BufferReceiveStream(const MessageBufferSharedPtr& messageBuffer, ParserStrategy parserStrategy);
-
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(BufferReceiveStream);
+	
+		CLASS_INVARIANT_DECLARE;
 
 		void OnEvent(uint64_t socketID, const SocketManagerSharedPtr& socketManager);
 
 		// 如果读取未完成，需要继续解析
-		bool IsFinish() const;
+		bool IsFinish() const noexcept;
 
 		void PushBack(const MessageBufferSharedPtr& messageBuffer);
 

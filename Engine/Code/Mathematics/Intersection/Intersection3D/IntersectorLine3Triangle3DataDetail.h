@@ -67,8 +67,7 @@ const Mathematics::Triangle3<Real> Mathematics::IntersectorLine3Triangle3Data<Re
 }
 
 template <typename Real>
-Real Mathematics::IntersectorLine3Triangle3Data<Real>
-	::GetDirectionDotNormal() const
+Real Mathematics::IntersectorLine3Triangle3Data<Real>::GetDirectionDotNormal() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

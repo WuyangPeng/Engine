@@ -14,14 +14,20 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26493)
 CORE_TOOLS_RTTI_DEFINE(Rendering, PlanarReflectionEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PlanarReflectionEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PlanarReflectionEffect);
 
 Rendering::PlanarReflectionEffect
 	::PlanarReflectionEffect(int numPlanes)
-	:mNumPlanes{ numPlanes }, mAlphaState{ NEW0 AlphaState() }, mDepthState{ NEW0 DepthState() }, mStencilState{ NEW0 StencilState() }
+    : mNumPlanes{ numPlanes }, mAlphaState{ std::make_shared<AlphaState>() }, mDepthState{ std::make_shared<DepthState>() }, mStencilState{ std::make_shared < StencilState>() }
 {
 	mPlanes = NEW1<TrianglesMeshSmartPointer>(mNumPlanes);
     mReflectances = NEW1<float>(mNumPlanes);  
@@ -30,8 +36,13 @@ Rendering::PlanarReflectionEffect
 Rendering::PlanarReflectionEffect
 	::~PlanarReflectionEffect()
 {
-    DELETE1(mPlanes);
-    DELETE1(mReflectances);
+	EXCEPTION_TRY
+	{
+            DELETE1(mPlanes);
+            DELETE1(mReflectances);
+	}
+	EXCEPTION_ALL_CATCH(Rendering)
+   
 }
 
 void Rendering::PlanarReflectionEffect
@@ -48,7 +59,7 @@ void Rendering::PlanarReflectionEffect
     // The depth range will be modified during drawing, so save the current
     // depth range for restoration later.
  
-   auto depthRange =  renderer->GetDepthRange();
+  const  auto depthRange =  renderer->GetDepthRange();
 
     // Get the camera to store post-world transformations.
     ConstCameraSmartPointer camera = renderer->GetCamera();
@@ -222,7 +233,7 @@ const CoreTools::ObjectSmartPointer Rendering::PlanarReflectionEffect::
 	GetObjectByName(const std::string& name)
 {
 	auto found = ParentType::GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -230,7 +241,7 @@ const CoreTools::ObjectSmartPointer Rendering::PlanarReflectionEffect::
 	for (auto i = 0; i < mNumPlanes; ++i)
 	{
 		auto found2 = mPlanes[i]->GetObjectByName(name);
-		if (found2.IsValidPtr())
+		if (found2 )
 		{
 			return found2;
 		}			
@@ -244,7 +255,7 @@ const std::vector<CoreTools::ObjectSmartPointer> Rendering::PlanarReflectionEffe
 {
 	std::vector<CoreTools::ObjectSmartPointer> objects;
 	auto found = ParentType::GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		objects.push_back(found);
 	}
@@ -263,7 +274,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::PlanarReflectionEffect
 	::GetConstObjectByName(const std::string& name) const
 {	
 	auto found = ParentType::GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -271,7 +282,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::PlanarReflectionEffect
 	for (int i = 0; i < mNumPlanes; ++i)
 	{
 		auto found2 = mPlanes[i]->GetConstObjectByName(name);
-		if (found2.IsValidPtr())
+		if (found2 )
 		{
 			return found2;
 		}			
@@ -317,10 +328,10 @@ int Rendering::PlanarReflectionEffect
 uint64_t Rendering::PlanarReflectionEffect
 	::Register(CoreTools::ObjectRegister& target) const
 {
-	auto id = ParentType::Register(target);
+	const auto id = ParentType::Register(target);
 	if (0 < id)
 	{
-		target.RegisterSmartPointer(mNumPlanes, mPlanes);
+	//	target.RegisterSmartPointer(mNumPlanes, mPlanes);
 		return id;
 	}
 
@@ -335,7 +346,7 @@ void Rendering::PlanarReflectionEffect
 	ParentType::Save(target);
 
 	target.WriteWithNumber(mNumPlanes, mReflectances);
-	target.WriteSmartPointerWithNumber(mNumPlanes, mPlanes);
+	//target.WriteSmartPointerWithNumber(mNumPlanes, mPlanes);
 
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);	
 }
@@ -344,11 +355,14 @@ void Rendering::PlanarReflectionEffect
 	::Link(CoreTools::ObjectLink& source)
 {
 	SYSTEM_UNUSED_ARG(source);
+
+	CoreTools::DoNothing();
 }
 
 void Rendering::PlanarReflectionEffect
 	::PostLink()
 {	
+	CoreTools::DoNothing();
 }
 
 void Rendering::PlanarReflectionEffect
@@ -360,7 +374,7 @@ void Rendering::PlanarReflectionEffect
 	GlobalEffect::Load(source);
 
 	source.Read(mNumPlanes, mReflectances);
-	source.ReadSmartPointer(mNumPlanes, mPlanes);
+//	source.ReadSmartPointer(mNumPlanes, mPlanes);
 
 	CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -368,7 +382,7 @@ void Rendering::PlanarReflectionEffect
  
 
 int Rendering::PlanarReflectionEffect
-	::GetNumPlanes() const
+	::GetNumPlanes() const noexcept
 {
 	return mNumPlanes;
 }
@@ -383,20 +397,18 @@ void Rendering::PlanarReflectionEffect
 	mPlanes[i]->SetCullingMode(CullingMode::Always);
 }
 
-Rendering::ConstTrianglesMeshSmartPointer Rendering::PlanarReflectionEffect
-	::GetPlane(int i) const
+Rendering::ConstTrianglesMeshSmartPointer Rendering::PlanarReflectionEffect ::GetPlane(int i) const noexcept
 {
 	return mPlanes[i];
 }
 
-void Rendering::PlanarReflectionEffect
-	::SetReflectance(int i, float reflectance)
+void Rendering::PlanarReflectionEffect ::SetReflectance(int i, float reflectance) noexcept
 {
 	mReflectances[i] = reflectance;
 }
 
-float Rendering::PlanarReflectionEffect
-	::GetReflectance(int i) const
+float Rendering::PlanarReflectionEffect ::GetReflectance(int i) const noexcept
 {
 	return mReflectances[i];
 }
+#include STSTEM_WARNING_POP

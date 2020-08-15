@@ -22,17 +22,21 @@ namespace Imagics
 		TImage2D (int xBound, int yBound, T* data = 0);
 		TImage2D (const TImage2D& image);
 		TImage2D (const char* filename);
+		~TImage2D() = default;
 		
 		// Data access.
-		T& operator() (int x, int y) const;
+		T& operator() (int x, int y) const noexcept;
 		
 		// Conversion between 2D coordinates and 1D indexing.
-		int GetIndex (int x, int y) const;
-		void GetCoordinates (int index, int& x, int& y) const;
+		int GetIndex (int x, int y) const noexcept;
+		void GetCoordinates (int index, int& x, int& y) const noexcept;
 		
 		// Assignment.
 		TImage2D& operator= (const TImage2D& image);
-		TImage2D& operator= (T value);
+                TImage2D& operator=(T value) noexcept;
+		
+		TImage2D& operator= (TImage2D&& image)= default;
+		TImage2D (TImage2D&& image)= default;
 		
 	protected:
 		using TImage<T>::SetBounds;

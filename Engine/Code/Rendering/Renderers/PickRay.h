@@ -36,8 +36,8 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 
 		bool IsResult() const noexcept;
-		Mathematics::APointf GetOrigin() const;
-		Mathematics::AVectorf GetDirection() const;
+		Mathematics::APointf GetOrigin() const noexcept;
+		Mathematics::AVectorf GetDirection() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(PickRay);

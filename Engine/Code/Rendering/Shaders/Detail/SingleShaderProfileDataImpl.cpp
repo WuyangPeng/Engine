@@ -14,7 +14,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 Rendering::SingleShaderProfileDataImpl
 	::SingleShaderProfileDataImpl(int numConstants,int numSamplers)	
 	:m_BaseRegister(numConstants),m_TextureUnit(numSamplers),m_Program{}
@@ -134,3 +136,4 @@ int Rendering::SingleShaderProfileDataImpl
 	return size;
 }
 
+#include STSTEM_WARNING_POP

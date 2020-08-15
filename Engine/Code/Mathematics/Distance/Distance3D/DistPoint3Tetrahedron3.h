@@ -33,10 +33,10 @@ namespace Mathematics
 		const Tetrahedron3& GetTetrahedron() const;
 
 		// Static distance queries.
-		virtual const DistanceResult GetSquared() const override;
+		 const DistanceResult GetSquared() const override;
 
 		// Function calculations for dynamic distance queries.
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		Vector3D mPoint;

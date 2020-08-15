@@ -14,7 +14,15 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
- 
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+ #include "System/Helper/PragmaWarning.h"
+ #include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26493)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TerrainBase);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainBase);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainBase);
@@ -28,7 +36,7 @@ Rendering::TerrainBase
 
     // Load terrain pages.
 	mPages = NEW2<TerrainPageSmartPointer>(mNumCols, mNumRows);
-    int row, col;
+    int row = 0, col = 0;
     for (row = 0; row < mNumRows; ++row)
     {
         for (col = 0; col < mNumCols; ++col)
@@ -55,14 +63,19 @@ Rendering::TerrainBase
 Rendering::TerrainBase
 	::~TerrainBase ()
 {
-    for (int row = 0; row < mNumRows; ++row)
+	EXCEPTION_TRY
+{
+for (int row = 0; row < mNumRows; ++row)
     {
         for (int col = 0; col < mNumCols; ++col)
         {
-            mPages[row][col].Reset();
+            mPages[row][col].reset();
         }
     }
     DELETE2(mPages);
+}
+EXCEPTION_ALL_CATCH(Rendering) 
+    
 }
 
 Rendering::TerrainPageSmartPointer Rendering::TerrainBase
@@ -78,9 +91,9 @@ Rendering::TerrainPageSmartPointer Rendering::TerrainBase
 }
 
 Rendering::TerrainPageSmartPointer Rendering::TerrainBase
-	::GetCurrentPage(float x, float y) const
+	::GetCurrentPage(float x, float y) const noexcept
 {
-    float invLength = 1.0f/(mSpacing*(float)(mSize - 1));
+    const float invLength = 1.0f/(mSpacing*(float)(mSize - 1));
 
     int col = (int)Mathematics:: Mathf::Floor(x*invLength);
     col %= mNumCols;
@@ -114,30 +127,30 @@ float Rendering::TerrainBase
 Mathematics::AVectorf Rendering::TerrainBase
 	::GetNormal(float x, float y) const
 {
-    float xp = x + mSpacing;
-    float xm = x - mSpacing;
-    float yp = y + mSpacing;
-    float ym = y - mSpacing;
+    const float xp = x + mSpacing;
+    const float xm = x - mSpacing;
+   const float yp = y + mSpacing;
+    const float ym = y - mSpacing;
 
 	TerrainPageSmartPointer page = GetCurrentPage(xp, y);
     float xtmp = xp - page->GetLocalTransform().GetTranslate()[0];
 	float ytmp = y - page->GetLocalTransform().GetTranslate()[1];
-    float hpz = page->GetHeight(xtmp,ytmp);
+   const float hpz = page->GetHeight(xtmp,ytmp);
 
     page = GetCurrentPage(xm, y);
 	xtmp = xm - page->GetLocalTransform().GetTranslate()[0];
 	ytmp = y - page->GetLocalTransform().GetTranslate()[1];
-    float hmz = page->GetHeight(xtmp,ytmp);
+   const float hmz = page->GetHeight(xtmp,ytmp);
 
     page = GetCurrentPage(x, yp);
 	xtmp = x - page->GetLocalTransform().GetTranslate()[0];
 	ytmp = yp - page->GetLocalTransform().GetTranslate()[1];
-    float hzp = page->GetHeight(xtmp,ytmp);
+   const float hzp = page->GetHeight(xtmp,ytmp);
 
     page = GetCurrentPage(x, ym);
 	xtmp = x - page->GetLocalTransform().GetTranslate()[0];
 	ytmp = ym - page->GetLocalTransform().GetTranslate()[1];
-    float hzm = page->GetHeight(xtmp,ytmp);
+   const float hzm = page->GetHeight(xtmp,ytmp);
 
 	Mathematics::AVectorf normal(hmz - hpz, hzm - hzp, 1.0f);
     normal.Normalize();
@@ -172,7 +185,7 @@ void Rendering::TerrainBase
 void Rendering::TerrainBase
 	::LoadPage(int row, int col, const System::String& heightName, const System::String& heightSuffix)
 {
-    int numHeights = mSize*mSize;
+    const int numHeights = mSize*mSize;
     unsigned short* heights = NEW1<unsigned short>(numHeights);
 	System::String fileName = heightName + SYSTEM_TEXT(".") + heightSuffix + SYSTEM_TEXT(".wmhf");
 	CoreTools::ReadFileManager heightFile(fileName);
@@ -187,9 +200,9 @@ void Rendering::TerrainBase
         memset(heights, 0, numHeights*sizeof(unsigned short));
     }
 
-    float length = mSpacing*(float)(mSize - 1);
+  const  float length = mSpacing*(float)(mSize - 1);
    Mathematics::  Float2 origin(col*length, row*length);
-   TerrainPageSmartPointer page(NEW0 TerrainPage(mVFormat, mSize, heights, origin, mMinElevation, mMaxElevation, mSpacing));
+   TerrainPageSmartPointer page(std::make_shared<TerrainPage>(mVFormat, mSize, heights, origin, mMinElevation, mMaxElevation, mSpacing));
 
     mPages[row][col] = page;
 }
@@ -226,7 +239,7 @@ void Rendering::TerrainBase
 	::OnCameraMotion ()
 {
     RENDERING_ASSERTION_0(mCamera != 0, "Camera must exist\n");
-    if (mCamera.IsNullPtr())
+    if (!mCamera )
     {
         return;
     }
@@ -239,24 +252,24 @@ void Rendering::TerrainBase
 
     // Update the model-space origins of the terrain pages.  Start the
     // process by locating the page that contains the camera.
-    float length = mSpacing*(float)(mSize - 1);
-    float invLength = 1.0f/length;
-	int newCameraCol = (int)Mathematics::Mathf::Floor(modelEye[0]*invLength);
-	int newCameraRow = (int)Mathematics::Mathf::Floor(modelEye[1]*invLength);
+   const float length = mSpacing*(float)(mSize - 1);
+   const float invLength = 1.0f/length;
+	const int newCameraCol = (int)Mathematics::Mathf::Floor(modelEye[0]*invLength);
+	const int newCameraRow = (int)Mathematics::Mathf::Floor(modelEye[1]*invLength);
     if (newCameraCol != mCameraCol || newCameraRow != mCameraRow)
     {
         mCameraCol = newCameraCol;
         mCameraRow = newCameraRow;
 
         // Translate page origins for toroidal wraparound.
-        int cminO = mCameraCol - mNumCols/2;
-        int cminP = cminO % mNumCols;
+       const int cminO = mCameraCol - mNumCols/2;
+         int cminP = cminO % mNumCols;
         if (cminP < 0)
         {
             cminP += mNumCols;
         }
 
-        int rminO = mCameraRow - mNumRows/2;
+        const int rminO = mCameraRow - mNumRows/2;
         int rminP = rminO % mNumRows;
         if (rminP < 0)
         {
@@ -303,17 +316,17 @@ const CoreTools::ObjectSmartPointer Rendering::TerrainBase
 	::GetObjectByName(const std::string& name)
 {
 	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
 	found = mVFormat->GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
 	found = mCamera->GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -323,7 +336,7 @@ const CoreTools::ObjectSmartPointer Rendering::TerrainBase
 		for (int col = 0; col < mNumCols; ++col)
 		{
 			found = mPages[row][col]->GetObjectByName(name);
-			if (found.IsValidPtr())
+			if (found )
 			{
 				return found;
 			}
@@ -361,18 +374,18 @@ const CoreTools::ConstObjectSmartPointer Rendering::TerrainBase
 	::GetConstObjectByName(const std::string& name) const
 {
 	CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
 
 	found = mVFormat->GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
 	found = mCamera->GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -382,7 +395,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::TerrainBase
 		for (int col = 0; col < mNumCols; ++col)
 		{
 			found = mPages[row][col]->GetConstObjectByName(name);
-			if (found.IsValidPtr())
+			if (found )
 			{
 				return found;
 			}
@@ -449,15 +462,15 @@ void Rendering::TerrainBase
     source.Read(mSpacing);
     source.Read(mCameraRow);
     source.Read(mCameraCol);
-    source.ReadSmartPointer(mVFormat);
-	source.ReadSmartPointer(mCamera);
+  //  source.ReadSmartPointer(mVFormat);
+	//source.ReadSmartPointer(mCamera);
 
 	mPages = NEW2<TerrainPageSmartPointer>(mNumCols, mNumRows);
     for (int row = 0; row < mNumRows; ++row)
     {
         for (int col = 0; col < mNumCols; ++col)
         {
-			source.ReadSmartPointer(mPages[row][col]);
+			//source.ReadSmartPointer(mPages[row][col]);
         }
     }
 
@@ -469,13 +482,13 @@ void Rendering::TerrainBase
 {
     Node::Link(source);
 
-    source.ResolveObjectSmartPointerLink(mVFormat);
-	source.ResolveObjectSmartPointerLink(mCamera);
+   // source.ResolveObjectSmartPointerLink(mVFormat);
+	//source.ResolveObjectSmartPointerLink(mCamera);
     for (int row = 0; row < mNumRows; ++row)
     {
         for (int col = 0; col < mNumCols; ++col)
         {
-			source.ResolveObjectSmartPointerLink(mPages[row][col]);
+			//source.ResolveObjectSmartPointerLink(mPages[row][col]);
         }
     }
 }
@@ -489,16 +502,16 @@ void Rendering::TerrainBase
 uint64_t Rendering::TerrainBase
 	::Register(CoreTools::ObjectRegister& target) const
 {
-	uint64_t id = Node::Register(target);
+	const uint64_t id = Node::Register(target);
 	if (0 < id)
     {
-        target.RegisterSmartPointer(mVFormat);
-		target.RegisterSmartPointer(mCamera);
+       // target.RegisterSmartPointer(mVFormat);
+		//target.RegisterSmartPointer(mCamera);
         for (int row = 0; row < mNumRows; ++row)
         {
             for (int col = 0; col < mNumCols; ++col)
             {
-				target.RegisterSmartPointer(mPages[row][col]);
+				//target.RegisterSmartPointer(mPages[row][col]);
             }
         }
 		return id;
@@ -522,14 +535,14 @@ void Rendering::TerrainBase
     target.Write(mSpacing);
     target.Write(mCameraRow);
     target.Write(mCameraCol);
-    target.WriteSmartPointer(mVFormat);
-	target.WriteSmartPointer(mCamera);
+   // target.WriteSmartPointer(mVFormat);
+	//target.WriteSmartPointer(mCamera);
 
     for (int row = 0; row < mNumRows; ++row)
     {
         for (int col = 0; col < mNumCols; ++col)
         {
-			target.WriteSmartPointer(mPages[row][col]);
+			//target.WriteSmartPointer(mPages[row][col]);
         }
     }
 
@@ -557,38 +570,39 @@ int Rendering::TerrainBase
 
 
  int Rendering::TerrainBase
-	 ::GetRowQuantity () const
+	 ::GetRowQuantity () const noexcept
 {
 	return mNumRows;
 }
 
  int Rendering::TerrainBase
-	 ::GetColQuantity () const
+	 ::GetColQuantity () const noexcept
 {
 	return mNumCols;
 }
 
  int Rendering::TerrainBase
-	 ::GetSize () const
+	 ::GetSize () const noexcept
 {
 	return mSize;
 }
 
  float Rendering::TerrainBase
-	 ::GetMinElevation () const
+	 ::GetMinElevation () const noexcept
 {
 	return mMinElevation;
 }
 
  float Rendering::TerrainBase
-	 ::GetMaxElevation () const
+	 ::GetMaxElevation () const noexcept
 {
 	return mMaxElevation;
 }
 
  float Rendering::TerrainBase
-	 ::GetSpacing () const
+	 ::GetSpacing () const noexcept
 {
 	return mSpacing;
 }
 
+ #include STSTEM_WARNING_POP

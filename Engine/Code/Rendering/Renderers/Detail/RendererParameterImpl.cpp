@@ -22,23 +22,21 @@ Rendering::RendererParameterImpl
 CLASS_INVARIANT_STUB_DEFINE( Rendering,RendererParameterImpl)
 
 Rendering::TextureFormat Rendering::RendererParameterImpl
-	::GetColorFormat() const
+	::GetColorFormat() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_RendererBasis.GetColorFormat();
 }
 
-Rendering::TextureFormat Rendering::RendererParameterImpl
-	::GetDepthStencilFormat() const
+Rendering::TextureFormat Rendering::RendererParameterImpl ::GetDepthStencilFormat() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_RendererBasis.GetDepthStencilFormat();
 }
 
-int Rendering::RendererParameterImpl
-	::GetNumMultisamples() const
+int Rendering::RendererParameterImpl ::GetNumMultisamples() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -46,7 +44,7 @@ int Rendering::RendererParameterImpl
 }
 
 Rendering::Colour<float> Rendering::RendererParameterImpl
-	::GetClearColor() const
+	::GetClearColor() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -62,7 +60,7 @@ const std::string Rendering::RendererParameterImpl
 }
 
 int Rendering::RendererParameterImpl
-	::GetXPosition () const
+	::GetXPosition () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -70,23 +68,21 @@ int Rendering::RendererParameterImpl
 }
 
 int Rendering::RendererParameterImpl
-	::GetYPosition () const
+	::GetYPosition () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_WindowY;
 }
 
-int Rendering::RendererParameterImpl
-	::GetWidth () const
+int Rendering::RendererParameterImpl ::GetWidth() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_RendererBasis.GetWidth();
 }
 
-int Rendering::RendererParameterImpl
-	::GetHeight () const
+int Rendering::RendererParameterImpl ::GetHeight() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -94,7 +90,7 @@ int Rendering::RendererParameterImpl
 }
 
 bool Rendering::RendererParameterImpl
-	::IsAllowResize() const
+	::IsAllowResize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -102,16 +98,15 @@ bool Rendering::RendererParameterImpl
 }
 
 Rendering::RendererTypes Rendering::RendererParameterImpl
-	::GetRendererType() const
+	::GetRendererType() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Type;
 }
 	
-void Rendering::RendererParameterImpl
-	::SetTextureFormat(TextureFormat colorFormat,TextureFormat depthStencilFormat, int numMultisamples)
-{
+void Rendering::RendererParameterImpl ::SetTextureFormat(TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept
+{ 
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_RendererBasis.SetTextureFormat(colorFormat, depthStencilFormat); 
@@ -138,8 +133,7 @@ void Rendering::RendererParameterImpl
 	m_IsAllowResize = allowResize;
 }
 
-void Rendering::RendererParameterImpl
-	::Resize( int width,int height )
+void Rendering::RendererParameterImpl ::Resize(int width, int height) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -147,7 +141,7 @@ void Rendering::RendererParameterImpl
 }
 
 const Rendering::RendererBasis Rendering::RendererParameterImpl
-	::GetRendererBasis() const
+	::GetRendererBasis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -187,7 +181,7 @@ void Rendering::RendererParameterImpl
 }
 
 int Rendering::RendererParameterImpl
-	::GetIcon() const
+	::GetIcon() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -195,7 +189,7 @@ int Rendering::RendererParameterImpl
 }
 
 bool Rendering::RendererParameterImpl
-	::IsIconDefault() const
+	::IsIconDefault() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -203,14 +197,14 @@ bool Rendering::RendererParameterImpl
 }
 
 int Rendering::RendererParameterImpl
-	::GetCursor() const
+	::GetCursor() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Cursor;
 }
 
-bool Rendering::RendererParameterImpl::IsCursorDefault() const
+bool Rendering::RendererParameterImpl::IsCursorDefault() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -218,7 +212,7 @@ bool Rendering::RendererParameterImpl::IsCursorDefault() const
 }
 
 System::WindowBrushTypes Rendering::RendererParameterImpl
-	::GetBackground() const
+	::GetBackground() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -226,7 +220,7 @@ System::WindowBrushTypes Rendering::RendererParameterImpl
 }
 
 void Rendering::RendererParameterImpl
-	::SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, System::WindowBrushTypes background)
+	::SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, System::WindowBrushTypes background) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

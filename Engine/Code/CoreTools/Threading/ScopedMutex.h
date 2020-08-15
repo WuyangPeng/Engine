@@ -27,6 +27,10 @@ namespace CoreTools
 	public:
 		explicit ScopedMutex(MasterType& mutex);
 		~ScopedMutex();
+		ScopedMutex(const ScopedMutex&) = delete;
+		ScopedMutex operator=(const ScopedMutex&) = delete;
+		ScopedMutex(ScopedMutex&&) noexcept = delete;
+		ScopedMutex operator=(ScopedMutex&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

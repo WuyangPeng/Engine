@@ -16,9 +16,14 @@
 using std::array;
 using std::string;
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26446)
 Network::MessageTarget
-	::MessageTarget(const MessageBufferSharedPtr& messageBuffer)
+	::MessageTarget(const MessageBufferSharedPtr& messageBuffer) noexcept
 	:m_Target{ messageBuffer }, m_ParserStrategy{ messageBuffer->GetParserStrategy() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -49,7 +54,7 @@ void Network::MessageTarget
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
+	const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
 	Write(value);
 }
 
@@ -118,7 +123,7 @@ void Network::MessageTarget
 }
 
 int Network::MessageTarget
-	::GetBytesWritten() const
+	::GetBytesWritten() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -146,3 +151,4 @@ void Network::MessageTarget
 }
 
 
+#include STSTEM_WARNING_POP

@@ -14,16 +14,19 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 using std::make_shared;
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 
 Network::SingleMessageEventContainer
-	::SingleMessageEventContainer()
+	::SingleMessageEventContainer() noexcept
 	:ParentType{}, m_MessageEvent{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::SingleMessageEventContainer
-	::SingleMessageEventContainer(const SingleMessageEventContainer& rhs)
+	::SingleMessageEventContainer(const SingleMessageEventContainer& rhs) noexcept
 	:ParentType{}, m_MessageEvent{ rhs.m_MessageEvent }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -37,7 +40,7 @@ Network::SingleMessageEventContainer
 }
 
 Network::SingleMessageEventContainer& Network::SingleMessageEventContainer
-	::operator=(const SingleMessageEventContainer& rhs)
+	::operator=(const SingleMessageEventContainer& rhs) noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -75,7 +78,7 @@ void Network::SingleMessageEventContainer
 
 	if (m_MessageEvent.lock())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("消息事件已存在！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("消息事件已存在！"s));
 	}
 
 	m_MessageEvent = messageEvent;
@@ -92,7 +95,7 @@ void Network::SingleMessageEventContainer
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("消息事件不存在！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("消息事件不存在！"s));
 	}
 }
 
@@ -118,7 +121,7 @@ void Network::SingleMessageEventContainer
 
 	if (m_MessageEvent.lock())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("消息事件已存在！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("消息事件已存在！"s));
 	}
 
 	m_MessageEvent = messageEvent;
@@ -165,7 +168,7 @@ Network::SingleMessageEventContainer::ImplPtr Network::SingleMessageEventContain
 }
 
 bool Network::SingleMessageEventContainer
-	::IsCanInsert() const
+	::IsCanInsert() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -176,7 +179,7 @@ bool Network::SingleMessageEventContainer
 }
 
 bool Network::SingleMessageEventContainer
-	::IsPrioritySame(MessageEventPriority priority) const
+	::IsPrioritySame(MessageEventPriority priority) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -187,3 +190,4 @@ bool Network::SingleMessageEventContainer
 
 
 
+#include STSTEM_WARNING_POP

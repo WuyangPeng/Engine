@@ -15,7 +15,10 @@
 #include "Physics/CollisionDetection/BoundTreeProjectionInfo.h"
 
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26486)
 Physics::BoundTreeSplitTrianglesImpl
 	::BoundTreeSplitTrianglesImpl(const Centroids& centroids, int beginIndex,int endIndex, const Split& inSplit, const APoint& origin, const AVector& direction)
 	:m_FirstOutSplitIndex{ 0 }, m_SecondOutSplitIndex{ 0 }, m_OutSplit(inSplit.size())
@@ -36,16 +39,14 @@ bool Physics::BoundTreeSplitTrianglesImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-int Physics::BoundTreeSplitTrianglesImpl
-	::GetFirstOutSplitIndex() const
+int Physics::BoundTreeSplitTrianglesImpl ::GetFirstOutSplitIndex() const noexcept
 {
 	PHYSICS_CLASS_IS_VALID_CONST_1;	
 
 	return m_FirstOutSplitIndex;
 }
 
-int Physics::BoundTreeSplitTrianglesImpl
-	::GetSecondOutSplitIndex() const
+int Physics::BoundTreeSplitTrianglesImpl ::GetSecondOutSplitIndex() const noexcept
 {
 	PHYSICS_CLASS_IS_VALID_CONST_1;	
 
@@ -66,12 +67,12 @@ void Physics::BoundTreeSplitTrianglesImpl
 	PHYSICS_ASSERTION_2(beginIndex <= endIndex && endIndex < static_cast<int>(inSplit.size()),"beginIndex大于endIndex");
 
 	// 投射到特定行
-	int quantity = endIndex - beginIndex + 1;
+	const int quantity = endIndex - beginIndex + 1;
 	vector<BoundTreeProjectionInfo> info;
  
 	for (int i = beginIndex; i <= endIndex; ++i)
     {
-        int triangle = inSplit[i];
+            const int triangle = inSplit[i];
 		AVector difference = centroids[triangle] - origin;
 		info.push_back(BoundTreeProjectionInfo(triangle, Dot(direction, difference)));	
     }
@@ -80,7 +81,7 @@ void Physics::BoundTreeSplitTrianglesImpl
 	  
 	// 通过排序查找投影的中值。
     sort(info.begin(), info.end());
-    int median = (quantity - 1) / 2;
+        const int median = (quantity - 1) / 2;
 
     // 用中间值分隔三角形。
 	m_FirstOutSplitIndex = beginIndex - 1;
@@ -96,3 +97,4 @@ void Physics::BoundTreeSplitTrianglesImpl
     }
 }
 
+#include STSTEM_WARNING_POP

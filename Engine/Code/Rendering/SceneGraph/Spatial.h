@@ -43,10 +43,12 @@ namespace Rendering
         
     public:
         Spatial();
-        virtual ~Spatial();
+          ~Spatial();
         
         Spatial(const Spatial& rhs);
         Spatial& operator= (const Spatial& rhs);
+        Spatial( Spatial&& rhs) = default;
+        Spatial& operator=(Spatial&& rhs) = default;
         
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
@@ -54,16 +56,16 @@ namespace Rendering
         
         // 更新几何状态和控制器。
         // 函数计算世界转换在遍历向下传递场景图和遍历向上传递世界边界。
-		virtual bool Update(double applicationTime = -Mathematics::Mathd::sm_MaxReal) override;
+		  bool Update(double applicationTime = -Mathematics::Mathd::sm_MaxReal) override;
         
         // 访问父对象。节点中调用attach/detach在子对象。
-		virtual void SetParent(Spatial* parent);
+                  virtual void SetParent(Spatial* parent) noexcept;
         
         bool Update (double applicationTime,bool initiator);
         
         // 访问父对象。
-        Spatial* GetParent ();	
-		const Spatial* GetParent () const;	
+        Spatial* GetParent() noexcept;	
+		const Spatial* GetParent() const noexcept;	
  
         // 支持分级裁剪。
         void OnGetVisibleSet (Culler& culler, bool noCull);

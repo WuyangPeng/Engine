@@ -22,6 +22,10 @@ namespace CoreTools
 	public:
 		EventImpl(bool manualReset, bool initialState);
 		~EventImpl();
+		EventImpl(const EventImpl&) = delete;
+		EventImpl& operator=(const EventImpl&) = delete;
+		EventImpl(EventImpl&&) noexcept = delete;
+		EventImpl& operator=(EventImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

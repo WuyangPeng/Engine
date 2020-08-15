@@ -28,14 +28,16 @@ namespace Rendering
 
 	public:
 		explicit TransformController(const Transform& localTransform);
-		virtual ~TransformController();
-
+		  ~TransformController();
+TransformController(TransformController&&) = default;
+		  TransformController& operator=(TransformController&&) = default;
+		  
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TransformController); 
 	 
-		void SetTransform(const Transform& localTransform);
-		const Transform GetTransform() const;
+		void SetTransform(const Transform& localTransform) noexcept;
+		const Transform GetTransform() const noexcept;
 
 		void SetTranslate(const APoint& translate);
 		void SetRotate(const Matrix& rotate);
@@ -43,15 +45,15 @@ namespace Rendering
 		void SetScale(const APoint& scale);
 		void SetMatrix(const Matrix& matrix);
 
-		virtual void SetObject(ControllerInterface* object) override;
-		virtual void SetObjectInCopy(ControllerInterface* object) override;
+		 void SetObject(ControllerInterface* object) override;
+		 void SetObjectInCopy(ControllerInterface* object) override;
 		
 		// 动画更新。应用程序时间以毫秒为单位。
 		// 更新简单的拷贝m_LocalTransform到Spatial m_Object的LocalTransform。
 		// 在这个意义上，TransformController表示一个所有时间为常数的transform。
-		virtual bool Update(double applicationTime) override;
+		 bool Update(double applicationTime) override;
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSmartPointer Clone() const override;
     
 	private:
 		IMPL_TYPE_DECLARE(TransformController);

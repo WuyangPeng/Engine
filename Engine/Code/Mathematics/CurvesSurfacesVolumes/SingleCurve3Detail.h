@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/17 19:09)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_SINGLE_CURVE3_DETAIL_H
@@ -11,36 +11,35 @@
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE3_DETAIL)
 
-#include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
-
+    #include "System/Helper/PragmaWarning.h"
+    #include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26429)
+    #include SYSTEM_WARNING_DISABLE(26474)
 template <typename Real>
-Mathematics::SingleCurve3<Real>
-	::SingleCurve3(Real tmin, Real tmax)
+Mathematics::SingleCurve3<Real>::SingleCurve3(Real tmin, Real tmax) noexcept
     : Curve3<Real>(tmin, tmax)
 {
 }
 
 template <typename Real>
-Real Mathematics::SingleCurve3<Real>
-	::GetSpeedWithData(Real t, const SingleCurve3<Real>* data)
+Real Mathematics::SingleCurve3<Real>::GetSpeedWithData(Real t, const SingleCurve3<Real>* data)
 {
-    return ((Curve3<Real>*)data)->GetSpeed(t);
+    return dynamic_cast<const Curve3<Real>*>(data)->GetSpeed(t);
 }
 
 template <typename Real>
-Real Mathematics::SingleCurve3<Real>
-	::GetLength(Real t0, Real t1) const
+Real Mathematics::SingleCurve3<Real>::GetLength(Real t0, Real t1) const
 {
     MATHEMATICS_ASSERTION_0(this->mTMin <= t0 && t0 <= this->mTMax, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(this->mTMin <= t1 && t1 <= this->mTMax, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(t0 <= t1, "Invalid input\n");
 
-	return RombergIntegral<Real, SingleCurve3>(8, t0, t1, GetSpeedWithData, this).GetValue();
+    return RombergIntegral<Real, SingleCurve3>(8, t0, t1, GetSpeedWithData, this).GetValue();
 }
 
 template <typename Real>
-Real Mathematics::SingleCurve3<Real>
-	::GetTime(Real length, int iterations, Real tolerance) const
+Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real tolerance) const
 {
     if (length <= Math<Real>::sm_Zero)
     {
@@ -63,9 +62,9 @@ Real Mathematics::SingleCurve3<Real>
     // this problem by using a hybrid of Newton's method and bisection.
 
     // Initial guess for Newton's method.
-    Real ratio = length/GetTotalLength();
+    Real ratio = length / GetTotalLength();
     Real oneMinusRatio = static_cast<Real>(1) - ratio;
-    Real t = oneMinusRatio* this->mTMin + ratio* this->mTMax;
+    Real t = oneMinusRatio * this->mTMin + ratio * this->mTMax;
 
     // Initial root-bounding interval for bisection.
     Real lower = this->mTMin, upper = this->mTMax;
@@ -81,7 +80,7 @@ Real Mathematics::SingleCurve3<Real>
         }
 
         // Generate a candidate for Newton's method.
-        Real tCandidate = t - difference/GetSpeed(t);
+        Real tCandidate = t - difference / GetSpeed(t);
 
         // Update the root-bounding interval and test for containment of the
         // candidate.
@@ -92,7 +91,7 @@ Real Mathematics::SingleCurve3<Real>
             {
                 // Candidate is outside the root-bounding interval.  Use
                 // bisection instead.
-                t = (Real{0.5})*(upper + lower);
+                t = (Real{ 0.5 }) * (upper + lower);
             }
             else
             {
@@ -109,7 +108,7 @@ Real Mathematics::SingleCurve3<Real>
             {
                 // Candidate is outside the root-bounding interval.  Use
                 // bisection instead.
-                t = (Real{0.5})*(upper + lower);
+                t = (Real{ 0.5 }) * (upper + lower);
             }
             else
             {
@@ -129,7 +128,7 @@ Real Mathematics::SingleCurve3<Real>
     return t;
 }
 
+    #include STSTEM_WARNING_POP
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE3_DETAIL)
 
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE3_DETAIL)
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_SINGLE_CURVE3_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_SINGLE_CURVE3_DETAIL_H

@@ -22,7 +22,7 @@ Network::SendMessageLevelImpl
 {
 	if (m_MessageMaxSize <= 0)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("设置缓冲区大小小于零！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("设置缓冲区大小小于零！"s));
 	}
 
 	NETWORK_SELF_CLASS_IS_VALID_1;
@@ -53,7 +53,7 @@ const Network::ConstMessageInterfaceSharedPtr Network::SendMessageLevelImpl
 	NETWORK_CLASS_IS_VALID_CONST_1;
 	NETWORK_ASSERTION_0(0 <= index && index < GetTopLevelSize(), "索引错误！");
 
-	return m_TopLevel[index];
+	return m_TopLevel.at(index);
 }
 
 Network::MessageInterfaceSharedPtr Network::SendMessageLevelImpl
@@ -72,7 +72,7 @@ void Network::SendMessageLevelImpl
 
 	if (m_MessageMaxSize < m_CurrentSize + message->GetStreamingSize())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("消息容量不足！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("消息容量不足！"s));
 	}
 	else
 	{
@@ -82,7 +82,7 @@ void Network::SendMessageLevelImpl
 }
 
 int Network::SendMessageLevelImpl
-	::GetRemainingSize() const
+	::GetRemainingSize() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -90,7 +90,7 @@ int Network::SendMessageLevelImpl
 }
 
 int Network::SendMessageLevelImpl
-	::GetCurrentSize() const
+	::GetCurrentSize() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_1;
 
@@ -98,7 +98,7 @@ int Network::SendMessageLevelImpl
 }
 
 void Network::SendMessageLevelImpl
-	::Clear()
+	::Clear() noexcept
 {
 	NETWORK_CLASS_IS_VALID_1;
 

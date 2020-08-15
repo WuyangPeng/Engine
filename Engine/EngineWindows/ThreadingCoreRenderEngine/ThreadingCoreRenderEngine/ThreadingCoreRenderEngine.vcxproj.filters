@@ -141,6 +141,54 @@
     <Text Include="Resource\References\Cpp\Primary\Programming Principles and Practice Using C++.txt">
       <Filter>资源文件\References\Cpp\Primary</Filter>
     </Text>
+    <Text Include="Resource\References\Cpp\Primary\A Tour of C++.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\Essential C++.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ A Dialog.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\Sams Teach Yourself C++ in One Hour a Day.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ Primer Plus.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\Accelerated C++.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ for the Impatient.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ Programming.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C &amp; C++ Code Capsules.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ Distilled.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\Computing Concepts with C++ Essentials.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ The Complete Reference.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\Programming With C++.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ The Core Language.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\C++ Programming From Problem Analysis To Program Design.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Primary\Standard C++ Bible.txt">
+      <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h">

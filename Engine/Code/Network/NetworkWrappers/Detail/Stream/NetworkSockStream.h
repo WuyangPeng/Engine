@@ -20,26 +20,25 @@ namespace Network
 		using ParentType = SockStreamImpl;
 
 	public:
-		NetworkSockStream();
-		virtual ~NetworkSockStream();
+		NetworkSockStream() noexcept; 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual WinSocketStreamType& GetNetworkSockStream() override;
+		 WinSocketStreamType& GetNetworkSockStream() noexcept override;
 
-		virtual int Receive(const MessageBufferSharedPtr& messageBuffer) override;
-		virtual int Send(const MessageBufferSharedPtr& messageBuffer) override;
+		 int Receive(const MessageBufferSharedPtr& messageBuffer) override;
+		 int Send(const MessageBufferSharedPtr& messageBuffer) override;
 
-		virtual void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
-		virtual void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
+		 void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
+		 void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
-		virtual bool CloseHandle() override;
-		virtual void SetNetworkHandle(WinSocketStreamType winSocket) override;
+		 bool CloseHandle() noexcept override;
+		 void SetNetworkHandle(WinSocketStreamType winSocket) noexcept override;
 
-		virtual bool EnableNonBlock() override;
+		 bool EnableNonBlock() noexcept override;
 
-		virtual const std::string GetRemoteAddress() const override;
-		virtual int GetRemotePort() const override;
+		 const std::string GetRemoteAddress() const override;
+		 int GetRemotePort() const noexcept override;
 
 	private:
 		WinSocketStreamType m_WinSocket;

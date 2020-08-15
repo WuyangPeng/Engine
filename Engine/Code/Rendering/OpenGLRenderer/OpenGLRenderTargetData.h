@@ -34,8 +34,8 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 		
 		// 渲染目标的操作。
-        void Enable (Renderer* renderer);
-		void Disable (Renderer* renderer);
+        void Enable (Renderer* renderer) noexcept;
+		void Disable (Renderer* renderer) noexcept;
         ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer);
 
 	private:

@@ -16,9 +16,12 @@
 
 using std::make_shared;
 
-DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(Network, MessageEventContainer)
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, MessageEventContainer)
+DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(Network, MessageEventContainer) 
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26486)
 Network::MessageEventContainer
 	::MessageEventContainer()
 	:m_Impl{ make_shared<SingleMessageEventContainer>() }
@@ -26,7 +29,7 @@ Network::MessageEventContainer
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, MessageEventContainer)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, MessageEventContainer)
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Network, MessageEventContainer, Remove, NetworkMessageEventSharedPtr, void)
 
@@ -77,3 +80,4 @@ void Network::MessageEventContainer
 
 	return m_Impl->OnEvent(socketID, message);
 }
+#include STSTEM_WARNING_POP

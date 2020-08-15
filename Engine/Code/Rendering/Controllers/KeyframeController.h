@@ -39,33 +39,34 @@ namespace Rendering
 		// 其中隐含依靠空间Spatial m_Object有它的应用程序适当地设置其他通道。
 		// 现在KeyframeController设置*所有*的通道。
 		KeyframeController(int numCommonTimes, int numTranslations,int numRotations, int numScales,const Transform& localTransform);
-
-		virtual ~KeyframeController();
+		~KeyframeController() = default;
+		KeyframeController(KeyframeController&&) = default;
+		KeyframeController& operator=(KeyframeController&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(KeyframeController); 
 
 		// 调用构造函数后，您必须设置数据使用这些函数。
-		int GetNumCommonTimes () const;
+		int GetNumCommonTimes () const noexcept;
 		float GetCommonTimes (int index) const;
 		void SetCommonTimes(int index, float commonTimes);
 		
-		int GetNumTranslations () const;
+		int GetNumTranslations () const noexcept;
 		float GetTranslationTimes(int index) const;
 		const APoint GetTranslations(int index) const;
 
 		void SetTranslationTimes(int index, float translationTimes);
 		void SetTranslations(int index, const APoint& translations);
 		
-		int GetNumRotations () const;
+		int GetNumRotations () const noexcept;
 		float GetRotationTimes(int index) const;
 		const AQuaternion GetRotations(int index) const;
 
 		void SetRotationTimes(int index, float rotationTimes);
 		void SetRotations(int index, const AQuaternion& rotations);
 		
-		int GetNumScales () const;
+		int GetNumScales () const noexcept;
 		float GetScaleTimes(int index) const;
 		float GetScales(int index) const;
 
@@ -73,11 +74,11 @@ namespace Rendering
 		void SetScales(int index, float scales);   
  
 		// 动画更新。应用程序时间以毫秒为单位。
-		virtual bool Update(double applicationTime) override;
-		virtual void SetObject(ControllerInterface* object) override;
-		virtual void SetObjectInCopy(ControllerInterface* object)override;
+		 bool Update(double applicationTime) override;
+		 void SetObject(ControllerInterface* object) override;
+		 void SetObjectInCopy(ControllerInterface* object)override;
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSmartPointer Clone() const override;
 		
 	protected:
 		// 支持查找给出指定时间的关键帧。
@@ -88,7 +89,7 @@ namespace Rendering
 
 		const APoint GetTranslate(const ControllerKeyInfo& keyInfo) const;
 		const Matrix GetRotate(const ControllerKeyInfo& keyInfo) const;
-		float GetScale(const ControllerKeyInfo& keyInfo) const;
+		float GetScale(const ControllerKeyInfo& keyInfo) const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(KeyframeController);

@@ -341,8 +341,24 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Resource\References\Cpp\Primary\A Tour of C++.txt" />
+    <Text Include="Resource\References\Cpp\Primary\Accelerated C++.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C &amp; C++ Code Capsules.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ A Dialog.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ Distilled.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ for the Impatient.txt" />
     <Text Include="Resource\References\Cpp\Primary\C++ How to Program.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ Primer Plus.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ Programming From Problem Analysis To Program Design.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ Programming.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ The Complete Reference.txt" />
+    <Text Include="Resource\References\Cpp\Primary\C++ The Core Language.txt" />
+    <Text Include="Resource\References\Cpp\Primary\Computing Concepts with C++ Essentials.txt" />
+    <Text Include="Resource\References\Cpp\Primary\Essential C++.txt" />
     <Text Include="Resource\References\Cpp\Primary\Programming Principles and Practice Using C++.txt" />
+    <Text Include="Resource\References\Cpp\Primary\Programming With C++.txt" />
+    <Text Include="Resource\References\Cpp\Primary\Sams Teach Yourself C++ in One Hour a Day.txt" />
+    <Text Include="Resource\References\Cpp\Primary\Standard C++ Bible.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />

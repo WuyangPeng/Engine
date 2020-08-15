@@ -15,12 +15,16 @@
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26493)
-
+#include SYSTEM_WARNING_DISABLE(26446)
 typedef std::map<Mathematics::Vector3Df,int> VMap;
 typedef VMap::iterator VMapIterator;
 typedef std::map<Mathematics::TriangleKey,int> TMap;
 typedef TMap::iterator TMapIterator;
+ 
 
 Imagics::ExtractSurfaceTetra
 	::ExtractSurfaceTetra (int xBound, int yBound,int zBound, int* data) noexcept
@@ -34,7 +38,7 @@ Imagics::ExtractSurfaceTetra
 }
 
 float Imagics::ExtractSurfaceTetra
-	::GetFunction (const Mathematics::Vector3Df& P) const noexcept
+	::GetFunction (const Mathematics::Vector3Df& P) const  
 {
     const int x = (int)P.GetXCoordinate();
     if (x < 0 || x >= mXBound-1)
@@ -54,7 +58,9 @@ float Imagics::ExtractSurfaceTetra
         return 0.0f;
     }
 
-    float dx = P.GetXCoordinate() - x, dy = P.GetYCoordinate() - y, dz = P.GetZCoordinate() - z;
+    const float dx = P.GetXCoordinate() - x;
+	const float	dy = P.GetYCoordinate() - y;
+	const float dz = P.GetZCoordinate() - z;
 
     const int i000 = x + mXBound*(y + mYBound*z);
     const int i100 = i000 + 1;
@@ -212,7 +218,7 @@ Mathematics::Vector3Df Imagics::ExtractSurfaceTetra
     const int i001 = i000 + mXYBound;
     const int i101 = i100 + mXYBound;
     const int i011 = i010 + mXYBound;
-    int i111 = i110 + mXYBound;
+    const int i111 = i110 + mXYBound;
     const float f000 = (float)mData[i000];
     const float f100 = (float)mData[i100];
     const float f010 = (float)mData[i010];
@@ -320,37 +326,37 @@ void Imagics::ExtractSurfaceTetra
         mData[i] = mData[i] - level;
     }
 
-    int xBoundM1 = mXBound - 1;
-    int yBoundM1 = mYBound - 1;
-    int zBoundM1 = mZBound - 1;
+    const int xBoundM1 = mXBound - 1;
+    const int yBoundM1 = mYBound - 1;
+    const int zBoundM1 = mZBound - 1;
     for (int z = 0, zp = 1; z < zBoundM1; ++z, ++zp)
     {
-        int zParity = (z & 1);
+        const int zParity = (z & 1);
 
         for (int y = 0, yp = 1; y < yBoundM1; ++y, ++yp)
         {
-            int yParity = (y & 1);
+            const int yParity = (y & 1);
 
             for (int x = 0, xp = 1; x < xBoundM1; ++x, ++xp)
             {
-                int xParity = (x & 1);
+               const int xParity = (x & 1);
 
-                int i000 = x + mXBound*(y + mYBound*z);
-                int i100 = i000 + 1;
-                int i010 = i000 + mXBound;
-                int i110 = i100 + mXBound;
-                int i001 = i000 + mXYBound;
-                int i101 = i100 + mXYBound;
-                int i011 = i010 + mXYBound;
-                int i111 = i110 + mXYBound;
-                int f000 = mData[i000];
-                int f100 = mData[i100];
-                int f010 = mData[i010];
-                int f110 = mData[i110];
-                int f001 = mData[i001];
-                int f101 = mData[i101];
-                int f011 = mData[i011];
-                int f111 = mData[i111];
+               const int i000 = x + mXBound*(y + mYBound*z);
+               const int i100 = i000 + 1;
+               const int i010 = i000 + mXBound;
+               const int i110 = i100 + mXBound;
+               const int i001 = i000 + mXYBound;
+               const int i101 = i100 + mXYBound;
+               const int i011 = i010 + mXYBound;
+               const int i111 = i110 + mXYBound;
+               const int f000 = mData[i000];
+               const int f100 = mData[i100];
+              const  int f010 = mData[i010];
+              const  int f110 = mData[i110];
+               const int f001 = mData[i001];
+               const int f101 = mData[i101];
+               const int f011 = mData[i011];
+               const int f111 = mData[i111];
 
                 if (xParity ^ yParity ^ zParity)
                 {
@@ -455,8 +461,8 @@ void Imagics::ExtractSurfaceTetra
 void Imagics::ExtractSurfaceTetra
 	::MakeUnique (std::vector<Mathematics::Vector3Df>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
 {
-    int numVertices = (int)vertices.size();
-    int numTriangles = (int)triangles.size();
+    const int numVertices = (int)vertices.size();
+     const int numTriangles = (int)triangles.size();
     if (numVertices == 0 || numTriangles == 0)
     {
         return;
@@ -468,7 +474,7 @@ void Imagics::ExtractSurfaceTetra
     for (int v = 0, nextVertex = 0; v < numVertices; ++v)
     {
         // Keep only unique vertices.
-        std::pair<VMapIterator,bool> result = vertexMap.insert(
+        const std::pair<VMapIterator,bool> result = vertexMap.insert(
             std::make_pair(vertices[v], nextVertex));
 
         if (result.second == true)
@@ -495,7 +501,7 @@ void Imagics::ExtractSurfaceTetra
         tri.SetKey(2, vIter->second);
 
         // Keep only unique triangles.
-        std::pair<TMapIterator,bool> result = triangleMap.insert(
+        const std::pair<TMapIterator,bool> result = triangleMap.insert(
             std::make_pair(tri, nextTriangle));
 
         if (result.second == true)
@@ -529,28 +535,28 @@ void Imagics::ExtractSurfaceTetra
         Mathematics::TriangleKey& tri = triangles[i];
 
         // Get triangle vertices.
-        Mathematics::Vector3Df v0 = vertices[tri.GetKey(0)];
-        Mathematics::Vector3Df v1 = vertices[tri.GetKey(1)];
-        Mathematics::Vector3Df v2 = vertices[tri.GetKey(2)];
+        const Mathematics::Vector3Df v0 = vertices[tri.GetKey(0)];
+        const Mathematics::Vector3Df v1 = vertices[tri.GetKey(1)];
+        const Mathematics::Vector3Df v2 = vertices[tri.GetKey(2)];
         
         // Construct triangle normal based on current orientation.
-        Mathematics::Vector3Df edge1 = v1 - v0;
-        Mathematics::Vector3Df edge2 = v2 - v0;
-        Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
+        const Mathematics::Vector3Df edge1 = v1 - v0;
+        const Mathematics::Vector3Df edge2 = v2 - v0;
+        const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
 
         // Get the image gradient at the vertices.
-        Mathematics::Vector3Df grad0 = GetGradient(v0);
-        Mathematics::Vector3Df grad1 = GetGradient(v1);
-        Mathematics::Vector3Df grad2 = GetGradient(v2);
+        const Mathematics::Vector3Df grad0 = GetGradient(v0);
+        const Mathematics::Vector3Df grad1 = GetGradient(v1);
+        const Mathematics::Vector3Df grad2 = GetGradient(v2);
 
         // Compute the average gradient.
-        Mathematics::Vector3Df gradAvr = (grad0 + grad1 + grad2)/3.0f;
+        const Mathematics::Vector3Df gradAvr = (grad0 + grad1 + grad2)/3.0f;
         
         // Compute the dot product of normal and average gradient.
-        float dot = Mathematics::Vector3DToolsf::DotProduct(gradAvr,normal);
+        const float dot = Mathematics::Vector3DToolsf::DotProduct(gradAvr,normal);
 
         // Choose triangle orientation based on gradient direction.
-        int save;
+        int save = 0;
         if (sameDir)
         {
             if (dot < 0.0f)
@@ -578,8 +584,8 @@ void Imagics::ExtractSurfaceTetra
 	::ComputeNormals (const std::vector<Mathematics::Vector3Df>& vertices,const std::vector<Mathematics::TriangleKey>& triangles,  std::vector<Mathematics::Vector3Df>& normals)
 {
     // Maintain a running sum of triangle normals at each vertex.
-    int numVertices = (int)vertices.size();
-    int numTriangles = (int)triangles.size();
+   const int numVertices = (int)vertices.size();
+   const int numTriangles = (int)triangles.size();
     normals.resize(numVertices);
     int i;
     for (i = 0; i < numVertices; ++i)
@@ -590,14 +596,14 @@ void Imagics::ExtractSurfaceTetra
     for (i = 0; i < numTriangles; ++i)
     {
         const Mathematics::TriangleKey& key = triangles[i];
-        Mathematics::Vector3Df v0 = vertices[key.GetKey(0)];
-        Mathematics::Vector3Df v1 = vertices[key.GetKey(1)];
-        Mathematics::Vector3Df v2 = vertices[key.GetKey(2)];
+       const Mathematics::Vector3Df v0 = vertices[key.GetKey(0)];
+       const Mathematics::Vector3Df v1 = vertices[key.GetKey(1)];
+       const Mathematics::Vector3Df v2 = vertices[key.GetKey(2)];
 
         // Construct triangle normal.
-        Mathematics::Vector3Df edge1 = v1 - v0;
-        Mathematics::Vector3Df edge2 = v2 - v0;
-        Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
+       const Mathematics::Vector3Df edge1 = v1 - v0;
+       const Mathematics::Vector3Df edge2 = v2 - v0;
+       const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
 
         // Maintain the sum of normals at each vertex.
         normals[key.GetKey(0)] += normal;
@@ -618,7 +624,7 @@ int Imagics::ExtractSurfaceTetra
                  int yNumer, int yDenom, int zNumer, int zDenom)
 {
     Vertex vertex(xNumer, xDenom, yNumer, yDenom, zNumer, zDenom);
-    VtxMapIterator vIter = vertexMap.find(vertex);
+   const VtxMapIterator vIter = vertexMap.find(vertex);
     if (vIter != vertexMap.end())
     {
         // Vertex already in map, just return its unique index.
@@ -639,10 +645,10 @@ void Imagics::ExtractSurfaceTetra
 			   int zDenom0, int xNumer1, int xDenom1, int yNumer1, int yDenom1,
 			   int zNumer1, int zDenom1)
 {
-    int v0 = AddVertex(vertexMap, xNumer0, xDenom0, yNumer0, yDenom0,
+    const int v0 = AddVertex(vertexMap, xNumer0, xDenom0, yNumer0, yDenom0,
         zNumer0, zDenom0);
 
-    int v1 = AddVertex(vertexMap, xNumer1, xDenom1, yNumer1, yDenom1,
+   const int v1 = AddVertex(vertexMap, xNumer1, xDenom1, yNumer1, yDenom1,
         zNumer1, zDenom1);
 
     edgeSet.insert( Mathematics::EdgeKey(v0, v1));
@@ -655,13 +661,13 @@ void Imagics::ExtractSurfaceTetra
 				   int yDenom1, int zNumer1, int zDenom1, int xNumer2, int xDenom2,
 				   int yNumer2, int yDenom2, int zNumer2, int zDenom2)
 {
-    int v0 = AddVertex(vertexMap, xNumer0, xDenom0, yNumer0, yDenom0,
+   const int v0 = AddVertex(vertexMap, xNumer0, xDenom0, yNumer0, yDenom0,
         zNumer0, zDenom0);
 
-    int v1 = AddVertex(vertexMap, xNumer1, xDenom1, yNumer1, yDenom1,
+  const  int v1 = AddVertex(vertexMap, xNumer1, xDenom1, yNumer1, yDenom1,
         zNumer1, zDenom1);
 
-    int v2 = AddVertex(vertexMap, xNumer2, xDenom2, yNumer2, yDenom2,
+   const int v2 = AddVertex(vertexMap, xNumer2, xDenom2, yNumer2, yDenom2,
         zNumer2, zDenom2);
 
     // Nothing to do if triangle already exists.
@@ -683,28 +689,28 @@ void Imagics::ExtractSurfaceTetra
     edgeSet.insert(Mathematics::EdgeKey(v2, v0));
 
     // Compute triangle normal assuming counterclockwise ordering.
-    Mathematics::Vector3Df pos0(
+   const Mathematics::Vector3Df pos0(
         xNumer0/(float)xDenom0,
         yNumer0/(float)yDenom0,
         zNumer0/(float)zDenom0);
 
-    Mathematics::Vector3Df pos1(
+   const Mathematics::Vector3Df pos1(
         xNumer1/(float)xDenom1,
         yNumer1/(float)yDenom1,
         zNumer1/(float)zDenom1);
 
-    Mathematics::Vector3Df pos2(
+   const Mathematics::Vector3Df pos2(
         xNumer2/(float)xDenom2,
         yNumer2/(float)yDenom2,
         zNumer2/(float)zDenom2);
 
-    Mathematics::Vector3Df edge0 = pos1 - pos0;
-    Mathematics::Vector3Df edge1 = pos2 - pos0;
-    Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge0,edge1);
+   const Mathematics::Vector3Df edge0 = pos1 - pos0;
+   const Mathematics::Vector3Df edge1 = pos2 - pos0;
+   const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge0,edge1);
 
     // Choose triangle orientation based on gradient direction.
-    Mathematics::Vector3Df centroid = (pos0 + pos1 + pos2)/3.0f;
-    Mathematics::Vector3Df grad = GetGradient(centroid);
+   const Mathematics::Vector3Df centroid = (pos0 + pos1 + pos2)/3.0f;
+   const Mathematics::Vector3Df grad = GetGradient(centroid);
     if (Mathematics::Vector3DToolsf::DotProduct(grad,normal) <= 0.0f)
     {
         triangleSet.insert(Mathematics::TriangleKey(v0, v1, v2));
@@ -721,10 +727,10 @@ void Imagics::ExtractSurfaceTetra
                           int x1, int y1, int z1, int f1, int x2, int y2, int z2, int f2, int x3,
                           int y3, int z3, int f3)
 {
-    int xn0, yn0, zn0, d0;
-    int xn1, yn1, zn1, d1;
-    int xn2, yn2, zn2, d2;
-    int xn3, yn3, zn3, d3;
+    int xn0 = 0, yn0= 0, zn0= 0, d0= 0;
+    int xn1= 0, yn1= 0, zn1= 0, d1= 0;
+    int xn2= 0, yn2= 0, zn2= 0, d2= 0;
+    int xn3= 0, yn3= 0, zn3= 0, d3= 0;
 
     if (f0 != 0)
     {
@@ -1283,7 +1289,7 @@ void Imagics::ExtractSurfaceTetra
 
 Imagics::ExtractSurfaceTetra::Vertex
 	::Vertex (int xNumer, int xDenom, int yNumer,
-    int yDenom, int zNumer, int zDenom)
+    int yDenom, int zNumer, int zDenom) noexcept
 {
     if (xDenom > 0)
     {
@@ -1320,9 +1326,9 @@ Imagics::ExtractSurfaceTetra::Vertex
 }
 
 bool Imagics::ExtractSurfaceTetra::Vertex
-	::operator< (const Vertex& vertex) const
+	::operator< (const Vertex& vertex) const noexcept
 {
-    unsigned int value0[6] =
+    const unsigned int value0[6] =
     {
         *(unsigned int*)&XNumer,
         *(unsigned int*)&XDenom,
@@ -1332,7 +1338,7 @@ bool Imagics::ExtractSurfaceTetra::Vertex
         *(unsigned int*)&ZDenom
     };
 
-    unsigned int value1[6] =
+    const unsigned int value1[6] =
     {
         *(unsigned int*)&vertex.XNumer,
         *(unsigned int*)&vertex.XDenom,

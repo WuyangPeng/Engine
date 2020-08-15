@@ -11,7 +11,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::RendererInputDataImpl
 	::RendererInputDataImpl()
 	: m_RendererInput{ make_shared<RendererInput>(Rendering::RendererTypes::Default) }
@@ -19,11 +21,7 @@ Rendering::RendererInputDataImpl
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering:: RendererInputDataImpl
-	::~RendererInputDataImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::RendererInputDataImpl
@@ -44,3 +42,4 @@ void Rendering::RendererInputDataImpl
 	m_RendererInput = make_shared<RendererInput>(type);
 }
 
+#include STSTEM_WARNING_POP

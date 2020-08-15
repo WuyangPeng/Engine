@@ -1,162 +1,167 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.3 (2019/07/22 16:35)
 
 #include "Rendering/RenderingExport.h"
 
 #include "PickRecordImpl.h"
+#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
-Rendering::PickRecordImpl
-	::PickRecordImpl()
-	:m_Intersected{}, m_Parameter{ 0.0f }, m_Triangle{ -1 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+Rendering::PickRecordImpl ::PickRecordImpl() noexcept
+    : m_Intersected{}, m_Parameter{ 0.0f }, m_Triangle{ -1 }
 {
-	m_Bary[0] = 1.0f;
-	m_Bary[1] = 0.0f;
-	m_Bary[2] = 0.0f;
+    m_Bary[0] = 1.0f;
+    m_Bary[1] = 0.0f;
+    m_Bary[2] = 0.0f;
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PickRecordImpl
-	::PickRecordImpl(const PickRecordImpl& rhs) 
-	:m_Intersected{ rhs.m_Intersected.IsNullPtr() ? ConstSpatialSmartPointer() : rhs.m_Intersected->Clone().PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>() },
-	 m_Parameter{ rhs.m_Parameter }, m_Triangle{ rhs.m_Triangle }
+Rendering::PickRecordImpl ::PickRecordImpl(const PickRecordImpl& rhs)
+    : m_Intersected{ (rhs.m_Intersected == nullptr) ? ConstSpatialSmartPointer() : boost::polymorphic_pointer_cast<Spatial>(rhs.m_Intersected->Clone()) },
+      m_Parameter{ rhs.m_Parameter }, m_Triangle{ rhs.m_Triangle }
 {
-	m_Bary[0] = rhs.m_Bary[0];
-	m_Bary[1] = rhs.m_Bary[1];
-	m_Bary[2] = rhs.m_Bary[2];
+    m_Bary[0] = rhs.m_Bary[0];
+    m_Bary[1] = rhs.m_Bary[1];
+    m_Bary[2] = rhs.m_Bary[2];
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
- 
-Rendering::PickRecordImpl& Rendering::PickRecordImpl
-	::operator=(const PickRecordImpl& rhs)
+
+Rendering::PickRecordImpl& Rendering::PickRecordImpl ::operator=(const PickRecordImpl& rhs)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	if (rhs.m_Intersected.IsNullPtr())
-	{
-		m_Intersected.Reset();
-	}
-	else
-	{
-		m_Intersected = rhs.m_Intersected->Clone().PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
-	}	
+    if (!rhs.m_Intersected)
+    {
+        m_Intersected.reset();
+    }
+    else
+    {
+        m_Intersected = boost::polymorphic_pointer_cast<Spatial>(rhs.m_Intersected->Clone());
+    }
 
-	m_Parameter = rhs.m_Parameter;
-	m_Triangle = rhs.m_Triangle;
-	
-	m_Bary[0] = rhs.m_Bary[0];
-	m_Bary[1] = rhs.m_Bary[1];
-	m_Bary[2] = rhs.m_Bary[2];
+    m_Parameter = rhs.m_Parameter;
+    m_Triangle = rhs.m_Triangle;
 
-	return *this;
+    m_Bary[0] = rhs.m_Bary[0];
+    m_Bary[1] = rhs.m_Bary[1];
+    m_Bary[2] = rhs.m_Bary[2];
+
+    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::PickRecordImpl
-	::IsValid() const  noexcept
+bool Rendering::PickRecordImpl ::IsValid() const noexcept
 {
-	if (-1 <= m_Triangle &&	0.0f <= m_Bary[0] && m_Bary[0] <= 1.0f &&
-		0.0f <= m_Bary[1] && m_Bary[1] <= 1.0f && 0.0f <= m_Bary[2] && m_Bary[2] <= 1.0f &&
-		Mathematics::Mathf::Approximate(1.0f, m_Bary[0] + m_Bary[1] + m_Bary[2]))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    try
+    {
+        if (-1 <= m_Triangle && 0.0f <= m_Bary[0] && m_Bary[0] <= 1.0f &&
+            0.0f <= m_Bary[1] && m_Bary[1] <= 1.0f && 0.0f <= m_Bary[2] && m_Bary[2] <= 1.0f &&
+            Mathematics::Mathf::Approximate(1.0f, m_Bary[0] + m_Bary[1] + m_Bary[2]))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
+float Rendering::PickRecordImpl ::GetParameter() const noexcept
 
-float Rendering::PickRecordImpl
-	::GetParameter() const 
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Parameter;
-}
-
-void Rendering::PickRecordImpl
-	::SetParameter(float parameter)
-{
-	RENDERING_CLASS_IS_VALID_1;
-
-	m_Parameter = parameter;
+    return m_Parameter;
 }
 
-int Rendering::PickRecordImpl
-	::GetTriangle() const
+void Rendering::PickRecordImpl ::SetParameter(float parameter) noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Triangle;
+    m_Parameter = parameter;
 }
 
-void Rendering::PickRecordImpl
-	::SetTriangle(int triangle)
+int Rendering::PickRecordImpl ::GetTriangle() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	m_Triangle = triangle;
+    return m_Triangle;
 }
 
-float Rendering::PickRecordImpl
-	::GetBary(int index) const 
+void Rendering::PickRecordImpl ::SetTriangle(int triangle) noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_1(0 <= index && index < sm_BarySize, "索引越界");
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Bary[index];
+    m_Triangle = triangle;
 }
 
-void Rendering::PickRecordImpl
-	::SetBary(float firstBary, float secondBary) 
+float Rendering::PickRecordImpl ::GetBary(int index) const
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_1(0.0f <= firstBary && firstBary <= 1.0f,"firstBary的取值在0.0和1.0之间");
-	RENDERING_ASSERTION_1(0.0f <= secondBary && secondBary <= 1.0f,"secondBary的取值在0.0和1.0之间");
-
-	m_Bary[0] = firstBary;
-	m_Bary[1] = secondBary;
-	m_Bary[2] = 1.0f - firstBary - secondBary;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_1(0 <= index && index < sm_BarySize, "索引越界");
+    CoreTools::DoNothing();
+    if (0 <= index && index < sm_BarySize)
+    {
+        return m_Bary[index];
+    }
+    else
+    {
+        return 0.0f;
+    }
 }
 
-Rendering::ConstSpatialSmartPointer Rendering::PickRecordImpl
-	::GetIntersected() const
+void Rendering::PickRecordImpl ::SetBary(float firstBary, float secondBary)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
+    CoreTools::DoNothing();
+    RENDERING_ASSERTION_1(0.0f <= firstBary && firstBary <= 1.0f, "firstBary的取值在0.0和1.0之间");
+    RENDERING_ASSERTION_1(0.0f <= secondBary && secondBary <= 1.0f, "secondBary的取值在0.0和1.0之间");
 
-	return m_Intersected;
+    m_Bary[0] = firstBary;
+    m_Bary[1] = secondBary;
+    m_Bary[2] = 1.0f - firstBary - secondBary;
 }
 
-void Rendering::PickRecordImpl
-	::SetIntersected(const ConstSpatialSmartPointer& intersected)
+Rendering::ConstSpatialSmartPointer Rendering::PickRecordImpl ::GetIntersected() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	m_Intersected = intersected;
+    return m_Intersected;
 }
 
-bool Rendering
-	::operator== (const PickRecordImpl& lhs, const PickRecordImpl& rhs) 
+void Rendering::PickRecordImpl ::SetIntersected(const ConstSpatialSmartPointer& intersected) noexcept
 {
-	auto lhsParameter = lhs.GetParameter();
-	auto rhsParameter = rhs.GetParameter();
+    RENDERING_CLASS_IS_VALID_1;
 
-	return memcmp(&lhsParameter, &rhsParameter, sizeof(float)) == 0;
+    m_Intersected = intersected;
 }
 
-bool Rendering
-	::operator< (const PickRecordImpl& lhs, const PickRecordImpl& rhs) 
+bool Rendering ::operator==(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept
 {
-	return lhs.GetParameter() < rhs.GetParameter();
+    const auto lhsParameter = lhs.GetParameter();
+    const auto rhsParameter = rhs.GetParameter();
+
+    return memcmp(&lhsParameter, &rhsParameter, sizeof(float)) == 0;
 }
 
- 
+bool Rendering ::operator<(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept
+{
+    return lhs.GetParameter() < rhs.GetParameter();
+}
+
+#include STSTEM_WARNING_POP

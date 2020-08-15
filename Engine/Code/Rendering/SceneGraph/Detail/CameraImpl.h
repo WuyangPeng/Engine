@@ -41,11 +41,11 @@ namespace Rendering
         
     public:
         explicit CameraImpl (bool isPerspective,float epsilon = Math::sm_ZeroTolerance);
-        explicit CameraImpl (float epsilon = Math::sm_ZeroTolerance);
+        explicit CameraImpl(float epsilon = Math::sm_ZeroTolerance)  ;
         
 		CLASS_INVARIANT_DECLARE;
 
-		float GetEpsilon() const;
+		float GetEpsilon() const noexcept;
  
         void SetFrame (const APoint& position,const AVector& directionVector,const AVector& upVector,const AVector& rightVector);
 
@@ -60,7 +60,7 @@ namespace Rendering
         
         const Matrix GetViewMatrix () const;
 
-        bool IsPerspective () const;
+        bool IsPerspective() const noexcept;
 
         void SetFrustum (float directionMin, float directionMax,float upMin, float upMax,float rightMin, float rightMax);
 
@@ -68,33 +68,33 @@ namespace Rendering
  
         void SetFrustum (float upFieldOfViewDegrees, float aspectRatio,float directionMin,float directionMax);
 
-        const float* GetFrustum () const;
+        const float* GetFrustum() const noexcept;
 
-        const CameraFrustumData GetFrustumData () const;
+        const CameraFrustumData GetFrustumData() const noexcept;
  
-        float GetDirectionMin () const;
-        float GetDirectionMax () const;
-        float GetUpMin () const;
-        float GetUpMax () const;
-        float GetRightMin () const;
-        float GetRightMax () const;
+        float GetDirectionMin() const noexcept;
+        float GetDirectionMax() const noexcept;
+        float GetUpMin() const noexcept;
+        float GetUpMax() const noexcept;
+        float GetRightMin() const noexcept;
+        float GetRightMax() const noexcept;
       
-        const Matrix GetProjectionMatrix () const;
+        const Matrix GetProjectionMatrix() const noexcept;
        
         void SetProjectionMatrix (const Matrix& projectionMatrix);
         void SetProjectionMatrix (const APoint& p00, const APoint& p10,const APoint& p11, const APoint& p01,float nearExtrude, float farExtrude);
         
-        DepthType GetDepthType () const;
+        DepthType GetDepthType() const noexcept;
     
-        const Matrix GetProjectionViewMatrix () const;
+        const Matrix GetProjectionViewMatrix() const noexcept;
      
-        void SetPreViewMatrix (const Matrix& preViewMatrix);
-        const Matrix GetPreViewMatrix () const;
-        bool PreViewIsIdentity () const;
+        void SetPreViewMatrix(const Matrix& preViewMatrix)  ;
+        const Matrix GetPreViewMatrix() const noexcept;
+        bool PreViewIsIdentity() const noexcept;
 
-        void SetPostProjectionMatrix (const Matrix& postProjMatrix);
-        const Matrix GetPostProjectionMatrix () const;
-        bool PostProjectionIsIdentity () const;
+        void SetPostProjectionMatrix (const Matrix& postProjMatrix) ;
+        const Matrix GetPostProjectionMatrix() const noexcept;
+        bool PostProjectionIsIdentity() const noexcept;
 
         // 对一组顶点计算轴对齐矩形包围盒在正则化显示空间,[-1,1]x[-1,1]。
         // 输入“顶点”是“float”的值三元组的指针,每个三元组代表一个顶点。
@@ -108,7 +108,7 @@ namespace Rendering
 		void Save (BufferTarget& target) const;
 		int GetStreamingSize () const;
 
-		void SetDepthType(DepthType depthType);
+		void SetDepthType(DepthType depthType)  ;
         
     private:     
         CameraMatrix m_CameraMatrix;     

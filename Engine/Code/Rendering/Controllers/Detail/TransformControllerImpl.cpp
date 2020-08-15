@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::TransformControllerImpl
-	::TransformControllerImpl(const Transform& localTransform)
+	::TransformControllerImpl(const Transform& localTransform) noexcept
 	: m_LocalTransform{ localTransform }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -19,16 +19,14 @@ Rendering::TransformControllerImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,TransformControllerImpl)
 
-void Rendering::TransformControllerImpl
-	::SetTransform(const Transform& localTransform)
+void Rendering::TransformControllerImpl ::SetTransform(const Transform& localTransform) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_LocalTransform = localTransform;
 }
 
-const Rendering::Transform Rendering::TransformControllerImpl
-	::GetTransform() const 
+const Rendering::Transform Rendering::TransformControllerImpl ::GetTransform() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

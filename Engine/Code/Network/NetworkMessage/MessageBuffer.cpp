@@ -12,7 +12,10 @@
 #include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 using std::make_shared;
 
 COPY_CONSTRUCTION_CLONE_DEFINE(Network, MessageBuffer)
@@ -25,7 +28,7 @@ Network::MessageBuffer
 }
 
 Network::MessageBuffer
-	::MessageBuffer(const ImplTypeSharedPtr& messageBuffer)
+	::MessageBuffer(const ImplTypeSharedPtr& messageBuffer) noexcept
 	:m_Impl{ messageBuffer }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
@@ -47,16 +50,16 @@ Network::MessageBuffer
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageBuffer)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, ClearCurrentIndex, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, ClearCurrentIndex, void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetCurrentReadIndex, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetRemainingReadCount, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, ClearCurrentReadIndex, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetRemainingReadCount, int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, ClearCurrentReadIndex, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageBuffer, AddCurrentReadIndex, int, void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetCurrentWriteIndex, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetRemainingWriteCount, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, ClearCurrentWriteIndex, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, ClearCurrentWriteIndex, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageBuffer, AddCurrentWriteIndex, int, void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetCurrentReadBufferedPtr, const char*)
@@ -68,7 +71,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetInitialBuffer
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetSize, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetParserStrategy, Network::ParserStrategy)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetReceiveCount, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetReceiveCount, int)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageBuffer, SetReceiveCount, int, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageBuffer, DecreaseReceiveCount, int, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, SetMessageHeadReceiveCount, void)
@@ -135,3 +138,4 @@ Network::MessageBuffer::MessageBufferSharedPtr Network::MessageBuffer
 
 	return make_shared<MessageBuffer>(m_Impl->Clone());
 }
+#include STSTEM_WARNING_POP

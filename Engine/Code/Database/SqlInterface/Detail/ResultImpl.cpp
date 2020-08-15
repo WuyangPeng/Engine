@@ -10,9 +10,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
-Database::ResultImpl
-	::ResultImpl(const ConfigurationStrategy& configurationStrategy)
-	: m_ConfigurationStrategy{ configurationStrategy }
+Database::ResultImpl ::ResultImpl(const ConfigurationStrategy& configurationStrategy) noexcept
+    : m_ConfigurationStrategy{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -30,7 +29,7 @@ Database::ResultImpl::ResultRowPtr Database::ResultImpl
 {
 	DATABASE_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("DocResultImpl的FetchOne未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("DocResultImpl的FetchOne未实现。"s));
 }
 
 Database::ResultImpl::ResultRowContainer Database::ResultImpl
@@ -38,11 +37,11 @@ Database::ResultImpl::ResultRowContainer Database::ResultImpl
 {
 	DATABASE_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("DocResultImpl的FetchAll未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("DocResultImpl的FetchAll未实现。"s));
 }
 
 Database::ConfigurationStrategy Database::ResultImpl
-	::GetConfigurationStrategy() const
+	::GetConfigurationStrategy() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 

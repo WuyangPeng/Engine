@@ -22,7 +22,7 @@
 using std::make_shared;
 
 Network::SockStreamFactory
-	::SockStreamFactory()
+	::SockStreamFactory() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -33,7 +33,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, SockStreamFactory)
 const Network::SockStreamFactory::ImplTypePtr Network::SockStreamFactory
 	::Create(const ConfigurationStrategy& configurationStrategy)
 {
-	auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
+	const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategyFlag)
 	{

@@ -14,17 +14,12 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::ThreadMutex
-	::ThreadMutex()
+	::ThreadMutex() noexcept
 	:m_Mutex{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
-CoreTools::ThreadMutex
-	::~ThreadMutex()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ThreadMutex)
 
@@ -55,7 +50,7 @@ void CoreTools::ThreadMutex
 }
 
 void CoreTools::ThreadMutex
-	::Delete()
+	::Delete() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -92,7 +87,7 @@ void CoreTools::ThreadMutex
 }
 
 void CoreTools::ThreadMutex
-	::Leave()
+	::Leave() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -107,7 +102,7 @@ void CoreTools::ThreadMutex
 }
 
 bool CoreTools::ThreadMutex
-	::TryEnter()
+	::TryEnter() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 

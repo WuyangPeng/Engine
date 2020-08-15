@@ -25,8 +25,12 @@ namespace Rendering
 		using PlatformVertexBufferPtr = std::shared_ptr<ClassType>;
 
 	public:
-		PlatformVertexBufferImpl ();
+		PlatformVertexBufferImpl () noexcept;
 		virtual ~PlatformVertexBufferImpl ();
+		PlatformVertexBufferImpl(const PlatformVertexBufferImpl&) = default;
+		PlatformVertexBufferImpl& operator=(const PlatformVertexBufferImpl&) = default;
+		PlatformVertexBufferImpl(PlatformVertexBufferImpl&&) = default;
+		PlatformVertexBufferImpl& operator=(PlatformVertexBufferImpl&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 		

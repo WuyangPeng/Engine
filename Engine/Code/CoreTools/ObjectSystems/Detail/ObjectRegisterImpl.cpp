@@ -15,7 +15,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h" 
 
 CoreTools::ObjectRegisterImpl
-	::ObjectRegisterImpl()
+	::ObjectRegisterImpl() noexcept
 	:m_Registered{}, m_Ordered{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -37,7 +37,7 @@ uint64_t CoreTools::ObjectRegisterImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto iter = m_Registered.find(smartPointer);
+	const auto iter = m_Registered.find(smartPointer);
 
 	if (iter != m_Registered.cend())
 	{
@@ -63,7 +63,7 @@ const CoreTools::ConstObjectInterfaceSmartPointer& CoreTools::ObjectRegisterImpl
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetOrderedSize(), "Ë÷Òý´íÎó£¡");
 
-	return m_Ordered[index];
+	return m_Ordered.at(index);
 }
 
 uint64_t CoreTools::ObjectRegisterImpl
@@ -98,7 +98,7 @@ uint64_t CoreTools::ObjectRegisterImpl
 
 // private
 uint64_t CoreTools::ObjectRegisterImpl
-	::GetOriginalUniqueID(const ConstObjectInterfaceSmartPointer& smartPointer) const
+	::GetOriginalUniqueID(const ConstObjectInterfaceSmartPointer& smartPointer) const noexcept
 {
 	uint64_t uniqueID{ 0 };
 

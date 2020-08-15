@@ -8,7 +8,11 @@
 #define IMAGICS_IMAGICS_TIMAGE3D_DETAIL_H
 
 #include "TImage3D.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename T>
 Imagics::TImage3D<T>
 	::TImage3D(int xBound, int yBound, int zBound, T* data)
@@ -38,21 +42,21 @@ Imagics::TImage3D<T>
 
 template <typename T>
 T& Imagics::TImage3D<T>
-	::operator() (int x, int y, int z) const
+	::operator() (int x, int y, int z) const noexcept
 {
     return mData[x + mBounds[0]*(y + mBounds[1]*z)];
 }
 
 template <typename T>
 int Imagics::TImage3D<T>
-	::GetIndex(int x, int y, int z) const
+	::GetIndex(int x, int y, int z) const noexcept
 {
     return x + mBounds[0]*(y + mBounds[1]*z);
 }
 
 template <typename T>
 void Imagics::TImage3D<T>
-	::GetCoordinates(int index, int& x, int& y, int& z) const
+	::GetCoordinates(int index, int& x, int& y, int& z) const noexcept
 {
     x = index % mBounds[0];
     index /= mBounds[0];
@@ -68,10 +72,9 @@ Imagics::TImage3D<T>& Imagics::TImage3D<T>
 }
 
 template <typename T>
-Imagics::TImage3D<T>& Imagics::TImage3D<T>
-	::operator= (T value)
+Imagics::TImage3D<T>& Imagics::TImage3D<T>::operator=(T value) noexcept
 {
     return (TImage3D<T>&) TImage<T>::operator=(value);
 }
-
+#include STSTEM_WARNING_POP
 #endif // IMAGICS_IMAGICS_TIMAGE3D_DETAIL_H

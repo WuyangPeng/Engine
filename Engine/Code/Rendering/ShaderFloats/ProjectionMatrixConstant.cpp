@@ -17,7 +17,12 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ProjectionMatrixConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ProjectionMatrixConstant);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ProjectionMatrixConstant); 
@@ -30,11 +35,7 @@ Rendering::ProjectionMatrixConstant
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ProjectionMatrixConstant
-	::~ProjectionMatrixConstant()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ProjectionMatrixConstant)
 
@@ -64,7 +65,7 @@ Rendering::ShaderFloatSmartPointer Rendering::ProjectionMatrixConstant
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ NEW0 ClassType(*this) };
+	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
 }
  
- 
+ #include STSTEM_WARNING_POP

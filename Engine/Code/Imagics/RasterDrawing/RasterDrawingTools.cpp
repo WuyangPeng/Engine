@@ -11,9 +11,14 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26487)
 void Imagics
-	::Line2D(int x0, int y0, int x1, int y1, void(*callback)(int, int))
+	::Line2D(int x0, int y0, int x1, int y1, void(*callback)(int, int)) noexcept
 {
     // Starting point of line.
     int x = x0, y = y0;
@@ -22,8 +27,8 @@ void Imagics
     int dx = x1-x0, dy = y1-y0;
 
     // Increment or decrement depending on direction of line.
-    int sx = (dx > 0 ? 1 : (dx < 0 ? -1 : 0));
-    int sy = (dy > 0 ? 1 : (dy < 0 ? -1 : 0));
+    const int sx = (dx > 0 ? 1 : (dx < 0 ? -1 : 0));
+    const int sy = (dy > 0 ? 1 : (dy < 0 ? -1 : 0));
 
     // Decision parameters for pixel selection.
     if (dx < 0)
@@ -34,11 +39,12 @@ void Imagics
     {
         dy = -dy;
     }
-    int ax = 2*dx, ay = 2*dy;
-    int decX, decY;
+    const int ax = 2*dx, ay = 2*dy;
+    int decX = 0, decY= 0;
 
     // Determine largest direction component, single-step related variable.
-    int maxValue = dx, var = 0;
+    const int maxValue = dx;
+    int var = 0;
     if (dy > maxValue)
     {
         var = 1;
@@ -90,7 +96,7 @@ void Imagics
 
 void Imagics
 	::Line3D(int x0, int y0, int z0, int x1, int y1, int z1,
-             void (*callback)(int,int,int))
+             void (*callback)(int,int,int)) noexcept
 {
     // Starting point of line.
     int x = x0, y = y0, z = z0;
@@ -99,9 +105,9 @@ void Imagics
     int dx = x1-x0, dy = y1-y0, dz = z1-z0;
 
     // Increment or decrement depending on direction of line.
-    int sx = (dx > 0 ? 1 : (dx < 0 ? -1 : 0));
-    int sy = (dy > 0 ? 1 : (dy < 0 ? -1 : 0));
-    int sz = (dz > 0 ? 1 : (dz < 0 ? -1 : 0));
+    const int sx = (dx > 0 ? 1 : (dx < 0 ? -1 : 0));
+    const int sy = (dy > 0 ? 1 : (dy < 0 ? -1 : 0));
+    const int sz = (dz > 0 ? 1 : (dz < 0 ? -1 : 0));
 
     // Decision parameters for voxel selection.
     if (dx < 0)
@@ -116,8 +122,8 @@ void Imagics
     {
         dz = -dz;
     }
-    int ax = 2*dx, ay = 2*dy, az = 2*dz;
-    int decX, decY, decZ;
+    const int ax = 2*dx, ay = 2*dy, az = 2*dz;
+    int decX = 0, decY = 0, decZ = 0;
 
     // Determine largest direction component, single-step related variable.
     int maxValue = dx, var = 0;
@@ -214,7 +220,7 @@ void Imagics
 
 void Imagics
 	::Line4D(int x0, int y0, int z0, int w0, int x1, int y1, int z1,
-             int w1,  void (*callback)(int,int,int,int))
+             int w1,  void (*callback)(int,int,int,int)) noexcept
 {
     // Starting point of line.
     int x = x0, y = y0, z = z0, w = w0;
@@ -223,10 +229,10 @@ void Imagics
     int dx = x1-x0, dy = y1-y0, dz = z1-z0, dw = w1-w0;
 
     // Increment or decrement depending on direction of line.
-    int sx = (dx > 0 ? 1 : (dx < 0 ? -1 : 0));
-    int sy = (dy > 0 ? 1 : (dy < 0 ? -1 : 0));
-    int sz = (dz > 0 ? 1 : (dz < 0 ? -1 : 0));
-    int sw = (dw > 0 ? 1 : (dw < 0 ? -1 : 0));
+    const int sx = (dx > 0 ? 1 : (dx < 0 ? -1 : 0));
+    const int sy = (dy > 0 ? 1 : (dy < 0 ? -1 : 0));
+    const int sz = (dz > 0 ? 1 : (dz < 0 ? -1 : 0));
+    const int sw = (dw > 0 ? 1 : (dw < 0 ? -1 : 0));
 
     // Decision parameters for hypervoxel selection.
     if (dx < 0)
@@ -245,8 +251,8 @@ void Imagics
     {
         dw = -dw;
     }
-    int ax = 2*dx, ay = 2*dy, az = 2*dz, aw = 2*dw;
-    int decX, decY, decZ, decW;
+    const int ax = 2*dx, ay = 2*dy, az = 2*dz, aw = 2*dw;
+    int decX = 0, decY = 0, decZ = 0, decW = 0;
 
     // Determine largest direction component, single-step related variable.
     int maxValue = dx, var = 0;
@@ -396,7 +402,7 @@ void Imagics
 }
 
 void Imagics
-	::Circle2D(int xc, int yc, int radius, void(*callback)(int, int))
+	::Circle2D(int xc, int yc, int radius, void(*callback)(int, int)) noexcept
 {
     for (int x = 0, y = radius, dec = 3-2*radius; x <= y; ++x)
     {
@@ -418,10 +424,10 @@ void Imagics
 }
 
 void Imagics
-	::Ellipse2D(int xc, int yc, int A, int B, void(*callback)(int, int))
+	::Ellipse2D(int xc, int yc, int A, int B, void(*callback)(int, int)) noexcept
 {
-    int A2 = A*A, B2 = B*B;
-    int x, y, dec;
+    const int A2 = A*A, B2 = B*B;
+    int x= 0, y= 0, dec = 0;
 
     for (x = 0, y = B, dec = 2*B2+A2*(1-2*B); B2*x <= A2*y; ++x)
     {
@@ -475,17 +481,17 @@ void Imagics
     }
 }
 
-static void SelectEllipsePoint (int A2, int B2, float fx, float fy, int& x,int& y)
+static void SelectEllipsePoint (int A2, int B2, float fx, float fy, int& x,int& y) noexcept
 {
-    int xFloor = int(Mathematics::Mathf::Floor(fx));
-	int yFloor = int(Mathematics::Mathf::Floor(fy));
-    int xIncr = B2*(2*xFloor + 1);
-    int yIncr = A2*(2*yFloor + 1);
-    int base = B2*xFloor*xFloor + A2*yFloor*yFloor - A2*B2;
-    int a00 = abs(base);
-    int a10 = abs(base + xIncr);
-    int a01 = abs(base + yIncr);
-    int a11 = abs(base + xIncr + yIncr);
+    int xFloor = static_cast<int>(Mathematics::Mathf::Floor(fx));
+    int yFloor = static_cast<int>(Mathematics::Mathf::Floor(fy));
+    const int xIncr = B2*(2*xFloor + 1);
+    const int yIncr = A2*(2*yFloor + 1);
+    const int base = B2*xFloor*xFloor + A2*yFloor*yFloor - A2*B2;
+    const int a00 = abs(base);
+    const int a10 = abs(base + xIncr);
+    const int a01 = abs(base + yIncr);
+    const int a11 = abs(base + xIncr + yIncr);
 
     int minValue = a00;
     x = xFloor;
@@ -510,7 +516,7 @@ static void SelectEllipsePoint (int A2, int B2, float fx, float fy, int& x,int& 
     }
 }
 
-static int WhichArc (int A2, int B2, int x, int y)
+static int WhichArc (int A2, int B2, int x, int y) noexcept
 {
     if (x > 0)
     {
@@ -550,7 +556,7 @@ static int WhichArc (int A2, int B2, int x, int y)
 
 void Imagics
 	::EllipseArc2D(int xc, int yc, int A, int B, float fx0,
-                   float fy0, float fx1, float fy1, void (*callback)(int,int))
+                   float fy0, float fx1, float fy1, void (*callback)(int,int)) noexcept
 {
     // Assert (within floating point roundoff errors):
     //   (x0-xc)^2/a^2 + (y0-yc)^2/b^2 = 1
@@ -584,7 +590,7 @@ void Imagics
 
         // Determine next pixel to process.  Notation <(x,y),dy/dx> indicates
         // point on ellipse and slope at that point.
-        int sigma;
+        int sigma = 0;
         switch (arc)
         {
         case 0:  // <(0,b),0> to <(u0,v0),-1>
@@ -737,7 +743,7 @@ void Imagics
 {
     // Change sign and/or swap the direction vectors in order to satisfy this
     // algorithm's requirement for visiting pixels in a particular order.
-    int save;
+    int save = 0;
     if (xa <= 0 && ya > 0)
     {
         // Use (-xb,-yb,xa,ya).
@@ -782,23 +788,23 @@ void Imagics
     // dy/dx = -(a*x+b*y)/(b*x+c*y).  Slope at (xb,yb) is
     // dy/dx = -xb/yb >= 0 and slope at (xa,ya) is dy/dx = -xa/ya < 0.
 
-	Mathematics::Integer<4> iXA2 = Mathematics::Integer<4>(xa)* Mathematics::Integer<4>(xa);
-	Mathematics::Integer<4> iYA2 = Mathematics::Integer<4>(ya)*Mathematics::Integer<4>(ya);
-	Mathematics::Integer<4> iXB2 = Mathematics::Integer<4>(xb)*Mathematics::Integer<4>(xb);
-	Mathematics::Integer<4> iYB2 = Mathematics::Integer<4>(yb)*Mathematics::Integer<4>(yb);
-	Mathematics::Integer<4> iXAYA = Mathematics::Integer<4>(xa)*Mathematics::Integer<4>(ya);
-	Mathematics::Integer<4> iXBYB = Mathematics::Integer<4>(xb)*Mathematics::Integer<4>(yb);
-	Mathematics::Integer<4> iLa2 = iXA2 + iYA2;
-	Mathematics::Integer<4> iLa4 = iLa2*iLa2;
-	Mathematics::Integer<4> iLb2 = iXB2 + iYB2;
-	Mathematics::Integer<4> iLb4 = iLb2*iLb2;
-	Mathematics::Integer<4> iA = iXA2*iLb4 + iXB2*iLa4;
-	Mathematics::Integer<4> iB = iXAYA*iLb4 + iXBYB*iLa4;
-	Mathematics::Integer<4> iC = iYA2*iLb4 + iYB2*iLa4;
-	Mathematics::Integer<4> iD = iLa4*iLb4;
+	const Mathematics::Integer<4> iXA2 = Mathematics::Integer<4>(xa)* Mathematics::Integer<4>(xa);
+	const Mathematics::Integer<4> iYA2 = Mathematics::Integer<4>(ya)*Mathematics::Integer<4>(ya);
+	const Mathematics::Integer<4> iXB2 = Mathematics::Integer<4>(xb)*Mathematics::Integer<4>(xb);
+	const Mathematics::Integer<4> iYB2 = Mathematics::Integer<4>(yb)*Mathematics::Integer<4>(yb);
+	const Mathematics::Integer<4> iXAYA = Mathematics::Integer<4>(xa)*Mathematics::Integer<4>(ya);
+	const Mathematics::Integer<4> iXBYB = Mathematics::Integer<4>(xb)*Mathematics::Integer<4>(yb);
+	const Mathematics::Integer<4> iLa2 = iXA2 + iYA2;
+	const Mathematics::Integer<4> iLa4 = iLa2*iLa2;
+	const Mathematics::Integer<4> iLb2 = iXB2 + iYB2;
+	const Mathematics::Integer<4> iLb4 = iLb2*iLb2;
+	const Mathematics::Integer<4> iA = iXA2*iLb4 + iXB2*iLa4;
+	const Mathematics::Integer<4> iB = iXAYA*iLb4 + iXBYB*iLa4;
+	const Mathematics::Integer<4> iC = iYA2*iLb4 + iYB2*iLa4;
+	const Mathematics::Integer<4> iD = iLa4*iLb4;
 
 	Mathematics::Integer<4> dx, dy, sigma;
-    int x, y, xp1, ym1, yp1;
+    int x= 0, y= 0, xp1= 0, ym1= 0, yp1= 0;
 
     if (ya <= xa)
     {
@@ -999,25 +1005,25 @@ void Imagics
 {
     image[y][x] = foreColor;
 
-    int xp1 = x+1;
+    const int xp1 = x+1;
     if (xp1 < xMax && image[y][xp1] == backColor)
     {
         RecursiveFill(xp1, y, xMax, yMax, image, foreColor, backColor);
     }
 
-    int xm1 = x-1;
+    const int xm1 = x-1;
     if (0 <= xm1 && image[y][xm1] == backColor)
     {
         RecursiveFill(xm1, y, xMax, yMax, image, foreColor, backColor);
     }
 
-    int yp1 = y+1;
+    const int yp1 = y+1;
     if (yp1 < yMax && image[yp1][x] == backColor)
     {
         RecursiveFill(x, yp1, xMax, yMax, image, foreColor, backColor);
     }
 
-    int ym1 = y-1;
+    const int ym1 = y-1;
     if (0 <= ym1 && image[ym1][x] == backColor)
     {
         RecursiveFill(x, ym1, xMax, yMax, image, foreColor, backColor);
@@ -1031,7 +1037,7 @@ void Imagics
     // Allocate the maximum amount of space needed.  If you prefer less, you
     // need to modify this data structure to allow for dynamic reallocation
     // when it is needed.  An empty stack has top == -1.
-    int quantity = xMax*yMax;
+    const int quantity = xMax*yMax;
     int* xStack = NEW1<int>(quantity);
 	int* yStack = NEW1<int>(quantity);
 
@@ -1051,7 +1057,7 @@ void Imagics
         // Fill the pixel.
         image[y][x] = foreColor;
 
-        int xp1 = x+1;
+        const int xp1 = x+1;
         if (xp1 < xMax && image[y][xp1] == backColor)
         {
             // Push pixel with background color.
@@ -1061,7 +1067,7 @@ void Imagics
             continue;
         }
 
-        int xm1 = x-1;
+        const int xm1 = x-1;
         if (0 <= xm1 && image[y][xm1] == backColor)
         {
             // Push pixel with background color.
@@ -1071,7 +1077,7 @@ void Imagics
             continue;
         }
 
-        int yp1 = y+1;
+        const int yp1 = y+1;
         if (yp1 < yMax && image[yp1][x] == backColor)
         {
             // Push pixel with background color.
@@ -1081,7 +1087,7 @@ void Imagics
             continue;
         }
 
-        int ym1 = y-1;
+        const int ym1 = y-1;
         if (0 <= ym1 && image[ym1][x] == backColor)
         {
             // Push pixel with background color.
@@ -1099,3 +1105,4 @@ void Imagics
 	DELETE1(yStack);
 }
 
+#include STSTEM_WARNING_POP

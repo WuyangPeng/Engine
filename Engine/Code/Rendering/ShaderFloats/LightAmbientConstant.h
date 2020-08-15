@@ -22,16 +22,16 @@ namespace Rendering
 
 	public:
 		explicit LightAmbientConstant(const LightSmartPointer& light);
-		virtual ~LightAmbientConstant();
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_OBJECT_FACTORY_DECLARE(LightAmbientConstant);
 		CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
-		virtual void Update(const Visual* visual, const Camera* camera) override;
+		  void Update(const Visual* visual, const Camera* camera) override;
 
-		virtual ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSmartPointer Clone() const override;
 	};
 
 #include STSTEM_WARNING_PUSH

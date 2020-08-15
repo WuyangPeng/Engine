@@ -31,7 +31,7 @@ COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE(CoreTools, BaseResource)
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, BaseResource)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BaseResource, GetPriority, CoreTools::PriorityType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, BaseResource, GetLastAccessTime, boost::posix_time::ptime)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BaseResource, GetLastAccessTime, boost::posix_time::ptime)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BaseResource, IsLocked, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(CoreTools, BaseResource, SetPriority, PriorityType, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, BaseResource, SetCurrentTime, void)

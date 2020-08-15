@@ -17,7 +17,10 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
 Rendering::MorphControllerImpl
 	::MorphControllerImpl(int numVertices, int numTargets,int numKeys) 
 	: m_NumVertices{ numVertices },m_NumTargets{ numTargets },m_Vertices(numVertices * numTargets),
@@ -27,7 +30,7 @@ Rendering::MorphControllerImpl
 }
 
 Rendering::MorphControllerImpl
-	::MorphControllerImpl()
+	::MorphControllerImpl() noexcept
 	: m_NumVertices{ 0 }, m_NumTargets{ 0 }, m_Vertices{}, m_NumKeys{ 0 },
 	  m_Times{}, m_Weights{}, m_LastIndex{ 0 }
 {
@@ -45,24 +48,21 @@ bool Rendering::MorphControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT	
 
-int Rendering::MorphControllerImpl
-	::GetNumVertices() const 
+int Rendering::MorphControllerImpl ::GetNumVertices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumVertices;
 }
 
-int Rendering::MorphControllerImpl
-	::GetNumTargets() const
+int Rendering::MorphControllerImpl ::GetNumTargets() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumTargets;
 }
 
-int Rendering::MorphControllerImpl
-	::GetNumKeys() const
+int Rendering::MorphControllerImpl ::GetNumKeys() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -76,7 +76,7 @@ const Rendering::MorphControllerImpl::APoint Rendering::MorphControllerImpl
 	RENDERING_ASSERTION_0(0 <= target && target < m_NumTargets, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= vertices && vertices < m_NumVertices, "Ë÷Òý´íÎó£¡");
 
-	int index = vertices + target * m_NumVertices;
+	const int index = vertices + target * m_NumVertices;
 
 	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 
@@ -99,7 +99,7 @@ float Rendering::MorphControllerImpl
 	RENDERING_ASSERTION_0(0 <= target && target < m_NumTargets - 1, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= key && key < m_NumKeys, "Ë÷Òý´íÎó£¡");
 
-	auto index = target + key * (m_NumTargets - 1);
+	const auto index = target + key * (m_NumTargets - 1);
 
 	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Weights.size()), "Ë÷Òý´íÎó£¡");
 
@@ -113,7 +113,7 @@ void Rendering::MorphControllerImpl
 	RENDERING_ASSERTION_0(0 <= target && target < m_NumTargets, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= vertices && vertices < m_NumVertices, "Ë÷Òý´íÎó£¡");
 
-	auto index = vertices + target * m_NumVertices;
+	const auto index = vertices + target * m_NumVertices;
 
 	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Vertices.size()), "Ë÷Òý´íÎó£¡");
 
@@ -136,7 +136,7 @@ void Rendering::MorphControllerImpl
 	RENDERING_ASSERTION_0(0 <= target && target < m_NumTargets - 1, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= key && key < m_NumKeys, "Ë÷Òý´íÎó£¡");
 
-	auto index = target + key * (m_NumTargets - 1);
+	const auto index = target + key * (m_NumTargets - 1);
 
 	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Weights.size()), "Ë÷Òý´íÎó£¡");
 
@@ -144,7 +144,7 @@ void Rendering::MorphControllerImpl
 }
 
 const Rendering::ControllerKeyInfo Rendering::MorphControllerImpl
-	::GetKeyInfo(float ctrlTime) 
+	::GetKeyInfo(float ctrlTime) noexcept
 {
 	if (ctrlTime <= m_Times[0])
     {   
@@ -170,7 +170,7 @@ const Rendering::ControllerKeyInfo Rendering::MorphControllerImpl
             ++nextIndex;
         }
 		      
-		auto normTime = (ctrlTime - m_Times[m_LastIndex]) / (m_Times[nextIndex] - m_Times[m_LastIndex]);
+		const auto normTime = (ctrlTime - m_Times[m_LastIndex]) / (m_Times[nextIndex] - m_Times[m_LastIndex]);
 
 		return ControllerKeyInfo{ normTime, m_LastIndex, nextIndex };
     }
@@ -183,7 +183,7 @@ const Rendering::ControllerKeyInfo Rendering::MorphControllerImpl
             --nextIndex;
         }
  
-		auto normTime = (ctrlTime - m_Times[nextIndex]) / (m_Times[m_LastIndex] - m_Times[nextIndex]);
+		const auto normTime = (ctrlTime - m_Times[nextIndex]) / (m_Times[m_LastIndex] - m_Times[nextIndex]);
 
 		return ControllerKeyInfo{ normTime, nextIndex, m_LastIndex };
     }
@@ -232,15 +232,15 @@ void Rendering::MorphControllerImpl
 	source.Read(m_NumTargets);
 	source.Read(m_NumKeys);
 
-	auto numTotalVertices = m_NumVertices * m_NumTargets;
+	const auto numTotalVertices = m_NumVertices * m_NumTargets;
 	m_Vertices.resize(numTotalVertices);
 	source.ReadAggregate(numTotalVertices, &m_Vertices[0]);
 
 	m_Times.resize(m_NumKeys);
 	source.Read(m_NumKeys, &m_Times[0]);
 
-	auto numTotalWeights = m_NumKeys * (m_NumTargets - 1);
+	const auto numTotalWeights = m_NumKeys * (m_NumTargets - 1);
 	m_Weights.resize(numTotalWeights);
 	source.Read(numTotalWeights, &m_Weights[0]);
 }
- 
+ #include STSTEM_WARNING_POP

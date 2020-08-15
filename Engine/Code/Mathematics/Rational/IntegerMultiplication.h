@@ -28,7 +28,7 @@ namespace Mathematics
 
 		CLASS_INVARIANT_DECLARE;
 
-		const IntegerData GetMultiplication() const;
+		const IntegerData GetMultiplication() const noexcept;
 
 	private:
 		void Calculate();

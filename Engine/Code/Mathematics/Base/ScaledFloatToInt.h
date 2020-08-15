@@ -17,16 +17,16 @@ namespace Mathematics
 		using ClassType = ScaledFloatToInt;
 
 	public:
-		ScaledFloatToInt(float value, int power);
+		ScaledFloatToInt(float value, int power) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetScaledResult() const;
+		int GetScaledResult() const noexcept;
 
 	private:
-		void Scaled();
-		void ShiftIntegerValue();
-		void CorrectResult();
+		void Scaled() noexcept;
+		void ShiftIntegerValue() noexcept;
+		void CorrectResult() noexcept;
 
 	private:
 		float m_FloatValue;

@@ -19,8 +19,8 @@ namespace Mathematics
 		using ClassType = Float4Impl;
 
 	public:
-		Float4Impl();
-		Float4Impl(float firstValue, float secondValue, float thirdValue, float fourValue);
+		Float4Impl() noexcept;
+		Float4Impl(float firstValue, float secondValue, float thirdValue, float fourValue) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

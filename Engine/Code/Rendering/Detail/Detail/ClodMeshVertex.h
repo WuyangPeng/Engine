@@ -29,25 +29,25 @@ namespace Rendering
 		using EdgeKeySetConstIter = EdgeKeySet::const_iterator;
 
 	public:
-		ClodMeshVertex(); 
+		ClodMeshVertex() noexcept; 
 
 		CLASS_INVARIANT_DECLARE;
 
 		void InsertTriangleKey(const TriangleKey& triangleKey);
 		void InsertEdgeKey(const EdgeKey& edgeKey);
-		void SetCollapsible(bool collapsible);
+		void SetCollapsible(bool collapsible) noexcept;
 
 		void EraseTriangleKey(const TriangleKey& triangleKey);
 		void EraseEdgeKey(const EdgeKey& edgeKey);
 		 
 		int GetTriangleKeySize() const;
 		int GetEdgeKeySize() const;
-		bool IsCollapsible() const;
+		bool IsCollapsible() const noexcept;
 
-		TriangleKeySetConstIter GetTriangleKeyBegin() const;
-		TriangleKeySetConstIter GetTriangleKeyEnd() const;
-		EdgeKeySetConstIter GetEdgeKeyBegin() const;
-		EdgeKeySetConstIter GetEdgeKeyEnd() const;
+		TriangleKeySetConstIter GetTriangleKeyBegin() const noexcept;
+		TriangleKeySetConstIter GetTriangleKeyEnd() const noexcept;
+		EdgeKeySetConstIter GetEdgeKeyBegin() const noexcept;
+		EdgeKeySetConstIter GetEdgeKeyEnd() const noexcept;
 
 	private:
 		EdgeKeySet m_AdjEdges;

@@ -21,13 +21,13 @@ namespace Network
 		using ParentType = BoostSockStream;
 
 	public:
-		BoostSegmentationSockStream();
-		virtual ~BoostSegmentationSockStream();
+                BoostSegmentationSockStream() noexcept;
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual int Receive(const MessageBufferSharedPtr& messageBuffer) override;
-		virtual void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
+		int Receive(const MessageBufferSharedPtr& messageBuffer) override;
+		void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
 	private:
 		int ReceiveHead(const MessageBufferSharedPtr& messageBuffer);
@@ -39,7 +39,7 @@ namespace Network
 		void SubclassAsyncReceiveHeadEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex);
 		void SubclassAsyncReceiveContentEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex);
 
-		virtual void SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex) override;
+		void SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex) override;
 
 	private:
 		StreamReceive m_StreamReceive;

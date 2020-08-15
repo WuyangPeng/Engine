@@ -37,7 +37,7 @@ namespace Database
 
 		CLASS_INVARIANT_DECLARE;
 
-		ConfigurationStrategy GetConfigurationStrategy() const;
+		ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
 		virtual ResultRowPtr FetchOne();
 		virtual ResultRowContainer FetchAll();

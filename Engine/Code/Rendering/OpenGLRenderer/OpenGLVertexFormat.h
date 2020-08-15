@@ -28,13 +28,13 @@ namespace Rendering
 
 	public:
 	   OpenGLVertexFormat (Renderer* renderer, const VertexFormat* vertexFormat);
-	   virtual ~OpenGLVertexFormat ();
+ 
 
 	   CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 	   
 	   // 顶点格式操作。
-	   virtual void Enable (Renderer* renderer) override;
-	   virtual void Disable (Renderer* renderer) override;
+	     void Enable (Renderer* renderer) noexcept override;
+	     void Disable (Renderer* renderer) noexcept override;
 	   
 	private:
 		void Init(const VertexFormat* vertexFormat);

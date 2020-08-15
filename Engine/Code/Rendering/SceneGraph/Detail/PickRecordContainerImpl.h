@@ -19,7 +19,7 @@ namespace Rendering
 		using ClassType = PickRecordContainerImpl;
 
 	public:	
-		PickRecordContainerImpl();
+		PickRecordContainerImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -28,7 +28,7 @@ namespace Rendering
 
 		int GetSize() const;
 		const PickRecord GetPickRecord(int index) const;
-		bool IsEmpty() const;
+                bool IsEmpty() const noexcept;
 
 	private:
 		std::vector<PickRecord> m_PickRecord;

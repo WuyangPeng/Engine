@@ -16,7 +16,11 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering,TextureCube);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,TextureCube);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,TextureCube); 
@@ -35,19 +39,25 @@ Rendering::TextureCube
 Rendering::TextureCube
     ::~TextureCube()
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
+    EXCEPTION_TRY
+    {
+        RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
+	
     
-    RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+    
 }
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, TextureCube)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,GetFormat,Rendering::TextureFormat)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,GetTextureType,Rendering::TextureFlags)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,GetUsage,Rendering::BufferUsage)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,GetNumLevels,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetFormat, Rendering::TextureFormat)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetTextureType, Rendering::TextureFlags)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetUsage, Rendering::BufferUsage)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetNumLevels, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,GetNumDimensions,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetNumDimensions, int)
 
 
 int Rendering::TextureCube
@@ -59,12 +69,12 @@ int Rendering::TextureCube
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,TextureCube,GetNumLevelBytes,int,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,GetNumTotalBytes,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetNumTotalBytes, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,TextureCube,GetLevelOffset,int,int)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,GetPixelSize,int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,IsCompressed,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, IsCompressed, bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,IsMipmapable,bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,TextureCube,SaveToFile,WriteFileManager&,void)
@@ -112,7 +122,7 @@ void Rendering::TextureCube
         
         m_Impl->GenerateMipmaps();
         
-        auto numLevels = m_Impl->GetNumLevels();
+     const   auto numLevels = m_Impl->GetNumLevels();
         
 		for (auto face = 0; face < 6; ++face)
 		{
@@ -204,7 +214,8 @@ Rendering::TextureSmartPointer Rendering::TextureCube
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return TextureSmartPointer{ NEW0 ClassType(*this) };
+	return TextureSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 
+#include STSTEM_WARNING_POP

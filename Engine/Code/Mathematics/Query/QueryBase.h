@@ -19,8 +19,13 @@ namespace Mathematics
 		using ClassType = QueryBase;
 
 	public:
-		QueryBase();
+		QueryBase() noexcept;
 		virtual ~QueryBase();
+		
+		QueryBase(const QueryBase&) = default;
+		 QueryBase& operator=(const QueryBase&) = default;
+		 QueryBase(QueryBase&&) = default;
+		 QueryBase& operator=(QueryBase&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

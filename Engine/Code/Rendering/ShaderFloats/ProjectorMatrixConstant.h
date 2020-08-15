@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/23 17:16)
 
 #ifndef RENDERING_SHADER_FLOATS_PROJECTOR_MATRIX_CONSTANT_H
@@ -17,45 +17,44 @@ RENDERING_EXPORT_SHARED_PTR(ProjectorMatrixConstantImpl);
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE ProjectorMatrixConstant : public ShaderFloat
-	{
-	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(ProjectorMatrixConstant);
-		using ParentType = ShaderFloat;
+    class RENDERING_DEFAULT_DECLARE ProjectorMatrixConstant : public ShaderFloat
+    {
+    public:
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ProjectorMatrixConstant);
+        using ParentType = ShaderFloat;
 
-	public:
-		// …Ë÷√biasScaleMatrixIndexŒ™0æÿ’Û”≥…‰ y' = (1 - y) / 2°£
-		// …Ë÷√biasScaleMatrixIndexŒ™1æÿ’Û”≥…‰ y' = (1 + y) / 2°£
-		ProjectorMatrixConstant(const ProjectorSmartPointer& projector,bool biased, int biasScaleMatrixIndex);
-		virtual ~ProjectorMatrixConstant();
+    public:
+        // …Ë÷√biasScaleMatrixIndexŒ™0æÿ’Û”≥…‰ y' = (1 - y) / 2°£
+        // …Ë÷√biasScaleMatrixIndexŒ™1æÿ’Û”≥…‰ y' = (1 + y) / 2°£
+        ProjectorMatrixConstant(const ProjectorSmartPointer& projector, bool biased, int biasScaleMatrixIndex);
+        ProjectorMatrixConstant(ProjectorMatrixConstant&&) noexcept = default;
+        ProjectorMatrixConstant& operator=(ProjectorMatrixConstant&&) noexcept = default;
+        ~ProjectorMatrixConstant() = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ProjectorMatrixConstant);
-		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Update(const Visual* visual, const Camera* camera) override;
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ProjectorMatrixConstant);
+        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-		virtual void SetNumRegisters(int numRegisters) override;
+        void Update(const Visual* visual, const Camera* camera) override;
 
-		const ConstProjectorSmartPointer GetProjector() const;
+        void SetNumRegisters(int numRegisters) override;
 
-		virtual ShaderFloatSmartPointer Clone() const override;
+        const ConstProjectorSmartPointer GetProjector() const;
 
-	private:
-		constexpr static auto sm_NumRegisters = 4;
+        ShaderFloatSmartPointer Clone() const override;
 
-	private:
-		IMPL_TYPE_DECLARE(ProjectorMatrixConstant);
-	};
+    private:
+        constexpr static auto sm_NumRegisters = 4;
+
+    private:
+        IMPL_TYPE_DECLARE(ProjectorMatrixConstant);
+    };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(ProjectorMatrixConstant);
+    CORE_TOOLS_STREAM_REGISTER(ProjectorMatrixConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ProjectorMatrixConstant);
+    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ProjectorMatrixConstant);
 }
 
-#endif // RENDERING_SHADER_FLOATS_PROJECTOR_MATRIX_CONSTANT_H
-
-
- 
+#endif  // RENDERING_SHADER_FLOATS_PROJECTOR_MATRIX_CONSTANT_H

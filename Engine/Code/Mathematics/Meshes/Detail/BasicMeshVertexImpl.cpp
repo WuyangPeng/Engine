@@ -12,9 +12,11 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 Mathematics::BasicMeshVertexImpl
-	::BasicMeshVertexImpl ()
+	::BasicMeshVertexImpl () noexcept
 	:m_Vertex{}, m_Edge{}, m_Triangle{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -86,5 +88,5 @@ void Mathematics::BasicMeshVertexImpl
 }
 
 
-
+#include STSTEM_WARNING_POP
 

@@ -22,7 +22,11 @@
 
 using std::string;
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+ #include SYSTEM_WARNING_DISABLE(26418)
+ #include SYSTEM_WARNING_DISABLE(26496)
 Rendering::NodeImpl
     ::NodeImpl (Node* realThis)
 	:m_Child{}, m_RealThis{ realThis }
@@ -33,14 +37,19 @@ Rendering::NodeImpl
 Rendering::NodeImpl
     ::~NodeImpl ()
 {
-    for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
+    EXCEPTION_TRY
     {
-        if (*iter != nullptr)
+        for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
         {
-            (*iter)->SetObject(nullptr);
-            iter->Reset();
+            if (*iter != nullptr)
+            {
+                (*iter)->SetObject(nullptr);
+                iter->reset();
+            }
         }
     }
+    EXCEPTION_ALL_CATCH(Rendering)
+  
     
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -56,11 +65,11 @@ int Rendering::NodeImpl
 }
 
 int Rendering::NodeImpl
-    ::AttachChild (SpatialSmartPointer& child)
+    ::AttachChild (SpatialSmartPointer  child)
 {
     RENDERING_CLASS_IS_VALID_9;
     
-	if (child.IsNullPtr())
+	if (!child)
     {
         RENDERING_ASSERTION_1(false, "你不能附加一个空节点到NodeImpl。\n");
         return -1;
@@ -75,7 +84,7 @@ int Rendering::NodeImpl
 	child->SetParent(m_RealThis);
 
     // 插入子节点到第一个可用插槽(如果有的话)。
-    auto index = GetFirstNullIndex();
+const    auto index = GetFirstNullIndex();
     if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
     {
         m_Child[index] = child;
@@ -92,11 +101,11 @@ int Rendering::NodeImpl
 
 // private
 int Rendering::NodeImpl
-    ::GetFirstNullIndex() const
+    ::GetFirstNullIndex() const noexcept
 {
     for (auto index = 0u;index < m_Child.size();++index)
     {
-        if (m_Child[index].IsNullPtr())
+        if (!m_Child[index] )
         {
             return index;
         }
@@ -106,18 +115,18 @@ int Rendering::NodeImpl
 }
 
 int Rendering::NodeImpl
-   ::DetachChild(SpatialSmartPointer& child)
+   ::DetachChild(SpatialSmartPointer  child) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
     
-    if (!child.IsNullPtr())
+    if ( child )
     {
         for (auto index = 0u;index < m_Child.size();++index)
         {
             if (m_Child[index] == child)
             {
                 m_Child[index]->SetParent(nullptr);
-                m_Child[index].Reset();
+                m_Child[index].reset();
                 
                 return index;
             }
@@ -135,10 +144,10 @@ Rendering::SpatialSmartPointer Rendering::NodeImpl
 	if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
     {
 		auto child = m_Child[index];
-        if (!child.IsNullPtr())
+        if ( child )
         {
 			child->SetParent(nullptr);
-			m_Child[index].Reset();
+			m_Child[index].reset();
         }
         
         return child;
@@ -147,7 +156,7 @@ Rendering::SpatialSmartPointer Rendering::NodeImpl
 }
 
 Rendering::SpatialSmartPointer Rendering::NodeImpl
-    ::SetChild(int index, SpatialSmartPointer& child)
+    ::SetChild(int index,const SpatialSmartPointer& child)
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -178,7 +187,7 @@ Rendering::SpatialSmartPointer Rendering::NodeImpl
     }
 
     // 索引超出了范围，附加子节点到数组。
-    if (!child.IsNullPtr())
+    if ( child )
     {
 		child->SetParent(m_RealThis);
     }
@@ -208,7 +217,7 @@ Rendering::ConstSpatialSmartPointer Rendering::NodeImpl
 
 	if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
 	{
-		return m_Child[index].PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+		return m_Child[index] ;
 	}
 
 	return ConstSpatialSmartPointer{};
@@ -225,7 +234,7 @@ bool Rendering::NodeImpl
     {
 		auto child = *iter;
         
-        if(!child.IsNullPtr())
+        if( child )
         {
 			if (!child->Update(applicationTime, false))
 			{
@@ -324,7 +333,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::NodeImpl
     
     for (auto iter = m_Child.begin(),end = m_Child.end(); iter != end; ++iter)
     {
-		auto child = iter->PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+		auto child = *iter;//->PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
         
         if (child != nullptr && child->GetName() == name)
         {
@@ -344,7 +353,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::NodeImpl
     
     for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
     {
-		auto child = iter->PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+		auto child = *iter;//->PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
         
         if (child != nullptr && child->GetName() == name)
         {
@@ -369,7 +378,7 @@ void Rendering::NodeImpl
     
     if (!m_Child.empty())
     {
-        source.ReadSmartPointer(boost::numeric_cast<int>(m_Child.size()),&m_Child[0]);
+      //  source.ReadSmartPointer(boost::numeric_cast<int>(m_Child.size()),&m_Child[0]);
     }
 }
 
@@ -377,15 +386,15 @@ void Rendering::NodeImpl
     ::Link (ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-
+    source;
     const auto numChildren = boost::numeric_cast<int>(m_Child.size());
     
     for (auto i = 0; i < numChildren; ++i)
     {
-        if (m_Child[i].GetAddress() != 0)
+      //  if (m_Child[i].GetAddress() != 0)
         {
-            source.ResolveObjectSmartPointerLink(m_Child[i]);
-            SetChild(i, m_Child[i]);
+       //     source.ResolveObjectSmartPointerLink(m_Child[i]);
+     //       SetChild(i, m_Child[i]);
         }
     }
 }
@@ -394,14 +403,14 @@ void Rendering::NodeImpl
     ::Register (ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
+    target;
     const auto numChildren = boost::numeric_cast<int>(m_Child.size());
    
     for (auto i = 0; i < numChildren; ++i)
     {
-        if (!m_Child[i].IsNullPtr())
+        if (m_Child[i])
         {
-            target.RegisterSmartPointer(m_Child[i]);
+           // target.RegisterSmartPointer(m_Child[i]);
         }
     }
 }
@@ -416,7 +425,7 @@ void Rendering::NodeImpl
 
 	if (!m_Child.empty())
 	{
-		target.WriteSmartPointerWithoutNumber(boost::numeric_cast<int>(m_Child.size()), &m_Child[0]);
+	//	target.WriteSmartPointerWithoutNumber(boost::numeric_cast<int>(m_Child.size()), &m_Child[0]);
 	}  
 }
 
@@ -437,3 +446,4 @@ int Rendering::NodeImpl
     return size;
 }
 
+#include STSTEM_WARNING_POP

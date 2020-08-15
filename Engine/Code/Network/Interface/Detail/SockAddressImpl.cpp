@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 Network::SockAddressImpl
-	::SockAddressImpl()
+	::SockAddressImpl() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -30,7 +30,7 @@ const Network::ACEInetAddressType& Network::SockAddressImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE地址类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE地址类！"s));
 }
 
 Network::ACEInetAddressType& Network::SockAddressImpl
@@ -46,7 +46,7 @@ const Network::BoostInetAddressType& Network::SockAddressImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是boost地址类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是boost地址类！"s));
 }
 
 Network::BoostInetAddressType& Network::SockAddressImpl
@@ -62,7 +62,7 @@ const Network::WinSockInetAddressType& Network::SockAddressImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是WinSock地址类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是WinSock地址类！"s));
 }
 
 Network::WinSockInetAddressType& Network::SockAddressImpl

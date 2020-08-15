@@ -25,17 +25,17 @@ namespace Network
 		ACESockInetAddress();
 		explicit ACESockInetAddress(int port);
 		ACESockInetAddress(const std::string& hostName, int port);
-		virtual ~ACESockInetAddress();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const ACEInetAddressType& GetACEInetAddress() const override;
-		virtual ACEInetAddressType& GetACEInetAddress() override;
+		const ACEInetAddressType& GetACEInetAddress() const noexcept override;
+		ACEInetAddressType& GetACEInetAddress() override;
 
-		virtual const SockAddressPtr Clone() const override;
+		const SockAddressPtr Clone() const override;
 
-		virtual const std::string GetAddress() const override;
-		virtual int GetPort() const override;
+		const std::string GetAddress() const override;
+		int GetPort() const override;
 
 	private:
 		ACEInetAddress m_ACEInetAddress;

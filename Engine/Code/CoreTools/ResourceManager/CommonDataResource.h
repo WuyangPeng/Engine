@@ -24,18 +24,20 @@ namespace CoreTools
 
 	public:
 		CommonDataResource(PriorityType priority, uint32_t size);
-		virtual ~CommonDataResource();
+		~CommonDataResource() = default;
+		CommonDataResource(CommonDataResource&&) noexcept = default;
+		CommonDataResource& operator=(CommonDataResource&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual uint32_t GetSize() const override;
-		virtual bool IsDisposed() const override;
+		uint32_t GetSize() const noexcept override;
+		bool IsDisposed() const noexcept override;
 
-		virtual void Recreate() override;
-		virtual void Dispose() override;
+		void Recreate() override;
+		void Dispose() noexcept override;
 
-		virtual void SetData(int index, uint8_t value) override;
-		virtual uint8_t GetData(int index) const override;
+		void SetData(int index, uint8_t value) override;
+		uint8_t GetData(int index) const override;
 
 	private:
 		IMPL_TYPE_DECLARE(CommonDataResource);

@@ -22,25 +22,24 @@ namespace Network
 		using ParentType = HandleSetImpl;
 
 	public:
-		SockACEHandleSet();
-		virtual ~SockACEHandleSet();
+		SockACEHandleSet(); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void SetBit(ACEHandle handle) override;
-		virtual int64_t GetMaxSet() const override;
-		virtual SockFdSet* GetFdSet() override;
-		virtual void Sync(ACEHandle maxHandle) override;
-		virtual bool IsSet(ACEHandle handle) const override;
-		virtual void ClearBit(ACEHandle handle) override;
-		virtual bool IsFdSetFull() const override;
-		virtual int IsFdSetCount() const override;
+		void SetBit(ACEHandle handle) override;
+		int64_t GetMaxSet() const override;
+		SockFdSet* GetFdSet() override;
+		void Sync(ACEHandle maxHandle) override;
+		bool IsSet(ACEHandle handle) const override;
+		void ClearBit(ACEHandle handle) override;
+		bool IsFdSetFull() const override;
+		int IsFdSetCount() const override;
 
-		virtual ImplTypePtr Clone() const override;
+		ImplTypePtr Clone() const override;
 
-		virtual const ACEHandleSet& GetACEHandleSet() const override;
+		const ACEHandleSet& GetACEHandleSet() const noexcept override;
 
-		virtual bool Select(int width) override;
+		bool Select(int width) override;
 
 	private:
 		ACEHandleSet m_ACEHandleSet;

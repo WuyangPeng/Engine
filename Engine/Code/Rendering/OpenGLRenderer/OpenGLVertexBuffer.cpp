@@ -12,7 +12,11 @@
 #include "Rendering/Resources/VertexBuffer.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 Rendering::OpenGLVertexBuffer
     ::OpenGLVertexBuffer (Renderer* renderer,const VertexBuffer* vertexBuffer)
 	:ParentType{}, m_Buffer{ 0 }
@@ -55,7 +59,7 @@ bool Rendering::OpenGLVertexBuffer
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::OpenGLVertexBuffer
-    ::Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset)
+    ::Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -68,7 +72,7 @@ void Rendering::OpenGLVertexBuffer
 }
 
 void Rendering::OpenGLVertexBuffer
-    ::Disable (Renderer* renderer, unsigned int streamIndex)
+    ::Disable (Renderer* renderer, unsigned int streamIndex) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -79,7 +83,7 @@ void Rendering::OpenGLVertexBuffer
 }
 
 void* Rendering::OpenGLVertexBuffer
-    ::Lock (BufferLocking mode)
+    ::Lock (BufferLocking mode) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -89,10 +93,11 @@ void* Rendering::OpenGLVertexBuffer
 }
 
 void Rendering::OpenGLVertexBuffer
-    ::Unlock ()
+    ::Unlock () noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
 	System::SetGlUnmapBuffer(m_Buffer);
 }
 
+#include STSTEM_WARNING_POP

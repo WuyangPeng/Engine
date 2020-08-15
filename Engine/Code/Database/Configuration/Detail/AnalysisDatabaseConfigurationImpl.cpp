@@ -137,7 +137,7 @@ Database::ConfigurationStrategy Database::AnalysisDatabaseConfigurationImpl
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	auto iter = m_Container.find(name);
+	const auto iter = m_Container.find(name);
 
 	if (iter != m_Container.cend())
 	{
@@ -183,7 +183,7 @@ Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl
 		return WrappersStrategy::FlatFile;
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("数据库包装器类型不存在。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("数据库包装器类型不存在。"s));
 }
 
 Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::AnalysisDatabaseConfigurationImpl

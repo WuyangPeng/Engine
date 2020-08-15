@@ -19,7 +19,11 @@
 using std::move;
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26429)
 Network::BufferReceiveStreamImpl
 	::BufferReceiveStreamImpl(const MessageBufferSharedPtr& messageBuffer, ParserStrategy parserStrategy)
 	:m_TopLevel{}, m_ParserStrategy{ parserStrategy }, m_LastMessageBuffer{}
@@ -122,11 +126,11 @@ void Network::BufferReceiveStreamImpl
 		auto factory = MESSAGE_MANAGER_SINGLETON.Find(messageType, fullVersion);
 
 		// 从源缓冲器加载该对象。
-		auto message = (*factory)(messageSource, messageType);
+		const auto message = (*factory)(messageSource, messageType);
 
 		m_TopLevel.Insert(message);
 	}
-	catch (CoreTools::Error& error)
+	catch (const CoreTools::Error& error)
 	{
 		LOG_SINGLETON_ENGINE_APPENDER(Error, Network)
 			<< error << SYSTEM_TEXT("（") << messageType << SYSTEM_TEXT("）")
@@ -140,11 +144,11 @@ void Network::BufferReceiveStreamImpl
 {
 	if (m_LastMessageBuffer)
 	{
-		auto messageLength = m_LastMessageBuffer->GetMessageLength();
+		const auto messageLength = m_LastMessageBuffer->GetMessageLength();
 
 		if (messageLength < messageBuffer->GetCurrentWriteIndex() + m_LastMessageBuffer->GetCurrentWriteIndex())
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("消息长度读取错误！"));
+			THROW_EXCEPTION(SYSTEM_TEXT("消息长度读取错误！"s));
 		}
 
 		m_LastMessageBuffer->PushBack(messageBuffer);
@@ -159,7 +163,7 @@ void Network::BufferReceiveStreamImpl
 void Network::BufferReceiveStreamImpl
 	::CopyToLastMessageSource()
 {
-	auto messageLength = m_LastMessageBuffer->GetMessageLength();
+	const auto messageLength = m_LastMessageBuffer->GetMessageLength();
 	if (m_LastMessageBuffer->GetSize() < messageLength)
 	{
 		m_LastMessageBuffer = m_LastMessageBuffer->Expansion(messageLength);
@@ -180,7 +184,7 @@ void Network::BufferReceiveStreamImpl
 }
 
 bool Network::BufferReceiveStreamImpl
-	::IsFinish() const
+	::IsFinish() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -197,3 +201,4 @@ void Network::BufferReceiveStreamImpl
 
 	AnalysisBuffer(messageBuffer);
 }
+#include STSTEM_WARNING_POP

@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.3 (2019/07/23 17:18)
 
 #ifndef RENDERING_SHADER_FLOATS_SHADER_FLOATS_H
@@ -9,13 +9,13 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Mathematics/Algebra/AVector.h"
-#include "Mathematics/Algebra/APoint.h"
-#include "Mathematics/Algebra/Matrix.h"
-#include "Rendering/DataTypes/Colour.h"
-#include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+#include "CoreTools/ObjectSystems/Object.h"
+#include "Mathematics/Algebra/APoint.h"
+#include "Mathematics/Algebra/AVector.h"
+#include "Mathematics/Algebra/Matrix.h"
+#include "Rendering/DataTypes/Colour.h"
 
 #include <vector>
 
@@ -23,75 +23,76 @@ RENDERING_EXPORT_SHARED_PTR(ShaderFloatImpl);
 
 namespace Rendering
 {
-	class Camera;
-	class Visual;
+    class Camera;
+    class Visual;
 
-	class RENDERING_DEFAULT_DECLARE ShaderFloat : public CoreTools::Object
-	{
-	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderFloat);
+    class RENDERING_DEFAULT_DECLARE ShaderFloat : public CoreTools::Object
+    {
+    public:
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderFloat);
         using ParentType = Object;
-		using FloatVector = std::vector<float>;
-		using AVector = Mathematics::AVectorf;
-		using APoint = Mathematics::APointf;
-		using Matrix = Mathematics::Matrixf;
-		using Colour = Colour<float>;
-		using ShaderFloatSmartPointer = CoreTools::ThirdSubclassSmartPointer<ClassType>;
-	    using ConstShaderFloatSmartPointer = CoreTools::ConstThirdSubclassSmartPointer<ClassType>;
+        using FloatVector = std::vector<float>;
+        using AVector = Mathematics::AVectorf;
+        using APoint = Mathematics::APointf;
+        using Matrix = Mathematics::Matrixf;
+        using Colour = Colour<float>;
+        using ShaderFloatSmartPointer = std::shared_ptr<ClassType>;
+        using ConstShaderFloatSmartPointer = std::shared_ptr<const ClassType>;
 
-	public:
-		// 寄存器的数量必须为正数。每个寄存器相当于四个浮点数。
-		ShaderFloat();
-		explicit ShaderFloat(int numRegisters);
-		explicit ShaderFloat(const FloatVector& data);
-		virtual ~ShaderFloat();
+    public:
+        // 寄存器的数量必须为正数。每个寄存器相当于四个浮点数。
+        ShaderFloat();
+        explicit ShaderFloat(int numRegisters);
+        explicit ShaderFloat(const FloatVector& data);
+        ~ShaderFloat();
+        ShaderFloat(ShaderFloat&&) noexcept = default;
+        ShaderFloat& operator=(ShaderFloat&&) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
-		
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ShaderFloat); 
+        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		// 对于延迟构造。
-		virtual void SetNumRegisters(int numRegisters);
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ShaderFloat);
 
-		int GetNumRegisters() const;
-		const float* GetData() const;
-		float* GetData();
+        // 对于延迟构造。
+        virtual void SetNumRegisters(int numRegisters);
 
-		// 由寄存器访问数据。SetRegister从data复制四个浮点值的副本到寄存器index。
-		// SetRegisters从data复制mNumElements个浮点值到所有寄存器。
-		// 类似的浮点值大小由Get*函数复制。
-		void SetRegister(int index, const FloatVector& data);
-		void SetRegister(int index, const AVector& vector);
-		void SetRegister(int index, const APoint& point);
-		void SetRegister(int index, const Colour& colour);
-		void SetRegisters(const Matrix& matrix);
-		void SetRegisters(const FloatVector& data);
-		const FloatVector GetRegister(int index) const;
-		const FloatVector GetRegisters() const;
+        int GetNumRegisters() const;
+        const float* GetData() const;
+        float* GetData();
 
-		// 按索引访问数据。
-		const float& operator[] (int index) const;
-		float& operator[] (int index);
+        // 由寄存器访问数据。SetRegister从data复制四个浮点值的副本到寄存器index。
+        // SetRegisters从data复制mNumElements个浮点值到所有寄存器。
+        // 类似的浮点值大小由Get*函数复制。
+        void SetRegister(int index, const FloatVector& data);
+        void SetRegister(int index, const AVector& vector);
+        void SetRegister(int index, const APoint& point);
+        void SetRegister(int index, const Colour& colour);
+        void SetRegisters(const Matrix& matrix);
+        void SetRegisters(const FloatVector& data);
+        const FloatVector GetRegister(int index) const;
+        const FloatVector GetRegisters() const;
 
-		// 该函数允许着色器常量的动态更新在渲染器调用VisualEffectInput::Enable函数。
-		// 因此，数据传送到着色器程序尽可能晚在渲染通道发生。
-		// 这是在绘图调用修改摄像机设置全局效果时非常有用。
-		void EnableUpdater();
-		void DisableUpdater();
-		bool AllowUpdater() const;
-		virtual void Update(const Visual* visual, const Camera* camera);
+        // 按索引访问数据。
+        const float& operator[](int index) const;
+        float& operator[](int index);
 
-		virtual ShaderFloatSmartPointer Clone() const;
+        // 该函数允许着色器常量的动态更新在渲染器调用VisualEffectInput::Enable函数。
+        // 因此，数据传送到着色器程序尽可能晚在渲染通道发生。
+        // 这是在绘图调用修改摄像机设置全局效果时非常有用。
+        void EnableUpdater();
+        void DisableUpdater();
+        bool AllowUpdater() const;
+        virtual void Update(const Visual* visual, const Camera* camera);
 
-	private:
-		IMPL_TYPE_DECLARE(ShaderFloat);
-	};
+        virtual ShaderFloatSmartPointer Clone() const;
+
+    private:
+        IMPL_TYPE_DECLARE(ShaderFloat);
+    };
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426) 
-	CORE_TOOLS_STREAM_REGISTER(ShaderFloat);
+#include SYSTEM_WARNING_DISABLE(26426)
+    CORE_TOOLS_STREAM_REGISTER(ShaderFloat);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third,ShaderFloat);
+    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ShaderFloat);
 }
 
-#endif // RENDERING_SHADER_FLOATS_SHADER_FLOATS_H
-
+#endif  // RENDERING_SHADER_FLOATS_SHADER_FLOATS_H

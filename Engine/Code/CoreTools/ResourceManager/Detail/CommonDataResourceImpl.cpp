@@ -69,7 +69,7 @@ void CoreTools::CommonDataResourceImpl
 	CORE_TOOLS_CLASS_IS_VALID_1;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_DataSize), "Ë÷Òý´íÎó£¡");
 
-	m_Data[index] = value;
+	m_Data.at(index) = value;
 }
 
 uint8_t CoreTools::CommonDataResourceImpl
@@ -78,6 +78,6 @@ uint8_t CoreTools::CommonDataResourceImpl
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_DataSize), "Ë÷Òý´íÎó£¡");
 
-	return m_Data[index];
+	return m_Data.at(index);
 }
 

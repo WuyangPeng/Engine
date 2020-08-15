@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.3 (2019/07/17 10:58)
 
 // 渲染库（Rendering）位于引擎的第四层，
@@ -17,13 +17,13 @@
 // 6.	ShaderFloats（浮点着色器）
 // 7.	Detail（细节）
 // 8.	Shaders（着色器）
-// 9.	LocalEffects（局部特效） 
+// 9.	LocalEffects（局部特效）
 // 10.	GlobalEffects（全局特效）
 // 11.	CurvesSurfaces（曲线曲面）
-// 12.	Illumination（光照） 
+// 12.	Illumination（光照）
 // 13.	ImageProcessing（图像处理）
 // 14.	Picture（图像）
-// 15.	Sorting（排序）
+// 15.	Sorting（排序） 
 // 16.	Terrain（地形处理）
 // 17.	Vertex（顶点）
 // 18.	TextFonts（文本及字体）
@@ -60,17 +60,16 @@
 
 #ifndef BUILDING_RENDERING_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_RENDERING_STATIC
+#else  // BUILDING_RENDERING_STATIC
 
-	namespace Rendering
-	{
-		void StaticDllLib()
-		{
+namespace Rendering
+{
+    void StaticDllLib() noexcept
+    {
 
-		}
-	}
+    }
+}
 
-#endif // !BUILDING_RENDERING_STATIC
-
+#endif  // !BUILDING_RENDERING_STATIC

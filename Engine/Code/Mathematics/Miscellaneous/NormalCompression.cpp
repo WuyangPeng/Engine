@@ -8,7 +8,9 @@
 
 #include "NormalCompression.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 static int gsN = 127;  // N(N+1)/2 = 8128 < 2^{13}
 static auto temp1 = 2 * gsN + 1;
 static double gsB = temp1;
@@ -19,7 +21,7 @@ static double gsInvFactor = 1.0/gsFactor;
 
 
 void Mathematics
-	::CompressNormal (double x, double y, double z,unsigned short& index)
+	::CompressNormal (double x, double y, double z,unsigned short& index) noexcept
 {
     // assert:  x*x + y*y + z*z = 1
 
@@ -42,8 +44,8 @@ void Mathematics
     }
 
     // Determine mantissa.
-    unsigned short usX = (unsigned short) Mathd::Floor(gsFactor*x);
-    unsigned short usY = (unsigned short) Mathd::Floor(gsFactor*y);
+    const unsigned short usX = static_cast<unsigned short>(Mathd::Floor(gsFactor*x));
+    const unsigned short usY = static_cast<unsigned short>(Mathd::Floor(gsFactor*y));
     unsigned short mantissa = usX + ((usY*(255-usY)) >> 1);
     index |= mantissa;
 }
@@ -51,12 +53,12 @@ void Mathematics
 void Mathematics
 	::UncompressNormal (unsigned short index, double& x, double& y, double& z)
 {
-    unsigned short mantissa = index & 0x1FFF;
+    const unsigned short mantissa = index & 0x1FFF;
 
     // Extract triangular indices.
-	auto a = 8 * mantissa;
+	const auto a = 8 * mantissa;
     double temp = gsB2 - a;
-    unsigned short usY = (unsigned short) Mathd::Floor(0.5*(gsB - Mathd::Sqrt(Mathd::FAbs(temp))));
+    unsigned short usY = static_cast<unsigned short>(Mathd::Floor(0.5*(gsB - Mathd::Sqrt(Mathd::FAbs(temp)))));
     unsigned short usX = mantissa - ((usY*(255 - usY)) >> 1);
 
     // Build approximate normal.
@@ -80,3 +82,4 @@ void Mathematics
     }
 }
 
+#include STSTEM_WARNING_POP

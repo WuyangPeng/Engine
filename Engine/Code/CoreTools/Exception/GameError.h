@@ -31,7 +31,7 @@ namespace CoreTools
 
 		E GetErrorCode() const noexcept;
 
-		virtual const String GetError() const override;
+		  const String GetError() const override;
 
 	private: 
 		virtual const String GetErrorCodeDescribed() const;

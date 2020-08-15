@@ -23,8 +23,8 @@ Rendering::TrianglePosition
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,TrianglePosition)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TrianglePosition,GetFirstPosition,const Rendering::TrianglePosition::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TrianglePosition,GetFirstPosition,const Rendering::TrianglePosition::APoint)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TrianglePosition,GetSecondPosition,const Rendering::TrianglePosition::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TrianglePosition, GetSecondPosition, const Rendering::TrianglePosition::APoint)
 									
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TrianglePosition,GetThirdPosition,const Rendering::TrianglePosition::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TrianglePosition, GetThirdPosition, const Rendering::TrianglePosition::APoint)

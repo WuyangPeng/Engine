@@ -19,7 +19,10 @@
 
 using std::string;
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26455)
 Rendering::VisualPassImpl
 	::VisualPassImpl()
 	:m_VertexShader{},m_PixelShader{},m_AlphaState{},m_CullState{},
@@ -52,60 +55,60 @@ void Rendering::VisualPassImpl
 	::Save(BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.WriteSmartPointer(m_VertexShader);
-	target.WriteSmartPointer(m_PixelShader);
-	target.WriteSmartPointer(m_AlphaState);
-	target.WriteSmartPointer(m_CullState);
-	target.WriteSmartPointer(m_DepthState);
-	target.WriteSmartPointer(m_OffsetState);
-	target.WriteSmartPointer(m_StencilState);
-	target.WriteSmartPointer(m_WireState);
+    target;
+	//target.WriteSmartPointer(m_VertexShader);
+	//target.WriteSmartPointer(m_PixelShader);
+	//target.WriteSmartPointer(m_AlphaState);
+	//target.WriteSmartPointer(m_CullState);
+	//target.WriteSmartPointer(m_DepthState);
+	//target.WriteSmartPointer(m_OffsetState);
+	//target.WriteSmartPointer(m_StencilState);
+	//target.WriteSmartPointer(m_WireState);
 }
 
 void Rendering::VisualPassImpl
 	::Load(BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ReadSmartPointer(m_VertexShader);
-	source.ReadSmartPointer(m_PixelShader);
-	source.ReadSmartPointer(m_AlphaState);
-	source.ReadSmartPointer(m_CullState);
-	source.ReadSmartPointer(m_DepthState);
-	source.ReadSmartPointer(m_OffsetState);
-	source.ReadSmartPointer(m_StencilState);
-	source.ReadSmartPointer(m_WireState);
+    source;
+	//source.ReadSmartPointer(m_VertexShader);
+	//source.ReadSmartPointer(m_PixelShader);
+	//source.ReadSmartPointer(m_AlphaState);
+	//source.ReadSmartPointer(m_CullState);
+	//source.ReadSmartPointer(m_DepthState);
+	//source.ReadSmartPointer(m_OffsetState);
+	//source.ReadSmartPointer(m_StencilState);
+	//source.ReadSmartPointer(m_WireState);
 }
 
 void Rendering::VisualPassImpl
 	::Link(ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ResolveObjectSmartPointerLink(m_VertexShader);
-	source.ResolveObjectSmartPointerLink(m_PixelShader);
-	source.ResolveObjectSmartPointerLink(m_AlphaState);
-	source.ResolveObjectSmartPointerLink(m_CullState);
-	source.ResolveObjectSmartPointerLink(m_DepthState);
-	source.ResolveObjectSmartPointerLink(m_OffsetState);
-	source.ResolveObjectSmartPointerLink(m_StencilState);
-	source.ResolveObjectSmartPointerLink(m_WireState);
+    source;
+	//source.ResolveObjectSmartPointerLink(m_VertexShader);
+	//source.ResolveObjectSmartPointerLink(m_PixelShader);
+	//source.ResolveObjectSmartPointerLink(m_AlphaState);
+	//source.ResolveObjectSmartPointerLink(m_CullState);
+	//source.ResolveObjectSmartPointerLink(m_DepthState);
+	//source.ResolveObjectSmartPointerLink(m_OffsetState);
+	//source.ResolveObjectSmartPointerLink(m_StencilState);
+	//source.ResolveObjectSmartPointerLink(m_WireState);
 }
 
 void Rendering::VisualPassImpl
 	::Register(ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_VertexShader);
-	target.RegisterSmartPointer(m_PixelShader);
-	target.RegisterSmartPointer(m_AlphaState);
-	target.RegisterSmartPointer(m_CullState);
-	target.RegisterSmartPointer(m_DepthState);
-	target.RegisterSmartPointer(m_OffsetState);
-	target.RegisterSmartPointer(m_StencilState);
-	target.RegisterSmartPointer(m_WireState);
+    target;
+	//target.RegisterSmartPointer(m_VertexShader);
+	//target.RegisterSmartPointer(m_PixelShader);
+	//target.RegisterSmartPointer(m_AlphaState);
+	//target.RegisterSmartPointer(m_CullState);
+	//target.RegisterSmartPointer(m_DepthState);
+	//target.RegisterSmartPointer(m_OffsetState);
+	//target.RegisterSmartPointer(m_StencilState);
+	//target.RegisterSmartPointer(m_WireState);
 }
 
 const CoreTools::ObjectSmartPointer Rendering::VisualPassImpl
@@ -339,7 +342,7 @@ const Rendering::ConstVertexShaderSmartPointer Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_VertexShader.GetConstSmartPointer();
+	return m_VertexShader;
 }
 
 const Rendering::ConstPixelShaderSmartPointer Rendering::VisualPassImpl
@@ -347,7 +350,7 @@ const Rendering::ConstPixelShaderSmartPointer Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_PixelShader.GetConstSmartPointer();
+	return m_PixelShader ;
 }
 
 const Rendering::ConstAlphaStateSmartPointer Rendering::VisualPassImpl
@@ -355,7 +358,7 @@ const Rendering::ConstAlphaStateSmartPointer Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_AlphaState.GetConstSmartPointer();
+	return m_AlphaState ;
 }
 
 const Rendering::ConstCullStateSmartPointer Rendering::VisualPassImpl
@@ -363,7 +366,7 @@ const Rendering::ConstCullStateSmartPointer Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_CullState.GetConstSmartPointer();
+	return m_CullState ;
 }
 
 const Rendering::ConstDepthStateSmartPointer Rendering::VisualPassImpl
@@ -371,7 +374,7 @@ const Rendering::ConstDepthStateSmartPointer Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_DepthState.GetConstSmartPointer();
+	return m_DepthState ;
 
 }
 
@@ -380,7 +383,7 @@ const Rendering::ConstOffsetStateSmartPointer Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_OffsetState.GetConstSmartPointer();
+	return m_OffsetState  ;
 }
 
 const Rendering::ConstStencilStateSmartPointer Rendering::VisualPassImpl
@@ -388,7 +391,7 @@ const Rendering::ConstStencilStateSmartPointer Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_StencilState.GetConstSmartPointer();
+	return m_StencilState ;
 }
 
 const Rendering::ConstWireStateSmartPointer Rendering::VisualPassImpl
@@ -396,7 +399,7 @@ const Rendering::ConstWireStateSmartPointer Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_WireState.GetConstSmartPointer();
+	return m_WireState ;
 
 }
 
@@ -477,7 +480,7 @@ void Rendering::VisualPassImpl
 	manager.Read(sizeof(int), &numSamplers);
 	manager.Read(sizeof(int), &numProfiles);
  
-	PixelShaderSmartPointer pixelShader{ NEW0 PixelShader(programName, numInputs, numOutputs, numConstants, numSamplers) };
+	PixelShaderSmartPointer pixelShader{ std::make_shared<PixelShader>(programName, numInputs, numOutputs, numConstants, numSamplers) };
 	pixelShader->LoadShader(manager, numProfiles);
 	SetPixelShader(pixelShader);
 }
@@ -529,3 +532,4 @@ void Rendering::VisualPassImpl
 	wireState->LoadState(manager);
 	SetWireState(wireState);
 }
+#include STSTEM_WARNING_POP

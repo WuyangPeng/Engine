@@ -32,13 +32,15 @@ namespace Mathematics
 		~RombergIntegral();
 		RombergIntegral(const RombergIntegral& rhs);
 		RombergIntegral& operator=(const RombergIntegral& rhs);
-
+		RombergIntegral(RombergIntegral&& rhs) = default;
+		RombergIntegral& operator=(RombergIntegral&& rhs) = default;
+		
 		CLASS_INVARIANT_DECLARE;
 
-		Real GetValue() const;
+		Real GetValue() const noexcept;
 
 	private:
-		void Calculate();
+		void Calculate() noexcept;
 
 	private:
 		int m_Order;

@@ -25,18 +25,18 @@ namespace Mathematics
 		// 输入顶点的组成部分被截断为64位整数，
 		// 所以你应该确保顶点是足够大的分配好的数值。
 		explicit Query3Int64(const std::vector<Vector3D>& vertices);
-		virtual ~Query3Int64();
+		 ~Query3Int64();
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		// 运行时类型信息。
-		virtual QueryType GetType() const override;
+		 QueryType GetType() const override;
 
-		virtual PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
-		virtual PlaneQueryType ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const override;
+		 PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
+		 PlaneQueryType ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const override;
 
-		virtual CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
-		virtual CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const override;
+		 CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
+		 CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const override;
 	};
 
 	using Query3Int64f = Query3Int64<float>;

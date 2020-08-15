@@ -11,7 +11,10 @@
 #include "IntersectorDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26455)
 template <typename Real, template <typename> class Vector>
 Mathematics::StaticIntersector<Real, Vector>
 	::StaticIntersector(const Real epsilon)
@@ -38,5 +41,5 @@ bool Mathematics::StaticIntersector<Real, Vector>
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT	
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_DETAIL_H

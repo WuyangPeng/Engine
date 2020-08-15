@@ -23,6 +23,7 @@ namespace Network
 
 	public:
 		BufferReceiveStreamImpl(const MessageBufferSharedPtr& messageBuffer, ParserStrategy parserStrategy);
+		~BufferReceiveStreamImpl() = default;
 
 		BufferReceiveStreamImpl(const BufferReceiveStreamImpl& rhs);
 		BufferReceiveStreamImpl& operator=(const BufferReceiveStreamImpl& rhs);
@@ -34,7 +35,7 @@ namespace Network
 		void OnEvent(uint64_t socketID, const SocketManagerSharedPtr& socketManager);
 
 		// 如果读取未完成，需要继续解析
-		bool IsFinish() const;
+		bool IsFinish() const noexcept;
 
 		void PushBack(const MessageBufferSharedPtr& messageBuffer);
 

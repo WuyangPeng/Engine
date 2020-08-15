@@ -33,7 +33,7 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		const ResourceSharedPtr GetResourceSharedPtr() const;
+		const ResourceSharedPtr GetResourceSharedPtr() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(ResourceManagerLock);

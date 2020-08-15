@@ -10,14 +10,17 @@
 #include "Curve2.h"
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CURVE2_DETAIL)
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "Mathematics/Algebra/Vector2DTools.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 template <typename Real>
 Mathematics::Curve2<Real>
-	::Curve2(Real tmin, Real tmax)
+	::Curve2(Real tmin, Real tmax) noexcept
 	:mTMin{ tmin }, mTMax{ tmax }
 {
     
@@ -25,20 +28,20 @@ Mathematics::Curve2<Real>
 
 template <typename Real>
 Mathematics::Curve2<Real>
-	::~Curve2()
+	::~Curve2() noexcept
 {
 }
 
 template <typename Real>
 Real Mathematics::Curve2<Real>
-	::GetMinTime() const
+	::GetMinTime() const noexcept
 {
     return mTMin;
 }
 
 template <typename Real>
 Real Mathematics::Curve2<Real>
-	::GetMaxTime() const
+	::GetMaxTime() const noexcept
 {
     return mTMax;
 }
@@ -56,8 +59,8 @@ template <typename Real>
 Real Mathematics::Curve2<Real>
 	::GetSpeed(Real t) const
 {
-    Vector2D<Real> velocity = GetFirstDerivative(t);
-	Real speed = Vector2DTools<Real>::VectorMagnitude(velocity);
+    const Vector2D<Real> velocity = GetFirstDerivative(t);
+	const Real speed = Vector2DTools<Real>::VectorMagnitude(velocity);
     return speed;
 }
 
@@ -101,8 +104,8 @@ template <typename Real>
 Real Mathematics::Curve2<Real>
 	::GetCurvature(Real t) const
 {
-	auto der1 = GetFirstDerivative(t);
-	auto der2 = GetSecondDerivative(t);
+	const auto der1 = GetFirstDerivative(t);
+	const auto der2 = GetSecondDerivative(t);
 	auto speedSqr = Vector2DTools<Real>::VectorMagnitudeSquared(der1);
 
     if (speedSqr >= Math<Real>::sm_ZeroTolerance)
@@ -125,9 +128,9 @@ void Mathematics::Curve2<Real>
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
     points = NEW1<Vector2D<Real> >(numPoints);
 
-	auto temp1 = mTMax - mTMin;
-	auto temp2 = numPoints - 1;
-	auto delta = (temp1)/(temp2);
+	const auto temp1 = mTMax - mTMin;
+	const auto temp2 = numPoints - 1;
+	const auto delta = (temp1)/(temp2);
 
     for (auto i = 0; i < numPoints; ++i)
     {
@@ -143,7 +146,7 @@ void Mathematics::Curve2<Real>
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
     points = NEW1<Vector2D<Real> >(numPoints);
 
-	auto temp = numPoints - 1;
+	const auto temp = numPoints - 1;
 	auto delta = GetTotalLength()/(temp);
 
     for (auto i = 0; i < numPoints; ++i)
@@ -153,7 +156,7 @@ void Mathematics::Curve2<Real>
         points[i] = GetPosition(t);
     }
 } 
-
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CURVE2_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_CURVE2_DETAIL_H

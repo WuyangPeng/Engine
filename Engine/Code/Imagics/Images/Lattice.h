@@ -22,24 +22,25 @@ namespace Imagics
 		virtual ~Lattice ();
 		
 		// Data access.
-		int GetDimensions () const;
-		const int* GetBounds () const;
-		int GetBound (int i) const;
-		int GetQuantity () const;
-		const int* GetOffsets () const;
-		int GetOffset (int i) const;
+		int GetDimensions () const noexcept;
+		const int* GetBounds () const noexcept;
+		int GetBound (int i) const noexcept; 
+		int GetQuantity () const noexcept;
+		const int* GetOffsets () const noexcept;
+		int GetOffset (int i) const noexcept;
 		
 		// Assignment.
 		Lattice& operator= (const Lattice& lattice);
+		Lattice& operator= (Lattice&& lattice) = default;
 		
 		// Comparisons.
-		bool operator== (const Lattice& lattice) const;
-		bool operator!= (const Lattice& lattice) const;
+		bool operator== (const Lattice& lattice) const noexcept;
+		bool operator!= (const Lattice& lattice) const noexcept;
 		
 		// Conversions between n-dim and 1-dim structures.  The coordinate arrays
 		// must have the same number of elements as the dimensions of the lattice.
-		int GetIndex (const int* coord) const;
-		void GetCoordinates (int index, int* coord) const;
+		int GetIndex (const int* coord) const noexcept;
+		void GetCoordinates (int index, int* coord) const noexcept;
 		
 		// Streaming.
 		bool Load(CoreTools::ReadFileManager& inFile);
@@ -52,13 +53,14 @@ namespace Imagics
 		// bound array.
 		Lattice (int numDimensions, int* bounds);
 		Lattice (const Lattice& lattice);
-		Lattice ();
+		Lattice (Lattice&& lattice) = default;
+		Lattice () noexcept;
 		
 		// For deferred creation of bounds.  Lattice accepts responsibility
 		// for deleting the bound array.
 		Lattice (int numDimensions);
 		void SetBounds (int* bounds);
-		void ComputeQuantityAndOffsets ();
+		void ComputeQuantityAndOffsets () noexcept;
 		
 		int mNumDimensions;
 		int* mBounds;

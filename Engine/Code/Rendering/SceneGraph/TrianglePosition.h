@@ -27,9 +27,9 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 
-		const APoint GetFirstPosition() const;
-		const APoint GetSecondPosition() const;
-		const APoint GetThirdPosition() const;
+		const APoint GetFirstPosition() const noexcept;
+                const APoint GetSecondPosition() const noexcept;
+                const APoint GetThirdPosition() const noexcept;
 
 	private:
 		IMPL_TYPE_DECLARE(TrianglePosition);

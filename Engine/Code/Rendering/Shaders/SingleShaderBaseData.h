@@ -40,8 +40,8 @@ namespace Rendering
 		void SetData (const std::string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic);		
 		
 		const std::string GetName () const;
-		ShaderFlags::VariableType GetType () const;
-		ShaderFlags::VariableSemantic GetSemantic () const;	
+		ShaderFlags::VariableType GetType () const noexcept;
+                ShaderFlags::VariableSemantic GetSemantic() const noexcept;	
 
 		void Load (BufferSource& source);
 		void Save (BufferTarget& target) const;

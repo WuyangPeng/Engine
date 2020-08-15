@@ -17,17 +17,12 @@ Network::MessageTypeConditionSpecific
 {
 	if (m_Version.empty())
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("版本号数据为空。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("版本号数据为空。"s));
 	}
 
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
-
-Network::MessageTypeConditionSpecific
-	::~MessageTypeConditionSpecific()
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Network::MessageTypeConditionSpecific

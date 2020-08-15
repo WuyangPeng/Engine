@@ -24,17 +24,17 @@ namespace Mathematics
 
 	public:
 		DistanceMultipleClosestPointsResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints);
-		virtual ~DistanceMultipleClosestPointsResult();
+		  ~DistanceMultipleClosestPointsResult();
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		virtual const Vector GetLhsClosestPoint(int index) const override;
-		virtual const Vector GetRhsClosestPoint(int index) const override;
+		  const Vector GetLhsClosestPoint(int index) const override;
+		  const Vector GetRhsClosestPoint(int index) const override;
 
-		virtual int GetLhsClosestPointSize() const override;
-		virtual int GetRhsClosestPointSize() const override;
+		  int GetLhsClosestPointSize() const override;
+		  int GetRhsClosestPointSize() const override;
 
-		virtual ImplTypePtr Clone() const override;
+		  ImplTypePtr Clone() const override;
 
 	private:
 		ClosestPoints m_LhsClosestPoints;

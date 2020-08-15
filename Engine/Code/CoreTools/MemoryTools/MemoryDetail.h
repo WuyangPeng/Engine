@@ -12,6 +12,13 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+	#include SYSTEM_WARNING_DISABLE(26487)
+	#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26471)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
 template <typename T>
 T* CoreTools::Memory
 	::New1DArray(const int bound)
@@ -328,7 +335,7 @@ void CoreTools::Memory
 		DeleteArray(data, bytesNumber);
 
 		data = nullptr;
-	}
+ 	}
 }
 
 // private
@@ -360,12 +367,12 @@ void CoreTools::Memory
 	::Delete2DArray(T**& data)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
-
+ 
 	if (data != nullptr)
 	{
 		CORE_TOOLS_ASSERTION_2(MEMORY_MANAGER_SINGLETON.GetMemBlockDimensions(data) == 2, "维度不匹配！");
 
-		auto bytesNumber = MEMORY_MANAGER_SINGLETON.GetBytesNumber(data[0]) / sizeof(T);
+		const auto bytesNumber = MEMORY_MANAGER_SINGLETON.GetBytesNumber(data[0]) / sizeof(T);
 
 		DeleteArray(data[0], bytesNumber);
 
@@ -386,7 +393,7 @@ void CoreTools::Memory
 	{
 		CORE_TOOLS_ASSERTION_2(MEMORY_MANAGER_SINGLETON.GetMemBlockDimensions(data) == 3, "维度不匹配！");
 
-		auto bytesNumber = MEMORY_MANAGER_SINGLETON.GetBytesNumber(data[0][0]) / sizeof(T);
+		const auto bytesNumber = MEMORY_MANAGER_SINGLETON.GetBytesNumber(data[0][0]) / sizeof(T);
 
 		DeleteArray(data[0][0], bytesNumber);
 
@@ -426,6 +433,8 @@ void CoreTools::Memory
 		data = nullptr;
 	}
 }
+
+#include STSTEM_WARNING_POP
 
 #endif // CORE_TOOLS_MEMORY_TOOLS_MEMORY_DETAIL_H
 

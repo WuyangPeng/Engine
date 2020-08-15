@@ -25,8 +25,12 @@ namespace Rendering
 		using PlatformTexture3DPtr = std::shared_ptr<ClassType>;
 
 	public:
-		PlatformTexture3DImpl();
+		PlatformTexture3DImpl() noexcept;
 		virtual ~PlatformTexture3DImpl();
+                PlatformTexture3DImpl(const PlatformTexture3DImpl&) = default;
+                PlatformTexture3DImpl& operator=(const PlatformTexture3DImpl&) = default;
+                PlatformTexture3DImpl(PlatformTexture3DImpl&&) = default;
+                PlatformTexture3DImpl& operator=(PlatformTexture3DImpl&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 

@@ -14,10 +14,15 @@
 #include "System/OpenGL/OpenGLAPI.h"
 #include "Rendering/Resources/VertexFormat.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26429)
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 Rendering::OpenGLVertexFormatData<usage>
-	::OpenGLVertexFormatData()
+	::OpenGLVertexFormatData() noexcept
 	:m_Has{ 0 }, m_Channels{ 0 },m_Type{ System::OpenGLData::None }, m_Offset{ 0 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -38,11 +43,11 @@ void Rendering::OpenGLVertexFormatData<usage>
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	int index = vertexFormat->GetIndex(usage);
+	const int index = vertexFormat->GetIndex(usage);
 	if (0 <= index)
 	{
 		m_Has = 1;
-		VertexFormatFlags::AttributeType type = vertexFormat->GetAttributeType(index); 
+		const VertexFormatFlags::AttributeType type = vertexFormat->GetAttributeType(index); 
 		m_Channels = g_OpenGLAttributeChannels[System::EnumCastUnderlying(type)];
 		m_Type = System::OpenGLData(g_OpenGLAttributeType[System::EnumCastUnderlying(type)]);
 		m_Offset = vertexFormat->GetOffset(index);
@@ -51,7 +56,7 @@ void Rendering::OpenGLVertexFormatData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 void Rendering::OpenGLVertexFormatData<usage>
-	::Set( UInt has,UInt channels, DataType type,UInt offset )
+	::Set( UInt has,UInt channels, DataType type,UInt offset ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -63,7 +68,7 @@ void Rendering::OpenGLVertexFormatData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 bool Rendering::OpenGLVertexFormatData<usage>
-	::IsHas() const
+	::IsHas() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -72,7 +77,7 @@ bool Rendering::OpenGLVertexFormatData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 System::OpenGLUInt Rendering::OpenGLVertexFormatData<usage>
-	::GetChannels() const
+	::GetChannels() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -81,7 +86,7 @@ System::OpenGLUInt Rendering::OpenGLVertexFormatData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 System::OpenGLData Rendering::OpenGLVertexFormatData<usage>
-	::GetType() const
+	::GetType() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -90,7 +95,7 @@ System::OpenGLData Rendering::OpenGLVertexFormatData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 System::OpenGLUInt Rendering::OpenGLVertexFormatData<usage>
-	::GetOffset() const
+	::GetOffset() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -100,83 +105,83 @@ System::OpenGLUInt Rendering::OpenGLVertexFormatData<usage>
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Position>
-	::Enable(int stride);
+	::Enable(int stride) noexcept;
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Normal>
-	::Enable(int stride); 
+	::Enable(int stride) noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Tangent>
-	::Enable(int stride); 
+	::Enable(int stride) noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Binormal>
-	::Enable(int stride); 
+	::Enable(int stride) noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendIndices>
-	::Enable(int stride); 
+	::Enable(int stride) noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendWeight>
-	::Enable(int stride); 
+	::Enable(int stride) noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::FogCoord>
-	::Enable(int stride); 
+	::Enable(int stride) noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Psize>
-	::Enable(int stride); 
+	::Enable(int stride) noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Position>
-	::Disable(); 
+	::Disable() noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Normal>
-	::Disable(); 
+	::Disable() noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Tangent>
-	::Disable(); 
+	::Disable() noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Binormal>
-	::Disable(); 
+	::Disable() noexcept; 
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendIndices>
-	::Disable();
+	::Disable() noexcept;
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendWeight>
-	::Disable();
+	::Disable() noexcept;
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::FogCoord>
-	::Disable();
+	::Disable() noexcept;
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Psize>
-	::Disable();
-
+	::Disable() noexcept;
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_DATA_DETAIL_H
 
 

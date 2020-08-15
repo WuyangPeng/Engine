@@ -14,7 +14,7 @@ using std::make_shared;
 using std::string;
 
 Network::ConfigurationStrategyFactory
-	::ConfigurationStrategyFactory()
+	::ConfigurationStrategyFactory() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }

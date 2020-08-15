@@ -24,7 +24,7 @@ namespace Network
 		using ImplPtr = std::shared_ptr<MessageEventContainerImpl>;
 
 	public:
-		MultiMessageEventContainerImpl();
+		MultiMessageEventContainerImpl() noexcept;
 		explicit MultiMessageEventContainerImpl(const NetworkMessageEventSharedPtr& messageEvent);
 
 		CLASS_INVARIANT_DECLARE;

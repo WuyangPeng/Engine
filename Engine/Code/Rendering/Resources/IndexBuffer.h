@@ -18,14 +18,18 @@ namespace Rendering
 	public:
 		using ClassType = IndexBuffer;
 		using ParentType = Buffer;
-		using IndexBufferSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
-		using ConstIndexBufferSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>;
+		using IndexBufferSmartPointer = std::shared_ptr<ClassType>;
+		using ConstIndexBufferSmartPointer = std::shared_ptr<const ClassType>;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
 		IndexBuffer ();
 		IndexBuffer (int numIndices, int indexSize,BufferUsage usage = BufferUsage::Static);
-		virtual ~IndexBuffer (); 
+		  ~IndexBuffer (); 
+		  IndexBuffer(const IndexBuffer&) = default;
+		  IndexBuffer& operator=(const IndexBuffer&) = default;
+		   IndexBuffer( IndexBuffer&&) = default;
+		  IndexBuffer& operator=( IndexBuffer&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 				
@@ -35,8 +39,8 @@ namespace Rendering
 		// 设置这个的能力是在多个几何图元共享索引缓冲区时有用,
 		// 每个基元使用一套连续索引。
 		// 在这种情况下,应用程序对于每一个几何元素动态调用SetNumElements和SetOffset。
-		void SetOffset (int offset);
-		int GetOffset () const;
+		void SetOffset (int offset) noexcept;
+		int GetOffset () const noexcept;
 
 		void SaveToFile(WriteFileManager& outFile) const;
 		void ReadFromFile(ReadFileManager& inFile);

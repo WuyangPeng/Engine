@@ -25,13 +25,13 @@ namespace Network
 	public:
 		BufferSendStream(int bytesTotal, ParserStrategy parserStrategy);
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(BufferSendStream);
+		CLASS_INVARIANT_DECLARE;
 
 		bool Insert(const MessageInterfaceSharedPtr& message);
 		void Save(const MessageBufferSharedPtr& messageBuffer);
 		void Clear();
 
-		bool IsEmpty() const;
+		bool IsEmpty() const noexcept;
 		int GetCurrentSize() const;
 
 	private:

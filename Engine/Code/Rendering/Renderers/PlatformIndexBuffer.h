@@ -32,6 +32,10 @@ namespace Rendering
 	public:
 		PlatformIndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer);
 		~PlatformIndexBuffer ();
+		PlatformIndexBuffer(const PlatformIndexBuffer&) = delete;
+		PlatformIndexBuffer& operator=(const PlatformIndexBuffer&) = delete;
+		PlatformIndexBuffer( PlatformIndexBuffer&&) = delete;
+		PlatformIndexBuffer& operator=( PlatformIndexBuffer&&) = delete;
 
 		CLASS_INVARIANT_DECLARE;
 		

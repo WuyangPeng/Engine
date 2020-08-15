@@ -12,7 +12,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 Rendering::ClodMeshVertex
-	::ClodMeshVertex()
+	::ClodMeshVertex() noexcept
 	:m_AdjEdges{}, m_AdjTriangles{}, m_Collapsible{ true }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -37,7 +37,7 @@ void Rendering::ClodMeshVertex
 }
 
 void Rendering::ClodMeshVertex
-	::SetCollapsible(bool collapsible)
+	::SetCollapsible(bool collapsible) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -61,7 +61,7 @@ int Rendering::ClodMeshVertex
 }
 
 bool Rendering::ClodMeshVertex
-	::IsCollapsible() const
+	::IsCollapsible() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -69,7 +69,7 @@ bool Rendering::ClodMeshVertex
 }
 
 Rendering::ClodMeshVertex::TriangleKeySetConstIter Rendering::ClodMeshVertex
-	::GetTriangleKeyBegin() const
+	::GetTriangleKeyBegin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -77,7 +77,7 @@ Rendering::ClodMeshVertex::TriangleKeySetConstIter Rendering::ClodMeshVertex
 }
 
 Rendering::ClodMeshVertex::TriangleKeySetConstIter Rendering::ClodMeshVertex
-	::GetTriangleKeyEnd() const
+	::GetTriangleKeyEnd() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -85,7 +85,7 @@ Rendering::ClodMeshVertex::TriangleKeySetConstIter Rendering::ClodMeshVertex
 }
 
 Rendering::ClodMeshVertex::EdgeKeySetConstIter Rendering::ClodMeshVertex
-	::GetEdgeKeyBegin() const
+	::GetEdgeKeyBegin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -93,7 +93,7 @@ Rendering::ClodMeshVertex::EdgeKeySetConstIter Rendering::ClodMeshVertex
 }
 
 Rendering::ClodMeshVertex::EdgeKeySetConstIter Rendering::ClodMeshVertex
-	::GetEdgeKeyEnd() const
+	::GetEdgeKeyEnd() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

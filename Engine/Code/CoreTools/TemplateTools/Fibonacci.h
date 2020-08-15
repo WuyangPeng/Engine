@@ -39,7 +39,7 @@ namespace CoreTools
 	};
 
 	uint32_t CORE_TOOLS_DEFAULT_DECLARE RecursiveFibonacci(uint32_t integer) noexcept;
-	uint32_t CORE_TOOLS_DEFAULT_DECLARE NonRecursiveFibonacci(uint32_t integer) noexcept;
+	uint32_t CORE_TOOLS_DEFAULT_DECLARE NonRecursiveFibonacci(uint32_t integer);
 }
 
 #define FIBONACCI( n ) CoreTools::Fibonacci< n >::Value

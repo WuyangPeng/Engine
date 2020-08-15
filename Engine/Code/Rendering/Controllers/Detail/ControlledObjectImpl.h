@@ -32,8 +32,13 @@ namespace Rendering
 		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
 
     public:
-        explicit ControlledObjectImpl(ControllerInterface* realThis);
+                explicit ControlledObjectImpl(ControllerInterface* realThis) noexcept;
         ~ControlledObjectImpl();
+
+        ControlledObjectImpl(const ControlledObjectImpl&) = delete;
+        ControlledObjectImpl& operator=(const ControlledObjectImpl&) = delete;
+        ControlledObjectImpl(ControlledObjectImpl&&) = delete;
+        ControlledObjectImpl& operator=(ControlledObjectImpl&&) = delete;
         
         CLASS_INVARIANT_DECLARE;
         
@@ -43,11 +48,11 @@ namespace Rendering
         int GetNumControllers () const;
         ConstControllerInterfaceSmartPointer GetConstController (int index) const;
 		ControllerInterfaceSmartPointer GetController (int index);
-        void AttachController (ControllerInterfaceSmartPointer& controller);
-        void DetachController (ControllerInterfaceSmartPointer& controller);
+        void AttachController (ControllerInterfaceSmartPointer controller);
+        void DetachController (ControllerInterfaceSmartPointer controller);
         void DetachAllControllers ();
         bool UpdateControllers (double applicationTime);
-		void AttachControllerInCopy(ControllerInterfaceSmartPointer& controller);
+		void AttachControllerInCopy(ControllerInterfaceSmartPointer controller);
         
         void Load (BufferSource& source);
 		void Save (BufferTarget& target) const;

@@ -42,16 +42,16 @@
 #endif // defined(CORE_TOOLS_USE_ASSERT) && 2 <= USER_ASSERT_LEVEL
 
 #define CORE_TOOLS_OBJECT_FACTORY_DECLARE(className) \
-	    protected: explicit className(LoadConstructor value); \
+	    public: explicit className(LoadConstructor value); \
 		private: static bool sm_StreamRegistered; \
 		public: static bool RegisterFactory (); \
 		static void InitializeFactory (); static void TerminateFactory (); \
 		static CoreTools::ObjectInterfaceSmartPointer Factory (CoreTools::BufferSource& source)   
 
 #define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE \
-		virtual void Load (CoreTools::BufferSource& source) override; virtual void Link (CoreTools::ObjectLink& source) override; \
-		virtual void PostLink () override; virtual uint64_t Register(CoreTools::ObjectRegister& target) const override; \
-		virtual void Save (CoreTools::BufferTarget& target) const override; virtual int GetStreamingSize () const override;    
+		void Load (CoreTools::BufferSource& source) override; void Link (CoreTools::ObjectLink& source) override; \
+		void PostLink () override; uint64_t Register(CoreTools::ObjectRegister& target) const override; \
+		void Save (CoreTools::BufferTarget& target) const override; int GetStreamingSize () const override;    
 
 #define CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(className) \
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(className); \
@@ -64,7 +64,7 @@
 
 #define CORE_TOOLS_FACTORY_DEFINE(namespaceName,className) \
         CoreTools::ObjectInterfaceSmartPointer namespaceName::className::Factory(CoreTools::BufferSource& source) { \
-        CoreTools::ObjectInterfaceSmartPointer object{ NEW0 className(LoadConstructor::ConstructorLoader) }; \
+        CoreTools::ObjectInterfaceSmartPointer object{ std::make_shared<className>(LoadConstructor::ConstructorLoader) }; \
         object->Load(source); return object; }
 
 #define CORE_TOOLS_STREAM_REGISTER(className) \
@@ -94,7 +94,7 @@
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_REGISTER_DEFINE(namespaceName,className) \
 		uint64_t namespaceName::className::Register( CoreTools::ObjectRegister& target ) const { \
-		CLASS_IS_VALID_CONST_0;	auto uniqueID = ParentType::Register(target); \
+		CLASS_IS_VALID_CONST_0; const auto uniqueID = ParentType::Register(target); \
 		if (uniqueID != 0) { m_Impl->Register(target); } return uniqueID; }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(namespaceName,className) \

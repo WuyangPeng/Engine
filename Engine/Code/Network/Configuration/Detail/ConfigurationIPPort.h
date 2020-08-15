@@ -20,12 +20,12 @@ namespace Network
 
 	public:
 		ConfigurationIPPort(const std::string& ip, int port);
-		ConfigurationIPPort();
+		ConfigurationIPPort() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		std::string GetIP() const;
-		int GetPort() const;
+		int GetPort() const noexcept;
 
 	private:
 		std::string m_IP;

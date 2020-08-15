@@ -45,7 +45,7 @@ bool Network::IntegerMessage<E>
 
 template<typename E>
 const CoreTools::Rtti& Network::IntegerMessage<E>
-	::GetRttiType() const
+	::GetRttiType() const noexcept
 {
 	return sm_Type;
 }
@@ -69,9 +69,8 @@ Network::MessageInterfaceSharedPtr Network::IntegerMessage<E>
 }
 
 template<typename E>
-Network::IntegerMessage<E>
-	::IntegerMessage(LoadConstructor value, int64_t messageID)
-	: ParentType{ value,messageID }, m_Integer{ }
+Network::IntegerMessage<E>::IntegerMessage(LoadConstructor value, int64_t messageID) noexcept
+    : ParentType{ value, messageID }, m_Integer{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }

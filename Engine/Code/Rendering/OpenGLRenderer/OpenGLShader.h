@@ -26,8 +26,7 @@ namespace Rendering
 		// base-class destructor.  This is not a problem because the
 		// derived-class destructors are called explicitly when the shaders
 		// are destroyed by Renderer.
-		OpenGLShader();
-		~OpenGLShader();
+		OpenGLShader() noexcept; 
 
 	protected:
 		void SetSamplerState (Renderer* renderer, const ShaderBase* shader,int profile, 

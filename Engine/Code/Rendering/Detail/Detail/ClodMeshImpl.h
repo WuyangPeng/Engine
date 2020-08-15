@@ -35,8 +35,8 @@ namespace Rendering
 		using Object = CoreTools::Object;
 
 	public:
-		ClodMeshImpl();		
-		explicit ClodMeshImpl(const CollapseRecordArraySmartPointer& recordArray);
+		ClodMeshImpl() noexcept;		
+		explicit ClodMeshImpl(const CollapseRecordArraySmartPointer& recordArray) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -47,8 +47,8 @@ namespace Rendering
 		void Register(ObjectRegister& target) const;
  
 		int GetNumRecords () const;
-		int GetTargetRecord() const;
-		void SetTargetRecord(int targetRecord);	
+		int GetTargetRecord() const noexcept;
+		void SetTargetRecord(int targetRecord) noexcept;	
 
 		// 几何更新。Draw函数将调用此更新，并根据目标记录的当前值调整TrianglesMesh数量。
 		// 可以在不需要显示网格的应用程序手动调用。

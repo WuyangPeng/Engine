@@ -31,7 +31,7 @@ namespace Rendering
 							  ShaderFlags::SamplerCoordinate coordinate0 = ShaderFlags::SamplerCoordinate::ClampEdge,
 							  ShaderFlags::SamplerCoordinate coordinate1 = ShaderFlags::SamplerCoordinate::ClampEdge);
 
-		virtual ~MaterialTextureEffect ();
+		 
 
 		// Any change in sampler state is made via the pixel shader.
 		PixelShader* GetPixelShader () const;
@@ -49,16 +49,19 @@ namespace Rendering
 	private:
 		static int msDx9VRegisters[2];
 		static int msOglVRegisters[2];
-		static int* msVRegisters[ShaderFlags::MaxProfiles];
-		static std::string msVPrograms[ShaderFlags::MaxProfiles];
+		static int* msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+		static std::string msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
 		static int msAllPTextureUnits[1];
-		static int* msPTextureUnits[ShaderFlags::MaxProfiles];
-		static std::string msPPrograms[ShaderFlags::MaxProfiles];
+		static int* msPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+		static std::string msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
 	};
 
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(MaterialTextureEffect);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, MaterialTextureEffect);
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_LOCAL_EFFECTS_MATERIAL_TEXTURE_EFFECT_H

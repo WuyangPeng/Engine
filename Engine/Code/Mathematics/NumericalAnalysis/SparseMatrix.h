@@ -37,8 +37,8 @@ namespace Mathematics
 		const Real& operator() (int row, int column) const;
 		Real& operator() (int row, int column);
 
-		const ConstIter GetBegin() const;
-		const ConstIter GetEnd() const;
+		const ConstIter GetBegin() const noexcept;
+		const ConstIter GetEnd() const noexcept;
 
 	private:
 		using SparseMatrixEntry = std::map<SparseMatrixIndex, Real>; 

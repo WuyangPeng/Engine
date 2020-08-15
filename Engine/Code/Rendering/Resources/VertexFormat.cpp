@@ -23,7 +23,11 @@
  
 using std::vector;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26446)
 CORE_TOOLS_RTTI_DEFINE(Rendering,VertexFormat);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,VertexFormat);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,VertexFormat); 
@@ -41,7 +45,12 @@ Rendering::VertexFormat
 Rendering::VertexFormat
 	::~VertexFormat()
 {
-	RENDERER_MANAGE_SINGLETON.UnbindAll(this); 
+	EXCEPTION_TRY
+	{
+            RENDERER_MANAGE_SINGLETON.UnbindAll(this); 
+	}
+	EXCEPTION_ALL_CATCH(Rendering)
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -54,7 +63,7 @@ Rendering::VertexFormat::VertexFormatSmartPointer Rendering::VertexFormat
 {
 	auto numAttributes = boost::numeric_cast<int>(triple.size());
 
-	VertexFormatSmartPointer vertexformat{ NEW0 VertexFormat(numAttributes) };
+	VertexFormatSmartPointer vertexformat{ std::make_shared< VertexFormat>(numAttributes) };
 
 	auto offset = 0u;
 	for (auto i = 0; i < numAttributes; ++i)
@@ -73,7 +82,7 @@ Rendering::VertexFormat::VertexFormatSmartPointer Rendering::VertexFormat
 {
 	auto numAttributes = boost::numeric_cast<int>(triple.size());
 
-	VertexFormatSmartPointer vertexformat{ NEW0 VertexFormat(numAttributes) };
+	VertexFormatSmartPointer vertexformat{ std::make_shared < VertexFormat>(numAttributes) };
 
 	auto offset = 0u;
 	for (auto i = 0; i < numAttributes; ++i)
@@ -113,16 +122,16 @@ void Rendering::VertexFormat
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,SetStride,int,void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexFormat,GetNumAttributes,int)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,VertexFormat,GetNumAttributes,int)	
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetStreamIndex,int,unsigned int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetOffset,int,unsigned int)									
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetAttributeType,int,Rendering::VertexFormatFlags::AttributeType)									
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetAttributeUsage,int,Rendering::VertexFormatFlags::AttributeUsage)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetUsageIndex,int,unsigned int)	
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,VertexFormat,GetStride,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexFormat, GetStride, int)
 
 int Rendering::VertexFormat
-    ::GetIndex( AttributeUsage usage, unsigned int usageIndex ) const
+    ::GetIndex( AttributeUsage usage, unsigned int usageIndex ) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -130,19 +139,17 @@ int Rendering::VertexFormat
 }
 
 int Rendering::VertexFormat
-	::GetComponentSize( AttributeType type )
+	::GetComponentSize( AttributeType type ) noexcept
 {
 	return ImplType::GetComponentSize(type);
 }
 
-int Rendering::VertexFormat
-	::GetNumComponents( AttributeType type )
+int Rendering::VertexFormat ::GetNumComponents(AttributeType type) noexcept
 {
 	return ImplType::GetNumComponents(type);
 }
 
-int Rendering::VertexFormat
-	::GetTypeSize( AttributeType type )
+int Rendering::VertexFormat ::GetTypeSize(AttributeType type) noexcept
 {
 	return ImplType::GetTypeSize(type);
 }
@@ -239,7 +246,7 @@ Rendering::VertexFormat::VertexFormatSmartPointer Rendering::VertexFormat
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return VertexFormatSmartPointer{ NEW0 ClassType(*this) };
+	return VertexFormatSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 Rendering::VertexFormatSmartPointer Rendering::VertexFormat
@@ -248,10 +255,11 @@ Rendering::VertexFormatSmartPointer Rendering::VertexFormat
 	auto numAttributes = 0;
 	manager.Read(sizeof(int), &numAttributes);
 
-	VertexFormatSmartPointer vertexFormat{ NEW0 VertexFormat(numAttributes) };
+	VertexFormatSmartPointer vertexFormat{ std::make_shared < VertexFormat>(numAttributes) };
 
 	vertexFormat->ReadFromFile(manager);
 
 	return vertexFormat;
 }
 
+#include STSTEM_WARNING_POP

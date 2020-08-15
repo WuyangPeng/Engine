@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::CullStateImpl
-	::CullStateImpl()
+	::CullStateImpl() noexcept
 	:m_Enabled{ true }, m_CCWOrder{ true }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -23,32 +23,28 @@ Rendering::CullStateImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,CullStateImpl)
 
-bool Rendering::CullStateImpl
-	::IsEnabled() const
+bool Rendering::CullStateImpl ::IsEnabled() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Enabled;
 }
 
-void Rendering::CullStateImpl
-	::SetEnabled(bool enabled)
+void Rendering::CullStateImpl ::SetEnabled(bool enabled) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Enabled = enabled;
 }
 
-bool Rendering::CullStateImpl
-	::IsCCWOrder() const
+bool Rendering::CullStateImpl ::IsCCWOrder() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_CCWOrder;
 }
 
-void Rendering::CullStateImpl
-	::SetCCWOrder(bool cCWOrder)
+void Rendering::CullStateImpl ::SetCCWOrder(bool cCWOrder) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -89,8 +85,8 @@ void Rendering::CullStateImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto enabled = m_Enabled ? 1 : 0;
-	auto ccwOrder = m_CCWOrder ? 1 : 0;
+const auto enabled = m_Enabled ? 1 : 0;
+        const auto ccwOrder = m_CCWOrder ? 1 : 0;
 
 	manager.Write(sizeof(int), &enabled);
 	manager.Write(sizeof(int), &ccwOrder);

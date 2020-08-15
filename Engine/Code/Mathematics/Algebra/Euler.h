@@ -30,20 +30,20 @@ namespace Mathematics
 	public:
 		Euler(ExtractEulerResultType type, ExtractEulerResultOrder order,
 			  Real x0Angle, Real y0Angle, Real z0Angle,
-			  Real x1Angle, Real y1Angle, Real z1Angle);
+			  Real x1Angle, Real y1Angle, Real z1Angle) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		ExtractEulerResultType GetType() const;
-		ExtractEulerResultOrder GetOrder() const;
-		Real GetX0Angle() const;
-		Real GetY0Angle() const;
-		Real GetZ0Angle() const;
-		Real GetX1Angle() const;
-		Real GetY1Angle() const;
-		Real GetZ1Angle() const;
-		Real GetAngle(MatrixRotationAxis axisIndex) const;
-		void SetAngle(MatrixRotationAxis axisIndex, Real angle);
+		ExtractEulerResultType GetType() const noexcept;
+		ExtractEulerResultOrder GetOrder() const noexcept;
+		Real GetX0Angle() const noexcept;
+		Real GetY0Angle() const noexcept;
+		Real GetZ0Angle() const noexcept;
+		Real GetX1Angle() const noexcept;
+		Real GetY1Angle() const noexcept;
+		Real GetZ1Angle() const noexcept;
+		Real GetAngle(MatrixRotationAxis axisIndex) const noexcept;
+		void SetAngle(MatrixRotationAxis axisIndex, Real angle) noexcept;
 
 	private:
 		ExtractEulerResultType m_Type;

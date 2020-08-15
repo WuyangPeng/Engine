@@ -17,7 +17,10 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+ #include SYSTEM_WARNING_DISABLE(26418)
 Rendering::PickerImpl
 	::PickerImpl(const ConstSpatialSmartPointer& scene, const APoint& origin,const AVector& direction, float tMin, float tMax)
 	:m_Origin{ origin }, m_Direction{ direction }, m_TMin{ tMin }, m_TMax{ tMax }, m_Records{}
@@ -47,7 +50,7 @@ bool Rendering::PickerImpl
 
 
 bool Rendering::PickerImpl
-	::IsRecordsExist() const 
+	::IsRecordsExist() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -77,7 +80,7 @@ const Rendering::PickRecord Rendering::PickerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("记录不存在！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("记录不存在！"s));
 	}	
 }
 
@@ -105,7 +108,7 @@ const Rendering::PickRecord Rendering::PickerImpl
 		}
 		if (findIndex == -1)
 		{		
-			THROW_EXCEPTION(SYSTEM_TEXT("记录的值都是负数！"));		
+			THROW_EXCEPTION(SYSTEM_TEXT("记录的值都是负数！"s));		
 		}
 
 		for (auto i = findIndex + 1; i < numRecords; ++i)
@@ -121,7 +124,7 @@ const Rendering::PickRecord Rendering::PickerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("记录不存在！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("记录不存在！"s));
 	}	
 }
 
@@ -150,7 +153,7 @@ const Rendering::PickRecord Rendering::PickerImpl
 		}
 		if (closest == -1)
 		{
-			THROW_EXCEPTION(SYSTEM_TEXT("记录的值都是正数！"));
+			THROW_EXCEPTION(SYSTEM_TEXT("记录的值都是正数！"s));
 		}
 
 		for (auto i = findIndex + 1; i < numRecords; ++i)
@@ -168,8 +171,9 @@ const Rendering::PickRecord Rendering::PickerImpl
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("记录不存在！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("记录不存在！"s));
 	}	
 }
 
 
+#include STSTEM_WARNING_POP

@@ -19,7 +19,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include <type_traits>
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
 template <typename PlatformBufferType>
 Rendering::BufferManagement<PlatformBufferType>
 	::BufferManagement(RendererPtr ptr)
@@ -54,7 +56,7 @@ void Rendering::BufferManagement< PlatformBufferType>
 
     if (m_Buffers.find(buffer) == m_Buffers.end())
     {
-		PlatformBufferTypeSharedPtr platformBuffer{ std::make_shared<PlatformBufferType>(ptr.get(), buffer.GetData()) };
+		PlatformBufferTypeSharedPtr platformBuffer{ std::make_shared<PlatformBufferType>(ptr.get(), buffer.get()) };
 		m_Buffers.insert({ buffer, platformBuffer });
     }
 }
@@ -82,7 +84,7 @@ void Rendering::BufferManagement<PlatformBufferType>
 		return;
 	}
 
-    auto iter = m_Buffers.find(buffer);
+const auto iter = m_Buffers.find(buffer);
     PlatformBufferTypeSharedPtr platformBuffer;
     if (iter != m_Buffers.end())
     {
@@ -91,7 +93,7 @@ void Rendering::BufferManagement<PlatformBufferType>
     else
     {
         // 延迟构造。
-		platformBuffer = std::make_shared<PlatformIndexBuffer>(ptr.get(), buffer.GetData());
+		platformBuffer = std::make_shared<PlatformIndexBuffer>(ptr.get(), buffer.get());
 		m_Buffers.insert({ buffer,  platformBuffer });
     }
 
@@ -112,7 +114,7 @@ void Rendering::BufferManagement<PlatformBufferType>
 		return;
 	}
 
-	auto iter = m_Buffers.find(buffer);
+const auto iter = m_Buffers.find(buffer);
  
     if (iter != m_Buffers.end())
     {
@@ -136,7 +138,7 @@ void Rendering::BufferManagement<PlatformBufferType>
 		return;
 	}
 
-	auto iter = m_Buffers.find(buffer);
+	const auto iter = m_Buffers.find(buffer);
     PlatformBufferTypeSharedPtr platformBuffer;
     if (iter != m_Buffers.end())
     {
@@ -145,7 +147,7 @@ void Rendering::BufferManagement<PlatformBufferType>
     else
     {
         // 延迟构造。
-		platformBuffer = std::make_shared<PlatformBufferType>(ptr.get(), buffer.GetData());
+		platformBuffer = std::make_shared<PlatformBufferType>(ptr.get(), buffer.get());
 		m_Buffers.insert({ buffer,  platformBuffer });
     }
 
@@ -166,7 +168,7 @@ void Rendering::BufferManagement<PlatformBufferType>
 		return;
 	}
 
-	auto iter = m_Buffers.find(buffer);
+	const auto iter = m_Buffers.find(buffer);
  
     if (iter != m_Buffers.end())
     {
@@ -188,7 +190,7 @@ void* Rendering::BufferManagement< PlatformBufferType>
 		return nullptr;
 	}
 
-	auto iter = m_Buffers.find(buffer);
+const auto iter = m_Buffers.find(buffer);
     PlatformBufferTypeSharedPtr platformBuffer;
     if (iter != m_Buffers.end())
     {
@@ -197,7 +199,7 @@ void* Rendering::BufferManagement< PlatformBufferType>
     else
     {
         // 延迟构造。
-        platformBuffer = std::make_shared<PlatformBufferType>(ptr.get(), buffer.GetData());
+        platformBuffer = std::make_shared<PlatformBufferType>(ptr.get(), buffer.get());
 		m_Buffers.insert({ buffer,  platformBuffer });
     }
 
@@ -210,7 +212,7 @@ void Rendering::BufferManagement<PlatformBufferType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Buffers.find(buffer);
+const auto iter = m_Buffers.find(buffer);
  
     if (iter != m_Buffers.end())
     {
@@ -226,7 +228,7 @@ void Rendering::BufferManagement<PlatformBufferType>
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto numBytes = buffer->GetNumBytes();
+	const auto numBytes = buffer->GetNumBytes();
 	auto srcData = buffer->GetReadOnlyData();
 
 	BufferManagementLockEncapsulation<ClassType> manager{ *this };
@@ -241,15 +243,15 @@ typename Rendering::BufferManagement<PlatformBufferType>::PlatformBufferTypeShar
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Buffers.find(buffer);
+const auto iter = m_Buffers.find(buffer);
     if (iter != m_Buffers.end())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的缓冲区资源！"));
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的缓冲区资源！"s));
     }
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RENDERERS_BUFFER_MANAGEMENT_DETAIL_H

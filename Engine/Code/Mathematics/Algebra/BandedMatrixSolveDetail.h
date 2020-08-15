@@ -23,6 +23,10 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
+
 template <typename Real>
 Mathematics::BandedMatrixSolve<Real>
 	::BandedMatrixSolve(int size, int lowerBandsNumber, int upperBandsNumber, const Real epsilon)
@@ -99,7 +103,7 @@ bool Mathematics::BandedMatrixSolve<Real>
 	// 下三角置零
 	for (auto i = 0; i < upperBandedMatrix.GetUpperBandsNumber(); ++i)
 	{
-		auto lowerSize = upperBandedMatrix.GetSize() - 1 - i;
+		const auto lowerSize = upperBandedMatrix.GetSize() - 1 - i;
 		memset(upperBandedMatrix.GetLowerBand(i), 0, lowerSize * sizeof(Real));
 	}
 
@@ -108,7 +112,7 @@ bool Mathematics::BandedMatrixSolve<Real>
 	// 上三角置零
 	for (int i = 0; i < lowerBandedMatrix.GetLowerBandsNumber(); ++i)
 	{
-		int upperSize = lowerBandedMatrix.GetSize() - 1 - i;
+		const int upperSize = lowerBandedMatrix.GetSize() - 1 - i;
 		memset(lowerBandedMatrix.GetUpperBand(i), 0, upperSize * sizeof(Real));
 	}
 
@@ -143,7 +147,7 @@ Real Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 int Mathematics::BandedMatrixSolve<Real>
-	::GetSize() const
+	::GetSize() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -151,8 +155,7 @@ int Mathematics::BandedMatrixSolve<Real>
 }
 
 template <typename Real>
-int Mathematics::BandedMatrixSolve<Real>
-	::GetLowerBandsNumber() const
+int Mathematics::BandedMatrixSolve<Real>::GetLowerBandsNumber() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -160,8 +163,7 @@ int Mathematics::BandedMatrixSolve<Real>
 }
 
 template <typename Real>
-int Mathematics::BandedMatrixSolve<Real>
-	::GetUpperBandsNumber() const
+int Mathematics::BandedMatrixSolve<Real>::GetUpperBandsNumber() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -201,7 +203,7 @@ void Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 Real Mathematics::BandedMatrixSolve<Real>
-	::GetEpsilon() const
+	::GetEpsilon() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -221,8 +223,7 @@ void Mathematics::BandedMatrixSolve<Real>
 }
 
 template <typename Real>
-Real* Mathematics::BandedMatrixSolve<Real>
-	::GetDiagonalBand()
+Real* Mathematics::BandedMatrixSolve<Real>::GetDiagonalBand() noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_6;
 
@@ -233,7 +234,7 @@ Real* Mathematics::BandedMatrixSolve<Real>
 
 template <typename Real>
 const Real* Mathematics::BandedMatrixSolve<Real>
-	::GetDiagonalBand() const
+	::GetDiagonalBand() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -241,8 +242,7 @@ const Real* Mathematics::BandedMatrixSolve<Real>
 }
 
 template <typename Real>
-int Mathematics::BandedMatrixSolve<Real>
-	::GetLowerBandMax(int index) const
+int Mathematics::BandedMatrixSolve<Real>::GetLowerBandMax(int index) const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -257,7 +257,7 @@ Real* Mathematics::BandedMatrixSolve<Real>
 
 	m_Solve = BandedMatrixSolveFlags::Unsolved;
 
-	return  const_cast<Real*>(static_cast<const ClassType&>(*this).GetLowerBand(index));
+	return const_cast<Real*>(static_cast<const ClassType&>(*this).GetLowerBand(index));
 }
 
 template <typename Real>
@@ -588,6 +588,8 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics:
 
 	return result;
 }
+
+#include STSTEM_WARNING_POP
 
 #endif // MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H
 

@@ -33,17 +33,17 @@ namespace Rendering
 		using ReadFileManager = CoreTools::ReadFileManager;
 
 	public:
-		VertexFormatType(AttributeType type, AttributeUsage usage,unsigned int usageIndex);
-		VertexFormatType();
+		VertexFormatType(AttributeType type, AttributeUsage usage,unsigned int usageIndex) noexcept;
+            VertexFormatType() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
  
-		AttributeType GetType() const;
-		void SetType(AttributeType type);
-		AttributeUsage GetUsage() const;
-		void SetUsage(AttributeUsage usage);
-		unsigned int GetUsageIndex() const;
-		void SetUsageIndex(unsigned int usageIndex);
+		AttributeType GetType() const noexcept;
+                void SetType(AttributeType type) noexcept;
+                AttributeUsage GetUsage() const noexcept;
+                void SetUsage(AttributeUsage usage) noexcept;
+                unsigned int GetUsageIndex() const noexcept;
+                void SetUsageIndex(unsigned int usageIndex) noexcept;
 
 		int GetStreamingSize() const;
 		void Save(BufferTarget& target) const;

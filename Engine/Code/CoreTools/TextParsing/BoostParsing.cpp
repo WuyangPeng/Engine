@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::BoostParsing
-	::BoostParsing()
+	::BoostParsing() noexcept
 {
 
 }

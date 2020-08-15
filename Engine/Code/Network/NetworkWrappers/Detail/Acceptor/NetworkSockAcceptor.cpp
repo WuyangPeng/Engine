@@ -21,14 +21,17 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Network::NetworkSockAcceptor
 	::NetworkSockAcceptor(int port)
 	:ParentType{}, m_SocketHandle{ System::GetSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
 	if (!System::IsSocketValid(m_SocketHandle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"s));
 	}
 
 	NetworkSockInetAddress sockAddress{ port };
@@ -45,7 +48,7 @@ Network::NetworkSockAcceptor
 {
 	if (!System::IsSocketValid(m_SocketHandle))
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"s));
 	}
 
 	NetworkSockInetAddress sockAddress{ hostName,port };
@@ -56,11 +59,7 @@ Network::NetworkSockAcceptor
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::NetworkSockAcceptor
-	::~NetworkSockAcceptor()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NetworkSockAcceptor)
 
@@ -71,7 +70,7 @@ bool Network::NetworkSockAcceptor
 
 	auto addrLen = boost::numeric_cast<int>(sizeof(sockAddress->GetWinSockInetAddress()));
 
-	auto acceptHandle = System::Accept(m_SocketHandle, &sockAddress->GetWinSockInetAddress(), &addrLen);
+	const auto acceptHandle = System::Accept(m_SocketHandle, &sockAddress->GetWinSockInetAddress(), &addrLen);
 
 	if (System::IsSocketValid(acceptHandle))
 	{
@@ -94,7 +93,7 @@ bool Network::NetworkSockAcceptor
 
 	auto addrLen = boost::numeric_cast<int>(sizeof(sockAddress.GetWinSockInetAddress()));
 
-	auto acceptHandle = System::Accept(m_SocketHandle, &sockAddress.GetWinSockInetAddress(), &addrLen);
+	const auto acceptHandle = System::Accept(m_SocketHandle, &sockAddress.GetWinSockInetAddress(), &addrLen);
 
 	if (System::IsSocketValid(acceptHandle))
 	{
@@ -109,7 +108,7 @@ bool Network::NetworkSockAcceptor
 }
 
 bool Network::NetworkSockAcceptor
-	::EnableNonBlock()
+	::EnableNonBlock() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -118,7 +117,7 @@ bool Network::NetworkSockAcceptor
 }
 
 System::WinSocket Network::NetworkSockAcceptor
-	::GetWinSocket()
+	::GetWinSocket() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -154,10 +153,10 @@ const std::string Network::NetworkSockAcceptor
 }
 
 int Network::NetworkSockAcceptor
-	::GetPort() const
+	::GetPort() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
 	return 0;
 }
-
+#include STSTEM_WARNING_POP

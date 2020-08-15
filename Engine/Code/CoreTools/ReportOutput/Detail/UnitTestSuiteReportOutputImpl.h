@@ -25,7 +25,7 @@ namespace CoreTools
 
 	public:
 		UnitTestSuiteReportOutputImpl(const std::string& timeDescribe, int borderLineLength, const OStreamShared& osPtr  );
-		virtual ~UnitTestSuiteReportOutputImpl();
+		 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

@@ -12,10 +12,12 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 Network::MultiMessageEventContainerImpl
-	::MultiMessageEventContainerImpl()
-	:m_MessageEventContainer{}
+	::MultiMessageEventContainerImpl() noexcept
+	:m_MessageEventContainer{} 
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -79,4 +81,4 @@ Network::MultiMessageEventContainerImpl::ImplPtr Network::MultiMessageEventConta
 	return priorityMessageEventContainer;
 }
 
-
+#include STSTEM_WARNING_POP

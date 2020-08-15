@@ -12,6 +12,7 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "System/Helper/PragmaWarning/Disable4996.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 
 #include <fstream>
 #include "System/Helper/PragmaWarning.h"
@@ -541,11 +542,11 @@ bool AssistTools::FxCompiler
         return false;
     }
 
-	mVShader =  CreateShader(true, vProgram, vInputs, vOutputs,
-		vConstants, vSamplers).PolymorphicDowncastObjectSmartPointer<Rendering::VertexShaderSmartPointer>();
+	mVShader = boost::polymorphic_pointer_cast<Rendering::VertexShader>(CreateShader(true, vProgram, vInputs, vOutputs,
+		vConstants, vSamplers));
 
-	mPShader =  CreateShader(false, pProgram, pInputs, pOutputs,
-		pConstants, pSamplers).PolymorphicDowncastObjectSmartPointer<Rendering::PixelShaderSmartPointer>();
+	mPShader =  boost::polymorphic_pointer_cast<Rendering::PixelShader>(CreateShader(false, pProgram, pInputs, pOutputs,
+		pConstants, pSamplers));
 
 	Rendering::VisualPassSmartPointer pass(NEW0 Rendering::VisualPass());
     pass->SetVertexShader(mVShader);
@@ -589,12 +590,12 @@ bool AssistTools::FxCompiler
         return false;
     }
 
-    if (!UpdateShader(mVShader.GetData(), vProgram, vInputs, vOutputs, vConstants,vSamplers))
+    if (!UpdateShader(mVShader.get(), vProgram, vInputs, vOutputs, vConstants,vSamplers))
     {
         return false;
     }
 
-    if (!UpdateShader(mPShader.GetData(), pProgram, pInputs, pOutputs, pConstants,
+    if (!UpdateShader(mPShader.get(), pProgram, pInputs, pOutputs, pConstants,
         pSamplers))
     {
         return false;
@@ -910,12 +911,12 @@ Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
     Rendering::ShaderBaseSmartPointer shader;
     if (isVShader)
     {
-        shader.Reset(NEW0 Rendering::VertexShader(program.Name, numInputs, numOutputs,
+        shader.reset(NEW0 Rendering::VertexShader(program.Name, numInputs, numOutputs,
             numConstants, numSamplers));
     }
     else
     {
-        shader.Reset(NEW0 Rendering::PixelShader(program.Name, numInputs, numOutputs,
+        shader.reset(NEW0 Rendering::PixelShader(program.Name, numInputs, numOutputs,
             numConstants, numSamplers));
     }
 

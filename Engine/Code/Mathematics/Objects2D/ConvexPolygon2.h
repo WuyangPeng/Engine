@@ -53,7 +53,7 @@ namespace Mathematics
 		// 允许顶点修改。调用者必须确保多边形仍是凸多边形。
 		// 只要你修改尽可能多的顶点后，调用UpdateLines()。
 		// 所有经由SetVertex的修改，UpdateLines中线的更新，只在修改的共享的顶点的边进行。
-		virtual void SetVertex(int index, const Vector2D& vertex) override;
+		 void SetVertex(int index, const Vector2D& vertex) override;
 		void UpdateLines();
 		bool IsUpdateLines() const;
 

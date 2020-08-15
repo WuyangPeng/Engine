@@ -20,7 +20,11 @@
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455) 
+#include SYSTEM_WARNING_DISABLE(26415) 
+#include SYSTEM_WARNING_DISABLE(26418) 
 Network::ACESockConnector
 	::ACESockConnector()
 	:m_ACESockConnector{}
@@ -28,11 +32,7 @@ Network::ACESockConnector
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockConnector
-	::~ACESockConnector()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ACESockConnector)
 
@@ -55,7 +55,7 @@ void Network::ACESockConnector
 	CoreTools::CallbackParameters callbackParameters{};
 	callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
 
-	auto result = m_ACESockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress());
+	const auto result = m_ACESockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress());
 
 	if (result == 0)
 	{
@@ -73,5 +73,5 @@ const Network::ACESockConnector::SockConnectorPtr Network::ACESockConnector
 
 	return make_shared<ClassType>(*this);
 }
-
+#include STSTEM_WARNING_POP
 #endif // NETWORK_USE_ACE

@@ -15,7 +15,9 @@
 
 using std::vector;
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455) 
 Rendering::ProjectorMatrixConstantImpl
 	::ProjectorMatrixConstantImpl(const ProjectorSmartPointer& projector,bool biased, int biasScaleMatrixIndex)
 	:ParentType{ projector }, m_Biased{ biased },m_BiasScaleMatrixIndex{ biasScaleMatrixIndex }
@@ -30,12 +32,7 @@ Rendering::ProjectorMatrixConstantImpl
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ProjectorMatrixConstantImpl
-	::~ProjectorMatrixConstantImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
+  
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::ProjectorMatrixConstantImpl
 	::IsValid() const noexcept
@@ -98,3 +95,4 @@ const Rendering::ProjectorMatrixConstantImpl::Matrix Rendering::ProjectorMatrixC
 
 
 
+#include STSTEM_WARNING_POP

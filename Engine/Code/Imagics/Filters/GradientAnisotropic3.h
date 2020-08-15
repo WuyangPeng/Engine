@@ -19,12 +19,12 @@ namespace Imagics
 		GradientAnisotropic3 (int xBound, int yBound, int zBound, float xSpacing,float ySpacing, float zSpacing, 
 							  const float* data, const bool* mask,float borderValue, ScaleType scaleType, float K);
 		
-		virtual ~GradientAnisotropic3 ();
+ 
 		
 	protected:
-		void ComputeParam ();
-		virtual void OnPreUpdate ();
-		virtual void OnUpdate (int x, int y, int z);
+		void ComputeParam () noexcept;
+		  void OnPreUpdate () noexcept override;
+                void OnUpdate(int x, int y, int z) noexcept override;
 		
 		float mK;           // k
 		

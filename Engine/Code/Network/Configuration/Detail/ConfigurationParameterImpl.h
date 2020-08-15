@@ -24,7 +24,7 @@ namespace Network
 		using Parameter = std::set<String>;
 
 	public:
-		ConfigurationParameterImpl();
+		ConfigurationParameterImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

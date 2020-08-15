@@ -50,7 +50,7 @@ namespace Mathematics
 		Int64Vector3& operator*= (const int64_t& scalar);
 		Int64Vector3& operator/= (const int64_t& scalar);
 
-		int64_t SquaredLength() const;
+		int64_t SquaredLength() const noexcept;
 
 		// ·µ»Ø Dot(lhs,rhs).
 		int64_t Dot(const Int64Vector3& rhs) const;

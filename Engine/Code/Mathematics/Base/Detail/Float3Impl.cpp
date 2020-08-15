@@ -10,14 +10,14 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 Mathematics::Float3Impl
-	::Float3Impl()
+	::Float3Impl() noexcept
 	:m_Tuple{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::Float3Impl
-	::Float3Impl(float firstValue, float secondValue, float thirdValue)
+	::Float3Impl(float firstValue, float secondValue, float thirdValue) noexcept
 	:m_Tuple{ firstValue,secondValue,thirdValue }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;

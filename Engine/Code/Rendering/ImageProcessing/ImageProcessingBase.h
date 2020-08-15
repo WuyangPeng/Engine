@@ -24,19 +24,23 @@ namespace Rendering
 		// Construction and destruction.
 		ImageProcessingBase(int numCols, int numRows, int numTargets);
 		virtual ~ImageProcessingBase();
+		ImageProcessingBase(const ImageProcessingBase&)=default;
+		ImageProcessingBase& operator=(const ImageProcessingBase&)=default;
+		ImageProcessingBase(ImageProcessingBase&&)=default;
+		ImageProcessingBase& operator=(ImageProcessingBase&&)=default;
 
 		// Member access.
-		 int GetNumCols() const;
-		 int GetNumRows() const;
-		 int GetNumTargets() const;
-		 float GetColSpacing() const;
-		 float GetRowSpacing() const;
-		 const Camera* GetCamera() const;
-		 const TrianglesMesh* GetRectangle() const;
-		 const RenderTarget* GetTarget(int i) const;
+		 int GetNumCols() const noexcept;
+		 int GetNumRows() const noexcept;
+		 int GetNumTargets() const noexcept;
+		 float GetColSpacing() const noexcept;
+		 float GetRowSpacing() const noexcept;
+		 const Camera* GetCamera() const noexcept;
+		 const TrianglesMesh* GetRectangle() const noexcept;
+		 const RenderTarget* GetTarget(int i) const noexcept;
 
 		// The lexicographical mapping into linear memory.
-		 int Index(int col, int row) const;
+		 int Index(int col, int row) const noexcept; 
 
 		// Allow the caller to create an effect that shares the vertex shader
 		// managed by this class.
@@ -49,8 +53,8 @@ namespace Rendering
 		void PostDraw();
 
 		// Support for the standard image processing pipeline.
-		const Texture2D* GetMainTexture() const;
-		 const VisualEffectInstance* GetMainEffectInstance() const;
+		const Texture2D* GetMainTexture() const noexcept;
+		 const VisualEffectInstance* GetMainEffectInstance() const noexcept;
 		void Initialize(Renderer* renderer, bool openglHack = false);
 		void ExecuteStep(Renderer* renderer, bool draw);
 
@@ -79,8 +83,8 @@ namespace Rendering
 
 		static int msDx9VRegisters[1];
 		static int msOglVRegisters[1];
-		static int* msVRegisters[ShaderFlags::MaxProfiles];
-		static std::string msVPrograms[ShaderFlags::MaxProfiles];
+		static int* msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+		static std::string msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
 	};
 }
 

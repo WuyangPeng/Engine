@@ -43,7 +43,7 @@ namespace Mathematics
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut) override;
+		 void Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut) override;
 
 	private:
 		void Update(const VariableMatrix& derivative);

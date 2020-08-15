@@ -9,6 +9,9 @@
 #include "OpenGLESRenderer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "../Flags/RendererTypes.h"
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
 #include "System/Helper/PragmaWarning/Disable4100.h"
 Rendering::OpenGLESRenderer
 	::OpenGLESRenderer(const RendererBasis& basis)
@@ -20,7 +23,7 @@ Rendering::OpenGLESRenderer
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLESRenderer)
 
 Rendering::RendererTypes Rendering::OpenGLESRenderer
-	::GetRendererType() const
+	::GetRendererType() const noexcept
 {
 	return RendererTypes::OpenGLES;
 }
@@ -155,3 +158,4 @@ void Rendering::OpenGLESRenderer::ClearColorBuffer(int x, int y, int w, int h)
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
+#include STSTEM_WARNING_POP

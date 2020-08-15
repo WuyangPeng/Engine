@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/26 09:33)
 
 #ifndef RENDERING_IMAGE_PROCESSING_IMAGE_PROCESSING3_H
@@ -34,80 +34,78 @@
 
 namespace Rendering
 {
-	class  ImageProcessing3 : public ImageProcessingBase
-	{
-	public:
-		// Construction and destruction.  The constructors are for a rectangular
-		// cube with bound2 = factor0*factor1.  Objects of this class should not
-		// be instantiated until the shader profile is known.  Thus, do not create
-		// such an object in an application constructor, but do so in OnInitialize
-		// or later.
+    class ImageProcessing3 : public ImageProcessingBase
+    {
+    public:
+        // Construction and destruction.  The constructors are for a rectangular
+        // cube with bound2 = factor0*factor1.  Objects of this class should not
+        // be instantiated until the shader profile is known.  Thus, do not create
+        // such an object in an application constructor, but do so in OnInitialize
+        // or later.
 
-		// Use this constructor for the standard image processing pipeline.
-		ImageProcessing3(int bound0, int bound1, int factor0, int factor1, Mathematics::Float4* imageData, 
-						 PixelShaderSmartPointer mainPShader, const Mathematics::Float4& boundaryColor, bool useDirichlet);
+        // Use this constructor for the standard image processing pipeline.
+        ImageProcessing3(int bound0, int bound1, int factor0, int factor1, Mathematics::Float4* imageData,
+                         PixelShaderSmartPointer mainPShader, const Mathematics::Float4& boundaryColor, bool useDirichlet);
 
-		// Use this constructor when you want to set up your own pipeline for
-		// processing the image.
-		ImageProcessing3(int bound0, int bound1, int factor0, int factor1, int numTargets);
+        // Use this constructor when you want to set up your own pipeline for
+        // processing the image.
+        ImageProcessing3(int bound0, int bound1, int factor0, int factor1, int numTargets);
 
-		virtual ~ImageProcessing3();
+        // Member access.
+        int GetBound0() const noexcept;
+        int GetBound1() const noexcept;
+        int GetBound2() const noexcept;
+        int GetFactor0() const noexcept;
+        int GetFactor1() const noexcept;
+        float GetDx() const noexcept;
+        float GetDy() const noexcept;
+        float GetDz() const noexcept;
 
-		// Member access.
-		int GetBound0() const;
-		int GetBound1() const;
-		int GetBound2() const;
-		int GetFactor0() const;
-		int GetFactor1() const;
-		float GetDx() const;
-		float GetDy() const;
-		float GetDz() const;
+        // The mapping from 2D pixel to 3D voxel.
+        void Map2Dto3D(int u, int v, int& x, int& y, int& z) const noexcept;
 
-		// The mapping from 2D pixel to 3D voxel.
-		void Map2Dto3D(int u, int v, int& x, int& y, int& z) const;
+        // The mapping from 3D voxel to 2D pixel.
+        void Map3Dto2D(int x, int y, int z, int& u, int& v) const noexcept;
 
-		// The mapping from 3D voxel to 2D pixel.
-		void Map3Dto2D(int x, int y, int z, int& u, int& v) const;
+        // The mapping from 3D voxel to 1D memory.
+        int Map3Dto1D(int x, int y, int z) noexcept;
 
-		// The mapping from 3D voxel to 1D memory.
-		int Map3Dto1D(int x, int y, int z);
+        // Create a tiled image corresponding to the 3D image data.
+        Texture2DSmartPointer CreateTiledImage(const Mathematics::Float4* imageData);
 
-		// Create a tiled image corresponding to the 3D image data.
-		Texture2DSmartPointer CreateTiledImage(Mathematics::Float4* imageData);
+        // Set boundary pixels to (0,0,0,0).
+        void CreateBoundaryDirichletEffect(VisualEffectSmartPointer& effect,
+                                           VisualEffectInstanceSmartPointer& instance);
 
-		// Set boundary pixels to (0,0,0,0).
-		void CreateBoundaryDirichletEffect(VisualEffectSmartPointer& effect,
-			VisualEffectInstanceSmartPointer& instance);
+        // Set boundary pixels so that boundary derivatives are zero.
+        void CreateBoundaryNeumannEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance);
 
-		// Set boundary pixels so that boundary derivatives are zero.
-		void CreateBoundaryNeumannEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance);
+        // Draw the tiled image using the boundary color for boundary voxels.
+        void CreateDrawEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance, const Mathematics::Float4& boundaryColor);
 
-		// Draw the tiled image using the boundary color for boundary voxels.
-		void CreateDrawEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance, const Mathematics::Float4& boundaryColor);
+    private:
+        int mBound0, mBound1, mBound2, mBound0M1, mBound1M1, mBound2M1;
+        int mFactor0, mFactor1;
+        float mDx, mDy, mDz;
 
-	private:
-		int mBound0, mBound1, mBound2, mBound0M1, mBound1M1, mBound2M1;
-		int mFactor0, mFactor1;
-		float mDx, mDy, mDz;
+        // Profile information for BoundaryDirichlet.fx.
+        static int msAllDirichletPTextureUnits[2];
+        static int* msDirichletPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        static std::string msDirichletPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
 
-		// Profile information for BoundaryDirichlet.fx.
-		static int msAllDirichletPTextureUnits[2];
-		static int* msDirichletPTextureUnits[ShaderFlags::MaxProfiles];
-		static std::string msDirichletPPrograms[ShaderFlags::MaxProfiles];
+        // Profile information for BoundaryNeumann.fx.
+        static int msAllNeumannPTextureUnits[2];
+        static int* msNeumannPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        static std::string msNeumannPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
 
-		// Profile information for BoundaryNeumann.fx.
-		static int msAllNeumannPTextureUnits[2];
-		static int* msNeumannPTextureUnits[ShaderFlags::MaxProfiles];
-		static std::string msNeumannPPrograms[ShaderFlags::MaxProfiles];
-
-		// Profile information for ScreenShader.fx, function v_ScreenShader and
-		// p_ScreenShader3.
-		static int msAllDrawPRegisters[1];
-		static int* msDrawPRegisters[ShaderFlags::MaxProfiles];
-		static int msAllDrawPTextureUnits[2];
-		static int* msDrawPTextureUnits[ShaderFlags::MaxProfiles];
-		static std::string msDrawPPrograms[ShaderFlags::MaxProfiles];
-	};
+        // Profile information for ScreenShader.fx, function v_ScreenShader and
+        // p_ScreenShader3.
+        static int msAllDrawPRegisters[1];
+        static int* msDrawPRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        static int msAllDrawPTextureUnits[2];
+        static int* msDrawPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        static std::string msDrawPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+    };
 }
 
-#endif // RENDERING_IMAGE_PROCESSING_IMAGE_PROCESSING3_H
+#endif  // RENDERING_IMAGE_PROCESSING_IMAGE_PROCESSING3_H

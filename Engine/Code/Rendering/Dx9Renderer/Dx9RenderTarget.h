@@ -24,13 +24,13 @@ namespace Rendering
 
 	public:
 		Dx9RenderTarget (Renderer* renderer,const RenderTarget* renderTarget);
-		virtual ~Dx9RenderTarget();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Enable (Renderer* renderer) override;
-		virtual void Disable (Renderer* renderer) override;
-		virtual ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer) override;
+		 void Enable (Renderer* renderer) override;
+		 void Disable (Renderer* renderer) override;
+		 ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer) override;
 	};
 }
 

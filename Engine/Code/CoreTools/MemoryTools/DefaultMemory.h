@@ -46,15 +46,15 @@ namespace CoreTools
 
 		// 对 2D 数组:  data[bound2][bound1]
 		template <typename T>
-		static void Delete2DArray(T**& data);
+		static void Delete2DArray(T**& data) noexcept;
 
 		// 对 3D 数组:  data[bound3][bound2][bound1]
 		template <typename T>
-		static void Delete3DArray(T***& data);
+		static void Delete3DArray(T***& data) noexcept;
 
 		// 对 4D 数组:  data[bound4][bound3][bound2][bound1]
 		template <typename T>
-		static void Delete4DArray(T****& data);
+		static void Delete4DArray(T****& data) noexcept;
 
 	private:
 		template <typename T>

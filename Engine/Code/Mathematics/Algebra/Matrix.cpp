@@ -11,8 +11,11 @@
 #ifndef MATHEMATICS_INCLUDED_MATRIX_DETAIL
 	#define MATHEMATICS_INCLUDED_MATRIX_DETAIL
 #endif // MATHEMATICS_INCLUDED_MATRIX_DETAIL
-
-#include "MatrixDetail.h" 
+    #include "System/Helper/PragmaWarning.h"
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26446)
+    #include SYSTEM_WARNING_DISABLE(26482)
+    #include "MatrixDetail.h" 
 #include "Matrix3Detail.h"
 #include "APointDetail.h"
 #include "AVectorDetail.h"
@@ -25,6 +28,7 @@ namespace Mathematics
 	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
 	class Matrix<double>;
 }
+#include STSTEM_WARNING_POP
 
 #endif // MATHEMATICS_EXPORT_TEMPLATE
 

@@ -20,14 +20,14 @@ namespace Rendering
 		using ClassType = CameraManagerImpl;
 
 	public:
-		CameraManagerImpl();
+                CameraManagerImpl() noexcept;
 	
 		CLASS_INVARIANT_DECLARE;
  
         // 你应该在平台相关应用程序层设置。
         // 这个保证你访问正确的投影矩阵在GetProjection()。
-		void SetDefaultDepthType(RendererTypes type);
-		DepthType GetDepthType() const;
+                void SetDefaultDepthType(RendererTypes type) noexcept;
+                DepthType GetDepthType() const noexcept;
 
 	private: 
 		// 指定类型的投影矩阵(DirectX和OpenGL不同）。 

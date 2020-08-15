@@ -45,7 +45,11 @@ namespace Rendering
 		// which the plane normal points.
 		Portal(int numVertices, Mathematics::APointf* modelVertices, const Mathematics::Planef& modelPlane, ConvexRegion* adjacentRegion, bool open);
 
-		virtual ~Portal();
+		  ~Portal();
+		  Portal(const Portal&) = default;
+		   Portal& operator=(const Portal&) = default;
+		    Portal(Portal&&) = default;
+		   Portal& operator=(Portal&&) = default;
 
 		// Member access.  The region to which the portal leads.  Portals can be
 		// open or closed.
@@ -68,9 +72,12 @@ namespace Rendering
 		Mathematics::Planef mModelPlane;
 		Mathematics::Planef mWorldPlane;
 	};
- 
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(Portal);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, Portal);
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_SORTING_PORTAL_H

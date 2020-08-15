@@ -23,17 +23,17 @@ namespace Network
 		NetworkSockInetAddress();
 		explicit NetworkSockInetAddress(int port);
 		NetworkSockInetAddress(const std::string& hostName, int port);
-		virtual ~NetworkSockInetAddress();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual const WinSockInetAddressType& GetWinSockInetAddress() const override;
-		virtual WinSockInetAddressType& GetWinSockInetAddress() override;
+		 const WinSockInetAddressType& GetWinSockInetAddress() const noexcept override;
+		 WinSockInetAddressType& GetWinSockInetAddress() override;
 
-		virtual const SockAddressPtr Clone() const override;
+		 const SockAddressPtr Clone() const override;
 
-		virtual const std::string GetAddress() const override;
-		virtual int GetPort() const override;
+		 const std::string GetAddress() const override;
+		 int GetPort() const override;
 
 	private:
 		WinSockInetAddressType m_InetAddress;

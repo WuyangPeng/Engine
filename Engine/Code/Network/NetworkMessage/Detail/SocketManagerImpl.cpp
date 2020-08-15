@@ -16,14 +16,16 @@
 #define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *m_Mutex }
 
 using std::make_unique;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::SocketManagerImpl
 	::SocketManagerImpl()
 	:m_MessageEventManagerContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 Network::SocketManagerImpl
 	::SocketManagerImpl(const SocketManagerImpl& rhs)
 	:m_MessageEventManagerContainer{ rhs.m_MessageEventManagerContainer }, m_Mutex{ make_unique<CoreTools::Mutex>() }
@@ -69,7 +71,7 @@ void Network::SocketManagerImpl
 
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto iter = m_MessageEventManagerContainer.find(socketID);
+	const auto iter = m_MessageEventManagerContainer.find(socketID);
 
 	if (iter != m_MessageEventManagerContainer.cend())
 	{
@@ -84,7 +86,7 @@ void Network::SocketManagerImpl
 
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto iter = m_MessageEventManagerContainer.find(socketID);
+	const auto iter = m_MessageEventManagerContainer.find(socketID);
 
 	if (iter != m_MessageEventManagerContainer.cend())
 	{
@@ -109,7 +111,7 @@ void Network::SocketManagerImpl
 
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto iter = m_MessageEventManagerContainer.find(socketID);
+const auto iter = m_MessageEventManagerContainer.find(socketID);
 
 	if (iter != m_MessageEventManagerContainer.cend())
 	{
@@ -124,7 +126,7 @@ void Network::SocketManagerImpl
 
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto iter = m_MessageEventManagerContainer.find(socketID);
+	const auto iter = m_MessageEventManagerContainer.find(socketID);
 
 	if (iter != m_MessageEventManagerContainer.cend())
 	{
@@ -149,7 +151,7 @@ void Network::SocketManagerImpl
 
 	NETWORK_CLASS_IS_VALID_9;
 
-	auto iter = m_MessageEventManagerContainer.find(socketID);
+	const auto iter = m_MessageEventManagerContainer.find(socketID);
 
 	if (iter != m_MessageEventManagerContainer.cend())
 	{

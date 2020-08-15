@@ -62,30 +62,30 @@ namespace Rendering
         
 		CLASS_INVARIANT_DECLARE;
 
-		void FromHalfFloatType(HalfFloatType value);
+		void FromHalfFloatType(HalfFloatType value) noexcept;
         
-        float ToFloat () const;
-        HalfFloatType ToHalfFloat() const;
+        float ToFloat() const noexcept;
+                HalfFloatType ToHalfFloat() const noexcept;
 
 		// 算术运算。
 		const HalfFloat operator- () const; 
 
 		// 算术更新。
-		HalfFloat& operator+= (const HalfFloat& rhs);
-		HalfFloat& operator-= (const HalfFloat& rhs);
-		HalfFloat& operator*= (const HalfFloat& rhs);
+                HalfFloat& operator+=(const HalfFloat& rhs) noexcept;
+                HalfFloat& operator-=(const HalfFloat& rhs) noexcept;
+                HalfFloat& operator*=(const HalfFloat& rhs) noexcept;
 		HalfFloat& operator/= (const HalfFloat& rhs);
         
     private:
-        static HalfFloatType ConvertHalfFloat(float value);
+                static HalfFloatType ConvertHalfFloat(float value) noexcept;
         
     private:
         HalfFloatType m_HalfFloat;
     };
 
 	// 比较 
-	bool RENDERING_DEFAULT_DECLARE operator== (const HalfFloat& lhs,const HalfFloat& rhs);
-	bool RENDERING_DEFAULT_DECLARE operator< (const HalfFloat& lhs,const HalfFloat& rhs);
+	bool RENDERING_DEFAULT_DECLARE operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
+    bool RENDERING_DEFAULT_DECLARE operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
 
 	bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs,const float epsilon = Mathematics::Mathf::sm_ZeroTolerance);
 
@@ -93,8 +93,8 @@ namespace Rendering
 	RENDERING_DEFAULT_DECLARE std::ostream& operator<< (std::ostream& outFile, const HalfFloat& halfFloat);
 
 	// 只添加必要的运算符
-	float RENDERING_DEFAULT_DECLARE operator * (float lhs,const HalfFloat& rhs);
-	float RENDERING_DEFAULT_DECLARE operator * (const HalfFloat& lhs,float rhs);
+        float RENDERING_DEFAULT_DECLARE operator*(float lhs, const HalfFloat& rhs) noexcept;
+        float RENDERING_DEFAULT_DECLARE operator*(const HalfFloat& lhs, float rhs) noexcept;
 	float RENDERING_DEFAULT_DECLARE operator / (float lhs,const HalfFloat& rhs);
 }
 

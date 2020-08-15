@@ -50,8 +50,10 @@ namespace Rendering
 		// 直到通过SetProgram函数提供的所有程序（用于各种型材）
 		// 着色器的结构是不完整的。
         ShaderBase (const std::string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers);    
-        virtual ~ShaderBase () = 0;
-        
+          ~ShaderBase () = 0;
+
+        ShaderBase(ShaderBase&&) noexcept = default;
+        ShaderBase& operator=(ShaderBase&&) noexcept = default;
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ShaderBase); 
@@ -95,10 +97,10 @@ namespace Rendering
 		void SaveShader(WriteFileManager& manager) const;
 		void LoadShader(ReadFileManager& manager, int numProfiles);
 
-		void SetProfile(const ShaderProfileDataSmartPointer& profile);
-		const ConstShaderProfileDataSmartPointer GetProfile() const;
+		void SetProfile(const ShaderProfileDataSmartPointer& profile) noexcept;
+                const ConstShaderProfileDataSmartPointer GetProfile() const noexcept;
 
-		ShaderProfileDataSmartPointer GetProfile();
+		ShaderProfileDataSmartPointer GetProfile() noexcept;
 
     private:
 		IMPL_TYPE_DECLARE(ShaderBase);

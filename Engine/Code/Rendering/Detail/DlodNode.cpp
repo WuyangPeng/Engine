@@ -15,7 +15,12 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, DlodNode);
@@ -41,11 +46,11 @@ Rendering::DlodNode
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, DlodNode)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DlodNode,GetModelCenter,const Rendering::DlodNode::APoint)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DlodNode,GetWorldCenter,const Rendering::DlodNode::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DlodNode,GetModelCenter,const Rendering::DlodNode::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DlodNode,GetWorldCenter,const Rendering::DlodNode::APoint)
  
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, DlodNode,SetModelCenter,APoint,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DlodNode,GetNumLevelsOfDetail,int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, DlodNode,SetModelCenter,APoint,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DlodNode,GetNumLevelsOfDetail,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DlodNode,GetModelMinDistance,int,float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DlodNode,GetModelMaxDistance,int,float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DlodNode, GetWorldMinDistance,int,float) 
@@ -96,4 +101,4 @@ void Rendering::DlodNode
 		}
 	}
 }
- 
+ #include STSTEM_WARNING_POP

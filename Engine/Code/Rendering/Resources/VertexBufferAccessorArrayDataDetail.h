@@ -14,7 +14,11 @@
 #include "VertexBuffer.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(6385)
 template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
 Rendering::VertexBufferAccessorArrayData<usage, number>
 	::VertexBufferAccessorArrayData()	 
@@ -92,7 +96,7 @@ const float* Rendering::VertexBufferAccessorArrayData<usage, number>
 
 	return m_Data[unit].GetDataTuple(stride,index);
 } 
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_VERTEX_BUFFER_ACCESSOR_ARRAY_DATA_DETAIL_H
 
 

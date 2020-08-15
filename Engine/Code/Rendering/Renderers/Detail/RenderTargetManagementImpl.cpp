@@ -38,7 +38,7 @@ void Rendering::RenderTargetManagementImpl
 
     if (m_RenderTargets.find(renderTarget) == m_RenderTargets.end())
     {
-		PlatformRenderTargetSharedPtr platformRenderTarget{ make_shared<PlatformRenderTarget>(m_Renderer.lock().get(),renderTarget.GetData()) };
+		PlatformRenderTargetSharedPtr platformRenderTarget{ make_shared<PlatformRenderTarget>(m_Renderer.lock().get(),renderTarget.get()) };
 		m_RenderTargets.insert({ renderTarget, platformRenderTarget });
     }
 }
@@ -56,7 +56,7 @@ void Rendering::RenderTargetManagementImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-    auto iter = m_RenderTargets.find(renderTarget);
+    const auto iter = m_RenderTargets.find(renderTarget);
     PlatformRenderTargetSharedPtr platformRenderTarget;
     if (iter != m_RenderTargets.end())
     {
@@ -64,7 +64,7 @@ void Rendering::RenderTargetManagementImpl
     }
     else
     {
-        platformRenderTarget = make_shared<PlatformRenderTarget>(m_Renderer.lock().get(),renderTarget.GetData());
+        platformRenderTarget = make_shared<PlatformRenderTarget>(m_Renderer.lock().get(),renderTarget.get());
 		m_RenderTargets.insert({ renderTarget, platformRenderTarget });
     }
 
@@ -76,7 +76,7 @@ void Rendering::RenderTargetManagementImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_RenderTargets.find(renderTarget);
+	const auto iter = m_RenderTargets.find(renderTarget);
  
     if (iter != m_RenderTargets.end())
     {
@@ -91,7 +91,7 @@ Rendering::ConstTexture2DSmartPointer  Rendering::RenderTargetManagementImpl
 {
   	RENDERING_CLASS_IS_VALID_1;
     
-	auto iter = m_RenderTargets.find(renderTarget);
+	const auto iter = m_RenderTargets.find(renderTarget);
     if (iter != m_RenderTargets.end())
     {
 		auto platformRenderTarget = iter->second;
@@ -99,7 +99,7 @@ Rendering::ConstTexture2DSmartPointer  Rendering::RenderTargetManagementImpl
     }
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的渲染目标！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的渲染目标！"s));
 	}
 }
 
@@ -108,13 +108,13 @@ Rendering::RenderTargetManagementImpl::PlatformRenderTargetSharedPtr Rendering::
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_RenderTargets.find(renderTarget);
+	const auto iter = m_RenderTargets.find(renderTarget);
     if (iter != m_RenderTargets.end())
     {
         return iter->second;
     }
     else
     {
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的渲染目标！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的渲染目标！"s));
     }
 }

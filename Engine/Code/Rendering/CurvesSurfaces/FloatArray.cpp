@@ -14,7 +14,10 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 
 using std::make_shared;
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, FloatArray);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, FloatArray);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, FloatArray); 
@@ -29,11 +32,7 @@ Rendering::FloatArray
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::FloatArray
-	::~FloatArray()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,FloatArray)
 
@@ -42,8 +41,8 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, FloatArray,operator[], int,cons
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, FloatArray,operator[], int, float&)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, FloatArray,GetNumElements, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, FloatArray,GetData, const float*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, FloatArray,GetData, const float*)
  
 
 
- 
+ #include STSTEM_WARNING_POP

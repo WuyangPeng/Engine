@@ -17,7 +17,9 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 using std::vector;
 
 Rendering::PointControllerImpl
@@ -28,9 +30,8 @@ Rendering::PointControllerImpl
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PointControllerImpl
-	::PointControllerImpl()
-	:m_SystemLinearSpeed{ 0.0f },m_SystemAngularSpeed{ 0.0f },m_SystemLinearAxis{ AVector::sm_UnitZ },m_SystemAngularAxis{ AVector::sm_UnitZ },m_NumPoints{ 0 },
+Rendering::PointControllerImpl ::PointControllerImpl() noexcept
+    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ AVector::sm_UnitZ }, m_SystemAngularAxis{ AVector::sm_UnitZ }, m_NumPoints{ 0 },
 	 m_PointLinearSpeed{},m_PointAngularSpeed{},m_PointLinearAxis{},m_PointAngularAxis{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -47,8 +48,7 @@ bool Rendering::PointControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT	
  
-int Rendering::PointControllerImpl
-	::GetNumPoints() const 
+int Rendering::PointControllerImpl ::GetNumPoints() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -127,64 +127,56 @@ void Rendering::PointControllerImpl
 	m_PointAngularAxis[index] = pointAngularAxis;
 }
 
-float Rendering::PointControllerImpl
-	::GetSystemLinearSpeed() const 
+float Rendering::PointControllerImpl ::GetSystemLinearSpeed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemLinearSpeed;
 }
 
-void Rendering::PointControllerImpl
-	::SetSystemLinearSpeed(float systemLinearSpeed) 
+void Rendering::PointControllerImpl ::SetSystemLinearSpeed(float systemLinearSpeed) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemLinearSpeed = systemLinearSpeed;
 }
 
-float Rendering::PointControllerImpl
-	::GetSystemAngularSpeed() const 
+float Rendering::PointControllerImpl ::GetSystemAngularSpeed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemAngularSpeed;
 }
 
-void Rendering::PointControllerImpl
-	::SetSystemAngularSpeed(float systemAngularSpeed)
+void Rendering::PointControllerImpl ::SetSystemAngularSpeed(float systemAngularSpeed) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemAngularSpeed = systemAngularSpeed;
 }
 
-const Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl
-	::GetSystemLinearAxis() const 
+const Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl ::GetSystemLinearAxis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemLinearAxis;
 }
 
-void Rendering::PointControllerImpl
-	::SetSystemLinearAxis(const AVector& systemLinearAxis) 
+void Rendering::PointControllerImpl ::SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemLinearAxis = systemLinearAxis;
 }
 
-const Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl
-	::GetSystemAngularAxis() const 
+const Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl ::GetSystemAngularAxis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemAngularAxis;
 }
 
-void Rendering::PointControllerImpl
-	::SetSystemAngularAxis(const AVector& systemAngularAxis)
+void Rendering::PointControllerImpl ::SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -249,4 +241,4 @@ int Rendering::PointControllerImpl
 }
 
 
-
+#include STSTEM_WARNING_POP

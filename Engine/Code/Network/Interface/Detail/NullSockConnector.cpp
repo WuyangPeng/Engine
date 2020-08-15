@@ -21,23 +21,24 @@ using std::string;
 using std::make_shared;
 using std::to_string;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 Network::NullSockConnector
-	::NullSockConnector()
+	::NullSockConnector() noexcept
 	:ParentType{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::NullSockConnector
-	::~NullSockConnector()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockConnector)
 
 bool Network::NullSockConnector
-	::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+	::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 
@@ -70,3 +71,4 @@ const Network::NullSockConnector::SockConnectorPtr Network::NullSockConnector
 
 	return make_shared<ClassType>(*this);
 }
+#include STSTEM_WARNING_POP

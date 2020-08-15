@@ -1,50 +1,46 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.2.5 (2020/03/16 12:26)
 
 #include "Database/DatabaseExport.h"
 
 #include "CollectionImpl.h"
 #include "System/Helper/UnusedMacro.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
 using std::string;
 
-Database::CollectionImpl
-	::CollectionImpl(const ConfigurationStrategy& configurationStrategy)
-	: m_ConfigurationStrategy{ configurationStrategy }
+Database::CollectionImpl ::CollectionImpl(const ConfigurationStrategy& configurationStrategy) noexcept
+    : m_ConfigurationStrategy{ configurationStrategy }
 {
-	DATABASE_SELF_CLASS_IS_VALID_9;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-Database::CollectionImpl
-	::~CollectionImpl()
+Database::CollectionImpl ::~CollectionImpl()
 {
-	DATABASE_SELF_CLASS_IS_VALID_9;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Database, CollectionImpl)
 
-Database::CollectionImpl::ResultPtr Database::CollectionImpl
-	::ExecuteDoc(const string& findStatement, const BindStatementType& bindStatement, int limitStatement)
+Database::CollectionImpl::ResultPtr Database::CollectionImpl ::ExecuteDoc(const string& findStatement, const BindStatementType& bindStatement, int limitStatement)
 {
-	DATABASE_CLASS_IS_VALID_9;
+    DATABASE_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(findStatement);
-	SYSTEM_UNUSED_ARG(bindStatement);
-	SYSTEM_UNUSED_ARG(limitStatement);
+    SYSTEM_UNUSED_ARG(findStatement);
+    SYSTEM_UNUSED_ARG(bindStatement);
+    SYSTEM_UNUSED_ARG(limitStatement);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("CollectionImpl未实现Execute"));
+    THROW_EXCEPTION(SYSTEM_TEXT("CollectionImpl未实现Execute"s));
 }
 
-Database::ConfigurationStrategy Database::CollectionImpl
-	::GetConfigurationStrategy() const
+Database::ConfigurationStrategy
+    Database::CollectionImpl::GetConfigurationStrategy() const noexcept
 {
-	DATABASE_CLASS_IS_VALID_CONST_9;
+    DATABASE_CLASS_IS_VALID_CONST_9;
 
-	return m_ConfigurationStrategy;
+    return m_ConfigurationStrategy;
 }
-

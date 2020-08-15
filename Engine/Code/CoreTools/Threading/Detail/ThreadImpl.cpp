@@ -15,6 +15,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include <gsl/gsl_util>
+
 CoreTools::ThreadImpl
 	::ThreadImpl(void* function, void* userData, int processorNumber, ThreadSize stackSize)
 	:m_ThreadID{ 0 }, m_Function{ function }, m_UserData{ userData }, m_ProcessorNumber{ processorNumber }, m_StackSize{ stackSize },
@@ -34,12 +36,11 @@ CoreTools::ThreadImpl
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
 	if (!System::CloseSystemThread(m_Thread))
-	{
-		LogAppenderIOManager::Format format{ SYSTEM_TEXT("释放线程（%1%）失败。") };
-		format % m_ThreadID;
-
+	{	 
 		LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-			<< format.str()
+			<< SYSTEM_TEXT("释放线程")
+			<< gsl::narrow_cast<int>(m_ThreadID)
+			<< SYSTEM_TEXT("失败。")
 			<< LOG_SINGLETON_TRIGGER_ASSERT;
 	}
 }
@@ -68,7 +69,7 @@ void CoreTools::ThreadImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto result = System::ResumeSystemThread(m_Thread);
+	const auto result = System::ResumeSystemThread(m_Thread);
 	if (result == sm_FailResult)
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("线程恢复失败！"s));
@@ -80,7 +81,7 @@ void CoreTools::ThreadImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	auto result = System::SuspendSystemThread(m_Thread);
+	const auto result = System::SuspendSystemThread(m_Thread);
 	if (result == sm_FailResult)
 	{
 		THROW_EXCEPTION(SYSTEM_TEXT("线程挂起失败！"s));
@@ -122,7 +123,7 @@ int CoreTools::ThreadImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto priority = System::GetSystemThreadPriority(m_Thread);
+	const auto priority = System::GetSystemThreadPriority(m_Thread);
 
 	if (priority == EnumCastUnderlying(System::ThreadPriority::ErrorReturn))
 	{

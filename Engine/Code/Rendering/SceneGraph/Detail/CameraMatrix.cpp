@@ -18,7 +18,12 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26496)
 Rendering::CameraMatrix
     ::CameraMatrix (const WorldCoordinateFrame& worldCoordinateFrame,const CameraFrustum& cameraFrustum,float epsilon)
 	:m_WorldCoordinateFrame{ worldCoordinateFrame }, m_CameraFrustum{ cameraFrustum }, m_PreViewMatrix{ Matrix::sm_Identity }, m_PreViewIsIdentity{ true },
@@ -211,7 +216,7 @@ void Rendering::CameraMatrix
 CLASS_INVARIANT_STUB_DEFINE(Rendering,CameraMatrix)
 
 const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix
-    ::GetProjectionMatrix () const
+    ::GetProjectionMatrix () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -305,16 +310,14 @@ void Rendering::CameraMatrix
 }
 
 
-Rendering::DepthType Rendering::CameraMatrix
-    ::GetDepthType () const
+Rendering::DepthType Rendering::CameraMatrix ::GetDepthType() const noexcept 
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_DepthType;
 }
 
-const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix
-    ::GetProjectionViewMatrix () const
+const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix ::GetProjectionViewMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -332,16 +335,14 @@ void Rendering::CameraMatrix
     UpdateProjectionViewMatrix();
 }
 
-const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix
-    ::GetPreViewMatrix () const
+const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix ::GetPreViewMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_PreViewMatrix;
 }
 
-bool Rendering::CameraMatrix
-    ::PreViewIsIdentity () const
+bool Rendering::CameraMatrix ::PreViewIsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -359,16 +360,14 @@ void Rendering::CameraMatrix
     UpdateProjectionViewMatrix();
 }
 
-const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix
-    ::GetPostProjectionMatrix () const
+const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix ::GetPostProjectionMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_PostProjectionMatrix;
 }
 
-bool Rendering::CameraMatrix
-    ::PostProjectionIsIdentity () const
+bool Rendering::CameraMatrix ::PostProjectionIsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -385,16 +384,14 @@ void Rendering::CameraMatrix
     OnFrustumChange();
 }
 
-const Rendering::CameraFrustum& Rendering::CameraMatrix
-    ::GetCameraFrustum() const
+const Rendering::CameraFrustum& Rendering::CameraMatrix ::GetCameraFrustum() const noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
     
     return m_CameraFrustum;   
 }
 
-const Rendering::WorldCoordinateFrame& Rendering::CameraMatrix
-    ::GetWorldCoordinateFrame() const
+const Rendering::WorldCoordinateFrame& Rendering::CameraMatrix ::GetWorldCoordinateFrame() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -483,8 +480,7 @@ int Rendering::CameraMatrix
     return size;
 }
 
-float Rendering::CameraMatrix
-	::GetEpsilon() const
+float Rendering::CameraMatrix ::GetEpsilon() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -503,3 +499,4 @@ void Rendering::CameraMatrix
 	OnFrustumChange();
 }
 
+#include STSTEM_WARNING_POP

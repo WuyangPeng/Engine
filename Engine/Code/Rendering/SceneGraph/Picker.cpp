@@ -26,7 +26,7 @@ Rendering::Picker
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, Picker)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker,IsRecordsExist, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Picker,IsRecordsExist, bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker,GetClosestToZero, const Rendering::PickRecord)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker,GetClosestNonnegative, const Rendering::PickRecord)		

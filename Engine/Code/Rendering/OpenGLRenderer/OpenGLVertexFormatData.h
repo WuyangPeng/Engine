@@ -26,21 +26,21 @@ namespace Rendering
 		using DataType = System::OpenGLData;
 
 	public:
-		OpenGLVertexFormatData ();
+		OpenGLVertexFormatData () noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		void Init(const VertexFormat* vertexFormat);
 
-		void Set(UInt has,UInt channels,DataType type,UInt offset);
+		void Set(UInt has,UInt channels,DataType type,UInt offset) noexcept;
 
-		bool IsHas() const;
-		UInt GetChannels() const;
-		DataType GetType() const;
-		UInt GetOffset() const;
+		bool IsHas() const noexcept;
+		UInt GetChannels() const noexcept;
+		DataType GetType() const noexcept;
+		UInt GetOffset() const noexcept;
 
-		void Enable(int stride);
-		void Disable();
+		void Enable(int stride) noexcept;
+		void Disable() noexcept;
 
 	private:
 		UInt m_Has;

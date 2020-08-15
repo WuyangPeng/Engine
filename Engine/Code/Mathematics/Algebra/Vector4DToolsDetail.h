@@ -15,7 +15,10 @@
 #include "Vector4D.h"
 
 #include <iostream>
-
+#include "System/Helper/PragmaWarning.h" 
+ 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 template <typename Real>
 bool Mathematics::Vector4DTools<Real>
 	::Approximate(const Vector4D& lhs, const Vector4D& rhs, const Real epsilon)
@@ -132,7 +135,7 @@ typename const Mathematics::Vector4DTools<Real>::AxesAlignBoundingBox4D Mathemat
 
 	return AxesAlignBoundingBox4D{ min,max };
 }
-
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_VECTOR4D_TOOLS_DETAIL)
 
 template <typename Real>

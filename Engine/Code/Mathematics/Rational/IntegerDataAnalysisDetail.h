@@ -23,7 +23,7 @@
 
 template <int N>
 Mathematics::IntegerDataAnalysis<N>
-	::IntegerDataAnalysis(const IntegerData& master)
+	::IntegerDataAnalysis(const IntegerData& master) noexcept
 	:m_Master{ master }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -44,7 +44,7 @@ const Mathematics::IntegerData<N> Mathematics::IntegerDataAnalysis<N>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto symbol = m_Master.GetSign();
+	const auto symbol = m_Master.GetSign();
 
 	if (symbol == NumericalValueSymbol::Negative)
 	{

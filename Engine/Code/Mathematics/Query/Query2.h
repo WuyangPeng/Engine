@@ -31,7 +31,7 @@ namespace Mathematics
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual QueryType GetType() const override;
+		 QueryType GetType() const override;
 
 		int GetNumVertices() const;
 		const Vector2D GetVertice(int index) const;

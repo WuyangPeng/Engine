@@ -39,7 +39,7 @@ namespace Rendering
 		void SetConstant (const std::string& name,int numRegistersUsed);
 
 		const std::string GetConstantName () const;
-		int GetNumRegistersUsed () const;	
+		int GetNumRegistersUsed () const noexcept;	
 
 		void Load (BufferSource& source);
 		void Save (BufferTarget& target) const;

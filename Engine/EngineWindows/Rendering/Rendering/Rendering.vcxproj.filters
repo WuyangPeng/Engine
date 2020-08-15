@@ -1391,13 +1391,13 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\WindowRendererInput.cpp">
       <Filter>Renderers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PlatformTextureCube.cpp">
-      <Filter>Renderers 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\PickRayImpl.cpp">
       <Filter>Renderers 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PickRay.cpp">
+      <Filter>Renderers 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTextureCube.cpp">
       <Filter>Renderers 源文件</Filter>
     </ClCompile>
   </ItemGroup>

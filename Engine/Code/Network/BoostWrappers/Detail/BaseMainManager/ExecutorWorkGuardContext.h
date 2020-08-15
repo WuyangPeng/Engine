@@ -30,7 +30,7 @@ namespace Network
 	public:
 		void Run();
 
-		IOContextType& GetIOContext();
+		IOContextType& GetIOContext() noexcept;
 		void PostStopContext();
 		void DispatchStopContext();
 		bool IsContextStop() const;

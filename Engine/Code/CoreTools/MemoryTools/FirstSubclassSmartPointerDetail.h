@@ -14,7 +14,9 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
+#include STSTEM_WARNING_PUSH
 
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename BaseClass>
 CoreTools::FirstSubclassSmartPointer<BaseClass>
 	::FirstSubclassSmartPointer(uint64_t address, BaseClassType* data)
@@ -22,9 +24,7 @@ CoreTools::FirstSubclassSmartPointer<BaseClass>
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-#include STSTEM_WARNING_PUSH
 
-#include SYSTEM_WARNING_DISABLE(26434) 
 template <typename BaseClass>
 CoreTools::FirstSubclassSmartPointer<BaseClass>
 	::FirstSubclassSmartPointer(BaseClassType* data)

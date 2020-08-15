@@ -8,11 +8,17 @@
 
 #include "OpenGLVertexFormatArrayDataDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26481)
 template <>
 void Rendering
 	::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::TextureCoord,Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -27,7 +33,7 @@ void Rendering
 
 void Rendering
 	::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::Color,Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -45,7 +51,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::TextureCoord,Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>
-	::Disable()
+	::Disable() noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -60,7 +66,7 @@ void Rendering
 
 void Rendering
 	::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::Color,Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>
-	::Disable()
+	::Disable() noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	static_assert(System::EnumCastUnderlying(Rendering::VertexFormatFlags::MaximumNumber::ColorUnits) <= 2,"");
@@ -75,3 +81,4 @@ void Rendering
 		System::GlDisableSecondaryColorArray();
 	}
 }
+#include STSTEM_WARNING_POP

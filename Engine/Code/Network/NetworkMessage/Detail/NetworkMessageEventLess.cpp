@@ -11,13 +11,13 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 
 Network::NetworkMessageEventLess
-	::NetworkMessageEventLess()
+	::NetworkMessageEventLess() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 bool Network::NetworkMessageEventLess
-	::operator()(const NetworkMessageEventWeakPtr& lhs, const NetworkMessageEventWeakPtr& rhs) const
+	::operator()(const NetworkMessageEventWeakPtr& lhs, const NetworkMessageEventWeakPtr& rhs) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

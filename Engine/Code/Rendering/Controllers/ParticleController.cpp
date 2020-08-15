@@ -25,7 +25,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426) 
+#include SYSTEM_WARNING_DISABLE(26455) 
 CORE_TOOLS_RTTI_DEFINE(Rendering, ParticleController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ParticleController); 
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, ParticleController);
@@ -64,18 +67,18 @@ Rendering::ParticleController& Rendering::ParticleController
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ParticleController) 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ParticleController,GetNumParticles,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ParticleController,GetNumParticles,int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ParticleController,GetSystemLinearSpeed,float)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ParticleController,SetSystemLinearSpeed,float,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ParticleController,GetSystemAngularSpeed,float)								 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ParticleController,SetSystemAngularSpeed,float,void) 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ParticleController,GetSystemLinearAxis,const Rendering::ParticleController::AVector) 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ParticleController,SetSystemLinearAxis,AVector,void) 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ParticleController,GetSystemAngularAxis,const Rendering::ParticleController::AVector)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ParticleController,SetSystemAngularAxis,AVector,void) 							 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ParticleController,GetSystemSizeChange,float)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ParticleController,SetSystemSizeChange,float,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ParticleController,GetSystemLinearSpeed,float)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, ParticleController,SetSystemLinearSpeed,float,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ParticleController,GetSystemAngularSpeed,float)								 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, ParticleController,SetSystemAngularSpeed,float,void) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ParticleController,GetSystemLinearAxis,const Rendering::ParticleController::AVector) 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, ParticleController,SetSystemLinearAxis,AVector,void) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ParticleController,GetSystemAngularAxis,const Rendering::ParticleController::AVector)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, ParticleController,SetSystemAngularAxis,AVector,void) 							 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ParticleController,GetSystemSizeChange,float)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, ParticleController,SetSystemSizeChange,float,void)
 										 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ParticleController,GetParticleLinearSpeed,int,float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ParticleController,GetParticleLinearAxis,int,const Rendering::ParticleController::AVector)
@@ -173,22 +176,22 @@ void Rendering::ParticleController
 
 	if (m_Particles != nullptr)
 	{
-		auto dSize = ctrlTime * GetSystemSizeChange();
+		const auto dSize = ctrlTime * GetSystemSizeChange();
 		m_Particles->SetSizeAdjust(m_Particles->GetSizeAdjust() + dSize);
 		if (m_Particles->GetSizeAdjust() < 0.0f)
 		{
 			m_Particles->SetSizeAdjust(0.0f);
 		}
 
-		auto distance = ctrlTime * GetSystemLinearSpeed();
+		const auto distance = ctrlTime * GetSystemLinearSpeed();
 		auto deltaTrn = distance * GetSystemLinearAxis();
 		auto localTransform = m_Particles->GetLocalTransform();
 		auto translate = localTransform.GetTranslate() + deltaTrn;
 		localTransform.SetTranslate(translate);
 
-		auto angle = ctrlTime * GetSystemAngularSpeed();
-		Mathematics::Matrixf deltaRot{ GetSystemAngularAxis(), angle };
-		auto rotate = deltaRot * localTransform.GetRotate();
+		const auto angle = ctrlTime * GetSystemAngularSpeed();
+		const Mathematics::Matrixf deltaRot{ GetSystemAngularAxis(), angle };
+		const auto rotate = deltaRot * localTransform.GetRotate();
 		localTransform.SetRotate(rotate);
 
 		m_Particles->SetLocalTransform(localTransform);
@@ -202,15 +205,15 @@ void Rendering::ParticleController
 
 	if (m_Particles != nullptr)
 	{
-		auto numActive = m_Particles->GetNumActive();
+		const auto numActive = m_Particles->GetNumActive();
 		for (auto i = 0; i < numActive; ++i)
 		{
 			auto position = m_Particles->GetPosition(i);
 			auto size = m_Particles->GetSize(i);
 
-			auto dSize = ctrlTime * GetParticleSizeChange(i);
+			const auto dSize = ctrlTime * GetParticleSizeChange(i);
 			size += dSize;
-			auto distance = ctrlTime * GetParticleLinearSpeed(i);
+			const auto distance = ctrlTime * GetParticleLinearSpeed(i);
 			auto deltaTrn = distance * GetParticleLinearAxis(i);
 			position += deltaTrn;
 		
@@ -300,4 +303,4 @@ void Rendering::ParticleController
 }
 
 
- 
+ #include STSTEM_WARNING_POP

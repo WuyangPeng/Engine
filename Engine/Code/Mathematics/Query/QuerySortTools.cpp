@@ -36,6 +36,6 @@ Mathematics::QuerySortTools
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Mathematics, QuerySortTools)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, QuerySortTools, GetSymbol, Mathematics::NumericalValueSymbol)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, QuerySortTools, GetSymbol, Mathematics::NumericalValueSymbol)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, QuerySortTools, GetValue, int, int)

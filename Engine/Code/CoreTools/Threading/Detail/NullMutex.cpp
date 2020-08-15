@@ -10,45 +10,40 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
 CoreTools::NullMutex
-	::NullMutex()
+	::NullMutex() noexcept
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::NullMutex
-	::~NullMutex()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, NullMutex)
 
 void CoreTools::NullMutex
-	::Initialize()
+	::Initialize() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
 
 void CoreTools::NullMutex
-	::Delete()
+	::Delete() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
 
 void CoreTools::NullMutex
-	::Enter()
+	::Enter() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
 
 void CoreTools::NullMutex
-	::Leave()
+	::Leave() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
 
 bool CoreTools::NullMutex
-	::TryEnter()
+	::TryEnter() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 

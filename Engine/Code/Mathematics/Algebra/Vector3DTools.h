@@ -43,17 +43,17 @@ namespace Mathematics
 
 	public:
 		static bool Approximate(const Vector3D& lhs, const Vector3D& rhs,
-								const Real epsilon = Math::sm_ZeroTolerance) noexcept;
+								const Real epsilon = Math::sm_ZeroTolerance);
 
-		static Real VectorMagnitude(const Vector3D& vector) noexcept;
-		static Real VectorMagnitudeSquared(const Vector3D& vector) noexcept;
+		static Real VectorMagnitude(const Vector3D& vector);
+		static Real VectorMagnitudeSquared(const Vector3D& vector);
 		static Real DotProduct(const Vector3D& lhs, const Vector3D& rhs);
 
 		// 叉积使用的是右手的规则计算。 
 		// 请注意，某些图形API使用左手的规则。 
 		// 如果你计算叉积使用这些函数，并将结果发送给一个期望用左手的API，
 		// 您将需要更改的矢量符号（替换每个组件值c为-c）。
-		static const Vector3D CrossProduct(const Vector3D& lhs, const Vector3D& rhs) noexcept;
+		static const Vector3D CrossProduct(const Vector3D& lhs, const Vector3D& rhs);
 		static const Vector3D CrossProductWithReduceMultiplication(const Vector3D& lhs, const Vector3D& rhs);
 		static const Vector3D UnitCrossProduct(const Vector3D& lhs, const Vector3D& rhs,
 											   const Real epsilon = Math::sm_ZeroTolerance);

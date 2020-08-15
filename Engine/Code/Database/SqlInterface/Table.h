@@ -34,7 +34,7 @@ namespace Database
 
 		CLASS_INVARIANT_DECLARE;
 
-		ConfigurationStrategy GetConfigurationStrategy() const;
+		ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
 		ResultPtr Select(std::initializer_list<std::string> selectStatement, const std::string& whereStatement,
 						 const std::string& orderByStatement, const BindStatementType& bindStatement);

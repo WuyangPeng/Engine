@@ -13,16 +13,15 @@
 using namespace Rendering;
 
 
-Dx9Shader::Dx9Shader()
+Dx9Shader::Dx9Shader() noexcept
 {
 }
 
-Dx9Shader::~Dx9Shader()
-{
-}
+ 
 
 void Dx9Shader::SetSamplerState(Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, int maxSamplers,DWORD base, Dx9RendererData::SamplerState* currentSS)
 {
+    CoreTools::DoNothing();
 	renderer; shader; profile; parameters; maxSamplers; base; currentSS;
    /* IDirect3DDevice9* device = renderer->mData->mDevice;
     HRESULT hr;
@@ -272,6 +271,7 @@ void Dx9Shader::SetSamplerState(Renderer* renderer, const ShaderBase* shader,int
 
 void Dx9Shader::DisableTextures(Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, int maxSamplers,DWORD base)
 {
+    CoreTools::DoNothing();
 	renderer; shader; profile; parameters; maxSamplers; base;
 	/*
     int numSamplers = shader->GetNumSamplers();

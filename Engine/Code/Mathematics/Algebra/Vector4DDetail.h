@@ -45,7 +45,7 @@ const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
 
 template <typename Real>
 Mathematics::Vector4D<Real>
-	::Vector4D()
+	::Vector4D() noexcept
 	:m_Tuple{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -122,7 +122,7 @@ bool Mathematics::Vector4D<Real>
 
 template <typename Real>
 Real Mathematics::Vector4D<Real>
-	::GetXCoordinate() const noexcept
+	::GetXCoordinate() const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -131,7 +131,7 @@ Real Mathematics::Vector4D<Real>
 
 template <typename Real>
 Real Mathematics::Vector4D<Real>
-	::GetYCoordinate() const noexcept
+	::GetYCoordinate() const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -140,7 +140,7 @@ Real Mathematics::Vector4D<Real>
 
 template <typename Real>
 Real Mathematics::Vector4D<Real>
-	::GetZCoordinate() const noexcept
+	::GetZCoordinate() const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -149,7 +149,7 @@ Real Mathematics::Vector4D<Real>
 
 template <typename Real>
 Real Mathematics::Vector4D<Real>
-	::GetWCoordinate() const noexcept
+	::GetWCoordinate() const  
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

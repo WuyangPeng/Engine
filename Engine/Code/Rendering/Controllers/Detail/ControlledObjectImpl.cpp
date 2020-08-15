@@ -19,12 +19,16 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
 using std::string;
 using std::vector;
 
 Rendering::ControlledObjectImpl
-    ::ControlledObjectImpl (ControllerInterface* realThis)
+    ::ControlledObjectImpl (ControllerInterface* realThis) noexcept
 	:m_Controllers{}, m_RealThis{ realThis }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -35,7 +39,7 @@ Rendering::ControlledObjectImpl
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
     
-    DetachAllControllers();
+  CoreTools::NoexceptNoReturn(*this,&ClassType::DetachAllControllers);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -72,7 +76,7 @@ Rendering::ConstControllerInterfaceSmartPointer Rendering::ControlledObjectImpl
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= index && index < GetNumControllers(), "Ë÷Òý´íÎóÔÚGetController\n");
  
-     return m_Controllers[index].PolymorphicCastConstObjectSmartPointer<ConstControllerInterfaceSmartPointer>();
+     return m_Controllers[index];
 }
 
 Rendering::ControllerInterfaceSmartPointer	Rendering::ControlledObjectImpl
@@ -85,7 +89,7 @@ Rendering::ControllerInterfaceSmartPointer	Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-    ::AttachController (ControllerInterfaceSmartPointer& controller)
+    ::AttachController (ControllerInterfaceSmartPointer controller)
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -104,7 +108,7 @@ void Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-	::AttachControllerInCopy(ControllerInterfaceSmartPointer& controller) 
+	::AttachControllerInCopy(ControllerInterfaceSmartPointer controller) 
 {
 	RENDERING_CLASS_IS_VALID_1;
     
@@ -123,7 +127,7 @@ void Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-    ::DetachController (ControllerInterfaceSmartPointer& controller)
+    ::DetachController (ControllerInterfaceSmartPointer controller)
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -183,7 +187,7 @@ bool Rendering::ControlledObjectImpl
 }
 
 const CoreTools::ObjectSmartPointer Rendering::ControlledObjectImpl
-    ::GetObjectByName(const string& name)
+    ::GetObjectByName(const string& name)  
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -194,6 +198,8 @@ const CoreTools::ObjectSmartPointer Rendering::ControlledObjectImpl
 			return m_Controllers[i];
 		}           
     }
+
+    CoreTools::DoNothing();
     
     return CoreTools::ObjectSmartPointer();
 }
@@ -220,12 +226,12 @@ const CoreTools::ConstObjectSmartPointer Rendering::ControlledObjectImpl
     ::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
+    CoreTools::DoNothing();
     for (auto i = 0u; i < m_Controllers.size(); ++i)
     {
 		if (m_Controllers[i]->GetName() == name)
 		{
-			return m_Controllers[i].PolymorphicCastConstObjectSmartPointer<CoreTools::ConstObjectSmartPointer>();
+			return m_Controllers[i];
 		}           
     }
     
@@ -243,7 +249,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::ControlledObjectImpl
     {
 		if (m_Controllers[i]->GetName() == name)
 		{
-			objects.push_back(m_Controllers[i].PolymorphicCastConstObjectSmartPointer<CoreTools::ConstObjectSmartPointer>());
+			objects.push_back(m_Controllers[i]);
 		}            
     }
     
@@ -269,11 +275,11 @@ void Rendering::ControlledObjectImpl
     ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
+    CoreTools::DoNothing();
 	if(!m_Controllers.empty())
-	{	
-		target.RegisterSmartPointer(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
-	
+        {
+            target;
+		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);	
 	}
 }
 
@@ -284,11 +290,12 @@ void Rendering::ControlledObjectImpl
 
 	if(!m_Controllers.empty())
 	{
-		target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+		//target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
 	}
 	else
 	{
-		target.Write(static_cast<int>(0));
+            constexpr int zero = 0;
+                target.Write(zero);
 	}
 }
 
@@ -296,10 +303,11 @@ void Rendering:: ControlledObjectImpl
     ::Link (CoreTools::ObjectLink& source)
 { 
 	RENDERING_CLASS_IS_VALID_1;    
-
+    CoreTools::DoNothing();
    if(!m_Controllers.empty())
-   {
-	   source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+        {
+       source;
+	 //  source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
    }
 }
 
@@ -315,7 +323,7 @@ void Rendering:: ControlledObjectImpl
 	
 	if(!m_Controllers.empty())
 	{
-		source.ReadSmartPointer(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+//		source.ReadSmartPointer(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
 	}
 }
 
@@ -324,4 +332,4 @@ void Rendering:: ControlledObjectImpl
 
 
 
- 
+ #include STSTEM_WARNING_POP

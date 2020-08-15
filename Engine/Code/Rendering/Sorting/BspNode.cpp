@@ -11,7 +11,12 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
-
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486) 
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering, BspNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BspNode);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BspNode); 
@@ -36,10 +41,7 @@ Rendering::BspNode
 	AttachChild(spatialSmartPointer);  // right child
 }
 
-Rendering::BspNode
-	::~BspNode ()
-{
-}
+ 
 
 Rendering::SpatialSmartPointer Rendering::BspNode
 	::GetContainingNode(const Mathematics::APointf& point)
@@ -47,14 +49,14 @@ Rendering::SpatialSmartPointer Rendering::BspNode
     SpatialSmartPointer posChild = GetPositiveChild();
 	SpatialSmartPointer negChild = GetNegativeChild();
 
-	if (posChild.IsValidPtr() || negChild.IsValidPtr())
+	if (posChild  || negChild )
     {
 		BspNodeSmartPointer bspChild;
 
         if (mWorldPlane.WhichSide(point) < Mathematics::NumericalValueSymbol::Zero)
         {
-			bspChild = negChild.PolymorphicCastObjectSmartPointer<BspNodeSmartPointer>();
-			if (bspChild.IsValidPtr())
+            bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);//.PolymorphicCastObjectSmartPointer<SmartPointer>();
+			if (bspChild )
             {
                 return bspChild->GetContainingNode(point);
             }
@@ -65,8 +67,9 @@ Rendering::SpatialSmartPointer Rendering::BspNode
         }
         else
         {
-			bspChild = posChild.PolymorphicCastObjectSmartPointer<BspNodeSmartPointer>();
-			if (bspChild.IsValidPtr())
+            bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);
+           // posChild.PolymorphicCastObjectSmartPointer<BspNodeSmartPointer>();
+			if (bspChild )
             {
                 return bspChild->GetContainingNode(point);
             }
@@ -82,7 +85,7 @@ Rendering::SpatialSmartPointer Rendering::BspNode
 
 bool Rendering::BspNode::UpdateWorldData (double applicationTime)
 {
-	bool result =  Node::UpdateWorldData(applicationTime);
+const	bool result =  Node::UpdateWorldData(applicationTime);
  
      //mWorldPlane = ModelPlane * GetWorldTransform().GetInverseMatrix();
   // mWorldPlane.Normalize();
@@ -101,7 +104,7 @@ void Rendering::BspNode
 
     const ConstCameraSmartPointer camera = culler.GetCamera();
 	Mathematics::NumericalValueSymbol positionSide = mWorldPlane.WhichSide(camera->GetPosition());
-	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPlane);
+const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPlane);
 
     if (positionSide > Mathematics::NumericalValueSymbol::Zero)
     {
@@ -112,7 +115,7 @@ void Rendering::BspNode
             // The frustum is on the negative side of the plane or straddles
             // the plane.  In either case, the negative child is potentially
             // visible.
-			if (negChild.IsValidPtr())
+			if (negChild )
             {
                 negChild->OnGetVisibleSet(culler, noCull);
             }
@@ -122,7 +125,7 @@ void Rendering::BspNode
         {
             // The frustum straddles the plane.  The coplanar child is
             // potentially visible.
-			if (copChild.IsValidPtr())
+			if (copChild )
             {
                 copChild->OnGetVisibleSet(culler, noCull);
             }
@@ -133,7 +136,7 @@ void Rendering::BspNode
             // The frustum is on the positive side of the plane or straddles
             // the plane.  In either case, the positive child is potentially
             // visible.
-			if (posChild.IsValidPtr())
+			if (posChild )
             {
                 posChild->OnGetVisibleSet(culler, noCull);
             }
@@ -148,7 +151,7 @@ void Rendering::BspNode
             // The frustum is on the positive side of the plane or straddles
             // the plane.  In either case, the positive child is potentially
             // visible.
-			if (posChild.IsValidPtr())
+			if (posChild )
             {
                 posChild->OnGetVisibleSet(culler, noCull);
             }
@@ -158,7 +161,7 @@ void Rendering::BspNode
         {
             // The frustum straddles the plane.  The coplanar child is
             // potentially visible.
-			if (copChild.IsValidPtr())
+			if (copChild )
             {
                 copChild->OnGetVisibleSet(culler, noCull);
             }
@@ -169,7 +172,7 @@ void Rendering::BspNode
             // The frustum is on the negative side of the plane or straddles
             // the plane.  In either case, the negative child is potentially
             // visible.
-			if (negChild.IsValidPtr())
+			if (negChild )
             {
                 negChild->OnGetVisibleSet(culler, noCull);
             }
@@ -184,34 +187,34 @@ void Rendering::BspNode
 		float NdD = Dot( mWorldPlane.GetNormal(),camera->GetDirectionVector());
         if (NdD >= 0.0f)
         {
-			if (posChild.IsValidPtr())
+			if (posChild )
             {
                 posChild->OnGetVisibleSet(culler, noCull);
             }
 
-			if (copChild.IsValidPtr())
+			if (copChild )
             {
                 copChild->OnGetVisibleSet(culler, noCull);
             }
 
-			if (negChild.IsValidPtr())
+			if (negChild )
             {
                 negChild->OnGetVisibleSet(culler, noCull);
             }
         }
         else
         {
-			if (negChild.IsValidPtr())
+			if (negChild )
             {
                 negChild->OnGetVisibleSet(culler, noCull);
             }
 
-			if (copChild.IsValidPtr())
+			if (copChild )
             {
                 copChild->OnGetVisibleSet(culler, noCull);
             }
 
-			if (posChild.IsValidPtr())
+			if (posChild )
             {
                 posChild->OnGetVisibleSet(culler, noCull);
             }
@@ -347,8 +350,9 @@ Rendering::SpatialSmartPointer Rendering::BspNode
 }
 
  const Mathematics::Planef& Rendering::BspNode
-	 ::GetWorldPlane() const
+	 ::GetWorldPlane() const noexcept
 {
 	return mWorldPlane;
 }
 
+	#include STSTEM_WARNING_POP

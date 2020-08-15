@@ -17,7 +17,11 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26455)
 template <int N>
 Mathematics::Integer<N>
 	::Integer()
@@ -122,7 +126,7 @@ const Mathematics::Integer<N> Mathematics::Integer<N>
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	Integer integer;
-	IntegerDataAnalysis<N> analysis{ m_IntegerData };
+	const IntegerDataAnalysis<N> analysis{ m_IntegerData };
 	integer.m_IntegerData = -analysis;
 
 	return integer;
@@ -376,7 +380,7 @@ std::ostream& Mathematics
 
 	return os;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_RATIONAL_INTEGER_DETAIL_H
 
 

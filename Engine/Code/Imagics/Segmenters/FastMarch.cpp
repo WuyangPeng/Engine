@@ -9,7 +9,11 @@
 #include "FastMarch.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 Imagics::FastMarch
 	::FastMarch(int quantity, const float* speeds,const std::vector<int>& seeds)
     : mHeap(quantity, 1, Mathematics::Mathf::sm_MaxReal)
@@ -29,9 +33,14 @@ Imagics::FastMarch
 Imagics::FastMarch
 	::~FastMarch()
 {
-    DELETE1(mTrials);
+	EXCEPTION_TRY
+{
+DELETE1(mTrials);
 	DELETE1(mInvSpeeds);
 	DELETE1(mTimes);
+}
+EXCEPTION_ALL_CATCH(Imagics)  
+    
 }
 
 void Imagics::FastMarch
@@ -47,13 +56,13 @@ void Imagics::FastMarch
     // -MAX_REAL.  Such pixels can never be visited; the minus sign
     // distinguishes these from pixels not yet reached during iteration.
     mTimes = NEW1<float>(mQuantity);
-    int i;
-    for (i = 0; i < mQuantity; ++i)
+   
+    for (int i = 0; i < mQuantity; ++i)
     {
 		mTimes[i] = Mathematics::Mathf::sm_MaxReal;
     }
 
-    for (i = 0; i < (int)seeds.size(); ++i)
+    for (auto i = 0u; i <  seeds.size(); ++i)
     {
         mTimes[seeds[i]] = 0.0f;
     }
@@ -61,7 +70,7 @@ void Imagics::FastMarch
     // Trial pixels are identified by having min-heap record associated with
     // them.  Known or Far pixels have no associated record.
 	mTrials = NEW1<int>(mQuantity);
-	size_t numBytes = mQuantity*sizeof(const CoreTools::MinHeapRecord<int, float>*);
+	const size_t numBytes = mQuantity*sizeof(const CoreTools::MinHeapRecord<int, float>*);
     memset(mTrials, 0, numBytes);
 }
 
@@ -89,7 +98,7 @@ void Imagics::FastMarch
 void Imagics::FastMarch
 	::InitializeSpeed(const float speed)
 {
-    float invSpeed = 1.0f/speed;
+    const float invSpeed = 1.0f/speed;
     mInvSpeeds = NEW1<float>(mQuantity);
     for (int i = 0; i < mQuantity; ++i)
     {
@@ -143,49 +152,49 @@ void Imagics::FastMarch
 }
 
 void Imagics::FastMarch
-	::SetTime(int i, float time)
+	::SetTime(int i, float time) noexcept
 {
 	mTimes[i] = time;
 }
 
 float Imagics::FastMarch
-	::GetTime(int i) const
+	::GetTime(int i) const noexcept
 {
 	return mTimes[i];
 }
 
 int Imagics::FastMarch
-	::GetQuantity() const
+	::GetQuantity() const noexcept
 {
 	return mQuantity;
 }
 
 bool Imagics::FastMarch
-	::IsValid(int i) const
+	::IsValid(int i) const noexcept
 {
 	return 0.0f <= mTimes[i] && mTimes[i] < Mathematics::Mathf::sm_MaxReal;
 }
 
 bool Imagics::FastMarch
-	::IsTrial(int i) const
+	::IsTrial(int i) const noexcept
 {
 	return mTrials[i] != 0;
 }
 
 bool Imagics::FastMarch
-	::IsFar(int i) const
+	::IsFar(int i) const noexcept
 {
 	return mTimes[i] == Mathematics::Mathf::sm_MaxReal;
 }
 
 bool Imagics::FastMarch
-	::IsZeroSpeed(int i) const
+	::IsZeroSpeed(int i) const noexcept
 {
 	return mTimes[i] == -Mathematics::Mathf::sm_MaxReal;
 }
 
-bool Imagics::FastMarch
-	::IsInterior(int i) const
+bool Imagics::FastMarch ::IsInterior(int i) const noexcept
 {
 	return IsValid(i) && !IsTrial(i);
 }
+#include STSTEM_WARNING_POP

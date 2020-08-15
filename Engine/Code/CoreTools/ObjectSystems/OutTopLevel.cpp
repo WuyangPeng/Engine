@@ -12,21 +12,23 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::OutTopLevel
 	::OutTopLevel()
 	:m_Impl{ make_shared<ImplType>() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, OutTopLevel)
 
 DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, OutTopLevel)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, OutTopLevel, IsTopLevel, uint64_t, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, OutTopLevel, GetTopLevelSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, OutTopLevel, operator[], int, const CoreTools::ConstObjectInterfaceSmartPointer&)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, OutTopLevel, operator[], int, CoreTools::ConstObjectInterfaceSmartPointer)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, OutTopLevel, Insert, ObjectInterfaceSmartPointer, void)
 
 void CoreTools::OutTopLevel

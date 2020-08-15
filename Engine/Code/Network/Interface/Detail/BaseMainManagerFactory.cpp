@@ -21,7 +21,7 @@
 using std::make_shared;
 
 Network::BaseMainManagerFactory
-	::BaseMainManagerFactory()
+	::BaseMainManagerFactory() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -32,7 +32,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, BaseMainManagerFactory)
 const Network::BaseMainManagerFactory::ImplTypePtr Network::BaseMainManagerFactory
 	::Create(const ConfigurationStrategy& configurationStrategy)
 {
-	auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
+	const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
 	switch (wrappersStrategyFlag)
 	{

@@ -17,7 +17,9 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
 Rendering::VertexBufferAccessorImpl
 	::VertexBufferAccessorImpl(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer)
 	:m_VertexFormat{ vertexformat }, m_VertexBuffer{ vertexbuffer }, m_Stride{ m_VertexFormat->GetStride() },
@@ -42,7 +44,7 @@ Rendering::VertexBufferAccessorImpl
 bool Rendering::VertexBufferAccessorImpl
 	::IsValid() const noexcept
 {
-	if (!(m_VertexFormat.IsNullPtr() || m_VertexBuffer.IsNullPtr()))
+	if (!(!m_VertexFormat  || !m_VertexBuffer ))
 		return true;
 	else
 		return false;
@@ -62,7 +64,7 @@ void Rendering::VertexBufferAccessorImpl
 }
 
 void Rendering::VertexBufferAccessorImpl
-	::ApplyTo(Visual* visual)
+	::ApplyTo(const Visual* visual)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -90,7 +92,7 @@ void Rendering::VertexBufferAccessorImpl
 }
 
 const char* Rendering::VertexBufferAccessorImpl
-	::GetData() const
+	::GetData() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -98,7 +100,7 @@ const char* Rendering::VertexBufferAccessorImpl
 }
 
 int Rendering::VertexBufferAccessorImpl
-	::GetNumVertices() const
+	::GetNumVertices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -106,7 +108,7 @@ int Rendering::VertexBufferAccessorImpl
 }
 
 int Rendering::VertexBufferAccessorImpl
-	::GetStride() const
+	::GetStride() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -114,7 +116,7 @@ int Rendering::VertexBufferAccessorImpl
 }
 
 const char* Rendering::VertexBufferAccessorImpl
-	::GetPosition(int index) const
+	::GetPosition(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -122,7 +124,7 @@ const char* Rendering::VertexBufferAccessorImpl
 }
 
 bool Rendering::VertexBufferAccessorImpl
-	::HasPosition() const
+	::HasPosition() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -130,7 +132,7 @@ bool Rendering::VertexBufferAccessorImpl
 }
 
 int Rendering::VertexBufferAccessorImpl
-	::GetPositionChannels() const
+	::GetPositionChannels() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	
@@ -138,7 +140,7 @@ int Rendering::VertexBufferAccessorImpl
 }
 
 const float* Rendering::VertexBufferAccessorImpl
-	::GetPositionTuple(int index) const
+	::GetPositionTuple(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -146,7 +148,7 @@ const float* Rendering::VertexBufferAccessorImpl
 }
 
 const char* Rendering::VertexBufferAccessorImpl
-	::GetNormal(int index) const
+	::GetNormal(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -154,7 +156,7 @@ const char* Rendering::VertexBufferAccessorImpl
 }
 
 bool Rendering::VertexBufferAccessorImpl
-	::HasNormal() const
+	::HasNormal() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -162,7 +164,7 @@ bool Rendering::VertexBufferAccessorImpl
 }
 
 int Rendering::VertexBufferAccessorImpl
-	::GetNormalChannels() const
+	::GetNormalChannels() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	
@@ -170,7 +172,7 @@ int Rendering::VertexBufferAccessorImpl
 }
 
 const float* Rendering::VertexBufferAccessorImpl
-	::GetNormalTuple(int index) const
+	::GetNormalTuple(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -178,7 +180,7 @@ const float* Rendering::VertexBufferAccessorImpl
 }
 
 const char* Rendering::VertexBufferAccessorImpl
-	::GetTangent(int index) const 
+	::GetTangent(int index) const  noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -186,7 +188,7 @@ const char* Rendering::VertexBufferAccessorImpl
 }
 
 bool Rendering::VertexBufferAccessorImpl
-	::HasTangent() const 
+	::HasTangent() const  noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -194,7 +196,7 @@ bool Rendering::VertexBufferAccessorImpl
 }
 
 int Rendering::VertexBufferAccessorImpl
-	::GetTangentChannels() const
+	::GetTangentChannels() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -202,7 +204,7 @@ int Rendering::VertexBufferAccessorImpl
 }
 
 const float* Rendering::VertexBufferAccessorImpl
-	::GetTangentTuple(int index) const 
+	::GetTangentTuple(int index) const  noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -210,7 +212,7 @@ const float* Rendering::VertexBufferAccessorImpl
 }
 
 const char* Rendering::VertexBufferAccessorImpl
-	::GetBinormal(int index) const
+	::GetBinormal(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -218,7 +220,7 @@ const char* Rendering::VertexBufferAccessorImpl
 }
 
 bool Rendering::VertexBufferAccessorImpl
-	::HasBinormal() const 
+	::HasBinormal() const  noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -226,7 +228,7 @@ bool Rendering::VertexBufferAccessorImpl
 }
 
 int Rendering::VertexBufferAccessorImpl
-	::GetBinormalChannels() const
+	::GetBinormalChannels() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -234,7 +236,7 @@ int Rendering::VertexBufferAccessorImpl
 }
 
 const float* Rendering::VertexBufferAccessorImpl
-	::GetBinormalTuple(int index) const
+	::GetBinormalTuple(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -306,7 +308,7 @@ const float* Rendering::VertexBufferAccessorImpl
 }
 
 const char* Rendering::VertexBufferAccessorImpl
-	::GetBlendIndices(int index) const
+	::GetBlendIndices(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -314,7 +316,7 @@ const char* Rendering::VertexBufferAccessorImpl
 }
 
 bool Rendering::VertexBufferAccessorImpl
-	::HasBlendIndices() const 
+	::HasBlendIndices() const  noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -322,7 +324,7 @@ bool Rendering::VertexBufferAccessorImpl
 }
 
 const char* Rendering::VertexBufferAccessorImpl
-	::GetBlendWeight(int index) const
+	::GetBlendWeight(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -330,7 +332,7 @@ const char* Rendering::VertexBufferAccessorImpl
 }
 
 bool Rendering::VertexBufferAccessorImpl
-	::HasBlendWeight() const 
+	::HasBlendWeight() const  noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -387,3 +389,4 @@ int Rendering::VertexBufferAccessorImpl
 	return excursion;
 }
 
+#include STSTEM_WARNING_POP

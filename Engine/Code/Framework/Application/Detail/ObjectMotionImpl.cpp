@@ -18,9 +18,8 @@ using Mathematics::Mathf;
 using Rendering::Spatial;
 using Rendering::Transform;
 
-Framework::ObjectMotionImpl
-	::ObjectMotionImpl(const SpatialSmartPointer& motionObject)
-	:m_MotionObject{ motionObject }, m_DoRoll{ 0 }, m_DoYaw{ 0 }, m_DoPitch{ 0 }, m_BeginXTrack{ 0.0f }, m_BeginYTrack{ 0.0f },
+Framework::ObjectMotionImpl ::ObjectMotionImpl(const SpatialSmartPointer& motionObject) noexcept
+    : m_MotionObject{ motionObject }, m_DoRoll{ 0 }, m_DoYaw{ 0 }, m_DoPitch{ 0 }, m_BeginXTrack{ 0.0f }, m_BeginYTrack{ 0.0f },
 	 m_EndXTrack{ 0.0f }, m_EndYTrack{ 0.0f }, m_SaveRotate{ }, m_UseTrackBall{ true }, m_TrackBallDown{ false }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -30,7 +29,7 @@ Framework::ObjectMotionImpl
 bool Framework::ObjectMotionImpl
 	::IsValid() const noexcept
 {
-	if (m_MotionObject.IsValidPtr())
+	if (m_MotionObject )
 		return true;
 	else
 		return false;

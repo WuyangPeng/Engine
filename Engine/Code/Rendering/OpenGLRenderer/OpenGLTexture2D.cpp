@@ -20,16 +20,12 @@ Rendering::OpenGLTexture2D
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::OpenGLTexture2D
-	::~OpenGLTexture2D()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTexture2D)
 
 void Rendering::OpenGLTexture2D
-	::Enable( Renderer* renderer, int textureUnit )
+	::Enable( Renderer* renderer, int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -39,7 +35,7 @@ void Rendering::OpenGLTexture2D
 }
 
 void Rendering::OpenGLTexture2D
-	::Disable( Renderer* renderer, int textureUnit )
+	::Disable( Renderer* renderer, int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -49,7 +45,7 @@ void Rendering::OpenGLTexture2D
 }
 
 void* Rendering::OpenGLTexture2D
-	::Lock( int level, BufferLocking mode )
+	::Lock( int level, BufferLocking mode ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -57,7 +53,7 @@ void* Rendering::OpenGLTexture2D
 }
 
 void Rendering::OpenGLTexture2D
-	::Unlock( int level )
+	::Unlock( int level ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -65,7 +61,7 @@ void Rendering::OpenGLTexture2D
 }
 
 System::OpenGLUInt Rendering::OpenGLTexture2D
-	::GetTexture() const
+	::GetTexture() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

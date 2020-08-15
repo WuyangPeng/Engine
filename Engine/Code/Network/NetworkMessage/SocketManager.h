@@ -27,10 +27,9 @@ namespace Network
 		NON_COPY_CLASSES_TYPE_DECLARE(SocketManager);
 
 	public:
-		SocketManager();
-		virtual ~SocketManager();
+		SocketManager(); 
 
-		IMPL_MOVE_OPERATOR_COMPLETE_DECLARE(SocketManager);
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 	public:
 		void Insert(uint64_t socketID);

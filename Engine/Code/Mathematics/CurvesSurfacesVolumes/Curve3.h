@@ -18,15 +18,18 @@ namespace Mathematics
 	{
 	public:
 		// Abstract base class.
-		Curve3 (Real tmin, Real tmax);
+            Curve3(Real tmin, Real tmax) noexcept;
 		virtual ~Curve3 ();
-		
+		Curve3(const Curve3&) = default;
+		Curve3& operator=(const Curve3&) = default;
+		Curve3(Curve3&&) = default;
+		Curve3& operator=(Curve3&&) = default;
 		// Interval on which curve parameter is defined.  If you are interested
 		// in only a subinterval of the actual domain of the curve, you may set
 		// that subinterval with SetTimeInterval.  This function requires that
 		// tmin < tmax.
-		Real GetMinTime () const;
-		Real GetMaxTime () const;
+                Real GetMinTime() const noexcept;
+                Real GetMaxTime() const noexcept;
 		void SetTimeInterval (Real tmin, Real tmax);
 		
 		// Position and derivatives.

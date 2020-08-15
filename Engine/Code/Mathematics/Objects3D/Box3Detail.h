@@ -12,7 +12,10 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 template <typename Real>
 Mathematics::Box3<Real>
 	::Box3()
@@ -42,6 +45,7 @@ template <typename Real>
 bool Mathematics::Box3<Real>
 	::IsValid() const noexcept
 {
+	try{
 	if (m_Axis[0].IsNormalize(m_Epsilon) && m_Axis[1].IsNormalize(m_Epsilon) &&
 		m_Axis[2].IsNormalize(m_Epsilon) && -m_Epsilon <= m_Extent[0] &&
 		-m_Epsilon <= m_Extent[1] && -m_Epsilon <= m_Extent[2] &&
@@ -50,6 +54,11 @@ bool Mathematics::Box3<Real>
 		return true;
 	}
 	else
+	{
+		return false;
+	}
+	}
+	catch(...)
 	{
 		return false;
 	}
@@ -78,7 +87,7 @@ const std::vector<typename Mathematics::Box3<Real>::Vector3D> Mathematics::Box3<
 
 template <typename Real>
 typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
-	::GetCenter() const
+	::GetCenter() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -87,7 +96,7 @@ typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
 
 template <typename Real>
 typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
-	::GetFirstAxis() const
+	::GetFirstAxis() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -96,7 +105,7 @@ typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
 
 template <typename Real>
 typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
-	::GetSecondAxis() const
+	::GetSecondAxis() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -105,7 +114,7 @@ typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
 
 template <typename Real>
 typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
-	::GetThirdAxis() const
+	::GetThirdAxis() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -114,7 +123,7 @@ typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
 
 template <typename Real>
 typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
-	::GetAxis(int index) const
+	::GetAxis(int index) const 
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -124,7 +133,7 @@ typename const Mathematics::Box3<Real>::Vector3D Mathematics::Box3<Real>
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"s));
 	}
 }
 
@@ -140,13 +149,13 @@ Real Mathematics::Box3<Real>
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"s));
 	}
 }
 
 template <typename Real>
 Real Mathematics::Box3<Real>
-	::GetFirstExtent() const
+	::GetFirstExtent() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -155,7 +164,7 @@ Real Mathematics::Box3<Real>
 
 template <typename Real>
 Real Mathematics::Box3<Real>
-	::GetSecondExtent() const
+	::GetSecondExtent() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -164,7 +173,7 @@ Real Mathematics::Box3<Real>
 
 template <typename Real>
 Real Mathematics::Box3<Real>
-	::GetThirdExtent() const
+	::GetThirdExtent() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -173,7 +182,7 @@ Real Mathematics::Box3<Real>
 
 template <typename Real>
 Real Mathematics::Box3<Real>
-	::GetEpsilon() const
+	::GetEpsilon() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -230,6 +239,6 @@ std::ostream& Mathematics
 
 	return outFile;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_OBJECTS3D_BOX3_DETAIL_H
 

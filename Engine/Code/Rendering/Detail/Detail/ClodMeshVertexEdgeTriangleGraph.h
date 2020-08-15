@@ -52,16 +52,16 @@ namespace Rendering
 		const ClodMeshEdge& GetClodMeshEdge(const EdgeKey& edgeKey) const;
 		const ClodMeshVertex& GetClodMeshVertex(int index) const;
 		Triangle GetTriangle(const TriangleKey& triangleKey) const;
-		EdgeMapConstIter GetEdgeMapBegin() const;
-		EdgeMapConstIter GetEdgeMapEnd() const;
-		int GetMinHeapElementsNumber() const;
+		EdgeMapConstIter GetEdgeMapBegin() const noexcept;
+		EdgeMapConstIter GetEdgeMapEnd() const noexcept;
+		int GetMinHeapElementsNumber() const noexcept;
 
 		const MinHeapRecord GetMinHeapMinimum() const;
 
-		RemainingConstIter GetVerticesRemainingBegin() const;
-		RemainingConstIter GetTrianglesRemainingBegin() const;
-		RemainingConstIter GetVerticesRemainingEnd() const;
-		RemainingConstIter GetTrianglesRemainingEnd() const;
+		RemainingConstIter GetVerticesRemainingBegin() const noexcept;
+		RemainingConstIter GetTrianglesRemainingBegin() const noexcept;
+		RemainingConstIter GetVerticesRemainingEnd() const noexcept;
+		RemainingConstIter GetTrianglesRemainingEnd() const noexcept;
 
 		bool IsUniqueIndexValid(int minHeapRecordIndex) const;
 

@@ -15,7 +15,11 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486) 
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering, SwitchNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SwitchNode);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SwitchNode); 
@@ -26,12 +30,7 @@ Rendering::SwitchNode
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-Rendering::SwitchNode
-	::~SwitchNode ()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,SwitchNode)
 
@@ -42,7 +41,7 @@ void Rendering::SwitchNode
     {
 		// 所有视觉对象在活跃的子树中，添加到可见组。
 		auto child = GetChild(m_ActiveChild);
-		if (!child.IsNullPtr())
+		if (child)
 		{
 			child->OnGetVisibleSet(culler, noCull);
 		}
@@ -54,7 +53,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::SwitchNode
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 Rendering::SwitchNode
@@ -74,7 +73,7 @@ void Rendering::SwitchNode
 }
 
 int Rendering::SwitchNode
-	::GetActiveChild() const
+	::GetActiveChild() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -82,7 +81,7 @@ int Rendering::SwitchNode
 }
 
 void Rendering::SwitchNode
-	::DisableAllChildren()
+	::DisableAllChildren() noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -160,13 +159,13 @@ const Rendering::PickRecordContainer Rendering::SwitchNode
 
 	PickRecordContainer container;
 
-	auto activeChild = GetActiveChild();
+	const auto activeChild = GetActiveChild();
 	if (activeChild != System::EnumCastUnderlying(SwitchNodeType::InvalidChild))
 	{
 		if (GetWorldBound().TestIntersection(origin, direction, tMin, tMax))
 		{
 			auto child = GetConstChild(activeChild);
-			if (!child.IsNullPtr())
+			if (child)
 			{
 				auto childContainer = child->ExecuteRecursive(origin, direction, tMin, tMax);
 
@@ -179,4 +178,4 @@ const Rendering::PickRecordContainer Rendering::SwitchNode
 }
 
 
- 
+  #include STSTEM_WARNING_POP

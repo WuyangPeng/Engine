@@ -22,16 +22,16 @@ namespace Rendering
         using APoint = Mathematics::APoint<float>;
         
     public:
-        TransformMatrix ();
+        TransformMatrix() noexcept;
         
 		CLASS_INVARIANT_DECLARE;
         
-        void MakeIdentity ();    
+        void MakeIdentity() noexcept;    
         void MakeUnitScale (const Matrix& rotate);
 
-        bool IsIdentity () const;  
-        bool IsRotationOrScaleMatrix () const;  
-        bool IsUniformScale () const;  
+        bool IsIdentity() const noexcept;  
+        bool IsRotationOrScaleMatrix() const noexcept;  
+        bool IsUniformScale() const noexcept;  
        
         void SetRotate (const Matrix& rotate,const APoint& scale);
         void SetMatrix (const Matrix& matrix);
@@ -39,7 +39,7 @@ namespace Rendering
         void SetScale (const Matrix& rotate,const APoint& scale);
         void SetUniformScale (const Matrix& rotate,float scale);
 
-		const Matrix GetMatrix () const;
+		const Matrix GetMatrix() const noexcept;
         
         int GetStreamingSize () const;
 

@@ -17,14 +17,14 @@ namespace Rendering
 		using ClassType = ControllerKeyInfo;
 		 
 	public:
-		ControllerKeyInfo();
-		ControllerKeyInfo(float normTime, int firstIndex, int secondIndex);	
+                ControllerKeyInfo() noexcept;
+            ControllerKeyInfo(float normTime, int firstIndex, int secondIndex) noexcept;	
 
 		CLASS_INVARIANT_DECLARE;
 
-		float GetNormTime() const;
-		int GetFirstIndex() const;
-		int GetSecondIndex() const;
+		float GetNormTime() const noexcept;
+                int GetFirstIndex() const noexcept;
+                int GetSecondIndex() const noexcept;
 
 	private:
 		float m_NormTime;

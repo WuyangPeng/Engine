@@ -24,6 +24,10 @@ namespace Rendering
 	public:
 		explicit TextureLockManager(PlatformTextureType& manager);
 		~TextureLockManager();
+		TextureLockManager(const TextureLockManager&) = delete;
+		TextureLockManager& operator=(const TextureLockManager&) = delete;
+		TextureLockManager( TextureLockManager&&) = delete;
+		TextureLockManager& operator=( TextureLockManager&&) = delete;
 
 		CLASS_INVARIANT_DECLARE;
  

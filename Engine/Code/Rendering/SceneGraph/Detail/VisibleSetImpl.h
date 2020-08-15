@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.3 (2019/07/22 11:00)
 
 #ifndef RENDERING_SCENE_GRAPH_VISIBLE_SET_IMPL_H
@@ -22,31 +22,30 @@ namespace Rendering
     {
     public:
         using ClassType = VisibleSetImpl;
-		using VisualContainer = std::vector<VisualSmartPointer>;
-		using VisualContainerIter = VisualContainer::iterator;
-        
+        using VisualContainer = std::vector<VisualSmartPointer>;
+        using VisualContainerIter = VisualContainer::iterator;
+
     public:
-        VisibleSetImpl ();
-        ~VisibleSetImpl ();
-        
-		CLASS_INVARIANT_DECLARE;
+        VisibleSetImpl() noexcept;
+
+        CLASS_INVARIANT_DECLARE;
 
         // 获得可见的元素集。
-        int GetNumVisible () const;
-		const ConstVisualSmartPointer GetVisible(int index) const;
+        int GetNumVisible() const;
+        const ConstVisualSmartPointer GetVisible(int index) const;
 
         // 插入一个可见的对象。
-		void Insert(const VisualSmartPointer& visible);
+        void Insert(const VisualSmartPointer& visible);
 
         // 设置集合元素的个数为零。
-        void Clear ();
+        void Clear() noexcept;
 
-		VisualContainerIter begin();
-		VisualContainerIter end();
+        VisualContainerIter begin() noexcept;
+        VisualContainerIter end() noexcept;
 
-    private: 
-		std::vector<VisualSmartPointer> m_Visible;
+    private:
+        std::vector<VisualSmartPointer> m_Visible;
     };
 }
 
-#endif // RENDERING_SCENE_GRAPH_VISIBLE_SET_IMPL_H
+#endif  // RENDERING_SCENE_GRAPH_VISIBLE_SET_IMPL_H

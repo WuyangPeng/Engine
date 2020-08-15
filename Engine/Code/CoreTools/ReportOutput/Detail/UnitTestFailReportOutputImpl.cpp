@@ -18,12 +18,7 @@ CoreTools::UnitTestFailReportOutputImpl
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
-CoreTools::UnitTestFailReportOutputImpl
-	::~UnitTestFailReportOutputImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, UnitTestFailReportOutputImpl)
 

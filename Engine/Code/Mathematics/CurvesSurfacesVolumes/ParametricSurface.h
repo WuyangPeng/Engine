@@ -18,8 +18,7 @@ namespace Mathematics
 	class ParametricSurface : public Surface<Real>
 	{
 	public:
-		// Abstract base class.
-		virtual ~ParametricSurface();
+	 
 
 		// The parametric domain is either rectangular or triangular.  Valid (u,v)
 		// values for a rectangular domain satisfy
@@ -27,11 +26,11 @@ namespace Mathematics
 		// Valid (u,v) values for a triangular domain satisfy
 		//   umin <= u <= umax,  vmin <= v <= vmax,
 		//   (vmax-vmin)*(u-umin)+(umax-umin)*(v-vmax) <= 0
-		Real GetUMin() const;
-		Real GetUMax() const;
-		Real GetVMin() const;
-		Real GetVMax() const;
-		bool IsRectangular() const;
+            Real GetUMin() const noexcept;
+            Real GetUMax() const noexcept;
+            Real GetVMin() const noexcept;
+            Real GetVMax() const noexcept;
+            bool IsRectangular() const noexcept;
 
 		// position and derivatives up to second order
 		virtual Vector3D<Real> P(Real u, Real v) const = 0;

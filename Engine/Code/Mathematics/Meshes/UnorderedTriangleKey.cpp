@@ -13,9 +13,12 @@
 
 #include <algorithm>
 #include "CoreTools/Helper/ExceptionMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 Mathematics::UnorderedTriangleKey
-::UnorderedTriangleKey (int first, int second,int third)
+::UnorderedTriangleKey (int first, int second,int third) noexcept
 {
     if (first < second)
     {
@@ -58,7 +61,7 @@ Mathematics::UnorderedTriangleKey
 
 
 Mathematics::UnorderedTriangleKey
-	::UnorderedTriangleKey(const UnorderedTriangleKey& rhs)
+	::UnorderedTriangleKey(const UnorderedTriangleKey& rhs) noexcept
 {
     m_Vertex[0] = rhs.m_Vertex[0];
     m_Vertex[1] = rhs.m_Vertex[1];
@@ -68,7 +71,7 @@ Mathematics::UnorderedTriangleKey
 }
 
 Mathematics::UnorderedTriangleKey& Mathematics::UnorderedTriangleKey
-	::operator = (const UnorderedTriangleKey& rhs)
+	::operator = (const UnorderedTriangleKey& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
     
@@ -92,7 +95,7 @@ int Mathematics::UnorderedTriangleKey
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"));
+		THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý´íÎó£¡"s));
 	}
 }
 
@@ -122,3 +125,4 @@ bool Mathematics
     return lhs.GetKey(0) < rhs.GetKey(0);
 }
 
+#include STSTEM_WARNING_POP

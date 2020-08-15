@@ -24,7 +24,7 @@ namespace Network
 		using MessageContainerConstIter = MessageContainer::const_iterator;
 
 	public:
-		ReceiveMessageLevelImpl();
+		ReceiveMessageLevelImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -34,8 +34,8 @@ namespace Network
 		// 对顶层的对象进行保存。
 		void Insert(const MessageInterfaceSharedPtr& message);
 
-		MessageContainerConstIter begin() const;
-		MessageContainerConstIter end() const;
+		MessageContainerConstIter begin() const noexcept;
+		MessageContainerConstIter end() const noexcept;
 
 	private:
 		// 顶层对象的流。

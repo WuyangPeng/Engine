@@ -12,7 +12,7 @@
 #include <utility>
 
 Mathematics::SparseMatrixIndex
-	::SparseMatrixIndex(int row, int column)
+	::SparseMatrixIndex(int row, int column) noexcept
 	:m_Row{ row }, m_Column{ column }
 {
 	if (m_Column < m_Row)
@@ -35,7 +35,7 @@ bool Mathematics::SparseMatrixIndex
 #endif // OPEN_CLASS_INVARIANT
 
 int Mathematics::SparseMatrixIndex
-	::GetRow() const
+	::GetRow() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -43,7 +43,7 @@ int Mathematics::SparseMatrixIndex
 }
 
 int Mathematics::SparseMatrixIndex
-	::GetColumn() const
+	::GetColumn() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -51,7 +51,7 @@ int Mathematics::SparseMatrixIndex
 }
 
 bool  Mathematics
-	::operator<(const SparseMatrixIndex& lhs, const SparseMatrixIndex& rhs)
+	::operator<(const SparseMatrixIndex& lhs, const SparseMatrixIndex& rhs) noexcept
 {
 	if (lhs.GetRow() < rhs.GetRow())
 		return true;

@@ -23,13 +23,17 @@
 #include "Rendering/Renderers/ShaderManagementDetail.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::RendererImpl
 	::RendererImpl(const RendererBasis& basis)
 	: m_RendererBasis{ basis }, 
 
-	  m_DefaultAlphaState{ NEW0 AlphaState{ } }, m_DefaultCullState{ NEW0 CullState{ } }, m_DefaultDepthState{ NEW0 DepthState{ } }, 
-	  m_DefaultOffsetState{ NEW0 OffsetState{ } }, m_DefaultStencilState{ NEW0 StencilState{ } }, m_DefaultWireState{ NEW0 WireState{ } },
+	  m_DefaultAlphaState{ std::make_shared<AlphaState>() }, m_DefaultCullState{ std::make_shared<CullState>() }, m_DefaultDepthState{ std::make_shared<DepthState>() }, 
+	  m_DefaultOffsetState{ std::make_shared<OffsetState>() }, m_DefaultStencilState{ std::make_shared<StencilState>() }, m_DefaultWireState{ std::make_shared<WireState>() },
 
 	  m_AlphaState{ m_DefaultAlphaState }, m_CullState{ m_DefaultCullState }, m_DepthState{ m_DefaultDepthState }, 
 	  m_OffsetState{ m_DefaultOffsetState }, m_StencilState{ m_DefaultStencilState }, m_WireState{ m_DefaultWireState }, m_ReverseCullOrder{ false },
@@ -794,7 +798,7 @@ void Rendering::RendererImpl
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_OverrideAlphaState = alphaState;
-	if (alphaState.IsValidPtr())
+	if (alphaState )
 	{
 		SetAlphaState(alphaState);
 	}
@@ -810,7 +814,7 @@ void Rendering::RendererImpl
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_OverrideCullState = cullState;
-	if (cullState.IsValidPtr())
+	if (cullState )
 	{
 		SetCullState(cullState);
 	}
@@ -826,7 +830,7 @@ void Rendering::RendererImpl
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_OverrideDepthState = depthState;
-	if (depthState.IsValidPtr())
+	if (depthState )
 	{
 		SetDepthState(depthState);
 	}
@@ -842,7 +846,7 @@ void Rendering::RendererImpl
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_OverrideOffsetState = offsetState;
-	if (offsetState.IsValidPtr())
+	if (offsetState )
 	{
 		SetOffsetState(offsetState);
 	}
@@ -858,7 +862,7 @@ void Rendering::RendererImpl
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_OverrideStencilState = stencilState;
-	if (stencilState.IsValidPtr())
+	if (stencilState )
 	{
 		SetStencilState(stencilState);
 	}
@@ -874,7 +878,7 @@ void Rendering::RendererImpl
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_OverrideWireState = wireState;
-	if (wireState.IsValidPtr())
+	if (wireState )
 	{
 		SetWireState(wireState);
 	}
@@ -929,13 +933,13 @@ const Rendering::RendererImpl::Matrix Rendering::RendererImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Camera.IsValidPtr())
+	if (m_Camera )
 	{
 		return m_Camera->GetViewMatrix();
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
 	}
 }
 
@@ -944,13 +948,13 @@ const Rendering::RendererImpl::Matrix Rendering::RendererImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Camera.IsValidPtr())
+	if (m_Camera )
 	{
 		return m_Camera->GetProjectionMatrix();
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
 	}
 }
 
@@ -959,13 +963,13 @@ const Rendering::RendererImpl::Matrix Rendering::RendererImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Camera.IsValidPtr())
+	if (m_Camera )
 	{
 		return m_Camera->GetPostProjectionMatrix();
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"));
+		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
 	}
 }
 
@@ -976,13 +980,13 @@ Rendering::PickRay Rendering::RendererImpl
 
 	const PickRay errorPickRay{ };
 
-	if (m_Camera.IsNullPtr())
+	if (!m_Camera)
 	{
 		return errorPickRay;
 	}
 
 	// 获取当前视口，并测试其中是否包含（x，y）。
-	auto viewport = GetViewport();
+	const auto viewport = GetViewport();
 	if (!viewport.IsInViewport(x,y))
 	{
 		return errorPickRay;
@@ -993,8 +997,8 @@ Rendering::PickRay Rendering::RendererImpl
 	auto u = (boost::numeric_cast<float>(y - viewport.GetYPosition())) / boost::numeric_cast<float>(viewport.GetHeight());
 
  	// 获取相对坐标，单位为[rmin,rmax] x [umin,umax]。
-	auto rightBlend = (1.0f - r) * m_Camera->GetRightMin() + r * m_Camera->GetRightMax();
-	auto upBlend = (1.0f - u) * m_Camera->GetUpMin() + u * m_Camera->GetUpMax();
+	const auto rightBlend = (1.0f - r) * m_Camera->GetRightMin() + r * m_Camera->GetRightMax();
+	const auto upBlend = (1.0f - u) * m_Camera->GetUpMin() + u * m_Camera->GetUpMax();
 
 	Mathematics::APointf origin{ };
 	Mathematics::AVectorf direction{ };
@@ -1131,7 +1135,7 @@ void Rendering::RendererImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	if (globalEffect.IsNullPtr())
+	if (!globalEffect )
 	{ 
 		for (auto& visual : visibleSet)
 		{
@@ -1162,8 +1166,8 @@ void Rendering::RendererImpl
 void Rendering::RendererImpl
 	::Draw(const VisualSmartPointer& visual, VisualEffectInstanceSmartPointer instance)
 {	 
-	RENDERING_ASSERTION_0(visual.IsValidPtr(), "visual对象必须存在。\n");	
-	RENDERING_ASSERTION_0(instance.IsValidPtr(), "visual对象必须具有effect实例。\n");
+	RENDERING_ASSERTION_0(visual != nullptr , "visual对象必须存在。\n");	
+	RENDERING_ASSERTION_0(instance != nullptr, "visual对象必须具有effect实例。\n");
 		 
 	const auto vertexFormat = visual->GetConstVertexFormat();
 	const auto vertexBuffer = visual->GetConstVertexBuffer();
@@ -1172,7 +1176,7 @@ void Rendering::RendererImpl
 	// OpenGL渲染器要求在启用顶点格式之前先启用顶点缓冲区。 该顺序与DirectX9渲染器无关。
 	Enable(vertexBuffer);
 	Enable(vertexFormat);
-	if (indexBuffer.IsValidPtr())
+	if (indexBuffer )
 	{
 		Enable(indexBuffer);
 	}
@@ -1220,7 +1224,7 @@ void Rendering::RendererImpl
 	#endif // RENDERING_RESET_STATE_AFTER_DRAW
 	}
 
-	if (indexBuffer.IsValidPtr())
+	if (indexBuffer )
 	{
 		Disable(indexBuffer);
 	}
@@ -1244,4 +1248,4 @@ void Rendering::RendererImpl
 
 	return m_Texture2DManagement->InsertTextureMap(texture, platformTexture);
 }
- 
+ #include STSTEM_WARNING_POP

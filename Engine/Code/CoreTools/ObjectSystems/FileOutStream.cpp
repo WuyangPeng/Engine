@@ -18,6 +18,10 @@
 
 using std::string;
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+
 CoreTools::FileOutStream
 	::FileOutStream(const OutTopLevel& topLevel)
 	:m_BufferOutStream{ topLevel }
@@ -45,3 +49,4 @@ void CoreTools::FileOutStream
 
 
 
+#include STSTEM_WARNING_POP

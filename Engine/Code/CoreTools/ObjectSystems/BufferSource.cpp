@@ -20,11 +20,13 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26415) 
+#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 
 CoreTools::BufferSource
-	::BufferSource(const FileBufferPtr& fileBufferPtr)
-	:m_Source{ boost::numeric_cast<int>(fileBufferPtr->GetSize()), fileBufferPtr->GetBufferBegin() }
+	::BufferSource(const FileBuffer& fileBuffer)
+	:m_Source{ boost::numeric_cast<int>(fileBuffer.GetSize()), fileBuffer.GetBufferBegin() }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -119,8 +121,7 @@ void CoreTools::BufferSource
 	m_Source.IncrementBytesProcessed(bytesNumber);
 }
 
-void CoreTools::BufferSource
-	::ReadUniqueID(ObjectInterfaceSmartPointer& object)
+void CoreTools::BufferSource ::ReadUniqueID(ObjectInterfaceSmartPointer object)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

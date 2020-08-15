@@ -32,10 +32,10 @@ namespace CoreTools
 	public:
 		Tuple() noexcept;
 
-		explicit Tuple(ParamType firstParam);
+		explicit Tuple(ParamType firstParam) noexcept;
 		Tuple(ParamType firstParam, ParamType secondParam) noexcept;
 		Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam) noexcept;
-		Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam, ParamType fourthParam);
+		Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam, ParamType fourthParam) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

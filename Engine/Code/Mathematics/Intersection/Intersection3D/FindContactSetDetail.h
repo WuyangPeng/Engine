@@ -16,7 +16,13 @@
 #include "Mathematics/Objects3D/Box3Detail.h"
 #include "Mathematics/Algebra/Vector3DDetail.h"
 #include "Mathematics/Objects3D/Triangle3Detail.h" 
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26446)
 // FindContactSet<Real>
 
 template <typename Real>
@@ -94,7 +100,7 @@ Mathematics::FindContactSet<Real>
 	Vector3D<Real> segFinal[2]{ segment[0] + tfirst * segVelocity,segment[1] + tfirst * segVelocity };
 
 	// Move the box to its new position.
-	auto boxFinal = box.GetMove(tfirst, boxVelocity);
+	const auto boxFinal = box.GetMove(tfirst, boxVelocity);
 
 	const int* sIndex = segCfg.mIndex;
 	const int* bIndex = boxCfg.mIndex;
@@ -174,7 +180,7 @@ Mathematics::FindContactSet<Real>
 	Vector3D<Real> triFinal[3]{ triangle.GetVertex(0) + tfirst * triVelocity,triangle.GetVertex(1) + tfirst * triVelocity,triangle.GetVertex(2) + tfirst * triVelocity };
 
 	// Move the box to new its position.
-	auto boxFinal = box.GetMove(tfirst, boxVelocity);
+	const auto boxFinal = box.GetMove(tfirst, boxVelocity);
 
 	const int* tIndex = triCfg.mIndex;
 	const int* bIndex = boxCfg.mIndex;
@@ -306,8 +312,8 @@ Mathematics::FindContactSet<Real>
 					 const Vector3D<Real>& box0Velocity, const Vector3D<Real>& box1Velocity, Real tfirst, int& quantity, Vector3D<Real>* P)
 {
 	// Move the boxes to their new positions.
-	Box3<Real> box0Final{ box0.GetCenter() + tfirst * box0Velocity,box0.GetFirstAxis(),box0.GetSecondAxis(),box0.GetThirdAxis(),box0.GetFirstExtent(),box0.GetSecondExtent(),box0.GetThirdExtent() };
-	Box3<Real> box1Final{ box1.GetCenter() + tfirst * box1Velocity,box1.GetFirstAxis(),box1.GetSecondAxis(),box1.GetThirdAxis(),box1.GetFirstExtent(),box1.GetSecondExtent(),box1.GetThirdExtent() };
+	const Box3<Real> box0Final{ box0.GetCenter() + tfirst * box0Velocity,box0.GetFirstAxis(),box0.GetSecondAxis(),box0.GetThirdAxis(),box0.GetFirstExtent(),box0.GetSecondExtent(),box0.GetThirdExtent() };
+	const Box3<Real> box1Final{ box1.GetCenter() + tfirst * box1Velocity,box1.GetFirstAxis(),box1.GetSecondAxis(),box1.GetThirdAxis(),box1.GetFirstExtent(),box1.GetSecondExtent(),box1.GetThirdExtent() };
 
 	const int* b0Index = box0Cfg.mIndex;
 	const int* b1Index = box1Cfg.mIndex;
@@ -496,7 +502,7 @@ void Mathematics::FindContactSet<Real>
 {
 	auto dir0 = segment0[1] - segment0[0];
 	auto dir1 = segment1[1] - segment1[0];
-	auto normal = Vector3DTools<Real>::CrossProduct(dir0, dir1);
+	const auto normal = Vector3DTools<Real>::CrossProduct(dir0, dir1);
 
 	// The comparison is sin(kDir0,kDir1) < epsilon.
 	auto sqrLen0 = Vector3DTools<Real>::VectorMagnitudeSquared(dir0);
@@ -525,13 +531,13 @@ void Mathematics::FindContactSet<Real>
 		P[i] = segment[i];
 	}
 
-	Vector3D<Real> side[3]{ triangle[1] - triangle[0], triangle[2] - triangle[1], triangle[0] - triangle[2] };
+	const Vector3D<Real> side[3]{ triangle[1] - triangle[0], triangle[2] - triangle[1], triangle[0] - triangle[2] };
 
-	auto normal = Vector3DTools<Real>::CrossProduct(side[0], side[1]);
+	const auto normal = Vector3DTools<Real>::CrossProduct(side[0], side[1]);
 	for (i = 0; i < 3; ++i)
 	{
 		// Normal pointing inside the triangle.
-		auto sideN = Vector3DTools<Real>::CrossProduct(normal, side[i]);
+		const auto sideN = Vector3DTools<Real>::CrossProduct(normal, side[i]);
 		auto constant = Vector3DTools<Real>::DotProduct(sideN, triangle[i]);
 		ClipConvexPolygonAgainstPlane(sideN, constant, quantity, P);
 	}
@@ -596,6 +602,8 @@ void Mathematics::FindContactSet<Real>
 		ClipConvexPolygonAgainstPlane(normal, constant, quantity, P);
 	}
 }
+
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_FIND_CONTACT_SET_DETAIL)
 
 #endif // MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_DETAIL_H

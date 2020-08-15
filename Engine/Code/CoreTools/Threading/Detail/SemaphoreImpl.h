@@ -24,6 +24,10 @@ namespace CoreTools
 	public:
 		SemaphoreImpl(int initialCount, int maximumCount);
 		~SemaphoreImpl();
+		SemaphoreImpl(const SemaphoreImpl&) = delete;
+		SemaphoreImpl& operator=(const SemaphoreImpl&) = delete;
+		SemaphoreImpl(SemaphoreImpl&&) noexcept = delete;
+		SemaphoreImpl& operator=(SemaphoreImpl&&) noexcept = delete;
 
 		CLASS_INVARIANT_DECLARE;
 

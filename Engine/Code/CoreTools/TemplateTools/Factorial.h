@@ -39,7 +39,17 @@ namespace CoreTools
 	};
 
 	uint32_t CORE_TOOLS_DEFAULT_DECLARE RecursiveFactorial(uint32_t integer) noexcept;
-	uint32_t CORE_TOOLS_DEFAULT_DECLARE NonRecursiveFactorial(uint32_t integer) noexcept;
+	constexpr uint32_t NonRecursiveFactorial(uint32_t integer) noexcept
+	{
+		auto result = 1u;
+
+		for (auto index = 1u; index <= integer; ++index)
+		{
+			result *= index;
+		}
+
+		return result;
+	}
 }
 
 #define FACTORIAL( n ) CoreTools::Factorial< n >::Value

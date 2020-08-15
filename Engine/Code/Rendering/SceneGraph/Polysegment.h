@@ -31,7 +31,7 @@ namespace Rendering
 		// 例如，{V0, V1, V2, V3}形式线段<V0, V1>和 <V2, V3>。
 		// 在这种情况下，输入顶点缓冲器必须具有偶数数目的元素。
 		Polysegment(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,bool contiguous);
-		virtual ~Polysegment();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
@@ -42,13 +42,13 @@ namespace Rendering
 		// 对于不相交的线段，0 <= numSegments <= numVertices / 2。 
 		int GetMaxNumSegments () const;
 		void SetNumSegments (int numSegments);
-		int GetNumSegments () const;
+                int GetNumSegments() const noexcept;
 
 	    // 当'contiguous'是'true'，所述polysegment是连接线段的序列。
 		// 当是一组不相交段时，'contiguous'是'false'。
-		bool GetContiguous () const;
+                bool GetContiguous() const noexcept;
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSmartPointer Clone() const override;
 		
 	private:
 		// 当前活动线段的数量

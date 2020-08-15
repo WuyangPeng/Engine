@@ -23,7 +23,9 @@
 using std::string;
 using std::vector;
 using std::make_shared;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, IKJoint);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IKJoint);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IKJoint);
@@ -48,7 +50,7 @@ CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, IKJoint)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,GetAxis,MatrixRotationAxis,const Rendering::IKJoint::AVector)
 									   
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,GetObjectSmartPointer,const Rendering::ConstSpatialSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKJoint,GetObjectSmartPointer,const Rendering::ConstSpatialSmartPointer)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,GetGoalsNum,int) 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,GetGoalsSmartPointer,int,const Rendering::ConstIKGoalSmartPointer)
@@ -83,7 +85,7 @@ uint64_t Rendering::IKJoint
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	auto uniqueID = ParentType::Register(target);
+	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
 		m_Impl->Register(target);
@@ -157,3 +159,4 @@ void Rendering::IKJoint
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,IsAllowTranslation,MatrixRotationAxis,bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,IsAllowRotation,MatrixRotationAxis,bool)
+#include STSTEM_WARNING_POP

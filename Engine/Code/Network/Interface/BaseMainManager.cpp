@@ -56,7 +56,10 @@ void Network::BaseMainManager
 
 	m_Impl->Run();
 }
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
 Network::IOContextType& Network::BaseMainManager
 	::GetIOContext()
 {
@@ -66,7 +69,7 @@ Network::IOContextType& Network::BaseMainManager
 
 	return m_Impl->GetIOContext();
 }
-
+#include STSTEM_WARNING_POP
 void Network::BaseMainManager
 	::StopContext()
 {

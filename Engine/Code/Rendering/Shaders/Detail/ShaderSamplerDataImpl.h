@@ -33,7 +33,7 @@ namespace Rendering
 		using BufferTarget = CoreTools::BufferTarget;
 	
 	public:		
-		ShaderSamplerDataImpl();
+		ShaderSamplerDataImpl() noexcept;
 		explicit ShaderSamplerDataImpl(int numSamplers);
 
 		CLASS_INVARIANT_DECLARE;

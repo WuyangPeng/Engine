@@ -25,23 +25,23 @@ namespace Imagics
                     float ySpacing, float zSpacing, const float speed,
 					const std::vector<int>& seeds);
 		
-		virtual ~FastMarch3 ();
+	 
 		
 		// Member access.
-		int GetXBound () const;
-		int GetYBound () const;
-		int GetZBound () const;
-		float GetXSpacing () const;
-		float GetYSpacing () const;
-		float GetZSpacing () const;
-		int Index (int x, int y, int z) const;
+		int GetXBound () const noexcept; 
+		int GetYBound () const noexcept;
+		int GetZBound () const noexcept;
+		float GetXSpacing () const noexcept;
+		float GetYSpacing () const noexcept;
+		float GetZSpacing () const noexcept;
+		int Index (int x, int y, int z) const noexcept;
 		
 		// Voxel classification.
-		virtual void GetBoundary (std::vector<int>& rkBoundary) const;
-		virtual bool IsBoundary (int i) const;
+		  void GetBoundary (std::vector<int>& rkBoundary) const override;
+                bool IsBoundary(int i) const noexcept override;
 		
 		// Run one step of the fast marching algorithm.
-		virtual void Iterate ();
+		  void Iterate () override;
 		
 	protected:
 		// Called by the constructors.

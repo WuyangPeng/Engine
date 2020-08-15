@@ -18,11 +18,11 @@ namespace Mathematics
 	{
 	public:
 		// Abstract base class.
-		SingleCurve2 (Real tmin, Real tmax);
+            SingleCurve2(Real tmin, Real tmax) noexcept;
 		
 		// Length-from-time and time-from-length.
-		virtual Real GetLength (Real t0, Real t1) const;
-		virtual Real GetTime (Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const;
+		  Real GetLength (Real t0, Real t1) const override;
+		  Real GetTime (Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const override;
 		
 	protected: 
 		using Curve2<Real>::GetSpeed;

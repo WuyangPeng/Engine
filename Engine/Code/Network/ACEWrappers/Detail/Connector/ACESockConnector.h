@@ -13,7 +13,7 @@
 
 #include "Network/Interface/Detail/SockConnectorImpl.h"
 
-#include <ace/SOCK_Connector.h>
+#include "System/Helper/PragmaWarning/ACE.h"
 
 namespace Network
 {
@@ -24,15 +24,14 @@ namespace Network
 		using ParentType = SockConnectorImpl;
 
 	public:
-		ACESockConnector();
-		virtual ~ACESockConnector();
+		ACESockConnector(); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
-		virtual void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+		bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+		void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-		virtual const SockConnectorPtr Clone() const override;
+		const SockConnectorPtr Clone() const override;
 
 	private:
 		ACE_SOCK_Connector m_ACESockConnector;

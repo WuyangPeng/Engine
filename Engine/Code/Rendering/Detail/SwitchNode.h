@@ -20,23 +20,22 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
-		SwitchNode ();
-		virtual ~SwitchNode ();
+		SwitchNode (); 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(SwitchNode); 
 	
 		void SetActiveChild (int activeChild);
-		int GetActiveChild () const;
-		void DisableAllChildren ();
+		int GetActiveChild () const noexcept;
+		void DisableAllChildren () noexcept;
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSmartPointer Clone() const override;
 
-		virtual const PickRecordContainer ExecuteRecursive(const APoint& origin,const AVector& direction, float tMin, float tMax) const override;
+		 const PickRecordContainer ExecuteRecursive(const APoint& origin,const AVector& direction, float tMin, float tMax) const override;
 	 
 	protected:
-		 virtual void GetVisibleSet (Culler& culler, bool noCull) override;
+		  void GetVisibleSet (Culler& culler, bool noCull) override;
 		 
 	private:
 		 int m_ActiveChild;

@@ -13,10 +13,16 @@
 #include "VertexFormat.h"
 #include "VertexBuffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 Rendering::VertexBufferAccessorData<usage>
-	::VertexBufferAccessorData()
+	::VertexBufferAccessorData() noexcept
 	:m_Data{ nullptr }, m_DataChannels{ 0 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -47,13 +53,13 @@ void Rendering::VertexBufferAccessorData<usage>
 {
 	RENDERING_CLASS_IS_VALID_9;
 	
-	auto baseType = VertexFormatFlags::AttributeType::None;
+	const auto baseType = VertexFormatFlags::AttributeType::None;
 
-	auto index = vertexformat->GetIndex(usage, number);
+	const auto index = vertexformat->GetIndex(usage, number);
 	if (0 <= index)
 	{
 		m_Data = vertexbuffer->GetReadOnlyData(vertexformat->GetOffset(index));
-		auto type = vertexformat->GetAttributeType(index);
+		const auto type = vertexformat->GetAttributeType(index);
 		m_DataChannels = System::EnumCastUnderlying(type) - System::EnumCastUnderlying(baseType);
 		if (4 < m_DataChannels)
 		{
@@ -73,7 +79,7 @@ void Rendering::VertexBufferAccessorData<Rendering::VertexFormatFlags::Attribute
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto index = vertexformat->GetIndex(VertexFormatFlags::AttributeUsage::BlendIndices, number);
+	const auto index = vertexformat->GetIndex(VertexFormatFlags::AttributeUsage::BlendIndices, number);
 	if (0 <= index)
 	{
 		m_Data = vertexbuffer->GetReadOnlyData(vertexformat->GetOffset(index));
@@ -92,7 +98,7 @@ void Rendering::VertexBufferAccessorData<Rendering::VertexFormatFlags::Attribute
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto index = vertexformat->GetIndex(VertexFormatFlags::AttributeUsage::BlendWeight, number);
+	const auto index = vertexformat->GetIndex(VertexFormatFlags::AttributeUsage::BlendWeight, number);
 	if (0 <= index)
 	{
 		m_Data = vertexbuffer->GetReadOnlyData(vertexformat->GetOffset(index));
@@ -107,7 +113,7 @@ void Rendering::VertexBufferAccessorData<Rendering::VertexFormatFlags::Attribute
  
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 const char* Rendering::VertexBufferAccessorData<usage>
-	::GetData(int stride, int index) const
+	::GetData(int stride, int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -116,7 +122,7 @@ const char* Rendering::VertexBufferAccessorData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 bool Rendering::VertexBufferAccessorData<usage>
-	::HasData() const
+	::HasData() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -125,7 +131,7 @@ bool Rendering::VertexBufferAccessorData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 int Rendering::VertexBufferAccessorData<usage>
-	::GetDataChannels() const
+	::GetDataChannels() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -134,13 +140,14 @@ int Rendering::VertexBufferAccessorData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 const float* Rendering::VertexBufferAccessorData<usage>
-	::GetDataTuple(int stride, int index) const
+	::GetDataTuple(int stride, int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return reinterpret_cast<const float*>(m_Data + index * stride);
 } 
 
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_DATA_DETAIL_H
 
 

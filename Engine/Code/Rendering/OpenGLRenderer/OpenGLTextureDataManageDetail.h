@@ -16,7 +16,7 @@
 
 template <typename ManageType>
 Rendering::OpenGLTextureDataManager<ManageType>
-	::OpenGLTextureDataManager(ManageType& manager)
+	::OpenGLTextureDataManager(ManageType& manager) noexcept
 	:m_Manager{ manager }, m_Level{ -1 }, m_Face{ -1 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -49,7 +49,7 @@ bool Rendering::OpenGLTextureDataManager<ManageType>
 
 template <typename ManageType>
 void* Rendering::OpenGLTextureDataManager<ManageType>
-	::Lock(int level, BufferLocking mode)
+	::Lock(int level, BufferLocking mode) noexcept
 {
 	static_assert(TextureDataTraits<ManageType::TextureType>::sm_TextureType != TextureFlags::TextureCube);
 
@@ -62,7 +62,7 @@ void* Rendering::OpenGLTextureDataManager<ManageType>
 
 template <typename ManageType>
 void* Rendering::OpenGLTextureDataManager<ManageType>
-	::Lock(int face, int level, BufferLocking mode)
+	::Lock(int face, int level, BufferLocking mode) noexcept
 {
 	static_assert(TextureDataTraits<ManageType::TextureType>::sm_TextureType == TextureFlags::TextureCube);
 

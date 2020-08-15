@@ -14,7 +14,7 @@
 using std::make_shared;
 
 CoreTools::ResourceFactory
-	::ResourceFactory(BaseResourceManager& resourceManager)
+	::ResourceFactory(BaseResourceManager& resourceManager) noexcept
 	:m_ResourceManager{ resourceManager }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -35,7 +35,7 @@ uint32_t CoreTools::ResourceFactory
 
 	BaseResourceManager::ResourceSharedPtr ptr{ make_shared<CommonDataResource>(type,size) };
 
-	auto id = m_ResourceManager.InsertResource(ptr);
+	const auto id = m_ResourceManager.InsertResource(ptr);
 
 	return id;
 }

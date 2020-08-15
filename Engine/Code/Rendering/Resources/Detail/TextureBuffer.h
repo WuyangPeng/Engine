@@ -36,10 +36,13 @@ namespace Rendering
         using FileBufferPtr = std::shared_ptr<FileBuffer>;
 
     public:
-		explicit TextureBuffer(int itemSize);
+		explicit TextureBuffer(int itemSize) noexcept;
 		TextureBuffer(const TextureBuffer& rhs);
 		TextureBuffer& operator=(const TextureBuffer& rhs);
-        
+		TextureBuffer( TextureBuffer&& rhs) = default;
+		TextureBuffer& operator=( TextureBuffer&& rhs) = default;
+        ~TextureBuffer()= default;
+		
 		CLASS_INVARIANT_DECLARE; 
 
 		void Reset(int bufferSize);

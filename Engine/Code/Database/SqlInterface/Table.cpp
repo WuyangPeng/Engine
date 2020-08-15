@@ -25,7 +25,7 @@ Database::Table
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, Table)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Table, GetConfigurationStrategy, Database::ConfigurationStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, Table, GetConfigurationStrategy, Database::ConfigurationStrategy)
 
 Database::Table::ResultPtr Database::Table
 	::Select(initializer_list<string> selectStatement, const string& whereStatement, const string& orderByStatement, const BindStatementType& bindStatement)

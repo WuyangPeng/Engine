@@ -27,28 +27,28 @@ namespace Network
 
 	public:
 		CacheClient(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager);
-		virtual ~CacheClient();
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual uint64_t Connect() override;
-		virtual void AsyncConnect() override;
+		uint64_t Connect() override;
+		void AsyncConnect() override;
 
-		virtual void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
-		virtual void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
+		void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
+		void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
 
-		virtual void Receive() override;
-		virtual void AsyncReceive() override;
-		virtual void ImmediatelySend(uint64_t socketID) override;
-		virtual void ImmediatelyAsyncSend(uint64_t socketID) override;
+		void Receive() override;
+		void AsyncReceive() override;
+		void ImmediatelySend(uint64_t socketID) override;
+		void ImmediatelyAsyncSend(uint64_t socketID) override;
 
-		virtual uint64_t GetSocketID() const;
+		uint64_t GetSocketID() const noexcept override;
 
 	private:
 		using BufferType = std::vector<char>;
 
 	private:
-		virtual bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
+		bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
 
 	private:
 		SockConnector m_SockConnector;

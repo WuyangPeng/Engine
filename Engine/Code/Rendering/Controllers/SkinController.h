@@ -27,14 +27,16 @@ namespace Rendering
 	public:
 		// 顶点和骨骼的数目在对象的生存期是固定的。
 		SkinController(int numVertices, int numBones);
-		virtual ~SkinController();
-
+		  ~SkinController();
+		SkinController(SkinController&&) = default;
+		  SkinController& operator=(SkinController&&) = default;
+		  
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(SkinController); 
 
-		int GetNumVertices() const;
-		int GetNumBones() const;
+		int GetNumVertices() const noexcept;
+		int GetNumBones() const noexcept;
 
 		const ConstNodeSmartPointer GetBones(int bonesIndex) const;
 		float GetWeights(int bonesIndex, int verticesIndex) const;
@@ -50,12 +52,12 @@ namespace Rendering
 		void SetOffsets(int bonesIndex, const std::vector<APoint>& offsets);
 		
 		// 动画更新。应用程序时间以毫秒为单位。
-		virtual bool Update(double applicationTime) override;
+		 bool Update(double applicationTime) override;
 
-		virtual ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSmartPointer Clone() const override;
 
-		virtual void SetObject(ControllerInterface* object) override;
-		virtual void SetObjectInCopy(ControllerInterface* object) override;
+		 void SetObject(ControllerInterface* object) override;
+		 void SetObjectInCopy(ControllerInterface* object) override;
 		
 	private:
 		IMPL_TYPE_DECLARE(SkinController);

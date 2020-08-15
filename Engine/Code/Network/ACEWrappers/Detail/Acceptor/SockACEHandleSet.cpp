@@ -12,7 +12,10 @@
 using std::make_shared;
 
 #ifdef NETWORK_USE_ACE
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455) 
+#include SYSTEM_WARNING_DISABLE(26490) 
 Network::SockACEHandleSet
 	::SockACEHandleSet()
 	:ParentType{}, m_ACEHandleSet{}
@@ -20,12 +23,7 @@ Network::SockACEHandleSet
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::SockACEHandleSet
-	::~SockACEHandleSet()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockACEHandleSet)
 
 void Network::SockACEHandleSet
@@ -85,7 +83,7 @@ Network::SockACEHandleSet::ImplTypePtr Network::SockACEHandleSet
 }
 
 const Network::ACEHandleSet& Network::SockACEHandleSet
-	::GetACEHandleSet() const
+	::GetACEHandleSet() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -121,5 +119,5 @@ bool Network::SockACEHandleSet
 	else
 		return false;
 }
-
+#include STSTEM_WARNING_POP
 #endif // NETWORK_USE_ACE

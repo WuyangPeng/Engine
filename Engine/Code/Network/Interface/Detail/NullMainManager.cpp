@@ -11,41 +11,33 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 Network::NullMainManager
-	::NullMainManager()
+	::NullMainManager() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::NullMainManager
-	::~NullMainManager()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullMainManager)
 
-void Network::NullMainManager
-	::Run()
+void Network::NullMainManager ::Run() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 }
 
-void Network::NullMainManager
-	::StopContext()
+void Network::NullMainManager ::StopContext() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 }
 
-bool Network::NullMainManager
-	::IsContextStop() const
+bool Network::NullMainManager ::IsContextStop() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
 	return false;
 }
 
-void Network::NullMainManager
-	::RestartContext()
+void Network::NullMainManager ::RestartContext() noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 }

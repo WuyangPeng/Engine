@@ -20,14 +20,20 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering,VertexBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,VertexBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,VertexBuffer); 
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, VertexBuffer);
 
 Rendering::VertexBuffer
-	::VertexBuffer()
+	::VertexBuffer() noexcept
 	:ParentType{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -43,7 +49,12 @@ Rendering::VertexBuffer
 Rendering::VertexBuffer
 	::~VertexBuffer ()
 {
-    RENDERER_MANAGE_SINGLETON.UnbindAll(this); 
+	EXCEPTION_TRY
+	{
+            RENDERER_MANAGE_SINGLETON.UnbindAll(this); 
+	}
+	EXCEPTION_ALL_CATCH(Rendering)
+    
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -78,7 +89,7 @@ void Rendering::VertexBuffer
 
 	for (auto index = 0; index < numVertices; ++index)
 	{
-		auto excursion = vertexBufferAccessor.GetNormalExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetNormalExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstNormal = reinterpret_cast<float*>(data);
@@ -101,7 +112,7 @@ void Rendering::VertexBuffer
 
 	for (auto index = 0; index < numVertices; ++index)
 	{
-		auto excursion = vertexBufferAccessor.GetNormalExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetNormalExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstNormal = reinterpret_cast<float*>(data);
@@ -128,7 +139,7 @@ void Rendering::VertexBuffer
 
 	if (0 <= index && index < numVertices)
 	{
-		auto excursion = vertexBufferAccessor.GetNormalExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetNormalExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstNormal = reinterpret_cast<float*>(data);
@@ -155,7 +166,7 @@ void Rendering::VertexBuffer
 
 	if (0 <= index && index < numVertices)
 	{
-		auto excursion = vertexBufferAccessor.GetTangentExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetTangentExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstTangent = reinterpret_cast<float*>(data);
@@ -179,7 +190,7 @@ void Rendering::VertexBuffer
 
 	if (0 <= index && index < numVertices)
 	{
-		auto excursion = vertexBufferAccessor.GetBinormalExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetBinormalExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstBinormal = reinterpret_cast<float*>(data);
@@ -202,7 +213,7 @@ void Rendering::VertexBuffer
 
 	for (auto index = 0; index < numVertices; ++index)
 	{
-		auto excursion = vertexBufferAccessor.GetTangentExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetTangentExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstTangent = reinterpret_cast<float*>(data);
@@ -226,7 +237,7 @@ void Rendering::VertexBuffer
 
 	for (auto index = 0; index < numVertices; ++index)
 	{
-		auto excursion = vertexBufferAccessor.GetBinormalExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetBinormalExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstBinormal = reinterpret_cast<float*>(data);
@@ -250,7 +261,7 @@ void Rendering::VertexBuffer
 
 	for (auto index = 0; index < numVertices; ++index)
 	{
-		auto excursion = vertexBufferAccessor.GetTextureCoordExcursion(0,index);
+		const auto excursion = vertexBufferAccessor.GetTextureCoordExcursion(0,index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstTextureCoord = reinterpret_cast<float*>(data);
@@ -286,7 +297,7 @@ void Rendering::VertexBuffer
 
 	if (0 <= index && index < numVertices)
 	{
-		auto excursion = vertexBufferAccessor.GetPositionExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetPositionExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstPosition = reinterpret_cast<float*>(data);
@@ -309,7 +320,7 @@ void Rendering::VertexBuffer
 
 	if (0 <= index && index < numVertices)
 	{
-		auto excursion = vertexBufferAccessor.GetTextureCoordExcursion(unit, index);
+		const auto excursion = vertexBufferAccessor.GetTextureCoordExcursion(unit, index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstTextureCoord = reinterpret_cast<float*>(data);
@@ -330,7 +341,7 @@ void Rendering::VertexBuffer
 
 	if (0 <= index && index < numVertices)
 	{
-		auto excursion = vertexBufferAccessor.GetNormalExcursion(index);
+		const auto excursion = vertexBufferAccessor.GetNormalExcursion(index);
 		auto data = GetAccessWriteData(excursion);
 
 		auto firstNormal = reinterpret_cast<float*>(data);
@@ -348,6 +359,7 @@ Rendering::VertexBufferSmartPointer
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return VertexBufferSmartPointer{ NEW0 ClassType(*this) };
+	return VertexBufferSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
+#include STSTEM_WARNING_POP

@@ -17,7 +17,7 @@ namespace CoreTools
 		using ClassType = BoostParsing;
 
 	public:
-		BoostParsing();
+		BoostParsing() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 	};

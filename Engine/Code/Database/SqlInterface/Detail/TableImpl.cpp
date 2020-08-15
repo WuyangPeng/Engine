@@ -16,7 +16,7 @@ using std::initializer_list;
 using namespace std::literals;
 
 Database::TableImpl
-	::TableImpl(const ConfigurationStrategy& configurationStrategy)
+	::TableImpl(const ConfigurationStrategy& configurationStrategy) noexcept
 	: m_ConfigurationStrategy{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;

@@ -16,7 +16,13 @@
 #include <iostream>
 
 using std::ostream;
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
 Rendering::HalfFloat
     ::HalfFloat(float value)
 	:m_HalfFloat{ ConvertHalfFloat(value) }
@@ -34,9 +40,9 @@ Rendering::HalfFloat
 // static
 Rendering::HalfFloat::HalfFloatType
     Rendering::HalfFloat
-    ::ConvertHalfFloat(float value)
+    ::ConvertHalfFloat(float value) noexcept
 {
-    auto bits = *reinterpret_cast<unsigned int*>(&value);
+    const auto bits = *reinterpret_cast<unsigned int*>(&value);
 	auto biasExp = static_cast<unsigned short>((bits & 0x7F800000) >> 23);
     if (0x0071 <= biasExp)
     {
@@ -45,8 +51,8 @@ Rendering::HalfFloat::HalfFloatType
             if (biasExp != 0)
             {
                 // 截断23位小数到10位。 
-				auto signBit = static_cast<unsigned short>((bits & 0x80000000) >> 16);
-				auto mantissa = (bits & 0x007FFFFF) >> 13;
+				const auto signBit = static_cast<unsigned short>((bits & 0x80000000) >> 16);
+                const auto mantissa = (bits & 0x007FFFFF) >> 13;
                 biasExp = (biasExp - 0x0070) << 10;
                 return static_cast<HalfFloatType>(signBit | biasExp | mantissa);
             }
@@ -59,22 +65,21 @@ Rendering::HalfFloat::HalfFloatType
         else
         {
             // E = 30, M = 1023 (半浮点数的最大量级)
-			auto signBit = static_cast<unsigned short>((bits & 0x80000000) >> 16);
+            const auto signBit = static_cast<unsigned short>((bits & 0x80000000) >> 16);
             return signBit | static_cast<unsigned short>(0x7BFF);
         }
     }
     else
     {
         // E = 1, M = 0 (半浮点数的最小量级)
-		auto signBit = static_cast<unsigned short>((bits & 0x80000000) >> 16);
+        const auto signBit = static_cast<unsigned short>((bits & 0x80000000) >> 16);
         return signBit | static_cast<unsigned short>(0x0400);
     }
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,HalfFloat)
 
-void Rendering::HalfFloat
-	::FromHalfFloatType( HalfFloatType value )
+void Rendering::HalfFloat ::FromHalfFloatType(HalfFloatType value) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -82,17 +87,17 @@ void Rendering::HalfFloat
 }
 
 float Rendering::HalfFloat
-    ::ToFloat () const
+    ::ToFloat () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
 	auto biasExp  = static_cast<unsigned int>(m_HalfFloat & 0x7C00) >> 10;
     if (biasExp != 0)
     {
-		auto signBit  = static_cast<unsigned int>(m_HalfFloat & 0x8000) << 16;
-		auto mantissa = static_cast<unsigned int>(m_HalfFloat & 0x03FF) << 13;
+		const auto signBit  = static_cast<unsigned int>(m_HalfFloat & 0x8000) << 16;
+        const auto mantissa = static_cast<unsigned int>(m_HalfFloat & 0x03FF) << 13;
         biasExp = (biasExp + 0x0070) << 23;
-		auto result = signBit | biasExp | mantissa;
+        auto result = signBit | biasExp | mantissa;
         return *reinterpret_cast<float*>(&result);
     }
     else
@@ -102,8 +107,7 @@ float Rendering::HalfFloat
     }
 }
 
-Rendering::HalfFloat::HalfFloatType Rendering::HalfFloat
-    ::ToHalfFloat() const
+Rendering::HalfFloat::HalfFloatType Rendering::HalfFloat ::ToHalfFloat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -115,14 +119,13 @@ const Rendering::HalfFloat Rendering::HalfFloat
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    float value = -ToFloat ();
+    const float value = -ToFloat ();
 
 	return HalfFloat{ value };
 }
 
  
-Rendering::HalfFloat& Rendering::HalfFloat
-    ::operator+= (const HalfFloat& rhs)
+Rendering::HalfFloat& Rendering::HalfFloat ::operator+=(const HalfFloat& rhs) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -135,8 +138,7 @@ Rendering::HalfFloat& Rendering::HalfFloat
     return *this;
 }
 
-Rendering::HalfFloat& Rendering::HalfFloat
-    ::operator-= (const HalfFloat& rhs)
+Rendering::HalfFloat& Rendering::HalfFloat ::operator-=(const HalfFloat& rhs) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -150,8 +152,7 @@ Rendering::HalfFloat& Rendering::HalfFloat
 
 }
 
-Rendering::HalfFloat& Rendering::HalfFloat
-    ::operator*= (const HalfFloat& rhs)
+Rendering::HalfFloat& Rendering::HalfFloat ::operator*=(const HalfFloat& rhs) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -168,7 +169,7 @@ Rendering::HalfFloat& Rendering::HalfFloat
     ::operator/= (const HalfFloat& rhs)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-
+    CoreTools::DoNothing();
     if (m_HalfFloat != 0)
     {
          float value = ToFloat ();
@@ -187,8 +188,7 @@ Rendering::HalfFloat& Rendering::HalfFloat
     return *this;
 }
 
-bool Rendering
-    ::operator== (const HalfFloat& lhs,const HalfFloat& rhs)
+bool Rendering ::operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept
 {
     if(lhs.ToHalfFloat() == rhs.ToHalfFloat())
         return true;
@@ -197,8 +197,7 @@ bool Rendering
 }
 
 
-bool Rendering
-    ::operator< (const HalfFloat& lhs,const HalfFloat& rhs)
+bool Rendering ::operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept
 {
     if(lhs.ToFloat() < rhs.ToFloat())
         return true;
@@ -223,14 +222,12 @@ ostream& Rendering
     return outFile;
 }
 
-float Rendering
-	::operator*( float lhs,const HalfFloat& rhs )
+float Rendering ::operator*(float lhs, const HalfFloat& rhs) noexcept
 {
 	return lhs * rhs.ToFloat();
 }
 
-float Rendering
-	::operator*( const HalfFloat& lhs,float rhs )
+float Rendering ::operator*(const HalfFloat& lhs, float rhs) noexcept
 {
 	return lhs.ToFloat() * rhs;
 }
@@ -238,6 +235,7 @@ float Rendering
 float Rendering
 	::operator/( float lhs,const HalfFloat& rhs )
 {
+    CoreTools::DoNothing();
 	if (rhs.ToHalfFloat() != 0)
 	{
 		return lhs / rhs.ToFloat();
@@ -256,3 +254,4 @@ Rendering::HalfFloat Mathematics::Math<Rendering::HalfFloat>
 {
 	return Rendering::HalfFloat{ Mathf::FAbs(value.ToFloat()) };
 }
+#include STSTEM_WARNING_POP

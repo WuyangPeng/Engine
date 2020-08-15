@@ -28,8 +28,8 @@ namespace CoreTools
 		explicit UnitTestStream(const OStreamShared& osPtr) noexcept;
 		virtual ~UnitTestStream() = default;
 
-		UnitTestStream(const UnitTestStream&) = delete;
-		UnitTestStream& operator=(const UnitTestStream&) = delete;
+		UnitTestStream(const UnitTestStream&) = default;
+		UnitTestStream& operator=(const UnitTestStream&) = default;
 		UnitTestStream(UnitTestStream&&) noexcept = default;
 		UnitTestStream& operator=(UnitTestStream&&) noexcept = default;
 

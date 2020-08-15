@@ -11,7 +11,11 @@
 #include "ACEMainManager.h"
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455) 
+#include SYSTEM_WARNING_DISABLE(26487) 
+#include SYSTEM_WARNING_DISABLE(26440) 
 Network::ACEMainManager
 	::ACEMainManager()
 	:ParentType{}, InterfaceType{}
@@ -19,11 +23,7 @@ Network::ACEMainManager
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACEMainManager
-	::~ACEMainManager()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ACEMainManager)
 
@@ -43,6 +43,6 @@ int Network::ACEMainManager
 
 	return 0;
 }
-
+#include STSTEM_WARNING_POP
 #endif // NETWORK_USE_ACE
 

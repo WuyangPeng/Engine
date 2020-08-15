@@ -31,9 +31,9 @@ namespace Rendering
 		class DisplayListInfo
 		{
 		public:
-			int mQuantity;  // number of display lists, input to glGenLists
-			int mStart;     // start index, output from glGenLists
-			int mBase;      // base index for glListBase
+			int mQuantity = 0;  // number of display lists, input to glGenLists
+			int mStart = 0;     // start index, output from glGenLists
+			int mBase = 0;      // base index for glListBase
 		};
 
 		DisplayListInfo mFont;
@@ -46,47 +46,47 @@ namespace Rendering
 		class RenderState
 		{
 		public:
-			RenderState ();
+			RenderState () noexcept;
 			void Initialize (const AlphaState* astate,const CullState* cstate, const DepthState* dstate,
 							 const OffsetState* ostate, const StencilState* sstate, const WireState* wstate);
 
 			// AlphaState
-			bool mAlphaBlendEnabled;
-			GLenum mAlphaSrcBlend;
-			GLenum mAlphaDstBlend;
-			bool mAlphaCompareEnabled;
-			GLenum mCompareFunction;
-			float mAlphaReference;
+			bool mAlphaBlendEnabled  = false;
+			GLenum mAlphaSrcBlend = 0;
+			GLenum mAlphaDstBlend = 0;
+			bool mAlphaCompareEnabled= false;
+			GLenum mCompareFunction = 0;
+			float mAlphaReference = 0.0f;
 			Mathematics::Float4 mBlendColor;
 
 			// CullState
-			bool mCullEnabled;
-			bool mCCWOrder;
+			bool mCullEnabled= false;
+			bool mCCWOrder= false;
 
 			// DepthState
-			bool mDepthEnabled;
-			bool mDepthWriteEnabled;
-			GLenum mDepthCompareFunction;
+			bool mDepthEnabled= false;
+			bool mDepthWriteEnabled= false;
+			GLenum mDepthCompareFunction= 0;
 
 			// OffsetState
-			bool mFillEnabled;
-			bool mLineEnabled;
-			bool mPointEnabled;
-			float mOffsetScale;
-			float mOffsetBias;
+			bool mFillEnabled= false;
+			bool mLineEnabled= false;
+			bool mPointEnabled= false;
+			float mOffsetScale = 0.0f;
+			float mOffsetBias = 0.0f;
 
 			// StencilState
-			bool mStencilEnabled;
-			GLenum mStencilCompareFunction;
-			GLuint mStencilReference;
-			GLuint mStencilMask;
-			GLuint mStencilWriteMask;
-			GLenum mStencilOnFail;
-			GLenum mStencilOnZFail;
-			GLenum mStencilOnZPass;
+			bool mStencilEnabled = 0.0f;
+			GLenum mStencilCompareFunction= 0;
+			GLuint mStencilReference= 0;
+			GLuint mStencilMask= 0;
+			GLuint mStencilWriteMask= 0;
+			GLenum mStencilOnFail= 0;
+			GLenum mStencilOnZFail= 0;
+			GLenum mStencilOnZPass= 0;
 
 			// WireState
-			bool mWireEnabled;
+			bool mWireEnabled= false;
 		};
 
 		RenderState mCurrentRS;
@@ -101,7 +101,7 @@ namespace Rendering
 		class SamplerState
 		{
 		public:
-			SamplerState ();
+			SamplerState () ;
 
 			// Get the state of the currently enabled texture.  This state appears
 			// to be associated with the OpenGL texture object.  How does this
@@ -109,20 +109,20 @@ namespace Rendering
 			// the sampler state separate from the texture object state.
 			void GetCurrent (GLenum target);
 
-			float mAnisotropy;
-			float mLodBias;
-			GLint mMagFilter;
-			GLint mMinFilter;
+			float mAnisotropy= false;
+			float mLodBias= false;
+			GLint mMagFilter= 0;
+			GLint mMinFilter= 0;
 			Mathematics::Float4 mBorderColor;
-			GLint mWrap[3];
+			GLint mWrap[3]{};
 		};
 
 		SamplerState mCurrentSS[MAX_NUM_PSAMPLERS];
 
 		// Capabilities (queried at run time).
-		int mMaxVShaderImages;
-		int mMaxPShaderImages;
-		int mMaxCombinedImages;
+		int mMaxVShaderImages= 0;
+		int mMaxPShaderImages= 0;
+		int mMaxCombinedImages= 0;
 	};
 
 }

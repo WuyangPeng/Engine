@@ -17,47 +17,42 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::VertexFormatElement
-	::VertexFormatElement()
+	::VertexFormatElement() noexcept
 	:m_StreamIndex{ 0 }, m_Offset{ 0 }, m_VertexFormatType{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VertexFormatElement
-	::VertexFormatElement(unsigned int streamIndex, unsigned int offset, const VertexFormatType& vertexFormatType)
-	:m_StreamIndex{ streamIndex }, m_Offset{ offset }, m_VertexFormatType{ vertexFormatType }
+Rendering::VertexFormatElement ::VertexFormatElement(unsigned int streamIndex, unsigned int offset, const VertexFormatType& vertexFormatType) noexcept
+    : m_StreamIndex{ streamIndex }, m_Offset{ offset }, m_VertexFormatType{ vertexFormatType }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,VertexFormatElement)
 
-unsigned int Rendering::VertexFormatElement
-    ::GetStreamIndex() const
+unsigned int Rendering::VertexFormatElement ::GetStreamIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_StreamIndex;
 }
 
-void Rendering::VertexFormatElement
-	::SetStreamIndex( unsigned int streamIndex )
+void Rendering::VertexFormatElement ::SetStreamIndex(unsigned int streamIndex) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_StreamIndex = streamIndex;
 }
 
-unsigned int Rendering::VertexFormatElement
-	::GetOffset() const
+unsigned int Rendering::VertexFormatElement ::GetOffset() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Offset;
 }
 
-void Rendering::VertexFormatElement
-	::SetOffset( unsigned int offset )
+void Rendering::VertexFormatElement ::SetOffset(unsigned int offset) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -65,47 +60,42 @@ void Rendering::VertexFormatElement
 }
 
 Rendering::VertexFormatFlags::AttributeType Rendering::VertexFormatElement
-	::GetType() const
+	::GetType() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_VertexFormatType.GetType();
 }
 
-void Rendering::VertexFormatElement
-	::SetType( AttributeType type )
+void Rendering::VertexFormatElement ::SetType(AttributeType type) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_VertexFormatType.SetType(type);
 }
 
-Rendering::VertexFormatFlags::AttributeUsage Rendering::VertexFormatElement
-	::GetUsage() const
+Rendering::VertexFormatFlags::AttributeUsage Rendering::VertexFormatElement ::GetUsage() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_VertexFormatType.GetUsage();
 }
 
-void Rendering::VertexFormatElement
-	::SetUsage( AttributeUsage usage )
+void Rendering::VertexFormatElement ::SetUsage(AttributeUsage usage) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_VertexFormatType.SetUsage(usage);
 }
 
-unsigned int Rendering::VertexFormatElement
-	::GetUsageIndex() const
+unsigned int Rendering::VertexFormatElement ::GetUsageIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_VertexFormatType.GetUsageIndex();
 }
 
-void Rendering::VertexFormatElement
-	::SetUsageIndex( unsigned int usageIndex )
+void Rendering::VertexFormatElement ::SetUsageIndex(unsigned int usageIndex) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -144,16 +134,14 @@ void Rendering::VertexFormatElement
 	m_VertexFormatType.Load(source);
 }
 
-void Rendering::VertexFormatElement
-    ::SetVertexFormatType(const VertexFormatType& vertexFormatType) 
+void Rendering::VertexFormatElement ::SetVertexFormatType(const VertexFormatType& vertexFormatType) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_VertexFormatType = vertexFormatType;
 }
 
-void Rendering::VertexFormatElement
-    ::Set(unsigned int streamIndex, unsigned int offset,const VertexFormatType& vertexFormatType)
+void Rendering::VertexFormatElement ::Set(unsigned int streamIndex, unsigned int offset, const VertexFormatType& vertexFormatType) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

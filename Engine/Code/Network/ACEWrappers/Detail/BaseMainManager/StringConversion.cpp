@@ -15,7 +15,7 @@
 using std::string;
 
 Network::StringConversion
-	::StringConversion()
+	::StringConversion() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }

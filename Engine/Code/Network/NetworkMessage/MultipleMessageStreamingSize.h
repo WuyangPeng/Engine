@@ -33,7 +33,7 @@ namespace Network
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual int GetStreamingSize(const MultipleMessageContainer& container) const override;
+		 int GetStreamingSize(const MultipleMessageContainer& container) const override;
 	};
 
 	template<typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>

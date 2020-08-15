@@ -10,8 +10,7 @@
 #include "MessageTypeCondition.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
-Network::MessageTypeConditionOperating
-	::MessageTypeConditionOperating()
+Network::MessageTypeConditionOperating ::MessageTypeConditionOperating() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }

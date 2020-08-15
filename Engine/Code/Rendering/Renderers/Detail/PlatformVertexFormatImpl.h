@@ -23,9 +23,13 @@ namespace Rendering
 		using PlatformVertexFormatPtr = std::shared_ptr<ClassType>;
 
     public:
-        PlatformVertexFormatImpl ();
+        PlatformVertexFormatImpl () noexcept;
         virtual ~PlatformVertexFormatImpl ();
-
+		PlatformVertexFormatImpl(const PlatformVertexFormatImpl&) = default;
+		PlatformVertexFormatImpl& operator=(const PlatformVertexFormatImpl&) = default;
+		PlatformVertexFormatImpl(PlatformVertexFormatImpl&&) = default;
+		PlatformVertexFormatImpl& operator=(PlatformVertexFormatImpl&&) = default;
+		
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         // 顶点格式操作。

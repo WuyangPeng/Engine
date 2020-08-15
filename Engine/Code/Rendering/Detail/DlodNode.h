@@ -25,20 +25,22 @@ namespace Rendering
 
 	public:
 		explicit DlodNode (int numLevelsOfDetail);
-		virtual ~DlodNode ();
+		  ~DlodNode ();
+		  DlodNode(DlodNode&&) noexcept = default;
+		DlodNode& operator=(DlodNode&&) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(DlodNode); 
 
 		// 访问中心(LOD)细节等级。
-	 	const APoint GetModelCenter() const;		
-		const APoint GetWorldCenter () const;
+	 	const APoint GetModelCenter() const  noexcept;		
+		const APoint GetWorldCenter () const noexcept;
 
-		void SetModelCenter(const APoint& modelCenter);
+		void SetModelCenter(const APoint& modelCenter) noexcept;
 
 		// 获得子节点的距离间隔。
-		int GetNumLevelsOfDetail () const;
+		int GetNumLevelsOfDetail () const noexcept;
 		float GetModelMinDistance (int index) const;
 		float GetModelMaxDistance(int index) const;
 		float GetWorldMinDistance(int index) const;
@@ -47,7 +49,7 @@ namespace Rendering
 		
 	protected:
 		// 支持分级裁剪。
-		virtual void GetVisibleSet(Culler& culler, bool noCull);
+		  void GetVisibleSet(Culler& culler, bool noCull) override;
 
 	private:
 		// 开关基于来自世界LOD中心，以摄像头距离选择子节点。

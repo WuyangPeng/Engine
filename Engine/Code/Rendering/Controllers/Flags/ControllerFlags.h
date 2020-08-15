@@ -10,7 +10,7 @@
 namespace Rendering
 {
 	// 时间管理。一个控制器可以使用自己的时间比例和它指定时间是如何被映射到应用程序时间。
-    enum ControllerRepeatType
+    enum class ControllerRepeatType
     {
         Clamp,
         Wrap,

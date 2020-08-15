@@ -23,8 +23,12 @@ namespace CoreTools
 		using ClassType = ReportOutput;
 
 	public:
-		explicit ReportOutput(const OStreamShared& osPtr);
+		explicit ReportOutput(const OStreamShared& osPtr) noexcept;
 		virtual ~ReportOutput();
+		ReportOutput(const ReportOutput&) = delete;
+		ReportOutput& operator=(const ReportOutput&) = delete;
+		ReportOutput(ReportOutput&&) noexcept = delete;
+		ReportOutput& operator=(ReportOutput&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -33,10 +37,10 @@ namespace CoreTools
 		void PrintNumber(int number);
 
 	protected:
-		OStreamShared GetStream();
+		OStreamShared GetStream() noexcept;
 
 	private:
-		OStreamShared m_OsPtr;
+		OStreamShared m_OsPtr;   
 	};
 }
 

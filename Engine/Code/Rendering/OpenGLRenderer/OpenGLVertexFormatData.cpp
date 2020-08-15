@@ -8,11 +8,14 @@
 
 #include "OpenGLVertexFormatDataDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Position>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -25,7 +28,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Normal>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -38,7 +41,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Tangent>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -51,7 +54,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Binormal>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -64,7 +67,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendIndices>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -77,7 +80,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendWeight>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -90,7 +93,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::FogCoord>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -103,7 +106,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Psize>
-	::Enable(int stride)
+	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -116,7 +119,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Position>
-	::Disable()
+	::Disable() noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -129,7 +132,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Normal>
-	::Disable()
+	::Disable() noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -142,7 +145,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Tangent>
-	::Disable()
+	::Disable() noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -155,7 +158,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Binormal>
-	::Disable()
+	::Disable() noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -168,7 +171,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendIndices>
-	::Disable()
+	::Disable() noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -181,8 +184,8 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendWeight>
-	::Disable()
-{
+	::Disable() noexcept
+{ 
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	if (IsHas())
@@ -194,7 +197,7 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::FogCoord>
-	::Disable()
+	::Disable() noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -207,8 +210,8 @@ void Rendering
 template <>
 void Rendering
 	::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Psize>
-	::Disable()
-{
+	::Disable() noexcept
+{ 
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	if (IsHas())
@@ -216,3 +219,4 @@ void Rendering
 		System::GlDisablePSizeArray();
 	}
 }
+#include STSTEM_WARNING_POP

@@ -19,11 +19,11 @@ namespace Network
 		using ClassType = NetworkMessageEventLess;
 
 	public:
-		NetworkMessageEventLess();
+		NetworkMessageEventLess() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		bool operator()(const NetworkMessageEventWeakPtr& lhs, const NetworkMessageEventWeakPtr& rhs) const;
+		bool operator()(const NetworkMessageEventWeakPtr& lhs, const NetworkMessageEventWeakPtr& rhs) const noexcept;
 	};
 }
 

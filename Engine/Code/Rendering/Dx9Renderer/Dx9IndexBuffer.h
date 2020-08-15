@@ -24,16 +24,16 @@ namespace Rendering
 		using ParentType = PlatformIndexBufferImpl;
 
 	public:
-		Dx9IndexBuffer(Renderer* renderer,const IndexBuffer* indexBuffer);
-		virtual ~Dx9IndexBuffer();
+                Dx9IndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer) noexcept;
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		// »º³åÇø²Ù×÷
-		virtual void Enable(Renderer* renderer) override;
-		virtual void Disable(Renderer* renderer) override;
-		virtual void* Lock(BufferLocking mode) override;
-		virtual void Unlock() override;
+		 void Enable(Renderer* renderer) override;
+		 void Disable(Renderer* renderer) override;
+		 void* Lock(BufferLocking mode) override;
+		 void Unlock() override;
 	};
 }
 

@@ -14,19 +14,21 @@
 #include "Detail/TextureData.h"
 #include "TextureLevelDataDetail.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
 template<typename TexturePtrType,int WindowSize>
 TexturePtrType Rendering::LoadTexture
 	::CreateTexture1DPtr( const TextureData& data,ReadFileManager& inFile)
 {
 	static_assert(WindowSize == 1,"WindowSize == 1");
 
-	auto numDimensions =	TextureImpl::CalculateNumDimensions (data.GetTextureType()); 
+	const auto numDimensions =	TextureImpl::CalculateNumDimensions (data.GetTextureType()); 
 	
 	TextureLevelData<WindowSize> levelData{ numDimensions };
 	levelData.ReadFromFile(inFile);
-	auto dimension0 = levelData.GetDimension(0,0);
-	TexturePtrType texture{ NEW0 Texture1D{ data.GetFormat(),dimension0,data.GetNumLevels(), data.GetUsage() } };
+	const auto dimension0 = levelData.GetDimension(0,0);
+	TexturePtrType texture{ std::make_shared< Texture1D>( data.GetFormat(),dimension0,data.GetNumLevels(), data.GetUsage() ) };
 	
 	texture->ReadFromFile(inFile); 	
 	
@@ -39,13 +41,13 @@ TexturePtrType Rendering::LoadTexture
 {
 	static_assert(WindowSize == 2, "WindowSize == 2");
 
-	auto numDimensions = TextureImpl::CalculateNumDimensions (data.GetTextureType());
+	const auto numDimensions = TextureImpl::CalculateNumDimensions (data.GetTextureType());
 	
 	TextureLevelData<WindowSize> levelData{ numDimensions };
 	levelData.ReadFromFile(inFile);
-	auto dimension0 = levelData.GetDimension(0,0);
-	auto dimension1 = levelData.GetDimension(1,0);
-	TexturePtrType texture{ NEW0 Texture2D{ data.GetFormat(),dimension0, dimension1,data.GetNumLevels(),data.GetUsage() } };
+	const auto dimension0 = levelData.GetDimension(0,0);
+	const auto dimension1 = levelData.GetDimension(1,0);
+	TexturePtrType texture{ std::make_shared<Texture2D>(data.GetFormat(),dimension0, dimension1,data.GetNumLevels(),data.GetUsage() ) };
 	
 	texture->ReadFromFile(inFile); 	
 	
@@ -58,14 +60,14 @@ TexturePtrType Rendering::LoadTexture
 {
 	static_assert(WindowSize == 3, "WindowSize == 3");
 
-	auto numDimensions = TextureImpl::CalculateNumDimensions (data.GetTextureType()); 
+	const auto numDimensions = TextureImpl::CalculateNumDimensions (data.GetTextureType()); 
 	
 	TextureLevelData<WindowSize> levelData{ numDimensions };
 	levelData.ReadFromFile(inFile);
-	auto dimension0 = levelData.GetDimension(0,0);
-	auto dimension1 = levelData.GetDimension(1,0);
-	auto dimension2 = levelData.GetDimension(2,0);
-	TexturePtrType texture{ NEW0 Texture3D{ data.GetFormat(),dimension0, dimension1,dimension2,  data.GetNumLevels(), data.GetUsage()} };
+	const auto dimension0 = levelData.GetDimension(0,0);
+	const auto dimension1 = levelData.GetDimension(1,0);
+	const auto dimension2 = levelData.GetDimension(2,0);
+	TexturePtrType texture{ std::make_shared< Texture3D>( data.GetFormat(),dimension0, dimension1,dimension2,  data.GetNumLevels(), data.GetUsage())};
 	
 	texture->ReadFromFile(inFile); 	
 	
@@ -78,16 +80,16 @@ TexturePtrType Rendering::LoadTexture
 {
 	static_assert(WindowSize == 2, "WindowSize == 2");
 
-	auto numDimensions = TextureImpl::CalculateNumDimensions (data.GetTextureType()); 
+	const auto numDimensions = TextureImpl::CalculateNumDimensions (data.GetTextureType()); 
 	
 	TextureLevelData<WindowSize> levelData{ numDimensions };
 	levelData.ReadFromFile(inFile);
-	auto dimension = levelData.GetDimension(0,0);
-	TexturePtrType texture{ NEW0 TextureCube{ data.GetFormat(),dimension,data.GetNumLevels(),data.GetUsage() } };
+	const auto dimension = levelData.GetDimension(0,0);
+	TexturePtrType texture{ std::make_shared< TextureCube>( data.GetFormat(),dimension,data.GetNumLevels(),data.GetUsage() ) };
 	
 	texture->ReadFromFile(inFile); 	
 	
 	return texture;
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_LOAD_TEXTURE_DETAIL_H

@@ -24,13 +24,17 @@ namespace Rendering
 		// Construction and destruction.
 		Dx9PixelShader(Renderer* renderer, const PixelShader* pshader);
 		~Dx9PixelShader();
+		Dx9PixelShader(const Dx9PixelShader&) = default;
+		Dx9PixelShader& operator=(const Dx9PixelShader&) = default;
+		Dx9PixelShader(Dx9PixelShader&&) = default;
+		Dx9PixelShader& operator=(Dx9PixelShader&&) = default;
 
 		// Pixel shader operations.
 		void Enable(Renderer* renderer, const PixelShader* pshader, const ShaderParameters* parameters);
 		void Disable(Renderer* renderer, const PixelShader* pshader, const ShaderParameters* parameters);
 
 	private:
-		IDirect3DPixelShader9* mShader;
+		IDirect3DPixelShader9* mShader = nullptr;
 	};
 
 }

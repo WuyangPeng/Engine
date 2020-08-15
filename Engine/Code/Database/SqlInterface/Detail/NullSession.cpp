@@ -12,19 +12,13 @@
 
 using std::make_shared;
 
-Database::NullSession
-	::NullSession(const ConfigurationStrategy& configurationStrategy)
+Database::NullSession 
+	::NullSession(const ConfigurationStrategy& configurationStrategy) noexcept
 	: ParentType{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
-
-Database::NullSession
-	::~NullSession()
-{
-	DATABASE_SELF_CLASS_IS_VALID_9;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, NullSession)
 
 

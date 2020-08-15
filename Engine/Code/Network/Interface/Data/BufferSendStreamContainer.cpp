@@ -44,7 +44,7 @@ void Network::BufferSendStreamContainer
 }
 
 bool Network::BufferSendStreamContainer
-	::IsEmpty() const
+	::IsEmpty() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -60,7 +60,7 @@ uint32_t Network::BufferSendStreamContainer
 }
 
 Network::ACEHandle Network::BufferSendStreamContainer
-	::GetACEHandle() const
+	::GetACEHandle() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -68,7 +68,7 @@ Network::ACEHandle Network::BufferSendStreamContainer
 }
 
 uint64_t Network::BufferSendStreamContainer
-	::GetSocketID() const
+	::GetSocketID() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

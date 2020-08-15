@@ -37,8 +37,8 @@ namespace Rendering
  
         void SetCenter (const APoint& center);
         void SetRadius (float radius);
-        const APoint& GetCenter () const;
-        float GetRadius () const;
+        const APoint& GetCenter () const noexcept;
+        float GetRadius() const noexcept;
 
 		int GetStreamingSize () const;
  

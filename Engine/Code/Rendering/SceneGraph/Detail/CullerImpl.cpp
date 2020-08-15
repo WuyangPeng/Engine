@@ -12,6 +12,15 @@
 #include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26429)
 
 Rendering::CullerImpl
     ::CullerImpl (const ConstCameraSmartPointer& camera)
@@ -22,34 +31,26 @@ Rendering::CullerImpl
     
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-Rendering::CullerImpl
-    ::~CullerImpl ()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::CullerImpl
     ::IsValid() const noexcept
 {
-	if (0 < m_PlaneQuantity && !m_Camera.IsNullPtr())
+	if (0 < m_PlaneQuantity &&  m_Camera )
         return true;
     else
         return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::CullerImpl
-   ::SetCamera(const ConstCameraSmartPointer& camera)
+void Rendering::CullerImpl ::SetCamera(const ConstCameraSmartPointer& camera) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Camera = camera;
 }
 
-Rendering::ConstCameraSmartPointer Rendering::CullerImpl
-    ::GetCamera () const
+Rendering::ConstCameraSmartPointer Rendering::CullerImpl ::GetCamera() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -121,8 +122,7 @@ void Rendering::CullerImpl
     m_PlaneState = 0xFFFFFFFF;
 }
 
-const float* Rendering::CullerImpl
-    ::GetFrustum () const
+const float* Rendering::CullerImpl ::GetFrustum() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -137,40 +137,35 @@ void Rendering::CullerImpl
     m_VisibleSet.Insert(visible);
 }
 
-int Rendering::CullerImpl
-    ::GetPlaneQuantity () const
+int Rendering::CullerImpl ::GetPlaneQuantity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_PlaneQuantity;
 }
 
-const Rendering::CullerImpl::Plane* Rendering::CullerImpl
-    ::GetPlanes () const
+const Rendering::CullerImpl::Plane* Rendering::CullerImpl ::GetPlanes() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Plane;
 }
 
-void Rendering::CullerImpl
-    ::SetPlaneState (unsigned int planeState)
+void Rendering::CullerImpl ::SetPlaneState(unsigned int planeState) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_PlaneState = planeState;
 }
 
-unsigned int Rendering::CullerImpl
-    ::GetPlaneState () const
+unsigned int Rendering::CullerImpl ::GetPlaneState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_PlaneState;
 }
 
-void Rendering::CullerImpl
-    ::PushPlane (const Plane& plane)
+void Rendering::CullerImpl ::PushPlane(const Plane& plane) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -182,8 +177,7 @@ void Rendering::CullerImpl
     }
 }
 
-void Rendering::CullerImpl
-    ::PopPlane ()
+void Rendering::CullerImpl ::PopPlane() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -419,8 +413,7 @@ Mathematics::NumericalValueSymbol Rendering::CullerImpl
     return Mathematics::NumericalValueSymbol::Negative;
 }
 
-void Rendering::CullerImpl
-    ::Clear ()
+void Rendering::CullerImpl ::Clear() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -444,18 +437,17 @@ const Rendering::ConstVisualSmartPointer  Rendering::CullerImpl
 
 }
 
-Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl
-	::begin()
+Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl ::begin() noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	return m_VisibleSet.begin();
 }
 
-Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl
-	::end()
+Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl ::end() noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	return m_VisibleSet.end();
 }
+#include STSTEM_WARNING_POP

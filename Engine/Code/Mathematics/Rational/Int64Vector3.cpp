@@ -16,7 +16,10 @@
 
 using std::ostream;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26455)
 DELAY_COPY_CONSTRUCTION_DEFINE(Mathematics, Int64Vector3)
 
 Mathematics::Int64Vector3
@@ -65,7 +68,7 @@ const Mathematics::Int64Vector3 Mathematics::Int64Vector3
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	auto impl = -(*m_Impl);
+	const auto impl = -(*m_Impl);
 
 	return Int64Vector3{ impl.GetX(),impl.GetY(),impl.GetZ() };
 }
@@ -110,7 +113,7 @@ Mathematics::Int64Vector3&	Mathematics::Int64Vector3
 	return *this;
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Int64Vector3, SquaredLength, int64_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Int64Vector3, SquaredLength, int64_t)
 
 int64_t Mathematics::Int64Vector3
 	::Dot(const Int64Vector3& rhs) const
@@ -143,7 +146,7 @@ Mathematics::Int64Vector3 Mathematics::Int64Vector3
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	auto impl = Mathematics::Cross(*m_Impl, *rhs.m_Impl);
+	const auto impl = Mathematics::Cross(*m_Impl, *rhs.m_Impl);
 
 	return Int64Vector3{ impl.GetX(),impl.GetY(),impl.GetZ() };
 }
@@ -164,3 +167,4 @@ ostream& Mathematics
 	return os;
 }
 
+#include STSTEM_WARNING_POP

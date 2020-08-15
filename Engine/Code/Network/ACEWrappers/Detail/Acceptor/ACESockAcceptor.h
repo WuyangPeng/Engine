@@ -13,7 +13,7 @@
 
 #include "Network/Interface/Detail/SockAcceptorImpl.h"
 
-#include <ace/SOCK_Acceptor.h>
+#include "System/Helper/PragmaWarning/ACE.h"
 
 namespace Network
 {
@@ -26,22 +26,26 @@ namespace Network
 	public:
 		explicit ACESockAcceptor(int port);
 		ACESockAcceptor(const std::string& hostName, int port);
-		virtual ~ACESockAcceptor();
+		~ACESockAcceptor();
+		ACESockAcceptor(const ACESockAcceptor&) = delete;
+		ACESockAcceptor& operator=(const ACESockAcceptor&) = delete;
+		ACESockAcceptor(ACESockAcceptor&&) noexcept = delete;
+		ACESockAcceptor& operator=(ACESockAcceptor&&) noexcept = delete;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
-		virtual bool Accept(const SockStreamSharedPtr& sockStream) override;
+		bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+		bool Accept(const SockStreamSharedPtr& sockStream) override;
 
-		virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
-		virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+		void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
+		void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-		virtual bool EnableNonBlock() override;
+		bool EnableNonBlock() override;
 
-		virtual ACEHandle GetACEHandle() override;
+		ACEHandle GetACEHandle() override;
 
-		virtual const std::string GetAddress() const override;
-		virtual int GetPort() const override;
+		const std::string GetAddress() const override;
+		int GetPort() const override;
 
 	private:
 		ACE_SOCK_Acceptor m_ACESockAcceptor;

@@ -26,7 +26,7 @@ namespace CoreTools
 	public:
 		UnitTestFailReportOutputImpl(const std::string& failClassName, const std::string& fileName, int lineNumber,
 									 const std::string& errorMessage, const OStreamShared& osPtr);
-		virtual ~UnitTestFailReportOutputImpl();
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 

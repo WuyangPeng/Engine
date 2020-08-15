@@ -15,9 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Line3<Real>
-	::Line3(const Vector3D& origin, const Vector3D& direction, const Real epsilon)
-	:m_Origin{ origin }, m_Direction{ direction }, m_Epsilon{ epsilon }
+Mathematics::Line3<Real>::Line3(const Vector3D& origin, const Vector3D& direction, const Real epsilon) noexcept
+    : m_Origin{ origin }, m_Direction{ direction }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -27,17 +26,24 @@ template <typename Real>
 bool Mathematics::Line3<Real>
 	::IsValid() const noexcept
 {
-	if (m_Direction.IsNormalize(m_Epsilon))
-		return true;
-	else
-		return false;
+	try
+    {
+        if (m_Direction.IsNormalize(m_Epsilon))
+            return true;
+        else
+            return false;
+	}
+	catch (...)
+	{
+            return false;
+	}
+
 }
 #endif // OPEN_CLASS_INVARIANT
 
 
 template <typename Real>
-typename const Mathematics::Line3<Real>::Vector3D Mathematics::Line3<Real>
-	::GetOrigin() const
+typename const Mathematics::Line3<Real>::Vector3D Mathematics::Line3<Real>::GetOrigin() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -46,7 +52,7 @@ typename const Mathematics::Line3<Real>::Vector3D Mathematics::Line3<Real>
 
 template <typename Real>
 typename const Mathematics::Line3<Real>::Vector3D Mathematics::Line3<Real>
-	::GetDirection() const
+	::GetDirection() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

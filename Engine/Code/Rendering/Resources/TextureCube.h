@@ -23,34 +23,35 @@ namespace Rendering
         
     public:
 		TextureCube (TextureFormat format, int dimension, int numLevels, BufferUsage usage = BufferUsage::Texture);
-		virtual ~TextureCube();
-        
+		  ~TextureCube();
+                TextureCube(TextureCube&&) = default;
+                  TextureCube& operator=(TextureCube&&) = default;
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TextureCube); 
         
-        virtual TextureFormat GetFormat () const override;
-        virtual TextureFlags GetTextureType () const override;
-        virtual BufferUsage GetUsage () const override;
-        virtual int GetNumLevels () const override;
+          TextureFormat GetFormat () const noexcept override;
+                TextureFlags GetTextureType() const noexcept override;
+          BufferUsage GetUsage() const noexcept override;
+                int GetNumLevels() const noexcept override;
         
-        virtual int GetNumDimensions () const override;
-        virtual int GetDimension (int index, int level) const override;
-        virtual int GetNumLevelBytes (int level) const override;
-        virtual int GetNumTotalBytes () const override;
-        virtual int GetLevelOffset (int level) const override;
+          int GetNumDimensions() const noexcept override;
+          int GetDimension (int index, int level) const override;
+          int GetNumLevelBytes (int level) const override;
+          int GetNumTotalBytes() const noexcept override;
+          int GetLevelOffset (int level) const override;
         
-        virtual int GetPixelSize () const override;
-        virtual bool IsCompressed () const override;
-        virtual bool IsMipmapable () const override;
-        virtual void SaveToFile (WriteFileManager& outFile) const override;
-        virtual void ReadFromFile (ReadFileManager& inFile) override;
+          int GetPixelSize () const override;
+          bool IsCompressed() const noexcept override;
+          bool IsMipmapable () const override;
+          void SaveToFile (WriteFileManager& outFile) const override;
+          void ReadFromFile (ReadFileManager& inFile) override;
 
-		virtual void SetUserField (int index, int userField) override;
-        virtual int GetUserField (int index) const override;
+		  void SetUserField (int index, int userField) override;
+          int GetUserField (int index) const override;
         
-        virtual void GenerateMipmaps () override;
-        virtual bool HasMipmaps () const override;
+          void GenerateMipmaps () override;
+          bool HasMipmaps () const override;
 
         int GetWidth () const;
         int GetHeight () const;
@@ -58,7 +59,7 @@ namespace Rendering
         char* GetTextureData (int face,int level);
 		const char* GetTextureData (int face,int level) const;
 
-		virtual TextureSmartPointer Clone() const override;
+		  TextureSmartPointer Clone() const override;
         
     private:
 		IMPL_TYPE_DECLARE(TextureCube);

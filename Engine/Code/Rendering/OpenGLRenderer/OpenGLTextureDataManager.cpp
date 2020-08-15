@@ -8,15 +8,19 @@
 
 #include "OpenGLTextureDataManageDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "CoreTools/Helper/ExceptionMacro.h" 
 template <>
 Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture1D> >
 	::~OpenGLTextureDataManager()
+{EXCEPTION_TRY
 {
-	if (m_Level != -1)
+if (m_Level != -1)
 	{		 
 		m_Manager.Unlock(m_Level);		 
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -25,10 +29,14 @@ template <>
 Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture2D> >
 	::~OpenGLTextureDataManager()
 {
-	if (m_Level != -1)
+	EXCEPTION_TRY
+{
+if (m_Level != -1)
 	{		 
 		m_Manager.Unlock(m_Level);		 
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -36,11 +44,15 @@ Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Text
 template <>
 Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture3D> >
 	::~OpenGLTextureDataManager()
+{EXCEPTION_TRY
 {
-	if (m_Level != -1)
+if (m_Level != -1)
 	{		 
 		m_Manager.Unlock(m_Level);		 
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -48,11 +60,15 @@ Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Text
 template <>
 Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::TextureCube> >
 	::~OpenGLTextureDataManager()
+{EXCEPTION_TRY
 {
-	if (m_Level != -1)
+if (m_Level != -1)
 	{		 
 		m_Manager.Unlock(m_Face, m_Level);		 
 	}
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

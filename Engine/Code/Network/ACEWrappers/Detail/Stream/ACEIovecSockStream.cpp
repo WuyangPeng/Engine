@@ -24,7 +24,14 @@
 
 using std::string;
 using std::array;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455) 
+#include SYSTEM_WARNING_DISABLE(26415) 
+#include SYSTEM_WARNING_DISABLE(26418) 
+#include SYSTEM_WARNING_DISABLE(26465) 
+#include SYSTEM_WARNING_DISABLE(26446) 
+#include SYSTEM_WARNING_DISABLE(26481) 
 Network::ACEIovecSockStream
 	::ACEIovecSockStream()
 	:ParentType{}
@@ -32,11 +39,7 @@ Network::ACEIovecSockStream
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACEIovecSockStream
-	::~ACEIovecSockStream()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ACEIovecSockStream)
 
@@ -45,7 +48,7 @@ int Network::ACEIovecSockStream
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	static const auto headSize = MessageInterface::GetMessageHeadSize();
+	static constexpr auto headSize = MessageInterface::GetMessageHeadSize();
 
 	if (messageBuffer->GetCurrentWriteIndex() <= headSize)
 	{
@@ -76,5 +79,5 @@ void Network::ACEIovecSockStream
 	callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
 	eventInterface->EventFunction(callbackParameters);
 }
-
+#include STSTEM_WARNING_POP
 #endif // NETWORK_USE_ACE

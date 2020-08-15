@@ -45,17 +45,15 @@ Mathematics::AVector<T>
 } 
 
 template <typename T>
-Mathematics::AVector<T>
-	::AVector(T x, T y, T z)
-	:m_HomogeneousPoint{ x,y,z,Math::sm_Zero }
+Mathematics::AVector<T>::AVector(T x, T y, T z) noexcept
+    : m_HomogeneousPoint{ x, y, z, Math::sm_Zero }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
-Mathematics::AVector<T>
-	::AVector(const HomogeneousPoint& homogeneousPoint)
-	:m_HomogeneousPoint{ homogeneousPoint }
+Mathematics::AVector<T>::AVector(const HomogeneousPoint& homogeneousPoint) noexcept
+    : m_HomogeneousPoint{ homogeneousPoint }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -101,8 +99,7 @@ const Mathematics::Float3 Mathematics::AVector<T>
 }
 
 template <typename T>
-const Mathematics::Vector3D<T> Mathematics::AVector<T>
-	::GetVector3D() const
+const Mathematics::Vector3D<T> Mathematics::AVector<T>::GetVector3D() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -27,12 +27,12 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		Torus3Parameters(Real s, Real t);
+		Torus3Parameters(Real s, Real t) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		Real GetS() const;
-		Real GetT() const;
+		Real GetS() const noexcept;
+		Real GetT() const noexcept;
 
 	private:
 		Real m_S;

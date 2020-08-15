@@ -14,7 +14,9 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
 template <typename BaseClass>
 CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
 	::ConstFirstSubclassSmartPointer(uint64_t address, const BaseClassType* data)
@@ -27,7 +29,7 @@ CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 
 template <typename BaseClass>
 CoreTools::ConstFirstSubclassSmartPointer<BaseClass>
@@ -274,7 +276,7 @@ bool CoreTools
 
 template <typename BaseClass>
 bool CoreTools
-	::operator<(const ConstFirstSubclassSmartPointer<BaseClass>& lhs, const ConstFirstSubclassSmartPointer<BaseClass>& rhs)
+	::operator<(const ConstFirstSubclassSmartPointer<BaseClass>& lhs, const ConstFirstSubclassSmartPointer<BaseClass>& rhs) noexcept
 {
 	return lhs.GetAddress() < rhs.GetAddress();
 }

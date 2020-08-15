@@ -17,7 +17,7 @@ namespace CoreTools
 		using ClassType = TwoDimensionalParsing;
 
 	public:
-		TwoDimensionalParsing();
+		TwoDimensionalParsing() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 	};

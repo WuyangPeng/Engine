@@ -29,7 +29,7 @@ namespace Rendering
 		using BufferTarget = CoreTools::BufferTarget;
 
 	public:
-		CollapseRecordArrayImpl();
+		CollapseRecordArrayImpl() noexcept;
 		explicit CollapseRecordArrayImpl(const std::vector<CollapseRecord>& collapseRecord);
 		
 		CLASS_INVARIANT_DECLARE;

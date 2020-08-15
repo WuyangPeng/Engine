@@ -13,14 +13,14 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 Mathematics::Int64Vector2Impl
-	::Int64Vector2Impl()
+	::Int64Vector2Impl() noexcept
 	:m_Tuple{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::Int64Vector2Impl
-	::Int64Vector2Impl(const Int64Vector<2>& rhs)
+	::Int64Vector2Impl(const Int64Vector<2>& rhs) noexcept
 	:m_Tuple{ rhs }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -37,7 +37,7 @@ Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
-	::operator=(const Int64Vector<2>& rhs)
+	::operator=(const Int64Vector<2>& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -88,8 +88,7 @@ const Mathematics::Int64Vector2Impl Mathematics::Int64Vector2Impl
 	return Int64Vector2Impl{ m_Tuple[1], -m_Tuple[0] };
 }
 
-const Mathematics::Int64Vector2Impl Mathematics::Int64Vector2Impl
-	::operator-() const
+const Mathematics::Int64Vector2Impl Mathematics::Int64Vector2Impl ::operator-() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -97,7 +96,7 @@ const Mathematics::Int64Vector2Impl Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
-	::operator+=(const Int64Vector2Impl& rhs)
+	::operator+=(const Int64Vector2Impl& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -107,7 +106,7 @@ Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
-	::operator-=(const Int64Vector2Impl& rhs)
+	::operator-=(const Int64Vector2Impl& rhs) noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -117,8 +116,8 @@ Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
 }
 
 Mathematics::Int64Vector2Impl& Mathematics::Int64Vector2Impl
-	::operator*=(const int64_t& scalar)
-{
+	::operator*=(const int64_t& scalar) noexcept
+{ 
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	m_Tuple *= scalar;
@@ -137,7 +136,7 @@ Mathematics::Int64Vector2Impl&	Mathematics::Int64Vector2Impl
 }
 
 int64_t Mathematics::Int64Vector2Impl
-	::SquaredLength() const
+	::SquaredLength() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

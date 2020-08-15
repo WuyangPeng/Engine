@@ -23,7 +23,7 @@ namespace Network
 		using ClassType = StringConversion;
 
 	public:
-		StringConversion();
+		StringConversion() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

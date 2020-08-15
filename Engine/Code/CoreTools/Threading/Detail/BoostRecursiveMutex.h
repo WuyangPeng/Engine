@@ -21,15 +21,14 @@ namespace CoreTools
 		using ParentType = MutexImpl;
 
 	public:
-		BoostRecursiveMutex();
-		virtual ~BoostRecursiveMutex();
+		BoostRecursiveMutex() noexcept; 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		void Initialize() override;
-		void Delete() override;
+		void Initialize() noexcept override;
+		void Delete() noexcept override;
 		void Enter() override;
-		bool TryEnter() override;
+		bool TryEnter() noexcept override;
 		void Leave() override;
 
 	private:

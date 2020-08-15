@@ -19,6 +19,6 @@ Network::HandleSetIterator
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, HandleSetIterator)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, HandleSetIterator)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSetIterator, operator(), Network::ACEHandle)

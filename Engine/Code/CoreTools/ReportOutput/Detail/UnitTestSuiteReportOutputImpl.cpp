@@ -27,12 +27,7 @@ CoreTools::UnitTestSuiteReportOutputImpl
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::UnitTestSuiteReportOutputImpl
-	::~UnitTestSuiteReportOutputImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, UnitTestSuiteReportOutputImpl)
 
 void CoreTools::UnitTestSuiteReportOutputImpl

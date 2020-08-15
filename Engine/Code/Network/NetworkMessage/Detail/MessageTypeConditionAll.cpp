@@ -13,22 +13,18 @@
 #include "Network/NetworkMessage/MessageManager.h"
 
 Network::MessageTypeConditionAll
-	::MessageTypeConditionAll()
+	::MessageTypeConditionAll() noexcept
 	:ParentType{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageTypeConditionAll
-	::~MessageTypeConditionAll()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageTypeConditionAll)
 
 bool Network::MessageTypeConditionAll
-	::IsVersionsConform(int version) const
+	::IsVersionsConform(int version) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -37,8 +33,7 @@ bool Network::MessageTypeConditionAll
 	return true;
 }
 
-int Network::MessageTypeConditionAll
-	::GetMinVersion() const
+int Network::MessageTypeConditionAll ::GetMinVersion() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

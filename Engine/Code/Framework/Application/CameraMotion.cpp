@@ -22,7 +22,7 @@ Framework::CameraMotion
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, CameraMotion)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraMotion, GetCameraPtr, const Framework::CameraMotion::CameraSmartPointer);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, GetCameraPtr, const Framework::CameraMotion::CameraSmartPointer);
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraMotion, MoveCamera, bool);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, SlowerCameraTranslation, void);

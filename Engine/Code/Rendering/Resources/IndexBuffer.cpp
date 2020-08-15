@@ -19,8 +19,20 @@
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 
+#include "CoreTools/Helper/ExceptionMacro.h" 
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering,IndexBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,IndexBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,IndexBuffer); 
@@ -41,8 +53,12 @@ Rendering::IndexBuffer
 
 Rendering::IndexBuffer
 	::~IndexBuffer ()
+{EXCEPTION_TRY
 {
-	RENDERER_MANAGE_SINGLETON.UnbindAll(this); 
+RENDERER_MANAGE_SINGLETON.UnbindAll(this); 
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -50,7 +66,7 @@ Rendering::IndexBuffer
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,IndexBuffer)
 	
 void Rendering::IndexBuffer
-    ::SetOffset( int offset )
+    ::SetOffset( int offset ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -58,7 +74,7 @@ void Rendering::IndexBuffer
 }
 
 int Rendering::IndexBuffer
-	::GetOffset() const
+	::GetOffset() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -164,7 +180,7 @@ Rendering::IndexBufferSmartPointer Rendering::IndexBuffer
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return IndexBufferSmartPointer(NEW0 ClassType(*this));
+	return IndexBufferSmartPointer(std::make_shared<ClassType>(*this));
 }
 
 void Rendering::IndexBuffer
@@ -398,4 +414,4 @@ void Rendering::IndexBuffer
 	accessWriteData[index] = current;
 }
 
- 
+ #include STSTEM_WARNING_POP

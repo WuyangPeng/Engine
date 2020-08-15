@@ -13,7 +13,15 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26429)
+ #include SYSTEM_WARNING_DISABLE(26426)
+ #include SYSTEM_WARNING_DISABLE(26486)
+ #include SYSTEM_WARNING_DISABLE(26481)
+ #include SYSTEM_WARNING_DISABLE(26489)
+ #include SYSTEM_WARNING_DISABLE(26490)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TrianglesMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TrianglesMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TrianglesMesh);
@@ -24,14 +32,7 @@ Rendering::TrianglesMesh
 	:ParentType{ VisualPrimitiveType::TriangleMesh,vertexformat,vertexbuffer,indexbuffer }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::TrianglesMesh
-	::~TrianglesMesh()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
+} 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TrianglesMesh)
 
 int Rendering::TrianglesMesh
@@ -51,15 +52,15 @@ const Rendering::TriangleIndex
 	if (0 <= index && index < GetNumTriangles())
 	{
 		auto indices = 3 * index + reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData());
-		auto firstIndex = *indices++;
-		auto secondIndex = *indices++;
-		auto thirdIndex = *indices;
+	const	auto firstIndex = *indices++;
+                const auto secondIndex = *indices++;
+        const auto thirdIndex = *indices;
 
 		return TriangleIndex{ firstIndex,secondIndex,thirdIndex };
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("未找到三角形顶点索引"));
+		THROW_EXCEPTION(SYSTEM_TEXT("未找到三角形顶点索引"s));
 	}	 
 }
 
@@ -68,7 +69,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::TrianglesMesh
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 } 
 
- 
+ #include STSTEM_WARNING_POP

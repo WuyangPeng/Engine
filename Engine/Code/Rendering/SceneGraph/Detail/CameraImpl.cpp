@@ -18,7 +18,13 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26489)
 Rendering::CameraImpl
 ::CameraImpl (bool isPerspective, float epsilon)
 	: m_CameraMatrix{ WorldCoordinateFrame{ epsilon },CameraFrustum{ isPerspective },epsilon }
@@ -26,9 +32,8 @@ Rendering::CameraImpl
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::CameraImpl
-    ::CameraImpl (float epsilon)
-	:m_CameraMatrix{ epsilon }
+Rendering::CameraImpl ::CameraImpl(float epsilon)  
+    : m_CameraMatrix{ epsilon }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -99,8 +104,7 @@ const Rendering::CameraImpl::Matrix Rendering::CameraImpl
     return m_CameraMatrix.GetWorldCoordinateFrame().GetViewMatrix();
 }
 
-bool Rendering::CameraImpl
-    ::IsPerspective () const
+bool Rendering::CameraImpl ::IsPerspective() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -145,72 +149,63 @@ void Rendering::CameraImpl
     m_CameraMatrix.OnFrustumChange(cameraFrustum);
 }
 
-const float* Rendering::CameraImpl
-    ::GetFrustum () const
+const float* Rendering::CameraImpl ::GetFrustum() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetCameraFrustum().GetFrustum ();
 }
 
-const Rendering::CameraFrustumData Rendering::CameraImpl
-    ::GetFrustumData () const
+const Rendering::CameraFrustumData Rendering::CameraImpl ::GetFrustumData() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetCameraFrustum().GetFrustumData ();
 }
 
-float Rendering::CameraImpl
-    ::GetDirectionMin () const
+float Rendering::CameraImpl ::GetDirectionMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetCameraFrustum().GetDirectionMin();
 }
 
-float Rendering::CameraImpl
-    ::GetDirectionMax () const
+float Rendering::CameraImpl ::GetDirectionMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetCameraFrustum().GetDirectionMax();
 }
 
-float Rendering::CameraImpl
-    ::GetUpMin () const
+float Rendering::CameraImpl ::GetUpMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetCameraFrustum().GetUpMin();
 }
 
-float Rendering::CameraImpl
-    ::GetUpMax () const
+float Rendering::CameraImpl ::GetUpMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetCameraFrustum().GetUpMax();
 }
 
-float Rendering::CameraImpl
-    ::GetRightMin () const
+float Rendering::CameraImpl ::GetRightMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetCameraFrustum().GetRightMin();
 }
 
-float Rendering::CameraImpl
-    ::GetRightMax () const
+float Rendering::CameraImpl ::GetRightMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetCameraFrustum().GetRightMax();
 }
 
-const Rendering::CameraImpl::Matrix Rendering::CameraImpl
-    ::GetProjectionMatrix () const
+const Rendering::CameraImpl::Matrix Rendering::CameraImpl ::GetProjectionMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -233,16 +228,14 @@ void Rendering::CameraImpl
     m_CameraMatrix.SetProjectionMatrix(p00,p10,p11,p01,nearExtrude,farExtrude);
 }
 
-Rendering::DepthType Rendering::CameraImpl
-    ::GetDepthType () const
+Rendering::DepthType Rendering::CameraImpl ::GetDepthType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetDepthType ();
 }
 
-const Rendering::CameraImpl::Matrix Rendering::CameraImpl
-    ::GetProjectionViewMatrix () const
+const Rendering::CameraImpl::Matrix Rendering::CameraImpl ::GetProjectionViewMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -257,16 +250,14 @@ void Rendering::CameraImpl
     m_CameraMatrix.SetPreViewMatrix (preViewMatrix);
 }
 
-const Rendering::CameraImpl::Matrix Rendering::CameraImpl
-    ::GetPreViewMatrix () const
+const Rendering::CameraImpl::Matrix Rendering::CameraImpl ::GetPreViewMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetPreViewMatrix ();
 }
 
-bool Rendering::CameraImpl
-    ::PreViewIsIdentity () const
+bool Rendering::CameraImpl ::PreViewIsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -281,16 +272,14 @@ void Rendering::CameraImpl
     m_CameraMatrix.SetPostProjectionMatrix (postProjMatrix);
 }
 
-const Rendering::CameraImpl::Matrix Rendering::CameraImpl
-    ::GetPostProjectionMatrix () const
+const Rendering::CameraImpl::Matrix Rendering::CameraImpl ::GetPostProjectionMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_CameraMatrix.GetPostProjectionMatrix ();
 }
 
-bool Rendering::CameraImpl
-    ::PostProjectionIsIdentity () const
+bool Rendering::CameraImpl ::PostProjectionIsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -308,7 +297,7 @@ const Rendering::CameraImpl::AxesAlignBoundingBox2D Rendering::CameraImpl
     {
         viewProjectionMatrix = GetPostProjectionMatrix() * viewProjectionMatrix;
     }
-	auto worldViewProjectionMatrix = viewProjectionMatrix * worldMatrix;
+const	auto worldViewProjectionMatrix = viewProjectionMatrix * worldMatrix;
 
     // 计算正则化的包围盒矩形显示坐标。
 	auto xmin = Mathematics::Mathf::sm_MaxReal;
@@ -320,7 +309,7 @@ const Rendering::CameraImpl::AxesAlignBoundingBox2D Rendering::CameraImpl
 		auto vertex = reinterpret_cast<const float*>(vertices);
 		HomogeneousPoint position{ vertex[0], vertex[1], vertex[2], 1.0f };
 		auto homogeneousPosition = worldViewProjectionMatrix * position;
-		auto invW = 1.0f / homogeneousPosition[3];
+                const auto invW = 1.0f / homogeneousPosition[3];
 		auto xNormalizeDeviceCoordinate  = homogeneousPosition[0] * invW;
 		auto yNormalizeDeviceCoordinate = homogeneousPosition[1] * invW;
         if (xNormalizeDeviceCoordinate < xmin)
@@ -367,13 +356,12 @@ int Rendering::CameraImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     
-	auto size = m_CameraMatrix.GetStreamingSize();
+const	auto size = m_CameraMatrix.GetStreamingSize();
     
     return size;
 }
 
-float Rendering::CameraImpl
-	::GetEpsilon() const
+float Rendering::CameraImpl ::GetEpsilon() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -388,3 +376,4 @@ void Rendering::CameraImpl
 	m_CameraMatrix.SetDepthType(depthType);
 }
 
+#include STSTEM_WARNING_POP

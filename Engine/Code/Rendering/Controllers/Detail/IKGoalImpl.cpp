@@ -15,20 +15,20 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using std::string;
 using std::vector;
 
 Rendering::IKGoalImpl
-	::IKGoalImpl(const SpatialSmartPointer& target,const SpatialSmartPointer& effector,float weight)
+	::IKGoalImpl(const SpatialSmartPointer& target,const SpatialSmartPointer& effector,float weight) noexcept
 	:m_Target{ target }, m_Effector{ effector }, m_Weight{ weight }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::IKGoalImpl
-	::IKGoalImpl()
-	:m_Target{}, m_Effector{}, m_Weight{ 1.0f }
+Rendering::IKGoalImpl ::IKGoalImpl() noexcept
+    : m_Target{}, m_Effector{}, m_Weight{ 1.0f }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -55,8 +55,8 @@ void Rendering::IKGoalImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	target.Write(m_Weight);
-	target.WriteSmartPointer(m_Target);
-	target.WriteSmartPointer(m_Effector);
+	//target.WriteSmartPointer(m_Target);
+	//target.WriteSmartPointer(m_Effector);
 }
 
 void Rendering::IKGoalImpl
@@ -65,42 +65,43 @@ void Rendering::IKGoalImpl
 	RENDERING_CLASS_IS_VALID_9;
 
 	source.Read(m_Weight);
-	source.ReadSmartPointer(m_Target);
-	source.ReadSmartPointer(m_Effector);
+	//source.ReadSmartPointer(m_Target);
+	//source.ReadSmartPointer(m_Effector);
 }
 
 void Rendering::IKGoalImpl
 	::Link(CoreTools::ObjectLink& source)
 {
-	RENDERING_CLASS_IS_VALID_9;	 
-
-	source.ResolveObjectSmartPointerLink(m_Target);
-	source.ResolveObjectSmartPointerLink(m_Effector);
+	RENDERING_CLASS_IS_VALID_9;	
+	CoreTools::DoNothing();
+	source;
+	//source.ResolveObjectSmartPointerLink(m_Target);
+	//source.ResolveObjectSmartPointerLink(m_Effector);
 }
 
 void Rendering::IKGoalImpl
 	::Register(CoreTools::ObjectRegister& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_Target);
-	target.RegisterSmartPointer(m_Effector);
+    target;
+    CoreTools::DoNothing();
+	//target.RegisterSmartPointer(m_Target);
+	//target.RegisterSmartPointer(m_Effector);
 }
 
 const Rendering::ConstSpatialSmartPointer Rendering::IKGoalImpl
-	::GetTarget() const 
+	::GetTarget() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Target.PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+	return m_Target;
 }
 
-const Rendering::ConstSpatialSmartPointer Rendering::IKGoalImpl
-	::GetEffector() const
+const Rendering::ConstSpatialSmartPointer Rendering::IKGoalImpl ::GetEffector() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Effector.PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+	return m_Effector;
 }
 
 const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl
@@ -119,16 +120,14 @@ const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl
 	return m_Effector->GetWorldTransform().GetTranslate();
 }
 
-void Rendering::IKGoalImpl
-	::SetWeight(float weight) 
+void Rendering::IKGoalImpl ::SetWeight(float weight) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Weight = weight;
 }
 
-float Rendering::IKGoalImpl
-	::GetWeight() const
+float Rendering::IKGoalImpl ::GetWeight() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

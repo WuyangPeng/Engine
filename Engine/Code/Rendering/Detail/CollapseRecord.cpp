@@ -10,7 +10,9 @@
 #include "Detail/CollapseRecordImpl.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 using std::make_shared;
 
 DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, CollapseRecord)
@@ -32,10 +34,10 @@ IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,CollapseRecord,SetNumTr
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,CollapseRecord,GetIndices,const std::vector<int>);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,CollapseRecord,GetIndex,int,int); 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,CollapseRecord,GetIndicesSize,int); 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,CollapseRecord,GetVKeep,int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,CollapseRecord,GetVThrow,int);  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,CollapseRecord,GetNumVertices,int);  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,CollapseRecord,GetNumTriangles,int); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,CollapseRecord,GetVKeep,int);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,CollapseRecord,GetVThrow,int);  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,CollapseRecord,GetNumVertices,int);  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,CollapseRecord,GetNumTriangles,int); 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,CollapseRecord,Load,BufferSource&,void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,CollapseRecord,Save,BufferTarget&,void); 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,CollapseRecord,GetStreamingSize,int); 
@@ -60,4 +62,4 @@ bool Rendering
 }
 
 
- 
+ #include STSTEM_WARNING_POP

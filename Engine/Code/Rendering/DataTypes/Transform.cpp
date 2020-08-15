@@ -14,7 +14,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
 const Rendering::Transform Rendering::Transform
 	::sm_Identity;
 
@@ -33,9 +36,9 @@ IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, MakeIdentity,v
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, MakeUnitScale,void);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, IsIdentity,bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, IsRotationOrScaleMatrix,bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, IsUniformScale,bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, IsIdentity,bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, IsRotationOrScaleMatrix,bool);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, IsUniformScale,bool);
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Transform, SetRotate,Matrix,void);
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Transform, SetMatrix,Matrix,void);
@@ -44,8 +47,8 @@ IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Transform, SetScale,AP
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Transform,  SetUniformScale,float,void);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetRotate,  const Rendering::Transform::Matrix);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetMatrix,  const Rendering::Transform::Matrix);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetTranslate, const Rendering::Transform::APoint);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, GetMatrix,  const Rendering::Transform::Matrix);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, GetTranslate, const Rendering::Transform::APoint);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetScale, const Rendering::Transform::APoint);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetUniformScale,float);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetNorm,float);
@@ -76,7 +79,7 @@ Rendering::Transform& Rendering::Transform
     return *this;
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform,GetHomogeneousMatrix,const Rendering::Transform::Matrix);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform,GetHomogeneousMatrix,const Rendering::Transform::Matrix);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Transform,GetInverseMatrix,float, const Rendering::Transform::Matrix);
 
@@ -111,13 +114,13 @@ const Rendering::Transform Rendering
 bool Rendering
     ::Approximate(const Transform& lhs, const Transform& rhs, const float epsilon)
 {
-	auto lhsIsIdentity = lhs.IsIdentity ();  
-	auto lhsIsRotationOrScaleMatrix = lhs.IsRotationOrScaleMatrix ();
-	auto lhsIsUniformScale = lhs.IsUniformScale ();
+	const auto lhsIsIdentity = lhs.IsIdentity ();  
+	const auto lhsIsRotationOrScaleMatrix = lhs.IsRotationOrScaleMatrix ();
+	const auto lhsIsUniformScale = lhs.IsUniformScale ();
 
-	auto rhsIsIdentity = rhs.IsIdentity ();
-	auto rhsIsRotationOrScaleMatrix = rhs.IsRotationOrScaleMatrix ();
-	auto rhsIsUniformScale = rhs.IsUniformScale ();
+	const auto rhsIsIdentity = rhs.IsIdentity ();
+	const auto rhsIsRotationOrScaleMatrix = rhs.IsRotationOrScaleMatrix ();
+	const auto rhsIsUniformScale = rhs.IsUniformScale ();
 
 	if(lhsIsIdentity != rhsIsIdentity || lhsIsRotationOrScaleMatrix != rhsIsRotationOrScaleMatrix || lhsIsUniformScale != rhsIsUniformScale)
     {
@@ -176,3 +179,4 @@ std::ostream& Rendering
 
 	return outFile;
 }
+#include STSTEM_WARNING_POP

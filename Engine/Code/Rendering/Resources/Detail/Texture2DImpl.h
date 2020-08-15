@@ -26,9 +26,9 @@ namespace Rendering
     public:
 		Texture2DImpl();
 		Texture2DImpl (TextureFormat format, int dimension0,int dimension1,int numLevels,BufferUsage usage = BufferUsage::Texture);
-		virtual ~Texture2DImpl();
+ 
         
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
      
 		// 获取第零级别mipmap产生的维度。
         int GetWidth () const;
@@ -38,14 +38,14 @@ namespace Rendering
         char* GetTextureData (int level);
 		const char* GetTextureData (int level) const;
         
-        virtual int GetNumDimensions () const override;
-        virtual int GetDimension (int index, int level) const override;
-        virtual int GetNumLevelBytes (int level) const override;
-        virtual int GetNumTotalBytes () const override;
-        virtual int GetLevelOffset (int level) const override;
+          int GetNumDimensions() const noexcept override;
+          int GetDimension (int index, int level) const override;
+          int GetNumLevelBytes (int level) const override;
+          int GetNumTotalBytes() const noexcept override;
+          int GetLevelOffset (int level) const override;
 
 	protected:
-		virtual int GetMaxLevels() const override;
+		  int GetMaxLevels() const override;
 
     private:
 		using FloatColour = Colour<float>;
@@ -53,18 +53,18 @@ namespace Rendering
 
 	private:
         void ResetDimension(int dimension0,int dimension1);
-		virtual void DoGenerateMipmaps() override;
-		virtual void ComputeNumLevelBytes() override;
-		virtual void VerifyNumLevels() override;
+		  void DoGenerateMipmaps() override;
+		  void ComputeNumLevelBytes() override;
+		  void VerifyNumLevels() override;
         void GenerateNextMipmap (int width, int height, const char* texels, int widthNext, int heightNext, char* texelsNext);
         int CalculateNumLevelBytes(int dimension0,int dimension1);
         
-        virtual void LoadLevelData (CoreTools::BufferSource& source) override;
-		virtual void SaveLevelData (CoreTools::BufferTarget& target) const override;
-		virtual int GetLevelDataStreamingSize () const override;
+          void LoadLevelData (CoreTools::BufferSource& source) override;
+		  void SaveLevelData (CoreTools::BufferTarget& target) const override;
+		  int GetLevelDataStreamingSize () const override;
 
-		virtual void SaveLevelDataToFile (WriteFileManager& outFile) const override;
-		virtual void LoadLevelDataFromFile (ReadFileManager& inFile) override;
+		  void SaveLevelDataToFile (WriteFileManager& outFile) const override;
+		  void LoadLevelDataFromFile (ReadFileManager& inFile) override;
         
     private:
         TextureLevelData m_TextureLevelData;

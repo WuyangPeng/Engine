@@ -23,7 +23,7 @@ namespace Network
 		using ImplTypePtr = std::shared_ptr<ImplType>;
 
 	public:
-		SockAcceptorFactory();
+                SockAcceptorFactory() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -27,7 +27,7 @@ namespace Mathematics
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool IsIntersection() const override;
+		 bool IsIntersection() const override;
 
 		// 动态相交查询的两个区间处于第一次/最后一次接触的时间。
 		Real GetFirstTime() const;

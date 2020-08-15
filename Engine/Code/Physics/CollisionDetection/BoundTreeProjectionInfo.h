@@ -18,19 +18,19 @@ namespace Physics
 		using  ClassType = BoundTreeProjectionInfo;
 
     public:
-		BoundTreeProjectionInfo(int triangle, float projection);
+                BoundTreeProjectionInfo(int triangle, float projection) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetTriangle() const;
-		float GetProjection() const;
+		int GetTriangle() const noexcept;
+                float GetProjection() const noexcept;
 
 	private:
         int m_Triangle;
 		float m_Projection;
     };
 
-	bool PHYSICS_DEFAULT_DECLARE operator< (const BoundTreeProjectionInfo& lhs, const BoundTreeProjectionInfo& rhs);
+	bool PHYSICS_DEFAULT_DECLARE operator<(const BoundTreeProjectionInfo& lhs, const BoundTreeProjectionInfo& rhs) noexcept;
 }
 
 

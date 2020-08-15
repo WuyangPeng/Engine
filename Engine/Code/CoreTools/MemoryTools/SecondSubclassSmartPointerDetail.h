@@ -13,7 +13,9 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
+#include STSTEM_WARNING_PUSH
 
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename SubClass, typename BaseClass>
 CoreTools::SecondSubclassSmartPointer<SubClass, BaseClass>
 	::SecondSubclassSmartPointer(uint64_t address, SubclassType* data)
@@ -21,9 +23,7 @@ CoreTools::SecondSubclassSmartPointer<SubClass, BaseClass>
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-#include STSTEM_WARNING_PUSH
-
-#include SYSTEM_WARNING_DISABLE(26434)   
+  
 template <typename SubClass, typename BaseClass>
 CoreTools::SecondSubclassSmartPointer<SubClass, BaseClass>
 	::SecondSubclassSmartPointer(SubclassType* data)  

@@ -14,11 +14,13 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "Mathematics/Algebra/Vector3DTools.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 template <typename Real>
-Mathematics::Curve3<Real>
-	::Curve3(Real tmin, Real tmax)
-	:mTMin{ tmin }, mTMax{ tmax }
+Mathematics::Curve3<Real>::Curve3(Real tmin, Real tmax) noexcept
+    : mTMin{ tmin }, mTMax{ tmax }
 {
     
 }
@@ -30,15 +32,13 @@ Mathematics::Curve3<Real>
 }
 
 template <typename Real>
-Real Mathematics::Curve3<Real>
-	::GetMinTime() const
+Real Mathematics::Curve3<Real>::GetMinTime() const noexcept
 {
     return mTMin;
 }
 
 template <typename Real>
-Real Mathematics::Curve3<Real>
-	::GetMaxTime() const
+Real Mathematics::Curve3<Real>::GetMaxTime() const noexcept
 {
     return mTMax;
 }
@@ -56,8 +56,8 @@ template <typename Real>
 Real Mathematics::Curve3<Real>
 	::GetSpeed(Real t) const
 {
-	auto velocity = GetFirstDerivative(t);
-	auto speed = Vector3DTools<Real>::VectorMagnitude(velocity);
+	const auto velocity = GetFirstDerivative(t);
+	const auto speed = Vector3DTools<Real>::VectorMagnitude(velocity);
     return speed;
 }
 
@@ -81,8 +81,8 @@ template <typename Real>
 Mathematics::Vector3D<Real> Mathematics::Curve3<Real>
 	::GetNormal(Real t) const
 {
-	auto velocity = GetFirstDerivative(t);
-	auto acceleration = GetSecondDerivative(t);
+	const auto velocity = GetFirstDerivative(t);
+	const auto acceleration = GetSecondDerivative(t);
 	auto VDotV = Vector3DTools<Real>::DotProduct(velocity,velocity);
 	auto VDotA = Vector3DTools<Real>::DotProduct(velocity,acceleration);
 	auto normal = VDotV*acceleration - VDotA*velocity;
@@ -95,7 +95,7 @@ Mathematics::Vector3D<Real> Mathematics::Curve3<Real>
 	::GetBinormal(Real t) const
 {
 	auto velocity = GetFirstDerivative(t);
-	auto acceleration = GetSecondDerivative(t);
+	const auto acceleration = GetSecondDerivative(t);
 	auto VDotV = Vector3DTools<Real>::DotProduct(velocity,velocity);
 	auto VDotA = Vector3DTools<Real>::DotProduct(velocity,acceleration);
 	auto normal = VDotV*acceleration - VDotA*velocity;
@@ -111,7 +111,7 @@ void Mathematics::Curve3<Real>
 {
     position = GetPosition(t);
 	auto velocity = GetFirstDerivative(t);
-	auto acceleration = GetSecondDerivative(t);
+	const auto acceleration = GetSecondDerivative(t);
 	auto VDotV = Vector3DTools<Real>::DotProduct(velocity,velocity);
 	auto VDotA = Vector3DTools<Real>::DotProduct(velocity,acceleration);
     normal = VDotV*acceleration - VDotA*velocity;
@@ -125,13 +125,13 @@ template <typename Real>
 Real Mathematics::Curve3<Real>
 	::GetCurvature(Real t) const
 {
-	auto velocity = GetFirstDerivative(t);
+	const auto velocity = GetFirstDerivative(t);
 	auto speedSqr = Vector3DTools<Real>::VectorMagnitudeSquared(velocity);
 
     if (speedSqr >= Math<Real>::sm_ZeroTolerance)
     {
-		auto acceleration = GetSecondDerivative(t);
-		auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
+		const auto acceleration = GetSecondDerivative(t);
+		const auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
 		auto numer = Vector3DTools<Real>::VectorMagnitude(cross);
 		auto denom = Math<Real>::Pow(speedSqr, static_cast<Real>(1.5));
         return numer/denom;
@@ -147,14 +147,14 @@ template <typename Real>
 Real Mathematics::Curve3<Real>
 	::GetTorsion(Real t) const
 {
-	auto velocity = GetFirstDerivative(t);
-	auto acceleration = GetSecondDerivative(t);
-	auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
+	const auto velocity = GetFirstDerivative(t);
+	const auto acceleration = GetSecondDerivative(t);
+	const auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
 	auto denom = Vector3DTools<Real>::VectorMagnitudeSquared(cross);
 
     if (denom >= Math<Real>::sm_ZeroTolerance)
     {
-		auto jerk = GetThirdDerivative(t);
+		const auto jerk = GetThirdDerivative(t);
 		auto numer = Vector3DTools<Real>::DotProduct(cross,jerk);
         return numer/denom;
     }
@@ -172,9 +172,9 @@ void Mathematics::Curve3<Real>
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
     points = NEW1<Vector3D<Real> >(numPoints);
 
-	auto temp1 = mTMax - mTMin;
-	auto temp2 = numPoints - 1;
-	auto delta = (temp1 )/(temp2);
+	const auto temp1 = mTMax - mTMin;
+	const auto temp2 = numPoints - 1;
+	const auto delta = (temp1 )/(temp2);
 
     for (auto i = 0; i < numPoints; ++i)
     {
@@ -190,7 +190,7 @@ void Mathematics::Curve3<Real>
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
     points = NEW1<Vector3D<Real> >(numPoints);
 
-	auto temp = numPoints - 1;
+	const auto temp = numPoints - 1;
 	auto delta = GetTotalLength()/(temp);
 
     for (auto i = 0; i < numPoints; ++i)
@@ -200,7 +200,7 @@ void Mathematics::Curve3<Real>
         points[i] = GetPosition(t);
     }
 }
-
+#include STSTEM_WARNING_POP
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CURVE3_DETAIL)
 

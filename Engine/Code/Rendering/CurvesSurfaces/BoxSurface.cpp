@@ -18,7 +18,23 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26493)
+ #include SYSTEM_WARNING_DISABLE(26451)
+ #include SYSTEM_WARNING_DISABLE(26815)
+#include SYSTEM_WARNING_DISABLE(26409)
 CORE_TOOLS_RTTI_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BoxSurface);
@@ -39,12 +55,12 @@ Rendering::BoxSurface
 	// u = 0
 	mesh = CreateFace(mNumWSamples, mNumVSamples, vformat[0], false, 0.0f,permute);
 	mesh->SetName("u0");
-	AttachChild(mesh);
+//	AttachChild(mesh);
 
 	// u = 1
 	mesh = CreateFace(mNumWSamples, mNumVSamples, vformat[1], true, 1.0f,permute);
 	mesh->SetName("u1");
-	AttachChild(mesh);
+	//AttachChild(mesh);
 
 	// v faces
 	permute[0] = 0;
@@ -54,12 +70,12 @@ Rendering::BoxSurface
 	// v = 0
 	mesh = CreateFace(mNumWSamples, mNumUSamples, vformat[2], true, 0.0f,permute);
 	mesh->SetName("v0");
-	AttachChild(mesh);
+//	AttachChild(mesh);
 
 	// v = 1
 	mesh = CreateFace(mNumWSamples, mNumUSamples, vformat[3], false, 1.0f,permute);
 	mesh->SetName("v1");
-	AttachChild(mesh);
+//	AttachChild(mesh);
 
 	// w faces
 	permute[0] = 0;
@@ -69,34 +85,40 @@ Rendering::BoxSurface
 	// w = 0
 	mesh = CreateFace(mNumVSamples, mNumUSamples, vformat[4], false, 0.0f,permute);
 	mesh->SetName("w0");
-	AttachChild(mesh);
+// 	AttachChild(mesh);
 
 	// w = 1
 	mesh = CreateFace(mNumVSamples, mNumUSamples, vformat[5], true, 1.0f,permute);
 	mesh->SetName("w1");
-	AttachChild(mesh);
+//	AttachChild(mesh);
 }
 
 Rendering::BoxSurface
 	::~BoxSurface()
 {
-	DELETE0(mVolume);
+	
+EXCEPTION_TRY
+{
+DELETE0(mVolume);
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+	
 }
 
 Rendering::TrianglesMeshSmartPointer Rendering::BoxSurface
 	::CreateFace(int numRows, int numCols, VertexFormatSmartPointer vformat, bool ccw, float faceValue, int permute[3])
 {
-	auto numVertices = numRows * numCols;
-	auto vstride = vformat->GetStride();
-	VertexBufferSmartPointer vbuffer{ NEW0 VertexBuffer(numVertices, vstride) };
+	const auto numVertices = numRows * numCols;
+	const auto vstride = vformat->GetStride();
+        VertexBufferSmartPointer vbuffer{ std::make_shared<VertexBuffer>(numVertices, vstride) };
 	VertexBufferAccessor vba{ vformat, vbuffer };
 
 	float param[3];
 	param[permute[2]] = faceValue;
-	auto sign = (ccw ? 1.0f : -1.0f);
-	auto rowFactor = 1.0f / (float)(numRows - 1);
-	auto colFactor = 1.0f / (float)(numCols - 1);
-	int row, col, i;
+	const auto sign = (ccw ? 1.0f : -1.0f);
+	const auto rowFactor = 1.0f / static_cast<float>(numRows - 1);
+	const auto colFactor = 1.0f / static_cast<float>(numCols - 1);
+	int row= 0, col= 0, i= 0;
 	for (row = 0, i = 0; row < numRows; ++row)
 	{
 		param[permute[1]] = row * rowFactor;
@@ -107,16 +129,16 @@ Rendering::TrianglesMeshSmartPointer Rendering::BoxSurface
 
 			if (vba.HasNormal())
 			{
-				auto cDer = mVolume->GetDerivative(permute[0], param);
-				auto rDer = mVolume->GetDerivative(permute[1], param);
+				const auto cDer = mVolume->GetDerivative(permute[0], param);
+				const auto rDer = mVolume->GetDerivative(permute[1], param);
 				vbuffer->SetTriangleNormal(vba, i, sign*Mathematics::Vector3DToolsf::UnitCrossProduct(cDer, rDer));
 
 			}
 
-			const auto numUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
+			constexpr auto numUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
 			for (auto unit = 0; unit < numUnits; ++unit)
 			{
-				Mathematics::Vector2Df tcoord{ param[permute[0]], param[permute[1]] };
+				const Mathematics::Vector2Df tcoord{ param[permute[0]], param[permute[1]] };
 				if (vba.HasTextureCoord(unit))
 				{
 					RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "Texture coordinate must be 2D\n");
@@ -126,10 +148,10 @@ Rendering::TrianglesMeshSmartPointer Rendering::BoxSurface
 		}
 	}
 
-	auto numTriangles = 2 * (numRows - 1)*(numCols - 1);
-	IndexBufferSmartPointer ibuffer{ NEW0 IndexBuffer(3 * numTriangles, sizeof(int)) };
+	const auto numTriangles = 2 * (numRows - 1)*(numCols - 1);
+        IndexBufferSmartPointer ibuffer = std::make_shared < IndexBuffer>(3 * numTriangles,(int) sizeof(int))  ;
 
-	int* indices = (int*)ibuffer.GetData();
+	int* indices = (int*)ibuffer.get();
 	for (row = 0, i = 0; row < numRows - 1; ++row)
 	{
 		int i0 = i;
@@ -160,7 +182,7 @@ Rendering::TrianglesMeshSmartPointer Rendering::BoxSurface
 		}
 	}
 
-	TrianglesMeshSmartPointer mesh{ NEW0 TrianglesMesh(vformat, vbuffer, ibuffer) };
+	TrianglesMeshSmartPointer mesh{ std::make_shared < TrianglesMesh>(vformat, vbuffer, ibuffer) };
 	return mesh;
 }
 
@@ -171,9 +193,9 @@ void Rendering::BoxSurface
 
 	float param[3];
 	param[permute[2]] = faceValue;
-	auto sign = (ccw ? 1.0f : -1.0f);
-	auto rowFactor = 1.0f / (float)(numRows - 1);
-	auto colFactor = 1.0f / (float)(numCols - 1);
+	const auto sign = (ccw ? 1.0f : -1.0f);
+	const auto rowFactor = 1.0f / (float)(numRows - 1);
+	const auto colFactor = 1.0f / (float)(numCols - 1);
 	for (auto row = 0, i = 0; row < numRows; ++row)
 	{
 		param[permute[1]] = row * rowFactor;
@@ -185,8 +207,8 @@ void Rendering::BoxSurface
 
 			if (vba.HasNormal())
 			{
-				auto cDer = mVolume->GetDerivative(permute[0], param);
-				auto rDer = mVolume->GetDerivative(permute[1], param);
+				const auto cDer = mVolume->GetDerivative(permute[0], param);
+				const auto rDer = mVolume->GetDerivative(permute[1], param);
 
 				vbuffer->SetTriangleNormal(vba, i, sign*Mathematics::Vector3DToolsf::UnitCrossProduct(cDer, rDer));
 
@@ -209,21 +231,21 @@ void Rendering::BoxSurface
 	permute[2] = 0;
 
 	// u = 0
-	mesh = GetChild(0).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
+        mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(0));
 	vformat = mesh->GetVertexFormat();
 	vbuffer = mesh->GetVertexBuffer();
 	UpdateFace(mNumWSamples, mNumVSamples, vformat, vbuffer, false, 0.0f, permute);
 	mesh->UpdateModelSpace(VisualUpdateType::Normals);
 
-	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.GetData());
+	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
 
 	// u = 1
-	mesh = GetChild(1).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
+        mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(1)) ;
 	vformat = mesh->GetVertexFormat();
 	vbuffer = mesh->GetVertexBuffer();
 	UpdateFace(mNumWSamples, mNumVSamples, vformat, vbuffer, true, 1.0f, permute);
 	mesh->UpdateModelSpace(VisualUpdateType::Normals);
-	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.GetData());
+	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
 
 	// v faces
 	permute[0] = 0;
@@ -231,20 +253,20 @@ void Rendering::BoxSurface
 	permute[2] = 1;
 
 	// v = 0
-	mesh = GetChild(2).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
+        mesh =boost::polymorphic_pointer_cast<TrianglesMesh>( GetChild(2)) ;
 	vformat = mesh->GetVertexFormat();
 	vbuffer = mesh->GetVertexBuffer();
 	UpdateFace(mNumWSamples, mNumUSamples, vformat, vbuffer, true, 0.0f, permute);
 	mesh->UpdateModelSpace(VisualUpdateType::Normals);
-	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.GetData());
+	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
 
 	// v = 1
-	mesh = GetChild(3).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
+        mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(3)) ;
 	vformat = mesh->GetVertexFormat();
 	vbuffer = mesh->GetVertexBuffer();
 	UpdateFace(mNumWSamples, mNumUSamples, vformat, vbuffer, false, 1.0f, permute);
 	mesh->UpdateModelSpace(VisualUpdateType::Normals);
-	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.GetData());
+	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
 
 	// w faces
 	permute[0] = 0;
@@ -252,20 +274,20 @@ void Rendering::BoxSurface
 	permute[2] = 2;
 
 	// w = 0
-	mesh = GetChild(4).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
+	mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(4) );
 	vformat = mesh->GetVertexFormat();
 	vbuffer = mesh->GetVertexBuffer();
 	UpdateFace(mNumVSamples, mNumUSamples, vformat, vbuffer, false, 0.0f, permute);
 	mesh->UpdateModelSpace(VisualUpdateType::Normals);
-	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.GetData());
+	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
 
 	// w = 1
-	mesh = GetChild(5).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
+	mesh =boost::polymorphic_pointer_cast<TrianglesMesh>( GetChild(5) );
 	vformat = mesh->GetVertexFormat();
 	vbuffer = mesh->GetVertexBuffer();
 	UpdateFace(mNumVSamples, mNumUSamples, vformat, vbuffer, true, 1.0f, permute);
 	mesh->UpdateModelSpace(VisualUpdateType::Normals);
-	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.GetData());
+	RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
 }
 
 void Rendering::BoxSurface
@@ -273,16 +295,16 @@ void Rendering::BoxSurface
 {
 	for (auto face = 0; face < 6; face++)
 	{
-		auto mesh = GetChild(face).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
+            auto mesh = boost::polymorphic_pointer_cast<Visual>(GetChild(face));
 
 		auto effect = mesh->GetConstEffectInstance();
 		const auto numPasses = effect->GetNumPasses();
 		for (auto p = 0; p < numPasses; ++p)
 		{
 			const auto pass = effect->GetConstPass(p);
-			CullState*  cstate = const_cast<CullState*>( pass->GetCullState().GetData());
+			CullState*  cstate = const_cast<CullState*>( pass->GetCullState().get());
 			cstate->SetEnabled ( false);
-			DepthState* dstate = const_cast<DepthState*>(pass->GetDepthState().GetData());
+			DepthState* dstate = const_cast<DepthState*>(pass->GetDepthState().get());
 			dstate->SetEnabled ( false);
 			dstate->SetWritable ( true);
 			dstate->SetCompare(DepthStateFlags::CompareMode::LessEqual);
@@ -298,16 +320,16 @@ void Rendering::BoxSurface
 {
 	for (auto face = 0; face < 6; face++)
 	{
-		auto mesh = GetChild(face).PolymorphicCastObjectSmartPointer<TrianglesMeshSmartPointer>();
+            auto mesh = boost::polymorphic_pointer_cast<Visual>(GetChild(face));
 		auto effect = mesh->GetConstEffectInstance();
 		const auto numPasses = effect->GetNumPasses();
 		for (auto p = 0; p < numPasses; ++p)
 		{
 			const auto pass = effect->GetConstPass(p);
 
-			CullState*  cstate = const_cast<CullState*>(pass->GetCullState().GetData());
+			CullState*  cstate = const_cast<CullState*>(pass->GetCullState().get());
 			cstate->SetEnabled(false);
-			DepthState* dstate = const_cast<DepthState*>(pass->GetDepthState().GetData());
+			DepthState* dstate = const_cast<DepthState*>(pass->GetDepthState().get());
 			dstate->SetEnabled(false);
 			dstate->SetWritable(true);
 			dstate->SetCompare(DepthStateFlags::CompareMode::LessEqual);
@@ -495,12 +517,12 @@ void Rendering::BoxSurface
 
 	Node::Save(target);
 
-	int numUCtrlPoints = mVolume->GetNumCtrlPoints(0);
-	int numVCtrlPoints = mVolume->GetNumCtrlPoints(1);
-	int numWCtrlPoints = mVolume->GetNumCtrlPoints(2);
-	int uDegree = mVolume->GetDegree(0);
-	int vDegree = mVolume->GetDegree(1);
-	int wDegree = mVolume->GetDegree(2);
+	const int numUCtrlPoints = mVolume->GetNumCtrlPoints(0);
+	const int numVCtrlPoints = mVolume->GetNumCtrlPoints(1);
+	const int numWCtrlPoints = mVolume->GetNumCtrlPoints(2);
+	const int uDegree = mVolume->GetDegree(0);
+	const int vDegree = mVolume->GetDegree(1);
+	const int wDegree = mVolume->GetDegree(2);
 	target.Write(numUCtrlPoints);
 	target.Write(numVCtrlPoints);
 	target.Write(numWCtrlPoints);
@@ -513,7 +535,7 @@ void Rendering::BoxSurface
 		{
 			for (int w = 0; w < numWCtrlPoints; ++w)
 			{
-				Mathematics::Vector3Df ctrl = mVolume->GetControlPoint(u, v, w);
+				const Mathematics::Vector3Df ctrl = mVolume->GetControlPoint(u, v, w);
 				target.WriteAggregate(ctrl);
 			}
 		}
@@ -532,9 +554,9 @@ int Rendering::BoxSurface
 {
 	int size = Node::GetStreamingSize();
 
-	int numUCtrlPoints = mVolume->GetNumCtrlPoints(0);
-	int numVCtrlPoints = mVolume->GetNumCtrlPoints(1);
-	int numWCtrlPoints = mVolume->GetNumCtrlPoints(2);
+	const int numUCtrlPoints = mVolume->GetNumCtrlPoints(0);
+	const int numVCtrlPoints = mVolume->GetNumCtrlPoints(1);
+	const int numWCtrlPoints = mVolume->GetNumCtrlPoints(2);
 	size += sizeof(numUCtrlPoints);
 	size += sizeof(numVCtrlPoints);
 	size += sizeof(numWCtrlPoints);
@@ -553,26 +575,27 @@ int Rendering::BoxSurface
 
 
 const Mathematics::BSplineVolumef* Rendering::BoxSurface
-	::GetVolume() const
+	::GetVolume() const noexcept
 {
 	return mVolume;
 }
 
 int Rendering::BoxSurface
-	::GetNumUSamples() const
+	::GetNumUSamples() const noexcept
 {
 	return mNumUSamples;
 }
 
 int Rendering::BoxSurface
-	::GetNumVSamples() const
-{
+	::GetNumVSamples() const noexcept
+{ 
 	return mNumVSamples;
 }
 
 int Rendering::BoxSurface
-	::GetNumWSamples() const
+	::GetNumWSamples() const noexcept
 {
 	return mNumWSamples;
 }
 
+#include STSTEM_WARNING_POP

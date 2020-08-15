@@ -35,7 +35,7 @@ namespace Rendering
 		using MatrixRotationAxis = Mathematics::MatrixRotationAxis;
 
 	public:	
-		IKJointImpl();
+		IKJointImpl() noexcept;
 		IKJointImpl (const SpatialSmartPointer& object,const IKGoalSmartPointerVector& goals);
 
 		CLASS_INVARIANT_DECLARE;
@@ -55,7 +55,7 @@ namespace Rendering
 		bool UpdateLocalTranslate (MatrixRotationAxis axisIndex);
 		bool UpdateLocalRotate (MatrixRotationAxis axisIndex);
 
-		const ConstSpatialSmartPointer GetObjectSmartPointer() const;
+		const ConstSpatialSmartPointer GetObjectSmartPointer() const noexcept;
 		const ConstIKGoalSmartPointer GetGoalsSmartPointer(int index) const;
 		int GetGoalsNum() const;
 
@@ -66,7 +66,7 @@ namespace Rendering
 		bool IsAllowRotation(MatrixRotationAxis axisIndex) const;
  
 	private:
-		void Init();
+                void Init() noexcept;
 
 	private:
 		// 索引i为joint的父世界axis[i]。

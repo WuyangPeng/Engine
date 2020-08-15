@@ -20,9 +20,15 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26473)
+#include SYSTEM_WARNING_DISABLE(26492)
 Rendering::TextureBuffer
-	::TextureBuffer(int itemSize)
+	::TextureBuffer(int itemSize) noexcept
 	:m_Data{},m_ItemSize{ itemSize }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -126,7 +132,7 @@ int Rendering::TextureBuffer
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(0);
+	const auto size = CORE_TOOLS_STREAM_SIZE(0);
     
 	return m_Data != nullptr ? boost::numeric_cast<int>(m_Data->GetSize() + size) : size;
 }
@@ -172,7 +178,7 @@ void Rendering::TextureBuffer
 
 	for (auto face = 0; face < 6; ++face)
 	{
-		auto oldFaceOffset = face * oldNumTotalBytes / 6;
+	const	auto oldFaceOffset = face * oldNumTotalBytes / 6;
 		auto faceOffset = face * newNumTotalBytes / 6;
 		memcpy(fileBuffer->GetBufferBegin() + faceOffset,  GetReadOnlyData() + oldFaceOffset, numLevel0Bytes);
 	}
@@ -187,7 +193,7 @@ int Rendering::TextureBuffer
 
 	return boost::numeric_cast<int>(m_Data->GetSize());
 }
-
+#include STSTEM_WARNING_POP
 
 
  

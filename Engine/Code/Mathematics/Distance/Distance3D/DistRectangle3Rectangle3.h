@@ -34,10 +34,10 @@ namespace Mathematics
 		const Rectangle3& GetRectangle1() const;
 
 		// Static distanc queries.
-		virtual const DistanceResult GetSquared() const override;
+		 const DistanceResult GetSquared() const override;
 
 		// Function calculations for dynamic distance queries.
-		virtual const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
 	private:
 		Rectangle3 mRectangle0;

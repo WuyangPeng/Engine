@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/10 14:37)
 
 #ifndef NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_EVENT_H
@@ -16,25 +16,30 @@ template class NETWORK_DEFAULT_DECLARE std::enable_shared_from_this<Network::Net
 
 namespace Network
 {
-	class NETWORK_DEFAULT_DECLARE NetworkMessageEvent : public std::enable_shared_from_this<NetworkMessageEvent>
-	{
-	public:
-		using ClassType = NetworkMessageEvent;
+    class NETWORK_DEFAULT_DECLARE NetworkMessageEvent : public std::enable_shared_from_this<NetworkMessageEvent>
+    {
+    public:
+        using ClassType = NetworkMessageEvent;
 
-	public:
-		NetworkMessageEvent();
-		virtual ~NetworkMessageEvent();
+    public:
+        NetworkMessageEvent() noexcept;
+        virtual ~NetworkMessageEvent();
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        NetworkMessageEvent(const NetworkMessageEvent&) = default;
+        NetworkMessageEvent& operator=(const NetworkMessageEvent&) = default;
+        NetworkMessageEvent(NetworkMessageEvent&&) = default;
+        NetworkMessageEvent& operator=(NetworkMessageEvent&&) = default;
 
-		virtual void CallBackEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) = 0;
-	};
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-	using NetworkMessageEventSharedPtr = std::shared_ptr<NetworkMessageEvent>;
-	using ConstNetworkMessageEventSharedPtr = std::shared_ptr<const NetworkMessageEvent>;
+        virtual void CallBackEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) = 0;
+    };
 
-	using NetworkMessageEventWeakPtr = std::weak_ptr<NetworkMessageEvent>;
-	using ConstNetworkMessageEventWeakPtr = std::weak_ptr<const NetworkMessageEvent>;
+    using NetworkMessageEventSharedPtr = std::shared_ptr<NetworkMessageEvent>;
+    using ConstNetworkMessageEventSharedPtr = std::shared_ptr<const NetworkMessageEvent>;
+
+    using NetworkMessageEventWeakPtr = std::weak_ptr<NetworkMessageEvent>;
+    using ConstNetworkMessageEventWeakPtr = std::weak_ptr<const NetworkMessageEvent>;
 }
 
-#endif // NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_EVENT_H
+#endif  // NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_EVENT_H

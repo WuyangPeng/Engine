@@ -12,11 +12,13 @@
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE2_DETAIL)
 
 #include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26474)
 template <typename Real>
-Mathematics::SingleCurve2<Real>
-	::SingleCurve2(Real tmin, Real tmax)
-    :Curve2<Real>(tmin, tmax)
+Mathematics::SingleCurve2<Real>::SingleCurve2(Real tmin, Real tmax) noexcept
+    : Curve2<Real>(tmin, tmax)
 {
 }
 
@@ -24,7 +26,7 @@ template <typename Real>
 Real Mathematics::SingleCurve2<Real>
 	::GetSpeedWithData(Real t, const SingleCurve2<Real>* data)
 {
-    return ((Curve2<Real>*)data)->GetSpeed(t);
+    return dynamic_cast<const Curve2<Real>*>(data)->GetSpeed(t);
 }
 
 template <typename Real>
@@ -128,7 +130,7 @@ Real Mathematics::SingleCurve2<Real>
     // precision of 32-bit floats.  It is safe to use the last computed time.
     return t;
 }
-
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE2_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_SINGLE_CURVE2_DETAIL_H

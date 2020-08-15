@@ -27,7 +27,7 @@ namespace Mathematics
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool IsIntersection() const override;
+		 bool IsIntersection() const override;
 
 		// 有关交集的信息。
 		// 相交数为0（区间不重叠），

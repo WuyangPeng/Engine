@@ -32,7 +32,7 @@ namespace Mathematics
 
 		const Line3 GetLine() const;
 		const Triangle3 GetTriangle() const;
-		Real GetDirectionDotNormal() const;
+                Real GetDirectionDotNormal() const noexcept;
 
 		Vector3D GetOriginCrossEdge2() const;
 		Vector3D GetEdge1CrossOrigin() const;

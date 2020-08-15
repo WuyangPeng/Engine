@@ -13,7 +13,16 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26429)
 CORE_TOOLS_RTTI_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, CurveMesh);
@@ -38,14 +47,19 @@ Rendering::CurveMesh
 Rendering::CurveMesh
 	::~CurveMesh ()
 {
-    DELETE1(mSegments);
-    DELETE1(mCInfo);
+    EXCEPTION_TRY
+    {
+        DELETE1(mSegments);
+        DELETE1(mCInfo);
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
+    
 }
 
 void Rendering::CurveMesh
 	::SetLevel (int level)
 {
-    if (mOrigVBuffer.IsNullPtr())
+    if (!mOrigVBuffer)
     {
         // The mesh is locked, so no subdivision is allowed.
         return;
@@ -68,8 +82,8 @@ void Rendering::CurveMesh
     int i;
     for (i = 0; i < mLevel; ++i)
     {
-        int nextNumVertices = numVertices + numEdges;
-        int nextNumEdges = 2*numEdges;
+        const int nextNumVertices = numVertices + numEdges;
+        const int nextNumEdges = 2 * numEdges;
         Subdivide(numVertices, numEdges, edges);
         RENDERING_ASSERTION_0(numVertices == nextNumVertices && numEdges == nextNumEdges, "Unexpected condition\n");
         numVertices = nextNumVertices;
@@ -85,11 +99,11 @@ void Rendering::CurveMesh
 
     DELETE1(edges);
     OnDynamicChange();
-	RENDERER_MANAGE_SINGLETON.BindAll(GetVertexBuffer().GetData());
+	RENDERER_MANAGE_SINGLETON.BindAll(GetVertexBuffer().get());
 }
 
 int Rendering::CurveMesh
-	::GetLevel () const
+	::GetLevel () const noexcept
 {
     return mLevel;
 }
@@ -115,7 +129,7 @@ void Rendering::CurveMesh
 
     // Allocate storage for the subdivision.
     int vstride = GetVertexFormat()->GetStride();
-	SetVertexBuffer(VertexBufferSmartPointer(NEW0 VertexBuffer(numTotalVertices, vstride)));
+	SetVertexBuffer(VertexBufferSmartPointer(std::make_shared<VertexBuffer>(numTotalVertices, vstride)));
     edges = NEW1<Edge>(numTotalEdges);
     if (mAllowDynamicChange)
     {
@@ -132,7 +146,7 @@ void Rendering::CurveMesh
     char* origData = const_cast<char*>(mOrigVBuffer->GetReadOnlyData());
     char* fullData = const_cast<char*>(GetVertexBuffer()->GetReadOnlyData());
     int index = 0;
-    int indexDelta = (1 << mLevel);
+   const  int indexDelta = (1 << mLevel);
     int fullStride = vstride*indexDelta;
     for (i = 0; i < numOrigEdges; ++i)
     {
@@ -171,13 +185,13 @@ void Rendering::CurveMesh
 
     for (int old = numEdges-1, curr = 2*numEdges - 1; old >= 0; --old)
     {
-        Edge& edge = edges[old];
+       const  Edge& edge = edges[old];
 
         // Compute the vertex at the average of the parameter values.
-        int v0 = edge.V[0];
-        int v1 = edge.V[1];
+       const int v0 = edge.V[0];
+       const int v1 = edge.V[1];
         int vMid = (v0 + v1)/2;
-        float paramMid = 0.5f*(edge.Param[0] + edge.Param[1]);
+       const float paramMid = 0.5f * (edge.Param[0] + edge.Param[1]);
 	 
         // vba.Position<Float3>(vMid) = edge.Segment->P(paramMid);
 
@@ -190,10 +204,10 @@ void Rendering::CurveMesh
         }
 
 //        int unit, i;
-         float* data0;
-         float* data1;
-         float* data;
-		const int numColorUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::ColorUnits);
+         float* data0 = nullptr;
+        float* data1 = nullptr;
+         float* data = nullptr;
+		constexpr int numColorUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::ColorUnits);
 		for (int unit = 0; unit < numColorUnits; ++unit)
         {
             if (vba.HasColor(unit))
@@ -209,7 +223,7 @@ void Rendering::CurveMesh
             }
         }
 
-		const int numTCoordUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
+		constexpr int numTCoordUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
         for (int unit = 0; unit < numTCoordUnits; ++unit)
         {
 			if (vba.HasTextureCoord(unit))
@@ -274,12 +288,13 @@ void Rendering::CurveMesh
 }
 
 void Rendering::CurveMesh
-	::Lock ()
+	::Lock ()  
 {
-    if (mOrigVBuffer.IsValidPtr())
+    CoreTools::DoNothing();
+    if (mOrigVBuffer)
     {
-		mOrigVBuffer.Reset(); 
-		mOrigParams.Reset();
+		mOrigVBuffer.reset(); 
+		mOrigParams.reset();
         DELETE1(mSegments);
         mSegments = 0;
     }
@@ -288,20 +303,19 @@ void Rendering::CurveMesh
     // the vertices of the mesh, even though the mesh is "locked".
 }
 
-bool Rendering::CurveMesh
-	::IsLocked () const
+bool Rendering::CurveMesh ::IsLocked() const noexcept
 {
-    return mOrigVBuffer.IsNullPtr();
+    return !mOrigVBuffer;
 }
 
 void Rendering::CurveMesh
-	::InitializeCurveInfo ()
+	::InitializeCurveInfo () noexcept
 {
     // Because vertices are shared by edges, the last visited edge for a
     // vertex donates its segment and parameter values to that vertex.
     const float* params = mOrigParams->GetData();
     int index = 0;
-    int indexDelta = (1 << mLevel);
+   const  int indexDelta = (1 << mLevel);
     for (int i = 0; i < mNumSegments; ++i)
     {
         int v0 = index;
@@ -315,19 +329,18 @@ void Rendering::CurveMesh
 }
 
 Rendering::CurveMesh::Edge
-	::Edge ()
+	::Edge () noexcept
 {
-	Segment.Reset();
+	Segment.reset();
     V[0] = -1;
     V[1] = -1;
     Param[0] = 0.0f;
     Param[1] = 0.0f;
 }
 
-Rendering::CurveMesh::CurveInfo
-	::CurveInfo ()
+Rendering::CurveMesh::CurveInfo ::CurveInfo() noexcept
 {
-	Segment.Reset();
+    Segment.reset();
     Param = 0.0f;
 }
 
@@ -338,19 +351,19 @@ const CoreTools::ObjectSmartPointer Rendering::CurveMesh
 	::GetObjectByName(const std::string& name)
 {
 	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
 
 	found = mOrigVBuffer->GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found)
 	{
 		return found;
 	}
 
 	found = mOrigParams->GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found)
 	{
 		return found;
 	}
@@ -360,7 +373,7 @@ const CoreTools::ObjectSmartPointer Rendering::CurveMesh
 		for (int i = 0; i < mNumSegments; ++i)
 		{
 			CoreTools::ObjectSmartPointer found2 = mSegments[i]->GetObjectByName(name);
-			if (found2.IsValidPtr())
+			if (found2)
 				return found2;
 		}
 	}
@@ -396,19 +409,19 @@ const CoreTools::ConstObjectSmartPointer Rendering::CurveMesh
 	::GetConstObjectByName(const std::string& name) const
 {
 	CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found)
 	{
 		return found;
 	}
 
 	found = mOrigVBuffer->GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found)
 	{
 		return found;
 	}
 
 	found = mOrigParams->GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found)
 	{
 		return found;
 	}
@@ -418,7 +431,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::CurveMesh
 		for (int i = 0; i < mNumSegments; ++i)
 		{
 			CoreTools::ConstObjectSmartPointer found2 = mSegments[i]->GetConstObjectByName(name);
-			if (found2.IsValidPtr())
+			if (found2)
 				return found2;
 		}
 	}
@@ -472,13 +485,13 @@ void Rendering::CurveMesh
     source.Read(mNumSegments);
     source.Read(mLevel);
 	mAllowDynamicChange = source.ReadBool();
-	source.ReadSmartPointer(mOrigVBuffer);
-	source.ReadSmartPointer(mOrigParams);
+//	source.ReadSmartPointer(mOrigVBuffer);
+	//source.ReadSmartPointer(mOrigParams);
 
-    bool locked = (mOrigVBuffer.IsNullPtr());
+    const bool locked = (!mOrigVBuffer);
     if (!locked)
     {
-        source.ReadSmartPointer(mNumSegments, mSegments);
+      //  source.ReadSmartPointer(mNumSegments, mSegments);
     }
 
     if (mAllowDynamicChange)
@@ -486,7 +499,7 @@ void Rendering::CurveMesh
         mCInfo = NEW1<CurveInfo>(mNumFullVertices);
         for (int i = 0; i < mNumFullVertices; ++i)
         {
-            source.ReadSmartPointer(mCInfo[i].Segment);
+         //   source.ReadSmartPointer(mCInfo[i].Segment);
             source.Read(mCInfo[i].Param);
         }
     }
@@ -499,14 +512,14 @@ void Rendering::CurveMesh
 {
     Polysegment::Link(source);
 
-	source.ResolveObjectSmartPointerLink(mOrigVBuffer);
-	source.ResolveObjectSmartPointerLink(mOrigParams);
-	source.ResolveObjectSmartPointerLink(mNumSegments, mSegments);
+	//source.ResolveObjectSmartPointerLink(mOrigVBuffer);
+	//source.ResolveObjectSmartPointerLink(mOrigParams);
+	//source.ResolveObjectSmartPointerLink(mNumSegments, mSegments);
     if (mCInfo)
     {
         for (int i = 0; i < mNumFullVertices; ++i)
         {
-            source.ResolveObjectSmartPointerLink(mCInfo[i].Segment);
+          //  source.ResolveObjectSmartPointerLink(mCInfo[i].Segment);
         }
     }
 }
@@ -520,17 +533,17 @@ void Rendering::CurveMesh
 uint64_t Rendering::CurveMesh
 	::Register(CoreTools::ObjectRegister& target) const
 {
-	uint64_t id = Polysegment::Register(target);
+    const uint64_t id = Polysegment::Register(target);
     if (0 < id)
     {
-        target.RegisterSmartPointer(mOrigVBuffer);
-		target.RegisterSmartPointer(mOrigParams);
-		target.RegisterSmartPointer(mNumSegments, mSegments);
+      //  target.RegisterSmartPointer(mOrigVBuffer);
+		//target.RegisterSmartPointer(mOrigParams);
+		//target.RegisterSmartPointer(mNumSegments, mSegments);
         if (mCInfo)
         {
             for (int i = 0; i < mNumFullVertices; ++i)
             {
-                target.RegisterSmartPointer(mCInfo[i].Segment);
+              //  target.RegisterSmartPointer(mCInfo[i].Segment);
             }
         }
 		return id;
@@ -549,15 +562,15 @@ void Rendering::CurveMesh
     target.Write(mNumSegments);
     target.Write(mLevel);
     target.WriteBool(mAllowDynamicChange);
-    target.WriteSmartPointer(mOrigVBuffer);
-	target.WriteSmartPointer(mOrigParams);
-    target.WriteSmartPointerWithNumber(mNumSegments, mSegments);
+  //  target.WriteSmartPointer(mOrigVBuffer);
+	//target.WriteSmartPointer(mOrigParams);
+   // target.WriteSmartPointerWithNumber(mNumSegments, mSegments);
 
     if (mCInfo)
     {
         for (int i = 0; i < mNumFullVertices; ++i)
         {
-            target.WriteSmartPointer(mCInfo[i].Segment);
+           // target.WriteSmartPointer(mCInfo[i].Segment);
             target.Write(mCInfo[i].Param);
         }
     }
@@ -590,3 +603,4 @@ int Rendering::CurveMesh
     return size;
 }
 
+#include STSTEM_WARNING_POP

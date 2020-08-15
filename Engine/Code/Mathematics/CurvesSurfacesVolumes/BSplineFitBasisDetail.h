@@ -14,8 +14,11 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Assert/Assert.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 template <typename Real>
 Mathematics::BSplineFitBasis<Real>
 	::BSplineFitBasis (int quantity, int degree)
@@ -32,20 +35,28 @@ template <typename Real>
 Mathematics::BSplineFitBasis<Real>
 	::~BSplineFitBasis ()
 {
-    DELETE1(mValue);
+	EXCEPTION_TRY
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+ DELETE1(mValue);
     DELETE1(mKnot);
+#include STSTEM_WARNING_POP
+}
+EXCEPTION_ALL_CATCH(Mathematics) 
+    
 }
 
 template <typename Real>
 int Mathematics::BSplineFitBasis<Real>
-	::GetQuantity () const
+	::GetQuantity () const noexcept
 {
     return mQuantity;
 }
 
 template <typename Real>
 int Mathematics::BSplineFitBasis<Real>
-	::GetDegree () const
+	::GetDegree () const noexcept
 {
     return mDegree;
 }
@@ -59,9 +70,9 @@ void Mathematics::BSplineFitBasis<Real>
     // Use scaled time and scaled knots so that 1/(Q-D) does not need to
     // be explicitly stored by the class object.  Determine the extreme
     // indices affected by local control.
-	auto temp = mQuantity - mDegree;
-	auto QmD = (Real)(temp);
-    Real tValue;
+	const auto temp = mQuantity - mDegree;
+	auto QmD = static_cast<Real>(temp);
+    Real tValue { };
     if (t <= Math<Real>::sm_Zero)
     {
         tValue = Math<Real>::sm_Zero;
@@ -77,7 +88,7 @@ void Mathematics::BSplineFitBasis<Real>
     else
     {
         tValue = QmD*t;
-        imin = (int)tValue;
+        imin = static_cast<int>(tValue);
         imax = imin + mDegree;
     }
 
@@ -94,8 +105,8 @@ void Mathematics::BSplineFitBasis<Real>
         }
         else
         {
-			auto temp2 = i1 - mDegree;
-            mKnot[i0] = (Real)(temp2);
+			const auto temp2 = i1 - mDegree;
+            mKnot[i0] = static_cast<Real>(temp2);
         }
     }
 
@@ -110,7 +121,8 @@ void Mathematics::BSplineFitBasis<Real>
 		auto k0 = mDegree, k1 = row;
 		auto knot0 = mKnot[k0], knot1 = mKnot[k1];
 		auto invDenom = (static_cast<Real>(1))/(knot0 - knot1);
-		Real c1 = (knot0 - tValue)*invDenom, c0;
+		Real c1 = (knot0 - tValue)*invDenom;
+		Real c0{ };
         mValue[row] = c1*mValue[row + 1];
 
         for (auto col = row + 1; col < mDegree; ++col)
@@ -137,7 +149,7 @@ Real Mathematics::BSplineFitBasis<Real>
     MATHEMATICS_ASSERTION_0(0 <= i && i <= mDegree, "Invalid index\n");
     return mValue[i];
 }
-
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_DETAIL_H

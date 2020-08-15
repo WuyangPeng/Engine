@@ -98,9 +98,9 @@ namespace Rendering
 		void SaveShader(WriteFileManager& manager) const;
 		void LoadShader(ReadFileManager& manager, int numProfiles);
 
-		void SetProfile(const ShaderProfileDataSmartPointer& profile);
-		const ConstShaderProfileDataSmartPointer GetProfile() const;
-		ShaderProfileDataSmartPointer GetProfile();
+		void SetProfile(const ShaderProfileDataSmartPointer& profile) noexcept;
+                const ConstShaderProfileDataSmartPointer GetProfile() const noexcept;
+                ShaderProfileDataSmartPointer GetProfile() noexcept;
 
 	private:
 		ShaderBaseData m_Input;

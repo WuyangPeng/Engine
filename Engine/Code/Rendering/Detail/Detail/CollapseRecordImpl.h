@@ -27,7 +27,7 @@ namespace Rendering
 		using BufferTarget = CoreTools::BufferTarget;
 
 	public:
-		explicit CollapseRecordImpl (int vKeep = -1, int vThrow = -1,int numVertices = 0, int numTriangles = 0);
+		explicit CollapseRecordImpl (int vKeep = -1, int vThrow = -1,int numVertices = 0, int numTriangles = 0) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -35,16 +35,16 @@ namespace Rendering
 		const std::vector<int> GetIndices() const;
 		int GetIndex(int index) const;
 		int GetIndicesSize() const;
-		void ClearIndices();
+		void ClearIndices() noexcept;
 
-		int GetVKeep() const;
-		void SetVKeep(int vKeep);
-		int GetVThrow() const;
-		void SetVThrow(int vThrow);
-		int GetNumVertices() const;
-		void SetNumVertices(int numVertices);
-		int GetNumTriangles() const;
-		void SetNumTriangles(int numTriangles);
+		int GetVKeep() const noexcept;
+		void SetVKeep(int vKeep) noexcept;
+		int GetVThrow() const noexcept;
+		void SetVThrow(int vThrow) noexcept;
+		int GetNumVertices() const noexcept;
+		void SetNumVertices(int numVertices) noexcept;
+		int GetNumTriangles() const noexcept;
+		void SetNumTriangles(int numTriangles) noexcept;
 
 		void Load(BufferSource& source);
 		void Save(BufferTarget& target) const;

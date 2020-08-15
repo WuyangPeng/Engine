@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.4.0.0 (2020/07/10 21:37)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.0 (2020/08/16 1:46)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_EXPORT_H
 #define THREADING_CORE_RENDER_ENGINE_EXPORT_H
@@ -10,7 +13,7 @@
 #include "Framework/Helper/UserMacro.h"
 
 #ifndef BUILDING_THREADING_CORE_RENDER_ENGINE_EXPORT
-	#define BUILDING_THREADING_CORE_RENDER_ENGINE_EXPORT
-#endif // BUILDING_THREADING_CORE_RENDER_ENGINE_EXPORT
+    #define BUILDING_THREADING_CORE_RENDER_ENGINE_EXPORT
+#endif  // BUILDING_THREADING_CORE_RENDER_ENGINE_EXPORT
 
-#endif // THREADING_CORE_RENDER_ENGINE_EXPORT_H
+#endif  // THREADING_CORE_RENDER_ENGINE_EXPORT_H

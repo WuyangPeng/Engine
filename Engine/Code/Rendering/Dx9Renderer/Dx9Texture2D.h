@@ -26,17 +26,21 @@ namespace Rendering
 
 	public:		
 		Dx9Texture2D(Renderer* renderer, const Texture2D* texture);
-		virtual ~Dx9Texture2D();
+		  ~Dx9Texture2D();
+                Dx9Texture2D(const Dx9Texture2D&) = default;
+                  Dx9Texture2D& operator=(const Dx9Texture2D&) = default;
+                Dx9Texture2D(Dx9Texture2D&&) = default;
+                  Dx9Texture2D& operator=(Dx9Texture2D&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		// ÎÆÀí²Ù×÷
-		virtual void Enable (Renderer* renderer, int textureUnit) override;
-		virtual void Disable (Renderer* renderer, int textureUnit) override;
-		virtual void* Lock (int level, BufferLocking mode) override;
-		virtual void Unlock (int level) override;
+		 void Enable (Renderer* renderer, int textureUnit) override;
+		 void Disable (Renderer* renderer, int textureUnit) override;
+		 void* Lock (int level, BufferLocking mode) override;
+		 void Unlock (int level) override;
 
-		virtual UInt GetTexture() const override;
+		 UInt GetTexture() const override;
 
 	private:
 		// Constructor for creating the color/depth textures for a render target.	 

@@ -13,6 +13,10 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Polysegment);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Polysegment);
@@ -23,7 +27,7 @@ Rendering::Polysegment
 	:ParentType{ contiguous ? VisualPrimitiveType::PolysegmentsContiguous : VisualPrimitiveType::PolysegmentsDisjoint,vertexformat, vertexbuffer,IndexBufferSmartPointer() },
 	 m_NumSegments{ 0 }, m_Contiguous{ contiguous }
 {
-	auto numVertices = vertexbuffer->GetNumElements();
+    const auto numVertices = vertexbuffer->GetNumElements();
 	RENDERING_ASSERTION_1(2 <= numVertices,"Polysegments必须至少有两点\n");
 
 	if (m_Contiguous)
@@ -40,11 +44,7 @@ Rendering::Polysegment
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Polysegment
-	::~Polysegment() 
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+   
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::Polysegment
@@ -75,7 +75,7 @@ void Rendering::Polysegment
 	auto numVertices = GetConstVertexBuffer()->GetNumElements();
 	if (m_Contiguous)
 	{
-		auto numVerticesMinus1 = numVertices - 1;
+            const auto numVerticesMinus1 = numVertices - 1;
 		if (0 <= numSegments && numSegments <= numVerticesMinus1)
 		{
 			m_NumSegments = numSegments;
@@ -87,7 +87,7 @@ void Rendering::Polysegment
 	}
 	else
 	{
-		auto numVerticesDivide2 = numVertices / 2;
+            const auto numVerticesDivide2 = numVertices / 2;
 		if (0 <= numSegments && numSegments <= numVerticesDivide2)
 		{
 			m_NumSegments = numSegments;
@@ -100,7 +100,7 @@ void Rendering::Polysegment
 }
 
 int Rendering::Polysegment
-	::GetNumSegments() const 
+	::GetNumSegments() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -108,8 +108,7 @@ int Rendering::Polysegment
 }
 
 
-bool Rendering::Polysegment
-	::GetContiguous() const 
+bool Rendering::Polysegment ::GetContiguous() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -121,7 +120,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::Polysegment
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 Rendering::Polysegment
@@ -198,4 +197,4 @@ void Rendering::Polysegment
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
- 
+ #include STSTEM_WARNING_POP

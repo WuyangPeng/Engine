@@ -1,13 +1,13 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
+//
 // ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 10:12)
 
 #ifndef RENDERING_CONTROLLERS_IK_CONTROLLER_IMPL_H
-#define RENDERING_CONTROLLERS_IK_CONTROLLER_IMPL_H 
+#define RENDERING_CONTROLLERS_IK_CONTROLLER_IMPL_H
 
-#include "Rendering/RenderingDll.h" 
+#include "Rendering/RenderingDll.h"
 
 #include "Rendering/Controllers/IKGoal.h"
 #include "Rendering/Controllers/IKJoint.h"
@@ -16,56 +16,56 @@
 
 namespace CoreTools
 {
-	class BufferTarget;
-	class BufferSource;
-	class ObjectLink;
-	class ObjectRegister;
-	class Object;
+    class BufferTarget;
+    class BufferSource;
+    class ObjectLink;
+    class ObjectRegister;
+    class Object;
 }
 
 namespace Rendering
-{	
-	class RENDERING_HIDDEN_DECLARE IKControllerImpl
-	{
-	public:
-		using ClassType = IKControllerImpl;
-		using IKGoalSmartPointerVector = std::vector<IKGoalSmartPointer>;
-		using IKJointSmartPointerVector = std::vector<IKJointSmartPointer>;
-		using Object = CoreTools::Object;
-		using ObjectSmartPointer = CoreTools::ObjectSmartPointer;
-		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
+{
+    class RENDERING_HIDDEN_DECLARE IKControllerImpl
+    {
+    public:
+        using ClassType = IKControllerImpl;
+        using IKGoalSmartPointerVector = std::vector<IKGoalSmartPointer>;
+        using IKJointSmartPointerVector = std::vector<IKJointSmartPointer>;
+        using Object = CoreTools::Object;
+        using ObjectSmartPointer = CoreTools::ObjectSmartPointer;
+        using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
 
-	public:
-		IKControllerImpl();
-		explicit IKControllerImpl(const IKJointSmartPointerVector& joints);
+    public:
+        IKControllerImpl() noexcept;
+        explicit IKControllerImpl(const IKJointSmartPointerVector& joints);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		int GetStreamingSize() const;
-		void Save(CoreTools::BufferTarget& target) const;
-		void Load(CoreTools::BufferSource& source);
-		void Link(CoreTools::ObjectLink& source);
-		void Register(CoreTools::ObjectRegister& target) const;
+        int GetStreamingSize() const;
+        void Save(CoreTools::BufferTarget& target) const;
+        void Load(CoreTools::BufferSource& source);
+        void Link(CoreTools::ObjectLink& source);
+        void Register(CoreTools::ObjectRegister& target) const;
 
-		const ObjectSmartPointer GetObjectByName(const std::string& name); 
-		const std::vector<ObjectSmartPointer> GetAllObjectsByName(const std::string& name); 
-		const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const;
-		const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;
+        const ObjectSmartPointer GetObjectByName(const std::string& name);
+        const std::vector<ObjectSmartPointer> GetAllObjectsByName(const std::string& name);
+        const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const;
+        const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;
 
-		int GetIterations() const;
-		void SetIterations(int iterations);
-		bool IsOrderEndToRoot() const;
-		void SetOrderEndToRoot(bool orderEndToRoot);
+        int GetIterations() const noexcept;
+        void SetIterations(int iterations) noexcept;
+        bool IsOrderEndToRoot() const noexcept;
+        void SetOrderEndToRoot(bool orderEndToRoot) noexcept;
 
-		const IKJointSmartPointer GetJointsSmartPointer(int index);
-		int GetJointsNum() const;
+        const IKJointSmartPointer GetJointsSmartPointer(int index);
+        int GetJointsNum() const;
 
-	private:		
-		int m_Iterations;       // Ä¬ÈÏ = 128
-		bool m_OrderEndToRoot;  // Ä¬ÈÏ = true
-	 
-		IKJointSmartPointerVector m_Joints;			 
-	};
+    private:
+        int m_Iterations;  // Ä¬ÈÏ = 128
+        bool m_OrderEndToRoot;  // Ä¬ÈÏ = true
+
+        IKJointSmartPointerVector m_Joints;
+    };
 }
 
-#endif // RENDERING_CONTROLLERS_IK_CONTROLLER_IMPL_H
+#endif  // RENDERING_CONTROLLERS_IK_CONTROLLER_IMPL_H

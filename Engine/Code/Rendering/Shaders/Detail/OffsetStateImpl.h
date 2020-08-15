@@ -29,7 +29,7 @@ namespace Rendering
 		using ReadFileManager = CoreTools::ReadFileManager;
 
 	public:
-		OffsetStateImpl();
+                OffsetStateImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

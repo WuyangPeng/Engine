@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
 
 Rendering::ClodMeshCollapseInfo
-	::ClodMeshCollapseInfo(int vKeep, int vThrow )
+	::ClodMeshCollapseInfo(int vKeep, int vThrow ) noexcept
 	:m_VKeep{ vKeep }, m_VThrow{ vThrow }, m_TThrow0{ -1 }, m_TThrow1{ -1 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -19,7 +19,7 @@ Rendering::ClodMeshCollapseInfo
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ClodMeshCollapseInfo)
 
 int Rendering::ClodMeshCollapseInfo
-	::GetVKeep() const
+	::GetVKeep() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -27,7 +27,7 @@ int Rendering::ClodMeshCollapseInfo
 }
 
 void Rendering::ClodMeshCollapseInfo
-	::SetVKeep(int vKeep)
+	::SetVKeep(int vKeep) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -35,7 +35,7 @@ void Rendering::ClodMeshCollapseInfo
 }
 
 int Rendering::ClodMeshCollapseInfo
-	::GetVThrow() const
+	::GetVThrow() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -43,7 +43,7 @@ int Rendering::ClodMeshCollapseInfo
 }
 
 void Rendering::ClodMeshCollapseInfo
-	::SetVThrow(int vThrow)
+	::SetVThrow(int vThrow) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -51,7 +51,7 @@ void Rendering::ClodMeshCollapseInfo
 }
 
 int Rendering::ClodMeshCollapseInfo
-	::GetTThrow0() const
+	::GetTThrow0() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -59,7 +59,7 @@ int Rendering::ClodMeshCollapseInfo
 }
 
 void Rendering::ClodMeshCollapseInfo
-	::SetTThrow0(int tThrow0)
+	::SetTThrow0(int tThrow0) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -67,7 +67,7 @@ void Rendering::ClodMeshCollapseInfo
 }
 
 int Rendering::ClodMeshCollapseInfo
-	::GetTThrow1() const
+	::GetTThrow1() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -75,7 +75,7 @@ int Rendering::ClodMeshCollapseInfo
 }
 
 void Rendering::ClodMeshCollapseInfo
-	::SetTThrow1(int tThrow1)
+	::SetTThrow1(int tThrow1) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

@@ -33,9 +33,9 @@ namespace Framework
 
 		CLASS_INVARIANT_DECLARE;
 
-		const AVector GetAxis() const;
+		const AVector GetAxis() const noexcept;
 		float GetAngle() const noexcept;
-		const Matrix GetRotate() const;
+                const Matrix GetRotate() const noexcept;
 		const Transform GetIncrement() const;
 
 	private:

@@ -20,14 +20,13 @@ Network::SendMessageLevel
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, SendMessageLevel)
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, SendMessageLevel)
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, SendMessageLevel)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SendMessageLevel)
+DELAY_COPY_CONSTRUCTION_DEFINE(Network, SendMessageLevel) 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, GetTopLevelSize, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SendMessageLevel, operator[], int, const Network::ConstMessageInterfaceSharedPtr)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Network, SendMessageLevel, Insert, MessageInterfaceSharedPtr, void)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, SendMessageLevel, operator[], int, Network::MessageInterfaceSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, GetRemainingSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, GetCurrentSize, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, SendMessageLevel, GetRemainingSize, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, SendMessageLevel, GetCurrentSize, int)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, Clear, void)

@@ -22,13 +22,17 @@ namespace Rendering
 		// Construction and destruction
 		PdrVertexShader (Renderer* renderer, const VertexShader* vshader);
 		~PdrVertexShader ();
+		PdrVertexShader(const PdrVertexShader&) = default;
+		PdrVertexShader& operator=(const PdrVertexShader&) = default;
+		PdrVertexShader( PdrVertexShader&&) = default;
+		PdrVertexShader& operator=( PdrVertexShader&&) = default;
 
 		// Vertex shader operations.
 		void Enable (Renderer* renderer, const VertexShader* vshader,const ShaderParameters* parameters);
 		void Disable (Renderer* renderer, const VertexShader* vshader,const ShaderParameters* parameters);
 
 	private:
-		GLuint mShader;
+		GLuint mShader = 0;
 	};
 
 }

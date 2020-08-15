@@ -25,7 +25,7 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 
 	public:
-		Matrix3Extract(Real angle, const Vector3D& axis);
+		Matrix3Extract(Real angle, const Vector3D& axis) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

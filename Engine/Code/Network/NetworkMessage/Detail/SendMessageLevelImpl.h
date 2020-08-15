@@ -33,10 +33,10 @@ namespace Network
 		// 对顶层的对象进行保存。
 		void Insert(const MessageInterfaceSharedPtr& message);
 
-		int GetRemainingSize() const;
-		int GetCurrentSize() const;
+		int GetRemainingSize() const noexcept;
+		int GetCurrentSize() const noexcept;
 
-		void Clear();
+		void Clear() noexcept;
 
 	private:
 		using MessagePtrContainer = std::vector<MessageInterfaceSharedPtr>;

@@ -23,14 +23,14 @@ namespace Rendering
 		using ParentType = PlatformVertexFormatImpl;	 
 
 	public:
-		Dx9VertexFormat(Renderer* renderer,const VertexFormat* vertexFormat);
-		virtual ~Dx9VertexFormat();
+		Dx9VertexFormat(Renderer* renderer,const VertexFormat* vertexFormat) noexcept;
+		 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 		// 顶点格式操作。
-		virtual void Enable(Renderer* renderer) override;
-		virtual void Disable(Renderer* renderer) override;
+		 void Enable(Renderer* renderer) override;
+		 void Disable(Renderer* renderer) override;
 	};
 }
 

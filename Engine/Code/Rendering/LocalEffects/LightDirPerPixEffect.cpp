@@ -21,14 +21,26 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
- 
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26815)
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering, LightDirPerPixEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightDirPerPixEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightDirPerPixEffect);
 
 Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 {
-	VertexShaderSmartPointer vshader{ NEW0 VertexShader{ "Wm5.LightDirPerPix",2, 3, 1, 0 } };
+    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>( "Wm5.LightDirPerPix", 2, 3, 1, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord1);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
@@ -38,7 +50,7 @@ Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 
 	auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -48,7 +60,7 @@ Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 		profile->SetProgram(i, msVPrograms[i]);
 	} 
 
-	PixelShaderSmartPointer pshader{ NEW0 PixelShader{ "Wm5.LightDirPerPix",2, 1, 10, 0 } };
+	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>( "Wm5.LightDirPerPix",2, 1, 10, 0 ) };
     pshader->SetInput(0, "vertexPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetInput(1, "vertexNormal", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord1);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -65,7 +77,7 @@ Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 
 	profile = pshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 10; ++j)
 		{
@@ -90,25 +102,23 @@ Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 	InsertTechnique(technique);
 }
 
-Rendering::LightDirPerPixEffect::~LightDirPerPixEffect()
-{
-}
+ 
 
 Rendering::VisualEffectInstance* Rendering::LightDirPerPixEffect::CreateInstance(Light* light,
     Material* material) const
 {
 	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0,ShaderFloatSmartPointer(NEW0 ProjectionViewMatrixConstant()));
-    instance->SetPixelConstant(0, 0,ShaderFloatSmartPointer(NEW0 CameraModelPositionConstant()));
-    instance->SetPixelConstant(0, 1,ShaderFloatSmartPointer(NEW0 MaterialEmissiveConstant(MaterialSmartPointer(material))));
-    instance->SetPixelConstant(0, 2,ShaderFloatSmartPointer(NEW0 MaterialAmbientConstant(MaterialSmartPointer(material))));
-    instance->SetPixelConstant(0, 3,ShaderFloatSmartPointer(NEW0 MaterialDiffuseConstant(MaterialSmartPointer(material))));
-    instance->SetPixelConstant(0, 4,ShaderFloatSmartPointer(NEW0 MaterialSpecularConstant(MaterialSmartPointer(material))));
-    instance->SetPixelConstant(0, 5,ShaderFloatSmartPointer(NEW0 LightModelDirectionVectorConstant(LightSmartPointer(light))));
-    instance->SetPixelConstant(0, 6,ShaderFloatSmartPointer(NEW0 LightAmbientConstant(LightSmartPointer(light))));
-    instance->SetPixelConstant(0, 7,ShaderFloatSmartPointer(NEW0 LightDiffuseConstant(LightSmartPointer(light))));
-    instance->SetPixelConstant(0, 8,ShaderFloatSmartPointer(NEW0 LightSpecularConstant(LightSmartPointer(light))));
-    instance->SetPixelConstant(0, 9,ShaderFloatSmartPointer(NEW0 LightAttenuationConstant(LightSmartPointer(light))));
+    instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared < ProjectionViewMatrixConstant>()));
+    instance->SetPixelConstant(0, 0,ShaderFloatSmartPointer(std::make_shared<CameraModelPositionConstant>()));
+    instance->SetPixelConstant(0, 1, ShaderFloatSmartPointer(std::make_shared < MaterialEmissiveConstant>(MaterialSmartPointer(material))));
+    instance->SetPixelConstant(0, 2, ShaderFloatSmartPointer(std::make_shared < MaterialAmbientConstant>(MaterialSmartPointer(material))));
+    instance->SetPixelConstant(0, 3, ShaderFloatSmartPointer(std::make_shared < MaterialDiffuseConstant>(MaterialSmartPointer(material))));
+    instance->SetPixelConstant(0, 4, ShaderFloatSmartPointer(std::make_shared < MaterialSpecularConstant>(MaterialSmartPointer(material))));
+    instance->SetPixelConstant(0, 5, ShaderFloatSmartPointer(std::make_shared < LightModelDirectionVectorConstant>(LightSmartPointer(light))));
+    instance->SetPixelConstant(0, 6, ShaderFloatSmartPointer(std::make_shared < LightAmbientConstant>(LightSmartPointer(light))));
+    instance->SetPixelConstant(0, 7, ShaderFloatSmartPointer(std::make_shared < LightDiffuseConstant>(LightSmartPointer(light))));
+    instance->SetPixelConstant(0, 8, ShaderFloatSmartPointer(std::make_shared < LightSpecularConstant>(LightSmartPointer(light))));
+    instance->SetPixelConstant(0, 9, ShaderFloatSmartPointer(std::make_shared < LightAttenuationConstant>(LightSmartPointer(light))));
 
     return instance;
 }
@@ -116,7 +126,7 @@ Rendering::VisualEffectInstance* Rendering::LightDirPerPixEffect::CreateInstance
 Rendering::VisualEffectInstance* Rendering::LightDirPerPixEffect::CreateUniqueInstance(
     Light* light, Material* material)
 {
-    LightDirPerPixEffect* effect = CoreTools::New0 < LightDirPerPixEffect>();
+    const LightDirPerPixEffect* effect = CoreTools::New0 < LightDirPerPixEffect>();
     return effect->CreateInstance(light, material);
 }
 
@@ -154,9 +164,9 @@ void Rendering::LightDirPerPixEffect
 	auto pass = GetTechnique(0)->GetPass(0);
 	auto vshader = pass->GetVertexShader();
 	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().GetData());
+	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -166,9 +176,9 @@ void Rendering::LightDirPerPixEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().GetData());
+	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 10; ++j)
 		{
@@ -207,7 +217,7 @@ int Rendering::LightDirPerPixEffect
 
 int Rendering::LightDirPerPixEffect::msDx9VRegisters[1]  { 0 };
 int Rendering::LightDirPerPixEffect::msOglVRegisters[1]  { 1 };
-int* Rendering::LightDirPerPixEffect::msVRegisters[ShaderFlags::MaxProfiles] 
+int* Rendering::LightDirPerPixEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msDx9VRegisters,
@@ -216,7 +226,7 @@ int* Rendering::LightDirPerPixEffect::msVRegisters[ShaderFlags::MaxProfiles]
     msOglVRegisters
 };
 
-std::string Rendering::LightDirPerPixEffect::msVPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::LightDirPerPixEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // VP_NONE
     "",
@@ -273,7 +283,7 @@ std::string Rendering::LightDirPerPixEffect::msVPrograms[ShaderFlags::MaxProfile
 int Rendering::LightDirPerPixEffect::msAllPRegisters[10] 
     { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-int* Rendering::LightDirPerPixEffect::msPRegisters[ShaderFlags::MaxProfiles] 
+int* Rendering::LightDirPerPixEffect::msPRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msAllPRegisters,
@@ -282,7 +292,7 @@ int* Rendering::LightDirPerPixEffect::msPRegisters[ShaderFlags::MaxProfiles]
     msAllPRegisters
 };
 
-std::string Rendering::LightDirPerPixEffect::msPPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::LightDirPerPixEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // PP_NONE
     "",
@@ -386,3 +396,4 @@ std::string Rendering::LightDirPerPixEffect::msPPrograms[ShaderFlags::MaxProfile
     "END\n"
 };
 
+#include STSTEM_WARNING_POP

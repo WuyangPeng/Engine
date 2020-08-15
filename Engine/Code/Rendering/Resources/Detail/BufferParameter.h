@@ -17,16 +17,16 @@ namespace Rendering
 		using ClassType = BufferParameter;
 
 	public:	
-		BufferParameter();
-		BufferParameter(int offset, int componentSize, int numComponents);
+		BufferParameter() noexcept;
+            BufferParameter(int offset, int componentSize, int numComponents) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 		
-		void Set(int offset, int componentSize, int numComponents);
+		void Set(int offset, int componentSize, int numComponents) noexcept;
 
-		int GetOffset() const;
-		int GetComponentSize() const;
-		int GetNumComponents() const;
+		int GetOffset() const noexcept;
+                int GetComponentSize() const noexcept;
+                int GetNumComponents() const noexcept;
 		
 	private:
 		int m_Offset;

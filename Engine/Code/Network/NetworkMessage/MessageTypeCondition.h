@@ -31,7 +31,7 @@ namespace Network
 		MessageTypeCondition(VersionsCondition condition, int version);
 		MessageTypeCondition();
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(MessageTypeCondition);
+		CLASS_INVARIANT_DECLARE;
 
 	public:
 		bool IsVersionsConform(int version) const;

@@ -18,18 +18,18 @@ namespace Rendering
 		using ClassType = ClodMeshCollapseInfo;
 
 	public:
-		ClodMeshCollapseInfo(int vKeep = -1, int vThrow = -1);
+		ClodMeshCollapseInfo(int vKeep = -1, int vThrow = -1) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		int GetVKeep() const;
-		void SetVKeep(int vKeep);
-		int GetVThrow() const;
-		void SetVThrow(int vThrow);
-		int GetTThrow0() const;
-		void SetTThrow0(int tThrow0);
-		int GetTThrow1() const;
-		void SetTThrow1(int tThrow1);
+		int GetVKeep() const noexcept;
+		void SetVKeep(int vKeep) noexcept;
+		int GetVThrow() const noexcept;
+		void SetVThrow(int vThrow) noexcept;
+		int GetTThrow0() const noexcept;
+		void SetTThrow0(int tThrow0) noexcept;
+		int GetTThrow1() const noexcept;
+		void SetTThrow1(int tThrow1) noexcept;
 
 	private:	
 		int m_VKeep;

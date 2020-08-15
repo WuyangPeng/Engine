@@ -7,11 +7,12 @@
 #include "Rendering/RenderingExport.h"
 
 #include "TrianglePositionImpl.h"
+
 #include "Mathematics/Algebra/APointDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::TrianglePositionImpl
-	::TrianglePositionImpl(const APoint& firstPosition,const APoint& secondPosition, const APoint& thirdPosition)
+	::TrianglePositionImpl(const APoint& firstPosition,const APoint& secondPosition, const APoint& thirdPosition) noexcept
 	:m_FirstPosition{ firstPosition }, m_SecondPosition{ secondPosition }, m_ThirdPosition{ thirdPosition }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -19,24 +20,21 @@ Rendering::TrianglePositionImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, TrianglePositionImpl)
 
-const Rendering::TrianglePositionImpl::APoint Rendering::TrianglePositionImpl
-	::GetFirstPosition() const 
+const Rendering::TrianglePositionImpl::APoint Rendering::TrianglePositionImpl ::GetFirstPosition() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_FirstPosition;
 }
 
-const Rendering::TrianglePositionImpl::APoint Rendering::TrianglePositionImpl
-	::GetSecondPosition() const 
+const Rendering::TrianglePositionImpl::APoint Rendering::TrianglePositionImpl ::GetSecondPosition() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_SecondPosition;
 }
 
-const Rendering::TrianglePositionImpl::APoint Rendering::TrianglePositionImpl
-	::GetThirdPosition() const 
+const Rendering::TrianglePositionImpl::APoint Rendering::TrianglePositionImpl ::GetThirdPosition() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

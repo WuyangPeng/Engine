@@ -20,8 +20,8 @@ namespace Database
 		using ParentType = TableImpl;
 
 	public:
-		explicit NullTable(const ConfigurationStrategy& configurationStrategy);
-		virtual ~NullTable();
+                explicit NullTable(const ConfigurationStrategy& configurationStrategy) noexcept;
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 	};

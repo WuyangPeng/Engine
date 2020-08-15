@@ -13,7 +13,7 @@
 
 #include "Network/Interface/Detail/BaseMainManagerImpl.h"
 
-#include <ace/OS_main.h>
+#include "System/Helper/PragmaWarning/ACE.h"
 
 namespace Network
 {
@@ -25,15 +25,14 @@ namespace Network
 		using InterfaceType = ACE_Main_Base;
 
 	public:
-		ACEMainManager();
-		virtual ~ACEMainManager();
+		ACEMainManager(); 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
 	public:
-		virtual void Run() override;
+		void Run() override;
 
-		virtual int run_i(int argc, ACE_TCHAR** argv) override;
+		int run_i(int argc, ACE_TCHAR** argv) override;
 	};
 }
 

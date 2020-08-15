@@ -30,7 +30,7 @@ namespace Network
 		CLASS_INVARIANT_DECLARE;
 
 		std::string GetAddress() const;
-		int GetPort() const;
+		int GetPort() const noexcept;
 
 	private:
 		std::string m_Address;

@@ -24,24 +24,24 @@ namespace Database
 		using MysqlxRowPtr = std::shared_ptr<MysqlxRow>;
 
 	public:
-		explicit MysqlConnectorResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow);
-		virtual ~MysqlConnectorResultRow();
+                explicit MysqlConnectorResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow) noexcept;
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Print(std::ostream& os) const override;
+		  void Print(std::ostream& os) const override;
 
-		virtual int GetIntValue(int pos) const override;
-		virtual uint32_t GetUIntValue(int pos) const override;
-		virtual int64_t GetInt64Value(int pos) const override;
-		virtual uint64_t GetUInt64Value(int pos) const override;
-		virtual float GetFloatValue(int pos) const override;
-		virtual double GetDoubleValue(int pos) const override;
-		virtual bool GetBoolValue(int pos) const override;
-		virtual std::string GetStringValue(int pos) const override;
-		virtual std::wstring GetWStringValue(int pos) const override;
+		  int GetIntValue(int pos) const override;
+		  uint32_t GetUIntValue(int pos) const override;
+		  int64_t GetInt64Value(int pos) const override;
+		  uint64_t GetUInt64Value(int pos) const override;
+		  float GetFloatValue(int pos) const override;
+		  double GetDoubleValue(int pos) const override;
+		  bool GetBoolValue(int pos) const override;
+		  std::string GetStringValue(int pos) const override;
+		  std::wstring GetWStringValue(int pos) const override;
 
-		virtual int GetColCount() const override;
+		  int GetColCount() const override;
 
 	private:
 		MysqlxRowPtr m_MysqlxRow;

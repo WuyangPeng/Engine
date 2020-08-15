@@ -18,7 +18,7 @@
 using std::for_each;
 
 Rendering::CollapseRecordArrayImpl
-	::CollapseRecordArrayImpl()
+	::CollapseRecordArrayImpl() noexcept
 	:m_CollapseRecord{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -56,7 +56,7 @@ const Rendering::CollapseRecord Rendering::CollapseRecordArrayImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= index && index < GetNumRecords(), "Ë÷Òý´íÎó£¡");
 
-	return m_CollapseRecord[index];
+	return m_CollapseRecord.at(index);
 }
 
 void Rendering::CollapseRecordArrayImpl

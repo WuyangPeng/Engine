@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.4.0.0 (2020/07/10 21:37)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.0 (2020/08/16 1:46)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_H
 #define THREADING_CORE_RENDER_ENGINE_H
@@ -13,22 +16,22 @@
 
 #include "Network/Network.h"
 #include "Database/Database.h"
-#include "Script/Script.h"	
-#include "Mathematics/Mathematics.h"	
-#include "SoundEffect/SoundEffect.h"		
-#include "InputOutput/InputOutput.h"		
+#include "Script/Script.h"
+#include "Mathematics/Mathematics.h"
+#include "SoundEffect/SoundEffect.h"
+#include "InputOutput/InputOutput.h"
 
-#include "ResourceManager/ResourceManager.h"		
-#include "Rendering/Rendering.h"		
-#include "Physics/Physics.h"		
-#include "Imagics/Imagics.h"		
+#include "ResourceManager/ResourceManager.h"
+#include "Rendering/Rendering.h"
+#include "Physics/Physics.h"
+#include "Imagics/Imagics.h"
 
-#include "Animation/Animation.h"		
-#include "ArtificialIntellegence/ArtificialIntellegence.h"		
-#include "UserInterface/UserInterface.h"	
+#include "Animation/Animation.h"
+#include "ArtificialIntellegence/ArtificialIntellegence.h"
+#include "UserInterface/UserInterface.h"
 
-#include "AssistTools/AssistTools.h"		
+#include "AssistTools/AssistTools.h"
 
-#include "Framework/Framework.h"	
+#include "Framework/Framework.h"
 
-#endif // THREADING_CORE_RENDER_ENGINE_H
+#endif  // THREADING_CORE_RENDER_ENGINE_H

@@ -26,10 +26,10 @@ namespace Mathematics
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual Real GetLhsParameter() const override;
-		virtual Real GetRhsParameter() const override;
+		  Real GetLhsParameter() const override;
+		  Real GetRhsParameter() const override;
 
-		virtual ImplTypePtr Clone() const override;
+		  ImplTypePtr Clone() const override;
 
 	private:
 		Real m_LhsParameter;

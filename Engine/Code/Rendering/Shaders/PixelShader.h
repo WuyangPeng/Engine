@@ -20,8 +20,11 @@ namespace Rendering
         
     public:
         PixelShader (const std::string& programName,int numInputs,int numOutputs,int numConstants,int numSamplers);
-         virtual ~PixelShader ();        
-
+           ~PixelShader ();        
+               PixelShader(const PixelShader&)  = default;
+           PixelShader& operator=(const PixelShader&)  = default;
+                         PixelShader(PixelShader&&) noexcept = default;
+           PixelShader& operator=(PixelShader&&) noexcept = default;
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_OBJECT_FACTORY_DECLARE(PixelShader);

@@ -1,28 +1,26 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 10:55)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "HandleSet.h"
-#include "Detail/HandleSetImpl.h"
 #include "Detail/HandleSetFactory.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Detail/HandleSetImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-Network::HandleSet
-	::HandleSet(const ConfigurationStrategy& configurationStrategy)
-	:m_Impl{ HandleSetFactory::Create(configurationStrategy) }
+Network::HandleSet ::HandleSet(const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ HandleSetFactory::Create(configurationStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, HandleSet)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, HandleSet)
 
 DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(Network, HandleSet)
-DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(Network, HandleSet)
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, SetBit, ACEHandle, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, GetMaxSet, int64_t)
@@ -35,4 +33,3 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, IsFdSetFull, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, IsFdSetCount, int)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, Select, int, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, IsFdSetCountIsOne, bool)
-

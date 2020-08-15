@@ -27,7 +27,7 @@ namespace Network
 		using SocketIDContainerConstIter = SocketIDContainer::const_iterator;
 
 	public:
-		BufferSendStreamMultiIndexContainer();
+		BufferSendStreamMultiIndexContainer() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -37,8 +37,8 @@ namespace Network
 		BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerPtrByHandle(ACEHandle handle);
 
 		void Erase(uint64_t socketID);
-		SocketIDContainerConstIter begin() const;
-		SocketIDContainerConstIter end() const;
+		SocketIDContainerConstIter begin() const noexcept;
+		SocketIDContainerConstIter end() const noexcept;
 
 	private:
 		using HandleIDContainer = std::map<ACEHandle, BufferSendStreamContainerWeakPtr>;

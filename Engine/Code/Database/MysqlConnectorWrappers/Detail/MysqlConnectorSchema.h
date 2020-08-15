@@ -28,12 +28,12 @@ namespace Database
 		explicit MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr);
 		MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr, int dbIndex);
 		MysqlConnectorSchema(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema);
-		virtual ~MysqlConnectorSchema();
+	 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual MysqlxCollectionPtr GetCollection(const std::string& collectionName) override;
-		virtual MysqlxTablePtr GetTable(const std::string& tableonName) override;
+		  MysqlxCollectionPtr GetCollection(const std::string& collectionName) override;
+		  MysqlxTablePtr GetTable(const std::string& tableonName) override;
 
 	private:
 		using MysqlxSchemaPtr = std::unique_ptr<MysqlxSchema>;

@@ -20,16 +20,12 @@ Rendering::OpenGLTextureCube
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::OpenGLTextureCube
-	::~OpenGLTextureCube()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTextureCube)
 
 void Rendering::OpenGLTextureCube
-	::Enable( Renderer* renderer, int textureUnit )
+	::Enable( Renderer* renderer, int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -39,7 +35,7 @@ void Rendering::OpenGLTextureCube
 }
 
 void Rendering::OpenGLTextureCube
-	::Disable( Renderer* renderer, int textureUnit )
+	::Disable( Renderer* renderer, int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -49,7 +45,7 @@ void Rendering::OpenGLTextureCube
 }
 
 void* Rendering::OpenGLTextureCube
-	::Lock( int face,int level, BufferLocking mode )
+	::Lock( int face,int level, BufferLocking mode ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -57,7 +53,7 @@ void* Rendering::OpenGLTextureCube
 }
 
 void Rendering::OpenGLTextureCube
-	::Unlock( int face,int level )
+	::Unlock( int face,int level ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

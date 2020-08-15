@@ -12,7 +12,10 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Polypoint);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Polypoint);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Polypoint);
@@ -24,11 +27,7 @@ Rendering::Polypoint
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Polypoint
-	::~Polypoint()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::Polypoint
@@ -54,7 +53,7 @@ void Rendering::Polypoint
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto numVertices = GetMaxNumPoints();
+const	auto numVertices = GetMaxNumPoints();
     if (0 <= numPoints && numPoints <= numVertices)
     {
         m_NumPoints = numPoints;
@@ -66,7 +65,7 @@ void Rendering::Polypoint
 }
 
 int Rendering::Polypoint
-	::GetNumPoints() const
+	::GetNumPoints() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -149,6 +148,7 @@ Rendering::ControllerInterfaceSmartPointer Rendering::Polypoint
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ NEW0 ClassType(*this) };
+	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
+#include STSTEM_WARNING_POP

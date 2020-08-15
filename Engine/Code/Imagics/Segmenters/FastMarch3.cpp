@@ -8,7 +8,10 @@
 
 #include "FastMarch3.h"
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26481)
 const float Imagics::FastMarch3
 	::msOneThird = 1.0f / 3.0f;
 
@@ -30,10 +33,7 @@ Imagics::FastMarch3
     Initialize(xBound, yBound, zBound, xSpacing, ySpacing, zSpacing);
 }
 
-Imagics::FastMarch3
-	::~FastMarch3()
-{
-}
+ 
 
 void Imagics::FastMarch3
 	::Initialize(int xBound, int yBound, int zBound,
@@ -55,7 +55,7 @@ void Imagics::FastMarch3
 
     // Boundary pixels are marked as zero speed to allow us to avoid having
     // to process the boundary pixels separately during the iteration.
-    int x, y, z, i;
+    int x = 0, y = 0, z = 0, i = 0;
 
     // vertex (0,0,0)
     i = Index(0,0,0);
@@ -210,8 +210,7 @@ void Imagics::FastMarch3
     }
 }
 
-bool Imagics::FastMarch3
-	::IsBoundary(int i) const
+bool Imagics::FastMarch3 ::IsBoundary(int i) const noexcept
 {
     if (IsValid(i) && !IsTrial(i))
     {
@@ -233,7 +232,7 @@ void Imagics::FastMarch3
 {
     // Remove the minimum trial value from the heap.
    
-	CoreTools::MinHeapRecord<int, float> record = mHeap.Remove();
+	const CoreTools::MinHeapRecord<int, float> record = mHeap.Remove();
 	int i = record.GetUniqueIndex();
 	//float value = record.GetValue();
 
@@ -320,8 +319,8 @@ void Imagics::FastMarch3
 void Imagics::FastMarch3
 	::ComputeTime(int i)
 {
-    bool hasXTerm;
-    float xConst;
+    bool hasXTerm = false;
+    float xConst = 0.0f;
     if (IsValid(i-1))
     {
         hasXTerm = true;
@@ -345,8 +344,8 @@ void Imagics::FastMarch3
         xConst = 0.0f;
     }
 
-    bool hasYTerm;
-    float yConst;
+    bool hasYTerm= false;
+    float yConst = 0.0f;
     if (IsValid(i-mXBound))
     {
         hasYTerm = true;
@@ -370,8 +369,8 @@ void Imagics::FastMarch3
         yConst = 0.0f;
     }
 
-    bool hasZTerm;
-    float zConst;
+    bool hasZTerm= false;
+    float zConst=0.0f;
     if (IsValid(i-mXYBound))
     {
         hasZTerm = true;
@@ -395,7 +394,7 @@ void Imagics::FastMarch3
         zConst = 0.0f;
     }
 
-    float sum, diff, discr;
+    float sum=0.0f, diff=0.0f, discr=0.0f;
 
     if (hasXTerm)
     {
@@ -549,44 +548,45 @@ void Imagics::FastMarch3
 
 
 int Imagics::FastMarch3
-	::GetXBound() const
+	::GetXBound() const noexcept
 {
 	return mXBound;
 }
 
-int Imagics::FastMarch3
-	::GetYBound() const
+int Imagics::FastMarch3 
+	::GetYBound() const noexcept
 {
 	return mYBound;
 }
 
 int Imagics::FastMarch3
-	::GetZBound() const
+	::GetZBound() const noexcept
 {
 	return mZBound;
 }
 
 float Imagics::FastMarch3
-	::GetXSpacing() const
+	::GetXSpacing() const noexcept
 {
 	return mXSpacing;
 }
 
 float Imagics::FastMarch3
-	::GetYSpacing() const
+	::GetYSpacing() const noexcept
 {
 	return mYSpacing;
 }
 
 float Imagics::FastMarch3
-	::GetZSpacing() const
+	::GetZSpacing() const noexcept
 {
 	return mZSpacing;
 }
 
 int Imagics::FastMarch3
-	::Index(int x, int y, int z) const
+	::Index(int x, int y, int z) const noexcept
 {
 	return x + mXBound*(y + mYBound*z);
 }
 
+#include STSTEM_WARNING_POP

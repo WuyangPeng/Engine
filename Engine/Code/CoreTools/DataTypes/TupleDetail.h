@@ -25,7 +25,7 @@ CoreTools::Tuple<Dimension, Type>
 
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>
-	::Tuple(ParamType firstParam)
+	::Tuple(ParamType firstParam) noexcept
 	:m_Tuple{ firstParam }
 {
 	static_assert(Dimension == 1, "Dimension == 1");
@@ -55,15 +55,13 @@ CoreTools::Tuple<Dimension, Type>
 
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>
-	::Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam, ParamType fourthParam)
+	::Tuple(ParamType firstParam, ParamType secondParam, ParamType thirdParam, ParamType fourthParam) noexcept
 	:m_Tuple{ firstParam,secondParam,thirdParam,fourthParam }
 {
 	static_assert(Dimension == 4, "Dimension == 4");
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
-
 
 // private
 template <int Dimension, typename Type>

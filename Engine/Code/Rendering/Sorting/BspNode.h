@@ -34,7 +34,7 @@ namespace Rendering
 		// separating plane.
 		BspNode();
 		BspNode(const Mathematics::Planef& modelPlane);
-		virtual ~BspNode();
+		 
 
 		// These methods should be used instead of the attach/detach methods in
 		// the Node base class.
@@ -50,23 +50,26 @@ namespace Rendering
 
 		// Member access.
 		 Mathematics::Planef ModelPlane;
-		 const Mathematics::Planef &GetWorldPlane() const;
+                 const Mathematics::Planef& GetWorldPlane() const noexcept;
 
 		// Determine the portion of the scene that contains the point.
 		 SpatialSmartPointer GetContainingNode(const Mathematics::APointf& point);
 
 	protected:
 		// Support for the geometric update. 
-		virtual bool UpdateWorldData(double applicationTime);
+		  bool UpdateWorldData(double applicationTime) override;
 
 		// Support for hierarchical culling.
-		virtual void GetVisibleSet(Culler& culler, bool noCull);
+		  void GetVisibleSet(Culler& culler, bool noCull) override;
 
 		Mathematics::Planef mWorldPlane;
 	};
-
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(BspNode);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, BspNode);
+	#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_SORTING_BSP_NODE_H

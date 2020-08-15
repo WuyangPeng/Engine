@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 Network::BaseMainManagerImpl
-	::BaseMainManagerImpl()
+	::BaseMainManagerImpl() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -29,7 +29,7 @@ Network::IOContextType& Network::BaseMainManagerImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是boost管理类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是boost管理类！"s));
 }
 
 void Network::BaseMainManagerImpl
@@ -37,7 +37,7 @@ void Network::BaseMainManagerImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是boost管理类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是boost管理类！"s));
 }
 
 bool Network::BaseMainManagerImpl
@@ -45,7 +45,7 @@ bool Network::BaseMainManagerImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是boost管理类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是boost管理类！"s));
 }
 
 void Network::BaseMainManagerImpl
@@ -53,6 +53,6 @@ void Network::BaseMainManagerImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("不是boost管理类！"));
+	THROW_EXCEPTION(SYSTEM_TEXT("不是boost管理类！"s));
 }
 

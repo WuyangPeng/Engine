@@ -26,16 +26,14 @@ namespace CoreTools
 	public:
 		explicit BaseResource(PriorityType priority);
 		virtual ~BaseResource();
-		
-		BaseResource(const BaseResource&) = default;
-		BaseResource& operator=(const BaseResource&) = default;
+ 
 		BaseResource(BaseResource&&) noexcept = default;
 		BaseResource& operator=(BaseResource&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		PriorityType GetPriority() const noexcept;
-		boost::posix_time::ptime GetLastAccessTime() const;
+		boost::posix_time::ptime GetLastAccessTime() const noexcept;
 		bool IsLocked() const noexcept;
 
 		void SetPriority(PriorityType priority) noexcept;

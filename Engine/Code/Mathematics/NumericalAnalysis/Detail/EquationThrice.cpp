@@ -15,7 +15,7 @@
 using std::swap;
 
 Mathematics::EquationThrice
-	::EquationThrice(double constant, double once, double secondary, double thrice, double epsilon)
+	::EquationThrice(double constant, double once, double secondary, double thrice, double epsilon)  
 	:ParentType{ epsilon }, m_Constant{ constant }, m_Once{ once }, m_Secondary{ secondary }, m_Thrice{ thrice }
 {
 	Calculate();
@@ -23,16 +23,12 @@ Mathematics::EquationThrice
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-Mathematics::EquationThrice
-	::~EquationThrice()
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EquationThrice)
 
 double Mathematics::EquationThrice
-	::Substitution(double value) const
+	::Substitution(double value) const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -52,7 +48,7 @@ const Mathematics::EquationThrice::Imaginary Mathematics::EquationThrice
 }
 
 double Mathematics::EquationThrice
-	::SubstitutionTangent(double solution) const
+	::SubstitutionTangent(double solution) const noexcept
 {
 	return m_Once + solution * m_Secondary * 2.0 +
 		   Mathd::Square(solution) * m_Thrice * 3.0;
@@ -74,11 +70,11 @@ void  Mathematics::EquationThrice
 	// p = -a^2/3 + b
 	// q = 2a^3/27 - ab/3 +c
 	// p' = p / 3 ,q' = q / 2
-	auto pThird = CalculatePThird();
-	auto qHalf = CalculateQHalf();
+	const auto pThird = CalculatePThird();
+	const auto qHalf = CalculateQHalf();
 
 	// 差别式 D' = p'^3 + q'^2
-	auto discriminant = CalculateDiscriminant(pThird, qHalf);
+	const auto discriminant = CalculateDiscriminant(pThird, qHalf);
 
 	CalculateResult(pThird, qHalf, discriminant);
 }
@@ -108,34 +104,30 @@ bool Mathematics::EquationThrice
 	return false;
 }
 
-// static
-double Mathematics::EquationThrice
-	::CalculateDiscriminant(double pThird, double qHalf)
-{
-	return qHalf * qHalf + pThird * pThird * pThird;
-}
+ 
+
 
 double Mathematics::EquationThrice
-	::CalculatePThird() const
+	::CalculatePThird() const noexcept
 {
-	auto two = m_Secondary / m_Thrice;
-	auto one = m_Once / m_Thrice;
+	const auto two = m_Secondary / m_Thrice;
+	const auto one = m_Once / m_Thrice;
 
-	auto p = one - two * two / 3.0;
-	auto pThird = p / 3.0;
+	const auto p = one - two * two / 3.0;
+	const auto pThird = p / 3.0;
 
 	return pThird;
 }
 
 double Mathematics::EquationThrice
-	::CalculateQHalf() const
+	::CalculateQHalf() const noexcept
 {
-	auto two = m_Secondary / m_Thrice;
-	auto one = m_Once / m_Thrice;
-	auto zero = m_Constant / m_Thrice;
+	const auto two = m_Secondary / m_Thrice;
+	const auto one = m_Once / m_Thrice;
+	const auto zero = m_Constant / m_Thrice;
 
-	auto q = zero - two * one / 3.0 + two * two * two / 27.0 * 2.0;
-	auto qHalf = q / 2.0;
+	const auto q = zero - two * one / 3.0 + two * two * two / 27.0 * 2.0;
+	const auto qHalf = q / 2.0;
 
 	return qHalf;
 }
@@ -161,17 +153,17 @@ void Mathematics::EquationThrice
 void Mathematics::EquationThrice
 	::CalculateResultDiscriminantIsPlus(double qHalf, double discriminant)
 {
-	auto two = m_Secondary / m_Thrice;
+	const auto two = m_Secondary / m_Thrice;
 
-	auto discriminantSqrt = Mathd::Sqrt(discriminant);
-	auto rCube = -qHalf + discriminantSqrt;
-	auto sCube = -qHalf - discriminantSqrt;
+	const auto discriminantSqrt = Mathd::Sqrt(discriminant);
+	const auto rCube = -qHalf + discriminantSqrt;
+	const auto sCube = -qHalf - discriminantSqrt;
 
-	auto r = Mathd::CubeRoot(rCube);
-	auto s = Mathd::CubeRoot(sCube);
+	const auto r = Mathd::CubeRoot(rCube);
+	const auto s = Mathd::CubeRoot(sCube);
 
 	// 求实数根
-	auto realResult = r + s - two / 3.0;
+	const auto realResult = r + s - two / 3.0;
 
 	SetRealResult(realResult);
 
@@ -194,9 +186,9 @@ void Mathematics::EquationThrice
 void Mathematics::EquationThrice
 	::CalculateResultDiscriminantIsZero(double qHalf)
 {
-	auto two = m_Secondary / m_Thrice;
+	const auto two = m_Secondary / m_Thrice;
 
-	auto r = Mathd::CubeRoot(qHalf);
+	const auto r = Mathd::CubeRoot(qHalf);
 
 	auto minRealResult = 2 * r - two / 3.0;
 	auto maxRealResult = -r - two / 3.0;
@@ -213,18 +205,18 @@ void Mathematics::EquationThrice
 void Mathematics::EquationThrice
 	::CalculateResultDiscriminantIsNegative(double pThird, double qHalf)
 {
-	auto two = m_Secondary / m_Thrice;
+	const auto two = m_Secondary / m_Thrice;
 
 	// 下面将x = 2mcosθ代入方程
 	// 并根据4cos^3(θ) - 3cosθ = cos(3θ)求出方程的解。
-	auto middleAngle = Mathd::ACos(-qHalf / Mathd::Sqrt(-pThird * pThird * pThird)) / 3.0;
-	auto leastAngle = middleAngle - 2.0 * Mathd::sm_PI / 3.0;
-	auto mostAngle = middleAngle + 2.0 * Mathd::sm_PI / 3.0;
-	auto prefix = 2.0 * Mathd::Sqrt(-pThird);
+	const auto middleAngle = Mathd::ACos(-qHalf / Mathd::Sqrt(-pThird * pThird * pThird)) / 3.0;
+	const auto leastAngle = middleAngle - 2.0 * Mathd::sm_PI / 3.0;
+	const auto mostAngle = middleAngle + 2.0 * Mathd::sm_PI / 3.0;
+	const auto prefix = 2.0 * Mathd::Sqrt(-pThird);
 
-	auto leastAngleRealResult = prefix * Mathd::Cos(leastAngle) - two / 3.0;
-	auto middleAngleRealResult = prefix * Mathd::Cos(middleAngle) - two / 3.0;
-	auto mostAngleRealResult = prefix * Mathd::Cos(mostAngle) - two / 3.0;
+	const auto leastAngleRealResult = prefix * Mathd::Cos(leastAngle) - two / 3.0;
+	const auto middleAngleRealResult = prefix * Mathd::Cos(middleAngle) - two / 3.0;
+	const auto mostAngleRealResult = prefix * Mathd::Cos(mostAngle) - two / 3.0;
 
 	SetRealResult(leastAngleRealResult);
 	SetRealResult(middleAngleRealResult);

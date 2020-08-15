@@ -20,7 +20,7 @@ Network::ConfigurationIPPort
 }
 
 Network::ConfigurationIPPort
-	::ConfigurationIPPort()
+	::ConfigurationIPPort() noexcept
 	:m_IP{  }, m_Port{ 0 }
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
@@ -29,15 +29,14 @@ Network::ConfigurationIPPort
 CLASS_INVARIANT_STUB_DEFINE(Network, ConfigurationIPPort)
 
 string Network::ConfigurationIPPort
-	::GetIP() const
+	::GetIP() const 
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
 	return m_IP;
 }
 
-int Network::ConfigurationIPPort
-	::GetPort() const
+int Network::ConfigurationIPPort ::GetPort() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

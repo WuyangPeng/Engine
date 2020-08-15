@@ -16,7 +16,17 @@
 
 using std::set;
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
 Rendering::CreateClodMeshImpl
 	::CreateClodMeshImpl(TrianglesMeshSmartPointer mesh)
 	: m_ClodMeshTriangleMesh{ mesh }, m_Graph{ m_ClodMeshTriangleMesh.GetNumVertices(),m_ClodMeshTriangleMesh.GetNumIndices() }, m_Collapses{}, m_CollapseRecord{}
@@ -33,7 +43,7 @@ Rendering::CollapseRecordArraySmartPointer Rendering::CreateClodMeshImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return CollapseRecordArraySmartPointer{ NEW0 CollapseRecordArray(m_CollapseRecord) };
+	return CollapseRecordArraySmartPointer{ std::make_shared< CollapseRecordArray>(m_CollapseRecord) };
 }
 
 // private
@@ -454,3 +464,4 @@ void Rendering::CreateClodMeshImpl
 		++record;
     }
 }
+#include STSTEM_WARNING_POP

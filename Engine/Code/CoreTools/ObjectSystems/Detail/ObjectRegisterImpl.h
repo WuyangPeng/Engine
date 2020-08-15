@@ -20,7 +20,7 @@ namespace CoreTools
 		using ClassType = ObjectRegisterImpl;
 
 	public:
-		ObjectRegisterImpl();
+		ObjectRegisterImpl() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -35,7 +35,7 @@ namespace CoreTools
 		using RegisterSequentialContainer = std::vector<ConstObjectInterfaceSmartPointer>;
 
 	private:
-		uint64_t GetOriginalUniqueID(const ConstObjectInterfaceSmartPointer& smartPointer) const;
+                uint64_t GetOriginalUniqueID(const ConstObjectInterfaceSmartPointer& smartPointer) const noexcept;
 
 	private:
 		// 存储objects，对顶层对象使用图的深度优先遍历。

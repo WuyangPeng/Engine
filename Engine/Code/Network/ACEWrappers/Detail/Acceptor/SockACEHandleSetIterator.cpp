@@ -18,11 +18,7 @@ Network::SockACEHandleSetIterator
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::SockACEHandleSetIterator
-	::~SockACEHandleSetIterator()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockACEHandleSetIterator)
 

@@ -30,36 +30,36 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 
 		void ApplyTo(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer);
-		void ApplyTo(Visual* visual);
+		void ApplyTo(const Visual* visual);
 	
-		const char* GetData() const;
-		int GetNumVertices () const;
-		int GetStride () const;		
+		const char* GetData() const noexcept;
+		int GetNumVertices () const noexcept;
+		int GetStride () const noexcept;		
   
 		// 通用访问顶点缓冲区中的数据。
 		// The Get*Channels()函数仅用于FLOAT{1,2,3,4}的数据有效，并返回浮点数属性的数目。
-		const char* GetPosition(int index) const;
-		bool HasPosition () const;
-		int GetPositionChannels () const;
-		const float* GetPositionTuple(int index) const;
+		const char* GetPosition(int index) const noexcept;
+		bool HasPosition () const noexcept;
+		int GetPositionChannels () const noexcept;
+		const float* GetPositionTuple(int index) const noexcept;
 		int GetPositionExcursion(int index) const;
     
-		const char* GetNormal(int index) const;
-		bool HasNormal () const;
-		int GetNormalChannels () const;
-		const float* GetNormalTuple(int index) const;
+		const char* GetNormal(int index) const noexcept;
+		bool HasNormal () const noexcept;
+		int GetNormalChannels () const noexcept;
+		const float* GetNormalTuple(int index) const noexcept;
 		int GetNormalExcursion(int index) const;		
 	    
-		const char* GetTangent(int index) const;
-		bool HasTangent () const;
-		int GetTangentChannels () const;
-		const float* GetTangentTuple(int index) const;
+		const char* GetTangent(int index) const noexcept;
+		bool HasTangent () const noexcept;
+		int GetTangentChannels () const noexcept;
+		const float* GetTangentTuple(int index) const noexcept;
 		int GetTangentExcursion(int index) const;
     
-		const char* GetBinormal(int index) const;
-		bool HasBinormal () const;
-		int GetBinormalChannels () const;
-		const float* GetBinormalTuple(int index) const;
+		const char* GetBinormal(int index) const noexcept;
+		bool HasBinormal () const noexcept;
+		int GetBinormalChannels () const noexcept;
+		const float* GetBinormalTuple(int index) const noexcept;
 		int GetBinormalExcursion(int index) const;
 		     
 		const char* GetTextureCoord(int unit, int index) const;
@@ -73,11 +73,11 @@ namespace Rendering
 		int GetColorChannels (int unit) const;
 		const float* GetColorTuple(int unit, int index) const;
     
-		const char* GetBlendIndices(int index) const;
-		bool HasBlendIndices () const;
+		const char* GetBlendIndices(int index) const noexcept;
+		bool HasBlendIndices () const noexcept; 
     
-		const char* GetBlendWeight(int index) const;
-		bool HasBlendWeight () const;
+		const char* GetBlendWeight(int index) const noexcept;
+		bool HasBlendWeight () const noexcept;
 		
 	private:		
 		void Initialize ();

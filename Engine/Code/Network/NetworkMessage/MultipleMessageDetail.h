@@ -54,7 +54,7 @@ bool Network::MultipleMessage<E, ByteType, Types...>
 
 template<typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 const CoreTools::Rtti& Network::MultipleMessage<E, ByteType, Types...>
-	::GetRttiType() const
+	::GetRttiType() const noexcept
 {
 	return sm_Type;
 }
@@ -78,9 +78,8 @@ Network::MessageInterfaceSharedPtr Network::MultipleMessage<E, ByteType, Types..
 }
 
 template<typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-Network::MultipleMessage<E, ByteType, Types...>
-	::MultipleMessage(LoadConstructor value, int64_t messageID)
-	: ParentType{ value,messageID }, m_Message{ }
+Network::MultipleMessage<E, ByteType, Types...>::MultipleMessage(LoadConstructor value, int64_t messageID) noexcept
+    : ParentType{ value, messageID }, m_Message{}
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }

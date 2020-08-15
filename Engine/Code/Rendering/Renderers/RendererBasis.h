@@ -19,20 +19,20 @@ namespace Rendering
 		using ClassType = RendererBasis;
 
 	public:
-		RendererBasis();
-		RendererBasis(int width,int height,TextureFormat colorFormat,TextureFormat depthStencilFormat,  int numMultisamples);
+		RendererBasis() noexcept;
+		RendererBasis(int width,int height,TextureFormat colorFormat,TextureFormat depthStencilFormat,  int numMultisamples) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 	
-		int GetWidth () const;
-		int GetHeight () const;	
-		TextureFormat GetColorFormat() const;
-		TextureFormat GetDepthStencilFormat() const;
-		int GetNumMultisamples() const;
+		int GetWidth () const noexcept;
+		int GetHeight () const noexcept;	
+		TextureFormat GetColorFormat() const noexcept;
+		TextureFormat GetDepthStencilFormat() const noexcept;
+		int GetNumMultisamples() const noexcept;
 
-		void SetSize(int width,int height);
-		void SetTextureFormat(TextureFormat colorFormat,TextureFormat depthStencilFormat);
-		void SetMultisamplesNumber(int numMultisamples);
+		void SetSize(int width,int height) noexcept;
+		void SetTextureFormat(TextureFormat colorFormat,TextureFormat depthStencilFormat) noexcept;
+		void SetMultisamplesNumber(int numMultisamples) noexcept;
 
 	private:
 		int m_WindowWidth;

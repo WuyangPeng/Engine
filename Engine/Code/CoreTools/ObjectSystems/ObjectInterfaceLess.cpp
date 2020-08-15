@@ -8,8 +8,13 @@
 
 #include "ObjectInterfaceLess.h"
 
-bool CoreTools::ObjectInterfaceSmartPointerLess
-	::operator()(const ConstObjectInterfaceSmartPointer& lhs, const ConstObjectInterfaceSmartPointer& rhs)
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
+bool CoreTools::ObjectInterfaceSmartPointerLess ::operator()(const ConstObjectInterfaceSmartPointer& lhs, const ConstObjectInterfaceSmartPointer& rhs) noexcept
 {
 	return lhs->GetUniqueID() < rhs->GetUniqueID();
 }
+#include STSTEM_WARNING_POP

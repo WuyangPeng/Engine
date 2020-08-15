@@ -22,7 +22,7 @@ namespace Rendering
 	public:
 		using ClassType = TextureManagement <PlatformTextureType>;
 		using TextureType = typename PlatformTextureType::TextureType;
-		using TextureConstPtr = CoreTools::ConstFourthSubclassSmartPointer<TextureType>;
+		using TextureConstPtr = std::shared_ptr<const TextureType>;
 		using PlatformTextureSharedPtr = std::shared_ptr<PlatformTextureType>;
 	    using RendererPtr = std::shared_ptr<Renderer>;
 

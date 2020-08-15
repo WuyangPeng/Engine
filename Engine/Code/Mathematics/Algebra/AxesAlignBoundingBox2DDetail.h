@@ -69,10 +69,18 @@ template <typename Real>
 bool Mathematics::AxesAlignBoundingBox2D<Real>
 	::IsValid() const noexcept
 {
-	if (m_MaxPoint.GetXCoordinate() < m_MinPoint.GetXCoordinate() || m_MaxPoint.GetYCoordinate() < m_MinPoint.GetYCoordinate())
+	try
+	{
+		if (m_MaxPoint.GetXCoordinate() < m_MinPoint.GetXCoordinate() || m_MaxPoint.GetYCoordinate() < m_MinPoint.GetYCoordinate())
+			return false;
+		else
+			return true;
+	}
+	catch(...)
+	{
 		return false;
-	else
-		return true;
+	}
+	
 }
 #endif // OPEN_CLASS_INVARIANT
 

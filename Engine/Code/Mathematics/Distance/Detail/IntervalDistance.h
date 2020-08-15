@@ -27,8 +27,8 @@ namespace Mathematics
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 	private:
-		virtual const DistanceResult Get(Real t) const override;
-		virtual Real GetDerivative(Real t) const override;
+		  const DistanceResult Get(Real t) const override;
+		  Real GetDerivative(Real t) const override;
 	};
 }
 

@@ -12,7 +12,12 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
-
+#include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ConvexRegion);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConvexRegion);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConvexRegion);
@@ -25,19 +30,23 @@ Rendering::ConvexRegion
 
 Rendering::ConvexRegion
 	::~ConvexRegion ()
+{EXCEPTION_TRY
 {
-    for (int i = 0; i < mNumPortals; ++i)
+for (int i = 0; i < mNumPortals; ++i)
     {
         DELETE0(mPortals[i]);
     }
     DELETE1(mPortals);
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+    
 }
 
 bool Rendering::ConvexRegion
 	::UpdateWorldData (double applicationTime)
 {
     // Update the region walls and contained objects.
-	bool result = Node::UpdateWorldData(applicationTime);
+const	bool result = Node::UpdateWorldData(applicationTime);
 
     // Update the portal geometry.
     for (int i = 0; i < mNumPortals; ++i)
@@ -75,7 +84,7 @@ const CoreTools::ObjectSmartPointer Rendering::ConvexRegion
 	:: GetObjectByName(const std::string& name)
 {
 	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -83,7 +92,7 @@ const CoreTools::ObjectSmartPointer Rendering::ConvexRegion
 	{
 	 
 		found = mPortals[i]->GetObjectByName(name);
-		if (found.IsValidPtr())
+		if (found )
 		{
 			return found;
 		}
@@ -112,7 +121,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::ConvexRegion
 	::GetConstObjectByName(const std::string& name) const
 {
 	CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
-	if (found.IsValidPtr())
+	if (found )
 	{
 		return found;
 	}
@@ -121,7 +130,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::ConvexRegion
 	{
 
 		found = mPortals[i]->GetObjectByName(name);
-		if (found.IsValidPtr())
+		if (found )
 		{
 			return found;
 		}
@@ -173,7 +182,7 @@ void Rendering::ConvexRegion
 {
     Node::Link(source);
 
-    source.ResolveObjectLink(mNumPortals, mPortals);
+  //  source.ResolveObjectLink(mNumPortals, mPortals);
 }
 
 void Rendering::ConvexRegion
@@ -187,7 +196,7 @@ uint64_t Rendering::ConvexRegion
 {
     if (Node::Register(target))
     {
-        target.Register(mNumPortals, mPortals);
+    //    target.Register(mNumPortals, mPortals);
         return true;
     }
     return false;
@@ -200,7 +209,7 @@ void Rendering::ConvexRegion
 
     Node::Save(target);
 
-    target.WritePointerWithNumber(mNumPortals, mPortals);
+   // target.WritePointerWithNumber(mNumPortals, mPortals);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE( target);
 }
@@ -216,14 +225,15 @@ int Rendering::ConvexRegion
 
 
  int Rendering::ConvexRegion
-	 ::GetNumPortals () const
+	 ::GetNumPortals () const noexcept
 {
 	return mNumPortals;
 }
 
  Rendering::Portal* Rendering::ConvexRegion
-	 ::GetPortal (int i) const
+	 ::GetPortal (int i) const noexcept
 {
 	return mPortals[i];
 }
 
+#include STSTEM_WARNING_POP

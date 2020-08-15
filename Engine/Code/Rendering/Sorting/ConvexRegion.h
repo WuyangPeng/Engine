@@ -29,15 +29,19 @@ namespace Rendering
 		// Construction and destruction.  ConvexRegion accepts responsibility
 		// for deleting the input array of Portal*.
 		ConvexRegion(int numPortals, Portal** portals);
-		virtual ~ConvexRegion();
+		  ~ConvexRegion();
+		  ConvexRegion(const ConvexRegion&) = default;
+		  ConvexRegion& operator=(const ConvexRegion&) = default;
+		   ConvexRegion( ConvexRegion&&) = default;
+		  ConvexRegion& operator=( ConvexRegion&&) = default;
 
 		// Portal access.
-		  int GetNumPortals() const;
-		  Portal* GetPortal(int i) const;
+		  int GetNumPortals() const noexcept;
+		  Portal* GetPortal(int i) const noexcept;
 
 	protected:
 		// Support for the geometric update.
-		virtual bool UpdateWorldData(double applicationTime);
+		  bool UpdateWorldData(double applicationTime) override;
 
 		// Portals of the region (these are not set up to be shared).
 		int mNumPortals;
@@ -53,13 +57,15 @@ namespace Rendering
 		// track which region the eyepoint is in using your own system, you will
 		// need to make sure the convex region that contains the camera position
 		// is the first one visited during a depth-first traversal of the scene.
-		virtual void GetVisibleSet(Culler& culler, bool noCull);
+		  void GetVisibleSet(Culler& culler, bool noCull) override;
 	};
  
- 
+  #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(ConvexRegion);
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, ConvexRegion);
-
+#include STSTEM_WARNING_POP
 }
 
 #endif // RENDERING_SORTING_CONVEX_REGION_H

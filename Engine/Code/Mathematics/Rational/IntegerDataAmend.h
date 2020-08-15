@@ -26,7 +26,7 @@ namespace Mathematics
 		using IntegerData = IntegerData<N>;
 
 	public:
-		explicit IntegerDataAmend(IntegerData& master);
+                explicit IntegerDataAmend(IntegerData& master) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

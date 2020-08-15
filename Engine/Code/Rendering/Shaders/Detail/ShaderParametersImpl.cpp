@@ -21,18 +21,26 @@
 using std::string;
 using std::vector;
 using std::swap;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26415)
+ #include SYSTEM_WARNING_DISABLE(26418)
+ #include SYSTEM_WARNING_DISABLE(26418)
+ #include SYSTEM_WARNING_DISABLE(26487)
+ #include SYSTEM_WARNING_DISABLE(26489)
+ #include SYSTEM_WARNING_DISABLE(26440)
 Rendering::ShaderParametersImpl
 	::ShaderParametersImpl(const ConstShaderBaseSmartPointer& shader)
 	:m_Shader{ shader }, m_Constants{}, m_Textures{}
 {
-	auto numConstants = m_Shader->GetNumConstants();
+    const auto numConstants = m_Shader->GetNumConstants();
 	if (0 < numConstants)
 	{
 		m_Constants.resize(numConstants);
 	}
 
-	auto numSamplers = m_Shader->GetNumSamplers();
+const auto numSamplers = m_Shader->GetNumSamplers();
 	if (0 < numSamplers)
 	{
 		m_Textures.resize(numSamplers);
@@ -41,9 +49,8 @@ Rendering::ShaderParametersImpl
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ShaderParametersImpl
-	::ShaderParametersImpl()
-	:m_Shader{}, m_Constants{}, m_Textures{}
+Rendering::ShaderParametersImpl ::ShaderParametersImpl() noexcept
+    : m_Shader{}, m_Constants{}, m_Textures{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;	
 }
@@ -91,20 +98,20 @@ void Rendering::ShaderParametersImpl
 	::Load( BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ReadSmartPointer(m_Shader);
-	source.ReadSmartPointer(m_Constants);
-	source.ReadSmartPointer(m_Textures);
+    source;
+	//source.ReadSmartPointer(m_Shader);
+	//source.ReadSmartPointer(m_Constants);
+	//source.ReadSmartPointer(m_Textures);
 }
 
 void Rendering::ShaderParametersImpl
 	::Save( BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.WriteSmartPointer(m_Shader);
-	target.WriteSmartPointer(m_Constants);
-	target.WriteSmartPointer(m_Textures);
+    target;
+	//target.WriteSmartPointer(m_Shader);
+	//target.WriteSmartPointer(m_Constants);
+	//target.WriteSmartPointer(m_Textures);
 }
 
 int Rendering::ShaderParametersImpl
@@ -124,17 +131,17 @@ void Rendering::ShaderParametersImpl
 	::Link(ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ResolveObjectConstSmartPointerLink(m_Shader);
+    source;
+	//source.ResolveObjectConstSmartPointerLink(m_Shader);
 
 	if (0 < m_Constants.size())
 	{
-		source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Constants.size()),&m_Constants[0]);
+		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Constants.size()),&m_Constants[0]);
 	}
 
 	if (0 < m_Textures.size())
 	{
-		source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Textures.size()), &m_Textures[0]);
+		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Textures.size()), &m_Textures[0]);
 	}
 }
 
@@ -142,17 +149,17 @@ void Rendering::ShaderParametersImpl
 	::Register(ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_Shader);
+    target;
+	//target.RegisterSmartPointer(m_Shader);
 
 	if (0 < m_Constants.size())
 	{
-		target.RegisterSmartPointer(boost::numeric_cast<int>(m_Constants.size()), &m_Constants[0]);
+		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Constants.size()), &m_Constants[0]);
 	}
 
 	if (0 < m_Textures.size())
 	{
-		target.RegisterSmartPointer(boost::numeric_cast<int>(m_Textures.size()), &m_Textures[0]);
+		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Textures.size()), &m_Textures[0]);
 	}
 }
 
@@ -286,7 +293,7 @@ const Rendering::ShaderParametersImpl::ConstShaderFloatSmartPointerGather Render
 
 	for (const auto& pointer: m_Constants)
 	{
-		gather.push_back(pointer.PolymorphicCastConstObjectSmartPointer<ConstShaderFloatSmartPointer>());
+		gather.push_back(pointer );
 	}
 
 	return gather;
@@ -301,7 +308,7 @@ const Rendering::ShaderParametersImpl::ConstTextureSmartPointerGather Rendering:
 
 	for (const auto& pointer: m_Textures)
 	{
-		gather.push_back(pointer.PolymorphicCastConstObjectSmartPointer<ConstTextureSmartPointer>());
+		gather.push_back(pointer );
 	}
 
 	return gather;
@@ -312,7 +319,7 @@ int Rendering::ShaderParametersImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto numConstants = GetNumConstants();
+const auto numConstants = GetNumConstants();
 
 	for (auto index = 0; index < numConstants; ++index)
 	{
@@ -323,7 +330,7 @@ int Rendering::ShaderParametersImpl
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("找不到常量！\n"));
+	THROW_EXCEPTION(SYSTEM_TEXT("找不到常量！\n"s));
 }
 
 void Rendering::ShaderParametersImpl
@@ -340,7 +347,7 @@ int Rendering::ShaderParametersImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	auto numTextures = GetNumTextures();
+const auto numTextures = GetNumTextures();
 
 	for (auto index = 0; index < numTextures; ++index)
     {
@@ -351,7 +358,7 @@ int Rendering::ShaderParametersImpl
         }
     }
 
-	THROW_EXCEPTION(SYSTEM_TEXT("找不到纹理！\n"));
+	THROW_EXCEPTION(SYSTEM_TEXT("找不到纹理！\n"s));
 }
 
 void Rendering::ShaderParametersImpl
@@ -368,7 +375,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::ShaderParametersImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto numConstants = GetNumConstants();
+const auto numConstants = GetNumConstants();
 
 	for (auto index = 0; index < numConstants; ++index)
 	{
@@ -378,7 +385,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::ShaderParametersImpl
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("找不到常量！\n"));
+	THROW_EXCEPTION(SYSTEM_TEXT("找不到常量！\n"s));
 }
 
 const Rendering::ConstShaderFloatSmartPointer Rendering::ShaderParametersImpl
@@ -387,7 +394,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::ShaderParametersImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= handle && handle < GetNumConstants(), "索引越界！\n");
 
-	return m_Constants[handle].PolymorphicCastConstObjectSmartPointer<ConstShaderFloatSmartPointer>();
+	return m_Constants[handle] ;
 }
 
 const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
@@ -395,7 +402,7 @@ const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto numTextures = GetNumTextures();
+	const auto numTextures = GetNumTextures();
 
 	for (auto index = 0; index < numTextures; ++index)
 	{
@@ -405,7 +412,7 @@ const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
 		}
 	}
 
-	THROW_EXCEPTION(SYSTEM_TEXT("找不到纹理！\n"));
+	THROW_EXCEPTION(SYSTEM_TEXT("找不到纹理！\n"s));
 }
 
 const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
@@ -414,7 +421,7 @@ const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= handle && handle < GetNumTextures(), "索引越界！\n");
 
-	return m_Textures[handle].PolymorphicCastConstObjectSmartPointer<ConstTextureSmartPointer>();
+	return m_Textures[handle] ;
 }
 
 void Rendering::ShaderParametersImpl
@@ -426,7 +433,8 @@ void Rendering::ShaderParametersImpl
 	{
 		if (constant->AllowUpdater())
 		{
-			constant->Update(visual.GetData(), camera.GetData());
+			constant->Update(visual.get(), camera.get());
 		}
 	}	 
 }
+#include STSTEM_WARNING_POP

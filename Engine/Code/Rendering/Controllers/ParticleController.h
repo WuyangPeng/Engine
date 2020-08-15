@@ -28,28 +28,30 @@ namespace Rendering
 	public:
 		// 所连接的对象必须是Particles。
 		ParticleController();
-		virtual ~ParticleController();
+		  ~ParticleController();
+		  ParticleController(ParticleController&&) = default;
+		  ParticleController& operator=(ParticleController&&) = default;
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ParticleController); 
 		
-		float GetSystemLinearSpeed() const;
-		void SetSystemLinearSpeed(float systemLinearSpeed);
-		float GetSystemAngularSpeed() const;
-		void SetSystemAngularSpeed(float systemAngularSpeed);
-		const AVector GetSystemLinearAxis() const;
-		void SetSystemLinearAxis(const AVector& systemLinearAxis);
-		const AVector GetSystemAngularAxis() const;
-		void SetSystemAngularAxis(const AVector& systemAngularAxis);
-		float GetSystemSizeChange() const;
-		void SetSystemSizeChange(float systemSizeChange);
+		float GetSystemLinearSpeed() const noexcept;
+		void SetSystemLinearSpeed(float systemLinearSpeed) noexcept;
+		float GetSystemAngularSpeed() const noexcept;
+		void SetSystemAngularSpeed(float systemAngularSpeed) noexcept;
+		const AVector GetSystemLinearAxis() const noexcept;
+		void SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept;
+		const AVector GetSystemAngularAxis() const noexcept;
+		void SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept;
+		float GetSystemSizeChange() const noexcept;
+		void SetSystemSizeChange(float systemSizeChange) noexcept;
 
 	    // 粒子运动，在该系统的模型空间。速度矢量应为单位的长度。
 		// 其中点代表一个刚体在应用程序，
 		// 你可以选择该系统的原点为粒子的质量中心和
 		// 坐标轴对应于惯性张量的主方向。
-		int GetNumParticles() const;
+		int GetNumParticles() const noexcept;
 		float GetParticleLinearSpeed(int index) const; 
 		const AVector GetParticleLinearAxis(int index) const;
 		float GetParticleSizeChange(int index) const;
@@ -59,9 +61,9 @@ namespace Rendering
 		void SetParticleSizeChange(int index, float particleSizeChange);		
 
 		// 动画更新。应用程序时间以毫秒为单位。
-		virtual bool Update(double applicationTime) override;
-		virtual void SetObject(ControllerInterface* object) override;
-		virtual void SetObjectInCopy(ControllerInterface* object) override;
+		 bool Update(double applicationTime) override;
+		 void SetObject(ControllerInterface* object) override;
+		 void SetObjectInCopy(ControllerInterface* object) override;
 		
 	protected:
 		// 对于粒子运动数组的延迟分配。

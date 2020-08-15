@@ -41,7 +41,7 @@ namespace Mathematics
 	// are not the sample points.  However, this requires generating random
 	// points to get the axes and, well, you can see the problem...
 
-	MATHEMATICS_TEMPLATE_DEFAULT_DECLARE void Histogram(int dimension, double angle, int numPoints, double** points, int* histogram);
+	MATHEMATICS_TEMPLATE_DEFAULT_DECLARE void Histogram(int dimension, double angle, int numPoints, double** points, int* histogram) noexcept;
 
 	//An example of how to use these functions.
 	//

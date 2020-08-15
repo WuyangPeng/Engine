@@ -20,7 +20,11 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
 Rendering::SkinControllerImpl
 	::SkinControllerImpl(int numVertices, int numBones)
 	:m_NumVertices{ numVertices },m_NumBones{ numBones },m_Size{ numVertices * numBones },
@@ -29,9 +33,8 @@ Rendering::SkinControllerImpl
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SkinControllerImpl
-	::SkinControllerImpl() 
-	:m_NumVertices{ 0 }, m_NumBones{ 0 }, m_Size{ 0 },
+Rendering::SkinControllerImpl ::SkinControllerImpl() noexcept
+    : m_NumVertices{ 0 }, m_NumBones{ 0 }, m_Size{ 0 },
 	 m_Bones{}, m_Weights{}, m_Offsets{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -48,16 +51,14 @@ bool Rendering::SkinControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-int Rendering::SkinControllerImpl
-	::GetNumVertices() const
+int Rendering::SkinControllerImpl ::GetNumVertices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumVertices;
 }
 
-int Rendering::SkinControllerImpl
-	::GetNumBones() const
+int Rendering::SkinControllerImpl ::GetNumBones() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -80,7 +81,7 @@ float Rendering::SkinControllerImpl
 	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < m_NumVertices, "Ë÷Òý´íÎó£¡");
 
-	auto index = verticesIndex + bonesIndex * m_NumVertices;
+	const auto index = verticesIndex + bonesIndex * m_NumVertices;
 
 	RENDERING_ASSERTION_0(0 <= index && index < m_Size, "Ë÷Òý´íÎó£¡");
 
@@ -94,7 +95,7 @@ const Rendering::SkinControllerImpl::APoint Rendering::SkinControllerImpl
 	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < m_NumVertices, "Ë÷Òý´íÎó£¡");
 
-	auto index = verticesIndex + bonesIndex * m_NumVertices;
+	const auto index = verticesIndex + bonesIndex * m_NumVertices;
 
 	RENDERING_ASSERTION_0(0 <= index && index < m_Size, "Ë÷Òý´íÎó£¡");
 
@@ -126,7 +127,7 @@ void Rendering::SkinControllerImpl
 	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < m_NumVertices, "Ë÷Òý´íÎó£¡");
 
-	auto index = verticesIndex + bonesIndex * m_NumVertices;
+	const auto index = verticesIndex + bonesIndex * m_NumVertices;
 
 	RENDERING_ASSERTION_0(0 <= index && index < m_Size, "Ë÷Òý´íÎó£¡");
 
@@ -139,7 +140,7 @@ void Rendering::SkinControllerImpl
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_2(boost::numeric_cast<int>(weights.size()) == m_NumVertices, "´«ÈëµÄ¹Ç÷À´óÐ¡´íÎó");
 
-	auto beginIndex = bonesIndex * m_NumVertices;
+	const auto beginIndex = bonesIndex * m_NumVertices;
 	RENDERING_ASSERTION_0(0 <= beginIndex && beginIndex < m_Size, "Ë÷Òý´íÎó£¡");
 
 	RENDERING_ASSERTION_0(0 <= beginIndex + m_NumVertices - 1 &&  beginIndex + m_NumVertices - 1 < m_Size, "Ë÷Òý´íÎó£¡");
@@ -157,7 +158,7 @@ void Rendering::SkinControllerImpl
 	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < m_NumVertices, "Ë÷Òý´íÎó£¡");
 
-	auto index = verticesIndex + bonesIndex * m_NumVertices;
+	const auto index = verticesIndex + bonesIndex * m_NumVertices;
 
 	RENDERING_ASSERTION_0(0 <= index && index < m_Size, "Ë÷Òý´íÎó£¡");
 
@@ -170,7 +171,7 @@ void Rendering::SkinControllerImpl
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_2(boost::numeric_cast<int>(offsets.size()) == m_NumVertices, "´«ÈëµÄ¹Ç÷À´óÐ¡´íÎó");
 
-	auto beginIndex = bonesIndex * m_NumVertices;
+	const auto beginIndex = bonesIndex * m_NumVertices;
 	RENDERING_ASSERTION_0(0 <= beginIndex && beginIndex < m_Size, "Ë÷Òý´íÎó£¡");
 	RENDERING_ASSERTION_0(0 <= beginIndex + m_NumVertices - 1 && beginIndex + m_NumVertices - 1 < m_Size, "Ë÷Òý´íÎó£¡");
 
@@ -203,7 +204,7 @@ void Rendering::SkinControllerImpl
 	target.Write(m_NumVertices);
 	target.Write(m_NumBones);
 
-	target.WriteSmartPointerWithoutNumber(m_NumBones, &m_Bones[0]);
+//	target.WriteSmartPointerWithoutNumber(m_NumBones, &m_Bones[0]);
 	target.WriteWithoutNumber(m_Size, &m_Weights[0]);
 	target.WriteAggregateWithoutNumber(m_Size, &m_Offsets[0]);
 }
@@ -220,7 +221,7 @@ void Rendering::SkinControllerImpl
 	m_Weights.resize(m_Size);
 	m_Offsets.resize(m_Size);
 	 
-	source.ReadSmartPointer(m_NumBones, &m_Bones[0]);
+//	source.ReadSmartPointer(m_NumBones, &m_Bones[0]);
 	source.Read(m_Size, &m_Weights[0]);
 	source.ReadAggregate(m_Size, &m_Offsets[0]);	
 }
@@ -229,15 +230,18 @@ void Rendering::SkinControllerImpl
 	::Link(CoreTools::ObjectLink& source) 
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	source.ResolveObjectConstSmartPointerLink(m_NumBones, &m_Bones[0]);
+    CoreTools::DoNothing();
+    source;
+    //	source.ResolveObjectConstSmartPointerLink(m_NumBones, &m_Bones[0]);
 }
 
 void Rendering::SkinControllerImpl
 	::Register(CoreTools::ObjectRegister& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	target.RegisterSmartPointer(m_NumBones, &m_Bones[0]);
+    target;
+    CoreTools::DoNothing();
+	//target.RegisterSmartPointer(m_NumBones, &m_Bones[0]);
 }
  
+#include STSTEM_WARNING_POP

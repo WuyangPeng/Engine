@@ -58,7 +58,7 @@ bool CoreTools::MinHeapRecordStoredManager<Generator, Scalar>
 {
 	try
 	{
-		auto maxElements = m_RecordStoreds.GetMaxElements();
+		const auto maxElements = m_RecordStoreds.GetMaxElements();
 
 		for (auto index = 0; index < maxElements; ++index)
 		{
@@ -187,8 +187,8 @@ void CoreTools::MinHeapRecordStoredManager<Generator, Scalar>
 {
 	CORE_TOOLS_CLASS_IS_VALID_8;
 
-	auto lhsUniqueIndex = m_RecordStoreds.GetUniqueIndex(lhsHeapIndex);
-	auto rhsUniqueIndex = m_RecordStoreds.GetUniqueIndex(rhsHeapIndex);
+	const auto lhsUniqueIndex = m_RecordStoreds.GetUniqueIndex(lhsHeapIndex);
+	const auto rhsUniqueIndex = m_RecordStoreds.GetUniqueIndex(rhsHeapIndex);
 
 	m_RecordStoreds.ChangeValue(lhsHeapIndex, rhsHeapIndex);
 	m_RecordIndexes.ChangeIndex(lhsUniqueIndex, rhsUniqueIndex);

@@ -14,7 +14,15 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26429)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TubeSurface);  
@@ -26,7 +34,7 @@ Rendering::TubeSurface
      mNumSliceSamples(numSliceSamples), mUpVector(upVector),mSin(0), mCos(0), mClosed(closed), mSampleByArcLength(sampleByArcLength)
 {
     // Compute the surface vertices.
-    int numVertices;
+    int numVertices = 0;
     if (mClosed)
     {
         numVertices = (mNumSliceSamples + 1)*(mNumMedialSamples + 1);
@@ -37,8 +45,8 @@ Rendering::TubeSurface
     }
 
     SetVertexFormat(vformat);
-    int vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBufferSmartPointer(NEW0 VertexBuffer(numVertices, vstride)));
+     const int vstride = vformat->GetStride();
+    SetVertexBuffer(VertexBufferSmartPointer(std::make_shared< VertexBuffer>(numVertices, vstride)));
 
     ComputeSinCos();
     ComputeVertices();
@@ -64,9 +72,14 @@ Rendering::TubeSurface
 Rendering::TubeSurface
 	::~TubeSurface ()
 {
-    DELETE0(mMedial);
+	EXCEPTION_TRY
+{
+ DELETE0(mMedial);
     DELETE1(mSin);
     DELETE1(mCos);
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+    
 }
 
 void Rendering::TubeSurface
@@ -79,10 +92,10 @@ void Rendering::TubeSurface
     mSin = NEW1<float>(mNumSliceSamples + 1);
     mCos = NEW1<float>(mNumSliceSamples + 1);
 
-    float invSliceSamples = 1.0f/(float)mNumSliceSamples;
+    const float invSliceSamples = 1.0f/(float)mNumSliceSamples;
     for (int i = 0; i < mNumSliceSamples; ++i)
     {
-        float angle = Mathematics:: Mathf::sm_TwoPI*invSliceSamples*i;
+       const float angle = Mathematics:: Mathf::sm_TwoPI*invSliceSamples*i;
         mCos[i] = Mathematics::Mathf::Cos(angle);
         mSin[i] = Mathematics::Mathf::Sin(angle);
     }
@@ -93,11 +106,11 @@ void Rendering::TubeSurface
 void Rendering::TubeSurface
 	::ComputeVertices ()
 {
-    float tMin = mMedial->GetMinTime();
-    float tRange = mMedial->GetMaxTime() - tMin;
+   const float tMin = mMedial->GetMinTime();
+   const float tRange = mMedial->GetMaxTime() - tMin;
 
     // Sampling by arc length requires the total length of the curve.
-    float totalLength;
+    float totalLength = 0.0f;
     if (mSampleByArcLength)
     {
         totalLength = mMedial->GetTotalLength();
@@ -108,7 +121,7 @@ void Rendering::TubeSurface
     }
 
     // Vertex construction requires a normalized time (uses a division).
-    float denom;
+    float denom = 0.0f;
     if (mClosed)
     {
         denom = 1.0f/(float)mNumMedialSamples;
@@ -122,7 +135,7 @@ void Rendering::TubeSurface
 
     for (int m = 0, v = 0; m < mNumMedialSamples; ++m, ++v)
     {
-        float t;
+        float t= 0.0f;
         if (mSampleByArcLength)
         {
             t = mMedial->GetTime(m*totalLength*denom);
@@ -181,8 +194,8 @@ void Rendering::TubeSurface
 void Rendering::TubeSurface
 	::ComputeNormals ()
 {
-    int s, sM1, sP1, m, mM1, mP1;
-    Mathematics::Vector3Df dir0, dir1;
+    int s = 0, sM1= 0, sP1= 0, m= 0, mM1= 0, mP1= 0;
+    const Mathematics::Vector3Df dir0, dir1;
 
     VertexBufferAccessor vba(this);
 
@@ -286,17 +299,17 @@ void Rendering::TubeSurface
     VertexBufferAccessor vba(this);
 
     Mathematics::Float2 tcoordRange(tcoordMax.GetFirstValue() - tcoordMin.GetFirstValue(), tcoordMax.GetSecondValue() - tcoordMin.GetSecondValue() );
-    int mMax = (mClosed ? mNumMedialSamples : mNumMedialSamples - 1);
+    const int mMax = (mClosed ? mNumMedialSamples : mNumMedialSamples - 1);
     for (int m = 0, v = 0; m <= mMax; m++)
     {
-        float mRatio = ((float)m)/((float)mMax);
-        float mValue = tcoordMin.GetSecondValue() + mRatio*tcoordRange.GetSecondValue();
+        const float mRatio = ((float)m)/((float)mMax);
+        const float mValue = tcoordMin.GetSecondValue() + mRatio*tcoordRange.GetSecondValue();
         for (int s = 0; s <= mNumSliceSamples; ++s, ++v)
         {
-            float sRatio = ((float)s)/((float)mNumSliceSamples);
-            float sValue = tcoordMin.GetFirstValue() + sRatio*tcoordRange.GetFirstValue();
+           const float sRatio = ((float)s)/((float)mNumSliceSamples);
+           const float sValue = tcoordMin.GetFirstValue() + sRatio*tcoordRange.GetFirstValue();
               Mathematics::Float2 tcoord(sValue, mValue);
-            const int numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
+            constexpr int numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
             for (int unit = 0; unit < numTCoords; ++unit)
             {
                 if (vba.HasTextureCoord(unit))
@@ -314,7 +327,7 @@ void Rendering::TubeSurface
 	::ComputeIndices (bool insideView)
 {
 	insideView;
-    int numTriangles;
+    int numTriangles = 0;
     if (mClosed)
     {
         numTriangles = 2*mNumSliceSamples*mNumMedialSamples;
@@ -324,7 +337,7 @@ void Rendering::TubeSurface
         numTriangles = 2*mNumSliceSamples*(mNumMedialSamples-1);
     }
 
-    SetIndexBuffer(IndexBufferSmartPointer(NEW0 IndexBuffer(3*numTriangles, sizeof(int))));
+    SetIndexBuffer(IndexBufferSmartPointer(std::make_shared < IndexBuffer>(3 * numTriangles,(int) sizeof(int))));
 
 	/*
     int* indices = (int*)mIBuffer->GetData();
@@ -420,7 +433,7 @@ void Rendering::TubeSurface
     {
         ComputeNormals();
     }
-	RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer().GetData()); 
+	RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer().get()); 
 }
 
 
@@ -518,56 +531,56 @@ int Rendering::TubeSurface
 
 
  void Rendering::TubeSurface
-	 ::SetMedial(Mathematics:: Curve3f* medial)
+	 ::SetMedial(Mathematics:: Curve3f* medial) noexcept
 {
 	mMedial = medial;
 }
 
  const Mathematics::Curve3f* Rendering::TubeSurface
-	 ::GetMedial() const
+	 ::GetMedial() const noexcept
 {
 	return mMedial;
 }
 
  void Rendering::TubeSurface
-	 ::SetRadial(RadialFunction radial)
+	 ::SetRadial(RadialFunction radial) noexcept
 {
 	mRadial = radial;
 }
 
  Rendering::TubeSurface::RadialFunction Rendering::TubeSurface
-	 ::GetRadial() const
+	 ::GetRadial() const noexcept
 {
 	return mRadial;
 }
 
  void Rendering::TubeSurface
-	 ::SetUpVector(const Mathematics::Vector3Df& upVector)
+	 ::SetUpVector(const Mathematics::Vector3Df& upVector) noexcept
 {
 	mUpVector = upVector;
 }
 
  const Mathematics::Vector3Df& Rendering::TubeSurface
-	 ::GetUpVector() const
+	 ::GetUpVector() const noexcept
 {
 	return mUpVector;
 }
 
  int Rendering::TubeSurface
-	 ::GetNumMedialSamples() const
+	 ::GetNumMedialSamples() const noexcept
 {
 	return mNumMedialSamples;
 }
 
  int Rendering::TubeSurface
-	 ::GetNumSliceSamples() const
+	 ::GetNumSliceSamples() const noexcept
 {
 	return mNumSliceSamples;
 }
 
- int Rendering::TubeSurface
-	 ::Index(int s, int m)
+ int Rendering::TubeSurface ::Index(int s, int m) noexcept
 {
 	return s + (mNumSliceSamples + 1)*m;
 }
 
+ #include STSTEM_WARNING_POP

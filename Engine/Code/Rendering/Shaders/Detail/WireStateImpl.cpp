@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::WireStateImpl
-	::WireStateImpl()
+	::WireStateImpl() noexcept
 	:m_Enabled{ false }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -44,21 +44,19 @@ int Rendering::WireStateImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Enabled);	
+	const auto size = CORE_TOOLS_STREAM_SIZE(m_Enabled);	
 
 	return size;
 }
 
-bool Rendering::WireStateImpl
-	::IsEnabled() const
+bool Rendering::WireStateImpl ::IsEnabled() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Enabled;
 }
 
-void Rendering::WireStateImpl
-	::SetEnabled( bool enabled )
+void Rendering::WireStateImpl ::SetEnabled(bool enabled) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -70,7 +68,7 @@ void Rendering::WireStateImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto enabled = (m_Enabled ? 1 : 0);
+const	auto enabled = (m_Enabled ? 1 : 0);
 
 	manager.Write(sizeof(int), &enabled);
 }

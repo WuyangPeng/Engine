@@ -21,7 +21,11 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26493)
 template <typename Texture>
 Rendering::OpenGLTextureData<Texture>
 	::OpenGLTextureData( const Texture* texture )
@@ -32,7 +36,7 @@ Rendering::OpenGLTextureData<Texture>
 {
 	CreatePixelBufferObjects(texture);
 	InitRemainData();
-	auto previousBind = CreateTextureStructure();
+	const auto previousBind = CreateTextureStructure();
 	CreateMipmapLevelStructures(texture,previousBind);	
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -43,7 +47,7 @@ template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>
 	::CreatePixelBufferObjects(const Texture* texture)
 {
-	auto usage = g_OpenGLBufferUsage[System::EnumCastUnderlying(texture->GetUsage())];
+	const auto usage = g_OpenGLBufferUsage[System::EnumCastUnderlying(texture->GetUsage())];
 
 	// 创建像素缓冲器的对象来存储纹理数据。
 	for (auto level = 0u; level < m_NumLevels; ++level)
@@ -67,7 +71,7 @@ void Rendering::OpenGLTextureData<Texture>
 // private
 template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>
-	::InitRemainData()
+	::InitRemainData() noexcept
 {
 	for (auto level = m_NumLevels; level < TextureMaximumMipmapLevels; ++level)
 	{
@@ -90,11 +94,11 @@ void Rendering::OpenGLTextureData<Texture>
 // private
 template <typename Texture>
 System::OpenGLUInt Rendering::OpenGLTextureData<Texture>
-	::CreateTextureStructure()
+	::CreateTextureStructure() noexcept
 {
 	// 创建纹理结构。
 	m_Texture = System::GlGenTextures();
-	auto previousBind = BindTexture(sm_SamplerType, m_Texture);
+	const auto previousBind = BindTexture(sm_SamplerType, m_Texture);
 
 	return previousBind;
 }
@@ -147,7 +151,7 @@ bool Rendering::OpenGLTextureData<Texture>
 
 template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>
-	::Enable( int textureUnit )
+	::Enable( int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -158,7 +162,7 @@ void Rendering::OpenGLTextureData<Texture>
 
 template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>
-	::Disable( int textureUnit )
+	::Disable( int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -169,7 +173,7 @@ void Rendering::OpenGLTextureData<Texture>
 
 template <typename Texture>
 void* Rendering::OpenGLTextureData<Texture>
-	::Lock( int level, BufferLocking mode )
+	::Lock( int level, BufferLocking mode ) noexcept
 {
 	static_assert(TextureDataTraits<Texture>::sm_TextureType != TextureFlags::TextureCube);
 
@@ -188,7 +192,7 @@ void* Rendering::OpenGLTextureData<Texture>
 
 template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>
-	::Unlock( int level )
+	::Unlock( int level ) noexcept
 {
 	static_assert(TextureDataTraits<Texture>::sm_TextureType != TextureFlags::TextureCube);
 
@@ -201,7 +205,7 @@ void Rendering::OpenGLTextureData<Texture>
 
         if (m_WriteLock[0][level])
         {
-            GLuint previousBind = BindTexture(sm_SamplerType, m_Texture);
+            const GLuint previousBind = BindTexture(sm_SamplerType, m_Texture);
 
 			TextureImage(level);			
 			
@@ -216,19 +220,19 @@ void Rendering::OpenGLTextureData<Texture>
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture1D>
-	::TextureImage(int level);
+	::TextureImage(int level) noexcept;
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture2D>
-	::TextureImage(int level);
+	::TextureImage(int level) noexcept;
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture3D>
-	::TextureImage(int level);
+	::TextureImage(int level) noexcept;
 
 template <typename Texture>
 void* Rendering::OpenGLTextureData<Texture>
-	::Lock( int face, int level, BufferLocking mode )
+	::Lock( int face, int level, BufferLocking mode ) noexcept
 {
 	static_assert(TextureDataTraits<Texture>::sm_TextureType == TextureFlags::TextureCube);
 
@@ -246,7 +250,7 @@ void* Rendering::OpenGLTextureData<Texture>
 
 template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>
-	::Unlock( int face, int level )
+	::Unlock( int face, int level ) noexcept
 {
 	static_assert(TextureDataTraits<Texture>::sm_TextureType == TextureFlags::TextureCube);
 
@@ -259,7 +263,7 @@ void Rendering::OpenGLTextureData<Texture>
 
         if (m_WriteLock[face][level])
         {
-            UInt previousBind = BindTexture(TextureDataTraits<Texture>::sm_SamplerType, m_Texture);
+            const UInt previousBind = BindTexture(TextureDataTraits<Texture>::sm_SamplerType, m_Texture);
 
             if (m_IsCompressed)
             {
@@ -295,11 +299,11 @@ void Rendering::OpenGLTextureData<Texture>
 
 template <typename Texture>
 System::OpenGLUInt Rendering::OpenGLTextureData<Texture>
-	::GetTexture() const
+	::GetTexture() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_Texture;
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_DETAIL_H

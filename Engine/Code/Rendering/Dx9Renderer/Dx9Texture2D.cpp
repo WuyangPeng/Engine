@@ -9,10 +9,12 @@
 #include "Dx9Texture2D.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/UnusedMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 Rendering::Dx9Texture2D
 	::Dx9Texture2D( Renderer* renderer, const Texture2D* texture ) 
-{	
+{
+    CoreTools::DoNothing();
 	SYSTEM_UNUSED_ARG(renderer);
 	SYSTEM_UNUSED_ARG(texture);
 	/*
@@ -55,6 +57,7 @@ Rendering::Dx9Texture2D
 Rendering::Dx9Texture2D
 	::Dx9Texture2D(Renderer* renderer, bool isColortexture, const Texture2D* texture,bool autoGenMipMap)
 {
+    CoreTools::DoNothing();
 	renderer; isColortexture; texture;
 	autoGenMipMap;
 	/*
@@ -106,7 +109,7 @@ void Rendering::Dx9Texture2D
 	::Enable( Renderer* renderer, int textureUnit )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    CoreTools::DoNothing();
 	/*
 	 IDirect3DDevice9* device = renderer->mData->mDevice;
 
@@ -123,7 +126,7 @@ void Rendering::Dx9Texture2D
 	::Disable( Renderer* renderer, int textureUnit )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    CoreTools::DoNothing();
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
 	HRESULT hr;
@@ -152,7 +155,7 @@ void* Rendering::Dx9Texture2D
 	::Lock( int level, BufferLocking mode )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    CoreTools::DoNothing();
 	/*
 	 D3DLOCKED_RECT rect;
 	 HRESULT hr = mTexture->LockRect((UINT)level, &rect, 0,
@@ -172,7 +175,7 @@ void Rendering::Dx9Texture2D
 	::Unlock( int level )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
+    CoreTools::DoNothing();
 	/*
 	 HRESULT hr = mTexture->UnlockRect((UINT)level);
 	 WM5_UNUSED(hr);
@@ -185,6 +188,7 @@ void Rendering::Dx9Texture2D
 System::OpenGLUInt Rendering::Dx9Texture2D
 	::GetTexture() const
 {
+    CoreTools::DoNothing();
 	return 0;
 }
 

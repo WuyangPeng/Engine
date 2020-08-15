@@ -19,7 +19,9 @@
 
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering,ShaderBase);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ShaderBase);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ShaderBase); 
@@ -167,9 +169,10 @@ void Rendering::ShaderBase
 	return m_Impl->LoadShader(manager, numProfiles);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderBase,GetProfile,const Rendering::ConstShaderProfileDataSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderBase, GetProfile, Rendering::ShaderProfileDataSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderBase,GetProfile,const Rendering::ConstShaderProfileDataSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderBase, GetProfile, Rendering::ShaderProfileDataSmartPointer)
 									  
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderBase,SetProfile, ShaderProfileDataSmartPointer,void)							
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, ShaderBase, SetProfile, ShaderProfileDataSmartPointer, void)							
 									
  
+#include STSTEM_WARNING_POP

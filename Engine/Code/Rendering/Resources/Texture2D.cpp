@@ -16,7 +16,11 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering,Texture2D);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Texture2D);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,Texture2D); 
@@ -37,17 +41,22 @@ Rendering::Texture2D
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
     
-    RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+    EXCEPTION_TRY
+    {
+        RENDERER_MANAGE_SINGLETON.UnbindAll(this);
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
+    
 }
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Texture2D) 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,GetFormat,Rendering::TextureFormat)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,GetTextureType,Rendering::TextureFlags)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,GetUsage,Rendering::BufferUsage)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,GetNumLevels,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Texture2D,GetFormat,Rendering::TextureFormat)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetTextureType, Rendering::TextureFlags)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetUsage, Rendering::BufferUsage)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumLevels, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,GetNumDimensions,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumDimensions, int)
 
 
 int Rendering::Texture2D
@@ -59,12 +68,12 @@ int Rendering::Texture2D
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture2D,GetNumLevelBytes,int,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,GetNumTotalBytes,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumTotalBytes, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture2D,GetLevelOffset,int,int)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,GetPixelSize,int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,IsCompressed,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, IsCompressed, bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture2D,IsMipmapable,bool)
 
@@ -98,7 +107,7 @@ void Rendering::Texture2D
         
         m_Impl->GenerateMipmaps();
         
-        auto numLevels = m_Impl->GetNumLevels();
+       const auto numLevels = m_Impl->GetNumLevels();
         
         for (auto level = 0; level < numLevels; ++level)
         {
@@ -188,8 +197,9 @@ Rendering::TextureSmartPointer Rendering::Texture2D
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return TextureSmartPointer{ NEW0 ClassType(*this) };
+	return TextureSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 
 
+#include STSTEM_WARNING_POP

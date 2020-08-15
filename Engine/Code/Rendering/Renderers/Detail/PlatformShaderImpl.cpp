@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::PlatformShaderImpl
-	::PlatformShaderImpl()	
+	::PlatformShaderImpl()	noexcept
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

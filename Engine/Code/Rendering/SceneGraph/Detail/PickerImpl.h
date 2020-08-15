@@ -35,7 +35,7 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 
-		bool IsRecordsExist() const;
+		bool IsRecordsExist() const noexcept;
 		
 		// 以下三个函数返回满足约束的记录。
 		// 他们应该在0 < m_Records.GetSize()时调用。

@@ -41,9 +41,9 @@ namespace Rendering
 	public:
 		explicit Triangles(VisualPrimitiveType type = VisualPrimitiveType::Triangles);
 		Triangles(VisualPrimitiveType type,const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer);
-		virtual ~Triangles();
+ 
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_OBJECT_FACTORY_DECLARE(Triangles);
 		CORE_TOOLS_RTTI_OVERRIDE_DECLARE;	
@@ -60,9 +60,9 @@ namespace Rendering
 		int GetNumVertices () const;
 		const Vector3D GetPosition(int vertexIndex) const;
 		
-		virtual void UpdateModelSpace(VisualUpdateType type) override;
+		  void UpdateModelSpace(VisualUpdateType type) override;
 
-		virtual const PickRecordContainer ExecuteRecursive(const APoint& origin,const AVector& direction, float tMin, float tMax) const override;
+		  const PickRecordContainer ExecuteRecursive(const APoint& origin,const AVector& direction, float tMin, float tMax) const override;
 		
 	private:
 		// 支持几何更新

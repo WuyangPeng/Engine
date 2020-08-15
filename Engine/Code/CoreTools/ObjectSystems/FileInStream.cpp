@@ -37,7 +37,7 @@ void CoreTools::FileInStream
 {
 	ReadFileManager manager{ fileName };
 
-	auto readSize = manager.GetFileByteSize();
+	const auto readSize = manager.GetFileByteSize();
 
 	// 获取该文件的版本。
 	auto version = Version::GetVersion();
@@ -48,11 +48,11 @@ void CoreTools::FileInStream
 		THROW_EXCEPTION(fileName + SYSTEM_TEXT("版本字符串不存在或者存储的版本字符串不够大"));
 	}
 
-	BufferInStream::FileBufferPtr bufferInformation{ make_shared<FileBuffer>(readSize) };
+	FileBuffer bufferInformation{ boost::numeric_cast<size_t>(readSize) };
 
-	manager.Read(sizeof(char), boost::numeric_cast<int>(bufferInformation->GetSize()), bufferInformation->GetBufferBegin());
+	manager.Read(sizeof(char), boost::numeric_cast<int>(bufferInformation.GetSize()), bufferInformation.GetBufferBegin());
 
-	string fileVersion{ bufferInformation->GetBufferBegin(), length };
+	string fileVersion{ bufferInformation.GetBufferBegin(), length };
 
 	// 比较所需的文件版本。
 	if (fileVersion != version)
@@ -71,7 +71,7 @@ void CoreTools::FileInStream
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, FileInStream)
 
 CoreTools::InTopLevel CoreTools::FileInStream
-	::GetInTopLevel() const
+	::GetInTopLevel() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

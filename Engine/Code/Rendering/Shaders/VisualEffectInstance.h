@@ -28,8 +28,9 @@ namespace Rendering
 
 	public:
 		VisualEffectInstance(const VisualEffectSmartPointer& effect, int techniqueIndex);
-		virtual ~VisualEffectInstance();
-
+		  ~VisualEffectInstance();
+                VisualEffectInstance(VisualEffectInstance&&) noexcept = default;
+                  VisualEffectInstance& operator=(VisualEffectInstance&&) noexcept = default;
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualEffectInstance);

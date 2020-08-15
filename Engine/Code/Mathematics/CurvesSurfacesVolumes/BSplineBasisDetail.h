@@ -14,12 +14,19 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h" 
 #include "Mathematics/Base/MathDetail.h"
-
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include <memory>
+#include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26429)
+
 
 template <typename Real>
 Mathematics::BSplineBasis<Real>
-	::BSplineBasis ()
+	::BSplineBasis () noexcept
 	:mBD1{}, mBD2{}, mBD3{}, mNumCtrlPoints{}, mDegree{}, mKnot{}, mOpen{}, mUniform{}, mBD0{}
 {
 }
@@ -38,8 +45,9 @@ void Mathematics::BSplineBasis<Real>
 {
     mUniform = true;
 
-    int i, numKnots = Initialize(numCtrlPoints, degree, open);
-	auto temp = mNumCtrlPoints - mDegree;
+    int i = 0;
+	const auto numKnots = Initialize(numCtrlPoints, degree, open);
+	const auto temp = mNumCtrlPoints - mDegree;
     auto factor = (static_cast<Real>(1))/(temp);
     if (mOpen)
     {
@@ -50,7 +58,7 @@ void Mathematics::BSplineBasis<Real>
 
         for (/**/; i < mNumCtrlPoints; ++i)
         {
-			auto temp1 = i - mDegree;
+			const auto temp1 = i - mDegree;
             mKnot[i] = temp1 *factor;
         }
 
@@ -63,7 +71,7 @@ void Mathematics::BSplineBasis<Real>
     {
         for (i = 0; i < numKnots; ++i)
         {
-			auto temp2 = i - mDegree;
+			const auto temp2 = i - mDegree;
             mKnot[i] = temp2 *factor;
         }
     }
@@ -83,7 +91,8 @@ void Mathematics::BSplineBasis<Real>
 {
     mUniform = false;
 
-    int i, numKnots = Initialize(numCtrlPoints, degree, true);
+    int i = 0;
+	const auto numKnots = Initialize(numCtrlPoints, degree, true);
     for (i = 0; i <= mDegree; ++i)
     {
         mKnot[i] = Math<Real>::sm_Zero;
@@ -104,65 +113,74 @@ template <typename Real>
 Mathematics::BSplineBasis<Real>
 	::~BSplineBasis ()
 {
-    DELETE1(mKnot);
+	
+	EXCEPTION_TRY
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+ DELETE1(mKnot);
     Deallocate(mBD0);
     Deallocate(mBD1);
     Deallocate(mBD2);
     Deallocate(mBD3);
+#include STSTEM_WARNING_POP
+}
+EXCEPTION_ALL_CATCH(Mathematics)  
+    
 }
 
 template <typename Real>
 int Mathematics::BSplineBasis<Real>
-	::GetNumCtrlPoints () const
+	::GetNumCtrlPoints () const noexcept
 {
     return mNumCtrlPoints;
 }
 
 template <typename Real>
 int Mathematics::BSplineBasis<Real>
-	::GetDegree () const
+	::GetDegree () const noexcept
 {
     return mDegree;
 }
 
 template <typename Real>
 bool Mathematics::BSplineBasis<Real>
-	::IsOpen () const
+	::IsOpen () const noexcept
 {
     return mOpen;
 }
 
 template <typename Real>
 bool Mathematics::BSplineBasis<Real>
-	::IsUniform () const
+	::IsUniform () const noexcept
 {
     return mUniform;
 }
 
 template <typename Real>
 Real Mathematics::BSplineBasis<Real>
-	::GetD0 (int i) const
+	::GetD0 (int i) const noexcept
 {
     return mBD0[mDegree][i];
 }
 
 template <typename Real>
 Real Mathematics::BSplineBasis<Real>
-	::GetD1 (int i) const
+	::GetD1 (int i) const noexcept
 {
     return mBD1[mDegree][i];
 }
 
 template <typename Real>
 Real Mathematics::BSplineBasis<Real>
-	::GetD2 (int i) const
+	::GetD2 (int i) const noexcept
 {
     return mBD2[mDegree][i];
 }
 
 template <typename Real>
 Real Mathematics::BSplineBasis<Real>
-	::GetD3 (int i) const
+	::GetD3 (int i) const noexcept
 {
     return mBD3[mDegree][i];
 }
@@ -171,18 +189,20 @@ template <typename Real>
 Real** Mathematics::BSplineBasis<Real>
 	::Allocate () const
 {
-	auto numRows = mDegree + 1;
-	auto numCols = mNumCtrlPoints + mDegree;
+	const auto numRows = mDegree + 1;
+	const auto numCols = mNumCtrlPoints + mDegree;
     Real** data = NEW2<Real>(numCols, numRows);
-	auto num = numRows * numCols;
+	const auto num = numRows * numCols;
     memset(data[0], 0, num *sizeof(Real));
     return data;
 }
 
 template <typename Real>
 void Mathematics::BSplineBasis<Real>
-	::Deallocate (Real** data)
+	::Deallocate (Real** data)   
 {
+    CoreTools::DoNothing();
+
     DELETE2(data);
 }
 
@@ -197,7 +217,7 @@ int Mathematics::BSplineBasis<Real>
     mDegree = degree;
     mOpen = open;
 
-    int numKnots = mNumCtrlPoints + mDegree + 1;
+    const int numKnots = mNumCtrlPoints + mDegree + 1;
     mKnot = NEW1<Real>(numKnots);
 
     mBD0 = Allocate();
@@ -215,7 +235,7 @@ void Mathematics::BSplineBasis<Real>
     if (!mUniform)
     {
         // Access only allowed to elements d+1 <= i <= n.
-		auto i = j + mDegree + 1;
+		const auto i = j + mDegree + 1;
         if (mDegree + 1 <= i && i <= mNumCtrlPoints)
         {
             mKnot[i] = value;
@@ -233,22 +253,25 @@ void Mathematics::BSplineBasis<Real>
 
 template <typename Real>
 Real Mathematics::BSplineBasis<Real>
-	::GetKnot (int j) const
+	::GetKnot (int j) const 
 {
     // Access only allowed to elements d+1 <= i <= n.
-	auto i = j + mDegree + 1;
+	const auto i = j + mDegree + 1;
     if (mDegree + 1 <= i && i <= mNumCtrlPoints)
     {
         return mKnot[i];
     }
 
     MATHEMATICS_ASSERTION_0(false, "Knot index out of range.\n");
+	
+	CoreTools::DoNothing();
+	
     return Math<Real>::sm_MaxReal;
 }
 
 template <typename Real>
 int Mathematics::BSplineBasis<Real>
-	::GetKey (Real& t) const
+	::GetKey (Real& t) const noexcept
 {
     if (mOpen)
     {
@@ -274,11 +297,11 @@ int Mathematics::BSplineBasis<Real>
     }
 
 
-    int i;
+    int i = 0;
 
     if (mUniform)
     {
-        i = mDegree + (int)((mNumCtrlPoints - mDegree)*t);
+        i = mDegree + static_cast<int>((mNumCtrlPoints - mDegree)*t);
     }
     else
     {
@@ -342,8 +365,8 @@ void Mathematics::BSplineBasis<Real>
     }
 
     Real n0 = t - mKnot[i], n1 = mKnot[i+1] - t;
-    Real invD0, invD1;
-    int j;
+    Real invD0 = 0, invD1 = 0;
+    int j = 0;
     for (j = 1; j <= mDegree; j++)
     {
         invD0 = (static_cast<Real>(1))/(mKnot[i+j] - mKnot[i]);
@@ -402,7 +425,7 @@ void Mathematics::BSplineBasis<Real>
     minIndex = i - mDegree;
     maxIndex = i;
 }
-
+#include STSTEM_WARNING_POP
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_BASIS_DETAIL)
 

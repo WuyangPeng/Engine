@@ -13,7 +13,11 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include <type_traits>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26487)
 template <typename T>
 void CoreTools::ObjectLink
 	::ResolveLink(T*& object)
@@ -81,7 +85,7 @@ void CoreTools::ObjectLink
 	static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	auto uniqueID = object.GetAddress();
+	const auto uniqueID = object.GetAddress();
 	if (uniqueID != 0)
 	{
 		object = GetObjectPtr(uniqueID).PolymorphicCastObjectSmartPointer<T>();
@@ -127,5 +131,5 @@ void CoreTools::ObjectLink
 		ResolveObjectConstSmartPointerLink(object[i]);
 	}
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_DETAIL_H

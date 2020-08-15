@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 Network::MessageEventContainerImpl
-	::MessageEventContainerImpl()
+	::MessageEventContainerImpl() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }

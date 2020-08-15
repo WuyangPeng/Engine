@@ -39,12 +39,18 @@ template <typename Real>
 bool Mathematics::Vector2DOrthonormalBasis<Real>
 	::IsValid() const noexcept
 {
+	try{
 	if (Math::FAbs(Vector2DTools::DotProduct(m_UVector, m_VVector)) <= m_Epsilon &&
 		m_UVector.IsNormalize(m_Epsilon) && m_VVector.IsNormalize(m_Epsilon))
 	{
 		return true;
 	}
 	else
+	{
+		return false;
+	}
+	}
+	catch(...)
 	{
 		return false;
 	}

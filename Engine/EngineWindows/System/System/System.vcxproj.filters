@@ -2169,6 +2169,24 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26418.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26415.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Bind.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26403.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26402.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26815.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6386.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">

@@ -13,9 +13,8 @@
 
 using std::string;
 
-Database::SchemaImpl
-	::SchemaImpl(const ConfigurationStrategy& configurationStrategy)
-	: m_ConfigurationStrategy{ configurationStrategy }
+Database::SchemaImpl ::SchemaImpl(const ConfigurationStrategy& configurationStrategy) noexcept
+    : m_ConfigurationStrategy{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -28,8 +27,7 @@ Database::SchemaImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Database, SchemaImpl)
 
-Database::ConfigurationStrategy Database::SchemaImpl
-	::GetConfigurationStrategy() const
+Database::ConfigurationStrategy Database::SchemaImpl ::GetConfigurationStrategy() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -43,7 +41,7 @@ Database::SchemaImpl::MysqlxCollectionPtr Database::SchemaImpl
 
 	SYSTEM_UNUSED_ARG(collectionName);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SchemaImpl的GetCollection未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SchemaImpl的GetCollection未实现。"s));
 }
 
 Database::SchemaImpl::MysqlxTablePtr Database::SchemaImpl
@@ -53,6 +51,6 @@ Database::SchemaImpl::MysqlxTablePtr Database::SchemaImpl
 
 	SYSTEM_UNUSED_ARG(tableonName);
 
-	THROW_EXCEPTION(SYSTEM_TEXT("SchemaImpl的GetTable未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("SchemaImpl的GetTable未实现。"s));
 }
 

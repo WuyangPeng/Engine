@@ -21,7 +21,7 @@ using std::make_shared;
 using std::mem_fn;
 
 CoreTools::ThreadManagerImpl
-	::ThreadManagerImpl()
+	::ThreadManagerImpl() noexcept
 	:m_Thread{}, m_ThreadHandle{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -73,11 +73,11 @@ void CoreTools::ThreadManagerImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	auto result = System::WaitForSystemThread(boost::numeric_cast<int>(m_ThreadHandle.size()), m_ThreadHandle.data(), true, EnumCastUnderlying(System::MutexWait::Infinite));
+	const auto result = System::WaitForSystemThread(boost::numeric_cast<int>(m_ThreadHandle.size()), m_ThreadHandle.data(), true, EnumCastUnderlying(System::MutexWait::Infinite));
 
 	if (result == System::MutexWaitReturn::Failed)
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("等待线程失败！"));
+		THROW_EXCEPTION(SYSTEM_TEXT("等待线程失败！"s));
 	}
 
 	m_Thread.clear();

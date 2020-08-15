@@ -40,7 +40,9 @@ namespace Rendering
 
 		VisualEffectInstanceImpl(const VisualEffectInstanceImpl& rhs);
 		VisualEffectInstanceImpl& operator=(const VisualEffectInstanceImpl& rhs);
-
+                ~VisualEffectInstanceImpl() = default;
+                VisualEffectInstanceImpl(VisualEffectInstanceImpl&&) noexcept = default;
+                VisualEffectInstanceImpl& operator=(VisualEffectInstanceImpl&&) noexcept = default;
 		CLASS_INVARIANT_DECLARE;
 
 		int GetStreamingSize() const;

@@ -12,14 +12,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
 CoreTools::BoostMutex
-	::BoostMutex()
+	::BoostMutex() noexcept
 	:m_Mutex{}
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::BoostMutex
-	::~BoostMutex()
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -27,13 +21,13 @@ CoreTools::BoostMutex
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BoostMutex)
 
 void CoreTools::BoostMutex
-	::Initialize()
+	::Initialize() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
 
 void CoreTools::BoostMutex
-	::Delete()
+	::Delete() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 }
@@ -59,7 +53,7 @@ void CoreTools::BoostMutex
 }
 
 bool CoreTools::BoostMutex
-	::TryEnter()
+	::TryEnter() noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 

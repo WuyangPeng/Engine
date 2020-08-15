@@ -18,8 +18,9 @@ using std::string;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26486)
 CoreTools::BufferInStreamImpl
-	::BufferInStreamImpl(const FileBufferPtr& bufferInformation, int startPoint)
+	::BufferInStreamImpl(const FileBuffer& bufferInformation, int startPoint)
 	:m_StartPoint{ startPoint }, m_TopLevel{}, m_Source{ bufferInformation }, m_ObjectLink{}
 {
 	AnalysisBuffer();

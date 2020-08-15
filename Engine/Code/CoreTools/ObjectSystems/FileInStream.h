@@ -30,7 +30,7 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		InTopLevel GetInTopLevel() const;
+		InTopLevel GetInTopLevel() const noexcept;
 
 	private:
 		void Load(const String& fileName);

@@ -15,18 +15,13 @@ using std::ostream;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-Database::MysqlConnectorDocResultRow
-	::MysqlConnectorDocResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc)
-	: ParentType{ configurationStrategy }, m_MysqlxDbDoc{ mysqlxDbDoc }
+Database::MysqlConnectorDocResultRow ::MysqlConnectorDocResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc) noexcept
+    : ParentType{ configurationStrategy }, m_MysqlxDbDoc{ mysqlxDbDoc }
 {
 	DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::MysqlConnectorDocResultRow
-	::~MysqlConnectorDocResultRow()
-{
-	DATABASE_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Database::MysqlConnectorDocResultRow

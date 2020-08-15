@@ -23,17 +23,17 @@ namespace Rendering
 		using AttributeType = VertexFormatFlags::AttributeType;
 
 	public:
-		VertexBufferAccessorData();
+		VertexBufferAccessorData() noexcept;
 		VertexBufferAccessorData(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer);
 
 		CLASS_INVARIANT_DECLARE;
 
 		void Init(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer,int number = 0);
 
-		const char* GetData(int stride, int index) const;
-		bool HasData() const;
-		int GetDataChannels() const;
-		const float* GetDataTuple(int stride, int index) const;
+		const char* GetData(int stride, int index) const noexcept;
+		bool HasData() const noexcept;
+		int GetDataChannels() const noexcept;
+		const float* GetDataTuple(int stride, int index) const noexcept;
 
 	private:
 		const char* m_Data;

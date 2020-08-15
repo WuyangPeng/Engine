@@ -13,10 +13,11 @@
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
-Rendering::OffsetStateImpl
-	::OffsetStateImpl()
-	: m_FillEnabled{ false }, m_LineEnabled{ false }, m_PointEnabled{ false }, m_Scale{ 0.0f }, m_Bias{ 0.0f }
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+Rendering::OffsetStateImpl ::OffsetStateImpl() noexcept
+    : m_FillEnabled{ false }, m_LineEnabled{ false }, m_PointEnabled{ false }, m_Scale{ 0.0f }, m_Bias{ 0.0f }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;	
 }
@@ -146,11 +147,11 @@ void Rendering::OffsetStateImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto fillEnabled = (m_FillEnabled ? 1 : 0);
-	auto lineEnabled = (m_LineEnabled ? 1 : 0);
-	auto pointEnabled = (m_PointEnabled ? 1 : 0);
-	auto scale = m_Scale;
-	auto bias = m_Bias;
+const	auto fillEnabled = (m_FillEnabled ? 1 : 0);
+        const auto lineEnabled = (m_LineEnabled ? 1 : 0);
+const auto pointEnabled = (m_PointEnabled ? 1 : 0);
+        const auto scale = m_Scale;
+const auto bias = m_Bias;
 
 	manager.Write(sizeof(int), &fillEnabled);
 	manager.Write(sizeof(int), &lineEnabled);
@@ -181,3 +182,4 @@ void Rendering::OffsetStateImpl
 	m_Scale = scale;
 	m_Bias = bias;
 }
+#include STSTEM_WARNING_POP

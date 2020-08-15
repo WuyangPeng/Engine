@@ -24,7 +24,7 @@ namespace Network
 	public:
 		ConfigurationSubStrategy();
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(ConfigurationSubStrategy);
+		CLASS_INVARIANT_DECLARE;
 
 		bool IsExist(WrappersSubStrategy wrappersSubStrategy) const;
 		int GetValue(WrappersSubStrategy wrappersSubStrategy) const;

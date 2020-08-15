@@ -22,16 +22,15 @@ namespace CoreTools
 		using ParentType = MutexImpl;
 
 	public:
-		StdRecursiveMutex();
-		virtual ~StdRecursiveMutex();
+		StdRecursiveMutex() noexcept; 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Initialize() override;
-		virtual void Delete() override;
-		virtual void Enter() override;
-		virtual bool TryEnter() override;
-		virtual void Leave() override;
+		void Initialize() noexcept override;
+		void Delete() noexcept override;
+		void Enter() override;
+		bool TryEnter() noexcept override;
+		void Leave() override;
 
 	private:
 		std::recursive_mutex m_Mutex;

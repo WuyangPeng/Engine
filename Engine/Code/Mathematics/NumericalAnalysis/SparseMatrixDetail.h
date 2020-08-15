@@ -83,7 +83,7 @@ Real& Mathematics::SparseMatrix<Real>
 
 template <typename Real>
 typename const Mathematics::SparseMatrix<Real>::ConstIter Mathematics::SparseMatrix<Real>
-	::GetBegin() const
+	::GetBegin() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -92,7 +92,7 @@ typename const Mathematics::SparseMatrix<Real>::ConstIter Mathematics::SparseMat
 
 template <typename Real>
 typename const Mathematics::SparseMatrix<Real>::ConstIter Mathematics::SparseMatrix<Real>
-	::GetEnd() const
+	::GetEnd() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

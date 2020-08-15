@@ -6,7 +6,7 @@
 
 #include "Rendering/RenderingExport.h"
 
-#include "SurfacePatch.h"
+#include "SurfacePatch.h" 
 #include "Detail/SurfacePatchImpl.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -16,7 +16,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering, SurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SurfacePatch);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, SurfacePatch); 
@@ -30,12 +32,7 @@ Rendering::SurfacePatch
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-Rendering::SurfacePatch
-	::~SurfacePatch()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, SurfacePatch)
@@ -70,12 +67,12 @@ bool Rendering::SurfacePatch
 }
 #endif // OPEN_CLASS_INVARIANT
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatch,GetUMin, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatch,GetUMax, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatch,GetVMin, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatch,GetVMax, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatch,GetUMin, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatch,GetUMax, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatch,GetVMin, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatch,GetVMax, float)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SurfacePatch,IsRectangular, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatch,IsRectangular, bool)
 
 const Rendering::SurfacePatch::AVector Rendering::SurfacePatch
 	::GetTangent0(float u, float v) const
@@ -188,19 +185,19 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 	curvatureTensor(1,1) = -Dot(normal,derivativesVV);
 
 	// 特征多项式为 0 = det(B-kG) = c2*k^2+c1*k+c0.
-	float constant = curvatureTensor(0,0) * curvatureTensor(1,1) -
+	const float constant = curvatureTensor(0,0) * curvatureTensor(1,1) -
 		             curvatureTensor(0,1) * curvatureTensor(1,0);
-	float once = 2.0f * curvatureTensor(0,1) * metricTensor(0,1) -
+	const float once = 2.0f * curvatureTensor(0,1) * metricTensor(0,1) -
 		         curvatureTensor(0,0) * metricTensor(1,1) -
 				 curvatureTensor(1,1) * metricTensor(0,0);
-	float twice = metricTensor(0,0) * metricTensor(1,1) -
+	const float twice = metricTensor(0,0) * metricTensor(1,1) -
 		          metricTensor(0,1) * metricTensor(1,0);
 
 	// 主曲率的特征多项式的根。
-	float discriminant =
+	const float discriminant =
 		Mathematics::Mathf::Sqrt(Mathematics::Mathf::FAbs(once * once - 4.0f * constant * twice));
-	float principalCurvature0 = -0.5f * (once + discriminant);
-	float principalCurvature1 = 0.5f * (-once + discriminant);
+	const float principalCurvature0 = -0.5f * (once + discriminant);
+	const float principalCurvature1 = 0.5f * (-once + discriminant);
 		
 	// 主方向是(B-kG)w = 0的解,
 	// w1 = (b12-k1*g12,-(b11-k1*g11)) 或 (b22-k1*g22,-(b12-k1*g12))
@@ -235,3 +232,4 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 	return PrincipalCurvatureInfo(principalCurvature0, principalCurvature1, principalDirection0, principalDirection1);
 }
 
+#include STSTEM_WARNING_POP

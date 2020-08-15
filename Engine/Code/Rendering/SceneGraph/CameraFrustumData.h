@@ -17,8 +17,8 @@ namespace Rendering
 		using ClassType = CameraFrustumData;
         
     public:
-        CameraFrustumData();
-        CameraFrustumData (float upFieldOfViewDegrees,float aspectRatio,float directionMin,float directionMax,bool symmetric = true);
+                CameraFrustumData() noexcept;
+        CameraFrustumData(float upFieldOfViewDegrees, float aspectRatio, float directionMin, float directionMax, bool symmetric = true) noexcept;
         
 		CLASS_INVARIANT_DECLARE;
   
@@ -28,7 +28,7 @@ namespace Rendering
         float GetDirectionMax() const;
         
         // 只有当返回是true是，其它值才是有效的。
-        bool IsSymmetric() const;
+        bool IsSymmetric() const noexcept;
         
     private:
         float m_UpFieldOfViewDegrees;

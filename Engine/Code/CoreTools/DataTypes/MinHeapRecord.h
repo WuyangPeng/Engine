@@ -26,7 +26,7 @@ namespace CoreTools
 		MinHeapRecord();
 		MinHeapRecord(int uniqueIndex, Scalar initialValue);
 		MinHeapRecord(int uniqueIndex, Generator generator, Scalar initialValue);
-		~MinHeapRecord();
+ 
 
 		CLASS_INVARIANT_DECLARE;
 

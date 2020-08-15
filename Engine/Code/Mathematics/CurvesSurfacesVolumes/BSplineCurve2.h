@@ -46,19 +46,23 @@ namespace Mathematics
 		// elements must be nondecreasing.  Each element must be in [0,1].
 		BSplineCurve2 (int numCtrlPoints, const Vector2D<Real>* ctrlPoint, int degree, bool loop, const Real* knot);
 
-		virtual ~BSplineCurve2 ();
-
-		int GetNumCtrlPoints () const;
-		int GetDegree () const;
-		bool IsOpen () const;
-		bool IsUniform () const;
-		bool IsLoop () const;
+		  ~BSplineCurve2 ();
+		BSplineCurve2(const BSplineCurve2&) = default;
+		BSplineCurve2& operator=(const BSplineCurve2&) = default;
+		BSplineCurve2(BSplineCurve2&&) = default;
+		BSplineCurve2& operator=(BSplineCurve2&&) = default;
+		
+		int GetNumCtrlPoints () const noexcept;
+		int GetDegree () const noexcept;
+		bool IsOpen () const noexcept;
+		bool IsUniform () const noexcept;
+		bool IsLoop () const noexcept;
 
 		// Control points may be changed at any time.  The input index should be
 		// valid (0 <= i <= n).  If it is invalid, GetControlPoint returns a
 		// vector whose components are all MAX_REAL.
-		void SetControlPoint (int i, const Vector2D<Real>& ctrl);
-		Vector2D<Real> GetControlPoint (int i) const;
+		void SetControlPoint (int i, const Vector2D<Real>& ctrl) noexcept;
+		Vector2D<Real> GetControlPoint (int i) const noexcept;
 
 		// The knot values can be changed only if the basis function is nonuniform
 		// and the input index is valid (0 <= i <= n-d-1).  If these conditions
@@ -70,10 +74,10 @@ namespace Mathematics
 		// an open spline clamps t to [0,1].  That is, if t > 1, t is set to 1;
 		// if t < 0, t is set to 0.  A periodic spline wraps to to [0,1].  That
 		// is, if t is outside [0,1], then t is set to t-floor(t).
-		virtual Vector2D<Real> GetPosition (Real t) const;
-		virtual Vector2D<Real> GetFirstDerivative (Real t) const;
-		virtual Vector2D<Real> GetSecondDerivative (Real t) const;
-		virtual Vector2D<Real> GetThirdDerivative (Real t) const;
+		  Vector2D<Real> GetPosition (Real t) const override;
+		  Vector2D<Real> GetFirstDerivative (Real t) const override;
+		  Vector2D<Real> GetSecondDerivative (Real t) const override;
+		  Vector2D<Real> GetThirdDerivative (Real t) const override;
 
 		// If you need position and derivatives at the same time, it is more
 		// efficient to call these functions.  Pass the addresses of those
@@ -83,7 +87,7 @@ namespace Mathematics
 
 		// Access the basis function to compute it without control points.  This
 		// is useful for least squares fitting of curves.
-		BSplineBasis<Real>& GetBasis ();
+		BSplineBasis<Real>& GetBasis () noexcept;
 
 	protected:
 		// Replicate the necessary number of control points when the Create

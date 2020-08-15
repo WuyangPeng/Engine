@@ -10,9 +10,13 @@
 #include "IntersectorAxis.h"
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_INTERSECTOR_AXIS_DETAIL) 
-
-#include "IntersectorConfigurationDetail.h"
+#include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26481)
+    #include SYSTEM_WARNING_DISABLE(26485)
+    #include SYSTEM_WARNING_DISABLE(26429)
+    #include "IntersectorConfigurationDetail.h"
 #include "Mathematics/Objects3D/Box3Detail.h"
+#include "System/Helper/PragmaWarning.h" 
 
 // IntrAxis<Real>
 
@@ -895,7 +899,7 @@ bool Mathematics::IntersectorAxis<Real>
 	}
 	return true;
 }
-
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_INTERSECTOR_AXIS_DETAIL)
 
 #endif // MATHEMATICS_INTERSECTION_INTERSECTOR_AXIS_DETAIL_H

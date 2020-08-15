@@ -13,7 +13,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 CoreTools::OutTopLevelImpl
-	::OutTopLevelImpl()
+	::OutTopLevelImpl() noexcept
 	:m_TopLevel{}, m_UniqueID{}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -37,13 +37,13 @@ int CoreTools::OutTopLevelImpl
 	return boost::numeric_cast<int>(m_TopLevel.size());
 }
 
-const CoreTools::ConstObjectInterfaceSmartPointer& CoreTools::OutTopLevelImpl
+  CoreTools::ConstObjectInterfaceSmartPointer  CoreTools::OutTopLevelImpl
 	::operator[](int index) const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetTopLevelSize(), "Ë÷Òý´íÎó£¡");
 
-	return m_TopLevel[index];
+	return m_TopLevel.at(index);
 }
 
 void CoreTools::OutTopLevelImpl
@@ -59,7 +59,7 @@ void CoreTools::OutTopLevelImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	m_TopLevel[index]->SetUniqueID(uniqueID);
+	m_TopLevel.at(index)->SetUniqueID(uniqueID);
 	m_UniqueID.insert(uniqueID);
 }
 

@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::Matrix3Extract<Real>
-	::Matrix3Extract(Real angle, const Vector3D& axis)
+	::Matrix3Extract(Real angle, const Vector3D& axis) noexcept
 	: m_Angle{ angle }, m_Axis{ axis }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;

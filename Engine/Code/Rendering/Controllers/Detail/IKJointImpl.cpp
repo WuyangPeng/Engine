@@ -20,13 +20,16 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
 using std::string;
 using std::vector;
 
-Rendering::IKJointImpl
-	::IKJointImpl()
-	:m_Object{}, m_Goals{}
+Rendering::IKJointImpl ::IKJointImpl() noexcept
+    : m_Object{}, m_Goals{}
 {
 	Init();
 
@@ -44,7 +47,7 @@ Rendering::IKJointImpl
 
 // private
 void Rendering::IKJointImpl
-	::Init()
+	::Init() noexcept
 {
 	for (auto i = 0; i < sm_NumAxis; ++i)
 	{
@@ -92,8 +95,8 @@ void Rendering::IKJointImpl
 	target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowRotation);
 	target.WriteWithoutNumber(sm_NumAxis, m_MinRotation);
 	target.WriteWithoutNumber(sm_NumAxis, m_MaxRotation);
-	target.WriteSmartPointer(m_Object);
-	target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+//	target.WriteSmartPointer(m_Object);
+	//target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
 void Rendering::IKJointImpl
@@ -107,14 +110,14 @@ void Rendering::IKJointImpl
 	source.ReadBool(sm_NumAxis, m_AllowRotation);
 	source.Read(sm_NumAxis, m_MinRotation);
 	source.Read(sm_NumAxis, m_MaxRotation);
-	source.ReadSmartPointer(m_Object);
+//	source.ReadSmartPointer(m_Object);
 
 	int size{ 0 };
 	source.Read(size);
 	if(0 < size)
 	{
 		m_Goals.resize(size);
-		source.ReadSmartPointer(size, &m_Goals[0]);
+		//source.ReadSmartPointer(size, &m_Goals[0]);
 	}	
 }
 
@@ -122,18 +125,20 @@ void Rendering::IKJointImpl
 	::Link( CoreTools::ObjectLink& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-
-	source.ResolveObjectSmartPointerLink(m_Object);
-	source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+    source;
+        CoreTools::DoNothing();
+    // 	source.ResolveObjectSmartPointerLink(m_Object);
+//	source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
 void Rendering::IKJointImpl
 	::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.RegisterSmartPointer(m_Object);
-	target.RegisterSmartPointer(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+    target;
+        CoreTools::DoNothing();
+    //	target.RegisterSmartPointer(m_Object);
+//	target.RegisterSmartPointer(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
 const CoreTools::ObjectSmartPointer Rendering::IKJointImpl
@@ -224,10 +229,10 @@ const Rendering::IKJointImpl::AVector Rendering::IKJointImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto parent = m_Object->GetParent();
+	const Rendering::Spatial* const parent = m_Object->GetParent();
 	if (parent != nullptr)
 	{
-		return parent->GetWorldTransform().GetRotate().GetColumn((int)axisIndex);		 
+		return parent->GetWorldTransform().GetRotate().GetColumn(System::EnumCastUnderlying(axisIndex));		 
 	}
 	else if (axisIndex == Mathematics::MatrixRotationAxis::X)
 	{
@@ -248,7 +253,7 @@ void Rendering::IKJointImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	const auto parent = m_Object->GetParent();
+	const Rendering::Spatial* const parent = m_Object->GetParent();
 	if (parent != nullptr)
 	{
 		m_Object->SetWorldTransform(parent->GetWorldTransform() * m_Object->GetLocalTransform());		
@@ -264,12 +269,12 @@ void Rendering::IKJointImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	const auto parent = m_Object->GetParent();
+	const Rendering::Spatial* const parent = m_Object->GetParent();
 	if (parent != nullptr)
 	{
 		auto transform = m_Object->GetWorldTransform();
 
-		auto rotate = parent->GetWorldTransform().GetRotate() * m_Object->GetLocalTransform().GetRotate();
+		const auto rotate = parent->GetWorldTransform().GetRotate() * m_Object->GetLocalTransform().GetRotate();
 		transform.SetRotate(rotate);
 
 		auto translate = parent->GetWorldTransform() * m_Object->GetLocalTransform().GetTranslate();
@@ -440,11 +445,11 @@ bool Rendering::IKJointImpl
 }
 
 const Rendering::ConstSpatialSmartPointer Rendering::IKJointImpl
-	::GetObjectSmartPointer() const 
+	::GetObjectSmartPointer() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Object.PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+	return m_Object;
 }
 
 const Rendering::ConstIKGoalSmartPointer Rendering::IKJointImpl
@@ -453,7 +458,7 @@ const Rendering::ConstIKGoalSmartPointer Rendering::IKJointImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Goals.size()), "Ë÷Òý´íÎó£¡");
 
-	return m_Goals[index].PolymorphicCastConstObjectSmartPointer<ConstIKGoalSmartPointer>();
+	return m_Goals[index];
 }
 
 int Rendering::IKJointImpl
@@ -499,3 +504,4 @@ bool Rendering::IKJointImpl
 
 	return m_AllowRotation[System::EnumCastUnderlying(axisIndex)];
 }
+#include STSTEM_WARNING_POP

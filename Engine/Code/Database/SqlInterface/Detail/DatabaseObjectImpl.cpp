@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
 Database::DatabaseObjectImpl
-	::DatabaseObjectImpl(const ConfigurationStrategy& configurationStrategy)
+	::DatabaseObjectImpl(const ConfigurationStrategy& configurationStrategy) noexcept
 	: m_ConfigurationStrategy{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
@@ -25,8 +25,7 @@ Database::DatabaseObjectImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Database, DatabaseObjectImpl)
 
-Database::ConfigurationStrategy Database::DatabaseObjectImpl
-	::GetConfigurationStrategy() const
+Database::ConfigurationStrategy Database::DatabaseObjectImpl ::GetConfigurationStrategy() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -38,6 +37,6 @@ Database::DatabaseObjectImpl::MysqlxSessionPtr Database::DatabaseObjectImpl
 {
 	DATABASE_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("DatabaseObjectImpl的GetMysqlxSessionPtr未实现。"));
+	THROW_EXCEPTION(SYSTEM_TEXT("DatabaseObjectImpl的GetMysqlxSessionPtr未实现。"s));
 }
 

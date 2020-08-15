@@ -14,7 +14,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/PropertyTree.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26493)
 using std::string;
 using boost::property_tree::ptree;
 using boost::property_tree::ptree_error;
@@ -161,10 +163,10 @@ bool Rendering::AnalysisRendererManager
 #endif // OPEN_CLASS_INVARIANT
 
 Rendering::AnalysisRendererManager::RendererPtr	Rendering::AnalysisRendererManager
-	::GetRendererPtr() const
+	::GetRendererPtr() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_RendererPtr;
 }
-
+#include STSTEM_WARNING_POP

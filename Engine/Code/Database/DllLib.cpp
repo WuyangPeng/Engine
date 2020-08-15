@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.2.5 (2020/03/16 10:05)
 
 // 数据库（Database）位于引擎的第三层，只允许调用引擎中的System、CoreTools库，
@@ -30,20 +30,16 @@
 
 #ifndef BUILDING_DATABASE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_DATABASE_STATIC
+#else  // BUILDING_DATABASE_STATIC
 
-	namespace Database
-	{
-		void StaticDllLib()
-		{
+namespace Database
+{
+    void StaticDllLib() noexcept
+    {
 
-		}
-	}
+    }
+}
 
-#endif // !BUILDING_DATABASE_STATIC
-
-
-
- 
+#endif  // !BUILDING_DATABASE_STATIC

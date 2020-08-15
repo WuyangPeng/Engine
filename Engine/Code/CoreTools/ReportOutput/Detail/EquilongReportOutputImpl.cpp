@@ -13,18 +13,13 @@ using std::string;
 using std::ostream;
 
 CoreTools::EquilongReportOutputImpl
-	::EquilongReportOutputImpl(int borderLineLength, const OStreamShared& osPtr)
+	::EquilongReportOutputImpl(int borderLineLength, const OStreamShared& osPtr) noexcept
 	:ParentType{ osPtr }, m_BorderLineLength{ borderLineLength }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::EquilongReportOutputImpl
-	::~EquilongReportOutputImpl()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::EquilongReportOutputImpl
 	::IsValid() const noexcept

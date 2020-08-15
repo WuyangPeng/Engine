@@ -14,29 +14,29 @@ namespace Imagics
 	// Process the pixels visited by Bresenham's algorithm for the line segment
 	// with end points (x0,y0) and (x1,y1).  The callback is executed for each
 	// visited pixel (x,y).  The arguments to the callback are x and y.
-	IMAGICS_DEFAULT_DECLARE	void Line2D(int x0, int y0, int x1, int y1, void (*callback)(int,int));
+	IMAGICS_DEFAULT_DECLARE	void Line2D(int x0, int y0, int x1, int y1, void (*callback)(int,int)) noexcept;
 	
 	// Process the voxels visited by Bresenham's algorithm for the line segment
 	// with end points (x0,y0,z0) and (x1,y1,z1).  The callback is executed for
 	// each visited voxel (x,y,z).  The arguments to the callback are x, y, and z.
-	IMAGICS_DEFAULT_DECLARE void Line3D(int x0, int y0, int z0, int x1, int y1, int z1, void (*callback)(int,int,int));
+	IMAGICS_DEFAULT_DECLARE void Line3D(int x0, int y0, int z0, int x1, int y1, int z1, void (*callback)(int,int,int)) noexcept;
 	
 	// Process the hypervoxels visited by Bresenham's algorithm for the line
 	// segment with end points (x0,y0,z0,w0) and (x1,y1,z1,w1).  The callback is
 	// executed for each visited hypervoxel (x,y,z,w).  The arguments to the
 	// callback are x, y, z, and w.
-	IMAGICS_DEFAULT_DECLARE void Line4D(int x0, int y0, int z0, int w0, int x1, int y1, int z1, int w1, void (*callback)(int,int,int,int));
+	IMAGICS_DEFAULT_DECLARE void Line4D(int x0, int y0, int z0, int w0, int x1, int y1, int z1, int w1, void (*callback)(int,int,int,int)) noexcept;
 	
 	// Process the pixels visited by Bresenham's algorithm for the circle
 	// (x-xc)^2 + (y-yc)^2 = r^2.  The callback is executed for each
 	// visited pixel (x,y).  The arguments to the callback are x and y.
-	IMAGICS_DEFAULT_DECLARE void Circle2D(int xc, int yc, int radius,  void (*callback)(int,int));
+	IMAGICS_DEFAULT_DECLARE void Circle2D(int xc, int yc, int radius,  void (*callback)(int,int)) noexcept;
 	
 	// Process the pixels visited by Bresenham's algorithm for the axis-aligned
 	// ellipse (x-xc)^2/a^2 + (y-yc)^2/b^2 = 1.  The callback is
 	// executed for each visited pixel (x,y).  The arguments to the callback are
 	// x and y.
-	IMAGICS_DEFAULT_DECLARE void Ellipse2D(int xc, int yc, int A, int B, void (*callback)(int,int));
+	IMAGICS_DEFAULT_DECLARE void Ellipse2D(int xc, int yc, int A, int B, void (*callback)(int,int)) noexcept;
 	
 	// Process the pixels visited by Bresenham's algorithm for an arc of the
 	// axis-aligned ellipse (x-xc)^2/a^2 + (y-yc)^2/b^2 = 1.  The arc has end
@@ -44,7 +44,7 @@ namespace Imagics
 	// i = 0,1.  The arc is traversed in clockwise order.  The callback is
 	// executed for each visited pixel (x,y).  The arguments to the callback are
 	// x and y.
-	IMAGICS_DEFAULT_DECLARE void EllipseArc2D(int xc, int yc, int A, int B, float fx0, float fy0, float fx1, float fy1, void (*callback)(int,int));
+	IMAGICS_DEFAULT_DECLARE void EllipseArc2D(int xc, int yc, int A, int B, float fx0, float fy0, float fx1, float fy1, void (*callback)(int,int)) noexcept;
 	
 	// Process the pixels visited by Bresenham's algorithm for an oriented
 	// ellipse.  The ellipse has shape and orientation determined by the bounding

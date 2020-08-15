@@ -22,11 +22,11 @@ Database::DatabaseObject
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, DatabaseObject)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, DatabaseObject, GetConfigurationStrategy, Database::ConfigurationStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, DatabaseObject, GetConfigurationStrategy, Database::ConfigurationStrategy)
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 Database::DatabaseObject::DatabaseObjectWeakPtr Database::DatabaseObject
-	::GetImplType() const
+	::GetImplType() const noexcept
 {
 	DATABASE_CLASS_IS_VALID_CONST_1;
 

@@ -12,14 +12,16 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Mathematics::Float1
 	::Float1()
 	:m_Impl{ make_shared<ImplType>() }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 Mathematics::Float1
 	::Float1(float value)
 	:m_Impl{ make_shared<ImplType>(value) }

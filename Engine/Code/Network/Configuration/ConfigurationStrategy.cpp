@@ -13,14 +13,16 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::ConfigurationStrategy
 	::ConfigurationStrategy()
 	:m_Impl{ ConfigurationStrategyFactory::Create() }
 {
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
-
+#include STSTEM_WARNING_POP
 Network::ConfigurationStrategy
 	::ConfigurationStrategy(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ServerStrategy serverStrategy, MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSSLStrategy openSSLStrategy, const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter, SocketSendMessage socketSendMessage, const string& ip, int port)
 	:m_Impl{ ConfigurationStrategyFactory::Create(wrappersStrategy, connectStrategy,serverStrategy,messageStrategy,parserStrategy,openSSLStrategy,subStrategy,configurationParameter, socketSendMessage,ip,port) }
@@ -35,24 +37,23 @@ Network::ConfigurationStrategy
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-PERFORMANCE_COPY_CONSTRUCTION_DEFINE(Network, ConfigurationStrategy)
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, ConfigurationStrategy)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, ConfigurationStrategy)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetWrappersStrategy, Network::WrappersStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetPatternStrategy, Network::ServerStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetMessageStrategy, Network::MessageStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetClientStrategy, Network::ClientStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetConnectStrategy, Network::ConnectStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetParserStrategy, Network::ParserStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetOpenSSLStrategy, Network::OpenSSLStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetSocketSendMessage, Network::SocketSendMessage)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetConfigurationSubStrategy, const Network::ConfigurationSubStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetWrappersStrategy, Network::WrappersStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetPatternStrategy, Network::ServerStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetMessageStrategy, Network::MessageStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetClientStrategy, Network::ClientStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetConnectStrategy, Network::ConnectStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetParserStrategy, Network::ParserStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetOpenSSLStrategy, Network::OpenSSLStrategy)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetSocketSendMessage, Network::SocketSendMessage)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetConfigurationSubStrategy, const Network::ConfigurationSubStrategy)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, ConfigurationStrategy, IsExist, WrappersSubStrategy, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetBufferSize, int)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetIP, string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetPort, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetConfigurationParameter, const Network::ConfigurationParameter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetPort, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetConfigurationParameter, const Network::ConfigurationParameter)
 
 
 

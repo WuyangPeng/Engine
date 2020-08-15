@@ -20,28 +20,28 @@ namespace Network
 		using ParentType = MessageEventContainerImpl;
 
 	public:
-		SingleMessageEventContainer();
-		virtual ~SingleMessageEventContainer();
+		SingleMessageEventContainer() noexcept;
+		  ~SingleMessageEventContainer();
 
-		SingleMessageEventContainer(const SingleMessageEventContainer& rhs);
-		SingleMessageEventContainer& operator=(const SingleMessageEventContainer& rhs);
+		SingleMessageEventContainer(const SingleMessageEventContainer& rhs) noexcept;
+		SingleMessageEventContainer& operator=(const SingleMessageEventContainer& rhs) noexcept;
 		SingleMessageEventContainer(SingleMessageEventContainer&& rhs) noexcept;
 		SingleMessageEventContainer& operator=(SingleMessageEventContainer&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual void Insert(const NetworkMessageEventSharedPtr& messageEvent) override;
-		virtual void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority) override;
-		virtual void Remove(const NetworkMessageEventSharedPtr& messageEvent) override;
+		 void Insert(const NetworkMessageEventSharedPtr& messageEvent) override;
+		 void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority) override;
+		 void Remove(const NetworkMessageEventSharedPtr& messageEvent) override;
 
-		virtual void OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) override;
+		 void OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) override;
 
-		virtual ImplPtr Clone() const override;
-		virtual ImplPtr CloneToMultiMessage() const override;
-		virtual ImplPtr CloneToPriorityMessage() const override;
+		 ImplPtr Clone() const override;
+		 ImplPtr CloneToMultiMessage() const override;
+		 ImplPtr CloneToPriorityMessage() const override;
 
-		virtual bool IsCanInsert() const override;
-		virtual bool IsPrioritySame(MessageEventPriority priority) const override;
+		 bool IsCanInsert() const noexcept override;
+		 bool IsPrioritySame(MessageEventPriority priority) const noexcept override;
 
 	private:
 		NetworkMessageEventWeakPtr m_MessageEvent;

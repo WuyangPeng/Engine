@@ -18,10 +18,16 @@
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(6385)
+ 
 template <int WindowSize>
 Rendering::TextureLevelData<WindowSize>
-	::TextureLevelData( int numDimensions )
+	::TextureLevelData( int numDimensions ) noexcept
 	:m_NumDimensions{ numDimensions }, m_NumTotalBytes{ 0 }
 {
 	for (auto level = 0; level < TextureMaximumMipmapLevels;++level)
@@ -51,8 +57,7 @@ bool Rendering::TextureLevelData<WindowSize>
 #endif // OPEN_CLASS_INVARIANT
 
 template <int WindowSize>
-int Rendering::TextureLevelData<WindowSize>
-	::GetNumDimensions() const
+int Rendering::TextureLevelData<WindowSize>::GetNumDimensions() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -76,7 +81,11 @@ void Rendering::TextureLevelData<WindowSize>
 	RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(0 <= index && index < WindowSize && 0 <= level && level < TextureMaximumMipmapLevels,"索引错误！");
     
-    m_Dimension[index][level] = dimension;
+	if (0 <= index && index < WindowSize && 0 <= level && level < TextureMaximumMipmapLevels)
+    {
+            m_Dimension[index][level] = dimension;
+	}
+   
 }
 
 template <int WindowSize>
@@ -90,8 +99,7 @@ int Rendering::TextureLevelData<WindowSize>
 }
 
 template <int WindowSize>
-int Rendering::TextureLevelData<WindowSize>
-	::GetNumTotalBytes() const
+int Rendering::TextureLevelData<WindowSize>::GetNumTotalBytes() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -115,12 +123,16 @@ void Rendering::TextureLevelData<WindowSize>
 	RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= level && level < TextureMaximumMipmapLevels, "索引错误！");
     
-    m_NumLevelBytes[level] = numLevelBytes;
+	if (0 <= level && level < TextureMaximumMipmapLevels)
+    {
+            m_NumLevelBytes[level] = numLevelBytes;
+	}
+   
 }
 
 template <int WindowSize>
 void Rendering::TextureLevelData<WindowSize>
-	::RecountNumTotalBytes(int numLevels, TextureFlags type)
+	::RecountNumTotalBytes(int numLevels, TextureFlags type) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -137,8 +149,7 @@ void Rendering::TextureLevelData<WindowSize>
 }
 
 template <int WindowSize>
-void Rendering::TextureLevelData<WindowSize>
-	::RecountLevelOffsets( int numLevels )
+void Rendering::TextureLevelData<WindowSize>::RecountLevelOffsets(int numLevels) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -225,8 +236,8 @@ void Rendering::TextureLevelData<WindowSize>
 {
 	RENDERING_CLASS_IS_VALID_1; 
 
-	auto oldNumDimensions = m_NumDimensions;
-	auto oldNumTotalBytes = m_NumTotalBytes;
+const	auto oldNumDimensions = m_NumDimensions;
+        const auto oldNumTotalBytes = m_NumTotalBytes;
 
 	inFile.Read(sizeof(int),&m_NumDimensions);
 
@@ -244,9 +255,9 @@ void Rendering::TextureLevelData<WindowSize>
 		m_NumDimensions = oldNumDimensions;
 		m_NumTotalBytes = oldNumTotalBytes;
 		
-		THROW_EXCEPTION(SYSTEM_TEXT("读取的纹理等级数据不正确。\n"));		
+		THROW_EXCEPTION(SYSTEM_TEXT("读取的纹理等级数据不正确。\n"s));		
 	}
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
 

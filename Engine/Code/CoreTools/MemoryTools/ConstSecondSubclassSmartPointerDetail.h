@@ -31,7 +31,7 @@ CoreTools::ConstSecondSubclassSmartPointer<SubClass, BaseClass>
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 } 
-#include STSTEM_WARNING_POP
+
 template <typename SubClass, typename BaseClass>
 CoreTools::ConstSecondSubclassSmartPointer<SubClass, BaseClass>
 	::ConstSecondSubclassSmartPointer() noexcept
@@ -39,7 +39,7 @@ CoreTools::ConstSecondSubclassSmartPointer<SubClass, BaseClass>
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename SubClass, typename BaseClass>

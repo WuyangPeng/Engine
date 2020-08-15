@@ -16,7 +16,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, LightSpotConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightSpotConstant);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightSpotConstant);
@@ -29,11 +32,7 @@ Rendering::LightSpotConstant
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::LightSpotConstant
-	::~LightSpotConstant()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightSpotConstant)
 
@@ -57,7 +56,8 @@ Rendering::ShaderFloatSmartPointer Rendering::LightSpotConstant
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ NEW0 ClassType(*this) };
+	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
 
+#include STSTEM_WARNING_POP

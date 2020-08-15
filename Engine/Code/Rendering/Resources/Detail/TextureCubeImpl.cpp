@@ -19,7 +19,16 @@
 #include <vector>
 
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH  
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26473)
+#include SYSTEM_WARNING_DISABLE(26492)
 Rendering::TextureCubeImpl
     ::TextureCubeImpl(TextureFormat format, int dimension,int numLevels,BufferUsage usage)
 	:ParentType{ format, TextureFlags::TextureCube, usage, numLevels },
@@ -50,8 +59,8 @@ void Rendering::TextureCubeImpl
     m_TextureLevelData.SetDimension(0,0,dimension);
     m_TextureLevelData.SetDimension(1,0,dimension);
     
-    auto maxLevels = GetMaxLevels();
-	auto numLevels = GetNumLevels();
+  const  auto maxLevels = GetMaxLevels();
+	const auto numLevels = GetNumLevels();
     
     RENDERING_ASSERTION_0(0 <= numLevels && numLevels <= maxLevels, "numLevels无效！\n");
     
@@ -73,10 +82,10 @@ int Rendering::TextureCubeImpl
 void Rendering::TextureCubeImpl
     ::ComputeNumLevelBytes ()
 {
-	auto type = GetTextureType();
+	const auto type = GetTextureType();
 	auto dimension0 = GetWidth ();
 	auto dimension1 = GetHeight ();
-	auto numLevels = GetNumLevels();
+	const auto numLevels = GetNumLevels();
     
     for (auto level = 0; level < numLevels; ++level)
     {
@@ -103,7 +112,7 @@ void Rendering::TextureCubeImpl
 int Rendering::TextureCubeImpl
     ::CalculateNumLevelBytes(int dimension)
 {
-	auto format = GetFormat();
+const	auto format = GetFormat();
     
     if (format == TextureFormat::DXT1)
     {
@@ -145,8 +154,9 @@ int Rendering::TextureCubeImpl
 void Rendering::TextureCubeImpl
     ::VerifyNumLevels()
 {
-	auto format = GetFormat();
-	auto numLevels = GetNumLevels();
+    CoreTools::DoNothing();
+    const	auto format = GetFormat();
+const	auto numLevels = GetNumLevels();
     
     if (format == TextureFormat::R32F || format == TextureFormat::G32R32F ||  format == TextureFormat::A32B32G32R32F)
     {
@@ -166,16 +176,12 @@ void Rendering::TextureCubeImpl
     }
 }
 
-Rendering::TextureCubeImpl
-    ::~TextureCubeImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,TextureCubeImpl)
 
 int Rendering::TextureCubeImpl
-    ::GetNumDimensions () const
+    ::GetNumDimensions () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -199,7 +205,7 @@ int Rendering::TextureCubeImpl
 }
 
 int Rendering::TextureCubeImpl
-    ::GetNumTotalBytes () const
+    ::GetNumTotalBytes () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -237,7 +243,7 @@ void Rendering::TextureCubeImpl
     
 	for (auto face = 0; face < 6; ++face)
 	{
-		auto numLevels = GetNumLevels();
+	const	auto numLevels = GetNumLevels();
 		auto dimension = GetWidth();
 
 		auto faceOffset = face * GetNumTotalBytes() / 6;
@@ -246,7 +252,7 @@ void Rendering::TextureCubeImpl
 		for (auto level = 1; level < numLevels; ++level)
 		{
 			auto texelsNext = GetTextureData(face,level);
-			auto dimensionNext = GetDimension(0,level);
+		const	auto dimensionNext = GetDimension(0,level);
 
 			GenerateNextMipmap(dimension, texels, dimensionNext, texelsNext);
 
@@ -273,7 +279,7 @@ const char* Rendering::TextureCubeImpl
 	RENDERING_ASSERTION_0(0 <= level && level < GetNumLevels(), "无效等级在GetData\n");
 	RENDERING_ASSERTION_0(0 <= face && face < 6, "无效面在GetData\n");
 
-	auto faceOffset = face * GetNumTotalBytes() / 6;
+const	auto faceOffset = face * GetNumTotalBytes() / 6;
 	return GetReadOnlyData() + faceOffset + GetLevelOffset(level);
 }
 
@@ -282,7 +288,7 @@ void Rendering::TextureCubeImpl
 {
     vector<FloatColour> colour(dimension * dimension);
     
-	auto format = GetFormat();
+const	auto format = GetFormat();
   
 	auto fromFunction = ColourConvertFrom::sm_FromFunction[System::EnumCastUnderlying(format)];
 
@@ -290,7 +296,7 @@ void Rendering::TextureCubeImpl
     
     if(fromFunction != nullptr && toFunction != nullptr)
     {
-		auto numTexels = dimension * dimension;
+	const	auto numTexels = dimension * dimension;
         
         fromFunction(numTexels, texels, &colour[0]);
         
@@ -298,9 +304,9 @@ void Rendering::TextureCubeImpl
         {
             for (auto widthIndex = 0; widthIndex < dimensionNext; ++widthIndex)
             {
-				auto index = widthIndex + dimensionNext * heightIndex;
-				auto base = 2 * (widthIndex + dimension * heightIndex);
-				auto fourthIndex = base + dimension + 1;
+			const	auto index = widthIndex + dimensionNext * heightIndex;
+			const	auto base = 2 * (widthIndex + dimension * heightIndex);
+			const	auto fourthIndex = base + dimension + 1;
                 
 				if (fourthIndex < boost::numeric_cast<int>(colour.size()))
 				{
@@ -317,7 +323,7 @@ void Rendering::TextureCubeImpl
             }
         }
 
-		auto numTexelsNext = dimensionNext * dimensionNext;
+	const	auto numTexelsNext = dimensionNext * dimensionNext;
         
         toFunction(numTexelsNext,  &colour[0], texelsNext);
     }
@@ -363,3 +369,4 @@ void Rendering::TextureCubeImpl
 	ExpandFileBufferSizeOnCube();
 }
 
+#include STSTEM_WARNING_POP

@@ -14,7 +14,7 @@ namespace Imagics
 	class IMAGICS_DEFAULT_DECLARE PdeFilter
 	{
 	public:
-		enum IMAGICS_DEFAULT_DECLARE ScaleType
+		enum class IMAGICS_DEFAULT_DECLARE ScaleType
 		{
 			// The data is processed as is.
 			ST_NONE,
@@ -34,22 +34,26 @@ namespace Imagics
 		
 		// The abstract base class for all PDE-based filters.
 		virtual ~PdeFilter ();
+		PdeFilter(const PdeFilter&) = default;
+		PdeFilter& operator=(const PdeFilter&) = default;
+		PdeFilter(PdeFilter&&) = default;
+		PdeFilter& operator=(PdeFilter&&) = default;
 		
 		// Member access.
-		int GetQuantity () const;
-		float GetBorderValue () const;
-		ScaleType GetScaleType () const;
+		int GetQuantity () const noexcept;
+		float GetBorderValue () const noexcept;
+		ScaleType GetScaleType () const noexcept;
 		
 		// Access to the time step for the PDE solver.
-		void SetTimeStep (float timeStep);
-		float GetTimeStep () const;
+		void SetTimeStep (float timeStep) noexcept;
+		float GetTimeStep () const noexcept;
 		
 		// This function calls OnPreUpdate, OnUpdate, and OnPostUpdate, in that
 		// order.
 		void Update ();
 		
 	protected:
-		PdeFilter (int quantity, const float* data, float borderValue,ScaleType scaleType);
+		PdeFilter (int quantity, const float* data, float borderValue,ScaleType scaleType) noexcept;
 		
 		// The derived classes for 2D and 3D implement this to recompute the
 		// boundary values when Neumann conditions are used.  If derived classes
@@ -78,12 +82,14 @@ namespace Imagics
 		// This member stores how the image data was transformed during the
 		// constructor call.
 		ScaleType mScaleType;
-		float mMin, mOffset, mScale;
+		float mMin= 0.0f;
+		float mOffset = 0.0f;
+		float mScale= 0.0f;
 		
 		// The time step for the PDE solver.  The stability of an algorithm
 		// depends on the magnitude of the time step, but the magnitude itself
 		// depends on the algorithm.
-		float mTimeStep;
+		float mTimeStep = 0.0f;
 	};
 }
 

@@ -25,7 +25,7 @@ namespace Network
 	public:
 		explicit SendMessageLevel(int messageMaxSize);
 
-		IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(SendMessageLevel);
+		CLASS_INVARIANT_DECLARE;
 
 		int GetTopLevelSize() const;
 		const ConstMessageInterfaceSharedPtr operator [](int index) const;
@@ -34,8 +34,8 @@ namespace Network
 		// 对顶层的对象进行保存。
 		void Insert(const MessageInterfaceSharedPtr& messagePtr);
 
-		int GetRemainingSize() const;
-		int GetCurrentSize() const;
+		int GetRemainingSize() const noexcept;
+		int GetCurrentSize() const noexcept;
 
 		void Clear();
 

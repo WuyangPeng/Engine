@@ -24,20 +24,20 @@ namespace Rendering
 		using TriangleKeySetConstIter = TriangleKeySet::const_iterator;
 
 	public:
-		ClodMeshEdge();
+		ClodMeshEdge() noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		void InsertTriangleKey(const TriangleKey& triangleKey);
 		void EraseTriangleKey(const TriangleKey& triangleKey);
 			 
-		int GetTriangleKeySize() const;
+		int GetTriangleKeySize() const noexcept;
 	
-		TriangleKeySetConstIter GetTriangleKeyBegin() const;
-		TriangleKeySetConstIter GetTriangleKeyEnd() const;
+		TriangleKeySetConstIter GetTriangleKeyBegin() const noexcept; 
+		TriangleKeySetConstIter GetTriangleKeyEnd() const noexcept;
 
-		int GetMinHeapRecordIndex() const;
-		void SetMinHeapRecordIndex(int index);
+		int GetMinHeapRecordIndex() const noexcept;
+		void SetMinHeapRecordIndex(int index) noexcept;
 
 		const TriangleKey GetBeginTriangleKey() const;
 		const TriangleKey GetEndTriangleKey() const;

@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::CollapseRecordImpl
-	::CollapseRecordImpl (int vKeep, int vThrow, int numVertices,int numTriangles)
+	::CollapseRecordImpl (int vKeep, int vThrow, int numVertices,int numTriangles) noexcept
 	:m_VKeep{ vKeep }, m_VThrow{ vThrow }, m_NumVertices{ numVertices }, m_NumTriangles{ numTriangles }, m_Indices{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -32,7 +32,7 @@ bool Rendering::CollapseRecordImpl
 #endif // OPEN_CLASS_INVARIANT 
 
 int Rendering::CollapseRecordImpl
-	::GetVKeep() const
+	::GetVKeep() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -40,7 +40,7 @@ int Rendering::CollapseRecordImpl
 }
 
 void Rendering::CollapseRecordImpl
-	::SetVKeep( int vKeep )
+	::SetVKeep( int vKeep ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -48,7 +48,7 @@ void Rendering::CollapseRecordImpl
 }
 
 int Rendering::CollapseRecordImpl
-	::GetNumVertices() const
+	::GetNumVertices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -56,7 +56,7 @@ int Rendering::CollapseRecordImpl
 }
 
 void Rendering::CollapseRecordImpl
-	::SetNumVertices( int numVertices )
+	::SetNumVertices( int numVertices ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -64,7 +64,7 @@ void Rendering::CollapseRecordImpl
 }
 
 int Rendering::CollapseRecordImpl
-	::GetNumTriangles() const
+	::GetNumTriangles() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -72,7 +72,7 @@ int Rendering::CollapseRecordImpl
 }
 
 void Rendering::CollapseRecordImpl
-	::SetNumTriangles( int numTriangles )
+	::SetNumTriangles( int numTriangles ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -101,7 +101,7 @@ int Rendering::CollapseRecordImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= index && index < GetIndicesSize(),"Ë÷Òý´íÎó£¡");
 
-	return m_Indices[index];
+	return m_Indices.at(index);
 }
 
 int Rendering::CollapseRecordImpl
@@ -113,7 +113,7 @@ int Rendering::CollapseRecordImpl
 }
 
 int Rendering::CollapseRecordImpl
-	::GetVThrow() const
+	::GetVThrow() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -121,7 +121,7 @@ int Rendering::CollapseRecordImpl
 }
 
 void Rendering::CollapseRecordImpl
-	::SetVThrow(int vThrow)
+	::SetVThrow(int vThrow) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -167,7 +167,7 @@ int Rendering::CollapseRecordImpl
 }
 
 void Rendering::CollapseRecordImpl
-	::ClearIndices()
+	::ClearIndices() noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

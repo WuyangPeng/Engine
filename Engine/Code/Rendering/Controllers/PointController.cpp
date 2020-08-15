@@ -25,7 +25,10 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26455)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, PointController);
@@ -66,7 +69,7 @@ Rendering::PointController& Rendering::PointController
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, PointController) 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PointController,GetNumPoints,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController,GetNumPoints,int)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController,GetPointLinearSpeed,int,float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController,GetPointAngularSpeed,int,float)
@@ -108,14 +111,14 @@ void Rendering::PointController
 	return m_Impl->SetPointAngularAxis(index, pointAngularAxis);
 }
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PointController,GetSystemLinearSpeed,float)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController,SetSystemLinearSpeed,float,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PointController,GetSystemAngularSpeed,float)								 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController,SetSystemAngularSpeed,float,void) 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PointController,GetSystemLinearAxis,const Rendering::PointController::AVector) 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, PointController,SetSystemLinearAxis,AVector,void) 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PointController,GetSystemAngularAxis,const Rendering::PointController::AVector)  
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, PointController, SetSystemAngularAxis,AVector,void) 							 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController,GetSystemLinearSpeed,float)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, PointController,SetSystemLinearSpeed,float,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController,GetSystemAngularSpeed,float)								 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, PointController,SetSystemAngularSpeed,float,void) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController,GetSystemLinearAxis,const Rendering::PointController::AVector) 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, PointController,SetSystemLinearAxis,AVector,void) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController,GetSystemAngularAxis,const Rendering::PointController::AVector)  
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, PointController, SetSystemAngularAxis,AVector,void) 							 
 
  
 void Rendering::PointController
@@ -182,15 +185,15 @@ void Rendering::PointController
 
 	if (m_Points != nullptr)
 	{
-		auto distance = ctrlTime * GetSystemLinearSpeed();
+		const auto distance = ctrlTime * GetSystemLinearSpeed();
 		auto deltaTrn = distance * GetSystemLinearAxis();
 		auto localTransform = m_Points->GetLocalTransform();
 		auto translate = localTransform.GetTranslate() + deltaTrn;
 		localTransform.SetTranslate(translate);		
 
-		auto angle = ctrlTime * GetSystemAngularSpeed();
-		Mathematics::Matrixf deltaRot{ GetSystemAngularAxis(), angle };
-		auto rotate = deltaRot * localTransform.GetRotate();
+		const auto angle = ctrlTime * GetSystemAngularSpeed();
+		const Mathematics::Matrixf deltaRot{ GetSystemAngularAxis(), angle };
+		const auto rotate = deltaRot * localTransform.GetRotate();
 		localTransform.SetRotate(rotate); 
 
 		m_Points->SetLocalTransform(localTransform);
@@ -209,7 +212,7 @@ void Rendering::PointController
 		const auto numPoints = m_Points->GetNumPoints();
 		for (auto i = 0; i < numPoints; ++i)
 		{
-			auto distance = ctrlTime * GetPointLinearSpeed(i);
+			const auto distance = ctrlTime * GetPointLinearSpeed(i);
 			auto position = vba.GetPosition<Mathematics::APointf>(i);
 			auto deltaTrn = distance * GetPointLinearAxis(i);
 			m_Points->GetVertexBuffer()->SetPosition(vba, i, position + deltaTrn);			 
@@ -219,15 +222,15 @@ void Rendering::PointController
 		{
 			for (auto i = 0; i < numPoints; ++i)
 			{
-				auto angle = ctrlTime * GetPointAngularSpeed(i);
+				const auto angle = ctrlTime * GetPointAngularSpeed(i);
 				auto normal = vba.GetNormal<AVector>(i);
 				normal.Normalize();
-				Mathematics::Matrixf deltaRot{ GetPointAngularAxis(i), angle };
+				const Mathematics::Matrixf deltaRot{ GetPointAngularAxis(i), angle };
 				m_Points->GetVertexBuffer()->SetTriangleNormal(vba, i, deltaRot * normal);			 
 			}
 		}
 
-		RENDERER_MANAGE_SINGLETON.UpdateAll(m_Points->GetConstVertexBuffer().GetData());
+		RENDERER_MANAGE_SINGLETON.UpdateAll(m_Points->GetConstVertexBuffer().get());
 	}	
 }
 
@@ -313,4 +316,4 @@ void Rendering::PointController
 
 
 
- 
+ #include STSTEM_WARNING_POP

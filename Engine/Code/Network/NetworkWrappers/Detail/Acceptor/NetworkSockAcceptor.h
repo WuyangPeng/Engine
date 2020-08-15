@@ -22,22 +22,22 @@ namespace Network
 	public:
 		explicit NetworkSockAcceptor(int port);
 		NetworkSockAcceptor(const std::string& hostName, int port);
-		virtual ~NetworkSockAcceptor();
+ 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
-		virtual bool Accept(const SockStreamSharedPtr& sockStream) override;
+		 bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+		 bool Accept(const SockStreamSharedPtr& sockStream) override;
 
-		virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
-		virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+		 void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
+		 void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-		virtual bool EnableNonBlock() override;
+		 bool EnableNonBlock() noexcept override;
 
-		virtual WinSocketType GetWinSocket() override;
+		 WinSocketType GetWinSocket() noexcept override;
 
-		virtual const std::string GetAddress() const override;
-		virtual int GetPort() const override;
+		 const std::string GetAddress() const override;
+		 int GetPort() const noexcept override;
 
 	private:
 		WinSocketType m_SocketHandle;

@@ -33,9 +33,9 @@ namespace Rendering
 		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
 
 	public:		
-		BlendTransformControllerImpl();
+		BlendTransformControllerImpl() noexcept;
 		BlendTransformControllerImpl(const TransformControllerSmartPointer& firstController,const TransformControllerSmartPointer& secondController,
-									 bool rotationScaleMatrices,bool geometricRotation = false,bool geometricScale = false);
+                                             bool rotationScaleMatrices, bool geometricRotation = false, bool geometricScale = false) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -51,14 +51,14 @@ namespace Rendering
 		const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;	
 		
  		// 权重w是一个数字的量0 <= w <= 1。
-		const ConstTransformControllerSmartPointer GetFirstController() const;
-		const ConstTransformControllerSmartPointer GetSecondController() const;
-		bool IsRotationScaleMatrices() const;
-		void SetWeight (float weight);
-		float GetWeight () const;
+                const ConstTransformControllerSmartPointer GetFirstController() const noexcept;
+                const ConstTransformControllerSmartPointer GetSecondController() const noexcept;
+                bool IsRotationScaleMatrices() const noexcept;
+                void SetWeight(float weight) noexcept;
+                float GetWeight() const noexcept;
 
-		bool IsGeometricRotation() const;
-		bool IsGeometricScale() const;
+		bool IsGeometricRotation() const noexcept;
+                bool IsGeometricScale() const noexcept;
 
 		void  SetObject(ControllerInterface* object);
 		bool Update(double applicationTime);

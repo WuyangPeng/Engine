@@ -28,7 +28,7 @@ namespace Network
 	public:
 		explicit HandleSetIterator(const ConfigurationStrategy& configurationStrategy, const HandleSet& handleSet);
 
-		IMPL_MOVE_OPERATOR_COMPLETE_DECLARE(HandleSetIterator);
+		CLASS_INVARIANT_DECLARE;
 
 		ACEHandle operator()();
 

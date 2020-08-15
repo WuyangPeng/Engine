@@ -30,14 +30,13 @@ namespace CoreTools
 	template<unsigned N>
 	struct Factorial;
 
-	uint32_t RecursiveFactorial(uint32_t integer) noexcept;
-	uint32_t NonRecursiveFactorial(uint32_t integer) noexcept;
+	uint32_t RecursiveFactorial(uint32_t integer) noexcept; 
 
 	template<unsigned N>
 	struct Fibonacci;
 
 	uint32_t RecursiveFibonacci(uint32_t integer) noexcept;
-	uint32_t NonRecursiveFibonacci(uint32_t integer) noexcept;
+ 
 
 	template <class T>
 	struct ParamType;

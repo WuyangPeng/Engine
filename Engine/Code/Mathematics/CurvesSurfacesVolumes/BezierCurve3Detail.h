@@ -14,7 +14,9 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Algebra/Vector3DDetail.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 template <typename Real>
 Mathematics::BezierCurve3<Real>
 	::BezierCurve3 (int degree, Vector3D<Real>* ctrlPoint)
@@ -22,7 +24,8 @@ Mathematics::BezierCurve3<Real>
 {
     MATHEMATICS_ASSERTION_0(degree >= 2, "The degree must be three or larger\n");
 
-    int i, j;
+    int i = 0;
+	int j = 0;
 
     mDegree = degree;
     mNumCtrlPoints = mDegree + 1;
@@ -80,23 +83,31 @@ template <typename Real>
 Mathematics::BezierCurve3<Real>
 	::~BezierCurve3 ()
 {
-    DELETE2(mChoose);
+	EXCEPTION_TRY
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+ DELETE2(mChoose);
     DELETE1(mDer3CtrlPoint);
     DELETE1(mDer2CtrlPoint);
     DELETE1(mDer1CtrlPoint);
     DELETE1(mCtrlPoint);
+#include STSTEM_WARNING_POP
+}
+EXCEPTION_ALL_CATCH(Mathematics)  
+    
 }
 
 template <typename Real>
 int Mathematics::BezierCurve3<Real>
-	::GetDegree () const
+	::GetDegree () const noexcept
 {
     return mDegree;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real>* Mathematics::BezierCurve3<Real>
-	::GetControlPoints () const
+	::GetControlPoints () const noexcept
 {
     return mCtrlPoint;
 }
@@ -129,7 +140,7 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
 	auto powT = t;
 	auto result = oneMinusT*mDer1CtrlPoint[0];
 
-	auto degreeM1 = mDegree - 1;
+	const auto degreeM1 = mDegree - 1;
     for (auto i = 1; i < degreeM1; ++i)
     {
 		auto coeff = mChoose[degreeM1][i]*powT;
@@ -138,7 +149,7 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
     }
 
     result += powT*mDer1CtrlPoint[degreeM1];
-    result *= Real(mDegree);
+    result *= static_cast<Real>(mDegree);
 
     return result;
 }
@@ -151,7 +162,7 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
 	auto powT = t;
 	auto result = oneMinusT*mDer2CtrlPoint[0];
 
-	auto degreeM2 = mDegree - 2;
+	const auto degreeM2 = mDegree - 2;
     for (auto i = 1; i < degreeM2; ++i)
     {
 		auto coeff = mChoose[degreeM2][i]*powT;
@@ -160,9 +171,9 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
     }
 
     result += powT*mDer2CtrlPoint[degreeM2];
-	auto temp = mDegree - 1;
-	auto temp2 = mDegree * temp;
-    result *= Real(temp2);
+	const auto temp = mDegree - 1;
+	const auto temp2 = mDegree * temp;
+    result *= static_cast<Real>(temp2);
 
     return result;
 }
@@ -180,7 +191,7 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
 	auto powT = t;
 	auto result = oneMinusT*mDer3CtrlPoint[0];
 
-    int degreeM3 = mDegree - 3;
+    const int degreeM3 = mDegree - 3;
     for (auto i = 1; i < degreeM3; ++i)
     {
 		auto coeff = mChoose[degreeM3][i]*powT;
@@ -189,14 +200,14 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
     }
 
     result += powT*mDer3CtrlPoint[degreeM3];
-	auto temp1 = mDegree - 1;
-	auto temp2 = mDegree - 2;
-	auto temp3 = mDegree * temp1*temp2;
-    result *= Real(temp3);
+	const auto temp1 = mDegree - 1;
+	const auto temp2 = mDegree - 2;
+	const auto temp3 = mDegree * temp1*temp2;
+    result *= static_cast<Real>(temp3);
 
     return result;
 }
-
+#include STSTEM_WARNING_POP
 
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BEZIER_CURVE3_DETAIL)
 

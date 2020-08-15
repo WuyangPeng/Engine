@@ -20,15 +20,14 @@ namespace Network
 		using ParentType = SockConnectorImpl;
 
 	public:
-		NetworkSockConnector();
-		virtual ~NetworkSockConnector();
+		NetworkSockConnector() noexcept; 
 
 		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
 
-		virtual bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
-		virtual void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+		 bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+		 void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-		virtual const SockConnectorPtr Clone() const override;
+		 const SockConnectorPtr Clone() const override;
 	};
 }
 

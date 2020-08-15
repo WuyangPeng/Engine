@@ -13,17 +13,13 @@
 using std::make_shared;
 
 Database::NullTable
-	::NullTable(const ConfigurationStrategy& configurationStrategy)
+	::NullTable(const ConfigurationStrategy& configurationStrategy) noexcept
 	: ParentType{ configurationStrategy }
 {
 	DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-Database::NullTable
-	::~NullTable()
-{
-	DATABASE_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, NullTable)
 

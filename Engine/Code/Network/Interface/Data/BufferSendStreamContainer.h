@@ -30,12 +30,12 @@ namespace Network
 
 		void Clear();
 
-		bool IsEmpty() const;
+		bool IsEmpty() const noexcept;
 
 		uint32_t GetCurrentSize() const;
 
-		ACEHandle GetACEHandle() const;
-		uint64_t GetSocketID() const;
+		ACEHandle GetACEHandle() const noexcept;
+		uint64_t GetSocketID() const noexcept;
 
 	private:
 		uint64_t m_SocketID;

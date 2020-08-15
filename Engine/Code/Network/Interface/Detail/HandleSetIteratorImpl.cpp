@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 
 Network::HandleSetIteratorImpl
-	::HandleSetIteratorImpl()
+	::HandleSetIteratorImpl() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -30,6 +30,6 @@ Network::ACEHandle Network::HandleSetIteratorImpl
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("»ñÈ¡¾ä±úÊ§°Ü£¡"));
+	THROW_EXCEPTION(SYSTEM_TEXT("»ñÈ¡¾ä±úÊ§°Ü£¡"s));
 }
 

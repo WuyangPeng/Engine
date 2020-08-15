@@ -18,7 +18,9 @@
 using std::string;
 using std::to_string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::NetworkSockInetAddress
 	::NetworkSockInetAddress(const string& hostName, int port)
 	:m_InetAddress{}, m_AddressName{ hostName }
@@ -44,7 +46,7 @@ Network::NetworkSockInetAddress
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 Network::NetworkSockInetAddress
 	::NetworkSockInetAddress(int port)
 	:m_InetAddress{}, m_AddressName{ "0.0.0.0" }
@@ -58,16 +60,12 @@ Network::NetworkSockInetAddress
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::NetworkSockInetAddress
-	::~NetworkSockInetAddress()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkSockInetAddress)
 
 const Network::WinSockInetAddressType& Network::NetworkSockInetAddress
-	::GetWinSockInetAddress() const
+	::GetWinSockInetAddress() const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 

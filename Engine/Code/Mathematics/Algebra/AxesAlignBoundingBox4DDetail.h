@@ -72,6 +72,7 @@ template <typename T>
 bool Mathematics::AxesAlignBoundingBox4D<T>
 	::IsValid() const noexcept
 {
+	try{
 	if (m_MaxPoint.GetXCoordinate() < m_MinPoint.GetXCoordinate() ||
 		m_MaxPoint.GetYCoordinate() < m_MinPoint.GetYCoordinate() ||
 		m_MaxPoint.GetZCoordinate() < m_MinPoint.GetZCoordinate() ||
@@ -82,6 +83,11 @@ bool Mathematics::AxesAlignBoundingBox4D<T>
 	else
 	{
 		return true;
+	}
+	}
+	catch(...)
+	{
+		return false;
 	}
 }
 #endif // OPEN_CLASS_INVARIANT

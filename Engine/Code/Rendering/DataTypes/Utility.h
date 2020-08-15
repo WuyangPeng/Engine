@@ -21,9 +21,9 @@ namespace Rendering
     public:
 		// pixels数组大小为x方向为xSize * numBytesPerPixel，
 		// y方向为ySize
-        static void ReflectX (int xSize, int ySize,int numBytesPerPixel,char* pixels);
+        static void ReflectX (int xSize, int ySize,int numBytesPerPixel,char* pixels) noexcept;
 
-        static void ReflectY (int xSize, int ySize,int numBytesPerPixel,char* pixels);
+        static void ReflectY (int xSize, int ySize,int numBytesPerPixel,char* pixels) noexcept;
     };
 }
 

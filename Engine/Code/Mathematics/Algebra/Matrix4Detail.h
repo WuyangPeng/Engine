@@ -16,6 +16,10 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
 template <typename Real>
 const Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>
 	::sm_Zero{ MatrixTypeFlags::Zero };
@@ -866,5 +870,5 @@ bool Mathematics
 {
 	return Approximate(lhs, rhs, Math<Real>::sm_ZeroTolerance);
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_MATRIX4_DETAIL_H

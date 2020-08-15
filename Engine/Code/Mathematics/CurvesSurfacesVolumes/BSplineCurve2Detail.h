@@ -13,6 +13,10 @@
 
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26429)
 
 template <typename Real>
 Mathematics::BSplineCurve2<Real>
@@ -46,14 +50,22 @@ template <typename Real>
 Mathematics::BSplineCurve2<Real>
 	::~BSplineCurve2 ()
 {
-    DELETE1(mCtrlPoint);
+	EXCEPTION_TRY
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+  DELETE1(mCtrlPoint);
+#include STSTEM_WARNING_POP
+}
+EXCEPTION_ALL_CATCH(Mathematics)  
+   
 }
 
 template <typename Real>
 void Mathematics::BSplineCurve2<Real>
 	::CreateControl (const Vector2D<Real>* ctrlPoint)
 {
-	auto newNumCtrlPoints = mNumCtrlPoints + mReplicate;
+	const auto newNumCtrlPoints = mNumCtrlPoints + mReplicate;
 
     mCtrlPoint = NEW1<Vector2D<Real> >(newNumCtrlPoints);
     memcpy(mCtrlPoint, ctrlPoint, mNumCtrlPoints*sizeof(Vector2D<Real>));
@@ -66,42 +78,42 @@ void Mathematics::BSplineCurve2<Real>
 
 template <typename Real>
 int Mathematics::BSplineCurve2<Real>
-	::GetNumCtrlPoints () const
+	::GetNumCtrlPoints () const noexcept
 {
     return mNumCtrlPoints;
 }
 
 template <typename Real>
 int Mathematics::BSplineCurve2<Real>
-	::GetDegree () const
+	::GetDegree () const noexcept
 {
     return mBasis.GetDegree();
 }
 
 template <typename Real>
 bool Mathematics::BSplineCurve2<Real>
-	::IsOpen () const
+	::IsOpen () const noexcept
 {
     return mBasis.IsOpen();
 }
 
 template <typename Real>
 bool Mathematics::BSplineCurve2<Real>
-	::IsUniform () const
+	::IsUniform () const noexcept
 {
     return mBasis.IsUniform();
 }
 
 template <typename Real>
 bool Mathematics::BSplineCurve2<Real>
-	::IsLoop () const
+	::IsLoop () const noexcept
 {
     return mLoop;
 }
 
 template <typename Real>
 void Mathematics::BSplineCurve2<Real>
-	::SetControlPoint (int i, const Vector2D<Real>& ctrl)
+	::SetControlPoint (int i, const Vector2D<Real>& ctrl) noexcept
 {
     if (0 <= i && i < mNumCtrlPoints)
     {
@@ -118,7 +130,7 @@ void Mathematics::BSplineCurve2<Real>
 
 template <typename Real>
 Mathematics::Vector2D<Real> Mathematics::BSplineCurve2<Real>
-	::GetControlPoint (int i) const
+	::GetControlPoint (int i) const noexcept
 {
     if (0 <= i && i < mNumCtrlPoints)
     {
@@ -146,7 +158,7 @@ template <typename Real>
 void Mathematics::BSplineCurve2<Real>
 	::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, Vector2D<Real>* der2, Vector2D<Real>* der3) const
 {
-    int i, imin, imax;
+    int i = 0, imin = 0, imax = 0;
     if (der3)
     {
         mBasis.Compute(t, 0, imin, imax);
@@ -209,7 +221,7 @@ void Mathematics::BSplineCurve2<Real>
 
 template <typename Real>
 Mathematics::BSplineBasis<Real>& Mathematics::BSplineCurve2<Real>
-	::GetBasis ()
+	::GetBasis () noexcept
 {
     return mBasis;
 }
@@ -249,7 +261,7 @@ Mathematics::Vector2D<Real> Mathematics::BSplineCurve2<Real>
     Get(t, 0, 0, 0, &der3);
     return der3;
 }
-
+#include STSTEM_WARNING_POP
 #endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_CURVE2_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE2_DETAIL_H

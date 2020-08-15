@@ -16,64 +16,56 @@
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 
-Rendering::VertexFormatType
-	::VertexFormatType()
-	:m_Type{ VertexFormatFlags::AttributeType::None },m_Usage{ VertexFormatFlags::AttributeUsage::None },m_UsageIndex{ 0 }
+Rendering::VertexFormatType ::VertexFormatType() noexcept
+    : m_Type{ VertexFormatFlags::AttributeType::None }, m_Usage{ VertexFormatFlags::AttributeUsage::None }, m_UsageIndex{ 0 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VertexFormatType
-	::VertexFormatType(AttributeType type, AttributeUsage usage,unsigned int usageIndex) 
-	:m_Type{ type },m_Usage{ usage },m_UsageIndex{ usageIndex }
+Rendering::VertexFormatType ::VertexFormatType(AttributeType type, AttributeUsage usage, unsigned int usageIndex) noexcept
+    : m_Type{ type }, m_Usage{ usage }, m_UsageIndex{ usageIndex }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VertexFormatType)
 
-Rendering::VertexFormatFlags::AttributeType Rendering::VertexFormatType
-	::GetType() const
+Rendering::VertexFormatFlags::AttributeType Rendering::VertexFormatType ::GetType() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Type;
 }
 
-void Rendering::VertexFormatType
-	::SetType( AttributeType type )
+void Rendering::VertexFormatType ::SetType(AttributeType type) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Type = type;
 }
 
-Rendering::VertexFormatFlags::AttributeUsage Rendering::VertexFormatType
-	::GetUsage() const
+Rendering::VertexFormatFlags::AttributeUsage Rendering::VertexFormatType ::GetUsage() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Usage;
 }
 
-void Rendering::VertexFormatType
-	::SetUsage( AttributeUsage usage )
+void Rendering::VertexFormatType ::SetUsage(AttributeUsage usage) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Usage = usage;
 }
 
-unsigned int Rendering::VertexFormatType
-	::GetUsageIndex() const
+unsigned int Rendering::VertexFormatType ::GetUsageIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_UsageIndex;
 }
 
-void Rendering::VertexFormatType
-	::SetUsageIndex( unsigned int usageIndex )
+void Rendering::VertexFormatType ::SetUsageIndex(unsigned int usageIndex) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -117,8 +109,8 @@ void Rendering::VertexFormatType
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto type = System::EnumCastUnderlying(m_Type);
-	auto usage = System::EnumCastUnderlying(m_Usage);
+	 const auto type = System::EnumCastUnderlying(m_Type);
+        const auto usage = System::EnumCastUnderlying(m_Usage);
 
 	outFile.Write(sizeof(int), &type);
 	outFile.Write(sizeof(int), &usage);

@@ -24,15 +24,19 @@ namespace Imagics
 		TImage3D (const char* filename);
 		
 		// Data access.
-		T& operator() (int x, int y, int z) const;
+		T& operator() (int x, int y, int z) const noexcept;
 		
 		// Conversion between 3D coordinates and 1D indexing.
-		int GetIndex (int x, int y, int z) const;
-		void GetCoordinates (int index, int& x, int& y, int& z) const;
+		int GetIndex (int x, int y, int z) const noexcept;
+		void GetCoordinates (int index, int& x, int& y, int& z) const noexcept;
 		
 		// Assignment.
 		TImage3D& operator= (const TImage3D& image);
-		TImage3D& operator= (T value);
+                TImage3D& operator=(T value) noexcept;
+		
+		~TImage3D() = default;
+		TImage3D& operator= (TImage3D&& image)= default;
+		TImage3D (TImage3D&& image)= default;
 		
 	protected:
 		using TImage<T>::SetBounds;

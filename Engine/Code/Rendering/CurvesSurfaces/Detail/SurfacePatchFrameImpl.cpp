@@ -9,9 +9,8 @@
 #include "SurfacePatchFrameImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::SurfacePatchFrameImpl
-	::SurfacePatchFrameImpl(const APoint& position, const AVector& tangent0, const AVector& tangent1, const AVector& normal)
-	:m_Position{ position }, m_Tangent0{ tangent0 },m_Tangent1{ tangent1 }, m_Normal{ normal }
+Rendering::SurfacePatchFrameImpl ::SurfacePatchFrameImpl(const APoint& position, const AVector& tangent0, const AVector& tangent1, const AVector& normal) noexcept
+    : m_Position{ position }, m_Tangent0{ tangent0 }, m_Tangent1{ tangent1 }, m_Normal{ normal }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -24,32 +23,28 @@ bool Rendering::SurfacePatchFrameImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-const Rendering::SurfacePatchFrameImpl::APoint Rendering::SurfacePatchFrameImpl
-	::GetPosition() const
+const Rendering::SurfacePatchFrameImpl::APoint Rendering::SurfacePatchFrameImpl ::GetPosition() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Position;
 }
 
-const Rendering::SurfacePatchFrameImpl::AVector Rendering::SurfacePatchFrameImpl
-	::GetTangent0() const
+const Rendering::SurfacePatchFrameImpl::AVector Rendering::SurfacePatchFrameImpl ::GetTangent0() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Tangent0;
 }
 
-const Rendering::SurfacePatchFrameImpl::AVector Rendering::SurfacePatchFrameImpl
-	::GetTangent1() const
+const Rendering::SurfacePatchFrameImpl::AVector Rendering::SurfacePatchFrameImpl ::GetTangent1() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Tangent1;
 }
 
-const Rendering::SurfacePatchFrameImpl::AVector Rendering::SurfacePatchFrameImpl
-	::GetNormal() const
+const Rendering::SurfacePatchFrameImpl::AVector Rendering::SurfacePatchFrameImpl ::GetNormal() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

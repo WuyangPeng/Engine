@@ -54,17 +54,17 @@ namespace Mathematics
 		CLASS_INVARIANT_DECLARE;
 
 		// ×ø±ê·ÃÎÊ
-		Real GetXCoordinate() const noexcept;
-		Real GetYCoordinate() const noexcept;
+		Real GetXCoordinate() const;
+		Real GetYCoordinate() const;
 		bool IsZero(const Real epsilon = Math::sm_ZeroTolerance) const;
 
-		void ZeroOut();
+		void ZeroOut() noexcept;
 		void SetCoordinate(Real x, Real y);
 		void SetXCoordinate(Real x);
 		void SetYCoordinate(Real y);
 		void Normalize(const Real epsilon = Math::sm_ZeroTolerance);
 
-		bool IsNormalize(const Real epsilon = Math::sm_ZeroTolerance) const noexcept;
+		bool IsNormalize(const Real epsilon = Math::sm_ZeroTolerance) const;
 
 		const ClassType operator- () const;
 		const Real& operator[](unsigned int index) const;

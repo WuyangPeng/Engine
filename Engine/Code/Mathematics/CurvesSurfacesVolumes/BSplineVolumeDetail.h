@@ -10,7 +10,14 @@
 #include "BSplineVolume.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
 namespace Mathematics
 {
 
@@ -35,24 +42,29 @@ BSplineVolume<Real>::BSplineVolume (int numUCtrlPoints, int numVCtrlPoints, int 
 template <typename Real>
 BSplineVolume<Real>::~BSplineVolume ()
 {
-    DELETE3(mCtrlPoint);
+	EXCEPTION_TRY
+{
+DELETE3(mCtrlPoint);
+}
+EXCEPTION_ALL_CATCH(Rendering)  
+    
 }
 
 template <typename Real>
-int BSplineVolume<Real>::GetNumCtrlPoints (int dim) const
+int BSplineVolume<Real>::GetNumCtrlPoints (int dim) const noexcept
 {
     return mBasis[dim].GetNumCtrlPoints();
 }
 
 template <typename Real>
-int BSplineVolume<Real>::GetDegree (int dim) const
+int BSplineVolume<Real>::GetDegree (int dim) const noexcept
 {
     return mBasis[dim].GetDegree();
 }
 
 template <typename Real>
 void BSplineVolume<Real>::SetControlPoint (int uIndex, int vIndex,
-    int wIndex, const Vector3D<Real>& ctrlPoint)
+    int wIndex, const Vector3D<Real>& ctrlPoint) noexcept
 {
     if (0 <= uIndex && uIndex < mBasis[0].GetNumCtrlPoints()  &&  0 <= vIndex && vIndex < mBasis[1].GetNumCtrlPoints() &&  0 <= wIndex && wIndex < mBasis[2].GetNumCtrlPoints())
     {
@@ -62,7 +74,7 @@ void BSplineVolume<Real>::SetControlPoint (int uIndex, int vIndex,
 
 template <typename Real>
 Vector3D<Real> BSplineVolume<Real>::GetControlPoint (int uIndex, int vIndex,
-    int wIndex) const
+    int wIndex) const noexcept
 {
     if (0 <= uIndex && uIndex < mBasis[0].GetNumCtrlPoints() &&  0 <= vIndex && vIndex < mBasis[1].GetNumCtrlPoints()  &&  0 <= wIndex && wIndex < mBasis[2].GetNumCtrlPoints())
     {
@@ -201,6 +213,6 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivative (int i, Real pos[3]) const
 }
 
 }
-
+#include STSTEM_WARNING_POP
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_DETAIL_H

@@ -41,6 +41,10 @@ namespace Rendering
 		explicit ProjectorConstantImpl(const ProjectorSmartPointer& projector);
 		ProjectorConstantImpl();
 		virtual ~ProjectorConstantImpl();
+                ProjectorConstantImpl(const ProjectorConstantImpl&) = default;
+                ProjectorConstantImpl& operator=(const ProjectorConstantImpl&) = default;
+                ProjectorConstantImpl(ProjectorConstantImpl&&) noexcept = default;
+                ProjectorConstantImpl& operator=(ProjectorConstantImpl&&) noexcept = default;
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 	

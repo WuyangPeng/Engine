@@ -16,7 +16,11 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Material);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Material);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Material);
@@ -131,3 +135,4 @@ int Rendering::Material
 	return size;
 }
 
+#include STSTEM_WARNING_POP

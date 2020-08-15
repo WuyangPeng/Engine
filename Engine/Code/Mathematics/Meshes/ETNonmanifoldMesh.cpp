@@ -10,9 +10,21 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 
 #include <fstream>
-
+#include <gsl/gsl_util>
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26402)
+#include SYSTEM_WARNING_DISABLE(26429)
 Mathematics::ETNonmanifoldMesh
-	::ETNonmanifoldMesh (ECreator eCreator, TCreator tCreator)
+	::ETNonmanifoldMesh (ECreator eCreator, TCreator tCreator) noexcept
 {
     mECreator = (eCreator ? eCreator : CreateEdge);
     mTCreator = (tCreator ? tCreator : CreateTriangle);
@@ -21,8 +33,12 @@ Mathematics::ETNonmanifoldMesh
 Mathematics::ETNonmanifoldMesh
 	::~ETNonmanifoldMesh ()
 {
-    EMapIterator eiter = mEMap.begin();
-    EMapIterator eend = mEMap.end();
+	EXCEPTION_TRY
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+ EMapIterator eiter = mEMap.begin();
+    const EMapIterator eend = mEMap.end();
     for (/**/; eiter != eend; ++eiter)
     {
         Edge* edge = eiter->second;
@@ -30,13 +46,16 @@ Mathematics::ETNonmanifoldMesh
     }
 
     TMapIterator titer = mTMap.begin();
-    TMapIterator tend = mTMap.end();
+    const TMapIterator tend = mTMap.end();
     for (/**/; titer != tend; ++titer)
     {
         Triangle* tri = titer->second;
         DELETE0(tri);
     }
+#include STSTEM_WARNING_POP
 }
+    EXCEPTION_ALL_CATCH(Mathematics)
+    }
 
 Mathematics::ETNonmanifoldMesh::EPtr Mathematics::ETNonmanifoldMesh
 	::CreateEdge (int v0, int v1)
@@ -53,8 +72,8 @@ Mathematics::ETNonmanifoldMesh::TPtr Mathematics::ETNonmanifoldMesh
 Mathematics::ETNonmanifoldMesh::TPtr Mathematics::ETNonmanifoldMesh
 	::InsertTriangle (int v0, int v1, int v2)
 {
-    TriangleKey tKey(v0, v1, v2);
-    TMapIterator titer = mTMap.find(tKey);
+    const TriangleKey tKey(v0, v1, v2);
+    const TMapIterator titer = mTMap.find(tKey);
     if (titer != mTMap.end())
     {
         // Triangle already exists.
@@ -68,9 +87,9 @@ Mathematics::ETNonmanifoldMesh::TPtr Mathematics::ETNonmanifoldMesh
     // Add edges to mesh.
     for (int i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
     {
-        EdgeKey eKey(tri->V[i0], tri->V[i1]);
-        EPtr edge;
-        EMapIterator eiter = mEMap.find(eKey);
+        const EdgeKey eKey(tri->V[i0], tri->V[i1]);
+        EPtr edge = nullptr;
+        const EMapIterator eiter = mEMap.find(eKey);
         if (eiter == mEMap.end())
         {
             // First time edge encountered.
@@ -94,8 +113,8 @@ Mathematics::ETNonmanifoldMesh::TPtr Mathematics::ETNonmanifoldMesh
 bool Mathematics::ETNonmanifoldMesh
 	::RemoveTriangle (int v0, int v1, int v2)
 {
-    TriangleKey tKey(v0, v1, v2);
-    TMapIterator titer = mTMap.find(tKey);
+    const TriangleKey tKey(v0, v1, v2);
+   const  TMapIterator titer = mTMap.find(tKey);
     if (titer == mTMap.end())
     {
         // Triangle does not exist.
@@ -112,7 +131,7 @@ bool Mathematics::ETNonmanifoldMesh
         // Remove edge if you had the last reference to it.
         if (edge->T.size() == 0)
         {
-            EdgeKey eKey(edge->V[0], edge->V[1]);
+            const EdgeKey eKey(edge->V[0], edge->V[1]);
             mEMap.erase(eKey);
             DELETE0(edge);
         }
@@ -127,7 +146,7 @@ bool Mathematics::ETNonmanifoldMesh
 	::IsManifold () const
 {
     EMapCIterator eiter = mEMap.begin();
-    EMapCIterator eend = mEMap.end();
+    const EMapCIterator eend = mEMap.end();
     for (/**/; eiter != eend; ++eiter)
     {
         if (eiter->second->T.size() > 2)
@@ -142,7 +161,7 @@ bool Mathematics::ETNonmanifoldMesh
 	::IsClosed () const
 {
     EMapCIterator eiter = mEMap.begin();
-    EMapCIterator eend = mEMap.end();
+    const EMapCIterator eend = mEMap.end();
     for (/**/; eiter != eend; ++eiter)
     {
         if (eiter->second->T.size() != 2)
@@ -174,7 +193,7 @@ bool Mathematics::ETNonmanifoldMesh
 
         // Process boundary triangles.
         std::set<Triangle*>::iterator titer = boundary.begin();
-        std::set<Triangle*>::iterator tend = boundary.end();
+        const std::set<Triangle*>::iterator tend = boundary.end();
         for (/**/; titer != tend; ++titer)
         {
             // Boundary triangle is adjacent to current connected component.
@@ -187,7 +206,7 @@ bool Mathematics::ETNonmanifoldMesh
                 EPtr edge = tri->E[i];
                 std::set<Triangle*>::const_iterator aiter =
                     edge->T.begin();
-                std::set<Triangle*>::const_iterator aend =
+                const std::set<Triangle*>::const_iterator aend =
                     edge->T.end();
                 for (/**/; aiter != aend; ++aiter)
                 {
@@ -236,7 +255,7 @@ void Mathematics::ETNonmanifoldMesh
         {
             EPtr edge = tri->E[i];
             std::set<Triangle*>::const_iterator aiter = edge->T.begin();
-            std::set<Triangle*>::const_iterator aend = edge->T.end();
+            const std::set<Triangle*>::const_iterator aend = edge->T.end();
             for (/**/; aiter != aend; ++aiter)
             {
                 if (*aiter != tri)
@@ -282,8 +301,9 @@ void Mathematics::ETNonmanifoldMesh
     }
 
     // Assign unique indices to the triangles.
-    std::map<Triangle*,int> tIndex;
-    tIndex[(Triangle*)0] = 0;
+    std::map<Triangle*, int> tIndex;
+    Triangle* triNull{};
+    tIndex[triNull] = 0;
     i = 1;
     TMapIterator titer = mTMap.begin();
     TMapIterator tend = mTMap.end();
@@ -297,7 +317,7 @@ void Mathematics::ETNonmanifoldMesh
     }
 
     // Print edges.
-    outfile << "edge quantity = " << (int)mEMap.size() << std::endl;
+    outfile << "edge quantity = " <<  mEMap.size() << std::endl;
     eiter = mEMap.begin();
     eend = mEMap.end();
     for (/**/; eiter != eend; ++eiter)
@@ -307,7 +327,7 @@ void Mathematics::ETNonmanifoldMesh
             << 'v' << edge->V[0] << ",v" << edge->V[1] << "; ";
 
         std::set<Triangle*>::const_iterator aiter = edge->T.begin();
-        std::set<Triangle*>::const_iterator aend = edge->T.end();
+        const std::set<Triangle*>::const_iterator aend = edge->T.end();
         for (/**/; aiter != aend; ++aiter)
         {
             outfile << 't' << tIndex[*aiter] << ',';
@@ -317,7 +337,7 @@ void Mathematics::ETNonmanifoldMesh
     outfile << std::endl;
 
     // Print triangles.
-    outfile << "triangle quantity = " << (int)mTMap.size() << std::endl;
+    outfile << "triangle quantity = " <<  mTMap.size()  << std::endl;
     titer = mTMap.begin();
     tend = mTMap.end();
     for (/**/; titer != tend; ++titer)
@@ -362,7 +382,7 @@ void Mathematics::ETNonmanifoldMesh
 // ETNonmanifoldMesh::Edge
 
 Mathematics::ETNonmanifoldMesh::Edge
-	::Edge (int v0, int v1)
+	::Edge (int v0, int v1) noexcept
 {
     V[0] = v0;
     V[1] = v1;
@@ -378,7 +398,7 @@ Mathematics::ETNonmanifoldMesh::Edge
 // ETNonmanifoldMesh::Triangle
 
 Mathematics::ETNonmanifoldMesh::Triangle
-	::Triangle (int v0, int v1, int v2)
+	::Triangle (int v0, int v1, int v2) noexcept
 	:E{}, V{} 
 {
     V[0] = v0;
@@ -398,26 +418,27 @@ Mathematics::ETNonmanifoldMesh::Triangle
 
 
 int Mathematics::ETNonmanifoldMesh
-	::GetNumEdges () const
+	::GetNumEdges () const noexcept
 {
-	return (int)mEMap.size();
+	return gsl::narrow_cast<int>(mEMap.size());
 }
 
 const Mathematics::ETNonmanifoldMesh::EMap& Mathematics::ETNonmanifoldMesh
-	::GetEdges () const
+	::GetEdges () const noexcept
 {
 	return mEMap;
 }
 
 int Mathematics::ETNonmanifoldMesh
-	::GetNumTriangles () const
+	::GetNumTriangles () const noexcept
 {
-	return (int)mTMap.size();
+	return gsl::narrow_cast<int>(mTMap.size());
 }
 
 const Mathematics::ETNonmanifoldMesh::TMap& Mathematics::ETNonmanifoldMesh
-	::GetTriangles () const
+	::GetTriangles () const noexcept
 {
 	return mTMap; 
 }
 
+#include STSTEM_WARNING_POP

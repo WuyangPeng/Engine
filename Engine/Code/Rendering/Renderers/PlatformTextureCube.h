@@ -32,7 +32,11 @@ namespace Rendering
 	public:
 		PlatformTextureCube(Renderer* renderer, const TextureCube* textureCube);
 		virtual ~PlatformTextureCube ();
-
+		PlatformTextureCube(const PlatformTextureCube&) = delete;
+		PlatformTextureCube& operator=(const PlatformTextureCube&) = delete;
+		PlatformTextureCube( PlatformTextureCube&&) = delete;
+		PlatformTextureCube& operator=( PlatformTextureCube&&) = delete;
+		
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 		// ÎÆÀí²Ù×÷

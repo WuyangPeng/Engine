@@ -37,9 +37,9 @@ namespace Mathematics
 
 		CLASS_INVARIANT_DECLARE;
 
-		const AVector GetUVector() const;
-		const AVector GetVVector() const;
-		const AVector GetWVector() const;
+		const AVector GetUVector() const noexcept;
+                const AVector GetVVector() const noexcept;
+                const AVector GetWVector() const noexcept;
 
 	private:
 		void Generate();

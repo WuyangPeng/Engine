@@ -11,14 +11,26 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
- 
+ #include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26815)
 CORE_TOOLS_RTTI_DEFINE(Rendering, VertexColor3Effect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexColor3Effect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexColor3Effect);
 
 Rendering::VertexColor3Effect::VertexColor3Effect ()
 {
-	VertexShaderSmartPointer vshader{ NEW0 VertexShader("Wm5.VertexColor3",2, 2, 1, 0) };
+    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>("Wm5.VertexColor3", 2, 2, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelColor", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Color0);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
@@ -26,7 +38,7 @@ Rendering::VertexColor3Effect::VertexColor3Effect ()
     vshader->SetConstant(0, "PVWMatrix", 4);
 	auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -36,35 +48,31 @@ Rendering::VertexColor3Effect::VertexColor3Effect ()
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	PixelShaderSmartPointer pshader{ NEW0 PixelShader("Wm5.VertexColor3", 1, 1, 0, 0) };
+	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.VertexColor3", 1, 1, 0, 0) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Color0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
 	profile = pshader->GetProfile();
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{ NEW0 VisualPass{} };
+	VisualPassSmartPointer pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSmartPointer{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSmartPointer{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSmartPointer{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSmartPointer{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSmartPointer{ NEW0 WireState{} });
+	pass->SetAlphaState(AlphaStateSmartPointer{   });
+	pass->SetCullState(CullStateSmartPointer{   });
+	pass->SetDepthState(DepthStateSmartPointer{   });
+	pass->SetOffsetState(OffsetStateSmartPointer{   });
+	pass->SetStencilState(StencilStateSmartPointer{   });
+	pass->SetWireState(WireStateSmartPointer{   });
 
-	VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique{} };
+	VisualTechniqueSmartPointer technique{   };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
-
-Rendering::VertexColor3Effect
-	::~VertexColor3Effect ()
-{
-}
+ 
 
 Rendering::VisualEffectInstance* Rendering::VertexColor3Effect
 	::CreateInstance () const
@@ -77,7 +85,7 @@ Rendering::VisualEffectInstance* Rendering::VertexColor3Effect
 Rendering::VisualEffectInstance* Rendering::VertexColor3Effect
 	::CreateUniqueInstance ()
 {
-    VertexColor3Effect* effect = CoreTools::New0 < VertexColor3Effect>();
+    const VertexColor3Effect* effect = CoreTools::New0 < VertexColor3Effect>();
     return effect->CreateInstance();
 }
 
@@ -115,9 +123,9 @@ void Rendering::VertexColor3Effect
 	auto pass = GetTechnique(0)->GetPass(0);
 	auto vshader = pass->GetVertexShader();
 	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().GetData());
+	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		for (auto j = 0; j < 1; ++j)
 		{
@@ -127,9 +135,9 @@ void Rendering::VertexColor3Effect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().GetData());
+	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < ShaderFlags::MaxProfiles; ++i)
+	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		profile->SetProgram(i, msPPrograms[i]);
 	}
@@ -163,7 +171,7 @@ int Rendering::VertexColor3Effect
 
 int Rendering::VertexColor3Effect::msDx9VRegisters[1]  { 0 };
 int Rendering::VertexColor3Effect::msOglVRegisters[1] { 1 };
-int* Rendering::VertexColor3Effect::msVRegisters[ShaderFlags::MaxProfiles] 
+int* Rendering::VertexColor3Effect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     0,
     msDx9VRegisters,
@@ -172,7 +180,7 @@ int* Rendering::VertexColor3Effect::msVRegisters[ShaderFlags::MaxProfiles]
     msOglVRegisters
 };
 
-std::string Rendering::VertexColor3Effect::msVPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::VertexColor3Effect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // VP_NONE
     "",
@@ -232,7 +240,7 @@ std::string Rendering::VertexColor3Effect::msVPrograms[ShaderFlags::MaxProfiles]
     "END\n"
 };
 
-std::string Rendering::VertexColor3Effect::msPPrograms[ShaderFlags::MaxProfiles] 
+std::string Rendering::VertexColor3Effect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
 {
     // PP_NONE
     "",
@@ -265,4 +273,4 @@ std::string Rendering::VertexColor3Effect::msPPrograms[ShaderFlags::MaxProfiles]
     "MOV result.color.w, c[0].x;\n"
     "END\n"
 };
-
+#include STSTEM_WARNING_POP

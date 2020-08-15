@@ -28,20 +28,20 @@ namespace Mathematics
 		using IntegerType = typename TraitsType::IntegerType;
 
 	public:
-		explicit FloatingPointAnalysis(T value);
+		explicit FloatingPointAnalysis(T value) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		// 内存表示：
 		// 符号位（1）、指数位（float8位、double11位）、尾数位（float23位、double52位），获取未经处理的存储值。
-		IntegerType GetSymbolValue() const;
-		IntegerType GetExponent() const;
-		IntegerType GetMantissa() const;
+		IntegerType GetSymbolValue() const noexcept;
+		IntegerType GetExponent() const noexcept;
+		IntegerType GetMantissa() const noexcept;
 
-		NumericalValueSymbol GetSymbol() const;
-		FloatingPointAnalysisType GetType() const;
+		NumericalValueSymbol GetSymbol() const noexcept;
+		FloatingPointAnalysisType GetType() const noexcept;
 		int GetRealExponent() const;
-		IntegerType GetRealMantissa() const;
+		IntegerType GetRealMantissa() const noexcept;
 
 	private:
 		static constexpr IntegerType sm_Symbol{ TraitsType::g_Symbol };

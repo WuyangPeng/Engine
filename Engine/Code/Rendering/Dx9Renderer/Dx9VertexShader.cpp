@@ -6,6 +6,7 @@
 
 #include "Rendering/RenderingExport.h" 
 #include "Dx9VertexShader.h"
+#include "CoreTools/ClassInvariant/Noexcept.h"
 
 using namespace Rendering; 
 
@@ -50,6 +51,7 @@ Dx9VertexShader::Dx9VertexShader(Renderer* renderer,const VertexShader* vshader)
     {
         errors->Release();
     }*/
+        CoreTools::DoNothing();
 }
 
 Dx9VertexShader::~Dx9VertexShader()
@@ -84,10 +86,12 @@ void Dx9VertexShader::Enable(Renderer* renderer,const VertexShader* vshader, con
     SetSamplerState(renderer, vshader, profile, parameters,
         renderer->mData->mMaxVShaderImages, D3DVERTEXTEXTURESAMPLER0,
         renderer->mData->mCurrentVSState);*/
+        CoreTools::DoNothing();
 }
 
 void Dx9VertexShader::Disable(Renderer* renderer,const VertexShader* vshader, const ShaderParameters* parameters)
 {
+    CoreTools::DoNothing();
 	renderer; vshader; parameters;
    /* IDirect3DDevice9* device = renderer->mData->mDevice;
     HRESULT hr;

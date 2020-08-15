@@ -19,7 +19,14 @@
 #include <vector>
 
 using std::vector;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26486)
 Rendering::Texture1DImpl
     ::Texture1DImpl(TextureFormat format, int dimension0,int numLevels,BufferUsage usage)
 	:ParentType{ format, TextureFlags::Texture1D, usage, numLevels }, m_TextureLevelData{ CalculateNumDimensions(TextureFlags::Texture1D) }
@@ -48,8 +55,8 @@ void Rendering::Texture1DImpl
 {
     m_TextureLevelData.SetDimension(0,0,dimension0);
     
-    auto maxLevels = GetMaxLevels();
-	auto numLevels = GetNumLevels();
+    const auto maxLevels = GetMaxLevels();
+    const auto numLevels = GetNumLevels();
     
     RENDERING_ASSERTION_0(0 <= numLevels && numLevels <= maxLevels, "numLevels无效！\n");
     
@@ -64,7 +71,7 @@ int Rendering::Texture1DImpl
     ::GetMaxLevels() const
 {
 	auto logDimension0 = Mathematics::BitHacks::Log2OfPowerOfTwo(GetLength());
-	auto maxLevels = logDimension0 + 1;
+    const auto maxLevels = logDimension0 + 1;
     
     return maxLevels;
 }
@@ -73,10 +80,10 @@ int Rendering::Texture1DImpl
 void Rendering::Texture1DImpl
     ::ComputeNumLevelBytes ()
 {
-	auto format = GetFormat();
-	auto type = GetTextureType();
-	auto dimension0 = GetLength ();
-	auto numLevels = GetNumLevels();
+    const auto format = GetFormat();
+    const auto type = GetTextureType();
+      auto dimension0 = GetLength();
+    const auto numLevels = GetNumLevels();
     
     for (auto level = 0; level < numLevels; ++level)
     {
@@ -97,8 +104,9 @@ void Rendering::Texture1DImpl
 void Rendering::Texture1DImpl
     ::VerifyNumLevels()
 {
-	auto format = GetFormat();
-	auto numLevels = GetNumLevels();
+    CoreTools::DoNothing();
+    const	auto format = GetFormat();
+    const auto numLevels = GetNumLevels();
     
     if (format == TextureFormat::R32F || format == TextureFormat::G32R32F || format == TextureFormat::A32B32G32R32F)
     {
@@ -119,17 +127,12 @@ void Rendering::Texture1DImpl
         SetNumLevels(1);
     }
 }
-
-Rendering::Texture1DImpl
-    ::~Texture1DImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+ 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Texture1DImpl)
 
 int Rendering::Texture1DImpl
-    ::GetNumDimensions () const
+    ::GetNumDimensions () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -153,7 +156,7 @@ int Rendering::Texture1DImpl
 }
 
 int Rendering::Texture1DImpl
-    ::GetNumTotalBytes () const
+    ::GetNumTotalBytes () const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
@@ -179,13 +182,13 @@ int Rendering::Texture1DImpl
 void Rendering::Texture1DImpl
 	::DoGenerateMipmaps()
 {
-	auto numLevels = GetNumLevels();
+	const auto numLevels = GetNumLevels();
 	auto length = GetLength();
 	auto texels = GetWriteData();
 	for (auto level = 1; level < numLevels; ++level)
 	{
 		auto texelsNext = GetTextureData(level);
-		auto lengthNext = GetDimension(0, level);
+            const auto lengthNext = GetDimension(0, level);
 
 		GenerateNextMipmap(length, texels, lengthNext, texelsNext);
 
@@ -218,7 +221,7 @@ void Rendering::Texture1DImpl
 	// 用于临时存储生成的mipmaps。
 	vector<FloatColour> colour(length);
     
-	auto format = GetFormat();
+	const auto format = GetFormat();
     
 	// 像素从原生格式转换为32位RGBA。
 	auto fromFunction = ColourConvertFrom::sm_FromFunction[System::EnumCastUnderlying(format)];
@@ -233,7 +236,7 @@ void Rendering::Texture1DImpl
 		// 就地创建下一个miplevel。
         for (auto index = 0; index < lengthNext; ++index)
         {
-			auto base = 2 * index;
+            const auto base = 2 * index;
             colour[index] = 0.5f * colour[base] + 0.5f * colour[base + 1];
         }
 
@@ -278,3 +281,4 @@ void Rendering::Texture1DImpl
 
 
 
+#include STSTEM_WARNING_POP

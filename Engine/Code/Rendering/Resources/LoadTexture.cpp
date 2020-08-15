@@ -43,7 +43,7 @@ Rendering::TextureSmartPointer  Rendering::LoadTexture
         }
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("无效的纹理类型。\n"));
+            THROW_EXCEPTION(SYSTEM_TEXT("无效的纹理类型。\n"s));
         }
     }	
 }
@@ -66,7 +66,7 @@ Rendering::Texture1DSmartPointer Rendering::LoadTexture
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture1D。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture1D。\n"s));
 	}	
 }
 
@@ -88,7 +88,7 @@ Rendering::Texture2DSmartPointer Rendering::LoadTexture
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture2D。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture2D。\n"s));
 	}
 }
 
@@ -111,7 +111,7 @@ Rendering::Texture3DSmartPointer Rendering::LoadTexture
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture3D。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture3D。\n"s));
 	}
 }
 
@@ -134,7 +134,7 @@ Rendering::TextureCubeSmartPointer Rendering::LoadTexture
 	}
 	else
 	{
-		THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::TextureCube。\n"));
+		THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::TextureCube。\n"s));
 	}
 }
 
