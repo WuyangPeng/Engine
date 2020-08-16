@@ -135,7 +135,7 @@ void Rendering::ShaderProfileDataImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(System::EnumCastUnderlying(System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)));
+	target.Write(System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles));
 
 	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{

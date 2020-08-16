@@ -459,7 +459,7 @@ void Rendering::VisualPassImpl
 	manager.Read(sizeof(int), &numSamplers);
 	manager.Read(sizeof(int), &numProfiles);
  
-	VertexShaderSmartPointer vertexShader{ NEW0 VertexShader(programName, numInputs, numOutputs, numConstants, numSamplers) };
+	VertexShaderSmartPointer vertexShader{ std::make_shared < VertexShader>(programName, numInputs, numOutputs, numConstants, numSamplers) };
 	vertexShader->LoadShader(manager, numProfiles);
 	SetVertexShader(vertexShader);
 }
@@ -488,7 +488,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadAlphaState(ReadFileManager& manager)
 {
-	AlphaStateSmartPointer alphaState{ NEW0 AlphaState };
+    AlphaStateSmartPointer alphaState{ std::make_shared < AlphaState>() };
 	alphaState->LoadState(manager);
 	SetAlphaState(alphaState);
 }
@@ -496,7 +496,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadCullState(ReadFileManager& manager)
 {
-	CullStateSmartPointer cullState{ NEW0 CullState };
+    CullStateSmartPointer cullState{ std::make_shared < CullState>() };
 	cullState->LoadState(manager);
 	SetCullState(cullState);
 }
@@ -504,7 +504,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadDepthState(ReadFileManager& manager)
 {
-	DepthStateSmartPointer depthState{ NEW0 DepthState };
+    DepthStateSmartPointer depthState{ std::make_shared < DepthState>() };
 	depthState->LoadState(manager);
 	SetDepthState(depthState);
 }
@@ -512,7 +512,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadOffsetState(ReadFileManager& manager)
 {
-	OffsetStateSmartPointer offsetState{ NEW0 OffsetState };
+    OffsetStateSmartPointer offsetState{ std::make_shared < OffsetState>() };
 	offsetState->LoadState(manager);
 	SetOffsetState(offsetState);
 }
@@ -520,7 +520,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadStencilState(ReadFileManager& manager)
 {
-	StencilStateSmartPointer stencilState{ NEW0 StencilState };
+    StencilStateSmartPointer stencilState{ std::make_shared < StencilState>() };
 	stencilState->LoadState(manager);
 	SetStencilState(stencilState);
 }
@@ -528,7 +528,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadWireState(ReadFileManager& manager)
 {
-	WireStateSmartPointer wireState{ NEW0 WireState };
+    WireStateSmartPointer wireState{ std::make_shared < WireState>() };
 	wireState->LoadState(manager);
 	SetWireState(wireState);
 }

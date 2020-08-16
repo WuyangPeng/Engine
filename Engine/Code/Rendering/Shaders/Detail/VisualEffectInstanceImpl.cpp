@@ -42,8 +42,8 @@ Rendering::VisualEffectInstanceImpl
 	for (auto passIndex = 0; passIndex < m_NumPasses; ++passIndex)
 	{
 		auto pass = m_Effect->GetPass(techniqueIndex, passIndex);
-		m_VertexParameters[passIndex] = ShaderParametersSmartPointer{ NEW0 ShaderParameters(pass->GetVertexShader()) };
-		m_PixelParameters[passIndex] = ShaderParametersSmartPointer{ NEW0 ShaderParameters(pass->GetPixelShader()) };
+            m_VertexParameters[passIndex] = ShaderParametersSmartPointer{ std::make_shared < ShaderParameters>(pass->GetVertexShader()) };
+                m_PixelParameters[passIndex] = ShaderParametersSmartPointer{ std::make_shared < ShaderParameters>(pass->GetPixelShader()) };
 	}
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -57,8 +57,8 @@ Rendering::VisualEffectInstanceImpl
 	for (auto passIndex = 0; passIndex < m_NumPasses; ++passIndex)
 	{
 		auto pass = m_Effect->GetPass(m_TechniqueIndex, passIndex);
-		m_VertexParameters[passIndex] = ShaderParametersSmartPointer{ NEW0 ShaderParameters(*rhs.m_VertexParameters[passIndex]) };
-		m_PixelParameters[passIndex] = ShaderParametersSmartPointer{ NEW0 ShaderParameters(*rhs.m_PixelParameters[passIndex]) };
+            m_VertexParameters[passIndex] = ShaderParametersSmartPointer{ std::make_shared < ShaderParameters>(*rhs.m_VertexParameters[passIndex]) };
+                m_PixelParameters[passIndex] = ShaderParametersSmartPointer{ std::make_shared < ShaderParameters>(*rhs.m_PixelParameters[passIndex]) };
 	}
 
 	RENDERING_SELF_CLASS_IS_VALID_1;

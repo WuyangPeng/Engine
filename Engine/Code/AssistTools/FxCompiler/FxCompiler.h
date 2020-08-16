@@ -135,8 +135,8 @@ namespace AssistTools
 		Rendering::PixelShaderSmartPointer mPShader;
 		bool mAlreadyCompiled;
 
-		static const std::string msVProfileName[Rendering::ShaderFlags::MaxProfiles];
-		static const std::string msPProfileName[Rendering::ShaderFlags::MaxProfiles];
+		static const std::string msVProfileName[System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)];
+                static const std::string msPProfileName[System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)];
 		static const std::string msVTName[System::EnumCastUnderlying(Rendering::ShaderFlags::VariableType::Quantity)];
 		static const std::string msVSName[System::EnumCastUnderlying(Rendering::ShaderFlags::VariableSemantic::Quantity)];
 		static const std::string msSTName[System::EnumCastUnderlying(Rendering::ShaderFlags::SamplerType::Quantity)];

@@ -25,9 +25,7 @@
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26409)
-const std::string AssistTools::FxCompiler
-	::msVProfileName[Rendering::ShaderFlags::MaxProfiles] =
-{
+const std::string AssistTools::FxCompiler ::msVProfileName[System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)] = {
     "",
     "vs_1_1",
     "vs_2_0",
@@ -36,7 +34,7 @@ const std::string AssistTools::FxCompiler
 };
 
 const std::string AssistTools::FxCompiler
-	::msPProfileName[Rendering::ShaderFlags::MaxProfiles] =
+	::msPProfileName[System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)] =
 {
     "",
     "ps_1_1",
@@ -137,7 +135,7 @@ AssistTools::FxCompiler
         bool compileSucceeded = false;
         std::string command;
         int i;
-		for (i = 1; i < Rendering::ShaderFlags::MaxProfiles; ++i)
+		for (i = 1; i < System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles); ++i)
         {
             // Delete the old vertex shader output (if it exists).
             command = "del " + fxName + "." + msVProfileName[i] + ".txt";
@@ -217,9 +215,9 @@ AssistTools::FxCompiler
 
     InitializeMaps();
 
-	Program vProgram[Rendering::ShaderFlags::MaxProfiles];
-	Program pProgram[Rendering::ShaderFlags::MaxProfiles];
-	for (int i = 1; i < Rendering::ShaderFlags::MaxProfiles; ++i)
+	Program vProgram[System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)];
+	Program pProgram[System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)];
+	for (int i = 1; i < System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles); ++i)
     {
         mActiveProfile = i;
 

@@ -354,7 +354,7 @@ void Rendering::ShaderBaseImpl
 	auto numOutputs = GetNumOutputs();
 	auto numConstants = GetNumConstants();
 	auto numSamplers = GetNumSamplers();
-	auto numProfiles = System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles);
+constexpr	auto numProfiles = System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles);
 
 	manager.Write(sizeof(int), &numInputs);
 	manager.Write(sizeof(int), &numOutputs);
@@ -494,7 +494,7 @@ void Rendering::ShaderBaseImpl
 		SetBorderColor(i, Colour(borderColor[0], borderColor[1], borderColor[2], borderColor[3]));
 	}
 
-	ShaderProfileDataSmartPointer profile{ NEW0 ShaderProfileData(GetNumConstants(), GetNumSamplers()) };
+	ShaderProfileDataSmartPointer profile{ std::make_shared< ShaderProfileData>(GetNumConstants(), GetNumSamplers()) };
 
 	for (auto profileIndex = 0; profileIndex < numProfiles; ++profileIndex)
 	{

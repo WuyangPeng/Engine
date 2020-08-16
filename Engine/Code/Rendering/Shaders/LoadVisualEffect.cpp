@@ -26,7 +26,7 @@ const Rendering::VisualEffectSmartPointer Rendering::LoadVisualEffect
 
 	CoreTools::ReadFileManager manager{ fileName };
 
-	VisualEffectSmartPointer effect{ NEW0 VisualEffect };
+	VisualEffectSmartPointer effect{ std::make_shared < VisualEffect>() };
 
 	effect->LoadVisualTechnique(manager);
 

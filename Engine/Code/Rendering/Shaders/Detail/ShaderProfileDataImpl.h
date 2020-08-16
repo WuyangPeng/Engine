@@ -15,6 +15,7 @@
 #include <array>
 #include <string>
 #include <vector>
+#include "System/Helper/EnumCast.h"
 
 namespace CoreTools
 {

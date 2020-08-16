@@ -14,6 +14,7 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/TriangleIndex.h"
+#include <gsl/gsl_util>
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
@@ -31,7 +32,7 @@ Rendering::NormalDerivatives ::NormalDerivatives(const VertexBufferAccessor& ver
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::NormalDerivatives ::IsValid() const noexcept
 {
-    const auto numVertices = static_cast<size_t>(m_VertexBufferAccessor.GetNumVertices());
+    const auto numVertices = gsl::narrow_cast<size_t>(m_VertexBufferAccessor.GetNumVertices());
     if (numVertices == m_DerivativestNormal.size() &&
         m_ProjectMatrix.size() == m_DerivativestNormal.size() &&
         m_Tangent.size() == m_Binormal.size() &&
