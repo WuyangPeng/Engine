@@ -1,21 +1,21 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.3 (2019/07/26 10:14)
 
 #include "Rendering/RenderingExport.h"
 
-#include "ImageProcessingBase.h" 
-#include "Mathematics/Base/Float2.h"
-#include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "Rendering/Renderers/Renderer.h"
-#include "Rendering/Shaders/ShaderManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "ImageProcessingBase.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
+#include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+#include "Mathematics/Base/Float2.h"
+#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Shaders/ShaderManager.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -25,152 +25,149 @@
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26475)
 #include SYSTEM_WARNING_DISABLE(26446)
-Rendering::ImageProcessingBase
-	::ImageProcessingBase (int numCols, int numRows, int numTargets)
+Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, int numTargets)
     : mNumCols(numCols), mNumRows(numRows), mNumTargets(numTargets)
 {
     RENDERING_ASSERTION_0(mNumCols > 1 && mNumRows > 0, "Invalid bound.\n");
     RENDERING_ASSERTION_0(mNumTargets > 0, "Invalid number of targets.\n");
 
-    mColSpacing = 1.0f/(float)(mNumCols - 1);
-    mRowSpacing = 1.0f/(float)(mNumRows - 1);
+    mColSpacing = 1.0f / (float)(mNumCols - 1);
+    mRowSpacing = 1.0f / (float)(mNumRows - 1);
 
     // The screen camera maps (x,y,z) in [0,1]^3 to (x',y,'z') in
     // [-1,1]^2 x [0,1].
-	mCamera = std::make_shared<Camera>(false);
+    mCamera = std::make_shared<Camera>(false);
     mCamera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-	mCamera->SetFrame(Mathematics::APointf::sm_Origin, Mathematics::AVectorf::sm_UnitZ, Mathematics::AVectorf::sm_UnitY, Mathematics::AVectorf::sm_UnitX);
+    mCamera->SetFrame(Mathematics::Pointf::g_Origin, Mathematics::Vectorf::g_UnitZ, Mathematics::Vectorf::g_UnitY, Mathematics::Vectorf::g_UnitX);
 
     // Create the vertex format for the square.
-	std::vector<VertexFormatType> triple;
-	const VertexFormatType vertexFormatType0(VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 0);
-	const VertexFormatType vertexFormatType1(VertexFormatFlags::AttributeType::Float2, VertexFormatFlags::AttributeUsage::TextureCoord, 1);
-	triple.push_back(vertexFormatType0);
-	triple.push_back(vertexFormatType1);
+    std::vector<VertexFormatType> triple;
+    const VertexFormatType vertexFormatType0(VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 0);
+    const VertexFormatType vertexFormatType1(VertexFormatFlags::AttributeType::Float2, VertexFormatFlags::AttributeUsage::TextureCoord, 1);
+    triple.push_back(vertexFormatType0);
+    triple.push_back(vertexFormatType1);
 
-	VertexFormatSmartPointer vformat = VertexFormat::Create(triple);
- 
+    VertexFormatSmartPointer vformat = VertexFormat::Create(triple);
+
     vformat->SetAttribute(0, 0, 0, VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 0);
-    vformat->SetAttribute(1, 0, 3*sizeof(float), VertexFormatFlags::AttributeType::Float2, VertexFormatFlags::AttributeUsage::TextureCoord, 0);
-    vformat->SetStride(5*sizeof(float)); 
+    vformat->SetAttribute(1, 0, 3 * sizeof(float), VertexFormatFlags::AttributeType::Float2, VertexFormatFlags::AttributeUsage::TextureCoord, 0);
+    vformat->SetStride(5 * sizeof(float));
 
     // Create the vertex buffer for the squares.
     const int vstride = vformat->GetStride();
-    VertexBufferSmartPointer vbuffer ( std::make_shared<VertexBuffer>(4, vstride));
+    VertexBufferSmartPointer vbuffer(std::make_shared<VertexBuffer>(4, vstride));
     VertexBufferAccessor vba(vformat, vbuffer);
 
-    float xmin = 0.0f, xmax= 0.0f, ymin= 0.0f, ymax= 0.0f;
+    float xmin = 0.0f, xmax = 0.0f, ymin = 0.0f, ymax = 0.0f;
     Mathematics::Float2 tc0, tc1, tc2, tc3;
-	if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
+    if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
     {
         xmin = 0.0f;
         xmax = 1.0f;
         ymin = 0.0f;
         ymax = 1.0f;
-		tc0 = Mathematics::Float2(0.0f, 0.0f);
-		tc1 = Mathematics::Float2(1.0f, 0.0f);
-		tc2 = Mathematics::Float2(1.0f, 1.0f);
-		tc3 = Mathematics::Float2(0.0f, 1.0f);
+        tc0 = Mathematics::Float2(0.0f, 0.0f);
+        tc1 = Mathematics::Float2(1.0f, 0.0f);
+        tc2 = Mathematics::Float2(1.0f, 1.0f);
+        tc3 = Mathematics::Float2(0.0f, 1.0f);
     }
     else
     {
-        xmin = -0.5f*mColSpacing;
-        xmax = 1.0f - 0.5f*mColSpacing;
-        ymin = +0.5f*mRowSpacing;
-        ymax = 1.0f + 0.5f*mRowSpacing;
-		tc0 = Mathematics::Float2(0.0f, 1.0f);
-		tc1 = Mathematics::Float2(1.0f, 1.0f);
-		tc2 = Mathematics::Float2(1.0f, 0.0f);
-		tc3 = Mathematics::Float2(0.0f, 0.0f);
+        xmin = -0.5f * mColSpacing;
+        xmax = 1.0f - 0.5f * mColSpacing;
+        ymin = +0.5f * mRowSpacing;
+        ymax = 1.0f + 0.5f * mRowSpacing;
+        tc0 = Mathematics::Float2(0.0f, 1.0f);
+        tc1 = Mathematics::Float2(1.0f, 1.0f);
+        tc2 = Mathematics::Float2(1.0f, 0.0f);
+        tc3 = Mathematics::Float2(0.0f, 0.0f);
     }
 
-	// 先通过编译
+    // 先通过编译
 
-	vbuffer->SetPosition(vba, 0, Mathematics::Float3(xmin, ymin, 0.0f));
-	vbuffer->SetPosition(vba, 1, Mathematics::Float3(xmax, ymin, 0.0f));
-	vbuffer->SetPosition(vba, 2, Mathematics::Float3(xmax, ymax, 0.0f));
-	vbuffer->SetPosition(vba, 3, Mathematics::Float3(xmin, ymax, 0.0f));
+    vbuffer->SetPosition(vba, 0, Mathematics::APoint(xmin, ymin, 0.0f));
+    vbuffer->SetPosition(vba, 1, Mathematics::APoint(xmax, ymin, 0.0f));
+    vbuffer->SetPosition(vba, 2, Mathematics::APoint(xmax, ymax, 0.0f));
+    vbuffer->SetPosition(vba, 3, Mathematics::APoint(xmin, ymax, 0.0f));
 
-	vbuffer->SetTextureCoord(vba, 0,Mathematics::Vector2Df(tc0.GetFirstValue(),tc0.GetSecondValue()), 0);
-	vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc1.GetFirstValue(), tc1.GetSecondValue()), 1);
-	vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc2.GetFirstValue(), tc2.GetSecondValue()), 2);
-	vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc3.GetFirstValue(), tc3.GetSecondValue()), 3); 
-	 
-	
-	
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc0.GetFirstValue(), tc0.GetSecondValue()), 0);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc1.GetFirstValue(), tc1.GetSecondValue()), 1);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc2.GetFirstValue(), tc2.GetSecondValue()), 2);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc3.GetFirstValue(), tc3.GetSecondValue()), 3);
+
     // Create the index buffer for the square.
-    IndexBufferSmartPointer ibuffer ( NEW0 IndexBuffer(6, sizeof(int)));
-	 
+    IndexBufferSmartPointer ibuffer(NEW0 IndexBuffer(6, sizeof(int)));
+
     int* indices = (int*)ibuffer->GetReadOnlyData();
-    indices[0] = 0;  indices[1] = 1;  indices[2] = 2;
-    indices[3] = 0;  indices[4] = 2;  indices[5] = 3;
-	 
+    indices[0] = 0;
+    indices[1] = 1;
+    indices[2] = 2;
+    indices[3] = 0;
+    indices[4] = 2;
+    indices[5] = 3;
 
     // Create the square.
-	mRectangle .reset( NEW0 TrianglesMesh(vformat, vbuffer, ibuffer));
+    mRectangle.reset(NEW0 TrianglesMesh(vformat, vbuffer, ibuffer));
 
     CreateVertexShader();
     mTargets = NEW1<RenderTargetSmartPointer>(mNumTargets);
     for (int i = 0; i < mNumTargets; ++i)
     {
-		mTargets[i].reset(NEW0 RenderTarget(1, TextureFormat( System::TextureInternalFormat::A32B32G32R32F), mNumCols, mNumRows, false, false));
+        mTargets[i].reset(NEW0 RenderTarget(1, TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mNumCols, mNumRows, false, false));
     }
 }
 
-Rendering::ImageProcessingBase
-	::~ImageProcessingBase ()
-{EXCEPTION_TRY
+Rendering::ImageProcessingBase ::~ImageProcessingBase()
 {
-DELETE1(mTargets);
-}
-EXCEPTION_ALL_CATCH(Rendering)  
-    
+    EXCEPTION_TRY
+    {
+        DELETE1(mTargets);
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::ImageProcessingBase
-	::CreateEffect (PixelShaderSmartPointer pshader, VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance)
+void Rendering::ImageProcessingBase ::CreateEffect(PixelShaderSmartPointer pshader, VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance)
 {
     // Create the pass.
-    VisualPassSmartPointer pass ( std::make_shared<VisualPass>());
+    VisualPassSmartPointer pass(std::make_shared<VisualPass>());
     pass->SetPixelShader(pshader);
 
     // All effects share the vertex shader for the square trimesh.
     pass->SetVertexShader(mVertexShader);
 
     // Create global state.
-    pass->SetAlphaState(AlphaStateSmartPointer(std::make_shared < AlphaState>()));
-    pass->SetOffsetState(OffsetStateSmartPointer(std::make_shared < OffsetState>()));
-    pass->SetStencilState(StencilStateSmartPointer(std::make_shared < StencilState>()));
-    pass->SetWireState(WireStateSmartPointer(std::make_shared < WireState>()));
+    pass->SetAlphaState(AlphaStateSmartPointer(std::make_shared<AlphaState>()));
+    pass->SetOffsetState(OffsetStateSmartPointer(std::make_shared<OffsetState>()));
+    pass->SetStencilState(StencilStateSmartPointer(std::make_shared<StencilState>()));
+    pass->SetWireState(WireStateSmartPointer(std::make_shared<WireState>()));
 
     // Culling is not needed for image processing.
-    CullStateSmartPointer cstate(std::make_shared < CullState>());
-    cstate->SetEnabled ( false);
+    CullStateSmartPointer cstate(std::make_shared<CullState>());
+    cstate->SetEnabled(false);
     pass->SetCullState(cstate);
 
     // Depth buffering is not needed for image processing.
-    DepthStateSmartPointer dstate(std::make_shared < DepthState>());
-    dstate->SetEnabled ( false);
-	dstate->SetWritable (false);
+    DepthStateSmartPointer dstate(std::make_shared<DepthState>());
+    dstate->SetEnabled(false);
+    dstate->SetWritable(false);
     pass->SetDepthState(dstate);
 
     // Create the effect.
-    VisualTechniqueSmartPointer technique(std::make_shared < VisualTechnique>());
+    VisualTechniqueSmartPointer technique(std::make_shared<VisualTechnique>());
     technique->InsertPass(pass);
-    effect =std::make_shared < VisualEffect>();
+    effect = std::make_shared<VisualEffect>();
     effect->InsertTechnique(technique);
 
     // Create the effect instance and set the vertex shader constants.
-    instance =std::make_shared < VisualEffectInstance>(effect, 0);
+    instance = std::make_shared<VisualEffectInstance>(effect, 0);
 
     // Standard transform for vertex shader.
     instance->SetVertexConstant(0, "PVWMatrix", mPVWMatrixConstant);
 }
 
-void Rendering::ImageProcessingBase
-	::PreDraw ()
+void Rendering::ImageProcessingBase ::PreDraw()
 {
-	if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
+    if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
     {
         // Reflect the image in y to account for OpenGL textures having
         // origin in the upper-left corner.
@@ -178,25 +175,23 @@ void Rendering::ImageProcessingBase
     }
 }
 
-void Rendering::ImageProcessingBase
-	::PostDraw ()
+void Rendering::ImageProcessingBase ::PostDraw()
 {
-	if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
+    if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
 
     {
         // Remove the y-reflection.
-		mCamera->SetPostProjectionMatrix(Mathematics::Matrixf::sm_Identity);
+        mCamera->SetPostProjectionMatrix(Mathematics::Matrixf::sm_Identity);
     }
 }
 
-void Rendering::ImageProcessingBase
-	::Initialize (Renderer* renderer, bool openglHack)
+void Rendering::ImageProcessingBase ::Initialize(Renderer* renderer, bool openglHack)
 {
     // Initialize the image processing by copying the image to a render
     // target.
     renderer->Bind(mTargets[0]);
-	renderer->Bind(mTargets[1]);
-	renderer->Bind(mMainTexture);
+    renderer->Bind(mTargets[1]);
+    renderer->Bind(mMainTexture);
     if (renderer->PreDraw())
     {
         renderer->SetCamera(mCamera);
@@ -234,59 +229,56 @@ void Rendering::ImageProcessingBase
             mRectangle->SetEffectInstance(mDrawEffectInstance);
         }
 
-		renderer->Enable(mTargets[0]);
+        renderer->Enable(mTargets[0]);
         renderer->ClearColorBuffer();
-		renderer->Draw(mRectangle);
-		renderer->Disable(mTargets[0]);
+        renderer->Draw(mRectangle);
+        renderer->Disable(mTargets[0]);
         if (openglHack)
         {
             // See the coments above for OpenGL.
-		 
+
             //mMainEffectInstance->SetPixelTexture(0, "StateSampler",  mTargets[1]->GetColorTexture(0));
         }
         else
         {
-		 
-           // mDrawEffectInstance->SetPixelTexture(0, "StateSampler",  mTargets[1]->GetColorTexture(0));
+            // mDrawEffectInstance->SetPixelTexture(0, "StateSampler",  mTargets[1]->GetColorTexture(0));
         }
 
         // Set the boundary conditions.
         mRectangle->SetEffectInstance(mBoundaryEffectInstance);
-		renderer->Enable(mTargets[1]);
-		renderer->Draw(mRectangle);
-		renderer->Disable(mTargets[1]);
+        renderer->Enable(mTargets[1]);
+        renderer->Draw(mRectangle);
+        renderer->Disable(mTargets[1]);
 
         renderer->PostDraw();
     }
 }
 
-void Rendering::ImageProcessingBase
-	::ExecuteStep (Renderer* renderer, bool draw)
+void Rendering::ImageProcessingBase ::ExecuteStep(Renderer* renderer, bool draw)
 {
     // Draw the image.
     if (draw)
     {
         PreDraw();
         mRectangle->SetEffectInstance(mDrawEffectInstance);
-		renderer->Draw(mRectangle);
+        renderer->Draw(mRectangle);
         PostDraw();
     }
 
     // Take a step using the main effect.
     mRectangle->SetEffectInstance(mMainEffectInstance);
     renderer->Enable(mTargets[0]);
-	renderer->Draw(mRectangle);
-	renderer->Disable(mTargets[0]);
+    renderer->Draw(mRectangle);
+    renderer->Disable(mTargets[0]);
 
     // Set the boundary conditions.
     mRectangle->SetEffectInstance(mBoundaryEffectInstance);
-	renderer->Enable(mTargets[1]);
-	renderer->Draw(mRectangle);
-	renderer->Disable(mTargets[1]);
+    renderer->Enable(mTargets[1]);
+    renderer->Draw(mRectangle);
+    renderer->Disable(mTargets[1]);
 }
 
-void Rendering::ImageProcessingBase
-	::CreateVertexShader ()
+void Rendering::ImageProcessingBase ::CreateVertexShader()
 {
     // void v_ScreenShader
     // (
@@ -304,35 +296,32 @@ void Rendering::ImageProcessingBase
     //     vertexTCoord = modelTCoord;
     // }
 
-	// 先通过编译
-	 
-	mVertexShader = VertexShaderSmartPointer{ std::make_shared < VertexShader>("Wm5.ScreenShader", 1, 2, 1, 0) };
+    // 先通过编译
+
+    mVertexShader = VertexShaderSmartPointer{ std::make_shared<VertexShader>("Wm5.ScreenShader", 1, 2, 1, 0) };
     mVertexShader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    mVertexShader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,  ShaderFlags::VariableSemantic::Position);
+    mVertexShader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
     mVertexShader->SetOutput(1, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
     mVertexShader->SetConstant(0, "PVWMatrix", 4);
 
+    auto profile = mVertexShader->GetProfile();
 
-	auto profile = mVertexShader->GetProfile();
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 1; ++j)
+        {
+            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+        }
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		for (auto j = 0; j < 1; ++j)
-		{
-			profile->SetBaseRegister(i, j, msVRegisters[i][j]);
-		}
+        profile->SetProgram(i, msVPrograms[i]);
+    }
 
-		profile->SetProgram(i, msVPrograms[i]);
-	}
-
-	mPVWMatrixConstant = ProjectionViewWorldMatrixConstantSmartPointer{ std::make_shared < ProjectionViewWorldMatrixConstant>() };
-	 
+    mPVWMatrixConstant = ProjectionViewWorldMatrixConstantSmartPointer{ std::make_shared<ProjectionViewWorldMatrixConstant>() };
 }
 
-int Rendering::ImageProcessingBase::msDx9VRegisters[1]   { 0 };
-int Rendering::ImageProcessingBase::msOglVRegisters[1]   { 1 };
-int* Rendering::ImageProcessingBase::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]  
-{
+int Rendering::ImageProcessingBase::msDx9VRegisters[1]{ 0 };
+int Rendering::ImageProcessingBase::msOglVRegisters[1]{ 1 };
+int* Rendering::ImageProcessingBase::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     0,
     msDx9VRegisters,
     msDx9VRegisters,
@@ -340,8 +329,7 @@ int* Rendering::ImageProcessingBase::msVRegisters[System::EnumCastUnderlying(Sha
     msOglVRegisters
 };
 
-std::string Rendering::ImageProcessingBase::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
-{
+std::string Rendering::ImageProcessingBase::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     // VP_NONE
     "",
 
@@ -391,75 +379,63 @@ std::string Rendering::ImageProcessingBase::msVPrograms[System::EnumCastUnderlyi
     "END\n"
 };
 
-
- int Rendering::ImageProcessingBase
-	 ::GetNumCols() const noexcept
+int Rendering::ImageProcessingBase ::GetNumCols() const noexcept
 {
-	return mNumCols;
+    return mNumCols;
 }
 
- int Rendering::ImageProcessingBase
-	 ::GetNumRows() const noexcept
+int Rendering::ImageProcessingBase ::GetNumRows() const noexcept
 {
-	return mNumRows;
+    return mNumRows;
 }
 
- int Rendering::ImageProcessingBase
-	 ::GetNumTargets() const noexcept
+int Rendering::ImageProcessingBase ::GetNumTargets() const noexcept
 {
-	return mNumTargets;
+    return mNumTargets;
 }
 
- float Rendering::ImageProcessingBase
-	 ::GetColSpacing() const noexcept
+float Rendering::ImageProcessingBase ::GetColSpacing() const noexcept
 {
-	return mColSpacing;
+    return mColSpacing;
 }
 
- float Rendering::ImageProcessingBase
-	 ::GetRowSpacing() const noexcept
+float Rendering::ImageProcessingBase ::GetRowSpacing() const noexcept
 {
-	return mRowSpacing;
+    return mRowSpacing;
 }
 
- const Rendering::Camera* Rendering::ImageProcessingBase
-	 ::GetCamera() const noexcept
+const Rendering::Camera* Rendering::ImageProcessingBase ::GetCamera() const noexcept
 {
-	return mCamera.get();
+    return mCamera.get();
 }
 
- const Rendering::TrianglesMesh* Rendering::ImageProcessingBase
-	 ::GetRectangle() const noexcept
+const Rendering::TrianglesMesh* Rendering::ImageProcessingBase ::GetRectangle() const noexcept
 {
-     return mRectangle.get();
- }
-
- const Rendering::RenderTarget* Rendering::ImageProcessingBase
-	 ::GetTarget(int i) const noexcept
-{
-	if (0 <= i && i < mNumTargets)
-	{
-            return mTargets[i].get();
-	}
-	return 0;
+    return mRectangle.get();
 }
 
- int Rendering::ImageProcessingBase
-	 ::Index(int col, int row) const noexcept
+const Rendering::RenderTarget* Rendering::ImageProcessingBase ::GetTarget(int i) const noexcept
 {
-	return col + mNumCols*row;
+    if (0 <= i && i < mNumTargets)
+    {
+        return mTargets[i].get();
+    }
+    return 0;
 }
 
- const Rendering::Texture2D* Rendering::ImageProcessingBase
-	 ::GetMainTexture() const noexcept
+int Rendering::ImageProcessingBase ::Index(int col, int row) const noexcept
 {
-     return mMainTexture.get();
- }
+    return col + mNumCols * row;
+}
 
- const Rendering::VisualEffectInstance* Rendering::ImageProcessingBase
-	 ::GetMainEffectInstance() const noexcept
+const Rendering::Texture2D* Rendering::ImageProcessingBase ::GetMainTexture() const noexcept
 {
-     return mMainEffectInstance.get();
- }
+    return mMainTexture.get();
+}
 
- #include STSTEM_WARNING_POP
+const Rendering::VisualEffectInstance* Rendering::ImageProcessingBase ::GetMainEffectInstance() const noexcept
+{
+    return mMainEffectInstance.get();
+}
+
+#include STSTEM_WARNING_POP

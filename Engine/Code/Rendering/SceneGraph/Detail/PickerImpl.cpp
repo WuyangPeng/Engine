@@ -21,7 +21,7 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
  #include SYSTEM_WARNING_DISABLE(26418)
-Rendering::PickerImpl
+Rendering::PickerImpl 
 	::PickerImpl(const ConstSpatialSmartPointer& scene, const APoint& origin,const AVector& direction, float tMin, float tMax)
 	:m_Origin{ origin }, m_Direction{ direction }, m_TMin{ tMin }, m_TMax{ tMax }, m_Records{}
 {

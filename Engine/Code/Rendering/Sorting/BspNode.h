@@ -8,7 +8,7 @@
 #define RENDERING_SORTING_BSP_NODE_H
 
 #include "Rendering/RenderingDll.h"
- 
+ #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Rendering/SceneGraph/Node.h"
 #include "Mathematics/Algebra/Plane.h"
 

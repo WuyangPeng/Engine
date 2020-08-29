@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorRay3Sphere3<Real>
 {
     auto diff = mRay.GetOrigin() - mSphere.GetCenter();
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
-    if (a0 <= Math<Real>::sm_Zero)
+    if (a0 <= Math<Real>::GetValue(0))
     {
         // P is inside the sphere
 		this->SetIntersectionType(IntersectionType::Other);
@@ -46,7 +46,7 @@ void Mathematics::StaticTestIntersectorRay3Sphere3<Real>
     // else: P is outside the sphere
 
 	auto a1 = Vector3DTools::DotProduct(mRay.GetDirection(),diff);
-    if (a1 >= Math<Real>::sm_Zero)
+    if (a1 >= Math<Real>::GetValue(0))
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;

@@ -54,12 +54,12 @@ typename Mathematics::OrthogonalPlaneFit3<Real>::Plane3 Mathematics::OrthogonalP
 	origin /= boost::numeric_cast<Real>(numPoints);
 
 	// 计算产品总和
-	auto sumXX = Math::sm_Zero;
-	auto sumXY = Math::sm_Zero;
-	auto sumXZ = Math::sm_Zero;
-	auto sumYY = Math::sm_Zero;
-	auto sumYZ = Math::sm_Zero;
-	auto sumZZ = Math::sm_Zero;
+	auto sumXX = Math::GetValue(0);
+	auto sumXY = Math::GetValue(0);
+	auto sumXZ = Math::GetValue(0);
+	auto sumYY = Math::GetValue(0);
+	auto sumYZ = Math::GetValue(0);
+	auto sumZZ = Math::GetValue(0);
 
 	for (auto i = 0u; i < numPoints; ++i)
 	{

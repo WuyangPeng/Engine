@@ -28,10 +28,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticFindIntersectorSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold = Math::sm_ZeroTolerance, const Real intervalThreshold = Math::sm_Zero);
+		StaticFindIntersectorSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold = Math::GetZeroTolerance(), const Real intervalThreshold = Math::sm_Zero);
 		virtual ~StaticFindIntersectorSegment2Segment2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Segment2 GetLhsSegment() const;
 		const Segment2 GetRhsSegment() const;

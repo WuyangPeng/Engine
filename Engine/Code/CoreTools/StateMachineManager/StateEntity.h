@@ -31,7 +31,7 @@ namespace CoreTools
 		explicit StateEntity(StatePtr currentState, StatePtr globalState);
 		virtual ~StateEntity();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool EventFunction(const Telegram& telegram);
 

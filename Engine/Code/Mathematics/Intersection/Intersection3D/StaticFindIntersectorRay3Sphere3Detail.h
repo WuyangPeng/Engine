@@ -39,7 +39,7 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>
     auto diff = mRay.GetOrigin() - mSphere.GetCenter();
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
     Real a1, discr, root;
-    if (a0 <= Math<Real>::sm_Zero)
+    if (a0 <= Math<Real>::GetZero())
     {
         // P is inside the sphere
 		a1 = Vector3DTools::DotProduct(mRay.GetDirection(),diff);
@@ -67,7 +67,7 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>
         mQuantity = 0;
 		this->SetIntersectionType(IntersectionType::Empty);
     }
-    else if (discr >= Math::sm_ZeroTolerance)
+    else if (discr >= Math::GetZeroTolerance())
     {
         root = Math::Sqrt(discr);
         mRayParameter[0] = -a1 - root;

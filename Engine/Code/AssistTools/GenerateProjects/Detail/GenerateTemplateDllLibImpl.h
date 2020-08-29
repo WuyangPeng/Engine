@@ -23,7 +23,7 @@ namespace AssistTools
 		GenerateTemplateDllLibImpl(const System::String& templateFileName, const Replace& replace);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void GenerateTo(const System::String& exportDirectory, const System::String& newProjectName, 
 			            const CopyrightData& copyrightData, const System::String& solutionName,

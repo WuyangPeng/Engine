@@ -125,7 +125,7 @@ Mathematics::Matrix2<Real>
 template <typename Real>
 Mathematics::Matrix2<Real>
 	::Matrix2(Real member00, Real member11)
-	:m_Entry{ member00,Math::sm_Zero,Math::sm_Zero,member11 }
+	:m_Entry{ member00,Math::GetValue(0),Math::GetValue(0),member11 }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -165,10 +165,10 @@ void Mathematics::Matrix2<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Entry(0, 0) = Math::sm_Zero;
-	m_Entry(0, 1) = Math::sm_Zero;
-	m_Entry(1, 0) = Math::sm_Zero;
-	m_Entry(1, 1) = Math::sm_Zero;
+	m_Entry(0, 0) = Math::GetValue(0);
+	m_Entry(0, 1) = Math::GetValue(0);
+	m_Entry(1, 0) = Math::GetValue(0);
+	m_Entry(1, 1) = Math::GetValue(0);
 }
 
 template <typename Real>
@@ -177,10 +177,10 @@ void Mathematics::Matrix2<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Entry(0, 0) = Math::sm_One;
-	m_Entry(0, 1) = Math::sm_Zero;
-	m_Entry(1, 0) = Math::sm_Zero;
-	m_Entry(1, 1) = Math::sm_One;
+	m_Entry(0, 0) = Math::GetValue(1);
+	m_Entry(0, 1) = Math::GetValue(0);
+	m_Entry(1, 0) = Math::GetValue(0);
+	m_Entry(1, 1) = Math::GetValue(1);
 }
 
 template <typename Real>
@@ -190,8 +190,8 @@ void Mathematics::Matrix2<Real>
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	m_Entry(0, 0) = member00;
-	m_Entry(0, 1) = Math::sm_Zero;
-	m_Entry(1, 0) = Math::sm_Zero;
+	m_Entry(0, 1) = Math::GetValue(0);
+	m_Entry(1, 0) = Math::GetValue(0);
 	m_Entry(1, 1) = member11;
 }
 
@@ -318,7 +318,7 @@ Mathematics::Matrix2<Real>& Mathematics::Matrix2<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (Math::sm_ZeroTolerance < Math::FAbs(scalar))
+	if (Math::GetZeroTolerance() < Math::FAbs(scalar))
 	{
 		m_Entry(0, 0) /= scalar;
 		m_Entry(0, 1) /= scalar;
@@ -413,9 +413,9 @@ Real Mathematics::Matrix2<Real>
 	// 矩阵必须是旋转矩阵！
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Entry(0, 0) - m_Entry(1, 1)) <= Math::sm_ZeroTolerance &&
-							Math::FAbs(m_Entry(0, 1) + m_Entry(1, 0)) <= Math::sm_ZeroTolerance &&
-							Math::FAbs(m_Entry(0, 1) * (-m_Entry(1, 0)) + m_Entry(0, 0) * m_Entry(1, 1) - Math::sm_One) <= Math::sm_ZeroTolerance,
+	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Entry(0, 0) - m_Entry(1, 1)) <= Math::GetZeroTolerance() &&
+							Math::FAbs(m_Entry(0, 1) + m_Entry(1, 0)) <= Math::GetZeroTolerance() &&
+							Math::FAbs(m_Entry(0, 1) * (-m_Entry(1, 0)) + m_Entry(0, 0) * m_Entry(1, 1) - Math::GetValue(1)) <= Math::GetZeroTolerance(),
 							"该矩阵不是旋转矩阵！");
 
 	return Math::ATan2(m_Entry(1, 0), m_Entry(0, 0));
@@ -433,9 +433,9 @@ void Mathematics::Matrix2<Real>
 	// 其中|V|表示向量V的长度和A * B表示向量A和B的点积
 
 	// 矩阵必须是旋转矩阵！
-	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Entry(0, 0) - m_Entry(1, 1)) <= Math::sm_ZeroTolerance &&
-							Math::FAbs(m_Entry(0, 1) + m_Entry(1, 0)) <= Math::sm_ZeroTolerance &&
-							Math::FAbs(m_Entry(0, 1) * (-m_Entry(1, 0)) + m_Entry(0, 0) * m_Entry(1, 1) - Math::sm_One) <= Math::sm_ZeroTolerance,
+	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Entry(0, 0) - m_Entry(1, 1)) <= Math::GetZeroTolerance() &&
+							Math::FAbs(m_Entry(0, 1) + m_Entry(1, 0)) <= Math::GetZeroTolerance() &&
+							Math::FAbs(m_Entry(0, 1) * (-m_Entry(1, 0)) + m_Entry(0, 0) * m_Entry(1, 1) - Math::GetValue(1)) <= Math::GetZeroTolerance(),
 							"该矩阵不是旋转矩阵！");
 
 	MATHEMATICS_CLASS_IS_VALID_9;
@@ -486,7 +486,7 @@ typename const Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics
 
 	Real cosValue{ };
 	Real sinValue{ };
-	if (Math::sm_Zero <= difference)
+	if (Math::GetValue(0) <= difference)
 	{
 		cosValue = m_Entry(0, 1);
 		sinValue = eigenvalue0 - m_Entry(0, 0);
@@ -579,7 +579,7 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs)
 {
-	return Approximate(lhs, rhs, Math::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math::GetZeroTolerance());
 }
 #include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H

@@ -13,7 +13,9 @@
 #include "Mathematics/Algebra/AVector.h" 
 
 RENDERING_EXPORT_SHARED_PTR(ParticleControllerImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {	
 	class Particles;
@@ -32,7 +34,7 @@ namespace Rendering
 		  ParticleController(ParticleController&&) = default;
 		  ParticleController& operator=(ParticleController&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ParticleController); 
 		
@@ -86,5 +88,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, ParticleController); 
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_PARTICLE_CONTROLLER_H

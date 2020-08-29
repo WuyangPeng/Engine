@@ -46,12 +46,12 @@ void Mathematics::GreatCircleFit3<Real>
 	::Calculate(const Points& points)
 {
 	// 计算向量的协方差矩阵。
-	auto sumXX = Math::sm_Zero;
-	auto sumXY = Math::sm_Zero;
-	auto sumXZ = Math::sm_Zero;
-	auto sumYY = Math::sm_Zero;
-	auto sumYZ = Math::sm_Zero;
-	auto sumZZ = Math::sm_Zero;
+	auto sumXX = Math::GetValue(0);
+	auto sumXY = Math::GetValue(0);
+	auto sumXZ = Math::GetValue(0);
+	auto sumYY = Math::GetValue(0);
+	auto sumYZ = Math::GetValue(0);
+	auto sumZZ = Math::GetValue(0);
 	auto numPoints = points.size();
 
 	for (const auto& point : points)

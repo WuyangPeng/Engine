@@ -26,7 +26,7 @@ namespace Network
     public:
         explicit BoostMainManagerUseMultiContext(const ConfigurationSubStrategy& subStrategy);
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     public:
         void Run() noexcept override;

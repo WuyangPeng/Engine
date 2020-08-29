@@ -77,20 +77,20 @@ bool Mathematics::PointInPolyhedron3<Real>
     auto planeDistance = Vector3DTools<Real>::DotProduct(plane.GetNormal(),ray.GetOrigin()) - plane.GetConstant();
 	auto planeAngle = Vector3DTools<Real>::DotProduct(plane.GetNormal(),ray.GetDirection());
 
-    if (planeDistance < Math<Real>::sm_Zero)
+    if (planeDistance < Math<Real>::GetValue(0))
     {
         // The ray origin is on the negative side of the plane.
-        if (planeAngle <= Math<Real>::sm_Zero)
+        if (planeAngle <= Math<Real>::GetValue(0))
         {
             // The ray points away from the plane.
             return true;
         }
     }
 
-    if (planeDistance > Math<Real>::sm_Zero)
+    if (planeDistance > Math<Real>::GetValue(0))
     {
         // The ray origin is on the positive side of the plane.
-        if (planeAngle >= Math<Real>::sm_Zero)
+        if (planeAngle >= Math<Real>::GetValue(0))
         {
             // The ray points away from the plane.
             return true;

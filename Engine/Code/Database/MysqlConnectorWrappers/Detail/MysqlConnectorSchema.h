@@ -30,7 +30,7 @@ namespace Database
 		MysqlConnectorSchema(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema);
 	 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  MysqlxCollectionPtr GetCollection(const std::string& collectionName) override;
 		  MysqlxTablePtr GetTable(const std::string& tableonName) override;

@@ -26,7 +26,7 @@ template <typename Real>
 bool Mathematics::Bisect2<Real>
 	::IsValid() const noexcept
 {
-	if (m_FirstFunction != nullptr && m_SecondFunction != nullptr && 0 < m_MaxLevel && Math<Real>::sm_Zero <= m_Tolerance)
+	if (m_FirstFunction != nullptr && m_SecondFunction != nullptr && 0 < m_MaxLevel && Math<Real>::GetValue(0) <= m_Tolerance)
 	{
 		return true;
 	}

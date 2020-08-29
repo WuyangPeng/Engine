@@ -31,7 +31,7 @@ namespace Mathematics
 		DistancePoint2Ellipse2(const Vector2D& point, const Ellipse2& ellipse);
 		virtual ~DistancePoint2Ellipse2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector2D GetPoint() const;
 		const Ellipse2 GetEllipse() const;

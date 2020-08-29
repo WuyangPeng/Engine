@@ -14,7 +14,9 @@
 #include "Rendering/SceneGraph/Material.h"
 #include "ShaderFloat.h"
 
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 
 RENDERING_EXPORT_SHARED_PTR(MaterialConstantImpl);
 
@@ -32,7 +34,7 @@ namespace Rendering
                 MaterialConstant(MaterialConstant&&) noexcept = default;
             MaterialConstant& operator=(MaterialConstant&&) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(MaterialConstant);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
@@ -55,5 +57,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, MaterialConstant);
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_SHADER_FLOATS_MATERIAL_CONSTANT_H

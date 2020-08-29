@@ -42,7 +42,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	// Process as if V0-triangle is stationary and V1-triangle is moving.
 	auto W = this->GetRhsVelocity() - this->GetLhsVelocity();
 	auto side = 0;  // 0 = NONE, -1 = LEFT, +1 = RIGHT
-	auto tfirst = Math::sm_Zero;
+	auto tfirst = Math::GetValue(0);
 	auto tlast = Math::sm_MaxReal;
 
 	Configuration cfg0, cfg1, tcfg0, tcfg1;
@@ -50,7 +50,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	auto i1 = 0;
 	auto i2 = 0;
 	Vector2D D;
-	auto speed = Math::sm_Zero;
+	auto speed = Math::GetValue(0);
 
 	// Process edges of V0-triangle.
 	for (i0 = 1, i1 = 2, i2 = 0; i2 < 3; i0 = i1, i1 = i2++)
@@ -137,11 +137,11 @@ int Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	for (auto i = 0; i < 3; ++i)
 	{
 		auto t = Vector2DTools::DotProduct(D, (V[i] - P));
-		if (t > Math::sm_Zero)
+		if (t > Math::GetValue(0))
 		{
 			++positive;
 		}
-		else if (t < Math::sm_Zero)
+		else if (t < Math::GetValue(0))
 		{
 			++negative;
 		}
@@ -174,7 +174,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	for (i = 0; i < quantity; ++i)
 	{
 		test[i] = Vector2DTools::DotProduct(N, V[i]) - c;
-		if (test[i] > Math::sm_Zero)
+		if (test[i] > Math::GetValue(0))
 		{
 			positive++;
 			if (pIndex < 0)
@@ -182,7 +182,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 				pIndex = i;
 			}
 		}
-		else if (test[i] < Math::sm_Zero)
+		else if (test[i] < Math::GetValue(0))
 		{
 			negative++;
 		}
@@ -197,7 +197,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 			auto cQuantity = 0;
 			auto cur = 0;
 			auto prv = 0;
-			auto t = Math::sm_Zero;
+			auto t = Math::GetValue(0);
 
 			if (pIndex > 0)
 			{
@@ -208,7 +208,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 				// Vertices on positive side of line.
-				while (cur < quantity && test[cur] > Math::sm_Zero)
+				while (cur < quantity && test[cur] > Math::GetValue(0))
 				{
 					CV[cQuantity++] = V[cur++];
 				}
@@ -230,7 +230,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 			{
 				// Vertices on positive side of line.
 				cur = 0;
-				while (cur < quantity && test[cur] > Math::sm_Zero)
+				while (cur < quantity && test[cur] > Math::GetValue(0))
 				{
 					CV[cQuantity++] = V[cur++];
 				}
@@ -241,7 +241,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 				// Skip vertices on negative side.
-				while (cur < quantity && test[cur] <= Math::sm_Zero)
+				while (cur < quantity && test[cur] <= Math::GetValue(0))
 				{
 					++cur;
 				}
@@ -254,7 +254,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 					CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 					// Vertices on positive side of line.
-					while (cur < quantity && test[cur] > Math::sm_Zero)
+					while (cur < quantity && test[cur] > Math::GetValue(0))
 					{
 						CV[cQuantity++] = V[cur++];
 					}
@@ -289,7 +289,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	cfg.Index[1] = i1;
 	cfg.Index[2] = i2;
 	cfg.Min = Vector2DTools::DotProduct(D, (V[i0] - V[i1]));
-	cfg.Max = Math::sm_Zero;
+	cfg.Max = Math::GetValue(0);
 }
 
 template <typename Real>
@@ -400,13 +400,13 @@ template <typename Real>
 bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	::NoIntersect(const Configuration& cfg0, const Configuration& cfg1, Real tmax, Real speed, int& side, Configuration& tcfg0, Configuration& tcfg1, Real& tfirst, Real& tlast)
 {
-	auto invSpeed = Math::sm_Zero;
-	auto t = Math::sm_Zero;
+	auto invSpeed = Math::GetValue(0);
+	auto t = Math::GetValue(0);
 
 	if (cfg1.Max < cfg0.Min)
 	{
 		// V1-interval initially on left of V0-interval.
-		if (speed <= Math::sm_Zero)
+		if (speed <= Math::GetValue(0))
 		{
 			// Intervals moving apart.
 			return true;
@@ -445,7 +445,7 @@ bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	else if (cfg0.Max < cfg1.Min)
 	{
 		// V1-interval initially on right of V0-interval.
-		if (speed >= Math::sm_Zero)
+		if (speed >= Math::GetValue(0))
 		{
 			// Intervals moving apart.
 			return true;
@@ -484,7 +484,7 @@ bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	else
 	{
 		// V0-interval and V1-interval initially overlap.
-		if (speed > Math::sm_Zero)
+		if (speed > Math::GetValue(0))
 		{
 			// Update last time.
 			invSpeed = (static_cast<Real>(1)) / speed;
@@ -500,7 +500,7 @@ bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 				return true;
 			}
 		}
-		else if (speed < Math::sm_Zero)
+		else if (speed < Math::GetValue(0))
 		{
 			// Update last time.
 			invSpeed = (static_cast<Real>(1)) / speed;
@@ -527,9 +527,9 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 {
 	Vector2D edge, diff;
 	const Vector2D* origin{ nullptr };
-	auto invEdE = Math::sm_Zero;
-	auto emin = Math::sm_Zero;
-	auto emax = Math::sm_Zero;
+	auto invEdE = Math::GetValue(0);
+	auto emin = Math::GetValue(0);
+	auto emax = Math::GetValue(0);
 	auto i = 0;
 
 	if (side == 1)  // V1-interval contacts V0-interval on right.
@@ -554,7 +554,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 			diff = V1[cfg1.Index[0]] - *origin;
 			emax = Vector2DTools::DotProduct(edge, diff)*invEdE;
 			MATHEMATICS_ASSERTION_0(emin <= emax, "Unexpected condition\n");
-			StaticFindIntersector1<Real> intr{ Math::sm_Zero, static_cast<Real>(1), emin, emax };
+			StaticFindIntersector1<Real> intr{ Math::GetValue(0), static_cast<Real>(1), emin, emax };
 			quantity = intr.GetNumIntersections();
 			MATHEMATICS_ASSERTION_0(quantity > 0, "Unexpected condition\n");
 			for (i = 0; i < quantity; ++i)
@@ -585,7 +585,7 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 			diff = V0[cfg0.Index[0]] - *origin;
 			emax = Vector2DTools::DotProduct(edge, diff)*invEdE;
 			MATHEMATICS_ASSERTION_0(emin <= emax, "Unexpected condition\n");
-			StaticFindIntersector1<Real> intr{ Math::sm_Zero, static_cast<Real>(1), emin, emax };
+			StaticFindIntersector1<Real> intr{ Math::GetValue(0), static_cast<Real>(1), emin, emax };
 			quantity = intr.GetNumIntersections();
 			MATHEMATICS_ASSERTION_0(quantity > 0, "Unexpected condition\n");
 			for (i = 0; i < quantity; ++i)

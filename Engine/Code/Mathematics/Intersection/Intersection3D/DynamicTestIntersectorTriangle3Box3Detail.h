@@ -37,7 +37,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>
 {
 	// Process as if triangle is stationary, box is moving.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-	auto mContactTime = Math<Real>::sm_Zero;
+	auto mContactTime = Math<Real>::GetZero();
 	auto tlast = Math::sm_MaxReal;
 
 	// Test direction of triangle normal.

@@ -8,7 +8,7 @@
 #define RENDERING_SCENE_GRAPH_LIGHT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
@@ -35,7 +35,7 @@ namespace Rendering
 		using Colour = Colour<float>;
 
 	public: 
-		explicit LightImpl(LightType type = LightType::Ambient,float epsilon = Math::sm_ZeroTolerance);
+		explicit LightImpl(LightType type = LightType::Ambient,float epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;		 
 		

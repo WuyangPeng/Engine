@@ -19,7 +19,9 @@
 
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <array>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace CoreTools
 {
     template <int Rows, int Columns, typename Type>
@@ -80,5 +82,5 @@ namespace CoreTools
     template <int Rows, int Columns, typename Type>
     bool operator<(const Table<Rows, Columns, Type>& lhs, const Table<Rows, Columns, Type>& rhs);
 }
-
+#include STSTEM_WARNING_POP
 #endif  // CORE_TOOLS_DATA_TYPE_TABLE_H

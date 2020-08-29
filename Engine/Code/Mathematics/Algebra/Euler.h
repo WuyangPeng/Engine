@@ -12,7 +12,7 @@
 #include "AlgebraFwd.h"
 #include "Flags/MatrixFlags.h"
 #include "Flags/ExtractEulerResultType.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
 

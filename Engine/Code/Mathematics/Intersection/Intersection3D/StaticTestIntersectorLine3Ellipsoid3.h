@@ -45,7 +45,7 @@ namespace Mathematics
 		// The default values for the thresholds are zero, but you may set them
 		// to be nonzero (negThreshold <= 0 and posThreshold >= 0).  Previously,
 		// the negative threshold was hard-coded as zero.  The positive threshold
-		// was hard-coded to Math<Real>::sm_ZeroTolerance, which is not suitable for
+		// was hard-coded to Math<Real>::GetZeroTolerance(), which is not suitable for
 		// some data sets (i.e. when ellipsoid extents are quite large).  The
 		// default is now zero, so if your application relied on the old behavior,
 		// you must modify this value.

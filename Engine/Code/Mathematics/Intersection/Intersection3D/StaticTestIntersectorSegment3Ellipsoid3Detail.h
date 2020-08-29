@@ -52,14 +52,14 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
 
     // No intersection if Q(t) has no real roots.
 	auto discr = a1*a1 - a0*a2;
-    if (discr < Math<Real>::sm_Zero)
+    if (discr < Math<Real>::GetValue(0))
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // Test whether segment origin is inside ellipsoid.
-    if (a0 <= Math<Real>::sm_Zero)
+    if (a0 <= Math<Real>::GetValue(0))
     {
 		this->SetIntersectionType(IntersectionType::Other);
 		return;
@@ -71,19 +71,19 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
 
     Real q, qder, e = mSegment.GetExtent();
 
-    if (a1 >= Math<Real>::sm_Zero)
+    if (a1 >= Math<Real>::GetValue(0))
     {
         // Roots are possible only on [-e,0], e is the segment extent.  At
         // least one root occurs if Q(-e) <= 0 or if Q(-e) > 0 and Q'(-e) < 0.
         q = a0 + e*(((Real)-2)*a1 + a2*e);
-        if (q <= Math<Real>::sm_Zero)
+        if (q <= Math<Real>::GetValue(0))
         {
 			this->SetIntersectionType(IntersectionType::Other);
 			return;
         }
 
         qder = a1 - a2*e;
-        if (qder < Math<Real>::sm_Zero)
+        if (qder < Math<Real>::GetValue(0))
         {
 			this->SetIntersectionType(IntersectionType::Other);
 			return;
@@ -101,7 +101,7 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
         }
 
         qder = a1 + a2*e;
-        if (qder < Math<Real>::sm_Zero)
+        if (qder < Math<Real>::GetValue(0))
         {
 			this->SetIntersectionType(IntersectionType::Other);
 			return;

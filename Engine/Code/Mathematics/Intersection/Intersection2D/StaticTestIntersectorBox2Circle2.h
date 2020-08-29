@@ -25,9 +25,9 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticTestIntersectorBox2Circle2(const Box2& box, const Circle2& circle, const Real epsilon = Math::sm_ZeroTolerance);
+		StaticTestIntersectorBox2Circle2(const Box2& box, const Circle2& circle, const Real epsilon = Math::GetZeroTolerance());
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// Object access.
 		const Box2 GetBox() const;

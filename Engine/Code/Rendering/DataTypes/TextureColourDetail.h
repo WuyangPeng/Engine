@@ -1,288 +1,130 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/18 11:33)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.0.0 (2020/08/25 13:10)
 
 #ifndef RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H
 #define RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H
 
 #include "TextureColour.h"
-#include "Mathematics/Base/MathDetail.h"
-#include "System/Helper/UnusedMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include <type_traits> 
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-template <Rendering::TextureFormat Format>
-const typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::sm_MinValue{ static_cast<BitType>(ColourTextureFormatTraits<Format>::sm_MinValue) };
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <Rendering::TextureFormat Format>
-const typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::sm_RedMaxValue{ static_cast<BitType>(ColourTextureFormatTraits<Format>::sm_RedMaxValue) };
-
-template <Rendering::TextureFormat Format>
-const typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::sm_GreenMaxValue{ static_cast<BitType>(ColourTextureFormatTraits<Format>::sm_GreenMaxValue) };
-
-template <Rendering::TextureFormat Format>
-const typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::sm_BlueMaxValue{ static_cast<BitType>(ColourTextureFormatTraits<Format>::sm_BlueMaxValue) };
-
-template <Rendering::TextureFormat Format>
-const typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::sm_AlphaMaxValue{ static_cast<BitType>(ColourTextureFormatTraits<Format>::sm_AlphaMaxValue) };
-
-template <Rendering::TextureFormat Format>
-const typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::sm_LuminanceMaxValue{ static_cast<BitType>(ColourTextureFormatTraits<Format>::sm_LuminanceMaxValue) };
-
-template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>
-	::TextureColour()
-	:m_Colour{}
+Rendering::TextureColour<Format>::TextureColour(ValueType value1, ValueType value2) noexcept
+    : m_Colour{}, m_IsClamp{ true }
 {
-	for(int i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] = sm_MinValue;
-	}
+    constexpr auto valid1 = std::is_same_v<RedType, TrueType> &&
+                            std::is_same_v<GreenType, TrueType> &&
+                            !std::is_same_v<BlueType, TrueType> &&
+                            !std::is_same_v<LuminanceType, TrueType> &&
+                            !std::is_same_v<AlphaType, TrueType>;
 
-	RENDERING_SELF_CLASS_IS_VALID_4;
+    constexpr auto valid2 = !std::is_same_v<RedType, TrueType> &&
+                            !std::is_same_v<GreenType, TrueType> &&
+                            !std::is_same_v<BlueType, TrueType> &&
+                            std::is_same_v<LuminanceType, TrueType> &&
+                            std::is_same_v<AlphaType, TrueType>;
+
+    static_assert(valid1 || valid2, "Format type is error!");
+
+    SetColour(value1, value2);
+
+    RENDERING_SELF_CLASS_IS_VALID_3;
 }
 
 template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>
-	::TextureColour(BitType red, BitType green, BitType blue, BitType alpha)
-{	
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType,Rendering::TrueType>::value,"RedType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType,Rendering::TrueType>::value, "GreenType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::BlueType,Rendering::TrueType>::value, "BlueType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::AlphaType,Rendering::TrueType>::value, "AlphaType is TrueType!");
-	static_assert(!std::is_same<ColourTextureFormatTraits<Format>::LuminanceType,Rendering::TrueType>::value, "LuminanceType isn't TrueType!");
-
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] = sm_MinValue;
-	}
-
-	SetColour(red,green,blue,alpha); 
-
-	RENDERING_SELF_CLASS_IS_VALID_4;
-}
-
-template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>
-	::TextureColour(BitType red, BitType green, BitType blue)
+void Rendering::TextureColour<Format>::SetColour(ValueType value1, ValueType value2) noexcept
 {
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::BlueType, Rendering::TrueType>::value, "BlueType is TrueType!"); 
-	static_assert(!std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, Rendering::TrueType>::value, "LuminanceType isn't TrueType!");
+    static_assert(false, "TextureFormat is error!");
 
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] = sm_MinValue;
-	}
+    RENDERING_CLASS_IS_VALID_3;
 
-	SetColour(red,green,blue); 
-
-	RENDERING_SELF_CLASS_IS_VALID_4;
-}
-
-template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>
-	::TextureColour(BitType value)
-{ 
-	static_assert(!std::is_same<ColourTextureFormatTraits<Format>::GreenType, Rendering::TrueType>::value, "GreenType isn't TrueType!");
-	static_assert(!std::is_same<ColourTextureFormatTraits<Format>::BlueType, Rendering::TrueType>::value, "BlueType isn't TrueType!");
-
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] = sm_MinValue;
-	}
-	
-	SetColour(value); 
-
-	RENDERING_SELF_CLASS_IS_VALID_4;
-}
- 
-template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>
-	::TextureColour(BitType firstValue, BitType secondValue)
-{		
-	static_assert((std::is_same<ColourTextureFormatTraits<Format>::RedType,Rendering::TrueType>::value &&
-				   std::is_same<ColourTextureFormatTraits<Format>::GreenType,Rendering::TrueType>::value &&
-	 	 	 	   !std::is_same<ColourTextureFormatTraits<Format>::BlueType,Rendering::TrueType>::value &&
-	 	 	 	   !std::is_same<ColourTextureFormatTraits<Format>::LuminanceType,Rendering::TrueType>::value &&
-	 	 	 	   !std::is_same<ColourTextureFormatTraits<Format>::AlphaType,Rendering::TrueType>::value) ||
-	 	 	 	  (!std::is_same<ColourTextureFormatTraits<Format>::RedType,Rendering::TrueType>::value &&
-	 	 	 	   !std::is_same<ColourTextureFormatTraits<Format>::GreenType,Rendering::TrueType>::value &&
-	 	 	 	   !std::is_same<ColourTextureFormatTraits<Format>::BlueType,Rendering::TrueType>::value &&
-				   std::is_same<ColourTextureFormatTraits<Format>::LuminanceType,Rendering::TrueType>::value &&
-				   std::is_same<ColourTextureFormatTraits<Format>::AlphaType, Rendering::TrueType>::value),"Format type is error!");
-
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] = sm_MinValue;
-	}
-
-	SetColour(firstValue, secondValue); 
-
-	RENDERING_SELF_CLASS_IS_VALID_4;
-} 
-
-template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>::SetColour(BitType red, BitType green, BitType blue, BitType alpha) noexcept
-{
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::BlueType, Rendering::TrueType>::value, "BlueType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::AlphaType, Rendering::TrueType>::value, "AlphaType is TrueType!");
-	static_assert(!std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, Rendering::TrueType>::value, "LuminanceType isn't TrueType!");
-
-	RENDERING_CLASS_IS_VALID_4;
-
-	m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsRed] = red;
-	m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsGreen] = green;
-	m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsBlue] = blue;
-	m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsAlpha] = alpha;
-
-	Standardization();
-}
-
-template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>::SetColour(BitType red, BitType green, BitType blue) noexcept
-{
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType, Rendering::TrueType>::value, "RedType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::BlueType, Rendering::TrueType>::value, "BlueType is TrueType!");
-	static_assert(!std::is_same<ColourTextureFormatTraits<Format>::AlphaType, Rendering::TrueType>::value, "AlphaType isn't TrueType!");
-	static_assert(!std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, Rendering::TrueType>::value, "LuminanceType isn't TrueType!"); 
-
-	RENDERING_CLASS_IS_VALID_4;
-
-	m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsRed] = red;
-	m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsGreen] = green;
-	m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsBlue] = blue;
-
-	Standardization();
+    m_Colour[0] = value1;
+    m_Colour[1] = value2;
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A1R5G5B5>::SetColour(BitType red, BitType green, BitType blue) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8L8>::SetColour(ValueType alpha, ValueType luminance) noexcept;
+
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A4R4G4B4>::SetColour(BitType red, BitType green, BitType blue) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G16R16>::SetColour(ValueType green, ValueType red) noexcept;
+
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8R8G8B8>::SetColour(BitType red, BitType green, BitType blue) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>::SetColour(ValueType green, ValueType red) noexcept;
+
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8B8G8R8>::SetColour(BitType red, BitType green, BitType blue) noexcept;
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16>::SetColour(BitType red, BitType green, BitType blue) noexcept;
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A16B16G16R16F>::SetColour(BitType red, BitType green, BitType blue) noexcept;
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A32B32G32R32F>::SetColour(BitType red, BitType green, BitType blue) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>::SetColour(ValueType green, ValueType red) noexcept;
 
 template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>::SetColour(BitType value) noexcept
+Rendering::TextureColour<Format>::TextureColour(ValueType value) noexcept
+    : m_Colour{}, m_IsClamp{ true }
 {
-	static_assert(false,"TextureFormat is error!");
+    static_assert(!std::is_same_v<GreenType, TrueType>, "GreenType isn't TrueType!");
+    static_assert(!std::is_same_v<BlueType, TrueType>, "BlueType isn't TrueType!");
 
-	RENDERING_CLASS_IS_VALID_4;
+    SetColour(value);
 
-	m_Colour[0] = value; 
-}  
-
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8>::SetColour(BitType alpha) noexcept;
-
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::L8>::SetColour(BitType luminance) noexcept;
-
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::L16>::SetColour(BitType luminance) noexcept;
-
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::R16F>::SetColour(BitType red) noexcept;
-
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::R32F>::SetColour(BitType red) noexcept;
+    RENDERING_SELF_CLASS_IS_VALID_3;
+}
 
 template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>::SetColour(BitType firstValue, BitType secondValue) noexcept
+void Rendering::TextureColour<Format>::SetColour(ValueType value) noexcept
 {
-	static_assert(false, "TextureFormat is error!");
+    static_assert(false, "TextureFormat is error!");
 
-	RENDERING_CLASS_IS_VALID_4;
+    RENDERING_CLASS_IS_VALID_3;
 
-	m_Colour[0] = firstValue;  
-	m_Colour[1] = secondValue; 
-} 
-
-template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8L8>
-	::SetColour(BitType alpha, BitType luminance) noexcept;
+    m_Colour[0] = value;
+}
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G16R16>::SetColour(BitType green, BitType red) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::A8>::SetColour(ValueType alpha) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>::SetColour(BitType green, BitType red) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::L8>::SetColour(ValueType luminance) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>::SetColour(BitType green, BitType red) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::L16>::SetColour(ValueType luminance) noexcept;
 
-// static 
-// private
+template <>
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::R16F>::SetColour(ValueType red) noexcept;
+
+template <>
+RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat::R32F>::SetColour(ValueType red) noexcept;
+
 template <Rendering::TextureFormat Format>
-typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::Clamp(BitType colour, BitType maxValue) noexcept
+template <Rendering::TextureFormat RhsFormat>
+Rendering::TextureColour<Format>::TextureColour(const TextureColour<RhsFormat>& colour)
 {
-	if(colour < sm_MinValue)
-		return sm_MinValue;
-	else if(maxValue < colour)
-		return maxValue;
-	else 
-		return colour;
+    static_assert(std::is_same_v<RedType, TextureColour<RhsFormat>::RedType>, "RedType isn't same!");
+    static_assert(std::is_same_v<GreenType, TextureColour<RhsFormat>::GreenType>, "GreenType isn't same!");
+    static_assert(std::is_same_v<BlueType, TextureColour<RhsFormat>::BlueType>, "BlueType isn't same!");
+    static_assert(std::is_same_v<LuminanceType, TextureColour<RhsFormat>::LuminanceType>, "LuminanceType isn't same!");
+
+    ConvertingColourFormat(colour);
+
+    RENDERING_SELF_CLASS_IS_VALID_3;
 }
 
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
-Rendering::TextureColour<Format>
-	::TextureColour(const TextureColour<RhsFormat>& colour)
+Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator=(const TextureColour<RhsFormat>& colour)
 {
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType, ColourTextureFormatTraits<RhsFormat>::RedType>::value, "RedType isn't same!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType, ColourTextureFormatTraits<RhsFormat>::GreenType>::value, "GreenType isn't same!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::BlueType, ColourTextureFormatTraits<RhsFormat>::BlueType>::value, "BlueType isn't same!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, ColourTextureFormatTraits<RhsFormat>::LuminanceType>::value, "LuminanceType isn't same!");
-	 
-	ConvertingColourFormat(colour); 
+    static_assert(std::is_same_v<RedType, TextureColour<RhsFormat>::RedType>, "RedType isn't same!");
+    static_assert(std::is_same_v<GreenType, TextureColour<RhsFormat>::GreenType>, "GreenType isn't same!");
+    static_assert(std::is_same_v<BlueType, TextureColour<RhsFormat>::BlueType>, "BlueType isn't same!");
+    static_assert(std::is_same_v<LuminanceType, TextureColour<RhsFormat>::LuminanceType>, "LuminanceType isn't same!");
 
-	RENDERING_SELF_CLASS_IS_VALID_4;
-}
+    RENDERING_CLASS_IS_VALID_3;
 
-template <Rendering::TextureFormat Format>
-template <Rendering::TextureFormat RhsFormat>
-Rendering::TextureColour<Format>& Rendering::TextureColour<Format>
-	::operator= (const TextureColour<RhsFormat>& colour)
-{
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType, ColourTextureFormatTraits<RhsFormat>::RedType>::value, "RedType isn't same!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType, ColourTextureFormatTraits<RhsFormat>::GreenType>::value, "GreenType isn't same!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::BlueType, ColourTextureFormatTraits<RhsFormat>::BlueType>::value, "BlueType isn't same!");
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, ColourTextureFormatTraits<RhsFormat>::LuminanceType>::value, "LuminanceType isn't same!");
-
-	RENDERING_CLASS_IS_VALID_4;
-
-	ConvertingColourFormat(colour);	
+    ConvertingColourFormat(colour);
 
     return *this;
 }
@@ -290,439 +132,527 @@ Rendering::TextureColour<Format>& Rendering::TextureColour<Format>
 // private
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
-void Rendering::TextureColour<Format>
-	::ConvertingColourFormat(const TextureColour<RhsFormat>& colour)
+void Rendering::TextureColour<Format>::ConvertingColourFormat(const TextureColour<RhsFormat>& colour)
 {
-	using RhsBitType = typename ColourTextureFormatTraits<RhsFormat>::BitType;
+    constexpr auto rhsRedMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_RedMaxValue;
+    constexpr auto rhsGreenMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_GreenMaxValue;
+    constexpr auto rhsBlueMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_BlueMaxValue;
+    constexpr auto rhsLuminanceMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_LuminanceMaxValue;
 
-	auto rhsRedMaxValue = boost::numeric_cast<RhsBitType>(ColourTextureFormatTraits<RhsFormat>::sm_RedMaxValue);
-	auto rhsGreenMaxValue = boost::numeric_cast<RhsBitType>(ColourTextureFormatTraits<RhsFormat>::sm_GreenMaxValue);
-	auto rhsBlueMaxValue = boost::numeric_cast<RhsBitType>(ColourTextureFormatTraits<RhsFormat>::sm_BlueMaxValue);
-	auto rhsLuminanceMaxValue = boost::numeric_cast<RhsBitType>(ColourTextureFormatTraits<RhsFormat>::sm_LuminanceMaxValue);
-
-	Converting<RhsFormat,ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsRed,
-			   ColourTextureFormatTraits<RhsFormat>::ColourTextureFormatTraitsRed>(colour,sm_RedMaxValue,rhsRedMaxValue,std::is_same<ColourTextureFormatTraits<Format>::RedType,TrueType>());
-	Converting<RhsFormat,ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsGreen,
-			   ColourTextureFormatTraits<RhsFormat>::ColourTextureFormatTraitsGreen>(colour,sm_GreenMaxValue,rhsGreenMaxValue,std::is_same<ColourTextureFormatTraits<Format>::GreenType,TrueType>());
-	Converting<RhsFormat,ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsBlue,
-			   ColourTextureFormatTraits<RhsFormat>::ColourTextureFormatTraitsBlue>(colour,sm_BlueMaxValue,rhsBlueMaxValue,std::is_same<ColourTextureFormatTraits<Format>::BlueType,TrueType>());
-	ConvertingAlpha(colour,std::is_same<ColourTextureFormatTraits<Format>::AlphaType,TrueType>(), std::is_same<ColourTextureFormatTraits<RhsFormat>::AlphaType,TrueType>());
-	Converting<RhsFormat, ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsLuminance,
-			   ColourTextureFormatTraits<RhsFormat>::ColourTextureFormatTraitsLuminance> (colour,sm_LuminanceMaxValue,rhsLuminanceMaxValue,std::is_same<ColourTextureFormatTraits<Format>::LuminanceType,TrueType>());
+    Converting<RhsFormat, sm_Red, TextureColour<RhsFormat>::sm_Red>(colour, sm_RedMaxValue, rhsRedMaxValue, std::is_same<ColourTextureFormatTraits<Format>::RedType, TrueType>());
+    Converting<RhsFormat, sm_Green, TextureColour<RhsFormat>::sm_Green>(colour, sm_GreenMaxValue, rhsGreenMaxValue, std::is_same<ColourTextureFormatTraits<Format>::GreenType, TrueType>());
+    Converting<RhsFormat, sm_Blue, TextureColour<RhsFormat>::sm_Blue>(colour, sm_BlueMaxValue, rhsBlueMaxValue, std::is_same<ColourTextureFormatTraits<Format>::BlueType, TrueType>());
+    ConvertingAlpha(colour, std::is_same<AlphaType, TrueType>(), std::is_same<TextureColour<RhsFormat>::AlphaType, TrueType>());
+    Converting<RhsFormat, sm_Luminance, TextureColour<RhsFormat>::sm_Luminance>(colour, sm_LuminanceMaxValue, rhsLuminanceMaxValue, std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, TrueType>());
 }
 
 // private
 template <Rendering::TextureFormat Format>
-template <Rendering::TextureFormat RhsFormat,int Index,int RhsIndex,bool IsFloatingPoint, bool RhsIsFloatingPoint>
-void Rendering::TextureColour<Format>
-   ::ConvertingBit( const TextureColour<RhsFormat>& colour,BitType maxValue,typename TextureColour<RhsFormat>::BitType rhsMinValue,
-					typename TextureColour<RhsFormat>::BitType rhsMaxValue,const std::integral_constant<bool,IsFloatingPoint>&,
-				    const std::integral_constant<bool,RhsIsFloatingPoint>&)
+template <Rendering::TextureFormat RhsFormat, int Index, int RhsIndex, bool HaveBit>
+void Rendering::TextureColour<Format>::Converting(const TextureColour<RhsFormat>& colour, MinType maxValue, typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::integral_constant<bool, HaveBit>&)
 {
-	using RhsBitType = typename TextureColour<RhsFormat>::BitType;
+    constexpr auto rhsMinValue = ColourTextureFormatTraits<RhsFormat>::sm_MinValue;
 
-	const auto rhsFormatDistance = boost::numeric_cast<RhsBitType>(rhsMaxValue - rhsMinValue);
-	const auto lhsFormatDistance = boost::numeric_cast<BitType>(maxValue - sm_MinValue);
-	const auto value = boost::numeric_cast<RhsBitType>(colour[RhsIndex] - rhsMinValue);
-
-	m_Colour[Index] = boost::numeric_cast<BitType>(value * lhsFormatDistance / rhsFormatDistance) + sm_MinValue;
+    ConvertingBit<RhsFormat, Index, RhsIndex>(colour, maxValue, rhsMinValue, rhsMaxValue, std::integral_constant<bool, sm_IsFloatingPoint>(),
+                                              std::integral_constant<bool, ColourTextureFormatTraits<RhsFormat>::sm_IsFloatingPoint>());
 }
 
 // private
 template <Rendering::TextureFormat Format>
-template <Rendering::TextureFormat RhsFormat,int Index,int RhsIndex>
-void Rendering::TextureColour<Format>
-	::ConvertingBit( const TextureColour<RhsFormat>& colour,BitType maxValue,typename TextureColour<RhsFormat>::BitType rhsMinValue,
-					 typename TextureColour<RhsFormat>::BitType rhsMaxValue,const std::false_type&,const std::true_type&)
+template <Rendering::TextureFormat RhsFormat, int Index, int RhsIndex>
+void Rendering::TextureColour<Format>::Converting([[maybe_unused]] const TextureColour<RhsFormat>& colour, [[maybe_unused]] MinType maxValue, [[maybe_unused]] typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::false_type&) noexcept
 {
-	using RhsBitType = typename TextureColour<RhsFormat>::BitType;
-
-	const auto rhsFormatDistance = boost::numeric_cast<RhsBitType>(rhsMaxValue - rhsMinValue);
-	const auto lhsFormatDistance = boost::numeric_cast<BitType>(maxValue - sm_MinValue);
-	const auto value = boost::numeric_cast<RhsBitType>(colour[RhsIndex] - rhsMinValue);
-
-	m_Colour[Index] = boost::numeric_cast<BitType>(value * lhsFormatDistance / rhsFormatDistance + 0.5f) + sm_MinValue;
 }
 
 // private
 template <Rendering::TextureFormat Format>
-template <Rendering::TextureFormat RhsFormat,int Index,int RhsIndex,bool HaveBit>
-void Rendering::TextureColour<Format>
-	::Converting( const TextureColour<RhsFormat>& colour,BitType maxValue,typename TextureColour<RhsFormat>::BitType rhsMaxValue,const std::integral_constant<bool,HaveBit>& )
+template <Rendering::TextureFormat RhsFormat, bool HaveAlpha, bool RhsHaveAlpha>
+void Rendering::TextureColour<Format>::ConvertingAlpha([[maybe_unused]] const TextureColour<RhsFormat>& colour, const std::integral_constant<bool, HaveAlpha>&, const std::integral_constant<bool, RhsHaveAlpha>&) noexcept
 {
-	using RhsBitType = typename TextureColour<RhsFormat>::BitType;
-
-	auto rhsMinValue = boost::numeric_cast<RhsBitType>(ColourTextureFormatTraits<RhsFormat>::sm_MinValue);
-
-	ConvertingBit<RhsFormat,Index,RhsIndex>(colour,maxValue,rhsMinValue,rhsMaxValue, std::integral_constant<bool,sm_IsFloatingPoint>(),
-										    std::integral_constant<bool,ColourTextureFormatTraits<RhsFormat>::sm_IsFloatingPoint>());
-}
-
-// private
-template <Rendering::TextureFormat Format>
-template <Rendering::TextureFormat RhsFormat,int Index,int RhsIndex>
-void Rendering::TextureColour<Format>
-    ::Converting( const TextureColour<RhsFormat>& colour, BitType maxValue, typename TextureColour<RhsFormat>::BitType rhsMaxValue,const std::false_type& )
-{
-	SYSTEM_UNUSED_ARG(colour);
-	SYSTEM_UNUSED_ARG(maxValue);
-	SYSTEM_UNUSED_ARG(rhsMaxValue);
-}
-
-// private
-template <Rendering::TextureFormat Format>
-template <Rendering::TextureFormat RhsFormat,bool HaveAlpha,bool RhsHaveAlpha>
-void Rendering::TextureColour<Format>
-	::ConvertingAlpha(const TextureColour<RhsFormat>& colour,const std::integral_constant<bool, HaveAlpha>&,const std::integral_constant<bool, RhsHaveAlpha>&)
-{
-     SYSTEM_UNUSED_ARG(colour);
 }
 
 // private
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
-void Rendering::TextureColour<Format>
-	::ConvertingAlpha(const TextureColour<RhsFormat>& colour,const std::true_type&,const std::true_type&)
+void Rendering::TextureColour<Format>::ConvertingAlpha(const TextureColour<RhsFormat>& colour, const std::true_type&, const std::true_type&)
 {
-	using RhsBitType = typename ColourTextureFormatTraits<RhsFormat>::BitType;
+    constexpr auto rhsAlphaMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_AlphaMaxValue;
 
-	auto rhsAlphaMaxValue = boost::numeric_cast<RhsBitType>(ColourTextureFormatTraits<RhsFormat>::sm_AlphaMaxValue);
-
-	Converting<RhsFormat,ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsAlpha,
-		       ColourTextureFormatTraits<RhsFormat>::ColourTextureFormatTraitsAlpha>(colour,sm_AlphaMaxValue,rhsAlphaMaxValue,std::is_same<ColourTextureFormatTraits<Format>::AlphaType,TrueType>());
+    Converting<RhsFormat, sm_Alpha, TextureColour<RhsFormat>::sm_Alpha>(colour, sm_AlphaMaxValue, rhsAlphaMaxValue, std::is_same<ColourTextureFormatTraits<Format>::AlphaType, TrueType>());
 }
 
 // private
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
-void Rendering::TextureColour<Format>
-	::ConvertingAlpha(const TextureColour<RhsFormat>& colour,const std::true_type&,const std::false_type&)
+void Rendering::TextureColour<Format>::ConvertingAlpha([[maybe_unused]] const TextureColour<RhsFormat>& colour, const std::true_type&, const std::false_type&) noexcept
 {
-	 m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsAlpha] = sm_AlphaMaxValue;
+    static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize, "index is crossing!");
 
-     SYSTEM_UNUSED_ARG(colour);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[sm_Alpha] = sm_AlphaMaxValue;
+#include STSTEM_WARNING_POP
+}
+
+// private
+template <Rendering::TextureFormat Format>
+template <Rendering::TextureFormat RhsFormat, int Index, int RhsIndex, bool IsFloatingPoint, bool RhsIsFloatingPoint>
+void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsFormat>& colour, MinType maxValue, typename TextureColour<RhsFormat>::MinType rhsMinValue,
+                                                     typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::integral_constant<bool, IsFloatingPoint>&,
+                                                     const std::integral_constant<bool, RhsIsFloatingPoint>&)
+{
+    static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
+    static_assert(0 <= RhsIndex && RhsIndex < ColourTextureFormatTraits<RhsFormat>::sm_ArraySize, "index is crossing!");
+
+    using RhsValueType = typename TextureColour<RhsFormat>::ValueType;
+
+    const auto rhsFormatDistance = rhsMaxValue - rhsMinValue;
+    const auto lhsFormatDistance = maxValue - sm_MinValue;
+    const auto difference = colour[RhsIndex] - rhsMinValue;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance) + sm_MinValue;
+#include STSTEM_WARNING_POP
+}
+
+// private
+template <Rendering::TextureFormat Format>
+template <Rendering::TextureFormat RhsFormat, int Index, int RhsIndex>
+void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsFormat>& colour, MinType maxValue, typename TextureColour<RhsFormat>::MinType rhsMinValue,
+                                                     typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::false_type&, const std::true_type&)
+{
+    static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
+    static_assert(0 <= RhsIndex && RhsIndex < ColourTextureFormatTraits<RhsFormat>::sm_ArraySize, "index is crossing!");
+
+    using RhsValueType = typename TextureColour<RhsFormat>::ValueType;
+
+    const auto rhsFormatDistance = rhsMaxValue - rhsMinValue;
+    const auto lhsFormatDistance = maxValue - sm_MinValue;
+    const auto difference = colour[RhsIndex] - rhsMinValue;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance + 0.5f) + sm_MinValue;
+#include STSTEM_WARNING_POP
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <Rendering::TextureFormat Format>
-bool Rendering::TextureColour<Format>
-	::IsValid() const noexcept
+bool Rendering::TextureColour<Format>::IsValid() const noexcept
 {
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		if (m_Colour[i] < sm_MinValue)
-		{
-			return false;
-		}		   
-	}
+    if (!m_IsClamp)
+    {
+        return true;
+    }
 
-	return true;
+    try
+    {
+        auto iter = sm_MaxValue.cbegin();
+        for (auto value : m_Colour)
+        {
+            if (iter == sm_MaxValue.cend())
+            {
+                return false;
+            }
+
+            if (value < sm_MinValue || *iter < value)
+            {
+                return false;
+            }
+
+            ++iter;
+        }
+
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <Rendering::TextureFormat Format>
-typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::GetRed() const
+bool Rendering::TextureColour<Format>::IsClamp() const noexcept
 {
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::RedType, Rendering::TrueType>::value, "RedType is TrueType!"); 
+    RENDERING_CLASS_IS_VALID_CONST_3;
 
-	RENDERING_CLASS_IS_VALID_CONST_4;
-
-	return m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsRed];
-}
-
-template <Rendering::TextureFormat Format>
-typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::GetGreen() const
-{
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::GreenType, Rendering::TrueType>::value, "GreenType is TrueType!");
-
-	RENDERING_CLASS_IS_VALID_CONST_4;  
-
-	return m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsGreen];
-}
-
-template <Rendering::TextureFormat Format>
-typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::GetBlue() const
-{
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::BlueType, Rendering::TrueType>::value, "BlueType is TrueType!");
-
-	RENDERING_CLASS_IS_VALID_CONST_4; 
-
-	return m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsBlue];
+    return m_IsClamp;
 }
 
 template <Rendering::TextureFormat Format>
-typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::GetAlpha() const
+void Rendering::TextureColour<Format>::SetClamp(bool isClamp) noexcept
 {
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::AlphaType, Rendering::TrueType>::value, "AlphaType is TrueType!");
+    RENDERING_CLASS_IS_VALID_3;
 
-	RENDERING_CLASS_IS_VALID_CONST_4; 
+    if (m_IsClamp == false && isClamp == true)
+    {
+        m_IsClamp = true;
+        Standardization();
+    }
 
-	return m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsAlpha];
+    m_IsClamp = isClamp;
 }
 
 template <Rendering::TextureFormat Format>
-typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::GetLuminance() const
+typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetRed() const noexcept
 {
-	static_assert(std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, Rendering::TrueType>::value, "LuminanceType is TrueType!");
+    static_assert(std::is_same_v<TextureColour<Format>::RedType, TrueType>, "RedType is TrueType!");
+    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
 
-	RENDERING_CLASS_IS_VALID_CONST_4; 
+    RENDERING_CLASS_IS_VALID_CONST_3;
 
-	return m_Colour[ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsLuminance];
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    return m_Colour[sm_Red];
+#include STSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
-const typename Rendering::TextureColour<Format>::BitType* Rendering::TextureColour<Format>
-	::GetPoint() const
+typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetGreen() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_4;
+    static_assert(std::is_same_v<TextureColour<Format>::GreenType, TrueType>, "GreenType is TrueType!");
+    static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
 
-	return m_Colour.data();
+    RENDERING_CLASS_IS_VALID_CONST_3;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    return m_Colour[sm_Green];
+#include STSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
-typename Rendering::TextureColour<Format>::BitType Rendering::TextureColour<Format>
-	::operator[]( int index ) const
+typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetBlue() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_4;
-	RENDERING_ASSERTION_1(0 <= index && index < sm_ArraySize,"Ë÷Òý´íÎó£¡");
+    static_assert(std::is_same_v<TextureColour<Format>::BlueType, TrueType>, "BlueType is TrueType!");
+    static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
 
-	return m_Colour[index];
-}
- 
-template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>& Rendering::TextureColour<Format>
-	::operator+= (const TextureColour& rhs)
-{
-	RENDERING_CLASS_IS_VALID_4;
+    RENDERING_CLASS_IS_VALID_CONST_3;
 
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] += rhs.m_Colour[i];
-	}
-
-	Standardization();
-
-	return *this;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    return m_Colour[sm_Blue];
+#include STSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>
-	::Standardization() noexcept
+typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetAlpha() const noexcept
 {
-    Standardization<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsRed>(std::is_same<ColourTextureFormatTraits<Format>::RedType,TrueType>(),sm_RedMaxValue);
-	Standardization<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsGreen>(std::is_same<ColourTextureFormatTraits<Format>::GreenType,TrueType>(), sm_GreenMaxValue);
-	Standardization<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsBlue>(std::is_same<ColourTextureFormatTraits<Format>::BlueType,TrueType>(),sm_BlueMaxValue);
-	Standardization<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsAlpha>(std::is_same<ColourTextureFormatTraits<Format>::AlphaType,TrueType>(),sm_AlphaMaxValue);
-	Standardization<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsLuminance>(std::is_same<ColourTextureFormatTraits<Format>::LuminanceType,TrueType>(),sm_LuminanceMaxValue);
+    static_assert(std::is_same_v<TextureColour<Format>::AlphaType, TrueType>, "AlphaType is TrueType!");
+    static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
+
+    RENDERING_CLASS_IS_VALID_CONST_3;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    return m_Colour[sm_Alpha];
+#include STSTEM_WARNING_POP
+}
+
+template <Rendering::TextureFormat Format>
+typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetLuminance() const noexcept
+{
+    static_assert(std::is_same_v<TextureColour<Format>::LuminanceType, Rendering::TrueType>, "LuminanceType is TrueType!");
+    static_assert(0 <= sm_Luminance && sm_Luminance < sm_ArraySize);
+
+    RENDERING_CLASS_IS_VALID_CONST_3;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    return m_Colour[sm_Luminance];
+#include STSTEM_WARNING_POP
+}
+
+template <Rendering::TextureFormat Format>
+const typename Rendering::TextureColour<Format>::ValueType* Rendering::TextureColour<Format>::GetPoint() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_3;
+
+    return m_Colour.data();
+}
+
+template <Rendering::TextureFormat Format>
+typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::operator[](int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_3;
+
+    return m_Colour.at(index);
+}
+
+template <Rendering::TextureFormat Format>
+void Rendering::TextureColour<Format>::SetRed(ValueType red) noexcept
+{
+    static_assert(std::is_same_v<TextureColour<Format>::RedType, TrueType>, "RedType is TrueType!");
+    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
+
+    RENDERING_CLASS_IS_VALID_3;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[sm_Red] = red;
+#include STSTEM_WARNING_POP
+}
+
+template <Rendering::TextureFormat Format>
+void Rendering::TextureColour<Format>::SetGreen(ValueType green) noexcept
+{
+    static_assert(std::is_same_v<TextureColour<Format>::GreenType, TrueType>, "GreenType is TrueType!");
+    static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
+
+    RENDERING_CLASS_IS_VALID_3;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[sm_Green] = green;
+#include STSTEM_WARNING_POP
+}
+
+template <Rendering::TextureFormat Format>
+void Rendering::TextureColour<Format>::SetBlue(ValueType blue) noexcept
+{
+    static_assert(std::is_same_v<TextureColour<Format>::BlueType, TrueType>, "BlueType is TrueType!");
+    static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
+
+    RENDERING_CLASS_IS_VALID_3;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[sm_Blue] = blue;
+#include STSTEM_WARNING_POP
+}
+
+template <Rendering::TextureFormat Format>
+void Rendering::TextureColour<Format>::SetAlpha(ValueType alpha) noexcept
+{
+    static_assert(std::is_same_v<TextureColour<Format>::AlphaType, TrueType>, "AlphaType is TrueType!");
+    static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
+
+    RENDERING_CLASS_IS_VALID_3;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[sm_Alpha] = alpha;
+#include STSTEM_WARNING_POP
+}
+
+template <Rendering::TextureFormat Format>
+void Rendering::TextureColour<Format>::SetLuminance(ValueType luminance) noexcept
+{
+    static_assert(std::is_same_v<TextureColour<Format>::LuminanceType, TrueType>, "LuminanceType is TrueType!");
+    static_assert(0 <= sm_Luminance && sm_Luminance < sm_ArraySize);
+
+    RENDERING_CLASS_IS_VALID_3;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[sm_Luminance] = luminance;
+#include STSTEM_WARNING_POP
+}
+
+template <Rendering::TextureFormat Format>
+Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator+=(const TextureColour& rhs) noexcept
+{
+    RENDERING_CLASS_IS_VALID_3;
+
+    auto rhsIter = rhs.m_Colour.cbegin();
+    for (auto& value : m_Colour)
+    {
+        if (rhsIter != rhs.m_Colour.cend())
+        {
+            value += *rhsIter;
+        }
+
+        ++rhsIter;
+    }
+
+    Standardization();
+
+    return *this;
+}
+
+template <Rendering::TextureFormat Format>
+Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator-=(const TextureColour& rhs) noexcept
+{
+    RENDERING_CLASS_IS_VALID_3;
+
+    auto rhsIter = rhs.m_Colour.cbegin();
+    for (auto& value : m_Colour)
+    {
+        if (rhsIter != rhs.m_Colour.cend())
+        {
+            value -= *rhsIter;
+        }
+
+        ++rhsIter;
+    }
+
+    Standardization();
+
+    return *this;
+}
+
+template <Rendering::TextureFormat Format>
+Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator*=(const TextureColour& rhs)
+{
+    RENDERING_CLASS_IS_VALID_3;
+
+    Multiply<sm_Red>(std::is_same<RedType, TrueType>(), sm_RedMaxValue, rhs);
+    Multiply<sm_Green>(std::is_same<GreenType, TrueType>(), sm_GreenMaxValue, rhs);
+    Multiply<sm_Blue>(std::is_same<BlueType, TrueType>(), sm_BlueMaxValue, rhs);
+    Multiply<sm_Alpha>(std::is_same<AlphaType, TrueType>(), sm_AlphaMaxValue, rhs);
+    Multiply<sm_Luminance>(std::is_same<LuminanceType, TrueType>(), sm_LuminanceMaxValue, rhs);
+
+    Standardization();
+
+    return *this;
+}
+
+template <Rendering::TextureFormat Format>
+template <int Index, bool HaveBit>
+void Rendering::TextureColour<Format>::Multiply(const std::integral_constant<bool, HaveBit>&, MinType maxValue, const TextureColour& colour)
+{
+    static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    m_Colour[Index] = boost::numeric_cast<ValueType>(m_Colour[Index] * colour[Index] / maxValue);
+#include STSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
 template <int Index>
-void Rendering::TextureColour<Format>
-	::Standardization(const std::false_type&,BitType maxValue) noexcept
+void Rendering::TextureColour<Format>::Multiply(const std::false_type&, [[maybe_unused]] MinType maxValue, [[maybe_unused]] const TextureColour& colour) noexcept
 {
-	SYSTEM_UNUSED_ARG(maxValue);
 }
-
-template <Rendering::TextureFormat Format>
-template <int Index>
-void Rendering::TextureColour<Format>
-	::Standardization(const std::true_type&,BitType maxValue) noexcept
-{
-	static_assert(0 <= Index && Index < sm_ArraySize,"index is crossing!");
-
-	m_Colour[Index] = Clamp(m_Colour[Index],maxValue);
-}
-
-template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>& Rendering::TextureColour<Format>
-	::operator-= (const TextureColour& rhs) 
-{
-	RENDERING_CLASS_IS_VALID_4;
-
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] -= rhs.m_Colour[i];
-	}
-
-	Standardization();
-
-	return *this;
-}
-
-template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>& Rendering::TextureColour<Format>
-	::operator*= (const TextureColour& rhs) 
-{
-	RENDERING_CLASS_IS_VALID_4;
-
- 	Multiply<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsRed>(std::is_same<ColourTextureFormatTraits<Format>::RedType,TrueType>(),sm_RedMaxValue,rhs);
-	Multiply<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsGreen>(std::is_same<ColourTextureFormatTraits<Format>::GreenType,TrueType>(),sm_GreenMaxValue,rhs);
-	Multiply<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsBlue>(std::is_same<ColourTextureFormatTraits<Format>::BlueType,TrueType>(),sm_BlueMaxValue,rhs);
-	Multiply<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsAlpha>(std::is_same<ColourTextureFormatTraits<Format>::AlphaType,TrueType>(),sm_AlphaMaxValue,rhs);
-	Multiply<ColourTextureFormatTraits<Format>::ColourTextureFormatTraitsLuminance>(std::is_same<ColourTextureFormatTraits<Format>::LuminanceType,TrueType>(),sm_LuminanceMaxValue,rhs);
-
-	Standardization();
-	
-	return *this;
-}
-
-template <Rendering::TextureFormat Format>
-template <int Index,bool HaveBit>
-void Rendering::TextureColour<Format>
-	::Multiply(const std::integral_constant<bool,HaveBit>&,BitType maxValue,const TextureColour& colour)
-{
-	static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!"); 
-
-	m_Colour[Index] = BitType(m_Colour[Index] * colour[Index] / maxValue); 
-}
-
-template <Rendering::TextureFormat Format>
-template <int Index>
-void Rendering::TextureColour<Format>
-	::Multiply(const std::false_type&,BitType maxValue,const TextureColour& colour)
-{
-	SYSTEM_UNUSED_ARG(maxValue);
-	SYSTEM_UNUSED_ARG(colour);
-} 
 
 template <Rendering::TextureFormat Format>
 template <typename RhsType>
-Rendering::TextureColour<Format>& Rendering::TextureColour<Format>
-	::operator*= (RhsType rhs)
+Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator*=(RhsType rhs)
 {
-	static_assert(std::is_arithmetic<RhsType>::value,"RhsType is arithmetic!");
+    static_assert(std::is_arithmetic_v<RhsType>, "RhsType is arithmetic!");
 
-	RENDERING_CLASS_IS_VALID_4;
+    RENDERING_CLASS_IS_VALID_3;
 
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] *= rhs;
-	}
+    for (auto& value : m_Colour)
+    {
+        auto multiply = value * rhs;
+        value = boost::numeric_cast<ValueType>(multiply);
+    }
 
-	Standardization();
+    Standardization();
 
-	return *this;
+    return *this;
 }
 
 template <Rendering::TextureFormat Format>
 template <typename RhsType>
-Rendering::TextureColour<Format>& Rendering::TextureColour<Format>
-	::operator/= (RhsType rhs)
+Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator/=(RhsType rhs)
 {
-	static_assert(boost::is_arithmetic<RhsType>::value, "RhsType is arithmetic!");
+    static_assert(std::is_arithmetic_v<RhsType>, "RhsType is arithmetic!");
 
-	RENDERING_CLASS_IS_VALID_4;
+    RENDERING_CLASS_IS_VALID_3;
 
-	Divide(rhs,std::is_floating_point<RhsType>());
+    Divide(rhs, std::is_floating_point<RhsType>());
 
-	return *this;
+    return *this;
 }
 
 // private
 template <Rendering::TextureFormat Format>
-template <typename RhsType,bool RhsIsFloatingPoint>
-void Rendering::TextureColour <Format>
-    ::Divide(RhsType rhs,const std::integral_constant<bool,RhsIsFloatingPoint>&)
+template <typename RhsType, bool RhsIsFloatingPoint>
+void Rendering::TextureColour<Format>::Divide(RhsType rhs, const std::integral_constant<bool, RhsIsFloatingPoint>&)
 {
-    if(Mathematics::Math<RhsType>::FAbs(rhs) <= Mathematics::Math<RhsType>::sm_Epsilon)
+    if (Mathematics::Math<RhsType>::FAbs(rhs) <= Mathematics::Math<RhsType>::GetZeroTolerance())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó£¡"));
+        THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó£¡"s));
     }
 
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] /= rhs;
-	}
+    for (auto& value : m_Colour)
+    {
+        auto divide = value / rhs;
+        value = boost::numeric_cast<ValueType>(divide);
+    }
 
-	Standardization();
+    Standardization();
 }
 
 // private
 template <Rendering::TextureFormat Format>
 template <typename RhsType>
-void Rendering::TextureColour <Format>
-    ::Divide(RhsType rhs,const std::false_type&)
+void Rendering::TextureColour<Format>::Divide(RhsType rhs, const std::false_type&)
 {
-    if(rhs == 0)
+    if (rhs == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó£¡"));
+        THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó£¡"s));
     }
-    
-	for(auto i = 0;i < sm_ArraySize;++i)
-	{
-		m_Colour[i] /= rhs;
-	}
-    
-	Standardization();
-}
- 
-template <Rendering::TextureFormat Format>
-bool Rendering
-	::Approximate(const TextureColour<Format>& lhs,const TextureColour<Format>& rhs,typename TextureColour<Format>::BitType epsilon)
-{
-	static_assert(ColourTextureFormatTraits<Format>::sm_IsFloatingPoint,"Format is Floating Point!");
 
-	using BitType = typename ColourTextureFormatTraits<Format>::BitType;
+    for (auto& value : m_Colour)
+    {
+        auto divide = value / rhs;
+        value = boost::numeric_cast<ValueType>(divide);
+    }
 
-	for(auto i = 0;i < ColourTextureFormatTraits<Format>::sm_ArraySize;++i)
-	{
-		if (epsilon < Mathematics::Math<BitType>::FAbs(lhs[i] - rhs[i]))
-		{
-			return false;
-		}              
-	}
-
-	return true;
+    Standardization();
 }
 
 template <Rendering::TextureFormat Format>
-bool Rendering
-	::operator== (const TextureColour<Format>& lhs,const TextureColour<Format>& rhs)
+bool Rendering ::Approximate(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs, typename TextureColour<Format>::ValueType epsilon)
 {
-	static_assert(!ColourTextureFormatTraits<Format>::sm_IsFloatingPoint, "Format isn't Floating Point!");
+    static_assert(ColourTextureFormatTraits<Format>::sm_IsFloatingPoint, "Format is Floating Point!");
 
-	for(auto i = 0;i < ColourTextureFormatTraits<Format>::sm_ArraySize;++i)
-	{
-		if (lhs[i] != rhs[i])
-		{
-			return false;
-		}              
-	}
+    using ValueType = typename TextureColour<Format>::ValueType;
 
-	return true;
+    for (auto i = 0; i < ColourTextureFormatTraits<Format>::sm_ArraySize; ++i)
+    {
+        if (epsilon < Mathematics::Math<ValueType>::FAbs(lhs[i] - rhs[i]))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
-template <Rendering::TextureFormat LhsFormat,typename RhsType>
-const Rendering::TextureColour<LhsFormat> Rendering
-	::operator* (const TextureColour<LhsFormat>& lhs, RhsType rhs)
+template <Rendering::TextureFormat Format>
+bool Rendering ::operator==(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs)
 {
-	static_assert(std::is_arithmetic<RhsType>::value, "RhsType is arithmetic!");
+    static_assert(!ColourTextureFormatTraits<Format>::sm_IsFloatingPoint, "Format isn't Floating Point!");
 
-	return TextureColour<LhsFormat>(lhs) *= rhs;
+    for (auto i = 0; i < ColourTextureFormatTraits<Format>::sm_ArraySize; ++i)
+    {
+        if (lhs[i] != rhs[i])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+template <Rendering::TextureFormat LhsFormat, typename RhsType>
+const Rendering::TextureColour<LhsFormat> Rendering::operator*(const TextureColour<LhsFormat>& lhs, RhsType rhs)
+{
+    static_assert(std::is_arithmetic_v<RhsType>, "RhsType is arithmetic!");
+
+    return TextureColour<LhsFormat>(lhs) *= rhs;
 }
 
 template <typename LhsType, Rendering::TextureFormat RhsFormat>
-const Rendering::TextureColour<RhsFormat> Rendering
-	::operator* (LhsType lhs, const TextureColour<RhsFormat>& rhs)
+const Rendering::TextureColour<RhsFormat> Rendering::operator*(LhsType lhs, const TextureColour<RhsFormat>& rhs)
 {
-	static_assert(std::is_arithmetic<LhsType>::value, "LhsType is arithmetic!"); 
+    static_assert(std::is_arithmetic_v<LhsType>, "LhsType is arithmetic!");
 
-	return TextureColour<RhsFormat>(rhs) *= lhs;
+    return TextureColour<RhsFormat>(rhs) *= lhs;
 }
 
-template <Rendering::TextureFormat LhsFormat,typename RhsType>
-const Rendering::TextureColour<LhsFormat> Rendering
-	::operator/ (const TextureColour<LhsFormat>& lhs, RhsType rhs) 
+template <Rendering::TextureFormat LhsFormat, typename RhsType>
+const Rendering::TextureColour<LhsFormat> Rendering::operator/(const TextureColour<LhsFormat>& lhs, RhsType rhs)
 {
-	static_assert(std::is_arithmetic<RhsType>::value, "RhsType is arithmetic!");
+    static_assert(std::is_arithmetic_v<RhsType>, "RhsType is arithmetic!");
 
-	return TextureColour<LhsFormat>(lhs) /= rhs;
+    return TextureColour<LhsFormat>(lhs) /= rhs;
 }
-#include STSTEM_WARNING_POP
-#endif // RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H
+
+#endif  // RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H

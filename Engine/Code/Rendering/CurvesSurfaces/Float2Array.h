@@ -34,7 +34,7 @@ namespace Rendering
         Float2Array(Float2Array&&) = default;
         Float2Array& operator=(Float2Array&&) = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Float2Array);
 

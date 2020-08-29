@@ -33,7 +33,7 @@ namespace CoreTools
 		CReadFileManagerImpl(CReadFileManagerImpl&&) noexcept = delete;
 		CReadFileManagerImpl& operator=(CReadFileManagerImpl&&) noexcept = delete;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		int GetFileByteSize() const override;
 

@@ -51,17 +51,17 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 	auto det = Math<Real>::FAbs(a00*a11 - a01 * a01);
 	auto s = a01 * b1 - a11 * b0;
 	auto t = a01 * b0 - a00 * b1;
-	Real sqrDistance = Math<Real>::sm_Zero;
+	Real sqrDistance = Math<Real>::GetValue(0);
 
 	if (s + t <= det)
 	{
-		if (s < Math<Real>::sm_Zero)
+		if (s < Math<Real>::GetValue(0))
 		{
-			if (t < Math<Real>::sm_Zero)  // region 4
+			if (t < Math<Real>::GetValue(0))  // region 4
 			{
-				if (b0 < Math<Real>::sm_Zero)
+				if (b0 < Math<Real>::GetValue(0))
 				{
-					t = Math<Real>::sm_Zero;
+					t = Math<Real>::GetValue(0);
 					if (-b0 >= a00)
 					{
 						s = static_cast<Real>(1);
@@ -75,10 +75,10 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				}
 				else
 				{
-					s = Math<Real>::sm_Zero;
-					if (b1 >= Math<Real>::sm_Zero)
+					s = Math<Real>::GetValue(0);
+					if (b1 >= Math<Real>::GetValue(0))
 					{
-						t = Math<Real>::sm_Zero;
+						t = Math<Real>::GetValue(0);
 						sqrDistance = c;
 					}
 					else if (-b1 >= a11)
@@ -95,10 +95,10 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 			}
 			else  // region 3
 			{
-				s = Math<Real>::sm_Zero;
-				if (b1 >= Math<Real>::sm_Zero)
+				s = Math<Real>::GetValue(0);
+				if (b1 >= Math<Real>::GetValue(0))
 				{
-					t = Math<Real>::sm_Zero;
+					t = Math<Real>::GetValue(0);
 					sqrDistance = c;
 				}
 				else if (-b1 >= a11)
@@ -113,12 +113,12 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				}
 			}
 		}
-		else if (t < Math<Real>::sm_Zero)  // region 5
+		else if (t < Math<Real>::GetValue(0))  // region 5
 		{
-			t = Math<Real>::sm_Zero;
-			if (b0 >= Math<Real>::sm_Zero)
+			t = Math<Real>::GetValue(0);
+			if (b0 >= Math<Real>::GetValue(0))
 			{
-				s = Math<Real>::sm_Zero;
+				s = Math<Real>::GetValue(0);
 				sqrDistance = c;
 			}
 			else if (-b0 >= a00)
@@ -145,7 +145,7 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 	{
 		Real tmp0, tmp1, numer, denom;
 
-		if (s < Math<Real>::sm_Zero)  // region 2
+		if (s < Math<Real>::GetValue(0))  // region 2
 		{
 			tmp0 = a01 + b0;
 			tmp1 = a11 + b1;
@@ -156,7 +156,7 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				if (numer >= denom)
 				{
 					s = static_cast<Real>(1);
-					t = Math<Real>::sm_Zero;
+					t = Math<Real>::GetValue(0);
 					sqrDistance = a00 + (static_cast<Real>(2))*b0 + c;
 				}
 				else
@@ -168,15 +168,15 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 			}
 			else
 			{
-				s = Math<Real>::sm_Zero;
-				if (tmp1 <= Math<Real>::sm_Zero)
+				s = Math<Real>::GetValue(0);
+				if (tmp1 <= Math<Real>::GetValue(0))
 				{
 					t = static_cast<Real>(1);
 					sqrDistance = a11 + (static_cast<Real>(2))*b1 + c;
 				}
-				else if (b1 >= Math<Real>::sm_Zero)
+				else if (b1 >= Math<Real>::GetValue(0))
 				{
-					t = Math<Real>::sm_Zero;
+					t = Math<Real>::GetValue(0);
 					sqrDistance = c;
 				}
 				else
@@ -186,7 +186,7 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				}
 			}
 		}
-		else if (t < Math<Real>::sm_Zero)  // region 6
+		else if (t < Math<Real>::GetValue(0))  // region 6
 		{
 			tmp0 = a01 + b1;
 			tmp1 = a00 + b0;
@@ -197,7 +197,7 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				if (numer >= denom)
 				{
 					t = static_cast<Real>(1);
-					s = Math<Real>::sm_Zero;
+					s = Math<Real>::GetValue(0);
 					sqrDistance = a11 + (static_cast<Real>(2))*b1 + c;
 				}
 				else
@@ -209,15 +209,15 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 			}
 			else
 			{
-				t = Math<Real>::sm_Zero;
-				if (tmp1 <= Math<Real>::sm_Zero)
+				t = Math<Real>::GetValue(0);
+				if (tmp1 <= Math<Real>::GetValue(0))
 				{
 					s = static_cast<Real>(1);
 					sqrDistance = a00 + (static_cast<Real>(2))*b0 + c;
 				}
-				else if (b0 >= Math<Real>::sm_Zero)
+				else if (b0 >= Math<Real>::GetValue(0))
 				{
-					s = Math<Real>::sm_Zero;
+					s = Math<Real>::GetValue(0);
 					sqrDistance = c;
 				}
 				else
@@ -230,9 +230,9 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 		else  // region 1
 		{
 			numer = a11 + b1 - a01 - b0;
-			if (numer <= Math<Real>::sm_Zero)
+			if (numer <= Math<Real>::GetValue(0))
 			{
-				s = Math<Real>::sm_Zero;
+				s = Math<Real>::GetValue(0);
 				t = static_cast<Real>(1);
 				sqrDistance = a11 + (static_cast<Real>(2))*b1 + c;
 			}
@@ -242,7 +242,7 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				if (numer >= denom)
 				{
 					s = static_cast<Real>(1);
-					t = Math<Real>::sm_Zero;
+					t = Math<Real>::GetValue(0);
 					sqrDistance = a00 + (static_cast<Real>(2))*b0 + c;
 				}
 				else
@@ -256,9 +256,9 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 	}
 
 	// Account for numerical round-off error.
-	if (sqrDistance < Math<Real>::sm_Zero)
+	if (sqrDistance < Math<Real>::GetValue(0))
 	{
-		sqrDistance = Math<Real>::sm_Zero;
+		sqrDistance = Math<Real>::GetValue(0);
 	}
 
 	mClosestPoint0 = mPoint;
@@ -267,7 +267,7 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 	mTriangleBary[2] = t;
 	mTriangleBary[0] = static_cast<Real>(1) - s - t;
 
-	return DistanceResult{ sqrDistance, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDistance, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>

@@ -60,18 +60,18 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>
 	Real dot;
 
 	// Solve the quadratic.  Keep only those X for which Dot(A,X-V) >= 0.
-	if (Math::FAbs(c2) >= Math::sm_ZeroTolerance)
+	if (Math::FAbs(c2) >= Math::GetZeroTolerance())
 	{
 		// c2 != 0
 		auto discr = c1 * c1 - c0 * c2;
-		if (discr < Math::sm_Zero)
+		if (discr < Math::GetValue(0))
 		{
 			// Q(t) = 0 has no real-valued roots.  The line does not
 			// intersect the double-sided cone.
 			this->SetIntersectionType(IntersectionType::Empty);
 			mQuantity = 0;
 		}
-		else if (discr > Math::sm_ZeroTolerance)
+		else if (discr > Math::GetZeroTolerance())
 		{
 			// Q(t) = 0 has two distinct real-valued roots.  However, one or
 			// both of them might intersect the portion of the double-sided
@@ -85,7 +85,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>
 			mPoint[mQuantity] = mLine.GetOrigin() + t * mLine.GetDirection();
 			E = mPoint[mQuantity] - mCone.GetVertex();
 			dot = Vector3DTools::DotProduct(E, mCone.GetAxis());
-			if (dot > Math::sm_Zero)
+			if (dot > Math::GetValue(0))
 			{
 				mQuantity++;
 			}
@@ -94,7 +94,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>
 			mPoint[mQuantity] = mLine.GetOrigin() + t * mLine.GetDirection();
 			E = mPoint[mQuantity] - mCone.GetVertex();
 			dot = Vector3DTools::DotProduct(E, mCone.GetAxis());
-			if (dot > Math::sm_Zero)
+			if (dot > Math::GetValue(0))
 			{
 				mQuantity++;
 			}
@@ -125,7 +125,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>
 			// One repeated real root (line is tangent to the cone).
 			mPoint[0] = mLine.GetOrigin() - (c1 / c2)*mLine.GetDirection();
 			E = mPoint[0] - mCone.GetVertex();
-			if (Vector3DTools::DotProduct(E, mCone.GetAxis()) > Math::sm_Zero)
+			if (Vector3DTools::DotProduct(E, mCone.GetAxis()) > Math::GetValue(0))
 			{
 
 				this->SetIntersectionType(IntersectionType::Point);
@@ -138,13 +138,13 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>
 			}
 		}
 	}
-	else if (Math::FAbs(c1) >= Math::sm_ZeroTolerance)
+	else if (Math::FAbs(c1) >= Math::GetZeroTolerance())
 	{
 		// c2 = 0, c1 != 0 (D is a direction vector on the cone boundary)
 		mPoint[0] = mLine.GetOrigin() - ((Real{ 0.5 })*c0 / c1)*mLine.GetDirection();
 		E = mPoint[0] - mCone.GetVertex();
 		dot = Vector3DTools::DotProduct(E, mCone.GetAxis());
-		if (dot > Math::sm_Zero)
+		if (dot > Math::GetValue(0))
 		{
 			this->SetIntersectionType(IntersectionType::Ray);
 			mQuantity = 2;
@@ -156,7 +156,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>
 			mQuantity = 0;
 		}
 	}
-	else if (Math::FAbs(c0) >= Math::sm_ZeroTolerance)
+	else if (Math::FAbs(c0) >= Math::GetZeroTolerance())
 	{
 		// c2 = c1 = 0, c0 != 0
 		this->SetIntersectionType(IntersectionType::Empty);

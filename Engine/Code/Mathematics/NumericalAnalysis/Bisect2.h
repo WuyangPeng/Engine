@@ -11,7 +11,7 @@
 
 #include "Bisect2Root.h"
 #include "NumericalAnalysisFwd.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 namespace Mathematics
 {
@@ -27,7 +27,7 @@ namespace Mathematics
 		using Bisect2Root = Bisect2Root<Real>;
 
 	public:
-		Bisect2(Function firstFunction, Function secondFunction, int maxLevel, Real tolerance = Math<Real>::sm_ZeroTolerance);
+		Bisect2(Function firstFunction, Function secondFunction, int maxLevel, Real tolerance = Math<Real>::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

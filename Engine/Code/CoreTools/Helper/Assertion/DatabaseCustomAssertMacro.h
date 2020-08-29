@@ -33,11 +33,11 @@ static_assert(DATABASE_ASSERT_LEVEL <= ASSERT_LEVEL, "Database assert level defi
 
 #else // DATABASE_ASSERT_LEVEL < 0
 
-	#define DATABASE_ASSERTION_0(condition, format, ...) ((void)0)
-	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, ...) ((void)0)
+	#define DATABASE_ASSERTION_0(condition, format, ...) (static_cast<void>(0))
+	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
-	#define DATABASE_ASSERTION_DEBUG(condition, format, ...) ((void)0)
-	#define DATABASE_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, ...) ((void)0)
+	#define DATABASE_ASSERTION_DEBUG(condition, format, ...) (static_cast<void>(0))
+	#define DATABASE_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif //0 <= DATABASE_ASSERT_LEVEL
 
@@ -50,8 +50,8 @@ static_assert(DATABASE_ASSERT_LEVEL <= ASSERT_LEVEL, "Database assert level defi
 
 #else // DATABASE_ASSERT_LEVEL < 1
 
-	#define DATABASE_ASSERTION_1(condition, format, ...) ((void)0)
-	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition,functionDescribed,format, ...) ((void)0)
+	#define DATABASE_ASSERTION_1(condition, format, ...) (static_cast<void>(0))
+	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 1 <= DATABASE_ASSERT_LEVEL
 
@@ -64,8 +64,8 @@ static_assert(DATABASE_ASSERT_LEVEL <= ASSERT_LEVEL, "Database assert level defi
 
 #else // DATABASE_ASSERT_LEVEL < 2
 
-	#define DATABASE_ASSERTION_2(condition, format, ...) ((void)0)
-	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition,functionDescribed,format, ...) ((void)0)
+	#define DATABASE_ASSERTION_2(condition, format, ...) (static_cast<void>(0))
+	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 2 <= DATABASE_ASSERT_LEVEL
 
@@ -78,8 +78,8 @@ static_assert(DATABASE_ASSERT_LEVEL <= ASSERT_LEVEL, "Database assert level defi
 
 #else // DATABASE_ASSERT_LEVEL < 3
 
-	#define DATABASE_ASSERTION_3(condition, format, ...) ((void)0)
-	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition,functionDescribed,format, ...) ((void)0)
+	#define DATABASE_ASSERTION_3(condition, format, ...) (static_cast<void>(0))
+	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 3 <= DATABASE_ASSERT_LEVEL
 
@@ -92,8 +92,8 @@ static_assert(DATABASE_ASSERT_LEVEL <= ASSERT_LEVEL, "Database assert level defi
 
 #else // DATABASE_ASSERT_LEVEL < 4
 
-	#define DATABASE_ASSERTION_4(condition, format, ...) ((void)0)
-	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition,functionDescribed,format, ...) ((void)0)
+	#define DATABASE_ASSERTION_4(condition, format, ...) (static_cast<void>(0))
+	#define DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 4 <= DATABASE_ASSERT_LEVEL
 

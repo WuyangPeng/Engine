@@ -1,0 +1,8 @@
+计算机系统：系统架构与操作系统的高度集成 （Computer Systems:An Integrated Approach to Architecture and Operating Systems）
+
+☆ 
+作者： Umakishore Ramachandran、William D.Leahy Jr.
+
+知识点 
+1.	计算机系统基础知识。
+2.	计算机系统基础知识练习。 

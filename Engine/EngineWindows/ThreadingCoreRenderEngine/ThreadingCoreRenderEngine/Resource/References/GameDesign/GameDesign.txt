@@ -1,1 +1,15 @@
 参考文献·游戏设计
+
+1.	Geometry（几何学）
+2.	Graphics（图形学）
+3.	Physics（物理学）
+4.	AlgorithmicTechnique（算法技术）
+5.	RenderingTechnology（渲染技术） 
+6.	OpenGL
+7.	DirectX
+8.	SoundProgramming（音效编程）
+9.	ArtificialIntellegence（人工智能）
+10.	GameDesign（游戏设计）
+11.	GameProgramming（游戏编程）
+12.	GameEngine（游戏引擎）
+13.	ImageProcessing（图像处理）

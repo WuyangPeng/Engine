@@ -27,7 +27,7 @@ namespace Database
                 MysqlConnectorResult(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult) noexcept;
 	 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  ResultRowPtr FetchOne() override;
 		  ResultRowContainer FetchAll() override;

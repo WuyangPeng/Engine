@@ -235,7 +235,7 @@ bool Mathematics::NoniterativeEigen3x3<Real>
 	// 返回包含最大值的行，要用于特征向量构造。
 	maxRow = Vector3D{ matrix(maxRowIndex, 0),matrix(maxRowIndex,1),matrix(maxRowIndex, 2) };
 
-	return Math<Real>::sm_ZeroTolerance <= maxEntry;
+	return Math<Real>::GetZeroTolerance() <= maxEntry;
 }
 
 template <typename Real>
@@ -271,7 +271,7 @@ void Mathematics::NoniterativeEigen3x3<Real>
 		row = 1;
 	}
 
-	if (Math<Real>::sm_ZeroTolerance <= maxValue)
+	if (Math<Real>::GetZeroTolerance() <= maxValue)
 	{
 		if (row == 0)
 		{
@@ -323,7 +323,7 @@ void Mathematics::NoniterativeEigen3x3<Real>
 		row = 1;
 	}
 
-	if (Math<Real>::sm_ZeroTolerance <= maxValue)
+	if (Math<Real>::GetZeroTolerance() <= maxValue)
 	{
 		if (row == 0)
 		{

@@ -31,10 +31,10 @@ void Mathematics::HeightLineFit2<Real>
 	// 这将陷入由系数矩阵存在（几乎）零的行列式。
 
 	// 计算线性系统的总和。
-	auto sumX = Math::sm_Zero;
-	auto sumY = Math::sm_Zero;
-	auto sumXX = Math::sm_Zero;
-	auto sumXY = Math::sm_Zero;
+	auto sumX = Math::GetValue(0);
+	auto sumY = Math::GetValue(0);
+	auto sumXX = Math::GetValue(0);
+	auto sumXY = Math::GetValue(0);
 
 	auto numPoints = points.size();
 	for (auto i = 0u; i < numPoints; ++i)

@@ -88,7 +88,7 @@ const typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathemat
 									   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 									   tool.GetOriginDifferenceSquaredLength();
 
-				return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::sm_Zero, m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),
+				return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::GetValue(0), m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),
 									   m_Segment.GetCenterPoint() + rhsT * m_Segment.GetDirection(),lhsT,rhsT };
 			}
 			else
@@ -117,7 +117,7 @@ const typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathemat
 	auto t = tool.GetLhsT(-rhsExtent);
 	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
 
-	return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),Math::sm_Zero, m_Line.GetOrigin() + t * m_Line.GetDirection(),
+	return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),Math::GetValue(0), m_Line.GetOrigin() + t * m_Line.GetDirection(),
 						   m_Segment.GetCenterPoint() + rhsExtent * m_Segment.GetDirection(),t,rhsExtent };
 }
 
@@ -128,8 +128,8 @@ const typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathemat
 	auto originDifferenceDotLhsDirection = tool.GetOriginDifferenceDotLhsDirection();
 	auto squaredDistance = tool.GetSquaredDistanceWithParallel();
 
-	return DistanceResult{ squaredDistance, Math::sm_Zero, m_Line.GetOrigin() - originDifferenceDotLhsDirection * m_Line.GetDirection(),
-						   m_Segment.GetCenterPoint(), -originDifferenceDotLhsDirection,Math::sm_Zero };
+	return DistanceResult{ squaredDistance, Math::GetValue(0), m_Line.GetOrigin() - originDifferenceDotLhsDirection * m_Line.GetDirection(),
+						   m_Segment.GetCenterPoint(), -originDifferenceDotLhsDirection,Math::GetValue(0) };
 }
 
 template <typename Real>

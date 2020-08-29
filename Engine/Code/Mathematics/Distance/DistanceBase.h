@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "DistanceResult.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
@@ -70,7 +70,7 @@ namespace Mathematics
 		// 对于牛顿法和逆抛物线插值。
 		// 默认 = 8
 		int m_MaximumIterations;
-		// 默认 = Math<Real>::sm_ZeroTolerance
+		// 默认 = Math<Real>::GetZeroTolerance()
 		Real m_ZeroThreshold;
 
 		// 默认 = 1e-03

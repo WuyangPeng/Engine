@@ -47,7 +47,7 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>
 	// Get the box velocity relative to the segment.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-	SetContactTime(Math<Real>::sm_Zero);
+	SetContactTime(Math<Real>::GetZero());
 	auto tlast = Math::sm_MaxReal;
 
 	auto i = 0;
@@ -91,7 +91,7 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>
 		}
 	}
 
-	if (mContactTime < Math<Real>::sm_Zero || side == IntersectorConfiguration<Real>::NONE)
+	if (mContactTime < Math<Real>::GetZero() || side == IntersectorConfiguration<Real>::NONE)
 	{
 		// intersecting now
 		SetContactTime(mContactTime);

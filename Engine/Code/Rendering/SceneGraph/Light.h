@@ -30,12 +30,12 @@ namespace Rendering
         using Colour = Colour<float>;
 
     public:
-        explicit Light(LightType type = LightType::Ambient, float epsilon = Math::sm_ZeroTolerance);
+        explicit Light(LightType type = LightType::Ambient, float epsilon = Math::GetZeroTolerance());
         ~Light();
         Light(Light&&) = default;
         Light& operator=(Light&&) = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Light);
 

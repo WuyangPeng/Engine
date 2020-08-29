@@ -84,7 +84,7 @@ void Rendering::SpatialData
 {
     RENDERING_CLASS_IS_VALID_9;
     
-	m_WorldBound = Bound{ APoint::sm_Origin,0.0f };
+	m_WorldBound = Bound{ Mathematics::Pointf::g_Origin,0.0f };
     m_WorldBoundIsCurrent = false;
 }
 

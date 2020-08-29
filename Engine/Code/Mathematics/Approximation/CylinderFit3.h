@@ -42,7 +42,7 @@
 //     axis = fit1.GetAxis(); 
 //  }
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
 #include <vector>
@@ -59,8 +59,8 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		explicit CylinderFit3(const Points& points, const Real epsilon = Math::sm_ZeroTolerance);
-		CylinderFit3(const Points& points, const Vector3D& guessCenter, const Vector3D& guessAxis, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit CylinderFit3(const Points& points, const Real epsilon = Math::GetZeroTolerance());
+		CylinderFit3(const Points& points, const Vector3D& guessCenter, const Vector3D& guessAxis, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

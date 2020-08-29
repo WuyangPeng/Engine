@@ -35,7 +35,7 @@
 
 	namespace ResourceManager
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

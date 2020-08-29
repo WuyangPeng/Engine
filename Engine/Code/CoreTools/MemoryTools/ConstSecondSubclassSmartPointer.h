@@ -30,7 +30,7 @@ namespace CoreTools
 		explicit ConstSecondSubclassSmartPointer(const SubclassType* data);
 		ConstSecondSubclassSmartPointer() noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const SubclassType* GetData() const override;
 		const SubclassType& operator* () const override;

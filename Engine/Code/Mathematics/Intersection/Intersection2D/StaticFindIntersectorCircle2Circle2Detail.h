@@ -90,9 +90,9 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>
 			// 理论上，discriminant是非负的。
 			// 然而，数值四舍五入误差可能使其略负。将其截断为零。
 			auto discriminant = lhsRadius * lhsRadius / centerDifferenceSquaredLength - ordinal * ordinal;
-			if (discriminant < Math::sm_Zero)
+			if (discriminant < Math::GetValue(0))
 			{
-				discriminant = Math::sm_Zero;
+				discriminant = Math::GetValue(0);
 			}
 			auto discriminantSqrt = Math::Sqrt(discriminant);
 			auto perp = Vector2DTools::GetPerp(centerDifference);

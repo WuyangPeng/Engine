@@ -31,7 +31,7 @@ namespace Network
 		MultipleMessageStreamingSize();
 		virtual ~MultipleMessageStreamingSize();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 int GetStreamingSize(const MultipleMessageContainer& container) const override;
 	};

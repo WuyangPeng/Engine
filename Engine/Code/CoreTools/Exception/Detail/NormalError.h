@@ -21,7 +21,7 @@ namespace CoreTools
 		explicit NormalError(const FunctionDescribed& functionDescribed, const String& message);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 	};
 }
 

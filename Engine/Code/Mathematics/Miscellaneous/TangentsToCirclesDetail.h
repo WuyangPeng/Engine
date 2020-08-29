@@ -63,7 +63,7 @@ namespace Mathematics
 		Real tmp, a;
 
 		Real rDiff = circle1.GetRadius() - circle0.GetRadius();
-		if (Math<Real>::FAbs(rDiff) >= Math<Real>::sm_ZeroTolerance)
+		if (Math<Real>::FAbs(rDiff) >= Math<Real>::GetZeroTolerance())
 		{
 			// Solve (R1^2-R0^2)*s^2 + 2*R0^2*s - R0^2 = 0..
 			Real r1Sqr = circle1.GetRadius() *circle1.GetRadius();

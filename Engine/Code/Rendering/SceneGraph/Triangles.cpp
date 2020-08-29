@@ -5,7 +5,7 @@
 // 引擎版本：0.0.0.3 (2019/07/22 18:28)
 
 #include "Rendering/RenderingExport.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "PickRecord.h"
 #include "PickRecordContainer.h"
 #include "Triangles.h"
@@ -92,9 +92,9 @@ const Rendering::TrianglePosition Rendering::Triangles ::GetWorldTriangle(int in
 
     auto trianglePosition = GetModelTriangle(index);
 
-    auto firstPosition = GetWorldTransform() * trianglePosition.GetFirstPosition();
-    auto secondPosition = GetWorldTransform() * trianglePosition.GetSecondPosition();
-    auto thirdPosition = GetWorldTransform() * trianglePosition.GetThirdPosition();
+const auto firstPosition = GetWorldTransform() * trianglePosition.GetFirstPosition();
+    const auto secondPosition = GetWorldTransform() * trianglePosition.GetSecondPosition();
+    const auto thirdPosition = GetWorldTransform() * trianglePosition.GetThirdPosition();
 
     return TrianglePosition{ firstPosition, secondPosition, thirdPosition };
 }
@@ -175,14 +175,14 @@ void Rendering::Triangles ::UpdateModelNormals(const VertexBufferAccessor& verte
         const auto triangleIndex = GetTriangle(index);
 
         // 获取顶点位置
-        auto position0 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetFirstIndex());
-        auto position1 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetSecondIndex());
-        auto position2 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetThirdIndex());
+        const auto position0 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetFirstIndex());
+        const auto position1 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetSecondIndex());
+        const auto position2 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetThirdIndex());
 
         // 计算三角形法线。这个法线的长度为法线的加权和。
-        auto triangleEdge1 = position1 - position0;
-        auto triangleEdge2 = position2 - position0;
-        auto triangleNormal = Cross(triangleEdge1, triangleEdge2);
+        const auto triangleEdge1 = position1 - position0;
+        const auto triangleEdge2 = position2 - position0;
+        const auto triangleNormal = Cross(triangleEdge1, triangleEdge2);
 
         // 添加三角形法线到顶点法线和。
         GetVertexBuffer()->AddTriangleNormal(vertexBufferAccessor, triangleIndex.GetFirstIndex(), triangleNormal);
@@ -219,13 +219,13 @@ void Rendering::Triangles ::UpdateModelTangentsUseGeometry(const VertexBufferAcc
     {
         if (vertexBufferAccessor.HasTangent())
         {
-            auto tangent = normalDerivatives.GetTangent(index);
+              const auto tangent = normalDerivatives.GetTangent(index);
             GetVertexBuffer()->SetTriangleTangent(vertexBufferAccessor, index, tangent);
         }
 
         if (vertexBufferAccessor.HasBinormal())
         {
-            auto binormal = normalDerivatives.GetBinormal(index);
+            const auto binormal = normalDerivatives.GetBinormal(index);
             GetVertexBuffer()->SetTriangleBinormal(vertexBufferAccessor, index, binormal);
         }
     }
@@ -254,8 +254,8 @@ void Rendering::Triangles ::UpdateModelTangentsUseTextureCoords(const VertexBuff
 const        auto triangleIndex = GetTriangle(index);
 
         vector<APoint> localPosition(3);
-        vector<AVector> localNormal(3);
-        vector<AVector> localTangent(3);
+vector<AVector> localNormal(3, Mathematics::Vectorf::g_Zero);
+        vector<AVector> localTangent(3, Mathematics::Vectorf::g_Zero);
         vector<Vector2D> localTextureCoord(3);
 
         for (auto current = 0; current < 3; ++current)
@@ -269,15 +269,15 @@ const        auto triangleIndex = GetTriangle(index);
 
         for (auto current = 0; current < 3; ++current)
         {
-            auto currLocTangent = localTangent[current];
-            if (!Approximate(currLocTangent, AVector::sm_Zero))
+            const auto& currLocTangent = localTangent[current];
+            if (!Approximate(currLocTangent, Mathematics::Vectorf::g_Zero))
             {
                 // 这个顶点已被访问。
                 continue;
             }
 
             // 计算顶点的切线空间。
-            auto normalVector = localNormal[current];
+         const   auto& normalVector = localNormal[current];
             const auto prev = ((current + 2) % 3);
             const auto next = ((current + 1) % 3);
 
@@ -290,7 +290,7 @@ const        auto triangleIndex = GetTriangle(index);
             tangentVector.Normalize();
 
             // 计算双切线B,另一个切线垂直于T。
-            auto bitangentVector = UnitCross(normalVector, tangentVector);
+            const auto bitangentVector = UnitCross(normalVector, tangentVector);
 
             const auto currentTriangleIndex = triangleIndex[current];
             if (vertexBufferAccessor.HasTangent())
@@ -314,27 +314,27 @@ const        auto triangleIndex = GetTriangle(index);
 const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const APoint& position0, const Vector2D& textureCoord0, const APoint& position1, const Vector2D& textureCoord1, const APoint& position2, const Vector2D& textureCoord2)
 {
     // 计算顶点P0位置的变化。
-    auto differenceP1P0 = position1 - position0;
-    auto differenceP2P0 = position2 - position0;
+    const auto differenceP1P0 = position1 - position0;
+    const auto differenceP2P0 = position2 - position0;
 
-    if (Mathematics::Mathf::FAbs(differenceP1P0.Length()) < Mathematics::Mathf::sm_ZeroTolerance ||
-        Mathematics::Mathf::FAbs(differenceP2P0.Length()) < Mathematics::Mathf::sm_ZeroTolerance)
+    if (Mathematics::Mathf::FAbs(differenceP1P0.Length()) < Mathematics::Mathf::GetZeroTolerance() ||
+        Mathematics::Mathf::FAbs(differenceP2P0.Length()) < Mathematics::Mathf::GetZeroTolerance())
     {
         // 这个三角形是非常小的，称之为退化退化三角形。
-        return AVector::sm_Zero;
+        return Mathematics::Vectorf::g_Zero;
     }
 
     // 计算顶点P0纹理坐标在边缘P1-P0的方向上的变化。
     auto differenceU1U0 = textureCoord1[0] - textureCoord0[0];
     auto differenceV1V0 = textureCoord1[1] - textureCoord0[1];
-    if (Mathematics::Mathf::FAbs(differenceV1V0) < Mathematics::Mathf::sm_ZeroTolerance)
+    if (Mathematics::Mathf::FAbs(differenceV1V0) < Mathematics::Mathf::GetZeroTolerance())
     {
         // 三角形实际上在纹理坐标v上没有变化。
-        if (Mathematics::Mathf::FAbs(differenceU1U0) < Mathematics::Mathf::sm_ZeroTolerance)
+        if (Mathematics::Mathf::FAbs(differenceU1U0) < Mathematics::Mathf::GetZeroTolerance())
         {
             // 三角形实际上在纹理坐标u上没有变化。
             // 由于纹理坐标不改变这个三角形，把它当作一个退化参数曲面。
-            return AVector::sm_Zero;
+            return Mathematics::Vectorf::g_Zero;
         }
 
         // 变化在所有u上是有效，所以设置切向量为T = dP / du。
@@ -345,10 +345,10 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
     auto differenceU2U0 = textureCoord2[0] - textureCoord0[0];
     auto differenceV2V0 = textureCoord2[1] - textureCoord0[1];
     auto det = differenceV1V0 * differenceU2U0 - differenceV2V0 * differenceU1U0;
-    if (Mathematics::Mathf::FAbs(det) < Mathematics::Mathf::sm_ZeroTolerance)
+    if (Mathematics::Mathf::FAbs(det) < Mathematics::Mathf::GetZeroTolerance())
     {
         // 三角形顶点是共线的参数空间，所以把它当作一个退化参数曲面。
-        return AVector::sm_Zero;
+        return Mathematics::Vectorf::g_Zero;
     }
 
     // 三角形顶点是不共线的参数空间，所以选择切线为
@@ -366,10 +366,10 @@ const Rendering::PickRecordContainer Rendering::Triangles ::ExecuteRecursive(con
     {
         // 将线性组件转换到模型空间坐标。
         auto worldInverseTransform = GetWorldTransform().GetInverseTransform();
-        auto modelOriginPoint = worldInverseTransform * origin;
+        const auto modelOriginPoint = worldInverseTransform * origin;
         const auto modelOrigin = modelOriginPoint.GetVector3D();
 
-        auto modelDirectionVector = worldInverseTransform * direction;
+const auto modelDirectionVector = worldInverseTransform * direction;
         const auto modelDirection = modelDirectionVector.GetVector3D();
 
         const Line3 line{ modelOrigin, modelDirection };

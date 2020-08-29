@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 {
 	auto pDist = mPlane.DistanceTo(mCapsule.GetSegment().GetEndPoint());
 	auto nDist = mPlane.DistanceTo(mCapsule.GetSegment().GetBeginPoint());
-    if (pDist*nDist <= Math<Real>::sm_Zero)
+    if (pDist*nDist <= Math<Real>::GetZero())
     {
         // Capsule segment endpoints on opposite sides of the plane.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -61,10 +61,10 @@ bool Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 	::CapsuleIsCulled() const
 {
 	auto pDist = mPlane.DistanceTo(mCapsule.GetSegment().GetEndPoint());
-    if (pDist < Math<Real>::sm_Zero)
+    if (pDist < Math<Real>::GetZero())
     {
 		auto nDist = mPlane.DistanceTo(mCapsule.GetSegment().GetBeginPoint());
-        if (nDist < Math<Real>::sm_Zero)
+        if (nDist < Math<Real>::GetZero())
         {
             if (pDist <= nDist)
             {

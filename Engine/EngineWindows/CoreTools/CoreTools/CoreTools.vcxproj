@@ -316,6 +316,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Flags\UniqueIDSelectFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Singleton.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\SingletonDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\SpanIterator.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\SpanIteratorDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManagerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\BitArrayManager\ArrayProxy.h" />
@@ -920,6 +922,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\Assert\Assertion.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\SpanIterator.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\ArrayProxy.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\BitArrayManager\BitArray.cpp" />

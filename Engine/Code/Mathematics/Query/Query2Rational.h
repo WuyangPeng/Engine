@@ -28,7 +28,7 @@ namespace Mathematics
 		explicit Query2Rational(const std::vector<Vector2D>& vertices);
 		 ~Query2Rational();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 QueryType GetType() const override;
 

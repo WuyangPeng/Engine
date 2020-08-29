@@ -26,13 +26,13 @@ Mathematics::Ellipse2<Real> Mathematics
     // we actually build an ellipse.
     for (auto i = 0; i < 2; ++i)
     {
-        if (diag[i] < Math<Real>::sm_Zero)
+        if (diag[i] < Math<Real>::GetValue(0))
         {
             diag[i] = -diag[i];
         }
-        if (diag[i] < Math<Real>::sm_ZeroTolerance)
+        if (diag[i] < Math<Real>::GetZeroTolerance())
         {
-            diag[i] = Math<Real>::sm_ZeroTolerance;
+            diag[i] = Math<Real>::GetZeroTolerance();
         }
     }
 
@@ -47,7 +47,7 @@ Mathematics::Ellipse2<Real> Mathematics
     // If the maximum value of Q(X[i]) for all input points is V^2, then a
     // bounding ellipse is Q(X) = V^2 since Q(X[i]) <= V^2 for all i.
 
-	auto maxValue = Math<Real>::sm_Zero;
+	auto maxValue = Math<Real>::GetValue(0);
     for (auto i = 0u; i < points.size(); ++i)
     {
 		auto diff = points[i] - box.GetCenter();
@@ -107,7 +107,7 @@ const Mathematics::Ellipse2<Real> Mathematics
 	Vector2D<Real> axis[2];
 
     // Bounding ellipse orientation is average of input orientations.
-    if (Vector2DTools<Real>::DotProduct(ellipse0.GetAxis0(),ellipse1.GetAxis0()) >= Math<Real>::sm_Zero)
+    if (Vector2DTools<Real>::DotProduct(ellipse0.GetAxis0(),ellipse1.GetAxis0()) >= Math<Real>::GetValue(0))
     {
         axis[0] = (Real{0.5})*(ellipse0.GetAxis0() + ellipse1.GetAxis0());
         axis[0].Normalize();

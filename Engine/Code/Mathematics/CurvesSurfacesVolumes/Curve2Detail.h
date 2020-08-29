@@ -108,7 +108,7 @@ Real Mathematics::Curve2<Real>
 	const auto der2 = GetSecondDerivative(t);
 	auto speedSqr = Vector2DTools<Real>::VectorMagnitudeSquared(der1);
 
-    if (speedSqr >= Math<Real>::sm_ZeroTolerance)
+    if (speedSqr >= Math<Real>::GetZeroTolerance())
     {
 		auto numer = Vector2DTools<Real>::DotPerp(der1,der2);
 		auto denom = Math<Real>::Pow(speedSqr, static_cast<Real>(1.5));
@@ -117,7 +117,7 @@ Real Mathematics::Curve2<Real>
     else
     {
         // Curvature is indeterminate, just return 0.
-        return Math<Real>::sm_Zero;
+        return Math<Real>::GetValue(0);
     }
 }
 

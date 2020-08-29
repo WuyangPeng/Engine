@@ -33,7 +33,7 @@ namespace Rendering
 		CollapseRecordArray(CollapseRecordArray&&)= default;
 		CollapseRecordArray& operator=(CollapseRecordArray&&)= default;
 		
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CollapseRecordArray); 
 

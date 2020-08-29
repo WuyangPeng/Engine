@@ -36,14 +36,14 @@ template <typename Real>
 void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>
 	::Find()
 {
-	SetContactTime(Math<Real>::sm_Zero);
+	SetContactTime(Math<Real>::GetZero());
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
 	IntersectorConfiguration<Real> cfg;
 	IntersectorAxis<Real>::GetConfiguration(mHalfspace.GetNormal(), mBox, cfg);
 
-	Real mContactTime = Math<Real>::sm_Zero;
+	Real mContactTime = Math<Real>::GetZero();
 	if (!IntersectorAxis<Real>::Test(mHalfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, mHalfspace.GetConstant(), cfg.mMin, cfg.mMax, this->GetTMax(), mContactTime, tlast))
 	{
 		// Never intersecting.
@@ -52,7 +52,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>
 		return;
 	}
 
-	if (mContactTime == Math<Real>::sm_Zero)
+	if (mContactTime == Math<Real>::GetZero())
 	{
 		// Intersecting now.
 		SetContactTime(mContactTime);

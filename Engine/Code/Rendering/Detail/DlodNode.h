@@ -14,7 +14,9 @@
 #include "CoreTools/Helper/SubclassSmartPointerMacro.h"
 
 RENDERING_EXPORT_SHARED_PTR(DlodNodeImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE DlodNode : public SwitchNode
@@ -29,7 +31,7 @@ namespace Rendering
 		  DlodNode(DlodNode&&) noexcept = default;
 		DlodNode& operator=(DlodNode&&) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(DlodNode); 
 
@@ -64,5 +66,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Eighth,DlodNode);
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_DETAIL_DLOD_NODE_H

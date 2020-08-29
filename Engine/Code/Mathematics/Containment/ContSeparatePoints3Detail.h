@@ -172,11 +172,11 @@ int Mathematics::SeparatePoints3<Real>
         {
 			auto v = indices[3*t + i];
 			auto c0 = Vector3DTools<Real>::DotProduct(plane.GetNormal(),points[v]);
-			if (c0 > plane.GetConstant() + Math<Real>::sm_ZeroTolerance)
+			if (c0 > plane.GetConstant() + Math<Real>::GetZeroTolerance())
             {
                 ++posSide;
             }
-			else if (c0 < plane.GetConstant() - Math<Real>::sm_ZeroTolerance)
+			else if (c0 < plane.GetConstant() - Math<Real>::GetZeroTolerance())
             {
                 ++negSide;
             }
@@ -203,12 +203,12 @@ int Mathematics::SeparatePoints3<Real>
         {
 			auto v = indices[3*t + i];
 			auto c0 = Vector3DTools<Real>::DotProduct(plane.GetNormal(),points[v]);
-            if (c0 > plane.GetConstant() + Math<Real>::sm_ZeroTolerance)
+            if (c0 > plane.GetConstant() + Math<Real>::GetZeroTolerance())
             {
                 // Positive side.
                 return +1;
             }
-			if (c0 < plane.GetConstant() - Math<Real>::sm_ZeroTolerance)
+			if (c0 < plane.GetConstant() - Math<Real>::GetZeroTolerance())
             {
                 // Negative side.
                 return -1;

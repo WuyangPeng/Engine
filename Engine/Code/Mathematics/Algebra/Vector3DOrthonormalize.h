@@ -32,9 +32,9 @@ namespace Mathematics
 	public:
 		// Gram-Schmidt正交化. 
 		// 以线性无关的向量U、V和W，来计算一个正交组（单位长度，相互垂直）。
-		Vector3DOrthonormalize(const Vector3D& lhs, const Vector3D& mhs, const Vector3D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
+		Vector3DOrthonormalize(const Vector3D& lhs, const Vector3D& mhs, const Vector3D& rhs, const Real epsilon = Math::GetZeroTolerance());
 
-		explicit Vector3DOrthonormalize(const std::vector<Vector3D> vectors, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit Vector3DOrthonormalize(const std::vector<Vector3D> vectors, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

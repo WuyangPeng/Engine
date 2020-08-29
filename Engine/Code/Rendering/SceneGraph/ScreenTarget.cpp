@@ -28,7 +28,7 @@ const Rendering::CameraSmartPointer Rendering::ScreenTarget
     // [-1,1]^2 x [0,1].
 	CameraSmartPointer camera{ std::make_shared<Camera>(false) };
     camera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-    camera->SetFrame(APoint::sm_Origin, AVector::sm_UnitZ, AVector::sm_UnitY,AVector::sm_UnitX);
+    camera->SetFrame(Mathematics::Pointf::g_Origin, Mathematics::Vectorf::g_UnitZ, Mathematics::Vectorf::g_UnitY,Mathematics::Vectorf::g_UnitX);
 
     return camera;
 }

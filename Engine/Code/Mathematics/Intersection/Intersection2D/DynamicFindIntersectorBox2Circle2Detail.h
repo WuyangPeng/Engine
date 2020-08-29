@@ -52,8 +52,8 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 	auto vy = Vector2DTools<Real>::DotProduct(vel, m_Box.GetSecondAxis());
 	auto ex = m_Box.GetFirstExtent();
 	auto ey = m_Box.GetSecondExtent();
-	auto ix = Math::sm_Zero;
-	auto iy = Math::sm_Zero;
+	auto ix = Math::GetValue(0);
+	auto iy = Math::GetValue(0);
 
 	auto type = 0;
 
@@ -89,7 +89,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			// the circle center as the intersection point, but let the
 			// caller know that the objects overlap by returning an "other"
 			// intersection.			
-			SetContactTime(Math::sm_Zero);
+			SetContactTime(Math::GetValue(0));
 			m_ContactPoint = m_Circle.GetCenter();
 			this->SetIntersectionType(IntersectionType::Other);
 			return;
@@ -143,25 +143,25 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 	auto dy = cy + ey;
 	auto rsqr = m_Circle.GetRadius()*m_Circle.GetRadius();
 	auto diff = dx * dx + dy * dy - rsqr;
-	if (diff <= Math::sm_Zero)
+	if (diff <= Math::GetValue(0))
 	{
 		// Circle is already intersecting the box.
-		SetContactTime(Math::sm_Zero);
+		SetContactTime(Math::GetValue(0));
 		return -1;
 	}
 
 	auto dot = vx * dx + vy * dy;
-	if (dot >= Math::sm_Zero)
+	if (dot >= Math::GetValue(0))
 	{
 		// Circle not moving towards box.
 		return 0;
 	}
 
 	auto dotPerp = vx * dy - vy * dx;
-	auto vsqr = Math::sm_Zero;
-	auto inv = Math::sm_Zero;
+	auto vsqr = Math::GetValue(0);
+	auto inv = Math::GetValue(0);
 
-	if (dotPerp >= Math::sm_Zero)
+	if (dotPerp >= Math::GetValue(0))
 	{
 		// Potential contact on left edge.
 		if (dotPerp <= m_Circle.GetRadius()*vy)
@@ -175,7 +175,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			return 1;
 		}
 
-		if (vx <= Math::sm_Zero)
+		if (vx <= Math::GetValue(0))
 		{
 			// Passed corner, moving away from box.
 			return 0;
@@ -184,7 +184,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 		vsqr = vx * vx + vy * vy;
 		dy = cy - ey;
 		dotPerp = vx * dy - vy * dx;
-		if (dotPerp >= Math::sm_Zero && dotPerp*dotPerp > rsqr*vsqr)
+		if (dotPerp >= Math::GetValue(0) && dotPerp*dotPerp > rsqr*vsqr)
 		{
 			// Circle misses box.
 			return 0;
@@ -224,7 +224,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			return 1;
 		}
 
-		if (vy <= Math::sm_Zero)
+		if (vy <= Math::GetValue(0))
 		{
 			// Passed corner, moving away from box.
 			return 0;
@@ -233,7 +233,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 		vsqr = vx * vx + vy * vy;
 		dx = cx - ex;
 		dotPerp = vx * dy - vy * dx;
-		if (-dotPerp >= Math::sm_Zero && dotPerp*dotPerp > rsqr*vsqr)
+		if (-dotPerp >= Math::GetValue(0) && dotPerp*dotPerp > rsqr*vsqr)
 		{
 			// Circle misses box.
 			return 0;
@@ -269,14 +269,14 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 {
 	auto dx = cx + ex;
 	auto xSignedDist = dx + m_Circle.GetRadius();
-	if (xSignedDist >= Math::sm_Zero)
+	if (xSignedDist >= Math::GetValue(0))
 	{
 		// Circle is already intersecting the box.
-		this->SetContactTime(Math::sm_Zero);
+		this->SetContactTime(Math::GetValue(0));
 		return -1;
 	}
 
-	if (vx <= Math::sm_Zero)
+	if (vx <= Math::GetValue(0))
 	{
 		// Circle not moving towards box.
 		return 0;
@@ -284,17 +284,17 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 
 	auto rsqr = m_Circle.GetRadius()*m_Circle.GetRadius();
 	auto vsqr = vx * vx + vy * vy;
-	auto dy = Math::sm_Zero;
-	auto dot = Math::sm_Zero;
-	auto dotPerp = Math::sm_Zero;
-	auto diff = Math::sm_Zero;
-	auto inv = Math::sm_Zero;
+	auto dy = Math::GetValue(0);
+	auto dot = Math::GetValue(0);
+	auto dotPerp = Math::GetValue(0);
+	auto diff = Math::GetValue(0);
+	auto inv = Math::GetValue(0);
 
-	if (vy >= Math::sm_Zero)
+	if (vy >= Math::GetValue(0))
 	{
 		dy = cy - ey;
 		dotPerp = vx * dy - vy * dx;
-		if (dotPerp >= Math::sm_Zero && dotPerp*dotPerp > rsqr*vsqr)
+		if (dotPerp >= Math::GetValue(0) && dotPerp*dotPerp > rsqr*vsqr)
 		{
 			// Circle misses box.
 			return 0;
@@ -324,7 +324,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 	{
 		dy = cy + ey;
 		dotPerp = vx * dy - vy * dx;
-		if (dotPerp <= Math::sm_Zero && dotPerp * dotPerp > rsqr * vsqr)
+		if (dotPerp <= Math::GetValue(0) && dotPerp * dotPerp > rsqr * vsqr)
 		{
 			// Circle misses box.
 			return 0;

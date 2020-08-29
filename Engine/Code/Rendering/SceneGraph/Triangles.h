@@ -8,7 +8,7 @@
 #define RENDERING_SCENE_GRAPH_TRIANGLES_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Visual.h"
 #include "TriangleIndex.h"
 #include "TrianglePosition.h"
@@ -43,7 +43,7 @@ namespace Rendering
 		Triangles(VisualPrimitiveType type,const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_OBJECT_FACTORY_DECLARE(Triangles);
 		CORE_TOOLS_RTTI_OVERRIDE_DECLARE;	

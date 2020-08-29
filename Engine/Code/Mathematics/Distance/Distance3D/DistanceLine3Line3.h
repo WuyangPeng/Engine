@@ -31,7 +31,7 @@ namespace Mathematics
 		DistanceLine3Line3(const Line3& lhsLine, const Line3& rhsLine);
 		virtual ~DistanceLine3Line3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Line3 GetLhsLine() const;
 		const Line3 GetRhsLine() const;

@@ -26,7 +26,7 @@ namespace Network
 	public:
 		explicit MessageArrayBuffer(ParserStrategy parserStrategy) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const char* GetInitialBufferedPtr() const noexcept override;
 		char* GetInitialBufferedPtr() noexcept override;

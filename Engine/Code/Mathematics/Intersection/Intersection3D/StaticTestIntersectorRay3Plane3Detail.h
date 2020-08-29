@@ -68,7 +68,7 @@ void Mathematics::StaticTestIntersectorRay3Plane3<Real>
 {
 	Line3<Real> line{ m_Ray.GetOrigin(), m_Ray.GetDirection() };
 	StaticFindIntersectorLine3Plane3<Real> intr{ line, m_Plane };
-	if (intr.IsIntersection() && intr.GetLineParameter() >= Math<Real>::sm_Zero)
+	if (intr.IsIntersection() && intr.GetLineParameter() >= Math<Real>::GetValue(0))
 	{
 		// The line intersects the plane, but possibly at a point that is
 		// not on the ray.

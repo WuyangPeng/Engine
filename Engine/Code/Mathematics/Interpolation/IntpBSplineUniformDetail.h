@@ -127,7 +127,7 @@ namespace Mathematics
 		// Compute increments to skip zero values of mtensor.
 		for (i = 0; i < mDp1To2N; /**/)
 		{
-			for (j = i + 1; j < mDp1To2N && mProduct[j] == Math<Real>::sm_Zero; ++j)
+			for (j = i + 1; j < mDp1To2N && mProduct[j] == Math<Real>::GetValue(0); ++j)
 			{
 				mSkip[i]++;
 			}

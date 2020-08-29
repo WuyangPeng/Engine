@@ -508,7 +508,7 @@ void Mathematics::FindContactSet<Real>
 	auto sqrLen0 = Vector3DTools<Real>::VectorMagnitudeSquared(dir0);
 	auto sqrLen1 = Vector3DTools<Real>::VectorMagnitudeSquared(dir1);
 	auto sqrLenN = Vector3DTools<Real>::VectorMagnitudeSquared(normal);
-	if (sqrLenN < Math<Real>::sm_ZeroTolerance*sqrLen0*sqrLen1)
+	if (sqrLenN < Math<Real>::GetZeroTolerance()*sqrLen0*sqrLen1)
 	{
 		ColinearSegments(segment0, segment1, quantity, P);
 	}

@@ -52,7 +52,7 @@ void Mathematics::SphereFit3<Real>
 	// 猜测初始中心。
 	if (initialCenterIsAverage)
 	{
-		m_Sphere.SetSphere(average, Math<Real>::sm_Zero);
+		m_Sphere.SetSphere(average, Math<Real>::GetValue(0));
 	}
 	else
 	{
@@ -70,8 +70,8 @@ void Mathematics::SphereFit3<Real>
 
 		auto circleDifference = m_Sphere.GetCenter() - current;
 
-		if (Math<Real>::FAbs(circleDifference[0]) <= Math<Real>::sm_ZeroTolerance &&
-			Math<Real>::FAbs(circleDifference[1]) <= Math<Real>::sm_ZeroTolerance)
+		if (Math<Real>::FAbs(circleDifference[0]) <= Math<Real>::GetZeroTolerance() &&
+			Math<Real>::FAbs(circleDifference[1]) <= Math<Real>::GetZeroTolerance())
 		{
 			return;
 		}
@@ -108,7 +108,7 @@ void Mathematics::SphereFit3<Real>
 	auto numPoints = points.size();
 
 	// 计算平均值L, dL/da, dL/db, dL/dc。
-	auto lengthAverage = Math<Real>::sm_Zero;
+	auto lengthAverage = Math<Real>::GetValue(0);
 	Vector3D derLenghtAverage;
 
 	for (auto i = 0u; i < numPoints; ++i)
@@ -116,7 +116,7 @@ void Mathematics::SphereFit3<Real>
 		auto difference = points[i] - m_Sphere.GetCenter();
 
 		auto length = Vector3DTools<Real>::VectorMagnitude(difference);
-		if (Math<Real>::sm_ZeroTolerance < length)
+		if (Math<Real>::GetZeroTolerance() < length)
 		{
 			lengthAverage += length;
 			derLenghtAverage -= difference / length;

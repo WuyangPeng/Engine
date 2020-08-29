@@ -28,7 +28,7 @@ namespace Rendering
 		TextureCubeImpl (TextureFormat format, int dimension,int numLevels,BufferUsage usage = BufferUsage::Texture);
  
         
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
      
         int GetWidth () const;
         int GetHeight () const;

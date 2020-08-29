@@ -29,10 +29,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticFindIntersectorLine2Ray2(const Line2& line, const Ray2& ray, const Real dotThreshold = Math::sm_ZeroTolerance);
+		StaticFindIntersectorLine2Ray2(const Line2& line, const Ray2& ray, const Real dotThreshold = Math::GetZeroTolerance());
 		virtual ~StaticFindIntersectorLine2Ray2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// ≥…‘±∑√Œ 
 		const Line2 GetLine() const;

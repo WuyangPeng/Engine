@@ -27,7 +27,7 @@ namespace Network
         BoostSockStream(BoostSockStream&&) noexcept = default;
         BoostSockStream& operator=(BoostSockStream&&) noexcept = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         BoostSockStreamType& GetBoostSockStream() noexcept override;
 

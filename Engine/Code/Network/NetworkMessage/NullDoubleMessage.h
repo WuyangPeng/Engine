@@ -23,7 +23,7 @@ namespace Network
                 explicit NullDoubleMessage(int64_t messageID) noexcept;
 		 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 		NETWORK_STREAM_DECLARE(NullDoubleMessage);

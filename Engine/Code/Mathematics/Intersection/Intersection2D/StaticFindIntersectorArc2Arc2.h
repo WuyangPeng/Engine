@@ -31,10 +31,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticFindIntersectorArc2Arc2(const Arc2& lhsArc, const Arc2& rhsArc, const Real epsilon = Math::sm_ZeroTolerance);
+		StaticFindIntersectorArc2Arc2(const Arc2& lhsArc, const Arc2& rhsArc, const Real epsilon = Math::GetZeroTolerance());
 		virtual ~StaticFindIntersectorArc2Arc2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Arc2 GetLhsArc() const;
 		const Arc2 GetRhsArc() const;

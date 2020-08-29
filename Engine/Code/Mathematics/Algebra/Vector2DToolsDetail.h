@@ -31,7 +31,7 @@ template <typename Real>
 bool Mathematics::Vector2DTools<Real>
 	::Approximate(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon)
 {
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= epsilon, "epsilon必须大于或等于0！");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
 	return Math::FAbs(lhs.GetXCoordinate() - rhs.GetXCoordinate()) < epsilon &&
 		   Math::FAbs(lhs.GetYCoordinate() - rhs.GetYCoordinate()) < epsilon;
@@ -87,7 +87,7 @@ template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2DTools<Real>
 	::ParallelVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon)
 {
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= epsilon, "epsilon必须大于或等于0！");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
 	auto moduleSquare = VectorMagnitudeSquared(rhs);
 

@@ -77,7 +77,7 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 		auto rhsT = tool.GetRhsT();
 		auto rhsExtentMultiplyDet = rhsExtent * det;
 
-		if (Math::sm_Zero <= lhsT)
+		if (Math::GetValue(0) <= lhsT)
 		{
 			if (-rhsExtentMultiplyDet <= rhsT)
 			{
@@ -86,7 +86,7 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 					// 区域 0			
 
 					// 最小点为射线和线段内部点。
-					return DistanceResult{ Math::sm_Zero, Math::sm_Zero, m_Ray.GetOrigin() + lhsT / det * m_Ray.GetDirection(),
+					return DistanceResult{ Math::GetValue(0), Math::GetValue(0), m_Ray.GetOrigin() + lhsT / det * m_Ray.GetDirection(),
 										   m_Segment.GetCenterPoint() + rhsT / det * m_Segment.GetDirection() };
 				}
 				else
@@ -123,7 +123,7 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 	else
 	{
 		// 射线和线段平行
-		if (Math::sm_Zero < tool.GetDirectionDot())
+		if (Math::GetValue(0) < tool.GetDirectionDot())
 		{
 			// 相反的方向向量。
 			return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, -rhsExtent);
@@ -144,16 +144,16 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 		tool.GetOriginDifferenceSquaredLength();
 
-	if (Math::sm_Zero < t)
+	if (Math::GetValue(0) < t)
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-							   Math::sm_Zero, m_Ray.GetOrigin() + t * m_Ray.GetDirection(),
+							   Math::GetValue(0), m_Ray.GetOrigin() + t * m_Ray.GetDirection(),
 							   m_Segment.GetCenterPoint() + rhsExtent * m_Segment.GetDirection() };
 	}
 	else
 	{
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(rhsSquare),
-							   Math::sm_Zero, m_Ray.GetOrigin(),
+							   Math::GetValue(0), m_Ray.GetOrigin(),
 							   m_Segment.GetCenterPoint() + rhsExtent * m_Segment.GetDirection() };
 	}
 }
@@ -163,13 +163,13 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 	::GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
 {
 	auto t = tool.GetLhsT(rhsExtent);
-	if (Math::sm_Zero < t)
+	if (Math::GetValue(0) < t)
 	{
 		auto rhsSquare = -rhsExtent * (-rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 						 tool.GetOriginDifferenceSquaredLength();
 
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-							   Math::sm_Zero, m_Ray.GetOrigin() + t * m_Ray.GetDirection(),
+							   Math::GetValue(0), m_Ray.GetOrigin() + t * m_Ray.GetDirection(),
 							   m_Segment.GetCenterPoint() - rhsExtent * m_Segment.GetDirection() };
 	}
 	else
@@ -194,7 +194,7 @@ const typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathemati
 
 	return DistanceResult{ Math::GetNumericalRoundOffNonnegative(dotRhsDirection * (dotRhsDirection + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 																 tool.GetOriginDifferenceSquaredLength()),
-						   Math::sm_Zero, m_Ray.GetOrigin(), m_Segment.GetCenterPoint() + dotRhsDirection * m_Segment.GetDirection() };
+						   Math::GetValue(0), m_Ray.GetOrigin(), m_Segment.GetCenterPoint() + dotRhsDirection * m_Segment.GetDirection() };
 }
 
 template <typename Real>

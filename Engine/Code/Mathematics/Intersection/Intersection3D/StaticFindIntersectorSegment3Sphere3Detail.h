@@ -16,7 +16,7 @@ Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	: mSegment{ segment }, mSphere{ sphere }
 {
     mQuantity = 0;
-    ZeroThreshold = Math::sm_ZeroTolerance;
+    ZeroThreshold = Math::GetZeroTolerance();
 	Find();
 }
 
@@ -43,7 +43,7 @@ void Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
 	auto a1 = Vector3DTools::DotProduct(mSegment.GetDirection(),diff);
 	auto discr = a1*a1 - a0;
-    if (discr < Math<Real>::sm_Zero)
+    if (discr < Math<Real>::GetZero())
     {
         mQuantity = 0;
 		this->SetIntersectionType(IntersectionType::Empty);
@@ -55,17 +55,17 @@ void Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	auto qm = tmp0 - tmp1;
 	auto qp = tmp0 + tmp1;
     Real root;
-    if (qm*qp <= Math<Real>::sm_Zero)
+    if (qm*qp <= Math<Real>::GetZero())
     {
         root = Math::Sqrt(discr);
-        mSegmentParameter[0] = (qm > Math<Real>::sm_Zero ? -a1 - root : -a1 + root);
+        mSegmentParameter[0] = (qm > Math<Real>::GetZero() ? -a1 - root : -a1 + root);
         mPoint[0] = mSegment.GetCenterPoint() + mSegmentParameter[0] * mSegment.GetDirection();
         mQuantity = 1;
 		this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    if (qm > Math<Real>::sm_Zero && Math::FAbs(a1) < mSegment.GetExtent())
+    if (qm > Math<Real>::GetZero() && Math::FAbs(a1) < mSegment.GetExtent())
     {
         if (discr >= ZeroThreshold)
         {

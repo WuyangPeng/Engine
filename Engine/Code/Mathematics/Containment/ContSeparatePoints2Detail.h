@@ -115,11 +115,11 @@ int Mathematics::SeparatePoints2<Real>
     for (int i1 = 0, i0 = numEdges-1; i1 < numEdges; i0 = i1++)
     {
         c0 = Vector2DTools<Real>::DotProduct(lineNormal,points[edges[i0]]);
-        if (c0 > lineConstant + Math<Real>::sm_ZeroTolerance)
+        if (c0 > lineConstant + Math<Real>::GetZeroTolerance())
         {
             ++posSide;
         }
-		else if (c0 < lineConstant - Math<Real>::sm_ZeroTolerance)
+		else if (c0 < lineConstant - Math<Real>::GetZeroTolerance())
         {
             ++negSide;
         }
@@ -131,11 +131,11 @@ int Mathematics::SeparatePoints2<Real>
         }
 
 		c0 = Vector2DTools<Real>::DotProduct(lineNormal,points[edges[i1]]);
-		if (c0 > lineConstant + Math<Real>::sm_ZeroTolerance)
+		if (c0 > lineConstant + Math<Real>::GetZeroTolerance())
         {
             ++posSide;
         }
-		else if (c0 < lineConstant - Math<Real>::sm_ZeroTolerance)
+		else if (c0 < lineConstant - Math<Real>::GetZeroTolerance())
         {
             ++negSide;
         }
@@ -159,24 +159,24 @@ int Mathematics::SeparatePoints2<Real>
     for (auto i1 = 0, i0 = numEdges-1; i1 < numEdges; i0 = i1++)
     {
 		c0 = Vector2DTools<Real>::DotProduct(lineNormal,points[edges[i0]]);
-        if (c0 > lineConstant + Math<Real>::sm_ZeroTolerance)
+        if (c0 > lineConstant + Math<Real>::GetZeroTolerance())
         {
             // Hull on positive side.
             return +1;
         }
-		if (c0 < lineConstant - Math<Real>::sm_ZeroTolerance)
+		if (c0 < lineConstant - Math<Real>::GetZeroTolerance())
         {
             // Hull on negative side.
             return -1;
         }
 
 		c0 = Vector2DTools<Real>::DotProduct( lineNormal,points[edges[i1]]);
-		if (c0 > lineConstant + Math<Real>::sm_ZeroTolerance)
+		if (c0 > lineConstant + Math<Real>::GetZeroTolerance())
         {
             // Hull on positive side.
             return +1;
         }
-		if (c0 < lineConstant - Math<Real>::sm_ZeroTolerance)
+		if (c0 < lineConstant - Math<Real>::GetZeroTolerance())
         {
             // Hull on negative side.
             return -1;

@@ -202,7 +202,7 @@ bool Mathematics::Delaunay1<Real>
 template <typename Real>
 Mathematics::Delaunay1<Real>
 	::Delaunay1(const System::TChar* filename)
-	:Delaunay<Real>{ 0, Math<Real>::sm_Zero, false, QueryType::Real }
+	:Delaunay<Real>{ 0, Math<Real>::GetValue(0), false, QueryType::Real }
 {
     mVertices = 0;
 	auto loaded = Load(filename);

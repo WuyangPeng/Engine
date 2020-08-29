@@ -28,7 +28,7 @@ bool Mathematics::Ellipse3<Real>
 	::IsValid() const noexcept
 {
 	if (m_Normal.IsNormalize(m_Epsilon) && m_Major.IsNormalize(m_Epsilon) && m_Minor.IsNormalize(m_Epsilon) &&
-		Math::sm_Zero <= m_MajorLength && Math::sm_Zero <= m_MinorLength)
+		Math::GetValue(0) <= m_MajorLength && Math::GetValue(0) <= m_MinorLength)
 	{
 		return true;
 	}

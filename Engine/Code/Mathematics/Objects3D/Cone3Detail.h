@@ -20,7 +20,7 @@ Mathematics::Cone3<Real>
 	:m_Vertex{ vertex }, m_Axis{ axis }, m_CosAngle{ Math::Cos(angle) },
 	 m_SinAngle{ Math::Sin(angle) }, m_Height{ height }, m_Epsilon{ epsilon }
 {
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "角度必须在第一象限！");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "角度必须在第一象限！");
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

@@ -90,7 +90,7 @@ template <typename Real, template <typename> class Matrix>
 Real Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>
 	::Dot(const Real* lhs, const Real* rhs) const
 {
-	auto dot = Math<Real>::sm_Zero;
+	auto dot = Math<Real>::GetValue(0);
 	for (auto i = 0; i < m_Size; ++i)
 	{
 		dot += lhs[i] * rhs[i];
@@ -103,7 +103,7 @@ template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>
 	::Multiply()
 {
-	m_Product.assign(m_Size, Math<Real>::sm_Zero);
+	m_Product.assign(m_Size, Math<Real>::GetValue(0));
 
 	for (auto row = 0; row < m_Size; ++row)
 	{
@@ -164,7 +164,7 @@ template <typename Real, template <typename> class Matrix>
 bool Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>
 	::IsValid() const noexcept
 {
-	if (m_Matrix.GetRowsNumber() == m_Matrix.GetColumnsNumber() && Math<Real>::sm_Zero <= m_ZeroTolerance)
+	if (m_Matrix.GetRowsNumber() == m_Matrix.GetColumnsNumber() && Math<Real>::GetValue(0) <= m_ZeroTolerance)
 	{
 		return true;
 	}

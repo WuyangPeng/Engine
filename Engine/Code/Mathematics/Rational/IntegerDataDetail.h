@@ -25,6 +25,8 @@
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26429)
+ 
+#include SYSTEM_WARNING_DISABLE(26456)
 template <int N>
 Mathematics::IntegerData<N>::IntegerData()
     : m_Buffer{}

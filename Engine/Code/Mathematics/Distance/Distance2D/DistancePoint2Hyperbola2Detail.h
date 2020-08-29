@@ -33,7 +33,7 @@ template <typename Real>
 bool Mathematics::DistancePoint2Hyperbola2<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Math::sm_Zero < m_Extent.GetXCoordinate() && Math::sm_Zero < m_Extent.GetYCoordinate())
+	if (ParentType::IsValid() && Math::GetValue(0) < m_Extent.GetXCoordinate() && Math::GetValue(0) < m_Extent.GetYCoordinate())
 		return true;
 	else
 		return false;
@@ -79,14 +79,14 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 	auto maximumIterations = this->GetMaximumIterations();
 	for (auto loop = 0; loop < maximumIterations; ++loop)
 	{
-		if (!Math::Approximate(hyperbolaRoot, Math::sm_Zero, this->GetZeroThreshold()) &&
+		if (!Math::Approximate(hyperbolaRoot, Math::GetValue(0), this->GetZeroThreshold()) &&
 			!Math::Approximate(tRoot, t0, this->GetZeroThreshold()) &&
 			!Math::Approximate(tRoot, t1, this->GetZeroThreshold()))
 		{
 			break;
 		}
 
-		if (Math::sm_Zero < hyperbolaRoot)
+		if (Math::GetValue(0) < hyperbolaRoot)
 		{
 			t0 = tRoot;
 			tRoot = static_cast<Real>(0.5) * (t0 + t1);
@@ -110,7 +110,7 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 
 	auto diff = m_Point - closest;
 
-	return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(diff), Math::sm_Zero, m_Point, closest };
+	return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(diff), Math::GetValue(0), m_Point, closest };
 }
 
 // private

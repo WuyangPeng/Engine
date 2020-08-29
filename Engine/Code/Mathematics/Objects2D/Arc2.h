@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Vector2DTools.h"
 
@@ -34,7 +34,7 @@ namespace Mathematics
 		// 以便end1通过end0逆时针方向遍历获得。
 		// 应用程序负责确保end0和end1在圆环上，和他们正确的排序。
 
-		Arc2(const Vector2D& center, Real radius, const Vector2D& firstEnd, const Vector2D& secondEnd, const Real epsilon = Math::sm_ZeroTolerance);
+		Arc2(const Vector2D& center, Real radius, const Vector2D& firstEnd, const Vector2D& secondEnd, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

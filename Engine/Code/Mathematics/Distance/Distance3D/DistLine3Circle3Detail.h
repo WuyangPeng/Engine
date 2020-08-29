@@ -39,13 +39,13 @@ typename const Mathematics::DistLine3Circle3<Real>::DistanceResult Mathematics::
 	::GetSquared() const
 {
 	auto D = mLine.GetOrigin() - mCircle.GetCenter();
-	auto s = Math<Real>::sm_Zero;
-	auto sqrDistance = Math<Real>::sm_Zero;
-	auto temp = Math<Real>::sm_Zero;
+	auto s = Math<Real>::GetValue(0);
+	auto sqrDistance = Math<Real>::GetValue(0);
+	auto temp = Math<Real>::GetValue(0);
 
 	auto MxN = Vector3DTools::CrossProduct(mLine.GetDirection(), mCircle.GetNormal());
 	auto m0sqr = Vector3DTools::DotProduct(MxN, MxN);
-	if (m0sqr > Math<Real>::sm_Zero)
+	if (m0sqr > Math<Real>::GetValue(0))
 	{
 		auto m0 = sqrt(m0sqr);
 		auto rm0 = mCircle.GetRadius()*m0;
@@ -55,7 +55,7 @@ typename const Mathematics::DistLine3Circle3<Real>::DistanceResult Mathematics::
 		DxN += lambda * MxN;
 		auto m2b2 = Vector3DTools::DotProduct(mLine.GetDirection(), D);
 		auto b1sqr = Vector3DTools::DotProduct(DxN, DxN);
-		if (b1sqr > Math<Real>::sm_Zero)
+		if (b1sqr > Math<Real>::GetValue(0))
 		{
 			auto b1 = sqrt(b1sqr);
 			auto rm0sqr = mCircle.GetRadius()*m0sqr;
@@ -113,7 +113,7 @@ typename const Mathematics::DistLine3Circle3<Real>::DistanceResult Mathematics::
 				}
 				else
 				{
-					if (m2b2 <= Math<Real>::sm_Zero)
+					if (m2b2 <= Math<Real>::GetValue(0))
 					{
 						s = BisectF(m2b2, rm0sqr, m0sqr, b1sqr, -m2b2, -m2b2 + rm0);
 						mNumClosestLine = 1;
@@ -159,14 +159,14 @@ typename const Mathematics::DistLine3Circle3<Real>::DistanceResult Mathematics::
 			}
 			else
 			{
-				if (m2b2 < Math<Real>::sm_Zero)
+				if (m2b2 < Math<Real>::GetValue(0))
 				{
 					s = BisectF(m2b2, rm0sqr, m0sqr, b1sqr, -m2b2, -m2b2 + rm0);
 					mNumClosestLine = 1;
 					mClosestLine[0] = mLine.GetOrigin() + (s + lambda) * mLine.GetDirection();
 					sqrDistance = SqrDistancePointCircle(0);
 				}
-				else if (m2b2 > Math<Real>::sm_Zero)
+				else if (m2b2 > Math<Real>::GetValue(0))
 				{
 					s = BisectF(m2b2, rm0sqr, m0sqr, b1sqr, -m2b2 - rm0, -m2b2);
 					mNumClosestLine = 1;
@@ -183,14 +183,14 @@ typename const Mathematics::DistLine3Circle3<Real>::DistanceResult Mathematics::
 		}
 		else
 		{
-			if (m2b2 < Math<Real>::sm_Zero)
+			if (m2b2 < Math<Real>::GetValue(0))
 			{
 				s = -m2b2 + rm0;
 				mNumClosestLine = 1;
 				mClosestLine[0] = mLine.GetOrigin() + (s + lambda)*mLine.GetDirection();
 				sqrDistance = SqrDistancePointCircle(0);
 			}
-			else if (m2b2 > Math<Real>::sm_Zero)
+			else if (m2b2 > Math<Real>::GetValue(0))
 			{
 				s = -m2b2 - rm0;
 				mNumClosestLine = 1;
@@ -230,7 +230,7 @@ typename const Mathematics::DistLine3Circle3<Real>::DistanceResult Mathematics::
 		mClosestPoint1.push_back(mClosestCircle[i]);
 	}
 
-	return DistanceResult{ sqrDistance, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDistance, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>
@@ -252,7 +252,7 @@ Real Mathematics::DistLine3Circle3<Real>
 	auto PmC = mClosestLine[i] - mCircle.GetCenter();
 	auto QmC = PmC - Vector3DTools::DotProduct(mCircle.GetNormal(), PmC)*mCircle.GetNormal();
 	auto lengthQmC = Vector3DTools::VectorMagnitude(QmC);
-	if (lengthQmC > Math<Real>::sm_Zero)
+	if (lengthQmC > Math<Real>::GetValue(0))
 	{
 		mNumClosestCircle = 1;
 		mClosestCircle[i] = mCircle.GetCenter() + mCircle.GetRadius()*QmC / lengthQmC;
@@ -271,16 +271,16 @@ template <typename Real>
 Real Mathematics::DistLine3Circle3<Real>
 	::BisectF(Real m2b2, Real rm0sqr, Real m0sqr, Real b1sqr, Real smin, Real smax)
 { 
-	auto s = Math<Real>::sm_Zero;
+	auto s = Math<Real>::GetValue(0);
 	for (auto i = 0; i < 1024; ++i)
 	{
 		s = (static_cast<Real>(0.5)) * (smin + smax);
 		auto f = s + m2b2 - rm0sqr * s / Math<Real>::Sqrt(m0sqr*s*s + b1sqr);
-		if (f == Math<Real>::sm_Zero || s == smin || s == smax)
+		if (f == Math<Real>::GetValue(0) || s == smin || s == smax)
 		{
 			return s;
 		}
-		if (f > Math<Real>::sm_Zero)
+		if (f > Math<Real>::GetValue(0))
 		{
 			smax = s;
 		}

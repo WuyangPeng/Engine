@@ -9,7 +9,7 @@
 
 #include "SingularValue.h"
 #include "SingularValueDecomposition.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Matrix3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"

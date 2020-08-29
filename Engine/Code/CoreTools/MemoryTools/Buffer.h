@@ -12,13 +12,13 @@
 #include "MemoryToolsFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/noncopyable.hpp>
+ 
 
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+ 
 
 namespace CoreTools
 {     
-    class CORE_TOOLS_DEFAULT_DECLARE Buffer : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE Buffer  
     {
     public:
         using ClassType = Buffer;
@@ -29,9 +29,9 @@ namespace CoreTools
         ~Buffer() noexcept;
 
         Buffer(const Buffer&) = delete;
-        Buffer& operator=(const Buffer&) = delete;
+      virtual  Buffer& operator=(const Buffer&) = delete;
 		Buffer(Buffer&&) noexcept = delete;
-		Buffer& operator=(Buffer&&) noexcept = delete;
+      virtual Buffer& operator=(Buffer&&) noexcept = delete;
         
 		CLASS_INVARIANT_DECLARE;
         

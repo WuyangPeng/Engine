@@ -23,7 +23,7 @@ namespace Rendering
 	public:
 		ProjectionViewMatrixConstant();
 		 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_OBJECT_FACTORY_DECLARE(ProjectionViewMatrixConstant);
 		CORE_TOOLS_RTTI_OVERRIDE_DECLARE; 

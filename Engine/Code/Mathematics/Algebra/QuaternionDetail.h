@@ -24,22 +24,24 @@
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26426)
+    #include SYSTEM_WARNING_DISABLE(26440)
+    #include SYSTEM_WARNING_DISABLE(26456)
 template <typename Real>
 const Mathematics::Quaternion<Real>	Mathematics::Quaternion<Real>
 	::sm_Zero{};
 
 template <typename Real>
 const Mathematics::Quaternion<Real>	Mathematics::Quaternion<Real>
-	::sm_Identity{ Math::sm_One,Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
+	::sm_Identity{ Math::GetValue(1),Math::GetValue(0),Math::GetValue(0),Math::GetValue(0) };
 
 template <typename Real>
 Mathematics::Quaternion<Real>
 	::Quaternion() noexcept
 {
-	m_Tuple[0] = Math::sm_Zero;
-	m_Tuple[1] = Math::sm_Zero;
-	m_Tuple[2] = Math::sm_Zero;
-	m_Tuple[3] = Math::sm_Zero;
+	m_Tuple[0] = Math::GetValue(0);
+	m_Tuple[1] = Math::GetValue(0);
+	m_Tuple[2] = Math::GetValue(0);
+	m_Tuple[3] = Math::GetValue(0);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -90,10 +92,10 @@ void Mathematics::Quaternion<Real>
 
 	auto trace = matrix(0, 0) + matrix(1, 1) + matrix(2, 2);
 
-	if (Math::sm_Zero < trace)
+	if (Math::GetValue(0) < trace)
 	{
 		// |w| > 1/2, 可能选择 w > 1/2
-		auto root = Math::Sqrt(trace + Math::sm_One);  // 2w
+		auto root = Math::Sqrt(trace + Math::GetValue(1));  // 2w
 
 		m_Tuple[0] = static_cast<Real>(0.5) * root;
 		root = static_cast<Real>(0.5) / root;  // 1 / (4w)
@@ -117,7 +119,7 @@ void Mathematics::Quaternion<Real>
 		auto j = next[i];
 		auto k = next[j];
 
-		auto root = Math::Sqrt(matrix(i, i) - matrix(j, j) - matrix(k, k) + Math::sm_One);
+		auto root = Math::Sqrt(matrix(i, i) - matrix(j, j) - matrix(k, k) + Math::GetValue(1));
 		Real* quat[3] = { &m_Tuple[1], &m_Tuple[2], &m_Tuple[3] };
 		*quat[i] = static_cast<Real>(0.5) * root;
 		root = static_cast<Real>(0.5) / root;
@@ -370,7 +372,7 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (Math::FAbs(scalar) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(scalar) <= Math::GetZeroTolerance())
 	{
 		for (auto i = 0; i < 4; ++i)
 		{
@@ -394,9 +396,9 @@ typename const Mathematics::Quaternion<Real>::Matrix3 Mathematics::Quaternion<Re
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto twoX = Math::sm_Two * m_Tuple[1];
-	auto twoY = Math::sm_Two * m_Tuple[2];
-	auto twoZ = Math::sm_Two * m_Tuple[3];
+	auto twoX = Math::GetValue(2) * m_Tuple[1];
+	auto twoY = Math::GetValue(2) * m_Tuple[2];
+	auto twoZ = Math::GetValue(2) * m_Tuple[3];
 	auto twoWX = twoX * m_Tuple[0];
 	auto twoWY = twoY * m_Tuple[0];
 	auto twoWZ = twoZ * m_Tuple[0];
@@ -407,9 +409,9 @@ typename const Mathematics::Quaternion<Real>::Matrix3 Mathematics::Quaternion<Re
 	auto twoYZ = twoZ * m_Tuple[2];
 	auto twoZZ = twoZ * m_Tuple[3];
 
-	return Matrix3{ Math::sm_One - (twoYY + twoZZ),twoXY - twoWZ,twoXZ + twoWY,
-					twoXY + twoWZ,Math::sm_One - (twoXX + twoZZ),twoYZ - twoWX,
-					twoXZ - twoWY,twoYZ + twoWX,Math::sm_One - (twoXX + twoYY) };
+	return Matrix3{ Math::GetValue(1) - (twoYY + twoZZ),twoXY - twoWZ,twoXZ + twoWY,
+					twoXY + twoWZ,Math::GetValue(1) - (twoXX + twoZZ),twoYZ - twoWX,
+					twoXZ - twoWY,twoYZ + twoWX,Math::GetValue(1) - (twoXX + twoYY) };
 }
 
 template <typename Real>
@@ -442,7 +444,7 @@ typename const Mathematics::Quaternion<Real>::Vector3D Mathematics::Quaternion<R
 
 	auto sqrareLength = m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] + m_Tuple[3] * m_Tuple[3];
 
-	if (Math::sm_ZeroTolerance < sqrareLength)
+	if (Math::GetZeroTolerance() < sqrareLength)
 	{
 		auto invLength = Math::InvSqrt(sqrareLength);
 
@@ -463,13 +465,13 @@ Real Mathematics::Quaternion<Real>
 
 	auto sqrareLength = m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] + m_Tuple[3] * m_Tuple[3];
 
-	if (Math::sm_ZeroTolerance < sqrareLength)
+	if (Math::GetZeroTolerance() < sqrareLength)
 	{
-		return Math::sm_Two * Math::ACos(m_Tuple[0]);
+		return Math::GetValue(2) * Math::ACos(m_Tuple[0]);
 	}
 	else
 	{
-		return Math::sm_Zero;
+		return Math::GetValue(0);
 	}
 }
 
@@ -519,10 +521,10 @@ void Mathematics::Quaternion<Real>
 	{
 		MATHEMATICS_ASSERTION_1(false, "四元数正则化错误！");
 
-		m_Tuple[0] = Math::sm_Zero;
-		m_Tuple[1] = Math::sm_Zero;
-		m_Tuple[2] = Math::sm_Zero;
-		m_Tuple[3] = Math::sm_Zero;
+		m_Tuple[0] = Math::GetValue(0);
+		m_Tuple[1] = Math::GetValue(0);
+		m_Tuple[2] = Math::GetValue(0);
+		m_Tuple[3] = Math::GetValue(0);
 	}
 }
 
@@ -536,7 +538,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	auto norm = SquaredLength();
 
-	if (Math::sm_ZeroTolerance < norm)
+	if (Math::GetZeroTolerance() < norm)
 	{
 		return Quaternion{ m_Tuple[0] / norm, -m_Tuple[1] / norm, -m_Tuple[2] / norm, -m_Tuple[3] / norm };
 	}
@@ -562,7 +564,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	::Exp() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Tuple[0]) <= Math::sm_ZeroTolerance, "四元数w必须等于0！");
+	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Tuple[0]) <= Math::GetZeroTolerance(), "四元数w必须等于0！");
 
 	// 如果 q = A * (x*i+y*j+z*k) 这里 (x,y,z) 是单位长度，然后
 	// exp(q) = cos(A) + sin(A)*(x*i+y*j+z*k)。
@@ -576,7 +578,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	auto sinValue = Math::Sin(angle);
 	result.m_Tuple[0] = Math::Cos(angle);
 
-	if (Math::sm_ZeroTolerance <= Math::FAbs(sinValue))
+	if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
 	{
 		auto coeff = sinValue / angle;
 		for (auto i = 1; i < 4; ++i)
@@ -608,13 +610,13 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	// 因为 A/sin(A) 趋向于 1。
 
 	Quaternion result;
-	result.m_Tuple[0] = Math::sm_Zero;
+	result.m_Tuple[0] = Math::GetValue(0);
 
-	if (Math::FAbs(m_Tuple[0]) < Math::sm_One)
+	if (Math::FAbs(m_Tuple[0]) < Math::GetValue(1))
 	{
 		auto angle = Math::ACos(m_Tuple[0]);
 		auto sinValue = Math::Sin(angle);
-		if (Math::sm_ZeroTolerance <= Math::FAbs(sinValue))
+		if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
 		{
 			auto coeff = angle / sinValue;
 			for (auto i = 1; i < 4; ++i)
@@ -671,7 +673,7 @@ void Mathematics::Quaternion<Real>
 	auto cosValue = Dot(firstQuaternion, secondQuaternion);
 	auto angle = Math::ACos(cosValue);
 
-	if (Math::sm_ZeroTolerance <= Math::FAbs(angle))
+	if (Math::GetZeroTolerance() <= Math::FAbs(angle))
 	{
 		auto sinValue = Math::Sin(angle);
 		auto tAngle = t * angle;
@@ -698,12 +700,12 @@ void Mathematics::Quaternion<Real>
 	auto cosValue = Dot(firstQuaternion, secondQuaternion);
 	auto angle = Math::ACos(cosValue);
 
-	if (Math::sm_ZeroTolerance <= Math::FAbs(angle))
+	if (Math::GetZeroTolerance() <= Math::FAbs(angle))
 	{
 		auto sinValue = Math::Sin(angle);
-		auto phase = Math::sm_PI * extraSpins * t;
+		auto phase = Math::GetPI() * extraSpins * t;
 
-		auto coeff0 = Math::Sin((Math::sm_One - t) * angle - phase) / sinValue;
+		auto coeff0 = Math::Sin((Math::GetValue(1) - t) * angle - phase) / sinValue;
 		auto coeff1 = Math::Sin(t * angle + phase) / sinValue;
 
 		m_Tuple[0] = coeff0 * firstQuaternion.m_Tuple[0] + coeff1 * secondQuaternion.m_Tuple[0];
@@ -757,7 +759,7 @@ void Mathematics::Quaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	auto slerpT = Math::sm_Two * t * (Math::sm_One - t);
+	auto slerpT = Math::GetValue(2) * t * (Math::GetValue(1) - t);
 
 	Quaternion slerpP;
 	slerpP.Slerp(t, q0, q1);
@@ -800,7 +802,7 @@ void Mathematics::Quaternion<Real>
 	// 在这种情况下，A = pi和垂直于firstVector的任何轴都可以被用作旋转轴。
 
 	auto bisector = firstVector + secondVector;
-	if (Math::Approximate(Vector3DTools::VectorMagnitude(bisector), Math::sm_Zero, epsilon))
+	if (Math::Approximate(Vector3DTools::VectorMagnitude(bisector), Math::GetValue(0), epsilon))
 	{
 		bisector.ZeroOut();
 	}
@@ -813,7 +815,7 @@ void Mathematics::Quaternion<Real>
 
 	m_Tuple[0] = cosHalfAngle;
 
-	if (!Math::Approximate(cosHalfAngle, Math::sm_Zero, epsilon))
+	if (!Math::Approximate(cosHalfAngle, Math::GetValue(0), epsilon))
 	{
 		const  auto cross = Vector3DTools::CrossProduct(firstVector, bisector);
 		m_Tuple[1] = cross.GetXCoordinate();
@@ -827,14 +829,14 @@ void Mathematics::Quaternion<Real>
 			// V1.x或V1.z是最大规模的组成部分。
 			auto invLength = Math::InvSqrt(firstVector[0] * firstVector[0] + firstVector[2] * firstVector[2]);
 			m_Tuple[1] = -firstVector[2] * invLength;
-			m_Tuple[2] = Math::sm_Zero;
+			m_Tuple[2] = Math::GetValue(0);
 			m_Tuple[3] = +firstVector[0] * invLength;
 		}
 		else
 		{
 			// V1.y或V1.z是最大规模的组成部分。	
 			auto invLength = Math::InvSqrt(firstVector[1] * firstVector[1] + firstVector[2] * firstVector[2]);
-			m_Tuple[1] = Math::sm_Zero;
+			m_Tuple[1] = Math::GetValue(0);
 			m_Tuple[2] = +firstVector[2] * invLength;
 			m_Tuple[3] = -firstVector[1] * invLength;
 		}
@@ -911,7 +913,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	const auto p0 = m_Tuple[0];
 	const auto p1 = m_Tuple[axisIndex];
 	const auto sqrLength = p0 * p0 + p1 * p1;
-	if (Math::sm_ZeroTolerance < sqrLength)
+	if (Math::GetZeroTolerance() < sqrLength)
 	{
 		// 唯一的最近点。
 		auto invLength = Math::InvSqrt(sqrLength);
@@ -921,8 +923,8 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	else
 	{
 		// 无穷多解，选择theta = 0。
-		quaternion[0] = Math::sm_One;
-		quaternion[axisIndex] = Math::sm_Zero;
+		quaternion[0] = Math::GetValue(1);
+		quaternion[axisIndex] = Math::GetValue(0);
 	}
 
 	return quaternion;
@@ -936,18 +938,18 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	const auto det = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
 
-	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::GetZeroTolerance())
 	{
-		auto discr = Math::sm_One - static_cast<Real>(4) * det * det;
+		auto discr = Math::GetValue(1) - static_cast<Real>(4) * det * det;
 		discr = Math::Sqrt(Math::FAbs(discr));
 
 		const auto a = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
 		const auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
-		auto c0 = Math::sm_Zero;
-		auto s0 = Math::sm_Zero;
+		auto c0 = Math::GetValue(0);
+		auto s0 = Math::GetValue(0);
 
-		if (Math::sm_Zero <= b)
+		if (Math::GetValue(0) <= b)
 		{
 			c0 = static_cast<Real>(0.5) * (discr + b);
 			s0 = a;
@@ -974,7 +976,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	{
 		const auto invLength = Math::InvSqrt(Math::FAbs(det));
 
-		return Quaternion{ m_Tuple[0] * invLength,m_Tuple[1] * invLength,Math::sm_Zero,Math::sm_Zero };
+		return Quaternion{ m_Tuple[0] * invLength,m_Tuple[1] * invLength,Math::GetValue(0),Math::GetValue(0) };
 	}
 }
 
@@ -1152,7 +1154,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	auto p0 = m_Tuple[0];
 	auto p1 = m_Tuple[System::EnumCastUnderlying(axis)];
 	const auto sqrLength = p0 * p0 + p1 * p1;
-	if (Math::sm_ZeroTolerance < sqrLength)
+	if (Math::GetZeroTolerance() < sqrLength)
 	{
 		const auto invLength = Math::InvSqrt(sqrLength);
 		p0 *= invLength;
@@ -1169,7 +1171,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto cosValueMin = con.GetCosMinAngle();
 			auto sinValueMin = con.GetSinMinAngle();
 			auto dotMinAngle = p0 * cosValueMin + p1 * sinValueMin;
-			if (dotMinAngle < Math::sm_Zero)
+			if (dotMinAngle < Math::GetValue(0))
 			{
 				cosValueMin = -cosValueMin;
 				sinValueMin = -sinValueMin;
@@ -1179,7 +1181,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto cosValueMax = con.GetCosMaxAngle();
 			auto sinValueMax = con.GetSinMaxAngle();
 			auto dotMaxAngle = p0 * cosValueMax + p1 * sinValueMax;
-			if (dotMaxAngle < Math::sm_Zero)
+			if (dotMaxAngle < Math::GetValue(0))
 			{
 				cosValueMax = -cosValueMax;
 				sinValueMax = -sinValueMax;
@@ -1216,16 +1218,16 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	const auto det = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
 
-	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::GetZeroTolerance())
 	{
-		const auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
+		const auto discr = Math::Sqrt(Math::FAbs(Math::GetValue(1) - (static_cast<Real>(4)) * det * det));
 		const auto a = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
 		const auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
 		Real c0{ };
 		Real s0{ };
 
-		if (Math::sm_Zero <= b)
+		if (Math::GetValue(0) <= b)
 		{
 			c0 = static_cast<Real>(0.5) * (discr + b);
 			s0 = a;
@@ -1254,15 +1256,15 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		else
 		{
 			// 最大值出现在边界点。
-			Quaternion r{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(),Math::sm_Zero, Math::sm_Zero };
-			Quaternion rInv{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(),Math::sm_Zero, Math::sm_Zero };
+			Quaternion r{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(),Math::GetValue(0), Math::GetValue(0) };
+			Quaternion rInv{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(),Math::GetValue(0), Math::GetValue(0) };
 			auto prod = rInv * (*this);
 			auto tmp = prod.GetClosest(QuaternionClosestAxis::Y, yCon);
 			auto dotOptAngle = Dot(prod, tmp);
 			auto quaternion = r * tmp;
 
-			r = Quaternion(xCon.GetCosMaxAngle(), xCon.GetSinMaxAngle(), Math::sm_Zero, Math::sm_Zero);
-			rInv = Quaternion(xCon.GetCosMaxAngle(), -xCon.GetSinMaxAngle(), Math::sm_Zero, Math::sm_Zero);
+			r = Quaternion(xCon.GetCosMaxAngle(), xCon.GetSinMaxAngle(), Math::GetValue(0), Math::GetValue(0));
+			rInv = Quaternion(xCon.GetCosMaxAngle(), -xCon.GetSinMaxAngle(), Math::GetValue(0), Math::GetValue(0));
 			prod = rInv * (*this);
 			tmp = prod.GetClosest(QuaternionClosestAxis::Y, yCon);
 			auto dotAngle = Dot(prod, tmp);
@@ -1272,8 +1274,8 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ yCon.GetCosMinAngle(), Math::sm_Zero,yCon.GetSinMinAngle(), Math::sm_Zero };
-			rInv = Quaternion{ yCon.GetCosMinAngle(), Math::sm_Zero,-yCon.GetSinMinAngle(), Math::sm_Zero };
+			r = Quaternion{ yCon.GetCosMinAngle(), Math::GetValue(0),yCon.GetSinMinAngle(), Math::GetValue(0) };
+			rInv = Quaternion{ yCon.GetCosMinAngle(), Math::GetValue(0),-yCon.GetSinMinAngle(), Math::GetValue(0) };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::X, xCon);
 			dotAngle = Dot(prod, tmp);
@@ -1283,8 +1285,8 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ yCon.GetCosMaxAngle(), Math::sm_Zero,yCon.GetSinMaxAngle(), Math::sm_Zero };
-			rInv = Quaternion{ yCon.GetCosMaxAngle(), Math::sm_Zero,-yCon.GetSinMaxAngle(), Math::sm_Zero };
+			r = Quaternion{ yCon.GetCosMaxAngle(), Math::GetValue(0),yCon.GetSinMaxAngle(), Math::GetValue(0) };
+			rInv = Quaternion{ yCon.GetCosMaxAngle(), Math::GetValue(0),-yCon.GetSinMaxAngle(), Math::GetValue(0) };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::X, xCon);
 			dotAngle = Dot(prod, tmp);
@@ -1300,12 +1302,12 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	else
 	{
 		// 无穷多解，选择一个满足约束的角度。
-		auto c0 = Math::sm_Zero;
-		auto s0 = Math::sm_Zero;
-		auto c1 = Math::sm_Zero;
-		auto s1 = Math::sm_Zero;
+		auto c0 = Math::GetValue(0);
+		auto s0 = Math::GetValue(0);
+		auto c1 = Math::GetValue(0);
+		auto s1 = Math::GetValue(0);
 
-		if (Math::sm_Zero < det)
+		if (Math::GetValue(0) < det)
 		{
 			const auto minAngle = xCon.GetMinAngle() - yCon.GetMaxAngle();
 			const auto maxAngle = xCon.GetMaxAngle() - yCon.GetMinAngle();
@@ -1316,7 +1318,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Math::sm_Zero <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::GetValue(0) <= tmp[1] ? Math::GetPI() : -Math::GetPI());
 
 				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
@@ -1349,7 +1351,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Math::sm_Zero <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::GetValue(0) <= tmp[1] ? Math::GetPI() : -Math::GetPI());
 
 				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
@@ -1374,7 +1376,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		Quaternion quaternion{ c0 * c1,s0 * c1,c0 * s1,s0 * s1 };
 
-		if (Dot(*this, quaternion) < Math::sm_Zero)
+		if (Dot(*this, quaternion) < Math::GetValue(0))
 		{
 			quaternion = -quaternion;
 		}
@@ -1405,17 +1407,17 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	const auto det = m_Tuple[0] * m_Tuple[2] - m_Tuple[1] * m_Tuple[3];
 
-	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::GetZeroTolerance())
 	{
-		const auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
+		const auto discr = Math::Sqrt(Math::FAbs(Math::GetValue(1) - (static_cast<Real>(4)) * det * det));
 
 		const auto a = m_Tuple[0] * m_Tuple[3] + m_Tuple[1] * m_Tuple[2];
 		const auto b = m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] - m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
-		auto c2 = Math::sm_Zero;
-		auto s2 = Math::sm_Zero;
+		auto c2 = Math::GetValue(0);
+		auto s2 = Math::GetValue(0);
 
-		if (Math::sm_Zero <= b)
+		if (Math::GetValue(0) <= b)
 		{
 			c2 = static_cast<Real>(0.5) * (discr + b);
 			s2 = a;
@@ -1444,15 +1446,15 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		else
 		{
 			// 最大值出现在边界点。
-			Quaternion r{ zCon.GetCosMinAngle(), Math::sm_Zero, Math::sm_Zero,zCon.GetSinMinAngle() };
-			Quaternion rInv{ zCon.GetCosMinAngle(), Math::sm_Zero, Math::sm_Zero,-zCon.GetSinMinAngle() };
+			Quaternion r{ zCon.GetCosMinAngle(), Math::GetValue(0), Math::GetValue(0),zCon.GetSinMinAngle() };
+			Quaternion rInv{ zCon.GetCosMinAngle(), Math::GetValue(0), Math::GetValue(0),-zCon.GetSinMinAngle() };
 			auto prod = rInv * (*this);
 			auto tmp = prod.GetClosest(QuaternionClosestAxis::X, xCon);
 			auto dotOptAngle = Dot(prod, tmp);
 			auto quaternion = r * tmp;
 
-			r = Quaternion{ zCon.GetCosMaxAngle(), Math::sm_Zero, Math::sm_Zero,zCon.GetSinMaxAngle() };
-			rInv = Quaternion{ zCon.GetCosMaxAngle(), Math::sm_Zero, Math::sm_Zero,-zCon.GetSinMaxAngle() };
+			r = Quaternion{ zCon.GetCosMaxAngle(), Math::GetValue(0), Math::GetValue(0),zCon.GetSinMaxAngle() };
+			rInv = Quaternion{ zCon.GetCosMaxAngle(), Math::GetValue(0), Math::GetValue(0),-zCon.GetSinMaxAngle() };
 			prod = rInv * (*this);
 			tmp = prod.GetClosest(QuaternionClosestAxis::X, xCon);
 			auto dotAngle = Dot(prod, tmp);
@@ -1462,8 +1464,8 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(),Math::sm_Zero, Math::sm_Zero };
-			rInv = Quaternion{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(), Math::sm_Zero,  Math::sm_Zero };
+			r = Quaternion{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(),Math::GetValue(0), Math::GetValue(0) };
+			rInv = Quaternion{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(), Math::GetValue(0),  Math::GetValue(0) };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::Z, zCon);
 			dotAngle = Dot(prod, tmp);
@@ -1473,8 +1475,8 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ xCon.GetCosMaxAngle(), xCon.GetSinMaxAngle(), Math::sm_Zero, Math::sm_Zero };
-			rInv = Quaternion{ xCon.GetCosMaxAngle(), -xCon.GetSinMaxAngle(), Math::sm_Zero,  Math::sm_Zero };
+			r = Quaternion{ xCon.GetCosMaxAngle(), xCon.GetSinMaxAngle(), Math::GetValue(0), Math::GetValue(0) };
+			rInv = Quaternion{ xCon.GetCosMaxAngle(), -xCon.GetSinMaxAngle(), Math::GetValue(0),  Math::GetValue(0) };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::Z, zCon);
 			dotAngle = Dot(prod, tmp);
@@ -1490,12 +1492,12 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	else
 	{
 		// 无穷多解，选择一个满足约束的角度。
-		auto c0 = Math::sm_Zero;
-		auto s0 = Math::sm_Zero;
-		auto c2 = Math::sm_Zero;
-		auto s2 = Math::sm_Zero;
+		auto c0 = Math::GetValue(0);
+		auto s0 = Math::GetValue(0);
+		auto c2 = Math::GetValue(0);
+		auto s2 = Math::GetValue(0);
 
-		if (Math::sm_Zero < det)
+		if (Math::GetValue(0) < det)
 		{
 			const auto minAngle = xCon.GetMinAngle() - zCon.GetMaxAngle();
 			const auto maxAngle = xCon.GetMaxAngle() - zCon.GetMinAngle();
@@ -1506,7 +1508,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Math::sm_Zero <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::GetValue(0) <= tmp[1] ? Math::GetPI() : -Math::GetPI());
 
 				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
@@ -1539,7 +1541,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[1], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Math::sm_Zero <= tmp[1] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::GetValue(0) <= tmp[1] ? Math::GetPI() : -Math::GetPI());
 
 				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
@@ -1564,7 +1566,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		Quaternion quaternion{ c2 * c0,c2 * s0, s2 * s0,s2 * c0 };
 
-		if (Dot(*this, quaternion) < Math::sm_Zero)
+		if (Dot(*this, quaternion) < Math::GetValue(0))
 		{
 			quaternion = -quaternion;
 		}
@@ -1595,17 +1597,17 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 	const auto det = m_Tuple[0] * m_Tuple[1] + m_Tuple[2] * m_Tuple[3];
 
-	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(det) < static_cast<Real>(0.5) - Math::GetZeroTolerance())
 	{
-		const auto discr = Math::Sqrt(Math::FAbs(Math::sm_One - (static_cast<Real>(4)) * det * det));
+		const auto discr = Math::Sqrt(Math::FAbs(Math::GetValue(1) - (static_cast<Real>(4)) * det * det));
 
 		const auto a = m_Tuple[0] * m_Tuple[3] - m_Tuple[1] * m_Tuple[2];
 		const auto b = m_Tuple[0] * m_Tuple[0] - m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] - m_Tuple[3] * m_Tuple[3];
 
-		auto c2 = Math::sm_Zero;
-		auto s2 = Math::sm_Zero;
+		auto c2 = Math::GetValue(0);
+		auto s2 = Math::GetValue(0);
 
-		if (Math::sm_Zero <= b)
+		if (Math::GetValue(0) <= b)
 		{
 			c2 = static_cast<Real>(0.5) * (discr + b);
 			s2 = a;
@@ -1633,15 +1635,15 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 		else
 		{
 			// 最大值出现在边界点。
-			Quaternion r{ zCon.GetCosMinAngle(), Math::sm_Zero, Math::sm_Zero, zCon.GetSinMinAngle() };
-			Quaternion rInv{ zCon.GetCosMinAngle(), Math::sm_Zero, Math::sm_Zero,-zCon.GetSinMinAngle() };
+			Quaternion r{ zCon.GetCosMinAngle(), Math::GetValue(0), Math::GetValue(0), zCon.GetSinMinAngle() };
+			Quaternion rInv{ zCon.GetCosMinAngle(), Math::GetValue(0), Math::GetValue(0),-zCon.GetSinMinAngle() };
 			auto prod = rInv * (*this);
 			auto tmp = prod.GetClosest(QuaternionClosestAxis::Y, yCon);
 			auto dotOptAngle = Dot(prod, tmp);
 			auto quaternion = r * tmp;
 
-			r = Quaternion{ zCon.GetCosMaxAngle(), Math::sm_Zero, Math::sm_Zero, zCon.GetSinMaxAngle() };
-			rInv = Quaternion{ zCon.GetCosMaxAngle(), Math::sm_Zero, Math::sm_Zero, -zCon.GetSinMaxAngle() };
+			r = Quaternion{ zCon.GetCosMaxAngle(), Math::GetValue(0), Math::GetValue(0), zCon.GetSinMaxAngle() };
+			rInv = Quaternion{ zCon.GetCosMaxAngle(), Math::GetValue(0), Math::GetValue(0), -zCon.GetSinMaxAngle() };
 			prod = rInv * (*this);
 			tmp = prod.GetClosest(QuaternionClosestAxis::Y, yCon);
 			auto dotAngle = Dot(prod, tmp);
@@ -1651,8 +1653,8 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ yCon.GetCosMinAngle(), Math::sm_Zero,yCon.GetSinMinAngle(), Math::sm_Zero };
-			rInv = Quaternion{ yCon.GetCosMinAngle(), Math::sm_Zero,-yCon.GetSinMinAngle(), Math::sm_Zero };
+			r = Quaternion{ yCon.GetCosMinAngle(), Math::GetValue(0),yCon.GetSinMinAngle(), Math::GetValue(0) };
+			rInv = Quaternion{ yCon.GetCosMinAngle(), Math::GetValue(0),-yCon.GetSinMinAngle(), Math::GetValue(0) };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::Z, zCon);
 			dotAngle = Dot(prod, tmp);
@@ -1662,8 +1664,8 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 				dotOptAngle = dotAngle;
 			}
 
-			r = Quaternion{ yCon.GetCosMaxAngle(), Math::sm_Zero,yCon.GetSinMaxAngle(), Math::sm_Zero };
-			rInv = Quaternion{ yCon.GetCosMaxAngle(), Math::sm_Zero,-yCon.GetSinMaxAngle(), Math::sm_Zero };
+			r = Quaternion{ yCon.GetCosMaxAngle(), Math::GetValue(0),yCon.GetSinMaxAngle(), Math::GetValue(0) };
+			rInv = Quaternion{ yCon.GetCosMaxAngle(), Math::GetValue(0),-yCon.GetSinMaxAngle(), Math::GetValue(0) };
 			prod = (*this) * rInv;
 			tmp = prod.GetClosest(QuaternionClosestAxis::Z, zCon);
 			dotAngle = Dot(prod, tmp);
@@ -1679,12 +1681,12 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 	else
 	{
 		/// 无穷多解，选择一个满足约束的角度。
-		auto c1 = Math::sm_Zero;
-		auto s1 = Math::sm_Zero;
-		auto c2 = Math::sm_Zero;
-		auto s2 = Math::sm_Zero;
+		auto c1 = Math::GetValue(0);
+		auto s1 = Math::GetValue(0);
+		auto c2 = Math::GetValue(0);
+		auto s2 = Math::GetValue(0);
 
-		if (det < Math::sm_Zero)
+		if (det < Math::GetValue(0))
 		{
 			const auto minAngle = yCon.GetMinAngle() - zCon.GetMaxAngle();
 			const auto maxAngle = yCon.GetMaxAngle() - zCon.GetMinAngle();
@@ -1695,7 +1697,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[2], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Math::sm_Zero <= tmp[2] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::GetValue(0) <= tmp[2] ? Math::GetPI() : -Math::GetPI());
 
 				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
@@ -1728,7 +1730,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 			auto angle = Math::ATan2(tmp[2], tmp[0]);
 			if (angle < minAngle || maxAngle < angle)
 			{
-				angle -= (Math::sm_Zero <= tmp[2] ? Math::sm_PI : -Math::sm_PI);
+				angle -= (Math::GetValue(0) <= tmp[2] ? Math::GetPI() : -Math::GetPI());
 
 				MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angle的值必须在minAngle和maxAngle之间！");
 			}
@@ -1753,7 +1755,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>
 
 		Quaternion quaternion{ c2 * c1,-s2 * s1, c2 * s1,s2 * c1 };
 
-		if (Dot(*this, quaternion) < Math::sm_Zero)
+		if (Dot(*this, quaternion) < Math::GetValue(0))
 		{
 			quaternion = -quaternion;
 		}
@@ -1826,7 +1828,7 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs)
 {
-	return Approximate(lhs, rhs, Math::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math::GetZeroTolerance());
 }
 
 template <typename Real>

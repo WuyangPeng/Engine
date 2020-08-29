@@ -70,13 +70,13 @@ Mathematics::Sphere3<Real> Mathematics
 
     if (rDiffSqr >= lenSqr)
     {
-        return (rDiff >= Math<Real>::sm_Zero ? sphere1 : sphere0);
+        return (rDiff >= Math<Real>::GetValue(0) ? sphere1 : sphere0);
     }
 
 	auto length = Math<Real>::Sqrt(lenSqr);
    
 	Vector3D<Real> center;
-    if (length > Math<Real>::sm_ZeroTolerance)
+    if (length > Math<Real>::GetZeroTolerance())
     {
         Real coeff = (length + rDiff)/((static_cast<Real>(2))*length);
 		center = sphere0.GetCenter() + coeff*cenDiff;

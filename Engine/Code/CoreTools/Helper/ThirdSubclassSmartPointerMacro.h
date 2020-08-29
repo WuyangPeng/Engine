@@ -19,7 +19,7 @@
 		explicit SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)(uint64_t address,const SubclassType* data = nullptr); \
 		explicit SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)(const SubclassType* data); \
 	    SYSTEM_MULTIPLE_CONCATENATOR(Const,subclassIndex,SubclassSmartPointer)() noexcept; \
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; \
+		CLASS_INVARIANT_OVERRIDE_DECLARE; \
 		const SubclassType* GetData() const override; const SubclassType& operator* () const override; const SubclassType* operator-> () const override; }; } 
 
 #define SUBCLASS_SMART_POINTER_STATEMENT(subclassIndex,baseClassIndex) \
@@ -33,7 +33,7 @@
 		public: explicit SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)(uint64_t address,SubclassType* data = nullptr); \
 		explicit SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)(SubclassType* data); \
 		SYSTEM_CONCATENATOR(subclassIndex,SubclassSmartPointer)() noexcept; \
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; SubclassType* GetData() override; SubclassType& operator* () override; \
+		CLASS_INVARIANT_OVERRIDE_DECLARE; SubclassType* GetData() override; SubclassType& operator* () override; \
 		SubclassType* operator-> () override; const SubclassType* GetData() const override; const SubclassType& operator* () const override; \
 		const SubclassType* operator-> () const override; ConstType GetConstSmartPointer() const; operator ConstType () const; }; }	
 

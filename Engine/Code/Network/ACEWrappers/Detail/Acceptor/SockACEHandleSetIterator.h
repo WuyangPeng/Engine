@@ -24,7 +24,7 @@ namespace Network
 	public:
 		explicit SockACEHandleSetIterator(const ACEHandleSet& handleSet); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		ACEHandle operator()() override;
 

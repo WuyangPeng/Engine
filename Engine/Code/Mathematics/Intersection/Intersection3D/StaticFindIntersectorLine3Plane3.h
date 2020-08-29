@@ -28,11 +28,11 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticFindIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon = Math::sm_ZeroTolerance);
+		StaticFindIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon = Math::GetZeroTolerance());
 
 		virtual ~StaticFindIntersectorLine3Plane3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Line3 GetLine() const;
 		const Plane3 GetPlane() const;

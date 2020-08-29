@@ -28,7 +28,7 @@ namespace Network
 	public:
 		Server(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
  
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool RunServer();
 

@@ -13,7 +13,9 @@
 
 using std::move;
 using namespace std::literals;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Framework::EngineMiddleLayerInterface
 	::EngineMiddleLayerInterface(MiddleLayerPlatform modelViewController) noexcept
 	:ParentType{ modelViewController }
@@ -391,3 +393,4 @@ const Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayer
 	THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
 }
 
+#include STSTEM_WARNING_POP

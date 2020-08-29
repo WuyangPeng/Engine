@@ -17,7 +17,7 @@
     #include "CoreTools/Helper/MemberFunctionMacro.h"
     #include "CoreTools/Helper/MemoryMacro.h"
     #include "CoreTools/ObjectSystems/StreamSize.h"
-    #include "Mathematics/Base/Math.h"
+    #include "Mathematics/Base/MathDetail.h"
 
     #include "System/Helper/PragmaWarning/NumericCast.h"
 
@@ -29,6 +29,7 @@
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26456)
 template <typename Real>
 Mathematics::Polynomial<Real>::Polynomial(int degree)
     : m_Degree{ degree }, m_Coeff{ nullptr }
@@ -334,7 +335,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator/=(Real sc
 	
 	CoreTools::DoNothing();
 
-    if (Math::sm_ZeroTolerance < Math::FAbs(scalar))
+    if (Math::GetZeroTolerance() < Math::FAbs(scalar))
     {
         for (auto i = 0; i <= m_Degree; ++i)
         {
@@ -372,7 +373,7 @@ const Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetDerivative
     else
     {
         Polynomial result{ 0 };
-        result.m_Coeff[0] = Math::sm_Zero;
+        result.m_Coeff[0] = Math::GetValue(0);
         return result;
     }
 }
@@ -417,8 +418,8 @@ void Mathematics::Polynomial<Real>::Compress(Real epsilon) noexcept
 
     if (0 <= m_Degree)
     {
-        auto invLeading = Math::sm_One / m_Coeff[m_Degree];
-        m_Coeff[m_Degree] = Math::sm_One;
+        auto invLeading = Math::GetValue(1) / m_Coeff[m_Degree];
+        m_Coeff[m_Degree] = Math::GetValue(1);
         for (auto i = 0; i < m_Degree; ++i)
         {
             m_Coeff[i] *= invLeading;
@@ -438,7 +439,7 @@ typename const Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Poly
         Polynomial remainder{ *this };
 
         // 做除法（欧几里得算法）。
-        auto inv = Math::sm_One / divisor[divisor.m_Degree];
+        auto inv = Math::GetValue(1) / divisor[divisor.m_Degree];
         for (auto quotientIndex = quotientDegree; 0 <= quotientIndex; --quotientIndex)
         {
             auto divisorIndex = divisor.m_Degree + quotientIndex;
@@ -459,7 +460,7 @@ typename const Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Poly
 
         if (remainderDegree == 0 && Math::FAbs(remainder[0]) < epsilon)
         {
-            remainder[0] = Math::sm_Zero;
+            remainder[0] = Math::GetValue(0);
         }
 
         Polynomial correctRemainder{ remainderDegree };
@@ -472,7 +473,7 @@ typename const Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Poly
     else
     {
         Polynomial quotient{ 0 };
-        quotient[0] = Math::sm_Zero;
+        quotient[0] = Math::GetValue(0);
         Polynomial remainder{ *this };
 
         return PolynomialDivide{ quotient, *this };
@@ -507,7 +508,7 @@ bool Mathematics ::Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rh
 template <typename T>
 bool Mathematics ::Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs)
 {
-    return Approximate(lhs, rhs, Math<T>::sm_ZeroTolerance);
+    return Approximate(lhs, rhs, Math<T>::GetZeroTolerance());
 }
 
 template <typename Real>

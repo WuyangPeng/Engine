@@ -83,11 +83,11 @@ void Mathematics::StaticTestIntersectorRay3Triangle3<Real>
 	//   |Dot(D,N)|*t = -sign(Dot(D,N))*Dot(Q,N)
 	auto DdN = Vector3DTools::DotProduct(m_Ray.GetDirection(),normal);
 	Real sign;
-	if (DdN > Math::sm_ZeroTolerance)
+	if (DdN > Math::GetZeroTolerance())
 	{
 		sign = static_cast<Real>(1);
 	}
-	else if (DdN < -Math::sm_ZeroTolerance)
+	else if (DdN < -Math::GetZeroTolerance())
 	{
 		sign = (Real)-1;
 		DdN = -DdN;
@@ -101,16 +101,16 @@ void Mathematics::StaticTestIntersectorRay3Triangle3<Real>
 	}
 
 	auto DdQxE2 = sign*  Vector3DTools::DotProduct(m_Ray.GetDirection(), Vector3DTools::CrossProduct( diff,edge2));
-	if (DdQxE2 >= Math<Real>::sm_Zero)
+	if (DdQxE2 >= Math<Real>::GetValue(0))
 	{
 		auto DdE1xQ = sign*Vector3DTools::DotProduct(m_Ray.GetDirection(), Vector3DTools::CrossProduct( edge1,diff));
-		if (DdE1xQ >= Math<Real>::sm_Zero)
+		if (DdE1xQ >= Math<Real>::GetValue(0))
 		{
 			if (DdQxE2 + DdE1xQ <= DdN)
 			{
 				// Line intersects triangle, check if ray does.
 				auto QdN = -sign*Vector3DTools::DotProduct(diff,normal);
-				if (QdN >= Math<Real>::sm_Zero)
+				if (QdN >= Math<Real>::GetValue(0))
 				{
 					// Ray intersects triangle.
 		

@@ -42,7 +42,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	auto velocity0 = this->GetLhsVelocity();
 	auto velocity1 = this->GetRhsVelocity();
 
-	auto tfirst = Math::sm_Zero;
+	auto tfirst = Math::GetValue(0);
 	auto tlast = Math::sm_MaxReal;
 
 	// Velocity relative to triangle0.
@@ -73,7 +73,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	auto i0 = 0;
 	auto i1 = 0;
 
-	if (Math::FAbs(Vector3DTools::DotProduct(N, M)) < static_cast<Real>(1) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(Vector3DTools::DotProduct(N, M)) < static_cast<Real>(1) - Math::GetZeroTolerance())
 	{
 		// Triangles are not parallel.
 
@@ -123,7 +123,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		}
 	}
 
-	if (tfirst <= Math::sm_Zero)
+	if (tfirst <= Math::GetValue(0))
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
 		return;
@@ -200,19 +200,19 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	for (auto i = 0; i < 3; ++i)
 	{
 		distance[i] = plane.DistanceTo(triangle.GetVertex()[i]);
-		if (distance[i] > Math::sm_ZeroTolerance)
+		if (distance[i] > Math::GetZeroTolerance())
 		{
 			sign[i] = 1;
 			positive++;
 		}
-		else if (distance[i] < -Math::sm_ZeroTolerance)
+		else if (distance[i] < -Math::GetZeroTolerance())
 		{
 			sign[i] = -1;
 			negative++;
 		}
 		else
 		{
-			distance[i] = Math::sm_Zero;
+			distance[i] = Math::GetValue(0);
 			sign[i] = 0;
 			zero++;
 		}
@@ -233,8 +233,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 
 	// Compute transverse intersections of triangle edges with line.
-	auto numer = Math::sm_Zero;
-	auto denom = Math::sm_Zero;
+	auto numer = Math::GetValue(0);
+	auto denom = Math::GetValue(0);
 	auto i0 = 0; 
 	auto i1 = 0;
 	auto i2 = 0;
@@ -521,7 +521,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	Vector2D<Real> save;
 	auto edge0 = projTri0.GetVertex()[1] - projTri0.GetVertex()[0];
 	auto edge1 = projTri0.GetVertex()[2] - projTri0.GetVertex()[0];
-	if (Vector2DTools<Real>::DotPerp(edge0, edge1) < Math::sm_Zero)
+	if (Vector2DTools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
 	{
 		// Triangle is clockwise, reorder it.
 		projTri0 = Triangle2<Real>(projTri0V[0], projTri0V[2], projTri0V[1]);
@@ -529,7 +529,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 
 	edge0 = projTri1.GetVertex()[1] - projTri1.GetVertex()[0];
 	edge1 = projTri1.GetVertex()[2] - projTri1.GetVertex()[0];
-	if (Vector2DTools<Real>::DotPerp(edge0, edge1) < Math::sm_Zero)
+	if (Vector2DTools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
 	{
 		// Triangle is clockwise, reorder it.
 		projTri1 = Triangle2<Real>(projTri1V[0], projTri1V[2], projTri1V[1]);
@@ -584,11 +584,11 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 {
 	// Constant velocity separating axis test.
 
-	auto t = Math::sm_Zero;
+	auto t = Math::GetValue(0);
 
 	if (vmax < umin) // V on left of U
 	{
-		if (speed <= Math::sm_Zero) // V moving away from U
+		if (speed <= Math::GetValue(0)) // V moving away from U
 		{
 			return false;
 		}
@@ -621,7 +621,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (umax < vmin)   // V on right of U
 	{
-		if (speed >= Math::sm_Zero) // V moving away from U
+		if (speed >= Math::GetValue(0)) // V moving away from U
 		{
 			return false;
 		}
@@ -655,7 +655,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 	else // V and U on overlapping interval
 	{
-		if (speed > Math::sm_Zero)
+		if (speed > Math::GetValue(0))
 		{
 			// Find last time of contact on this axis.
 			t = (umax - vmin) / speed;
@@ -670,7 +670,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 				return false;
 			}
 		}
-		else if (speed < Math::sm_Zero)
+		else if (speed < Math::GetValue(0))
 		{
 			// Find last time of contact on this axis.
 			t = (umin - vmax) / speed;
@@ -697,11 +697,11 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	// potential configurations, and TUC and TVC are the best known
 	// configurations.
 
-	auto t = Math::sm_Zero;
+	auto t = Math::GetValue(0);
 
 	if (VC.mMax < UC.mMin) // V on left of U
 	{
-		if (speed <= Math::sm_Zero) // V moving away from U
+		if (speed <= Math::GetValue(0)) // V moving away from U
 		{
 			return false;
 		}
@@ -740,7 +740,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (UC.mMax < VC.mMin)   // V on right of U
 	{
-		if (speed >= Math::sm_Zero) // V moving away from U
+		if (speed >= Math::GetValue(0)) // V moving away from U
 		{
 			return false;
 		}
@@ -779,7 +779,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 	else // V and U on overlapping interval
 	{
-		if (speed > Math::sm_Zero)
+		if (speed > Math::GetValue(0))
 		{
 			// Find last time of contact on this axis.
 			t = (UC.mMax - VC.mMin) / speed;
@@ -794,7 +794,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 				return false;
 			}
 		}
-		else if (speed < Math::sm_Zero)
+		else if (speed < Math::GetValue(0))
 		{
 			// Find last time of contact on this axis.
 			t = (UC.mMin - VC.mMax) / speed;
@@ -817,10 +817,10 @@ template <typename Real>
 bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	::TestOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, Real& tfirst, Real& tlast)
 {
-	auto min0 = Math::sm_Zero;
-	auto max0 = Math::sm_Zero;
-	auto min1 = Math::sm_Zero;
-	auto max1 = Math::sm_Zero;
+	auto min0 = Math::GetValue(0);
+	auto max0 = Math::GetValue(0);
+	auto min1 = Math::GetValue(0);
+	auto max1 = Math::GetValue(0);
 	ProjectOntoAxis(mTriangle0, axis, min0, max0);
 	ProjectOntoAxis(mTriangle1, axis, min1, max1);
 	auto speed = Vector3DTools::DotProduct(velocity, axis);
@@ -1090,14 +1090,14 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	// and s = N*DxE1/N*N.
 	auto delta = V0 - U0;
 	auto s = Vector3DTools::DotProduct(normal, (Vector3DTools::CrossProduct(delta, edge1) / Vector3DTools::VectorMagnitudeSquared(normal)));
-	if (s < Math::sm_Zero)
+	if (s < Math::GetValue(0))
 	{
-		MATHEMATICS_ASSERTION_0(s >= -Math::sm_ZeroTolerance, "Unexpected s value.\n");
-		s = Math::sm_Zero;
+		MATHEMATICS_ASSERTION_0(s >= -Math::GetZeroTolerance(), "Unexpected s value.\n");
+		s = Math::GetValue(0);
 	}
 	else if (s > static_cast<Real>(1))
 	{
-		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::sm_ZeroTolerance, "Unexpected s value.\n");
+		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::GetZeroTolerance(), "Unexpected s value.\n");
 		s = static_cast<Real>(1);
 	}
 

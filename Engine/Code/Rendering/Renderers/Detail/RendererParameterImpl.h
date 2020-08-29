@@ -25,7 +25,7 @@ namespace Rendering
         using ColourType = Colour<float>;
 
     public:
-        explicit RendererParameterImpl(RendererTypes type);
+        explicit RendererParameterImpl(RendererTypes type) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -44,7 +44,7 @@ namespace Rendering
 
         void SetTextureFormat(TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept;
 
-        void SetClearColor(float red, float green, float blue, float alpha);
+        void SetClearColor(float red, float green, float blue, float alpha) noexcept;
 
         void SetWindowParameter(const std::string& windowTitle, int width, int height, int x, int y, bool allowResize);
 

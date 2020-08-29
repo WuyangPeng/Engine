@@ -50,9 +50,9 @@ namespace Mathematics
 		// 其中K = -A^{-1}*B/2, M = A/(B^T*A^{-1}*B/4-C)。
 		// 为椭圆体时，M必须具有所有特征值为正。
 		Ellipsoid3(const Vector3D& center, const Vector3D& axis0, const Vector3D& axis1, const Vector3D& axis2,
-				   const Real extent0, const Real extent1, const Real extent2, const Real epsilon = Math::sm_ZeroTolerance);
+				   const Real extent0, const Real extent1, const Real extent2, const Real epsilon = Math::GetZeroTolerance());
 
-		explicit Ellipsoid3(const Ellipsoid3Coefficients& coefficients, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit Ellipsoid3(const Ellipsoid3Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -75,7 +75,7 @@ namespace Mathematics
 
 		// 构建m_Center，m_Axis和m_Extent从二次方程。
 		// 如果输入系数不能表示一个椭圆体，则抛出异常。
-		void FromCoefficients(const Ellipsoid3Coefficients& coefficients, const Real epsilon = Math::sm_ZeroTolerance);
+		void FromCoefficients(const Ellipsoid3Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
 
 		// 计算的二次函数 Q(X) = (X-K)^T * M * (X-K) - 1.
 		Real Evaluate(const Vector3D& point) const;

@@ -24,7 +24,7 @@ namespace Mathematics
 											 const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter);
 		virtual ~DistanceClosestPointsParameterResult();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  Real GetLhsParameter() const override;
 		  Real GetRhsParameter() const override;

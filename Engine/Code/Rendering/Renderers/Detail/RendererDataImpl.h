@@ -15,6 +15,7 @@
 #include "System/Window/Flags/WindowFlags.h"
 
 #include <string>
+#include <memory>
 
 namespace Rendering
 {

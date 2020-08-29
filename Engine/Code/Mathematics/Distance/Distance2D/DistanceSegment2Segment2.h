@@ -33,7 +33,7 @@ namespace Mathematics
 		DistanceSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment);
 		virtual ~DistanceSegment2Segment2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Segment2 GetLhsSegment() const;
 		const Segment2 GetRhsSegment() const;

@@ -8,7 +8,7 @@
 #define RENDERING_SCENE_GRAPH_WORLD_COORDINATE_FRAME_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Rendering/SceneGraph/Flags/CameraFlags.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
@@ -34,7 +34,7 @@ namespace Rendering
 		using Math = Mathematics::Math<float>;
         
     public:
-                explicit WorldCoordinateFrame(float epsilon = Math::sm_ZeroTolerance)  ;
+                explicit WorldCoordinateFrame(float epsilon = Math::GetZeroTolerance())  ;
         
 		CLASS_INVARIANT_DECLARE;
 

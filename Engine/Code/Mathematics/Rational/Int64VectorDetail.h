@@ -18,7 +18,8 @@
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26482) 
+#include SYSTEM_WARNING_DISABLE(26456)
 template <int VectorSize>
 Mathematics::Int64Vector<VectorSize>::Int64Vector() noexcept
     : m_Tuple{}

@@ -13,6 +13,8 @@
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26434)
+ 
+#include SYSTEM_WARNING_DISABLE(26456)
 template <typename T>
 Imagics::TImage3D<T>
 	::TImage3D(int xBound, int yBound, int zBound, T* data)

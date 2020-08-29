@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 #include "Mathematics/Algebra/Vector3D.h"
 #include "Mathematics/Algebra/Vector3DTools.h"
@@ -40,16 +40,16 @@ namespace Mathematics
 		Plane3();
 
 		// 直接指定N和C。
-		Plane3(const Vector3D& normal, Real constant, const Real epsilon = Math::sm_ZeroTolerance);
+		Plane3(const Vector3D& normal, Real constant, const Real epsilon = Math::GetZeroTolerance());
 
 		// 指定N，c = Dot(N,P)，这里P是平面是的一点。
-		Plane3(const Vector3D& normal, const Vector3D& point, const Real epsilon = Math::sm_ZeroTolerance);
+		Plane3(const Vector3D& normal, const Vector3D& point, const Real epsilon = Math::GetZeroTolerance());
 
 		// N = Cross(P1-P0,P2-P0)/Length(Cross(P1-P0,P2-P0))，
 		// c = Dot(N,P0)，其中P0，P1，P2是在平面上的点。
-		Plane3(const Vector3D& firstPoint, const Vector3D& secondPoint, const Vector3D& thirdPoint, const Real epsilon = Math::sm_ZeroTolerance);
+		Plane3(const Vector3D& firstPoint, const Vector3D& secondPoint, const Vector3D& thirdPoint, const Real epsilon = Math::GetZeroTolerance());
 
-		explicit Plane3(const Triangle3& triangle, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit Plane3(const Triangle3& triangle, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

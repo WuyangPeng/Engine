@@ -51,7 +51,7 @@ namespace CoreTools
 	public:
 		explicit UnitTest(const OStreamShared& osPtr); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const std::string GetName() const override;
 		int GetPassedNumber() const noexcept override;

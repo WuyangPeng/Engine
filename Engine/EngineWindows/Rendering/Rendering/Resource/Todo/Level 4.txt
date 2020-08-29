@@ -1,3 +1,5 @@
 TODO Level 4
 
 0.5.0.0 
+
+1.	（DataTypes）将ColourConvertFrom和ColourConvertTo的静态函数改成子类或策略模式实现。

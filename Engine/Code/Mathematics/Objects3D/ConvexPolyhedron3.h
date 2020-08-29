@@ -11,7 +11,7 @@
 
 #include "Plane3.h"
 #include "Polyhedron3.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <set>
 #include <type_traits>
@@ -59,7 +59,7 @@ namespace Mathematics
         ConvexPolyhedron3(ConvexPolyhedron3&& rhs) = delete;
         ConvexPolyhedron3& operator=(ConvexPolyhedron3&& rhs) = delete;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         // 只读成员访问。
         const PlanePtr GetPlanes() const;
@@ -79,11 +79,11 @@ namespace Mathematics
         // 其有符号的距离满足d < 0，数值舍入误差会产生不正确凸性测试，
         // 所以一个小的负阈值t可能通过该函数，
         // 在这种情况下，距离测试会变成d < t < 0。
-        bool IsConvex(Real threshold = -Math::sm_ZeroTolerance) const;
+        bool IsConvex(Real threshold = -Math::GetZeroTolerance()) const;
 
         // 点在多面体的测试，在点和平面的面，在n个顶点之间查询执行，为O(n)算法。
         // 这不是最优算法。可将基本BSP算法用于这个类。这是一个O(log n)的算法。
-        bool Contains(const Vector3D& point, Real threshold = -Math::sm_ZeroTolerance) const;
+        bool Contains(const Vector3D& point, Real threshold = -Math::GetZeroTolerance()) const;
 
     private:
         void InitPlanes();

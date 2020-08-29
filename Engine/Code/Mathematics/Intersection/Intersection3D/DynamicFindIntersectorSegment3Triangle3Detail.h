@@ -81,7 +81,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>
 	// Get the triangle velocity relative to the segment.
 	auto relVelocity = velocity1 - velocity0;
 
-	SetContactTime(Math<Real>::sm_Zero);
+	SetContactTime(Math<Real>::GetZero());
 	auto tlast = Math::sm_MaxReal;
 
 	// Test tri-normal.
@@ -103,7 +103,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>
 	auto dirSqrLen = Vector3DTools::VectorMagnitudeSquared(dirU);
 	auto norUSqrLen = Vector3DTools::VectorMagnitudeSquared(normU);
 	auto norVSqrLen = Vector3DTools::VectorMagnitudeSquared(normV);
-	auto oneMinusEpsilon = static_cast<Real>(1) - Math::sm_ZeroTolerance;
+	auto oneMinusEpsilon = static_cast<Real>(1) - Math::GetZeroTolerance();
 
 	auto i0 = 0;
 	auto i1 = 0;
@@ -148,7 +148,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>
 		}
 	}
 
-	if (mContactTime < Math<Real>::sm_Zero)
+	if (mContactTime < Math<Real>::GetZero())
 	{
 		SetContactTime(mContactTime);
 		this->SetIntersectionType(IntersectionType::Empty);

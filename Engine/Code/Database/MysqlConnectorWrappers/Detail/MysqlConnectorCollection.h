@@ -27,7 +27,7 @@ namespace Database
 		explicit MysqlConnectorCollection(const Schema& schema, const std::string& collectionName);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  ResultPtr ExecuteDoc(const std::string& findStatement, const BindStatementType& bindStatement, int limitStatement) override;
 

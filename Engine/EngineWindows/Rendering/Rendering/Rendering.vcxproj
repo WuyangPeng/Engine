@@ -354,6 +354,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatchFrame.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\TubeSurface.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Bound.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Colour.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFrom.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourConvertTo.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourManager.cpp" />
@@ -728,8 +729,11 @@
     <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\TubeSurface.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Bound.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Colour.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourAchieve.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFrom.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFromDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertTo.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertToDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourDefaultTraits.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourManager.h" />
@@ -737,6 +741,10 @@
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\DataTypes.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\DataTypesFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\BoundImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsFromCheck.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsFromCheckDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsToCheck.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsToCheckDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrix.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Flags\TextureFormat.h" />
@@ -807,7 +815,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\GlxRenderer\GlxRendererInput.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Helper\HelperFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Helper\PlatformMacro.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Illumination\Illumination.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Illumination\IlluminationFwd.h" />

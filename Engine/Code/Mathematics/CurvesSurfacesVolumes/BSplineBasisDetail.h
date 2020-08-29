@@ -53,7 +53,7 @@ void Mathematics::BSplineBasis<Real>
     {
         for (i = 0; i <= mDegree; ++i)
         {
-            mKnot[i] = Math<Real>::sm_Zero;
+            mKnot[i] = Math<Real>::GetValue(0);
         }
 
         for (/**/; i < mNumCtrlPoints; ++i)
@@ -95,7 +95,7 @@ void Mathematics::BSplineBasis<Real>
 	const auto numKnots = Initialize(numCtrlPoints, degree, true);
     for (i = 0; i <= mDegree; ++i)
     {
-        mKnot[i] = Math<Real>::sm_Zero;
+        mKnot[i] = Math<Real>::GetValue(0);
     }
 
     for (auto j = 0; i < mNumCtrlPoints; ++i, ++j)
@@ -276,9 +276,9 @@ int Mathematics::BSplineBasis<Real>
     if (mOpen)
     {
         // Open splines clamp to [0,1].
-        if (t <= Math<Real>::sm_Zero)
+        if (t <= Math<Real>::GetValue(0))
         {
-            t = Math<Real>::sm_Zero;
+            t = Math<Real>::GetValue(0);
             return mDegree;
         }
         else if (t >= static_cast<Real>(1))
@@ -290,7 +290,7 @@ int Mathematics::BSplineBasis<Real>
     else
     {
         // Periodic splines wrap to [0,1).
-        if (t < Math<Real>::sm_Zero || t >= static_cast<Real>(1))
+        if (t < Math<Real>::GetValue(0) || t >= static_cast<Real>(1))
         {
             t -= Math<Real>::Floor(t);
         }
@@ -353,13 +353,13 @@ void Mathematics::BSplineBasis<Real>
 
     if (order >= 1)
     {
-        mBD1[0][i] = Math<Real>::sm_Zero;
+        mBD1[0][i] = Math<Real>::GetValue(0);
         if (order >= 2)
         {
-            mBD2[0][i] = Math<Real>::sm_Zero;
+            mBD2[0][i] = Math<Real>::GetValue(0);
             if (order >= 3)
             {
-                mBD3[0][i] = Math<Real>::sm_Zero;
+                mBD3[0][i] = Math<Real>::GetValue(0);
             }
         }
     }

@@ -37,18 +37,18 @@ void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	::Test()
 {
 	auto dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), mPlane1.GetNormal());
-	if (Math::FAbs(dot) < static_cast<Real>(1) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(dot) < static_cast<Real>(1) - Math::GetZeroTolerance())
 	{
 		// The planes are initially intersecting.  Linear velocities will
 		// not change the fact that they are intersecting.
-		SetContactTime(Math::sm_Zero);
+		SetContactTime(Math::GetValue(0));
 		this->SetIntersectionType(IntersectionType::Line);
 		return;
 	}
 
 	// Check if planes are already coplanar.
-	auto cDiff = Math::sm_Zero;
-	if (dot >= Math::sm_Zero)
+	auto cDiff = Math::GetValue(0);
+	if (dot >= Math::GetValue(0))
 	{
 		// Normals are in same direction, need to look at c0-c1.
 		cDiff = mPlane0.GetConstant() - mPlane1.GetConstant();
@@ -59,10 +59,10 @@ void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 		cDiff = mPlane0.GetConstant() + mPlane1.GetConstant();
 	}
 
-	if (Math::FAbs(cDiff) < Math::sm_ZeroTolerance)
+	if (Math::FAbs(cDiff) < Math::GetZeroTolerance())
 	{
 		// Planes are initially the same.
-		SetContactTime(Math::sm_Zero);
+		SetContactTime(Math::GetValue(0));
 		this->SetIntersectionType(IntersectionType::Plane);
 		return;
 	}
@@ -71,7 +71,7 @@ void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	// become coplanar.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 	dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), relVelocity);
-	if (Math::FAbs(dot) < Math::sm_ZeroTolerance)
+	if (Math::FAbs(dot) < Math::GetZeroTolerance())
 	{
 		// The relative motion of the planes keeps them parallel.
 		this->SetIntersectionType(IntersectionType::Empty);
@@ -79,7 +79,7 @@ void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	}
 
 	SetContactTime(cDiff / dot);
-	if (Math::sm_Zero <= this->GetContactTime() && this->GetContactTime() <= this->GetTMax())
+	if (Math::GetValue(0) <= this->GetContactTime() && this->GetContactTime() <= this->GetTMax())
 	{
 		// The planes are moving towards each other and will meet within the
 		// specified time interval.

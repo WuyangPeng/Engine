@@ -45,7 +45,7 @@ typename const Mathematics::DistLine3Triangle3<Real>::DistanceResult Mathematics
 	auto edge1 = mTriangle.GetVertex(2) - mTriangle.GetVertex(0);
 	auto normal = Vector3DTools::UnitCrossProduct(edge0, edge1);
 	auto NdD = Vector3DTools::DotProduct(normal, mLine.GetDirection());
-	if (Math::FAbs(NdD) > Math::sm_ZeroTolerance)
+	if (Math::FAbs(NdD) > Math::GetZeroTolerance())
 	{
 		// The line and triangle are not parallel, so the line intersects
 		// the plane of the triangle.
@@ -68,7 +68,7 @@ typename const Mathematics::DistLine3Triangle3<Real>::DistanceResult Mathematics
 		auto b2 = (UdE0*VdDiff - VdE0 * UdDiff)*invDet;
 		auto b0 = static_cast<Real>(1) - b1 - b2;
 
-		if (b0 >= Math<Real>::sm_Zero && b1 >= Math<Real>::sm_Zero && b2 >= Math<Real>::sm_Zero)
+		if (b0 >= Math<Real>::GetValue(0) && b1 >= Math<Real>::GetValue(0) && b2 >= Math<Real>::GetValue(0))
 		{
 			// Line parameter for the point of intersection.
 			auto DdE0 = Vector3DTools::DotProduct(mLine.GetDirection(), edge0);
@@ -86,7 +86,7 @@ typename const Mathematics::DistLine3Triangle3<Real>::DistanceResult Mathematics
 
 			mClosestPoint1 = mTriangle.GetVertex(0) + b1 * edge0 + b2 * edge1;
 
-			return DistanceResult{ Math<Real>::sm_Zero };
+			return DistanceResult{ Math<Real>::GetValue(0) };
 		}
 	}
 
@@ -116,11 +116,11 @@ typename const Mathematics::DistLine3Triangle3<Real>::DistanceResult Mathematics
 			auto ratio = sqrDistTmp.GetRhsParameter() / segment.GetExtent();
 			mTriangleBary[i0] = (static_cast<Real>(0.5)) * (static_cast<Real>(1) - ratio);
 			mTriangleBary[i1] = static_cast<Real>(1) - mTriangleBary[i0];
-			mTriangleBary[3 - i0 - i1] = Math<Real>::sm_Zero;
+			mTriangleBary[3 - i0 - i1] = Math<Real>::GetValue(0);
 		}
 	}
 
-	return DistanceResult{ sqrDist, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDist, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 

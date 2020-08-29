@@ -8,7 +8,7 @@
 #define RENDERING_GLOBAL_EFFECTS_PLANAR_REFLECTION_EFFECT_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "GlobalEffect.h"
 #include "Mathematics/Algebra/Matrix.h"
 #include "Mathematics/Algebra/Plane.h"

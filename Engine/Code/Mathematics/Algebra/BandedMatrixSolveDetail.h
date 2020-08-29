@@ -12,7 +12,7 @@
 #include "VariableMatrix.h"
 #include "BandedMatrixDetail.h"
 #include "VariableLengthVector.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/ObjectInterface.h"
@@ -134,7 +134,7 @@ template <typename Real>
 Real Mathematics::BandedMatrixSolve<Real>
 	::GetProduct(const BandedMatrix& upperBandedMatrix, const BandedMatrix& lowerBandedMatrix, int row, int column) const
 {
-	auto sum = Math::sm_Zero;
+	auto sum = Math::GetValue(0);
 	for (auto index = 0; index < upperBandedMatrix.GetSize(); ++index)
 	{
 		sum += lowerBandedMatrix(row, index) * upperBandedMatrix(index, column);
@@ -410,7 +410,7 @@ bool Mathematics::BandedMatrixSolve<Real>
 			}
 
 			auto diagonal = m_Cholesky(index, index);
-			if (diagonal <= Math::sm_Zero)
+			if (diagonal <= Math::GetValue(0))
 			{
 				m_Solve = BandedMatrixSolveFlags::Failure;
 
@@ -546,7 +546,7 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics:
 			}
 		}
 
-		auto inverse = Math::sm_One / lowerRR;
+		auto inverse = Math::GetValue(1) / lowerRR;
 		for (auto bCol = 0; bCol < result.GetColumnsNumber(); ++bCol)
 		{
 			result[row][bCol] *= inverse;
@@ -579,7 +579,7 @@ typename const Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics:
 			}
 		}
 
-		auto inverse = Math::sm_One / upperRR;
+		auto inverse = Math::GetValue(1) / upperRR;
 		for (auto bCol = 0; bCol < result.GetColumnsNumber(); ++bCol)
 		{
 			result[row][bCol] *= inverse;

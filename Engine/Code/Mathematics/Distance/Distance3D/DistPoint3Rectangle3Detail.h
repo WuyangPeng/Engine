@@ -67,9 +67,9 @@ typename const Mathematics::DistPoint3Rectangle3<Real>::DistanceResult Mathemati
 	sqrDistance += s1 * (s1 + (static_cast<Real>(2))*b1);
 
 	// Account for numerical round-off error.
-	if (sqrDistance < Math<Real>::sm_Zero)
+	if (sqrDistance < Math<Real>::GetValue(0))
 	{
-		sqrDistance = Math<Real>::sm_Zero;
+		sqrDistance = Math<Real>::GetValue(0);
 	}
 
 	mClosestPoint0 = mPoint;
@@ -77,7 +77,7 @@ typename const Mathematics::DistPoint3Rectangle3<Real>::DistanceResult Mathemati
 	mRectCoord[0] = s0;
 	mRectCoord[1] = s1;
 
-	return DistanceResult{ sqrDistance, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDistance, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>

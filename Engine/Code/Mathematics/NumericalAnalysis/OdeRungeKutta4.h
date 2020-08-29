@@ -28,7 +28,7 @@ namespace Mathematics
 		OdeRungeKutta4(int dimension, Real step, Function function, const UserDataType* userData);
 		virtual ~OdeRungeKutta4();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		virtual void Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut);
 		virtual void SetStepSize(Real step);

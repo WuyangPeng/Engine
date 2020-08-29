@@ -27,7 +27,7 @@ namespace Mathematics
 		using VariableMatrix = VariableMatrix<Real>;
 
 	public:
-		explicit BandedMatrixInvert(const BandedMatrix& matrix, Real zeroTolerance = Math::sm_ZeroTolerance);
+		explicit BandedMatrixInvert(const BandedMatrix& matrix, Real zeroTolerance = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

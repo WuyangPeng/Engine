@@ -40,7 +40,7 @@ void Mathematics::DynamicFindIntersector1<Real>
 	{
 		// [u0,u1]最初在[v0,v1]的左边。
 		auto differenceSpeed = speedU - speedV;
-		if (Math::sm_Zero < differenceSpeed)
+		if (Math::GetValue(0) < differenceSpeed)
 		{
 			// 区间必须朝向彼此移动。
 			auto differencePosition = v0 - u1;
@@ -58,7 +58,7 @@ void Mathematics::DynamicFindIntersector1<Real>
 	{
 		// [u0,u1]最初在[v0,v1]的右边。
 		auto differenceSpeed = speedV - speedU;
-		if (Math::sm_Zero < differenceSpeed)
+		if (Math::GetValue(0) < differenceSpeed)
 		{
 			// 区间必须朝向彼此移动。
 			auto differencePosition = u0 - v1;
@@ -75,7 +75,7 @@ void Mathematics::DynamicFindIntersector1<Real>
 	else
 	{
 		// 区间本来就相交。
-		m_FirstTime = Math::sm_Zero;
+		m_FirstTime = Math::GetValue(0);
 		if (speedU + epsilon < speedV)
 		{
 			m_LastTime = (u1 - v0) / (speedV - speedU);
@@ -130,7 +130,7 @@ template <typename Real>
 bool Mathematics::DynamicFindIntersector1<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Math::sm_Zero <= m_FirstTime && m_FirstTime <= m_LastTime)
+	if (ParentType::IsValid() && Math::GetValue(0) <= m_FirstTime && m_FirstTime <= m_LastTime)
 		return true;
 	else
 		return false;

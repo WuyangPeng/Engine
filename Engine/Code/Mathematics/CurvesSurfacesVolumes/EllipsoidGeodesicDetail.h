@@ -45,7 +45,7 @@ void EllipsoidGeodesic<Real>::ComputeMetric(const VariableLengthVector<Real>& po
 	auto cos1 = Math<Real>::Cos(point[1]);
 	auto sin1 = Math<Real>::Sin(point[1]);
 
-	Vector3D<Real> der0{ -mXExtent * sin0*sin1, mYExtent*cos0*sin1, Math<Real>::sm_Zero };
+	Vector3D<Real> der0{ -mXExtent * sin0*sin1, mYExtent*cos0*sin1, Math<Real>::GetValue(0) };
 	Vector3D<Real> der1{ mXExtent*cos0*cos1,  mYExtent*sin0*cos1,-mZExtent * sin1 };
 
 	mMetric[0][0] = Vector3DTools<Real>::DotProduct(der0,der0);
@@ -62,13 +62,13 @@ void EllipsoidGeodesic<Real>::ComputeChristoffel1 (const VariableLengthVector<Re
 	auto cos1 = Math<Real>::Cos(point[1]);
 	auto sin1 = Math<Real>::Sin(point[1]);
 
-	Vector3D<Real> der0{ -mXExtent * sin0*sin1, mYExtent*cos0*sin1, Math<Real>::sm_Zero };
+	Vector3D<Real> der0{ -mXExtent * sin0*sin1, mYExtent*cos0*sin1, Math<Real>::GetValue(0) };
 
 	Vector3D<Real> der1{ mXExtent*cos0*cos1,  mYExtent*sin0*cos1,-mZExtent * sin1 };
 
-	Vector3D<Real> der00{ -mXExtent * cos0*sin1, -mYExtent * sin0*sin1, Math<Real>::sm_Zero };
+	Vector3D<Real> der00{ -mXExtent * cos0*sin1, -mYExtent * sin0*sin1, Math<Real>::GetValue(0) };
 
-	Vector3D<Real> der01{ -mXExtent * sin0*cos1, mYExtent*cos0*cos1, Math<Real>::sm_Zero };
+	Vector3D<Real> der01{ -mXExtent * sin0*cos1, mYExtent*cos0*cos1, Math<Real>::GetValue(0) };
 
 	Vector3D<Real> der11{ -mXExtent * cos0*sin1, -mYExtent * sin0*sin1,-mZExtent * cos1 };
 

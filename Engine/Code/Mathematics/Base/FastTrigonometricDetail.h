@@ -19,7 +19,7 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastSinRoughCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
 	CoreTools::DoNothing();
 
@@ -29,7 +29,7 @@ Real Mathematics::FastTrigonometric<Real>
 	result *= angleSquare;
 	result -= static_cast<Real>(1.6605e-01);
 	result *= angleSquare;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= angle;
 
 	return result;
@@ -39,7 +39,7 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastSinPreciseCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
 	CoreTools::DoNothing();
 
@@ -55,7 +55,7 @@ Real Mathematics::FastTrigonometric<Real>
 	result *= angleSquare;
 	result -= static_cast<Real>(1.666666664e-01);
 	result *= angleSquare;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= angle;
 
 	return result;
@@ -65,29 +65,29 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastSinMorePreciseCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
 	CoreTools::DoNothing();
 
 	auto angleSqrare = Math::Square(angle);
 
-	return angle * (Math::sm_One - angleSqrare / static_cast<Real>(2.0) / static_cast<Real>(3.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(4.0) / static_cast<Real>(5.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(6.0) / static_cast<Real>(7.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(8.0) / static_cast<Real>(9.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(10.0) / static_cast<Real>(11.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(12.0) / static_cast<Real>(13.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(14.0) / static_cast<Real>(15.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(16.0) / static_cast<Real>(17.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(18.0) / static_cast<Real>(19.0) *
-				   (Math::sm_One - angleSqrare / static_cast<Real>(20.0) / static_cast<Real>(21.0)))))))))));
+	return angle * (Math::GetValue(1) - angleSqrare / static_cast<Real>(2.0) / static_cast<Real>(3.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(4.0) / static_cast<Real>(5.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(6.0) / static_cast<Real>(7.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(8.0) / static_cast<Real>(9.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(10.0) / static_cast<Real>(11.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(12.0) / static_cast<Real>(13.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(14.0) / static_cast<Real>(15.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(16.0) / static_cast<Real>(17.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(18.0) / static_cast<Real>(19.0) *
+				   (Math::GetValue(1) - angleSqrare / static_cast<Real>(20.0) / static_cast<Real>(21.0)))))))))));
 }
 
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastCosRoughCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
 	CoreTools::DoNothing();
 
@@ -97,7 +97,7 @@ Real Mathematics::FastTrigonometric<Real>
 	result *= angleSquare;
 	result -= static_cast<Real>(4.967e-01);
 	result *= angleSquare;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 
 	return result;
 }
@@ -106,7 +106,7 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastCosPreciseCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
 	CoreTools::DoNothing();
 
@@ -122,7 +122,7 @@ Real Mathematics::FastTrigonometric<Real>
 	result *= angleSquare;
 	result -= static_cast<Real>(4.999999963e-01);
 	result *= angleSquare;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 
 	return result;
 }
@@ -131,30 +131,30 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastCosMorePreciseCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_HalfPI, "输入值必须在范围[0,pi/2]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
 	CoreTools::DoNothing();
 
 	auto angleSqrare = Math::Square(angle);
 
-	return  (Math::sm_One - angleSqrare / static_cast<Real>(2.0) *
-		    (Math::sm_One - angleSqrare / static_cast<Real>(3.0) / static_cast<Real>(4.0) *
-			(Math::sm_One - angleSqrare / static_cast<Real>(5.0) / static_cast<Real>(6.0)	*
-			(Math::sm_One - angleSqrare / static_cast<Real>(7.0) / static_cast<Real>(8.0)	*
-			(Math::sm_One - angleSqrare / static_cast<Real>(9.0) / static_cast<Real>(10.0) *
-			(Math::sm_One - angleSqrare / static_cast<Real>(11.0) / static_cast<Real>(12.0) *
-			(Math::sm_One - angleSqrare / static_cast<Real>(13.0) / static_cast<Real>(14.0) *
-			(Math::sm_One - angleSqrare / static_cast<Real>(15.0) / static_cast<Real>(16.0) *
-			(Math::sm_One - angleSqrare / static_cast<Real>(17.0) / static_cast<Real>(18.0) *
-			(Math::sm_One - angleSqrare / static_cast<Real>(19.0) / static_cast<Real>(20.0) *
-			(Math::sm_One - angleSqrare / static_cast<Real>(21.0) / static_cast<Real>(22.0))))))))))));
+	return  (Math::GetValue(1) - angleSqrare / static_cast<Real>(2.0) *
+		    (Math::GetValue(1) - angleSqrare / static_cast<Real>(3.0) / static_cast<Real>(4.0) *
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(5.0) / static_cast<Real>(6.0)	*
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(7.0) / static_cast<Real>(8.0)	*
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(9.0) / static_cast<Real>(10.0) *
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(11.0) / static_cast<Real>(12.0) *
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(13.0) / static_cast<Real>(14.0) *
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(15.0) / static_cast<Real>(16.0) *
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(17.0) / static_cast<Real>(18.0) *
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(19.0) / static_cast<Real>(20.0) *
+			(Math::GetValue(1) - angleSqrare / static_cast<Real>(21.0) / static_cast<Real>(22.0))))))))))));
 }
 
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastTanRoughCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_QuarterPI, "输入值必须在范围[0,pi/4]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetQuarterPI(), "输入值必须在范围[0,pi/4]！\n");
 
 	CoreTools::DoNothing();
 
@@ -164,7 +164,7 @@ Real Mathematics::FastTrigonometric<Real>
 	result *= angleSquare;
 	result += static_cast<Real>(3.1755e-01);
 	result *= angleSquare;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= angle;
 
 	return result;
@@ -174,7 +174,7 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastTanPreciseCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_QuarterPI, "输入值必须在范围[0,pi/4]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetQuarterPI(), "输入值必须在范围[0,pi/4]！\n");
 
 	CoreTools::DoNothing();
 
@@ -192,7 +192,7 @@ Real Mathematics::FastTrigonometric<Real>
 	result *= angleSquare;
 	result += static_cast<Real>(3.333314036e-01);
 	result *= angleSquare;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= angle;
 
 	return result;
@@ -202,18 +202,17 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastTanMorePreciseCalculation(Real angle)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= angle && angle <= Math::sm_QuarterPI, "输入值必须在范围[0,pi/4]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetQuarterPI(), "输入值必须在范围[0,pi/4]！\n");
 
 	return FastSinMorePreciseCalculation(angle) / FastCosMorePreciseCalculation(angle);
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>
-	::FastInvSinRoughCalculation(Real value)
+Real Mathematics::FastTrigonometric<Real>::FastInvSinRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= value && value <= Math::sm_One, "输入值必须在范围[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(0), "输入值必须在范围[0,1]！\n");
 
-	auto root = Math::Sqrt(Math::sm_One - value);
+	auto root = Math::Sqrt(Math::GetValue(1) - value);
 
 	auto result = static_cast<Real>(-0.0187293);
 	result *= value;
@@ -222,18 +221,17 @@ Real Mathematics::FastTrigonometric<Real>
 	result -= static_cast<Real>(0.2121144);
 	result *= value;
 	result += static_cast<Real>(1.5707288);
-	result = Math::sm_HalfPI - root * result;
+	result = Math::GetHalfPI() - root * result;
 
 	return result;
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>
-	::FastInvSinPreciseCalculation(Real value)
+Real Mathematics::FastTrigonometric<Real>::FastInvSinPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= value && value <= Math::sm_One, "输入值必须在范围[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(0), "输入值必须在范围[0,1]！\n");
 
-	auto root = Math::Sqrt(Math::sm_One - value);
+	auto root = Math::Sqrt(Math::GetValue(1) - value);
 
 	auto result = static_cast<Real>(-0.0012624911);
 	result *= value;
@@ -250,18 +248,17 @@ Real Mathematics::FastTrigonometric<Real>
 	result -= static_cast<Real>(0.2145988016);
 	result *= value;
 	result += static_cast<Real>(1.5707963050);
-	result = Math::sm_HalfPI - root * result;
+	result = Math::GetHalfPI() - root * result;
 
 	return result;
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>
-	::FastInvCosRoughCalculation(Real value)
+Real Mathematics::FastTrigonometric<Real>::FastInvCosRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= value && value <= Math::sm_One, "输入值必须在范围[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(0), "输入值必须在范围[0,1]！\n");
 
-	auto root = Math::Sqrt(Math::sm_One - value);
+	auto root = Math::Sqrt(Math::GetValue(1) - value);
 
 	auto result = static_cast<Real>(-0.0187293);
 	result *= value;
@@ -276,12 +273,11 @@ Real Mathematics::FastTrigonometric<Real>
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>
-	::FastInvCosPreciseCalculation(Real value)
+Real Mathematics::FastTrigonometric<Real>::FastInvCosPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= value && value <= Math::sm_One, "输入值必须在范围[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(0), "输入值必须在范围[0,1]！\n");
 
-	auto root = Math::Sqrt(Math::sm_One - value);
+	auto root = Math::Sqrt(Math::GetValue(1) - value);
 
 	auto result = static_cast<Real>(-0.0012624911);
 	result *= value;
@@ -307,7 +303,7 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastInvTanRoughCalculation(Real value)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_NegativeOne <= value && value <= Math::sm_One, "输入值必须在范围[-1,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(0), "输入值必须在范围[-1,1]！\n");
 
 	CoreTools::DoNothing();
 
@@ -331,7 +327,7 @@ template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
 	::FastInvTanPreciseCalculation(Real value)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_NegativeOne <= value && value <= Math::sm_One, "输入值必须在范围[-1,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(0), "输入值必须在范围[-1,1]！\n");
 
 	CoreTools::DoNothing();
 
@@ -353,7 +349,7 @@ Real Mathematics::FastTrigonometric<Real>
 	result *= valueSquare;
 	result -= static_cast<Real>(0.3333314528);
 	result *= valueSquare;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= value;
 
 	return result;

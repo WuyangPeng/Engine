@@ -18,6 +18,7 @@
 #include SYSTEM_WARNING_DISABLE(26460)
 #include SYSTEM_WARNING_DISABLE(26465)
 #include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26819) 
 
 #include <boost/asio/connect.hpp>
 

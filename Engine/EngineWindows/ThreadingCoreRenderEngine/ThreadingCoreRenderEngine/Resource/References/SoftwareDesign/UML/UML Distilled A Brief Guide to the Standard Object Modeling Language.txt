@@ -1,0 +1,16 @@
+UML精粹（UML Distilled:A Brief Guide to the Standard Object Modeling Language）
+（第3版）
+
+官方网站：
+http://martinfowler.com 、http://phruby.com
+
+★
+作者：Martin Fowler
+
+知识点 
+1.	UML基础知识。 
+
+代码 
+1.  书籍代码。 
+
+要点

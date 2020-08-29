@@ -1,1 +1,10 @@
 参考文献·操作系统
+
+1.	WindowsAPI
+2.	MFC 
+3.	ATL 
+4.	COM 
+5.	ACE 
+6.	NetworkProgramming（网络编程）
+7.	Debugging（调试）
+8.	ConcurrentProgramming（并发编程）

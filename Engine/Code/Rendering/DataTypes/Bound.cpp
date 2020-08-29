@@ -5,7 +5,7 @@
 // ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/18 15:07)
 
 #include "Rendering/RenderingExport.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Bound.h"
 #include "Detail/BoundImpl.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -13,12 +13,13 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
-
+ 
 using std::vector;
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26496)
 Rendering::Bound
     ::Bound(const APoint& center,float radius)
 	:m_Impl{ make_shared<ImplType>(center,radius) }
@@ -28,7 +29,7 @@ Rendering::Bound
 
 Rendering::Bound
 	::Bound()
-	:m_Impl{ make_shared<ImplType>(APoint::sm_Origin,0.0f) } 
+    : m_Impl{ make_shared<ImplType>(Mathematics::Pointf::g_Origin, 0.0f) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }

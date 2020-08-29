@@ -181,9 +181,9 @@ void Framework::CameraMotionImpl
 	m_WorldDirection = rotation * m_WorldDirection;
 	m_WorldRight = rotation * m_WorldRight;
 
-	auto directionVector = rotation * m_Camera->GetDirectionVector();
-	auto upVector = rotation * m_Camera->GetUpVector();
-	auto rightVector = rotation * m_Camera->GetRightVector();
+const	auto directionVector = rotation * m_Camera->GetDirectionVector();
+        const auto upVector = rotation * m_Camera->GetUpVector();
+const auto rightVector = rotation * m_Camera->GetRightVector();
 	m_Camera->SetAxes(directionVector, upVector, rightVector);
 }
 
@@ -196,9 +196,9 @@ void Framework::CameraMotionImpl
 	m_WorldDirection = rotation * m_WorldDirection;
 	m_WorldRight = rotation * m_WorldRight;
 
-	auto directionVector = rotation * m_Camera->GetDirectionVector();
-	auto upVector = rotation * m_Camera->GetUpVector();
-	auto rightVector = rotation * m_Camera->GetRightVector();
+const auto directionVector = rotation * m_Camera->GetDirectionVector();
+        const auto upVector = rotation * m_Camera->GetUpVector();
+const auto rightVector = rotation * m_Camera->GetRightVector();
 	m_Camera->SetAxes(directionVector, upVector, rightVector);
 }
 
@@ -209,9 +209,9 @@ void Framework::CameraMotionImpl
 
 	const Matrix rotation{ m_WorldRight, m_RotationSpeed };
 
-	auto directionVector = rotation * m_Camera->GetDirectionVector();
-	auto upVector = rotation * m_Camera->GetUpVector();
-	auto rightVector = rotation * m_Camera->GetRightVector();
+const auto directionVector = rotation * m_Camera->GetDirectionVector();
+        const auto upVector = rotation * m_Camera->GetUpVector();
+const auto rightVector = rotation * m_Camera->GetRightVector();
 	m_Camera->SetAxes(directionVector, upVector, rightVector);
 }
 
@@ -222,9 +222,9 @@ void Framework::CameraMotionImpl
 
 	const Matrix rotation{ m_WorldRight, -m_RotationSpeed };
 
-	auto directionVector = rotation * m_Camera->GetDirectionVector();
-	auto upVector = rotation * m_Camera->GetUpVector();
-	auto rightVector = rotation * m_Camera->GetRightVector();
+const auto directionVector = rotation * m_Camera->GetDirectionVector();
+        const auto upVector = rotation * m_Camera->GetUpVector();
+const auto rightVector = rotation * m_Camera->GetRightVector();
 	m_Camera->SetAxes(directionVector, upVector, rightVector);
 }
 

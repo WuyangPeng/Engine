@@ -58,7 +58,7 @@ void Framework::ObjectMotionRotateTrackBall
 	beginZ *= -1.0f;
 
 	// 使用相机的世界坐标,顺序是(D,U,R),所以点是(z,y,x)。
-	AVector vec0{ beginZ, beginY, beginX };
+        const AVector vec0{ beginZ, beginY, beginX };
 
 	// 获得球面上的第二个向量。
 	length = Mathf::Sqrt(endX * endX + endY * endY);
@@ -78,7 +78,7 @@ void Framework::ObjectMotionRotateTrackBall
 	endZ *= -1.0f;
 
 	// 使用相机的世界坐标,顺序是(D,U,R),所以点是(z,y,x)。
-	AVector vec1{ endZ, endY, endX };
+        const AVector vec1{ endZ, endY, endX };
 
 	// 创建旋转的轴和角度。
 	auto axis = Cross(vec0, vec1);
@@ -98,12 +98,12 @@ void Framework::ObjectMotionRotateTrackBall
 			axis[0] = beginY * invLength;
 			axis[1] = -beginX * invLength;
 			axis[2] = 0.0f;
-			angle = Mathf::sm_PI;
+			angle = Mathf::GetPI();
 		}
 		else
 		{
 			// 0弧度旋转。 
-			axis = AVector::sm_UnitX;
+			axis = Mathematics::Vectorf::g_UnitX;
 			angle = 0.0f;
 		}
 	}

@@ -12,7 +12,9 @@
 #include "TransformController.h"
 
 RENDERING_EXPORT_SHARED_PTR(BlendTransformControllerImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE BlendTransformController : public TransformController
@@ -53,7 +55,7 @@ namespace Rendering
         BlendTransformController(BlendTransformController&&) noexcept = default;
         BlendTransformController& operator=(BlendTransformController&&) noexcept = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(BlendTransformController);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
@@ -87,5 +89,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
     CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Sixth, BlendTransformController);
 }
-
+#include STSTEM_WARNING_POP
 #endif  // RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_H

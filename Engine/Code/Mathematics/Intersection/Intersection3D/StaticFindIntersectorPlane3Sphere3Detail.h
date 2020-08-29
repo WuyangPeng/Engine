@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorPlane3Sphere3<Real>
 	::StaticFindIntersectorPlane3Sphere3(const Plane3& plane,const Sphere3& sphere)
-	: mPlane{ plane }, mSphere{ sphere }, mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Math<Real>::sm_Zero }
+	: mPlane{ plane }, mSphere{ sphere }, mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Math<Real>::GetValue(0) }
 {
 	Find();
 }

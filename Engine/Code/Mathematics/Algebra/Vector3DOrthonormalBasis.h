@@ -29,7 +29,7 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		explicit Vector3DOrthonormalBasis(const Vector3D& nonzeroVector, bool isUnit, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit Vector3DOrthonormalBasis(const Vector3D& nonzeroVector, bool isUnit, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

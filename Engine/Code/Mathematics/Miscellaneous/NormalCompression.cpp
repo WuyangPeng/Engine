@@ -11,6 +11,7 @@
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26440)
 static int gsN = 127;  // N(N+1)/2 = 8128 < 2^{13}
 static auto temp1 = 2 * gsN + 1;
 static double gsB = temp1;

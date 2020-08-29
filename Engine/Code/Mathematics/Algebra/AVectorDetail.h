@@ -1,414 +1,101 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 11:44)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.0 (2020/08/28 0:55)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
 
 #include "AVector.h"
 
-#include "Vector3D.h"
-#include "AlgebraTraits.h"
-#include "AVectorOrthonormalizeDetail.h"
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AVECTOR_ACHIEVE)
+
+    #include "AVectorAchieve.h"
+
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AVECTOR_ACHIEVE)
+
 #include "AVectorOrthonormalBasisDetail.h"
+#include "AVectorOrthonormalizeDetail.h"
+#include "Vector3D.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include STSTEM_WARNING_PUSH
-
-#include SYSTEM_WARNING_DISABLE(26426)   
 template <typename T>
-const Mathematics::AVector<T> Mathematics::AVector<T>
-	::sm_Zero{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
-
-template <typename T>
-const Mathematics::AVector<T> Mathematics::AVector<T>
-	::sm_UnitX{ Math::sm_One,Math::sm_Zero,Math::sm_Zero };
-
-template <typename T>
-const Mathematics::AVector<T> Mathematics::AVector<T>
-	::sm_UnitY{ Math::sm_Zero,Math::sm_One,Math::sm_Zero };
-
-template <typename T>
-const Mathematics::AVector<T> Mathematics::AVector<T>
-	::sm_UnitZ{ Math::sm_Zero,Math::sm_Zero,Math::sm_One };
-#include STSTEM_WARNING_POP
-
-template <typename T>
-Mathematics::AVector<T>
-	::AVector() noexcept
-	:m_HomogeneousPoint{ }
+bool Mathematics::Approximate(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon)
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-} 
-
-template <typename T>
-Mathematics::AVector<T>::AVector(T x, T y, T z) noexcept
-    : m_HomogeneousPoint{ x, y, z, Math::sm_Zero }
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    return Math<T>::FAbs(lhs.GetX() - rhs.GetX()) <= epsilon &&
+           Math<T>::FAbs(lhs.GetY() - rhs.GetY()) <= epsilon &&
+           Math<T>::FAbs(lhs.GetZ() - rhs.GetZ()) <= epsilon;
 }
 
 template <typename T>
-Mathematics::AVector<T>::AVector(const HomogeneousPoint& homogeneousPoint) noexcept
-    : m_HomogeneousPoint{ homogeneousPoint }
+T Mathematics::Dot(const AVector<T>& lhs, const AVector<T>& rhs) noexcept
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    return lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY() + lhs.GetZ() * rhs.GetZ();
 }
 
 template <typename T>
-Mathematics::AVector<T>
-	::AVector(const Float3& tuple)
-	:m_HomogeneousPoint{ tuple.GetFirstValue(),tuple.GetSecondValue(),tuple.GetThirdValue(),Math::sm_Zero }
+const Mathematics::AVector<T> Mathematics::Cross(const AVector<T>& lhs, const AVector<T>& rhs)
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    return AVector<T>{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(), lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(), lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX() };
 }
 
 template <typename T>
-Mathematics::AVector<T>
-	::AVector(const Vector3D& rhs)
-	:m_HomogeneousPoint{ rhs.GetXCoordinate(),rhs.GetYCoordinate(),rhs.GetZCoordinate(),Math::sm_Zero }
+const Mathematics::AVector<T> Mathematics::UnitCross(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon)
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
+    auto cross = Cross(lhs, rhs);
 
-#ifdef OPEN_CLASS_INVARIANT
-template <typename T>
-bool Mathematics::AVector<T>
-	::IsValid() const noexcept
-{
-	if (Math::FAbs(m_HomogeneousPoint.GetW() - Math::sm_Zero) <= Math::sm_Epsilon)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT	
+    cross.Normalize(epsilon);
 
-
-template <typename T>
-const Mathematics::Float3 Mathematics::AVector<T>
-	::GetFloat3() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	return Float3{ boost::numeric_cast<float>(m_HomogeneousPoint.GetX()),
-				   boost::numeric_cast<float>(m_HomogeneousPoint.GetY()),
-				   boost::numeric_cast<float>(m_HomogeneousPoint.GetZ()) };
+    return cross;
 }
 
 template <typename T>
-const Mathematics::Vector3D<T> Mathematics::AVector<T>::GetVector3D() const noexcept
+const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<T>& lhs, const AVector<T>& mhs, const AVector<T>& rhs, const T epsilon)
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    // 如果输入向量v0、v1和v2，则Gram-Schmidt正交向量产生矢量u0、u1和u2如下，
+    //   u0 = v0 / |v0|
+    //   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
+    //   u2 = (v2 - (u0 * v2)u0 - (u1 * v2)u1) / |v2 - (u0 * v2)u0 - (u1 * v2)u1|
+    //
+    // 其中|A|表示向量A的长度和A * B表示向量A和B的点积
 
-	return Vector3D{ m_HomogeneousPoint.GetX(),m_HomogeneousPoint.GetY(),m_HomogeneousPoint.GetZ() };
+    return AVectorOrthonormalize<T>{ lhs, mhs, rhs, epsilon };
 }
 
 template <typename T>
-const T& Mathematics::AVector<T>
-	::operator[](int index) const  
+const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const std::vector<AVector<T>>& vectors, const T epsilon)
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3, "索引错误！");	
+    MATHEMATICS_ASSERTION_1(vectors.size() == 3, "vectors的大小错误！");
 
-	return m_HomogeneousPoint[index];
+    return AVectorOrthonormalize<T>{ vectors, epsilon };
 }
 
 template <typename T>
-T& Mathematics::AVector<T>
-	::operator[](int index) 
+const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, const T epsilon)
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < 3, "索引错误！");	
+    MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
 
-	return OPERATOR_SQUARE_BRACKETS(T, index);
+    return AVectorOrthonormalBasis<T>(nonzeroVector, false, epsilon);
 }
 
 template <typename T>
-const Mathematics::AVector<T> Mathematics::AVector<T>
-	::operator-() const
+const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateComplementBasis(const AVector<T>& unitVector, const T epsilon)
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_ASSERTION_3(unitVector.IsNormalize(epsilon), "输入必须是单位向量！");
 
-	return AVector{ -m_HomogeneousPoint[0],-m_HomogeneousPoint[1],-m_HomogeneousPoint[2] };
+    return AVectorOrthonormalBasis<T>(unitVector, true, epsilon);
 }
 
 template <typename T>
-Mathematics::AVector<T>& Mathematics::AVector<T>
-	::operator+=(const ClassType& rhs)
+std::ostream& Mathematics::operator<<(std::ostream& outFile, const AVector<T>& vector)
 {
-	MATHEMATICS_CLASS_IS_VALID_1;
+    outFile << vector.GetX() << "　" << vector.GetY() << "　" << vector.GetZ();
 
-	m_HomogeneousPoint[0] += rhs[0];
-	m_HomogeneousPoint[1] += rhs[1];
-	m_HomogeneousPoint[2] += rhs[2];
-
-	return *this;
+    return outFile;
 }
 
-template <typename T>
-Mathematics::AVector<T>& Mathematics::AVector<T>
-	::operator-=(const ClassType& rhs)
-{
-	MATHEMATICS_CLASS_IS_VALID_1;
-
-	m_HomogeneousPoint[0] -= rhs[0];
-	m_HomogeneousPoint[1] -= rhs[1];
-	m_HomogeneousPoint[2] -= rhs[2];
-
-	return *this;
-}
-
-template <typename T>
-Mathematics::AVector<T>& Mathematics::AVector<T>
-	::operator*=(T scalar)
-{
-	MATHEMATICS_CLASS_IS_VALID_1;
-
-	m_HomogeneousPoint[0] *= scalar;
-	m_HomogeneousPoint[1] *= scalar;
-	m_HomogeneousPoint[2] *= scalar;
-
-	return *this;
-}
-
-template <typename T>
-Mathematics::AVector<T>& Mathematics::AVector<T>
-	::operator/=(T scalar)
-{
-	MATHEMATICS_CLASS_IS_VALID_1;
-
-	if (Math::sm_ZeroTolerance < Math::FAbs(scalar))
-	{
-		m_HomogeneousPoint[0] /= scalar;
-		m_HomogeneousPoint[1] /= scalar;
-		m_HomogeneousPoint[2] /= scalar;
-	}
-	else
-	{
-		MATHEMATICS_ASSERTION_1(false, "除零错误！");
-
-		m_HomogeneousPoint[0] = Math::sm_MaxReal;
-		m_HomogeneousPoint[1] = Math::sm_MaxReal;
-		m_HomogeneousPoint[2] = Math::sm_MaxReal;
-	}
-
-	return *this;
-}
-
-template <typename T>
-T Mathematics::AVector<T>
-	::Length() const  
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	return Math::Sqrt(SquaredLength());
-}
-
-template <typename T>
-T Mathematics::AVector<T>
-	::SquaredLength() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	return  m_HomogeneousPoint[0] * m_HomogeneousPoint[0] +
-			m_HomogeneousPoint[1] * m_HomogeneousPoint[1] +
-			m_HomogeneousPoint[2] * m_HomogeneousPoint[2];
-}
-
-
-template <typename T>
-void Mathematics::AVector<T>
-	::Normalize(const T epsilon)
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	auto length = Length();
-
-	if (epsilon < length)
-	{
-		m_HomogeneousPoint[0] /= length;
-		m_HomogeneousPoint[1] /= length;
-		m_HomogeneousPoint[2] /= length;
-	}
-	else
-	{
-		MATHEMATICS_ASSERTION_1(false, "除零错误！");
-
-		m_HomogeneousPoint[0] = Math::sm_Zero;
-		m_HomogeneousPoint[1] = Math::sm_Zero;
-		m_HomogeneousPoint[2] = Math::sm_Zero;
-	}
-}
-
-template <typename T>
-bool Mathematics::AVector<T>
-::IsZero(const T epsilon) const  
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	auto length = Length();
-
-	if (epsilon < Math::FAbs(length))
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
-
-template <typename T>
-bool Mathematics::AVector<T>
-::IsNormalize(const T epsilon) const  
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	auto length = Length();
-
-	if (epsilon < Math::FAbs(length - Math::sm_One))
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
-
-template <typename T>
-bool Mathematics
-::Approximate(const AVector<T>& lhs, const AVector<T>& rhs,
-			  const T epsilon)
-{
-	return Math<T>::FAbs(lhs[0] - rhs[0]) <= epsilon &&
-		   Math<T>::FAbs(lhs[1] - rhs[1]) <= epsilon &&
-		   Math<T>::FAbs(lhs[2] - rhs[2]) <= epsilon;
-}
-
-template <typename T>
-bool Mathematics
-	::Approximate(const AVector<T>& lhs, const AVector<T>& rhs)
-{
-	return Approximate(lhs, rhs, Math<T>::sm_ZeroTolerance);
-}
-
-template <typename T>
-T Mathematics
-	::Dot(const AVector<T>& lhs, const AVector<T>& rhs)  
-{
-	return lhs[0] * rhs[0] + lhs[1] * rhs[1] + lhs[2] * rhs[2];
-}
-
-template <typename T>
-const Mathematics::AVector<T>
-Mathematics
-	::Cross(const AVector<T>& lhs, const AVector<T>& rhs)
-{
-	return AVector<T> {lhs[1] * rhs[2] - lhs[2] * rhs[1], lhs[2] * rhs[0] - lhs[0] * rhs[2], lhs[0] * rhs[1] - lhs[1] * rhs[0] };
-}
-
-template <typename T>
-const Mathematics::AVector<T> Mathematics
-	::UnitCross(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon)
-{
-	auto cross = Cross(lhs, rhs);
-
-	cross.Normalize(epsilon);
-
-	return cross;
-}
-
-template <typename T>
-const Mathematics::AVector<T> Mathematics
-	::UnitCross(const AVector<T>& lhs, const AVector<T>& rhs)
-{
-	return UnitCross(lhs, rhs, Math<T>::sm_ZeroTolerance);
-}
-
-template <typename T>
-const Mathematics::AVectorOrthonormalize<T>	Mathematics
-	::Orthonormalize(const AVector<T>& lhs, const AVector<T>& mhs, const AVector<T>& rhs, const T epsilon)
-{
-	// 如果输入向量v0、v1和v2，则Gram-Schmidt正交向量产生矢量u0、u1和u2如下，
-	//   u0 = v0 / |v0|
-	//   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
-	//   u2 = (v2 - (u0 * v2)u0 - (u1 * v2)u1) / 
-	//        |v2 - (u0 * v2)u0 - (u1 * v2)u1|
-	//
-	// 其中|A|表示向量A的长度和A * B表示向量A和B的点积
-
-	return AVectorOrthonormalize<T>{ lhs, mhs, rhs, epsilon };
-}
-
-template <typename T>
-const Mathematics::AVectorOrthonormalize<T> Mathematics
-	::Orthonormalize(const std::vector<AVector<T> >& vectors, const T epsilon)
-{
-	MATHEMATICS_ASSERTION_0(vectors.size() == 3, "vectors的大小错误！");
-
-	return AVectorOrthonormalize<T>{ vectors, epsilon };
-}
-
-
-template <typename T>
-const Mathematics::AVectorOrthonormalize<T>	Mathematics
-	::Orthonormalize(const AVector<T>& lhs, const AVector<T>& mhs, const AVector<T>& rhs)
-{
-	return Orthonormalize(lhs, mhs, rhs, Math<T>::sm_ZeroTolerance);
-}
-
-template <typename T>
-const Mathematics::AVectorOrthonormalize<T> Mathematics
-	::Orthonormalize(const std::vector<AVector<T> >& vectors)
-{
-	MATHEMATICS_ASSERTION_0(vectors.size() == 3, "vectors的大小错误！");
-
-	return Orthonormalize(vectors, Math<T>::sm_ZeroTolerance);
-}
-
-template <typename T>
-const Mathematics::AVectorOrthonormalBasis<T> Mathematics
-	::GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, const T epsilon)
-{
-	MATHEMATICS_ASSERTION_0(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
-
-	return AVectorOrthonormalBasis<T>(nonzeroVector, false, epsilon);
-}
-
-template <typename T>
-const Mathematics::AVectorOrthonormalBasis<T> Mathematics
-	::GenerateOrthonormalBasis(const AVector<T>& nonzeroVector)
-{
-	return GenerateOrthonormalBasis(nonzeroVector, Math<T>::sm_ZeroTolerance);
-}
-
-template <typename T>
-const Mathematics::AVectorOrthonormalBasis<T> Mathematics
-	::GenerateComplementBasis(const AVector<T>& unitVector, const T epsilon)
-{
-	MATHEMATICS_ASSERTION_0(unitVector.IsNormalize(epsilon), "输入必须是单位向量！");
-
-	return AVectorOrthonormalBasis<T>(unitVector, true, epsilon);
-}
-
-template <typename T>
-const Mathematics::AVectorOrthonormalBasis<T> Mathematics
-	::GenerateComplementBasis(const AVector<T>& unitVector)
-{
-	return  GenerateComplementBasis(unitVector, Math<T>::sm_ZeroTolerance);
-}
-
-template <typename T>
-std::ostream& Mathematics
-	::operator<<(std::ostream& outFile, const AVector<T>& vector)
-{
-	outFile << vector[0] << "　" << vector[1] << "　" << vector[2];
-
-	return outFile;
-}
-
-#endif // MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
+#endif  // MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H

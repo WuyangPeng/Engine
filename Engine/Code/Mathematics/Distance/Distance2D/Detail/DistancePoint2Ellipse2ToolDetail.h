@@ -14,7 +14,7 @@
 template <typename Real>
 Mathematics::DistancePoint2Ellipse2Tool<Real>
 	::DistancePoint2Ellipse2Tool(Real firstExtent, Real secondExtent, const Vector2D& vector, Real zeroThreshold)
-	:m_Extent{ firstExtent,secondExtent }, m_InputVector{ vector }, m_OutputVector{}, m_SquaredDistance{ Math<Real>::sm_Zero }, m_ZeroThreshold{ zeroThreshold }
+	:m_Extent{ firstExtent,secondExtent }, m_InputVector{ vector }, m_OutputVector{}, m_SquaredDistance{ Math<Real>::GetValue(0) }, m_ZeroThreshold{ zeroThreshold }
 {
 	ComputeSquaredDistance();
 
@@ -27,7 +27,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>
 	::ComputeSquaredDistance()
 {
 	// 确定m_InputVector的反射到第一象限。
-	bool reflect[2]{ m_InputVector.GetXCoordinate() < Math<Real>::sm_Zero,m_InputVector.GetYCoordinate() < Math<Real>::sm_Zero };
+	bool reflect[2]{ m_InputVector.GetXCoordinate() < Math<Real>::GetValue(0),m_InputVector.GetYCoordinate() < Math<Real>::GetValue(0) };
 
 	// 确定递减辐度轴顺序。
 	int permute[2]{};
@@ -105,11 +105,11 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>
 							extentMultiplyQueryPoint[1] / (middleT + extentSquared[1]) };
 				auto lenghtSquaredMinusOne = Vector2DTools<Real>::VectorMagnitudeSquared(r) - static_cast<Real>(1);
 
-				if (Math<Real>::sm_Zero < lenghtSquaredMinusOne)
+				if (Math<Real>::GetValue(0) < lenghtSquaredMinusOne)
 				{
 					beginT = middleT;
 				}
-				else if (lenghtSquaredMinusOne < Math<Real>::sm_Zero)
+				else if (lenghtSquaredMinusOne < Math<Real>::GetValue(0))
 				{
 					endT = middleT;
 				}
@@ -126,7 +126,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>
 		}
 		else  // y0 == 0
 		{
-			m_OutputVector[0] = Math<Real>::sm_Zero;
+			m_OutputVector[0] = Math<Real>::GetValue(0);
 			m_OutputVector[1] = extent[1];
 			Real difference = queryPoint[1] - extent[1];
 			m_SquaredDistance = difference * difference;
@@ -152,7 +152,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>
 			// 最近的椭圆点有m_OutputVector.y == 0，
 			// 在域边界间隔(x0/e0)^2 = 1。			 
 			m_OutputVector[0] = extent[0];
-			m_OutputVector[1] = Math<Real>::sm_Zero;
+			m_OutputVector[1] = Math<Real>::GetValue(0);
 			auto difference = queryPoint[0] - extent[0];
 			m_SquaredDistance = difference * difference;
 		}
@@ -164,7 +164,7 @@ template <typename Real>
 bool Mathematics::DistancePoint2Ellipse2Tool<Real>
 	::IsValid() const noexcept
 {
-	if (Math<Real>::sm_Zero <= m_SquaredDistance)
+	if (Math<Real>::GetValue(0) <= m_SquaredDistance)
 		return true;
 	else
 		return false;

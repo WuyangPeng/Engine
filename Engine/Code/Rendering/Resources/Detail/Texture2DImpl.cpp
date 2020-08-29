@@ -281,21 +281,22 @@ void Rendering::Texture2DImpl
     ::GenerateNextMipmap (int width, int height, const char* texels,int widthNext, int heightNext, char* texelsNext)
 {
     // 用于临时存储生成的mipmaps。
-	vector<FloatColour> colour(width * height);
-    
-const	auto format = GetFormat();
+	//vector<FloatColour> colour(width * height);
+    texelsNext;
+    texels;
+    const auto format = GetFormat();
     
 	// 像素从原生格式转换为32位RGBA。
-	auto fromFunction = ColourConvertFrom::sm_FromFunction[System::EnumCastUnderlying(format)];
+    auto fromFunction = ColourConvertFrom::GetConvertFromFunction(format);
 
 	// 像素从32位RGBA纹理转换为本机格式。
-	auto toFunction = ColourConvertTo::sm_ToFunction[System::EnumCastUnderlying(format)];
+    auto toFunction = ColourConvertTo::GetConvertToFunction(format);
     
     if(fromFunction != nullptr && toFunction != nullptr)
     {
         const auto numTexels = width * height;
-        
-        fromFunction(numTexels, texels, &colour[0]);
+        vector<char> fromVector;  // 复制texels数组
+        auto colour = fromFunction(fromVector);
         
 		// 就地创建下一个miplevel。
         for (auto heightIndex = 0; heightIndex < heightNext; ++heightIndex)
@@ -320,7 +321,7 @@ const	auto format = GetFormat();
 
 	const auto numTexelsNext = widthNext * heightNext;
         
-        toFunction(numTexelsNext,  &colour[0], texelsNext);
+       auto result = toFunction(colour);
     }  
 }
 

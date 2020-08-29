@@ -42,12 +42,12 @@ void Mathematics::StaticFindIntersectorLine3Sphere3<Real>
 	auto a1 = Vector3DTools::DotProduct(mLine.GetDirection(), diff);
 	auto discr = a1 * a1 - a0;
 
-	if (discr < Math<Real>::sm_Zero)
+	if (discr < Math<Real>::GetZero())
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
 		mQuantity = 0;
 	}
-	else if (discr >= Math::sm_ZeroTolerance)
+	else if (discr >= Math::GetZeroTolerance())
 	{
 		auto root = Math::Sqrt(discr);
 		mLineParameter[0] = -a1 - root;

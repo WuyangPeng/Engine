@@ -140,7 +140,7 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>
 	Quaternion<Real> lhsQuaternion{ lhsRotationColumn };
 	Quaternion<Real> rhsQuaternion{ rhsRotationColumn };
  
-	if (Dot(lhsQuaternion,rhsQuaternion) < Math<Real>::sm_Zero)
+	if (Dot(lhsQuaternion,rhsQuaternion) < Math<Real>::GetValue(0))
     {
 		rhsQuaternion = -rhsQuaternion;
     }

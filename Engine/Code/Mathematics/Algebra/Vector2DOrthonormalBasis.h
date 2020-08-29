@@ -29,7 +29,7 @@ namespace Mathematics
 		using Vector2DTools = Vector2DTools<Real>;
 
 	public:
-		explicit Vector2DOrthonormalBasis(const Vector2D& nonzeroVector, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit Vector2DOrthonormalBasis(const Vector2D& nonzeroVector, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

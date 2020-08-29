@@ -27,13 +27,13 @@ Mathematics::Ellipsoid3<Real> Mathematics
     // we actually build an ellipse.
     for (auto i = 0; i < 3; ++i)
     {
-        if (diag[i] < Math<Real>::sm_Zero)
+        if (diag[i] < Math<Real>::GetValue(0))
         {
             diag[i] = -diag[i];
         }
-        if (diag[i] < Math<Real>::sm_ZeroTolerance)
+        if (diag[i] < Math<Real>::GetZeroTolerance())
         {
-            diag[i] = Math<Real>::sm_ZeroTolerance;
+            diag[i] = Math<Real>::GetZeroTolerance();
         }
     }
 
@@ -48,7 +48,7 @@ Mathematics::Ellipsoid3<Real> Mathematics
     // If the maximum value of Q(X[i]) for all input points is V^2, then a
     // bounding ellipsoid is Q(X) = V^2 since Q(X[i]) <= V^2 for all i.
 
-	auto maxValue = Math<Real>::sm_Zero;
+	auto maxValue = Math<Real>::GetValue(0);
     for (auto i = 0u; i < points.size(); ++i)
     {
 		auto diff = points[i] - box.GetCenter();
@@ -115,7 +115,7 @@ const Mathematics::Ellipsoid3<Real>  Mathematics
 
 	Quaternion<Real> q0{ rotationColumn0 };
 	Quaternion<Real> q1{ rotationColumn1 };
-    if (Dot(q0,q1) < Math<Real>::sm_Zero)
+    if (Dot(q0,q1) < Math<Real>::GetValue(0))
     {
         q1 = -q1;
     }

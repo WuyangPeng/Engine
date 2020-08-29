@@ -10,7 +10,9 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "SingleCurve3.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Mathematics
 {
 	template <typename Real>
@@ -48,5 +50,5 @@ namespace Mathematics
 	using BezierCurve3f = BezierCurve3<float>;
 	using BezierCurve3d = BezierCurve3<double>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE3_H

@@ -110,12 +110,12 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 	// 计算系数 r0 = r00+r02*z^2.
 	Polynomial<Real> r0{ 2 };
 	r0[0] = b0 * b0;
-	r0[1] = Math::sm_Zero;
+	r0[1] = Math::GetValue(0);
 	r0[2] = b3 * b3 - b0 * b0;
 
 	// 计算多项式 r1 = r11 * z.
 	Polynomial<Real> r1{ 1 };
-	r1[0] = Math::sm_Zero;
+	r1[0] = Math::GetValue(0);
 	r1[1] = static_cast<Real>(2) * b0 * b3;
 
 	// 计算多项式 g0 = g00 + g01 * z + g02 * z^2 + g03 * z^3 + g04 * z^4.
@@ -169,15 +169,15 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 		auto g0cs1 = g0(rhsCosValue);
 		auto g1cs1 = g1(rhsCosValue);
 		auto product = g0cs1 * g1cs1;
-		if (Math::sm_Zero < product)
+		if (Math::GetValue(0) < product)
 		{
 			rhsSinValue = -rhsSinValue;
 		}
-		else if (product < Math::sm_Zero)
+		else if (product < Math::GetValue(0))
 		{
 			// rhsSinValue已经有正确的符号
 		}
-		else if (!Math::Approximate(g1cs1, Math::sm_Zero, this->GetZeroThreshold()))
+		else if (!Math::Approximate(g1cs1, Math::GetValue(0), this->GetZeroThreshold()))
 		{
 			// g0 == 0.0
 			// assert( rhsSinValue == 0.0 );
@@ -227,7 +227,7 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 		}
 	}
 
-	return DistanceResult{ minSquaredDistance, Math::sm_Zero, lhsClosestPoint,rhsClosestPoint };
+	return DistanceResult{ minSquaredDistance, Math::GetValue(0), lhsClosestPoint,rhsClosestPoint };
 }
 
 template <typename Real>

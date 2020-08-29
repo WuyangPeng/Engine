@@ -44,18 +44,18 @@ void Mathematics::StaticFindIntersectorRay2Circle2<Real>
 		// Reduce root count if line-circle intersections are not on ray.
 		if (mQuantity == 1)
 		{
-			if (t[0] < Math<Real>::sm_Zero)
+			if (t[0] < Math<Real>::GetZero())
 			{
 				mQuantity = 0;
 			}
 		}
 		else
 		{
-			if (t[1] < Math<Real>::sm_Zero)
+			if (t[1] < Math<Real>::GetZero())
 			{
 				mQuantity = 0;
 			}
-			else if (t[0] < Math<Real>::sm_Zero)
+			else if (t[0] < Math<Real>::GetZero())
 			{
 				mQuantity = 1;
 				t[0] = t[1];

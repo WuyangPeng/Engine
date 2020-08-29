@@ -6,7 +6,7 @@
 
 #include "Physics/PhysicsExport.h"
 
-#include "BoundTreeSplitTrianglesImpl.h" 
+#include "BoundTreeSplitTrianglesImpl.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
@@ -16,10 +16,11 @@
 
 using std::vector;
 #include "System/Helper/PragmaWarning.h"
+#include <algorithm>
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446) 
 #include SYSTEM_WARNING_DISABLE(26486)
-Physics::BoundTreeSplitTrianglesImpl
+Physics::BoundTreeSplitTrianglesImpl 
 	::BoundTreeSplitTrianglesImpl(const Centroids& centroids, int beginIndex,int endIndex, const Split& inSplit, const APoint& origin, const AVector& direction)
 	:m_FirstOutSplitIndex{ 0 }, m_SecondOutSplitIndex{ 0 }, m_OutSplit(inSplit.size())
 {
@@ -73,14 +74,14 @@ void Physics::BoundTreeSplitTrianglesImpl
 	for (int i = beginIndex; i <= endIndex; ++i)
     {
             const int triangle = inSplit[i];
-		AVector difference = centroids[triangle] - origin;
+			const AVector difference = centroids[triangle] - origin;
 		info.push_back(BoundTreeProjectionInfo(triangle, Dot(direction, difference)));	
     }
 
 	PHYSICS_ASSERTION_2(quantity == static_cast<int>(info.size()),"BoundTreeProjectionInfo大小错误。");
 	  
 	// 通过排序查找投影的中值。
-    sort(info.begin(), info.end());
+    std::sort(info.begin(), info.end());
         const int median = (quantity - 1) / 2;
 
     // 用中间值分隔三角形。

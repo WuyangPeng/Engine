@@ -11,7 +11,7 @@
 
 #include "AlgebraFwd.h"
 #include "Flags/MatrixFlags.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
@@ -114,10 +114,10 @@ namespace Mathematics
         void MakeRotation(const AVector& axis, Real angle);  // Real
 
         const Matrix Transpose() const noexcept;  // M^T
-        const Matrix Inverse(const Real epsilon = Math::sm_ZeroTolerance) const;  // M^{-1}
+        const Matrix Inverse(const Real epsilon = Math::GetZeroTolerance()) const;  // M^{-1}
         const Matrix Adjoint() const noexcept;  // M^{adj}
 
-        const Matrix Invert3x3(const Real epsilon = Math::sm_ZeroTolerance) const;
+        const Matrix Invert3x3(const Real epsilon = Math::GetZeroTolerance()) const;
 
         Real Determinant() const noexcept;  // det(M)
 

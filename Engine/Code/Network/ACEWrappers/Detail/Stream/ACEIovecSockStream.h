@@ -24,7 +24,7 @@ namespace Network
 	public:
 		ACEIovecSockStream(); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		int Send(const MessageBufferSharedPtr& messageBuffer) override;
 		void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;

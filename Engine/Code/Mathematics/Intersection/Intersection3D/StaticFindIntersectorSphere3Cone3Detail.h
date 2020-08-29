@@ -49,7 +49,7 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>
 	auto dot = Vector3DTools::DotProduct(diff,mCone.GetAxis());
 	auto dotSqr = dot*dot;
 	auto cosSqr = mCone.GetCosAngle()*mCone.GetCosAngle();
-    if (dotSqr >= lenSqr*cosSqr && dot > Math<Real>::sm_Zero)
+    if (dotSqr >= lenSqr*cosSqr && dot > Math<Real>::GetZero())
     {
         // Sphere center is inside cone, so sphere and cone intersect.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -83,7 +83,7 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>
 	auto tmp = mCone.GetSinAngle() / uLen;
 	mPoint = t*(mCone.GetCosAngle()*mCone.GetAxis() + tmp*B);
 
-	if (discr >= Math<Real>::sm_Zero && test >= Math<Real>::sm_Zero)
+	if (discr >= Math<Real>::GetZero() && test >= Math<Real>::GetZero())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}

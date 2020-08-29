@@ -22,7 +22,7 @@ namespace Network
     public:
         NullSockStream() noexcept;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         int Send(const MessageBufferSharedPtr& messageBuffer) noexcept override;
         int Receive(const MessageBufferSharedPtr& messageBuffer) noexcept override;

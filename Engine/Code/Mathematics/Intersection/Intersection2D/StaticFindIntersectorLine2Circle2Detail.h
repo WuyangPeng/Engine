@@ -79,14 +79,14 @@ bool Mathematics::StaticFindIntersectorLine2Circle2<Real>
 	auto a0 = Vector2DTools::VectorMagnitudeSquared(diff) - radius * radius;
 	auto a1 = Vector2DTools::DotProduct(direction, diff);
 	auto discr = a1 * a1 - a0;
-	if (discr > Math::sm_ZeroTolerance)
+	if (discr > Math::GetZeroTolerance())
 	{
 		rootCount = 2;
 		discr = Math::Sqrt(discr);
 		t[0] = -a1 - discr;
 		t[1] = -a1 + discr;
 	}
-	else if (discr < -Math::sm_ZeroTolerance)
+	else if (discr < -Math::GetZeroTolerance())
 	{
 		rootCount = 0;
 	}

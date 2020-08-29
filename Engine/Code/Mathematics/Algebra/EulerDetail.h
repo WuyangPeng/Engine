@@ -12,7 +12,7 @@
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_EULER_DETAIL)
 
 #include "AlgebraTraits.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -31,12 +31,12 @@ template <typename Real>
 bool Mathematics::Euler<Real>
 	::IsValid() const noexcept
 {
-	if (-Math::sm_PI <= m_X0Angle && m_X0Angle <= Math::sm_PI &&
-		-Math::sm_PI <= m_Y0Angle && m_Y0Angle <= Math::sm_PI &&
-		-Math::sm_PI <= m_Z0Angle && m_Z0Angle <= Math::sm_PI &&
-		-Math::sm_PI <= m_X1Angle && m_X1Angle <= Math::sm_PI &&
-		-Math::sm_PI <= m_Y1Angle && m_Y1Angle <= Math::sm_PI &&
-		-Math::sm_PI <= m_Z1Angle && m_Z1Angle <= Math::sm_PI)
+	if (-Math::GetPI() <= m_X0Angle && m_X0Angle <= Math::GetPI() &&
+		-Math::GetPI() <= m_Y0Angle && m_Y0Angle <= Math::GetPI() &&
+		-Math::GetPI() <= m_Z0Angle && m_Z0Angle <= Math::GetPI() &&
+		-Math::GetPI() <= m_X1Angle && m_X1Angle <= Math::GetPI() &&
+		-Math::GetPI() <= m_Y1Angle && m_Y1Angle <= Math::GetPI() &&
+		-Math::GetPI() <= m_Z1Angle && m_Z1Angle <= Math::GetPI())
 	{
 		return true;
 	}

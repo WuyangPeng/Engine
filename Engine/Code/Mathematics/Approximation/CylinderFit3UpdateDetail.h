@@ -22,7 +22,7 @@
 template <typename Real>
 Mathematics::CylinderFit3Update<Real>
 	::CylinderFit3Update(const Points& points, const Vector3D& guessCenter, const Vector3D& guessAxis, const Real epsilon)
-	:m_Points{ points }, m_InverseRadiusSqrare{ Math::sm_One }, m_Axis{ guessAxis }, m_Center{ guessCenter },
+	:m_Points{ points }, m_InverseRadiusSqrare{ Math::GetValue(1) }, m_Axis{ guessAxis }, m_Center{ guessCenter },
 	 m_Exactly{ Math::sm_MaxReal }, m_Epsilon{ epsilon }, m_UpdateData{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_8;
@@ -63,8 +63,8 @@ template <typename Real>
 void Mathematics::CylinderFit3Update<Real>
 	::UpdateInverseRadiusSqrare()
 {
-	auto deltaCrossAxisLengthSquaredSum = Math::sm_Zero;
-	auto deltaCrossAxisLengthQuarticSum = Math::sm_Zero;
+	auto deltaCrossAxisLengthSquaredSum = Math::GetValue(0);
+	auto deltaCrossAxisLengthQuarticSum = Math::GetValue(0);
 
 	for (const auto& data : m_UpdateData)
 	{
@@ -76,7 +76,7 @@ void Mathematics::CylinderFit3Update<Real>
 	m_InverseRadiusSqrare = deltaCrossAxisLengthSquaredSum / deltaCrossAxisLengthQuarticSum;
 	m_Exactly = static_cast<Real>(1) - m_InverseRadiusSqrare * deltaCrossAxisLengthSquaredSum / static_cast<Real>(m_UpdateData.size());
 
-	MATHEMATICS_ASSERTION_2(Math::sm_Zero <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
+	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
 }
 
 // private
@@ -86,8 +86,8 @@ void Mathematics::CylinderFit3Update<Real>
 {
 	// 计算的最快下降的方向。     
 	Vector3D descentDirection{ Vector3D::sm_Zero };
-	auto aMean = Math::sm_Zero;
-	auto aaMean = Math::sm_Zero;
+	auto aMean = Math::GetValue(0);
+	auto aaMean = Math::GetValue(0);
 
 	for (const auto& data : m_UpdateData)
 	{
@@ -105,17 +105,17 @@ void Mathematics::CylinderFit3Update<Real>
 	if (descentDirection.IsZero(m_Epsilon))
 	{
 		m_Exactly = aaMean;
-		MATHEMATICS_ASSERTION_2(Math::sm_Zero <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
+		MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
 
 		return;
 	}
 
 	// 计算用于最快下降的线的四次多项式。
-	auto abMean = Math::sm_Zero;
-	auto acMean = Math::sm_Zero;
-	auto bbMean = Math::sm_Zero;
-	auto bcMean = Math::sm_Zero;
-	auto ccMean = Math::sm_Zero;
+	auto abMean = Math::GetValue(0);
+	auto acMean = Math::GetValue(0);
+	auto bbMean = Math::GetValue(0);
+	auto bcMean = Math::GetValue(0);
+	auto ccMean = Math::GetValue(0);
 	for (const auto& data : m_UpdateData)
 	{
 		auto delta = data.GetDelta();
@@ -149,7 +149,7 @@ void Mathematics::CylinderFit3Update<Real>
 	polynomialRoots.FindAlgebraic(derivativePolynomial[0], derivativePolynomial[1], derivativePolynomial[2], derivativePolynomial[3]);
 	auto count = polynomialRoots.GetCount();
 
-	auto min = polynomial(Math::sm_Zero);
+	auto min = polynomial(Math::GetValue(0));
 	auto minIndex = -1;
 	for (auto i = 0; i < count; ++i)
 	{
@@ -162,7 +162,7 @@ void Mathematics::CylinderFit3Update<Real>
 	}
 
 	m_Exactly = min;
-	MATHEMATICS_ASSERTION_2(Math::sm_Zero <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
+	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
 
 	if (0 <= minIndex)
 	{
@@ -182,8 +182,8 @@ void Mathematics::CylinderFit3Update<Real>
 
 	// 计算的最快下降的方向。    
 	Vector3D descentDirection;
-	auto aMean = Math::sm_Zero;
-	auto aaMean = Math::sm_Zero;
+	auto aMean = Math::GetValue(0);
+	auto aaMean = Math::GetValue(0);
 
 	for (const auto& data : m_UpdateData)
 	{
@@ -204,7 +204,7 @@ void Mathematics::CylinderFit3Update<Real>
 	if (descentDirection.IsZero(m_Epsilon))
 	{
 		m_Exactly = aaMean;
-		MATHEMATICS_ASSERTION_2(Math::sm_Zero <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
+		MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
 
 		return;
 	}
@@ -212,9 +212,9 @@ void Mathematics::CylinderFit3Update<Real>
 	// 计算用于最快下降的线的四次多项式。
 	auto descentDirectionCrossAxis = Vector3DToolsd::CrossProduct(descentDirection, m_Axis);
 	auto c = Vector3DTools<Real>::VectorMagnitude(descentDirectionCrossAxis) * inverseNumPoints * m_InverseRadiusSqrare;
-	auto bMean = Math::sm_Zero;
-	auto abMean = Math::sm_Zero;
-	auto bbMean = Math::sm_Zero;
+	auto bMean = Math::GetValue(0);
+	auto abMean = Math::GetValue(0);
+	auto bbMean = Math::GetValue(0);
 
 	for (const auto& data : m_UpdateData)
 	{
@@ -242,7 +242,7 @@ void Mathematics::CylinderFit3Update<Real>
 								  derivativePolynomial[2], derivativePolynomial[3]);
 	auto count = polynomialRoots.GetCount();
 
-	auto min = polynomial(Math::sm_Zero);
+	auto min = polynomial(Math::GetValue(0));
 	auto minIndex = -1;
 	for (auto i = 0; i < count; ++i)
 	{
@@ -255,7 +255,7 @@ void Mathematics::CylinderFit3Update<Real>
 	}
 
 	m_Exactly = min;
-	MATHEMATICS_ASSERTION_2(Math::sm_Zero <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
+	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "误差值错误！");
 
 	if (0 <= minIndex)
 	{
@@ -268,7 +268,7 @@ template <typename Real>
 bool Mathematics::CylinderFit3Update<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_InverseRadiusSqrare && Math::sm_Zero <= m_Exactly && Math::sm_Zero <= m_Epsilon && m_Axis.IsNormalize(m_Epsilon))
+	if (Math::GetValue(0) <= m_InverseRadiusSqrare && Math::GetValue(0) <= m_Exactly && Math::GetValue(0) <= m_Epsilon && m_Axis.IsNormalize(m_Epsilon))
 	{
 		return true;
 	}

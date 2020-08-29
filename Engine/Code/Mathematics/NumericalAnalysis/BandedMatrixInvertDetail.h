@@ -40,11 +40,11 @@ void Mathematics::BandedMatrixInvert<Real>
 		{
 			if (row != col)
 			{
-				m_Output(row, col) = Math::sm_Zero;
+				m_Output(row, col) = Math::GetValue(0);
 			}
 			else
 			{
-				m_Output(row, row) = Math::sm_One;
+				m_Output(row, row) = Math::GetValue(1);
 			}
 		}
 	}
@@ -73,7 +73,7 @@ void Mathematics::BandedMatrixInvert<Real>
 		THROW_EXCEPTION(SYSTEM_TEXT("支点必须非零！"));
 	}
 
-	m_Matrix(reduceRow, reduceRow) = Math::sm_One;
+	m_Matrix(reduceRow, reduceRow) = Math::GetValue(1);
 
 	// 行相乘使对角线项为1一致
 	auto columnMin = reduceRow + 1;
@@ -104,7 +104,7 @@ void Mathematics::BandedMatrixInvert<Real>
 	for (auto row = rowMin; row < rowMax; ++row)
 	{
 		auto mult = m_Matrix(row, reduceRow);
-		m_Matrix(row, reduceRow) = Math::sm_Zero;
+		m_Matrix(row, reduceRow) = Math::GetValue(0);
 		for (auto column = columnMin; column < columnMax; ++column)
 		{
 			m_Matrix(row, column) -= mult * m_Matrix(reduceRow, column);
@@ -130,7 +130,7 @@ void Mathematics::BandedMatrixInvert<Real>
 	for (auto row = rowMax; rowMin <= row; --row)
 	{
 		auto mult = m_Matrix(row, reduceRow);
-		m_Matrix(row, reduceRow) = Math::sm_Zero;
+		m_Matrix(row, reduceRow) = Math::GetValue(0);
 		for (auto column = 0; column < m_Output.GetColumnsNumber(); ++column)
 		{
 			m_Output(row, column) -= mult * m_Output(reduceRow, column);
@@ -143,7 +143,7 @@ template <typename Real>
 bool Mathematics::BandedMatrixInvert<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_ZeroTolerance)
+	if (Math::GetValue(0) <= m_ZeroTolerance)
 	{
 		return true;
 	}

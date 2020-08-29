@@ -16,10 +16,10 @@
 template <typename Real>
 Mathematics::Vector2DInformation<Real>
 	::Vector2DInformation(const std::vector<Vector2D>& points, Real epsilon)
-	:m_Points{ points }, m_Epsilon{ epsilon }, m_Dimension{ -1 }, m_AABBPtr{}, m_MaxRange{ Math::sm_Zero }, m_Origin{},
+	:m_Points{ points }, m_Epsilon{ epsilon }, m_Dimension{ -1 }, m_AABBPtr{}, m_MaxRange{ Math::GetValue(0) }, m_Origin{},
 	 m_DirectionX{}, m_DirectionY{}, m_MinExtreme{ -1 }, m_MaxExtreme{ -1 }, m_PerpendicularExtreme{ -1 }, m_ExtremeCCW{ false }
 {
-	MATHEMATICS_ASSERTION_0(0 < m_Points.size() && Math::sm_Zero <= m_Epsilon, "无效输入在Vector2DInformation\n");
+	MATHEMATICS_ASSERTION_0(0 < m_Points.size() && Math::GetValue(0) <= m_Epsilon, "无效输入在Vector2DInformation\n");
 
 	m_IndexMin[0] = 0;
 	m_IndexMin[1] = 0;
@@ -119,8 +119,8 @@ bool Mathematics::Vector2DInformation<Real>
 		m_MaxExtreme = m_MinExtreme;
 		m_PerpendicularExtreme = m_MinExtreme;
 
-		m_DirectionX[0] = Math::sm_Zero;
-		m_DirectionY[1] = Math::sm_Zero;
+		m_DirectionX[0] = Math::GetValue(0);
+		m_DirectionY[1] = Math::GetValue(0);
 
 		return true;
 	}
@@ -136,7 +136,7 @@ bool Mathematics::Vector2DInformation<Real>
 	m_DirectionX.Normalize(m_Epsilon);
 	m_DirectionY = -Vector2DTools::GetPerp(m_DirectionX);
 
-	auto maxDistance = Math::sm_Zero;
+	auto maxDistance = Math::GetValue(0);
 	auto maxSign = NumericalValueSymbol::Zero;
 	m_PerpendicularExtreme = m_MinExtreme;
 	for (auto index = 0u; index < m_Points.size(); ++index)

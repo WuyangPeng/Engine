@@ -30,7 +30,7 @@ namespace Rendering
         IKGoal(IKGoal&&) = default;
         IKGoal& operator=(IKGoal&&) = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(IKGoal);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;

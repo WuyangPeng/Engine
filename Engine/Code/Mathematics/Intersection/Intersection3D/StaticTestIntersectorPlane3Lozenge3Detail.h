@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
 {
 	auto sDistMM = mPlane.DistanceTo(mLozenge.GetRectangle().GetMMCorner());
 	auto sDistPM = mPlane.DistanceTo(mLozenge.GetRectangle().GetPMCorner());
-    if (sDistMM*sDistPM <= Math<Real>::sm_Zero)
+    if (sDistMM*sDistPM <= Math<Real>::GetValue(0))
     {
         // Two lozenge ends on opposite sides of the plane.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -45,7 +45,7 @@ void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
     }
 
 	Real sDistMP = mPlane.DistanceTo(mLozenge.GetRectangle().GetMPCorner());
-    if (sDistMM*sDistMP <= Math<Real>::sm_Zero)
+    if (sDistMM*sDistMP <= Math<Real>::GetValue(0))
     {
         // Two lozenge ends on opposite sides of the plane.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -53,7 +53,7 @@ void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
     }
 
 	auto sDistPP = mPlane.DistanceTo(mLozenge.GetRectangle().GetPPCorner());
-    if (sDistPM*sDistPP <= Math<Real>::sm_Zero)
+    if (sDistPM*sDistPP <= Math<Real>::GetValue(0))
     {
         // Two lozenge ends on opposite sides of the plane.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -78,16 +78,16 @@ bool Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
 	::LozengeIsCulled() const
 {
 	auto sDistMM = mPlane.DistanceTo(mLozenge.GetRectangle().GetMMCorner());
-    if (sDistMM < Math<Real>::sm_Zero)
+    if (sDistMM < Math<Real>::GetValue(0))
     {
 		auto sDistPM = mPlane.DistanceTo(mLozenge.GetRectangle().GetPMCorner());
-        if (sDistPM < Math<Real>::sm_Zero)
+        if (sDistPM < Math<Real>::GetValue(0))
         {
 			auto sDistMP = mPlane.DistanceTo(mLozenge.GetRectangle().GetMPCorner());
-            if (sDistMP < Math<Real>::sm_Zero)
+            if (sDistMP < Math<Real>::GetValue(0))
             {
 				auto sDistPP = mPlane.DistanceTo(mLozenge.GetRectangle().GetPPCorner());
-                if (sDistPP < Math<Real>::sm_Zero)
+                if (sDistPP < Math<Real>::GetValue(0))
                 {
                     // All four lozenge corners on negative side of plane.
                     if (sDistMM <= sDistPM)

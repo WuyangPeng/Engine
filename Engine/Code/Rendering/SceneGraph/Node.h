@@ -13,7 +13,9 @@
 #include "Culler.h"
 
 RENDERING_EXPORT_SHARED_PTR(NodeImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Node : public Spatial
@@ -28,7 +30,7 @@ namespace Rendering
         Node(Node&&) noexcept = default;
         Node& operator=(Node&&) noexcept = default;
         
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
+		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Node);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
@@ -65,5 +67,6 @@ namespace Rendering
 
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Sixth, Node); 
 }
+#include STSTEM_WARNING_POP
 
 #endif // RENDERING_SCENE_GRAPH_NODE_H

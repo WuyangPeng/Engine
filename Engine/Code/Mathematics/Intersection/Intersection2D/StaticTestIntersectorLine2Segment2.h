@@ -27,10 +27,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticTestIntersectorLine2Segment2(const Line2& line, const Segment2& segment, const Real dotThreshold = Math::sm_ZeroTolerance, const Real intervalThreshold = Math::sm_Zero);
+		StaticTestIntersectorLine2Segment2(const Line2& line, const Segment2& segment, const Real dotThreshold = Math::GetZeroTolerance(), const Real intervalThreshold = Math::sm_Zero);
 		virtual ~StaticTestIntersectorLine2Segment2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Line2 GetLine() const;
 		const Segment2 GetSegment() const;

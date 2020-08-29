@@ -34,7 +34,7 @@ namespace Mathematics
 		// 每当|y[i]| <= e[i]对于所有的i
 		Box2();
 		Box2(const Vector2D& center, const Vector2D& firstAxis, const Vector2D& secondAxis,
-			 const Real firstExtent, const Real secondExtent, const Real epsilon = Math::sm_ZeroTolerance);
+			 const Real firstExtent, const Real secondExtent, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

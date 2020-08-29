@@ -23,7 +23,7 @@ namespace CoreTools
 		WriteBufferIOImpl(int bytesTotal, char* buffer) noexcept;
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const char* GetBuffer() const noexcept override;
 

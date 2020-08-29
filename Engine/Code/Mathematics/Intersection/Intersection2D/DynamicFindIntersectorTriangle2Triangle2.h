@@ -28,7 +28,7 @@ namespace Mathematics
 
 	public:
 		DynamicFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax,
-												 const Vector2D& velocity0, const Vector2D& velocity1, const Real epsilon = Math::sm_ZeroTolerance);
+												 const Vector2D& velocity0, const Vector2D& velocity1, const Real epsilon = Math::GetZeroTolerance());
 
 		// Object access.
 		const Triangle2 GetTriangle0() const;

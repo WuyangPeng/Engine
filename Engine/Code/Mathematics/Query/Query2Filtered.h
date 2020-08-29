@@ -32,7 +32,7 @@ namespace Mathematics
 		Query2Filtered(const std::vector<Vector2D>& vertices, Real uncertainty);
 		 ~Query2Filtered();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 QueryType GetType() const override;
 

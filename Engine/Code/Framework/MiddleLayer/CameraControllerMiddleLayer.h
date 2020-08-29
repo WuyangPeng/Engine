@@ -25,7 +25,7 @@ namespace Framework
 	public:
 		explicit CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool KeyDown(int key, const WindowPoint& point) override;
 		bool SpecialKeyDown(int key, const WindowPoint& point) override;

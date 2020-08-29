@@ -16,7 +16,9 @@
 
 using std::move;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Framework
 {
 	static constexpr auto g_DefaultWidth = 1024;
@@ -205,3 +207,4 @@ void  Framework::PixelViewMiddleLayer
 
 	return m_Impl->Fill(x, y, foreColour, backColour);
 }
+#include STSTEM_WARNING_POP

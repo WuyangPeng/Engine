@@ -30,7 +30,7 @@ namespace Network
         ServerImpl(ServerImpl&&) noexcept = default;
         ServerImpl& operator=(ServerImpl&&) noexcept = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         ConfigurationStrategy GetConfigurationStrategy() const noexcept;
         bool RunServer();

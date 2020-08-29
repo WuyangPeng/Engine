@@ -69,8 +69,8 @@ namespace Rendering
         Transform& operator*= (const Transform& transform);
 
         const Matrix GetHomogeneousMatrix () const noexcept;
-        const Matrix GetInverseMatrix (float epsilon = Math::sm_ZeroTolerance) const;
-        const Transform GetInverseTransform (float epsilon = Math::sm_ZeroTolerance) const;
+        const Matrix GetInverseMatrix (float epsilon = Math::GetZeroTolerance()) const;
+        const Transform GetInverseTransform (float epsilon = Math::GetZeroTolerance()) const;
 
         static const Transform sm_Identity;
 

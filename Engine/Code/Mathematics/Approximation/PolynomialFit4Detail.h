@@ -53,7 +53,7 @@ void Mathematics::PolynomialFit4<Real>
 			for (auto xDegreeIndex = 0; xDegreeIndex <= xDegree; ++xDegreeIndex)
 			{
 				auto index = xDegreeIndex + xBound * (yDegreeIndex + yBound * zDegreeIndex);
-				inputVector[index] = Math<Real>::sm_Zero;
+				inputVector[index] = Math<Real>::GetValue(0);
 				for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
 				{
 					inputVector[index] += wSamples[samplesIndex] * xPower(samplesIndex, xDegreeIndex) *  yPower(samplesIndex, yDegreeIndex) * zPower(samplesIndex, zDegreeIndex);
@@ -66,7 +66,7 @@ void Mathematics::PolynomialFit4<Real>
 						for (auto innerXDegreeIndex = 0; innerXDegreeIndex <= xDegree; ++innerXDegreeIndex)
 						{
 							auto innerIndex = innerXDegreeIndex + xBound * (innerYDegreeIndex + yBound * innerZDegreeIndex);
-							auto sum = Math<Real>::sm_Zero;
+							auto sum = Math<Real>::GetValue(0);
 							for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
 							{
 								sum += xPower(samplesIndex, xDegreeIndex + innerXDegreeIndex) *

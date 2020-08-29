@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
@@ -81,7 +81,7 @@ namespace Mathematics
         // 4-tuple的长度的平方
         Real SquaredLength() const noexcept;
 
-        void Normalize(Real epsilon = Math::sm_ZeroTolerance);
+        void Normalize(Real epsilon = Math::GetZeroTolerance());
 
         // 适用于非零四元数
         const AQuaternion Inverse() const;
@@ -95,7 +95,7 @@ namespace Mathematics
         // 适用于单位长度四元数
         const AQuaternion Log() const noexcept;
 
-        bool IsNormalize(Real epsilon = Math::sm_ZeroTolerance) const;
+        bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const;
 
         // 由四元数旋转向量。
         const AVector Rotate(const AVector& vector) const;

@@ -21,7 +21,7 @@
     #include "CoreTools/Helper/MemoryMacro.h"
     #include "CoreTools/Helper/StreamMacro.h"
     #include "CoreTools/ObjectSystems/ObjectInterface.h"
-    #include "Mathematics/Base/Math.h"
+    #include "Mathematics/Base/MathDetail.h"
 
     #include "System/Helper/PragmaWarning.h"
     #include "CoreTools/ClassInvariant/Noexcept.h"
@@ -366,11 +366,11 @@ const Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column) con
     }
 
     // CholeskyFactor函数会将s_Dummy重复赋值为0。
-    static auto s_Dummy = Math::sm_Zero;
+    static auto s_Dummy = Math::GetValue(0);
 
-    MATHEMATICS_ASSERTION_1(Math::FAbs(s_Dummy) <= Math::sm_ZeroTolerance, "静态变量s_Dummy值被修改！s_Dummy值必须为零！");
+    MATHEMATICS_ASSERTION_1(Math::FAbs(s_Dummy) <= Math::GetZeroTolerance(), "静态变量s_Dummy值被修改！s_Dummy值必须为零！");
 
-    s_Dummy = Math::sm_Zero;
+    s_Dummy = Math::GetValue(0);
 
     return s_Dummy;
 }
@@ -403,7 +403,7 @@ void Mathematics::BandedMatrix<Real>::SetIdentity() noexcept
 
     for (auto i = 0; i < m_Size; ++i)
     {
-        m_DiagonalBand[i] = Math::sm_One;
+        m_DiagonalBand[i] = Math::GetValue(1);
     }
 
     for (auto i = 0; i < m_LowerBandsNumber; ++i)

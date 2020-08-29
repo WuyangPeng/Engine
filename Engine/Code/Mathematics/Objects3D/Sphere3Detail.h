@@ -33,7 +33,7 @@ template <typename Real>
 bool Mathematics::Sphere3<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_Radius)
+	if (Math::GetValue(0) <= m_Radius)
 		return true;
 	else
 		return false;

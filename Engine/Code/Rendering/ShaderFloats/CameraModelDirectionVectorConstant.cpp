@@ -45,7 +45,7 @@ void Rendering::CameraModelDirectionVectorConstant
  	
 	const auto worldDirectionVector = camera->GetDirectionVector();
 	const auto worldInverseMatrix = visual->GetWorldTransform().GetInverseMatrix();
-	auto modelDirectionVector = worldInverseMatrix * worldDirectionVector;
+        const auto modelDirectionVector = worldInverseMatrix * worldDirectionVector;
 
 	SetRegister(0, modelDirectionVector);
 }

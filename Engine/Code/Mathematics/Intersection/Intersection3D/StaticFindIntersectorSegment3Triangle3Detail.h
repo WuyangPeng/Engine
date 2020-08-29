@@ -51,11 +51,11 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>
     //   |Dot(D,N)|*t = -sign(Dot(D,N))*Dot(Q,N)
 	auto DdN = Vector3DTools::DotProduct(mSegment.GetDirection(),normal);
     Real sign;
-    if (DdN > Math::sm_ZeroTolerance)
+    if (DdN > Math::GetZeroTolerance())
     {
         sign = static_cast<Real>(1);
     }
-    else if (DdN < -Math::sm_ZeroTolerance)
+    else if (DdN < -Math::GetZeroTolerance())
     {
         sign = (Real)-1;
         DdN = -DdN;
@@ -70,10 +70,10 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>
     }
 
 	auto DdQxE2 = sign*Vector3DTools::DotProduct(mSegment.GetDirection(), Vector3DTools::CrossProduct(diff,edge2));
-    if (DdQxE2 >= Math<Real>::sm_Zero)
+    if (DdQxE2 >= Math<Real>::GetZero())
     {
 		Real DdE1xQ = sign*Vector3DTools::DotProduct(mSegment.GetDirection(), Vector3DTools::CrossProduct(edge1,diff));
-        if (DdE1xQ >= Math<Real>::sm_Zero)
+        if (DdE1xQ >= Math<Real>::GetZero())
         {
             if (DdQxE2 + DdE1xQ <= DdN)
             {

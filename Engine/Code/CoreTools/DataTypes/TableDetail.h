@@ -18,6 +18,7 @@
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26456)
 template <int Rows, int Columns, typename Type>
 CoreTools::Table<Rows, Columns, Type>::Table() noexcept
     : m_Entry{}

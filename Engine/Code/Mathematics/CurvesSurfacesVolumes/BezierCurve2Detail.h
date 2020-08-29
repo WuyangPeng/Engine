@@ -19,7 +19,7 @@
 template <typename Real>
 Mathematics::BezierCurve2<Real>
 	::BezierCurve2 (int degree, Vector2D<Real>* ctrlPoint)
-	:SingleCurve2<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }
+    : SingleCurve2<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1) }
 {
     MATHEMATICS_ASSERTION_0(degree >= 2, "The degree must be three or larger\n");
 

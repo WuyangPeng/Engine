@@ -27,7 +27,7 @@ namespace CoreTools
 		UnitTestSuiteReportOutputImpl(const std::string& timeDescribe, int borderLineLength, const OStreamShared& osPtr  );
 		 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void PrintTestName(const std::string& testName);
 		void PrintSuiteName(const std::string& suiteName);

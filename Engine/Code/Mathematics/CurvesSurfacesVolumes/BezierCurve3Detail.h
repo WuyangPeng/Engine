@@ -20,7 +20,7 @@
 template <typename Real>
 Mathematics::BezierCurve3<Real>
 	::BezierCurve3 (int degree, Vector3D<Real>* ctrlPoint)
-	:SingleCurve3<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }
+	:SingleCurve3<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1) }
 {
     MATHEMATICS_ASSERTION_0(degree >= 2, "The degree must be three or larger\n");
 

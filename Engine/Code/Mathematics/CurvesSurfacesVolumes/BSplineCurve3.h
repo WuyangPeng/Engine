@@ -11,7 +11,9 @@
 
 #include "SingleCurve3.h"
 #include "BSplineBasis.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Mathematics
 {
 	template <typename Real>
@@ -107,5 +109,5 @@ namespace Mathematics
 	using BSplineCurve3f = BSplineCurve3<float>;
 	using BSplineCurve3d = BSplineCurve3<double>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE3_H

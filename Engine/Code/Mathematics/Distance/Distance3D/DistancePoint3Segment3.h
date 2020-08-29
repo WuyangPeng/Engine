@@ -31,7 +31,7 @@ namespace Mathematics
 		DistancePoint3Segment3(const Vector3D& point, const Segment3& segment);
 		virtual ~DistancePoint3Segment3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector3D GetPoint() const;
 		const Segment3 GetSegment() const;

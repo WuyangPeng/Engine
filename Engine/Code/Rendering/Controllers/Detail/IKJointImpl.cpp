@@ -5,8 +5,9 @@
 // 引擎版本：0.0.0.3 (2019/07/23 13:49)
 
 #include "Rendering/RenderingExport.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "IKJointImpl.h"
+
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -25,13 +26,14 @@
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26496)
 using std::string;
 using std::vector;
 
 Rendering::IKJointImpl ::IKJointImpl() noexcept
     : m_Object{}, m_Goals{}
 {
-	Init();
+    Init(); 
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -55,8 +57,8 @@ void Rendering::IKJointImpl
 		m_MinTranslation[i] = -Mathematics::Mathf::sm_MaxReal;
 		m_MaxTranslation[i] = Mathematics::Mathf::sm_MaxReal;
 		m_AllowRotation[i] = false;
-		m_MinRotation[i] = -Mathematics::Mathf::sm_PI;
-		m_MaxRotation[i] = Mathematics::Mathf::sm_PI;
+		m_MinRotation[i] = -Mathematics::Mathf::GetPI();
+		m_MaxRotation[i] = Mathematics::Mathf::GetPI();
 	}
 }
 
@@ -232,19 +234,19 @@ const Rendering::IKJointImpl::AVector Rendering::IKJointImpl
 	const Rendering::Spatial* const parent = m_Object->GetParent();
 	if (parent != nullptr)
 	{
-		return parent->GetWorldTransform().GetRotate().GetColumn(System::EnumCastUnderlying(axisIndex));		 
+            return AVector{ parent->GetWorldTransform().GetRotate().GetColumn(System::EnumCastUnderlying(axisIndex)) };		 
 	}
 	else if (axisIndex == Mathematics::MatrixRotationAxis::X)
 	{
-		return AVector::sm_UnitX;
+		return Mathematics::Vectorf::g_UnitX;
 	}
 	else if (axisIndex == Mathematics::MatrixRotationAxis::Y)
 	{
-		return AVector::sm_UnitY;
+		return Mathematics::Vectorf::g_UnitY;
 	}
 	else  //  axisIndex == MatrixRotationAxis::Z
 	{
-		return AVector::sm_UnitZ;
+		return Mathematics::Vectorf::g_UnitZ;
 	}
 }
 
@@ -310,7 +312,7 @@ bool Rendering::IKJointImpl
 		denom += goal->GetWeight();
 	}
 
-	if (Mathematics::Mathf::FAbs(denom) <= Mathematics::Mathf::sm_ZeroTolerance)
+	if (Mathematics::Mathf::FAbs(denom) <= Mathematics::Mathf::GetZeroTolerance())
 	{
 		// 权重太小，没有转换。
 		return false;
@@ -384,7 +386,7 @@ bool Rendering::IKJointImpl
 		denom -= goal->GetWeight() * Dot(goalMinusPoint,axisCrossAxisCrossEffectorMinusPoint);
 	}
 
-	if (numer * numer + denom * denom <= Mathematics::Mathf::sm_ZeroTolerance)
+	if (numer * numer + denom * denom <= Mathematics::Mathf::GetZeroTolerance())
 	{
 		// 未定义 atan2,不旋转。
 		return false;
@@ -478,7 +480,7 @@ void Rendering::IKJointImpl
 	m_AllowTranslation[System::EnumCastUnderlying(axisIndex)] = allowTranslation;
 }
 
-void Rendering::IKJointImpl
+void Rendering::IKJointImpl 
 	::SetAllowRotation(MatrixRotationAxis axisIndex, bool allowRotation) 
 {
 	RENDERING_CLASS_IS_VALID_9;

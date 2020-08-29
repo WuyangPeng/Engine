@@ -32,8 +32,8 @@ Mathematics::Box2<Real>
 	::Box2()
 	:m_Center{}, m_Epsilon{}
 {
-	m_Extent[0] = Math::sm_Zero;
-	m_Extent[1] = Math::sm_Zero;
+	m_Extent[0] = Math::GetValue(0);
+	m_Extent[1] = Math::GetValue(0);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

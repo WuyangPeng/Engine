@@ -38,8 +38,8 @@ namespace Mathematics
 		int i0 = 0, i1 = quantity, i2 = 2 * quantity;
 		for (/**/; i0 < quantity; ++i0, ++i1, ++i2)
 		{
-			wrapAngles[i1][0] = wrapAngles[i0][0] + Math<Real>::sm_TwoPI;
-			wrapAngles[i2][0] = wrapAngles[i0][0] - Math<Real>::sm_TwoPI;
+			wrapAngles[i1][0] = wrapAngles[i0][0] + Math<Real>::GetTwoPI();
+			wrapAngles[i2][0] = wrapAngles[i0][0] - Math<Real>::GetTwoPI();
 			wrapAngles[i1][1] = wrapAngles[i0][1];
 			wrapAngles[i2][1] = wrapAngles[i0][1];
 			wrapF[i1] = wrapF[i0];
@@ -72,14 +72,14 @@ namespace Mathematics
 			}
 			else
 			{
-				theta = -Math<Real>::sm_PI;
-				phi = Math<Real>::sm_PI;
+				theta = -Math<Real>::GetPI();
+				phi = Math<Real>::GetPI();
 			}
 		}
 		else
 		{
-			theta = -Math<Real>::sm_PI;
-			phi = Math<Real>::sm_Zero;
+			theta = -Math<Real>::GetPI();
+			phi = Math<Real>::GetValue(0);
 		}
 	}
 

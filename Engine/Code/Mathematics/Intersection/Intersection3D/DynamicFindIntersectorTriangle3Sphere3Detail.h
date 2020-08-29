@@ -85,7 +85,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				if (inside[2])
 				{
 					// Triangle inside sphere.
-					SetContactTime(Math<Real>::sm_Zero);
+					SetContactTime(Math<Real>::GetZero());
 					this->SetIntersectionType(IntersectionType::Empty);
 					return;
 				}
@@ -136,7 +136,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 					{
 						this->SetIntersectionType(IntersectionType::Empty);
 					}
-					SetContactTime(Math<Real>::sm_Zero);
+					SetContactTime(Math<Real>::GetZero());
 					return;
 				}
 			}
@@ -173,7 +173,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 					{
 						this->SetIntersectionType(IntersectionType::Empty);
 					}
-					SetContactTime(Math<Real>::sm_Zero);
+					SetContactTime(Math<Real>::GetZero());
 					return;
 				}
 			}
@@ -191,7 +191,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 					{
 						this->SetIntersectionType(IntersectionType::Empty);
 					}
-					SetContactTime(Math<Real>::sm_Zero);
+					SetContactTime(Math<Real>::GetZero());
 					return;
 				}
 				else // !inside[2]
@@ -224,7 +224,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 		if (NdC > NdT)
 		{
 			// Positive side.
-			if (Vector3DTools::DotProduct(relVelocity, normal) >= Math<Real>::sm_Zero)
+			if (Vector3DTools::DotProduct(relVelocity, normal) >= Math<Real>::GetZero())
 			{
 				// Moving away, easy out.
 				this->SetIntersectionType(IntersectionType::Empty);
@@ -236,7 +236,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 		else
 		{
 			// Negative side.
-			if (Vector3DTools::DotProduct(relVelocity, normal) <= Math<Real>::sm_Zero)
+			if (Vector3DTools::DotProduct(relVelocity, normal) <= Math<Real>::GetZero())
 			{
 				// Moving away, easy out.
 				this->SetIntersectionType(IntersectionType::Empty);
@@ -334,7 +334,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 					{
 						this->SetIntersectionType(IntersectionType::Empty);
 					}
-					SetContactTime(Math<Real>::sm_Zero);
+					SetContactTime(Math<Real>::GetZero());
 					return;
 				}
 			}
@@ -370,7 +370,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 					{
 						this->SetIntersectionType(IntersectionType::Empty);
 					}
-					SetContactTime(Math<Real>::sm_Zero);
+					SetContactTime(Math<Real>::GetZero());
 					return;
 				}
 			}
@@ -387,7 +387,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 					{
 						this->SetIntersectionType(IntersectionType::Empty);
 					}
-					SetContactTime(Math<Real>::sm_Zero);
+					SetContactTime(Math<Real>::GetZero());
 					return;
 				}
 				else // !inside[2]
@@ -424,7 +424,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	if (Vector3DTools::VectorMagnitudeSquared(dist) < mSphere.GetRadius()*mSphere.GetRadius())
 	{
 		// Already intersecting that vertex.
-		SetContactTime(Math<Real>::sm_Zero);
+		SetContactTime(Math<Real>::GetZero());
 		return false;
 	}
 
@@ -432,7 +432,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	auto relVelocity = velocity1 - velocity0;
 
 	// Check for easy out.
-	if (Vector3DTools::DotProduct(relVelocity, dist) <= Math<Real>::sm_Zero)
+	if (Vector3DTools::DotProduct(relVelocity, dist) <= Math<Real>::GetZero())
 	{
 		// Moving away.
 		return false;

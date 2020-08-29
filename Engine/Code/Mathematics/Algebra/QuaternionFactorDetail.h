@@ -9,7 +9,7 @@
 
 #include "QuaternionFactor.h"
 #include "Quaternion.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -119,19 +119,19 @@ void Mathematics::QuaternionFactor<Real>
 
 	auto fLength = Math::Sqrt(a * a + b * b);
 
-	if (Math::sm_ZeroTolerance < fLength)
+	if (Math::GetZeroTolerance() < fLength)
 	{
 		auto sigma0 = a / fLength;
 		auto gamma0 = b / fLength;
 
-		if (Math::sm_Zero <= gamma0)
+		if (Math::GetValue(0) <= gamma0)
 		{
-			m_CosX = Math::Sqrt(static_cast<Real>(0.5) * (Math::sm_One + gamma0));
+			m_CosX = Math::Sqrt(static_cast<Real>(0.5) * (Math::GetValue(1) + gamma0));
 			m_SinX = static_cast<Real>(0.5) * sigma0 / m_CosX;
 		}
 		else
 		{
-			m_SinX = Math::Sqrt(static_cast<Real>(0.5) * (Math::sm_One - gamma0));
+			m_SinX = Math::Sqrt(static_cast<Real>(0.5) * (Math::GetValue(1) - gamma0));
 			m_CosX = static_cast<Real>(0.5) * sigma0 / m_SinX;
 		}
 
@@ -155,25 +155,25 @@ void Mathematics::QuaternionFactor<Real>
 	else
 	{
 		// 无穷多解。选择其中之一。
-		if (Math::sm_Zero < m_Quaternion[0] * m_Quaternion[2] + m_Quaternion[1] * m_Quaternion[3])
+		if (Math::GetValue(0) < m_Quaternion[0] * m_Quaternion[2] + m_Quaternion[1] * m_Quaternion[3])
 		{
 			// p = (p0,p1,p0,p1)
-			m_CosX = Math::sm_One;
-			m_SinX = Math::sm_Zero;
-			m_CosY = Math::sm_InverseSqrt2;
-			m_SinY = Math::sm_InverseSqrt2;
-			m_CosZ = Math::sm_Sqrt2 * m_Quaternion[0];
-			m_SinZ = Math::sm_Sqrt2 * m_Quaternion[1];
+			m_CosX = Math::GetValue(1);
+			m_SinX = Math::GetValue(0);
+			m_CosY = Math::GetInverseSqrt2();
+			m_SinY = Math::GetInverseSqrt2();
+			m_CosZ = Math::GetSqrt2() * m_Quaternion[0];
+			m_SinZ = Math::GetSqrt2() * m_Quaternion[1];
 		}
 		else
 		{
 			// p = (p0,p1,-p0,-p1)
-			m_CosX = Math::sm_One;
-			m_SinX = Math::sm_Zero;
-			m_CosY = Math::sm_InverseSqrt2;
-			m_SinY = -Math::sm_InverseSqrt2;
-			m_CosZ = Math::sm_Sqrt2 * m_Quaternion[0];
-			m_SinZ = -Math::sm_Sqrt2 * m_Quaternion[1];
+			m_CosX = Math::GetValue(1);
+			m_SinX = Math::GetValue(0);
+			m_CosY = Math::GetInverseSqrt2();
+			m_SinY = -Math::GetInverseSqrt2();
+			m_CosZ = Math::GetSqrt2() * m_Quaternion[0];
+			m_SinZ = -Math::GetSqrt2() * m_Quaternion[1];
 		}
 	}
 }

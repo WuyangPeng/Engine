@@ -328,7 +328,7 @@ const Rendering::BlendTransformControllerImpl::APoint Rendering::BlendTransformC
 			auto absS0 = Mathematics::Mathf::FAbs(s0);
 			auto absS1 = Mathematics::Mathf::FAbs(s1);
 
-			if (Mathematics::Mathf::sm_ZeroTolerance < absS0 && Mathematics::Mathf::sm_ZeroTolerance < absS1)
+			if (Mathematics::Mathf::GetZeroTolerance() < absS0 && Mathematics::Mathf::GetZeroTolerance() < absS1)
 			{
                             const auto sign0 = Mathematics::Mathf::Sign(s0);
                             const auto sign1 = Mathematics::Mathf::Sign(s1);

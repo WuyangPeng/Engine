@@ -31,7 +31,7 @@ namespace Mathematics
 		DistancePoint3Box3(const Vector3D& point, const Box3& ellipse);
 		virtual ~DistancePoint3Box3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector3D GetPoint() const;
 		const Box3 GetBox() const;

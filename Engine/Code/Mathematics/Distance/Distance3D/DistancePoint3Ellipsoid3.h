@@ -30,7 +30,7 @@ namespace Mathematics
 		DistancePoint3Ellipsoid3(const Vector3D& point, const Ellipsoid3& ellipsoid);
 		virtual ~DistancePoint3Ellipsoid3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector3D GetPoint() const;
 		const Ellipsoid3 GetEllipsoid() const;

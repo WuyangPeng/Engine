@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Vector2DTools.h"
 
@@ -37,10 +37,10 @@ namespace Mathematics
 		// 且|t| <= e。值 e = Length(P1-P0)/2是该线段的“范围”（半径或半长）。
 
 		// 构造函数计算center、direction和extent从beginPoint和endPoint
-		Segment2(const Vector2D& beginPoint, const Vector2D& endPoint, const Real epsilon = Math::sm_ZeroTolerance);
+		Segment2(const Vector2D& beginPoint, const Vector2D& endPoint, const Real epsilon = Math::GetZeroTolerance());
 
 		// 构造函数计算beginPoint和endPoint从center、direction和extent
-		Segment2(Real extent, const Vector2D& center, const Vector2D& direction, const Real epsilon = Math::sm_ZeroTolerance);
+		Segment2(Real extent, const Vector2D& center, const Vector2D& direction, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

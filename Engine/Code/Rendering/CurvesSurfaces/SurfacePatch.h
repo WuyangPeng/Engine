@@ -36,7 +36,7 @@ namespace Rendering
         SurfacePatch& operator=(SurfacePatch&&) = default;
 
 #ifdef OPEN_CLASS_INVARIANT
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
         bool IsParameterValid(float u, float v) const noexcept;
 #endif  // OPEN_CLASS_INVARIANT
 

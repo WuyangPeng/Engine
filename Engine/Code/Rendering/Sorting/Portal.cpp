@@ -108,7 +108,7 @@ bool Rendering::Portal
     float umin = +Mathematics::Mathf::sm_MaxReal;  // bottom
     float umax = -Mathematics::Mathf::sm_MaxReal;  // top
 
-    Mathematics::AVectorf diff;
+    Mathematics::AVectorf diff{ Mathematics ::Vectorf ::g_Zero};
 	Mathematics::APointf vertexCam;
     int i = 0;
 
@@ -117,8 +117,8 @@ bool Rendering::Portal
         constexpr float epsilon = 1e-6f, invEpsilon = 1e+6f;
         int firstSign = 0, lastSign = 0;  // in {-1,0,1}
         bool signChange = false;
-		Mathematics::APointf firstVertex = Mathematics::APointf::sm_Origin;
-		Mathematics::APointf lastVertex = Mathematics::APointf::sm_Origin;
+		Mathematics::APointf firstVertex = Mathematics::Pointf::g_Origin;
+		Mathematics::APointf lastVertex = Mathematics::Pointf::g_Origin;
         float NdD = 0.0f, UdD= 0.0f, RdD= 0.0f, t= 0.0f;
 
         for (i = 0; i < mNumVertices; i++)

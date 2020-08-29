@@ -40,7 +40,7 @@ void Network::MultiMessageEventContainerImpl
 }
 
 void Network::MultiMessageEventContainerImpl
-	::Remove(const NetworkMessageEventSharedPtr& messageEvent)
+	::Remove(const NetworkMessageEventSharedPtr& messageEvent) noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
 

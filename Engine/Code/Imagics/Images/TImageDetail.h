@@ -16,6 +16,8 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 #include SYSTEM_WARNING_DISABLE(26481)
+ #include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26456)
 template <typename T>
 Imagics::TImage<T>
 	::TImage(int numDimensions, int* bounds, T* data)

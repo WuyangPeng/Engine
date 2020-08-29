@@ -8,11 +8,11 @@
 #define RENDERING_SCENE_GRAPH_CAMERA_MATRIX_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "CameraFrustum.h"
 #include "WorldCoordinateFrame.h"
 #include "Mathematics/Algebra/APoint.h"
-#include "Mathematics/Algebra/AVector.h"
+
 #include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/SceneGraph/Flags/CameraFlags.h"
 
@@ -36,8 +36,8 @@ namespace Rendering
         using Math = Mathematics::Math<float>;
 
     public:
-        explicit CameraMatrix(const WorldCoordinateFrame& worldCoordinateFrame, const CameraFrustum& cameraFrustum, float epsilon = Math::sm_ZeroTolerance);
-        explicit CameraMatrix(float epsilon = Math::sm_ZeroTolerance);
+        explicit CameraMatrix(const WorldCoordinateFrame& worldCoordinateFrame, const CameraFrustum& cameraFrustum, float epsilon = Math::GetZeroTolerance());
+        explicit CameraMatrix(float epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

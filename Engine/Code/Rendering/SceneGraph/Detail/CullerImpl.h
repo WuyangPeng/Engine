@@ -8,10 +8,9 @@
 #define RENDERING_SCENE_GRAPH_CULLER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "CameraFrustum.h"
-#include "Mathematics/Algebra/APoint.h"
-#include "Mathematics/Algebra/AVector.h"
+#include "Mathematics/Algebra/APoint.h" 
 #include "Mathematics/Algebra/Plane.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/VisibleSet.h"

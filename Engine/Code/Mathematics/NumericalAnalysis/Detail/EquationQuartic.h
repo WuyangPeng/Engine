@@ -20,10 +20,10 @@ namespace Mathematics
 		using ParentType = EquationImpl;
 
 	public:
-		EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon = Mathd::sm_ZeroTolerance)  ;
+		EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon = Mathd::GetZeroTolerance())  ;
 	 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  double Substitution(double value) const noexcept override;
 		  const Imaginary Substitution(const Imaginary& value) const override;

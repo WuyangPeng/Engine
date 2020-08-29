@@ -19,7 +19,7 @@ template <typename Real>
 Real Mathematics::FastNegativeExp<Real>
 	::FastNegativeExpMoreRoughCalculation(Real value)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= value, "输入值必须在范围[0,无穷大)！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
 	auto result = static_cast<Real>(0.0038278);
 
@@ -28,10 +28,10 @@ Real Mathematics::FastNegativeExp<Real>
 	result *= value;
 	result += static_cast<Real>(0.2507213);
 	result *= value;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= result;
 	result *= result;
-	result = Math::sm_One / result;
+	result = Math::GetValue(1) / result;
 
 	CoreTools::DoNothing();
 
@@ -42,7 +42,7 @@ template <typename Real>
 Real Mathematics::FastNegativeExp<Real>
 	::FastNegativeExpRoughCalculation(Real value)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= value, "输入值必须在范围[0,无穷大)！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
 	auto result = static_cast<Real>(0.00026695);
 
@@ -53,10 +53,10 @@ Real Mathematics::FastNegativeExp<Real>
 	result *= value;
 	result += static_cast<Real>(0.24991035);
 	result *= value;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= result;
 	result *= result;
-	result = Math::sm_One / result;
+	result = Math::GetValue(1) / result;
 
 	CoreTools::DoNothing();
 
@@ -67,7 +67,7 @@ template <typename Real>
 Real Mathematics::FastNegativeExp<Real>
 	::FastNegativeExpPreciseCalculation(Real value)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= value, "输入值必须在范围[0,无穷大)！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
 	auto result = static_cast<Real>(0.000014876);
 
@@ -80,11 +80,11 @@ Real Mathematics::FastNegativeExp<Real>
 	result *= value;
 	result += static_cast<Real>(0.250010936);
 	result *= value;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= result;
 	result *= result;
 
-	result = Math::sm_One / result;
+	result = Math::GetValue(1) / result;
 
 	CoreTools::DoNothing();
 
@@ -95,7 +95,7 @@ template <typename Real>
 Real Mathematics::FastNegativeExp<Real>
 	::FastNegativeExpMorePreciseCalculation(Real value)
 {
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= value, "输入值必须在范围[0,无穷大)！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
 	auto result = static_cast<Real>(0.0000006906);
 
@@ -110,10 +110,10 @@ Real Mathematics::FastNegativeExp<Real>
 	result *= value;
 	result += static_cast<Real>(0.2499986842);
 	result *= value;
-	result += Math::sm_One;
+	result += Math::GetValue(1);
 	result *= result;
 	result *= result;
-	result = Math::sm_One / result;
+	result = Math::GetValue(1) / result;
 
 	CoreTools::DoNothing();
 

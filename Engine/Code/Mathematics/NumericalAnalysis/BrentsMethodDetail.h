@@ -34,8 +34,8 @@ template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethod<Real, UserDataType>
 	::IsValid() const noexcept
 {
-	if (m_Function != nullptr && 1 <= m_MaxIterations && m_NegativeFTolerance <= Math::sm_Zero &&
-		Math::sm_Zero <= m_PositiveFTolerance && Math::sm_Zero <= m_StepXTolerance && Math::sm_Zero <= m_ConvXTolerance)
+	if (m_Function != nullptr && 1 <= m_MaxIterations && m_NegativeFTolerance <= Math::GetValue(0) &&
+		Math::GetValue(0) <= m_PositiveFTolerance && Math::GetValue(0) <= m_StepXTolerance && Math::GetValue(0) <= m_ConvXTolerance)
 	{
 		return true;
 	}
@@ -89,7 +89,7 @@ void Mathematics::BrentsMethod<Real, UserDataType>
 	::SetNegativeFTolerance(Real negativeFTolerance)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_1(negativeFTolerance <= Math::sm_Zero, "无效 negativeFTolerance。\n");
+	MATHEMATICS_ASSERTION_1(negativeFTolerance <= Math::GetValue(0), "无效 negativeFTolerance。\n");
 
 	m_NegativeFTolerance = negativeFTolerance;
 }
@@ -108,7 +108,7 @@ void Mathematics::BrentsMethod<Real, UserDataType>
 	::SetPositiveFTolerance(Real positiveFTolerance)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= positiveFTolerance, "无效 positiveFTolerance。\n");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= positiveFTolerance, "无效 positiveFTolerance。\n");
 
 	m_PositiveFTolerance = positiveFTolerance;
 }
@@ -127,7 +127,7 @@ void Mathematics::BrentsMethod<Real, UserDataType>
 	::SetStepXTolerance(Real stepXTolerance)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= stepXTolerance, "无效 stepXTolerance。\n");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= stepXTolerance, "无效 stepXTolerance。\n");
 
 	m_StepXTolerance = stepXTolerance;
 }
@@ -146,7 +146,7 @@ void Mathematics::BrentsMethod<Real, UserDataType>
 	::SetConvXTolerance(Real convXTolerance)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= convXTolerance, "无效 convXTolerance。\n");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= convXTolerance, "无效 convXTolerance。\n");
 
 	m_ConvXTolerance = convXTolerance;
 }

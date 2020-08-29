@@ -31,7 +31,7 @@ namespace Mathematics
 		DistanceCircle3Circle3(const Circle3& lhsCircle, const Circle3& rhsCircle);
 		virtual ~DistanceCircle3Circle3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Circle3 GetLhsCircle() const;
 		const Circle3 GetRhsCircle() const;

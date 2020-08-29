@@ -2309,6 +2309,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\WeakPtr.h">
       <Filter>ObjectSystems 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\SpanIterator.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\SpanIteratorDetail.h">
+      <Filter>Base 模板文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -3108,6 +3114,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Directory.cpp">
       <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\SpanIterator.cpp">
+      <Filter>Base 源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

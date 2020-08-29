@@ -32,7 +32,7 @@ template <typename Real>
 bool Mathematics::LinearSystemInverse<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_ZeroTolerance && m_Inverse.GetRowsNumber() == m_Inverse.GetColumnsNumber() && static_cast<size_t>(m_Size) == m_ColumnsIndex.size() &&
+	if (Math::GetValue(0) <= m_ZeroTolerance && m_Inverse.GetRowsNumber() == m_Inverse.GetColumnsNumber() && static_cast<size_t>(m_Size) == m_ColumnsIndex.size() &&
 		m_ColumnsIndex.size() == m_RowIndex.size() && m_RowIndex.size() == m_Pivoted.size() && (m_OutputVector.empty() || m_OutputVector.size() == static_cast<size_t>(m_Size)))
 	{
 		return true;
@@ -132,7 +132,7 @@ template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
 	::CalculateCurrentMaxValue()
 {
-	m_CurrentMaxValue = Math::sm_Zero;
+	m_CurrentMaxValue = Math::GetValue(0);
 
 	for (auto outerIndex = 0; outerIndex < m_Size; ++outerIndex)
 	{
@@ -179,7 +179,7 @@ void Mathematics::LinearSystemInverse<Real>
 ::ZeroOutPivotColumnLocations(int outerIndex)
 {
 	auto save = m_Inverse(outerIndex, m_CurrentColumn);
-	m_Inverse(outerIndex, m_CurrentColumn) = Math::sm_Zero;
+	m_Inverse(outerIndex, m_CurrentColumn) = Math::GetValue(0);
 	for (int innerIndex = 0; innerIndex < m_Size; ++innerIndex)
 	{
 		m_Inverse(outerIndex, innerIndex) -= m_Inverse(m_CurrentColumn, innerIndex) * save;

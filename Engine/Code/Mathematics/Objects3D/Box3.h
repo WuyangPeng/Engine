@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
 #include <vector>
@@ -34,7 +34,7 @@ namespace Mathematics
 		// 每当|y[i]| <= e[i]对于所有的i
 		Box3();
 		Box3(const Vector3D& center, const Vector3D& firstAxis, const Vector3D& secondAxis, const Vector3D& thirdAxis,
-			 const Real firstExtent, const Real secondExtent, const Real thirdExtent, const Real epsilon = Math::sm_ZeroTolerance);
+			 const Real firstExtent, const Real secondExtent, const Real thirdExtent, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

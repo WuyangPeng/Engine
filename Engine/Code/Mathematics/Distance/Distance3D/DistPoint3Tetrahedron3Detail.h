@@ -78,11 +78,11 @@ typename const Mathematics::DistPoint3Tetrahedron3<Real>::DistanceResult Mathema
 	{
 		// The query point is inside the "solid" tetrahedron.  Report a zero
 		// distance.  The closest points are identical.
-		minSqrDistance = Math<Real>::sm_Zero;
+		minSqrDistance = Math<Real>::GetValue(0);
 		mClosestPoint1 = mPoint;
 	}
 
-	return DistanceResult{ minSqrDistance, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ minSqrDistance, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>

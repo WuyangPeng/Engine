@@ -27,7 +27,7 @@ namespace CoreTools
 		GameError(const FunctionDescribed& functionDescribed, WindowError lastError, E errorCode, const String& message);
 		virtual ~GameError();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		E GetErrorCode() const noexcept;
 

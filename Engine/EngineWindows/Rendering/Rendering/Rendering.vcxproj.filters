@@ -280,6 +280,9 @@
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{dd27412f-dade-49aa-b1cc-9c4fe73da646}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DataTypes 模板文件\Detail">
+      <UniqueIdentifier>{8160eca1-9dd8-45bd-b32d-8331f92345a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -1400,6 +1403,9 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformTextureCube.cpp">
       <Filter>Renderers 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Colour.cpp">
+      <Filter>DataTypes 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingLib.h">
@@ -1643,9 +1649,6 @@
       <Filter>DataTypes 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourDetail.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TextureColourDetail.h">
       <Filter>DataTypes 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Demogl\Demogl.h">
@@ -2893,14 +2896,35 @@
     <ClInclude Include="..\..\..\Code\Rendering\Helper\HelperFwd.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Helper\PlatformMacro.h">
-      <Filter>Helper 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Helper\UserMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Helper\Helper.h">
       <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFromDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsFromCheck.h">
+      <Filter>DataTypes 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsFromCheckDetail.h">
+      <Filter>DataTypes 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsToCheckDetail.h">
+      <Filter>DataTypes 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsToCheck.h">
+      <Filter>DataTypes 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertToDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TextureColourDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourAchieve.h">
+      <Filter>DataTypes 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

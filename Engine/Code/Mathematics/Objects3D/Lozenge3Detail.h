@@ -25,7 +25,7 @@ template <typename Real>
 bool Mathematics::Lozenge3<Real>
 	::IsValid() const noexcept
 {
-	if (Math<Real>::sm_Zero < m_Radius)
+	if (Math<Real>::GetValue(0) < m_Radius)
 		return true;
 	else
 		return false;

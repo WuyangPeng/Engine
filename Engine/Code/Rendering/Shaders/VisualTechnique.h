@@ -37,7 +37,7 @@ namespace Rendering
         ~VisualTechnique();
         VisualTechnique(VisualTechnique&&) noexcept = default;
         VisualTechnique& operator=(VisualTechnique&&) noexcept = default;
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualTechnique);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;

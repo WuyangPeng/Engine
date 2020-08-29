@@ -30,7 +30,4 @@ namespace Mathematics
 }
 #include STSTEM_WARNING_POP
 
-#endif // MATHEMATICS_EXPORT_TEMPLATE
-
-
-
+#endif // MATHEMATICS_EXPORT_TEMPLATE 

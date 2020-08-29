@@ -11,7 +11,7 @@
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_QUATERNION_CONSTRAINTS_DETAIL)
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -32,7 +32,7 @@ template <typename Real>
 bool Mathematics::QuaternionConstraints<Real>
 	::IsValid() const noexcept
 {
-	if (-Math::sm_HalfPI <= m_MinAngle && m_MinAngle <= Math::sm_HalfPI && m_MinAngle <= m_MaxAngle && m_MaxAngle <= Math::sm_HalfPI)
+	if (-Math::GetHalfPI() <= m_MinAngle && m_MinAngle <= Math::GetHalfPI() && m_MinAngle <= m_MaxAngle && m_MaxAngle <= Math::GetHalfPI())
 		return true;
 	else
 		return false;
@@ -44,7 +44,7 @@ bool Mathematics::QuaternionConstraints<Real>
 	::IsValid(Real x, Real y) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::sm_One), "(x,y)必须是单位长度！");
+	MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::GetValue(1)), "(x,y)必须是单位长度！");
 	
 	CoreTools::DoNothing();
 

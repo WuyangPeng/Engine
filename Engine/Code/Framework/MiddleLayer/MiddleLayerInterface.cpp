@@ -10,7 +10,9 @@
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/ClassInvariant/NoexceptDetail.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Framework::MiddleLayerInterface
 	::MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform) noexcept
 	:m_MiddleLayerPlatform{ middleLayerPlatform }
@@ -255,3 +257,4 @@ Framework::MiddleLayerPlatform Framework::MiddleLayerInterface
 
 	return m_MiddleLayerPlatform;
 }
+#include STSTEM_WARNING_POP

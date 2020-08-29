@@ -15,7 +15,9 @@
 using std::move;
 using std::string;
 using std::make_shared;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Framework
 {
 	constexpr auto g_DefaultMaxTimer = 30;
@@ -161,3 +163,4 @@ bool Framework::ModelMiddleLayer
 	return ParentType::MouseClick(button, state, point, virtualKeys);
 }
 
+#include STSTEM_WARNING_POP

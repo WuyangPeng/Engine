@@ -21,7 +21,7 @@ namespace Framework
 	public:
 		explicit InputManager(MiddleLayerPlatform middleLayerPlatform);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; 
+		CLASS_INVARIANT_OVERRIDE_DECLARE; 
 	};
 }
 

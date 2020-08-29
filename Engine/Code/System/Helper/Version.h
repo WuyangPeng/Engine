@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.0 (2020/05/11 13:23)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.1 (2020/08/29 1:11)
 
 #ifndef SYSTEM_HELPER_VERSION_H
 #define SYSTEM_HELPER_VERSION_H 
@@ -12,6 +15,6 @@
 //  g_TCREVersion / 10000 % 100 是次版本号
 //  g_TCREVersion / 1000000 % 100 是主版本号
 
-constexpr auto g_TCREVersion = 30000;
+constexpr auto g_TCREVersion = 50001;
 
 #endif // SYSTEM_HELPER_VERSION_H

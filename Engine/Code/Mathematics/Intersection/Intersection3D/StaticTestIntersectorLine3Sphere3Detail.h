@@ -39,7 +39,7 @@ void Mathematics::StaticTestIntersectorLine3Sphere3<Real>
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
 	auto a1 = Vector3DTools::DotProduct(mLine.GetDirection(),diff);
 	auto discr = a1*a1 - a0;
-	if (discr >= Math<Real>::sm_Zero)
+	if (discr >= Math<Real>::GetZero())
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}

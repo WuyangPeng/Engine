@@ -31,7 +31,7 @@ namespace Mathematics
 		DistancePoint3Line3(const Vector3D& point, const Line3& line);
 		virtual ~DistancePoint3Line3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector3D GetPoint() const;
 		const Line3 GetLine() const;

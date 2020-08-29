@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Flags/QuantityType.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/SignRational.h"
 
 #include <type_traits>

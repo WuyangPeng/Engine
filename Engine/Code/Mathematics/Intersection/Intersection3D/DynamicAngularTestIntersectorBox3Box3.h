@@ -27,7 +27,7 @@ namespace Mathematics
 
 	public:
 		DynamicAngularTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, int numSteps, const Vector3D& lhsVelocity, const Vector3D& lhsRotCenter,
-											  const Vector3D& lhsRotAxis, const Vector3D& rhsVelocity, const Vector3D& rhsRotCenter, const Vector3D& rhsRotAxis, const Real epsilon = Math::sm_ZeroTolerance);
+											  const Vector3D& lhsRotAxis, const Vector3D& rhsVelocity, const Vector3D& rhsRotCenter, const Vector3D& rhsRotAxis, const Real epsilon = Math::GetZeroTolerance());
 
 		// Object access.
 		const Box3 GetBox0() const;

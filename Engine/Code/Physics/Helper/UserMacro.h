@@ -9,6 +9,7 @@
 
 #include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
+#include "Mathematics/Helper/UserMacro.h"
 
 #define CLOSE_PHYSICS_USE_EXPORT_TEMPLATE (0x01) 
 #define CLOSE_LCPSOLVER_LOG (0x01 << 1) 

@@ -119,22 +119,22 @@ void Mathematics::Matrix4<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Entry(0, 0) = Math::sm_Zero;
-	m_Entry(0, 1) = Math::sm_Zero;
-	m_Entry(0, 2) = Math::sm_Zero;
-	m_Entry(0, 3) = Math::sm_Zero;
-	m_Entry(1, 0) = Math::sm_Zero;
-	m_Entry(1, 1) = Math::sm_Zero;
-	m_Entry(1, 2) = Math::sm_Zero;
-	m_Entry(1, 3) = Math::sm_Zero;
-	m_Entry(2, 0) = Math::sm_Zero;
-	m_Entry(2, 1) = Math::sm_Zero;
-	m_Entry(2, 2) = Math::sm_Zero;
-	m_Entry(2, 3) = Math::sm_Zero;
-	m_Entry(3, 0) = Math::sm_Zero;
-	m_Entry(3, 1) = Math::sm_Zero;
-	m_Entry(3, 2) = Math::sm_Zero;
-	m_Entry(3, 3) = Math::sm_Zero;
+	m_Entry(0, 0) = Math::GetValue(0);
+	m_Entry(0, 1) = Math::GetValue(0);
+	m_Entry(0, 2) = Math::GetValue(0);
+	m_Entry(0, 3) = Math::GetValue(0);
+	m_Entry(1, 0) = Math::GetValue(0);
+	m_Entry(1, 1) = Math::GetValue(0);
+	m_Entry(1, 2) = Math::GetValue(0);
+	m_Entry(1, 3) = Math::GetValue(0);
+	m_Entry(2, 0) = Math::GetValue(0);
+	m_Entry(2, 1) = Math::GetValue(0);
+	m_Entry(2, 2) = Math::GetValue(0);
+	m_Entry(2, 3) = Math::GetValue(0);
+	m_Entry(3, 0) = Math::GetValue(0);
+	m_Entry(3, 1) = Math::GetValue(0);
+	m_Entry(3, 2) = Math::GetValue(0);
+	m_Entry(3, 3) = Math::GetValue(0);
 }
 
 template <typename Real>
@@ -143,22 +143,22 @@ void Mathematics::Matrix4<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Entry(0, 0) = Math::sm_One;
-	m_Entry(0, 1) = Math::sm_Zero;
-	m_Entry(0, 2) = Math::sm_Zero;
-	m_Entry(0, 3) = Math::sm_Zero;
-	m_Entry(1, 0) = Math::sm_Zero;
-	m_Entry(1, 1) = Math::sm_One;
-	m_Entry(1, 2) = Math::sm_Zero;
-	m_Entry(1, 3) = Math::sm_Zero;
-	m_Entry(2, 0) = Math::sm_Zero;
-	m_Entry(2, 1) = Math::sm_Zero;
-	m_Entry(2, 2) = Math::sm_One;
-	m_Entry(2, 3) = Math::sm_Zero;
-	m_Entry(3, 0) = Math::sm_Zero;
-	m_Entry(3, 1) = Math::sm_Zero;
-	m_Entry(3, 2) = Math::sm_Zero;
-	m_Entry(3, 3) = Math::sm_One;
+	m_Entry(0, 0) = Math::GetValue(1);
+	m_Entry(0, 1) = Math::GetValue(0);
+	m_Entry(0, 2) = Math::GetValue(0);
+	m_Entry(0, 3) = Math::GetValue(0);
+	m_Entry(1, 0) = Math::GetValue(0);
+	m_Entry(1, 1) = Math::GetValue(1);
+	m_Entry(1, 2) = Math::GetValue(0);
+	m_Entry(1, 3) = Math::GetValue(0);
+	m_Entry(2, 0) = Math::GetValue(0);
+	m_Entry(2, 1) = Math::GetValue(0);
+	m_Entry(2, 2) = Math::GetValue(1);
+	m_Entry(2, 3) = Math::GetValue(0);
+	m_Entry(3, 0) = Math::GetValue(0);
+	m_Entry(3, 1) = Math::GetValue(0);
+	m_Entry(3, 2) = Math::GetValue(0);
+	m_Entry(3, 3) = Math::GetValue(1);
 }
 
 template <typename Real>
@@ -299,7 +299,7 @@ Mathematics::Matrix4<Real>& Mathematics::Matrix4<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (Math::sm_ZeroTolerance < Math::FAbs(scalar))
+	if (Math::GetZeroTolerance() < Math::FAbs(scalar))
 	{
 		m_Entry(0, 0) /= scalar;
 		m_Entry(0, 1) /= scalar;
@@ -532,9 +532,9 @@ void Mathematics::Matrix4<Real>
 	m_Entry(2, 1) = direction[2] * normal[1];
 	m_Entry(2, 2) = direction[2] * normal[2] - dotNormalDirection;
 	m_Entry(2, 3) = -dotNormalOrigin * direction[2];
-	m_Entry(3, 0) = Math::sm_Zero;
-	m_Entry(3, 1) = Math::sm_Zero;
-	m_Entry(3, 2) = Math::sm_Zero;
+	m_Entry(3, 0) = Math::GetValue(0);
+	m_Entry(3, 1) = Math::GetValue(0);
+	m_Entry(3, 2) = Math::GetValue(0);
 	m_Entry(3, 3) = -dotNormalDirection;
 }
 
@@ -588,22 +588,22 @@ void Mathematics::Matrix4<Real>
 
 	auto twoDotNormalOrigin = static_cast<Real>(2) * Vector3DTools::DotProduct(normal, origin);
 
-	m_Entry(0, 0) = Math::sm_One - static_cast<Real>(2) * normal[0] * normal[0];
+	m_Entry(0, 0) = Math::GetValue(1) - static_cast<Real>(2) * normal[0] * normal[0];
 	m_Entry(0, 1) = -static_cast<Real>(2) * normal[0] * normal[1];
 	m_Entry(0, 2) = -static_cast<Real>(2) * normal[0] * normal[2];
 	m_Entry(0, 3) = twoDotNormalOrigin * normal[0];
 	m_Entry(1, 0) = -static_cast<Real>(2) * normal[1] * normal[0];
-	m_Entry(1, 1) = Math::sm_One - static_cast<Real>(2) * normal[1] * normal[1];
+	m_Entry(1, 1) = Math::GetValue(1) - static_cast<Real>(2) * normal[1] * normal[1];
 	m_Entry(1, 2) = -static_cast<Real>(2) * normal[1] * normal[2];
 	m_Entry(1, 3) = twoDotNormalOrigin * normal[1];
 	m_Entry(2, 0) = -static_cast<Real>(2) * normal[2] * normal[0];
 	m_Entry(2, 1) = -static_cast<Real>(2) * normal[2] * normal[1];
-	m_Entry(2, 2) = Math::sm_One - static_cast<Real>(2) * normal[2] * normal[2];
+	m_Entry(2, 2) = Math::GetValue(1) - static_cast<Real>(2) * normal[2] * normal[2];
 	m_Entry(2, 3) = twoDotNormalOrigin * normal[2];
-	m_Entry(3, 0) = Math::sm_Zero;
-	m_Entry(3, 1) = Math::sm_Zero;
-	m_Entry(3, 2) = Math::sm_Zero;
-	m_Entry(3, 3) = Math::sm_One;
+	m_Entry(3, 0) = Math::GetValue(0);
+	m_Entry(3, 1) = Math::GetValue(0);
+	m_Entry(3, 2) = Math::GetValue(0);
+	m_Entry(3, 3) = Math::GetValue(1);
 }
 
 template <typename Real>
@@ -730,24 +730,24 @@ void Mathematics::Matrix4<Real>
 	auto depth = farDistance - nearDistance;
 
 	m_Entry(0, 0) = (static_cast<Real>(2) * nearDistance) / width;
-	m_Entry(0, 1) = Math::sm_Zero;
-	m_Entry(0, 2) = Math::sm_Zero;
-	m_Entry(0, 3) = Math::sm_Zero;
+	m_Entry(0, 1) = Math::GetValue(0);
+	m_Entry(0, 2) = Math::GetValue(0);
+	m_Entry(0, 3) = Math::GetValue(0);
 
-	m_Entry(1, 0) = Math::sm_Zero;
+	m_Entry(1, 0) = Math::GetValue(0);
 	m_Entry(1, 1) = (static_cast<Real>(2) * nearDistance) / height;
-	m_Entry(1, 2) = Math::sm_Zero;
-	m_Entry(1, 3) = Math::sm_Zero;
+	m_Entry(1, 2) = Math::GetValue(0);
+	m_Entry(1, 3) = Math::GetValue(0);
 
 	m_Entry(2, 0) = (right + left) / width;
 	m_Entry(2, 1) = (top + bottom) / height;
 	m_Entry(2, 2) = -(farDistance + nearDistance) / depth;
-	m_Entry(2, 3) = -Math::sm_One;
+	m_Entry(2, 3) = -Math::GetValue(1);
 
-	m_Entry(3, 0) = Math::sm_Zero;
-	m_Entry(3, 1) = Math::sm_Zero;
+	m_Entry(3, 0) = Math::GetValue(0);
+	m_Entry(3, 1) = Math::GetValue(0);
 	m_Entry(3, 2) = -(static_cast<Real>(2) * farDistance * nearDistance) / depth;
-	m_Entry(3, 3) = Math::sm_Zero;
+	m_Entry(3, 3) = Math::GetValue(0);
 }
 
 // 创建一个立体矩阵给定在Y方向上的领域视图的度数，
@@ -758,31 +758,31 @@ void Mathematics::Matrix4<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	auto angle = fieldOfViewY / Math::sm_Two;
+	auto angle = fieldOfViewY / Math::GetValue(2);
 	// 角度转换成弧度
-	angle *= Math::sm_DegToRad;
+	angle *= Math::GetDegreeToRadian();
 
 	auto cot = Math::Cos(angle) / Math::Sin(angle);
 
 	m_Entry(0, 0) = cot / aspect;
-	m_Entry(0, 1) = Math::sm_Zero;
-	m_Entry(0, 2) = Math::sm_Zero;
-	m_Entry(0, 3) = Math::sm_Zero;
+	m_Entry(0, 1) = Math::GetValue(0);
+	m_Entry(0, 2) = Math::GetValue(0);
+	m_Entry(0, 3) = Math::GetValue(0);
 
-	m_Entry(1, 0) = Math::sm_Zero;
+	m_Entry(1, 0) = Math::GetValue(0);
 	m_Entry(1, 1) = cot;
-	m_Entry(1, 2) = Math::sm_Zero;
-	m_Entry(1, 3) = Math::sm_Zero;
+	m_Entry(1, 2) = Math::GetValue(0);
+	m_Entry(1, 3) = Math::GetValue(0);
 
-	m_Entry(2, 0) = Math::sm_Zero;
-	m_Entry(2, 1) = Math::sm_Zero;
+	m_Entry(2, 0) = Math::GetValue(0);
+	m_Entry(2, 1) = Math::GetValue(0);
 	m_Entry(2, 2) = -(farDistance + nearDistance) / (farDistance - nearDistance);
-	m_Entry(2, 3) = -Math::sm_One;
+	m_Entry(2, 3) = -Math::GetValue(1);
 
-	m_Entry(3, 0) = Math::sm_Zero;
-	m_Entry(3, 1) = Math::sm_Zero;
-	m_Entry(3, 2) = -(Math::sm_Two * farDistance * nearDistance) / (farDistance - nearDistance);
-	m_Entry(3, 3) = Math::sm_Zero;
+	m_Entry(3, 0) = Math::GetValue(0);
+	m_Entry(3, 1) = Math::GetValue(0);
+	m_Entry(3, 2) = -(Math::GetValue(2) * farDistance * nearDistance) / (farDistance - nearDistance);
+	m_Entry(3, 3) = Math::GetValue(0);
 }
 
 // 由给定的左侧，右侧，底部，顶部，近值，和远值创建平截头体边界的正交矩阵。
@@ -796,25 +796,25 @@ void Mathematics::Matrix4<Real>
 	auto height = top - bottom;
 	auto depth = farDistance - nearDistance;
 
-	m_Entry(0, 0) = Math::sm_Two / width;
-	m_Entry(0, 1) = Math::sm_Zero;
-	m_Entry(0, 2) = Math::sm_Zero;
-	m_Entry(0, 3) = Math::sm_Zero;
+	m_Entry(0, 0) = Math::GetValue(2) / width;
+	m_Entry(0, 1) = Math::GetValue(0);
+	m_Entry(0, 2) = Math::GetValue(0);
+	m_Entry(0, 3) = Math::GetValue(0);
 
-	m_Entry(1, 0) = Math::sm_Zero;
-	m_Entry(1, 1) = Math::sm_Two / height;
-	m_Entry(1, 2) = Math::sm_Zero;
-	m_Entry(1, 3) = Math::sm_Zero;
+	m_Entry(1, 0) = Math::GetValue(0);
+	m_Entry(1, 1) = Math::GetValue(2) / height;
+	m_Entry(1, 2) = Math::GetValue(0);
+	m_Entry(1, 3) = Math::GetValue(0);
 
-	m_Entry(2, 0) = Math::sm_Zero;
-	m_Entry(2, 1) = Math::sm_Zero;
-	m_Entry(2, 2) = -Math::sm_Two / depth;
-	m_Entry(2, 3) = Math::sm_Zero;
+	m_Entry(2, 0) = Math::GetValue(0);
+	m_Entry(2, 1) = Math::GetValue(0);
+	m_Entry(2, 2) = -Math::GetValue(2) / depth;
+	m_Entry(2, 3) = Math::GetValue(0);
 
 	m_Entry(3, 0) = -(right + left) / width;
 	m_Entry(3, 1) = -(top + bottom) / height;
 	m_Entry(3, 2) = -(farDistance + nearDistance) / depth;
-	m_Entry(3, 3) = Math::sm_One;
+	m_Entry(3, 3) = Math::GetValue(1);
 }
 
 // 创建使用3个基本规范化向量的方向矩阵
@@ -828,22 +828,22 @@ void Mathematics::Matrix4<Real>
 	m_Entry(0, 0) = xDirection[0];
 	m_Entry(0, 1) = yDirection[0];
 	m_Entry(0, 2) = zDirection[0];
-	m_Entry(0, 3) = Math::sm_Zero;
+	m_Entry(0, 3) = Math::GetValue(0);
 
 	m_Entry(1, 0) = xDirection[1];
 	m_Entry(1, 1) = yDirection[1];
 	m_Entry(1, 2) = zDirection[1];
-	m_Entry(1, 3) = Math::sm_Zero;
+	m_Entry(1, 3) = Math::GetValue(0);
 
 	m_Entry(2, 0) = xDirection[2];
 	m_Entry(2, 1) = yDirection[2];
 	m_Entry(2, 2) = zDirection[2];
-	m_Entry(2, 3) = Math::sm_Zero;
+	m_Entry(2, 3) = Math::GetValue(0);
 
-	m_Entry(3, 0) = Math::sm_Zero;
-	m_Entry(3, 1) = Math::sm_Zero;
-	m_Entry(3, 2) = Math::sm_Zero;
-	m_Entry(3, 3) = Math::sm_One;
+	m_Entry(3, 0) = Math::GetValue(0);
+	m_Entry(3, 1) = Math::GetValue(0);
+	m_Entry(3, 2) = Math::GetValue(0);
+	m_Entry(3, 3) = Math::GetValue(1);
 }
 
 template <typename Real>
@@ -868,7 +868,7 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Matrix4<Real>& lhs, const Matrix4<Real>& rhs)
 {
-	return Approximate(lhs, rhs, Math<Real>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math<Real>::GetZeroTolerance());
 }
 #include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_MATRIX4_DETAIL_H

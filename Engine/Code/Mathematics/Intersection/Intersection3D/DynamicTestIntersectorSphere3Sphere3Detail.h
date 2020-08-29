@@ -44,10 +44,10 @@ void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>
 	auto rSumSqr = rSum * rSum;
 
 	auto result = false;
-	if (a > Math::sm_Zero)
+	if (a > Math::GetValue(0))
 	{
 		auto b = Vector3DTools::DotProduct(CDiff, relVelocity);
-		if (b <= Math::sm_Zero)
+		if (b <= Math::GetValue(0))
 		{
 			if (-this->GetTMax()*a <= b)
 			{

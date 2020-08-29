@@ -29,7 +29,7 @@ bool Mathematics::Frustum3<Real>
 	::IsValid() const noexcept
 {
 	if (m_DirectionVector.IsNormalize(m_Epsilon) && m_UpVector.IsNormalize(m_Epsilon) && m_RightVector.IsNormalize(m_Epsilon) &&
-		Math::sm_Zero < m_DirectionMin && m_DirectionMin < m_DirectionMax && Math::sm_Zero < m_RightBound && Math::sm_Zero < m_UpBound)
+		Math::GetValue(0) < m_DirectionMin && m_DirectionMin < m_DirectionMax && Math::GetValue(0) < m_RightBound && Math::GetValue(0) < m_UpBound)
 	{
 		return true;
 	}

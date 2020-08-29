@@ -101,15 +101,15 @@ Real Mathematics::Triangle3<Real>
 	auto det = Math::FAbs(a00 * a11 - a01 * a01);
 	auto s = a01 * b1 - a11 * b0;
 	auto t = a01 * b0 - a00 * b1;
-	auto sqrDistance = Math::sm_Zero;
+	auto sqrDistance = Math::GetValue(0);
 
 	if (s + t <= det)
 	{
-		if (s < Math::sm_Zero)
+		if (s < Math::GetValue(0))
 		{
-			if (t < Math::sm_Zero)  // 区域4
+			if (t < Math::GetValue(0))  // 区域4
 			{
-				if (b0 < Math::sm_Zero)
+				if (b0 < Math::GetValue(0))
 				{
 					if (a00 <= -b0)
 					{
@@ -122,7 +122,7 @@ Real Mathematics::Triangle3<Real>
 				}
 				else
 				{
-					if (Math::sm_Zero <= b1)
+					if (Math::GetValue(0) <= b1)
 					{
 						sqrDistance = c;
 					}
@@ -138,7 +138,7 @@ Real Mathematics::Triangle3<Real>
 			}
 			else  // 区域3
 			{
-				if (Math::sm_Zero <= b1)
+				if (Math::GetValue(0) <= b1)
 				{
 					sqrDistance = c;
 				}
@@ -152,9 +152,9 @@ Real Mathematics::Triangle3<Real>
 				}
 			}
 		}
-		else if (t < Math::sm_Zero)  // 区域5
+		else if (t < Math::GetValue(0))  // 区域5
 		{
-			if (Math::sm_Zero <= b0)
+			if (Math::GetValue(0) <= b0)
 			{
 				sqrDistance = c;
 			}
@@ -179,7 +179,7 @@ Real Mathematics::Triangle3<Real>
 	}
 	else
 	{
-		if (s < Math::sm_Zero)  // 区域2
+		if (s < Math::GetValue(0))  // 区域2
 		{
 			auto tmp0 = a01 + b0;
 			auto tmp1 = a11 + b1;
@@ -202,11 +202,11 @@ Real Mathematics::Triangle3<Real>
 			}
 			else
 			{
-				if (tmp1 <= Math::sm_Zero)
+				if (tmp1 <= Math::GetValue(0))
 				{
 					sqrDistance = a11 + static_cast<Real>(2) * b1 + c;
 				}
-				else if (Math::sm_Zero <= b1)
+				else if (Math::GetValue(0) <= b1)
 				{
 					sqrDistance = c;
 				}
@@ -216,7 +216,7 @@ Real Mathematics::Triangle3<Real>
 				}
 			}
 		}
-		else if (t < Math::sm_Zero)  // 区域 6
+		else if (t < Math::GetValue(0))  // 区域 6
 		{
 			auto tmp0 = a01 + b1;
 			auto tmp1 = a00 + b0;
@@ -227,7 +227,7 @@ Real Mathematics::Triangle3<Real>
 				if (denom <= numer)
 				{
 					t = static_cast<Real>(1);
-					s = Math::sm_Zero;
+					s = Math::GetValue(0);
 					sqrDistance = a11 + static_cast<Real>(2) * b1 + c;
 				}
 				else
@@ -241,11 +241,11 @@ Real Mathematics::Triangle3<Real>
 			}
 			else
 			{
-				if (tmp1 <= Math::sm_Zero)
+				if (tmp1 <= Math::GetValue(0))
 				{
 					sqrDistance = a00 + static_cast<Real>(2) * b0 + c;
 				}
-				else if (Math::sm_Zero <= b0)
+				else if (Math::GetValue(0) <= b0)
 				{
 					sqrDistance = c;
 				}
@@ -258,7 +258,7 @@ Real Mathematics::Triangle3<Real>
 		else  // 区域 1
 		{
 			auto numer = a11 + b1 - a01 - b0;
-			if (numer <= Math::sm_Zero)
+			if (numer <= Math::GetValue(0))
 			{
 				sqrDistance = a11 + static_cast<Real>(2) * b1 + c;
 			}

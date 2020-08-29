@@ -22,7 +22,7 @@ namespace Rendering
     public:
 		explicit GlutRenderer(const RendererBasis& basis);
         
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  RendererTypes GetRendererType() const override;
 

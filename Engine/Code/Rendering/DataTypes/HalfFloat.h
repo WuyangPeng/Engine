@@ -1,37 +1,42 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/18 11:19)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.0 (2020/08/24 13:49)
 
 #ifndef RENDERING_DATA_TYPES_HALF_FLOAT_H
 #define RENDERING_DATA_TYPES_HALF_FLOAT_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Mathematics/Base/Math.h"
-
 #include "System/Helper/PragmaWarning/Operators.h"
+#include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/Rational/IntegerTraits.h"
+
+#include <iosfwd>
 
 namespace Rendering
-{ 
-    // 一个16位浮点数有1位的符号位(S),5位的指数位(E),和10位的小数位(M)。
-    // 16位浮点数的值是由以下几点:
-    //    (-1)^S * 0.0,                        如果 E == 0 和 M == 0,
-    //    (-1)^S * 2^-14 * (M / 2^10),         如果 E == 0 和 M != 0,
-    //    (-1)^S * 2^(E-15) * (1 + M/2^10),    如果 0 < E < 31,
-    //    (-1)^S * INF,                        如果 E == 31 和 M == 0, 或者
-    //    NaN,                                 如果 E == 31 和 M != 0,
-    // 这里
-    //    S = floor((N mod 65536) / 32768),
-    //    E = floor((N mod 32768) / 1024), 和
-    //    M = N mod 1024. 
-    // 实现也可以使用下列替代编码:
-    //    (-1)^S * 0.0,                        如果 E == 0 和 M != 0,
-    //    (-1)^S * 2^(E-15) * (1 + M/2^10),    如果 E == 31 和 M == 0, 或者
-    //    (-1)^S * 2^(E-15) * (1 + M/2^10),    如果 E == 31 和 M != 0,
+{
+    //  一个16位浮点数有1位的符号位(S)，5位的指数位(E)和10位的小数位(M)。
+    //  16位浮点数的值由以下决定：
+    //  (-1)^S * 0.0，如果 E == 0和M == 0，
+    //  (-1)^S * 2^(-14) * (M / 2^10)，如果E == 0和M != 0，
+    //  (-1)^S * 2^(E - 15) * (1 + M / 2^10)，如果0 < E < 31，
+    //  (-1)^S * INF，如果E == 31和M == 0，或者
+    //  NaN，如果E == 31和M != 0。
+    //  这里
+    //  S = floor((N mod 65536) / 32768)，
+    //  E = floor((N mod 32768) / 1024)，和
+    //  M = N mod 1024。
+    //  还允许实现使用以下任何替代编码：
+    //  (-1)^S * 0.0，如果E == 0和M != 0,
+    //  (-1)^S * 2^(E-15) * (1 + M/2^10)，如果E == 31和M == 0，或者
+    //  (-1)^S * 2^(E-15) * (1 + M/2^10)，如果E == 31和M != 0。
     //
-    // 这个表说明了ToHalf和ToFloat的转换。 
+    //  下表说明了ToHalf和ToFloat中的转换。
     // ---------------------------
     // bias16  exp32  bias32
     // ---------------------------
@@ -49,57 +54,71 @@ namespace Rendering
     //     :       :      :
     //    31     128    255 (0xFF)
     // ---------------------------
- 
-    class RENDERING_DEFAULT_DECLARE HalfFloat : private boost::arithmetic<HalfFloat,boost::totally_ordered<HalfFloat> >
+
+    class RENDERING_DEFAULT_DECLARE HalfFloat : private boost::arithmetic<HalfFloat, boost::totally_ordered<HalfFloat>>
     {
     public:
-		using ClassType = HalfFloat;
-        using HalfFloatType = uint16_t;
-        
+        using ClassType = HalfFloat;
+        using OriginalType = uint16_t;
+
     public:
-        explicit HalfFloat(float value = 0.0f);
-		explicit HalfFloat(int value);
-        
-		CLASS_INVARIANT_DECLARE;
+        explicit HalfFloat(float value) noexcept;
+        explicit HalfFloat(int value);
 
-		void FromHalfFloatType(HalfFloatType value) noexcept;
-        
+        explicit constexpr HalfFloat(OriginalType value) noexcept
+            : m_HalfFloat{ value }
+        { 
+        }
+
+        CLASS_INVARIANT_DECLARE;
+
         float ToFloat() const noexcept;
-                HalfFloatType ToHalfFloat() const noexcept;
+        OriginalType ToOriginalType() const noexcept;
 
-		// 算术运算。
-		const HalfFloat operator- () const; 
+        const HalfFloat operator-() const noexcept;
 
-		// 算术更新。
-                HalfFloat& operator+=(const HalfFloat& rhs) noexcept;
-                HalfFloat& operator-=(const HalfFloat& rhs) noexcept;
-                HalfFloat& operator*=(const HalfFloat& rhs) noexcept;
-		HalfFloat& operator/= (const HalfFloat& rhs);
-        
+        HalfFloat& operator+=(const HalfFloat& rhs) noexcept;
+        HalfFloat& operator-=(const HalfFloat& rhs) noexcept;
+        HalfFloat& operator*=(const HalfFloat& rhs) noexcept;
+        HalfFloat& operator/=(const HalfFloat& rhs);
+
     private:
-                static HalfFloatType ConvertHalfFloat(float value) noexcept;
-        
+        static OriginalType ConvertHalfFloat(float value) noexcept;
+
     private:
-        HalfFloatType m_HalfFloat;
+        using IntegerType = OriginalType;
+        static constexpr IntegerType g_Symbol{ 0x8000 };
+        static constexpr uint32_t g_SymbolShifting{ 15 };
+        static constexpr IntegerType g_Exponent{ 0x7C00 };
+        static constexpr uint32_t g_ExponentShifting{ 10 };
+        static constexpr uint32_t g_RealExponentDifference{ 0xF };
+        static constexpr IntegerType g_Mantissa{ 0x03FF };
+        static constexpr IntegerType g_QuietNaN{ 0x0200 };
+        static constexpr auto g_ExponentDigits = g_SymbolShifting - g_ExponentShifting;
+
+        using FloatTraitsType = typename Mathematics::IntegerTraits<float>::TraitsType;
+        using FloatIntegerType = typename FloatTraitsType::IntegerType;
+
+        static constexpr auto g_SymbolShiftingDifference = FloatTraitsType::g_SymbolShifting - g_SymbolShifting;
+        static constexpr auto g_ExponentShiftingDifference = FloatTraitsType::g_ExponentShifting - g_ExponentShifting;
+        static constexpr auto g_ExponentDifference = ((1 << FloatTraitsType::g_ExponentDigits) - (1 << g_ExponentDigits)) / 2;
+
+    private:
+        OriginalType m_HalfFloat;
     };
 
-	// 比较 
-	bool RENDERING_DEFAULT_DECLARE operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
+    bool RENDERING_DEFAULT_DECLARE operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
     bool RENDERING_DEFAULT_DECLARE operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
 
-	bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs,const float epsilon = Mathematics::Mathf::sm_ZeroTolerance);
+    bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::Mathf::GetZeroTolerance());
 
-	// 调试输出。 
-	RENDERING_DEFAULT_DECLARE std::ostream& operator<< (std::ostream& outFile, const HalfFloat& halfFloat);
+    RENDERING_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& outFile, const HalfFloat& halfFloat);
 
-	// 只添加必要的运算符
-        float RENDERING_DEFAULT_DECLARE operator*(float lhs, const HalfFloat& rhs) noexcept;
-        float RENDERING_DEFAULT_DECLARE operator*(const HalfFloat& lhs, float rhs) noexcept;
-	float RENDERING_DEFAULT_DECLARE operator / (float lhs,const HalfFloat& rhs);
+    float RENDERING_DEFAULT_DECLARE operator*(float lhs, const HalfFloat& rhs) noexcept;
+    float RENDERING_DEFAULT_DECLARE operator*(const HalfFloat& lhs, float rhs) noexcept;
+    float RENDERING_DEFAULT_DECLARE operator/(float lhs, const HalfFloat& rhs);
+
+    HalfFloat RENDERING_DEFAULT_DECLARE FAbs(const HalfFloat& value) noexcept;
 }
 
-template <>
-RENDERING_DEFAULT_DECLARE Rendering::HalfFloat Mathematics::Math<Rendering::HalfFloat>
-	::FAbs (Rendering::HalfFloat value) noexcept;
-
-#endif // RENDERING_DATA_TYPES_HALF_FLOAT_H
+#endif  // RENDERING_DATA_TYPES_HALF_FLOAT_H

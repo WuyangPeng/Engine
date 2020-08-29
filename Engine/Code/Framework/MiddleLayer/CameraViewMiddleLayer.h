@@ -25,7 +25,7 @@ namespace Framework
 	public:
 		explicit CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
 

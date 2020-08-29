@@ -35,7 +35,7 @@ template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Sphere3<Real>
 	::Test()
 {
-	SetContactTime(Math<Real>::sm_Zero);
+	SetContactTime(Math<Real>::GetZero());
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 	auto distance = Vector3DTools::DotProduct(mHalfspace.GetNormal(), mSphere.GetCenter());

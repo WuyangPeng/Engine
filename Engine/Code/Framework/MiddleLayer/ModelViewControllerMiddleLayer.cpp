@@ -13,7 +13,9 @@
 
 using std::move;
 using std::make_shared;
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Framework::ModelViewControllerMiddleLayer
 	::ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
 	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>() }
@@ -56,4 +58,4 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddl
 
  
 
- 
+ #include STSTEM_WARNING_POP

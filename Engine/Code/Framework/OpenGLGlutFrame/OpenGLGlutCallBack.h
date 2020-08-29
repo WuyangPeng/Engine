@@ -25,7 +25,7 @@ namespace Framework
 	public:
 		explicit OpenGLGlutCallBack(int64_t delta);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool RenderScene() override;
 		bool ChangeSize(int width, int height) override;

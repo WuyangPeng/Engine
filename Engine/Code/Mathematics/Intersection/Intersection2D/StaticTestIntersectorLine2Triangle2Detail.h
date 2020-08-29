@@ -82,19 +82,19 @@ void  Mathematics::StaticTestIntersectorLine2Triangle2<Real>
 	{
 		auto diff = triangle.GetVertex()[i] - origin;
 		dist[i] = Vector2DTools::DotPerp(diff, direction);
-		if (dist[i] > Math::sm_ZeroTolerance)
+		if (dist[i] > Math::GetZeroTolerance())
 		{
 			sign[i] = 1;
 			++positive;
 		}
-		else if (dist[i] < -Math::sm_ZeroTolerance)
+		else if (dist[i] < -Math::GetZeroTolerance())
 		{
 			sign[i] = -1;
 			++negative;
 		}
 		else
 		{
-			dist[i] = Math<Real>::sm_Zero;
+			dist[i] = Math<Real>::GetZero();
 			sign[i] = 0;
 			++zero;
 		}
@@ -115,8 +115,8 @@ void Mathematics::StaticTestIntersectorLine2Triangle2<Real>
 	}
 
 	// Compute transverse intersections of triangle edges with line.
-	auto numer = Math::sm_Zero;
-	auto denom = Math::sm_Zero;
+	auto numer = Math::GetValue(0);
+	auto denom = Math::GetValue(0);
 	auto i0 = 0;
 	auto i1 = 0;
 	auto i2 = 0;

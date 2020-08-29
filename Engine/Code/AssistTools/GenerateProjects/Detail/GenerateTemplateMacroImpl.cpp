@@ -83,8 +83,8 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 0
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_0 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_0 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_0 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_0 (static_cast<void>(0))
 
 #endif // 0 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
@@ -95,8 +95,8 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 1
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_1 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_1 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_1 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_1 (static_cast<void>(0))
 
 #endif // 1 <= CLASS_INVARIANT_LEVEL
 
@@ -107,8 +107,8 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 2
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_2 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_2 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_2 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_2 (static_cast<void>(0))
 
 #endif // 2 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
@@ -119,8 +119,8 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 3
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_3 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_3 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_3 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_3 (static_cast<void>(0))
 
 #endif // 3 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
@@ -131,8 +131,8 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 4
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_4 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_4 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_4 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_4 (static_cast<void>(0))
 
 #endif // 4 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
@@ -143,8 +143,8 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 5
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_5 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_5 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_5 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_5 (static_cast<void>(0))
 
 #endif // 5 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
@@ -155,8 +155,8 @@ ClassInvariantMacro.h
 
 #else // CLASS_INVARIANT_LEVEL < 6
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_6 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_6 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_6 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_6 (static_cast<void>(0))
 
 #endif // 6 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
@@ -167,8 +167,8 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 7
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_7 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_7 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_7 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_7 (static_cast<void>(0))
 
 #endif // 7 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
@@ -179,8 +179,8 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 8
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_8 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_8 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_8 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_8 (static_cast<void>(0))
 
 #endif // 8 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
@@ -191,69 +191,69 @@ ClassInvariantMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL < 9
 
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_9 ((void)0)
-	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_9 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_9 (static_cast<void>(0))
+	#define %ProjectCapital%_%ManagerCapital%_SELF_CLASS_IS_VALID_9 (static_cast<void>(0))
 
 #endif // 9 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
 
 #if 0 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_0 CLASS_IS_VALID_CONST_0
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 0
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_0 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_0 (static_cast<void>(0))
 #endif // 0 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 1 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_1 CLASS_IS_VALID_CONST_1
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 1
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_1 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_1 (static_cast<void>(0))
 #endif // 1 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 2 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_2 CLASS_IS_VALID_CONST_2
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 2
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_2 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_2 (static_cast<void>(0))
 #endif // 2 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 3 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_3 CLASS_IS_VALID_CONST_3
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 3
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_3 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_3 (static_cast<void>(0))
 #endif // 3 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 4 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_4 CLASS_IS_VALID_CONST_4
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 4
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_4 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_4 (static_cast<void>(0))
 #endif // 4 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 5 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_5 CLASS_IS_VALID_CONST_5
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 5
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_5 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_5 (static_cast<void>(0))
 #endif // 5 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 6 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_6 CLASS_IS_VALID_CONST_6
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 6
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_6 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_6 (static_cast<void>(0))
 #endif // 6 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 7 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_7 CLASS_IS_VALID_CONST_7
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 7
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_7 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_7 (static_cast<void>(0))
 #endif // 7 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 8 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_8 CLASS_IS_VALID_CONST_8
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 8
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_8 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_8 (static_cast<void>(0))
 #endif // 8 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #if 9 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_9 CLASS_IS_VALID_CONST_9
 #else // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL < 9
-	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_9 ((void)0)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_9 (static_cast<void>(0))
 #endif // 9 <= %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
 
 #endif // %ProjectCapital%_%ManagerCapital%_MACRO_%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_MACRO_H
@@ -280,8 +280,8 @@ CustomAssertMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL < 0
 
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_0(condition, format, ...) ((void)0)
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, ...) ((void)0)
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_0(condition, format, ...) (static_cast<void>(0))
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif //0 <= %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL
 
@@ -294,8 +294,8 @@ CustomAssertMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL < 1
 
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_1(condition, format, ...) ((void)0)
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition,functionDescribed,format, ...) ((void)0)
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_1(condition, format, ...) (static_cast<void>(0))
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 1 <= %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL
 
@@ -308,8 +308,8 @@ CustomAssertMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL < 2
 
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_2(condition, format, ...) ((void)0)
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition,functionDescribed,format, ...) ((void)0)
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_2(condition, format, ...) (static_cast<void>(0))
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 2 <= %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL
 
@@ -322,8 +322,8 @@ CustomAssertMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL < 3
 
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_3(condition, format, ...) ((void)0)
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition,functionDescribed,format, ...) ((void)0)
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_3(condition, format, ...) (static_cast<void>(0))
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 3 <= %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL
 
@@ -336,8 +336,8 @@ CustomAssertMacro.h
 
 #else // %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL < 4
 
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_4(condition, format, ...) ((void)0)
-#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition,functionDescribed,format, ...) ((void)0)
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_4(condition, format, ...) (static_cast<void>(0))
+#define %ProjectCapital%_%ManagerCapital%_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 4 <= %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL
 

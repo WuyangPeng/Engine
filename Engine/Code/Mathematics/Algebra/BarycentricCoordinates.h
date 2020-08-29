@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
 
 #include <type_traits>

@@ -77,7 +77,7 @@ void Mathematics::QuadraticCircleFit2<Real>
 
 	auto eigenVector = eigenSystem.GetEigenvector(0);
 	// µ±ÐÄ³ýÁã
-	if (Math<Real>::sm_ZeroTolerance < Math<Real>::FAbs(eigenVector[3]))
+	if (Math<Real>::GetZeroTolerance() < Math<Real>::FAbs(eigenVector[3]))
 	{
 		auto inv = static_cast<Real>(1) / eigenVector[3];
 
@@ -106,7 +106,7 @@ template <typename Real>
 bool Mathematics::QuadraticCircleFit2<Real>
 	::IsValid() const noexcept
 {
-	if (Math<Real>::sm_Zero < m_Radius && Math<Real>::sm_Zero <= m_EigenValue)
+	if (Math<Real>::GetValue(0) < m_Radius && Math<Real>::GetValue(0) <= m_EigenValue)
 		return true;
 	else
 		return false;

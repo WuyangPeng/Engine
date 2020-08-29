@@ -10,7 +10,9 @@
 #include "Texture.h"
 
 RENDERING_EXPORT_SHARED_PTR(Texture3DImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Texture3D : public Texture
@@ -27,7 +29,7 @@ namespace Rendering
                 Texture3D(Texture3D&&) = default;
                   Texture3D& operator=(Texture3D&&) = default;
         
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
+		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture3D); 
         
@@ -72,5 +74,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, Texture3D); 
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_TEXTURE_3D_H

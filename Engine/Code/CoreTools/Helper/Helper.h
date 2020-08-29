@@ -29,6 +29,6 @@
 #include "ThirdSubclassSmartPointerMacro.h"
 #include "ExceptionMacro.h"
 #include "PropertiesMacro.h"
-#include "UserMacro.h"
+#include "UserMacro.h" 
 
 #endif // CORE_TOOLS_HELPER_H

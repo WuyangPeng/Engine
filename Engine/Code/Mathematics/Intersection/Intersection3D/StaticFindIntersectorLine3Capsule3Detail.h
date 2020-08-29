@@ -98,12 +98,12 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	// Get the z-value, in capsule coordinates, of the incoming line's
 	// unit-length direction.
 	auto dz = Vector3DTools::DotProduct(W, dir);
-	if (Math::FAbs(dz) >= static_cast<Real>(1) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(dz) >= static_cast<Real>(1) - Math::GetZeroTolerance())
 	{
 		// The line is parallel to the capsule axis.  Determine whether the
 		// line intersects the capsule hemispheres.
 		auto radialSqrDist = rSqr - P.GetXCoordinate()*P.GetXCoordinate() - P.GetYCoordinate()*P.GetYCoordinate();
-		if (radialSqrDist < Math::sm_Zero)
+		if (radialSqrDist < Math::GetValue(0))
 		{
 			// Line outside the cylinder of the capsule, no intersection.
 			return 0;
@@ -111,7 +111,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 
 		// line intersects the hemispherical caps
 		auto zOffset = Math::Sqrt(radialSqrDist) + extent;
-		if (dz > Math::sm_Zero)
+		if (dz > Math::GetValue(0))
 		{
 			t[0] = -P.GetZCoordinate() - zOffset;
 			t[1] = -P.GetZCoordinate() + zOffset;
@@ -135,7 +135,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	auto a1 = P.GetXCoordinate()*D.GetXCoordinate() + P.GetYCoordinate()*D.GetYCoordinate();
 	auto a2 = D.GetXCoordinate()*D.GetXCoordinate() + D.GetYCoordinate()*D.GetYCoordinate();
 	auto discr = a1 * a1 - a0 * a2;
-	if (discr < Math::sm_Zero)
+	if (discr < Math::GetValue(0))
 	{
 		// Line does not intersect infinite cylinder.
 		return 0;
@@ -143,7 +143,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 
 	Real root, inv, tValue, zValue;
 	int quantity = 0;
-	if (discr > Math::sm_ZeroTolerance)
+	if (discr > Math::GetZeroTolerance())
 	{
 		// Line intersects infinite cylinder in two places.
 		root = Math::Sqrt(discr);
@@ -189,7 +189,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	a1 += PZpE * D.GetZCoordinate();
 	a0 += PZpE * PZpE;
 	discr = a1 * a1 - a0;
-	if (discr > Math::sm_ZeroTolerance)
+	if (discr > Math::GetZeroTolerance())
 	{
 		root = Math::Sqrt(discr);
 		tValue = -a1 - root;
@@ -226,7 +226,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 			}
 		}
 	}
-	else if (Math::FAbs(discr) <= Math::sm_ZeroTolerance)
+	else if (Math::FAbs(discr) <= Math::GetZeroTolerance())
 	{
 		tValue = -a1;
 		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
@@ -254,7 +254,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	a1 -= (static_cast<Real>(2))*extent*D.GetZCoordinate();
 	a0 -= (static_cast<Real>(4))*extent*P.GetZCoordinate();
 	discr = a1 * a1 - a0;
-	if (discr > Math::sm_ZeroTolerance)
+	if (discr > Math::GetZeroTolerance())
 	{
 		root = Math::Sqrt(discr);
 		tValue = -a1 - root;
@@ -291,7 +291,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 			}
 		}
 	}
-	else if (Math::FAbs(discr) <= Math::sm_ZeroTolerance)
+	else if (Math::FAbs(discr) <= Math::GetZeroTolerance())
 	{
 		tValue = -a1;
 		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();

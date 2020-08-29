@@ -193,7 +193,7 @@ bool Rendering::CullerImpl
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-    if (bound.GetRadius() <= Math::sm_ZeroTolerance)
+    if (bound.GetRadius() <= Math::GetZeroTolerance())
     {
         // 节点是一个虚拟节点不可见。
         return false;

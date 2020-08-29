@@ -24,7 +24,7 @@ Mathematics::Plane3<Real>
 template <typename Real>
 Mathematics::Plane3<Real>
 	::Plane3()
-	:m_Normal{ Vector3D::sm_UnitX }, m_Constant{}, m_Epsilon{ Math::sm_ZeroTolerance }
+	:m_Normal{ Vector3D::sm_UnitX }, m_Constant{}, m_Epsilon{ Math::GetZeroTolerance() }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

@@ -70,7 +70,7 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	auto a0 = Vector3DTools::VectorMagnitudeSquared(diff) - mCircle.GetRadius()*mCircle.GetRadius();
 
 	auto discr = a1 * a1 - a0 * a2;
-	if (discr < Math<Real>::sm_Zero)
+	if (discr < Math<Real>::GetZero())
 	{
 		// No real roots, the circle does not intersect the plane.
 		this->SetIntersectionType(IntersectionType::Empty);
@@ -80,7 +80,7 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	this->SetIntersectionType(IntersectionType::Point);
 
 	auto inv = (static_cast<Real>(1)) / a2;
-	if (discr < Math::sm_ZeroTolerance)
+	if (discr < Math::GetZeroTolerance())
 	{
 		// One repeated root, the circle just touches the plane.
 		mQuantity = 1;

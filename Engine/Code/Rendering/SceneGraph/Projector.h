@@ -25,10 +25,10 @@ namespace Rendering
 	public:
 		// 这类和Camera类的唯一区别是,你可以显式地指定深度的类型。
 		// Camera类被迫使用默认的深度类型(即符合当前启用图形API)。
-		Projector(DepthType depthType, bool isPerspective = true,float epsilon = Math::sm_ZeroTolerance);
+		Projector(DepthType depthType, bool isPerspective = true,float epsilon = Math::GetZeroTolerance());
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Projector);
 

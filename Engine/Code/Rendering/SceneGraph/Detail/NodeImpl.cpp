@@ -27,6 +27,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26446)
  #include SYSTEM_WARNING_DISABLE(26418)
  #include SYSTEM_WARNING_DISABLE(26496)
+ #include SYSTEM_WARNING_DISABLE(26440)
 Rendering::NodeImpl
     ::NodeImpl (Node* realThis)
 	:m_Child{}, m_RealThis{ realThis }
@@ -252,7 +253,7 @@ const Rendering::Bound Rendering::NodeImpl
     RENDERING_CLASS_IS_VALID_9;
  
     // 从一个无效的边界开始。
-	Bound bound{ Bound::APoint::sm_Origin,0.0f };
+	Bound bound{ Mathematics::Pointf::g_Origin,0.0f };
     
     for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
     {

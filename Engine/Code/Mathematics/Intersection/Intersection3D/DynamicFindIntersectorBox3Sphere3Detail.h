@@ -49,7 +49,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 
 	// Flip coordinate frame into the first octant.
 	int signX = 1;
-	if (ax < Math<Real>::sm_Zero)
+	if (ax < Math<Real>::GetZero())
 	{
 		ax = -ax;
 		vx = -vx;
@@ -57,7 +57,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	}
 
 	int signY = 1;
-	if (ay < Math<Real>::sm_Zero)
+	if (ay < Math<Real>::GetZero())
 	{
 		ay = -ay;
 		vy = -vy;
@@ -65,7 +65,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	}
 
 	int signZ = 1;
-	if (az < Math<Real>::sm_Zero)
+	if (az < Math<Real>::GetZero())
 	{
 		az = -az;
 		vz = -vz;
@@ -73,9 +73,9 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	}
 
 	// Intersection coordinates.
-	auto ix = Math::sm_Zero;
-	auto iy = Math::sm_Zero;
-	auto iz = Math::sm_Zero;
+	auto ix = Math::GetValue(0);
+	auto iy = Math::GetValue(0);
+	auto iz = Math::GetValue(0);
 	auto retVal = 0;
 
 	if (ax <= mBox.GetExtent(0))
@@ -86,7 +86,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 			{
 				// The sphere center is inside box.  Return it as the contact
 				// point, but report an "other" intersection type.
-				SetContactTime(Math<Real>::sm_Zero);
+				SetContactTime(Math<Real>::GetZero());
 				mContactPoint = mSphere.GetCenter();
 				this->SetIntersectionType(IntersectionType::Other);
 				return;
@@ -205,12 +205,12 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	// Check for already intersecting if above face.
 	if (cz <= ez + mSphere.GetRadius() && aboveFace)
 	{
-		SetContactTime(Math<Real>::sm_Zero);
+		SetContactTime(Math<Real>::GetZero());
 		return -1;
 	}
 
 	// Check for easy out (moving away on Z axis).
-	if (vz >= Math<Real>::sm_Zero)
+	if (vz >= Math<Real>::GetZero())
 	{
 		return 0;
 	}
@@ -219,11 +219,11 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 
 	auto vsqrX = vz * vz + vx * vx;
 	auto vsqrY = vz * vz + vy * vy;
-	auto dx = Math::sm_Zero;
-	auto dy = Math::sm_Zero;
+	auto dx = Math::GetValue(0);
+	auto dy = Math::GetValue(0);
 	auto dz = cz - ez;
-	auto crossX = Math::sm_Zero;
-	auto crossY = Math::sm_Zero;
+	auto crossX = Math::GetValue(0);
+	auto crossY = Math::GetValue(0);
 	auto signX = 0;
 	auto signY = 0;
 
@@ -232,7 +232,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	// pass through the box.  Then it is only necessary to check two edges,
 	// the face and the vertex for intersection.
 
-	if (vx >= Math<Real>::sm_Zero)
+	if (vx >= Math<Real>::GetZero())
 	{
 		signX = 1;
 		dx = cx - ex;
@@ -245,7 +245,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 		crossX = vz * dx - vx * dz;
 	}
 
-	if (vy >= Math<Real>::sm_Zero)
+	if (vy >= Math<Real>::GetZero())
 	{
 		signY = 1;
 		dy = cy - ey;
@@ -338,9 +338,9 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	// towards.
 
 	auto rsqr = mSphere.GetRadius() * mSphere.GetRadius();
-	auto dy = Math::sm_Zero;
-	auto crossZ = Math::sm_Zero;
-	auto crossX = Math::sm_Zero;  // possible edge/vertex intersection
+	auto dy = Math::GetValue(0);
+	auto crossZ = Math::GetValue(0);
+	auto crossX = Math::GetValue(0);  // possible edge/vertex intersection
 	auto signY = 0;
 
 	// Depending on the sign of Vy, pick the vertex that the velocity is
@@ -348,7 +348,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	// such that their sign will always be positive if the sphere center goes
 	// over that edge.
 
-	if (vy >= Math<Real>::sm_Zero)
+	if (vy >= Math<Real>::GetZero())
 	{
 		signY = 1;
 		dy = cy - ey;
@@ -364,7 +364,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	}
 
 	// Check where on edge this intersection will occur.
-	if (crossZ >= Math<Real>::sm_Zero && crossX >= Math<Real>::sm_Zero &&  crossX * crossX + crossZ * crossZ > vy*vy*mSphere.GetRadius() * mSphere.GetRadius())
+	if (crossZ >= Math<Real>::GetZero() && crossX >= Math<Real>::GetZero() &&  crossX * crossX + crossZ * crossZ > vy*vy*mSphere.GetRadius() * mSphere.GetRadius())
 	{
 		// Sphere potentially intersects with vertex.
 		Vector3D relVelocity{ vx, vy, vz };
@@ -412,16 +412,16 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	if (aboveEdge)
 	{
 		auto diff = dx * dx + dz * dz - rsqr;
-		if (diff <= Math<Real>::sm_Zero)
+		if (diff <= Math<Real>::GetZero())
 		{
 			// Circle is already intersecting the box.
-			SetContactTime(Math<Real>::sm_Zero);
+			SetContactTime(Math<Real>::GetZero());
 			return -1;
 		}
 	}
 
 	auto dot = vx * dx + vz * dz;
-	if (dot >= Math<Real>::sm_Zero)
+	if (dot >= Math<Real>::GetZero())
 	{
 		// Circle not moving towards box.
 		return 0;
@@ -430,10 +430,10 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	// The value dotPerp splits the region of interest along the edge in the
 	// middle of that region.
 	auto dotPerp = vz * dx - vx * dz;
-	if (dotPerp >= Math<Real>::sm_Zero)
+	if (dotPerp >= Math<Real>::GetZero())
 	{
 		// Sphere moving towards +z face.
-		if (vx >= Math<Real>::sm_Zero)
+		if (vx >= Math<Real>::GetZero())
 		{
 			// Passed corner, moving away from box.
 			return 0;
@@ -458,7 +458,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	else
 	{
 		// Sphere moving towards +x face.
-		if (vz >= Math<Real>::sm_Zero)
+		if (vz >= Math<Real>::GetZero())
 		{
 			// Passed corner, moving away from box.
 			return 0;
@@ -488,14 +488,14 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	auto dz = cz - ez;
 	auto rsqr = mSphere.GetRadius() * mSphere.GetRadius();
 	auto diff = dx * dx + dy * dy + dz * dz - rsqr;
-	if (diff <= Math<Real>::sm_Zero)
+	if (diff <= Math<Real>::GetZero())
 	{
 		// Sphere is already intersecting the box.
-		SetContactTime(Math<Real>::sm_Zero);
+		SetContactTime(Math<Real>::GetZero());
 		return -1;
 	}
 
-	if (vx * dx + vy * dy + vz * dz >= Math<Real>::sm_Zero)
+	if (vx * dx + vy * dy + vz * dz >= Math<Real>::GetZero())
 	{
 		// Sphere not moving towards box.
 		return 0;
@@ -535,7 +535,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	auto vz2 = vz * vz;
 
 	// Intersection with the vertex?
-	if ((crossY < Math<Real>::sm_Zero && crossZ >= Math<Real>::sm_Zero && crY2 + crZ2 <= rsqr * vx2) || (crossZ < Math<Real>::sm_Zero && crossX < Math<Real>::sm_Zero && crX2 + crZ2 <= rsqr * vy2) || (crossY >= Math<Real>::sm_Zero && crossX >= Math<Real>::sm_Zero && crX2 + crY2 <= rsqr * vz2))
+	if ((crossY < Math<Real>::GetZero() && crossZ >= Math<Real>::GetZero() && crY2 + crZ2 <= rsqr * vx2) || (crossZ < Math<Real>::GetZero() && crossX < Math<Real>::GetZero() && crX2 + crZ2 <= rsqr * vy2) || (crossY >= Math<Real>::GetZero() && crossX >= Math<Real>::GetZero() && crX2 + crY2 <= rsqr * vz2))
 	{
 		// Standard line-sphere intersection.
 		SetContactTime(GetVertexIntersection(dx, dy, dz, vx, vy, vz, mSphere.GetRadius()*mSphere.GetRadius()));
@@ -544,12 +544,12 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 		iz = this->GetContactTime()*vz + cz;
 		return 1;
 	}
-	else if (crossY < Math<Real>::sm_Zero && crossZ >= Math<Real>::sm_Zero)
+	else if (crossY < Math<Real>::GetZero() && crossZ >= Math<Real>::GetZero())
 	{
 		// x edge region, check y,z planes.
 		return FindEdgeRegionIntersection(ey, ex, ez, cy, cx, cz, vy, vx, vz, iy, ix, iz, false);
 	}
-	else if (crossZ < Math<Real>::sm_Zero && crossX < Math<Real>::sm_Zero)
+	else if (crossZ < Math<Real>::GetZero() && crossX < Math<Real>::GetZero())
 	{
 		// y edge region, check x,z planes.
 		return FindEdgeRegionIntersection(ex, ey, ez, cx, cy, cz, vx, vy, vz, ix, iy, iz, false);

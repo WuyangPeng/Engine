@@ -18,7 +18,7 @@ template <typename Real>
 Mathematics::StaticTestIntersectorLine2Classify<Real>
 	::StaticTestIntersectorLine2Classify(const Vector2D& lhsOrigin, const Vector2D& lhsDirection, const Vector2D& rhsOrigin,
 										 const Vector2D& rhsDirection, bool isCalculateParameter, const Real epsilon)
-	:ParentType{ epsilon }, m_FirstParameter{ Math::sm_Zero }, m_SecondParameter{ Math::sm_Zero }
+	:ParentType{ epsilon }, m_FirstParameter{ Math::GetValue(0) }, m_SecondParameter{ Math::GetValue(0) }
 {
 	Test(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection, isCalculateParameter);
 

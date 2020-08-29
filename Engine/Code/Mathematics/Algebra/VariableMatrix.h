@@ -11,7 +11,7 @@
 
 #include "AlgebraFwd.h"
 #include "Flags/MatrixFlags.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
@@ -28,7 +28,9 @@
 // 因此，你一定要小心你如何在图形API接口中转换代码。
 //
 // 矩阵被储存为行主序保存，matrix[row][col].
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Mathematics
 {
 	template <typename Real>
@@ -164,5 +166,5 @@ namespace Mathematics
 	using VariableMatrixf = VariableMatrix<float>;
 	using VariableMatrixd = VariableMatrix<double>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_H

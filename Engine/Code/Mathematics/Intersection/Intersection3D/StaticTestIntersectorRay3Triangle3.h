@@ -28,11 +28,11 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticTestIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon = Math::sm_ZeroTolerance);
+		StaticTestIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon = Math::GetZeroTolerance());
 
 		virtual ~StaticTestIntersectorRay3Triangle3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Ray3 GetRay() const;
 		const Triangle3 GetTriangle() const;

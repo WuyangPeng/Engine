@@ -22,7 +22,7 @@ namespace Framework
 	public:
 		explicit AndroidCallBack(int64_t delta);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void RedrawNeededMessage(AndroidApp* androidApp) override;
 		void ResizedMessage(AndroidApp* androidApp) override;

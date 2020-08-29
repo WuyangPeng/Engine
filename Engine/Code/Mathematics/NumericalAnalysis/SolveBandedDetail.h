@@ -93,7 +93,7 @@ void Mathematics::SolveBanded<Real>
 	for (auto row = rowMin; row < rowMax; ++row)
 	{
 		auto mult = m_Matrix(row, reduceRow);
-		m_Matrix(row, reduceRow) = Math<Real>::sm_Zero;
+		m_Matrix(row, reduceRow) = Math<Real>::GetValue(0);
 		for (auto column = columnMin; column < columnMax; ++column)
 		{
 			m_Matrix(row, column) -= mult * m_Matrix(reduceRow, column);
@@ -107,7 +107,7 @@ template <typename Real>
 bool Mathematics::SolveBanded<Real>
 	::IsValid() const noexcept
 {
-	if (!m_Output.empty() && Math<Real>::sm_Zero <= m_ZeroTolerance)
+	if (!m_Output.empty() && Math<Real>::GetValue(0) <= m_ZeroTolerance)
 	{
 		return true;
 	}

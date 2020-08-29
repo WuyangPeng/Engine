@@ -26,7 +26,7 @@ namespace Rendering
 		Dx9VertexFormat(Renderer* renderer,const VertexFormat* vertexFormat) noexcept;
 		 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// 顶点格式操作。
 		 void Enable(Renderer* renderer) override;

@@ -24,7 +24,7 @@ namespace Network
                 BoostSegmentationSockStream() noexcept;
 	 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		int Receive(const MessageBufferSharedPtr& messageBuffer) override;
 		void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;

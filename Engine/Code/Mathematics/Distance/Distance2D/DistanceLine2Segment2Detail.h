@@ -83,7 +83,7 @@ const typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathemat
 				// 两个内部点最接近，一个在直线上，一个在线段上。
 				auto lhsT = tool.GetLhsT();
 
-				return DistanceResult{ Math::sm_Zero, Math::sm_Zero, m_Line.GetOrigin() + lhsT / det * m_Line.GetDirection(),
+				return DistanceResult{ Math::GetValue(0), Math::GetValue(0), m_Line.GetOrigin() + lhsT / det * m_Line.GetDirection(),
 									   m_Segment.GetCenterPoint() + rhsT / det * m_Segment.GetDirection() };
 			}
 			else
@@ -113,7 +113,7 @@ const typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathemat
 	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
 
 	return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-						   Math::sm_Zero, m_Line.GetOrigin() + t * m_Line.GetDirection(),
+						   Math::GetValue(0), m_Line.GetOrigin() + t * m_Line.GetDirection(),
 						   m_Segment.GetCenterPoint() + rhsExtent * m_Segment.GetDirection() };
 }
 
@@ -124,7 +124,7 @@ const typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathemat
 	auto originDifferenceDotLhsDirection = tool.GetOriginDifferenceDotLhsDirection();
 	auto squaredDistance = tool.GetSquaredDistanceWithParallel();
 
-	return DistanceResult{ squaredDistance, Math::sm_Zero,
+	return DistanceResult{ squaredDistance, Math::GetValue(0),
 						   m_Line.GetOrigin() - originDifferenceDotLhsDirection * m_Line.GetDirection(),
 						   m_Segment.GetCenterPoint() };
 }

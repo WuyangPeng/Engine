@@ -27,7 +27,7 @@ namespace Rendering
                 Dx9IndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer) noexcept;
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// »º³åÇø²Ù×÷
 		 void Enable(Renderer* renderer) override;

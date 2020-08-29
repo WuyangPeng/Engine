@@ -17,7 +17,7 @@ namespace Mathematics
 		// At least a 3x3x3 block of data points are needed to construct the
 		// estimates of the boundary derivatives.
 		MATHEMATICS_ASSERTION_0(xBound >= 3 && yBound >= 3 && zBound >= 3 && F, "Invalid input\n");
-		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero && ySpacing > Math<Real>::sm_Zero && zSpacing > Math<Real>::sm_Zero, "Invalid input\n");
+		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0) && zSpacing > Math<Real>::GetValue(0), "Invalid input\n");
 
 		mXBound = xBound;
 		mYBound = yBound;
@@ -402,20 +402,20 @@ namespace Mathematics
 
 		// convolution masks
 		//   centered difference, O(h^2)
-		Real CDer[3] = { -Real{0.5}, Math<Real>::sm_Zero, Real{0.5} };
+		Real CDer[3] = { -Real{0.5}, Math<Real>::GetValue(0), Real{0.5} };
 		//   one-sided difference, O(h^2)
 		Real ODer[3] = { -static_cast<Real>(1.5), static_cast<Real>(2), -Real{0.5} };
 		Real mask;
 
 		// corners
-		FXYZ[0][0][0] = Math<Real>::sm_Zero;
-		FXYZ[0][0][mXBound - 1] = Math<Real>::sm_Zero;
-		FXYZ[0][mYBound - 1][0] = Math<Real>::sm_Zero;
-		FXYZ[0][mYBound - 1][mXBound - 1] = Math<Real>::sm_Zero;
-		FXYZ[mZBound - 1][0][0] = Math<Real>::sm_Zero;
-		FXYZ[mZBound - 1][0][mXBound - 1] = Math<Real>::sm_Zero;
-		FXYZ[mZBound - 1][mYBound - 1][0] = Math<Real>::sm_Zero;
-		FXYZ[mZBound - 1][mYBound - 1][mXBound - 1] = Math<Real>::sm_Zero;
+		FXYZ[0][0][0] = Math<Real>::GetValue(0);
+		FXYZ[0][0][mXBound - 1] = Math<Real>::GetValue(0);
+		FXYZ[0][mYBound - 1][0] = Math<Real>::GetValue(0);
+		FXYZ[0][mYBound - 1][mXBound - 1] = Math<Real>::GetValue(0);
+		FXYZ[mZBound - 1][0][0] = Math<Real>::GetValue(0);
+		FXYZ[mZBound - 1][0][mXBound - 1] = Math<Real>::GetValue(0);
+		FXYZ[mZBound - 1][mYBound - 1][0] = Math<Real>::GetValue(0);
+		FXYZ[mZBound - 1][mYBound - 1][mXBound - 1] = Math<Real>::GetValue(0);
 		for (iz = 0; iz <= 2; ++iz)
 		{
 			for (iy = 0; iy <= 2; ++iy)
@@ -454,10 +454,10 @@ namespace Mathematics
 		// x-edges
 		for (ix0 = 1; ix0 < mXBound - 1; ++ix0)
 		{
-			FXYZ[0][0][ix0] = Math<Real>::sm_Zero;
-			FXYZ[0][mYBound - 1][ix0] = Math<Real>::sm_Zero;
-			FXYZ[mZBound - 1][0][ix0] = Math<Real>::sm_Zero;
-			FXYZ[mZBound - 1][mYBound - 1][ix0] = Math<Real>::sm_Zero;
+			FXYZ[0][0][ix0] = Math<Real>::GetValue(0);
+			FXYZ[0][mYBound - 1][ix0] = Math<Real>::GetValue(0);
+			FXYZ[mZBound - 1][0][ix0] = Math<Real>::GetValue(0);
+			FXYZ[mZBound - 1][mYBound - 1][ix0] = Math<Real>::GetValue(0);
 			for (iz = 0; iz <= 2; ++iz)
 			{
 				for (iy = 0; iy <= 2; ++iy)
@@ -485,10 +485,10 @@ namespace Mathematics
 		// y-edges
 		for (iy0 = 1; iy0 < mYBound - 1; ++iy0)
 		{
-			FXYZ[0][iy0][0] = Math<Real>::sm_Zero;
-			FXYZ[0][iy0][mXBound - 1] = Math<Real>::sm_Zero;
-			FXYZ[mZBound - 1][iy0][0] = Math<Real>::sm_Zero;
-			FXYZ[mZBound - 1][iy0][mXBound - 1] = Math<Real>::sm_Zero;
+			FXYZ[0][iy0][0] = Math<Real>::GetValue(0);
+			FXYZ[0][iy0][mXBound - 1] = Math<Real>::GetValue(0);
+			FXYZ[mZBound - 1][iy0][0] = Math<Real>::GetValue(0);
+			FXYZ[mZBound - 1][iy0][mXBound - 1] = Math<Real>::GetValue(0);
 			for (iz = 0; iz <= 2; ++iz)
 			{
 				for (iy = 0; iy <= 2; ++iy)
@@ -516,10 +516,10 @@ namespace Mathematics
 		// z-edges
 		for (iz0 = 1; iz0 < mZBound - 1; ++iz0)
 		{
-			FXYZ[iz0][0][0] = Math<Real>::sm_Zero;
-			FXYZ[iz0][0][mXBound - 1] = Math<Real>::sm_Zero;
-			FXYZ[iz0][mYBound - 1][0] = Math<Real>::sm_Zero;
-			FXYZ[iz0][mYBound - 1][mXBound - 1] = Math<Real>::sm_Zero;
+			FXYZ[iz0][0][0] = Math<Real>::GetValue(0);
+			FXYZ[iz0][0][mXBound - 1] = Math<Real>::GetValue(0);
+			FXYZ[iz0][mYBound - 1][0] = Math<Real>::GetValue(0);
+			FXYZ[iz0][mYBound - 1][mXBound - 1] = Math<Real>::GetValue(0);
 			for (iz = 0; iz <= 2; ++iz)
 			{
 				for (iy = 0; iy <= 2; ++iy)
@@ -549,8 +549,8 @@ namespace Mathematics
 		{
 			for (ix0 = 1; ix0 < mXBound - 1; ++ix0)
 			{
-				FXYZ[0][iy0][ix0] = Math<Real>::sm_Zero;
-				FXYZ[mZBound - 1][iy0][ix0] = Math<Real>::sm_Zero;
+				FXYZ[0][iy0][ix0] = Math<Real>::GetValue(0);
+				FXYZ[mZBound - 1][iy0][ix0] = Math<Real>::GetValue(0);
 				for (iz = 0; iz <= 2; ++iz)
 				{
 					for (iy = 0; iy <= 2; ++iy)
@@ -575,8 +575,8 @@ namespace Mathematics
 		{
 			for (ix0 = 1; ix0 < mXBound - 1; ++ix0)
 			{
-				FXYZ[iz0][0][ix0] = Math<Real>::sm_Zero;
-				FXYZ[iz0][mYBound - 1][ix0] = Math<Real>::sm_Zero;
+				FXYZ[iz0][0][ix0] = Math<Real>::GetValue(0);
+				FXYZ[iz0][mYBound - 1][ix0] = Math<Real>::GetValue(0);
 				for (iz = 0; iz <= 2; ++iz)
 				{
 					for (iy = 0; iy <= 2; ++iy)
@@ -601,8 +601,8 @@ namespace Mathematics
 		{
 			for (iy0 = 1; iy0 < mYBound - 1; ++iy0)
 			{
-				FXYZ[iz0][iy0][0] = Math<Real>::sm_Zero;
-				FXYZ[iz0][iy0][mXBound - 1] = Math<Real>::sm_Zero;
+				FXYZ[iz0][iy0][0] = Math<Real>::GetValue(0);
+				FXYZ[iz0][iy0][mXBound - 1] = Math<Real>::GetValue(0);
 				for (iz = 0; iz <= 2; ++iz)
 				{
 					for (iy = 0; iy <= 2; ++iy)
@@ -629,7 +629,7 @@ namespace Mathematics
 			{
 				for (ix0 = 1; ix0 < mXBound - 1; ++ix0)
 				{
-					FXYZ[iz0][iy0][ix0] = Math<Real>::sm_Zero;
+					FXYZ[iz0][iy0][ix0] = Math<Real>::GetValue(0);
 
 					for (iz = 0; iz <= 2; ++iz)
 					{
@@ -920,30 +920,30 @@ namespace Mathematics
 		poly.A(1, 1, 1) = FXYZ[0][0][0];
 
 		// solve for Aij0
-		b0 = (F[1][0][0] - poly(0, 0, 0, dx, Math<Real>::sm_Zero, Math<Real>::sm_Zero))*invDX2;
-		b1 = (FX[1][0][0] - poly(1, 0, 0, dx, Math<Real>::sm_Zero, Math<Real>::sm_Zero))*invDX;
+		b0 = (F[1][0][0] - poly(0, 0, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX2;
+		b1 = (FX[1][0][0] - poly(1, 0, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 0, 0) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(3, 0, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
 
-		b0 = (F[0][1][0] - poly(0, 0, 0, Math<Real>::sm_Zero, dy, Math<Real>::sm_Zero))*invDY2;
-		b1 = (FY[0][1][0] - poly(0, 1, 0, Math<Real>::sm_Zero, dy, Math<Real>::sm_Zero))*invDY;
+		b0 = (F[0][1][0] - poly(0, 0, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY2;
+		b1 = (FY[0][1][0] - poly(0, 1, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY;
 		poly.A(0, 2, 0) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(0, 3, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
 
-		b0 = (FY[1][0][0] - poly(0, 1, 0, dx, Math<Real>::sm_Zero, Math<Real>::sm_Zero))*invDX2;
-		b1 = (FXY[1][0][0] - poly(1, 1, 0, dx, Math<Real>::sm_Zero, Math<Real>::sm_Zero))*invDX;
+		b0 = (FY[1][0][0] - poly(0, 1, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX2;
+		b1 = (FXY[1][0][0] - poly(1, 1, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 1, 0) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(3, 1, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
 
-		b0 = (FX[0][1][0] - poly(1, 0, 0, Math<Real>::sm_Zero, dy, Math<Real>::sm_Zero))*invDY2;
-		b1 = (FXY[0][1][0] - poly(1, 1, 0, Math<Real>::sm_Zero, dy, Math<Real>::sm_Zero))*invDY;
+		b0 = (FX[0][1][0] - poly(1, 0, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY2;
+		b1 = (FXY[0][1][0] - poly(1, 1, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY;
 		poly.A(1, 2, 0) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(1, 3, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
 
-		b0 = (F[1][1][0] - poly(0, 0, 0, dx, dy, Math<Real>::sm_Zero))*invDX2*invDY2;
-		b1 = (FX[1][1][0] - poly(1, 0, 0, dx, dy, Math<Real>::sm_Zero))*invDX*invDY2;
-		b2 = (FY[1][1][0] - poly(0, 1, 0, dx, dy, Math<Real>::sm_Zero))*invDX2*invDY;
-		b3 = (FXY[1][1][0] - poly(1, 1, 0, dx, dy, Math<Real>::sm_Zero))*invDX*invDY;
+		b0 = (F[1][1][0] - poly(0, 0, 0, dx, dy, Math<Real>::GetValue(0)))*invDX2*invDY2;
+		b1 = (FX[1][1][0] - poly(1, 0, 0, dx, dy, Math<Real>::GetValue(0)))*invDX*invDY2;
+		b2 = (FY[1][1][0] - poly(0, 1, 0, dx, dy, Math<Real>::GetValue(0)))*invDX2*invDY;
+		b3 = (FXY[1][1][0] - poly(1, 1, 0, dx, dy, Math<Real>::GetValue(0)))*invDX*invDY;
 		poly.A(2, 2, 0) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
 		poly.A(3, 2, 0) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
 		poly.A(2, 3, 0) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDY;
@@ -951,25 +951,25 @@ namespace Mathematics
 			invDX*invDY;
 
 		// solve for Ai0k
-		b0 = (F[0][0][1] - poly(0, 0, 0, Math<Real>::sm_Zero, Math<Real>::sm_Zero, dz))*invDZ2;
-		b1 = (FZ[0][0][1] - poly(0, 0, 1, Math<Real>::sm_Zero, Math<Real>::sm_Zero, dz))*invDZ;
+		b0 = (F[0][0][1] - poly(0, 0, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ2;
+		b1 = (FZ[0][0][1] - poly(0, 0, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ;
 		poly.A(0, 0, 2) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(0, 0, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDZ;
 
-		b0 = (FZ[1][0][0] - poly(0, 0, 1, dx, Math<Real>::sm_Zero, Math<Real>::sm_Zero))*invDX2;
-		b1 = (FXZ[1][0][0] - poly(1, 0, 1, dx, Math<Real>::sm_Zero, Math<Real>::sm_Zero))*invDX;
+		b0 = (FZ[1][0][0] - poly(0, 0, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX2;
+		b1 = (FXZ[1][0][0] - poly(1, 0, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 0, 1) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(3, 0, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
 
-		b0 = (FX[0][0][1] - poly(1, 0, 0, Math<Real>::sm_Zero, Math<Real>::sm_Zero, dz))*invDZ2;
-		b1 = (FXZ[0][0][1] - poly(1, 0, 1, Math<Real>::sm_Zero, Math<Real>::sm_Zero, dz))*invDZ;
+		b0 = (FX[0][0][1] - poly(1, 0, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ2;
+		b1 = (FXZ[0][0][1] - poly(1, 0, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ;
 		poly.A(1, 0, 2) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(1, 0, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDZ;
 
-		b0 = (F[1][0][1] - poly(0, 0, 0, dx, Math<Real>::sm_Zero, dz))*invDX2*invDZ2;
-		b1 = (FX[1][0][1] - poly(1, 0, 0, dx, Math<Real>::sm_Zero, dz))*invDX*invDZ2;
-		b2 = (FZ[1][0][1] - poly(0, 0, 1, dx, Math<Real>::sm_Zero, dz))*invDX2*invDZ;
-		b3 = (FXZ[1][0][1] - poly(1, 0, 1, dx, Math<Real>::sm_Zero, dz))*invDX*invDZ;
+		b0 = (F[1][0][1] - poly(0, 0, 0, dx, Math<Real>::GetValue(0), dz))*invDX2*invDZ2;
+		b1 = (FX[1][0][1] - poly(1, 0, 0, dx, Math<Real>::GetValue(0), dz))*invDX*invDZ2;
+		b2 = (FZ[1][0][1] - poly(0, 0, 1, dx, Math<Real>::GetValue(0), dz))*invDX2*invDZ;
+		b3 = (FXZ[1][0][1] - poly(1, 0, 1, dx, Math<Real>::GetValue(0), dz))*invDX*invDZ;
 		poly.A(2, 0, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
 		poly.A(3, 0, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
 		poly.A(2, 0, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
@@ -977,20 +977,20 @@ namespace Mathematics
 			invDX*invDZ;
 
 		// solve for A0jk
-		b0 = (FZ[0][1][0] - poly(0, 0, 1, Math<Real>::sm_Zero, dy, Math<Real>::sm_Zero))*invDY2;
-		b1 = (FYZ[0][1][0] - poly(0, 1, 1, Math<Real>::sm_Zero, dy, Math<Real>::sm_Zero))*invDY;
+		b0 = (FZ[0][1][0] - poly(0, 0, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY2;
+		b1 = (FYZ[0][1][0] - poly(0, 1, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY;
 		poly.A(0, 2, 1) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(0, 3, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
 
-		b0 = (FY[0][0][1] - poly(0, 1, 0, Math<Real>::sm_Zero, Math<Real>::sm_Zero, dz))*invDZ2;
-		b1 = (FYZ[0][0][1] - poly(0, 1, 1, Math<Real>::sm_Zero, Math<Real>::sm_Zero, dz))*invDZ;
+		b0 = (FY[0][0][1] - poly(0, 1, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ2;
+		b1 = (FYZ[0][0][1] - poly(0, 1, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ;
 		poly.A(0, 1, 2) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(0, 1, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDZ;
 
-		b0 = (F[0][1][1] - poly(0, 0, 0, Math<Real>::sm_Zero, dy, dz))*invDY2*invDZ2;
-		b1 = (FY[0][1][1] - poly(0, 1, 0, Math<Real>::sm_Zero, dy, dz))*invDY*invDZ2;
-		b2 = (FZ[0][1][1] - poly(0, 0, 1, Math<Real>::sm_Zero, dy, dz))*invDY2*invDZ;
-		b3 = (FYZ[0][1][1] - poly(0, 1, 1, Math<Real>::sm_Zero, dy, dz))*invDY*invDZ;
+		b0 = (F[0][1][1] - poly(0, 0, 0, Math<Real>::GetValue(0), dy, dz))*invDY2*invDZ2;
+		b1 = (FY[0][1][1] - poly(0, 1, 0, Math<Real>::GetValue(0), dy, dz))*invDY*invDZ2;
+		b2 = (FZ[0][1][1] - poly(0, 0, 1, Math<Real>::GetValue(0), dy, dz))*invDY2*invDZ;
+		b3 = (FYZ[0][1][1] - poly(0, 1, 1, Math<Real>::GetValue(0), dy, dz))*invDY*invDZ;
 		poly.A(0, 2, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
 		poly.A(0, 3, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDY;
 		poly.A(0, 2, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
@@ -998,20 +998,20 @@ namespace Mathematics
 			invDY*invDZ;
 
 		// solve for Aij1
-		b0 = (FYZ[1][0][0] - poly(0, 1, 1, dx, Math<Real>::sm_Zero, Math<Real>::sm_Zero))*invDX2;
-		b1 = (FXYZ[1][0][0] - poly(1, 1, 1, dx, Math<Real>::sm_Zero, Math<Real>::sm_Zero))*invDX;
+		b0 = (FYZ[1][0][0] - poly(0, 1, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX2;
+		b1 = (FXYZ[1][0][0] - poly(1, 1, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 1, 1) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(3, 1, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
 
-		b0 = (FXZ[0][1][0] - poly(1, 0, 1, Math<Real>::sm_Zero, dy, Math<Real>::sm_Zero))*invDY2;
-		b1 = (FXYZ[0][1][0] - poly(1, 1, 1, Math<Real>::sm_Zero, dy, Math<Real>::sm_Zero))*invDY;
+		b0 = (FXZ[0][1][0] - poly(1, 0, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY2;
+		b1 = (FXYZ[0][1][0] - poly(1, 1, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY;
 		poly.A(1, 2, 1) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(1, 3, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
 
-		b0 = (FZ[1][1][0] - poly(0, 0, 1, dx, dy, Math<Real>::sm_Zero))*invDX2*invDY2;
-		b1 = (FXZ[1][1][0] - poly(1, 0, 1, dx, dy, Math<Real>::sm_Zero))*invDX*invDY2;
-		b2 = (FYZ[1][1][0] - poly(0, 1, 1, dx, dy, Math<Real>::sm_Zero))*invDX2*invDY;
-		b3 = (FXYZ[1][1][0] - poly(1, 1, 1, dx, dy, Math<Real>::sm_Zero))*invDX*invDY;
+		b0 = (FZ[1][1][0] - poly(0, 0, 1, dx, dy, Math<Real>::GetValue(0)))*invDX2*invDY2;
+		b1 = (FXZ[1][1][0] - poly(1, 0, 1, dx, dy, Math<Real>::GetValue(0)))*invDX*invDY2;
+		b2 = (FYZ[1][1][0] - poly(0, 1, 1, dx, dy, Math<Real>::GetValue(0)))*invDX2*invDY;
+		b3 = (FXYZ[1][1][0] - poly(1, 1, 1, dx, dy, Math<Real>::GetValue(0)))*invDX*invDY;
 		poly.A(2, 2, 1) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
 		poly.A(3, 2, 1) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
 		poly.A(2, 3, 1) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDY;
@@ -1019,15 +1019,15 @@ namespace Mathematics
 			invDX*invDY;
 
 		// solve for Ai1k
-		b0 = (FXY[0][0][1] - poly(1, 1, 0, Math<Real>::sm_Zero, Math<Real>::sm_Zero, dz))*invDZ2;
-		b1 = (FXYZ[0][0][1] - poly(1, 1, 1, Math<Real>::sm_Zero, Math<Real>::sm_Zero, dz))*invDZ;
+		b0 = (FXY[0][0][1] - poly(1, 1, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ2;
+		b1 = (FXYZ[0][0][1] - poly(1, 1, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ;
 		poly.A(1, 1, 2) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(1, 1, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDZ;
 
-		b0 = (FY[1][0][1] - poly(0, 1, 0, dx, Math<Real>::sm_Zero, dz))*invDX2*invDZ2;
-		b1 = (FXY[1][0][1] - poly(1, 1, 0, dx, Math<Real>::sm_Zero, dz))*invDX*invDZ2;
-		b2 = (FYZ[1][0][1] - poly(0, 1, 1, dx, Math<Real>::sm_Zero, dz))*invDX2*invDZ;
-		b3 = (FXYZ[1][0][1] - poly(1, 1, 1, dx, Math<Real>::sm_Zero, dz))*invDX*invDZ;
+		b0 = (FY[1][0][1] - poly(0, 1, 0, dx, Math<Real>::GetValue(0), dz))*invDX2*invDZ2;
+		b1 = (FXY[1][0][1] - poly(1, 1, 0, dx, Math<Real>::GetValue(0), dz))*invDX*invDZ2;
+		b2 = (FYZ[1][0][1] - poly(0, 1, 1, dx, Math<Real>::GetValue(0), dz))*invDX2*invDZ;
+		b3 = (FXYZ[1][0][1] - poly(1, 1, 1, dx, Math<Real>::GetValue(0), dz))*invDX*invDZ;
 		poly.A(2, 1, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
 		poly.A(3, 1, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
 		poly.A(2, 1, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
@@ -1035,10 +1035,10 @@ namespace Mathematics
 			invDX*invDZ;
 
 		// solve for A1jk
-		b0 = (FX[0][1][1] - poly(1, 0, 0, Math<Real>::sm_Zero, dy, dz))*invDY2*invDZ2;
-		b1 = (FXY[0][1][1] - poly(1, 1, 0, Math<Real>::sm_Zero, dy, dz))*invDY*invDZ2;
-		b2 = (FXZ[0][1][1] - poly(1, 0, 1, Math<Real>::sm_Zero, dy, dz))*invDY2*invDZ;
-		b3 = (FXYZ[0][1][1] - poly(1, 1, 1, Math<Real>::sm_Zero, dy, dz))*invDY*invDZ;
+		b0 = (FX[0][1][1] - poly(1, 0, 0, Math<Real>::GetValue(0), dy, dz))*invDY2*invDZ2;
+		b1 = (FXY[0][1][1] - poly(1, 1, 0, Math<Real>::GetValue(0), dy, dz))*invDY*invDZ2;
+		b2 = (FXZ[0][1][1] - poly(1, 0, 1, Math<Real>::GetValue(0), dy, dz))*invDY2*invDZ;
+		b3 = (FXYZ[0][1][1] - poly(1, 1, 1, Math<Real>::GetValue(0), dy, dz))*invDY*invDZ;
 		poly.A(1, 2, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
 		poly.A(1, 3, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDY;
 		poly.A(1, 2, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
@@ -1192,7 +1192,7 @@ namespace Mathematics
 		Real yPow[4] = { static_cast<Real>(1), y, y*y, y*y*y };
 		Real zPow[4] = { static_cast<Real>(1), z, z*z, z*z*z };
 
-		Real p = Math<Real>::sm_Zero;
+		Real p = Math<Real>::GetValue(0);
 		for (int iz = 0; iz <= 3; ++iz)
 		{
 			for (int iy = 0; iy <= 3; ++iy)
@@ -1221,25 +1221,25 @@ namespace Mathematics
 			xPow[3] = x * x*x;
 			break;
 		case 1:
-			xPow[0] = Math<Real>::sm_Zero;
+			xPow[0] = Math<Real>::GetValue(0);
 			xPow[1] = static_cast<Real>(1);
 			xPow[2] = (static_cast<Real>(2))*x;
 			xPow[3] = (static_cast<Real>(3))*x*x;
 			break;
 		case 2:
-			xPow[0] = Math<Real>::sm_Zero;
-			xPow[1] = Math<Real>::sm_Zero;
+			xPow[0] = Math<Real>::GetValue(0);
+			xPow[1] = Math<Real>::GetValue(0);
 			xPow[2] = static_cast<Real>(2);
 			xPow[3] = ((Real)6)*x;
 			break;
 		case 3:
-			xPow[0] = Math<Real>::sm_Zero;
-			xPow[1] = Math<Real>::sm_Zero;
-			xPow[2] = Math<Real>::sm_Zero;
+			xPow[0] = Math<Real>::GetValue(0);
+			xPow[1] = Math<Real>::GetValue(0);
+			xPow[2] = Math<Real>::GetValue(0);
 			xPow[3] = (Real)6;
 			break;
 		default:
-			return Math<Real>::sm_Zero;
+			return Math<Real>::GetValue(0);
 		}
 
 		Real yPow[4];
@@ -1252,25 +1252,25 @@ namespace Mathematics
 			yPow[3] = y * y*y;
 			break;
 		case 1:
-			yPow[0] = Math<Real>::sm_Zero;
+			yPow[0] = Math<Real>::GetValue(0);
 			yPow[1] = static_cast<Real>(1);
 			yPow[2] = (static_cast<Real>(2))*y;
 			yPow[3] = (static_cast<Real>(3))*y*y;
 			break;
 		case 2:
-			yPow[0] = Math<Real>::sm_Zero;
-			yPow[1] = Math<Real>::sm_Zero;
+			yPow[0] = Math<Real>::GetValue(0);
+			yPow[1] = Math<Real>::GetValue(0);
 			yPow[2] = static_cast<Real>(2);
 			yPow[3] = ((Real)6)*y;
 			break;
 		case 3:
-			yPow[0] = Math<Real>::sm_Zero;
-			yPow[1] = Math<Real>::sm_Zero;
-			yPow[2] = Math<Real>::sm_Zero;
+			yPow[0] = Math<Real>::GetValue(0);
+			yPow[1] = Math<Real>::GetValue(0);
+			yPow[2] = Math<Real>::GetValue(0);
 			yPow[3] = (Real)6;
 			break;
 		default:
-			return Math<Real>::sm_Zero;
+			return Math<Real>::GetValue(0);
 		}
 
 		Real zPow[4];
@@ -1283,28 +1283,28 @@ namespace Mathematics
 			zPow[3] = z * z*z;
 			break;
 		case 1:
-			zPow[0] = Math<Real>::sm_Zero;
+			zPow[0] = Math<Real>::GetValue(0);
 			zPow[1] = static_cast<Real>(1);
 			zPow[2] = (static_cast<Real>(2))*z;
 			zPow[3] = (static_cast<Real>(3))*z*z;
 			break;
 		case 2:
-			zPow[0] = Math<Real>::sm_Zero;
-			zPow[1] = Math<Real>::sm_Zero;
+			zPow[0] = Math<Real>::GetValue(0);
+			zPow[1] = Math<Real>::GetValue(0);
 			zPow[2] = static_cast<Real>(2);
 			zPow[3] = ((Real)6)*z;
 			break;
 		case 3:
-			zPow[0] = Math<Real>::sm_Zero;
-			zPow[1] = Math<Real>::sm_Zero;
-			zPow[2] = Math<Real>::sm_Zero;
+			zPow[0] = Math<Real>::GetValue(0);
+			zPow[1] = Math<Real>::GetValue(0);
+			zPow[2] = Math<Real>::GetValue(0);
 			zPow[3] = (Real)6;
 			break;
 		default:
-			return Math<Real>::sm_Zero;
+			return Math<Real>::GetValue(0);
 		}
 
-		Real p = Math<Real>::sm_Zero;
+		Real p = Math<Real>::GetValue(0);
 
 		for (int iz = 0; iz <= 3; ++iz)
 		{

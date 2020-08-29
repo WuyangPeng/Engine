@@ -18,9 +18,9 @@ Mathematics::IncrementalDelaunay2<Real>
 	 mAdjacencies{ 0 }, mPathLast{ -1 }, mPath{ 0 }, mLastEdgeV0{ -1 }, mLastEdgeV1{ -1 }, mLastEdgeOpposite{ -1 }, mLastEdgeOppositeIndex{ -1 }
 {
     MATHEMATICS_ASSERTION_0(mXMin < mXMax && mYMin < mYMax,"Invalid bounding rectangle\n");
-    MATHEMATICS_ASSERTION_0(Math<Real>::sm_Zero <= mUncertainty && mUncertainty <= static_cast<Real>(1),"Invalid uncertainty\n");
+    MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= mUncertainty && mUncertainty <= static_cast<Real>(1),"Invalid uncertainty\n");
 
-    if (mUncertainty > Math<Real>::sm_Zero)
+    if (mUncertainty > Math<Real>::GetValue(0))
     {
         mRatVertexPool = NEW0 std::vector<QRVector>();
         mRatVertexEvaluated = NEW0 std::vector<bool>();
@@ -94,7 +94,7 @@ int Mathematics::IncrementalDelaunay2<Real>
     int posIndex = boost::numeric_cast<int>(mVertexPool.size());
     mVMap[position] = posIndex;
     mVertexPool.push_back(position);
-    if (mUncertainty > Math<Real>::sm_Zero)
+    if (mUncertainty > Math<Real>::GetValue(0))
     {
         (*mRatVertexPool).push_back(QRVector());
         (*mRatVertexEvaluated).push_back(false);
@@ -662,10 +662,10 @@ int Mathematics::IncrementalDelaunay2<Real>
             det = -det;
         }
 
-        if (mUncertainty == Math<Real>::sm_Zero)
+        if (mUncertainty == Math<Real>::GetValue(0))
         {
             // Compute the sign test using floating-point arithmetic.
-            return (det > Math<Real>::sm_Zero ? +1 : (det < Math<Real>::sm_Zero ? -1 : 0));
+            return (det > Math<Real>::GetValue(0) ? +1 : (det < Math<Real>::GetValue(0) ? -1 : 0));
         }
 
         // Use filtered predicates.
@@ -675,7 +675,7 @@ int Mathematics::IncrementalDelaunay2<Real>
         if (Math<Real>::FAbs(det) >= scaledUncertainty)
         {
             // The floating-point sign test is deemed to be certain.
-            return (det > Math<Real>::sm_Zero ? +1 : (det < Math<Real>::sm_Zero ? -1 : 0));
+            return (det > Math<Real>::GetValue(0) ? +1 : (det < Math<Real>::GetValue(0) ? -1 : 0));
         }
     }
 
@@ -823,10 +823,10 @@ int Mathematics::IncrementalDelaunay2<Real>
             det = -det;
         }
 
-        if (mUncertainty == Math<Real>::sm_Zero)
+        if (mUncertainty == Math<Real>::GetValue(0))
         {
             // Compute the sign test using floating-point arithmetic.
-            return (det < Math<Real>::sm_Zero ? +1 : (det > Math<Real>::sm_Zero ? -1 : 0));
+            return (det < Math<Real>::GetValue(0) ? +1 : (det > Math<Real>::GetValue(0) ? -1 : 0));
         }
 
         // Use filtered predicates.
@@ -836,7 +836,7 @@ int Mathematics::IncrementalDelaunay2<Real>
 		auto scaledUncertainty = mUncertainty*length0*length1*length2;
         if (Math<Real>::FAbs(det) >= scaledUncertainty)
         {
-            return (det < Math<Real>::sm_Zero ? 1 : (det > Math<Real>::sm_Zero ? -1 : 0));
+            return (det < Math<Real>::GetValue(0) ? 1 : (det > Math<Real>::GetValue(0) ? -1 : 0));
         }
     }
 

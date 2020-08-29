@@ -23,7 +23,7 @@ namespace CoreTools
 		explicit OutputConsoleTextColorsManager(LogLevel logLevel);
 	 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	private:
 		using OutputManager = ConsoleTextColorsManager<System::StandardHandle::Output>;

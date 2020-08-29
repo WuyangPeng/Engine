@@ -55,9 +55,9 @@ typename Mathematics::GaussPointsFit2<Real>::Box2 Mathematics::GaussPointsFit2<R
 	center /= static_cast<Real>(numPoints);
 
 	// 计算点的协方差矩阵。
-	auto sumXX = Math<Real>::sm_Zero;
-	auto sumXY = Math<Real>::sm_Zero;
-	auto sumYY = Math<Real>::sm_Zero;
+	auto sumXX = Math<Real>::GetValue(0);
+	auto sumXY = Math<Real>::GetValue(0);
+	auto sumYY = Math<Real>::GetValue(0);
 	for (const auto& point : points)
 	{
 		auto diff = point - center;

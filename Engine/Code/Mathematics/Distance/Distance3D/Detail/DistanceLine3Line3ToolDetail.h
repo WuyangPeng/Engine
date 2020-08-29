@@ -153,7 +153,7 @@ Real  Mathematics::DistanceLine3Line3Tool<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto sign = (Math::sm_Zero < m_DirectionDot ? static_cast<Real>(-1) : static_cast<Real>(1));
+	auto sign = (Math::GetValue(0) < m_DirectionDot ? static_cast<Real>(-1) : static_cast<Real>(1));
 	auto average = static_cast<Real>(0.5) * (m_OriginDifferenceDotLhsDirection - sign * m_OriginDifferenceDotRhsDirection);
 
 	return average;

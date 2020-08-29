@@ -24,12 +24,12 @@ template <typename Real>
 bool Mathematics::IntersectorAxis<Real>
 	::Test(const Vector3D<Real>& axis, const Vector3D<Real> segment[2], const Triangle3<Real>& triangle, const Vector3D<Real>& velocity, Real tmax, Real& tfirst, Real& tlast)
 {
-	auto min0 = Math<Real>::sm_Zero;
-	auto max0 = Math<Real>::sm_Zero;
+	auto min0 = Math<Real>::GetValue(0);
+	auto max0 = Math<Real>::GetValue(0);
 	GetProjection(axis, segment, min0, max0);
 
-	auto min1 = Math<Real>::sm_Zero;
-	auto max1 = Math<Real>::sm_Zero;
+	auto min1 = Math<Real>::GetValue(0);
+	auto max1 = Math<Real>::GetValue(0);
 	GetProjection(axis, triangle, min1, max1);
 
 	return Test(axis, velocity, min0, max0, min1, max1, tmax, tfirst, tlast);
@@ -40,12 +40,12 @@ bool Mathematics::IntersectorAxis<Real>
 	::Test(const Vector3D<Real>& axis, const Vector3D<Real> segment[2], const Box3<Real>& box,
 		   const Vector3D<Real>& velocity, Real tmax, Real& tfirst, Real& tlast)
 {
-	auto min0 = Math<Real>::sm_Zero;
-	auto max0 = Math<Real>::sm_Zero;
+	auto min0 = Math<Real>::GetValue(0);
+	auto max0 = Math<Real>::GetValue(0);
 	GetProjection(axis, segment, min0, max0);
 
-	auto min1 = Math<Real>::sm_Zero;
-	auto max1 = Math<Real>::sm_Zero;
+	auto min1 = Math<Real>::GetValue(0);
+	auto max1 = Math<Real>::GetValue(0);
 	GetProjection(axis, box, min1, max1);
 
 	return Test(axis, velocity, min0, max0, min1, max1, tmax, tfirst, tlast);
@@ -55,12 +55,12 @@ template <typename Real>
 bool Mathematics::IntersectorAxis<Real>
 	::Test(const Vector3D<Real>& axis, const Triangle3<Real>& triangle, const Box3<Real>& box, const Vector3D<Real>& velocity, Real tmax, Real& tfirst, Real& tlast)
 {
-	auto min0 = Math<Real>::sm_Zero;
-	auto max0 = Math<Real>::sm_Zero;
+	auto min0 = Math<Real>::GetValue(0);
+	auto max0 = Math<Real>::GetValue(0);
 	GetProjection(axis, triangle, min0, max0);
 
-	auto min1 = Math<Real>::sm_Zero;
-	auto max1 = Math<Real>::sm_Zero;
+	auto min1 = Math<Real>::GetValue(0);
+	auto max1 = Math<Real>::GetValue(0);
 	GetProjection(axis, box, min1, max1);
 
 	return Test(axis, velocity, min0, max0, min1, max1, tmax, tfirst, tlast);
@@ -70,12 +70,12 @@ template <typename Real>
 bool Mathematics::IntersectorAxis<Real>
 	::Test(const Vector3D<Real>& axis, const Box3<Real>& box0, const Box3<Real>& box1, const Vector3D<Real>& velocity, Real tmax, Real& tfirst, Real& tlast)
 {
-	auto min0 = Math<Real>::sm_Zero;
-	auto max0 = Math<Real>::sm_Zero;
+	auto min0 = Math<Real>::GetValue(0);
+	auto max0 = Math<Real>::GetValue(0);
 	GetProjection(axis, box0, min0, max0);
 
-	auto min1 = Math<Real>::sm_Zero;
-	auto max1 = Math<Real>::sm_Zero;
+	auto min1 = Math<Real>::GetValue(0);
+	auto max1 = Math<Real>::GetValue(0);
 	GetProjection(axis, box1, min1, max1);
 
 	return Test(axis, velocity, min0, max0, min1, max1, tmax, tfirst, tlast);
@@ -205,7 +205,7 @@ void Mathematics::IntersectorAxis<Real>
 {
 	Real dot[2]{ Vector3DTools<Real>::DotProduct(axis,segment[0]),Vector3DTools<Real>::DotProduct(axis,segment[1]) };
 
-	if (Math<Real>::FAbs(dot[1] - dot[0]) < Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(dot[1] - dot[0]) < Math<Real>::GetZeroTolerance())
 	{
 		cfg.mMap = IntersectorConfiguration<Real>::m2;
 	}
@@ -383,11 +383,11 @@ void Mathematics::IntersectorAxis<Real>
 
 	Real absAxes[3]{ Math<Real>::FAbs(axes[0]),Math<Real>::FAbs(axes[1]),Math<Real>::FAbs(axes[2]) };
 
-	Real maxProjectedExtent = Math<Real>::sm_Zero;
+	Real maxProjectedExtent = Math<Real>::GetValue(0);
 
-	if (absAxes[0] < Math<Real>::sm_ZeroTolerance)
+	if (absAxes[0] < Math<Real>::GetZeroTolerance())
 	{
-		if (absAxes[1] < Math<Real>::sm_ZeroTolerance)
+		if (absAxes[1] < Math<Real>::GetZeroTolerance())
 		{
 			// face-face
 			cfg.mMap = IntersectorConfiguration<Real>::m44;
@@ -395,7 +395,7 @@ void Mathematics::IntersectorAxis<Real>
 			maxProjectedExtent = absAxes[2] * box.GetExtent(2);
 
 			// faces have normals along axis[2]
-			if (axes[2] > Math<Real>::sm_Zero)
+			if (axes[2] > Math<Real>::GetValue(0))
 			{
 				cfg.mIndex[0] = 0;
 				cfg.mIndex[1] = 1;
@@ -420,7 +420,7 @@ void Mathematics::IntersectorAxis<Real>
 				cfg.mIndex[7] = 2;
 			}
 		}
-		else if (absAxes[2] < Math<Real>::sm_ZeroTolerance)
+		else if (absAxes[2] < Math<Real>::GetZeroTolerance())
 		{
 			// face-face
 			cfg.mMap = IntersectorConfiguration<Real>::m44;
@@ -428,7 +428,7 @@ void Mathematics::IntersectorAxis<Real>
 			maxProjectedExtent = absAxes[1] * box.GetExtent(1);
 
 			// faces have normals along axis[1]
-			if (axes[1] > Math<Real>::sm_Zero)
+			if (axes[1] > Math<Real>::GetValue(0))
 			{
 				cfg.mIndex[0] = 4;
 				cfg.mIndex[1] = 5;
@@ -461,9 +461,9 @@ void Mathematics::IntersectorAxis<Real>
 			maxProjectedExtent = absAxes[1] * box.GetExtent(1) + absAxes[2] * box.GetExtent(2);
 
 			// axis 0 is perpendicular to axis
-			if (axes[1] > Math<Real>::sm_Zero)
+			if (axes[1] > Math<Real>::GetValue(0))
 			{
-				if (axes[2] > Math<Real>::sm_Zero)
+				if (axes[2] > Math<Real>::GetValue(0))
 				{
 					cfg.mIndex[0] = 0;
 					cfg.mIndex[1] = 1;
@@ -482,7 +482,7 @@ void Mathematics::IntersectorAxis<Real>
 			}
 			else // axes[1] < 0
 			{
-				if (axes[2] > Math<Real>::sm_Zero)
+				if (axes[2] > Math<Real>::GetValue(0))
 				{
 					cfg.mIndex[0] = 2;
 					cfg.mIndex[1] = 3;
@@ -501,9 +501,9 @@ void Mathematics::IntersectorAxis<Real>
 			}
 		}
 	}
-	else if (absAxes[1] < Math<Real>::sm_ZeroTolerance)
+	else if (absAxes[1] < Math<Real>::GetZeroTolerance())
 	{
-		if (absAxes[2] < Math<Real>::sm_ZeroTolerance)
+		if (absAxes[2] < Math<Real>::GetZeroTolerance())
 		{
 			// face-face
 			cfg.mMap = IntersectorConfiguration<Real>::m44;
@@ -511,7 +511,7 @@ void Mathematics::IntersectorAxis<Real>
 			maxProjectedExtent = absAxes[0] * box.GetExtent(0);
 
 			// faces have normals along axis[0]
-			if (axes[0] > Math<Real>::sm_Zero)
+			if (axes[0] > Math<Real>::GetValue(0))
 			{
 				cfg.mIndex[0] = 0;
 				cfg.mIndex[1] = 2;
@@ -545,9 +545,9 @@ void Mathematics::IntersectorAxis<Real>
 			maxProjectedExtent = absAxes[0] * box.GetExtent(0) + absAxes[2] * box.GetExtent(2);
 
 			// axis 1 is perpendicular to axis
-			if (axes[0] > Math<Real>::sm_Zero)
+			if (axes[0] > Math<Real>::GetValue(0))
 			{
-				if (axes[2] > Math<Real>::sm_Zero)
+				if (axes[2] > Math<Real>::GetValue(0))
 				{
 					cfg.mIndex[0] = 0;
 					cfg.mIndex[1] = 2;
@@ -566,7 +566,7 @@ void Mathematics::IntersectorAxis<Real>
 			}
 			else // axes[0] < 0
 			{
-				if (axes[2] > Math<Real>::sm_Zero)
+				if (axes[2] > Math<Real>::GetValue(0))
 				{
 					cfg.mIndex[0] = 1;
 					cfg.mIndex[1] = 3;
@@ -586,7 +586,7 @@ void Mathematics::IntersectorAxis<Real>
 		}
 	}
 
-	else if (absAxes[2] < Math<Real>::sm_ZeroTolerance)
+	else if (absAxes[2] < Math<Real>::GetZeroTolerance())
 	{
 		// only axis2 less than zero
 		// seg-seg
@@ -595,9 +595,9 @@ void Mathematics::IntersectorAxis<Real>
 		maxProjectedExtent = absAxes[0] * box.GetExtent(0) + absAxes[1] * box.GetExtent(1);
 
 		// axis 2 is perpendicular to axis
-		if (axes[0] > Math<Real>::sm_Zero)
+		if (axes[0] > Math<Real>::GetValue(0))
 		{
-			if (axes[1] > Math<Real>::sm_Zero)
+			if (axes[1] > Math<Real>::GetValue(0))
 			{
 				cfg.mIndex[0] = 0;
 				cfg.mIndex[1] = 4;
@@ -616,7 +616,7 @@ void Mathematics::IntersectorAxis<Real>
 		}
 		else // axes[0] < 0
 		{
-			if (axes[1] > Math<Real>::sm_Zero)
+			if (axes[1] > Math<Real>::GetValue(0))
 			{
 				cfg.mIndex[0] = 1;
 				cfg.mIndex[1] = 5;
@@ -643,7 +643,7 @@ void Mathematics::IntersectorAxis<Real>
 		maxProjectedExtent = absAxes[0] * box.GetExtent(0) + absAxes[1] * box.GetExtent(1) + absAxes[2] * box.GetExtent(2);
 
 		// only these two vertices matter, the rest are irrelevant
-		cfg.mIndex[0] = (axes[0] > Math<Real>::sm_Zero ? 0 : 1) + (axes[1] > Math<Real>::sm_Zero ? 0 : 2) + (axes[2] > Math<Real>::sm_Zero ? 0 : 4);
+		cfg.mIndex[0] = (axes[0] > Math<Real>::GetValue(0) ? 0 : 1) + (axes[1] > Math<Real>::GetValue(0) ? 0 : 2) + (axes[2] > Math<Real>::GetValue(0) ? 0 : 4);
 		// by ordering the vertices this way, opposite corners add up to 7
 		cfg.mIndex[7] = 7 - cfg.mIndex[0];
 	}
@@ -668,12 +668,12 @@ bool Mathematics::IntersectorAxis<Real>
 	//
 	// velocity is Velocity1 - Velocity0
 
-	auto t = Math<Real>::sm_Zero;
+	auto t = Math<Real>::GetValue(0);
 	auto speed = Vector3DTools<Real>::DotProduct(axis, velocity);
 
 	if (max1 < min0) // object1 on left of object0
 	{
-		if (speed <= Math<Real>::sm_Zero) // object1 moving away from object0
+		if (speed <= Math<Real>::GetValue(0)) // object1 moving away from object0
 		{
 			return false;
 		}
@@ -706,7 +706,7 @@ bool Mathematics::IntersectorAxis<Real>
 	}
 	else if (max0 < min1)   // object1 on right of object0
 	{
-		if (speed >= Math<Real>::sm_Zero) // object1 moving away from object0
+		if (speed >= Math<Real>::GetValue(0)) // object1 moving away from object0
 		{
 			return false;
 		}
@@ -740,7 +740,7 @@ bool Mathematics::IntersectorAxis<Real>
 	}
 	else // object1 and object0 on overlapping interval
 	{
-		if (speed > Math<Real>::sm_Zero)
+		if (speed > Math<Real>::GetValue(0))
 		{
 			// find last time of contact on this axis
 			t = (max0 - min1) / speed;
@@ -755,7 +755,7 @@ bool Mathematics::IntersectorAxis<Real>
 				return false;
 			}
 		}
-		else if (speed < Math<Real>::sm_Zero)
+		else if (speed < Math<Real>::GetValue(0))
 		{
 			// find last time of contact on this axis
 			t = (min0 - max1) / speed;
@@ -783,12 +783,12 @@ bool Mathematics::IntersectorAxis<Real>
 	// and cfg1Start are the current potential configurations for contact,
 	// and cfg0Final and cfg1Final are improved configurations.
 
-	auto t = Math<Real>::sm_Zero;
+	auto t = Math<Real>::GetValue(0);
 	auto speed = Vector3DTools<Real>::DotProduct(axis, velocity);
 
 	if (cfg1Start.mMax < cfg0Start.mMin) // object1 left of object0
 	{
-		if (speed <= Math<Real>::sm_Zero) // object1 moving away from object0
+		if (speed <= Math<Real>::GetValue(0)) // object1 moving away from object0
 		{
 			return false;
 		}
@@ -827,7 +827,7 @@ bool Mathematics::IntersectorAxis<Real>
 	}
 	else if (cfg0Start.mMax < cfg1Start.mMin)  // obj1 right of obj0
 	{
-		if (speed >= Math<Real>::sm_Zero) // object1 moving away from object0
+		if (speed >= Math<Real>::GetValue(0)) // object1 moving away from object0
 		{
 			return false;
 		}
@@ -866,7 +866,7 @@ bool Mathematics::IntersectorAxis<Real>
 	}
 	else // object1 and object0 on overlapping interval
 	{
-		if (speed > Math<Real>::sm_Zero)
+		if (speed > Math<Real>::GetValue(0))
 		{
 			// find last time of contact on this axis
 			t = (cfg0Start.mMax - cfg1Start.mMin) / speed;
@@ -881,7 +881,7 @@ bool Mathematics::IntersectorAxis<Real>
 				return false;
 			}
 		}
-		else if (speed < Math<Real>::sm_Zero)
+		else if (speed < Math<Real>::GetValue(0))
 		{
 			// find last time of contact on this axis
 			t = (cfg0Start.mMin - cfg1Start.mMax) / speed;

@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, const Real epsilon = Math::sm_ZeroTolerance);
+		TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

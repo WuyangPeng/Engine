@@ -19,7 +19,7 @@
 static void RecurseRandomPoint (int dimension, double* point)
 {
     // Select random point on circle.
-    const double angle = Mathematics::Randomd::IntervalRandom(0.0,Mathematics::Mathd::sm_TwoPI);
+    const double angle = Mathematics::Randomd::IntervalRandom(0.0,Mathematics::Mathd::GetTwoPI());
     const double cs = Mathematics::Mathd::Cos(angle);
    const  double sn = Mathematics::Mathd::Sin(angle);
 

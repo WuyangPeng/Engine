@@ -205,7 +205,10 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivative (int i, Real pos[3]) const
     {
     case 0:  return GetDerivativeU(pos[0], pos[1], pos[2]);
     case 1:  return GetDerivativeV(pos[0], pos[1], pos[2]);
-    case 2:  return GetDerivativeW(pos[0], pos[1], pos[2]);
+    case 2:
+        return GetDerivativeW(pos[0], pos[1], pos[2]);
+    default:
+        break;
     }
 
     MATHEMATICS_ASSERTION_0(false, "Derivatives larger than order 3 not supported\n");

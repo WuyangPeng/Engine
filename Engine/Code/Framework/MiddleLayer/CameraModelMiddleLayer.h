@@ -37,7 +37,7 @@ namespace Framework
 		CameraModelMiddleLayer(CameraModelMiddleLayer&& rhs) noexcept;
 		CameraModelMiddleLayer& operator=(CameraModelMiddleLayer&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool Initialize() override;
 		void Terminate() override;

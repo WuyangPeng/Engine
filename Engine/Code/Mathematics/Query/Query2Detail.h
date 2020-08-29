@@ -106,9 +106,9 @@ Mathematics::LineQueryType Mathematics::Query2<Real>
 		det = -det;
 	}
 
-	if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(det) <= Math<Real>::GetZeroTolerance())
 		return LineQueryType::OnLine;
-	else if (Math<Real>::sm_Zero < det)
+	else if (Math<Real>::GetValue(0) < det)
 		return LineQueryType::Right;
 	else
 		return LineQueryType::Left;
@@ -208,9 +208,9 @@ Mathematics::CircumcircleQueryType Mathematics::Query2<Real>
 		det = -det;
 	}
 
-	if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(det) <= Math<Real>::GetZeroTolerance())
 		return CircumcircleQueryType::OnCircumcircle;
-	else if (det < Math<Real>::sm_Zero)
+	else if (det < Math<Real>::GetValue(0))
 		return CircumcircleQueryType::Outside;
 	else
 		return CircumcircleQueryType::Inside;

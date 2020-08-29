@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
 #include <vector>
@@ -37,7 +37,7 @@ namespace Mathematics
 		// 四个角的远平面的截锥是 E + f*D + (f/n)*(s0*u*U + s1*r*Real)，
 		// 其中|s0| = |s1| = 1（四项选择）
 		Frustum3(const Vector3D& origin, const Vector3D& directionVector, const Vector3D& upVector, const Vector3D& rightVector, Real directionMin,
-				 Real directionMax, Real upBound, Real rightBound, const Real epsilon = Math::sm_ZeroTolerance);
+				 Real directionMax, Real upBound, Real rightBound, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

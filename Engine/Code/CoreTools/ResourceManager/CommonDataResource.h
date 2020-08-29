@@ -28,7 +28,7 @@ namespace CoreTools
 		CommonDataResource(CommonDataResource&&) noexcept = default;
 		CommonDataResource& operator=(CommonDataResource&&) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		uint32_t GetSize() const noexcept override;
 		bool IsDisposed() const noexcept override;

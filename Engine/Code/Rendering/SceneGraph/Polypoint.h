@@ -26,7 +26,7 @@ namespace Rendering
 		Polypoint(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer);
 	 
                 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Polypoint);	
  

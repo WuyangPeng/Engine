@@ -41,7 +41,7 @@ void Rendering::LightModelDirectionVectorConstant
 
 	auto light = GetLight();
 	const auto worldInverseMatrix = visual->GetWorldTransform().GetInverseMatrix();
-	auto modelDirectionVector = worldInverseMatrix * light->GetDirectionVector();
+        const auto modelDirectionVector = worldInverseMatrix * light->GetDirectionVector();
 
 	SetRegister(0, modelDirectionVector);
 

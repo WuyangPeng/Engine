@@ -17,7 +17,7 @@
 #include <gsl/gsl_util>
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-
+#include SYSTEM_WARNING_DISABLE(26496)
 Rendering::NormalDerivatives ::NormalDerivatives(const VertexBufferAccessor& vertexBufferAccessor)
     : m_VertexBufferAccessor{ vertexBufferAccessor },
       m_DerivativestNormal{ vertexBufferAccessor.GetNumVertices() },
@@ -116,7 +116,7 @@ void Rendering::NormalDerivatives ::ComputeNormalDerivativesMatrix()
             }
         }
 
-        m_ProjectMatrix[index].SetColumn(3, APoint::sm_Origin.GetHomogeneousPoint());
+        m_ProjectMatrix[index].SetColumn(3,Mathematics::Pointf::g_Origin.GetHomogeneousPoint());
         m_DerivativestNormal[index] = m_DifferentMatrix[index] * m_ProjectMatrix[index].Inverse();
     }
 }

@@ -24,7 +24,7 @@ namespace CoreTools
 		BufferPoolImpl() noexcept;
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		Buffer* Get() override;
 

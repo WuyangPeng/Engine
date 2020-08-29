@@ -16,7 +16,7 @@
 
 namespace Physics
 { 
-	class PHYSICS_HIDDEN_DECLARE BoundTreeSplitTrianglesImpl
+	class PHYSICS_HIDDEN_DECLARE BoundTreeSplitTrianglesImpl  
 	{
 	public:
 		using ClassType = BoundTreeSplitTrianglesImpl;

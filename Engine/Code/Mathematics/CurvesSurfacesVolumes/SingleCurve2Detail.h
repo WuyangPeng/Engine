@@ -44,7 +44,7 @@ template <typename Real>
 Real Mathematics::SingleCurve2<Real>
 	::GetTime(Real length, int iterations, Real tolerance) const
 {
-    if (length <= Math<Real>::sm_Zero)
+    if (length <= Math<Real>::GetValue(0))
     {
         return this->mTMin;
     }
@@ -87,7 +87,7 @@ Real Mathematics::SingleCurve2<Real>
 
         // Update the root-bounding interval and test for containment of the
         // candidate.
-        if (difference > Math<Real>::sm_Zero)
+        if (difference > Math<Real>::GetValue(0))
         {
             upper = t;
             if (tCandidate <= lower)

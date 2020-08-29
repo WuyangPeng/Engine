@@ -30,7 +30,7 @@ namespace Network
         BoostSockInetAddress(BoostSockInetAddress&& rhs) noexcept;
         BoostSockInetAddress& operator=(BoostSockInetAddress&& rhs) noexcept;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         const BoostInetAddressType& GetBoostInetAddress() const noexcept override;
         BoostInetAddressType& GetBoostInetAddress() override;

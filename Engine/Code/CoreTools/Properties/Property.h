@@ -25,7 +25,7 @@ namespace CoreTools
 		Property();
 		explicit Property(V value);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		ClassType& operator=(R value);
 		operator R() const;

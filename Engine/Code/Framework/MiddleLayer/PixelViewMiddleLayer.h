@@ -31,7 +31,7 @@ namespace Framework
 		PixelViewMiddleLayer(PixelViewMiddleLayer&& rhs) noexcept;
 		PixelViewMiddleLayer& operator=(PixelViewMiddleLayer&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool Initialize() override;
 		bool Idle(int64_t timeDelta) override;

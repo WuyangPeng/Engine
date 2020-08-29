@@ -20,8 +20,8 @@ Mathematics::EllipseByArcs2<Real>
 	:m_Points(numArcs + 1), m_Circle(numArcs)
 {
 	MATHEMATICS_ASSERTION_2(2 <= m_Circle.size(), "必须至少指定两个圆弧\n");
-	MATHEMATICS_ASSERTION_2(Math<Real>::sm_Zero <= begin, "begin必须大于或等于0\n");
-	MATHEMATICS_ASSERTION_2(Math<Real>::sm_Zero <= end, " end必须大于或等于0\n");
+	MATHEMATICS_ASSERTION_2(Math<Real>::GetValue(0) <= begin, "begin必须大于或等于0\n");
+	MATHEMATICS_ASSERTION_2(Math<Real>::GetValue(0) <= end, " end必须大于或等于0\n");
 
 	Calculate(begin, end);
 
@@ -42,8 +42,8 @@ void Mathematics::EllipseByArcs2<Real>
 	auto numArcs = boost::numeric_cast<int>(m_Circle.size());
 
 	// 在第一象限椭圆的终点。点按逆时针顺序产生。
-	m_Points[0] = Vector2D{ begin, Math<Real>::sm_Zero };
-	m_Points[numArcs] = Vector2D{ Math<Real>::sm_Zero, end };
+	m_Points[0] = Vector2D{ begin, Math<Real>::GetValue(0) };
+	m_Points[numArcs] = Vector2D{ Math<Real>::GetValue(0), end };
 
 	// 终点的曲率，对于计算圆弧存储曲率。
 	auto beginCurvature = begin / endSquare;

@@ -240,16 +240,16 @@ void Rendering::CameraMatrix
     RENDERING_ASSERTION_1(nearExtrude < farExtrude, "farExtrude必须大于nearExtrude\n");
     
     // 计算最近面的视图体积
-	auto q000 = APoint::sm_Origin + nearExtrude * (p00 - APoint::sm_Origin);
-	auto q100 = APoint::sm_Origin + nearExtrude * (p10 - APoint::sm_Origin);
-	auto q110 = APoint::sm_Origin + nearExtrude * (p11 - APoint::sm_Origin);
-	auto q010 = APoint::sm_Origin + nearExtrude * (p01 - APoint::sm_Origin);
+	auto q000 = Mathematics::Pointf::g_Origin + nearExtrude * (p00 - Mathematics::Pointf::g_Origin);
+	auto q100 = Mathematics::Pointf::g_Origin + nearExtrude * (p10 - Mathematics::Pointf::g_Origin);
+	auto q110 = Mathematics::Pointf::g_Origin + nearExtrude * (p11 - Mathematics::Pointf::g_Origin);
+	auto q010 = Mathematics::Pointf::g_Origin + nearExtrude * (p01 - Mathematics::Pointf::g_Origin);
     
     // 计算最远面的视图体积
-	auto q001 = APoint::sm_Origin + farExtrude * (p00 - APoint::sm_Origin);
-	auto q101 = APoint::sm_Origin + farExtrude * (p10 - APoint::sm_Origin);
-	auto q111 = APoint::sm_Origin + farExtrude * (p11 - APoint::sm_Origin);
-	auto q011 = APoint::sm_Origin + farExtrude * (p01 - APoint::sm_Origin);
+	auto q001 = Mathematics::Pointf::g_Origin + farExtrude * (p00 - Mathematics::Pointf::g_Origin);
+	auto q101 = Mathematics::Pointf::g_Origin + farExtrude * (p10 - Mathematics::Pointf::g_Origin);
+	auto q111 = Mathematics::Pointf::g_Origin + farExtrude * (p11 - Mathematics::Pointf::g_Origin);
+	auto q011 = Mathematics::Pointf::g_Origin + farExtrude * (p01 - Mathematics::Pointf::g_Origin);
     
     // 计算q111的表示
 	auto u0 = q100 - q000;

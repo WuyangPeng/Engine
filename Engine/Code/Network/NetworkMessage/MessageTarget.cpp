@@ -22,6 +22,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26456)
 Network::MessageTarget
 	::MessageTarget(const MessageBufferSharedPtr& messageBuffer) noexcept
 	:m_Target{ messageBuffer }, m_ParserStrategy{ messageBuffer->GetParserStrategy() }

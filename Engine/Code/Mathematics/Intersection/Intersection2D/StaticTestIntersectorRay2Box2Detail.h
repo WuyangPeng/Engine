@@ -47,7 +47,7 @@ void Mathematics::StaticTestIntersectorRay2Box2<Real>
 	AWdU[0] = Math::FAbs(WdU[0]);
 	DdU[0] = Vector2DTools::DotProduct(diff, mBox.GetFirstAxis());
 	ADdU[0] = Math::FAbs(DdU[0]);
-	if (ADdU[0] > mBox.GetFirstExtent() && DdU[0] * WdU[0] >= Math<Real>::sm_Zero)
+	if (ADdU[0] > mBox.GetFirstExtent() && DdU[0] * WdU[0] >= Math<Real>::GetZero())
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
 		return;
@@ -57,7 +57,7 @@ void Mathematics::StaticTestIntersectorRay2Box2<Real>
 	AWdU[1] = Math::FAbs(WdU[1]);
 	DdU[1] = Vector2DTools::DotProduct(diff, mBox.GetSecondAxis());
 	ADdU[1] = Math::FAbs(DdU[1]);
-	if (ADdU[1] > mBox.GetSecondExtent() && DdU[1] * WdU[1] >= Math<Real>::sm_Zero)
+	if (ADdU[1] > mBox.GetSecondExtent() && DdU[1] * WdU[1] >= Math<Real>::GetZero())
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
 		return;

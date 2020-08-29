@@ -38,7 +38,7 @@ template <typename Real>
 void Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 	::Find()
 {
-	SetContactTime(Math<Real>::sm_Zero);
+	SetContactTime(Math<Real>::GetZero());
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
@@ -56,7 +56,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 		return;
 	}
 
-	if (mContactTime == Math<Real>::sm_Zero)
+	if (mContactTime == Math<Real>::GetZero())
 	{
 		// Intersecting now.
 		this->SetIntersectionType(IntersectionType::Empty);

@@ -47,6 +47,7 @@
 	#include SYSTEM_WARNING_DISABLE(26497) 	
 	#include SYSTEM_WARNING_DISABLE(26812) 	
 	#include SYSTEM_WARNING_DISABLE(26814) 
+	#include SYSTEM_WARNING_DISABLE(26819) 
 
 	#include <boost/property_tree/ptree.hpp>
 	#include <boost/property_tree/json_parser.hpp>

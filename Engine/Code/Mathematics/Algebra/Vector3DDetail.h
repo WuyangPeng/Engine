@@ -26,24 +26,24 @@
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
-	::sm_Zero{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
+	::sm_Zero{ Math::GetValue(0),Math::GetValue(0),Math::GetValue(0) };
 
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
-	::sm_UnitX{ Math::sm_One, Math::sm_Zero, Math::sm_Zero };
+	::sm_UnitX{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
-	::sm_UnitY{ Math::sm_Zero,Math::sm_One,Math::sm_Zero };
+	::sm_UnitY{ Math::GetValue(0),Math::GetValue(1),Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
-	::sm_UnitZ{ Math::sm_Zero,Math::sm_Zero,Math::sm_One };
+	::sm_UnitZ{ Math::GetValue(0),Math::GetValue(0),Math::GetValue(1) };
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
-	::sm_One{ Math::sm_One,Math::sm_One,Math::sm_One };
+	::sm_One{ Math::GetValue(1),Math::GetValue(1),Math::GetValue(1) };
 	
 	#include STSTEM_WARNING_POP
 
@@ -87,7 +87,7 @@ template <typename Real>
 template <typename RhsType>
 Mathematics::Vector3D<Real>
 	::Vector3D(const Vector2D<RhsType>& vector)
-	:m_Tuple{ boost::numeric_cast<Real>(vector.GetXCoordinate()), boost::numeric_cast<Real>(vector.GetYCoordinate()),Math::sm_Zero }
+	:m_Tuple{ boost::numeric_cast<Real>(vector.GetXCoordinate()), boost::numeric_cast<Real>(vector.GetYCoordinate()),Math::GetValue(0) }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -233,7 +233,7 @@ bool Mathematics::Vector3D<Real>
 
 	auto length = Vector3DTools::VectorMagnitude(*this);
 
-	if (Math::FAbs(length - Math::sm_One) <= epsilon)
+	if (Math::FAbs(length - Math::GetValue(1)) <= epsilon)
 		return true;
 	else
 		return false;
@@ -313,7 +313,7 @@ Mathematics::Vector3D<Real>& Mathematics::Vector3D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (Math::sm_ZeroTolerance < Math::FAbs(rhs))
+	if (Math::GetZeroTolerance() < Math::FAbs(rhs))
 	{
 		m_Tuple[0] /= rhs;
 		m_Tuple[1] /= rhs;
@@ -350,9 +350,9 @@ typename const Mathematics::Vector3D<Real>::BarycentricCoordinates Mathematics::
 		Tuple4 bary{ Vector3DTools::DotProduct(difference[3],e1CrossE2) / det,
 					 Vector3DTools::DotProduct(difference[3],e2CrossE0) / det,
 					 Vector3DTools::DotProduct(difference[3],e0CrossE1) / det,
-					 Math::sm_Zero };
+					 Math::GetValue(0) };
 
-		bary[3] = Math::sm_One - bary[0] - bary[1] - bary[2];
+		bary[3] = Math::GetValue(1) - bary[0] - bary[1] - bary[2];
 
 		return BarycentricCoordinates{ true,bary };
 	}

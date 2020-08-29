@@ -15,7 +15,7 @@
     #include "CoreTools/Helper/MemoryMacro.h"
     #include "Mathematics/Algebra/Vector3DDetail.h"
     #include "Mathematics/Base/MathDetail.h"
-    #include STSTEM_WARNING_PUSH
+    #include STSTEM_WARNING_PUSH 
     #include SYSTEM_WARNING_DISABLE(26481)
     #include SYSTEM_WARNING_DISABLE(26489)
     #include SYSTEM_WARNING_DISABLE(26493)

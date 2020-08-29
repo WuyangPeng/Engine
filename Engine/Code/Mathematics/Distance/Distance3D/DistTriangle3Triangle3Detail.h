@@ -43,7 +43,7 @@ typename const Mathematics::DistTriangle3Triangle3<Real>::DistanceResult Mathema
 	// Compare edges of triangle0 to the interior of triangle1.
 	auto sqrDist = Math::sm_MaxReal;
 
-	auto ratio = Math::sm_Zero;
+	auto ratio = Math::GetValue(0);
 	auto i0 = 0;
 	auto i1 = 0;
 	for (i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
@@ -65,14 +65,14 @@ typename const Mathematics::DistTriangle3Triangle3<Real>::DistanceResult Mathema
 			ratio = queryST.GetSegmentParameter() / edge.GetExtent();
 			mTriangleBary0[i0] = (static_cast<Real>(0.5))*(static_cast<Real>(1) - ratio);
 			mTriangleBary0[i1] = static_cast<Real>(1) - mTriangleBary0[i0];
-			mTriangleBary0[3 - i0 - i1] = Math<Real>::sm_Zero;
+			mTriangleBary0[3 - i0 - i1] = Math<Real>::GetValue(0);
 			mTriangleBary1[0] = queryST.GetTriangleBary(0);
 			mTriangleBary1[1] = queryST.GetTriangleBary(1);
 			mTriangleBary1[2] = queryST.GetTriangleBary(2);
 
-			if (sqrDist <= Math::sm_ZeroTolerance)
+			if (sqrDist <= Math::GetZeroTolerance())
 			{
-				DistanceResult{ Math<Real>::sm_Zero, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+				DistanceResult{ Math<Real>::GetValue(0), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 			}
 		}
 	}
@@ -97,19 +97,19 @@ typename const Mathematics::DistTriangle3Triangle3<Real>::DistanceResult Mathema
 			ratio = queryST.GetSegmentParameter() / edge.GetExtent();
 			mTriangleBary1[i0] = (static_cast<Real>(0.5)) * (static_cast<Real>(1) - ratio);
 			mTriangleBary1[i1] = static_cast<Real>(1) - mTriangleBary1[i0];
-			mTriangleBary1[3 - i0 - i1] = Math<Real>::sm_Zero;
+			mTriangleBary1[3 - i0 - i1] = Math<Real>::GetValue(0);
 			mTriangleBary0[0] = queryST.GetTriangleBary(0);
 			mTriangleBary0[1] = queryST.GetTriangleBary(1);
 			mTriangleBary0[2] = queryST.GetTriangleBary(2);
 
-			if (sqrDist <= Math::sm_ZeroTolerance)
+			if (sqrDist <= Math::GetZeroTolerance())
 			{
-				return DistanceResult{ Math<Real>::sm_Zero, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+				return DistanceResult{ Math<Real>::GetValue(0), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 			}
 		}
 	}
 
-	return DistanceResult{ sqrDist, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDist, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>

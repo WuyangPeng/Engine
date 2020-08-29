@@ -35,10 +35,10 @@ namespace Mathematics
 		// 如果你想知道s[]值，传递isCalculateParameter为'true'。
 		// 代码用于射线-射线，直线-直线和线段-线段的相交测试共享。
 		StaticTestIntersectorLine2Classify(const Vector2D& lhsOrigin, const Vector2D& lhsDirection, const Vector2D& rhsOrigin,
-										   const Vector2D& rhsDirection, bool isCalculateParameter = true, const Real epsilon = Math::sm_ZeroTolerance);
+										   const Vector2D& rhsDirection, bool isCalculateParameter = true, const Real epsilon = Math::GetZeroTolerance());
 		virtual ~StaticTestIntersectorLine2Classify();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		Real GetFirstParameter() const;
 		Real GetSecondParameter() const;

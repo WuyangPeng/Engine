@@ -1,0 +1,18 @@
+3D游戏与计算机图形学中的数学方法（Mathematics for 3D Game Programming and Computer Graphics）
+（第3版）
+
+★★
+作者：Eric Lengyel 
+
+官方网站：
+http://www.mathfor3dgameprogramming.com/
+
+知识点 
+1.	3D数学基础知识。 
+2.	3D数学基础知识练习。
+3.	向量和矩阵的基础知识。
+4.	光照的基础知识。
+5.	物理的基础知识。
+
+代码 
+1.  书籍代码。 

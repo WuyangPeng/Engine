@@ -31,7 +31,7 @@ namespace Mathematics
 		DistancePoint2Line2(const Vector2D& point, const Line2& line);
 		virtual ~DistancePoint2Line2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector2D GetPoint() const;
 		const Line2 GetLine() const;

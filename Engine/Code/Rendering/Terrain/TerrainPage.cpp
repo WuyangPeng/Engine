@@ -50,7 +50,7 @@ Rendering::TerrainPage
          const int x = i % mSize;
          const int y = i / mSize;
 
-		 GetVertexBuffer()->SetPosition(vba, i, Mathematics::Float3(GetX(x), GetY(y), GetHeight(i)));       
+		 GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointf(GetX(x), GetY(y), GetHeight(i)));       
     }
 
 	UpdateModelSpace(VisualUpdateType::Normals);

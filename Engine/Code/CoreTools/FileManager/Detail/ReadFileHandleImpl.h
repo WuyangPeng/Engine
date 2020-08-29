@@ -23,7 +23,7 @@ namespace CoreTools
 		explicit ReadFileHandleImpl(const String& fileName);
 		 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  int GetFileByteSize() const override;
 

@@ -349,7 +349,7 @@ Real Mathematics::PolynomialFit4Powers<Real>
 		zPowers[power] = zPowers[beforeIndex] * z;
 	}
 
-	auto w = Math<Real>::sm_Zero;
+	auto w = Math<Real>::GetValue(0);
 	for (auto i = 0u; i < m_Powers.size(); ++i)
 	{
 		auto xp = xPowers[m_Powers[i][0]];

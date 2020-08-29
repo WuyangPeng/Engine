@@ -22,7 +22,7 @@ namespace CoreTools
 	public:
 		explicit ErrorConsoleTextColorsManager(LogLevel logLevel); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	private:
 		using ErrorManager = ConsoleTextColorsManager<System::StandardHandle::Error>;

@@ -14,7 +14,9 @@
 #include "IKJoint.h"
 
 RENDERING_EXPORT_SHARED_PTR(IKControllerImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE IKController : public Controller
@@ -31,7 +33,7 @@ namespace Rendering
         IKController(IKController&&) = default;
         IKController& operator=(IKController&&) = default;
 
-            CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+            CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(IKController);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
@@ -60,5 +62,6 @@ namespace Rendering
     CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, IKController);
 
 }
+#include STSTEM_WARNING_POP
 
 #endif  // RENDERING_CONTROLLERS_IK_CONTROLLER_H

@@ -132,10 +132,10 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 	if (eigenvectors && mSize > 0)
 	{
 		// Start with the identity matrix.
-		std::fill(eigenvectors, eigenvectors + mSize * mSize, Math::sm_Zero);
+		std::fill(eigenvectors, eigenvectors + mSize * mSize, Math::GetValue(0));
 		for (auto d = 0; d < mSize; ++d)
 		{
-			eigenvectors[d + mSize * d] = Math::sm_One;
+			eigenvectors[d + mSize * d] = Math::GetValue(1);
 		}
 
 		// Multiply the Householder reflections using backward accumulation.
@@ -148,9 +148,9 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 			auto twoinvvdv = column[mSize*(i + 1)];
 			for (r = 0; r < i + 1; ++r)
 			{
-				mVVector[r] = Math::sm_Zero;
+				mVVector[r] = Math::GetValue(0);
 			}
-			mVVector[r] = Math::sm_One;
+			mVVector[r] = Math::GetValue(1);
 			for (++r; r < mSize; ++r)
 			{
 				mVVector[r] = column[mSize*r];
@@ -159,7 +159,7 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 			// Compute the w vector.
 			for (r = 0; r < mSize; ++r)
 			{
-				mWVector[r] = Math::sm_Zero;
+				mWVector[r] = Math::GetValue(0);
 				for (c = rmin; c < mSize; ++c)
 				{
 					mWVector[r] += mVVector[c] * eigenvectors[r + mSize * c];
@@ -285,11 +285,11 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 		memset(x, 0, mSize * sizeof(Real));
 		if (mPermutation[c] >= 0)
 		{
-			x[mPermutation[c]] = Math::sm_One;
+			x[mPermutation[c]] = Math::GetValue(1);
 		}
 		else
 		{
-			x[c] = Math::sm_One;
+			x[c] = Math::GetValue(1);
 		}
 
 		// Apply the Givens rotations.
@@ -354,10 +354,10 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 	{
 		// Compute the Householder vector.  Read the initial vector from the
 		// row of the matrix.
-		auto length = Math::sm_Zero;
+		auto length = Math::GetValue(0);
 		for (r = 0; r < ip1; ++r)
 		{
-			mVVector[r] = Math::sm_Zero;
+			mVVector[r] = Math::GetValue(0);
 		}
 		for (r = ip1; r < mSize; ++r)
 		{
@@ -365,14 +365,14 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 			mVVector[r] = vr;
 			length += vr * vr;
 		}
-		auto vdv = Math::sm_One;
+		auto vdv = Math::GetValue(1);
 		length = Math::Sqrt(length);
-		if (length > Math::sm_Zero)
+		if (length > Math::GetValue(0))
 		{
 			auto& v1 = mVVector[ip1];
-			auto sgn = (v1 >= Math::sm_Zero ? Math::sm_One : Math::sm_NegativeOne);
-			auto invDenom = (Math::sm_One) / (v1 + sgn * length);
-			v1 = Math::sm_One;
+			auto sgn = (v1 >= Math::GetValue(0) ? Math::GetValue(1) : Math::GetValue(-1));
+			auto invDenom = (Math::GetValue(1)) / (v1 + sgn * length);
+			v1 = Math::GetValue(1);
 			for (r = ip1 + 1; r < mSize; ++r)
 			{
 				auto& vr = mVVector[r];
@@ -382,12 +382,12 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 		}
 
 		// Compute the rank-1 offsets v*w^T and w*v^T.
-		auto invvdv = Math::sm_One / vdv;
+		auto invvdv = Math::GetValue(1) / vdv;
 		auto twoinvvdv = invvdv * static_cast<Real>(2);
-		auto pdvtvdv = Math::sm_Zero;
+		auto pdvtvdv = Math::GetValue(0);
 		for (r = i; r < mSize; ++r)
 		{
-			mPVector[r] = Math::sm_Zero;
+			mPVector[r] = Math::GetValue(0);
 			for (c = i; c < r; ++c)
 			{
 				mPVector[r] += mMatrix[r + mSize * c] * mVVector[c];
@@ -451,26 +451,26 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 	::GetSinCos(Real x, Real y, Real& cs, Real& sn)
 {
 	// Solves sn*x + cs*y = 0 robustly.
-	auto tau = Math::sm_Zero;
-	if (y != Math::sm_Zero)
+	auto tau = Math::GetValue(0);
+	if (y != Math::GetValue(0))
 	{
 		if (Math::FAbs(y) > Math::FAbs(x))
 		{
 			tau = -x / y;
-			sn = (Math::sm_One) / Math::Sqrt((Math::sm_One) + tau * tau);
+			sn = (Math::GetValue(1)) / Math::Sqrt((Math::GetValue(1)) + tau * tau);
 			cs = sn * tau;
 		}
 		else
 		{
 			tau = -y / x;
-			cs = (Math::sm_One) / Math::Sqrt((Math::sm_One) + tau * tau);
+			cs = (Math::GetValue(1)) / Math::Sqrt((Math::GetValue(1)) + tau * tau);
 			sn = cs * tau;
 		}
 	}
 	else
 	{
-		cs = Math::sm_One;
-		sn = Math::sm_Zero;
+		cs = Math::GetValue(1);
+		sn = Math::GetValue(0);
 	}
 }
 
@@ -484,22 +484,22 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 	auto a01 = mSuperdiagonal[imax];
 	auto a11 = mDiagonal[imax + 1];
 	auto dif = (a00 - a11) * static_cast<Real>(0.5);
-	auto sgn = (dif >= Math::sm_Zero ? Math::sm_One : Math::sm_NegativeOne);
+	auto sgn = (dif >= Math::GetValue(0) ? Math::GetValue(1) : Math::GetValue(-1));
 	auto a01sqr = a01 * a01;
 	auto u = a11 - a01sqr / (dif + sgn * Math::Sqrt(dif*dif + a01sqr));
 	auto x = mDiagonal[imin] - u;
 	auto y = mSuperdiagonal[imin];
 
-	auto a12 = Math::sm_Zero;
-	auto a22 = Math::sm_Zero;
-	auto a23 = Math::sm_Zero;
-	auto tmp11 = Math::sm_Zero;
-	auto tmp12 = Math::sm_Zero;
-	auto tmp21 = Math::sm_Zero;
-	auto tmp22 = Math::sm_Zero;
-	auto cs = Math::sm_Zero;
-	auto sn = Math::sm_Zero;
-	auto a02 = Math::sm_Zero;
+	auto a12 = Math::GetValue(0);
+	auto a22 = Math::GetValue(0);
+	auto a23 = Math::GetValue(0);
+	auto tmp11 = Math::GetValue(0);
+	auto tmp12 = Math::GetValue(0);
+	auto tmp21 = Math::GetValue(0);
+	auto tmp22 = Math::GetValue(0);
+	auto cs = Math::GetValue(0);
+	auto sn = Math::GetValue(0);
+	auto a02 = Math::GetValue(0);
 	auto i0 = imin - 1;
 	auto i1 = imin;
 	auto i2 = imin + 1;

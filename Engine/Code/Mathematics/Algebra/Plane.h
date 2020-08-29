@@ -12,7 +12,7 @@
 #include "AlgebraFwd.h"
 #include "HomogeneousPoint.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
@@ -38,33 +38,33 @@ namespace Mathematics
         // c是平面常数，且X = (x0,x1,x2,1) 是在平面上的任意点。
         // 用户必须保证法线的向量是单位长度
         // 存储作为一个4元组是(n0,n1,n2,-c)。
-        explicit Plane(const T epsilon = Math::sm_ZeroTolerance) noexcept;
+        explicit Plane(const T epsilon = Math::GetZeroTolerance()) noexcept;
 
         // 使用AVector构造平面必须保证输入的法线为单位向量，
         // 使用HomogeneousPoint或三个T构造平面，只需保证输入的法线向量是非零向量。
 
         // 直接指定N和c
-        Plane(T normalX, T normalY, T normalZ, T constant, const T epsilon = Math::sm_ZeroTolerance);
-        Plane(const AVector& normal, T constant, const T epsilon = Math::sm_ZeroTolerance);
+        Plane(T normalX, T normalY, T normalZ, T constant, const T epsilon = Math::GetZeroTolerance());
+        Plane(const AVector& normal, T constant, const T epsilon = Math::GetZeroTolerance());
 
         // N被指定，c = Dot(N,P)，其中 P = (p0,p1,p2,1)是在平面上的点。
-        Plane(const AVector& normal, const APoint& point, const T epsilon = Math::sm_ZeroTolerance);
+        Plane(const AVector& normal, const APoint& point, const T epsilon = Math::GetZeroTolerance());
 
         // N = Cross(P1 - P0,P2 - P0) / Length(Cross(P1 - P0,P2 - P0))，
         // c = Dot(N,P0) ，
         // 这里P0，P1，P2是在平面上的点。
-        Plane(const APoint& lhs, const APoint& mhs, const APoint& rhs, const T epsilon = Math::sm_ZeroTolerance);
+        Plane(const APoint& lhs, const APoint& mhs, const APoint& rhs, const T epsilon = Math::GetZeroTolerance());
 
         // 指定整个(n0,n1,n2,-c) 元组。
-        Plane(const HomogeneousPoint& tuple, const T epsilon = Math::sm_ZeroTolerance);
+        Plane(const HomogeneousPoint& tuple, const T epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
         const HomogeneousPoint GetHomogeneousPoint() const;
 
         // 坐标访问
-        const T* GetElements() const noexcept;
-        T* GetElements() noexcept;
+       // const T* GetElements() const noexcept;
+       // T* GetElements() noexcept;
         const T& operator[](int index) const;
         T& operator[](int index);
 

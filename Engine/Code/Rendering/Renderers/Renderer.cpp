@@ -18,7 +18,9 @@
 #include "CoreTools/Helper/ExceptionMacro.h" 
 using std::move;
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Rendering::Renderer
 	::Renderer(RendererTypes type, const RendererBasis& basis)
 	:m_Impl{ RendererFactory::Create(type,basis) }, m_RendererID{ 0 }
@@ -529,7 +531,7 @@ void Rendering::Renderer
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Draw(screenBuffer.at(0).GetPoint(), reflectY);
+	return m_Impl->Draw(screenBuffer.at(0).GetPoint().data(), reflectY);
 }
 
 void Rendering::Renderer
@@ -551,3 +553,4 @@ void Rendering::Renderer
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetRendererType, Rendering::RendererTypes)
+#include STSTEM_WARNING_POP

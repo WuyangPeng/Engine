@@ -35,12 +35,12 @@ template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
 	::Test()
 {
-	auto mContactTime = Math<Real>::sm_Zero;
+	auto mContactTime = Math<Real>::GetZero();
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-	auto fmin = Math::sm_Zero;
-	auto fmax = Math::sm_Zero;
+	auto fmin = Math::GetValue(0);
+	auto fmax = Math::GetValue(0);
 	IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), mTriangle, fmin, fmax);
 
 	if (IntersectorAxis<Real>::Test(mHalfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, mHalfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))

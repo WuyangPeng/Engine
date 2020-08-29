@@ -225,10 +225,10 @@ void Mathematics::EigenDecomposition<Real>
 	m_Diagonal[0] = m_Matrix[0][0];
 	m_Diagonal[1] = m_Matrix[1][1];
 	m_Subdiagonal[0] = m_Matrix[0][1];
-	m_Subdiagonal[1] = Math::sm_Zero;
+	m_Subdiagonal[1] = Math::GetValue(0);
 	m_SolveMatrix[0][0] = static_cast<Real>(1);
-	m_SolveMatrix[0][1] = Math::sm_Zero;
-	m_SolveMatrix[1][0] = Math::sm_Zero;
+	m_SolveMatrix[0][1] = Math::GetValue(0);
+	m_SolveMatrix[1][0] = Math::GetValue(0);
 	m_SolveMatrix[1][1] = static_cast<Real>(1);
 
 	m_IsRotation = true;
@@ -247,8 +247,8 @@ void Mathematics::EigenDecomposition<Real>
 	auto m22 = m_Matrix[2][2];
 
 	m_Diagonal[0] = m00;
-	m_Subdiagonal[2] = Math::sm_Zero;
-	if (Math::sm_ZeroTolerance < Math::FAbs(m02))
+	m_Subdiagonal[2] = Math::GetValue(0);
+	if (Math::GetZeroTolerance() < Math::FAbs(m02))
 	{
 		auto length = Math::Sqrt(m01 * m01 + m02 * m02);
 		m01 /= length;
@@ -259,12 +259,12 @@ void Mathematics::EigenDecomposition<Real>
 		m_Subdiagonal[0] = length;
 		m_Subdiagonal[1] = m12 - m01 * q;
 		m_SolveMatrix[0][0] = static_cast<Real>(1);
-		m_SolveMatrix[0][1] = Math::sm_Zero;
-		m_SolveMatrix[0][2] = Math::sm_Zero;
-		m_SolveMatrix[1][0] = Math::sm_Zero;
+		m_SolveMatrix[0][1] = Math::GetValue(0);
+		m_SolveMatrix[0][2] = Math::GetValue(0);
+		m_SolveMatrix[1][0] = Math::GetValue(0);
 		m_SolveMatrix[1][1] = m01;
 		m_SolveMatrix[1][2] = m02;
-		m_SolveMatrix[2][0] = Math::sm_Zero;
+		m_SolveMatrix[2][0] = Math::GetValue(0);
 		m_SolveMatrix[2][1] = m02;
 		m_SolveMatrix[2][2] = -m01;
 
@@ -277,13 +277,13 @@ void Mathematics::EigenDecomposition<Real>
 		m_Subdiagonal[0] = m01;
 		m_Subdiagonal[1] = m12;
 		m_SolveMatrix[0][0] = static_cast<Real>(1);
-		m_SolveMatrix[0][1] = Math::sm_Zero;
-		m_SolveMatrix[0][2] = Math::sm_Zero;
-		m_SolveMatrix[1][0] = Math::sm_Zero;
+		m_SolveMatrix[0][1] = Math::GetValue(0);
+		m_SolveMatrix[0][2] = Math::GetValue(0);
+		m_SolveMatrix[1][0] = Math::GetValue(0);
 		m_SolveMatrix[1][1] = static_cast<Real>(1);
-		m_SolveMatrix[1][2] = Math::sm_Zero;
-		m_SolveMatrix[2][0] = Math::sm_Zero;
-		m_SolveMatrix[2][1] = Math::sm_Zero;
+		m_SolveMatrix[1][2] = Math::GetValue(0);
+		m_SolveMatrix[2][0] = Math::GetValue(0);
+		m_SolveMatrix[2][1] = Math::GetValue(0);
 		m_SolveMatrix[2][2] = static_cast<Real>(1);
 
 		m_IsRotation = true;
@@ -317,7 +317,7 @@ void Mathematics::EigenDecomposition<Real>
 		else
 		{
 			m_Subdiagonal[index] = m_SolveMatrix[index][index - 1];
-			m_Diagonal[index] = Math::sm_Zero;
+			m_Diagonal[index] = Math::GetValue(0);
 		}
 	}
 }
@@ -329,10 +329,10 @@ void Mathematics::EigenDecomposition<Real>
 {
 	auto scale = GetScale(index);
 
-	if (Math::FAbs(scale) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(scale) <= Math::GetZeroTolerance())
 	{
 		m_Subdiagonal[index] = m_SolveMatrix[index][index - 1];
-		m_Diagonal[index] = Math::sm_Zero;
+		m_Diagonal[index] = Math::GetValue(0);
 	}
 	else
 	{
@@ -345,7 +345,7 @@ template <typename Real>
 void Mathematics::EigenDecomposition<Real>
 	::CalculateDiagonal(int index, Real scale)
 {
-	Real diagonaValue = Math::sm_Zero;
+	Real diagonaValue = Math::GetValue(0);
 
 	for (auto diagonaIndex = 0; diagonaIndex <= index - 1; ++diagonaIndex)
 	{
@@ -355,7 +355,7 @@ void Mathematics::EigenDecomposition<Real>
 
 	auto solveMatrixValue = m_SolveMatrix[index][index - 1];
 	auto diagonaValueSqrt = Math::Sqrt(diagonaValue);
-	if (Math::sm_Zero < solveMatrixValue)
+	if (Math::GetValue(0) < solveMatrixValue)
 	{
 		diagonaValueSqrt = -diagonaValueSqrt;
 	}
@@ -372,12 +372,12 @@ void Mathematics::EigenDecomposition<Real>
 	::CalculateSubdiagonal(int index)
 {
 	auto diagonaValue = m_Diagonal[index];
-	Real subdiagonalProduct = Math::sm_Zero;
+	Real subdiagonalProduct = Math::GetValue(0);
 
 	for (int outerIndex = 0; outerIndex <= index - 1; ++outerIndex)
 	{
 		m_SolveMatrix[outerIndex][index] = m_SolveMatrix[index][outerIndex] / diagonaValue;
-		Real solveMatrixProduct = Math::sm_Zero;
+		Real solveMatrixProduct = Math::GetValue(0);
 		for (int innerIndex = 0; innerIndex <= outerIndex; ++innerIndex)
 		{
 			solveMatrixProduct += m_SolveMatrix[outerIndex][innerIndex] * m_SolveMatrix[index][innerIndex];
@@ -410,7 +410,7 @@ template <typename Real>
 Real Mathematics::EigenDecomposition<Real>
 	::GetScale(int index) const
 {
-	auto scale = Math::sm_Zero;
+	auto scale = Math::GetValue(0);
 
 	for (auto scaleIndex = 0; scaleIndex <= index - 1; ++scaleIndex)
 	{
@@ -425,11 +425,11 @@ template <typename Real>
 void Mathematics::EigenDecomposition<Real>
 	::SecondStep()
 {
-	m_Diagonal[0] = Math::sm_Zero;
-	m_Subdiagonal[0] = Math::sm_Zero;
+	m_Diagonal[0] = Math::GetValue(0);
+	m_Subdiagonal[0] = Math::GetValue(0);
 	for (auto index = 0; index <= m_Size - 1; ++index)
 	{
-		if (Math::sm_ZeroTolerance < Math::FAbs(m_Diagonal[index]))
+		if (Math::GetZeroTolerance() < Math::FAbs(m_Diagonal[index]))
 		{
 			for (auto outerIndex = 0; outerIndex <= index - 1; ++outerIndex)
 			{
@@ -448,8 +448,8 @@ void Mathematics::EigenDecomposition<Real>
 		m_SolveMatrix[index][index] = static_cast<Real>(1);
 		for (auto innerIndex = 0; innerIndex <= index - 1; ++innerIndex)
 		{
-			m_SolveMatrix[innerIndex][index] = Math::sm_Zero;
-			m_SolveMatrix[index][innerIndex] = Math::sm_Zero;
+			m_SolveMatrix[innerIndex][index] = Math::GetValue(0);
+			m_SolveMatrix[index][innerIndex] = Math::GetValue(0);
 		}
 	}
 }
@@ -466,7 +466,7 @@ void Mathematics::EigenDecomposition<Real>
 		m_Subdiagonal[temp] = m_Subdiagonal[index];
 	}
 	auto temp1 = m_Size - 1;
-	m_Subdiagonal[temp1] = Math::sm_Zero;
+	m_Subdiagonal[temp1] = Math::GetValue(0);
 }
 
 // private
@@ -526,7 +526,7 @@ void Mathematics::EigenDecomposition<Real>
 	auto subdiagonalValue = GetQLAlgorithmSubdiagonalValue(totalIndex, outerIndex);
 	auto sine = static_cast<Real>(1);
 	auto cosine = static_cast<Real>(1);
-	auto diagonalDifferenceValue = Math::sm_Zero;
+	auto diagonalDifferenceValue = Math::GetValue(0);
 
 	for (auto innerIndex = outerIndex - 1; innerIndex >= totalIndex; --innerIndex)
 	{
@@ -563,7 +563,7 @@ void Mathematics::EigenDecomposition<Real>
 
 	m_Diagonal[totalIndex] -= diagonalDifferenceValue;
 	m_Subdiagonal[totalIndex] = subdiagonalValue;
-	m_Subdiagonal[outerIndex] = Math::sm_Zero;
+	m_Subdiagonal[outerIndex] = Math::GetValue(0);
 }
 
 // private
@@ -575,7 +575,7 @@ Real Mathematics::EigenDecomposition<Real>
 	auto value = (m_Diagonal[temp] - m_Diagonal[totalIndex]) / (static_cast<Real>(2) * m_Subdiagonal[totalIndex]);
 
 	auto amendValue = Math::Sqrt(value * value + static_cast<Real>(1));
-	if (value < Math::sm_Zero)
+	if (value < Math::GetValue(0))
 	{
 		return m_Diagonal[outerIndex] - m_Diagonal[totalIndex] + m_Subdiagonal[totalIndex] / (value - amendValue);
 	}
@@ -607,7 +607,7 @@ bool Mathematics::EigenDecomposition<Real>
 	auto temp = outerIndex + 1;
 	auto diagonalSum = Math::FAbs(m_Diagonal[outerIndex]) + Math::FAbs(m_Diagonal[temp]);
 
-	if (Math::FAbs(Math::FAbs(m_Subdiagonal[outerIndex]) + diagonalSum - diagonalSum) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(Math::FAbs(m_Subdiagonal[outerIndex]) + diagonalSum - diagonalSum) <= Math::GetZeroTolerance())
 	{
 		return true;
 	}

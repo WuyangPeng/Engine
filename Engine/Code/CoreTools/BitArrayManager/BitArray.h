@@ -12,7 +12,9 @@
 #include "BitArrayManagerFwd.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
-
+#include "System/Helper/PragmaWarning.h" 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace CoreTools
 {
 	class CORE_TOOLS_DEFAULT_DECLARE BitArray : private boost::equality_comparable<BitArray, boost::bitwise<BitArray>>
@@ -103,5 +105,5 @@ namespace CoreTools
 
 	bool CORE_TOOLS_DEFAULT_DECLARE operator==(const BitArray& lhs, const BitArray& rhs) noexcept;
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_TOOLS_BIT_ARRAY_BIT_ARRAY_H

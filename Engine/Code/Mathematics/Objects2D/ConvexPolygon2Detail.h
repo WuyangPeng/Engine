@@ -107,12 +107,12 @@ void Mathematics::ConvexPolygon2<Real>
 	auto edge = vertex1 - vertex0;
 	auto normal = Vector2DTools::GetPerp(-edge);
 	auto length = Vector2DTools::VectorMagnitude(normal);
-	if (Math::sm_ZeroTolerance < length)
+	if (Math::GetZeroTolerance() < length)
 	{
 		normal /= length;
 		auto dot = Vector2DTools::DotProduct(normal, diff);
-		MATHEMATICS_ASSERTION_1(Math::sm_Zero <= dot, "点积必须为非负数\n");
-		if (dot < Math::sm_Zero)
+		MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= dot, "点积必须为非负数\n");
+		if (dot < Math::GetValue(0))
 		{
 			normal = -normal;
 		}
@@ -143,7 +143,7 @@ bool Mathematics::ConvexPolygon2<Real>
 	::IsConvex(Real threshold) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(threshold <= Math::sm_Zero, "threshold必须为负值！");
+	MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
 	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(), "需要更新线段！");
 
 	auto maxDistance = -Math::sm_MaxReal;
@@ -178,7 +178,7 @@ bool Mathematics::ConvexPolygon2<Real>
 	::Contains(const typename Vector2D& point, Real threshold) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(threshold <= Math::sm_Zero, "threshold必须为负值！");
+	MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
 	MATHEMATICS_ASSERTION_1(m_SharingEdges.empty(), "需要更新线段！");
 
 	for (auto i = 0; i < this->GetNumVertices(); ++i)

@@ -92,14 +92,14 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>
 	::FindEachDirection(int index, int maxLevel, int maxBracket)
 {
 	m_DirectionCurrent = m_Direction[index];
-	Real beginResult = Math<Real>::sm_Zero;
-	Real endResult = Math<Real>::sm_Zero;
+	Real beginResult = Math<Real>::GetValue(0);
+	Real endResult = Math<Real>::GetValue(0);
 	ComputeDomain(m_Begin, m_End, &beginResult, &endResult);
 
 	// 对 1D 函数回调
 	Minimize1 minimizer{ LineFunction, maxLevel, maxBracket, this };
 
-	auto minimizerData = minimizer.GetMinimum(beginResult, endResult, Math<Real>::sm_Zero);
+	auto minimizerData = minimizer.GetMinimum(beginResult, endResult, Math<Real>::GetValue(0));
 
 	auto minLocation = minimizerData.GetMinLocation();
 
@@ -110,7 +110,7 @@ template <typename Real, typename UserDataType>
 Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>
 	::EstimateUnitLengthConjugateDirection()
 {
-	auto length = Math<Real>::sm_Zero;
+	auto length = Math<Real>::GetValue(0);
 	for (auto i = 0; i < m_Dimensions; ++i)
 	{
 		m_DirectionConjugate[i] = m_MinimizeNData.GetMinLocation(i) - m_Save[i];
@@ -129,15 +129,15 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>
 		m_DirectionConjugate[i] /= length;
 	}
 
-	auto beginResult = Math<Real>::sm_Zero;
-	auto endResult = Math<Real>::sm_Zero;
+	auto beginResult = Math<Real>::GetValue(0);
+	auto endResult = Math<Real>::GetValue(0);
 
 	// 最小化共轭方向。
 	m_DirectionConjugate = m_DirectionConjugate;
 	ComputeDomain(m_Begin, m_End, &beginResult, &endResult);
 
 	Minimize1 minimizer{ LineFunction, maxLevel, maxBracket, this };
-	auto minimizerData = minimizer.GetMinimum(beginResult, endResult, Math<Real>::sm_Zero);
+	auto minimizerData = minimizer.GetMinimum(beginResult, endResult, Math<Real>::GetValue(0));
 
 	m_MinimizeNData.Set(minimizerData.GetMinValue(), minimizerData.GetMinLocation(), m_DirectionCurrent);
 
@@ -165,7 +165,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>
 		auto beginMinus = begin[i] - m_MinimizeNData.GetMinLocation(i);
 		auto endMinus = end[i] - m_MinimizeNData.GetMinLocation(i);
 
-		if (Math<Real>::sm_Zero < m_DirectionCurrent[i])
+		if (Math<Real>::GetValue(0) < m_DirectionCurrent[i])
 		{
 			// 有效的间隔是[b0,b1]。
 			beginMinus /= m_DirectionCurrent[i];
@@ -179,7 +179,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>
 				*endResult = endMinus;
 			}
 		}
-		else if (m_DirectionCurrent[i] < Math<Real>::sm_Zero)
+		else if (m_DirectionCurrent[i] < Math<Real>::GetValue(0))
 		{
 			// 有效的间隔是[b1,b0]。
 			beginMinus /= m_DirectionCurrent[i];
@@ -196,13 +196,13 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>
 	}
 
 	// 数字差错更正导致值几乎为零。
-	if (Math<Real>::sm_Zero < *beginResult)
+	if (Math<Real>::GetValue(0) < *beginResult)
 	{
-		*beginResult = Math<Real>::sm_Zero;
+		*beginResult = Math<Real>::GetValue(0);
 	}
-	if (*endResult < Math<Real>::sm_Zero)
+	if (*endResult < Math<Real>::GetValue(0))
 	{
-		*endResult = Math<Real>::sm_Zero;
+		*endResult = Math<Real>::GetValue(0);
 	}
 }
 

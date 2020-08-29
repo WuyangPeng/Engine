@@ -26,7 +26,7 @@ namespace Rendering
 		Dx9RenderTarget (Renderer* renderer,const RenderTarget* renderTarget);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 void Enable (Renderer* renderer) override;
 		 void Disable (Renderer* renderer) override;

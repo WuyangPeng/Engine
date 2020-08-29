@@ -27,7 +27,7 @@ namespace CoreTools
 		EventEntity();
 		virtual ~EventEntity();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		virtual bool EventFunction(const Telegram& telegram) = 0;
 	};

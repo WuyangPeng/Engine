@@ -303,7 +303,7 @@ Real Mathematics::PolynomialFit3Powers<Real>
 		yPowers[power] = yPowers[temp] * y;
 	}
 
-	auto w = Math<Real>::sm_Zero;
+	auto w = Math<Real>::GetValue(0);
 	for (auto i = 0u; i < m_Powers.size(); ++i)
 	{
 		auto xp = xPowers[m_Powers[i][0]];

@@ -34,7 +34,7 @@ namespace Mathematics
 		DistanceLine2Ray2(const Line2& line, const Ray2& ray);
 		virtual ~DistanceLine2Ray2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Line2 GetLine() const;
 		const Ray2 GetRay() const;

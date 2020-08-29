@@ -28,7 +28,7 @@ namespace Rendering
 		Texture3DImpl (TextureFormat format, int dimension0,int dimension1,int dimension2,int numLevels,BufferUsage usage = BufferUsage::Texture);
 		 
         
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
      
 		// 获取第零级别mipmap产生的维度。
         int GetWidth () const;

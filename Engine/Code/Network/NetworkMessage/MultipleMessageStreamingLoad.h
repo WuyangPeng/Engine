@@ -31,7 +31,7 @@ namespace Network
 		MultipleMessageStreamingLoad();
 		virtual ~MultipleMessageStreamingLoad();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 void Load(MultipleMessageContainer& container, const MessageSourceSharedPtr& source) const override;
 	};

@@ -94,7 +94,7 @@ void Mathematics::Minimize1<Real, UserDataType>
 	auto middleFunction = m_Function(middle, m_UserData);
 	minimize1Data.CompareData(middle, middleFunction);
 
-	if (Math<Real>::sm_Zero < beginFunction - (static_cast<Real>(2) * middleFunction + endFunction))
+	if (Math<Real>::GetValue(0) < beginFunction - (static_cast<Real>(2) * middleFunction + endFunction))
 	{
 		// 二次拟合具有中点正二阶导数。
 		if (beginFunction < endFunction)
@@ -232,7 +232,7 @@ void Mathematics::Minimize1<Real, UserDataType>
 
 		// 测试收敛。
 
-		if (Math<Real>::FAbs(end - begin) <= static_cast<Real>(2) * Math<Real>::sm_ZeroTolerance * Math<Real>::FAbs(middle) + Math<Real>::sm_Epsilon)
+		if (Math<Real>::FAbs(end - begin) <= static_cast<Real>(2) * Math<Real>::GetZeroTolerance() * Math<Real>::FAbs(middle) + Math<Real>::sm_Epsilon)
 		{
 			break;
 		}

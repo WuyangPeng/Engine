@@ -18,7 +18,7 @@ namespace Framework
 		using ParentType = FontInformationImpl;
 
 	public: 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		int GetStringWidth(const String& text) const final;
 		int GetCharacterWidth(const TChar character) const noexcept final;

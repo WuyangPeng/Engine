@@ -13,8 +13,8 @@ template <typename Real>
 Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
 	::StaticFindIntersectorPlane3Cylinder3 (const Plane3& rkPlane,const Cylinder3& rkCylinder)
 	: mPlane{ rkPlane }, mCylinder{ rkCylinder }, mLine0{ Vector3D::sm_Zero, Vector3D::sm_Zero }, mLine1{ Vector3D::sm_Zero, Vector3D::sm_Zero },
-	  mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero,Math<Real>::sm_Zero }, 
-	  mEllipse{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero }
+	  mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero,Math<Real>::GetValue(0) }, 
+	  mEllipse{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Math<Real>::GetValue(0), Math<Real>::GetValue(0) }
 {
     mType = PC_EMPTY_SET;
 
@@ -44,7 +44,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
 	auto cosTheta = Vector3DTools::DotProduct( mCylinder.GetAxis().GetDirection(), mPlane.GetNormal());
 	auto absCosTheta = Math::FAbs(cosTheta);
 
-    if (absCosTheta > Math<Real>::sm_Zero)
+    if (absCosTheta > Math<Real>::GetZero())
     {
         // The cylinder axis intersects the plane in a unique point.
         if (absCosTheta < static_cast<Real>(1))
@@ -118,7 +118,7 @@ bool Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
 	auto term = mCylinder.GetRadius()*root +  (Real{0.5})*mCylinder.GetHeight()*absNdW;
 
     // Culling occurs if and only if max <= 0.
-    return sDist + term <= Math<Real>::sm_Zero;
+    return sDist + term <= Math<Real>::GetZero();
 }
 
 template <typename Real>

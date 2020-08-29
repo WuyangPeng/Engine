@@ -25,7 +25,7 @@ template <typename Real>
 bool Mathematics::Cylinder3<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_Radius && Math::sm_Zero <= m_Height)
+	if (Math::GetValue(0) <= m_Radius && Math::GetValue(0) <= m_Height)
 		return true;
 	else
 		return false;

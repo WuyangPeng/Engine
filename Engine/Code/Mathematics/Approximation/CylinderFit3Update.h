@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "CylinderFit3UpdateData.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
 #include <vector>
@@ -29,7 +29,7 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		CylinderFit3Update(const Points& points, const Vector3D& guessCenter, const Vector3D& guessAxis, const Real epsilon = Math::sm_ZeroTolerance);
+		CylinderFit3Update(const Points& points, const Vector3D& guessCenter, const Vector3D& guessAxis, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

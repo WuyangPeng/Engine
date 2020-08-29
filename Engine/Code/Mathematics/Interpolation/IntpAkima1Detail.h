@@ -141,7 +141,7 @@ namespace Mathematics
 			return ((Real)6)*mCoeff[3];
 		}
 
-		return Math<Real>::sm_Zero;
+		return Math<Real>::GetValue(0);
 	}
 
 }

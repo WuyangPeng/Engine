@@ -19,7 +19,7 @@
 template <typename T>
 Mathematics::Plane<T>
 	::Plane(const T epsilon) noexcept
-	:m_Tuple{ Math::sm_One, Math::sm_Zero, Math::sm_Zero, Math::sm_Zero }, m_Epsilon{ epsilon }
+	:m_Tuple{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) }, m_Epsilon{ epsilon }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -55,8 +55,8 @@ Mathematics::Plane<T>
 	::Plane(const APoint& lhs, const APoint& mhs, const APoint& rhs, const T epsilon)
 	:m_Tuple{}, m_Epsilon{ epsilon }
 {
-	auto edge1 = mhs - lhs;
-	auto edge2 = rhs - lhs;
+const	auto edge1 = mhs - lhs;
+    const auto edge2 = rhs - lhs;
 	auto normal = UnitCross(edge1, edge2, m_Epsilon);
 	m_Tuple[0] = normal[0];
 	m_Tuple[1] = normal[1];
@@ -102,7 +102,7 @@ bool Mathematics::Plane<T>
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26447)	
-		if (Math::Sqrt(m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2]) - Math::sm_One <= m_Epsilon)
+		if (Math::Sqrt(m_Tuple[0] * m_Tuple[0] + m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2]) - Math::GetValue(1) <= m_Epsilon)
 			return true;
 		else
 			return false;
@@ -123,23 +123,23 @@ const Mathematics::HomogeneousPoint<T> Mathematics::Plane<T>
 
 	return m_Tuple;
 }
-
-template <typename T>
-const T* Mathematics::Plane<T>::GetElements() const noexcept
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	return m_Tuple.GetCoordinate();
-}
-
-template <typename T>
-T* Mathematics::Plane<T>
-	::GetElements() noexcept
-{
-	MATHEMATICS_CLASS_IS_VALID_1;
-
-	return m_Tuple.GetCoordinate();
-}
+// 
+// template <typename T>
+// const T* Mathematics::Plane<T>::GetElements() const noexcept
+// {
+// 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+// 
+// 	return m_Tuple.GetCoordinate();
+// }
+// 
+// template <typename T>
+// T* Mathematics::Plane<T>
+// 	::GetElements() noexcept
+// {
+// 	MATHEMATICS_CLASS_IS_VALID_1;
+// 
+// 	return m_Tuple.GetCoordinate().data();
+// }
 
 template <typename T>
 const T& Mathematics::Plane<T>
@@ -275,7 +275,7 @@ template <typename T>
 bool Mathematics
 	::Approximate(const Plane<T>& lhs, const Plane<T>& rhs)
 {
-	return Approximate(lhs, rhs, Math<T>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math<T>::GetZeroTolerance());
 }
 
 #endif // MATHEMATICS_ALGEBRA_PLANE_DETAIL_H

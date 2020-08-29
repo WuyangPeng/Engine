@@ -52,7 +52,7 @@ namespace Mathematics
 
 		SetPolynomial(0, x - mBase[0], mPoly[0]);
 
-		Real result = Math<Real>::sm_Zero;
+		Real result = Math<Real>::GetValue(0);
 		for (int k = 0; k <= mDegree; ++k)
 		{
 			result += mPoly[0][k] * mInter[k];
@@ -82,7 +82,7 @@ namespace Mathematics
 
 		SetPolynomial(dx, x - mBase[0], mPoly[0]);
 
-		Real result = Math<Real>::sm_Zero;
+		Real result = Math<Real>::GetValue(0);
 		for (int k = dx; k <= mDegree; ++k)
 		{
 			result += mPoly[0][k] * mInter[k];
@@ -107,7 +107,7 @@ namespace Mathematics
 	{
 		for (int k = 0; k <= mDegree; ++k)
 		{
-			mInter[k] = Math<Real>::sm_Zero;
+			mInter[k] = Math<Real>::GetValue(0);
 			for (int i = 0, j = mBase[0] - 1; i <= mDegree; ++i, ++j)
 			{
 				mInter[k] += mData[j] * mMatrix[i][k];

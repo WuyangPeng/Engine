@@ -29,7 +29,7 @@ namespace Network
 	public:
 		SocketManager(); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	public:
 		void Insert(uint64_t socketID);

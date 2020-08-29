@@ -55,9 +55,9 @@ typename Mathematics::OrthogonalLineFit2<Real>::Line2  Mathematics::OrthogonalLi
 	origin /= boost::numeric_cast<Real>(points.size());
 
 	// 计算点的协方差矩阵。
-	Real sumXX = Math::sm_Zero;
-	Real sumXY = Math::sm_Zero;
-	Real sumYY = Math::sm_Zero;
+	Real sumXX = Math::GetValue(0);
+	Real sumXY = Math::GetValue(0);
+	Real sumYY = Math::GetValue(0);
 	for (const auto& point : points)
 	{
 		auto diff = point - origin;

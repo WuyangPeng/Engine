@@ -36,7 +36,7 @@ namespace Rendering
         ~CullState();
         CullState(CullState&&) noexcept = default;
         CullState& operator=(CullState&&) noexcept = default;
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CullState);
 

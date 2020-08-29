@@ -29,7 +29,7 @@ namespace Mathematics
 		using OutputConstIterator = LinearSystemConstIterator<Real>;
 
 	public:
-		explicit LinearSystemInverse(const VariableMatrix& matrix, Real zeroTolerance = Math::sm_ZeroTolerance, const Real* inputVector = nullptr);
+		explicit LinearSystemInverse(const VariableMatrix& matrix, Real zeroTolerance = Math::GetZeroTolerance(), const Real* inputVector = nullptr);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -55,7 +55,7 @@ namespace Mathematics
 
 	private:
 		// 线性系统求解容差。
-		Real m_ZeroTolerance;  // 默认 = Math::sm_ZeroTolerance
+		Real m_ZeroTolerance;  // 默认 = Math::GetZeroTolerance()
 		VariableMatrix m_Inverse;
 		int m_Size;
 		std::vector<int> m_ColumnsIndex;

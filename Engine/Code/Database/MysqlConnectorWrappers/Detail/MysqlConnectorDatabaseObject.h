@@ -31,7 +31,7 @@ namespace Database
         MysqlConnectorDatabaseObject(MysqlConnectorDatabaseObject&&) = default;
         MysqlConnectorDatabaseObject& operator=(MysqlConnectorDatabaseObject&&) = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         MysqlxSessionPtr GetMysqlxSessionPtr() override;
 

@@ -27,7 +27,7 @@ namespace Rendering
         WindowRendererInput( WindowRendererInput&&) = default;
         WindowRendererInput& operator=( WindowRendererInput&&) = default;
 		
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
           RendererTypes GetRendererType() const noexcept override;    
 		 	void SetWindowID(int windowID) noexcept override;

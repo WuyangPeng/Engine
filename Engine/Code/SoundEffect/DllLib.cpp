@@ -34,7 +34,7 @@
 
 	namespace SoundEffect
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

@@ -52,14 +52,14 @@ void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
 
     // No intersection if Q(t) has no real roots.
 	auto discr = a1*a1 - a0*a2;
-    if (discr < Math<Real>::sm_Zero)
+    if (discr < Math<Real>::GetValue(0))
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // Test whether ray origin is inside ellipsoid.
-    if (a0 <= Math<Real>::sm_Zero)
+    if (a0 <= Math<Real>::GetValue(0))
     {
 		this->SetIntersectionType(IntersectionType::Point);
         return;
@@ -69,7 +69,7 @@ void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
     // the case that a2 > 0, since M is positive definite, implying that
     // D^T*M*D > 0 for any nonzero vector D.  Thus, an intersection occurs
     // only when Q'(0) < 0.
-	if (a1 < Math<Real>::sm_Zero)
+	if (a1 < Math<Real>::GetValue(0))
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}

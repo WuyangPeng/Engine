@@ -36,7 +36,7 @@ namespace Mathematics
 
 	public:
 		static bool Approximate(const Vector4D& lhs, const Vector4D& rhs,
-								const Real epsilon = Math::sm_ZeroTolerance);
+								const Real epsilon = Math::GetZeroTolerance());
 
 		static Real VectorMagnitude(const Vector4D& vector);
 		static Real VectorMagnitudeSquared(const Vector4D& vector);
@@ -44,8 +44,8 @@ namespace Mathematics
 		static Real DistanceSquared(const Vector4D& lhs, const Vector4D& rhs);
 		static Real DotProduct(const Vector4D& lhs, const Vector4D& rhs);
 
-		static const Vector4D ParallelVectorLhsToRhs(const Vector4D& lhs, const Vector4D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
-		static const Vector4D ApeakVectorLhsToRhs(const Vector4D& lhs, const Vector4D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector4D ParallelVectorLhsToRhs(const Vector4D& lhs, const Vector4D& rhs, const Real epsilon = Math::GetZeroTolerance());
+		static const Vector4D ApeakVectorLhsToRhs(const Vector4D& lhs, const Vector4D& rhs, const Real epsilon = Math::GetZeroTolerance());
 		static Real GetVectorIncludedAngle(const Vector4D& lhs, const Vector4D& rhs);
 
 		// 计算点的轴对齐包围盒。

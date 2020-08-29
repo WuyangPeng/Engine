@@ -12,7 +12,7 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/noncopyable.hpp>
+ 
 #include <string>
 #include <iostream>
 
@@ -23,7 +23,7 @@ namespace CoreTools
 {
 	class OStreamShared;
 
-	class CORE_TOOLS_DEFAULT_DECLARE Suite : private boost::noncopyable
+	class CORE_TOOLS_DEFAULT_DECLARE Suite  
 	{
 	public:
 		using ClassType = Suite;

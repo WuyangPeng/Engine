@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "BrentsMethodRoot.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 namespace Mathematics
 {

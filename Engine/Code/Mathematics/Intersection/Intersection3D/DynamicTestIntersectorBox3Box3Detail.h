@@ -41,7 +41,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>
 		SetIntersectionType(intersector.GetIntersectionType());
 		if (intersector.IsIntersection())
 		{
-			SetContactTime(Math::sm_Zero);
+			SetContactTime(Math::GetValue(0));
 			return;
 		}
 		return;
@@ -51,7 +51,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>
 	// the cases when at least one pair of axes are parallel.  If this
 	// happens, there is no need to include the cross-product axes for
 	// separation.
-	const auto cutoff = static_cast<Real>(1) - Math::sm_ZeroTolerance;
+	const auto cutoff = static_cast<Real>(1) - Math::GetZeroTolerance();
 	auto existsParallelPair = false;
 
 	// convenience variables
@@ -65,17 +65,17 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>
 	Real AbsC[3][3]{};  // |c_{ij}|
 	Real AD[3]{};       // Dot(A_i,D)
 	Real AW[3]{};       // Dot(A_i,W)
-	auto min0 = Math::sm_Zero;
-	auto max0 = Math::sm_Zero;
-	auto min1 = Math::sm_Zero;
-	auto max1 = Math::sm_Zero;
-	auto center = Math::sm_Zero;
-	auto radius = Math::sm_Zero;
-	auto speed = Math::sm_Zero;
+	auto min0 = Math::GetValue(0);
+	auto max0 = Math::GetValue(0);
+	auto min1 = Math::GetValue(0);
+	auto max1 = Math::GetValue(0);
+	auto center = Math::GetValue(0);
+	auto radius = Math::GetValue(0);
+	auto speed = Math::GetValue(0);
 	auto i = 0;
 	auto j = 0;
 
-	SetContactTime(Math::sm_Zero);
+	SetContactTime(Math::GetValue(0));
 	auto tlast = Math::sm_MaxReal;
 
 	// axes C0+t*A[i]
@@ -273,12 +273,12 @@ template <typename Real>
 bool Mathematics::DynamicTestIntersectorBox3Box3<Real>
 	::IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real& tlast)
 {
-	auto invSpeed = Math::sm_Zero;
-	auto t = Math::sm_Zero;
+	auto invSpeed = Math::GetValue(0);
+	auto t = Math::GetValue(0);
 
 	if (max1 < min0) // box1 initially on left of box0
 	{
-		if (speed <= Math::sm_Zero)
+		if (speed <= Math::GetValue(0))
 		{
 			// The projection intervals are moving apart.
 			return true;
@@ -311,7 +311,7 @@ bool Mathematics::DynamicTestIntersectorBox3Box3<Real>
 	}
 	else if (max0 < min1) // box1 initially on right of box0
 	{
-		if (speed >= Math::sm_Zero)
+		if (speed >= Math::GetValue(0))
 		{
 			// The projection intervals are moving apart.
 			return true;
@@ -344,7 +344,7 @@ bool Mathematics::DynamicTestIntersectorBox3Box3<Real>
 	}
 	else // box0 and box1 initially overlap
 	{
-		if (speed > Math::sm_Zero)
+		if (speed > Math::GetValue(0))
 		{
 			t = (max0 - min1) / speed;
 			if (t < tlast)
@@ -359,7 +359,7 @@ bool Mathematics::DynamicTestIntersectorBox3Box3<Real>
 				return true;
 			}
 		}
-		else if (speed < Math::sm_Zero)
+		else if (speed < Math::GetValue(0))
 		{
 			t = (min0 - max1) / speed;
 			if (t < tlast)

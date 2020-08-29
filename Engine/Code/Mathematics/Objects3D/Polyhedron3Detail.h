@@ -174,7 +174,7 @@ Real Mathematics::Polyhedron3<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-	auto surfaceArea = Math::sm_Zero;
+	auto surfaceArea = Math::GetValue(0);
 
 	for (auto i = 0; i < m_NumTriangles; ++i)
 	{
@@ -199,7 +199,7 @@ Real Mathematics::Polyhedron3<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-	auto volume = Math::sm_Zero;
+	auto volume = Math::GetValue(0);
 
 	for (auto i = 0; i < m_NumTriangles; ++i)
 	{

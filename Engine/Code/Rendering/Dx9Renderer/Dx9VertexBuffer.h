@@ -28,7 +28,7 @@ namespace Rendering
         Dx9VertexBuffer (Renderer* renderer,const VertexBuffer* vertexBuffer) noexcept;
  
 
-	   CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+	   CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	    // ¶¥µã»º³åÇø²Ù×÷¡£
 		 void Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) override;

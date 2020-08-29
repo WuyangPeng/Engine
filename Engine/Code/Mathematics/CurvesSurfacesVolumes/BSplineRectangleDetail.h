@@ -25,7 +25,7 @@ namespace Mathematics
 template <typename Real>
 BSplineRectangle<Real>
 	::BSplineRectangle (int numUCtrlPoints,int numVCtrlPoints, Vector3D<Real>** ctrlPoint, int uDegree,int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
-	: ParametricSurface<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1), Math<Real>::sm_Zero, static_cast<Real>(1), true }
+	: ParametricSurface<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1), Math<Real>::GetValue(0), static_cast<Real>(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
@@ -48,7 +48,7 @@ BSplineRectangle<Real>
 template <typename Real>
 BSplineRectangle<Real>
 	::BSplineRectangle (int numUCtrlPoints,int numVCtrlPoints, Vector3D<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
-	: ParametricSurface<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1), Math<Real>::sm_Zero, static_cast<Real>(1), true }
+	: ParametricSurface<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1), Math<Real>::GetValue(0), static_cast<Real>(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
@@ -71,7 +71,7 @@ BSplineRectangle<Real>
 template <typename Real>
 BSplineRectangle<Real>
 	::BSplineRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, int uDegree,  int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
-	: ParametricSurface<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1), Math<Real>::sm_Zero, static_cast<Real>(1), true }
+	: ParametricSurface<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1), Math<Real>::GetValue(0), static_cast<Real>(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1,"Invalid input\n");
@@ -94,7 +94,7 @@ BSplineRectangle<Real>
 template <typename Real>
 BSplineRectangle<Real>
 	::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot)
-	: ParametricSurface<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1), Math<Real>::sm_Zero, static_cast<Real>(1), true }
+	: ParametricSurface<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1), Math<Real>::GetValue(0), static_cast<Real>(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1,"Invalid input\n");

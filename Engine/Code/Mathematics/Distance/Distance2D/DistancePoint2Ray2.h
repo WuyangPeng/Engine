@@ -31,7 +31,7 @@ namespace Mathematics
 		DistancePoint2Ray2(const Vector2D& point, const Ray2& ray);
 		virtual ~DistancePoint2Ray2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector2D GetPoint() const;
 		const Ray2 GetRay() const;

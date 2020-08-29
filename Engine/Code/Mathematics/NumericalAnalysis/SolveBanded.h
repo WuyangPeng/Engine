@@ -27,7 +27,7 @@ namespace Mathematics
 		using OutputConstIterator = LinearSystemConstIterator<Real>;
 
 	public:
-		explicit SolveBanded(const BandedMatrix& matrix, const Real* inputVector, Real zeroTolerance = Math<Real>::sm_ZeroTolerance);
+		explicit SolveBanded(const BandedMatrix& matrix, const Real* inputVector, Real zeroTolerance = Math<Real>::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

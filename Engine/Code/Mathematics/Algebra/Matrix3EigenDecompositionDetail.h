@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
 Mathematics::Matrix3EigenDecomposition <Real>
@@ -28,12 +28,12 @@ template <typename Real>
 bool Mathematics::Matrix3EigenDecomposition <Real>
 	::IsValid() const noexcept
 {
-	if (Math::FAbs(m_Diagonal(0, 1) - Math::sm_Zero) <= m_Epsilon &&
-		Math::FAbs(m_Diagonal(0, 2) - Math::sm_Zero) <= m_Epsilon &&
-		Math::FAbs(m_Diagonal(1, 0) - Math::sm_Zero) <= m_Epsilon &&
-		Math::FAbs(m_Diagonal(1, 2) - Math::sm_Zero) <= m_Epsilon &&
-		Math::FAbs(m_Diagonal(2, 0) - Math::sm_Zero) <= m_Epsilon &&
-		Math::FAbs(m_Diagonal(2, 1) - Math::sm_Zero) <= m_Epsilon)
+	if (Math::FAbs(m_Diagonal(0, 1) - Math::GetValue(0)) <= m_Epsilon &&
+		Math::FAbs(m_Diagonal(0, 2) - Math::GetValue(0)) <= m_Epsilon &&
+		Math::FAbs(m_Diagonal(1, 0) - Math::GetValue(0)) <= m_Epsilon &&
+		Math::FAbs(m_Diagonal(1, 2) - Math::GetValue(0)) <= m_Epsilon &&
+		Math::FAbs(m_Diagonal(2, 0) - Math::GetValue(0)) <= m_Epsilon &&
+		Math::FAbs(m_Diagonal(2, 1) - Math::GetValue(0)) <= m_Epsilon)
 	{
 		return true;
 	}

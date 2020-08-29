@@ -71,7 +71,7 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 
 	for (auto i = 0; i < 3; ++i)
 	{
-		if (direction[i] < Math<Real>::sm_Zero)
+		if (direction[i] < Math<Real>::GetValue(0))
 		{
 			point[i] = -point[i];
 			direction[i] = -direction[i];
@@ -84,13 +84,13 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 	}
 
 	Real sqrDistance{};
-	mLineParameter = Math<Real>::sm_Zero;
+	mLineParameter = Math<Real>::GetValue(0);
 
-	if (direction.GetXCoordinate() > Math<Real>::sm_Zero)
+	if (direction.GetXCoordinate() > Math<Real>::GetValue(0))
 	{
-		if (direction.GetYCoordinate() > Math<Real>::sm_Zero)
+		if (direction.GetYCoordinate() > Math<Real>::GetValue(0))
 		{
-			if (direction.GetZCoordinate() > Math<Real>::sm_Zero)  // (+,+,+)
+			if (direction.GetZCoordinate() > Math<Real>::GetValue(0))  // (+,+,+)
 			{
 				CaseNoZeros(point, direction, sqrDistance);
 			}
@@ -101,7 +101,7 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 		}
 		else
 		{
-			if (direction.GetZCoordinate() > Math<Real>::sm_Zero)  // (+,0,+)
+			if (direction.GetZCoordinate() > Math<Real>::GetValue(0))  // (+,0,+)
 			{
 				Case0(0, 2, 1, point, direction, sqrDistance);
 			}
@@ -113,9 +113,9 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 	}
 	else
 	{
-		if (direction.GetYCoordinate() > Math<Real>::sm_Zero)
+		if (direction.GetYCoordinate() > Math<Real>::GetValue(0))
 		{
-			if (direction.GetZCoordinate() > Math<Real>::sm_Zero)  // (0,+,+)
+			if (direction.GetZCoordinate() > Math<Real>::GetValue(0))  // (0,+,+)
 			{
 				Case0(1, 2, 0, point, direction, sqrDistance);
 			}
@@ -126,7 +126,7 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 		}
 		else
 		{
-			if (direction.GetZCoordinate() > Math<Real>::sm_Zero)  // (0,0,+)
+			if (direction.GetZCoordinate() > Math<Real>::GetValue(0))  // (0,0,+)
 			{
 				Case00(2, 0, 1, point, direction, sqrDistance);
 			}
@@ -153,7 +153,7 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 		mClosestPoint1 += point[i] * mBox.GetAxis(i);
 	}
 
-	return DistanceResult{ sqrDistance,Math<Real>::sm_Zero,mClosestPoint0,mClosestPoint1 };
+	return DistanceResult{ sqrDistance,Math<Real>::GetValue(0),mClosestPoint0,mClosestPoint1 };
 }
 
 template <typename Real>
@@ -161,12 +161,12 @@ void Mathematics::DistLine3Box3<Real>
 	::Face(int i0, int i1, int i2, Vector3D& pnt, const Vector3D& dir, const Vector3D& PmE, Real& sqrDistance) const
 {
 	Vector3D PpE;
-	auto lenSqr = Math<Real>::sm_Zero;
-	auto inv = Math<Real>::sm_Zero;
-	auto tmp = Math<Real>::sm_Zero;
-	auto param = Math<Real>::sm_Zero;
-	auto t = Math<Real>::sm_Zero;
-	auto delta = Math<Real>::sm_Zero;
+	auto lenSqr = Math<Real>::GetValue(0);
+	auto inv = Math<Real>::GetValue(0);
+	auto tmp = Math<Real>::GetValue(0);
+	auto param = Math<Real>::GetValue(0);
+	auto t = Math<Real>::GetValue(0);
+	auto delta = Math<Real>::GetValue(0);
 
 	PpE[i1] = pnt[i1] + mBox.GetExtent(i1);
 	PpE[i2] = pnt[i2] + mBox.GetExtent(i2);
@@ -176,7 +176,7 @@ void Mathematics::DistLine3Box3<Real>
 		{
 			// v[i1] >= -e[i1], v[i2] >= -e[i2] (distance = 0)
 			pnt[i0] = mBox.GetExtent(i0);
-			inv = Math<Real>::sm_One / dir[i0];
+			inv = Math<Real>::GetValue(1) / dir[i0];
 			pnt[i1] -= dir[i1] * PmE[i0] * inv;
 			pnt[i2] -= dir[i2] * PmE[i0] * inv;
 			mLineParameter = -PmE[i0] * inv;
@@ -253,7 +253,7 @@ void Mathematics::DistLine3Box3<Real>
 			// v[i1] < -e[i1], v[i2] < -e[i2]
 			lenSqr = dir[i0] * dir[i0] + dir[i2] * dir[i2];
 			tmp = lenSqr * PpE[i1] - dir[i1] * (dir[i0] * PmE[i0] + dir[i2] * PpE[i2]);
-			if (tmp >= Math<Real>::sm_Zero)
+			if (tmp >= Math<Real>::GetValue(0))
 			{
 				// v[i1]-edge is closest
 				if (tmp <= (static_cast<Real>(2))*lenSqr*mBox.GetExtent(i1))
@@ -287,7 +287,7 @@ void Mathematics::DistLine3Box3<Real>
 
 			lenSqr = dir[i0] * dir[i0] + dir[i1] * dir[i1];
 			tmp = lenSqr * PpE[i2] - dir[i2] * (dir[i0] * PmE[i0] + dir[i1] * PpE[i1]);
-			if (tmp >= Math<Real>::sm_Zero)
+			if (tmp >= Math<Real>::GetValue(0))
 			{
 				// v[i2]-edge is closest
 				if (tmp <= (static_cast<Real>(2))*lenSqr*mBox.GetExtent(i2))
@@ -341,10 +341,10 @@ void Mathematics::DistLine3Box3<Real>
 
 	auto prodDxPy = dir.GetXCoordinate() * PmE.GetYCoordinate();
 	auto prodDyPx = dir.GetYCoordinate() * PmE.GetXCoordinate();
-	auto prodDzPx = Math<Real>::sm_Zero;
-	auto prodDxPz = Math<Real>::sm_Zero; 
-	auto prodDzPy = Math<Real>::sm_Zero;
-	auto prodDyPz = Math<Real>::sm_Zero;
+	auto prodDzPx = Math<Real>::GetValue(0);
+	auto prodDxPz = Math<Real>::GetValue(0); 
+	auto prodDzPy = Math<Real>::GetValue(0);
+	auto prodDyPz = Math<Real>::GetValue(0);
 
 	if (prodDyPx >= prodDxPy)
 	{
@@ -386,9 +386,9 @@ void Mathematics::DistLine3Box3<Real>
 	auto PmE1 = pnt[i1] - mBox.GetExtent(i1);
 	auto prod0 = dir[i1] * PmE0;
 	auto prod1 = dir[i0] * PmE1;
-	auto delta = Math<Real>::sm_Zero;
-	auto invLSqr = Math<Real>::sm_Zero;
-	auto inv = Math<Real>::sm_Zero;
+	auto delta = Math<Real>::GetValue(0);
+	auto invLSqr = Math<Real>::GetValue(0);
+	auto inv = Math<Real>::GetValue(0);
 
 	if (prod0 >= prod1)
 	{
@@ -397,7 +397,7 @@ void Mathematics::DistLine3Box3<Real>
 
 		auto PpE1 = pnt[i1] + mBox.GetExtent(i1);
 		delta = prod0 - dir[i0] * PpE1;
-		if (delta >= Math<Real>::sm_Zero)
+		if (delta >= Math<Real>::GetValue(0))
 		{
 			invLSqr = (static_cast<Real>(1)) / (dir[i0] * dir[i0] + dir[i1] * dir[i1]);
 			sqrDistance += delta * delta*invLSqr;
@@ -418,7 +418,7 @@ void Mathematics::DistLine3Box3<Real>
 
 		Real PpE0 = pnt[i0] + mBox.GetExtent(i0);
 		delta = prod1 - dir[i1] * PpE0;
-		if (delta >= Math<Real>::sm_Zero)
+		if (delta >= Math<Real>::GetValue(0))
 		{
 			invLSqr = (static_cast<Real>(1)) / (dir[i0] * dir[i0] + dir[i1] * dir[i1]);
 			sqrDistance += delta * delta*invLSqr;
@@ -451,7 +451,7 @@ template <typename Real>
 void Mathematics::DistLine3Box3<Real>
 	::Case00(int i0, int i1, int i2, Vector3D& pnt, const Vector3D& dir, Real& sqrDistance) const
 {
-	auto delta = Math<Real>::sm_Zero;
+	auto delta = Math<Real>::GetValue(0);
 
 	mLineParameter = (mBox.GetExtent(i0) - pnt[i0]) / dir[i0];
 
@@ -488,7 +488,7 @@ template <typename Real>
 void Mathematics::DistLine3Box3<Real>
 	::Case000(Vector3D& pnt, Real& sqrDistance) const
 {
-	auto delta = Math<Real>::sm_Zero;
+	auto delta = Math<Real>::GetValue(0);
 
 	if (pnt.GetXCoordinate() < -mBox.GetExtent(0))
 	{

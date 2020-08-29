@@ -21,7 +21,9 @@
 using std::move;
 using std::string;
 using std::make_shared;
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Framework::ViewMiddleLayer
 	::ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
 	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>() }
@@ -205,3 +207,4 @@ bool Framework::ViewMiddleLayer
 
 	return ParentType::MouseClick(button, state, point, virtualKeys);
 }
+#include STSTEM_WARNING_POP

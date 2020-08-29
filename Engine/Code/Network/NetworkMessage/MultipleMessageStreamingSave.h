@@ -31,7 +31,7 @@ namespace Network
 		MultipleMessageStreamingSave();
 		virtual ~MultipleMessageStreamingSave();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 void Save(const MultipleMessageContainer& container, const MessageTargetSharedPtr& target) const override;
 	};

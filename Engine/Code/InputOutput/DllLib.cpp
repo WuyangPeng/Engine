@@ -28,7 +28,7 @@
 
 	namespace InputOutput
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

@@ -26,13 +26,14 @@
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26440)
 template <typename Real>
 const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
-	::sm_Zero = AQuaternion<Real>{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
+	::sm_Zero = AQuaternion<Real>{ Math::GetValue(0),Math::GetValue(0),Math::GetValue(0),Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
-	::sm_Identity = AQuaternion<Real>{ Math::sm_One, Math::sm_Zero, Math::sm_Zero, Math::sm_Zero };
+	::sm_Identity = AQuaternion<Real>{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
 
 template <typename Real>
 Mathematics::AQuaternion<Real>
@@ -75,10 +76,10 @@ void Mathematics::AQuaternion<Real>
 
 	auto trace = matrix(0, 0) + matrix(1, 1) + matrix(2, 2);
 
-	if (Math::sm_Zero < trace)
+	if (Math::GetValue(0) < trace)
 	{
 		// |w| > 1/2, 可能选择 w > 1/2
-		auto root = Math::Sqrt(trace + Math::sm_One);  // 2w
+		auto root = Math::Sqrt(trace + Math::GetValue(1));  // 2w
 
 		m_Tuple[0] = static_cast<Real>(0.5) * root;
 		root = static_cast<Real>(0.5) / root;  // 1 / (4w)
@@ -102,7 +103,7 @@ void Mathematics::AQuaternion<Real>
 		auto j = next[i];
 		auto k = next[j];
 
-		auto root = Math::Sqrt(matrix(i, i) - matrix(j, j) - matrix(k, k) + Math::sm_One);
+		auto root = Math::Sqrt(matrix(i, i) - matrix(j, j) - matrix(k, k) + Math::GetValue(1));
 		Real* quat[3]{ &m_Tuple[1], &m_Tuple[2], &m_Tuple[3] };
 		*quat[i] = static_cast<Real>(0.5) * root;
 		root = static_cast<Real>(0.5) / root;
@@ -313,7 +314,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real 
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (Math::FAbs(scalar) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(scalar) <= Math::GetZeroTolerance())
 	{
 		for (auto i = 0; i < 4; ++i)
 		{
@@ -349,15 +350,15 @@ typename const Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<R
 	auto twoYZ = twoZ * m_Tuple[2];
 	auto twoZZ = twoZ * m_Tuple[3];
 
-	return Matrix{ Math::sm_One - (twoYY + twoZZ),twoXY - twoWZ,twoXZ + twoWY,Math::sm_Zero,
-				   twoXY + twoWZ,Math::sm_One - (twoXX + twoZZ),twoYZ - twoWX,Math::sm_Zero,
-				   twoXZ - twoWY,twoYZ + twoWX,Math::sm_One - (twoXX + twoYY),Math::sm_Zero,
-				   Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_One };
+	return Matrix{ Math::GetValue(1) - (twoYY + twoZZ),twoXY - twoWZ,twoXZ + twoWY,Math::GetValue(0),
+				   twoXY + twoWZ,Math::GetValue(1) - (twoXX + twoZZ),twoYZ - twoWX,Math::GetValue(0),
+				   twoXZ - twoWY,twoYZ + twoWX,Math::GetValue(1) - (twoXX + twoYY),Math::GetValue(0),
+				   Math::GetValue(0),Math::GetValue(0),Math::GetValue(0),Math::GetValue(1) };
 }
 
 template <typename Real>
 typename const Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>
-	::ToAxis() const
+	::ToAxis() const 
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 	// 代表旋转的四元数是 
@@ -365,7 +366,7 @@ typename const Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<
 
 	auto sqrareLength = m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] + m_Tuple[3] * m_Tuple[3];
 
-	if (Math::sm_ZeroTolerance < sqrareLength)
+	if (Math::GetZeroTolerance() < sqrareLength)
 	{
 		auto invLength = Math::InvSqrt(sqrareLength);
 
@@ -374,7 +375,7 @@ typename const Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<
 	else
 	{
 		// 角度是 0 (2 * pi的模), 所以任何轴都行。
-		return AVector{ Math::sm_One,Math::sm_Zero,Math::sm_Zero };
+		return AVector{ Math::GetValue(1),Math::GetValue(0),Math::GetValue(0) };
 	}
 }
 
@@ -385,13 +386,13 @@ Real Mathematics ::AQuaternion<Real>::ToAngle() const noexcept
 
 	auto sqrareLength = m_Tuple[1] * m_Tuple[1] + m_Tuple[2] * m_Tuple[2] + m_Tuple[3] * m_Tuple[3];
 
-	if (Math::sm_ZeroTolerance < sqrareLength)
+	if (Math::GetZeroTolerance() < sqrareLength)
 	{
 		return static_cast<Real>(2) * Math::ACos(m_Tuple[0]);
 	}
 	else
 	{
-		return Math::sm_Zero;
+		return Math::GetValue(0);
 	}
 }
 
@@ -431,10 +432,10 @@ void Mathematics::AQuaternion<Real>
 	{
 		MATHEMATICS_ASSERTION_1(false, "四元数正则化错误！");
 
-		m_Tuple[0] = Math::sm_Zero;
-		m_Tuple[1] = Math::sm_Zero;
-		m_Tuple[2] = Math::sm_Zero;
-		m_Tuple[3] = Math::sm_Zero;
+		m_Tuple[0] = Math::GetValue(0);
+		m_Tuple[1] = Math::GetValue(0);
+		m_Tuple[2] = Math::GetValue(0);
+		m_Tuple[3] = Math::GetValue(0);
 	}
 }
 
@@ -466,7 +467,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 
 	auto norm = SquaredLength();
 
-	if (Math::sm_ZeroTolerance < norm)
+	if (Math::GetZeroTolerance() < norm)
 	{
 		return AQuaternion{ m_Tuple[0] / norm,-m_Tuple[1] / norm,-m_Tuple[2] / norm,-m_Tuple[3] / norm };
 	}
@@ -491,7 +492,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 	::Exp() const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Tuple[0]) <= Math::sm_ZeroTolerance, "四元数w必须等于0！");
+	MATHEMATICS_ASSERTION_1(Math::FAbs(m_Tuple[0]) <= Math::GetZeroTolerance(), "四元数w必须等于0！");
 
 	// 如果 q = A * (x*i+y*j+z*k) 这里 (x,y,z) 是单位长度，然后
 	// exp(q) = cos(A) + sin(A)*(x*i+y*j+z*k)。
@@ -505,7 +506,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 	auto sinValue = Math::Sin(angle);
 	result.m_Tuple[0] = Math::Cos(angle);
 
-	if (Math::sm_ZeroTolerance <= Math::FAbs(sinValue))
+	if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
 	{
 		auto coeff = sinValue / angle;
 		for (auto i = 1; i < 4; ++i)
@@ -536,13 +537,13 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const
 	// 因为 A/sin(A) 趋向于 1。
 
 	AQuaternion result;
-	result.m_Tuple[0] = Math::sm_Zero;
+	result.m_Tuple[0] = Math::GetValue(0);
 
-	if (Math::FAbs(m_Tuple[0]) < Math::sm_One)
+	if (Math::FAbs(m_Tuple[0]) < Math::GetValue(1))
 	{
 		auto angle = Math::ACos(m_Tuple[0]);
 		auto sinValue = Math::Sin(angle);
-		if (Math::sm_ZeroTolerance <= Math::FAbs(sinValue))
+		if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
 		{
 			auto coeff = angle / sinValue;
 			for (auto i = 1; i < 4; ++i)
@@ -599,7 +600,7 @@ void Mathematics::AQuaternion<Real>
 	auto cosValue = Dot(firstQuaternion, secondQuaternion);
 	auto angle = Math::ACos(cosValue);
 
-	if (Math::sm_ZeroTolerance <= Math::FAbs(angle))
+	if (Math::GetZeroTolerance() <= Math::FAbs(angle))
 	{
 		auto sinValue = Math::Sin(angle);
 		auto tAngle = t * angle;
@@ -639,7 +640,7 @@ void Mathematics::AQuaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	auto slerpT = static_cast<Real>(2) * t * (Math::sm_One - t);
+	auto slerpT = static_cast<Real>(2) * t * (Math::GetValue(1) - t);
 
 	AQuaternion slerpP;
 	slerpP.Slerp(t, q0, q1);
@@ -717,7 +718,7 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs)
 {
-	return Approximate(lhs, rhs, Math<Real>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math<Real>::GetZeroTolerance());
 }
 
 template <typename Real>

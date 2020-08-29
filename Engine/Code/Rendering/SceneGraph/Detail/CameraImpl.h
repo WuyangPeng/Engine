@@ -40,8 +40,8 @@ namespace Rendering
         using Math = Mathematics::Math<float>;
         
     public:
-        explicit CameraImpl (bool isPerspective,float epsilon = Math::sm_ZeroTolerance);
-        explicit CameraImpl(float epsilon = Math::sm_ZeroTolerance)  ;
+        explicit CameraImpl (bool isPerspective,float epsilon = Math::GetZeroTolerance());
+        explicit CameraImpl(float epsilon = Math::GetZeroTolerance())  ;
         
 		CLASS_INVARIANT_DECLARE;
 

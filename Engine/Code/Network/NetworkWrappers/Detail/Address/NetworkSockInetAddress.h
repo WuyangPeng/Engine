@@ -25,7 +25,7 @@ namespace Network
 		NetworkSockInetAddress(const std::string& hostName, int port);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 const WinSockInetAddressType& GetWinSockInetAddress() const noexcept override;
 		 WinSockInetAddressType& GetWinSockInetAddress() override;

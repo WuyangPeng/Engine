@@ -31,7 +31,7 @@ namespace Network
 		StringMessage(int64_t messageID, const StringType& stringType);
 		virtual ~StringMessage();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		CORE_TOOLS_RTTI_DECLARE;
 		NETWORK_STREAM_DECLARE(StringMessage);

@@ -10,7 +10,9 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Buffer.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {	
 	class RENDERING_DEFAULT_DECLARE IndexBuffer : public Buffer
@@ -31,7 +33,7 @@ namespace Rendering
 		   IndexBuffer( IndexBuffer&&) = default;
 		  IndexBuffer& operator=( IndexBuffer&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 				
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(IndexBuffer); 
 
@@ -64,6 +66,6 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, IndexBuffer); 
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_INDEX_BUFFER_H
 

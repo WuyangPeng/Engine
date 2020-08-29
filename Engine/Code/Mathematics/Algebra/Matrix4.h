@@ -82,7 +82,7 @@ namespace Mathematics
 		Matrix4& operator*= (const Matrix4& rhs);
 
 		// ÆäËüÔËËã
-		const Matrix4 Inverse(const Real epsilon = Math::sm_ZeroTolerance) const;
+		const Matrix4 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
 		const Matrix4 Adjoint() const;
 		Real Determinant() const;
 

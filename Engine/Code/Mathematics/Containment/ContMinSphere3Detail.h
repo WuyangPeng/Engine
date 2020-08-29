@@ -122,14 +122,14 @@ bool Mathematics::MinSphere3<Real>
     // so the next line of code is not in error.
     distDiff = test - sphere.GetRadius();
 
-    return distDiff <= Math<Real>::sm_Zero;
+    return distDiff <= Math<Real>::GetValue(0);
 }
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 	::ExactSphere1(const Vector3D<Real>& P)
 {
-	Sphere3<Real> minimal{ P, Math<Real>::sm_Zero };
+	Sphere3<Real> minimal{ P, Math<Real>::GetValue(0) };
     return minimal;
 }
 
@@ -180,7 +180,7 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 	Vector3D<Real> center;
 	Real  radius;
-    if (Math<Real>::FAbs(det) > Math<Real>::sm_Zero)
+    if (Math<Real>::FAbs(det) > Math<Real>::GetValue(0))
     {
         Real m00, m01, m10, m11, d0, d1;
         if (AdA >= BdB)

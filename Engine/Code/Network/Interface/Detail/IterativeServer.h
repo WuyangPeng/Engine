@@ -28,7 +28,7 @@ namespace Network
     public:
         IterativeServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
         void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;

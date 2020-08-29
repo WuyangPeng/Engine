@@ -14,6 +14,7 @@
 #include "Mathematics/Base/MathDetail.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26496)
 CORE_TOOLS_RTTI_DEFINE(Rendering, CurveSegment);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CurveSegment);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, CurveSegment);
@@ -83,7 +84,7 @@ float Rendering::CurveSegment ::Curvature(float u) const
     AVector velocity = PU(u);
     const float speedSqr = velocity.SquaredLength();
 
-    if (speedSqr >= Mathematics::Mathf::sm_ZeroTolerance)
+    if (speedSqr >= Mathematics::Mathf::GetZeroTolerance())
     {
         AVector acceleration = PUU(u);
         AVector cross = Cross(velocity, acceleration);
@@ -105,7 +106,7 @@ float Rendering::CurveSegment ::Torsion(float u) const
     AVector cross = Cross(velocity, acceleration);
     const float denom = cross.SquaredLength();
 
-    if (denom >= Mathematics::Mathf::sm_ZeroTolerance)
+    if (denom >= Mathematics::Mathf::GetZeroTolerance())
     {
         AVector jerk = PUUU(u);
         const float numer = Dot(cross, jerk);

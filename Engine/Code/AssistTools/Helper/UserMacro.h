@@ -9,6 +9,7 @@
 
 #include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/UserMacro.h" 
+#include "Mathematics/Helper/UserMacro.h"
 
 #define CLOSE_USE_XXX (0x01) 
 #define CLOSE_ASSIST_TOOLS_MAX (((CLOSE_USE_XXX) << 1) - 1)

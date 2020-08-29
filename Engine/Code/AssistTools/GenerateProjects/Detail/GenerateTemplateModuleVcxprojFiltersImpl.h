@@ -23,7 +23,7 @@ namespace AssistTools
 		GenerateTemplateModuleVcxprojFiltersImpl(const System::String& templateFileName, const System::String& solutionName, const System::String& moduleName);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newModuleName) const;
 

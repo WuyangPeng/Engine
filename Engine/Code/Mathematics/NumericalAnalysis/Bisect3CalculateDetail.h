@@ -10,7 +10,7 @@
 #include "Bisect3Calculate.h"
 #include "Bisect3Node.h"
 #include "Bisect3.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 

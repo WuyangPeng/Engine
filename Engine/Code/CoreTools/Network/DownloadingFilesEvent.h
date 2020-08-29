@@ -17,7 +17,9 @@
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::DownloadingFilesEvent>;
 template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools::DownloadingFilesEvent>;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace CoreTools
 {
 	class CORE_TOOLS_DEFAULT_DECLARE DownloadingFilesEvent : public std::enable_shared_from_this<DownloadingFilesEvent>
@@ -42,5 +44,5 @@ namespace CoreTools
 	using ConstDownloadingFilesEventSharedPointer = std::shared_ptr<const DownloadingFilesEvent>;
 	using DownloadingFilesEventSharedPointer = std::shared_ptr<DownloadingFilesEvent>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_TOOLS_DOWNLOADING_FILES_EVENT_H

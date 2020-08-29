@@ -23,7 +23,7 @@ namespace Database
                 explicit NullSession(const ConfigurationStrategy& configurationStrategy) noexcept;
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 	};
 }
 

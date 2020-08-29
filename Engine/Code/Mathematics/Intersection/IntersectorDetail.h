@@ -30,7 +30,7 @@ template <typename Real, template <typename> class Vector>
 bool Mathematics::Intersector<Real, Vector>
 	::IsValid() const  noexcept
 {
-	if (Math::sm_Zero <= m_Epsilon)
+	if (Math::GetValue(0) <= m_Epsilon)
 		return true;
 	else
 		return false;

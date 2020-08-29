@@ -11,8 +11,8 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include "Mathematics/Algebra/APointDetail.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/APoint.h"
+ #include "Mathematics/Algebra/AVector.h"
 
 #include <boost/noncopyable.hpp>
 
@@ -27,7 +27,7 @@ namespace Rendering
         using ClassType = PickRayImpl;
 
     public:
-        PickRayImpl() noexcept;
+        PickRayImpl() noexcept; 
         PickRayImpl(bool result, const Mathematics::APointf& origin, const Mathematics::AVectorf& direction) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -39,7 +39,7 @@ namespace Rendering
     private:
         bool m_Result;
         Mathematics::APointf m_Origin;
-        Mathematics::AVectorf m_Direction;
+        Mathematics::AVectorf m_Direction; 
     };
 }
 

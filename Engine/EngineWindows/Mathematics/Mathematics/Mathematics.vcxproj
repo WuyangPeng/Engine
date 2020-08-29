@@ -169,7 +169,7 @@
     <LinkIncremental>true</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -259,7 +259,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -308,7 +308,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AlgebraAggregate.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\APoint.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AQuaternion.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AVector.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalBasis.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalize.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BandedMatrix.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Euler.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPoint.cpp" />
@@ -384,6 +388,7 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Query\QuerySortTools.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\Detail\Int64Vector2Impl.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\Detail\Int64Vector3Impl.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\FloatingPointAnalysis.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\Int64Vector2.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\Int64Vector3.cpp" />
   </ItemGroup>
@@ -394,14 +399,18 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraStreamSize.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraTraits.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APoint.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APointAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APointDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AQuaternion.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AQuaternionDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalBasis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalBasisAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalBasisDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalize.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalizeAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalizeDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox2D.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox2DDetail.h" />
@@ -421,6 +430,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\MatrixFlags.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\QuaternionFlags.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPoint.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPointAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPointDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix2.h" />
@@ -564,6 +574,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Base\Log2OfPowerOfTwo.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\Log2OfPowerOfTwoDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\Math.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\MathAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\MathDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\Random.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\RandomDetail.h" />
@@ -1474,6 +1485,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\Detail\Int64Vector3Impl.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\Flags\FloatingPointAnalysisType.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\FloatingPointAnalysis.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\FloatingPointAnalysisAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\FloatingPointAnalysisDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\Int64Vector.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\Int64Vector2.h" />

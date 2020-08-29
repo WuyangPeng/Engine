@@ -27,7 +27,7 @@ namespace Rendering
         OpenGLRenderTarget (Renderer* renderer,const RenderTarget* renderTarget);
  
         
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
           void Enable (Renderer* renderer) noexcept override;
 		  void Disable (Renderer* renderer) noexcept override;

@@ -2187,6 +2187,15 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6386.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26819.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26818.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\MathConstants.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">

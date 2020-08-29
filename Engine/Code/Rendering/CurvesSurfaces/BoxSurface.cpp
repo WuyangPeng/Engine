@@ -125,7 +125,7 @@ Rendering::TrianglesMeshSmartPointer Rendering::BoxSurface
 		for (col = 0; col < numCols; ++col, ++i)
 		{
 			param[permute[0]] = col * colFactor;
-			vbuffer->SetPosition(vba, i, mVolume->GetPosition(param));
+                    vbuffer->SetPosition(vba, i, APoint{ mVolume->GetPosition(param) });
 
 			if (vba.HasNormal())
 			{
@@ -203,7 +203,7 @@ void Rendering::BoxSurface
 		{
 			param[permute[0]] = col * colFactor;
 
-			vbuffer->SetPosition(vba, i, mVolume->GetPosition(param));
+			vbuffer->SetPosition(vba, i, APoint{ mVolume->GetPosition(param) });
 
 			if (vba.HasNormal())
 			{

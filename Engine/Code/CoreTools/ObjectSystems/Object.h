@@ -36,11 +36,11 @@ namespace CoreTools
 		~Object() = 0;
 
 		Object(const Object&) = default;
-		Object& operator=(const Object&) = default;
+                virtual Object& operator=(const Object&) = default;
 		Object(Object&&) noexcept = default;
-		Object& operator=(Object&&) noexcept = default;
+                virtual Object& operator=(Object&&) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Object);
 		CORE_TOOLS_NAMES_DECLARE;

@@ -156,7 +156,8 @@ void CoreTools::BufferTarget
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	WriteWithoutNumber(4, datum.GetPoint());
+	auto value = datum.GetPoint();
+        WriteWithoutNumber(4, value.data());
 } 
 
 template <> 
@@ -178,7 +179,7 @@ void CoreTools::BufferTarget
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	WriteWithoutNumber(4, datum.GetPoint());
+	WriteWithoutNumber(4, datum.GetPoint().data());
 } 
 
 #include STSTEM_WARNING_POP

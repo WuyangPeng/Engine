@@ -28,7 +28,7 @@ namespace Network
 		NetworkMainManager(NetworkMainManager&&) = default;
 		NetworkMainManager& operator=(NetworkMainManager&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	public:
 		  void Run() noexcept override;

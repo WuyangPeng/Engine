@@ -44,7 +44,7 @@ typename const Mathematics::DistLine3Rectangle3<Real>::DistanceResult Mathematic
 	// zero.
 	auto N = Vector3DTools::CrossProduct(mRectangle.GetFirstAxis(), mRectangle.GetSecondAxis());
 	auto NdD = Vector3DTools::DotProduct(N, mLine.GetDirection());
-	if (Math::FAbs(NdD) > Math::sm_ZeroTolerance)
+	if (Math::FAbs(NdD) > Math::GetZeroTolerance())
 	{
 		// The line and rectangle are not parallel, so the line intersects
 		// the plane of the rectangle.
@@ -82,7 +82,7 @@ typename const Mathematics::DistLine3Rectangle3<Real>::DistanceResult Mathematic
 
 			mClosestPoint1 = mRectangle.GetCenter() + s0 * mRectangle.GetFirstAxis() + s1 * mRectangle.GetSecondAxis();
 
-			return DistanceResult{ Math<Real>::sm_Zero };
+			return DistanceResult{ Math<Real>::GetValue(0) };
 		}
 	}
 
@@ -122,7 +122,7 @@ typename const Mathematics::DistLine3Rectangle3<Real>::DistanceResult Mathematic
 		}
 	}
 
-	return DistanceResult{ sqrDist, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDist, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 

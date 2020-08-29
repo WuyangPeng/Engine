@@ -77,7 +77,7 @@ const typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics
 							   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 							   tool.GetOriginDifferenceSquaredLength();
 
-		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::sm_Zero, m_LhsLine.GetOrigin() + lhsT * m_LhsLine.GetDirection(),
+		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::GetValue(0), m_LhsLine.GetOrigin() + lhsT * m_LhsLine.GetDirection(),
 							   m_RhsLine.GetOrigin() + rhsT * m_RhsLine.GetDirection(),lhsT,rhsT };
 	}
 	else
@@ -86,9 +86,9 @@ const typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics
 		auto originDifferenceDotLhsDirection = tool.GetOriginDifferenceDotLhsDirection();
 		auto squaredDistance = tool.GetSquaredDistanceWithParallel();
 
-		return DistanceResult{ squaredDistance, Math::sm_Zero,
+		return DistanceResult{ squaredDistance, Math::GetValue(0),
 							   m_LhsLine.GetOrigin() - originDifferenceDotLhsDirection * m_LhsLine.GetDirection(),
-							   m_RhsLine.GetOrigin(), -originDifferenceDotLhsDirection,Math::sm_Zero };
+							   m_RhsLine.GetOrigin(), -originDifferenceDotLhsDirection,Math::GetValue(0) };
 	}
 }
 

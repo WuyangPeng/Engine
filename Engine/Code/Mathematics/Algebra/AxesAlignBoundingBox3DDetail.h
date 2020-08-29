@@ -124,7 +124,7 @@ typename const Mathematics::AxesAlignBoundingBox3D<Real>::Vector3D Mathematics::
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return (m_MaxPoint + m_MinPoint) / Math::sm_Two;
+	return (m_MaxPoint + m_MinPoint) / Math::GetValue(2);
 }
 
 template <typename Real>
@@ -133,7 +133,7 @@ Real Mathematics::AxesAlignBoundingBox3D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return (m_MaxPoint.GetXCoordinate() - m_MinPoint.GetXCoordinate()) / Math::sm_Two;
+	return (m_MaxPoint.GetXCoordinate() - m_MinPoint.GetXCoordinate()) / Math::GetValue(2);
 }
 
 template <typename Real>
@@ -142,7 +142,7 @@ Real Mathematics::AxesAlignBoundingBox3D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return (m_MaxPoint.GetYCoordinate() - m_MinPoint.GetYCoordinate()) / Math::sm_Two;
+	return (m_MaxPoint.GetYCoordinate() - m_MinPoint.GetYCoordinate()) / Math::GetValue(2);
 }
 
 template <typename Real>
@@ -151,7 +151,7 @@ Real Mathematics::AxesAlignBoundingBox3D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return (m_MaxPoint.GetZCoordinate() - m_MinPoint.GetZCoordinate()) / Math::sm_Two;
+	return (m_MaxPoint.GetZCoordinate() - m_MinPoint.GetZCoordinate()) / Math::GetValue(2);
 }
 
 template <typename Real>

@@ -8,7 +8,7 @@
 #define RENDERING_SHADER_FLOATS_SHADER_FLOATS_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SubclassSmartPointerMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
@@ -48,7 +48,7 @@ namespace Rendering
         ShaderFloat(ShaderFloat&&) noexcept = default;
         ShaderFloat& operator=(ShaderFloat&&) noexcept = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ShaderFloat);
 

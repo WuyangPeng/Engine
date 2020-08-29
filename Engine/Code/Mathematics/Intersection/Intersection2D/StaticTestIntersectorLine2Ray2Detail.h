@@ -36,7 +36,7 @@ void Mathematics::StaticTestIntersectorLine2Ray2<Real>
 	if (intersectionType == IntersectionType::Point)
 	{
 		// 测试线-线相交的点是否在射线上。
-		if (Math::sm_Zero <= classify.GetSecondParameter())
+		if (Math::GetValue(0) <= classify.GetSecondParameter())
 		{
 			m_Quantity = 1;
 		}

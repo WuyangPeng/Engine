@@ -10,12 +10,14 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
 #include <vector>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Mathematics
 {
 	template <typename Real>
@@ -64,7 +66,7 @@ namespace Mathematics
 		// 向量运算
 		Real Length() const;
 		Real SquaredLength() const;
-		void Normalize(Real epsilon = Math::sm_ZeroTolerance);
+		void Normalize(Real epsilon = Math::GetZeroTolerance());
 
 		const std::vector<Real> GetValue() const;
 
@@ -88,7 +90,7 @@ namespace Mathematics
 
 	template <typename Real>
 	bool Approximate(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs,
-					 const Real epsilon = Math<Real>::sm_ZeroTolerance);
+					 const Real epsilon = Math<Real>::GetZeroTolerance());
 
 	// 调试输出。
 	template <typename Real>
@@ -97,5 +99,5 @@ namespace Mathematics
 	using VariableLengthVectorf = VariableLengthVector<float>;
 	using VariableLengthVectord = VariableLengthVector<double>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_H

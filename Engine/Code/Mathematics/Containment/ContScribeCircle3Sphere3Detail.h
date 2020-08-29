@@ -20,7 +20,7 @@ bool Mathematics
 	auto e02e12 = Vector3DTools<Real>::DotProduct(E02,E12);
 	auto e12e12 = Vector3DTools<Real>::DotProduct(E12,E12);
 	auto det = e02e02*e12e12 - e02e12*e02e12;
-    if (Math<Real>::FAbs(det) < Math<Real>::sm_ZeroTolerance)
+    if (Math<Real>::FAbs(det) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
@@ -41,11 +41,11 @@ bool Mathematics
 		 
 		direction0.SetXCoordinate(-normal.GetYCoordinate());
 		direction0.SetYCoordinate(normal.GetXCoordinate());
-		direction0.SetZCoordinate(Math<Real>::sm_Zero);
+		direction0.SetZCoordinate(Math<Real>::GetValue(0));
     }
     else
     {
-		direction0.SetXCoordinate(Math<Real>::sm_Zero);
+		direction0.SetXCoordinate(Math<Real>::GetValue(0));
 		direction0.SetYCoordinate(normal.GetZCoordinate());
 		direction0.SetZCoordinate(-normal.GetYCoordinate());        
     }
@@ -113,19 +113,19 @@ bool Mathematics
 	auto N2 = Vector3DTools<Real>::UnitCrossProduct(normal, E2);
 
 	auto a0 = Vector3DTools<Real>::DotProduct(N1,E0);
-    if (Math<Real>::FAbs(a0) < Math<Real>::sm_ZeroTolerance)
+    if (Math<Real>::FAbs(a0) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 
 	auto a1 = Vector3DTools<Real>::DotProduct(N2,E1);
-	if (Math<Real>::FAbs(a1) < Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(a1) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 
 	auto a2 = Vector3DTools<Real>::DotProduct(N0,E2);
-	if (Math<Real>::FAbs(a2) < Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(a2) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
@@ -164,22 +164,22 @@ bool Mathematics
 	auto N3 = Vector3DTools<Real>::CrossProduct(E10,E20);
 
     // Normalize the normals.
-	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N0)) < Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N0)) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 	N0.Normalize();
-	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N1)) < Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N1)) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 	N1.Normalize();
-	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N2)) < Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N2)) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 	N2.Normalize();
-	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N3)) < Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N3)) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
@@ -194,8 +194,8 @@ bool Mathematics
 
     Real B[3] 
     {
-        Math<Real>::sm_Zero,
-        Math<Real>::sm_Zero,
+        Math<Real>::GetValue(0),
+        Math<Real>::GetValue(0),
 		-Vector3DTools<Real>::DotProduct(N3,E30)
     };
 

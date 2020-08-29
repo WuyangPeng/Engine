@@ -44,7 +44,7 @@ void Mathematics::PolynomialFit2<Real>
 
 	for (auto degreeIndex = 0; degreeIndex <= degree; ++degreeIndex)
 	{
-		inputVector[degreeIndex] = Math<Real>::sm_Zero;
+		inputVector[degreeIndex] = Math<Real>::GetValue(0);
 		for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
 		{
 			inputVector[degreeIndex] += wSamples[samplesIndex] * power(samplesIndex, degreeIndex);
@@ -52,7 +52,7 @@ void Mathematics::PolynomialFit2<Real>
 
 		for (auto innerIndex = 0; innerIndex <= degree; ++innerIndex)
 		{
-			matrix(degreeIndex, innerIndex) = Math<Real>::sm_Zero;
+			matrix(degreeIndex, innerIndex) = Math<Real>::GetValue(0);
 			for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
 			{
 				matrix(degreeIndex, innerIndex) += power(samplesIndex, degreeIndex + innerIndex);

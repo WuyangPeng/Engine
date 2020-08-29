@@ -12,7 +12,7 @@
 using std::string;
 
 Rendering::RendererParameterImpl
-	::RendererParameterImpl(RendererTypes type)
+	::RendererParameterImpl(RendererTypes type) noexcept
 	:m_Type{ type }, m_RendererBasis{}, m_Colour{ 0.0f, 0.0f, 0.0f, 1.0f },
 	m_WindowTitle{}, m_WindowX{ 0 }, m_WindowY{ 0 }, m_IsAllowResize{ true }
 {
@@ -114,7 +114,7 @@ void Rendering::RendererParameterImpl ::SetTextureFormat(TextureFormat colorForm
 }
 
 void Rendering::RendererParameterImpl
-	::SetClearColor(float red,float green,float blue,float alpha)
+	::SetClearColor(float red,float green,float blue,float alpha) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

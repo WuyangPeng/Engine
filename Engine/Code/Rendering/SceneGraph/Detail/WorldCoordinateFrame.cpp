@@ -21,8 +21,8 @@
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
 Rendering::WorldCoordinateFrame ::WorldCoordinateFrame(float epsilon)  
-    : m_Position{ APoint::sm_Origin }, m_DirectionVector{ -AVector::sm_UnitZ }, m_UpVector{ AVector::sm_UnitY },
-	m_RightVector{ AVector::sm_UnitX }, m_ViewMatrix{ Matrix::sm_Zero }, m_Epsilon{ epsilon }
+    : m_Position{ Mathematics::Pointf::g_Origin }, m_DirectionVector{ -Mathematics::Vectorf::g_UnitZ }, m_UpVector{ Mathematics::Vectorf::g_UnitY },
+	m_RightVector{ Mathematics::Vectorf::g_UnitX }, m_ViewMatrix{ Matrix::sm_Zero }, m_Epsilon{ epsilon }
 {
     OnFrameChange ();
     
@@ -88,7 +88,7 @@ void Rendering::WorldCoordinateFrame
     if (m_Epsilon < Mathematics::Mathf::FAbs(1.0f - det))
     {
         // 输入向量并没有形成一个标准正交集合。这里重新正交化
-		auto orthonormalize = Orthonormalize(m_DirectionVector, m_UpVector,m_RightVector,m_Epsilon);
+        const auto orthonormalize = Orthonormalize(m_DirectionVector, m_UpVector, m_RightVector, m_Epsilon);
         
         m_DirectionVector = orthonormalize.GetUVector();
         m_UpVector = orthonormalize.GetVVector();

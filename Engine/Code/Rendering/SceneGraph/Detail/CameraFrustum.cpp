@@ -66,7 +66,7 @@ void Rendering::CameraFrustum
 {
     RENDERING_CLASS_IS_VALID_9;
     
-  const  auto halfAngleRadians = 0.5f * upFieldOfViewDegrees * Mathematics::Mathf::sm_DegToRad;
+  const  auto halfAngleRadians = 0.5f * upFieldOfViewDegrees * Mathematics::Mathf::GetDegreeToRadian();
     
     m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] = directionMin * Mathematics::Mathf::Tan(halfAngleRadians);
     m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] = aspectRatio * m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)];
@@ -91,7 +91,7 @@ const Rendering::CameraFrustumData Rendering::CameraFrustum ::GetFrustumData() c
         m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] == -m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)])
     {
     const    auto ratio = m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] / m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)];
-        const auto upFieldOfViewDegrees = 2.0f * Mathematics::Mathf::ATan(ratio) * Mathematics::Mathf::sm_RadToDeg;
+        const auto upFieldOfViewDegrees = 2.0f * Mathematics::Mathf::ATan(ratio) * Mathematics::Mathf::GetRadianToDegree();
     const auto aspectRatio = m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] / m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)];
         const auto directionMin = m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)];
     const auto directionMax = m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMax)];

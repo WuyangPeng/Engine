@@ -71,8 +71,8 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 	Vector3D closest{ Vector3DTools::DotProduct(difference, m_Box.GetFirstAxis()),
 					  Vector3DTools::DotProduct(difference,m_Box.GetSecondAxis()),
 					  Vector3DTools::DotProduct(difference,m_Box.GetThirdAxis()) };
-	auto squaredDistance = Math::sm_Zero;
-	auto delta = Math::sm_Zero;
+	auto squaredDistance = Math::GetValue(0);
+	auto delta = Math::GetValue(0);
 
 	if (closest.GetXCoordinate() < -m_Box.GetFirstExtent())
 	{
@@ -113,7 +113,7 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 		closest.SetZCoordinate(m_Box.GetThirdExtent());
 	}
 
-	return DistanceResult{ squaredDistance, Math::sm_Zero, m_Point,
+	return DistanceResult{ squaredDistance, Math::GetValue(0), m_Point,
 						   m_Box.GetCenter() + closest.GetXCoordinate() * m_Box.GetFirstAxis() +
 						   closest.GetYCoordinate() * m_Box.GetSecondAxis() +
 						   closest.GetZCoordinate() * m_Box.GetThirdAxis() };

@@ -28,6 +28,8 @@ using std::make_shared;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26456)
+#include SYSTEM_WARNING_DISABLE(26496)
 CORE_TOOLS_RTTI_DEFINE(Rendering, SkinController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SkinController); 
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SkinController);
@@ -144,14 +146,14 @@ bool Rendering::SkinController
 				// 计算的皮肤顶点位置。
 				for (auto vertex = 0; vertex < m_Impl->GetNumVertices(); ++vertex)
 				{
-					auto position = APoint::sm_Origin;
+                                      auto position = Mathematics::Pointf::g_Origin;
 					for (auto bone = 0; bone < m_Impl->GetNumBones(); ++bone)
 					{
 						const auto weight = m_Impl->GetWeights(bone, vertex);
-						if (Mathematics::Mathf::sm_ZeroTolerance < Mathematics::Mathf::FAbs(weight))
+						if (Mathematics::Mathf::GetZeroTolerance() < Mathematics::Mathf::FAbs(weight))
 						{
-							auto offset = m_Impl->GetOffsets(bone, vertex);
-							auto worldOffset = m_Impl->GetBones(bone)->GetWorldTransform() * offset;
+                                                    const auto offset = m_Impl->GetOffsets(bone, vertex);
+                                                    const auto worldOffset = m_Impl->GetBones(bone)->GetWorldTransform() * offset;
 							position += weight * worldOffset;
 						}
 					}

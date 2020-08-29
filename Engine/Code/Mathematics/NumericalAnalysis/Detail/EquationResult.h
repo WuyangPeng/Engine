@@ -38,8 +38,8 @@ namespace Mathematics
 		int GetRealResultCount() const;
 		int GetImaginaryResultCount() const;
 
-		void AddRealResult(double solution, double epsilon = Mathd::sm_ZeroTolerance);
-		void AddImaginaryResult(const Imaginary& solution, double epsilon = Mathd::sm_ZeroTolerance);
+		void AddRealResult(double solution, double epsilon = Mathd::GetZeroTolerance());
+		void AddImaginaryResult(const Imaginary& solution, double epsilon = Mathd::GetZeroTolerance());
 		void CleanSolution() noexcept;
 
 		const RealConstIterator GetRealBegin() const noexcept;

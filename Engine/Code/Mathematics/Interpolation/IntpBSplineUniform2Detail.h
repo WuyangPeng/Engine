@@ -68,7 +68,7 @@ namespace Mathematics
 		SetPolynomial(0, y - mBase[1], mPoly[1]);
 
 		int index[2] = { 0, 0 };
-		Real result = Math<Real>::sm_Zero;
+		Real result = Math<Real>::GetValue(0);
 		for (int k = index[0] + mDp1 * index[1]; k < mDp1ToN; ++k)
 		{
 			result += mPoly[0][index[0]] * mPoly[1][index[1]] * mInter[k];
@@ -179,7 +179,7 @@ namespace Mathematics
 		// Compute and save the intermediate product.
 		for (int i = 0, j = 0; i < mDp1ToN; ++i)
 		{
-			Real sum = Math<Real>::sm_Zero;
+			Real sum = Math<Real>::GetValue(0);
 			for (k = 0; k < mDp1ToN; k += mSkip[j], j += mSkip[j])
 			{
 				sum += mProduct[j] * mCache[k];

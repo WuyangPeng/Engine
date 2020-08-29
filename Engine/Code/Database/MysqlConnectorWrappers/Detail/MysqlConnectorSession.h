@@ -33,7 +33,7 @@ namespace Database
         MysqlConnectorSession(MysqlConnectorSession&&) = default;
         MysqlConnectorSession& operator=(MysqlConnectorSession&&) = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         MysqlxSchemaPtr GetMysqlxSchemaPtr() override;
         MysqlxSchemaPtr GetMysqlxSchemaPtr(int dbIndex) override;

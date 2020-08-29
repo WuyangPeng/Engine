@@ -14,7 +14,7 @@ Mathematics::DynamicTestIntersectorSegment3Sphere3<Real>
 	::DynamicTestIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
 	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mSegment{ segment }, mSphere{ sphere }
 {
-	ZeroThreshold = Math::sm_ZeroTolerance;
+	ZeroThreshold = Math::GetZeroTolerance();
 	Test();
 }
 

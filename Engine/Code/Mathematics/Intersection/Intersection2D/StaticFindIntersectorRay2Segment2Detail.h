@@ -60,7 +60,7 @@ void Mathematics::StaticFindIntersectorRay2Segment2<Real>
 		auto tmax = dotProduct + m_Segment.GetExtent();
 
 		// 计算区间 [0,+infinity) 和 [tmin,tmax]相交点。
-		StaticFindIntersector1<Real> calc{ Math::sm_Zero, Math::sm_MaxReal, tmin, tmax,dotThreshold };
+		StaticFindIntersector1<Real> calc{ Math::GetValue(0), Math::sm_MaxReal, tmin, tmax,dotThreshold };
 
 		m_Quantity = calc.GetNumIntersections();
 

@@ -32,7 +32,7 @@ template <typename Real, typename Vector>
 bool Mathematics::DistanceResultImpl<Real, Vector>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_Distance)
+	if (Math::GetValue(0) <= m_Distance)
 		return true;
 	else
 		return false;
@@ -54,7 +54,7 @@ Real  Mathematics::DistanceResultImpl<Real, Vector>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return Math::sm_Zero;
+	return Math::GetValue(0);
 }
 
 template <typename Real, typename Vector>

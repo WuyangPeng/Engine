@@ -286,19 +286,21 @@ const	auto faceOffset = face * GetNumTotalBytes() / 6;
 void Rendering::TextureCubeImpl
     ::GenerateNextMipmap (int dimension, const char* texels, int dimensionNext, char* texelsNext)
 {
-    vector<FloatColour> colour(dimension * dimension);
+    texelsNext;
+    texels;
+   // vector<FloatColour> colour(dimension * dimension);
     
 const	auto format = GetFormat();
   
-	auto fromFunction = ColourConvertFrom::sm_FromFunction[System::EnumCastUnderlying(format)];
+	auto fromFunction = ColourConvertFrom::GetConvertFromFunction(format);
 
-	auto toFunction = ColourConvertTo::sm_ToFunction[System::EnumCastUnderlying(format)];
+	auto toFunction = ColourConvertTo::GetConvertToFunction(format);
     
     if(fromFunction != nullptr && toFunction != nullptr)
     {
 	const	auto numTexels = dimension * dimension;
-        
-        fromFunction(numTexels, texels, &colour[0]);
+        vector<char> fromVector;  // ¸´ÖÆtexelsÊý×é
+        auto colour = fromFunction(fromVector);
         
         for (auto heightIndex = 0; heightIndex < dimensionNext; ++heightIndex)
         {
@@ -325,7 +327,7 @@ const	auto format = GetFormat();
 
 	const	auto numTexelsNext = dimensionNext * dimensionNext;
         
-        toFunction(numTexelsNext,  &colour[0], texelsNext);
+           auto result = toFunction(colour);
     }
 }
 

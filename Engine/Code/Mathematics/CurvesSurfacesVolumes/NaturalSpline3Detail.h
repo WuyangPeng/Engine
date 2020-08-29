@@ -87,7 +87,7 @@ void NaturalSpline3<Real>::CreateFreeSpline ()
     Real inv;
 
     ell[0] = static_cast<Real>(1);
-    mu[0] = Math<Real>::sm_Zero;
+    mu[0] = Math<Real>::GetValue(0);
     z[0] = Vector3D<Real>::sm_Zero;
     for (i = 1; i < mNumSegments; ++i)
     {

@@ -37,7 +37,7 @@ namespace Rendering
 		  ~OffsetState();
                 OffsetState(OffsetState&&) noexcept = default;
                   OffsetState& operator=(OffsetState&&) noexcept = default;
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(OffsetState); 
 

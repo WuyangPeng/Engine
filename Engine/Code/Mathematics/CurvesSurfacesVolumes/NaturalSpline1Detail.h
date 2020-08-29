@@ -139,8 +139,8 @@ void NaturalSpline1<Real>::CreateFreeSpline ()
     }
 
     // The boundary conditions.
-    mC[0] = Math<Real>::sm_Zero;
-    mC[mNumSegments] = Math<Real>::sm_Zero;
+    mC[0] = Math<Real>::GetValue(0);
+    mC[mNumSegments] = Math<Real>::GetValue(0);
 
     // The linear system that determines C[1] through C[numSegs-1].
 	//bool solved = 
@@ -237,39 +237,39 @@ void NaturalSpline1<Real>::CreatePeriodicSpline ()
         delta3 = delta*delta2;
 
         mat[j+0][j+0] = static_cast<Real>(1);
-        mat[j+0][j+1] = Math<Real>::sm_Zero;
-        mat[j+0][j+2] = Math<Real>::sm_Zero;
-        mat[j+0][j+3] = Math<Real>::sm_Zero;
+        mat[j+0][j+1] = Math<Real>::GetValue(0);
+        mat[j+0][j+2] = Math<Real>::GetValue(0);
+        mat[j+0][j+3] = Math<Real>::GetValue(0);
         mat[j+1][j+0] = static_cast<Real>(1);
         mat[j+1][j+1] = delta;
         mat[j+1][j+2] = delta2;
         mat[j+1][j+3] = delta3;
-        mat[j+2][j+0] = Math<Real>::sm_Zero;
+        mat[j+2][j+0] = Math<Real>::GetValue(0);
         mat[j+2][j+1] = static_cast<Real>(1);
         mat[j+2][j+2] = (static_cast<Real>(2))*delta;
         mat[j+2][j+3] = (static_cast<Real>(3))*delta2;
-        mat[j+3][j+0] = Math<Real>::sm_Zero;
-        mat[j+3][j+1] = Math<Real>::sm_Zero;
+        mat[j+3][j+0] = Math<Real>::GetValue(0);
+        mat[j+3][j+1] = Math<Real>::GetValue(0);
         mat[j+3][j+2] = static_cast<Real>(1);
         mat[j+3][j+3] = (static_cast<Real>(3))*delta;
 
         k = j + 4;
-        mat[j+0][k+0] = Math<Real>::sm_Zero;
-        mat[j+0][k+1] = Math<Real>::sm_Zero;
-        mat[j+0][k+2] = Math<Real>::sm_Zero;
-        mat[j+0][k+3] = Math<Real>::sm_Zero;
+        mat[j+0][k+0] = Math<Real>::GetValue(0);
+        mat[j+0][k+1] = Math<Real>::GetValue(0);
+        mat[j+0][k+2] = Math<Real>::GetValue(0);
+        mat[j+0][k+3] = Math<Real>::GetValue(0);
         mat[j+1][k+0] = (Real)-1;
-        mat[j+1][k+1] = Math<Real>::sm_Zero;
-        mat[j+1][k+2] = Math<Real>::sm_Zero;
-        mat[j+1][k+3] = Math<Real>::sm_Zero;
-        mat[j+2][k+0] = Math<Real>::sm_Zero;
+        mat[j+1][k+1] = Math<Real>::GetValue(0);
+        mat[j+1][k+2] = Math<Real>::GetValue(0);
+        mat[j+1][k+3] = Math<Real>::GetValue(0);
+        mat[j+2][k+0] = Math<Real>::GetValue(0);
         mat[j+2][k+1] = (Real)-1;
-        mat[j+2][k+2] = Math<Real>::sm_Zero;
-        mat[j+2][k+3] = Math<Real>::sm_Zero;
-        mat[j+3][k+0] = Math<Real>::sm_Zero;
-        mat[j+3][k+1] = Math<Real>::sm_Zero;
+        mat[j+2][k+2] = Math<Real>::GetValue(0);
+        mat[j+2][k+3] = Math<Real>::GetValue(0);
+        mat[j+3][k+0] = Math<Real>::GetValue(0);
+        mat[j+3][k+1] = Math<Real>::GetValue(0);
         mat[j+3][k+2] = (Real)-1;
-        mat[j+3][k+3] = Math<Real>::sm_Zero;
+        mat[j+3][k+3] = Math<Real>::GetValue(0);
     }
 
     delta = mTimes[i+1] - mTimes[i];
@@ -277,46 +277,46 @@ void NaturalSpline1<Real>::CreatePeriodicSpline ()
     delta3 = delta*delta2;
 
     mat[j+0][j+0] = static_cast<Real>(1);
-    mat[j+0][j+1] = Math<Real>::sm_Zero;
-    mat[j+0][j+2] = Math<Real>::sm_Zero;
-    mat[j+0][j+3] = Math<Real>::sm_Zero;
+    mat[j+0][j+1] = Math<Real>::GetValue(0);
+    mat[j+0][j+2] = Math<Real>::GetValue(0);
+    mat[j+0][j+3] = Math<Real>::GetValue(0);
     mat[j+1][j+0] = static_cast<Real>(1);
     mat[j+1][j+1] = delta;
     mat[j+1][j+2] = delta2;
     mat[j+1][j+3] = delta3;
-    mat[j+2][j+0] = Math<Real>::sm_Zero;
+    mat[j+2][j+0] = Math<Real>::GetValue(0);
     mat[j+2][j+1] = static_cast<Real>(1);
     mat[j+2][j+2] = (static_cast<Real>(2))*delta;
     mat[j+2][j+3] = (static_cast<Real>(3))*delta2;
-    mat[j+3][j+0] = Math<Real>::sm_Zero;
-    mat[j+3][j+1] = Math<Real>::sm_Zero;
+    mat[j+3][j+0] = Math<Real>::GetValue(0);
+    mat[j+3][j+1] = Math<Real>::GetValue(0);
     mat[j+3][j+2] = static_cast<Real>(1);
     mat[j+3][j+3] = (static_cast<Real>(3))*delta;
 
     k = 0;
-    mat[j+0][k+0] = Math<Real>::sm_Zero;
-    mat[j+0][k+1] = Math<Real>::sm_Zero;
-    mat[j+0][k+2] = Math<Real>::sm_Zero;
-    mat[j+0][k+3] = Math<Real>::sm_Zero;
+    mat[j+0][k+0] = Math<Real>::GetValue(0);
+    mat[j+0][k+1] = Math<Real>::GetValue(0);
+    mat[j+0][k+2] = Math<Real>::GetValue(0);
+    mat[j+0][k+3] = Math<Real>::GetValue(0);
     mat[j+1][k+0] = (Real)-1;
-    mat[j+1][k+1] = Math<Real>::sm_Zero;
-    mat[j+1][k+2] = Math<Real>::sm_Zero;
-    mat[j+1][k+3] = Math<Real>::sm_Zero;
-    mat[j+2][k+0] = Math<Real>::sm_Zero;
+    mat[j+1][k+1] = Math<Real>::GetValue(0);
+    mat[j+1][k+2] = Math<Real>::GetValue(0);
+    mat[j+1][k+3] = Math<Real>::GetValue(0);
+    mat[j+2][k+0] = Math<Real>::GetValue(0);
     mat[j+2][k+1] = (Real)-1;
-    mat[j+2][k+2] = Math<Real>::sm_Zero;
-    mat[j+2][k+3] = Math<Real>::sm_Zero;
-    mat[j+3][k+0] = Math<Real>::sm_Zero;
-    mat[j+3][k+1] = Math<Real>::sm_Zero;
+    mat[j+2][k+2] = Math<Real>::GetValue(0);
+    mat[j+2][k+3] = Math<Real>::GetValue(0);
+    mat[j+3][k+0] = Math<Real>::GetValue(0);
+    mat[j+3][k+1] = Math<Real>::GetValue(0);
     mat[j+3][k+2] = (Real)-1;
-    mat[j+3][k+3] = Math<Real>::sm_Zero;
+    mat[j+3][k+3] = Math<Real>::GetValue(0);
 
     for (i = 0, j = 0; i < mNumSegments; ++i, j += 4)
     {
         rhs[j+0] = mA[i];
-        rhs[j+1] = Math<Real>::sm_Zero;
-        rhs[j+2] = Math<Real>::sm_Zero;
-        rhs[j+3] = Math<Real>::sm_Zero;
+        rhs[j+1] = Math<Real>::GetValue(0);
+        rhs[j+2] = Math<Real>::GetValue(0);
+        rhs[j+3] = Math<Real>::GetValue(0);
     }
 
 	VariableLengthVector<Real> coeff{ size };
@@ -454,7 +454,7 @@ void NaturalSpline1<Real>::GetKeyInfo (Real t, int& key, Real& dt) const
     if (t <= mTimes[0])
     {
         key = 0;
-        dt = Math<Real>::sm_Zero;
+        dt = Math<Real>::GetValue(0);
     }
     else if (t >= mTimes[mNumSegments])
     {

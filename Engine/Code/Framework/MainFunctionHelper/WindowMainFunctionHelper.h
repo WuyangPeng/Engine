@@ -35,7 +35,7 @@ namespace Framework
 		WindowMainFunctionHelper(WindowMainFunctionHelper&& rhs) noexcept;
 		WindowMainFunctionHelper& operator=(WindowMainFunctionHelper&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void Destroy() override;
 

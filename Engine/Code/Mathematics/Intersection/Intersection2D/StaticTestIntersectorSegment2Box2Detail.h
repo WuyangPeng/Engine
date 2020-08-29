@@ -42,7 +42,7 @@ void Mathematics::StaticTestIntersectorSegment2Box2<Real>
 
 	Real AWdU[2]{};
 	Real ADdU[2]{};
-	auto RHS = Math::sm_Zero;
+	auto RHS = Math::GetValue(0);
 	AWdU[0] = Math::FAbs(Vector2DTools::DotProduct(mSegment.GetDirection(), mBox.GetFirstAxis()));
 	ADdU[0] = Math::FAbs(Vector2DTools::DotProduct(diff, mBox.GetFirstAxis()));
 	RHS = mBox.GetFirstExtent() + mSegment.GetExtent() * AWdU[0];

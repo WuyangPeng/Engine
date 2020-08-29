@@ -14,7 +14,9 @@
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::BaseEntity>;
 template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools::BaseEntity>;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace CoreTools
 {
 	class CORE_TOOLS_DEFAULT_DECLARE BaseEntity : public std::enable_shared_from_this<BaseEntity>
@@ -43,5 +45,5 @@ namespace CoreTools
 		uint64_t m_EntityID;
 	};
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H

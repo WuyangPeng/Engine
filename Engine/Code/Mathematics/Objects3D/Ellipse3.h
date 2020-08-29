@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
 #include <type_traits> 
@@ -36,7 +36,7 @@ namespace Mathematics
 		// 成员'Center'为C，“Normal”是N，'Major'是U，'Minor'是V，
 		// 'MajorLength“是a和”MinorLength'为b。
 		Ellipse3(const Vector3D& center, const Vector3D& normal, const Vector3D& major, const Vector3D& minor,
-				 Real majorLength, Real minorLength, const Real epsilon = Math::sm_ZeroTolerance);
+				 Real majorLength, Real minorLength, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -114,7 +114,7 @@ void Mathematics::ContEllipse2MinCR<Real>
     // the maximum terminates before or at this line.
     int i, iYMin = -1;
     int iXMin = -1;
-    Real axMax = Math<Real>::sm_Zero, ayMax = Math<Real>::sm_Zero;  // A[i] >= (0,0) by design
+    Real axMax = Math<Real>::GetValue(0), ayMax = Math<Real>::GetValue(0);  // A[i] >= (0,0) by design
     for (i = 0; i < numConstraints; ++i)
     {
         // The minimum x-intercept is 1/A[iXMin].X() for A[iXMin].X() the
@@ -142,7 +142,7 @@ void Mathematics::ContEllipse2MinCR<Real>
     // constraint line constructed above.  The next vertex of the hull occurs
     // as the closest point to the first vertex on the current constraint
     // line.  The following loop finds each consecutive vertex.
-    Real x0 = Math<Real>::sm_Zero, xMax = (static_cast<Real>(1))/axMax;
+    Real x0 = Math<Real>::GetValue(0), xMax = (static_cast<Real>(1))/axMax;
     int j;
     for (j = 0; j < numConstraints; ++j)
     {
@@ -163,7 +163,7 @@ void Mathematics::ContEllipse2MinCR<Real>
                 // previous one, that is, -a1/b1 < -a0/b0, in which case we
                 // process only lines for which d < 0.
 				auto det = Vector2DTools<Real>::DotPerp(A[iYMin],A[i]);
-                if (det < Math<Real>::sm_Zero)  // TO DO.  Need epsilon test here?
+                if (det < Math<Real>::GetValue(0))  // TO DO.  Need epsilon test here?
                 {
                     // Compute the x-value for the point of intersection,
                     // (x1,y1).  There may be floating point error issues in

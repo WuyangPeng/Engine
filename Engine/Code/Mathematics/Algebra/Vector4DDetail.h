@@ -21,27 +21,27 @@
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_Zero{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_Zero };
+	::sm_Zero{ Math::GetValue(0),Math::GetValue(0),Math::GetValue(0),Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_UnitX{ Math::sm_One, Math::sm_Zero, Math::sm_Zero, Math::sm_Zero };
+	::sm_UnitX{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_UnitY{ Math::sm_Zero,  Math::sm_One, Math::sm_Zero,Math::sm_Zero };
+	::sm_UnitY{ Math::GetValue(0),  Math::GetValue(1), Math::GetValue(0),Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_UnitZ{ Math::sm_Zero,Math::sm_Zero,Math::sm_One,Math::sm_Zero };
+	::sm_UnitZ{ Math::GetValue(0),Math::GetValue(0),Math::GetValue(1),Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_UnitW{ Math::sm_Zero,Math::sm_Zero,Math::sm_Zero,Math::sm_One };
+	::sm_UnitW{ Math::GetValue(0),Math::GetValue(0),Math::GetValue(0),Math::GetValue(1) };
 
 template <typename Real>
 const Mathematics::Vector4D<Real> Mathematics::Vector4D<Real>
-	::sm_One{ Math::sm_One,Math::sm_One,Math::sm_One,Math::sm_One };
+	::sm_One{ Math::GetValue(1),Math::GetValue(1),Math::GetValue(1),Math::GetValue(1) };
 
 template <typename Real>
 Mathematics::Vector4D<Real>
@@ -94,7 +94,7 @@ Mathematics::Vector4D<Real>
 	:m_Tuple{ boost::numeric_cast<Real>(vector.GetXCoordinate()),
 			  boost::numeric_cast<Real>(vector.GetYCoordinate()),
 			  boost::numeric_cast<Real>(vector.GetZCoordinate()),
-			  Math::sm_Zero }
+			  Math::GetValue(0) }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -261,7 +261,7 @@ void Mathematics::Vector4D<Real>
 		m_Tuple[0] /= m_Tuple[3];
 		m_Tuple[1] /= m_Tuple[3];
 		m_Tuple[2] /= m_Tuple[3];
-		m_Tuple[3] = Math::sm_One;
+		m_Tuple[3] = Math::GetValue(1);
 	}
 	else
 	{
@@ -348,7 +348,7 @@ Mathematics::Vector4D<Real>& Mathematics::Vector4D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (Math::sm_ZeroTolerance < Math::FAbs(rhs))
+	if (Math::GetZeroTolerance() < Math::FAbs(rhs))
 	{
 		m_Tuple[0] /= rhs;
 		m_Tuple[1] /= rhs;

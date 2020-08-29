@@ -10,6 +10,8 @@
 #include "BoxManager.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox3DDetail.h"
 
+#include <algorithm>
+
 namespace Physics
 {
 

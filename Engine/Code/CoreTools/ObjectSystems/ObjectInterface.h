@@ -41,9 +41,9 @@ namespace CoreTools
         virtual ~ObjectInterface();
 
         ObjectInterface(const ObjectInterface&) = default;
-        ObjectInterface& operator=(const ObjectInterface&) = default;
+        virtual ObjectInterface& operator=(const ObjectInterface&) = default;
         ObjectInterface(ObjectInterface&&) noexcept = default;
-        ObjectInterface& operator=(ObjectInterface&&) noexcept = default;
+      virtual  ObjectInterface& operator=(ObjectInterface&&) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

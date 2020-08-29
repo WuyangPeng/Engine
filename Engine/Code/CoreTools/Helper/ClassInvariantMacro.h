@@ -51,9 +51,9 @@
 
 #else // !OPEN_CLASS_INVARIANT
 
-	#define CLASS_IS_VALID ((void)0)
-	#define SELF_CLASS_IS_VALID ((void)0)
-	#define CLASS_IS_VALID_CONST ((void)0)
+	#define CLASS_IS_VALID (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID (static_cast<void>(0))
+	#define CLASS_IS_VALID_CONST (static_cast<void>(0))
 
 #endif // OPEN_CLASS_INVARIANT
 
@@ -82,8 +82,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 0
 
-	#define CLASS_IS_VALID_0 ((void)0)
-	#define SELF_CLASS_IS_VALID_0 ((void)0)
+	#define CLASS_IS_VALID_0 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_0 (static_cast<void>(0))
 
 #endif //0 <= CLASS_INVARIANT_LEVEL
 
@@ -94,8 +94,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 1
 
-	#define CLASS_IS_VALID_1 ((void)0)
-	#define SELF_CLASS_IS_VALID_1 ((void)0)
+	#define CLASS_IS_VALID_1 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_1 (static_cast<void>(0))
 
 #endif // 1 <= CLASS_INVARIANT_LEVEL
 
@@ -106,8 +106,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 2
 
-	#define CLASS_IS_VALID_2 ((void)0)
-	#define SELF_CLASS_IS_VALID_2 ((void)0)
+	#define CLASS_IS_VALID_2 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_2 (static_cast<void>(0))
 
 #endif // 2 <= CLASS_INVARIANT_LEVEL
 
@@ -118,8 +118,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 3
 
-	#define CLASS_IS_VALID_3 ((void)0)
-	#define SELF_CLASS_IS_VALID_3 ((void)0)
+	#define CLASS_IS_VALID_3 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_3 (static_cast<void>(0))
 
 #endif // 3 <= CLASS_INVARIANT_LEVEL
 
@@ -130,8 +130,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 4
 
-	#define CLASS_IS_VALID_4 ((void)0)
-	#define SELF_CLASS_IS_VALID_4 ((void)0)
+	#define CLASS_IS_VALID_4 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_4 (static_cast<void>(0))
 
 #endif // 4 <= CLASS_INVARIANT_LEVEL
 
@@ -142,8 +142,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 5
 
-	#define CLASS_IS_VALID_5 ((void)0)
-	#define SELF_CLASS_IS_VALID_5 ((void)0)
+	#define CLASS_IS_VALID_5 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_5 (static_cast<void>(0))
 
 #endif // 5 <= CLASS_INVARIANT_LEVEL
 
@@ -154,8 +154,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 6
 
-	#define CLASS_IS_VALID_6 ((void)0)
-	#define SELF_CLASS_IS_VALID_6 ((void)0)
+	#define CLASS_IS_VALID_6 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_6 (static_cast<void>(0))
 
 #endif // 6 <= CLASS_INVARIANT_LEVEL
 
@@ -166,8 +166,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 7
 
-	#define CLASS_IS_VALID_7 ((void)0)
-	#define SELF_CLASS_IS_VALID_7 ((void)0)
+	#define CLASS_IS_VALID_7 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_7 (static_cast<void>(0))
 
 #endif // 7 <= CLASS_INVARIANT_LEVEL
 
@@ -178,8 +178,8 @@
 
 #else // CLASS_INVARIANT_LEVEL < 8
 
-	#define CLASS_IS_VALID_8 ((void)0)
-	#define SELF_CLASS_IS_VALID_8 ((void)0)
+	#define CLASS_IS_VALID_8 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_8 (static_cast<void>(0))
 
 #endif // 8 <= CLASS_INVARIANT_LEVEL
 
@@ -190,69 +190,69 @@
 
 #else // CLASS_INVARIANT_LEVEL < 9
 
-	#define CLASS_IS_VALID_9 ((void)0)
-	#define SELF_CLASS_IS_VALID_9 ((void)0)
+	#define CLASS_IS_VALID_9 (static_cast<void>(0))
+	#define SELF_CLASS_IS_VALID_9 (static_cast<void>(0))
 
 #endif // 9 <= CLASS_INVARIANT_LEVEL
 
 #if 0 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_0 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 0
-	#define CLASS_IS_VALID_CONST_0 ((void)0)
+	#define CLASS_IS_VALID_CONST_0 (static_cast<void>(0))
 #endif // 0 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 1 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_1 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 1
-	#define CLASS_IS_VALID_CONST_1 ((void)0)
+	#define CLASS_IS_VALID_CONST_1 (static_cast<void>(0))
 #endif // 1 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 2 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_2 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 2
-	#define CLASS_IS_VALID_CONST_2 ((void)0)
+	#define CLASS_IS_VALID_CONST_2 (static_cast<void>(0))
 #endif // 2 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 3 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_3 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 3
-	#define CLASS_IS_VALID_CONST_3 ((void)0)
+	#define CLASS_IS_VALID_CONST_3 (static_cast<void>(0))
 #endif // 3 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 4 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_4 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 4
-	#define CLASS_IS_VALID_CONST_4 ((void)0)
+	#define CLASS_IS_VALID_CONST_4 (static_cast<void>(0))
 #endif // 4 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 5 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_5 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 5
-	#define CLASS_IS_VALID_CONST_5 ((void)0)
+	#define CLASS_IS_VALID_CONST_5 (static_cast<void>(0))
 #endif // 5 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 6 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_6 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 6
-	#define CLASS_IS_VALID_CONST_6 ((void)0)
+	#define CLASS_IS_VALID_CONST_6 (static_cast<void>(0))
 #endif // 6 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 7 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_7 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 7
-	#define CLASS_IS_VALID_CONST_7 ((void)0)
+	#define CLASS_IS_VALID_CONST_7 (static_cast<void>(0))
 #endif // 7 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 8 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_8 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 8
-	#define CLASS_IS_VALID_CONST_8 ((void)0)
+	#define CLASS_IS_VALID_CONST_8 (static_cast<void>(0))
 #endif // 8 <= CLASS_INVARIANT_CONST_LEVEL
 
 #if 9 <= CLASS_INVARIANT_CONST_LEVEL
 	#define CLASS_IS_VALID_CONST_9 CLASS_IS_VALID_CONST
 #else // CLASS_INVARIANT_CONST_LEVEL < 9
-	#define CLASS_IS_VALID_CONST_9 ((void)0)
+	#define CLASS_IS_VALID_CONST_9 (static_cast<void>(0))
 #endif // 9 <= CLASS_INVARIANT_CONST_LEVEL
 
 #endif // CORE_TOOLS_HELPER_CLASS_INVARIANT_MACRO_H

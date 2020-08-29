@@ -97,7 +97,7 @@ namespace Mathematics
 		Matrix2& operator*= (const Matrix2& rhs);
 
 		// 其它运算
-		const Matrix2 Inverse(const Real epsilon = Math::sm_ZeroTolerance) const;
+		const Matrix2 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
 		const Matrix2 Adjoint() const;
 		Real Determinant() const;
 
@@ -112,7 +112,7 @@ namespace Mathematics
 		// D = diag(d0,d1)是一个对角矩阵，这里对角线项为d0和d1。
 		// 特征向量u[i]对应的特征向量d[i]。特征值排序为d0 <= d1。
 		// 返回值的第一部分为rotation，第二部分为diagonal。
-		const Matrix2EigenDecomposition EigenDecomposition(const Real epsilon = Math::sm_ZeroTolerance) const;
+		const Matrix2EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const;
 
 		// 特殊矩阵。
 		static const Matrix2 sm_Zero;

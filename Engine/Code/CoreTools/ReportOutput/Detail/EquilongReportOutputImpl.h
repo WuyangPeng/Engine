@@ -23,7 +23,7 @@ namespace CoreTools
 		explicit EquilongReportOutputImpl(int borderLineLength, const OStreamShared& osPtr ) noexcept;
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void PrintBorderLine(char character);
 

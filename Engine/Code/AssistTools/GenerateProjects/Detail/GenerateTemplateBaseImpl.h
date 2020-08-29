@@ -29,7 +29,7 @@ namespace AssistTools
 		GenerateTemplateBaseImpl(const System::String& templateFileName, const System::String& extension, const Replace& replace);
 		
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	protected:
 		const System::String GetOriginal(GenerateTemplateReplace flag) const;

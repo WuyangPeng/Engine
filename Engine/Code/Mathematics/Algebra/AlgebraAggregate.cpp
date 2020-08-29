@@ -330,7 +330,7 @@ void CoreTools::BufferSource ::ReadAggregate(Mathematics::Plane<float>& datum)
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Read(4, datum.GetElements());
+  //  Read(4, datum.GetElements());
 
     float epsilon{ 0.0f };
     Read(epsilon);
@@ -344,7 +344,7 @@ void CoreTools::BufferTarget ::WriteAggregate(const Mathematics::Plane<float>& d
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    WriteWithoutNumber(4, datum.GetElements());
+ //   WriteWithoutNumber(4, datum.GetElements());
     Write(datum.GetEpsilon());
 }
 
@@ -355,7 +355,7 @@ void CoreTools::BufferSource ::ReadAggregate(Mathematics::Plane<double>& datum)
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Read(4, datum.GetElements());
+   // Read(4, datum.GetElements());
 
     double epsilon{ 0.0 };
     Read(epsilon);
@@ -369,7 +369,7 @@ void CoreTools::BufferTarget ::WriteAggregate(const Mathematics::Plane<double>& 
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    WriteWithoutNumber(4, datum.GetElements());
+  //  WriteWithoutNumber(4, datum.GetElements());
     Write(datum.GetEpsilon());
 }
 

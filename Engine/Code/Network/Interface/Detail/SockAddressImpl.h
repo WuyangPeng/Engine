@@ -23,9 +23,9 @@ namespace Network
         SockAddressImpl() noexcept;
         virtual ~SockAddressImpl();
         SockAddressImpl(const SockAddressImpl&) = default;
-        SockAddressImpl& operator=(const SockAddressImpl&) = default;
+      virtual  SockAddressImpl& operator=(const SockAddressImpl&) = default;
         SockAddressImpl(SockAddressImpl&&) noexcept = default;
-        SockAddressImpl& operator=(SockAddressImpl&&) noexcept = default;
+      virtual SockAddressImpl& operator=(SockAddressImpl&&) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

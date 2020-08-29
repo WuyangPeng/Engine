@@ -55,12 +55,12 @@ typename Mathematics::GaussPointsFit3<Real>::Box3 Mathematics::GaussPointsFit3<R
 	center /= static_cast<Real>(numPoints);
 
 	// 计算点的协方差矩阵。
-	auto sumXX = Math<Real>::sm_Zero;
-	auto sumXY = Math<Real>::sm_Zero;
-	auto sumYY = Math<Real>::sm_Zero;
-	auto sumXZ = Math<Real>::sm_Zero;
-	auto sumYZ = Math<Real>::sm_Zero;
-	auto sumZZ = Math<Real>::sm_Zero;
+	auto sumXX = Math<Real>::GetValue(0);
+	auto sumXY = Math<Real>::GetValue(0);
+	auto sumYY = Math<Real>::GetValue(0);
+	auto sumXZ = Math<Real>::GetValue(0);
+	auto sumYZ = Math<Real>::GetValue(0);
+	auto sumZZ = Math<Real>::GetValue(0);
 
 	for (const auto& point : points)
 	{

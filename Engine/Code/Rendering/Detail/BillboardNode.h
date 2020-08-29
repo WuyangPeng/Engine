@@ -12,6 +12,9 @@
 #include "CoreTools/Helper/SubclassSmartPointerMacro.h"
 
 RENDERING_EXPORT_SHARED_PTR(BillboardNodeImpl);
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 
 namespace Rendering
 {
@@ -29,7 +32,7 @@ namespace Rendering
 		BillboardNode(BillboardNode&&) noexcept = default;
 		BillboardNode& operator=(BillboardNode&&) noexcept= default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(BillboardNode);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
@@ -54,5 +57,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, BillboardNode);
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_DETAIL_BILLBOARD_NODE_H

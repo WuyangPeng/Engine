@@ -11,14 +11,15 @@
     #ifndef MATHEMATICS_INCLUDED_AQUATERNION_DETAIL
         #define MATHEMATICS_INCLUDED_AQUATERNION_DETAIL
     #endif  // MATHEMATICS_INCLUDED_AQUATERNION_DETAIL
-
-    #include "AQuaternionDetail.h"
-    #include "AVectorDetail.h"
-    #include "MatrixDetail.h"
-    #include "System/Helper/PragmaWarning.h"
+  #include "System/Helper/PragmaWarning.h"
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26446)
     #include SYSTEM_WARNING_DISABLE(26482)
+    #include "AQuaternionDetail.h"
+    #include "AVectorDetail.h"
+    #include "MatrixDetail.h"
+  
+
 
 namespace Mathematics
 {

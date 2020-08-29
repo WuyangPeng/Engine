@@ -35,7 +35,7 @@ namespace Network
 		Client(Client&&) = delete;
         Client& operator=(Client&&) = delete;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         uint64_t Connect();
         void AsyncConnect();

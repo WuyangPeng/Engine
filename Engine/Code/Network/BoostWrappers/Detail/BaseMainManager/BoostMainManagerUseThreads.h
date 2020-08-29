@@ -32,7 +32,7 @@ namespace Network
         BoostMainManagerUseThreads(BoostMainManagerUseThreads&&) noexcept = default;
         BoostMainManagerUseThreads& operator=(BoostMainManagerUseThreads&&) noexcept = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void StopContext() override;
         void RestartContext() override;

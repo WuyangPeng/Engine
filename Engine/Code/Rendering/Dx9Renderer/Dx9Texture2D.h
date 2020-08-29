@@ -32,7 +32,7 @@ namespace Rendering
                 Dx9Texture2D(Dx9Texture2D&&) = default;
                   Dx9Texture2D& operator=(Dx9Texture2D&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		// ÎÆÀí²Ù×÷
 		 void Enable (Renderer* renderer, int textureUnit) override;

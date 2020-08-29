@@ -15,7 +15,9 @@
 #include "Mathematics/Algebra/AVector.h"
 
 RENDERING_EXPORT_SHARED_PTR(MorphControllerImpl); 
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE MorphController : public Controller
@@ -42,7 +44,7 @@ namespace Rendering
 		  MorphController(MorphController&&) = default;
 		   MorphController& operator=(MorphController&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(MorphController); 
 
@@ -79,5 +81,6 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, MorphController); 
 }
+#include STSTEM_WARNING_POP
 
 #endif // RENDERING_CONTROLLERS_MORPH_CONTROLLER_H

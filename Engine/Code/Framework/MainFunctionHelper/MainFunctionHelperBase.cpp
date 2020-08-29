@@ -26,7 +26,9 @@
 using std::move;
 using std::make_shared;
 using namespace std::literals;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Framework::MainFunctionHelperBase
 	::MainFunctionHelperBase(const EnvironmentDirectory& environmentDirectory)
 	:m_Impl{ }, m_MainFunctionSchedule{ MainFunctionSchedule::Failure }
@@ -303,3 +305,4 @@ Framework::EnvironmentDirectory Framework::MainFunctionHelperBase
 	}
 }
 
+#include STSTEM_WARNING_POP

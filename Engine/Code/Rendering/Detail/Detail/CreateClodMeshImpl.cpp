@@ -205,7 +205,7 @@ int Rendering::CreateClodMeshImpl
 	     
 	for (auto iter = vertexThrow.GetTriangleKeyBegin(), end = vertexThrow.GetTriangleKeyEnd(); iter != end;++iter)
     {
-		auto trianglKey = *iter;
+		const auto& trianglKey = *iter;
 
 		// 计算为（使用CCW逆时针顺序）由三角形的顶点确定的平面的法线向量。
 		auto middleIndex = trianglKey.GetKeyIndex(vThrow);
@@ -251,7 +251,7 @@ void Rendering::CreateClodMeshImpl
      
 	for (auto iter = vertexThrow.GetTriangleKeyBegin(),end = vertexThrow.GetTriangleKeyEnd(); iter != end; ++iter)
     {
-		auto triangleKey = *iter;
+            const auto& triangleKey = *iter;
 
 		auto keyIndex = triangleKey.GetKeyIndex(vThrow);
     

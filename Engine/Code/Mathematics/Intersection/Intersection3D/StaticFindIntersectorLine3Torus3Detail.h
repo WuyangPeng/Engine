@@ -54,7 +54,7 @@ void Mathematics::StaticFindIntersectorLine3Torus3<Real>
     poly[4] = dd*dd;
 
     // Solve the quartic.
-	PolynomialRoots<Real> proots{ Math::sm_ZeroTolerance };
+	PolynomialRoots<Real> proots{ Math::GetZeroTolerance() };
     proots.FindBisection(poly, 6);
     mQuantity = proots.GetCount();
 	auto begin = proots.GetBegin();

@@ -54,16 +54,16 @@ namespace Mathematics
         Real GetXCoordinate() const;
         Real GetYCoordinate() const;
         Real GetZCoordinate() const;
-        bool IsZero(const Real epsilon = Math::sm_ZeroTolerance) const;
+        bool IsZero(const Real epsilon = Math::GetZeroTolerance()) const;
 
         void ZeroOut() noexcept;
         void SetCoordinate(Real x, Real y, Real z);
         void SetXCoordinate(Real x);
         void SetYCoordinate(Real y);
         void SetZCoordinate(Real z);
-        void Normalize(const Real epsilon = Math::sm_ZeroTolerance);
+        void Normalize(const Real epsilon = Math::GetZeroTolerance());
 
-        bool IsNormalize(const Real epsilon = Math::sm_ZeroTolerance) const;
+        bool IsNormalize(const Real epsilon = Math::GetZeroTolerance()) const;
 
         const ClassType operator-() const;
         const Real& operator[](unsigned int index) const;
@@ -87,7 +87,7 @@ namespace Mathematics
         // 当且仅当{V0，V1，V2, V3}是线性无关组时返回值是有效的。
         // 数值上，测试 |det[V0 V1 V2 V3]| <= epsilon。
         const BarycentricCoordinates GetBarycentrics(const ClassType& firstVector, const ClassType& secondVector, const ClassType& thirdVector,
-                                                     const ClassType& fourthVector, const Real epsilon = Math::sm_ZeroTolerance) const;
+                                                     const ClassType& fourthVector, const Real epsilon = Math::GetZeroTolerance()) const;
 
         const ClassType GetMove(Real t, const ClassType& velocity) const;
 

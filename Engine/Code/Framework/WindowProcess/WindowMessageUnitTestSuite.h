@@ -33,7 +33,7 @@ namespace Framework
 	public:
 		WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		int GetPassedNumber() const noexcept;
 

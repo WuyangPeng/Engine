@@ -70,8 +70,8 @@ const typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics
 	// 计算平方距离和包围盒上的最近点。
 	Vector2D closest{ Vector2DTools::DotProduct(difference,m_Box.GetFirstAxis()),
 					  Vector2DTools::DotProduct(difference,m_Box.GetSecondAxis()) };
-	auto squaredDistance = Math<Real>::sm_Zero;
-	auto delta = Math<Real>::sm_Zero;
+	auto squaredDistance = Math<Real>::GetValue(0);
+	auto delta = Math<Real>::GetValue(0);
 
 	if (closest.GetXCoordinate() < -m_Box.GetFirstExtent())
 	{
@@ -99,7 +99,7 @@ const typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics
 		closest.SetYCoordinate(m_Box.GetSecondExtent());
 	}
 
-	return DistanceResult{ squaredDistance, Math<Real>::sm_Zero, m_Point,
+	return DistanceResult{ squaredDistance, Math<Real>::GetValue(0), m_Point,
 						   m_Box.GetCenter() + closest.GetXCoordinate() * m_Box.GetFirstAxis() +
 						   closest.GetYCoordinate() * m_Box.GetSecondAxis() };
 }

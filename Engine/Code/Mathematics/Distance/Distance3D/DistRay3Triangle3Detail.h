@@ -46,7 +46,7 @@ typename const Mathematics::DistRay3Triangle3<Real>::DistanceResult Mathematics:
 	auto sqrDist = queryLT.GetSquared();
 	mRayParameter = queryLT.GetLineParameter();
 
-	if (mRayParameter >= Math<Real>::sm_Zero)
+	if (mRayParameter >= Math<Real>::GetValue(0))
 	{
 		mClosestPoint0 = sqrDist.GetLhsClosestPoint();
 		mClosestPoint1 = sqrDist.GetRhsClosestPoint();
@@ -60,12 +60,12 @@ typename const Mathematics::DistRay3Triangle3<Real>::DistanceResult Mathematics:
 		DistPoint3Triangle3<Real> queryPT{ mClosestPoint0, mTriangle };
 		sqrDist = queryPT.GetSquared();
 		mClosestPoint1 = sqrDist.GetRhsClosestPoint();
-		mRayParameter = Math<Real>::sm_Zero;
+		mRayParameter = Math<Real>::GetValue(0);
 		mTriangleBary[0] = queryPT.GetTriangleBary(0);
 		mTriangleBary[1] = queryPT.GetTriangleBary(1);
 		mTriangleBary[2] = queryPT.GetTriangleBary(2);
 	}
-	return DistanceResult{ sqrDist.GetDistance(), Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDist.GetDistance(), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>

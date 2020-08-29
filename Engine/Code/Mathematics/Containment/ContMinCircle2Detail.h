@@ -120,14 +120,14 @@ bool Mathematics::MinCircle2<Real>
     // so the next line of code is not in error.
     distDiff = test - circle.GetRadius();
 
-    return distDiff <= Math<Real>::sm_Zero;
+    return distDiff <= Math<Real>::GetValue(0);
 }
 
 template <typename Real>
 Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 	::ExactCircle1(const Vector2D<Real>& P)
 {
-	Circle2<Real> minimal{ P, Math<Real>::sm_Zero };
+	Circle2<Real> minimal{ P, Math<Real>::GetValue(0) };
     return minimal;
 }
 

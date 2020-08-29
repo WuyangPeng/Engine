@@ -25,7 +25,7 @@ template <typename Real>
 bool Mathematics::Bisect1<Real>
 	::IsValid() const noexcept
 {
-	if (m_Function != nullptr && 0 < m_MaxLevel && Math<Real>::sm_Zero <= m_Tolerance)
+	if (m_Function != nullptr && 0 < m_MaxLevel && Math<Real>::GetValue(0) <= m_Tolerance)
 	{
 		return true;
 	}
@@ -56,7 +56,7 @@ typename const Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real
 	}
 
 	// 方程无解
-	if (Math<Real>::sm_Zero < beginPointFunctionValue * endPointFunctionValue)
+	if (Math<Real>::GetValue(0) < beginPointFunctionValue * endPointFunctionValue)
 	{
 		return Bisect1Root{};
 	}
@@ -71,12 +71,12 @@ typename const Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real
 			return Bisect1Root{ middlePoints,BisectRootType::HaveSolution };
 		}
 
-		if (beginPointFunctionValue * middlePointFunctionValue < Math<Real>::sm_Zero)
+		if (beginPointFunctionValue * middlePointFunctionValue < Math<Real>::GetValue(0))
 		{
 			endPoint = middlePoints;
 			endPointFunctionValue = middlePointFunctionValue;
 		}
-		else if (endPointFunctionValue * middlePointFunctionValue < Math<Real>::sm_Zero)
+		else if (endPointFunctionValue * middlePointFunctionValue < Math<Real>::GetValue(0))
 		{
 			beginPoint = middlePoints;
 			beginPointFunctionValue = middlePointFunctionValue;

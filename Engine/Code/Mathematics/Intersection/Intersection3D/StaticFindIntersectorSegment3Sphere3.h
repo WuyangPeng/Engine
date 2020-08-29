@@ -39,7 +39,7 @@ namespace Mathematics
 		const Vector3D GetPoint(int i) const;
 		Real GetSegmentParameter(int i) const;
 
-		Real ZeroThreshold;  // default = Math<Real>::sm_ZeroTolerance
+		Real ZeroThreshold;  // default = Math<Real>::GetZeroTolerance()
 
 	private:
 		// Static intersection queries.		

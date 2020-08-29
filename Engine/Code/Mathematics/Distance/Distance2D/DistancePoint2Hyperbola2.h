@@ -67,7 +67,7 @@ namespace Mathematics
 		DistancePoint2Hyperbola2(const Vector2D& point, const Vector2D& extent);
 		virtual ~DistancePoint2Hyperbola2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector2D GetPoint() const;
 		const Vector2D GetExtent() const;

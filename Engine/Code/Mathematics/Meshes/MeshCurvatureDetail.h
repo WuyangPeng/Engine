@@ -116,7 +116,7 @@ Mathematics::MeshCurvature<Real>
 
         // Compute the max-abs entry of D*W^T.  If this entry is (nearly)
         // zero, flag the DNormal matrix as singular.
-        Real maxAbs = Math<Real>::sm_Zero;
+        Real maxAbs = Math<Real>::GetValue(0);
         for (row = 0; row < 3; ++row)
         {
             for (col = 0; col < 3; ++col)
@@ -168,8 +168,8 @@ Mathematics::MeshCurvature<Real>
         if (DWTrnZero[i])
         {
             // At a locally planar point.
-            mMinCurvatures[i] = Math<Real>::sm_Zero;
-            mMaxCurvatures[i] = Math<Real>::sm_Zero;
+            mMinCurvatures[i] = Math<Real>::GetValue(0);
+            mMaxCurvatures[i] = Math<Real>::GetValue(0);
             mMinDirections[i] = U;
             mMaxDirections[i] = V;
             continue;

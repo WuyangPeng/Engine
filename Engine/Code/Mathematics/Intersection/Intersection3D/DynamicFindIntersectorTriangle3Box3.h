@@ -29,7 +29,7 @@ namespace Mathematics
 
 	public:
 		DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tmax,
-											const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+											const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
 		// Object access.
 		const Triangle3 GetTriangle() const;

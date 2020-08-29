@@ -28,6 +28,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26434)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Particles);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Particles);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Particles);
@@ -140,14 +141,14 @@ void Rendering::Particles
 
 	// 获取在粒子模型空间中相机的轴方向。
 	auto transform = GetWorldTransform().GetInverseTransform();
-	auto upPlusRight = transform * (camera->GetUpVector() + camera->GetRightVector());
-	auto upMinusRight = transform * (camera->GetUpVector() - camera->GetRightVector());
+        const auto upPlusRight = transform * (camera->GetUpVector() + camera->GetRightVector());
+        const auto upMinusRight = transform * (camera->GetUpVector() - camera->GetRightVector());
 
 	// 生成四边形像一对三角形。
         const auto numActive = m_Impl->GetNumActive();
 	for (auto index = 0; index < numActive; index += 4)
 	{
-		auto position = m_Impl->GetPosition(index);
+            const auto position = m_Impl->GetPosition(index);
             const auto trueSize = m_Impl->GetTrueSize(index);
 		auto scaledUpPlusRight = trueSize * upPlusRight;
 		auto scaledUpMinusRight = trueSize * upMinusRight;

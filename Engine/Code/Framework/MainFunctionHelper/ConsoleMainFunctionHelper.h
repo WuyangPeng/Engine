@@ -28,7 +28,7 @@ namespace Framework
 		ConsoleMainFunctionHelper(ConsoleMainFunctionHelper&& rhs) noexcept;
 		ConsoleMainFunctionHelper& operator=(ConsoleMainFunctionHelper&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void Destroy() override;
 

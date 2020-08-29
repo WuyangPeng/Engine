@@ -28,7 +28,7 @@ namespace Mathematics
 		explicit Query3Integer(const std::vector<Vector3D>& vertices);
 		 ~Query3Integer();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// 运行时类型信息。
 		 QueryType GetType() const override;

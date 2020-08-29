@@ -24,10 +24,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		explicit DynamicIntersector(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit DynamicIntersector(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 		virtual ~DynamicIntersector() = 0;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// 两个物体在第一次接触时动态相交查询的时间。
 		Real GetContactTime() const;

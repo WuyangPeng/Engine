@@ -41,7 +41,7 @@ namespace Mathematics
 						 DerivativeFunction derivativeFunction, const UserDataType* userData);
 		virtual ~OdeImplicitEuler();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 void Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut) override;
 

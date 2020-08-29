@@ -9,6 +9,7 @@
 
 #include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/UserMacro.h" 
+#include "Mathematics/Helper/UserMacro.h"
 
 #define CLOSE_USE_ANIMATION (0x01) 
 #define CLOSE_ANIMATION_MAX (((CLOSE_USE_ANIMATION) << 1) - 1)

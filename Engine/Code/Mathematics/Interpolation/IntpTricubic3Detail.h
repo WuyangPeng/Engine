@@ -17,7 +17,7 @@ namespace Mathematics
 		// At least a 4x4x4 block of data points are needed to construct the
 		// tricubic interpolation.
 		MATHEMATICS_ASSERTION_0(xBound >= 4 && yBound >= 4 && zBound >= 4 && F,"Invalid input\n");
-		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero && ySpacing > Math<Real>::sm_Zero && zSpacing > Math<Real>::sm_Zero,"Invalid input\n");
+		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0) && zSpacing > Math<Real>::GetValue(0),"Invalid input\n");
 
 		mXBound = xBound;
 		mYBound = yBound;
@@ -178,9 +178,9 @@ namespace Mathematics
 		int row, col;
 		for (row = 0; row < 4; ++row)
 		{
-			P[row] = Math<Real>::sm_Zero;
-			Q[row] = Math<Real>::sm_Zero;
-			r[row] = Math<Real>::sm_Zero;
+			P[row] = Math<Real>::GetValue(0);
+			Q[row] = Math<Real>::GetValue(0);
+			r[row] = Math<Real>::GetValue(0);
 			for (col = 0; col < 4; ++col)
 			{
 				P[row] += mBlend[row][col] * U[col];
@@ -194,7 +194,7 @@ namespace Mathematics
 		--ix;
 		--iy;
 		--iz;
-		Real result = Math<Real>::sm_Zero;
+		Real result = Math<Real>::GetValue(0);
 		for (int slice = 0; slice < 4; ++slice)
 		{
 			int zClamp = iz + slice;
@@ -279,7 +279,7 @@ namespace Mathematics
 			break;
 		case 1:
 			dx = xIndex - ix;
-			U[0] = Math<Real>::sm_Zero;
+			U[0] = Math<Real>::GetValue(0);
 			U[1] = static_cast<Real>(1);
 			U[2] = (static_cast<Real>(2))*dx;
 			U[3] = (static_cast<Real>(3))*dx*dx;
@@ -287,21 +287,21 @@ namespace Mathematics
 			break;
 		case 2:
 			dx = xIndex - ix;
-			U[0] = Math<Real>::sm_Zero;
-			U[1] = Math<Real>::sm_Zero;
+			U[0] = Math<Real>::GetValue(0);
+			U[1] = Math<Real>::GetValue(0);
 			U[2] = static_cast<Real>(2);
 			U[3] = ((Real)6)*dx;
 			xMult = mInvXSpacing * mInvXSpacing;
 			break;
 		case 3:
-			U[0] = Math<Real>::sm_Zero;
-			U[1] = Math<Real>::sm_Zero;
-			U[2] = Math<Real>::sm_Zero;
+			U[0] = Math<Real>::GetValue(0);
+			U[1] = Math<Real>::GetValue(0);
+			U[2] = Math<Real>::GetValue(0);
 			U[3] = (Real)6;
 			xMult = mInvXSpacing * mInvXSpacing*mInvXSpacing;
 			break;
 		default:
-			return Math<Real>::sm_Zero;
+			return Math<Real>::GetValue(0);
 		}
 
 		Real V[4], dy, yMult;
@@ -317,7 +317,7 @@ namespace Mathematics
 			break;
 		case 1:
 			dy = yIndex - iy;
-			V[0] = Math<Real>::sm_Zero;
+			V[0] = Math<Real>::GetValue(0);
 			V[1] = static_cast<Real>(1);
 			V[2] = (static_cast<Real>(2))*dy;
 			V[3] = (static_cast<Real>(3))*dy*dy;
@@ -325,21 +325,21 @@ namespace Mathematics
 			break;
 		case 2:
 			dy = yIndex - iy;
-			V[0] = Math<Real>::sm_Zero;
-			V[1] = Math<Real>::sm_Zero;
+			V[0] = Math<Real>::GetValue(0);
+			V[1] = Math<Real>::GetValue(0);
 			V[2] = static_cast<Real>(2);
 			V[3] = ((Real)6)*dy;
 			yMult = mInvYSpacing * mInvYSpacing;
 			break;
 		case 3:
-			V[0] = Math<Real>::sm_Zero;
-			V[1] = Math<Real>::sm_Zero;
-			V[2] = Math<Real>::sm_Zero;
+			V[0] = Math<Real>::GetValue(0);
+			V[1] = Math<Real>::GetValue(0);
+			V[2] = Math<Real>::GetValue(0);
 			V[3] = (Real)6;
 			yMult = mInvYSpacing * mInvYSpacing*mInvYSpacing;
 			break;
 		default:
-			return Math<Real>::sm_Zero;
+			return Math<Real>::GetValue(0);
 		}
 
 		Real W[4], dz, zMult;
@@ -355,7 +355,7 @@ namespace Mathematics
 			break;
 		case 1:
 			dz = zIndex - iz;
-			W[0] = Math<Real>::sm_Zero;
+			W[0] = Math<Real>::GetValue(0);
 			W[1] = static_cast<Real>(1);
 			W[2] = (static_cast<Real>(2))*dz;
 			W[3] = (static_cast<Real>(3))*dz*dz;
@@ -363,21 +363,21 @@ namespace Mathematics
 			break;
 		case 2:
 			dz = zIndex - iz;
-			W[0] = Math<Real>::sm_Zero;
-			W[1] = Math<Real>::sm_Zero;
+			W[0] = Math<Real>::GetValue(0);
+			W[1] = Math<Real>::GetValue(0);
 			W[2] = static_cast<Real>(2);
 			W[3] = ((Real)6)*dz;
 			zMult = mInvZSpacing * mInvZSpacing;
 			break;
 		case 3:
-			W[0] = Math<Real>::sm_Zero;
-			W[1] = Math<Real>::sm_Zero;
-			W[2] = Math<Real>::sm_Zero;
+			W[0] = Math<Real>::GetValue(0);
+			W[1] = Math<Real>::GetValue(0);
+			W[2] = Math<Real>::GetValue(0);
 			W[3] = (Real)6;
 			zMult = mInvZSpacing * mInvZSpacing*mInvZSpacing;
 			break;
 		default:
-			return Math<Real>::sm_Zero;
+			return Math<Real>::GetValue(0);
 		}
 
 		// Compute P = M*U, Q = M*V, and Real = M*W.
@@ -385,9 +385,9 @@ namespace Mathematics
 		int row, col;
 		for (row = 0; row < 4; ++row)
 		{
-			P[row] = Math<Real>::sm_Zero;
-			Q[row] = Math<Real>::sm_Zero;
-			r[row] = Math<Real>::sm_Zero;
+			P[row] = Math<Real>::GetValue(0);
+			Q[row] = Math<Real>::GetValue(0);
+			r[row] = Math<Real>::GetValue(0);
 			for (col = 0; col < 4; ++col)
 			{
 				P[row] += mBlend[row][col] * U[col];
@@ -401,7 +401,7 @@ namespace Mathematics
 		--ix;
 		--iy;
 		--iz;
-		Real result = Math<Real>::sm_Zero;
+		Real result = Math<Real>::GetValue(0);
 		for (int slice = 0; slice < 4; ++slice)
 		{
 			int zClamp = iz + slice;

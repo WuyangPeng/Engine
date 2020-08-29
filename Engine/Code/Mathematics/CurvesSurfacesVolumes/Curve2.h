@@ -21,9 +21,9 @@ namespace Mathematics
 		Curve2 (Real tmin, Real tmax) noexcept;
 		virtual ~Curve2 () noexcept;
 		Curve2(const Curve2&) = default;
-		Curve2& operator=(const Curve2&) = default;
+		virtual Curve2& operator=(const Curve2&) = default;
 		Curve2(Curve2&&) = default;
-		Curve2& operator=(Curve2&&) = default;
+                virtual Curve2& operator=(Curve2&&) = default;
 		
 		// Interval on which curve parameter is defined.  If you are interested
 		// in only a subinterval of the actual domain of the curve, you may set

@@ -40,9 +40,9 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>
 {
 	mQuantity = 0;
 
-	SetContactTime(Math::sm_Zero);
+	SetContactTime(Math::GetValue(0));
 	auto tlast = Math::sm_MaxReal;
-	auto mContactTime = Math::sm_Zero;
+	auto mContactTime = Math::GetValue(0);
 
 	// Relative velocity of box1 relative to box0.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
@@ -92,7 +92,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>
 
 			// Since all axes are unit length (assumed), then can just compare
 			// against a constant (not relative) epsilon.
-			if (Vector3DTools::VectorMagnitudeSquared(axis) <= Math::sm_ZeroTolerance)
+			if (Vector3DTools::VectorMagnitudeSquared(axis) <= Math::GetZeroTolerance())
 			{
 				// Axis i0 and i1 are parallel.  If any two axes are parallel,
 				// then the only comparisons that needed are between the faces
@@ -145,7 +145,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>
 		SetContactTime(mContactTime);
 	}
 
-	if (mContactTime <= Math::sm_Zero || side == IntersectorConfiguration<Real>::NONE)
+	if (mContactTime <= Math::GetValue(0) || side == IntersectorConfiguration<Real>::NONE)
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
 		SetContactTime(mContactTime);

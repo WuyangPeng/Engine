@@ -158,7 +158,7 @@ template <typename Real>
 bool Mathematics::QuadraticFit3<Real>
 	::IsValid() const noexcept
 {
-	if (Math<Real>::sm_Zero <= m_EigenValue)
+	if (Math<Real>::GetValue(0) <= m_EigenValue)
 		return true;
 	else
 		return false;

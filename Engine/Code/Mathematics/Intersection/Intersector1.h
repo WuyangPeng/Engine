@@ -7,7 +7,7 @@
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR1_H
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <array>
 #include <type_traits> 
@@ -28,7 +28,7 @@ namespace Mathematics
 		// 终点必须排序：u0 <= u1和v0 <= v1。 
 		// 允许sm_MaxReal和-sm_MaxReal的值，
 		// 允许退化间隔：u0 = u1或v0 = v1。
-		Intersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon = Math::sm_ZeroTolerance);
+		Intersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon = Math::GetZeroTolerance());
 		virtual ~Intersector1();
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;

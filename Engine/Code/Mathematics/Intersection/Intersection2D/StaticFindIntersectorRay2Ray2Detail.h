@@ -40,7 +40,7 @@ void Mathematics::StaticFindIntersectorRay2Ray2<Real>
 	if (intersectionType == IntersectionType::Point)
 	{
 		// 测试直线交点是否在射线上。
-		if (Math::sm_Zero <= classify.GetFirstParameter() && Math::sm_Zero <= classify.GetSecondParameter())
+		if (Math::GetValue(0) <= classify.GetFirstParameter() && Math::GetValue(0) <= classify.GetSecondParameter())
 		{
 			m_Quantity = 1;
 			intersectionType = IntersectionType::Point;
@@ -56,12 +56,12 @@ void Mathematics::StaticFindIntersectorRay2Ray2<Real>
 	{
 		auto dotProduct = Vector2DTools::DotProduct(m_LhsRay.GetDirection(), m_RhsRay.GetOrigin() - m_LhsRay.GetOrigin());
 
-		if (Math::sm_Zero < Vector2DTools::DotProduct(m_LhsRay.GetDirection(), m_RhsRay.GetDirection()))
+		if (Math::GetValue(0) < Vector2DTools::DotProduct(m_LhsRay.GetDirection(), m_RhsRay.GetDirection()))
 		{
 			// 射线是共线的并且在相同的方向，所以它们必须是重叠的。
 			m_Quantity = std::numeric_limits<int>::max();
 			intersectionType = IntersectionType::Ray;
-			m_Point[0] = (Math::sm_Zero < dotProduct ? m_RhsRay.GetOrigin() : m_LhsRay.GetOrigin());
+			m_Point[0] = (Math::GetValue(0) < dotProduct ? m_RhsRay.GetOrigin() : m_LhsRay.GetOrigin());
 		}
 		else
 		{

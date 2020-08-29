@@ -10,7 +10,9 @@
 #include "Imagics/ImagicsDll.h"
 
 #include "PdeFilter.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Imagics
 {
 	class IMAGICS_DEFAULT_DECLARE PdeFilter2 : public PdeFilter
@@ -105,5 +107,5 @@ namespace Imagics
 		bool** mMask;
 	};
 }
-
+#include STSTEM_WARNING_POP
 #endif

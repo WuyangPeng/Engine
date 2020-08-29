@@ -34,7 +34,7 @@ namespace Mathematics
 
     public:
         explicit Equation(double constant, double once, double secondary = 0.0,
-                          double thrice = 0.0, double quartic = 0.0, double epsilon = Mathd::sm_ZeroTolerance);
+                          double thrice = 0.0, double quartic = 0.0, double epsilon = Mathd::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

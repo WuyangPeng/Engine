@@ -41,7 +41,7 @@ void Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
     mQuantity = 0;
     for (auto i = 0; i < quantity; ++i)
     {
-        if (t[i] >= Math<Real>::sm_Zero)
+        if (t[i] >= Math<Real>::GetZero())
         {
 			mPoint[mQuantity++] = mRay.GetOrigin() + t[i] * mRay.GetDirection();
         }

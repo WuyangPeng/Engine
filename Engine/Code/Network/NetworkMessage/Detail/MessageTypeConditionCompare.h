@@ -23,7 +23,7 @@ namespace Network
     public:
         MessageTypeConditionCompare(VersionsCondition condition, int version) noexcept;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     public:
         bool IsVersionsConform(int version) const noexcept override;

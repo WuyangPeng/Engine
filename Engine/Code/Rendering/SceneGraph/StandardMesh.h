@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h" 
 
 #include "TrianglesMesh.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Rendering/Resources/VertexBufferAccessor.h" 

@@ -8,7 +8,7 @@
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_DETAIL_H
 
 #include "BrentsMethodCalculate.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
@@ -59,7 +59,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>
 		// 该端点是满足函数公差的近似根。
 		m_Bisect2Root = BrentsMethodRoot{ m_End, m_EndFunction,BrentsMethodRootType::HaveSolution };
 	}
-	else if (m_BeginFunction * m_EndFunction < Math<Real>::sm_Zero)
+	else if (m_BeginFunction * m_EndFunction < Math<Real>::GetValue(0))
 	{
 		Search();
 	}
@@ -149,8 +149,8 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>
 {
 	UpdateFunctionDifference();
 
-	if (Math<Real>::sm_ZeroTolerance < Math<Real>::FAbs(m_BeginSearchFunctionDifference) &&
-		Math<Real>::sm_ZeroTolerance < Math<Real>::FAbs(m_EndSearchFunctionDifference))
+	if (Math<Real>::GetZeroTolerance() < Math<Real>::FAbs(m_BeginSearchFunctionDifference) &&
+		Math<Real>::GetZeroTolerance() < Math<Real>::FAbs(m_EndSearchFunctionDifference))
 	{
 		// 使用逆二次插值。
 		InverseQuadratic();
@@ -235,7 +235,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>
 	auto absSearchBeginSearchEndDiff = Math<Real>::FAbs(m_SearchBegin - m_SearchEnd);
 
 	auto currentBisected = false;
-	if (Math<Real>::sm_ZeroTolerance < solutionAvrDiff * solutionEndDiff)
+	if (Math<Real>::GetZeroTolerance() < solutionAvrDiff * solutionEndDiff)
 	{
 		// 值s不是在0.75 * x0+0.25 * x1和x1之间。
 		// 注：该算法有时有x0 < x1但有时x1 < x0，
@@ -274,7 +274,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>
 	m_SearchEnd = m_SearchBegin;
 	m_SearchBegin = m_End;
 	m_SearchFunction = m_EndFunction;
-	if (m_BeginFunction * m_SolutionFunction < Math<Real>::sm_Zero)
+	if (m_BeginFunction * m_SolutionFunction < Math<Real>::GetValue(0))
 	{
 		m_End = m_Solution;
 		m_EndFunction = m_SolutionFunction;

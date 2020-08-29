@@ -23,7 +23,9 @@
 using std::move;
 using std::make_shared;
 using namespace std::literals;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Framework::NetworkManagerInterface
 	::NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform)
 	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(System::EnumCastUnderlying(NetworkMiddleLayer::Count)) }, 
@@ -312,3 +314,4 @@ bool Framework::NetworkManagerInterface
 	return ParentType::MouseClick(button, state, point, virtualKeys);
 }
 
+#include STSTEM_WARNING_POP

@@ -30,7 +30,7 @@ namespace Rendering
 	   OpenGLVertexFormat (Renderer* renderer, const VertexFormat* vertexFormat);
  
 
-	   CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+	   CLASS_INVARIANT_OVERRIDE_DECLARE;
 	   
 	   // 顶点格式操作。
 	     void Enable (Renderer* renderer) noexcept override;

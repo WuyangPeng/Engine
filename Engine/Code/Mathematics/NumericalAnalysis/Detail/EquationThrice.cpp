@@ -210,8 +210,8 @@ void Mathematics::EquationThrice
 	// 下面将x = 2mcosθ代入方程
 	// 并根据4cos^3(θ) - 3cosθ = cos(3θ)求出方程的解。
 	const auto middleAngle = Mathd::ACos(-qHalf / Mathd::Sqrt(-pThird * pThird * pThird)) / 3.0;
-	const auto leastAngle = middleAngle - 2.0 * Mathd::sm_PI / 3.0;
-	const auto mostAngle = middleAngle + 2.0 * Mathd::sm_PI / 3.0;
+	const auto leastAngle = middleAngle - 2.0 * Mathd::GetPI() / 3.0;
+	const auto mostAngle = middleAngle + 2.0 * Mathd::GetPI() / 3.0;
 	const auto prefix = 2.0 * Mathd::Sqrt(-pThird);
 
 	const auto leastAngleRealResult = prefix * Mathd::Cos(leastAngle) - two / 3.0;

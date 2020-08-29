@@ -22,7 +22,7 @@ namespace CoreTools
 	public:
 		NullMutex() noexcept; 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void Initialize() noexcept override;
 		void Delete() noexcept override;

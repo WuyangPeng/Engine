@@ -14,6 +14,7 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26456)
 Rendering::PickRecordImpl ::PickRecordImpl() noexcept
     : m_Intersected{}, m_Parameter{ 0.0f }, m_Triangle{ -1 }
 {

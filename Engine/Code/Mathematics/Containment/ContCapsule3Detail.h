@@ -18,7 +18,7 @@ Mathematics::Capsule3<Real> Mathematics
 {
 	auto line = OrthogonalLineFit3<Real>(points).GetLine3();
 
-	auto maxRadiusSqr = Math<Real>::sm_Zero;
+	auto maxRadiusSqr = Math<Real>::GetValue(0);
      
 	for (auto i = 0u; i < points.size(); ++i)
     {
@@ -69,7 +69,7 @@ Mathematics::Capsule3<Real> Mathematics
 	else
 	{
 		// Container is a sphere.
-		extent = Math<Real>::sm_Zero;
+		extent = Math<Real>::GetValue(0);
 	}
 
 	auto center = line.GetOrigin() + ((Real{0.5})*(minValue + maxValue))*line.GetDirection();
@@ -96,7 +96,7 @@ bool Mathematics
 	::InCapsule(const Sphere3<Real>& sphere, const Capsule3<Real>& capsule)
 {
 	auto rDiff = capsule.GetRadius() - sphere.GetRadius();
-    if (rDiff >= Math<Real>::sm_Zero)
+    if (rDiff >= Math<Real>::GetValue(0))
     {
 		auto distance = DistancePoint3Segment3<Real>(sphere.GetCenter(), capsule.GetSegment()).Get();
         return distance.GetDistance() <= rDiff;
@@ -138,7 +138,7 @@ Mathematics::Capsule3<Real> Mathematics
 	Vector3D<Real> direction;
 
 	// Axis unit direction is average of input axis unit directions.
-	if (Vector3DTools<Real>::DotProduct(D0,D1) >= Math<Real>::sm_Zero)
+	if (Vector3DTools<Real>::DotProduct(D0,D1) >= Math<Real>::GetValue(0))
 	{
 		direction = D0 + D1;
 	}
@@ -253,7 +253,7 @@ Mathematics::Capsule3<Real> Mathematics
 	else
 	{
 		// Container is a sphere.
-		extent = Math<Real>::sm_Zero;
+		extent = Math<Real>::GetValue(0);
 	}
 
 	Segment3<Real> segment{ extent, center, direction };

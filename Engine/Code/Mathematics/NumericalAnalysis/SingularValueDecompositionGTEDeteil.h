@@ -77,10 +77,10 @@ unsigned int Mathematics::SingularValueDecompositionGTE<Real>
 			}
 		}
 
-		auto norm = Math::sm_Zero;
-		if (maxAbsComp > Math::sm_Zero)
+		auto norm = Math::GetValue(0);
+		if (maxAbsComp > Math::GetValue(0))
 		{
-			auto invMaxAbsComp = Math::sm_One / maxAbsComp;
+			auto invMaxAbsComp = Math::GetValue(1) / maxAbsComp;
 			for (auto i = 0; i < numElements; ++i)
 			{
 				auto ratio = input[i] * invMaxAbsComp;
@@ -184,7 +184,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 	}
 
 	// Start with the identity matrix.
-	std::fill(uMatrix, uMatrix + mNumRows * mNumRows, Math<Real>::sm_Zero);
+	std::fill(uMatrix, uMatrix + mNumRows * mNumRows, Math<Real>::GetZero());
 	for (int d = 0; d < mNumRows; ++d)
 	{
 		uMatrix[d + mNumRows * d] = static_cast<Real>(1);
@@ -198,7 +198,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 		// Copy the u vector and 2/Dot(u,u) from the matrix.
 		auto twoinvudu = mTwoInvUTU[i0];
 		auto const* column = &mMatrix[i0];
-		mUVector[i0] = Math::sm_One;
+		mUVector[i0] = Math::GetValue(1);
 		for (r = i1; r < mNumRows; ++r)
 		{
 			mUVector[r] = column[mNumCols*r];
@@ -208,7 +208,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 		mWVector[i0] = twoinvudu;
 		for (r = i1; r < mNumRows; ++r)
 		{
-			mWVector[r] = Math::sm_Zero;
+			mWVector[r] = Math::GetValue(0);
 			for (c = i1; c < mNumRows; ++c)
 			{
 				mWVector[r] += mUVector[c] * uMatrix[r + mNumRows * c];
@@ -289,7 +289,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 	}
 
 	// Start with the identity matrix.
-	std::fill(vMatrix, vMatrix + mNumCols * mNumCols, Math<Real>::sm_Zero);
+	std::fill(vMatrix, vMatrix + mNumCols * mNumCols, Math<Real>::GetZero());
 	for (int d = 0; d < mNumCols; ++d)
 	{
 		vMatrix[d + mNumCols * d] = static_cast<Real>(1);
@@ -306,7 +306,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 		// Copy the v vector and 2/Dot(v,v) from the matrix.
 		auto twoinvvdv = mTwoInvVTV[i0];
 		auto const* row = &mMatrix[mNumCols*i0];
-		mVVector[i1] = Math::sm_One;
+		mVVector[i1] = Math::GetValue(1);
 		for (r = i2; r < mNumCols; ++r)
 		{
 			mVVector[r] = row[r];
@@ -316,7 +316,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 		mWVector[i1] = twoinvvdv;
 		for (r = i2; r < mNumCols; ++r)
 		{
-			mWVector[r] = Math::sm_Zero;
+			mWVector[r] = Math::GetValue(0);
 			for (c = i2; c < mNumCols; ++c)
 			{
 				mWVector[r] += mVVector[c] * vMatrix[r + mNumCols * c];
@@ -402,21 +402,21 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 	for (auto i = 0, ip1 = 1; i < mNumCols; ++i, ++ip1)
 	{
 		// Compute the U-Householder vector.
-		auto length = Math::sm_Zero;
+		auto length = Math::GetValue(0);
 		for (r = i; r < mNumRows; ++r)
 		{
 			auto ur = mMatrix[i + mNumCols * r];
 			mUVector[r] = ur;
 			length += ur * ur;
 		}
-		auto udu = Math::sm_One;
+		auto udu = Math::GetValue(1);
 		length = Math::Sqrt(length);
-		if (length > Math::sm_Zero)
+		if (length > Math::GetValue(0))
 		{
 			auto& u1 = mUVector[i];
-			auto sgn = (u1 >= Math::sm_Zero ? Math::sm_One : Math::sm_NegativeOne);
-			auto invDenom = Math::sm_One / (u1 + sgn * length);
-			u1 = Math::sm_One;
+			auto sgn = (u1 >= Math::GetValue(0) ? Math::GetValue(1) : Math::GetValue(-1));
+			auto invDenom = Math::GetValue(1) / (u1 + sgn * length);
+			u1 = Math::GetValue(1);
 			for (r = ip1; r < mNumRows; ++r)
 			{
 				auto& ur = mUVector[r];
@@ -426,11 +426,11 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 		}
 
 		// Compute the rank-1 offset u*w^T.
-		auto invudu = Math::sm_One / udu;
+		auto invudu = Math::GetValue(1) / udu;
 		auto twoinvudu = invudu * static_cast<Real>(2);
 		for (c = i; c < mNumCols; ++c)
 		{
-			mWVector[c] = Math::sm_Zero;
+			mWVector[c] = Math::GetValue(0);
 			for (r = i; r < mNumRows; ++r)
 			{
 				mWVector[c] += mMatrix[c + mNumCols * r] * mUVector[r];
@@ -450,7 +450,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 		if (i < mNumCols - 2)
 		{
 			// Compute the V-Householder vectors.
-			length = Math::sm_Zero;
+			length = Math::GetValue(0);
 			for (c = ip1; c < mNumCols; ++c)
 			{
 				auto vc = mMatrix[c + mNumCols * i];
@@ -459,12 +459,12 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 			}
 			auto vdv = static_cast<Real>(1);
 			length = sqrt(length);
-			if (length > Math::sm_Zero)
+			if (length > Math::GetValue(0))
 			{
 				auto& v1 = mVVector[ip1];
-				auto sgn = (v1 >= Math::sm_Zero ? Math::sm_One : Math::sm_NegativeOne);
-				auto invDenom = Math::sm_One / (v1 + sgn * length);
-				v1 = Math::sm_One;
+				auto sgn = (v1 >= Math::GetValue(0) ? Math::GetValue(1) : Math::GetValue(-1));
+				auto invDenom = Math::GetValue(1) / (v1 + sgn * length);
+				v1 = Math::GetValue(1);
 				for (c = ip1 + 1; c < mNumCols; ++c)
 				{
 					auto& vc = mVVector[c];
@@ -474,11 +474,11 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 			}
 
 			// Compute the rank-1 offset w*v^T.
-			auto invvdv = Math::sm_One / vdv;
+			auto invvdv = Math::GetValue(1) / vdv;
 			auto twoinvvdv = invvdv * static_cast<Real>(2);
 			for (r = i; r < mNumRows; ++r)
 			{
-				mWVector[r] = Math::sm_Zero;
+				mWVector[r] = Math::GetValue(0);
 				for (c = ip1; c < mNumCols; ++c)
 				{
 					mWVector[r] += mMatrix[c + mNumCols * r] * mVVector[c];
@@ -528,26 +528,26 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 	::GetSinCos(Real x, Real y, Real& cs,Real& sn)
 {
 	// Solves sn*x + cs*y = 0 robustly.
-	auto tau = Math::sm_Zero;
-	if (y != Math::sm_Zero)
+	auto tau = Math::GetValue(0);
+	if (y != Math::GetValue(0))
 	{
 		if (Math::FAbs(y) > Math::FAbs(x))
 		{
 			tau = -x / y;
-			sn = Math::sm_One / Math::Sqrt(Math::sm_One + tau * tau);
+			sn = Math::GetValue(1) / Math::Sqrt(Math::GetValue(1) + tau * tau);
 			cs = sn * tau;
 		}
 		else
 		{
 			tau = -y / x;
-			cs = Math::sm_One / Math::Sqrt(Math::sm_One + tau * tau);
+			cs = Math::GetValue(1) / Math::Sqrt(Math::GetValue(1) + tau * tau);
 			sn = cs * tau;
 		}
 	}
 	else
 	{
-		cs = Math::sm_One;
-		sn = Math::sm_Zero;
+		cs = Math::GetValue(1);
+		sn = Math::GetValue(0);
 	}
 }
  
@@ -561,12 +561,12 @@ bool Mathematics::SingularValueDecompositionGTE<Real>
 		{
 			// Use planar rotations to case the superdiagonal entry out of
 			// the matrix, thus producing a row of zeros.
-			auto x = Math::sm_Zero;
-			auto z = Math::sm_Zero; 
-			auto cs = Math::sm_Zero; 
-			auto sn = Math::sm_Zero;
+			auto x = Math::GetValue(0);
+			auto z = Math::GetValue(0); 
+			auto cs = Math::GetValue(0); 
+			auto sn = Math::GetValue(0);
 			auto y = mSuperdiagonal[i];
-			mSuperdiagonal[i] = Math::sm_Zero;
+			mSuperdiagonal[i] = Math::GetValue(0);
 			for (auto j = i + 1; j <= imax + 1; ++j)
 			{
 				x = mDiagonal[j];
@@ -592,7 +592,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 {
 	// The implicit shift.  Compute the eigenvalue u of the lower-right 2x2
 	// block of A = B^T*B that is closer to b11.
-	auto f0 = (imax >= Math::sm_One ? mSuperdiagonal[imax - 1] : Math::sm_Zero);
+	auto f0 = (imax >= Math::GetValue(1) ? mSuperdiagonal[imax - 1] : Math::GetValue(0));
 	auto d1 = mDiagonal[imax];
 	auto f1 = mSuperdiagonal[imax];
 	auto d2 = mDiagonal[imax + 1];
@@ -600,19 +600,19 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 	auto a01 = d1 * f1;
 	auto a11 = d2 * d2 + f1 * f1;
 	auto dif = (a00 - a11) * static_cast<Real>(0.5);
-	auto sgn = (dif >= Math::sm_Zero ? Math::sm_One : Math::sm_NegativeOne);
+	auto sgn = (dif >= Math::GetValue(0) ? Math::GetValue(1) : Math::GetValue(-1));
 	auto a01sqr = a01 * a01;
 	auto u = a11 - a01sqr / (dif + sgn * Math::Sqrt(dif*dif + a01sqr));
 	auto x = mDiagonal[imin] * mDiagonal[imin] - u;
 	auto y = mDiagonal[imin] * mSuperdiagonal[imin];
 
-	auto a12 = Math::sm_Zero;
-	auto a21 = Math::sm_Zero;
-	auto a22 = Math::sm_Zero;
-	auto a23 = Math::sm_Zero;
-	auto cs = Math::sm_Zero; 
-	auto sn = Math::sm_Zero;
-	auto a02 = Math::sm_Zero;
+	auto a12 = Math::GetValue(0);
+	auto a21 = Math::GetValue(0);
+	auto a22 = Math::GetValue(0);
+	auto a23 = Math::GetValue(0);
+	auto cs = Math::GetValue(0); 
+	auto sn = Math::GetValue(0);
+	auto a02 = Math::GetValue(0);
 	auto i0 = imin - 1;
 	auto i1 = imin;
 	auto i2 = imin + 1;
@@ -673,14 +673,14 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 {
 	for (auto i = 0; i < mNumCols; ++i)
 	{
-		if (mDiagonal[i] >= Math::sm_Zero)
+		if (mDiagonal[i] >= Math::GetValue(0))
 		{
-			mFixupDiagonal[i] = Math::sm_One;
+			mFixupDiagonal[i] = Math::GetValue(1);
 		}
 		else
 		{
 			mDiagonal[i] = -mDiagonal[i];
-			mFixupDiagonal[i] = Math::sm_NegativeOne;
+			mFixupDiagonal[i] = Math::GetValue(-1);
 		}
 	}
 }

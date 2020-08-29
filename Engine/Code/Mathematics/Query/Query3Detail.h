@@ -113,9 +113,9 @@ Mathematics::PlaneQueryType Mathematics::Query3<Real>
 		det = -det;
 	}
 
-	if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(det) <= Math<Real>::GetZeroTolerance())
 		return PlaneQueryType::OnPlane;
-	else if (Math<Real>::sm_Zero < det)
+	else if (Math<Real>::GetValue(0) < det)
 		return PlaneQueryType::PositiveSide;
 	else
 		return PlaneQueryType::NegativeSide;
@@ -239,9 +239,9 @@ Mathematics::CircumsphereQueryType Mathematics::Query3<Real>
 		det = -det;
 	}
 
-	if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
+	if (Math<Real>::FAbs(det) <= Math<Real>::GetZeroTolerance())
 		return CircumsphereQueryType::OnCircumsphere;
-	else if (det < Math<Real>::sm_Zero)
+	else if (det < Math<Real>::GetValue(0))
 		return CircumsphereQueryType::Inside;
 	else
 		return CircumsphereQueryType::Outside;

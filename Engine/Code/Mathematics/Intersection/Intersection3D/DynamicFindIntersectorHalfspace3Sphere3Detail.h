@@ -35,7 +35,7 @@ template <typename Real>
 void Mathematics::DynamicFindIntersectorHalfspace3Sphere3<Real>
 	::Find()
 {
-	SetContactTime(Math<Real>::sm_Zero);
+	SetContactTime(Math<Real>::GetZero());
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 	auto distance = Vector3DTools::DotProduct(mHalfspace.GetNormal(), mSphere.GetCenter());
@@ -49,7 +49,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Sphere3<Real>
 		return;
 	}
 
-	if (mContactTime == Math<Real>::sm_Zero)
+	if (mContactTime == Math<Real>::GetZero())
 	{
 		// Intersecting now.
 		SetContactTime(mContactTime);

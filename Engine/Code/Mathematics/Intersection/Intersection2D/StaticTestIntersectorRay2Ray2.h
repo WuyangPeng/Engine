@@ -26,10 +26,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticTestIntersectorRay2Ray2(const Ray2& lhsRay, const Ray2& rhsRay, const Real dotThreshold = Math::sm_ZeroTolerance);
+		StaticTestIntersectorRay2Ray2(const Ray2& lhsRay, const Ray2& rhsRay, const Real dotThreshold = Math::GetZeroTolerance());
 		virtual ~StaticTestIntersectorRay2Ray2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Ray2 GetLhsRay() const;
 		const Ray2 GetRhsRay() const;

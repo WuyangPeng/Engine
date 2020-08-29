@@ -81,7 +81,7 @@ void Mathematics::RombergIntegral<Real, UserDataType>
 	for (auto orderIndex = 2; orderIndex <= m_Order; ++orderIndex)
 	{
 		// 通过梯形规则逼近。
-		auto sum = Math::sm_Zero;
+		auto sum = Math::GetValue(0);
 
 		for (auto i = 1; i <= p0; ++i)
 		{

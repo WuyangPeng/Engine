@@ -23,7 +23,7 @@ namespace CoreTools
 	public:
 		explicit AppenderConsole(AppenderPrint appenderFlags, LogLevel logLevel = LogLevel::Disabled);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		AppenderType GetAppenderType() const noexcept override;
 

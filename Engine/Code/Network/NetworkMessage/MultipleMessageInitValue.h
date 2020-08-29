@@ -33,7 +33,7 @@ namespace Network
 
 		virtual ~MultipleMessageInitValue();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 	};
 
 	template<typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>

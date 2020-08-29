@@ -14,7 +14,9 @@
 
 
 RENDERING_EXPORT_SHARED_PTR(ProjectorConstantImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE ProjectorWorldPositionConstant : public ShaderFloat
@@ -35,7 +37,7 @@ namespace Rendering
                 ProjectorWorldPositionConstant( ProjectorWorldPositionConstant&& rhs) noexcept = default;
                 ProjectorWorldPositionConstant& operator=(ProjectorWorldPositionConstant&& rhs) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ProjectorWorldPositionConstant);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
@@ -60,6 +62,7 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ProjectorWorldPositionConstant);
 }
+#include STSTEM_WARNING_POP
 
 #endif // RENDERING_SHADER_FLOATS_PROJECTOR_WORLD_POSITION_CONSTANT_H
 

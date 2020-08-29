@@ -5,7 +5,7 @@
 // ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/18 14:58)
 
 #include "Rendering/RenderingExport.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "TransformImpl.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"

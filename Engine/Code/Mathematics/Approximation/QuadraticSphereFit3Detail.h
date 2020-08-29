@@ -90,7 +90,7 @@ void Mathematics::QuadraticSphereFit3<Real>
 	auto eigenVector = eigenSystem.GetEigenvector(0);
 
 	// µ±ÐÄ³ýÁã
-	if (Math<Real>::sm_ZeroTolerance < Math<Real>::FAbs(eigenVector[4]))
+	if (Math<Real>::GetZeroTolerance() < Math<Real>::FAbs(eigenVector[4]))
 	{
 		Real inv = static_cast<Real>(1) / eigenVector[4];
 
@@ -120,7 +120,7 @@ template <typename Real>
 bool Mathematics::QuadraticSphereFit3<Real>
 	::IsValid() const noexcept
 {
-	if (Math<Real>::sm_Zero < m_Radius && Math<Real>::sm_Zero <= m_EigenValue)
+	if (Math<Real>::GetValue(0) < m_Radius && Math<Real>::GetValue(0) <= m_EigenValue)
 		return true;
 	else
 		return false;

@@ -10,7 +10,7 @@
 #include "Flags/IntersectionType.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Vector3D.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
 
@@ -27,7 +27,7 @@ namespace Mathematics
         using VectorType = Vector<Real>;
 
     public:
-        explicit Intersector(const Real epsilon = Math::sm_ZeroTolerance) noexcept;
+        explicit Intersector(const Real epsilon = Math::GetZeroTolerance()) noexcept;
         virtual ~Intersector() = 0;
         Intersector(const Intersector&) = default;
         Intersector& operator=(const Intersector&) = default;

@@ -7,7 +7,7 @@
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_H
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 namespace Mathematics
 {

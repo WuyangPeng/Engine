@@ -107,7 +107,7 @@ bool Mathematics::StaticFindIntersectorLine3Box3<Real>
 	// plane.  Otherwise 'false' is returned in which case the line segment
 	// is entirely clipped.
 
-	if (denom > Math<Real>::sm_Zero)
+	if (denom > Math<Real>::GetZero())
 	{
 		if (numer > denom*t1)
 		{
@@ -119,7 +119,7 @@ bool Mathematics::StaticFindIntersectorLine3Box3<Real>
 		}
 		return true;
 	}
-	else if (denom < Math<Real>::sm_Zero)
+	else if (denom < Math<Real>::GetZero())
 	{
 		if (numer > denom*t0)
 		{
@@ -133,7 +133,7 @@ bool Mathematics::StaticFindIntersectorLine3Box3<Real>
 	}
 	else
 	{
-		return numer <= Math<Real>::sm_Zero;
+		return numer <= Math<Real>::GetZero();
 	}
 }
 

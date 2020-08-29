@@ -42,7 +42,7 @@ void Rendering::LightModelPositionConstant
 	 
 	const auto worldPosition = GetLight()->GetPosition();
 	const auto worldInverseMatrix = visual->GetWorldTransform().GetInverseMatrix();
-	auto modelPosition = worldInverseMatrix * worldPosition;
+const	auto modelPosition = worldInverseMatrix * worldPosition;
 	
 	SetRegister(0, modelPosition);
 

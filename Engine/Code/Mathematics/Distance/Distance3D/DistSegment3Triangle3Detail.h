@@ -80,7 +80,7 @@ typename const Mathematics::DistSegment3Triangle3<Real>::DistanceResult Mathemat
 		mTriangleBary[2] = queryPT.GetTriangleBary(2);
 	}
 
-	return DistanceResult{ sqrDist.GetDistance(), Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDist.GetDistance(), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>

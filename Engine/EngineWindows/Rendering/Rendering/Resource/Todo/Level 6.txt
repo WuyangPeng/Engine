@@ -1,3 +1,7 @@
 TODO Level 6
 
 0.5.0.0 
+
+1.	（DataTypes）合并TextureColour的特化。 
+2.	（DataTypes）考虑是否要增加TextureColour和Colour之间的转换。 
+3.	（DataTypes）考虑是否要导出TextureColour类。 

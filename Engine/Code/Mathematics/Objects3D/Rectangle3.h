@@ -30,7 +30,7 @@ namespace Mathematics
 		// 点Real(s,t) = C+s0*U0+s1*U1，其中C是矩形的中心，U0和U1是单位长度的垂直轴。
 		// 参数s0和s1是由约束|s0| <= e0 和|s1| <= e1，
 		// 其中e0 > 0和e1 > 0称为矩形的范围。
-		Rectangle3(const Vector3D& center, const Vector3D& axis0, const Vector3D& axis1, Real extent0, Real extent1, const Real epsilon = Math::sm_ZeroTolerance);
+		Rectangle3(const Vector3D& center, const Vector3D& axis0, const Vector3D& axis1, Real extent0, Real extent1, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

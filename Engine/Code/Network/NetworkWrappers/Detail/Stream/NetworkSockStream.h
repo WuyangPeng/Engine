@@ -22,7 +22,7 @@ namespace Network
 	public:
 		NetworkSockStream() noexcept; 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 WinSocketStreamType& GetNetworkSockStream() noexcept override;
 

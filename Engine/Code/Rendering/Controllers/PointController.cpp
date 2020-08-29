@@ -29,13 +29,14 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26456)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, PointController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PointController); 
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, PointController);
-
-Rendering::PointController
+ 
+    Rendering::PointController
 	::PointController()
 	:ParentType{}, m_Impl{ make_shared<ImplType>() }, m_Points{ nullptr }
 {
@@ -188,7 +189,7 @@ void Rendering::PointController
 		const auto distance = ctrlTime * GetSystemLinearSpeed();
 		auto deltaTrn = distance * GetSystemLinearAxis();
 		auto localTransform = m_Points->GetLocalTransform();
-		auto translate = localTransform.GetTranslate() + deltaTrn;
+const		auto translate = localTransform.GetTranslate() + deltaTrn;
 		localTransform.SetTranslate(translate);		
 
 		const auto angle = ctrlTime * GetSystemAngularSpeed();

@@ -28,8 +28,8 @@ template <typename Real>
 bool Mathematics::Torus3Parameters<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_S && m_S <= static_cast<Real>(1) &&
-		Math::sm_Zero <= m_T && m_T <= static_cast<Real>(1))
+	if (Math::GetValue(0) <= m_S && m_S <= static_cast<Real>(1) &&
+		Math::GetValue(0) <= m_T && m_T <= static_cast<Real>(1))
 		return true;
 	else
 		return false;

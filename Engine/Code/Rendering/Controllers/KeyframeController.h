@@ -16,7 +16,9 @@
 #include "Rendering/DataTypes/Transform.h"
 
 RENDERING_EXPORT_SHARED_PTR(KeyframeControllerImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {	
 	class RENDERING_DEFAULT_DECLARE KeyframeController : public TransformController
@@ -43,7 +45,7 @@ namespace Rendering
 		KeyframeController(KeyframeController&&) = default;
 		KeyframeController& operator=(KeyframeController&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(KeyframeController); 
 
@@ -101,5 +103,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Sixth, KeyframeController); 
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_KEYFRAME_CONTROLLER_H

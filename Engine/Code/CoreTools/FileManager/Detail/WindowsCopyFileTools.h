@@ -25,7 +25,7 @@ namespace CoreTools
 	public:
 		WindowsCopyFileTools(const String& inFileName, const String& outFileName);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	private:
 		String m_InFileName;

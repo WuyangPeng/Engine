@@ -32,7 +32,7 @@ namespace Mathematics
 		DistanceRay3Ray3(const Ray3& lhsRay, const Ray3& rhsRay);
 		virtual ~DistanceRay3Ray3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Ray3 GetLhsRay() const;
 		const Ray3 GetRhsRay() const;

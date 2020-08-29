@@ -66,7 +66,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	::SetNegativeThreshold(Real negThreshold)
 {
-    if (negThreshold <= Math<Real>::sm_Zero)
+    if (negThreshold <= Math<Real>::GetZero())
     {
         mNegativeThreshold = negThreshold;
         return;
@@ -86,7 +86,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	::SetPositiveThreshold(Real posThreshold)
 {
-    if (posThreshold >= Math<Real>::sm_Zero)
+    if (posThreshold >= Math<Real>::GetZero())
     {
         mPositiveThreshold = posThreshold;
         return;

@@ -19,6 +19,7 @@
 *.obj
 *.opendb
 *.pdb
+*.recipe
 *.res
 *.sarif
 *.sbr

@@ -85,11 +85,11 @@ int Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>
 	for (auto i = 0; i < 3; ++i)
 	{
 		auto t = Vector2DTools::DotProduct(D, (V[i] - P));
-		if (t > Math<Real>::sm_Zero)
+		if (t > Math<Real>::GetZero())
 		{
 			++positive;
 		}
-		else if (t < Math<Real>::sm_Zero)
+		else if (t < Math<Real>::GetZero())
 		{
 			++negative;
 		}

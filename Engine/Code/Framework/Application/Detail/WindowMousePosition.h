@@ -20,7 +20,7 @@ namespace Framework
 	public:
 		explicit WindowMousePosition(HWnd hwnd) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		//  Û±ÍŒª÷√
 		const WindowPoint GetMousePosition() const noexcept final;

@@ -43,7 +43,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	// Process as if triangle is stationary, box is moving.
 	auto relVelocity = velocity1 - velocity0;
 
-	SetContactTime(Math::sm_Zero);
+	SetContactTime(Math::GetValue(0));
 	auto tlast = Math::sm_MaxReal;
 
 	auto side = IntersectorConfiguration<Real>::NONE;
@@ -82,7 +82,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 		auto NdN = Vector3DTools::VectorMagnitudeSquared(triNorm);
 		auto AdA = Vector3DTools::VectorMagnitudeSquared(axis);
 		auto sn = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - NdA * NdA / (NdN*AdA)));
-		if (sn < Math::sm_ZeroTolerance)
+		if (sn < Math::GetZeroTolerance())
 		{
 			coplanar = i0;
 		}
@@ -132,7 +132,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 		}
 	}
 
-	if (mContactTime < Math::sm_Zero || side == IntersectorConfiguration<Real>::NONE)
+	if (mContactTime < Math::GetValue(0) || side == IntersectorConfiguration<Real>::NONE)
 	{
 		SetContactTime(mContactTime);
 		this->SetIntersectionType(IntersectionType::Empty);

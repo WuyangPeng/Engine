@@ -16,7 +16,9 @@
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
 #include <vector>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Mathematics
 {
     template <typename Real>
@@ -110,5 +112,5 @@ namespace Mathematics
     using Polynomialf = Polynomial<float>;
     using Polynomiald = Polynomial<double>;
 }
-
+#include STSTEM_WARNING_POP
 #endif  // MATHEMATICS_ALGEBRA_POLYNOMIAL_H

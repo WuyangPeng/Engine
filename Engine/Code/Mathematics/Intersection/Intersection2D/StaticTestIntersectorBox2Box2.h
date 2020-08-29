@@ -25,10 +25,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticTestIntersectorBox2Box2(const Box2& lhsBox, const Box2& rhsBox, const Real epsilon = Math::sm_ZeroTolerance);
+		StaticTestIntersectorBox2Box2(const Box2& lhsBox, const Box2& rhsBox, const Real epsilon = Math::GetZeroTolerance());
 		virtual ~StaticTestIntersectorBox2Box2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Box2 GetLhsBox() const;
 		const Box2 GetRhsBox() const;

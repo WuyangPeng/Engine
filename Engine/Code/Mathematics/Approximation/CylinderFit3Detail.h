@@ -117,7 +117,7 @@ template <typename Real>
 bool Mathematics::CylinderFit3<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_Radius && Math::sm_Zero <= m_Height && Math::sm_Zero <= m_Exactly && Math::sm_Zero <= m_Epsilon && m_Axis.IsNormalize(m_Epsilon))
+	if (Math::GetValue(0) <= m_Radius && Math::GetValue(0) <= m_Height && Math::GetValue(0) <= m_Exactly && Math::GetValue(0) <= m_Epsilon && m_Axis.IsNormalize(m_Epsilon))
 	{
 		return true;
 	}

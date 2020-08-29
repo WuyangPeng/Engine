@@ -15,7 +15,7 @@ namespace Mathematics
 	IntpThinPlateSpline3<Real>::IntpThinPlateSpline3(int quantity,Real* X, Real* Y, Real* Z, Real* F, Real smooth, bool owner,bool transformToUnitCube)
 		:mSmooth(smooth)
 	{
-		MATHEMATICS_ASSERTION_0(quantity >= 4 && X && Y && Z && F && smooth >= Math<Real>::sm_Zero,"Invalid input\n");
+		MATHEMATICS_ASSERTION_0(quantity >= 4 && X && Y && Z && F && smooth >= Math<Real>::GetValue(0),"Invalid input\n");
 
 		mInitialized = false;
 		mQuantity = quantity;
@@ -93,13 +93,13 @@ namespace Mathematics
 			// The classical thin-plate spline uses the data as is.  The values
 			// mXMax, mYMax, and mZMax are not used, but they are initialized
 			// anyway (to irrelevant numbers).
-			mXMin = Math<Real>::sm_Zero;
+			mXMin = Math<Real>::GetValue(0);
 			mXMax = static_cast<Real>(1);
 			mXInvRange = static_cast<Real>(1);
-			mYMin = Math<Real>::sm_Zero;
+			mYMin = Math<Real>::GetValue(0);
 			mYMax = static_cast<Real>(1);
 			mYInvRange = static_cast<Real>(1);
-			mZMin = Math<Real>::sm_Zero;
+			mZMin = Math<Real>::GetValue(0);
 			mZMax = static_cast<Real>(1);
 			mZInvRange = static_cast<Real>(1);
 			memcpy(mX, X, mQuantity * sizeof(Real));
@@ -158,7 +158,7 @@ namespace Mathematics
 		Real prod[4];
 		for (row = 0; row < 4; ++row)
 		{
-			prod[row] = Math<Real>::sm_Zero;
+			prod[row] = Math<Real>::GetValue(0);
 			for (i = 0; i < mQuantity; ++i)
 			{
 				prod[row] += PMat[row][i] * F[i];
@@ -168,7 +168,7 @@ namespace Mathematics
 		// Compute 'b' vector for smooth thin plate spline.
 		for (row = 0; row < 4; ++row)
 		{
-			mB[row] = Math<Real>::sm_Zero;
+			mB[row] = Math<Real>::GetValue(0);
 			for (i = 0; i < 4; ++i)
 			{
 				mB[row] += invQMat[row][i] * prod[i];
@@ -189,7 +189,7 @@ namespace Mathematics
 		// Compute 'a' vector for smooth thin plate spline.
 		for (row = 0; row < mQuantity; ++row)
 		{
-			mA[row] = Math<Real>::sm_Zero;
+			mA[row] = Math<Real>::GetValue(0);
 			for (i = 0; i < mQuantity; ++i)
 			{
 				mA[row] += invAMat[row][i] * tmp[i];
@@ -269,7 +269,7 @@ namespace Mathematics
 	template <typename Real>
 	Real IntpThinPlateSpline3<Real>::ComputeFunctional() const
 	{
-		Real functional = Math<Real>::sm_Zero;
+		Real functional = Math<Real>::GetValue(0);
 		for (int row = 0; row < mQuantity; ++row)
 		{
 			for (int col = 0; col < mQuantity; ++col)
@@ -290,7 +290,7 @@ namespace Mathematics
 			}
 		}
 
-		if (mSmooth > Math<Real>::sm_Zero)
+		if (mSmooth > Math<Real>::GetValue(0))
 		{
 			functional *= mSmooth;
 		}

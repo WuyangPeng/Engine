@@ -35,11 +35,11 @@ static_assert(IMAGICS_ASSERT_LEVEL <= ASSERT_LEVEL, "Imagics assert level defini
 
 #else // IMAGICS_ASSERT_LEVEL < 0
 
-	#define IMAGICS_ASSERTION_0(condition, format, ...) ((void)0)
-	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, ...) ((void)0)
+	#define IMAGICS_ASSERTION_0(condition, format, ...) (static_cast<void>(0))
+	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
-	#define IMAGICS_ASSERTION_DEBUG(condition, format, ...) ((void)0)
-	#define IMAGICS_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, ...) ((void)0)
+	#define IMAGICS_ASSERTION_DEBUG(condition, format, ...) (static_cast<void>(0))
+	#define IMAGICS_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif //0 <= IMAGICS_ASSERT_LEVEL
 
@@ -52,8 +52,8 @@ static_assert(IMAGICS_ASSERT_LEVEL <= ASSERT_LEVEL, "Imagics assert level defini
 
 #else // IMAGICS_ASSERT_LEVEL < 1
 
-	#define IMAGICS_ASSERTION_1(condition, format, ...) ((void)0)
-	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition,functionDescribed,format, ...) ((void)0)
+	#define IMAGICS_ASSERTION_1(condition, format, ...) (static_cast<void>(0))
+	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 1 <= IMAGICS_ASSERT_LEVEL
 
@@ -66,8 +66,8 @@ static_assert(IMAGICS_ASSERT_LEVEL <= ASSERT_LEVEL, "Imagics assert level defini
 
 #else // IMAGICS_ASSERT_LEVEL < 2
 
-	#define IMAGICS_ASSERTION_2(condition, format, ...) ((void)0)
-	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition,functionDescribed,format, ...) ((void)0)
+	#define IMAGICS_ASSERTION_2(condition, format, ...) (static_cast<void>(0))
+	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 2 <= IMAGICS_ASSERT_LEVEL
 
@@ -80,8 +80,8 @@ static_assert(IMAGICS_ASSERT_LEVEL <= ASSERT_LEVEL, "Imagics assert level defini
 
 #else // IMAGICS_ASSERT_LEVEL < 3
 
-	#define IMAGICS_ASSERTION_3(condition, format, ...) ((void)0)
-	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition,functionDescribed,format, ...) ((void)0)
+	#define IMAGICS_ASSERTION_3(condition, format, ...) (static_cast<void>(0))
+	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 3 <= IMAGICS_ASSERT_LEVEL
 
@@ -94,8 +94,8 @@ static_assert(IMAGICS_ASSERT_LEVEL <= ASSERT_LEVEL, "Imagics assert level defini
 
 #else // IMAGICS_ASSERT_LEVEL < 4
 
-	#define IMAGICS_ASSERTION_4(condition, format, ...) ((void)0)
-	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition,functionDescribed,format, ...) ((void)0)
+	#define IMAGICS_ASSERTION_4(condition, format, ...) (static_cast<void>(0))
+	#define IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition,functionDescribed,format, ...) (static_cast<void>(0))
 
 #endif // 4 <= IMAGICS_ASSERT_LEVEL
 

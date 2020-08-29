@@ -17,7 +17,7 @@ using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26486)
-
+#include SYSTEM_WARNING_DISABLE(26456)
 Network::SingleMessageEventContainer
 	::SingleMessageEventContainer() noexcept
 	:ParentType{}, m_MessageEvent{}

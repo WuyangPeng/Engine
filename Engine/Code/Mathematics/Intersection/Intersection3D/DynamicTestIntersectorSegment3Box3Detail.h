@@ -42,7 +42,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>
 	// Get the box velocity relative to the segment.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-	auto mContactTime = Math<Real>::sm_Zero;
+	auto mContactTime = Math<Real>::GetZero();
 	auto tlast = Math::sm_MaxReal;
 
 	auto i = 0;

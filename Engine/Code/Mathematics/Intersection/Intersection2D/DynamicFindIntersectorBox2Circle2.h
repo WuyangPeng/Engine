@@ -28,7 +28,7 @@ namespace Mathematics
 
 	public:
 		DynamicFindIntersectorBox2Circle2(const Box2& box, const Circle2& circle, Real tmax,
-										  const Vector2D& lhsVelocity, const Vector2D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+										  const Vector2D& lhsVelocity, const Vector2D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
 		// Object access.
 		const Box2 GetBox() const;

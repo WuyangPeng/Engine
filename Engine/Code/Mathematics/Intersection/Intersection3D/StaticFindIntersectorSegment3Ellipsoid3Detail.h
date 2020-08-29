@@ -55,12 +55,12 @@ void Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
     // Intersection occurs if Q(t) has real roots with t >= 0.
 	auto discr = a1*a1 - a0*a2;
     Real t[2];
-    if (discr < Math<Real>::sm_Zero)
+    if (discr < Math<Real>::GetZero())
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         mQuantity = 0;
     }
-    else if (discr > Math::sm_ZeroTolerance)
+    else if (discr > Math::GetZeroTolerance())
     {
         Real root = Math::Sqrt(discr);
         Real inv = (static_cast<Real>(1))/a2;

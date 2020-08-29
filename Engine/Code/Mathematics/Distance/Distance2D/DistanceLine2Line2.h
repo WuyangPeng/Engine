@@ -30,7 +30,7 @@ namespace Mathematics
 		DistanceLine2Line2(const Line2& lhsLine, const Line2& rhsLine);
 		virtual ~DistanceLine2Line2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Line2 GetLhsLine() const;
 		const Line2 GetRhsLine() const;

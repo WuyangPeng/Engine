@@ -33,7 +33,7 @@ namespace Rendering
 		  OpenGLIndexBuffer(OpenGLIndexBuffer&&) = default;
 		  OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&&) = default;
         
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// »º³åÇø²Ù×÷
 		 void Enable(Renderer* renderer) noexcept override;

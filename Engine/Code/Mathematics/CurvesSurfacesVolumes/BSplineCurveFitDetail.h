@@ -8,7 +8,7 @@
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_DETAIL_H
 
 #include "BSplineCurveFit.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/BandedMatrixSolveDetail.h"
 
 namespace Mathematics

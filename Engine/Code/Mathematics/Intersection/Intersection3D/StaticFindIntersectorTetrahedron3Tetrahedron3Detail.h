@@ -83,11 +83,11 @@ void  Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>
     for (i = 0; i < 4; ++i)
     {
         C[i] = plane.DistanceTo(tetra.GetVertex(i));
-        if (C[i] > Math<Real>::sm_Zero)
+        if (C[i] > Math<Real>::GetZero())
         {
             pos[positive++] = i;
         }
-        else if (C[i] < Math<Real>::sm_Zero)
+        else if (C[i] < Math<Real>::GetZero())
         {
             neg[negative++] = i;
         }

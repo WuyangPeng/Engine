@@ -30,7 +30,7 @@ namespace Mathematics
 		DistancePoint2Box2(const Vector2D& point, const Box2& ellipse);
 		virtual ~DistancePoint2Box2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Vector2D GetPoint() const;
 		const Box2 GetBox() const;

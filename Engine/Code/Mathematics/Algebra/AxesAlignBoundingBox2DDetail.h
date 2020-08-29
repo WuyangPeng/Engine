@@ -108,8 +108,8 @@ typename const Mathematics::AxesAlignBoundingBox2D<Real>::Vector2D Mathematics::
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	Vector2D center{ (m_MinPoint.GetXCoordinate() + m_MaxPoint.GetXCoordinate()) / Math::sm_Two,
-					 (m_MinPoint.GetYCoordinate() + m_MaxPoint.GetYCoordinate()) / Math::sm_Two };
+	Vector2D center{ (m_MinPoint.GetXCoordinate() + m_MaxPoint.GetXCoordinate()) / Math::GetValue(2),
+					 (m_MinPoint.GetYCoordinate() + m_MaxPoint.GetYCoordinate()) / Math::GetValue(2) };
 
 	return center;
 }
@@ -120,7 +120,7 @@ Real Mathematics::AxesAlignBoundingBox2D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return (m_MaxPoint.GetXCoordinate() - m_MinPoint.GetXCoordinate()) / Math::sm_Two;
+	return (m_MaxPoint.GetXCoordinate() - m_MinPoint.GetXCoordinate()) / Math::GetValue(2);
 }
 
 template <typename Real>
@@ -129,7 +129,7 @@ Real Mathematics::AxesAlignBoundingBox2D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return (m_MaxPoint.GetYCoordinate() - m_MinPoint.GetYCoordinate()) / Math::sm_Two;
+	return (m_MaxPoint.GetYCoordinate() - m_MinPoint.GetYCoordinate()) / Math::GetValue(2);
 }
 
 

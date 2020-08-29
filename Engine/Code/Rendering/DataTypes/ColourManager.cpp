@@ -1,37 +1,36 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/18 15:29)
 
 #include "Rendering/RenderingExport.h"
 
+#include "ColourDetail.h"
 #include "ColourManager.h"
-#include "System/Helper/ConfigMacro.h"
 
-#include<gsl/gsl_util>
+#include <gsl/gsl_util>
 
- 
-void Rendering::ColourManager
-	::ExtractR8G8B8 (unsigned int color, unsigned char& red, unsigned char& green, unsigned char& blue) noexcept
+Rendering::ByteColour Rendering::ColourManager::ExtractR8G8B8(uint32_t color) noexcept
 {
-	unsigned char alpha{};
+    auto colour = ExtractR8G8B8A8(color);
+    colour.SetAlpha(ColourDefaultTraits<uint8_t>::sm_MaxValue);
 
-	return ExtractR8G8B8A8(color,red,green,blue,alpha);
+    return colour;
 }
 
-void Rendering::ColourManager
-	::ExtractR8G8B8A8 (unsigned int color, unsigned char& red, unsigned char& green, unsigned char& blue,  unsigned char& alpha) noexcept
+Rendering::ByteColour Rendering::ColourManager::ExtractR8G8B8A8(uint32_t color) noexcept
 {
 #ifdef SYSTEM_BIG_ENDIAN
-    red =  gsl::narrow_cast<unsigned char>((color & 0xFF000000) >> 24);
-    green = gsl::narrow_cast<unsigned char>((color & 0x00FF0000) >> 16);
-    blue = gsl::narrow_cast<unsigned char>((color & 0x0000FF00) >>  8);
-    alpha = gsl::narrow_cast<unsigned char>((color & 0x000000FF));
-#else // !SYSTEM_BIG_ENDIAN
-    red = gsl::narrow_cast<unsigned char>((color & 0x000000FF));
-    green = gsl::narrow_cast<unsigned char>((color & 0x0000FF00) >>  8);
-    blue = gsl::narrow_cast<unsigned char>((color & 0x00FF0000) >> 16);
-    alpha = gsl::narrow_cast<unsigned char>((color & 0xFF000000) >> 24);
-#endif // SYSTEM_BIG_ENDIAN
+    return ByteColour{ gsl::narrow_cast<uint8_t>((color & 0xFF000000) >> 24),
+                       gsl::narrow_cast<uint8_t>((color & 0x00FF0000) >> 16),
+                       gsl::narrow_cast<uint8_t>((color & 0x0000FF00) >> 8),
+                       gsl::narrow_cast<uint8_t>((color & 0x000000FF)) };
+
+#else  // !SYSTEM_BIG_ENDIAN
+    return ByteColour{ gsl::narrow_cast<uint8_t>((color & 0x000000FF)),
+                       gsl::narrow_cast<uint8_t>((color & 0x0000FF00) >> 8),
+                       gsl::narrow_cast<uint8_t>((color & 0x00FF0000) >> 16),
+                       gsl::narrow_cast<uint8_t>((color & 0xFF000000) >> 24) };
+#endif  // SYSTEM_BIG_ENDIAN
 }

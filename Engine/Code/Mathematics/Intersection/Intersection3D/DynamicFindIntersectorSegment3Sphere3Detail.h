@@ -16,7 +16,7 @@ Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>
 	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mSegment{ segment }, mSphere{ sphere }
 {
 	mQuantity = 0;
-	ZeroThreshold = Math::sm_ZeroTolerance;
+	ZeroThreshold = Math::GetZeroTolerance();
 	Find();
 }
 
@@ -42,7 +42,7 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>
 	StaticFindIntersectorSegment3Sphere3<Real> inter{ mSegment,mSphere };
 	if (inter.IsIntersection())
 	{
-		SetContactTime(Math<Real>::sm_Zero);
+		SetContactTime(Math<Real>::GetZero());
 		this->SetIntersectionType(IntersectionType::Other);
 		// 相交点赋值
 		return;
@@ -66,7 +66,7 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>
 	StaticFindIntersectorSegment3Capsule3<Real> intr{ path, capsule };
 	if (!intr.IsIntersection())
 	{
-		SetContactTime(Math<Real>::sm_Zero);
+		SetContactTime(Math<Real>::GetZero());
 		this->SetIntersectionType(IntersectionType::Empty);
 		return;
 	}

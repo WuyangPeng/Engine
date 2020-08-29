@@ -18,7 +18,7 @@ namespace Mathematics
 		// At least a 3x3 block of data points are needed to construct the
 		// estimates of the boundary derivatives.
 		MATHEMATICS_ASSERTION_0(xBound >= 3 && yBound >= 3 && F, "Invalid input\n");
-		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero && ySpacing > Math<Real>::sm_Zero, "Invalid input\n");
+		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0), "Invalid input\n");
 
 		mXBound = xBound;
 		mYBound = yBound;
@@ -305,23 +305,23 @@ namespace Mathematics
 		poly.A(0, 1) = FY[0][0];
 		poly.A(1, 1) = FXY[0][0];
 
-		b0 = (F[1][0] - poly(0, 0, dx, Math<Real>::sm_Zero))*fInvDX2;
-		b1 = (FX[1][0] - poly(1, 0, dx, Math<Real>::sm_Zero))*invDX;
+		b0 = (F[1][0] - poly(0, 0, dx, Math<Real>::GetValue(0)))*fInvDX2;
+		b1 = (FX[1][0] - poly(1, 0, dx, Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 0) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(3, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
 
-		b0 = (F[0][1] - poly(0, 0, Math<Real>::sm_Zero, dy))*fInvDY2;
-		b1 = (FY[0][1] - poly(0, 1, Math<Real>::sm_Zero, dy))*invDY;
+		b0 = (F[0][1] - poly(0, 0, Math<Real>::GetValue(0), dy))*fInvDY2;
+		b1 = (FY[0][1] - poly(0, 1, Math<Real>::GetValue(0), dy))*invDY;
 		poly.A(0, 2) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(0, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
 
-		b0 = (FY[1][0] - poly(0, 1, dx, Math<Real>::sm_Zero))*fInvDX2;
-		b1 = (FXY[1][0] - poly(1, 1, dx, Math<Real>::sm_Zero))*invDX;
+		b0 = (FY[1][0] - poly(0, 1, dx, Math<Real>::GetValue(0)))*fInvDX2;
+		b1 = (FXY[1][0] - poly(1, 1, dx, Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 1) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(3, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
 
-		b0 = (FX[0][1] - poly(1, 0, Math<Real>::sm_Zero, dy))*fInvDY2;
-		b1 = (FXY[0][1] - poly(1, 1, Math<Real>::sm_Zero, dy))*invDY;
+		b0 = (FX[0][1] - poly(1, 0, Math<Real>::GetValue(0), dy))*fInvDY2;
+		b1 = (FXY[0][1] - poly(1, 1, Math<Real>::GetValue(0), dy))*invDY;
 		poly.A(1, 2) = (static_cast<Real>(3))*b0 - b1;
 		poly.A(1, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
 
@@ -454,25 +454,25 @@ namespace Mathematics
 			xPow[3] = x * x*x;
 			break;
 		case 1:
-			xPow[0] = Math<Real>::sm_Zero;
+			xPow[0] = Math<Real>::GetValue(0);
 			xPow[1] = static_cast<Real>(1);
 			xPow[2] = (static_cast<Real>(2))*x;
 			xPow[3] = (static_cast<Real>(3))*x*x;
 			break;
 		case 2:
-			xPow[0] = Math<Real>::sm_Zero;
-			xPow[1] = Math<Real>::sm_Zero;
+			xPow[0] = Math<Real>::GetValue(0);
+			xPow[1] = Math<Real>::GetValue(0);
 			xPow[2] = static_cast<Real>(2);
 			xPow[3] = ((Real)6)*x;
 			break;
 		case 3:
-			xPow[0] = Math<Real>::sm_Zero;
-			xPow[1] = Math<Real>::sm_Zero;
-			xPow[2] = Math<Real>::sm_Zero;
+			xPow[0] = Math<Real>::GetValue(0);
+			xPow[1] = Math<Real>::GetValue(0);
+			xPow[2] = Math<Real>::GetValue(0);
 			xPow[3] = (Real)6;
 			break;
 		default:
-			return Math<Real>::sm_Zero;
+			return Math<Real>::GetValue(0);
 		}
 
 		Real yPow[4];
@@ -485,28 +485,28 @@ namespace Mathematics
 			yPow[3] = y * y*y;
 			break;
 		case 1:
-			yPow[0] = Math<Real>::sm_Zero;
+			yPow[0] = Math<Real>::GetValue(0);
 			yPow[1] = static_cast<Real>(1);
 			yPow[2] = (static_cast<Real>(2))*y;
 			yPow[3] = (static_cast<Real>(3))*y*y;
 			break;
 		case 2:
-			yPow[0] = Math<Real>::sm_Zero;
-			yPow[1] = Math<Real>::sm_Zero;
+			yPow[0] = Math<Real>::GetValue(0);
+			yPow[1] = Math<Real>::GetValue(0);
 			yPow[2] = static_cast<Real>(2);
 			yPow[3] = ((Real)6)*y;
 			break;
 		case 3:
-			yPow[0] = Math<Real>::sm_Zero;
-			yPow[1] = Math<Real>::sm_Zero;
-			yPow[2] = Math<Real>::sm_Zero;
+			yPow[0] = Math<Real>::GetValue(0);
+			yPow[1] = Math<Real>::GetValue(0);
+			yPow[2] = Math<Real>::GetValue(0);
 			yPow[3] = (Real)6;
 			break;
 		default:
-			return Math<Real>::sm_Zero;
+			return Math<Real>::GetValue(0);
 		}
 
-		Real p = Math<Real>::sm_Zero;
+		Real p = Math<Real>::GetValue(0);
 		for (int iy = 0; iy <= 3; ++iy)
 		{
 			for (int ix = 0; ix <= 3; ++ix)

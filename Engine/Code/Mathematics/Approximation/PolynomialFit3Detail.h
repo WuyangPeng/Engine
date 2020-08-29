@@ -51,7 +51,7 @@ void Mathematics::PolynomialFit3<Real>
 		for (auto xDegreeIndex = 0; xDegreeIndex <= xDegree; ++xDegreeIndex)
 		{
 			auto index = xDegreeIndex + xBound * yDegreeIndex;
-			inputVector[index] = Math<Real>::sm_Zero;
+			inputVector[index] = Math<Real>::GetValue(0);
 			for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
 			{
 				inputVector[index] += wSamples[samplesIndex] * xPower(samplesIndex, xDegreeIndex) * yPower(samplesIndex, yDegreeIndex);
@@ -62,7 +62,7 @@ void Mathematics::PolynomialFit3<Real>
 				for (auto innerXDegreeIndex = 0; innerXDegreeIndex <= xDegree; ++innerXDegreeIndex)
 				{
 					auto innerIndex = innerXDegreeIndex + xBound * innerYDegreeIndex;
-					matrix(index, innerIndex) = Math<Real>::sm_Zero;
+					matrix(index, innerIndex) = Math<Real>::GetValue(0);
 					for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
 					{
 						matrix(index, innerIndex) += xPower(samplesIndex, xDegreeIndex + innerXDegreeIndex) * yPower(samplesIndex, yDegreeIndex + innerYDegreeIndex);

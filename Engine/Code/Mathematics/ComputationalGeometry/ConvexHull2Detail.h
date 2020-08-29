@@ -179,7 +179,7 @@ Mathematics::ConvexHull1<Real>* Mathematics::ConvexHull2<Real>
 template <typename Real>
 Mathematics::ConvexHull2<Real>
 	::ConvexHull2(const System::TChar* filename)
-	:ConvexHull <Real>{ Real{ 0}, Math<Real>::sm_Zero, false, QueryType::Real }, mVertices{ 0 }, mSVertices{}, mQuery{ 0 }
+	:ConvexHull <Real>{ Real{ 0}, Math<Real>::GetValue(0), false, QueryType::Real }, mVertices{ 0 }, mSVertices{}, mQuery{ 0 }
 {
 	auto loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);

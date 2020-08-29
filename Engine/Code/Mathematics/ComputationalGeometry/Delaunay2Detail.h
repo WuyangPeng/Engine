@@ -467,7 +467,7 @@ bool Mathematics::Delaunay2<Real>
 template <typename Real>
 Mathematics::Delaunay2<Real>
 	::Delaunay2 (const System::TChar* filename)
-	:Delaunay<Real>{ 0, Math<Real>::sm_Zero, false, QueryType::Real }, mVertices{ 0 }, mSVertices{ 0 }, mQuery{ 0 }, mPath{ 0 }
+	:Delaunay<Real>{ 0, Math<Real>::GetValue(0), false, QueryType::Real }, mVertices{ 0 }, mSVertices{ 0 }, mQuery{ 0 }, mPath{ 0 }
 {
     bool loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);

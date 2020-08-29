@@ -11,15 +11,15 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/noncopyable.hpp>
+ 
 #include <string>
 
 CORE_TOOLS_EXPORT_SHARED_PTR(TestingInformationHelperImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+ 
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE TestingInformationHelper : private boost::noncopyable
+	class CORE_TOOLS_DEFAULT_DECLARE TestingInformationHelper 
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(TestingInformationHelper);

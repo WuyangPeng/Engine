@@ -26,9 +26,9 @@
 Rendering::LightImpl ::LightImpl(LightType type, float epsilon) 
     : m_Ambient{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } }, m_Diffuse{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } }, m_Specular{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } },
       m_Constant{ 1.0f }, m_Linear{ 0.0f }, m_Quadratic{ 0.0f },
-      m_Intensity{ 1.0f }, m_Angle{ Math::sm_PI }, m_CosAngle{ -1.0f },
-      m_SinAngle{ 0.0f }, m_Exponent{ 1.0f }, m_Position{ APoint::sm_Origin },
-      m_DirectionVector{ -AVector::sm_UnitZ }, m_UpVector{ AVector::sm_UnitY }, m_RightVector{ AVector::sm_UnitX },
+      m_Intensity{ 1.0f }, m_Angle{ Math::GetPI() }, m_CosAngle{ -1.0f },
+      m_SinAngle{ 0.0f }, m_Exponent{ 1.0f }, m_Position{ Mathematics::Pointf::g_Origin },
+      m_DirectionVector{ -Mathematics::Vectorf::g_UnitZ }, m_UpVector{ Mathematics::Vectorf::g_UnitY }, m_RightVector{ Mathematics::Vectorf::g_UnitX },
       m_LightType{ type }, m_Epsilon{ epsilon }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -39,7 +39,7 @@ bool Rendering::LightImpl ::IsValid() const noexcept
 {
     try
     {
-        if (0 < m_Angle && m_Angle <= Math::sm_PI &&
+        if (0 < m_Angle && m_Angle <= Math::GetPI() &&
             0 <= m_Constant && 0 <= m_Linear &&
             0 <= m_Quadratic && 0 <= m_Intensity &&
             Math::Approximate(m_CosAngle, Math::Cos(m_Angle), m_Epsilon) &&
@@ -82,7 +82,7 @@ Rendering::LightType Rendering::LightImpl ::GetType() const
 void Rendering::LightImpl ::SetAngle(float angle)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_1(0.0f < angle && angle <= Math::sm_PI, "Angle超出范围在SetAngle。\n");
+    RENDERING_ASSERTION_1(0.0f < angle && angle <= Math::GetPI(), "Angle超出范围在SetAngle。\n");
 
     m_Angle = angle;
     m_CosAngle = Math::Cos(angle);
@@ -252,7 +252,7 @@ void Rendering::LightImpl ::SetDirection(const AVector& direction)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto orthonormalBasis = GenerateOrthonormalBasis(direction, m_Epsilon);
+const auto orthonormalBasis = GenerateOrthonormalBasis(direction, m_Epsilon);
 
     m_UpVector = orthonormalBasis.GetUVector();
     m_RightVector = orthonormalBasis.GetVVector();

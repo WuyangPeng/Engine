@@ -23,19 +23,19 @@
 #include SYSTEM_WARNING_DISABLE(26426)
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2D<Real>
-	::sm_Zero{ Math::sm_Zero,Math::sm_Zero };
+	::sm_Zero{ Math::GetValue(0),Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2D<Real>
-	::sm_UnitX{ Math::sm_One,Math::sm_Zero };
+	::sm_UnitX{ Math::GetValue(1),Math::GetValue(0) };
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2D<Real>
-	::sm_UnitY{ Math::sm_Zero,Math::sm_One };
+	::sm_UnitY{ Math::GetValue(0),Math::GetValue(1) };
 
 template <typename Real>
 const Mathematics::Vector2D<Real> Mathematics::Vector2D<Real>
-	::sm_One{ Math::sm_One,Math::sm_One };
+	::sm_One{ Math::GetValue(1),Math::GetValue(1) };
 
 template <typename Real>
 Mathematics::Vector2D<Real>
@@ -203,7 +203,7 @@ bool Mathematics::Vector2D<Real>
 
 	auto length = Vector2DTools::VectorMagnitude(*this);
 
-	if (Math::FAbs(length - Math::sm_One) <= epsilon)
+	if (Math::FAbs(length - Math::GetValue(1)) <= epsilon)
 		return true;
 	else
 		return false;
@@ -280,7 +280,7 @@ Mathematics::Vector2D<Real>& Mathematics::Vector2D<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (Math::sm_ZeroTolerance < Math::FAbs(rhs))
+	if (Math::GetZeroTolerance() < Math::FAbs(rhs))
 	{
 		m_Tuple[0] /= rhs;
 		m_Tuple[1] /= rhs;
@@ -309,9 +309,9 @@ Mathematics::Vector2D<Real>
 
 	if (epsilon < Math::FAbs(det))
 	{
-		Tuple3 bary{ Vector2DTools::DotPerp(difference[2], difference[1]) / det, Vector2DTools::DotPerp(difference[0], difference[2]) / det, Math::sm_Zero };
+		Tuple3 bary{ Vector2DTools::DotPerp(difference[2], difference[1]) / det, Vector2DTools::DotPerp(difference[0], difference[2]) / det, Math::GetValue(0) };
 
-		bary[2] = Math::sm_One - bary[0] - bary[1];
+		bary[2] = Math::GetValue(1) - bary[0] - bary[1];
 
 		return BarycentricCoordinates{ true,bary };
 	}

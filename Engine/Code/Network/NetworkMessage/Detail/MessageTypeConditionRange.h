@@ -23,7 +23,7 @@ namespace Network
 		MessageTypeConditionRange(int beginVersion, int endVersion);
 		 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	public:
                 bool IsVersionsConform(int version) const noexcept override;

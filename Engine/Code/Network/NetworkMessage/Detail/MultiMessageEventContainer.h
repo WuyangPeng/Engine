@@ -29,11 +29,11 @@ namespace Network
 		MultiMessageEventContainer(MultiMessageEventContainer&& rhs) noexcept;
 		MultiMessageEventContainer& operator=(MultiMessageEventContainer&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  void Insert(const NetworkMessageEventSharedPtr& messageEvent) override;
 		  void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority) override;
-		  void Remove(const NetworkMessageEventSharedPtr& messageEvent) override;
+		  void Remove(const NetworkMessageEventSharedPtr& messageEvent) noexcept override;
 
 		  void OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) override;
 

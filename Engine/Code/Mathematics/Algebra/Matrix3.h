@@ -123,7 +123,7 @@ namespace Mathematics
         // 其它运算
         const Matrix3 TimesDiagonal(const Vector3D& diagonal) const;  // M * D
         const Matrix3 DiagonalTimes(const Vector3D& diagonal) const;  // D * M
-        const Matrix3 Inverse(const Real epsilon = Math::sm_ZeroTolerance) const;
+        const Matrix3 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
         const Matrix3 Adjoint() const;
         Real Determinant() const;
 
@@ -141,7 +141,7 @@ namespace Mathematics
         // D = diag(d0,d1,d2)是一个对角矩阵，这里对角线项为d0、d1和d2。
         // 特征向量u[i]对应的特征向量d[i]。特征值排序为d0 <= d1 <= d2。
         // 返回值的第一部分为rotation，第二部分为diagonal。
-        const Matrix3EigenDecomposition EigenDecomposition(const Real epsilon = Math::sm_ZeroTolerance) const;
+        const Matrix3EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const;
 
         // 从欧拉角创建旋转矩阵
         void MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle);

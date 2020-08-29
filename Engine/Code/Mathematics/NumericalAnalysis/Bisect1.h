@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Bisect1Root.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 // 二分法解方程
 namespace Mathematics
@@ -26,7 +26,7 @@ namespace Mathematics
 		using Bisect1Root = Bisect1Root<Real>;
 
 	public:
-		Bisect1(Function function, int maxLevel, Real tolerance = Math<Real>::sm_ZeroTolerance);
+		Bisect1(Function function, int maxLevel, Real tolerance = Math<Real>::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

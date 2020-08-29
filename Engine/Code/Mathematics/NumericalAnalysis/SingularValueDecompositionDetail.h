@@ -58,9 +58,9 @@ void Mathematics::SingularValueDecomposition<Real>
 		// 创建Householder向量对A的部分列
 		for (auto row = 0; row < column; ++row)
 		{
-			vector[row] = Math<Real>::sm_Zero;
+			vector[row] = Math<Real>::GetValue(0);
 		}
-		auto length = Math<Real>::sm_Zero;
+		auto length = Math<Real>::GetValue(0);
 		for (auto row = column; row < numRows; ++row)
 		{
 			vector[row] = m_Diagonal[row][column];
@@ -68,7 +68,7 @@ void Mathematics::SingularValueDecomposition<Real>
 		}
 		length = Math<Real>::Sqrt(length);
 		auto beta = vector[column] + Math<Real>::Sign(vector[column]) * length;
-		if (Math<Real>::sm_ZeroTolerance < Math<Real>::FAbs(beta))
+		if (Math<Real>::GetZeroTolerance() < Math<Real>::FAbs(beta))
 		{
 			for (int i = column + 1; i < numRows; ++i)
 			{
@@ -105,7 +105,7 @@ typename const Mathematics::SingularValueDecomposition<Real>::VariableLengthVect
 	auto householderVector = vector;
 	auto length = householderVector.Length();
 	auto beta = vector[0] + Math<Real>::Sign(vector[0]) * length;
-	if (Math<Real>::sm_ZeroTolerance < Math<Real>::FAbs(beta))
+	if (Math<Real>::GetZeroTolerance() < Math<Real>::FAbs(beta))
 	{
 		for (auto i = 1; i < householderVector.GetSize(); ++i)
 		{

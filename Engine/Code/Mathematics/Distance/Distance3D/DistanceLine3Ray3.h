@@ -36,7 +36,7 @@ namespace Mathematics
 		DistanceLine3Ray3(const Line3& line, const Ray3& ray);
 		virtual ~DistanceLine3Ray3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Line3 GetLine() const;
 		const Ray3 GetRay() const;

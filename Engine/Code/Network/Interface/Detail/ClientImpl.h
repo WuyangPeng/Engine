@@ -27,7 +27,7 @@ namespace Network
         ClientImpl(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager) noexcept;
  
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         virtual uint64_t Connect();
         virtual void AsyncConnect();

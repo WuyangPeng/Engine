@@ -19,7 +19,9 @@
 
 using std::move;
 using std::make_shared;
- 
+ #include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Framework::CameraModelMiddleLayer
 	::CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
 	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>() }, m_TimeDelta{ System::g_Microseconds }
@@ -211,3 +213,4 @@ void Framework::CameraModelMiddleLayer
 
 
 
+#include STSTEM_WARNING_POP

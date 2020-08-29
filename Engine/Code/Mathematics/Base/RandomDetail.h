@@ -28,7 +28,7 @@ Real Mathematics::Random<Real>
 
 	auto ratio = (static_cast<Real>(rand())) / (static_cast<Real>(RAND_MAX));
 
-	MATHEMATICS_ASSERTION_3(Math::sm_Zero <= ratio && ratio <= Math::sm_One, "ratio值必须在区间[0,1]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= ratio && ratio <= Math::GetValue(1), "ratio值必须在区间[0,1]！\n");
 
 	return ratio;
 }
@@ -37,9 +37,9 @@ template <typename Real>
 Real Mathematics::Random<Real>
 	::SymmetricRandom(uint32_t seed)
 {
-	auto ratio = (Math::sm_Two * UnitRandom(seed)) - Math::sm_One;
+	auto ratio = (Math::GetValue(2) * UnitRandom(seed)) - Math::GetValue(1);
 
-	MATHEMATICS_ASSERTION_3(Math::sm_NegativeOne <= ratio && ratio <= Math::sm_One, "ratio值必须在区间[-1,1]！\n");
+	MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= ratio && ratio <= Math::GetValue(1), "ratio值必须在区间[-1,1]！\n");
 
 	return ratio;
 }

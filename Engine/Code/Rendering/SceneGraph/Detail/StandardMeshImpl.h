@@ -8,10 +8,10 @@
 #define RENDERING_SCENE_GRAPH_STANDARD_MESH_IMPL_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 

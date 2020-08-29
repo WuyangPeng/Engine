@@ -137,7 +137,7 @@ const std::vector<typename Mathematics::Tetrahedron3<Real>::Plane3> Mathematics:
 	normal[3] = Vector3DTools::UnitCrossProduct(edge21, edge31);  // <v1,v2,v3>
 
 	auto det = Vector3DTools::DotProduct(edge10, normal[3]);
-	if (det < Math::sm_Zero)
+	if (det < Math::GetValue(0))
 	{
 		// 法线是指向内部点，改变他们的方向。
 		for (auto i = 0; i < 4; ++i)

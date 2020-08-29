@@ -28,7 +28,7 @@ namespace Mathematics
 		OdeEuler(int dimension, Real step, typename Function function, const UserDataType* userData);
 		virtual ~OdeEuler();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 void Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut) override;
 	};

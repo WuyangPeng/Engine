@@ -27,7 +27,7 @@ namespace Network
 	public:
 		ACEMainManager(); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	public:
 		void Run() override;

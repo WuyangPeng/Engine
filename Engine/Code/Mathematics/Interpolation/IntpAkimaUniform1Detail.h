@@ -15,7 +15,7 @@ namespace Mathematics
 	IntpAkimaUniform1<Real>::IntpAkimaUniform1(int quantity, Real xMin,Real xSpacing, Real* F)
 		:IntpAkima1<Real>{ quantity, F }
 	{
-		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero, "Spacing must be positive\n");
+		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0), "Spacing must be positive\n");
 
 		mXMin = xMin;
 		mXMax = xMin + xSpacing * (quantity - 1);

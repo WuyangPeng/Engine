@@ -47,7 +47,7 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 
 	// Perform calculations in octant with nonnegative Real and U coordinates.
 	auto rSignChange = false;
-	if (test.GetXCoordinate() < Math<Real>::sm_Zero)
+	if (test.GetXCoordinate() < Math<Real>::GetValue(0))
 	{
 		rSignChange = true;
 		test.SetXCoordinate(-test.GetXCoordinate());
@@ -58,7 +58,7 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 	}
 
 	auto uSignChange = false;
-	if (test.GetYCoordinate() < Math<Real>::sm_Zero)
+	if (test.GetYCoordinate() < Math<Real>::GetValue(0))
 	{
 		uSignChange = true;
 		test.SetYCoordinate(-test.GetYCoordinate());
@@ -89,14 +89,14 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 	// Voronoi region of the vertices, edges, and faces of the frustum that
 	// the test point lives.
 	Vector3D closest;
-	auto rDot = Math<Real>::sm_Zero;
-	auto uDot = Math<Real>::sm_Zero;
-	auto rdDot = Math<Real>::sm_Zero;
-	auto udDot = Math<Real>::sm_Zero;
-	auto rudDot = Math<Real>::sm_Zero;
-	auto rEdgeDot = Math<Real>::sm_Zero;
-	auto uEdgeDot = Math<Real>::sm_Zero;
-	auto t = Math<Real>::sm_Zero;
+	auto rDot = Math<Real>::GetValue(0);
+	auto uDot = Math<Real>::GetValue(0);
+	auto rdDot = Math<Real>::GetValue(0);
+	auto udDot = Math<Real>::GetValue(0);
+	auto rudDot = Math<Real>::GetValue(0);
+	auto rEdgeDot = Math<Real>::GetValue(0);
+	auto uEdgeDot = Math<Real>::GetValue(0);
+	auto t = Math<Real>::GetValue(0);
 	if (test.GetZCoordinate() >= dmax)
 	{
 		if (test.GetXCoordinate() <= rmax)
@@ -206,7 +206,7 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 			{
 				rudDot = rmin * test.GetXCoordinate() + umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
 				rEdgeDot = umin * rudDot - minRUDDot * test.GetYCoordinate();
-				if (rEdgeDot >= Math<Real>::sm_Zero)
+				if (rEdgeDot >= Math<Real>::GetValue(0))
 				{
 					rdDot = rmin * test.GetXCoordinate() + dmin * test.GetZCoordinate();
 					if (rdDot >= maxRDDot)
@@ -236,7 +236,7 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 				else
 				{
 					uEdgeDot = rmin * rudDot - minRUDDot * test.GetXCoordinate();
-					if (uEdgeDot >= Math<Real>::sm_Zero)
+					if (uEdgeDot >= Math<Real>::GetValue(0))
 					{
 						udDot = umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
 						if (udDot >= maxUDDot)
@@ -296,9 +296,9 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 	{
 		rDot = dmin * test.GetXCoordinate() - rmin * test.GetZCoordinate();
 		uDot = dmin * test.GetYCoordinate() - umin * test.GetZCoordinate();
-		if (rDot <= Math<Real>::sm_Zero)
+		if (rDot <= Math<Real>::GetValue(0))
 		{
-			if (uDot <= Math<Real>::sm_Zero)
+			if (uDot <= Math<Real>::GetValue(0))
 			{
 				// point inside frustum
 				closest = test;
@@ -325,7 +325,7 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 		}
 		else
 		{
-			if (uDot <= Math<Real>::sm_Zero)
+			if (uDot <= Math<Real>::GetValue(0))
 			{
 				rdDot = rmin * test.GetXCoordinate() + dmin * test.GetZCoordinate();
 				if (rdDot >= maxRDDot)
@@ -348,7 +348,7 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 			{
 				rudDot = rmin * test.GetXCoordinate() + umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
 				rEdgeDot = umin * rudDot - minRUDDot * test.GetYCoordinate();
-				if (rEdgeDot >= Math<Real>::sm_Zero)
+				if (rEdgeDot >= Math<Real>::GetValue(0))
 				{
 					rdDot = rmin * test.GetXCoordinate() + dmin * test.GetZCoordinate();
 					if (rdDot >= maxRDDot)
@@ -370,7 +370,7 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 				else
 				{
 					uEdgeDot = rmin * rudDot - minRUDDot * test.GetXCoordinate();
-					if (uEdgeDot >= Math<Real>::sm_Zero)
+					if (uEdgeDot >= Math<Real>::GetValue(0))
 					{
 						udDot = umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
 						if (udDot >= maxUDDot)
@@ -431,7 +431,7 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 	mClosestPoint1 = mFrustum.GetOrigin() + closest.GetXCoordinate()*mFrustum.GetRightVector() +
 					 closest.GetYCoordinate()*mFrustum.GetUpVector() + closest.GetZCoordinate()*mFrustum.GetDirectionVector();
 
-	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(diff), Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(diff), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 

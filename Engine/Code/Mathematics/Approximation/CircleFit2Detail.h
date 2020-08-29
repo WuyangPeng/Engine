@@ -38,7 +38,7 @@ void Mathematics::CircleFit2<Real>
 	// 猜测初始中心。
 	if (initialCenterIsAverage)
 	{
-		m_Circle.SetCircle(average, Math<Real>::sm_Zero);
+		m_Circle.SetCircle(average, Math<Real>::GetValue(0));
 	}
 	else
 	{
@@ -56,8 +56,8 @@ void Mathematics::CircleFit2<Real>
 
 		auto circleDifference = m_Circle.GetCenter() - current;
 
-		if (Math<Real>::FAbs(circleDifference[0]) <= Math<Real>::sm_ZeroTolerance &&
-			Math<Real>::FAbs(circleDifference[1]) <= Math<Real>::sm_ZeroTolerance)
+		if (Math<Real>::FAbs(circleDifference[0]) <= Math<Real>::GetZeroTolerance() &&
+			Math<Real>::FAbs(circleDifference[1]) <= Math<Real>::GetZeroTolerance())
 		{
 			return;
 		}
@@ -93,7 +93,7 @@ void Mathematics::CircleFit2<Real>
 	auto numPoints = boost::numeric_cast<int>(points.size());
 
 	// 计算平均值L, dL/da, dL/db。
-	auto lengthAverage = Math<Real>::sm_Zero;
+	auto lengthAverage = Math<Real>::GetValue(0);
 	Vector2D derLenghtAverage;
 
 	for (auto i = 0; i < numPoints; ++i)
@@ -101,7 +101,7 @@ void Mathematics::CircleFit2<Real>
 		auto difference = points[i] - m_Circle.GetCenter();
 
 		auto length = Vector2DTools<Real>::VectorMagnitude(difference);
-		if (Math<Real>::sm_ZeroTolerance < length)
+		if (Math<Real>::GetZeroTolerance() < length)
 		{
 			lengthAverage += length;
 			derLenghtAverage -= difference / length;

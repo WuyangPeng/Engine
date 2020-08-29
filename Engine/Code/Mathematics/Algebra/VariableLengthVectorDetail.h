@@ -31,7 +31,8 @@
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26434)
 
-
+ 
+    #include SYSTEM_WARNING_DISABLE(26456)
 template <typename Real>
 Mathematics::VariableLengthVector<Real>
 	::VariableLengthVector(int size)
@@ -315,7 +316,7 @@ Real Mathematics::VariableLengthVector<Real>
 
 	CoreTools::DoNothing();
 
-	auto squaredLength = Math::sm_Zero;
+	auto squaredLength = Math::GetValue(0);
 
 	for (auto i = 0; i < m_Size; ++i)
 	{
@@ -348,7 +349,7 @@ void Mathematics::VariableLengthVector<Real>
 
 		for (auto i = 0; i < m_Size; ++i)
 		{
-			m_Tuple[i] = Math::sm_Zero;
+			m_Tuple[i] = Math::GetValue(0);
 		}
 	}
 }
@@ -403,7 +404,7 @@ Real Mathematics
 {
 	MATHEMATICS_ASSERTION_1(lhs.GetSize() == rhs.GetSize(), "向量大小不同！");
 
-	auto dotProduct = Math<Real>::sm_Zero;
+	auto dotProduct = Math<Real>::GetValue(0);
 
 	for (auto i = 0; i < lhs.GetSize(); ++i)
 	{

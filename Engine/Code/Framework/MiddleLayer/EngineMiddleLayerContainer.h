@@ -84,7 +84,7 @@ namespace Framework
 		EngineMiddleLayerContainer(EngineMiddleLayerContainer&& rhs) noexcept;
 		EngineMiddleLayerContainer& operator=(EngineMiddleLayerContainer&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager) override;
 		void SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager) override;

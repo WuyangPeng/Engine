@@ -15,7 +15,7 @@ Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	::StaticTestIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere)
 	: mSegment{ segment }, mSphere{ sphere }
 {
-     ZeroThreshold = Math::sm_ZeroTolerance;
+     ZeroThreshold = Math::GetZeroTolerance();
 	 Test();
 }
 
@@ -41,7 +41,7 @@ void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
 	auto a1 = Vector3DTools::DotProduct(mSegment.GetDirection(),diff);
 	auto discr = a1*a1 - a0;
-    if (discr < Math<Real>::sm_Zero)
+    if (discr < Math<Real>::GetZero())
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -51,13 +51,13 @@ void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	auto tmp1 = (static_cast<Real>(2))*a1*mSegment.GetExtent();
 	auto qm = tmp0 - tmp1;
 	auto qp = tmp0 + tmp1;
-    if (qm*qp <= Math<Real>::sm_Zero)
+    if (qm*qp <= Math<Real>::GetZero())
     {
 		this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-	if (qm > Math<Real>::sm_Zero && Math::FAbs(a1) < mSegment.GetExtent())
+	if (qm > Math<Real>::GetZero() && Math::FAbs(a1) < mSegment.GetExtent())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}

@@ -37,7 +37,7 @@ namespace Rendering
 		   RenderTarget( RenderTarget&&) = default;
 		  RenderTarget& operator=( RenderTarget&&) = default;
 		  
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
+		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(RenderTarget);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;

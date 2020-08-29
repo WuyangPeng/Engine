@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/Vector3D.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
 
@@ -29,7 +29,7 @@ namespace Mathematics
     public:
         // 线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t是任意实数。
         // 用户必须确保D是单位长度。
-        Line3(const Vector3D& origin, const Vector3D& direction, const Real epsilon = Math::sm_ZeroTolerance) noexcept;
+        Line3(const Vector3D& origin, const Vector3D& direction, const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

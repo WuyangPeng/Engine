@@ -1,0 +1,15 @@
+深入理解计算机系统 （Computer Systems:A Programmers's Perspective）
+（第3版）
+
+官方网站：
+http://csapp.cs.cmu.edu
+ 
+☆ 
+作者： Randal E.Bryant、David R.O'Hallaron
+
+知识点 
+1.	计算机基础知识。
+2.	计算机基础知识习题。
+
+代码 
+1.  书籍代码。

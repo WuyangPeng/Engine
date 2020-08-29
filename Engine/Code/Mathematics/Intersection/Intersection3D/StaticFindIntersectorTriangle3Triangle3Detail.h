@@ -520,7 +520,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	Vector2D<Real> save;
 	auto edge0 = projTri0.GetVertex()[1] - projTri0.GetVertex()[0];
 	auto edge1 = projTri0.GetVertex()[2] - projTri0.GetVertex()[0];
-	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Math<Real>::sm_Zero)
+	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Math<Real>::GetZero())
 	{
 		// Triangle is clockwise, reorder it.
 		projTri0 = Triangle2<Real>{ projTri0V[0],projTri0V[2],projTri0V[1] };
@@ -528,7 +528,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 
 	edge0 = projTri1.GetVertex()[1] - projTri1.GetVertex()[0];
 	edge1 = projTri1.GetVertex()[2] - projTri1.GetVertex()[0];
-	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Math<Real>::sm_Zero)
+	if (Vector2DTools<Real>::DotPerp(edge0,edge1) < Math<Real>::GetZero())
 	{
 		// Triangle is clockwise, reorder it.
 		projTri1 = Triangle2<Real>{ projTri1V[0],projTri1V[2],projTri1V[1] };
@@ -587,7 +587,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 
 	if (vmax < umin) // V on left of U
 	{
-		if (speed <= Math<Real>::sm_Zero) // V moving away from U
+		if (speed <= Math<Real>::GetZero()) // V moving away from U
 		{
 			return false;
 		}
@@ -620,7 +620,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (umax < vmin)   // V on right of U
 	{
-		if (speed >= Math<Real>::sm_Zero) // V moving away from U
+		if (speed >= Math<Real>::GetZero()) // V moving away from U
 		{
 			return false;
 		}
@@ -654,7 +654,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else // V and U on overlapping interval
 	{
-		if (speed > Math<Real>::sm_Zero)
+		if (speed > Math<Real>::GetZero())
 		{
 			// Find last time of contact on this axis.
 			t = (umax - vmin)/speed;
@@ -669,7 +669,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 				return false; 
 			}
 		}
-		else if (speed < Math<Real>::sm_Zero)
+		else if (speed < Math<Real>::GetZero())
 		{
 			// Find last time of contact on this axis.
 			t = (umin - vmax)/speed;
@@ -700,7 +700,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 
 	if (VC.mMax < UC.mMin) // V on left of U
 	{
-		if (speed <= Math<Real>::sm_Zero) // V moving away from U
+		if (speed <= Math<Real>::GetZero()) // V moving away from U
 		{
 			return false;
 		}
@@ -739,7 +739,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (UC.mMax < VC.mMin)   // V on right of U
 	{
-		if (speed >= Math<Real>::sm_Zero) // V moving away from U
+		if (speed >= Math<Real>::GetZero()) // V moving away from U
 		{
 			return false;
 		}
@@ -778,7 +778,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else // V and U on overlapping interval
 	{
-		if (speed > Math<Real>::sm_Zero)
+		if (speed > Math<Real>::GetZero())
 		{
 			// Find last time of contact on this axis.
 			t = (UC.mMax - VC.mMin)/speed;
@@ -793,7 +793,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 				return false;
 			}
 		}
-		else if (speed < Math<Real>::sm_Zero)
+		else if (speed < Math<Real>::GetZero())
 		{
 			// Find last time of contact on this axis.
 			t = (UC.mMin - VC.mMax)/speed;
@@ -1084,14 +1084,14 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	// and s = N*DxE1/N*N.
 	auto delta = V0 - U0;
 	auto s = Vector3DTools::DotProduct(normal,(Vector3DTools::CrossProduct(delta,edge1)/Vector3DTools::VectorMagnitudeSquared( normal)));
-	if (s < Math<Real>::sm_Zero)
+	if (s < Math<Real>::GetZero())
 	{
-		MATHEMATICS_ASSERTION_0(s >= -Math::sm_ZeroTolerance,"Unexpected s value.\n");
-		s = Math<Real>::sm_Zero;
+		MATHEMATICS_ASSERTION_0(s >= -Math::GetZeroTolerance(),"Unexpected s value.\n");
+		s = Math<Real>::GetZero();
 	}
 	else if (s > static_cast<Real>(1))
 	{
-		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::sm_ZeroTolerance,"Unexpected s value.\n");
+		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::GetZeroTolerance(),"Unexpected s value.\n");
 		s = static_cast<Real>(1);
 	}
 

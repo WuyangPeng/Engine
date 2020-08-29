@@ -29,7 +29,7 @@ namespace Mathematics
 		explicit Query3(const std::vector<Vector3D>& vertices);
 		virtual ~Query3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 QueryType GetType() const override;
 

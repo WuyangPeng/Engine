@@ -11,7 +11,7 @@
 
 #include "Bisect3Root.h"
 #include "NumericalAnalysisFwd.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 namespace Mathematics
 {
@@ -28,7 +28,7 @@ namespace Mathematics
 
 	public:
 		Bisect3(Function firstFunction, Function secondFunction, Function thirdFunction,
-				int maxLevel, Real tolerance = Math<Real>::sm_ZeroTolerance);
+				int maxLevel, Real tolerance = Math<Real>::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

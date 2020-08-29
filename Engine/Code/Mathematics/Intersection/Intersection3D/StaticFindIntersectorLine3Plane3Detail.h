@@ -71,7 +71,7 @@ void Mathematics::StaticFindIntersectorLine3Plane3<Real>
 {
 	auto DdN = Vector3DTools::DotProduct(m_Line.GetDirection(), m_Plane.GetNormal());
 	auto signedDistance = m_Plane.DistanceTo(m_Line.GetOrigin());
-	if (Math::FAbs(DdN) > Math::sm_ZeroTolerance)
+	if (Math::FAbs(DdN) > Math::GetZeroTolerance())
 	{
 		// The line is not parallel to the plane, so they must intersect.
 		m_LineParameter = -signedDistance / DdN;
@@ -82,11 +82,11 @@ void Mathematics::StaticFindIntersectorLine3Plane3<Real>
 
 	// The Line and plane are parallel.  Determine if they are numerically
 	// close enough to be coincident.
-	if (Math::FAbs(signedDistance) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(signedDistance) <= Math::GetZeroTolerance())
 	{
 		// The line is coincident with the plane, so choose t = 0 for the
 		// parameter.
-		m_LineParameter = Math<Real>::sm_Zero;
+		m_LineParameter = Math<Real>::GetZero();
 		this->SetIntersectionType(IntersectionType::Line);
 
 		return;

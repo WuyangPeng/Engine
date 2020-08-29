@@ -26,7 +26,7 @@ namespace Network
 		PriorityMessageEventContainer();
 		 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		  void Insert(const NetworkMessageEventSharedPtr& messageEvent) override;
 		  void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority) override;

@@ -94,7 +94,7 @@ typename const Mathematics::DistTriangle3Rectangle3<Real>::DistanceResult Mathem
 			}
 		}
 	}
-	return DistanceResult{ sqrDist, Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDist, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>

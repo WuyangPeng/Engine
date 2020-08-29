@@ -19,6 +19,7 @@ using std::make_shared;
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26496)
 CORE_TOOLS_RTTI_DEFINE(Rendering, SurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SurfacePatch);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, SurfacePatch); 
@@ -204,8 +205,8 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 	float a0 = curvatureTensor(0,1) - principalCurvature0 * metricTensor(0,1);
 	float a1 = principalCurvature0 * metricTensor(0,0) - curvatureTensor(0,0);
 	float length = Mathematics::Mathf::Sqrt(a0 * a0 + a1 * a1);
-	AVector principalDirection0;
-	if (Mathematics::Mathf::sm_ZeroTolerance <= length)
+        AVector principalDirection0{ Mathematics ::Vectorf::g_Zero };
+	if (Mathematics::Mathf::GetZeroTolerance() <= length)
 	{
 		principalDirection0 = a0 * derivativesU + a1 * derivativesV;
 	}
@@ -214,7 +215,7 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 		a0 = curvatureTensor(1,1) - principalCurvature0 * metricTensor(1,1);
 		a1 = principalCurvature0*metricTensor(0,1) - curvatureTensor(0,1);
 		length = Mathematics::Mathf::Sqrt(a0 * a0 + a1 * a1);
-		if (Mathematics::Mathf::sm_ZeroTolerance <= length)
+		if (Mathematics::Mathf::GetZeroTolerance() <= length)
 		{
 			principalDirection0 = a0 * derivativesU + a1 * derivativesV;
 		}

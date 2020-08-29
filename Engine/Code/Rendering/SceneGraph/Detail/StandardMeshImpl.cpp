@@ -26,6 +26,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26496)
 Rendering::StandardMeshImpl ::StandardMeshImpl(const VertexFormatSmartPointer& vertexFormat, bool isStatic, bool inside, const Transform* transform)
     : m_VertexFormat{ vertexFormat }, m_Transform{ transform != nullptr ? *transform : Transform() }, m_IsStatic{ isStatic },
       m_Inside{ inside }, m_HasNormals{ false }, m_Usage{ isStatic ? BufferUsage::Static : BufferUsage::Dynamic }
@@ -259,7 +260,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Disk(in
     const auto radialSamplesInvertor = 1.0f / static_cast<float>(radialSamples);
     for (auto radialIndex = 0; radialIndex < radialSamples; ++radialIndex)
     {
-        auto angle = Math::sm_TwoPI * radialSamplesInvertor * radialIndex;
+        auto angle = Math::GetTwoPI() * radialSamplesInvertor * radialIndex;
         auto angleCos = Math::Cos(angle);
         auto angleSin = Math::Sin(angle);
         APoint radial{ angleCos, angleSin, 0.0f };
@@ -429,7 +430,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     vector<float> angleSin(radialSamples + 1);
     for (auto radialIndex = 0; radialIndex < radialSamples; ++radialIndex)
     {
-        auto angle = Math::sm_TwoPI * radialSamplesInvertor * radialIndex;
+        auto angle = Math::GetTwoPI() * radialSamplesInvertor * radialIndex;
         angleCos[radialIndex] = Math::Cos(angle);
         angleSin[radialIndex] = Math::Sin(angle);
     }
@@ -544,7 +545,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
     auto maxDist = Math::Sqrt(radius * radius + height * height);
-    mesh->GetModelBound().SetCenter(APoint::sm_Origin);
+    mesh->GetModelBound().SetCenter(Mathematics::Pointf::g_Origin);
     mesh->GetModelBound().SetRadius(maxDist);
 
     return mesh;
@@ -595,7 +596,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
     auto maxDist = Math::Sqrt(radius * radius + height * height);
-    mesh->GetModelBound().SetCenter(APoint::sm_Origin);
+    mesh->GetModelBound().SetCenter(Mathematics::Pointf::g_Origin);
     mesh->GetModelBound().SetRadius(maxDist);
 
     return mesh;
@@ -629,7 +630,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Sphere(
 
     for (auto radialSamplesIndex = 0; radialSamplesIndex < radialSamples; ++radialSamplesIndex)
     {
-        auto angle = Math::sm_TwoPI * radialSamplesInvertor * radialSamplesIndex;
+        auto angle = Math::GetTwoPI() * radialSamplesInvertor * radialSamplesIndex;
         angleCos[radialSamplesIndex] = Math::Cos(angle);
         angleSin[radialSamplesIndex] = Math::Sin(angle);
     }
@@ -841,7 +842,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Sphere(
     // 重置边界使用真实的信息。
     TrianglesMeshSmartPointer mesh{ NEW0 TrianglesMesh(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 
-    mesh->GetModelBound().SetCenter(APoint::sm_Origin);
+    mesh->GetModelBound().SetCenter(Mathematics::Pointf::g_Origin);
     mesh->GetModelBound().SetRadius(radius);
 
     return mesh;
@@ -871,7 +872,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Torus(i
     {
         // 计算在规定的角度圆环的圆心。
         const auto circleFraction = circleIndex * circleSamplesInvertor;  // 在 [0,1)
-        auto theta = Math::sm_TwoPI * circleFraction;
+        auto theta = Math::GetTwoPI() * circleFraction;
         auto cosTheta = Math::Cos(theta);
         auto sinTheta = Math::Sin(theta);
         APoint radial{ cosTheta, sinTheta, 0.0f };
@@ -882,7 +883,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Torus(i
         for (auto radialIndex = 0; radialIndex < radialSamples; ++radialIndex)
         {
             const auto radialFraction = radialIndex * radialSamplesInvertor;  // in [0,1)
-            auto phi = Math::sm_TwoPI * radialFraction;
+            auto phi = Math::GetTwoPI() * radialFraction;
             auto cosPhi = Math::Cos(phi);
             auto sinPhi = Math::Sin(phi);
             auto normal = cosPhi * radial - sinPhi * APoint(0.0f, 0.0f, -1.0f);
@@ -911,12 +912,12 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Torus(i
             ++totalIndex;
         }
 
-        auto position = vertexBufferAccessor.GetPosition<APoint>(save);
+const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
         vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, position);
 
         if (m_HasNormals)
         {
-            auto normal = vertexBufferAccessor.GetNormal<AVector>(save);
+            const auto normal = vertexBufferAccessor.GetNormal<AVector>(save);
             vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
         }
 
@@ -934,12 +935,12 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Torus(i
     // 重复圆柱体两端以形成一个环面。
     for (auto radialIndex = 0; radialIndex <= radialSamples; ++radialIndex)
     {
-        auto position = vertexBufferAccessor.GetPosition<APoint>(radialIndex);
+        const auto position = vertexBufferAccessor.GetPosition<APoint>(radialIndex);
         vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, position);
 
         if (m_HasNormals)
         {
-            auto normal = vertexBufferAccessor.GetNormal<AVector>(radialIndex);
+            const auto normal = vertexBufferAccessor.GetNormal<AVector>(radialIndex);
             vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
         }
 
@@ -1001,7 +1002,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Torus(i
     // 重置边界使用真实的信息。
     TrianglesMeshSmartPointer mesh{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 
-    mesh->GetModelBound().SetCenter(APoint::sm_Origin);
+    mesh->GetModelBound().SetCenter(Mathematics::Pointf::g_Origin);
     mesh->GetModelBound().SetRadius(outerRadius);
 
     return mesh;
@@ -1515,14 +1516,14 @@ void Rendering::StandardMeshImpl ::CreatePlatonicTextures(const VertexBufferAcce
                 Vector2D textures;
                 if (Math::FAbs(position[2]) < 1.0f)
                 {
-                    textures[0] = 0.5f * (1.0f + Math::ATan2(position[1], position[0]) * Math::sm_InversePI);
+                    textures[0] = 0.5f * (1.0f + Math::ATan2(position[1], position[0]) * Math::GetInversePI());
                 }
                 else
                 {
                     textures[0] = 0.5f;
                 }
 
-                textures[1] = Math::ACos(position[2]) * Math::sm_InversePI;
+                textures[1] = Math::ACos(position[2]) * Math::GetInversePI();
 
                 vertexBuffer->SetTextureCoord(vertexBufferAccessor, i, textures, unit);
             }

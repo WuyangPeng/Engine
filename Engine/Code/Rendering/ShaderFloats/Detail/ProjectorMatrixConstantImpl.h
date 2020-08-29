@@ -26,7 +26,7 @@ namespace Rendering
 		ProjectorMatrixConstantImpl();
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 	
 		  void Load(BufferSource& source) override;
 		  void Save(BufferTarget& target) const override;

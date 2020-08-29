@@ -46,7 +46,7 @@ typename const Mathematics::DistRay3Box3<Real>::DistanceResult Mathematics::Dist
 	auto sqrDistance = queryLB.GetSquared();
 	auto lineParameter = sqrDistance.GetLhsParameter();
 
-	if (lineParameter >= Math<Real>::sm_Zero)
+	if (lineParameter >= Math<Real>::GetValue(0))
 	{
 		mClosestPoint0 = sqrDistance.GetLhsClosestPoint();
 		mClosestPoint1 = sqrDistance.GetRhsClosestPoint();
@@ -59,7 +59,7 @@ typename const Mathematics::DistRay3Box3<Real>::DistanceResult Mathematics::Dist
 		mClosestPoint1 = sqrDistance.GetRhsClosestPoint();
 	}
 
-	return DistanceResult{ sqrDistance.GetDistance(), Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDistance.GetDistance(), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 template <typename Real>

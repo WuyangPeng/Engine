@@ -53,7 +53,7 @@ void Mathematics::GreatArcFit3<Real>
 	// 连续定位的角度是一个最大的差值。
 	// 实际上, 我们构建一个圆锥包含最小角的单位长度向量。
 	auto numPointsMinus1 = numPoints - 1;
-	auto maxDiff = Math<Real>::sm_TwoPI + items[0].GetAngle() - items[numPointsMinus1].GetAngle();
+	auto maxDiff = Math<Real>::GetTwoPI() + items[0].GetAngle() - items[numPointsMinus1].GetAngle();
 	auto end0 = 0;
 	auto end1 = numPointsMinus1;
 	for (auto index = 0u; index < numPointsMinus1; ++index)

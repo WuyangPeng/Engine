@@ -43,7 +43,7 @@ namespace Mathematics
 
 	public:
 		static bool Approximate(const Vector3D& lhs, const Vector3D& rhs,
-								const Real epsilon = Math::sm_ZeroTolerance);
+								const Real epsilon = Math::GetZeroTolerance());
 
 		static Real VectorMagnitude(const Vector3D& vector);
 		static Real VectorMagnitudeSquared(const Vector3D& vector);
@@ -56,12 +56,12 @@ namespace Mathematics
 		static const Vector3D CrossProduct(const Vector3D& lhs, const Vector3D& rhs);
 		static const Vector3D CrossProductWithReduceMultiplication(const Vector3D& lhs, const Vector3D& rhs);
 		static const Vector3D UnitCrossProduct(const Vector3D& lhs, const Vector3D& rhs,
-											   const Real epsilon = Math::sm_ZeroTolerance);
+											   const Real epsilon = Math::GetZeroTolerance());
 
 		static Real Distance(const Vector3D& lhs, const Vector3D& rhs);
 		static Real DistanceSquared(const Vector3D& lhs, const Vector3D& rhs);
-		static const Vector3D ParallelVectorLhsToRhs(const Vector3D& lhs, const Vector3D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
-		static const Vector3D ApeakVectorLhsToRhs(const Vector3D& lhs, const Vector3D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector3D ParallelVectorLhsToRhs(const Vector3D& lhs, const Vector3D& rhs, const Real epsilon = Math::GetZeroTolerance());
+		static const Vector3D ApeakVectorLhsToRhs(const Vector3D& lhs, const Vector3D& rhs, const Real epsilon = Math::GetZeroTolerance());
 		static const Vector3D ReflectionVector(const Vector3D& ray, const Vector3D& normal);
 		static const Vector3D RefractionVector(const Vector3D& ray, const Vector3D& normal, Real consistencyRatio);
 		static const Vector3D FeatheringOutZAxes(const Vector3D& vector, Function function);
@@ -76,19 +76,19 @@ namespace Mathematics
 		// Gram-Schmidt正交化. 
 		// 以线性无关的向量U、V和W，来计算一个正交组（单位长度，相互垂直）。
 		static const Vector3DOrthonormalize Orthonormalize(const Vector3D& lhs, const Vector3D& mhs, const Vector3D& rhs,
-														   const Real epsilon = Math::sm_ZeroTolerance);
-		static const Vector3DOrthonormalize Orthonormalize(const std::vector<Vector3D> vectors, const Real epsilon = Math::sm_ZeroTolerance);
+														   const Real epsilon = Math::GetZeroTolerance());
+		static const Vector3DOrthonormalize Orthonormalize(const std::vector<Vector3D> vectors, const Real epsilon = Math::GetZeroTolerance());
 
 		// 输入值nonzeroVector（W）必须是一个非零向量。
 		// 返回值是一个标准正交基{U，V, W}。
 		// 返回的W为通过此函数正则化的nonzeroVector。
 		// 如果你已知W是单位长度，使用GenerateComplementBasis来计算U和V。
-		static const Vector3DOrthonormalBasis  GenerateOrthonormalBasis(const Vector3D& nonzeroVector, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector3DOrthonormalBasis  GenerateOrthonormalBasis(const Vector3D& nonzeroVector, const Real epsilon = Math::GetZeroTolerance());
 
 		// 输入值nonzeroVector（W）必须是一个单位向量。
 		// 返回值中的向量{U,V}是单位长度且互相垂直，
 		// 且{U,V,W}是一个标准正交基。
-		static const Vector3DOrthonormalBasis GenerateComplementBasis(const Vector3D& unitVector, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector3DOrthonormalBasis GenerateComplementBasis(const Vector3D& unitVector, const Real epsilon = Math::GetZeroTolerance());
 	};
 
 	// STL

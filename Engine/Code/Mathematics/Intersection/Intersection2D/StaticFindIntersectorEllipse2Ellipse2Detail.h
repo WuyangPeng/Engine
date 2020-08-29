@@ -61,7 +61,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 	// Compute the 4th-degree polynomial whose roots lead to intersections of
 	// the ellipses, and then compute its roots.
 	auto poly = GetQuartic(mEllipse0, mEllipse1);
-	PolynomialRoots<Real> proots{ Math::sm_ZeroTolerance };
+	PolynomialRoots<Real> proots{ Math::GetZeroTolerance() };
 	proots.FindBisection(poly, DIGITS_ACCURACY);
 	auto yCount = proots.GetCount();
 
@@ -105,7 +105,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 	for (; begin != end; ++begin)
 	{
 		point[1] = *begin;
-		PolynomialRoots<Real> ar{ Math::sm_ZeroTolerance };
+		PolynomialRoots<Real> ar{ Math::GetZeroTolerance() };
 		Polynomial<Real> apoly{ 2 };
 		apoly[0] = qp0[0] + point[1] * (qp0[2] + point[1] * qp0[5]);
 		apoly[1] = qp0[1] + point[1] * qp0[4];
@@ -121,7 +121,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 			auto q0 = mEllipse0.Evaluate(point);
 			auto q1 = mEllipse1.Evaluate(point);
 
-			Real angle0 = Math::sm_Zero;
+			Real angle0 = Math::GetValue(0);
 			auto transverse = RefinePoint(coeff, point, q0, q1, angle0);
 
 			i = ix + 2 * iy;
@@ -141,14 +141,14 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 
 	for (i = 0; i < 8; ++i)
 	{
-		if (measure[i].Norm < Math::sm_ZeroTolerance)
+		if (measure[i].Norm < Math::GetZeroTolerance())
 		{
 			auto j = 0;
-			auto adiff = Math::sm_Zero;
+			auto adiff = Math::GetValue(0);
 			for (j = 0; j < mQuantity; ++j)
 			{
 				adiff = measure[i].Angle0 - measure[j].Angle0;
-				if (Math::FAbs(adiff) < Math::sm_ZeroTolerance)
+				if (Math::FAbs(adiff) < Math::GetZeroTolerance())
 				{
 					break;
 				}
@@ -244,7 +244,7 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Classificatio
 	// transformed ellipse1 are used to determine whether the ellipses
 	// intersect, are separated, or one contains the other.
 	auto minSqrDistance = Math::sm_MaxReal;
-	auto maxSqrDistance = Math<Real>::sm_Zero;
+	auto maxSqrDistance = Math<Real>::GetZero();
 	auto i = 0;
 
 	if (K == Vector2D::sm_Zero)
@@ -307,7 +307,7 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Classificatio
 		// d0 > d1
 		for (i = 0; i < 2; ++i)
 		{
-			if (param[i].second > Math<Real>::sm_Zero)
+			if (param[i].second > Math<Real>::GetZero())
 			{
 				valid.push_back(param[i]);
 			}
@@ -317,7 +317,7 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Classificatio
 	{
 		// d0 = d1
 		param[0].second += param[1].second;
-		if (param[0].second > Math<Real>::sm_Zero)
+		if (param[0].second > Math<Real>::GetZero())
 		{
 			valid.push_back(param[0]);
 		}
@@ -381,7 +381,7 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 	::BisectF(Real d0, Real d1, Real d0c0, Real d1c1, Real smin, Real fmin, Real smax, Real fmax, Real& s, Real& f)
 {
-	auto increasing = (fmin < Math<Real>::sm_Zero);
+	auto increasing = (fmin < Math<Real>::GetZero());
 
 	constexpr auto maxIterations = 256;
 	for (auto i = 0; i < maxIterations; ++i)
@@ -396,7 +396,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 				auto invN0Sqr = invN0 * invN0;
 				auto invN1Sqr = invN1 * invN1;
 				f = d0c0 * invN0Sqr + d1c1 * invN1Sqr - static_cast<Real>(1);
-				if (f < Math<Real>::sm_Zero)
+				if (f < Math<Real>::GetZero())
 				{
 					if (increasing)
 					{
@@ -409,7 +409,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 						fmax = f;
 					}
 				}
-				else if (f > Math<Real>::sm_Zero)
+				else if (f > Math<Real>::GetZero())
 				{
 					if (increasing)
 					{
@@ -458,12 +458,12 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 				auto invN0Cub = invN0 * invN0*invN0;
 				auto invN1Cub = invN1 * invN1*invN1;
 				df = (static_cast<Real>(-2) * (d0 * d0c0 * invN0Cub + d1 * d1c1 * invN1Cub));
-				if (df < Math<Real>::sm_Zero)
+				if (df < Math<Real>::GetZero())
 				{
 					smin = s;
 					dfmin = df;
 				}
-				else if (df > Math<Real>::sm_Zero)
+				else if (df > Math<Real>::GetZero())
 				{
 					smax = s;
 					dfmax = df;
@@ -505,18 +505,18 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 	auto sqrtd1c1 = Math::Sqrt(d1c1);
 	auto invD0 = (static_cast<Real>(1)) / d0;
 	auto invD1 = (static_cast<Real>(1)) / d1;
-	auto temp0 = Math::sm_Zero;
-	auto temp1 = Math::sm_Zero;
-	auto smin = Math::sm_Zero; 
-	auto smax = Math::sm_Zero; 
-	auto s = Math::sm_Zero;
-	auto fmin = Math::sm_Zero; 
-	auto fmax = Math::sm_Zero; 
-	auto f = Math::sm_Zero;
-	auto invN0 = Math::sm_Zero;
-	auto invN1 = Math::sm_Zero; 
-	auto invN0Sqr = Math::sm_Zero; 
-	auto invN1Sqr = Math::sm_Zero;
+	auto temp0 = Math::GetValue(0);
+	auto temp1 = Math::GetValue(0);
+	auto smin = Math::GetValue(0); 
+	auto smax = Math::GetValue(0); 
+	auto s = Math::GetValue(0);
+	auto fmin = Math::GetValue(0); 
+	auto fmax = Math::GetValue(0); 
+	auto f = Math::GetValue(0);
+	auto invN0 = Math::GetValue(0);
+	auto invN1 = Math::GetValue(0); 
+	auto invN0Sqr = Math::GetValue(0); 
+	auto invN1Sqr = Math::GetValue(0);
 
 	// Compute root in (-infinity,1/d0).
 	temp0 = (static_cast<Real>(1) - multiplier0 * sqrtd0c0) * invD0;
@@ -527,14 +527,14 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 	invN0Sqr = invN0 * invN0;
 	invN1Sqr = invN1 * invN1;
 	fmin = d0c0 * invN0Sqr + d1c1 * invN1Sqr - static_cast<Real>(1);
-	MATHEMATICS_ASSERTION_0(fmin < Math<Real>::sm_Zero, "Unexpected condition.\n");
+	MATHEMATICS_ASSERTION_0(fmin < Math<Real>::GetZero(), "Unexpected condition.\n");
 	smax = (static_cast<Real>(1) - multiplier1 * sqrtd0c0) * invD0;
 	invN0 = (static_cast<Real>(1)) / (d0*smax - static_cast<Real>(1));
 	invN1 = (static_cast<Real>(1)) / (d1*smax - static_cast<Real>(1));
 	invN0Sqr = invN0 * invN0;
 	invN1Sqr = invN1 * invN1;
 	fmax = d0c0 * invN0Sqr + d1c1 * invN1Sqr - static_cast<Real>(1);
-	MATHEMATICS_ASSERTION_0(fmax > Math<Real>::sm_Zero, "Unexpected condition.\n");
+	MATHEMATICS_ASSERTION_0(fmax > Math<Real>::GetZero(), "Unexpected condition.\n");
 	BisectF(d0, d1, d0c0, d1c1, smin, fmin, smax, fmax, s, f);
 	roots[numRoots++] = s;
 
@@ -546,7 +546,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 	invN0Sqr = invN0 * invN0;
 	invN1Sqr = invN1 * invN1;
 	fmid = d0c0 * invN0Sqr + d1c1 * invN1Sqr - static_cast<Real>(1);
-	if (fmid < Math<Real>::sm_Zero)
+	if (fmid < Math<Real>::GetZero())
 	{
 		BisectF(d0, d1, d0c0, d1c1, invD0, Math::sm_MaxReal, smid, fmid, s, f);
 		roots[numRoots++] = s;
@@ -563,14 +563,14 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 	invN0Sqr = invN0 * invN0;
 	invN1Sqr = invN1 * invN1;
 	fmax = d0c0 * invN0Sqr + d1c1 * invN1Sqr - static_cast<Real>(1);
-	MATHEMATICS_ASSERTION_0(fmax < Math<Real>::sm_Zero, "Unexpected condition.\n");
+	MATHEMATICS_ASSERTION_0(fmax < Math<Real>::GetZero(), "Unexpected condition.\n");
 	smin = (static_cast<Real>(1) + multiplier1 * sqrtd1c1)*invD1;
 	invN0 = (static_cast<Real>(1)) / (d0*smin - static_cast<Real>(1));
 	invN1 = (static_cast<Real>(1)) / (d1*smin - static_cast<Real>(1));
 	invN0Sqr = invN0 * invN0;
 	invN1Sqr = invN1 * invN1;
 	fmin = d0c0 * invN0Sqr + d1c1 * invN1Sqr - static_cast<Real>(1);
-	MATHEMATICS_ASSERTION_0(fmin > Math<Real>::sm_Zero, "Unexpected condition.\n");
+	MATHEMATICS_ASSERTION_0(fmin > Math<Real>::GetZero(), "Unexpected condition.\n");
 	BisectF(d0, d1, d0c0, d1c1, smin, fmin, smax, fmax, s, f);
 	roots[numRoots++] = s;
 }
@@ -661,7 +661,7 @@ bool Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 	auto f0 = coeff[0] + coeff[1] * cs + coeff[2] * sn + coeff[3] * cs*cs + coeff[4] * cs*sn + coeff[5] * sn*sn;
 	auto df0 = -coeff[1] * sn + coeff[2] * cs + (static_cast<Real>(2))*(coeff[5] - coeff[3])*cs*sn + coeff[4] * (cs*cs - sn * sn);
 
-	Real a1 = Math<Real>::sm_Zero, f1, df1;
+	Real a1 = Math<Real>::GetZero(), f1, df1;
 
 	// The value f0 should match q1 (to within floating-point round-off
 	// error).  Try to force f0 to zero using bisection.  This requires
@@ -677,7 +677,7 @@ bool Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 		sn = Math::Sin(a1);
 		f1 = coeff[0] + coeff[1] * cs + coeff[2] * sn + coeff[3] * cs*cs + coeff[4] * cs*sn + coeff[5] * sn*sn;
 
-		if (f0*f1 < Math<Real>::sm_Zero)
+		if (f0*f1 < Math<Real>::GetZero())
 		{
 			// Switch to bisection.
 			break;
@@ -685,7 +685,7 @@ bool Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 
 		df1 = -coeff[1] * sn + coeff[2] * cs + (static_cast<Real>(2))*(coeff[5] - coeff[3])*cs*sn + coeff[4] * (cs*cs - sn * sn);
 
-		if (df1*df0 < Math<Real>::sm_Zero)
+		if (df1*df0 < Math<Real>::GetZero())
 		{
 			// Try a steeper slope in hopes of finding an opposite sign
 			// value.
@@ -722,11 +722,11 @@ bool Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>
 			f1 = coeff[0] + coeff[1] * cs + coeff[2] * sn + coeff[3] * cs*cs + coeff[4] * cs*sn + coeff[5] * sn*sn;
 
 			auto product = f0 * f1;
-			if (product < Math<Real>::sm_Zero)
+			if (product < Math<Real>::GetZero())
 			{
 				a1 = angle;
 			}
-			else if (product > Math<Real>::sm_Zero)
+			else if (product > Math<Real>::GetZero())
 			{
 				a0 = angle;
 				f0 = f1;

@@ -20,10 +20,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		DynamicTestIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::sm_ZeroTolerance);
+		DynamicTestIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::GetZeroTolerance());
 		virtual ~DynamicTestIntersector1();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		virtual bool IsIntersection() const override;
 

@@ -18,7 +18,7 @@
     #include "VariableLengthVector.h"
     #include "CoreTools/Helper/MemberFunctionMacro.h"
     #include "CoreTools/Helper/MemoryMacro.h"
-    #include "Mathematics/Base/Math.h"
+    #include "Mathematics/Base/MathDetail.h"
 
     #include "System/Helper/PragmaWarning.h"
     #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -33,7 +33,8 @@
     #include SYSTEM_WARNING_DISABLE(26488)
  #include SYSTEM_WARNING_DISABLE(26409)
  #include SYSTEM_WARNING_DISABLE(26492)
-
+ 
+    #include SYSTEM_WARNING_DISABLE(26456)
 template <typename Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNumber)
     : m_RowsNumber{ rowsNumber }, m_ColumnsNumber{ columnsNumber }, m_ElementsNumber{ m_RowsNumber * m_ColumnsNumber },
@@ -185,7 +186,7 @@ void Mathematics::VariableMatrix<Real>::SetIdentity()
 
     for (auto i = 0; i < m_RowsNumber; ++i)
     {
-        m_Entry[i][i] = Math::sm_One;
+        m_Entry[i][i] = Math::GetValue(1);
     }
 }
 
@@ -489,7 +490,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator/=
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::sm_ZeroTolerance < scalar)
+    if (Math::GetZeroTolerance() < scalar)
     {
         for (auto rows = 0; rows < m_RowsNumber; ++rows)
         {
@@ -717,7 +718,7 @@ bool Mathematics ::Approximate(const VariableMatrix<Real>& lhs, const VariableMa
 template <typename Real>
 bool Mathematics ::Approximate(const VariableMatrix<Real>& lhs, const VariableMatrix<Real>& rhs)
 {
-    return Approximate(lhs, rhs, Math<Real>::sm_ZeroTolerance);
+    return Approximate(lhs, rhs, Math<Real>::GetZeroTolerance());
 }
 
 template <typename Real>

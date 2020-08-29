@@ -32,7 +32,7 @@ namespace CoreTools
 		explicit UnitTestComposite(const OStreamShared& osPtr) noexcept;
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		virtual void ClearUnitTestCollection();
 		virtual void AddUnitTest(UnitTestCompositePtr unitTest);

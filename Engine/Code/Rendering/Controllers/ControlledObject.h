@@ -12,7 +12,9 @@
 #include "ControllerInterface.h"
 
 RENDERING_EXPORT_SHARED_PTR(ControlledObjectImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE ControlledObject : public ControllerInterface 
@@ -30,7 +32,7 @@ namespace Rendering
          ControlledObject(ControlledObject&&) = default;
          ControlledObject& operator=(ControlledObject&&) = default;
         
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
+		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ControlledObject);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
@@ -62,5 +64,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ControlledObject); 
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_CONTROLLED_OBJECT_H

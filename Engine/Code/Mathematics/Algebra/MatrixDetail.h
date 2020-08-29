@@ -14,7 +14,9 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 #include SYSTEM_WARNING_DISABLE(26492)
 #include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26426) 
+#include SYSTEM_WARNING_DISABLE(26456)
+#include SYSTEM_WARNING_DISABLE(26440)
 #include "Matrix.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -58,19 +60,19 @@ Mathematics::Matrix<Real>
 	m_Entry[0] = rhs(0, 0);
 	m_Entry[1] = rhs(0, 1);
 	m_Entry[2] = rhs(0, 2);
-	m_Entry[3] = Math::sm_Zero;
+	m_Entry[3] = Math::GetValue(0);
 	m_Entry[4] = rhs(1, 0);
 	m_Entry[5] = rhs(1, 1);
 	m_Entry[6] = rhs(1, 2);
-	m_Entry[7] = Math::sm_Zero;
+	m_Entry[7] = Math::GetValue(0);
 	m_Entry[8] = rhs(2, 0);
 	m_Entry[9] = rhs(2, 1);
 	m_Entry[10] = rhs(2, 2);
-	m_Entry[11] = Math::sm_Zero;
-	m_Entry[12] = Math::sm_Zero;
-	m_Entry[13] = Math::sm_Zero;
-	m_Entry[14] = Math::sm_Zero;
-	m_Entry[15] = Math::sm_One;
+	m_Entry[11] = Math::GetValue(0);
+	m_Entry[12] = Math::GetValue(0);
+	m_Entry[13] = Math::GetValue(0);
+	m_Entry[14] = Math::GetValue(0);
+	m_Entry[15] = Math::GetValue(1);
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -222,19 +224,19 @@ Mathematics::Matrix<Real>
 		m_Entry[0] = firstVector[0];
 		m_Entry[1] = firstVector[1];
 		m_Entry[2] = firstVector[2];
-		m_Entry[3] = Math::sm_Zero;
+		m_Entry[3] = Math::GetValue(0);
 		m_Entry[4] = secondVector[0];
 		m_Entry[5] = secondVector[1];
 		m_Entry[6] = secondVector[2];
-		m_Entry[7] = Math::sm_Zero;
+		m_Entry[7] = Math::GetValue(0);
 		m_Entry[8] = thirdVector[0];
 		m_Entry[9] = thirdVector[1];
 		m_Entry[10] = thirdVector[2];
-		m_Entry[11] = Math::sm_Zero;
+		m_Entry[11] = Math::GetValue(0);
 		m_Entry[12] = point[0];
 		m_Entry[13] = point[1];
 		m_Entry[14] = point[2];
-		m_Entry[15] = Math::sm_One;
+		m_Entry[15] = Math::GetValue(1);
 	}
 	else
 	{
@@ -250,10 +252,10 @@ Mathematics::Matrix<Real>
 		m_Entry[9] = secondVector[2];
 		m_Entry[10] = thirdVector[2];
 		m_Entry[11] = point[2];
-		m_Entry[12] = Math::sm_Zero;
-		m_Entry[13] = Math::sm_Zero;
-		m_Entry[14] = Math::sm_Zero;
-		m_Entry[15] = Math::sm_One;
+		m_Entry[12] = Math::GetValue(0);
+		m_Entry[13] = Math::GetValue(0);
+		m_Entry[14] = Math::GetValue(0);
+		m_Entry[15] = Math::GetValue(1);
 	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -309,19 +311,19 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>
 	m_Entry[0] = rhs(0, 0);
 	m_Entry[1] = rhs(0, 1);
 	m_Entry[2] = rhs(0, 2);
-	m_Entry[3] = Math::sm_Zero;
+	m_Entry[3] = Math::GetValue(0);
 	m_Entry[4] = rhs(1, 0);
 	m_Entry[5] = rhs(1, 1);
 	m_Entry[6] = rhs(1, 2);
-	m_Entry[7] = Math::sm_Zero;
+	m_Entry[7] = Math::GetValue(0);
 	m_Entry[8] = rhs(2, 0);
 	m_Entry[9] = rhs(2, 1);
 	m_Entry[10] = rhs(2, 2);
-	m_Entry[11] = Math::sm_Zero;
-	m_Entry[12] = Math::sm_Zero;
-	m_Entry[13] = Math::sm_Zero;
-	m_Entry[14] = Math::sm_Zero;
-	m_Entry[15] = Math::sm_One;
+	m_Entry[11] = Math::GetValue(0);
+	m_Entry[12] = Math::GetValue(0);
+	m_Entry[13] = Math::GetValue(0);
+	m_Entry[14] = Math::GetValue(0);
+	m_Entry[15] = Math::GetValue(1);
 
 	return *this;
 }
@@ -526,7 +528,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator/=(Real scalar) no
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (Math::sm_ZeroTolerance < Math::FAbs(scalar))
+	if (Math::GetZeroTolerance() < Math::FAbs(scalar))
 	{
 		for (auto i = 0; i < 16; ++i)
 		{
@@ -559,22 +561,22 @@ void Mathematics::Matrix<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Entry[0] = Math::sm_One;
-	m_Entry[1] = Math::sm_Zero;
-	m_Entry[2] = Math::sm_Zero;
-	m_Entry[3] = Math::sm_Zero;
-	m_Entry[4] = Math::sm_Zero;
-	m_Entry[5] = Math::sm_One;
-	m_Entry[6] = Math::sm_Zero;
-	m_Entry[7] = Math::sm_Zero;
-	m_Entry[8] = Math::sm_Zero;
-	m_Entry[9] = Math::sm_Zero;
-	m_Entry[10] = Math::sm_One;
-	m_Entry[11] = Math::sm_Zero;
-	m_Entry[12] = Math::sm_Zero;
-	m_Entry[13] = Math::sm_Zero;
-	m_Entry[14] = Math::sm_Zero;
-	m_Entry[15] = Math::sm_One;
+	m_Entry[0] = Math::GetValue(1);
+	m_Entry[1] = Math::GetValue(0);
+	m_Entry[2] = Math::GetValue(0);
+	m_Entry[3] = Math::GetValue(0);
+	m_Entry[4] = Math::GetValue(0);
+	m_Entry[5] = Math::GetValue(1);
+	m_Entry[6] = Math::GetValue(0);
+	m_Entry[7] = Math::GetValue(0);
+	m_Entry[8] = Math::GetValue(0);
+	m_Entry[9] = Math::GetValue(0);
+	m_Entry[10] = Math::GetValue(1);
+	m_Entry[11] = Math::GetValue(0);
+	m_Entry[12] = Math::GetValue(0);
+	m_Entry[13] = Math::GetValue(0);
+	m_Entry[14] = Math::GetValue(0);
+	m_Entry[15] = Math::GetValue(1);
 }
 
 template <typename Real>
@@ -583,21 +585,21 @@ void Mathematics::Matrix<Real>::MakeDiagonal(Real member00, Real member11, Real 
 	MATHEMATICS_CLASS_IS_VALID_9;
 
 	m_Entry[0] = member00;
-	m_Entry[1] = Math::sm_Zero;
-	m_Entry[2] = Math::sm_Zero;
-	m_Entry[3] = Math::sm_Zero;
-	m_Entry[4] = Math::sm_Zero;
+	m_Entry[1] = Math::GetValue(0);
+	m_Entry[2] = Math::GetValue(0);
+	m_Entry[3] = Math::GetValue(0);
+	m_Entry[4] = Math::GetValue(0);
 	m_Entry[5] = member11;
-	m_Entry[6] = Math::sm_Zero;
-	m_Entry[7] = Math::sm_Zero;
-	m_Entry[8] = Math::sm_Zero;
-	m_Entry[9] = Math::sm_Zero;
+	m_Entry[6] = Math::GetValue(0);
+	m_Entry[7] = Math::GetValue(0);
+	m_Entry[8] = Math::GetValue(0);
+	m_Entry[9] = Math::GetValue(0);
 	m_Entry[10] = member22;
-	m_Entry[11] = Math::sm_Zero;
-	m_Entry[12] = Math::sm_Zero;
-	m_Entry[13] = Math::sm_Zero;
-	m_Entry[14] = Math::sm_Zero;
-	m_Entry[15] = Math::sm_One;
+	m_Entry[11] = Math::GetValue(0);
+	m_Entry[12] = Math::GetValue(0);
+	m_Entry[13] = Math::GetValue(0);
+	m_Entry[14] = Math::GetValue(0);
+	m_Entry[15] = Math::GetValue(1);
 }
 
 template <typename Real>
@@ -608,7 +610,7 @@ void Mathematics::Matrix<Real>
 
 	auto cosValue = Math::Cos(angle);
 	auto sinValue = Math::Sin(angle);
-	auto oneMinusCos = Math::sm_One - cosValue;
+	auto oneMinusCos = Math::GetValue(1) - cosValue;
 
 	auto xAxisSquare = axis[0] * axis[0];
 	auto yAxisSquare = axis[1] * axis[1];
@@ -629,19 +631,19 @@ void Mathematics::Matrix<Real>
 	m_Entry[0] = xAxisSquareMultipliedOneMinusCos + cosValue;
 	m_Entry[1] = xym - zSin;
 	m_Entry[2] = xzm + ySin;
-	m_Entry[3] = Math::sm_Zero;
+	m_Entry[3] = Math::GetValue(0);
 	m_Entry[4] = xym + zSin;
 	m_Entry[5] = yAxisSquareMultipliedOneMinusCos + cosValue;
 	m_Entry[6] = yzm - xSin;
-	m_Entry[7] = Math::sm_Zero;
+	m_Entry[7] = Math::GetValue(0);
 	m_Entry[8] = xzm - ySin;
 	m_Entry[9] = yzm + xSin;
 	m_Entry[10] = zAxisSquareMultipliedOneMinusCos + cosValue;
-	m_Entry[11] = Math::sm_Zero;
-	m_Entry[12] = Math::sm_Zero;
-	m_Entry[13] = Math::sm_Zero;
-	m_Entry[14] = Math::sm_Zero;
-	m_Entry[15] = Math::sm_One;
+	m_Entry[11] = Math::GetValue(0);
+	m_Entry[12] = Math::GetValue(0);
+	m_Entry[13] = Math::GetValue(0);
+	m_Entry[14] = Math::GetValue(0);
+	m_Entry[15] = Math::GetValue(1);
 }
 
 template <typename Real>
@@ -964,9 +966,9 @@ void Mathematics::Matrix<Real>
 	m_Entry[9] = direction[2] * normal[1];
 	m_Entry[10] = direction[2] * normal[2] - dotNormalDirection;
 	m_Entry[11] = -dotNormalOrigin * direction[2];
-	m_Entry[12] = Math::sm_Zero;
-	m_Entry[13] = Math::sm_Zero;
-	m_Entry[14] = Math::sm_Zero;
+	m_Entry[12] = Math::GetValue(0);
+	m_Entry[13] = Math::GetValue(0);
+	m_Entry[14] = Math::GetValue(0);
 	m_Entry[15] = -dotNormalDirection;
 }
 
@@ -1017,24 +1019,24 @@ void Mathematics::Matrix<Real>
 	//
 	// 其中P是平面上的点，N是一个单位长度的平面法线。
 
-	auto twoDotNormalOrigin = Math::sm_Two * Dot(origin, normal);
+	auto twoDotNormalOrigin = Math::GetValue(2) * Dot(origin, normal);
 
-	m_Entry[0] = Math::sm_One - Math::sm_Two * normal[0] * normal[0];
-	m_Entry[1] = -Math::sm_Two * normal[0] * normal[1];
-	m_Entry[2] = -Math::sm_Two * normal[0] * normal[2];
+	m_Entry[0] = Math::GetValue(1) - Math::GetValue(2) * normal[0] * normal[0];
+	m_Entry[1] = -Math::GetValue(2) * normal[0] * normal[1];
+	m_Entry[2] = -Math::GetValue(2) * normal[0] * normal[2];
 	m_Entry[3] = twoDotNormalOrigin * normal[0];
-	m_Entry[4] = -Math::sm_Two * normal[1] * normal[0];
-	m_Entry[5] = Math::sm_One - Math::sm_Two * normal[1] * normal[1];
-	m_Entry[6] = -Math::sm_Two * normal[1] * normal[2];
+	m_Entry[4] = -Math::GetValue(2) * normal[1] * normal[0];
+	m_Entry[5] = Math::GetValue(1) - Math::GetValue(2) * normal[1] * normal[1];
+	m_Entry[6] = -Math::GetValue(2) * normal[1] * normal[2];
 	m_Entry[7] = twoDotNormalOrigin * normal[1];
-	m_Entry[8] = -Math::sm_Two * normal[2] * normal[0];
-	m_Entry[9] = -Math::sm_Two * normal[2] * normal[1];
-	m_Entry[10] = Math::sm_One - Math::sm_Two * normal[2] * normal[2];
+	m_Entry[8] = -Math::GetValue(2) * normal[2] * normal[0];
+	m_Entry[9] = -Math::GetValue(2) * normal[2] * normal[1];
+	m_Entry[10] = Math::GetValue(1) - Math::GetValue(2) * normal[2] * normal[2];
 	m_Entry[11] = twoDotNormalOrigin * normal[2];
-	m_Entry[12] = Math::sm_Zero;
-	m_Entry[13] = Math::sm_Zero;
-	m_Entry[14] = Math::sm_Zero;
-	m_Entry[15] = Math::sm_One;
+	m_Entry[12] = Math::GetValue(0);
+	m_Entry[13] = Math::GetValue(0);
+	m_Entry[14] = Math::GetValue(0);
+	m_Entry[15] = Math::GetValue(1);
 }
 
 
@@ -1252,7 +1254,7 @@ template <typename Real>
 bool Mathematics
 	::Approximate(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
-	return Approximate(lhs, rhs, Math<Real>::sm_ZeroTolerance);
+	return Approximate(lhs, rhs, Math<Real>::GetZeroTolerance());
 }
 
 template <typename Real>

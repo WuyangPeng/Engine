@@ -371,7 +371,7 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
 	auto rSqr = mCylinder.GetRadius()*mCylinder.GetRadius();
 	auto D = Q0 - Q1;
 	auto dot = Vector2DTools<Real>::DotProduct(Q0,D);
-    if (dot <= Math<Real>::sm_Zero)
+    if (dot <= Math<Real>::GetZero())
     {
         return Vector2DTools<Real>::DotProduct(Q0,Q0) <= rSqr;
     }
@@ -396,11 +396,11 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
     for (i0 = numVertices-1, i1 = 0; i1 < numVertices; i0 = i1++)
     {
 		auto dot = Vector2DTools<Real>::DotPerp(Q[i0],(Q[i0] - Q[i1]));
-        if (dot > Math<Real>::sm_Zero)
+        if (dot > Math<Real>::GetZero())
         {
             ++positive;
         }
-        else if (dot < Math<Real>::sm_Zero)
+        else if (dot < Math<Real>::GetZero())
         {
             ++negative;
         }

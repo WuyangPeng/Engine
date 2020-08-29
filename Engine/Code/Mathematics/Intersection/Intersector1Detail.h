@@ -36,7 +36,7 @@ template <typename Real>
 bool Mathematics::Intersector1<Real>
 	::IsValid() const noexcept
 {
-	if (m_U[0] <= m_U[1] && m_V[0] <= m_V[1] && Math::sm_Zero <= m_Epsilon)
+	if (m_U[0] <= m_U[1] && m_V[0] <= m_V[1] && Math::GetValue(0) <= m_Epsilon)
 		return true;
 	else
 		return false;

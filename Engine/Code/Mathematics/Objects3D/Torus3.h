@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Torus3Parameters.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
 

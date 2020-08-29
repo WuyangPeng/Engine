@@ -20,7 +20,9 @@
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>
 #include <vector>
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Mathematics
 {
 	template <typename Real>
@@ -100,12 +102,12 @@ namespace Mathematics
 
 		Real Length() const;  // 4-tuple的长度
 		Real SquaredLength() const noexcept;  // 4-tuple的长度的平方
-		void Normalize(Real epsilon = Math::sm_ZeroTolerance);
+		void Normalize(Real epsilon = Math::GetZeroTolerance());
 		const Quaternion Inverse() const;  // 适用于非零四元数
 		const Quaternion Conjugate() const noexcept;  // 取负数在 x, y, 和 z 上
 		const Quaternion Exp() const;  // 适用于四元数 w = 0
 		const Quaternion Log() const noexcept;  // 适用于单位长度四元数
-		bool IsNormalize(Real epsilon = Math::sm_ZeroTolerance) const;
+		bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const;
 
 		// 由四元数旋转向量。
 		const Vector3D Rotate(const Vector3D& vector) const;
@@ -125,14 +127,14 @@ namespace Mathematics
 		// 角度是firstVector和secondVector之间的角度。
 		// 如果firstVector和secondVector是平行的，旋转任意轴都行，
 		// 例如组合(z2,x2,y2)，其中，secondVector = (x2,y2,z2)。
-		void Align(const Vector3D& firstVector, const Vector3D& secondVector, Real epsilon = Math::sm_ZeroTolerance);
+		void Align(const Vector3D& firstVector, const Vector3D& secondVector, Real epsilon = Math::GetZeroTolerance());
 
 		// 分解四元数为q = q_twist * q_swing，其中q是'this'四元数。
 		// 如果V1是输入轴和V2为V1通过q的旋转，
 		// q_swing表示大约垂直于V1和V2的轴线旋转（见Quaternion::Align），
 		// 并q_twist是大约是V1旋转。
 		// 返回值的第一部分为twist，第二部分为swing。
-		const QuaternionSwingTwist DecomposeTwistTimesSwing(const Vector3D& vector, Real epsilon = Math::sm_ZeroTolerance) const;
+		const QuaternionSwingTwist DecomposeTwistTimesSwing(const Vector3D& vector, Real epsilon = Math::GetZeroTolerance()) const;
 
 		// 分解四元数为q = q_swing * q_twist，其中q是'this'四元数。
 		// 如果V1是输入轴和V2为V1通过q的旋转，
@@ -140,7 +142,7 @@ namespace Mathematics
 		// 并q_twist是大约是V1旋转。
 		// 返回值的第一部分为swing，第二部分为twist。
 
-		const QuaternionSwingTwist DecomposeSwingTimesTwist(const Vector3D& vector, Real epsilon = Math::sm_ZeroTolerance) const;
+		const QuaternionSwingTwist DecomposeSwingTimesTwist(const Vector3D& vector, Real epsilon = Math::GetZeroTolerance()) const;
 
 		// *** 查找最近无约束的角度的四元数。
 
@@ -264,5 +266,5 @@ namespace Mathematics
 	using Quaternionf = Quaternion<float>;
 	using Quaterniond = Quaternion<double>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // MATHEMATICS_ALGEBRA_QUATERNION_H

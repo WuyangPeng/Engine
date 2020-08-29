@@ -76,7 +76,7 @@ const typename  Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Math
 	auto lhsClosestPoint = m_Point;
 	auto rhsClosestPoint = m_Ellipsoid.GetCenter() + outputVector[0] * m_Ellipsoid.GetAxis0() + outputVector[1] * m_Ellipsoid.GetAxis1() + outputVector[2] * m_Ellipsoid.GetAxis2();
 
-	return DistanceResult{ squaredDistance, Math<Real>::sm_Zero, lhsClosestPoint, rhsClosestPoint };
+	return DistanceResult{ squaredDistance, Math<Real>::GetValue(0), lhsClosestPoint, rhsClosestPoint };
 }
 
 template <typename Real>

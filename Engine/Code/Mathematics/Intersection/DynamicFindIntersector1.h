@@ -22,10 +22,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::sm_ZeroTolerance);
+		DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::GetZeroTolerance());
 		virtual ~DynamicFindIntersector1();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 bool IsIntersection() const override;
 

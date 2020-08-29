@@ -46,13 +46,13 @@ void Mathematics::EllipseFit2<Real>
 							 static_cast<Real>(0.5) * m_SecondExtent,
 							 m_Center.GetXCoordinate() - firstExtent,
 							 m_Center.GetYCoordinate() - secondExtent,
-							 -Math<Real>::sm_PI };
+							 -Math<Real>::GetPI() };
 
 	std::vector<Real> end{ static_cast<Real>(2) * m_FirstExtent,
 						   static_cast<Real>(2) * m_SecondExtent,
 						   m_Center.GetXCoordinate() + firstExtent,
 						   m_Center.GetYCoordinate() + secondExtent,
-						   Math<Real>::sm_PI };
+						   Math<Real>::GetPI() };
 
 	std::vector<Real> initial{ m_FirstExtent, m_SecondExtent, m_Center.GetXCoordinate(),
 							   m_Center.GetYCoordinate(), angle };
@@ -103,7 +103,7 @@ Real Mathematics::EllipseFit2<Real>
 							Vector2D::sm_UnitY, input[0], input[1] };
 
 	// 变换点到中心C和旋转Real的列的坐标系统
-	auto energy = Math<Real>::sm_Zero;
+	auto energy = Math<Real>::GetValue(0);
 
 	auto numPoints = userData->GetNumPoint();
 
@@ -128,7 +128,7 @@ template <typename Real>
 bool Mathematics::EllipseFit2<Real>
 	::IsValid() const noexcept
 {
-	if (Math<Real>::sm_Zero <= m_Exactly)
+	if (Math<Real>::GetValue(0) <= m_Exactly)
 		return true;
 	else
 		return false;

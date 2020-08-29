@@ -35,7 +35,7 @@ namespace Mathematics
 		DistanceLine2Segment2(const Line2& line, const Segment2& ray);
 		virtual ~DistanceLine2Segment2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Line2 GetLine() const;
 		const Segment2 GetSegment() const;

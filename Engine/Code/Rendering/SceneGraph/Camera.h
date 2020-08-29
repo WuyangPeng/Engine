@@ -36,14 +36,14 @@ namespace Rendering
 		using Math = Mathematics::Math<float>;
         
     public:
-        Camera (bool isPerspective = true,float epsilon = Math::sm_ZeroTolerance);
+        Camera (bool isPerspective = true,float epsilon = Math::GetZeroTolerance());
           ~Camera ();
 
           Camera(Camera&&) = default;
           Camera& operator=(Camera&&) = default;
 
         
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;    
+		CLASS_INVARIANT_OVERRIDE_DECLARE;    
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Camera); 
 

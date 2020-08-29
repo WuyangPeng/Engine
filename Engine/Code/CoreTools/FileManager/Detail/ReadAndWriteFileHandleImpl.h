@@ -20,7 +20,7 @@ namespace CoreTools
 	public:
 		explicit ReadAndWriteFileHandleImpl(const String& fileName); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void Read(size_t itemSize, void* data);
 		void Read(size_t itemSize, size_t itemsNumber, void* data);

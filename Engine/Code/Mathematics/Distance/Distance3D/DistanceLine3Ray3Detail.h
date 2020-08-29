@@ -73,7 +73,7 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
 	{
 		auto rhsT = tool.GetRhsT();
 
-		if (Math::sm_Zero <= rhsT)
+		if (Math::GetValue(0) <= rhsT)
 		{
 			// 两个内部点最接近，一个在直线上，一个在射线上。
 			auto lhsT = tool.GetLhsT() / det;
@@ -82,7 +82,7 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
 								   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 								   tool.GetOriginDifferenceSquaredLength();
 
-			return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::sm_Zero, m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),
+			return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::GetValue(0), m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),
 								   m_Ray.GetOrigin() + rhsT * m_Ray.GetDirection(),lhsT,rhsT };
 		}
 		else
@@ -104,9 +104,9 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
 {
 	auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
-	return DistanceResult{ squaredDistance, Math::sm_Zero,
+	return DistanceResult{ squaredDistance, Math::GetValue(0),
 						   m_Line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * m_Line.GetDirection(), m_Ray.GetOrigin(),
-						   -tool.GetOriginDifferenceDotLhsDirection(),Math::sm_Zero };
+						   -tool.GetOriginDifferenceDotLhsDirection(),Math::GetValue(0) };
 }
 
 template <typename Real>

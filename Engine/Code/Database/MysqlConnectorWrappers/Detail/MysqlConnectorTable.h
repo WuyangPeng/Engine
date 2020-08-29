@@ -29,7 +29,7 @@ namespace Database
     public:
         MysqlConnectorTable(const Schema& schema, const std::string& tableName);
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         ResultPtr Select(std::initializer_list<std::string> selectStatement, const std::string& whereStatement,
                          const std::string& orderByStatement, const BindStatementType& bindStatement) override;

@@ -5,7 +5,7 @@
 // 引擎版本：0.0.0.3 (2019/07/18 14:07)
 
 #include "Rendering/RenderingExport.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "BoundImpl.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -27,6 +27,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26451)
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
 Rendering::BoundImpl ::BoundImpl(const APoint& center, float radius) noexcept
     : m_Center{ center }, m_Radius{ radius }
 {
@@ -103,13 +104,13 @@ void Rendering::BoundImpl ::GrowToContain(const BoundImpl& bound)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (bound.m_Radius <= Math::sm_ZeroTolerance)
+    if (bound.m_Radius <= Math::GetZeroTolerance())
     {
         // 输入边界是无效的，不影响增长
         return;
     }
 
-    if (m_Radius <= Math::sm_ZeroTolerance)
+    if (m_Radius <= Math::GetZeroTolerance())
     {
         // 当前边界是无效的，所以只赋值输入边界
         *this = bound;
@@ -133,7 +134,7 @@ void Rendering::BoundImpl ::GrowToContain(const BoundImpl& bound)
     }
 
     auto length = Math::Sqrt(lengthSqruared);
-    if (Math::sm_ZeroTolerance < length)
+    if (Math::GetZeroTolerance() < length)
     {
         auto coefficient = (length + radiusDifference) / (2.0f * length);
         m_Center += coefficient * centerDifference;
@@ -225,7 +226,7 @@ bool Rendering::BoundImpl ::TestIntersection(const APoint& origin, const AVector
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    if (m_Radius <= Math::sm_ZeroTolerance)
+    if (m_Radius <= Math::GetZeroTolerance())
     {
         // 边界是无效的，不相交。
         return false;

@@ -8,13 +8,15 @@
 #define RENDERING_RESOURCES_VERTEX_BUFFER_H
 
 #include "Rendering/RenderingDll.h"
-
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Buffer.h"
 #include "VertexFormat.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Vector2D.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {	
 	class VertexBufferAccessor;
@@ -40,7 +42,7 @@ namespace Rendering
                 VertexBuffer(VertexBuffer&&) = default;
                 VertexBuffer& operator=(VertexBuffer&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 				
 		CORE_TOOLS_OBJECT_FACTORY_DECLARE(VertexBuffer);
 		CORE_TOOLS_RTTI_OVERRIDE_DECLARE; 
@@ -73,5 +75,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, VertexBuffer); 
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_VERTEX_BUFFER_H

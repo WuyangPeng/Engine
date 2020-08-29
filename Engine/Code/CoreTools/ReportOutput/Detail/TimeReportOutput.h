@@ -32,7 +32,7 @@ namespace CoreTools
 	public:
 		TimeReportOutput(const std::string& timeDescribe, int borderLineLength, const OStreamShared& osPtr );
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void PrintCurrentTime();
 		void PrintCostTime(const CpuTimer& cpuTime);

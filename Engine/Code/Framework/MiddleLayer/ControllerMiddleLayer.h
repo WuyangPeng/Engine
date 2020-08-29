@@ -22,7 +22,7 @@ namespace Framework
 	public:
 		explicit ControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool KeyDown(int key, const WindowPoint& point) override;
 

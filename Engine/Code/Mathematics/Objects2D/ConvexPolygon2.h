@@ -44,7 +44,7 @@ namespace Mathematics
 		ConvexPolygon2(int verticesNumber, Vector2DPtr verticesPtr, LinePtr lines);
 		virtual ~ConvexPolygon2();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// 只读成员访问。
 		const LinePtr GetLines() const;
@@ -63,11 +63,11 @@ namespace Mathematics
 		// 其有符号的距离满足d < 0，数值舍入误差会产生不正确凸性测试，
 		// 所以一个小的负阈值t可能通过该函数，
 		// 在这种情况下，距离测试会变成d < t < 0。
-		bool IsConvex(Real threshold = -Math::sm_ZeroTolerance) const;
+		bool IsConvex(Real threshold = -Math::GetZeroTolerance()) const;
 
 		// 点在多边形的测试，在点和边缘的线，在n个顶点之间边的查询执行，为O(n)算法。
 		// 这不是最优算法。TODO：将二分搜索算法用于这个类。这是一个O(log n)的算法。
-		bool Contains(const Vector2D& point, Real threshold = -Math::sm_ZeroTolerance) const;
+		bool Contains(const Vector2D& point, Real threshold = -Math::GetZeroTolerance()) const;
 
 	private:
 		// 支持的边缘线的高效更新。

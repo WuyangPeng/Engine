@@ -35,17 +35,17 @@ template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>
 	::Test()
 {
-	SetContactTime(Math<Real>::sm_Zero);
+	SetContactTime(Math<Real>::GetZero());
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
 	Vector3D segment[2]{ mSegment.GetBeginPoint(),  mSegment.GetEndPoint() };
 
-	auto fmin = Math::sm_Zero;
-	auto fmax = Math::sm_Zero;
+	auto fmin = Math::GetValue(0);
+	auto fmax = Math::GetValue(0);
 	IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), segment, fmin, fmax);
 
-	auto mContactTime = Math::sm_Zero;
+	auto mContactTime = Math::GetValue(0);
 	if (IntersectorAxis<Real>::Test(mHalfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, mHalfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))
 	{
 		SetContactTime(mContactTime);

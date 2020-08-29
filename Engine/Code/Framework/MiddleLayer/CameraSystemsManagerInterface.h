@@ -27,7 +27,7 @@ namespace Framework
 	public:
 		explicit CameraSystemsManagerInterface(MiddleLayerPlatform middleLayerPlatform);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		// 渲染中间层处理
 		bool Paint() final;

@@ -104,7 +104,7 @@ namespace Mathematics
 		Real k1 = mBC * mBC + AC * mBD - AB * mCD;
 		Real k2 = mBC * mBD;
 
-		if (Math<Real>::FAbs(k2) >= Math<Real>::sm_ZeroTolerance)
+		if (Math<Real>::FAbs(k2) >= Math<Real>::GetZeroTolerance())
 		{
 			// The s-equation is quadratic.
 			Real inv = (static_cast<Real>(0.5)) / k2;
@@ -115,7 +115,7 @@ namespace Mathematics
 			result0[0] = (-k1 - root)*inv;
 			result0[1] = AB / (mBC + mBD * result0[0]);
 			Real deviation0 = Deviation(result0);
-			if (deviation0 == Math<Real>::sm_Zero)
+			if (deviation0 == Math<Real>::GetValue(0))
 			{
 				return result0;
 			}
@@ -124,21 +124,21 @@ namespace Mathematics
 			result1[0] = (-k1 + root)*inv;
 			result1[1] = AB / (mBC + mBD * result1.GetXCoordinate());
 			Real deviation1 = Deviation(result1);
-			if (deviation1 == Math<Real>::sm_Zero)
+			if (deviation1 == Math<Real>::GetValue(0))
 			{
 				return result1;
 			}
 
 			if (deviation0 <= deviation1)
 			{
-				if (deviation0 <= Math<Real>::sm_ZeroTolerance)
+				if (deviation0 <= Math<Real>::GetZeroTolerance())
 				{
 					return result0;
 				}
 			}
 			else
 			{
-				if (deviation1 <= Math<Real>::sm_ZeroTolerance)
+				if (deviation1 <= Math<Real>::GetZeroTolerance())
 				{
 					return result1;
 				}
@@ -152,7 +152,7 @@ namespace Mathematics
 			result[0] = -k0 / k1;
 			result[1] = AB / (mBC + mBD * result.GetXCoordinate());
 			Real deviation = Deviation(result);
-			if (deviation <= Math<Real>::sm_ZeroTolerance)
+			if (deviation <= Math<Real>::GetZeroTolerance())
 			{
 				return result;
 			}
@@ -166,10 +166,10 @@ namespace Mathematics
 	Real BiQuadToSqr<Real>::Deviation(const Vector2D<Real>& SPoint)
 	{
 		// Deviation is the squared distance of the point from the unit square.
-		Real deviation = Math<Real>::sm_Zero;
+		Real deviation = Math<Real>::GetValue(0);
 		Real delta;
 
-		if (SPoint.GetXCoordinate() < Math<Real>::sm_Zero)
+		if (SPoint.GetXCoordinate() < Math<Real>::GetValue(0))
 		{
 			deviation += SPoint.GetXCoordinate()*SPoint.GetXCoordinate();
 		}
@@ -179,7 +179,7 @@ namespace Mathematics
 			deviation += delta * delta;
 		}
 
-		if (SPoint.GetYCoordinate() < Math<Real>::sm_Zero)
+		if (SPoint.GetYCoordinate() < Math<Real>::GetValue(0))
 		{
 			deviation += SPoint.GetYCoordinate()*SPoint.GetYCoordinate();
 		}

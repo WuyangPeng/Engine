@@ -30,7 +30,7 @@ namespace Mathematics
 		explicit Query2Integer(const std::vector<Vector2D>& vertices);
 		 ~Query2Integer();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 QueryType GetType() const override;
 

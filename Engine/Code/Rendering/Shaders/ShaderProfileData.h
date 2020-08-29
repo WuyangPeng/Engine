@@ -32,7 +32,7 @@ namespace Rendering
         ShaderProfileData(ShaderProfileData&&) noexcept = default;
         ShaderProfileData& operator=(ShaderProfileData&&) noexcept = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ShaderProfileData);
 

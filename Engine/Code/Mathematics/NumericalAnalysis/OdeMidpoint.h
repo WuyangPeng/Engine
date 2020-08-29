@@ -28,7 +28,7 @@ namespace Mathematics
 		OdeMidpoint(int dimension, Real step, Function function, const UserDataType* userData);
 		virtual ~OdeMidpoint();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 void Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut) override;
 		 void SetStepSize(Real step) override;

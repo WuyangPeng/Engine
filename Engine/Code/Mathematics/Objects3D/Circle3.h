@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 #include "Mathematics/Algebra/Vector3DTools.h"
 
@@ -38,7 +38,7 @@ namespace Mathematics
 		// U 是输入向量 'direction0', V 是输入向量 'direction1, 
 		// 和 N 是输入向量 'normal'.
 		Circle3(const Vector3D& center, const Vector3D& direction0, const Vector3D& direction1,
-				const Vector3D& normal, const Real radius, const Real epsilon = Math::sm_ZeroTolerance);
+				const Vector3D& normal, const Real radius, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

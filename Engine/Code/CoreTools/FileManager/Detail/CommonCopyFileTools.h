@@ -28,7 +28,7 @@ namespace CoreTools
 	public:
 		CommonCopyFileTools(const String& inFileName, const String& outFileName); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	private:
 		using BufferType = std::vector<char>;

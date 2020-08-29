@@ -32,7 +32,7 @@ namespace CoreTools
 		explicit SecondSubclassSmartPointer(SubclassType* data);
 		SecondSubclassSmartPointer() noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		SubclassType* GetData() override;
 		SubclassType& operator* () override;

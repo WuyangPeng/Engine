@@ -15,9 +15,9 @@ template <typename Real, typename Vector>
 Mathematics::IntervalDistanceBase<Real, Vector>
 	::IntervalDistanceBase(const DistanceBase& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
 	:m_Distance{ distance }, m_TMin{ tMin }, m_TMax{ tMax }, m_LhsVelocity{ lhsVelocity },
-	 m_RhsVelocity{ rhsVelocity }, m_DistanceResult{ Math::sm_Zero }, m_BeginT{ tMin }, m_EndT{ tMax },
-	 m_BeginDistanceResult{ Math::sm_Zero }, m_BeginDerivativeDistanceResult{ Math::sm_Zero }, 
-	 m_EndDistanceResult{ Math::sm_Zero }, m_EndDerivativeDistanceResult{ Math::sm_Zero }
+	 m_RhsVelocity{ rhsVelocity }, m_DistanceResult{ Math::GetValue(0) }, m_BeginT{ tMin }, m_EndT{ tMax },
+	 m_BeginDistanceResult{ Math::GetValue(0) }, m_BeginDerivativeDistanceResult{ Math::GetValue(0) }, 
+	 m_EndDistanceResult{ Math::GetValue(0) }, m_EndDerivativeDistanceResult{ Math::GetValue(0) }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -80,14 +80,14 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>
 	if (m_BeginDistanceResult.GetDistance() <= m_Distance.GetZeroThreshold())
 	{
 		// 距离为有效值零。对象是在最初位置接触。
-		m_BeginDistanceResult.Set(Math::sm_Zero, m_BeginT);
+		m_BeginDistanceResult.Set(Math::GetValue(0), m_BeginT);
 		m_DistanceResult = m_BeginDistanceResult;
 
 		return true;
 	}
 
 	m_BeginDerivativeDistanceResult = GetDerivative(m_BeginT);
-	if (Math::sm_Zero <= m_BeginDerivativeDistanceResult)
+	if (Math::GetValue(0) <= m_BeginDerivativeDistanceResult)
 	{
 		// 距离在[0,tmax]增加。 
 		m_BeginDistanceResult.SetContactTime(m_BeginT);
@@ -108,14 +108,14 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>
 	if (m_EndDistanceResult.GetDistance() <= m_Distance.GetZeroThreshold())
 	{
 		// 距离为有效值零。
-		m_EndDistanceResult.Set(Math::sm_Zero, m_EndT);
+		m_EndDistanceResult.Set(Math::GetValue(0), m_EndT);
 		m_DistanceResult = m_EndDistanceResult;
 
 		return true;
 	}
 
 	m_EndDerivativeDistanceResult = GetDerivative(m_EndT);
-	if (m_EndDerivativeDistanceResult <= Math::sm_Zero)
+	if (m_EndDerivativeDistanceResult <= Math::GetValue(0))
 	{
 		// 距离在[0,tmax]增加。 
 		m_EndDistanceResult.SetContactTime(m_EndT);
@@ -149,14 +149,14 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>
 		if (m_DistanceResult.GetDistance() <= m_Distance.GetZeroThreshold())
 		{
 			// 距离为有效值零。
-			m_DistanceResult.SetDistance(Math::sm_Zero);
+			m_DistanceResult.SetDistance(Math::GetValue(0));
 			m_DistanceResult.SetContactTime(iterationT);
 
 			return true;
 		}
 
 		auto derivativeResult = GetDerivative(iterationT);
-		if (Math::sm_Zero <= derivativeResult)
+		if (Math::GetValue(0) <= derivativeResult)
 		{
 			// 图形的凸性保证当该条件发生时，距离总为正。切换到最小数字。
 			return false;
@@ -187,7 +187,7 @@ void Mathematics::IntervalDistanceBase<Real, Vector>
 	::BisectionMethod()
 {
 	// 距离总为正。使用二分法找到导数函数的根。
-	auto resultT = Math::sm_Zero;
+	auto resultT = Math::GetValue(0);
 	for (auto loop = 0; loop < m_Distance.GetMaximumIterations(); ++loop)
 	{
 		resultT = static_cast<Real>(0.5) * (m_BeginT + m_EndT);
@@ -225,7 +225,7 @@ template <typename Real, typename Vector>
 bool Mathematics::IntervalDistanceBase<Real, Vector>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_TMin && m_TMin <= m_TMax)
+	if (Math::GetValue(0) <= m_TMin && m_TMin <= m_TMax)
 	{
 		return true;
 	}

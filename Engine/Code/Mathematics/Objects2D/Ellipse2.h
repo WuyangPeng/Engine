@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Ellipse2Coefficients.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Matrix2.h"
 #include "Mathematics/Algebra/Vector2DTools.h"
@@ -53,9 +53,9 @@ namespace Mathematics
 		// 为椭圆形时，M必须具有所有特征值为正。
 
 		Ellipse2(const Vector2D& center, const Vector2D& axis0, const Vector2D& axis1,
-				 const Real extent0, const Real extent1, const Real epsilon = Math::sm_ZeroTolerance);
+				 const Real extent0, const Real extent1, const Real epsilon = Math::GetZeroTolerance());
 
-		explicit Ellipse2(const Ellipse2Coefficients& coefficients, const Real epsilon = Math::sm_ZeroTolerance);
+		explicit Ellipse2(const Ellipse2Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -76,7 +76,7 @@ namespace Mathematics
 
 		// 构建m_Center，m_Axis和m_Extent从二次方程。
 		// 如果输入系数不能表示一个椭圆，则抛出异常。
-		void FromCoefficients(const Ellipse2Coefficients& coefficients, const Real epsilon = Math::sm_ZeroTolerance);
+		void FromCoefficients(const Ellipse2Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
 
 		// 计算的二次函数 Q(X) = (X-K)^T * M * (X-K) - 1.
 		Real Evaluate(const Vector2D& point) const;

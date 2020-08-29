@@ -147,12 +147,12 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
         p = mFrustum.GetRightBound()*Math::FAbs(A[i]) + mFrustum.GetUpBound()*Math::FAbs(B[i]);
         NC[i] = mFrustum.GetDirectionMin()*C[i];
         fmin = NC[i] - p;
-        if (fmin < Math<Real>::sm_Zero)
+        if (fmin < Math<Real>::GetZero())
         {
             fmin *= mFrustum.GetDirectionRatio();
         }
         fmax = NC[i] + p;
-        if (fmax > Math<Real>::sm_Zero)
+        if (fmax > Math<Real>::GetZero())
         {
             fmax *= mFrustum.GetDirectionRatio();
         }
@@ -169,12 +169,12 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
     {
         p = mFrustum.GetUpBound()*Math::FAbs(C[i]);
         fmin = -NB[i] - p;
-        if (fmin < Math<Real>::sm_Zero)
+        if (fmin < Math<Real>::GetZero())
         {
             fmin *= mFrustum.GetDirectionRatio();
         }
         fmax = -NB[i] + p;
-        if (fmax > Math<Real>::sm_Zero)
+        if (fmax > Math<Real>::GetZero())
         {
             fmax *= mFrustum.GetDirectionRatio();
         }
@@ -192,12 +192,12 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
     {
         p = mFrustum.GetRightBound()*Math::FAbs(C[i]);
         fmin = NA[i] - p;
-        if (fmin < Math<Real>::sm_Zero)
+        if (fmin < Math<Real>::GetZero())
         {
             fmin *= mFrustum.GetDirectionRatio();
         }
         fmax = NA[i] + p;
-        if (fmax > Math<Real>::sm_Zero)
+        if (fmax > Math<Real>::GetZero())
         {
             fmax *= mFrustum.GetDirectionRatio();
         }
@@ -223,17 +223,17 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
         p = mFrustum.GetRightBound()*Math::FAbs(NBmUC[i]) + mFrustum.GetUpBound()*Math::FAbs(NAmRC[i]);
         tmp = -mFrustum.GetDirectionMin()*RBmUA[i];
         fmin = tmp - p;
-        if (fmin < Math<Real>::sm_Zero)
+        if (fmin < Math<Real>::GetZero())
         {
             fmin *= mFrustum.GetDirectionRatio();
         }
         fmax = tmp + p;
-        if (fmax > Math<Real>::sm_Zero)
+        if (fmax > Math<Real>::GetZero())
         {
             fmax *= mFrustum.GetDirectionRatio();
         }
         DdD = D[0]*NBmUC[i] - D[1]*NAmRC[i] - D[2]*RBmUA[i];
-        radius = Math<Real>::sm_Zero;
+        radius = Math<Real>::GetZero();
         for (j = 0; j < 3; j++)
         {
             radius += extents[j]*Math::FAbs(A[j]*NBmUC[i] - B[j]*NAmRC[i] - C[j]*RBmUA[i]);
@@ -251,17 +251,17 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
         p = mFrustum.GetRightBound()*Math::FAbs(NBpUC[i]) + mFrustum.GetUpBound()*Math::FAbs(NAmRC[i]);
         tmp = -mFrustum.GetDirectionMin()*RBpUA[i];
         fmin = tmp - p;
-        if (fmin < Math<Real>::sm_Zero)
+        if (fmin < Math<Real>::GetZero())
         {
             fmin *= mFrustum.GetDirectionRatio();
         }
         fmax = tmp + p;
-        if (fmax > Math<Real>::sm_Zero)
+        if (fmax > Math<Real>::GetZero())
         {
             fmax *= mFrustum.GetDirectionRatio();
         }
         DdD = D[0]*NBpUC[i] - D[1]*NAmRC[i] - D[2]*RBpUA[i];
-        radius = Math<Real>::sm_Zero;
+        radius = Math<Real>::GetZero();
         for (j = 0; j < 3; ++j)
         {
             radius += extents[j]*Math::FAbs(A[j]*NBpUC[i] - B[j]*NAmRC[i] - C[j]*RBpUA[i]);
@@ -279,17 +279,17 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
         p = mFrustum.GetRightBound()*Math::FAbs(NBmUC[i]) + mFrustum.GetUpBound()*Math::FAbs(NApRC[i]);
         tmp = mFrustum.GetDirectionMin()*RBpUA[i];
         fmin = tmp - p;
-        if (fmin < Math<Real>::sm_Zero)
+        if (fmin < Math<Real>::GetZero())
         {
             fmin *= mFrustum.GetDirectionRatio();
         }
         fmax = tmp + p;
-        if (fmax > Math<Real>::sm_Zero)
+        if (fmax > Math<Real>::GetZero())
         {
             fmax *= mFrustum.GetDirectionRatio();
         }
         DdD = D[0]*NBmUC[i] - D[1]*NApRC[i] + D[2]*RBpUA[i];
-        radius = Math<Real>::sm_Zero;
+        radius = Math<Real>::GetZero();
         for (j = 0; j < 3; ++j)
         {
             radius += extents[j]*Math::FAbs(A[j]*NBmUC[i] - B[j]*NApRC[i] + C[j]*RBpUA[i]);
@@ -307,17 +307,17 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
         p = mFrustum.GetRightBound()*Math::FAbs(NBpUC[i]) + mFrustum.GetUpBound()*Math::FAbs(NApRC[i]);
         tmp = mFrustum.GetDirectionMin()*RBmUA[i];
         fmin = tmp - p;
-        if (fmin < Math<Real>::sm_Zero)
+        if (fmin < Math<Real>::GetZero())
         {
             fmin *= mFrustum.GetDirectionRatio();
         }
         fmax = tmp + p;
-        if (fmax > Math<Real>::sm_Zero)
+        if (fmax > Math<Real>::GetZero())
         {
             fmax *= mFrustum.GetDirectionRatio();
         }
         DdD = D[0]*NBpUC[i] - D[1]*NApRC[i] + D[2]*RBmUA[i];
-        radius = Math<Real>::sm_Zero;
+        radius = Math<Real>::GetZero();
         for (j = 0; j < 3; ++j)
         {
             radius += extents[j]*Math::FAbs(A[j]*NBpUC[i] - B[j]*NApRC[i] + C[j]*RBmUA[i]);

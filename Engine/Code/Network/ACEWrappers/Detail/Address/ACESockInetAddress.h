@@ -27,7 +27,7 @@ namespace Network
 		ACESockInetAddress(const std::string& hostName, int port);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const ACEInetAddressType& GetACEInetAddress() const noexcept override;
 		ACEInetAddressType& GetACEInetAddress() override;

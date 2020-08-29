@@ -76,7 +76,7 @@ typename const Mathematics::DistSegment3Rectangle3<Real>::DistanceResult Mathema
 		mRectCoord[0] = queryPR.GetRectangleCoordinate(0);
 		mRectCoord[1] = queryPR.GetRectangleCoordinate(1);
 	}
-	return DistanceResult{ sqrDist.GetDistance(), Math<Real>::sm_Zero, mClosestPoint0, mClosestPoint1 };
+	return DistanceResult{ sqrDist.GetDistance(), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }
 
 

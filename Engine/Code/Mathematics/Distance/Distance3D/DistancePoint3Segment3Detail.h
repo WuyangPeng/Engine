@@ -88,8 +88,8 @@ const typename Mathematics::DistancePoint3Segment3<Real>::DistanceResult Mathema
 
 	difference = rhsClosestPoint - m_Point;
 
-	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(difference), Math<Real>::sm_Zero,
-						   m_Point,rhsClosestPoint,Math<Real>::sm_Zero,param };
+	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(difference), Math<Real>::GetValue(0),
+						   m_Point,rhsClosestPoint,Math<Real>::GetValue(0),param };
 }
 
 template <typename Real>

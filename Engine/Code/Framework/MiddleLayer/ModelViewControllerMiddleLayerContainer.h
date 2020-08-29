@@ -39,7 +39,7 @@ namespace Framework
 		ModelViewControllerMiddleLayerContainer(ModelViewControllerMiddleLayerContainer&& rhs) noexcept;
 		ModelViewControllerMiddleLayerContainer& operator=(ModelViewControllerMiddleLayerContainer&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_FINAL_DECLARE;
+		CLASS_INVARIANT_FINAL_DECLARE;
 
 		bool PreCreate(const EnvironmentDirectory& environmentDirectory) final;
 		bool Create() final;

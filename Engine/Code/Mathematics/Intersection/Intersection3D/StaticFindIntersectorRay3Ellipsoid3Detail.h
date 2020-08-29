@@ -53,26 +53,26 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
     // Intersection occurs if Q(t) has real roots with t >= 0.
 	auto discr = a1*a1 - a0*a2;
     Real t[2];
-    if (discr < Math<Real>::sm_Zero)
+    if (discr < Math<Real>::GetZero())
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         mQuantity = 0;
     }
-    else if (discr > Math<Real>::sm_Zero)
+    else if (discr > Math<Real>::GetZero())
     {
 		auto root = Math::Sqrt(discr);
 		auto inv = (static_cast<Real>(1))/a2;
         t[0] = (-a1 - root)*inv;
         t[1] = (-a1 + root)*inv;
 
-        if (t[0] >= Math<Real>::sm_Zero)
+        if (t[0] >= Math<Real>::GetZero())
         {
 			this->SetIntersectionType(IntersectionType::Segment);
             mQuantity = 2;
 			mPoint[0] = mRay.GetOrigin() + t[0] * mRay.GetDirection();
 			mPoint[1] = mRay.GetOrigin() + t[1] * mRay.GetDirection();
         }
-        else if (t[1] >= Math<Real>::sm_Zero)
+        else if (t[1] >= Math<Real>::GetZero())
         {
 			this->SetIntersectionType(IntersectionType::Point);
             mQuantity = 1;
@@ -88,7 +88,7 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
     else
     {
         t[0] = -a1/a2;
-        if (t[0] >= Math<Real>::sm_Zero)
+        if (t[0] >= Math<Real>::GetZero())
         {
 			this->SetIntersectionType(IntersectionType::Point);
             mQuantity = 1;

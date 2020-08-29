@@ -31,7 +31,7 @@ namespace Network
         ReactiveServer(ReactiveServer&&) noexcept = default;
         ReactiveServer& operator=(ReactiveServer&&) noexcept = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
 

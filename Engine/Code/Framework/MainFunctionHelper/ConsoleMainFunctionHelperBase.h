@@ -28,7 +28,7 @@ namespace Framework
 	public:
 		ConsoleMainFunctionHelperBase(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		int GetArgc() const noexcept;
 		char** GetArgv() const noexcept;

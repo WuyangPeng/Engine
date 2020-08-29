@@ -13,7 +13,9 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 using std::string;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 Network::SockAddress
 	::SockAddress(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
 	:m_Impl{ SockAddressFactory::Create(hostName, port, configurationStrategy) }
@@ -47,3 +49,4 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetWinSockInetAddr
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetAddress, const string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetPort, int)
+#include STSTEM_WARNING_POP

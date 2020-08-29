@@ -87,7 +87,7 @@ bool ImplicitSurface<Real>::ComputePrincipalCurvatureInfo (const Vector3D<Real>&
 	auto fy = FY(pos);
 	auto fz = FZ(pos);
 	auto fLength = Math<Real>::Sqrt(fx*fx + fy*fy + fz*fz);
-    if (fLength <= Math<Real>::sm_ZeroTolerance)
+    if (fLength <= Math<Real>::GetZeroTolerance())
     {
         return false;
     }

@@ -11,7 +11,7 @@
 
 #include "AlgebraFwd.h"
 #include "Flags/QuaternionFlags.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
 

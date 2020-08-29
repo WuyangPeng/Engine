@@ -22,7 +22,7 @@ namespace CoreTools
 	public:
 		NoValueCommandArgument(int index, const std::string& name); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		int GetInteger() const override;
 		float GetFloat() const override;

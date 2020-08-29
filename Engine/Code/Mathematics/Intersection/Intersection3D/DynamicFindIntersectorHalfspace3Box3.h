@@ -37,7 +37,7 @@ namespace Mathematics
 		DynamicFindIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box,
 											 Real tmax, const Vector3D& lhsVelocity,
 											 const Vector3D& rhsVelocity,
-											 const Real epsilon = Math::sm_ZeroTolerance);
+											 const Real epsilon = Math::GetZeroTolerance());
 
 		// Object access.
 		const Plane3 GetHalfspace() const;

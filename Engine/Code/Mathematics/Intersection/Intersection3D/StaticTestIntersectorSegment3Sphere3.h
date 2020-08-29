@@ -38,7 +38,7 @@ namespace Mathematics
 		// Static intersection queries.
 		void Test();
 
-		Real ZeroThreshold;  // default = Math<Real>::sm_ZeroTolerance
+		Real ZeroThreshold;  // default = Math<Real>::GetZeroTolerance()
 
 		// The objects to intersect.
 		Segment3 mSegment;

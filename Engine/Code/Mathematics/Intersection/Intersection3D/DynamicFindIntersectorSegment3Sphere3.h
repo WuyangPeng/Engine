@@ -29,7 +29,7 @@ namespace Mathematics
 
 	public:
 		DynamicFindIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere, Real tmax,
-											  const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+											  const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
 		// Object access.
 		const Segment3 GetSegment() const;
@@ -40,7 +40,7 @@ namespace Mathematics
 		const Vector3D GetPoint(int i) const;
 		Real GetSegmentParameter(int i) const;
 
-		Real ZeroThreshold;  // default = Math<Real>::sm_ZeroTolerance
+		Real ZeroThreshold;  // default = Math<Real>::GetZeroTolerance()
 
 	private:
 		// Dynamic find-intersection query.  The first point of contact is

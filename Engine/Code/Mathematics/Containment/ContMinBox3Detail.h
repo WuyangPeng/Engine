@@ -23,7 +23,7 @@ Mathematics::MinBox3<Real>
 
     if (hullDim == 0)
     {
-		mMinBox.Set(points[0], Vector3D<Real>::sm_UnitX, Vector3D<Real>::sm_UnitY, Vector3D<Real>::sm_UnitZ, Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero);
+		mMinBox.Set(points[0], Vector3D<Real>::sm_UnitX, Vector3D<Real>::sm_UnitY, Vector3D<Real>::sm_UnitZ, Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetValue(0));
        
         return;
     }
@@ -36,8 +36,8 @@ Mathematics::MinBox3<Real>
 		auto center = (Real{0.5})*(points[hullIndices[0]] + points[hullIndices[1]]);
 		auto diff = points[hullIndices[1]] - points[hullIndices[0]];
 		auto extent0 = (Real{0.5})*Vector3DTools<Real>::VectorMagnitude(diff);
-		auto extent1 = Math<Real>::sm_Zero;
-		auto extent2 = Math<Real>::sm_Zero;
+		auto extent1 = Math<Real>::GetValue(0);
+		auto extent2 = Math<Real>::GetValue(0);
 
 		diff.Normalize();
 	 
@@ -95,7 +95,7 @@ Mathematics::MinBox3<Real>
 					W,
 					box2.GetFirstExtent(),
 					box2.GetSecondExtent() ,
-					Math<Real>::sm_Zero); 
+					Math<Real>::GetValue(0)); 
 
         return;
     }
@@ -157,8 +157,8 @@ Mathematics::MinBox3<Real>
         // of counterclockwise when viewed from outside the hull).  The
         // height calculations here trap that problem (the incorrectly ordered
         // face will not affect the minimum volume box calculations).
-        minHeight = Math<Real>::sm_Zero;
-        maxHeight = Math<Real>::sm_Zero;
+        minHeight = Math<Real>::GetValue(0);
+        maxHeight = Math<Real>::GetValue(0);
         j = 0;
 		auto iter = uniqueIndices.begin();
         while (iter != uniqueIndices.end())
@@ -222,7 +222,7 @@ Mathematics::MinBox3<Real>
 			V = points[e1iter->GetKey(1)] - points[e1iter->GetKey(0)];
             V.Normalize();
             Real dot = Vector3DTools<Real>::DotProduct(V,W);
-            if (Math<Real>::FAbs(dot) > Math<Real>::sm_ZeroTolerance)
+            if (Math<Real>::FAbs(dot) > Math<Real>::GetZeroTolerance())
             {
                 continue;
             }
@@ -233,12 +233,12 @@ Mathematics::MinBox3<Real>
 				U = points[e0iter->GetKey(1)] - points[e0iter->GetKey(0)];
                 U.Normalize();
 				dot = Vector3DTools<Real>::DotProduct(U, V);
-                if (Math<Real>::FAbs(dot) > Math<Real>::sm_ZeroTolerance)
+                if (Math<Real>::FAbs(dot) > Math<Real>::GetZeroTolerance())
                 {
                     continue;
                 }
 				dot = Vector3DTools<Real>::DotProduct(U,W);
-				if (Math<Real>::FAbs(dot) > Math<Real>::sm_ZeroTolerance)
+				if (Math<Real>::FAbs(dot) > Math<Real>::GetZeroTolerance())
                 {
                     continue;
                 }
@@ -246,9 +246,9 @@ Mathematics::MinBox3<Real>
                 // The three edges are mutually orthogonal.  Project the
                 // hull points onto the lines containing the edges.  Use
                 // hull point zero as the origin.
-                Real umin = Math<Real>::sm_Zero, umax = Math<Real>::sm_Zero;
-                Real vmin = Math<Real>::sm_Zero, vmax = Math<Real>::sm_Zero;
-                Real wmin = Math<Real>::sm_Zero, wmax = Math<Real>::sm_Zero;
+                Real umin = Math<Real>::GetValue(0), umax = Math<Real>::GetValue(0);
+                Real vmin = Math<Real>::GetValue(0), vmax = Math<Real>::GetValue(0);
+                Real wmin = Math<Real>::GetValue(0), wmax = Math<Real>::GetValue(0);
                 origin = points[hullIndices[0]];
 
                 std::set<int>::const_iterator iter = uniqueIndices.begin();

@@ -135,7 +135,7 @@ void ParametricSurface<Real>::ComputePrincipalCurvatureInfo (Real u, Real v,Real
 	auto a0 = curvatureTensor[0][1] - curv0*metricTensor[0][1];
 	auto a1 = curv0*metricTensor[0][0] - curvatureTensor[0][0];
 	auto length = Math<Real>::Sqrt(a0*a0 + a1*a1);
-    if (length >= Math<Real>::sm_ZeroTolerance)
+    if (length >= Math<Real>::GetZeroTolerance())
     {
         dir0 = a0*derU + a1*derV;
     }
@@ -144,7 +144,7 @@ void ParametricSurface<Real>::ComputePrincipalCurvatureInfo (Real u, Real v,Real
         a0 = curvatureTensor[1][1] - curv0*metricTensor[1][1];
         a1 = curv0*metricTensor[0][1] - curvatureTensor[0][1];
         length = Math<Real>::Sqrt(a0*a0 + a1*a1);
-        if (length >= Math<Real>::sm_ZeroTolerance)
+        if (length >= Math<Real>::GetZeroTolerance())
         {
             dir0 = a0*derU + a1*derV;
         }

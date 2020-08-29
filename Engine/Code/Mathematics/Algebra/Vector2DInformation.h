@@ -32,7 +32,7 @@ namespace Mathematics
 
 	public:
 		// 值epsilon被使用在计算点集的维度时，作为相对误差。
-		Vector2DInformation(const std::vector<Vector2D>& points, Real epsilon = Math::sm_ZeroTolerance);
+		Vector2DInformation(const std::vector<Vector2D>& points, Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

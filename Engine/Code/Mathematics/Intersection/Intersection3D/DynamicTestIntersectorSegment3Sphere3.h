@@ -29,7 +29,7 @@ namespace Mathematics
 
 	public:
 		DynamicTestIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere, Real tmax,
-											  const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::sm_ZeroTolerance);
+											  const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
 		// Object access.
 		const Segment3 GetSegment() const;
@@ -39,7 +39,7 @@ namespace Mathematics
 		// Dynamic test-intersection query.
 		void Test();
 
-		Real ZeroThreshold;  // default = Math<Real>::sm_ZeroTolerance
+		Real ZeroThreshold;  // default = Math<Real>::GetZeroTolerance()
 
 		// The objects to intersect.
 		Segment3 mSegment;

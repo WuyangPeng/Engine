@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "SparseMatrix.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/BandedMatrix.h"
 #include "Mathematics/Algebra/VariableMatrix.h"
 #include "Mathematics/Algebra/VariableLengthVector.h"
@@ -34,7 +34,7 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		explicit LinearSystem(Real zeroTolerance = Math::sm_ZeroTolerance);
+		explicit LinearSystem(Real zeroTolerance = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -135,7 +135,7 @@ namespace Mathematics
 
 	private:
 		// 线性系统求解容差。
-		// 默认 = Math<Real>::sm_ZeroTolerance
+		// 默认 = Math<Real>::GetZeroTolerance()
 		Real m_ZeroTolerance;
 	};
 

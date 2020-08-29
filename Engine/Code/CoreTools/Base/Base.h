@@ -9,5 +9,6 @@
 
 #include "SingletonDetail.h"
 #include "UniqueIDManagerDetail.h"
+#include "SpanIteratorDetail.h"
 
 #endif // CORE_TOOLS_BASE_H

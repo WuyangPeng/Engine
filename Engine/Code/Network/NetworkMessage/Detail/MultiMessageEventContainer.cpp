@@ -17,6 +17,7 @@ using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26456)
 Network::MultiMessageEventContainer
 	::MultiMessageEventContainer()
 	:ParentType{}, m_Impl{ make_shared<ImplType>() }, m_Priority{ MessageEventPriority::Count }
@@ -68,7 +69,7 @@ Network::MultiMessageEventContainer& Network::MultiMessageEventContainer
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Network, MultiMessageEventContainer)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, MultiMessageEventContainer, Remove, NetworkMessageEventSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Network, MultiMessageEventContainer, Remove, NetworkMessageEventSharedPtr, void)
 
 void Network::MultiMessageEventContainer
 	::Insert(const NetworkMessageEventSharedPtr& smartPointer)

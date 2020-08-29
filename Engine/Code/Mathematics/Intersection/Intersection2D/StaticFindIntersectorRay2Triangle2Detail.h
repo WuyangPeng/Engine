@@ -55,7 +55,7 @@ void Mathematics::StaticFindIntersectorRay2Triangle2<Real>
 		Real param[2]{};
 		StaticFindIntersectorLine2Triangle2<Real>::GetInterval(mRay.GetOrigin(), mRay.GetDirection(), mTriangle, dist, sign, param);
 
-		StaticFindIntersector1<Real> intr{ param[0], param[1], Math<Real>::sm_Zero,Math::sm_MaxReal };
+		StaticFindIntersector1<Real> intr{ param[0], param[1], Math<Real>::GetZero(),Math::sm_MaxReal };
 
 		mQuantity = intr.GetNumIntersections();
 		if (mQuantity == 2)

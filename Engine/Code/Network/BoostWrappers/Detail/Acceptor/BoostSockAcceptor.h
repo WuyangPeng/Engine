@@ -31,7 +31,7 @@ namespace Network
         BoostSockAcceptor(BoostSockAcceptor&& rhs) noexcept;
         BoostSockAcceptor& operator=(BoostSockAcceptor&& rhs) noexcept;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         bool Accept(const SockStreamSharedPtr& sockStream) override;
         bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;

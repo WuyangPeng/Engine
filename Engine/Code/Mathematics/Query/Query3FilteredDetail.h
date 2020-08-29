@@ -32,7 +32,7 @@ template <typename Real>
 bool Mathematics::Query3Filtered<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Math<Real>::sm_Zero <= m_Uncertainty && m_Uncertainty <= static_cast<Real>(1))
+	if (ParentType::IsValid() && Math<Real>::GetValue(0) <= m_Uncertainty && m_Uncertainty <= static_cast<Real>(1))
 		return true;
 	else
 		return false;
@@ -89,9 +89,9 @@ Mathematics::PlaneQueryType Mathematics::Query3Filtered<Real>
 	auto det = QueryDotTools<Real>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
 	if (scaledUncertainty <= Math<Real>::FAbs(det))
 	{
-		if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
+		if (Math<Real>::FAbs(det) <= Math<Real>::GetZeroTolerance())
 			return PlaneQueryType::OnPlane;
-		else if (Math<Real>::sm_Zero < det)
+		else if (Math<Real>::GetValue(0) < det)
 			return PlaneQueryType::PositiveSide;
 		else
 			return PlaneQueryType::NegativeSide;
@@ -163,9 +163,9 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Filtered<Real>
 
 	if (scaledUncertainty <= Math<Real>::FAbs(det))
 	{
-		if (Math<Real>::FAbs(det) <= Math<Real>::sm_ZeroTolerance)
+		if (Math<Real>::FAbs(det) <= Math<Real>::GetZeroTolerance())
 			return CircumsphereQueryType::OnCircumsphere;
-		else if (det < Math<Real>::sm_Zero)
+		else if (det < Math<Real>::GetValue(0))
 			return CircumsphereQueryType::Inside;
 		else
 			return CircumsphereQueryType::Outside;

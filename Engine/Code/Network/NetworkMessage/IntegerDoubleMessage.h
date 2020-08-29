@@ -31,7 +31,7 @@ namespace Network
 		IntegerDoubleMessage(int64_t messageID, const IntegerType& integerType);
 		virtual ~IntegerDoubleMessage();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		CORE_TOOLS_RTTI_DECLARE;
 		NETWORK_STREAM_DECLARE(IntegerDoubleMessage);

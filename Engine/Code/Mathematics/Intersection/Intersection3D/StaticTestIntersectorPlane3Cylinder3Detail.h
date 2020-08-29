@@ -69,7 +69,7 @@ bool Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>
 	auto term = mCylinder.GetRadius()*root + (Real{0.5})*mCylinder.GetHeight()*absNdW;
 
     // Culling occurs if and only if max <= 0.
-    return sDist + term <= Math<Real>::sm_Zero;
+    return sDist + term <= Math<Real>::GetValue(0);
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CYLINDER3_DETAIL_H

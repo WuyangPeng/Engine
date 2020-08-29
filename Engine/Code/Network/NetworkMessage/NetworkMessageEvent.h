@@ -13,7 +13,10 @@
 
 template class NETWORK_DEFAULT_DECLARE std::weak_ptr<Network::NetworkMessageEvent>;
 template class NETWORK_DEFAULT_DECLARE std::enable_shared_from_this<Network::NetworkMessageEvent>;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+ 
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE NetworkMessageEvent : public std::enable_shared_from_this<NetworkMessageEvent>
@@ -41,5 +44,5 @@ namespace Network
     using NetworkMessageEventWeakPtr = std::weak_ptr<NetworkMessageEvent>;
     using ConstNetworkMessageEventWeakPtr = std::weak_ptr<const NetworkMessageEvent>;
 }
-
+#include STSTEM_WARNING_POP
 #endif  // NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_EVENT_H

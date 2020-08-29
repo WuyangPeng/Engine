@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "LinearSystemConstIteratorDetail.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <boost/noncopyable.hpp>
 #include <vector>
@@ -28,7 +28,7 @@ namespace Mathematics
 		using OutputConstIterator = LinearSystemConstIterator<Real>;
 
 	public:
-		explicit SolveSymmetricConjugateGradient(const MatrixType& matrix, const Real* inputVector, Real zeroTolerance = Math<Real>::sm_ZeroTolerance);
+		explicit SolveSymmetricConjugateGradient(const MatrixType& matrix, const Real* inputVector, Real zeroTolerance = Math<Real>::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/19 10:04)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.0 (2020/08/27 21:25)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_H
 #define MATHEMATICS_ALGEBRA_A_POINT_H
@@ -12,54 +15,67 @@
 #include "AlgebraFwd.h"
 #include "HomogeneousPoint.h"
 #include "Mathematics/Base/BaseFwd.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
 
 namespace Mathematics
 {
     template <typename T>
-    class APoint
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE APoint
     {
     public:
         static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
         using ClassType = APoint<T>;
-        using HomogeneousPoint = HomogeneousPoint<T>;
         using Math = Math<T>;
-        using AlgebraTraits = AlgebraTraits<T>;
-        using Vector3D = Vector3D<T>;
         using AVector = AVector<T>;
+        using Vector3D = Vector3D<T>;
+        using HomogeneousPoint = HomogeneousPoint<T>;
 
     public:
         // APoint表示仿射坐标 (x,y,z,1)。 默认 (0,0,0,1)
-        APoint() noexcept;
-        APoint(T x, T y, T z) noexcept;
-        APoint(const Float3& tuple);
-        APoint(const Vector3D& rhs);
+        constexpr APoint() noexcept
+            : APoint{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) }
+        {
+        }
+
+        constexpr APoint(T x, T y, T z) noexcept
+            : m_HomogeneousPoint{ x, y, z, Math::GetValue(1) }
+        {
+        }
+
+        explicit APoint(const Vector3D& rhs);
 
         CLASS_INVARIANT_DECLARE;
 
-        const Float3 GetFloat3() const;
-        const Vector3D GetVector3D() const noexcept;
-        const HomogeneousPoint GetHomogeneousPoint() const noexcept;
+        [[nodiscard]] T GetX() const noexcept;
+        void SetX(T x) noexcept;
+        [[nodiscard]] T GetY() const noexcept;
+        void SetY(T y) noexcept;
+        [[nodiscard]] T GetZ() const noexcept;
+        void SetZ(T y) noexcept;
 
-        const T& operator[](int index) const;
-        T& operator[](int index);
+        [[nodiscard]] const Vector3D GetVector3D() const noexcept;
+        [[nodiscard]] const HomogeneousPoint GetHomogeneousPoint() const noexcept;
+
+        [[nodiscard]] const T& operator[](int index) const;
+        [[nodiscard]] T& operator[](int index);
 
         // 算术运算支持仿射代数。
 
         // 一个点加或减一个向量的结果是一个点
-        ClassType& operator+=(const AVector& rhs);
-        ClassType& operator-=(const AVector& rhs);
+        APoint& operator+=(const AVector& rhs);
+        APoint& operator-=(const AVector& rhs);
 
-        ClassType& operator+=(const ClassType& rhs);
-        ClassType& operator-=(const ClassType& rhs);
-        ClassType& operator*=(T scalar);
-        ClassType& operator/=(T scalar);
-        const APoint operator-() const;
+        APoint& operator+=(const APoint& rhs);
+        APoint& operator-=(const APoint& rhs);
+        APoint& operator*=(T scalar);
+        APoint& operator/=(T scalar);
+        [[nodiscard]] const APoint operator-() const noexcept;
 
-        // 特殊向量
-        static const APoint sm_Origin;  // (0,0,0,1)
+    private:
+        static constexpr auto sm_APointSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
 
     private:
         HomogeneousPoint m_HomogeneousPoint;
@@ -67,13 +83,13 @@ namespace Mathematics
 
     // 两个点相减为一个向量
     template <typename T>
-    const AVector<T> operator-(const APoint<T>& lhs, const APoint<T>& rhs);
+    [[nodiscard]] const AVector<T> operator-(const APoint<T>& lhs, const APoint<T>& rhs) noexcept;
 
     // 一个点增加或减小一个向量的结果是一个点
     template <typename T>
-    const APoint<T> operator+(const APoint<T>& lhs, const AVector<T>& rhs);
+    [[nodiscard]] const APoint<T> operator+(const APoint<T>& lhs, const AVector<T>& rhs);
     template <typename T>
-    const APoint<T> operator-(const APoint<T>& lhs, const AVector<T>& rhs);
+    [[nodiscard]] const APoint<T> operator-(const APoint<T>& lhs, const AVector<T>& rhs);
 
     // 在仿射代数，点不能随意加减。然而，仿射和和仿射差是允许的。您有责任确保您在计算哪一个。
 
@@ -85,35 +101,36 @@ namespace Mathematics
     // r = d1 * p1 + d2 * p2 + ... + dn * pn
     // 这里p1到pn是齐次坐标的点（w值是1）和 d1到dn是标量，且d1 + d2 + ... + dn = 0，其结果r是齐次坐标点。
 
-    // 注意：这个类的算法操作返回APoint对象，但仿射差需要返回一个HomogeneousPoint对象。
+    // 注意：这个类的算法操作返回APoint对象，但仿射差需要返回一个AVector对象。
     // 下面的代码显示了如何实现这一点：
     // APoint p1, p2, p3;  // 初始化为任何值
     // APoint difference = 1.5f * p1 + (-0.2f) * p2 + (-0.3f) * p3;
-    // HomogeneousPoint r = difference.GetHomogeneousPoint();
+    // AVector r { difference.GetHomogeneousPoint() };
+    // r仅复制x，y和z分量，并将w分量设置为零。
     template <typename T>
-    const APoint<T> operator+(const APoint<T>& lhs, const APoint<T>& rhs);
+    [[nodiscard]] const APoint<T> operator+(const APoint<T>& lhs, const APoint<T>& rhs);
 
     template <typename T>
-    const APoint<T> operator*(const APoint<T>& lhs, T scalar);
+    [[nodiscard]] const APoint<T> operator*(const APoint<T>& lhs, T scalar);
 
     template <typename T>
-    const APoint<T> operator/(const APoint<T>& lhs, T scalar);
+    [[nodiscard]] const APoint<T> operator/(const APoint<T>& lhs, T scalar);
 
     template <typename T>
-    const APoint<T> operator*(T scalar, const APoint<T>& rhs);
+    [[nodiscard]] const APoint<T> operator*(T scalar, const APoint<T>& rhs);
 
     // 在仿射代数是不允许计算一个点和一个向量的内积。 然而，当处理平面时，这是一个方便的定义。
     // 具体而言，平面是Dot(N,X-P) = 0，其中N是一个向量，P是平面上一个特定的点，且X是在平面上的任意点。
     // 差X - P是一个向量，那么Dot(N,X - P)被很好地定义。如果平面被重写为Dot(N,X) = Dot(N,P)，这在仿射代数中是不支持的，
     // 无论无如，我们有时需要计算Dot(N,P)。在下文中，APoint的w分量被忽略，这意味着APoint被视为向量。
     template <typename T>
-    T Dot(const APoint<T>& lhs, const AVector<T>& rhs);
+    [[nodiscard]] T Dot(const APoint<T>& lhs, const AVector<T>& rhs);
 
     template <typename T>
-    bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs, const T epsilon);
+    [[nodiscard]] bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs, const T epsilon);
 
     template <typename T>
-    bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs);
+    [[nodiscard]] bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs);
 
     // 调试输出
     template <typename T>
@@ -121,6 +138,18 @@ namespace Mathematics
 
     using APointf = APoint<float>;
     using APointd = APoint<double>;
+
+    namespace Pointf
+    {
+        // (0,0,0,1)
+        constexpr APointf g_Origin;
+    }
+
+    namespace Pointd
+    {
+        // (0,0,0,1)
+        constexpr APointd g_Origin;
+    }
 }
 
 #endif  // MATHEMATICS_ALGEBRA_A_POINT_H

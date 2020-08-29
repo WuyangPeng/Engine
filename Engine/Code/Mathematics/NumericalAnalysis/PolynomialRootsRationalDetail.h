@@ -20,7 +20,7 @@ typename const Mathematics::PolynomialRootsRational<Real>::PolynomialRational Ma
 
 template <typename Real>
 typename const Mathematics::PolynomialRootsRational<Real>::PolynomialRational Mathematics::PolynomialRootsRational<Real>
-	::sm_One{ Math::sm_One };
+	::sm_One{ Math::GetValue(1) };
 
 template <typename Real>
 Mathematics::PolynomialRootsRational<Real>
@@ -29,7 +29,7 @@ Mathematics::PolynomialRootsRational<Real>
 {
 	for (auto i = 0; i < sm_MaxRoot; ++i)
 	{
-		m_Root[i] = Math::sm_Zero;
+		m_Root[i] = Math::GetValue(0);
 		m_Multiplicity[i] = 0;
 	}
 
@@ -246,7 +246,7 @@ bool Mathematics::PolynomialRootsRational<Real>
 		// 估算判别式。
 		auto discriminant = rationalDiscriminant.ConvertTo<Real>();
 
-		MATHEMATICS_ASSERTION_3(Math::sm_Zero < discriminant, "意外情况\n");
+		MATHEMATICS_ASSERTION_3(Math::GetValue(0) < discriminant, "意外情况\n");
 
 		discriminant = Math::Sqrt(discriminant);
 
@@ -344,7 +344,7 @@ bool Mathematics::PolynomialRootsRational<Real>
 
 		// 估计判别式 
 		auto discriminant = rationalDiscriminant.ConvertTo<Real>();
-		MATHEMATICS_ASSERTION_3(Math::sm_Zero < discriminant, "意外情况\n");
+		MATHEMATICS_ASSERTION_3(Math::GetValue(0) < discriminant, "意外情况\n");
 		auto discriminantSqrt = Math::Sqrt(discriminant);
 
 		rationalDiscriminant = PolynomialRational{ discriminantSqrt };
@@ -376,7 +376,7 @@ bool Mathematics::PolynomialRootsRational<Real>
 
 		// 通过计算的特征值求解该多项式的根。
 		auto negativeQ = -rationalQ.ConvertTo<Real>();
-		MATHEMATICS_ASSERTION_3(Math::sm_Zero < negativeQ, "意外情况\n");
+		MATHEMATICS_ASSERTION_3(Math::GetValue(0) < negativeQ, "意外情况\n");
 
 		auto negativeR = -rationalR.ConvertTo<Real>();
 		auto negativeDiscriminant = -rationalDiscriminant.ConvertTo<Real>();

@@ -97,11 +97,11 @@ namespace Rendering
 
         // 获取齐次矩阵的逆，当需要时重新计算。
         // H = {{M,T},{0,1}}, 这里 H^{-1} = {{M^{-1},-M^{-1}*T},{0,1}}。
-		const Matrix GetInverseMatrix (float epsilon = Math::sm_ZeroTolerance) const;
+		const Matrix GetInverseMatrix (float epsilon = Math::GetZeroTolerance()) const;
 
         // 获取Transform的逆。
         // 不执行测试来确保调用的转换是可逆的。
-		const TransformImpl GetInverseTransform (float epsilon = Math::sm_ZeroTolerance) const;
+		const TransformImpl GetInverseTransform (float epsilon = Math::GetZeroTolerance()) const;
 
         // 单位转换
         static const TransformImpl sm_Identity;

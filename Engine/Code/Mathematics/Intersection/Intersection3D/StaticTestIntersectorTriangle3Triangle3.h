@@ -30,10 +30,10 @@ namespace Mathematics
 		using Math = Math<Real>;
 
 	public:
-		StaticTestIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, const Real epsilon = Math::sm_ZeroTolerance);
+		StaticTestIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, const Real epsilon = Math::GetZeroTolerance());
 		virtual ~StaticTestIntersectorTriangle3Triangle3();
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const Triangle3 GetLhsTriangle() const;
 		const Triangle3 GetRhsTriangle() const;

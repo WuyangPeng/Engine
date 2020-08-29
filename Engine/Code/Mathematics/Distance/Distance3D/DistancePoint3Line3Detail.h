@@ -69,7 +69,7 @@ const typename Mathematics::DistancePoint3Line3<Real>::DistanceResult Mathematic
 	auto rhsClosestPoint = m_Line.GetOrigin() + param * m_Line.GetDirection();
 	difference = rhsClosestPoint - m_Point;
 
-	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(difference),Math<Real>::sm_Zero,m_Point,rhsClosestPoint,Math<Real>::sm_Zero,param };
+	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(difference),Math<Real>::GetValue(0),m_Point,rhsClosestPoint,Math<Real>::GetValue(0),param };
 }
 
 template <typename Real>

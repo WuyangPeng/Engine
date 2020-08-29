@@ -20,7 +20,7 @@ namespace Framework
 	public:
 		explicit WindowFontInformation(HWnd hwnd) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		int GetStringWidth(const String& text) const noexcept final;
 		int GetCharacterWidth(const TChar character) const final;

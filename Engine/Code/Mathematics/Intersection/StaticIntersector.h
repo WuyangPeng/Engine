@@ -22,14 +22,14 @@ namespace Mathematics
 		using ParentType = Intersector<Real, Vector>;
 
 	public:
-		explicit StaticIntersector(const Real epsilon = Math::sm_ZeroTolerance);
+		explicit StaticIntersector(const Real epsilon = Math::GetZeroTolerance());
 		  ~StaticIntersector() = 0;
                 StaticIntersector(const StaticIntersector&) = default;
                 StaticIntersector& operator=(const StaticIntersector&) = default;
                 StaticIntersector(StaticIntersector&&) = default;
                 StaticIntersector& operator=(StaticIntersector&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 	};
 
 	using StaticIntersector2f = StaticIntersector<float, Vector2D>;

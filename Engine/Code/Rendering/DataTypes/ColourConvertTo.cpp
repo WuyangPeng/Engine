@@ -1,358 +1,418 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/18 15:20)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.0.0 (2020/08/22 11:14)
 
 #include "Rendering/RenderingExport.h"
 
-#include "ColourConvertTo.h"
-#include "ColourDetail.h"
+#include "ColourConvertToDetail.h"
 #include "HalfFloat.h"
-#include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "Rendering/DataTypes/ColourTextureFormatTraits.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26429)
-void Rendering::ColourConvertTo
-    ::ConvertToR5G6B5 (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
-{
-    auto source = inTexels;
-	auto target = reinterpret_cast<unsigned short*>(outTexels);
-    for (int i = 0; i < numInTexels; ++i)
-    {
-		auto red = static_cast<unsigned short>(source->GetRed() * ColourTextureFormatTraits<TextureFormat::R5G6B5>::sm_RedMaxValue + 0.5f);        
-		auto green = static_cast<unsigned short>(source->GetGreen() * ColourTextureFormatTraits<TextureFormat::R5G6B5>::sm_GreenMaxValue + 0.5f);        
-		auto blue = static_cast<unsigned short>(source->GetBlue() * ColourTextureFormatTraits<TextureFormat::R5G6B5>::sm_BlueMaxValue + 0.5f);
 
-        *target = blue | (green << 5) | (red << 11);
-        
-        ++source;
-        ++target;
-    }
+#include <array>
+
+using std::array;
+
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToR5G6B5(const InTexelsType& inTexels)
+{
+    constexpr auto textureFormat = TextureFormat::R5G6B5;
+
+    return ConvertToSmall<textureFormat>(inTexels);
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToA1R5G5B5 (int numInTexels, const FloatColour* inTexels,char* outTexels) noexcept
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA1R5G5B5(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned short*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
-    {
-		auto red = static_cast<unsigned short>(source->GetRed() * ColourTextureFormatTraits<TextureFormat::A1R5G5B5>::sm_RedMaxValue + 0.5f);        
-		auto green = static_cast<unsigned short>(source->GetGreen() * ColourTextureFormatTraits<TextureFormat::A1R5G5B5>::sm_GreenMaxValue + 0.5f);        
-		auto blue = static_cast<unsigned short>(source->GetBlue() * ColourTextureFormatTraits<TextureFormat::A1R5G5B5>::sm_BlueMaxValue + 0.5f);        
-		auto alpha = static_cast<unsigned short>(source->GetAlpha() * ColourTextureFormatTraits<TextureFormat::A1R5G5B5>::sm_AlphaMaxValue + 0.5f);
-        
-        *target = blue | (green << 5) | (red << 10) | (alpha << 15);
-        
-        ++source;
-        ++target;
-    }
+    constexpr auto textureFormat = TextureFormat::A1R5G5B5;
+
+    return ConvertToSmall<textureFormat>(inTexels);
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToA4R4G4B4 (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA4R4G4B4(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned short*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
-    {
-		auto red = static_cast<unsigned short>(source->GetRed() * ColourTextureFormatTraits<TextureFormat::A4R4G4B4>::sm_RedMaxValue + 0.5f);        
-		auto green = static_cast<unsigned short>(source->GetGreen() * ColourTextureFormatTraits<TextureFormat::A4R4G4B4>::sm_GreenMaxValue +  0.5f);        
-		auto blue = static_cast<unsigned short>(source->GetBlue() * ColourTextureFormatTraits<TextureFormat::A4R4G4B4>::sm_BlueMaxValue + 0.5f);        
-		auto alpha = static_cast<unsigned short>(source->GetAlpha() * ColourTextureFormatTraits<TextureFormat::A4R4G4B4>::sm_AlphaMaxValue + 0.5f);
-        
-        *target = blue | (green << 4) | (red << 8) | (alpha << 12);
-        
-        ++source;
-        ++target;
-    }
+    constexpr auto textureFormat = TextureFormat::A4R4G4B4;
+
+    return ConvertToSmall<textureFormat>(inTexels);
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToA8 (int numInTexels, const FloatColour* inTexels,char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA8(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned char*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::A8;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		const ByteColour colour{ *source };
-        
-        *target = colour.GetAlpha();
-        
-        ++source;
-        ++target;
+        const ByteColour colour{ source };
+
+        const auto alpha = colour.GetAlpha();
+
+        Increase<textureFormat>(target, alpha);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToL8 (int numInTexels, const FloatColour* inTexels,char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToL8(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned char*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::L8;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		const ByteColour colour{ *source };
-        
-        *target = colour.GetRed();
-        
-        ++source;
-        ++target;
+        const ByteColour colour{ source };
+
+        const auto luminance = colour.GetRed();
+
+        Increase<textureFormat>(target, luminance);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToA8L8 (int numInTexels, const FloatColour* inTexels,char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA8L8(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned char*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::A8L8;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		const ByteColour colour{ *source };
-        
-        *target++ = colour.GetRed();
-        *target++ = colour.GetAlpha();
-        
-        ++source;
+        const ByteColour colour{ source };
+
+        const auto luminance = colour.GetRed();
+        const auto alpha = colour.GetAlpha();
+
+        Increase<textureFormat>(target, luminance);
+        Increase<textureFormat>(target, alpha);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToR8G8B8 (int numInTexels, const FloatColour* inTexels,char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToR8G8B8(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned char*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::R8G8B8;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		const ByteColour colour{ *source };
-        
-        *target++ = colour.GetBlue();
-        *target++ = colour.GetGreen();
-        *target++ = colour.GetRed();
-        
-        ++source;
+        const ByteColour colour{ source };
+
+        const auto blue = colour.GetBlue();
+        const auto green = colour.GetGreen();
+        const auto red = colour.GetRed();
+
+        Increase<textureFormat>(target, blue);
+        Increase<textureFormat>(target, green);
+        Increase<textureFormat>(target, red);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-   ::ConvertToA8R8G8B8 (int numInTexels, const FloatColour* inTexels,char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA8R8G8B8(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned char*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::A8R8G8B8;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		const ByteColour colour{ *source };
-        
-        *target++ = colour.GetBlue();
-        *target++ = colour.GetGreen();
-        *target++ = colour.GetRed();
-        *target++ = colour.GetAlpha();
-        
-        ++source;
+        const ByteColour colour{ source };
+
+        const auto blue = colour.GetBlue();
+        const auto green = colour.GetGreen();
+        const auto red = colour.GetRed();
+        const auto alpha = colour.GetAlpha();
+
+        Increase<textureFormat>(target, blue);
+        Increase<textureFormat>(target, green);
+        Increase<textureFormat>(target, red);
+        Increase<textureFormat>(target, alpha);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToA8B8G8R8 (int numInTexels, const FloatColour* inTexels,char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA8B8G8R8(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned char*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::A8B8G8R8;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		const ByteColour colour{ *source };
-        
-        *target++ = colour.GetRed();
-        *target++ = colour.GetGreen();
-        *target++ = colour.GetBlue();
-        *target++ = colour.GetAlpha();
-        
-        ++source;
+        const ByteColour colour{ source };
+
+        const auto red = colour.GetRed();
+        const auto green = colour.GetGreen();
+        const auto blue = colour.GetBlue();
+        const auto alpha = colour.GetAlpha();
+
+        Increase<textureFormat>(target, red);
+        Increase<textureFormat>(target, green);
+        Increase<textureFormat>(target, blue);
+        Increase<textureFormat>(target, alpha);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToL16 (int numInTexels, const FloatColour* inTexels,char* outTexels) noexcept
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToL16(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned short*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::L16;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		auto red = static_cast<unsigned short>(source->GetRed() *  ColourTextureFormatTraits<TextureFormat::L16>::sm_LuminanceMaxValue + 0.5f);
-        
-        *target = red;
-        
-        ++source;
-        ++target;
+        const auto luminance = GetLuminance<textureFormat>(source);
+
+        Increase<textureFormat>(target, luminance);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-
-void Rendering::ColourConvertTo
-    ::ConvertToG16R16 (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToG16R16(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned short*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::G16R16;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		auto red = static_cast<unsigned short>(source->GetRed() * ColourTextureFormatTraits<TextureFormat::G16R16>::sm_RedMaxValue + 0.5f);
-        
-        *target++ = red;
-        
-		auto green = static_cast<unsigned short>(source->GetGreen() *  ColourTextureFormatTraits<TextureFormat::G16R16>::sm_GreenMaxValue + 0.5f);
-        
-        *target++ = green;
-        
-        ++source;
+        const auto red = GetRed<textureFormat>(source);
+        const auto green = GetGreen<textureFormat>(source);
+
+        Increase<textureFormat>(target, red);
+        Increase<textureFormat>(target, green);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToA16B16G16R16 (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA16B16G16R16(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<unsigned short*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::A16B16G16R16;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		auto red = static_cast<unsigned short>(source->GetRed() * ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_RedMaxValue + 0.5f);
-        
-        *target++ = red;
-        
-		auto green = static_cast<unsigned short>(source->GetGreen() * ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_GreenMaxValue + 0.5f);
-        
-        *target++ = green;
-        
-		auto blue = static_cast<unsigned short>(source->GetBlue() * ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_BlueMaxValue + 0.5f);
-        
-        *target++ = blue;
-        
-		auto alpha = static_cast<unsigned short>(source->GetAlpha() * ColourTextureFormatTraits<TextureFormat::A16B16G16R16>::sm_AlphaMaxValue + 0.5f);
-        
-        *target++ = alpha;
-        
-        ++source;
+        const auto red = GetRed<textureFormat>(source);
+        const auto green = GetGreen<textureFormat>(source);
+        const auto blue = GetBlue<textureFormat>(source);
+        const auto alpha = GetAlpha<textureFormat>(source);
+
+        Increase<textureFormat>(target, red);
+        Increase<textureFormat>(target, green);
+        Increase<textureFormat>(target, blue);
+        Increase<textureFormat>(target, alpha);
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToR16F (int numInTexels, const FloatColour* inTexels, char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToR16F(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<HalfFloat::HalfFloatType*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::R16F;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		*target = HalfFloat{ source->GetRed() }.ToHalfFloat();
-        
-        ++source;
-        ++target;
+        IncreaseHalfFloat<textureFormat>(target, source.GetRed());
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToG16R16F (int numInTexels, const FloatColour* inTexels,char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToG16R16F(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<HalfFloat::HalfFloatType*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::G16R16F;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		*target++ = HalfFloat{ source->GetRed() }.ToHalfFloat();
-		*target++ = HalfFloat{ source->GetGreen() }.ToHalfFloat();
-        
-        ++source;
+        IncreaseHalfFloat<textureFormat>(target, source.GetRed());
+        IncreaseHalfFloat<textureFormat>(target, source.GetGreen());
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToA16B16G16R16F (int numInTexels, const FloatColour* inTexels,char* outTexels)
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA16B16G16R16F(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<HalfFloat::HalfFloatType*>(outTexels);
-    for (int i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::A16B16G16R16F;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-		*target++ = HalfFloat{ source->GetRed() }.ToHalfFloat();
-		*target++ = HalfFloat{ source->GetGreen() }.ToHalfFloat();
-		*target++ = HalfFloat{ source->GetBlue() }.ToHalfFloat();
-		*target++ = HalfFloat{ source->GetAlpha() }.ToHalfFloat();
-        
-        ++source;
+        IncreaseHalfFloat<textureFormat>(target, source.GetRed());
+        IncreaseHalfFloat<textureFormat>(target, source.GetGreen());
+        IncreaseHalfFloat<textureFormat>(target, source.GetBlue());
+        IncreaseHalfFloat<textureFormat>(target, source.GetAlpha());
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-
-void Rendering::ColourConvertTo
-    ::ConvertToR32F (int numInTexels, const FloatColour* inTexels,char* outTexels) noexcept
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToR32F(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<float*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::R32F;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-        *target = source->GetRed();
-        
-        ++source;
-        ++target;
+        Increase<textureFormat>(target, source.GetRed());
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-void Rendering::ColourConvertTo
-    ::ConvertToG32R32F (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToG32R32F(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<float*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::G32R32F;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-        *target++ = source->GetRed();
-        *target++ = source->GetGreen();
-        
-        ++source;
+        Increase<textureFormat>(target, source.GetRed());
+        Increase<textureFormat>(target, source.GetGreen());
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-
-void Rendering::ColourConvertTo
-    ::ConvertToA32B32G32R32F (int numInTexels, const FloatColour* inTexels, char* outTexels) noexcept
+Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA32B32G32R32F(const InTexelsType& inTexels)
 {
-	auto source = inTexels;
-	auto target = reinterpret_cast<float*>(outTexels);
-    for (auto i = 0; i < numInTexels; ++i)
+    constexpr auto textureFormat = TextureFormat::A32B32G32R32F;
+
+    TexelsToCheck<textureFormat> texelsCheck{ inTexels.size() };
+
+    OutTexelsType outTexels(texelsCheck.GetOutTexelsLength());
+    SpanIterator target{ outTexels.begin(), outTexels.end(), outTexels.begin() };
+
+    for (const auto& source : inTexels)
     {
-        *target++ = source->GetRed();
-        *target++ = source->GetGreen();
-        *target++ = source->GetBlue();
-        *target++ = source->GetAlpha();
-        
-        ++source;
+        Increase<textureFormat>(target, source.GetRed());
+        Increase<textureFormat>(target, source.GetGreen());
+        Increase<textureFormat>(target, source.GetBlue());
+        Increase<textureFormat>(target, source.GetAlpha());
     }
+
+    texelsCheck.CheckOutTexels(outTexels.size());
+
+    return outTexels;
 }
 
-Rendering::ColourConvertTo::ConvertToFunction
-    Rendering::ColourConvertTo::sm_ToFunction[ConvertToQuantity]  
+Rendering::ColourConvertTo::ConvertToFunction Rendering::ColourConvertTo::GetConvertToFunction(TextureFormat textureFormat)
 {
-    nullptr,
-    &ConvertToR5G6B5,
-    &ConvertToA1R5G5B5,
-    &ConvertToA4R4G4B4,
-    &ConvertToA8,
-    &ConvertToL8,
-    &ConvertToA8L8,
-    &ConvertToR8G8B8,
-    &ConvertToA8R8G8B8,
-    &ConvertToA8B8G8R8,
-    &ConvertToL16,
-    &ConvertToG16R16,
-    &ConvertToA16B16G16R16,
-    &ConvertToR16F,
-    &ConvertToG16R16F,
-    &ConvertToA16B16G16R16F,
-    &ConvertToR32F,
-    &ConvertToG32R32F,
-    &ConvertToA32B32G32R32F,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
-};
-#include STSTEM_WARNING_POP
+    using FunctionContainer = array<ConvertToFunction, sm_ConvertToQuantity>;
+
+    static FunctionContainer functionContainer{ nullptr,
+                                                &ConvertToR5G6B5,
+                                                &ConvertToA1R5G5B5,
+                                                &ConvertToA4R4G4B4,
+                                                &ConvertToA8,
+                                                &ConvertToL8,
+                                                &ConvertToA8L8,
+                                                &ConvertToR8G8B8,
+                                                &ConvertToA8R8G8B8,
+                                                &ConvertToA8B8G8R8,
+                                                &ConvertToL16,
+                                                &ConvertToG16R16,
+                                                &ConvertToA16B16G16R16,
+                                                &ConvertToR16F,
+                                                &ConvertToG16R16F,
+                                                &ConvertToA16B16G16R16F,
+                                                &ConvertToR32F,
+                                                &ConvertToG32R32F,
+                                                &ConvertToA32B32G32R32F,
+                                                nullptr,
+                                                nullptr,
+                                                nullptr,
+                                                nullptr };
+
+    return functionContainer.at(System::EnumCastUnderlying(textureFormat));
+}

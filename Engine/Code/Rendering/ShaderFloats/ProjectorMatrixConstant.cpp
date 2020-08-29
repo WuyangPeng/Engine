@@ -21,6 +21,7 @@ using std::make_shared;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26456)
 #include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ProjectorMatrixConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ProjectorMatrixConstant);

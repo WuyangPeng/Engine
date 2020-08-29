@@ -13,7 +13,9 @@
 #include "Controller.h" 
 
 RENDERING_EXPORT_SHARED_PTR(PointControllerImpl);
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
 	class Polypoint;
@@ -32,7 +34,7 @@ namespace Rendering
 		PointController(PointController&&) = default;
 		  PointController& operator=(PointController&&) = default;
 		  
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(PointController); 
 
@@ -86,5 +88,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, PointController); 
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_POINT_CONTROLLER_H

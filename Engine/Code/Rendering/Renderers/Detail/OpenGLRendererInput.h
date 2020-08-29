@@ -25,7 +25,7 @@ namespace Rendering
         OpenGLRendererInput() noexcept;
  
         
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
           RendererTypes GetRendererType() const noexcept override;    
 		 	void SetWindowID(int windowID) noexcept override;

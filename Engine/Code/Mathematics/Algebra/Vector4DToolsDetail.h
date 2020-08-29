@@ -23,7 +23,7 @@ template <typename Real>
 bool Mathematics::Vector4DTools<Real>
 	::Approximate(const Vector4D& lhs, const Vector4D& rhs, const Real epsilon)
 {
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= epsilon, "epsilon必须大于或等于0！");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
 	return Math::FAbs(lhs.GetXCoordinate() - rhs.GetXCoordinate()) < epsilon &&
 		   Math::FAbs(lhs.GetYCoordinate() - rhs.GetYCoordinate()) < epsilon &&

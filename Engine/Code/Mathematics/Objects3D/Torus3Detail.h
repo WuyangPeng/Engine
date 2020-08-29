@@ -30,7 +30,7 @@ template <typename Real>
 bool Mathematics::Torus3<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero < m_InnerRadius && m_InnerRadius < m_OuterRadius)
+	if (Math::GetValue(0) < m_InnerRadius && m_InnerRadius < m_OuterRadius)
 		return true;
 	else
 		return false;
@@ -60,12 +60,12 @@ typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
 	::GetPosition(Real s, Real t) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= s && s <= static_cast<Real>(1) && Math::sm_Zero <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= static_cast<Real>(1) && Math::GetValue(0) <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
 
 	CoreTools::DoNothing();
 
-	auto twoPiS = Math::sm_TwoPI * s;
-	auto twoPiT = Math::sm_TwoPI * t;
+	auto twoPiS = Math::GetTwoPI() * s;
+	auto twoPiT = Math::GetTwoPI() * t;
 	auto cosTwoPiS = Math::Cos(twoPiS);
 	auto sinTwoPiS = Math::Sin(twoPiS);
 	auto cosTwoPiT = Math::Cos(twoPiT);
@@ -80,9 +80,9 @@ typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
 	::GetNormal(Real s, Real t) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_1(Math::sm_Zero <= s && s <= static_cast<Real>(1) && Math::sm_Zero <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
+	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= static_cast<Real>(1) && Math::GetValue(0) <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
 
-	auto twoPiS = Math::sm_TwoPI * s;
+	auto twoPiS = Math::GetTwoPI() * s;
 	auto cosTwoPiS = Math::Cos(twoPiS);
 	auto sinTwoPiS = Math::Sin(twoPiS);
 	const auto position = GetPosition(s, t);
@@ -103,39 +103,39 @@ typename const Mathematics::Torus3<Real>::Torus3Parameters Mathematics::Torus3<R
 
 	auto radius = Math::Sqrt(position.GetXCoordinate() * position.GetXCoordinate() + position.GetYCoordinate() * position.GetYCoordinate());
 
-	auto s = Math::sm_Zero;
+	auto s = Math::GetValue(0);
 
-	if (Math::sm_ZeroTolerance < radius)
+	if (Math::GetZeroTolerance() < radius)
 	{
 		auto angle = Math::ATan2(position.GetYCoordinate(), position.GetXCoordinate());
-		if (Math::sm_Zero <= angle)
+		if (Math::GetValue(0) <= angle)
 		{
-			s = angle * Math::sm_InverseTwoPI;
+			s = angle * Math::GetInverseTwoPI();
 		}
 		else
 		{
-			s = static_cast<Real>(1) + angle * Math::sm_InverseTwoPI;
+			s = static_cast<Real>(1) + angle * Math::GetInverseTwoPI();
 		}
 	}
 
 	auto diff = radius - m_OuterRadius;
 
-	auto t = Math::sm_Zero;
+	auto t = Math::GetValue(0);
 
-	if (Math::FAbs(diff) < Math::sm_ZeroTolerance &&  Math::FAbs(position.GetZCoordinate()) < Math::sm_ZeroTolerance)
+	if (Math::FAbs(diff) < Math::GetZeroTolerance() &&  Math::FAbs(position.GetZCoordinate()) < Math::GetZeroTolerance())
 	{
-		t = Math::sm_Zero;
+		t = Math::GetValue(0);
 	}
 	else
 	{
 		auto angle = Math::ATan2(position.GetZCoordinate(), diff);
-		if (Math::sm_Zero <= angle)
+		if (Math::GetValue(0) <= angle)
 		{
-			t = angle * Math::sm_InverseTwoPI;
+			t = angle * Math::GetInverseTwoPI();
 		}
 		else
 		{
-			t = static_cast<Real>(1) + angle * Math::sm_InverseTwoPI;
+			t = static_cast<Real>(1) + angle * Math::GetInverseTwoPI();
 		}
 	}
 

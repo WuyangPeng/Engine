@@ -25,7 +25,9 @@ namespace CoreTools
 	class BufferSource;
 	class BufferTarget;
 }
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace Rendering
 {
 	class Culler;  
@@ -50,7 +52,7 @@ namespace Rendering
         Spatial( Spatial&& rhs) = default;
         Spatial& operator=(Spatial&& rhs) = default;
         
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;        
+		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Spatial);
         
@@ -116,5 +118,5 @@ namespace Rendering
 #include STSTEM_WARNING_POP
 	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, Spatial); 
 }
-
+#include STSTEM_WARNING_POP
 #endif // RENDERING_SCENE_GRAPH_SPATIAL_H

@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
 #include <type_traits> 
@@ -44,13 +44,13 @@ namespace Mathematics
 		// axis必须是单位长度和角度必须在(0,pi/2)。
 		// 对于无限锥，设置“height”为Math<Real>::sm_MaxReal
 		Cone3(const Vector3D& vertex, const Vector3D& axis, const Real angle,
-			  const Real height, const Real epsilon = Math::sm_ZeroTolerance);
+			  const Real height, const Real epsilon = Math::GetZeroTolerance());
 
 		// axis必须是单位长度。
 		// 一对(cosAngle,sinAngle)必须严格在平面的第一象限，以保证锥角为(0,pi/2)
 		// 对于无限锥，设置“height”为Math<Real>::sm_MaxReal
 		Cone3(const Real cosAngle, const Real sinAngle, const Real height,
-			  const Vector3D& vertex, const Vector3D& axis, const Real epsilon = Math::sm_ZeroTolerance);
+			  const Vector3D& vertex, const Vector3D& axis, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_DECLARE;
 

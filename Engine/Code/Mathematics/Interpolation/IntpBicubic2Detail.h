@@ -18,7 +18,7 @@ IntpBicubic2<Real>::IntpBicubic2 (int xBound, int yBound, Real xMin, Real xSpaci
     // At least a 3x3 block of data points are needed to construct the
     // estimates of the boundary derivatives.
     MATHEMATICS_ASSERTION_0(xBound >= 3 && yBound >= 3 && F, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::sm_Zero && ySpacing > Math<Real>::sm_Zero, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0), "Invalid input\n");
 
     mXBound = xBound;
     mYBound = yBound;
@@ -134,8 +134,8 @@ Real IntpBicubic2<Real>::operator() (Real x, Real y) const
     int row, col;
     for (row = 0; row < 4; ++row)
     {
-        P[row] = Math<Real>::sm_Zero;
-        Q[row] = Math<Real>::sm_Zero;
+        P[row] = Math<Real>::GetValue(0);
+        Q[row] = Math<Real>::GetValue(0);
         for (col = 0; col < 4; ++col)
         {
             P[row] += mBlend[row][col]*U[col];
@@ -146,7 +146,7 @@ Real IntpBicubic2<Real>::operator() (Real x, Real y) const
     // Compute (M*U)^t D (M*V) where D is the 4x4 subimage containing (x,y).
     --ix;
     --iy;
-    Real result = Math<Real>::sm_Zero;
+    Real result = Math<Real>::GetValue(0);
     for (row = 0; row < 4; ++row)
     {
         int yClamp = iy + row;
@@ -210,7 +210,7 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
         break;
     case 1:
         dx = xIndex - ix;
-        U[0] = Math<Real>::sm_Zero;
+        U[0] = Math<Real>::GetValue(0);
         U[1] = static_cast<Real>(1);
         U[2] = (static_cast<Real>(2))*dx;
         U[3] = (static_cast<Real>(3))*dx*dx;
@@ -218,21 +218,21 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
         break;
     case 2:
         dx = xIndex - ix;
-        U[0] = Math<Real>::sm_Zero;
-        U[1] = Math<Real>::sm_Zero;
+        U[0] = Math<Real>::GetValue(0);
+        U[1] = Math<Real>::GetValue(0);
         U[2] = static_cast<Real>(2);
         U[3] = (Real)6*dx;
         xMult = mInvXSpacing*mInvXSpacing;
         break;
     case 3:
-        U[0] = Math<Real>::sm_Zero;
-        U[1] = Math<Real>::sm_Zero;
-        U[2] = Math<Real>::sm_Zero;
+        U[0] = Math<Real>::GetValue(0);
+        U[1] = Math<Real>::GetValue(0);
+        U[2] = Math<Real>::GetValue(0);
         U[3] = (Real)6;
         xMult = mInvXSpacing*mInvXSpacing*mInvXSpacing;
         break;
     default:
-        return Math<Real>::sm_Zero;
+        return Math<Real>::GetValue(0);
     }
 
     Real V[4], dy, yMult;
@@ -248,7 +248,7 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
         break;
     case 1:
         dy = yIndex - iy;
-        V[0] = Math<Real>::sm_Zero;
+        V[0] = Math<Real>::GetValue(0);
         V[1] = static_cast<Real>(1);
         V[2] = (static_cast<Real>(2))*dy;
         V[3] = (static_cast<Real>(3))*dy*dy;
@@ -256,21 +256,21 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
         break;
     case 2:
         dy = yIndex - iy;
-        V[0] = Math<Real>::sm_Zero;
-        V[1] = Math<Real>::sm_Zero;
+        V[0] = Math<Real>::GetValue(0);
+        V[1] = Math<Real>::GetValue(0);
         V[2] = static_cast<Real>(2);
         V[3] = ((Real)6)*dy;
         yMult = mInvYSpacing*mInvYSpacing;
         break;
     case 3:
-        V[0] = Math<Real>::sm_Zero;
-        V[1] = Math<Real>::sm_Zero;
-        V[2] = Math<Real>::sm_Zero;
+        V[0] = Math<Real>::GetValue(0);
+        V[1] = Math<Real>::GetValue(0);
+        V[2] = Math<Real>::GetValue(0);
         V[3] = (Real)6;
         yMult = mInvYSpacing*mInvYSpacing*mInvYSpacing;
         break;
     default:
-        return Math<Real>::sm_Zero;
+        return Math<Real>::GetValue(0);
     }
 
     // Compute P = M*U and Q = M*V.
@@ -278,8 +278,8 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
     int row, col;
     for (row = 0; row < 4; ++row)
     {
-        P[row] = Math<Real>::sm_Zero;
-        Q[row] = Math<Real>::sm_Zero;
+        P[row] = Math<Real>::GetValue(0);
+        Q[row] = Math<Real>::GetValue(0);
         for (col = 0; col < 4; ++col)
         {
             P[row] += mBlend[row][col]*U[col];
@@ -290,7 +290,7 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
     // Compute (M*U)^t D (M*V) where D is the 4x4 subimage containing (x,y).
     --ix;
     --iy;
-    Real result = Math<Real>::sm_Zero;
+    Real result = Math<Real>::GetValue(0);
     for (row = 0; row < 4; ++row)
     {
         int yClamp = iy + row;

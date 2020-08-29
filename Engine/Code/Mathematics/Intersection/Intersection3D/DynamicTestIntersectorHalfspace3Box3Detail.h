@@ -35,12 +35,12 @@ template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>
 	::Test()
 {
-	SetContactTime(Math<Real>::sm_Zero);
+	SetContactTime(Math<Real>::GetZero());
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-	auto fmin = Math::sm_Zero;
-	auto fmax = Math::sm_Zero;
+	auto fmin = Math::GetValue(0);
+	auto fmax = Math::GetValue(0);
 	IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), mBox, fmin, fmax);
 
 	auto mContactTime = this->GetContactTime();

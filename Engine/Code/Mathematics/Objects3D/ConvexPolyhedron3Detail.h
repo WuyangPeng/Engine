@@ -142,12 +142,12 @@ void Mathematics::ConvexPolyhedron3<Real>::UpdatePlane(int index, const Vector3D
     auto edge2 = vertex2 - vertex0;
     auto normal = Vector3DTools::CrossProduct(edge2, edge1);
     auto length = Vector3DTools::VectorMagnitude(normal);
-    if (Math::sm_ZeroTolerance < length)
+    if (Math::GetZeroTolerance() < length)
     {
         normal /= length;
         auto dot = Vector3DTools::DotProduct(normal, diff);
-        MATHEMATICS_ASSERTION_3(Math::sm_Zero <= dot, "点积必须为非负数\n");
-        if (dot < Math::sm_Zero)
+        MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= dot, "点积必须为非负数\n");
+        if (dot < Math::GetValue(0))
         {
             normal = -normal;
         }
@@ -175,7 +175,7 @@ template <typename Real>
 bool Mathematics::ConvexPolyhedron3<Real>::IsConvex(Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_1(threshold <= Math::sm_Zero, "threshold必须为负值！");
+    MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
     MATHEMATICS_ASSERTION_1(m_SharingTriangles.empty(), "需要更新平面！");
 
     auto maxDistance = -Math::sm_MaxReal;
@@ -211,7 +211,7 @@ template <typename Real>
 bool Mathematics::ConvexPolyhedron3<Real>::Contains(const Vector3D& point, Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_1(threshold <= Math::sm_Zero, "threshold必须为负值！");
+    MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
     MATHEMATICS_ASSERTION_1(m_SharingTriangles.empty(), "需要更新平面！");
 
     for (auto i = 0; i < this->GetNumTriangles(); ++i)

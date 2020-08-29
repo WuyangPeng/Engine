@@ -49,7 +49,7 @@ bool Mathematics::Box3<Real>
 	if (m_Axis[0].IsNormalize(m_Epsilon) && m_Axis[1].IsNormalize(m_Epsilon) &&
 		m_Axis[2].IsNormalize(m_Epsilon) && -m_Epsilon <= m_Extent[0] &&
 		-m_Epsilon <= m_Extent[1] && -m_Epsilon <= m_Extent[2] &&
-		Math::sm_Zero <= m_Epsilon)
+		Math::GetValue(0) <= m_Epsilon)
 	{
 		return true;
 	}

@@ -60,11 +60,11 @@ void Framework::ObjectMotionMove
 		m_Angle = m_DoRoll * m_RotationSpeed;
 		if (parent != nullptr)
 		{
-			m_Axis = parent->GetWorldTransform().GetRotate().GetColumn(0);
+                    m_Axis = Mathematics::AVector{ parent->GetWorldTransform().GetRotate().GetColumn(0) };
 		}
 		else
 		{
-			m_Axis = AVector::sm_UnitX;
+			m_Axis = Mathematics::Vectorf::g_UnitX;
 		}
 	}
 	else if (m_DoYaw != 0)
@@ -74,11 +74,13 @@ void Framework::ObjectMotionMove
 		m_Angle = m_DoYaw * m_RotationSpeed;
 		if (parent != nullptr)
 		{
-			m_Axis = parent->GetWorldTransform().GetRotate().GetColumn(1);
+                    m_Axis = Mathematics::AVector{
+                        parent->GetWorldTransform().GetRotate().GetColumn(1)
+                    };
 		}
 		else
 		{
-			m_Axis = AVector::sm_UnitY;
+			m_Axis = Mathematics::Vectorf::g_UnitY;
 		}
 	}
 	else if (m_DoPitch != 0)
@@ -88,11 +90,13 @@ void Framework::ObjectMotionMove
 		m_Angle = m_DoPitch * m_RotationSpeed;
 		if (parent != nullptr)
 		{
-			m_Axis = parent->GetWorldTransform().GetRotate().GetColumn(2);
+                    m_Axis = Mathematics::AVector{
+                        parent->GetWorldTransform().GetRotate().GetColumn(2)
+                    };
 		}
 		else
 		{
-			m_Axis = AVector::sm_UnitZ;
+			m_Axis = Mathematics::Vectorf::g_UnitZ;
 		}
 	}
 }

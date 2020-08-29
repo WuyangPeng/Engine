@@ -29,7 +29,7 @@ namespace Rendering
 		  Dx9RendererInput( Dx9RendererInput&&) =default;
 		  Dx9RendererInput& operator=( Dx9RendererInput&&) =default;
         
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
           RendererTypes GetRendererType() const noexcept override ;
 		

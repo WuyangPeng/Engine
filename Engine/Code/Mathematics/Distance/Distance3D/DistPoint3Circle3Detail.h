@@ -42,7 +42,7 @@ typename const Mathematics::DistPoint3Circle3<Real>::DistanceResult Mathematics:
 	auto lengthQmC = Vector3DTools::VectorMagnitude(QmC);
 	Vector3D mClosestPoint1;
 	auto mHasMultipleClosestPoints1 = false;
-	if (lengthQmC > Math<Real>::sm_Zero)
+	if (lengthQmC > Math<Real>::GetValue(0))
 	{
 		mClosestPoint1 = mCircle.GetCenter() + mCircle.GetRadius() * QmC / lengthQmC;
 		mHasMultipleClosestPoints1 = false;
@@ -59,7 +59,7 @@ typename const Mathematics::DistPoint3Circle3<Real>::DistanceResult Mathematics:
 	auto diff = mClosestPoint0 - mClosestPoint1;
 	auto sqrDistance = Vector3DTools::DotProduct(diff, diff);
 
-	return DistanceResult{ sqrDistance,Math<Real>::sm_Zero,mClosestPoint0,mClosestPoint1 };
+	return DistanceResult{ sqrDistance,Math<Real>::GetValue(0),mClosestPoint0,mClosestPoint1 };
 }
 
 template <typename Real>

@@ -46,32 +46,32 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 	auto rSum = mSphere0.GetRadius() + mSphere1.GetRadius();
 	auto rSumSqr = rSum * rSum;
 
-	if (a > Math::sm_Zero)
+	if (a > Math::GetValue(0))
 	{
 		auto b = Vector3DTools::DotProduct(CDiff, relVelocity);
-		if (b <= Math::sm_Zero)
+		if (b <= Math::GetValue(0))
 		{
 			if (-tmax * a <= b || tmax * (tmax*a + (static_cast<Real>(2.0))*b) + c <= rSumSqr)
 			{
 				auto cdiff = c - rSumSqr;
 				auto discr = b * b - a * cdiff;
-				if (discr >= Math::sm_Zero)
+				if (discr >= Math::GetValue(0))
 				{
-					if (cdiff <= Math::sm_Zero)
+					if (cdiff <= Math::GetValue(0))
 					{
 						// The spheres are initially intersecting.  Estimate a
 						// point of contact by using the midpoint of the line
 						// segment connecting the sphere centers.
-						SetContactTime(Math::sm_Zero);
+						SetContactTime(Math::GetValue(0));
 						mContactPoint = (Real{ 0.5 })*(mSphere0.GetCenter() + mSphere1.GetCenter());
 					}
 					else
 					{
 						// The first time of contact is in [0,tmax].
 						SetContactTime(-(b + Math::Sqrt(discr)) / a);
-						if (this->GetContactTime() < Math::sm_Zero)
+						if (this->GetContactTime() < Math::GetValue(0))
 						{
-							SetContactTime(Math::sm_Zero);
+							SetContactTime(Math::GetValue(0));
 						}
 						else if (this->GetContactTime() > tmax)
 						{
@@ -97,7 +97,7 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 		// The spheres are initially intersecting.  Estimate a point of
 		// contact by using the midpoint of the line segment connecting the
 		// sphere centers.
-		SetContactTime(Math::sm_Zero);
+		SetContactTime(Math::GetValue(0));
 		mContactPoint = (static_cast<Real>(0.5)) * (mSphere0.GetCenter() + mSphere1.GetCenter());
 		this->SetIntersectionType(IntersectionType::Other);
 		return;

@@ -27,7 +27,7 @@ namespace Framework
 	public:
 		explicit ArtificialIntellegenceInterface(MiddleLayerPlatform middleLayerPlatform);
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE; 
+		CLASS_INVARIANT_OVERRIDE_DECLARE; 
 
 		ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input);
 		ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Network);

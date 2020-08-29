@@ -77,9 +77,9 @@
 
 #else // !defined(CORE_TOOLS_USE_MEMORY) && !defined(CORE_TOOLS_MEMORY_ALWAYS_CREATE)
 
-	#define MEMORY_CREATE ((void)0)
-	#define MEMORY_CREATE_WITH_ALLOCATOR_AND_DEALLOCATOR(allocator,deallocator) ((void)0)
-	#define MEMORY_DESTROY ((void)0)
+	#define MEMORY_CREATE (static_cast<void>(0))
+	#define MEMORY_CREATE_WITH_ALLOCATOR_AND_DEALLOCATOR(allocator,deallocator) (static_cast<void>(0))
+	#define MEMORY_DESTROY (static_cast<void>(0))
 	
 	namespace CoreTools
 	{

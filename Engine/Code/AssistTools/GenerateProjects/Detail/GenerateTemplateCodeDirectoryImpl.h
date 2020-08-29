@@ -25,7 +25,7 @@ namespace AssistTools
 		GenerateTemplateCodeDirectoryImpl(const System::String& directory, const std::string& configurationFileName);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void GenerateTo(const System::String& exportDirectory, const System::String& newSolutionName, 
 			            const CopyrightData& copyrightData, const System::String& projectCapital,

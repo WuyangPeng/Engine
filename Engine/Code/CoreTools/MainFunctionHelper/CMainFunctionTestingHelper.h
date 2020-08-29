@@ -39,7 +39,7 @@ namespace CoreTools
 		CMainFunctionTestingHelper(CMainFunctionTestingHelper&& rhs) noexcept = delete;
 		CMainFunctionTestingHelper& operator=(CMainFunctionTestingHelper&& rhs) noexcept = delete;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	protected:
 		using SuiteSharedPtr = std::shared_ptr<Suite>;

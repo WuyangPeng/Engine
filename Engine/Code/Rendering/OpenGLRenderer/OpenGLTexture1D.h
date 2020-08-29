@@ -28,7 +28,7 @@ namespace Rendering
 		OpenGLTexture1D (Renderer* renderer, const Texture1D* texture);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		// ÎÆÀí²Ù×÷
 		  void Enable (Renderer* renderer, int textureUnit) noexcept override;

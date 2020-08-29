@@ -25,6 +25,8 @@
 #include SYSTEM_WARNING_DISABLE(26490)
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
+ 
+#include SYSTEM_WARNING_DISABLE(26456)
 Network::MessageBufferImpl ::MessageBufferImpl(ParserStrategy parserStrategy) noexcept
     : m_CurrentReadIndex{ 0 }, m_CurrentWriteIndex{ 0 }, m_ReceiveCount{ -1 }, m_ParserStrategy{ parserStrategy }
 {

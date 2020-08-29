@@ -33,7 +33,7 @@ void Mathematics::ScribeCircle2Inscribe<Real>
 	auto len20 = Vector2DTools<Real>::VectorMagnitude(d20);
 	auto len21 = Vector2DTools<Real>::VectorMagnitude(d21);
 	auto perimeter = len10 + len20 + len21;
-	if (Math<Real>::sm_ZeroTolerance < perimeter)
+	if (Math<Real>::GetZeroTolerance() < perimeter)
 	{
 		len10 /= perimeter;
 		len20 /= perimeter;

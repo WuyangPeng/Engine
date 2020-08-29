@@ -32,7 +32,7 @@ template <typename Real, template <typename> class Vector>
 bool Mathematics::DynamicIntersector<Real, Vector>
 	::IsValid() const  noexcept
 {
-	if (ParentType::IsValid() && Math::sm_Zero <= m_ContactTime)
+	if (ParentType::IsValid() && Math::GetValue(0) <= m_ContactTime)
 		return true;
 	else
 		return false;

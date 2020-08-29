@@ -194,7 +194,7 @@ void Rendering::AlphaStateImpl ::SaveState(WriteFileManager& manager) const
     manager.Write(sizeof(int), &compareEnabled);
     manager.Write(sizeof(int), &compare);
     manager.Write(sizeof(float), &reference);
-    manager.Write(sizeof(float), 4, constantColor.GetPoint());
+    manager.Write(sizeof(float), 4, constantColor.GetPoint().data());
 }
 
 void Rendering::AlphaStateImpl ::LoadState(ReadFileManager& manager)

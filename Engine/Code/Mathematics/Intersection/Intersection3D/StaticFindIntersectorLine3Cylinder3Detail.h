@@ -97,19 +97,19 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	// unit-length direction.
 	auto dz = Vector3DTools::DotProduct(W, dir);
 
-	if (Math::FAbs(dz) >= static_cast<Real>(1) - Math::sm_ZeroTolerance)
+	if (Math::FAbs(dz) >= static_cast<Real>(1) - Math::GetZeroTolerance())
 	{
 		// The line is parallel to the cylinder axis.  Determine if the line
 		// intersects the cylinder end disks.
 		auto radialSqrDist = rSqr - P.GetXCoordinate()*P.GetXCoordinate() - P.GetYCoordinate()*P.GetYCoordinate();
-		if (radialSqrDist < Math<Real>::sm_Zero)
+		if (radialSqrDist < Math<Real>::GetZero())
 		{
 			// Line outside the cylinder, no intersection.
 			return 0;
 		}
 
 		// Line intersects the cylinder end disks.
-		if (dz > Math<Real>::sm_Zero)
+		if (dz > Math<Real>::GetZero())
 		{
 			t[0] = -P.GetZCoordinate() - halfHeight;
 			t[1] = -P.GetZCoordinate() + halfHeight;
@@ -127,7 +127,7 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 
 	Real a0, a1, a2, discr, root, inv, tValue;
 
-	if (Math::FAbs(D.GetZCoordinate()) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(D.GetZCoordinate()) <= Math::GetZeroTolerance())
 	{
 		// The line is perpendicular to the cylinder axis.
 		if (Math::FAbs(P.GetZCoordinate()) > halfHeight)
@@ -145,12 +145,12 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 		a1 = P.GetXCoordinate()*D.GetXCoordinate() + P.GetYCoordinate()*D.GetYCoordinate();
 		a2 = D.GetXCoordinate()*D.GetXCoordinate() + D.GetYCoordinate()*D.GetYCoordinate();
 		discr = a1 * a1 - a0 * a2;
-		if (discr < Math<Real>::sm_Zero)
+		if (discr < Math<Real>::GetZero())
 		{
 			// Line does not intersect cylinder.
 			return 0;
 		}
-		else if (discr > Math::sm_ZeroTolerance)
+		else if (discr > Math::GetZeroTolerance())
 		{
 			// Line intersects cylinder in two places.
 			root = Math::Sqrt(discr);
@@ -209,13 +209,13 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	a1 = P.GetXCoordinate()*D.GetXCoordinate() + P.GetYCoordinate()*D.GetYCoordinate();
 	a2 = D.GetXCoordinate()*D.GetXCoordinate() + D.GetYCoordinate()*D.GetYCoordinate();
 	discr = a1 * a1 - a0 * a2;
-	if (discr < Math<Real>::sm_Zero)
+	if (discr < Math<Real>::GetZero())
 	{
 		// Line does not intersect cylinder wall.
 		MATHEMATICS_ASSERTION_0(quantity == 0, "Unexpected condition\n");
 		return 0;
 	}
-	else if (discr > Math::sm_ZeroTolerance)
+	else if (discr > Math::GetZeroTolerance())
 	{
 		root = Math::Sqrt(discr);
 		inv = (static_cast<Real>(1)) / a2;

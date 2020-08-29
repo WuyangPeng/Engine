@@ -7,12 +7,13 @@
 #include "Imagics/ImagicsExport.h"
 
 #include "RasterDrawingTools.h"
-
+ 
 #include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26429)
@@ -90,6 +91,8 @@ void Imagics
                 x += sx;
             }
         }
+        break;
+    default:
         break;
     }
 }
@@ -214,6 +217,8 @@ void Imagics
                 y += sy;
             }
         }
+        break;
+    default:
         break;
     }
 }
@@ -397,6 +402,8 @@ void Imagics
                 z += sz;
             }
         }
+        break;
+    default:
         break;
     }
 }
@@ -724,6 +731,8 @@ void Imagics
             {
                 arc = 0;
             }
+            break;
+        default:
             break;
         }
 

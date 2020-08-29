@@ -32,7 +32,7 @@ namespace Rendering
 		   OpenGLVertexBuffer( OpenGLVertexBuffer&&) =default;
 		  OpenGLVertexBuffer& operator=( OpenGLVertexBuffer&&) =default;
 
-	   CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+	   CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 	    // ¶¥µã»º³åÇø²Ù×÷¡£
 		  void Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) noexcept override;

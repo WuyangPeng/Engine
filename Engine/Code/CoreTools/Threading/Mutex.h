@@ -27,7 +27,7 @@ namespace CoreTools
 		Mutex(Mutex&&) noexcept = delete;
 		Mutex& operator=(Mutex&&) noexcept = delete;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void Initialize() override;
 		void Delete() override;

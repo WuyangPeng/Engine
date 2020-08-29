@@ -22,7 +22,7 @@ namespace Network
     public:
         NullSockAddress(const std::string& address, int ip);
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         const SockAddressPtr Clone() const override;
 

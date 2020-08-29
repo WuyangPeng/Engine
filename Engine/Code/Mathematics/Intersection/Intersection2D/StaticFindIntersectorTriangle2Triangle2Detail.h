@@ -89,11 +89,11 @@ int Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 	for (auto i = 0; i < 3; ++i)
 	{
 		auto t = Vector2DTools::DotProduct(D, (V[i] - P));
-		if (t > Math<Real>::sm_Zero)
+		if (t > Math<Real>::GetZero())
 		{
 			++positive;
 		}
-		else if (t < Math<Real>::sm_Zero)
+		else if (t < Math<Real>::GetZero())
 		{
 			++negative;
 		}
@@ -126,7 +126,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 	for (i = 0; i < quantity; ++i)
 	{
 		test[i] = Vector2DTools::DotProduct(N, V[i]) - c;
-		if (test[i] > Math<Real>::sm_Zero)
+		if (test[i] > Math<Real>::GetZero())
 		{
 			positive++;
 			if (pIndex < 0)
@@ -134,7 +134,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 				pIndex = i;
 			}
 		}
-		else if (test[i] < Math<Real>::sm_Zero)
+		else if (test[i] < Math<Real>::GetZero())
 		{
 			negative++;
 		}
@@ -149,7 +149,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 			auto cQuantity = 0;
 			auto cur = 0;
 			auto prv = 0;
-			auto t = Math::sm_Zero;
+			auto t = Math::GetValue(0);
 
 			if (pIndex > 0)
 			{
@@ -160,7 +160,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 				// Vertices on positive side of line.
-				while (cur < quantity && test[cur] >Math<Real>::sm_Zero)
+				while (cur < quantity && test[cur] >Math<Real>::GetZero())
 				{
 					CV[cQuantity++] = V[cur++];
 				}
@@ -182,7 +182,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 			{
 				// Vertices on positive side of line.
 				cur = 0;
-				while (cur < quantity && test[cur] >Math<Real>::sm_Zero)
+				while (cur < quantity && test[cur] >Math<Real>::GetZero())
 				{
 					CV[cQuantity++] = V[cur++];
 				}
@@ -193,7 +193,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 				CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 				// Skip vertices on negative side.
-				while (cur < quantity && test[cur] <= Math<Real>::sm_Zero)
+				while (cur < quantity && test[cur] <= Math<Real>::GetZero())
 				{
 					++cur;
 				}
@@ -206,7 +206,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 					CV[cQuantity++] = V[cur] + t * (V[prv] - V[cur]);
 
 					// Vertices on positive side of line.
-					while (cur < quantity && test[cur] >Math<Real>::sm_Zero)
+					while (cur < quantity && test[cur] >Math<Real>::GetZero())
 					{
 						CV[cQuantity++] = V[cur++];
 					}

@@ -31,7 +31,7 @@ namespace CoreTools
 		explicit SuiteImpl(const std::string& name, const OStreamShared& osPtr, bool printRunUnitTest);
 
 #ifdef OPEN_CLASS_INVARIANT
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		bool IsUnitTestValid() const noexcept;
 #endif // OPEN_CLASS_INVARIANT
 

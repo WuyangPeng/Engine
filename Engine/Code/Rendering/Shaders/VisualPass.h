@@ -44,7 +44,7 @@ namespace Rendering
         ~VisualPass();
         VisualPass(VisualPass&&) noexcept = default;
         VisualPass& operator=(VisualPass&&) noexcept = default;
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualPass);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;

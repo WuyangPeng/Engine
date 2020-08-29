@@ -24,7 +24,7 @@ namespace Network
 		NetworkSockAcceptor(const std::string& hostName, int port);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 		 bool Accept(const SockStreamSharedPtr& sockStream) override;

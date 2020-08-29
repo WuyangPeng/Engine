@@ -41,7 +41,7 @@ namespace Mathematics
         using AlgebraTraits = AlgebraTraits<Real>;
 
     public:
-        BandedMatrixSolve(int size, int lowerBandsNumber, int upperBandsNumber, const Real epsilon = Math::sm_ZeroTolerance);
+        BandedMatrixSolve(int size, int lowerBandsNumber, int upperBandsNumber, const Real epsilon = Math::GetZeroTolerance());
         BandedMatrixSolve(const BandedMatrixSolve& rhs);
         ~BandedMatrixSolve();
 
@@ -63,7 +63,7 @@ namespace Mathematics
         Real GetEpsilon() const noexcept;
 
         // 重设大小会清空原有数据。
-        void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber, const Real epsilon = Math::sm_ZeroTolerance);
+        void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber, const Real epsilon = Math::GetZeroTolerance());
 
         // 对角线
         Real* GetDiagonalBand() noexcept;

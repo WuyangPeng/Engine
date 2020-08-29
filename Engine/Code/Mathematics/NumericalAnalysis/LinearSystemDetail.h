@@ -32,7 +32,7 @@ template <typename Real>
 bool Mathematics::LinearSystem<Real>
 	::IsValid() const noexcept
 {
-	if (Math::sm_Zero <= m_ZeroTolerance)
+	if (Math::GetValue(0) <= m_ZeroTolerance)
 		return true;
 	else
 		return false;

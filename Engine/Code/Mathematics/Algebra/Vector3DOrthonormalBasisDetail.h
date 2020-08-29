@@ -52,7 +52,7 @@ void Mathematics::Vector3DOrthonormalBasis<Real>
 	// unitVector.x或unitVector.z是大小最大的组成部分，交换他们
 	auto invLength = Math::InvSqrt(m_WVector[0] * m_WVector[0] + m_WVector[2] * m_WVector[2]);
 
-	m_UVector = Vector3D{ -m_WVector[2] * invLength,Math::sm_Zero,m_WVector[0] * invLength };
+	m_UVector = Vector3D{ -m_WVector[2] * invLength,Math::GetValue(0),m_WVector[0] * invLength };
 
 	m_VVector = Vector3D{ m_WVector[1] * m_UVector[2],m_WVector[2] * m_UVector[0] - m_WVector[0] * m_UVector[2],-m_WVector[1] * m_UVector[0] };
 }
@@ -64,7 +64,7 @@ void Mathematics::Vector3DOrthonormalBasis<Real>
 	// unitVector.y或unitVector.z是大小最大的组成部分，交换他们
 	auto invLength = Math::InvSqrt(m_WVector[1] * m_WVector[1] + m_WVector[2] * m_WVector[2]);
 
-	m_UVector = Vector3D{ Math::sm_Zero,m_WVector[2] * invLength,-m_WVector[1] * invLength };
+	m_UVector = Vector3D{ Math::GetValue(0),m_WVector[2] * invLength,-m_WVector[1] * invLength };
 
 	m_VVector = Vector3D{ m_WVector[1] * m_UVector[2] - m_WVector[2] * m_UVector[1],-m_WVector[0] * m_UVector[2],m_WVector[0] * m_UVector[1] };
 }

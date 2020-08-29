@@ -17,7 +17,7 @@ Mathematics::Cylinder3<Real> Mathematics
 {
 	auto line = OrthogonalLineFit3<Real>(points).GetLine3();
 
-	auto maxRadiusSqr = Math<Real>::sm_Zero;
+	auto maxRadiusSqr = Math<Real>::GetValue(0);
  
     for (auto i = 0u; i < points.size(); ++i)
     {

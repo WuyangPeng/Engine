@@ -16,9 +16,9 @@ Mathematics::Tridiagonalize<Real>
 	::Tridiagonalize(const Matrix3& matrix)
 	:m_InputMatrix{ matrix }, m_OutputMatrix{ MatrixTypeFlags::Identity }, m_Reflection{ false }, m_Diagonal{}, m_Subdiagonal{}
 {
-	MATHEMATICS_ASSERTION_1(Math::FAbs(m_InputMatrix(0, 1) - m_InputMatrix(1, 0)) <= Math::sm_ZeroTolerance &&
-							Math::FAbs(m_InputMatrix(0, 2) - m_InputMatrix(2, 0)) <= Math::sm_ZeroTolerance &&
-							Math::FAbs(m_InputMatrix(1, 2) - m_InputMatrix(2, 1)) <= Math::sm_ZeroTolerance,
+	MATHEMATICS_ASSERTION_1(Math::FAbs(m_InputMatrix(0, 1) - m_InputMatrix(1, 0)) <= Math::GetZeroTolerance() &&
+							Math::FAbs(m_InputMatrix(0, 2) - m_InputMatrix(2, 0)) <= Math::GetZeroTolerance() &&
+							Math::FAbs(m_InputMatrix(1, 2) - m_InputMatrix(2, 1)) <= Math::GetZeroTolerance(),
 							"矩阵必须是对称矩阵。");
 	Init();
 
@@ -60,30 +60,30 @@ void Mathematics::Tridiagonalize<Real>
 	auto m22 = m_InputMatrix(2, 2);
 
 	m_Diagonal[0] = m00;
-	m_Diagonal[1] = Math::sm_Zero;
-	m_Diagonal[2] = Math::sm_Zero;
+	m_Diagonal[1] = Math::GetValue(0);
+	m_Diagonal[2] = Math::GetValue(0);
 
-	m_Subdiagonal[0] = Math::sm_Zero;
-	m_Subdiagonal[0] = Math::sm_Zero;
+	m_Subdiagonal[0] = Math::GetValue(0);
+	m_Subdiagonal[0] = Math::GetValue(0);
 
-	if (Math::sm_ZeroTolerance <= Math::FAbs(m02))
+	if (Math::GetZeroTolerance() <= Math::FAbs(m02))
 	{
 		m_Subdiagonal[0] = Math::Sqrt(m01 * m01 + m02 * m02);
-		auto invLength = Math::sm_One / m_Subdiagonal[0];
+		auto invLength = Math::GetValue(1) / m_Subdiagonal[0];
 		m01 *= invLength;
 		m02 *= invLength;
-		auto temp = Math::sm_Two * m01 * m12 + m02 * (m22 - m11);
+		auto temp = Math::GetValue(2) * m01 * m12 + m02 * (m22 - m11);
 		m_Diagonal[1] = m11 + m02 * temp;
 		m_Diagonal[2] = m22 - m02 * temp;
 		m_Subdiagonal[1] = m12 - m01 * temp;
 
-		m_OutputMatrix(0, 0) = Math::sm_One;
-		m_OutputMatrix(0, 1) = Math::sm_Zero;
-		m_OutputMatrix(0, 2) = Math::sm_Zero;
-		m_OutputMatrix(1, 0) = Math::sm_Zero;
+		m_OutputMatrix(0, 0) = Math::GetValue(1);
+		m_OutputMatrix(0, 1) = Math::GetValue(0);
+		m_OutputMatrix(0, 2) = Math::GetValue(0);
+		m_OutputMatrix(1, 0) = Math::GetValue(0);
 		m_OutputMatrix(1, 1) = m01;
 		m_OutputMatrix(1, 2) = m02;
-		m_OutputMatrix(2, 0) = Math::sm_Zero;
+		m_OutputMatrix(2, 0) = Math::GetValue(0);
 		m_OutputMatrix(2, 1) = m02;
 		m_OutputMatrix(2, 2) = -m01;
 
@@ -125,11 +125,11 @@ void Mathematics::Tridiagonalize<Real>
 	auto eigenvalue0 = static_cast<Real>(0.5) * (sum - discr);
 	auto eigenvalue1 = static_cast<Real>(0.5) * (sum + discr);
 
-	auto cosValue = Math::sm_Zero;
-	auto sinValue = Math::sm_Zero;
+	auto cosValue = Math::GetValue(0);
+	auto sinValue = Math::GetValue(0);
 
 	// 计算Givens旋转。
-	if (Math::sm_Zero <= difference)
+	if (Math::GetValue(0) <= difference)
 	{
 		cosValue = m_Subdiagonal[lhsIndex];
 		sinValue = m_Diagonal[lhsIndex] - eigenvalue0;
@@ -151,8 +151,8 @@ void Mathematics::Tridiagonalize<Real>
 	// 更新三角矩阵。
 	m_Diagonal[lhsIndex] = eigenvalue0;
 	m_Diagonal[rhsIndex] = eigenvalue1;
-	m_Subdiagonal[0] = Math::sm_Zero;
-	m_Subdiagonal[1] = Math::sm_Zero;
+	m_Subdiagonal[0] = Math::GetValue(0);
+	m_Subdiagonal[1] = Math::GetValue(0);
 }
 
 template <typename Real>
@@ -229,11 +229,11 @@ bool Mathematics::Tridiagonalize<Real>
 
 		// 设置参数为QL步骤的第一阶段中。 
 		// 对于A的值是在对角项D[2]和隐式移位的差由Wilkinson建议。
-		auto ratio = (m_Diagonal[1] - m_Diagonal[0]) / (Math::sm_Two * m_Subdiagonal[0]);
-		auto root = Math::Sqrt(Math::sm_One + ratio * ratio);
+		auto ratio = (m_Diagonal[1] - m_Diagonal[0]) / (Math::GetValue(2) * m_Subdiagonal[0]);
+		auto root = Math::Sqrt(Math::GetValue(1) + ratio * ratio);
 		auto b = m_Subdiagonal[1];
 		auto a = m_Diagonal[2] - m_Diagonal[0];
-		if (Math::sm_Zero <= ratio)
+		if (Math::GetValue(0) <= ratio)
 		{
 			a += m_Subdiagonal[0] / (ratio + root);
 		}
@@ -242,20 +242,20 @@ bool Mathematics::Tridiagonalize<Real>
 			a += m_Subdiagonal[0] / (ratio - root);
 		}
 
-		auto cosValue = Math::sm_Zero;
-		auto sinValue = Math::sm_Zero;
+		auto cosValue = Math::GetValue(0);
+		auto sinValue = Math::GetValue(0);
 
 		// 计算Givens旋转的第一遍。
 		if (Math::FAbs(a) <= Math::FAbs(b))
 		{
 			ratio = a / b;
-			sinValue = Math::InvSqrt((Math::sm_One + ratio * ratio));
+			sinValue = Math::InvSqrt((Math::GetValue(1) + ratio * ratio));
 			cosValue = ratio * sinValue;
 		}
 		else
 		{
 			ratio = b / a;
-			cosValue = Math::InvSqrt(Math::sm_One + ratio * ratio);
+			cosValue = Math::InvSqrt(Math::GetValue(1) + ratio * ratio);
 			sinValue = ratio * cosValue;
 		}
 
@@ -264,7 +264,7 @@ bool Mathematics::Tridiagonalize<Real>
 
 		// 设置参数为QL步骤的第二步。
 		// 值tmp0和tmp1需要在第二阶段结束时，才能全面更新三对角矩阵。
-		auto tmp0 = (m_Diagonal[1] - m_Diagonal[2]) * sinValue + Math::sm_Two * m_Subdiagonal[1] * cosValue;
+		auto tmp0 = (m_Diagonal[1] - m_Diagonal[2]) * sinValue + Math::GetValue(2) * m_Subdiagonal[1] * cosValue;
 		auto tmp1 = cosValue * m_Subdiagonal[0];
 		b = sinValue * m_Subdiagonal[0];
 		a = cosValue * tmp0 - m_Subdiagonal[1];
@@ -274,17 +274,17 @@ bool Mathematics::Tridiagonalize<Real>
 		if (Math::FAbs(a) <= Math::FAbs(b))
 		{
 			ratio = a / b;
-			root = Math::Sqrt(Math::sm_One + ratio * ratio);
+			root = Math::Sqrt(Math::GetValue(1) + ratio * ratio);
 			m_Subdiagonal[1] = b * root;
-			sinValue = Math::sm_One / root;
+			sinValue = Math::GetValue(1) / root;
 			cosValue = ratio * sinValue;
 		}
 		else
 		{
 			ratio = b / a;
-			root = Math::Sqrt(Math::sm_One + ratio * ratio);
+			root = Math::Sqrt(Math::GetValue(1) + ratio * ratio);
 			m_Subdiagonal[1] = a * root;
-			cosValue = Math::sm_One / root;
+			cosValue = Math::GetValue(1) / root;
 			sinValue = ratio * cosValue;
 		}
 
@@ -294,7 +294,7 @@ bool Mathematics::Tridiagonalize<Real>
 		// 完成三对角矩阵的更新。
 		auto tmp2 = m_Diagonal[1] - tmp0;
 		m_Diagonal[2] += tmp0;
-		tmp0 = (m_Diagonal[0] - tmp2) * sinValue + Math::sm_Two *  tmp1 * cosValue;
+		tmp0 = (m_Diagonal[0] - tmp2) * sinValue + Math::GetValue(2) *  tmp1 * cosValue;
 		m_Subdiagonal[0] = cosValue * tmp0 - tmp1;
 		tmp0 *= sinValue;
 		m_Diagonal[1] = tmp2 + tmp0;

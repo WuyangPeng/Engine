@@ -8,6 +8,8 @@
 
 #include "PickRayImpl.h"  
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
 
 Rendering::PickRayImpl
 	::PickRayImpl(bool result, const Mathematics::APointf& origin, const Mathematics::AVectorf& direction) noexcept
@@ -17,7 +19,7 @@ Rendering::PickRayImpl
 }
 
 Rendering::PickRayImpl ::PickRayImpl() noexcept
-    : m_Result{ false }, m_Origin{}, m_Direction{}
+    : m_Result{ false }, m_Origin{}, m_Direction{ Mathematics::Vectorf::g_Zero }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

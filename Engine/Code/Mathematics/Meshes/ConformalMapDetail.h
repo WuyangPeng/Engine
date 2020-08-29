@@ -25,7 +25,7 @@ Mathematics::ConformalMap<Real>
 	// Construct sparse matrix A nondiagonal entries.
 	typename LinearSystem<Real>::SparseMatrixType AMat(numEdges, numEdges);
 	int i, e, t, v0, v1, v2;
-	Real value = Math<Real>::sm_Zero;
+	Real value = Math<Real>::GetValue(0);
 	for (e = 0; e < numEdges; ++e)
 	{
 		const BasicMesh::Edge& edge = edges[e];
@@ -107,7 +107,7 @@ Mathematics::ConformalMap<Real>
 	Real im0 = invProd * Vector3DTools<Real>::DotProduct(E12, E10);
 	Real re1 = invLen10;
 	Real im1 = invProd * Vector3DTools<Real>::DotProduct(E20, E10);
-	Real re2 = Math<Real>::sm_Zero;
+	Real re2 = Math<Real>::GetValue(0);
 	Real im2 = -len10 * invLenCross;
 
 	// Solve sparse system for real parts.
@@ -193,7 +193,7 @@ Mathematics::ConformalMap<Real>
 	// Use the average as the south pole.  The points tend to be clustered
 	// approximately in the middle of the conformally mapped punctured
 	// triangle, so the average is a good choice to place the pole.
-	Vector2D<Real> origin(Math<Real>::sm_Zero, Math<Real>::sm_Zero);
+	Vector2D<Real> origin(Math<Real>::GetValue(0), Math<Real>::GetValue(0));
 	for (i = 0; i < numPoints; ++i)
 	{
 		origin += mPlanes[i];
@@ -231,7 +231,7 @@ Mathematics::ConformalMap<Real>
 	// triangle has an area whose fraction of total spherical area is the
 	// same fraction as the area of the punctured triangle to the total area
 	// of the original triangle mesh.
-	Real twoTotalArea = Math<Real>::sm_Zero;
+	Real twoTotalArea = Math<Real>::GetValue(0);
 	for (t = 0; t < numTriangles; ++t)
 	{
 		const BasicMesh::Triangle& T0 = triangles[t];
@@ -327,8 +327,8 @@ Real Mathematics::ConformalMap<Real>
 	Real e2 = diffX10 * diffY20 - diffX20 * diffY10;
 
 	Polynomial<Real> poly0(6);
-	poly0[0] = Math<Real>::sm_Zero;
-	poly0[1] = Math<Real>::sm_Zero;
+	poly0[0] = Math<Real>::GetValue(0);
+	poly0[1] = Math<Real>::GetValue(0);
 	poly0[2] = e0 * e0;
 	poly0[3] = c0 * c0 + d0 * d0 + (static_cast<Real>(2))*e0*e1;
 	poly0[4] = (static_cast<Real>(2))*(c0*c1 + d0 * d1 + e0 * e1) + e1 * e1;
@@ -343,7 +343,7 @@ Real Mathematics::ConformalMap<Real>
 	qpoly2[0] = r2Sqr;
 	qpoly2[1] = static_cast<Real>(1);
 
-	Real tmp = areaFraction * Math<Real>::sm_PI;
+	Real tmp = areaFraction * Math<Real>::GetPI();
 	Real amp = tmp * tmp;
 
 	Polynomial<Real> poly1 = amp*qpoly0;
@@ -359,9 +359,9 @@ Real Mathematics::ConformalMap<Real>
 	MATHEMATICS_ASSERTION_0(final.GetDegree() <= 8, "Unexpected condition\n");
 
 	// Bound a root near zero and apply bisection to find t.
-	Real tmin = Math<Real>::sm_Zero, fmin = final(tmin);
+	Real tmin = Math<Real>::GetValue(0), fmin = final(tmin);
 	Real tmax = static_cast<Real>(1), fmax = final(tmax);
-	MATHEMATICS_ASSERTION_0(fmin > Math<Real>::sm_Zero && fmax < Math<Real>::sm_Zero, "Unexpected condition\n");
+	MATHEMATICS_ASSERTION_0(fmin > Math<Real>::GetValue(0) && fmax < Math<Real>::GetValue(0), "Unexpected condition\n");
 
 	// Determine the number of iterations to get 'digits' of accuracy.
 	const int digits = 6;
@@ -369,13 +369,13 @@ Real Mathematics::ConformalMap<Real>
 	Real tmp1 = ((Real)digits)*Math<Real>::Log(static_cast<Real>(10));
 	Real arg = (tmp0 + tmp1) / Math<Real>::Log(static_cast<Real>(2));
 	int maxIter = (int)(arg + static_cast<Real>(0.5));
-	Real tmid = Math<Real>::sm_Zero, fmid;
+	Real tmid = Math<Real>::GetValue(0), fmid;
 	for (int i = 0; i < maxIter; ++i)
 	{
 		tmid = (static_cast<Real>(0.5))*(tmin + tmax);
 		fmid = final(tmid);
 		Real product = fmid * fmin;
-		if (product < Math<Real>::sm_Zero)
+		if (product < Math<Real>::GetValue(0))
 		{
 			tmax = tmid;
 			fmax = fmid;

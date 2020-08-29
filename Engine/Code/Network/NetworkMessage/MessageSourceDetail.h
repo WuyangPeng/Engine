@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
+ 
 
 template <typename T>
 void Network::MessageSource

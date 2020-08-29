@@ -37,13 +37,13 @@ bool Mathematics::BarycentricCoordinates <Real, WindowSize>
 	if (!m_IsValid)
 		return true;
 
-	auto coordinatesSum = Math::sm_Zero;
+	auto coordinatesSum = Math::GetValue(0);
 	for (auto i = 0; i < WindowSize; ++i)
 	{
 		coordinatesSum += m_Tuple[i];
 	}
 
-	if (Math::FAbs(Math::sm_One - coordinatesSum) <= Math::sm_ZeroTolerance)
+	if (Math::FAbs(Math::GetValue(1) - coordinatesSum) <= Math::GetZeroTolerance())
 		return true;
 	else
 		return false;

@@ -408,7 +408,7 @@ constexpr	auto numProfiles = System::EnumCastUnderlying(ShaderFlags::Profiles::M
 		manager.Write(sizeof(int), 3, coord);
 		manager.Write(sizeof(float), &lodBias);
 		manager.Write(sizeof(float), &anisotropy);
-		manager.Write(sizeof(float), 4, borderColor.GetPoint());
+		manager.Write(sizeof(float), 4, borderColor.GetPoint().data());
 	}
 
 	const auto profile = GetProfile();

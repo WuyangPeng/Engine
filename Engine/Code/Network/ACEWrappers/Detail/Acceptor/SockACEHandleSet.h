@@ -24,7 +24,7 @@ namespace Network
 	public:
 		SockACEHandleSet(); 
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		void SetBit(ACEHandle handle) override;
 		int64_t GetMaxSet() const override;

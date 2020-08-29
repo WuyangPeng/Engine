@@ -32,7 +32,7 @@ namespace Rendering
                 Dx9TextureCube(Dx9TextureCube&&) = default;
                 Dx9TextureCube& operator=(Dx9TextureCube&&) = default;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		// ÎÆÀí²Ù×÷
 		 void Enable (Renderer* renderer, int textureUnit) override;

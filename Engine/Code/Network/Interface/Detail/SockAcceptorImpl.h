@@ -11,11 +11,11 @@
 
 #include "Network/Interface/NetworkInternalFwd.h"
 
-#include <boost/noncopyable.hpp>
+ 
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE SockAcceptorImpl : private boost::noncopyable
+    class NETWORK_HIDDEN_DECLARE SockAcceptorImpl  
     {
     public:
         using ClassType = SockAcceptorImpl;
@@ -24,9 +24,9 @@ namespace Network
         SockAcceptorImpl() noexcept;
         virtual ~SockAcceptorImpl();
         SockAcceptorImpl(const SockAcceptorImpl&) = delete;
-        SockAcceptorImpl& operator=(const SockAcceptorImpl&) = delete;
+      virtual  SockAcceptorImpl& operator=(const SockAcceptorImpl&) = delete;
         SockAcceptorImpl(SockAcceptorImpl&&) noexcept = delete;
-        SockAcceptorImpl& operator=(SockAcceptorImpl&&) noexcept = delete;
+      virtual SockAcceptorImpl& operator=(SockAcceptorImpl&&) noexcept = delete;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

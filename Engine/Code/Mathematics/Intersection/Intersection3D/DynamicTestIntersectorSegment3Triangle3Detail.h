@@ -45,7 +45,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 	// Get the triangle velocity relative to the segment.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-	auto  mContactTime = Math<Real>::sm_Zero;
+	auto  mContactTime = Math<Real>::GetZero();
 	auto tlast = Math::sm_MaxReal;
 
 	// Test tri-normal.
@@ -64,7 +64,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 	auto dirSqrLen = Vector3DTools::VectorMagnitudeSquared(dirU);
 	auto norUSqrLen = Vector3DTools::VectorMagnitudeSquared(normU);
 	auto norVSqrLen = Vector3DTools::VectorMagnitudeSquared(normV);
-	auto oneMinusEpsilon = static_cast<Real>(1) - Math::sm_ZeroTolerance;
+	auto oneMinusEpsilon = static_cast<Real>(1) - Math::GetZeroTolerance();
 
 	auto i0 = 0;
 	auto i1 = 0;

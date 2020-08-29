@@ -13,7 +13,7 @@
 
 #include "Network/Interface/Detail/BaseMainManagerImpl.h"
 
-#include <ace/OS_main.h>
+#include "System/Helper/PragmaWarning/ACE.h"
 
 namespace Network
 {

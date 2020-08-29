@@ -23,7 +23,7 @@ namespace CoreTools
 		WindowsError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message);
  
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		const String GetError() const override;
 

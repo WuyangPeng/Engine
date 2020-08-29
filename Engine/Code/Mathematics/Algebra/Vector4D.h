@@ -53,7 +53,7 @@ namespace Mathematics
 		Real GetYCoordinate() const;
 		Real GetZCoordinate() const;
 		Real GetWCoordinate() const;
-		bool IsZero(const Real epsilon = Math::sm_ZeroTolerance) const;
+		bool IsZero(const Real epsilon = Math::GetZeroTolerance()) const;
 
 		void ZeroOut();
 		void SetCoordinate(Real x, Real y, Real z, Real w);
@@ -61,8 +61,8 @@ namespace Mathematics
 		void SetYCoordinate(Real y);
 		void SetZCoordinate(Real z);
 		void SetWCoordinate(Real w);
-		void Normalize(const Real epsilon = Math::sm_ZeroTolerance);
-		void ProjectionNormalization(const Real epsilon = Math::sm_ZeroTolerance);
+		void Normalize(const Real epsilon = Math::GetZeroTolerance());
+		void ProjectionNormalization(const Real epsilon = Math::GetZeroTolerance());
 
 		const ClassType operator-() const;
 		const Real& operator[](unsigned int index) const;

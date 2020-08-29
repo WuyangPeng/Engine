@@ -9,7 +9,7 @@
 
 #include "QDUDecompositionValue.h"
 #include "SingularValueDetail.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Matrix3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -94,7 +94,7 @@ void Mathematics::QDUDecompositionValue<Real>
 	// 保证正交矩阵行列式1（无反射）
 	auto det = m_Orthogonal.Determinant();
 
-	if (det < Math<Real>::sm_Zero)
+	if (det < Math<Real>::GetValue(0))
 	{
 		for (auto row = 0; row < 3; ++row)
 		{
@@ -127,11 +127,11 @@ void Mathematics::QDUDecompositionValue<Real>
 	m_UpperTriangular(0, 0) = static_cast<Real>(1);
 	m_UpperTriangular(0, 1) = right(0, 1) * invD00;
 	m_UpperTriangular(0, 2) = right(0, 2) * invD00;
-	m_UpperTriangular(1, 0) = Math<Real>::sm_Zero;
+	m_UpperTriangular(1, 0) = Math<Real>::GetValue(0);
 	m_UpperTriangular(1, 1) = static_cast<Real>(1);
 	m_UpperTriangular(1, 2) = right(1, 2) / m_Diagonal(1, 1);
-	m_UpperTriangular(2, 0) = Math<Real>::sm_Zero;
-	m_UpperTriangular(2, 1) = Math<Real>::sm_Zero;
+	m_UpperTriangular(2, 0) = Math<Real>::GetValue(0);
+	m_UpperTriangular(2, 1) = Math<Real>::GetValue(0);
 	m_UpperTriangular(2, 2) = static_cast<Real>(1);
 }
 

@@ -61,6 +61,102 @@
     <Filter Include="资源文件\References\Libs">
       <UniqueIdentifier>{9803534a-88d9-48d5-960e-774dc6d35e43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\References\OperatingSystem\WindowsAPI">
+      <UniqueIdentifier>{7a57890a-447c-49c3-a1a8-e0ca7c3d556f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OperatingSystem\MFC">
+      <UniqueIdentifier>{9d5ab4b3-2435-44ca-8d4c-47e75710897f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OperatingSystem\ATL">
+      <UniqueIdentifier>{d212390e-0141-45e6-a170-ff9df722059f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OperatingSystem\COM">
+      <UniqueIdentifier>{783d0d57-216e-4d16-b53c-3ac574d03c62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OperatingSystem\ACE">
+      <UniqueIdentifier>{ff9daf77-589e-4d5d-ba43-297f62689fca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OperatingSystem\NetworkProgramming">
+      <UniqueIdentifier>{18500948-5828-47c9-a07d-8ce4cec46bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OperatingSystem\Debugging">
+      <UniqueIdentifier>{84465752-6b60-422e-a652-73796b8f3770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OperatingSystem\ConcurrentProgramming">
+      <UniqueIdentifier>{32fed71f-8ff3-49f6-987d-a72cdba4c2cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\Geometry">
+      <UniqueIdentifier>{2e3fea44-cfa3-4f67-abe4-38afbb016c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\Graphics">
+      <UniqueIdentifier>{5c214f48-eae7-4095-9223-7b103372ae86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\Physics">
+      <UniqueIdentifier>{972138af-2161-45fc-8cdb-c89e4b247b7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\AlgorithmicTechnique">
+      <UniqueIdentifier>{1dbd5e24-69a7-4198-90c3-c7b4a8ffaa9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\RenderingTechnology">
+      <UniqueIdentifier>{d18a0509-a7e6-4eb3-b9b4-2a60141d77aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\OpenGL">
+      <UniqueIdentifier>{14163e40-2abe-4361-92b9-f55051b5d686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\DirectX">
+      <UniqueIdentifier>{33646aca-84ed-4d71-9046-10fad4084855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\SoundProgramming">
+      <UniqueIdentifier>{34aee97a-8a62-47ce-9b26-fc958189c585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\ArtificialIntellegence">
+      <UniqueIdentifier>{eb339081-ae00-4800-96c7-4366d008133f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\GameDesign">
+      <UniqueIdentifier>{cc5f19a9-a77a-44f7-ba50-d1a3e6009d63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\GameProgramming">
+      <UniqueIdentifier>{1607d7f0-afd6-4c44-ad51-095ed3c0df69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\GameEngine">
+      <UniqueIdentifier>{9297857e-836b-475a-be6b-f75dfdcb14a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\GameDesign\ImageProcessing">
+      <UniqueIdentifier>{400fc8fb-705a-4641-aba8-135e4db0078d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\UML">
+      <UniqueIdentifier>{a67cf920-2ee7-4138-862c-1260a3140041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\Code">
+      <UniqueIdentifier>{661398d2-a533-40d1-8d6d-bb42d0a8f2ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\Mode">
+      <UniqueIdentifier>{2080917a-3dcb-4d20-9c7c-1df436f14949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\Refactoring">
+      <UniqueIdentifier>{301269e1-a2db-4b78-a304-d9e18aa6efdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\TestDrive">
+      <UniqueIdentifier>{df1ba563-106e-4821-8c3c-9dd934eb58c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\AgileDevelopment">
+      <UniqueIdentifier>{8aa58bb7-47ab-4177-97a9-0e1969857d6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\Experience">
+      <UniqueIdentifier>{6b2cef26-5e8c-4887-8782-599b168ddffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\ObjectOriented">
+      <UniqueIdentifier>{9d7bf053-66e4-49a9-b723-9f77c9e8bf7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\SoftwareEngineering">
+      <UniqueIdentifier>{41eef3f5-f54d-427d-83b0-6a11c67a7742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\Compile">
+      <UniqueIdentifier>{af7b0c4b-c247-414b-81ff-cee03587c140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\SoftwareDesign\ArtificialIntellegence">
+      <UniqueIdentifier>{1b6b9bb9-fe76-4892-b047-714f1f0624d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -188,6 +284,63 @@
     </Text>
     <Text Include="Resource\References\Cpp\Primary\Standard C++ Bible.txt">
       <Filter>资源文件\References\Cpp\Primary</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\WindowsAPI\WindowsAPI.txt">
+      <Filter>资源文件\References\OperatingSystem\WindowsAPI</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Programming Windows.txt">
+      <Filter>资源文件\References\OperatingSystem\WindowsAPI</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Programming Applications for Microsoft Windows.txt">
+      <Filter>资源文件\References\OperatingSystem\WindowsAPI</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Windows System Programming.txt">
+      <Filter>资源文件\References\OperatingSystem\WindowsAPI</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Microsoft Windows Internals.txt">
+      <Filter>资源文件\References\OperatingSystem\WindowsAPI</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Computer Systems A Programmers%27s Perspective.txt">
+      <Filter>资源文件\References\OperatingSystem\WindowsAPI</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Computer Systems An Integrated Approach to Architecture and Operating Systems.txt">
+      <Filter>资源文件\References\OperatingSystem\WindowsAPI</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\Geometry\3D Math Primer for Graphics and Game Development.txt">
+      <Filter>资源文件\References\GameDesign\Geometry</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\Geometry\Geometry.txt">
+      <Filter>资源文件\References\GameDesign\Geometry</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\Geometry\Procedural Elements for Computer Graphics.txt">
+      <Filter>资源文件\References\GameDesign\Geometry</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\Geometry\Geometric Tools for Computer Graphics.txt">
+      <Filter>资源文件\References\GameDesign\Geometry</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\Geometry\Mathematics for 3D Game Programming and Computer Graphics.txt">
+      <Filter>资源文件\References\GameDesign\Geometry</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\UML\UML.txt">
+      <Filter>资源文件\References\SoftwareDesign\UML</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\UML\Object-Oriented Modeling and Design with UML.txt">
+      <Filter>资源文件\References\SoftwareDesign\UML</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\UML\Applying UML and Patterns.txt">
+      <Filter>资源文件\References\SoftwareDesign\UML</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\UML\Sams Teach Yourself UML in 24 Hours.txt">
+      <Filter>资源文件\References\SoftwareDesign\UML</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\UML\The Unified Modeling Language Reference Manual.txt">
+      <Filter>资源文件\References\SoftwareDesign\UML</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\UML\The Unified Modeling Language User Guide.txt">
+      <Filter>资源文件\References\SoftwareDesign\UML</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\UML\UML Distilled A Brief Guide to the Standard Object Modeling Language.txt">
+      <Filter>资源文件\References\SoftwareDesign\UML</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

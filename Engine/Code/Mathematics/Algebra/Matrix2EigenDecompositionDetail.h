@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
 Mathematics::Matrix2EigenDecomposition<Real>
@@ -31,8 +31,8 @@ bool Mathematics::Matrix2EigenDecomposition<Real>
 	if (Math::FAbs(m_Rotation(0, 0) - m_Rotation(1, 1)) <= m_Epsilon &&
 		Math::FAbs(m_Rotation(0, 1) + m_Rotation(1, 0)) <= m_Epsilon &&
 		Math::FAbs(m_Rotation(0, 0) * m_Rotation(1, 1) - m_Rotation(0, 1) * m_Rotation(1, 0) - AlgebraTraits::UnitValue) <= m_Epsilon &&
-		Math::FAbs(m_Diagonal(0, 1) - Math::sm_Zero) <= m_Epsilon &&
-		Math::FAbs(m_Diagonal(1, 0) - Math::sm_Zero) <= m_Epsilon)
+		Math::FAbs(m_Diagonal(0, 1) - Math::GetValue(0)) <= m_Epsilon &&
+		Math::FAbs(m_Diagonal(1, 0) - Math::GetValue(0)) <= m_Epsilon)
 	{
 		return true;
 	}

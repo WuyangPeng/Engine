@@ -307,7 +307,7 @@ const	auto worldViewProjectionMatrix = viewProjectionMatrix * worldMatrix;
     for (auto i = 0; i < numVertices; ++i)
     {
 		auto vertex = reinterpret_cast<const float*>(vertices);
-		HomogeneousPoint position{ vertex[0], vertex[1], vertex[2], 1.0f };
+        const HomogeneousPoint position{ vertex[0], vertex[1], vertex[2], 1.0f };
 		auto homogeneousPosition = worldViewProjectionMatrix * position;
                 const auto invW = 1.0f / homogeneousPosition[3];
 		auto xNormalizeDeviceCoordinate  = homogeneousPosition[0] * invW;

@@ -15,7 +15,7 @@
 
 template <typename Real, typename Vector>
 const Real Mathematics::DistanceBase<Real, Vector>
-	::sm_DefaultZeroThreshold{ Math::sm_ZeroTolerance };
+	::sm_DefaultZeroThreshold{ Math::GetZeroTolerance() };
 
 template <typename Real, typename Vector>
 const Real Mathematics::DistanceBase<Real, Vector>
@@ -41,7 +41,7 @@ template <typename Real, typename Vector>
 bool Mathematics::DistanceBase<Real, Vector>
 	::IsValid() const noexcept
 {
-	if (0 < m_MaximumIterations && Math::sm_Zero <= m_ZeroThreshold && Math::sm_Zero < m_DifferenceStep &&
+	if (0 < m_MaximumIterations && Math::GetValue(0) <= m_ZeroThreshold && Math::GetValue(0) < m_DifferenceStep &&
 		Math::Approximate(static_cast<Real>(0.5) / m_DifferenceStep, m_InverseTwoDifferenceStep, m_ZeroThreshold))
 	{
 		return true;
@@ -58,7 +58,7 @@ void Mathematics::DistanceBase<Real, Vector>
 	::SetDifferenceStep(Real differenceStep)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_2(Math::sm_Zero < differenceStep, "无效的相差步进值\n");
+	MATHEMATICS_ASSERTION_2(Math::GetValue(0) < differenceStep, "无效的相差步进值\n");
 
 	m_DifferenceStep = differenceStep;
 	m_InverseTwoDifferenceStep = static_cast<Real>(0.5) / m_DifferenceStep;
@@ -88,7 +88,7 @@ void Mathematics::DistanceBase<Real, Vector>
 	::SetZeroThreshold(Real zeroThreshold)
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_2(Math::sm_Zero <= zeroThreshold, "无效的临界值\n");
+	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= zeroThreshold, "无效的临界值\n");
 
 	m_ZeroThreshold = zeroThreshold;
 }

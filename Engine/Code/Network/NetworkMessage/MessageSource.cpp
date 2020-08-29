@@ -17,6 +17,7 @@ using std::vector;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26456)
 Network::MessageSource
 	::MessageSource(const MessageBufferSharedPtr& messageBuffer) noexcept
 	:m_Source{ messageBuffer }, m_ParserStrategy{ messageBuffer->GetParserStrategy() }

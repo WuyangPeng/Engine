@@ -128,7 +128,7 @@ Real Mathematics::Curve3<Real>
 	const auto velocity = GetFirstDerivative(t);
 	auto speedSqr = Vector3DTools<Real>::VectorMagnitudeSquared(velocity);
 
-    if (speedSqr >= Math<Real>::sm_ZeroTolerance)
+    if (speedSqr >= Math<Real>::GetZeroTolerance())
     {
 		const auto acceleration = GetSecondDerivative(t);
 		const auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
@@ -139,7 +139,7 @@ Real Mathematics::Curve3<Real>
     else
     {
         // Curvature is indeterminate, just return 0.
-        return Math<Real>::sm_Zero;
+        return Math<Real>::GetValue(0);
     }
 }
 
@@ -152,7 +152,7 @@ Real Mathematics::Curve3<Real>
 	const auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
 	auto denom = Vector3DTools<Real>::VectorMagnitudeSquared(cross);
 
-    if (denom >= Math<Real>::sm_ZeroTolerance)
+    if (denom >= Math<Real>::GetZeroTolerance())
     {
 		const auto jerk = GetThirdDerivative(t);
 		auto numer = Vector3DTools<Real>::DotProduct(cross,jerk);
@@ -161,7 +161,7 @@ Real Mathematics::Curve3<Real>
     else
     {
         // Torsion is indeterminate, just return 0.
-        return Math<Real>::sm_Zero;
+        return Math<Real>::GetValue(0);
     }
 }
 

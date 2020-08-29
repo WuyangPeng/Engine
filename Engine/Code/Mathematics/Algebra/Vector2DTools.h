@@ -40,7 +40,7 @@ namespace Mathematics
 		using AxesAlignBoundingBox2D = AxesAlignBoundingBox2D<Real>;
 
 	public:
-		static bool Approximate(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
+		static bool Approximate(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::GetZeroTolerance());
 
 		static Real VectorMagnitude(const Vector2D& vector);
 		static Real VectorMagnitudeSquared(const Vector2D& vector)  ;
@@ -51,8 +51,8 @@ namespace Mathematics
 		// 即DotPerp	
 		static Real PseudoCrossProduct(const Vector2D& lhs, const Vector2D& rhs);
 
-		static const Vector2D ParallelVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
-		static const Vector2D ApeakVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector2D ParallelVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::GetZeroTolerance());
+		static const Vector2D ApeakVectorLhsToRhs(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::GetZeroTolerance());
 		static Real GetVectorIncludedAngle(const Vector2D& lhs, const Vector2D& rhs)  ;
 
 		// 垂直线相关
@@ -60,7 +60,7 @@ namespace Mathematics
 		static const Vector2D GetPerp(const Vector2D& vector)  ;
 
 		// 返回 (y,-x) / sqrt(x * x + y * y).
-		static const Vector2D GetUnitPerp(const Vector2D& vector, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector2D GetUnitPerp(const Vector2D& vector, const Real epsilon = Math::GetZeroTolerance());
 
 		// 返回 DotPerp((lhs.x,lhs.y),(rhs.x,rhs.y)) = 
 		// lhs.x * rhs.y - lhs.y * rhs.x.
@@ -71,13 +71,13 @@ namespace Mathematics
 
 		// Gram-Schmidt正交化. 
 		// 以线性无关的向量U和V，来计算一个正交组（单位长度，相互垂直）。		
-		static const Vector2DOrthonormalize Orthonormalize(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector2DOrthonormalize Orthonormalize(const Vector2D& lhs, const Vector2D& rhs, const Real epsilon = Math::GetZeroTolerance());
 
 		// 输入值nonzeroVector（V）必须是一个非零向量。
 		// 返回值是一个标准正交基{U，V}。
 		// 返回的V为通过此函数正则化的nonzeroVector。
 		// 如果你已知V是单位长度，使用U = GetPerp(V)。
-		static const Vector2DOrthonormalBasis GenerateOrthonormalBasis(const Vector2D& nonzeroVector, const Real epsilon = Math::sm_ZeroTolerance);
+		static const Vector2DOrthonormalBasis GenerateOrthonormalBasis(const Vector2D& nonzeroVector, const Real epsilon = Math::GetZeroTolerance());
 	};
 
 	// STL

@@ -20,6 +20,7 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26456)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, BillboardNode);
@@ -75,7 +76,7 @@ bool Rendering::BillboardNode
 		// 如果投影的照相机是在模型上的轴 (x = 0 和 z = 0)，
 		// ATan2返回零（而非NaN的），因此没有必要捕获此退化情况，并分别进行处理。
 		auto angle = Mathematics::Mathf::ATan2(modelPosition[0], modelPosition[2]);
-		const Mathematics::Matrixf orient{ AVector::sm_UnitY, angle };
+		const Mathematics::Matrixf orient{ Mathematics::Vectorf::g_UnitY, angle };
 
 		auto transform = GetWorldTransform();
 		const auto rotate = transform.GetRotate() * orient;

@@ -65,7 +65,7 @@ template <typename Real>
 void Mathematics::BSplineFitBasis<Real>
 	::Compute (Real t, int& imin, int& imax) const
 {
-    MATHEMATICS_ASSERTION_0(Math<Real>::sm_Zero <= t && t <= static_cast<Real>(1), "Invalid input.\n");
+    MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= t && t <= static_cast<Real>(1), "Invalid input.\n");
 
     // Use scaled time and scaled knots so that 1/(Q-D) does not need to
     // be explicitly stored by the class object.  Determine the extreme
@@ -73,9 +73,9 @@ void Mathematics::BSplineFitBasis<Real>
 	const auto temp = mQuantity - mDegree;
 	auto QmD = static_cast<Real>(temp);
     Real tValue { };
-    if (t <= Math<Real>::sm_Zero)
+    if (t <= Math<Real>::GetValue(0))
     {
-        tValue = Math<Real>::sm_Zero;
+        tValue = Math<Real>::GetValue(0);
         imin = 0;
         imax = mDegree;
     }
@@ -97,7 +97,7 @@ void Mathematics::BSplineFitBasis<Real>
     {
         if (i1 <= mDegree)
         {
-            mKnot[i0] = Math<Real>::sm_Zero;
+            mKnot[i0] = Math<Real>::GetValue(0);
         }
         else if (i1 >= mQuantity)
         {

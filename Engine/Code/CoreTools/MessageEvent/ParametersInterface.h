@@ -15,7 +15,9 @@
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::ParametersInterface>;
 template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools::ParametersInterface>;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace CoreTools
 {
 	class CORE_TOOLS_DEFAULT_DECLARE ParametersInterface : public std::enable_shared_from_this<ParametersInterface>
@@ -40,5 +42,5 @@ namespace CoreTools
 	using ParametersInterfaceSharedPtr = std::shared_ptr<ParametersInterface>;
 	using ConstParametersInterfaceSharedPtr = std::shared_ptr<const ParametersInterface>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_H

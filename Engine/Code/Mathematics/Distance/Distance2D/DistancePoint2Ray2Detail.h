@@ -67,15 +67,15 @@ const typename Mathematics::DistancePoint2Ray2<Real>::DistanceResult Mathematics
 	auto difference = m_Point - m_Ray.GetOrigin();
 	auto param = Vector2DTools::DotProduct(m_Ray.GetDirection(), difference);
 
-	if (param <= Math<Real>::sm_Zero)
+	if (param <= Math<Real>::GetValue(0))
 	{
-		param = Math<Real>::sm_Zero;
+		param = Math<Real>::GetValue(0);
 	}
 
 	auto rhsClosestPoint = m_Ray.GetOrigin() + param * m_Ray.GetDirection();
 	difference = rhsClosestPoint - m_Point;
 
-	return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(difference), Math<Real>::sm_Zero,m_Point,rhsClosestPoint };
+	return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(difference), Math<Real>::GetValue(0),m_Point,rhsClosestPoint };
 }
 
 template <typename Real>

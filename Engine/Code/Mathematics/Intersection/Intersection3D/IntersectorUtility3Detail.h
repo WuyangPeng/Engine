@@ -46,9 +46,9 @@ void Mathematics
 
 		// TODO: This should probably be a relative tolerance.  Multiplying
 		// by the constant is probably not the best way to do this.
-		test[i] = Vector3DTools<Real>::DotProduct(normal, P[i]) - constant + Math<Real>::FAbs(constant)*Math<Real>::sm_ZeroTolerance;
+		test[i] = Vector3DTools<Real>::DotProduct(normal, P[i]) - constant + Math<Real>::FAbs(constant)*Math<Real>::GetZeroTolerance();
 
-		if (test[i] >= Math<Real>::sm_Zero)
+		if (test[i] >= Math<Real>::GetValue(0))
 		{
 			++positive;
 			if (pIndex < 0)
@@ -119,7 +119,7 @@ void Mathematics
 					CV[cQuantity++] = P[cur] + t * (P[prv] - P[cur]);
 
 					// vertices on positive side of line
-					while (cur < currQuantity && test[cur] >= Math<Real>::sm_Zero)
+					while (cur < currQuantity && test[cur] >= Math<Real>::GetValue(0))
 					{
 						CV[cQuantity++] = P[cur++];
 					}
@@ -141,7 +141,7 @@ void Mathematics
 				{
 					// vertices on positive side of line
 					cur = 0;
-					while (cur < currQuantity && test[cur] >= Math<Real>::sm_Zero)
+					while (cur < currQuantity && test[cur] >= Math<Real>::GetValue(0))
 					{
 						CV[cQuantity++] = P[cur++];
 					}
@@ -152,7 +152,7 @@ void Mathematics
 					CV[cQuantity++] = P[cur] + t * (P[prv] - P[cur]);
 
 					// skip vertices on negative side
-					while (cur < currQuantity && test[cur] < Math<Real>::sm_Zero)
+					while (cur < currQuantity && test[cur] < Math<Real>::GetValue(0))
 					{
 						cur++;
 					}
@@ -165,7 +165,7 @@ void Mathematics
 						CV[cQuantity++] = P[cur] + t * (P[prv] - P[cur]);
 
 						// vertices on positive side of line
-						while (cur < currQuantity && test[cur] >= Math<Real>::sm_Zero)
+						while (cur < currQuantity && test[cur] >= Math<Real>::GetValue(0))
 						{
 							CV[cQuantity++] = P[cur++];
 						}

@@ -19,7 +19,7 @@
 
 #include "AlgebraFwd.h"
 #include "Flags/MatrixFlags.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
 #include <type_traits>

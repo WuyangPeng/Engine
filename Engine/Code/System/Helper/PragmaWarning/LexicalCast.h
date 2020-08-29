@@ -41,6 +41,7 @@
 	#include SYSTEM_WARNING_DISABLE(26476)
 	#include SYSTEM_WARNING_DISABLE(26812) 
 	#include SYSTEM_WARNING_DISABLE(26814) 
+	#include SYSTEM_WARNING_DISABLE(26819) 
 
 	#include <boost/lexical_cast.hpp>
 

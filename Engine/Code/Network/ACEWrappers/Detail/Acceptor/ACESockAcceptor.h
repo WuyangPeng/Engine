@@ -32,7 +32,7 @@ namespace Network
 		ACESockAcceptor(ACESockAcceptor&&) noexcept = delete;
 		ACESockAcceptor& operator=(ACESockAcceptor&&) noexcept = delete;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 		bool Accept(const SockStreamSharedPtr& sockStream) override;

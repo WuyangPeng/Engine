@@ -15,7 +15,7 @@ Mathematics::ConvexHull<Real>
 	::ConvexHull(int numVertices, Real epsilon, bool owner, QueryType queryType)
 	:mQueryType{ queryType }, mNumVertices{ numVertices }, mDimension{ 0 }, mNumSimplices{ 0 }, mIndices{ 0 }, mEpsilon{ epsilon }, mOwner{ owner }
 {
-    MATHEMATICS_ASSERTION_0(mNumVertices > 0 && mEpsilon >= Math<Real>::sm_Zero, "Invalid inputs\n");
+    MATHEMATICS_ASSERTION_0(mNumVertices > 0 && mEpsilon >= Math<Real>::GetValue(0), "Invalid inputs\n");
 }
 
 template <typename Real>

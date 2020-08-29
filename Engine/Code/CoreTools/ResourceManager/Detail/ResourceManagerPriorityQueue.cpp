@@ -34,7 +34,7 @@ void CoreTools::ResourceManagerPriorityQueue
 }
 
 bool CoreTools::ResourceManagerPriorityQueue
-	::IsEmpty() const
+	::IsEmpty() const noexcept
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

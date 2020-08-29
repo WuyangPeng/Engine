@@ -14,7 +14,7 @@ namespace Mathematics
 
 template <typename Real>
 NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints,const Vector2D<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, bool open)
-	: SingleCurve2<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }, mLoop{ loop }
+	: SingleCurve2<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1) }, mLoop{ loop }
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
@@ -27,7 +27,7 @@ NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints,const Vector2D<Real>* ctrlPoin
 
 template <typename Real>
 NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints, const Vector2D<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, const Real* knot)
-	: SingleCurve2<Real>{ Math<Real>::sm_Zero, static_cast<Real>(1) }, mLoop{ loop }
+	: SingleCurve2<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1) }, mLoop{ loop }
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
@@ -190,7 +190,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
 
     // Compute position.
 	auto X = Vector2D<Real>::sm_Zero;
-	auto w = Math<Real>::sm_Zero;
+	auto w = Math<Real>::GetValue(0);
     for (i = imin; i <= imax; ++i)
     {
         tmp = mBasis.GetD0(i)*mCtrlWeight[i];
@@ -211,7 +211,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
 
     // Compute first derivative.
 	auto XDer1 = Vector2D<Real>::sm_Zero;
-	auto wDer1 = Math<Real>::sm_Zero;
+	auto wDer1 = Math<Real>::GetValue(0);
     for (i = imin; i <= imax; ++i)
     {
         tmp = mBasis.GetD1(i)*mCtrlWeight[i];
@@ -231,7 +231,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
 
     // Compute second derivative.
 	auto XDer2 = Vector2D<Real>::sm_Zero;
-	auto wDer2 = Math<Real>::sm_Zero;
+	auto wDer2 = Math<Real>::GetValue(0);
     for (i = imin; i <= imax; ++i)
     {
         tmp = mBasis.GetD2(i)*mCtrlWeight[i];
@@ -251,7 +251,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
 
     // Compute third derivative.
 	auto XDer3 = Vector2D<Real>::sm_Zero;
-	auto wDer3 = Math<Real>::sm_Zero;
+	auto wDer3 = Math<Real>::GetValue(0);
     for (i = imin; i <= imax; i++)
     {
         tmp = mBasis.GetD3(i)*mCtrlWeight[i];

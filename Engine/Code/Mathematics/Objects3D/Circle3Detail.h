@@ -8,7 +8,7 @@
 #define MATHEMATICS_OBJECTS3D_CIRCLE3_DETAIL_H
 
 #include "Circle3.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/Vector3DTools.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"

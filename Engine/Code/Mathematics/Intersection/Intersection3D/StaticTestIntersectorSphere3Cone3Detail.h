@@ -42,12 +42,12 @@ void Mathematics::StaticTestIntersectorSphere3Cone3<Real>
 	auto D = CmV + (mSphere.GetRadius()*invSin)*mCone.GetAxis();
 	auto DSqrLen = Vector3DTools::VectorMagnitudeSquared(D);
 	auto e = Vector3DTools::DotProduct(D, mCone.GetAxis());
-    if (e > Math<Real>::sm_Zero && e*e >= DSqrLen*cosSqr)
+    if (e > Math<Real>::GetZero() && e*e >= DSqrLen*cosSqr)
     {
 		auto sinSqr = mCone.GetSinAngle()*mCone.GetSinAngle();
 		DSqrLen = Vector3DTools::VectorMagnitudeSquared(CmV);
 		e = -Vector3DTools::DotProduct(CmV,mCone.GetAxis());
-        if (e > Math<Real>::sm_Zero && e*e >= DSqrLen*sinSqr)
+        if (e > Math<Real>::GetZero() && e*e >= DSqrLen*sinSqr)
         {
 			auto rSqr = mSphere.GetRadius()*mSphere.GetRadius();
 			if (DSqrLen <= rSqr)

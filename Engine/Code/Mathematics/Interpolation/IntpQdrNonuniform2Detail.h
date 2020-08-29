@@ -79,7 +79,7 @@ namespace Mathematics
 			Real nx = dy1 * dz2 - dy2 * dz1;
 			Real ny = dz1 * dx2 - dz2 * dx1;
 			Real nz = dx1 * dy2 - dx2 * dy1;
-			if (nz < Math<Real>::sm_Zero)
+			if (nz < Math<Real>::GetValue(0))
 			{
 				nx = -nx;
 				ny = -ny;
@@ -94,7 +94,7 @@ namespace Mathematics
 		// Scale the normals to form (x,y,-1).
 		for (i = 0; i < numVertices; ++i)
 		{
-			if (Math<Real>::FAbs(FZ[i]) > Math<Real>::sm_ZeroTolerance)
+			if (Math<Real>::FAbs(FZ[i]) > Math<Real>::GetZeroTolerance())
 			{
 				Real inv = -(static_cast<Real>(1)) / FZ[i];
 				mFX[i] *= inv;
@@ -102,8 +102,8 @@ namespace Mathematics
 			}
 			else
 			{
-				mFX[i] = Math<Real>::sm_Zero;
-				mFY[i] = Math<Real>::sm_Zero;
+				mFX[i] = Math<Real>::GetValue(0);
+				mFY[i] = Math<Real>::GetValue(0);
 			}
 		}
 
@@ -352,7 +352,7 @@ namespace Mathematics
 			bary[0] = barycentricCoordinates[0];
 			bary[1] = barycentricCoordinates[1];
 			bary[2] = barycentricCoordinates[2];
-			if (bary[0] >= Math<Real>::sm_Zero && bary[1] >= Math<Real>::sm_Zero && bary[2] >= Math<Real>::sm_Zero)
+			if (bary[0] >= Math<Real>::GetValue(0) && bary[1] >= Math<Real>::GetValue(0) && bary[2] >= Math<Real>::GetValue(0))
 			{
 				// P is in triangle <Sub0,Sub1,Sub2>
 				break;

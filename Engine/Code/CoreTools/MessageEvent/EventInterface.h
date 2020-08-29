@@ -15,7 +15,9 @@
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::EventInterface>;
 template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools::EventInterface>;
-
+#include "System/Helper/PragmaWarning.h"
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 namespace CoreTools
 {
 	// 如果只需要一个回调函数，子类继承EventFunction。
@@ -43,5 +45,5 @@ namespace CoreTools
 	using EventInterfaceSharedPtr = std::shared_ptr<EventInterface>;
 	using ConsEventInterfaceSharedPtr = std::shared_ptr<const EventInterface>;
 }
-
+#include STSTEM_WARNING_POP
 #endif // CORE_TOOLS_MESSAGE_EVENT_EVENT_INTERFACE_H

@@ -44,7 +44,7 @@ namespace Rendering
         VertexFormat(VertexFormat&&) = default;
         VertexFormat& operator=(VertexFormat&&) = default;
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VertexFormat)
         // 便利函数用于创建一个顶点格式通过指定它的所有属性。

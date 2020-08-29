@@ -30,9 +30,9 @@ namespace Mathematics
         using Math = Math<Real>;
 
     public:
-        StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon = Math::sm_ZeroTolerance);
+        StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon = Math::GetZeroTolerance());
 
-        CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         const Line3 GetLine() const;
         const Triangle3 GetTriangle() const;

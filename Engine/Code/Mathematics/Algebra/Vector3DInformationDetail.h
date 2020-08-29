@@ -16,10 +16,10 @@
 template <typename Real>
 Mathematics::Vector3DInformation<Real>
 	::Vector3DInformation(const std::vector<Vector3D>& points, Real epsilon)
-	:m_Points{ points }, m_Epsilon{ epsilon }, m_Dimension{ -1 }, m_AABBPtr{}, m_MaxRange{ Math::sm_Zero }, m_Origin{}, m_DirectionX{},
+	:m_Points{ points }, m_Epsilon{ epsilon }, m_Dimension{ -1 }, m_AABBPtr{}, m_MaxRange{ Math::GetValue(0) }, m_Origin{}, m_DirectionX{},
 	 m_DirectionY{}, m_DirectionZ{}, m_MinExtreme{ -1 }, m_MaxExtreme{ -1 }, m_PerpendicularExtreme{ -1 }, m_TetrahedronExtreme{ -1 }, m_ExtremeCCW{ false }
 {
-	MATHEMATICS_ASSERTION_0(0 < m_Points.size() && Math::sm_Zero <= m_Epsilon, "无效输入在Vector3DInformation\n");
+	MATHEMATICS_ASSERTION_0(0 < m_Points.size() && Math::GetValue(0) <= m_Epsilon, "无效输入在Vector3DInformation\n");
 
 	m_IndexMin[0] = 0;
 	m_IndexMin[1] = 0;
@@ -122,9 +122,9 @@ bool Mathematics::Vector3DInformation<Real>
 		m_PerpendicularExtreme = m_MinExtreme;
 		m_PerpendicularExtreme = m_MinExtreme;
 
-		m_DirectionX[0] = Math::sm_Zero;
-		m_DirectionY[1] = Math::sm_Zero;
-		m_DirectionY[2] = Math::sm_Zero;
+		m_DirectionX[0] = Math::GetValue(0);
+		m_DirectionY[1] = Math::GetValue(0);
+		m_DirectionY[2] = Math::GetValue(0);
 
 		return true;
 	}
@@ -139,7 +139,7 @@ bool Mathematics::Vector3DInformation<Real>
 	m_DirectionX = m_Points[m_MaxExtreme] - m_Origin;
 	m_DirectionX.Normalize(m_Epsilon);
 
-	auto maxDistance = Math::sm_Zero;
+	auto maxDistance = Math::GetValue(0);
 	m_PerpendicularExtreme = m_MinExtreme;
 	for (auto index = 0u; index < m_Points.size(); ++index)
 	{
@@ -176,7 +176,7 @@ bool Mathematics::Vector3DInformation<Real>
 	m_DirectionY -= dot * m_DirectionX;
 	m_DirectionY.Normalize(m_Epsilon);
 	m_DirectionZ = Vector3DTools::CrossProduct(m_DirectionX, m_DirectionY);
-	auto maxDistance = Math::sm_Zero;
+	auto maxDistance = Math::GetValue(0);
 	auto maxSign = NumericalValueSymbol::Zero;
 	m_TetrahedronExtreme = m_MinExtreme;
 

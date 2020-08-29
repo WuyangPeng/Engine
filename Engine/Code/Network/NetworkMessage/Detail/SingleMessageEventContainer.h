@@ -28,7 +28,7 @@ namespace Network
 		SingleMessageEventContainer(SingleMessageEventContainer&& rhs) noexcept;
 		SingleMessageEventContainer& operator=(SingleMessageEventContainer&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_OVERRIDE_DECLARE;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
 		 void Insert(const NetworkMessageEventSharedPtr& messageEvent) override;
 		 void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority) override;

@@ -36,7 +36,7 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorRay2Box2<Real>
 	::Find()
 {
-	auto t0 = Math::sm_Zero;
+	auto t0 = Math::GetValue(0);
 	auto t1 = Math::sm_MaxReal;
 	auto mIntersectionType = 0;
 	StaticFindIntersectorLine2Box2<Real>::DoClipping(t0, t1, mRay.GetOrigin(), mRay.GetDirection(), mBox, true, mQuantity, mPoint, mIntersectionType);
