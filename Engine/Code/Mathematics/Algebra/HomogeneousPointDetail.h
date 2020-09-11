@@ -19,12 +19,9 @@
 #endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_HOMOGENEOUS_POINT_ACHIEVE)
 
 template <typename T>
-bool Mathematics::operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs) noexcept
+bool Mathematics::operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs)  
 {
-    if (lhs.GetX() == rhs.GetX() && lhs.GetY() == rhs.GetY() && lhs.GetZ() == rhs.GetZ() && lhs.GetW() == rhs.GetW())
-        return true;
-    else
-        return false;
+    return lhs.GetCoordinate() == rhs.GetCoordinate();
 }
 
 template <typename T>

@@ -29,7 +29,7 @@ namespace Rendering
     {
     public:
         using ClassType = IKJointImpl;
-        using AVector = Mathematics::AVectorf;
+        using AVector = Mathematics::FloatAVector;
         using IKGoalSmartPointerVector = std::vector<IKGoalSmartPointer>;
         using Object = CoreTools::Object;
         using MatrixRotationAxis = Mathematics::MatrixRotationAxis;

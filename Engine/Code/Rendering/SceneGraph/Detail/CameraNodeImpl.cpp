@@ -43,16 +43,16 @@ const Rendering::ConstCameraSmartPointer Rendering::CameraNodeImpl ::GetCamera()
     return m_Camera;
 }
 
-const Rendering::Transform Rendering::CameraNodeImpl ::GetLocalTransform() const
+const Rendering::FloatTransform Rendering::CameraNodeImpl ::GetLocalTransform() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_CameraÎª¿ÕÖ¸Õë£¡");
 
-    Transform transform;
+    FloatTransform transform;
     transform.SetTranslate(m_Camera->GetPosition());
 
     const Matrix rotate{ m_Camera->GetDirectionVector(), m_Camera->GetUpVector(), m_Camera->GetRightVector(),
-                         Mathematics::Pointf::g_Origin, Mathematics::MatrixMajorFlags::Column };
+                         Mathematics::Float::g_Origin, Mathematics::MatrixMajorFlags::Column };
 
     transform.SetRotate(rotate);
 

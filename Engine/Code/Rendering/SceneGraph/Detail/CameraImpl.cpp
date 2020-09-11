@@ -300,10 +300,10 @@ const Rendering::CameraImpl::AxesAlignBoundingBox2D Rendering::CameraImpl
 const	auto worldViewProjectionMatrix = viewProjectionMatrix * worldMatrix;
 
     // 计算正则化的包围盒矩形显示坐标。
-	auto xmin = Mathematics::Mathf::sm_MaxReal;
-	auto xmax = -Mathematics::Mathf::sm_MaxReal;
-	auto ymin = Mathematics::Mathf::sm_MaxReal;
-	auto ymax = -Mathematics::Mathf::sm_MaxReal;
+	auto xmin = Mathematics::FloatMath::sm_MaxReal;
+	auto xmax = -Mathematics::FloatMath::sm_MaxReal;
+	auto ymin = Mathematics::FloatMath::sm_MaxReal;
+	auto ymax = -Mathematics::FloatMath::sm_MaxReal;
     for (auto i = 0; i < numVertices; ++i)
     {
 		auto vertex = reinterpret_cast<const float*>(vertices);

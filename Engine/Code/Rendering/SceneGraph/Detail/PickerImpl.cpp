@@ -64,12 +64,12 @@ const Rendering::PickRecord Rendering::PickerImpl
 		 
 	if (IsRecordsExist())
 	{
-		auto closest = Mathematics::Mathf::FAbs(m_Records.GetPickRecord(0).GetParameter());
+		auto closest = Mathematics::FloatMath::FAbs(m_Records.GetPickRecord(0).GetParameter());
 		auto index = 0;
 		const auto numRecords = m_Records.GetSize();
 		for (auto i = 1; i < numRecords; ++i)
 		{
-			auto parameter = Mathematics::Mathf::FAbs(m_Records.GetPickRecord(i).GetParameter());
+			auto parameter = Mathematics::FloatMath::FAbs(m_Records.GetPickRecord(i).GetParameter());
 			if (parameter < closest)
 			{
 				closest = parameter;
@@ -92,7 +92,7 @@ const Rendering::PickRecord Rendering::PickerImpl
 	if (IsRecordsExist())
 	{
 		// 获取第一个正数。
-		auto closest = Mathematics::Mathf::sm_MaxReal;
+		auto closest = Mathematics::FloatMath::sm_MaxReal;
 		 
 		const auto numRecords = m_Records.GetSize();
 		auto findIndex = -1;
@@ -136,7 +136,7 @@ const Rendering::PickRecord Rendering::PickerImpl
 	if (IsRecordsExist())
 	{
 		// 获取第一个负数。
-		auto closest = -Mathematics::Mathf::sm_MaxReal;
+		auto closest = -Mathematics::FloatMath::sm_MaxReal;
 
 		const auto numRecords = m_Records.GetSize();
 		auto findIndex = -1;

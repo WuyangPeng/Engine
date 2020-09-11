@@ -192,7 +192,7 @@ void Rendering::ParticleController
 		localTransform.SetTranslate(translate);
 
 		const auto angle = ctrlTime * GetSystemAngularSpeed();
-		const Mathematics::Matrixf deltaRot{ GetSystemAngularAxis(), angle };
+		const Mathematics::FloatMatrix deltaRot{ GetSystemAngularAxis(), angle };
 		const auto rotate = deltaRot * localTransform.GetRotate();
 		localTransform.SetRotate(rotate);
 

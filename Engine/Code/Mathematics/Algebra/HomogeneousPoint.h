@@ -17,6 +17,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 #include <array>
+#include <vector>
 #include <type_traits>
 
 // 当齐次点存储的值为浮点数时，比较两点相等，
@@ -31,6 +32,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
         using ClassType = HomogeneousPoint<T>;
+        using ContainerType = std::vector<ClassType>;
 
     public:
         enum class PointIndex
@@ -92,7 +94,7 @@ namespace Mathematics
 
     // 比较（仅供STL容器使用）
     template <typename T>
-    bool operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs) noexcept;
+    bool operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs);
 
     template <typename T>
     bool operator<(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs) noexcept;
@@ -100,8 +102,8 @@ namespace Mathematics
     template <typename T>
     bool Approximate(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
 
-    using HomogeneousPointf = HomogeneousPoint<float>;
-    using HomogeneousPointd = HomogeneousPoint<double>;
+    using FloatHomogeneousPoint = HomogeneousPoint<float>;
+    using DoubleHomogeneousPoint = HomogeneousPoint<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_HOMOGENEOUS_POINT_H

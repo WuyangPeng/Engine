@@ -80,7 +80,7 @@ namespace Rendering
             if constexpr (sm_Alpha != -1)
             {
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446) // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
                 m_Colour[sm_Alpha] = sm_AlphaMaxValue;
 #include STSTEM_WARNING_POP
             }
@@ -115,7 +115,7 @@ namespace Rendering
             static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446) // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
             m_Colour[sm_Red] = red;
             m_Colour[sm_Green] = green;
             m_Colour[sm_Blue] = blue;
@@ -137,7 +137,7 @@ namespace Rendering
             static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446) // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
             m_Colour[sm_Red] = red;
             m_Colour[sm_Green] = green;
             m_Colour[sm_Blue] = blue;
@@ -227,7 +227,7 @@ namespace Rendering
                 static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446) // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
                 m_Colour[Index] = Clamp(m_Colour[Index], maxValue);
 #include STSTEM_WARNING_POP
             }

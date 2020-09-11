@@ -76,7 +76,7 @@ void Rendering::CreateClodMeshImpl
 		auto ekey = record.GetGenerator();
 		auto metric = record.GetValue();
 
-        if (Mathematics::Mathf::Approximate(metric,Mathematics::Mathf::sm_MaxReal,1e-8f))
+        if (Mathematics::FloatMath::Approximate(metric,Mathematics::FloatMath::sm_MaxReal,1e-8f))
         {
        		// 所有剩余的堆元素都是无限的值。
             if (!ValidResults())
@@ -156,7 +156,7 @@ float Rendering::CreateClodMeshImpl
     }
 
 	// 边的边界（含有边的一个三角形）和交接边缘（3个或更多个三角形共用边）不允许崩塌。
-    return Mathematics::Mathf::sm_MaxReal;
+    return Mathematics::FloatMath::sm_MaxReal;
 }
 
 

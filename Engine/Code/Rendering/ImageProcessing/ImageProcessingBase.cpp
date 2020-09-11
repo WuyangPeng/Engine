@@ -38,7 +38,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     // [-1,1]^2 x [0,1].
     mCamera = std::make_shared<Camera>(false);
     mCamera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-    mCamera->SetFrame(Mathematics::Pointf::g_Origin, Mathematics::Vectorf::g_UnitZ, Mathematics::Vectorf::g_UnitY, Mathematics::Vectorf::g_UnitX);
+    mCamera->SetFrame(Mathematics::Float::g_Origin, Mathematics::Float::g_UnitZ, Mathematics::Float::g_UnitY, Mathematics::Float::g_UnitX);
 
     // Create the vertex format for the square.
     std::vector<VertexFormatType> triple;
@@ -171,7 +171,7 @@ void Rendering::ImageProcessingBase ::PreDraw()
     {
         // Reflect the image in y to account for OpenGL textures having
         // origin in the upper-left corner.
-        mCamera->SetPostProjectionMatrix(Mathematics::Matrixf(1.0f, -1.0f, 1.0f));
+        mCamera->SetPostProjectionMatrix(Mathematics::FloatMatrix(1.0f, -1.0f, 1.0f));
     }
 }
 
@@ -181,7 +181,7 @@ void Rendering::ImageProcessingBase ::PostDraw()
 
     {
         // Remove the y-reflection.
-        mCamera->SetPostProjectionMatrix(Mathematics::Matrixf::sm_Identity);
+        mCamera->SetPostProjectionMatrix(Mathematics::Float::g_IdentityMatrix);
     }
 }
 

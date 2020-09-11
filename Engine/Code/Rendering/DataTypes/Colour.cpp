@@ -46,13 +46,12 @@ ostream& Rendering::operator<<(ostream& os, const Colour<uint8_t>& colour)
 
 #ifdef RENDERING_TEMPLATE_TEST
 
+using std::cout;
+
 namespace Rendering
 {
     void ColourTemplateTest()
     {
-        using IntColour = Colour<uint8_t>;
-        using FloatColour = Colour<float>;
-
         IntColour colour1{};
         IntColour colour2{ 10, 20, 30 };
         IntColour colour3{ 10, 20, 30, 40 };
@@ -81,7 +80,7 @@ namespace Rendering
         colour1 *= 5;
         colour2 /= 4;
 
-        auto result = Approximate(colour4, colour4, Mathematics::Mathf::GetZeroTolerance());
+        auto result = Approximate(colour4, colour4, Mathematics::FloatMath::GetZeroTolerance());
         result = (colour1 == colour2);
         result = (colour1 != colour2);
 
@@ -92,6 +91,8 @@ namespace Rendering
         auto colour6 = colour1 + colour2;
         colour6 = colour1 - colour2;
         colour6 = colour1 * colour2;
+
+        cout << colour1;
     }
 }
 

@@ -1,0 +1,16 @@
+参考文献·开源库·核心工具
+
+1.	GSL 
+2.  CppCoreGuidelines
+3.  boost 
+4.  stlsoft
+5.  Visual Leak Detector 
+6.  zlib
+7.  freetype 
+8.  Pantheios
+9.  Openrj 
+10. Zthread
+11. loki 
+12.	TIFF 
+13.	shwild 
+14.	cppunit 

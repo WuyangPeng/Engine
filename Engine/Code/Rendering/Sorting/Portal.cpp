@@ -28,11 +28,11 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Portal);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Portal);
 
 Rendering::Portal
-	::Portal(int numVertices, Mathematics::APointf* modelVertices,const Mathematics::Planef& modelPlane, ConvexRegion* adjacentRegion, bool open)
+	::Portal(int numVertices, Mathematics::FloatAPoint* modelVertices,const Mathematics::FloatPlane& modelPlane, ConvexRegion* adjacentRegion, bool open)
 	:ParentType("Portal"),AdjacentRegion(adjacentRegion),Open(open),mNumVertices(numVertices),
      mModelVertices(modelVertices),mModelPlane(modelPlane),mWorldPlane(modelPlane)
 {
-	mWorldVertices = NEW1<Mathematics::APointf>(mNumVertices);
+	mWorldVertices = NEW1<Mathematics::FloatAPoint>(mNumVertices);
 }
 
 Rendering::Portal::~Portal ()
@@ -46,8 +46,7 @@ EXCEPTION_ALL_CATCH(Rendering)
   
 }
 
-void Rendering::Portal
-	::UpdateWorldData (const Transform& worldTransform)
+void Rendering::Portal ::UpdateWorldData(const FloatTransform& worldTransform) noexcept
 {
     for (int i = 0; i < mNumVertices; ++i)
     {
@@ -103,13 +102,13 @@ bool Rendering::Portal
 
     const ConstCameraSmartPointer camera = culler.GetCamera();
     const float* frustum = culler.GetFrustum();
-    float rmin = +Mathematics::Mathf::sm_MaxReal;  // left
-    float rmax = -Mathematics::Mathf::sm_MaxReal;  // right
-    float umin = +Mathematics::Mathf::sm_MaxReal;  // bottom
-    float umax = -Mathematics::Mathf::sm_MaxReal;  // top
+    float rmin = +Mathematics::FloatMath::sm_MaxReal;  // left
+    float rmax = -Mathematics::FloatMath::sm_MaxReal;  // right
+    float umin = +Mathematics::FloatMath::sm_MaxReal;  // bottom
+    float umax = -Mathematics::FloatMath::sm_MaxReal;  // top
 
-    Mathematics::AVectorf diff{ Mathematics ::Vectorf ::g_Zero};
-	Mathematics::APointf vertexCam;
+    Mathematics::FloatAVector diff{ Mathematics ::Float ::g_Zero};
+	Mathematics::FloatAPoint vertexCam;
     int i = 0;
 
     if (camera->IsPerspective())
@@ -117,8 +116,8 @@ bool Rendering::Portal
         constexpr float epsilon = 1e-6f, invEpsilon = 1e+6f;
         int firstSign = 0, lastSign = 0;  // in {-1,0,1}
         bool signChange = false;
-		Mathematics::APointf firstVertex = Mathematics::Pointf::g_Origin;
-		Mathematics::APointf lastVertex = Mathematics::Pointf::g_Origin;
+		Mathematics::FloatAPoint firstVertex = Mathematics::Float::g_Origin;
+		Mathematics::FloatAPoint lastVertex = Mathematics::Float::g_Origin;
         float NdD = 0.0f, UdD= 0.0f, RdD= 0.0f, t= 0.0f;
 
         for (i = 0; i < mNumVertices; i++)
@@ -448,7 +447,7 @@ void Rendering::Portal
 	Open = source.ReadBool();
 //    source.ReadSmartPointer(AdjacentRegion);
 
-    mWorldVertices = NEW1<Mathematics::APointf>(mNumVertices);
+    mWorldVertices = NEW1<Mathematics::FloatAPoint>(mNumVertices);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

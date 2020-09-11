@@ -33,7 +33,7 @@ namespace Rendering
 		// may be attached such as the triangles that are coplanar with the
 		// separating plane.
 		BspNode();
-		BspNode(const Mathematics::Planef& modelPlane);
+		BspNode(const Mathematics::FloatPlane& modelPlane);
 		 
 
 		// These methods should be used instead of the attach/detach methods in
@@ -49,11 +49,11 @@ namespace Rendering
 		 SpatialSmartPointer GetNegativeChild();
 
 		// Member access.
-		 Mathematics::Planef ModelPlane;
-                 const Mathematics::Planef& GetWorldPlane() const noexcept;
+		 Mathematics::FloatPlane ModelPlane;
+                 const Mathematics::FloatPlane& GetWorldPlane() const noexcept;
 
 		// Determine the portion of the scene that contains the point.
-		 SpatialSmartPointer GetContainingNode(const Mathematics::APointf& point);
+		 SpatialSmartPointer GetContainingNode(const Mathematics::FloatAPoint& point);
 
 	protected:
 		// Support for the geometric update. 
@@ -62,7 +62,7 @@ namespace Rendering
 		// Support for hierarchical culling.
 		  void GetVisibleSet(Culler& culler, bool noCull) override;
 
-		Mathematics::Planef mWorldPlane;
+		Mathematics::FloatPlane mWorldPlane;
 	};
  #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH

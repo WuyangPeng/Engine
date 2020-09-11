@@ -21,7 +21,7 @@ namespace Rendering
     public:
         COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKGoal);
         using ParentType = Object;
-        using APoint = Mathematics::APointf;
+        using APoint = Mathematics::FloatAPoint;
 
     public:
         IKGoal(const SpatialSmartPointer& target, const SpatialSmartPointer& effector, float weight = 1.0f);

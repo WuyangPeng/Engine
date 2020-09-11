@@ -27,8 +27,8 @@ namespace Rendering
     {
     public:
         using ClassType = MorphControllerImpl;
-        using AVector = Mathematics::AVectorf;
-        using APoint = Mathematics::APointf;
+        using AVector = Mathematics::FloatAVector;
+        using APoint = Mathematics::FloatAPoint;
 
     public:
         // 顶点的数目，变形的目标，被固定对象的生存期的键。

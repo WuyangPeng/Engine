@@ -530,6 +530,9 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalize.cpp">
       <Filter>Algebra 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Plane.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsLib.h">
@@ -3917,6 +3920,12 @@
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AVectorOrthonormalizeAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PlaneAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\MatrixAchieve.h">
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
   </ItemGroup>

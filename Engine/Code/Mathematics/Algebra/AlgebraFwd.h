@@ -137,7 +137,7 @@ namespace Mathematics
 
 	enum class ExtractEulerResultType;
 	enum class ExtractEulerResultOrder;
-	enum class MatrixTypeFlags;
+	enum class MatrixInitType;
 	enum class MatrixMajorFlags;
 	enum class MatrixRotationAxis;
 	enum class BandedMatrixSolveFlags;

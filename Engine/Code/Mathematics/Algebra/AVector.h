@@ -15,8 +15,10 @@
 #include "AlgebraFwd.h"
 #include "HomogeneousPoint.h"
 #include "System/Helper/PragmaWarning/Operators.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 #include <type_traits>
+#include <vector>
 
 namespace Mathematics
 {
@@ -30,6 +32,7 @@ namespace Mathematics
         using Math = Math<T>;
         using Vector3D = Vector3D<T>;
         using HomogeneousPoint = HomogeneousPoint<T>;
+        using ContainerType = std::vector<ClassType>;
 
     public:
         // AVector表示仿射坐标 (x,y,z,0)。默认 (0,0,0,0)。
@@ -68,11 +71,11 @@ namespace Mathematics
         AVector& operator/=(T scalar);
 
         // 向量运算。
-        [[nodiscard]] T Length() const;
+        [[nodiscard]] T Length() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
         [[nodiscard]] T SquaredLength() const noexcept;
         void Normalize(const T epsilon = Math::GetZeroTolerance());
-        [[nodiscard]] bool IsZero(const T epsilon = Math::GetZeroTolerance()) const;
-        [[nodiscard]] bool IsNormalize(const T epsilon = Math::GetZeroTolerance()) const;
+        [[nodiscard]] bool IsZero(const T epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        [[nodiscard]] bool IsNormalize(const T epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     private:
         static constexpr auto sm_AVectorSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
@@ -82,12 +85,12 @@ namespace Mathematics
     };
 
     template <typename T>
-    [[nodiscard]] bool Approximate(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
+    [[nodiscard]] bool Approximate(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance()) noexcept;
 
     template <typename T>
     [[nodiscard]] T Dot(const AVector<T>& lhs, const AVector<T>& rhs) noexcept;
     template <typename T>
-    [[nodiscard]] const AVector<T> Cross(const AVector<T>& lhs, const AVector<T>& rhs);
+    [[nodiscard]] const AVector<T> Cross(const AVector<T>& lhs, const AVector<T>& rhs) noexcept;
     template <typename T>
     [[nodiscard]] const AVector<T> UnitCross(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
 
@@ -110,32 +113,32 @@ namespace Mathematics
     template <typename T>
     std::ostream& operator<<(std::ostream& outFile, const AVector<T>& vector);
 
-    using AVectorf = AVector<float>;
-    using AVectord = AVector<double>;
+    using FloatAVector = AVector<float>;
+    using DoubleAVector = AVector<double>;
 
     // 特殊向量
-    namespace Vectorf
+    namespace Float
     {
         // (0,0,0,0)
-        constexpr AVectorf g_Zero;
+        constexpr FloatAVector g_Zero{};
         // (1,0,0,0)
-        constexpr AVectorf g_UnitX{ Mathf::GetValue(1), Mathf::GetValue(0), Mathf::GetValue(0) };
+        constexpr FloatAVector g_UnitX{ FloatMath::GetValue(1), FloatMath::GetValue(0), FloatMath::GetValue(0) };
         // (0,1,0,0)
-        constexpr AVectorf g_UnitY{ Mathf::GetValue(0), Mathf::GetValue(1), Mathf::GetValue(0) };
+        constexpr FloatAVector g_UnitY{ FloatMath::GetValue(0), FloatMath::GetValue(1), FloatMath::GetValue(0) };
         // (0,0,1,0)
-        constexpr AVectorf g_UnitZ{ Mathf::GetValue(0), Mathf::GetValue(0), Mathf::GetValue(1) };
+        constexpr FloatAVector g_UnitZ{ FloatMath::GetValue(0), FloatMath::GetValue(0), FloatMath::GetValue(1) };
     }
 
-    namespace Vectord
+    namespace Double
     {
         // (0,0,0,0)
-        constexpr AVectord g_Zero;
+        constexpr DoubleAVector g_Zero{};
         // (1,0,0,0)
-        constexpr AVectord g_UnitX{ Mathd::GetValue(1), Mathd::GetValue(0), Mathd::GetValue(0) };
+        constexpr DoubleAVector g_UnitX{ DoubleMath::GetValue(1), DoubleMath::GetValue(0), DoubleMath::GetValue(0) };
         // (0,1,0,0)
-        constexpr AVectord g_UnitY{ Mathd::GetValue(0), Mathd::GetValue(1), Mathd::GetValue(0) };
+        constexpr DoubleAVector g_UnitY{ DoubleMath::GetValue(0), DoubleMath::GetValue(1), DoubleMath::GetValue(0) };
         // (0,0,1,0)
-        constexpr AVectord g_UnitZ{ Mathd::GetValue(0), Mathd::GetValue(0), Mathd::GetValue(1) };
+        constexpr DoubleAVector g_UnitZ{ DoubleMath::GetValue(0), DoubleMath::GetValue(0), DoubleMath::GetValue(1) };
     }
 }
 

@@ -20,7 +20,7 @@ namespace Rendering
     {
     public:
         PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(PrincipalCurvatureInfo);
-        using AVector = Mathematics::AVectorf;
+        using AVector = Mathematics::FloatAVector;
 
     public:
         PrincipalCurvatureInfo(float principalCurvature0, float principalCurvature1, const AVector& principalDirection0, const AVector& principalDirection1);

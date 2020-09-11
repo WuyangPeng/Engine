@@ -137,7 +137,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexBufferAccessor,GetTangent
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexBufferAccessor,GetPositionExcursion, int, int)									  
  
 template <>
-Mathematics::APointf Rendering::VertexBufferAccessor ::GetPosition(int index) const noexcept
+Mathematics::FloatAPoint Rendering::VertexBufferAccessor ::GetPosition(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -145,13 +145,13 @@ Mathematics::APointf Rendering::VertexBufferAccessor ::GetPosition(int index) co
 	auto secondPosition = *(reinterpret_cast<const float*>(GetPosition(index) + sizeof(float)));
 	auto thirdPosition = *(reinterpret_cast<const float*>(GetPosition(index) + sizeof(float) * 2));
 
-	Mathematics::APointf position{ firstPosition, secondPosition, thirdPosition };
+	Mathematics::FloatAPoint position{ firstPosition, secondPosition, thirdPosition };
 
 	return position;
 }
 
 template <>
-Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept
+Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -159,13 +159,13 @@ Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetNormal(int index) con
 	auto secondNormal = *(reinterpret_cast<const float*>(GetNormal(index) + sizeof(float)));
 	auto thirdNormal = *(reinterpret_cast<const float*>(GetNormal(index) + sizeof(float)* 2));
 
-	Mathematics::AVectorf normal{ firstNormal, secondNormal, thirdNormal };
+	Mathematics::FloatAVector normal{ firstNormal, secondNormal, thirdNormal };
 
 	return normal;
 }
 
 template <>
-Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept
+Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -173,13 +173,13 @@ Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetTangent(int index) co
 	auto secondTangent = *(reinterpret_cast<const float*>(GetTangent(index) + sizeof(float)));
 	auto thirdTangent = *(reinterpret_cast<const float*>(GetTangent(index) + sizeof(float)* 2));
 
-	Mathematics::AVectorf tangent{ firstTangent, secondTangent, thirdTangent };
+	Mathematics::FloatAVector tangent{ firstTangent, secondTangent, thirdTangent };
 
 	return tangent;
 }
 
 template <>
-Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept
+Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -187,7 +187,7 @@ Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetBinormal(int index) c
 	auto secondBinormal = *(reinterpret_cast<const float*>(GetBinormal(index) + sizeof(float)));
 	auto thirdBinormal = *(reinterpret_cast<const float*>(GetBinormal(index) + sizeof(float)* 2));
 
-	Mathematics::AVectorf binormal{ firstBinormal, secondBinormal, thirdBinormal };
+	Mathematics::FloatAVector binormal{ firstBinormal, secondBinormal, thirdBinormal };
 
 	return binormal;
 }

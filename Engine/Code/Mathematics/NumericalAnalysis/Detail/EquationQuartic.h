@@ -20,7 +20,7 @@ namespace Mathematics
 		using ParentType = EquationImpl;
 
 	public:
-		EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon = Mathd::GetZeroTolerance())  ;
+		EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon = DoubleMath::GetZeroTolerance())  ;
 	 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;

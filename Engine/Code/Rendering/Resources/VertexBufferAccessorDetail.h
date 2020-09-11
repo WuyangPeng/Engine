@@ -16,7 +16,7 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::APointf Rendering::VertexBufferAccessor ::GetPosition(int index) const noexcept;
+RENDERING_DEFAULT_DECLARE Mathematics::FloatAPoint Rendering::VertexBufferAccessor ::GetPosition(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor
@@ -28,7 +28,7 @@ T Rendering::VertexBufferAccessor
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept;
+RENDERING_DEFAULT_DECLARE Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept
@@ -39,7 +39,7 @@ T Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept;
+RENDERING_DEFAULT_DECLARE Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept
@@ -50,7 +50,7 @@ T Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::AVectorf Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept;
+RENDERING_DEFAULT_DECLARE Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept

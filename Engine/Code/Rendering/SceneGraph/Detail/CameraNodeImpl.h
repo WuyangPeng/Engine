@@ -63,7 +63,7 @@ namespace Rendering
         void SetCamera(const CameraSmartPointer& camera) noexcept;
         const ConstCameraSmartPointer GetCamera() const noexcept;
 
-        const Transform GetLocalTransform() const;
+        const FloatTransform GetLocalTransform() const;
 
         void SetFrame(const APoint& position, const AVector& directionVector, const AVector& upVector, const AVector& rightVector);
 

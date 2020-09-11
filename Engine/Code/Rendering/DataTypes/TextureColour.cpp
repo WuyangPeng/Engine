@@ -28,7 +28,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8L8>::SetColour(ValueTy
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Alpha] = alpha;
     m_Colour[sm_Luminance] = luminance;
 #include STSTEM_WARNING_POP
@@ -51,7 +51,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::G16R16>::SetColour(Value
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Green] = green;
     m_Colour[sm_Red] = red;
 #include STSTEM_WARNING_POP
@@ -74,7 +74,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>::SetColour(Valu
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Green] = green;
     m_Colour[sm_Red] = red;
 #include STSTEM_WARNING_POP
@@ -97,7 +97,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>::SetColour(Valu
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Green] = green;
     m_Colour[sm_Red] = red;
 #include STSTEM_WARNING_POP
@@ -119,7 +119,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8>::SetColour(ValueType
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Alpha] = alpha;
 #include STSTEM_WARNING_POP
 
@@ -140,7 +140,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::L8>::SetColour(ValueType
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Luminance] = luminance;
 #include STSTEM_WARNING_POP
 
@@ -161,7 +161,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::L16>::SetColour(ValueTyp
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Luminance] = luminance;
 #include STSTEM_WARNING_POP
 
@@ -182,7 +182,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::R16F>::SetColour(ValueTy
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Red] = red;
 #include STSTEM_WARNING_POP
 
@@ -203,14 +203,14 @@ void Rendering::TextureColour<Rendering::TextureFormat::R32F>::SetColour(ValueTy
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Red] = red;
 #include STSTEM_WARNING_POP
 
     Standardization();
 }
 
-#ifdef RENDERING_TEMPLATE_TEST
+#ifdef RENDERING_TEMPLATE_TEST 
 
 namespace Rendering
 {
@@ -269,7 +269,7 @@ namespace Rendering
         colour8 = colour1 - colour2;
         colour8 = colour1 * colour2;
 
-        auto result = Approximate(colour6, colour6, Mathematics::Mathf::GetZeroTolerance());
+        auto result = Approximate(colour6, colour6, Mathematics::FloatMath::GetZeroTolerance());
         result = (colour1 == colour2);
         result = (colour1 != colour2);
 
@@ -283,7 +283,7 @@ namespace Rendering
         const L8Colour colour13{ 5 };
         const L16Colour colour14{ 5 };
         const R16FColour colour15{ 0.4f };
-        const R32FColour colour16{ 0.4f };
+        const R32FColour colour16{ 0.4f }; 
     }
 }
 

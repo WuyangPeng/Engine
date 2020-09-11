@@ -23,7 +23,7 @@ namespace Imagics
 	protected:
 		void ComputeParam () noexcept;
 		  void OnPreUpdate () noexcept override;
-		  void OnUpdate (int x, int y) override;
+                void OnUpdate(int x, int y)   override;
 		
 		float mK;           // k
 		

@@ -29,8 +29,8 @@ namespace Rendering
 		using VertexBufferSmartPointer = std::shared_ptr<ClassType>;
 		using ConstVertexBufferSmartPointer = std::shared_ptr<const ClassType>;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
-		using AVector = Mathematics::AVectorf;
-		using APoint = Mathematics::APointf;
+		using AVector = Mathematics::FloatAVector;
+		using APoint = Mathematics::FloatAPoint;
 		using Vector2D = Mathematics::Vector2Df;
 
 	public:

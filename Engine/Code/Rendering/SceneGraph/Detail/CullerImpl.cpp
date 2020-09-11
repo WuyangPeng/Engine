@@ -189,7 +189,7 @@ void Rendering::CullerImpl ::PopPlane() noexcept
 }
 
 bool Rendering::CullerImpl
-    ::IsVisible (const Bound& bound)
+    ::IsVisible (const FloatBound& bound) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -229,7 +229,7 @@ bool Rendering::CullerImpl
 }
 
 bool Rendering::CullerImpl
-    ::IsVisible (int numVertices, const APoint* vertices, bool ignoreNearPlane) const
+    ::IsVisible (int numVertices, const APoint* vertices, bool ignoreNearPlane) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

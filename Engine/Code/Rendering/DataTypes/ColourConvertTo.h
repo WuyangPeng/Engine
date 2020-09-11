@@ -12,9 +12,8 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Colour.h"
-
-#include "DataTypesFwd.h"
+#include "Colour.h" 
+#include "ColourTextureFormatTraits.h"
 #include "Flags/TextureFormat.h"
 #include "System/Helper/EnumCast.h"
 #include "CoreTools/Base/SpanIterator.h"

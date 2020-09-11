@@ -317,6 +317,7 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Euler.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPoint.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Plane.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Polynomial.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Quaternion.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\QuaternionConstraints.cpp" />
@@ -445,8 +446,10 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3ExtractDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\MatrixAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\MatrixDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Plane.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PlaneAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PlaneDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Polynomial.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PolynomialDetail.h" />

@@ -237,7 +237,7 @@ void CoreTools::SpanIterator<Iter>::Increase(T value)
     result = value;
 
     *this += sizeof(T);
-}
+} 
 
 template <typename Iter>
 typename Iter::difference_type CoreTools::operator-(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs)

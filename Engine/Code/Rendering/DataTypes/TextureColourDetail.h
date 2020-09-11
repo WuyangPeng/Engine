@@ -189,7 +189,7 @@ void Rendering::TextureColour<Format>::ConvertingAlpha([[maybe_unused]] const Te
     static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize, "index is crossing!");
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Alpha] = sm_AlphaMaxValue;
 #include STSTEM_WARNING_POP
 }
@@ -211,7 +211,7 @@ void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsForm
     const auto difference = colour[RhsIndex] - rhsMinValue;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance) + sm_MinValue;
 #include STSTEM_WARNING_POP
 }
@@ -232,7 +232,7 @@ void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsForm
     const auto difference = colour[RhsIndex] - rhsMinValue;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance + 0.5f) + sm_MinValue;
 #include STSTEM_WARNING_POP
 }
@@ -304,7 +304,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     return m_Colour[sm_Red];
 #include STSTEM_WARNING_POP
 }
@@ -318,7 +318,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     return m_Colour[sm_Green];
 #include STSTEM_WARNING_POP
 }
@@ -332,7 +332,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     return m_Colour[sm_Blue];
 #include STSTEM_WARNING_POP
 }
@@ -346,7 +346,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     return m_Colour[sm_Alpha];
 #include STSTEM_WARNING_POP
 }
@@ -360,7 +360,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     return m_Colour[sm_Luminance];
 #include STSTEM_WARNING_POP
 }
@@ -390,7 +390,7 @@ void Rendering::TextureColour<Format>::SetRed(ValueType red) noexcept
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Red] = red;
 #include STSTEM_WARNING_POP
 }
@@ -404,7 +404,7 @@ void Rendering::TextureColour<Format>::SetGreen(ValueType green) noexcept
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Green] = green;
 #include STSTEM_WARNING_POP
 }
@@ -418,7 +418,7 @@ void Rendering::TextureColour<Format>::SetBlue(ValueType blue) noexcept
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Blue] = blue;
 #include STSTEM_WARNING_POP
 }
@@ -432,7 +432,7 @@ void Rendering::TextureColour<Format>::SetAlpha(ValueType alpha) noexcept
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Alpha] = alpha;
 #include STSTEM_WARNING_POP
 }
@@ -446,7 +446,7 @@ void Rendering::TextureColour<Format>::SetLuminance(ValueType luminance) noexcep
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[sm_Luminance] = luminance;
 #include STSTEM_WARNING_POP
 }
@@ -516,7 +516,7 @@ void Rendering::TextureColour<Format>::Multiply(const std::integral_constant<boo
     static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
     m_Colour[Index] = boost::numeric_cast<ValueType>(m_Colour[Index] * colour[Index] / maxValue);
 #include STSTEM_WARNING_POP
 }

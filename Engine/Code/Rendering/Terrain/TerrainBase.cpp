@@ -96,14 +96,14 @@ Rendering::TerrainPageSmartPointer Rendering::TerrainBase
 {
     const float invLength = 1.0f/(mSpacing*(float)(mSize - 1));
 
-    int col = (int)Mathematics:: Mathf::Floor(x*invLength);
+    int col = (int)Mathematics:: FloatMath::Floor(x*invLength);
     col %= mNumCols;
     if (col < 0)
     {
         col += mNumCols;
     }
 
-	int row = (int)Mathematics::Mathf::Floor(y*invLength);
+	int row = (int)Mathematics::FloatMath::Floor(y*invLength);
     row %= mNumRows;
     if (row < 0)
     {
@@ -125,7 +125,7 @@ float Rendering::TerrainBase
     return page->GetHeight(x, y);
 }
 
-Mathematics::AVectorf Rendering::TerrainBase
+Mathematics::FloatAVector Rendering::TerrainBase
 	::GetNormal(float x, float y) const
 {
     const float xp = x + mSpacing;
@@ -153,7 +153,7 @@ Mathematics::AVectorf Rendering::TerrainBase
 	ytmp = ym - page->GetLocalTransform().GetTranslate()[1];
    const float hzm = page->GetHeight(xtmp,ytmp);
 
-	Mathematics::AVectorf normal(hmz - hpz, hzm - hzp, 1.0f);
+	Mathematics::FloatAVector normal(hmz - hpz, hzm - hzp, 1.0f);
     normal.Normalize();
     return normal;
 }
@@ -246,17 +246,17 @@ void Rendering::TerrainBase
     }
 
     // Get camera location/direction in model space of terrain.
-   Mathematics:: APointf worldEye = mCamera->GetPosition();
-   Mathematics::AVectorf worldDir = mCamera->GetDirectionVector();
-   Mathematics::APointf modelEye = GetWorldTransform().GetInverseMatrix()*worldEye;
-   Mathematics::AVectorf modelDir = GetWorldTransform().GetInverseMatrix()*worldDir;
+   Mathematics:: FloatAPoint worldEye = mCamera->GetPosition();
+   Mathematics::FloatAVector worldDir = mCamera->GetDirectionVector();
+   Mathematics::FloatAPoint modelEye = GetWorldTransform().GetInverseMatrix()*worldEye;
+   Mathematics::FloatAVector modelDir = GetWorldTransform().GetInverseMatrix()*worldDir;
 
     // Update the model-space origins of the terrain pages.  Start the
     // process by locating the page that contains the camera.
    const float length = mSpacing*(float)(mSize - 1);
    const float invLength = 1.0f/length;
-	const int newCameraCol = (int)Mathematics::Mathf::Floor(modelEye[0]*invLength);
-	const int newCameraRow = (int)Mathematics::Mathf::Floor(modelEye[1]*invLength);
+	const int newCameraCol = (int)Mathematics::FloatMath::Floor(modelEye[0]*invLength);
+	const int newCameraRow = (int)Mathematics::FloatMath::Floor(modelEye[1]*invLength);
     if (newCameraCol != mCameraCol || newCameraRow != mCameraRow)
     {
         mCameraCol = newCameraCol;
@@ -286,7 +286,7 @@ void Rendering::TerrainBase
                 TerrainPageSmartPointer page = mPages[rP][cP];
 				Mathematics::Float2 oldOrigin = page->GetOrigin();
 				Mathematics::Float2 newOrigin(cO*length, rO*length);
-				Mathematics::APointf pageTrn(newOrigin.GetFirstValue() - oldOrigin.GetFirstValue(),
+				Mathematics::FloatAPoint pageTrn(newOrigin.GetFirstValue() - oldOrigin.GetFirstValue(),
 											 newOrigin.GetSecondValue() - oldOrigin.GetSecondValue(),
 											 page->GetLocalTransform().GetTranslate()[2]);
 				 

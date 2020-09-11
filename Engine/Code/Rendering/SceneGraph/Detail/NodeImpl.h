@@ -112,7 +112,7 @@ namespace Rendering
 
         // 对几何更新的支持。
         bool UpdateWorldData(double applicationTime);
-        const Bound GetWorldBound();
+        const FloatBound GetWorldBound();
 
         // 对分级裁剪的支持。
         void GetVisibleSet(Culler& culler, bool noCull);

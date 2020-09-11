@@ -10,7 +10,3 @@ http://www.craiglarman.com 、http://www.craiglarman.cn
 知识点 
 1.	UML基础知识。 
 
-代码 
-1.  书籍代码。 
-
-要点

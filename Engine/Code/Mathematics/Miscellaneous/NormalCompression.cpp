@@ -17,7 +17,7 @@ static auto temp1 = 2 * gsN + 1;
 static double gsB = temp1;
 static double gsB2 = gsB*gsB;
 static auto temp2 = (gsN - 1);
-static double gsFactor = temp2 *Mathematics::Mathd::Sqrt(0.5);
+static double gsFactor = temp2 *Mathematics::DoubleMath::Sqrt(0.5);
 static double gsInvFactor = 1.0/gsFactor;
 
 
@@ -45,8 +45,8 @@ void Mathematics
     }
 
     // Determine mantissa.
-    const unsigned short usX = static_cast<unsigned short>(Mathd::Floor(gsFactor*x));
-    const unsigned short usY = static_cast<unsigned short>(Mathd::Floor(gsFactor*y));
+    const unsigned short usX = static_cast<unsigned short>(DoubleMath::Floor(gsFactor*x));
+    const unsigned short usY = static_cast<unsigned short>(DoubleMath::Floor(gsFactor*y));
     unsigned short mantissa = usX + ((usY*(255-usY)) >> 1);
     index |= mantissa;
 }
@@ -59,14 +59,14 @@ void Mathematics
     // Extract triangular indices.
 	const auto a = 8 * mantissa;
     double temp = gsB2 - a;
-    unsigned short usY = static_cast<unsigned short>(Mathd::Floor(0.5*(gsB - Mathd::Sqrt(Mathd::FAbs(temp)))));
+    unsigned short usY = static_cast<unsigned short>(DoubleMath::Floor(0.5*(gsB - DoubleMath::Sqrt(DoubleMath::FAbs(temp)))));
     unsigned short usX = mantissa - ((usY*(255 - usY)) >> 1);
 
     // Build approximate normal.
     x = usX*gsInvFactor;
     y = usY*gsInvFactor;
     temp = 1.0 - x*x - y*y;
-    z = Mathd::Sqrt(Mathd::FAbs(temp));
+    z = DoubleMath::Sqrt(DoubleMath::FAbs(temp));
 
     // Determine octant.
     if (index & 0x8000)

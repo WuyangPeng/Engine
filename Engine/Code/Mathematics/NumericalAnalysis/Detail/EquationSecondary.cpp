@@ -66,7 +66,7 @@ bool Mathematics::EquationSecondary
 	::Predigest()
 {
 	// 求出一个解为0，并简化为一次方程
-	if (Mathd::FAbs(m_Constant) <= GetEpsilon())
+	if (DoubleMath::FAbs(m_Constant) <= GetEpsilon())
 	{
 		SetRealResult(0.0);
 		EquationOnce equation{ m_Once,m_Secondary };
@@ -76,7 +76,7 @@ bool Mathematics::EquationSecondary
 	}
 
 	// 简化为一次方程
-	if (Mathd::FAbs(m_Secondary) <= GetEpsilon())
+	if (DoubleMath::FAbs(m_Secondary) <= GetEpsilon())
 	{
 		EquationOnce equation{ m_Constant,m_Once };
 		AddResult(equation);
@@ -104,7 +104,7 @@ double Mathematics::EquationSecondary
 void Mathematics::EquationSecondary
 	::CalculateResult(double lhs, double discriminant)
 {
-	if (Mathd::FAbs(discriminant) <= GetEpsilon())
+	if (DoubleMath::FAbs(discriminant) <= GetEpsilon())
 		CalculateResultDiscriminantIsZero(lhs);
 	else if (0.0 < discriminant)
 		CalculateResultDiscriminantIsPlus(lhs, discriminant);
@@ -116,7 +116,7 @@ void Mathematics::EquationSecondary
 	::CalculateResultDiscriminantIsPlus(double lhs, double discriminant)
 {
 	// 计算sqrt(discriminant) / 2a
-	auto rhs = Mathd::Sqrt(discriminant) / m_Secondary / 2.0;
+	auto rhs = DoubleMath::Sqrt(discriminant) / m_Secondary / 2.0;
 
 	const auto minResult = lhs - rhs;
 	const auto maxResult = lhs + rhs;
@@ -135,7 +135,7 @@ void Mathematics::EquationSecondary
 	::CalculateResultDiscriminantIsNegative(double lhs, double discriminant)
 {
 	// 计算sqrt(-discriminant) / 2a
-	auto rhs = Mathd::Sqrt(-discriminant) / m_Secondary / 2.0;
+	auto rhs = DoubleMath::Sqrt(-discriminant) / m_Secondary / 2.0;
 
 	SetImaginaryResult(Imaginary{ lhs, -rhs });
 	SetImaginaryResult(Imaginary{ lhs, rhs });

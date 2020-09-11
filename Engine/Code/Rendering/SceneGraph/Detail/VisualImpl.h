@@ -32,8 +32,7 @@ namespace CoreTools
 
 namespace Rendering
 {
-    class VisualEffectInstance;
-    class Transform;
+    class VisualEffectInstance; 
 
     class RENDERING_HIDDEN_DECLARE VisualImpl
     {
@@ -44,7 +43,7 @@ namespace Rendering
         using ObjectRegister = CoreTools::ObjectRegister;
         using ObjectLink = CoreTools::ObjectLink;
         using Object = CoreTools::Object;
-        using APoint = Mathematics::APointf;
+        using APoint = Mathematics::FloatAPoint;
 
     public:
         explicit VisualImpl(VisualPrimitiveType type = VisualPrimitiveType::None);
@@ -66,8 +65,8 @@ namespace Rendering
         ConstIndexBufferSmartPointer GetConstIndexBuffer() const;
         IndexBufferSmartPointer GetIndexBuffer();
 
-        const Bound& GetModelBound() const noexcept;
-        Bound& GetModelBound() noexcept;
+        const FloatBound& GetModelBound() const noexcept;
+        FloatBound& GetModelBound() noexcept;
 
         // 存取绘制对象的视觉效果。
         void SetEffectInstance(const VisualEffectInstanceSmartPointer& effect) noexcept;
@@ -75,7 +74,7 @@ namespace Rendering
         const VisualEffectInstanceSmartPointer GetEffectInstance() noexcept;
 
         // 对几何更新的支持。
-        const Bound GetWorldBound(const Transform& worldTransform);
+        const FloatBound GetWorldBound(const FloatTransform& worldTransform);
         void UpdateModelBound();
         void ComputeBounding(const std::vector<APoint>& positions);
 
@@ -92,7 +91,7 @@ namespace Rendering
 
     private:
         VisualData m_VisualData;
-        Bound m_ModelBound;
+        FloatBound m_ModelBound;
 
         // 着色器效果用来绘制视觉。
         VisualEffectInstanceSmartPointer m_Effect;

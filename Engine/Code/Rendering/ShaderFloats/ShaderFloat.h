@@ -32,9 +32,9 @@ namespace Rendering
         COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderFloat);
         using ParentType = Object;
         using FloatVector = std::vector<float>;
-        using AVector = Mathematics::AVectorf;
-        using APoint = Mathematics::APointf;
-        using Matrix = Mathematics::Matrixf;
+        using AVector = Mathematics::FloatAVector;
+        using APoint = Mathematics::FloatAPoint;
+        using Matrix = Mathematics::FloatMatrix;
         using Colour = Colour<float>;
         using ShaderFloatSmartPointer = std::shared_ptr<ClassType>;
         using ConstShaderFloatSmartPointer = std::shared_ptr<const ClassType>;

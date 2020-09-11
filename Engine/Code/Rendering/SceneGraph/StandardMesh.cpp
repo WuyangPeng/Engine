@@ -17,7 +17,7 @@ using std::make_shared;
 DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, StandardMesh)
 
 Rendering::StandardMesh
-	::StandardMesh(const VertexFormatSmartPointer& vertexFormat,bool isStatic, bool inside,const Transform* transform)
+	::StandardMesh(const VertexFormatSmartPointer& vertexFormat,bool isStatic, bool inside,const FloatTransform* transform)
 	:m_Impl{ make_shared<ImplType>(vertexFormat,isStatic,inside,transform) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -25,8 +25,8 @@ Rendering::StandardMesh
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, StandardMesh)
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, StandardMesh,SetTransform, Transform,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, StandardMesh,GetTransform, const Rendering::Transform&)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, StandardMesh,SetTransform, FloatTransform,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, StandardMesh,GetTransform, const Rendering::FloatTransform&)
 
 const Rendering::TrianglesMeshSmartPointer Rendering::StandardMesh
 	::Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const

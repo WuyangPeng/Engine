@@ -28,7 +28,7 @@ namespace Rendering
         using ClassType = ParticlesImpl;
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
-        using APoint = Mathematics::APointf;
+        using APoint = Mathematics::FloatAPoint;
 
     public:
         // VertexFormat对象必须包含3元组位置。

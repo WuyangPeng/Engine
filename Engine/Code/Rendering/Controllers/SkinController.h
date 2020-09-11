@@ -24,7 +24,7 @@ namespace Rendering
 	public:
 		COPY_UNSHARE_CLASSES_TYPE_DECLARE(SkinController);
 		using ParentType = Controller;
-		using APoint = Mathematics::APointf;
+		using APoint = Mathematics::FloatAPoint;
 
 	public:
 		// 顶点和骨骼的数目在对象的生存期是固定的。

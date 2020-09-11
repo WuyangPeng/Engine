@@ -141,16 +141,16 @@ bool Rendering::SkinController
 				VertexBufferAccessor vba{ visual };
 
 				// 皮肤顶点在骨骼世界坐标系统计算，所以视觉世界变换必须为单位。
-				visual->SetWorldTransform(Transform::sm_Identity);
+                                visual->SetWorldTransform(FloatTransform{});
 
 				// 计算的皮肤顶点位置。
 				for (auto vertex = 0; vertex < m_Impl->GetNumVertices(); ++vertex)
 				{
-                                      auto position = Mathematics::Pointf::g_Origin;
+                                      auto position = Mathematics::Float::g_Origin;
 					for (auto bone = 0; bone < m_Impl->GetNumBones(); ++bone)
 					{
 						const auto weight = m_Impl->GetWeights(bone, vertex);
-						if (Mathematics::Mathf::GetZeroTolerance() < Mathematics::Mathf::FAbs(weight))
+						if (Mathematics::FloatMath::GetZeroTolerance() < Mathematics::FloatMath::FAbs(weight))
 						{
                                                     const auto offset = m_Impl->GetOffsets(bone, vertex);
                                                     const auto worldOffset = m_Impl->GetBones(bone)->GetWorldTransform() * offset;

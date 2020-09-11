@@ -45,7 +45,7 @@ void Mathematics::AVectorOrthonormalBasis<Real>::Generate()
 }
 
 template <typename Real>
-void Mathematics::AVectorOrthonormalBasis<Real>::GenerateOnXOrZIsMax()
+void Mathematics::AVectorOrthonormalBasis<Real>::GenerateOnXOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
     // unitVector.x或unitVector.z是最大量级的分量，交换他们
     auto invLength = Math::InvSqrt(m_WVector.GetX() * m_WVector.GetX() + m_WVector.GetZ() * m_WVector.GetZ());
@@ -55,7 +55,7 @@ void Mathematics::AVectorOrthonormalBasis<Real>::GenerateOnXOrZIsMax()
 }
 
 template <typename Real>
-void Mathematics::AVectorOrthonormalBasis<Real>::GenerateOnYOrZIsMax()
+void Mathematics::AVectorOrthonormalBasis<Real>::GenerateOnYOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
     // unitVector.y或unitVector.z是最大量级的分量，交换他们
     auto invLength = Math::InvSqrt(m_WVector.GetY() * m_WVector.GetY() + m_WVector.GetZ() * m_WVector.GetZ());

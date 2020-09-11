@@ -1,1 +1,12 @@
 参考文献·其他语言
+
+1.	Database（数据库）
+2.	SQL
+3.	SQL Server
+4.	Java
+5.	CSharp（C#）
+6.	Python
+7.	RegularExpression（正则表达式）
+8.	Redis
+9.	Lua
+10.	Perl

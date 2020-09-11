@@ -38,10 +38,10 @@ namespace Physics
 		static_assert(std::is_base_of<CoreTools::ObjectInterface, typename MeshSmartPointer::SubclassType>::value);
 		
 		using ClassType = BoundTreeChild<MeshSmartPointer,Bound>;
-		using Transform = Rendering::Transform;
+		using Transform = Rendering::FloatTransform;
 		using BoundTreeChildPtr = std::shared_ptr<ClassType>;
-		using APoint = Mathematics::APointf;
-		using AVector = Mathematics::AVectorf;
+		using APoint = Mathematics::FloatAPoint;
+		using AVector = Mathematics::FloatAVector;
 		using Line3 = Mathematics::Line3f;
 		using Centroids = std::vector<APoint>;
 		using Split = std::vector<int>;

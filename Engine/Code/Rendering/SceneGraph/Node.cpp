@@ -116,7 +116,7 @@ void Rendering::Node ::UpdateWorldBound()
 
     if (!GetWorldBoundIsCurrent())
     {
-        auto bound = m_Impl->GetWorldBound();
+       const auto bound = m_Impl->GetWorldBound();
         BoundGrowToContain(bound);
     }
 }

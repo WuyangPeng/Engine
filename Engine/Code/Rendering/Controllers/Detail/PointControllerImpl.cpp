@@ -24,14 +24,14 @@ using std::vector;
 
 Rendering::PointControllerImpl
 	::PointControllerImpl(int numPoints)
-	:m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::Vectorf::g_UnitZ }, m_SystemAngularAxis{ Mathematics::Vectorf::g_UnitZ }, m_NumPoints{ numPoints },
+	:m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::Float::g_UnitZ }, m_SystemAngularAxis{ Mathematics::Float::g_UnitZ }, m_NumPoints{ numPoints },
 	 m_PointLinearSpeed(numPoints), m_PointAngularSpeed(numPoints), m_PointLinearAxis(numPoints), m_PointAngularAxis(numPoints)
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::PointControllerImpl ::PointControllerImpl() noexcept
-    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::Vectorf::g_UnitZ }, m_SystemAngularAxis{ Mathematics::Vectorf::g_UnitZ }, m_NumPoints{ 0 },
+    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::Float::g_UnitZ }, m_SystemAngularAxis{ Mathematics::Float::g_UnitZ }, m_NumPoints{ 0 },
 	 m_PointLinearSpeed{},m_PointAngularSpeed{},m_PointLinearAxis{},m_PointAngularAxis{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;

@@ -82,7 +82,7 @@ Imagics::PdeFilter3
     }
 
     // Assign values to the 1-voxel thick border.
-    if (mBorderValue != Mathematics::Mathf::sm_MaxReal)
+    if (mBorderValue != Mathematics::FloatMath::sm_MaxReal)
     {
         AssignDirichletImageBorder();
     }
@@ -95,7 +95,7 @@ Imagics::PdeFilter3
     // those voxels that are 26-neighbors of the mask voxels.
     if (mMask)
     {
-        if (mBorderValue != Mathematics::Mathf::sm_MaxReal)
+        if (mBorderValue != Mathematics::FloatMath::sm_MaxReal)
         {
             AssignDirichletMaskBorder();
         }
@@ -721,7 +721,7 @@ void Imagics::PdeFilter3
 void Imagics::PdeFilter3
 	::OnPreUpdate () noexcept
 {
-    if (mMask && mBorderValue == Mathematics::Mathf::sm_MaxReal)
+    if (mMask && mBorderValue == Mathematics::FloatMath::sm_MaxReal)
     {
         // Neumann boundary conditions are in use, so recompute the mask
         // border.

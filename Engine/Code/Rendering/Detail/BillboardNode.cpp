@@ -75,8 +75,8 @@ bool Rendering::BillboardNode
         // 要对齐广告牌，相机广告牌的模型空间的xz平面的投影决定对广告牌的模型y轴旋转的角度。
 		// 如果投影的照相机是在模型上的轴 (x = 0 和 z = 0)，
 		// ATan2返回零（而非NaN的），因此没有必要捕获此退化情况，并分别进行处理。
-		auto angle = Mathematics::Mathf::ATan2(modelPosition[0], modelPosition[2]);
-		const Mathematics::Matrixf orient{ Mathematics::Vectorf::g_UnitY, angle };
+		auto angle = Mathematics::FloatMath::ATan2(modelPosition[0], modelPosition[2]);
+		const Mathematics::FloatMatrix orient{ Mathematics::Float::g_UnitY, angle };
 
 		auto transform = GetWorldTransform();
 		const auto rotate = transform.GetRotate() * orient;

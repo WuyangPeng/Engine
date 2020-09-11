@@ -78,14 +78,14 @@ void Rendering::VisualImpl ::SetEffectInstance(const VisualEffectInstanceSmartPo
 	m_Effect = effect;
 }
 
-Rendering::Bound& Rendering::VisualImpl ::GetModelBound() noexcept
+Rendering::FloatBound& Rendering::VisualImpl ::GetModelBound() noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	return const_cast<Bound&>(static_cast<const ClassType*>(this)->GetModelBound());
+	return const_cast<FloatBound&>(static_cast<const ClassType*>(this)->GetModelBound());
 }
 
-const Rendering::Bound& Rendering::VisualImpl
+const Rendering::FloatBound& Rendering::VisualImpl
 	::GetModelBound() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -162,9 +162,9 @@ void Rendering::VisualImpl
 	m_VisualData.SetVertexFormat(vertexformat);
 }
 
-const Rendering::Bound 
+const Rendering::FloatBound 
 	Rendering::VisualImpl
-	::GetWorldBound( const Transform& worldTransform )
+	::GetWorldBound( const FloatTransform& worldTransform )
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -195,10 +195,10 @@ void Rendering::VisualImpl
 {
 const	auto numVertices = m_VisualData.GetVertexBufferNumElements();
     const auto stride = m_VisualData.GetVertexFormatStride();
-	auto data = m_VisualData.GetVertexBufferReadOnlyData();
+	//auto data = m_VisualData.GetVertexBufferReadOnlyData();
     const auto positionOffset = m_VisualData.GetPositionOffset();
 
-	m_ModelBound.ComputeFromData(numVertices, stride, data + positionOffset);
+	//m_ModelBound.ComputeFromData(numVertices, stride, data + positionOffset);
 }
 
 void Rendering::VisualImpl

@@ -1,185 +1,176 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/18 15:32)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.1 (2020/09/08 23:11)
 
 #include "Rendering/RenderingExport.h"
 
 #include "SpecializedIO.h"
+#include "TransformDetail.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
+
+#include <array>
+
+using std::array;
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::FloatTransform& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    datum.ReadAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleTransform& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    datum.ReadAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatTransform& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    datum.WriteAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleTransform& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    datum.WriteAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::FloatBound& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    datum.ReadAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleBound& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    datum.ReadAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatBound& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    datum.WriteAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleBound& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    datum.WriteAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    array<Rendering::FloatColour::ValueType, Rendering::FloatColour::sm_ArraySize> colour{};
+    Read(Rendering::FloatColour::sm_ArraySize, colour.data());
+
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26485)
-template <> 
-void CoreTools::BufferSource
-	::ReadAggregate(Rendering::Transform& datum)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;	;
-
-	const auto isIdentity = ReadBool();  
-	const auto isRotationOrScaleMatrix = ReadBool();
-	const auto isUniformScale = ReadBool();
-
-	if(isIdentity)
-	{
-	    datum.MakeIdentity();
-	}
-	else if(isRotationOrScaleMatrix)
-	{
-	    if(isUniformScale)
-	    {
-	        Rendering::Transform::Matrix rotate;
-			auto scale = 0.0f;
-	        Rendering::Transform::APoint translate;
-
-	        ReadAggregate(rotate);
-	        Read(scale);
-	        ReadAggregate(translate);
-
-	        datum.SetRotate(rotate);
-	        datum.SetUniformScale(scale);
-	        datum.SetTranslate(translate);
-	    }
-	    else
-	    {
-	        Rendering::Transform::Matrix rotate;
-	        Rendering::Transform::APoint scale;
-	        Rendering::Transform::APoint translate;
-
-	        ReadAggregate(rotate);
-	        ReadAggregate(scale);
-	        ReadAggregate(translate);
-
-	        datum.SetRotate(rotate);
-	        datum.SetScale(scale);
-	        datum.SetTranslate(translate);
-	    }
-	}
-	else
-	{
-	     Rendering::Transform::Matrix matrix;
-	     Rendering::Transform::APoint translate;
-
-	     ReadAggregate(matrix);
-	     ReadAggregate(translate);
-
-	     datum.SetMatrix(matrix);
-	     datum.SetTranslate(translate);
-	}
-}
-
-template <> 
-void CoreTools::BufferTarget
-	::WriteAggregate (const Rendering::Transform& datum)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	const auto isIdentity = datum.IsIdentity ();  
-	const auto isRotationOrScaleMatrix = datum.IsRotationOrScaleMatrix ();
-	const auto isUniformScale = datum.IsUniformScale ();
-
-	WriteBool(isIdentity);
-	WriteBool(isRotationOrScaleMatrix);
-	WriteBool(isUniformScale);
-
-	if(isIdentity)
-	{
-	     
-	}
-	else if(isRotationOrScaleMatrix)
-	{
-	    if(isUniformScale)
-	    {
-	        WriteAggregate(datum.GetRotate());
-	        Write(datum.GetUniformScale ());
-			WriteAggregate(datum.GetTranslate());
-	    }
-	    else
-	    {
-	        WriteAggregate(datum.GetRotate());
-	        WriteAggregate(datum.GetScale ());
-	        WriteAggregate(datum.GetTranslate());
-	    }
-	}
-	else
-	{
-	     WriteAggregate(datum.GetMatrix());
-	     WriteAggregate(datum.GetTranslate());
-	}
-}
-
-template <> 
-void CoreTools::BufferSource
-	::ReadAggregate(Rendering::Bound& datum)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	Rendering::Transform::APoint center;
-	auto radius = 0.0f;	
-
-	ReadAggregate(center);
-	Read(radius);
- 
-    datum.SetCenter (center);
-    datum.SetRadius (radius);
-}
-
-template <> 
-void CoreTools::BufferTarget
-	::WriteAggregate (const Rendering::Bound& datum)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	WriteAggregate(datum.GetCenter());
-	Write(datum.GetRadius());
-} 
-
-template <> 
-void CoreTools::BufferSource
-	::ReadAggregate(Rendering::Colour<float>& datum)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	float colour[4]   { 0.0f,0.0f,0.0f,0.0f }; 
-
-	Read(4, colour); 
-
-	datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
-}
-
-template <> 
-void CoreTools::BufferTarget
-	::WriteAggregate (const Rendering::Colour<float>& datum)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	auto value = datum.GetPoint();
-        WriteWithoutNumber(4, value.data());
-} 
-
-template <> 
-void CoreTools::BufferSource
-	::ReadAggregate(Rendering::Colour<unsigned>& datum)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	uint32_t colour[4]   { 0,0,0,0 }; 
-
-	Read(4, colour); 
-
-	datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
-}
-
-template <> 
-void CoreTools::BufferTarget
-	::WriteAggregate (const Rendering::Colour<unsigned>& datum)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	WriteWithoutNumber(4, datum.GetPoint().data());
-} 
-
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
+    datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 #include STSTEM_WARNING_POP
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatColour& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    auto value = datum.GetPoint();
+    WriteWithoutNumber(Rendering::FloatColour::sm_ArraySize, value.data());
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleColour& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    array<Rendering::DoubleColour::ValueType, Rendering::DoubleColour::sm_ArraySize> colour{};
+    Read(Rendering::DoubleColour::sm_ArraySize, colour.data());
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
+    datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
+#include STSTEM_WARNING_POP
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleColour& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    auto value = datum.GetPoint();
+    WriteWithoutNumber(Rendering::DoubleColour::sm_ArraySize, value.data());
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::ByteColour& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    array<Rendering::ByteColour::ValueType, Rendering::ByteColour::sm_ArraySize> colour{};
+    Read(Rendering::ByteColour::sm_ArraySize, colour.data());
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
+    datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
+#include STSTEM_WARNING_POP
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::ByteColour& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    auto value = datum.GetPoint();
+    WriteWithoutNumber(Rendering::ByteColour::sm_ArraySize, value.data());
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::IntColour& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    array<Rendering::IntColour::ValueType, Rendering::IntColour::sm_ArraySize> colour{};
+    Read(Rendering::IntColour::sm_ArraySize, colour.data());
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
+    datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
+#include STSTEM_WARNING_POP
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::IntColour& datum)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    auto value = datum.GetPoint();
+    WriteWithoutNumber(Rendering::IntColour::sm_ArraySize, value.data());
+}

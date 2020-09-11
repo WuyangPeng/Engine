@@ -254,8 +254,8 @@ void Rendering::Triangles ::UpdateModelTangentsUseTextureCoords(const VertexBuff
 const        auto triangleIndex = GetTriangle(index);
 
         vector<APoint> localPosition(3);
-vector<AVector> localNormal(3, Mathematics::Vectorf::g_Zero);
-        vector<AVector> localTangent(3, Mathematics::Vectorf::g_Zero);
+vector<AVector> localNormal(3, Mathematics::Float::g_Zero);
+        vector<AVector> localTangent(3, Mathematics::Float::g_Zero);
         vector<Vector2D> localTextureCoord(3);
 
         for (auto current = 0; current < 3; ++current)
@@ -270,7 +270,7 @@ vector<AVector> localNormal(3, Mathematics::Vectorf::g_Zero);
         for (auto current = 0; current < 3; ++current)
         {
             const auto& currLocTangent = localTangent[current];
-            if (!Approximate(currLocTangent, Mathematics::Vectorf::g_Zero))
+            if (!Approximate(currLocTangent, Mathematics::Float::g_Zero))
             {
                 // 这个顶点已被访问。
                 continue;
@@ -317,24 +317,24 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
     const auto differenceP1P0 = position1 - position0;
     const auto differenceP2P0 = position2 - position0;
 
-    if (Mathematics::Mathf::FAbs(differenceP1P0.Length()) < Mathematics::Mathf::GetZeroTolerance() ||
-        Mathematics::Mathf::FAbs(differenceP2P0.Length()) < Mathematics::Mathf::GetZeroTolerance())
+    if (Mathematics::FloatMath::FAbs(differenceP1P0.Length()) < Mathematics::FloatMath::GetZeroTolerance() ||
+        Mathematics::FloatMath::FAbs(differenceP2P0.Length()) < Mathematics::FloatMath::GetZeroTolerance())
     {
         // 这个三角形是非常小的，称之为退化退化三角形。
-        return Mathematics::Vectorf::g_Zero;
+        return Mathematics::Float::g_Zero;
     }
 
     // 计算顶点P0纹理坐标在边缘P1-P0的方向上的变化。
     auto differenceU1U0 = textureCoord1[0] - textureCoord0[0];
     auto differenceV1V0 = textureCoord1[1] - textureCoord0[1];
-    if (Mathematics::Mathf::FAbs(differenceV1V0) < Mathematics::Mathf::GetZeroTolerance())
+    if (Mathematics::FloatMath::FAbs(differenceV1V0) < Mathematics::FloatMath::GetZeroTolerance())
     {
         // 三角形实际上在纹理坐标v上没有变化。
-        if (Mathematics::Mathf::FAbs(differenceU1U0) < Mathematics::Mathf::GetZeroTolerance())
+        if (Mathematics::FloatMath::FAbs(differenceU1U0) < Mathematics::FloatMath::GetZeroTolerance())
         {
             // 三角形实际上在纹理坐标u上没有变化。
             // 由于纹理坐标不改变这个三角形，把它当作一个退化参数曲面。
-            return Mathematics::Vectorf::g_Zero;
+            return Mathematics::Float::g_Zero;
         }
 
         // 变化在所有u上是有效，所以设置切向量为T = dP / du。
@@ -345,10 +345,10 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
     auto differenceU2U0 = textureCoord2[0] - textureCoord0[0];
     auto differenceV2V0 = textureCoord2[1] - textureCoord0[1];
     auto det = differenceV1V0 * differenceU2U0 - differenceV2V0 * differenceU1U0;
-    if (Mathematics::Mathf::FAbs(det) < Mathematics::Mathf::GetZeroTolerance())
+    if (Mathematics::FloatMath::FAbs(det) < Mathematics::FloatMath::GetZeroTolerance())
     {
         // 三角形顶点是共线的参数空间，所以把它当作一个退化参数曲面。
-        return Mathematics::Vectorf::g_Zero;
+        return Mathematics::Float::g_Zero;
     }
 
     // 三角形顶点是不共线的参数空间，所以选择切线为

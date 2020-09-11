@@ -1,0 +1,7 @@
+数据库重构（Refactoring Databases Evolutionary Database Design）
+ 
+★★
+作者：Scott W.Ambler、Pramod J.Sadalage
+
+知识点 
+1.	数据库重构基础知识。  

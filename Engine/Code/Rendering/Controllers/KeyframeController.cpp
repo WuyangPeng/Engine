@@ -34,7 +34,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, KeyframeController);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, KeyframeController);
 
 Rendering::KeyframeController
-	::KeyframeController( int numCommonTimes, int numTranslations, int numRotations,int numScales, const Transform& localTransform )
+	::KeyframeController( int numCommonTimes, int numTranslations, int numRotations,int numScales, const FloatTransform& localTransform )
 	:ParentType{ localTransform },
 	m_Impl{ make_shared<ImplType>(numCommonTimes,numTranslations,numRotations,numScales) }
 {

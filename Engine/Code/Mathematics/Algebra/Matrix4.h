@@ -37,7 +37,7 @@ namespace Mathematics
 	public:
 		// 如果标志为MatrixFlagsZero，创建零矩阵，
 		// 否则创建单位矩阵。
-		explicit Matrix4(MatrixTypeFlags flag = MatrixTypeFlags::Zero);
+		explicit Matrix4(MatrixInitType flag = MatrixInitType::Zero);
 
 		// 输入矩阵在行r和列c
 		Matrix4(Real member00, Real member01, Real member02, Real member03,

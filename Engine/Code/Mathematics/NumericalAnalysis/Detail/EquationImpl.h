@@ -25,7 +25,7 @@ namespace Mathematics
         using RealVector = EquationResult::RealVector;
 
     public:
-        explicit EquationImpl(double epsilon = Mathd::GetZeroTolerance()) noexcept;
+        explicit EquationImpl(double epsilon = DoubleMath::GetZeroTolerance()) noexcept;
         virtual ~EquationImpl();
         EquationImpl(const EquationImpl&) = default;
         EquationImpl& operator=(const EquationImpl&) = default;

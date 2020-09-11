@@ -27,7 +27,7 @@ Rendering::ConvexRegionManager
 }
 
 Rendering::ConvexRegionManager
-	::ConvexRegionManager(const Mathematics::Planef& modelPlane)
+	::ConvexRegionManager(const Mathematics::FloatPlane& modelPlane)
     :BspNode(modelPlane)
 {
 }
@@ -56,7 +56,7 @@ Rendering::SpatialSmartPointer Rendering::ConvexRegionManager
 }
 
 Rendering::ConvexRegionSmartPointer Rendering::ConvexRegionManager
-	::GetContainingRegion(const  Mathematics::APointf& point)
+	::GetContainingRegion(const  Mathematics::FloatAPoint& point)
 {
     return boost::polymorphic_pointer_cast<ConvexRegion>(GetContainingNode(point));
 }

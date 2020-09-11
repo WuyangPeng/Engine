@@ -36,7 +36,7 @@ Rendering::HalfFloat::HalfFloat(int value)
 Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float value) noexcept
 {
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26490) // 这里必须使用reinterpret_cast
     const auto bits = reinterpret_cast<IntegerType&>(value);
 #include STSTEM_WARNING_POP
 
@@ -90,7 +90,7 @@ float Rendering::HalfFloat::ToFloat() const noexcept
         const auto result = sign | exponent | mantissa;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26490) // 这里必须使用reinterpret_cast
         return reinterpret_cast<const float&>(result);
 #include STSTEM_WARNING_POP
     }
@@ -192,9 +192,9 @@ bool Rendering::operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept
         return false;
 }
 
-bool Rendering::Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon)
+bool Rendering::Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    if (Mathematics::Mathf::Approximate(lhs.ToFloat(), rhs.ToFloat(), epsilon))
+    if (Mathematics::FloatMath::Approximate(lhs.ToFloat(), rhs.ToFloat(), epsilon))
         return true;
     else
         return false;
@@ -231,5 +231,5 @@ float Rendering::operator/(float lhs, const HalfFloat& rhs)
 
 Rendering::HalfFloat Rendering::FAbs(const HalfFloat& value) noexcept
 {
-    return Rendering::HalfFloat{ Mathematics::Mathf::FAbs(value.ToFloat()) };
+    return Rendering::HalfFloat{ Mathematics::FloatMath::FAbs(value.ToFloat()) };
 }

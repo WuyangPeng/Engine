@@ -134,7 +134,7 @@ void Mathematics::NoniterativeEigen3x3<Real>
 	::ComputeRoots(const Matrix3& matrix)
 {
 	static constexpr double s_Inverse3(1.0 / 3.0);
-	static const double s_Sqrt3(Mathd::Sqrt(3.0));
+	static const double s_Sqrt3(DoubleMath::Sqrt(3.0));
 
 	// 转换的唯一的矩阵元素为双精度
 	auto a00 = static_cast<double>(matrix(0, 0));
@@ -173,10 +173,10 @@ void Mathematics::NoniterativeEigen3x3<Real>
 	}
 
 	// 通过求解该多项式的根，计算特征值。
-	auto magnitude = Mathd::Sqrt(-aDivided3);
-	auto angle = Mathd::ATan2(Mathd::Sqrt(-q), halfMB) * s_Inverse3;
-	auto cosValue = Mathd::Cos(angle);
-	auto sinValue = Mathd::Sin(angle);
+	auto magnitude = DoubleMath::Sqrt(-aDivided3);
+	auto angle = DoubleMath::ATan2(DoubleMath::Sqrt(-q), halfMB) * s_Inverse3;
+	auto cosValue = DoubleMath::Cos(angle);
+	auto sinValue = DoubleMath::Sin(angle);
 	auto root0 = static_cast<Real>(c2Divided3 + 2.0 * magnitude * cosValue);
 	auto root1 = static_cast<Real>(c2Divided3 - magnitude * (cosValue + s_Sqrt3 * sinValue));
 	auto root2 = static_cast<Real>(c2Divided3 - magnitude * (cosValue - s_Sqrt3 * sinValue));

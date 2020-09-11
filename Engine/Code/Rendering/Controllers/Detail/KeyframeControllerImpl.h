@@ -30,8 +30,8 @@ namespace Rendering
 	public:
 		using ClassType = KeyframeControllerImpl;
 		using AQuaternion = Mathematics::AQuaternionf;
-		using APoint = Mathematics::APointf;
-		using Matrix = Mathematics::Matrixf;
+		using APoint = Mathematics::FloatAPoint;
+		using Matrix = Mathematics::FloatMatrix;
 
 	public:
 		// 如果平移，旋转和缩放都有着相同的关键帧时间，则numCommonTimes被设置为正数。

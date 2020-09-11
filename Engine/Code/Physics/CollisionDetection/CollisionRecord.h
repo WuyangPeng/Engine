@@ -50,7 +50,7 @@ namespace Physics
 		using Intersector = Mathematics::Intersector<float,Mathematics::Vector3D>;
 		using IntersectorSharedPtr = std::shared_ptr<Intersector>;
 		using BoundTreeChildSharedPtr = std::shared_ptr<BoundTreeChild> ;
-		using AVector = Mathematics::AVectorf;
+		using AVector = Mathematics::FloatAVector;
 		using ConstMeshSmartPointer = typename MeshSmartPointer::ConstType;
 		using Callback = void (*) (const CollisionRecord& lhsRecord, int t0,
 			                       const CollisionRecord& rhsRecord, int t1,

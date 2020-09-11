@@ -325,16 +325,16 @@ const Rendering::BlendTransformControllerImpl::APoint Rendering::BlendTransformC
 		{
 			auto s0 = firstScale[i];
 			auto s1 = secondScale[i];
-			auto absS0 = Mathematics::Mathf::FAbs(s0);
-			auto absS1 = Mathematics::Mathf::FAbs(s1);
+			auto absS0 = Mathematics::FloatMath::FAbs(s0);
+			auto absS1 = Mathematics::FloatMath::FAbs(s1);
 
-			if (Mathematics::Mathf::GetZeroTolerance() < absS0 && Mathematics::Mathf::GetZeroTolerance() < absS1)
+			if (Mathematics::FloatMath::GetZeroTolerance() < absS0 && Mathematics::FloatMath::GetZeroTolerance() < absS1)
 			{
-                            const auto sign0 = Mathematics::Mathf::Sign(s0);
-                            const auto sign1 = Mathematics::Mathf::Sign(s1);
+                            const auto sign0 = Mathematics::FloatMath::Sign(s0);
+                            const auto sign1 = Mathematics::FloatMath::Sign(s1);
 			 
-				auto pow0 = Mathematics::Mathf::Pow(absS0, oneMinusWeight);
-				auto pow1 = Mathematics::Mathf::Pow(absS1, m_Weight);
+				auto pow0 = Mathematics::FloatMath::Pow(absS0, oneMinusWeight);
+				auto pow1 = Mathematics::FloatMath::Pow(absS1, m_Weight);
 
 				blendScale[i] = sign0 * (sign1 * pow0) * pow1;
 			}

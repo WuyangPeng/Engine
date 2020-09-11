@@ -9,8 +9,3 @@ http://martinfowler.com 、http://phruby.com
 
 知识点 
 1.	UML基础知识。 
-
-代码 
-1.  书籍代码。 
-
-要点

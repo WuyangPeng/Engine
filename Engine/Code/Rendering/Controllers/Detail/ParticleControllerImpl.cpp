@@ -22,7 +22,7 @@
 #include SYSTEM_WARNING_DISABLE(26446)
 Rendering::ParticleControllerImpl
 	::ParticleControllerImpl(int numParticles)
-    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::Vectorf::g_UnitZ }, m_SystemAngularAxis{ Mathematics::Vectorf::g_UnitZ }, m_SystemSizeChange{ 0.0f },
+    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::Float::g_UnitZ }, m_SystemAngularAxis{ Mathematics::Float::g_UnitZ }, m_SystemSizeChange{ 0.0f },
 	 m_NumParticles{ numParticles }, m_ParticleLinearSpeed(numParticles), m_ParticleLinearAxis(numParticles), m_ParticleSizeChange(numParticles)
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -30,7 +30,7 @@ Rendering::ParticleControllerImpl
 
 Rendering::ParticleControllerImpl
 	::ParticleControllerImpl() noexcept
-	:m_SystemLinearSpeed{ 0.0f },m_SystemAngularSpeed{ 0.0f },m_SystemLinearAxis{ Mathematics::Vectorf::g_UnitZ },m_SystemAngularAxis{ Mathematics::Vectorf::g_UnitZ },m_SystemSizeChange{ 0.0f },
+	:m_SystemLinearSpeed{ 0.0f },m_SystemAngularSpeed{ 0.0f },m_SystemLinearAxis{ Mathematics::Float::g_UnitZ },m_SystemAngularAxis{ Mathematics::Float::g_UnitZ },m_SystemSizeChange{ 0.0f },
 	 m_NumParticles{ 0 },m_ParticleLinearSpeed{},m_ParticleLinearAxis{},m_ParticleSizeChange{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;

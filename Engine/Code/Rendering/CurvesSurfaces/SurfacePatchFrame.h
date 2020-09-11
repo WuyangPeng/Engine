@@ -21,8 +21,8 @@ namespace Rendering
 	{
 	public:
 		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(SurfacePatchFrame);
-		using AVector = Mathematics::AVectorf;
-		using APoint = Mathematics::APointf;
+		using AVector = Mathematics::FloatAVector;
+		using APoint = Mathematics::FloatAPoint;
 
 	public:
 		SurfacePatchFrame(const APoint& position, const AVector& tangent0, const AVector& tangent1, const  AVector& normal);	 

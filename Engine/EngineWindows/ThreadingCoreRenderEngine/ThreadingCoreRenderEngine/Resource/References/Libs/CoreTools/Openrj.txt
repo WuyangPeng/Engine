@@ -1,0 +1,10 @@
+Openrj
+ 
+官方网站 
+http://www.openrj.org/
+
+★
+
+知识点 
+1.	Record-Jar结构化文本文件格式的读取器。
+

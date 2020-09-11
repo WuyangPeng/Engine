@@ -25,7 +25,7 @@ namespace Rendering
 	public:
 		COPY_UNSHARE_CLASSES_TYPE_DECLARE(PointController);
 		using ParentType = Controller;
-		using AVector = Mathematics::AVectorf;
+		using AVector = Mathematics::FloatAVector;
 
 	public:
 		// 所连接的对象必须是Polypoint或Polypoint派生的类。

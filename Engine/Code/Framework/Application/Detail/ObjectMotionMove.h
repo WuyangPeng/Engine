@@ -22,10 +22,10 @@ namespace Framework
 	{
 	public:
 		using ClassType = ObjectMotionMove;
-		using Matrix = Mathematics::Matrixf;
-		using AVector = Mathematics::AVectorf;
+		using Matrix = Mathematics::FloatMatrix;
+		using AVector = Mathematics::FloatAVector;
 		using Spatial = Rendering::Spatial;
-		using Transform = Rendering::Transform;		
+		using Transform = Rendering::FloatTransform;		
 		using SpatialSmartPointer = Rendering::SpatialSmartPointer;
 
 	public:

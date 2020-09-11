@@ -1,0 +1,10 @@
+Zthread
+ 
+官方网站 
+http://zthread.sourceforge.net/
+
+☆
+
+知识点 
+1.	线程库。
+

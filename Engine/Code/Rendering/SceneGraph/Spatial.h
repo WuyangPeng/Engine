@@ -13,7 +13,7 @@
 #include "PickRecordContainer.h"
 #include "Flags/CullingModeFlags.h"
 #include "Rendering/DataTypes/Bound.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/Controllers/ControlledObject.h"
 #include "CoreTools/MemoryTools/ThirdSubclassSmartPointer.h"
 #include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointer.h"
@@ -58,7 +58,7 @@ namespace Rendering
         
         // 更新几何状态和控制器。
         // 函数计算世界转换在遍历向下传递场景图和遍历向上传递世界边界。
-		  bool Update(double applicationTime = -Mathematics::Mathd::sm_MaxReal) override;
+		  bool Update(double applicationTime = -Mathematics::DoubleMath::sm_MaxReal) override;
         
         // 访问父对象。节点中调用attach/detach在子对象。
                   virtual void SetParent(Spatial* parent) noexcept;
@@ -73,14 +73,14 @@ namespace Rendering
         void OnGetVisibleSet (Culler& culler, bool noCull);
         virtual void GetVisibleSet (Culler& culler, bool noCull) = 0;
 	    
-        void SetLocalTransform(const Transform& transform);
-        void SetWorldTransform(const Transform& transform);
-        void SetWorldBound(const Bound& bound);
+        void SetLocalTransform(const FloatTransform& transform);
+        void SetWorldTransform(const FloatTransform& transform);
+        void SetWorldBound(const FloatBound& bound);
         void SetCullingMode(CullingMode culling);
         
-        const Transform GetLocalTransform() const;
-        const Transform GetWorldTransform() const;
-        const Bound GetWorldBound() const;
+        const FloatTransform GetLocalTransform() const;
+        const FloatTransform GetWorldTransform() const;
+        const FloatBound GetWorldBound() const;
         CullingMode GetCullingMode() const; 
 
 		void SetLocalTransformTranslate(const APoint& translate);
@@ -90,13 +90,13 @@ namespace Rendering
         
      protected:
         void InitWorldBound();
-        void BoundGrowToContain(const Bound& worldBound);
+         void BoundGrowToContain(const FloatBound& worldBound);
         
         // 对几何更新的支持。
         virtual bool UpdateWorldData (double applicationTime);
 
         bool GetWorldBoundIsCurrent() const;
-		void SetWorldTransformOnUpdate(const Transform& transform);
+		void SetWorldTransformOnUpdate(const FloatTransform& transform);
         
     private:
         using SpatialDataPtr = std::shared_ptr<SpatialData>;

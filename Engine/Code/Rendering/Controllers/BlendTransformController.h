@@ -22,8 +22,8 @@ namespace Rendering
     public:
         COPY_UNSHARE_CLASSES_TYPE_DECLARE(BlendTransformController);
         using ParentType = TransformController;
-        using APoint = Mathematics::APointf;
-        using Matrix = Mathematics::Matrixf;
+        using APoint = Mathematics::FloatAPoint;
+        using Matrix = Mathematics::FloatMatrix;
 
     public:
         // 设定'rotationScaleMatrices'为“真”时,输入控制器管理的形式为：

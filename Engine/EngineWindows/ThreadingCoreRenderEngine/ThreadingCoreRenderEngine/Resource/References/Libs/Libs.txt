@@ -1,1 +1,18 @@
 参考文献·开源库
+
+1.	CoreTools（核心工具）
+2.	Network（网络）
+3.	Database（数据库）
+4.	Script（脚本）
+5.	Mathematics（数学）
+6.	SoundEffect（音效）
+7.	InputOutput（输入输出）
+8.	ResourceManager（资源管理）
+9.	Rendering（渲染）
+10.	Physics（物理）
+11.	Imagics（图像分析）
+12.	Animation（动画）
+13.	ArtificialIntellegence（人工智能）
+14.	UserInterface（界面）
+15.	AssistTools（辅助工具）
+16.	Framework（框架）

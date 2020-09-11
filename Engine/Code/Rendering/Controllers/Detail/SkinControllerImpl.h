@@ -9,6 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/DataTypes/Bound.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Rendering/SceneGraph/Node.h"
 
@@ -28,7 +29,7 @@ namespace Rendering
     {
     public:
         using ClassType = SkinControllerImpl;
-        using APoint = Mathematics::APointf;
+        using APoint = Mathematics::FloatAPoint;
 
     public:
         // 顶点和骨骼的数目在对象的生存期是固定的。

@@ -29,8 +29,8 @@ namespace Rendering
 		using ClassType = Triangles;
 		using ParentType = Visual;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
-		using APoint = Mathematics::APointf;
-		using AVector = Mathematics::AVectorf;
+		using APoint = Mathematics::FloatAPoint;
+		using AVector = Mathematics::FloatAVector;
 		using Vector3D = Mathematics::Vector3Df;
 		using Vector2D = Mathematics::Vector2Df;
 		using Line3 = Mathematics::Line3f;

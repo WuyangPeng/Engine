@@ -212,4 +212,21 @@ const Mathematics::APoint<T> Mathematics::APoint<T>::operator-() const noexcept
     return APoint{ -m_HomogeneousPoint.GetX(), -m_HomogeneousPoint.GetY(), -m_HomogeneousPoint.GetZ() };
 }
 
+template <typename T>
+T Mathematics::APoint<T>::GetNorm() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    auto maxValue = Math::FAbs(GetX());
+    if (maxValue < Math::FAbs(GetY()))
+    {
+        maxValue = Math::FAbs(GetY());
+    }
+    if (maxValue < Math::FAbs(GetZ()))
+    {
+        maxValue = Math::FAbs(GetZ());
+    }
+    return maxValue;
+}
+
 #endif  //  MATHEMATICS_ALGEBRA_A_POINT_ACHIEVE_H

@@ -33,7 +33,7 @@ Rendering::BspNode
 }
 
 Rendering::BspNode
-	::BspNode(const Mathematics::Planef& modelPlane)
+	::BspNode(const Mathematics::FloatPlane& modelPlane)
     :ModelPlane(modelPlane),mWorldPlane(modelPlane)
 {
 	SpatialSmartPointer spatialSmartPointer;
@@ -45,7 +45,7 @@ Rendering::BspNode
  
 
 Rendering::SpatialSmartPointer Rendering::BspNode
-	::GetContainingNode(const Mathematics::APointf& point)
+	::GetContainingNode(const Mathematics::FloatAPoint& point)
 {
     SpatialSmartPointer posChild = GetPositiveChild();
 	SpatialSmartPointer negChild = GetNegativeChild();
@@ -350,7 +350,7 @@ Rendering::SpatialSmartPointer Rendering::BspNode
 	return GetChild(2);
 }
 
- const Mathematics::Planef& Rendering::BspNode
+ const Mathematics::FloatPlane& Rendering::BspNode
 	 ::GetWorldPlane() const noexcept
 {
 	return mWorldPlane;

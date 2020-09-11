@@ -12,6 +12,7 @@
 #include "Mathematics/Algebra/APoint.h"
 
 #include <vector>
+#include "Rendering/DataTypes/DataTypesFwd.h"
 
 namespace CoreTools
 {
@@ -21,14 +22,14 @@ namespace CoreTools
 
 namespace Rendering
 {
-	class Transform;
+	
 
 	class RENDERING_HIDDEN_DECLARE DlodNodeImpl
 	{
 		using ClassType = DlodNodeImpl;
 		using BufferSource = CoreTools::BufferSource;
 		using BufferTarget = CoreTools::BufferTarget;
-		using APoint = Mathematics::APointf;
+		using APoint = Mathematics::FloatAPoint;
 
 	public:
 		DlodNodeImpl();
@@ -45,7 +46,7 @@ namespace Rendering
 		const APoint GetWorldCenter () const noexcept;
 
 		void SetModelCenter(const APoint& modelCenter) noexcept;
-		void SetWorldCenter(const Transform& transform);
+                void SetWorldCenter(const FloatTransform& transform) noexcept;
 		
 		// 获得子节点的距离间隔。
 		int GetNumLevelsOfDetail () const noexcept;

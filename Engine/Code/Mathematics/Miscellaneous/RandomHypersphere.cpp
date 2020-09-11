@@ -19,9 +19,9 @@
 static void RecurseRandomPoint (int dimension, double* point)
 {
     // Select random point on circle.
-    const double angle = Mathematics::Randomd::IntervalRandom(0.0,Mathematics::Mathd::GetTwoPI());
-    const double cs = Mathematics::Mathd::Cos(angle);
-   const  double sn = Mathematics::Mathd::Sin(angle);
+    const double angle = Mathematics::Randomd::IntervalRandom(0.0,Mathematics::DoubleMath::GetTwoPI());
+    const double cs = Mathematics::DoubleMath::Cos(angle);
+   const  double sn = Mathematics::DoubleMath::Sin(angle);
 
     if (dimension > 3)
     {
@@ -44,7 +44,7 @@ static void RecurseRandomPoint (int dimension, double* point)
     else if (dimension == 3)
     {
         const double value = Mathematics::Randomd::SymmetricRandom();
-        const double complement = Mathematics::Mathd::Sqrt(Mathematics::Mathd::FAbs(1.0 - value*value));
+        const double complement = Mathematics::DoubleMath::Sqrt(Mathematics::DoubleMath::FAbs(1.0 - value*value));
         point[0] *= value;
         point[1] *= complement*cs;
         point[2] *= complement*sn;
@@ -70,7 +70,7 @@ void Mathematics::Histogram (int dimension, double angle, int numPoints,double**
 {
     // Count the number of points located in the cone of specified angle
     // about each of the samples.
-    const double cs = Mathd::Cos(angle);
+    const double cs = DoubleMath::Cos(angle);
 
     for (int i = 0; i < numPoints; ++i)
     {

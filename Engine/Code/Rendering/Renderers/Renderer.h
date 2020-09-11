@@ -61,7 +61,7 @@ namespace Rendering
 		NON_COPY_CLASSES_TYPE_DECLARE(Renderer);   
 		using ColourUByte = Colour<uint8_t>;
 		using Colour = Colour<float>;	
-		using Matrix = Mathematics::Matrixf;
+		using Matrix = Mathematics::FloatMatrix;
 
 	public:
 		explicit Renderer(const std::string& fileName);

@@ -93,7 +93,7 @@ bool Mathematics::EquationResult
 
 	for (const auto& value : m_RealResult)
 	{
-		if (Mathd::FAbs(solution - value) <= epsilon)
+		if (DoubleMath::FAbs(solution - value) <= epsilon)
 		{
 			return true;
 		}
@@ -112,8 +112,8 @@ bool Mathematics::EquationResult
 	{
 		if (!((0 < value.imag()) ^ (0 < solution.imag())))
 		{
-			if (Mathd::FAbs(solution.real() - value.real()) <= epsilon &&
-				Mathd::FAbs(solution.imag() - value.imag()) <= epsilon)
+			if (DoubleMath::FAbs(solution.real() - value.real()) <= epsilon &&
+				DoubleMath::FAbs(solution.imag() - value.imag()) <= epsilon)
 			{
 				return true;
 			}

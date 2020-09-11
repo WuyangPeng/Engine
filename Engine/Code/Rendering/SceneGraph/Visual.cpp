@@ -153,8 +153,8 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstEffectIn
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetEffectInstance, VisualEffectInstanceSmartPointer, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetEffectInstance, const Rendering::VisualEffectInstanceSmartPointer)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, const Rendering::Bound&)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, Rendering::Bound&)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, const Rendering::FloatBound&)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, Rendering::FloatBound&)
 
 void Rendering::Visual
 	::UpdateModelSpace(VisualUpdateType type)
@@ -168,7 +168,7 @@ void Rendering::Visual
 	::UpdateWorldBound()
 {	
 	auto worldTransform = GetWorldTransform();
-	auto worldBound = m_Impl->GetWorldBound(worldTransform);
+    const auto worldBound = m_Impl->GetWorldBound(worldTransform);
 
 	BoundGrowToContain(worldBound);
 }

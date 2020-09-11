@@ -157,6 +157,84 @@
     <Filter Include="资源文件\References\SoftwareDesign\ArtificialIntellegence">
       <UniqueIdentifier>{1b6b9bb9-fe76-4892-b047-714f1f0624d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\Database">
+      <UniqueIdentifier>{aee98879-880e-4124-b5e3-8c4cd90fd3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\SQL">
+      <UniqueIdentifier>{915afd9f-752a-4e0a-b94b-13ed27e423c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\SQL Server">
+      <UniqueIdentifier>{d0fd751e-c21c-400e-8443-9182bcc709c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\Java">
+      <UniqueIdentifier>{7a9dd7b5-670c-4db0-8d39-28e83b17a2a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\Python">
+      <UniqueIdentifier>{98e8319d-6c58-4ae6-9f82-04a202609e4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\Perl">
+      <UniqueIdentifier>{95652bdc-a11c-41a0-b752-33b7f5ee8827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\RegularExpression">
+      <UniqueIdentifier>{55f185d4-c987-4734-abbe-119003f51389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\CSharp">
+      <UniqueIdentifier>{00176496-f003-4c90-85f0-d619eaef43cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\Redis">
+      <UniqueIdentifier>{f143ca5d-fd98-4536-a47b-c1e2b9fbfe28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\OtherLanguages\Lua">
+      <UniqueIdentifier>{788a77c0-67bf-4b8c-bbe5-064607d23820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\CoreTools">
+      <UniqueIdentifier>{a66b55e0-5efc-441c-aa25-823e8e31f7d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Network">
+      <UniqueIdentifier>{5958a5f8-4f5a-47a4-883c-d77107f28b20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Database">
+      <UniqueIdentifier>{e80cf9a8-92a8-48ad-b105-e796bb542fc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Script">
+      <UniqueIdentifier>{2f57dbcb-512e-4273-91c6-b2ae85c934b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Mathematics">
+      <UniqueIdentifier>{e32a4b0e-8587-4bf4-ac7b-166091f8e2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\SoundEffect">
+      <UniqueIdentifier>{99fecbca-1830-49af-9d74-3f7ecf5dead6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\InputOutput">
+      <UniqueIdentifier>{e78976f8-217a-430e-afd8-8a662b1597bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\ResourceManager">
+      <UniqueIdentifier>{659dbd72-f532-4453-af23-e0e5cdedf4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Rendering">
+      <UniqueIdentifier>{2d29e1c4-5576-4867-b784-466944e78549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Physics">
+      <UniqueIdentifier>{8610cd71-aba9-4ee4-90bc-5d97682ce164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Imagics">
+      <UniqueIdentifier>{282352f2-ef89-461f-a15c-a3236ea18525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Animation">
+      <UniqueIdentifier>{1022eca4-31e8-4877-a436-5ef7e8e2c8f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\ArtificialIntellegence">
+      <UniqueIdentifier>{d5fa385f-3010-4999-b993-4ffd73a11e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\UserInterface">
+      <UniqueIdentifier>{d7f4ca98-9108-43e6-842d-04016da1e34e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\AssistTools">
+      <UniqueIdentifier>{8d02518f-d684-46dc-a6fb-70f5036cc791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\References\Libs\Framework">
+      <UniqueIdentifier>{20fa88b7-855a-4f56-8f44-ed2ee5d6f5b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -341,6 +419,87 @@
     </Text>
     <Text Include="Resource\References\SoftwareDesign\UML\UML Distilled A Brief Guide to the Standard Object Modeling Language.txt">
       <Filter>资源文件\References\SoftwareDesign\UML</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Database.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\A First Course in Database Systems.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Data Mining Concepts and Techniques.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Data Mining Practical Machine Learning Tools and Techniques.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Database Design &amp; Relational Theory.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Database System Concepts.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Database System Implementation.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Database Systems The Complets Book.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Mining the Social Web.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Refactoring Databases Evolutionary Database Design.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Seven Databases in Seven Weeks.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Database\Transaction Processing Concepts and Techniques.txt">
+      <Filter>资源文件\References\OtherLanguages\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\CoreTools.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\GSL.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\freetype.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\loki.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\Openrj.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\Pantheios.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\shwild.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\stlsoft.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\TIFF.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\Visual Leak Detector.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\zlib.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\Zthread.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\boost.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\CppCoreGuidelines.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\cppunit.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

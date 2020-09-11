@@ -11,6 +11,7 @@
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
@@ -135,8 +136,8 @@ void Rendering::PlanarReflectionEffect
 
         // Compute the equation for the mirror plane in model coordinates
         // and get the reflection matrix in world coordinates.
-        Mathematics::Matrixf reflection;
-		Mathematics::Planef modelPlane;
+        Mathematics::FloatMatrix reflection;
+		Mathematics::FloatPlane modelPlane;
         GetReflectionMatrixAndModelPlane(i, reflection, modelPlane);
 
         // TODO:  Add clip plane support to the renderer.
@@ -216,17 +217,17 @@ void Rendering::PlanarReflectionEffect
 }
 
 void Rendering::PlanarReflectionEffect
-	::GetReflectionMatrixAndModelPlane(int i, Mathematics::Matrixf& reflection, Mathematics::Planef& modelPlane)
+	::GetReflectionMatrixAndModelPlane(int i, Mathematics::FloatMatrix& reflection, Mathematics::FloatPlane& modelPlane)
 {
     // Compute the equation for the mirror plane in world coordinates.
 	auto vertex =  mPlanes[i]->GetWorldTriangle(0);
-	Mathematics::Planef worldPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
+	Mathematics::FloatPlane worldPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
 
     // Compute the reflection matrix.
-	reflection.MakeReflection(Mathematics::APointf(vertex.GetFirstPosition()[0], vertex.GetFirstPosition()[1], vertex.GetFirstPosition()[2]), worldPlane.GetNormal());
+	reflection.MakeReflection(Mathematics::FloatAPoint(vertex.GetFirstPosition()[0], vertex.GetFirstPosition()[1], vertex.GetFirstPosition()[2]), worldPlane.GetNormal());
 
 	vertex =  mPlanes[i]->GetModelTriangle(0);
-	modelPlane = Mathematics::Planef{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
+	modelPlane = Mathematics::FloatPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
 }
 
 // Name support.

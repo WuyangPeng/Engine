@@ -182,7 +182,7 @@ const auto savePlaneState = culler.GetPlaneState();
 }
 
 void Rendering::Spatial
-    ::SetLocalTransform(const Transform& transform)
+    ::SetLocalTransform(const FloatTransform& transform)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -190,15 +190,14 @@ void Rendering::Spatial
 }
 
 void Rendering::Spatial
-    ::SetWorldTransform(const Transform& transform)
+    ::SetWorldTransform(const FloatTransform& transform)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
     return m_SpatialDataPtr->DirectSetWorldTransform(transform);
 }
 
-void Rendering::Spatial
-    ::SetWorldBound(const Bound& bound)
+void Rendering::Spatial ::SetWorldBound(const FloatBound& bound)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -221,15 +220,14 @@ void Rendering::Spatial
     return m_SpatialDataPtr->InitWorldBound();
 }
 
-void Rendering::Spatial
-    ::BoundGrowToContain(const Bound& worldBound)
+void Rendering::Spatial ::BoundGrowToContain(const FloatBound& worldBound)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
     return m_SpatialDataPtr->SetWorldBound(worldBound);
 }
 
-const Rendering::Transform Rendering::Spatial
+const Rendering::FloatTransform Rendering::Spatial
     ::GetLocalTransform() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -237,7 +235,7 @@ const Rendering::Transform Rendering::Spatial
     return m_SpatialDataPtr->GetLocalTransform();
 }
 
-const Rendering::Transform Rendering::Spatial
+const Rendering::FloatTransform Rendering::Spatial
     ::GetWorldTransform() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -245,7 +243,7 @@ const Rendering::Transform Rendering::Spatial
     return m_SpatialDataPtr->GetWorldTransform();
 }
 
-const Rendering::Bound Rendering::Spatial
+const Rendering::FloatBound Rendering::Spatial
     ::GetWorldBound() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -388,7 +386,7 @@ void Rendering::Spatial
 }
 
 void Rendering::Spatial
-	::SetWorldTransformOnUpdate( const Transform& transform )
+	::SetWorldTransformOnUpdate( const FloatTransform& transform )
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

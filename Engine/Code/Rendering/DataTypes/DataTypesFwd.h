@@ -38,8 +38,17 @@ namespace Rendering
     template <TextureFormat Format>
     class TextureColour;
 
-    class Transform;
+    template <typename T>
     class Bound;
+
+    using FloatBound = Bound<float>;
+    using DoubleBound = Bound<double>;
+
+    template <typename Real>
+    class Transform;
+
+    using FloatTransform = Transform<float>;
+    using DoubleTransform = Transform<double>;
 }
 
 #endif  // RENDERING_DATA_TYPES_FWD_H

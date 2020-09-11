@@ -135,7 +135,7 @@ double Mathematics::EquationImpl
 		const auto validateValue = Substitution(amendSolution);
 		const auto derivative = SubstitutionTangent(amendSolution);
 
-		if (Mathd::FAbs(derivative) <= m_Epsilon)
+		if (DoubleMath::FAbs(derivative) <= m_Epsilon)
 		{
 			break;
 		}
@@ -144,7 +144,7 @@ double Mathematics::EquationImpl
 
 		amendSolution -= adjustedValue;
 
-		if (Mathd::FAbs(validateValue) <= m_Epsilon || Mathd::FAbs(derivative) <= m_Epsilon || Mathd::FAbs(adjustedValue) <= m_Epsilon)
+		if (DoubleMath::FAbs(validateValue) <= m_Epsilon || DoubleMath::FAbs(derivative) <= m_Epsilon || DoubleMath::FAbs(adjustedValue) <= m_Epsilon)
 		{
 			break;
 		}
@@ -168,9 +168,9 @@ const Mathematics::EquationImpl::Imaginary Mathematics::EquationImpl
 
 		amendSolution -= adjustedValue;
 
-		if ((Mathd::FAbs(validateValue.real()) <= m_Epsilon && Mathd::FAbs(validateValue.imag()) <= m_Epsilon) ||
-			(Mathd::FAbs(derivative.real()) <= m_Epsilon && Mathd::FAbs(derivative.imag()) <= m_Epsilon) ||
-			(Mathd::FAbs(adjustedValue.real()) <= m_Epsilon && Mathd::FAbs(adjustedValue.imag()) <= m_Epsilon))
+		if ((DoubleMath::FAbs(validateValue.real()) <= m_Epsilon && DoubleMath::FAbs(validateValue.imag()) <= m_Epsilon) ||
+			(DoubleMath::FAbs(derivative.real()) <= m_Epsilon && DoubleMath::FAbs(derivative.imag()) <= m_Epsilon) ||
+			(DoubleMath::FAbs(adjustedValue.real()) <= m_Epsilon && DoubleMath::FAbs(adjustedValue.imag()) <= m_Epsilon))
 		{
 			break;
 		}

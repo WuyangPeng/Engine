@@ -548,7 +548,11 @@ void CoreTools::BufferSource ::ReadAggregate(Mathematics::Matrix<float>& datum)
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Read(16, datum[0]);
+    std::vector<float> data(16);
+
+    Read(16,data.data());
+    
+    datum = Mathematics::Matrix<float>{ data, Mathematics::MatrixMajorFlags::Row };
 }
 
 template <>
@@ -558,7 +562,7 @@ void CoreTools::BufferTarget ::WriteAggregate(const Mathematics::Matrix<float>& 
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    WriteWithoutNumber(16, datum[0]);
+    WriteWithoutNumber(16, datum.GetData().data());
 }
 
 template <>
@@ -568,7 +572,11 @@ void CoreTools::BufferSource ::ReadAggregate(Mathematics::Matrix<double>& datum)
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Read(16, datum[0]);
+     std::vector<double> data(16);
+
+    Read(16, data.data());
+
+    datum = Mathematics::Matrix<double>{ data, Mathematics::MatrixMajorFlags::Row };
 }
 
 template <>
@@ -578,7 +586,7 @@ void CoreTools::BufferTarget ::WriteAggregate(const Mathematics::Matrix<double>&
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    WriteWithoutNumber(16, datum[0]);
+    WriteWithoutNumber(16, datum.GetData().data());
 }
 
 template <>

@@ -41,7 +41,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Culler,GetPlaneState,unsigned int)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Culler,PushPlane,Plane,void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Culler,PopPlane,void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Culler,IsVisible,Bound,bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Culler,IsVisible,FloatBound,bool)
 
 bool Rendering::Culler
     ::IsVisible (int numVertices, const APoint* vertices,bool ignoreNearPlane) const

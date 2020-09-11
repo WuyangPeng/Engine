@@ -26,9 +26,9 @@ namespace Rendering
 	public:
 		COPY_UNSHARE_CLASSES_TYPE_DECLARE(KeyframeController);
 		using ParentType = TransformController;
-		using Matrix = Mathematics::Matrixf;
+		using Matrix = Mathematics::FloatMatrix;
 		using AQuaternion = Mathematics::AQuaternionf;
-		using APoint = Mathematics::APointf;
+		using APoint = Mathematics::FloatAPoint;
 
 	public:
 		// 如果平移，旋转和缩放都有着相同的关键帧时间，则numCommonTimes被设置为正数。
@@ -40,7 +40,7 @@ namespace Rendering
 		// 这个类的以前的行为是为了填补只能由关键帧代表的通道变换，
 		// 其中隐含依靠空间Spatial m_Object有它的应用程序适当地设置其他通道。
 		// 现在KeyframeController设置*所有*的通道。
-		KeyframeController(int numCommonTimes, int numTranslations,int numRotations, int numScales,const Transform& localTransform);
+		KeyframeController(int numCommonTimes, int numTranslations,int numRotations, int numScales,const FloatTransform& localTransform);
 		~KeyframeController() = default;
 		KeyframeController(KeyframeController&&) = default;
 		KeyframeController& operator=(KeyframeController&&) = default;

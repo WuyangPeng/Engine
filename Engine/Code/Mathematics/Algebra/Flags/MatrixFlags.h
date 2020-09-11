@@ -11,7 +11,7 @@
 
 namespace Mathematics
 {
-	enum class MatrixTypeFlags
+	enum class MatrixInitType
 	{
 		Zero,
 		Identity

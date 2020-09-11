@@ -26,8 +26,8 @@
 #include SYSTEM_WARNING_DISABLE(26496)
 Rendering::CameraMatrix
     ::CameraMatrix (const WorldCoordinateFrame& worldCoordinateFrame,const CameraFrustum& cameraFrustum,float epsilon)
-	:m_WorldCoordinateFrame{ worldCoordinateFrame }, m_CameraFrustum{ cameraFrustum }, m_PreViewMatrix{ Matrix::sm_Identity }, m_PreViewIsIdentity{ true },
-	 m_PostProjectionMatrix{ Matrix::sm_Identity }, m_PostProjectionIsIdentity{ true }, m_DepthType{ CAMERA_MANAGE_SINGLETON.GetDepthType() }, m_Epsilon{ epsilon }
+	:m_WorldCoordinateFrame{ worldCoordinateFrame }, m_CameraFrustum{ cameraFrustum }, m_PreViewMatrix{ Mathematics::Float::g_IdentityMatrix }, m_PreViewIsIdentity{ true },
+	 m_PostProjectionMatrix{Mathematics::Float::g_IdentityMatrix }, m_PostProjectionIsIdentity{ true }, m_DepthType{ CAMERA_MANAGE_SINGLETON.GetDepthType() }, m_Epsilon{ epsilon }
 {
     OnFrustumChange();
     
@@ -36,8 +36,8 @@ Rendering::CameraMatrix
 
 Rendering::CameraMatrix
     ::CameraMatrix (float epsilon)
-	:m_WorldCoordinateFrame{ epsilon }, m_CameraFrustum{ true },m_PreViewMatrix{ Matrix::sm_Identity },m_PreViewIsIdentity{ true },
-	 m_PostProjectionMatrix{ Matrix::sm_Identity },m_PostProjectionIsIdentity{ true },m_DepthType{ CAMERA_MANAGE_SINGLETON.GetDepthType() },m_Epsilon{ epsilon }
+	:m_WorldCoordinateFrame{ epsilon }, m_CameraFrustum{ true },m_PreViewMatrix{ Mathematics::Float::g_IdentityMatrix },m_PreViewIsIdentity{ true },
+	 m_PostProjectionMatrix{ Mathematics::Float::g_IdentityMatrix },m_PostProjectionIsIdentity{ true },m_DepthType{ CAMERA_MANAGE_SINGLETON.GetDepthType() },m_Epsilon{ epsilon }
 {
     OnFrustumChange();
     
@@ -240,16 +240,16 @@ void Rendering::CameraMatrix
     RENDERING_ASSERTION_1(nearExtrude < farExtrude, "farExtrude必须大于nearExtrude\n");
     
     // 计算最近面的视图体积
-	auto q000 = Mathematics::Pointf::g_Origin + nearExtrude * (p00 - Mathematics::Pointf::g_Origin);
-	auto q100 = Mathematics::Pointf::g_Origin + nearExtrude * (p10 - Mathematics::Pointf::g_Origin);
-	auto q110 = Mathematics::Pointf::g_Origin + nearExtrude * (p11 - Mathematics::Pointf::g_Origin);
-	auto q010 = Mathematics::Pointf::g_Origin + nearExtrude * (p01 - Mathematics::Pointf::g_Origin);
+	auto q000 = Mathematics::Float::g_Origin + nearExtrude * (p00 - Mathematics::Float::g_Origin);
+	auto q100 = Mathematics::Float::g_Origin + nearExtrude * (p10 - Mathematics::Float::g_Origin);
+	auto q110 = Mathematics::Float::g_Origin + nearExtrude * (p11 - Mathematics::Float::g_Origin);
+	auto q010 = Mathematics::Float::g_Origin + nearExtrude * (p01 - Mathematics::Float::g_Origin);
     
     // 计算最远面的视图体积
-	auto q001 = Mathematics::Pointf::g_Origin + farExtrude * (p00 - Mathematics::Pointf::g_Origin);
-	auto q101 = Mathematics::Pointf::g_Origin + farExtrude * (p10 - Mathematics::Pointf::g_Origin);
-	auto q111 = Mathematics::Pointf::g_Origin + farExtrude * (p11 - Mathematics::Pointf::g_Origin);
-	auto q011 = Mathematics::Pointf::g_Origin + farExtrude * (p01 - Mathematics::Pointf::g_Origin);
+	auto q001 = Mathematics::Float::g_Origin + farExtrude * (p00 - Mathematics::Float::g_Origin);
+	auto q101 = Mathematics::Float::g_Origin + farExtrude * (p10 - Mathematics::Float::g_Origin);
+	auto q111 = Mathematics::Float::g_Origin + farExtrude * (p11 - Mathematics::Float::g_Origin);
+	auto q011 = Mathematics::Float::g_Origin + farExtrude * (p01 - Mathematics::Float::g_Origin);
     
     // 计算q111的表示
 	auto u0 = q100 - q000;
@@ -330,7 +330,7 @@ void Rendering::CameraMatrix
     RENDERING_CLASS_IS_VALID_9;
     
     m_PreViewMatrix = preViewMatrix;
-    m_PreViewIsIdentity = Approximate(m_PreViewMatrix,Matrix::sm_Identity,m_Epsilon);
+    m_PreViewIsIdentity = Approximate(m_PreViewMatrix,Mathematics::Float::g_IdentityMatrix,m_Epsilon);
     
     UpdateProjectionViewMatrix();
 }
@@ -355,7 +355,7 @@ void Rendering::CameraMatrix
     RENDERING_CLASS_IS_VALID_9;
     
     m_PostProjectionMatrix = postProjMatrix;
-    m_PostProjectionIsIdentity = Approximate(m_PostProjectionMatrix,Matrix::sm_Identity,m_Epsilon);
+    m_PostProjectionIsIdentity = Approximate(m_PostProjectionMatrix,Mathematics::Float::g_IdentityMatrix,m_Epsilon);
     
     UpdateProjectionViewMatrix();
 }

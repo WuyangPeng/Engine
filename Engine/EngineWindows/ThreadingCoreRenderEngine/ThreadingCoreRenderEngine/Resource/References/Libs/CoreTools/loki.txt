@@ -1,0 +1,10 @@
+loki
+ 
+官方网站 
+http://loki-lib.sourceforge.net/
+
+☆
+
+知识点 
+1.	设计模式库。
+

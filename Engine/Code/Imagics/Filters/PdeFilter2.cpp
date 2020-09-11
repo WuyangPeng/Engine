@@ -69,7 +69,7 @@ Imagics::PdeFilter2
     }
 
     // Assign values to the 1-pixel image border.
-    if (mBorderValue != Mathematics::Mathf::sm_MaxReal)
+    if (mBorderValue != Mathematics::FloatMath::sm_MaxReal)
     {
         AssignDirichletImageBorder();
     }
@@ -82,7 +82,7 @@ Imagics::PdeFilter2
     // those pixels that are 8-neighbors of the mask pixels.
     if (mMask)
     {
-        if (mBorderValue != Mathematics::Mathf::sm_MaxReal)
+        if (mBorderValue != Mathematics::FloatMath::sm_MaxReal)
         {
             AssignDirichletMaskBorder();
         }
@@ -347,7 +347,7 @@ void Imagics::PdeFilter2
 void Imagics:: PdeFilter2
 	::OnPreUpdate () noexcept
 {
-    if (mMask && mBorderValue == Mathematics::Mathf::sm_MaxReal)
+    if (mMask && mBorderValue == Mathematics::FloatMath::sm_MaxReal)
     {
         // Neumann boundary conditions are in use, so recompute the mask
         // border.

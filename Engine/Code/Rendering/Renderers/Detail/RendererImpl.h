@@ -64,7 +64,7 @@ namespace Rendering
 		using ClassType = RendererImpl;
 
 		using Colour = Colour<float>;
-		using Matrix = Mathematics::Matrixf;
+		using Matrix = Mathematics::FloatMatrix;
 		using RendererSharedPtr = std::shared_ptr<Renderer>;
 		using PlatformVertexFormatSharedPtr = std::shared_ptr<PlatformVertexFormat>;
 		using PlatformVertexBufferSharedPtr = std::shared_ptr<PlatformVertexBuffer>;

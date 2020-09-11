@@ -39,7 +39,7 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, BlendTransformController);
 Rendering::BlendTransformController
 	::BlendTransformController(const TransformControllerSmartPointer& firstController,const TransformControllerSmartPointer& secondController, 
 							   bool rotationScaleMatrices,bool geometricRotation,bool geometricScale) 
-	:ParentType{ Transform::sm_Identity }, m_Impl{ make_shared<ImplType>(firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale) }
+	: ParentType{ FloatTransform{} }, m_Impl{ make_shared<ImplType>(firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale) }
 {
      RENDERING_SELF_CLASS_IS_VALID_1;
 }

@@ -1,35 +1,37 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.0.3 (2019/07/17 18:40)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.1 (2020/09/08 22:33)
 
 #ifndef RENDERING_DATA_TYPES_SPECIALIZED_IO_H
 #define RENDERING_DATA_TYPES_SPECIALIZED_IO_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Bound.h"
+#include "BoundDetail.h"
 #include "ColourDetail.h"
-#include "Transform.h"
+#include "TransformDetail.h"
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
 
 template <>
-struct CoreTools::StreamSize<Rendering::Transform>
+struct CoreTools::StreamSize<Rendering::FloatTransform>
 {
-    static int GetStreamSize(const Rendering::Transform& value)
+    static int GetStreamSize(const Rendering::FloatTransform& value)
     {
         return value.GetStreamingSize();
     }
 };
 
 template <>
-struct CoreTools::StreamSize<Rendering::Bound>
+struct CoreTools::StreamSize<Rendering::FloatBound>
 {
-    static int GetStreamSize(const Rendering::Bound& value)
+    static int GetStreamSize(const Rendering::FloatBound& value)
     {
         return value.GetStreamingSize();
     }
@@ -38,45 +40,67 @@ struct CoreTools::StreamSize<Rendering::Bound>
 template <typename T>
 struct CoreTools::StreamSize<Rendering::Colour<T>>
 {
-    static int GetStreamSize(const Rendering::Colour<T>& value) noexcept
+    static int GetStreamSize(const Rendering::Colour<T>& value)
     {
         SYSTEM_UNUSED_ARG(value);
 
-        return sizeof(T) * 4;
+        return Rendering::Colour<T>::sm_ArraySize * CoreTools::GetStreamSize(value.GetRed());
     }
 };
 
 template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource ::ReadAggregate(Rendering::Transform& datum);
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::FloatTransform& datum);
 
 template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget ::WriteAggregate(const Rendering::Transform& datum);
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatTransform& datum);
 
 template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource ::ReadAggregate(Rendering::Bound& datum);
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleTransform& datum);
 
 template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget ::WriteAggregate(const Rendering::Bound& datum);
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleTransform& datum);
 
 template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource ::ReadAggregate(Rendering::Colour<float>& datum);
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::FloatBound& datum);
 
 template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget ::WriteAggregate(const Rendering::Colour<float>& datum);
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatBound& datum);
 
 template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource ::ReadAggregate(Rendering::Colour<unsigned>& datum);
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleBound& datum);
 
 template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget ::WriteAggregate(const Rendering::Colour<unsigned>& datum);
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleBound& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatColour& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleColour& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleColour& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::ByteColour& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::ByteColour& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::IntColour& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::IntColour& datum);
 
 namespace Rendering
 {
     template <typename T>
-    int GetStreamSize(T value)
-    {
-        CoreTools::DoNothing();
-
+    int GetStreamSize(T value) noexcept(noexcept(CoreTools::StreamSize<T>::GetStreamSize(value))) 
+    {         
         return CoreTools::StreamSize<T>::GetStreamSize(value);
     }
 }

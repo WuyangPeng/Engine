@@ -12,15 +12,15 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "Colour.h"
 #include "ColourDefaultTraits.h"
-#include "DataTypesFwd.h"
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE ColourManager
     {
     public:
-        using ClassType = ColourManager; 
+        using ClassType = ColourManager;
 
     public:
         // 从8位通道创建一个32位RGB的颜色。alpha通道设置为255。

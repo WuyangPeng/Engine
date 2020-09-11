@@ -146,7 +146,7 @@ namespace Physics
 		PHYSICS_LCPPOLYDIST_FUNCTION(PrintMatrices(M, Q));
 
 		int tryNumber = 0;
-		double distance = -Mathematics::Mathd::sm_MaxReal;
+		double distance = -Mathematics::DoubleMath::sm_MaxReal;
 		while (processing)
 		{
 			double* zResult = NEW1<double>(mNumEquations);
@@ -705,10 +705,10 @@ namespace Physics
 			}
 		}
 		mLog << std::endl << " Solution points are separated by "
-			 << Mathematics::Mathf::Sqrt(distance);
+			 << Mathematics::FloatMath::Sqrt(distance);
 		mLog << " units." << std::endl;
 		mLog << "The smallest distance between test points is "
-			 << Mathematics::Mathf::Sqrt((float)minValue);
+			 << Mathematics::FloatMath::Sqrt((float)minValue);
 		mLog << std::endl << "and occurs for (" << testPoints1[iLine][0];
 		for (i = 1; i < mDimension; ++i)
 		{

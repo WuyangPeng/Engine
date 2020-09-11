@@ -32,7 +32,7 @@ namespace Rendering
         using ParentType = Spatial;
         using VisualSmartPointer = std::shared_ptr<ClassType>;
         using ConstVisualSmartPointer = std::shared_ptr<const ClassType>;
-        using APoint = Mathematics::APointf;
+        using APoint = Mathematics::FloatAPoint;
 
     public:
         explicit Visual(VisualPrimitiveType type = VisualPrimitiveType::None);
@@ -60,8 +60,8 @@ namespace Rendering
         ConstIndexBufferSmartPointer GetConstIndexBuffer() const;
         IndexBufferSmartPointer GetIndexBuffer();
 
-        const Bound& GetModelBound() const noexcept;
-        Bound& GetModelBound() noexcept;
+        const FloatBound& GetModelBound() const noexcept;
+        FloatBound& GetModelBound() noexcept;
 
         // 存取绘制对象的视觉效果。
         void SetEffectInstance(const VisualEffectInstanceSmartPointer& effect) noexcept;

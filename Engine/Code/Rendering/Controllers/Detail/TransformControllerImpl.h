@@ -25,16 +25,16 @@ namespace Rendering
     {
     public:
         using ClassType = TransformControllerImpl;
-        using APoint = Mathematics::APointf;
-        using Matrix = Mathematics::Matrixf;
+        using APoint = Mathematics::FloatAPoint;
+        using Matrix = Mathematics::FloatMatrix;
 
     public:
-        explicit TransformControllerImpl(const Transform& localTransform) noexcept;
+        explicit TransformControllerImpl(const FloatTransform& localTransform) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetTransform(const Transform& localTransform) noexcept;
-        const Transform GetTransform() const noexcept;
+        void SetTransform(const FloatTransform& localTransform) noexcept;
+        const FloatTransform GetTransform() const noexcept;
 
         void SetTranslate(const APoint& translate);
         void SetRotate(const Matrix& rotate);
@@ -47,7 +47,7 @@ namespace Rendering
         void Load(CoreTools::BufferSource& source);
 
     private:
-        Transform m_LocalTransform;
+        FloatTransform m_LocalTransform;
     };
 }
 

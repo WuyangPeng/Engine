@@ -25,7 +25,7 @@ namespace Rendering
     {
     public:
         using ClassType = ParticleControllerImpl;
-        using AVector = Mathematics::AVectorf;
+        using AVector = Mathematics::FloatAVector;
 
     public:
         explicit ParticleControllerImpl(int numParticles);

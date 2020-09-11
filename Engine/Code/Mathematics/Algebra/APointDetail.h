@@ -17,8 +17,8 @@
     #include "APointAchieve.h"
 
 #endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_APOINT_ACHIEVE)
- 
-#include "AVector.h" 
+
+#include "AVector.h"
 
 template <typename T>
 const Mathematics::AVector<T> Mathematics::operator-(const APoint<T>& lhs, const APoint<T>& rhs) noexcept
@@ -83,21 +83,15 @@ const Mathematics::APoint<T> Mathematics::operator*(T scalar, const APoint<T>& r
 }
 
 template <typename T>
-T Mathematics::Dot(const APoint<T>& lhs, const AVector<T>& rhs)
+T Mathematics::Dot(const APoint<T>& lhs, const AVector<T>& rhs) noexcept
 {
     return lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY() + lhs.GetZ() * rhs.GetZ();
 }
 
 template <typename T>
-bool Mathematics::Approximate(const APoint<T>& lhs, const APoint<T>& rhs, const T epsilon)
+bool Mathematics::Approximate(const APoint<T>& lhs, const APoint<T>& rhs, const T epsilon) noexcept
 {
     return Math<T>::FAbs(lhs.GetX() - rhs.GetX()) <= epsilon && Math<T>::FAbs(lhs.GetY() - rhs.GetY()) <= epsilon && Math<T>::FAbs(lhs.GetZ() - rhs.GetZ()) <= epsilon;
-}
-
-template <typename T>
-bool Mathematics::Approximate(const APoint<T>& lhs, const APoint<T>& rhs)
-{
-    return Approximate(lhs, rhs, Math<T>::GetZeroTolerance());
 }
 
 template <typename T>
@@ -107,5 +101,5 @@ std::ostream& Mathematics::operator<<(std::ostream& outFile, const APoint<T>& po
 
     return outFile;
 }
- 
+
 #endif  // MATHEMATICS_ALGEBRA_A_POINT_DETAIL_H

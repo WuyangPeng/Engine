@@ -54,7 +54,7 @@ namespace CoreTools
         [[nodiscard]] T Increase();
 
         template <typename T>
-        [[nodiscard]] void Increase(T value);
+        [[nodiscard]] void Increase(T value); 
 
     private: 
         template <typename T>

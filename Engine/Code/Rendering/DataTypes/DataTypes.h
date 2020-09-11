@@ -22,7 +22,8 @@
 #include "TextureColour.h"
 
 #include "Bound.h"
-#include "SpecializedIO.h"
 #include "Transform.h"
+
+#include "SpecializedIO.h"
 
 #endif  // RENDERING_DATA_TYPES_H

@@ -59,10 +59,10 @@ namespace Rendering
         void PopPlane() noexcept;
 
         // 比较对象的世界边界对立的裁剪平面。只有Spatial调用这个函数。
-        bool IsVisible(const Bound& bound);
+        bool IsVisible(const FloatBound& bound) noexcept;
 
         // 支持在 Portal::GetVisibleSet.
-        bool IsVisible(int numVertices, const APoint* vertices, bool ignoreNearPlane) const;
+        bool IsVisible(int numVertices, const APoint* vertices, bool ignoreNearPlane) const noexcept;
 
         // 支持在 BspNode::GetVisibleSet.
         // 确定视图平截头体是否完全在平面的一侧。

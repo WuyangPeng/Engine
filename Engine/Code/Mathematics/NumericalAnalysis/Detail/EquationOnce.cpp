@@ -61,7 +61,7 @@ const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce
 void Mathematics::EquationOnce
 	::Solving()
 {
-	MATHEMATICS_ASSERTION_0(GetEpsilon() < Mathd::FAbs(m_Once), "³ýÁã´íÎó£¡");
+	MATHEMATICS_ASSERTION_0(GetEpsilon() < DoubleMath::FAbs(m_Once), "³ýÁã´íÎó£¡");
 
 	const auto solution = -m_Constant / m_Once;
 

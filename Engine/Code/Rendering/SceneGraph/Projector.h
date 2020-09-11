@@ -20,7 +20,7 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
         using ProjectorSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
 		using ConstProjectorSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>;
-		using Matrix = Mathematics::Matrixf;
+		using Matrix = Mathematics::FloatMatrix;
 
 	public:
 		// 这类和Camera类的唯一区别是,你可以显式地指定深度的类型。

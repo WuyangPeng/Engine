@@ -25,11 +25,11 @@ namespace Rendering
 	public:
 		COPY_UNSHARE_CLASSES_TYPE_DECLARE(TransformController);
 		using ParentType = Controller;
-		using APoint = Mathematics::APointf;
-		using Matrix = Mathematics::Matrixf;
+		using APoint = Mathematics::FloatAPoint;
+		using Matrix = Mathematics::FloatMatrix;
 
 	public:
-		explicit TransformController(const Transform& localTransform);
+		explicit TransformController(const FloatTransform& localTransform);
 		  ~TransformController();
 	TransformController(TransformController&&) = default;
 		  TransformController& operator=(TransformController&&) = default;
@@ -38,8 +38,8 @@ namespace Rendering
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TransformController); 
 	 
-		void SetTransform(const Transform& localTransform) noexcept;
-		const Transform GetTransform() const noexcept;
+		void SetTransform(const FloatTransform& localTransform) noexcept;
+		const FloatTransform GetTransform() const noexcept;
 
 		void SetTranslate(const APoint& translate);
 		void SetRotate(const Matrix& rotate);

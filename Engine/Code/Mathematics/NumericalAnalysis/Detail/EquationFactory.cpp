@@ -20,11 +20,11 @@ using std::make_shared;
 Mathematics::EquationFactory::EquationImplSharedPtr Mathematics::EquationFactory
 	::Create(double constant, double once, double secondary, double thrice, double quartic, double epsilon)
 {
-	if (epsilon < Mathd::FAbs(quartic))
+	if (epsilon < DoubleMath::FAbs(quartic))
 		return make_shared<EquationQuartic>(constant, once, secondary, thrice, quartic, epsilon);
-	else if (epsilon < Mathd::FAbs(thrice))
+	else if (epsilon < DoubleMath::FAbs(thrice))
 		return make_shared<EquationThrice>(constant, once, secondary, thrice, epsilon);
-	else if (epsilon < Mathd::FAbs(secondary))
+	else if (epsilon < DoubleMath::FAbs(secondary))
 		return make_shared<EquationSecondary>(constant, once, secondary, epsilon);
 	else
 		return  make_shared<EquationOnce>(constant, once, epsilon);

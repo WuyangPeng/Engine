@@ -20,7 +20,7 @@ namespace Mathematics
 		using ParentType = EquationImpl;
 
 	public:
-		EquationSecondary(double constant, double once, double secondary, double epsilon = Mathd::GetZeroTolerance())  ;
+		EquationSecondary(double constant, double once, double secondary, double epsilon = DoubleMath::GetZeroTolerance())  ;
 	 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;

@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerTraits.h"
 
@@ -67,7 +68,7 @@ namespace Rendering
 
         explicit constexpr HalfFloat(OriginalType value) noexcept
             : m_HalfFloat{ value }
-        { 
+        {
         }
 
         CLASS_INVARIANT_DECLARE;
@@ -110,7 +111,7 @@ namespace Rendering
     bool RENDERING_DEFAULT_DECLARE operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
     bool RENDERING_DEFAULT_DECLARE operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
 
-    bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::Mathf::GetZeroTolerance());
+    bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::FloatMath::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     RENDERING_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& outFile, const HalfFloat& halfFloat);
 

@@ -64,9 +64,6 @@
     <Filter Include="DataTypes 头文件\Detail">
       <UniqueIdentifier>{5cc4967b-841a-41c5-8048-f31337970d67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DataTypes 源文件\Detail">
-      <UniqueIdentifier>{bcaeb31f-1ce0-4bf5-b315-95330cf24bf4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Demogl 头文件">
       <UniqueIdentifier>{ebf6d0d2-fb71-4b94-9985-09e049f9642b}</UniqueIdentifier>
     </Filter>
@@ -466,15 +463,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\TubeSurface.cpp">
       <Filter>CurvesSurfaces 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Detail\BoundImpl.cpp">
-      <Filter>DataTypes 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImpl.cpp">
-      <Filter>DataTypes 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrix.cpp">
-      <Filter>DataTypes 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Bound.cpp">
       <Filter>DataTypes 源文件</Filter>
@@ -1597,13 +1585,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatchFrame.h">
       <Filter>CurvesSurfaces 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\BoundImpl.h">
-      <Filter>DataTypes 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImpl.h">
-      <Filter>DataTypes 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrix.h">
       <Filter>DataTypes 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Transform.h">
@@ -2924,6 +2906,27 @@
       <Filter>DataTypes 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourAchieve.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\BoundAchieve.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\BoundDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrixDetail.h">
+      <Filter>DataTypes 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrix.h">
+      <Filter>DataTypes 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImplDetail.h">
+      <Filter>DataTypes 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformAchieve.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformDetail.h">
       <Filter>DataTypes 模板文件</Filter>
     </ClInclude>
   </ItemGroup>

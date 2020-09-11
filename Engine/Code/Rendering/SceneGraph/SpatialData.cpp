@@ -27,7 +27,7 @@ Rendering::SpatialData
 CLASS_INVARIANT_STUB_DEFINE(Rendering,SpatialData)
 
 void Rendering::SpatialData
-    ::DirectSetWorldTransform(const Transform& transform)
+    ::DirectSetWorldTransform(const FloatTransform& transform)
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -45,7 +45,7 @@ void Rendering::SpatialData
 }
 
 void Rendering::SpatialData
-    ::SetLocalTransform(const Transform& transform)
+    ::SetLocalTransform(const FloatTransform& transform)
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -62,7 +62,7 @@ void Rendering::SpatialData
 }
 
 void Rendering::SpatialData
-    ::SetLocalTransformToWorldTransform(const Transform& worldTransform)
+    ::SetLocalTransformToWorldTransform(const FloatTransform& worldTransform)
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -84,7 +84,7 @@ void Rendering::SpatialData
 {
     RENDERING_CLASS_IS_VALID_9;
     
-	m_WorldBound = Bound{ Mathematics::Pointf::g_Origin,0.0f };
+	m_WorldBound = Bound{ Mathematics::Float::g_Origin,0.0f };
     m_WorldBoundIsCurrent = false;
 }
 
@@ -113,7 +113,7 @@ bool Rendering::SpatialData
     return m_WorldBoundIsCurrent;
 }
 
-const Rendering::Transform Rendering::SpatialData
+const Rendering::FloatTransform Rendering::SpatialData
     ::GetLocalTransform() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -121,7 +121,7 @@ const Rendering::Transform Rendering::SpatialData
     return m_LocalTransform;
 }
 
-const Rendering::Transform Rendering::SpatialData
+const Rendering::FloatTransform Rendering::SpatialData
     ::GetWorldTransform() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -129,7 +129,7 @@ const Rendering::Transform Rendering::SpatialData
     return m_WorldTransform;
 }
 
-const Rendering::Bound Rendering::SpatialData
+const Rendering::FloatBound Rendering::SpatialData
     ::GetWorldBound() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -201,7 +201,7 @@ void Rendering::SpatialData
 }
 
 void Rendering::SpatialData
-	::SetWorldTransformOnUpdate( const Transform& transform )
+	::SetWorldTransformOnUpdate( const FloatTransform& transform )
 {
 	RENDERING_CLASS_IS_VALID_9;
 

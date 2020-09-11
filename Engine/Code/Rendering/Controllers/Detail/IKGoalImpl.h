@@ -28,7 +28,7 @@ namespace Rendering
 	{
 	public:
 		using ClassType = IKGoalImpl;
-		using APoint = Mathematics::APointf;
+		using APoint = Mathematics::FloatAPoint;
 		using Object = CoreTools::Object;
 		using ObjectSmartPointer = CoreTools::ObjectSmartPointer;
 		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;

@@ -27,8 +27,8 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26496)
-Rendering::StandardMeshImpl ::StandardMeshImpl(const VertexFormatSmartPointer& vertexFormat, bool isStatic, bool inside, const Transform* transform)
-    : m_VertexFormat{ vertexFormat }, m_Transform{ transform != nullptr ? *transform : Transform() }, m_IsStatic{ isStatic },
+Rendering::StandardMeshImpl ::StandardMeshImpl(const VertexFormatSmartPointer& vertexFormat, bool isStatic, bool inside, const FloatTransform* transform)
+    : m_VertexFormat{ vertexFormat }, m_Transform{ transform != nullptr ? *transform : FloatTransform() }, m_IsStatic{ isStatic },
       m_Inside{ inside }, m_HasNormals{ false }, m_Usage{ isStatic ? BufferUsage::Static : BufferUsage::Dynamic }
 {
     for (auto i = 0; i < sm_MaxUnits; ++i)
@@ -118,14 +118,14 @@ Rendering::StandardMeshImpl& Rendering::StandardMeshImpl ::operator=(const Stand
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, StandardMeshImpl)
 
-void Rendering::StandardMeshImpl ::SetTransform(const Transform& transform) noexcept
+void Rendering::StandardMeshImpl ::SetTransform(const FloatTransform& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_Transform = transform;
 }
 
-const Rendering::Transform& Rendering::StandardMeshImpl ::GetTransform() const noexcept
+const Rendering::FloatTransform& Rendering::StandardMeshImpl ::GetTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -545,7 +545,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
     auto maxDist = Math::Sqrt(radius * radius + height * height);
-    mesh->GetModelBound().SetCenter(Mathematics::Pointf::g_Origin);
+    mesh->GetModelBound().SetCenter(Mathematics::Float::g_Origin);
     mesh->GetModelBound().SetRadius(maxDist);
 
     return mesh;
@@ -596,7 +596,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
     auto maxDist = Math::Sqrt(radius * radius + height * height);
-    mesh->GetModelBound().SetCenter(Mathematics::Pointf::g_Origin);
+    mesh->GetModelBound().SetCenter(Mathematics::Float::g_Origin);
     mesh->GetModelBound().SetRadius(maxDist);
 
     return mesh;
@@ -842,7 +842,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Sphere(
     // 重置边界使用真实的信息。
     TrianglesMeshSmartPointer mesh{ NEW0 TrianglesMesh(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 
-    mesh->GetModelBound().SetCenter(Mathematics::Pointf::g_Origin);
+    mesh->GetModelBound().SetCenter(Mathematics::Float::g_Origin);
     mesh->GetModelBound().SetRadius(radius);
 
     return mesh;
@@ -1002,7 +1002,7 @@ const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
     // 重置边界使用真实的信息。
     TrianglesMeshSmartPointer mesh{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 
-    mesh->GetModelBound().SetCenter(Mathematics::Pointf::g_Origin);
+    mesh->GetModelBound().SetCenter(Mathematics::Float::g_Origin);
     mesh->GetModelBound().SetRadius(outerRadius);
 
     return mesh;

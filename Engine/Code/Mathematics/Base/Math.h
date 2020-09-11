@@ -113,8 +113,8 @@ namespace Mathematics
         [[nodiscard]] static constexpr Real GetInverseTwoPI() noexcept;
     };
 
-    using Mathf = Math<float>;
-    using Mathd = Math<double>;
+    using FloatMath = Math<float>;
+    using DoubleMath = Math<double>;
 }
 
 #endif  // MATHEMATICS_BASE_MATH_H

@@ -13,6 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AVector.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -26,8 +27,8 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = AVectorOrthonormalBasis<Real>;
-        using AVector = AVector<Real>;
         using Math = Math<Real>;
+        using AVector = AVector<Real>;
 
     public:
         explicit AVectorOrthonormalBasis(const AVector& nonzeroVector, bool isUnit, const Real epsilon = Math::GetZeroTolerance());
@@ -40,8 +41,8 @@ namespace Mathematics
 
     private:
         void Generate();
-        void GenerateOnXOrZIsMax();
-        void GenerateOnYOrZIsMax();
+        void GenerateOnXOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void GenerateOnYOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     private:
         bool m_IsUnit;

@@ -15,7 +15,7 @@ using std::make_shared;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 Rendering::PickRay
-	::PickRay(bool result, const Mathematics::APointf& origin, const Mathematics::AVectorf& direction)
+	::PickRay(bool result, const Mathematics::FloatAPoint& origin, const Mathematics::FloatAVector& direction)
 	:m_Impl{ make_shared<ImplType>(result,origin,direction) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -31,7 +31,7 @@ Rendering::PickRay
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, PickRay)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, IsResult, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, GetOrigin, Mathematics::APointf)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, GetDirection, Mathematics::AVectorf) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, GetOrigin, Mathematics::FloatAPoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, GetDirection, Mathematics::FloatAVector) 
 
 #include STSTEM_WARNING_POP

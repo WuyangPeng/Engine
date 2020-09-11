@@ -24,10 +24,10 @@ namespace Framework
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(CameraModelMiddleLayer);
 		using ParentType = ModelMiddleLayer;
-		using APoint = Mathematics::APointf;
-		using AVector = Mathematics::AVectorf;
+		using APoint = Mathematics::FloatAPoint;
+		using AVector = Mathematics::FloatAVector;
 		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-		using Transform = Rendering::Transform;
+		using Transform = Rendering::FloatTransform;
 
 	public:
 		explicit CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform);

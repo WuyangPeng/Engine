@@ -14,9 +14,9 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/Transform.h" 
 
-using Mathematics::Mathf;
+using Mathematics::FloatMath;
 using Rendering::Spatial;
-using Rendering::Transform;
+using Rendering::FloatTransform;
 
 Framework::ObjectMotionImpl ::ObjectMotionImpl(const SpatialSmartPointer& motionObject) noexcept
     : m_MotionObject{ motionObject }, m_DoRoll{ 0 }, m_DoYaw{ 0 }, m_DoPitch{ 0 }, m_BeginXTrack{ 0.0f }, m_BeginYTrack{ 0.0f },
@@ -150,7 +150,7 @@ bool Framework::ObjectMotionImpl
 	return m_TrackBallDown;
 }
 
-const Transform Framework::ObjectMotionImpl
+const FloatTransform Framework::ObjectMotionImpl
 	::GetMotionObjectLocalTransform() const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;

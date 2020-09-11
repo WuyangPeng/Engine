@@ -12,14 +12,14 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 
 Rendering::PickRayImpl
-	::PickRayImpl(bool result, const Mathematics::APointf& origin, const Mathematics::AVectorf& direction) noexcept
+	::PickRayImpl(bool result, const Mathematics::FloatAPoint& origin, const Mathematics::FloatAVector& direction) noexcept
 	:m_Result{ result }, m_Origin{ origin }, m_Direction{ direction }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::PickRayImpl ::PickRayImpl() noexcept
-    : m_Result{ false }, m_Origin{}, m_Direction{ Mathematics::Vectorf::g_Zero }
+    : m_Result{ false }, m_Origin{}, m_Direction{ Mathematics::Float::g_Zero }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -34,14 +34,14 @@ bool Rendering::PickRayImpl
 	return m_Result;
 }
 
-Mathematics::APointf Rendering::PickRayImpl ::GetOrigin() const noexcept
+Mathematics::FloatAPoint Rendering::PickRayImpl ::GetOrigin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Origin;
 }
 
-Mathematics::AVectorf Rendering::PickRayImpl ::GetDirection() const noexcept
+Mathematics::FloatAVector Rendering::PickRayImpl ::GetDirection() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

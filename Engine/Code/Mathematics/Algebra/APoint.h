@@ -12,12 +12,13 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "AlgebraFwd.h"
+#include "AVector.h"
 #include "HomogeneousPoint.h"
 #include "Mathematics/Base/BaseFwd.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
+#include <vector>
 
 namespace Mathematics
 {
@@ -32,6 +33,9 @@ namespace Mathematics
         using AVector = AVector<T>;
         using Vector3D = Vector3D<T>;
         using HomogeneousPoint = HomogeneousPoint<T>;
+        using ContainerType = std::vector<ClassType>;
+
+        static constexpr auto sm_APointSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
 
     public:
         // APoint表示仿射坐标 (x,y,z,1)。 默认 (0,0,0,1)
@@ -74,8 +78,7 @@ namespace Mathematics
         APoint& operator/=(T scalar);
         [[nodiscard]] const APoint operator-() const noexcept;
 
-    private:
-        static constexpr auto sm_APointSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
+        [[nodiscard]] T GetNorm() const noexcept;
 
     private:
         HomogeneousPoint m_HomogeneousPoint;
@@ -124,31 +127,28 @@ namespace Mathematics
     // 差X - P是一个向量，那么Dot(N,X - P)被很好地定义。如果平面被重写为Dot(N,X) = Dot(N,P)，这在仿射代数中是不支持的，
     // 无论无如，我们有时需要计算Dot(N,P)。在下文中，APoint的w分量被忽略，这意味着APoint被视为向量。
     template <typename T>
-    [[nodiscard]] T Dot(const APoint<T>& lhs, const AVector<T>& rhs);
+    [[nodiscard]] T Dot(const APoint<T>& lhs, const AVector<T>& rhs) noexcept;
 
     template <typename T>
-    [[nodiscard]] bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs, const T epsilon);
-
-    template <typename T>
-    [[nodiscard]] bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs);
+    [[nodiscard]] bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance()) noexcept;
 
     // 调试输出
     template <typename T>
     std::ostream& operator<<(std::ostream& outFile, const APoint<T>& point);
 
-    using APointf = APoint<float>;
-    using APointd = APoint<double>;
+    using FloatAPoint = APoint<float>;
+    using DoubleAPoint = APoint<double>;
 
-    namespace Pointf
+    namespace Float
     {
         // (0,0,0,1)
-        constexpr APointf g_Origin;
+        constexpr FloatAPoint g_Origin{};
     }
 
-    namespace Pointd
+    namespace Double
     {
         // (0,0,0,1)
-        constexpr APointd g_Origin;
+        constexpr DoubleAPoint g_Origin{};
     }
 }
 

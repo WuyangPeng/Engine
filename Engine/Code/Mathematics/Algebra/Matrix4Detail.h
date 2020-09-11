@@ -22,18 +22,18 @@
 
 template <typename Real>
 const Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>
-	::sm_Zero{ MatrixTypeFlags::Zero };
+	::sm_Zero{ MatrixInitType::Zero };
 
 template <typename Real>
 const Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>
-	::sm_Identity{ MatrixTypeFlags::Identity };
+	::sm_Identity{ MatrixInitType::Identity };
 
 template <typename Real>
 Mathematics::Matrix4<Real>
-	::Matrix4(MatrixTypeFlags flag)
+	::Matrix4(MatrixInitType flag)
 	:m_Entry{}
 {
-	if (flag == MatrixTypeFlags::Identity)
+	if (flag == MatrixInitType::Identity)
 	{
 		MakeIdentity();
 	}

@@ -14,7 +14,7 @@
 template <typename Real>
 Mathematics::Tridiagonalize<Real>
 	::Tridiagonalize(const Matrix3& matrix)
-	:m_InputMatrix{ matrix }, m_OutputMatrix{ MatrixTypeFlags::Identity }, m_Reflection{ false }, m_Diagonal{}, m_Subdiagonal{}
+	:m_InputMatrix{ matrix }, m_OutputMatrix{ MatrixInitType::Identity }, m_Reflection{ false }, m_Diagonal{}, m_Subdiagonal{}
 {
 	MATHEMATICS_ASSERTION_1(Math::FAbs(m_InputMatrix(0, 1) - m_InputMatrix(1, 0)) <= Math::GetZeroTolerance() &&
 							Math::FAbs(m_InputMatrix(0, 2) - m_InputMatrix(2, 0)) <= Math::GetZeroTolerance() &&

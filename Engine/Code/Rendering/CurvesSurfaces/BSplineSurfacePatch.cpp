@@ -60,37 +60,37 @@ Rendering::BSplineSurfacePatch ::~BSplineSurfacePatch()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-const Mathematics::APointf Rendering::BSplineSurfacePatch ::GetPosition(float u, float v) const
+const Mathematics::FloatAPoint Rendering::BSplineSurfacePatch ::GetPosition(float u, float v) const
 {
     Mathematics::Vector3Df p = mPatch->P(u, v);
     return APoint(p[0], p[1], p[2]);
 }
 
-const Mathematics::AVectorf Rendering::BSplineSurfacePatch ::GetDerivativesU(float u, float v) const
+const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesU(float u, float v) const
 {
     Mathematics::Vector3Df pu = mPatch->PU(u, v);
     return AVector(pu[0], pu[1], pu[2]);
 }
 
-const Mathematics::AVectorf Rendering::BSplineSurfacePatch ::GetDerivativesV(float u, float v) const
+const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesV(float u, float v) const
 {
     Mathematics::Vector3Df pv = mPatch->PV(u, v);
     return AVector(pv[0], pv[1], pv[2]);
 }
 
-const Mathematics::AVectorf Rendering::BSplineSurfacePatch ::GetDerivativesUU(float u, float v) const
+const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesUU(float u, float v) const
 {
     Mathematics::Vector3Df puu = mPatch->PUU(u, v);
     return AVector(puu[0], puu[1], puu[2]);
 }
 
-const Mathematics::AVectorf Rendering::BSplineSurfacePatch ::GetDerivativesUV(float u, float v) const
+const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesUV(float u, float v) const
 {
     Mathematics::Vector3Df puv = mPatch->PUV(u, v);
     return AVector(puv[0], puv[1], puv[2]);
 }
 
-const Mathematics::AVectorf Rendering::BSplineSurfacePatch ::GetDerivativesVV(float u, float v) const
+const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesVV(float u, float v) const
 {
     Mathematics::Vector3Df pvv = mPatch->PVV(u, v);
     return AVector(pvv[0], pvv[1], pvv[2]);

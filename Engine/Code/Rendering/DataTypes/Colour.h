@@ -182,6 +182,11 @@ namespace Rendering
     std::ostream& operator<<(std::ostream& os, const Colour<T>& colour);
 
     RENDERING_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& os, const Colour<uint8_t>& colour);
+
+    using ByteColour = Colour<uint8_t>;
+    using IntColour = Colour<int>;
+    using FloatColour = Colour<float>;
+    using DoubleColour = Colour<double>;
 }
 
 #endif  // RENDERING_DATA_TYPES_COLOUR_H

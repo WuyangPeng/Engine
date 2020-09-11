@@ -33,7 +33,7 @@ double Mathematics::EquationThrice
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Constant + m_Once * value +
-		   m_Secondary * Mathd::Square(value) +
+		   m_Secondary * DoubleMath::Square(value) +
 		   m_Thrice * value * value * value;
 }
 
@@ -51,7 +51,7 @@ double Mathematics::EquationThrice
 	::SubstitutionTangent(double solution) const noexcept
 {
 	return m_Once + solution * m_Secondary * 2.0 +
-		   Mathd::Square(solution) * m_Thrice * 3.0;
+		   DoubleMath::Square(solution) * m_Thrice * 3.0;
 }
 
 const Mathematics::EquationThrice::Imaginary Mathematics::EquationThrice
@@ -83,7 +83,7 @@ bool Mathematics::EquationThrice
 	::Predigest()
 {
 	// 常数项为零时，化解方程。
-	if (Mathd::FAbs(m_Constant) <= GetEpsilon())
+	if (DoubleMath::FAbs(m_Constant) <= GetEpsilon())
 	{
 		SetRealResult(0.0);
 		EquationSecondary equation{ m_Once,m_Secondary,m_Thrice };
@@ -93,7 +93,7 @@ bool Mathematics::EquationThrice
 	}
 
 	// 三次项为零时，化解方程。
-	if (Mathd::FAbs(m_Thrice) <= GetEpsilon())
+	if (DoubleMath::FAbs(m_Thrice) <= GetEpsilon())
 	{
 		EquationSecondary equation{ m_Constant,m_Once,m_Secondary };
 		AddResult(equation);
@@ -142,7 +142,7 @@ void Mathematics::EquationThrice
 	// 其中
 	// ρ   = -0.5 + i(sqrt(3)/2)
 	// ρ^2 = -0.5 - i(sqrt(3)/2)
-	if (Mathd::FAbs(discriminant) <= GetEpsilon())
+	if (DoubleMath::FAbs(discriminant) <= GetEpsilon())
 		CalculateResultDiscriminantIsZero(qHalf);
 	else if (0.0 < discriminant)
 		CalculateResultDiscriminantIsPlus(qHalf, discriminant);
@@ -155,12 +155,12 @@ void Mathematics::EquationThrice
 {
 	const auto two = m_Secondary / m_Thrice;
 
-	const auto discriminantSqrt = Mathd::Sqrt(discriminant);
+	const auto discriminantSqrt = DoubleMath::Sqrt(discriminant);
 	const auto rCube = -qHalf + discriminantSqrt;
 	const auto sCube = -qHalf - discriminantSqrt;
 
-	const auto r = Mathd::CubeRoot(rCube);
-	const auto s = Mathd::CubeRoot(sCube);
+	const auto r = DoubleMath::CubeRoot(rCube);
+	const auto s = DoubleMath::CubeRoot(sCube);
 
 	// 求实数根
 	const auto realResult = r + s - two / 3.0;
@@ -168,8 +168,8 @@ void Mathematics::EquationThrice
 	SetRealResult(realResult);
 
 	// 求虚数根
-	const Imaginary density{ -0.5, Mathd::Sqrt(3.0) / 2.0 };
-	const Imaginary densitySquare{ -0.5, -Mathd::Sqrt(3.0) / 2.0 };
+	const Imaginary density{ -0.5, DoubleMath::Sqrt(3.0) / 2.0 };
+	const Imaginary densitySquare{ -0.5, -DoubleMath::Sqrt(3.0) / 2.0 };
 
 	auto minImaginaryResult = density * r + densitySquare * s - two / 3.0;
 	auto maxImaginaryResult = density * s + densitySquare * r - two / 3.0;
@@ -188,7 +188,7 @@ void Mathematics::EquationThrice
 {
 	const auto two = m_Secondary / m_Thrice;
 
-	const auto r = Mathd::CubeRoot(qHalf);
+	const auto r = DoubleMath::CubeRoot(qHalf);
 
 	auto minRealResult = 2 * r - two / 3.0;
 	auto maxRealResult = -r - two / 3.0;
@@ -209,14 +209,14 @@ void Mathematics::EquationThrice
 
 	// 下面将x = 2mcosθ代入方程
 	// 并根据4cos^3(θ) - 3cosθ = cos(3θ)求出方程的解。
-	const auto middleAngle = Mathd::ACos(-qHalf / Mathd::Sqrt(-pThird * pThird * pThird)) / 3.0;
-	const auto leastAngle = middleAngle - 2.0 * Mathd::GetPI() / 3.0;
-	const auto mostAngle = middleAngle + 2.0 * Mathd::GetPI() / 3.0;
-	const auto prefix = 2.0 * Mathd::Sqrt(-pThird);
+	const auto middleAngle = DoubleMath::ACos(-qHalf / DoubleMath::Sqrt(-pThird * pThird * pThird)) / 3.0;
+	const auto leastAngle = middleAngle - 2.0 * DoubleMath::GetPI() / 3.0;
+	const auto mostAngle = middleAngle + 2.0 * DoubleMath::GetPI() / 3.0;
+	const auto prefix = 2.0 * DoubleMath::Sqrt(-pThird);
 
-	const auto leastAngleRealResult = prefix * Mathd::Cos(leastAngle) - two / 3.0;
-	const auto middleAngleRealResult = prefix * Mathd::Cos(middleAngle) - two / 3.0;
-	const auto mostAngleRealResult = prefix * Mathd::Cos(mostAngle) - two / 3.0;
+	const auto leastAngleRealResult = prefix * DoubleMath::Cos(leastAngle) - two / 3.0;
+	const auto middleAngleRealResult = prefix * DoubleMath::Cos(middleAngle) - two / 3.0;
+	const auto mostAngleRealResult = prefix * DoubleMath::Cos(mostAngle) - two / 3.0;
 
 	SetRealResult(leastAngleRealResult);
 	SetRealResult(middleAngleRealResult);

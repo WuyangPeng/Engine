@@ -24,7 +24,7 @@ namespace Mathematics
 		using EquationImplSharedPtr = std::shared_ptr<EquationImpl>;
 
 	public:
-		static EquationImplSharedPtr Create(double constant, double once, double secondary = 0.0, double thrice = 0.0, double quartic = 0.0, double epsilon = Mathd::GetZeroTolerance());
+		static EquationImplSharedPtr Create(double constant, double once, double secondary = 0.0, double thrice = 0.0, double quartic = 0.0, double epsilon = DoubleMath::GetZeroTolerance());
 	};
 }
 

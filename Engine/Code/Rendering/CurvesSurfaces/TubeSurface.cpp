@@ -95,9 +95,9 @@ void Rendering::TubeSurface
     const float invSliceSamples = 1.0f/(float)mNumSliceSamples;
     for (int i = 0; i < mNumSliceSamples; ++i)
     {
-       const float angle = Mathematics:: Mathf::GetTwoPI()*invSliceSamples*i;
-        mCos[i] = Mathematics::Mathf::Cos(angle);
-        mSin[i] = Mathematics::Mathf::Sin(angle);
+       const float angle = Mathematics:: FloatMath::GetTwoPI()*invSliceSamples*i;
+        mCos[i] = Mathematics::FloatMath::Cos(angle);
+        mSin[i] = Mathematics::FloatMath::Sin(angle);
     }
     mSin[mNumSliceSamples] = mSin[0];
     mCos[mNumSliceSamples] = mCos[0];

@@ -196,7 +196,7 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 
 	// 主曲率的特征多项式的根。
 	const float discriminant =
-		Mathematics::Mathf::Sqrt(Mathematics::Mathf::FAbs(once * once - 4.0f * constant * twice));
+		Mathematics::FloatMath::Sqrt(Mathematics::FloatMath::FAbs(once * once - 4.0f * constant * twice));
 	const float principalCurvature0 = -0.5f * (once + discriminant);
 	const float principalCurvature1 = 0.5f * (-once + discriminant);
 		
@@ -204,9 +204,9 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 	// w1 = (b12-k1*g12,-(b11-k1*g11)) 或 (b22-k1*g22,-(b12-k1*g12))
 	float a0 = curvatureTensor(0,1) - principalCurvature0 * metricTensor(0,1);
 	float a1 = principalCurvature0 * metricTensor(0,0) - curvatureTensor(0,0);
-	float length = Mathematics::Mathf::Sqrt(a0 * a0 + a1 * a1);
-        AVector principalDirection0{ Mathematics ::Vectorf::g_Zero };
-	if (Mathematics::Mathf::GetZeroTolerance() <= length)
+	float length = Mathematics::FloatMath::Sqrt(a0 * a0 + a1 * a1);
+        AVector principalDirection0{ Mathematics ::Float::g_Zero };
+	if (Mathematics::FloatMath::GetZeroTolerance() <= length)
 	{
 		principalDirection0 = a0 * derivativesU + a1 * derivativesV;
 	}
@@ -214,8 +214,8 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 	{
 		a0 = curvatureTensor(1,1) - principalCurvature0 * metricTensor(1,1);
 		a1 = principalCurvature0*metricTensor(0,1) - curvatureTensor(0,1);
-		length = Mathematics::Mathf::Sqrt(a0 * a0 + a1 * a1);
-		if (Mathematics::Mathf::GetZeroTolerance() <= length)
+		length = Mathematics::FloatMath::Sqrt(a0 * a0 + a1 * a1);
+		if (Mathematics::FloatMath::GetZeroTolerance() <= length)
 		{
 			principalDirection0 = a0 * derivativesU + a1 * derivativesV;
 		}

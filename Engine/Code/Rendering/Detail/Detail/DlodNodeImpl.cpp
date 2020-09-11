@@ -177,7 +177,7 @@ void Rendering::DlodNodeImpl
 }
 
 void Rendering::DlodNodeImpl
-	::SetWorldCenter( const Transform& transform )
+	::SetWorldCenter( const FloatTransform& transform ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 

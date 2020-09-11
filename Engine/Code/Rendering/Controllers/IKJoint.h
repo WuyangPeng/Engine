@@ -21,8 +21,8 @@ namespace Rendering
 	public:
 		COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKJoint);
 		using ParentType = Object;
-		using APoint = Mathematics::APointf;
-		using AVector = Mathematics::AVectorf;
+		using APoint = Mathematics::FloatAPoint;
+		using AVector = Mathematics::FloatAVector;
 		using IKGoalSmartPointerVector = std::vector<IKGoalSmartPointer>;
 		using MatrixRotationAxis = Mathematics::MatrixRotationAxis;
 

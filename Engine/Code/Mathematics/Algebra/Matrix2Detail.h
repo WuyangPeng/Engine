@@ -22,18 +22,18 @@
  
 template <typename Real>
 const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>
-	::sm_Zero{ MatrixTypeFlags::Zero };
+	::sm_Zero{ MatrixInitType::Zero };
 
 template <typename Real>
 const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>
-	::sm_Identity{ MatrixTypeFlags::Identity };
+	::sm_Identity{ MatrixInitType::Identity };
 
 template <typename Real>
 Mathematics::Matrix2<Real>
-	::Matrix2(MatrixTypeFlags flag) noexcept
+	::Matrix2(MatrixInitType flag) noexcept
 	:m_Entry{}
 {
-	if (flag == MatrixTypeFlags::Identity)
+	if (flag == MatrixInitType::Identity)
 	{
 		MakeIdentity();
 	}
@@ -470,7 +470,7 @@ typename const Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics
 	if (Math::FAbs(Math::FAbs(m_Entry(0, 1)) + sum - sum) < epsilon)
 	{
 		// 矩阵 M 是对角矩阵（数字四舍五入）。
-		Matrix2<Real> rotation{ MatrixTypeFlags::Identity };
+		Matrix2<Real> rotation{ MatrixInitType::Identity };
 		Matrix2<Real> diagonal{ m_Entry(0,0),m_Entry(1,1) };
 
 		return Matrix2EigenDecomposition{ rotation, diagonal, epsilon };

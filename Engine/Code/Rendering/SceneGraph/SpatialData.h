@@ -30,22 +30,23 @@ namespace Rendering
 		using BufferTarget = CoreTools::BufferTarget;
         using APoint = Mathematics::APoint<float>;
 		using Matrix = Mathematics::Matrix<float>;
+        using Bound =  Bound<float>;
         
     public:
         SpatialData ();
         
         CLASS_INVARIANT_DECLARE;
         
-        void DirectSetWorldTransform(const Transform& transform);
+        void DirectSetWorldTransform(const FloatTransform& transform);
         void DirectSetWorldBound(const Bound& bound);
         
-        void SetLocalTransform(const Transform& transform);
+        void SetLocalTransform(const FloatTransform& transform);
         void SetCullingMode(CullingMode culling);
 
 		void SetLocalTransformTranslate(const APoint& translate);
 		void SetLocalTransformRotate(const Matrix& rotate);
         
-        void SetLocalTransformToWorldTransform(const Transform& worldTransform);
+        void SetLocalTransformToWorldTransform(const FloatTransform& worldTransform);
         void SetLocalTransformToWorldTransform();
         
         void InitWorldBound();
@@ -54,8 +55,8 @@ namespace Rendering
         bool GetWorldTransformIsCurrent() const;
         bool GetWorldBoundIsCurrent() const;
         
-        const Transform GetLocalTransform() const;
-        const Transform GetWorldTransform() const;
+        const FloatTransform GetLocalTransform() const;
+        const FloatTransform GetWorldTransform() const;
         const Bound GetWorldBound() const;
         CullingMode GetCullingMode() const;
         
@@ -63,13 +64,13 @@ namespace Rendering
 		void Save (BufferTarget& target) const;
 		int GetStreamingSize () const;
 
-		void SetWorldTransformOnUpdate(const Transform& transform);
+		void SetWorldTransformOnUpdate(const FloatTransform& transform);
 
     private:
         // 局部和世界变换。在某些情况下,您可能需要直接设置世界变换绕过Spatial::Update()机制。
         // 如果直接设置m_WorldTransform,m_WorldTransformIsCurrent应该设置为“true”。
-        Transform m_LocalTransform;
-        Transform m_WorldTransform;
+        FloatTransform m_LocalTransform;
+        FloatTransform m_WorldTransform;
         bool m_WorldTransformIsCurrent;
 
         // 世界绑定访问。在某些情况下,您可能想要直接设置世界绑定,绕过Spatial::Update()机制。

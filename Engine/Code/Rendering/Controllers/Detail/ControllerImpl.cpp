@@ -16,7 +16,7 @@
 
 Rendering::ControllerImpl
     ::ControllerImpl () noexcept
-	:m_Repeat{ ControllerRepeatType::Clamp }, m_MinTime{ 0.0 }, m_MaxTime{ 0.0 }, m_Phase{ 0.0 }, m_Frequency{ 1.0 }, m_Active{ true }, m_ApplicationTime{ -Mathematics::Mathd::sm_MaxReal }
+	:m_Repeat{ ControllerRepeatType::Clamp }, m_MinTime{ 0.0 }, m_MaxTime{ 0.0 }, m_Phase{ 0.0 }, m_Frequency{ 1.0 }, m_Active{ true }, m_ApplicationTime{ -Mathematics::DoubleMath::sm_MaxReal }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -203,7 +203,7 @@ void Rendering::ControllerImpl
     source.Read(m_Frequency);
     m_Active = source.ReadBool();
     
-    m_ApplicationTime = -Mathematics::Mathd::sm_MaxReal;
+    m_ApplicationTime = -Mathematics::DoubleMath::sm_MaxReal;
 }
 
 void Rendering::ControllerImpl

@@ -18,8 +18,8 @@ namespace Rendering
 	{
 	public:
 		using ClassType = ScreenTarget;
-		using APoint = Mathematics::APointf;
-		using AVector = Mathematics::AVectorf;
+		using APoint = Mathematics::FloatAPoint;
+		using AVector = Mathematics::FloatAVector;
 		using Vector2D = Mathematics::Vector2Df;
 
 	public:

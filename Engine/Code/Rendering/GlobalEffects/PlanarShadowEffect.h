@@ -51,7 +51,7 @@ namespace Rendering
         const Mathematics::Float4& GetShadowColor(int i) const noexcept;
 
     protected:
-        bool GetProjectionMatrix(int i, Mathematics::Matrixf& projection);
+        bool GetProjectionMatrix(int i, Mathematics::FloatMatrix& projection);
 
         int mNumPlanes;
         TrianglesMeshSmartPointer* mPlanes;

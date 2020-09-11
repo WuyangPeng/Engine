@@ -38,9 +38,9 @@ double Mathematics::EquationQuartic
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
 	return m_Constant + m_Once * value +
-		   m_Secondary * Mathd::Square(value) +
+		   m_Secondary * DoubleMath::Square(value) +
 		   m_Thrice * value * value * value +
-		   m_Quartic * Mathd::Square(value) * Mathd::Square(value);
+		   m_Quartic * DoubleMath::Square(value) * DoubleMath::Square(value);
 }
 
 const Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic
@@ -58,7 +58,7 @@ double Mathematics::EquationQuartic
 	::SubstitutionTangent(double solution) const noexcept
 {
 	return m_Once + solution * m_Secondary * 2.0 +
-		   Mathd::Square(solution) * m_Thrice * 3.0 +
+		   DoubleMath::Square(solution) * m_Thrice * 3.0 +
 		   solution * solution * solution * m_Quartic * 4.0;
 }
 
@@ -90,7 +90,7 @@ bool Mathematics::EquationQuartic
 	::Predigest()
 {
 	// 常数项为零时，化解方程。
-	if (Mathd::FAbs(m_Constant) <= GetEpsilon())
+	if (DoubleMath::FAbs(m_Constant) <= GetEpsilon())
 	{
 		SetRealResult(0.0);
 		EquationThrice equation{ m_Once,m_Secondary,m_Thrice,m_Quartic };
@@ -100,7 +100,7 @@ bool Mathematics::EquationQuartic
 	}
 
 	// 四次项为零时，化解方程。
-	if (Mathd::FAbs(m_Quartic) <= GetEpsilon())
+	if (DoubleMath::FAbs(m_Quartic) <= GetEpsilon())
 	{
 		EquationThrice equation{ m_Constant,m_Once,m_Secondary,m_Thrice };
 		AddResult(equation);
@@ -173,8 +173,8 @@ void Mathematics::EquationQuartic
 
 	if (0.0 <= x1 && 0.0 <= x0)
 	{
-		const auto x1sqrt = Mathd::Sqrt(x1);
-		const auto x0sqrt = Mathd::Sqrt(x0);
+		const auto x1sqrt = DoubleMath::Sqrt(x1);
+		const auto x0sqrt = DoubleMath::Sqrt(x0);
 
 		if (0 <= q)
 		{

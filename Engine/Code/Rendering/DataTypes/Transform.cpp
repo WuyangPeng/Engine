@@ -1,182 +1,86 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/18 15:43)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.1 (2020/09/06 10:46)
 
 #include "Rendering/RenderingExport.h"
 
-#include "Transform.h"
-#include "Detail/TransformImpl.h"
-#include "Mathematics/Algebra/APointDetail.h"
-#include "Mathematics/Algebra/MatrixDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#ifdef RENDERING_EXPORT_TEMPLATE
 
-using std::make_shared;
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26455)
-const Rendering::Transform Rendering::Transform
-	::sm_Identity;
+    #ifndef RENDERING_INCLUDED_TRANSFORM_ACHIEVE
+        #define RENDERING_INCLUDED_TRANSFORM_ACHIEVE
+    #endif  // RENDERING_INCLUDED_TRANSFORM_ACHIEVE
 
-Rendering::Transform
-    ::Transform()
-	:m_Impl{ make_shared<ImplType>() }
+#endif  // RENDERING_EXPORT_TEMPLATE
+
+#include "TransformDetail.h"
+
+#ifdef RENDERING_EXPORT_TEMPLATE
+
+namespace Rendering
 {
-    RENDERING_SELF_CLASS_IS_VALID_1;
+    template RENDERING_TEMPLATE_DEFAULT_DECLARE class Transform<float>;
+    template RENDERING_TEMPLATE_DEFAULT_DECLARE class Transform<double>;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,Transform)
+#endif  // RENDERING_EXPORT_TEMPLATE
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Rendering,Transform)
+#ifdef RENDERING_TEMPLATE_TEST
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, MakeIdentity,void);
+using std::cout;
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, MakeUnitScale,void);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, IsIdentity,bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, IsRotationOrScaleMatrix,bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, IsUniformScale,bool);
-
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Transform, SetRotate,Matrix,void);
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Transform, SetMatrix,Matrix,void);
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Transform,  SetTranslate,APoint,void);
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Transform, SetScale,APoint,void);
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Transform,  SetUniformScale,float,void);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetRotate,  const Rendering::Transform::Matrix);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, GetMatrix,  const Rendering::Transform::Matrix);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform, GetTranslate, const Rendering::Transform::APoint);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetScale, const Rendering::Transform::APoint);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetUniformScale,float);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Transform, GetNorm,float);
-
-Rendering::Transform::APoint Rendering::Transform
-    ::operator* (const APoint& point) const
+namespace Rendering
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return (*m_Impl) * point;
-}
-
-Rendering::Transform::AVector Rendering::Transform
-    ::operator* (const AVector& vector) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return (*m_Impl) * vector;
-}
-
-Rendering::Transform& Rendering::Transform
-    ::operator*= (const Transform& transform)
-{
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
-    
-    *m_Impl *= *transform.m_Impl;
-    
-    return *this;
-}
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Transform,GetHomogeneousMatrix,const Rendering::Transform::Matrix);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Transform,GetInverseMatrix,float, const Rendering::Transform::Matrix);
-
-const Rendering::Transform Rendering::Transform
-    ::GetInverseTransform (float epsilon) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    Transform transform;
-    
-    *transform.m_Impl = m_Impl->GetInverseTransform(epsilon);
-
-	return transform;
-}
-
-int Rendering::Transform
-    ::GetStreamingSize () const
-{
-    return m_Impl->GetStreamingSize ();
-}
-
-const Rendering::Transform Rendering
-    ::operator* (const Transform& lhs, const Transform& rhs)
-{
-	Transform result{ lhs };
-    
-    result *= rhs;
-    
-    return result;
-}
-
-bool Rendering
-    ::Approximate(const Transform& lhs, const Transform& rhs, const float epsilon)
-{
-	const auto lhsIsIdentity = lhs.IsIdentity ();  
-	const auto lhsIsRotationOrScaleMatrix = lhs.IsRotationOrScaleMatrix ();
-	const auto lhsIsUniformScale = lhs.IsUniformScale ();
-
-	const auto rhsIsIdentity = rhs.IsIdentity ();
-	const auto rhsIsRotationOrScaleMatrix = rhs.IsRotationOrScaleMatrix ();
-	const auto rhsIsUniformScale = rhs.IsUniformScale ();
-
-	if(lhsIsIdentity != rhsIsIdentity || lhsIsRotationOrScaleMatrix != rhsIsRotationOrScaleMatrix || lhsIsUniformScale != rhsIsUniformScale)
+    void TransformTemplateTest()
     {
-        return false;
-    }
-    else if(lhsIsIdentity && rhsIsIdentity)
-    {
-        return true;
-    }
-    else if(lhsIsRotationOrScaleMatrix && rhsIsRotationOrScaleMatrix)
-    {
-	    if(lhsIsUniformScale && rhsIsUniformScale)
-	    {
-			if (Approximate(lhs.GetRotate(), rhs.GetRotate(), epsilon) && Mathematics::Mathf::Approximate(lhs.GetUniformScale(), rhs.GetUniformScale(), epsilon) &&
-				Approximate(lhs.GetTranslate(), rhs.GetTranslate(), epsilon))
-			{
-				return true;
-			}               
-			else
-			{
-				return false;
-			}
-                
-	    }
-	    else
-	    {
-	       if(Approximate(lhs.GetRotate (),rhs.GetRotate (),epsilon) && Approximate(lhs.GetScale (),rhs.GetScale (),epsilon) && Approximate(lhs.GetTranslate (),rhs.GetTranslate (),epsilon))
-                return true;
-           else
-                return false;  
-	    }
-    }
-	else
-	{
-        if(Approximate(lhs.GetMatrix (),rhs.GetMatrix (),epsilon) && Approximate(lhs.GetTranslate (),rhs.GetTranslate (),epsilon) )
-            return true;
-        else
-            return false;   
-	} 
-	}
+        FloatTransform transform1{};
+        FloatTransform transform2{ transform1 };
+        transform1.MakeIdentity();
+        transform1.MakeUnitScale();
 
-std::ostream& Rendering
-	::operator<<(std::ostream& outFile, const Transform& transform) 
-{
-	if(transform.IsRotationOrScaleMatrix())
-	{
-		outFile << "Rotate:" << transform.GetRotate() << "　";
-		outFile << "Translate:" << transform.GetTranslate() << "　";
-		outFile << "Scale:" << transform.GetScale() << "　";
-	}
-	else
-	{
-		outFile << "Rotate:" << transform.GetMatrix() << "　";
-		outFile << "Translate:" << transform.GetTranslate() << "　";	
-	}		
+        [[maybe_unused]] const auto isIdentity = transform1.IsIdentity();
+        [[maybe_unused]] const auto isRotationOrScaleMatrix = transform1.IsRotationOrScaleMatrix();
+        [[maybe_unused]] const auto isUniformScale = transform1.IsUniformScale();
 
-	return outFile;
+        const auto rotate = transform1.GetRotate();
+        const auto matrix = transform1.GetMatrix();
+        const auto translate = transform1.GetTranslate();
+        const auto scale = transform1.GetScale();
+        const auto uniformScale = transform1.GetUniformScale();
+
+        transform1.SetRotate(rotate);
+        transform1.SetMatrix(matrix);
+        transform1.SetTranslate(translate);
+        transform1.SetScale(scale);
+        transform1.SetUniformScale(uniformScale);
+
+        [[maybe_unused]] const auto norm = transform1.GetNorm();
+        [[maybe_unused]] const auto aPoint = transform1 * Mathematics::Float::g_Origin;
+        [[maybe_unused]] const auto aVector = transform1 * Mathematics::Float::g_UnitX;
+        transform1 *= transform2;
+        [[maybe_unused]] const auto homogeneousMatrix = transform1.GetHomogeneousMatrix();
+        [[maybe_unused]] const auto inverseMatrix = transform1.GetInverseMatrix();
+        [[maybe_unused]] const auto inverseTransform = transform1.GetInverseTransform();
+        [[maybe_unused]] const auto streamingSize = transform1.GetStreamingSize();
+
+        [[maybe_unused]] const auto transform3 = transform1 * transform2;
+        [[maybe_unused]] const auto approximate = Approximate(transform1, transform2);
+
+        cout << transform1;
+    }
 }
-#include STSTEM_WARNING_POP
+
+#else  // !RENDERING_TEMPLATE_TEST
+
+namespace Rendering
+{
+    void TransformTemplateTest() noexcept
+    {
+    }
+}
+
+#endif  // RENDERING_TEMPLATE_TEST

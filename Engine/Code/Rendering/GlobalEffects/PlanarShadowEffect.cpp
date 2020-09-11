@@ -5,7 +5,7 @@
 // ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/25 15:33)
 
 #include "Rendering/RenderingExport.h"
-
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "PlanarShadowEffect.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
@@ -132,7 +132,7 @@ void Rendering::PlanarShadowEffect
         mStencilState->SetOnZPass ( StencilStateFlags::OperationType::Zero);  // visible set to 0
 
         // Get the projection matrix relative to the projector (light).
-        Mathematics::Matrixf projection;
+        Mathematics::FloatMatrix projection;
         if (!GetProjectionMatrix(i, projection))
         {
             continue;
@@ -166,12 +166,12 @@ void Rendering::PlanarShadowEffect
 }
 
 bool Rendering::PlanarShadowEffect
-	::GetProjectionMatrix (int i, Mathematics::Matrixf& projection)
+	::GetProjectionMatrix (int i, Mathematics::FloatMatrix& projection)
 {
     // Compute the equation for the shadow plane in world coordinates.
     //Mathematics::APointf vertex[3];
 	TrianglePosition vertex =  mPlanes[i]->GetWorldTriangle(0);
-    Mathematics::Planef worldPlane(vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition());
+    Mathematics::FloatPlane worldPlane(vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition());
 
     // This is a conservative test to see whether a shadow should be cast.
     // This can cause incorrect results if the caster is large and intersects
@@ -186,7 +186,7 @@ bool Rendering::PlanarShadowEffect
 
     // Compute the projection matrix for the light source.
     LightSmartPointer projector = mProjectors[i];
-    Mathematics::AVectorf normal = worldPlane.GetNormal();
+    Mathematics::FloatAVector normal = worldPlane.GetNormal();
     if (projector->GetType() == LightType::Directional)
     {
         float NdD = Dot(normal,projector->GetDirectionVector());

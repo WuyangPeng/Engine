@@ -19,10 +19,10 @@ namespace Framework
 	{
 	public:
 		using ClassType = CameraModelMiddleLayerImpl;
-		using APoint = Mathematics::APointf;
-		using AVector = Mathematics::AVectorf;
+		using APoint = Mathematics::FloatAPoint;
+		using AVector = Mathematics::FloatAVector;
 		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-		using Transform = Rendering::Transform;
+		using Transform = Rendering::FloatTransform;
 		using CameraSmartPointer = Rendering::CameraSmartPointer;
 		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
 

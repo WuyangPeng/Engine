@@ -247,13 +247,13 @@ bool Rendering::NodeImpl
 	return result;
 }
 
-const Rendering::Bound Rendering::NodeImpl
+const Rendering::FloatBound Rendering::NodeImpl
     ::GetWorldBound ()
 {
     RENDERING_CLASS_IS_VALID_9;
  
     // 从一个无效的边界开始。
-	Bound bound{ Mathematics::Pointf::g_Origin,0.0f };
+	FloatBound bound{ Mathematics::Float::g_Origin,0.0f };
     
     for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
     {

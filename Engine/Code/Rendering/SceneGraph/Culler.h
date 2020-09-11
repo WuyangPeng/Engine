@@ -67,7 +67,7 @@ namespace Rendering
         void PopPlane();
 
         // 比较对象的世界边界对立的裁剪平面。只有Spatial调用这个函数。
-        bool IsVisible(const Bound& bound);
+        bool IsVisible(const FloatBound& bound);
 
         // 支持在 Portal::GetVisibleSet.
         bool IsVisible(int numVertices, const APoint* vertices, bool ignoreNearPlane) const;

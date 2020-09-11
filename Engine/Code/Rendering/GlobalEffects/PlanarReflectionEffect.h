@@ -46,7 +46,7 @@ namespace Rendering
         float GetReflectance(int i) const noexcept;
 
     protected:
-        void GetReflectionMatrixAndModelPlane(int i, Mathematics::Matrixf& reflection, Mathematics::Planef& modelPlane);
+        void GetReflectionMatrixAndModelPlane(int i, Mathematics::FloatMatrix& reflection, Mathematics::FloatPlane& modelPlane);
 
         int mNumPlanes;
         TrianglesMeshSmartPointer* mPlanes;

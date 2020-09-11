@@ -12,9 +12,9 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Rendering/DataTypes/Transform.h"
 
-using Mathematics::Mathf;
+using Mathematics::FloatMath;
 using Rendering::Spatial;
-using Rendering::Transform;
+using Rendering::FloatTransform;
 
 Framework::ObjectMotionRotateTrackBall
 	::ObjectMotionRotateTrackBall(const SpatialSmartPointer& motionObject, const ConstCameraSmartPointer& camera, float m_BeginXTrack, float m_BeginYTrack,
@@ -38,7 +38,7 @@ void Framework::ObjectMotionRotateTrackBall
 	auto endY = m_EndYTrack;
 
 	// 获得球面上的第一个向量。
-	auto length = Mathf::Sqrt(beginX * beginX + beginY * beginY);
+	auto length = FloatMath::Sqrt(beginX * beginX + beginY * beginY);
 	auto beginZ = 0.0f;
 	auto endZ = 0.0f;
 
@@ -53,7 +53,7 @@ void Framework::ObjectMotionRotateTrackBall
 	{
 		// 计算点(x0,y0,z0)在负单位半球。
 		beginZ = 1.0f - beginX * beginX - beginY * beginY;
-		beginZ = (beginZ <= 0.0f ? 0.0f : Mathf::Sqrt(beginZ));
+		beginZ = (beginZ <= 0.0f ? 0.0f : FloatMath::Sqrt(beginZ));
 	}
 	beginZ *= -1.0f;
 
@@ -61,7 +61,7 @@ void Framework::ObjectMotionRotateTrackBall
         const AVector vec0{ beginZ, beginY, beginX };
 
 	// 获得球面上的第二个向量。
-	length = Mathf::Sqrt(endX * endX + endY * endY);
+	length = FloatMath::Sqrt(endX * endX + endY * endY);
 	if (1.0f < length)
 	{
 		// 在单位圆外,投影到它。  
@@ -73,7 +73,7 @@ void Framework::ObjectMotionRotateTrackBall
 	{
 		// 计算点(x1,y1,z1) 在负单位半球。
 		endZ = 1.0f - endX * endX - endY * endY;
-		endZ = (endZ <= 0.0f ? 0.0f : Mathf::Sqrt(endZ));
+		endZ = (endZ <= 0.0f ? 0.0f : FloatMath::Sqrt(endZ));
 	}
 	endZ *= -1.0f;
 
@@ -87,23 +87,23 @@ void Framework::ObjectMotionRotateTrackBall
 	if (!axis.IsZero())
 	{
 		axis.Normalize();
-		angle = Mathf::ACos(dot);
+		angle = FloatMath::ACos(dot);
 	}
 	else  // 向量是平行的。
 	{
 		if (dot < 0.0f)
 		{
 			// π弧度旋转。
-			auto invLength = Mathf::InvSqrt(beginX * beginX + beginY * beginY);
+			auto invLength = FloatMath::InvSqrt(beginX * beginX + beginY * beginY);
 			axis[0] = beginY * invLength;
 			axis[1] = -beginX * invLength;
 			axis[2] = 0.0f;
-			angle = Mathf::GetPI();
+			angle = FloatMath::GetPI();
 		}
 		else
 		{
 			// 0弧度旋转。 
-			axis = Mathematics::Vectorf::g_UnitX;
+			axis = Mathematics::Float::g_UnitX;
 			angle = 0.0f;
 		}
 	}
@@ -133,7 +133,7 @@ void Framework::ObjectMotionRotateTrackBall
 	m_LocalRotate.Orthonormalize();
 }
 
-const Transform Framework::ObjectMotionRotateTrackBall
+const FloatTransform Framework::ObjectMotionRotateTrackBall
 	::GetTransform() const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;

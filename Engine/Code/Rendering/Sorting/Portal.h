@@ -43,7 +43,7 @@ namespace Rendering
 		// deleting the input array.  The model vertices must be counterclockwise
 		// oriented in the model plane when viewed from the side of the plane to
 		// which the plane normal points.
-		Portal(int numVertices, Mathematics::APointf* modelVertices, const Mathematics::Planef& modelPlane, ConvexRegion* adjacentRegion, bool open);
+		Portal(int numVertices, Mathematics::FloatAPoint* modelVertices, const Mathematics::FloatPlane& modelPlane, ConvexRegion* adjacentRegion, bool open);
 
 		  ~Portal();
 		  Portal(const Portal&) = default;
@@ -59,7 +59,7 @@ namespace Rendering
 	protected:
 		// Support for the graph update.
 		friend class ConvexRegion;
-		void UpdateWorldData(const Transform& worldTransform);
+            void UpdateWorldData(const FloatTransform& worldTransform) noexcept;
 
 		// Support for culling.
 		bool ReducedFrustum(const Culler& culler, float reducedFrustum[6]);
@@ -67,10 +67,10 @@ namespace Rendering
 
 		// Portal vertices and their planes.
 		int mNumVertices;
-		Mathematics::APointf* mModelVertices;
-		Mathematics:: APointf* mWorldVertices;
-		Mathematics::Planef mModelPlane;
-		Mathematics::Planef mWorldPlane;
+		Mathematics::FloatAPoint* mModelVertices;
+		Mathematics:: FloatAPoint* mWorldVertices;
+		Mathematics::FloatPlane mModelPlane;
+		Mathematics::FloatPlane mWorldPlane;
 	};
  #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH

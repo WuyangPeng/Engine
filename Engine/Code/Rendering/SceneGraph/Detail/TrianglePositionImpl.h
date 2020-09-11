@@ -17,7 +17,7 @@ namespace Rendering
     {
     public:
         using ClassType = TrianglePositionImpl;
-        using APoint = Mathematics::APointf;
+        using APoint = Mathematics::FloatAPoint;
 
     public:
         TrianglePositionImpl(const APoint& firstPosition, const APoint& secondPosition, const APoint& thirdPosition) noexcept;

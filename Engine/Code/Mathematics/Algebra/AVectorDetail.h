@@ -24,7 +24,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename T>
-bool Mathematics::Approximate(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon)
+bool Mathematics::Approximate(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon) noexcept
 {
     return Math<T>::FAbs(lhs.GetX() - rhs.GetX()) <= epsilon &&
            Math<T>::FAbs(lhs.GetY() - rhs.GetY()) <= epsilon &&
@@ -38,7 +38,7 @@ T Mathematics::Dot(const AVector<T>& lhs, const AVector<T>& rhs) noexcept
 }
 
 template <typename T>
-const Mathematics::AVector<T> Mathematics::Cross(const AVector<T>& lhs, const AVector<T>& rhs)
+const Mathematics::AVector<T> Mathematics::Cross(const AVector<T>& lhs, const AVector<T>& rhs) noexcept
 {
     return AVector<T>{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(), lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(), lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX() };
 }

@@ -17,6 +17,7 @@
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/StandardMesh.h"
+#include "Rendering/DataTypes/TransformDetail.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -95,9 +96,9 @@ void Rendering::RevolutionSurface ::ComputeSampleData()
     const float invNumRadialSamples = 1.0f / (float)mNumRadialSamples;
     for (int i = 0; i < mNumRadialSamples; ++i)
     {
-        const float angle = Mathematics::Mathf::GetTwoPI() * invNumRadialSamples * i;
-        mCos[i] = Mathematics::Mathf::Cos(angle);
-        mSin[i] = Mathematics::Mathf::Sin(angle);
+        const float angle = Mathematics::FloatMath::GetTwoPI() * invNumRadialSamples * i;
+        mCos[i] = Mathematics::FloatMath::Cos(angle);
+        mSin[i] = Mathematics::FloatMath::Sin(angle);
     }
     mSin[mNumRadialSamples] = mSin[0];
     mCos[mNumRadialSamples] = mCos[0];
@@ -324,7 +325,7 @@ const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin
     i = numVertices - (mNumRadialSamples + 1);
     for (r = 0; r <= mNumRadialSamples; ++r, ++i)
     {
-        GetVertexBuffer()->SetPosition(vba, i, vba.GetPosition<Mathematics::APointf>(r));
+        GetVertexBuffer()->SetPosition(vba, i, vba.GetPosition<Mathematics::FloatAPoint>(r));
     }
 }
 

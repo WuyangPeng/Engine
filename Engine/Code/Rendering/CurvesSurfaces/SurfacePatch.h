@@ -26,8 +26,8 @@ namespace Rendering
     public:
         COPY_UNSHARE_CLASSES_TYPE_DECLARE(SurfacePatch);
         using ParentType = Object;
-        using AVector = Mathematics::AVectorf;
-        using APoint = Mathematics::APointf;
+        using AVector = Mathematics::FloatAVector;
+        using APoint = Mathematics::FloatAPoint;
 
     public:
         SurfacePatch(float uMin, float uMax, float vMin, float vMax, bool rectangular);

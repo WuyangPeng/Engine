@@ -21,13 +21,13 @@ namespace Rendering
     {
     public:
         using ClassType = StandardMeshImpl;
-        using APoint = Mathematics::APointf;
-        using AVector = Mathematics::AVectorf;
+        using APoint = Mathematics::FloatAPoint;
+        using AVector = Mathematics::FloatAVector;
         using Vector2D = Mathematics::Vector2Df;
-        using Math = Mathematics::Mathf;
+        using Math = Mathematics::FloatMath;
 
     public:
-        StandardMeshImpl(const VertexFormatSmartPointer& vertexFormat, bool isStatic = true, bool inside = false, const Transform* transform = nullptr);
+        StandardMeshImpl(const VertexFormatSmartPointer& vertexFormat, bool isStatic = true, bool inside = false, const FloatTransform* transform = nullptr);
 
         StandardMeshImpl(const StandardMeshImpl& rhs);
         StandardMeshImpl& operator=(const StandardMeshImpl& rhs);
@@ -38,8 +38,8 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetTransform(const Transform& transform) noexcept;
-        const Transform& GetTransform() const noexcept;
+        void SetTransform(const FloatTransform& transform) noexcept;
+        const FloatTransform& GetTransform() const noexcept;
 
         const TrianglesMeshSmartPointer Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const;
         const TrianglesMeshSmartPointer Disk(int shellSamples, int radialSamples, float radius) const;
@@ -66,7 +66,7 @@ namespace Rendering
         static constexpr auto sm_MaxUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
 
         VertexFormatSmartPointer m_VertexFormat;
-        Transform m_Transform;
+        FloatTransform m_Transform;
         bool m_IsStatic;
         bool m_Inside;
         bool m_HasNormals;

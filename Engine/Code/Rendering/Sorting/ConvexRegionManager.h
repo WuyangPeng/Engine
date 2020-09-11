@@ -29,7 +29,7 @@ namespace Rendering
 		// Construction and destruction.  The BSP tree should be built so that
 		// the leaf nodes are where the ConvexRegion objects are located.
 		ConvexRegionManager();
-		ConvexRegionManager(const Mathematics::Planef& modelPlane);
+		ConvexRegionManager(const Mathematics::FloatPlane& modelPlane);
 	 
 
 		// The middle child of ConvexRegionManager is where the representation
@@ -41,7 +41,7 @@ namespace Rendering
 
 		// Determine region that contains the point.  If the point is outside
 		// the set of regions, the return values is null.
-		ConvexRegionSmartPointer GetContainingRegion(const Mathematics::APointf& point);
+		ConvexRegionSmartPointer GetContainingRegion(const Mathematics::FloatAPoint& point);
 
 	protected:
 		// Support for culling.
