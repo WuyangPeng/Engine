@@ -19,16 +19,19 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE IKGoal : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKGoal);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKGoal);
         using ParentType = Object;
         using APoint = Mathematics::FloatAPoint;
 
     public:
         IKGoal(const SpatialSmartPointer& target, const SpatialSmartPointer& effector, float weight = 1.0f);
         ~IKGoal();
-
+   
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         IKGoal(IKGoal&&) = default;
         IKGoal& operator=(IKGoal&&) = default;
+#include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -42,6 +45,8 @@ namespace Rendering
 
         void SetWeight(float weight) noexcept;
         float GetWeight() const noexcept;
+
+        ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
         IMPL_TYPE_DECLARE(IKGoal);

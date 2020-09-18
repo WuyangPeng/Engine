@@ -35,6 +35,7 @@ namespace Rendering
 		  const TriangleIndex GetTriangle(int index) const override;
 
 		  ControllerInterfaceSmartPointer Clone() const override;
+                  ObjectInterfaceSharedPtr CloneObject() const override;
 	};
 
 #include STSTEM_WARNING_PUSH

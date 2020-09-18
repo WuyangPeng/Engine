@@ -27,6 +27,9 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26473)
 #include SYSTEM_WARNING_DISABLE(26492)
+ 
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::TextureBuffer
 	::TextureBuffer(int itemSize) noexcept
 	:m_Data{},m_ItemSize{ itemSize }
@@ -113,17 +116,17 @@ void Rendering::TextureBuffer
 }
 
 void Rendering::TextureBuffer
-    ::Save( CoreTools::BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1; 
 	
 	if (m_Data != nullptr && m_Data->GetSize() != 0)
 	{
-		target.WriteWithNumber(boost::numeric_cast<int>(m_Data->GetSize()), m_Data->GetBufferBegin());
+		//target.WriteWithNumber(boost::numeric_cast<int>(m_Data->GetSize()), m_Data->GetBufferBegin());
 	}		
 	else
 	{
-		target.Write(0);
+		target->Write(0);
 	}		
 }
 

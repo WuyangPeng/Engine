@@ -12,6 +12,7 @@
 #include "System/Helper/EnumCast.h"
 #include "Rendering/SceneGraph/CameraFrustumData.h"
 #include "Rendering/SceneGraph/Flags/CameraFlags.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -72,8 +73,8 @@ namespace Rendering
         float GetRightMax() const noexcept;
 
         void Load(BufferSource& source);
-        void Save(BufferTarget& target) const;
-        int GetStreamingSize() const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+        int GetStreamingSize() const noexcept;
 
     private:
         // 视图平截头体,存储在顺序为min (near), dmax (far),

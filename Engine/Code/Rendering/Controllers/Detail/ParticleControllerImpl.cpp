@@ -20,6 +20,8 @@
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::ParticleControllerImpl
 	::ParticleControllerImpl(int numParticles)
     : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::Float::g_UnitZ }, m_SystemAngularAxis{ Mathematics::Float::g_UnitZ }, m_SystemSizeChange{ 0.0f },
@@ -180,7 +182,7 @@ void Rendering::ParticleControllerImpl
 }
 
 int Rendering::ParticleControllerImpl
-	::GetStreamingSize() const
+	::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -199,19 +201,19 @@ int Rendering::ParticleControllerImpl
 }
 
 void Rendering::ParticleControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.Write(m_SystemLinearSpeed);
-	target.Write(m_SystemAngularSpeed);
-	target.WriteAggregate(m_SystemLinearAxis);
-	target.WriteAggregate(m_SystemAngularAxis);
-	target.Write(m_SystemSizeChange);
-	target.Write(m_NumParticles);
-	target.WriteWithoutNumber(m_NumParticles, &m_ParticleLinearSpeed[0]); 
-	target.WriteAggregateWithoutNumber(m_NumParticles, &m_ParticleLinearAxis[0]);
-	target.WriteWithoutNumber(m_NumParticles, &m_ParticleSizeChange[0]);
+    target->Write(m_SystemLinearSpeed);
+	target->Write(m_SystemAngularSpeed);
+    target->WriteAggregate(m_SystemLinearAxis);
+        target->WriteAggregate(m_SystemAngularAxis);
+	target->Write(m_SystemSizeChange);
+	target->Write(m_NumParticles);
+        target->WriteContainerWithoutNumber(m_ParticleLinearSpeed); 
+	//target.WriteAggregateWithoutNumber(m_NumParticles, &m_ParticleLinearAxis[0]);
+//	target.WriteWithoutNumber(m_NumParticles, &m_ParticleSizeChange[0]);
 }
 
 void Rendering::ParticleControllerImpl

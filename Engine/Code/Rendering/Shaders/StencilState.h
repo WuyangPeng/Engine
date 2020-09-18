@@ -27,7 +27,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE StencilState : public CoreTools::Object
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(StencilState);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(StencilState);
 		using ParentType = Object;
 		using CompareMode = StencilStateFlags::CompareMode;
 		using OperationType = StencilStateFlags::OperationType;
@@ -37,8 +37,13 @@ namespace Rendering
 	public:
 		StencilState();
 		  ~StencilState();
+
+		   #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
                 StencilState(StencilState&&) noexcept = default;
                   StencilState& operator=(StencilState&&) noexcept = default;
+				  #include STSTEM_WARNING_POP
+
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(StencilState); 
@@ -63,7 +68,7 @@ namespace Rendering
 
 		void SaveState(WriteFileManager& manager) const;
 		void LoadState(ReadFileManager& manager);
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(StencilState);
 	};

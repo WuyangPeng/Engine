@@ -26,17 +26,17 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		ObjectInterfaceSmartPointer GetObjectPtr(uint64_t uniqueID);
+		ObjectInterfaceSharedPtr GetObjectPtr(uint64_t uniqueID);
 		int GetOrderedSize() const;
-		ObjectInterfaceSmartPointer& operator [](int index);
+		ObjectInterfaceSharedPtr& operator [](int index);
 
-		void Insert(uint64_t uniqueID, const ObjectInterfaceSmartPointer& ptr);
+		void Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& ptr);
 
 		void Sort();
 
 	private:
-		using LinkAssociatedContainer = std::map<uint64_t, ObjectInterfaceSmartPointer>;
-		using LinkSequentialContainer = std::vector<ObjectInterfaceSmartPointer>;
+		using LinkAssociatedContainer = std::map<uint64_t, ObjectInterfaceSharedPtr>;
+		using LinkSequentialContainer = std::vector<ObjectInterfaceSharedPtr>;
 
 	private:
 		// 存储图形加载过程中的顶层对象。

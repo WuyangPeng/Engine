@@ -9,7 +9,7 @@
 #include "KeyframeController.h"
 #include "Detail/KeyframeControllerImpl.h"
 #include "Rendering/SceneGraph/Spatial.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
@@ -209,7 +209,7 @@ bool Rendering::KeyframeController
 				SetUniformScale(scale);
 			} 
 		}
-		auto spatial = CoreTools::StaticCast<Spatial>(GetControllerObject());
+                auto spatial = dynamic_cast<Spatial*>(GetControllerObject());
 		 
 		spatial->SetLocalTransform(GetTransform());
 		return true;
@@ -238,8 +238,7 @@ int Rendering::KeyframeController
 	return size;
 }
 
-uint64_t Rendering::KeyframeController
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::KeyframeController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -247,7 +246,7 @@ uint64_t Rendering::KeyframeController
 }
 
 void Rendering::KeyframeController
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -289,4 +288,12 @@ void Rendering::KeyframeController
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::KeyframeController::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

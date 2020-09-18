@@ -22,6 +22,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, CullState);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CullState);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, CullState); 
@@ -55,4 +56,11 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, CullState, SetCCWO
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, CullState,SaveState, WriteFileManager&, void)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, CullState,LoadState, ReadFileManager&, void)
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::CullState::CloneObject() const 
+{
+	 RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

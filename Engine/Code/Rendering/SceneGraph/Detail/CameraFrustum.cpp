@@ -20,6 +20,8 @@
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26485)
 #include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::CameraFrustum ::CameraFrustum(bool isPerspective) noexcept
     : m_IsPerspective{ isPerspective }
 {
@@ -155,16 +157,15 @@ void Rendering::CameraFrustum
 }
 
 void Rendering::CameraFrustum
-    ::Save( BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     
-    target.WriteWithoutNumber(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
-    target.WriteBool(m_IsPerspective);
+   // target.WriteWithoutNumber(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
+    target->Write(m_IsPerspective);
 }
 
-int Rendering::CameraFrustum
-    ::GetStreamingSize() const
+int Rendering::CameraFrustum ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     

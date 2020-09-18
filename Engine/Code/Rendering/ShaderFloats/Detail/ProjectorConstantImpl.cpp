@@ -62,7 +62,7 @@ void Rendering::ProjectorConstantImpl
 }
 
 void Rendering::ProjectorConstantImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -129,8 +129,7 @@ void Rendering::ProjectorConstantImpl
 	//source.ResolveObjectSmartPointerLink(m_Projector);
 }
 
-void Rendering::ProjectorConstantImpl
-	::Register( ObjectRegister& target ) const
+void Rendering::ProjectorConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

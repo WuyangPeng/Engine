@@ -17,6 +17,7 @@
 
 using std::string;
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -45,4 +46,11 @@ Rendering::PixelShader ::~PixelShader()
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, PixelShader)
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::PixelShader::CloneObject() const 
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

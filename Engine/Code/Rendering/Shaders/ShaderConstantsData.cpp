@@ -63,7 +63,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderConstantsData,GetConstant
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderConstantsData,GetNumRegistersUsed, int,int)
  
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderConstantsData,Load,BufferSource&,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderConstantsData,Save,BufferTarget&,void)  
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderConstantsData, Save, CoreTools::BufferTargetSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ShaderConstantsData,GetStreamingSize,int) 
 
 #include STSTEM_WARNING_POP

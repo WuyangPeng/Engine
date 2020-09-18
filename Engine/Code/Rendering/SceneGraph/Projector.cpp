@@ -57,7 +57,7 @@ int Rendering::Projector
 }
 
 uint64_t Rendering::Projector
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -65,7 +65,7 @@ uint64_t Rendering::Projector
 }
 
 void Rendering::Projector
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -73,7 +73,7 @@ void Rendering::Projector
     
 	ParentType::Save(target);
 	
-	target.WriteEnum(GetDepthType());
+	target->WriteEnum(GetDepthType());
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

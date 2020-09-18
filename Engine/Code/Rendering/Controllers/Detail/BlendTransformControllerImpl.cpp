@@ -23,7 +23,9 @@
 
 using std::string;
 using std::vector;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::BlendTransformControllerImpl
 	::BlendTransformControllerImpl() noexcept
 	:m_FirstController{}, m_SecondController{}, m_Weight{ 0.0f }, m_RotationScaleMatrices{ false }, m_GeometricRotation{ false }, m_GeometricScale{ false }
@@ -52,7 +54,7 @@ bool Rendering::BlendTransformControllerImpl
 #endif // OPEN_CLASS_INVARIANT
 
 int Rendering::BlendTransformControllerImpl
-	::GetStreamingSize() const 
+	::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -67,16 +69,16 @@ int Rendering::BlendTransformControllerImpl
 }
 
 void Rendering::BlendTransformControllerImpl
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	//target.WriteSmartPointer(m_FirstController);
 	//target.WriteSmartPointer(m_SecondController);
-	target.Write(m_Weight);
-	target.WriteBool(m_RotationScaleMatrices);
-	target.WriteBool(m_GeometricRotation);
-	target.WriteBool(m_GeometricScale);
+	target->Write(m_Weight);
+	target->Write(m_RotationScaleMatrices);
+	target->Write(m_GeometricRotation);
+	target->Write(m_GeometricScale);
 }
 
 void Rendering::BlendTransformControllerImpl
@@ -117,7 +119,7 @@ void Rendering::BlendTransformControllerImpl
 }
 
 void Rendering::BlendTransformControllerImpl
-	::Register(CoreTools::ObjectRegister& target) const 
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
@@ -368,3 +370,4 @@ const Rendering::BlendTransformControllerImpl::Matrix Rendering::BlendTransformC
 	return oneMinusWeight * firstMatrix + m_Weight * secondMatrix;
 }
 
+#include STSTEM_WARNING_POP

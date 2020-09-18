@@ -18,7 +18,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Texture3D : public Texture
     {
     public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture3D);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture3D);
 		using ParentType = Texture;
 		using Texture3DSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
 		using ConstTexture3DSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>;
@@ -62,7 +62,7 @@ namespace Rendering
         
         char* GetTextureData (int level);
 		const char* GetTextureData (int level) const;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
 		  TextureSmartPointer Clone() const override;
         
     private:

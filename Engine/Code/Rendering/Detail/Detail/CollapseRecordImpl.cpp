@@ -12,7 +12,9 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::CollapseRecordImpl
 	::CollapseRecordImpl (int vKeep, int vThrow, int numVertices,int numTriangles) noexcept
 	:m_VKeep{ vKeep }, m_VThrow{ vThrow }, m_NumVertices{ numVertices }, m_NumTriangles{ numTriangles }, m_Indices{}
@@ -141,15 +143,15 @@ void Rendering::CollapseRecordImpl
 }
 
 void Rendering::CollapseRecordImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_VKeep);
-	target.Write(m_VThrow);
-	target.Write(m_NumVertices);
-	target.Write(m_NumTriangles);
-	target.Write(m_Indices);
+	target->Write(m_VKeep);
+	target->Write(m_VThrow);
+	target->Write(m_NumVertices);
+	target->Write(m_NumTriangles);
+        target->WriteContainerWithNumber(m_Indices);
 }
 
 int Rendering::CollapseRecordImpl
@@ -173,3 +175,4 @@ void Rendering::CollapseRecordImpl
 
 	m_Indices.clear();
 }
+#include STSTEM_WARNING_POP

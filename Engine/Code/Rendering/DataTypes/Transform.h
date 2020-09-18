@@ -115,7 +115,7 @@ namespace Rendering
         [[nodiscard]] const Transform GetInverseTransform(float epsilon = Math::GetZeroTolerance()) const;
 
         // Á÷Ö§³Ö
-        [[nodiscard]] int GetStreamingSize() const;
+        [[nodiscard]] int GetStreamingSize() const noexcept;
 
         void ReadAggregate(CoreTools::BufferSource& source);
         void WriteAggregate(CoreTools::BufferTarget& target) const;

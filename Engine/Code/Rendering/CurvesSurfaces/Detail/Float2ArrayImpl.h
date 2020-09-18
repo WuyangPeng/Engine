@@ -12,6 +12,7 @@
 #include "Mathematics/Base/Float2.h"
 
 #include <vector>
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -37,7 +38,7 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         void Load(BufferSource& source);
-        void Save(BufferTarget& target) const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const;
 
         int GetNumElements() const;

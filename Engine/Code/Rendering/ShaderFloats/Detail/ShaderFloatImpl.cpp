@@ -23,6 +23,8 @@
 
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::ShaderFloatImpl
 	::ShaderFloatImpl()
 	:m_Data{},m_AllowUpdater{ true }
@@ -240,12 +242,12 @@ void Rendering::ShaderFloatImpl
 }
 
 void Rendering::ShaderFloatImpl
-	::Save (BufferTarget& target) const
+	::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	
-	target.Write(m_Data);
-	target.WriteBool(m_AllowUpdater);
+	target->WriteContainerWithNumber(m_Data);
+	target->Write(m_AllowUpdater);
 }
 
 int Rendering::ShaderFloatImpl

@@ -363,7 +363,7 @@ const Rendering::TransformImpl<Real> Rendering::TransformImpl<Real>::GetInverseT
 }
 
 template <typename Real>
-int Rendering::TransformImpl<Real>::GetStreamingSize() const
+int Rendering::TransformImpl<Real>::GetStreamingSize() const noexcept
 {
     const auto isIdentity = m_TransformMatrix.IsIdentity();
     const auto isRotationOrScaleMatrix = m_TransformMatrix.IsRotationOrScaleMatrix();

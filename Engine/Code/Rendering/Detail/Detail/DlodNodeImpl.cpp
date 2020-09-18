@@ -18,6 +18,9 @@
 #include SYSTEM_WARNING_DISABLE(26446) 
 #include SYSTEM_WARNING_DISABLE(26455) 
 #include SYSTEM_WARNING_DISABLE(26472) 
+ 
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::DlodNodeImpl
 	::DlodNodeImpl()
 	: m_ModelLodCenter{}, m_WorldLodCenter{}, m_NumLevelsOfDetail{ 0 }, m_ModelMinDistance{}, m_ModelMaxDistance{}, m_WorldMinDistance{}, m_WorldMaxDistance{}
@@ -66,17 +69,17 @@ void Rendering::DlodNodeImpl
 }
 
 void Rendering::DlodNodeImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.WriteAggregate(m_ModelLodCenter);
-	target.WriteAggregate(m_WorldLodCenter);
-	target.Write(m_NumLevelsOfDetail);
-	target.Write(m_ModelMinDistance);
-	target.Write(m_ModelMaxDistance);
-	target.Write(m_WorldMinDistance);
-	target.Write(m_WorldMaxDistance);
+	target->WriteAggregate(m_ModelLodCenter);
+        target->WriteAggregate(m_WorldLodCenter);
+	target->Write(m_NumLevelsOfDetail);
+        target->WriteContainerWithNumber(m_ModelMinDistance);
+        target->WriteContainerWithNumber(m_ModelMaxDistance);
+        target->WriteContainerWithNumber(m_WorldMinDistance);
+        target->WriteContainerWithNumber(m_WorldMaxDistance);
 }
 
 int Rendering::DlodNodeImpl

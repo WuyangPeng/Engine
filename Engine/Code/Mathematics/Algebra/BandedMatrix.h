@@ -54,7 +54,7 @@ namespace Mathematics
         int GetSize() const noexcept;
         int GetLowerBandsNumber() const noexcept;
         int GetUpperBandsNumber() const noexcept;
-        int GetStreamSize() const;
+        int GetStreamSize() const noexcept;
 
         // 重设大小会清空原有数据。
         void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber);
@@ -62,18 +62,21 @@ namespace Mathematics
         // 对角线
         Real* GetDiagonalBand() noexcept;
         const Real* GetDiagonalBand() const noexcept;
+        std::vector<Real> GetDiagonalBandValue() const;
 
         // 下三角
         // GetLowerBand(index):  0 <= index < LowerBandMax
         int GetLowerBandMax(int index) const;
         Real* GetLowerBand(int index);
         const Real* GetLowerBand(int index) const;
+        std::vector<Real> GetLowerBandValue(int index) const;
 
         // 上三角
         // GetUupperBand(index):  0 <= index < UpperBandMax
         int GetUpperBandMax(int index) const;
         Real* GetUpperBand(int index);
         const Real* GetUpperBand(int index) const;
+        std::vector<Real> GetUpperBandValue(int index) const;
 
         Real& operator()(int row, int column);
         const Real& operator()(int row, int column) const;

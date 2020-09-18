@@ -926,7 +926,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZXY(Real zAngle, Real xAngle, Real yAn
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle)  
+void Mathematics::Matrix3<Real>::MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -1611,6 +1611,26 @@ void Mathematics::Matrix3<Real>::Slerp(Real t, const Matrix3& firstRot, const Ma
     MakeRotation(axis, t * angle);
 
     *this = firstRot * (*this);
+}
+
+template <typename T>
+const typename Mathematics::Matrix3<T>::ArrayType Mathematics::Matrix3<T>::GetCoordinate() const noexcept
+{
+    return ArrayType{ m_Entry(0, 0), m_Entry(0, 1), m_Entry(0, 2),
+                      m_Entry(1, 0), m_Entry(1, 1), m_Entry(1, 2),
+                      m_Entry(2, 0), m_Entry(2, 1), m_Entry(2, 2) };
+}
+
+template <typename T>
+void Mathematics::Matrix3<T>::Set(const ArrayType& coordinate) noexcept
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    for (int i = 0; i < sm_MatrixSize; ++i)
+    {
+        m_Entry(i / 3, i % 3) = coordinate[i];
+    }
+#include STSTEM_WARNING_POP
 }
 
 template <typename Real>

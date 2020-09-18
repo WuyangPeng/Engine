@@ -27,6 +27,7 @@
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26485)
 #include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 using std::vector;
 
@@ -87,16 +88,17 @@ int Rendering::IKJointImpl
 }
 
 void Rendering::IKJointImpl
-	::Save( CoreTools::BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowTranslation);
-	target.WriteWithoutNumber(sm_NumAxis, m_MinTranslation);
-	target.WriteWithoutNumber(sm_NumAxis, m_MaxTranslation);
-	target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowRotation);
-	target.WriteWithoutNumber(sm_NumAxis, m_MinRotation);
-	target.WriteWithoutNumber(sm_NumAxis, m_MaxRotation);
+    CoreTools::DoNothing();
+    target;
+	//target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowTranslation);
+	//target.WriteWithoutNumber(sm_NumAxis, m_MinTranslation);
+	//target.WriteWithoutNumber(sm_NumAxis, m_MaxTranslation);
+	//target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowRotation);
+	//target.WriteWithoutNumber(sm_NumAxis, m_MinRotation);
+	//target.WriteWithoutNumber(sm_NumAxis, m_MaxRotation);
 //	target.WriteSmartPointer(m_Object);
 	//target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
@@ -134,7 +136,7 @@ void Rendering::IKJointImpl
 }
 
 void Rendering::IKJointImpl
-	::Register( CoreTools::ObjectRegister& target ) const
+	::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

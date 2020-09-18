@@ -19,7 +19,9 @@
 
 using std::string;
 using std::vector;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::IKGoalImpl
 	::IKGoalImpl(const SpatialSmartPointer& target,const SpatialSmartPointer& effector,float weight) noexcept
 	:m_Target{ target }, m_Effector{ effector }, m_Weight{ weight }
@@ -37,8 +39,7 @@ Rendering::IKGoalImpl ::IKGoalImpl() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Rendering,IKGoalImpl)
 #endif // OPEN_CLASS_INVARIANT	
 
-int Rendering::IKGoalImpl
-	::GetStreamingSize() const
+int Rendering::IKGoalImpl ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -50,11 +51,11 @@ int Rendering::IKGoalImpl
 }
 
 void Rendering::IKGoalImpl
-	::Save(CoreTools::BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_Weight);
+	target->Write(m_Weight);
 	//target.WriteSmartPointer(m_Target);
 	//target.WriteSmartPointer(m_Effector);
 }
@@ -80,7 +81,7 @@ void Rendering::IKGoalImpl
 }
 
 void Rendering::IKGoalImpl
-	::Register(CoreTools::ObjectRegister& target) const 
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -201,3 +202,4 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::IKGoalImpl
 
 	return objects;
 }
+#include STSTEM_WARNING_POP

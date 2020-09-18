@@ -102,8 +102,7 @@ void Rendering::VertexFormatElement ::SetUsageIndex(unsigned int usageIndex) noe
 	m_VertexFormatType.SetUsageIndex(usageIndex);
 }
 
-int Rendering::VertexFormatElement
-	::GetStreamingSize() const
+int Rendering::VertexFormatElement ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -115,12 +114,12 @@ int Rendering::VertexFormatElement
 }
 
 void Rendering::VertexFormatElement
-	::Save( CoreTools::BufferTarget& target ) const 
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_StreamIndex);
-	target.Write(m_Offset);
+	target->Write(m_StreamIndex);
+	target->Write(m_Offset);
 	m_VertexFormatType.Save(target);
 }
 

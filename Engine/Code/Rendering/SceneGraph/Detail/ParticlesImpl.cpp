@@ -24,6 +24,8 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::ParticlesImpl
 	::ParticlesImpl( const std::vector<APoint>& positions,const std::vector<float>& sizes,float sizeAdjust )
 	:m_Positions{ positions }, m_Sizes{ sizes }, m_SizeAdjust{ sizeAdjust }, m_NumActive{ boost::numeric_cast<int>(positions.size()) }
@@ -167,19 +169,19 @@ void Rendering::ParticlesImpl
 }
 
 void Rendering::ParticlesImpl
-	::Save(BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	auto size = boost::numeric_cast<uint32_t>(m_Positions.size());
 
-	target.Write(size);
+	target->Write(size);
 
-	target.WriteAggregateWithoutNumber(size,&m_Positions[0]);
-	target.WriteWithoutNumber(size, &m_Sizes[0]);
+	//target.WriteAggregateWithoutNumber(size,&m_Positions[0]);
+        target->WriteContainerWithNumber(m_Sizes);
 
-	target.Write(m_SizeAdjust);
-	target.Write(m_NumActive);
+	target->Write(m_SizeAdjust);
+	target->Write(m_NumActive);
 }
 
 int Rendering::ParticlesImpl

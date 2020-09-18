@@ -64,8 +64,8 @@ namespace Rendering
 		static int GetNumComponents (AttributeType type) noexcept;
 		static int GetTypeSize (AttributeType type) noexcept;
 
-		int GetStreamingSize () const;
-		void Save (BufferTarget& target) const;
+		int GetStreamingSize() const noexcept;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		void Load (BufferSource& source);
 
 		void SaveToFile(WriteFileManager& outFile) const;

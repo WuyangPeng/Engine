@@ -22,6 +22,7 @@ using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering,ShaderBase);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ShaderBase);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ShaderBase); 

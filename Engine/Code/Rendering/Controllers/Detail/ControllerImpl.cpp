@@ -13,7 +13,9 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::ControllerImpl
     ::ControllerImpl () noexcept
 	:m_Repeat{ ControllerRepeatType::Clamp }, m_MinTime{ 0.0 }, m_MaxTime{ 0.0 }, m_Phase{ 0.0 }, m_Frequency{ 1.0 }, m_Active{ true }, m_ApplicationTime{ -Mathematics::DoubleMath::sm_MaxReal }
@@ -207,20 +209,19 @@ void Rendering::ControllerImpl
 }
 
 void Rendering::ControllerImpl
-    ::Save( BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	target.WriteEnum(m_Repeat);
-    target.Write(m_MinTime);
-    target.Write(m_MaxTime);
-    target.Write(m_Phase);
-    target.Write(m_Frequency);
-    target.WriteBool(m_Active);
+	target->WriteEnum(m_Repeat);
+        target->Write(m_MinTime);
+        target->Write(m_MaxTime);
+        target->Write(m_Phase);
+        target->Write(m_Frequency);
+        target->Write(m_Active);
 }
 
-int Rendering::ControllerImpl
-    ::GetStreamingSize() const
+int Rendering::ControllerImpl ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -235,3 +236,4 @@ int Rendering::ControllerImpl
 }
 
 
+#include STSTEM_WARNING_POP

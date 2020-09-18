@@ -10,6 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include <vector>
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -47,7 +48,7 @@ namespace Rendering
 		void SetNumTriangles(int numTriangles) noexcept;
 
 		void Load(BufferSource& source);
-		void Save(BufferTarget& target) const;
+		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
 
 	private:

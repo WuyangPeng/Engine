@@ -20,6 +20,7 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, RenderTarget);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RenderTarget);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RenderTarget);
@@ -81,7 +82,7 @@ int Rendering::RenderTarget
 }
 
 uint64_t Rendering::RenderTarget
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -95,7 +96,7 @@ uint64_t Rendering::RenderTarget
 }
 
 void Rendering::RenderTarget
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -139,4 +140,11 @@ void Rendering::RenderTarget
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::RenderTarget::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

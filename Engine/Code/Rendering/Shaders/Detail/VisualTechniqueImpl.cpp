@@ -24,6 +24,7 @@
 #include SYSTEM_WARNING_DISABLE(26414)
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 using std::vector;
 
@@ -45,7 +46,7 @@ int Rendering::VisualTechniqueImpl
 }
 
 void Rendering::VisualTechniqueImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -71,8 +72,7 @@ void Rendering::VisualTechniqueImpl
 	} 
 }
 
-void Rendering::VisualTechniqueImpl
-	::Register( ObjectRegister& target ) const
+void Rendering::VisualTechniqueImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

@@ -14,6 +14,7 @@
 #include "Rendering/Controllers/ControllerKeyInfo.h"
 
 #include <vector>
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -62,7 +63,7 @@ namespace Rendering
         const ControllerKeyInfo GetKeyInfo(float ctrlTime) noexcept;
 
         int GetStreamingSize() const;
-        void Save(CoreTools::BufferTarget& target) const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         void Load(CoreTools::BufferSource& source);
 
     private:

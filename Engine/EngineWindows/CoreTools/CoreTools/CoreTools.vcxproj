@@ -702,8 +702,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferSourceDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTarget.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTargetDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ConstObjectAssociated.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferInStreamImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferOutStreamImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferTargetImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\InTopLevelImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectLinkImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectManagerImpl.h" />
@@ -714,8 +716,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\FileInStream.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\FileOutStream.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTerm.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermContainer.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InTopLevel.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Object.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectAssociated.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterface.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterfaceLess.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectLink.h" />
@@ -726,7 +730,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectRegisterDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectSystems.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectSystemsFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectType.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\OutTopLevel.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermRegisterFactory.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Rtti.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Stream.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\StreamDetail.h" />
@@ -1101,6 +1107,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferTarget.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferInStreamImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferOutStreamImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferTargetImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\InTopLevelImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectLinkImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\ObjectManagerImpl.cpp" />
@@ -1111,6 +1118,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\FileInStream.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\FileOutStream.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTerm.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermContainer.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InTopLevel.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Object.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterface.cpp" />

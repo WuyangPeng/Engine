@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include <string>
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 RENDERING_EXPORT_SHARED_PTR(SingleShaderSamplerDataImpl);
 
@@ -54,7 +55,7 @@ namespace Rendering
 		Colour GetBorderColor () const;
 
 		void Load (BufferSource& source);
-		void Save (BufferTarget& target) const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
 		
 	private:

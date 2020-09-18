@@ -23,7 +23,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE CameraNode : public Node
     {
     public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(CameraNode);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CameraNode);
 		using ParentType = Node;
         
     public:
@@ -44,7 +44,7 @@ namespace Rendering
           CameraNode& operator=(CameraNode&&) noexcept = default;
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
-        
+           ObjectInterfaceSharedPtr CloneObject() const override;
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CameraNode);
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
         

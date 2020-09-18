@@ -55,9 +55,9 @@ namespace Rendering
 		void AttachControllerInCopy(ControllerInterfaceSmartPointer controller);
         
         void Load (BufferSource& source);
-		void Save (BufferTarget& target) const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
-        void Register (ObjectRegister& target) const;
+                void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
         void Link (ObjectLink& source);
         
 		const ObjectSmartPointer GetObjectByName(const std::string& name); 

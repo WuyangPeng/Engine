@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:37)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/14 15:38)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_IMPL_H
@@ -10,39 +13,33 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/ObjectSystems/ObjectInterface.h"
-
-#include <vector>
-#include <set>
+#include "CoreTools/ObjectSystems/ObjectType.h"
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE OutTopLevelImpl
-	{
-	public:
-		using ClassType = OutTopLevelImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE OutTopLevelImpl
+    {
+    public:
+        using ClassType = OutTopLevelImpl;
 
-	public:
-		OutTopLevelImpl() noexcept;
+    public:
+        OutTopLevelImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool IsTopLevel(uint64_t uniqueID) const;
-		int GetTopLevelSize() const;
-		ConstObjectInterfaceSmartPointer operator [](int index) const;
+        [[nodiscard]] bool IsTopLevel(const ConstObjectInterfaceSharedPtr& object) const;
+        [[nodiscard]] int GetTopLevelSize() const;
 
-		// 对顶层的对象进行保存。
-		void Insert(const ObjectInterfaceSmartPointer& objectPtr);
-		void SetUniqueID(int index, uint64_t uniqueID);
+        [[nodiscard]] ConstObjectContainerConstIter begin() const noexcept;
+        [[nodiscard]] ConstObjectContainerConstIter end() const noexcept;
 
-	private:
-		using ObjectPtrCollection = std::vector<ObjectInterfaceSmartPointer>;
-		using UniqueIDCollection = std::set<uint64_t>;
+        // 对顶层的对象进行保存。
+        void Insert(const ObjectInterfaceSharedPtr& object);
 
-	private:
-		// 顶层对象的流。
-		ObjectPtrCollection m_TopLevel;
-		UniqueIDCollection m_UniqueID;
-	};
+    private:
+        // 顶层对象的流。
+        ConstObjectContainer m_TopLevel;
+    };
 }
 
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_IMPL_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_IMPL_H

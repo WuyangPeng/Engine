@@ -30,7 +30,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderBase : public CoreTools::Object
     {
     public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderBase);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderBase);
 		using ParentType = Object;
 		using Colour = Colour<float>;
 		using WriteFileManager = CoreTools::WriteFileManager;
@@ -52,8 +52,12 @@ namespace Rendering
         ShaderBase (const std::string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers);    
           ~ShaderBase () = 0;
 
+		  #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         ShaderBase(ShaderBase&&) noexcept = default;
         ShaderBase& operator=(ShaderBase&&) noexcept = default;
+		 #include STSTEM_WARNING_POP
+
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ShaderBase); 

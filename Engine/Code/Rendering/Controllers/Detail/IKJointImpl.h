@@ -41,10 +41,10 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         int GetStreamingSize() const;
-        void Save(CoreTools::BufferTarget& target) const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         void Load(CoreTools::BufferSource& source);
         void Link(CoreTools::ObjectLink& source);
-        void Register(CoreTools::ObjectRegister& target) const;
+        void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 

@@ -261,12 +261,28 @@ Real* Mathematics::BandedMatrixSolve<Real>
 }
 
 template <typename Real>
+std::vector<Real> Mathematics::BandedMatrixSolve<Real>::GetDiagonalBandValue() const
+{
+    MATHEMATICS_CLASS_IS_VALID_6;  
+
+	return m_Input.GetDiagonalBandValue();
+}
+
+template <typename Real>
 const Real* Mathematics::BandedMatrixSolve<Real>
 	::GetLowerBand(int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
 	return m_Input.GetLowerBand(index);
+}
+
+template <typename Real>
+std::vector<Real> Mathematics::BandedMatrixSolve<Real>::GetLowerBandValue(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_6;
+
+    return m_Input.GetLowerBandValue(index);
 }
 
 template <typename Real>
@@ -296,6 +312,14 @@ const Real* Mathematics::BandedMatrixSolve<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
 	return m_Input.GetUpperBand(index);
+}
+
+template <typename Real>
+std::vector<Real> Mathematics::BandedMatrixSolve<Real>::GetUpperBandValue(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_6;
+
+    return m_Input.GetUpperBandValue(index);
 }
 
 template <typename Real>

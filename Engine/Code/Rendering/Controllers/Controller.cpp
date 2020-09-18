@@ -170,8 +170,7 @@ int Rendering::Controller
 	return size;
 }
 
-uint64_t Rendering::Controller
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::Controller ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -179,14 +178,13 @@ uint64_t Rendering::Controller
 
 	if(uniqueID != 0)
 	{
-		target.Register(m_Object);
+		//target.Register(m_Object);
 	}
     
     return uniqueID;
 }
 
-void Rendering::Controller
-    ::Save (CoreTools::BufferTarget& target) const
+void Rendering::Controller ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -196,7 +194,7 @@ void Rendering::Controller
 	
 	m_Impl->Save(target);
 
-    target.WritePointer(m_Object);
+   // target.WritePointer(m_Object);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

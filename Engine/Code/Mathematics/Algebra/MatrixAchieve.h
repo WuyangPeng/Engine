@@ -263,6 +263,27 @@ const typename Mathematics::Matrix<Real>::ContainerType Mathematics::Matrix<Real
 }
 
 template <typename Real>
+const typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::GetRowMajor() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    EntryType rowMatrix{ GetValue<0>(), GetValue<1>(), GetValue<2>(), GetValue<3>(),
+                         GetValue<4>(), GetValue<5>(), GetValue<6>(), GetValue<7>(),
+                         GetValue<8>(), GetValue<9>(), GetValue<10>(), GetValue<11>(),
+                         GetValue<12>(), GetValue<13>(), GetValue<14>(), GetValue<15>() };
+
+    return rowMatrix;
+}
+
+template <typename Real>
+void Mathematics::Matrix<Real>::Set(const EntryType& rowMajor) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    m_Entry = rowMajor;
+}
+
+template <typename Real>
 const Mathematics::Matrix<Real> Mathematics::Matrix<Real>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;

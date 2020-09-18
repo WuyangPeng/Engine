@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Colour.h" 
+#include "Colour.h"
 #include "ColourTextureFormatTraits.h"
 #include "Flags/TextureFormat.h"
 #include "System/Helper/EnumCast.h"

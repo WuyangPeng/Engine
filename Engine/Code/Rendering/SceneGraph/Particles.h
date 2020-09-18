@@ -23,7 +23,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Particles : public TrianglesMesh
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Particles);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Particles);
         using ParentType = TrianglesMesh;
         using ParticlesSmartPointer = CoreTools::NinthSubclassSmartPointer<ClassType>;
         using ConstParticlesSmartPointer = CoreTools::ConstNinthSubclassSmartPointer<ClassType>;

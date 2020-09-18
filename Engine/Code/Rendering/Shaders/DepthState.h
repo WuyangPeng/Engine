@@ -27,7 +27,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE DepthState : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(DepthState);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(DepthState);
         using ParentType = Object;
         using CompareMode = DepthStateFlags::CompareMode;
         using WriteFileManager = CoreTools::WriteFileManager;
@@ -36,8 +36,12 @@ namespace Rendering
     public:
         DepthState();
         ~DepthState();
+
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         DepthState(DepthState&&) noexcept = default;
         DepthState& operator=(DepthState&&) noexcept = default;
+        #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -53,7 +57,7 @@ namespace Rendering
 
         void SaveState(WriteFileManager& manager) const;
         void LoadState(ReadFileManager& manager);
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     private:
         IMPL_TYPE_DECLARE(DepthState);
     };

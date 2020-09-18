@@ -229,7 +229,7 @@ int Rendering::Visual
 }
 
 uint64_t Rendering::Visual
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -244,7 +244,7 @@ const	auto uniqueID = ParentType::Register(target);
 }
 
 void Rendering::Visual
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     

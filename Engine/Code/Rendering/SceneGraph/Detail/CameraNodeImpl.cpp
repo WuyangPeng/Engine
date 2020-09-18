@@ -20,7 +20,9 @@
 
 using std::string;
 using std::vector;
-
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::CameraNodeImpl ::CameraNodeImpl(const CameraSmartPointer& camera) noexcept
     : m_Camera{ camera }
 {
@@ -99,7 +101,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::CameraNodeImpl ::Get
     return m_Camera->GetAllConstObjectsByName(name);
 }
 
-int Rendering::CameraNodeImpl ::GetStreamingSize() const
+int Rendering::CameraNodeImpl ::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -108,7 +110,7 @@ const    auto size = CORE_TOOLS_STREAM_SIZE(m_Camera);
     return size;
 }
 
-uint64_t Rendering::CameraNodeImpl ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::CameraNodeImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -116,7 +118,7 @@ uint64_t Rendering::CameraNodeImpl ::Register(CoreTools::ObjectRegister& target)
     return m_Camera->Register(target);
 }
 
-void Rendering::CameraNodeImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::CameraNodeImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -147,3 +149,4 @@ bool Rendering::CameraNodeImpl ::IsNullPtr() const noexcept
 
     return !m_Camera;
 }
+#include STSTEM_WARNING_POP 

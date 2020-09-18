@@ -338,13 +338,12 @@ void Rendering::TextureCubeImpl
 }
 
 void Rendering::TextureCubeImpl
-    ::SaveLevelData (CoreTools::BufferTarget& target) const
+    ::SaveLevelData (const CoreTools::BufferTargetSharedPtr& target) const
 {
     m_TextureLevelData.Save(target);
 }
 
-int Rendering::TextureCubeImpl
-    ::GetLevelDataStreamingSize () const
+int Rendering::TextureCubeImpl ::GetLevelDataStreamingSize() const noexcept
 {
     return m_TextureLevelData.GetStreamingSize();
 }

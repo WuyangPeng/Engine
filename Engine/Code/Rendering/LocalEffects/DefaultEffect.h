@@ -26,7 +26,7 @@ namespace Rendering
 		// Construction and destruction.
 		DefaultEffect ();
  
-		
+		  ObjectInterfaceSharedPtr CloneObject() const override;
 		// Create an instance of the effect with unique parameters.
 		VisualEffectInstance* CreateInstance () const;
 		

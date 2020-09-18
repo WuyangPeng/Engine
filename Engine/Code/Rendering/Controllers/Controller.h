@@ -25,7 +25,7 @@ namespace Rendering
     public:
         // 复制一个Controller不会将其加入ControllerObject。
         // 销毁一个Controller不会将其从ControllerObject删除。
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Controller);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Controller);
         using ParentType = ControllerInterface;
     
     public:

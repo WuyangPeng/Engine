@@ -19,7 +19,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffer.h"
@@ -48,7 +48,7 @@ Rendering::PointController ::~PointController()
 }
 
 Rendering::PointController ::PointController(const PointController& rhs)
-    : ParentType(rhs), m_Impl{ make_shared<ImplType>(*rhs.m_Impl) }, m_Points{ CoreTools::StaticCast<Polypoint>(GetControllerObject()) }
+    : ParentType(rhs), m_Impl{ make_shared<ImplType>(*rhs.m_Impl) }, m_Points{ dynamic_cast<Polypoint*>(GetControllerObject()) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -59,7 +59,7 @@ Rendering::PointController& Rendering::PointController ::operator=(const PointCo
 
     ParentType::operator=(rhs);
     m_Impl = make_shared<ImplType>(*rhs.m_Impl);
-    m_Points = CoreTools::StaticCast<Polypoint>(GetControllerObject());
+    m_Points = dynamic_cast<Polypoint*>(GetControllerObject());
 
     return *this;
 }
@@ -131,7 +131,7 @@ void Rendering::PointController ::SetObject(ControllerInterface* object)
 
     if (object != nullptr)
     {
-        m_Points = CoreTools::StaticCast<Polypoint>(object);
+        m_Points = dynamic_cast<Polypoint*>(object);
         Reallocate(m_Points->GetVertexBuffer()->GetNumElements());
     }
     else
@@ -236,14 +236,14 @@ int Rendering::PointController ::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::PointController ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::PointController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return ParentType::Register(target);
 }
 
-void Rendering::PointController ::Save(CoreTools::BufferTarget& target) const
+void Rendering::PointController ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -273,7 +273,7 @@ void Rendering::PointController ::PostLink()
 
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::sm_Type), "Œﬁ–ß¿‡\n");
 
-    m_Points = CoreTools::StaticCast<Polypoint>(object);
+    m_Points = dynamic_cast<Polypoint*>(object);
 }
 
 void Rendering::PointController ::Load(CoreTools::BufferSource& source)

@@ -145,14 +145,13 @@ void Rendering::VertexColor4Effect
 	}
 }
 
-uint64_t Rendering::VertexColor4Effect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::VertexColor4Effect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::VertexColor4Effect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

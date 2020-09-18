@@ -1,117 +1,94 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:49)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/14 18:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ObjectRegisterImpl.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/ConstFirstSubclassSmartPointerDetail.h"
-
+#include "TopLevel.h"
 #include "System/Helper/PragmaWarning/NumericCast.h" 
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
-CoreTools::ObjectRegisterImpl
-	::ObjectRegisterImpl() noexcept
-	:m_Registered{}, m_Ordered{}
+CoreTools::ObjectRegisterImpl::ObjectRegisterImpl() noexcept
+    : m_Registered{}
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::ObjectRegisterImpl
-	::IsValid() const noexcept
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectRegisterImpl)
+
+uint64_t CoreTools::ObjectRegisterImpl::GetUniqueID(const ConstObjectInterfaceSharedPtr& object) const
 {
-	if (m_Registered.size() == m_Ordered.size())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-uint64_t CoreTools::ObjectRegisterImpl
-	::GetUniqueID(const ConstObjectInterfaceSmartPointer& smartPointer) const
-{
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    const auto& container = m_Registered.get<UniqueObject>();
 
-	const auto iter = m_Registered.find(smartPointer);
+    const auto iter = container.find(object);
 
-	if (iter != m_Registered.cend())
-	{
-		return iter->second;
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("object指针没有注册！"s));
-	}
+    if (iter != container.cend())
+    {
+        return iter->m_Associated;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("object指针没有注册！"s));
+    }
 }
 
-int CoreTools::ObjectRegisterImpl
-	::GetOrderedSize() const
+int CoreTools::ObjectRegisterImpl::GetOrderedSize() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return boost::numeric_cast<int>(m_Ordered.size());
+    return boost::numeric_cast<int>(m_Registered.size());
 }
 
-const CoreTools::ConstObjectInterfaceSmartPointer& CoreTools::ObjectRegisterImpl
-	::operator[](int index) const
+CoreTools::ConstRegisterContainerConstIter CoreTools::ObjectRegisterImpl::begin() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
-	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetOrderedSize(), "索引错误！");
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Ordered.at(index);
+    return m_Registered.begin();
 }
 
-uint64_t CoreTools::ObjectRegisterImpl
-	::RegisterRoot(const ConstObjectInterfaceSmartPointer& smartPointer)
+CoreTools::ConstRegisterContainerConstIter CoreTools::ObjectRegisterImpl::end() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	if (m_Registered.find(smartPointer) == m_Registered.cend())
-	{
-		// 这是对象第一次在图表对象中遇到。
-		// 我们需要使加载——连接器系统正常工作写入一个唯一的标识符到磁盘。最简单的就是写对象的地址，
-		// 所以我们可以使用Object::Save保存在一组地址在set中（“注册”）。但这有两个问题：
-
-		// 1. 地址在两次应用程序运行时改变。两次运行，相同的场景图将导致不同的对象的排序，
-		// 因为在“注册”地址的顺序发生了变化。一个解决方案是存储地址的数组（ordered）并保存对象存储顺序在数组中。
-
-		// 2. 即使保障了对象的顺序，两次运行，相同的场景图将导致文件不逐字节匹配。地址本身改变。
-		// 一个解决办法是指定一个“虚拟地址”到每个对象，因为它被注册。最简单的就是使用“ordered”对象的索引。
-		// 为了避免零地址和零指数之间的混淆，我们使用索引是数组的索引加一。
-		auto uniqueID = GetOriginalUniqueID(smartPointer);
-
-		m_Registered.insert({ smartPointer, uniqueID });
-		m_Ordered.push_back(smartPointer);
-
-		return uniqueID;
-	}
-	else
-	{
-		return 0;
-	}
+    return m_Registered.end();
 }
 
-// private
-uint64_t CoreTools::ObjectRegisterImpl
-	::GetOriginalUniqueID(const ConstObjectInterfaceSmartPointer& smartPointer) const noexcept
+uint64_t CoreTools::ObjectRegisterImpl::RegisterRoot(const ConstObjectInterfaceSharedPtr& object)
 {
-	uint64_t uniqueID{ 0 };
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	if (smartPointer != nullptr)
-	{
-		uniqueID = smartPointer->GetUniqueID();
-	}
+    const auto& container = m_Registered.get<UniqueObject>();
 
-	if (uniqueID == 0)
-	{
-		uniqueID = m_Ordered.size();
-	}
+    if (container.find(object) == container.cend())
+    {
+        // 这是对象第一次在图表对象中遇到。
+        // 我们需要使加载——连接器系统正常工作写入一个唯一的标识符到磁盘。最简单的就是写对象的地址，
+        // 所以我们可以使用Object::Save保存在一组地址在set中（“注册”）。但这有两个问题：
 
-	return uniqueID;
+        // 1. 地址在两次应用程序运行时改变。两次运行，相同的场景图将导致不同的对象的排序，
+        // 因为在“注册”地址的顺序发生了变化。一个解决方案是存储地址的数组（ordered）并保存对象存储顺序在数组中。
+
+        // 2. 即使保障了对象的顺序，两次运行，相同的场景图将导致文件不逐字节匹配。地址本身改变。
+        // 一个解决办法是指定一个“虚拟地址”到每个对象，因为它被注册。最简单的就是使用“ordered”对象的索引。
+        // 为了避免零地址和零指数之间的混淆，我们使用索引是数组的索引加一。
+
+        auto uniqueID = m_Registered.size() + 1;
+
+        m_Registered.emplace_back(object, uniqueID);
+
+        return uniqueID;
+    }
+    else
+    {
+        return 0;
+    }
 }
-

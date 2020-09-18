@@ -64,7 +64,7 @@ namespace Rendering
 
 		// Update of active set of terrain pages.
 		void OnCameraMotion();
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		void LoadHeader(const System::String& heightName);
 

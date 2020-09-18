@@ -24,10 +24,12 @@
 using std::vector;
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering,VertexFormat);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,VertexFormat);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,VertexFormat); 
@@ -174,7 +176,7 @@ int Rendering::VertexFormat
 }
 
 uint64_t Rendering::VertexFormat
-	::Register( CoreTools::ObjectRegister& target ) const
+	::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -182,7 +184,7 @@ uint64_t Rendering::VertexFormat
 }
 
 void Rendering::VertexFormat
-	::Save (CoreTools::BufferTarget& target) const
+	::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -260,6 +262,12 @@ Rendering::VertexFormatSmartPointer Rendering::VertexFormat
 	vertexFormat->ReadFromFile(manager);
 
 	return vertexFormat;
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::VertexFormat::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

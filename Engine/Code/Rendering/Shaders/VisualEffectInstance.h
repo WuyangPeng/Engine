@@ -23,14 +23,19 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE VisualEffectInstance : public CoreTools::Object
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualEffectInstance);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualEffectInstance);
 		using ParentType = Object;
 
 	public:
 		VisualEffectInstance(const VisualEffectSmartPointer& effect, int techniqueIndex);
 		  ~VisualEffectInstance();
+
+		  #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
                 VisualEffectInstance(VisualEffectInstance&&) noexcept = default;
                   VisualEffectInstance& operator=(VisualEffectInstance&&) noexcept = default;
+				    #include STSTEM_WARNING_POP
+
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualEffectInstance);
@@ -74,7 +79,7 @@ namespace Rendering
 		const ConstShaderFloatSmartPointer GetPixelConstant(int pass, int handle) const;
 		const ConstTextureSmartPointer GetVertexTexture(int pass, int handle) const;
 		const ConstTextureSmartPointer GetPixelTexture(int pass, int handle) const;
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(VisualEffectInstance);
 	};

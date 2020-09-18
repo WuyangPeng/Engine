@@ -11,6 +11,7 @@
 
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/Shaders/Flags/AlphaStateFlags.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -41,7 +42,7 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 
 		void Load(BufferSource& source);
-		void Save(BufferTarget& target) const;
+		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
 
 		bool IsBlendEnabled() const;

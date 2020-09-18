@@ -19,7 +19,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE IKJoint : public CoreTools::Object 
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKJoint);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKJoint);
 		using ParentType = Object;
 		using APoint = Mathematics::FloatAPoint;
 		using AVector = Mathematics::FloatAVector;
@@ -29,8 +29,12 @@ namespace Rendering
 	public:		
 		IKJoint(const SpatialSmartPointer& object,const IKGoalSmartPointerVector& goals);
 		  ~IKJoint();
+
+		  #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
                 IKJoint(IKJoint&&) = default;
                 IKJoint& operator=(IKJoint&&) = default;
+#include STSTEM_WARNING_POP
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -53,7 +57,7 @@ namespace Rendering
 
 		bool IsAllowTranslation(MatrixRotationAxis axisIndex) const;
 		bool IsAllowRotation(MatrixRotationAxis axisIndex) const;
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(IKJoint);
 	};

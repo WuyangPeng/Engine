@@ -54,6 +54,15 @@ void CoreTools::BufferSource ::Read(std::vector<T>& datum)
     }
 }
 
+template <typename T, int Size>
+void CoreTools::BufferSource::Read(std::array<T, Size>& datum)
+{
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    Read(Size, datum.data());
+}
+
 template <typename T>
 void CoreTools::BufferSource ::ReadEnum(T& datum)
 {
@@ -107,7 +116,7 @@ void CoreTools::BufferSource ::ReadAggregate(std::vector<T>& datum)
 template <typename T>
 void CoreTools::BufferSource ::ReadSmartPointer(T& object)
 {
-    static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
+    static_assert(std::is_base_of_v<ConstObjectInterfaceSharedPtr, T>, "T is not base of ConstObjectInterfaceSmartPointer");
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     uint64_t uniqueID{ 0 };
@@ -119,7 +128,7 @@ void CoreTools::BufferSource ::ReadSmartPointer(T& object)
 template <typename T>
 void CoreTools::BufferSource ::ReadSmartPointer(std::vector<T>& datum)
 {
-    static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
+    static_assert(std::is_base_of_v<ConstObjectInterfaceSharedPtr, T>, "T is not base of ConstObjectInterfaceSmartPointer");
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     int32_t size{ 0 };
@@ -136,7 +145,7 @@ void CoreTools::BufferSource ::ReadSmartPointer(std::vector<T>& datum)
 template <typename T>
 void CoreTools::BufferSource ::ReadSmartPointer(int elementsNumber, T* objects)
 {
-    static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
+    static_assert(std::is_base_of_v<ConstObjectInterfaceSharedPtr, T>, "T is not base of ConstObjectInterfaceSmartPointer");
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     for (auto i = 0; i < elementsNumber; ++i)
@@ -146,7 +155,7 @@ void CoreTools::BufferSource ::ReadSmartPointer(int elementsNumber, T* objects)
 }
 
 template <typename T, int size>
-void CoreTools::BufferSource::ReadWeakPtr(std::array<WeakPtr<T>,size>& datum)
+void CoreTools::BufferSource::ReadWeakPtr(std::array<WeakPtr<T>, size>& datum)
 {
     static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
@@ -180,7 +189,7 @@ void CoreTools::BufferSource::ReadWeakPtr(WeakPtr<T>& object)
     static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-     uint64_t uniqueID{ 0 };
+    uint64_t uniqueID{ 0 };
     m_Source.Read(sizeof(uint64_t), &uniqueID);
 
     object = T{ uniqueID };

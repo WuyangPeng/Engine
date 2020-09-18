@@ -10,7 +10,7 @@
 #include "TelegramMessageManager.h"
 #include "Telegram.h"
 #include "EntityManagerDetail.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
@@ -191,7 +191,7 @@ void CoreTools::TelegramMessageManager<EventType>
 {
 	auto entity = ENTITY_MANAGER_SINGLETON.GetEntity(entityID);
 
-	auto eventEntity = PolymorphicSharedPtrDowncast<EventEntity>(entity);
+	auto eventEntity = boost::polymorphic_pointer_downcast<EventEntity>(entity);
 
 	eventEntity->EventFunction(telegram);
 }

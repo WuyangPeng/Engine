@@ -501,6 +501,66 @@
     <Text Include="Resource\References\Libs\CoreTools\cppunit.txt">
       <Filter>资源文件\References\Libs\Database</Filter>
     </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Intermediate.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\The C++ Programming Language.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Ruminations on C++.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Efficient C++ Performance Programming Techniques.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Imperfect C++.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Applied C++.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ footprint and Performance Optimization.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Programming Today.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Gotchas.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ In Action Industrial-Strength Programming Techniques.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Strategies and Tactics.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Cookbook.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Advanced C++.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Professional C++.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ A Software Enginearing Approach.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Effective Object-Oriented Software Construction.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\How not to Program in C++.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Master Reference.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Thomas Wong C + + programming secret.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Intermediate\Optimized C++.txt">
+      <Filter>资源文件\References\Cpp\Intermediate</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h">

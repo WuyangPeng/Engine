@@ -57,6 +57,13 @@ Rendering::ControllerInterfaceSmartPointer Rendering::BlendTransformController
 
 	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::BlendTransformController ::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return Clone();
+} 
 									  
 Rendering::BlendTransformController
 	::BlendTransformController(LoadConstructor value)
@@ -78,7 +85,7 @@ int Rendering::BlendTransformController
 }
 
 uint64_t Rendering::BlendTransformController
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 
@@ -92,7 +99,7 @@ uint64_t Rendering::BlendTransformController
 }
 
 void Rendering::BlendTransformController
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -202,7 +209,7 @@ bool Rendering::BlendTransformController
 			SetMatrix(blendMatrix);
 		}
 
-		auto spatial = CoreTools::StaticCast<Spatial>(GetControllerObject());
+		auto spatial = dynamic_cast<Spatial*>(GetControllerObject());
 
 		spatial->SetLocalTransform(GetTransform());	 
 

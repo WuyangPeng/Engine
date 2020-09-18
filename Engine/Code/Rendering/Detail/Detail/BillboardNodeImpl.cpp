@@ -49,7 +49,7 @@ int Rendering::BillboardNodeImpl
 }
 
 void Rendering::BillboardNodeImpl
-	::Save(CoreTools::BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -72,8 +72,7 @@ void Rendering::BillboardNodeImpl
 	//source.ResolveObjectSmartPointerLink(m_Camera); 
 }
 
-void Rendering::BillboardNodeImpl
-	::Register(CoreTools::ObjectRegister& target) const 
+void Rendering::BillboardNodeImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

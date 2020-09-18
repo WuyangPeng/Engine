@@ -14,6 +14,7 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
 #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -192,7 +193,7 @@ void Rendering::ConvexRegion
 }
 
 uint64_t Rendering::ConvexRegion
-	::Register(CoreTools::ObjectRegister& target) const
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     if (Node::Register(target))
     {
@@ -203,7 +204,7 @@ uint64_t Rendering::ConvexRegion
 }
 
 void Rendering::ConvexRegion
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -234,6 +235,13 @@ int Rendering::ConvexRegion
 	 ::GetPortal (int i) const noexcept
 {
 	return mPortals[i];
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::ConvexRegion::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

@@ -11,6 +11,7 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h" 
 #include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 // CORE_TOOLS_STREAM_SIZE宏被流系统使用。
 #define CORE_TOOLS_STREAM_SIZE(value) CoreTools::GetStreamSize(value) 
@@ -46,12 +47,14 @@
 		private: static bool sm_StreamRegistered; \
 		public: static bool RegisterFactory (); \
 		static void InitializeFactory (); static void TerminateFactory (); \
-		static CoreTools::ObjectInterfaceSmartPointer Factory (CoreTools::BufferSource& source)   
+		static CoreTools::ObjectInterfaceSharedPtr Factory (CoreTools::BufferSource& source)   
 
 #define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE \
 		void Load (CoreTools::BufferSource& source) override; void Link (CoreTools::ObjectLink& source) override; \
-		void PostLink () override; uint64_t Register(CoreTools::ObjectRegister& target) const override; \
-		void Save (CoreTools::BufferTarget& target) const override; int GetStreamingSize () const override;    
+		void PostLink() override;                                                     \
+    uint64_t Register(const CoreTools::ObjectRegisterSharedPtr& target) const override; \
+		void Save(const CoreTools::BufferTargetSharedPtr& target) const override;           \
+    int GetStreamingSize() const override;    
 
 #define CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(className) \
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(className); \
@@ -59,16 +62,16 @@
 		CORE_TOOLS_RTTI_OVERRIDE_DECLARE
 
 #define CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(namespaceName,className) \
-	    CoreTools::ObjectInterfaceSmartPointer namespaceName::className::Factory (CoreTools::BufferSource& ){ \
-		ASSERTION_0(false, "抽象类没有工厂！\n"); return CoreTools::ObjectInterfaceSmartPointer(); }
+	    CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory (CoreTools::BufferSource& ){ \
+		ASSERTION_0(false, "抽象类没有工厂！\n"); return CoreTools::ObjectInterfaceSharedPtr(); }
 
 #define CORE_TOOLS_FACTORY_DEFINE(namespaceName,className) \
-        CoreTools::ObjectInterfaceSmartPointer namespaceName::className::Factory(CoreTools::BufferSource& source) { \
-        CoreTools::ObjectInterfaceSmartPointer object{ std::make_shared<className>(LoadConstructor::ConstructorLoader) }; \
+        CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(CoreTools::BufferSource& source) { \
+        CoreTools::ObjectInterfaceSharedPtr object{ std::make_shared<className>(LoadConstructor::ConstructorLoader) }; \
         object->Load(source); return object; }
 
 #define CORE_TOOLS_STREAM_REGISTER(className) \
-	    static bool SYSTEM_MULTIPLE_CONCATENATOR(gs_,className,StreamRegistered) { className::RegisterFactory() }
+	    static auto SYSTEM_MULTIPLE_CONCATENATOR(g_,className,StreamRegistered) = className::RegisterFactory() 
 
 #define CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(namespaceName,className) \
 	    bool namespaceName::className::sm_StreamRegistered { false }; \
@@ -89,16 +92,19 @@
 		size += m_Impl->GetStreamingSize();	return size; }
 
 #define CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(namespaceName,className) \
-		uint64_t namespaceName::className::Register( CoreTools::ObjectRegister& target ) const { \
+		uint64_t namespaceName::className::Register(const CoreTools::ObjectRegisterSharedPtr& target) const \
+    { \
 		CLASS_IS_VALID_CONST_0;	return ParentType::Register(target); }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_REGISTER_DEFINE(namespaceName,className) \
-		uint64_t namespaceName::className::Register( CoreTools::ObjectRegister& target ) const { \
+		uint64_t namespaceName::className::Register(const CoreTools::ObjectRegisterSharedPtr& target) const \
+    { \
 		CLASS_IS_VALID_CONST_0; const auto uniqueID = ParentType::Register(target); \
 		if (uniqueID != 0) { m_Impl->Register(target); } return uniqueID; }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(namespaceName,className) \
-		void namespaceName::className::Save (CoreTools::BufferTarget& target) const { \
+		void namespaceName::className::Save(const CoreTools::BufferTargetSharedPtr& target) const \
+    { \
 		CLASS_IS_VALID_CONST_0;	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target); \
 		ParentType::Save(target); m_Impl->Save(target); CORE_TOOLS_END_DEBUG_STREAM_SAVE(target); }
 

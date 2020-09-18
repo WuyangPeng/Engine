@@ -22,7 +22,7 @@
 template <>
 struct CoreTools::StreamSize<Rendering::FloatTransform>
 {
-    static int GetStreamSize(const Rendering::FloatTransform& value)
+    static int GetStreamSize(const Rendering::FloatTransform& value) noexcept
     {
         return value.GetStreamingSize();
     }
@@ -31,7 +31,7 @@ struct CoreTools::StreamSize<Rendering::FloatTransform>
 template <>
 struct CoreTools::StreamSize<Rendering::FloatBound>
 {
-    static int GetStreamSize(const Rendering::FloatBound& value)
+    static int GetStreamSize(const Rendering::FloatBound& value) noexcept
     {
         return value.GetStreamingSize();
     }
@@ -40,11 +40,9 @@ struct CoreTools::StreamSize<Rendering::FloatBound>
 template <typename T>
 struct CoreTools::StreamSize<Rendering::Colour<T>>
 {
-    static int GetStreamSize(const Rendering::Colour<T>& value)
+    constexpr static int GetStreamSize([[maybe_unused]] const Rendering::Colour<T>& value) noexcept
     {
-        SYSTEM_UNUSED_ARG(value);
-
-        return Rendering::Colour<T>::sm_ArraySize * CoreTools::GetStreamSize(value.GetRed());
+        return Rendering::Colour<T>::sm_ArraySize * CoreTools::GetStreamSize<T>();
     }
 };
 
@@ -99,8 +97,8 @@ RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Ren
 namespace Rendering
 {
     template <typename T>
-    int GetStreamSize(T value) noexcept(noexcept(CoreTools::StreamSize<T>::GetStreamSize(value))) 
-    {         
+    int GetStreamSize(T value) noexcept(noexcept(CoreTools::StreamSize<T>::GetStreamSize(value)))
+    {
         return CoreTools::StreamSize<T>::GetStreamSize(value);
     }
 }

@@ -57,8 +57,8 @@ namespace Rendering
         void GenerateNextMipmap(int length, const char* texels, int lengthNext, char* texelsNext);
 
         void LoadLevelData(CoreTools::BufferSource& source) override;
-        void SaveLevelData(CoreTools::BufferTarget& target) const override;
-        int GetLevelDataStreamingSize() const override;
+        void SaveLevelData(const CoreTools::BufferTargetSharedPtr& target) const override;
+        int GetLevelDataStreamingSize() const noexcept override;
 
         void SaveLevelDataToFile(WriteFileManager& outFile) const override;
         void LoadLevelDataFromFile(ReadFileManager& inFile) override;

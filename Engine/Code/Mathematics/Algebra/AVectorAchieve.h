@@ -84,7 +84,7 @@ void Mathematics::AVector<T>::SetX(T x) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-     m_HomogeneousPoint.SetX(x);
+    m_HomogeneousPoint.SetX(x);
 }
 
 template <typename T>
@@ -254,6 +254,23 @@ bool Mathematics::AVector<T>::IsNormalize(const T epsilon) const noexcept(g_Asse
     {
         return true;
     }
+}
+
+template <typename T>
+const typename Mathematics::AVector<T>::ArrayType Mathematics::AVector<T>::GetCoordinate() const noexcept
+{
+    return ArrayType{ GetX(), GetY(), GetZ() };
+}
+
+template <typename T>
+void Mathematics::AVector<T>::Set(const ArrayType& coordinate) noexcept
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    SetX(coordinate[0]);
+    SetY(coordinate[1]);
+    SetZ(coordinate[2]);
+#include STSTEM_WARNING_POP
 }
 
 #endif  // MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H

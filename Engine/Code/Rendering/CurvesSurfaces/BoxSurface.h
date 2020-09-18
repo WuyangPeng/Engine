@@ -67,7 +67,7 @@ namespace Rendering
 		void EnableSorting();
 		void DisableSorting();
 		void SortFaces(const AVector& worldViewDirection);
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		TrianglesMeshSmartPointer CreateFace(int numRows, int numCols, VertexFormatSmartPointer vformat,bool ccw, float faceValue, int permute[3]);
 

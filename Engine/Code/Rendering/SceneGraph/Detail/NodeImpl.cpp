@@ -28,6 +28,7 @@ using std::vector;
  #include SYSTEM_WARNING_DISABLE(26418)
  #include SYSTEM_WARNING_DISABLE(26496)
  #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26415) 
 Rendering::NodeImpl
     ::NodeImpl (Node* realThis)
 	:m_Child{}, m_RealThis{ realThis }
@@ -400,8 +401,7 @@ void Rendering::NodeImpl
     }
 }
 
-void Rendering::NodeImpl
-    ::Register (ObjectRegister& target) const
+void Rendering::NodeImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -417,12 +417,12 @@ void Rendering::NodeImpl
 }
 
 void Rendering::NodeImpl
-    ::Save (BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     const auto numChildren = boost::numeric_cast<int>(m_Child.size());
-    target.Write(numChildren);
+    target->Write(numChildren);
 
 	if (!m_Child.empty())
 	{

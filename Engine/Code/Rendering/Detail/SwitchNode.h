@@ -31,7 +31,7 @@ namespace Rendering
 		void DisableAllChildren () noexcept;
 
 		 ControllerInterfaceSmartPointer Clone() const override;
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 		 const PickRecordContainer ExecuteRecursive(const APoint& origin,const AVector& direction, float tMin, float tMax) const override;
 	 
 	protected:

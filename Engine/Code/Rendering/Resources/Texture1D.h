@@ -18,7 +18,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Texture1D : public Texture
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture1D);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture1D);
         using ParentType = Texture;
         using Texture1DSmartPointer = std::shared_ptr<ClassType>;
         using ConstTexture1DSmartPointer = std::shared_ptr<const ClassType>;
@@ -64,7 +64,7 @@ namespace Rendering
         const char* GetTextureData(int level) const;
 
         TextureSmartPointer Clone() const override;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     private:
         IMPL_TYPE_DECLARE(Texture1D);
     };

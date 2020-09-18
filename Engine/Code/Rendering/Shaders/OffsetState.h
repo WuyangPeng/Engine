@@ -27,7 +27,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE OffsetState : public CoreTools::Object
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(OffsetState);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(OffsetState);
 		using ParentType = Object;
 		using WriteFileManager = CoreTools::WriteFileManager;
 		using ReadFileManager = CoreTools::ReadFileManager;
@@ -35,8 +35,13 @@ namespace Rendering
 	public:
 		OffsetState();
 		  ~OffsetState();
+
+		  #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
                 OffsetState(OffsetState&&) noexcept = default;
                   OffsetState& operator=(OffsetState&&) noexcept = default;
+				     #include STSTEM_WARNING_POP
+
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(OffsetState); 
@@ -55,7 +60,7 @@ namespace Rendering
 
 		void SaveState(WriteFileManager& manager) const;
 		void LoadState(ReadFileManager& manager);
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(OffsetState);
 	};

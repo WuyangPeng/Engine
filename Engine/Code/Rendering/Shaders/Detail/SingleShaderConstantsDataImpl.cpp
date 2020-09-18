@@ -14,7 +14,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::string;
-
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::SingleShaderConstantsDataImpl
 	::SingleShaderConstantsDataImpl( const string& name,int numRegistersUsed )
 	:m_Name{ name }, m_NumRegistersUsed{ numRegistersUsed }
@@ -73,12 +75,12 @@ void Rendering::SingleShaderConstantsDataImpl
 }
 
 void Rendering::SingleShaderConstantsDataImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.WriteString(m_Name);
-	target.Write(m_NumRegistersUsed);
+	target->Write(m_Name);
+	target->Write(m_NumRegistersUsed);
 }
 
 int Rendering::SingleShaderConstantsDataImpl
@@ -93,3 +95,4 @@ int Rendering::SingleShaderConstantsDataImpl
 }
 
 
+#include STSTEM_WARNING_POP

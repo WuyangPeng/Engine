@@ -21,7 +21,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE RenderTarget : public CoreTools::Object 
     {
     public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(RenderTarget);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(RenderTarget);
 		using ParentType = Object;
      	using Texture2DSmartPointer = std::shared_ptr<Texture2D>;
 		using ConstTexture2DSmartPointer = std::shared_ptr< const Texture2D>;
@@ -34,8 +34,11 @@ namespace Rendering
         
           ~RenderTarget ();
  
+          #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 		   RenderTarget( RenderTarget&&) = default;
 		  RenderTarget& operator=( RenderTarget&&) = default;
+          		#include STSTEM_WARNING_POP
 		  
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
@@ -50,7 +53,7 @@ namespace Rendering
 		ConstTexture2DSmartPointer GetDepthStencilTexture() const noexcept;
         bool HasMipmaps () const noexcept;
         bool HasDepthStencil () const noexcept;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     private:
 		IMPL_TYPE_DECLARE(RenderTarget);
     };

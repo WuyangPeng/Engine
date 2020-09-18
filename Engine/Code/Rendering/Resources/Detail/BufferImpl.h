@@ -63,7 +63,7 @@ namespace Rendering
         void SaveBufferDataToFile(WriteFileManager& outFile, const ConstVertexFormatSmartPointer& vertexformat) const;
 
         void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const;
 
         char* GetAccessWriteData(int index);

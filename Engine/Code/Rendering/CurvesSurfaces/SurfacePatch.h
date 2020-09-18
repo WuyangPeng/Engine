@@ -24,7 +24,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE SurfacePatch : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(SurfacePatch);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(SurfacePatch);
         using ParentType = Object;
         using AVector = Mathematics::FloatAVector;
         using APoint = Mathematics::FloatAPoint;
@@ -32,8 +32,12 @@ namespace Rendering
     public:
         SurfacePatch(float uMin, float uMax, float vMin, float vMax, bool rectangular);
         ~SurfacePatch() = default;
+
+          #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         SurfacePatch(SurfacePatch&&) = default;
         SurfacePatch& operator=(SurfacePatch&&) = default;
+          #include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
         CLASS_INVARIANT_OVERRIDE_DECLARE;

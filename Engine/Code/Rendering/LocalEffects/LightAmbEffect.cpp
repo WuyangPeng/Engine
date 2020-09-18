@@ -157,14 +157,13 @@ void Rendering::LightAmbEffect
 	}
 }
 
-uint64_t Rendering::LightAmbEffect
-	::Register(CoreTools::ObjectRegister& target) const 
+uint64_t Rendering::LightAmbEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::LightAmbEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

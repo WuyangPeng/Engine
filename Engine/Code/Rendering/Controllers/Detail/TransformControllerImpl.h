@@ -42,8 +42,8 @@ namespace Rendering
         void SetScale(const APoint& scale);
         void SetMatrix(const Matrix& matrix);
 
-        int GetStreamingSize() const;
-        void Save(CoreTools::BufferTarget& target) const;
+        int GetStreamingSize() const noexcept;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         void Load(CoreTools::BufferSource& source);
 
     private:

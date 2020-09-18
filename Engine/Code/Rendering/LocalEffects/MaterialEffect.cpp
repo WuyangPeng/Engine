@@ -13,6 +13,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
  #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -145,14 +146,13 @@ void Rendering::MaterialEffect::PostLink ()
 	}
 }
 
-uint64_t Rendering::MaterialEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::MaterialEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::MaterialEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -263,4 +263,11 @@ std::string Rendering::MaterialEffect::msPPrograms[System::EnumCastUnderlying(Sh
     "MOV result.color, fragment.color.primary;\n"
     "END\n"
 };
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::MaterialEffect::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

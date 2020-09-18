@@ -195,6 +195,25 @@ void Mathematics::Vector4D<Real>
 }
 
 template <typename Real>
+void Mathematics::Vector4D<Real>::SetCoordinate(const ArrayType& coordinate)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    m_Tuple[0] = coordinate.at(0);
+    m_Tuple[1] = coordinate.at(1);
+    m_Tuple[2] = coordinate.at(2);
+    m_Tuple[3] = coordinate.at(3);
+}
+
+template <typename Real>
+typename Mathematics::Vector4D<Real>::ArrayType Mathematics::Vector4D<Real>::GetCoordinate() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ArrayType{ m_Tuple[0], m_Tuple[1], m_Tuple[2], m_Tuple[3] };
+}
+
+template <typename Real>
 void Mathematics::Vector4D<Real>
 	::SetXCoordinate(Real x)
 {

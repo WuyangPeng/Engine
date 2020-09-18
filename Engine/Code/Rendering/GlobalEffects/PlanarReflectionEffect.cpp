@@ -327,8 +327,7 @@ int Rendering::PlanarReflectionEffect
 	return size;	 
 }
 
-uint64_t Rendering::PlanarReflectionEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::PlanarReflectionEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	const auto id = ParentType::Register(target);
 	if (0 < id)
@@ -341,13 +340,13 @@ uint64_t Rendering::PlanarReflectionEffect
 }
 
 void Rendering::PlanarReflectionEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
 	ParentType::Save(target);
 
-	target.WriteWithNumber(mNumPlanes, mReflectances);
+	//target.WriteWithNumber(mNumPlanes, mReflectances);
 	//target.WriteSmartPointerWithNumber(mNumPlanes, mPlanes);
 
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);	
@@ -413,4 +412,10 @@ float Rendering::PlanarReflectionEffect ::GetReflectance(int i) const noexcept
 {
 	return mReflectances[i];
 }
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::PlanarReflectionEffect::CloneObject() const
+{
+    return std::make_shared<ClassType>(*this);
+}
+
 #include STSTEM_WARNING_POP

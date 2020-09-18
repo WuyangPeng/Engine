@@ -12,7 +12,7 @@
 #include "Rendering/SceneGraph/Projector.h"
 
 #include <vector>
-#include <string>
+#include <string> 
  
 namespace CoreTools
 {
@@ -49,10 +49,10 @@ namespace Rendering
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 	
 		virtual void Load(BufferSource& source);
-		virtual void Save(BufferTarget& target) const;
+		virtual void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		virtual int GetStreamingSize() const;
 		void Link(ObjectLink& source);
-		void Register(ObjectRegister& target) const;
+                void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
 		const ObjectSmartPointer GetObjectByName(const std::string& name); 
 		const std::vector<ObjectSmartPointer> GetAllObjectsByName(const std::string& name); 

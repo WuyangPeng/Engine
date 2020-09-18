@@ -13,7 +13,7 @@
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
 
-bool CoreTools::ObjectInterfaceSmartPointerLess ::operator()(const ConstObjectInterfaceSmartPointer& lhs, const ConstObjectInterfaceSmartPointer& rhs) noexcept
+bool CoreTools::ObjectInterfaceSmartPointerLess ::operator()(const ConstObjectInterfaceSharedPtr& lhs, const ConstObjectInterfaceSharedPtr& rhs) noexcept
 {
 	return lhs->GetUniqueID() < rhs->GetUniqueID();
 }

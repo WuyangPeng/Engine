@@ -53,6 +53,9 @@ namespace Mathematics
         using Matrix3Extract = Matrix3Extract<Real>;
         using Matrix3EigenDecomposition = Matrix3EigenDecomposition<Real>;
 
+        static constexpr auto sm_MatrixSize = 9;
+        using ArrayType = std::array<Real, sm_MatrixSize>;
+
     public:
         // 如果标志为MatrixFlagsZero，创建零矩阵，
         // 否则创建单位矩阵。
@@ -149,7 +152,7 @@ namespace Mathematics
         void MakeEulerYXZ(Real yAngle, Real xAngle, Real zAngle);
         void MakeEulerYZX(Real yAngle, Real zAngle, Real xAngle);
         void MakeEulerZXY(Real zAngle, Real xAngle, Real yAngle);
-        void MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle) ;
+        void MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle);
         void MakeEulerXYX(Real x0Angle, Real yAngle, Real x1Angle);
         void MakeEulerXZX(Real x0Angle, Real zAngle, Real x1Angle);
         void MakeEulerYXY(Real y0Angle, Real xAngle, Real y1Angle);
@@ -284,6 +287,9 @@ namespace Mathematics
         // 如果Q是一个旋转矩阵使用单位长度轴U和角A，
         // 则Q^ t是一个旋转矩阵使用单位长度轴U和旋转角度t*A。
         void Slerp(Real t, const Matrix3& firstRot, const Matrix3& secondRot);
+
+        [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
+        void Set(const ArrayType& coordinate) noexcept;
 
         // 特殊矩阵。
         static const Matrix3 sm_Zero;

@@ -19,7 +19,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Material : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Material);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Material);
         using ParentType = Object;
         using Colour = Colour<float>;
 
@@ -28,8 +28,11 @@ namespace Rendering
         Material(const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular);
         ~Material();
 
+         #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         Material(Material&&) = default;
         Material& operator=(Material&&) = default;
+        	#include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -47,7 +50,7 @@ namespace Rendering
 
         float GetAlpha() const;
         float GetSpecularExponent() const;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     private:
         IMPL_TYPE_DECLARE(Material);
     };

@@ -19,6 +19,8 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::MaterialImpl
     ::MaterialImpl()
 	:m_Emissive{ 0.0f, 0.0f, 0.0f, 1.0f }, m_Ambient{ 0.0f, 0.0f, 0.0f, 1.0f }, m_Diffuse{ 0.0f, 0.0f, 0.0f, 1.0f }, m_Specular{ 0.0f, 0.0f, 0.0f, 0.0f }
@@ -46,14 +48,14 @@ void Rendering::MaterialImpl
 }
 
 void Rendering::MaterialImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteAggregate(m_Emissive);
-	target.WriteAggregate(m_Ambient);
-	target.WriteAggregate(m_Diffuse);
-	target.WriteAggregate(m_Specular);
+	target->WriteAggregate(m_Emissive);
+        target->WriteAggregate(m_Ambient);
+        target->WriteAggregate(m_Diffuse);
+        target->WriteAggregate(m_Specular);
 }
 
 int Rendering::MaterialImpl

@@ -29,7 +29,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderFloat : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderFloat);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderFloat);
         using ParentType = Object;
         using FloatVector = std::vector<float>;
         using AVector = Mathematics::FloatAVector;
@@ -45,8 +45,12 @@ namespace Rendering
         explicit ShaderFloat(int numRegisters);
         explicit ShaderFloat(const FloatVector& data);
         ~ShaderFloat();
+
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         ShaderFloat(ShaderFloat&&) noexcept = default;
         ShaderFloat& operator=(ShaderFloat&&) noexcept = default;
+        		   #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -82,7 +86,7 @@ namespace Rendering
         void DisableUpdater();
         bool AllowUpdater() const;
         virtual void Update(const Visual* visual, const Camera* camera);
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
         virtual ShaderFloatSmartPointer Clone() const;
 
     private:

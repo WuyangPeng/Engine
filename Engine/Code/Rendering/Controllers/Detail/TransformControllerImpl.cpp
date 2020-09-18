@@ -9,7 +9,10 @@
 #include "TransformControllerImpl.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include STSTEM_WARNING_PUSH
+ 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::TransformControllerImpl
 	::TransformControllerImpl(const FloatTransform& localTransform) noexcept
 	: m_LocalTransform{ localTransform }
@@ -34,7 +37,7 @@ const Rendering::FloatTransform Rendering::TransformControllerImpl ::GetTransfor
 }
 
 int Rendering::TransformControllerImpl
-	::GetStreamingSize() const
+	::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -42,11 +45,11 @@ int Rendering::TransformControllerImpl
 }
 
 void Rendering::TransformControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteAggregate(m_LocalTransform);
+	target->WriteAggregate(m_LocalTransform);
 }
 
 void Rendering::TransformControllerImpl
@@ -98,3 +101,4 @@ void Rendering::TransformControllerImpl
 }
 
 
+#include STSTEM_WARNING_POP

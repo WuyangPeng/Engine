@@ -10,7 +10,7 @@
 #include "Detail/IKJointImpl.h"
 #include "Rendering/SceneGraph/Spatial.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -26,6 +26,7 @@ using std::make_shared;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, IKJoint);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IKJoint);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IKJoint);
@@ -81,7 +82,7 @@ int Rendering::IKJoint
 }
 
 uint64_t Rendering::IKJoint
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -95,7 +96,7 @@ uint64_t Rendering::IKJoint
 }
 
 void Rendering::IKJoint
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -159,4 +160,12 @@ void Rendering::IKJoint
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,IsAllowTranslation,MatrixRotationAxis,bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,IsAllowRotation,MatrixRotationAxis,bool)
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::IKJoint::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

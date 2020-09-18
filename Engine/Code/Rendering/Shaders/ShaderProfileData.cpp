@@ -21,6 +21,7 @@ using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering,ShaderProfileData);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ShaderProfileData);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ShaderProfileData); 
@@ -95,5 +96,11 @@ const std::string Rendering::ShaderProfileData
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderProfileData, GetBaseRegisterSize, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderProfileData, GetTextureUnitSize, int)
 
+CoreTools::ObjectInterfaceSharedPtr Rendering::ShaderProfileData::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
 #include STSTEM_WARNING_POP

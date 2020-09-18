@@ -210,7 +210,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::R32F>::SetColour(ValueTy
     Standardization();
 }
 
-#ifdef RENDERING_TEMPLATE_TEST 
+#ifdef RENDERING_TEMPLATE_TEST
 
 namespace Rendering
 {
@@ -283,7 +283,7 @@ namespace Rendering
         const L8Colour colour13{ 5 };
         const L16Colour colour14{ 5 };
         const R16FColour colour15{ 0.4f };
-        const R32FColour colour16{ 0.4f }; 
+        const R32FColour colour16{ 0.4f };
     }
 }
 

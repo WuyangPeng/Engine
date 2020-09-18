@@ -63,6 +63,8 @@ namespace Mathematics
         // 计算多项式，p(t)。
         Real operator()(Real value) const noexcept;
 
+        std::vector<Real> GetValue() const;
+
         const Polynomial operator-() const;
 
         Polynomial& operator+=(const Polynomial& rhs);
@@ -98,7 +100,7 @@ namespace Mathematics
     private:
         int m_Degree;
         Real* m_Coeff;
-    };
+    }; 
 
     template <typename Real>
     const Polynomial<Real> operator*(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs);

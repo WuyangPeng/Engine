@@ -187,6 +187,9 @@ namespace Mathematics
         // 矩阵存储为行主序。将它们存储在指定的列主序的数组中，该数组有16个元素。
         [[nodiscard]] const ContainerType GetColumnMajor() const;
 
+        [[nodiscard]] const EntryType GetRowMajor() const noexcept;
+        void Set(const EntryType& rowMajor) noexcept;
+
         // 算术运算
         const Matrix operator-() const noexcept;
         Matrix& operator+=(const Matrix& rhs);

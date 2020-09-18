@@ -23,7 +23,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE TransformController : public Controller
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(TransformController);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(TransformController);
 		using ParentType = Controller;
 		using APoint = Mathematics::FloatAPoint;
 		using Matrix = Mathematics::FloatMatrix;
@@ -56,7 +56,7 @@ namespace Rendering
 		 bool Update(double applicationTime) override;
 
 		 ControllerInterfaceSmartPointer Clone() const override;
-    
+                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(TransformController);
 	};

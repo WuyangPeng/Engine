@@ -92,7 +92,7 @@ int Rendering::Polypoint
 }
 
 uint64_t Rendering::Polypoint
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -100,7 +100,7 @@ uint64_t Rendering::Polypoint
 }
 
 void Rendering::Polypoint
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -108,7 +108,7 @@ void Rendering::Polypoint
     
 	ParentType::Save(target);
 	
-	target.Write(m_NumPoints);
+	target->Write(m_NumPoints);
      
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -149,6 +149,13 @@ Rendering::ControllerInterfaceSmartPointer Rendering::Polypoint
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::Polypoint::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

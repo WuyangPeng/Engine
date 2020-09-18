@@ -102,8 +102,8 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatColour& datum
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    auto value = datum.GetPoint();
-    WriteWithoutNumber(Rendering::FloatColour::sm_ArraySize, value.data());
+    const auto value = datum.GetPoint();
+    WriteContainer(value);
 }
 
 template <>
@@ -125,8 +125,8 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleColour& datu
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    auto value = datum.GetPoint();
-    WriteWithoutNumber(Rendering::DoubleColour::sm_ArraySize, value.data());
+    const auto value = datum.GetPoint();
+    WriteContainer(value);
 }
 
 template <>
@@ -148,8 +148,8 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::ByteColour& datum)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    auto value = datum.GetPoint();
-    WriteWithoutNumber(Rendering::ByteColour::sm_ArraySize, value.data());
+    const auto value = datum.GetPoint();
+    WriteContainer(value);
 }
 
 template <>
@@ -171,6 +171,6 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::IntColour& datum)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    auto value = datum.GetPoint();
-    WriteWithoutNumber(Rendering::IntColour::sm_ArraySize, value.data());
+    const auto value = datum.GetPoint();
+    WriteContainer(value);
 }

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:39)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/11 13:00)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
@@ -17,27 +20,25 @@ CORE_TOOLS_EXPORT_SHARED_PTR(ObjectNameImpl);
 
 namespace CoreTools
 {
-	// Object类的名字
-	class CORE_TOOLS_DEFAULT_DECLARE ObjectName
-	{
-	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectName);
+    // Object类的名字
+    class CORE_TOOLS_DEFAULT_DECLARE ObjectName
+    {
+    public:
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectName);
 
-	public:
-		explicit ObjectName(const std::string& name = "");
+    public:
+        explicit ObjectName(const std::string& name);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const std::string& GetName() const noexcept;
-		bool IsExactly(const ObjectName& name) const noexcept;
+        [[nodiscard]] std::string GetName() const;
+        [[nodiscard]] bool IsExactly(const ObjectName& name) const noexcept;
 
-		void SetName(const std::string& name);
+        void SetName(const std::string& name);
 
-		void Swap(ClassType& rhs) noexcept;
-
-	private:
-		IMPL_TYPE_DECLARE(ObjectName);
-	};
+    private:
+        IMPL_TYPE_DECLARE(ObjectName);
+    };
 }
 
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H

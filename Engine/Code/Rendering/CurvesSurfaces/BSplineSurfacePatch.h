@@ -63,7 +63,7 @@ namespace Rendering
         const AVector GetDerivativesUU(float u, float v) const override;
         const AVector GetDerivativesUV(float u, float v) const override;
         const AVector GetDerivativesVV(float u, float v) const override;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     protected:
         // The class has four constructors, not counting the default one used
         // for streaming.  The correct constructor needs to be called on a stream

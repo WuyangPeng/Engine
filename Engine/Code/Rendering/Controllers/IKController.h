@@ -22,7 +22,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE IKController : public Controller
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKController);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKController);
         using ParentType = Controller;
         using IKJointSmartPointerVector = std::vector<IKJointSmartPointer>;
 
@@ -42,6 +42,7 @@ namespace Rendering
         bool Update(double applicationTime) override;
 
         ControllerInterfaceSmartPointer Clone() const override;
+        ObjectInterfaceSharedPtr CloneObject() const override;
 
         int GetIterations() const noexcept;
         void SetIterations(int iterations) noexcept;

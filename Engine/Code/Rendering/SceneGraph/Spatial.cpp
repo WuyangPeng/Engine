@@ -11,7 +11,7 @@
 #include "Culler.h"
 #include "System/Helper/UnusedMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -291,7 +291,7 @@ int Rendering::Spatial
 }
 
 uint64_t Rendering::Spatial
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -302,7 +302,7 @@ const auto uniqueID = ParentType::Register(target);
 }
 
 void Rendering::Spatial
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -336,7 +336,7 @@ void Rendering::Spatial
     
 	ParentType::PostLink();
     
-    m_Parent = CoreTools::DynamicCast<Spatial>(GetControllerObject());
+    m_Parent = dynamic_cast<Spatial*>(GetControllerObject());
 }
 
 void Rendering::Spatial

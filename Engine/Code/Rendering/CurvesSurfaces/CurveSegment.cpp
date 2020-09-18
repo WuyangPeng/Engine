@@ -150,19 +150,19 @@ void Rendering::CurveSegment ::PostLink()
     Object::PostLink();
 }
 
-uint64_t Rendering::CurveSegment ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::CurveSegment ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return Object::Register(target);
 }
 
-void Rendering::CurveSegment ::Save(CoreTools::BufferTarget& target) const
+void Rendering::CurveSegment ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     Object::Save(target);
 
-    target.Write(mUMin);
-    target.Write(mUMax);
+    target->Write(mUMin);
+    target->Write(mUMax);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

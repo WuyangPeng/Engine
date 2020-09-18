@@ -21,6 +21,7 @@
 #include SYSTEM_WARNING_DISABLE(26485)
 #include SYSTEM_WARNING_DISABLE(6386)
 #include SYSTEM_WARNING_DISABLE(6385)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::TextureUserField
     ::TextureUserField ()     noexcept
 {
@@ -61,15 +62,15 @@ void Rendering::TextureUserField
 }
 
 void Rendering::TextureUserField
-    ::Save( CoreTools::BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-   
-    target.WriteWithoutNumber(TextureMaxUserFields,m_UserField);    
+    CoreTools::DoNothing();
+    target;
+    //target.WriteWithoutNumber(TextureMaxUserFields,m_UserField);    
 }
 
-int Rendering::TextureUserField
-    ::GetStreamingSize() const
+int Rendering::TextureUserField ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;    
   

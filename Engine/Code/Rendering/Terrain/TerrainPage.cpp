@@ -176,25 +176,25 @@ void Rendering::TerrainPage
 }
 
 uint64_t Rendering::TerrainPage
-	::Register(CoreTools::ObjectRegister& target) const
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	return ParentType::Register(target);
 }
 
 void Rendering::TerrainPage
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
 	ParentType::Save(target);
 
-    target.Write(mSize);
+    target->Write(mSize);
     const int numVertices = mSize*mSize;
-    target.WriteWithNumber(numVertices, mHeights);
-    target.WriteAggregate(mOrigin);
-    target.Write(mMinElevation);
-    target.Write(mMaxElevation);
-    target.Write(mSpacing);
+   // target.WriteWithNumber(numVertices, mHeights);
+    target->WriteAggregate(mOrigin);
+    target->Write(mMinElevation);
+    target->Write(mMaxElevation);
+    target->Write(mSpacing);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

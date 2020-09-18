@@ -214,7 +214,7 @@ void Mathematics::BandedMatrix<Real>::ResetSize(int size, int lowerBandsNumber, 
 }
 
 template <typename Real>
-int Mathematics::BandedMatrix<Real>::GetStreamSize() const
+int Mathematics::BandedMatrix<Real>::GetStreamSize() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -256,6 +256,21 @@ const Real* Mathematics::BandedMatrix<Real>::GetDiagonalBand() const noexcept
 }
 
 template <typename Real>
+std::vector<Real> Mathematics::BandedMatrix<Real>::GetDiagonalBandValue() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    std::vector<Real> result;
+
+    for (auto i = 0; i < m_Size; ++i)
+    {
+        result.emplace_back(m_DiagonalBand[i]);
+    }
+
+    return result;
+}
+
+template <typename Real>
 int Mathematics::BandedMatrix<Real>::GetLowerBandMax(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -293,6 +308,31 @@ const Real* Mathematics::BandedMatrix<Real>::GetLowerBand(int index) const
 }
 
 template <typename Real>
+std::vector<Real> Mathematics::BandedMatrix<Real>::GetLowerBandValue(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_ASSERTION_0(0 <= index && index < m_LowerBandsNumber, "无效索引在 GetLowerBand\n");
+
+    if (m_LowerBand != nullptr)
+    {
+        std::vector<Real> result;
+
+        for (auto i = 0; i < m_Size - 1 - index; ++i)
+        {
+            result.emplace_back(m_LowerBand[index][i]);
+        }
+
+        return result;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("m_LowerBand为空。"s));
+    }
+}
+
+ 
+
+template <typename Real>
 int Mathematics::BandedMatrix<Real>::GetUpperBandMax(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -322,6 +362,29 @@ const Real* Mathematics::BandedMatrix<Real>::GetUpperBand(int index) const
     if (m_UpperBand != nullptr)
     {
         return m_UpperBand[index];
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("m_UpperBand为空。"s));
+    }
+}
+
+template <typename Real>
+std::vector<Real> Mathematics::BandedMatrix<Real>::GetUpperBandValue(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_ASSERTION_0(0 <= index && index < m_UpperBandsNumber, "无效索引在 GetUpperBand\n");
+
+    if (m_UpperBand != nullptr)
+    {
+        std::vector<Real> result;
+
+        for (auto i = 0; i < m_Size - 1 - index; ++i)
+        {
+            result.emplace_back(m_UpperBand[index][i]);
+        }
+
+        return result;
     }
     else
     {

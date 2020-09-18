@@ -38,7 +38,7 @@ namespace Rendering
 		// Portal access.
 		  int GetNumPortals() const noexcept;
 		  Portal* GetPortal(int i) const noexcept;
-
+                  ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		// Support for the geometric update.
 		  bool UpdateWorldData(double applicationTime) override;

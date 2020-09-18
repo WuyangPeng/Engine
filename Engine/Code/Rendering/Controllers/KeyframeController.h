@@ -24,7 +24,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE KeyframeController : public TransformController
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(KeyframeController);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(KeyframeController);
 		using ParentType = TransformController;
 		using Matrix = Mathematics::FloatMatrix;
 		using AQuaternion = Mathematics::AQuaternionf;
@@ -81,7 +81,7 @@ namespace Rendering
 		 void SetObjectInCopy(ControllerInterface* object)override;
 
 		 ControllerInterfaceSmartPointer Clone() const override;
-		
+                 ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		// 支持查找给出指定时间的关键帧。
 		const ControllerKeyInfo GetTranslateKeyInfo(float ctrlTime);

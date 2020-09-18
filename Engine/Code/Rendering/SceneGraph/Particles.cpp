@@ -191,7 +191,7 @@ int Rendering::Particles
 }
 
 uint64_t Rendering::Particles
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -199,7 +199,7 @@ uint64_t Rendering::Particles
 }
 
 void Rendering::Particles
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     

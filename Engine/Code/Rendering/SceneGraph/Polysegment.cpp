@@ -144,7 +144,7 @@ int Rendering::Polysegment
 }
 
 uint64_t Rendering::Polysegment
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -152,7 +152,7 @@ uint64_t Rendering::Polysegment
 }
 
 void Rendering::Polysegment
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -160,8 +160,8 @@ void Rendering::Polysegment
     
 	ParentType::Save(target);
 	
-	target.Write(m_NumSegments);
-	target.WriteBool(m_Contiguous);
+	target->Write(m_NumSegments);
+	target->Write(m_Contiguous);
      
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -195,6 +195,13 @@ void Rendering::Polysegment
 	m_Contiguous = source.ReadBool();
         
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::Polysegment::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
  #include STSTEM_WARNING_POP

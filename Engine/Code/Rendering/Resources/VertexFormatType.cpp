@@ -15,7 +15,12 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
+#include "System/Helper/EnumCast.h"
+#include STSTEM_WARNING_PUSH
+ 
+#include SYSTEM_WARNING_DISABLE(26418)
 
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::VertexFormatType ::VertexFormatType() noexcept
     : m_Type{ VertexFormatFlags::AttributeType::None }, m_Usage{ VertexFormatFlags::AttributeUsage::None }, m_UsageIndex{ 0 }
 {
@@ -72,8 +77,7 @@ void Rendering::VertexFormatType ::SetUsageIndex(unsigned int usageIndex) noexce
 	m_UsageIndex = usageIndex;
 }
 
-int Rendering::VertexFormatType
-	::GetStreamingSize() const
+int Rendering::VertexFormatType ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -85,13 +89,13 @@ int Rendering::VertexFormatType
 }
 
 void Rendering::VertexFormatType
-	::Save( CoreTools::BufferTarget& target ) const 
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteEnum(m_Type);
-	target.WriteEnum(m_Usage);
-	target.Write(m_UsageIndex);
+	target->WriteEnum(m_Type);
+        target->WriteEnum(m_Usage);
+	target->Write(m_UsageIndex);
 }
 
 void Rendering::VertexFormatType
@@ -132,3 +136,4 @@ void Rendering::VertexFormatType
 	m_Type = System::UnderlyingCastEnum<AttributeType>(type);
 	m_Usage = System::UnderlyingCastEnum<AttributeUsage>(usage);
 }
+#include STSTEM_WARNING_POP

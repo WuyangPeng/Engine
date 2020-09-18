@@ -147,24 +147,22 @@ int Rendering::ControlledObject
 	return size;
 }
 
-uint64_t Rendering::ControlledObject
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::ControlledObject ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
 	const auto uniqueID = ParentType::Register(target);
 	if(uniqueID != 0)
 	{
-		m_Impl->Register(target);
+		//m_Impl->Register(target);
 
-		target.Register(m_Object);   
+		//target.Register(m_Object);   
 	}   
     
     return uniqueID;
 }
 
-void Rendering::ControlledObject
-    ::Save (CoreTools::BufferTarget& target) const
+void Rendering::ControlledObject ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -174,7 +172,7 @@ void Rendering::ControlledObject
 	
 	m_Impl->Save(target);
 
-    target.WritePointer(m_Object); 
+   // target.WritePointer(m_Object); 
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

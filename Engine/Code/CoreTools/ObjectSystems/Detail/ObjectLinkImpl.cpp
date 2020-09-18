@@ -36,7 +36,7 @@ bool CoreTools::ObjectLinkImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-CoreTools::ObjectInterfaceSmartPointer CoreTools::ObjectLinkImpl
+CoreTools::ObjectInterfaceSharedPtr CoreTools::ObjectLinkImpl
 	::GetObjectPtr(uint64_t uniqueID)
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
@@ -61,7 +61,7 @@ int CoreTools::ObjectLinkImpl
 	return boost::numeric_cast<int>(m_Ordered.size());
 }
 
-CoreTools::ObjectInterfaceSmartPointer& CoreTools::ObjectLinkImpl
+CoreTools::ObjectInterfaceSharedPtr& CoreTools::ObjectLinkImpl
 	::operator[](int index)
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
@@ -71,7 +71,7 @@ CoreTools::ObjectInterfaceSmartPointer& CoreTools::ObjectLinkImpl
 }
 
 void CoreTools::ObjectLinkImpl
-	::Insert(uint64_t uniqueID, const ObjectInterfaceSmartPointer& ptr)
+	::Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& ptr)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 

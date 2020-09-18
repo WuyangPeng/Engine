@@ -1688,9 +1688,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\StreamSize.h">
       <Filter>ObjectSystems 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\TypeCasting.h">
-      <Filter>ObjectSystems 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\PerformanceProfiler\PerformanceProfiler.h">
       <Filter>PerformanceProfiler 头文件</Filter>
     </ClInclude>
@@ -2314,6 +2311,27 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Base\SpanIteratorDetail.h">
       <Filter>Base 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermRegisterFactory.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermContainer.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\TypeCasting.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectType.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectAssociated.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ConstObjectAssociated.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferTargetImpl.h">
+      <Filter>ObjectSystems 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3117,6 +3135,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\Base\SpanIterator.cpp">
       <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermContainer.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferTargetImpl.cpp">
+      <Filter>ObjectSystems 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

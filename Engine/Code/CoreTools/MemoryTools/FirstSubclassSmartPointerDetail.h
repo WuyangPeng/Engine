@@ -9,7 +9,7 @@
 
 #include "FirstSubclassSmartPointer.h"
 #include "SmartPointerManager.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
@@ -146,7 +146,7 @@ SubclassSmartPointer CoreTools::FirstSubclassSmartPointer<BaseClass>
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return SubclassSmartPointer{ PolymorphicCast<typename SubclassSmartPointer::SubclassType>(GetData()) };
+	return SubclassSmartPointer{ boost::polymorphic_cast<const typename SubclassSmartPointer::SubclassType*>(GetData()) };
 }
 
 template <typename BaseClass>
@@ -158,7 +158,7 @@ SubclassSmartPointer CoreTools::FirstSubclassSmartPointer<BaseClass>
 
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return SubclassSmartPointer{ PolymorphicDowncast<typename SubclassSmartPointer::SubclassType>(GetData()) };
+	return SubclassSmartPointer{ boost::polymorphic_downcast<const typename SubclassSmartPointer::SubclassType*>(GetData()) };
 }
 
 template <typename BaseClass>

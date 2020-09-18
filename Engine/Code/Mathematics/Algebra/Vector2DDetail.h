@@ -158,6 +158,23 @@ void Mathematics::Vector2D<Real>
 }
 
 template <typename Real>
+void Mathematics::Vector2D<Real>::SetCoordinate(const ArrayType& coordinate)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    m_Tuple[0] = coordinate.at(0);
+    m_Tuple[1] = coordinate.at(1);
+}
+
+template <typename Real>
+typename Mathematics::Vector2D<Real>::ArrayType Mathematics::Vector2D<Real>::GetCoordinate() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+	return ArrayType{ m_Tuple[0], m_Tuple[1] };
+}
+
+template <typename Real>
 void Mathematics::Vector2D<Real>
 	::SetXCoordinate(Real x)
 {

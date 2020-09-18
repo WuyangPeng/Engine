@@ -23,6 +23,8 @@
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26472)
 #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415) 
 using std::string;
 using std::vector;
 using std::swap;
@@ -121,13 +123,13 @@ int Rendering::VisualEffectInstanceImpl
 }
 
 void Rendering::VisualEffectInstanceImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	//target.WriteSmartPointer(m_Effect);
-	target.Write(m_TechniqueIndex);
-	target.Write(m_NumPasses);
+	target->Write(m_TechniqueIndex);
+	target->Write(m_NumPasses);
 	//target.WriteSmartPointer(m_VertexParameters);
 	//target.WriteSmartPointer(m_PixelParameters);
 }
@@ -162,8 +164,7 @@ void Rendering::VisualEffectInstanceImpl
 	}		
 }
 
-void Rendering::VisualEffectInstanceImpl
-	::Register(ObjectRegister& target) const
+void Rendering::VisualEffectInstanceImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

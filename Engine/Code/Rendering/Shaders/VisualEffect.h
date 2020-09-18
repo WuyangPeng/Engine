@@ -27,7 +27,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE VisualEffect : public CoreTools::Object
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualEffect);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualEffect);
 		using ParentType = Object;
 		using WriteFileManager = CoreTools::WriteFileManager;
 		using ReadFileManager = CoreTools::ReadFileManager;
@@ -35,8 +35,13 @@ namespace Rendering
 	public:
 		VisualEffect();
 		  ~VisualEffect();
+
+		  #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
                 VisualEffect(VisualEffect&&) noexcept = default;
                   VisualEffect& operator=(VisualEffect&&) noexcept = default;
+				   #include STSTEM_WARNING_POP
+
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualEffect);
@@ -62,7 +67,7 @@ namespace Rendering
 
 		void SaveVisualTechnique(WriteFileManager& manager) const;
 		void LoadVisualTechnique(ReadFileManager& manager);
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(VisualEffect);
 	};

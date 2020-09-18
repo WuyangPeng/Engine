@@ -9,7 +9,7 @@
 
 #include "CallbackParameters.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 
 template<typename ConstSubclass>
 std::shared_ptr<const ConstSubclass> CoreTools::CallbackParameters

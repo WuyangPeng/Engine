@@ -24,6 +24,8 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 using std::string;
 using std::vector;
 
@@ -272,7 +274,7 @@ int Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     CoreTools::DoNothing();
@@ -284,7 +286,7 @@ void Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1; 
 
@@ -295,7 +297,7 @@ void Rendering::ControlledObjectImpl
 	else
 	{
             constexpr int zero = 0;
-                target.Write(zero);
+                target->Write(zero);
 	}
 }
 

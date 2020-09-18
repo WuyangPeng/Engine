@@ -21,7 +21,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Node : public Spatial
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Node);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Node);
         using ParentType = Spatial;
         
     public:
@@ -48,7 +48,7 @@ namespace Rendering
           ControllerInterfaceSmartPointer Clone() const override;
 
 		  const PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
-
+          ObjectInterfaceSharedPtr CloneObject() const override;
     protected:
 		  bool UpdateWorldData(double applicationTime) override;
 

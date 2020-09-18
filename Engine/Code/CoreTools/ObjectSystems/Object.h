@@ -32,13 +32,19 @@ namespace CoreTools
 		using ConstObjectSmartPointer = std::shared_ptr<const Object>;
 
 	public:
-		explicit Object(const std::string& name);
-		~Object() = 0;
+		explicit Object(const std::string& name); 
 
-		Object(const Object&) = default;
-                virtual Object& operator=(const Object&) = default;
-		Object(Object&&) noexcept = default;
+		#include STSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26456)
+
+                ~Object() = default;
+                Object(const Object&)  = default;
+                virtual Object& operator=(const Object&)  = default;
+                Object(Object&&) noexcept = default;
                 virtual Object& operator=(Object&&) noexcept = default;
+
+#include STSTEM_WARNING_POP
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -47,7 +53,7 @@ namespace CoreTools
 
 	public:
 		// ¶ÔÏóÃû×Ö
-		const std::string& GetName() const noexcept;
+		  std::string  GetName() const  ;
 		void SetName(const std::string& name);
 
 	protected:

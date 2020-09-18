@@ -22,6 +22,7 @@ using std::make_shared;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ShaderParameters);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ShaderParameters);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ShaderParameters); 
@@ -98,6 +99,13 @@ void Rendering::ShaderParameters
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
        
 	return m_Impl->UpdateConstants(visual, camera);
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::ShaderParameters::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
  #include STSTEM_WARNING_POP

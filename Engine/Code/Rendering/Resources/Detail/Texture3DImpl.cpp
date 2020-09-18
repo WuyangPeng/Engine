@@ -354,13 +354,12 @@ void Rendering::Texture3DImpl
 }
 
 void Rendering::Texture3DImpl
-    ::SaveLevelData (CoreTools::BufferTarget& target) const
+    ::SaveLevelData (const CoreTools::BufferTargetSharedPtr& target) const
 {
     m_TextureLevelData.Save(target);
 }
 
-int Rendering::Texture3DImpl
-    ::GetLevelDataStreamingSize () const
+int Rendering::Texture3DImpl ::GetLevelDataStreamingSize() const noexcept
 {
     return m_TextureLevelData.GetStreamingSize();
 }

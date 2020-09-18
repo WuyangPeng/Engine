@@ -193,14 +193,13 @@ void Rendering::Texture2ColorBlendEffect
 	}
 }
 
-uint64_t Rendering::Texture2ColorBlendEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Texture2ColorBlendEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::Texture2ColorBlendEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

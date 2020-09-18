@@ -34,6 +34,9 @@ namespace Mathematics
         using BarycentricCoordinates = BarycentricCoordinates<Real, 4>;
         using ToolsType = Vector3DTools<Real>;
 
+         static constexpr auto sm_PointSize = 3;
+           using ArrayType = std::array<Real, sm_PointSize>;
+
     public:
         Vector3D() noexcept;
         Vector3D(const Tuple3& tuple);
@@ -55,6 +58,9 @@ namespace Mathematics
         Real GetYCoordinate() const;
         Real GetZCoordinate() const;
         bool IsZero(const Real epsilon = Math::GetZeroTolerance()) const;
+
+          void SetCoordinate(const ArrayType& coordinate);
+        ArrayType GetCoordinate() const;
 
         void ZeroOut() noexcept;
         void SetCoordinate(Real x, Real y, Real z);

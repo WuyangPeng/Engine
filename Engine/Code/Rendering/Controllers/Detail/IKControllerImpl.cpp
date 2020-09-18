@@ -24,7 +24,9 @@
 
 using std::string;
 using std::vector;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::IKControllerImpl ::IKControllerImpl() noexcept
     : m_Iterations{ 128 }, m_OrderEndToRoot{ true }, m_Joints{}
 {
@@ -69,12 +71,12 @@ int Rendering::IKControllerImpl
 }
 
 void Rendering::IKControllerImpl
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_Iterations);
-	target.WriteBool(m_OrderEndToRoot);
+	target->Write(m_Iterations);
+	target->Write(m_OrderEndToRoot);
 
 	if (!m_Joints.empty())
 	{
@@ -115,7 +117,7 @@ void Rendering::IKControllerImpl
 }
 
 void Rendering::IKControllerImpl
-	::Register(CoreTools::ObjectRegister& target) const
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     CoreTools::DoNothing();
@@ -239,3 +241,4 @@ const Rendering::IKJointSmartPointer Rendering::IKControllerImpl
 
 	return m_Joints.at(index);
 }
+#include STSTEM_WARNING_POP

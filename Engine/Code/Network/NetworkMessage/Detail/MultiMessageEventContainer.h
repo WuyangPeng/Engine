@@ -19,7 +19,7 @@ namespace Network
 	class NETWORK_HIDDEN_DECLARE MultiMessageEventContainer : public MessageEventContainerImpl
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(MultiMessageEventContainer);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MultiMessageEventContainer);
 		using ParentType = MessageEventContainerImpl;
 
 	public:

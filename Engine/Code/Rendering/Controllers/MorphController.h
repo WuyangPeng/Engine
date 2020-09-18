@@ -23,7 +23,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE MorphController : public Controller
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(MorphController);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MorphController);
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 		using APoint = Mathematics::FloatAPoint;
@@ -66,7 +66,7 @@ namespace Rendering
 		 void SetObjectInCopy(ControllerInterface* object) override;
 
 		 ControllerInterfaceSmartPointer Clone() const override;
-
+                 ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		// 查找边界上的键。
 		const ControllerKeyInfo GetKeyInfo(float ctrlTime) noexcept;

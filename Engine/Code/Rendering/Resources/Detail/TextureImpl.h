@@ -76,7 +76,7 @@ namespace Rendering
         int GetUserField (int index) const;
         
 		void Load (CoreTools::BufferSource& source);
-		void Save (CoreTools::BufferTarget& target) const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;              
       
 		void SaveToFile (WriteFileManager& outFile) const;
@@ -95,7 +95,7 @@ namespace Rendering
         
     private:
         virtual void LoadLevelData (CoreTools::BufferSource& source) = 0;
-		virtual void SaveLevelData (CoreTools::BufferTarget& target) const = 0;
+		virtual void SaveLevelData (const CoreTools::BufferTargetSharedPtr& target) const = 0;
 		virtual int GetLevelDataStreamingSize () const = 0;
 
 		virtual void SaveLevelDataToFile (WriteFileManager& outFile) const = 0;

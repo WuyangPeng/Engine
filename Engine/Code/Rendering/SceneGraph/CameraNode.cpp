@@ -195,7 +195,7 @@ int Rendering::CameraNode
 }
 
 uint64_t Rendering::CameraNode
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -209,7 +209,7 @@ const	auto uniqueID = ParentType::Register(target);
 }
 
 void Rendering::CameraNode
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -260,6 +260,12 @@ Rendering::CameraNode::ControllerInterfaceSmartPointer Rendering::CameraNode
     RENDERING_CLASS_IS_VALID_CONST_1;
     
 	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::CameraNode::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

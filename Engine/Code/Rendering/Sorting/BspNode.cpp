@@ -13,6 +13,7 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
  #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486) 
@@ -82,6 +83,13 @@ Rendering::SpatialSmartPointer Rendering::BspNode
     }
 
 	return SpatialSmartPointer(this);
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::BspNode::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 bool Rendering::BspNode::UpdateWorldData (double applicationTime)
@@ -259,20 +267,20 @@ void Rendering::BspNode
 }
 
 uint64_t Rendering::BspNode
-	::Register(CoreTools::ObjectRegister& target) const
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return Node::Register(target);
 }
 
 void Rendering::BspNode
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     Node::Save(target);
 
-	target.WriteAggregate(ModelPlane);
-    target.WriteAggregate(mWorldPlane);
+	target->WriteAggregate(ModelPlane);
+    target->WriteAggregate(mWorldPlane);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

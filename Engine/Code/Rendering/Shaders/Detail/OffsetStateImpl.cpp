@@ -16,6 +16,8 @@
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::OffsetStateImpl ::OffsetStateImpl() noexcept
     : m_FillEnabled{ false }, m_LineEnabled{ false }, m_PointEnabled{ false }, m_Scale{ 0.0f }, m_Bias{ 0.0f }
 {
@@ -37,15 +39,15 @@ void Rendering::OffsetStateImpl
 }
 
 void Rendering::OffsetStateImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteBool(m_FillEnabled);
-	target.WriteBool(m_LineEnabled);
-	target.WriteBool(m_PointEnabled);
-	target.Write(m_Scale);
-	target.Write(m_Bias);
+	target->Write(m_FillEnabled);
+	target->Write(m_LineEnabled);
+	target->Write(m_PointEnabled);
+	target->Write(m_Scale);
+	target->Write(m_Bias);
 }
 
 int Rendering::OffsetStateImpl

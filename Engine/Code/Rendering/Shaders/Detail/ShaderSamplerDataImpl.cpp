@@ -174,9 +174,9 @@ void Rendering::ShaderSamplerDataImpl
 }
 
 void Rendering::ShaderSamplerDataImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
-	target.Write(boost::numeric_cast<uint32_t>(m_SingleShaderSamplerData.size()));
+	target->Write(boost::numeric_cast<uint32_t>(m_SingleShaderSamplerData.size()));
 
 	for_each(m_SingleShaderSamplerData.begin(), m_SingleShaderSamplerData.end(), std::bind(&SingleShaderSamplerData::Save, std::placeholders::_1,std::ref(target)));
 }

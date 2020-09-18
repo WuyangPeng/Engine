@@ -16,6 +16,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26455)
@@ -48,5 +49,11 @@ Rendering::VertexShader
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,VertexShader)
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::VertexShader::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
  #include STSTEM_WARNING_POP

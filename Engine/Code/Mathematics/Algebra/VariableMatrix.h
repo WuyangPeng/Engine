@@ -77,6 +77,8 @@ namespace Mathematics
 		const Real& operator() (int row, int column) const;
 		Real& operator() (int row, int column);
 
+		std::vector<Real> GetValue() const;
+
 		void SetIdentity();
 
 		void SetRow(int row, const VariableLengthVector& vector);

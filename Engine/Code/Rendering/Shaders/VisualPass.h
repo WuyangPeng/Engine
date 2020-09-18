@@ -34,7 +34,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VisualPass : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualPass);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualPass);
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
@@ -42,8 +42,13 @@ namespace Rendering
     public:
         VisualPass();
         ~VisualPass();
+
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         VisualPass(VisualPass&&) noexcept = default;
         VisualPass& operator=(VisualPass&&) noexcept = default;
+                #include STSTEM_WARNING_POP
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualPass);
@@ -71,6 +76,8 @@ namespace Rendering
         void SaveState(WriteFileManager& manager) const;
         void LoadShader(ReadFileManager& manager);
         void LoadState(ReadFileManager& manager);
+
+        ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
         IMPL_TYPE_DECLARE(VisualPass);

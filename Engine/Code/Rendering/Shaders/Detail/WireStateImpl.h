@@ -8,6 +8,7 @@
 #define RENDERING_SHADERS_WIRE_STATE_IMPL_H
 
 #include "Rendering/RenderingDll.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -34,8 +35,8 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 
 		void Load(BufferSource& source);
-		void Save(BufferTarget& target) const;
-		int GetStreamingSize() const;
+		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+                int GetStreamingSize() const noexcept;
 
 		bool IsEnabled() const noexcept;
                 void SetEnabled(bool enabled) noexcept;

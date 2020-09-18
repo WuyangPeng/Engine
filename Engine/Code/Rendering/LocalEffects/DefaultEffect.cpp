@@ -12,6 +12,7 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -137,14 +138,13 @@ void Rendering::DefaultEffect
 	} 
 }
 
-uint64_t Rendering::DefaultEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::DefaultEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	return ParentType::Register(target);
 }
 
 void Rendering::DefaultEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -256,5 +256,11 @@ std::string Rendering::DefaultEffect::msPPrograms[System::EnumCastUnderlying(Sha
     "MOV result.color, c[0].xyxx;\n"
     "END\n"
 };
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::DefaultEffect::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
 #include STSTEM_WARNING_POP

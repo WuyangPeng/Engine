@@ -23,7 +23,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Float2Array : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Float2Array);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Float2Array);
         using ParentType = Object;
         using Float2 = Mathematics::Float2;
         using Float2Vector = std::vector<Float2>;
@@ -31,8 +31,12 @@ namespace Rendering
     public:
         explicit Float2Array(const Float2Vector& data);
         ~Float2Array() = default;
+
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         Float2Array(Float2Array&&) = default;
         Float2Array& operator=(Float2Array&&) = default;
+          #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -43,7 +47,7 @@ namespace Rendering
 
         const Float2& operator[](int index) const;
         Float2& operator[](int index);
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     private:
         IMPL_TYPE_DECLARE(Float2Array);
     };

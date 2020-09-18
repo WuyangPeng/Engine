@@ -36,6 +36,7 @@ namespace Mathematics
         using ContainerType = std::vector<ClassType>;
 
         static constexpr auto sm_APointSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
+        using ArrayType = std::array<T, sm_APointSize>;
 
     public:
         // APoint表示仿射坐标 (x,y,z,1)。 默认 (0,0,0,1)
@@ -79,6 +80,9 @@ namespace Mathematics
         [[nodiscard]] const APoint operator-() const noexcept;
 
         [[nodiscard]] T GetNorm() const noexcept;
+
+        [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
+        void Set(const ArrayType& coordinate) noexcept;
 
     private:
         HomogeneousPoint m_HomogeneousPoint;

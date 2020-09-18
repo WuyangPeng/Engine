@@ -53,8 +53,8 @@ namespace Rendering
         void SetVertexFormatType(const VertexFormatType& vertexFormatType) noexcept;
         void Set(unsigned int streamIndex, unsigned int offset, const VertexFormatType& vertexFormatType) noexcept;
 
-        int GetStreamingSize() const;
-        void Save(BufferTarget& target) const;
+        int GetStreamingSize() const noexcept;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         void Load(BufferSource& source);
 
         void SaveToFile(WriteFileManager& outFile) const;

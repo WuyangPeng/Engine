@@ -22,6 +22,8 @@
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446) 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::KeyframeControllerImpl
 	::KeyframeControllerImpl() noexcept
 	: m_NumCommonTimes{ 0 }, m_CommonTimes{},	  
@@ -101,8 +103,7 @@ bool Rendering::KeyframeControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT	
 
-int Rendering::KeyframeControllerImpl
-	::GetStreamingSize() const 
+int Rendering::KeyframeControllerImpl ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -135,61 +136,61 @@ int Rendering::KeyframeControllerImpl
 }
 
 void Rendering::KeyframeControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumCommonTimes);
+	target->Write(m_NumCommonTimes);
 
 	if (0 < m_NumCommonTimes)
 	{
-		target.WriteWithoutNumber(m_NumCommonTimes, &m_CommonTimes[0]);
+		//target.WriteWithoutNumber(m_NumCommonTimes, &m_CommonTimes[0]);
 
-		if (0 < m_NumTranslations)
-			target.WriteAggregateWithNumber(m_NumTranslations, &m_Translations[0]);
-		else
-			target.Write(m_NumTranslations);
+	//	if (0 < m_NumTranslations)
+	//		target.WriteAggregateWithNumber(m_NumTranslations, &m_Translations[0]);
+	//	else
+	//		target->Write(m_NumTranslations);
 
-		if (0 < m_NumRotations)
-			target.WriteAggregateWithNumber(m_NumRotations, &m_Rotations[0]);
-		else
-			target.Write(m_NumRotations);
+		//if (0 < m_NumRotations)
+		//	target.WriteAggregateWithNumber(m_NumRotations, &m_Rotations[0]);
+		//else
+		//	target->Write(m_NumRotations);
 
-		if (0 < m_NumScales)
-			target.WriteWithNumber(m_NumScales, &m_Scales[0]);
-		else
-			target.Write(m_NumScales);
+		//if (0 < m_NumScales)
+		//	target.WriteWithNumber(m_NumScales, &m_Scales[0]);
+		//else
+			//target->Write(m_NumScales);
 	}
 	else
 	{
 		if (0 < m_NumTranslations)
 		{
-			target.WriteWithNumber(m_NumTranslations, &m_TranslationTimes[0]);
-			target.WriteAggregateWithoutNumber(m_NumTranslations, &m_Translations[0]);
+			//target.WriteWithNumber(m_NumTranslations, &m_TranslationTimes[0]);
+			//target.WriteAggregateWithoutNumber(m_NumTranslations, &m_Translations[0]);
 		}
 		else
 		{
-			target.Write(m_NumTranslations);
+			target->Write(m_NumTranslations);
 		}
 
 		if (0 < m_NumRotations)
 		{
-			target.WriteWithNumber(m_NumRotations, &m_RotationTimes[0]);
-			target.WriteAggregateWithoutNumber(m_NumRotations, &m_Rotations[0]);
+			//target.WriteWithNumber(m_NumRotations, &m_RotationTimes[0]);
+			//target.WriteAggregateWithoutNumber(m_NumRotations, &m_Rotations[0]);
 		}
 		else
 		{
-			target.Write(m_NumRotations);
+			target->Write(m_NumRotations);
 		}
 
 		if (0 < m_NumScales)
 		{
-			target.WriteWithNumber(m_NumScales, &m_ScaleTimes[0]);
-			target.WriteWithoutNumber(m_NumScales, &m_Scales[0]);
+			//target.WriteWithNumber(m_NumScales, &m_ScaleTimes[0]);
+			//target.WriteWithoutNumber(m_NumScales, &m_Scales[0]);
 		}
 		else
 		{
-			target.Write(m_NumScales);
+			target->Write(m_NumScales);
 		}		 
 	}
 }

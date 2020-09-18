@@ -17,6 +17,8 @@
 	#define CORE_TOOLS_ASSERT_LEVEL 4
 #endif // CORE_TOOLS_ASSERT_LEVEL
 
+constexpr auto g_CoreToolsAssert = CORE_TOOLS_ASSERT_LEVEL;
+
 static_assert(CORE_TOOLS_ASSERT_LEVEL <= ASSERT_LEVEL, "Core Tools assert level definition error.");
 
 #if 0 <= CORE_TOOLS_ASSERT_LEVEL

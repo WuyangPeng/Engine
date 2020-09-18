@@ -20,6 +20,9 @@ using std::string;
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26482)
+ 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 #if defined(TCRE_USE_MSVC)
     #pragma warning(disable : 28020)
 #endif  // TCRE_USE_MSVC
@@ -160,19 +163,19 @@ void Rendering::SingleShaderSamplerDataImpl
 }
 
 void Rendering::SingleShaderSamplerDataImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteString(m_SamplerName);
-	target.WriteEnum(m_SamplerType);
-	target.WriteEnum(m_Filter);
-	target.WriteEnum(m_Coordinate[0]);
-	target.WriteEnum(m_Coordinate[1]);
-	target.WriteEnum(m_Coordinate[2]);
-	target.Write(m_LodBias);
-	target.Write(m_Anisotropy);
-	target.WriteAggregate(m_BorderColor);
+	target->Write(m_SamplerName);
+        target->WriteEnum(m_SamplerType);
+        target->WriteEnum(m_Filter);
+        target->WriteEnum(m_Coordinate[0]);
+        target->WriteEnum(m_Coordinate[1]);
+        target->WriteEnum(m_Coordinate[2]);
+	target->Write(m_LodBias);
+	target->Write(m_Anisotropy);
+        target->WriteAggregate(m_BorderColor);
 }
 
 int Rendering::SingleShaderSamplerDataImpl

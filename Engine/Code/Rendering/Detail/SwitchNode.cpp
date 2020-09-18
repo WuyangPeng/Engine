@@ -100,8 +100,7 @@ int Rendering::SwitchNode
 	return size;
 }
 
-uint64_t Rendering::SwitchNode
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::SwitchNode ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -109,7 +108,7 @@ uint64_t Rendering::SwitchNode
 }
 
 void Rendering::SwitchNode
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -117,7 +116,7 @@ void Rendering::SwitchNode
     
 	ParentType::Save(target);
 	
-	target.Write(m_ActiveChild);
+	target->Write(m_ActiveChild);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -177,5 +176,11 @@ const Rendering::PickRecordContainer Rendering::SwitchNode
 	return container;
 }
 
+CoreTools::ObjectInterface::ObjectInterfaceSharedPtr Rendering::SwitchNode::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
   #include STSTEM_WARNING_POP

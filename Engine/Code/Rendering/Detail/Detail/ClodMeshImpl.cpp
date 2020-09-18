@@ -51,12 +51,12 @@ void Rendering::ClodMeshImpl
 }
 
 void Rendering::ClodMeshImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_CurrentRecord);
-	target.Write(m_TargetRecord);
+	target->Write(m_CurrentRecord);
+	target->Write(m_TargetRecord);
 //	target.WriteSmartPointer(m_RecordArray);
 }
 
@@ -81,8 +81,7 @@ void Rendering::ClodMeshImpl
 	//source.ResolveObjectSmartPointerLink(m_RecordArray);
 }
 
-void Rendering::ClodMeshImpl
-	::Register(ObjectRegister& target) const
+void Rendering::ClodMeshImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

@@ -193,14 +193,13 @@ void Rendering::Texture2MulEffect
 	}
 }
 
-uint64_t Rendering::Texture2MulEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Texture2MulEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::Texture2MulEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

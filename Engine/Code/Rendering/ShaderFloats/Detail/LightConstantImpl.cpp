@@ -56,7 +56,7 @@ void Rendering::LightConstantImpl
 }
 
 void Rendering::LightConstantImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
@@ -123,8 +123,7 @@ void Rendering::LightConstantImpl
     //	source.ResolveObjectSmartPointerLink(m_Light);
 }
 
-void Rendering::LightConstantImpl
-	::Register( ObjectRegister& target ) const
+void Rendering::LightConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

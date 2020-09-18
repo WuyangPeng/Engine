@@ -14,7 +14,7 @@
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
@@ -50,7 +50,7 @@ Rendering::ParticleController
 
 Rendering::ParticleController
 	::ParticleController(const ParticleController& rhs) 
-	: ParentType(rhs), m_Impl{ make_shared<ImplType>(*rhs.m_Impl) }, m_Particles{ CoreTools::StaticCast<Particles>(GetControllerObject()) }
+	: ParentType(rhs), m_Impl{ make_shared<ImplType>(*rhs.m_Impl) }, m_Particles{ dynamic_cast<Particles*>(GetControllerObject()) }
 { 
 	RENDERING_SELF_CLASS_IS_VALID_1; 
 }                                    
@@ -62,7 +62,7 @@ Rendering::ParticleController& Rendering::ParticleController
 
 	ParentType::operator=(rhs);     
 	m_Impl = make_shared<ImplType>(*rhs.m_Impl);
-	m_Particles = CoreTools::StaticCast<Particles>(GetControllerObject());
+        m_Particles = dynamic_cast<Particles*>(GetControllerObject());
 
 	return *this;
 }
@@ -142,7 +142,7 @@ void Rendering::ParticleController
 
 	if (object != nullptr)
 	{		 
-		m_Particles = CoreTools::StaticCast<Particles>(object);
+		m_Particles = dynamic_cast<Particles*>(object);
 		Reallocate(m_Particles->GetNumParticles());
 	}
 	else
@@ -246,8 +246,7 @@ int Rendering::ParticleController
 	return size;
 }
 
-uint64_t Rendering::ParticleController
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::ParticleController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -255,7 +254,7 @@ uint64_t Rendering::ParticleController
 }
 
 void Rendering::ParticleController
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -287,7 +286,7 @@ void Rendering::ParticleController
 
 	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Particles::sm_Type), "Œﬁ–ß¿‡\n");
 
-	m_Particles = CoreTools::StaticCast<Particles>(object);
+	m_Particles = dynamic_cast<Particles*>(object);
 }
 
 void Rendering::ParticleController

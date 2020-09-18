@@ -38,7 +38,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderParameters : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderParameters);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderParameters);
         using ParentType = Object;
         using ConstShaderFloatSmartPointerGather = std::vector<ConstShaderFloatSmartPointer>;
         using ConstTextureSmartPointerGather = std::vector<ConstTextureSmartPointer>;
@@ -47,8 +47,12 @@ namespace Rendering
     public:
         explicit ShaderParameters(const ConstShaderBaseSmartPointer& shader);
         ~ShaderParameters();
+
+          #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         ShaderParameters(ShaderParameters&&) = default;
         ShaderParameters& operator=(ShaderParameters&&) = default;
+           #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -77,7 +81,7 @@ namespace Rendering
         // “handle”是上述的Set*函数的返回值。
         const ConstShaderFloatSmartPointer GetConstant(int handle) const;
         const ConstTextureSmartPointer GetTexture(int handle) const;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
         // 更新着色器常量在绘制调用期间。
         void UpdateConstants(const VisualSmartPointer& visual, const CameraSmartPointer& camera);
 

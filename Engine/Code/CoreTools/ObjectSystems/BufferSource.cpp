@@ -121,7 +121,7 @@ void CoreTools::BufferSource
 	m_Source.IncrementBytesProcessed(bytesNumber);
 }
 
-void CoreTools::BufferSource ::ReadUniqueID(ObjectInterfaceSmartPointer object)
+void CoreTools::BufferSource ::ReadUniqueID(ObjectInterfaceSharedPtr object)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

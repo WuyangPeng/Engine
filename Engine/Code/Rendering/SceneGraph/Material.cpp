@@ -21,6 +21,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Material);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Material);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Material);
@@ -102,7 +103,7 @@ void Rendering::Material
 }
 
 uint64_t Rendering::Material
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -110,7 +111,7 @@ uint64_t Rendering::Material
 }
 
 void Rendering::Material
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -133,6 +134,12 @@ int Rendering::Material
 	size += m_Impl->GetStreamingSize();
     
 	return size;
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::Material::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

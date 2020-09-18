@@ -1,65 +1,60 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:50)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/14 16:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "OutTopLevelImpl.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+#include "TopLevel.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
-CoreTools::OutTopLevelImpl
-	::OutTopLevelImpl() noexcept
-	:m_TopLevel{}, m_UniqueID{}
+CoreTools::OutTopLevelImpl::OutTopLevelImpl() noexcept
+    : m_TopLevel{} 
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, OutTopLevelImpl)
 
-bool CoreTools::OutTopLevelImpl
-	::IsTopLevel(uint64_t uniqueID) const
+bool CoreTools::OutTopLevelImpl::IsTopLevel(const ConstObjectInterfaceSharedPtr& object) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_UniqueID.find(uniqueID) != m_UniqueID.cend();
+    const auto& container = m_TopLevel.get<UniqueObject>();
+
+    return container.find(object) != container.cend();
 }
 
-int CoreTools::OutTopLevelImpl
-	::GetTopLevelSize() const
+int CoreTools::OutTopLevelImpl::GetTopLevelSize() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return boost::numeric_cast<int>(m_TopLevel.size());
+    return boost::numeric_cast<int>(m_TopLevel.size());
 }
 
-  CoreTools::ConstObjectInterfaceSmartPointer  CoreTools::OutTopLevelImpl
-	::operator[](int index) const
+CoreTools::ConstObjectContainerConstIter CoreTools::OutTopLevelImpl::begin() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetTopLevelSize(), "索引错误！");
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_TopLevel.at(index);
+    return m_TopLevel.begin();
 }
 
-void CoreTools::OutTopLevelImpl
-	::Insert(const ObjectInterfaceSmartPointer& objectPtr)
+CoreTools::ConstObjectContainerConstIter CoreTools::OutTopLevelImpl::end() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	m_TopLevel.push_back(objectPtr);
+    return m_TopLevel.end();
 }
 
-void CoreTools::OutTopLevelImpl
-	::SetUniqueID(int index, uint64_t uniqueID)
+void CoreTools::OutTopLevelImpl::Insert(const ObjectInterfaceSharedPtr& object)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	m_TopLevel.at(index)->SetUniqueID(uniqueID);
-	m_UniqueID.insert(uniqueID);
+    m_TopLevel.emplace_back(object); 
 }
-

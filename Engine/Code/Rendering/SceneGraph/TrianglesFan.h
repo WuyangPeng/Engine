@@ -34,7 +34,7 @@ namespace Rendering
 		// 索引缓冲区数据的解释。
 		  int GetNumTriangles() const override;
 		  const TriangleIndex GetTriangle(int index) const override;
-
+                  ObjectInterfaceSharedPtr CloneObject() const override;
 		  ControllerInterfaceSmartPointer Clone() const override;
 	};
 

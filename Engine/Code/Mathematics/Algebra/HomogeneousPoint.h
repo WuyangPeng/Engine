@@ -75,6 +75,8 @@ namespace Mathematics
         T GetW() const noexcept;
         void SetW(T y) noexcept;
 
+        void Set(const ArrayType& coordinate) noexcept;
+
         static constexpr int GetPointByte() noexcept
         {
             return GetPointSize() * sizeof(T);

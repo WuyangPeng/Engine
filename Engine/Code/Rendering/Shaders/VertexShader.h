@@ -27,7 +27,7 @@ namespace Rendering
         VertexShader& operator=(const VertexShader&) = default;
         VertexShader(VertexShader&&) noexcept = default;
         VertexShader& operator=(VertexShader&&) noexcept = default;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(VertexShader);

@@ -1,0 +1,13 @@
+C++ 精髓——软件工程方法（C++:A Software Enginearing Approach）
+
+官方网站：
+ftp://ftp.prenhall.com/pub/ptr/c++programming.w-050/corec++ （已失效）。
+
+○
+作者：Victor Shtern
+
+知识点 
+
+代码 
+
+要点  

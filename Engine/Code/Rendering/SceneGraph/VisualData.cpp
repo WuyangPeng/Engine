@@ -24,6 +24,8 @@ using std::vector;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::VisualData
 	::VisualData(VisualPrimitiveType type)
 	:m_Type{ type }, m_VertexFormat{}, m_VertexBuffer{}, m_IndexBuffer{}
@@ -201,11 +203,11 @@ void Rendering::VisualData
 }
 
 void Rendering::VisualData
-	::Save(BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteEnum(m_Type);
+	target->WriteEnum(m_Type);
 	//target.WriteSmartPointer(m_VertexFormat);
 	//target.WriteSmartPointer(m_VertexBuffer);
 	//target.WriteSmartPointer(m_IndexBuffer);	
@@ -225,8 +227,7 @@ int Rendering::VisualData
 	return size;
 }
 
-void Rendering::VisualData
-	::Register(ObjectRegister& target) const
+void Rendering::VisualData ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

@@ -14,7 +14,9 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::TextureData
     ::TextureData (TextureFormat format, TextureFlags type,BufferUsage usage, int numLevels) noexcept
 	: m_Format{ format }, m_Type{ type }, m_Usage{ usage }, m_NumLevels{ numLevels }
@@ -106,18 +108,17 @@ void Rendering::TextureData
 }
 
 void Rendering::TextureData
-    ::Save( CoreTools::BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
    
-    target.WriteEnum(m_Format);
-    target.WriteEnum(m_Type);
-    target.WriteEnum(m_Usage);
-    target.Write(m_NumLevels);    
+    target->WriteEnum(m_Format);
+        target->WriteEnum(m_Type);
+    target->WriteEnum(m_Usage);
+    target->Write(m_NumLevels);    
 }
 
-int Rendering::TextureData
-    ::GetStreamingSize() const
+int Rendering::TextureData ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
   
@@ -175,4 +176,4 @@ void Rendering::TextureData
 	}
 }
 
-
+#include STSTEM_WARNING_POP 

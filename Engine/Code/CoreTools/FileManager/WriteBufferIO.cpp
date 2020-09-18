@@ -13,9 +13,8 @@
 
 using std::make_shared;
 
-CoreTools::WriteBufferIO
-	::WriteBufferIO(int bytesTotal, char* buffer)
-	:m_Impl{ make_shared<ImplType>(bytesTotal,buffer) }
+CoreTools::WriteBufferIO ::WriteBufferIO(int bufferSize)
+    : m_Impl{ make_shared<ImplType>(bufferSize) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

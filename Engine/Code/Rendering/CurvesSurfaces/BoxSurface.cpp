@@ -14,13 +14,14 @@
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26489)
@@ -504,14 +505,13 @@ void Rendering::BoxSurface::PostLink()
 	Node::PostLink();
 }
 
-uint64_t Rendering::BoxSurface
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::BoxSurface ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	return Node::Register(target);
 }
 
 void Rendering::BoxSurface
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -523,12 +523,12 @@ void Rendering::BoxSurface
 	const int uDegree = mVolume->GetDegree(0);
 	const int vDegree = mVolume->GetDegree(1);
 	const int wDegree = mVolume->GetDegree(2);
-	target.Write(numUCtrlPoints);
-	target.Write(numVCtrlPoints);
-	target.Write(numWCtrlPoints);
-	target.Write(uDegree);
-	target.Write(vDegree);
-	target.Write(wDegree);
+	target->Write(numUCtrlPoints);
+	target->Write(numVCtrlPoints);
+	target->Write(numWCtrlPoints);
+	target->Write(uDegree);
+	target->Write(vDegree);
+	target->Write(wDegree);
 	for (int u = 0; u < numUCtrlPoints; ++u)
 	{
 		for (int v = 0; v < numVCtrlPoints; ++v)
@@ -536,15 +536,15 @@ void Rendering::BoxSurface
 			for (int w = 0; w < numWCtrlPoints; ++w)
 			{
 				const Mathematics::Vector3Df ctrl = mVolume->GetControlPoint(u, v, w);
-				target.WriteAggregate(ctrl);
+                            target->WriteAggregate(ctrl);
 			}
 		}
 	}
 
-	target.Write(mNumUSamples);
-	target.Write(mNumVSamples);
-	target.Write(mNumWSamples);
-	target.WriteBool(mDoSort);
+	target->Write(mNumUSamples);
+	target->Write(mNumVSamples);
+	target->Write(mNumWSamples);
+	target->Write(mDoSort);
 
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -596,6 +596,13 @@ int Rendering::BoxSurface
 	::GetNumWSamples() const noexcept
 {
 	return mNumWSamples;
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::BoxSurface::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

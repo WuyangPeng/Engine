@@ -1,48 +1,38 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:54)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/11 13:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ObjectName.h"
 #include "Detail/ObjectNameImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::string;
 using std::make_shared;
-using std::swap;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-CoreTools::ObjectName
-	::ObjectName(const string& name)
-	:m_Impl{ make_shared<ImplType>(name) }
+using std::string;
+
+CoreTools::ObjectName::ObjectName(const string& name)
+    : m_Impl{ make_shared<ImplType>(name) }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
+
+COPY_CONSTRUCTION_DEFINE(CoreTools, ObjectName)
+
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, ObjectName)
 
-DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, ObjectName)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ObjectName, GetName, string)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, ObjectName, SetName, string, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ObjectName, GetName, const string&)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, ObjectName, SetName, string, void)
-
-bool CoreTools::ObjectName
-	::IsExactly(const ObjectName& name) const noexcept
+bool CoreTools::ObjectName::IsExactly(const ObjectName& name) const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->IsExactly(*name.m_Impl);
+    return m_Impl->IsExactly(*name.m_Impl);
 }
-
-void CoreTools::ObjectName
-	::Swap(ClassType& rhs) noexcept
-{
-	m_Impl.swap(rhs.m_Impl);
-}
-
-

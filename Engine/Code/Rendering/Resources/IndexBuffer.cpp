@@ -101,7 +101,7 @@ int Rendering::IndexBuffer
 }
 
 uint64_t Rendering::IndexBuffer
-	::Register( CoreTools::ObjectRegister& target ) const
+	::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -109,7 +109,7 @@ uint64_t Rendering::IndexBuffer
 }
 
 void Rendering::IndexBuffer
-	::Save (CoreTools::BufferTarget& target) const
+	::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -117,7 +117,7 @@ void Rendering::IndexBuffer
 
 	ParentType::Save(target);
 	
-	target.Write(m_Offset);
+	target->Write(m_Offset);
 
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -412,6 +412,13 @@ void Rendering::IndexBuffer
 	SYSTEM_UNUSED_ARG(original);
 
 	accessWriteData[index] = current;
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::IndexBuffer::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
  #include STSTEM_WARNING_POP

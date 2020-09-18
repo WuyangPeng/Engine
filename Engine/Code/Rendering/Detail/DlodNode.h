@@ -22,7 +22,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE DlodNode : public SwitchNode
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(DlodNode);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(DlodNode);
 		using ParentType = SwitchNode;
 
 	public:

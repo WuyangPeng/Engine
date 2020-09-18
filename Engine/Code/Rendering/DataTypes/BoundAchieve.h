@@ -85,7 +85,7 @@ T Rendering::Bound<T>::GetRadius() const noexcept
 }
 
 template <typename T>
-int Rendering::Bound<T>::GetStreamingSize() const
+int Rendering::Bound<T>::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -198,7 +198,7 @@ void Rendering::Bound<T>::ComputeFromData(int numElements, int stride, SpanConst
 }
 
 template <typename T>
-void Rendering::Bound<T>::ComputeFromData(const std::vector<Vector3D>& data)
+void Rendering::Bound<T>::ComputeFromData(const Vector3DContainer& data)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -213,7 +213,7 @@ void Rendering::Bound<T>::ComputeFromData(const std::vector<Vector3D>& data)
 }
 
 template <typename T>
-void Rendering::Bound<T>::ComputeFromData(const std::vector<APoint>& data)
+void Rendering::Bound<T>::ComputeFromData(const APointContainer& data)
 {
     RENDERING_CLASS_IS_VALID_1;
 

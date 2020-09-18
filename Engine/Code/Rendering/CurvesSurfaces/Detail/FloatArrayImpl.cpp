@@ -17,6 +17,8 @@
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::FloatArrayImpl
 	::FloatArrayImpl( const FloatVector& elements )
 	:m_Elements{ elements }
@@ -42,11 +44,11 @@ void Rendering::FloatArrayImpl
 }
 
 void Rendering::FloatArrayImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_Elements);
+	target->WriteContainerWithNumber(m_Elements);
 }
 
 int Rendering::FloatArrayImpl

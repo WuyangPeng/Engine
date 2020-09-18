@@ -1,47 +1,41 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:37)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/15 12:55)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_IMPL_H
 
-#include "CoreTools/ObjectSystems/ObjectInterface.h"
-
-#include <map>
-#include <vector>
+#include "CoreTools/ObjectSystems/ConstObjectAssociated.h" 
 
 namespace CoreTools
 {
-	class ObjectRegisterImpl
-	{
-	public:
-		using ClassType = ObjectRegisterImpl;
+    class ObjectRegisterImpl
+    {
+    public:
+        using ClassType = ObjectRegisterImpl;
 
-	public:
-		ObjectRegisterImpl() noexcept;
+    public:
+        ObjectRegisterImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		uint64_t GetUniqueID(const ConstObjectInterfaceSmartPointer& smartPointer) const;
-		int GetOrderedSize() const;
-		const ConstObjectInterfaceSmartPointer& operator [](int smartPointer) const;
+        [[nodiscard]] uint64_t GetUniqueID(const ConstObjectInterfaceSharedPtr& object) const;
+        [[nodiscard]] int GetOrderedSize() const;
 
-		uint64_t RegisterRoot(const ConstObjectInterfaceSmartPointer& smartPointer);
+        [[nodiscard]] ConstRegisterContainerConstIter begin() const noexcept;
+        [[nodiscard]] ConstRegisterContainerConstIter end() const noexcept;
 
-	private:
-		using RegisterAssociatedContainer = std::map<ConstObjectInterfaceSmartPointer, uint64_t>;
-		using RegisterSequentialContainer = std::vector<ConstObjectInterfaceSmartPointer>;
+        [[nodiscard]] uint64_t RegisterRoot(const ConstObjectInterfaceSharedPtr& object);
 
-	private:
-                uint64_t GetOriginalUniqueID(const ConstObjectInterfaceSmartPointer& smartPointer) const noexcept;
-
-	private:
-		// 存储objects，对顶层对象使用图的深度优先遍历。
-		RegisterAssociatedContainer m_Registered;
-		RegisterSequentialContainer m_Ordered;
-	};
+    private:
+        // 存储objects，对顶层对象使用图的深度优先遍历。
+        ConstRegisterContainer m_Registered;
+    };
 }
 
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_IMPL_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_IMPL_H

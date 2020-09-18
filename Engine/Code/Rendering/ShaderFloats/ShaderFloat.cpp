@@ -21,6 +21,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ShaderFloat);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ShaderFloat);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ShaderFloat); 
@@ -134,4 +135,11 @@ Rendering::ShaderFloat::ShaderFloatSmartPointer Rendering::ShaderFloat
 
 	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
 }
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::ShaderFloat::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

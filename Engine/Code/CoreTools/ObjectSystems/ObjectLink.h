@@ -26,11 +26,11 @@ namespace CoreTools
 
 		CLASS_INVARIANT_DECLARE;
 
-		ObjectInterfaceSmartPointer GetObjectPtr(uint64_t uniqueID);
+		ObjectInterfaceSharedPtr GetObjectPtr(uint64_t uniqueID);
 		int GetOrderedSize() const;
-		ObjectInterfaceSmartPointer& operator [](int index);
+		ObjectInterfaceSharedPtr& operator [](int index);
 
-		void Insert(uint64_t uniqueID, const ObjectInterfaceSmartPointer& ptr);
+		void Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& ptr);
 
 		void Sort();
 

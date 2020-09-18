@@ -135,14 +135,14 @@ void Rendering::BufferImpl
 }
 
 void Rendering::BufferImpl
-	::Save( CoreTools::BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumElements);
-	target.Write(m_ElementSize);
-	target.WriteEnum(m_Usage);
-	target.WriteWithNumber(boost::numeric_cast<int>(m_Data.size()), &m_Data[0]);
+	target->Write(m_NumElements);
+	target->Write(m_ElementSize);
+        target->WriteEnum(m_Usage);
+        target->WriteContainerWithNumber(m_Data);
 }
 
 int Rendering::BufferImpl

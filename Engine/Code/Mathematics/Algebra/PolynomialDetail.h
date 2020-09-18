@@ -160,6 +160,19 @@ void Mathematics::Polynomial<Real>::ResetDegree(int degree)
 }
 
 template <typename Real>
+std::vector<Real> Mathematics::Polynomial<Real>::GetValue() const
+{
+    std::vector<Real> result;
+
+    for (auto i = 0; i <= m_Degree; ++i)
+    {
+        result.emplace_back(m_Coeff[i]);
+    }
+
+    return result;
+}
+
+template <typename Real>
 int Mathematics::Polynomial<Real>::GetDegree() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;

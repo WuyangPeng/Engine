@@ -129,4 +129,18 @@ void Mathematics::HomogeneousPoint<T>::SetW(T w) noexcept
     m_W = w;
 }
 
+template <typename T>
+void Mathematics::HomogeneousPoint<T>::Set(const ArrayType& coordinate) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446) 
+    SetX(coordinate[0]);
+    SetY(coordinate[1]);
+    SetZ(coordinate[2]);
+    SetW(coordinate[3]);
+#include STSTEM_WARNING_POP
+}
+
 #endif  //  MATHEMATICS_ALGEBRA_POINT_ACHIEVE_H

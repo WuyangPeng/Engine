@@ -21,6 +21,7 @@ using std::make_shared;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering,Buffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Buffer);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Buffer); 
@@ -78,7 +79,7 @@ int Rendering::Buffer
 }
 
 uint64_t Rendering::Buffer
-	::Register( CoreTools::ObjectRegister& target ) const
+	::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -86,7 +87,7 @@ uint64_t Rendering::Buffer
 }
 
 void Rendering::Buffer
-	::Save (CoreTools::BufferTarget& target) const
+	::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

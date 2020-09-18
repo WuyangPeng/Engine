@@ -45,7 +45,7 @@ namespace CoreTools
 		OutTopLevel m_TopLevel;
 
 		// 存储objects，对顶层对象使用图的深度优先遍历。
-		ObjectRegister m_ObjectRegister;
+		ObjectRegisterSharedPtr m_ObjectRegister;
 
 		FileBufferPtr m_BufferPtr;
 		BufferTargetPtr m_TargetPtr;

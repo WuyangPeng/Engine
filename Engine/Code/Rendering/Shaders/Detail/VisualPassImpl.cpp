@@ -52,7 +52,7 @@ int Rendering::VisualPassImpl
 }
 
 void Rendering::VisualPassImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -96,8 +96,7 @@ void Rendering::VisualPassImpl
 	//source.ResolveObjectSmartPointerLink(m_WireState);
 }
 
-void Rendering::VisualPassImpl
-	::Register(ObjectRegister& target) const
+void Rendering::VisualPassImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

@@ -70,9 +70,11 @@ bool Network::MessageInterface ::IsDerivedTypeOf(const ConstMessageInterfaceShar
     return message && GetRttiType().IsDerived(message->GetRttiType());
 }
 
-int Network::MessageInterface ::GetStreamingSize() const
+int Network::MessageInterface ::GetStreamingSize() const 
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
+
+    CoreTools::DoNothing();
 
     // ÏûÏ¢ºÅ
     const auto size = CORE_TOOLS_STREAM_SIZE(m_MessageID);

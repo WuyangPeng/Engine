@@ -357,8 +357,7 @@ void Rendering::PlanarShadowEffect
     mMaterialEffectInstance.reset(mMaterialEffect->CreateInstance(mMaterial.get()));
 }
 
-uint64_t Rendering::PlanarShadowEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::PlanarShadowEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
    const  uint64_t id = GlobalEffect::Register(target);
 	if(0 < id)
@@ -372,13 +371,13 @@ uint64_t Rendering::PlanarShadowEffect
 }
 
 void Rendering::PlanarShadowEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     GlobalEffect::Save(target);
 
-    target.WriteAggregateWithNumber(mNumPlanes, mShadowColors);
+  //  target.WriteAggregateWithNumber(mNumPlanes, mShadowColors);
   //  target.WriteSmartPointerWithNumber(mNumPlanes, mPlanes);
   //  target.WriteSmartPointerWithNumber(mNumPlanes, mProjectors);
   //  target.WriteSmartPointer(mShadowCaster);
@@ -441,4 +440,11 @@ Rendering::TrianglesMeshSmartPointer Rendering::PlanarShadowEffect ::GetPlane(in
 {
 	return mShadowColors[i];
 }
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::PlanarShadowEffect::CloneObject() const 
+{
+      RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
   #include STSTEM_WARNING_POP

@@ -19,7 +19,7 @@ namespace CoreTools
 	class CORE_TOOLS_DEFAULT_DECLARE CommonDataResource : public BaseResource
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(CommonDataResource);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CommonDataResource);
 		using ParentType = BaseResource;
 
 	public:

@@ -25,7 +25,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE MaterialConstant : public ShaderFloat
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(MaterialConstant);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MaterialConstant);
 		using ParentType = ShaderFloat;
 
 	public:

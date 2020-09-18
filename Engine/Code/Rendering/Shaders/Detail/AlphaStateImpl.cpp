@@ -19,6 +19,8 @@
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::AlphaStateImpl ::AlphaStateImpl()
     : m_BlendEnabled{ false }, m_SourceBlend{ AlphaStateFlags::SourceBlendMode::SourceAlpha },
       m_DestinationBlend{ AlphaStateFlags::DestinationBlendMode::OneMinusSourceAlpha }, m_CompareEnabled{ false },
@@ -148,17 +150,17 @@ void Rendering::AlphaStateImpl ::Load(BufferSource& source)
     source.ReadAggregate(m_ConstantColor);
 }
 
-void Rendering::AlphaStateImpl ::Save(BufferTarget& target) const
+void Rendering::AlphaStateImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.WriteBool(m_BlendEnabled);
-    target.WriteEnum(m_SourceBlend);
-    target.WriteEnum(m_DestinationBlend);
-    target.WriteBool(m_CompareEnabled);
-    target.WriteEnum(m_Compare);
-    target.Write(m_Reference);
-    target.WriteAggregate(m_ConstantColor);
+    target->Write(m_BlendEnabled);
+    target->WriteEnum(m_SourceBlend);
+    target->WriteEnum(m_DestinationBlend);
+    target->Write(m_CompareEnabled);
+    target->WriteEnum(m_Compare);
+    target->Write(m_Reference);
+    target->WriteAggregate(m_ConstantColor);
 }
 
 int Rendering::AlphaStateImpl ::GetStreamingSize() const

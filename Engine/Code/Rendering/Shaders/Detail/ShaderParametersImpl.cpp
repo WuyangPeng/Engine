@@ -105,7 +105,7 @@ void Rendering::ShaderParametersImpl
 }
 
 void Rendering::ShaderParametersImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -145,8 +145,7 @@ void Rendering::ShaderParametersImpl
 	}
 }
 
-void Rendering::ShaderParametersImpl
-	::Register(ObjectRegister& target) const
+void Rendering::ShaderParametersImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

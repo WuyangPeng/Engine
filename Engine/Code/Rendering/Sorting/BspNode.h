@@ -54,7 +54,7 @@ namespace Rendering
 
 		// Determine the portion of the scene that contains the point.
 		 SpatialSmartPointer GetContainingNode(const Mathematics::FloatAPoint& point);
-
+                 ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		// Support for the geometric update. 
 		  bool UpdateWorldData(double applicationTime) override;

@@ -73,11 +73,11 @@ void Rendering::CollapseRecordArrayImpl
 }
 
 void Rendering::CollapseRecordArrayImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(GetNumRecords());
+	target->Write(GetNumRecords());
 
 	for_each(m_CollapseRecord.begin(),m_CollapseRecord.end(),std::bind(&CollapseRecord::Save, std::placeholders::_1, std::ref(target)));
 }

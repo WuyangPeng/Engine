@@ -11,6 +11,9 @@
 
 #include "BufferIOImpl.h"
 
+#include <vector>
+#include "../FileBuffer.h"
+
 namespace CoreTools
 {
 	class CORE_TOOLS_HIDDEN_DECLARE WriteBufferIOImpl : public BufferIOImpl
@@ -20,7 +23,7 @@ namespace CoreTools
 		using ParentType = BufferIOImpl;
 
 	public:
-		WriteBufferIOImpl(int bytesTotal, char* buffer) noexcept;
+		explicit WriteBufferIOImpl(int bufferSize)  ;
  
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -35,7 +38,7 @@ namespace CoreTools
 		uint32_t WriteToBuffer(size_t itemSize, size_t itemsNumber, const void* data);
 
 	private:
-		char* m_Buffer;
+                FileBuffer m_Buffer;
 	};
 }
 

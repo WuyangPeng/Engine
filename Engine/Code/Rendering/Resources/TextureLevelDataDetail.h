@@ -25,6 +25,8 @@
 #include SYSTEM_WARNING_DISABLE(26485)
 #include SYSTEM_WARNING_DISABLE(6385)
  
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 template <int WindowSize>
 Rendering::TextureLevelData<WindowSize>
 	::TextureLevelData( int numDimensions ) noexcept
@@ -180,25 +182,24 @@ void Rendering::TextureLevelData<WindowSize>
 
 template <int WindowSize>
 void Rendering::TextureLevelData<WindowSize>
-    ::Save( CoreTools::BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumDimensions);
+	target->Write(m_NumDimensions);
 
 	for(auto i = 0;i < WindowSize;++i)
 	{
-		target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_Dimension[i]);
+		//target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_Dimension[i]);
 	}   
 
-    target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_NumLevelBytes);
-    target.Write(m_NumTotalBytes);
-    target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_LevelOffsets);
+   // target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_NumLevelBytes);
+    target->Write(m_NumTotalBytes);
+   // target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_LevelOffsets);
 }
 
 template <int WindowSize>
-int Rendering::TextureLevelData<WindowSize>
-    ::GetStreamingSize() const
+int Rendering::TextureLevelData<WindowSize>::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 

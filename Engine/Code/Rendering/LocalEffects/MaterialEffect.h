@@ -33,7 +33,7 @@ namespace Rendering
         // Convenience for creating an instance.  The application does not have to
         // create the effect explicitly in order to create an instance from it.
         static VisualEffectInstance* CreateUniqueInstance(Material* material);
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     private:
         static int msDx9VRegisters[2];
         static int msOglVRegisters[2];

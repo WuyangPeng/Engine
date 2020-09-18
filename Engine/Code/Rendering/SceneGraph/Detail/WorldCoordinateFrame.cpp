@@ -20,6 +20,8 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::WorldCoordinateFrame ::WorldCoordinateFrame(float epsilon)  
     : m_Position{ Mathematics::Float::g_Origin }, m_DirectionVector{ -Mathematics::Float::g_UnitZ }, m_UpVector{ Mathematics::Float::g_UnitY },
 	m_RightVector{ Mathematics::Float::g_UnitX }, m_ViewMatrix{ Mathematics::Float::g_ZeroMatrix }, m_Epsilon{ epsilon }
@@ -174,15 +176,15 @@ void Rendering::WorldCoordinateFrame
 }
 
 void Rendering::WorldCoordinateFrame
-    ::Save( BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	target.WriteAggregate(m_Position);
-    target.WriteAggregate(m_DirectionVector);
-    target.WriteAggregate(m_UpVector);
-    target.WriteAggregate(m_RightVector);
-    target.Write(m_Epsilon);
+	target->WriteAggregate(m_Position);
+        target->WriteAggregate(m_DirectionVector);
+        target->WriteAggregate(m_UpVector);
+        target->WriteAggregate(m_RightVector);
+    target->Write(m_Epsilon);
 }
 
 int Rendering::WorldCoordinateFrame

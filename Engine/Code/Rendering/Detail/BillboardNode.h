@@ -23,7 +23,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE BillboardNode : public Node
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(BillboardNode);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(BillboardNode);
 		using ParentType = Node;
 
 	public:

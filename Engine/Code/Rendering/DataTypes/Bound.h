@@ -33,17 +33,20 @@ namespace Rendering
         static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
         using ClassType = Bound<T>;
+        using Transform = Transform<T>;
         using Math = Mathematics::Math<T>;
         using Plane = Mathematics::Plane<T>;
         using APoint = Mathematics::APoint<T>;
         using AVector = Mathematics::AVector<T>;
         using Vector3D = Mathematics::Vector3D<T>;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-        using Transform = Transform<T>;
 
         using PixelType = std::vector<char>;
         using PixelTypeConstIter = PixelType::const_iterator;
         using SpanConstIterator = CoreTools::SpanIterator<PixelTypeConstIter>;
+
+        using APointContainer = std::vector<APoint>;
+        using Vector3DContainer = std::vector<Vector3D>;
 
     public:
         // 边界指定为一个指定中心和半径的球体。
@@ -62,15 +65,15 @@ namespace Rendering
         [[nodiscard]] const APoint& GetCenter() const noexcept;
         [[nodiscard]] T GetRadius() const noexcept;
 
-        [[nodiscard]] int GetStreamingSize() const;
+        [[nodiscard]] int GetStreamingSize() const noexcept;
 
         // 边界上的操作。
         [[nodiscard]] NumericalValueSymbol WhichSide(const Plane& plane) const noexcept;
         void GrowToContain(const Bound& bound);
         [[nodiscard]] const Bound TransformBy(const Transform& transform) const;
         void ComputeFromData(int numElements, int stride, SpanConstIterator data);
-        void ComputeFromData(const std::vector<APoint>& data);
-        void ComputeFromData(const std::vector<Vector3D>& data);
+        void ComputeFromData(const APointContainer& data);
+        void ComputeFromData(const Vector3DContainer& data);
 
         // 测试线性分量和边界是否相交（不计算交战）。线性分量通过P + t * D进行参数化，
         // 这里P是一个分量上的点（原点），D是一个单位长度向量。间隔[tmin,tmax]是

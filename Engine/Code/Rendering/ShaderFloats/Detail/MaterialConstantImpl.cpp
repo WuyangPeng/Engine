@@ -53,7 +53,7 @@ void Rendering::MaterialConstantImpl
 }
 
 void Rendering::MaterialConstantImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
@@ -120,8 +120,7 @@ void Rendering::MaterialConstantImpl
 	//source.ResolveObjectSmartPointerLink(m_Material);
 }
 
-void Rendering::MaterialConstantImpl
-	::Register( ObjectRegister& target ) const
+void Rendering::MaterialConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

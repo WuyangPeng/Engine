@@ -12,6 +12,7 @@
 #include "Mathematics/Algebra/AVector.h"
 
 #include <vector>
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -57,8 +58,8 @@ namespace Rendering
         void SetParticleLinearAxis(int index, const AVector& particleLinearAxis);
         void SetParticleSizeChange(int index, float particleSizeChange);
 
-        int GetStreamingSize() const;
-        void Save(CoreTools::BufferTarget& target) const;
+        int GetStreamingSize() const noexcept;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         void Load(CoreTools::BufferSource& source);
 
     private:

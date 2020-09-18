@@ -94,12 +94,12 @@ void Rendering::ShaderConstantsDataImpl
 }
 
 void Rendering::ShaderConstantsDataImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	const uint32_t size = boost::numeric_cast<uint32_t>(m_SingleShaderConstantsData.size());
-	target.Write(size);
+	target->Write(size);
 
 	for_each(m_SingleShaderConstantsData.begin(), m_SingleShaderConstantsData.end(),std::bind(&SingleShaderConstantsData::Save, std::placeholders::_1,std::ref(target)));
 }

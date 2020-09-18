@@ -13,7 +13,10 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include STSTEM_WARNING_PUSH 
 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::WireStateImpl
 	::WireStateImpl() noexcept
 	:m_Enabled{ false }
@@ -32,15 +35,14 @@ void Rendering::WireStateImpl
 }
 
 void Rendering::WireStateImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteBool(m_Enabled);
+	target->Write(m_Enabled);
 }
 
-int Rendering::WireStateImpl
-	::GetStreamingSize() const
+int Rendering::WireStateImpl ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -83,3 +85,4 @@ void Rendering::WireStateImpl
 
 	m_Enabled = (enabled == 1) ? true : false;
 }
+#include STSTEM_WARNING_POP

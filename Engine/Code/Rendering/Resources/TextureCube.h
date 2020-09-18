@@ -18,7 +18,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE TextureCube : public Texture
     {
     public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(TextureCube);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(TextureCube);
 		using ParentType = Texture;
 		using TextureCubeSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
 		using ConstTextureCubeSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>;
@@ -62,7 +62,7 @@ namespace Rendering
 		const char* GetTextureData (int face,int level) const;
 
 		  TextureSmartPointer Clone() const override;
-        
+                ObjectInterfaceSharedPtr CloneObject() const override;
     private:
 		IMPL_TYPE_DECLARE(TextureCube);
     };

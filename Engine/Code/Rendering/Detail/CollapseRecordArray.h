@@ -23,15 +23,19 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE CollapseRecordArray : public CoreTools::Object
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(CollapseRecordArray);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CollapseRecordArray);
 		using ParentType = Object;
 
 	public:		
 		explicit CollapseRecordArray(const std::vector<CollapseRecord>& collapseRecord);
  
 		~CollapseRecordArray() = default;
+
+		#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 		CollapseRecordArray(CollapseRecordArray&&)= default;
 		CollapseRecordArray& operator=(CollapseRecordArray&&)= default;
+		#include STSTEM_WARNING_POP
 		
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -40,7 +44,7 @@ namespace Rendering
 		int GetNumRecords() const;
 		const std::vector<CollapseRecord> GetRecords() const;
 		const CollapseRecord GetRecord(int index) const;
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(CollapseRecordArray);
 	};

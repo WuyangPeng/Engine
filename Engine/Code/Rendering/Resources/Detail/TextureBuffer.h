@@ -14,6 +14,7 @@
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 
 #include <memory>
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -52,7 +53,7 @@ namespace Rendering
 		char* GetWriteData();
         
 		void Load (CoreTools::BufferSource& source);
-		void Save (CoreTools::BufferTarget& target) const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;              
       
 		void SaveToFile (WriteFileManager& outFile) const;

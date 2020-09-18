@@ -20,6 +20,7 @@
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26456)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, DepthState);
@@ -57,4 +58,11 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DepthState,SetCompare, Comp
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DepthState,SaveState, WriteFileManager&, void)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DepthState,LoadState, ReadFileManager&, void)
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::DepthState::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

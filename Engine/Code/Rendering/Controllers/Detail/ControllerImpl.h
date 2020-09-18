@@ -11,6 +11,7 @@
 
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/Flags/ControllerFlags.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -59,8 +60,8 @@ namespace Rendering
         void SetActive(bool active) noexcept;
         
         void Load (BufferSource& source);
-		void Save (BufferTarget& target) const;
-		int GetStreamingSize () const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
+        int GetStreamingSize() const noexcept;
         
     private:
         ControllerRepeatType m_Repeat;  // д╛хо = ControllerRepeatType::Clamp

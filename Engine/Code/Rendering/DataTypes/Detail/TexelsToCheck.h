@@ -28,8 +28,8 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        size_t GetOutTexelsLength() const noexcept; 
- 
+        size_t GetOutTexelsLength() const noexcept;
+
         void CheckOutTexels(size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
 
     private:

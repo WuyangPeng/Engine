@@ -186,14 +186,13 @@ void Rendering::MaterialTextureEffect
 	}
 }
 
-uint64_t Rendering::MaterialTextureEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::MaterialTextureEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::MaterialTextureEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

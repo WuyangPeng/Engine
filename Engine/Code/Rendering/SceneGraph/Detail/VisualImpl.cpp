@@ -212,13 +212,13 @@ void Rendering::VisualImpl
 }
 
 void Rendering::VisualImpl
-	::Save(BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	m_VisualData.Save(target);
-	target.WriteAggregate(m_ModelBound); 
-//	target.WriteSmartPointer(m_Effect);
+        target->WriteAggregate(m_ModelBound);
+        //	target.WriteSmartPointer(m_Effect);
 }
 
 int Rendering::VisualImpl
@@ -234,8 +234,7 @@ int Rendering::VisualImpl
 	return size;
 }
 
-void Rendering::VisualImpl
-	::Register(ObjectRegister& target) const
+void Rendering::VisualImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -10,6 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Shaders/Flags/DepthStateFlags.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -37,7 +38,7 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 
 		void Load(BufferSource& source);
-		void Save(BufferTarget& target) const;
+		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
 
 		bool IsEnabled() const;

@@ -651,6 +651,24 @@ void Mathematics::AQuaternion<Real>
 	Slerp(slerpT, slerpP, slerpQ);
 }
 
+template <typename T>
+const typename Mathematics::AQuaternion<T>::ArrayType Mathematics::AQuaternion<T>::GetCoordinate() const noexcept
+{
+    return ArrayType{ GetW(), GetX(), GetY(), GetZ() };
+}
+
+template <typename T>
+void Mathematics::AQuaternion<T>::Set(const ArrayType& coordinate) noexcept
+{
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26446)
+    SetW(coordinate[0]);
+    SetX(coordinate[1]);
+    SetY(coordinate[2]);
+    SetZ(coordinate[3]);
+    #include STSTEM_WARNING_POP
+} 
+
 #include STSTEM_WARNING_POP
 
 #endif //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AQUATERNION_DETAIL)

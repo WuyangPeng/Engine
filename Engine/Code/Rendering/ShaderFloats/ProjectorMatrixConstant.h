@@ -22,7 +22,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ProjectorMatrixConstant : public ShaderFloat
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ProjectorMatrixConstant);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ProjectorMatrixConstant);
         using ParentType = ShaderFloat;
 
     public:

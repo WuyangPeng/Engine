@@ -341,6 +341,26 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Resource\References\Cpp\Intermediate\Advanced C++.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\Applied C++.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ A Software Enginearing Approach.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Cookbook.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Effective Object-Oriented Software Construction.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ footprint and Performance Optimization.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Gotchas.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ In Action Industrial-Strength Programming Techniques.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Master Reference.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Programming Today.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\C++ Strategies and Tactics.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\Efficient C++ Performance Programming Techniques.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\How not to Program in C++.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\Imperfect C++.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\Intermediate.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\Optimized C++.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\Professional C++.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\Ruminations on C++.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\The C++ Programming Language.txt" />
+    <Text Include="Resource\References\Cpp\Intermediate\Thomas Wong C + + programming secret.txt" />
     <Text Include="Resource\References\Cpp\Primary\A Tour of C++.txt" />
     <Text Include="Resource\References\Cpp\Primary\Accelerated C++.txt" />
     <Text Include="Resource\References\Cpp\Primary\C &amp; C++ Code Capsules.txt" />

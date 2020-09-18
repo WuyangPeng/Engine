@@ -22,8 +22,7 @@
 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-
+#include SYSTEM_WARNING_DISABLE(26426) 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::Vector3D<Real>
 	::sm_Zero{ Math::GetValue(0),Math::GetValue(0),Math::GetValue(0) };
@@ -176,6 +175,24 @@ void Mathematics::Vector3D<Real>
 	m_Tuple[0] = x;
 	m_Tuple[1] = y;
 	m_Tuple[2] = z;
+}
+
+template <typename Real>
+void Mathematics::Vector3D<Real>::SetCoordinate(const ArrayType& coordinate)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    m_Tuple[0] = coordinate.at(0);
+    m_Tuple[1] = coordinate.at(1);
+    m_Tuple[2] = coordinate.at(2);
+}
+
+template <typename Real>
+typename Mathematics::Vector3D<Real>::ArrayType Mathematics::Vector3D<Real>::GetCoordinate() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ArrayType{ m_Tuple[0], m_Tuple[1], m_Tuple[2] };
 }
 
 template <typename Real>

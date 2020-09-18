@@ -13,6 +13,7 @@
 #include "TransformMatrix.h"
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/StreamMacro.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 
 #ifdef OPEN_CLASS_INVARIANT

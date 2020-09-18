@@ -10,7 +10,7 @@
 #include "Detail/TransformControllerImpl.h"
 #include "Rendering/SceneGraph/Spatial.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -85,7 +85,7 @@ bool Rendering::TransformController
 
     if (ParentType::Update(applicationTime))
     {		 
-		auto spatial = CoreTools::StaticCast<Spatial>(GetControllerObject());
+		auto spatial = dynamic_cast<Spatial*>(GetControllerObject());
 		if (spatial != nullptr)
 		{
 			spatial->SetLocalTransform(m_Impl->GetTransform());
@@ -123,8 +123,7 @@ int Rendering::TransformController
 	return size;
 }
 
-uint64_t Rendering::TransformController
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::TransformController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -132,7 +131,7 @@ uint64_t Rendering::TransformController
 }
 
 void Rendering::TransformController
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -175,6 +174,12 @@ void Rendering::TransformController
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
+CoreTools::ObjectInterfaceSharedPtr Rendering::TransformController::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
  
 
 

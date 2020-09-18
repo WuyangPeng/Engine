@@ -81,7 +81,7 @@ namespace Network
         virtual ImplPtr Expansion(int count) const = 0;
 
     private:
-        bool IsNeedSwap() const noexcept;
+        bool IsNeedSwap() const  ;
 
     private:
         std::atomic_int m_CurrentReadIndex;

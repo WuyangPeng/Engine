@@ -28,7 +28,7 @@ namespace Rendering
         PixelShader(PixelShader&&) noexcept = default;
         PixelShader& operator=(PixelShader&&) noexcept = default;
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-
+         ObjectInterfaceSharedPtr CloneObject() const override;
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(PixelShader);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
     };

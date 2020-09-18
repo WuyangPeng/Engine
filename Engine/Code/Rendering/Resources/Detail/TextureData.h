@@ -12,6 +12,7 @@
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/TextureFlags.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -45,8 +46,8 @@ namespace Rendering
 		void SetNumLevels(int numLevels) noexcept;
 
 		void Load (CoreTools::BufferSource& source);
-		void Save (CoreTools::BufferTarget& target) const;
-		int GetStreamingSize () const;		
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
+                int GetStreamingSize() const noexcept;		
 
 		void SaveToFile (WriteFileManager& outFile) const;
 		void ReadFromFile (ReadFileManager& inFile);

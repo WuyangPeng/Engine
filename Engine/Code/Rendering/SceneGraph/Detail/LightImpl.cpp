@@ -23,6 +23,9 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
+ 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::LightImpl ::LightImpl(LightType type, float epsilon) 
     : m_Ambient{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } }, m_Diffuse{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } }, m_Specular{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } },
       m_Constant{ 1.0f }, m_Linear{ 0.0f }, m_Quadratic{ 0.0f },
@@ -281,26 +284,26 @@ void Rendering::LightImpl ::Load(BufferSource& source)
     source.ReadAggregate(m_RightVector);
 }
 
-void Rendering::LightImpl ::Save(BufferTarget& target) const
+void Rendering::LightImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.WriteEnum(m_LightType);
-    target.WriteAggregate(m_Ambient);
-    target.WriteAggregate(m_Diffuse);
-    target.WriteAggregate(m_Specular);
-    target.Write(m_Constant);
-    target.Write(m_Linear);
-    target.Write(m_Quadratic);
-    target.Write(m_Intensity);
-    target.Write(m_Angle);
-    target.Write(m_CosAngle);
-    target.Write(m_SinAngle);
-    target.Write(m_Exponent);
-    target.WriteAggregate(m_Position);
-    target.WriteAggregate(m_DirectionVector);
-    target.WriteAggregate(m_UpVector);
-    target.WriteAggregate(m_RightVector);
+    target->WriteEnum(m_LightType);
+    target->WriteAggregate(m_Ambient);
+    target->WriteAggregate(m_Diffuse);
+    target->WriteAggregate(m_Specular);
+    target->Write(m_Constant);
+    target->Write(m_Linear);
+    target->Write(m_Quadratic);
+    target->Write(m_Intensity);
+    target->Write(m_Angle);
+    target->Write(m_CosAngle);
+    target->Write(m_SinAngle);
+    target->Write(m_Exponent);
+    target->WriteAggregate(m_Position);
+    target->WriteAggregate(m_DirectionVector);
+    target->WriteAggregate(m_UpVector);
+    target->WriteAggregate(m_RightVector);
 }
 
 int Rendering::LightImpl ::GetStreamingSize() const

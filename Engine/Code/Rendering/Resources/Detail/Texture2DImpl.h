@@ -60,8 +60,8 @@ namespace Rendering
         int CalculateNumLevelBytes(int dimension0,int dimension1);
         
           void LoadLevelData (CoreTools::BufferSource& source) override;
-		  void SaveLevelData (CoreTools::BufferTarget& target) const override;
-		  int GetLevelDataStreamingSize () const override;
+		  void SaveLevelData (const CoreTools::BufferTargetSharedPtr& target) const override;
+          int GetLevelDataStreamingSize() const noexcept override;
 
 		  void SaveLevelDataToFile (WriteFileManager& outFile) const override;
 		  void LoadLevelDataFromFile (ReadFileManager& inFile) override;

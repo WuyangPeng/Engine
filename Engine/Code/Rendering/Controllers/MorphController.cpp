@@ -12,7 +12,7 @@
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -111,7 +111,7 @@ bool Rendering::MorphController
     if (ParentType::Update(applicationTime))
     {
 		// 访问该顶点缓冲器来存储混合目标。
-		auto visual = CoreTools::StaticCast<Visual>(GetControllerObject());
+        auto visual = dynamic_cast<Visual*>(GetControllerObject());
 		if (visual != nullptr)
 		{
 			RENDERING_ASSERTION_2(m_Impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "顶点数不匹配\n"); 
@@ -200,8 +200,7 @@ int Rendering::MorphController
 	return size;
 }
 
-uint64_t Rendering::MorphController
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::MorphController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -209,7 +208,7 @@ uint64_t Rendering::MorphController
 }
 
 void Rendering::MorphController
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -252,6 +251,12 @@ void Rendering::MorphController
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
+CoreTools::ObjectInterfaceSharedPtr Rendering::MorphController::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
  
 #include STSTEM_WARNING_POP

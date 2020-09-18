@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:26)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/15 17:24)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_DETAIL_H
@@ -12,64 +15,43 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include <type_traits>
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26486)
+
 template <typename T>
-void CoreTools::ObjectRegister
-	::Register(const T* object)
+void CoreTools::ObjectRegister::Register(const T& object)
 {
-	static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
+    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	if (object != nullptr)
-	{
-		object->Register(*this);
-	}
+    if (object.m_Object != nullptr)
+    {
+        object.m_Object->Register(shared_from_this());
+    }
 }
 
 template <typename T>
-void CoreTools::ObjectRegister
-	::Register(int elementsNumber, T* const* objects)
+void CoreTools::ObjectRegister::RegisterContainer(const T& objects)
 {
-	static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
+    using ValueType = typename T::value_type;
 
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	for (auto i = 0; i < elementsNumber; ++i)
-	{
-		Register(objects[i]);
-	}
+    for (const auto& object : objects)
+    {
+        Register(object);
+    }
 }
 
-template <typename T>
-void CoreTools::ObjectRegister
-	::RegisterSmartPointer(const T& object)
+template <typename T, int Size>
+void CoreTools::ObjectRegister::RegisterContainer(const std::array<T, Size>& objects)
 {
-	static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
+    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
+    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	if (object != nullptr)
-	{
-		object->Register(*this);
-	}
+    for (const auto& object : objects)
+    {
+        Register(object);
+    }
 }
 
-template <typename T>
-void CoreTools::ObjectRegister
-	::RegisterSmartPointer(int elementsNumber, const T* objects)
-{
-	static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
-
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	for (auto i = 0; i < elementsNumber; ++i)
-	{
-		RegisterSmartPointer(objects[i]);
-	}
-}
-#include STSTEM_WARNING_POP
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_DETAIL_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_DETAIL_H

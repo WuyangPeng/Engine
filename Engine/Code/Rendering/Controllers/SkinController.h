@@ -22,7 +22,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE SkinController : public Controller
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(SkinController);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(SkinController);
 		using ParentType = Controller;
 		using APoint = Mathematics::FloatAPoint;
 
@@ -60,7 +60,7 @@ namespace Rendering
 
 		 void SetObject(ControllerInterface* object) override;
 		 void SetObjectInCopy(ControllerInterface* object) override;
-		
+                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(SkinController);
 	};

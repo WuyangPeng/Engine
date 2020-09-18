@@ -16,6 +16,8 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::SpatialData
    ::SpatialData ()
 	: m_LocalTransform{},m_WorldTransform{},m_WorldTransformIsCurrent{ false },
@@ -157,16 +159,16 @@ void Rendering::SpatialData
 }
 
 void Rendering::SpatialData
-    ::Save( BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     
-    target.WriteAggregate(m_LocalTransform);
-    target.WriteAggregate(m_WorldTransform);
-    target.WriteBool(m_WorldTransformIsCurrent);
-    target.WriteAggregate(m_WorldBound);
-    target.WriteBool(m_WorldBoundIsCurrent);
-    target.WriteEnum(m_Culling);
+    target->WriteAggregate(m_LocalTransform);
+        target->WriteAggregate(m_WorldTransform);
+    target->Write(m_WorldTransformIsCurrent);
+        target->WriteAggregate(m_WorldBound);
+    target->Write(m_WorldBoundIsCurrent);
+        target->WriteEnum(m_Culling);
 }
 
 int Rendering::SpatialData

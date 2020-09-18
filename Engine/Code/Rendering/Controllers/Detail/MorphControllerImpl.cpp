@@ -21,6 +21,8 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::MorphControllerImpl
 	::MorphControllerImpl(int numVertices, int numTargets,int numKeys) 
 	: m_NumVertices{ numVertices },m_NumTargets{ numTargets },m_Vertices(numVertices * numTargets),
@@ -210,17 +212,17 @@ int Rendering::MorphControllerImpl
 }
 
 void Rendering::MorphControllerImpl
-	::Save( CoreTools::BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumVertices);
-	target.Write(m_NumTargets);
-	target.Write(m_NumKeys);
+	target->Write(m_NumVertices);
+	target->Write(m_NumTargets);
+	target->Write(m_NumKeys);
 
-	target.WriteAggregateWithoutNumber(boost::numeric_cast<int>(m_Vertices.size()), &m_Vertices[0]);
-	target.WriteWithoutNumber(m_NumKeys, &m_Times[0]);
-	target.WriteWithoutNumber(boost::numeric_cast<int>(m_Weights.size()), &m_Weights[0]);
+	target->WriteAggregateContainerWithoutNumber(m_Vertices);
+	//target.WriteWithoutNumber(m_NumKeys, &m_Times[0]);
+	//target.WriteWithoutNumber(boost::numeric_cast<int>(m_Weights.size()), &m_Weights[0]);
 }
 
 void Rendering::MorphControllerImpl

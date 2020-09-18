@@ -198,19 +198,19 @@ void Rendering::RectangleSurface ::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::RectangleSurface ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::RectangleSurface ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return ParentType::Register(target);
 }
 
-void Rendering::RectangleSurface ::Save(CoreTools::BufferTarget& target) const
+void Rendering::RectangleSurface ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
 
-    target.Write(mNumUSamples);
-    target.Write(mNumVSamples);
+    target->Write(mNumUSamples);
+    target->Write(mNumVSamples);
 
     // TODO.  The class ParametricSurface3 is abstract and does not know
     // about the data representation for the derived-class object that is

@@ -9,7 +9,7 @@
 
 #include "StateEntity.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 
 template <typename Subclass, typename EventType>
 CoreTools::StateEntity<Subclass, EventType>
@@ -49,7 +49,7 @@ void CoreTools::StateEntity<Subclass, EventType>
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	auto owner = PolymorphicSharedPtrDowncast<Subclass>(ParentType::shared_from_this());
+	auto owner = boost::polymorphic_pointer_downcast<Subclass>(ParentType::shared_from_this());
 
 	m_StateMachineBase.Register(owner);
 }

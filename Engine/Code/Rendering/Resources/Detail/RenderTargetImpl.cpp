@@ -29,6 +29,9 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26487)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26418)
+ 
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::RenderTargetImpl
     ::RenderTargetImpl (int numTargets, TextureFormat format,int width, int height,bool hasMipmaps, bool hasDepthStencil)
 	:m_ColorTextures{ numTargets }, m_DepthStencilTexture{}, m_HasMipmaps{ hasMipmaps }
@@ -283,13 +286,13 @@ int Rendering::RenderTargetImpl
 }
 
 void Rendering::RenderTargetImpl
-    ::Save (BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
     
  //   target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
  //   target.WriteSmartPointer(m_DepthStencilTexture);
-    target.WriteBool(m_HasMipmaps);
+    target->Write(m_HasMipmaps);
 }
 
 void Rendering::RenderTargetImpl
@@ -320,8 +323,7 @@ void Rendering::RenderTargetImpl
    // source.ResolveObjectSmartPointerLink(m_DepthStencilTexture);
 }
 
-void Rendering::RenderTargetImpl
-    ::Register (ObjectRegister& target) const
+void Rendering::RenderTargetImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
     CoreTools::DoNothing();

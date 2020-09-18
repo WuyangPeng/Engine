@@ -88,4 +88,12 @@ Rendering::ControllerInterfaceSmartPointer
 
 	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesFan::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

@@ -13,7 +13,9 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::string;
-
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::SingleShaderBaseDataImpl
 	::SingleShaderBaseDataImpl( const string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic )
 	:m_Name{ name },m_Type{ type },m_Semantic{ semantic }
@@ -73,13 +75,13 @@ void Rendering::SingleShaderBaseDataImpl
 }
 
 void Rendering::SingleShaderBaseDataImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteString(m_Name);
-	target.WriteEnum(m_Type);
-	target.WriteEnum(m_Semantic);
+	target->Write(m_Name);
+        target->WriteEnum(m_Type);
+        target->WriteEnum(m_Semantic);
 }
 
 int Rendering::SingleShaderBaseDataImpl
@@ -94,3 +96,4 @@ int Rendering::SingleShaderBaseDataImpl
 	return size;
 }
 
+#include STSTEM_WARNING_POP

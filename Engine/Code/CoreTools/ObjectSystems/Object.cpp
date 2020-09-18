@@ -26,9 +26,11 @@ using std::swap;
 
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/ClassInvariant/Noexcept.h"
+#include "../Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 CORE_TOOLS_RTTI_DEFINE(CoreTools, Object);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, Object);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(CoreTools, Object);
@@ -46,22 +48,17 @@ CoreTools::Object
 CoreTools::Object
 	::Object(LoadConstructor value)
 	:ParentType{ value },
-	m_Name{}
+	m_Name{""}
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::Object
-	::~Object()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
+ 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, Object);
 
 // 名字
-const string& CoreTools::Object
-	::GetName() const noexcept
+  string  CoreTools::Object
+	::GetName() const  
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -100,14 +97,13 @@ int CoreTools::Object
 	return size;
 }
 
-uint64_t CoreTools::Object
-	::Register(ObjectRegister& target) const
+uint64_t CoreTools::Object ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
 	{
-		return target.RegisterRoot(ConstObjectInterfaceSmartPointer{ this });
+		return target->RegisterRoot(ConstObjectInterfaceSharedPtr{ this });
 	}
 	else
 	{
@@ -116,21 +112,21 @@ uint64_t CoreTools::Object
 }
 
 void CoreTools::Object
-	::Save(BufferTarget& target) const
+	::Save(const BufferTargetSharedPtr& target) const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
 	// 写入RTTI名用于加载期间查找工厂函数。
-	target.WriteString(GetRttiType().GetName());
+	target->Write(GetRttiType().GetName());
 
 	// 写入对象的唯一标识符。这是加载和链接时使用。
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
 	{
-		ConstObjectInterfaceSmartPointer smartPointer{ this };
+		ConstObjectInterfaceSharedPtr smartPointer{ this };
 
-		target.WriteUniqueID(smartPointer);
+		target->WriteUniqueID(smartPointer);
 	}
 	else
 	{
@@ -138,7 +134,7 @@ void CoreTools::Object
 	}
 
 	// 写入对象的名字。
-	target.WriteString(m_Name.GetName());
+	target->Write(m_Name.GetName());
 
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -177,7 +173,7 @@ void CoreTools::Object
 	// 读取的对象的唯一标识符。这提供信息在链接阶段。 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
 	{
-		ObjectInterfaceSmartPointer smartPointer{ this };
+		ObjectInterfaceSharedPtr smartPointer{ this };
 
 		source.ReadUniqueID(smartPointer);
 	}

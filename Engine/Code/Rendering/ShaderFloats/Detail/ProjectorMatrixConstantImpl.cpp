@@ -59,13 +59,13 @@ void Rendering::ProjectorMatrixConstantImpl
 }
 
 void Rendering::ProjectorMatrixConstantImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	ParentType::Save(target);
-	target.WriteBool(m_Biased);
-	target.Write(m_BiasScaleMatrixIndex);
+	target->Write(m_Biased);
+	target->Write(m_BiasScaleMatrixIndex);
 }
 
 int Rendering::ProjectorMatrixConstantImpl

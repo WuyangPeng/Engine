@@ -23,7 +23,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE ParticleController : public Controller
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(ParticleController);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ParticleController);
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 

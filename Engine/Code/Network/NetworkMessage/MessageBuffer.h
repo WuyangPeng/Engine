@@ -23,7 +23,7 @@ namespace Network
     class NETWORK_DEFAULT_DECLARE MessageBuffer
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageBuffer);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageBuffer);
         using MessageBufferSharedPtr = std::shared_ptr<MessageBuffer>;
         using ConstMessageBufferSharedPtr = std::shared_ptr<const MessageBuffer>;
         using ImplTypeSharedPtr = std::shared_ptr<ImplType>;

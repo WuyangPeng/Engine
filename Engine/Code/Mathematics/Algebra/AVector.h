@@ -34,6 +34,9 @@ namespace Mathematics
         using HomogeneousPoint = HomogeneousPoint<T>;
         using ContainerType = std::vector<ClassType>;
 
+        static constexpr auto sm_AVectorSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
+        using ArrayType = std::array<T, sm_AVectorSize>;
+
     public:
         // AVector表示仿射坐标 (x,y,z,0)。默认 (0,0,0,0)。
         constexpr AVector() noexcept
@@ -77,8 +80,8 @@ namespace Mathematics
         [[nodiscard]] bool IsZero(const T epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
         [[nodiscard]] bool IsNormalize(const T epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
-    private:
-        static constexpr auto sm_AVectorSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
+        [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
+        void Set(const ArrayType& coordinate) noexcept;
 
     private:
         HomogeneousPoint m_HomogeneousPoint;

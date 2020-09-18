@@ -65,7 +65,7 @@ namespace Rendering
 
         [[nodiscard]] const TransformImpl GetInverseTransform(float epsilon = Math::GetZeroTolerance()) const;
 
-        [[nodiscard]] int GetStreamingSize() const;
+        [[nodiscard]] int GetStreamingSize() const noexcept;
 
     private:
         // 完整的4x4齐次矩阵H = {{M,T},{0,1}}和它的逆矩阵为H^{-1} = {M^{-1},-M^{-1}*T},{0,1}}。 逆矩阵只在需要时计算。

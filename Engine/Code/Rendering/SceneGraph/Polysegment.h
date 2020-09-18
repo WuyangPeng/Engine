@@ -49,7 +49,7 @@ namespace Rendering
                 bool GetContiguous() const noexcept;
 
 		  ControllerInterfaceSmartPointer Clone() const override;
-		
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		// 当前活动线段的数量
 		int m_NumSegments;		

@@ -25,7 +25,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Camera : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Camera);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Camera);
         using ParentType = Object;
         using CameraSmartPointer = CoreTools::ThirdSubclassSmartPointer<ClassType>;
 	    using ConstCameraSmartPointer = CoreTools::ConstThirdSubclassSmartPointer<ClassType>;
@@ -39,10 +39,13 @@ namespace Rendering
         Camera (bool isPerspective = true,float epsilon = Math::GetZeroTolerance());
           ~Camera ();
 
+          #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
           Camera(Camera&&) = default;
           Camera& operator=(Camera&&) = default;
+          #include STSTEM_WARNING_POP
 
-        
+            ObjectInterfaceSharedPtr CloneObject() const override;
 		CLASS_INVARIANT_OVERRIDE_DECLARE;    
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Camera); 

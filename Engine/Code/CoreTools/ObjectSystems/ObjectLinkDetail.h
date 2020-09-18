@@ -8,10 +8,11 @@
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_DETAIL_H
 
 #include "ObjectLink.h"
-#include "TypeCasting.h"
+ 
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "CoreTools/MemoryTools/FirstSubclassSmartPointer.h"
+#include "System/Helper/PragmaWarning/PolymorphicCast.h"
 #include <type_traits>
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
@@ -60,7 +61,7 @@ void CoreTools::ObjectLink
 		auto uniqueID = reinterpret_cast<size_t>(reinterpret_cast<void*>(object));
 		if (uniqueID != 0)
 		{
-			object = PolymorphicCast<T>(GetObjectPtr(uniqueID).GetData());
+			object = boost::polymorphic_cast<T>(GetObjectPtr(uniqueID).GetData());
 		}
 	}
 }
@@ -82,7 +83,7 @@ template <typename T>
 void CoreTools::ObjectLink
 	::ResolveObjectSmartPointerLink(T& object)
 {
-	static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
+	static_assert(std::is_base_of_v<ConstObjectInterfaceSharedPtr, T>, "T is not base of ConstObjectInterfaceSmartPointer");
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	const auto uniqueID = object.GetAddress();
@@ -96,7 +97,7 @@ template <typename T>
 void CoreTools::ObjectLink
 	::ResolveObjectSmartPointerLink(int elementsNumber, T* object)
 {
-	static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
+	static_assert(std::is_base_of_v<ConstObjectInterfaceSharedPtr, T>, "T is not base of ConstObjectInterfaceSmartPointer");
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	for (auto i = 0; i < elementsNumber; ++i)
@@ -109,7 +110,7 @@ template <typename T>
 void CoreTools::ObjectLink
 	::ResolveObjectConstSmartPointerLink(T& object)
 {
-	static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
+	static_assert(std::is_base_of_v<ConstObjectInterfaceSharedPtr, T>, "T is not base of ConstObjectInterfaceSmartPointer");
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	auto uniqueID = object.GetAddress();
@@ -123,7 +124,7 @@ template <typename T>
 void CoreTools::ObjectLink
 	::ResolveObjectConstSmartPointerLink(int elementsNumber, T* object)
 {
-	static_assert(std::is_base_of_v<ConstObjectInterfaceSmartPointer, T>, "T is not base of ConstObjectInterfaceSmartPointer");
+	static_assert(std::is_base_of_v<ConstObjectInterfaceSharedPtr, T>, "T is not base of ConstObjectInterfaceSmartPointer");
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	for (auto i = 0; i < elementsNumber; ++i)

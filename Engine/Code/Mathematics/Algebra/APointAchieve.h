@@ -229,4 +229,21 @@ T Mathematics::APoint<T>::GetNorm() const noexcept
     return maxValue;
 }
 
+template <typename T>
+const typename Mathematics::APoint<T>::ArrayType Mathematics::APoint<T>::GetCoordinate() const noexcept
+{
+    return ArrayType{ GetX(), GetY(), GetZ() };
+}
+
+template <typename T>
+void Mathematics::APoint<T>::Set(const ArrayType& coordinate) noexcept
+{
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+    SetX(coordinate[0]);
+    SetY(coordinate[1]);
+    SetZ(coordinate[2]);
+#include STSTEM_WARNING_POP
+}
+
 #endif  //  MATHEMATICS_ALGEBRA_A_POINT_ACHIEVE_H

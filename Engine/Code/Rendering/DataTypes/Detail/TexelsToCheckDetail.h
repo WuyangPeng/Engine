@@ -12,8 +12,8 @@
 
 #include "Rendering/RenderingExport.h"
 
-#include "TexelsToCheck.h"
 #include "ColourTextureFormatTraits.h"
+#include "TexelsToCheck.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 template <Rendering::TextureFormat Format>
@@ -40,7 +40,7 @@ size_t Rendering::TexelsToCheck<Format>::GetOutTexelsLength() const noexcept
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_InTexelsSize * sm_Step;
-} 
+}
 
 template <Rendering::TextureFormat Format>
 void Rendering::TexelsToCheck<Format>::CheckOutTexels([[maybe_unused]] size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2)

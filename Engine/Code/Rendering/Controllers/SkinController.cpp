@@ -12,7 +12,7 @@
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/TypeCasting.h"
+
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -130,7 +130,7 @@ bool Rendering::SkinController
 	if (ParentType::Update(applicationTime))
 	{
 		// 访问该顶点缓冲器来存储混合目标。
-		auto visual = CoreTools::StaticCast<Visual>(GetControllerObject());
+            auto visual = dynamic_cast<Visual*>(GetControllerObject());
 		if (visual != nullptr)
 		{
 			auto vertexBuffer = visual->GetVertexBuffer();
@@ -207,22 +207,21 @@ int Rendering::SkinController
 	return size;
 }
 
-uint64_t Rendering::SkinController
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::SkinController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
 	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
-		m_Impl->Register(target);	 
+	//	m_Impl->Register(target);	 
 	}
 
 	return uniqueID;
 }
 
 void Rendering::SkinController
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -267,5 +266,11 @@ void Rendering::SkinController
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
+CoreTools::ObjectInterfaceSharedPtr Rendering::SkinController::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
  #include STSTEM_WARNING_POP

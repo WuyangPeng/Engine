@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/21 15:39)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/10 18:25)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
@@ -12,8 +15,12 @@
 #include "ObjectSystemsFwd.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/RttiMacro.h"
-#include "CoreTools/MemoryTools/FirstSubclassSmartPointer.h"
-#include <memory>
+#include "CoreTools/Helper/StreamMacro.h"
+
+#include <memory> 
+
+template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::ObjectInterface>;
+template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools::ObjectInterface>;
 
 namespace CoreTools
 {
@@ -28,22 +35,27 @@ namespace CoreTools
     // 指向常量的常量ObjectInterface指针
     using ConstObjectConstPtr = const ObjectInterface* const;
 
-    class CORE_TOOLS_DEFAULT_DECLARE ObjectInterface
+    class CORE_TOOLS_DEFAULT_DECLARE ObjectInterface : public std::enable_shared_from_this<ObjectInterface>
     {
     public:
         using ClassType = ObjectInterface;
-        using ObjectInterfaceSmartPointer = std::shared_ptr<ObjectInterface>;
-        using ConstObjectInterfaceSmartPointer = std::shared_ptr<const ObjectInterface>;
-        using FactoryFunction = ObjectInterfaceSmartPointer (*)(BufferSource& stream);
+        using ObjectInterfaceSharedPtr = std::shared_ptr<ObjectInterface>;
+        using ConstObjectInterfaceSharedPtr = std::shared_ptr<const ObjectInterface>;
+        using FactoryFunction = ObjectInterfaceSharedPtr (*)(BufferSource& stream);   
 
     public:
         ObjectInterface() noexcept;
-        virtual ~ObjectInterface();
+#include STSTEM_WARNING_PUSH
 
-        ObjectInterface(const ObjectInterface&) = default;
-        virtual ObjectInterface& operator=(const ObjectInterface&) = default;
+#include SYSTEM_WARNING_DISABLE(26456)
+        
+        virtual ~ObjectInterface() = default;
+        ObjectInterface(const ObjectInterface&) noexcept = default;
+        virtual ObjectInterface& operator=(const ObjectInterface&) noexcept = default;
         ObjectInterface(ObjectInterface&&) noexcept = default;
-      virtual  ObjectInterface& operator=(ObjectInterface&&) noexcept = default;
+        virtual ObjectInterface& operator=(ObjectInterface&&) noexcept = default;
+
+        #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -61,18 +73,20 @@ namespace CoreTools
         static bool RegisterFactory();
         static void InitializeFactory();
         static void TerminateFactory();
-        static ObjectInterfaceSmartPointer Factory(BufferSource& source);
+        static ObjectInterfaceSharedPtr Factory(BufferSource& source);
 
         uint64_t GetUniqueID() const noexcept;
         void SetUniqueID(uint64_t uniqueID) noexcept;
 
-        virtual uint64_t Register(ObjectRegister& target) const = 0;
+        virtual uint64_t Register(const CoreTools::ObjectRegisterSharedPtr& target) const = 0;
         virtual int GetStreamingSize() const = 0;
-        virtual void Save(BufferTarget& target) const = 0;
+        virtual void Save(const CoreTools::BufferTargetSharedPtr& target) const = 0;
 
         virtual void Link(ObjectLink& source) = 0;
         virtual void PostLink() = 0;
-        virtual void Load(BufferSource& source) = 0;       
+        virtual void Load(BufferSource& source) = 0;
+
+        virtual ObjectInterfaceSharedPtr CloneObject() const = 0;
 
     protected:
         // 加载系统所使用的构造函数。
@@ -83,20 +97,13 @@ namespace CoreTools
 
         explicit ObjectInterface(LoadConstructor value) noexcept;
 
-    private:
-        static bool sm_StreamRegistered;
-
+    private:   
         uint64_t m_UniqueID;
     };
 
-    using ObjectInterfaceSmartPointer = ObjectInterface::ObjectInterfaceSmartPointer;
-    using ConstObjectInterfaceSmartPointer = ObjectInterface::ConstObjectInterfaceSmartPointer;
-}
-
-#include "CoreTools/Helper/StreamMacro.h"
-
-namespace CoreTools
-{
+    using ObjectInterfaceSharedPtr = ObjectInterface::ObjectInterfaceSharedPtr;
+    using ConstObjectInterfaceSharedPtr = ObjectInterface::ConstObjectInterfaceSharedPtr;
+ 
 #include STSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(26426)

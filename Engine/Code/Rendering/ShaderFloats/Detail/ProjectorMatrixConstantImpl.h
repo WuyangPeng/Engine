@@ -29,7 +29,7 @@ namespace Rendering
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 	
 		  void Load(BufferSource& source) override;
-		  void Save(BufferTarget& target) const override;
+		  void Save(const CoreTools::BufferTargetSharedPtr& target) const override;
 		  int GetStreamingSize() const override;
 
 		const Matrix GetProjectionViewWorldMatrix(const Matrix& projectionViewWorldMatrix) const;

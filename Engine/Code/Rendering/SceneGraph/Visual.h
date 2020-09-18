@@ -28,7 +28,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Visual : public Spatial
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Visual);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Visual);
         using ParentType = Spatial;
         using VisualSmartPointer = std::shared_ptr<ClassType>;
         using ConstVisualSmartPointer = std::shared_ptr<const ClassType>;

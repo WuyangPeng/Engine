@@ -9,6 +9,7 @@
 #include "BSplineSurfacePatch.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -191,41 +192,41 @@ void Rendering::BSplineSurfacePatch ::PostLink()
     SurfacePatch::PostLink();
 }
 
-uint64_t Rendering::BSplineSurfacePatch ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::BSplineSurfacePatch ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return SurfacePatch::Register(target);
 }
 
-void Rendering::BSplineSurfacePatch ::Save(CoreTools::BufferTarget& target) const
+void Rendering::BSplineSurfacePatch ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     SurfacePatch::Save(target);
 
-    target.Write(mConstructor);
+    target->Write(mConstructor);
 
     const int numCtrlPoints0 = mPatch->GetNumCtrlPoints(0);
     const int numCtrlPoints1 = mPatch->GetNumCtrlPoints(1);
-    target.Write(numCtrlPoints0);
-    target.Write(numCtrlPoints1);
+    target->Write(numCtrlPoints0);
+    target->Write(numCtrlPoints1);
     int i0 = 0, i1 = 0;
     for (i0 = 0; i0 < numCtrlPoints0; ++i0)
     {
         for (i1 = 0; i1 < numCtrlPoints1; ++i1)
         {
-            target.WriteAggregate(mPatch->GetControlPoint(i0, i1));
+            target->WriteAggregate(mPatch->GetControlPoint(i0, i1));
         }
     }
 
     const int degree0 = mPatch->GetDegree(0);
     const int degree1 = mPatch->GetDegree(1);
-    target.Write(degree0);
-    target.Write(degree1);
+    target->Write(degree0);
+    target->Write(degree1);
 
     const bool loop0 = mPatch->IsLoop(0);
     const bool loop1 = mPatch->IsLoop(1);
-    target.WriteBool(loop0);
-    target.WriteBool(loop1);
+    target->Write(loop0);
+    target->Write(loop1);
 
     bool open0 = false, open1 = false;
     int numKnots0 = 0, numKnots1 = 0;
@@ -234,40 +235,40 @@ void Rendering::BSplineSurfacePatch ::Save(CoreTools::BufferTarget& target) cons
     {
     case 1:
         open0 = mPatch->IsOpen(0);
-        target.WriteBool(open0);
+        target->Write(open0);
         open1 = mPatch->IsOpen(1);
-        target.WriteBool(open1);
+        target->Write(open1);
         break;
     case 2:
         open0 = mPatch->IsOpen(0);
-        target.WriteBool(open0);
+        target->Write(open0);
         numKnots1 = numCtrlPoints1 - degree1 - 1;
         for (i1 = 0; i1 < numKnots1; ++i1)
         {
-            target.Write(mPatch->GetKnot(1, i1));
+            target->Write(mPatch->GetKnot(1, i1));
         }
         break;
     case 3:
         numKnots0 = numCtrlPoints0 - degree0 - 1;
         for (i0 = 0; i0 < numKnots0; ++i0)
         {
-            target.Write(mPatch->GetKnot(0, i0));
+            target->Write(mPatch->GetKnot(0, i0));
         }
 
         open1 = mPatch->IsOpen(1);
-        target.WriteBool(open1);
+        target->Write(open1);
         break;
     case 4:
         numKnots0 = numCtrlPoints0 - degree0 - 1;
         for (i0 = 0; i0 < numKnots0; ++i0)
         {
-            target.Write(mPatch->GetKnot(0, i0));
+            target->Write(mPatch->GetKnot(0, i0));
         }
 
         numKnots1 = numCtrlPoints1 - degree1 - 1;
         for (i1 = 0; i1 < numKnots1; ++i1)
         {
-            target.Write(mPatch->GetKnot(1, i1));
+            target->Write(mPatch->GetKnot(1, i1));
         }
         break;
     default:
@@ -315,6 +316,13 @@ int Rendering::BSplineSurfacePatch ::GetStreamingSize() const
     }
 
     return size;
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::BSplineSurfacePatch::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

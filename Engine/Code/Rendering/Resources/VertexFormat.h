@@ -29,7 +29,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VertexFormat : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VertexFormat);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VertexFormat);
         using ParentType = Object;
         using VertexFormatSmartPointer = std::shared_ptr<ClassType>;
         using ConstVertexFormatSmartPointer = std::shared_ptr<const ClassType>;
@@ -41,8 +41,11 @@ namespace Rendering
     public:
         ~VertexFormat();
 
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         VertexFormat(VertexFormat&&) = default;
         VertexFormat& operator=(VertexFormat&&) = default;
+        #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -93,7 +96,7 @@ namespace Rendering
         virtual VertexFormatSmartPointer Clone() const;
 
         void SetStride(int stride);
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     public:
         // 暂时改成公有
         explicit VertexFormat(int numAttributes);

@@ -18,6 +18,7 @@ using std::make_shared;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Float2Array);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Float2Array);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Float2Array); 
@@ -42,6 +43,12 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Float2Array,operator[], int
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Float2Array,GetNumElements, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Float2Array,GetData, const Rendering::Float2Array::Float2*)
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::Float2Array::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
  
 
 #include STSTEM_WARNING_POP

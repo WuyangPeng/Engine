@@ -25,7 +25,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26414)
 #include SYSTEM_WARNING_DISABLE(26455)
-
+#include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26440)
 
 Rendering::VisualEffectImpl
@@ -46,7 +46,7 @@ int Rendering::VisualEffectImpl
 }
 
 void Rendering::VisualEffectImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -72,8 +72,7 @@ void Rendering::VisualEffectImpl
 	} 
 }
 
-void Rendering::VisualEffectImpl
-	::Register( ObjectRegister& target ) const
+void Rendering::VisualEffectImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

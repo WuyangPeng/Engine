@@ -14,8 +14,11 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/EnumCast.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::DepthStateImpl
 	::DepthStateImpl() noexcept
 	:m_Enabled{ true },m_Writable{ true },m_Compare{ DepthStateFlags::CompareMode::LessEqual }
@@ -36,13 +39,13 @@ void Rendering::DepthStateImpl
 }
 
 void Rendering::DepthStateImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteBool(m_Enabled);
-	target.WriteBool(m_Writable);
-	target.WriteEnum(m_Compare);
+	target->Write(m_Enabled);
+	target->Write(m_Writable);
+        target->WriteEnum(m_Compare);
 }
 
 int Rendering::DepthStateImpl

@@ -12,7 +12,9 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::SurfacePatchImpl ::SurfacePatchImpl() noexcept
     : m_UMin{ 0.0f }, m_UMax{ 0.0f }, m_VMin{ 0.0f }, m_VMax{ 0.0f }, m_Rectangular{ true }
 {
@@ -46,18 +48,18 @@ void Rendering::SurfacePatchImpl ::Load(BufferSource& source)
     m_Rectangular = source.ReadBool();
 }
 
-void Rendering::SurfacePatchImpl ::Save(BufferTarget& target) const
+void Rendering::SurfacePatchImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.Write(m_UMin);
-    target.Write(m_UMax);
-    target.Write(m_VMin);
-    target.Write(m_VMax);
-    target.WriteBool(m_Rectangular);
+    target->Write(m_UMin);
+    target->Write(m_UMax);
+    target->Write(m_VMin);
+    target->Write(m_VMax);
+    target->Write(m_Rectangular);
 }
 
-int Rendering::SurfacePatchImpl ::GetStreamingSize() const
+int Rendering::SurfacePatchImpl ::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -104,3 +106,4 @@ bool Rendering::SurfacePatchImpl ::IsRectangular() const noexcept
 
     return m_Rectangular;
 }
+#include STSTEM_WARNING_POP

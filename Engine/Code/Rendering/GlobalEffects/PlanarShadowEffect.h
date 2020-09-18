@@ -49,7 +49,7 @@ namespace Rendering
         Light* GetProjector(int i) const noexcept;
         void SetShadowColor(int i, const Mathematics::Float4& shadowColor) noexcept;
         const Mathematics::Float4& GetShadowColor(int i) const noexcept;
-
+          ObjectInterfaceSharedPtr CloneObject() const override;
     protected:
         bool GetProjectionMatrix(int i, Mathematics::FloatMatrix& projection);
 

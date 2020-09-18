@@ -147,7 +147,7 @@ int Rendering::Node ::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Node ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Node ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -160,7 +160,7 @@ const    auto uniqueID = ParentType::Register(target);
     return uniqueID;
 }
 
-void Rendering::Node ::Save(CoreTools::BufferTarget& target) const
+void Rendering::Node ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -236,4 +236,12 @@ bool Rendering::Node ::UpdateImplWorldData(double applicationTime)
 {
     return m_Impl->UpdateWorldData(applicationTime);
 }
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::Node::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 #include STSTEM_WARNING_POP

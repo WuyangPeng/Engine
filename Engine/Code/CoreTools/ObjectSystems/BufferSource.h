@@ -13,9 +13,9 @@
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/FileManager/ReadBufferIO.h"
 
-#include <vector>
-#include <array>
 #include "WeakPtr.h"
+#include <array>
+#include <vector>
 
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
@@ -49,6 +49,9 @@ namespace CoreTools
 
         template <typename T>
         void Read(std::vector<T>& datum);
+
+        template <typename T, int Size>
+        void Read(std::array<T, Size>& datum);
 
         // 读取枚举值为4字节。
         template <typename T>
@@ -86,13 +89,11 @@ namespace CoreTools
         int GetBytesRead() const noexcept;
         int GetBytesTotal() const noexcept;
         void IncrementBytesProcessed(int bytesNumber) noexcept;
-        void ReadUniqueID(ObjectInterfaceSmartPointer object);
+        void ReadUniqueID(ObjectInterfaceSharedPtr object);
 
     private:
         ReadBufferIO m_Source;
     };
-
-    
 
 }
 

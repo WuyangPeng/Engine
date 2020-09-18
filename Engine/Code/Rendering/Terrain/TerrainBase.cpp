@@ -17,6 +17,7 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
  #include "System/Helper/PragmaWarning.h"
  #include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -447,6 +448,13 @@ Rendering::TerrainBase::TerrainBase (LoadConstructor value)
 {
 }
 
+CoreTools::ObjectInterfaceSharedPtr Rendering::TerrainBase::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 void Rendering::TerrainBase
 	::Load(CoreTools::BufferSource& source)
 {
@@ -501,7 +509,7 @@ void Rendering::TerrainBase
 }
 
 uint64_t Rendering::TerrainBase
-	::Register(CoreTools::ObjectRegister& target) const
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	const uint64_t id = Node::Register(target);
 	if (0 < id)
@@ -521,21 +529,21 @@ uint64_t Rendering::TerrainBase
 }
 
 void Rendering::TerrainBase
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     Node::Save(target);
 
-    target.Write(mMode);
-    target.Write(mNumRows);
-    target.Write(mNumCols);
-    target.Write(mSize);
-    target.Write(mMinElevation);
-    target.Write(mMaxElevation);
-    target.Write(mSpacing);
-    target.Write(mCameraRow);
-    target.Write(mCameraCol);
+    target->Write(mMode);
+    target->Write(mNumRows);
+    target->Write(mNumCols);
+    target->Write(mSize);
+    target->Write(mMinElevation);
+    target->Write(mMaxElevation);
+    target->Write(mSpacing);
+    target->Write(mCameraRow);
+    target->Write(mCameraCol);
    // target.WriteSmartPointer(mVFormat);
 	//target.WriteSmartPointer(mCamera);
 

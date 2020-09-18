@@ -14,11 +14,14 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/EnumCast.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26496)
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::StencilStateImpl
 	::StencilStateImpl()
 	:m_Enabled{ false },m_Compare{ StencilStateFlags::CompareMode::Never },m_Reference{ 0 },m_Mask{ 0xFFFFFFFF },
@@ -45,18 +48,18 @@ void Rendering::StencilStateImpl
 }
 
 void Rendering::StencilStateImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteBool(m_Enabled);
-	target.WriteEnum(m_Compare);
-	target.Write(m_Reference);
-	target.Write(m_Mask);
-	target.Write(m_WriteMask);
-	target.WriteEnum(m_OnFail);
-	target.WriteEnum(m_OnZFail);
-	target.WriteEnum(m_OnZPass);
+	target->Write(m_Enabled);
+        target->WriteEnum(m_Compare);
+	target->Write(m_Reference);
+	target->Write(m_Mask);
+	target->Write(m_WriteMask);
+        target->WriteEnum(m_OnFail);
+        target->WriteEnum(m_OnZFail);
+        target->WriteEnum(m_OnZPass);
 }
 
 int Rendering::StencilStateImpl

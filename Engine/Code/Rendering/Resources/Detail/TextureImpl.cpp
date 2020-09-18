@@ -260,7 +260,7 @@ void Rendering::TextureImpl
 }
 
 void Rendering::TextureImpl
-    ::Save( CoreTools::BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     

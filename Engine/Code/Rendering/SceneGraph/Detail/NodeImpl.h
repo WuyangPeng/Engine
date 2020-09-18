@@ -118,9 +118,9 @@ namespace Rendering
         void GetVisibleSet(Culler& culler, bool noCull);
 
         void Load(BufferSource& source);
-        void Save(BufferTarget& target) const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const;
-        void Register(ObjectRegister& target) const;
+        void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
         void Link(ObjectLink& source);
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;

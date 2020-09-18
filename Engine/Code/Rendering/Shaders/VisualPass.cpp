@@ -22,6 +22,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26455)
+#include SYSTEM_WARNING_DISABLE(26456)
 CORE_TOOLS_RTTI_DEFINE(Rendering, VisualPass);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VisualPass);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VisualPass);
@@ -73,5 +74,12 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualPass,SaveState, WriteFile
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualPass,LoadShader, ReadFileManager&, void)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualPass,LoadState, ReadFileManager&, void)
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::VisualPass::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
 #include STSTEM_WARNING_POP

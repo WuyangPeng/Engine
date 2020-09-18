@@ -20,6 +20,8 @@
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 using std::vector;
 
 Rendering::PointControllerImpl
@@ -206,23 +208,22 @@ void Rendering::PointControllerImpl
 } 
 
 void Rendering::PointControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.Write(m_SystemLinearSpeed);
-	target.Write(m_SystemAngularSpeed);
-	target.WriteAggregate(m_SystemLinearAxis);
-	target.WriteAggregate(m_SystemAngularAxis);
-	target.Write(m_NumPoints);
-	target.WriteWithoutNumber(m_NumPoints, &m_PointLinearSpeed[0]);
-	target.WriteWithoutNumber(m_NumPoints, &m_PointAngularSpeed[0]);
-	target.WriteAggregateWithoutNumber(m_NumPoints, &m_PointLinearAxis[0]);
-	target.WriteAggregateWithoutNumber(m_NumPoints, &m_PointAngularAxis[0]);
+    target->Write(m_SystemLinearSpeed);
+	target->Write(m_SystemAngularSpeed);
+    target->WriteAggregate(m_SystemLinearAxis);
+        target->WriteAggregate(m_SystemAngularAxis);
+	target->Write(m_NumPoints);
+	//target.WriteWithoutNumber(m_NumPoints, &m_PointLinearSpeed[0]);
+	//target.WriteWithoutNumber(m_NumPoints, &m_PointAngularSpeed[0]);
+	//target.WriteAggregateWithoutNumber(m_NumPoints, &m_PointLinearAxis[0]);
+	//target.WriteAggregateWithoutNumber(m_NumPoints, &m_PointAngularAxis[0]);
 }
 
-int Rendering::PointControllerImpl
-	::GetStreamingSize() const
+int Rendering::PointControllerImpl ::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

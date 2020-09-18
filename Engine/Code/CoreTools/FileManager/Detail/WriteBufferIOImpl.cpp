@@ -20,9 +20,8 @@ using namespace std::literals;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-CoreTools::WriteBufferIOImpl
-	::WriteBufferIOImpl(int bytesTotal, char* buffer) noexcept
-	:ParentType{ bytesTotal,BufferIO::Write }, m_Buffer{ buffer }
+CoreTools::WriteBufferIOImpl ::WriteBufferIOImpl(int bufferSize)  
+    : ParentType{ bufferSize, BufferIO::Write }, m_Buffer(bufferSize)
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -33,7 +32,7 @@ CoreTools::WriteBufferIOImpl
 bool CoreTools::WriteBufferIOImpl
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_Buffer != nullptr)
+	if (ParentType::IsValid()  )
 		return true;
 	else
 		return false;
@@ -45,7 +44,7 @@ const char* CoreTools::WriteBufferIOImpl
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Buffer;
+	return m_Buffer.GetBufferBegin();
 }
 
 void CoreTools::WriteBufferIOImpl
@@ -84,7 +83,7 @@ uint32_t CoreTools::WriteBufferIOImpl
 	if (nextBytesProcessed <= GetBytesTotal())
 	{
 		// 获得缓冲区当前指针位置。
-		auto target = m_Buffer + GetBytesProcessed();
+		auto target = m_Buffer.GetBufferBegin() + GetBytesProcessed();
 
 		SetBytesProcessed(nextBytesProcessed);
 		System::MemoryCopy(target, data, numberToCopy);

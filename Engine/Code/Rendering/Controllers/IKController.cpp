@@ -75,22 +75,21 @@ int Rendering::IKController
 	return size;
 }
 
-uint64_t Rendering::IKController
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::IKController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 
 	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
-		m_Impl->Register(target);
+		//m_Impl->Register(target);
 	}
 
 	return uniqueID;
 }
 
 void Rendering::IKController
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -211,4 +210,12 @@ bool Rendering::IKController
 
 	return false;    
 }
- #include STSTEM_WARNING_POP
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::IKController::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return Clone();
+}
+
+#include STSTEM_WARNING_POP

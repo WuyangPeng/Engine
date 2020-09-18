@@ -31,6 +31,9 @@ namespace Mathematics
         using AVector = AVector<Real>;
         using AlgebraTraits = AlgebraTraits<Real>;
 
+        constexpr static auto sm_EntrySize = 4;
+        using ArrayType = std::array<Real, sm_EntrySize>;
+
     public:
         // 四元数q = w + x * i + y * j + z * k
         // 这里(w,x,y,z)不一定是单位长度的四维向量。
@@ -43,6 +46,41 @@ namespace Mathematics
 
         // 通过轴-角的旋转构造四元数
         AQuaternion(const AVector& axis, Real angle);
+
+        AQuaternion(const AQuaternion&) noexcept = default;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
+        AQuaternion& operator=(const AQuaternion& rhs) noexcept = default;
+#include STSTEM_WARNING_POP
+        ~AQuaternion() noexcept = default;
+        AQuaternion(AQuaternion&& rhs) noexcept
+            : m_Tuple{}
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+                m_Tuple[i] = rhs.m_Tuple[i];
+#include STSTEM_WARNING_POP
+            }
+        }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
+        AQuaternion& operator=(AQuaternion&& rhs) noexcept
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+                m_Tuple[i] = rhs.m_Tuple[i];
+#include STSTEM_WARNING_POP
+            }
+
+            return *this;
+        }
+#include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_DECLARE;
 
@@ -109,6 +147,9 @@ namespace Mathematics
         // 球面二次插值。
         void Squad(Real t, const AQuaternion& q0, const AQuaternion& a0,
                    const AQuaternion& a1, const AQuaternion& q1);
+
+        [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
+        void Set(const ArrayType& coordinate) noexcept;
 
         // 特殊四元数
         static const AQuaternion sm_Zero;

@@ -444,19 +444,19 @@ void Rendering::CameraMatrix
 }
 
 void Rendering::CameraMatrix
-    ::Save( BufferTarget& target ) const
+    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     
     m_WorldCoordinateFrame.Save(target);
     m_CameraFrustum.Save(target);
  
-    target.WriteAggregate(m_PreViewMatrix);
-    target.WriteBool(m_PreViewIsIdentity);
-    target.WriteAggregate(m_PostProjectionMatrix);
-    target.WriteBool(m_PostProjectionIsIdentity);
+    target->WriteAggregate(m_PreViewMatrix);
+    target->Write(m_PreViewIsIdentity);
+    target->WriteAggregate(m_PostProjectionMatrix);
+    target->Write(m_PostProjectionIsIdentity);
     
-    target.Write(m_Epsilon);
+    target->Write(m_Epsilon);
     
     // 这里不保存m_ProjectionMatrix[]和m_ProjectionViewMatrix[]。
 }

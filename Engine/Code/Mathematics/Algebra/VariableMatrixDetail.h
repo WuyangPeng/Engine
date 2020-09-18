@@ -13,8 +13,8 @@
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_VARIABLE_MATRIX_DETAIL)
 
-    #include "Matrix2.h"
-    #include "Matrix3.h"
+    #include "Matrix2Detail.h"
+    #include "Matrix3Detail.h"
     #include "VariableLengthVector.h"
     #include "CoreTools/Helper/MemberFunctionMacro.h"
     #include "CoreTools/Helper/MemoryMacro.h"
@@ -222,6 +222,24 @@ int Mathematics::VariableMatrix<Real>::GetElementsNumber() const noexcept
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     return m_ElementsNumber;
+}
+
+template <typename Real>
+std::vector<Real> Mathematics::VariableMatrix<Real>::GetValue() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    std::vector<Real> result;
+
+     for (auto rows = 0; rows < m_RowsNumber; ++rows)
+    {
+        for (auto columns = 0; columns < m_ColumnsNumber; ++columns)
+        {
+            result.emplace_back(m_Entry[rows][columns]);
+        }
+    }
+
+    return result;
 }
 
 template <typename Real>

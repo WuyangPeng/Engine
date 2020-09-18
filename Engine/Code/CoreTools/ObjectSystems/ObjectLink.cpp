@@ -27,12 +27,12 @@ CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, ObjectLink)
 
 DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, ObjectLink);
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, ObjectLink, GetObjectPtr, uint64_t, CoreTools::ObjectInterfaceSmartPointer)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, ObjectLink, GetObjectPtr, uint64_t, CoreTools::ObjectInterfaceSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ObjectLink, GetOrderedSize, int)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, ObjectLink, operator[], int, CoreTools::ObjectInterfaceSmartPointer&)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, ObjectLink, operator[], int, CoreTools::ObjectInterfaceSharedPtr&)
 
 void CoreTools::ObjectLink
-	::Insert(uint64_t uniqueID, const ObjectInterfaceSmartPointer& ptr)
+	::Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& ptr)
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 

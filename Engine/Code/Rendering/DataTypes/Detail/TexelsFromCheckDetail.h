@@ -12,8 +12,8 @@
 
 #include "Rendering/RenderingExport.h"
 
-#include "TexelsFromCheck.h"
 #include "ColourTextureFormatTraits.h"
+#include "TexelsFromCheck.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 template <Rendering::TextureFormat Format>

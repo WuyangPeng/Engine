@@ -282,7 +282,7 @@ void Rendering::ShaderBaseImpl
 }
 
 void Rendering::ShaderBaseImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -337,8 +337,7 @@ void Rendering::ShaderBaseImpl
 	//source.ResolveObjectSmartPointerLink(m_Profile);
 }
 
-void Rendering::ShaderBaseImpl
-	::Register( ObjectRegister& target ) const
+void Rendering::ShaderBaseImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

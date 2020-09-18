@@ -28,7 +28,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Buffer : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Buffer);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Buffer);
         using ParentType = Object;
         using BufferSmartPointer = CoreTools::ThirdSubclassSmartPointer<ClassType>;
         using ConstBufferSmartPointer = CoreTools::ConstThirdSubclassSmartPointer<ClassType>;
@@ -39,8 +39,12 @@ namespace Rendering
         Buffer();
         Buffer(int numElements, int elementSize, BufferUsage usage);
           ~Buffer() = 0;
+
+          #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         Buffer(Buffer&&) = default;
         Buffer& operator=(Buffer&&) = default;
+        #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

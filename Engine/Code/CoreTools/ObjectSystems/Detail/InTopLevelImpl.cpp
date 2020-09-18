@@ -1,87 +1,78 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:48)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/14 17:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "InTopLevelImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
-CoreTools::InTopLevelImpl
-	::InTopLevelImpl() noexcept
-	:m_TopLevel{}, m_UniqueID{}
+CoreTools::InTopLevelImpl::InTopLevelImpl() noexcept
+    : m_TopLevel{}
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::InTopLevelImpl
-	::IsValid() const noexcept
-{
-	if (m_TopLevel.size() == m_UniqueID.size())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, InTopLevelImpl)
 
-bool CoreTools::InTopLevelImpl
-	::IsTopLevel(uint64_t uniqueID) const
+bool CoreTools::InTopLevelImpl::IsTopLevel(const ObjectInterfaceSharedPtr& object) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_UniqueID.find(uniqueID) != m_UniqueID.cend();
+    const auto& container = m_TopLevel.get<UniqueObject>();
+ 
+    return container.find(object) != container.cend();
 }
 
-int CoreTools::InTopLevelImpl
-	::GetTopLevelSize() const
+int CoreTools::InTopLevelImpl::GetTopLevelSize() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return boost::numeric_cast<int>(m_TopLevel.size());
+    return boost::numeric_cast<int>(m_TopLevel.size());
 }
 
-CoreTools::ConstObjectInterfaceSmartPointer CoreTools::InTopLevelImpl
-	::operator[](int index) const
+void CoreTools::InTopLevelImpl::Insert(const ObjectInterfaceSharedPtr& object)
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
-	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetTopLevelSize(), "索引错误！");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return m_TopLevel.at(index);
+    if (!m_TopLevel.emplace_back(object).second)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("一个object指针只可以被插入一次！"s));
+    }
 }
 
-CoreTools::ObjectInterfaceSmartPointer& CoreTools::InTopLevelImpl
-	::operator[](int index)
+CoreTools::ObjectContainerConstIter CoreTools::InTopLevelImpl::begin() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
-	CORE_TOOLS_ASSERTION_0(0 <= index && index < GetTopLevelSize(), "索引错误！");
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_TopLevel.at(index);
+    return m_TopLevel.begin();
 }
 
-void CoreTools::InTopLevelImpl
-	::Insert(const ObjectInterfaceSmartPointer& objectPtr)
+CoreTools::ObjectContainerConstIter CoreTools::InTopLevelImpl::end() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	if (m_UniqueID.insert(objectPtr->GetUniqueID()).second)
-	{
-		m_TopLevel.push_back(objectPtr);
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("一个object指针只可以被插入一次！"s));
-	}
+    return m_TopLevel.end();
 }
 
+CoreTools::ObjectContainerIter CoreTools::InTopLevelImpl::begin() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
+    return m_TopLevel.begin();
+}
 
+CoreTools::ObjectContainerIter CoreTools::InTopLevelImpl::end() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-
+    return m_TopLevel.end();
+}

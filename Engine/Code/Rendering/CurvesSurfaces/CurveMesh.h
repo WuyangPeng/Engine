@@ -62,7 +62,7 @@ namespace Rendering
         // function is called, SetLevel is ignored.
         void Lock()  ;
         bool IsLocked() const noexcept;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     protected:
         VertexBufferSmartPointer mOrigVBuffer;
         FloatArraySmartPointer mOrigParams;

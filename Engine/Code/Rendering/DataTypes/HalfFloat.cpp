@@ -30,13 +30,13 @@ Rendering::HalfFloat::HalfFloat(int value)
     : m_HalfFloat{ ConvertHalfFloat(boost::numeric_cast<float>(value)) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
-} 
+}
 
 // static
 Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float value) noexcept
 {
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490) // 这里必须使用reinterpret_cast
+#include SYSTEM_WARNING_DISABLE(26490)  // 这里必须使用reinterpret_cast
     const auto bits = reinterpret_cast<IntegerType&>(value);
 #include STSTEM_WARNING_POP
 
@@ -44,7 +44,7 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float 
     if (g_ExponentDifference < exponent)
     {
         constexpr auto maxExponent = g_ExponentDifference + ((1 << g_ExponentDigits) - 1);
-        if (exponent < maxExponent)   
+        if (exponent < maxExponent)
         {
             if (exponent != 0)
             {
@@ -90,7 +90,7 @@ float Rendering::HalfFloat::ToFloat() const noexcept
         const auto result = sign | exponent | mantissa;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490) // 这里必须使用reinterpret_cast
+#include SYSTEM_WARNING_DISABLE(26490)  // 这里必须使用reinterpret_cast
         return reinterpret_cast<const float&>(result);
 #include STSTEM_WARNING_POP
     }

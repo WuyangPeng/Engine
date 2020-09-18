@@ -23,7 +23,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE PointController : public Controller
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(PointController);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(PointController);
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 

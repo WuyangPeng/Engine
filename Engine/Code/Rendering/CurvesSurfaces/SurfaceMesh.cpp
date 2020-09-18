@@ -681,7 +681,7 @@ void Rendering::SurfaceMesh ::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::SurfaceMesh ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::SurfaceMesh ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     const uint64_t id = ParentType::Register(target);
     if (0 < id)
@@ -702,16 +702,16 @@ uint64_t Rendering::SurfaceMesh ::Register(CoreTools::ObjectRegister& target) co
     return id;
 }
 
-void Rendering::SurfaceMesh ::Save(CoreTools::BufferTarget& target) const
+void Rendering::SurfaceMesh ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
 
-    target.Write(mNumFullVertices);
-    target.Write(mNumPatches);
-    target.Write(mLevel);
-    target.WriteBool(mAllowDynamicChange);
+    target->Write(mNumFullVertices);
+    target->Write(mNumPatches);
+    target->Write(mLevel);
+    target->Write(mAllowDynamicChange);
     //target.WriteSmartPointer(mOrigVBuffer);
     //target.WriteSmartPointer(mOrigIBuffer);
     //target.WriteSmartPointer(mOrigParams);

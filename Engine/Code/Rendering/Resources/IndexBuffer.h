@@ -56,7 +56,7 @@ namespace Rendering
 		void InitIndexBuffer(const std::vector<int> indices);
 
 		void SetIndexBuffer(int index, int original, int current);
-
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		int m_Offset;
 	};

@@ -107,4 +107,12 @@ const Rendering::TriangleIndex
 
 	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
 }
- #include STSTEM_WARNING_POP
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesStrip::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
+#include STSTEM_WARNING_POP

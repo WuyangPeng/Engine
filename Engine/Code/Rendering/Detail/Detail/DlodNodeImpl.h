@@ -13,6 +13,7 @@
 
 #include <vector>
 #include "Rendering/DataTypes/DataTypesFwd.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -38,7 +39,7 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 
 		void Load(BufferSource& source);
-		void Save(BufferTarget& target) const;
+		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
 		
 		// 访问中心(LOD)细节等级。

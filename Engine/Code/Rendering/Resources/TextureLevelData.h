@@ -43,8 +43,8 @@ namespace Rendering
         int GetLevelOffset(int level) const;
 
         void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
-        int GetStreamingSize() const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+        int GetStreamingSize() const noexcept;
 
         void SaveToFile(WriteFileManager& outFile) const;
         void ReadFromFile(ReadFileManager& inFile);

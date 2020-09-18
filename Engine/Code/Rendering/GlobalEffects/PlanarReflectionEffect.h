@@ -45,6 +45,8 @@ namespace Rendering
         void SetReflectance(int i, float reflectance) noexcept;
         float GetReflectance(int i) const noexcept;
 
+           ObjectInterfaceSharedPtr CloneObject() const override;
+
     protected:
         void GetReflectionMatrixAndModelPlane(int i, Mathematics::FloatMatrix& reflection, Mathematics::FloatPlane& modelPlane);
 

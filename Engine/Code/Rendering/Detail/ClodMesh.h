@@ -22,7 +22,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE ClodMesh : public TrianglesMesh
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(ClodMesh);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ClodMesh);
 		using ParentType = TrianglesMesh;
 
 	public:

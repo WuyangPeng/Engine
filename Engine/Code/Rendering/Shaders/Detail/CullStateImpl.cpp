@@ -13,7 +13,9 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include STSTEM_WARNING_PUSH 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::CullStateImpl
 	::CullStateImpl() noexcept
 	:m_Enabled{ true }, m_CCWOrder{ true }
@@ -61,16 +63,15 @@ void Rendering::CullStateImpl
 }
 
 void Rendering::CullStateImpl
-	::Save(BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteBool(m_Enabled);
-	target.WriteBool(m_CCWOrder);
+	target->Write(m_Enabled);
+	target->Write(m_CCWOrder);
 }
 
-int Rendering::CullStateImpl
-	::GetStreamingSize() const
+int Rendering::CullStateImpl ::GetStreamingSize() const noexcept
 {	
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -106,3 +107,4 @@ void Rendering::CullStateImpl
 	m_CCWOrder = (ccwOrder == 1) ? true : false; 
 }
 
+#include STSTEM_WARNING_POP

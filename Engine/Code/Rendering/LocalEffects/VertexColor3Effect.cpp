@@ -143,14 +143,13 @@ void Rendering::VertexColor3Effect
 	}
 }
 
-uint64_t Rendering::VertexColor3Effect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::VertexColor3Effect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::VertexColor3Effect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

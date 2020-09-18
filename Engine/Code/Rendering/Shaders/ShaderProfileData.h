@@ -23,14 +23,18 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderProfileData : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderProfileData);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderProfileData);
         using ParentType = Object;
 
     public:
         ShaderProfileData(int numConstants, int numSamplers);
         ~ShaderProfileData();
+
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         ShaderProfileData(ShaderProfileData&&) noexcept = default;
         ShaderProfileData& operator=(ShaderProfileData&&) noexcept = default;
+         #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -46,7 +50,7 @@ namespace Rendering
 
         int GetBaseRegisterSize() const noexcept;
         int GetTextureUnitSize() const noexcept;
-
+        ObjectInterfaceSharedPtr CloneObject() const override;
     private:
         IMPL_TYPE_DECLARE(ShaderProfileData);
     };

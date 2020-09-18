@@ -68,6 +68,7 @@ namespace Rendering
 		void SetTextureCoord(const VertexBufferAccessor& vertexBufferAccessor, int index, const Vector2D& textureCoord,int unit = 0);
 
 		virtual VertexBufferSmartPointer Clone() const;
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 

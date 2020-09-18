@@ -61,10 +61,10 @@ namespace Rendering
         bool HasDepthStencil() const noexcept;
         
         int GetStreamingSize () const;
-		void Save (BufferTarget& target) const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		void Load (BufferSource& source);
         void Link (ObjectLink& source);
-        void Register (ObjectRegister& target) const;
+                void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
         
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 

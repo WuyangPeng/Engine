@@ -195,14 +195,13 @@ void Rendering::LightSptPerPixEffect::PostLink ()
 	}
 }
 
-uint64_t Rendering::LightSptPerPixEffect
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::LightSptPerPixEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::LightSptPerPixEffect
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

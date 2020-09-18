@@ -12,6 +12,7 @@
 #include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 #include <string>
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -41,7 +42,7 @@ namespace Rendering
         ShaderFlags::VariableSemantic GetSemantic() const noexcept;
 
         void Load(BufferSource& source);
-        void Save(BufferTarget& target) const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const;
 
     private:

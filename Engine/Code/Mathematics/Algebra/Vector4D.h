@@ -32,6 +32,9 @@ namespace Mathematics
 		using Math = Math<Real>;
 		using ToolsType = Vector4DTools<Real>;
 
+		  static constexpr auto sm_PointSize = 4;
+		    using ArrayType = std::array<Real, sm_PointSize>;
+
 	public:
 		Vector4D() noexcept;
 		Vector4D(const Tuple4& tuple);
@@ -47,6 +50,9 @@ namespace Mathematics
 		Vector4D(const Vector4D<RhsType>& vector);
 
 		CLASS_INVARIANT_DECLARE;
+
+		  void SetCoordinate(const ArrayType& coordinate);
+                ArrayType GetCoordinate() const;
 
 		// ื๘ฑ๊ทรฮส
 		Real GetXCoordinate() const;

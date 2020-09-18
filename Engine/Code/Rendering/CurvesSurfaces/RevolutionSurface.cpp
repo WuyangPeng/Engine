@@ -175,6 +175,13 @@ void Rendering::RevolutionSurface ::UpdateSurface()
     }
 }
 
+CoreTools::ObjectInterface::ObjectInterfaceSharedPtr Rendering::RevolutionSurface::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
+
 void Rendering::RevolutionSurface::UpdateDisk()
 {
     VertexBufferAccessor vba(this);
@@ -367,24 +374,24 @@ void Rendering::RevolutionSurface ::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::RevolutionSurface ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::RevolutionSurface ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return ParentType::Register(target);
 }
 
-void Rendering::RevolutionSurface ::Save(CoreTools::BufferTarget& target) const
+void Rendering::RevolutionSurface ::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
 
-    target.Write(mXCenter);
-    target.WriteEnum(mTopology);
-    target.Write(mNumCurveSamples);
-    target.Write(mNumRadialSamples);
-    target.WriteWithNumber(mNumRadialSamples + 1, mSin);
-    target.WriteWithNumber(mNumRadialSamples + 1, mCos);
-    target.WriteBool(mSampleByArcLength);
+    target->Write(mXCenter);
+    target->WriteEnum(mTopology);
+    target->Write(mNumCurveSamples);
+    target->Write(mNumRadialSamples);
+  //  target.WriteWithNumber(mNumRadialSamples + 1, mSin);
+  //  target.WriteWithNumber(mNumRadialSamples + 1, mCos);
+    target->Write(mSampleByArcLength);
 
     // TODO.  The class Curve2 is abstract and does not know about the data
     // representation for the derived-class object that is passed to the

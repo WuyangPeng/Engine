@@ -381,7 +381,7 @@ void Network::MessageBufferImpl ::Write(int itemSize, int itemsNumber, const voi
     AddCurrentWriteIndex(numberToCopy);
 }
 
-bool Network::MessageBufferImpl ::IsNeedSwap() const noexcept
+bool Network::MessageBufferImpl ::IsNeedSwap() const  
 {
     if (CoreTools::Endian::IsLittleEndian() && m_ParserStrategy != ParserStrategy::LittleEndian ||
         CoreTools::Endian::IsBigEndian() && m_ParserStrategy != ParserStrategy::BigEndian)

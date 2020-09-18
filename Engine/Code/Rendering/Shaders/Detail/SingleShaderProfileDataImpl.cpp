@@ -17,6 +17,9 @@ using std::string;
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+ 
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::SingleShaderProfileDataImpl
 	::SingleShaderProfileDataImpl(int numConstants,int numSamplers)	
 	:m_BaseRegister(numConstants),m_TextureUnit(numSamplers),m_Program{}
@@ -114,13 +117,13 @@ void Rendering::SingleShaderProfileDataImpl
 }
 
 void Rendering::SingleShaderProfileDataImpl
-	::Save( BufferTarget& target ) const
+	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_BaseRegister);
-	target.Write(m_TextureUnit);
-	target.WriteString(m_Program);
+	target->WriteContainerWithNumber(m_BaseRegister);
+        target->WriteContainerWithNumber(m_TextureUnit);
+	target->Write(m_Program);
 }
 
 int Rendering::SingleShaderProfileDataImpl

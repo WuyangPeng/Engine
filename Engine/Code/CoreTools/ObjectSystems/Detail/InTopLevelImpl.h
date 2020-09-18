@@ -1,46 +1,48 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:32)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/14 17:29)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_IN_TOP_LEVEL_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_IN_TOP_LEVEL_IMPL_H
 
-#include "CoreTools/ObjectSystems/ObjectInterface.h"
+#include "CoreTools/CoreToolsDll.h"
 
-#include <set>
-#include <vector>
+#include "CoreTools/ObjectSystems/ObjectInterface.h"
+#include "CoreTools/ObjectSystems/ObjectType.h"
 
 namespace CoreTools
 {
-	class InTopLevelImpl
-	{
-	public:
-		using ClassType = InTopLevelImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE InTopLevelImpl
+    {
+    public:
+        using ClassType = InTopLevelImpl; 
 
-	public:
-		InTopLevelImpl() noexcept;
+    public:
+        InTopLevelImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool IsTopLevel(uint64_t uniqueID) const;
-		int GetTopLevelSize() const;
-		ConstObjectInterfaceSmartPointer operator [](int index) const;
-		ObjectInterfaceSmartPointer& operator [](int index);
+        [[nodiscard]] bool IsTopLevel(const ObjectInterfaceSharedPtr& object) const;
+        [[nodiscard]] int GetTopLevelSize() const;
 
-		// 对顶层的对象进行保存。
-		void Insert(const ObjectInterfaceSmartPointer& objectPtr);
+        [[nodiscard]] ObjectContainerConstIter begin() const noexcept;
+        [[nodiscard]] ObjectContainerConstIter end() const noexcept;
 
-	private:
-		using ObjectContainer = std::vector<ObjectInterfaceSmartPointer>;
-		using UniqueIDContainer = std::set<uint64_t>;
+        [[nodiscard]] ObjectContainerIter begin() noexcept;
+        [[nodiscard]] ObjectContainerIter end() noexcept;
 
-	private:
-		// 顶层对象的流。
-		ObjectContainer m_TopLevel;
-		UniqueIDContainer m_UniqueID;
-	};
+        // 对顶层的对象进行保存。
+        void Insert(const ObjectInterfaceSharedPtr& object); 
+
+    private:
+        // 顶层对象的流。
+        ObjectContainer m_TopLevel; 
+    };
 }
 
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_IN_TOP_LEVEL_IMPL_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_IN_TOP_LEVEL_IMPL_H

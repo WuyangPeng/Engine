@@ -61,7 +61,7 @@ namespace Rendering
 		   RevolutionSurface& operator=(const RevolutionSurface&) = default;
 		   RevolutionSurface(RevolutionSurface&&) = default;
 		   RevolutionSurface& operator=(RevolutionSurface&&) = default;
-
+                   ObjectInterfaceSharedPtr CloneObject() const override;
 		// Mmber access.
 		int GetCurveSamples() const noexcept;
 		int GetRadialSamples() const noexcept;

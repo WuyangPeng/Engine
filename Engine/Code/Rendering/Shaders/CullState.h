@@ -26,7 +26,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE CullState : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(CullState);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CullState);
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
@@ -34,8 +34,14 @@ namespace Rendering
     public:
         CullState();
         ~CullState();
+
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         CullState(CullState&&) noexcept = default;
         CullState& operator=(CullState&&) noexcept = default;
+
+        #include STSTEM_WARNING_POP
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CullState);
@@ -47,7 +53,7 @@ namespace Rendering
 
         void SaveState(WriteFileManager& manager) const;
         void LoadState(ReadFileManager& manager);
-
+         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
         IMPL_TYPE_DECLARE(CullState);
     };

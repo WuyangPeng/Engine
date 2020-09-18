@@ -140,7 +140,7 @@ int Rendering::Texture3D
 }
 
 uint64_t Rendering::Texture3D
-    ::Register( CoreTools::ObjectRegister& target ) const
+    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -148,7 +148,7 @@ uint64_t Rendering::Texture3D
 }
 
 void Rendering::Texture3D
-    ::Save (CoreTools::BufferTarget& target) const
+    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -200,5 +200,10 @@ Rendering::TextureSmartPointer Rendering::Texture3D
 	return TextureSmartPointer{ std::make_shared<ClassType>(*this) };
 }
 
+CoreTools::ObjectInterfaceSharedPtr Rendering::Texture3D::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
 #include STSTEM_WARNING_POP

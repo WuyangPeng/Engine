@@ -14,6 +14,7 @@
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -44,6 +45,13 @@ Rendering::Portal::~Portal ()
 }
 EXCEPTION_ALL_CATCH(Rendering)  
   
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::Portal::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 void Rendering::Portal ::UpdateWorldData(const FloatTransform& worldTransform) noexcept
@@ -467,27 +475,27 @@ void Rendering::Portal
 }
 
 uint64_t Rendering::Portal
-	::Register(CoreTools::ObjectRegister& target) const
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     if (Object::Register(target))
     {
-        target.Register(AdjacentRegion);
+       // target.Register(AdjacentRegion);
         return true;
     }
     return false;
 }
 
 void Rendering::Portal
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
     
     Object::Save(target);
 
-	target.WriteAggregateWithNumber(mNumVertices, mModelVertices);
-    target.WriteAggregate(mModelPlane);
-    target.WriteBool(Open);
-    target.WritePointer(AdjacentRegion);
+//	target.WriteAggregateWithNumber(mNumVertices, mModelVertices);
+    target->WriteAggregate(mModelPlane);
+    target->Write(Open);
+  //  target.WritePointer(AdjacentRegion);
 
     // World vertices are computed form model vertices in the update call,
     // so no need to save them.  The world plane is also computed in the

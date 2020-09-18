@@ -90,10 +90,10 @@ namespace Rendering
 		Colour GetBorderColor (int index) const;
 
 		void Load (BufferSource& source);
-		void Save (BufferTarget& target) const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
 		void Link(ObjectLink& source);
-		void Register(ObjectRegister& target) const;
+                void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
 		void SaveShader(WriteFileManager& manager) const;
 		void LoadShader(ReadFileManager& manager, int numProfiles);

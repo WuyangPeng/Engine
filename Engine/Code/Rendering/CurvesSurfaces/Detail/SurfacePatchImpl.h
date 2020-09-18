@@ -8,6 +8,7 @@
 #define RENDERING_CURVES_SURFACES_SURFACE_PATCH_IMPL_H
 
 #include "Rendering/RenderingDll.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -31,8 +32,8 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         void Load(BufferSource& source);
-        void Save(BufferTarget& target) const;
-        int GetStreamingSize() const;
+        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+        int GetStreamingSize() const noexcept;
 
         // 参数域可以是矩形或三角形。
         // 对于矩形域有效的(u,v)值满足umin <= u <= umax,  vmin <= v <= vmax

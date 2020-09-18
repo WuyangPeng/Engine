@@ -332,13 +332,12 @@ void Rendering::Texture2DImpl
 }
 
 void Rendering::Texture2DImpl
-    ::SaveLevelData (CoreTools::BufferTarget& target) const
+    ::SaveLevelData (const CoreTools::BufferTargetSharedPtr& target) const
 {
     m_TextureLevelData.Save(target);
 }
 
-int Rendering::Texture2DImpl
-    ::GetLevelDataStreamingSize () const
+int Rendering::Texture2DImpl ::GetLevelDataStreamingSize() const noexcept
 {
     return m_TextureLevelData.GetStreamingSize();
 }

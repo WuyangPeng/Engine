@@ -25,6 +25,8 @@ using std::vector;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::SkinControllerImpl
 	::SkinControllerImpl(int numVertices, int numBones)
 	:m_NumVertices{ numVertices },m_NumBones{ numBones },m_Size{ numVertices * numBones },
@@ -182,7 +184,7 @@ void Rendering::SkinControllerImpl
 }
 
 int Rendering::SkinControllerImpl
-	::GetStreamingSize() const 
+	::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -197,16 +199,16 @@ int Rendering::SkinControllerImpl
 }
 
 void Rendering::SkinControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumVertices);
-	target.Write(m_NumBones);
+	target->Write(m_NumVertices);
+	target->Write(m_NumBones);
 
 //	target.WriteSmartPointerWithoutNumber(m_NumBones, &m_Bones[0]);
-	target.WriteWithoutNumber(m_Size, &m_Weights[0]);
-	target.WriteAggregateWithoutNumber(m_Size, &m_Offsets[0]);
+	//target.WriteWithoutNumber(m_Size, &m_Weights[0]);
+	//target.WriteAggregateWithoutNumber(m_Size, &m_Offsets[0]);
 }
 
 void Rendering::SkinControllerImpl
@@ -236,7 +238,7 @@ void Rendering::SkinControllerImpl
 }
 
 void Rendering::SkinControllerImpl
-	::Register(CoreTools::ObjectRegister& target) const 
+	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

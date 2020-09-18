@@ -105,7 +105,7 @@ namespace Rendering
         const AxesAlignBoundingBox2D ComputeBoundingAABB (int numVertices,const char* vertices,int stride,const Matrix& worldMatrix) const;
         
         void Load (BufferSource& source);
-		void Save (BufferTarget& target) const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
 
 		void SetDepthType(DepthType depthType)  ;

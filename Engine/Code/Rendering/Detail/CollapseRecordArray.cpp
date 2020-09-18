@@ -18,6 +18,7 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26456)
 using std::make_shared;
  
 CORE_TOOLS_RTTI_DEFINE(Rendering, CollapseRecordArray);
@@ -41,5 +42,12 @@ CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, CollapseRecordArray)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CollapseRecordArray,GetNumRecords,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, CollapseRecordArray,GetRecord,int,const Rendering::CollapseRecord )
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CollapseRecordArray,GetRecords,const std::vector<Rendering::CollapseRecord>)
+
+CoreTools::ObjectInterface::ObjectInterfaceSharedPtr Rendering::CollapseRecordArray::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+}
 
 #include STSTEM_WARNING_POP

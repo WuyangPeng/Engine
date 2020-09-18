@@ -26,7 +26,7 @@ namespace CoreTools
 		NON_COPY_CLASSES_TYPE_DECLARE(WriteBufferIO);
 
 	public:
-		WriteBufferIO(int bytesTotal, char* buffer);
+		explicit WriteBufferIO(int bufferSize);
 
 		CLASS_INVARIANT_DECLARE;
 

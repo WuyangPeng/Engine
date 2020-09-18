@@ -5,10 +5,12 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/18 21:28)
+//	引擎版本：0.5.0.2 (2020/09/17 15:40)
 
 #ifndef RENDERING_DATA_TYPES_FWD_H
 #define RENDERING_DATA_TYPES_FWD_H
+
+#include "Rendering/RenderingDll.h"
 
 namespace Rendering
 {
@@ -25,7 +27,7 @@ namespace Rendering
     struct ColourDefaultTraits;
 
     template <typename T>
-    class Colour;
+    class RENDERING_TEMPLATE_DEFAULT_DECLARE Colour;
 
     using ByteColour = Colour<uint8_t>;
     using IntColour = Colour<int>;
@@ -39,13 +41,13 @@ namespace Rendering
     class TextureColour;
 
     template <typename T>
-    class Bound;
+    class RENDERING_TEMPLATE_DEFAULT_DECLARE Bound;
 
     using FloatBound = Bound<float>;
     using DoubleBound = Bound<double>;
 
     template <typename Real>
-    class Transform;
+    class RENDERING_TEMPLATE_DEFAULT_DECLARE Transform;
 
     using FloatTransform = Transform<float>;
     using DoubleTransform = Transform<double>;

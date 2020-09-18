@@ -50,7 +50,7 @@ namespace Rendering
 		   Portal& operator=(const Portal&) = default;
 		    Portal(Portal&&) = default;
 		   Portal& operator=(Portal&&) = default;
-
+                    ObjectInterfaceSharedPtr CloneObject() const override;
 		// Member access.  The region to which the portal leads.  Portals can be
 		// open or closed.
 		ConvexRegion* AdjacentRegion;

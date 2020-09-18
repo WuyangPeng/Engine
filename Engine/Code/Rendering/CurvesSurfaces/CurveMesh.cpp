@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -530,8 +531,7 @@ void Rendering::CurveMesh
     Polysegment::PostLink();
 }
 
-uint64_t Rendering::CurveMesh
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::CurveMesh ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     const uint64_t id = Polysegment::Register(target);
     if (0 < id)
@@ -552,16 +552,16 @@ uint64_t Rendering::CurveMesh
 }
 
 void Rendering::CurveMesh
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     Polysegment::Save(target);
 
-    target.Write(mNumFullVertices);
-    target.Write(mNumSegments);
-    target.Write(mLevel);
-    target.WriteBool(mAllowDynamicChange);
+    target->Write(mNumFullVertices);
+    target->Write(mNumSegments);
+    target->Write(mLevel);
+    target->Write(mAllowDynamicChange);
   //  target.WriteSmartPointer(mOrigVBuffer);
 	//target.WriteSmartPointer(mOrigParams);
    // target.WriteSmartPointerWithNumber(mNumSegments, mSegments);
@@ -571,7 +571,7 @@ void Rendering::CurveMesh
         for (int i = 0; i < mNumFullVertices; ++i)
         {
            // target.WriteSmartPointer(mCInfo[i].Segment);
-            target.Write(mCInfo[i].Param);
+            target->Write(mCInfo[i].Param);
         }
     }
 
@@ -601,6 +601,12 @@ int Rendering::CurveMesh
     }
 
     return size;
+}
+
+CoreTools::ObjectInterfaceSharedPtr Rendering::CurveMesh::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

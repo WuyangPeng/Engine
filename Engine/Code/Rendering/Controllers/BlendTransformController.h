@@ -20,7 +20,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE BlendTransformController : public TransformController
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(BlendTransformController);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(BlendTransformController);
         using ParentType = TransformController;
         using APoint = Mathematics::FloatAPoint;
         using Matrix = Mathematics::FloatMatrix;
@@ -74,6 +74,8 @@ namespace Rendering
         bool Update(double applicationTime) override;
 
         ControllerInterfaceSmartPointer Clone() const override;
+        
+        ObjectInterfaceSharedPtr CloneObject() const override;
 
         // 对“this”设置对象，管理控制器。
         void SetObject(ControllerInterface* object) override;

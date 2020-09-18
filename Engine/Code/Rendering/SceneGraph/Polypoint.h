@@ -36,7 +36,7 @@ namespace Rendering
                 int GetNumPoints() const noexcept;
 
 		  ControllerInterfaceSmartPointer Clone() const override;
-		
+                ObjectInterfaceSharedPtr CloneObject() const override;
 	private:	
 		// 当前活动点的数量。
 		int m_NumPoints;

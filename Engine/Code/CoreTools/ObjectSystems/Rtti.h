@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:39)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.0.2 (2020/09/11 12:56)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_RTTI_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_RTTI_H
@@ -11,26 +14,26 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE Rtti
-	{
-	public:
-		using ClassType = Rtti;
+    class CORE_TOOLS_DEFAULT_DECLARE Rtti
+    {
+    public:
+        using ClassType = Rtti;
 
-	public:
-		// 该名称必须在系统中必须是独特的。在CoreTools命名空间，类Foo应该使用“CoreTools.Foo”。
-		// 如果一个应用程序有另一个命名空间SomeName，然后的名称应为“SomeName.Foo”。
-		Rtti(const char* name, const Rtti* baseType) noexcept;
+    public:
+        // 该名称必须在系统中必须是独特的。在CoreTools命名空间，类Foo应该使用“CoreTools.Foo”。
+        // 如果一个应用程序有另一个命名空间SomeName，然后的名称应为“SomeName.Foo”。
+        Rtti(const char* name, const Rtti* baseType) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const char* GetName() const noexcept;
-		bool IsExactly(const Rtti& type) const noexcept;
-		bool IsDerived(const Rtti& type) const noexcept;
+        [[nodiscard]] const char* GetName() const noexcept;
+        [[nodiscard]] bool IsExactly(const Rtti& type) const noexcept;
+        [[nodiscard]] bool IsDerived(const Rtti& type) const noexcept;
 
-	private:
-		const char* m_Name;
-		const Rtti* m_BaseType;
-	};
+    private:
+        const char* m_Name;
+        const Rtti* m_BaseType;
+    };
 }
 
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_RTTI_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_RTTI_H

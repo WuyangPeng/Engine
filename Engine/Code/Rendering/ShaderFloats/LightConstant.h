@@ -22,7 +22,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE LightConstant : public ShaderFloat
 	{
 	public:
-		COPY_UNSHARE_CLASSES_TYPE_DECLARE(LightConstant);
+		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(LightConstant);
 		using ParentType = ShaderFloat;
 
 	public:

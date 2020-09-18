@@ -28,7 +28,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE AlphaState : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(AlphaState);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(AlphaState);
         using ParentType = Object;
         using Colour = Colour<float>;
         using SourceBlendMode = AlphaStateFlags::SourceBlendMode;
@@ -40,8 +40,12 @@ namespace Rendering
     public:
         AlphaState();
         ~AlphaState();
+
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         AlphaState(AlphaState&&) noexcept = default;
         AlphaState& operator=(AlphaState&&) noexcept = default;
+          #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -65,7 +69,7 @@ namespace Rendering
 
         void SaveState(WriteFileManager& manager) const;
         void LoadState(ReadFileManager& manager);
-
+          ObjectInterfaceSharedPtr CloneObject() const override;
     private:
         IMPL_TYPE_DECLARE(AlphaState);
     };

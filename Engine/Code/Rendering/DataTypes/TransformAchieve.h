@@ -235,7 +235,7 @@ const Rendering::Transform<Real> Rendering::Transform<Real>::GetInverseTransform
 }
 
 template <typename Real>
-int Rendering::Transform<Real>::GetStreamingSize() const
+int Rendering::Transform<Real>::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -308,9 +308,9 @@ void Rendering::Transform<Real>::WriteAggregate(CoreTools::BufferTarget& target)
     const auto isRotationOrScaleMatrix = IsRotationOrScaleMatrix();
     const auto isUniformScale = IsUniformScale();
 
-    target.WriteBool(isIdentity);
-    target.WriteBool(isRotationOrScaleMatrix);
-    target.WriteBool(isUniformScale);
+    target.Write(isIdentity);
+    target.Write(isRotationOrScaleMatrix);
+    target.Write(isUniformScale);
 
     if (!isIdentity)
     {

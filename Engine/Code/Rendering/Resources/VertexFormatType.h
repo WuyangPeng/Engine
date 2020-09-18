@@ -10,6 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Flags/VertexFormatFlags.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -45,8 +46,8 @@ namespace Rendering
                 unsigned int GetUsageIndex() const noexcept;
                 void SetUsageIndex(unsigned int usageIndex) noexcept;
 
-		int GetStreamingSize() const;
-		void Save(BufferTarget& target) const;
+		int GetStreamingSize() const noexcept;
+		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		void Load(BufferSource& source);
 
 		void SaveToFile(WriteFileManager& outFile) const;

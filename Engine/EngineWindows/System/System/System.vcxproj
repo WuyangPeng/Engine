@@ -622,6 +622,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\LimitTraits.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ListInserter.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\MathConstants.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\MultiIndex.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Mutex.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\MysqlxXdevapi.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\NumericCast.h" />

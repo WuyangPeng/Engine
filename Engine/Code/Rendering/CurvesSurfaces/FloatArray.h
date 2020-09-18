@@ -22,15 +22,19 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE FloatArray : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(FloatArray);
+        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(FloatArray);
         using ParentType = Object;
         using FloatVector = std::vector<float>;
 
     public:
         explicit FloatArray(const FloatVector& data);
         ~FloatArray() = default;
+
+        #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
         FloatArray(FloatArray&&) = default;
         FloatArray& operator=(FloatArray&&) = default;
+           #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -41,6 +45,8 @@ namespace Rendering
 
         const float& operator[](int index) const;
         float& operator[](int index);
+
+         ObjectInterfaceSharedPtr CloneObject() const  override;
 
     private:
         IMPL_TYPE_DECLARE(FloatArray);

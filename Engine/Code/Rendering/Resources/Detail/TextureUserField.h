@@ -10,6 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Resources/Flags/TextureFlags.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -38,8 +39,8 @@ namespace Rendering
 		int GetUserField (int index) const;
 
 		void Load (CoreTools::BufferSource& source);
-		void Save (CoreTools::BufferTarget& target) const;
-		int GetStreamingSize () const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
+                int GetStreamingSize() const noexcept;
 
 		void SaveToFile (WriteFileManager& outFile) const;
 		void ReadFromFile (ReadFileManager& inFile);

@@ -13,6 +13,7 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Matrix.h"
+#include "CoreTools/ObjectSystems/BufferTarget.h"
 
 namespace CoreTools
 {
@@ -67,7 +68,7 @@ namespace Rendering
         const Matrix GetViewMatrix () const;
         
         void Load (BufferSource& source);
-		void Save (BufferTarget& target) const;
+		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
         
     private:

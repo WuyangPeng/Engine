@@ -481,26 +481,25 @@ void Rendering::TubeSurface
     ParentType::PostLink();
 }
 
-uint64_t Rendering::TubeSurface
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::TubeSurface ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     return ParentType::Register(target);
 }
 
 void Rendering::TubeSurface
-	::Save(CoreTools::BufferTarget& target) const
+	::Save(const CoreTools::BufferTargetSharedPtr& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
 
-    target.Write(mNumMedialSamples);
-    target.Write(mNumSliceSamples);
-    target.WriteAggregate(mUpVector);
-    target.WriteWithNumber(mNumSliceSamples + 1, mSin);
-    target.WriteWithNumber(mNumSliceSamples + 1, mCos);
-    target.WriteBool(mClosed);
-    target.WriteBool(mSampleByArcLength);
+    target->Write(mNumMedialSamples);
+    target->Write(mNumSliceSamples);
+    target->WriteAggregate(mUpVector);
+  //  target.WriteWithNumber(mNumSliceSamples + 1, mSin);
+  //  target.WriteWithNumber(mNumSliceSamples + 1, mCos);
+    target->Write(mClosed);
+    target->Write(mSampleByArcLength);
 
     // TODO.  The class Curve3 is abstract and does not know about the data
     // representation for the derived-class object that is passed to the
