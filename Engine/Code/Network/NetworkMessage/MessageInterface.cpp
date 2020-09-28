@@ -9,7 +9,7 @@
 #include "MessageInterface.h"
 #include "MessageSourceDetail.h"
 #include "MessageTargetDetail.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -25,10 +25,10 @@ Network::MessageInterface ::MessageInterface(int64_t messageID) noexcept
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageInterface ::MessageInterface(LoadConstructor value, int64_t messageID) noexcept
+Network::MessageInterface ::MessageInterface([[maybe_unused]] LoadConstructor value, int64_t messageID) noexcept
     : m_MessageID{ messageID }
 {
-    SYSTEM_UNUSED_ARG(value);
+ 
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }

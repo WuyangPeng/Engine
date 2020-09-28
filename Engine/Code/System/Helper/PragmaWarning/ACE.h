@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.2.0.0 (2020/05/08 18:56)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 18:17)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_ACE_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_ACE_H
@@ -52,8 +55,8 @@
     #include <ace/INET_Addr.h>
     #include <ace/OS_main.h>
     #include <ace/SOCK_Acceptor.h>
-    #include <ace/SOCK_Stream.h>
     #include <ace/SOCK_Connector.h>
+    #include <ace/SOCK_Stream.h>
 
     #include STSTEM_WARNING_POP
 

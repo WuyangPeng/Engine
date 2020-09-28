@@ -1,8 +1,8 @@
-¼ÆËã»úÏµÍ³£ºÏµÍ³¼Ü¹¹Óë²Ù×÷ÏµÍ³µÄ¸ß¶È¼¯³É £¨Computer Systems:An Integrated Approach to Architecture and Operating Systems£©
+è®¡ç®—æœºç³»ç»Ÿï¼šç³»ç»Ÿæ¶æ„ä¸æ“ä½œç³»ç»Ÿçš„é«˜åº¦é›†æˆ ï¼ˆComputer Systems:An Integrated Approach to Architecture and Operating Systemsï¼‰
 
-¡î 
-×÷Õß£º Umakishore Ramachandran¡¢William D.Leahy Jr.
+â˜† 
+ä½œè€…ï¼š Umakishore Ramachandranã€William D.Leahy Jr.
 
-ÖªÊ¶µã 
-1.	¼ÆËã»úÏµÍ³»ù´¡ÖªÊ¶¡£
-2.	¼ÆËã»úÏµÍ³»ù´¡ÖªÊ¶Á·Ï°¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	è®¡ç®—æœºç³»ç»ŸåŸºç¡€çŸ¥è¯†ã€‚
+2.	è®¡ç®—æœºç³»ç»ŸåŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚ 

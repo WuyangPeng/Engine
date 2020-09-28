@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "CameraWorldDirectionVectorConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
@@ -40,8 +40,7 @@ Rendering::CameraWorldDirectionVectorConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, CameraWorldDirectionVectorConstant)
 
-void Rendering::CameraWorldDirectionVectorConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::CameraWorldDirectionVectorConstant ::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
  
@@ -49,7 +48,7 @@ void Rendering::CameraWorldDirectionVectorConstant
 
 	SetRegister(0, worldDVector);
 
-	SYSTEM_UNUSED_ARG(visual);
+ 
 }
 
 void Rendering::CameraWorldDirectionVectorConstant

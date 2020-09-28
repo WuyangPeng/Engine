@@ -1,0 +1,10 @@
+线性代数及其应用（Linear Algebra and Its Applications）
+（第3版）
+
+官方网站：http://www.laylinalgebra.com （已失效）
+
+☆
+作者：David C.Lay
+
+知识点 
+1.	线性代数基础知识。  

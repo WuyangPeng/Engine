@@ -7,17 +7,15 @@
 #include "Rendering/RenderingExport.h"
 
 #include "Dx9RenderTarget.h" 
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
 #include "CoreTools/ClassInvariant/Noexcept.h"
 
-Rendering::Dx9RenderTarget
-	::Dx9RenderTarget (Renderer* renderer,const RenderTarget* renderTarget) 
-	:ParentType{}
+Rendering::Dx9RenderTarget ::Dx9RenderTarget([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const RenderTarget* renderTarget)
+    : ParentType{}
 {
-	SYSTEM_UNUSED_ARG(renderTarget);
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 CoreTools::DoNothing();
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -26,34 +24,29 @@ CoreTools::DoNothing();
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, Dx9RenderTarget)
 
-void Rendering::Dx9RenderTarget
-	::Enable (Renderer* renderer)
+void Rendering::Dx9RenderTarget ::Enable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_9; 
 
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 
 	CoreTools::DoNothing();
 }
 
-void Rendering::Dx9RenderTarget
-	::Disable (Renderer* renderer)
+void Rendering::Dx9RenderTarget ::Disable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_9;  
 
-	 SYSTEM_UNUSED_ARG(renderer);
+	  
 
 	 CoreTools::DoNothing();
 }
 
-Rendering::ConstTexture2DSmartPointer Rendering::Dx9RenderTarget
-	::ReadColor(int index,Renderer* renderer)
+Rendering::ConstTexture2DSmartPointer Rendering::Dx9RenderTarget ::ReadColor([[maybe_unused]] int index, [[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_9;  
 
-	SYSTEM_UNUSED_ARG(index);
-	SYSTEM_UNUSED_ARG(renderer);
-
+ 
 	CoreTools::DoNothing();
 
 	return ConstTexture2DSmartPointer();

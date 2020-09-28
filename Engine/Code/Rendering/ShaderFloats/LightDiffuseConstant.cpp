@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "LightDiffuseConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -34,8 +34,7 @@ Rendering::LightDiffuseConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightDiffuseConstant)
 
-void Rendering::LightDiffuseConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::LightDiffuseConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -43,8 +42,7 @@ void Rendering::LightDiffuseConstant
 	 
 	SetRegister(0, light->GetDiffuse());
 
-	SYSTEM_UNUSED_ARG(visual);
-	SYSTEM_UNUSED_ARG(camera);
+ 
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::LightDiffuseConstant

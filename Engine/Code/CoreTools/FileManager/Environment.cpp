@@ -34,11 +34,10 @@ void CoreTools::Environment
 	sm_Environment.reset();
 }
 
-CoreTools::Environment
-::Environment(EnvironmentCreate environmentCreate)
-	:m_Impl{ make_shared<ImplType>() }
+CoreTools::Environment ::Environment([[maybe_unused]] EnvironmentCreate environmentCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(environmentCreate);
+ 
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

@@ -1,11 +1,11 @@
-Êı¾İÍÚ¾ò£ºÊµÓÃ»úÆ÷Ñ§Ï°¹¤¾ßÓë¼¼Êõ£¨Data Mining:Practical Machine Learning Tools and Techniques£©
-£¨µÚ3°æ£© 
+æ•°æ®æŒ–æ˜ï¼šå®ç”¨æœºå™¨å­¦ä¹ å·¥å…·ä¸æŠ€æœ¯ï¼ˆData Mining:Practical Machine Learning Tools and Techniquesï¼‰
+ï¼ˆç¬¬3ç‰ˆï¼‰ 
 
-¡î
-×÷Õß£ºIan H. Witten¡¢Eibe Frank
+â˜†
+ä½œè€…ï¼šIan H. Wittenã€Eibe Frank
 
-¹Ù·½ÍøÕ¾£º
+å®˜æ–¹ç½‘ç«™ï¼š
 http://www.cs.waikato.ac.nz/ml/weka
 
-ÖªÊ¶µã 
-1.	Êı¾İÍÚ¾ò»ù´¡ÖªÊ¶¡£  
+çŸ¥è¯†ç‚¹ 
+1.	æ•°æ®æŒ–æ˜åŸºç¡€çŸ¥è¯†ã€‚  

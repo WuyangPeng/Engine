@@ -1,83 +1,83 @@
-¿â
+åº“
 
-GSL£¨ÒıÇæÖ±½Ó¹ØÁª£©
+GSLï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. °æ±¾£º3.1.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/microsoft/GSL¡£
-3. gitµØÖ·£ºhttps://github.com/microsoft/GSL.git¡£
+1. ç‰ˆæœ¬ï¼š3.1.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/microsoft/GSLã€‚
+3. gitåœ°å€ï¼šhttps://github.com/microsoft/GSL.gitã€‚
 
-CppCoreGuidelines£¨ÒıÇæÖ±½Ó¹ØÁª£©
+CppCoreGuidelinesï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. ¹Ù·½ÍøÕ¾£ºhttps://github.com/isocpp/CppCoreGuidelines¡£
-2. gitµØÖ·£ºhttps://github.com/isocpp/CppCoreGuidelines.git¡£
+1. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/isocpp/CppCoreGuidelinesã€‚
+2. gitåœ°å€ï¼šhttps://github.com/isocpp/CppCoreGuidelines.gitã€‚
 
-boost£¨ÒıÇæÖ±½Ó¹ØÁª£©
+boostï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. °æ±¾£º1.73.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.boost.org/¡£
-3. ±àÒëÖ¸Áî£º
-  £¨1£©ÔËĞĞbootstrap¡£
-  £¨2£©ÔËĞĞb2 --toolset=msvc-10.0£¨ÌØ¶¨°æ±¾£©
-           b2£¨×îĞÂ°æ±¾£©	
-  £¨3£©ÓÉÓÚÁ´½Ócontext¿âĞèÒª£¬Ê¹ÓÃÑ¡Ïîasmflags=\safeseh¡£
+1. ç‰ˆæœ¬ï¼š1.73.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.boost.org/ã€‚
+3. ç¼–è¯‘æŒ‡ä»¤ï¼š
+  ï¼ˆ1ï¼‰è¿è¡Œbootstrapã€‚
+  ï¼ˆ2ï¼‰è¿è¡Œb2 --toolset=msvc-10.0ï¼ˆç‰¹å®šç‰ˆæœ¬ï¼‰
+           b2ï¼ˆæœ€æ–°ç‰ˆæœ¬ï¼‰	
+  ï¼ˆ3ï¼‰ç”±äºé“¾æ¥contextåº“éœ€è¦ï¼Œä½¿ç”¨é€‰é¡¹asmflags=\safesehã€‚
 
-stlsoft£¨ÒıÇæÖ±½Ó¹ØÁª£©
+stlsoftï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. °æ±¾£º1.10.1-beta16¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.stlsoft.org/¡£
-3. ÎÄ¼şstlsoft.h£¨ÔÚstlsoftÏÂ£©
-   ÔÚ732ĞĞ¸Ä³É
+1. ç‰ˆæœ¬ï¼š1.10.1-beta16ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.stlsoft.org/ã€‚
+3. æ–‡ä»¶stlsoft.hï¼ˆåœ¨stlsoftä¸‹ï¼‰
+   åœ¨732è¡Œæ”¹æˆ
    # elif (_MSC_VER < 2000)
    #  define STLSOFT_COMPILER_VERSION_STRING       "Visual C++ 14.1x"
 
-ACE£¨ÒıÇæÍ¨¹ıºêNETWORK_USE_ACE¹ØÁª£©
+ACEï¼ˆå¼•æ“é€šè¿‡å®NETWORK_USE_ACEå…³è”ï¼‰
 
-1. °æ±¾£º6.5.10¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://download.dre.vanderbilt.edu/¡¢ http://www.dre.vanderbilt.edu/~schmidt/ACE.html¡£
-3. ÔÚaceÄ¿Â¼ÏÂÔö¼ÓÎÄ¼şconfig.h°üº¬ÕıÈ·µÄconfigÎÄ¼ş¡£
+1. ç‰ˆæœ¬ï¼š6.5.10ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://download.dre.vanderbilt.edu/ã€ http://www.dre.vanderbilt.edu/~schmidt/ACE.htmlã€‚
+3. åœ¨aceç›®å½•ä¸‹å¢åŠ æ–‡ä»¶config.håŒ…å«æ­£ç¡®çš„configæ–‡ä»¶ã€‚
    #ifndef ACE_CONFIG_H
    #define ACE_CONFIG_H
 
        #include "config-win32.h"
 
    #endif /* ACE_CONFIG_H */
-   ¿ÉÊ¹ÓÃACEÏÂµÄÅú´¦ÀíÎÄ¼şCopyACEConfigÖ´ĞĞ¡£
-4. ±àÒëºÃx64°æ±¾ºó£¬ÊÖ¶¯½«ACE\ACE_wrappers\libÏÂÎÄ¼ş¸´ÖÆµ½ACE\ACE_wrappers\lib\X64£¬
-   È»ºóÔÙ±àÒëWin32°æ±¾£¬ÊÖ¶¯½«ACE\ACE_wrappers\libÏÂÎÄ¼ş¸´ÖÆµ½ACE\ACE_wrappers\lib\Win32¡£
-   ¿ÉÊ¹ÓÃACEÏÂµÄÅú´¦ÀíÎÄ¼şCopyACEWin32ºÍCopyACEX64Ö´ĞĞ¡£
-5. ±àÒëreleaseµÄWin32°æ±¾ºÍx64°æ±¾Ê±£¬ĞèÒªÏÈÖ´ĞĞÁíÒ»¸ö°æ±¾µÄ¹¤³ÌÇåÀí¡£
+   å¯ä½¿ç”¨ACEä¸‹çš„æ‰¹å¤„ç†æ–‡ä»¶CopyACEConfigæ‰§è¡Œã€‚
+4. ç¼–è¯‘å¥½x64ç‰ˆæœ¬åï¼Œæ‰‹åŠ¨å°†ACE\ACE_wrappers\libä¸‹æ–‡ä»¶å¤åˆ¶åˆ°ACE\ACE_wrappers\lib\X64ï¼Œ
+   ç„¶åå†ç¼–è¯‘Win32ç‰ˆæœ¬ï¼Œæ‰‹åŠ¨å°†ACE\ACE_wrappers\libä¸‹æ–‡ä»¶å¤åˆ¶åˆ°ACE\ACE_wrappers\lib\Win32ã€‚
+   å¯ä½¿ç”¨ACEä¸‹çš„æ‰¹å¤„ç†æ–‡ä»¶CopyACEWin32å’ŒCopyACEX64æ‰§è¡Œã€‚
+5. ç¼–è¯‘releaseçš„Win32ç‰ˆæœ¬å’Œx64ç‰ˆæœ¬æ—¶ï¼Œéœ€è¦å…ˆæ‰§è¡Œå¦ä¸€ä¸ªç‰ˆæœ¬çš„å·¥ç¨‹æ¸…ç†ã€‚
 
-openssl£¨ÒıÇæÍ¨¹ıºêNETWORK_USE_OPENSSL¹ØÁª£©
+opensslï¼ˆå¼•æ“é€šè¿‡å®NETWORK_USE_OPENSSLå…³è”ï¼‰
 
-1. °æ±¾£º1.1.1g¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.openssl.org/¡£
-3. ÏÂÔØ²¢°²×° ActivePerl¡£ÏÂÔØµØÖ·£ºhttp://www.activestate.com/activeperl/downloads 
-4. ´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»µ½ ($Perl64)\eg Ä¿Â¼£¬Ö´ĞĞ perl example.pl£¬
-   ÈôÌáÊ¾ Hello from ActivePerl! ÔòËµÃ÷ Perl °²×°³É¹¦¡£
-5. ÏÂÔØ²¢°²×° Nasm »ã±àÆ÷£¬²¢½«($NASM)\Ä¿Â¼Ìí¼Óµ½ÏµÍ³»·¾³±äÁ¿ Path ÖĞ¡£
-   ÏÂÔØµØÖ·£ºhttp://www.nasm.us/ 
-6. Í¨¹ı¹ÜÀíÔ±Éí·İÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁ ($openssl)Ä¿Â¼
-7. ÊäÈëperl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debug£¨±àÒëdebug°æ£©£¬
-   perl Configure VC-WIN32 --prefix=($openssl)\Win32\Release£¨±àÒërelease°æ±¾£©£¬    
-   »á³öÏÖ´íÎó£¬¿ÉºöÂÔ¡£
-8. ±àÒëX64£¬×ªµ½Ä¿Â¼Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\BuildÏÂÔËĞĞvcvars64.bat£¬
-   È»ºóÊäÈë perl Configure VC-WIN64A --debug --prefix=($openssl)\X64\Debug£¨±àÒëdebug°æ£©¡£
-   perl Configure VC-WIN64A --prefix=($openssl)\X64\Release£¨±àÒërelease°æ£©¡£    
-9. ±àÒëËÄ¸ö°æ±¾ÖĞĞèÒªÖ´ĞĞ nmake clean£¬ÔÙÊäÈëperlÓï¾ä¡£È»ºó
-   Ö´ĞĞ nmake¡¢nmake test¡¢nmake install¡£
+1. ç‰ˆæœ¬ï¼š1.1.1gã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.openssl.org/ã€‚
+3. ä¸‹è½½å¹¶å®‰è£… ActivePerlã€‚ä¸‹è½½åœ°å€ï¼šhttp://www.activestate.com/activeperl/downloads 
+4. æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½åˆ° ($Perl64)\eg ç›®å½•ï¼Œæ‰§è¡Œ perl example.plï¼Œ
+   è‹¥æç¤º Hello from ActivePerl! åˆ™è¯´æ˜ Perl å®‰è£…æˆåŠŸã€‚
+5. ä¸‹è½½å¹¶å®‰è£… Nasm æ±‡ç¼–å™¨ï¼Œå¹¶å°†($NASM)\ç›®å½•æ·»åŠ åˆ°ç³»ç»Ÿç¯å¢ƒå˜é‡ Path ä¸­ã€‚
+   ä¸‹è½½åœ°å€ï¼šhttp://www.nasm.us/ ã€‚
+6. é€šè¿‡ç®¡ç†å‘˜èº«ä»½è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³ ($openssl)ç›®å½•
+7. è¾“å…¥perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debugï¼ˆç¼–è¯‘debugç‰ˆï¼‰ï¼Œ
+   perl Configure VC-WIN32 --prefix=($openssl)\Win32\Releaseï¼ˆç¼–è¯‘releaseç‰ˆæœ¬ï¼‰ï¼Œ    
+   ä¼šå‡ºç°é”™è¯¯ï¼Œå¯å¿½ç•¥ã€‚
+8. ç¼–è¯‘X64ï¼Œè½¬åˆ°ç›®å½•Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Buildä¸‹è¿è¡Œvcvars64.batï¼Œ
+   ç„¶åè¾“å…¥ perl Configure VC-WIN64A --debug --prefix=($openssl)\X64\Debugï¼ˆç¼–è¯‘debugç‰ˆï¼‰ã€‚
+   perl Configure VC-WIN64A --prefix=($openssl)\X64\Releaseï¼ˆç¼–è¯‘releaseç‰ˆï¼‰ã€‚    
+9. ç¼–è¯‘å››ä¸ªç‰ˆæœ¬ä¸­éœ€è¦æ‰§è¡Œ nmake cleanï¼Œå†è¾“å…¥perlè¯­å¥ã€‚ç„¶å
+   æ‰§è¡Œ nmakeã€nmake testã€nmake installã€‚
 
-mysql £¨ÒıÇæÍ¨¹ıºêDATABASE_USE_MYSQL_C_API¹ØÁª£©
-1.  °æ±¾£º8.0.20¡£
-2.  ¹Ù·½ÍøÕ¾£ºhttps://www.mysql.com/¡£
-3.  ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4.  Windows.cmake 66ĞĞFATAL_ERROR¸Ä³ÉWARNING¡£
-5.  ¶¨ÒåÕıÈ·µÄBOOST_INCLUDE_DIRµ½($boost)¡£
-6.  boost.cmake 41ĞĞ¡¢300ĞĞ¡¢302ĞĞ¡¢310ĞĞ¸Ä³Éµ±Ç°Ê¹ÓÃµÄboost¿â°æ±¾¡£
-7.  ¶¨ÒåÕıÈ·µÄOPENSSL_ROOT_DIRµ½($openssl)£¬ĞèÒªÁ´½Ó¶ÔÓ¦°æ±¾µÄopenssl¡£ 
-8.  Win32°æ±¾µÄmysqld.vcxproj¹¤³ÌÎÄ¼şx64¸Ä³Éx86¡£
-9.  sql_locale.cc¡¢test_string_service_charset.cc¡¢sql_commands_help_data.hÁí´æÎªANSI±àÂë¡£
-10. ÎÄ¼şcrc32.cc£¨ÔÚstorage\innobase\utÏÂ£©
-    µÚ227ĞĞ¿ªÊ¼¸Ä³É
+mysql ï¼ˆå¼•æ“é€šè¿‡å®DATABASE_USE_MYSQL_C_APIå…³è”ï¼‰
+1.  ç‰ˆæœ¬ï¼š8.0.20ã€‚
+2.  å®˜æ–¹ç½‘ç«™ï¼šhttps://www.mysql.com/ã€‚
+3.  ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4.  Windows.cmake 66è¡ŒFATAL_ERRORæ”¹æˆWARNINGã€‚
+5.  å®šä¹‰æ­£ç¡®çš„BOOST_INCLUDE_DIRåˆ°($boost)ã€‚
+6.  boost.cmake 41è¡Œã€300è¡Œã€302è¡Œã€310è¡Œæ”¹æˆå½“å‰ä½¿ç”¨çš„booståº“ç‰ˆæœ¬ã€‚
+7.  å®šä¹‰æ­£ç¡®çš„OPENSSL_ROOT_DIRåˆ°($openssl)ï¼Œéœ€è¦é“¾æ¥å¯¹åº”ç‰ˆæœ¬çš„opensslã€‚ 
+8.  Win32ç‰ˆæœ¬çš„mysqld.vcxprojå·¥ç¨‹æ–‡ä»¶x64æ”¹æˆx86ã€‚
+9.  sql_locale.ccã€test_string_service_charset.ccã€sql_commands_help_data.hå¦å­˜ä¸ºANSIç¼–ç ã€‚
+10. æ–‡ä»¶crc32.ccï¼ˆåœ¨storage\innobase\utä¸‹ï¼‰
+    ç¬¬227è¡Œå¼€å§‹æ”¹æˆ
 	#if defined(_M_X64)  
 		crc_64bit = _mm_crc32_u64(crc_64bit, data);   
 	#else // !_M_X64 
@@ -87,150 +87,150 @@ mysql £¨ÒıÇæÍ¨¹ıºêDATABASE_USE_MYSQL_C_API¹ØÁª£©
 			ut_crc32_8_hw(&crc_64bit, &buf, &len); 
 		}
 	#endif /* defined (_M_X64) */
-11. ÎÄ¼ştables_contained_in.h£¨ÔÚincludeÏÂ£©
-    µÚ67ĞĞ¿ªÊ¼¸Ä³É
+11. æ–‡ä»¶tables_contained_in.hï¼ˆåœ¨includeä¸‹ï¼‰
+    ç¬¬67è¡Œå¼€å§‹æ”¹æˆ
     #if defined(_M_X64)  
 		_BitScanForward64(&idx, m_bits_left);  
 	#else // !_M_X64 
 		_BitScanForward(&idx, m_bits_left);
 	#endif /* defined (_M_X64) */
-11. ½«Ä¿Â¼include\boost_1_V_0ÖĞµÄV¸Ä³ÉÄ¿Ç°µÄboost¿â°æ±¾¡£
-12. ÓÉÓÚboost¿â°æ±¾²»Ò»ÖÂ£¬µ¼ÖÂ±àÒë²»¹ıÊ±£¬Ê¹ÓÃmysqlÖ¸¶¨µÄboost°æ±¾£¬
-	ĞèÒª¾É°æ±¾µÄboostÍ·ÎÄ¼ş¸´ÖÆµ½include\boost_1_V_0ÏÂ£¬È»ºóÓÃinclude\boost_1_V_0Ô­À´µÄÎÄ¼ş½øĞĞ¸²¸Ç¡£
+11. å°†ç›®å½•include\boost_1_V_0ä¸­çš„Væ”¹æˆç›®å‰çš„booståº“ç‰ˆæœ¬ã€‚
+12. ç”±äºbooståº“ç‰ˆæœ¬ä¸ä¸€è‡´ï¼Œå¯¼è‡´ç¼–è¯‘ä¸è¿‡æ—¶ï¼Œä½¿ç”¨mysqlæŒ‡å®šçš„boostç‰ˆæœ¬ï¼Œ
+	éœ€è¦æ—§ç‰ˆæœ¬çš„boostå¤´æ–‡ä»¶å¤åˆ¶åˆ°include\boost_1_V_0ä¸‹ï¼Œç„¶åç”¨include\boost_1_V_0åŸæ¥çš„æ–‡ä»¶è¿›è¡Œè¦†ç›–ã€‚
  
-mysql connector c++£¨ÒıÇæÍ¨¹ıºêDATABASE_USE_MYSQL_CPP_CONNECTOR¹ØÁª£©
-1. °æ±¾£º8.0.20¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.mysql.com/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ÉèÖÃÕıÈ·µÄWITH_SSL£¨Ô­Îªsystem£©Ö¸Ïò¶ÔÓ¦°æ±¾µÄ($openssl)£¬Èç±àÒëµÄÊÇx64°æ±¾£¬ĞèÒªÖ¸Ïòx64µÄopenssl¡£
+mysql connector c++ï¼ˆå¼•æ“é€šè¿‡å®DATABASE_USE_MYSQL_CPP_CONNECTORå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š8.0.20ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.mysql.com/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. è®¾ç½®æ­£ç¡®çš„WITH_SSLï¼ˆåŸä¸ºsystemï¼‰æŒ‡å‘å¯¹åº”ç‰ˆæœ¬çš„($openssl)ï¼Œå¦‚ç¼–è¯‘çš„æ˜¯x64ç‰ˆæœ¬ï¼Œéœ€è¦æŒ‡å‘x64çš„opensslã€‚
    
-protobuf£¨ÒıÇæÍ¨¹ıºêNETWORK_USE_PROTOBUF¹ØÁª£©
-1. °æ±¾£º3.12.3¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/protocolbuffers/protobuf¡£
-3. gitµØÖ·£ºhttps://github.com/protocolbuffers/protobuf.git¡£
-4. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+protobufï¼ˆå¼•æ“é€šè¿‡å®NETWORK_USE_PROTOBUFå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š3.12.3ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/protocolbuffers/protobufã€‚
+3. gitåœ°å€ï¼šhttps://github.com/protocolbuffers/protobuf.gitã€‚
+4. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
-freeglut£¨ÒıÇæÍ¨¹ıºêSYSTEM_USE_GLUT¹ØÁª£©
+freeglutï¼ˆå¼•æ“é€šè¿‡å®SYSTEM_USE_GLUTå…³è”ï¼‰
 
-1. °æ±¾£º3.2.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://freeglut.sourceforge.net/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+1. ç‰ˆæœ¬ï¼š3.2.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://freeglut.sourceforge.net/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
-wxWidgets£¨ÒıÇæÍ¨¹ıºêUSER_INTERFACE_USE_WX_WIDGETS¹ØÁª£©
+wxWidgetsï¼ˆå¼•æ“é€šè¿‡å®USER_INTERFACE_USE_WX_WIDGETSå…³è”ï¼‰
 
-1. °æ±¾£º3.1.3¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.wxwidgets.org/¡£
+1. ç‰ˆæœ¬ï¼š3.1.3ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.wxwidgets.org/ã€‚
 
-opencv£¨ÒıÇæÍ¨¹ıºêIMAGICS_USE_OPENCV¹ØÁª£©
+opencvï¼ˆå¼•æ“é€šè¿‡å®IMAGICS_USE_OPENCVå…³è”ï¼‰
 
-1. °æ±¾£º4.3.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://opencv.org/
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+1. ç‰ˆæœ¬ï¼š4.3.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://opencv.org/
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
-Visual Leak Detector£¨ÒıÇæDebug°æ±¾Ö±½Ó¹ØÁª£©
+Visual Leak Detectorï¼ˆå¼•æ“Debugç‰ˆæœ¬ç›´æ¥å…³è”ï¼‰
 
-1. °æ±¾£º2.5.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://archive.codeplex.com/?p=vld¡£
-3. gitµØÖ·£ºhttps://github.com/KindDragon/vld.git¡£
-4. vld.cpp£¬976ĞĞÈ¥µô¶Ô¸ß°æ±¾µÄVSµÄ±àÒëÏŞÖÆ¡£
-5. Allocs.cppµÚ35ĞĞ£¬testsuite.cppµÚ74ĞĞÔö¼Ó 
+1. ç‰ˆæœ¬ï¼š2.5.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://archive.codeplex.com/?p=vldã€‚
+3. gitåœ°å€ï¼šhttps://github.com/KindDragon/vld.gitã€‚
+4. vld.cppï¼Œ976è¡Œå»æ‰å¯¹é«˜ç‰ˆæœ¬çš„VSçš„ç¼–è¯‘é™åˆ¶ã€‚
+5. Allocs.cppç¬¬35è¡Œï¼Œtestsuite.cppç¬¬74è¡Œå¢åŠ  
    #elif _MSC_VER > 1900	// VS 2017
    #define CRTDLLNAME   _T("ucrtbased.dll")
-6. Allocs.cppµÚ60ĞĞ£¬testsuite.cppµÚ98ĞĞÔö¼Ó 
+6. Allocs.cppç¬¬60è¡Œï¼Œtestsuite.cppç¬¬98è¡Œå¢åŠ  
    #elif _MSC_VER > 1900	// VS 2017
    #define CRTDLLNAME   _T("ucrtbase.dll") 
-7. ¹¤³Ìvld_main_testÔö¼Óºê_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING¡£
-8. src\testsÏÂCommon.propsµÚ18ĞĞ¸Ä³Év142¡£
+7. å·¥ç¨‹vld_main_testå¢åŠ å®_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNINGã€‚
+8. src\testsä¸‹Common.propsç¬¬18è¡Œæ”¹æˆv142ã€‚
 
-OpenAL Soft£¨ÒıÇæÍ¨¹ıºêSOUND_EFFECT_USE_OPENAL¹ØÁª£©
-1. °æ±¾£º1.20.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.openal-soft.org/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+OpenAL Softï¼ˆå¼•æ“é€šè¿‡å®SOUND_EFFECT_USE_OPENALå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š1.20.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.openal-soft.org/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
-zlib£¨ÒıÇæÖ±½Ó¹ØÁª£©
-1. °æ±¾£º1.2.11¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.zlib.net/
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+zlibï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š1.2.11ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.zlib.net/
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
-freetype£¨ÒıÇæÖ±½Ó¹ØÁª£©
-1. °æ±¾£º2.10.2¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.freetype.org/
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+freetypeï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š2.10.2ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.freetype.org/
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
-lua£¨ÒıÇæÍ¨¹ıºêSCRIPT_USE_LUA¹ØÁª£©
-1. °æ±¾£º5.4.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.lua.org/
-3. ÔÚbuildÏÂ½¨Á¢VS¹¤³Ì£¬lua£¬¾²Ì¬¿â¡£°üº¬ÒÔÏÂÎÄ¼ş£ºlapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c 
+luaï¼ˆå¼•æ“é€šè¿‡å®SCRIPT_USE_LUAå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š5.4.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.lua.org/
+3. åœ¨buildä¸‹å»ºç«‹VSå·¥ç¨‹ï¼Œluaï¼Œé™æ€åº“ã€‚åŒ…å«ä»¥ä¸‹æ–‡ä»¶ï¼šlapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c 
    lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c ltm.c 
    lundump.c lvm.c lzio.c lauxlib.c lbaselib.c lbitlib.c lcorolib.c ldblib.c liolib.c lmathlib.c 
-   loslib.c lstrlib.c ltablib.c lutf8lib.c loadlib.c linit.c¡££¨³ıÈ¥luac.cºÍlua.cµÄËùÓĞÎÄ¼ş£©¡£
-   Êä³öÄ¿Â¼¸Ä³É£º$(SolutionDir)$(Platform)\$(Configuration)\¡£
-4. ½¨Á¢VS¹¤³Ì£¬³ÌĞòinterpreter£¨°üº¬lua.c£©ºÍcompiler£¨°üº¬luac.c£©¡£
-   Êä³öÄ¿Â¼¸Ä³É£º$(SolutionDir)$(Platform)\$(Configuration)\¡£
-   Ôö¼Ó¸½¼Ó¿âÄ¿Â¼£º$(SolutionDir)$(Platform)\$(Configuration)\¡£¸½¼ÓÒÀÀµÏîÔö¼Ó£ºlua.lib¡£
+   loslib.c lstrlib.c ltablib.c lutf8lib.c loadlib.c linit.cã€‚ï¼ˆé™¤å»luac.cå’Œlua.cçš„æ‰€æœ‰æ–‡ä»¶ï¼‰ã€‚
+   è¾“å‡ºç›®å½•æ”¹æˆï¼š$(SolutionDir)$(Platform)\$(Configuration)\ã€‚
+4. å»ºç«‹VSå·¥ç¨‹ï¼Œç¨‹åºinterpreterï¼ˆåŒ…å«lua.cï¼‰å’Œcompilerï¼ˆåŒ…å«luac.cï¼‰ã€‚
+   è¾“å‡ºç›®å½•æ”¹æˆï¼š$(SolutionDir)$(Platform)\$(Configuration)\ã€‚
+   å¢åŠ é™„åŠ åº“ç›®å½•ï¼š$(SolutionDir)$(Platform)\$(Configuration)\ã€‚é™„åŠ ä¾èµ–é¡¹å¢åŠ ï¼šlua.libã€‚
 
-perl£¨ÒıÇæÍ¨¹ıºêSCRIPT_USE_PERL¹ØÁª£©
-1. °æ±¾£º5.32.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.perl.org/
-3. ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬134ĞĞÈ¥³ı×¢ÊÍ¡£
-4. ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬23ĞĞµÄINST_DRVÉèÖÃ³É($perl)¡£
-5. ÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁ ($perl)/Win32Ä¿Â¼
-6. ±àÒëWin32µÄdebug°æ£¬ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬30ĞĞ¡¢163ĞĞÈ¥³ı×¢ÊÍ£¬24ĞĞÉèÖÃ³É$(INST_DRV)\BuildWin32\Debug¡£
-7. ±àÒëWin32µÄrelease°æ£¬ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬30ĞĞÈ¥³ı×¢ÊÍ£¬163ĞĞ×¢ÊÍ£¬24ĞĞÉèÖÃ³É$(INST_DRV)\BuildWin32\Release¡£
-8. ±àÒëX64£¬×ªµ½Ä¿Â¼Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\BuildÏÂÔËĞĞvcvars64.bat¡£
-9. ±àÒëX64µÄdebug°æ£¬ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬163ĞĞÈ¥³ı×¢ÊÍ£¬30ĞĞ×¢ÊÍ£¬24ĞĞÉèÖÃ³É$(INST_DRV)\BuildX64\Debug¡£
-10.±àÒëX64µÄrelease°æ£¬ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬30ĞĞ¡¢163ĞĞ×¢ÊÍ£¬24ĞĞÉèÖÃ³É$(INST_DRV)\BuildX64\Release¡£
-11.ÔÚWin32Ä¿Â¼²ã¼¶ÏÂÖ´ĞĞÃüÁînmake¡£
-12.±àÒëËÄ¸ö°æ±¾ÖĞĞèÒªÖ´ĞĞnmake clean£¬È»ºóÔÙÖ´ĞĞnmake¡¢nmake install¡£
-13.±àÒëWin32ºÍX64°æ±¾ÖĞĞèÒªÖØĞÂÊ¹ÓÃÔ­°æµÄperl±àÒë¡£
+perlï¼ˆå¼•æ“é€šè¿‡å®SCRIPT_USE_PERLå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š5.32.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.perl.org/
+3. ä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ134è¡Œå»é™¤æ³¨é‡Šã€‚
+4. ä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ23è¡Œçš„INST_DRVè®¾ç½®æˆ($perl)ã€‚
+5. è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³ ($perl)/Win32ç›®å½•
+6. ç¼–è¯‘Win32çš„debugç‰ˆï¼Œä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ30è¡Œã€163è¡Œå»é™¤æ³¨é‡Šï¼Œ24è¡Œè®¾ç½®æˆ$(INST_DRV)\BuildWin32\Debugã€‚
+7. ç¼–è¯‘Win32çš„releaseç‰ˆï¼Œä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ30è¡Œå»é™¤æ³¨é‡Šï¼Œ163è¡Œæ³¨é‡Šï¼Œ24è¡Œè®¾ç½®æˆ$(INST_DRV)\BuildWin32\Releaseã€‚
+8. ç¼–è¯‘X64ï¼Œè½¬åˆ°ç›®å½•Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Buildä¸‹è¿è¡Œvcvars64.batã€‚
+9. ç¼–è¯‘X64çš„debugç‰ˆï¼Œä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ163è¡Œå»é™¤æ³¨é‡Šï¼Œ30è¡Œæ³¨é‡Šï¼Œ24è¡Œè®¾ç½®æˆ$(INST_DRV)\BuildX64\Debugã€‚
+10.ç¼–è¯‘X64çš„releaseç‰ˆï¼Œä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ30è¡Œã€163è¡Œæ³¨é‡Šï¼Œ24è¡Œè®¾ç½®æˆ$(INST_DRV)\BuildX64\Releaseã€‚
+11.åœ¨Win32ç›®å½•å±‚çº§ä¸‹æ‰§è¡Œå‘½ä»¤nmakeã€‚
+12.ç¼–è¯‘å››ä¸ªç‰ˆæœ¬ä¸­éœ€è¦æ‰§è¡Œnmake cleanï¼Œç„¶åå†æ‰§è¡Œnmakeã€nmake installã€‚
+13.ç¼–è¯‘Win32å’ŒX64ç‰ˆæœ¬ä¸­éœ€è¦é‡æ–°ä½¿ç”¨åŸç‰ˆçš„perlç¼–è¯‘ã€‚
 
-Pantheios£¨ÒıÇæÍ¨¹ıºêCORE_TOOLS_USE_PANTHEIOS¹ØÁª£©
-1. °æ±¾£º1.0.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.pantheios.org/
-3. ĞŞ¸Äbuild\vc16.x64ºÍbuild\vc16ÏÂmakefileÎÄ¼ş£¬
-   µÚ77ĞĞ¸Ä³ÉPROJ_LIB_DIR =	$(PROJ_BASE_DIR)\X64\libºÍPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\lib¡£
-   ×¢ÊÍµôµÚ687ĞĞºÍ700ĞĞ£¨-WX¾¯¸æÊÓÎª´íÎó£©¡£
-   23ĞĞÏÂÔö¼Ó
+Pantheiosï¼ˆå¼•æ“é€šè¿‡å®CORE_TOOLS_USE_PANTHEIOSå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š1.0.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.pantheios.org/
+3. ä¿®æ”¹build\vc16.x64å’Œbuild\vc16ä¸‹makefileæ–‡ä»¶ï¼Œ
+   ç¬¬77è¡Œæ”¹æˆPROJ_LIB_DIR =	$(PROJ_BASE_DIR)\X64\libå’ŒPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\libã€‚
+   æ³¨é‡Šæ‰ç¬¬687è¡Œå’Œ700è¡Œï¼ˆ-WXè­¦å‘Šè§†ä¸ºé”™è¯¯ï¼‰ã€‚
+   23è¡Œä¸‹å¢åŠ 
    STLSOFT = ($stlsoft)
    ACE = ($ACE)
-4. ×¢ÊÍpantheios.hµÚ196ĞĞ£¬ÒòÎªÎŞ·¨ÏÂÔØµ½1.10.1 beta 20°æ±¾µÄstlsoft¡£
-5. test\component\test.component.bec.fprintfÏÂµÄÎÄ¼ştest.component.bec.fprintf.cpp×¢ÊÍµôµÚ182ĞĞ¡£
-6. ÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁbuild\vc16.x64ºÍbuild\vc16Ä¿Â¼£¬Ö´ĞĞnmake¡£
-7. ±àÒëX64£¬×ªµ½Ä¿Â¼Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\BuildÏÂÔËĞĞvcvars64.bat¡£
-8. ²»ÒªÖ´ĞĞnmake clean¡£
+4. æ³¨é‡Špantheios.hç¬¬196è¡Œï¼Œå› ä¸ºæ— æ³•ä¸‹è½½åˆ°1.10.1 beta 20ç‰ˆæœ¬çš„stlsoftã€‚
+5. test\component\test.component.bec.fprintfä¸‹çš„æ–‡ä»¶test.component.bec.fprintf.cppæ³¨é‡Šæ‰ç¬¬182è¡Œã€‚
+6. è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³build\vc16.x64å’Œbuild\vc16ç›®å½•ï¼Œæ‰§è¡Œnmakeã€‚
+7. ç¼–è¯‘X64ï¼Œè½¬åˆ°ç›®å½•Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Buildä¸‹è¿è¡Œvcvars64.batã€‚
+8. ä¸è¦æ‰§è¡Œnmake cleanã€‚
  
-Openrj£¨ÒıÇæÍ¨¹ıºêCORE_TOOLS_USE_OPENRJ¹ØÁª£©
-1. °æ±¾£º1.6.4¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.openrj.org/
-3. ĞŞ¸Äbuild\vc8ÏÂmakefileÎÄ¼ş£¬
-   µÚ26ĞĞ¸Ä³ÉCOMP_TAG = vc16¡£
-   µÚ44ĞĞ¸Ä³ÉPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\libºÍPROJ_LIB_DIR = $(PROJ_BASE_DIR)\X64\lib¡£
-   ×¢ÊÍµôµÚ110ĞĞºÍ115ĞĞ£¨-WX¾¯¸æÊÓÎª´íÎó£©¡£
-   25ĞĞÔö¼ÓSTLSOFT = ($stlsoft)¡£
-   ±àÒëX64£¬27ĞĞÏÂÔö¼Ó
+Openrjï¼ˆå¼•æ“é€šè¿‡å®CORE_TOOLS_USE_OPENRJå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š1.6.4ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.openrj.org/
+3. ä¿®æ”¹build\vc8ä¸‹makefileæ–‡ä»¶ï¼Œ
+   ç¬¬26è¡Œæ”¹æˆCOMP_TAG = vc16ã€‚
+   ç¬¬44è¡Œæ”¹æˆPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\libå’ŒPROJ_LIB_DIR = $(PROJ_BASE_DIR)\X64\libã€‚
+   æ³¨é‡Šæ‰ç¬¬110è¡Œå’Œ115è¡Œï¼ˆ-WXè­¦å‘Šè§†ä¸ºé”™è¯¯ï¼‰ã€‚
+   25è¡Œå¢åŠ STLSOFT = ($stlsoft)ã€‚
+   ç¼–è¯‘X64ï¼Œ27è¡Œä¸‹å¢åŠ 
    LD_ARGS = -machine:x64
-   ARCH_TAG = .x64¡£
-4. ÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁbuild\vc8Ä¿Â¼£¬Ö´ĞĞnmake¡£
-5. ²»ÒªÖ´ĞĞnmake clean¡£
+   ARCH_TAG = .x64ã€‚
+4. è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³build\vc8ç›®å½•ï¼Œæ‰§è¡Œnmakeã€‚
+5. ä¸è¦æ‰§è¡Œnmake cleanã€‚
 
-ogg£¨ÒıÇæÍ¨¹ıºêSOUND_EFFECT_USE_OGG¹ØÁª£©
-1. °æ±¾£º1.3.4¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.xiph.org/downloads/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+oggï¼ˆå¼•æ“é€šè¿‡å®SOUND_EFFECT_USE_OGGå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š1.3.4ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.xiph.org/downloads/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
-vorbis£¨ÒıÇæÍ¨¹ıºêSOUND_EFFECT_USE_VORBIS¹ØÁª£©
-1. °æ±¾£º1.3.7¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.xiph.org/downloads/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ¶¨ÒåÕıÈ·µÄOGG_INCLUDE_DIRµ½($ogg)/include¡£ 
-5. ¶¨ÒåÕıÈ·µÄOGG_LIBRARYµ½($ogg)/BuildX64/Release/ogg.libºÍ($ogg)/BuildWin32/Release/ogg.lib¡£  
+vorbisï¼ˆå¼•æ“é€šè¿‡å®SOUND_EFFECT_USE_VORBISå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š1.3.7ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.xiph.org/downloads/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. å®šä¹‰æ­£ç¡®çš„OGG_INCLUDE_DIRåˆ°($ogg)/includeã€‚ 
+5. å®šä¹‰æ­£ç¡®çš„OGG_LIBRARYåˆ°($ogg)/BuildX64/Release/ogg.libå’Œ($ogg)/BuildWin32/Release/ogg.libã€‚  
 
-FLTK£¨ÒıÇæÍ¨¹ıºêUSER_INTERFACE_USE_FLTK¹ØÁª£©
-1. °æ±¾£º1.3.5
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.fltk.org/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ÎÄ¼şFl_Device.cxx£º
-   µÚ84ĞĞ¸Ä³É
+FLTKï¼ˆå¼•æ“é€šè¿‡å®USER_INTERFACE_USE_FLTKå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š1.3.5
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.fltk.org/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. æ–‡ä»¶Fl_Device.cxxï¼š
+   ç¬¬84è¡Œæ”¹æˆ
    static
    #if defined(__APPLE__)
 		Fl_Quartz_Graphics_Driver
@@ -242,25 +242,25 @@ FLTK£¨ÒıÇæÍ¨¹ıºêUSER_INTERFACE_USE_FLTK¹ØÁª£©
 		driver;
    static Fl_Display_Device display(&driver);
    return &display;
-   ÒÔÏû³ıƒÈ´æĞ¹Â¶¡£ 
+   ä»¥æ¶ˆé™¤å…§å­˜æ³„éœ²ã€‚ 
    
-chipmunk2D physics£¨ÒıÇæÍ¨¹ıºêPHYSICS_USE_CHIPMUNK2D¹ØÁª£©
-1. °æ±¾£º7.0.3¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://chipmunk-physics.net/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. chipmunk_demosµÄC++ÓïÑÔ±ê×¼¸Ä³É£ºstd:c++latest¡£
+chipmunk2D physicsï¼ˆå¼•æ“é€šè¿‡å®PHYSICS_USE_CHIPMUNK2Då…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š7.0.3ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://chipmunk-physics.net/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. chipmunk_demosçš„C++è¯­è¨€æ ‡å‡†æ”¹æˆï¼šstd:c++latestã€‚
 5. ChipmunkDebugDraw.c
-   µÚ44ĞĞµÄ(RGBA8)¸Ä³ÉRGBA8¡£
-   ×¢ÊÍµÚ63ĞĞµ½150ĞĞ¡£ 
-   µÚ170ĞĞµ½175ĞĞ£¬µÚ183ĞĞµ½186ĞĞ£¬206ĞĞµ½213ĞĞ£¬267ĞĞµ½270ĞĞµÄ(Vertex)¸Ä³ÉVertex¡£
-   µÚ171ĞĞºÍ182ĞĞ¸Ä³É
+   ç¬¬44è¡Œçš„(RGBA8)æ”¹æˆRGBA8ã€‚
+   æ³¨é‡Šç¬¬63è¡Œåˆ°150è¡Œã€‚ 
+   ç¬¬170è¡Œåˆ°175è¡Œï¼Œç¬¬183è¡Œåˆ°186è¡Œï¼Œ206è¡Œåˆ°213è¡Œï¼Œ267è¡Œåˆ°270è¡Œçš„(Vertex)æ”¹æˆVertexã€‚
+   ç¬¬171è¡Œå’Œ182è¡Œæ”¹æˆ
    Index index[] = { 0, 1, 2, 0, 2, 3 };
    Vertex *vertexes = push_vertexes(4, index, 6);
 6. ChipmunkDemo.c   
-   µÚ353ĞĞµ½µÚ355ĞĞ¸Ä³É
+   ç¬¬353è¡Œåˆ°ç¬¬355è¡Œæ”¹æˆ
    sg_pass_action action{};
    action.colors[0] = {.action = SG_ACTION_CLEAR, .val = {0x07/255.0f, 0x36/255.0f, 0x42/255.0f}};
-   µÚ629ĞĞµ½µÚ638ĞĞ¸Ä³É
+   ç¬¬629è¡Œåˆ°ç¬¬638è¡Œæ”¹æˆ
    return sapp_desc{
 			.init_cb = Init,
 			.frame_cb = Display,
@@ -272,5 +272,5 @@ chipmunk2D physics£¨ÒıÇæÍ¨¹ıºêPHYSICS_USE_CHIPMUNK2D¹ØÁª£©
 			.window_title = "Chipmunk2D",
 		};
 7. ChipmunkDemoTextSupport.c
-   ×¢ÊÍµÚ69ĞĞµ½165ĞĞ¡£
-   µÚ206ĞĞµ½209ĞĞµÄ(Vertex)¸Ä³ÉVertex¡£
+   æ³¨é‡Šç¬¬69è¡Œåˆ°165è¡Œã€‚
+   ç¬¬206è¡Œåˆ°209è¡Œçš„(Vertex)æ”¹æˆVertexã€‚

@@ -8,7 +8,7 @@
 #define CORE_MEMORY_TOOLS_POOL_DETAIL_H
 
 #include "Pool.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -116,11 +116,9 @@ T* CoreTools::Pool<T>
 
 // private
 template<class T>
-bool CoreTools::Pool<T>
-	::ConformCondition(T* ptr)
+bool CoreTools::Pool<T>::ConformCondition([[maybe_unused]] T* ptr)
 {
-	SYSTEM_UNUSED_ARG(ptr);
-
+ 
 	CoreTools::DoNothing();
 
 	return true;

@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "LightSpotConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -36,8 +36,7 @@ Rendering::LightSpotConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightSpotConstant)
 
-void Rendering::LightSpotConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::LightSpotConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -47,8 +46,7 @@ void Rendering::LightSpotConstant
 	 
 	SetRegister(0, data); 
 
-	SYSTEM_UNUSED_ARG(camera);
-	SYSTEM_UNUSED_ARG(visual);
+ ;
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::LightSpotConstant

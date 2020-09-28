@@ -34,11 +34,10 @@ void Rendering::ShaderManager
 	sm_ShaderManager.reset();
 }
 
-Rendering::ShaderManager
-::ShaderManager(ShaderManagerCreate shaderManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Rendering::ShaderManager ::ShaderManager([[maybe_unused]] ShaderManagerCreate shaderManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(shaderManagerCreate);
+ 
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

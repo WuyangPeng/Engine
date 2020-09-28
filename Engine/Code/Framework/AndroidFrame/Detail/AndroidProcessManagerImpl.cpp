@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "AndroidProcessManagerImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Android/AndroidInputKeyEvent.h"
 #include "System/Android/AndroidInputMotionEvent.h"
 #include "System/Android/Flags/AndroidNativeAppGlueFlags.h"
@@ -174,17 +174,14 @@ int Framework::AndroidProcessManagerImpl
 		return NotDealMessage(androidApp, event);
 }
  
-void Framework::AndroidProcessManagerImpl
-	::NotDealMessage(const AndroidApp* state) noexcept
+void Framework::AndroidProcessManagerImpl ::NotDealMessage([[maybe_unused]] const AndroidApp* state) noexcept
 {
-	SYSTEM_UNUSED_ARG(state);
+	 
 }
 
-int Framework::AndroidProcessManagerImpl
-	::NotDealMessage(const AndroidApp* state, const AndroidInputEvent* event) noexcept
+int Framework::AndroidProcessManagerImpl ::NotDealMessage([[maybe_unused]] const AndroidApp* state, [[maybe_unused]] const AndroidInputEvent* event) noexcept
 {
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(event);
+	 
 
 	return 0;
 }

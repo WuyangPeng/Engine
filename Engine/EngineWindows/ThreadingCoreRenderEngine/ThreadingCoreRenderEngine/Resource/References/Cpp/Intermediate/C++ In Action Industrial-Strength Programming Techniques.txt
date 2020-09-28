@@ -1,10 +1,10 @@
-C++ Êµ¼ùÖ®Â·£¨C++ In Action:Industrial-Strength Programming Techniques£©
+C++ å®è·µä¹‹è·¯ï¼ˆC++ In Action:Industrial-Strength Programming Techniquesï¼‰
 
-¡î
-×÷Õß£ºBartosz Milewski
+â˜†
+ä½œè€…ï¼šBartosz Milewski
 
-ÖªÊ¶µã 
-1.	C++	»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	C++	åŸºç¡€çŸ¥è¯†ã€‚ 
 
-´úÂë 
-1.  Êé¼®´úÂë¡£ 
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚ 

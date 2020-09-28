@@ -8,7 +8,7 @@
   <ItemDefinitionGroup>
     <Link>
       <AdditionalLibraryDirectories>$(LibsEnvironmentX64DebugLib);$(EngineStaticX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>   
+    </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>

@@ -9,7 +9,7 @@
 #include "Spatial.h"
 #include "SpatialData.h"
 #include "Culler.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include "CoreTools/ObjectSystems/ObjectManager.h"
@@ -356,15 +356,11 @@ void Rendering::Spatial
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-const Rendering::PickRecordContainer Rendering::Spatial
-	::ExecuteRecursive(const APoint& origin, const AVector& direction,float tMin, float tMax) const 
+const Rendering::PickRecordContainer Rendering::Spatial ::ExecuteRecursive([[maybe_unused]] const APoint& origin, [[maybe_unused]] const AVector& direction, [[maybe_unused]] float tMin, [[maybe_unused]] float tMax) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	SYSTEM_UNUSED_ARG(origin);
-	SYSTEM_UNUSED_ARG(direction);
-	SYSTEM_UNUSED_ARG(tMin);
-	SYSTEM_UNUSED_ARG(tMax);
+ 
 
 	return PickRecordContainer();
 }

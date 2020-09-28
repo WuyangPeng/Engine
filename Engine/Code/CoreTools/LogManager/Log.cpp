@@ -40,11 +40,10 @@ void CoreTools::Log
 	sm_Log.reset();
 }
 
-CoreTools::Log
-::Log(LogCreate logCreate)
-	:m_Impl{ make_shared<ImplType>() }
+CoreTools::Log ::Log([[maybe_unused]] LogCreate logCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(logCreate);
+ 
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

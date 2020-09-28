@@ -9,7 +9,7 @@
 
 #include "LiteralCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "System/Helper/UnusedMacro.h"
+
 
 #include <boost/static_assert.hpp>
 #include "System/Helper/PragmaWarning/LimitTraits.h"
@@ -39,7 +39,7 @@ CoreTools::LiteralCast<T, V>
 
 	void(*ptr)() = Constranints;
 
-	SYSTEM_UNUSED_ARG(ptr);
+	
 }
 
 template<typename T, int64_t V>

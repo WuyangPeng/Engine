@@ -1,0 +1,4 @@
+参考文献·开源库·数据库
+
+1.	mysql 
+2.  mysql connector c++ 

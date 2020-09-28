@@ -22,12 +22,11 @@ Framework::WindowMessageInterface
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowMessageInterface)
 
-bool Framework::WindowMessageInterface
-	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::WindowMessageInterface ::PreCreate([[maybe_unused]] const EnvironmentDirectory& environmentDirectory)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(environmentDirectory);
+ 
 
 	CoreTools::DoNothing();
 
@@ -273,14 +272,12 @@ System::WindowLResult Framework::WindowMessageInterface
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::EraseBkgnd, wParam, lParam);
 }
 
-void Framework::WindowMessageInterface
-	::Display(HWnd hwnd, int64_t timeDelta)
+void Framework::WindowMessageInterface ::Display([[maybe_unused]] HWnd hwnd, [[maybe_unused]] int64_t timeDelta)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	SYSTEM_UNUSED_ARG(hwnd);
-	SYSTEM_UNUSED_ARG(timeDelta);
+ 
 
 	CoreTools::DoNothing();
 }

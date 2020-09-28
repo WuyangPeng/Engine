@@ -1,13 +1,13 @@
-C++ ¸ß¼¶±à³Ì£¨Professional C++£©
+C++ é«˜çº§ç¼–ç¨‹ï¼ˆProfessional C++ï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://www.wrox.com¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.wrox.comã€‚
 
-¡ğ
-×÷Õß£ºNicholas A.Solter¡¢Scott J.Kleper
+â—‹
+ä½œè€…ï¼šNicholas A.Solterã€Scott J.Kleper
 
-ÖªÊ¶µã 
+çŸ¥è¯†ç‚¹ 
+1.	C++	åŸºç¡€çŸ¥è¯†ã€‚   
 
-´úÂë 
-
-Òªµã  
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚ 

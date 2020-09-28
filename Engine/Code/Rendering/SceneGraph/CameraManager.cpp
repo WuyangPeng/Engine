@@ -35,11 +35,10 @@ void Rendering::CameraManager
 	sm_CameraManager.reset();
 }
 
-Rendering::CameraManager
-::CameraManager(CameraManagerCreate cameraManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Rendering::CameraManager ::CameraManager([[maybe_unused]] CameraManagerCreate cameraManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(cameraManagerCreate);
+ 
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }

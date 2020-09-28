@@ -9,7 +9,7 @@
 
 #include "ContPointInPolyhedron3.h"
 #include "ContPointInPolygon2.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorRay3Plane3.h"
 #include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorRay3Plane3.h"
 #include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorRay3Triangle3.h"
@@ -270,7 +270,7 @@ bool Mathematics::PointInPolyhedron3<Real>
             // led to a discrepancy between FastNoIntersect and the Find()
             // result.
             MATHEMATICS_ASSERTION_0(intersects, "Unexpected condition\n");
-            SYSTEM_UNUSED_ARG(intersects);
+            
 
 			auto intr = ray.GetOrigin() + calc.GetRayParameter()*ray.GetDirection();
 
@@ -362,7 +362,7 @@ bool Mathematics::PointInPolyhedron3<Real>
             // led to a discrepancy between FastNoIntersect and the Find()
             // result.
             MATHEMATICS_ASSERTION_0(intersects, "Unexpected condition\n");
-            SYSTEM_UNUSED_ARG(intersects);
+            
 
 			auto intr = ray.GetOrigin() + calc.GetRayParameter()*ray.GetDirection();
 

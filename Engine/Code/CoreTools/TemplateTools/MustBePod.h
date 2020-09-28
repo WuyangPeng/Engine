@@ -9,7 +9,7 @@
 #define CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_POD_H
 
 #include "CoreTools/CoreToolsDll.h"
-#include "System/Helper/UnusedMacro.h"
+
 
 namespace CoreTools
 {
@@ -20,7 +20,7 @@ namespace CoreTools
 		{
 			void(*ptr)() = Constranints;
 
-			SYSTEM_UNUSED_ARG(ptr);
+			
 		}
 
 	private:
@@ -31,7 +31,7 @@ namespace CoreTools
 				T TIsNotPODType;
 			} unionType;
 
-			SYSTEM_UNUSED_ARG(unionType);
+			
 		}
 	};
 
@@ -42,7 +42,7 @@ namespace CoreTools
 		{
 			void(*ptr)() = Constranints;
 
-			SYSTEM_UNUSED_ARG(ptr);
+			
 		}
 
 	private:
@@ -53,7 +53,7 @@ namespace CoreTools
 				T TIsNotPODTypeOrVoid;
 			} unionType;
 
-			SYSTEM_UNUSED_ARG(unionType);
+			
 		}
 	};
 

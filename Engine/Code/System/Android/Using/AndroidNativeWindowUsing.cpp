@@ -1,53 +1,48 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 13:02)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/27 19:18)
 
 #include "System/SystemExport.h"
 
 #include "AndroidNativeWindowUsing.h"
-#include "System/Helper/EnumCast.h"
 #include "System/Android/Flags/AndroidNativeWindowFlags.h"
+#include "System/Helper/EnumCast.h"
 
 #ifndef SYSTEM_PLATFORM_ANDROID
 
-System::AndroidNativeWindowBuffer
-	::AndroidNativeWindowBuffer() noexcept
-	:width{ 0 }, height{ 0 }, stride{ 0 }, format{ EnumCastUnderlying(WindowFormat::RGBA8888) }, bits{}, reserved{}
+System::AndroidNativeWindowBuffer::AndroidNativeWindowBuffer() noexcept
+    : width{ 0 }, height{ 0 }, stride{ 0 }, format{ EnumCastUnderlying(WindowFormat::RGBA8888) }, bits{}, reserved{}
 {
-
 }
 
-System::AndroidRect
-	::AndroidRect() noexcept
-	:left{ 0 }, top{ 0 }, right{ 0 }, bottom{ 0 }
+System::AndroidRect::AndroidRect() noexcept
+    : left{ 0 }, top{ 0 }, right{ 0 }, bottom{ 0 }
 {
-
 }
 
-int System::AndroidRect
-	::GetLeft() const noexcept
+int System::AndroidRect::GetLeft() const noexcept
 {
-	return left;
+    return left;
 }
 
-int System::AndroidRect
-	::GetTop() const noexcept
+int System::AndroidRect::GetTop() const noexcept
 {
-	return top;
+    return top;
 }
 
-int System::AndroidRect
-	::GetRight() const noexcept
+int System::AndroidRect::GetRight() const noexcept
 {
-	return right;
+    return right;
 }
 
-int System::AndroidRect
-	::GetBottom() const noexcept
+int System::AndroidRect::GetBottom() const noexcept
 {
-	return bottom;
+    return bottom;
 }
 
-#endif // SYSTEM_PLATFORM_ANDROID
+#endif  // SYSTEM_PLATFORM_ANDROID

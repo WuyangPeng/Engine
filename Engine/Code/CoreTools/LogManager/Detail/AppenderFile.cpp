@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AppenderFile.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/FileManager/FileTools.h"
 #include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/LogManager/LogMessage.h"
@@ -139,7 +139,7 @@ System::String CoreTools::AppenderFile
 void CoreTools::AppenderFile
 	::NewDirectory(const String& directory) noexcept
 {
-	System::CreateFileDirectory(directory, nullptr);
+    [[maybe_unused]] const auto result = System::CreateFileDirectory(directory, nullptr);
 }
 
 System::String CoreTools::AppenderFile

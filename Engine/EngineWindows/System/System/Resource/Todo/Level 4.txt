@@ -1,8 +1,8 @@
 TODO Level 4
 
-0.2.0.0
+0.5.1.0
 
-1.£¨CharacterString£©Íê³ÉCharacterString·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºCodePage¡£
-2.£¨CharacterString£©Íê³ÉCharacterString·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºFormatErrorMessage¡¢StringConversion¡¢FormatString¡£
-3.£¨FileManager£©Íê³ÉFileManager·ÇWindowsÆ½Ì¨µÄÊµÏÖ£º File¡¢FileTime¡¢FileTools¡¢FindFile¡£
-4.£¨FileManager£©°²×¿ÏµÍ³ÆÁ±ÎGetEnvironmentº¯ÊıµÄµ÷ÓÃ£¬²é¿´ÊÇ·ñÓĞ½â¾ö·½°¸¡£
+1.ï¼ˆCharacterStringï¼‰å®ŒæˆCharacterStringéWindowså¹³å°çš„å®ç°ï¼šCodePageã€‚
+2.ï¼ˆCharacterStringï¼‰å®ŒæˆCharacterStringéWindowså¹³å°çš„å®ç°ï¼šFormatErrorMessageã€StringConversionã€FormatStringã€‚
+3.ï¼ˆFileManagerï¼‰å®ŒæˆFileManageréWindowså¹³å°çš„å®ç°ï¼š Fileã€FileTimeã€FileToolsã€FindFileã€‚
+4.ï¼ˆFileManagerï¼‰å®‰å“ç³»ç»Ÿå±è”½GetEnvironmentå‡½æ•°çš„è°ƒç”¨ï¼ŒæŸ¥çœ‹æ˜¯å¦æœ‰è§£å†³æ–¹æ¡ˆã€‚

@@ -1,0 +1,9 @@
+SQL 完全手册  （SQL:The Complete Reference）
+（第2版）
+
+☆
+作者：  James R.Groff、Paul N.Weinberg
+
+知识点 
+1.	SQL基础知识。  
+

@@ -11,7 +11,7 @@
 #include "VirtualKeysTypes.h"
 #include "Flags/MouseTypes.h"
 #include "System/Helper/EnumCast.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Window/WindowUser.h"
 #include "System/Window/WindowCreate.h"
@@ -108,15 +108,13 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::CloseMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::CloseMessage(HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	DoCloseMessage(hwnd);
 
-	SYSTEM_UNUSED_ARG(wParam);
-	SYSTEM_UNUSED_ARG(lParam);
+ 
 
 	return 0;
 }
@@ -154,8 +152,7 @@ System::String Framework::WindowMessage<MiddleLayer>
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::CharMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::CharMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -173,8 +170,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 		m_MiddleLayer->KeyDown(key, point);
 	}
-
-	SYSTEM_UNUSED_ARG(lParam);
+ 
 
 	return 0;
 }
@@ -191,22 +187,19 @@ const Framework::WindowPoint Framework::WindowMessage<MiddleLayer>
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MoveMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::MoveMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	m_MiddleLayer->Move(WindowPoint{ lParam });
 
-	SYSTEM_UNUSED_ARG(hwnd);
-	SYSTEM_UNUSED_ARG(wParam);
+ 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::KeyDownMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -222,7 +215,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 	// KeyDown在CharMessage上监听。
 
-	SYSTEM_UNUSED_ARG(lParam);
+ 
 
 	return 0;
 }
@@ -250,8 +243,7 @@ bool Framework::WindowMessage<MiddleLayer>
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::KeyUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::KeyUpMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -268,15 +260,13 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 	{
 		m_MiddleLayer->KeyUp(virtualKey, point);
 	}
-
-	SYSTEM_UNUSED_ARG(lParam);
+ 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::LeftButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::LeftButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -284,15 +274,13 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 	const VirtualKeysTypes virtualKeys{ wParam };
 
 	m_MiddleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, windowPoint, virtualKeys);
-
-	SYSTEM_UNUSED_ARG(hwnd);
+ 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::LeftButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::LeftButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -301,14 +289,13 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 	m_MiddleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, windowPoint, virtualKeys);
 
-	SYSTEM_UNUSED_ARG(hwnd);
+ 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MiddleButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::MiddleButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -317,14 +304,13 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 	m_MiddleLayer->MouseClick(MouseButtonsTypes::MiddleButton, MouseStateTypes::MouseDown, windowPoint, virtualKeys);
 
-	SYSTEM_UNUSED_ARG(hwnd);
+ 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MiddleButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::MiddleButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -333,14 +319,13 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 	m_MiddleLayer->MouseClick(MouseButtonsTypes::MiddleButton, MouseStateTypes::MouseUp, windowPoint, virtualKeys);
 
-	SYSTEM_UNUSED_ARG(hwnd);
+ 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::RightButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::RightButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -349,14 +334,13 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 	m_MiddleLayer->MouseClick(MouseButtonsTypes::RightButton, MouseStateTypes::MouseDown, windowPoint, virtualKeys);
 
-	SYSTEM_UNUSED_ARG(hwnd);
+	 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::RightButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::RightButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -365,7 +349,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 	m_MiddleLayer->MouseClick(MouseButtonsTypes::RightButton, MouseStateTypes::MouseUp, windowPoint, virtualKeys);
 
-	SYSTEM_UNUSED_ARG(hwnd);
+	 
 
 	return 0;
 }
@@ -388,14 +372,13 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 		m_MiddleLayer->PassiveMotion(windowPoint);
 	}
 
-	SYSTEM_UNUSED_ARG(hwnd);
+ 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::MouseWheelMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::MouseWheelMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -404,7 +387,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 
 	m_MiddleLayer->MouseWheel(System::GetHighWord(wParam) / System::EnumCastUnderlying(System::WindowMessages::MouseWheel), windowPoint, virtualKeys);
 
-	SYSTEM_UNUSED_ARG(hwnd);
+ 
 
 	return 0;
 }
@@ -421,32 +404,26 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::PaintMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::PaintMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	m_MiddleLayer->Paint();	 
 
-	SYSTEM_UNUSED_ARG(hwnd);
-	SYSTEM_UNUSED_ARG(wParam);
-	SYSTEM_UNUSED_ARG(lParam);
+ 
 
 	return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>
-	::EraseBackgroundMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowLResult Framework::WindowMessage<MiddleLayer>::EraseBackgroundMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	CoreTools::DoNothing();
 
 	// 这告诉Windows不擦除背景（由OpenGL或DirectX来完成）。
-	SYSTEM_UNUSED_ARG(hwnd);
-	SYSTEM_UNUSED_ARG(wParam);
-	SYSTEM_UNUSED_ARG(lParam);
+ 
 
 	return 1;
 }

@@ -1,17 +1,17 @@
-C++ ±à³ÌÏ°ÌâÓë½â´ğ£¨Programming With C++£©
+C++ ç¼–ç¨‹ä¹ é¢˜ä¸è§£ç­”ï¼ˆProgramming With C++ï¼‰
 
-¹Ù·½ÍøÕ¾ 
-http://projectEuclid.net/schaums £¨ÒÑÊ§Ğ§£©¡¢ http://www.richmond.edu/~hubbard/shaums £¨ÒÑÊ§Ğ§£©¡¢
-http://hubbards.org/schaums £¨ÒÑÊ§Ğ§£©¡¢ http://jhubbard.net/schaums £¨ÒÑÊ§Ğ§£©¡£
+å®˜æ–¹ç½‘ç«™ 
+http://projectEuclid.net/schaums ï¼ˆå·²å¤±æ•ˆï¼‰ã€ http://www.richmond.edu/~hubbard/shaums ï¼ˆå·²å¤±æ•ˆï¼‰ã€
+http://hubbards.org/schaums ï¼ˆå·²å¤±æ•ˆï¼‰ã€ http://jhubbard.net/schaums ï¼ˆå·²å¤±æ•ˆï¼‰ã€‚
 
-¡ğ
-×÷Õß£ºJolvi R. Hubbard
+â—‹
+ä½œè€…ï¼šJolvi R. Hubbard
 
-ÖªÊ¶µã 
-1.	C++»ù´¡ÖªÊ¶¡£ 
-2.	C++»ù´¡ÖªÊ¶Á·Ï°¡£
+çŸ¥è¯†ç‚¹ 
+1.	C++åŸºç¡€çŸ¥è¯†ã€‚ 
+2.	C++åŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚
 
-´úÂë 
-1.  Êé¼®´úÂë¡£
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚
 
   

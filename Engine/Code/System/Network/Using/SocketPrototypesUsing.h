@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 15:25)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/24 17:59)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
@@ -10,128 +13,128 @@
 #include "System/Helper/Platform.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
-	#include <WinSock2.h>
-	#include <Ws2ipdef.h> 
-#else // !SYSTEM_PLATFORM_WIN32
-	#include "System/Window/Using/WindowUsing.h"
-#endif // SYSTEM_PLATFORM_WIN32
+    #include <WinSock2.h>
+    #include <Ws2ipdef.h>
+#else  // !SYSTEM_PLATFORM_WIN32
+    #include "System/Window/Using/WindowUsing.h"
+#endif  // SYSTEM_PLATFORM_WIN32
 
 namespace System
-{	
+{
 #ifdef SYSTEM_PLATFORM_WIN32
 
-	 using WinSockInAddr = in_addr;
-	 using WinSockAddrIn = sockaddr_in;
-	 using WinSockIn6Addr = in6_addr;
-	 using WinSockAddrIn6 = sockaddr_in6;
-	 using WinSockScopeID = SCOPE_ID;
-	 using WinSocket = SOCKET;	
-	 using WinSockAddr = sockaddr;	
-	 using WinSockFdSet = fd_set;	 
-	 using WinSockTimeval = timeval;	
-	 using SocketLinger = LINGER;
+    using WinSockInAddr = in_addr;
+    using WinSockAddrIn = sockaddr_in;
+    using WinSockIn6Addr = in6_addr;
+    using WinSockAddrIn6 = sockaddr_in6;
+    using WinSockScopeID = SCOPE_ID;
+    using WinSocket = SOCKET;
+    using WinSockAddr = sockaddr;
+    using WinSockFdSet = fd_set;
+    using WinSockTimeval = timeval;
+    using SocketLinger = LINGER;
 
-	 constexpr WinSocket g_InvalidSocket{ INVALID_SOCKET };
-	 constexpr int g_SocketError{ SOCKET_ERROR };
-	 constexpr int g_InAddrAny{ INADDR_ANY };
-	 constexpr int g_FdSetSize{ FD_SETSIZE };
-	 constexpr int g_InAddrLoopback{ INADDR_LOOPBACK };
+    constexpr WinSocket g_InvalidSocket{ INVALID_SOCKET };
+    constexpr auto g_SocketError = SOCKET_ERROR;
+    constexpr auto g_InAddrAny = INADDR_ANY;
+    constexpr auto g_FdSetSize = FD_SETSIZE;
+    constexpr auto g_InAddrLoopback = INADDR_LOOPBACK;
 
-#else // !SYSTEM_PLATFORM_WIN32	
- 
-	 struct WinSockInAddr
-	 {
-		 union 
-		 {
-			 struct 
-			 { 
-				 uint8_t s_b1,s_b2,s_b3,s_b4; 
-			 } S_un_b;
-			 struct 
-			 { 
-				 uint16_t s_w1,s_w2;
-			 } S_un_w;
-			 WindowULong S_addr;
-		 } S_un; 
-	 };	  
+#else  // !SYSTEM_PLATFORM_WIN32
 
-	 struct WinSockAddrIn
-	 {
-		 int16_t sin_family;
-		 uint16_t sin_port;
-		 WinSockInAddr sin_addr;
-		 char sin_zero[8];
-	 };
+    struct WinSockInAddr
+    {
+        union
+        {
+            struct
+            {
+                uint8_t s_b1, s_b2, s_b3, s_b4;
+            } S_un_b;
+            struct
+            {
+                uint16_t s_w1, s_w2;
+            } S_un_w;
+            WindowULong S_addr;
+        } S_un;
+    };
 
-	 struct WinSockIn6Addr
-	 {
-		 union 
-		 {
-			 uint8_t Byte[16];
-			 uint16_t Word[8];
-		 } u;
-	 };
+    struct WinSockAddrIn
+    {
+        int16_t sin_family;
+        uint16_t sin_port;
+        WinSockInAddr sin_addr;
+        char sin_zero[8];
+    };
 
-	 struct WinSockScopeID
-	 {
-		 union 
-		 {
-			 struct
-			 {
-				 WindowULong Zone : 28;
-				 WindowULong Level : 4;
-			 };
-			 WindowULong Value;
-		 };
-	 };
+    struct WinSockIn6Addr
+    {
+        union
+        {
+            uint8_t Byte[16];
+            uint16_t Word[8];
+        } u;
+    };
 
-	 struct WinSockAddrIn6
-	 {
-		 uint16_t sin6_family;
-		 uint16_t sin6_port;
-		 WindowULong sin6_flowinfo;
-		 WinSockIn6Addr sin6_addr;
-		 union
-		 {
-			 WindowULong sin6_scope_id;
-			 WinSockScopeID sin6_scope_struct;
-		 };
-	 }; 
+    struct WinSockScopeID
+    {
+        union
+        {
+            struct
+            {
+                WindowULong Zone : 28;
+                WindowULong Level : 4;
+            };
+            WindowULong Value;
+        };
+    };
 
-	 using WinSocket = int64_t;	
+    struct WinSockAddrIn6
+    {
+        uint16_t sin6_family;
+        uint16_t sin6_port;
+        WindowULong sin6_flowinfo;
+        WinSockIn6Addr sin6_addr;
+        union
+        {
+            WindowULong sin6_scope_id;
+            WinSockScopeID sin6_scope_struct;
+        };
+    };
 
-	 struct WinSockAddr
-	 {
-		 uint16_t sa_family;
-		 char sa_data[14];           
-	 };	 
+    using WinSocket = int64_t;
 
-	 constexpr int g_FdSetSize{ 64 };
+    struct WinSockAddr
+    {
+        uint16_t sa_family;
+        char sa_data[14];
+    };
 
-	 struct WinSockFdSet
-	 {
-		 uint32_t fd_count;
-		 WinSocket fd_array[g_FdSetSize];
-	 };
+    constexpr auto g_FdSetSize = 64;
 
-	 struct WinSockTimeval
-	 {
-		 long tv_sec;        
-		 long tv_usec;        
-	 };
+    struct WinSockFdSet
+    {
+        uint32_t fd_count;
+        WinSocket fd_array[g_FdSetSize];
+    };
 
-	 struct SocketLinger
-	 {
-		 uint16_t l_onoff;
-		 uint16_t l_linger;
-	 };
+    struct WinSockTimeval
+    {
+        long tv_sec;
+        long tv_usec;
+    };
 
-	 constexpr auto g_InvalidSocket = static_cast<WinSocket>(~0);
-	 constexpr int g_SocketError{ -1 };
-	 constexpr int g_InAddrAny{ 0x00000000 };	
-	 constexpr int g_InAddrLoopback{ 0x7f000001 };	 
+    struct SocketLinger
+    {
+        uint16_t l_onoff;
+        uint16_t l_linger;
+    };
 
-#endif // SYSTEM_PLATFORM_WIN32    		 
+    constexpr auto g_InvalidSocket = static_cast<WinSocket>(~0);
+    constexpr auto g_SocketError = -1;
+    constexpr auto g_InAddrAny = 0x00000000;
+    constexpr auto g_InAddrLoopback = 0x7f000001;
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-#endif // SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
+#endif  // SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H

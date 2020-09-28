@@ -1,263 +1,190 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 16:17)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/23 17:58)
 
 #include "System/SystemExport.h"
 
 #include "ThreadTools.h"
-#include "System/Helper/UnusedMacro.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Window/WindowSystem.h"
-#include "System/Helper/EnumCast.h"
 
-System::ThreadHandle System
-	::CreateSystemRemoteThread(WindowHandle process, WindowSecurityAttributesPtr threadAttributes, WindowSize stackSize, ThreadStartRoutine startAddress,
-							   WindowVoidPtr parameter, ThreadCreation creationFlags, WindowDWordPtr threadID) noexcept
+System::ThreadHandle System::CreateSystemRemoteThread([[maybe_unused]] WindowHandle process, [[maybe_unused]] WindowSecurityAttributesPtr threadAttributes, [[maybe_unused]] WindowSize stackSize, [[maybe_unused]] ThreadStartRoutine startAddress,
+                                                      [[maybe_unused]] WindowVoidPtr parameter, [[maybe_unused]] ThreadCreation creationFlags, [[maybe_unused]] WindowDWordPtr threadID) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::CreateRemoteThread(process, threadAttributes, stackSize, startAddress, parameter, EnumCastUnderlying(creationFlags), threadID);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(process);
-	SYSTEM_UNUSED_ARG(threadAttributes);
-	SYSTEM_UNUSED_ARG(stackSize);
-	SYSTEM_UNUSED_ARG(startAddress);
-	SYSTEM_UNUSED_ARG(parameter);
-	SYSTEM_UNUSED_ARG(creationFlags);
-	SYSTEM_UNUSED_ARG(threadID);
-
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32
+    return ::CreateRemoteThread(process, threadAttributes, stackSize, startAddress, parameter, EnumCastUnderlying(creationFlags), threadID);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ThreadHandle System
-	::CreateSystemRemoteThread(WindowHandle process, WindowSecurityAttributesPtr threadAttributes, WindowSize stackSize, ThreadStartRoutine startAddress,
-							   WindowVoidPtr parameter, ThreadCreation creationFlags, ProcThreadAttributeListPtr attributeList, WindowDWordPtr threadID) noexcept
+System::ThreadHandle System::CreateSystemRemoteThread([[maybe_unused]] WindowHandle process, [[maybe_unused]] WindowSecurityAttributesPtr threadAttributes, [[maybe_unused]] WindowSize stackSize, [[maybe_unused]] ThreadStartRoutine startAddress,
+                                                      [[maybe_unused]] WindowVoidPtr parameter, [[maybe_unused]] ThreadCreation creationFlags, [[maybe_unused]] ProcThreadAttributeListPtr attributeList, [[maybe_unused]] WindowDWordPtr threadID) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::CreateRemoteThreadEx(process, threadAttributes, stackSize, startAddress, parameter, EnumCastUnderlying(creationFlags), attributeList, threadID);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(process);
-	SYSTEM_UNUSED_ARG(threadAttributes);
-	SYSTEM_UNUSED_ARG(stackSize);
-	SYSTEM_UNUSED_ARG(startAddress);
-	SYSTEM_UNUSED_ARG(parameter);
-	SYSTEM_UNUSED_ARG(creationFlags);
-	SYSTEM_UNUSED_ARG(attributeList);
-	SYSTEM_UNUSED_ARG(threadID);
-
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32
+    return ::CreateRemoteThreadEx(process, threadAttributes, stackSize, startAddress, parameter, EnumCastUnderlying(creationFlags), attributeList, threadID);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ThreadHandle System
-	::OpenSystemThread(ThreadStandardAccess standardDesiredAccess, ThreadSpecificAccess specificDesiredAccess, bool inheritHandle, WindowDWord threadID) noexcept
+System::ThreadHandle System::OpenSystemThread([[maybe_unused]] ThreadStandardAccess standardDesiredAccess, [[maybe_unused]] ThreadSpecificAccess specificDesiredAccess, [[maybe_unused]] bool inheritHandle, [[maybe_unused]] WindowDWord threadID) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::OpenThread(EnumCastUnderlying(standardDesiredAccess) | EnumCastUnderlying(specificDesiredAccess), BoolConversion(inheritHandle), threadID);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(standardDesiredAccess);
-	SYSTEM_UNUSED_ARG(specificDesiredAccess);
-	SYSTEM_UNUSED_ARG(inheritHandle);
-	SYSTEM_UNUSED_ARG(threadID);
-
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32
+    return ::OpenThread(EnumCastUnderlying(standardDesiredAccess) | EnumCastUnderlying(specificDesiredAccess), BoolConversion(inheritHandle), threadID);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::GetThreadExitCode(ThreadHandle thread, WindowDWordPtr exitCode) noexcept
+bool System::GetThreadExitCode([[maybe_unused]] ThreadHandle thread, [[maybe_unused]] WindowDWordPtr exitCode) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::GetExitCodeThread(thread, exitCode) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-	SYSTEM_UNUSED_ARG(exitCode);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::GetExitCodeThread(thread, exitCode) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowDWord System
-	::GetSystemThreadID(ThreadHandle thread) noexcept
+System::WindowDWord System::GetSystemThreadID([[maybe_unused]] ThreadHandle thread) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::GetThreadId(thread);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-
-	return 0;
-#endif // SYSTEM_PLATFORM_WIN32
+    return ::GetThreadId(thread);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return 0;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::SetSystemThreadPriorityBoost(ThreadHandle thread, bool disablePriorityBoost) noexcept
+bool System::SetSystemThreadPriorityBoost([[maybe_unused]] ThreadHandle thread, [[maybe_unused]] bool disablePriorityBoost) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::SetThreadPriorityBoost(thread, disablePriorityBoost) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-	SYSTEM_UNUSED_ARG(disablePriorityBoost);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::SetThreadPriorityBoost(thread, disablePriorityBoost) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::GetSystemThreadPriorityBoost(ThreadHandle thread, WindowBoolPtr disablePriorityBoost) noexcept
+bool System::GetSystemThreadPriorityBoost([[maybe_unused]] ThreadHandle thread, [[maybe_unused]] WindowBoolPtr disablePriorityBoost) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::GetThreadPriorityBoost(thread, disablePriorityBoost) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-	SYSTEM_UNUSED_ARG(disablePriorityBoost);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::GetThreadPriorityBoost(thread, disablePriorityBoost) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::SwitchToSystemThread() noexcept
+bool System::SwitchToSystemThread() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::SwitchToThread() != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::SwitchToThread() != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::OpenSystemThreadToken(ThreadHandle thread, TokenStandardAccess standardAccess, TokenSpecificAccess specificAccess, bool openAsSelf, WindowHandlePtr tokenHandle) noexcept
+bool System::OpenSystemThreadToken([[maybe_unused]] ThreadHandle thread, [[maybe_unused]] TokenStandardAccess standardAccess, [[maybe_unused]] TokenSpecificAccess specificAccess, [[maybe_unused]] bool openAsSelf, [[maybe_unused]] WindowHandlePtr tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::OpenThreadToken(thread, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), BoolConversion(openAsSelf), tokenHandle) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-	SYSTEM_UNUSED_ARG(standardAccess);
-	SYSTEM_UNUSED_ARG(specificAccess);
-	SYSTEM_UNUSED_ARG(openAsSelf);
-	SYSTEM_UNUSED_ARG(tokenHandle);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::OpenThreadToken(thread, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), BoolConversion(openAsSelf), tokenHandle) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::SetSystemThreadToken(ThreadHandlePtr thread, WindowHandle tokenHandle) noexcept
+bool System::SetSystemThreadToken([[maybe_unused]] ThreadHandlePtr thread, [[maybe_unused]] WindowHandle tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::SetThreadToken(thread, tokenHandle) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-	SYSTEM_UNUSED_ARG(tokenHandle);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::SetThreadToken(thread, tokenHandle) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::GetSystemThreadContext(ThreadHandle thread, WindowContextPtr context) noexcept
+bool System::GetSystemThreadContext([[maybe_unused]] ThreadHandle thread, [[maybe_unused]] WindowContextPtr context) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::GetThreadContext(thread, context) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-	SYSTEM_UNUSED_ARG(context);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::GetThreadContext(thread, context) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::SetSystemThreadContext(ThreadHandle thread, const WindowContext* context) noexcept
+bool System::SetSystemThreadContext([[maybe_unused]] ThreadHandle thread, [[maybe_unused]] const WindowContext* context) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::SetThreadContext(thread, context) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-	SYSTEM_UNUSED_ARG(context);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::SetThreadContext(thread, context) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::GetSystemThreadTimes(ThreadHandle thread, FileTimePtr creationTime, FileTimePtr exitTime, FileTimePtr kernelTime, FileTimePtr userTime) noexcept
+bool System::GetSystemThreadTimes([[maybe_unused]] ThreadHandle thread, [[maybe_unused]] FileTimePtr creationTime, [[maybe_unused]] FileTimePtr exitTime, [[maybe_unused]] FileTimePtr kernelTime, [[maybe_unused]] FileTimePtr userTime) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::GetThreadTimes(thread, creationTime, exitTime, kernelTime, userTime) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(thread);
-	SYSTEM_UNUSED_ARG(creationTime);
-	SYSTEM_UNUSED_ARG(exitTime);
-	SYSTEM_UNUSED_ARG(kernelTime);
-	SYSTEM_UNUSED_ARG(userTime);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::GetThreadTimes(thread, creationTime, exitTime, kernelTime, userTime) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::CloseTokenHandle(WindowHandle tokenHandle) noexcept
+bool System::CloseTokenHandle([[maybe_unused]] WindowHandle tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::CloseHandle(tokenHandle) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(tokenHandle);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::CloseHandle(tokenHandle) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::ImpersonateThreadSelf(SecurityImpersonationLevel securityImpersonationLevel) noexcept
+bool System::ImpersonateThreadSelf([[maybe_unused]] SecurityImpersonationLevel securityImpersonationLevel) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::ImpersonateSelf(securityImpersonationLevel) != g_False)
-		return true;
-	else
-		return false;
-#else // SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(securityImpersonationLevel);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::ImpersonateSelf(securityImpersonationLevel) != g_False)
+        return true;
+    else
+        return false;
+#else  // SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System
-	::InitThreadContextFlags(WindowContext& context, ThreadContextState flags) noexcept
+void System::InitThreadContextFlags(WindowContext& context, ThreadContextState flags) noexcept
 {
-	context.ContextFlags = EnumCastUnderlying(flags);
+    context.ContextFlags = EnumCastUnderlying(flags);
 }
-

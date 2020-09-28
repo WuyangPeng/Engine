@@ -49,21 +49,6 @@
     <Filter Include="CharacterString 头文件\Using">
       <UniqueIdentifier>{bc39ddc7-c435-4305-8e7c-87838101bf88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Com 头文件">
-      <UniqueIdentifier>{0b866535-80cb-4ad5-b167-fdf648fc0369}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Com 源文件">
-      <UniqueIdentifier>{19acf517-b9e9-4c3f-b0b8-65a1d9857b8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Com 头文件\Flags">
-      <UniqueIdentifier>{6f3e548b-fc9b-411c-9b5d-810ad574bf12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Com 头文件\Fwd">
-      <UniqueIdentifier>{cc2e8b05-bddf-495b-b9e7-ed4902eb6eb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Com 头文件\Using">
-      <UniqueIdentifier>{33f906b4-1a36-46f7-ab5d-b47038b5760f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Console 头文件">
       <UniqueIdentifier>{d3a90ce2-8d67-4fee-a1d6-38d118845d15}</UniqueIdentifier>
     </Filter>
@@ -84,9 +69,6 @@
     </Filter>
     <Filter Include="DirectX 源文件">
       <UniqueIdentifier>{c0a79cf1-5b66-4d00-a7b7-d008f08dba30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DirectX 头文件\Fwd">
-      <UniqueIdentifier>{e92a46cb-9530-4832-9c52-4713dc701226}</UniqueIdentifier>
     </Filter>
     <Filter Include="DynamicLink 头文件">
       <UniqueIdentifier>{5b406b1d-d09f-4fdc-8595-0bc93aa9c897}</UniqueIdentifier>
@@ -210,12 +192,6 @@
     </Filter>
     <Filter Include="OpenGL 头文件\Fwd">
       <UniqueIdentifier>{fc2a6943-ab83-41fd-ba23-125873c9cbd1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenGL 源文件\Test">
-      <UniqueIdentifier>{62a65637-c95a-406a-8485-c5cdd6576350}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenGL 头文件\Test">
-      <UniqueIdentifier>{1a802c92-83ca-4dd1-b463-87d38d19f89b}</UniqueIdentifier>
     </Filter>
     <Filter Include="OpenGL 头文件\Using">
       <UniqueIdentifier>{e7a67c9b-6e62-4072-be52-6e52c99e3a2d}</UniqueIdentifier>
@@ -363,27 +339,6 @@
     <ClInclude Include="..\..\..\Code\System\Android\Flags\AndroidNativeWindowFlags.h">
       <Filter>Android 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidInputKeyEventFwd.h">
-      <Filter>Android 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidInputMotionEventFwd.h">
-      <Filter>Android 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidInputQueueFwd.h">
-      <Filter>Android 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidLooperFwd.h">
-      <Filter>Android 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidNativeAppGlueFwd.h">
-      <Filter>Android 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidNativeWindowFwd.h">
-      <Filter>Android 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidUsingFwd.h">
-      <Filter>Android 头文件\Fwd</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidFlagsFwd.h">
       <Filter>Android 头文件\Fwd</Filter>
     </ClInclude>
@@ -464,27 +419,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\CharacterString\FormatStringDetail.h">
       <Filter>CharacterString 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Com\ComObjectBase.h">
-      <Filter>Com 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Com\Com.h">
-      <Filter>Com 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Com\ComFwd.h">
-      <Filter>Com 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Com\Flags\IUnknownFlags.h">
-      <Filter>Com 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Com\Fwd\ComFlagsFwd.h">
-      <Filter>Com 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Com\Fwd\ComObjectBaseFwd.h">
-      <Filter>Com 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Com\Using\IUnknownUsing.h">
-      <Filter>Com 头文件\Using</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Console\Flags\ConsoleHandleFlags.h">
       <Filter>Console 头文件\Flags</Filter>
@@ -572,15 +506,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Console\ConsoleTitle.h">
       <Filter>Console 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\DirectX\Fwd\DirectXD3D10Fwd.h">
-      <Filter>DirectX 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\DirectX\Fwd\DirectXD3D11Fwd.h">
-      <Filter>DirectX 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\DirectX\Fwd\DirectXD3D9Fwd.h">
-      <Filter>DirectX 头文件\Fwd</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\DirectX\DirectX.h">
       <Filter>DirectX 头文件</Filter>
@@ -754,9 +679,6 @@
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\UnicodeUsing.h">
-      <Filter>Helper 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\UnusedMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\UserMacro.h">
@@ -1437,21 +1359,6 @@
     <ClInclude Include="..\..\..\Code\System\Network\Fwd\NetworkFlagsFwd.h">
       <Filter>Network 头文件\Fwd</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Network\Fwd\SocketPrototypesFwd.h">
-      <Filter>Network 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Network\Fwd\WindowsExtensionPrototypesFwd.h">
-      <Filter>Network 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Network\Fwd\WindowsInternetFwd.h">
-      <Filter>Network 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Network\Fwd\WindowsSockExFwd.h">
-      <Filter>Network 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Network\Fwd\DatabasePrototypesFwd.h">
-      <Filter>Network 头文件\Fwd</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Network\Using\SocketPrototypesUsing.h">
       <Filter>Network 头文件\Using</Filter>
     </ClInclude>
@@ -1578,26 +1485,11 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\GLExtensionsFlags.h">
       <Filter>OpenGL 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLAPIFwd.h">
-      <Filter>OpenGL 头文件\Fwd</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLFlagsFwd.h">
-      <Filter>OpenGL 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLGlutFwd.h">
-      <Filter>OpenGL 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLInitFwd.h">
-      <Filter>OpenGL 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLUtilityFwd.h">
       <Filter>OpenGL 头文件\Fwd</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\GLPluginFwd.h">
       <Filter>OpenGL 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Test\GL11Test.h">
-      <Filter>OpenGL 头文件\Test</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GL45ExtensionsUsing.h">
       <Filter>OpenGL 头文件\Using</Filter>
@@ -1704,34 +1596,7 @@
     <ClInclude Include="..\..\..\Code\System\Security\Flags\AccessCheckFlags.h">
       <Filter>Security 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\CreateSecurityFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\LookupPrivilegeFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\SecurityAceFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\SecurityAclFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\SecurityBaseFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\SecurityDescriptorFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Security\Fwd\SecurityFlagsFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\SecuritySidFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\AccessCheckFwd.h">
-      <Filter>Security 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Fwd\AddAccessFwd.h">
       <Filter>Security 头文件\Fwd</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Security\Using\LookupPrivilegeUsing.h">
@@ -2088,34 +1953,7 @@
     <ClInclude Include="..\..\..\Code\System\Window\Flags\WindowSystemFlags.h">
       <Filter>Window 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowCreateFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowFlagsFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowFontInformationFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowNamedPipeFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowProcessFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowRegisterFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowRegistryFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowSystemFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\WindowUserFwd.h">
-      <Filter>Window 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Window\Fwd\LastPlatformErrorFwd.h">
       <Filter>Window 头文件\Fwd</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Window\Using\WindowRegistryUsing.h">
@@ -2199,6 +2037,18 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\MultiIndex.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Security\Flags\LookupPrivilegeNameFlags.h">
+      <Filter>Security 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Window\Flags\IUnknownFlags.h">
+      <Filter>Window 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Window\Using\IUnknownUsing.h">
+      <Filter>Window 头文件\Using</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Window\ComObjectBase.h">
+      <Filter>Window 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">
@@ -2242,9 +2092,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\CharacterString\StringConversion.cpp">
       <Filter>CharacterString 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\Com\ComObjectBase.cpp">
-      <Filter>Com 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\Console\ConsoleAlias.cpp">
       <Filter>Console 源文件</Filter>
@@ -2447,9 +2294,6 @@
     <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\WglExtensions.cpp">
       <Filter>OpenGL 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\OpenGL\Test\GL11Test.cpp">
-      <Filter>OpenGL 源文件\Test</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLGlut.cpp">
       <Filter>OpenGL 源文件</Filter>
     </ClCompile>
@@ -2594,6 +2438,12 @@
     <ClCompile Include="..\..\..\Code\System\CharacterString\CodePage.cpp">
       <Filter>CharacterString 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\Window\ComObjectBase.cpp">
+      <Filter>Window 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\Window\Engineering.cpp">
+      <Filter>Window 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Schedule.txt">
@@ -2601,6 +2451,12 @@
     </Text>
     <Text Include="Resource\ReadMe.txt">
       <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 2.txt">
       <Filter>资源文件\Todo</Filter>
@@ -2624,12 +2480,6 @@
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
   </ItemGroup>

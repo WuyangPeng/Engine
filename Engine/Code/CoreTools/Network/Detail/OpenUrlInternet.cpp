@@ -41,7 +41,7 @@ CoreTools::OpenUrlInternet
 CoreTools::OpenUrlInternet
 	::~OpenUrlInternet()
 {
-	System::InternetCloseHandle(m_UrlInternet);
+    [[maybe_unused]] const auto result = System::InternetCloseHandle(m_UrlInternet);
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

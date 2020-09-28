@@ -1,11 +1,11 @@
-UMLÓÃ»§Ö¸ÄÏ£¨The Unified Modeling Language User Guide£©
-£¨µÚ2°æ£©
+UMLç”¨æˆ·æŒ‡å—ï¼ˆThe Unified Modeling Language User Guideï¼‰
+ï¼ˆç¬¬2ç‰ˆï¼‰
 
-¡ï
-×÷Õß£ºGrady Booch¡¢James Rumbaugh¡¢Ivar Jacobson
+â˜…
+ä½œè€…ï¼šGrady Boochã€James Rumbaughã€Ivar Jacobson
 
-¹Ù·½ÍøÕ¾£º
+å®˜æ–¹ç½‘ç«™ï¼š
 http://www.omg.org
 
-ÖªÊ¶µã 
-1.	UML»ù´¡ÖªÊ¶¡£
+çŸ¥è¯†ç‚¹ 
+1.	UMLåŸºç¡€çŸ¥è¯†ã€‚

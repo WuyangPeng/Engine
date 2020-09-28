@@ -1,12 +1,12 @@
-Êı¾İÍÚ¾ò¸ÅÄîÓë¼¼Êõ£¨Data Mining Concepts and Techniques£©
-£¨µÚ3°æ£© 
+æ•°æ®æŒ–æ˜æ¦‚å¿µä¸æŠ€æœ¯ï¼ˆData Mining Concepts and Techniquesï¼‰
+ï¼ˆç¬¬3ç‰ˆï¼‰ 
 
-¡î
-×÷Õß£ºJiawei Han¡¢Micheline Kamber¡¢Jian Pei
+â˜†
+ä½œè€…ï¼šJiawei Hanã€Micheline Kamberã€Jian Pei
 
-¹Ù·½ÍøÕ¾£º
-http://www.booksite.mkp.com/datamining3e/ ¡¢http://www.cs.uiuc.edu/~hanj/bk3
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.booksite.mkp.com/datamining3e/ ã€http://www.cs.uiuc.edu/~hanj/bk3
 
-ÖªÊ¶µã 
-1.	Êı¾İÍÚ¾ò»ù´¡ÖªÊ¶¡£  
+çŸ¥è¯†ç‚¹ 
+1.	æ•°æ®æŒ–æ˜åŸºç¡€çŸ¥è¯†ã€‚  
 

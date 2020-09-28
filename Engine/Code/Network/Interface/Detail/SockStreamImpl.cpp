@@ -40,22 +40,20 @@ Network::ACEHandleType Network::SockStreamImpl
 	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"s));
 }
 
-void Network::SockStreamImpl
-	::SetACEHandle(ACEHandleType handle)
+void Network::SockStreamImpl ::SetACEHandle([[maybe_unused]] ACEHandleType handle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(handle);
+	 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"s));
 }
 
-void Network::SockStreamImpl
-	::SetNetworkHandle(WinSocketStreamType winSocket)
+void Network::SockStreamImpl ::SetNetworkHandle([[maybe_unused]] WinSocketStreamType winSocket)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(winSocket);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("不是Network Stream类！"s));
 }

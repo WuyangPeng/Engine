@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:41)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:49)
 
 #ifndef SYSTEM_HELPER_GL_EXT_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_EXT_EXTENSIONS_MACRO_H
@@ -103,7 +106,7 @@
 #define glCopyTexImage2DEXT System::GlCopyTexImage2DEXT
 #define glCopyTexSubImage1DEXT System::GlCopyTexSubImage1DEXT
 #define glCopyTexSubImage2DEXT System::GlCopyTexSubImage2DEXT
-#define glCopyTexSubImage3DEXT System::GlCopyTexSubImage3DEXT 
+#define glCopyTexSubImage3DEXT System::GlCopyTexSubImage3DEXT
 
 // (EXT 011) GL_EXT_histogram
 
@@ -843,7 +846,6 @@
 
 // (EXT 298) GL_EXT_texture_mirror_clamp
 
-
 #define GL_MIRROR_CLAMP_EXT 0x8742
 #define GL_MIRROR_CLAMP_TO_EDGE_EXT 0x8743
 #define GL_MIRROR_CLAMP_TO_BORDER_EXT 0x8912
@@ -1246,7 +1248,7 @@
 #define glGetTransformFeedbackVaryingEXT System::GlGetTransformFeedbackVaryingEXT
 #define glTransformFeedbackVaryingsEXT System::GlTransformFeedbackVaryingsEXT
 
-// (EXT 353) GL_EXT_direct_state_access 
+// (EXT 353) GL_EXT_direct_state_access
 
 #define GL_PROGRAM_MATRIX_EXT 0x8E2D
 #define GL_TRANSPOSE_PROGRAM_MATRIX_EXT 0x8E2E
@@ -1685,4 +1687,4 @@
 #define GL_CG_VERTEX_SHADER_EXT 0x890E
 #define GL_CG_FRAGMENT_SHADER_EXT 0x890F
 
-#endif // SYSTEM_HELPER_GL_EXT_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_EXT_EXTENSIONS_MACRO_H

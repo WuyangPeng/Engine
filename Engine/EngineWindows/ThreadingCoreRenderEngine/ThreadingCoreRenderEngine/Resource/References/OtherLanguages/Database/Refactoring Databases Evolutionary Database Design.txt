@@ -1,7 +1,7 @@
-Êı¾İ¿âÖØ¹¹£¨Refactoring Databases Evolutionary Database Design£©
+æ•°æ®åº“é‡æ„ï¼ˆRefactoring Databases Evolutionary Database Designï¼‰
  
-¡ï¡ï
-×÷Õß£ºScott W.Ambler¡¢Pramod J.Sadalage
+â˜…â˜…
+ä½œè€…ï¼šScott W.Amblerã€Pramod J.Sadalage
 
-ÖªÊ¶µã 
-1.	Êı¾İ¿âÖØ¹¹»ù´¡ÖªÊ¶¡£  
+çŸ¥è¯†ç‚¹ 
+1.	æ•°æ®åº“é‡æ„åŸºç¡€çŸ¥è¯†ã€‚  

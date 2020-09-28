@@ -1,15 +1,15 @@
-Ğ´¸ø´ó¼Ò¿´µÄC++Êé£¨C++ Programming£©
+å†™ç»™å¤§å®¶çœ‹çš„C++ä¹¦ï¼ˆC++ Programmingï¼‰
 
-¹Ù·½ÍøÕ¾ 
-http://www.DMCInsight.com/cppvqs¡£
+å®˜æ–¹ç½‘ç«™ 
+http://www.DMCInsight.com/cppvqsã€‚
 
-¡ğ
-×÷Õß£ºLarry Ullman¡¢Andreas Signer
+â—‹
+ä½œè€…ï¼šLarry Ullmanã€Andreas Signer
 
-ÖªÊ¶µã 
-1.	C++»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	C++åŸºç¡€çŸ¥è¯†ã€‚ 
 
-´úÂë 
-1.  Êé¼®´úÂë¡£
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚
 
   

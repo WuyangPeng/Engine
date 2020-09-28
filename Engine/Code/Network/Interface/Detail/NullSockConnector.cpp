@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h" 
 
 #include "NullSockConnector.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -37,24 +37,19 @@ Network::NullSockConnector
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockConnector)
 
-bool Network::NullSockConnector
-	::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept
+bool Network::NullSockConnector ::Connect([[maybe_unused]] const SockStreamSharedPtr& sockStream, [[maybe_unused]] const SockAddressSharedPtr& sockAddress) noexcept
 {
 	NETWORK_CLASS_IS_VALID_9;
-
-	SYSTEM_UNUSED_ARG(sockStream);
-	SYSTEM_UNUSED_ARG(sockAddress);
+ 
 
 	return true;
 }
 
-void Network::NullSockConnector
-	::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::NullSockConnector ::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const SockStreamSharedPtr& sockStream, [[maybe_unused]] const SockAddressSharedPtr& sockAddress)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(sockStream);
-	SYSTEM_UNUSED_ARG(sockAddress);
+ 
 
 	CoreTools::CallbackParameters callbackParameters;
 	callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));

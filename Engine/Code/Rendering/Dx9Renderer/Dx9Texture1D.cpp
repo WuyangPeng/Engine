@@ -8,16 +8,14 @@
 
 #include "Dx9Texture1D.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/ClassInvariant/Noexcept.h"
 
-Rendering::Dx9Texture1D
-	::Dx9Texture1D( Renderer* renderer, const Texture1D* texture )
- 
+Rendering::Dx9Texture1D ::Dx9Texture1D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture1D* texture)
+
 {	
 	CoreTools::DoNothing();
-	SYSTEM_UNUSED_ARG(renderer);
-	SYSTEM_UNUSED_ARG(texture);
+ 
 
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
@@ -51,13 +49,11 @@ Rendering::Dx9Texture1D
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9Texture1D)
 
-void Rendering::Dx9Texture1D
-	::Enable( Renderer* renderer, int textureUnit )
+void Rendering::Dx9Texture1D ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(textureUnit);
-	SYSTEM_UNUSED_ARG(renderer);
+ 
         CoreTools::DoNothing();
 
 	/*
@@ -69,13 +65,11 @@ void Rendering::Dx9Texture1D
 		textureUnit, DXGetErrorString(hr));*/
 }
 
-void Rendering::Dx9Texture1D
-	::Disable( Renderer* renderer, int textureUnit )
+void Rendering::Dx9Texture1D ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(textureUnit);
-	SYSTEM_UNUSED_ARG(renderer);
+ 
         CoreTools::DoNothing();
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
@@ -98,13 +92,11 @@ void Rendering::Dx9Texture1D
 	textureUnit, DXGetErrorString(hr));*/
 }
 
-void* Rendering::Dx9Texture1D
-	::Lock( int level, BufferLocking mode )
+void* Rendering::Dx9Texture1D ::Lock([[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(level);
-	SYSTEM_UNUSED_ARG(mode);
+ 
         CoreTools::DoNothing();
 	/*
 	 D3DLOCKED_RECT rect;
@@ -118,8 +110,7 @@ void* Rendering::Dx9Texture1D
 	return nullptr;
 }
 
-void Rendering::Dx9Texture1D
-	::Unlock( int level )
+void Rendering::Dx9Texture1D ::Unlock([[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -129,6 +120,6 @@ void Rendering::Dx9Texture1D
 	RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to unlock level %u of 1D texture: %s\n",
 	level, DXGetErrorString(hr));*/
         CoreTools::DoNothing();
-	SYSTEM_UNUSED_ARG(level);
+ 
 }
 

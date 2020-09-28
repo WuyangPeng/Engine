@@ -1,40 +1,43 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 15:36)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 11:09)
 
 #ifndef SYSTEM_HELPER_VACPP_H
 #define SYSTEM_HELPER_VACPP_H
 
 #if defined(__IBMCPP__)
 
-	// Visual Age (IBM) C++ 编译器设置：
+    // Visual Age (IBM) C++ 编译器设置：
 
-	#ifndef SYSTEM_CPP_STANDARD
-		#define SYSTEM_CPP_STANDARD 3
-	#endif // SYSTEM_CPP_STANDARD
+    #ifndef SYSTEM_CPP_STANDARD
+        #define SYSTEM_CPP_STANDARD 3
+    #endif  // SYSTEM_CPP_STANDARD
 
-	#ifndef TCRE_USE_VACPP
-		#define TCRE_USE_VACPP 1
-	#endif // TCRE_USE_VACPP
+    #ifndef TCRE_USE_VACPP
+        #define TCRE_USE_VACPP 1
+    #endif  // TCRE_USE_VACPP
 
-	#ifndef COMPILER_VERSION
-		#define COMPILER_VERSION __IBMCPP__
-	#endif // COMPILER_VERSION
+    #ifndef COMPILER_VERSION
+        #define COMPILER_VERSION __IBMCPP__
+    #endif  // COMPILER_VERSION
 
-	#ifndef SYSTEM_COMPILER
-		#define SYSTEM_COMPILER "IBM Visual Age 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
-	#endif // SYSTEM_COMPILER
+    #ifndef SYSTEM_COMPILER
+        #define SYSTEM_COMPILER "IBM Visual Age 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+    #endif  // SYSTEM_COMPILER
 
-	#if __IBMCPP__ < 500
-		#error "编译器未配置"
-	#endif // __IBMCPP__ < 500
+    #if __IBMCPP__ < 500
+        #error "编译器未配置"
+    #endif  // __IBMCPP__ < 500
 
-	#if (1210 < __IBMCPP__)
-		#error "未知编译器"
-	#endif // (1210 < __IBMCPP__) 
+    #if (1210 < __IBMCPP__)
+        #error "未知编译器"
+    #endif  // (1210 < __IBMCPP__)
 
-#endif // defined(__IBMCPP__)
+#endif  // defined(__IBMCPP__)
 
-#endif // SYSTEM_HELPER_VACPP_H
+#endif  // SYSTEM_HELPER_VACPP_H

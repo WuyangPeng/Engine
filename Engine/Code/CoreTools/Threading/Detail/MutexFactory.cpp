@@ -19,7 +19,7 @@
 	#include "WindowsMutex.h"
 #else // !SYSTEM_PLATFORM_WIN32
 	#include "ThreadMutex.h"
-	#include "System/Helper/UnusedMacro.h"
+	
 #endif // SYSTEM_PLATFORM_WIN32
 
 using std::make_shared;

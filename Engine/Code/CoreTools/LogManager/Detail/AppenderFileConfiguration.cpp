@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AppenderFileConfiguration.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/LogManager/LogMessagePrefix.h"
 #include "CoreTools/LogManager/LogMessagePostfix.h" 
@@ -46,12 +46,9 @@ CoreTools::AppenderType CoreTools::AppenderFileConfiguration
 }
 
 // private
-void CoreTools::AppenderFileConfiguration
-	::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) noexcept
+void CoreTools::AppenderFileConfiguration ::DoWrite([[maybe_unused]] const LogMessage& message, [[maybe_unused]] const LogMessagePrefix& prefix, [[maybe_unused]] const LogMessagePostfix& postfix) noexcept
 {
-	SYSTEM_UNUSED_ARG(message);
-	SYSTEM_UNUSED_ARG(prefix);
-	SYSTEM_UNUSED_ARG(postfix);
+	 
 }
 
 const CoreTools::AppenderFileConfiguration::AppenderImplPtr CoreTools::AppenderFileConfiguration

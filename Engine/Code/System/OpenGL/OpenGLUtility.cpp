@@ -1,103 +1,111 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 15:49)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/26 15:32)
 
 #include "System/SystemExport.h"
 
-#include "OpenGLUtility.h" 
-#include "Detail/GLUtility.h"
-#include "Detail/GLExtensions.h"
-#include "Detail/WglExtensions.h"
+#include "OpenGLUtility.h"
 #include "Flags/GLExtensionsFlags.h"
+#include "Detail/GLExtensions.h"
+#include "Detail/GLUtility.h"
+#include "Detail/WglExtensions.h"
 #include "System/CharacterString/FormatString.h"
 
 using std::string;
 using namespace std::literals;
 
-System::OpenGLSystemVersion System
-	::GetOpenGLVersion() noexcept
+System::OpenGLSystemVersion System::GetOpenGLVersion() noexcept
 {
-	auto token = GetVersionString();
-	if (token != nullptr)
-	{
-		const auto major = *token;
-		if (major != '\0')
-		{
+    auto token = GetVersionString();
+    if (token != nullptr)
+    {
+        const auto major = *token;
+        if (major != '\0')
+        {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26489)
-			++token;
-			if (token != nullptr && *token == '.')
-			{
-				++token;
-				if (token != nullptr)
-				{
-					const auto minor = *token;
+            ++token;
+            if (token != nullptr && *token == '.')
+            {
+                ++token;
+                if (token != nullptr)
+                {
+                    const auto minor = *token;
 
-					return GetOpenGLVersion(major, minor);
-				}
-			}
+                    return GetOpenGLVersion(major, minor);
+                }
+            }
 #include STSTEM_WARNING_POP
-		}
-	}
+        }
+    }
 
-	return OpenGLSystemVersion::VersionNone;
+    return OpenGLSystemVersion::VersionNone;
 }
 
-bool System
-	::IsOpenGLSupportsExtension(const char* extension) noexcept
+bool System::IsOpenGLSupportsExtension(const char* extension)
 {
-	if (extension == nullptr)
-	{
-		return false;
-	}
+    if (extension == nullptr)
+    {
+        return false;
+    }
 
-	auto extensionString = GetExtensionString();
-	if (extensionString == nullptr)
-	{
-		return false;
-	}
+    auto extensionString = GetExtensionString();
+    if (extensionString == nullptr)
+    {
+        return false;
+    }
 
-	auto begin = Strstr(extensionString, extension);
-	if (begin == nullptr)
-	{
-		return false;
-	}
+    string glExtension{ extensionString };
 
-	// 扩展被发现,但确保它不是另一个扩展的合适子串。
+    const auto pos = glExtension.find(extension);
+
+    if (pos == string::npos)
+    {
+        return false;
+    }
+
+    const auto endPos = pos + Strlen(extension);
+
+    if (endPos >= glExtension.size())
+    {
+        return true;
+    }
+
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-	const auto end = *(begin + Strlen(extension));
+#include SYSTEM_WARNING_DISABLE(26446)
+    auto end = glExtension[endPos];
 #include STSTEM_WARNING_POP
 
-	return end == ' ' || end == 0 || end == '\t' || end == '\n';
+    // 扩展被发现,但确保它不是另一个扩展的合适子串。
+
+    return end == ' ' || end == 0 || end == '\t' || end == '\n';
 }
 
-void* System
-	::GetFunctionPointer(const char* glFunction) noexcept
+void* System::GetFunctionPointer(const char* glFunction) noexcept
 {
-	return GetOpenGLFunctionPointer(glFunction);
+    return GetOpenGLFunctionPointer(glFunction);
 }
 
-string System
-	::GetOpenGLErrorDescription(OpenGLErrorCode code)
+string System::GetOpenGLErrorDescription(OpenGLErrorCode code)
 {
-	auto description = GetOpenGLErrorString(code);
+    auto description = GetOpenGLErrorString(code);
 
-	if (description != nullptr)
-	{
-		return description;
-	}
-	else
-	{
-		return ""s;
-	}
+    if (description != nullptr)
+    {
+        return description;
+    }
+    else
+    {
+        return ""s;
+    }
 }
 
-bool System
-	::IsWglSupportsExtension(const char* wglExtension) noexcept
+bool System::IsWglSupportsExtension(const char* wglExtension)
 {
-	return SupportsWglExtension(wglExtension);
+    return SupportsWglExtension(wglExtension);
 }

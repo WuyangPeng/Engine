@@ -1,226 +1,208 @@
-ϵͳ��ģ��
+系统库模块
 
-1.	Helper��������
+1.	Helper（帮助）
 
-��װ��System������Ҫ�ĺ�ͳ�����ԭ����ʹ��constexpr��ģ���滻�ꡣ
-����ʹ�õĺ갴����Ʒ������ģ�飬���к갴�ձ�׼ʹ��ȫ��д���»��߷ָ��������ݸ�ģ����Ҫ���ӡ�
-Ϊ�˷���opengl��������׼��gl��ʹ��ԭ����������ʹ��ȫ��д�ı�׼��
-Ŀǰ������
-��1�� ���ó����ͺ꣺���ڶ���ʹ�õ�ƽ̨���������ͱ�׼�⡣
-	  �����ֽڴ�С�˵ĺ꣺SYSTEM_LITTLE_ENDIAN��SYSTEM_BIG_ENDIAN��
-	  ʹ�õ�C++��׼��SYSTEM_CPP_STANDARD��
-	  unused���ԣ�SYSTEM_ATTRIBUTE_UNUSED�������������֧�֣�����Ϊ�ա�
-	  ѡ���ƽ̨���ƣ�TCRE_SYSTEM_PLATFORM��ʹ�õ�ƽ̨��SYSTEM_PLATFORM_XXX��
-	  ѡ��ı������汾��TCRE_COMPILER_VERSION�����������ƣ�TCRE_SYSTEM_COMPILER��ʹ�õı�������TCRE_USE_XXX�� 
-	  ѡ��ı�׼��汾��TCRE_CPPLIB_VERSION����׼�����ƣ�TCRE_SYSTEM_STDLIB��ʹ�õı�׼�⣺TCRE_USE_XXX��
-��2�� �û��꣺�����Ƿ�ʹ�þ�̬�⡢���GL�����Ƿ�ʹ��Windows�ꡢDirectX����������OpenGL2��glut���û��趨��
-��3�� �ַ���ƴ�Ӻ꣺�����ں���ƴ���ַ�����
-��4�� δʹ�ñ�־�꣺��������δʹ�ò����ľ��档
-��5�� Unicode�ַ�using�����������Ƿ����UNICODE�������ַ�������char����wchar_t��
-��6�� ��ǹ�ʱ�����꣺��ƽ̨�ĺ������һ����������Ϊ��ʱ��
-��7�� ��ӡ��������Ϣ�꣺��ӡ����ʹ�õı�������Ϣ��
-��8�� Windowsƽ̨��غ꣺��Windows���װ��constexpr������ƽ̨ͨ�ú꣬��ʵ�ַ�Windowsƽ̨�ĵ��á� 
-��9�� �汾�ţ�����İ汾�š�
-��10��������־�꣺���ݲ�ͬƽ̨�ı�׼������������ĵ���򵼳����š�
-��11����ȫ��ʶ���꣺Windowsƽ̨��ȫ��ʶ������Ҫ�ĺ꣬��Ҫ���ڰ�ȫ��ʶ���ĳ�ʼ����
-��12������꣺����������fd����ز�����
-��13��gl��չ�꣺��֤openglͷ�ļ��İ���˳���Լ�opengl������opengl��Ķ��塣
-	  �汾1.1��4.5��opengl������opengl�ꡣ
-	  ARB��չ��opengl������opengl�ꡣ
-	  ARB ES��չ��opengl������opengl�ꡣ
-	  EXT��չ��opengl������opengl�ꡣ
-	  �����Ӽ���opengl������opengl�ꡣ
-	  glu��չ��opengl������opengl�ꡣ
-	  glx��չ��opengl������opengl�ꡣ
-	  wgl��չ��opengl������opengl�ꡣ
-	  opengl����ꡣ
-	  opengl���ߺꡣ
-��14��PragmaWarning�������ض��ı��������档
-��15��ƽ̨ͷ�ļ������ڰ���ƽ̨��ص�ͷ�ļ���
-��16��ö�ٵ�ת���������ʵ��ö�ٺ���������֮���ת����ö��ת������������ָ��ת��������ͣ�����ת����Ҫָ��������͡�
-��17��ö�ٺ꣺���ڶ���ö��������������
-��18��Noexcept����װһ�����������쳣�ĺ�����
+封装了System库所需要的宏和常量，原则上使用constexpr和模板替换宏。
+必须使用的宏按照设计放入帮助模块，所有宏按照标准使用全大写和下划线分隔，将根据各模块需要添加。
+为了符合opengl函数名标准，gl宏使用原函数名而不使用全大写的标准。
+（1） 配置常量和宏：用于定义使用的平台、编译器和标准库。
+	  定义字节大小端的宏：SYSTEM_LITTLE_ENDIAN和SYSTEM_BIG_ENDIAN。
+	  使用的C++标准：SYSTEM_CPP_STANDARD。
+	  选择的平台名称：TCRE_SYSTEM_PLATFORM。使用的平台：SYSTEM_PLATFORM_XXX。
+	  选择的编译器版本：TCRE_COMPILER_VERSION，编译器名称：TCRE_SYSTEM_COMPILER，使用的编译器：TCRE_USE_XXX。 
+	  选择的标准库版本：TCRE_CPPLIB_VERSION、标准库名称：TCRE_SYSTEM_STDLIB，使用的标准库：TCRE_USE_XXX。
+（2） 用户宏：用于是否使用静态库、检查GL错误、是否使用Windows宏、DirectX、自旋锁、OpenGL2和glut等用户设定。
+（3） 字符串拼接宏：用于在宏中拼接字符串。 
+（4） Unicode字符using声明：根据是否定义宏UNICODE来决定字符类型是char还是wchar_t。
+（5） 标记过时函数宏：跨平台的宏来标记一个函数或类为过时。
+（6） 打印编译器信息宏：打印正在使用的编译器信息。
+（7） 版本号：引擎的版本号。
+（8） 导出标志宏：根据不同平台的标准，定义类或函数的导入或导出符号。
+（9） Windows平台相关宏：将Windows宏封装成constexpr函数或平台通用宏，以实现非Windows平台的调用。 
+（10）安全标识符宏：Windows平台安全标识符所需要的宏，主要用于安全标识符的初始化。
+（11）网络宏：用于描述符fd的相关操作。
+（12）gl扩展宏：保证opengl头文件的包含顺序，以及opengl函数和opengl宏的定义。
+	  版本1.1至4.5的opengl函数和opengl宏。
+	  ARB扩展的opengl函数和opengl宏。
+	  ARB ES扩展的opengl函数和opengl宏。
+	  EXT扩展的opengl函数和opengl宏。
+	  成像子集的opengl函数和opengl宏。
+	  glu扩展的opengl函数和opengl宏。
+	  glx扩展的opengl函数和opengl宏。
+	  wgl扩展的opengl函数和opengl宏。
+	  opengl插件宏。
+	  opengl工具宏。
+（13）PragmaWarning：消除特定的编译器警告。
+（14）平台头文件：用于包含平台相关的头文件。
+（15）枚举的转换运算符：实现枚举和整型类型之间的转换。枚举转换成整型无需指定转换结果类型，其他转换需要指定结果类型。
+（16）枚举宏：用于定义枚举所需的运算符。
+（17）Noexcept：封装一个捕获所有异常的函数。
 
-2.	SystemOutput��ϵͳ�����
+2.	SystemOutput（系统输出）
 
-��װ�˲���ϵͳ�������ص��á��������������Ϣ������̨������ϵͳ�ĶԻ���
-Ŀǰ������
-��1������ϵͳ����ID�����ݲ�ͬƽ̨���������ϵͳ���������á�
-��2����Ϣ���־�����ݲ�ͬƽ̨��������Ϣ���־��
-��3�������Ϣ�����������Ϣ������̨��
-��4����Ϣ��ѡ�񣺵���ϵͳ�ĶԻ������û�ѡ��
+封装了操作系统输出的相关调用。包括输出调试信息到控制台，弹出系统的对话框。
+（1）操作系统语言ID：根据不同平台，定义操作系统的语言设置。
+（2）消息框标志：根据不同平台，定义消息框标志。
+（3）输出信息：输出调试信息到控制台。
+（4）消息框选择：弹出系统的对话框让用户选择。
 
-3.	DynamicLink����̬���ӣ�
+3.	DynamicLink（动态链接）
 
-��װ�˲���ϵͳ�򿪺͹رն�̬���ӿ⣬����ָ���Ķ�̬���ӿ��е�����⺯����ַ���Ӷ�̬���ӿ���������Դ����ص��á�
-Ŀǰ������
-��1�� ���ض�̬���ӿ⣺��̬���ӿ�Ĵ򿪺͹رգ�����ָ���Ķ�̬���ӿ��е�����⺯����ַ��
-��2�� ��̬���ӿ�ĸ�����������ȡ��̬���ӿ�ľ�������֡�
-��3�� ��̬���ӿ������Ŀ¼����ȡ�����ö�̬���ӿ������Ŀ¼��
-��4�� ��̬���ӿ���Դ�ļ��أ��Ӷ�̬���ӿ���������Դ��
-��5�� ��̬���ӿ���Դ���о٣���ȡ��̬���ӿ���Դ�����֡����Ժ����͡�
+封装了操作系统打开和关闭动态链接库，检索指定的动态链接库中的输出库函数地址，从动态链接库中载入资源等相关调用。
+（1） 加载动态链接库：动态链接库的打开和关闭，检索指定的动态链接库中的输出库函数地址。
+（2） 动态链接库的辅助函数：获取动态链接库的句柄和名字。
+（3） 动态链接库的载入目录：获取和设置动态链接库的载入目录。
+（4） 动态链接库资源的加载：从动态链接库中载入资源。
+（5） 动态链接库资源的列举：获取动态链接库资源的名字、语言和类型。
 
-4.	CharacterString���ַ�����
+4.	CharacterString（字符串）
 
-��װ�˲���ϵͳ�ַ���������ص��á�������ʽ���ַ������ַ���ת��������ҳ�����ɴ�����Ϣ��
-Ŀǰ������
-��1�� ������Ϣ��������Ϣ�ĸ�ʽ����
-��2�� ����ҳ����ȡ����ҳ�������Ϣ��
-��3�� �ַ���ת�����ַ�����char��wchar_t֮���ת����
-��4�� ��ʽ���ַ�������ʽ���ַ�������ص��á�
+封装了操作系统字符操作的相关调用。包括格式化字符串、字符串转换、代码页和生成错误消息。
+（1） 错误消息：错误消息的格式化。
+（2） 代码页：获取代码页的相关信息。
+（3） 字符串转换：字符类型char和wchar_t之间的转换。
+（4） 格式化字符串：格式化字符串的相关调用。
  
-5.	Console������̨��
+5.	Console（控制台）
 
-��װ�˿���̨�Ŀ����͹رգ��Լ����úͻ�ȡ����̨��ɫ�仯������ҳ�����塢��Ϣ������������������Ϣ��
-Ŀǰ������
-��1�� ����̨���������̨����Ļ�ȡ�����á�
-��2�� ����̨��ɫ������̨��ɫ���úͶ�д��
-��3�� ����̨���룺����̨����Ĺ����Ͷ�д��
-��4�� ����̨���������̨����Ĺ����Ͷ�д��
-��5�� ����̨������������̨�����������úͻ�ȡ��
-��6�� ����̨���壺����̨������Ϣ�����úͻ�ȡ��
-��7�� ����̨ģʽ������̨ģʽ�Ļ�ȡ�����á�
-��8�� ����̨��꣺����̨�����Ϣ�����úͻ�ȡ��
-��9�� ����̨���⣺����̨��������úͻ�ȡ��
-��10������̨���������Ӻͻ�ȡ����̨������
-��11������̨����ҳ����ȡ�����ÿ���̨����ҳ��
-��12������̨��Ϣ������̨��Ϣ�Ļ�ȡ�����á�
-��13������̨���ߣ�һЩ��صĿ���̨���ߡ�
-��14������̨���ڣ�����̨���ڵĴ��������١�
+封装了控制台的开启和关闭，以及设置和获取控制台颜色变化、代码页、字体、信息、输入输出、标题等信息。
+（1） 控制台句柄：控制台句柄的获取和设置。
+（2） 控制台颜色：控制台颜色设置和读写。
+（3） 控制台输入：控制台输入的管理和读写。
+（4） 控制台输出：控制台输出的管理和读写。
+（5） 控制台缓冲区：控制台缓冲区的设置和获取。
+（6） 控制台字体：控制台字体信息的设置和获取。
+（7） 控制台模式：控制台模式的获取和设置。
+（8） 控制台光标：控制台光标信息的设置和获取。
+（9） 控制台标题：控制台标题的设置和获取。
+（10）控制台别名：增加和获取控制台别名。
+（11）控制台代码页：获取和设置控制台代码页。
+（12）控制台信息：控制台信息的获取和设置。
+（13）控制台工具：一些相关的控制台工具。
+（14）控制台窗口：控制台窗口的创建的销毁。
 
-6.	MemoryTools���ڴ湤�ߣ�
+6.	MemoryTools（内存工具）
 
-��װ�˲���ϵͳ������ͷ��ڴ棬�����ڴ�������ļ�ӳ�����ص��á�
-Ŀǰ������
-��1���ѣ����������ٶѣ��Լ���ص��ڴ湤�ߺ�����
-��2�������ڴ棺���������������ڴ棬�Լ���ص������ڴ湤�ߺ�����
-��3���ļ�ӳ��ϵͳ�������������ļ�ӳ�䣬�Լ���ص��ļ�ӳ�乤�ߺ�����
-��4���ڴ湤�ߣ��ڴ湤�ߺ�����������ʼ���ڴ棬����Windows�ṹ���С�ȹ��ߺ�����
-��5��ȫ�ֶѣ�����������ȫ�ֶѣ�����ص�ȫ�ֶѹ��ߺ�����
-��6���ֲ��ڴ棺�ֲ��ڴ�ķ�������١�
+封装了操作系统分配和释放内存，虚拟内存管理和文件映射的相关调用。
+（1）堆：创建和销毁堆，以及相关的内存工具函数。
+（2）虚拟内存：创建和销毁虚拟内存，以及相关的虚拟内存工具函数。
+（3）文件映射系统：创建和销毁文件映射，以及相关的文件映射工具函数。
+（4）内存工具：内存工具函数，包括初始化内存，设置Windows结构体大小等工具函数。
+（5）全局堆：创建和销毁全局堆，和相关的全局堆工具函数。
+（6）局部内存：局部内存的分配和销毁。
 
-7.	Threading���̣߳�
+7.	Threading（线程）
 
-��װ�˲���ϵͳ�̺߳ͽ��̵���ص��ã����������̡߳����̡��̳߳ء��¼�������������������ʱ�����Լ�����һЩ��ز�����
-Ŀǰ������
-��1�� �ٽ������ٽ����Ĵ��������١�������뿪��
-��2�� �ź������ź����Ĵ������ͷš�
-��3�� �¼������¼�����Ĵ��������ٺ͵ȴ���
-��4�� ���������������Ĵ��������١�
-��5�� ��д������д���Ĵ������ͷš�
-��6�� �������������������Ĵ������ͷš�
-��7�� һ�ζ���һ�ζ���Ĵ������ͷš�
-��8�� �ȴ���ʱ�����ȴ���ʱ���Ĵ��������١��ȴ������á�
-��9�� ͬ�����ߣ��߳���ͣ����ز�����
-��10��ԭ�Ӳ��������ͱ�����ԭ�Ӳ�����
-��11���̣߳������������̵߳Ĳ�����
-��12���̸߳������ߣ��̲߳����ĸ������ߡ�
-��13���ֲ߳̾��洢���ֲ߳̾��洢�Ĳ�����
-��14�����̣����̵Ĵ��������١�
-��15�����̹��ߣ����̲����ĸ������ߡ�
-��16���߳̾�����ߣ��߳̾���ĸ������ߡ�
-��17���̳߳أ��̳߳ص���ز�����
-��18���ص�IO���ص�IO����ز�����
-��19���˳̣��˳̵Ĵ��������١�
+封装了操作系统线程和进程的相关调用，包括创建线程、进程、线程池、事件、锁、条件变量、定时器，以及其他一些相关操作。
+（1） 临界区：临界区的创建、销毁、进入和离开。
+（2） 信号量：信号量的创建和释放。
+（3） 事件对象：事件对象的创建、销毁和等待。
+（4） 互斥锁：互斥锁的创建和销毁。
+（5） 读写锁：读写锁的创建和释放。
+（6） 条件变量：条件变量的创建和释放。
+（7） 一次对象：一次对象的创建和释放。
+（8） 等待计时器：等待计时器的创建、销毁、等待和设置。
+（9） 同步工具：线程暂停的相关操作。
+（10）原子操作：整型变量的原子操作。
+（11）线程：创建和销毁线程的操作。
+（12）线程辅助工具：线程操作的辅助工具。
+（13）线程局部存储：线程局部存储的操作。
+（14）进程：进程的创建和销毁。
+（15）进程工具：进程操作的辅助工具。
+（16）线程句柄工具：线程句柄的辅助工具。
+（17）线程池：线程池的相关操作。
+（18）重叠IO：重叠IO的相关操作。
+（19）纤程：纤程的创建和销毁。
 
-8.	Time��ʱ�䣩
+8.	Time（时间）
 
-��װ����ʱ����ص�ϵͳ���õ�ʵ�֡����а�����ȡ���ʱ���ʱ����ϵͳ��ͣ��
-Ŀǰ������
-��1�� ��ȡ��ǰʱ�䣺��ȡ��ǰ���뼶��΢�뼶ʱ��¾��
-��2�� ʱ���ֵ���ݣ���ȡ����ʱ������
-��3�� ��ͣ����̨����ͣ����̨����Ҫ�������������
+封装了与时间相关的系统调用的实现。其中包括获取间隔时间计时器、系统暂停。
+（1） 获取当前时间：获取当前的秒级或微秒级时间戮。
+（2） 时间差值数据：获取两个时间间隔。
+（3） 暂停控制台：暂停控制台，需要按任意键继续。
 
-9.	FileManager���ļ�������
+9.	FileManager（文件管理）
 
-��װ�˲���ϵͳ�ļ���д��ʱ�䡢���Һͻ�����������ص��á�
-Ŀǰ������
-��1��C�����ļ�ϵͳ�� ͨ��FILE���͵��ļ�������
-��2�������ļ�ϵͳ���ļ��Ĵ򿪡��رա���������д��ɾ����
-��3���������ߣ��ļ������ĸ������ߡ�
-��4���ļ�ʱ�䣺�ļ�ʱ��Ļ�ȡ�����á�
-��5���ļ����ң��ļ����һ���������
-��6���������������������Ļ�ȡ�� 
+封装了操作系统文件读写、时间、查找和环境变量等相关调用。
+（1）C函数文件系统： 通过FILE类型的文件操作。
+（2）基础文件系统：文件的打开、关闭、创建、读写和删除。
+（3）辅助工具：文件管理的辅助工具。
+（4）文件时间：文件时间的获取和设置。
+（5）文件查找：文件查找基本函数。
+（6）环境变量：环境变量的获取。 
 
-10.	Security����ȫ�ԣ�
+10.	Security（安全性）
 
-��װ�˲���ϵͳ��ȫ�ԡ�Ȩ����ص��õ�ʵ�֡�
-Ŀǰ������
-��1������Ȩ�ޣ�����Ȩ�޵���ص��á�
-��2��������ȫ�������ȫ�������ص��á�
-��3����ȫ��ʶ������ȫ��ʶ������ص��á�
-��4�����ʿ����б������ʿ����б�����ص��á�
-��5����ȫ����������ȫ����������ص��á�
-��6�����ʿ�������ʿ��������ص��á�
-��7�����ӷ���Ȩ�ޣ�����Ȩ�޵���ص��á�
-��8����ȫ��������ȫ��������ص��á�
-��9�����ʼ�飺���ʼ�����ص��á�
+封装了操作系统安全性、权限相关调用的实现。
+（1）查找权限：查找权限的相关调用。
+（2）创建安全句柄：安全句柄的相关调用。
+（3）安全标识符：安全标识符的相关调用。
+（4）访问控制列表：访问控制列表的相关调用。
+（5）安全描述符：安全描述符的相关调用。
+（6）访问控制项：访问控制项的相关调用。
+（7）添加访问权限：访问权限的相关调用。
+（8）安全基础：安全基础的相关调用。
+（9）访问检查：访问检查的相关调用。
 
-11.	Network�����磩
+11.	Network（网络）
 
-��װ�˲���ϵͳ��ص�������õ�ʵ�֡�
-Ŀǰ������
-��1���׽���ԭ�ͣ��׽��ֻ���������ʵ�֡�
-��2������ԭ�ͣ���ȡ�׽��ֵ������Ϣ��
-��3��Windows��չԭ�ͣ�Windowsƽ̨���������ʵ�֡�
-��4��Windows�׽��֣�Windowsƽ̨���׽���ʵ�֡�
-��5��Windows��������Windowsƽ̨Internet�����ʵ�֡�
+封装了操作系统相关的网络调用的实现。
+（1）套接字原型：套接字基础函数的实现。
+（2）数据原型：获取套接字的相关信息。
+（3）Windows扩展原型：Windows平台的相关网络实现。
+（4）Windows套接字：Windows平台的套接字实现。
+（5）Windows互联网：Windows平台Internet的相关实现。
 
-12.	Window��Window��
+12.	OpenGL（OpenGL）
 
-��װ��Window����ϵͳ���õ�ʵ�֡�����Window���ڴ�����ע�ᡢ���ڻص���Window��־������Windowsϵͳ������
-Ŀǰ������
-��1�� ϵͳ�����룺��ȡ������ϵͳ�����롣
-��2�� Window���������ڴ�����������غ�����
-��3�� Window���̣�������غ������á�
-��4�� Window����ע�᣺����ע����ص��á�
-��5�� ������Ϣ������������Ϣ������
-��6�� ϵͳ������ϵͳ��غ�����
-��7�� �����ܵ��������ܵ��Ĵ����͹رա�
-��8�� �û��������û�����������
-��9�� ע�����ע����Ĵ�����ɾ�����޸ġ� 
-��10��Windows���ͱ�����Windowsϵͳ�����Ͷ��塣
-��11��Engineering����װһЩ������صĺ�����
-��12��ComObjectBase��Com����Ļ���������
+封装了OpenGL调用的实现。包括OpenGL API、GLUT、GLEW和OpenGL标志。
+（1）OpenGL工具：OpenGL辅助工具。
+（2）OpenGL初始化：OpenGL的环境初始化。
+（3）OpenGL API：对OpenGL API的封装。
+（4）GLUT：对GLUT API的封装。
+（5）OpenGL Wgl 原型：OpenGL在Windows平台的环境实现。
+（6）OpenGL 测试：对每个OpenGL API进行调用测试。不使用导出所有API的方式，通过导出几个函数使用枚举的方式进行API调用测试。
 
-13.	OpenGL��OpenGL��
+13.	DirectX（DirectX）
 
-��װ��OpenGL���õ�ʵ�֡�����OpenGL API��GLUT��GLEW��OpenGL��־��
-Ŀǰ������
-��1��OpenGL���ߣ�OpenGL�������ߡ�
-��2��OpenGL��ʼ����OpenGL�Ļ�����ʼ����
-��3��OpenGL API����OpenGL API�ķ�װ��
-��4��GLUT����GLUT API�ķ�װ��
-��5��OpenGL Wgl ԭ�ͣ�OpenGL��Windowsƽ̨�Ļ���ʵ�֡�
-��6��OpenGL ���ԣ���ÿ��OpenGL API���е��ò��ԡ���ʹ�õ�������API�ķ�ʽ��ͨ��������������ʹ��ö�ٵķ�ʽ����API���ò��ԡ�
+封装了DirectX调用的实现。包括DirectX9、DirectX10和DirectX11。
+（1）DirectX9：对DirectX9 API的封装。
+（2）DirectX10：对DirectX10 API的封装。
+（3）DirectX11：对DirectX11 API的封装。
 
-14.	DirectX��DirectX��
+14.	Window（Window）
 
-��װ��DirectX���õ�ʵ�֡�����DirectX9��DirectX10��DirectX11��
-Ŀǰ������
-��1��DirectX9����DirectX9 API�ķ�װ��
-��2��DirectX10����DirectX10 API�ķ�װ��
-��3��DirectX11����DirectX11 API�ķ�װ��
+封装了Window操作系统调用的实现。包括Window窗口创建、注册、窗口回调、Window标志和其他Windows系统函数。
+（1） 系统错误码：获取和设置系统错误码。
+（2） Window创建：窗口创建和其他相关函数。
+（3） Window进程：进程相关函数调用。
+（4） Window窗口注册：窗口注册相关调用。
+（5） 字体信息：窗口字体信息函数。
+（6） 系统：窗口系统相关函数。
+（7） 命名管道：命名管道的创建和关闭。
+（8） 用户辅助：用户辅助函数。
+（9） 注册表：注册表的创建、删除和修改。 
+（10）Windows类型别名：Windows系统的类型定义。
+（11）Engineering：封装一些工程相关的函数。
+（12）ComObjectBase：Com对象的基础操作。
 
-15.	Linux��Linux��
+15.	Linux（Linux）
 
-��װ��Linux����ϵͳ���õ�ʵ�֡���Ҫ����������ϵͳ�������������Linux API��
-Ŀǰ������
-��1��Linux API��Linux API�Լ�����ƽ̨��Linux API������ʵ�֡�
+封装了Linux操作系统调用的实现。主要用于在其他系统正常调用虚拟的Linux API。
+（1）Linux API：Linux API以及其他平台对Linux API的虚拟实现。
 
-16.	Macintosh��Macintosh��
+16.	Macintosh（Macintosh）
 
-��װ��Macintosh����ϵͳ���õ�ʵ�֡���Ҫ����������ϵͳ�������������Macintosh API��
-Ŀǰ������
-��1��Macintosh API��Macintosh API�Լ�����ƽ̨��Macintosh API������ʵ�֡�
+封装了Macintosh操作系统调用的实现。主要用于在其他系统正常调用虚拟的Macintosh API。
+（1）Macintosh API：Macintosh API以及其他平台对Macintosh API的虚拟实现。
 
-17.	Android��Android��
+17.	Android（Android）
 
-��װ��Android����ϵͳ���õ�ʵ�֡���Ҫ����������ϵͳ�������������Android API��
-��1����׿������¼����԰�׿������¼��ķ�װ��
-��2����׿������¼����԰�׿��������¼��ķ�װ��
-��3����׿ѭ�����԰�׿ѭ���ķ�װ��
-��4����׿������У��԰�׿������еķ�װ��
-��5����׿���ڣ��԰�׿���ڵķ�װ��
-��6����׿Ӧ�ó��򣺶԰�׿Ӧ�ó���ķ�װ�� 
-��7��Android API������Android API�Լ�����ƽ̨��Android API������ʵ�֡�
+封装了Android操作系统调用的实现。主要用于在其他系统正常调用虚拟的Android API。
+（1）安卓输入键事件：对安卓输入键事件的封装。
+（2）安卓输入键事件：对安卓输入滚动事件的封装。
+（3）安卓循环：对安卓循环的封装。
+（4）安卓输入队列：对安卓输入队列的封装。
+（5）安卓窗口：对安卓窗口的封装。
+（6）安卓应用程序：对安卓应用程序的封装。 
+（7）Android API：其他Android API以及其他平台对Android API的虚拟实现。

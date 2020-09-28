@@ -1,425 +1,279 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.0 (2020/01/02 15:28)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.1.0 (2020/09/24 18:17)
 
 #include "System/SystemExport.h"
 
 #include "WindowsSockEx.h"
 #include "Using/SocketPrototypesUsing.h"
-#include "System/Window/WindowSystem.h"
-#include "System/Helper/UnusedMacro.h"
-#include "System/Helper/WindowsMacro.h"
-#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/WindowsMacro.h"
+#include "System/Window/WindowSystem.h"
 
-System::WinSocket System
-	::WinSocketAccept(WinSocket winSocket, WinSockAddr* addr, WindowIntPtr addrlen, WinSockConditionProc condition, WindowPtrDWord callbackData) noexcept
+System::WinSocket System::WinSocketAccept([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockAddr* addr, [[maybe_unused]] WindowIntPtr addrlen, [[maybe_unused]] WinSockConditionProc condition, [[maybe_unused]] WindowPtrDWord callbackData) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return ::WSAAccept(winSocket, addr, addrlen, condition, callbackData);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(addr);
-	SYSTEM_UNUSED_ARG(addrlen);
-	SYSTEM_UNUSED_ARG(condition);
-	SYSTEM_UNUSED_ARG(callbackData);
-
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    return ::WSAAccept(winSocket, addr, addrlen, condition, callbackData);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketCloseEvent(WinSockEvent winSockEvent) noexcept
+bool System::WinSocketCloseEvent([[maybe_unused]] WinSockEvent winSockEvent) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSACloseEvent(winSockEvent) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSockEvent);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSACloseEvent(winSockEvent) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketConnect(WinSocket winSocket, const WinSockAddr* name, int namelen, WinSockBufPtr callerData,
-					   WinSockBufPtr calleeData, QualityOfServicePtr sQualityOfService, QualityOfServicePtr gQualityOfService) noexcept
+bool System::WinSocketConnect([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] const WinSockAddr* name, [[maybe_unused]] int namelen, [[maybe_unused]] WinSockBufPtr callerData,
+                              [[maybe_unused]] WinSockBufPtr calleeData, [[maybe_unused]] QualityOfServicePtr sQualityOfService, [[maybe_unused]] QualityOfServicePtr gQualityOfService) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSAConnect(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService) != g_SocketError)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(name);
-	SYSTEM_UNUSED_ARG(callerData);
-	SYSTEM_UNUSED_ARG(calleeData);
-	SYSTEM_UNUSED_ARG(sQualityOfService);
-	SYSTEM_UNUSED_ARG(gQualityOfService);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSAConnect(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService) != g_SocketError)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketConnectByName(WinSocket winSocket, TChar* nodename, TChar* servicename, WindowDWordPtr localAddressLength,
-							 WinSockAddr* localAddress, WindowDWordPtr remoteAddressLength, WinSockAddr* remoteAddress, const WinSockTimeval* timeout) noexcept
+bool System::WinSocketConnectByName([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] TChar* nodename, [[maybe_unused]] TChar* servicename, [[maybe_unused]] WindowDWordPtr localAddressLength,
+                                    [[maybe_unused]] WinSockAddr* localAddress, [[maybe_unused]] WindowDWordPtr remoteAddressLength, [[maybe_unused]] WinSockAddr* remoteAddress, [[maybe_unused]] const WinSockTimeval* timeout) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSAConnectByName(winSocket, nodename, servicename, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout, nullptr) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(nodename);
-	SYSTEM_UNUSED_ARG(servicename);
-	SYSTEM_UNUSED_ARG(localAddressLength);
-	SYSTEM_UNUSED_ARG(localAddress);
-	SYSTEM_UNUSED_ARG(remoteAddressLength);
-	SYSTEM_UNUSED_ARG(remoteAddress);
-	SYSTEM_UNUSED_ARG(timeout);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSAConnectByName(winSocket, nodename, servicename, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout, nullptr) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketConnectByList(WinSocket winSocket, SocketAddressListPtr socketAddress, WindowDWordPtr localAddressLength, WinSockAddr* localAddress,
-							 WindowDWordPtr remoteAddressLength, WinSockAddr* remoteAddress, const WinSockTimeval* timeout) noexcept
+bool System::WinSocketConnectByList([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] SocketAddressListPtr socketAddress, [[maybe_unused]] WindowDWordPtr localAddressLength, [[maybe_unused]] WinSockAddr* localAddress,
+                                    [[maybe_unused]] WindowDWordPtr remoteAddressLength, [[maybe_unused]] WinSockAddr* remoteAddress, [[maybe_unused]] const WinSockTimeval* timeout) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSAConnectByList(winSocket, socketAddress, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout, nullptr) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(socketAddress);
-	SYSTEM_UNUSED_ARG(localAddressLength);
-	SYSTEM_UNUSED_ARG(localAddress);
-	SYSTEM_UNUSED_ARG(remoteAddressLength);
-	SYSTEM_UNUSED_ARG(remoteAddress);
-	SYSTEM_UNUSED_ARG(timeout);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSAConnectByList(winSocket, socketAddress, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout, nullptr) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSockEvent System
-	::WinSocketCreateEvent() noexcept
+System::WinSockEvent System::WinSocketCreateEvent() noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return ::WSACreateEvent();
-#else // !SYSTEM_PLATFORM_WIN32
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    return ::WSACreateEvent();
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketEnumNetworkEvents(WinSocket winSocket, WinSockEvent eventObject, SocketNetworkEventsPtr networkEvents) noexcept
+bool System::WinSocketEnumNetworkEvents([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockEvent eventObject, [[maybe_unused]] SocketNetworkEventsPtr networkEvents) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSAEnumNetworkEvents(winSocket, eventObject, networkEvents) != g_SocketError)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(eventObject);
-	SYSTEM_UNUSED_ARG(networkEvents);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSAEnumNetworkEvents(winSocket, eventObject, networkEvents) != g_SocketError)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketEventSelect(WinSocket winSocket, WinSockEvent eventObject, long networkEvents) noexcept
+bool System::WinSocketEventSelect([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockEvent eventObject, [[maybe_unused]] long networkEvents) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSAEventSelect(winSocket, eventObject, networkEvents) != g_SocketError)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(eventObject);
-	SYSTEM_UNUSED_ARG(networkEvents);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSAEventSelect(winSocket, eventObject, networkEvents) != g_SocketError)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketHtonl(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept
+bool System::WinSocketHtonl([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] unsigned long hostlong, [[maybe_unused]] unsigned long* netlong) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSAHtonl(winSocket, hostlong, netlong) != g_SocketError)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(hostlong);
-	SYSTEM_UNUSED_ARG(netlong);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSAHtonl(winSocket, hostlong, netlong) != g_SocketError)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketHtons(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept
+bool System::WinSocketHtons([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] unsigned short hostshort, [[maybe_unused]] unsigned short* netshort) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSAHtons(winSocket, hostshort, netshort) != g_SocketError)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(hostshort);
-	SYSTEM_UNUSED_ARG(netshort);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSAHtons(winSocket, hostshort, netshort) != g_SocketError)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketNtohl(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept
+bool System::WinSocketNtohl([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] unsigned long netlong, [[maybe_unused]] unsigned long* hostlong) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSANtohl(winSocket, netlong, hostlong) != g_SocketError)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(netlong);
-	SYSTEM_UNUSED_ARG(hostlong);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSANtohl(winSocket, netlong, hostlong) != g_SocketError)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketNtohs(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept
+bool System::WinSocketNtohs([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] unsigned short netshort, [[maybe_unused]] unsigned short* hostshort) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSANtohs(winSocket, netshort, hostshort) != g_SocketError)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(netshort);
-	SYSTEM_UNUSED_ARG(hostshort);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSANtohs(winSocket, netshort, hostshort) != g_SocketError)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System
-	::WinSocketRecv(WinSocket winSocket, WinSockBufPtr buffers, WindowDWord bufferCount, WindowDWordPtr numberOfBytesRecvd,
-					WindowDWordPtr flags, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept
+int System::WinSocketRecv([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockBufPtr buffers, [[maybe_unused]] WindowDWord bufferCount, [[maybe_unused]] WindowDWordPtr numberOfBytesRecvd,
+                          [[maybe_unused]] WindowDWordPtr flags, [[maybe_unused]] SocketOverlappedPtr overlapped, [[maybe_unused]] SocketOverlappedCompletionRoutine completionRoutine) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return ::WSARecv(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, overlapped, completionRoutine);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(buffers);
-	SYSTEM_UNUSED_ARG(bufferCount);
-	SYSTEM_UNUSED_ARG(numberOfBytesRecvd);
-	SYSTEM_UNUSED_ARG(flags);
-	SYSTEM_UNUSED_ARG(overlapped);
-	SYSTEM_UNUSED_ARG(completionRoutine);
-
-	return 0;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    return ::WSARecv(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, overlapped, completionRoutine);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return 0;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(4996)
-
-bool System
-	::WinSocketRecvDisconnect(WinSocket winSocket, WinSockBufPtr inboundDisconnectData) noexcept
+bool System::WinSocketRecvDisconnect([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockBufPtr inboundDisconnectData) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	
-	if (::WSARecvDisconnect(winSocket, inboundDisconnectData) != g_SocketError)
-		return true;
-	else
-		return false;
-	
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(inboundDisconnectData);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(4996)
+    if (::WSARecvDisconnect(winSocket, inboundDisconnectData) != g_SocketError)
+        return true;
+    else
+        return false;
+    #include STSTEM_WARNING_POP
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketSendDisconnect(WinSocket winSocket, WinSockBufPtr outboundDisconnectData) noexcept
+bool System::WinSocketSendDisconnect([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockBufPtr outboundDisconnectData) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	 
-
-	if (::WSASendDisconnect(winSocket, outboundDisconnectData) != g_SocketError)
-		return true;
-	else
-		return false;
-	 
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(outboundDisconnectData);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(4996)
+    if (::WSASendDisconnect(winSocket, outboundDisconnectData) != g_SocketError)
+        return true;
+    else
+        return false;
+    #include STSTEM_WARNING_POP
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-#include STSTEM_WARNING_POP
-
-int System
-	::WinSocketRecvFrom(WinSocket winSocket, WinSockBufPtr buffers, WindowDWord bufferCount, WindowDWordPtr numberOfBytesRecvd, WindowDWordPtr flags,
-						WinSockAddr* from, WindowIntPtr fromlen, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept
+int System::WinSocketRecvFrom([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockBufPtr buffers, [[maybe_unused]] WindowDWord bufferCount, [[maybe_unused]] WindowDWordPtr numberOfBytesRecvd, [[maybe_unused]] WindowDWordPtr flags,
+                              [[maybe_unused]] WinSockAddr* from, [[maybe_unused]] WindowIntPtr fromlen, SocketOverlappedPtr overlapped, [[maybe_unused]] SocketOverlappedCompletionRoutine completionRoutine) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return ::WSARecvFrom(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, from, fromlen, overlapped, completionRoutine);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(buffers);
-	SYSTEM_UNUSED_ARG(bufferCount);
-	SYSTEM_UNUSED_ARG(numberOfBytesRecvd);
-	SYSTEM_UNUSED_ARG(flags);
-	SYSTEM_UNUSED_ARG(from);
-	SYSTEM_UNUSED_ARG(fromlen);
-	SYSTEM_UNUSED_ARG(overlapped);
-	SYSTEM_UNUSED_ARG(completionRoutine);
-
-	return 0;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    return ::WSARecvFrom(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, from, fromlen, overlapped, completionRoutine);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return 0;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketResetEvent(WinSockEvent resetEvent) noexcept
+bool System::WinSocketResetEvent([[maybe_unused]] WinSockEvent resetEvent) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSAResetEvent(resetEvent) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(resetEvent);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSAResetEvent(resetEvent) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System
-	::WinSocketSend(WinSocket winSocket, WinSockBufPtr buffers, WindowDWord bufferCount, WindowDWordPtr numberOfBytesSent,
-					WindowDWord flags, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept
+int System::WinSocketSend([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockBufPtr buffers, [[maybe_unused]] WindowDWord bufferCount, [[maybe_unused]] WindowDWordPtr numberOfBytesSent,
+                          [[maybe_unused]] WindowDWord flags, [[maybe_unused]] SocketOverlappedPtr overlapped, [[maybe_unused]] SocketOverlappedCompletionRoutine completionRoutine) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return ::WSASend(winSocket, buffers, bufferCount, numberOfBytesSent, flags, overlapped, completionRoutine);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(buffers);
-	SYSTEM_UNUSED_ARG(bufferCount);
-	SYSTEM_UNUSED_ARG(numberOfBytesSent);
-	SYSTEM_UNUSED_ARG(flags);
-	SYSTEM_UNUSED_ARG(overlapped);
-	SYSTEM_UNUSED_ARG(completionRoutine);
-
-	return 0;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    return ::WSASend(winSocket, buffers, bufferCount, numberOfBytesSent, flags, overlapped, completionRoutine);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return 0;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System
-	::WinSocketSendMsg(WinSocket winSocket, SocketMsgPtr msg, WindowDWord flags, WindowDWordPtr numberOfBytesSent, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept
+int System::WinSocketSendMsg([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] SocketMsgPtr msg, [[maybe_unused]] WindowDWord flags, [[maybe_unused]] WindowDWordPtr numberOfBytesSent, [[maybe_unused]] SocketOverlappedPtr overlapped, [[maybe_unused]] SocketOverlappedCompletionRoutine completionRoutine) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return ::WSASendMsg(winSocket, msg, flags, numberOfBytesSent, overlapped, completionRoutine);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(msg);
-	SYSTEM_UNUSED_ARG(flags);
-	SYSTEM_UNUSED_ARG(numberOfBytesSent);
-	SYSTEM_UNUSED_ARG(overlapped);
-	SYSTEM_UNUSED_ARG(completionRoutine);
-
-	return 0;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    return ::WSASendMsg(winSocket, msg, flags, numberOfBytesSent, overlapped, completionRoutine);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return 0;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System
-	::WinSocketSendTo(WinSocket winSocket, WinSockBufPtr buffers, WindowDWord bufferCount, WindowDWordPtr numberOfBytesSent,
-					  WindowDWord flags, const WinSockAddr* to, int tolen, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept
+int System::WinSocketSendTo([[maybe_unused]] WinSocket winSocket, [[maybe_unused]] WinSockBufPtr buffers, [[maybe_unused]] WindowDWord bufferCount, [[maybe_unused]] WindowDWordPtr numberOfBytesSent,
+                            [[maybe_unused]] WindowDWord flags, [[maybe_unused]] const WinSockAddr* to, [[maybe_unused]] int tolen, [[maybe_unused]] SocketOverlappedPtr overlapped, [[maybe_unused]] SocketOverlappedCompletionRoutine completionRoutine) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return ::WSASendTo(winSocket, buffers, bufferCount, numberOfBytesSent, flags, to, tolen, overlapped, completionRoutine);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(winSocket);
-	SYSTEM_UNUSED_ARG(buffers);
-	SYSTEM_UNUSED_ARG(bufferCount);
-	SYSTEM_UNUSED_ARG(numberOfBytesSent);
-	SYSTEM_UNUSED_ARG(flags);
-	SYSTEM_UNUSED_ARG(to);
-	SYSTEM_UNUSED_ARG(tolen);
-	SYSTEM_UNUSED_ARG(overlapped);
-	SYSTEM_UNUSED_ARG(completionRoutine);
-
-	return 0;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    return ::WSASendTo(winSocket, buffers, bufferCount, numberOfBytesSent, flags, to, tolen, overlapped, completionRoutine);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return 0;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::WinSocketSetEvent(WinSockEvent setEvent) noexcept
+bool System::WinSocketSetEvent([[maybe_unused]] WinSockEvent setEvent) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	if (::WSASetEvent(setEvent) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(setEvent);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32	
+#ifdef SYSTEM_PLATFORM_WIN32
+    if (::WSASetEvent(setEvent) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSocket System
-	::GetWinSocket(ProtocolFamilies addressFamilies, SocketTypes type, SocketProtocols protocol, SocketProtocolInfoPtr protocolInfo, SocketGroup group, WindowDWord flags) noexcept
+System::WinSocket System::GetWinSocket([[maybe_unused]] ProtocolFamilies addressFamilies, [[maybe_unused]] SocketTypes type, [[maybe_unused]] SocketProtocols protocol, [[maybe_unused]] SocketProtocolInfoPtr protocolInfo, [[maybe_unused]] SocketGroup group, [[maybe_unused]] WindowDWord flags) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return ::WSASocket(EnumCastUnderlying(addressFamilies), EnumCastUnderlying(type), EnumCastUnderlying(protocol), protocolInfo, group, flags);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(addressFamilies);
-	SYSTEM_UNUSED_ARG(type);
-	SYSTEM_UNUSED_ARG(protocol);
-	SYSTEM_UNUSED_ARG(protocolInfo);
-	SYSTEM_UNUSED_ARG(group);
-	SYSTEM_UNUSED_ARG(flags);
-
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    return ::WSASocket(EnumCastUnderlying(addressFamilies), EnumCastUnderlying(type), EnumCastUnderlying(protocol), protocolInfo, group, flags);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WaitForMultipleEventsReturn System
-	::WinSocketWaitForMultipleEvents(WindowDWord eventsCount, const WinSockEvent* events, bool waitAll, WindowDWord timeout, bool alertable) noexcept
+System::WaitForMultipleEventsReturn System::WinSocketWaitForMultipleEvents([[maybe_unused]] WindowDWord eventsCount, [[maybe_unused]] const WinSockEvent* events, [[maybe_unused]] bool waitAll, [[maybe_unused]] WindowDWord timeout, [[maybe_unused]] bool alertable) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32	
-	return UnderlyingCastEnum<WaitForMultipleEventsReturn>(::WSAWaitForMultipleEvents(eventsCount, events, BoolConversion(waitAll), timeout, BoolConversion(alertable)));
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(eventsCount);
-	SYSTEM_UNUSED_ARG(events);
-	SYSTEM_UNUSED_ARG(waitAll);
-	SYSTEM_UNUSED_ARG(timeout);
-	SYSTEM_UNUSED_ARG(alertable);
-
-	return WaitForMultipleEventsReturn::WaitFailed;
-#endif // SYSTEM_PLATFORM_WIN32
+#ifdef SYSTEM_PLATFORM_WIN32
+    return UnderlyingCastEnum<WaitForMultipleEventsReturn>(::WSAWaitForMultipleEvents(eventsCount, events, BoolConversion(waitAll), timeout, BoolConversion(alertable)));
+#else  // !SYSTEM_PLATFORM_WIN32
+    return WaitForMultipleEventsReturn::WaitFailed;
+#endif  // SYSTEM_PLATFORM_WIN32
 }

@@ -35,11 +35,10 @@ void Network::BaseMainManager
 	sm_BaseMainManager.reset();
 }
 
-Network::BaseMainManager
-::BaseMainManager(const ConfigurationStrategy& configurationStrategy, BaseMainManagerCreate baseMainManagerCreate)
-	:m_Impl{ BaseMainManagerFactory::Create(configurationStrategy) }
+Network::BaseMainManager ::BaseMainManager(const ConfigurationStrategy& configurationStrategy, [[maybe_unused]] BaseMainManagerCreate baseMainManagerCreate)
+    : m_Impl{ BaseMainManagerFactory::Create(configurationStrategy) }
 {
-	SYSTEM_UNUSED_ARG(baseMainManagerCreate);
+ 
 
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }

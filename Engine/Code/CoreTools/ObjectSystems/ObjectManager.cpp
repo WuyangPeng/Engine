@@ -39,11 +39,10 @@ void CoreTools::ObjectManager
 	sm_ObjectManager.reset();
 }
 
-CoreTools::ObjectManager
-::ObjectManager(ObjectManagerCreate objectManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+CoreTools::ObjectManager ::ObjectManager([[maybe_unused]] ObjectManagerCreate objectManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(objectManagerCreate);
+ 
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

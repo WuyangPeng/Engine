@@ -1,13 +1,13 @@
-¼ÆËã»úÍ¼ĞÎÑ§¼¸ºÎ¹¤¾ßËã·¨Ïê½â£¨Geometric Tools for Computer Graphics£©
+è®¡ç®—æœºå›¾å½¢å­¦å‡ ä½•å·¥å…·ç®—æ³•è¯¦è§£ï¼ˆGeometric Tools for Computer Graphicsï¼‰
 
-¹Ù·½ÍøÕ¾£º 
-http://www.mkp.com/gtcg ¡¢http://www.magic-software.com
+å®˜æ–¹ç½‘ç«™ï¼š 
+http://www.mkp.com/gtcg ã€http://www.magic-software.com
 
-¡ï¡î
-×÷Õß£º Philip J.Schneider¡¢David H.Eberly
+â˜…â˜†
+ä½œè€…ï¼š Philip J.Schneiderã€David H.Eberly
 
-ÖªÊ¶µã 
-1.	3DÊıÑ§»ù´¡ÖªÊ¶¡£ 
-2.	¶şÎ¬¼¸ºÎÍ¼Ôª»ù´¡ÖªÊ¶¡£
-3.	ÈıÎ¬¼¸ºÎÍ¼Ôª»ù´¡ÖªÊ¶¡£
+çŸ¥è¯†ç‚¹ 
+1.	3Dæ•°å­¦åŸºç¡€çŸ¥è¯†ã€‚ 
+2.	äºŒç»´å‡ ä½•å›¾å…ƒåŸºç¡€çŸ¥è¯†ã€‚
+3.	ä¸‰ç»´å‡ ä½•å›¾å…ƒåŸºç¡€çŸ¥è¯†ã€‚
 

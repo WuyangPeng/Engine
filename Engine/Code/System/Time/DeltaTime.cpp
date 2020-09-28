@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/10 13:22)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/24 12:49)
 
 #include "System/SystemExport.h"
 
@@ -10,37 +13,32 @@
 #include "Data/CurrentDeltaTime.h"
 #include "System/Window/WindowSystem.h"
 
-int64_t System
-	::GetTimeInMicroseconds(const DeltaTimeValueData& deltaTime) noexcept
+int64_t System::GetTimeInMicroseconds(const DeltaTimeValueData& deltaTime) noexcept
 {
-	return g_Microseconds * deltaTime.GetSecond() + deltaTime.GetMicrosecond();
+    return g_Microseconds * deltaTime.GetSecond() + deltaTime.GetMicrosecond();
 }
 
-int64_t System
-	::GetTimeInMicroseconds() noexcept
+int64_t System::GetTimeInMicroseconds() noexcept
 {
-	const CurrentDeltaTime currentTime{ };
+    const CurrentDeltaTime currentTime{};
 
-	const DeltaTimeValueData deltaTimeValueData{ currentTime.GetDeltaTimeValueData() };
+    const DeltaTimeValueData deltaTimeValueData{ currentTime.GetDeltaTimeValueData() };
 
-	return GetTimeInMicroseconds(deltaTimeValueData);
+    return GetTimeInMicroseconds(deltaTimeValueData);
 }
 
-int64_t System
-	::GetTimeInSeconds(const DeltaTimeValueData& deltaTime) noexcept
+int64_t System::GetTimeInSeconds(const DeltaTimeValueData& deltaTime) noexcept
 {
-	return deltaTime.GetSecond();
+    return deltaTime.GetSecond();
 }
 
-int64_t System
-	::GetTimeInSeconds() noexcept
+int64_t System::GetTimeInSeconds() noexcept
 {
-	const auto microseconds = GetTimeInMicroseconds();
-	return microseconds / g_Microseconds;
+    const auto microseconds = GetTimeInMicroseconds();
+    return microseconds / g_Microseconds;
 }
 
-void System
-	::SystemPause() noexcept
+void System::SystemPause() noexcept
 {
-	SystemCommand("PAUSE");
+    [[maybe_unused]] const auto status = SystemCommand("PAUSE");
 }

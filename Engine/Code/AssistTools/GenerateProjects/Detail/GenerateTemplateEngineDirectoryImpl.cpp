@@ -162,7 +162,7 @@ void AssistTools::GenerateTemplateEngineDirectoryImpl
 {
 	System::String fullDirectory = resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newManager + GetForwardSlash() + GetResource();
 
-	System::CreateFileDirectory(fullDirectory, nullptr);
+	[[maybe_unused]] const auto result = System::CreateFileDirectory(fullDirectory, nullptr);
 
 	CoreTools::WriteFileManager manager(fullDirectory + GetForwardSlash() + GetUpdate());
 }

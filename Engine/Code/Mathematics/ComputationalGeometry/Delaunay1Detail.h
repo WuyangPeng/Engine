@@ -9,7 +9,7 @@
 
 #include "Delaunay1.h"
 #include "CoreTools/Helper/MemoryMacro.h"
-#include "System/Helper/UnusedMacro.h"
+
 
 template <typename Real>
 Mathematics::Delaunay1<Real>
@@ -207,7 +207,7 @@ Mathematics::Delaunay1<Real>
     mVertices = 0;
 	auto loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);
-	SYSTEM_UNUSED_ARG(loaded);
+	
 }
 
 template <typename Real>

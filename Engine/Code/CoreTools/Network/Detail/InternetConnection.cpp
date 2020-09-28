@@ -29,7 +29,7 @@ CoreTools::InternetConnection
 CoreTools::InternetConnection
 	::~InternetConnection()
 {
-	System::InternetCloseHandle(m_Internet);
+    [[maybe_unused]] const auto result = System::InternetCloseHandle(m_Internet);
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

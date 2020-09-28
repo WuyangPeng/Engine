@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/16 1:47)
+//	引擎版本：0.5.1.0 (2020/09/19 16:15)
 
 #include "ThreadingCoreRenderEngineExport.h"
 
@@ -15,10 +15,10 @@
 
 #ifndef BUILDING_STATIC
 
-	DLL_MAIN_FUNCTION(ThreadingCoreRenderEngine);
+DLL_MAIN_FUNCTION(ThreadingCoreRenderEngine);
 
 #else  // !BUILDING_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(ThreadingCoreRenderEngine);
+CORE_TOOLS_MUTEX_INIT(ThreadingCoreRenderEngine);
 
 #endif  // BUILDING_STATIC

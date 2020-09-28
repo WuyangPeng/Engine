@@ -1,18 +1,18 @@
-Windows ϵͳ��̣�Windows System Programming��
-����4�棩
+Windows 系统编程（Windows System Programming）
+（第4版）
 
-�ٷ���վ��
+官方网站：
 http://www.jmhartsoftware.com
  
-����  
-���ߣ�Johnson M. Hart
+★★★  
+作者：Johnson M. Hart
 
-֪ʶ�� 
-1.	Windows����֪ʶ��
-2.	Windows�ļ���������֪ʶ��
-3.	Windows���̡��̻߳���֪ʶ��
-4.	Windows�����̻���֪ʶ��
-5.	Windows����֪ʶϰ�⡣
+知识点 
+1.	Windows基础知识。
+2.	Windows文件管理基础知识。
+3.	Windows进程、线程基础知识。
+4.	Windows网络编程基础知识。
+5.	Windows基础知识习题。
 
-���� 
-1.  �鼮���롣 
+代码 
+1.  书籍代码。 

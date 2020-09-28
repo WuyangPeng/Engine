@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2019/12/31 15:25)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/27 17:37)
 
 #ifndef SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_TYPEDEF_H
 #define SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_TYPEDEF_H
@@ -13,118 +16,113 @@
 
 namespace System
 {
-	using AndroidNativeActivity = ANativeActivity;
-	using AndroidConfiguration = AConfiguration;
-	using AndroidApp = android_app;
-	using AndroidPollSource = android_poll_source;
+    using AndroidNativeActivity = ANativeActivity;
+    using AndroidConfiguration = AConfiguration;
+    using AndroidApp = android_app;
+    using AndroidPollSource = android_poll_source;
 }
 
-#else // !SYSTEM_PLATFORM_ANDROID
+#else  // !SYSTEM_PLATFORM_ANDROID
 
-#include "AndroidNativeWindowUsing.h"
-#include "System/Window/Using/WindowUsing.h"  
+    #include "AndroidNativeWindowUsing.h"
+    #include "System/Window/Using/WindowUsing.h"
 
-#include <memory>
+    #include <memory>
 
 namespace System
 {
-	class SYSTEM_DEFAULT_DECLARE AndroidNativeActivity
-	{
+    class SYSTEM_DEFAULT_DECLARE AndroidNativeActivity
+    {
+    };
 
-	};
+    class SYSTEM_DEFAULT_DECLARE AndroidConfiguration
+    {
+    };
 
-	class SYSTEM_DEFAULT_DECLARE AndroidConfiguration
-	{
+    class AndroidApp;
+    class AndroidInputEvent;
+    class AndroidLooper;
+    class AndroidInputQueue;
+    class AndroidNativeWindow;
 
-	};
+    class SYSTEM_DEFAULT_DECLARE AndroidPollSource final
+    {
+    public:
+        using ClassType = AndroidPollSource;
 
-	struct AndroidApp;
-	struct AndroidInputEvent;
-	struct AndroidLooper;
-	struct AndroidInputQueue;
-	struct AndroidNativeWindow;
+    public:
+        AndroidPollSource() noexcept;
 
-	struct SYSTEM_DEFAULT_DECLARE AndroidPollSource
-	{
-	public:
-		using ClassType = AndroidPollSource;
+        void process(AndroidApp* androidApp, AndroidPollSource* source) noexcept;
 
-	public:
-		AndroidPollSource() noexcept;
+    private:
+        int id;
+        AndroidApp* app;
+    };
 
-		void process(struct AndroidApp* androidApp, struct AndroidPollSource* source) noexcept;
+    template class SYSTEM_DEFAULT_DECLARE std::shared_ptr<AndroidInputQueue>;
+    template class SYSTEM_DEFAULT_DECLARE std::shared_ptr<AndroidNativeWindow>;
 
-	private:
-		int id;
-		AndroidApp* app;
-	};
+    class SYSTEM_DEFAULT_DECLARE AndroidApp final
+    {
+    public:
+        using ClassType = AndroidApp;
 
-	template class SYSTEM_DEFAULT_DECLARE std::shared_ptr<AndroidInputQueue>;
-	template class SYSTEM_DEFAULT_DECLARE std::shared_ptr<AndroidNativeWindow>;
+    public:
+        AndroidApp();
 
-	struct SYSTEM_DEFAULT_DECLARE AndroidApp
-	{
-	public:
-		using ClassType = AndroidApp;
+        ~AndroidApp() = default;
+        AndroidApp(const AndroidApp&) = delete;
+        AndroidApp& operator=(const AndroidApp&) = delete;
+        AndroidApp(AndroidApp&&) = delete;
+        AndroidApp& operator=(AndroidApp&&) = delete;
 
-	public:
-		AndroidApp(); 
+        using AppCmd = void (*)(AndroidApp* app, int cmd);
+        using InputEvent = int (*)(AndroidApp* app, AndroidInputEvent* event);
 
-		AndroidApp(const AndroidApp&) = delete;
-		AndroidApp& operator = (const AndroidApp&) = delete;
+    public:
+        void SetDestroyRequested(int isDestroyRequested) noexcept;
+        [[nodiscard]] int GetDestroyRequested() const noexcept;
 
-		using AppCmd = void(*)(struct AndroidApp* app, int cmd);
-		using InputEvent = int(*)(struct AndroidApp* app, AndroidInputEvent* event);
+        [[nodiscard]] WindowHWnd GetRunning() const noexcept;
+        void SetRunning(WindowHWnd value) noexcept;
 
-		void SetDestroyRequested(int isDestroyRequested) noexcept;
-		int GetDestroyRequested() const noexcept;	
+        void OnAppCmd(AndroidApp* app, int cmd) noexcept;
+        void OnInputEvent(AndroidApp* app, AndroidInputEvent* event) noexcept;
 
-		System::WindowHWnd GetRunning() const noexcept;
-		void SetRunning(System::WindowHWnd val) noexcept;
+        void SetOnAppCmd(AndroidApp::AppCmd value) noexcept;
+        void SetOnInputEvent(AndroidApp::InputEvent value) noexcept;
 
-		void OnAppCmd(struct AndroidApp* app, int cmd) noexcept;
-		void OnInputEvent(struct AndroidApp* app, AndroidInputEvent* event) noexcept;
+        [[nodiscard]] AndroidNativeWindow* GetAndroidNativeWindow() noexcept;
 
-		void SetOnAppCmd(System::AndroidApp::AppCmd value) noexcept;
-		void SetOnInputEvent(System::AndroidApp::InputEvent value) noexcept;
-
-		AndroidNativeWindow* GetAndroidNativeWindow() noexcept
-		{
-			return window.get();
-		}
-
-	private:
-		void* userData;
-		AndroidNativeActivity* activity;
-		AndroidConfiguration* config;
-		void* savedState;
-		size_t savedStateSize;
-		AndroidLooper* looper;  
-	public:
-		AndroidRect contentRect;
-		int activityState;	
-		int destroyRequested; 
-		int msgread;
-		int msgwrite;
-		AndroidPollSource cmdPollSource;
-		AndroidPollSource inputPollSource;	
-	private:
-		WindowHWnd running;
-	public:
-		int stateSaved;
-		int destroyed;
-		int redrawNeeded;
-	private:
-		AndroidInputQueue* pendingInputQueue;
-		AndroidNativeWindow* pendingWindow;
-		AppCmd onAppCmd;
-		InputEvent onInputEvent;	
-		AndroidRect pendingContentRect;		
-		std::shared_ptr<AndroidInputQueue> inputQueue;
-		std::shared_ptr<AndroidNativeWindow> window;		
-	};
+    private:
+        void* userData;
+        AndroidNativeActivity* activity;
+        AndroidConfiguration* config;
+        void* savedState;
+        size_t savedStateSize;
+        AndroidLooper* looper;
+        AndroidRect contentRect;
+        int activityState;
+        int destroyRequested;
+        int msgread;
+        int msgwrite;
+        AndroidPollSource cmdPollSource;
+        AndroidPollSource inputPollSource;   
+        WindowHWnd running;
+        int stateSaved;
+        int destroyed;
+        int redrawNeeded;
+        AndroidInputQueue* pendingInputQueue;
+        AndroidNativeWindow* pendingWindow;
+        AppCmd onAppCmd;
+        InputEvent onInputEvent;
+        AndroidRect pendingContentRect;
+        std::shared_ptr<AndroidInputQueue> inputQueue;
+        std::shared_ptr<AndroidNativeWindow> window;
+    };
 }
 
-#endif // SYSTEM_PLATFORM_ANDROID
+#endif  // SYSTEM_PLATFORM_ANDROID
 
-#endif // SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_TYPEDEF_H
+#endif  // SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_TYPEDEF_H

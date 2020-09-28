@@ -1,13 +1,13 @@
-²Î¿¼ÎÄÏ×¡¤Èí¼şÉè¼Æ
+å‚è€ƒæ–‡çŒ®Â·è½¯ä»¶è®¾è®¡
 
 1.	UML
-2.	Code£¨´úÂë£©
-3.	Mode£¨Ä£Ê½£©
-4.	Refactoring£¨ÖØ¹¹£©
-5.	TestDrive£¨²âÊÔÇı¶¯£© 
-6.	AgileDevelopment£¨Ãô½İ¿ª·¢£©
-7.	Experience£¨¾­Ñé£©
-8.	ObjectOriented£¨ÃæÏò¶ÔÏó£©
-9.	SoftwareEngineering£¨Èí¼ş¹¤³Ì£©
-10.	Compile£¨±àÒë£©
-11.	ArtificialIntellegence£¨ÈË¹¤ÖÇÄÜ£© 
+2.	Codeï¼ˆä»£ç ï¼‰
+3.	Modeï¼ˆæ¨¡å¼ï¼‰
+4.	Refactoringï¼ˆé‡æ„ï¼‰
+5.	TestDriveï¼ˆæµ‹è¯•é©±åŠ¨ï¼‰ 
+6.	AgileDevelopmentï¼ˆæ•æ·å¼€å‘ï¼‰
+7.	Experienceï¼ˆç»éªŒï¼‰
+8.	ObjectOrientedï¼ˆé¢å‘å¯¹è±¡ï¼‰
+9.	SoftwareEngineeringï¼ˆè½¯ä»¶å·¥ç¨‹ï¼‰
+10.	Compileï¼ˆç¼–è¯‘ï¼‰
+11.	ArtificialIntellegenceï¼ˆäººå·¥æ™ºèƒ½ï¼‰ 

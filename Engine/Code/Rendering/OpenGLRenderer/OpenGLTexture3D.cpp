@@ -8,14 +8,13 @@
 
 #include "OpenGLTexture3D.h"
 #include "OpenGLTextureDataDetail.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
  
-Rendering::OpenGLTexture3D
-	::OpenGLTexture3D( Renderer* renderer, const Texture3D* texture )
-	:m_OpenGLTextureData{ texture }
-{	
-	SYSTEM_UNUSED_ARG(renderer);
+Rendering::OpenGLTexture3D ::OpenGLTexture3D([[maybe_unused]] Renderer* renderer, const Texture3D* texture)
+    : m_OpenGLTextureData{ texture }
+{
+    
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -24,24 +23,22 @@ Rendering::OpenGLTexture3D
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTexture3D)
 
-void Rendering::OpenGLTexture3D
-	::Enable( Renderer* renderer, int textureUnit ) noexcept
+void Rendering::OpenGLTexture3D ::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_OpenGLTextureData.Enable(textureUnit);
 
-	SYSTEM_UNUSED_ARG(renderer);
+	 
 }
 
-void Rendering::OpenGLTexture3D
-	::Disable( Renderer* renderer, int textureUnit ) noexcept
+void Rendering::OpenGLTexture3D ::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_OpenGLTextureData.Disable(textureUnit);
 
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
 void* Rendering::OpenGLTexture3D

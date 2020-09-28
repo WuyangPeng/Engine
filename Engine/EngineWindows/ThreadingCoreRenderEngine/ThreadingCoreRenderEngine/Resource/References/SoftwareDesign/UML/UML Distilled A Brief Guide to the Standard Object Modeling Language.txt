@@ -1,11 +1,11 @@
-UML¾«´â£¨UML Distilled:A Brief Guide to the Standard Object Modeling Language£©
-£¨µÚ3°æ£©
+ï»¿UMLç²¾ç²¹ï¼ˆUML Distilled:A Brief Guide to the Standard Object Modeling Languageï¼‰
+ï¼ˆç¬¬3ç‰ˆï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://martinfowler.com ¡¢http://phruby.com
+å®˜æ–¹ç½‘ç«™ï¼š
+http://martinfowler.com ã€http://phruby.com
 
-¡ï
-×÷Õß£ºMartin Fowler
+â˜…
+ä½œè€…ï¼šMartin Fowler
 
-ÖªÊ¶µã 
-1.	UML»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	UMLåŸºç¡€çŸ¥è¯†ã€‚ 

@@ -1,11 +1,11 @@
-C++ ±à³Ì¡ª¡ª´ÓÎÊÌâ·ÖÎöµ½³ÌÐòÉè¼Æ£¨C++ Programming:From Problem Analysis To Program Design£©
+C++ ç¼–ç¨‹â€”â€”ä»Žé—®é¢˜åˆ†æžåˆ°ç¨‹åºè®¾è®¡ï¼ˆC++ Programming:From Problem Analysis To Program Designï¼‰
 
-¡ð
-×÷Õß£ºD.S.Malik
+â—‹
+ä½œè€…ï¼šD.S.Malik
 
-ÖªÊ¶µã 
-1.	C++»ù´¡ÖªÊ¶¡£ 
-2.	C++»ù´¡ÖªÊ¶Á·Ï°¡£
+çŸ¥è¯†ç‚¹ 
+1.	C++åŸºç¡€çŸ¥è¯†ã€‚ 
+2.	C++åŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚
 
  
 

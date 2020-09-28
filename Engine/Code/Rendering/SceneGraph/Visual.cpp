@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 using std::string;
@@ -156,12 +156,11 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetEffectIns
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, const Rendering::FloatBound&)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, Rendering::FloatBound&)
 
-void Rendering::Visual
-	::UpdateModelSpace(VisualUpdateType type)
+void Rendering::Visual ::UpdateModelSpace([[maybe_unused]] VisualUpdateType type)
 {
 	UpdateModelBound();
 
-	SYSTEM_UNUSED_ARG(type);
+ 
 }  
 
 void Rendering::Visual
@@ -181,8 +180,7 @@ void Rendering::Visual
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,ComputeBounding, vector<APoint>,void)
 
-void Rendering::Visual
-	::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::Visual ::GetVisibleSet(Culler& culler, [[maybe_unused]] bool noCull)
 {		 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
 	{
@@ -193,7 +191,7 @@ void Rendering::Visual
 		THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
 	}
 
-	SYSTEM_UNUSED_ARG(noCull);
+ 
 }
 
 Rendering::ConstVisualSmartPointer Rendering::Visual

@@ -8,14 +8,13 @@
 
 #include "OpenGLTextureCube.h"
 #include "OpenGLTextureDataDetail.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
  
-Rendering::OpenGLTextureCube
-	::OpenGLTextureCube( Renderer* renderer, const TextureCube* texture )
-	:m_OpenGLTextureData{ texture }
+Rendering::OpenGLTextureCube ::OpenGLTextureCube([[maybe_unused]] Renderer* renderer, const TextureCube* texture)
+    : m_OpenGLTextureData{ texture }
 {	
-	SYSTEM_UNUSED_ARG(renderer);
+	 
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -24,24 +23,22 @@ Rendering::OpenGLTextureCube
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTextureCube)
 
-void Rendering::OpenGLTextureCube
-	::Enable( Renderer* renderer, int textureUnit ) noexcept
+void Rendering::OpenGLTextureCube ::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_OpenGLTextureData.Enable(textureUnit);
 
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
-void Rendering::OpenGLTextureCube
-	::Disable( Renderer* renderer, int textureUnit ) noexcept
+void Rendering::OpenGLTextureCube ::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_OpenGLTextureData.Disable(textureUnit);
 
-	SYSTEM_UNUSED_ARG(renderer);
+	 
 }
 
 void* Rendering::OpenGLTextureCube

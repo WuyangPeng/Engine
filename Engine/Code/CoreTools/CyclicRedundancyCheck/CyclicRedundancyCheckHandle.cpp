@@ -34,11 +34,10 @@ void CoreTools::CyclicRedundancyCheckHandle
 	sm_CyclicRedundancyCheckHandle.reset();
 }
 
-CoreTools::CyclicRedundancyCheckHandle
-::CyclicRedundancyCheckHandle(CyclicRedundancyCheckHandleCreate cyclicRedundancyCheckHandleCreate)
-	:m_Impl{ make_shared<ImplType>() }
+CoreTools::CyclicRedundancyCheckHandle ::CyclicRedundancyCheckHandle([[maybe_unused]] CyclicRedundancyCheckHandleCreate cyclicRedundancyCheckHandleCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(cyclicRedundancyCheckHandleCreate);
+	 
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

@@ -1,28 +1,26 @@
 TODO Level 9
 
-0.2.0.0
+0.5.1.0
 
-1. £¨UserInterface£©Íê³ÉUserInterface·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºOpenGLWglPrototypes¡£
-2. £¨UserInterface£©Íê³ÉWindows¡¢Macintosh¡¢LinuxºÍAndroidÆ½Ì¨µÄGUIµ÷ÓÃ¡£ 
-3. £¨Com£©Íê³ÉCom·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºComObjectBase¡£ComÆäËûÊµÏÖ¸ù¾İĞèÒªÌí¼Ó¡£
-4. £¨Security£©½«LookupPrivilegeUsingµÄstring³£Á¿¸Ä³É·Çconstexprº¯Êı¡£
-5. £¨OpenGL£©½«SYSTEM_GET_FUNCTION¡¢SYSTEM_GET_FUNCTION_SUFFIX¡¢SYSTEM_GET_FUNCTION_SUFFIX_ALTºê¸Ä³Éºê¼Óº¯Êı£¬²¢°Ñ²¶»ñËùÓĞÒì³£È¥µô£¬ÉÏ²ãµ÷ÓÃ¸Ä³É¿ÉÅ×³öÒì³£¡£
-6. £¨Security£©Íê³ÉSecurity·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºLookupPrivilege¡¢CreateSecurity¡¢SecuritySid¡¢SecurityAcl¡¢SecurityDescriptor¡¢SecurityAce¡¢AddAccess¡¢SecurityBase¡¢AccessCheck¡£
-7. £¨Network£©Íê³ÉNetwork·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºSocketPrototypes¡¢DatabasePrototypes¡¢WindowsExtensionPrototypes¡¢WindowsSockEx¡¢WindowsInternet¡£
-8. £¨Window£©Íê³ÉWindow·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºWindowCreate¡¢WindowProcess¡¢WindowRegister¡¢WindowFontInformation¡¢WindowSystem¡¢WindowNamedPipe¡¢WindowUser¡¢WindowRegistry¡£ 
-9. £¨Network£©²¹È«ÍøÂç¿âAPIµÄµ÷ÓÃ¡£
-10.£¨OpenGL£©½«OpenGLAPIÖĞµÄÀàĞÍºê¸Ä³ÉÃ¶¾Ù¡£
-11.£¨OpenGL£©½«OpenGLGlutÖĞµÄÀàĞÍºê¸Ä³ÉÃ¶¾Ù¡£
-12.£¨OpenGL£©¿¼ÂÇÊ¹ÓÃÀàºÍËø·â×°openglÊÇ·ñ´æÔÚµÄÈ«¾Ö±äÁ¿¡£
-13.£¨OpenGL£©¸ù¾İ×îĞÂµÄglew°æ±¾¶ÔÄ£¿é½øĞĞÀ©Õ¹¡£
-14.£¨OpenGL£©Íê³ÉOpenGL²âÊÔÄ£¿é£¬¶ÔËùÓĞOpenGL APIÍ¨¹ıÃ¶¾Ùµ÷ÓÃº¯Êı½øĞĞ·â×°¡£
-15.£¨DirectX£©Íê³ÉDirectX¿â£ºD3D9¡¢D3D10¡¢D3D11¡£
-16.£¨Linux£©Íê³ÉLinux APIÒÔ¼°ÆäËûÆ½Ì¨¶ÔLinux APIµÄĞéÄâÊµÏÖ¡£
-17.£¨Macintosh£©Íê³ÉMacintosh APIÒÔ¼°ÆäËûÆ½Ì¨¶ÔMacintosh APIµÄĞéÄâÊµÏÖ¡£ 
-18.£¨Android£©Íê³ÉAndroid APIÒÔ¼°ÆäËûÆ½Ì¨¶ÔAndroid APIµÄĞéÄâÊµÏÖ¡£ 
-19.£¨Window£©Íê³ÉWindow·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºLastWindowError¡£
-20.£¨×ÛºÏ£©ÊµÏÖÒÆÖ³µ½LinuxÆ½Ì¨¡£
-21.£¨×ÛºÏ£©ÊµÏÖÒÆÖ³µ½AndroidÆ½Ì¨¡£
-22.£¨×ÛºÏ£©ÊµÏÖÒÆÖ³µ½MacintoshÆ½Ì¨¡£
-23.£¨×ÛºÏ£©ÆäËû¿âÒıÓÃÏµÍ³¿âµÄFwdÎÄ¼ş´æÔÚÎÊÌâ£¬¸Ä³ÉÏµÍ³¿âÄÚ²¿Ê¹ÓÃ¡£
-24.£¨Window£©½ûÖ¹¹Ø±Õ¿ØÖÆÌ¨´°¿Ú£¬µ«×îĞ¡»¯Ê±ÒÀÈ»¿ÉÒÔ¹Ø±Õ¡£
+1. ï¼ˆUserInterfaceï¼‰å®ŒæˆUserInterfaceéWindowså¹³å°çš„å®ç°ï¼šOpenGLWglPrototypesã€‚
+2. ï¼ˆUserInterfaceï¼‰å®ŒæˆWindowsã€Macintoshã€Linuxå’ŒAndroidå¹³å°çš„GUIè°ƒç”¨ã€‚ 
+3. ï¼ˆWindowï¼‰å®ŒæˆComéWindowså¹³å°çš„å®ç°ï¼šComObjectBaseã€‚Comå…¶ä»–å®ç°æ ¹æ®éœ€è¦æ·»åŠ ã€‚
+4. ï¼ˆSecurityï¼‰å®ŒæˆSecurityéWindowså¹³å°çš„å®ç°ï¼šLookupPrivilegeã€CreateSecurityã€SecuritySidã€SecurityAclã€SecurityDescriptorã€SecurityAceã€AddAccessã€SecurityBaseã€AccessCheckã€‚
+5. ï¼ˆNetworkï¼‰å®ŒæˆNetworkéWindowså¹³å°çš„å®ç°ï¼šSocketPrototypesã€DatabasePrototypesã€WindowsExtensionPrototypesã€WindowsSockExã€WindowsInternetã€‚
+6. ï¼ˆWindowï¼‰å®ŒæˆWindowéWindowså¹³å°çš„å®ç°ï¼šWindowCreateã€WindowProcessã€WindowRegisterã€WindowFontInformationã€WindowSystemã€WindowNamedPipeã€WindowUserã€WindowRegistryã€‚ 
+7. ï¼ˆNetworkï¼‰è¡¥å…¨ç½‘ç»œåº“APIçš„è°ƒç”¨ã€‚
+8. ï¼ˆOpenGLï¼‰å°†OpenGLAPIä¸­çš„ç±»å‹å®æ”¹æˆæšä¸¾ã€‚
+9. ï¼ˆOpenGLï¼‰å°†OpenGLGlutä¸­çš„ç±»å‹å®æ”¹æˆæšä¸¾ã€‚
+10.ï¼ˆOpenGLï¼‰è€ƒè™‘ä½¿ç”¨ç±»å’Œé”å°è£…openglæ˜¯å¦å­˜åœ¨çš„å…¨å±€å˜é‡ã€‚
+11.ï¼ˆOpenGLï¼‰æ ¹æ®æœ€æ–°çš„glewç‰ˆæœ¬å¯¹æ¨¡å—è¿›è¡Œæ‰©å±•ã€‚
+12.ï¼ˆOpenGLï¼‰å®ŒæˆOpenGLæµ‹è¯•æ¨¡å—ï¼Œå¯¹æ‰€æœ‰OpenGL APIé€šè¿‡æšä¸¾è°ƒç”¨å‡½æ•°è¿›è¡Œå°è£…ã€‚
+13.ï¼ˆDirectXï¼‰å®ŒæˆDirectXåº“ï¼šD3D9ã€D3D10ã€D3D11ã€‚
+14.ï¼ˆLinuxï¼‰å®ŒæˆLinux APIä»¥åŠå…¶ä»–å¹³å°å¯¹Linux APIçš„è™šæ‹Ÿå®ç°ã€‚
+15.ï¼ˆMacintoshï¼‰å®ŒæˆMacintosh APIä»¥åŠå…¶ä»–å¹³å°å¯¹Macintosh APIçš„è™šæ‹Ÿå®ç°ã€‚ 
+16.ï¼ˆAndroidï¼‰å®ŒæˆAndroid APIä»¥åŠå…¶ä»–å¹³å°å¯¹Android APIçš„è™šæ‹Ÿå®ç°ã€‚ 
+17.ï¼ˆWindowï¼‰å®ŒæˆWindowéWindowså¹³å°çš„å®ç°ï¼šLastWindowErrorã€‚
+18.ï¼ˆWindowï¼‰ç¦æ­¢å…³é—­æ§åˆ¶å°çª—å£ï¼Œä½†æœ€å°åŒ–æ—¶ä¾ç„¶å¯ä»¥å…³é—­ã€‚
+19.ï¼ˆç»¼åˆï¼‰å®ç°ç§»æ®–åˆ°Linuxå¹³å°ã€‚
+20.ï¼ˆç»¼åˆï¼‰å®ç°ç§»æ®–åˆ°Androidå¹³å°ã€‚
+21.ï¼ˆç»¼åˆï¼‰å®ç°ç§»æ®–åˆ°Macintoshå¹³å°ã€‚
+

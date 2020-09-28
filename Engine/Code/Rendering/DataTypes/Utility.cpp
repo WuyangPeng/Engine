@@ -10,7 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "Utility.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Base/SpanIteratorDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"

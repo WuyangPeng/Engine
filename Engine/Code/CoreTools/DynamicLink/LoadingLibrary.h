@@ -28,12 +28,12 @@ namespace CoreTools
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(LoadingLibrary);
 		using String = System::String;
-		using LoadLibrary = System::LoadLibrary;
+		using LoadLibraryType = System::LoadLibraryType;
 		using DynamicLinkModule = System::DynamicLinkModule;
 		using DynamicLinkProcess = System::DynamicLinkProcess;
 
 	public:
-		LoadingLibrary(const String& fileName, LoadLibrary flags);
+		LoadingLibrary(const String& fileName, LoadLibraryType flags);
 
 		CLASS_INVARIANT_DECLARE;
 

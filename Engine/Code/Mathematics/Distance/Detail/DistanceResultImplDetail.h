@@ -8,7 +8,7 @@
 #define MATHEMATICS_DISTANCE_DISTANCE_RESLUT_IMPL_DETAIL_H
 
 #include "DistanceResultImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
@@ -76,25 +76,23 @@ const Vector Mathematics::DistanceResultImpl<Real, Vector>
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceResultImpl<Real, Vector>
-	::GetLhsClosestPoint(int index) const
+const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPoint([[maybe_unused]] int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < GetLhsClosestPointSize(), "距离结果不包含最近相交点！\n");
 
-	SYSTEM_UNUSED_ARG(index);
+ 
 
 	return Vector{};
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceResultImpl<Real, Vector>
-	::GetRhsClosestPoint(int index) const
+const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetRhsClosestPoint([[maybe_unused]] int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < GetRhsClosestPointSize(), "距离结果不包含最近相交点！\n");
 
-	SYSTEM_UNUSED_ARG(index);
+ 
 
 	return Vector{};
 }
@@ -142,7 +140,7 @@ void Mathematics::DistanceResultImpl<Real, Vector>
 	MATHEMATICS_CLASS_IS_VALID_1;
 	MATHEMATICS_ASSERTION_2(false, "距离结果不包含接触时间！\n");
 
-	SYSTEM_UNUSED_ARG(contactTime);
+	
 }
 
 template <typename Real, typename Vector>

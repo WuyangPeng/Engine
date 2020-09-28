@@ -1,13 +1,13 @@
-Êı¾İ¿âÏµÍ³»ù´¡½Ì³Ì£¨A First Course in Database Systems£©
-£¨µÚ3°æ£©
+æ•°æ®åº“ç³»ç»ŸåŸºç¡€æ•™ç¨‹ï¼ˆA First Course in Database Systemsï¼‰
+ï¼ˆç¬¬3ç‰ˆï¼‰
 
-¹Ù·½ÍøÕ¾£º
+å®˜æ–¹ç½‘ç«™ï¼š
 http://infolab.stanford.edu/~ullman/fcdb.html
 
-¡ï
-×÷Õß£ºJeffrey D.Ullman¡¢Jennifer Widom
+â˜…
+ä½œè€…ï¼šJeffrey D.Ullmanã€Jennifer Widom
 
-ÖªÊ¶µã 
-1.	Êı¾İ¿â»ù´¡ÖªÊ¶¡£ 
-2.	Êı¾İ¿â»ù´¡ÖªÊ¶Á·Ï°¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	æ•°æ®åº“åŸºç¡€çŸ¥è¯†ã€‚ 
+2.	æ•°æ®åº“åŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚ 
 

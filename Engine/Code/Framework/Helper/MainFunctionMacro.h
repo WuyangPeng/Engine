@@ -11,12 +11,12 @@
 
 #define WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(namespaceName, helperClassName, windowName, engineEnvironment,engineDirectory, windowSizeWidth, windowSizeHeight) \
 		int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowHInstance instance, SYSTEM_IN_OPT System::WindowHInstance previousInstance, \
-		SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) { SYSTEM_UNUSED_ARG(showCommand); \
+		SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) {  \
 		return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, windowName, windowSizeWidth, windowSizeHeight, previousInstance); }
 
 #define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment,engineDirectory, renderer) \
 		int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowHInstance instance, SYSTEM_IN_OPT System::WindowHInstance previousInstance, \
-		SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) { SYSTEM_UNUSED_ARG(showCommand); \
+		SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) {  \
 		return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment,engineDirectory, renderer, previousInstance); }
 
 #define CONSOLE_MAIN_FUNCTION(namespaceName, helperClassName, consoleTitle, engineEnvironment,engineDirectory) \
@@ -34,7 +34,7 @@
 
 	#define ANDROID_MAIN_FUNCTION(namespaceName, helperClassName,engineEnvironment,engineDirectory) \
 			int main() { System::AndroidApp androidApp{ }; return Framework::AndroidMainEntryPoint<namespaceName::helperClassName>(&androidApp, engineEnvironment,engineDirectory); } \
-			void android_main(System::AndroidApp* androidApp) { SYSTEM_UNUSED_ARG(androidApp); }
+			void android_main(System::AndroidApp* androidApp) {  }
 
 #else // !FRAMEWORK_ANDROID_TEST && !SYSTEM_PLATFORM_ANDROID
 

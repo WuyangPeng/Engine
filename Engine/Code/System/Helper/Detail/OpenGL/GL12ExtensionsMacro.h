@@ -1,13 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:38)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:46)
 
 #ifndef SYSTEM_HELPER_GL_12_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_12_EXTENSIONS_MACRO_H
 
-#include "System/Helper/GLExtensionsMacro.h" 
+#include "System/Helper/GLExtensionsMacro.h"
 
 #define GL_SMOOTH_POINT_SIZE_RANGE 0x0B12
 #define GL_SMOOTH_POINT_SIZE_GRANULARITY 0x0B13
@@ -56,4 +59,4 @@
 #define glTexSubImage3D System::GlTexSubImage3D
 #define glCopyTexSubImage3D System::GlCopyTexSubImage3D
 
-#endif // SYSTEM_HELPER_GL_12_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_12_EXTENSIONS_MACRO_H

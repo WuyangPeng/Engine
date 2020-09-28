@@ -1,11 +1,8 @@
-׽�����ռǡ�������C++ Bug��Χ�ˣ�How not to Program in C++��
+捉虫历险记——常见C++ Bug大围剿（How not to Program in C++）
 
-��
-���ߣ�Steve Oualline
+○
+作者：Steve Oualline
 
 
-֪ʶ�� 
-
-���� 
-
-Ҫ��  
+知识点 
+1.	C++	基础知识。    

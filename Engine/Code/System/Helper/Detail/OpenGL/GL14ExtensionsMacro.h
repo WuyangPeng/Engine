@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:38)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:46)
 
 #ifndef SYSTEM_HELPER_GL_14_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_14_EXTENSIONS_MACRO_H
@@ -93,6 +96,6 @@
 #define glWindowPos3i System::GlWindowPos3i
 #define glWindowPos3iv System::GlWindowPos3iv
 #define glWindowPos3s System::GlWindowPos3s
-#define glWindowPos3sv System::GlWindowPos3sv 
+#define glWindowPos3sv System::GlWindowPos3sv
 
-#endif // SYSTEM_HELPER_GL_14_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_14_EXTENSIONS_MACRO_H

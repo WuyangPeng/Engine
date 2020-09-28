@@ -1,21 +1,21 @@
-ÉîÈë½âÎöWindows²Ù×÷ÏµÍ³ £¨Microsoft Windows Internals£©
+æ·±å…¥è§£æWindowsæ“ä½œç³»ç»Ÿ ï¼ˆMicrosoft Windows Internalsï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://www.sysinternals.com¡¢ http://www.microsoft.com/technet/sysinternals/information.windowsinternals.mspx £¨ÒÑÊ§Ğ§£©¡¢
-http://www.microsoft.com/learning/support £¨ÒÑÊ§Ğ§£©¡¢http://www.microsoft.com/learning/support/search.asp £¨ÒÑÊ§Ğ§£©¡¢
-http://www.microsoft.com/technet/sysinternals £¨ÒÑÊ§Ğ§£© 
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.sysinternals.comã€ http://www.microsoft.com/technet/sysinternals/information.windowsinternals.mspx ï¼ˆå·²å¤±æ•ˆï¼‰ã€
+http://www.microsoft.com/learning/support ï¼ˆå·²å¤±æ•ˆï¼‰ã€http://www.microsoft.com/learning/support/search.asp ï¼ˆå·²å¤±æ•ˆï¼‰ã€
+http://www.microsoft.com/technet/sysinternals ï¼ˆå·²å¤±æ•ˆï¼‰ 
  
-µÚ4°æ
-¡î
-×÷Õß£ºMark E.Russinovich¡¢David A.Solomon
+ç¬¬4ç‰ˆ
+â˜†
+ä½œè€…ï¼šMark E.Russinovichã€David A.Solomon
 
-ÖªÊ¶µã 
-1.	Windows²Ù×÷ÏµÍ³»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	Windowsæ“ä½œç³»ç»ŸåŸºç¡€çŸ¥è¯†ã€‚ 
 
-µÚ6°æÉÏ²á
-¡ï
-×÷Õß£ºMark E.Russinovich¡¢David A.Solomon¡¢Alex Ionescu
+ç¬¬6ç‰ˆä¸Šå†Œ
+â˜…
+ä½œè€…ï¼šMark E.Russinovichã€David A.Solomonã€Alex Ionescu
 
-ÖªÊ¶µã 
-1.	Windows²Ù×÷ÏµÍ³»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	Windowsæ“ä½œç³»ç»ŸåŸºç¡€çŸ¥è¯†ã€‚ 
 

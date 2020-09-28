@@ -1,15 +1,15 @@
-ÉîÈëÀí½â¼ÆËã»úÏµÍ³ £¨Computer Systems:A Programmers's Perspective£©
-£¨µÚ3°æ£©
+æ·±å…¥ç†è§£è®¡ç®—æœºç³»ç»Ÿ ï¼ˆComputer Systems:A Programmers's Perspectiveï¼‰
+ï¼ˆç¬¬3ç‰ˆï¼‰
 
-¹Ù·½ÍøÕ¾£º
+å®˜æ–¹ç½‘ç«™ï¼š
 http://csapp.cs.cmu.edu
  
-¡î 
-×÷Õß£º Randal E.Bryant¡¢David R.O'Hallaron
+â˜† 
+ä½œè€…ï¼š Randal E.Bryantã€David R.O'Hallaron
 
-ÖªÊ¶µã 
-1.	¼ÆËã»ú»ù´¡ÖªÊ¶¡£
-2.	¼ÆËã»ú»ù´¡ÖªÊ¶Ï°Ìâ¡£
+çŸ¥è¯†ç‚¹ 
+1.	è®¡ç®—æœºåŸºç¡€çŸ¥è¯†ã€‚
+2.	è®¡ç®—æœºåŸºç¡€çŸ¥è¯†ä¹ é¢˜ã€‚
 
-´úÂë 
-1.  Êé¼®´úÂë¡£
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚

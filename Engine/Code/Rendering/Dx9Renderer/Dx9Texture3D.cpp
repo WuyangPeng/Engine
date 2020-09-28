@@ -7,17 +7,15 @@
 #include "Rendering/RenderingExport.h"
 
 #include "Dx9Texture3D.h" 
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ClassInvariant/Noexcept.h"
 
-Rendering::Dx9Texture3D
-	::Dx9Texture3D( Renderer* renderer, const Texture3D* texture )
- 
+Rendering::Dx9Texture3D ::Dx9Texture3D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture3D* texture)
+
 {
     CoreTools::DoNothing();
-	SYSTEM_UNUSED_ARG(renderer);
-	SYSTEM_UNUSED_ARG(texture);
+ 
 
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
@@ -52,8 +50,7 @@ Rendering::Dx9Texture3D
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9Texture3D)
 
-void Rendering::Dx9Texture3D
-	::Enable( Renderer* renderer, int textureUnit )
+void Rendering::Dx9Texture3D ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -65,12 +62,10 @@ void Rendering::Dx9Texture3D
 	  RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to enable 3D texture, unit %d: %s\n",
 	  textureUnit, DXGetErrorString(hr));*/
 
-	SYSTEM_UNUSED_ARG(textureUnit);
-	SYSTEM_UNUSED_ARG(renderer);
+	 
 }
 
-void Rendering::Dx9Texture3D
-	::Disable( Renderer* renderer, int textureUnit )
+void Rendering::Dx9Texture3D ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -93,13 +88,10 @@ void Rendering::Dx9Texture3D
 	hr = device->SetTexture(textureUnit, 0);
 	RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to disable 3D texture, unit %d: %s\n",
 	textureUnit, DXGetErrorString(hr));*/
-
-	SYSTEM_UNUSED_ARG(textureUnit);
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
-void* Rendering::Dx9Texture3D
-	::Lock( int level, BufferLocking mode )
+void* Rendering::Dx9Texture3D ::Lock([[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -112,14 +104,12 @@ void* Rendering::Dx9Texture3D
 	 level, DXGetErrorString(hr));
 	 return box.pBits;*/
 
-	SYSTEM_UNUSED_ARG(level);
-	SYSTEM_UNUSED_ARG(mode);
+	 
 
 	return nullptr;
 }
 
-void Rendering::Dx9Texture3D
-	::Unlock( int level )
+void Rendering::Dx9Texture3D ::Unlock([[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -129,6 +119,6 @@ void Rendering::Dx9Texture3D
 	 RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to unlock level %u of 3D texture: %s\n",
 	 level, DXGetErrorString(hr));*/
 
-	SYSTEM_UNUSED_ARG(level);
+ 
 }
 

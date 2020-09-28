@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ViewMatrixConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Rendering/SceneGraph/Camera.h"
@@ -38,8 +38,7 @@ Rendering::ViewMatrixConstant
  
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ViewMatrixConstant)
 
-void Rendering::ViewMatrixConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::ViewMatrixConstant ::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -47,7 +46,7 @@ void Rendering::ViewMatrixConstant
 
 	SetRegisters(viewMatrix);	
 
-	SYSTEM_UNUSED_ARG(visual);
+ 
 }
 
 void Rendering::ViewMatrixConstant

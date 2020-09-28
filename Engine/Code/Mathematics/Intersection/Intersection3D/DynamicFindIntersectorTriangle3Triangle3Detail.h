@@ -1065,7 +1065,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		StaticFindIntersectorTriangle3Triangle3<Real> calc{ tri0, tri1 };
 		auto result = calc.IsIntersection();
 		MATHEMATICS_ASSERTION_0(result, "Intersection must exist\n");
-		SYSTEM_UNUSED_ARG(result);
+		
 		mQuantity = calc.GetQuantity();
 		this->SetIntersectionType(calc.GetIntersectionType());
 		for (int i = 0; i < mQuantity; ++i)

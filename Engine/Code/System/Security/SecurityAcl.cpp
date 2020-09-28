@@ -1,92 +1,74 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 15:59)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/24 17:19)
 
 #include "System/SystemExport.h"
 
-#include "SecurityAcl.h" 
-#include "System/Helper/WindowsMacro.h"
-#include "System/Helper/UnusedMacro.h"
+#include "SecurityAcl.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/WindowsMacro.h"
 
-bool System
-	::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclRevisionInformationPtr aclInformation) noexcept
+bool System::GetAccessControlListInformation([[maybe_unused]] AccessCheckACLPtr acl, [[maybe_unused]] SecurityAclRevisionInformationPtr aclInformation) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(acl);
-	SYSTEM_UNUSED_ARG(aclInformation);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclSizeInformationPtr aclInformation) noexcept
+bool System::GetAccessControlListInformation([[maybe_unused]] AccessCheckACLPtr acl, [[maybe_unused]] SecurityAclSizeInformationPtr aclInformation) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclSizeInformation), AclSizeInformation) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(acl);
-	SYSTEM_UNUSED_ARG(aclInformation);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclSizeInformation), AclSizeInformation) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::InitializeAccessControlList(AccessCheckACLPtr acl, WindowDWord aclLength, AccessControlListRevision aclRevision) noexcept
+bool System::InitializeAccessControlList([[maybe_unused]] AccessCheckACLPtr acl, [[maybe_unused]] WindowDWord aclLength, [[maybe_unused]] AccessControlListRevision aclRevision) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::InitializeAcl(acl, aclLength, EnumCastUnderlying(aclRevision)) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(acl);
-	SYSTEM_UNUSED_ARG(aclLength);
-	SYSTEM_UNUSED_ARG(aclRevision);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::InitializeAcl(acl, aclLength, EnumCastUnderlying(aclRevision)) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::IsAccessControlListValid(AccessCheckACLPtr acl) noexcept
+bool System::IsAccessControlListValid([[maybe_unused]] AccessCheckACLPtr acl) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::IsValidAcl(acl) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(acl);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::IsValidAcl(acl) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::SetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclRevisionInformationPtr aclInformation) noexcept
+bool System::SetAccessControlListInformation([[maybe_unused]] AccessCheckACLPtr acl, [[maybe_unused]] SecurityAclRevisionInformationPtr aclInformation) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::SetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(acl);
-	SYSTEM_UNUSED_ARG(aclInformation);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::SetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }

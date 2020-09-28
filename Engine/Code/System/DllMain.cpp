@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/10 12:09)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/20 14:01)
 
 #include "System/SystemExport.h"
 
@@ -11,34 +14,24 @@
 #include "Helper/WindowsMacro.h"
 #include "Window/Using/WindowUsing.h"
 
-#if !defined(BUILDING_SYSTEM_STATIC) && defined(SYSTEM_PLATFORM_WIN32) 
+#if !defined(BUILDING_SYSTEM_STATIC) && defined(SYSTEM_PLATFORM_WIN32)
 
-	using System::WindowDWord;
-	using System::WindowVoidPtr;
-	using System::WindowHInstance;
+using System::WindowDWord;
+using System::WindowHInstance;
+using System::WindowVoidPtr;
 
-	#include STSTEM_WARNING_PUSH
-	#include SYSTEM_WARNING_DISABLE(26461)
+int SYSTEM_WINAPI DllMain([[maybe_unused]] WindowHInstance instance, [[maybe_unused]] WindowDWord reason, [[maybe_unused]] WindowVoidPtr reserved) noexcept
+{
+    return System::g_True;
+}
 
-	int SYSTEM_WINAPI DllMain(WindowHInstance instance, WindowDWord reason, WindowVoidPtr reserved) noexcept
-	{
-		SYSTEM_UNUSED_ARG(instance);
-		SYSTEM_UNUSED_ARG(reason);
-		SYSTEM_UNUSED_ARG(reserved);
+#else  // defined(BUILDING_SYSTEM_STATIC) || !defined(SYSTEM_PLATFORM_WIN32)
 
-		return System::g_True;
-	}
+namespace System
+{
+    void SystemDllMain() noexcept
+    {
+    }
+}
 
-	#include STSTEM_WARNING_POP 
-
-#else // defined(BUILDING_SYSTEM_STATIC) || !defined(SYSTEM_PLATFORM_WIN32)
-
-	namespace System
-	{
-		void SystemDllMain() noexcept
-		{
-
-		}
-	}
-
-#endif // !BUILDING_SYSTEM_STATIC
+#endif  // !BUILDING_SYSTEM_STATIC

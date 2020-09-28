@@ -10,7 +10,7 @@
 #include "InitTerm.h"
 #include "ObjectInterface.h"
 #include "ObjectManager.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
@@ -25,10 +25,10 @@ CoreTools::ObjectInterface ::ObjectInterface() noexcept
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::ObjectInterface ::ObjectInterface(LoadConstructor value) noexcept
+CoreTools::ObjectInterface ::ObjectInterface([[maybe_unused]] LoadConstructor value) noexcept
     : m_UniqueID{ 0 }
 {
-    SYSTEM_UNUSED_ARG(value);
+ 
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

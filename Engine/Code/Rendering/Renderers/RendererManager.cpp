@@ -36,11 +36,10 @@ void Rendering::RendererManager
 	sm_RendererManager.reset();
 }
 
-Rendering::RendererManager
-::RendererManager(RendererManagerCreate rendererManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Rendering::RendererManager ::RendererManager([[maybe_unused]] RendererManagerCreate rendererManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(rendererManagerCreate);
+ 
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }

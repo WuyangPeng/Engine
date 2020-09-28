@@ -8,7 +8,7 @@
 
 #include "ShaderFloat.h"
 #include "Detail/ShaderFloatImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -116,16 +116,14 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderFloat,DisableUpdater,vo
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderFloat,AllowUpdater, bool)
  
-void Rendering::ShaderFloat
-	::Update (const Visual* visual, const Camera* camera)
+void Rendering::ShaderFloat ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
     // ≈……˙¿‡¥Ê∏˘°£
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(visual);
-	SYSTEM_UNUSED_ARG(camera);
+ 
 }
 
 Rendering::ShaderFloat::ShaderFloatSmartPointer Rendering::ShaderFloat

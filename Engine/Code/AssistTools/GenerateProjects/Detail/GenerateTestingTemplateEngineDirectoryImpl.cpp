@@ -97,7 +97,7 @@ void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
 {
 	System::String fullDirectory = resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + moduleName + GetTesting() + GetForwardSlash() + GetResource();
 
-	System::CreateFileDirectory(fullDirectory, nullptr);
+	 [[maybe_unused]] const auto result = System::CreateFileDirectory(fullDirectory, nullptr);
 
 	CoreTools::WriteFileManager manager(fullDirectory + GetForwardSlash() + GetUpdate());
 }

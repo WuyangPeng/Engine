@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "NumberCommandArgument.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/PragmaWarning/LexicalCast.h" 
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
@@ -107,12 +107,11 @@ CoreTools::NumberCommandArgument::CommandArgumentSharedPtr CoreTools::NumberComm
 	return make_shared<NumberCommandArgument>(*this);
 }
 
-void CoreTools::NumberCommandArgument
-	::AddArgumentValue(const string& value)
+void CoreTools::NumberCommandArgument ::AddArgumentValue([[maybe_unused]] const string& value)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	SYSTEM_UNUSED_ARG(value);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不能添加值！"s));
 }

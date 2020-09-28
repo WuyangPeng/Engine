@@ -1,89 +1,82 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/10 13:21)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/24 12:48)
 
 #include "System/SystemExport.h"
 
 #include "DeltaTimeValueData.h"
 
-System::DeltaTimeValueData
-	::DeltaTimeValueData() noexcept
-	:m_DeltaTimeValue{ }
+System::DeltaTimeValueData::DeltaTimeValueData() noexcept
+    : m_DeltaTimeValue{}
 {
 }
 
-System::DeltaTimeValueData
-	::DeltaTimeValueData(const DeltaTimeValue& deltaTimeValue) noexcept
-	:m_DeltaTimeValue{ deltaTimeValue }
+System::DeltaTimeValueData::DeltaTimeValueData(const DeltaTimeValue& deltaTimeValue) noexcept
+    : m_DeltaTimeValue{ deltaTimeValue }
 {
 }
 
-System::DeltaTimeValueData
-	::DeltaTimeValueData(int64_t second, int32_t microsecond) noexcept
-	:m_DeltaTimeValue{ }
+System::DeltaTimeValueData::DeltaTimeValueData(int64_t second, int32_t microsecond) noexcept
+    : m_DeltaTimeValue{}
 {
-	m_DeltaTimeValue.tv_sec = second;
-	m_DeltaTimeValue.tv_usec = microsecond;
+    m_DeltaTimeValue.tv_sec = second;
+    m_DeltaTimeValue.tv_usec = microsecond;
 }
 
-const System::DeltaTimeValue System::DeltaTimeValueData
-	::GetDeltaTimeValue() const noexcept
+const System::DeltaTimeValue System::DeltaTimeValueData::GetDeltaTimeValue() const noexcept
 {
-	return m_DeltaTimeValue;
+    return m_DeltaTimeValue;
 }
 
-void System::DeltaTimeValueData
-	::SetValue(int64_t second, int32_t microsecond) noexcept
+void System::DeltaTimeValueData::SetValue(int64_t second, int32_t microsecond) noexcept
 {
-	m_DeltaTimeValue.tv_sec = second;
-	m_DeltaTimeValue.tv_usec = microsecond;
+    m_DeltaTimeValue.tv_sec = second;
+    m_DeltaTimeValue.tv_usec = microsecond;
 }
 
-int64_t System::DeltaTimeValueData
-	::GetSecond() const noexcept
+int64_t System::DeltaTimeValueData::GetSecond() const noexcept
 {
-	return m_DeltaTimeValue.tv_sec;
+    return m_DeltaTimeValue.tv_sec;
 }
 
-int32_t System::DeltaTimeValueData
-	::GetMicrosecond() const noexcept
+int32_t System::DeltaTimeValueData::GetMicrosecond() const noexcept
 {
-	return m_DeltaTimeValue.tv_usec;
+    return m_DeltaTimeValue.tv_usec;
 }
 
-void System::DeltaTimeValueData
-	::Correction() noexcept
+void System::DeltaTimeValueData::Correction() noexcept
 {
-	if (m_DeltaTimeValue.tv_usec < 0)
-	{
-		m_DeltaTimeValue.tv_usec += g_Microseconds;
-		--m_DeltaTimeValue.tv_sec;
-	}
+    if (m_DeltaTimeValue.tv_usec < 0)
+    {
+        m_DeltaTimeValue.tv_usec += g_Microseconds;
+        --m_DeltaTimeValue.tv_sec;
+    }
 }
 
-System::DeltaTimeValueData System
-	::operator-(const DeltaTimeValueData& lhs, const DeltaTimeValueData& rhs) noexcept
+System::DeltaTimeValueData System::operator-(const DeltaTimeValueData& lhs, const DeltaTimeValueData& rhs) noexcept
 {
 #ifdef SYSTEM_PLATFORM_MACOS
 
-	auto copyLhs = lhs.GetDeltaTimeValue();
-	auto copyRhs = rhs.GetDeltaTimeValue();
-	DeltaTimeValue result{ };
+    auto copyLhs = lhs.GetDeltaTimeValue();
+    auto copyRhs = rhs.GetDeltaTimeValue();
+    DeltaTimeValue result{};
 
-	timersub(&copyLhs, &copyRhs, &result);
+    timersub(&copyLhs, &copyRhs, &result);
 
-	return DeltaTimeValueData{ result };
+    return DeltaTimeValueData{ result };
 
-#else // !SYSTEM_PLATFORM_MACOS
+#else  // !SYSTEM_PLATFORM_MACOS
 
-	DeltaTimeValueData result{ lhs.GetSecond() - rhs.GetSecond() , lhs.GetMicrosecond() - rhs.GetMicrosecond() };
+    DeltaTimeValueData result{ lhs.GetSecond() - rhs.GetSecond(), lhs.GetMicrosecond() - rhs.GetMicrosecond() };
 
-	result.Correction();
+    result.Correction();
 
-	return result;
+    return result;
 
-#endif // SYSTEM_PLATFORM_MACOS
+#endif  // SYSTEM_PLATFORM_MACOS
 }
-

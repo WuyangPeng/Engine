@@ -8,7 +8,7 @@
 
 #include "OpenGLIndexBuffer.h"
 #include "OpenGLMapping.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/OpenGL/OpenGLAPI.h"
 #include "Rendering/Resources/IndexBuffer.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
@@ -18,13 +18,12 @@
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-Rendering::OpenGLIndexBuffer
-    ::OpenGLIndexBuffer (Renderer* renderer,const IndexBuffer* indexBuffer)
-	:ParentType{}, m_Buffer{ 0 }
+Rendering::OpenGLIndexBuffer ::OpenGLIndexBuffer([[maybe_unused]] Renderer* renderer, const IndexBuffer* indexBuffer)
+    : ParentType{}, m_Buffer{ 0 }
 {
     Init(indexBuffer);
     
-    SYSTEM_UNUSED_ARG(renderer);
+ 
     
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -60,24 +59,22 @@ bool Rendering::OpenGLIndexBuffer
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::OpenGLIndexBuffer
-    ::Enable (Renderer* renderer) noexcept
+void Rendering::OpenGLIndexBuffer ::Enable([[maybe_unused]] Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     System::GlBindElementBuffer(m_Buffer);
     
-    SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
-void Rendering::OpenGLIndexBuffer
-    ::Disable (Renderer* renderer) noexcept
+void Rendering::OpenGLIndexBuffer ::Disable([[maybe_unused]] Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     System::GlBindElementBuffer(0);
     
-    SYSTEM_UNUSED_ARG(renderer);
+  
 }
 
 void* Rendering::OpenGLIndexBuffer

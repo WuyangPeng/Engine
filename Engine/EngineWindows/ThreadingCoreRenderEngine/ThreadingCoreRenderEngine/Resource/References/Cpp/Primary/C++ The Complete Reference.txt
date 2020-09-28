@@ -1,16 +1,16 @@
-C++ ²Î¿¼´óÈ«£¨C++:The Complete Reference£©
-£¨µÚ4°æ£©
+C++ å‚è€ƒå¤§å…¨ï¼ˆC++:The Complete Referenceï¼‰
+ï¼ˆç¬¬4ç‰ˆï¼‰
 
-¹Ù·½ÍøÕ¾ 
-http://www.osborne.com¡£
+å®˜æ–¹ç½‘ç«™ 
+http://www.osborne.comã€‚
 
-¡ğ
-×÷Õß£ºHerbert Schildt
+â—‹
+ä½œè€…ï¼šHerbert Schildt
 
-ÖªÊ¶µã 
-1.	C++»ù´¡ÖªÊ¶¡£  
+çŸ¥è¯†ç‚¹ 
+1.	C++åŸºç¡€çŸ¥è¯†ã€‚  
 
-´úÂë 
-1.  Êé¼®´úÂë¡£
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚
 
   

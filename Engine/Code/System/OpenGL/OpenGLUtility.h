@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 15:40)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/25 13:17)
 
 #ifndef SYSTEM_OPENGL_OPEN_GLUTILITY_H
 #define SYSTEM_OPENGL_OPEN_GLUTILITY_H
@@ -15,15 +18,15 @@
 
 namespace System
 {
-	OpenGLSystemVersion SYSTEM_DEFAULT_DECLARE GetOpenGLVersion() noexcept;
+    [[nodiscard]] OpenGLSystemVersion SYSTEM_DEFAULT_DECLARE GetOpenGLVersion() noexcept;
 
-	bool SYSTEM_DEFAULT_DECLARE IsOpenGLSupportsExtension(const char* acExtension) noexcept;
+    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE IsOpenGLSupportsExtension(const char* acExtension);
 
-	SYSTEM_DEFAULT_DECLARE void* GetFunctionPointer(const char* glFunction) noexcept;
+    [[nodiscard]] SYSTEM_DEFAULT_DECLARE void* GetFunctionPointer(const char* glFunction) noexcept;
 
-	std::string SYSTEM_DEFAULT_DECLARE GetOpenGLErrorDescription(OpenGLErrorCode code);
+    [[nodiscard]] std::string SYSTEM_DEFAULT_DECLARE GetOpenGLErrorDescription(OpenGLErrorCode code);
 
-	SYSTEM_DEFAULT_DECLARE bool IsWglSupportsExtension(const char* wglExtension) noexcept;
+    [[nodiscard]] SYSTEM_DEFAULT_DECLARE bool IsWglSupportsExtension(const char* wglExtension);
 }
 
-#endif // SYSTEM_OPENGL_OPEN_GLUTILITY_H
+#endif  // SYSTEM_OPENGL_OPEN_GLUTILITY_H

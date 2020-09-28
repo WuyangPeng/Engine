@@ -96,7 +96,7 @@ void AssistTools::GenerateTemplateImpl
 	{
 		createDiectory += value;
 
-		System::CreateFileDirectory(createDiectory, nullptr);
+		[[maybe_unused]] const auto result = System::CreateFileDirectory(createDiectory, nullptr);
 
 		createDiectory += sm_ForwardSlash;
 	}	

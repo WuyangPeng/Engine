@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "IndexBuffer.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/Renderers/RendererManager.h" 
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -400,8 +400,7 @@ void Rendering::IndexBuffer
 	} 
 }
 
-void Rendering::IndexBuffer
-	::SetIndexBuffer(int index, int original, int current)
+void Rendering::IndexBuffer ::SetIndexBuffer(int index, [[maybe_unused]] int original, int current)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -409,7 +408,7 @@ void Rendering::IndexBuffer
 
 	RENDERING_ASSERTION_2(accessWriteData[index] == original, "原来的索引错误\n");
 
-	SYSTEM_UNUSED_ARG(original);
+ 
 
 	accessWriteData[index] = current;
 }

@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "AndroidCallBackInterface.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/ClassInvariant/NoexceptDetail.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
@@ -75,139 +75,120 @@ void Framework::AndroidCallBackInterface
 	m_State = androidApp;
 }
 
-void Framework::AndroidCallBackInterface
-	::ResizedMessage(AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface ::ResizedMessage([[maybe_unused]] AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
+ 
 
 	CoreTools::DoNothing();
 }
 
-void Framework::AndroidCallBackInterface
-	::TermMessage(AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface ::TermMessage([[maybe_unused]] AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
-
-	SYSTEM_UNUSED_ARG(androidApp);
+ 
 
 	CoreTools::DoNothing();
 }
 
-void Framework::AndroidCallBackInterface
-	::RedrawNeededMessage(AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface ::RedrawNeededMessage([[maybe_unused]] AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
+ 
 
 	CoreTools::DoNothing();
 }
 
-void Framework::AndroidCallBackInterface
-	::Display(AndroidApp* androidApp, int64_t timeDelta)
+void Framework::AndroidCallBackInterface ::Display([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] int64_t timeDelta)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
-	SYSTEM_UNUSED_ARG(timeDelta);
+ 
 
 	CoreTools::DoNothing();
 }
 
-void Framework::AndroidCallBackInterface
-	::NotDealCmdMessage(AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface ::NotDealCmdMessage([[maybe_unused]] AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
+ 
 
 	CoreTools::DoNothing();
 }
 
-int Framework::AndroidCallBackInterface
-	::NotDealInputMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface ::NotDealInputMessage([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
-	SYSTEM_UNUSED_ARG(androidInputEvent);
+ 
 
 	CoreTools::DoNothing();
 
 	return 0;
 }
 
-void Framework::AndroidCallBackInterface
-	::RectChanged(AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface ::RectChanged([[maybe_unused]] AndroidApp* androidApp)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
+ 
 
 	CoreTools::DoNothing();
 }
 
-int Framework::AndroidCallBackInterface
-	::KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface ::KeyDownMessage([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
-
-	SYSTEM_UNUSED_ARG(androidApp);
-	SYSTEM_UNUSED_ARG(androidInputEvent);
+ 
 
 	CoreTools::DoNothing();
 
 	return 0;
 }
 
-int Framework::AndroidCallBackInterface
-	::KeyUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface ::KeyUpMessage([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
-	SYSTEM_UNUSED_ARG(androidInputEvent);
+ 
+ 
 
 	CoreTools::DoNothing();
 
 	return 0;
 }
 
-int Framework::AndroidCallBackInterface
-	::ActionDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface ::ActionDownMessage([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
-	SYSTEM_UNUSED_ARG(androidInputEvent);
+ 
+ 
 
 	CoreTools::DoNothing();
 
 	return 0;
 }
 
-int Framework::AndroidCallBackInterface
-	::ActionUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface ::ActionUpMessage([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
-	SYSTEM_UNUSED_ARG(androidInputEvent);
+ 
 
 	CoreTools::DoNothing();
 
 	return 0;
 }
 
-int Framework::AndroidCallBackInterface
-	::ActionMoveMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface ::ActionMoveMessage([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidInputEvent* androidInputEvent)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(androidApp);
-	SYSTEM_UNUSED_ARG(androidInputEvent);
+ 
 
 	CoreTools::DoNothing();
 

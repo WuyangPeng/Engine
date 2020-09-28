@@ -1,0 +1,24 @@
+交互式计算机图形学  （Interactive Computer Graphics）
+
+官方网站：
+http://www.cs.unm.edu/~angel、www.pearsonhighered.com/irc、 http://www.aw.com/cssupport （已失效） 
+
+第5版
+★
+作者： Edward Angel 
+
+知识点 
+1.	计算机图形学基础知识。
+2.	计算机图形学练习。
+
+代码 
+1.	书籍代码。
+
+第7版
+★
+作者： Edward Angel 
+
+知识点 
+1.	WebGL基础知识。
+2.	计算机图形学基础知识。
+3.	计算机图形学练习。

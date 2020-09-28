@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AppenderImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Threading/ScopedMutex.h"
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/LogManager/LogMessagePrefix.h"

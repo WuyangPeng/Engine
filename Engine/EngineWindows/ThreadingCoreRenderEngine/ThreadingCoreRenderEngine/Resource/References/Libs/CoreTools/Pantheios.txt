@@ -1,10 +1,10 @@
 Pantheios
  
-�ٷ���վ 
+官方网站 
 http://www.pantheios.org/
 
-��
+★
 
-֪ʶ�� 
-1.	�����־API�⡣
+知识点 
+1.	诊断日志API库。
 

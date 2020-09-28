@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2019/12/31 15:26)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/27 17:40)
 
 #ifndef SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H
 #define SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H
@@ -11,67 +14,66 @@
 
 #ifdef SYSTEM_PLATFORM_ANDROID
 
-#include <android/native_window.h>
+    #include <android/native_window.h>
 
 namespace System
 {
-	using AndroidNativeWindow = ANativeWindow;
-	using AndroidNativeWindowBuffer = ANativeWindow_Buffer;
-	using AndroidRect = ARect;
+    using AndroidNativeWindow = ANativeWindow;
+    using AndroidNativeWindowBuffer = ANativeWindow_Buffer;
+    using AndroidRect = ARect;
 }
 
-#else // !SYSTEM_PLATFORM_ANDROID
+#else  // !SYSTEM_PLATFORM_ANDROID
 
-#include <array>
+    #include <array>
 
 namespace System
 {
-	struct SYSTEM_DEFAULT_DECLARE AndroidNativeWindow
-	{
+    class SYSTEM_DEFAULT_DECLARE AndroidNativeWindow
+    {
+    };
 
-	};
+    class SYSTEM_DEFAULT_DECLARE AndroidNativeWindowBuffer final
+    {
+    public:
+        using ClassType = AndroidNativeWindowBuffer;
 
-	struct SYSTEM_DEFAULT_DECLARE AndroidNativeWindowBuffer
-	{
-	public:
-		using ClassType = AndroidNativeWindowBuffer;
+    public:
+        AndroidNativeWindowBuffer() noexcept;
 
-	public:
-		AndroidNativeWindowBuffer() noexcept;
+    private:
+        static constexpr auto sm_Size = 6;
 
-	private:
-		static constexpr auto sm_Size = 6;
+    private:
+        int width;
+        int height;
+        int stride;
+        int format;
+        void* bits;
+        std::array<uint32_t, sm_Size> reserved;
+    };
 
-	private:
-		int width;
-		int height;
-		int stride;
-		int format;
-		void* bits;
-		std::array<uint32_t, sm_Size> reserved;
-	};
+    class SYSTEM_DEFAULT_DECLARE AndroidRect final
+    {
+    public:
+        using ClassType = AndroidRect;
 
-	struct SYSTEM_DEFAULT_DECLARE AndroidRect
-	{
-	public:
-		using ClassType = AndroidRect;
+    public:
+        AndroidRect() noexcept;
 
-	public:
-		AndroidRect() noexcept; 
+        [[nodiscard]] int GetLeft() const noexcept;
+        [[nodiscard]] int GetTop() const noexcept;
+        [[nodiscard]] int GetRight() const noexcept;
+        [[nodiscard]] int GetBottom() const noexcept;
 
-		int GetLeft() const noexcept;
-		int GetTop() const noexcept;
-		int GetRight() const noexcept;
-		int GetBottom() const noexcept;
-
-	private:
-		int left;
-		int top;
-		int right;
-		int bottom;
-	};
+    private:
+        int left;
+        int top;
+        int right;
+        int bottom;
+    };
 }
 
-#endif // SYSTEM_PLATFORM_ANDROID
+#endif  // SYSTEM_PLATFORM_ANDROID
 
-#endif // SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H
+#endif  // SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H

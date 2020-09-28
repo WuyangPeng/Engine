@@ -1,29 +1,32 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/09 21:15)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/23 0:42)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_TOOLS_H
 #define SYSTEM_CONSOLE_CONSOLE_TOOLS_H
 
-#include "System/SystemDll.h"   
+#include "System/SystemDll.h"
 
+#include "Using/ConsoleScreenBufferUsing.h"
 #include "Using/ConsoleToolsUsing.h"
-#include "Using/ConsoleScreenBufferUsing.h"  
 #include "System/Window/Using/WindowUsing.h"
 
 namespace System
 {
-	// 控制台工具。
+    // 控制台工具。
 
-	bool SYSTEM_DEFAULT_DECLARE SetSystemConsoleActiveScreenBuffer(WindowHandle consoleOutput) noexcept;
-	bool SYSTEM_DEFAULT_DECLARE AddSystemConsoleCtrlHandler(ConsoleHandlerRoutine handlerRoutine) noexcept;
-	bool SYSTEM_DEFAULT_DECLARE DeleteSystemConsoleCtrlHandler(ConsoleHandlerRoutine handlerRoutine) noexcept;
-	WindowHWnd SYSTEM_DEFAULT_DECLARE GetSystemConsoleWindow() noexcept;
-	bool SYSTEM_DEFAULT_DECLARE ReadSystemConsole(WindowHandle consoleInput, WindowVoidPtr buffer, WindowDWord numberOfCharsToRead,
-												  WindowDWordPtr numberOfCharsRead, ConsoleReadConsoleControlPtr inputControl) noexcept;
-	bool SYSTEM_DEFAULT_DECLARE WriteSystemConsole(WindowHandle consoleOutput, const void* buffer, WindowDWord numberOfCharsToWrite, WindowDWordPtr numberOfCharsWritten) noexcept;
+    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE SetSystemConsoleActiveScreenBuffer(WindowHandle consoleOutput) noexcept;
+    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE AddSystemConsoleCtrlHandler(ConsoleHandlerRoutine handlerRoutine) noexcept;
+    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE DeleteSystemConsoleCtrlHandler(ConsoleHandlerRoutine handlerRoutine) noexcept;
+    [[nodiscard]] WindowHWnd SYSTEM_DEFAULT_DECLARE GetSystemConsoleWindow() noexcept;
+    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE ReadSystemConsole(WindowHandle consoleInput, WindowVoidPtr buffer, WindowDWord numberOfCharsToRead,
+                                                                WindowDWordPtr numberOfCharsRead, ConsoleReadConsoleControlPtr inputControl) noexcept;
+    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WriteSystemConsole(WindowHandle consoleOutput, const void* buffer, WindowDWord numberOfCharsToWrite, WindowDWordPtr numberOfCharsWritten) noexcept;
 }
 
-#endif // SYSTEM_CONSOLE_CONSOLE_TOOLS_H
+#endif  // SYSTEM_CONSOLE_CONSOLE_TOOLS_H

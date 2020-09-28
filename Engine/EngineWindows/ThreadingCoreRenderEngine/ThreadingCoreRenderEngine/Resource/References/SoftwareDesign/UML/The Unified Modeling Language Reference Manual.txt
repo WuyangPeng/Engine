@@ -1,8 +1,8 @@
-UML²Î¿¼ÊÖ²á£¨The Unified Modeling Language Reference Manual£©
-£¨µÚ2°æ£©
+UMLå‚è€ƒæ‰‹å†Œï¼ˆThe Unified Modeling Language Reference Manualï¼‰
+ï¼ˆç¬¬2ç‰ˆï¼‰
 
-¡î
-×÷Õß£ºJames Rumbaugh¡¢Ivar Jacobson¡¢Grady Booch
+â˜†
+ä½œè€…ï¼šJames Rumbaughã€Ivar Jacobsonã€Grady Booch
 
-ÖªÊ¶µã 
-1.	UML»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	UMLåŸºç¡€çŸ¥è¯†ã€‚ 

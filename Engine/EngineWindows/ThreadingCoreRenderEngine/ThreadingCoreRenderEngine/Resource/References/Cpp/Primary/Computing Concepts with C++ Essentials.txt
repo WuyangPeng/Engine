@@ -1,17 +1,17 @@
-C++ ºËĞÄË¼Ïë£¨Computing Concepts with C++ Essentials£©
-£¨µÚ3°æ£©
+C++ æ ¸å¿ƒæ€æƒ³ï¼ˆComputing Concepts with C++ Essentialsï¼‰
+ï¼ˆç¬¬3ç‰ˆï¼‰
 
-¹Ù·½ÍøÕ¾ 
-http://www.horstmann.com/ ¡¢ http://www.wiley.com/college/horstmann¡£
+å®˜æ–¹ç½‘ç«™ 
+http://www.horstmann.com/ ã€ http://www.wiley.com/college/horstmannã€‚
 
-¡ğ
-×÷Õß£ºCay Horstmann
+â—‹
+ä½œè€…ï¼šCay Horstmann
 
-ÖªÊ¶µã 
-1.	C++»ù´¡ÖªÊ¶¡£ 
-2.	C++»ù´¡ÖªÊ¶Á·Ï°¡£
+çŸ¥è¯†ç‚¹ 
+1.	C++åŸºç¡€çŸ¥è¯†ã€‚ 
+2.	C++åŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚
 
-´úÂë 
-1.  Êé¼®´úÂë¡£
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚
 
   

@@ -7,7 +7,7 @@
 #ifndef CORE_TOOLS_HELPER_NOEXCEPT_H
 #define CORE_TOOLS_HELPER_NOEXCEPT_H 
 
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/UnicodeUsing.h"
 
 namespace CoreTools
@@ -16,9 +16,9 @@ namespace CoreTools
 	{
 		using namespace std::literals;
 
-		const System::String doNothing(SYSTEM_TEXT(""));
+		[[maybe_unused]] const System::String doNothing(SYSTEM_TEXT(""));
 
-		SYSTEM_UNUSED_ARG(doNothing);
+		 
 	}
 
 	template <typename T, typename Function>

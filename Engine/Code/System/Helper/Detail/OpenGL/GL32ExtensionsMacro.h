@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:39)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:47)
 
 #ifndef SYSTEM_HELPER_GL_32_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_32_EXTENSIONS_MACRO_H
@@ -30,11 +33,11 @@
 #define GL_MAX_GEOMETRY_INPUT_COMPONENTS 0x9123
 #define GL_MAX_GEOMETRY_OUTPUT_COMPONENTS 0x9124
 #define GL_MAX_FRAGMENT_INPUT_COMPONENTS 0x9125
-#define GL_CONTEXT_PROFILE_MASK 0x9126	
+#define GL_CONTEXT_PROFILE_MASK 0x9126
 
 #define glGetInteger64i_v System::GlGetInteger64i_v
 #define glGetBufferParameteri64v System::GlGetBufferParameteri64v
 #define glProgramParameteri System::GlProgramParameteri
 #define glFramebufferTexture System::GlFramebufferTexture
 
-#endif // SYSTEM_HELPER_GL_32_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_32_EXTENSIONS_MACRO_H

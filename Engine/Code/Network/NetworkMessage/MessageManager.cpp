@@ -36,11 +36,10 @@ void Network::MessageManager
 	sm_MessageManager.reset();
 }
 
-Network::MessageManager
-::MessageManager(MessageManagerCreate messageManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Network::MessageManager ::MessageManager([[maybe_unused]] MessageManagerCreate messageManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(messageManagerCreate);
+ 
 
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }

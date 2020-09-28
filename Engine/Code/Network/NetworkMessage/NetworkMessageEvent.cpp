@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "NetworkMessageEvent.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 
 Network::NetworkMessageEvent ::NetworkMessageEvent() noexcept

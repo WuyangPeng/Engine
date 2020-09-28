@@ -1,66 +1,66 @@
-����淶
+编码规范
 
-1.  �����ռ䣬�����ͺ������Դ�д��ĸ��ͷ���շ�ʽ��Сд��
-2.  ��������Сд��ĸ��ͷ���շ�ʽ��Сд��
-3.  �����ȫ��д�������»��߸�����
-4.  ��Ա����ʹ��m_��ͷ����̬����ʹ��s_��ͷ���ྲ̬����ʹ��sm_��ͷ��ȫ�ֱ���ʹ��g_��ͷ��
-5.  ʹ��enum class�ķ�ʽ����ö�١�ö�����Դ�д��ĸ��ͷ���շ�ʽ��Сд��
-6.  ͷ�ļ�ʹ��.h����չ����Դ�ļ�ʹ��.cpp����չ���������ļ�ʹ��.inl����չ����json�����ļ�ʹ��.json����չ����
-    ��־�ļ�ʹ��.log����չ����ģ��ʵ���ļ�ʹ��.h����չ��������Detail��Achieve��β��
-7.  �ⲿ�ࣨ�����ࣩǰ��XXX_DEFAULT_DECLARE��XXXΪ���ڿ�����ȫ��д��
-8.  �ڲ��ࣨ�������ࣩǰ��XXX_HIDDEN_DECLARE��XXXΪ���ڿ�����ȫ��д��
-9.  ������ֱ��ʹ�ó�0��1֮�������ֵ������ʹ����������Ӧʹ�þ�������������ʵ�������ı������档
-10. ��ͬƽ̨����Ŀ������������Static + $(Platform) + $(Configuration)����StaticX64Debug��
+1.  命名空间，类名和函数名以大写字母开头，驼峰式大小写。
+2.  变量名以小写字母开头，驼峰式大小写。
+3.  宏必须全大写，且以下划线隔开。
+4.  成员变量使用m_开头，静态变量使用s_开头，类静态变量使用sm_开头，全局变量使用g_开头。
+5.  使用enum class的方式定义枚举。枚举名以大写字母开头，驼峰式大小写。
+6.  头文件使用.h的扩展名，源文件使用.cpp的扩展名，内联文件使用.inl的扩展名，json配置文件使用.json的扩展名，
+    日志文件使用.log的扩展名，模板实现文件使用.h的扩展名，并以Detail或Achieve结尾。
+7.  外部类（导出类）前加XXX_DEFAULT_DECLARE，XXX为所在库名的全大写。
+8.  内部类（不导出类）前加XXX_HIDDEN_DECLARE，XXX为所在库名的全大写。
+9.  尽量不直接使用除0和1之外的整数值，避免使用文字量，应使用具名常量或具有适当作用域的变量代替。
+10. 不同平台或项目配置命名规则：Static + $(Platform) + $(Configuration)，如StaticX64Debug。
+11. 使用min和max表示[min,max]区间，使用begin和end表示[begin,end)区间。
 
-��ƹ淶
+设计规范
 
-1.  ʹ��C++17��׼��
-2.  �����ڸ�������ϵͳʵ�ֲ�ͬ�ĺ�����ȫת�Ƶ�System�⡣
-3.  ��System���⣬������ʹ�ò�������ֵ����������أ���Ҫʹ�ò�������ʱ��ת�Ƶ�������ĵײ����ģ���У���Mathematics������Underlyingģ�顣
-4.  ��Sysetm���⣬���������ʹ���಻��ʽ��������ClassType�ͱ�Ҫ��ParentType���Ҿ���ʹ��ASSETRTION��
-    ���ڵ�������ԭ�򣬲�ֱ�ӵ����ڲ�����಻��ʽ�������á�m_Impl->IsValid();����
-5.  ���е�������̬���ݵ��ñ���ʹ������
-6.  ����������ΪLevel4������������Ϊ���󣬴�����Ҫͨ�����������
-7.  ��ֹ������ֱ�ӱȽ���Ȼ���ȡ�
-8.  ��û�����Ե�������Ҫָ����������ʱ��һ��ʹ��auto��
-9.  ʹ�ó�ʼ�����б�����ʽ��ʼ����ֻ�ڱ�Ҫʱʹ��������ʽ����vector���͵Ⱥ���ʽ����auto����ʼ����
-10. �����������⣬��ֹ���ؿ�ָ�롢���ݿ�ָ���ʹ����ָ�롣
-11. ʹ��using����typedef��
-12. ֻ�������������ͷ�ļ���ͷ�ļ��İ���˳�򣺴������⵽��һ�㡣����Ŀ¼�е��κ�ͷ�ļ����ȱ�������
-    Ȼ���������Լ������ù���ͷ�ļ�������ǵ�������ͷ�ļ��������Ǳ�׼C++��ͷ�ļ���C��ͷ�ļ���
-13. ����ת����ʹ��static_cast��ת��ʧ���׳��쳣ʹ��boost::numeric_cast�������׳��쳣ʹ��gsl::narrow_cast�������档
-14. ʹ��make_shared��make_unique����������ָ�룬������new��
-15. ʹ�ñ�Ҫ��noexcept��final��override��
-16. ��ֱ���׳��쳣�ĺ���ʹ��[[noreturn]] ��
-17. �Ա����鷵��ֵ�ĺ���ʹ��[[nodiscard]]��
-18. �Կ��ܲ���ʹ�õĲ���ʹ��[[maybe_unused]]��
-19. ����û��break��case��ǩʹ��[[fallthrough]]��
-20. ������ȷʵ��Ҫ��������Ȩ�����������ʹ��shared_ptr����ʹ��unique_ptr��
-    ������unique_ptr����������Ҫ֪��ָ����Ĵ�С��Implģʽ��ʹ��unique_ptr��װָ�룬��ʹ�ø����ױ�̵�shared_ptr��
-21. ͬʱ���ڱ�׼���boost��ʵ��ʱ��ʹ�ñ�׼���ʵ�֡�
-22. �����������ͣ�����ʹ��bool��char��int��double�ͱ�Ҫ��size_t����Ҫʹ����������ʱ������ʹ�ù̶���С�����͡������ϵͳ��ص��ñ���ʹ�ù̶���С�����͡�
-23. ʹ��Implģʽ��װ�࣬ͨ������ClassShareType����ʶ�������ڣ�
-   ��1��������빲����Դʱ������ֻ�Ǹ������ָ���Ա����Ҫ����ǰע�ͣ������ࣩ�����캯���͸�ֵ��������м򵥵ĸ���ָ�롣�����������Share��β��
-   ��2����û���޸������ĳ�Ա������Ϊ��������ܣ�����ֻ�Ǹ������ָ���Ա�����캯���͸�ֵ��������м򵥵ĸ���ָ�롣
-   ��3�������޸������ĳ�Ա��������ʱ���帴�ƹ��캯���͸�ֵ��������������ơ�
-   ��4�������޸������ĳ�Ա���������캯���͸�ֵ������򵥵ĸ���ָ�룬ֻ�ڵ��÷ǳ�����Ա����ʱ���������ƣ���дʱ���ƻ��ƣ�Copy on Write��COW����
-        �����������ֹʹ���ӳٸ��ƣ�
-	    ���������麯��������¡�
-        �������ڲ�ĳ����Ա����������������õ�����¡�
-	    �������з����ڲ���Ա�����û�ָ�������¡�
-   ��5�����ֹ���ơ�
-24. ����������е�Ԫ���ԣ���ͨ�����ԡ���Ԫ���԰����������ԡ��̶�ֵ���ԡ����ֵ���Ժ͵������ԣ�ÿ������һ�������Ԫ����һ�㲻�����಻��ʽ�Ͷ��ԡ�
-    ����ʹ�ù��졪��������������ģʽ����������������������١����������ظ���������֤�ͼ�ʱ����������Ҫ��Ҫ���ǿɶ��ԡ�
+1.  使用C++17标准。
+2.  所有在各个操作系统实现不同的函数，全转移到System库。
+3.  除System库外，尽量不使用参数返回值。与性能相关，需要使用参数返回时，转移到各个库的底层调用模块中，如Mathematics库增加Underlying模块。
+4.  除Sysetm库外，所有类必须使用类不变式，并定义ClassType和必要的ParentType，且尽量使用ASSETRTION。
+    由于调试性能原因，不直接调用内部类的类不变式，即调用“m_Impl->IsValid();”。
+5.  所有单例及静态数据调用必须使用锁。
+6.  将警告设置为Level4，并将警告视为错误，代码需要通过代码分析。
+7.  禁止浮点数直接比较相等或不相等。
+8.  在没有明显的理由需要指定数据类型时，一般使用auto。
+9.  使用初始化器列表的形式初始化，只在必要时使用括号形式（如vector）和等号形式（如auto）初始化。
+10. 除特殊需求外，禁止返回空指针、传递空指针和使用裸指针。
+11. 使用using代替typedef。
+12. 只包含必须包含的头文件，头文件的包含顺序：从最特殊到最一般。本地目录中的任何头文件首先被包含，
+    然后是我们自己的所用工具头文件，随后是第三方库头文件，接着是标准C++库头文件和C库头文件。
+13. 整型转换不使用static_cast，转换失败抛出异常使用boost::numeric_cast，不能抛出异常使用gsl::narrow_cast消除警告。
+14. 使用make_shared和make_unique来创建智能指针，而不是new。
+15. 使用必要的noexcept、final和override。
+16. 对直接抛出异常的函数使用[[noreturn]] 。
+17. 对必须检查返回值的函数使用[[nodiscard]]。
+18. 对可能不会使用的参数使用[[maybe_unused]]。
+19. 对于没有break的case标签使用[[fallthrough]]。
+20. 除非你确实需要共享所有权，否则别轻易使用shared_ptr，请使用unique_ptr。
+    但由于unique_ptr析构函数需要知道指定类的大小，Impl模式不使用unique_ptr封装指针，而使用更容易编程的shared_ptr。
+21. 同时存在标准库和boost库实现时，使用标准库的实现。
+22. 对于内置类型，优先使用bool、char、int、double和必要的size_t。需要使用其它类型时，尽量使用固定大小的整型。网络或系统相关调用必须使用固定大小的整型。
+23. 使用Impl模式封装类，通过定义ClassShareType来标识类是属于：
+   （1）当类必须共享资源时，复制只是复制类的指针成员，需要在类前注释（共享类），构造函数和赋值运算符进行简单的复制指针。共享类必须以Share结尾。
+   （2）类没有修改自身的成员函数，为了提高性能，复制只是复制类的指针成员，构造函数和赋值运算符进行简单的复制指针。
+   （3）类有修改自身的成员函数，此时定义复制构造函数和赋值运算符对类进行深复制。
+   （4）类有修改自身的成员函数，构造函数和赋值运算符简单的复制指针，只在调用非常量成员函数时对类进行深复制，即写时复制机制（Copy on Write，COW）。
+        但以下情况禁止使用延迟复制：
+	    导出类有虚函数的情况下。
+        导出类内部某个成员析构函数有特殊调用的情况下。
+	    导出类有返回内部成员的引用或指针的情况下。
+   （5）类禁止复制。
+24. 所有类必须有单元测试，并通过测试。单元测试包括完整测试、固定值测试、随机值测试和迭代测试，每个测试一个概念。单元测试一般不测试类不变式和断言。
+    测试使用构造——操作——检验模式，必须满足五个条件：快速、独立、可重复、自足验证和及时。测试最重要的要素是可读性。
 
-����淶
+建议规范
 
-1. ����Ҫ�̣�����������
-2. ����if��for��ʹ�ã�ʹ�������for_each��
-3. ����p��ָ�룬ʹ��if(p != nullptr)�������Ǹ�����if(p)��if(nullptr != p)��
-4. ����ʹ��do��䡣
-5. ʹ����ָ��weak_ptr������󣬶�����ʹ�ñ������id��Ȼ��ͨ������ȥ������
-6. �κα�д��ģ�����ģ��ĳ���Ա��Ӧ�ý���������Ϊ��������д�Ĵ�����������֡�
-7. �����Ϊ��ʱ��ʹ��static_cast<void>(0)���ɷ�ֹ�걻������ֵ��
-8. ����һ�������ʱ��ʹ�ð���ͷ�ļ��ķ��������һ����ܴ�Ӧ���ṩһ��ͷ�ļ��ļ�д��ʽ��
-9. ʹ��min��max��ʾ[min,max]���䣬ʹ��begin��end��ʾ[begin,end)���䡣
-10.ʹ��move��forward�Ĵ���Ӧ��ʹ��std::move��std::forward����ʹ��using���������������Ա���Ǳ�ڵ����ֳ�ͻ��
+1. 函数要短，命名清晰。
+2. 减少if、for的使用，使用子类或for_each。
+3. 对于p是指针，使用if(p != nullptr)，而不是更简洁的if(p)或if(nullptr != p)。
+4. 避免使用do语句。
+5. 使用弱指针weak_ptr保存对象，而不是使用保存对象id，然后通过单例去索引。
+6. 任何编写类模板或函数模板的程序员都应该将概念检查作为他们所编写的代码的正常部分。
+7. 定义宏为空时，使用static_cast<void>(0)，可防止宏被用作右值。
+8. 声明一个类或函数时，使用包含头文件的方法。如果一个库很大，应该提供一个头文件的简写形式。
+9.使用move和forward的代码应该使用std::move和std::forward而不使用using声明。这样做可以避免潜在的名字冲突。

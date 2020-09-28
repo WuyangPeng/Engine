@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:39)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:48)
 
 #ifndef SYSTEM_HELPER_GL_ARB_ES_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_ARB_ES_EXTENSIONS_MACRO_H
@@ -26,7 +29,7 @@
 #define GL_SHADER_COMPILER 0x8DFA
 #define GL_MAX_VERTEX_UNIFORM_VECTORS 0x8DFB
 #define GL_MAX_VARYING_VECTORS 0x8DFC
-#define GL_MAX_FRAGMENT_UNIFORM_VECTORS 0x8DFD	
+#define GL_MAX_FRAGMENT_UNIFORM_VECTORS 0x8DFD
 
 #define glClearDepthf System::GlClearDepthf;
 #define glDepthRangef System::GlDepthRangef;
@@ -55,4 +58,4 @@
 #define GL_COMPRESSED_RGBA8_ETC2_EAC 0x9278
 #define GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC 0x9279
 
-#endif // SYSTEM_HELPER_GL_ARB_ES_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_ARB_ES_EXTENSIONS_MACRO_H

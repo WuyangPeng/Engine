@@ -1,18 +1,18 @@
-3D��Ϸ������ͼ��ѧ�е���ѧ������Mathematics for 3D Game Programming and Computer Graphics��
-����3�棩
+3D游戏与计算机图形学中的数学方法（Mathematics for 3D Game Programming and Computer Graphics）
+（第3版）
 
-���
-���ߣ�Eric Lengyel 
+★★
+作者：Eric Lengyel 
 
-�ٷ���վ��
+官方网站：
 http://www.mathfor3dgameprogramming.com/
 
-֪ʶ�� 
-1.	3D��ѧ����֪ʶ�� 
-2.	3D��ѧ����֪ʶ��ϰ��
-3.	�����;���Ļ���֪ʶ��
-4.	���յĻ���֪ʶ��
-5.	�����Ļ���֪ʶ��
+知识点 
+1.	3D数学基础知识。 
+2.	3D数学基础知识练习。
+3.	向量和矩阵的基础知识。
+4.	光照的基础知识。
+5.	物理的基础知识。
 
-���� 
-1.  �鼮���롣 
+代码 
+1.  书籍代码。 

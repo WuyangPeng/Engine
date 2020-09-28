@@ -1,16 +1,16 @@
 Accelerated C++
 
-¹Ù·½ÍøÕ¾ 
-http://www.acceleratedcpp.com¡£
+å®˜æ–¹ç½‘ç«™ 
+http://www.acceleratedcpp.comã€‚
 
-¡ñ
-×÷Õß£ºAndrew Koenig¡¢Barbara E.Moo
+â—
+ä½œè€…ï¼šAndrew Koenigã€Barbara E.Moo
 
-ÖªÊ¶µã 
-1.	C++»ù´¡ÖªÊ¶¡£ 
-2.	C++»ù´¡ÖªÊ¶Á·Ï°¡£
+çŸ¥è¯†ç‚¹ 
+1.	C++åŸºç¡€çŸ¥è¯†ã€‚ 
+2.	C++åŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚
 
-´úÂë 
-1.  Êé¼®´úÂë¡£
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚
 
   

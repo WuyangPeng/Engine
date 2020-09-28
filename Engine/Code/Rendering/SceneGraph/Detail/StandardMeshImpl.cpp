@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "StandardMeshImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
@@ -59,9 +59,9 @@ void Rendering::StandardMeshImpl ::Init()
 
     RENDERING_ASSERTION_1(0 <= positionIndex, "顶点格式必须包含位置。\n");
 
-    const auto positionType = m_VertexFormat->GetAttributeType(positionIndex);
+   [[maybe_unused]] const auto positionType = m_VertexFormat->GetAttributeType(positionIndex);
     RENDERING_ASSERTION_1(positionType == VertexFormatFlags::AttributeType::Float3, "位置必须是3元组的浮点数。\n");
-    SYSTEM_UNUSED_ARG(positionType);
+ 
 
     const auto normalIndex = m_VertexFormat->GetIndex(VertexFormatFlags::AttributeUsage::Normal);
     if (0 <= normalIndex)

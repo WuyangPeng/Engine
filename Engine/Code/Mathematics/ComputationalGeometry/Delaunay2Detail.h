@@ -8,7 +8,7 @@
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY2_DETAIL_H
 
 #include "Delaunay2.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Mathematics/Query/Query2Filtered.h"
 #include "Mathematics/Query/Query2Int64.h"
 #include "Mathematics/Query/Query2Integer.h"
@@ -471,7 +471,7 @@ Mathematics::Delaunay2<Real>
 {
     bool loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);
-    SYSTEM_UNUSED_ARG(loaded);
+    
 }
 
 template <typename Real>

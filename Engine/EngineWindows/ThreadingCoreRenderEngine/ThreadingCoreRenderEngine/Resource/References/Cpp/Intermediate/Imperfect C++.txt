@@ -1,13 +1,13 @@
 Imperfect C++
 
-¹Ù·½ÍøÕ¾£º
-http://imperfectcplusplus.com¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+http://imperfectcplusplus.comã€‚
 
-¡ï¡ï¡ï¡ï¡ï
-×÷Õß£ºMatthew Wilson
+â˜…â˜…â˜…â˜…â˜…
+ä½œè€…ï¼šMatthew Wilson
 
-ÖªÊ¶µã 
-1.	C++ ÖªÊ¶¡£
+çŸ¥è¯†ç‚¹ 
+1.	C++ çŸ¥è¯†ã€‚
 
-´úÂë
-1.  Êé¼®´úÂë¡£ 
+ä»£ç 
+1.  ä¹¦ç±ä»£ç ã€‚ 

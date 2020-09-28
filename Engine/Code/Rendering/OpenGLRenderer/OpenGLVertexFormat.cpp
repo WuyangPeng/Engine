@@ -8,7 +8,7 @@
 
 #include "OpenGLVertexFormat.h"
 #include "OpenGLMapping.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "OpenGLVertexFormatDataDetail.h"
 #include "OpenGLVertexFormatArrayDataDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -16,14 +16,13 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
  
-Rendering::OpenGLVertexFormat
-    ::OpenGLVertexFormat (Renderer* renderer, const VertexFormat* vertexFormat)
-	:ParentType{},m_Stride(vertexFormat->GetStride()),m_Position(),m_Normal(),m_Tangent(),m_Binormal(),
+Rendering::OpenGLVertexFormat ::OpenGLVertexFormat([[maybe_unused]] Renderer* renderer, const VertexFormat* vertexFormat)
+    : ParentType{}, m_Stride(vertexFormat->GetStride()), m_Position(), m_Normal(), m_Tangent(), m_Binormal(),
 	 m_TexCoord(),m_Color(),m_BlendIndices(),m_BlendWeight(),m_FogCoord(),m_PSize()
 {
     Init(vertexFormat);
 
-    SYSTEM_UNUSED_ARG(renderer);
+ 
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -58,8 +57,7 @@ bool Rendering::OpenGLVertexFormat
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::OpenGLVertexFormat
-	::Enable (Renderer* renderer) noexcept
+void Rendering::OpenGLVertexFormat ::Enable([[maybe_unused]] Renderer* renderer) noexcept
 {	
 	// 数据指针允许使用顶点缓冲
 	RENDERING_CLASS_IS_VALID_1;
@@ -77,11 +75,10 @@ void Rendering::OpenGLVertexFormat
 	m_FogCoord.Enable(m_Stride);
 	m_PSize.Enable(m_Stride);
 
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
-void Rendering::OpenGLVertexFormat
-	::Disable (Renderer* renderer) noexcept
+void Rendering::OpenGLVertexFormat ::Disable([[maybe_unused]] Renderer* renderer) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -98,6 +95,6 @@ void Rendering::OpenGLVertexFormat
 	m_FogCoord.Disable();
 	m_PSize.Disable();
 
-	SYSTEM_UNUSED_ARG(renderer);	
+ 	
 }
 #include STSTEM_WARNING_POP

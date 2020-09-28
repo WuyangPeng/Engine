@@ -8,7 +8,7 @@
 
 #include "BoostSegmentationSockStream.h"
 #include "BoostSockStreamHelper.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/Interface/Data/AddressData.h"

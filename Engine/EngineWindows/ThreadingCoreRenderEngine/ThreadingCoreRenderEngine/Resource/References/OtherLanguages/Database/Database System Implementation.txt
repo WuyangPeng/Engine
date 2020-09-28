@@ -1,13 +1,13 @@
-Êı¾İ¿âÏµÍ³ÊµÏÖ £¨Database System Implementation£©
-£¨µÚ2°æ£© 
+æ•°æ®åº“ç³»ç»Ÿå®ç° ï¼ˆDatabase System Implementationï¼‰
+ï¼ˆç¬¬2ç‰ˆï¼‰ 
 
-¹Ù·½ÍøÕ¾£º
+å®˜æ–¹ç½‘ç«™ï¼š
 http://infolab.stanford.edu/~ullman/fcdb.html
 
-¡ï
-×÷Õß£º Hector Garcia-Molina¡¢Jeffrey D.Ullman¡¢Jennifer Widom
+â˜…
+ä½œè€…ï¼š Hector Garcia-Molinaã€Jeffrey D.Ullmanã€Jennifer Widom
 
-ÖªÊ¶µã 
-1.	Êı¾İ¿â»ù´¡ÖªÊ¶¡£ 
-2.	Êı¾İ¿â»ù´¡ÖªÊ¶Á·Ï°¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	æ•°æ®åº“åŸºç¡€çŸ¥è¯†ã€‚ 
+2.	æ•°æ®åº“åŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚ 
 

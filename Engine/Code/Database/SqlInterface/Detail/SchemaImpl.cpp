@@ -7,7 +7,7 @@
 #include "Database/DatabaseExport.h"
 
 #include "SchemaImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
@@ -34,22 +34,20 @@ Database::ConfigurationStrategy Database::SchemaImpl ::GetConfigurationStrategy(
 	return m_ConfigurationStrategy;
 }
 
-Database::SchemaImpl::MysqlxCollectionPtr Database::SchemaImpl
-	::GetCollection(const string& collectionName)
+Database::SchemaImpl::MysqlxCollectionPtr Database::SchemaImpl ::GetCollection([[maybe_unused]] const string& collectionName)
 {
 	DATABASE_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(collectionName);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("SchemaImpl的GetCollection未实现。"s));
 }
 
-Database::SchemaImpl::MysqlxTablePtr Database::SchemaImpl
-	::GetTable(const string& tableonName)
+Database::SchemaImpl::MysqlxTablePtr Database::SchemaImpl ::GetTable([[maybe_unused]] const string& tableonName)
 {
 	DATABASE_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(tableonName);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("SchemaImpl的GetTable未实现。"s));
 }

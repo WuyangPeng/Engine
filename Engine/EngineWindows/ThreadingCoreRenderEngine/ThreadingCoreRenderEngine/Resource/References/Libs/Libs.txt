@@ -1,18 +1,18 @@
-²Î¿¼ÎÄÏ×¡¤¿ªÔ´¿â
+å‚è€ƒæ–‡çŒ®Â·å¼€æºåº“
 
-1.	CoreTools£¨ºËĞÄ¹¤¾ß£©
-2.	Network£¨ÍøÂç£©
-3.	Database£¨Êı¾İ¿â£©
-4.	Script£¨½Å±¾£©
-5.	Mathematics£¨ÊıÑ§£©
-6.	SoundEffect£¨ÒôĞ§£©
-7.	InputOutput£¨ÊäÈëÊä³ö£©
-8.	ResourceManager£¨×ÊÔ´¹ÜÀí£©
-9.	Rendering£¨äÖÈ¾£©
-10.	Physics£¨ÎïÀí£©
-11.	Imagics£¨Í¼Ïñ·ÖÎö£©
-12.	Animation£¨¶¯»­£©
-13.	ArtificialIntellegence£¨ÈË¹¤ÖÇÄÜ£©
-14.	UserInterface£¨½çÃæ£©
-15.	AssistTools£¨¸¨Öú¹¤¾ß£©
-16.	Framework£¨¿ò¼Ü£©
+1.	CoreToolsï¼ˆæ ¸å¿ƒå·¥å…·ï¼‰
+2.	Networkï¼ˆç½‘ç»œï¼‰
+3.	Databaseï¼ˆæ•°æ®åº“ï¼‰
+4.	Scriptï¼ˆè„šæœ¬ï¼‰
+5.	Mathematicsï¼ˆæ•°å­¦ï¼‰
+6.	SoundEffectï¼ˆéŸ³æ•ˆï¼‰
+7.	InputOutputï¼ˆè¾“å…¥è¾“å‡ºï¼‰
+8.	ResourceManagerï¼ˆèµ„æºç®¡ç†ï¼‰
+9.	Renderingï¼ˆæ¸²æŸ“ï¼‰
+10.	Physicsï¼ˆç‰©ç†ï¼‰
+11.	Imagicsï¼ˆå›¾åƒåˆ†æï¼‰
+12.	Animationï¼ˆåŠ¨ç”»ï¼‰
+13.	ArtificialIntellegenceï¼ˆäººå·¥æ™ºèƒ½ï¼‰
+14.	UserInterfaceï¼ˆç•Œé¢ï¼‰
+15.	AssistToolsï¼ˆè¾…åŠ©å·¥å…·ï¼‰
+16.	Frameworkï¼ˆæ¡†æ¶ï¼‰

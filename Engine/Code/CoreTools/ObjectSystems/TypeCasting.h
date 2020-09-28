@@ -12,6 +12,8 @@
 
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
+#include "ObjectInterface.h"
+
 #include <memory>
 #include <type_traits>
 

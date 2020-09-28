@@ -37,11 +37,10 @@ void Rendering::RendererData
 	sm_RendererData.reset();
 }
 
-Rendering::RendererData
-::RendererData(RendererDataCreate rendererDataCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Rendering::RendererData ::RendererData([[maybe_unused]] RendererDataCreate rendererDataCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(rendererDataCreate);
+ 
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }

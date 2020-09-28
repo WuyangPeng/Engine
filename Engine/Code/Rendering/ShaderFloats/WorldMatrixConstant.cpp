@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "WorldMatrixConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
@@ -39,8 +39,7 @@ Rendering::WorldMatrixConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,WorldMatrixConstant)
 
-void Rendering::WorldMatrixConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::WorldMatrixConstant ::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
  
@@ -48,7 +47,7 @@ void Rendering::WorldMatrixConstant
 
 	SetRegisters(worldMatrix);	
 
-	SYSTEM_UNUSED_ARG(camera);
+ 
 }
 
 void Rendering::WorldMatrixConstant

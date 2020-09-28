@@ -7,7 +7,7 @@
 #include "Mathematics/MathematicsExport.h"
 
 #include "EquationOnce.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -42,18 +42,16 @@ const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce
 	return m_Constant + value * m_Once;
 }
 
-double Mathematics::EquationOnce
-	::SubstitutionTangent(double solution) const noexcept
+double Mathematics::EquationOnce ::SubstitutionTangent([[maybe_unused]] double solution) const noexcept
 {
-	SYSTEM_UNUSED_ARG(solution);
+ 
 
 	return m_Once;
 }
 
-const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce
-	::SubstitutionTangent(const Imaginary& solution) const
+const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce ::SubstitutionTangent([[maybe_unused]] const Imaginary& solution) const
 {
-	SYSTEM_UNUSED_ARG(solution);
+ 
 
 	return m_Once;
 }

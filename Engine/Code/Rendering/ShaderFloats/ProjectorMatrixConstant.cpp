@@ -8,7 +8,7 @@
 
 #include "ProjectorMatrixConstant.h"
 #include "Detail/ProjectorMatrixConstantImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
@@ -53,8 +53,7 @@ void Rendering::ProjectorMatrixConstant
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ProjectorMatrixConstant,GetProjector, const Rendering::ConstProjectorSmartPointer )
 									
-void Rendering::ProjectorMatrixConstant
-	::Update( const Visual* visual, const Camera* camera )
+void Rendering::ProjectorMatrixConstant ::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -65,7 +64,7 @@ void Rendering::ProjectorMatrixConstant
 
 	SetRegisters(projectionViewWorldMatrix);
 
-	SYSTEM_UNUSED_ARG(camera);
+	 
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::ProjectorMatrixConstant

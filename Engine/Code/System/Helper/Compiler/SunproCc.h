@@ -1,40 +1,43 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 15:36)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 11:09)
 
 #ifndef SYSTEM_HELPER_SUNPRO_CC_H
 #define SYSTEM_HELPER_SUNPRO_CC_H
 
 #if defined(__SUNPRO_CC)
 
-	// Sun C++ 编译器设置：
+    // Sun C++ 编译器设置：
 
-	#if __SUNPRO_CC < 0x400
-		#error "编译器未配置"
-	#endif // __SUNPRO_CC < 0x400
-	
-	#if (0x590 < __SUNPRO_CC)
-		#error "未知的编译器"
-	#endif // (0x590 < __SUNPRO_CC)
+    #if __SUNPRO_CC < 0x400
+        #error "编译器未配置"
+    #endif  // __SUNPRO_CC < 0x400
 
-	#ifndef SYSTEM_CPP_STANDARD
-		#define SYSTEM_CPP_STANDARD 3
-	#endif // SYSTEM_CPP_STANDARD
+    #if (0x590 < __SUNPRO_CC)
+        #error "未知的编译器"
+    #endif  // (0x590 < __SUNPRO_CC)
 
-	#ifndef TCRE_USE_SUNPRO_CC
-		#define TCRE_USE_SUNPRO_CC 1
-	#endif // TCRE_USE_SUNPRO_CC
+    #ifndef SYSTEM_CPP_STANDARD
+        #define SYSTEM_CPP_STANDARD 3
+    #endif  // SYSTEM_CPP_STANDARD
 
-	#ifndef TCRE_COMPILER_VERSION
-		#define TCRE_COMPILER_VERSION __SUNPRO_CC
-	#endif // TCRE_COMPILER_VERSION
+    #ifndef TCRE_USE_SUNPRO_CC
+        #define TCRE_USE_SUNPRO_CC 1
+    #endif  // TCRE_USE_SUNPRO_CC
 
-	#ifndef TCRE_SYSTEM_COMPILER
-		#define TCRE_SYSTEM_COMPILER "Sun 编译器版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
-	#endif // TCRE_SYSTEM_COMPILER 
+    #ifndef TCRE_COMPILER_VERSION
+        #define TCRE_COMPILER_VERSION __SUNPRO_CC
+    #endif  // TCRE_COMPILER_VERSION
 
-#endif // defined(__SUNPRO_CC)
+    #ifndef TCRE_SYSTEM_COMPILER
+        #define TCRE_SYSTEM_COMPILER "Sun 编译器版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+    #endif  // TCRE_SYSTEM_COMPILER
 
-#endif // SYSTEM_HELPER_SUNPRO_CC_H
+#endif  // defined(__SUNPRO_CC)
+
+#endif  // SYSTEM_HELPER_SUNPRO_CC_H

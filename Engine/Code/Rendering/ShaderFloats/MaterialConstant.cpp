@@ -8,7 +8,7 @@
 
 #include "MaterialConstant.h"
 #include "Detail/MaterialConstantImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"

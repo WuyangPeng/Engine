@@ -1,14 +1,14 @@
-C++ ¸ßĞ§±à³Ì£ºÄÚ´æÓëĞÔÄÜÓÅ»¯£¨C++ footprint and Performance Optimization£©
+C++ é«˜æ•ˆç¼–ç¨‹ï¼šå†…å­˜ä¸æ€§èƒ½ä¼˜åŒ–ï¼ˆC++ footprint and Performance Optimizationï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://www.samspublishing.com¡¢ http://www.informit.com/store/c-plus-plus-footprint-and-performance-optimization-9780672319044¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.samspublishing.comã€ http://www.informit.com/store/c-plus-plus-footprint-and-performance-optimization-9780672319044ã€‚
 
-¡î
-×÷Õß£ºR.Alexander¡¢G.Bensley
+â˜†
+ä½œè€…ï¼šR.Alexanderã€G.Bensley
 
-ÖªÊ¶µã 
-1.	C++	ÓÅ»¯»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	C++	ä¼˜åŒ–åŸºç¡€çŸ¥è¯†ã€‚ 
 
-´úÂë 
-1.  Êé¼®´úÂë¡£ 
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚ 
 

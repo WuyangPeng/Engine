@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "UnitTestComposite.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -46,14 +46,13 @@ void CoreTools::UnitTestComposite
 	CORE_TOOLS_ASSERTION_4(false, "禁止调用UnitTestComposite::ClearUnitTestCollection()！");
 }
 
-void CoreTools::UnitTestComposite
-	::AddUnitTest(UnitTestCompositePtr unitTest)
+void CoreTools::UnitTestComposite ::AddUnitTest([[maybe_unused]] UnitTestCompositePtr unitTest)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "禁止调用UnitTestComposite::AddUnitTest()！");
 
-	SYSTEM_UNUSED_ARG(unitTest);
+ 
 }
 #include STSTEM_WARNING_POP
 int CoreTools::UnitTestComposite

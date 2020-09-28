@@ -9,7 +9,7 @@
 #include "SingleMessageEventContainer.h"
 #include "MultiMessageEventContainer.h"
 #include "PriorityMessageEventContainer.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
@@ -112,12 +112,11 @@ void Network::SingleMessageEventContainer
 	}
 }
 
-void Network::SingleMessageEventContainer
-	::Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
+void Network::SingleMessageEventContainer ::Insert(const NetworkMessageEventSharedPtr& messageEvent, [[maybe_unused]] MessageEventPriority priority)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(priority);
+ 
 
 	if (m_MessageEvent.lock())
 	{
@@ -178,12 +177,11 @@ bool Network::SingleMessageEventContainer
 		return false;
 }
 
-bool Network::SingleMessageEventContainer
-	::IsPrioritySame(MessageEventPriority priority) const noexcept
+bool Network::SingleMessageEventContainer ::IsPrioritySame([[maybe_unused]] MessageEventPriority priority) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(priority);
+ 
 
 	return false;
 }

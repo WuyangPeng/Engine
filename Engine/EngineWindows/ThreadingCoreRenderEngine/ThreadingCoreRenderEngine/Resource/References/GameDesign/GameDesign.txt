@@ -1,15 +1,15 @@
-²Î¿¼ÎÄÏ×¡¤ÓÎÏ·Éè¼Æ
+å‚è€ƒæ–‡çŒ®Â·æ¸¸æˆè®¾è®¡
 
-1.	Geometry£¨¼¸ºÎÑ§£©
-2.	Graphics£¨Í¼ĞÎÑ§£©
-3.	Physics£¨ÎïÀíÑ§£©
-4.	AlgorithmicTechnique£¨Ëã·¨¼¼Êõ£©
-5.	RenderingTechnology£¨äÖÈ¾¼¼Êõ£© 
+1.	Geometryï¼ˆå‡ ä½•å­¦ï¼‰
+2.	Graphicsï¼ˆå›¾å½¢å­¦ï¼‰
+3.	Physicsï¼ˆç‰©ç†å­¦ï¼‰
+4.	AlgorithmicTechniqueï¼ˆç®—æ³•æŠ€æœ¯ï¼‰
+5.	RenderingTechnologyï¼ˆæ¸²æŸ“æŠ€æœ¯ï¼‰ 
 6.	OpenGL
 7.	DirectX
-8.	SoundProgramming£¨ÒôĞ§±à³Ì£©
-9.	ArtificialIntellegence£¨ÈË¹¤ÖÇÄÜ£©
-10.	GameDesign£¨ÓÎÏ·Éè¼Æ£©
-11.	GameProgramming£¨ÓÎÏ·±à³Ì£©
-12.	GameEngine£¨ÓÎÏ·ÒıÇæ£©
-13.	ImageProcessing£¨Í¼Ïñ´¦Àí£©
+8.	SoundProgrammingï¼ˆéŸ³æ•ˆç¼–ç¨‹ï¼‰
+9.	ArtificialIntellegenceï¼ˆäººå·¥æ™ºèƒ½ï¼‰
+10.	GameDesignï¼ˆæ¸¸æˆè®¾è®¡ï¼‰
+11.	GameProgrammingï¼ˆæ¸¸æˆç¼–ç¨‹ï¼‰
+12.	GameEngineï¼ˆæ¸¸æˆå¼•æ“ï¼‰
+13.	ImageProcessingï¼ˆå›¾åƒå¤„ç†ï¼‰

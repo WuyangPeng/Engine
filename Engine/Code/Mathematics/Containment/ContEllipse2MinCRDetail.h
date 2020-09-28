@@ -9,7 +9,7 @@
 
 #include "ContEllipse2MinCR.h"
 #include "CoreTools/Helper/MemoryMacro.h"
-#include "System/Helper/UnusedMacro.h"
+
 
 template <typename Real>
 Mathematics::ContEllipse2MinCR<Real>
@@ -113,7 +113,7 @@ void Mathematics::ContEllipse2MinCR<Real>
     // contributes to the convex hull of the constraints and the search for
     // the maximum terminates before or at this line.
     int i, iYMin = -1;
-    int iXMin = -1;
+    [[maybe_unused]] int iXMin = -1;
     Real axMax = Math<Real>::GetValue(0), ayMax = Math<Real>::GetValue(0);  // A[i] >= (0,0) by design
     for (i = 0; i < numConstraints; ++i)
     {
@@ -134,7 +134,7 @@ void Mathematics::ContEllipse2MinCR<Real>
         }
     }
     MATHEMATICS_ASSERTION_0(iXMin != -1 && iYMin != -1, "Unexpected condition\n");
-    SYSTEM_UNUSED_ARG(iXMin);
+ 
 
     used[iYMin] = true;
 

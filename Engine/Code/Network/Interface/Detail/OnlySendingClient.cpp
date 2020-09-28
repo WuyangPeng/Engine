@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "OnlySendingClient.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
@@ -67,11 +67,11 @@ void Network::OnlySendingClient ::AsyncConnect()
     m_SockConnector.AsyncConnect(GetSocketManagerSharedPtr(), m_SockStream, sockAddress);
 }
 
-void Network::OnlySendingClient ::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::OnlySendingClient ::Send([[maybe_unused]] uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(socketID);
+ 
 
     if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Cache)
     {
@@ -109,11 +109,11 @@ void Network::OnlySendingClient ::AsyncSend(uint64_t socketID, const MessageInte
     }
 }
 
-void Network::OnlySendingClient ::ImmediatelySend(uint64_t socketID)
+void Network::OnlySendingClient ::ImmediatelySend([[maybe_unused]] uint64_t socketID)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(socketID);
+ 
 
     if (!m_BufferSendStream.IsEmpty())
     {
@@ -125,11 +125,11 @@ void Network::OnlySendingClient ::ImmediatelySend(uint64_t socketID)
     }
 }
 
-void Network::OnlySendingClient ::ImmediatelyAsyncSend(uint64_t socketID)
+void Network::OnlySendingClient ::ImmediatelyAsyncSend([[maybe_unused]] uint64_t socketID)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(socketID);
+ 
 
     if (!m_BufferSendStream.IsEmpty())
     {

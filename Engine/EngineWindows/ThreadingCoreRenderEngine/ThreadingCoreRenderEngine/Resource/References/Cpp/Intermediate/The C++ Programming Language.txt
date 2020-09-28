@@ -1,52 +1,52 @@
-C++ ����������ԣ�The C++ Programming Language��
+C++ 程序设计语言（The C++ Programming Language）
 
-������վ��
-http://www.hzcourse.com/web/teachRes/detail/3883/208�� http://www.hzcourse.com/web/refbook/detail/6641/208��
-�ٷ���վ��
-http://www.stroustrup.com ��http://www.research.att.com/~bs/covers.html ����ʧЧ����
+华章网站：
+http://www.hzcourse.com/web/teachRes/detail/3883/208、 http://www.hzcourse.com/web/refbook/detail/6641/208。
+官方网站：
+http://www.stroustrup.com 、http://www.research.att.com/~bs/covers.html （已失效）。
 
-�ر��
-���
-���ߣ�Bjarne Stroustrup
+特别版
+★★
+作者：Bjarne Stroustrup
 
-֪ʶ�� 
-1.	C++ ����֪ʶ��
-2.	C++ ����֪ʶ��ϰ��
+知识点 
+1.	C++ 基础知识。
+2.	C++ 基础知识练习。
 
-���� 
-1.  �鼮���롣
-2.  ��ϰ���롣
+代码 
+1.  书籍代码。
+2.  练习代码。
 
-Ҫ�� 
-1.	�����ƽ����ָ��������
-2.	��������ʹ�ú꣬��ʹ�ô��������д��ĸ�ĳ�ª�����֡�
-3.	�ڹ���ȫ�ֵĺ����ֿռ�Ķ���ʱ��Ӧ����˳�������ԡ�
-4.	��ֻ��һ������С�������Ĺ��캯������explicit��
+要点 
+1.	避免非平凡的指针算术。
+2.	如果你必须使用宏，请使用带有许多大写字母的丑陋的名字。
+3.	在构造全局的和名字空间的对象时，应避免顺序依赖性。
+4.	将只有一个“大小参数”的构造函数做成explicit。
 
-��4���1-3����
-�����
-���ߣ�Bjarne Stroustrup
+第4版第1-3部分
+★★★★
+作者：Bjarne Stroustrup
 
-֪ʶ�� 
-1.	C++ ����֪ʶ��
-2.	C++11 ����֪ʶ��
-3.	һ��������ơ�
+知识点 
+1.	C++ 基础知识。
+2.	C++11 基础知识。
+3.	一个矩阵设计。
 
-Ҫ�� 
-1.	��ָ�뿴��Java��������C++�еĵȼ��
-2.	��ֵ�ķ�ʽ�����������������ƶ����������Ч�ʣ���
-3.	���ݽṹӦ����С�ɡ�
-4.	ע��Ӧ�ü��ֱ�ӡ�
-5.	�ⲻӦֱ��������������û��Ĵ��������Ϣ����ȷ���������׳�һ���쳣Ȼ���ɵ����߾�������ô����
+要点 
+1.	将指针看作Java的引用在C++中的等价物。
+2.	以值的方式返回容器（依赖于移动操作以提高效率）。
+3.	数据结构应力求小巧。
+4.	注释应该简短直接。
+5.	库不应直接输出面向最终用户的错误诊断信息，正确的做法是抛出一个异常然后由调用者决定该怎么做。
 
-��4���4����
-����
-���ߣ�Bjarne Stroustrup
+第4版第4部分
+★★★
+作者：Bjarne Stroustrup
 
-֪ʶ�� 
-1.	C++ ����֪ʶ��
-2.	C++11 ����֪ʶ��
-3.	��׼�����֪ʶ��
+知识点 
+1.	C++ 基础知识。
+2.	C++11 基础知识。
+3.	标准库基础知识。
 
-Ҫ�� 
-1.	����ѡ�����ض��������Դ�������������ָ�롣
+要点 
+1.	优先选择有特定语义的资源句柄而不是智能指针。

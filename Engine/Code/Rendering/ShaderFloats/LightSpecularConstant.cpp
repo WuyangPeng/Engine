@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "LightSpecularConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -33,8 +33,7 @@ Rendering::LightSpecularConstant
  
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightSpecularConstant)
 
-void Rendering::LightSpecularConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::LightSpecularConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -42,8 +41,7 @@ void Rendering::LightSpecularConstant
 
 	SetRegister(0, light->GetSpecular());
 
-	SYSTEM_UNUSED_ARG(camera);
-	SYSTEM_UNUSED_ARG(visual);
+	 
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::LightSpecularConstant

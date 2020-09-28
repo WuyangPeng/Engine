@@ -1,13 +1,13 @@
 Applied C++
 
-¹Ù·½ÍøÕ¾£º
-http://www.appliedcpp.com/appliedcpp_sw¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.appliedcpp.com/appliedcpp_swã€‚
 
-¡ï¡ï
-×÷Õß£ºPhilip Romanik¡¢Amy Muntz
+â˜…â˜…
+ä½œè€…ï¼šPhilip Romanikã€Amy Muntz
 
-ÖªÊ¶µã 
-1.	¹¹½¨C++Èí¼şÖªÊ¶¡£
+çŸ¥è¯†ç‚¹ 
+1.	æ„å»ºC++è½¯ä»¶çŸ¥è¯†ã€‚
 
-´úÂë
-1.  Êé¼®´úÂë¡£ 
+ä»£ç 
+1.  ä¹¦ç±ä»£ç ã€‚ 

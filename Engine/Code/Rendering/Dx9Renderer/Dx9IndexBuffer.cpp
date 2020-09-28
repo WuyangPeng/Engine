@@ -7,15 +7,13 @@
 #include "Rendering/RenderingExport.h" 
 
 #include "Dx9IndexBuffer.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ClassInvariant/NoexceptDetail.h"
-Rendering::Dx9IndexBuffer
-	::Dx9IndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer) noexcept
-	:ParentType{}
+Rendering::Dx9IndexBuffer ::Dx9IndexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const IndexBuffer* indexBuffer) noexcept
+    : ParentType{}
 {
-	SYSTEM_UNUSED_ARG(indexBuffer);
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -33,32 +31,29 @@ bool Rendering::Dx9IndexBuffer
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::Dx9IndexBuffer
-	::Enable(Renderer* renderer)
+void Rendering::Dx9IndexBuffer ::Enable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 	
 	CoreTools::DoNothing();
 }
 
-void Rendering::Dx9IndexBuffer
-	::Disable(Renderer* renderer)
+void Rendering::Dx9IndexBuffer ::Disable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 	
 	CoreTools::DoNothing();
 }
 
-void* Rendering::Dx9IndexBuffer
-	::Lock(BufferLocking mode)
+void* Rendering::Dx9IndexBuffer ::Lock([[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	SYSTEM_UNUSED_ARG(mode);
+ 
 	
 	CoreTools::DoNothing();
 

@@ -35,11 +35,10 @@ void Rendering::RendererInputData
 	sm_RendererInputData.reset();
 }
 
-Rendering::RendererInputData
-::RendererInputData(RendererInputDataCreate rendererInputDataCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Rendering::RendererInputData ::RendererInputData([[maybe_unused]] RendererInputDataCreate rendererInputDataCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(rendererInputDataCreate);
+ 
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }

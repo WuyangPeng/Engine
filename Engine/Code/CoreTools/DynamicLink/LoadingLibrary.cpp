@@ -15,7 +15,7 @@ using std::string;
 using std::make_shared;
 
 CoreTools::LoadingLibrary
-	::LoadingLibrary(const String& fileName, LoadLibrary flags)
+	::LoadingLibrary(const String& fileName, LoadLibraryType flags)
 	:m_Impl{ make_shared<ImplType>(fileName,flags) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;

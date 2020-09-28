@@ -8,14 +8,13 @@
 
 #include "OpenGLTexture2D.h"
 #include "OpenGLTextureDataDetail.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
  
-Rendering::OpenGLTexture2D
-	::OpenGLTexture2D( Renderer* renderer, const Texture2D* texture )
-	:m_OpenGLTextureData{ texture }
+Rendering::OpenGLTexture2D ::OpenGLTexture2D([[maybe_unused]] Renderer* renderer, const Texture2D* texture)
+    : m_OpenGLTextureData{ texture }
 {	
-	SYSTEM_UNUSED_ARG(renderer);
+	 
 
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -24,24 +23,21 @@ Rendering::OpenGLTexture2D
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTexture2D)
 
-void Rendering::OpenGLTexture2D
-	::Enable( Renderer* renderer, int textureUnit ) noexcept
+void Rendering::OpenGLTexture2D ::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_OpenGLTextureData.Enable(textureUnit);
 
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
-void Rendering::OpenGLTexture2D
-	::Disable( Renderer* renderer, int textureUnit ) noexcept
+void Rendering::OpenGLTexture2D ::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_OpenGLTextureData.Disable(textureUnit);
-
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
 void* Rendering::OpenGLTexture2D

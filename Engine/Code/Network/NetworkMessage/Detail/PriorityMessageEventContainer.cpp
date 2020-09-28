@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "PriorityMessageEventContainer.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
@@ -99,12 +99,11 @@ bool Network::PriorityMessageEventContainer
 	return true;
 }
 
-bool Network::PriorityMessageEventContainer
-	::IsPrioritySame(MessageEventPriority priority) const noexcept
+bool Network::PriorityMessageEventContainer ::IsPrioritySame([[maybe_unused]] MessageEventPriority priority) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(priority);
+ 
 
 	return true;
 }

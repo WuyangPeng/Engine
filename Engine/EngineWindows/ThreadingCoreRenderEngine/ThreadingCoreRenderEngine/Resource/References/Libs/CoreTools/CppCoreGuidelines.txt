@@ -1,10 +1,10 @@
 CppCoreGuidelines
  
-¹Ù·½ÍøÕ¾ 
+å®˜æ–¹ç½‘ç«™ 
 https://github.com/isocpp/CppCoreGuidelines
 
-¡ï
+â˜…
 
-ÖªÊ¶µã 
-1.	C ++ºËÐÄ×¼Ôò¡£
+çŸ¥è¯†ç‚¹ 
+1.	C ++æ ¸å¿ƒå‡†åˆ™ã€‚
 

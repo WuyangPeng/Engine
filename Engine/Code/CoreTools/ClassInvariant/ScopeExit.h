@@ -11,8 +11,6 @@
 
 #include <functional>
 
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
-
 namespace CoreTools
 {
 	template<typename T = std::function<void(void)> >

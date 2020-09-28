@@ -8,7 +8,7 @@
 
 #include "NullSockStream.h"
 #include "System/Helper/EnumCast.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -34,29 +34,29 @@ Network::NullSockStream ::NullSockStream() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockStream)
 
-int Network::NullSockStream ::Send(const MessageBufferSharedPtr& messageBuffer) noexcept
+int Network::NullSockStream ::Send([[maybe_unused]] const MessageBufferSharedPtr& messageBuffer) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(messageBuffer);
+ 
 
     return 0;
 }
 
-int Network::NullSockStream ::Receive(const MessageBufferSharedPtr& messageBuffer) noexcept
+int Network::NullSockStream ::Receive([[maybe_unused]] const MessageBufferSharedPtr& messageBuffer) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(messageBuffer);
+ 
 
     return 0;
 }
 
-void Network::NullSockStream ::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::NullSockStream ::AsyncSend(const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(messageBuffer);
+ 
 
     CoreTools::CallbackParameters callbackParameters{};
     callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
@@ -64,12 +64,11 @@ void Network::NullSockStream ::AsyncSend(const EventInterfaceSharedPtr& eventInt
     eventInterface->EventFunction(callbackParameters);
 }
 
-void Network::NullSockStream ::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) noexcept
+void Network::NullSockStream ::AsyncReceive([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const MessageBufferSharedPtr& messageBuffer) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(eventInterface);
-    SYSTEM_UNUSED_ARG(messageBuffer);
+    
 }
 
 bool Network::NullSockStream ::CloseHandle() noexcept

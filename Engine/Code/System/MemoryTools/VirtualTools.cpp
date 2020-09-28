@@ -1,223 +1,167 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/10 0:13)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/23 1:09)
 
 #include "System/SystemExport.h"
 
-#include "VirtualTools.h" 
+#include "VirtualTools.h"
 #include "Flags/VirtualToolsFlags.h"
 #include "System/Helper/EnumCast.h"
-#include "System/Helper/UnusedMacro.h"
 #include "System/Helper/WindowsMacro.h"
 
-System::WindowVoidPtr System
-	::AllocateVirtual(WindowVoidPtr address, WindowSize size, MemoryAllocation allocationType, MemoryProtect protect) noexcept
+System::WindowVoidPtr System::AllocateVirtual([[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] WindowSize size, [[maybe_unused]] MemoryAllocation allocationType, [[maybe_unused]] MemoryProtect protect) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::VirtualAlloc(address, size, EnumCastUnderlying(allocationType), EnumCastUnderlying(protect));
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(size);
-	SYSTEM_UNUSED_ARG(allocationType);
-	SYSTEM_UNUSED_ARG(protect);
-
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32
+    return ::VirtualAlloc(address, size, EnumCastUnderlying(allocationType), EnumCastUnderlying(protect));
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowVoidPtr System
-	::AllocateVirtual(WindowHandle process, WindowVoidPtr address, WindowSize size, MemoryAllocation allocationType, MemoryProtect protect) noexcept
+System::WindowVoidPtr System::AllocateVirtual([[maybe_unused]] WindowHandle process, [[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] WindowSize size, [[maybe_unused]] MemoryAllocation allocationType, [[maybe_unused]] MemoryProtect protect) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::VirtualAllocEx(process, address, size, EnumCastUnderlying(allocationType), EnumCastUnderlying(protect));
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(process);
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(size);
-	SYSTEM_UNUSED_ARG(allocationType);
-	SYSTEM_UNUSED_ARG(protect);
-
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32
+    return ::VirtualAllocEx(process, address, size, EnumCastUnderlying(allocationType), EnumCastUnderlying(protect));
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::FreeVirtual(WindowVoidPtr address) noexcept
+bool System::FreeVirtual([[maybe_unused]] WindowVoidPtr address) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
+    constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
 
-	if (::VirtualFree(address, 0, freeType) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(address);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::VirtualFree(address, 0, freeType) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::FreeVirtual(WindowHandle process, WindowVoidPtr address) noexcept
+bool System::FreeVirtual([[maybe_unused]] WindowHandle process, [[maybe_unused]] WindowVoidPtr address) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
+    constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
 
-	if (::VirtualFreeEx(process, address, 0, freeType) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(process);
-	SYSTEM_UNUSED_ARG(address);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::VirtualFreeEx(process, address, 0, freeType) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::SetVirtualProtect(WindowVoidPtr address, WindowSize size, MemoryProtect newProtect, MemoryProtect* oldProtect) noexcept
+bool System::SetVirtualProtect([[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] WindowSize size, [[maybe_unused]] MemoryProtect newProtect, [[maybe_unused]] MemoryProtect* oldProtect) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	WindowDWord oldMemory{ 0 };
-	const auto result = ::VirtualProtect(address, size, EnumCastUnderlying(newProtect), &oldMemory);
+    WindowDWord oldMemory{ 0 };
+    const auto result = ::VirtualProtect(address, size, EnumCastUnderlying(newProtect), &oldMemory);
 
-	if (result != g_False)
-	{
-		UnderlyingCastEnumPtr(oldMemory, oldProtect);
+    if (result != g_False)
+    {
+        UnderlyingCastEnumPtr(oldMemory, oldProtect);
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(size);
-	SYSTEM_UNUSED_ARG(newProtect);
-	SYSTEM_UNUSED_ARG(oldProtect);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::SetVirtualProtect(WindowHandle process, WindowVoidPtr address, WindowSize size, MemoryProtect newProtect, MemoryProtect* oldProtect) noexcept
+bool System::SetVirtualProtect([[maybe_unused]] WindowHandle process, [[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] WindowSize size, [[maybe_unused]] MemoryProtect newProtect, [[maybe_unused]] MemoryProtect* oldProtect) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	WindowDWord oldMemory{ 0 };
-	const auto result = ::VirtualProtectEx(process, address, size, EnumCastUnderlying(newProtect), &oldMemory);
+    WindowDWord oldMemory{ 0 };
+    const auto result = ::VirtualProtectEx(process, address, size, EnumCastUnderlying(newProtect), &oldMemory);
 
-	if (result != g_False)
-	{
-		UnderlyingCastEnumPtr(oldMemory, oldProtect);
+    if (result != g_False)
+    {
+        UnderlyingCastEnumPtr(oldMemory, oldProtect);
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(process);
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(size);
-	SYSTEM_UNUSED_ARG(newProtect);
-	SYSTEM_UNUSED_ARG(oldProtect);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::GetVirtualQuery(WindowVoidPtr address, MemoryBasicInformationPtr buffer) noexcept
+bool System::GetVirtualQuery([[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] MemoryBasicInformationPtr buffer) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	constexpr auto memoryBasicInformationSize = sizeof(MemoryBasicInformation);
+    constexpr auto memoryBasicInformationSize = sizeof(MemoryBasicInformation);
 
-	const auto size = ::VirtualQuery(address, buffer, memoryBasicInformationSize);
+    const auto size = ::VirtualQuery(address, buffer, memoryBasicInformationSize);
 
-	if (size == memoryBasicInformationSize)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(buffer);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (size == memoryBasicInformationSize)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::GetVirtualQuery(WindowHandle process, WindowVoidPtr address, MemoryBasicInformationPtr buffer) noexcept
+bool System::GetVirtualQuery([[maybe_unused]] WindowHandle process, [[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] MemoryBasicInformationPtr buffer) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	constexpr auto memoryBasicInformationSize = sizeof(MemoryBasicInformation);
-	const auto size = ::VirtualQueryEx(process, address, buffer, memoryBasicInformationSize);
+    constexpr auto memoryBasicInformationSize = sizeof(MemoryBasicInformation);
+    const auto size = ::VirtualQueryEx(process, address, buffer, memoryBasicInformationSize);
 
-	if (size == memoryBasicInformationSize)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(buffer);
-	SYSTEM_UNUSED_ARG(process);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (size == memoryBasicInformationSize)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::LockVirtual(WindowVoidPtr address, WindowSize size) noexcept
+bool System::LockVirtual([[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] WindowSize size) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::VirtualLock(address, size) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(size);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::VirtualLock(address, size) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System
-	::UnlockVirtual(WindowVoidPtr address, WindowSize size) noexcept
+bool System::UnlockVirtual([[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] WindowSize size) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	if (::VirtualUnlock(address, size) != g_False)
-		return true;
-	else
-		return false;
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(size);
-
-	return false;
-#endif // SYSTEM_PLATFORM_WIN32
+    if (::VirtualUnlock(address, size) != g_False)
+        return true;
+    else
+        return false;
+#else  // !SYSTEM_PLATFORM_WIN32
+    return false;
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowVoidPtr System
-	::GetVirtualAllocNuma(WindowHandle process, WindowVoidPtr address, WindowSize size, MemoryAllocation allocationType, MemoryProtect protect, WindowDWord preferred) noexcept
+System::WindowVoidPtr System::GetVirtualAllocNuma([[maybe_unused]] WindowHandle process, [[maybe_unused]] WindowVoidPtr address, [[maybe_unused]] WindowSize size, [[maybe_unused]] MemoryAllocation allocationType, [[maybe_unused]] MemoryProtect protect, [[maybe_unused]] WindowDWord preferred) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-	return ::VirtualAllocExNuma(process, address, size, EnumCastUnderlying(allocationType), EnumCastUnderlying(protect), preferred);
-#else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(process);
-	SYSTEM_UNUSED_ARG(address);
-	SYSTEM_UNUSED_ARG(size);
-	SYSTEM_UNUSED_ARG(allocationType);
-	SYSTEM_UNUSED_ARG(protect);
-	SYSTEM_UNUSED_ARG(preferred);
-
-	return nullptr;
-#endif // SYSTEM_PLATFORM_WIN32
+    return ::VirtualAllocExNuma(process, address, size, EnumCastUnderlying(allocationType), EnumCastUnderlying(protect), preferred);
+#else  // !SYSTEM_PLATFORM_WIN32
+    return nullptr;
+#endif  // SYSTEM_PLATFORM_WIN32
 }

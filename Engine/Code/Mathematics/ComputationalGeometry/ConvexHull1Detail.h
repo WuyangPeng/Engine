@@ -9,7 +9,7 @@
 
 #include "ConvexHull1.h"
 #include "CoreTools/Helper/MemoryMacro.h"
-#include "System/Helper/UnusedMacro.h"
+
 
 template <typename Real>
 Mathematics::ConvexHull1<Real>
@@ -62,7 +62,7 @@ Mathematics::ConvexHull1<Real>
 {
     bool loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Failed to load file\n");
-	SYSTEM_UNUSED_ARG(loaded);
+	
 }
 
 template <typename Real>

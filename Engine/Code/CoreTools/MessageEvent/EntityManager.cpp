@@ -33,11 +33,10 @@ void CoreTools::EntityManager
 	sm_EntityManager.reset();
 }
 
-CoreTools::EntityManager
-	::EntityManager(EntityManagerCreate entityManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+CoreTools::EntityManager ::EntityManager([[maybe_unused]] EntityManagerCreate entityManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(entityManagerCreate);
+	 
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

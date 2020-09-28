@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:38)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:47)
 
 #ifndef SYSTEM_HELPER_GL_30_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_30_EXTENSIONS_MACRO_H
@@ -120,7 +123,7 @@
 #define GL_QUERY_BY_REGION_NO_WAIT 0x8E16
 #define GL_BUFFER_ACCESS_FLAGS 0x911F
 #define GL_BUFFER_MAP_LENGTH 0x9120
-#define GL_BUFFER_MAP_OFFSET 0x9121 
+#define GL_BUFFER_MAP_OFFSET 0x9121
 
 #define glColorMaski System::GlColorMaski
 #define glGetBooleani_v System::GlGetBooleani_v
@@ -181,4 +184,4 @@
 #define glClearBufferfi System::GlClearBufferfi
 #define glGetStringi System::GlGetStringi
 
-#endif // SYSTEM_HELPER_GL_30_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_30_EXTENSIONS_MACRO_H

@@ -1,12 +1,12 @@
-²Î¿¼ÎÄÏ×¡¤ÆäËûÓïÑÔ
+å‚è€ƒæ–‡çŒ®Â·å…¶ä»–è¯­è¨€
 
-1.	Database£¨Êı¾İ¿â£©
+1.	Databaseï¼ˆæ•°æ®åº“ï¼‰
 2.	SQL
 3.	SQL Server
 4.	Java
-5.	CSharp£¨C#£©
+5.	CSharpï¼ˆC#ï¼‰
 6.	Python
-7.	RegularExpression£¨ÕıÔò±í´ïÊ½£©
+7.	RegularExpressionï¼ˆæ­£åˆ™è¡¨è¾¾å¼ï¼‰
 8.	Redis
 9.	Lua
 10.	Perl

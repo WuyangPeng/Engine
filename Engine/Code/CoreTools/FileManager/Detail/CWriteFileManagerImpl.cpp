@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CWriteFileManagerImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/FileManager/Endian.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
@@ -136,16 +136,13 @@ size_t CoreTools::CWriteFileManagerImpl
 
 #endif // SYSTEM_BIG_ENDIAN
 
-size_t CoreTools::CWriteFileManagerImpl
-	::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) 
+size_t CoreTools::CWriteFileManagerImpl ::ReadFromFile([[maybe_unused]] size_t itemSize, [[maybe_unused]] size_t itemsNumber, [[maybe_unused]] void* data)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用ReadFromFile！");
 
-	SYSTEM_UNUSED_ARG(itemSize);
-	SYSTEM_UNUSED_ARG(itemsNumber);
-	SYSTEM_UNUSED_ARG(data);
+ 
 
 	CoreTools::DoNothing();
 
@@ -164,28 +161,26 @@ int CoreTools::CWriteFileManagerImpl
 	return System::g_CFileError;
 }
 
-bool CoreTools::CWriteFileManagerImpl
-	::UnGetCharacter(int character) 
+bool CoreTools::CWriteFileManagerImpl ::UnGetCharacter([[maybe_unused]] int character)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用UnGetCharacter！");
 
-	SYSTEM_UNUSED_ARG(character);
+ 
 
 	CoreTools::DoNothing();
 
 	return false;
 }
 
-string CoreTools::CWriteFileManagerImpl
-	::GetString(int count)
+string CoreTools::CWriteFileManagerImpl ::GetString([[maybe_unused]] int count)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用GetString！");
 
-	SYSTEM_UNUSED_ARG(count);
+ 
 
 	return "";
 }

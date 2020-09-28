@@ -1,13 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:39)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:47)
 
 #ifndef SYSTEM_HELPER_GL_31_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_31_EXTENSIONS_MACRO_H
 
-#include "System/Helper/GLExtensionsMacro.h" 
+#include "System/Helper/GLExtensionsMacro.h"
 
 #define GL_SAMPLER_2D_RECT 0x8B63
 #define GL_SAMPLER_2D_RECT_SHADOW 0x8B64
@@ -46,4 +49,4 @@
 #define glTexBuffer System::GlTexBuffer
 #define glPrimitiveRestartIndex System::GlPrimitiveRestartIndex
 
-#endif // SYSTEM_HELPER_GL_31_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_31_EXTENSIONS_MACRO_H

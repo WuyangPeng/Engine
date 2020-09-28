@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h" 
 
 #include "NetworkSockAcceptor.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Network/SocketPrototypes.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -36,8 +36,8 @@ Network::NetworkSockAcceptor
 
 	NetworkSockInetAddress sockAddress{ port };
 
-	System::Bind(m_SocketHandle, &sockAddress.GetWinSockInetAddress());
-	System::Listen(m_SocketHandle, 5);
+[[maybe_unused]]   auto result = System::Bind(m_SocketHandle, &sockAddress.GetWinSockInetAddress());
+     result = System::Listen(m_SocketHandle, 5);
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -53,8 +53,8 @@ Network::NetworkSockAcceptor
 
 	NetworkSockInetAddress sockAddress{ hostName,port };
 
-	System::Bind(m_SocketHandle, &sockAddress.GetWinSockInetAddress());
-	System::Listen(m_SocketHandle, 5);
+[[maybe_unused]] auto   result = System::Bind(m_SocketHandle, &sockAddress.GetWinSockInetAddress());
+      result = System::Listen(m_SocketHandle, 5);
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -124,24 +124,22 @@ System::WinSocket Network::NetworkSockAcceptor
 	return m_SocketHandle;
 }
 
-void Network::NetworkSockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
+void Network::NetworkSockAcceptor ::AsyncAccept([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	Accept(sockStream);
 
-	SYSTEM_UNUSED_ARG(eventInterface);
+ 
 }
 
-void Network::NetworkSockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::NetworkSockAcceptor ::AsyncAccept([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	Accept(sockStream, sockAddress);
 
-	SYSTEM_UNUSED_ARG(eventInterface);
+ 
 }
 
 const std::string Network::NetworkSockAcceptor

@@ -8,7 +8,7 @@
 
 #include "OpenGLVertexBuffer.h"
 #include "OpenGLMapping.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/Resources/VertexBuffer.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -17,13 +17,12 @@
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-Rendering::OpenGLVertexBuffer
-    ::OpenGLVertexBuffer (Renderer* renderer,const VertexBuffer* vertexBuffer)
-	:ParentType{}, m_Buffer{ 0 }
+Rendering::OpenGLVertexBuffer ::OpenGLVertexBuffer([[maybe_unused]] Renderer* renderer, const VertexBuffer* vertexBuffer)
+    : ParentType{}, m_Buffer{ 0 }
 {
     Init(vertexBuffer);
     
-    SYSTEM_UNUSED_ARG(renderer);
+ 
     
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -58,28 +57,22 @@ bool Rendering::OpenGLVertexBuffer
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::OpenGLVertexBuffer
-    ::Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) noexcept
+void Rendering::OpenGLVertexBuffer ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int vertexSize, [[maybe_unused]] unsigned int streamIndex, [[maybe_unused]] unsigned int offset) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     System::GlBindBuffer(m_Buffer);
     
-    SYSTEM_UNUSED_ARG(renderer);
-    SYSTEM_UNUSED_ARG(vertexSize);
-    SYSTEM_UNUSED_ARG(streamIndex);
-    SYSTEM_UNUSED_ARG(offset);
+ 
 }
 
-void Rendering::OpenGLVertexBuffer
-    ::Disable (Renderer* renderer, unsigned int streamIndex) noexcept
+void Rendering::OpenGLVertexBuffer ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int streamIndex) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     System::GlBindBuffer(0);
     
-    SYSTEM_UNUSED_ARG(renderer);
-    SYSTEM_UNUSED_ARG(streamIndex);
+ 
 }
 
 void* Rendering::OpenGLVertexBuffer

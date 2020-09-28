@@ -1,12 +1,12 @@
-UMLºÍÄ£Ê½Ó¦ÓÃ£¨Applying UML and Patterns£©
-£¨µÚ3°æ£©
+UMLå’Œæ¨¡å¼åº”ç”¨ï¼ˆApplying UML and Patternsï¼‰
+ï¼ˆç¬¬3ç‰ˆï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://www.craiglarman.com ¡¢http://www.craiglarman.cn
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.craiglarman.com ã€http://www.craiglarman.cn
 
-¡ï¡î
-×÷Õß£ºCarig Larman 
+â˜…â˜†
+ä½œè€…ï¼šCarig Larman 
 
-ÖªÊ¶µã 
-1.	UML»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	UMLåŸºç¡€çŸ¥è¯†ã€‚ 
 

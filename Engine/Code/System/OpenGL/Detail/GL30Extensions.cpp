@@ -1,29 +1,31 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.0 (2020/01/02 15:44)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.1.0 (2020/09/25 17:40)
 
 #include "System/SystemExport.h"
 
 #include "GL30Extensions.h"
 #include "GLUtility.h"
-#include "System/OpenGL/OpenGLUtility.h"
-#include "System/OpenGL/Flags/GLExtensionsFlags.h"
-#include "System/OpenGL/Using/GL30ExtensionsUsing.h"
 #include "System/Helper/Detail/OpenGL/GLPluginMacro.h"
+#include "System/OpenGL/Flags/GLExtensionsFlags.h"
+#include "System/OpenGL/OpenGLUtility.h"
+#include "System/OpenGL/Using/GL30ExtensionsUsing.h"
 
 // OpenGL 3.0
 
 namespace System
 {
-	ExistsOpenGLExtensions g_ExistsOpenGL30{ ExistsOpenGLExtensions::Unknown };
+    auto g_ExistsOpenGL30 = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System
-	::IsExistsOpenGL30() noexcept
+System::ExistsOpenGLExtensions System::IsExistsOpenGL30() noexcept
 {
-	return g_ExistsOpenGL30;
+    return g_ExistsOpenGL30;
 }
 
 System::PgglColorMaski System::gglColorMaski{ nullptr };
@@ -85,425 +87,363 @@ System::PgglClearBufferfv System::gglClearBufferfv{ nullptr };
 System::PgglClearBufferfi System::gglClearBufferfi{ nullptr };
 System::PgglGetStringi System::gglGetStringi{ nullptr };
 
-void System
-	::GlColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) noexcept
+void System::GlColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) noexcept
 {
-	SYSTEM_BODY_5(gglColorMaski, index, r, g, b, a);
+    SYSTEM_BODY_5(gglColorMaski, index, r, g, b, a);
 }
 
-void System
-	::GlGetBooleani_v(GLenum target, GLuint index, GLboolean* data) noexcept
+void System::GlGetBooleani_v(GLenum target, GLuint index, GLboolean* data) noexcept
 {
-	SYSTEM_BODY_3(gglGetBooleani_v, target, index, data);
+    SYSTEM_BODY_3(gglGetBooleani_v, target, index, data);
 }
 
-void System
-	::GlGetIntegeri_v(GLenum target, GLuint index, GLint* data) noexcept
+void System::GlGetIntegeri_v(GLenum target, GLuint index, GLint* data) noexcept
 {
-	SYSTEM_BODY_3(gglGetIntegeri_v, target, index, data);
+    SYSTEM_BODY_3(gglGetIntegeri_v, target, index, data);
 }
 
-void System
-	::GlEnablei(GLenum target, GLuint index) noexcept
+void System::GlEnablei(GLenum target, GLuint index) noexcept
 {
-	SYSTEM_BODY_2(gglEnablei, target, index);
+    SYSTEM_BODY_2(gglEnablei, target, index);
 }
 
-void System
-	::GlDisablei(GLenum target, GLuint index) noexcept
+void System::GlDisablei(GLenum target, GLuint index) noexcept
 {
-	SYSTEM_BODY_2(gglDisablei, target, index);
+    SYSTEM_BODY_2(gglDisablei, target, index);
 }
 
-GLboolean System
-	::GlIsEnabledi(GLenum target, GLuint index) noexcept
+GLboolean System::GlIsEnabledi(GLenum target, GLuint index) noexcept
 {
-	SYSTEM_BODY_2_RESULT(gglIsEnabledi, target, index, GLboolean, GL_FALSE);
+    SYSTEM_BODY_2_RESULT(gglIsEnabledi, target, index, GLboolean, GL_FALSE);
 }
 
-void System
-	::GlBeginTransformFeedback(GLenum primitiveMode) noexcept
+void System::GlBeginTransformFeedback(GLenum primitiveMode) noexcept
 {
-	SYSTEM_BODY_1(gglBeginTransformFeedback, primitiveMode);
+    SYSTEM_BODY_1(gglBeginTransformFeedback, primitiveMode);
 }
 
-void System
-	::GlEndTransformFeedback(void) noexcept
+void System::GlEndTransformFeedback(void) noexcept
 {
-	SYSTEM_BODY_0(gglEndTransformFeedback);
+    SYSTEM_BODY_0(gglEndTransformFeedback);
 }
 
-void System
-	::GlBindBufferRange(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size) noexcept
+void System::GlBindBufferRange(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size) noexcept
 {
-	SYSTEM_BODY_5(gglBindBufferRange, target, index, buffer, offset, size);
+    SYSTEM_BODY_5(gglBindBufferRange, target, index, buffer, offset, size);
 }
 
-void System
-	::GlBindBufferBase(GLenum target, GLuint index, GLuint buffer) noexcept
+void System::GlBindBufferBase(GLenum target, GLuint index, GLuint buffer) noexcept
 {
-	SYSTEM_BODY_3(gglBindBufferBase, target, index, buffer);
+    SYSTEM_BODY_3(gglBindBufferBase, target, index, buffer);
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26487)
-void System
-	::GlTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar** varyings, GLenum bufferMode) noexcept
+void System::GlTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar** varyings, GLenum bufferMode) noexcept
 {
-	SYSTEM_BODY_4(gglTransformFeedbackVaryings, program, count, varyings, bufferMode);
-}
-#include STSTEM_WARNING_POP
-
-void System
-	::GlGetTransformFeedbackVarying(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLsizei* size, GLenum* type, GLchar* name) noexcept
-{
-	SYSTEM_BODY_7(gglGetTransformFeedbackVarying, program, index, bufSize, length, size, type, name);
+    SYSTEM_BODY_4(gglTransformFeedbackVaryings, program, count, varyings, bufferMode);
 }
 
-void System
-	::GlClampColor(GLenum target, GLenum clamp) noexcept
+void System::GlGetTransformFeedbackVarying(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLsizei* size, GLenum* type, GLchar* name) noexcept
 {
-	SYSTEM_BODY_2(gglClampColor, target, clamp);
+    SYSTEM_BODY_7(gglGetTransformFeedbackVarying, program, index, bufSize, length, size, type, name);
 }
 
-void System
-	::GlBeginConditionalRender(GLuint id, GLenum mode) noexcept
+void System::GlClampColor(GLenum target, GLenum clamp) noexcept
 {
-	SYSTEM_BODY_2(gglBeginConditionalRender, id, mode);
+    SYSTEM_BODY_2(gglClampColor, target, clamp);
 }
 
-void System
-	::GlEndConditionalRender(void) noexcept
+void System::GlBeginConditionalRender(GLuint id, GLenum mode) noexcept
 {
-	SYSTEM_BODY_0(gglEndConditionalRender);
+    SYSTEM_BODY_2(gglBeginConditionalRender, id, mode);
 }
 
-void System
-	::GlVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
+void System::GlEndConditionalRender(void) noexcept
 {
-	SYSTEM_BODY_5(gglVertexAttribIPointer, index, size, type, stride, pointer);
+    SYSTEM_BODY_0(gglEndConditionalRender);
 }
 
-void System
-	::GlGetVertexAttribIiv(GLuint index, GLenum name, GLint* params) noexcept
+void System::GlVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_3(gglGetVertexAttribIiv, index, name, params);
+    SYSTEM_BODY_5(gglVertexAttribIPointer, index, size, type, stride, pointer);
 }
 
-void System
-	::GlGetVertexAttribIuiv(GLuint index, GLenum name, GLuint* params) noexcept
+void System::GlGetVertexAttribIiv(GLuint index, GLenum name, GLint* params) noexcept
 {
-	SYSTEM_BODY_3(gglGetVertexAttribIuiv, index, name, params);
+    SYSTEM_BODY_3(gglGetVertexAttribIiv, index, name, params);
 }
 
-void System
-	::GlVertexAttribI1i(GLuint index, GLint x) noexcept
+void System::GlGetVertexAttribIuiv(GLuint index, GLenum name, GLuint* params) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI1i, index, x);
+    SYSTEM_BODY_3(gglGetVertexAttribIuiv, index, name, params);
 }
 
-void System
-	::GlVertexAttribI2i(GLuint index, GLint x, GLint y) noexcept
+void System::GlVertexAttribI1i(GLuint index, GLint x) noexcept
 {
-	SYSTEM_BODY_3(gglVertexAttribI2i, index, x, y);
+    SYSTEM_BODY_2(gglVertexAttribI1i, index, x);
 }
 
-void System
-	::GlVertexAttribI3i(GLuint index, GLint x, GLint y, GLint z) noexcept
+void System::GlVertexAttribI2i(GLuint index, GLint x, GLint y) noexcept
 {
-	SYSTEM_BODY_4(gglVertexAttribI3i, index, x, y, z);
+    SYSTEM_BODY_3(gglVertexAttribI2i, index, x, y);
 }
 
-void System
-	::GlVertexAttribI4i(GLuint index, GLint x, GLint y, GLint z, GLint w) noexcept
+void System::GlVertexAttribI3i(GLuint index, GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_BODY_5(gglVertexAttribI4i, index, x, y, z, w);
+    SYSTEM_BODY_4(gglVertexAttribI3i, index, x, y, z);
 }
 
-void System
-	::GlVertexAttribI1ui(GLuint index, GLuint x) noexcept
+void System::GlVertexAttribI4i(GLuint index, GLint x, GLint y, GLint z, GLint w) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI1ui, index, x);
+    SYSTEM_BODY_5(gglVertexAttribI4i, index, x, y, z, w);
 }
 
-void System
-	::GlVertexAttribI2ui(GLuint index, GLuint x, GLuint y) noexcept
+void System::GlVertexAttribI1ui(GLuint index, GLuint x) noexcept
 {
-	SYSTEM_BODY_3(gglVertexAttribI2ui, index, x, y);
+    SYSTEM_BODY_2(gglVertexAttribI1ui, index, x);
 }
 
-void System
-	::GlVertexAttribI3ui(GLuint index, GLuint x, GLuint y, GLuint z) noexcept
+void System::GlVertexAttribI2ui(GLuint index, GLuint x, GLuint y) noexcept
 {
-	SYSTEM_BODY_4(gglVertexAttribI3ui, index, x, y, z);
+    SYSTEM_BODY_3(gglVertexAttribI2ui, index, x, y);
 }
 
-void System
-	::GlVertexAttribI4ui(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w) noexcept
+void System::GlVertexAttribI3ui(GLuint index, GLuint x, GLuint y, GLuint z) noexcept
 {
-	SYSTEM_BODY_5(gglVertexAttribI4ui, index, x, y, z, w);
+    SYSTEM_BODY_4(gglVertexAttribI3ui, index, x, y, z);
 }
 
-void System
-	::GlVertexAttribI1iv(GLuint index, const GLint* v) noexcept
+void System::GlVertexAttribI4ui(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI1iv, index, v);
+    SYSTEM_BODY_5(gglVertexAttribI4ui, index, x, y, z, w);
 }
 
-void System
-	::GlVertexAttribI2iv(GLuint index, const GLint* v) noexcept
+void System::GlVertexAttribI1iv(GLuint index, const GLint* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI2iv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI1iv, index, v);
 }
 
-void System
-	::GlVertexAttribI3iv(GLuint index, const GLint* v) noexcept
+void System::GlVertexAttribI2iv(GLuint index, const GLint* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI3iv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI2iv, index, v);
 }
 
-void System
-	::GlVertexAttribI4iv(GLuint index, const GLint* v) noexcept
+void System::GlVertexAttribI3iv(GLuint index, const GLint* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI4iv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI3iv, index, v);
 }
 
-void System
-	::GlVertexAttribI1uiv(GLuint index, const GLuint* v) noexcept
+void System::GlVertexAttribI4iv(GLuint index, const GLint* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI1uiv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI4iv, index, v);
 }
 
-void System
-	::GlVertexAttribI2uiv(GLuint index, const GLuint* v) noexcept
+void System::GlVertexAttribI1uiv(GLuint index, const GLuint* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI2uiv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI1uiv, index, v);
 }
 
-void System
-	::GlVertexAttribI3uiv(GLuint index, const GLuint* v) noexcept
+void System::GlVertexAttribI2uiv(GLuint index, const GLuint* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI3uiv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI2uiv, index, v);
 }
 
-void System
-	::GlVertexAttribI4uiv(GLuint index, const GLuint* v) noexcept
+void System::GlVertexAttribI3uiv(GLuint index, const GLuint* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI4uiv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI3uiv, index, v);
 }
 
-void System
-	::GlVertexAttribI4bv(GLuint index, const GLbyte* v) noexcept
+void System::GlVertexAttribI4uiv(GLuint index, const GLuint* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI4bv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI4uiv, index, v);
 }
 
-void System
-	::GlVertexAttribI4sv(GLuint index, const GLshort* v) noexcept
+void System::GlVertexAttribI4bv(GLuint index, const GLbyte* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI4sv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI4bv, index, v);
 }
 
-void System
-	::GlVertexAttribI4ubv(GLuint index, const GLubyte* v) noexcept
+void System::GlVertexAttribI4sv(GLuint index, const GLshort* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI4ubv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI4sv, index, v);
 }
 
-void System
-	::GlVertexAttribI4usv(GLuint index, const GLushort* v) noexcept
+void System::GlVertexAttribI4ubv(GLuint index, const GLubyte* v) noexcept
 {
-	SYSTEM_BODY_2(gglVertexAttribI4usv, index, v);
+    SYSTEM_BODY_2(gglVertexAttribI4ubv, index, v);
 }
 
-void System
-	::GlGetUniformuiv(GLuint program, GLint location, GLuint* params) noexcept
+void System::GlVertexAttribI4usv(GLuint index, const GLushort* v) noexcept
 {
-	SYSTEM_BODY_3(gglGetUniformuiv, program, location, params);
+    SYSTEM_BODY_2(gglVertexAttribI4usv, index, v);
 }
 
-void System
-	::GlBindFragDataLocation(GLuint program, GLuint color, const GLchar* name) noexcept
+void System::GlGetUniformuiv(GLuint program, GLint location, GLuint* params) noexcept
 {
-	SYSTEM_BODY_3(gglBindFragDataLocation, program, color, name);
+    SYSTEM_BODY_3(gglGetUniformuiv, program, location, params);
 }
 
-GLint System
-	::GlGetFragDataLocation(GLuint program, const GLchar* name) noexcept
+void System::GlBindFragDataLocation(GLuint program, GLuint color, const GLchar* name) noexcept
 {
-	SYSTEM_BODY_2_RESULT(gglGetFragDataLocation, program, name, GLint, -1);
+    SYSTEM_BODY_3(gglBindFragDataLocation, program, color, name);
 }
 
-void System
-	::GlUniform1ui(GLint location, GLuint v0) noexcept
+GLint System::GlGetFragDataLocation(GLuint program, const GLchar* name) noexcept
 {
-	SYSTEM_BODY_2(gglUniform1ui, location, v0);
+    SYSTEM_BODY_2_RESULT(gglGetFragDataLocation, program, name, GLint, -1);
 }
 
-void System
-	::GlUniform2ui(GLint location, GLuint v0, GLuint v1) noexcept
+void System::GlUniform1ui(GLint location, GLuint v0) noexcept
 {
-	SYSTEM_BODY_3(gglUniform2ui, location, v0, v1);
+    SYSTEM_BODY_2(gglUniform1ui, location, v0);
 }
 
-void System
-	::GlUniform3ui(GLint location, GLuint v0, GLuint v1, GLuint v2) noexcept
+void System::GlUniform2ui(GLint location, GLuint v0, GLuint v1) noexcept
 {
-	SYSTEM_BODY_4(gglUniform3ui, location, v0, v1, v2);
+    SYSTEM_BODY_3(gglUniform2ui, location, v0, v1);
 }
 
-void System
-	::GlUniform4ui(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) noexcept
+void System::GlUniform3ui(GLint location, GLuint v0, GLuint v1, GLuint v2) noexcept
 {
-	SYSTEM_BODY_5(gglUniform4ui, location, v0, v1, v2, v3);
+    SYSTEM_BODY_4(gglUniform3ui, location, v0, v1, v2);
 }
 
-void System
-	::GlUniform1uiv(GLint location, GLsizei count, const GLuint* value) noexcept
+void System::GlUniform4ui(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) noexcept
 {
-	SYSTEM_BODY_3(gglUniform1uiv, location, count, value);
+    SYSTEM_BODY_5(gglUniform4ui, location, v0, v1, v2, v3);
 }
 
-void System
-	::GlUniform2uiv(GLint location, GLsizei count, const GLuint* value) noexcept
+void System::GlUniform1uiv(GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_3(gglUniform2uiv, location, count, value);
+    SYSTEM_BODY_3(gglUniform1uiv, location, count, value);
 }
 
-void System
-	::GlUniform3uiv(GLint location, GLsizei count, const GLuint* value) noexcept
+void System::GlUniform2uiv(GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_3(gglUniform3uiv, location, count, value);
+    SYSTEM_BODY_3(gglUniform2uiv, location, count, value);
 }
 
-void System
-	::GlUniform4uiv(GLint location, GLsizei count, const GLuint* value) noexcept
+void System::GlUniform3uiv(GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_3(gglUniform3uiv, location, count, value);
+    SYSTEM_BODY_3(gglUniform3uiv, location, count, value);
 }
 
-void System
-	::GlTexParameterIiv(GLenum target, GLenum name, const GLint* params) noexcept
+void System::GlUniform4uiv(GLint location, GLsizei count, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_3(gglTexParameterIiv, target, name, params);
+    SYSTEM_BODY_3(gglUniform3uiv, location, count, value);
 }
 
-void System
-	::GlTexParameterIuiv(GLenum target, GLenum name, const GLuint* params) noexcept
+void System::GlTexParameterIiv(GLenum target, GLenum name, const GLint* params) noexcept
 {
-	SYSTEM_BODY_3(gglTexParameterIuiv, target, name, params);
+    SYSTEM_BODY_3(gglTexParameterIiv, target, name, params);
 }
 
-void System
-	::GlGetTexParameterIiv(GLenum target, GLenum name, GLint* params) noexcept
+void System::GlTexParameterIuiv(GLenum target, GLenum name, const GLuint* params) noexcept
 {
-	SYSTEM_BODY_3(gglGetTexParameterIiv, target, name, params);
+    SYSTEM_BODY_3(gglTexParameterIuiv, target, name, params);
 }
 
-void System
-	::GlGetTexParameterIuiv(GLenum target, GLenum name, GLuint* params) noexcept
+void System::GlGetTexParameterIiv(GLenum target, GLenum name, GLint* params) noexcept
 {
-	SYSTEM_BODY_3(gglGetTexParameterIuiv, target, name, params);
+    SYSTEM_BODY_3(gglGetTexParameterIiv, target, name, params);
 }
 
-void System
-	::GlClearBufferiv(GLenum buffer, GLint drawbuffer, const GLint* value) noexcept
+void System::GlGetTexParameterIuiv(GLenum target, GLenum name, GLuint* params) noexcept
 {
-	SYSTEM_BODY_3(gglClearBufferiv, buffer, drawbuffer, value);
+    SYSTEM_BODY_3(gglGetTexParameterIuiv, target, name, params);
 }
 
-void System
-	::GlClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint* value) noexcept
+void System::GlClearBufferiv(GLenum buffer, GLint drawbuffer, const GLint* value) noexcept
 {
-	SYSTEM_BODY_3(gglClearBufferuiv, buffer, drawbuffer, value);
+    SYSTEM_BODY_3(gglClearBufferiv, buffer, drawbuffer, value);
 }
 
-void System
-	::GlClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat* value) noexcept
+void System::GlClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint* value) noexcept
 {
-	SYSTEM_BODY_3(gglClearBufferfv, buffer, drawbuffer, value);
+    SYSTEM_BODY_3(gglClearBufferuiv, buffer, drawbuffer, value);
 }
 
-void System
-	::GlClearBufferfi(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil) noexcept
+void System::GlClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat* value) noexcept
 {
-	SYSTEM_BODY_4(gglClearBufferfi, buffer, drawbuffer, depth, stencil);
+    SYSTEM_BODY_3(gglClearBufferfv, buffer, drawbuffer, value);
 }
 
-const GLubyte* System
-	::GlGetStringi(GLenum name, GLuint index) noexcept
+void System::GlClearBufferfi(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil) noexcept
 {
-	SYSTEM_BODY_2_RESULT(gglGetStringi, name, index, const GLubyte*, nullptr);
+    SYSTEM_BODY_4(gglClearBufferfi, buffer, drawbuffer, depth, stencil);
 }
 
-void System
-	::InitOpenGL30() noexcept
+const GLubyte* System::GlGetStringi(GLenum name, GLuint index) noexcept
 {
-	if (System::OpenGLSystemVersion::Version30 <= System::GetOpenGLVersion())
-	{
-		g_ExistsOpenGL30 = ExistsOpenGLExtensions::Exists;
+    SYSTEM_BODY_2_RESULT(gglGetStringi, name, index, const GLubyte*, nullptr);
+}
 
-		SYSTEM_GET_FUNCTION(gglColorMaski);
-		SYSTEM_GET_FUNCTION(gglGetBooleani_v);
-		SYSTEM_GET_FUNCTION(gglGetIntegeri_v);
-		SYSTEM_GET_FUNCTION(gglEnablei);
-		SYSTEM_GET_FUNCTION(gglDisablei);
-		SYSTEM_GET_FUNCTION(gglIsEnabledi);
-		SYSTEM_GET_FUNCTION(gglBeginTransformFeedback);
-		SYSTEM_GET_FUNCTION(gglEndTransformFeedback);
-		SYSTEM_GET_FUNCTION(gglBindBufferRange);
-		SYSTEM_GET_FUNCTION(gglBindBufferBase);
-		SYSTEM_GET_FUNCTION(gglTransformFeedbackVaryings);
-		SYSTEM_GET_FUNCTION(gglGetTransformFeedbackVarying);
-		SYSTEM_GET_FUNCTION(gglClampColor);
-		SYSTEM_GET_FUNCTION(gglBeginConditionalRender);
-		SYSTEM_GET_FUNCTION(gglEndConditionalRender);
-		SYSTEM_GET_FUNCTION(gglVertexAttribIPointer);
-		SYSTEM_GET_FUNCTION(gglGetVertexAttribIiv);
-		SYSTEM_GET_FUNCTION(gglGetVertexAttribIuiv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI1i);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI2i);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI3i);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI4i);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI1ui);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI2ui);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI3ui);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI4ui);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI1iv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI2iv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI3iv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI4iv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI1uiv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI2uiv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI3uiv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI4uiv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI4bv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI4sv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI4ubv);
-		SYSTEM_GET_FUNCTION(gglVertexAttribI4usv);
-		SYSTEM_GET_FUNCTION(gglGetUniformuiv);
-		SYSTEM_GET_FUNCTION(gglBindFragDataLocation);
-		SYSTEM_GET_FUNCTION(gglGetFragDataLocation);
-		SYSTEM_GET_FUNCTION(gglUniform1ui);
-		SYSTEM_GET_FUNCTION(gglUniform2ui);
-		SYSTEM_GET_FUNCTION(gglUniform3ui);
-		SYSTEM_GET_FUNCTION(gglUniform4ui);
-		SYSTEM_GET_FUNCTION(gglUniform1uiv);
-		SYSTEM_GET_FUNCTION(gglUniform2uiv);
-		SYSTEM_GET_FUNCTION(gglUniform3uiv);
-		SYSTEM_GET_FUNCTION(gglUniform4uiv);
-		SYSTEM_GET_FUNCTION(gglTexParameterIiv);
-		SYSTEM_GET_FUNCTION(gglTexParameterIuiv);
-		SYSTEM_GET_FUNCTION(gglGetTexParameterIiv);
-		SYSTEM_GET_FUNCTION(gglGetTexParameterIuiv);
-		SYSTEM_GET_FUNCTION(gglClearBufferiv);
-		SYSTEM_GET_FUNCTION(gglClearBufferuiv);
-		SYSTEM_GET_FUNCTION(gglClearBufferfv);
-		SYSTEM_GET_FUNCTION(gglClearBufferfi);
-		SYSTEM_GET_FUNCTION(gglGetStringi);
-	}
-	else
-	{
-		g_ExistsOpenGL30 = ExistsOpenGLExtensions::NotExist;
-	}
+void System::InitOpenGL30()
+{
+    if (System::OpenGLSystemVersion::Version30 <= System::GetOpenGLVersion())
+    {
+        g_ExistsOpenGL30 = ExistsOpenGLExtensions::Exists;
+
+        SYSTEM_GET_FUNCTION(gglColorMaski);
+        SYSTEM_GET_FUNCTION(gglGetBooleani_v);
+        SYSTEM_GET_FUNCTION(gglGetIntegeri_v);
+        SYSTEM_GET_FUNCTION(gglEnablei);
+        SYSTEM_GET_FUNCTION(gglDisablei);
+        SYSTEM_GET_FUNCTION(gglIsEnabledi);
+        SYSTEM_GET_FUNCTION(gglBeginTransformFeedback);
+        SYSTEM_GET_FUNCTION(gglEndTransformFeedback);
+        SYSTEM_GET_FUNCTION(gglBindBufferRange);
+        SYSTEM_GET_FUNCTION(gglBindBufferBase);
+        SYSTEM_GET_FUNCTION(gglTransformFeedbackVaryings);
+        SYSTEM_GET_FUNCTION(gglGetTransformFeedbackVarying);
+        SYSTEM_GET_FUNCTION(gglClampColor);
+        SYSTEM_GET_FUNCTION(gglBeginConditionalRender);
+        SYSTEM_GET_FUNCTION(gglEndConditionalRender);
+        SYSTEM_GET_FUNCTION(gglVertexAttribIPointer);
+        SYSTEM_GET_FUNCTION(gglGetVertexAttribIiv);
+        SYSTEM_GET_FUNCTION(gglGetVertexAttribIuiv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI1i);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI2i);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI3i);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI4i);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI1ui);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI2ui);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI3ui);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI4ui);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI1iv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI2iv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI3iv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI4iv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI1uiv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI2uiv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI3uiv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI4uiv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI4bv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI4sv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI4ubv);
+        SYSTEM_GET_FUNCTION(gglVertexAttribI4usv);
+        SYSTEM_GET_FUNCTION(gglGetUniformuiv);
+        SYSTEM_GET_FUNCTION(gglBindFragDataLocation);
+        SYSTEM_GET_FUNCTION(gglGetFragDataLocation);
+        SYSTEM_GET_FUNCTION(gglUniform1ui);
+        SYSTEM_GET_FUNCTION(gglUniform2ui);
+        SYSTEM_GET_FUNCTION(gglUniform3ui);
+        SYSTEM_GET_FUNCTION(gglUniform4ui);
+        SYSTEM_GET_FUNCTION(gglUniform1uiv);
+        SYSTEM_GET_FUNCTION(gglUniform2uiv);
+        SYSTEM_GET_FUNCTION(gglUniform3uiv);
+        SYSTEM_GET_FUNCTION(gglUniform4uiv);
+        SYSTEM_GET_FUNCTION(gglTexParameterIiv);
+        SYSTEM_GET_FUNCTION(gglTexParameterIuiv);
+        SYSTEM_GET_FUNCTION(gglGetTexParameterIiv);
+        SYSTEM_GET_FUNCTION(gglGetTexParameterIuiv);
+        SYSTEM_GET_FUNCTION(gglClearBufferiv);
+        SYSTEM_GET_FUNCTION(gglClearBufferuiv);
+        SYSTEM_GET_FUNCTION(gglClearBufferfv);
+        SYSTEM_GET_FUNCTION(gglClearBufferfi);
+        SYSTEM_GET_FUNCTION(gglGetStringi);
+    }
+    else
+    {
+        g_ExistsOpenGL30 = ExistsOpenGLExtensions::NotExist;
+    }
 }

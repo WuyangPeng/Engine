@@ -1,13 +1,13 @@
 Essential C++
 
-¹Ù·½ÍøÕ¾ 
-http://www.aw1.com/cseng/titles/0-201-48518-4 £¨ÒÑÊ§Ğ§£©¡¢ http://www.objectwrite.com £¨ÒÑÊ§Ğ§£©¡£
+å®˜æ–¹ç½‘ç«™ 
+http://www.aw1.com/cseng/titles/0-201-48518-4 ï¼ˆå·²å¤±æ•ˆï¼‰ã€ http://www.objectwrite.com ï¼ˆå·²å¤±æ•ˆï¼‰ã€‚
 
-¡î
-×÷Õß£ºStanley B.Lippman
+â˜†
+ä½œè€…ï¼šStanley B.Lippman
 
-ÖªÊ¶µã 
-1.	C++»ù´¡ÖªÊ¶¡£
+çŸ¥è¯†ç‚¹ 
+1.	C++åŸºç¡€çŸ¥è¯†ã€‚
 
-´úÂë 
-1.  Êé¼®´úÂë¡£
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚

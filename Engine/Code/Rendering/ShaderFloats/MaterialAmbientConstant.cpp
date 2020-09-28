@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "MaterialAmbientConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -33,16 +33,14 @@ Rendering::MaterialAmbientConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,MaterialAmbientConstant)
 
-void Rendering::MaterialAmbientConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::MaterialAmbientConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	const auto colour = GetMaterial()->GetAmbient();
 	SetRegister(0, colour);
 
-	SYSTEM_UNUSED_ARG(visual);
-	SYSTEM_UNUSED_ARG(camera);
+	 
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::MaterialAmbientConstant

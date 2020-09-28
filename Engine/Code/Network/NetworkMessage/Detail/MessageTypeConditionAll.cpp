@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "MessageTypeConditionAll.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/VersionInformation/Version.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/MessageManager.h"
@@ -23,12 +23,11 @@ Network::MessageTypeConditionAll
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageTypeConditionAll)
 
-bool Network::MessageTypeConditionAll
-	::IsVersionsConform(int version) const noexcept
+bool Network::MessageTypeConditionAll ::IsVersionsConform([[maybe_unused]] int version) const noexcept
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(version);
+ 
 
 	return true;
 }

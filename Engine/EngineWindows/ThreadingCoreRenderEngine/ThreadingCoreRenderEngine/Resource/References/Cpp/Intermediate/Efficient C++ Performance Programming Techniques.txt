@@ -1,11 +1,11 @@
-Ìá¸ßC++ĞÔÄÜµÄ±à³Ì¼¼Êõ£¨Efficient C++:Performance Programming Techniques£©
+æé«˜C++æ€§èƒ½çš„ç¼–ç¨‹æŠ€æœ¯ï¼ˆEfficient C++:Performance Programming Techniquesï¼‰
 
-¡ï¡ï
-×÷Õß£ºDov Bulka¡¢David Mayhew
+â˜…â˜…
+ä½œè€…ï¼šDov Bulkaã€David Mayhew
 
-ÖªÊ¶µã 
+çŸ¥è¯†ç‚¹ 
 
-1.	¸ú×Ù·¶Àı¡£
-2.	ÄÚ´æ³Ø¡£
-3.	ÄÚÁª¡£
-4.	ÓÅ»¯¡£ 
+1.	è·Ÿè¸ªèŒƒä¾‹ã€‚
+2.	å†…å­˜æ± ã€‚
+3.	å†…è”ã€‚
+4.	ä¼˜åŒ–ã€‚ 

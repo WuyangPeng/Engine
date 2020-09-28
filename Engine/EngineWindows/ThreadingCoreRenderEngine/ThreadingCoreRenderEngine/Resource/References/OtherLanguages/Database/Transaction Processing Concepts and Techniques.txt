@@ -1,7 +1,7 @@
-ÊÂÎñ´¦Àí£º¸ÅÄîÓë¼¼Êõ£¨Transaction Processing:Concepts and Techniques£©
+äº‹åŠ¡å¤„ç†ï¼šæ¦‚å¿µä¸æŠ€æœ¯ï¼ˆTransaction Processing:Concepts and Techniquesï¼‰
 
-¡î
-×÷Õß£ºJim Gray¡¢Andreas Reuter
+â˜†
+ä½œè€…ï¼šJim Grayã€Andreas Reuter
 
-ÖªÊ¶µã 
-1.	ÊÂÎñ´¦Àí»ù´¡ÖªÊ¶¡£   
+çŸ¥è¯†ç‚¹ 
+1.	äº‹åŠ¡å¤„ç†åŸºç¡€çŸ¥è¯†ã€‚   

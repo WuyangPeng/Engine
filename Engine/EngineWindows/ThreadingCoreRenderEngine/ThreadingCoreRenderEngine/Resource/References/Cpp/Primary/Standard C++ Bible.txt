@@ -1,12 +1,12 @@
-±ê×¼C++±¦µä£¨Standard C++ Bible£©
+æ ‡å‡†C++å®å…¸ï¼ˆStandard C++ Bibleï¼‰
 
-¡÷
-×÷Õß£ºAl Stevens¡¢Clayton Walnum
+â–³
+ä½œè€…ï¼šAl Stevensã€Clayton Walnum
 
-ÖªÊ¶µã 
-1.	C++»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	C++åŸºç¡€çŸ¥è¯†ã€‚ 
 
-´úÂë 
-1.  Êé¼®´úÂë¡£
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚
 
   

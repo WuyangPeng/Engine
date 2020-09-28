@@ -9,7 +9,7 @@
 #include "OpenGLRenderTarget.h"
 #include "OpenGLTexture2D.h"
 #include "OpenGLMapping.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::OpenGLRenderTarget

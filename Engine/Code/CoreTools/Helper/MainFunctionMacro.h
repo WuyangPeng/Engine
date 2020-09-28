@@ -8,7 +8,7 @@
 #ifndef CORE_TOOLS_HELPER_MAIN_FUNCTION_MACRO_H
 #define CORE_TOOLS_HELPER_MAIN_FUNCTION_MACRO_H
 
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/WindowsMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/EnumCast.h"
@@ -48,7 +48,7 @@
 
 	#include STSTEM_WARNING_PUSH
 	#include SYSTEM_WARNING_DISABLE(26461)
-			inline void ExecuteDllMain(System::WindowHInstance instance, System::WindowDWord reason, System::WindowVoidPtr reserved, CoreTools::DllMutex& mutex)
+inline void ExecuteDllMain([[maybe_unused]] System::WindowHInstance instance, System::WindowDWord reason, [[maybe_unused]] System::WindowVoidPtr reserved, CoreTools::DllMutex& mutex)
 			{				
 				switch (System::UnderlyingCastEnum<System::DllMain>(reason))
 				{
@@ -62,8 +62,7 @@
 					break;
 				}							
 
-				SYSTEM_UNUSED_ARG(instance);
-				SYSTEM_UNUSED_ARG(reserved);
+			 
 			}
 	#include STSTEM_WARNING_POP
 

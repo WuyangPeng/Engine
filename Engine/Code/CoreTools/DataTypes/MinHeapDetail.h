@@ -9,7 +9,7 @@
 
 #include "MinHeap.h"
 #include "MinHeapRecordStoredManagerDetail.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
@@ -162,7 +162,7 @@ const CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, 
 	auto heapIndex = m_RecordStoredManager.GetHeapIndex(uniqueIndex);
 
 	CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < m_ElementsNumber, "ÎÞÐ§Ë÷Òý\n");
-	SYSTEM_UNUSED_ARG(heapIndex);
+	
 
 	return RecordType{ uniqueIndex,m_RecordStoredManager.GetGeneratorByUniqueIndex(uniqueIndex),m_RecordStoredManager.GetValueByUniqueIndex(uniqueIndex) };
 }

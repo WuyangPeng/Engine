@@ -12,7 +12,7 @@
 #include "OpenGLBindTexture.h"
 #include "Rendering/Resources/RenderTarget.h"
 #include "System/OpenGL/OpenGLAPI.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/PlatformTexture2D.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
@@ -169,8 +169,7 @@ bool Rendering::OpenGLRenderTargetDataImpl
 #endif // OPEN_CLASS_INVARIANT
 
 
-void Rendering::OpenGLRenderTargetDataImpl
-    ::Enable (Renderer* renderer) noexcept
+void Rendering::OpenGLRenderTargetDataImpl ::Enable([[maybe_unused]] Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -182,11 +181,10 @@ void Rendering::OpenGLRenderTargetDataImpl
     System::SetGlViewport(0, 0, m_Width, m_Height);
 	System::SetGlDepthRange(0.0, 1.0);
     
-    SYSTEM_UNUSED_ARG(renderer);
+    
 }
 
-void Rendering::OpenGLRenderTargetDataImpl
-   ::Disable (Renderer* renderer) noexcept
+void Rendering::OpenGLRenderTargetDataImpl ::Disable([[maybe_unused]] Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -206,8 +204,7 @@ void Rendering::OpenGLRenderTargetDataImpl
 
     System::SetGlViewport(m_PrevViewport[0], m_PrevViewport[1], m_PrevViewport[2], m_PrevViewport[3]);
 	System::SetGlDepthRange(m_PrevDepthRange[0], m_PrevDepthRange[1]);
-    
-    SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
 Rendering::ConstTexture2DSmartPointer

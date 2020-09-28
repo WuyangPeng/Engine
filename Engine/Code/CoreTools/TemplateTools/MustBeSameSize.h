@@ -9,7 +9,7 @@
 #define CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_SAME_SIZE_H
 
 #include "CoreTools/CoreToolsDll.h"
-#include "System/Helper/UnusedMacro.h"
+
 
 namespace CoreTools
 {
@@ -38,7 +38,7 @@ namespace CoreTools
 		{
 			void(*ptr)() = Constranints;
 
-			SYSTEM_UNUSED_ARG(ptr);
+			
 		}
 
 	private:
@@ -48,7 +48,7 @@ namespace CoreTools
 
 			int i[T1NotSameSizeAsT2];
 
-			SYSTEM_UNUSED_ARG(i);
+			
 		}
 	};
 }

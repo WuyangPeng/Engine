@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "GlutFontInformation.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
@@ -21,12 +21,10 @@ int Framework::GlutFontInformation
 	return boost::numeric_cast<int>(GetCharacterWidth('0') * text.size());
 }
 
-int Framework::GlutFontInformation
-	::GetCharacterWidth(const TChar character) const noexcept
+int Framework::GlutFontInformation ::GetCharacterWidth([[maybe_unused]] const TChar character) const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-	SYSTEM_UNUSED_ARG(character);
+ 
 
 	constexpr auto characterWidth = 8;
 

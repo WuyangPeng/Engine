@@ -1,0 +1,5 @@
+参考文献·其他语言·SQL Server
+ 
+1.	SQL Server 2008 编程入门经典
+2.  SQL Server 2008 高级程序设计
+3.  SQL Server 2008 管理员必备指南

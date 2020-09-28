@@ -1,10 +1,10 @@
-C++ ³ÁË¼Â¼£¨Ruminations on C++£©
+C++ æ²‰æ€å½•ï¼ˆRuminations on C++ï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://ftp.aw.com/cseng/authors/koenig/ruminations £¨ÒÑÊ§Ğ§£©¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+http://ftp.aw.com/cseng/authors/koenig/ruminations ï¼ˆå·²å¤±æ•ˆï¼‰ã€‚
 
-¡ï¡ï¡ï
-×÷Õß£ºAndrew Koenig¡¢Barbara E.Moo
+â˜…â˜…â˜…
+ä½œè€…ï¼šAndrew Koenigã€Barbara E.Moo
 
-ÖªÊ¶µã 
-1.	C++	ÖªÊ¶¡£
+çŸ¥è¯†ç‚¹ 
+1.	C++	çŸ¥è¯†ã€‚

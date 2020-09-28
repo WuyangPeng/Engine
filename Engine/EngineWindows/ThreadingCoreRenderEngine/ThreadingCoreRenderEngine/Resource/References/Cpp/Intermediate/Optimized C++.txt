@@ -1,13 +1,13 @@
-C++	ĞÔÄÜÓÅ»¯Ö¸ÄÏ£¨Optimized C++£©
+C++	æ€§èƒ½ä¼˜åŒ–æŒ‡å—ï¼ˆOptimized C++ï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://guntheroth.com ¡¢http://oldhandsblog.blogspot.com/ £¨ÒÑÊ§Ğ§£©¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+http://guntheroth.com ã€http://oldhandsblog.blogspot.com/ ï¼ˆå·²å¤±æ•ˆï¼‰ã€‚
 
-¡ï¡ï
-×÷Õß£ºKurt Guntheroth
+â˜…â˜…
+ä½œè€…ï¼šKurt Guntheroth
 
-ÖªÊ¶µã 
-1.	C++	ĞÔÄÜÓÅ»¯»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	C++	æ€§èƒ½ä¼˜åŒ–åŸºç¡€çŸ¥è¯†ã€‚ 
 
-´úÂë
-1.  Êé¼®´úÂë¡£ 
+ä»£ç 
+1.  ä¹¦ç±ä»£ç ã€‚ 

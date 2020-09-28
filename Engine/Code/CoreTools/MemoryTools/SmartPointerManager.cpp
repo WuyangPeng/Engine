@@ -34,11 +34,10 @@ void CoreTools::SmartPointerManager
 	sm_SmartPointerManager.reset();
 }
 
-CoreTools::SmartPointerManager
-::SmartPointerManager(SmartPointerManagerCreate smartPointerManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+CoreTools::SmartPointerManager ::SmartPointerManager([[maybe_unused]] SmartPointerManagerCreate smartPointerManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(smartPointerManagerCreate);
+ 
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

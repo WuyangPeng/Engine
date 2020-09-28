@@ -14,7 +14,7 @@
 #include "IntegerDataOperatorDetail.h"
 #include "IntegerMultiplicationDetail.h"
 #include "IntegerDivisionMultipleDetail.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -170,8 +170,7 @@ void Mathematics::IntegerDivisionModulo<N>
 
 		++loop;
 	}
-
-	SYSTEM_UNUSED_ARG(maxLoop);
+ 
 }
 
 #ifdef OPEN_CLASS_INVARIANT

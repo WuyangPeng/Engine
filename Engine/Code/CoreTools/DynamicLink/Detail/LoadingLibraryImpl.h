@@ -24,13 +24,13 @@ namespace CoreTools
 	public:
 		using ClassType = LoadingLibraryImpl;
 		using String = System::String;
-		using LoadLibrary = System::LoadLibrary;
+		using LoadLibraryType = System::LoadLibraryType;
 		using DynamicLinkString = System::DynamicLinkString;
 		using DynamicLinkModule = System::DynamicLinkModule;
 		using DynamicLinkProcess = System::DynamicLinkProcess;
 
 	public:
-		LoadingLibraryImpl(const String& fileName, LoadLibrary flags);
+		LoadingLibraryImpl(const String& fileName, LoadLibraryType flags);
 		~LoadingLibraryImpl() noexcept;
 		LoadingLibraryImpl(const LoadingLibraryImpl&) = delete;
 		LoadingLibraryImpl& operator=(const LoadingLibraryImpl&) = delete;

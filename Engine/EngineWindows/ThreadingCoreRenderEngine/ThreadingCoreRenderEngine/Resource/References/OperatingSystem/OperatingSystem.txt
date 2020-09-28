@@ -1,10 +1,8 @@
-²Î¿¼ÎÄÏ×¡¤²Ù×÷ÏµÍ³
+å‚è€ƒæ–‡çŒ®Â·æ“ä½œç³»ç»Ÿ
 
 1.	WindowsAPI
-2.	MFC 
-3.	ATL 
-4.	COM 
-5.	ACE 
-6.	NetworkProgramming£¨ÍøÂç±à³Ì£©
-7.	Debugging£¨µ÷ÊÔ£©
-8.	ConcurrentProgramming£¨²¢·¢±à³Ì£©
+2.	ACE 
+3.	NetworkProgrammingï¼ˆç½‘ç»œç¼–ç¨‹ï¼‰
+4.	Debuggingï¼ˆè°ƒè¯•ï¼‰
+5.	ConcurrentProgrammingï¼ˆå¹¶å‘ç¼–ç¨‹ï¼‰
+6.	Linux

@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ProjectionViewMatrixConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Rendering/SceneGraph/Camera.h"
@@ -39,8 +39,7 @@ Rendering::ProjectionViewMatrixConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ProjectionViewMatrixConstant)
 
-void Rendering::ProjectionViewMatrixConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::ProjectionViewMatrixConstant ::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -48,7 +47,7 @@ void Rendering::ProjectionViewMatrixConstant
 
 	SetRegisters(projectionMatrix);
 
-	SYSTEM_UNUSED_ARG(visual);
+ 
 }
 
 void Rendering::ProjectionViewMatrixConstant

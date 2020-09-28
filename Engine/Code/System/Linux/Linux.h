@@ -1,12 +1,15 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 15:18)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/27 15:48)
 
 #ifndef SYSTEM_LINUX_H
 #define SYSTEM_LINUX_H
 
-#include "LinuxNativeWindow.h" 
+#include "LinuxNativeWindow.h"
 
-#endif // SYSTEM_LINUX_H
+#endif  // SYSTEM_LINUX_H

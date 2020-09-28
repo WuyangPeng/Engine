@@ -7,7 +7,7 @@
 #include "System/SystemExport.h"
 
 #include "OpenGLWglPrototypes.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/WindowsMacro.h"
 
 System::OpenGLHdc System
@@ -29,9 +29,9 @@ bool System
 	else
 		return false;
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(arg1);
-	SYSTEM_UNUSED_ARG(arg2);
-	SYSTEM_UNUSED_ARG(arg3);
+	
+	
+	
 
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -43,7 +43,7 @@ System::OpenGLHglrc System
 #ifdef SYSTEM_PLATFORM_WIN32
 	return ::wglCreateContext(arg1);
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(arg1);
+	
 
 	return nullptr;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -58,7 +58,7 @@ bool SYSTEM_DEFAULT_DECLARE System
 	else
 		return false;
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(arg1);
+	
 
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -83,7 +83,7 @@ bool System
 	else
 		return false;
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(arg1);
+	
 
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -98,8 +98,8 @@ bool System
 	else
 		return false;
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(arg1);
-	SYSTEM_UNUSED_ARG(arg2);
+	
+	
 
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -114,8 +114,8 @@ bool System
 	else
 		return false;
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(arg1);
-	SYSTEM_UNUSED_ARG(arg2);
+	
+	
 
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -129,8 +129,8 @@ System::WindowDWord System
 	return ::wglSwapMultipleBuffers(arg1, arg2);
 
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(arg1);
-	SYSTEM_UNUSED_ARG(arg2);
+	
+	
 
 	return 0;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -144,8 +144,8 @@ int System
 	return ::ChoosePixelFormat(hdc, pixelFormatDescriptor);
 
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(hdc);
-	SYSTEM_UNUSED_ARG(pixelFormatDescriptor);
+	
+	
 
 	return 0;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -160,9 +160,9 @@ bool System
 	else
 		return false;
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(hdc);
-	SYSTEM_UNUSED_ARG(format);
-	SYSTEM_UNUSED_ARG(pixelFormatDescriptor);
+	
+	
+	
 
 	return false;
 #endif // SYSTEM_PLATFORM_WIN32
@@ -174,7 +174,7 @@ System::OpenGLProc System
 #ifdef SYSTEM_PLATFORM_WIN32
 	return ::wglGetProcAddress(glFunction);
 #else // !SYSTEM_PLATFORM_WIN32
-	SYSTEM_UNUSED_ARG(glFunction);
+	
 
 	return nullptr;
 #endif // SYSTEM_PLATFORM_WIN32

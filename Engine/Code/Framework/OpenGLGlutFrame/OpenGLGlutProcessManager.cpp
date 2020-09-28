@@ -33,11 +33,10 @@ void Framework::OpenGLGlutProcessManager
 	sm_OpenGLGlutProcessManager.reset();
 }
 
-Framework::OpenGLGlutProcessManager
-	::OpenGLGlutProcessManager(OpenGLGlutProcessManagerCreate openGLGlutProcessManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Framework::OpenGLGlutProcessManager ::OpenGLGlutProcessManager([[maybe_unused]] OpenGLGlutProcessManagerCreate openGLGlutProcessManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(openGLGlutProcessManagerCreate);
+ 
 
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

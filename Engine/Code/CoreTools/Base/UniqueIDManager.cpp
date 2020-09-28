@@ -33,10 +33,10 @@ void CoreTools::UniqueIDManager ::Destroy() noexcept
     sm_UniqueIDManager.reset();
 }
 
-CoreTools::UniqueIDManager ::UniqueIDManager(int count, UniqueIDManagerCreate uniqueIDManagerCreate)
+CoreTools::UniqueIDManager ::UniqueIDManager(int count, [[maybe_unused]] UniqueIDManagerCreate uniqueIDManagerCreate)
     : m_Impl{ make_shared<ImplType>(count) }
 {
-    SYSTEM_UNUSED_ARG(uniqueIDManagerCreate);
+   
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

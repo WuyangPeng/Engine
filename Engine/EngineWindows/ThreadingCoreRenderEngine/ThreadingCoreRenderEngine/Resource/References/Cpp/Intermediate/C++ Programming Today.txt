@@ -1,15 +1,15 @@
-ÏÖ´úC++³ÌĞòÉè¼Æ£¨C++ Programming Today£©
+ç°ä»£C++ç¨‹åºè®¾è®¡ï¼ˆC++ Programming Todayï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://www.prenhall.com/johnston¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.prenhall.com/johnstonã€‚
 
-¡î
-×÷Õß£ºBarbara Johnston
+â˜†
+ä½œè€…ï¼šBarbara Johnston
 
-ÖªÊ¶µã
-1.	C++	»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹
+1.	C++	åŸºç¡€çŸ¥è¯†ã€‚ 
 
-´úÂë 
-1.  Êé¼®´úÂë¡£ 
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚ 
 
  

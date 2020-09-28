@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h" 
 
 #include "NetworkSockConnector.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Network/SocketPrototypes.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
@@ -42,14 +42,13 @@ bool Network::NetworkSockConnector
 		return false;
 }
 
-void Network::NetworkSockConnector
-	::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::NetworkSockConnector ::AsyncConnect([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	System::Connect(sockStream->GetNetworkSockStream(), &sockAddress->GetWinSockInetAddress());
+[[maybe_unused]] const auto result = System::Connect(sockStream->GetNetworkSockStream(), &sockAddress->GetWinSockInetAddress());
 
-	SYSTEM_UNUSED_ARG(eventInterface);
+ 
 }
 
 const Network::NetworkSockConnector::SockConnectorPtr Network::NetworkSockConnector

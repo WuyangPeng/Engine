@@ -1,10 +1,10 @@
 loki
  
-�ٷ���վ 
+官方网站 
 http://loki-lib.sourceforge.net/
 
-��
+☆
 
-֪ʶ�� 
-1.	���ģʽ�⡣
+知识点 
+1.	设计模式库。
 

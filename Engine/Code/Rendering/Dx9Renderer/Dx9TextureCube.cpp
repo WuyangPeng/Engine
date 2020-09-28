@@ -8,17 +8,15 @@
 
 #include "Dx9TextureCube.h"
  
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ClassInvariant/Noexcept.h"
 
-Rendering::Dx9TextureCube
-	::Dx9TextureCube( Renderer* renderer, const TextureCube* texture )
-	 
+Rendering::Dx9TextureCube ::Dx9TextureCube([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const TextureCube* texture)
+
 {
     CoreTools::DoNothing();
-	SYSTEM_UNUSED_ARG(renderer);
-	SYSTEM_UNUSED_ARG(texture);
+	 
 
 	/*
 	  IDirect3DDevice9* device = renderer->mData->mDevice;
@@ -55,8 +53,7 @@ Rendering::Dx9TextureCube
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9TextureCube)
 
-void Rendering::Dx9TextureCube
-	::Enable( Renderer* renderer, int textureUnit )
+void Rendering::Dx9TextureCube ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -67,12 +64,10 @@ void Rendering::Dx9TextureCube
 	WM5_UNUSED(hr);
 	RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to enable cube texture, unit %d: %s\n",
 	textureUnit, DXGetErrorString(hr));*/
-	SYSTEM_UNUSED_ARG(renderer);
-	SYSTEM_UNUSED_ARG(textureUnit);
+ 
 }
 
-void Rendering::Dx9TextureCube
-	::Disable( Renderer* renderer, int textureUnit )
+void Rendering::Dx9TextureCube ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -96,12 +91,10 @@ void Rendering::Dx9TextureCube
 	RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to disable cube texture, unit %d: %s\n",
 	textureUnit, DXGetErrorString(hr));*/
 
-	SYSTEM_UNUSED_ARG(renderer);
-	SYSTEM_UNUSED_ARG(textureUnit);
+ 
 }
 
-void* Rendering::Dx9TextureCube
-	::Lock( int face,int level, BufferLocking mode )
+void* Rendering::Dx9TextureCube ::Lock([[maybe_unused]] int face, [[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -115,15 +108,12 @@ void* Rendering::Dx9TextureCube
 	face, level, DXGetErrorString(hr));
 	return rect.pBits;*/
 
-	SYSTEM_UNUSED_ARG(face);
-	SYSTEM_UNUSED_ARG(level);
-	SYSTEM_UNUSED_ARG(mode);
+ 
 
 	return nullptr;
 }
 
-void Rendering::Dx9TextureCube
-	::Unlock( int face,int level )
+void Rendering::Dx9TextureCube ::Unlock([[maybe_unused]] int face, [[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -133,9 +123,7 @@ void Rendering::Dx9TextureCube
 	  RENDERING_ASSERTION_0(hr == D3D_OK,
 	  "Failed to unlock face %u level %u of cube texture: %s\n",
 	  face, level, DXGetErrorString(hr));*/
-
-	SYSTEM_UNUSED_ARG(face);
-	SYSTEM_UNUSED_ARG(level);
+ 
 }
  
  

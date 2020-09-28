@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h" 
 
 #include "HandleSetImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 #include "CoreTools/ClassInvariant/Noexcept.h"
@@ -28,12 +28,11 @@ Network::HandleSetImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Network, HandleSetImpl)
 
-void Network::HandleSetImpl
-	::SetBit(ACEHandle handle)
+void Network::HandleSetImpl ::SetBit([[maybe_unused]] ACEHandle handle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(handle);
+	 
 
 	CoreTools::DoNothing();
 }
@@ -56,36 +55,33 @@ Network::SockFdSet* Network::HandleSetImpl
 	THROW_EXCEPTION(SYSTEM_TEXT("ªÒ»°fdset ß∞‹£°"s));
 }
 
-void Network::HandleSetImpl
-	::Sync(ACEHandle maxHandle)
+void Network::HandleSetImpl ::Sync([[maybe_unused]] ACEHandle maxHandle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(maxHandle);
+ 
 }
 
-bool Network::HandleSetImpl
-	::IsSet(ACEHandle handle) const
+bool Network::HandleSetImpl ::IsSet([[maybe_unused]] ACEHandle handle) const
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(handle);
+	 
 
 	CoreTools::DoNothing();
 
 	return false;
 }
 
-void Network::HandleSetImpl
-	::ClearBit(ACEHandle handle)
+void Network::HandleSetImpl ::ClearBit([[maybe_unused]] ACEHandle handle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(handle);
+	 
 }
 
 Network::HandleSetImpl::ImplTypePtr Network::HandleSetImpl
@@ -124,12 +120,11 @@ int Network::HandleSetImpl
 	return 0;
 }
 
-bool Network::HandleSetImpl
-	::Select(int width)
+bool Network::HandleSetImpl ::Select([[maybe_unused]] int width)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(width);
+ 
 
 	CoreTools::DoNothing();
 

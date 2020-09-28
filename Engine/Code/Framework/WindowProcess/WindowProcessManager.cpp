@@ -32,11 +32,10 @@ void Framework::WindowProcessManager
 	sm_WindowProcessManager.reset();
 }
 
-Framework::WindowProcessManager
-	::WindowProcessManager(WindowProcessManagerCreate windowProcessManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Framework::WindowProcessManager ::WindowProcessManager([[maybe_unused]] WindowProcessManagerCreate windowProcessManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(windowProcessManagerCreate);
+ 
 
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }  

@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ReadFileHandleImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/FileManager/Flags/FileFlags.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
@@ -68,8 +68,7 @@ void CoreTools::ReadFileHandleImpl
 	ReadFromFile(itemSize, itemsNumber, data);
 }
 
-void CoreTools::ReadFileHandleImpl
-	::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data)
+void CoreTools::ReadFileHandleImpl ::WriteToFile([[maybe_unused]] size_t itemSize, [[maybe_unused]] size_t itemsNumber, [[maybe_unused]] const void* data)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -77,22 +76,17 @@ void CoreTools::ReadFileHandleImpl
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(itemSize);
-	SYSTEM_UNUSED_ARG(itemsNumber);
-	SYSTEM_UNUSED_ARG(data);
+	 
 }
 
-void CoreTools::ReadFileHandleImpl
-	::AppendToFile(size_t itemSize, size_t itemsNumber, const void* data)
+void CoreTools::ReadFileHandleImpl ::AppendToFile([[maybe_unused]] size_t itemSize, [[maybe_unused]] size_t itemsNumber, [[maybe_unused]] const void* data)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "ReadFileHandleImpl½ûÖ¹µ÷ÓÃAppendToFile£¡");
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(itemSize);
-	SYSTEM_UNUSED_ARG(itemsNumber);
-	SYSTEM_UNUSED_ARG(data);
+ 
 }
 
 

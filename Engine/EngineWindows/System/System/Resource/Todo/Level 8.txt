@@ -1,8 +1,8 @@
 TODO Level 8
 
-0.2.0.0
+0.5.1.0
 
-1.£¨DynamicLink£©Íê³ÉDynamicLinkÄ£¿é·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºEnumResourceTools¡¢LoadResourceTools¡£
-2.£¨DynamicLink£©Íê³ÉDynamicLinkÄ£¿é·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºLibraryDirectory¡¢LibraryTools¡¢LoadLibrary¡£
-3.£¨Console£©Íê³ÉConsole·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºConsoleHandle¡¢ConsoleColours¡¢ConsoleInput¡¢ConsoleOutput¡¢ConsoleScreenBuffer¡¢ConsoleFont¡¢ConsoleMode¡¢
-		     ConsoleCursor¡¢ConsoleTitle¡¢ConsoleAlias¡¢ConsoleCodePage¡¢ConsoleInfo¡¢ConsoleTools¡¢ConsoleCreate¡£
+1.ï¼ˆDynamicLinkï¼‰å®ŒæˆDynamicLinkæ¨¡å—éWindowså¹³å°çš„å®ç°ï¼šEnumResourceToolsã€LoadResourceToolsã€‚
+2.ï¼ˆDynamicLinkï¼‰å®ŒæˆDynamicLinkæ¨¡å—éWindowså¹³å°çš„å®ç°ï¼šLibraryDirectoryã€LibraryToolsã€LoadLibraryã€‚
+3.ï¼ˆConsoleï¼‰å®ŒæˆConsoleéWindowså¹³å°çš„å®ç°ï¼šConsoleHandleã€ConsoleColoursã€ConsoleInputã€ConsoleOutputã€ConsoleScreenBufferã€ConsoleFontã€ConsoleModeã€
+		     ConsoleCursorã€ConsoleTitleã€ConsoleAliasã€ConsoleCodePageã€ConsoleInfoã€ConsoleToolsã€ConsoleCreateã€‚

@@ -9,7 +9,7 @@
 #define CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_BASE_H
 
 #include "CoreTools/CoreToolsDll.h"
-#include "System/Helper/UnusedMacro.h"
+
 
 namespace CoreTools
 {
@@ -20,7 +20,7 @@ namespace CoreTools
 		{
 			void(*ptr)(Derive*, Base*) = Constranints;
 
-			SYSTEM_UNUSED_ARG(ptr);
+			
 		}
 
 	private:
@@ -28,7 +28,7 @@ namespace CoreTools
 		{
 			basePtr = derivePtr;
 
-			SYSTEM_UNUSED_ARG(basePtr);
+			
 		}
 	};
 }

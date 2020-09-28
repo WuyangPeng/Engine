@@ -1,10 +1,10 @@
 freetype
  
-�ٷ���վ 
+官方网站 
 https://www.freetype.org/
 
-��
+★
 
-֪ʶ�� 
-1.	��Ⱦ����������⡣
+知识点 
+1.	渲染字体的软件库。
 

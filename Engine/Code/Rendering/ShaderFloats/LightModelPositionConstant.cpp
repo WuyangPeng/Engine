@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "LightModelPositionConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -35,8 +35,7 @@ Rendering::LightModelPositionConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightModelPositionConstant)
 
-void Rendering::LightModelPositionConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::LightModelPositionConstant ::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	 
@@ -46,7 +45,7 @@ const	auto modelPosition = worldInverseMatrix * worldPosition;
 	
 	SetRegister(0, modelPosition);
 
-	SYSTEM_UNUSED_ARG(camera);
+ 
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::LightModelPositionConstant

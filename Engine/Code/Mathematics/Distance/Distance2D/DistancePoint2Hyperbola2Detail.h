@@ -8,7 +8,7 @@
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_DETAIL_H
 
 #include "DistancePoint2Hyperbola2.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Mathematics/Algebra/Vector2DDetail.h"
 #include "Mathematics/Algebra/Vector2DToolsDetail.h" 
 #include "Mathematics/Distance/DistanceBaseDetail.h"
@@ -137,7 +137,7 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 	auto distanceResult = distance.GetSquared();
 	distanceResult.SetContactTime(t);
 
-	SYSTEM_UNUSED_ARG(rhsVelocity);
+	
 
 	return distanceResult;
 }

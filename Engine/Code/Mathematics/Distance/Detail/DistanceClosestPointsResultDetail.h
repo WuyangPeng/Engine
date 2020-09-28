@@ -38,25 +38,23 @@ bool Mathematics::DistanceClosestPointsResult<Real, Vector>
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceClosestPointsResult<Real, Vector>
-	::GetLhsClosestPoint(int index) const
+const Vector Mathematics::DistanceClosestPointsResult<Real, Vector>::GetLhsClosestPoint([[maybe_unused]] int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < GetLhsClosestPointSize(), "Ë÷Òý´íÎó£¡");
 
-	SYSTEM_UNUSED_ARG(index);
+ 
 
 	return m_LhsClosestPoint;
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceClosestPointsResult<Real, Vector>
-	::GetRhsClosestPoint(int index) const
+const Vector Mathematics::DistanceClosestPointsResult<Real, Vector>::GetRhsClosestPoint([[maybe_unused]] int index) const
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_0(0 <= index && index < GetRhsClosestPointSize(), "Ë÷Òý´íÎó£¡");
 
-	SYSTEM_UNUSED_ARG(index);
+ 
 
 	return m_RhsClosestPoint;
 }

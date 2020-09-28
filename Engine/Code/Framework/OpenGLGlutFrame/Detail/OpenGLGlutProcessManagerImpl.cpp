@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "OpenGLGlutProcessManagerImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperBase.h"
@@ -222,8 +222,7 @@ void Framework::OpenGLGlutProcessManagerImpl
 }
 
 // static
-void Framework::OpenGLGlutProcessManagerImpl
-	::TimerFunction(int timer)
+void Framework::OpenGLGlutProcessManagerImpl ::TimerFunction([[maybe_unused]] int timer)
 {
 	if (sm_OpenGLGlutCallBack != nullptr)
 	{
@@ -234,7 +233,7 @@ void Framework::OpenGLGlutProcessManagerImpl
 		THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÖ¸ÕëÎª¿Õ£¡"s));
 	}
 
-	SYSTEM_UNUSED_ARG(timer);
+ 
 }
 
 // static

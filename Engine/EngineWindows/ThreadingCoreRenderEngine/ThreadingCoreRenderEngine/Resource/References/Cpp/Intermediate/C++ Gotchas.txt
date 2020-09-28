@@ -1,13 +1,13 @@
-C++ ³ÌĞòÉè¼ÆÏİÚå£¨C++ Gotchas£©
+C++ ç¨‹åºè®¾è®¡é™·é˜±ï¼ˆC++ Gotchasï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://www.semantics.org¡¢ http://www.stevedewhurst.com/¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.semantics.orgã€ http://www.stevedewhurst.com/ã€‚
 
-¡ğ
-×÷Õß£ºStephen C. Dewhurst
+â—‹
+ä½œè€…ï¼šStephen C. Dewhurst
 
-ÖªÊ¶µã 
-1.	C++	ÏİÚå»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	C++	é™·é˜±åŸºç¡€çŸ¥è¯†ã€‚ 
 
-´úÂë 
-1.  Êé¼®´úÂë¡£   
+ä»£ç  
+1.  ä¹¦ç±ä»£ç ã€‚   

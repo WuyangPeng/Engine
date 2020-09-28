@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "WriteFileHandleImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -65,16 +65,13 @@ void CoreTools::WriteFileHandleImpl
 	WriteToFile(itemSize, itemsNumber, data);
 }
 
-void CoreTools::WriteFileHandleImpl
-	::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data)
+void CoreTools::WriteFileHandleImpl ::ReadFromFile([[maybe_unused]] size_t itemSize, [[maybe_unused]] size_t itemsNumber, [[maybe_unused]] void* data)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_0(false, "WriteFileHandleImpl½ûÖ¹µ÷ÓÃReadFromFile£¡");
 
-	SYSTEM_UNUSED_ARG(itemSize);
-	SYSTEM_UNUSED_ARG(itemsNumber);
-	SYSTEM_UNUSED_ARG(data);
+ 
 }
 
 

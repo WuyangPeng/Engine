@@ -352,11 +352,9 @@ void Rendering::PlanarReflectionEffect
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);	
 }
 
-void Rendering::PlanarReflectionEffect
-	::Link(CoreTools::ObjectLink& source)
+void Rendering::PlanarReflectionEffect ::Link([[maybe_unused]] CoreTools::ObjectLink& source)
 {
-	SYSTEM_UNUSED_ARG(source);
-
+ 
 	CoreTools::DoNothing();
 }
 

@@ -1,97 +1,84 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 13:02)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/27 17:34)
 
 #include "System/SystemExport.h"
 
-#include "AndroidNativeAppGlueUsing.h"
 #include "AndroidInputUsing.h"
-#include "System/Helper/UnusedMacro.h"
+#include "AndroidNativeAppGlueUsing.h"
 #include "System/Helper/PragmaWarning.h"
 
 #ifndef SYSTEM_PLATFORM_ANDROID
 
 using std::make_shared;
 
-System::AndroidPollSource
-	::AndroidPollSource() noexcept
-	:id{ 0 }, app{ nullptr }
+System::AndroidPollSource::AndroidPollSource() noexcept
+    : id{ 0 }, app{ nullptr }
 {
-
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26461)
-void System::AndroidPollSource
-	::process(struct AndroidApp* androidApp, struct AndroidPollSource* source) noexcept
+void System::AndroidPollSource::process([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidPollSource* source) noexcept
 {
-	SYSTEM_UNUSED_ARG(androidApp);
-	SYSTEM_UNUSED_ARG(source);
-}
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-System::AndroidApp
-	::AndroidApp()
-	:userData{ nullptr }, activity{ nullptr }, config{ nullptr }, savedState{ nullptr }, savedStateSize{ 0 }, looper{ nullptr }, 
-	 contentRect{}, activityState{ 0 }, destroyRequested{ 0 },
-	 msgread{ 0 }, msgwrite{ 0 }, cmdPollSource{}, inputPollSource{}, running{ nullptr }, stateSaved{ 0 }, destroyed{ 0 }, redrawNeeded{ 0 }, 
-	 pendingInputQueue{ nullptr }, pendingWindow{ nullptr }, pendingContentRect{}, onAppCmd{ nullptr }, onInputEvent{ nullptr },
-	 inputQueue{ std::make_shared<AndroidInputQueue>() },window{ std::make_shared<AndroidNativeWindow>() }
-{	
-	 
-}
-#include STSTEM_WARNING_POP
-
-void System::AndroidApp
-	::SetDestroyRequested(int isDestroyRequested) noexcept
-{
-	destroyRequested = isDestroyRequested;
 }
 
-int System::AndroidApp
-	::GetDestroyRequested() const noexcept
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26455)
+System::AndroidApp::AndroidApp()
+    : userData{ nullptr }, activity{ nullptr }, config{ nullptr }, savedState{ nullptr }, savedStateSize{ 0 }, looper{ nullptr }, contentRect{}, activityState{ 0 },
+      destroyRequested{ 0 }, msgread{ 0 }, msgwrite{ 0 }, cmdPollSource{}, inputPollSource{}, running{ nullptr }, stateSaved{ 0 }, destroyed{ 0 },
+      redrawNeeded{ 0 }, pendingInputQueue{ nullptr }, pendingWindow{ nullptr }, pendingContentRect{}, onAppCmd{ nullptr }, onInputEvent{ nullptr }, inputQueue{ std::make_shared<AndroidInputQueue>() }, window{ std::make_shared<AndroidNativeWindow>() }
 {
-	return destroyRequested;
-}  
+}
+    #include STSTEM_WARNING_POP
 
-System::WindowHWnd System::AndroidApp
-	::GetRunning() const noexcept
+System::AndroidNativeWindow* System::AndroidApp::GetAndroidNativeWindow() noexcept
 {
-	return running;
+    return window.get();
 }
 
-void System::AndroidApp
-	::SetRunning(System::WindowHWnd val) noexcept
+void System::AndroidApp::SetDestroyRequested(int isDestroyRequested) noexcept
 {
-	running = val;
+    destroyRequested = isDestroyRequested;
 }
 
-void System::AndroidApp
-	::OnAppCmd(struct AndroidApp* app, int cmd) noexcept
+int System::AndroidApp::GetDestroyRequested() const noexcept
 {
-	onAppCmd(app, cmd);
+    return destroyRequested;
 }
 
-void System::AndroidApp
-	::OnInputEvent(struct AndroidApp* app, AndroidInputEvent* event) noexcept
+System::WindowHWnd System::AndroidApp::GetRunning() const noexcept
 {
-	onInputEvent(app, event);
+    return running;
 }
 
-void System::AndroidApp
-	::SetOnAppCmd(AppCmd value) noexcept
+void System::AndroidApp::SetRunning(WindowHWnd value) noexcept
 {
-	onAppCmd = value;
+    this->running = value;
 }
 
-void System::AndroidApp
-	::SetOnInputEvent(InputEvent value) noexcept
+void System::AndroidApp::OnAppCmd(AndroidApp* app, int cmd) noexcept
 {
-	onInputEvent = value;
+    onAppCmd(app, cmd);
 }
 
-#endif // SYSTEM_PLATFORM_ANDROID
+void System::AndroidApp::OnInputEvent(AndroidApp* app, AndroidInputEvent* event) noexcept
+{
+    onInputEvent(app, event);
+}
+
+void System::AndroidApp::SetOnAppCmd(AppCmd value) noexcept
+{
+    this->onAppCmd = value;
+}
+
+void System::AndroidApp::SetOnInputEvent(InputEvent value) noexcept
+{
+    this->onInputEvent = value;
+}
+
+#endif  // SYSTEM_PLATFORM_ANDROID

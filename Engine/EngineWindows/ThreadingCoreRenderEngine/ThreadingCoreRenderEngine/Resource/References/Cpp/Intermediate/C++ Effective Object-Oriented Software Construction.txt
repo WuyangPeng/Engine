@@ -1,10 +1,7 @@
-C++ ÃæÏò¶ÔÏó¸ßĞ§±à³Ì£¨C++:Effective Object-Oriented Software Construction£©
+C++ é¢å‘å¯¹è±¡é«˜æ•ˆç¼–ç¨‹ï¼ˆC++:Effective Object-Oriented Software Constructionï¼‰
 
-¡ğ
-×÷Õß£ºKayshav Dattatri
+â—‹
+ä½œè€…ï¼šKayshav Dattatri
 
-ÖªÊ¶µã 
-
-´úÂë 
-
-Òªµã  
+çŸ¥è¯†ç‚¹ 
+1.	C++	åŸºç¡€çŸ¥è¯†ã€‚     

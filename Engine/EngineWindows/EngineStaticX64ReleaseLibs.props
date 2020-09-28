@@ -8,9 +8,9 @@
   <ItemDefinitionGroup>
     <Link>
       <AdditionalLibraryDirectories>$(LibsEnvironmentX64ReleaseLib);$(EngineStaticX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>    
+    </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-  </ItemDefinitionGroup> 
+  </ItemDefinitionGroup>
 </Project>

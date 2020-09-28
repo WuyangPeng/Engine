@@ -1,10 +1,10 @@
-Êı¾İ¿âÉè¼ÆÓë¹ØÏµÀíÂÛ£¨Database Design & Relational Theory£©
+æ•°æ®åº“è®¾è®¡ä¸å…³ç³»ç†è®ºï¼ˆDatabase Design & Relational Theoryï¼‰
 
-¡î
-×÷Õß£ºC.J.Date
+â˜†
+ä½œè€…ï¼šC.J.Date
 
-¹Ù·½ÍøÕ¾£º
+å®˜æ–¹ç½‘ç«™ï¼š
 http://www.justsql.co.uk/
 
-ÖªÊ¶µã 
-1.	Êı¾İ¿â»ù´¡ÖªÊ¶¡£  
+çŸ¥è¯†ç‚¹ 
+1.	æ•°æ®åº“åŸºç¡€çŸ¥è¯†ã€‚  

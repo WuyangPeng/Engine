@@ -7,16 +7,14 @@
 #include "Rendering/RenderingExport.h" 
 
 #include "Dx9VertexFormat.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ClassInvariant/Noexcept.h"
 
-Rendering::Dx9VertexFormat
-    ::Dx9VertexFormat (Renderer* renderer, const VertexFormat* vertexFormat)     noexcept
-	:ParentType{}
+Rendering::Dx9VertexFormat ::Dx9VertexFormat([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const VertexFormat* vertexFormat) noexcept
+    : ParentType{}
 {    
-	SYSTEM_UNUSED_ARG(vertexFormat);
-    SYSTEM_UNUSED_ARG(renderer);
+ 
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -34,18 +32,16 @@ bool Rendering::Dx9VertexFormat
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::Dx9VertexFormat
-	::Enable (Renderer* renderer)
+void Rendering::Dx9VertexFormat ::Enable([[maybe_unused]] Renderer* renderer)
 {		
 	RENDERING_CLASS_IS_VALID_1;
     CoreTools::DoNothing();
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
-void Rendering::Dx9VertexFormat
-	::Disable (Renderer* renderer)
+void Rendering::Dx9VertexFormat ::Disable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_1;
     CoreTools::DoNothing();
-	SYSTEM_UNUSED_ARG(renderer);	
+	 	
 }

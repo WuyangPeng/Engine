@@ -44,11 +44,10 @@ void Framework::AndroidProcessManager
 	sm_AndroidProcessManager.reset();
 }
 
-Framework::AndroidProcessManager
-	::AndroidProcessManager(AndroidProcessManagerCreate androidProcessManagerCreate)
-	:m_Impl{ make_shared<ImplType>() }
+Framework::AndroidProcessManager ::AndroidProcessManager([[maybe_unused]] AndroidProcessManagerCreate androidProcessManagerCreate)
+    : m_Impl{ make_shared<ImplType>() }
 {
-	SYSTEM_UNUSED_ARG(androidProcessManagerCreate);
+ 
 
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

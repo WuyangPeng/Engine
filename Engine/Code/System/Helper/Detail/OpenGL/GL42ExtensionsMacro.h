@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:39)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:48)
 
 #ifndef SYSTEM_HELPER_GL_42_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_42_EXTENSIONS_MACRO_H
@@ -14,6 +17,6 @@
 #define GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT 0x8E8E
 #define GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT 0x8E8F
 #define GL_COPY_READ_BUFFER_BINDING 0x8F36
-#define GL_COPY_WRITE_BUFFER_BINDING 0x8F37 
+#define GL_COPY_WRITE_BUFFER_BINDING 0x8F37
 
-#endif // SYSTEM_HELPER_GL_42_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_42_EXTENSIONS_MACRO_H

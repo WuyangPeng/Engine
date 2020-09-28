@@ -1,29 +1,31 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 15:40)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/25 16:36)
 
 #include "System/SystemExport.h"
 
 #include "GL14Extensions.h"
 #include "GLUtility.h"
-#include "System/OpenGL/OpenGLUtility.h"
-#include "System/OpenGL/Flags/GLExtensionsFlags.h"
-#include "System/OpenGL/Using/GL14ExtensionsUsing.h"
 #include "System/Helper/Detail/OpenGL/GLPluginMacro.h"
+#include "System/OpenGL/Flags/GLExtensionsFlags.h"
+#include "System/OpenGL/OpenGLUtility.h"
+#include "System/OpenGL/Using/GL14ExtensionsUsing.h"
 
 // OpenGL 1.4
 
 namespace System
 {
-	ExistsOpenGLExtensions g_ExistsOpenGL14{ ExistsOpenGLExtensions::Unknown };
+    auto g_ExistsOpenGL14 = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System
-	::IsExistsOpenGL14() noexcept
+System::ExistsOpenGLExtensions System::IsExistsOpenGL14() noexcept
 {
-	return g_ExistsOpenGL14;
+    return g_ExistsOpenGL14;
 }
 
 System::PgglBlendFuncSeparate System::gglBlendFuncSeparate{ nullptr };
@@ -72,354 +74,305 @@ System::PgglWindowPos3iv System::gglWindowPos3iv{ nullptr };
 System::PgglWindowPos3s System::gglWindowPos3s{ nullptr };
 System::PgglWindowPos3sv System::gglWindowPos3sv{ nullptr };
 
-void System
-	::GlBlendFuncSeparate(GLenum srcFactorRGB, GLenum dstFactorRGB, GLenum srcFactorA, GLenum dstFactorA) noexcept
+void System::GlBlendFuncSeparate(GLenum srcFactorRGB, GLenum dstFactorRGB, GLenum srcFactorA, GLenum dstFactorA) noexcept
 {
-	SYSTEM_BODY_4(gglBlendFuncSeparate, srcFactorRGB, dstFactorRGB, srcFactorA, dstFactorA);
+    SYSTEM_BODY_4(gglBlendFuncSeparate, srcFactorRGB, dstFactorRGB, srcFactorA, dstFactorA);
 }
 
-void System
-	::GlFogCoordd(GLdouble coord) noexcept
+void System::GlFogCoordd(GLdouble coord) noexcept
 {
-	SYSTEM_BODY_1(gglFogCoordd, coord);
+    SYSTEM_BODY_1(gglFogCoordd, coord);
 }
 
-void System
-	::GlFogCoorddv(const GLdouble* coord) noexcept
+void System::GlFogCoorddv(const GLdouble* coord) noexcept
 {
-	SYSTEM_BODY_1(gglFogCoorddv, coord);
+    SYSTEM_BODY_1(gglFogCoorddv, coord);
 }
 
-void System
-	::GlFogCoordf(GLfloat coord) noexcept
+void System::GlFogCoordf(GLfloat coord) noexcept
 {
-	SYSTEM_BODY_1(gglFogCoordf, coord);
+    SYSTEM_BODY_1(gglFogCoordf, coord);
 }
 
-void System
-	::GlFogCoordfv(const GLfloat* coord) noexcept
+void System::GlFogCoordfv(const GLfloat* coord) noexcept
 {
-	SYSTEM_BODY_1(gglFogCoordfv, coord);
+    SYSTEM_BODY_1(gglFogCoordfv, coord);
 }
 
-void System
-	::GlFogCoordPointer(GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
+void System::GlFogCoordPointer(GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_3(gglFogCoordPointer, type, stride, pointer);
+    SYSTEM_BODY_3(gglFogCoordPointer, type, stride, pointer);
 }
 
-void System
-	::GlMultiDrawArrays(GLenum mode, GLint* first, GLsizei* count, GLsizei primitiveCount) noexcept
+void System::GlMultiDrawArrays(GLenum mode, GLint* first, GLsizei* count, GLsizei primitiveCount) noexcept
 {
-	SYSTEM_BODY_4(gglMultiDrawArrays, mode, first, count, primitiveCount);
+    SYSTEM_BODY_4(gglMultiDrawArrays, mode, first, count, primitiveCount);
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26487)
-void System
-	::GlMultiDrawElements(GLenum mode, const GLsizei* count, GLenum type, const GLvoid** indices, GLsizei primitiveCount) noexcept
+void System::GlMultiDrawElements(GLenum mode, const GLsizei* count, GLenum type, const GLvoid** indices, GLsizei primitiveCount) noexcept
 {
-	SYSTEM_BODY_5(gglMultiDrawElements, mode, count, type, indices, primitiveCount);
-}
-#include STSTEM_WARNING_POP
-
-void System
-	::GlPointParameterf(GLenum name, GLfloat param) noexcept
-{
-	SYSTEM_BODY_2(gglPointParameterf, name, param);
+    SYSTEM_BODY_5(gglMultiDrawElements, mode, count, type, indices, primitiveCount);
 }
 
-void System
-	::GlPointParameterfv(GLenum name, const GLfloat* param) noexcept
+void System::GlPointParameterf(GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_BODY_2(gglPointParameterfv, name, param);
+    SYSTEM_BODY_2(gglPointParameterf, name, param);
 }
 
-void System
-	::GlPointParameteri(GLenum name, int param) noexcept
+void System::GlPointParameterfv(GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_2(gglPointParameteri, name, param);
+    SYSTEM_BODY_2(gglPointParameterfv, name, param);
 }
 
-void System
-	::GlPointParameteriv(GLenum name, const GLint* param) noexcept
+void System::GlPointParameteri(GLenum name, int param) noexcept
 {
-	SYSTEM_BODY_2(gglPointParameteriv, name, param);
+    SYSTEM_BODY_2(gglPointParameteri, name, param);
 }
 
-void System
-	::GlSecondaryColor3b(GLbyte red, GLbyte green, GLbyte blue) noexcept
+void System::GlPointParameteriv(GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_BODY_3(gglSecondaryColor3b, red, green, blue);
+    SYSTEM_BODY_2(gglPointParameteriv, name, param);
 }
 
-void System
-	::GlSecondaryColor3bv(const GLbyte* rgb) noexcept
+void System::GlSecondaryColor3b(GLbyte red, GLbyte green, GLbyte blue) noexcept
 {
-	SYSTEM_BODY_1(gglSecondaryColor3bv, rgb);
+    SYSTEM_BODY_3(gglSecondaryColor3b, red, green, blue);
 }
 
-void System
-	::GlSecondaryColor3d(GLdouble red, GLdouble green, GLdouble blue) noexcept
+void System::GlSecondaryColor3bv(const GLbyte* rgb) noexcept
 {
-	SYSTEM_BODY_3(gglSecondaryColor3d, red, green, blue);
+    SYSTEM_BODY_1(gglSecondaryColor3bv, rgb);
 }
 
-void System
-	::GlSecondaryColor3dv(const GLdouble* rgb) noexcept
+void System::GlSecondaryColor3d(GLdouble red, GLdouble green, GLdouble blue) noexcept
 {
-	SYSTEM_BODY_1(gglSecondaryColor3dv, rgb);
+    SYSTEM_BODY_3(gglSecondaryColor3d, red, green, blue);
 }
 
-void System
-	::GlSecondaryColor3f(GLfloat red, GLfloat green, GLfloat blue) noexcept
+void System::GlSecondaryColor3dv(const GLdouble* rgb) noexcept
 {
-	SYSTEM_BODY_3(gglSecondaryColor3f, red, green, blue);
+    SYSTEM_BODY_1(gglSecondaryColor3dv, rgb);
 }
 
-void System
-	::GlSecondaryColor3fv(const GLfloat* rgb) noexcept
+void System::GlSecondaryColor3f(GLfloat red, GLfloat green, GLfloat blue) noexcept
 {
-	SYSTEM_BODY_1(gglSecondaryColor3fv, rgb);
+    SYSTEM_BODY_3(gglSecondaryColor3f, red, green, blue);
 }
 
-void System
-	::GlSecondaryColor3i(GLint red, GLint green, GLint blue) noexcept
+void System::GlSecondaryColor3fv(const GLfloat* rgb) noexcept
 {
-	SYSTEM_BODY_3(gglSecondaryColor3i, red, green, blue);
+    SYSTEM_BODY_1(gglSecondaryColor3fv, rgb);
 }
 
-void System
-	::GlSecondaryColor3iv(const GLint* rgb) noexcept
+void System::GlSecondaryColor3i(GLint red, GLint green, GLint blue) noexcept
 {
-	SYSTEM_BODY_1(gglSecondaryColor3iv, rgb);
+    SYSTEM_BODY_3(gglSecondaryColor3i, red, green, blue);
 }
 
-void System
-	::GlSecondaryColor3s(GLshort red, GLshort green, GLshort blue) noexcept
+void System::GlSecondaryColor3iv(const GLint* rgb) noexcept
 {
-	SYSTEM_BODY_3(gglSecondaryColor3s, red, green, blue);
+    SYSTEM_BODY_1(gglSecondaryColor3iv, rgb);
 }
 
-void System
-	::GlSecondaryColor3sv(const GLshort* rgb) noexcept
+void System::GlSecondaryColor3s(GLshort red, GLshort green, GLshort blue) noexcept
 {
-	SYSTEM_BODY_1(gglSecondaryColor3sv, rgb);
+    SYSTEM_BODY_3(gglSecondaryColor3s, red, green, blue);
 }
 
-void System
-	::GlSecondaryColor3ub(GLubyte red, GLubyte green, GLubyte blue) noexcept
+void System::GlSecondaryColor3sv(const GLshort* rgb) noexcept
 {
-	SYSTEM_BODY_3(gglSecondaryColor3ub, red, green, blue);
+    SYSTEM_BODY_1(gglSecondaryColor3sv, rgb);
 }
 
-void System
-	::GlSecondaryColor3ubv(const GLubyte* rgb) noexcept
+void System::GlSecondaryColor3ub(GLubyte red, GLubyte green, GLubyte blue) noexcept
 {
-	SYSTEM_BODY_1(gglSecondaryColor3ubv, rgb);
+    SYSTEM_BODY_3(gglSecondaryColor3ub, red, green, blue);
 }
 
-void System
-	::GlSecondaryColor3ui(GLuint red, GLuint green, GLuint blue) noexcept
+void System::GlSecondaryColor3ubv(const GLubyte* rgb) noexcept
 {
-	SYSTEM_BODY_3(gglSecondaryColor3ui, red, green, blue);
+    SYSTEM_BODY_1(gglSecondaryColor3ubv, rgb);
 }
 
-void System
-	::GlSecondaryColor3uiv(const GLuint* rgb) noexcept
+void System::GlSecondaryColor3ui(GLuint red, GLuint green, GLuint blue) noexcept
 {
-	SYSTEM_BODY_1(gglSecondaryColor3uiv, rgb);
+    SYSTEM_BODY_3(gglSecondaryColor3ui, red, green, blue);
 }
 
-void System
-	::GlSecondaryColor3us(GLushort red, GLushort green, GLushort blue) noexcept
+void System::GlSecondaryColor3uiv(const GLuint* rgb) noexcept
 {
-	SYSTEM_BODY_3(gglSecondaryColor3us, red, green, blue);
+    SYSTEM_BODY_1(gglSecondaryColor3uiv, rgb);
 }
 
-void System
-	::GlSecondaryColor3usv(const GLushort* rgb) noexcept
+void System::GlSecondaryColor3us(GLushort red, GLushort green, GLushort blue) noexcept
 {
-	SYSTEM_BODY_1(gglSecondaryColor3usv, rgb);
+    SYSTEM_BODY_3(gglSecondaryColor3us, red, green, blue);
 }
 
-void System
-	::GlSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
+void System::GlSecondaryColor3usv(const GLushort* rgb) noexcept
 {
-	SYSTEM_BODY_4(gglSecondaryColorPointer, size, type, stride, pointer);
+    SYSTEM_BODY_1(gglSecondaryColor3usv, rgb);
 }
 
-void System
-	::GlWindowPos2d(GLdouble x, GLdouble y) noexcept
+void System::GlSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) noexcept
 {
-	SYSTEM_BODY_2(gglWindowPos2d, x, y);
+    SYSTEM_BODY_4(gglSecondaryColorPointer, size, type, stride, pointer);
 }
 
-void System
-	::GlWindowPos2dv(const GLdouble* xy) noexcept
+void System::GlWindowPos2d(GLdouble x, GLdouble y) noexcept
 {
-	SYSTEM_BODY_1(gglWindowPos2dv, xy);
+    SYSTEM_BODY_2(gglWindowPos2d, x, y);
 }
 
-void System
-	::GlWindowPos2f(GLfloat x, GLfloat y) noexcept
+void System::GlWindowPos2dv(const GLdouble* xy) noexcept
 {
-	SYSTEM_BODY_2(gglWindowPos2f, x, y);
+    SYSTEM_BODY_1(gglWindowPos2dv, xy);
 }
 
-void System
-	::GlWindowPos2fv(const GLfloat* xy) noexcept
+void System::GlWindowPos2f(GLfloat x, GLfloat y) noexcept
 {
-	SYSTEM_BODY_1(gglWindowPos2fv, xy);
+    SYSTEM_BODY_2(gglWindowPos2f, x, y);
 }
 
-void System
-	::GlWindowPos2i(GLint x, GLint y) noexcept
+void System::GlWindowPos2fv(const GLfloat* xy) noexcept
 {
-	SYSTEM_BODY_2(gglWindowPos2i, x, y);
+    SYSTEM_BODY_1(gglWindowPos2fv, xy);
 }
 
-void System
-	::GlWindowPos2iv(const GLint* xy) noexcept
+void System::GlWindowPos2i(GLint x, GLint y) noexcept
 {
-	SYSTEM_BODY_1(gglWindowPos2iv, xy);
+    SYSTEM_BODY_2(gglWindowPos2i, x, y);
 }
 
-void System
-	::GlWindowPos2s(GLshort x, GLshort y) noexcept
+void System::GlWindowPos2iv(const GLint* xy) noexcept
 {
-	SYSTEM_BODY_2(gglWindowPos2s, x, y);
+    SYSTEM_BODY_1(gglWindowPos2iv, xy);
 }
 
-void System
-	::GlWindowPos2sv(const GLshort* xy) noexcept
+void System::GlWindowPos2s(GLshort x, GLshort y) noexcept
 {
-	SYSTEM_BODY_1(gglWindowPos2sv, xy);
+    SYSTEM_BODY_2(gglWindowPos2s, x, y);
 }
 
-void System
-	::GlWindowPos3d(GLdouble x, GLdouble y, GLdouble z) noexcept
+void System::GlWindowPos2sv(const GLshort* xy) noexcept
 {
-	SYSTEM_BODY_3(gglWindowPos3d, x, y, z);
+    SYSTEM_BODY_1(gglWindowPos2sv, xy);
 }
 
-void System
-	::GlWindowPos3dv(const GLdouble* xyz) noexcept
+void System::GlWindowPos3d(GLdouble x, GLdouble y, GLdouble z) noexcept
 {
-	SYSTEM_BODY_1(gglWindowPos3dv, xyz);
+    SYSTEM_BODY_3(gglWindowPos3d, x, y, z);
 }
 
-void System
-	::GlWindowPos3f(GLfloat x, GLfloat y, GLfloat z) noexcept
+void System::GlWindowPos3dv(const GLdouble* xyz) noexcept
 {
-	SYSTEM_BODY_3(gglWindowPos3f, x, y, z);
+    SYSTEM_BODY_1(gglWindowPos3dv, xyz);
 }
 
-void System
-	::GlWindowPos3fv(const GLfloat* xyz) noexcept
+void System::GlWindowPos3f(GLfloat x, GLfloat y, GLfloat z) noexcept
 {
-	SYSTEM_BODY_1(gglWindowPos3fv, xyz);
+    SYSTEM_BODY_3(gglWindowPos3f, x, y, z);
 }
 
-void System
-	::GlWindowPos3i(GLint x, GLint y, GLint z) noexcept
+void System::GlWindowPos3fv(const GLfloat* xyz) noexcept
 {
-	SYSTEM_BODY_3(gglWindowPos3i, x, y, z);
+    SYSTEM_BODY_1(gglWindowPos3fv, xyz);
 }
 
-void System
-	::GlWindowPos3iv(const GLint* xyz) noexcept
+void System::GlWindowPos3i(GLint x, GLint y, GLint z) noexcept
 {
-	SYSTEM_BODY_1(gglWindowPos3iv, xyz);
+    SYSTEM_BODY_3(gglWindowPos3i, x, y, z);
 }
 
-void System
-	::GlWindowPos3s(GLshort x, GLshort y, GLshort z) noexcept
+void System::GlWindowPos3iv(const GLint* xyz) noexcept
 {
-	SYSTEM_BODY_3(gglWindowPos3s, x, y, z);
+    SYSTEM_BODY_1(gglWindowPos3iv, xyz);
 }
 
-void System
-	::GlWindowPos3sv(const GLshort* xyz) noexcept
+void System::GlWindowPos3s(GLshort x, GLshort y, GLshort z) noexcept
 {
-	SYSTEM_BODY_1(gglWindowPos3sv, xyz);
+    SYSTEM_BODY_3(gglWindowPos3s, x, y, z);
 }
 
-void System
-	::InitOpenGL14() noexcept
+void System::GlWindowPos3sv(const GLshort* xyz) noexcept
 {
-	if (System::OpenGLSystemVersion::Version14 <= GetOpenGLVersion())
-	{
-		g_ExistsOpenGL14 = ExistsOpenGLExtensions::Exists;
+    SYSTEM_BODY_1(gglWindowPos3sv, xyz);
+}
 
-		// GL_{EXT,INGR}_blend_func_separate
+void System::InitOpenGL14()
+{
+    if (System::OpenGLSystemVersion::Version14 <= GetOpenGLVersion())
+    {
+        g_ExistsOpenGL14 = ExistsOpenGLExtensions::Exists;
 
-		SYSTEM_GET_FUNCTION(gglBlendFuncSeparate);
+        // GL_{EXT,INGR}_blend_func_separate
 
-		// GL_EXT_fog_coord
+        SYSTEM_GET_FUNCTION(gglBlendFuncSeparate);
 
-		SYSTEM_GET_FUNCTION(gglFogCoordf);
-		SYSTEM_GET_FUNCTION(gglFogCoordfv);
-		SYSTEM_GET_FUNCTION(gglFogCoordd);
-		SYSTEM_GET_FUNCTION(gglFogCoorddv);
-		SYSTEM_GET_FUNCTION(gglFogCoordPointer);
+        // GL_EXT_fog_coord
 
-		// GL_EXT_multi_draw_arrays
+        SYSTEM_GET_FUNCTION(gglFogCoordf);
+        SYSTEM_GET_FUNCTION(gglFogCoordfv);
+        SYSTEM_GET_FUNCTION(gglFogCoordd);
+        SYSTEM_GET_FUNCTION(gglFogCoorddv);
+        SYSTEM_GET_FUNCTION(gglFogCoordPointer);
 
-		SYSTEM_GET_FUNCTION(gglMultiDrawArrays);
-		SYSTEM_GET_FUNCTION(gglMultiDrawElements);
+        // GL_EXT_multi_draw_arrays
 
-		// GL_{ARB,EXT,SGIS}_point_parameters
+        SYSTEM_GET_FUNCTION(gglMultiDrawArrays);
+        SYSTEM_GET_FUNCTION(gglMultiDrawElements);
 
-		SYSTEM_GET_FUNCTION(gglPointParameterf);
-		SYSTEM_GET_FUNCTION(gglPointParameterfv);
+        // GL_{ARB,EXT,SGIS}_point_parameters
 
-		// GL_NV_point_sprite
+        SYSTEM_GET_FUNCTION(gglPointParameterf);
+        SYSTEM_GET_FUNCTION(gglPointParameterfv);
 
-		SYSTEM_GET_FUNCTION(gglPointParameteri);
-		SYSTEM_GET_FUNCTION(gglPointParameteriv);
+        // GL_NV_point_sprite
 
-		// GL_EXT_secondary_color
+        SYSTEM_GET_FUNCTION(gglPointParameteri);
+        SYSTEM_GET_FUNCTION(gglPointParameteriv);
 
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3b);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3bv);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3d);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3dv);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3f);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3fv);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3i);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3iv);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3s);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3sv);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3ub);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3ubv);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3ui);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3uiv);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3us);
-		SYSTEM_GET_FUNCTION(gglSecondaryColor3usv);
-		SYSTEM_GET_FUNCTION(gglSecondaryColorPointer);
+        // GL_EXT_secondary_color
 
-		// GL_{ARB,MESA}_window_pos
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3b);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3bv);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3d);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3dv);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3f);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3fv);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3i);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3iv);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3s);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3sv);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3ub);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3ubv);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3ui);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3uiv);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3us);
+        SYSTEM_GET_FUNCTION(gglSecondaryColor3usv);
+        SYSTEM_GET_FUNCTION(gglSecondaryColorPointer);
 
-		SYSTEM_GET_FUNCTION(gglWindowPos2d);
-		SYSTEM_GET_FUNCTION(gglWindowPos2dv);
-		SYSTEM_GET_FUNCTION(gglWindowPos2f);
-		SYSTEM_GET_FUNCTION(gglWindowPos2fv);
-		SYSTEM_GET_FUNCTION(gglWindowPos2i);
-		SYSTEM_GET_FUNCTION(gglWindowPos2iv);
-		SYSTEM_GET_FUNCTION(gglWindowPos2s);
-		SYSTEM_GET_FUNCTION(gglWindowPos2sv);
-		SYSTEM_GET_FUNCTION(gglWindowPos3d);
-		SYSTEM_GET_FUNCTION(gglWindowPos3dv);
-		SYSTEM_GET_FUNCTION(gglWindowPos3f);
-		SYSTEM_GET_FUNCTION(gglWindowPos3fv);
-		SYSTEM_GET_FUNCTION(gglWindowPos3i);
-		SYSTEM_GET_FUNCTION(gglWindowPos3iv);
-		SYSTEM_GET_FUNCTION(gglWindowPos3s);
-		SYSTEM_GET_FUNCTION(gglWindowPos3sv);
-	}
-	else
-	{
-		g_ExistsOpenGL14 = ExistsOpenGLExtensions::NotExist;
-	}
+        // GL_{ARB,MESA}_window_pos
+
+        SYSTEM_GET_FUNCTION(gglWindowPos2d);
+        SYSTEM_GET_FUNCTION(gglWindowPos2dv);
+        SYSTEM_GET_FUNCTION(gglWindowPos2f);
+        SYSTEM_GET_FUNCTION(gglWindowPos2fv);
+        SYSTEM_GET_FUNCTION(gglWindowPos2i);
+        SYSTEM_GET_FUNCTION(gglWindowPos2iv);
+        SYSTEM_GET_FUNCTION(gglWindowPos2s);
+        SYSTEM_GET_FUNCTION(gglWindowPos2sv);
+        SYSTEM_GET_FUNCTION(gglWindowPos3d);
+        SYSTEM_GET_FUNCTION(gglWindowPos3dv);
+        SYSTEM_GET_FUNCTION(gglWindowPos3f);
+        SYSTEM_GET_FUNCTION(gglWindowPos3fv);
+        SYSTEM_GET_FUNCTION(gglWindowPos3i);
+        SYSTEM_GET_FUNCTION(gglWindowPos3iv);
+        SYSTEM_GET_FUNCTION(gglWindowPos3s);
+        SYSTEM_GET_FUNCTION(gglWindowPos3sv);
+    }
+    else
+    {
+        g_ExistsOpenGL14 = ExistsOpenGLExtensions::NotExist;
+    }
 }

@@ -149,7 +149,7 @@
     className& operator=(const className& rhs);            \
     className(className&& rhs) noexcept;                   \
     className& operator=(className&& rhs) noexcept;        \
-    void Swap(ObjectName& rhs) noexcept;
+    void Swap(className& rhs) noexcept;
 
 #define DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(className)      \
     TYPE_DECLARE(className);                                    \

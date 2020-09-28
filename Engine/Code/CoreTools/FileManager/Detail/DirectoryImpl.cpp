@@ -24,7 +24,7 @@ CoreTools::DirectoryImpl
 	if (0 < result && directoryName != systemCurrentDirectory.data())
 	{
 		m_DirectoryName = systemCurrentDirectory.data();
-		System::SetSystemCurrentDirectory(directoryName.c_str());
+            [[maybe_unused]] const auto result2 = System::SetSystemCurrentDirectory(directoryName.c_str());
 	}
 }
 
@@ -33,7 +33,7 @@ CoreTools::DirectoryImpl
 {
 	if (!m_DirectoryName.empty())
 	{
-		System::SetSystemCurrentDirectory(m_DirectoryName.c_str());
+            [[maybe_unused]] const auto result2 = System::SetSystemCurrentDirectory(m_DirectoryName.c_str());
 	}
 }
 

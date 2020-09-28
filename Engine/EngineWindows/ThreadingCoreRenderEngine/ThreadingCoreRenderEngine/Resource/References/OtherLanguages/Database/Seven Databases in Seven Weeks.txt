@@ -1,15 +1,15 @@
-ÆßÖÜÆßÊı¾İ¿â£¨Seven Databases in Seven Weeks£©
+ä¸ƒå‘¨ä¸ƒæ•°æ®åº“ï¼ˆSeven Databases in Seven Weeksï¼‰
 
-¡î
-×÷Õß£ºEric Redmond¡¢Jim R.Wilson
+â˜†
+ä½œè€…ï¼šEric Redmondã€Jim R.Wilson
 
-ÖªÊ¶µã 
-1.	PostgreSQL»ù´¡ÖªÊ¶¡£ 
-2.	Riak»ù´¡ÖªÊ¶¡£ 
-3.	HBase»ù´¡ÖªÊ¶¡£ 
-4.	MongoDB»ù´¡ÖªÊ¶¡£ 
-5.	CouchDB»ù´¡ÖªÊ¶¡£ 
-6.	Neo4j»ù´¡ÖªÊ¶¡£ 
-7.	Redis»ù´¡ÖªÊ¶¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	PostgreSQLåŸºç¡€çŸ¥è¯†ã€‚ 
+2.	RiakåŸºç¡€çŸ¥è¯†ã€‚ 
+3.	HBaseåŸºç¡€çŸ¥è¯†ã€‚ 
+4.	MongoDBåŸºç¡€çŸ¥è¯†ã€‚ 
+5.	CouchDBåŸºç¡€çŸ¥è¯†ã€‚ 
+6.	Neo4jåŸºç¡€çŸ¥è¯†ã€‚ 
+7.	RedisåŸºç¡€çŸ¥è¯†ã€‚ 
  
 

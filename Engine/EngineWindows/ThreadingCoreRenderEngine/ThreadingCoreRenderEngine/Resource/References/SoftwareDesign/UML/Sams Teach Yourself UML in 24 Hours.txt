@@ -1,9 +1,9 @@
-UML»ù´¡¡¢°¸ÀıÓëÓ¦ÓÃ£¨Sams Teach Yourself UML in 24 Hours£©
-£¨µÚ3°æ£©
+UMLåŸºç¡€ã€æ¡ˆä¾‹ä¸åº”ç”¨ï¼ˆSams Teach Yourself UML in 24 Hoursï¼‰
+ï¼ˆç¬¬3ç‰ˆï¼‰
 
-¡î
-×÷Õß£ºJoseph Schmuller
+â˜†
+ä½œè€…ï¼šJoseph Schmuller
 
-ÖªÊ¶µã 
-1.	UML»ù´¡ÖªÊ¶¡£ 
-2.	UML»ù´¡ÖªÊ¶Á·Ï°¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	UMLåŸºç¡€çŸ¥è¯†ã€‚ 
+2.	UMLåŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚ 

@@ -1,0 +1,10 @@
+数据结构与算法分析C++描述（Data Structures and Algorithm Analysis in C++）
+（第3版）
+
+官方网站：http://www.turingbook.com、www.aw.com/cssupport（已失效） 、http://www.cis.fiu.edu/~weiss
+
+☆
+作者：Mark Allen Welss
+
+知识点 
+1.	算法基础知识。 

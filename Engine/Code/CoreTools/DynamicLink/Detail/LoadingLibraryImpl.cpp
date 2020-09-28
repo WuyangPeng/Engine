@@ -16,7 +16,7 @@
 using std::string;
 
 CoreTools::LoadingLibraryImpl
-	::LoadingLibraryImpl(const String& fileName, LoadLibrary flags)
+	::LoadingLibraryImpl(const String& fileName, LoadLibraryType flags)
 	:m_FileName{ StringConversion::StandardConversionDynamicLinkString(fileName) },
 	 m_Library{ System::LoadDynamicLibrary(m_FileName.c_str(),flags) }
 {

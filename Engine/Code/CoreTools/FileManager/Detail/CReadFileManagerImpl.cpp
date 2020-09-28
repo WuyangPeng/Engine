@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CReadFileManagerImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/FileManager/Endian.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
@@ -83,44 +83,39 @@ void CoreTools::CReadFileManagerImpl
 #endif // SYSTEM_BIG_ENDIAN
 }
 
-size_t CoreTools::CReadFileManagerImpl
-	::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data)  
+size_t CoreTools::CReadFileManagerImpl ::WriteToFile([[maybe_unused]] size_t itemSize, [[maybe_unused]] size_t itemsNumber, [[maybe_unused]] const void* data)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CReadFileManageImpl禁止调用WriteToFile！");
 
-	SYSTEM_UNUSED_ARG(itemSize);
-	SYSTEM_UNUSED_ARG(itemsNumber);
-	SYSTEM_UNUSED_ARG(data);
+ 
 
 	CoreTools::DoNothing();
 
 	return 0;
 }
 
-bool CoreTools::CReadFileManagerImpl
-	::PutCharacter(int character)  
+bool CoreTools::CReadFileManagerImpl ::PutCharacter([[maybe_unused]] int character)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CReadFileManageImpl禁止调用PutCharacter！");
 
-	SYSTEM_UNUSED_ARG(character);
+ 
 
 	CoreTools::DoNothing();
 
 	return false;
 }
 
-bool CoreTools::CReadFileManagerImpl
-	::PutString(const string& str)  
+bool CoreTools::CReadFileManagerImpl ::PutString([[maybe_unused]] const string& str)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
 	CORE_TOOLS_ASSERTION_4(false, "CReadFileManageImpl禁止调用PutString！");
 
-	SYSTEM_UNUSED_ARG(str);
+ 
 
 	CoreTools::DoNothing();
 

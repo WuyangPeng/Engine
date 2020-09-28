@@ -7,7 +7,7 @@
 #include "Database/DatabaseExport.h"
 
 #include "TableImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
@@ -38,16 +38,11 @@ Database::ConfigurationStrategy Database::TableImpl
 	return m_ConfigurationStrategy;
 }
 
-Database::TableImpl::ResultPtr Database::TableImpl
-	::Select(std::initializer_list<string> selectStatement, const string& whereStatement,
-			 const string& orderByStatement, const BindStatementType& bindStatement)
+Database::TableImpl::ResultPtr Database::TableImpl ::Select([[maybe_unused]] std::initializer_list<string> selectStatement, [[maybe_unused]] const string& whereStatement,
+                                                            [[maybe_unused]] const string& orderByStatement, [[maybe_unused]] const BindStatementType& bindStatement)
 {
 	DATABASE_CLASS_IS_VALID_1;
-
-	SYSTEM_UNUSED_ARG(selectStatement);
-	SYSTEM_UNUSED_ARG(whereStatement);
-	SYSTEM_UNUSED_ARG(orderByStatement);
-	SYSTEM_UNUSED_ARG(bindStatement);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("TableImplŒ¥ µœ÷Select"s));
 }

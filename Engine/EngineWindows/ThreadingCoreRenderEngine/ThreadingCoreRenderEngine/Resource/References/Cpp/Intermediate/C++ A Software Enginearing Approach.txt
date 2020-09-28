@@ -1,13 +1,10 @@
-C++ ¾«Ëè¡ª¡ªÈí¼þ¹¤³Ì·½·¨£¨C++:A Software Enginearing Approach£©
+C++ ç²¾é«“â€”â€”è½¯ä»¶å·¥ç¨‹æ–¹æ³•ï¼ˆC++:A Software Enginearing Approachï¼‰
 
-¹Ù·½ÍøÕ¾£º
-ftp://ftp.prenhall.com/pub/ptr/c++programming.w-050/corec++ £¨ÒÑÊ§Ð§£©¡£
+å®˜æ–¹ç½‘ç«™ï¼š
+ftp://ftp.prenhall.com/pub/ptr/c++programming.w-050/corec++ ï¼ˆå·²å¤±æ•ˆï¼‰ã€‚
 
-¡ð
-×÷Õß£ºVictor Shtern
+â—‹
+ä½œè€…ï¼šVictor Shtern
 
-ÖªÊ¶µã 
-
-´úÂë 
-
-Òªµã  
+çŸ¥è¯†ç‚¹ 
+1.	C++	åŸºç¡€çŸ¥è¯†ã€‚   

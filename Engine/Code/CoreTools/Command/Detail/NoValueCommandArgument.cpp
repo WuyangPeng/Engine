@@ -7,7 +7,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "NoValueCommandArgument.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -107,12 +107,11 @@ CoreTools::NoValueCommandArgument::CommandArgumentSharedPtr CoreTools::NoValueCo
 	return make_shared<NoValueCommandArgument>(*this);
 }
 
-void CoreTools::NoValueCommandArgument
-	::AddArgumentValue(const string& value)
+void CoreTools::NoValueCommandArgument ::AddArgumentValue([[maybe_unused]] const string& value)
 {
 	CORE_TOOLS_CLASS_IS_VALID_1;
 
-	SYSTEM_UNUSED_ARG(value);
+	 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument√ª”–÷µ£°"s));
 }

@@ -8,7 +8,7 @@
 
 #include "MultiMessageEventContainerImpl.h"
 #include "PriorityMessageEventContainer.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 
 using std::make_shared;

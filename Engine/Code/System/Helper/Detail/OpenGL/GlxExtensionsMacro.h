@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:44)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:50)
 
 #ifndef SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H
@@ -11,17 +14,17 @@
 
 #if defined(SYSTEM_PLATFORM_LINUX)
 
-	#ifdef __glxext_h_
-		#error "glxext.h包含在GLExtensionsMacro.h之前"
-	#endif // __glxext_h_
+    #ifdef __glxext_h_
+        #error "glxext.h包含在GLExtensionsMacro.h之前"
+    #endif  // __glxext_h_
 
-	#define __glxext_h_
+    #define __glxext_h_
 
-	#include <X11/Xlib.h>
-	#include <X11/Xutil.h>
-	#include <X11/Xmd.h>
+    #include <X11/Xlib.h>
+    #include <X11/Xutil.h>
+    #include <X11/Xmd.h>
 
-#endif // SYSTEM_PLATFORM_LINUX
+#endif  // SYSTEM_PLATFORM_LINUX
 
 // GLX 1.0
 
@@ -81,7 +84,7 @@
 // GLX 1.2
 #define glXGetCurrentDisplay System::GlXGetCurrentDisplay
 
- // GLX 1.3
+// GLX 1.3
 #define GLX_WINDOW_BIT 0x00000001
 #define GLX_PIXMAP_BIT 0x00000002
 #define GLX_PBUFFER_BIT 0x00000004
@@ -219,7 +222,6 @@
 
 // (EXT 028) GLX_EXT_visual_info
 
-
 #define GLX_X_VISUAL_TYPE_EXT 0x22
 #define GLX_TRANSPARENT_TYPE_EXT 0x23
 #define GLX_TRANSPARENT_INDEX_VALUE_EXT 0x24
@@ -263,7 +265,6 @@
 #define glXFreeContextEXT System::GlXFreeContextEXT
 
 // (EXT 328) GLX_EXT_fbconfig_packed_float
-
 
 #define GLX_RGBA_UNSIGNED_FLOAT_BIT_EXT 0x00000008
 #define GLX_RGBA_UNSIGNED_FLOAT_TYPE_EXT 0x20B1
@@ -352,7 +353,7 @@
 #define glXGetVisualFromFBConfigSGIX System::GlXGetVisualFromFBConfigSGIX
 #define glXGetFBConfigFromVisualSGIX System::GlXGetFBConfigFromVisualSGIX
 
- // (SGIX 50) GLX_SGIX_pbuffer
+// (SGIX 50) GLX_SGIX_pbuffer
 
 #define GLX_PBUFFER_BIT_SGIX 0x00000004
 #define GLX_BUFFER_CLOBBER_MASK_SGIX 0x08000000
@@ -406,7 +407,7 @@
 #define glXBindSwapBarrierSGIX System::GlXBindSwapBarrierSGIX
 #define glXQueryMaxSwapBarriersSGIX System::GlXQueryMaxSwapBarriersSGIX
 
- // (SGIX 234) GLX_SGIX_visual_select_group
+// (SGIX 234) GLX_SGIX_visual_select_group
 
 #define GLX_VISUAL_SELECT_GROUP_SGIX 0x8028
 
@@ -432,4 +433,4 @@
 #define glXQueryHyperpipeConfigSGIX System::GlXQueryHyperpipeConfigSGIX
 #define glXQueryHyperpipeNetworkSGIX System::GlXQueryHyperpipeNetworkSGIX
 
-#endif // SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H

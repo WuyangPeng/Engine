@@ -69,7 +69,7 @@ ForEachMacros:
   - BOOST_FOREACH
 IncludeBlocks: Preserve
 IncludeCategories:  
-  - Regex:           '^"Flags/.*'
+  - Regex:           '^"(Flags|Fwd|Using)/.*'
     Priority:        2	
   - Regex:           '^"(Data|Detail)/.*'
     Priority:        3  

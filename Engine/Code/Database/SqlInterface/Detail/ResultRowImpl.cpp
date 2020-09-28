@@ -7,7 +7,7 @@
 #include "Database/DatabaseExport.h"
 
 #include "ResultRowImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 #include "CoreTools/ClassInvariant/Noexcept.h"
@@ -30,102 +30,91 @@ Database::ResultRowImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Database, ResultRowImpl)
 
-void Database::ResultRowImpl
-	::Print(std::ostream& os) const
+void Database::ResultRowImpl ::Print([[maybe_unused]] std::ostream& os) const
 {
 	DATABASE_CLASS_IS_VALID_9;
 
 	CoreTools::DoNothing();
-
-	SYSTEM_UNUSED_ARG(os);
+ 
 }
 
-int Database::ResultRowImpl
-	::GetIntValue(int pos) const
+int Database::ResultRowImpl ::GetIntValue([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetIntValue未实现。"s));
 }
 
-uint32_t Database::ResultRowImpl
-	::GetUIntValue(int pos) const
+uint32_t Database::ResultRowImpl ::GetUIntValue([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetUIntValue未实现。"s));
 }
 
-int64_t Database::ResultRowImpl
-	::GetInt64Value(int pos) const
+int64_t Database::ResultRowImpl ::GetInt64Value([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetInt64Value未实现。"s));
 }
 
-uint64_t Database::ResultRowImpl
-	::GetUInt64Value(int pos) const
+uint64_t Database::ResultRowImpl ::GetUInt64Value([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetUInt64Value未实现。"s));
 }
 
-float Database::ResultRowImpl
-	::GetFloatValue(int pos) const
+float Database::ResultRowImpl ::GetFloatValue([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetFloatValue未实现。"s));
 }
 
-double Database::ResultRowImpl
-	::GetDoubleValue(int pos) const
+double Database::ResultRowImpl ::GetDoubleValue([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetDoubleValue未实现。"s));
 }
 
-bool Database::ResultRowImpl
-	::GetBoolValue(int pos) const
+bool Database::ResultRowImpl ::GetBoolValue([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetBoolValue未实现。"s));
 }
 
-string Database::ResultRowImpl
-	::GetStringValue(int pos) const
+string Database::ResultRowImpl ::GetStringValue([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetStringValue未实现。"s));
 }
 
-wstring Database::ResultRowImpl
-	::GetWStringValue(int pos) const
+wstring Database::ResultRowImpl ::GetWStringValue([[maybe_unused]] int pos) const
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	SYSTEM_UNUSED_ARG(pos);
+ 
 
 	THROW_EXCEPTION(SYSTEM_TEXT("ResultRowImpl的GetWStringValue未实现。"s));
 }

@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ControllerInterface.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -36,26 +36,24 @@ Rendering::ControllerInterface
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ControllerInterface)
 
-void Rendering::ControllerInterface
-	::AttachController( ControllerInterfaceSmartPointer  controller )
+void Rendering::ControllerInterface ::AttachController([[maybe_unused]] ControllerInterfaceSmartPointer controller)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(false,"Controller禁止调用AttachController");
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(controller);
+	 
 }
 
-void Rendering::ControllerInterface
-	::DetachController( ControllerInterfaceSmartPointer  controller )
+void Rendering::ControllerInterface ::DetachController([[maybe_unused]] ControllerInterfaceSmartPointer controller)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(false,"Controller禁止调用DetachController");
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(controller);
+	 
 }
 
 int Rendering::ControllerInterface

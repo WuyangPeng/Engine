@@ -12,7 +12,7 @@
 #include "Mathematics/Query/Query3Int64.h"
 #include "Mathematics/Query/Query3Integer.h"
 #include "Mathematics/Query/Query3Rational.h"
-#include "System/Helper/UnusedMacro.h"
+
 
 #include <stack>
 
@@ -249,7 +249,7 @@ Mathematics::ConvexHull3<Real>
 {
     bool loaded = Load(filename);
     MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);
-    SYSTEM_UNUSED_ARG(loaded);
+    
 }
 
 template <typename Real>
@@ -426,7 +426,7 @@ bool Mathematics::ConvexHull3<Real>
         tri = next;
     }
     MATHEMATICS_ASSERTION_0(v1 == saveV0, "Expecting initial vertex\n");
-    SYSTEM_UNUSED_ARG(saveV0);
+    
 
     // Establish adjacency links between first/last triangles.
     saveTri->Adj[0] = tri;

@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "MiddleLayerInterface.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/ClassInvariant/NoexceptDetail.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
@@ -39,12 +39,11 @@ Framework::MiddleLayerInterface& Framework::MiddleLayerInterface
  
 CLASS_INVARIANT_STUB_DEFINE(Framework, MiddleLayerInterface)
 
-bool Framework::MiddleLayerInterface
-	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::MiddleLayerInterface ::PreCreate([[maybe_unused]] const EnvironmentDirectory& environmentDirectory)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(environmentDirectory);
+ 
 
 	CoreTools::DoNothing();
 
@@ -97,12 +96,11 @@ void Framework::MiddleLayerInterface
 	CoreTools::DoNothing();
 }
 
-bool Framework::MiddleLayerInterface
-	::Idle(int64_t timeDelta)
+bool Framework::MiddleLayerInterface ::Idle([[maybe_unused]] int64_t timeDelta)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(timeDelta);
+ 
 
 	CoreTools::DoNothing();
 
@@ -119,131 +117,108 @@ bool Framework::MiddleLayerInterface
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::Move(const WindowPoint& point)
+bool Framework::MiddleLayerInterface ::Move([[maybe_unused]] const WindowPoint& point)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(point);
+	 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
+bool Framework::MiddleLayerInterface ::Resize([[maybe_unused]] WindowDisplay windowDisplay, [[maybe_unused]] const WindowSize& size)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(windowDisplay);
-	SYSTEM_UNUSED_ARG(size);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::KeyUp(int key, const WindowPoint& point)
+bool Framework::MiddleLayerInterface ::KeyUp([[maybe_unused]] int key, [[maybe_unused]] const WindowPoint& point)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(point);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::KeyDown(int key, const WindowPoint& point)
+bool Framework::MiddleLayerInterface ::KeyDown([[maybe_unused]] int key, [[maybe_unused]] const WindowPoint& point)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(point);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::SpecialKeyUp(int key, const WindowPoint& point)
+bool Framework::MiddleLayerInterface ::SpecialKeyUp([[maybe_unused]] int key, [[maybe_unused]] const WindowPoint& point)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
-
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(point);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::SpecialKeyDown(int key, const WindowPoint& point)
+bool Framework::MiddleLayerInterface ::SpecialKeyDown([[maybe_unused]] int key, [[maybe_unused]] const WindowPoint& point)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(point);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::PassiveMotion(const WindowPoint& point)
+bool Framework::MiddleLayerInterface ::PassiveMotion([[maybe_unused]] const WindowPoint& point)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(point);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::MiddleLayerInterface ::Motion([[maybe_unused]] const WindowPoint& point, [[maybe_unused]] const VirtualKeysTypes& virtualKeys)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(point);
-	SYSTEM_UNUSED_ARG(virtualKeys);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::MiddleLayerInterface ::MouseWheel([[maybe_unused]] int delta, [[maybe_unused]] const WindowPoint& point, [[maybe_unused]] const VirtualKeysTypes& virtualKeys)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(delta);
-	SYSTEM_UNUSED_ARG(point);
-	SYSTEM_UNUSED_ARG(virtualKeys);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Framework::MiddleLayerInterface
-	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::MiddleLayerInterface ::MouseClick([[maybe_unused]] MouseButtonsTypes button, [[maybe_unused]] MouseStateTypes state, [[maybe_unused]] const WindowPoint& point, [[maybe_unused]] const VirtualKeysTypes& virtualKeys)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
-
-	SYSTEM_UNUSED_ARG(button);
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(point);
-	SYSTEM_UNUSED_ARG(virtualKeys);
+ 
 
 	CoreTools::DoNothing();
 

@@ -9,7 +9,7 @@
 #include "OpenGLGlutCallBackInterface.h"
 #include "System/OpenGL/OpenGLAPI.h"
 #include "System/OpenGL/OpenGLGlut.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/ClassInvariant/NoexceptDetail.h"
@@ -133,8 +133,7 @@ bool Framework::OpenGLGlutCallBackInterface
 	return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::SpecialKeysDown(int key, int xCoordinate, int yCoordinate)
+bool Framework::OpenGLGlutCallBackInterface ::SpecialKeysDown([[maybe_unused]] int key, [[maybe_unused]] int xCoordinate, [[maybe_unused]] int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -142,15 +141,12 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
+ 
 
 	return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::KeyboardDown(int key, int xCoordinate, int yCoordinate)
+bool Framework::OpenGLGlutCallBackInterface ::KeyboardDown([[maybe_unused]] int key, [[maybe_unused]] int xCoordinate, [[maybe_unused]] int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -158,15 +154,12 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
+ 
 
 	return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::SpecialKeysUp(int key, int xCoordinate, int yCoordinate)
+bool Framework::OpenGLGlutCallBackInterface ::SpecialKeysUp([[maybe_unused]] int key, [[maybe_unused]] int xCoordinate, [[maybe_unused]] int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -174,15 +167,12 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
+ 
 
 	return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::KeyboardUp(int key, int xCoordinate, int yCoordinate)
+bool Framework::OpenGLGlutCallBackInterface ::KeyboardUp([[maybe_unused]] int key, [[maybe_unused]] int xCoordinate, [[maybe_unused]] int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -190,15 +180,12 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(key);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
+	 
 
 	return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::PassiveMotion(int xCoordinate, int yCoordinate)
+bool Framework::OpenGLGlutCallBackInterface ::PassiveMotion([[maybe_unused]] int xCoordinate, [[maybe_unused]] int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -206,14 +193,12 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
+ 
 
 	return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::MouseClick(int button, int state, int xCoordinate, int yCoordinate)
+bool Framework::OpenGLGlutCallBackInterface ::MouseClick([[maybe_unused]] int button, [[maybe_unused]] int state, [[maybe_unused]] int xCoordinate, [[maybe_unused]] int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -221,16 +206,12 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(button);
-	SYSTEM_UNUSED_ARG(state);
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
+ 
 
 	return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::MotionFunction(int xCoordinate, int yCoordinate)
+bool Framework::OpenGLGlutCallBackInterface ::MotionFunction([[maybe_unused]] int xCoordinate, [[maybe_unused]] int yCoordinate)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -238,9 +219,7 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(xCoordinate);
-	SYSTEM_UNUSED_ARG(yCoordinate);
-
+ 
 	return true;
 }
 
@@ -270,12 +249,11 @@ bool Framework::OpenGLGlutCallBackInterface
 	return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface
-	::ProcessMenu(int menuValue)
+bool Framework::OpenGLGlutCallBackInterface ::ProcessMenu([[maybe_unused]] int menuValue)
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	SYSTEM_UNUSED_ARG(menuValue);
+ 
 
 	CoreTools::DoNothing();
 

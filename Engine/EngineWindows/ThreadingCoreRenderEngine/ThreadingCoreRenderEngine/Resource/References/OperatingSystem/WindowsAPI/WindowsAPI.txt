@@ -1,8 +1,9 @@
-�ο����ס�����ϵͳ��WindowsAPI
+参考文献·操作系统·WindowsAPI
  
-1.	Windows �������
-2.  Windows ���ı��
-3.  Windows ϵͳ���
-4.  �������Windows����ϵͳ
-5.  ������������ϵͳ
-6.  �����ϵͳ��ϵͳ�ܹ������ϵͳ�ĸ߶ȼ���
+1.	Windows 程序设计
+2.  Windows 核心编程
+3.  Windows 系统编程
+4.  深入解析Windows操作系统
+5.  深入理解计算机系统
+6.  计算机系统：系统架构与操作系统的高度集成
+7.	Visual C++ 入门经典 

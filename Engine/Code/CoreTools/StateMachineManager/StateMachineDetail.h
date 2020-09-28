@@ -12,7 +12,7 @@
 #include "EventDispatcherDetail.h"
 #include "StateMachineRowDetail.h"
 #include "DefaultEventDispatcherDetail.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 
@@ -71,8 +71,8 @@ typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMach
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(eventType);
-	SYSTEM_UNUSED_ARG(state);
+	
+	
 
 	return GetStateType();
 }

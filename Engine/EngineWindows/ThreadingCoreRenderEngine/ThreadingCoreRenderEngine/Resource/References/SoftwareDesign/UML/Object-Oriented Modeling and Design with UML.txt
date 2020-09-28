@@ -1,12 +1,12 @@
-UMLÃæÏò¶ÔÏó½¨Ä£ÓëÉè¼Æ£¨Object-Oriented Modeling and Design with UML£©
-£¨µÚ2°æ£©
+UMLé¢å‘å¯¹è±¡å»ºæ¨¡ä¸è®¾è®¡ï¼ˆObject-Oriented Modeling and Design with UMLï¼‰
+ï¼ˆç¬¬2ç‰ˆï¼‰
 
-¹Ù·½ÍøÕ¾£º
-http://www.modelsoftcorp.com £¨ÒÑÊ§Ğ§£©
+å®˜æ–¹ç½‘ç«™ï¼š
+http://www.modelsoftcorp.com ï¼ˆå·²å¤±æ•ˆï¼‰
 
-¡ï¡î
-×÷Õß£ºMichael Blaha¡¢James Rumbaugh
+â˜…â˜†
+ä½œè€…ï¼šMichael Blahaã€James Rumbaugh
 
-ÖªÊ¶µã 
-1.	UML»ù´¡ÖªÊ¶¡£ 
-1.	UML»ù´¡ÖªÊ¶Á·Ï°¡£ 
+çŸ¥è¯†ç‚¹ 
+1.	UMLåŸºç¡€çŸ¥è¯†ã€‚ 
+1.	UMLåŸºç¡€çŸ¥è¯†ç»ƒä¹ ã€‚ 

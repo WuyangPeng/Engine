@@ -13,7 +13,7 @@
 #include "ObjectRegister.h"
 #include "BufferSource.h"
 #include "BufferTargetDetail.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -139,15 +139,13 @@ void CoreTools::Object
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::Object
-	::Link(ObjectLink& source)
+void CoreTools::Object ::Link([[maybe_unused]] ObjectLink& source)
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
 	// Object没有Object*成员。
 
-	SYSTEM_UNUSED_ARG(source);
-
+ 
 	CoreTools::DoNothing();
 }
 

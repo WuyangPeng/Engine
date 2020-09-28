@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ClodMeshVertexEdgeTriangleGraph.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/DataTypes/MinHeapDetail.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -127,9 +127,9 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 
 			const auto record = m_Heap.Remove();
 			auto ekey = record.GetGenerator();
-			auto metric = record.GetValue();
+                        [[maybe_unused]] auto metric = record.GetValue();
 
-			SYSTEM_UNUSED_ARG(metric);
+			 
 
 			RENDERING_ASSERTION_2(Mathematics::FloatMath::Approximate(metric, -1.0f, 1e-8f), "该试题应该为-1。\n");
 

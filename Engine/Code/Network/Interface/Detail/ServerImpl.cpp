@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h" 
 
 #include "ServerImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Network/Interface/BaseMainManager.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
@@ -48,13 +48,11 @@ bool Network::ServerImpl
 		   HandleData(m_SocketManagerWeakPtr.lock()) && ImmediatelySend();
 }
 
-void Network::ServerImpl
-	::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::ServerImpl ::Send([[maybe_unused]] uint64_t socketID, [[maybe_unused]] const MessageInterfaceSharedPtr& message)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(socketID);
-	SYSTEM_UNUSED_ARG(message);
+ 
 
 	CoreTools::DoNothing();
 }
@@ -67,20 +65,18 @@ bool Network::ServerImpl
 	return true;
 }
 
-bool Network::ServerImpl
-	::HandleConnections(const SocketManagerSharedPtr& socketManager)
+bool Network::ServerImpl ::HandleConnections([[maybe_unused]] const SocketManagerSharedPtr& socketManager)
 {
-	SYSTEM_UNUSED_ARG(socketManager);
+ 
 
 	CoreTools::DoNothing();
 
 	return true;
 }
 
-bool Network::ServerImpl
-	::HandleData(const SocketManagerSharedPtr& socketManager)
+bool Network::ServerImpl ::HandleData([[maybe_unused]] const SocketManagerSharedPtr& socketManager)
 {
-	SYSTEM_UNUSED_ARG(socketManager);
+	 
 
 	CoreTools::DoNothing();
 
@@ -95,35 +91,30 @@ bool Network::ServerImpl
 	return true;
 }
 
-bool Network::ServerImpl
-	::ImmediatelySend(uint64_t socketID)
+bool Network::ServerImpl ::ImmediatelySend([[maybe_unused]] uint64_t socketID)
 {
     CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(socketID);
-
+ 
 	return true;
 }
 
-void Network::ServerImpl
-	::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::ServerImpl ::AsyncSend([[maybe_unused]] uint64_t socketID, [[maybe_unused]] const MessageInterfaceSharedPtr& message)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(socketID);
-	SYSTEM_UNUSED_ARG(message);
+	 
 }
 
-void Network::ServerImpl
-	::ImmediatelyAsyncSend(uint64_t socketID)
+void Network::ServerImpl ::ImmediatelyAsyncSend([[maybe_unused]] uint64_t socketID)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(socketID);
+ 
 }
 
 Network::SocketManagerSharedPtr Network::ServerImpl
@@ -143,14 +134,13 @@ Network::SocketManagerSharedPtr Network::ServerImpl
 	}
 }
 
-bool Network::ServerImpl
-	::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
+bool Network::ServerImpl ::EventFunction([[maybe_unused]] const CoreTools::CallbackParameters& callbackParameters)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
 	CoreTools::DoNothing();
 
-	SYSTEM_UNUSED_ARG(callbackParameters);
+ 
 
 	return true;
 }

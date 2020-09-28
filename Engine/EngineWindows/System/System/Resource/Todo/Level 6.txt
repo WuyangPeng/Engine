@@ -1,8 +1,8 @@
 TODO Level 6
 
-0.2.0.0 
+0.5.1.0
 
-1.£¨Helper£©Ôö¼Ó×¢ÊÍÒÔÇåÎúµÄÁË½âGLºêËùÊ¹ÓÃµÄº¯Êı£¬²¢Ê¹ÓÃÃ¶¾Ù½øĞĞ·â×°¡£
-2.£¨Helper£©GLºêÔö¼ÓÊ¹ÓÃº¯ÊıµÄ×¢ÊÍ£¬ÒÔ±êÃ÷ÓÃÍ¾¡£
-3.£¨SystemOutput£©Íê³ÉSystemOutputÄ£¿é·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºOutputDebugString¡¢MessageBoxSelection¡£
-4.£¨SystemOutput£©Íê³ÉSystemOutputÄ£¿é·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºLanguageIDData¡¢MessageBoxFlagsDataÏà¹ØµÄÃ¶¾Ù¶¨Òå¡£
+1.ï¼ˆHelperï¼‰å¢åŠ æ³¨é‡Šä»¥æ¸…æ™°çš„äº†è§£GLå®æ‰€ä½¿ç”¨çš„å‡½æ•°ï¼Œå¹¶ä½¿ç”¨æšä¸¾è¿›è¡Œå°è£…ã€‚
+2.ï¼ˆHelperï¼‰GLå®å¢åŠ ä½¿ç”¨å‡½æ•°çš„æ³¨é‡Šï¼Œä»¥æ ‡æ˜ç”¨é€”ã€‚
+3.ï¼ˆSystemOutputï¼‰å®ŒæˆSystemOutputæ¨¡å—éWindowså¹³å°çš„å®ç°ï¼šOutputDebugStringã€MessageBoxSelectionã€‚
+4.ï¼ˆSystemOutputï¼‰å®ŒæˆSystemOutputæ¨¡å—éWindowså¹³å°çš„å®ç°ï¼šLanguageIDDataã€MessageBoxFlagsDataç›¸å…³çš„æšä¸¾å®šä¹‰ã€‚

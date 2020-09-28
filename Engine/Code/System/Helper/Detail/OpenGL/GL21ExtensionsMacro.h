@@ -1,13 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:38)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:46)
 
 #ifndef SYSTEM_HELPER_GL_21_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_21_EXTENSIONS_MACRO_H
 
-#include "System/Helper/GLExtensionsMacro.h" 
+#include "System/Helper/GLExtensionsMacro.h"
 
 #define GL_CURRENT_RASTER_SECONDARY_COLOR 0x845F
 #define GL_PIXEL_PACK_BUFFER 0x88EB
@@ -40,4 +43,4 @@
 #define glUniformMatrix3x4fv System::GlUniformMatrix3x4fv
 #define glUniformMatrix4x3fv System::GlUniformMatrix4x3fv
 
-#endif // SYSTEM_HELPER_GL_21_EXTENSIONS_MACRO_H
+#endif  // SYSTEM_HELPER_GL_21_EXTENSIONS_MACRO_H

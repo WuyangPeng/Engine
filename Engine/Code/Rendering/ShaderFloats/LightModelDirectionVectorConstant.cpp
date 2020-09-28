@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "LightModelDirectionVectorConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -34,8 +34,7 @@ Rendering::LightModelDirectionVectorConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightModelDirectionVectorConstant)
 
-void Rendering::LightModelDirectionVectorConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::LightModelDirectionVectorConstant ::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -44,8 +43,7 @@ void Rendering::LightModelDirectionVectorConstant
         const auto modelDirectionVector = worldInverseMatrix * light->GetDirectionVector();
 
 	SetRegister(0, modelDirectionVector);
-
-	SYSTEM_UNUSED_ARG(camera);
+ 
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::LightModelDirectionVectorConstant

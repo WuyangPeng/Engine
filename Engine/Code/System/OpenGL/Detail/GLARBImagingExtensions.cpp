@@ -1,28 +1,30 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.0 (2020/01/02 15:45)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/25 18:56)
 
 #include "System/SystemExport.h"
 
 #include "GLARBImagingExtensions.h"
 #include "GLUtility.h"
-#include "System/OpenGL/OpenGLUtility.h"
-#include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/Helper/Detail/OpenGL/GLPluginMacro.h"
+#include "System/OpenGL/Flags/GLExtensionsFlags.h"
+#include "System/OpenGL/OpenGLUtility.h"
 
 // 成像子集 (GL_ARB_imaging)
 
 namespace System
 {
-	ExistsOpenGLExtensions g_ExistsGlArbImaging{ ExistsOpenGLExtensions::Unknown };
+    auto g_ExistsGlArbImaging = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System
-	::IsExistsGlArbImaging() noexcept
+System::ExistsOpenGLExtensions System::IsExistsGlArbImaging() noexcept
 {
-	return g_ExistsGlArbImaging;
+    return g_ExistsGlArbImaging;
 }
 
 System::PgglBlendColor System::gglBlendColor{ nullptr };
@@ -60,267 +62,232 @@ System::PgglMinmax System::gglMinmax{ nullptr };
 System::PgglResetHistogram System::gglResetHistogram{ nullptr };
 System::PgglResetMinmax System::gglResetMinmax{ nullptr };
 
-void System
-	::GlBlendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha) noexcept
+void System::GlBlendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha) noexcept
 {
-	SYSTEM_BODY_4(gglBlendColor, red, green, blue, alpha);
+    SYSTEM_BODY_4(gglBlendColor, red, green, blue, alpha);
 }
 
-void System
-	::GlBlendEquation(GLenum mode) noexcept
+void System::GlBlendEquation(GLenum mode) noexcept
 {
-	SYSTEM_BODY_1(gglBlendEquation, mode);
+    SYSTEM_BODY_1(gglBlendEquation, mode);
 }
 
-void System
-	::GlColorTable(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid* table) noexcept
+void System::GlColorTable(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid* table) noexcept
 {
-	SYSTEM_BODY_6(gglColorTable, target, internalFormat, width, format, type, table);
+    SYSTEM_BODY_6(gglColorTable, target, internalFormat, width, format, type, table);
 }
 
-void System
-	::GlColorTableParameterfv(GLenum target, GLenum name, const GLfloat* param) noexcept
+void System::GlColorTableParameterfv(GLenum target, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_3(gglColorTableParameterfv, target, name, param);
+    SYSTEM_BODY_3(gglColorTableParameterfv, target, name, param);
 }
 
-void System
-	::GlColorTableParameteriv(GLenum target, GLenum name, const GLint* param) noexcept
+void System::GlColorTableParameteriv(GLenum target, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_BODY_3(gglColorTableParameteriv, target, name, param);
+    SYSTEM_BODY_3(gglColorTableParameteriv, target, name, param);
 }
 
-void System
-	::GlCopyColorTable(GLenum target, GLenum internalFormat, GLint x, GLint y, GLsizei width) noexcept
+void System::GlCopyColorTable(GLenum target, GLenum internalFormat, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_BODY_5(gglCopyColorTable, target, internalFormat, x, y, width);
+    SYSTEM_BODY_5(gglCopyColorTable, target, internalFormat, x, y, width);
 }
 
-void System
-	::GlGetColorTable(GLenum target, GLenum format, GLenum type, GLvoid* table) noexcept
+void System::GlGetColorTable(GLenum target, GLenum format, GLenum type, GLvoid* table) noexcept
 {
-	SYSTEM_BODY_4(gglGetColorTable, target, format, type, table);
+    SYSTEM_BODY_4(gglGetColorTable, target, format, type, table);
 }
 
-void System
-	::GlGetColorTableParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
+void System::GlGetColorTableParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_3(gglGetColorTableParameterfv, target, name, param);
+    SYSTEM_BODY_3(gglGetColorTableParameterfv, target, name, param);
 }
 
-void System
-	::GlGetColorTableParameteriv(GLenum target, GLenum name, GLint* param) noexcept
+void System::GlGetColorTableParameteriv(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_3(gglGetColorTableParameteriv, target, name, param);
+    SYSTEM_BODY_3(gglGetColorTableParameteriv, target, name, param);
 }
 
-void System
-	::GlColorSubTable(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid* data) noexcept
+void System::GlColorSubTable(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid* data) noexcept
 {
-	SYSTEM_BODY_6(gglColorSubTable, target, start, count, format, type, data);
+    SYSTEM_BODY_6(gglColorSubTable, target, start, count, format, type, data);
 }
 
-void System
-	::GlCopyColorSubTable(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width) noexcept
+void System::GlCopyColorSubTable(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_BODY_5(gglCopyColorSubTable, target, start, x, y, width);
+    SYSTEM_BODY_5(gglCopyColorSubTable, target, start, x, y, width);
 }
 
-void System
-	::GlConvolutionFilter1D(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid* image) noexcept
+void System::GlConvolutionFilter1D(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid* image) noexcept
 {
-	SYSTEM_BODY_6(gglConvolutionFilter1D, target, internalFormat, width, format, type, image);
+    SYSTEM_BODY_6(gglConvolutionFilter1D, target, internalFormat, width, format, type, image);
 }
 
-void System
-	::GlConvolutionFilter2D(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* image) noexcept
+void System::GlConvolutionFilter2D(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* image) noexcept
 {
-	SYSTEM_BODY_7(gglConvolutionFilter2D, target, internalFormat, width, height, format, type, image);
+    SYSTEM_BODY_7(gglConvolutionFilter2D, target, internalFormat, width, height, format, type, image);
 }
 
-void System
-	::GlConvolutionParameterf(GLenum target, GLenum name, GLfloat param) noexcept
+void System::GlConvolutionParameterf(GLenum target, GLenum name, GLfloat param) noexcept
 {
-	SYSTEM_BODY_3(gglConvolutionParameterf, target, name, param);
+    SYSTEM_BODY_3(gglConvolutionParameterf, target, name, param);
 }
 
-void System
-	::GlConvolutionParameterfv(GLenum target, GLenum name, const GLfloat* param) noexcept
+void System::GlConvolutionParameterfv(GLenum target, GLenum name, const GLfloat* param) noexcept
 {
-	SYSTEM_BODY_3(gglConvolutionParameterfv, target, name, param);
+    SYSTEM_BODY_3(gglConvolutionParameterfv, target, name, param);
 }
 
-void System
-	::GlConvolutionParameteri(GLenum target, GLenum name, GLint param) noexcept
+void System::GlConvolutionParameteri(GLenum target, GLenum name, GLint param) noexcept
 {
-	SYSTEM_BODY_3(gglConvolutionParameteri, target, name, param);
+    SYSTEM_BODY_3(gglConvolutionParameteri, target, name, param);
 }
 
-void System
-	::GlConvolutionParameteriv(GLenum target, GLenum name, const GLint* param) noexcept
+void System::GlConvolutionParameteriv(GLenum target, GLenum name, const GLint* param) noexcept
 {
-	SYSTEM_BODY_3(gglConvolutionParameteriv, target, name, param);
+    SYSTEM_BODY_3(gglConvolutionParameteriv, target, name, param);
 }
 
-void System
-	::GlCopyConvolutionFilter1D(GLenum target, GLenum internalFormat, GLint x, GLint y, GLsizei width) noexcept
+void System::GlCopyConvolutionFilter1D(GLenum target, GLenum internalFormat, GLint x, GLint y, GLsizei width) noexcept
 {
-	SYSTEM_BODY_5(gglCopyConvolutionFilter1D, target, internalFormat, x, y, width);
+    SYSTEM_BODY_5(gglCopyConvolutionFilter1D, target, internalFormat, x, y, width);
 }
 
-void System
-	::GlCopyConvolutionFilter2D(GLenum target, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
+void System::GlCopyConvolutionFilter2D(GLenum target, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-	SYSTEM_BODY_6(gglCopyConvolutionFilter2D, target, internalFormat, x, y, width, height);
+    SYSTEM_BODY_6(gglCopyConvolutionFilter2D, target, internalFormat, x, y, width, height);
 }
 
-void System
-	::GlGetConvolutionFilter(GLenum target, GLenum format, GLenum type, GLvoid* image) noexcept
+void System::GlGetConvolutionFilter(GLenum target, GLenum format, GLenum type, GLvoid* image) noexcept
 {
-	SYSTEM_BODY_4(gglGetConvolutionFilter, target, format, type, image);
+    SYSTEM_BODY_4(gglGetConvolutionFilter, target, format, type, image);
 }
 
-void System
-	::GlGetConvolutionParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
+void System::GlGetConvolutionParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_3(gglGetConvolutionParameterfv, target, name, param);
+    SYSTEM_BODY_3(gglGetConvolutionParameterfv, target, name, param);
 }
 
-void System
-	::GlGetConvolutionParameteriv(GLenum target, GLenum name, GLint* param) noexcept
+void System::GlGetConvolutionParameteriv(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_3(gglGetConvolutionParameteriv, target, name, param);
+    SYSTEM_BODY_3(gglGetConvolutionParameteriv, target, name, param);
 }
 
-void System
-	::GlGetSeparableFilter(GLenum target, GLenum format, GLenum type, GLvoid* row, GLvoid* column, GLvoid* span) noexcept
+void System::GlGetSeparableFilter(GLenum target, GLenum format, GLenum type, GLvoid* row, GLvoid* column, GLvoid* span) noexcept
 {
-	SYSTEM_BODY_6(gglGetSeparableFilter, target, format, type, row, column, span);
+    SYSTEM_BODY_6(gglGetSeparableFilter, target, format, type, row, column, span);
 }
 
-void System
-	::GlSeparableFilter2D(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* row, const GLvoid* column) noexcept
+void System::GlSeparableFilter2D(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* row, const GLvoid* column) noexcept
 {
-	SYSTEM_BODY_8(gglSeparableFilter2D, target, internalFormat, width, height, format, type, row, column);
+    SYSTEM_BODY_8(gglSeparableFilter2D, target, internalFormat, width, height, format, type, row, column);
 }
 
-void System
-	::GlGetHistogram(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid* values) noexcept
+void System::GlGetHistogram(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid* values) noexcept
 {
-	SYSTEM_BODY_5(gglGetHistogram, target, reset, format, type, values);
+    SYSTEM_BODY_5(gglGetHistogram, target, reset, format, type, values);
 }
 
-void System
-	::GlGetHistogramParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
+void System::GlGetHistogramParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_3(gglGetHistogramParameterfv, target, name, param);
+    SYSTEM_BODY_3(gglGetHistogramParameterfv, target, name, param);
 }
 
-void System
-	::GlGetHistogramParameteriv(GLenum target, GLenum name, GLint* param) noexcept
+void System::GlGetHistogramParameteriv(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_3(gglGetHistogramParameteriv, target, name, param);
+    SYSTEM_BODY_3(gglGetHistogramParameteriv, target, name, param);
 }
 
-void System
-	::GlGetMinmax(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid* values) noexcept
+void System::GlGetMinmax(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid* values) noexcept
 {
-	SYSTEM_BODY_5(gglGetMinmax, target, reset, format, type, values);
+    SYSTEM_BODY_5(gglGetMinmax, target, reset, format, type, values);
 }
 
-void System
-	::GlGetMinmaxParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
+void System::GlGetMinmaxParameterfv(GLenum target, GLenum name, GLfloat* param) noexcept
 {
-	SYSTEM_BODY_3(gglGetMinmaxParameterfv, target, name, param);
+    SYSTEM_BODY_3(gglGetMinmaxParameterfv, target, name, param);
 }
 
-void System
-	::GlGetMinmaxParameteriv(GLenum target, GLenum name, GLint* param) noexcept
+void System::GlGetMinmaxParameteriv(GLenum target, GLenum name, GLint* param) noexcept
 {
-	SYSTEM_BODY_3(gglGetMinmaxParameteriv, target, name, param);
+    SYSTEM_BODY_3(gglGetMinmaxParameteriv, target, name, param);
 }
 
-void System
-	::GlHistogram(GLenum target, GLsizei width, GLenum internalFormat, GLboolean sink) noexcept
+void System::GlHistogram(GLenum target, GLsizei width, GLenum internalFormat, GLboolean sink) noexcept
 {
-	SYSTEM_BODY_4(gglHistogram, target, width, internalFormat, sink);
+    SYSTEM_BODY_4(gglHistogram, target, width, internalFormat, sink);
 }
 
-void System
-	::GlMinmax(GLenum target, GLenum internalFormat, GLboolean sink) noexcept
+void System::GlMinmax(GLenum target, GLenum internalFormat, GLboolean sink) noexcept
 {
-	SYSTEM_BODY_3(gglMinmax, target, internalFormat, sink);
+    SYSTEM_BODY_3(gglMinmax, target, internalFormat, sink);
 }
 
-void System
-	::GlResetHistogram(GLenum target) noexcept
+void System::GlResetHistogram(GLenum target) noexcept
 {
-	SYSTEM_BODY_1(gglResetHistogram, target);
+    SYSTEM_BODY_1(gglResetHistogram, target);
 }
 
-void System
-	::GlResetMinmax(GLenum target) noexcept
+void System::GlResetMinmax(GLenum target) noexcept
 {
-	SYSTEM_BODY_1(gglResetMinmax, target);
+    SYSTEM_BODY_1(gglResetMinmax, target);
 }
 
-void System
-	::InitGlArbImaging() noexcept
+void System::InitGlArbImaging()
 {
-	if (IsOpenGLSupportsExtension("GL_ARB_imaging"))
-	{
-		g_ExistsGlArbImaging = ExistsOpenGLExtensions::Exists;
+    if (IsOpenGLSupportsExtension("GL_ARB_imaging"))
+    {
+        g_ExistsGlArbImaging = ExistsOpenGLExtensions::Exists;
 
-		// GL_SGI_color_table
-		SYSTEM_GET_FUNCTION(gglColorTableParameterfv);
-		SYSTEM_GET_FUNCTION(gglColorTableParameteriv);
-		SYSTEM_GET_FUNCTION(gglCopyColorTable);
+        // GL_SGI_color_table
+        SYSTEM_GET_FUNCTION(gglColorTableParameterfv);
+        SYSTEM_GET_FUNCTION(gglColorTableParameteriv);
+        SYSTEM_GET_FUNCTION(gglCopyColorTable);
 
-		// GL_SGI_color_table and GL_EXT_paletted_texture
-		SYSTEM_GET_FUNCTION(gglColorTable);
-		SYSTEM_GET_FUNCTION(gglGetColorTable);
-		SYSTEM_GET_FUNCTION(gglGetColorTableParameterfv);
-		SYSTEM_GET_FUNCTION(gglGetColorTableParameteriv);
+        // GL_SGI_color_table and GL_EXT_paletted_texture
+        SYSTEM_GET_FUNCTION(gglColorTable);
+        SYSTEM_GET_FUNCTION(gglGetColorTable);
+        SYSTEM_GET_FUNCTION(gglGetColorTableParameterfv);
+        SYSTEM_GET_FUNCTION(gglGetColorTableParameteriv);
 
-		// GL_EXT_color_subtable
-		SYSTEM_GET_FUNCTION(gglColorSubTable);
-		SYSTEM_GET_FUNCTION(gglCopyColorSubTable);
+        // GL_EXT_color_subtable
+        SYSTEM_GET_FUNCTION(gglColorSubTable);
+        SYSTEM_GET_FUNCTION(gglCopyColorSubTable);
 
-		// GL_EXT_convolution
-		SYSTEM_GET_FUNCTION(gglConvolutionFilter1D);
-		SYSTEM_GET_FUNCTION(gglConvolutionFilter2D);
-		SYSTEM_GET_FUNCTION(gglConvolutionParameterf);
-		SYSTEM_GET_FUNCTION(gglConvolutionParameterfv);
-		SYSTEM_GET_FUNCTION(gglConvolutionParameteri);
-		SYSTEM_GET_FUNCTION(gglConvolutionParameteriv);
-		SYSTEM_GET_FUNCTION(gglCopyConvolutionFilter1D);
-		SYSTEM_GET_FUNCTION(gglCopyConvolutionFilter2D);
-		SYSTEM_GET_FUNCTION(gglGetConvolutionFilter);
-		SYSTEM_GET_FUNCTION(gglGetConvolutionParameterfv);
-		SYSTEM_GET_FUNCTION(gglGetConvolutionParameteriv);
-		SYSTEM_GET_FUNCTION(gglGetSeparableFilter);
-		SYSTEM_GET_FUNCTION(gglSeparableFilter2D);
+        // GL_EXT_convolution
+        SYSTEM_GET_FUNCTION(gglConvolutionFilter1D);
+        SYSTEM_GET_FUNCTION(gglConvolutionFilter2D);
+        SYSTEM_GET_FUNCTION(gglConvolutionParameterf);
+        SYSTEM_GET_FUNCTION(gglConvolutionParameterfv);
+        SYSTEM_GET_FUNCTION(gglConvolutionParameteri);
+        SYSTEM_GET_FUNCTION(gglConvolutionParameteriv);
+        SYSTEM_GET_FUNCTION(gglCopyConvolutionFilter1D);
+        SYSTEM_GET_FUNCTION(gglCopyConvolutionFilter2D);
+        SYSTEM_GET_FUNCTION(gglGetConvolutionFilter);
+        SYSTEM_GET_FUNCTION(gglGetConvolutionParameterfv);
+        SYSTEM_GET_FUNCTION(gglGetConvolutionParameteriv);
+        SYSTEM_GET_FUNCTION(gglGetSeparableFilter);
+        SYSTEM_GET_FUNCTION(gglSeparableFilter2D);
 
-		// GL_EXT_histogram
-		SYSTEM_GET_FUNCTION(gglGetHistogram);
-		SYSTEM_GET_FUNCTION(gglGetHistogramParameterfv);
-		SYSTEM_GET_FUNCTION(gglGetHistogramParameteriv);
-		SYSTEM_GET_FUNCTION(gglGetMinmax);
-		SYSTEM_GET_FUNCTION(gglGetMinmaxParameterfv);
-		SYSTEM_GET_FUNCTION(gglGetMinmaxParameteriv);
-		SYSTEM_GET_FUNCTION(gglHistogram);
-		SYSTEM_GET_FUNCTION(gglMinmax);
-		SYSTEM_GET_FUNCTION(gglResetHistogram);
-		SYSTEM_GET_FUNCTION(gglResetMinmax);
+        // GL_EXT_histogram
+        SYSTEM_GET_FUNCTION(gglGetHistogram);
+        SYSTEM_GET_FUNCTION(gglGetHistogramParameterfv);
+        SYSTEM_GET_FUNCTION(gglGetHistogramParameteriv);
+        SYSTEM_GET_FUNCTION(gglGetMinmax);
+        SYSTEM_GET_FUNCTION(gglGetMinmaxParameterfv);
+        SYSTEM_GET_FUNCTION(gglGetMinmaxParameteriv);
+        SYSTEM_GET_FUNCTION(gglHistogram);
+        SYSTEM_GET_FUNCTION(gglMinmax);
+        SYSTEM_GET_FUNCTION(gglResetHistogram);
+        SYSTEM_GET_FUNCTION(gglResetMinmax);
 
-		// GL_EXT_blend_color
-		SYSTEM_GET_FUNCTION(gglBlendColor);
+        // GL_EXT_blend_color
+        SYSTEM_GET_FUNCTION(gglBlendColor);
 
-		// GL_EXT_blend_minmax
-		SYSTEM_GET_FUNCTION(gglBlendEquation);
-	}
-	else
-	{
-		g_ExistsGlArbImaging = ExistsOpenGLExtensions::NotExist;
-	}
+        // GL_EXT_blend_minmax
+        SYSTEM_GET_FUNCTION(gglBlendEquation);
+    }
+    else
+    {
+        g_ExistsGlArbImaging = ExistsOpenGLExtensions::NotExist;
+    }
 }

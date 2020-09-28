@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:35)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:39)
 
 #ifndef SYSTEM_HELPER_GL_32_FLAGS_H
 #define SYSTEM_HELPER_GL_32_FLAGS_H
@@ -11,13 +14,13 @@
 
 namespace System
 {
-	enum class GL32Flags
-	{
-		GetInteger64i_v,
-		GetBufferParameteri64v,
-		ProgramParameteri,
-		FramebufferTexture,
-	};
+    enum class GL32Flags
+    {
+        GetInteger64i_v,
+        GetBufferParameteri64v,
+        ProgramParameteri,
+        FramebufferTexture,
+    };
 }
 
-#endif // SYSTEM_HELPER_GL_32_FLAGS_H
+#endif  // SYSTEM_HELPER_GL_32_FLAGS_H

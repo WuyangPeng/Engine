@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "NullSockAcceptor.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -28,22 +28,20 @@ Network::NullSockAcceptor ::NullSockAcceptor() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockAcceptor)
 
-bool Network::NullSockAcceptor ::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept
+bool Network::NullSockAcceptor ::Accept([[maybe_unused]] const SockStreamSharedPtr& sockStream, [[maybe_unused]] const SockAddressSharedPtr& sockAddress) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(sockStream);
-    SYSTEM_UNUSED_ARG(sockAddress);
+ 
 
     return false;
 }
 
-void Network::NullSockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) noexcept
+void Network::NullSockAcceptor ::AsyncAccept([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const SockStreamSharedPtr& sockStream) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(eventInterface);
-    SYSTEM_UNUSED_ARG(sockStream);
+  
 }
 
 bool Network::NullSockAcceptor ::EnableNonBlock() noexcept
@@ -53,20 +51,18 @@ bool Network::NullSockAcceptor ::EnableNonBlock() noexcept
     return false;
 }
 
-void Network::NullSockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept
+void Network::NullSockAcceptor ::AsyncAccept([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const SockStreamSharedPtr& sockStream, [[maybe_unused]] const SockAddressSharedPtr& sockAddress) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(eventInterface);
-    SYSTEM_UNUSED_ARG(sockStream);
-    SYSTEM_UNUSED_ARG(sockAddress);
+    
 }
 
-bool Network::NullSockAcceptor ::Accept(const SockStreamSharedPtr& sockStream) noexcept
+bool Network::NullSockAcceptor ::Accept([[maybe_unused]] const SockStreamSharedPtr& sockStream) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(sockStream);
+ 
 
     return false;
 }

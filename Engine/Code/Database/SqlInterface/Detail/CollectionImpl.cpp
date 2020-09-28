@@ -7,7 +7,7 @@
 #include "Database/DatabaseExport.h"
 
 #include "CollectionImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
@@ -26,13 +26,11 @@ Database::CollectionImpl ::~CollectionImpl()
 
 CLASS_INVARIANT_STUB_DEFINE(Database, CollectionImpl)
 
-Database::CollectionImpl::ResultPtr Database::CollectionImpl ::ExecuteDoc(const string& findStatement, const BindStatementType& bindStatement, int limitStatement)
+Database::CollectionImpl::ResultPtr Database::CollectionImpl ::ExecuteDoc([[maybe_unused]] const string& findStatement, [[maybe_unused]] const BindStatementType& bindStatement, [[maybe_unused]] int limitStatement)
 {
     DATABASE_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(findStatement);
-    SYSTEM_UNUSED_ARG(bindStatement);
-    SYSTEM_UNUSED_ARG(limitStatement);
+ 
 
     THROW_EXCEPTION(SYSTEM_TEXT("CollectionImplŒ¥ µœ÷Execute"s));
 }

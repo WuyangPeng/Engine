@@ -44,8 +44,8 @@ System::WindowWParam Framework::WindowMessageLoopImpl
 {
 	while (System::GetSystemMessage(&m_Msg))
 	{
-		System::TranslateSystemMessage(&m_Msg);
-		System::DispatchSystemMessage(&m_Msg);
+            [[maybe_unused]] const auto result1 = System::TranslateSystemMessage(&m_Msg);
+            [[maybe_unused]] const auto result2 = System::DispatchSystemMessage(&m_Msg);
 	}
 
 	return m_Msg.wParam;
@@ -90,8 +90,8 @@ bool Framework::WindowMessageLoopImpl
 	System::WindowHAccel accel{ nullptr };
 	if (!System::SystemTranslateAccelerator(hwnd, accel, &m_Msg))
 	{
-		System::TranslateSystemMessage(&m_Msg);
-		System::DispatchSystemMessage(&m_Msg);
+            [[maybe_unused]] const auto result1 = System::TranslateSystemMessage(&m_Msg);
+            [[maybe_unused]] const auto result2 = System::DispatchSystemMessage(&m_Msg);
 	}
 
 	return true;

@@ -1,24 +1,27 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 10:12)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/20 13:58)
 
 #ifndef SYSTEM_DLL_LIB_H
 #define SYSTEM_DLL_LIB_H
 
 #include "Helper/UserMacro.h"
 
-#if defined(TCRE_USE_MSVC) 
+#if defined(TCRE_USE_MSVC)
 
-	#pragma comment(lib,"Ws2_32.lib")
-	#pragma comment(lib,"Dbghelp.lib")
-	#pragma comment(lib,"Wininet.lib")		
+    #pragma comment(lib, "Ws2_32.lib")
+    #pragma comment(lib, "Dbghelp.lib")
+    #pragma comment(lib, "Wininet.lib")
 
-	#if !defined(SYSTEM_USE_GLUT) || defined(BUILDING_SYSTEM_STATIC)
-		#pragma comment(lib,"opengl32.lib")
-	#endif // SYSTEM_USE_GLUT
+    #if !defined(SYSTEM_USE_GLUT) || defined(BUILDING_SYSTEM_STATIC)
+        #pragma comment(lib, "opengl32.lib")
+    #endif  // SYSTEM_USE_GLUT
 
-#endif // TCRE_USE_MSVC
+#endif  // TCRE_USE_MSVC
 
-#endif // SYSTEM_DLL_LIB_H
+#endif  // SYSTEM_DLL_LIB_H

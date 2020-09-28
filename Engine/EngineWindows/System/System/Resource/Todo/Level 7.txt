@@ -1,8 +1,8 @@
 TODO Level 7
 
-0.2.0.0
+0.5.1.0
 
-1.£¨Helper£©Ê¹ÓÃ×îĞÂ°æ±¾µÄboost¿âÔö¼ÓCompiler¡¢PlatformºÍStdLibÀïµÄÉèÖÃ
-2.£¨MemoryTools£©Íê³ÉMemoryTools·ÇWindowsÆ½Ì¨µÄÊµÏÖ£ºVirtualTools¡¢ViewOfFile¡¢MemoryHelper¡¢GlobalTools¡¢LocalTools¡£
-3.£¨Threading£©Íê³ÉThreading·ÇWindowsÆ½Ì¨µÄÊµÏÖ£º CriticalSection¡¢Semaphore¡¢Event¡¢Mutex¡¢SlimReaderWriter¡¢ConditionVariable¡¢InitOnce¡¢WaitableTimer¡¢SyncTools¡¢Interlocked¡¢
-			   Thread¡¢ThreadTools¡¢ThreadLocalStorage¡¢Process¡¢ProcessTools¡¢HandleTools¡¢ThreadPool¡¢OverlappedTools¡¢FiberTools¡£
+1.ï¼ˆHelperï¼‰ä½¿ç”¨æœ€æ–°ç‰ˆæœ¬çš„booståº“å¢åŠ Compilerã€Platformå’ŒStdLibé‡Œçš„è®¾ç½®ã€‚
+2.ï¼ˆMemoryToolsï¼‰å®ŒæˆMemoryToolséWindowså¹³å°çš„å®ç°ï¼šVirtualToolsã€ViewOfFileã€MemoryHelperã€GlobalToolsã€LocalToolsã€‚
+3.ï¼ˆThreadingï¼‰å®ŒæˆThreadingéWindowså¹³å°çš„å®ç°ï¼š CriticalSectionã€Semaphoreã€Eventã€Mutexã€SlimReaderWriterã€ConditionVariableã€InitOnceã€WaitableTimerã€SyncToolsã€Interlockedã€
+			   Threadã€ThreadToolsã€ThreadLocalStorageã€Processã€ProcessToolsã€HandleToolsã€ThreadPoolã€OverlappedToolsã€FiberToolsã€‚

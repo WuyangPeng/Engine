@@ -1,0 +1,7 @@
+网络虚拟环境图形架构设计 （Networked graphics building networked games and virtual environments）
+
+★★★
+作者： Anthony Steed、Manuel Fradinho Oliveira 
+
+知识点 
+1.	网络基础知识。  

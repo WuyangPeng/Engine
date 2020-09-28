@@ -8,15 +8,13 @@
 
 #include "Dx9Texture2D.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/ClassInvariant/Noexcept.h"
 
-Rendering::Dx9Texture2D
-	::Dx9Texture2D( Renderer* renderer, const Texture2D* texture ) 
+Rendering::Dx9Texture2D ::Dx9Texture2D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture2D* texture)
 {
     CoreTools::DoNothing();
-	SYSTEM_UNUSED_ARG(renderer);
-	SYSTEM_UNUSED_ARG(texture);
+	 
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
 
@@ -105,8 +103,7 @@ Rendering::Dx9Texture2D
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9Texture2D)
 
-void Rendering::Dx9Texture2D
-	::Enable( Renderer* renderer, int textureUnit )
+void Rendering::Dx9Texture2D ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -118,12 +115,10 @@ void Rendering::Dx9Texture2D
 	 RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to enable 2D texture, unit %d: %s\n",
 	 textureUnit, DXGetErrorString(hr));*/
 
-	SYSTEM_UNUSED_ARG(textureUnit);
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
-void Rendering::Dx9Texture2D
-	::Disable( Renderer* renderer, int textureUnit )
+void Rendering::Dx9Texture2D ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -147,12 +142,11 @@ void Rendering::Dx9Texture2D
 	RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to disable 2D texture, unit %d: %s\n",
 	textureUnit, DXGetErrorString(hr));*/
 
-	SYSTEM_UNUSED_ARG(textureUnit);
-	SYSTEM_UNUSED_ARG(renderer);
+ 
 }
 
 void* Rendering::Dx9Texture2D
-	::Lock( int level, BufferLocking mode )
+	::Lock([[maybe_unused]] int level,[[maybe_unused]] BufferLocking mode )
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -165,14 +159,12 @@ void* Rendering::Dx9Texture2D
 	 level, DXGetErrorString(hr));
 	 return rect.pBits;*/
 
-	SYSTEM_UNUSED_ARG(level);
-	SYSTEM_UNUSED_ARG(mode);
+ 
 
 	return nullptr;
 }
 
-void Rendering::Dx9Texture2D
-	::Unlock( int level )
+void Rendering::Dx9Texture2D ::Unlock([[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DoNothing();
@@ -182,7 +174,7 @@ void Rendering::Dx9Texture2D
 	 RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to unlock level %u of 2D texture: %s\n",
 	 level, DXGetErrorString(hr));*/
 
-	SYSTEM_UNUSED_ARG(level);
+	 
 }
 
 System::OpenGLUInt Rendering::Dx9Texture2D

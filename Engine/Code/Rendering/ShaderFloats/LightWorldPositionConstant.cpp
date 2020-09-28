@@ -8,7 +8,7 @@
 
 #include "LightWorldPositionConstant.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
@@ -31,7 +31,7 @@ Rendering::LightWorldPositionConstant ::LightWorldPositionConstant(const LightSm
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, LightWorldPositionConstant)
 
-void Rendering::LightWorldPositionConstant ::Update(const Visual* visual, const Camera* camera)
+void Rendering::LightWorldPositionConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -40,8 +40,7 @@ void Rendering::LightWorldPositionConstant ::Update(const Visual* visual, const 
 
     SetRegister(0, worldPosition);
 
-    SYSTEM_UNUSED_ARG(camera);
-    SYSTEM_UNUSED_ARG(visual);
+ 
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::LightWorldPositionConstant ::Clone() const

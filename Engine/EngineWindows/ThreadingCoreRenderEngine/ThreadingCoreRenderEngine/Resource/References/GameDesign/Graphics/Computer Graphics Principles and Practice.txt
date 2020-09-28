@@ -1,0 +1,11 @@
+计算机图形学原理及实践——C语言描述  （Computer Graphics Principles and Practice）
+（第2版）
+
+○
+作者： James D.Foley、Andries van.Dam、Steven K.Feine、John F.Hughes
+
+知识点 
+1.	计算机图形学基础知识。
+
+代码 
+1.	SRGP图形软件包。

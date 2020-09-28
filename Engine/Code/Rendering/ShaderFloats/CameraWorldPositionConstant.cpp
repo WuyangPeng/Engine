@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "CameraWorldPositionConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Mathematics/Algebra/APointDetail.h"
@@ -40,8 +40,7 @@ Rendering::CameraWorldPositionConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, CameraWorldPositionConstant)
 
-void Rendering::CameraWorldPositionConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::CameraWorldPositionConstant ::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	
@@ -49,7 +48,7 @@ void Rendering::CameraWorldPositionConstant
 
 	SetRegister(0, worldPosition);
 
-	SYSTEM_UNUSED_ARG(visual);
+	 
 }
 
 void Rendering::CameraWorldPositionConstant

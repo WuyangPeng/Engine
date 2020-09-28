@@ -8,7 +8,7 @@
 
 #include "MemoryManager.h"
 #include "Detail/MemoryManagerImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Threading/ScopedMutex.h"
@@ -46,11 +46,10 @@ void CoreTools::MemoryManager
 	sm_MemoryManager.reset();
 }
 
-CoreTools::MemoryManager
-	::MemoryManager(Allocator allocator, Deallocator deallocator, MemoryManagerCreate memoryManagerCreate)
-	:m_Impl{ make_shared<ImplType>(allocator,deallocator) }
+CoreTools::MemoryManager ::MemoryManager(Allocator allocator, Deallocator deallocator, [[maybe_unused]] MemoryManagerCreate memoryManagerCreate)
+    : m_Impl{ make_shared<ImplType>(allocator, deallocator) }
 {
-	SYSTEM_UNUSED_ARG(memoryManagerCreate);
+	 
 
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -66,25 +65,23 @@ CoreTools::MemoryManager
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, MemoryManager)
 
 // static
-void* CoreTools::MemoryManager
-	::DefaultAllocator(size_t bytesNumber, const FunctionDescribed& functionDescribed) noexcept
+void* CoreTools::MemoryManager ::DefaultAllocator([[maybe_unused]] size_t bytesNumber, [[maybe_unused]] const FunctionDescribed& functionDescribed) noexcept
 {
  
 
-	SYSTEM_UNUSED_ARG(functionDescribed);
+	 
 
 	return System::MallocMemory(bytesNumber);
 }
 
 // static
-void CoreTools::MemoryManager
-	::DefaultDeallocator(const void* memBlock, const FunctionDescribed& functionDescribed) noexcept
+void CoreTools::MemoryManager ::DefaultDeallocator(const void* memBlock, [[maybe_unused]] const FunctionDescribed& functionDescribed) noexcept
 {
  
 
 	System::FreeMemory(const_cast<void*>(memBlock));
 
-	SYSTEM_UNUSED_ARG(functionDescribed);
+ 
 }
 
 void CoreTools::MemoryManager

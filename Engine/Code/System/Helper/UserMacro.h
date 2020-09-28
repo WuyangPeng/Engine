@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/16 23:23)
+//	引擎版本：0.5.1.0 (2020/09/21 11:19)
 
 #ifndef SYSTEM_HELPER_USER_MACRO_H
 #define SYSTEM_HELPER_USER_MACRO_H
@@ -83,7 +83,7 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 
 // 是否编译为静态库
 #ifdef BUILDING_STATIC
-    #define BUILDING_SYSTEM_STATIC
+    #define BUILDING_SYSTEM_STATIC static_cast<void>(0)
 #endif  // BUILDING_STATIC
 
 #include "PragmaWarning/EngineDisable.h"

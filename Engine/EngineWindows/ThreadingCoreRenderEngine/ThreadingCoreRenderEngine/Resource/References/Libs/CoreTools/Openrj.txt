@@ -1,10 +1,10 @@
 Openrj
  
-�ٷ���վ 
+官方网站 
 http://www.openrj.org/
 
-��
+★
 
-֪ʶ�� 
-1.	Record-Jar�ṹ���ı��ļ���ʽ�Ķ�ȡ����
+知识点 
+1.	Record-Jar结构化文本文件格式的读取器。
 

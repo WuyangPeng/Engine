@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "MaterialDiffuseConstant.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -34,16 +34,14 @@ Rendering::MaterialDiffuseConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,MaterialDiffuseConstant)
 
-void Rendering::MaterialDiffuseConstant
-	::Update(const Visual* visual, const Camera* camera)
+void Rendering::MaterialDiffuseConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	const auto colour = GetMaterial()->GetDiffuse();
 	SetRegister(0, colour);
 
-	SYSTEM_UNUSED_ARG(visual);
-	SYSTEM_UNUSED_ARG(camera);
+ 
 }
 
 Rendering::ShaderFloatSmartPointer Rendering::MaterialDiffuseConstant

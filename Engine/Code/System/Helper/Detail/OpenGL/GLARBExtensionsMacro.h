@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.2.0.0 (2020/05/07 23:40)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.0 (2020/09/21 17:48)
 
 #ifndef SYSTEM_HELPER_GL_ARB_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_ARB_EXTENSIONS_MACRO_H
@@ -718,7 +721,7 @@
 #define GL_DEPTH32F_STENCIL8 0x8CAD
 #define GL_FLOAT_32_UNSIGNED_INT_24_8_REV 0x8DAD
 
-// (ARB 45) GL_ARB_framebuffer_object 
+// (ARB 45) GL_ARB_framebuffer_object
 
 #define GL_INVALID_FRAMEBUFFER_OPERATION 0x0506
 #define GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING 0x8210
@@ -881,7 +884,7 @@
 
 #define glTexBufferARB System::GlTexBufferARB
 
-// (ARB 52) GL_ARB_texture_compression_rgtc 
+// (ARB 52) GL_ARB_texture_compression_rgtc
 
 #define GL_COMPRESSED_RED_RGTC1 0x8DBB
 #define GL_COMPRESSED_SIGNED_RED_RGTC1 0x8DBC
@@ -973,11 +976,11 @@
 
 #define glCopyBufferSubData System::GlCopyBufferSubData
 
-// (ARB 61) GL_ARB_depth_clamp 
+// (ARB 61) GL_ARB_depth_clamp
 
 #define GL_DEPTH_CLAMP 0x864F
 
-// (ARB 62) GL_ARB_draw_elements_base_vertex 
+// (ARB 62) GL_ARB_draw_elements_base_vertex
 
 #define glDrawElementsBaseVertex System::GlDrawElementsBaseVertex
 #define glDrawElementsInstancedBaseVertex System::GlDrawElementsInstancedBaseVertex
@@ -993,11 +996,11 @@
 
 #define glProvokingVertex System::GlProvokingVertex
 
-// (ARB 65) GL_ARB_seamless_cube_map 
+// (ARB 65) GL_ARB_seamless_cube_map
 
 #define GL_TEXTURE_CUBE_MAP_SEAMLESS 0x884F
 
-// (ARB 66) GL_ARB_sync 
+// (ARB 66) GL_ARB_sync
 
 #define GL_SYNC_FLUSH_COMMANDS_BIT 0x00000001
 #define GL_MAX_SERVER_WAIT_TIMEOUT 0x9111
@@ -1052,11 +1055,11 @@
 #define glTexImage2DMultisample System::GlTexImage2DMultisample
 #define glTexImage3DMultisample System::GlTexImage3DMultisample
 
-// (ARB 68) GL_ARB_vertex_array_bgra 
+// (ARB 68) GL_ARB_vertex_array_bgra
 
 #define GL_BGRA 0x80E1
 
-// (ARB 69) GL_ARB_draw_buffers_blend 
+// (ARB 69) GL_ARB_draw_buffers_blend
 
 #define glBlendEquationSeparateiARB System::GlBlendEquationSeparateiARB
 #define glBlendEquationiARB System::GlBlendEquationiARB
@@ -1070,7 +1073,7 @@
 
 #define glMinSampleShadingARB System::GlMinSampleShadingARB
 
-// (ARB 71) GL_ARB_texture_cube_map_array 
+// (ARB 71) GL_ARB_texture_cube_map_array
 
 #define GL_TEXTURE_CUBE_MAP_ARRAY_ARB 0x9009
 #define GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_ARB 0x900A
@@ -1080,13 +1083,13 @@
 #define GL_INT_SAMPLER_CUBE_MAP_ARRAY_ARB 0x900E
 #define GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_ARB 0x900F
 
-// (ARB 72) GL_ARB_texture_gather 
+// (ARB 72) GL_ARB_texture_gather
 
 #define GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB 0x8E5E
 #define GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB 0x8E5F
 #define GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB 0x8F9F
 
-// (ARB 76) GL_ARB_shading_language_include 
+// (ARB 76) GL_ARB_shading_language_include
 
 #define GL_SHADER_INCLUDE_ARB 0x8DAE
 #define GL_NAMED_STRING_LENGTH_ARB 0x8DE9
@@ -1116,11 +1119,11 @@
 #define glBindFragDataLocationIndexed System::GlBindFragDataLocationIndexed
 #define glGetFragDataIndex System::GlGetFragDataIndex
 
-// (ARB 80) GL_ARB_occlusion_query2 
+// (ARB 80) GL_ARB_occlusion_query2
 
 #define GL_ANY_SAMPLES_PASSED 0x8C2F
 
-// (ARB 81) GL_ARB_sampler_objects 
+// (ARB 81) GL_ARB_sampler_objects
 
 #define GL_SAMPLER_BINDING 0x8919
 
@@ -1139,11 +1142,11 @@
 #define glSamplerParameteri System::GlSamplerParameteri
 #define glSamplerParameteriv System::GlSamplerParameteriv
 
-// (ARB 83) GL_ARB_texture_rgb10_a2ui 
+// (ARB 83) GL_ARB_texture_rgb10_a2ui
 
 #define GL_RGB10_A2UI 0x906F
 
-// (ARB 84) GL_ARB_texture_swizzle 
+// (ARB 84) GL_ARB_texture_swizzle
 
 #define GL_TEXTURE_SWIZZLE_R 0x8E42
 #define GL_TEXTURE_SWIZZLE_G 0x8E43
@@ -1151,7 +1154,7 @@
 #define GL_TEXTURE_SWIZZLE_A 0x8E45
 #define GL_TEXTURE_SWIZZLE_RGBA 0x8E46
 
-// (ARB 85) GL_ARB_timer_query 
+// (ARB 85) GL_ARB_timer_query
 
 #define GL_TIME_ELAPSED 0x88BF
 #define GL_TIMESTAMP 0x8E28
@@ -1160,7 +1163,7 @@
 #define glGetQueryObjectui64v System::GlGetQueryObjectui64v
 #define glQueryCounter System::GlQueryCounter
 
-// (ARB 86) GL_ARB_vertex_type_2_10_10_10_rev 
+// (ARB 86) GL_ARB_vertex_type_2_10_10_10_rev
 
 #define GL_UNSIGNED_INT_2_10_10_10_REV 0x8368
 #define GL_INT_2_10_10_10_REV 0x8D9F
@@ -1204,7 +1207,7 @@
 #define glVertexP4ui System::GlVertexP4ui
 #define glVertexP4uiv System::GlVertexP4uiv
 
-// (ARB 87) GL_ARB_draw_indirect 
+// (ARB 87) GL_ARB_draw_indirect
 
 #define GL_DRAW_INDIRECT_BUFFER 0x8F3F
 #define GL_DRAW_INDIRECT_BUFFER_BINDING 0x8F43
@@ -1212,7 +1215,7 @@
 #define glDrawArraysIndirect System::GlDrawArraysIndirect
 #define glDrawElementsIndirect System::GlDrawElementsIndirect
 
-// (ARB 88) GL_ARB_gpu_shader5 
+// (ARB 88) GL_ARB_gpu_shader5
 
 #define GL_GEOMETRY_SHADER_INVOCATIONS 0x887F
 #define GL_MAX_GEOMETRY_SHADER_INVOCATIONS 0x8E5A
@@ -1255,7 +1258,7 @@
 #define glUniformMatrix4x2dv System::GlUniformMatrix4x2dv
 #define glUniformMatrix4x3dv System::GlUniformMatrix4x3dv
 
-// (ARB 90) GL_ARB_shader_subroutine 
+// (ARB 90) GL_ARB_shader_subroutine
 
 #define GL_ACTIVE_SUBROUTINES 0x8DE5
 #define GL_ACTIVE_SUBROUTINE_UNIFORMS 0x8DE6
@@ -1536,7 +1539,7 @@
 #define glDrawElementsInstancedBaseInstance System::GlDrawElementsInstancedBaseInstance
 #define glDrawElementsInstancedBaseVertexBaseInstance System::GlDrawElementsInstancedBaseVertexBaseInstance
 
-// (ARB 109) GL_ARB_transform_feedback_instanced 
+// (ARB 109) GL_ARB_transform_feedback_instanced
 
 #define glDrawTransformFeedbackInstanced System::GlDrawTransformFeedbackInstanced
 #define glDrawTransformFeedbackStreamInstanced System::GlDrawTransformFeedbackStreamInstanced
@@ -2228,7 +2231,7 @@
 
 #define glTextureBarrier System::GlTextureBarrier
 
-// (ARB 171) GL_ARB_pipeline_statistics_query 
+// (ARB 171) GL_ARB_pipeline_statistics_query
 
 #define GL_VERTICES_SUBMITTED_ARB 0x82EE
 #define GL_PRIMITIVES_SUBMITTED_ARB 0x82EF
@@ -2242,17 +2245,16 @@
 #define GL_CLIPPING_OUTPUT_PRIMITIVES_ARB 0x82F7
 #define GL_GEOMETRY_SHADER_INVOCATIONS 0x887F
 
-// (ARB 172) GL_ARB_sparse_buffer 
+// (ARB 172) GL_ARB_sparse_buffer
 
 #define GL_SPARSE_STORAGE_BIT_ARB 0x0400
 #define GL_SPARSE_BUFFER_PAGE_SIZE_ARB 0x82F8
 
 #define glBufferPageCommitmentARB System::GlBufferPageCommitmentARB
 
-// (ARB 173) GL_ARB_transform_feedback_overflow_query 
+// (ARB 173) GL_ARB_transform_feedback_overflow_query
 
 #define GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB 0x82EC
 #define GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB 0x82ED
 
-#endif // SYSTEM_HELPER_GL_ARB_EXTENSIONS_MACRO_H
-
+#endif  // SYSTEM_HELPER_GL_ARB_EXTENSIONS_MACRO_H

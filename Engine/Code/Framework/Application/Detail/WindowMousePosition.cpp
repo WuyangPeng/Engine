@@ -37,7 +37,7 @@ const Framework::WindowPoint Framework::WindowMousePosition
 
 	System::WindowPoint point{ };
 
-	System::GetCursorClientPos(m_Hwnd, point);
+[[maybe_unused]] const auto result = System::GetCursorClientPos(m_Hwnd, point);
 
 	return WindowPoint{ point };
 }
@@ -49,7 +49,7 @@ void Framework::WindowMousePosition
 
 	System::WindowPoint point{ windowPoint.GetWindowX(), windowPoint.GetWindowY() };
 
-	System::SetCursorClientPos(m_Hwnd, point);
+	[[maybe_unused]] const auto result = System::SetCursorClientPos(m_Hwnd, point);
 }
 
 Framework::WindowMousePosition::MousePositionImplSharedPtr Framework::WindowMousePosition

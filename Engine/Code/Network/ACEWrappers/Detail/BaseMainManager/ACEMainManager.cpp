@@ -9,7 +9,7 @@
 #ifdef NETWORK_USE_ACE
 
 #include "ACEMainManager.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
@@ -33,13 +33,11 @@ void Network::ACEMainManager
 	NETWORK_CLASS_IS_VALID_9;
 }
 
-int Network::ACEMainManager
-	::run_i(int argc, ACE_TCHAR** argv)
+int Network::ACEMainManager ::run_i([[maybe_unused]] int argc, [[maybe_unused]] ACE_TCHAR** argv)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	SYSTEM_UNUSED_ARG(argc);
-	SYSTEM_UNUSED_ARG(argv);
+	 
 
 	return 0;
 }

@@ -1,0 +1,8 @@
+具体数学（Concrete Mathematic）
+（第1版）
+
+☆
+作者：Ronald L. Graham、Donald E. Knuth、Oren Patashnik
+
+知识点 
+1.	具体数学基础知识。  

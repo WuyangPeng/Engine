@@ -8,17 +8,15 @@
 
 #include "Dx9VertexBuffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "Rendering/Resources/VertexBuffer.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
 #include "CoreTools/ClassInvariant/Noexcept.h"
 
-Rendering::Dx9VertexBuffer
-    ::Dx9VertexBuffer (Renderer* renderer,const VertexBuffer* vertexBuffer) noexcept
-    :ParentType{}
+Rendering::Dx9VertexBuffer ::Dx9VertexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const VertexBuffer* vertexBuffer) noexcept
+    : ParentType{}
 {
-    SYSTEM_UNUSED_ARG(renderer);
-    SYSTEM_UNUSED_ARG(vertexBuffer);
+ 
     
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -38,33 +36,26 @@ bool Rendering::Dx9VertexBuffer
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::Dx9VertexBuffer
-    ::Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset)
+void Rendering::Dx9VertexBuffer ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int vertexSize, [[maybe_unused]] unsigned int streamIndex, [[maybe_unused]] unsigned int offset)
 {
     RENDERING_CLASS_IS_VALID_1;   
  
     CoreTools::DoNothing();
-    SYSTEM_UNUSED_ARG(renderer);
-    SYSTEM_UNUSED_ARG(vertexSize);
-    SYSTEM_UNUSED_ARG(streamIndex);
-    SYSTEM_UNUSED_ARG(offset);
+     
 }
 
-void Rendering::Dx9VertexBuffer
-    ::Disable (Renderer* renderer, unsigned int streamIndex)
+void Rendering::Dx9VertexBuffer ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int streamIndex)
 {
     RENDERING_CLASS_IS_VALID_1; 
     CoreTools::DoNothing();
-    SYSTEM_UNUSED_ARG(renderer);
-    SYSTEM_UNUSED_ARG(streamIndex);
+  
 }
 
-void* Rendering::Dx9VertexBuffer
-    ::Lock (BufferLocking mode)
+void* Rendering::Dx9VertexBuffer ::Lock([[maybe_unused]] BufferLocking mode)
 {
     RENDERING_CLASS_IS_VALID_1;
     CoreTools::DoNothing();
-    SYSTEM_UNUSED_ARG(mode);
+ 
 
 	return nullptr;
 }

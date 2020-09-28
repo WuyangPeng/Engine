@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "ClientImpl.h"
-#include "System/Helper/UnusedMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/Interface/SockAddress.h"
@@ -53,21 +53,20 @@ void Network::ClientImpl ::AsyncReceive()
     CoreTools::DoNothing();
 }
 
-void Network::ClientImpl ::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::ClientImpl ::Send([[maybe_unused]] uint64_t socketID, [[maybe_unused]] const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(socketID);
-    SYSTEM_UNUSED_ARG(message);
+ 
 
     CoreTools::DoNothing();
 }
 
-void Network::ClientImpl ::ImmediatelySend(uint64_t socketID)
+void Network::ClientImpl ::ImmediatelySend([[maybe_unused]] uint64_t socketID)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(socketID);
+   
 
     CoreTools::DoNothing();
 }
@@ -86,21 +85,20 @@ Network::ConfigurationStrategy Network::ClientImpl ::GetConfigurationStrategy() 
     return m_ConfigurationStrategy;
 }
 
-void Network::ClientImpl ::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::ClientImpl ::AsyncSend([[maybe_unused]] uint64_t socketID, [[maybe_unused]] const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(socketID);
-    SYSTEM_UNUSED_ARG(message);
+     
 
     CoreTools::DoNothing();
 }
 
-void Network::ClientImpl ::ImmediatelyAsyncSend(uint64_t socketID)
+void Network::ClientImpl ::ImmediatelyAsyncSend([[maybe_unused]] uint64_t socketID)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(socketID);
+     
 
     CoreTools::DoNothing();
 }
@@ -114,11 +112,11 @@ uint64_t Network::ClientImpl ::GetSocketID() const
     return 0;
 }
 
-bool Network::ClientImpl ::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
+bool Network::ClientImpl ::EventFunction([[maybe_unused]] const CoreTools::CallbackParameters& callbackParameters)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    SYSTEM_UNUSED_ARG(callbackParameters);
+ 
 
     CoreTools::DoNothing();
 
