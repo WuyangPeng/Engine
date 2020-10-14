@@ -1,11 +1,4 @@
 TODO Level 6
  
-0.0.2.1
+0.0.5.1
 
-1. （HandleManager）优化句柄管理类。
-2. （ResourceManager）优化资源管理类。
-3. （FrameMemorySystem）优化帧内存系统。
-4. （BitArray）优化位数组类。
-5. （Properties）优化属性类。
-6. （MessageEvent）优化消息事件类。
-7. （StateMachineManager）优化状态机类。

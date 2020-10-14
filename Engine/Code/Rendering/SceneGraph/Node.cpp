@@ -11,7 +11,7 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
@@ -55,8 +55,8 @@ Rendering::Node ::Node(const Node& rhs)
     {
         auto original = rhs.GetConstChild(index);
 
-        SpatialSmartPointer controller = boost::polymorphic_pointer_cast<Spatial>(original->Clone());
-        //.PolymorphicCastObjectSmartPointer<SpatialSmartPointer>()
+        SpatialSharedPtr controller = boost::polymorphic_pointer_cast<Spatial>(original->Clone());
+        //.PolymorphicCastObjectSharedPtr<SpatialSharedPtr>()
 
         controller->SetParent(nullptr);
 
@@ -78,7 +78,7 @@ Rendering::Node& Rendering::Node ::operator=(const Node& rhs)
     {
         auto original = rhs.GetConstChild(index);
 
-        SpatialSmartPointer controller{ boost::polymorphic_pointer_cast<Spatial>(original->Clone())  };
+        SpatialSharedPtr controller{ boost::polymorphic_pointer_cast<Spatial>(original->Clone())  };
 
         controller->SetParent(nullptr);
         AttachChild(controller);
@@ -87,14 +87,33 @@ Rendering::Node& Rendering::Node ::operator=(const Node& rhs)
     return *this;
 }
 
+Rendering::Node ::Node(Node&& rhs) noexcept
+    : ParentType(std::move(rhs)), m_Impl{ std::move(rhs.m_Impl) }
+{
+    
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+Rendering::Node& Rendering::Node ::operator=(Node&& rhs) noexcept
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    ParentType::operator=(std::move(rhs));
+
+     m_Impl = std::move(rhs.m_Impl);
+
+    return *this;
+}
+
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Node)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Node, GetNumChildren, int)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, AttachChild, SpatialSmartPointer , int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Node, DetachChild, SpatialSmartPointer, int)
-    IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, DetachChildAt, int, Rendering::SpatialSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, GetChild, int, Rendering::SpatialSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, AttachChild, SpatialSharedPtr , int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Node, DetachChild, SpatialSharedPtr, int)
+    IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, DetachChildAt, int, Rendering::SpatialSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, GetChild, int, Rendering::SpatialSharedPtr)
 
 bool Rendering::Node ::UpdateWorldData(double applicationTime)
 {
@@ -108,7 +127,7 @@ bool Rendering::Node ::UpdateWorldData(double applicationTime)
     return result;
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, GetConstChild, int, Rendering::ConstSpatialSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, GetConstChild, int, Rendering::ConstSpatialSharedPtr)
 
 void Rendering::Node ::UpdateWorldBound()
 {
@@ -173,7 +192,7 @@ void Rendering::Node ::Save(const CoreTools::BufferTargetSharedPtr& target) cons
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Node ::Link(CoreTools::ObjectLink& source)
+void Rendering::Node ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -189,7 +208,7 @@ void Rendering::Node ::PostLink()
     ParentType::PostLink();
 }
 
-void Rendering::Node ::Load(CoreTools::BufferSource& source)
+void Rendering::Node ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -202,11 +221,11 @@ void Rendering::Node ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::Node::ControllerInterfaceSmartPointer Rendering::Node ::Clone() const
+Rendering::Node::ControllerInterfaceSharedPtr Rendering::Node ::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+    return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 const Rendering::PickRecordContainer Rendering::Node ::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const

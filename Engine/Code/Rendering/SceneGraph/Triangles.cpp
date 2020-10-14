@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
+ 
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
@@ -34,6 +34,7 @@
 
 using std::vector;
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/MemoryTools/SmartPointerManager.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26451)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -58,7 +59,7 @@ Rendering::Triangles ::Triangles(VisualPrimitiveType type)
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Triangles ::Triangles(VisualPrimitiveType type, const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer, const IndexBufferSmartPointer& indexbuffer)
+Rendering::Triangles ::Triangles(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
     : ParentType{ type, vertexformat, vertexbuffer, indexbuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -397,7 +398,7 @@ const auto modelDirectionVector = worldInverseTransform * direction;
                 {
                     PickRecord record;
 
-                    record.SetIntersected(ConstSpatialSmartPointer(this));
+                    record.SetIntersected(ConstSpatialSharedPtr(this));
                     record.SetParameter(intersector.GetLineParameter());
                     record.SetTriangle(i);
                     record.SetBary(intersector.GetTriangleBary0(), intersector.GetTriangleBary1());

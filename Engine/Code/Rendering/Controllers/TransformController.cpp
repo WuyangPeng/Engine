@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -38,11 +38,7 @@ Rendering::TransformController
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::TransformController
-	::~TransformController()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering,TransformController)
 
@@ -96,12 +92,12 @@ bool Rendering::TransformController
 	return false;
 }
 
-Rendering::ControllerInterfaceSmartPointer Rendering::TransformController
+Rendering::ControllerInterfaceSharedPtr Rendering::TransformController
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
  
 Rendering::TransformController
@@ -145,7 +141,7 @@ void Rendering::TransformController
 }
 
 void Rendering::TransformController
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -161,7 +157,7 @@ void Rendering::TransformController
 }
 
 void Rendering::TransformController
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     

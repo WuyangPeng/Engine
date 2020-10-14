@@ -1,0 +1,10 @@
+反模式：危机中软件、架构和项目的重构（Anti Patterns:Refactoring Software,Architectures,and Projects in Crisis）
+
+官方网站：
+http://www.serve.com/hibc/AntiPatterns/index.htm （已失效）
+
+★
+作者：William J.Brown、Raphael C.Malveau
+
+知识点 
+1.	软件开发基础知识。

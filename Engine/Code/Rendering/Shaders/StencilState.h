@@ -12,7 +12,7 @@
 #include "Flags/StencilStateFlags.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 
 RENDERING_EXPORT_SHARED_PTR(StencilStateImpl);
 
@@ -27,7 +27,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE StencilState : public CoreTools::Object
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(StencilState);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(StencilState, DESTRUCTOR_STATEMENT);
 		using ParentType = Object;
 		using CompareMode = StencilStateFlags::CompareMode;
 		using OperationType = StencilStateFlags::OperationType;
@@ -36,13 +36,7 @@ namespace Rendering
 
 	public:
 		StencilState();
-		  ~StencilState();
-
-		   #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-                StencilState(StencilState&&) noexcept = default;
-                  StencilState& operator=(StencilState&&) noexcept = default;
-				  #include STSTEM_WARNING_POP
+ 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -76,7 +70,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(StencilState);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, StencilState);
+	CORE_TOOLS_SHARED_PTR_DECLARE( StencilState);
 }
 
 #endif // RENDERING_SHADERS_STENCIL_STATE_H

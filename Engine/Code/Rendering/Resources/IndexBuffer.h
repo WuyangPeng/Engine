@@ -20,8 +20,8 @@ namespace Rendering
 	public:
 		using ClassType = IndexBuffer;
 		using ParentType = Buffer;
-		using IndexBufferSmartPointer = std::shared_ptr<ClassType>;
-		using ConstIndexBufferSmartPointer = std::shared_ptr<const ClassType>;
+		using IndexBufferSharedPtr = std::shared_ptr<ClassType>;
+		using ConstIndexBufferSharedPtr = std::shared_ptr<const ClassType>;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
@@ -47,7 +47,7 @@ namespace Rendering
 		void SaveToFile(WriteFileManager& outFile) const;
 		void ReadFromFile(ReadFileManager& inFile);
 
-		virtual IndexBufferSmartPointer Clone() const;
+		virtual IndexBufferSharedPtr Clone() const;
 
 		void InitIndexBuffer();
 		void InitIndexBufferInParticles();
@@ -64,7 +64,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(IndexBuffer);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, IndexBuffer); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( IndexBuffer); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_INDEX_BUFFER_H

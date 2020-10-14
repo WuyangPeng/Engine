@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectInterfaceLess.h"
-#include "CoreTools/MemoryTools/ConstFirstSubclassSmartPointerDetail.h"
+ 
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <algorithm>

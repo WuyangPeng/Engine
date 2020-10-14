@@ -8,11 +8,10 @@
 
 #include "LoadTextureDetail.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointerDetail.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointerDetail.h"
+ 
 
 // static
-Rendering::TextureSmartPointer  Rendering::LoadTexture
+Rendering::TextureSharedPtr  Rendering::LoadTexture
       ::LoadFromFile (const System::String& name)
 {
 	ReadFileManager inFile{ name };
@@ -27,19 +26,19 @@ Rendering::TextureSmartPointer  Rendering::LoadTexture
     {
         case TextureFlags::Texture1D:
         {
-			return CreateTexture1DPtr<TextureSmartPointer,1>(data,inFile);			
+			return CreateTexture1DPtr<TextureSharedPtr,1>(data,inFile);			
         }
         case TextureFlags::Texture2D:
         {
-			return CreateTexture2DPtr<TextureSmartPointer,2>(data,inFile);			
+			return CreateTexture2DPtr<TextureSharedPtr,2>(data,inFile);			
         }
         case TextureFlags::Texture3D:
         {
-			return CreateTexture3DPtr<TextureSmartPointer,3>(data,inFile);	
+			return CreateTexture3DPtr<TextureSharedPtr,3>(data,inFile);	
         }
         case TextureFlags::TextureCube:
         {
-			return CreateTextureCubePtr<TextureSmartPointer,2>(data,inFile);	
+			return CreateTextureCubePtr<TextureSharedPtr,2>(data,inFile);	
         }
         default:
         {
@@ -49,7 +48,7 @@ Rendering::TextureSmartPointer  Rendering::LoadTexture
 }
 
 // static
-Rendering::Texture1DSmartPointer Rendering::LoadTexture
+Rendering::Texture1DSharedPtr Rendering::LoadTexture
         ::Load1DFromFile (const System::String& name)
 {
 	ReadFileManager inFile{ name };
@@ -62,7 +61,7 @@ Rendering::Texture1DSmartPointer Rendering::LoadTexture
    
     if (data.GetTextureType() == TextureFlags::Texture1D)
     {	
-		return CreateTexture1DPtr<Texture1DSmartPointer, 1>(data, inFile);
+		return CreateTexture1DPtr<Texture1DSharedPtr, 1>(data, inFile);
 	}
 	else
 	{
@@ -71,7 +70,7 @@ Rendering::Texture1DSmartPointer Rendering::LoadTexture
 }
 
 // static
-Rendering::Texture2DSmartPointer Rendering::LoadTexture
+Rendering::Texture2DSharedPtr Rendering::LoadTexture
         ::Load2DFromFile (const System::String& name)
 {
 	ReadFileManager inFile{ name };
@@ -84,7 +83,7 @@ Rendering::Texture2DSmartPointer Rendering::LoadTexture
    
     if (data.GetTextureType() == TextureFlags::Texture2D)
     {	
-		return CreateTexture2DPtr<Texture2DSmartPointer, 2>(data, inFile);
+		return CreateTexture2DPtr<Texture2DSharedPtr, 2>(data, inFile);
 	}
 	else
 	{
@@ -93,7 +92,7 @@ Rendering::Texture2DSmartPointer Rendering::LoadTexture
 }
 
 // static
-Rendering::Texture3DSmartPointer Rendering::LoadTexture
+Rendering::Texture3DSharedPtr Rendering::LoadTexture
         ::Load3DFromFile (const System::String& name)
 {
 	ReadFileManager inFile{ name };
@@ -107,7 +106,7 @@ Rendering::Texture3DSmartPointer Rendering::LoadTexture
    
     if (data.GetTextureType() == TextureFlags::Texture3D)
     {	
-		return CreateTexture3DPtr<Texture3DSmartPointer, 3>(data, inFile);
+		return CreateTexture3DPtr<Texture3DSharedPtr, 3>(data, inFile);
 	}
 	else
 	{
@@ -116,7 +115,7 @@ Rendering::Texture3DSmartPointer Rendering::LoadTexture
 }
 
 // static
-Rendering::TextureCubeSmartPointer Rendering::LoadTexture
+Rendering::TextureCubeSharedPtr Rendering::LoadTexture
         ::LoadCubeFromFile (const System::String& name)
 {
 	ReadFileManager inFile{ name };
@@ -130,7 +129,7 @@ Rendering::TextureCubeSmartPointer Rendering::LoadTexture
    
     if (data.GetTextureType() == TextureFlags::TextureCube)
     {	
-		return CreateTextureCubePtr<TextureCubeSmartPointer, 2>(data, inFile);
+		return CreateTextureCubePtr<TextureCubeSharedPtr, 2>(data, inFile);
 	}
 	else
 	{

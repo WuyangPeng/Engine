@@ -1,0 +1,7 @@
+DirectX 实时渲染技术详解（Real-Time Rendering Tricks and Techniques in DirectX）
+
+○
+作者：Kelly Dempski
+
+知识点 
+1.	DirectX基础知识。   

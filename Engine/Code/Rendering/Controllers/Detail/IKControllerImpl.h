@@ -29,42 +29,42 @@ namespace Rendering
     {
     public:
         using ClassType = IKControllerImpl;
-        using IKGoalSmartPointerVector = std::vector<IKGoalSmartPointer>;
-        using IKJointSmartPointerVector = std::vector<IKJointSmartPointer>;
+        using IKGoalSharedPtrVector = std::vector<IKGoalSharedPtr>;
+        using IKJointSharedPtrVector = std::vector<IKJointSharedPtr>;
         using Object = CoreTools::Object;
-        using ObjectSmartPointer = CoreTools::ObjectSmartPointer;
-        using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
+        using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
+        using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
 
     public:
         IKControllerImpl() noexcept;
-        explicit IKControllerImpl(const IKJointSmartPointerVector& joints);
+        explicit IKControllerImpl(const IKJointSharedPtrVector& joints);
 
         CLASS_INVARIANT_DECLARE;
 
         int GetStreamingSize() const;
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(CoreTools::BufferSource& source);
-        void Link(CoreTools::ObjectLink& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
+        void Link(const CoreTools::ObjectLinkSharedPtr& source);
         void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
-        const ObjectSmartPointer GetObjectByName(const std::string& name);
-        const std::vector<ObjectSmartPointer> GetAllObjectsByName(const std::string& name);
-        const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const;
-        const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;
+        const ObjectSharedPtr GetObjectByName(const std::string& name);
+        const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name);
+        const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+        const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
 
         int GetIterations() const noexcept;
         void SetIterations(int iterations) noexcept;
         bool IsOrderEndToRoot() const noexcept;
         void SetOrderEndToRoot(bool orderEndToRoot) noexcept;
 
-        const IKJointSmartPointer GetJointsSmartPointer(int index);
+        const IKJointSharedPtr GetJointsSharedPtr(int index);
         int GetJointsNum() const;
 
     private:
         int m_Iterations;  // д╛хо = 128
         bool m_OrderEndToRoot;  // д╛хо = true
 
-        IKJointSmartPointerVector m_Joints;
+        IKJointSharedPtrVector m_Joints;
     };
 }
 

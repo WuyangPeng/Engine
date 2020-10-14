@@ -28,7 +28,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,PlatformRenderTarget,Enable,
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PlatformRenderTarget,Disable,Renderer*,void)
 
-Rendering::ConstTexture2DSmartPointer Rendering::PlatformRenderTarget
+Rendering::ConstTexture2DSharedPtr Rendering::PlatformRenderTarget
 	::ReadColor( int index,Renderer* renderer )
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;

@@ -22,15 +22,11 @@ namespace Rendering
     public:
         // 复制一个Controller不会将其加入ControllerObject。
         // 销毁一个Controller不会将其从ControllerObject删除。
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ControlledObject);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ControlledObject, = default);
         using ParentType = ControllerInterface;
         
     public:
         ControlledObject();
-         ~ControlledObject();
-
-         ControlledObject(ControlledObject&&) = default;
-         ControlledObject& operator=(ControlledObject&&) = default;
         
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
@@ -43,10 +39,10 @@ namespace Rendering
                 void SetObject(ControllerInterface* object) noexcept override;
     
           int GetNumControllers () const override;
-        ConstControllerInterfaceSmartPointer GetConstController (int index) const;
-		ControllerInterfaceSmartPointer GetController (int index);
-         void AttachController (ControllerInterfaceSmartPointer  controller) override;
-         void DetachController (ControllerInterfaceSmartPointer  controller) override;
+        ConstControllerInterfaceSharedPtr GetConstController (int index) const;
+		ControllerInterfaceSharedPtr GetController (int index);
+         void AttachController (ControllerInterfaceSharedPtr  controller) override;
+         void DetachController (ControllerInterfaceSharedPtr  controller) override;
         void DetachAllControllers ();
         bool UpdateControllers (double applicationTime);
 
@@ -62,7 +58,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
     CORE_TOOLS_STREAM_REGISTER(ControlledObject);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ControlledObject); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( ControlledObject); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_CONTROLLED_OBJECT_H

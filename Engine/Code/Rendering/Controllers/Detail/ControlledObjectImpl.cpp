@@ -14,13 +14,13 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26451)
@@ -72,7 +72,7 @@ int Rendering::ControlledObjectImpl
     return boost::numeric_cast<int>(m_Controllers.size());
 }
 
-Rendering::ConstControllerInterfaceSmartPointer Rendering::ControlledObjectImpl
+Rendering::ConstControllerInterfaceSharedPtr Rendering::ControlledObjectImpl
       ::GetConstController (int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -81,7 +81,7 @@ Rendering::ConstControllerInterfaceSmartPointer Rendering::ControlledObjectImpl
      return m_Controllers[index];
 }
 
-Rendering::ControllerInterfaceSmartPointer	Rendering::ControlledObjectImpl
+Rendering::ControllerInterfaceSharedPtr	Rendering::ControlledObjectImpl
 	::GetController (int index) 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -91,7 +91,7 @@ Rendering::ControllerInterfaceSmartPointer	Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-    ::AttachController (ControllerInterfaceSmartPointer controller)
+    ::AttachController (ControllerInterfaceSharedPtr controller)
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -110,7 +110,7 @@ void Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-	::AttachControllerInCopy(ControllerInterfaceSmartPointer controller) 
+	::AttachControllerInCopy(ControllerInterfaceSharedPtr controller) 
 {
 	RENDERING_CLASS_IS_VALID_1;
     
@@ -129,7 +129,7 @@ void Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-    ::DetachController (ControllerInterfaceSmartPointer controller)
+    ::DetachController (ControllerInterfaceSharedPtr controller)
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -188,7 +188,7 @@ bool Rendering::ControlledObjectImpl
     return someoneUpdated;
 }
 
-const CoreTools::ObjectSmartPointer Rendering::ControlledObjectImpl
+const CoreTools::ObjectSharedPtr Rendering::ControlledObjectImpl
     ::GetObjectByName(const string& name)  
 {
     RENDERING_CLASS_IS_VALID_1;
@@ -201,17 +201,17 @@ const CoreTools::ObjectSmartPointer Rendering::ControlledObjectImpl
 		}           
     }
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     
-    return CoreTools::ObjectSmartPointer();
+    return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::ControlledObjectImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::ControlledObjectImpl
     ::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    vector<CoreTools::ObjectSmartPointer> objects;
+    vector<CoreTools::ObjectSharedPtr> objects;
     
     for (auto i = 0u; i < m_Controllers.size(); ++i)
     {
@@ -224,11 +224,11 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::ControlledObjectImpl
     return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::ControlledObjectImpl
+const CoreTools::ConstObjectSharedPtr Rendering::ControlledObjectImpl
     ::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     for (auto i = 0u; i < m_Controllers.size(); ++i)
     {
 		if (m_Controllers[i]->GetName() == name)
@@ -237,15 +237,15 @@ const CoreTools::ConstObjectSmartPointer Rendering::ControlledObjectImpl
 		}           
     }
     
-    return CoreTools::ConstObjectSmartPointer();
+    return CoreTools::ConstObjectSharedPtr();
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::ControlledObjectImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::ControlledObjectImpl
     ::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-    vector<CoreTools::ConstObjectSmartPointer> objects;
+    vector<CoreTools::ConstObjectSharedPtr> objects;
     
     for (auto i = 0u; i < m_Controllers.size(); ++i)
     {
@@ -277,11 +277,11 @@ void Rendering::ControlledObjectImpl
     ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	if(!m_Controllers.empty())
         {
             target;
-		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);	
+		//target.RegisterSharedPtr(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);	
 	}
 }
 
@@ -292,7 +292,7 @@ void Rendering::ControlledObjectImpl
 
 	if(!m_Controllers.empty())
 	{
-		//target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+		//target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
 	}
 	else
 	{
@@ -301,31 +301,30 @@ void Rendering::ControlledObjectImpl
 	}
 }
 
-void Rendering:: ControlledObjectImpl
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::ControlledObjectImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 { 
 	RENDERING_CLASS_IS_VALID_1;    
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
    if(!m_Controllers.empty())
         {
        source;
-	 //  source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+	 //  source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
    }
 }
 
 void Rendering:: ControlledObjectImpl
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {   
 	RENDERING_CLASS_IS_VALID_1;  
 	    
 	uint32_t size{ 0 };
-    source.Read(size);
+    source->Read(size);
     
     m_Controllers.resize(size);
 	
 	if(!m_Controllers.empty())
 	{
-//		source.ReadSmartPointer(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+//		source.ReadSharedPtr(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
 	}
 }
 

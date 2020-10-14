@@ -25,15 +25,11 @@ namespace Rendering
     public:
         // 复制一个Controller不会将其加入ControllerObject。
         // 销毁一个Controller不会将其从ControllerObject删除。
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Controller);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Controller, = default);
         using ParentType = ControllerInterface;
     
     public:
-        Controller();
-          ~Controller();
-
-          Controller(Controller&&) = default;
-       virtual   Controller& operator=(Controller&&) = default;
+        Controller(); 
     
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
@@ -80,7 +76,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
     CORE_TOOLS_STREAM_REGISTER(Controller);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, Controller); 
+	CORE_TOOLS_SHARED_PTR_DECLARE(Controller); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_CONTROLLER_H

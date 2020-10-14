@@ -1,0 +1,10 @@
+DirectX 高级动画制作（Advanced Animation with DirectX）
+
+官方网站：
+http://www.GameDev.net
+
+○
+作者：Jim Adams
+
+知识点 
+1.	DirectX基础知识。   

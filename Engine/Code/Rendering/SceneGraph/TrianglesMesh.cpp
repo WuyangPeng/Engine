@@ -28,7 +28,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, TrianglesMesh);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, TrianglesMesh);
 
 Rendering::TrianglesMesh
-	::TrianglesMesh(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer, const IndexBufferSmartPointer& indexbuffer) 
+	::TrianglesMesh(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer) 
 	:ParentType{ VisualPrimitiveType::TriangleMesh,vertexformat,vertexbuffer,indexbuffer }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -64,12 +64,12 @@ const Rendering::TriangleIndex
 	}	 
 }
 
-Rendering::ControllerInterfaceSmartPointer Rendering::TrianglesMesh
+Rendering::ControllerInterfaceSharedPtr Rendering::TrianglesMesh
 	::Clone() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 } 
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesMesh::CloneObject() const

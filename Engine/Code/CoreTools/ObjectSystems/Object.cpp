@@ -18,14 +18,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/MemoryTools/SmartPointerManager.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+ 
 
 using std::string;
 using std::vector;
 using std::swap;
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "../Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
@@ -77,7 +77,7 @@ void CoreTools::Object
 void CoreTools::Object
 	::Swap(Object& rhs) noexcept
 {
-	m_Name.Swap(rhs.m_Name);
+    m_Name.SwapObjectName(rhs.m_Name);
 }
 
 int CoreTools::Object
@@ -139,14 +139,14 @@ void CoreTools::Object
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::Object ::Link([[maybe_unused]] ObjectLink& source)
+void CoreTools::Object ::Link([[maybe_unused]]const ObjectLinkSharedPtr& source)
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
 	// Object没有Object*成员。
 
  
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void CoreTools::Object
@@ -156,11 +156,10 @@ void CoreTools::Object
 
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
-void CoreTools::Object
-	::Load(BufferSource& source)
+void CoreTools::Object ::Load(const BufferSourceSharedPtr& source)
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -173,7 +172,7 @@ void CoreTools::Object
 	{
 		ObjectInterfaceSharedPtr smartPointer{ this };
 
-		source.ReadUniqueID(smartPointer);
+		source->ReadUniqueID(smartPointer);
 	}
 	else
 	{
@@ -181,30 +180,30 @@ void CoreTools::Object
 	}
 
 	// 读取对象名字。
-	auto name = source.ReadString();
+        auto name = source->ReadString();
 
 	SetName(name);
 
 	CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-const CoreTools::ObjectSmartPointer CoreTools::Object
+const CoreTools::ObjectSharedPtr CoreTools::Object
 	::GetObjectByName(const string& name)
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
 	if (name == m_Name.GetName() && SMART_POINTER_SINGLETON.IsSmartPointer(this))
-		return ObjectSmartPointer{ this };
+		return ObjectSharedPtr{ this };
 	else
-		return ObjectSmartPointer{};
+		return ObjectSharedPtr{};
 }
 
-const vector<CoreTools::ObjectSmartPointer> CoreTools::Object
+const vector<CoreTools::ObjectSharedPtr> CoreTools::Object
 	::GetAllObjectsByName(const string& name)
 {
 	CORE_TOOLS_CLASS_IS_VALID_9;
 
-	vector<ObjectSmartPointer> objects{};
+	vector<ObjectSharedPtr> objects{};
 
 	if (name == m_Name.GetName() && SMART_POINTER_SINGLETON.IsSmartPointer(this))
 	{
@@ -214,23 +213,23 @@ const vector<CoreTools::ObjectSmartPointer> CoreTools::Object
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer CoreTools::Object
+const CoreTools::ConstObjectSharedPtr CoreTools::Object
 	::GetConstObjectByName(const string& name) const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 	if (name == m_Name.GetName() && SMART_POINTER_SINGLETON.IsSmartPointer(this))
-		return ConstObjectSmartPointer{ this };
+		return ConstObjectSharedPtr{ this };
 	else
-		return ConstObjectSmartPointer{};
+		return ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> CoreTools::Object
+const vector<CoreTools::ConstObjectSharedPtr> CoreTools::Object
 	::GetAllConstObjectsByName(const string& name) const
 {
 	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	vector<ConstObjectSmartPointer> objects;
+	vector<ConstObjectSharedPtr> objects;
 
 	if (name == m_Name.GetName() && SMART_POINTER_SINGLETON.IsSmartPointer(this))
 	{

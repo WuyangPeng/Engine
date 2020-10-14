@@ -29,19 +29,19 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        ConstSpatialSmartPointer GetIntersected() const noexcept;
+        ConstSpatialSharedPtr GetIntersected() const noexcept;
         float GetParameter() const noexcept;
         int GetTriangle() const noexcept;
         float GetBary(int index) const;
 
-        void SetIntersected(const ConstSpatialSmartPointer& intersected) noexcept;
+        void SetIntersected(const ConstSpatialSharedPtr& intersected) noexcept;
         void SetParameter(float parameter) noexcept;
         void SetTriangle(int triangle) noexcept;
         void SetBary(float firstBary, float secondBary);
 
     private:
         // 分割的对象
-        ConstSpatialSmartPointer m_Intersected;
+        ConstSpatialSharedPtr m_Intersected;
 
         // 线性组件是由P + t * D参数化。成员m_Parameter是参数t在交点的值。
         float m_Parameter;

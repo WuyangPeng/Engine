@@ -36,3 +36,10 @@ bool CoreTools::ObjectName::IsExactly(const ObjectName& name) const noexcept
 
     return m_Impl->IsExactly(*name.m_Impl);
 }
+
+void CoreTools::ObjectName::SwapObjectName(ObjectName& name) noexcept
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    Swap(name);
+}

@@ -1,0 +1,7 @@
+人月神话 （The Mythical Man-month）
+
+★
+作者：FrederickP.Brooks.Jr. 
+
+知识点 
+1.	软件开发经验基础知识。

@@ -100,18 +100,18 @@ void Rendering::TextureBuffer
 }
 
 void Rendering::TextureBuffer
-    ::Load( CoreTools::BufferSource& source )
+    ::Load( const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_1;    
 
 	int numTotalBytes = 0;
-	source.Read(numTotalBytes);
+	source->Read(numTotalBytes);
 
 	if(numTotalBytes != 0)
 	{
 		m_Data = make_shared<FileBuffer>(numTotalBytes); 
 		
-		source.Read(boost::numeric_cast<int>(m_Data->GetSize()), m_Data->GetBufferBegin());
+		source->Read(boost::numeric_cast<int>(m_Data->GetSize()), m_Data->GetBufferBegin());
 	}	
 }
 

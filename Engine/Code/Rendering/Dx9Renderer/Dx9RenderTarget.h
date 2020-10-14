@@ -30,7 +30,7 @@ namespace Rendering
 
 		 void Enable (Renderer* renderer) override;
 		 void Disable (Renderer* renderer) override;
-		 ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer) override;
+		 ConstTexture2DSharedPtr ReadColor(int index,Renderer* renderer) override;
 	};
 }
 

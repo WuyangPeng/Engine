@@ -21,7 +21,7 @@ namespace Rendering
 
 	public:
 		// 保存视觉效果到外部的视频流系统的*.trve文件。
-		SaveVisualEffect(const VisualEffectSmartPointer& visualEffect, const System::String& fileName);
+		SaveVisualEffect(const VisualEffectSharedPtr& visualEffect, const System::String& fileName);
 
 		CLASS_INVARIANT_DECLARE;	
 	};

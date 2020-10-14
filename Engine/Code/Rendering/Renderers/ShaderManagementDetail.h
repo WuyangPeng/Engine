@@ -61,7 +61,7 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
  
 template <typename TextureFlags,typename PdrTextureType>
 void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Enable (TextureConstWeakPtr texture, const ConstShaderParametersSmartPointer& parameters)
+	::Enable (TextureConstWeakPtr texture, const ConstShaderParametersSharedPtr& parameters)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	parameters;
@@ -83,7 +83,7 @@ void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
 
 template <typename TextureFlags,typename PdrTextureType>
 void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Disable (TextureConstWeakPtr texture, const ConstShaderParametersSmartPointer& parameters)
+	::Disable (TextureConstWeakPtr texture, const ConstShaderParametersSharedPtr& parameters)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	parameters;

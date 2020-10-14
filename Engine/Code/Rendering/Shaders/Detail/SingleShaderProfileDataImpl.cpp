@@ -106,14 +106,13 @@ void Rendering::SingleShaderProfileDataImpl
 	m_TextureUnit.resize(numSamplers);
 }
 
-void Rendering::SingleShaderProfileDataImpl
-	::Load( BufferSource& source )
+void Rendering::SingleShaderProfileDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	source.Read(m_BaseRegister);
-	source.Read(m_TextureUnit);
-	m_Program = source.ReadString();
+	source->Read(m_BaseRegister);
+	source->Read(m_TextureUnit);
+        m_Program = source->ReadString();
 }
 
 void Rendering::SingleShaderProfileDataImpl

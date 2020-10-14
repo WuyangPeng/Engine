@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -24,6 +24,7 @@ using std::string;
 using std::vector;
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/MemoryTools/SmartPointerManager.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26455)
@@ -41,14 +42,28 @@ Rendering::Visual
 }
 
 Rendering::Visual
-	::Visual(VisualPrimitiveType type, const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer)
+	::Visual(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer,const IndexBufferSharedPtr& indexbuffer)
 	:ParentType{}, m_Impl{ make_shared<ImplType>(type, vertexformat, vertexbuffer, indexbuffer) }
 {
 	UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
+Rendering::Visual::Visual(Visual&& rhs) noexcept
+    : ParentType{
+          std::move(rhs)
+      },
+      m_Impl{ std::move(rhs.m_Impl) }
+{
+    SELF_CLASS_IS_VALID_0;
+}
+Rendering::Visual& Rendering::Visual::operator=(Visual&& rhs) noexcept
+{
+    CLASS_IS_VALID_0;
+    ParentType::operator=(std::move(rhs));
+    m_Impl = std::move(rhs.m_Impl);
+    return *this;
+}
 Rendering::Visual
 	::~Visual()
 {
@@ -100,7 +115,7 @@ void Rendering::Visual
 	if(vertexFormat)
 		SetVertexFormat(vertexFormat->Clone());
 	else
-		SetVertexFormat(VertexFormatSmartPointer{});
+		SetVertexFormat(VertexFormatSharedPtr{});
 }
 
 // private
@@ -112,7 +127,7 @@ void Rendering::Visual
 	if(vertexBuffer)
 		SetVertexBuffer(vertexBuffer->Clone());
 	else
-		SetVertexBuffer(VertexBufferSmartPointer{});
+		SetVertexBuffer(VertexBufferSharedPtr{});
 }
 
 // private
@@ -124,34 +139,34 @@ void Rendering::Visual
 	if(indexBuffer)
 		SetIndexBuffer(indexBuffer->Clone());
 	else
-		SetIndexBuffer(IndexBufferSmartPointer{});
+		SetIndexBuffer(IndexBufferSharedPtr{});
 }
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Visual) 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetPrimitiveType,Rendering::VisualPrimitiveType)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetConstVertexFormat,Rendering::ConstVertexFormatSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetConstVertexFormat,Rendering::ConstVertexFormatSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetVertexFormat,Rendering::VertexFormatSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetVertexFormat,Rendering::VertexFormatSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetVertexFormat,VertexFormatSmartPointer,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetVertexFormat,VertexFormatSharedPtr,void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetConstVertexBuffer,Rendering::ConstVertexBufferSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetConstVertexBuffer,Rendering::ConstVertexBufferSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetVertexBuffer,Rendering::VertexBufferSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetVertexBuffer,Rendering::VertexBufferSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetVertexBuffer,VertexBufferSmartPointer,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetVertexBuffer,VertexBufferSharedPtr,void)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetConstIndexBuffer,Rendering::ConstIndexBufferSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetConstIndexBuffer,Rendering::ConstIndexBufferSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetIndexBuffer,Rendering::IndexBufferSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetIndexBuffer,Rendering::IndexBufferSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetIndexBuffer,IndexBufferSmartPointer,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,SetIndexBuffer,IndexBufferSharedPtr,void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstEffectInstance,const Rendering::ConstVisualEffectInstanceSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetEffectInstance, VisualEffectInstanceSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetEffectInstance, const Rendering::VisualEffectInstanceSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstEffectInstance,const Rendering::ConstVisualEffectInstanceSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetEffectInstance, VisualEffectInstanceSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetEffectInstance, const Rendering::VisualEffectInstanceSharedPtr)
  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, const Rendering::FloatBound&)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, Rendering::FloatBound&)
@@ -184,7 +199,7 @@ void Rendering::Visual ::GetVisibleSet(Culler& culler, [[maybe_unused]] bool noC
 {		 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
 	{
-		culler.Insert(VisualSmartPointer{ this });
+		culler.Insert(VisualSharedPtr{ this });
 	}
 	else
 	{
@@ -194,12 +209,12 @@ void Rendering::Visual ::GetVisibleSet(Culler& culler, [[maybe_unused]] bool noC
  
 }
 
-Rendering::ConstVisualSmartPointer Rendering::Visual
-	::GetSmartPointer() const
+Rendering::ConstVisualSharedPtr Rendering::Visual
+	::GetSharedPtr() const
 {
-	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
+    if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
 	{
-		return ConstVisualSmartPointer{ this };
+		return ConstVisualSharedPtr{ this };
 	}		
 	else
 	{
@@ -256,7 +271,7 @@ void Rendering::Visual
 }
 
 void Rendering::Visual
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -274,7 +289,7 @@ void Rendering::Visual
 }
 
 void Rendering::Visual
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     

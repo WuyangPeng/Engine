@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/18 13:25)
+//	引擎版本：0.5.1.1 (2020/10/12 11:03)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_H
@@ -17,7 +17,7 @@
 namespace CoreTools
 {
     template <typename Iter>
-    class SpanIterator
+    class SpanIterator final
     {
     public:
         using ClassType = SpanIterator<Iter>;
@@ -48,15 +48,15 @@ namespace CoreTools
         [[nodiscard]] Iter GetEnd() const noexcept;
         [[nodiscard]] Iter GetCurrent() const noexcept;
 
-        [[nodiscard]] DifferenceType GetRemainingCount() const;        
+        [[nodiscard]] DifferenceType GetRemainingCount() const;
 
         template <typename T>
         [[nodiscard]] T Increase();
 
         template <typename T>
-        [[nodiscard]] void Increase(T value); 
+        [[nodiscard]] void Increase(T value);
 
-    private: 
+    private:
         template <typename T>
         [[nodiscard]] const T& ReinterpretCast() const;
 

@@ -38,7 +38,7 @@ namespace Rendering
 		void SetUserField (int index, int userField);
 		int GetUserField (int index) const;
 
-		void Load (CoreTools::BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
                 int GetStreamingSize() const noexcept;
 

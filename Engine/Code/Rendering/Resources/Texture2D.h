@@ -18,16 +18,14 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Texture2D : public Texture
     {
     public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture2D);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture2D, DESTRUCTOR_STATEMENT);
 		using ParentType = Texture;
-		using Texture2DSmartPointer = std::shared_ptr<ClassType>;
-		using ConstTexture2DSmartPointer = std::shared_ptr<const ClassType>;
+		using Texture2DSharedPtr = std::shared_ptr<ClassType>;
+		using ConstTexture2DSharedPtr = std::shared_ptr<const ClassType>;
         
     public:
 		Texture2D (TextureFormat format, int dimension0, int dimension1,int numLevels, BufferUsage usage = BufferUsage::Texture);
-		  ~Texture2D();
-                Texture2D(Texture2D&&) = default;
-                Texture2D& operator=(Texture2D&&) = default;
+		 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture2D); 
@@ -62,7 +60,7 @@ namespace Rendering
         char* GetTextureData (int level);
 		const char* GetTextureData (int level) const;
 
-		  TextureSmartPointer Clone() const override;
+		  TextureSharedPtr Clone() const override;
                 ObjectInterfaceSharedPtr CloneObject() const override;
     private:
 		IMPL_TYPE_DECLARE(Texture2D);
@@ -71,7 +69,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)   
     CORE_TOOLS_STREAM_REGISTER(Texture2D);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, Texture2D); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( Texture2D); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_TEXTURE_1D_H

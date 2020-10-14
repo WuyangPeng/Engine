@@ -123,7 +123,7 @@ void Rendering::IndexBuffer
 }
 
 void Rendering::IndexBuffer
-	::Link (CoreTools::ObjectLink& source)
+	::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {	
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -139,7 +139,7 @@ void Rendering::IndexBuffer
 }
 
 void Rendering::IndexBuffer
-	::Load (CoreTools::BufferSource& source)
+	::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -147,7 +147,7 @@ void Rendering::IndexBuffer
 
     ParentType::Load(source);
 	
-	source.Read(m_Offset);
+	source->Read(m_Offset);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -175,12 +175,12 @@ void Rendering::IndexBuffer
 	}		
 }
 
-Rendering::IndexBufferSmartPointer Rendering::IndexBuffer
+Rendering::IndexBufferSharedPtr Rendering::IndexBuffer
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return IndexBufferSmartPointer(std::make_shared<ClassType>(*this));
+	return IndexBufferSharedPtr(std::make_shared<ClassType>(*this));
 }
 
 void Rendering::IndexBuffer

@@ -15,6 +15,8 @@
 
 #endif // TCRE_USE_MSVC
 
+#include "System/SystemLib.h"
+
 #include "CoreTools/CoreToolsLib.h"
 
 #include "Mathematics/MathematicsLib.h"

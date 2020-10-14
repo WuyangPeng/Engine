@@ -51,7 +51,7 @@ namespace Rendering
 	 int GetNumTriangles() const noexcept;
 	 void SetNumTriangles(int numTriangles);
 
-	 void Load(BufferSource& source);
+	 void Load(const CoreTools::BufferSourceSharedPtr& source);
 	 void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 	 int GetStreamingSize() const;
 

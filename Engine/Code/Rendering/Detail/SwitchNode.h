@@ -30,7 +30,7 @@ namespace Rendering
 		int GetActiveChild () const noexcept;
 		void DisableAllChildren () noexcept;
 
-		 ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSharedPtr Clone() const override;
                 ObjectInterfaceSharedPtr CloneObject() const override;
 		 const PickRecordContainer ExecuteRecursive(const APoint& origin,const AVector& direction, float tMin, float tMax) const override;
 	 
@@ -44,7 +44,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(SwitchNode);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, SwitchNode); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( SwitchNode); 
 }
 
 #endif // RENDERING_DETAIL_SWITCH_NODE_H

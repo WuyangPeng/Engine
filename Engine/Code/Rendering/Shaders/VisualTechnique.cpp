@@ -12,7 +12,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -47,24 +47,24 @@ Rendering::VisualTechnique
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, VisualTechnique)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualTechnique,InsertPass,VisualPassSmartPointer,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualTechnique,InsertPass,VisualPassSharedPtr,void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualTechnique,GetNumPasses,int) 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetPass,int,const Rendering::ConstVisualPassSmartPointer) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetPass,int,const Rendering::ConstVisualPassSharedPtr) 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetVertexShader,int,const Rendering::ConstVertexShaderSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetVertexShader,int,const Rendering::ConstVertexShaderSharedPtr)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetPixelShader,int,const Rendering::ConstPixelShaderSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetPixelShader,int,const Rendering::ConstPixelShaderSharedPtr)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetAlphaState,int,const Rendering::ConstAlphaStateSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetAlphaState,int,const Rendering::ConstAlphaStateSharedPtr)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetCullState,int,const Rendering::ConstCullStateSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetCullState,int,const Rendering::ConstCullStateSharedPtr)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetDepthState,int,const Rendering::ConstDepthStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetOffsetState,int,const Rendering::ConstOffsetStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetStencilState,int,const Rendering::ConstStencilStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetWireState,int,const Rendering::ConstWireStateSmartPointer) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetDepthState,int,const Rendering::ConstDepthStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetOffsetState,int,const Rendering::ConstOffsetStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetStencilState,int,const Rendering::ConstStencilStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,GetWireState,int,const Rendering::ConstWireStateSharedPtr) 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualTechnique,SaveVisualPass, WriteFileManager&, void)
 

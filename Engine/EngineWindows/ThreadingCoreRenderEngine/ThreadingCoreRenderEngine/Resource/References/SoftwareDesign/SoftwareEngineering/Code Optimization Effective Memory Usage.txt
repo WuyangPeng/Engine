@@ -1,0 +1,7 @@
+代码优化：有效使用内存（Code Optimization:Effective Memory Usage）
+
+★★
+作者：Kris Kaspersky
+
+知识点 
+1.	软件开发基础知识。

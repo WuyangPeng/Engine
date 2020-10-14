@@ -16,12 +16,6 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{3d1e5eeb-9b4e-4b7d-ad2d-581c8507be7d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assert 头文件">
-      <UniqueIdentifier>{f605821d-2e0b-4561-af95-6a20899812d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assert 源文件">
-      <UniqueIdentifier>{408f25d0-7a59-4a59-bd98-e987329b9be2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Base 头文件">
       <UniqueIdentifier>{cb5f445c-79a7-42e8-9ee6-df14cb20b502}</UniqueIdentifier>
     </Filter>
@@ -57,15 +51,6 @@
     </Filter>
     <Filter Include="CharacterString 模板文件">
       <UniqueIdentifier>{0fe27edf-c7a4-4636-bcda-82337bf44d07}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ClassInvariant 头文件">
-      <UniqueIdentifier>{4edb32c4-fee8-47df-8237-c451bb236d3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ClassInvariant 模板文件">
-      <UniqueIdentifier>{94a31275-5cc0-429c-a276-27f9c05ff213}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ClassInvariant 头文件\Flags">
-      <UniqueIdentifier>{c19b0ca2-a76d-47a9-8a99-df48784105f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Command 头文件">
       <UniqueIdentifier>{e2c06ec6-0612-4d73-a5d8-0d5eec943631}</UniqueIdentifier>
@@ -114,18 +99,6 @@
     </Filter>
     <Filter Include="DataTypes 模板文件">
       <UniqueIdentifier>{40494400-4610-486e-9ba4-cb0eaa402674}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DynamicLink 头文件">
-      <UniqueIdentifier>{60c79edb-7d6e-4dd9-ae6b-df37b1bd16e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DynamicLink 源文件">
-      <UniqueIdentifier>{78ecc0db-b1b8-4493-b579-6df0827a4c54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DynamicLink 头文件\Detail">
-      <UniqueIdentifier>{8cb5fada-b060-4ce0-abc0-2045fd9abbb0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DynamicLink 源文件\Detail">
-      <UniqueIdentifier>{7b6ad5d6-1243-42a5-83aa-841d6de6f6a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineConfiguration 头文件">
       <UniqueIdentifier>{4787abcd-d84d-47be-824b-3cd067c4ca6a}</UniqueIdentifier>
@@ -186,9 +159,6 @@
     </Filter>
     <Filter Include="HandleManager 模板文件">
       <UniqueIdentifier>{f0f7bd71-e106-4fb1-af56-1ec2fa79cf8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ImplHelper 头文件">
-      <UniqueIdentifier>{018ce0f4-e82c-41e6-b7cb-3439bca94af1}</UniqueIdentifier>
     </Filter>
     <Filter Include="LogManager 源文件">
       <UniqueIdentifier>{f47dbc89-348e-434b-971f-358e4b6653eb}</UniqueIdentifier>
@@ -391,15 +361,6 @@
     <Filter Include="UnitTestSuite 模板文件">
       <UniqueIdentifier>{8b90d282-c8cd-4460-95c5-e9300da6d8fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VersionInformation 头文件">
-      <UniqueIdentifier>{22378e5d-e538-4039-890d-44dd2d37e3ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VersionInformation 源文件">
-      <UniqueIdentifier>{24d6e447-7fdd-4d27-bd8a-1972e4e7b68d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ClassInvariant 源文件">
-      <UniqueIdentifier>{dcdb5e83-2e97-4cee-8140-9082ffd2cc93}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Base 头文件\Flags">
       <UniqueIdentifier>{dba5c63c-b7eb-4de4-9d48-ba14e5f932ee}</UniqueIdentifier>
     </Filter>
@@ -442,8 +403,35 @@
     <Filter Include="TextParsing 源文件">
       <UniqueIdentifier>{9018e4b3-6017-4509-9c78-555538226a14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contract 模板文件">
+      <UniqueIdentifier>{94a31275-5cc0-429c-a276-27f9c05ff213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contract 头文件">
+      <UniqueIdentifier>{4edb32c4-fee8-47df-8237-c451bb236d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contract 头文件\Flags">
+      <UniqueIdentifier>{c19b0ca2-a76d-47a9-8a99-df48784105f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contract 源文件">
+      <UniqueIdentifier>{dcdb5e83-2e97-4cee-8140-9082ffd2cc93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
     <Text Include="Resource\Todo\Level 3.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -453,16 +441,7 @@
     <Text Include="Resource\Todo\Level 5.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
+    <Text Include="Resource\Todo\Level 6.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 7.txt">
@@ -473,12 +452,6 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -502,15 +475,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsFwd.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Assert\AssertFwd.h">
-      <Filter>Assert 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Assert\Assertion.h">
-      <Filter>Assert 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Assert\Assert.h">
-      <Filter>Assert 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Base\BaseFwd.h">
       <Filter>Base 头文件</Filter>
@@ -586,27 +550,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveStringDetail.h">
       <Filter>CharacterString 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\Flags\CheckInvariantFlags.h">
-      <Filter>ClassInvariant 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\CheckInvariant.h">
-      <Filter>ClassInvariant 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ClassInvariant.h">
-      <Filter>ClassInvariant 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ClassInvariantFwd.h">
-      <Filter>ClassInvariant 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\FunctionDescribed.h">
-      <Filter>ClassInvariant 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\TriggerAssert.h">
-      <Filter>ClassInvariant 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\CheckInvariantDetail.h">
-      <Filter>ClassInvariant 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainer.h">
       <Filter>Command 头文件\Detail</Filter>
@@ -778,18 +721,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleDetail.h">
       <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\Detail\LoadingLibraryImpl.h">
-      <Filter>DynamicLink 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\DynamicLink.h">
-      <Filter>DynamicLink 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\DynamicLinkFwd.h">
-      <Filter>DynamicLink 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DynamicLink\LoadingLibrary.h">
-      <Filter>DynamicLink 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.h">
       <Filter>EngineConfiguration 头文件\Detail</Filter>
@@ -1013,15 +944,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\HandleManager\ResourceHandleDetail.h">
       <Filter>HandleManager 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplHelperFwd.h">
-      <Filter>ImplHelper 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplStaticAssertHelper.h">
-      <Filter>ImplHelper 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ImplHelper\ImplHelper.h">
-      <Filter>ImplHelper 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AnalysisAppenderManager.h">
       <Filter>LogManager 头文件\Detail</Filter>
     </ClInclude>
@@ -1179,9 +1101,6 @@
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\StreamMacro.h">
-      <Filter>Helper 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Helper\SubclassSmartPointerMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\TemplateToolsMacro.h">
@@ -1343,9 +1262,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Flags\MD5ContextStatus.h">
       <Filter>MemoryTools 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ThirdSubclassSmartPointer.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
@@ -1355,19 +1271,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstFirstSubclassSmartPointer.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstSecondSubclassSmartPointer.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstThirdSubclassSmartPointer.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemory.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\FirstSubclassSmartPointer.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\HeapAllocate.h">
@@ -1397,9 +1301,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Random.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SecondSubclassSmartPointer.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArray.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
@@ -1418,28 +1319,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerSingle.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointer.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointerTraits.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassWeakPointer.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstFirstSubclassSmartPointerDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstSecondSubclassSmartPointerDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ConstThirdSubclassSmartPointerDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemoryDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\FirstSubclassSmartPointerDetail.h">
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\HeapAllocateDetail.h">
@@ -1449,9 +1329,6 @@
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\PoolDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SecondSubclassSmartPointerDetail.h">
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArrayDetail.h">
@@ -1467,15 +1344,6 @@
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointerSingleDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassSmartPointerDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SubclassWeakPointerDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ThirdSubclassSmartPointerDetail.h">
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\Detail\CallbackParametersImpl.h">
@@ -2210,15 +2078,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestDetail.h">
       <Filter>UnitTestSuite 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\Version.h">
-      <Filter>VersionInformation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\VersionInformation.h">
-      <Filter>VersionInformation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\VersionInformation\VersionInformationFwd.h">
-      <Filter>VersionInformation 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.h">
       <Filter>Base 头文件\Detail</Filter>
     </ClInclude>
@@ -2267,26 +2126,11 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\InitializeTerminatorMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ThirdSubclassSmartPointerMacro.h">
-      <Filter>Helper 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ScopeExit.h">
-      <Filter>ClassInvariant 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\ScopeExitDetail.h">
-      <Filter>ClassInvariant 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\BoostParsing.h">
       <Filter>TextParsing 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.h">
       <Filter>TextParsing 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\Noexcept.h">
-      <Filter>ClassInvariant 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ClassInvariant\NoexceptDetail.h">
-      <Filter>ClassInvariant 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.h">
       <Filter>UnitTestSuite 头文件\Detail</Filter>
@@ -2333,6 +2177,90 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferTargetImpl.h">
       <Filter>ObjectSystems 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\ExecuteDllMain.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\SafetyLimitMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Year.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Month.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Date.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Day.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\SharedPtrMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\Flags\CheckInvariantFlags.h">
+      <Filter>Contract 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\Assertion.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\CheckInvariant.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\FunctionDescribed.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\ImplStaticAssertHelper.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\Noexcept.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\ScopeExit.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\TriggerAssert.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\CheckInvariantDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\ScopeExitDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\Contract.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\ContractFwd.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Version.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\StaticSingleton.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\StaticSingletonDetail.h">
+      <Filter>Base 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\LoadingLibraryImpl.h">
+      <Filter>Base 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\LoadingLibrary.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\Flags\DisableNotThrowFlags.h">
+      <Filter>Contract 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadingInternalFwd.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Exception\ExceptionInternalFwd.h">
+      <Filter>Exception 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManagerInternalFwd.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -2340,9 +2268,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\DllMain.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Assert\Assertion.cpp">
-      <Filter>Assert 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.cpp">
       <Filter>Base 源文件</Filter>
@@ -2391,12 +2316,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\StringConversion.cpp">
       <Filter>CharacterString 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\ClassInvariant\FunctionDescribed.cpp">
-      <Filter>ClassInvariant 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\ClassInvariant\TriggerAssert.cpp">
-      <Filter>ClassInvariant 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\AnalysisCommandArgumentContainer.cpp">
       <Filter>Command 源文件\Detail</Filter>
@@ -2475,12 +2394,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.cpp">
       <Filter>DataTypes 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\DynamicLink\Detail\LoadingLibraryImpl.cpp">
-      <Filter>DynamicLink 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\DynamicLink\LoadingLibrary.cpp">
-      <Filter>DynamicLink 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.cpp">
       <Filter>EngineConfiguration 源文件\Detail</Filter>
@@ -3106,9 +3019,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestStream.cpp">
       <Filter>UnitTestSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\VersionInformation\Version.cpp">
-      <Filter>VersionInformation 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.cpp">
       <Filter>Base 源文件\Detail</Filter>
     </ClCompile>
@@ -3133,14 +3043,32 @@
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Directory.cpp">
       <Filter>FileManager 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Base\SpanIterator.cpp">
-      <Filter>Base 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermContainer.cpp">
       <Filter>ObjectSystems 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferTargetImpl.cpp">
       <Filter>ObjectSystems 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Contract\TriggerAssert.cpp">
+      <Filter>Contract 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Contract\Assertion.cpp">
+      <Filter>Contract 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Contract\FunctionDescribed.cpp">
+      <Filter>Contract 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Contract\Noexcept.cpp">
+      <Filter>Contract 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\Version.cpp">
+      <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\LoadingLibraryImpl.cpp">
+      <Filter>Base 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\LoadingLibrary.cpp">
+      <Filter>Base 源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

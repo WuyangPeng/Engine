@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -60,12 +60,12 @@ Rendering::VertexFormat
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,VertexFormat)
 
 // static
-Rendering::VertexFormat::VertexFormatSmartPointer Rendering::VertexFormat
+Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat
 	::Create(const vector<VertexFormatType> triple)
 {
 	auto numAttributes = boost::numeric_cast<int>(triple.size());
 
-	VertexFormatSmartPointer vertexformat{ std::make_shared< VertexFormat>(numAttributes) };
+	VertexFormatSharedPtr vertexformat{ std::make_shared< VertexFormat>(numAttributes) };
 
 	auto offset = 0u;
 	for (auto i = 0; i < numAttributes; ++i)
@@ -79,12 +79,12 @@ Rendering::VertexFormat::VertexFormatSmartPointer Rendering::VertexFormat
 	return vertexformat;
 }
 
-Rendering::VertexFormat::VertexFormatSmartPointer Rendering::VertexFormat
+Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat
 	::Create(const std::vector<VertexFormatElement> triple) 
 {
 	auto numAttributes = boost::numeric_cast<int>(triple.size());
 
-	VertexFormatSmartPointer vertexformat{ std::make_shared < VertexFormat>(numAttributes) };
+	VertexFormatSharedPtr vertexformat{ std::make_shared < VertexFormat>(numAttributes) };
 
 	auto offset = 0u;
 	for (auto i = 0; i < numAttributes; ++i)
@@ -198,7 +198,7 @@ void Rendering::VertexFormat
 }
 
 void Rendering::VertexFormat
-	::Link (CoreTools::ObjectLink& source)
+	::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {	
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -214,7 +214,7 @@ void Rendering::VertexFormat
 }
 
 void Rendering::VertexFormat
-	::Load (CoreTools::BufferSource& source)
+	::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -243,21 +243,21 @@ void Rendering::VertexFormat
 	m_Impl->ReadFromFile(inFile);
 }
 
-Rendering::VertexFormat::VertexFormatSmartPointer Rendering::VertexFormat
+Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return VertexFormatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return VertexFormatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
-Rendering::VertexFormatSmartPointer Rendering::VertexFormat
+Rendering::VertexFormatSharedPtr Rendering::VertexFormat
 	::LoadFromFile(ReadFileManager& manager)
 {
 	auto numAttributes = 0;
 	manager.Read(sizeof(int), &numAttributes);
 
-	VertexFormatSmartPointer vertexFormat{ std::make_shared < VertexFormat>(numAttributes) };
+	VertexFormatSharedPtr vertexFormat{ std::make_shared < VertexFormat>(numAttributes) };
 
 	vertexFormat->ReadFromFile(manager);
 

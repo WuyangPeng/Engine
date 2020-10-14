@@ -26,12 +26,12 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 
-		ConstSpatialSmartPointer GetIntersected() const;
+		ConstSpatialSharedPtr GetIntersected() const;
 		float GetParameter() const;
 		int GetTriangle() const;
 		float GetBary(int index) const;
 
-		void SetIntersected(const ConstSpatialSmartPointer& intersected);
+		void SetIntersected(const ConstSpatialSharedPtr& intersected);
 		void SetParameter(float parameter);
 		void SetTriangle(int triangle);
 		void SetBary(float firstBary, float secondBary);

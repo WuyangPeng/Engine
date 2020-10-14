@@ -9,7 +9,7 @@
 #include "Dx9IndexBuffer.h"
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 Rendering::Dx9IndexBuffer ::Dx9IndexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const IndexBuffer* indexBuffer) noexcept
     : ParentType{}
 {
@@ -37,7 +37,7 @@ void Rendering::Dx9IndexBuffer ::Enable([[maybe_unused]] Renderer* renderer)
 
  
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Rendering::Dx9IndexBuffer ::Disable([[maybe_unused]] Renderer* renderer)
@@ -46,7 +46,7 @@ void Rendering::Dx9IndexBuffer ::Disable([[maybe_unused]] Renderer* renderer)
 
  
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void* Rendering::Dx9IndexBuffer ::Lock([[maybe_unused]] BufferLocking mode)
@@ -55,7 +55,7 @@ void* Rendering::Dx9IndexBuffer ::Lock([[maybe_unused]] BufferLocking mode)
 
  
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return nullptr;
 }
@@ -65,5 +65,5 @@ void Rendering::Dx9IndexBuffer
 {
 	RENDERING_CLASS_IS_VALID_1;
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }

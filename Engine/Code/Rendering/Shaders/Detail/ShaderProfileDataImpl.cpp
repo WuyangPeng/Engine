@@ -110,14 +110,13 @@ int Rendering::ShaderProfileDataImpl ::GetTextureUnitSize() const noexcept
 	return m_NumSamplers;
 }
 
-void Rendering::ShaderProfileDataImpl
-	::Load( BufferSource& source )
+void Rendering::ShaderProfileDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	// 测试是否修改MaxProfiles。
 	int maxProfiles{ 0 };
-	source.Read(maxProfiles);
+	source->Read(maxProfiles);
 
 	RENDERING_ASSERTION_2(maxProfiles == System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"你改变了MaxProfiles的值，并加载了旧的数据集。");
 
@@ -126,8 +125,8 @@ void Rendering::ShaderProfileDataImpl
 		m_ShaderProfileData[i].Load(source);
 	}	 
 
-	source.Read(m_NumConstants);
-	source.Read(m_NumSamplers);
+	source->Read(m_NumConstants);
+	source->Read(m_NumSamplers);
 }
 
 void Rendering::ShaderProfileDataImpl

@@ -36,15 +36,14 @@ Rendering::MaterialImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, MaterialImpl)
 
-void Rendering::MaterialImpl
-	::Load(BufferSource& source)
+void Rendering::MaterialImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.ReadAggregate(m_Emissive);
-	source.ReadAggregate(m_Ambient);
-	source.ReadAggregate(m_Diffuse);
-	source.ReadAggregate(m_Specular);
+	source->ReadAggregate(m_Emissive);
+	source->ReadAggregate(m_Ambient);
+	source->ReadAggregate(m_Diffuse);
+	source->ReadAggregate(m_Specular);
 }
 
 void Rendering::MaterialImpl

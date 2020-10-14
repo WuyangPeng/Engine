@@ -1,0 +1,11 @@
+深入实践Boost（Boost C++ Application Development Cookbook）
+（第1版）
+
+华章网站：http://www.hzcourse.com/web/refbook/detail/5509/208。
+官方网站：http://www.packtpub.com/authors （搜索 Antony Polukhin跳转到 https://www.packtpub.com/books/info/authors/antony-polukhin）
+
+★
+作者：Antony Polukhin
+
+知识点 
+1.	C++ boost库基础知识。 

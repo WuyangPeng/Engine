@@ -9,7 +9,7 @@
 
 #include "Rendering/SceneGraph/Node.h"
 #include "Rendering/SceneGraph/Camera.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 
 RENDERING_EXPORT_SHARED_PTR(BillboardNodeImpl);
 #include "System/Helper/PragmaWarning.h"
@@ -23,14 +23,12 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE BillboardNode : public Node
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(BillboardNode);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(BillboardNode, = default);
 		using ParentType = Node;
 
 	public:
-		explicit BillboardNode(const CameraSmartPointer& camera);
-		~BillboardNode() = default;
-		BillboardNode(BillboardNode&&) noexcept = default;
-		BillboardNode& operator=(BillboardNode&&) noexcept= default;
+		explicit BillboardNode(const CameraSharedPtr& camera);
+		 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -38,11 +36,11 @@ namespace Rendering
 		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 	
 		// 广告牌对齐的摄像头。
-		void AlignTo(const CameraSmartPointer& camera);
+		void AlignTo(const CameraSharedPtr& camera);
 
-		 ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSharedPtr Clone() const override;
 
-		const ConstCameraSmartPointer GetCamera() const;
+		const ConstCameraSharedPtr GetCamera() const;
 		
 	private:
 		// 对几何更新的支持。
@@ -55,7 +53,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(BillboardNode);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, BillboardNode);
+	CORE_TOOLS_SHARED_PTR_DECLARE( BillboardNode);
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_DETAIL_BILLBOARD_NODE_H

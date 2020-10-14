@@ -9,7 +9,7 @@
 #include "LightConstantImpl.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -19,9 +19,9 @@ using std::string;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26455)
-
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::LightConstantImpl
-	::LightConstantImpl(const LightSmartPointer& light)
+	::LightConstantImpl(const LightSharedPtr& light)
 	:m_Light{ light }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -36,7 +36,7 @@ Rendering::LightConstantImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,LightConstantImpl)
 
-const Rendering::ConstLightSmartPointer Rendering::LightConstantImpl
+const Rendering::ConstLightSharedPtr Rendering::LightConstantImpl
 	::GetLight() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;	
@@ -44,15 +44,15 @@ const Rendering::ConstLightSmartPointer Rendering::LightConstantImpl
 	if (m_Light )
 		return m_Light ;
 	else
-		return ConstLightSmartPointer{};
+		return ConstLightSharedPtr{};
 }
 
 void Rendering::LightConstantImpl
-	::Load(BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
-    //	source.ReadSmartPointer(m_Light);
+    //	source.ReadSharedPtr(m_Light);
 }
 
 void Rendering::LightConstantImpl
@@ -60,7 +60,7 @@ void Rendering::LightConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
-	//target.WriteSmartPointer(m_Light);
+	//target.WriteSharedPtr(m_Light);
 }
 
 int Rendering::LightConstantImpl
@@ -71,7 +71,7 @@ int Rendering::LightConstantImpl
 	return CORE_TOOLS_STREAM_SIZE(m_Light);
 }
 
-const CoreTools::ObjectSmartPointer Rendering::LightConstantImpl
+const CoreTools::ObjectSharedPtr Rendering::LightConstantImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -79,10 +79,10 @@ const CoreTools::ObjectSmartPointer Rendering::LightConstantImpl
 	if (m_Light )
 		return m_Light->GetObjectByName(name);
 	else
-		return CoreTools::ObjectSmartPointer{};
+		return CoreTools::ObjectSharedPtr{};
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::LightConstantImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::LightConstantImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -90,10 +90,10 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::LightConstantImpl
 	if (m_Light )
 		return m_Light->GetAllObjectsByName(name);
 	else
-		return vector<CoreTools::ObjectSmartPointer>{};
+		return vector<CoreTools::ObjectSharedPtr>{};
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::LightConstantImpl
+const CoreTools::ConstObjectSharedPtr Rendering::LightConstantImpl
 	::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -101,10 +101,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::LightConstantImpl
 	if (m_Light )
 		return m_Light->GetConstObjectByName(name);
 	else
-		return CoreTools::ConstObjectSmartPointer{};
+		return CoreTools::ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::LightConstantImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::LightConstantImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -112,22 +112,21 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::LightConstantImpl
 	if (m_Light )
 		return m_Light->GetAllConstObjectsByName(name);
 	else
-		return vector<CoreTools::ConstObjectSmartPointer>{};
+		return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
-void Rendering::LightConstantImpl
-	::Link( ObjectLink& source )
+void Rendering::LightConstantImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
-    //	source.ResolveObjectSmartPointerLink(m_Light);
+    //	source.ResolveObjectSharedPtrLink(m_Light);
 }
 
 void Rendering::LightConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
-    //	target.RegisterSmartPointer(m_Light);
+    //	target.RegisterSharedPtr(m_Light);
 }
 
 #include STSTEM_WARNING_POP

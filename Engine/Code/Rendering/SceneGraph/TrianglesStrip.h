@@ -21,8 +21,8 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
-		TrianglesStrip(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,int indexSize);
-		TrianglesStrip(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer);
+		TrianglesStrip(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,int indexSize);
+		TrianglesStrip(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,const IndexBufferSharedPtr& indexbuffer);
  
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -35,14 +35,14 @@ namespace Rendering
 		  int GetNumTriangles() const override;
 		  const TriangleIndex GetTriangle(int index) const override;
                   ObjectInterfaceSharedPtr CloneObject() const override;
-		  ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSharedPtr Clone() const override;
 	};
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(TrianglesStrip);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Eighth, TrianglesStrip); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( TrianglesStrip); 
 }
 
 #endif // RENDERING_SCENE_GRAPH_TRIANGLES_STRIP_H

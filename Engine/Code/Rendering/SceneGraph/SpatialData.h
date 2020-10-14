@@ -60,7 +60,7 @@ namespace Rendering
         const Bound GetWorldBound() const;
         CullingMode GetCullingMode() const;
         
-        void Load (BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
 

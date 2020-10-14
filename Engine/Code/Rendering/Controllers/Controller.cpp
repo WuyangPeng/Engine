@@ -24,7 +24,7 @@ using std::string;
 using std::vector;
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26455)
@@ -39,12 +39,7 @@ Rendering::Controller
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-Rendering::Controller
-    ::~Controller()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 Rendering::Controller
 	::Controller(const Controller& rhs) 
@@ -65,6 +60,25 @@ Rendering::Controller& Rendering::Controller
 	m_Object = rhs.m_Object;
 
 	return *this;
+}
+
+Rendering::Controller ::Controller(Controller&& rhs) noexcept
+    : ParentType(std::move(rhs)), m_Impl{ std::move(rhs.m_Impl) }, m_Object{ std::move(rhs.m_Object) }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+Rendering::Controller& Rendering::Controller ::operator=(Controller&& rhs) noexcept
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    ParentType::operator=(std::move(rhs));
+
+    m_Impl = std::move(rhs.m_Impl);
+
+    m_Object = std::move(rhs.m_Object);
+
+    return *this;
 }
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Controller)
@@ -90,7 +104,7 @@ void Rendering::Controller ::SetObject(ControllerInterface* object)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	m_Object = object;
 }
@@ -113,7 +127,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetPha
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetFrequency, double, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetActive, bool, void)
 
-const CoreTools::ObjectSmartPointer Rendering::Controller
+const CoreTools::ObjectSharedPtr Rendering::Controller
     ::GetObjectByName(const string& name)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
@@ -122,7 +136,7 @@ const CoreTools::ObjectSmartPointer Rendering::Controller
     return ParentType::GetObjectByName(name);
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::Controller
+const vector<CoreTools::ObjectSharedPtr> Rendering::Controller
     ::GetAllObjectsByName(const string& name)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
@@ -131,7 +145,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::Controller
     return ParentType::GetAllObjectsByName(name);;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::Controller
+const CoreTools::ConstObjectSharedPtr Rendering::Controller
     ::GetConstObjectByName(const string& name) const
 {     
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -140,7 +154,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::Controller
     return ParentType::GetConstObjectByName(name);
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::Controller
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller
     ::GetAllConstObjectsByName(const string& name) const
 {    
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -199,16 +213,15 @@ void Rendering::Controller ::Save(const CoreTools::BufferTargetSharedPtr& target
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Controller
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::Controller ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
 	ParentType::Link(source); 
 
-/*	ControllerInterfaceSmartPointer object{ m_ObjectID,nullptr };
+/*	ControllerInterfaceSharedPtr object{ m_ObjectID,nullptr };
 	
-    source.ResolveObjectSmartPointerLink(object);
+    source.ResolveObjectSharedPtrLink(object);
 
 	m_Object = object.GetData();*/
 }
@@ -221,8 +234,7 @@ void Rendering::Controller
 	ParentType::PostLink();
 }
 
-void Rendering::Controller
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::Controller ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -230,11 +242,11 @@ void Rendering::Controller
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	//m_Impl->Load(source);
 
-	ControllerInterfaceSmartPointer object;
+	ControllerInterfaceSharedPtr object;
 
-	//source.ReadSmartPointer(object);
+	//source.ReadSharedPtr(object);
 
 	//m_ObjectID = object.GetAddress();
     
@@ -253,7 +265,7 @@ bool Rendering::Controller::Update(double applicationTime)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     return m_Impl->Update(applicationTime);
 }

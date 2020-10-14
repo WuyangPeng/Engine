@@ -19,7 +19,7 @@
 #include "CoreTools/FileManager/Environment.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/MemoryTools/SmartPointerManager.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 17:07)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/14 14:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -12,15 +15,10 @@
 
 using std::make_shared;
 
-CoreTools::DeleteFileTools
-	::DeleteFileTools(const String& fileName)
-	:m_Impl{ make_shared<ImplType>(fileName) }
+CoreTools::DeleteFileTools::DeleteFileTools(const String& fileName)
+    : m_Impl{ make_shared<ImplType>(fileName) }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, DeleteFileTools)
-
-
-
-

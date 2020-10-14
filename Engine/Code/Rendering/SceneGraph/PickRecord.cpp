@@ -28,12 +28,12 @@ Rendering::PickRecord
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,PickRecord)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord,GetIntersected,Rendering::ConstSpatialSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord,GetIntersected,Rendering::ConstSpatialSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord,GetParameter,float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord,GetTriangle,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord,GetBary,int,float) 
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, PickRecord,SetIntersected,ConstSpatialSmartPointer,void)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, PickRecord,SetIntersected,ConstSpatialSharedPtr,void)
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord,SetParameter,float,void) 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord,SetTriangle,int,void) 
  

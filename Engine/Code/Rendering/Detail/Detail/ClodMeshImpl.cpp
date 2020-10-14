@@ -14,7 +14,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
@@ -32,7 +32,7 @@ Rendering::ClodMeshImpl
 }
 
 Rendering::ClodMeshImpl
-	::ClodMeshImpl(const CollapseRecordArraySmartPointer& recordArray) noexcept
+	::ClodMeshImpl(const CollapseRecordArraySharedPtr& recordArray) noexcept
 	:m_CurrentRecord{ 0 }, m_TargetRecord{ 0 }, m_RecordArray{ recordArray }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -40,14 +40,13 @@ Rendering::ClodMeshImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ClodMeshImpl)
 
-void Rendering::ClodMeshImpl
-	::Load(BufferSource& source)
+void Rendering::ClodMeshImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.Read(m_CurrentRecord);
-	source.Read(m_TargetRecord);
-	//source.ReadSmartPointer(m_RecordArray);
+	source->Read(m_CurrentRecord);
+	source->Read(m_TargetRecord);
+	//source.ReadSharedPtr(m_RecordArray);
 }
 
 void Rendering::ClodMeshImpl
@@ -57,7 +56,7 @@ void Rendering::ClodMeshImpl
 
 	target->Write(m_CurrentRecord);
 	target->Write(m_TargetRecord);
-//	target.WriteSmartPointer(m_RecordArray);
+//	target.WriteSharedPtr(m_RecordArray);
 }
 
 int Rendering::ClodMeshImpl
@@ -73,19 +72,18 @@ int Rendering::ClodMeshImpl
 	return size;
 }
 
-void Rendering::ClodMeshImpl
-	::Link(ObjectLink& source)
+void Rendering::ClodMeshImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ResolveObjectSmartPointerLink(m_RecordArray);
+	//source.ResolveObjectSharedPtrLink(m_RecordArray);
 }
 
 void Rendering::ClodMeshImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.RegisterSmartPointer(m_RecordArray);
+	//target.RegisterSharedPtr(m_RecordArray);
 }
 
 int Rendering::ClodMeshImpl
@@ -113,7 +111,7 @@ void Rendering::ClodMeshImpl
 }
 
 void Rendering::ClodMeshImpl
-	::SelectLevelOfDetail(VertexBufferSmartPointer vertexbuffer,IndexBufferSmartPointer indexbuffer,int targetRecord)
+	::SelectLevelOfDetail(VertexBufferSharedPtr vertexbuffer,IndexBufferSharedPtr indexbuffer,int targetRecord)
 {
 	RENDERING_CLASS_IS_VALID_9; 	
 
@@ -167,7 +165,7 @@ void Rendering::ClodMeshImpl
 }
 
 
-const CoreTools::ObjectSmartPointer Rendering::ClodMeshImpl
+const CoreTools::ObjectSharedPtr Rendering::ClodMeshImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -175,7 +173,7 @@ const CoreTools::ObjectSmartPointer Rendering::ClodMeshImpl
 	return m_RecordArray->GetObjectByName(name);
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::ClodMeshImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::ClodMeshImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -183,7 +181,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::ClodMeshImpl
 	return m_RecordArray->GetAllObjectsByName(name);
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::ClodMeshImpl
+const CoreTools::ConstObjectSharedPtr Rendering::ClodMeshImpl
 	::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -191,7 +189,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::ClodMeshImpl
 	return m_RecordArray->GetConstObjectByName(name);
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::ClodMeshImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::ClodMeshImpl
 	::GetAllConstObjectsByName(const string& name) const
 { 
 	RENDERING_CLASS_IS_VALID_9;

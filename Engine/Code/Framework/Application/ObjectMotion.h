@@ -26,8 +26,8 @@ namespace Framework
 		using Matrix = Mathematics::FloatMatrix;
 		using AVector = Mathematics::FloatAVector;
 		using Transform = Rendering::FloatTransform;
-		using SpatialSmartPointer = Rendering::SpatialSmartPointer;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
+		using SpatialSmartPointer = Rendering::SpatialSharedPtr;
+		using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;
 
 	public:
 		explicit ObjectMotion(const SpatialSmartPointer& motionObject);

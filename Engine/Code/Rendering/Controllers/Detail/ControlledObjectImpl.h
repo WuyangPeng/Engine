@@ -28,8 +28,8 @@ namespace Rendering
         using ObjectRegister = CoreTools::ObjectRegister;
         using ObjectLink = CoreTools::ObjectLink;
 		using Object = CoreTools::Object;
-		using ObjectSmartPointer = CoreTools::ObjectSmartPointer;
-		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
+		using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
+		using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
 
     public:
                 explicit ControlledObjectImpl(ControllerInterface* realThis) noexcept;
@@ -46,28 +46,28 @@ namespace Rendering
         
         // 访问控制器控制该对象。
         int GetNumControllers () const;
-        ConstControllerInterfaceSmartPointer GetConstController (int index) const;
-		ControllerInterfaceSmartPointer GetController (int index);
-        void AttachController (ControllerInterfaceSmartPointer controller);
-        void DetachController (ControllerInterfaceSmartPointer controller);
+        ConstControllerInterfaceSharedPtr GetConstController (int index) const;
+		ControllerInterfaceSharedPtr GetController (int index);
+        void AttachController (ControllerInterfaceSharedPtr controller);
+        void DetachController (ControllerInterfaceSharedPtr controller);
         void DetachAllControllers ();
         bool UpdateControllers (double applicationTime);
-		void AttachControllerInCopy(ControllerInterfaceSmartPointer controller);
+		void AttachControllerInCopy(ControllerInterfaceSharedPtr controller);
         
-        void Load (BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
-        void Link (ObjectLink& source);
+                void Link(const CoreTools::ObjectLinkSharedPtr& source);
         
-		const ObjectSmartPointer GetObjectByName(const std::string& name); 
-		const std::vector<ObjectSmartPointer> GetAllObjectsByName(const std::string& name); 
-		const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const;
-		const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;
+		const ObjectSharedPtr GetObjectByName(const std::string& name); 
+		const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name); 
+		const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+		const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
 
     private:
         // 控制器控制该对象的数组。
-        std::vector<ControllerInterfaceSmartPointer> m_Controllers;
+        std::vector<ControllerInterfaceSharedPtr> m_Controllers;
         
         ControllerInterface* m_RealThis;
     };

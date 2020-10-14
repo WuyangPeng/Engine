@@ -9,7 +9,7 @@
 #include "SendSocketManager.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
@@ -20,7 +20,7 @@ Network::SendSocketManager
 {
 	fileName;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	NETWORK_SELF_CLASS_IS_VALID_9;
 } 
@@ -39,7 +39,7 @@ void Network::SendSocketManager
 	socketType;
 	 
 	serverID;
-        CoreTools::DoNothing();
+        CoreTools::DisableNoexcept();
 }
 
 
@@ -49,7 +49,7 @@ Network::SocketManagerSharedPtr Network::SendSocketManager::GetSocketManager(Soc
 	NETWORK_CLASS_IS_VALID_9;
 
 	socketType;
-        CoreTools::DoNothing();
+        CoreTools::DisableNoexcept();
 	serverID;
 
 	return nullptr;
@@ -57,47 +57,47 @@ Network::SocketManagerSharedPtr Network::SendSocketManager::GetSocketManager(Soc
 
 void Network::SendSocketManager::Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	socketType; serverID; messageID; messageEvent;
 }
 
 void Network::SendSocketManager::Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	socketType; serverID; messageID; messageEvent; priority;
 }
 
 void Network::SendSocketManager::Remove(SocketType socketType, int serverID, int64_t messageID)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	socketType; serverID; messageID;
 }
 
 void Network::SendSocketManager::HandlingMessages()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 void Network::SendSocketManager::Destroy()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 void Network::SendSocketManager::Remove(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	socketType; serverID; messageID; messageEvent;
 }
 
 std::vector<std::pair<Network::SocketType, int>>::const_iterator Network::SendSocketManager::begin()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	return std::vector<std::pair<SocketType, int>>::const_iterator();
 }
 
 std::vector<std::pair<Network::SocketType, int>>::const_iterator Network::SendSocketManager::end()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	return std::vector<std::pair<SocketType, int>>::const_iterator();
 }
 #include STSTEM_WARNING_POP

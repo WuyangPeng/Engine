@@ -1,19 +1,9 @@
 TODO Level 2
  
-0.0.2.1
+0.0.5.1
 
-1.  （ClassInvariant）完成类不变式非Microsoft Visual Studio的实现。 
-2.  （ClassInvariant）考虑使用可变模板参数来代替原先不安全的可变参数。
-3.  （ClassInvariant）类不变式对Debug版出现了性能问题，目前通过类不变式级别宏进行开启或关闭。   
-4.  （Assert）完成断言类非Microsoft Visual Studio的实现。 
-5.  （LogManager）支持日志库扩展性，可将日志写入数据库和将日志发送到日志服务器（包含日志原来的各种写入性）。 
-6.  （LogManager）根据ACE的日志库重整，增加日志级别等内容。 
-7.  （LogManager）使用单独的线程管理日志库。对同样的日志进行过滤。
-8.  （LogManager）对不会打印的日志进行优化，不进行字符串拼接。
-9.  （LogManager）将LogFilterManager返回的字符串改成配置。
-10. （Time）增加获取当前时间相关的信息，如月份，零点时间，周日时间等。
-
-0.3.0.2
-
-1.  （Time）创建一个类型安全的秒、毫秒和微秒类。
-	 
+1.  （Contract）完成类不变式非Microsoft Visual Studio的实现。 
+2.  （Contract）完成断言类非Microsoft Visual Studio的实现。 
+3.  （CharacterString）将类MultiByteConversionWideChar和WideCharConversionMultiByte中使用的堆指针改成vector，简化代码。
+4.  （FileManager）FileManager增加operator>>和operator<<接口。
+5.  （FileManager）将EnvironmentVariable.json的路径改成配置。

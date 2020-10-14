@@ -25,11 +25,7 @@ Network::MultiMessageEventContainer
 	NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::MultiMessageEventContainer
-	::~MultiMessageEventContainer()
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 Network::MultiMessageEventContainer
 	::MultiMessageEventContainer(const MultiMessageEventContainer& rhs)

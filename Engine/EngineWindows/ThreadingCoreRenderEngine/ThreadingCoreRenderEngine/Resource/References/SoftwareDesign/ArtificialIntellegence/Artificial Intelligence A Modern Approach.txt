@@ -1,0 +1,11 @@
+人工智能——一种现代方法（Artificial Intelligence:A Modern Approach）
+（第3版）
+
+官方网站：
+http://aima.cs.berkeley.edu
+
+☆
+作者：Stuart Russell、Peter Norvig 
+
+知识点 
+1.	人工智能基础知识。

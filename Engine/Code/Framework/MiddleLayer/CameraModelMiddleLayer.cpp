@@ -14,7 +14,7 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+ 
 #include "Framework/WindowCreate/WindowPoint.h"
 
 using std::move;
@@ -86,7 +86,7 @@ void Framework::CameraModelMiddleLayer
 
 	auto cameraViewMiddleLayer = boost::polymorphic_pointer_cast<CameraViewMiddleLayer>(GetViewMiddleLayer());
 
-	cameraViewMiddleLayer->SetCamera(Rendering::CameraSmartPointer{ });
+	cameraViewMiddleLayer->SetCamera(Rendering::CameraSharedPtr{});
 
 	m_Impl->Terminate();
 }

@@ -62,7 +62,7 @@ Rendering::VertexBuffer
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,VertexBuffer)
 
 void Rendering::VertexBuffer
-	::SaveToFile(WriteFileManager& outFile, const ConstVertexFormatSmartPointer& vertexformat) const 
+	::SaveToFile(WriteFileManager& outFile, const ConstVertexFormatSharedPtr& vertexformat) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -71,7 +71,7 @@ void Rendering::VertexBuffer
 }
 
 void Rendering::VertexBuffer
-	::ReadFromFile(ReadFileManager& inFile, const ConstVertexFormatSmartPointer& vertexformat)
+	::ReadFromFile(ReadFileManager& inFile, const ConstVertexFormatSharedPtr& vertexformat)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -354,12 +354,12 @@ void Rendering::VertexBuffer
 	}
 }
 
-Rendering::VertexBufferSmartPointer
+Rendering::VertexBufferSharedPtr
 	Rendering::VertexBuffer::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return VertexBufferSmartPointer{ std::make_shared<ClassType>(*this) };
+	return VertexBufferSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::VertexBuffer::CloneObject() const

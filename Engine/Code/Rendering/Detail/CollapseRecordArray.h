@@ -12,7 +12,7 @@
 #include "CollapseRecord.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 
 #include <vector>
 
@@ -23,19 +23,13 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE CollapseRecordArray : public CoreTools::Object
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CollapseRecordArray);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(CollapseRecordArray, = default);
 		using ParentType = Object;
 
 	public:		
 		explicit CollapseRecordArray(const std::vector<CollapseRecord>& collapseRecord);
  
-		~CollapseRecordArray() = default;
-
-		#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-		CollapseRecordArray(CollapseRecordArray&&)= default;
-		CollapseRecordArray& operator=(CollapseRecordArray&&)= default;
-		#include STSTEM_WARNING_POP
+		 
 		
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -52,7 +46,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(CollapseRecordArray);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, CollapseRecordArray);
+	CORE_TOOLS_SHARED_PTR_DECLARE( CollapseRecordArray);
 }
 
 #endif // RENDERING_DETAIL_COLLAPSE_RECORD_ARRAY_H

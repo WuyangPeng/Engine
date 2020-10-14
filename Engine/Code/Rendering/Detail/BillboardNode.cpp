@@ -12,7 +12,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -33,7 +33,7 @@ CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, BillboardNode);
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, BillboardNode);
 
 Rendering::BillboardNode
-	::BillboardNode(const CameraSmartPointer& camera)
+	::BillboardNode(const CameraSharedPtr& camera)
 	:ParentType{}, m_Impl{ make_shared<ImplType>(camera) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -43,17 +43,17 @@ Rendering::BillboardNode
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, BillboardNode)
 
-Rendering::ControllerInterfaceSmartPointer Rendering::BillboardNode
+Rendering::ControllerInterfaceSharedPtr Rendering::BillboardNode
 	::Clone() const 
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, BillboardNode,AlignTo,  CameraSmartPointer,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, BillboardNode,AlignTo,  CameraSharedPtr,void)
  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BillboardNode,GetCamera,const Rendering::ConstCameraSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BillboardNode,GetCamera,const Rendering::ConstCameraSharedPtr)
 
 bool Rendering::BillboardNode
 	::UpdateWorldData(double applicationTime)

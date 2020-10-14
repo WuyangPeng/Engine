@@ -11,8 +11,8 @@
 
 #include "VertexFormat.h"
 #include "Flags/BufferFlags.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointer.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointer.h"
+
+
 #include "CoreTools/ObjectSystems/Object.h"
 
 RENDERING_EXPORT_SHARED_PTR(BufferImpl);
@@ -28,23 +28,17 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Buffer : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Buffer);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Buffer, DESTRUCTOR_PURE_VIRTUAL);
         using ParentType = Object;
-        using BufferSmartPointer = CoreTools::ThirdSubclassSmartPointer<ClassType>;
-        using ConstBufferSmartPointer = CoreTools::ConstThirdSubclassSmartPointer<ClassType>;
+        using BufferSharedPtr = std::shared_ptr<ClassType>;
+        using ConstBufferSharedPtr = std::shared_ptr<ClassType>;
         using ReadFileManager = CoreTools::ReadFileManager;
         using WriteFileManager = CoreTools::WriteFileManager;
 
     public:
         Buffer();
         Buffer(int numElements, int elementSize, BufferUsage usage);
-          ~Buffer() = 0;
-
-          #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        Buffer(Buffer&&) = default;
-        Buffer& operator=(Buffer&&) = default;
-        #include STSTEM_WARNING_POP
+          
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -75,8 +69,8 @@ namespace Rendering
         void ReadBufferDataFromFile(ReadFileManager& inFile);
         void SaveHeadToFile(WriteFileManager& outFile) const;
         void ReadHeadFromFile(ReadFileManager& inFile);
-        void ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSmartPointer& vertexformat);
-        void SaveBufferDataToFile(WriteFileManager& outFile, const ConstVertexFormatSmartPointer& vertexformat) const;
+        void ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSharedPtr& vertexformat);
+        void SaveBufferDataToFile(WriteFileManager& outFile, const ConstVertexFormatSharedPtr& vertexformat) const;
 
         char* GetAccessWriteData(int index);
 
@@ -87,7 +81,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(Buffer);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, Buffer);
+    CORE_TOOLS_SHARED_PTR_DECLARE( Buffer);
 }
 
 #endif  // RENDERING_RESOURCES_BUFFER_H

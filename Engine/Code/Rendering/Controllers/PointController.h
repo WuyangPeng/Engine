@@ -23,16 +23,14 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE PointController : public Controller
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(PointController);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(PointController, = default);
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 
 	public:
 		// 所连接的对象必须是Polypoint或Polypoint派生的类。
 		PointController();
-		  ~PointController();
-		PointController(PointController&&) = default;
-		  PointController& operator=(PointController&&) = default;
+		 
 		  
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -86,7 +84,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(PointController);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, PointController); 
+        CORE_TOOLS_SHARED_PTR_DECLARE(PointController);
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_POINT_CONTROLLER_H

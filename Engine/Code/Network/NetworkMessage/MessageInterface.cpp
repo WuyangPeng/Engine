@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
@@ -74,7 +74,7 @@ int Network::MessageInterface ::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     // ÏûÏ¢ºÅ
     const auto size = CORE_TOOLS_STREAM_SIZE(m_MessageID);
@@ -116,7 +116,7 @@ int Network::MessageInterface ::GetSubMessageID() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     return 0;
 }

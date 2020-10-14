@@ -42,30 +42,30 @@ namespace Rendering
         int GetNumVertices() const noexcept;
         int GetNumBones() const noexcept;
 
-        const ConstNodeSmartPointer GetBones(int bonesIndex) const;
+        const ConstNodeSharedPtr GetBones(int bonesIndex) const;
         float GetWeights(int bonesIndex, int verticesIndex) const;
         const APoint GetOffsets(int bonesIndex, int verticesIndex) const;
 
         // 调用构造函数后，您必须使用这些函数设置数据。
-        void SetBones(int bonesIndex, const ConstNodeSmartPointer& node);
+        void SetBones(int bonesIndex, const ConstNodeSharedPtr& node);
         void SetWeights(int bonesIndex, int verticesIndex, float weights);
         void SetOffsets(int bonesIndex, int verticesIndex, const APoint& offsets);
 
-        void SetBones(const std::vector<ConstNodeSmartPointer>& bones);
+        void SetBones(const std::vector<ConstNodeSharedPtr>& bones);
         void SetWeights(int bonesIndex, const std::vector<float>& weights);
         void SetOffsets(int bonesIndex, const std::vector<APoint>& offsets);
 
         int GetStreamingSize() const noexcept;
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(CoreTools::BufferSource& source);
-        void Link(CoreTools::ObjectLink& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
+        void Link(const CoreTools::ObjectLinkSharedPtr& source);
         void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
     private:
         int m_NumVertices;  // nv
         int m_NumBones;  // nb
         int m_Size;
-        std::vector<ConstNodeSmartPointer> m_Bones;  // bones[nb]
+        std::vector<ConstNodeSharedPtr> m_Bones;  // bones[nb]
         std::vector<float> m_Weights;  // weight[nb][nv], 索引 v + nv * b
         std::vector<APoint> m_Offsets;  // offset[nb][nv], 索引 v + nv * b
     };

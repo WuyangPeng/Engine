@@ -1,0 +1,8 @@
+OpenGL 着色语言（OpenGL Shading Language）
+（第1版）
+
+★
+作者： Randi J.Rost
+
+知识点 
+1.	OpenGL基础知识。   

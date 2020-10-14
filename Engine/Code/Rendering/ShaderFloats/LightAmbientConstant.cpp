@@ -24,7 +24,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightAmbientConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, LightAmbientConstant);
 
 Rendering::LightAmbientConstant
-	::LightAmbientConstant(const LightSmartPointer& light)
+	::LightAmbientConstant(const LightSharedPtr& light)
 	:ParentType{ light }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -43,12 +43,12 @@ void Rendering::LightAmbientConstant ::Update([[maybe_unused]] const Visual* vis
  
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::LightAmbientConstant
+Rendering::ShaderFloatSharedPtr Rendering::LightAmbientConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 #include STSTEM_WARNING_POP

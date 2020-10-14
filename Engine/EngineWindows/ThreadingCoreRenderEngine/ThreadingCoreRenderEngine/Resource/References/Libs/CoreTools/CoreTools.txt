@@ -14,3 +14,4 @@
 12.	TIFF 
 13.	shwild 
 14.	cppunit 
+15.	libxml++

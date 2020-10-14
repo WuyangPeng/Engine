@@ -36,8 +36,8 @@ namespace Rendering
        void Bind (TextureConstWeakPtr texture); 
        void Unbind (TextureConstWeakPtr texture);
  
-       void Enable (TextureConstWeakPtr texture, const ConstShaderParametersSmartPointer& parameters);
-       void Disable (TextureConstWeakPtr texture, const ConstShaderParametersSmartPointer& parameters);
+       void Enable (TextureConstWeakPtr texture, const ConstShaderParametersSharedPtr& parameters);
+       void Disable (TextureConstWeakPtr texture, const ConstShaderParametersSharedPtr& parameters);
 
        void* Lock (TextureConstWeakPtr texture,int level, BufferLocking mode);
        void Unlock (TextureConstWeakPtr texture,int level);

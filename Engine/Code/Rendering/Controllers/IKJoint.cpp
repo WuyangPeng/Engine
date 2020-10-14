@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -33,17 +33,13 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, IKJoint);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, IKJoint);
 
 Rendering::IKJoint
-	::IKJoint(const SpatialSmartPointer& object, const IKGoalSmartPointerVector& goals) 
+	::IKJoint(const SpatialSharedPtr& object, const IKGoalSharedPtrVector& goals) 
 	:ParentType{ "IKJoint" }, m_Impl{ make_shared<ImplType>(object, goals) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IKJoint
-	::~IKJoint()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, IKJoint)
 
@@ -51,10 +47,10 @@ CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, IKJoint)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,GetAxis,MatrixRotationAxis,const Rendering::IKJoint::AVector)
 									   
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKJoint,GetObjectSmartPointer,const Rendering::ConstSpatialSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKJoint,GetObjectSharedPtr,const Rendering::ConstSpatialSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,GetGoalsNum,int) 
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,GetGoalsSmartPointer,int,const Rendering::ConstIKGoalSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,GetGoalsSharedPtr,int,const Rendering::ConstIKGoalSharedPtr)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,UpdateWorldTransform,void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,UpdateWorldRotateAndTranslate,void)
@@ -110,7 +106,7 @@ void Rendering::IKJoint
 }
 
 void Rendering::IKJoint
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -128,7 +124,7 @@ void Rendering::IKJoint
 }
 
 void Rendering::IKJoint
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     

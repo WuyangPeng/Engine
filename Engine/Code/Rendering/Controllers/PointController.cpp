@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
@@ -42,11 +42,7 @@ Rendering::PointController ::PointController()
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PointController ::~PointController()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 Rendering::PointController ::PointController(const PointController& rhs)
     : ParentType(rhs), m_Impl{ make_shared<ImplType>(*rhs.m_Impl) }, m_Points{ dynamic_cast<Polypoint*>(GetControllerObject()) }
 {
@@ -256,7 +252,7 @@ void Rendering::PointController ::Save(const CoreTools::BufferTargetSharedPtr& t
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::PointController ::Link(CoreTools::ObjectLink& source)
+void Rendering::PointController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -276,7 +272,7 @@ void Rendering::PointController ::PostLink()
     m_Points = dynamic_cast<Polypoint*>(object);
 }
 
-void Rendering::PointController ::Load(CoreTools::BufferSource& source)
+void Rendering::PointController ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

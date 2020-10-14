@@ -232,13 +232,12 @@ bool Rendering::ShaderFloatImpl
 	return m_AllowUpdater;
 }
 
-void Rendering::ShaderFloatImpl
-	::Load (BufferSource& source)
+void Rendering::ShaderFloatImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	 
-	source.Read(m_Data);
-	m_AllowUpdater = source.ReadBool();
+	source->Read(m_Data);
+	m_AllowUpdater = source->ReadBool();
 }
 
 void Rendering::ShaderFloatImpl

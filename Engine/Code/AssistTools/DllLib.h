@@ -15,4 +15,6 @@
 	
 #endif // TCRE_USE_MSVC
 
+#include "System/SystemLib.h"
+
 #endif // ASSIST_TOOLS_DLL_LIB_H

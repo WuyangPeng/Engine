@@ -27,7 +27,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, TrianglesFan);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, TrianglesFan);
 
 Rendering::TrianglesFan
-	::TrianglesFan(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer, const IndexBufferSmartPointer& indexbuffer) 
+	::TrianglesFan(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer) 
 	:ParentType{ VisualPrimitiveType::TriangleFan,vertexformat,vertexbuffer,indexbuffer }
 {
 	RENDERING_ASSERTION_1(indexbuffer->GetNumElements() >= vertexbuffer->GetNumElements(),"索引缓冲区没有足够的元素\n");
@@ -36,12 +36,12 @@ Rendering::TrianglesFan
 }
 
 Rendering::TrianglesFan
-	::TrianglesFan(const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer,int indexSize)
-	:ParentType{ VisualPrimitiveType::TriangleFan, vertexformat, vertexbuffer, IndexBufferSmartPointer() }
+	::TrianglesFan(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer,int indexSize)
+	:ParentType{ VisualPrimitiveType::TriangleFan, vertexformat, vertexbuffer, IndexBufferSharedPtr() }
 {
     const auto numVertices = vertexbuffer->GetNumElements();
 
-	IndexBufferSmartPointer indexBuffer{ std::make_shared< IndexBuffer>(numVertices, indexSize) };
+	IndexBufferSharedPtr indexBuffer{ std::make_shared< IndexBuffer>(numVertices, indexSize) };
 	indexBuffer->InitIndexBuffer();		
 	SetIndexBuffer(indexBuffer);
 
@@ -80,13 +80,13 @@ const Rendering::TriangleIndex
 	}	 
 }
 
-Rendering::ControllerInterfaceSmartPointer 
+Rendering::ControllerInterfaceSharedPtr 
 	Rendering::TrianglesFan
 	::Clone() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesFan::CloneObject() const

@@ -1,0 +1,10 @@
+C++ 语言的设计和演化（The Design and Evolution of C++）
+
+官方网站：
+http://www.boost-consulting.com/mplbook （已失效）、http://www.crystalclearsoftware.com/cgi-bin/boost_wiki/wiki.pl?CPP_Template_Metaprogramming_Book_-_Answers_Page
+
+★★ 
+作者：Bjarne Stroustrup
+
+知识点 
+1.	C++ 基础知识。 

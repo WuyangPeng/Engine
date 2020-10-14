@@ -21,7 +21,7 @@ using std::make_shared;
 DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, VertexBufferAccessor)
 
 Rendering::VertexBufferAccessor
-	::VertexBufferAccessor(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer)
+	::VertexBufferAccessor(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer)
 	:m_Impl{ make_shared<ImplType>(vertexformat, vertexbuffer) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -37,7 +37,7 @@ Rendering::VertexBufferAccessor
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,VertexBufferAccessor)
 
 void Rendering::VertexBufferAccessor
-	::ApplyTo(const ConstVertexFormatSmartPointer& vertexformat, const ConstVertexBufferSmartPointer& vertexbuffer) 
+	::ApplyTo(const ConstVertexFormatSharedPtr& vertexformat, const ConstVertexBufferSharedPtr& vertexbuffer) 
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 

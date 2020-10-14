@@ -38,7 +38,7 @@ Network::SockAddress
 }
 
 COPY_CONSTRUCTION_CLONE_DEFINE(Network, SockAddress)
-IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(Network, SockAddress)
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockAddress)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetACEInetAddress, const Network::ACEInetAddressType&)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetACEInetAddress, Network::ACEInetAddressType&)

@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
@@ -29,28 +29,22 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderFloat : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderFloat);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderFloat, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
         using FloatVector = std::vector<float>;
         using AVector = Mathematics::FloatAVector;
         using APoint = Mathematics::FloatAPoint;
         using Matrix = Mathematics::FloatMatrix;
         using Colour = Colour<float>;
-        using ShaderFloatSmartPointer = std::shared_ptr<ClassType>;
-        using ConstShaderFloatSmartPointer = std::shared_ptr<const ClassType>;
+        using ShaderFloatSharedPtr = std::shared_ptr<ClassType>;
+        using ConstShaderFloatSharedPtr = std::shared_ptr<const ClassType>;
 
     public:
         // 寄存器的数量必须为正数。每个寄存器相当于四个浮点数。
         ShaderFloat();
         explicit ShaderFloat(int numRegisters);
         explicit ShaderFloat(const FloatVector& data);
-        ~ShaderFloat();
-
-        #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        ShaderFloat(ShaderFloat&&) noexcept = default;
-        ShaderFloat& operator=(ShaderFloat&&) noexcept = default;
-        		   #include STSTEM_WARNING_POP
+        
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -87,7 +81,7 @@ namespace Rendering
         bool AllowUpdater() const;
         virtual void Update(const Visual* visual, const Camera* camera);
         ObjectInterfaceSharedPtr CloneObject() const override;
-        virtual ShaderFloatSmartPointer Clone() const;
+        virtual ShaderFloatSharedPtr Clone() const;
 
     private:
         IMPL_TYPE_DECLARE(ShaderFloat);
@@ -96,7 +90,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(ShaderFloat);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ShaderFloat);
+    CORE_TOOLS_SHARED_PTR_DECLARE( ShaderFloat);
 }
 
 #endif  // RENDERING_SHADER_FLOATS_SHADER_FLOATS_H

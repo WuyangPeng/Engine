@@ -618,6 +618,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PtrVector.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Push.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\RecursiveMutex.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Span.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Thread.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Timer.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\TypeTraits.h" />
@@ -717,6 +718,7 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\GlutFlags.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\GlutKeyCodesFlags.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLFlags.h" />
+    <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLWglPrototypesFlags.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\GLPluginFwd.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLFlagsFwd.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGL.h" />
@@ -725,6 +727,7 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLGlut.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLInit.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLUtility.h" />
+    <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLWglPrototypes.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GL11ExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GL12ExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GL13ExtensionsUsing.h" />
@@ -745,6 +748,7 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GlutUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GlxExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\OpenGLUsing.h" />
+    <ClInclude Include="..\..\..\Code\System\OpenGL\Using\OpenGLWglPrototypesUsing.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\WglExtensionsUsing.h" />
     <ClInclude Include="..\..\..\Code\System\Security\AccessCheck.h" />
     <ClInclude Include="..\..\..\Code\System\Security\AddAccess.h" />
@@ -851,13 +855,6 @@
     <ClInclude Include="..\..\..\Code\System\Time\Time.h" />
     <ClInclude Include="..\..\..\Code\System\Time\TimeFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Time\Using\DeltaTimeUsing.h" />
-    <ClInclude Include="..\..\..\Code\System\UserInterface\Flags\OpenGLWglPrototypesFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\UserInterface\Fwd\OpenGLWglPrototypesFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\UserInterface\Fwd\UserInterfaceFlagsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\UserInterface\OpenGLWglPrototypes.h" />
-    <ClInclude Include="..\..\..\Code\System\UserInterface\UserInterface.h" />
-    <ClInclude Include="..\..\..\Code\System\UserInterface\UserInterfaceFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\UserInterface\Using\OpenGLWglPrototypesUsing.h" />
     <ClInclude Include="..\..\..\Code\System\Window\ComObjectBase.h" />
     <ClInclude Include="..\..\..\Code\System\Window\Engineering.h" />
     <ClInclude Include="..\..\..\Code\System\Window\Flags\ExceptionFlags.h" />
@@ -979,6 +976,7 @@
     <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLGlut.cpp" />
     <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLInit.cpp" />
     <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLUtility.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLWglPrototypes.cpp" />
     <ClCompile Include="..\..\..\Code\System\Security\AccessCheck.cpp" />
     <ClCompile Include="..\..\..\Code\System\Security\AddAccess.cpp" />
     <ClCompile Include="..\..\..\Code\System\Security\CreateSecurity.cpp" />
@@ -1011,7 +1009,6 @@
     <ClCompile Include="..\..\..\Code\System\Time\Data\CurrentDeltaTime.cpp" />
     <ClCompile Include="..\..\..\Code\System\Time\Data\DeltaTimeValueData.cpp" />
     <ClCompile Include="..\..\..\Code\System\Time\DeltaTime.cpp" />
-    <ClCompile Include="..\..\..\Code\System\UserInterface\OpenGLWglPrototypes.cpp" />
     <ClCompile Include="..\..\..\Code\System\Window\ComObjectBase.cpp" />
     <ClCompile Include="..\..\..\Code\System\Window\Engineering.cpp" />
     <ClCompile Include="..\..\..\Code\System\Window\LastPlatformError.cpp" />

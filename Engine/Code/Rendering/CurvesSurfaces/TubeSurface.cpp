@@ -12,10 +12,11 @@
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26451)
@@ -29,8 +30,8 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, TubeSurface);
 
 Rendering::TubeSurface
 	::TubeSurface (Mathematics::Curve3f* medial, RadialFunction radial, bool closed, const Mathematics::Vector3Df& upVector, int numMedialSamples,int numSliceSamples,
-				   bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax,VertexFormatSmartPointer vformat)
-    :ParentType(vformat, VertexBufferSmartPointer(), IndexBufferSmartPointer()), mMedial(medial), mRadial(radial), mNumMedialSamples(numMedialSamples),
+				   bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax,VertexFormatSharedPtr vformat)
+    :ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mMedial(medial), mRadial(radial), mNumMedialSamples(numMedialSamples),
      mNumSliceSamples(numSliceSamples), mUpVector(upVector),mSin(0), mCos(0), mClosed(closed), mSampleByArcLength(sampleByArcLength)
 {
     // Compute the surface vertices.
@@ -46,7 +47,7 @@ Rendering::TubeSurface
 
     SetVertexFormat(vformat);
      const int vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBufferSmartPointer(std::make_shared< VertexBuffer>(numVertices, vstride)));
+    SetVertexBuffer(VertexBufferSharedPtr(std::make_shared< VertexBuffer>(numVertices, vstride)));
 
     ComputeSinCos();
     ComputeVertices();
@@ -337,7 +338,7 @@ void Rendering::TubeSurface
         numTriangles = 2*mNumSliceSamples*(mNumMedialSamples-1);
     }
 
-    SetIndexBuffer(IndexBufferSmartPointer(std::make_shared < IndexBuffer>(3 * numTriangles,(int) sizeof(int))));
+    SetIndexBuffer(IndexBufferSharedPtr(std::make_shared < IndexBuffer>(3 * numTriangles,(int) sizeof(int))));
 
 	/*
     int* indices = (int*)mIBuffer->GetData();
@@ -448,19 +449,19 @@ Rendering::TubeSurface
 }
 
 void Rendering::TubeSurface
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source.Read(mNumMedialSamples);
-    source.Read(mNumSliceSamples);
-    source.ReadAggregate(mUpVector);
-    source.Read(mNumSliceSamples+1, mSin);
-    source.Read(mNumSliceSamples+1, mCos);
-    mClosed =source.ReadBool();
-   mSampleByArcLength = source.ReadBool();
+    source->Read(mNumMedialSamples);
+    source->Read(mNumSliceSamples);
+    source->ReadAggregate(mUpVector);
+    source->Read(mNumSliceSamples+1, mSin);
+    source->Read(mNumSliceSamples+1, mCos);
+    mClosed =source->ReadBool();
+   mSampleByArcLength = source->ReadBool();
 
     // TODO.  See note in TubeSurface::Save.
     mMedial = 0;
@@ -470,7 +471,7 @@ void Rendering::TubeSurface
 }
 
 void Rendering::TubeSurface
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     ParentType::Link(source);
 }

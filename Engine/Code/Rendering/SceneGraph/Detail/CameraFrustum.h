@@ -72,7 +72,7 @@ namespace Rendering
         float GetRightMin() const noexcept;
         float GetRightMax() const noexcept;
 
-        void Load(BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const noexcept;
 

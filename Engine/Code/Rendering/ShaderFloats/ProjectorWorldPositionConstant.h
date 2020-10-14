@@ -28,14 +28,10 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
-		explicit ProjectorWorldPositionConstant(const ProjectorSmartPointer& projector);
+		explicit ProjectorWorldPositionConstant(const ProjectorSharedPtr& projector);
 		 
 
-		ProjectorWorldPositionConstant(const ProjectorWorldPositionConstant& rhs);
-		ProjectorWorldPositionConstant& operator=(const ProjectorWorldPositionConstant& rhs);
-                ~ProjectorWorldPositionConstant() = default;
-                ProjectorWorldPositionConstant( ProjectorWorldPositionConstant&& rhs) noexcept = default;
-                ProjectorWorldPositionConstant& operator=(ProjectorWorldPositionConstant&& rhs) noexcept = default;
+ 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -46,9 +42,9 @@ namespace Rendering
 
 		  void SetNumRegisters(int numRegisters) override;
 
-		const ConstProjectorSmartPointer GetProjector() const;
+		const ConstProjectorSharedPtr GetProjector() const;
 
-		  ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSharedPtr Clone() const override;
 
 	private:
 		constexpr static auto sm_NumRegisters = 1;
@@ -60,7 +56,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(ProjectorWorldPositionConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ProjectorWorldPositionConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( ProjectorWorldPositionConstant);
 }
 #include STSTEM_WARNING_POP
 

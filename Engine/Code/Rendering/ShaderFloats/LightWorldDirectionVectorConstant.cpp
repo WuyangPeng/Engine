@@ -24,7 +24,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightWorldDirectionVectorConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, LightWorldDirectionVectorConstant);
 
 Rendering::LightWorldDirectionVectorConstant
-	::LightWorldDirectionVectorConstant(const LightSmartPointer& light)
+	::LightWorldDirectionVectorConstant(const LightSharedPtr& light)
 	:ParentType{ light }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -46,12 +46,12 @@ void Rendering::LightWorldDirectionVectorConstant ::Update([[maybe_unused]] cons
 	 
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::LightWorldDirectionVectorConstant
+Rendering::ShaderFloatSharedPtr Rendering::LightWorldDirectionVectorConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 

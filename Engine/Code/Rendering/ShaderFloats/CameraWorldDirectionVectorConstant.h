@@ -32,7 +32,7 @@ namespace Rendering
 
 		  void SetNumRegisters(int numRegisters) override;
 
-		  ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSharedPtr Clone() const override;
 
 	private:
 		static constexpr auto sm_NumRegisters = 1;
@@ -42,7 +42,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(CameraWorldDirectionVectorConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, CameraWorldDirectionVectorConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( CameraWorldDirectionVectorConstant);
 } 
 
 #endif // RENDERING_SHADER_FLOATS_CAMERA_WORLD_DIRECTION_VECTOR_CONSTANT_H

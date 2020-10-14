@@ -11,7 +11,7 @@
 
 #include "ShaderBase.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerTraits.h"
+
 #include "Rendering/Resources/Texture.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/ShaderFloats/ShaderFloat.h"
@@ -23,36 +23,22 @@ namespace Rendering
     class Spatial;
 }
 
-// 编译不过的临时解决方案
-namespace CoreTools
-{
-    template <>
-    struct SubclassSmartPointerTraits<Rendering::Visual>
-    {
-        using ParentType = Rendering::Spatial;
-    };
-}
+ 
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE ShaderParameters : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderParameters);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderParameters, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
-        using ConstShaderFloatSmartPointerGather = std::vector<ConstShaderFloatSmartPointer>;
-        using ConstTextureSmartPointerGather = std::vector<ConstTextureSmartPointer>;
-        using VisualSmartPointer = std::shared_ptr<Visual>;
+        using ConstShaderFloatSharedPtrGather = std::vector<ConstShaderFloatSharedPtr>;
+        using ConstTextureSharedPtrGather = std::vector<ConstTextureSharedPtr>;
+        using VisualSharedPtr = std::shared_ptr<Visual>;
 
     public:
-        explicit ShaderParameters(const ConstShaderBaseSmartPointer& shader);
-        ~ShaderParameters();
-
-          #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        ShaderParameters(ShaderParameters&&) = default;
-        ShaderParameters& operator=(ShaderParameters&&) = default;
-           #include STSTEM_WARNING_POP
+        explicit ShaderParameters(const ConstShaderBaseSharedPtr& shader);
+        
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -60,30 +46,30 @@ namespace Rendering
 
         int GetNumConstants() const;
         int GetNumTextures() const;
-        const ConstShaderFloatSmartPointerGather GetConstants() const;
-        const ConstTextureSmartPointerGather GetTextures() const;
+        const ConstShaderFloatSharedPtrGather GetConstants() const;
+        const ConstTextureSharedPtrGather GetTextures() const;
 
         // 这些函数设定常理/纹理。
         // 如果成功，返回值为非负值，并且是到相应的阵列的索引。
         // 该索引可能会传递到Set*函数具有参数“handle”。
         // 该机制允许您直接通过索引设置，
         // 避免与Set*函数出现与参数“const std::string& name”的名字比较。
-        int SetConstant(const std::string& name, const ShaderFloatSmartPointer& shaderFloat);
-        int SetTexture(const std::string& name, const TextureSmartPointer& texture);
+        int SetConstant(const std::string& name, const ShaderFloatSharedPtr& shaderFloat);
+        int SetTexture(const std::string& name, const TextureSharedPtr& texture);
 
         // “handle”是上述的Set*函数的返回值。
-        void SetConstant(int handle, const ShaderFloatSmartPointer& shaderFloat);
-        void SetTexture(int handle, const TextureSmartPointer& texture);
+        void SetConstant(int handle, const ShaderFloatSharedPtr& shaderFloat);
+        void SetTexture(int handle, const TextureSharedPtr& texture);
 
-        const ConstShaderFloatSmartPointer GetConstant(const std::string& name) const;
-        const ConstTextureSmartPointer GetTexture(const std::string& name) const;
+        const ConstShaderFloatSharedPtr GetConstant(const std::string& name) const;
+        const ConstTextureSharedPtr GetTexture(const std::string& name) const;
 
         // “handle”是上述的Set*函数的返回值。
-        const ConstShaderFloatSmartPointer GetConstant(int handle) const;
-        const ConstTextureSmartPointer GetTexture(int handle) const;
+        const ConstShaderFloatSharedPtr GetConstant(int handle) const;
+        const ConstTextureSharedPtr GetTexture(int handle) const;
         ObjectInterfaceSharedPtr CloneObject() const override;
         // 更新着色器常量在绘制调用期间。
-        void UpdateConstants(const VisualSmartPointer& visual, const CameraSmartPointer& camera);
+        void UpdateConstants(const VisualSharedPtr& visual, const CameraSharedPtr& camera);
 
     private:
         IMPL_TYPE_DECLARE(ShaderParameters);
@@ -92,7 +78,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(ShaderParameters);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ShaderParameters);
+    CORE_TOOLS_SHARED_PTR_DECLARE( ShaderParameters);
 }
 
 #endif  // RENDERING_SHADERS_SHADER_PARAMETERS_H

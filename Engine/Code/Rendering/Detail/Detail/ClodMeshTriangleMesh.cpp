@@ -24,7 +24,7 @@
 using std::set;
 
 Rendering::ClodMeshTriangleMesh
-	::ClodMeshTriangleMesh(TrianglesMeshSmartPointer mesh)
+	::ClodMeshTriangleMesh(TrianglesMeshSharedPtr mesh)
 	: m_NumVertices{ mesh->GetVertexBuffer()->GetNumElements() },m_NumIndices{ mesh->GetIndexBuffer()->GetNumElements() },m_NumTriangles{ m_NumIndices / 3 },
 	  m_IndixBuffer{ mesh->GetIndexBuffer() },m_VertexBuffer{ mesh->GetVertexBuffer() },m_VertexBufferAccessor{ mesh.get() }
 {

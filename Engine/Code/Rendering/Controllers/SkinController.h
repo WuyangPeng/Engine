@@ -22,16 +22,14 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE SkinController : public Controller
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(SkinController);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(SkinController, = default);
 		using ParentType = Controller;
 		using APoint = Mathematics::FloatAPoint;
 
 	public:
 		// 顶点和骨骼的数目在对象的生存期是固定的。
 		SkinController(int numVertices, int numBones);
-		  ~SkinController();
-		SkinController(SkinController&&) = default;
-		  SkinController& operator=(SkinController&&) = default;
+	 
 		  
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -40,23 +38,23 @@ namespace Rendering
 		int GetNumVertices() const noexcept;
 		int GetNumBones() const noexcept;
 
-		const ConstNodeSmartPointer GetBones(int bonesIndex) const;
+		const ConstNodeSharedPtr GetBones(int bonesIndex) const;
 		float GetWeights(int bonesIndex, int verticesIndex) const;
 		const APoint GetOffsets(int bonesIndex, int verticesIndex) const;
 
 		// 调用构造函数后，您必须使用这些函数设置数据。
-		void SetBones(int bonesIndex, const ConstNodeSmartPointer& node);
+		void SetBones(int bonesIndex, const ConstNodeSharedPtr& node);
 		void SetWeights(int bonesIndex, int verticesIndex, float weights);
 		void SetOffsets(int bonesIndex, int verticesIndex, const APoint& offsets);
 
-		void SetBones(const std::vector<ConstNodeSmartPointer>& bones);
+		void SetBones(const std::vector<ConstNodeSharedPtr>& bones);
 		void SetWeights(int bonesIndex, const std::vector<float>& weights);
 		void SetOffsets(int bonesIndex, const std::vector<APoint>& offsets);
 		
 		// 动画更新。应用程序时间以毫秒为单位。
 		 bool Update(double applicationTime) override;
 
-		 ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSharedPtr Clone() const override;
 
 		 void SetObject(ControllerInterface* object) override;
 		 void SetObjectInCopy(ControllerInterface* object) override;
@@ -69,7 +67,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(SkinController);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, SkinController); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( SkinController); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_SKIN_CONTROLLER_H

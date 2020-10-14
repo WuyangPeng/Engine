@@ -22,16 +22,14 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ProjectorMatrixConstant : public ShaderFloat
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ProjectorMatrixConstant);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ProjectorMatrixConstant,DESTRUCTOR_DEFAULT);
         using ParentType = ShaderFloat;
 
     public:
         // …Ë÷√biasScaleMatrixIndexŒ™0æÿ’Û”≥…‰ y' = (1 - y) / 2°£
         // …Ë÷√biasScaleMatrixIndexŒ™1æÿ’Û”≥…‰ y' = (1 + y) / 2°£
-        ProjectorMatrixConstant(const ProjectorSmartPointer& projector, bool biased, int biasScaleMatrixIndex);
-        ProjectorMatrixConstant(ProjectorMatrixConstant&&) noexcept = default;
-        ProjectorMatrixConstant& operator=(ProjectorMatrixConstant&&) noexcept = default;
-        ~ProjectorMatrixConstant() = default;
+        ProjectorMatrixConstant(const ProjectorSharedPtr& projector, bool biased, int biasScaleMatrixIndex);
+        
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -42,9 +40,9 @@ namespace Rendering
 
         void SetNumRegisters(int numRegisters) override;
 
-        const ConstProjectorSmartPointer GetProjector() const;
+        const ConstProjectorSharedPtr GetProjector() const;
 
-        ShaderFloatSmartPointer Clone() const override;
+        ShaderFloatSharedPtr Clone() const override;
 
     private:
         constexpr static auto sm_NumRegisters = 4;
@@ -56,7 +54,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(ProjectorMatrixConstant);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ProjectorMatrixConstant);
+    CORE_TOOLS_SHARED_PTR_DECLARE( ProjectorMatrixConstant);
 }
 #include STSTEM_WARNING_POP
 #endif  // RENDERING_SHADER_FLOATS_PROJECTOR_MATRIX_CONSTANT_H

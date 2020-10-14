@@ -45,7 +45,7 @@ namespace Rendering
 
 		void SetNumLevels(int numLevels) noexcept;
 
-		void Load (CoreTools::BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
                 int GetStreamingSize() const noexcept;		
 

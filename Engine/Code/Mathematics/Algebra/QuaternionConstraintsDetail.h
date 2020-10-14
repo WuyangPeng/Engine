@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 template <typename Real>
 Mathematics::QuaternionConstraints<Real>
@@ -46,7 +46,7 @@ bool Mathematics::QuaternionConstraints<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::GetValue(1)), "(x,y)必须是单位长度！");
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	// 测试(x,y)是否满足约束条件。
 	auto xm = x - m_CosMinAngle;

@@ -10,7 +10,7 @@
 #include "Mathematics/Algebra/PlaneDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
+ 
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
  #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -27,37 +27,37 @@ Rendering::BspNode
 	::BspNode ()
     : ModelPlane(0.0f, 0.0f, 0.0f, 0.0f),mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
 {
-	SpatialSmartPointer spatialSmartPointer;
-	AttachChild(spatialSmartPointer);  // left child
-	AttachChild(spatialSmartPointer);  // middle child
-	AttachChild(spatialSmartPointer);  // right child
+	SpatialSharedPtr spatialSharedPtr;
+	AttachChild(spatialSharedPtr);  // left child
+	AttachChild(spatialSharedPtr);  // middle child
+	AttachChild(spatialSharedPtr);  // right child
 }
 
 Rendering::BspNode
 	::BspNode(const Mathematics::FloatPlane& modelPlane)
     :ModelPlane(modelPlane),mWorldPlane(modelPlane)
 {
-	SpatialSmartPointer spatialSmartPointer;
-	AttachChild(spatialSmartPointer);  // left child
-	AttachChild(spatialSmartPointer);  // middle child
-	AttachChild(spatialSmartPointer);  // right child
+	SpatialSharedPtr spatialSharedPtr;
+	AttachChild(spatialSharedPtr);  // left child
+	AttachChild(spatialSharedPtr);  // middle child
+	AttachChild(spatialSharedPtr);  // right child
 }
 
  
 
-Rendering::SpatialSmartPointer Rendering::BspNode
+Rendering::SpatialSharedPtr Rendering::BspNode
 	::GetContainingNode(const Mathematics::FloatAPoint& point)
 {
-    SpatialSmartPointer posChild = GetPositiveChild();
-	SpatialSmartPointer negChild = GetNegativeChild();
+    SpatialSharedPtr posChild = GetPositiveChild();
+	SpatialSharedPtr negChild = GetNegativeChild();
 
 	if (posChild  || negChild )
     {
-		BspNodeSmartPointer bspChild;
+		BspNodeSharedPtr bspChild;
 
         if (mWorldPlane.WhichSide(point) < Mathematics::NumericalValueSymbol::Zero)
         {
-            bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);//.PolymorphicCastObjectSmartPointer<SmartPointer>();
+            bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);//.PolymorphicCastObjectSharedPtr<SharedPtr>();
 			if (bspChild )
             {
                 return bspChild->GetContainingNode(point);
@@ -70,7 +70,7 @@ Rendering::SpatialSmartPointer Rendering::BspNode
         else
         {
             bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);
-           // posChild.PolymorphicCastObjectSmartPointer<BspNodeSmartPointer>();
+           // posChild.PolymorphicCastObjectSharedPtr<BspNodeSharedPtr>();
 			if (bspChild )
             {
                 return bspChild->GetContainingNode(point);
@@ -82,7 +82,7 @@ Rendering::SpatialSmartPointer Rendering::BspNode
         }
     }
 
-	return SpatialSmartPointer(this);
+	return SpatialSharedPtr(this);
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::BspNode::CloneObject() const
@@ -107,11 +107,11 @@ void Rendering::BspNode
 {
     // Get visible Geometry in back-to-front order.  If a global effect is
     // active, the Geometry objects in the subtree will be drawn using it.
-    SpatialSmartPointer posChild = GetPositiveChild();
-	SpatialSmartPointer copChild = GetCoplanarChild();
-	SpatialSmartPointer negChild = GetNegativeChild();
+    SpatialSharedPtr posChild = GetPositiveChild();
+	SpatialSharedPtr copChild = GetCoplanarChild();
+	SpatialSharedPtr negChild = GetNegativeChild();
 
-    const ConstCameraSmartPointer camera = culler.GetCamera();
+    const ConstCameraSharedPtr camera = culler.GetCamera();
 	Mathematics::NumericalValueSymbol positionSide = mWorldPlane.WhichSide(camera->GetPosition());
 const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPlane);
 
@@ -242,20 +242,20 @@ Rendering::BspNode
 }
 
 void Rendering::BspNode
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Node::Load(source);
 
-    source.ReadAggregate(ModelPlane);
-    source.ReadAggregate(mWorldPlane);
+    source->ReadAggregate(ModelPlane);
+    source->ReadAggregate(mWorldPlane);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::BspNode
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     Node::Link(source);
 }
@@ -295,8 +295,8 @@ int Rendering::BspNode
 }
 
 
-Rendering::SpatialSmartPointer Rendering::BspNode
-	::AttachPositiveChild (SpatialSmartPointer child)
+Rendering::SpatialSharedPtr Rendering::BspNode
+	::AttachPositiveChild (SpatialSharedPtr child)
 {
 	AttachChild(child);
 	return child;
@@ -304,8 +304,8 @@ Rendering::SpatialSmartPointer Rendering::BspNode
 	//return SetChild(0, child);
 }
 
-Rendering::SpatialSmartPointer Rendering::BspNode
-	::AttachCoplanarChild(SpatialSmartPointer child)
+Rendering::SpatialSharedPtr Rendering::BspNode
+	::AttachCoplanarChild(SpatialSharedPtr child)
 {
 	AttachChild(child);
 	return child;
@@ -313,8 +313,8 @@ Rendering::SpatialSmartPointer Rendering::BspNode
 	//return SetChild(1, child);
 }
 
-Rendering::SpatialSmartPointer Rendering::BspNode
-	::AttachNegativeChild(SpatialSmartPointer child)
+Rendering::SpatialSharedPtr Rendering::BspNode
+	::AttachNegativeChild(SpatialSharedPtr child)
  {
 	 AttachChild(child);
 	 return child;
@@ -322,37 +322,37 @@ Rendering::SpatialSmartPointer Rendering::BspNode
 	//return SetChild(2, child);
 }
 
-Rendering::SpatialSmartPointer Rendering::BspNode
+Rendering::SpatialSharedPtr Rendering::BspNode
 	::DetachPositiveChild()
 {
 	return DetachChildAt(0);
 }
 
-Rendering::SpatialSmartPointer Rendering::BspNode
+Rendering::SpatialSharedPtr Rendering::BspNode
 	::DetachCoplanarChild()
 {
 	return DetachChildAt(1);
 }
 
-Rendering::SpatialSmartPointer Rendering::BspNode
+Rendering::SpatialSharedPtr Rendering::BspNode
 	::DetachNegativeChild()
 {
 	return DetachChildAt(2);
 }
 
-Rendering::SpatialSmartPointer Rendering::BspNode
+Rendering::SpatialSharedPtr Rendering::BspNode
 	::GetPositiveChild()
 {
 	return GetChild(0);
 }
 
-Rendering::SpatialSmartPointer Rendering::BspNode
+Rendering::SpatialSharedPtr Rendering::BspNode
 	::GetCoplanarChild()
 {
 	return GetChild(1);
 }
 
-Rendering::SpatialSmartPointer Rendering::BspNode
+Rendering::SpatialSharedPtr Rendering::BspNode
 	::GetNegativeChild()
 {
 	return GetChild(2);

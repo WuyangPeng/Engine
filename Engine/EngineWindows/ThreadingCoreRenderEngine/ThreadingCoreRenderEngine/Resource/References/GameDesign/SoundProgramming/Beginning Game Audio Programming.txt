@@ -1,0 +1,7 @@
+游戏音效编程（Beginning Game Audio Programming）
+
+○
+作者： Mason McCuskey
+
+知识点 
+1.	游戏音效基础知识。   

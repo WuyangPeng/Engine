@@ -89,7 +89,7 @@ namespace %SolutionName%
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+#include "CoreTools/MemoryTools/SubclassSharedPtrDetail.h"
 
 %SolutionName%::%SolutionName%Helper
 	::%SolutionName%Helper(HInstance instance,char* commandLine,const WindowApplicationInformation& information,const EnvironmentDirectory& environmentDirectory)

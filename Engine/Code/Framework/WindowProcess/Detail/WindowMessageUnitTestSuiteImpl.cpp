@@ -12,6 +12,7 @@
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 using std::string;
 using std::make_unique;
@@ -19,7 +20,7 @@ using namespace std::literals;
 
 Framework::WindowMessageUnitTestSuiteImpl
 	::WindowMessageUnitTestSuiteImpl(const string& name, const  OStreamShared& streamShared)
-	:m_Alloc{ }, m_TestingInformationHelper{ },
+    : m_Alloc{ CoreTools::DisableNotThrow::Disable }, m_TestingInformationHelper{},
 	 m_Suite{ make_unique<Suite>(name, streamShared, m_TestingInformationHelper.IsPrintRun()) },
 	 m_Process{ { System::WindowsKeyCodes::F1,&ClassType::ResetTestDataOnMessage },
 			    { System::WindowsKeyCodes::F5,&ClassType::RunUnitTestOnMessage } }

@@ -31,7 +31,7 @@ namespace Rendering
 		// 直线:  tmin = -Mathf::sm_MaxReal, tmax = Mathf::sm_MaxReal
 		// 射线:  tmin = 0, tmax = Mathematics::Mathf::sm_MaxReal
 		// 线段:  tmin = 0, tmax > 0;
-		PickerImpl(const ConstSpatialSmartPointer& scene, const APoint& origin,const AVector& direction, float tMin, float tMax);
+		PickerImpl(const ConstSpatialSharedPtr& scene, const APoint& origin,const AVector& direction, float tMin, float tMax);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -51,7 +51,7 @@ namespace Rendering
 		
 	private:
 		// 选择发生递归遍历的输入场景。
-		void ExecuteRecursive(const ConstSpatialSmartPointer& object);
+		void ExecuteRecursive(const ConstSpatialSharedPtr& object);
 		
 		APoint m_Origin;
 		AVector m_Direction;

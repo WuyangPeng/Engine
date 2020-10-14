@@ -39,11 +39,11 @@ namespace Rendering
 		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(CreateClodMesh);
 
 	public:
-		explicit CreateClodMesh(TrianglesMeshSmartPointer mesh);
+		explicit CreateClodMesh(TrianglesMeshSharedPtr mesh);
 
 		CLASS_INVARIANT_DECLARE;
 
-		CollapseRecordArraySmartPointer GetCollapseRecordArray() const;
+		CollapseRecordArraySharedPtr GetCollapseRecordArray() const;
 	
 	private:		
 		IMPL_TYPE_DECLARE(CreateClodMesh);

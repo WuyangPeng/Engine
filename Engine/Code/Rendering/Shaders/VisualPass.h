@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Rendering/Shaders/AlphaState.h"
 #include "Rendering/Shaders/CullState.h"
@@ -34,43 +34,36 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VisualPass : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualPass);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualPass, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        VisualPass();
-        ~VisualPass();
-
-        #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        VisualPass(VisualPass&&) noexcept = default;
-        VisualPass& operator=(VisualPass&&) noexcept = default;
-                #include STSTEM_WARNING_POP
+        VisualPass(); 
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualPass);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        void SetVertexShader(const VertexShaderSmartPointer& vertexShader);
-        void SetPixelShader(const PixelShaderSmartPointer& pixelShader);
-        void SetAlphaState(const AlphaStateSmartPointer& alphaState);
-        void SetCullState(const CullStateSmartPointer& cullState);
-        void SetDepthState(const DepthStateSmartPointer& depthState);
-        void SetOffsetState(const OffsetStateSmartPointer& offsetState);
-        void SetStencilState(const StencilStateSmartPointer& stencilState);
-        void SetWireState(const WireStateSmartPointer& wireState);
+        void SetVertexShader(const VertexShaderSharedPtr& vertexShader);
+        void SetPixelShader(const PixelShaderSharedPtr& pixelShader);
+        void SetAlphaState(const AlphaStateSharedPtr& alphaState);
+        void SetCullState(const CullStateSharedPtr& cullState);
+        void SetDepthState(const DepthStateSharedPtr& depthState);
+        void SetOffsetState(const OffsetStateSharedPtr& offsetState);
+        void SetStencilState(const StencilStateSharedPtr& stencilState);
+        void SetWireState(const WireStateSharedPtr& wireState);
 
-        const ConstVertexShaderSmartPointer GetVertexShader() const;
-        const ConstPixelShaderSmartPointer GetPixelShader() const;
-        const ConstAlphaStateSmartPointer GetAlphaState() const;
-        const ConstCullStateSmartPointer GetCullState() const;
-        const ConstDepthStateSmartPointer GetDepthState() const;
-        const ConstOffsetStateSmartPointer GetOffsetState() const;
-        const ConstStencilStateSmartPointer GetStencilState() const;
-        const ConstWireStateSmartPointer GetWireState() const;
+        const ConstVertexShaderSharedPtr GetVertexShader() const;
+        const ConstPixelShaderSharedPtr GetPixelShader() const;
+        const ConstAlphaStateSharedPtr GetAlphaState() const;
+        const ConstCullStateSharedPtr GetCullState() const;
+        const ConstDepthStateSharedPtr GetDepthState() const;
+        const ConstOffsetStateSharedPtr GetOffsetState() const;
+        const ConstStencilStateSharedPtr GetStencilState() const;
+        const ConstWireStateSharedPtr GetWireState() const;
 
         void SaveShader(WriteFileManager& manager) const;
         void SaveState(WriteFileManager& manager) const;
@@ -86,7 +79,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(VisualPass);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, VisualPass);
+    CORE_TOOLS_SHARED_PTR_DECLARE( VisualPass);
 }
 
 #endif  // RENDERING_SHADERS_VISUAL_PASS_H

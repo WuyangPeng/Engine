@@ -9,7 +9,7 @@
 #include "Dx9VertexFormat.h"
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 Rendering::Dx9VertexFormat ::Dx9VertexFormat([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const VertexFormat* vertexFormat) noexcept
     : ParentType{}
@@ -35,13 +35,13 @@ bool Rendering::Dx9VertexFormat
 void Rendering::Dx9VertexFormat ::Enable([[maybe_unused]] Renderer* renderer)
 {		
 	RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
  
 }
 
 void Rendering::Dx9VertexFormat ::Disable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	 	
 }

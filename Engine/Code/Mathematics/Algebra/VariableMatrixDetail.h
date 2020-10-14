@@ -182,7 +182,7 @@ void Mathematics::VariableMatrix<Real>::SetIdentity()
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_1(m_RowsNumber == m_ColumnsNumber, "可变矩阵不是方阵！");
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     for (auto i = 0; i < m_RowsNumber; ++i)
     {
@@ -564,7 +564,7 @@ typename const Mathematics::VariableMatrix<Real>::Matrix3 Mathematics::VariableM
 {
     MATHEMATICS_ASSERTION_1(GetRowsNumber() == GetColumnsNumber() && GetRowsNumber() == 3, "矩阵不是Matrix3\n");
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     return Matrix3{ m_Entry[0][0], m_Entry[0][1], m_Entry[0][2],
                     m_Entry[1][0], m_Entry[1][1], m_Entry[1][2],

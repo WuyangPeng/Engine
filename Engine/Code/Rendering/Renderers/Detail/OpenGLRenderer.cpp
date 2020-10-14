@@ -28,32 +28,32 @@ Rendering::RendererTypes Rendering::OpenGLRenderer
 	return RendererTypes::OpenGL;
 }
 
-void Rendering::OpenGLRenderer::SetAlphaState(const ConstAlphaStateSmartPointer& alphaState)
+void Rendering::OpenGLRenderer::SetAlphaState(const ConstAlphaStateSharedPtr& alphaState)
 {
 	alphaState;
 }
 
-void Rendering::OpenGLRenderer::SetCullState(const ConstCullStateSmartPointer& cullState)
+void Rendering::OpenGLRenderer::SetCullState(const ConstCullStateSharedPtr& cullState)
 {
 	cullState;
 }
 
-void Rendering::OpenGLRenderer::SetDepthState(const ConstDepthStateSmartPointer& depthState)
+void Rendering::OpenGLRenderer::SetDepthState(const ConstDepthStateSharedPtr& depthState)
 {
 	depthState;
 }
 
-void Rendering::OpenGLRenderer::SetOffsetState(const ConstOffsetStateSmartPointer& offsetState)
+void Rendering::OpenGLRenderer::SetOffsetState(const ConstOffsetStateSharedPtr& offsetState)
 {
 	offsetState;
 }
 
-void Rendering::OpenGLRenderer::SetStencilState(const ConstStencilStateSmartPointer& stencilState)
+void Rendering::OpenGLRenderer::SetStencilState(const ConstStencilStateSharedPtr& stencilState)
 {
 	stencilState;
 }
 
-void Rendering::OpenGLRenderer::SetWireState(const ConstWireStateSmartPointer& wireState)
+void Rendering::OpenGLRenderer::SetWireState(const ConstWireStateSharedPtr& wireState)
 {
 	wireState;
 }
@@ -128,7 +128,7 @@ void Rendering::OpenGLRenderer::Draw(const uint8_t* screenBuffer, bool reflectY)
 	screenBuffer; reflectY;
 }
 
-void Rendering::OpenGLRenderer::DrawPrimitive(const ConstVisualSmartPointer& visual)
+void Rendering::OpenGLRenderer::DrawPrimitive(const ConstVisualSharedPtr& visual)
 {
 	visual;
 }

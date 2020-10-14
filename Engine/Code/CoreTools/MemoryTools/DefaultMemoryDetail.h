@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26401)
 #include SYSTEM_WARNING_DISABLE(26402)
@@ -34,7 +34,7 @@ T** CoreTools::DefaultMemory ::New2DArray(const int bound1, const int bound2)
     CORE_TOOLS_ASSERTION_0(0 < bound1, "要生成的数组大小必须大于0！");
     CORE_TOOLS_ASSERTION_0(0 < bound2, "要生成的数组大小必须大于0！");
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     const auto bound = bound1 * bound2;
     auto data = new T*[bound2];

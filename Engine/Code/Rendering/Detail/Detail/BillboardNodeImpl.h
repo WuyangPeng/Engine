@@ -34,24 +34,24 @@ namespace Rendering
 
 	public:
 		BillboardNodeImpl() noexcept;
-		explicit BillboardNodeImpl(const CameraSmartPointer& camera) noexcept;
+		explicit BillboardNodeImpl(const CameraSharedPtr& camera) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		void Load(BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
-		void Link(ObjectLink& source);
+                void Link(const CoreTools::ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
 		CORE_TOOLS_NAMES_IMPL_DECLARE;
 	
-		void AlignTo(const CameraSmartPointer& camera);
+		void AlignTo(const CameraSharedPtr& camera);
 
-		const ConstCameraSmartPointer GetCamera() const;
+		const ConstCameraSharedPtr GetCamera() const;
  
 	private:
-		CameraSmartPointer m_Camera;
+		CameraSharedPtr m_Camera;
 	};
 }
 

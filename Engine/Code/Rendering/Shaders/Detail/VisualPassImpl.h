@@ -53,29 +53,29 @@ namespace Rendering
 
 		int GetStreamingSize() const;
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-		void Load(BufferSource& source);
-		void Link(ObjectLink& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
+		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
 		CORE_TOOLS_NAMES_IMPL_DECLARE;
 
-		void SetVertexShader(const VertexShaderSmartPointer& vertexShader);
-		void SetPixelShader(const PixelShaderSmartPointer& pixelShader);
-		void SetAlphaState(const AlphaStateSmartPointer& alphaState);
-		void SetCullState(const CullStateSmartPointer& cullState);
-		void SetDepthState(const DepthStateSmartPointer& depthState);
-		void SetOffsetState(const OffsetStateSmartPointer& offsetState);
-		void SetStencilState(const StencilStateSmartPointer& stencilState);
-		void SetWireState(const WireStateSmartPointer& wireState);
+		void SetVertexShader(const VertexShaderSharedPtr& vertexShader);
+		void SetPixelShader(const PixelShaderSharedPtr& pixelShader);
+		void SetAlphaState(const AlphaStateSharedPtr& alphaState);
+		void SetCullState(const CullStateSharedPtr& cullState);
+		void SetDepthState(const DepthStateSharedPtr& depthState);
+		void SetOffsetState(const OffsetStateSharedPtr& offsetState);
+		void SetStencilState(const StencilStateSharedPtr& stencilState);
+		void SetWireState(const WireStateSharedPtr& wireState);
      
-		const ConstVertexShaderSmartPointer GetVertexShader() const;
-		const ConstPixelShaderSmartPointer GetPixelShader() const;
-		const ConstAlphaStateSmartPointer GetAlphaState() const;
-		const ConstCullStateSmartPointer GetCullState() const;
-		const ConstDepthStateSmartPointer GetDepthState() const;
-		const ConstOffsetStateSmartPointer GetOffsetState() const;
-		const ConstStencilStateSmartPointer GetStencilState() const;
-		const ConstWireStateSmartPointer GetWireState() const;
+		const ConstVertexShaderSharedPtr GetVertexShader() const;
+		const ConstPixelShaderSharedPtr GetPixelShader() const;
+		const ConstAlphaStateSharedPtr GetAlphaState() const;
+		const ConstCullStateSharedPtr GetCullState() const;
+		const ConstDepthStateSharedPtr GetDepthState() const;
+		const ConstOffsetStateSharedPtr GetOffsetState() const;
+		const ConstStencilStateSharedPtr GetStencilState() const;
+		const ConstWireStateSharedPtr GetWireState() const;
 
 		void SaveShader(WriteFileManager& manager) const;
 		void SaveState(WriteFileManager& manager) const;
@@ -93,14 +93,14 @@ namespace Rendering
 		void LoadWireState(ReadFileManager& manager);
 
 	private:
-		VertexShaderSmartPointer m_VertexShader;
-		PixelShaderSmartPointer m_PixelShader;
-		AlphaStateSmartPointer m_AlphaState;
-		CullStateSmartPointer m_CullState;
-		DepthStateSmartPointer m_DepthState;
-		OffsetStateSmartPointer m_OffsetState;
-		StencilStateSmartPointer m_StencilState;
-		WireStateSmartPointer m_WireState;
+		VertexShaderSharedPtr m_VertexShader;
+		PixelShaderSharedPtr m_PixelShader;
+		AlphaStateSharedPtr m_AlphaState;
+		CullStateSharedPtr m_CullState;
+		DepthStateSharedPtr m_DepthState;
+		OffsetStateSharedPtr m_OffsetState;
+		StencilStateSharedPtr m_StencilState;
+		WireStateSharedPtr m_WireState;
 	};
 }
 

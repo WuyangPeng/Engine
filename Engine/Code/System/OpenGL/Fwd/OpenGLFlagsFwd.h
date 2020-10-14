@@ -50,6 +50,10 @@ namespace System
     enum class ColorAttachent;
     enum class CheckFrambufferStatus;
     enum class AttributeUsage;
+	
+	// Wgl
+	enum class PixelFormatDescriptorFlags : uint32_t;
+	enum class PixelTypes;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_FLAGS_FWD_H

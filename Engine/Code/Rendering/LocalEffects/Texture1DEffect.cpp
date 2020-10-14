@@ -10,8 +10,9 @@
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"  
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
  #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -33,7 +34,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture1DEffect);
 Rendering::Texture1DEffect
 	::Texture1DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
 { 
-	VertexShaderSmartPointer vshader{ std::make_shared< VertexShader>( "Wm5.Texture1D", 2, 2, 1, 0 ) };
+	VertexShaderSharedPtr vshader{ std::make_shared< VertexShader>( "Wm5.Texture1D", 2, 2, 1, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float1,ShaderFlags::VariableSemantic::TextureCoord0);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
@@ -52,7 +53,7 @@ Rendering::Texture1DEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	} 
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>( "Wm5.Texture1D",1, 1, 0, 1 ) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>( "Wm5.Texture1D",1, 1, 0, 1 ) };
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float1,ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
     pshader->SetSampler(0, "BaseSampler", ShaderFlags::SamplerType::Sampler2D);
@@ -71,17 +72,17 @@ Rendering::Texture1DEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	}   
 
-   VisualPassSmartPointer pass{   };
+   VisualPassSharedPtr pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{   });
-	pass->SetCullState(CullStateSmartPointer{  });
-	pass->SetDepthState(DepthStateSmartPointer{   });
-	pass->SetOffsetState(OffsetStateSmartPointer{   });
-	pass->SetStencilState(StencilStateSmartPointer{  });
-	pass->SetWireState(WireStateSmartPointer{  {} });
+	pass->SetAlphaState(AlphaStateSharedPtr{   });
+	pass->SetCullState(CullStateSharedPtr{  });
+	pass->SetDepthState(DepthStateSharedPtr{   });
+	pass->SetOffsetState(OffsetStateSharedPtr{   });
+	pass->SetStencilState(StencilStateSharedPtr{  });
+	pass->SetWireState(WireStateSharedPtr{  {} });
 
-	VisualTechniqueSmartPointer technique{ };
+	VisualTechniqueSharedPtr technique{ };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
@@ -98,9 +99,9 @@ Rendering::PixelShader* Rendering
 Rendering::VisualEffectInstance* Rendering::Texture1DEffect
 	::CreateInstance (Texture1D* texture) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared < ProjectionViewMatrixConstant>()));
-	instance->SetPixelTexture(0, 0, TextureSmartPointer(texture));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared < ProjectionViewMatrixConstant>()));
+	instance->SetPixelTexture(0, 0, TextureSharedPtr(texture));
 
 	const ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
 	if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::Linear && !texture->HasMipmaps())
@@ -130,7 +131,7 @@ Rendering::Texture1DEffect
 }
 
 void Rendering::Texture1DEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -140,7 +141,7 @@ void Rendering::Texture1DEffect
 }
 
 void Rendering::Texture1DEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     VisualEffect::Link(source);
 }

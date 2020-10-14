@@ -123,7 +123,7 @@ namespace %SolutionName%
 #include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h" 
 #include "Framework/WindowProcess/WindowMessageDetail.h" 
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+#include "CoreTools/MemoryTools/SubclassSharedPtrDetail.h"
 #include "Framework/MiddleLayer/MiddleLayerInterfaceDetail.h"
 #include "%SolutionName%/%SolutionName%MiddleLayer/Input/InputManagerDetail.h"
 

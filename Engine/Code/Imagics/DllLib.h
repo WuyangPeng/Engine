@@ -17,4 +17,6 @@
 	
 #endif // TCRE_USE_MSVC
 
+#include "System/SystemLib.h"
+
 #endif // IMAGICS_DLL_LIB_H

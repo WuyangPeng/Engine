@@ -57,8 +57,8 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetNumTargets,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetFormat,Rendering::TextureFormat)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetWidth,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetHeight,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,RenderTarget,GetColorTexture,int,Rendering::RenderTarget::ConstTexture2DSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RenderTarget,GetDepthStencilTexture,Rendering::RenderTarget::ConstTexture2DSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,RenderTarget,GetColorTexture,int,Rendering::RenderTarget::ConstTexture2DSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RenderTarget,GetDepthStencilTexture,Rendering::RenderTarget::ConstTexture2DSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RenderTarget,HasMipmaps,bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RenderTarget,HasDepthStencil,bool)
 
@@ -110,7 +110,7 @@ void Rendering::RenderTarget
 }
 
 void Rendering::RenderTarget
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -128,7 +128,7 @@ void Rendering::RenderTarget
 }
 
 void Rendering::RenderTarget
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     

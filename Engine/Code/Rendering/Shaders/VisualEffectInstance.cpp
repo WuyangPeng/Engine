@@ -33,7 +33,7 @@ COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, VisualEffectInstance);
 CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, VisualEffectInstance);
 
 Rendering::VisualEffectInstance
-	::VisualEffectInstance(const VisualEffectSmartPointer& effect, int techniqueIndex)
+	::VisualEffectInstance(const VisualEffectSharedPtr& effect, int techniqueIndex)
 	:ParentType{ "VisualEffectInstance" }, m_Impl{ make_shared<ImplType>(effect, techniqueIndex) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -47,18 +47,18 @@ Rendering::VisualEffectInstance
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, VisualEffectInstance)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance,GetEffect, const Rendering::ConstVisualEffectSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance,GetEffect, const Rendering::ConstVisualEffectSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance, GetTechniqueIndex, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance, GetNumPasses, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPass, int, const Rendering::ConstVisualPassSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPixelParameters, int, const Rendering::ConstShaderParametersSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance,GetConstVertexParameters, int, const Rendering::ConstShaderParametersSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetPixelParameters, int, const Rendering::ShaderParametersSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetVertexParameters, int, const Rendering::ShaderParametersSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPass, int, const Rendering::ConstVisualPassSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPixelParameters, int, const Rendering::ConstShaderParametersSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance,GetConstVertexParameters, int, const Rendering::ConstShaderParametersSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetPixelParameters, int, const Rendering::ShaderParametersSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetVertexParameters, int, const Rendering::ShaderParametersSharedPtr)
  
 
 void Rendering::VisualEffectInstance
-	::SetVertexTexture(int pass, int handle, const TextureSmartPointer& texture)
+	::SetVertexTexture(int pass, int handle, const TextureSharedPtr& texture)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -66,14 +66,14 @@ void Rendering::VisualEffectInstance
 }
 
 void Rendering::VisualEffectInstance
-	::SetPixelTexture(int pass, int handle, const TextureSmartPointer& texture)
+	::SetPixelTexture(int pass, int handle, const TextureSharedPtr& texture)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->SetPixelTexture(pass, handle, texture);
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstance
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance
 	::GetVertexConstant(int pass, const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -81,7 +81,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstance
 	return m_Impl->GetVertexConstant(pass,name);
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstance
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance
 	::GetVertexConstant(int pass, int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -89,7 +89,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstance
 	return m_Impl->GetVertexConstant(pass, handle);
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstance
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance
 	::GetPixelConstant(int pass, const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -97,7 +97,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstance
 	return m_Impl->GetPixelConstant(pass, name);
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstance
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance
 	::GetPixelConstant(int pass, int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -105,7 +105,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstance
 	return m_Impl->GetPixelConstant(pass, handle);
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstance
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance
 	::GetVertexTexture(int pass, const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -113,7 +113,7 @@ const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstance
 	return m_Impl->GetVertexTexture(pass, name);
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstance
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance
 	::GetVertexTexture(int pass, int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -121,7 +121,7 @@ const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstance
 	return m_Impl->GetVertexTexture(pass, handle);
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstance
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance
 	::GetPixelTexture(int pass, const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -129,7 +129,7 @@ const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstance
 	return m_Impl->GetPixelTexture(pass, name);
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstance
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance
 	::GetPixelTexture(int pass, int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -138,7 +138,7 @@ const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstance
 } 
 
 void Rendering::VisualEffectInstance
-	::SetPixelConstant(int pass, int handle, const ShaderFloatSmartPointer& shaderFloat)
+	::SetPixelConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -146,7 +146,7 @@ void Rendering::VisualEffectInstance
 }
 
 void Rendering::VisualEffectInstance
-	::SetVertexConstant(int pass, int handle, const ShaderFloatSmartPointer& shaderFloat)
+	::SetVertexConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -154,7 +154,7 @@ void Rendering::VisualEffectInstance
 }
 
 int Rendering::VisualEffectInstance
-	::SetPixelTexture(int pass, const std::string& name, const TextureSmartPointer& texture)
+	::SetPixelTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -162,7 +162,7 @@ int Rendering::VisualEffectInstance
 }
 
 int Rendering::VisualEffectInstance
-	::SetVertexTexture(int pass, const std::string& name, const TextureSmartPointer& texture)
+	::SetVertexTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -170,7 +170,7 @@ int Rendering::VisualEffectInstance
 }
 
 int Rendering::VisualEffectInstance
-	::SetPixelConstant(int pass, const std::string& name, const ShaderFloatSmartPointer& shaderFloat)
+	::SetPixelConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -179,7 +179,7 @@ int Rendering::VisualEffectInstance
 
 
 int Rendering::VisualEffectInstance
-	::SetVertexConstant(int pass, const std::string& name, const ShaderFloatSmartPointer& shaderFloat)
+	::SetVertexConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

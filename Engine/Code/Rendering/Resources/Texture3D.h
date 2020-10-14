@@ -18,16 +18,14 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Texture3D : public Texture
     {
     public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture3D);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture3D, DESTRUCTOR_STATEMENT);
 		using ParentType = Texture;
-		using Texture3DSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
-		using ConstTexture3DSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>;
+		using Texture3DSharedPtr = std::shared_ptr<ClassType>;
+		using ConstTexture3DSharedPtr = std::shared_ptr<ClassType>;
         
     public:
 		Texture3D (TextureFormat format, int dimension0,int dimension1,int dimension2,int numLevels,BufferUsage usage = BufferUsage::Texture);
-		  ~Texture3D();
-                Texture3D(Texture3D&&) = default;
-                  Texture3D& operator=(Texture3D&&) = default;
+		 
         
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
@@ -63,7 +61,7 @@ namespace Rendering
         char* GetTextureData (int level);
 		const char* GetTextureData (int level) const;
         ObjectInterfaceSharedPtr CloneObject() const override;
-		  TextureSmartPointer Clone() const override;
+		  TextureSharedPtr Clone() const override;
         
     private:
 		IMPL_TYPE_DECLARE(Texture3D);
@@ -72,7 +70,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)  
     CORE_TOOLS_STREAM_REGISTER(Texture3D);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, Texture3D); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( Texture3D); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_TEXTURE_3D_H

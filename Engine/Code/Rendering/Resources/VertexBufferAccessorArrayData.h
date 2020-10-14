@@ -23,11 +23,11 @@ namespace Rendering
 
 	public:
 		VertexBufferAccessorArrayData();
-		VertexBufferAccessorArrayData(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer);
+		VertexBufferAccessorArrayData(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer);
 
 		CLASS_INVARIANT_DECLARE;
 
-		void Init(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer);
+		void Init(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer);
 
 		const char* GetData(int stride, int unit, int index) const;
 		bool HasData(int unit) const;

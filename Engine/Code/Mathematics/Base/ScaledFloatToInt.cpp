@@ -10,9 +10,9 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <algorithm>
+#include <algorithm> 
 
-using std::pow;
+ 
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)

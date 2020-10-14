@@ -14,7 +14,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
@@ -217,24 +217,24 @@ void Rendering::ParticleControllerImpl
 }
 
 void Rendering::ParticleControllerImpl
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	
-	source.Read(m_SystemLinearSpeed);
-	source.Read(m_SystemAngularSpeed);
-	source.ReadAggregate(m_SystemLinearAxis);
-	source.ReadAggregate(m_SystemAngularAxis);
-	source.Read(m_SystemSizeChange);
-	source.Read(m_NumParticles);
+	source->Read(m_SystemLinearSpeed);
+        source->Read(m_SystemAngularSpeed);
+        source->ReadAggregate(m_SystemLinearAxis);
+        source->ReadAggregate(m_SystemAngularAxis);
+        source->Read(m_SystemSizeChange);
+        source->Read(m_NumParticles);
 
 	m_ParticleLinearSpeed.resize(m_NumParticles);
 	m_ParticleLinearAxis.resize(m_NumParticles);
 	m_ParticleSizeChange.resize(m_NumParticles); 
 
-	source.Read(m_NumParticles, &m_ParticleLinearSpeed[0]);
-	source.ReadAggregate(m_NumParticles, &m_ParticleLinearAxis[0]);
-	source.Read(m_NumParticles, &m_ParticleSizeChange[0]);
+	source->Read(m_NumParticles, &m_ParticleLinearSpeed[0]);
+        source->ReadAggregate(m_NumParticles, &m_ParticleLinearAxis[0]);
+        source->Read(m_NumParticles, &m_ParticleSizeChange[0]);
 }
 
 

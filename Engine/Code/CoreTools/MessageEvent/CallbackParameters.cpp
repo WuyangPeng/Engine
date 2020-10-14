@@ -10,7 +10,7 @@
 #include "Detail/CallbackParametersImplDetail.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+ 
 
 using std::string;
 using std::wstring;

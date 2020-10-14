@@ -41,11 +41,7 @@ Rendering::Camera
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Camera
-    ::~Camera ()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,Camera)
 
@@ -180,7 +176,7 @@ void Rendering::Camera
 }
 
 void Rendering::Camera
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -196,7 +192,7 @@ void Rendering::Camera
 }
 
 void Rendering::Camera
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
   

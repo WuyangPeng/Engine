@@ -23,8 +23,8 @@ namespace Framework
 		using AVector = Mathematics::FloatAVector;
 		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
 		using Transform = Rendering::FloatTransform;
-		using CameraSmartPointer = Rendering::CameraSmartPointer;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
+		using CameraSmartPointer = Rendering::CameraSharedPtr;
+		using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;
 
 	public:
 		CameraModelMiddleLayerImpl() noexcept;

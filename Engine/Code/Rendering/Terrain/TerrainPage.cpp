@@ -10,10 +10,11 @@
 #include "Rendering/SceneGraph/StandardMesh.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -25,8 +26,8 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainPage);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainPage); 
 
 Rendering::TerrainPage
-	::TerrainPage (VertexFormatSmartPointer vformat, int size, unsigned short* heights, const Mathematics::Float2& origin, float minElevation, float maxElevation, float spacing)
-	:ParentType(vformat,VertexBufferSmartPointer(),IndexBufferSmartPointer()),mSize(size),mSizeM1(size - 1),
+	::TerrainPage (VertexFormatSharedPtr vformat, int size, unsigned short* heights, const Mathematics::Float2& origin, float minElevation, float maxElevation, float spacing)
+	:ParentType(vformat,VertexBufferSharedPtr(),IndexBufferSharedPtr()),mSize(size),mSizeM1(size - 1),
      mHeights(heights),mOrigin(origin), mMinElevation(minElevation), mMaxElevation(maxElevation), mSpacing(spacing)
 {
     // size = 2^p + 1, p <= 7
@@ -37,7 +38,7 @@ Rendering::TerrainPage
 
     // Create a mesh for the page.
     const float ext = mSpacing*mSizeM1;
-    TrianglesMeshSmartPointer mesh = StandardMesh(vformat).Rectangle(mSize, mSize, ext, ext);
+    TrianglesMeshSharedPtr mesh = StandardMesh(vformat).Rectangle(mSize, mSize, ext, ext);
     SetVertexFormat(vformat);
     SetVertexBuffer( mesh->GetVertexBuffer());
     SetIndexBuffer(mesh->GetIndexBuffer());     
@@ -142,19 +143,19 @@ Rendering::TerrainPage
 }
 
 void Rendering::TerrainPage
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
 	ParentType::Load(source);
 
-    source.Read(mSize);
+    source->Read(mSize);
     const int numVertices = mSize*mSize;
-    source.Read(numVertices, mHeights);
-    source.ReadAggregate(mOrigin);
-    source.Read(mMinElevation);
-    source.Read(mMaxElevation);
-    source.Read(mSpacing);
+    source->Read(numVertices, mHeights);
+    source->ReadAggregate(mOrigin);
+    source->Read(mMinElevation);
+    source->Read(mMaxElevation);
+    source->Read(mSpacing);
 
     mSizeM1 = mSize - 1;
     mInvSpacing = 1.0f/mSpacing;
@@ -164,7 +165,7 @@ void Rendering::TerrainPage
 }
 
 void Rendering::TerrainPage
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	ParentType::Link(source);
 }

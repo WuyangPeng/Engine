@@ -11,9 +11,10 @@
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"  
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
  #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -33,7 +34,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialEffect);
 Rendering::MaterialEffect
 	::MaterialEffect ()
 {
-	VertexShaderSmartPointer vshader{ std::make_shared< VertexShader>( "Wm5.Material",1, 2, 2, 0 ) };
+	VertexShaderSharedPtr vshader{ std::make_shared< VertexShader>( "Wm5.Material",1, 2, 2, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -52,7 +53,7 @@ Rendering::MaterialEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>( "Wm5.Material",1, 1, 0, 0 ) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>( "Wm5.Material",1, 1, 0, 0 ) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
 	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
@@ -60,17 +61,17 @@ Rendering::MaterialEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{   };
+	VisualPassSharedPtr pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{   });
-	pass->SetCullState(CullStateSmartPointer{   });
-	pass->SetDepthState(DepthStateSmartPointer{   });
-	pass->SetOffsetState(OffsetStateSmartPointer{   });
-	pass->SetStencilState(StencilStateSmartPointer{   });
-	pass->SetWireState(WireStateSmartPointer{   });
+	pass->SetAlphaState(AlphaStateSharedPtr{   });
+	pass->SetCullState(CullStateSharedPtr{   });
+	pass->SetDepthState(DepthStateSharedPtr{   });
+	pass->SetOffsetState(OffsetStateSharedPtr{   });
+	pass->SetStencilState(StencilStateSharedPtr{   });
+	pass->SetWireState(WireStateSharedPtr{   });
 
-	VisualTechniqueSmartPointer technique{   };
+	VisualTechniqueSharedPtr technique{   };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
@@ -80,9 +81,9 @@ Rendering::MaterialEffect
 Rendering::VisualEffectInstance* Rendering::MaterialEffect
 	::CreateInstance (Material* material) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, "PVWMatrix", ShaderFloatSmartPointer(CoreTools::New0 < ProjectionViewMatrixConstant>()));
-    instance->SetVertexConstant(0, "MaterialDiffuse",ShaderFloatSmartPointer(CoreTools::New0 < MaterialDiffuseConstant>(MaterialSmartPointer(material))));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+	instance->SetVertexConstant(0, "PVWMatrix", ShaderFloatSharedPtr(CoreTools::New0 < ProjectionViewMatrixConstant>()));
+    instance->SetVertexConstant(0, "MaterialDiffuse",ShaderFloatSharedPtr(CoreTools::New0 < MaterialDiffuseConstant>(MaterialSharedPtr(material))));
     return instance;
 }
 
@@ -104,7 +105,7 @@ Rendering::MaterialEffect
 }
 
 void Rendering::MaterialEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -114,7 +115,7 @@ void Rendering::MaterialEffect
 }
 
 void Rendering::MaterialEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     VisualEffect::Link(source);
 }

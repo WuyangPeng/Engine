@@ -28,7 +28,7 @@ namespace Rendering
 
 	public:
 		// Construction and destruction.
-		TerrainBase(const System::String& heightName, VertexFormatSmartPointer vformat, CameraSmartPointer camera );
+		TerrainBase(const System::String& heightName, VertexFormatSharedPtr vformat, CameraSharedPtr camera );
 
 		  ~TerrainBase();
 		  
@@ -46,8 +46,8 @@ namespace Rendering
 		 float GetSpacing() const noexcept;
 
 		// Page management.
-		 TerrainPageSmartPointer GetPage(int row, int col);
-		 TerrainPageSmartPointer GetCurrentPage(float x, float y) const noexcept;
+		 TerrainPageSharedPtr GetPage(int row, int col);
+		 TerrainPageSharedPtr GetCurrentPage(float x, float y) const noexcept;
 		float GetHeight(float x, float y) const;
 
 		// Estimate a normal vector at (x,y) by using the neighbors (x+dx,y+dy),
@@ -58,9 +58,9 @@ namespace Rendering
 		// Allow a page to be replaced.  The code unstitches the old page, loads
 		// the new page and stitches it, then returns the old page in case the
 		// application wants to cache it for quick reuse.
-		TerrainPageSmartPointer ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix);
+		TerrainPageSharedPtr ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix);
 
-		TerrainPageSmartPointer ReplacePage(int row, int col, TerrainPageSmartPointer newPage);
+		TerrainPageSharedPtr ReplacePage(int row, int col, TerrainPageSharedPtr newPage);
 
 		// Update of active set of terrain pages.
 		void OnCameraMotion();
@@ -74,22 +74,22 @@ namespace Rendering
 		int mMode;
 
 		// Shared by the pages.
-		VertexFormatSmartPointer mVFormat;
+		VertexFormatSharedPtr mVFormat;
 
 		// Page information.
 		int mNumRows, mNumCols;
 		int mSize;
 		float mMinElevation, mMaxElevation, mSpacing;
-		TerrainPageSmartPointer** mPages;
+		TerrainPageSharedPtr** mPages;
 
 		// Current page containing the camera.
 		int mCameraRow, mCameraCol;
-		CameraSmartPointer mCamera;
+		CameraSharedPtr mCamera;
 	};
 	#include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(TerrainBase);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, TerrainBase);
+	CORE_TOOLS_SHARED_PTR_DECLARE( TerrainBase);
 		#include STSTEM_WARNING_POP
 }
 

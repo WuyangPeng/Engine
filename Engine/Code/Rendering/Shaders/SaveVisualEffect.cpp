@@ -14,7 +14,7 @@
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
 Rendering::SaveVisualEffect
-	::SaveVisualEffect(const VisualEffectSmartPointer& visualEffect, const System::String& fileName)
+	::SaveVisualEffect(const VisualEffectSharedPtr& visualEffect, const System::String& fileName)
 {
 	CoreTools::WriteFileManager manager{ fileName };
 

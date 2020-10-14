@@ -12,7 +12,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -47,25 +47,25 @@ Rendering::VisualPass
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, VisualPass)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetVertexShader, VertexShaderSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetPixelShader, PixelShaderSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetAlphaState, AlphaStateSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetCullState, CullStateSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetVertexShader, VertexShaderSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetPixelShader, PixelShaderSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetAlphaState, AlphaStateSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetCullState, CullStateSharedPtr, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetDepthState, DepthStateSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetOffsetState, OffsetStateSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetStencilState, StencilStateSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetWireState, WireStateSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetDepthState, DepthStateSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetOffsetState, OffsetStateSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetStencilState, StencilStateSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualPass,SetWireState, WireStateSharedPtr, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetVertexShader, const Rendering::ConstVertexShaderSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetPixelShader,const Rendering::ConstPixelShaderSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetAlphaState,const Rendering::ConstAlphaStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetCullState,const Rendering::ConstCullStateSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetVertexShader, const Rendering::ConstVertexShaderSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetPixelShader,const Rendering::ConstPixelShaderSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetAlphaState,const Rendering::ConstAlphaStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetCullState,const Rendering::ConstCullStateSharedPtr)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetDepthState,const Rendering::ConstDepthStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetOffsetState,const Rendering::ConstOffsetStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetStencilState,const Rendering::ConstStencilStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetWireState,const Rendering::ConstWireStateSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetDepthState,const Rendering::ConstDepthStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetOffsetState,const Rendering::ConstOffsetStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetStencilState,const Rendering::ConstStencilStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualPass,GetWireState,const Rendering::ConstWireStateSharedPtr)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualPass,SaveShader, WriteFileManager&, void)
 

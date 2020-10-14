@@ -1,51 +1,54 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/18 10:15)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/09/29 17:19)
 
 // 日志类所需要的宏
 #ifndef CORE_TOOLS_HELPER_LOG_MACRO_H
 #define CORE_TOOLS_HELPER_LOG_MACRO_H
 
-#include "CoreTools/LogManager/Log.h"
-#include "CoreTools/LogManager/LogFileName.h"
-#include "CoreTools/LogManager/LogAppenderIOManager.h" 
+#include "CoreTools/Contract/FunctionDescribed.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
-#include "CoreTools/ClassInvariant/FunctionDescribed.h"
+#include "CoreTools/LogManager/Log.h"
+#include "CoreTools/LogManager/LogAppenderIOManager.h"
+#include "CoreTools/LogManager/LogFileName.h"
 
-#define LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed) \
-		SYSTEM_CONCATENATOR(LOG_SINGLETON.Out,appender()) << SYSTEM_CONCATENATOR(CoreTools::LogFilter::,filterType) << functionDescribed
+#define LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed) \
+    SYSTEM_CONCATENATOR(LOG_SINGLETON.Out, appender()) << SYSTEM_CONCATENATOR(CoreTools::LogFilter::, filterType) << functionDescribed
 
-#define LOG_SINGLETON_APPENDER(appender,filterType) \
-		LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType, (CORE_TOOLS_FUNCTION_DESCRIBED))
+#define LOG_SINGLETON_APPENDER(appender, filterType) \
+    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, (CORE_TOOLS_FUNCTION_DESCRIBED))
 
-#define LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed,fileName) \
-		LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed) << CoreTools::LogFileName{ fileName }
+#define LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, fileName) \
+    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed) << CoreTools::LogFileName(fileName)
 
-#define LOG_SINGLETON_FILE_APPENDER(appender,filterType,fileName) \
-	    LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType, (CORE_TOOLS_FUNCTION_DESCRIBED),fileName)
+#define LOG_SINGLETON_FILE_APPENDER(appender, filterType, fileName) \
+    LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, (CORE_TOOLS_FUNCTION_DESCRIBED), fileName)
 
-#define LOG_SINGLETON_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed) \
-		LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed) << CoreTools::LogFileName{ SYSTEM_TEXT("Console") }
+#define LOG_SINGLETON_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed) \
+    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed) << CoreTools::LogFileName(SYSTEM_TEXT("Console"))
 
-#define LOG_SINGLETON_CONSOLE_APPENDER(appender,filterType) \
-	    LOG_SINGLETON_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType, (CORE_TOOLS_FUNCTION_DESCRIBED))
+#define LOG_SINGLETON_CONSOLE_APPENDER(appender, filterType) \
+    LOG_SINGLETON_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, (CORE_TOOLS_FUNCTION_DESCRIBED))
 
-#define LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(appender,filterType,fileName) \
-	    LOG_SINGLETON_FILE_APPENDER(appender,filterType,fileName) << CoreTools::LogAppenderIOManageSign::AlwaysConsole
+#define LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(appender, filterType, fileName) \
+    LOG_SINGLETON_FILE_APPENDER(appender, filterType, fileName) << CoreTools::LogAppenderIOManageSign::AlwaysConsole
 
-#define LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed,fileName) \
-		LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed,fileName) \
+#define LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, fileName) \
+    LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, fileName)                 \
         << CoreTools::LogAppenderIOManageSign::AlwaysConsole
 
-#define LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed) \
-		LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType,functionDescribed,SYSTEM_TEXT(#filterType)) 
+#define LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed) \
+    LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, SYSTEM_TEXT(#filterType))
 
-#define LOG_SINGLETON_ENGINE_APPENDER(appender,filterType) \
-	    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(appender,filterType, (CORE_TOOLS_FUNCTION_DESCRIBED))
+#define LOG_SINGLETON_ENGINE_APPENDER(appender, filterType) \
+    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, (CORE_TOOLS_FUNCTION_DESCRIBED))
 
 #define LOG_SINGLETON_TRIGGER_ASSERT \
-		CoreTools::LogAppenderIOManageSign::TriggerAssert << CoreTools::LogAppenderIOManageSign::Refresh
+    CoreTools::LogAppenderIOManageSign::TriggerAssert << CoreTools::LogAppenderIOManageSign::Refresh
 
-#endif // CORE_TOOLS_HELPER_LOG_MACRO_H
+#endif  // CORE_TOOLS_HELPER_LOG_MACRO_H

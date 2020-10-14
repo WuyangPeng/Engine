@@ -15,7 +15,7 @@
 #include "TrianglesMesh.h"
 #include "TrianglesStrip.h"
 #include "CoreTools/FileManager/ReadFileManager.h"  
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
  
@@ -52,7 +52,7 @@ Rendering::VisualPrimitiveType Rendering::LoadVisual
 	return m_Data->GetPrimitiveType();
 }
 
-Rendering::VertexFormatSmartPointer Rendering::LoadVisual
+Rendering::VertexFormatSharedPtr Rendering::LoadVisual
 	::GetVertexFormat()
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -60,7 +60,7 @@ Rendering::VertexFormatSmartPointer Rendering::LoadVisual
 	return m_Data->GetVertexFormat();
 }
 
-Rendering::VertexBufferSmartPointer Rendering::LoadVisual
+Rendering::VertexBufferSharedPtr Rendering::LoadVisual
 	::GetVertexBuffer()
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -68,7 +68,7 @@ Rendering::VertexBufferSmartPointer Rendering::LoadVisual
 	return m_Data->GetVertexBuffer();
 }
 
-Rendering::IndexBufferSmartPointer Rendering::LoadVisual
+Rendering::IndexBufferSharedPtr Rendering::LoadVisual
 	::GetIndexBuffer()
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -89,11 +89,11 @@ void Rendering::LoadVisual
 	{	
 		auto vertexFormat =	VertexFormat::LoadFromFile(manager);
 
-		VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>() };
+		VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>() };
 
 		vertexBuffer->ReadFromFile(manager,vertexFormat);
 
-		IndexBufferSmartPointer indexBuffer{ std::make_shared<IndexBuffer>() };
+		IndexBufferSharedPtr indexBuffer{ std::make_shared<IndexBuffer>() };
 		indexBuffer->ReadFromFile(manager);
 
 		m_Data->SetPrimitiveType(System::UnderlyingCastEnum<VisualPrimitiveType>(type));
@@ -103,11 +103,11 @@ void Rendering::LoadVisual
 		if (indexBuffer->GetNumElements() != 0)
 			m_Data->SetIndexBuffer(indexBuffer);
 		else
-			m_Data->SetIndexBuffer(IndexBufferSmartPointer{});
+			m_Data->SetIndexBuffer(IndexBufferSharedPtr{});
 	}
 }
 
-Rendering::VisualSmartPointer Rendering::LoadVisual
+Rendering::VisualSharedPtr Rendering::LoadVisual
 	::CreateFromFile(const System::String& name) 
 {
 	LoadVisual loadVisual{ name };
@@ -115,23 +115,23 @@ Rendering::VisualSmartPointer Rendering::LoadVisual
 	switch (loadVisual.GetPrimitiveType())
 	{
 	case VisualPrimitiveType::Polypoint:
-		return VisualSmartPointer{ NEW0 Polypoint(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer()) };
+            return VisualSharedPtr{ std::make_shared < Polypoint>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer()) };
 	case VisualPrimitiveType::PolysegmentsDisjoint:
-		return VisualSmartPointer{ NEW0 Polysegment(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(),false) };
+            return VisualSharedPtr{ std::make_shared < Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), false) };
 	case VisualPrimitiveType::PolysegmentsContiguous:
-		return VisualSmartPointer{ NEW0 Polysegment(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), true) };
+            return VisualSharedPtr{ std::make_shared < Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), true) };
 	case VisualPrimitiveType::TriangleMesh:
-		return VisualSmartPointer{ NEW0 TrianglesMesh(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), loadVisual.GetIndexBuffer()) };
+            return VisualSharedPtr{ std::make_shared < TrianglesMesh>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), loadVisual.GetIndexBuffer()) };
 	case VisualPrimitiveType::TriangleStrip:
 	    {
 			auto indexBuffer = loadVisual.GetIndexBuffer();					
 			if (!indexBuffer)
 			{
-				return VisualSmartPointer{ NEW0 TrianglesStrip(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2) };
+                            return VisualSharedPtr{ std::make_shared < TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2) };
 			}
 			else
 			{
-				return VisualSmartPointer{ NEW0 TrianglesStrip(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer) };
+                            return VisualSharedPtr{ std::make_shared < TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer) };
 			}			
 	    }
 	case VisualPrimitiveType::TriangleFan:
@@ -139,11 +139,11 @@ Rendering::VisualSmartPointer Rendering::LoadVisual
 		auto indexBuffer = loadVisual.GetIndexBuffer();
 			if (!indexBuffer )
 			{
-				return VisualSmartPointer{ NEW0 TrianglesFan(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2) };
+                            return VisualSharedPtr{ std::make_shared < TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2) };
 			}
 			else
 			{
-				return VisualSmartPointer{ NEW0 TrianglesFan(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer) };
+                            return VisualSharedPtr{ std::make_shared < TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer) };
 			}
 	    }
 				 
@@ -154,7 +154,7 @@ Rendering::VisualSmartPointer Rendering::LoadVisual
 	}
 }
 
-Rendering::VisualSmartPointer 
+Rendering::VisualSharedPtr 
 	Rendering::LoadVisual::CreateFromFile(const System::String& name, int indexSize)
 {
 	LoadVisual loadVisual{ name };
@@ -162,9 +162,9 @@ Rendering::VisualSmartPointer
 	switch (loadVisual.GetPrimitiveType())
 	{	 
 	case VisualPrimitiveType::TriangleStrip:		
-		return VisualSmartPointer{ NEW0 TrianglesStrip(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize) };
+		return VisualSharedPtr{ std::make_shared < TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize) };
 	case VisualPrimitiveType::TriangleFan:		
-		return VisualSmartPointer{ NEW0 TrianglesFan(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize) };
+		return VisualSharedPtr{ std::make_shared < TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize) };
 	default:
 	    {
 		     THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"s));

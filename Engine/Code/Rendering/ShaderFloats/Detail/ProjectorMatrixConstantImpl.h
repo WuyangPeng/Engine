@@ -22,13 +22,13 @@ namespace Rendering
 		using Matrix = Mathematics::FloatMatrix;
  
 	public: 
-		ProjectorMatrixConstantImpl(const ProjectorSmartPointer& projector,bool biased, int biasScaleMatrixIndex);
+		ProjectorMatrixConstantImpl(const ProjectorSharedPtr& projector,bool biased, int biasScaleMatrixIndex);
 		ProjectorMatrixConstantImpl();
  
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 	
-		  void Load(BufferSource& source) override;
+		  void Load(const CoreTools::BufferSourceSharedPtr& source) override;
 		  void Save(const CoreTools::BufferTargetSharedPtr& target) const override;
 		  int GetStreamingSize() const override;
 

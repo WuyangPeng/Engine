@@ -259,21 +259,6 @@
     <Filter Include="Time 头文件\Using">
       <UniqueIdentifier>{4efc1c26-f6f1-4268-ad6d-ffd94f64205f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UserInterface 头文件">
-      <UniqueIdentifier>{324a2941-2a27-4713-8cea-ccd84d8b74de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UserInterface 源文件">
-      <UniqueIdentifier>{0619fd11-a1e4-4126-8dc6-ff58dbcc32d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UserInterface 头文件\Flags">
-      <UniqueIdentifier>{c7caa73a-64fb-40d1-8bd5-2983877d398b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UserInterface 头文件\Fwd">
-      <UniqueIdentifier>{f4c88420-6bb6-4ad2-b114-9fae4eebcce4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UserInterface 头文件\Using">
-      <UniqueIdentifier>{0abae324-ea51-4a2c-a85c-c68def52c0c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Window 头文件">
       <UniqueIdentifier>{2e729bfe-71e8-4449-a197-5f789f3cb9b0}</UniqueIdentifier>
     </Filter>
@@ -1860,27 +1845,6 @@
     <ClInclude Include="..\..\..\Code\System\Time\Using\DeltaTimeUsing.h">
       <Filter>Time 头文件\Using</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\UserInterface\OpenGLWglPrototypes.h">
-      <Filter>UserInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\UserInterface\UserInterface.h">
-      <Filter>UserInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\UserInterface\UserInterfaceFwd.h">
-      <Filter>UserInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\UserInterface\Flags\OpenGLWglPrototypesFlags.h">
-      <Filter>UserInterface 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\UserInterface\Fwd\OpenGLWglPrototypesFwd.h">
-      <Filter>UserInterface 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\UserInterface\Fwd\UserInterfaceFlagsFwd.h">
-      <Filter>UserInterface 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\UserInterface\Using\OpenGLWglPrototypesUsing.h">
-      <Filter>UserInterface 头文件\Using</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Window\WindowSystem.h">
       <Filter>Window 头文件</Filter>
     </ClInclude>
@@ -2048,6 +2012,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Window\ComObjectBase.h">
       <Filter>Window 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\Using\OpenGLWglPrototypesUsing.h">
+      <Filter>OpenGL 头文件\Using</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLWglPrototypesFlags.h">
+      <Filter>OpenGL 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLWglPrototypes.h">
+      <Filter>OpenGL 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Span.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2402,9 +2378,6 @@
     <ClCompile Include="..\..\..\Code\System\Time\Data\DeltaTimeValueData.cpp">
       <Filter>Time 源文件\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\UserInterface\OpenGLWglPrototypes.cpp">
-      <Filter>UserInterface 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\Window\LastPlatformError.cpp">
       <Filter>Window 源文件</Filter>
     </ClCompile>
@@ -2443,6 +2416,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\Window\Engineering.cpp">
       <Filter>Window 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLWglPrototypes.cpp">
+      <Filter>OpenGL 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,7 @@ namespace Network
     class NETWORK_DEFAULT_DECLARE MessageBuffer
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageBuffer);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageBuffer, = default);
         using MessageBufferSharedPtr = std::shared_ptr<MessageBuffer>;
         using ConstMessageBufferSharedPtr = std::shared_ptr<const MessageBuffer>;
         using ImplTypeSharedPtr = std::shared_ptr<ImplType>;
@@ -33,10 +33,7 @@ namespace Network
         MessageBuffer(BuffBlockSize buffBlockSize, ParserStrategy parserStrategy);
         MessageBuffer(int count, ParserStrategy parserStrategy);
         explicit MessageBuffer(const ImplTypeSharedPtr& messageBuffer) noexcept;
-        ~MessageBuffer() = default;
-
-        MessageBuffer(MessageBuffer&&) = default;
-        MessageBuffer& operator=(MessageBuffer&&) = default;
+     
 
         CLASS_INVARIANT_DECLARE;
 

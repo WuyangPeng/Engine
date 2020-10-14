@@ -1,0 +1,10 @@
+游戏人工智能编程案例精粹（Programming Game AI by Example）
+
+官方网站：
+http://www.jblearning.com/catalog/9781556220784
+
+★★
+作者： Mat Buckland
+
+知识点 
+1.	游戏人工智能基础知识。   

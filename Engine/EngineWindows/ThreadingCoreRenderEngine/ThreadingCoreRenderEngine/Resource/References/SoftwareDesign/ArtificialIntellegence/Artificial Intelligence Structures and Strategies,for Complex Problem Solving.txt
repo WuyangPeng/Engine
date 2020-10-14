@@ -1,0 +1,11 @@
+人工智能：复杂问题求解的结构和策略（Artificial Intelligence:Structures and Strategies,for Complex Problem Solving）
+（第6版）
+
+官方网站：
+http://www.cs.unm.edu/~luger/ai-final
+
+☆
+作者：George F.Luger 
+
+知识点 
+1.	人工智能基础知识。

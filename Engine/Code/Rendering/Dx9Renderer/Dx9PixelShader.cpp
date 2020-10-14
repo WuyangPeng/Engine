@@ -6,13 +6,13 @@
 
 #include "Rendering/RenderingExport.h" 
 #include "Dx9PixelShader.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 using namespace Rendering;
 
 
 Dx9PixelShader::Dx9PixelShader(Renderer* renderer,const PixelShader* pshader)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	renderer; pshader;
 /*    IDirect3DDevice9* device = renderer->mData->mDevice;
 
@@ -87,14 +87,14 @@ void Dx9PixelShader::Enable(Renderer* renderer, const PixelShader* pshader,const
         renderer->mData->mMaxPShaderImages, 0,
         renderer->mData->mCurrentPSState);*/
 		
-		CoreTools::DoNothing();
+		CoreTools::DisableNoexcept();
 }
 
 void Dx9PixelShader::Disable(Renderer* renderer, const PixelShader* pshader,const ShaderParameters* parameters)
 {
 	renderer; pshader; parameters;
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
    /* IDirect3DDevice9* device = renderer->mData->mDevice;
     HRESULT hr;
     WM5_UNUSED(hr);

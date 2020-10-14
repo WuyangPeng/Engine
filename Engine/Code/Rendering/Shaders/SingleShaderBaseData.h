@@ -44,7 +44,7 @@ namespace Rendering
 		ShaderFlags::VariableType GetType () const noexcept;
                 ShaderFlags::VariableSemantic GetSemantic() const noexcept;	
 
-		void Load (BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
 		

@@ -34,30 +34,30 @@ namespace Rendering
 		using ObjectLink = CoreTools::ObjectLink;
 		using ObjectRegister = CoreTools::ObjectRegister;
 		using Object = CoreTools::Object;
-		using ObjectSmartPointer = CoreTools::ObjectSmartPointer;
-		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
+		using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
+		using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
  
 	public: 
-		explicit LightConstantImpl(const LightSmartPointer& light);
+		explicit LightConstantImpl(const LightSharedPtr& light);
 		LightConstantImpl();
 
 		CLASS_INVARIANT_DECLARE;
 	
-		void Load(BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
-		void Link(ObjectLink& source);
+		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
-		const ObjectSmartPointer GetObjectByName(const std::string& name); 
-		const std::vector<ObjectSmartPointer> GetAllObjectsByName(const std::string& name); 
-		const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const;
-		const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;
+		const ObjectSharedPtr GetObjectByName(const std::string& name); 
+		const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name); 
+		const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+		const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
  
-		const ConstLightSmartPointer GetLight() const;
+		const ConstLightSharedPtr GetLight() const;
    
 	private:
-		LightSmartPointer m_Light;
+		LightSharedPtr m_Light;
 	};
 }
 

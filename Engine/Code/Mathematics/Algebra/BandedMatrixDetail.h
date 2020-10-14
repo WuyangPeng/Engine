@@ -13,7 +13,7 @@
 
     #include "AlgebraTraits.h"
     #include "VariableMatrix.h"
-    #include "CoreTools/ClassInvariant/NoexceptDetail.h"
+    #include "CoreTools/Contract/Noexcept.h"
     #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
     #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
     #include "CoreTools/Helper/ExceptionMacro.h"
@@ -24,7 +24,7 @@
     #include "Mathematics/Base/MathDetail.h"
 
     #include "System/Helper/PragmaWarning.h"
-    #include "CoreTools/ClassInvariant/Noexcept.h"
+    #include "CoreTools/Contract/Noexcept.h"
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26487)
     #include SYSTEM_WARNING_DISABLE(26489)
@@ -78,7 +78,7 @@ void Mathematics::BandedMatrix<Real>::Deallocate()
 {
     DELETE1(m_DiagonalBand);
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     if (m_LowerBand != nullptr)
     {
@@ -276,7 +276,7 @@ int Mathematics::BandedMatrix<Real>::GetLowerBandMax(int index) const
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(0 <= index && index < m_LowerBandsNumber, "无效索引在 GetLBandMax\n");
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     return m_Size - 1 - index;
 }
@@ -338,7 +338,7 @@ int Mathematics::BandedMatrix<Real>::GetUpperBandMax(int index) const
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(0 <= index && index < m_UpperBandsNumber, "无效索引在 GetUBandMax\n");
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     return m_Size - 1 - index;
 }

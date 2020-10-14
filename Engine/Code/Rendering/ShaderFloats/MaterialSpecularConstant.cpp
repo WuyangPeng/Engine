@@ -24,7 +24,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialSpecularConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, MaterialSpecularConstant);
 
 Rendering::MaterialSpecularConstant
-	::MaterialSpecularConstant(const MaterialSmartPointer& material)
+	::MaterialSpecularConstant(const MaterialSharedPtr& material)
 	:ParentType{ material }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -43,11 +43,11 @@ void Rendering::MaterialSpecularConstant ::Update([[maybe_unused]] const Visual*
  
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::MaterialSpecularConstant
+Rendering::ShaderFloatSharedPtr Rendering::MaterialSpecularConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 #include STSTEM_WARNING_POP

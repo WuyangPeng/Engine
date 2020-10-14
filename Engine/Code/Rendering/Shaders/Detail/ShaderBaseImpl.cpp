@@ -9,7 +9,7 @@
 #include "ShaderBaseImpl.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -20,6 +20,7 @@
 
 using std::string;
 #include "System/Helper/PragmaWarning.h" 
+#include "System/Helper/EnumCast.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26496)
@@ -269,8 +270,7 @@ Rendering::ShaderSamplerData::Colour Rendering::ShaderBaseImpl
 	return m_Sampler.GetBorderColor(index);
 }
 
-void Rendering::ShaderBaseImpl
-	::Load( BufferSource& source )
+void Rendering::ShaderBaseImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -278,7 +278,7 @@ void Rendering::ShaderBaseImpl
 	m_Output.Load(source);
 	m_Constants.Load(source);
 	m_Sampler.Load(source);
-	//source.ReadSmartPointer(m_Profile);
+	//source.ReadSharedPtr(m_Profile);
 }
 
 void Rendering::ShaderBaseImpl
@@ -290,7 +290,7 @@ void Rendering::ShaderBaseImpl
 	m_Output.Save(target);
 	m_Constants.Save(target);
 	m_Sampler.Save(target);
-	//target.WriteSmartPointer(m_Profile);
+	//target.WriteSharedPtr(m_Profile);
 }
 
 int Rendering::ShaderBaseImpl
@@ -308,40 +308,39 @@ int Rendering::ShaderBaseImpl
 	return size;
 }
 
-void Rendering::ShaderBaseImpl ::SetProfile(const ShaderProfileDataSmartPointer& profile) noexcept
+void Rendering::ShaderBaseImpl ::SetProfile(const ShaderProfileDataSharedPtr& profile) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Profile = profile;
 }
 
-const Rendering::ConstShaderProfileDataSmartPointer Rendering::ShaderBaseImpl ::GetProfile() const noexcept
+const Rendering::ConstShaderProfileDataSharedPtr Rendering::ShaderBaseImpl ::GetProfile() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Profile;
 }
 
-Rendering::ShaderProfileDataSmartPointer Rendering::ShaderBaseImpl ::GetProfile() noexcept
+Rendering::ShaderProfileDataSharedPtr Rendering::ShaderBaseImpl ::GetProfile() noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	return m_Profile;
 }
 
-void Rendering::ShaderBaseImpl
-	::Link( ObjectLink& source )
+void Rendering::ShaderBaseImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ResolveObjectSmartPointerLink(m_Profile);
+	//source.ResolveObjectSharedPtrLink(m_Profile);
 }
 
 void Rendering::ShaderBaseImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.RegisterSmartPointer(m_Profile);
+	//target.RegisterSharedPtr(m_Profile);
 }
 
 void Rendering::ShaderBaseImpl
@@ -493,7 +492,7 @@ void Rendering::ShaderBaseImpl
 		SetBorderColor(i, Colour(borderColor[0], borderColor[1], borderColor[2], borderColor[3]));
 	}
 
-	ShaderProfileDataSmartPointer profile{ std::make_shared< ShaderProfileData>(GetNumConstants(), GetNumSamplers()) };
+	ShaderProfileDataSharedPtr profile{ std::make_shared< ShaderProfileData>(GetNumConstants(), GetNumSamplers()) };
 
 	for (auto profileIndex = 0; profileIndex < numProfiles; ++profileIndex)
 	{

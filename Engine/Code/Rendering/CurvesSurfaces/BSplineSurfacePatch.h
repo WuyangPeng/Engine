@@ -78,7 +78,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(BSplineSurfacePatch);
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, BSplineSurfacePatch);
+    CORE_TOOLS_SHARED_PTR_DECLARE( BSplineSurfacePatch);
 #include STSTEM_WARNING_POP
 }
 

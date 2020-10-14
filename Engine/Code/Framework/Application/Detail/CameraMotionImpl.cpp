@@ -9,7 +9,7 @@
 #include "CameraMotionImpl.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+ 
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"

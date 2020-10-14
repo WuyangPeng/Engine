@@ -27,7 +27,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26496)
-Rendering::StandardMeshImpl ::StandardMeshImpl(const VertexFormatSmartPointer& vertexFormat, bool isStatic, bool inside, const FloatTransform* transform)
+Rendering::StandardMeshImpl ::StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic, bool inside, const FloatTransform* transform)
     : m_VertexFormat{ vertexFormat }, m_Transform{ transform != nullptr ? *transform : FloatTransform() }, m_IsStatic{ isStatic },
       m_Inside{ inside }, m_HasNormals{ false }, m_Usage{ isStatic ? BufferUsage::Static : BufferUsage::Dynamic }
 {
@@ -132,7 +132,7 @@ const Rendering::FloatTransform& Rendering::StandardMeshImpl ::GetTransform() co
     return m_Transform;
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -142,7 +142,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Rectang
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -182,7 +182,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Rectang
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared<IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared<IndexBuffer>(numIndices, 4, m_Usage) };
 
     totalIndex = 0;
     for (auto yIndex = 0; yIndex < ySamples - 1; ++yIndex)
@@ -200,11 +200,11 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Rectang
         }
     }
 
-    return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>( m_VertexFormat->Clone(), vertexBuffer, indexBuffer ) };
+    return TrianglesMeshSharedPtr{ std::make_shared < TrianglesMesh>( m_VertexFormat->Clone(), vertexBuffer, indexBuffer ) };
 }
 
 // private
-void Rendering::StandardMeshImpl ::TransformData(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSmartPointer& vertexBuffer) const
+void Rendering::StandardMeshImpl ::TransformData(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const
 {
     if (!m_Transform.IsIdentity())
     {
@@ -222,7 +222,7 @@ void Rendering::StandardMeshImpl ::TransformData(const VertexBufferAccessor& ver
     }
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Disk(int shellSamples, int radialSamples, float radius) const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Disk(int shellSamples, int radialSamples, float radius) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -234,7 +234,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Disk(in
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -291,13 +291,13 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Disk(in
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
     indexBuffer->InitIndexBufferInDisk(radialSamplesMinus1, shellSamplesMinus1);
 
-    return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>( m_VertexFormat->Clone(), vertexBuffer, indexBuffer ) };
+    return TrianglesMeshSharedPtr{ std::make_shared < TrianglesMesh>( m_VertexFormat->Clone(), vertexBuffer, indexBuffer ) };
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Box(float xExtent, float yExtent, float zExtent) const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Box(float xExtent, float yExtent, float zExtent) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -307,7 +307,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Box(flo
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -339,7 +339,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Box(flo
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引（外视图）
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>( numIndices, 4, m_Usage ) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>( numIndices, 4, m_Usage ) };
 
     vector<int> indices(36);
     indices[0] = 0;
@@ -386,7 +386,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Box(flo
 
     indexBuffer->InitIndexBuffer(indices);
 
-    TrianglesMeshSmartPointer mesh{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
+    TrianglesMeshSharedPtr mesh{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
     if (m_HasNormals)
     {
         mesh->UpdateModelSpace(VisualUpdateType::Normals);
@@ -406,7 +406,7 @@ void Rendering::StandardMeshImpl ::ReverseTriangleOrder(int numTriangles, int* i
     }
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::CylinderOmittedEndDisks(int axisSamples, int radialSamples, float radius, float height) const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::CylinderOmittedEndDisks(int axisSamples, int radialSamples, float radius, float height) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -416,7 +416,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -503,7 +503,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 产生索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>( numIndices, 4, m_Usage ) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>( numIndices, 4, m_Usage ) };
     vector<int> indices(numIndices);
     auto indicesIndex = 0;
 
@@ -540,7 +540,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
 
     indexBuffer->InitIndexBuffer(indices);
 
-    TrianglesMeshSmartPointer mesh{ std::make_shared < TrianglesMesh>( m_VertexFormat->Clone(), vertexBuffer, indexBuffer ) };
+    TrianglesMeshSharedPtr mesh{ std::make_shared < TrianglesMesh>( m_VertexFormat->Clone(), vertexBuffer, indexBuffer ) };
 
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
@@ -551,7 +551,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     return mesh;
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::CylinderIncludedEndDisks(int axisSamples, int radialSamples, float radius, float height) const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::CylinderIncludedEndDisks(int axisSamples, int radialSamples, float radius, float height) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -602,7 +602,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Cylinde
     return mesh;
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Sphere(int zSamples, int radialSamples, float radius) const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Sphere(int zSamples, int radialSamples, float radius) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -616,7 +616,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Sphere(
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -758,7 +758,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Sphere(
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
     vector<int> indices(numIndices);
     int indicesIndex = 0;
 
@@ -840,7 +840,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Sphere(
 
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
-    TrianglesMeshSmartPointer mesh{ NEW0 TrianglesMesh(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
+    TrianglesMeshSharedPtr mesh{ std::make_shared< TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 
     mesh->GetModelBound().SetCenter(Mathematics::Float::g_Origin);
     mesh->GetModelBound().SetRadius(radius);
@@ -848,7 +848,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Sphere(
     return mesh;
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -858,7 +858,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Torus(i
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -959,7 +959,7 @@ const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
     vector<int> indices(numIndices);
 
     auto indicesIndex = 0;
@@ -1000,7 +1000,7 @@ const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
 
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
-    TrianglesMeshSmartPointer mesh{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
+    TrianglesMeshSharedPtr mesh{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 
     mesh->GetModelBound().SetCenter(Mathematics::Float::g_Origin);
     mesh->GetModelBound().SetRadius(outerRadius);
@@ -1008,7 +1008,7 @@ const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
     return mesh;
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Tetrahedron() const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Tetrahedron() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -1022,7 +1022,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Tetrahe
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -1037,7 +1037,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Tetrahe
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
     vector<int> indices(12);
 
     indices[0] = 0;
@@ -1060,10 +1060,10 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Tetrahe
 
     indexBuffer->InitIndexBuffer(indices);
 
-    return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
+    return TrianglesMeshSharedPtr{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Hexahedron() const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Hexahedron() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -1075,7 +1075,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Hexahed
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -1094,7 +1094,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Hexahed
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
     vector<int> indices(numIndices);
 
     indices[0] = 0;
@@ -1141,10 +1141,10 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Hexahed
 
     indexBuffer->InitIndexBuffer(indices);
 
-    return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
+    return TrianglesMeshSharedPtr{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Octahedron() const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Octahedron() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -1154,7 +1154,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Octahed
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -1171,7 +1171,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Octahed
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
     vector<int> indices(numIndices);
 
     indices[0] = 4;
@@ -1206,10 +1206,10 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Octahed
 
     indexBuffer->InitIndexBuffer(indices);
 
-    return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
+    return TrianglesMeshSharedPtr{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Dodecahedron() const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Dodecahedron() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -1223,7 +1223,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Dodecah
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -1254,7 +1254,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Dodecah
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
     vector<int> indices(numIndices);
 
     indices[0] = 0;
@@ -1373,10 +1373,10 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Dodecah
 
     indexBuffer->InitIndexBuffer(indices);
 
-    return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
+    return TrianglesMeshSharedPtr{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Icosahedron() const
+const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Icosahedron() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -1391,7 +1391,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Icosahe
     const auto stride = m_VertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
+    VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(numVertices, stride, m_Usage) };
     VertexBufferAccessor vertexBufferAccessor{ m_VertexFormat,
                                                vertexBuffer };
 
@@ -1414,7 +1414,7 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Icosahe
     TransformData(vertexBufferAccessor, vertexBuffer);
 
     // 生成索引
-    IndexBufferSmartPointer indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
+    IndexBufferSharedPtr indexBuffer{ std::make_shared < IndexBuffer>(numIndices, 4, m_Usage) };
     vector<int> indices(numIndices);
 
     indices[0] = 0;
@@ -1485,11 +1485,11 @@ const Rendering::TrianglesMeshSmartPointer Rendering::StandardMeshImpl ::Icosahe
 
     indexBuffer->InitIndexBuffer(indices);
 
-    return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
+    return TrianglesMeshSharedPtr{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 }
 
 // private
-void Rendering::StandardMeshImpl ::CreatePlatonicNormals(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSmartPointer& vertexBuffer) const
+void Rendering::StandardMeshImpl ::CreatePlatonicNormals(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const
 {
     if (m_HasNormals)
     {
@@ -1503,7 +1503,7 @@ void Rendering::StandardMeshImpl ::CreatePlatonicNormals(const VertexBufferAcces
 }
 
 // private
-void Rendering::StandardMeshImpl ::CreatePlatonicTextures(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSmartPointer& vertexBuffer) const
+void Rendering::StandardMeshImpl ::CreatePlatonicTextures(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const
 {
     for (auto unit = 0; unit < sm_MaxUnits; ++unit)
     {

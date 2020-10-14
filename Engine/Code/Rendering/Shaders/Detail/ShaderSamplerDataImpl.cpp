@@ -161,13 +161,12 @@ Rendering::ShaderSamplerDataImpl::Colour Rendering::ShaderSamplerDataImpl
 	return m_SingleShaderSamplerData[index].GetBorderColor();
 }
 
-void Rendering::ShaderSamplerDataImpl
-	::Load( BufferSource& source )
+void Rendering::ShaderSamplerDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	uint32_t number{ 0 };
-	source.Read(number);
+	source->Read(number);
 	m_SingleShaderSamplerData.resize(number);
 	 
 	for_each(m_SingleShaderSamplerData.begin(), m_SingleShaderSamplerData.end(), std::bind(&SingleShaderSamplerData::Load,std::placeholders::_1,std::ref(source)));	 

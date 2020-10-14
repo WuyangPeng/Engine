@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"

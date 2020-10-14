@@ -10,12 +10,13 @@
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+ 
 #include "System/Helper/PragmaWarning/Disable4996.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 
 #include <fstream>
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26426)
@@ -546,23 +547,23 @@ bool AssistTools::FxCompiler
 	mPShader =  boost::polymorphic_pointer_cast<Rendering::PixelShader>(CreateShader(false, pProgram, pInputs, pOutputs,
 		pConstants, pSamplers));
 
-	Rendering::VisualPassSmartPointer pass(NEW0 Rendering::VisualPass());
+	Rendering::VisualPassSharedPtr pass(NEW0 Rendering::VisualPass());
     pass->SetVertexShader(mVShader);
     pass->SetPixelShader(mPShader);
 
     // TODO.  Once Cg FX files are parsed, the global state from each pass
     // should be set here.  For now, the application is responsible for
     // setting the global state after the *.wmfx file is loaded.
-	pass->SetAlphaState(Rendering::AlphaStateSmartPointer(NEW0 Rendering::AlphaState()));
-	pass->SetCullState(Rendering::CullStateSmartPointer(NEW0 Rendering::CullState()));
-	pass->SetDepthState(Rendering::DepthStateSmartPointer(NEW0 Rendering::DepthState()));
-	pass->SetOffsetState(Rendering::OffsetStateSmartPointer(NEW0 Rendering::OffsetState()));
-	pass->SetStencilState(Rendering::StencilStateSmartPointer(NEW0 Rendering::StencilState()));
-	pass->SetWireState(Rendering::WireStateSmartPointer(NEW0 Rendering::WireState()));
+	pass->SetAlphaState(Rendering::AlphaStateSharedPtr(NEW0 Rendering::AlphaState()));
+	pass->SetCullState(Rendering::CullStateSharedPtr(NEW0 Rendering::CullState()));
+	pass->SetDepthState(Rendering::DepthStateSharedPtr(NEW0 Rendering::DepthState()));
+	pass->SetOffsetState(Rendering::OffsetStateSharedPtr(NEW0 Rendering::OffsetState()));
+	pass->SetStencilState(Rendering::StencilStateSharedPtr(NEW0 Rendering::StencilState()));
+	pass->SetWireState(Rendering::WireStateSharedPtr(NEW0 Rendering::WireState()));
 
     // TODO.  Once Cg FX files are parsed, we might have multiple techniques
     // or multiple passes per technique.
-	Rendering::VisualTechniqueSmartPointer technique(NEW0 Rendering::VisualTechnique());
+	Rendering::VisualTechniqueSharedPtr technique(NEW0 Rendering::VisualTechnique());
     technique->InsertPass(pass);
 
 	mEffect = NEW0 Rendering::VisualEffect();
@@ -896,7 +897,7 @@ bool AssistTools::FxCompiler
     return true;
 }
 
-Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
+Rendering::ShaderBaseSharedPtr AssistTools::FxCompiler
 	::CreateShader(bool isVShader, const Program& program,
                    InputArray& inputs, OutputArray& outputs, ConstantArray& constants,
 				   SamplerArray& samplers)
@@ -906,7 +907,7 @@ Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
     const int numConstants = (int)constants.size();
     const int numSamplers = (int)samplers.size();
 
-    Rendering::ShaderBaseSmartPointer shader;
+    Rendering::ShaderBaseSharedPtr shader;
     if (isVShader)
     {
         shader.reset(NEW0 Rendering::VertexShader(program.Name, numInputs, numOutputs,
@@ -931,7 +932,7 @@ Rendering::ShaderBaseSmartPointer AssistTools::FxCompiler
         shader->SetOutput(i, output.Name, output.Type, output.Semantic);
     }
 
-	Rendering::ShaderProfileDataSmartPointer 
+	Rendering::ShaderProfileDataSharedPtr 
 		profile(NEW0 Rendering::ShaderProfileData(mActiveProfile,mActiveProfile));
 
     for (i = 0; i < numConstants; ++i)
@@ -1072,7 +1073,7 @@ bool AssistTools::FxCompiler
         }
     }
 
-	Rendering::ShaderProfileDataSmartPointer 
+	Rendering::ShaderProfileDataSharedPtr 
 		profile(NEW0 Rendering::ShaderProfileData(mActiveProfile,mActiveProfile));
 
     for (i = 0; i < numConstants; ++i)

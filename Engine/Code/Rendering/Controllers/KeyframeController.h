@@ -24,7 +24,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE KeyframeController : public TransformController
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(KeyframeController);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(KeyframeController, = default);
 		using ParentType = TransformController;
 		using Matrix = Mathematics::FloatMatrix;
 		using AQuaternion = Mathematics::AQuaternionf;
@@ -41,9 +41,7 @@ namespace Rendering
 		// 其中隐含依靠空间Spatial m_Object有它的应用程序适当地设置其他通道。
 		// 现在KeyframeController设置*所有*的通道。
 		KeyframeController(int numCommonTimes, int numTranslations,int numRotations, int numScales,const FloatTransform& localTransform);
-		~KeyframeController() = default;
-		KeyframeController(KeyframeController&&) = default;
-		KeyframeController& operator=(KeyframeController&&) = default;
+	 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -80,7 +78,7 @@ namespace Rendering
 		 void SetObject(ControllerInterface* object) override;
 		 void SetObjectInCopy(ControllerInterface* object)override;
 
-		 ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSharedPtr Clone() const override;
                  ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		// 支持查找给出指定时间的关键帧。
@@ -101,7 +99,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(KeyframeController);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Sixth, KeyframeController); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( KeyframeController); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_KEYFRAME_CONTROLLER_H

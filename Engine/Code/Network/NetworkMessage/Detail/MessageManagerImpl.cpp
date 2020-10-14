@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "MessageManagerImpl.h"
-#include "CoreTools/VersionInformation/Version.h"
+#include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"

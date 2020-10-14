@@ -15,6 +15,7 @@
 #include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
 
 #include <algorithm>
+#include <cmath>
 
 template <typename Real>
 Real Mathematics::Math<Real>::GetExponent() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
@@ -252,7 +253,7 @@ template <typename Real>
 Real Mathematics::Math<Real>::CubeRoot(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
     if (value < GetValue(0))
-        return -Pow(-value, GetRational(1,3));
+        return -Pow(-value, GetRational(1, 3));
     else
         return Pow(value, GetRational(1, 3));
 }

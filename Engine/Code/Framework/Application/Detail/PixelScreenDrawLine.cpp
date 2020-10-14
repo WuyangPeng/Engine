@@ -101,7 +101,7 @@ void Framework::PixelScreenDrawLine
 bool Framework::PixelScreenDrawLine
 	::IsValid() const noexcept
 { 
-	return CoreTools::Noexcept(*this, &ClassType::IsEndpointCorrect, false);
+	return CoreTools::Noexcept<bool, ClassType>(*this, &ClassType::IsEndpointCorrect, false);
 }
 
 bool Framework::PixelScreenDrawLine

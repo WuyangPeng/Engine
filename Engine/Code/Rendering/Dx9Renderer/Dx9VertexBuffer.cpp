@@ -11,7 +11,7 @@
 
 #include "Rendering/Resources/VertexBuffer.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 Rendering::Dx9VertexBuffer ::Dx9VertexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const VertexBuffer* vertexBuffer) noexcept
     : ParentType{}
@@ -40,21 +40,21 @@ void Rendering::Dx9VertexBuffer ::Enable([[maybe_unused]] Renderer* renderer, [[
 {
     RENDERING_CLASS_IS_VALID_1;   
  
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
      
 }
 
 void Rendering::Dx9VertexBuffer ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int streamIndex)
 {
     RENDERING_CLASS_IS_VALID_1; 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
   
 }
 
 void* Rendering::Dx9VertexBuffer ::Lock([[maybe_unused]] BufferLocking mode)
 {
     RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
  
 
 	return nullptr;
@@ -64,7 +64,7 @@ void Rendering::Dx9VertexBuffer
     ::Unlock ()
 {
     RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     
 }
 

@@ -21,8 +21,8 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Polypoint);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Polypoint);
 
 Rendering::Polypoint
-	::Polypoint(const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer)
-	:ParentType{ VisualPrimitiveType::Polypoint,vertexformat, vertexbuffer,IndexBufferSmartPointer() }, m_NumPoints{ vertexbuffer->GetNumElements() }
+	::Polypoint(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer)
+	:ParentType{ VisualPrimitiveType::Polypoint,vertexformat, vertexbuffer,IndexBufferSharedPtr() }, m_NumPoints{ vertexbuffer->GetNumElements() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -114,7 +114,7 @@ void Rendering::Polypoint
 }
 
 void Rendering::Polypoint
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -130,7 +130,7 @@ void Rendering::Polypoint
 }
 
 void Rendering::Polypoint
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -138,17 +138,17 @@ void Rendering::Polypoint
     
     ParentType::Load(source);
 	
-	source.Read(m_NumPoints);
+	source->Read(m_NumPoints);
         
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::ControllerInterfaceSmartPointer Rendering::Polypoint
+Rendering::ControllerInterfaceSharedPtr Rendering::Polypoint
 	::Clone() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::Polypoint::CloneObject() const

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 10:46)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/12 14:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -11,58 +14,50 @@
 
 using std::string;
 
-CoreTools::ErrorImpl
-	::ErrorImpl(const FunctionDescribed& functionDescribed, const String& message)
-	:m_FunctionDescribed{ functionDescribed }, m_ErrorMessage{ message }
+CoreTools::ErrorImpl::ErrorImpl(const FunctionDescribed& functionDescribed, const String& message)
+    : m_FunctionDescribed{ functionDescribed }, m_ErrorMessage{ message }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::ErrorImpl
-	::~ErrorImpl()
+CoreTools::ErrorImpl::~ErrorImpl() noexcept
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ErrorImpl)
 
-const System::String CoreTools::ErrorImpl
-	::GetError() const
+const System::String CoreTools::ErrorImpl::GetError() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_ErrorMessage;
+    return m_ErrorMessage;
 }
 
-const char* CoreTools::ErrorImpl
-	::GetCurrentFunction() const noexcept
+const char* CoreTools::ErrorImpl::GetCurrentFunction() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_FunctionDescribed.GetCurrentFunction();
+    return m_FunctionDescribed.GetCurrentFunction();
 }
 
-const char* CoreTools::ErrorImpl
-	::GetFileName() const noexcept
+const char* CoreTools::ErrorImpl::GetFileName() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_FunctionDescribed.GetFileName();
+    return m_FunctionDescribed.GetFileName();
 }
 
-int CoreTools::ErrorImpl
-	::GetLine() const noexcept
+int CoreTools::ErrorImpl::GetLine() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_FunctionDescribed.GetLine();
+    return m_FunctionDescribed.GetLine();
 }
 
-const CoreTools::FunctionDescribed& CoreTools::ErrorImpl
-	::GetFunctionDescribed() const noexcept
+const CoreTools::FunctionDescribed& CoreTools::ErrorImpl::GetFunctionDescribed() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_FunctionDescribed;
+    return m_FunctionDescribed;
 }
-

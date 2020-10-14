@@ -20,7 +20,7 @@ namespace Framework
 	public:
 		using ClassType = CameraViewMiddleLayer;
 		using ParentType = ViewMiddleLayer;
-		using CameraSmartPointer = Rendering::CameraSmartPointer;
+		using CameraSmartPointer = Rendering::CameraSharedPtr;
 
 	public:
 		explicit CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform);

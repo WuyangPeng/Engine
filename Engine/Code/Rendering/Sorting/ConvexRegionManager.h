@@ -35,13 +35,13 @@ namespace Rendering
 		// The middle child of ConvexRegionManager is where the representation
 		// of the outside of the set of regions is stored.  This can be an
 		// arbitrary subgraph, not just drawable geometry.
-		SpatialSmartPointer AttachOutside(SpatialSmartPointer outside);
-		SpatialSmartPointer DetachOutside();
-		SpatialSmartPointer GetOutside();
+		SpatialSharedPtr AttachOutside(SpatialSharedPtr outside);
+		SpatialSharedPtr DetachOutside();
+		SpatialSharedPtr GetOutside();
 
 		// Determine region that contains the point.  If the point is outside
 		// the set of regions, the return values is null.
-		ConvexRegionSmartPointer GetContainingRegion(const Mathematics::FloatAPoint& point);
+		ConvexRegionSharedPtr GetContainingRegion(const Mathematics::FloatAPoint& point);
 
 	protected:
 		// Support for culling.
@@ -53,7 +53,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(ConvexRegionManager);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Eighth, ConvexRegionManager);
+	CORE_TOOLS_SHARED_PTR_DECLARE( ConvexRegionManager);
 #include STSTEM_WARNING_POP
 }
 

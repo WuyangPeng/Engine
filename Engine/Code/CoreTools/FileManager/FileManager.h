@@ -5,21 +5,20 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/17 16:15)
+//	引擎版本：0.5.1.1 (2020/10/13 17:11)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_H
-
-#include "Endian.h"
-#include "FileBuffer.h"
 
 #include "CFileManagerHelper.h"
 #include "CReadFileManager.h"
 #include "CWriteFileManager.h"
 #include "CopyFileTools.h"
 #include "DeleteFileTools.h"
+#include "Endian.h"
 #include "Environment.h"
 #include "EnvironmentVariable.h"
+#include "FileBuffer.h"
 #include "FileHandleHelper.h"
 #include "FileManagerHelper.h"
 #include "IFStreamManager.h"

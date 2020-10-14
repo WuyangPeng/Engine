@@ -12,7 +12,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
@@ -48,12 +48,12 @@ void Rendering::SwitchNode
     }    
 }
 
-Rendering::ControllerInterfaceSmartPointer Rendering::SwitchNode
+Rendering::ControllerInterfaceSharedPtr Rendering::SwitchNode
 	::Clone() const 
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 Rendering::SwitchNode
@@ -122,7 +122,7 @@ void Rendering::SwitchNode
 }
 
 void Rendering::SwitchNode
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -138,7 +138,7 @@ void Rendering::SwitchNode
 }
 
 void Rendering::SwitchNode
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -146,7 +146,7 @@ void Rendering::SwitchNode
     
     ParentType::Load(source);
 	
-	source.Read(m_ActiveChild);
+	source->Read(m_ActiveChild);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

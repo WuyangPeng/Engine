@@ -1,13 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/18 10:13)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/09/28 16:39)
 
 #ifndef CORE_TOOLS_HELPER_EXPORT_MACRO_H
 #define CORE_TOOLS_HELPER_EXPORT_MACRO_H
 
-#include "CoreTools/ImplHelper/ImplStaticAssertHelper.h"
+#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
 #include <boost/noncopyable.hpp>
 #include <memory>
@@ -141,24 +144,43 @@
     TYPE_DECLARE(className);                                \
     using ClassShareType = CoreTools::PerformanceUnsharedClasses
 
-#define COPY_UNSHARE_CLASSES_TYPE_DECLARE(className)       \
-    TYPE_DECLARE(className);                               \
-    using ClassShareType = CoreTools::CopyUnsharedClasses; \
-    ~className() = default;                                \
-    className(const className& rhs);                       \
-    className& operator=(const className& rhs);            \
-    className(className&& rhs) noexcept;                   \
-    className& operator=(className&& rhs) noexcept;        \
-    void Swap(className& rhs) noexcept;
+#define DESTRUCTOR_STATEMENT
+#define DESTRUCTOR_DEFAULT = default
+#define DESTRUCTOR_PURE_VIRTUAL = 0
 
-#define DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(className)      \
-    TYPE_DECLARE(className);                                    \
-    using ClassShareType = CoreTools::DelayCopyUnsharedClasses; \
-                                                                \
-private:                                                        \
-    void Copy();                                                \
-                                                                \
-public:
+#define COPY_UNSHARE_CLASSES_TYPE_DECLARE(className, destructor) \
+private:                                                         \
+    void Swap(className& rhs) noexcept;                          \
+                                                                 \
+public:                                                          \
+    TYPE_DECLARE(className);                                     \
+    using ClassShareType = CoreTools::CopyUnsharedClasses;       \
+    ~className() noexcept destructor;                            \
+    className(const className& rhs);                             \
+    className& operator=(const className& rhs);                  \
+    className(className&& rhs) noexcept;                         \
+    className& operator=(className&& rhs) noexcept;
+
+#define COPY_UNSHARE_CLASSES_BASE_TYPE_DECLARE(className, destructor) \
+private:                                                              \
+    virtual void Swap(className& rhs) noexcept;                       \
+                                                                      \
+public:                                                               \
+    TYPE_DECLARE(className);                                          \
+    using ClassShareType = CoreTools::CopyUnsharedClasses;            \
+    virtual ~className() noexcept destructor;                         \
+    className(const className& rhs);                                  \
+    virtual className& operator=(const className& rhs);               \
+    className(className&& rhs) noexcept;                              \
+    virtual className& operator=(className&& rhs) noexcept;
+
+#define DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(className) \
+private:                                                   \
+    void Copy();                                           \
+                                                           \
+public:                                                    \
+    TYPE_DECLARE(className);                               \
+    using ClassShareType = CoreTools::DelayCopyUnsharedClasses;
 
 #define NON_COPY_CLASSES_TYPE_DECLARE(className) \
     TYPE_DECLARE(className);                     \
@@ -170,33 +192,5 @@ public:
 private:                                                                       \
     SYSTEM_CONCATENATOR(className, ImplPtr)                                    \
     m_Impl
-
-#define IMPL_MOVE_OPERATOR_DECLARE(className) \
-    className(className&& rhs) noexcept;      \
-    className& operator=(className&& rhs) noexcept
-
-#define IMPL_MOVE_OPERATOR_COMPLETE_DECLARE(className) \
-    IMPL_MOVE_OPERATOR_DECLARE(className);             \
-    CLASS_INVARIANT_DECLARE
-
-#define IMPL_COPY_OPERATOR_DECLARE(className) \
-    className(const className& rhs);          \
-    className& operator=(const className& rhs)
-
-#define IMPL_MOVE_AND_COPY_OPERATOR_COMPLETE_DECLARE(className) \
-    IMPL_MOVE_OPERATOR_COMPLETE_DECLARE(className);             \
-    IMPL_COPY_OPERATOR_DECLARE(className)
-
-#define OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(className) \
-    TYPE_DECLARE(className);                             \
-    className(const className& rhs);                     \
-    className& operator=(const className& rhs);          \
-    using ClassShareType = CoreTools::CopyUnsharedClasses
-
-#define COPY_UNSHARE_CLASSES_TYPE_DECLARE_USE_SWAP(className) \
-    OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(className);         \
-                                                              \
-private:                                                      \
-    void Swap(className& rhs) noexcept
 
 #endif  // CORE_TOOLS_HELPER_EXPORT_MACRO_H

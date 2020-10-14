@@ -24,11 +24,11 @@ namespace Rendering
 
 	public:
 		VertexBufferAccessorData() noexcept;
-		VertexBufferAccessorData(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer);
+		VertexBufferAccessorData(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer);
 
 		CLASS_INVARIANT_DECLARE;
 
-		void Init(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer,int number = 0);
+		void Init(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer,int number = 0);
 
 		const char* GetData(int stride, int index) const noexcept;
 		bool HasData() const noexcept;

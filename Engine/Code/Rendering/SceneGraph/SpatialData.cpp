@@ -147,15 +147,14 @@ Rendering::CullingMode Rendering::SpatialData
     return m_Culling;
 }
 
-void Rendering::SpatialData
-    ::Load (BufferSource& source )
+void Rendering::SpatialData ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
-    source.ReadAggregate(m_LocalTransform);
-    source.ReadAggregate(m_WorldTransform);
-    m_WorldTransformIsCurrent = source.ReadBool();
-    source.ReadAggregate(m_WorldBound);
-    m_WorldBoundIsCurrent = source.ReadBool();
-    source.ReadEnum(m_Culling);
+    source->ReadAggregate(m_LocalTransform);
+    source->ReadAggregate(m_WorldTransform);
+    m_WorldTransformIsCurrent = source->ReadBool();
+    source->ReadAggregate(m_WorldBound);
+    m_WorldBoundIsCurrent = source->ReadBool();
+    source->ReadEnum(m_Culling);
 }
 
 void Rendering::SpatialData

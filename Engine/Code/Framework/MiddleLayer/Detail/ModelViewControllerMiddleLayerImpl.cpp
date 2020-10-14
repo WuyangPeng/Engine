@@ -7,8 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "ModelViewControllerMiddleLayerImpl.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
-#include "CoreTools/MemoryTools/SubclassWeakPointerDetail.h"
+  
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
  
 Framework::ModelViewControllerMiddleLayerImpl

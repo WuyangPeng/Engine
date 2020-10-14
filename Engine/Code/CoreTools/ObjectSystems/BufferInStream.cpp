@@ -13,9 +13,8 @@
 
 using std::make_shared;
 
-CoreTools::BufferInStream
-	::BufferInStream(const FileBuffer& bufferInformation, int startPoint)
-	:m_Impl{ make_shared<ImplType>(bufferInformation,startPoint) }
+CoreTools::BufferInStream ::BufferInStream(const ConstFileBufferSharedPtr& bufferInformation, int startPoint)
+    : m_Impl{ make_shared<ImplType>(bufferInformation, startPoint) }
 {
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

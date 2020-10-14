@@ -124,12 +124,12 @@ void Rendering::VertexFormatElement
 }
 
 void Rendering::VertexFormatElement
-	::Load( CoreTools::BufferSource& source )
+	::Load( const CoreTools::BufferSourceSharedPtr& source )
 {	
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.Read(m_StreamIndex);
-	source.Read(m_Offset);
+	source->Read(m_StreamIndex);
+	source->Read(m_Offset);
 	m_VertexFormatType.Load(source);
 }
 

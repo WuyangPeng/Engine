@@ -88,27 +88,27 @@ namespace Rendering
         // SpatialPtr saveChild = node0->GetChild(0);
         // node0->DetachChild(saveChild);
         // node1->AttachChild(saveChild);
-        int AttachChild(SpatialSmartPointer child);
+        int AttachChild(SpatialSharedPtr child);
 
         // 分离一个子节点从这个节点。如果子节点在数组中非空,
         // 返回值是数组中存储的子节点的索引。否则,该函数返回-1。
-        int DetachChild(SpatialSmartPointer child) noexcept;
+        int DetachChild(SpatialSharedPtr child) noexcept;
 
         // 分离一个子节点从这个节点。
         // 如果0 <= i < GetNumChildren(),返回值是子节点的索引;
         // 否则,函数返回nullptr。
-        SpatialSmartPointer DetachChildAt(int index);
+        SpatialSharedPtr DetachChildAt(int index);
 
         // 在这里同样的限制同AttachChild一样，关于不能有多个parents。
         // 如果0 <= index < GetNumChildren(),该函数成功,返回index。
         // 如果index超出范围,这个函数*还*成功,附加子节点到数组的末尾。
         // 返回值是之前存储在索引index的子节点。
-        SpatialSmartPointer SetChild(int index, const SpatialSmartPointer& child);
+        SpatialSharedPtr SetChild(int index, const SpatialSharedPtr& child);
 
         // 获取指定的索引的子节点。如果0 <= i < GetNumChildren(),该函数成功,返回索引的子节点
         // ——记住,child[i]很可能是null。如果超出范围,函数返回nullptr。
-        SpatialSmartPointer GetChild(int index);
-        ConstSpatialSmartPointer GetConstChild(int index) const;
+        SpatialSharedPtr GetChild(int index);
+        ConstSpatialSharedPtr GetConstChild(int index) const;
 
         // 对几何更新的支持。
         bool UpdateWorldData(double applicationTime);
@@ -117,16 +117,16 @@ namespace Rendering
         // 对分级裁剪的支持。
         void GetVisibleSet(Culler& culler, bool noCull);
 
-        void Load(BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const;
         void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
-        void Link(ObjectLink& source);
+        void Link(const CoreTools:: ObjectLinkSharedPtr& source);
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 
     private:
-        using SpatialPtrVector = std::vector<SpatialSmartPointer>;
+        using SpatialPtrVector = std::vector<SpatialSharedPtr>;
 
     private:
         int GetFirstNullIndex() const noexcept;

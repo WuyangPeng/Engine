@@ -19,8 +19,8 @@ namespace Rendering
 		using ClassType = Polysegment;
 		using ParentType = Visual;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
-		using PolysegmentSmartPointer = CoreTools::SeventhSubclassSmartPointer<ClassType>;
-		using ConstPolysegmentSmartPointer = CoreTools::ConstSeventhSubclassSmartPointer<ClassType>;
+		using PolysegmentSharedPtr = std::shared_ptr<ClassType>;
+		using ConstPolysegmentSharedPtr = std::shared_ptr<ClassType>;
 
 	public:
 		// 如果'contiguous'是'true'，则该顶点形成意义上真正的polysegment，每对连续的顶点是由线段连接。
@@ -30,7 +30,7 @@ namespace Rendering
 		// 如果'contiguous'是'false'，顶点形成一组断开的线段。
 		// 例如，{V0, V1, V2, V3}形式线段<V0, V1>和 <V2, V3>。
 		// 在这种情况下，输入顶点缓冲器必须具有偶数数目的元素。
-		Polysegment(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,bool contiguous);
+		Polysegment(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,bool contiguous);
  
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -48,7 +48,7 @@ namespace Rendering
 		// 当是一组不相交段时，'contiguous'是'false'。
                 bool GetContiguous() const noexcept;
 
-		  ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSharedPtr Clone() const override;
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		// 当前活动线段的数量
@@ -62,7 +62,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(Polysegment);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, Polysegment); 
+        CORE_TOOLS_SHARED_PTR_DECLARE(   Polysegment);
 }
 
 #endif // RENDERING_SCENE_GRAPH_POLYSEGMENT_H

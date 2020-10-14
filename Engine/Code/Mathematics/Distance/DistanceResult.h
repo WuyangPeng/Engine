@@ -11,7 +11,7 @@
 
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Vector3D.h"
-#include "CoreTools/ImplHelper/ImplStaticAssertHelper.h"
+#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
 #include <vector>
 

@@ -41,7 +41,7 @@ namespace CoreTools
         using ClassType = ObjectInterface;
         using ObjectInterfaceSharedPtr = std::shared_ptr<ObjectInterface>;
         using ConstObjectInterfaceSharedPtr = std::shared_ptr<const ObjectInterface>;
-        using FactoryFunction = ObjectInterfaceSharedPtr (*)(BufferSource& stream);   
+        using FactoryFunction = ObjectInterfaceSharedPtr (*)(const BufferSourceSharedPtr& stream);   
 
     public:
         ObjectInterface() noexcept;
@@ -73,7 +73,7 @@ namespace CoreTools
         static bool RegisterFactory();
         static void InitializeFactory();
         static void TerminateFactory();
-        static ObjectInterfaceSharedPtr Factory(BufferSource& source);
+        static ObjectInterfaceSharedPtr Factory(const CoreTools::BufferSourceSharedPtr& source);
 
         uint64_t GetUniqueID() const noexcept;
         void SetUniqueID(uint64_t uniqueID) noexcept;
@@ -82,9 +82,9 @@ namespace CoreTools
         virtual int GetStreamingSize() const = 0;
         virtual void Save(const CoreTools::BufferTargetSharedPtr& target) const = 0;
 
-        virtual void Link(ObjectLink& source) = 0;
+        virtual void Link(const CoreTools::ObjectLinkSharedPtr& source) = 0;
         virtual void PostLink() = 0;
-        virtual void Load(BufferSource& source) = 0;
+        virtual void Load(const CoreTools::BufferSourceSharedPtr& source) = 0;
 
         virtual ObjectInterfaceSharedPtr CloneObject() const = 0;
 

@@ -24,12 +24,12 @@ namespace Rendering
 		using ClassType = VertexBufferAccessorImpl;
 			
 	public:	 
-		VertexBufferAccessorImpl(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer);
+		VertexBufferAccessorImpl(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer);
 		explicit VertexBufferAccessorImpl(Visual* visual);
 
 		CLASS_INVARIANT_DECLARE;
 
-		void ApplyTo(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer);
+		void ApplyTo(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer);
 		void ApplyTo(const Visual* visual);
 	
 		const char* GetData() const noexcept;
@@ -83,8 +83,8 @@ namespace Rendering
 		void Initialize ();
 
 	private:
-		ConstVertexFormatSmartPointer m_VertexFormat;
-		ConstVertexBufferSmartPointer m_VertexBuffer;
+		ConstVertexFormatSharedPtr m_VertexFormat;
+		ConstVertexBufferSharedPtr m_VertexBuffer;
  
 		int m_Stride;
 		const char* m_Data;

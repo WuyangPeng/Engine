@@ -30,20 +30,20 @@ namespace Rendering
     public:
         using ClassType = IKJointImpl;
         using AVector = Mathematics::FloatAVector;
-        using IKGoalSmartPointerVector = std::vector<IKGoalSmartPointer>;
+        using IKGoalSharedPtrVector = std::vector<IKGoalSharedPtr>;
         using Object = CoreTools::Object;
         using MatrixRotationAxis = Mathematics::MatrixRotationAxis;
 
     public:
         IKJointImpl() noexcept;
-        IKJointImpl(const SpatialSmartPointer& object, const IKGoalSmartPointerVector& goals);
+        IKJointImpl(const SpatialSharedPtr& object, const IKGoalSharedPtrVector& goals);
 
         CLASS_INVARIANT_DECLARE;
 
         int GetStreamingSize() const;
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(CoreTools::BufferSource& source);
-        void Link(CoreTools::ObjectLink& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
+        void Link(const CoreTools::ObjectLinkSharedPtr& source);
         void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
@@ -55,8 +55,8 @@ namespace Rendering
         bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
         bool UpdateLocalRotate(MatrixRotationAxis axisIndex);
 
-        const ConstSpatialSmartPointer GetObjectSmartPointer() const noexcept;
-        const ConstIKGoalSmartPointer GetGoalsSmartPointer(int index) const;
+        const ConstSpatialSharedPtr GetObjectSharedPtr() const noexcept;
+        const ConstIKGoalSharedPtr GetGoalsSharedPtr(int index) const;
         int GetGoalsNum() const;
 
         void SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation);
@@ -80,10 +80,10 @@ namespace Rendering
         float m_MaxRotation[sm_NumAxis];  // 默认 = +无穷大
 
         // 管理的对象。
-        SpatialSmartPointer m_Object;
+        SpatialSharedPtr m_Object;
 
         // 影响本joint的目标。
-        IKGoalSmartPointerVector m_Goals;
+        IKGoalSharedPtrVector m_Goals;
     };
 }
 

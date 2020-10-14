@@ -15,6 +15,6 @@
 //  g_TCREVersion / 10000 % 100 是次版本号
 //  g_TCREVersion / 1000000 % 100 是主版本号
 
-constexpr auto g_TCREVersion = 50100;
+constexpr auto g_TCREVersion = 50101;
 
 #endif  // SYSTEM_HELPER_VERSION_H

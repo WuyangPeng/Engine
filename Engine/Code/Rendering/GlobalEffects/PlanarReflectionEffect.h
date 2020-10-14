@@ -40,8 +40,8 @@ namespace Rendering
 
         // Member access.
         int GetNumPlanes() const noexcept;
-        void SetPlane(int i, TrianglesMeshSmartPointer plane);
-        ConstTrianglesMeshSmartPointer GetPlane(int i) const noexcept;
+        void SetPlane(int i, TrianglesMeshSharedPtr plane);
+        ConstTrianglesMeshSharedPtr GetPlane(int i) const noexcept;
         void SetReflectance(int i, float reflectance) noexcept;
         float GetReflectance(int i) const noexcept;
 
@@ -51,19 +51,19 @@ namespace Rendering
         void GetReflectionMatrixAndModelPlane(int i, Mathematics::FloatMatrix& reflection, Mathematics::FloatPlane& modelPlane);
 
         int mNumPlanes;
-        TrianglesMeshSmartPointer* mPlanes;
+        TrianglesMeshSharedPtr* mPlanes;
         float* mReflectances;
 
         // Global render state for drawing.
-        AlphaStateSmartPointer mAlphaState;
-        DepthStateSmartPointer mDepthState;
-        StencilStateSmartPointer mStencilState;
+        AlphaStateSharedPtr mAlphaState;
+        DepthStateSharedPtr mDepthState;
+        StencilStateSharedPtr mStencilState;
     };
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(PlanarReflectionEffect);
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, PlanarReflectionEffect);
+    CORE_TOOLS_SHARED_PTR_DECLARE( PlanarReflectionEffect);
 #include STSTEM_WARNING_POP
 }
 

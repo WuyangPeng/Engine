@@ -19,20 +19,14 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Material : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Material);
+       COPY_UNSHARE_CLASSES_TYPE_DECLARE(Material, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
         using Colour = Colour<float>;
 
     public:
         Material();
         Material(const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular);
-        ~Material();
-
-         #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        Material(Material&&) = default;
-        Material& operator=(Material&&) = default;
-        	#include STSTEM_WARNING_POP
+      
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -59,7 +53,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(Material);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, Material);
+    CORE_TOOLS_SHARED_PTR_DECLARE(   Material);
 }
 
 #endif  // RENDERING_SCENE_GRAPH_MATERIAL_H

@@ -59,12 +59,12 @@ void Rendering::CameraModelDirectionVectorConstant
 	ParentType::SetNumRegisters(numRegisters);
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::CameraModelDirectionVectorConstant
+Rendering::ShaderFloatSharedPtr Rendering::CameraModelDirectionVectorConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
  
 

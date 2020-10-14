@@ -15,13 +15,13 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::vector;
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26451)
@@ -67,7 +67,7 @@ int Rendering::SkinControllerImpl ::GetNumBones() const noexcept
 	return m_NumBones;
 }
 
-const Rendering::ConstNodeSmartPointer Rendering::SkinControllerImpl
+const Rendering::ConstNodeSharedPtr Rendering::SkinControllerImpl
 	::GetBones(int bonesIndex) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -105,7 +105,7 @@ const Rendering::SkinControllerImpl::APoint Rendering::SkinControllerImpl
 }
 
 void Rendering::SkinControllerImpl
-	::SetBones(int bonesIndex, const ConstNodeSmartPointer& node)
+	::SetBones(int bonesIndex, const ConstNodeSharedPtr& node)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "索引错误！");
@@ -114,7 +114,7 @@ void Rendering::SkinControllerImpl
 }
 
 void Rendering::SkinControllerImpl
-	::SetBones(const std::vector<ConstNodeSmartPointer>& bones)
+	::SetBones(const std::vector<ConstNodeSharedPtr>& bones)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_2(boost::numeric_cast<int>(bones.size()) == m_NumBones, "传入的骨骼大小错误");
@@ -206,35 +206,35 @@ void Rendering::SkinControllerImpl
 	target->Write(m_NumVertices);
 	target->Write(m_NumBones);
 
-//	target.WriteSmartPointerWithoutNumber(m_NumBones, &m_Bones[0]);
+//	target.WriteSharedPtrWithoutNumber(m_NumBones, &m_Bones[0]);
 	//target.WriteWithoutNumber(m_Size, &m_Weights[0]);
 	//target.WriteAggregateWithoutNumber(m_Size, &m_Offsets[0]);
 }
 
 void Rendering::SkinControllerImpl
-	::Load(CoreTools::BufferSource& source) 
+	::Load(const CoreTools::BufferSourceSharedPtr& source) 
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_NumVertices);
-	source.Read(m_NumBones);
+	source->Read(m_NumVertices);
+        source->Read(m_NumBones);
 	m_Size = m_NumVertices * m_NumBones;
 	m_Bones.resize(m_NumBones);
 	m_Weights.resize(m_Size);
 	m_Offsets.resize(m_Size);
 	 
-//	source.ReadSmartPointer(m_NumBones, &m_Bones[0]);
-	source.Read(m_Size, &m_Weights[0]);
-	source.ReadAggregate(m_Size, &m_Offsets[0]);	
+//	source.ReadSharedPtr(m_NumBones, &m_Bones[0]);
+        source->Read(m_Size, &m_Weights[0]);
+        source->ReadAggregate(m_Size, &m_Offsets[0]);
 }
 
 void Rendering::SkinControllerImpl
-	::Link(CoreTools::ObjectLink& source) 
+	::Link(const CoreTools::ObjectLinkSharedPtr& source) 
 {
 	RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     source;
-    //	source.ResolveObjectConstSmartPointerLink(m_NumBones, &m_Bones[0]);
+    //	source.ResolveObjectConstSharedPtrLink(m_NumBones, &m_Bones[0]);
 }
 
 void Rendering::SkinControllerImpl
@@ -242,8 +242,8 @@ void Rendering::SkinControllerImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
-    CoreTools::DoNothing();
-	//target.RegisterSmartPointer(m_NumBones, &m_Bones[0]);
+    CoreTools::DisableNoexcept();
+	//target.RegisterSharedPtr(m_NumBones, &m_Bones[0]);
 }
  
 #include STSTEM_WARNING_POP

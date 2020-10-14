@@ -10,7 +10,7 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/Vector3DDetail.h"
@@ -104,34 +104,34 @@ Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(LoadConstructor value)
 {
 }
 
-void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
+void Rendering::BSplineSurfacePatch ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     SurfacePatch::Load(source);
 
-    source.Read(mConstructor);
+    source->Read(mConstructor);
 
     int numCtrlPoints0, numCtrlPoints1;
-    source.Read(numCtrlPoints0);
-    source.Read(numCtrlPoints1);
+    source->Read(numCtrlPoints0);
+    source->Read(numCtrlPoints1);
     Mathematics::Vector3Df** ctrl = NEW2<Mathematics::Vector3Df>(numCtrlPoints1, numCtrlPoints0);
     int i0 = 0, i1 = 0;
     for (i0 = 0; i0 < numCtrlPoints0; ++i0)
     {
         for (i1 = 0; i1 < numCtrlPoints1; ++i1)
         {
-            source.ReadAggregate(ctrl[i0][i1]);
+            source->ReadAggregate(ctrl[i0][i1]);
         }
     }
 
     int degree0, degree1;
-    source.Read(degree0);
-    source.Read(degree1);
+    source->Read(degree0);
+    source->Read(degree1);
 
     bool loop0 = false, loop1 = false;
-    loop0 = source.ReadBool();
-    loop1 = source.ReadBool();
+    loop0 = source->ReadBool();
+    loop1 = source->ReadBool();
 
     bool open0 = false, open1 = false;
     float* knot0 = nullptr;
@@ -141,15 +141,15 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
     switch (mConstructor)
     {
     case 1:
-        open0 = source.ReadBool();
-        open1 = source.ReadBool();
+        open0 = source->ReadBool();
+        open1 = source->ReadBool();
 
         mPatch = NEW0 Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, open1);
         break;
     case 2:
-        open0 = source.ReadBool();
+        open0 = source->ReadBool();
         numKnots1 = numCtrlPoints1 - degree1 - 1;
-        source.Read(numKnots1, knot1);
+        source->Read(numKnots1, knot1);
 
         mPatch = NEW0 Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, knot1);
 
@@ -157,8 +157,8 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
         break;
     case 3:
         numKnots0 = numCtrlPoints0 - degree0 - 1;
-        source.Read(numKnots0, knot0);
-        open1 = source.ReadBool();
+        source->Read(numKnots0, knot0);
+        open1 = source->ReadBool();
 
         mPatch = NEW0 Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, open1);
 
@@ -166,9 +166,9 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
         break;
     case 4:
         numKnots0 = numCtrlPoints0 - degree0 - 1;
-        source.Read(numKnots0, knot0);
+        source->Read(numKnots0, knot0);
         numKnots1 = numCtrlPoints1 - degree1 - 1;
-        source.Read(numKnots1, knot1);
+        source->Read(numKnots1, knot1);
 
         mPatch = NEW0 Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, knot1);
 
@@ -182,7 +182,7 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::BSplineSurfacePatch ::Link(CoreTools::ObjectLink& source)
+void Rendering::BSplineSurfacePatch ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     SurfacePatch::Link(source);
 }

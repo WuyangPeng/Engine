@@ -19,9 +19,8 @@ using std::string;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26486)
-CoreTools::BufferInStreamImpl
-	::BufferInStreamImpl(const FileBuffer& bufferInformation, int startPoint)
-	:m_StartPoint{ startPoint }, m_TopLevel{}, m_Source{ bufferInformation }, m_ObjectLink{}
+CoreTools::BufferInStreamImpl ::BufferInStreamImpl(const ConstFileBufferSharedPtr& fileBuffer, int startPoint)
+    : m_StartPoint{ startPoint }, m_TopLevel{}, m_Source{ std::make_shared<BufferSource>(fileBuffer) }, m_ObjectLink{ std::make_shared<ObjectLink>() }
 {
 	AnalysisBuffer();
 
@@ -35,24 +34,23 @@ void CoreTools::BufferInStreamImpl
 	IncrementBytesProcessed();
 
 	// 加载集合中的唯一对象。
-	while (m_Source.GetBytesRead() < m_Source.GetBytesTotal())
+        while (m_Source->GetBytesRead() < m_Source->GetBytesTotal())
 	{
 		ReadObject();
 	}
 
-	m_ObjectLink.Sort();
+	m_ObjectLink->Sort();
 
 	Link();
 	PostLink();
 }
 
 // private
-void CoreTools::BufferInStreamImpl
-	::IncrementBytesProcessed() noexcept
+void CoreTools::BufferInStreamImpl ::IncrementBytesProcessed() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
 {
 	if (0 < m_StartPoint)
 	{
-		m_Source.IncrementBytesProcessed(m_StartPoint);
+            m_Source->IncrementBytesProcessed(m_StartPoint);
 	}
 }
 
@@ -61,12 +59,12 @@ void CoreTools::BufferInStreamImpl
 	::ReadObject()
 {
 	// 读取"Top Level"名或RTTI名。
-	auto name = m_Source.ReadString();
+    auto name = m_Source->ReadString();
 	auto isTopLevel = (name == TopLevel::GetTopLevelDescription());
 	if (isTopLevel)
 	{
 		// 读取RTTI名。
-		name = m_Source.ReadString();
+            name = m_Source->ReadString();
 	}
 
 	CreateObject(isTopLevel, name);
@@ -99,7 +97,7 @@ void CoreTools::BufferInStreamImpl
 
 	// 从源缓冲器加载该对象。
 	auto object = (*factory)(m_Source);
-	m_ObjectLink.Insert(object->GetUniqueID(), object);
+	m_ObjectLink->Insert(object->GetUniqueID(), object);
 
 	// 跟踪所有应用程序使用的顶层对象
 	if (isTopLevel)
@@ -114,11 +112,11 @@ void CoreTools::BufferInStreamImpl
 {
 	// 链接对象。这个程序会取代存储的任意Object*的数据成员的旧地址，
 	// 新地址会在当前运用程序运行时创建。
-	const auto orderedSize = m_ObjectLink.GetOrderedSize();
+    const auto orderedSize = m_ObjectLink->GetOrderedSize();
 
 	for (auto i = 0; i < orderedSize; ++i)
 	{
-		m_ObjectLink[i]->Link(m_ObjectLink);
+		(*m_ObjectLink)[i]->Link(m_ObjectLink);
 	}
 }
 
@@ -129,11 +127,11 @@ void CoreTools::BufferInStreamImpl
 	// 允许对象执行链接后的语义。在读取——链接的模式中，
 	// 默认构造函数用于创建一个对象，其中的数据再加载。链接器连接创建的对象。
 	// 后链接函数在应用程序运行时创建对象时可以做一些非默认构造函数所做的工作。
-	const auto orderedSize = m_ObjectLink.GetOrderedSize();
+    const auto orderedSize = m_ObjectLink->GetOrderedSize();
 
 	for (auto i = 0; i < orderedSize; ++i)
 	{
-		m_ObjectLink[i]->PostLink();
+            (*m_ObjectLink)[i]->PostLink();
 	}
 }
 

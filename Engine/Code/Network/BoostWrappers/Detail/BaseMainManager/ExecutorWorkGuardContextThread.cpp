@@ -12,7 +12,7 @@
 using std::make_unique;
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 Network::ExecutorWorkGuardContextThread

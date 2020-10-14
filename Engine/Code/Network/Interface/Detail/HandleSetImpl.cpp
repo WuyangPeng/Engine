@@ -10,7 +10,7 @@
 
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using std::make_shared;
 
@@ -34,7 +34,7 @@ void Network::HandleSetImpl ::SetBit([[maybe_unused]] ACEHandle handle)
 
 	 
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 int64_t Network::HandleSetImpl
@@ -42,7 +42,7 @@ int64_t Network::HandleSetImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }
@@ -59,7 +59,7 @@ void Network::HandleSetImpl ::Sync([[maybe_unused]] ACEHandle maxHandle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 }
@@ -70,7 +70,7 @@ bool Network::HandleSetImpl ::IsSet([[maybe_unused]] ACEHandle handle) const
 
 	 
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return false;
 }
@@ -79,7 +79,7 @@ void Network::HandleSetImpl ::ClearBit([[maybe_unused]] ACEHandle handle)
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	 
 }
@@ -105,7 +105,7 @@ bool Network::HandleSetImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -115,7 +115,7 @@ int Network::HandleSetImpl
 {
 	NETWORK_CLASS_IS_VALID_CONST_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }
@@ -126,7 +126,7 @@ bool Network::HandleSetImpl ::Select([[maybe_unused]] int width)
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return false;
 }

@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::vector;
@@ -32,28 +32,24 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, IKController);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, IKController);
 
 Rendering::IKController
-	::IKController(const IKJointSmartPointerVector& joints)
+	::IKController(const IKJointSharedPtrVector& joints)
 	:ParentType{}, m_Impl{ make_shared<ImplType>(joints) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IKController
-	::~IKController()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, IKController)
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, IKController)
 
-Rendering::ControllerInterfaceSmartPointer Rendering::IKController
+Rendering::ControllerInterfaceSharedPtr Rendering::IKController
 	::Clone() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 										  
 Rendering::IKController
@@ -102,14 +98,13 @@ void Rendering::IKController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::IKController
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::IKController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	ParentType::Link(source); 	
 
-	m_Impl->Link(source);
+	//m_Impl->Link(source);
 }
 
 void Rendering::IKController
@@ -120,8 +115,7 @@ void Rendering::IKController
 	ParentType::PostLink();	 
 }
 
-void Rendering::IKController
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::IKController ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -129,7 +123,7 @@ void Rendering::IKController
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	//m_Impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -138,7 +132,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKController,GetIteratio
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKController, IsOrderEndToRoot, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, IKController, SetIterations, int, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, IKController, SetOrderEndToRoot, bool, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKController,GetJointsSmartPointer, int,const Rendering::IKJointSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKController,GetJointsSharedPtr, int,const Rendering::IKJointSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKController,GetJointsNum, int)
 
 bool Rendering::IKController
@@ -153,7 +147,7 @@ bool Rendering::IKController
 
 		for (auto index = 0; index < mNumJoints; ++index)
 		{
-			auto pointer = m_Impl->GetJointsSmartPointer(index);
+			auto pointer = m_Impl->GetJointsSharedPtr(index);
 			pointer->UpdateWorldTransform();
 		}
 
@@ -170,7 +164,7 @@ bool Rendering::IKController
 					realIndex = mNumJoints - 1 - index;
 				}
 				
-				auto joint = m_Impl->GetJointsSmartPointer(realIndex);
+				auto joint = m_Impl->GetJointsSharedPtr(realIndex);
 				
 				for (auto axis = Mathematics::MatrixRotationAxis::X;axis < Mathematics::MatrixRotationAxis::Count; ++axis)
 				{		
@@ -180,7 +174,7 @@ bool Rendering::IKController
 						{
 							for (auto j = realIndex; j < mNumJoints; ++j)
 							{
-								auto joint2 = m_Impl->GetJointsSmartPointer(j);
+								auto joint2 = m_Impl->GetJointsSharedPtr(j);
 								joint2->UpdateWorldRotateAndTranslate();
 							}
 						}
@@ -195,7 +189,7 @@ bool Rendering::IKController
 						{
 							for (auto j = realIndex; j < mNumJoints; ++j)
 							{
-								auto joint2 = m_Impl->GetJointsSmartPointer(j);
+								auto joint2 = m_Impl->GetJointsSharedPtr(j);
 								
 								joint2->UpdateWorldRotateAndTranslate();
 							}

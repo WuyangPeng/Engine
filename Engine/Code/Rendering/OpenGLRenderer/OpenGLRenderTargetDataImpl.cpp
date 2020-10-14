@@ -15,13 +15,13 @@
 
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/PlatformTexture2D.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26429)
@@ -64,7 +64,7 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl
  
     for (int index = 0; index < m_NumTargets; ++index)
     {
-        ConstTexture2DSmartPointer colorTexture = renderTarget->GetColorTexture(index);
+        ConstTexture2DSharedPtr colorTexture = renderTarget->GetColorTexture(index);
         RENDERING_ASSERTION_1(!renderer->InTexture2DMap(colorTexture), "纹理不应该存在。\n");
         
 		std::shared_ptr<PlatformTexture2D> platformColorTexture(std::make_shared< PlatformTexture2D>(renderer,colorTexture.get()));
@@ -85,7 +85,7 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl
 void Rendering::OpenGLRenderTargetDataImpl
     ::CreateDepthStencilTexture(Renderer* renderer,const RenderTarget* renderTarget,UInt previousBind)
 {
-    ConstTexture2DSmartPointer depthStencilTexture = renderTarget->GetDepthStencilTexture();
+    ConstTexture2DSharedPtr depthStencilTexture = renderTarget->GetDepthStencilTexture();
     if (depthStencilTexture )
     {
         RENDERING_ASSERTION_1(!renderer->InTexture2DMap(depthStencilTexture),"纹理不应该存在。\n");
@@ -111,7 +111,7 @@ void Rendering::OpenGLRenderTargetDataImpl
 void Rendering::OpenGLRenderTargetDataImpl
     ::CheckFramebufferStatus()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     switch (System::GlCheckFramebufferStatus())
     {
 		case System::CheckFrambufferStatus::Complete:
@@ -207,7 +207,7 @@ void Rendering::OpenGLRenderTargetDataImpl ::Disable([[maybe_unused]] Renderer* 
  
 }
 
-Rendering::ConstTexture2DSmartPointer
+Rendering::ConstTexture2DSharedPtr
     Rendering::OpenGLRenderTargetDataImpl
     ::ReadColor (int index, Renderer* renderer)
 {
@@ -215,7 +215,7 @@ Rendering::ConstTexture2DSmartPointer
 
     Enable(renderer);
     
-    Texture2DSmartPointer texture(std::make_shared<Texture2D>(m_Format, m_Width, m_Height, 1));
+    Texture2DSharedPtr texture(std::make_shared<Texture2D>(m_Format, m_Width, m_Height, 1));
 
 	System::SetGlReadBuffer(static_cast<GLenum>(System::ColorAttachent::Color0) + index);
 

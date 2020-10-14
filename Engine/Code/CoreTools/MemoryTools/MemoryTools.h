@@ -24,13 +24,5 @@
 #include "BufferPool.h"
 #include "Buffer.h"
 #include "BufferStream.h"
-#include "SubclassSmartPointerTraits.h"
-#include "ConstFirstSubclassSmartPointerDetail.h"
-#include "FirstSubclassSmartPointerDetail.h"
-#include "ConstSecondSubclassSmartPointerDetail.h"
-#include "SecondSubclassSmartPointerDetail.h"
-#include "ConstThirdSubclassSmartPointerDetail.h"
-#include "ThirdSubclassSmartPointerDetail.h"
-#include "SubclassWeakPointerDetail.h"
 
 #endif // CORE_TOOLS_MEMORY_TOOLS_H

@@ -1,0 +1,10 @@
+游戏编程 All In One （Game Programming All in One）
+
+官方网站：
+http://gpaione.kyuumu.com （已失效） 、http://www.gamedev.net
+
+○
+作者：Bruno Miguel Teixeira de Sousa
+
+知识点 
+1.	DirectX基础知识。   

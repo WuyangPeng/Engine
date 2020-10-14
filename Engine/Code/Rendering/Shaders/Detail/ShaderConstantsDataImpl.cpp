@@ -81,13 +81,12 @@ int Rendering::ShaderConstantsDataImpl
 	return m_SingleShaderConstantsData[index].GetNumRegistersUsed();
 }
  
-void Rendering::ShaderConstantsDataImpl
-	::Load( BufferSource& source )
+void Rendering::ShaderConstantsDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	uint32_t number{ 0 };
-	source.Read(number);
+	source->Read(number);
 	m_SingleShaderConstantsData.resize(number);
 	 
 	for_each(m_SingleShaderConstantsData.begin(), m_SingleShaderConstantsData.end(),std::bind(&SingleShaderConstantsData::Load,std::placeholders::_1,std::ref(source)));	 

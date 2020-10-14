@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
@@ -30,7 +30,7 @@ Rendering::BillboardNodeImpl
 
 
 Rendering::BillboardNodeImpl
-	::BillboardNodeImpl(const CameraSmartPointer& camera) noexcept
+	::BillboardNodeImpl(const CameraSharedPtr& camera) noexcept
 	:m_Camera{ camera }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -53,33 +53,33 @@ void Rendering::BillboardNodeImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.WriteSmartPointer(m_Camera); 
+	//target.WriteSharedPtr(m_Camera); 
 }
 
 void Rendering::BillboardNodeImpl
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ReadSmartPointer(m_Camera); 
+	//source.ReadSharedPtr(m_Camera); 
 }
 
 void Rendering::BillboardNodeImpl
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	 
 	source;
-	//source.ResolveObjectSmartPointerLink(m_Camera); 
+	//source.ResolveObjectSharedPtrLink(m_Camera); 
 }
 
 void Rendering::BillboardNodeImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.RegisterSmartPointer(m_Camera); 
+	//target.RegisterSharedPtr(m_Camera); 
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::BillboardNodeImpl
+const CoreTools::ConstObjectSharedPtr Rendering::BillboardNodeImpl
 	::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -87,7 +87,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::BillboardNodeImpl
 	return m_Camera->GetConstObjectByName(name);	
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::BillboardNodeImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::BillboardNodeImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -95,7 +95,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::BillboardNodeImpl
 	return m_Camera->GetAllConstObjectsByName(name); 
 }
 
-const CoreTools::ObjectSmartPointer Rendering::BillboardNodeImpl
+const CoreTools::ObjectSharedPtr Rendering::BillboardNodeImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -103,7 +103,7 @@ const CoreTools::ObjectSmartPointer Rendering::BillboardNodeImpl
 	return m_Camera->GetObjectByName(name);	
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::BillboardNodeImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::BillboardNodeImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -112,14 +112,14 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::BillboardNodeImpl
 }
 
 void Rendering::BillboardNodeImpl
-	::AlignTo(const CameraSmartPointer& camera)
+	::AlignTo(const CameraSharedPtr& camera)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Camera = camera;
 }
 
-const Rendering::ConstCameraSmartPointer Rendering::BillboardNodeImpl
+const Rendering::ConstCameraSharedPtr Rendering::BillboardNodeImpl
 	::GetCamera() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;

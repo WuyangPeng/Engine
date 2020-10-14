@@ -15,8 +15,8 @@
 #include "Rendering/DataTypes/Bound.h"
 #include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/Controllers/ControlledObject.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointer.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointer.h"
+
+
 
 RENDERING_EXPORT_SHARED_PTR(SpatialData);
 
@@ -116,7 +116,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
     CORE_TOOLS_STREAM_REGISTER(Spatial);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, Spatial); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( Spatial); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_SCENE_GRAPH_SPATIAL_H

@@ -44,7 +44,7 @@ namespace Rendering
 
         int GetStreamingSize() const noexcept;
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(CoreTools::BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
 
     private:
         FloatTransform m_LocalTransform;

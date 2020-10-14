@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/ObjectSystems/Object.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h" 
+ 
 
 namespace Rendering
 {
@@ -41,7 +41,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(GlobalEffect);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, GlobalEffect);
+	CORE_TOOLS_SHARED_PTR_DECLARE( GlobalEffect);
 }
 
 #endif // RENDERING_GLOBAL_EFFECTS_GLOBAL_EFFECT_H

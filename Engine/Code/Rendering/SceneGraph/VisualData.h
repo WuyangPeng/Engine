@@ -40,35 +40,35 @@ namespace Rendering
 
 	public:
 		explicit VisualData(VisualPrimitiveType type = VisualPrimitiveType::None);
-		VisualData(VisualPrimitiveType type,const VertexFormatSmartPointer& vertexformat,
-				   const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer);
+		VisualData(VisualPrimitiveType type,const VertexFormatSharedPtr& vertexformat,
+				   const VertexBufferSharedPtr& vertexbuffer,const IndexBufferSharedPtr& indexbuffer);
  
 		CLASS_INVARIANT_DECLARE;
 		   
 		void SetPrimitiveType(VisualPrimitiveType type);
 		VisualPrimitiveType GetPrimitiveType() const;
 		
-		void SetVertexFormat(const VertexFormatSmartPointer& vertexformat);
-		ConstVertexFormatSmartPointer GetConstVertexFormat() const;
-		VertexFormatSmartPointer GetVertexFormat();
+		void SetVertexFormat(const VertexFormatSharedPtr& vertexformat);
+		ConstVertexFormatSharedPtr GetConstVertexFormat() const;
+		VertexFormatSharedPtr GetVertexFormat();
 		
-		void SetVertexBuffer(const VertexBufferSmartPointer& vertexbuffer);
-		ConstVertexBufferSmartPointer GetConstVertexBuffer() const;
-		VertexBufferSmartPointer GetVertexBuffer();
+		void SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer);
+		ConstVertexBufferSharedPtr GetConstVertexBuffer() const;
+		VertexBufferSharedPtr GetVertexBuffer();
 		
-		void SetIndexBuffer(const IndexBufferSmartPointer& indexbuffer);
-		ConstIndexBufferSmartPointer GetConstIndexBuffer() const;
-		IndexBufferSmartPointer GetIndexBuffer();		 
+		void SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer);
+		ConstIndexBufferSharedPtr GetConstIndexBuffer() const;
+		IndexBufferSharedPtr GetIndexBuffer();		 
 		
-		void Load(BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
-		void Link(ObjectLink& source);
+		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
 		
 		CORE_TOOLS_NAMES_IMPL_DECLARE;
 
-		bool IsVertexSmartPointerValid() const;
+		bool IsVertexSharedPtrValid() const;
 		int GetVertexBufferNumElements() const;
 		int GetVertexFormatStride() const;
 		int GetPositionOffset() const;
@@ -76,9 +76,9 @@ namespace Rendering
 	 
 	private:
 		VisualPrimitiveType m_Type;
-		VertexFormatSmartPointer m_VertexFormat;
-		VertexBufferSmartPointer m_VertexBuffer;
-		IndexBufferSmartPointer m_IndexBuffer;			
+		VertexFormatSharedPtr m_VertexFormat;
+		VertexBufferSharedPtr m_VertexBuffer;
+		IndexBufferSharedPtr m_IndexBuffer;			
 	};
 }
 

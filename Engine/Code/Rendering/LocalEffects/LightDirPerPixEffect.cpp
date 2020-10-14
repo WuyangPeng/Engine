@@ -20,8 +20,9 @@
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
  #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -40,7 +41,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightDirPerPixEffect);
 
 Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 {
-    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>( "Wm5.LightDirPerPix", 2, 3, 1, 0 ) };
+    VertexShaderSharedPtr vshader{ std::make_shared < VertexShader>( "Wm5.LightDirPerPix", 2, 3, 1, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord1);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
@@ -60,7 +61,7 @@ Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 		profile->SetProgram(i, msVPrograms[i]);
 	} 
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>( "Wm5.LightDirPerPix",2, 1, 10, 0 ) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>( "Wm5.LightDirPerPix",2, 1, 10, 0 ) };
     pshader->SetInput(0, "vertexPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetInput(1, "vertexNormal", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord1);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -87,17 +88,17 @@ Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 		profile->SetProgram(i, msPPrograms[i]);
 	} 
 
-   VisualPassSmartPointer pass{ NEW0 VisualPass{} };
+   VisualPassSharedPtr pass{ NEW0 VisualPass{} };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSmartPointer{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSmartPointer{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSmartPointer{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSmartPointer{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSmartPointer{ NEW0 WireState{} });
+	pass->SetAlphaState(AlphaStateSharedPtr{ NEW0 AlphaState{} });
+	pass->SetCullState(CullStateSharedPtr{ NEW0 CullState{} });
+	pass->SetDepthState(DepthStateSharedPtr{ NEW0 DepthState{} });
+	pass->SetOffsetState(OffsetStateSharedPtr{ NEW0 OffsetState{} });
+	pass->SetStencilState(StencilStateSharedPtr{ NEW0 StencilState{} });
+	pass->SetWireState(WireStateSharedPtr{ NEW0 WireState{} });
 
-	VisualTechniqueSmartPointer technique{ NEW0 VisualTechnique{} };
+	VisualTechniqueSharedPtr technique{ NEW0 VisualTechnique{} };
 	technique->InsertPass(pass);
 	InsertTechnique(technique);
 }
@@ -107,18 +108,18 @@ Rendering::LightDirPerPixEffect::LightDirPerPixEffect()
 Rendering::VisualEffectInstance* Rendering::LightDirPerPixEffect::CreateInstance(Light* light,
     Material* material) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared < ProjectionViewMatrixConstant>()));
-    instance->SetPixelConstant(0, 0,ShaderFloatSmartPointer(std::make_shared<CameraModelPositionConstant>()));
-    instance->SetPixelConstant(0, 1, ShaderFloatSmartPointer(std::make_shared < MaterialEmissiveConstant>(MaterialSmartPointer(material))));
-    instance->SetPixelConstant(0, 2, ShaderFloatSmartPointer(std::make_shared < MaterialAmbientConstant>(MaterialSmartPointer(material))));
-    instance->SetPixelConstant(0, 3, ShaderFloatSmartPointer(std::make_shared < MaterialDiffuseConstant>(MaterialSmartPointer(material))));
-    instance->SetPixelConstant(0, 4, ShaderFloatSmartPointer(std::make_shared < MaterialSpecularConstant>(MaterialSmartPointer(material))));
-    instance->SetPixelConstant(0, 5, ShaderFloatSmartPointer(std::make_shared < LightModelDirectionVectorConstant>(LightSmartPointer(light))));
-    instance->SetPixelConstant(0, 6, ShaderFloatSmartPointer(std::make_shared < LightAmbientConstant>(LightSmartPointer(light))));
-    instance->SetPixelConstant(0, 7, ShaderFloatSmartPointer(std::make_shared < LightDiffuseConstant>(LightSmartPointer(light))));
-    instance->SetPixelConstant(0, 8, ShaderFloatSmartPointer(std::make_shared < LightSpecularConstant>(LightSmartPointer(light))));
-    instance->SetPixelConstant(0, 9, ShaderFloatSmartPointer(std::make_shared < LightAttenuationConstant>(LightSmartPointer(light))));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared < ProjectionViewMatrixConstant>()));
+    instance->SetPixelConstant(0, 0,ShaderFloatSharedPtr(std::make_shared<CameraModelPositionConstant>()));
+    instance->SetPixelConstant(0, 1, ShaderFloatSharedPtr(std::make_shared < MaterialEmissiveConstant>(MaterialSharedPtr(material))));
+    instance->SetPixelConstant(0, 2, ShaderFloatSharedPtr(std::make_shared < MaterialAmbientConstant>(MaterialSharedPtr(material))));
+    instance->SetPixelConstant(0, 3, ShaderFloatSharedPtr(std::make_shared < MaterialDiffuseConstant>(MaterialSharedPtr(material))));
+    instance->SetPixelConstant(0, 4, ShaderFloatSharedPtr(std::make_shared < MaterialSpecularConstant>(MaterialSharedPtr(material))));
+    instance->SetPixelConstant(0, 5, ShaderFloatSharedPtr(std::make_shared < LightModelDirectionVectorConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 6, ShaderFloatSharedPtr(std::make_shared < LightAmbientConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 7, ShaderFloatSharedPtr(std::make_shared < LightDiffuseConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 8, ShaderFloatSharedPtr(std::make_shared < LightSpecularConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 9, ShaderFloatSharedPtr(std::make_shared < LightAttenuationConstant>(LightSharedPtr(light))));
 
     return instance;
 }
@@ -141,7 +142,7 @@ Rendering::LightDirPerPixEffect
 }
 
 void Rendering::LightDirPerPixEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -151,7 +152,7 @@ void Rendering::LightDirPerPixEffect
 }
 
 void Rendering::LightDirPerPixEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     VisualEffect::Link(source);
 }

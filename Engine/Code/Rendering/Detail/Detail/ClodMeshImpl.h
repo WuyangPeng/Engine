@@ -36,14 +36,14 @@ namespace Rendering
 
 	public:
 		ClodMeshImpl() noexcept;		
-		explicit ClodMeshImpl(const CollapseRecordArraySmartPointer& recordArray) noexcept;
+		explicit ClodMeshImpl(const CollapseRecordArraySharedPtr& recordArray) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
-		void Load(BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
-		void Link(ObjectLink& source);
+		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
  
 		int GetNumRecords () const;
@@ -52,7 +52,7 @@ namespace Rendering
 
 		// 几何更新。Draw函数将调用此更新，并根据目标记录的当前值调整TrianglesMesh数量。
 		// 可以在不需要显示网格的应用程序手动调用。
-		void SelectLevelOfDetail(VertexBufferSmartPointer vertexbuffer,IndexBufferSmartPointer indexbuffer,int targetRecord);
+		void SelectLevelOfDetail(VertexBufferSharedPtr vertexbuffer,IndexBufferSharedPtr indexbuffer,int targetRecord);
 
 		 CORE_TOOLS_NAMES_IMPL_DECLARE;
 
@@ -61,7 +61,7 @@ namespace Rendering
 		// 成员LOD选择。
 		int m_CurrentRecord;
 		int m_TargetRecord;
-		CollapseRecordArraySmartPointer m_RecordArray;
+		CollapseRecordArraySharedPtr m_RecordArray;
 	};
 }
 

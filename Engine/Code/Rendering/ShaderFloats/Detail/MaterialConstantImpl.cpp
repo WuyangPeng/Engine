@@ -9,7 +9,7 @@
 #include "MaterialConstantImpl.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -18,8 +18,9 @@ using std::string;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::MaterialConstantImpl
-	::MaterialConstantImpl(const MaterialSmartPointer& material) noexcept
+	::MaterialConstantImpl(const MaterialSharedPtr& material) noexcept
 	:m_Material{ material }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -33,7 +34,7 @@ Rendering::MaterialConstantImpl ::MaterialConstantImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,MaterialConstantImpl)
 
-const Rendering::ConstMaterialSmartPointer Rendering::MaterialConstantImpl
+const Rendering::ConstMaterialSharedPtr Rendering::MaterialConstantImpl
 	::GetMaterial() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;	
@@ -41,15 +42,14 @@ const Rendering::ConstMaterialSmartPointer Rendering::MaterialConstantImpl
 	if (m_Material )
 		return m_Material ;
 	else
-		return ConstMaterialSmartPointer{};
+		return ConstMaterialSharedPtr{};
 }
 
-void Rendering::MaterialConstantImpl
-	::Load(BufferSource& source)
+void Rendering::MaterialConstantImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
-	//source.ReadSmartPointer(m_Material);
+	//source.ReadSharedPtr(m_Material);
 }
 
 void Rendering::MaterialConstantImpl
@@ -57,7 +57,7 @@ void Rendering::MaterialConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
-	//target.WriteSmartPointer(m_Material);
+	//target.WriteSharedPtr(m_Material);
 }
 
 int Rendering::MaterialConstantImpl
@@ -68,7 +68,7 @@ int Rendering::MaterialConstantImpl
 	return CORE_TOOLS_STREAM_SIZE(m_Material);
 }
 
-const CoreTools::ObjectSmartPointer Rendering::MaterialConstantImpl
+const CoreTools::ObjectSharedPtr Rendering::MaterialConstantImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -76,10 +76,10 @@ const CoreTools::ObjectSmartPointer Rendering::MaterialConstantImpl
 	if (m_Material )
 		return m_Material->GetObjectByName(name);
 	else
-		return CoreTools::ObjectSmartPointer{};
+		return CoreTools::ObjectSharedPtr{};
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::MaterialConstantImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::MaterialConstantImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -87,10 +87,10 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::MaterialConstantImpl
 	if (m_Material )
 		return m_Material->GetAllObjectsByName(name);
 	else
-		return vector<CoreTools::ObjectSmartPointer>{};
+		return vector<CoreTools::ObjectSharedPtr>{};
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::MaterialConstantImpl
+const CoreTools::ConstObjectSharedPtr Rendering::MaterialConstantImpl
 	::GetConstObjectByName(const string& name) const 
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -98,10 +98,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::MaterialConstantImpl
 	if (m_Material )
 		return m_Material->GetConstObjectByName(name);
 	else
-		return CoreTools::ConstObjectSmartPointer{};
+		return CoreTools::ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::MaterialConstantImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::MaterialConstantImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -109,22 +109,21 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::MaterialConstantImpl
 	if (m_Material )
 		return m_Material->GetAllConstObjectsByName(name);
 	else
-		return vector<CoreTools::ConstObjectSmartPointer>{};
+		return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
-void Rendering::MaterialConstantImpl
-	::Link( ObjectLink& source )
+void Rendering::MaterialConstantImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
-	//source.ResolveObjectSmartPointerLink(m_Material);
+	//source.ResolveObjectSharedPtrLink(m_Material);
 }
 
 void Rendering::MaterialConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
-	//target.RegisterSmartPointer(m_Material);
+	//target.RegisterSharedPtr(m_Material);
 }
 
 #include STSTEM_WARNING_POP

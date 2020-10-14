@@ -12,7 +12,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
@@ -37,15 +37,15 @@ Rendering::VisualEffectInstanceImpl
 }
 
 Rendering::VisualEffectInstanceImpl
-	::VisualEffectInstanceImpl(const VisualEffectSmartPointer& effect, int techniqueIndex)
+	::VisualEffectInstanceImpl(const VisualEffectSharedPtr& effect, int techniqueIndex)
 	: m_Effect{ effect }, m_TechniqueIndex{ techniqueIndex }, m_NumPasses{ effect->GetNumPasses(techniqueIndex) },
 	  m_VertexParameters{ m_NumPasses },m_PixelParameters{ m_NumPasses }
 {
 	for (auto passIndex = 0; passIndex < m_NumPasses; ++passIndex)
 	{
 		auto pass = m_Effect->GetPass(techniqueIndex, passIndex);
-            m_VertexParameters[passIndex] = ShaderParametersSmartPointer{ std::make_shared < ShaderParameters>(pass->GetVertexShader()) };
-                m_PixelParameters[passIndex] = ShaderParametersSmartPointer{ std::make_shared < ShaderParameters>(pass->GetPixelShader()) };
+            m_VertexParameters[passIndex] = ShaderParametersSharedPtr{ std::make_shared < ShaderParameters>(pass->GetVertexShader()) };
+                m_PixelParameters[passIndex] = ShaderParametersSharedPtr{ std::make_shared < ShaderParameters>(pass->GetPixelShader()) };
 	}
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -59,8 +59,8 @@ Rendering::VisualEffectInstanceImpl
 	for (auto passIndex = 0; passIndex < m_NumPasses; ++passIndex)
 	{
 		auto pass = m_Effect->GetPass(m_TechniqueIndex, passIndex);
-            m_VertexParameters[passIndex] = ShaderParametersSmartPointer{ std::make_shared < ShaderParameters>(*rhs.m_VertexParameters[passIndex]) };
-                m_PixelParameters[passIndex] = ShaderParametersSmartPointer{ std::make_shared < ShaderParameters>(*rhs.m_PixelParameters[passIndex]) };
+            m_VertexParameters[passIndex] = ShaderParametersSharedPtr{ std::make_shared < ShaderParameters>(*rhs.m_VertexParameters[passIndex]) };
+                m_PixelParameters[passIndex] = ShaderParametersSharedPtr{ std::make_shared < ShaderParameters>(*rhs.m_PixelParameters[passIndex]) };
 	}
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -127,40 +127,39 @@ void Rendering::VisualEffectInstanceImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	//target.WriteSmartPointer(m_Effect);
+	//target.WriteSharedPtr(m_Effect);
 	target->Write(m_TechniqueIndex);
 	target->Write(m_NumPasses);
-	//target.WriteSmartPointer(m_VertexParameters);
-	//target.WriteSmartPointer(m_PixelParameters);
+	//target.WriteSharedPtr(m_VertexParameters);
+	//target.WriteSharedPtr(m_PixelParameters);
 }
 
 void Rendering::VisualEffectInstanceImpl
-	::Load(BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	//source.ReadSmartPointer(m_Effect);
-	source.Read(m_TechniqueIndex);
-	source.Read(m_NumPasses);
-	//source.ReadSmartPointer(m_VertexParameters);
-	//source.ReadSmartPointer(m_PixelParameters);
+	//source.ReadSharedPtr(m_Effect);
+	source->Read(m_TechniqueIndex);
+	source->Read(m_NumPasses);
+	//source.ReadSharedPtr(m_VertexParameters);
+	//source.ReadSharedPtr(m_PixelParameters);
 }
 
-void Rendering::VisualEffectInstanceImpl
-	::Link(ObjectLink& source)
+void Rendering::VisualEffectInstanceImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
-	//source.ResolveObjectSmartPointerLink(m_Effect);
+	//source.ResolveObjectSharedPtrLink(m_Effect);
 
 	if (!m_VertexParameters.empty())
 	{
-		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_VertexParameters.size()), &m_VertexParameters[0]);
+		//source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_VertexParameters.size()), &m_VertexParameters[0]);
 	}		
 	
 	if (!m_PixelParameters.empty())
 	{
-		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_PixelParameters.size()), &m_PixelParameters[0]);
+		//source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_PixelParameters.size()), &m_PixelParameters[0]);
 	}		
 }
 
@@ -168,26 +167,26 @@ void Rendering::VisualEffectInstanceImpl ::Register(const CoreTools::ObjectRegis
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
-	//target.RegisterSmartPointer(m_Effect);
+	//target.RegisterSharedPtr(m_Effect);
 
 	if (!m_VertexParameters.empty())
 	{
-		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_VertexParameters.size()), &m_VertexParameters[0]);
+		//target.RegisterSharedPtr(boost::numeric_cast<int>(m_VertexParameters.size()), &m_VertexParameters[0]);
 	}		
 
 	if (!m_PixelParameters.empty())
 	{
-		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_PixelParameters.size()), &m_PixelParameters[0]);
+		//target.RegisterSharedPtr(boost::numeric_cast<int>(m_PixelParameters.size()), &m_PixelParameters[0]);
 	}		
 }
 
 
-const CoreTools::ObjectSmartPointer Rendering::VisualEffectInstanceImpl
+const CoreTools::ObjectSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetObjectByName( const string& name )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	CoreTools::ObjectSmartPointer found = m_Effect->GetObjectByName(name);
+	CoreTools::ObjectSharedPtr found = m_Effect->GetObjectByName(name);
 
 	for(auto& pointer: m_VertexParameters)
 	{
@@ -207,15 +206,15 @@ const CoreTools::ObjectSmartPointer Rendering::VisualEffectInstanceImpl
 		}
 	}
 
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::VisualEffectInstanceImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::VisualEffectInstanceImpl
 	::GetAllObjectsByName( const string& name )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	vector<CoreTools::ObjectSmartPointer> objects = m_Effect->GetAllObjectsByName(name);
+	vector<CoreTools::ObjectSharedPtr> objects = m_Effect->GetAllObjectsByName(name);
 
 	for(auto& pointer: m_VertexParameters)
 	{		
@@ -234,7 +233,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::VisualEffectInstanceImpl
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::VisualEffectInstanceImpl
+const CoreTools::ConstObjectSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetConstObjectByName( const string& name ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -261,10 +260,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::VisualEffectInstanceImpl
 
  
 
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualEffectInstanceImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualEffectInstanceImpl
 	::GetAllConstObjectsByName( const string& name ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -288,7 +287,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualEffectInstance
 	return objects;
 }
 
-const Rendering::ConstVisualEffectSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstVisualEffectSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetEffect() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -312,7 +311,7 @@ int Rendering::VisualEffectInstanceImpl
 	return m_NumPasses;
 }
 
-const Rendering::ConstVisualPassSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstVisualPassSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetConstPass(int pass) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -320,7 +319,7 @@ const Rendering::ConstVisualPassSmartPointer Rendering::VisualEffectInstanceImpl
 	return m_Effect->GetPass(m_TechniqueIndex, pass);
 }
 
-const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstShaderParametersSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetConstVertexParameters(int pass) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -329,7 +328,7 @@ const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstan
 	return m_VertexParameters[pass] ;
 }
 
-const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstShaderParametersSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetConstPixelParameters(int pass) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -339,7 +338,7 @@ const Rendering::ConstShaderParametersSmartPointer Rendering::VisualEffectInstan
 }
 
 int Rendering::VisualEffectInstanceImpl
-	::SetVertexConstant(int pass, const std::string& name, const ShaderFloatSmartPointer& shaderFloat)
+	::SetVertexConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -348,7 +347,7 @@ int Rendering::VisualEffectInstanceImpl
 }
 
 void Rendering::VisualEffectInstanceImpl
-	::SetVertexConstant(int pass, int handle, const ShaderFloatSmartPointer& shaderFloat)
+	::SetVertexConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -357,7 +356,7 @@ void Rendering::VisualEffectInstanceImpl
 }
 
 void Rendering::VisualEffectInstanceImpl
-	::SetPixelConstant(int pass, int handle, const ShaderFloatSmartPointer& shaderFloat)
+	::SetPixelConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -366,7 +365,7 @@ void Rendering::VisualEffectInstanceImpl
 }
 
 void Rendering::VisualEffectInstanceImpl
-	::SetVertexTexture(int pass, int handle, const TextureSmartPointer& texture)
+	::SetVertexTexture(int pass, int handle, const TextureSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -375,7 +374,7 @@ void Rendering::VisualEffectInstanceImpl
 }
 
 void Rendering::VisualEffectInstanceImpl
-	::SetPixelTexture(int pass, int handle, const TextureSmartPointer& texture)
+	::SetPixelTexture(int pass, int handle, const TextureSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -384,7 +383,7 @@ void Rendering::VisualEffectInstanceImpl
 }
 
 int Rendering::VisualEffectInstanceImpl
-	::SetPixelConstant(int pass, const std::string& name, const ShaderFloatSmartPointer& shaderFloat)
+	::SetPixelConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -393,7 +392,7 @@ int Rendering::VisualEffectInstanceImpl
 }
 
 int Rendering::VisualEffectInstanceImpl
-	::SetVertexTexture(int pass, const std::string& name, const TextureSmartPointer& texture)
+	::SetVertexTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -402,7 +401,7 @@ int Rendering::VisualEffectInstanceImpl
 }
 
 int Rendering::VisualEffectInstanceImpl
-	::SetPixelTexture(int pass, const std::string& name, const TextureSmartPointer& texture)
+	::SetPixelTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_0(0 <= pass && pass < m_NumPasses, "索引越界！\n");
@@ -410,7 +409,7 @@ int Rendering::VisualEffectInstanceImpl
 	return m_PixelParameters[pass]->SetTexture(name, texture);
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetVertexConstant(int pass, const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -419,7 +418,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImp
 	return m_VertexParameters[pass]->GetConstant(name);
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetPixelConstant(int pass, int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -428,7 +427,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImp
 	return m_PixelParameters[pass]->GetConstant(handle);
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetVertexTexture(int pass, int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -437,7 +436,7 @@ const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstanceImpl
 	return m_VertexParameters[pass]->GetTexture(handle);
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetPixelTexture(int pass, int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -446,7 +445,7 @@ const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstanceImpl
 	return m_PixelParameters[pass]->GetTexture(handle);
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetPixelConstant(int pass, const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -455,7 +454,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImp
 	return m_PixelParameters[pass]->GetConstant(name);
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetVertexTexture(int pass, const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -464,7 +463,7 @@ const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstanceImpl
 	return m_VertexParameters[pass]->GetTexture(name);
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetPixelTexture(int pass, const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -473,7 +472,7 @@ const Rendering::ConstTextureSmartPointer Rendering::VisualEffectInstanceImpl
 	return m_PixelParameters[pass]->GetTexture(name);
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetVertexConstant(int pass, int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -482,7 +481,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::VisualEffectInstanceImp
 	return m_VertexParameters[pass]->GetConstant(handle);
 }
 
-const Rendering::ShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ShaderParametersSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetVertexParameters(int pass) 
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -491,7 +490,7 @@ const Rendering::ShaderParametersSmartPointer Rendering::VisualEffectInstanceImp
 	return m_VertexParameters[pass];
 }
 
-const Rendering::ShaderParametersSmartPointer Rendering::VisualEffectInstanceImpl
+const Rendering::ShaderParametersSharedPtr Rendering::VisualEffectInstanceImpl
 	::GetPixelParameters(int pass) 
 {
 	RENDERING_CLASS_IS_VALID_1;

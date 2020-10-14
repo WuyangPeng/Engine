@@ -39,7 +39,7 @@ namespace Rendering
 		//   w=0 face:  (u,v) in [0,1]^2, origin at vertex (0,0,0)
 		//   w=1 face:  (u,v) in [0,1]^2, origin at vertex (0,0,1)
 
-		BoxSurface(Mathematics::BSplineVolumef* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSmartPointer vformat[6]);
+		BoxSurface(Mathematics::BSplineVolumef* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSharedPtr vformat[6]);
 
 		  ~BoxSurface();
 		  
@@ -69,9 +69,9 @@ namespace Rendering
 		void SortFaces(const AVector& worldViewDirection);
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
-		TrianglesMeshSmartPointer CreateFace(int numRows, int numCols, VertexFormatSmartPointer vformat,bool ccw, float faceValue, int permute[3]);
+		TrianglesMeshSharedPtr CreateFace(int numRows, int numCols, VertexFormatSharedPtr vformat,bool ccw, float faceValue, int permute[3]);
 
-		void UpdateFace(int numRows, int numCols, VertexFormatSmartPointer vformat,VertexBufferSmartPointer vbuffer, bool ccw, float faceValue, int permute[3]);
+		void UpdateFace(int numRows, int numCols, VertexFormatSharedPtr vformat,VertexBufferSharedPtr vbuffer, bool ccw, float faceValue, int permute[3]);
 
 		Mathematics::BSplineVolumef* mVolume;
 		int mNumUSamples, mNumVSamples, mNumWSamples;
@@ -81,7 +81,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(BoxSurface);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, BoxSurface)
+	CORE_TOOLS_SHARED_PTR_DECLARE( BoxSurface)
 		#include STSTEM_WARNING_POP
 }
 

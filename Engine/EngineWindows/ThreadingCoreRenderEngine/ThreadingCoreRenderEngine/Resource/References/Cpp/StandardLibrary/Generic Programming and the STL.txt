@@ -1,0 +1,10 @@
+泛型编程与STL（Generic Programming and the STL）
+
+官方网站：
+http://www.sgi.com/tech/stl
+
+☆
+作者：Matthew H.Austem
+
+知识点 
+1.	C++标准库基础知识。 

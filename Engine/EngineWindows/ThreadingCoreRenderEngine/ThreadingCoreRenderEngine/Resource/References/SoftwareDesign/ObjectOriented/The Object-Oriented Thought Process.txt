@@ -1,0 +1,8 @@
+写给大家看的面向对象编程书（The Object-Oriented Thought Process）
+（第3版）
+
+○
+作者：Matt Weisfeld
+
+知识点 
+1.	面向对象基础知识。

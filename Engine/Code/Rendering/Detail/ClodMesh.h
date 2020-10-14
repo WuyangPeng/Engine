@@ -11,7 +11,7 @@
 
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 #include "Rendering/Detail/CollapseRecordArray.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 
 RENDERING_EXPORT_SHARED_PTR(ClodMeshImpl);
 #include "System/Helper/PragmaWarning.h"
@@ -22,18 +22,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE ClodMesh : public TrianglesMesh
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ClodMesh);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(ClodMesh, = default);
 		using ParentType = TrianglesMesh;
 
 	public:
 		// ClodMesh将复制“网格”的索引缓冲器，
 		// 因为它需要能够独立地更新两个索引，
 		// 或更多个ClodMesh对象共享相同的顶点缓冲器和折叠的记录。
-		explicit ClodMesh(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,
-			              const IndexBufferSmartPointer& indexbuffer,const CollapseRecordArraySmartPointer& recordArray);
-		~ClodMesh() = default;
-		ClodMesh(ClodMesh&&) noexcept= default;
-		ClodMesh& operator=(ClodMesh&&) noexcept= default;
+		explicit ClodMesh(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,
+			              const IndexBufferSharedPtr& indexbuffer,const CollapseRecordArraySharedPtr& recordArray);
+	 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -56,7 +54,7 @@ namespace Rendering
 		// 可以在不需要显示网格的应用程序手动调用。
 		void SelectLevelOfDetail ();
 
-		 ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSharedPtr Clone() const override;
 		
 	protected:
 		// 支持分级裁剪。
@@ -69,7 +67,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(ClodMesh);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, ClodMesh);
+	CORE_TOOLS_SHARED_PTR_DECLARE( ClodMesh);
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_DETAIL_CLOD_MESH_H

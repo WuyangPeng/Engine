@@ -12,7 +12,7 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-#include "CoreTools/ClassInvariant/FunctionDescribed.h"
+#include "CoreTools/Contract/FunctionDescribed.h"
 
 #include <string>
 

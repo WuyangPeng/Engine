@@ -1,42 +1,41 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 09:57)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/12 11:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "UniqueIDManagerImpl.h" 
+#include "UniqueIDManagerImpl.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
-CoreTools::UniqueIDManagerImpl
-	::UniqueIDManagerImpl(int count)
-	:m_UniqueID(count)
+CoreTools::UniqueIDManagerImpl::UniqueIDManagerImpl(int count)
+    : m_UniqueID(count)
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::UniqueIDManagerImpl
-	::IsValid() const noexcept
+bool CoreTools::UniqueIDManagerImpl::IsValid() const noexcept
 {
-	if (0u < m_UniqueID.size())
-		return true;
-	else
-		return false;
+    if (0u < m_UniqueID.size())
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
-uint64_t CoreTools::UniqueIDManagerImpl
-	::NextUniqueID(int index)
+uint64_t CoreTools::UniqueIDManagerImpl::NextUniqueID(int index)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
-	CORE_TOOLS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_UniqueID.size()), "索引越界。");
-	CORE_TOOLS_ASSERTION_3(m_UniqueID.at(index) < m_UniqueID.at(index) + 1, "数值溢出。");
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	return ++m_UniqueID.at(index);
+    auto& uniqueID = m_UniqueID.at(index);
+
+    CORE_TOOLS_ASSERTION_3(uniqueID < uniqueID + 1, "数值溢出。");
+
+    return ++uniqueID;
 }
-

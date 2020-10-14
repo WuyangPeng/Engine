@@ -42,7 +42,7 @@ namespace Rendering
         // The parameter 'allowDynamicChange' should be set to 'true' when you
         // plan to dynamically modify the curve segments.  For example, you might
         // modify the control points in a Bezier curve segment.
-        CurveMesh(VertexFormatSmartPointer vformat, VertexBufferSmartPointer vbuffer, CurveSegmentSmartPointer* segments, FloatArray* params, bool allowDynamicChange);
+        CurveMesh(VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, CurveSegmentSharedPtr* segments, FloatArray* params, bool allowDynamicChange);
 
         ~CurveMesh();
         CurveMesh(const CurveMesh&) = default;
@@ -64,9 +64,9 @@ namespace Rendering
         bool IsLocked() const noexcept;
         ObjectInterfaceSharedPtr CloneObject() const override;
     protected:
-        VertexBufferSmartPointer mOrigVBuffer;
-        FloatArraySmartPointer mOrigParams;
-        CurveSegmentSmartPointer* mSegments;
+        VertexBufferSharedPtr mOrigVBuffer;
+        FloatArraySharedPtr mOrigParams;
+        CurveSegmentSharedPtr* mSegments;
         int mNumFullVertices, mNumSegments, mLevel;
 
     private:
@@ -77,7 +77,7 @@ namespace Rendering
             Edge() noexcept;
 
             // Curve for subdivision evaluations.
-            CurveSegmentSmartPointer Segment;
+            CurveSegmentSharedPtr Segment;
 
             // Indices for the vertices.
             int V[2];
@@ -96,7 +96,7 @@ namespace Rendering
             friend class Memory;
             CurveInfo() noexcept;
 
-            CurveSegmentSmartPointer Segment;
+            CurveSegmentSharedPtr Segment;
             float Param;
         };
 
@@ -109,7 +109,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(CurveMesh);
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, CurveMesh);
+    CORE_TOOLS_SHARED_PTR_DECLARE( CurveMesh);
 #include STSTEM_WARNING_POP
 }
 

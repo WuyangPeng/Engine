@@ -31,7 +31,7 @@ using std::exception;
 using std::make_shared;
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
@@ -139,7 +139,7 @@ void CoreTools::UnitTest
 void CoreTools::UnitTest
 	::ResetOtherData()
 {
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void CoreTools::UnitTest
@@ -158,7 +158,7 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	if (m_DataPtr->IsEmpty())
 		m_CpuTimerImplPtr->Start();
@@ -172,7 +172,7 @@ void CoreTools::UnitTest
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	m_CpuTimerImplPtr->Stop();
 }

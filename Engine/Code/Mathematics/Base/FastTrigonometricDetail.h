@@ -13,7 +13,7 @@
 
 #include "MathDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>
@@ -21,7 +21,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -41,7 +41,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -67,7 +67,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto angleSqrare = Math::Square(angle);
 
@@ -89,7 +89,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -108,7 +108,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -133,7 +133,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto angleSqrare = Math::Square(angle);
 
@@ -156,7 +156,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetQuarterPI(), "输入值必须在范围[0,pi/4]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -176,7 +176,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
 	MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetQuarterPI(), "输入值必须在范围[0,pi/4]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto angleSquare = Math::Square(angle);
 
@@ -305,7 +305,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(0), "输入值必须在范围[-1,1]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto valueSquare = Math::Square(value);
 
@@ -329,7 +329,7 @@ Real Mathematics::FastTrigonometric<Real>
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(0), "输入值必须在范围[-1,1]！\n");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto valueSquare = Math::Square(value);
 

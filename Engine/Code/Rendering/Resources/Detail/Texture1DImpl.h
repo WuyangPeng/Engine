@@ -56,7 +56,7 @@ namespace Rendering
         void VerifyNumLevels() override;
         void GenerateNextMipmap(int length, const char* texels, int lengthNext, char* texelsNext);
 
-        void LoadLevelData(CoreTools::BufferSource& source) override;
+        void LoadLevelData(const CoreTools::BufferSourceSharedPtr& source) override;
         void SaveLevelData(const CoreTools::BufferTargetSharedPtr& target) const override;
         int GetLevelDataStreamingSize() const noexcept override;
 

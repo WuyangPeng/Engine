@@ -12,7 +12,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
@@ -34,8 +34,8 @@ CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, ClodMesh);
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ClodMesh);
 
 Rendering::ClodMesh
-	::ClodMesh(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,
-			   const IndexBufferSmartPointer& indexbuffer,const CollapseRecordArraySmartPointer& recordArray)
+	::ClodMesh(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,
+			   const IndexBufferSharedPtr& indexbuffer,const CollapseRecordArraySharedPtr& recordArray)
 	:ParentType{ vertexformat, vertexbuffer,indexbuffer->Clone() }, m_Impl{ make_shared<ImplType>(recordArray) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -45,12 +45,12 @@ Rendering::ClodMesh
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ClodMesh)
 
-Rendering::ControllerInterfaceSmartPointer Rendering::ClodMesh
+Rendering::ControllerInterfaceSharedPtr Rendering::ClodMesh
 	::Clone() const 
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 void Rendering::ClodMesh

@@ -1,91 +1,81 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 10:44)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/12 14:18)
 
 #ifndef CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
 #define CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
 
-#include "GameError.h" 
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h" 
+#include "GameError.h"
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
-template<typename E>
-CoreTools::GameError<E>
-	::GameError(const FunctionDescribed& functionDescribed, const LastError& lastError, E errorCode, const String& message)
-	:ParentType{ functionDescribed,lastError,message }, m_ErrorCode{ errorCode }
+template <typename E>
+CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, const LastError& lastError, E errorCode, const String& message)
+    : ParentType{ functionDescribed, lastError, message }, m_ErrorCode{ errorCode }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-template<typename E>
-CoreTools::GameError<E>
-	::GameError(const FunctionDescribed& functionDescribed, WindowError lastError, E errorCode, const String& message)
-	:ParentType{ functionDescribed,lastError,message }, m_ErrorCode{ errorCode }
+template <typename E>
+CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, WindowError lastError, E errorCode, const String& message)
+    : ParentType{ functionDescribed, lastError, message }, m_ErrorCode{ errorCode }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-template<typename E>
-CoreTools::GameError<E>
-	::~GameError()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template<typename E>
-bool CoreTools::GameError<E>
-	::IsValid() const noexcept
+template <typename E>
+bool CoreTools::GameError<E>::IsValid() const noexcept
 {
-	return ParentType::IsValid();
+    return ParentType::IsValid();
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
-template<typename E>
-E CoreTools::GameError<E>
-	::GetErrorCode() const noexcept
+template <typename E>
+E CoreTools::GameError<E>::GetErrorCode() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_ErrorCode;
+    return m_ErrorCode;
 }
 
-template<typename E>
-const System::String CoreTools::GameError<E>
-	::GetError() const
+template <typename E>
+const System::String CoreTools::GameError<E>::GetError() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto error = GetErrorCodeDescribed();
+    auto error = GetErrorCodeDescribed();
 
-	if (!error.empty())
-	{
-		error += SYSTEM_TEXT(" ");
-	}
+    if (!error.empty())
+    {
+        error += SYSTEM_TEXT(" ");
+    }
 
-	error += ParentType::GetError();
+    error += ParentType::GetError();
 
-	return error;
+    return error;
 }
 
-template<typename E>
-const System::String CoreTools::GameError<E>
-	::GetErrorCodeDescribed() const
+template <typename E>
+const System::String CoreTools::GameError<E>::GetErrorCodeDescribed() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	auto errorCodeDescribed = SYSTEM_TEXT("错误码 = ") + System::ToString(System::EnumCastUnderlying(m_ErrorCode));
+    auto errorCodeDescribed = SYSTEM_TEXT("错误码 = ") + System::ToString(System::EnumCastUnderlying(m_ErrorCode));
 
-	EXCEPTION_TRY
-	{
-		auto errorName = StringConversion::MultiByteConversionStandard(typeid(ClassType).name());
+    EXCEPTION_TRY
+    {
+        auto errorName = StringConversion::MultiByteConversionStandard(typeid(ClassType).name());
 
-		return SYSTEM_TEXT("异常名：") + errorName + SYSTEM_TEXT("，") + errorCodeDescribed;
-	}
-	EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools);
+        return SYSTEM_TEXT("异常名：") + errorName + SYSTEM_TEXT("，") + errorCodeDescribed;
+    }
+    EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools);
 
-	return errorCodeDescribed;
+    return errorCodeDescribed;
 }
 
-#endif // CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
+#endif  // CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H

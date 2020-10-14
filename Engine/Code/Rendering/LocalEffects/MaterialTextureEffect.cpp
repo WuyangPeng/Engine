@@ -11,8 +11,9 @@
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"  
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
  #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -34,7 +35,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialTextureEffect);
 Rendering::MaterialTextureEffect
 	::MaterialTextureEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
 { 
-	VertexShaderSmartPointer vshader{ std::make_shared< VertexShader>( "Wm5.MaterialTexture",  2, 3, 2, 0 ) };
+	VertexShaderSharedPtr vshader{ std::make_shared< VertexShader>( "Wm5.MaterialTexture",  2, 3, 2, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,  ShaderFlags::VariableSemantic::Position);
@@ -56,7 +57,7 @@ Rendering::MaterialTextureEffect
 	}
  
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.MaterialTexture",  2, 1, 0, 1) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.MaterialTexture",  2, 1, 0, 1) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
     pshader->SetInput(1, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
@@ -77,17 +78,17 @@ Rendering::MaterialTextureEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	} 
 
-	VisualPassSmartPointer pass{   };
+	VisualPassSharedPtr pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{   });
-	pass->SetCullState(CullStateSmartPointer{   });
-	pass->SetDepthState(DepthStateSmartPointer{    });
-	pass->SetOffsetState(OffsetStateSmartPointer{   });
-	pass->SetStencilState(StencilStateSmartPointer{   });
-	pass->SetWireState(WireStateSmartPointer{   });
+	pass->SetAlphaState(AlphaStateSharedPtr{   });
+	pass->SetCullState(CullStateSharedPtr{   });
+	pass->SetDepthState(DepthStateSharedPtr{    });
+	pass->SetOffsetState(OffsetStateSharedPtr{   });
+	pass->SetStencilState(StencilStateSharedPtr{   });
+	pass->SetWireState(WireStateSharedPtr{   });
 
-	VisualTechniqueSmartPointer technique{   };
+	VisualTechniqueSharedPtr technique{   };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
@@ -102,10 +103,10 @@ Rendering::PixelShader* Rendering::MaterialTextureEffect
 Rendering::VisualEffectInstance* Rendering::MaterialTextureEffect
 	::CreateInstance ( Material* material, Texture2D* texture) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared< ProjectionViewMatrixConstant>()));
-        instance->SetVertexConstant(0, 1, ShaderFloatSmartPointer(std::make_shared < MaterialDiffuseConstant>(MaterialSmartPointer(material))));
-	instance->SetPixelTexture(0, 0, TextureSmartPointer(texture));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+	instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared< ProjectionViewMatrixConstant>()));
+        instance->SetVertexConstant(0, 1, ShaderFloatSharedPtr(std::make_shared < MaterialDiffuseConstant>(MaterialSharedPtr(material))));
+	instance->SetPixelTexture(0, 0, TextureSharedPtr(texture));
 
 	const ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
 	if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::NearesLinear &&  !texture->HasMipmaps())
@@ -138,7 +139,7 @@ Rendering::MaterialTextureEffect
 }
 
 void Rendering::MaterialTextureEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -148,7 +149,7 @@ void Rendering::MaterialTextureEffect
 }
 
 void Rendering::MaterialTextureEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     VisualEffect::Link(source);
 }

@@ -9,7 +9,7 @@
 
 #include "EngineMiddleLayerContainer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  

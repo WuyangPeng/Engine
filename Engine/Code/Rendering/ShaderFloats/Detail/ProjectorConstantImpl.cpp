@@ -10,7 +10,7 @@
 #include "ProjectorConstantImpl.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -21,7 +21,7 @@ using std::string;
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
 Rendering::ProjectorConstantImpl
-	::ProjectorConstantImpl(const ProjectorSmartPointer& projector)
+	::ProjectorConstantImpl(const ProjectorSharedPtr& projector)
 	:m_Projector{ projector }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -42,7 +42,7 @@ Rendering::ProjectorConstantImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,ProjectorConstantImpl)
 
-const Rendering::ConstProjectorSmartPointer Rendering::ProjectorConstantImpl
+const Rendering::ConstProjectorSharedPtr Rendering::ProjectorConstantImpl
 	::GetProjector() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;	
@@ -50,15 +50,14 @@ const Rendering::ConstProjectorSmartPointer Rendering::ProjectorConstantImpl
 	if (m_Projector )
 		return m_Projector ;
 	else
-		return ConstProjectorSmartPointer{};
+		return ConstProjectorSharedPtr{};
 }
 
-void Rendering::ProjectorConstantImpl
-	::Load(BufferSource& source)
+void Rendering::ProjectorConstantImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ReadSmartPointer(m_Projector);
+	//source.ReadSharedPtr(m_Projector);
 }
 
 void Rendering::ProjectorConstantImpl
@@ -66,7 +65,7 @@ void Rendering::ProjectorConstantImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.WriteSmartPointer(m_Projector);
+	//target.WriteSharedPtr(m_Projector);
 }
 
 int Rendering::ProjectorConstantImpl
@@ -77,7 +76,7 @@ int Rendering::ProjectorConstantImpl
 	return CORE_TOOLS_STREAM_SIZE(m_Projector);
 }
 
-const CoreTools::ObjectSmartPointer Rendering::ProjectorConstantImpl
+const CoreTools::ObjectSharedPtr Rendering::ProjectorConstantImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -85,10 +84,10 @@ const CoreTools::ObjectSmartPointer Rendering::ProjectorConstantImpl
 	if (m_Projector )
 		return m_Projector->GetObjectByName(name);
 	else
-		return CoreTools::ObjectSmartPointer{};
+		return CoreTools::ObjectSharedPtr{};
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::ProjectorConstantImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::ProjectorConstantImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -96,10 +95,10 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::ProjectorConstantImpl
 	if (m_Projector )
 		return m_Projector->GetAllObjectsByName(name);
 	else
-		return vector<CoreTools::ObjectSmartPointer>{};
+		return vector<CoreTools::ObjectSharedPtr>{};
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::ProjectorConstantImpl
+const CoreTools::ConstObjectSharedPtr Rendering::ProjectorConstantImpl
 	::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -107,10 +106,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::ProjectorConstantImpl
 	if (m_Projector )
 		return m_Projector->GetConstObjectByName(name);
 	else
-		return CoreTools::ConstObjectSmartPointer{};
+		return CoreTools::ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::ProjectorConstantImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::ProjectorConstantImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -118,22 +117,21 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::ProjectorConstantImp
 	if (m_Projector )
 		return m_Projector->GetAllConstObjectsByName(name);
 	else
-		return vector<CoreTools::ConstObjectSmartPointer>{};
+		return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
-void Rendering::ProjectorConstantImpl
-	::Link( ObjectLink& source )
+void Rendering::ProjectorConstantImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ResolveObjectSmartPointerLink(m_Projector);
+	//source.ResolveObjectSharedPtrLink(m_Projector);
 }
 
 void Rendering::ProjectorConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.RegisterSmartPointer(m_Projector);
+	//target.RegisterSharedPtr(m_Projector);
 }
 
 

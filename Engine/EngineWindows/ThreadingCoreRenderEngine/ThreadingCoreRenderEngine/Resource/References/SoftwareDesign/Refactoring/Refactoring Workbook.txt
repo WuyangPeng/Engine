@@ -1,0 +1,12 @@
+重构手册 （Refactoring Workbook）
+
+官方网站：
+http://www.xp123.com
+
+★ 
+作者：William C.Wake
+
+知识点 
+1.	重构基础知识。
+
+ 

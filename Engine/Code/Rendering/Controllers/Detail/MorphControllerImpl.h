@@ -64,7 +64,7 @@ namespace Rendering
 
         int GetStreamingSize() const;
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(CoreTools::BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
 
     private:
         // 目标几何体。每个目标的顶点的数量必须和被管理的几何对象的顶点数量相匹配。

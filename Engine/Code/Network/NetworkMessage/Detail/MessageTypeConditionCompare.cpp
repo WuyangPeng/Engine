@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "MessageTypeConditionCompare.h"
-#include "CoreTools/VersionInformation/Version.h"
+#include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"

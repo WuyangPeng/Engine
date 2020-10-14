@@ -13,7 +13,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-#include "CoreTools/ClassInvariant/ClassInvariantFwd.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
 #include <string>
 

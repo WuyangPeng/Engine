@@ -26,7 +26,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightAttenuationConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, LightAttenuationConstant);
 
 Rendering::LightAttenuationConstant
-	::LightAttenuationConstant(const LightSmartPointer& light)
+	::LightAttenuationConstant(const LightSharedPtr& light)
 	:ParentType{ light }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -48,12 +48,12 @@ void Rendering::LightAttenuationConstant ::Update([[maybe_unused]] const Visual*
  
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::LightAttenuationConstant
+Rendering::ShaderFloatSharedPtr Rendering::LightAttenuationConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
  #include STSTEM_WARNING_POP

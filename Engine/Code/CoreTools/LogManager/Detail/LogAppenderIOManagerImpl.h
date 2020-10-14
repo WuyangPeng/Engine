@@ -13,7 +13,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-#include "CoreTools/ClassInvariant/ClassInvariantFwd.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
 #include <boost/format/format_fwd.hpp>
 

@@ -32,19 +32,18 @@ Rendering::StencilStateImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, StencilStateImpl)
 
-void Rendering::StencilStateImpl
-	::Load(BufferSource& source)
+void Rendering::StencilStateImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source.ReadBool();
-	source.ReadEnum(m_Compare);
-	source.Read(m_Reference);
-	source.Read(m_Mask);
-	source.Read(m_WriteMask);
-	source.ReadEnum(m_OnFail);
-	source.ReadEnum(m_OnZFail);
-	source.ReadEnum(m_OnZPass);
+	m_Enabled = source->ReadBool();
+	source->ReadEnum(m_Compare);
+	source->Read(m_Reference);
+	source->Read(m_Mask);
+	source->Read(m_WriteMask);
+	source->ReadEnum(m_OnFail);
+	source->ReadEnum(m_OnZFail);
+	source->ReadEnum(m_OnZPass);
 }
 
 void Rendering::StencilStateImpl

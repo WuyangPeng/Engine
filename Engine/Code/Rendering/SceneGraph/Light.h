@@ -22,7 +22,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Light : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Light);
+         COPY_UNSHARE_CLASSES_TYPE_DECLARE(Light, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
         using APoint = Mathematics::APoint<float>;
         using AVector = Mathematics::AVector<float>;
@@ -31,13 +31,7 @@ namespace Rendering
 
     public:
         explicit Light(LightType type = LightType::Ambient, float epsilon = Math::GetZeroTolerance());
-        ~Light();
-
-            #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        Light(Light&&) = default;
-        Light& operator=(Light&&) = default;
-        	#include STSTEM_WARNING_POP
+        
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -92,7 +86,7 @@ namespace Rendering
     CORE_TOOLS_STREAM_REGISTER(Light);
 #include STSTEM_WARNING_POP
 
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, Light);
+    CORE_TOOLS_SHARED_PTR_DECLARE( Light);
 }
 
 #endif  // RENDERING_SCENE_GRAPH_LIGHT_H

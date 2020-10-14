@@ -42,7 +42,7 @@ namespace Rendering
         // 渲染目标的操作。
         virtual void Enable (Renderer* renderer) noexcept;
 		virtual void Disable (Renderer* renderer) noexcept;
-        virtual ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer);
+        virtual ConstTexture2DSharedPtr ReadColor(int index,Renderer* renderer);
         
     private:
         void CreateFramebufferObject() noexcept;

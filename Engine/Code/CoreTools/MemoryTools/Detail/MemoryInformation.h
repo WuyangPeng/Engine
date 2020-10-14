@@ -9,7 +9,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CoreTools/ClassInvariant/FunctionDescribed.h"
+#include "CoreTools/Contract/FunctionDescribed.h"
 
 #include <string>
 

@@ -33,7 +33,7 @@ namespace Rendering
 
 		  void SetNumRegisters(int numRegisters) override;
 
-		  ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSharedPtr Clone() const override;
 
 	private:
 		const static int sm_NumRegisters = 4;
@@ -42,7 +42,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(WorldMatrixConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, WorldMatrixConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( WorldMatrixConstant);
 }
 
 #endif // RENDERING_SHADER_FLOATS_WORLD_MATRIX_CONSTANT_H

@@ -1,30 +1,5 @@
 TODO Level 5
 
-0.0.2.1
+0.0.5.1
 
-1.  （FileManager）对ReadBufferIO进行修改，改成直接使用FileBuffer，代替传递const char*。 
-2.  （FileManager）对WriteBufferIO进行修改，改成直接使用FileBuffer，代替传递char*。
-3.  （LogManager）日志库过天，文件改变逻辑，看看有没有办法直接加在日志库中，而不是通过外部调用。
-4.  （MemoryTools）内存库使用地址做键值，可能会导致错误。
-5.  （MemoryTools）修改MD5类，使其更加安全。 
-6.  （MemoryTools）修改内存池相关类，使用智能指针代替裸指针。
-7.  （MemoryTools）使用atomic增加引用计数，而不是锁。
-8.  （ObjectSystems）考虑ObjectRegister、BufferTarget、BufferSource、ObjectLink保留裸指针的接口是否必须。 
-9.  （UnitTestSuite）单元测试打印正在运行的测试，顶层信息未打出。
-10. （UnitTestSuite）单元测试打印测试的引擎、游戏版本号。
-11. （UnitTestSuite）同名但不同文件的单元测试出现问题，需要修改。
-12. （ResourceManager）将资源管理的键ID改成uint64_t。
-13. （ModuleInitializerTerminator）增加一个需要加载模块配置类，对配置进行读取。 
-14. （ModuleInitializerTerminator）增加一个模块自动加载及终止类。
-15. （ModuleInitializerTerminator）终止已加载的模块，并加载新的模块。			  
-16. （SyntacticParser）增加语法分析器。 
-17. （PerformanceProfiler）增加性能剖析器。
-18. （PerformanceProfiler）增加统计采集类。
-19. （PerformanceProfiler）在框架各个循环监测各模块使用的时间。 
-20. （EngineConfiguration）增加引擎配置类。
-21. （CyclicRedundancyCheck）将SpecifyCheckSum和SpecifyCheckSum的数组改成array，并移到实现文件。
-22. （RegularExpression）增加正则表达式解析类。
-23. （Network）完成Network模块。 
-24. （Properties）类MethodPropertySet的引用类型改成const引用类型。
-25. （zlib）完成zlib库的封装。
-26. （Freetype）完成Freetype库的封装。
+

@@ -26,22 +26,22 @@ namespace Rendering
 
 		  RendererTypes GetRendererType() const override;
 
-		  void SetAlphaState(const ConstAlphaStateSmartPointer& alphaState) override;
+		  void SetAlphaState(const ConstAlphaStateSharedPtr& alphaState) override;
 
 
-		  void SetCullState(const ConstCullStateSmartPointer& cullState) override;
+		  void SetCullState(const ConstCullStateSharedPtr& cullState) override;
 
 
-		  void SetDepthState(const ConstDepthStateSmartPointer& depthState) override;
+		  void SetDepthState(const ConstDepthStateSharedPtr& depthState) override;
 
 
-		  void SetOffsetState(const ConstOffsetStateSmartPointer& offsetState) override;
+		  void SetOffsetState(const ConstOffsetStateSharedPtr& offsetState) override;
 
 
-		  void SetStencilState(const ConstStencilStateSmartPointer& stencilState) override;
+		  void SetStencilState(const ConstStencilStateSharedPtr& stencilState) override;
 
 
-		  void SetWireState(const ConstWireStateSmartPointer& wireState) override;
+		  void SetWireState(const ConstWireStateSharedPtr& wireState) override;
 
 
 		  void SetViewport(const Viewport& viewport) override;
@@ -101,7 +101,7 @@ namespace Rendering
 		  void Draw(int x, int y, const Colour& color, const std::string& message) override;
 
 	private:
-		  void DrawPrimitive(const ConstVisualSmartPointer& visual) override;
+		  void DrawPrimitive(const ConstVisualSharedPtr& visual) override;
 
 	};
 }

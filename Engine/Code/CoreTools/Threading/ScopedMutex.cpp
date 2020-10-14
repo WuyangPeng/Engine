@@ -1,40 +1,33 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 11:29)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/12 19:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "ScopedMutex.h"
 #include "DllMutex.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "ScopedMutex.h"
 #include "System/Helper/PragmaWarning.h"
-#include "../Helper/ExceptionMacro.h"
-CoreTools::ScopedMutex
-	::ScopedMutex(MasterType& mutex)
-	:m_Mutex{ mutex }
-{
-	m_Mutex.Enter();
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+CoreTools::ScopedMutex::ScopedMutex(MasterType& mutex)
+    : m_Mutex{ mutex }
+{
+    m_Mutex.Enter();
+
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::ScopedMutex
-	::~ScopedMutex()
+CoreTools::ScopedMutex::~ScopedMutex() noexcept
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-	 
-		EXCEPTION_TRY
-		{
-			m_Mutex.Leave();
-		}
-		EXCEPTION_ALL_CATCH(CoreTools)	 
-
-#include STSTEM_WARNING_POP 
+    m_Mutex.Leave();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ScopedMutex)

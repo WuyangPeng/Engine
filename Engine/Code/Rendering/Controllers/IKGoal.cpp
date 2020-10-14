@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -34,24 +34,20 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, IKGoal);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, IKGoal);
 
 Rendering::IKGoal
-	::IKGoal(const SpatialSmartPointer& target,const SpatialSmartPointer& effector,float weight)
+	::IKGoal(const SpatialSharedPtr& target,const SpatialSharedPtr& effector,float weight)
 	:ParentType{ "IKGoal" }, m_Impl{ make_shared<ImplType>(target, effector, weight) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IKGoal
-	::~IKGoal() 
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, IKGoal)
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, IKGoal)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal,GetTarget, const Rendering::ConstSpatialSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetEffector, const Rendering::ConstSpatialSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal,GetTarget, const Rendering::ConstSpatialSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetEffector, const Rendering::ConstSpatialSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetTargetPosition, const Rendering::IKGoal::APoint)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetEffectorPosition, const Rendering::IKGoal::APoint)
  
@@ -105,14 +101,13 @@ void Rendering::IKGoal
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::IKGoal
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::IKGoal ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	ParentType::Link(source); 	
 
-	m_Impl->Link(source);
+	//m_Impl->Link(source);
 }
 
 void Rendering::IKGoal
@@ -123,8 +118,7 @@ void Rendering::IKGoal
 	ParentType::PostLink();	 
 }
 
-void Rendering::IKGoal
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::IKGoal ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -132,7 +126,7 @@ void Rendering::IKGoal
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	//m_Impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

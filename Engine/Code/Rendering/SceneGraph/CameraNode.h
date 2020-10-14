@@ -23,7 +23,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE CameraNode : public Node
     {
     public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CameraNode);
+         COPY_UNSHARE_CLASSES_TYPE_DECLARE(CameraNode, DESTRUCTOR_STATEMENT);
 		using ParentType = Node;
         
     public:
@@ -38,10 +38,8 @@ namespace Rendering
         //   local rotation column 0 = camera direction
         //   local rotation column 1 = camera up
         //   local rotation column 2 = camera right
-		explicit CameraNode(const CameraSmartPointer& camera);
-          ~CameraNode ();
-                CameraNode(CameraNode&&) noexcept = default;
-          CameraNode& operator=(CameraNode&&) noexcept = default;
+		explicit CameraNode(const CameraSharedPtr& camera);
+         
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
            ObjectInterfaceSharedPtr CloneObject() const override;
@@ -52,10 +50,10 @@ namespace Rendering
         // 当你设置摄像机，节点的本地转换将设置为当前相机的当前坐标系统。
         // 节点的世界变换将被计算,
         // 和相机的坐标系使用节点的世界转换。
-		void SetCamera(const CameraSmartPointer& camera);
-		const ConstCameraSmartPointer GetCamera() const noexcept;
+		void SetCamera(const CameraSharedPtr& camera);
+		const ConstCameraSharedPtr GetCamera() const noexcept;
         
-		  ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSharedPtr Clone() const override;
         
     protected:
           bool UpdateWorldData (double applicationTime) override;
@@ -68,7 +66,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
     CORE_TOOLS_STREAM_REGISTER(CameraNode);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, CameraNode); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( CameraNode); 
 }
 #include STSTEM_WARNING_POP
 

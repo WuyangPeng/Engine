@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/17 12:53)
+//	引擎版本：0.5.1.1 (2020/09/28 13:49)
 
 #ifndef CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
@@ -36,17 +36,11 @@
 
 #ifdef CORE_TOOLS_USE_ASSERT
 
-    #define ASSERTION(condition, format, ...)                                   \
-        CoreTools::Assertion                                                    \
-        {                                                                       \
-            (condition), (CORE_TOOLS_FUNCTION_DESCRIBED), (format), __VA_ARGS__ \
-        }
+    #define ASSERTION(condition, format, ...) \
+        CoreTools::Assertion{ (condition), (CORE_TOOLS_FUNCTION_DESCRIBED), (format), __VA_ARGS__ };
 
     #define ASSERTION_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) \
-        CoreTools::Assertion                                                            \
-        {                                                                               \
-            (condition), (functionDescribed), (format), __VA_ARGS__                     \
-        }
+        CoreTools::Assertion{ (condition), (functionDescribed), (format), __VA_ARGS__ };
 
 constexpr auto g_Assert = ASSERT_LEVEL;
 

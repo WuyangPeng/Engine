@@ -14,7 +14,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
@@ -226,23 +226,23 @@ void Rendering::MorphControllerImpl
 }
 
 void Rendering::MorphControllerImpl
-	::Load( CoreTools::BufferSource& source )
+	::Load(const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_NumVertices);
-	source.Read(m_NumTargets);
-	source.Read(m_NumKeys);
+	source->Read(m_NumVertices);
+        source->Read(m_NumTargets);
+        source->Read(m_NumKeys);
 
 	const auto numTotalVertices = m_NumVertices * m_NumTargets;
 	m_Vertices.resize(numTotalVertices);
-	source.ReadAggregate(numTotalVertices, &m_Vertices[0]);
+        source->ReadAggregate(numTotalVertices, &m_Vertices[0]);
 
 	m_Times.resize(m_NumKeys);
-	source.Read(m_NumKeys, &m_Times[0]);
+        source->Read(m_NumKeys, &m_Times[0]);
 
 	const auto numTotalWeights = m_NumKeys * (m_NumTargets - 1);
 	m_Weights.resize(numTotalWeights);
-	source.Read(numTotalWeights, &m_Weights[0]);
+        source->Read(numTotalWeights, &m_Weights[0]);
 }
  #include STSTEM_WARNING_POP

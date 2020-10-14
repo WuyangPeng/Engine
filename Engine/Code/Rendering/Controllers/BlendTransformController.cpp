@@ -14,7 +14,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -37,7 +37,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, BlendTransformController);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, BlendTransformController);
 
 Rendering::BlendTransformController
-	::BlendTransformController(const TransformControllerSmartPointer& firstController,const TransformControllerSmartPointer& secondController, 
+	::BlendTransformController(const TransformControllerSharedPtr& firstController,const TransformControllerSharedPtr& secondController, 
 							   bool rotationScaleMatrices,bool geometricRotation,bool geometricScale) 
 	: ParentType{ FloatTransform{} }, m_Impl{ make_shared<ImplType>(firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale) }
 {
@@ -50,12 +50,12 @@ COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, BlendTransformController)
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, BlendTransformController)
 
-Rendering::ControllerInterfaceSmartPointer Rendering::BlendTransformController
+Rendering::ControllerInterfaceSharedPtr Rendering::BlendTransformController
 	::Clone() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::BlendTransformController ::CloneObject() const
@@ -112,14 +112,13 @@ void Rendering::BlendTransformController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::BlendTransformController
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::BlendTransformController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	ParentType::Link(source); 	
 
-	m_Impl->Link(source);
+	//m_Impl->Link(source);
 }
 
 void Rendering::BlendTransformController
@@ -130,8 +129,7 @@ void Rendering::BlendTransformController
 	ParentType::PostLink();	 
 }
 
-void Rendering::BlendTransformController
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::BlendTransformController ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -139,14 +137,14 @@ void Rendering::BlendTransformController
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	//m_Impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, GetFirstController, const Rendering::ConstTransformControllerSmartPointer)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, GetFirstController, const Rendering::ConstTransformControllerSharedPtr)	
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, GetSecondController, const Rendering::ConstTransformControllerSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, GetSecondController, const Rendering::ConstTransformControllerSharedPtr)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController,IsRotationScaleMatrices,bool)
 

@@ -118,7 +118,7 @@ namespace Physics
 
 	void LCPSolverManager::DeallocateEquations()
 	{
-		CoreTools::DoNothing();
+		CoreTools::DisableNoexcept();
 		
 		for (int i = 0; i < mNumEquations; ++i)
 		{

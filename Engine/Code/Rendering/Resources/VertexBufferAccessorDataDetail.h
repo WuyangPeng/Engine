@@ -30,7 +30,7 @@ Rendering::VertexBufferAccessorData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 Rendering::VertexBufferAccessorData<usage>
-	::VertexBufferAccessorData(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer)
+	::VertexBufferAccessorData(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer)
 	:m_Data{ nullptr }, m_DataChannels{ 0 }
 {
 	Init(vertexformat, vertexbuffer);
@@ -49,7 +49,7 @@ bool Rendering::VertexBufferAccessorData<usage>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 void Rendering::VertexBufferAccessorData<usage>
-	::Init( const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer,int number)
+	::Init( const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer,int number)
 {
 	RENDERING_CLASS_IS_VALID_9;
 	
@@ -75,7 +75,7 @@ void Rendering::VertexBufferAccessorData<usage>
 
 template <>
 void Rendering::VertexBufferAccessorData<Rendering::VertexFormatFlags::AttributeUsage::BlendIndices>
-	::Init(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer,int number)
+	::Init(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer,int number)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -94,7 +94,7 @@ void Rendering::VertexBufferAccessorData<Rendering::VertexFormatFlags::Attribute
 
 template <>
 void Rendering::VertexBufferAccessorData<Rendering::VertexFormatFlags::AttributeUsage::BlendWeight>
-	::Init(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer,int number)
+	::Init(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer,int number)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

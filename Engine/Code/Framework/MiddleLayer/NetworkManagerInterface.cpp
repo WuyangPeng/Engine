@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
@@ -109,7 +109,7 @@ bool Framework::NetworkManagerInterface
 void Framework::NetworkManagerInterface
 	::RegisteredMessages()
 {
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 bool Framework::NetworkManagerInterface

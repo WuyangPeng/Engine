@@ -24,7 +24,7 @@ namespace Rendering
 	{
 	public:
 		using ClassType = RenderTargetManagementImpl;
-		using RenderTargetConstPtr = ConstRenderTargetSmartPointer;
+		using RenderTargetConstPtr = ConstRenderTargetSharedPtr;
 		using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
 	    using RendererPtr = std::shared_ptr<Renderer>;
 		
@@ -37,7 +37,7 @@ namespace Rendering
         void Unbind (RenderTargetConstPtr renderTarget);
         void Enable (RenderTargetConstPtr renderTarget);
         void Disable (RenderTargetConstPtr renderTarget);
-        ConstTexture2DSmartPointer ReadColor(int index,RenderTargetConstPtr renderTarget);
+        ConstTexture2DSharedPtr ReadColor(int index,RenderTargetConstPtr renderTarget);
 
         PlatformRenderTargetSharedPtr GetResource (RenderTargetConstPtr renderTarget);
         

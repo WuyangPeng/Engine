@@ -29,32 +29,32 @@ Rendering::RendererTypes Rendering::WindowRenderer
 	return RendererTypes::Window;
 }
 
-void Rendering::WindowRenderer::SetAlphaState(const ConstAlphaStateSmartPointer& alphaState)
+void Rendering::WindowRenderer::SetAlphaState(const ConstAlphaStateSharedPtr& alphaState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::WindowRenderer::SetCullState(const ConstCullStateSmartPointer& cullState)
+void Rendering::WindowRenderer::SetCullState(const ConstCullStateSharedPtr& cullState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::WindowRenderer::SetDepthState(const ConstDepthStateSmartPointer& depthState)
+void Rendering::WindowRenderer::SetDepthState(const ConstDepthStateSharedPtr& depthState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::WindowRenderer::SetOffsetState(const ConstOffsetStateSmartPointer& offsetState)
+void Rendering::WindowRenderer::SetOffsetState(const ConstOffsetStateSharedPtr& offsetState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::WindowRenderer::SetStencilState(const ConstStencilStateSmartPointer& stencilState)
+void Rendering::WindowRenderer::SetStencilState(const ConstStencilStateSharedPtr& stencilState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::WindowRenderer::SetWireState(const ConstWireStateSmartPointer& wireState)
+void Rendering::WindowRenderer::SetWireState(const ConstWireStateSharedPtr& wireState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
@@ -129,7 +129,7 @@ void Rendering::WindowRenderer::Draw(const uint8_t* screenBuffer, bool reflectY)
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::WindowRenderer::DrawPrimitive(const ConstVisualSmartPointer& visual)
+void Rendering::WindowRenderer::DrawPrimitive(const ConstVisualSharedPtr& visual)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }

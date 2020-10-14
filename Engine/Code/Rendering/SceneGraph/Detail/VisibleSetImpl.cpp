@@ -9,8 +9,8 @@
 #include "VisibleSetImpl.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointerDetail.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointerDetail.h"
+
+
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
@@ -40,14 +40,14 @@ int Rendering::VisibleSetImpl
 }
 
 void Rendering::VisibleSetImpl
-	::Insert(const VisualSmartPointer& visible)
+	::Insert(const VisualSharedPtr& visible)
 {
     RENDERING_CLASS_IS_VALID_9;
     
 	m_Visible.push_back(visible);
 }
 
-const Rendering::ConstVisualSmartPointer Rendering::VisibleSetImpl
+const Rendering::ConstVisualSharedPtr Rendering::VisibleSetImpl
     ::GetVisible (int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;

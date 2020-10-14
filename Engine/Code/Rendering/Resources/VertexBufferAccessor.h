@@ -24,12 +24,12 @@ namespace Rendering
         DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VertexBufferAccessor);
 
     public:
-        VertexBufferAccessor(const ConstVertexFormatSmartPointer& vertexformat, const ConstVertexBufferSmartPointer& vertexbuffer);
+        VertexBufferAccessor(const ConstVertexFormatSharedPtr& vertexformat, const ConstVertexBufferSharedPtr& vertexbuffer);
         explicit VertexBufferAccessor(Visual* visual);
 
         CLASS_INVARIANT_DECLARE;
 
-        void ApplyTo(const ConstVertexFormatSmartPointer& vertexformat, const ConstVertexBufferSmartPointer& vertexbuffer);
+        void ApplyTo(const ConstVertexFormatSharedPtr& vertexformat, const ConstVertexBufferSharedPtr& vertexbuffer);
         void ApplyTo(const Visual* visual);
 
         const char* GetData() const noexcept;

@@ -10,7 +10,7 @@
 #include "AndroidCallBackInterface.h"
 #include "Detail/AndroidProcessManagerImpl.h"
 #include "CoreTools/Threading/ScopedMutex.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 

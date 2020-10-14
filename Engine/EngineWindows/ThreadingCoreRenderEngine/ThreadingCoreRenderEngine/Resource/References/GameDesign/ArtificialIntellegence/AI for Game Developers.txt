@@ -1,0 +1,7 @@
+游戏开发中的人工智能（AI for Game Developers）
+
+★
+作者：David M.Bourg、Glenn Seemann
+
+知识点 
+1.	游戏人工智能基础知识。   

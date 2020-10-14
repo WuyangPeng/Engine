@@ -30,7 +30,7 @@ bool System::Strcat(char* destination, [[maybe_unused]] size_t sizeInBytes, cons
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     // 如果成功，则为零；如果失败，则为错误代码。
-    if (0 == ::strcat_s(destination, sizeInBytes, source))
+    if (::strcat_s(destination, sizeInBytes, source) == 0)
         return true;
     else
         return false;

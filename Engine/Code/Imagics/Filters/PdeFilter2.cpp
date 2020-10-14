@@ -268,7 +268,7 @@ void Imagics::PdeFilter2
 void Imagics::PdeFilter2
 	::AssignDirichletMaskBorder ()
 {
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 	
     if (mMask)
     {

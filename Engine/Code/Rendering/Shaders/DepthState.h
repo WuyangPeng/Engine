@@ -11,7 +11,7 @@
 
 #include "Flags/DepthStateFlags.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 
 namespace CoreTools
@@ -27,21 +27,14 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE DepthState : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(DepthState);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(DepthState, DESTRUCTOR_STATEMENT); 
         using ParentType = Object;
         using CompareMode = DepthStateFlags::CompareMode;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        DepthState();
-        ~DepthState();
-
-        #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        DepthState(DepthState&&) noexcept = default;
-        DepthState& operator=(DepthState&&) noexcept = default;
-        #include STSTEM_WARNING_POP
+        DepthState(); 
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -65,7 +58,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(DepthState);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, DepthState);
+    CORE_TOOLS_SHARED_PTR_DECLARE( DepthState);
 }
 
 #endif  // RENDERING_SHADERS_DEPTH_STATE_H

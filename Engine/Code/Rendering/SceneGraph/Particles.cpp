@@ -34,9 +34,9 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Particles);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Particles);
 
 Rendering::Particles
-	::Particles(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,
+	::Particles(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,
 				int indexSize, const vector<APoint>& positions,const vector<float>& sizes, float sizeAdjust) 
-	:ParentType{ vertexformat, vertexbuffer, IndexBufferSmartPointer() },
+	:ParentType{ vertexformat, vertexbuffer, IndexBufferSharedPtr() },
 	 m_Impl{ make_shared<ImplType>(positions, sizes, sizeAdjust) }
 {
 	InitIndexBuffer(indexSize);
@@ -59,7 +59,7 @@ const	auto numParticles = numVertices / 4;
 	RENDERING_ASSERTION_1(numVertices % 4 == 0, "顶点数必须是4的倍数。\n");
 	RENDERING_ASSERTION_1(numParticles == m_Impl->GetNumParticles(), "粒子数必须和位置数组大小相等。\n");
 
-	IndexBufferSmartPointer indexBuffer{ std::make_shared< IndexBuffer>(6 * numParticles, indexSize) };
+	IndexBufferSharedPtr indexBuffer{ std::make_shared< IndexBuffer>(6 * numParticles, indexSize) };
 	indexBuffer->InitIndexBufferInParticles();
 	SetIndexBuffer(indexBuffer);	
 }
@@ -86,12 +86,12 @@ COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Particles)
 
  CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Particles)
 
-Rendering::ControllerInterfaceSmartPointer Rendering::Particles
+Rendering::ControllerInterfaceSharedPtr Rendering::Particles
 	::Clone() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 } 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Particles,GetNumParticles, int)
@@ -131,7 +131,7 @@ void Rendering::Particles
 }
 
 void Rendering::Particles
-	::GenerateParticles(const ConstCameraSmartPointer& camera)
+	::GenerateParticles(const ConstCameraSharedPtr& camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -213,7 +213,7 @@ void Rendering::Particles
 }
 
 void Rendering::Particles
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -229,7 +229,7 @@ void Rendering::Particles
 }
 
 void Rendering::Particles
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     

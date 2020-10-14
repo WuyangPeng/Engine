@@ -28,16 +28,16 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, MaterialConstant);
 CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, MaterialConstant);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, MaterialConstant);
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, MaterialConstant);
+COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(Rendering, MaterialConstant);
 
 Rendering::MaterialConstant
-	::MaterialConstant(const MaterialSmartPointer& material)
+	::MaterialConstant(const MaterialSharedPtr& material)
 	:ParentType{ sm_NumRegisters }, m_Impl{ make_shared<ImplType>(material) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, MaterialConstant)
 
 void Rendering::MaterialConstant
@@ -49,6 +49,6 @@ void Rendering::MaterialConstant
 	ParentType::SetNumRegisters(numRegisters);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, MaterialConstant,GetMaterial, const Rendering::ConstMaterialSmartPointer )
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, MaterialConstant,GetMaterial, const Rendering::ConstMaterialSharedPtr )
 
 #include STSTEM_WARNING_POP

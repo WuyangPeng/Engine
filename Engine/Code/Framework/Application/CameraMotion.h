@@ -24,8 +24,8 @@ namespace Framework
 	{
 	public:
 		NON_COPY_CLASSES_TYPE_DECLARE(CameraMotion);
-		using CameraSmartPointer = Rendering::CameraSmartPointer;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSmartPointer;
+		using CameraSmartPointer = Rendering::CameraSharedPtr;
+		using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;
 
 	public:
 		CameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor = 2.0f, float rotationSpeedFactor = 2.0f);

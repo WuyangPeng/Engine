@@ -91,14 +91,14 @@ void Rendering::TextureData
 }
 
 void Rendering::TextureData
-    ::Load( CoreTools::BufferSource& source )
+    ::Load( const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
     
-	source.ReadEnum(m_Format);
-	source.ReadEnum(m_Type);
-	source.ReadEnum(m_Usage);
-    source.Read(m_NumLevels);    
+	source->ReadEnum(m_Format);
+	source->ReadEnum(m_Type);
+	source->ReadEnum(m_Usage);
+    source->Read(m_NumLevels);    
 
 	if (m_Format < TextureFormat::First && TextureFormat::Max <= m_Format && m_Type < TextureFlags::Texture1D &&
 		TextureFlags::Quantity <= m_Type && m_Usage < BufferUsage::Static && BufferUsage::Quantity <= m_Usage && m_NumLevels < 0)

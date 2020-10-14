@@ -28,32 +28,32 @@ Rendering::RendererTypes Rendering::OpenGLESRenderer
 	return RendererTypes::OpenGLES;
 }
 
-void Rendering::OpenGLESRenderer::SetAlphaState(const ConstAlphaStateSmartPointer& alphaState)
+void Rendering::OpenGLESRenderer::SetAlphaState(const ConstAlphaStateSharedPtr& alphaState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetCullState(const ConstCullStateSmartPointer& cullState)
+void Rendering::OpenGLESRenderer::SetCullState(const ConstCullStateSharedPtr& cullState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetDepthState(const ConstDepthStateSmartPointer& depthState)
+void Rendering::OpenGLESRenderer::SetDepthState(const ConstDepthStateSharedPtr& depthState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetOffsetState(const ConstOffsetStateSmartPointer& offsetState)
+void Rendering::OpenGLESRenderer::SetOffsetState(const ConstOffsetStateSharedPtr& offsetState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetStencilState(const ConstStencilStateSmartPointer& stencilState)
+void Rendering::OpenGLESRenderer::SetStencilState(const ConstStencilStateSharedPtr& stencilState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetWireState(const ConstWireStateSmartPointer& wireState)
+void Rendering::OpenGLESRenderer::SetWireState(const ConstWireStateSharedPtr& wireState)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
@@ -128,7 +128,7 @@ void Rendering::OpenGLESRenderer::Draw(const uint8_t* screenBuffer, bool reflect
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::DrawPrimitive(const ConstVisualSmartPointer& visual)
+void Rendering::OpenGLESRenderer::DrawPrimitive(const ConstVisualSharedPtr& visual)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }

@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(6385)
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -134,7 +135,7 @@ void Rendering::VertexFormatImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(0 < stride, "Stride必须是正数。\n");
-        CoreTools::DoNothing();
+        CoreTools::DisableNoexcept();
 	m_Stride = stride;
 }
 
@@ -264,18 +265,18 @@ void Rendering::VertexFormatImpl
 }
 
 void Rendering::VertexFormatImpl
-	::Load(BufferSource& source )
+	::Load(const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_NumAttributes);
+	source->Read(m_NumAttributes);
 
 	for (auto i = 0; i < System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::Attributes); ++i)
 	{
 		m_Elements[i].Load(source);
 	}
 
-	source.Read(m_Stride);
+	source->Read(m_Stride);
 }
 
 void Rendering::VertexFormatImpl

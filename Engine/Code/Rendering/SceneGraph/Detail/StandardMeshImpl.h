@@ -27,7 +27,7 @@ namespace Rendering
         using Math = Mathematics::FloatMath;
 
     public:
-        StandardMeshImpl(const VertexFormatSmartPointer& vertexFormat, bool isStatic = true, bool inside = false, const FloatTransform* transform = nullptr);
+        StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic = true, bool inside = false, const FloatTransform* transform = nullptr);
 
         StandardMeshImpl(const StandardMeshImpl& rhs);
         StandardMeshImpl& operator=(const StandardMeshImpl& rhs);
@@ -41,31 +41,31 @@ namespace Rendering
         void SetTransform(const FloatTransform& transform) noexcept;
         const FloatTransform& GetTransform() const noexcept;
 
-        const TrianglesMeshSmartPointer Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const;
-        const TrianglesMeshSmartPointer Disk(int shellSamples, int radialSamples, float radius) const;
-        const TrianglesMeshSmartPointer Box(float xExtent, float yExtent, float zExtent) const;
-        const TrianglesMeshSmartPointer CylinderOmittedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
-        const TrianglesMeshSmartPointer CylinderIncludedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
-        const TrianglesMeshSmartPointer Sphere(int zSamples, int radialSamples, float radius) const;
-        const TrianglesMeshSmartPointer Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const;
+        const TrianglesMeshSharedPtr Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const;
+        const TrianglesMeshSharedPtr Disk(int shellSamples, int radialSamples, float radius) const;
+        const TrianglesMeshSharedPtr Box(float xExtent, float yExtent, float zExtent) const;
+        const TrianglesMeshSharedPtr CylinderOmittedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
+        const TrianglesMeshSharedPtr CylinderIncludedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
+        const TrianglesMeshSharedPtr Sphere(int zSamples, int radialSamples, float radius) const;
+        const TrianglesMeshSharedPtr Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const;
 
-        const TrianglesMeshSmartPointer Tetrahedron() const;
-        const TrianglesMeshSmartPointer Hexahedron() const;
-        const TrianglesMeshSmartPointer Octahedron() const;
-        const TrianglesMeshSmartPointer Dodecahedron() const;
-        const TrianglesMeshSmartPointer Icosahedron() const;
+        const TrianglesMeshSharedPtr Tetrahedron() const;
+        const TrianglesMeshSharedPtr Hexahedron() const;
+        const TrianglesMeshSharedPtr Octahedron() const;
+        const TrianglesMeshSharedPtr Dodecahedron() const;
+        const TrianglesMeshSharedPtr Icosahedron() const;
 
     private:
         void Init();
-        void TransformData(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSmartPointer& vertexBuffer) const;
+        void TransformData(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const;
         void ReverseTriangleOrder(int numTriangles, int* indices) const noexcept;
-        void CreatePlatonicNormals(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSmartPointer& vertexBuffer) const;
-        void CreatePlatonicTextures(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSmartPointer& vertexBuffer) const;
+        void CreatePlatonicNormals(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const;
+        void CreatePlatonicTextures(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const;
 
     private:
         static constexpr auto sm_MaxUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
 
-        VertexFormatSmartPointer m_VertexFormat;
+        VertexFormatSharedPtr m_VertexFormat;
         FloatTransform m_Transform;
         bool m_IsStatic;
         bool m_Inside;

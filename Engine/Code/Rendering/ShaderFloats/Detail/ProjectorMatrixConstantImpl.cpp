@@ -9,7 +9,7 @@
 #include "ProjectorMatrixConstantImpl.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -19,7 +19,7 @@ using std::string;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455) 
 Rendering::ProjectorMatrixConstantImpl
-	::ProjectorMatrixConstantImpl(const ProjectorSmartPointer& projector,bool biased, int biasScaleMatrixIndex)
+	::ProjectorMatrixConstantImpl(const ProjectorSharedPtr& projector,bool biased, int biasScaleMatrixIndex)
 	:ParentType{ projector }, m_Biased{ biased },m_BiasScaleMatrixIndex{ biasScaleMatrixIndex }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -48,14 +48,13 @@ bool Rendering::ProjectorMatrixConstantImpl
 }
 #endif // OPEN_CLASS_INVARIANT 
 
-void Rendering::ProjectorMatrixConstantImpl
-	::Load(BufferSource& source)
+void Rendering::ProjectorMatrixConstantImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	ParentType::Load(source);
-	m_Biased = source.ReadBool();
-	source.Read(m_BiasScaleMatrixIndex);
+	m_Biased = source->ReadBool();
+	source->Read(m_BiasScaleMatrixIndex);
 }
 
 void Rendering::ProjectorMatrixConstantImpl

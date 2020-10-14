@@ -10,8 +10,9 @@
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h" 
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -33,7 +34,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture2ColorBlendEffect);
 Rendering::Texture2ColorBlendEffect
 	::Texture2ColorBlendEffect ()
 {
-    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>( "Wm5.Texture2ColorBlend", 3, 3, 1, 0 ) };
+    VertexShaderSharedPtr vshader{ std::make_shared < VertexShader>( "Wm5.Texture2ColorBlend", 3, 3, 1, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelTCoord0", ShaderFlags::VariableType::Float2,ShaderFlags::VariableSemantic::TextureCoord0);
     vshader->SetInput(2, "modelTCoord1", ShaderFlags::VariableType::Float2,ShaderFlags::VariableSemantic::TextureCoord1);
@@ -53,7 +54,7 @@ Rendering::Texture2ColorBlendEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.Texture2ColorBlend",2, 1, 0, 2) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.Texture2ColorBlend",2, 1, 0, 2) };
     pshader->SetInput(0, "vertexTCoord0", ShaderFlags::VariableType::Float2,ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetInput(1, "vertexTCoord1", ShaderFlags::VariableType::Float2,ShaderFlags::VariableSemantic::TextureCoord1);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -70,17 +71,17 @@ Rendering::Texture2ColorBlendEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-   VisualPassSmartPointer pass{   };
+   VisualPassSharedPtr pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{   });
-	pass->SetCullState(CullStateSmartPointer{   });
-	pass->SetDepthState(DepthStateSmartPointer{   });
-	pass->SetOffsetState(OffsetStateSmartPointer{    });
-	pass->SetStencilState(StencilStateSmartPointer{   });
-	pass->SetWireState(WireStateSmartPointer{   });
+	pass->SetAlphaState(AlphaStateSharedPtr{   });
+	pass->SetCullState(CullStateSharedPtr{   });
+	pass->SetDepthState(DepthStateSharedPtr{   });
+	pass->SetOffsetState(OffsetStateSharedPtr{    });
+	pass->SetStencilState(StencilStateSharedPtr{   });
+	pass->SetWireState(WireStateSharedPtr{   });
 
-	VisualTechniqueSmartPointer technique{   };
+	VisualTechniqueSharedPtr technique{   };
 	technique->InsertPass(pass);
 	InsertTechnique(technique);
 }
@@ -97,10 +98,10 @@ Rendering::PixelShader* Rendering
 Rendering::VisualEffectInstance* Rendering::Texture2ColorBlendEffect
 	::CreateInstance ( Texture2D* texture0, Texture2D* texture1) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared < ProjectionViewMatrixConstant>()));
-	instance->SetPixelTexture(0, 0, TextureSmartPointer(texture0));
-	instance->SetPixelTexture(0, 1, TextureSmartPointer(texture1));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared < ProjectionViewMatrixConstant>()));
+	instance->SetPixelTexture(0, 0, TextureSharedPtr(texture0));
+	instance->SetPixelTexture(0, 1, TextureSharedPtr(texture1));
 
     const PixelShader* pshader = GetPixelShader();
 
@@ -145,7 +146,7 @@ Rendering::Texture2ColorBlendEffect
 }
 
 void Rendering::Texture2ColorBlendEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -155,7 +156,7 @@ void Rendering::Texture2ColorBlendEffect
 }
 
 void Rendering::Texture2ColorBlendEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     VisualEffect::Link(source);
 }

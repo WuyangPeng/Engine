@@ -60,12 +60,12 @@ void Rendering::CameraWorldPositionConstant
 	ParentType::SetNumRegisters(numRegisters);
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::CameraWorldPositionConstant
+Rendering::ShaderFloatSharedPtr Rendering::CameraWorldPositionConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
   #include STSTEM_WARNING_POP

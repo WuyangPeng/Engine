@@ -35,12 +35,11 @@ Rendering::FloatArrayImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,FloatArrayImpl)
 
-void Rendering::FloatArrayImpl
-	::Load( BufferSource& source )
+void Rendering::FloatArrayImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.Read(m_Elements);
+	source->Read(m_Elements);
 }
 
 void Rendering::FloatArrayImpl

@@ -1,49 +1,57 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.1.1.0 (2020/05/02 13:36)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/14 11:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "DirectoryImpl.h" 
-#include "System/Window/WindowSystem.h"
+#include "DirectoryImpl.h"
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
+#include "System/Helper/PragmaWarning/Format.h"
+#include "System/Window/WindowSystem.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <array>
 
 using std::array;
 
-CoreTools::DirectoryImpl
-	::DirectoryImpl(const String& directoryName)
-	:m_DirectoryName{ }
+CoreTools::DirectoryImpl::DirectoryImpl(const String& directoryName)
+    : m_DirectoryName{}
 {
-	array<System::TChar, System::g_MaxPath> systemCurrentDirectory{ };
-	const auto result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
-	if (0 < result && directoryName != systemCurrentDirectory.data())
-	{
-		m_DirectoryName = systemCurrentDirectory.data();
-            [[maybe_unused]] const auto result2 = System::SetSystemCurrentDirectory(directoryName.c_str());
-	}
+    array<System::TChar, System::g_MaxPath> systemCurrentDirectory{};
+    const auto result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
+    if (0 < result && directoryName != systemCurrentDirectory.data())
+    {
+        m_DirectoryName = systemCurrentDirectory.data();
+        if (!System::SetSystemCurrentDirectory(directoryName.c_str()))
+        {
+            THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("设置当前目录“%1%”失败！"s)) % directoryName).str());
+        }
+    }
+
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::DirectoryImpl
-	::~DirectoryImpl()
+CoreTools::DirectoryImpl::~DirectoryImpl() noexcept
 {
-	if (!m_DirectoryName.empty())
-	{
-            [[maybe_unused]] const auto result2 = System::SetSystemCurrentDirectory(m_DirectoryName.c_str());
-	}
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+
+    if (!m_DirectoryName.empty())
+    {
+        if (!System::SetSystemCurrentDirectory(m_DirectoryName.c_str()))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
+                << SYSTEM_TEXT("设置当前目录")
+                << m_DirectoryName
+                << SYSTEM_TEXT("失败！")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
+        }
+    }
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::DirectoryImpl
-	::IsValid() const noexcept
-{
-	 
-		return true;
- 
-}
-#endif // OPEN_CLASS_INVARIANT
- 
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, DirectoryImpl)

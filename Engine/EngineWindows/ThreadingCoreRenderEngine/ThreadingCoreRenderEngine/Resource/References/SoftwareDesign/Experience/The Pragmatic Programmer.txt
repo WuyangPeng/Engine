@@ -1,0 +1,18 @@
+程序员修炼之道——从小工到专家（The Pragmatic Programmer:From Journeyman to Master）
+
+官方网站：
+http://www.pragmaticprogrammer.com
+
+第1版
+★★★
+作者： Andrew Hunt、David Thomas 
+
+知识点 
+1.	软件开发经验基础知识。
+
+第2版
+★★★
+作者： Andrew Hunt、David Thomas 
+
+知识点 
+1.	软件开发经验基础知识。

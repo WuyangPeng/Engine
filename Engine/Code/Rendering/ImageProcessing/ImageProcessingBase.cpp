@@ -11,11 +11,12 @@
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "Mathematics/Base/Float2.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/Shaders/ShaderManager.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -47,7 +48,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     triple.push_back(vertexFormatType0);
     triple.push_back(vertexFormatType1);
 
-    VertexFormatSmartPointer vformat = VertexFormat::Create(triple);
+    VertexFormatSharedPtr vformat = VertexFormat::Create(triple);
 
     vformat->SetAttribute(0, 0, 0, VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 0);
     vformat->SetAttribute(1, 0, 3 * sizeof(float), VertexFormatFlags::AttributeType::Float2, VertexFormatFlags::AttributeUsage::TextureCoord, 0);
@@ -55,7 +56,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
 
     // Create the vertex buffer for the squares.
     const int vstride = vformat->GetStride();
-    VertexBufferSmartPointer vbuffer(std::make_shared<VertexBuffer>(4, vstride));
+    VertexBufferSharedPtr vbuffer(std::make_shared<VertexBuffer>(4, vstride));
     VertexBufferAccessor vba(vformat, vbuffer);
 
     float xmin = 0.0f, xmax = 0.0f, ymin = 0.0f, ymax = 0.0f;
@@ -96,7 +97,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc3.GetFirstValue(), tc3.GetSecondValue()), 3);
 
     // Create the index buffer for the square.
-    IndexBufferSmartPointer ibuffer(NEW0 IndexBuffer(6, sizeof(int)));
+    IndexBufferSharedPtr ibuffer(std::make_shared < IndexBuffer>(6,static_cast<int>( sizeof(int))));
 
     int* indices = (int*)ibuffer->GetReadOnlyData();
     indices[0] = 0;
@@ -107,10 +108,10 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     indices[5] = 3;
 
     // Create the square.
-    mRectangle.reset(NEW0 TrianglesMesh(vformat, vbuffer, ibuffer));
+    mRectangle =std::make_shared < TrianglesMesh>(vformat, vbuffer, ibuffer);
 
     CreateVertexShader();
-    mTargets = NEW1<RenderTargetSmartPointer>(mNumTargets);
+    mTargets = NEW1<RenderTargetSharedPtr>(mNumTargets);
     for (int i = 0; i < mNumTargets; ++i)
     {
         mTargets[i].reset(NEW0 RenderTarget(1, TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mNumCols, mNumRows, false, false));
@@ -126,34 +127,34 @@ Rendering::ImageProcessingBase ::~ImageProcessingBase()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::ImageProcessingBase ::CreateEffect(PixelShaderSmartPointer pshader, VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance)
+void Rendering::ImageProcessingBase ::CreateEffect(PixelShaderSharedPtr pshader, VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
 {
     // Create the pass.
-    VisualPassSmartPointer pass(std::make_shared<VisualPass>());
+    VisualPassSharedPtr pass(std::make_shared<VisualPass>());
     pass->SetPixelShader(pshader);
 
     // All effects share the vertex shader for the square trimesh.
     pass->SetVertexShader(mVertexShader);
 
     // Create global state.
-    pass->SetAlphaState(AlphaStateSmartPointer(std::make_shared<AlphaState>()));
-    pass->SetOffsetState(OffsetStateSmartPointer(std::make_shared<OffsetState>()));
-    pass->SetStencilState(StencilStateSmartPointer(std::make_shared<StencilState>()));
-    pass->SetWireState(WireStateSmartPointer(std::make_shared<WireState>()));
+    pass->SetAlphaState(AlphaStateSharedPtr(std::make_shared<AlphaState>()));
+    pass->SetOffsetState(OffsetStateSharedPtr(std::make_shared<OffsetState>()));
+    pass->SetStencilState(StencilStateSharedPtr(std::make_shared<StencilState>()));
+    pass->SetWireState(WireStateSharedPtr(std::make_shared<WireState>()));
 
     // Culling is not needed for image processing.
-    CullStateSmartPointer cstate(std::make_shared<CullState>());
+    CullStateSharedPtr cstate(std::make_shared<CullState>());
     cstate->SetEnabled(false);
     pass->SetCullState(cstate);
 
     // Depth buffering is not needed for image processing.
-    DepthStateSmartPointer dstate(std::make_shared<DepthState>());
+    DepthStateSharedPtr dstate(std::make_shared<DepthState>());
     dstate->SetEnabled(false);
     dstate->SetWritable(false);
     pass->SetDepthState(dstate);
 
     // Create the effect.
-    VisualTechniqueSmartPointer technique(std::make_shared<VisualTechnique>());
+    VisualTechniqueSharedPtr technique(std::make_shared<VisualTechnique>());
     technique->InsertPass(pass);
     effect = std::make_shared<VisualEffect>();
     effect->InsertTechnique(technique);
@@ -298,7 +299,7 @@ void Rendering::ImageProcessingBase ::CreateVertexShader()
 
     // œ»Õ®π˝±‡“Î
 
-    mVertexShader = VertexShaderSmartPointer{ std::make_shared<VertexShader>("Wm5.ScreenShader", 1, 2, 1, 0) };
+    mVertexShader = VertexShaderSharedPtr{ std::make_shared<VertexShader>("Wm5.ScreenShader", 1, 2, 1, 0) };
     mVertexShader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
     mVertexShader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
     mVertexShader->SetOutput(1, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
@@ -316,7 +317,7 @@ void Rendering::ImageProcessingBase ::CreateVertexShader()
         profile->SetProgram(i, msVPrograms[i]);
     }
 
-    mPVWMatrixConstant = ProjectionViewWorldMatrixConstantSmartPointer{ std::make_shared<ProjectionViewWorldMatrixConstant>() };
+    mPVWMatrixConstant = ProjectionViewWorldMatrixConstantSharedPtr{ std::make_shared<ProjectionViewWorldMatrixConstant>() };
 }
 
 int Rendering::ImageProcessingBase::msDx9VRegisters[1]{ 0 };

@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
+ 
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
@@ -67,7 +67,7 @@ int Rendering::NodeImpl
 }
 
 int Rendering::NodeImpl
-    ::AttachChild (SpatialSmartPointer  child)
+    ::AttachChild (SpatialSharedPtr  child)
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -117,7 +117,7 @@ int Rendering::NodeImpl
 }
 
 int Rendering::NodeImpl
-   ::DetachChild(SpatialSmartPointer  child) noexcept
+   ::DetachChild(SpatialSharedPtr  child) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -138,7 +138,7 @@ int Rendering::NodeImpl
     return -1;
 }
 
-Rendering::SpatialSmartPointer Rendering::NodeImpl
+Rendering::SpatialSharedPtr Rendering::NodeImpl
     ::DetachChildAt (int index)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -154,11 +154,11 @@ Rendering::SpatialSmartPointer Rendering::NodeImpl
         
         return child;
     }
-	return SpatialSmartPointer{};
+	return SpatialSharedPtr{};
 }
 
-Rendering::SpatialSmartPointer Rendering::NodeImpl
-    ::SetChild(int index,const SpatialSmartPointer& child)
+Rendering::SpatialSharedPtr Rendering::NodeImpl
+    ::SetChild(int index,const SpatialSharedPtr& child)
 {
     RENDERING_CLASS_IS_VALID_9;
     
@@ -196,10 +196,10 @@ Rendering::SpatialSmartPointer Rendering::NodeImpl
     
     m_Child.push_back(child);
     
-	return SpatialSmartPointer{};
+	return SpatialSharedPtr{};
 }
 
-Rendering::SpatialSmartPointer Rendering::NodeImpl
+Rendering::SpatialSharedPtr Rendering::NodeImpl
     ::GetChild (int index)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -209,10 +209,10 @@ Rendering::SpatialSmartPointer Rendering::NodeImpl
         return m_Child[index];
     }
     
-	return SpatialSmartPointer{};
+	return SpatialSharedPtr{};
 }
 
-Rendering::ConstSpatialSmartPointer Rendering::NodeImpl
+Rendering::ConstSpatialSharedPtr Rendering::NodeImpl
     ::GetConstChild(int index) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -222,7 +222,7 @@ Rendering::ConstSpatialSmartPointer Rendering::NodeImpl
 		return m_Child[index] ;
 	}
 
-	return ConstSpatialSmartPointer{};
+	return ConstSpatialSharedPtr{};
 }
 
 bool Rendering::NodeImpl
@@ -290,7 +290,7 @@ void Rendering::NodeImpl
 
 // 名字支持。
 
-const CoreTools::ObjectSmartPointer Rendering::NodeImpl
+const CoreTools::ObjectSharedPtr Rendering::NodeImpl
     ::GetObjectByName (const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -305,15 +305,15 @@ const CoreTools::ObjectSmartPointer Rendering::NodeImpl
         }
     }
     
-    return CoreTools::ObjectSmartPointer();
+    return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::NodeImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::NodeImpl
     ::GetAllObjectsByName (const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
     
-    vector<CoreTools::ObjectSmartPointer> objects;
+    vector<CoreTools::ObjectSharedPtr> objects;
     
     for (auto iter = m_Child.begin(),end = m_Child.end();iter != end; ++iter)
     {
@@ -328,14 +328,14 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::NodeImpl
     return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::NodeImpl
+const CoreTools::ConstObjectSharedPtr Rendering::NodeImpl
     ::GetConstObjectByName (const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
     
     for (auto iter = m_Child.begin(),end = m_Child.end(); iter != end; ++iter)
     {
-		auto child = *iter;//->PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+		auto child = *iter;//->PolymorphicCastConstObjectSharedPtr<ConstSpatialSharedPtr>();
         
         if (child != nullptr && child->GetName() == name)
         {
@@ -343,19 +343,19 @@ const CoreTools::ConstObjectSmartPointer Rendering::NodeImpl
         }
     }
     
-	return CoreTools::ConstObjectSmartPointer{};
+	return CoreTools::ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::NodeImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::NodeImpl
     ::GetAllConstObjectsByName (const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
     
-    vector<CoreTools::ConstObjectSmartPointer> objects;
+    vector<CoreTools::ConstObjectSharedPtr> objects;
     
     for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
     {
-		auto child = *iter;//->PolymorphicCastConstObjectSmartPointer<ConstSpatialSmartPointer>();
+		auto child = *iter;//->PolymorphicCastConstObjectSharedPtr<ConstSpatialSharedPtr>();
         
         if (child != nullptr && child->GetName() == name)
         {
@@ -368,24 +368,22 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::NodeImpl
 
 // 流支持
 
-void Rendering::NodeImpl
-    ::Load (BufferSource& source)
+void Rendering::NodeImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
 	int numChildren{ 0 };
-    source.Read(numChildren);
+    source->Read(numChildren);
     
     m_Child.resize(numChildren);
     
     if (!m_Child.empty())
     {
-      //  source.ReadSmartPointer(boost::numeric_cast<int>(m_Child.size()),&m_Child[0]);
+      //  source.ReadSharedPtr(boost::numeric_cast<int>(m_Child.size()),&m_Child[0]);
     }
 }
 
-void Rendering::NodeImpl
-    ::Link (ObjectLink& source)
+void Rendering::NodeImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
@@ -395,7 +393,7 @@ void Rendering::NodeImpl
     {
       //  if (m_Child[i].GetAddress() != 0)
         {
-       //     source.ResolveObjectSmartPointerLink(m_Child[i]);
+       //     source.ResolveObjectSharedPtrLink(m_Child[i]);
      //       SetChild(i, m_Child[i]);
         }
     }
@@ -411,7 +409,7 @@ void Rendering::NodeImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& ta
     {
         if (m_Child[i])
         {
-           // target.RegisterSmartPointer(m_Child[i]);
+           // target.RegisterSharedPtr(m_Child[i]);
         }
     }
 }
@@ -426,7 +424,7 @@ void Rendering::NodeImpl
 
 	if (!m_Child.empty())
 	{
-	//	target.WriteSmartPointerWithoutNumber(boost::numeric_cast<int>(m_Child.size()), &m_Child[0]);
+	//	target.WriteSharedPtrWithoutNumber(boost::numeric_cast<int>(m_Child.size()), &m_Child[0]);
 	}  
 }
 

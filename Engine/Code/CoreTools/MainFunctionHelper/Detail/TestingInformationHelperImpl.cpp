@@ -13,7 +13,7 @@
 #include "CoreTools/FileManager/EnvironmentVariable.h" 
 
 #include <iostream>
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using boost::property_tree::ptree;
 using std::cerr;

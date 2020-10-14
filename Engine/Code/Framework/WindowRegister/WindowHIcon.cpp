@@ -11,6 +11,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "System/Helper/WindowsMacro.h"
 
 Framework::WindowHIcon
 	::WindowHIcon(const TChar* icon) noexcept

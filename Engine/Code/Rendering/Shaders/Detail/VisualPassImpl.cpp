@@ -14,7 +14,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 using std::string;
@@ -56,61 +56,60 @@ void Rendering::VisualPassImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.WriteSmartPointer(m_VertexShader);
-	//target.WriteSmartPointer(m_PixelShader);
-	//target.WriteSmartPointer(m_AlphaState);
-	//target.WriteSmartPointer(m_CullState);
-	//target.WriteSmartPointer(m_DepthState);
-	//target.WriteSmartPointer(m_OffsetState);
-	//target.WriteSmartPointer(m_StencilState);
-	//target.WriteSmartPointer(m_WireState);
+	//target.WriteSharedPtr(m_VertexShader);
+	//target.WriteSharedPtr(m_PixelShader);
+	//target.WriteSharedPtr(m_AlphaState);
+	//target.WriteSharedPtr(m_CullState);
+	//target.WriteSharedPtr(m_DepthState);
+	//target.WriteSharedPtr(m_OffsetState);
+	//target.WriteSharedPtr(m_StencilState);
+	//target.WriteSharedPtr(m_WireState);
 }
 
 void Rendering::VisualPassImpl
-	::Load(BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ReadSmartPointer(m_VertexShader);
-	//source.ReadSmartPointer(m_PixelShader);
-	//source.ReadSmartPointer(m_AlphaState);
-	//source.ReadSmartPointer(m_CullState);
-	//source.ReadSmartPointer(m_DepthState);
-	//source.ReadSmartPointer(m_OffsetState);
-	//source.ReadSmartPointer(m_StencilState);
-	//source.ReadSmartPointer(m_WireState);
+	//source.ReadSharedPtr(m_VertexShader);
+	//source.ReadSharedPtr(m_PixelShader);
+	//source.ReadSharedPtr(m_AlphaState);
+	//source.ReadSharedPtr(m_CullState);
+	//source.ReadSharedPtr(m_DepthState);
+	//source.ReadSharedPtr(m_OffsetState);
+	//source.ReadSharedPtr(m_StencilState);
+	//source.ReadSharedPtr(m_WireState);
 }
 
-void Rendering::VisualPassImpl
-	::Link(ObjectLink& source)
+void Rendering::VisualPassImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ResolveObjectSmartPointerLink(m_VertexShader);
-	//source.ResolveObjectSmartPointerLink(m_PixelShader);
-	//source.ResolveObjectSmartPointerLink(m_AlphaState);
-	//source.ResolveObjectSmartPointerLink(m_CullState);
-	//source.ResolveObjectSmartPointerLink(m_DepthState);
-	//source.ResolveObjectSmartPointerLink(m_OffsetState);
-	//source.ResolveObjectSmartPointerLink(m_StencilState);
-	//source.ResolveObjectSmartPointerLink(m_WireState);
+	//source.ResolveObjectSharedPtrLink(m_VertexShader);
+	//source.ResolveObjectSharedPtrLink(m_PixelShader);
+	//source.ResolveObjectSharedPtrLink(m_AlphaState);
+	//source.ResolveObjectSharedPtrLink(m_CullState);
+	//source.ResolveObjectSharedPtrLink(m_DepthState);
+	//source.ResolveObjectSharedPtrLink(m_OffsetState);
+	//source.ResolveObjectSharedPtrLink(m_StencilState);
+	//source.ResolveObjectSharedPtrLink(m_WireState);
 }
 
 void Rendering::VisualPassImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.RegisterSmartPointer(m_VertexShader);
-	//target.RegisterSmartPointer(m_PixelShader);
-	//target.RegisterSmartPointer(m_AlphaState);
-	//target.RegisterSmartPointer(m_CullState);
-	//target.RegisterSmartPointer(m_DepthState);
-	//target.RegisterSmartPointer(m_OffsetState);
-	//target.RegisterSmartPointer(m_StencilState);
-	//target.RegisterSmartPointer(m_WireState);
+	//target.RegisterSharedPtr(m_VertexShader);
+	//target.RegisterSharedPtr(m_PixelShader);
+	//target.RegisterSharedPtr(m_AlphaState);
+	//target.RegisterSharedPtr(m_CullState);
+	//target.RegisterSharedPtr(m_DepthState);
+	//target.RegisterSharedPtr(m_OffsetState);
+	//target.RegisterSharedPtr(m_StencilState);
+	//target.RegisterSharedPtr(m_WireState);
 }
 
-const CoreTools::ObjectSmartPointer Rendering::VisualPassImpl
+const CoreTools::ObjectSharedPtr Rendering::VisualPassImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -163,10 +162,10 @@ const CoreTools::ObjectSmartPointer Rendering::VisualPassImpl
 		return found;
 	}
 
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::VisualPassImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::VisualPassImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -191,7 +190,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::VisualPassImpl
 	return vertexObjects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::VisualPassImpl
+const CoreTools::ConstObjectSharedPtr Rendering::VisualPassImpl
 	::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -244,10 +243,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::VisualPassImpl
 		return found;
 	}
 
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualPassImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualPassImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -273,7 +272,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualPassImpl
 }
 
 void Rendering::VisualPassImpl
-	::SetVertexShader(const VertexShaderSmartPointer& vertexShader)
+	::SetVertexShader(const VertexShaderSharedPtr& vertexShader)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -281,7 +280,7 @@ void Rendering::VisualPassImpl
 }
  
 void Rendering::VisualPassImpl
-	::SetPixelShader(const PixelShaderSmartPointer& pixelShader)
+	::SetPixelShader(const PixelShaderSharedPtr& pixelShader)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -289,7 +288,7 @@ void Rendering::VisualPassImpl
 }
 
 void Rendering::VisualPassImpl
-	::SetAlphaState(const AlphaStateSmartPointer& alphaState)
+	::SetAlphaState(const AlphaStateSharedPtr& alphaState)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -297,7 +296,7 @@ void Rendering::VisualPassImpl
 }
 
 void Rendering::VisualPassImpl
-	::SetCullState(const CullStateSmartPointer& cullState)
+	::SetCullState(const CullStateSharedPtr& cullState)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -305,7 +304,7 @@ void Rendering::VisualPassImpl
 }
 
 void Rendering::VisualPassImpl
-	::SetDepthState(const DepthStateSmartPointer& depthState)
+	::SetDepthState(const DepthStateSharedPtr& depthState)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -313,7 +312,7 @@ void Rendering::VisualPassImpl
 }
 
 void Rendering::VisualPassImpl
-	::SetOffsetState(const OffsetStateSmartPointer& offsetState)
+	::SetOffsetState(const OffsetStateSharedPtr& offsetState)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -321,7 +320,7 @@ void Rendering::VisualPassImpl
 }
 
 void Rendering::VisualPassImpl
-	::SetStencilState(const StencilStateSmartPointer& stencilState)
+	::SetStencilState(const StencilStateSharedPtr& stencilState)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -329,14 +328,14 @@ void Rendering::VisualPassImpl
 }
 
 void Rendering::VisualPassImpl
-	::SetWireState(const WireStateSmartPointer& wireState)
+	::SetWireState(const WireStateSharedPtr& wireState)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_WireState = wireState;
 }
 
-const Rendering::ConstVertexShaderSmartPointer Rendering::VisualPassImpl
+const Rendering::ConstVertexShaderSharedPtr Rendering::VisualPassImpl
 	::GetVertexShader() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -344,7 +343,7 @@ const Rendering::ConstVertexShaderSmartPointer Rendering::VisualPassImpl
 	return m_VertexShader;
 }
 
-const Rendering::ConstPixelShaderSmartPointer Rendering::VisualPassImpl
+const Rendering::ConstPixelShaderSharedPtr Rendering::VisualPassImpl
 	::GetPixelShader() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -352,7 +351,7 @@ const Rendering::ConstPixelShaderSmartPointer Rendering::VisualPassImpl
 	return m_PixelShader ;
 }
 
-const Rendering::ConstAlphaStateSmartPointer Rendering::VisualPassImpl
+const Rendering::ConstAlphaStateSharedPtr Rendering::VisualPassImpl
 	::GetAlphaState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -360,7 +359,7 @@ const Rendering::ConstAlphaStateSmartPointer Rendering::VisualPassImpl
 	return m_AlphaState ;
 }
 
-const Rendering::ConstCullStateSmartPointer Rendering::VisualPassImpl
+const Rendering::ConstCullStateSharedPtr Rendering::VisualPassImpl
 	::GetCullState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -368,7 +367,7 @@ const Rendering::ConstCullStateSmartPointer Rendering::VisualPassImpl
 	return m_CullState ;
 }
 
-const Rendering::ConstDepthStateSmartPointer Rendering::VisualPassImpl
+const Rendering::ConstDepthStateSharedPtr Rendering::VisualPassImpl
 	::GetDepthState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -377,7 +376,7 @@ const Rendering::ConstDepthStateSmartPointer Rendering::VisualPassImpl
 
 }
 
-const Rendering::ConstOffsetStateSmartPointer Rendering::VisualPassImpl
+const Rendering::ConstOffsetStateSharedPtr Rendering::VisualPassImpl
 	::GetOffsetState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -385,7 +384,7 @@ const Rendering::ConstOffsetStateSmartPointer Rendering::VisualPassImpl
 	return m_OffsetState  ;
 }
 
-const Rendering::ConstStencilStateSmartPointer Rendering::VisualPassImpl
+const Rendering::ConstStencilStateSharedPtr Rendering::VisualPassImpl
 	::GetStencilState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -393,7 +392,7 @@ const Rendering::ConstStencilStateSmartPointer Rendering::VisualPassImpl
 	return m_StencilState ;
 }
 
-const Rendering::ConstWireStateSmartPointer Rendering::VisualPassImpl
+const Rendering::ConstWireStateSharedPtr Rendering::VisualPassImpl
 	::GetWireState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -458,7 +457,7 @@ void Rendering::VisualPassImpl
 	manager.Read(sizeof(int), &numSamplers);
 	manager.Read(sizeof(int), &numProfiles);
  
-	VertexShaderSmartPointer vertexShader{ std::make_shared < VertexShader>(programName, numInputs, numOutputs, numConstants, numSamplers) };
+	VertexShaderSharedPtr vertexShader{ std::make_shared < VertexShader>(programName, numInputs, numOutputs, numConstants, numSamplers) };
 	vertexShader->LoadShader(manager, numProfiles);
 	SetVertexShader(vertexShader);
 }
@@ -479,7 +478,7 @@ void Rendering::VisualPassImpl
 	manager.Read(sizeof(int), &numSamplers);
 	manager.Read(sizeof(int), &numProfiles);
  
-	PixelShaderSmartPointer pixelShader{ std::make_shared<PixelShader>(programName, numInputs, numOutputs, numConstants, numSamplers) };
+	PixelShaderSharedPtr pixelShader{ std::make_shared<PixelShader>(programName, numInputs, numOutputs, numConstants, numSamplers) };
 	pixelShader->LoadShader(manager, numProfiles);
 	SetPixelShader(pixelShader);
 }
@@ -487,7 +486,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadAlphaState(ReadFileManager& manager)
 {
-    AlphaStateSmartPointer alphaState{ std::make_shared < AlphaState>() };
+    AlphaStateSharedPtr alphaState{ std::make_shared < AlphaState>() };
 	alphaState->LoadState(manager);
 	SetAlphaState(alphaState);
 }
@@ -495,7 +494,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadCullState(ReadFileManager& manager)
 {
-    CullStateSmartPointer cullState{ std::make_shared < CullState>() };
+    CullStateSharedPtr cullState{ std::make_shared < CullState>() };
 	cullState->LoadState(manager);
 	SetCullState(cullState);
 }
@@ -503,7 +502,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadDepthState(ReadFileManager& manager)
 {
-    DepthStateSmartPointer depthState{ std::make_shared < DepthState>() };
+    DepthStateSharedPtr depthState{ std::make_shared < DepthState>() };
 	depthState->LoadState(manager);
 	SetDepthState(depthState);
 }
@@ -511,7 +510,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadOffsetState(ReadFileManager& manager)
 {
-    OffsetStateSmartPointer offsetState{ std::make_shared < OffsetState>() };
+    OffsetStateSharedPtr offsetState{ std::make_shared < OffsetState>() };
 	offsetState->LoadState(manager);
 	SetOffsetState(offsetState);
 }
@@ -519,7 +518,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadStencilState(ReadFileManager& manager)
 {
-    StencilStateSmartPointer stencilState{ std::make_shared < StencilState>() };
+    StencilStateSharedPtr stencilState{ std::make_shared < StencilState>() };
 	stencilState->LoadState(manager);
 	SetStencilState(stencilState);
 }
@@ -527,7 +526,7 @@ void Rendering::VisualPassImpl
 void Rendering::VisualPassImpl
 	::LoadWireState(ReadFileManager& manager)
 {
-    WireStateSmartPointer wireState{ std::make_shared < WireState>() };
+    WireStateSharedPtr wireState{ std::make_shared < WireState>() };
 	wireState->LoadState(manager);
 	SetWireState(wireState);
 }

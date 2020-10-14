@@ -36,7 +36,7 @@ namespace Rendering
 		// 渲染目标的操作。
         void Enable (Renderer* renderer) noexcept;
 		void Disable (Renderer* renderer) noexcept;
-        ConstTexture2DSmartPointer ReadColor(int index,Renderer* renderer);
+        ConstTexture2DSharedPtr ReadColor(int index,Renderer* renderer);
 
 	private:
 		IMPL_TYPE_DECLARE(OpenGLRenderTargetData);     

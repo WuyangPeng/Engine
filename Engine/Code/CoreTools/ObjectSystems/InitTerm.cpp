@@ -13,6 +13,7 @@
 #include "InitTermContainer.h"
 #include "ObjectManager.h"
 #include "CoreTools/Helper/SingletonMacro.h"
+#include "CoreTools/Helper/MainFunctionMacro.h"
 
 #include <array>
 

@@ -24,7 +24,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightDiffuseConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, LightDiffuseConstant);
 
 Rendering::LightDiffuseConstant
-	::LightDiffuseConstant(const LightSmartPointer& light)
+	::LightDiffuseConstant(const LightSharedPtr& light)
 	:ParentType{ light }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -45,11 +45,11 @@ void Rendering::LightDiffuseConstant ::Update([[maybe_unused]] const Visual* vis
  
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::LightDiffuseConstant
+Rendering::ShaderFloatSharedPtr Rendering::LightDiffuseConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 #include STSTEM_WARNING_POP

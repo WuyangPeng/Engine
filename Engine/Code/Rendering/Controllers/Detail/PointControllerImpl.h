@@ -60,7 +60,7 @@ namespace Rendering
 
         int GetStreamingSize() const noexcept;
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(CoreTools::BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
 
     private:
         // 系统的运动，在局部坐标。速度矢量应为单位的长度。

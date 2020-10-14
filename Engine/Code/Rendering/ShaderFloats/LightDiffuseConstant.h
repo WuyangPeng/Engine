@@ -21,7 +21,7 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
-		explicit LightDiffuseConstant(const LightSmartPointer& light);
+		explicit LightDiffuseConstant(const LightSharedPtr& light);
 	 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -31,14 +31,14 @@ namespace Rendering
 
 		  void Update(const Visual* visual, const Camera* camera) override;
 
-		  ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSharedPtr Clone() const override;
 	};
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(LightDiffuseConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, LightDiffuseConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( LightDiffuseConstant);
 }
 
 #endif // RENDERING_SHADER_FLOATS_LIGHT_DIFFUSE_CONSTANT_CONSTANT_H

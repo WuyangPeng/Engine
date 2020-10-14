@@ -1,0 +1,18 @@
+游戏引擎架构（Game Engine Architecture）
+
+官方网站：
+http://gameenginebook.com
+
+第1版
+★★★
+作者： Jason Gregory
+
+知识点 
+1.	游戏引擎基础知识。 
+
+第2版
+★★★
+作者： Jason Gregory
+
+知识点 
+1.	游戏引擎基础知识。

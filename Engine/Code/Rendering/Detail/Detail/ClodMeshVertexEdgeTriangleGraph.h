@@ -37,7 +37,7 @@ namespace Rendering
 
 	public:
 		ClodMeshVertexEdgeTriangleGraph(int numVertices, int numIndices);
-
+		 
 		CLASS_INVARIANT_DECLARE;
 
 		void InsertTriangle(const TriangleKey& triangleKey, Triangle triangle);

@@ -25,7 +25,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightModelPositionConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, LightModelPositionConstant);
 
 Rendering::LightModelPositionConstant
-	::LightModelPositionConstant(const LightSmartPointer& light)
+	::LightModelPositionConstant(const LightSharedPtr& light)
 	:ParentType{ light }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -48,11 +48,11 @@ const	auto modelPosition = worldInverseMatrix * worldPosition;
  
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::LightModelPositionConstant
+Rendering::ShaderFloatSharedPtr Rendering::LightModelPositionConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 #include STSTEM_WARNING_POP

@@ -21,7 +21,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
  
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -230,7 +230,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 	MATHEMATICS_CLASS_IS_VALID_1;
 	MATHEMATICS_ASSERTION_1(m_Size == rhs.GetSize(), "向量大小不同！");
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	for (auto i = 0; i < m_Size; ++i)
 	{
@@ -247,7 +247,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 	MATHEMATICS_CLASS_IS_VALID_1;
 	MATHEMATICS_ASSERTION_1(m_Size == rhs.GetSize(), "向量大小不同！");
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	for (auto i = 0; i < m_Size; ++i)
 	{
@@ -277,7 +277,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_1;
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	if (Math::sm_Epsilon < Math::FAbs(scalar))
 	{
@@ -314,7 +314,7 @@ Real Mathematics::VariableLengthVector<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto squaredLength = Math::GetValue(0);
 

@@ -53,7 +53,7 @@ namespace Rendering
 		// the input curve.
 		RevolutionSurface(Mathematics::Curve2f* curve, float xCenter, TopologyType topology,
 						  int numCurveSamples, int numRadialSamples, bool sampleByArcLength,
-						  bool outsideView, VertexFormatSmartPointer vformat);
+						  bool outsideView, VertexFormatSharedPtr vformat);
 
 		  ~RevolutionSurface();
 		  
@@ -97,7 +97,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 	#include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(RevolutionSurface);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, RevolutionSurface);
+	CORE_TOOLS_SHARED_PTR_DECLARE( RevolutionSurface);
 	#include STSTEM_WARNING_POP
 }
 

@@ -11,8 +11,8 @@
 
 #include "Rendering/Resources/Texture2D.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointer.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointer.h"
+
+
 
 #include <vector>
 
@@ -36,8 +36,8 @@ namespace Rendering
 		using BufferSource = CoreTools::BufferSource;
 		using ObjectRegister = CoreTools::ObjectRegister;
 		using ObjectLink = CoreTools::ObjectLink;
-		using ConstTexture2DSmartPointer = std::shared_ptr<const Texture2D>;
-		using Texture2DSmartPointer = std::shared_ptr<Texture2D>;
+		using ConstTexture2DSharedPtr = std::shared_ptr<const Texture2D>;
+		using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
 
     public:
  		// 支持目标的数量取决于图形硬件和驱动程序。“numTargets”必须至少1。
@@ -55,15 +55,15 @@ namespace Rendering
         TextureFormat GetFormat () const;
         int GetWidth () const;
         int GetHeight () const;
-        ConstTexture2DSmartPointer GetColorTexture (int index) const;
-        ConstTexture2DSmartPointer GetDepthStencilTexture() const noexcept;
+        ConstTexture2DSharedPtr GetColorTexture (int index) const;
+        ConstTexture2DSharedPtr GetDepthStencilTexture() const noexcept;
         bool HasMipmaps() const noexcept;
         bool HasDepthStencil() const noexcept;
         
         int GetStreamingSize () const;
 		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
-		void Load (BufferSource& source);
-        void Link (ObjectLink& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
+                void Link(const CoreTools::ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
         
         CORE_TOOLS_NAMES_IMPL_DECLARE;
@@ -72,8 +72,8 @@ namespace Rendering
         void Swap(RenderTargetImpl& rhs) noexcept;
 
     private:
-        std::vector<Texture2DSmartPointer> m_ColorTextures;
-        Texture2DSmartPointer m_DepthStencilTexture;
+        std::vector<Texture2DSharedPtr> m_ColorTextures;
+        Texture2DSharedPtr m_DepthStencilTexture;
         bool m_HasMipmaps;
     };
 }

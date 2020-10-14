@@ -21,14 +21,11 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Node : public Spatial
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Node);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Node, DESTRUCTOR_STATEMENT);
         using ParentType = Spatial;
         
     public:
-        Node ();
-        ~Node() ;
-        Node(Node&&) noexcept = default;
-        Node& operator=(Node&&) noexcept = default;
+        Node (); 
         
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
@@ -37,15 +34,15 @@ namespace Rendering
         
         int GetNumChildren () const;
         
-		int AttachChild(SpatialSmartPointer  child);
-        int DetachChild(SpatialSmartPointer child) noexcept;
-		SpatialSmartPointer DetachChildAt(int index);
-		SpatialSmartPointer GetChild(int index);
-		ConstSpatialSmartPointer GetConstChild(int index) const;
+		int AttachChild(SpatialSharedPtr  child);
+        int DetachChild(SpatialSharedPtr child) noexcept;
+		SpatialSharedPtr DetachChildAt(int index);
+		SpatialSharedPtr GetChild(int index);
+		ConstSpatialSharedPtr GetConstChild(int index) const;
         
           void GetVisibleSet(Culler& culler, bool noCull) override;
         
-          ControllerInterfaceSmartPointer Clone() const override;
+          ControllerInterfaceSharedPtr Clone() const override;
 
 		  const PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
           ObjectInterfaceSharedPtr CloneObject() const override;
@@ -65,7 +62,7 @@ namespace Rendering
     CORE_TOOLS_STREAM_REGISTER(Node);
 #include STSTEM_WARNING_POP
 
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Sixth, Node); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( Node); 
 }
 #include STSTEM_WARNING_POP
 

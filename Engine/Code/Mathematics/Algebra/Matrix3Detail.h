@@ -20,7 +20,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
@@ -282,7 +282,7 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     auto cosValue = Math::Cos(angle);
     auto sinValue = Math::Sin(angle);

@@ -28,7 +28,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26490)
 #include SYSTEM_WARNING_DISABLE(26496)
 Rendering::CreateClodMeshImpl
-	::CreateClodMeshImpl(TrianglesMeshSmartPointer mesh)
+	::CreateClodMeshImpl(TrianglesMeshSharedPtr mesh)
 	: m_ClodMeshTriangleMesh{ mesh }, m_Graph{ m_ClodMeshTriangleMesh.GetNumVertices(),m_ClodMeshTriangleMesh.GetNumIndices() }, m_Collapses{}, m_CollapseRecord{}
 {
 	Compute();
@@ -38,12 +38,12 @@ Rendering::CreateClodMeshImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, CreateClodMeshImpl)
 
-Rendering::CollapseRecordArraySmartPointer Rendering::CreateClodMeshImpl
+Rendering::CollapseRecordArraySharedPtr Rendering::CreateClodMeshImpl
 	::GetCollapseRecordArray() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return CollapseRecordArraySmartPointer{ std::make_shared< CollapseRecordArray>(m_CollapseRecord) };
+	return CollapseRecordArraySharedPtr{ std::make_shared< CollapseRecordArray>(m_CollapseRecord) };
 }
 
 // private

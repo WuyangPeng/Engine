@@ -41,7 +41,7 @@ namespace Rendering
         void Unbind (RenderTargetConstPtr renderTarget);
         void Enable (RenderTargetConstPtr renderTarget);
         void Disable (RenderTargetConstPtr renderTarget);
-        ConstTexture2DSmartPointer ReadColor(int index,RenderTargetConstPtr renderTarget);
+        ConstTexture2DSharedPtr ReadColor(int index,RenderTargetConstPtr renderTarget);
 
         PlatformRenderTargetSharedPtr GetResource (RenderTargetConstPtr renderTarget);
         

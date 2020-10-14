@@ -44,8 +44,8 @@ namespace Rendering
 
 		// Allow the caller to create an effect that shares the vertex shader
 		// managed by this class.
-		 void CreateEffect(PixelShaderSmartPointer pshader, VisualEffectSmartPointer& effect,
-			VisualEffectInstanceSmartPointer& instance);
+		 void CreateEffect(PixelShaderSharedPtr pshader, VisualEffectSharedPtr& effect,
+			VisualEffectInstanceSharedPtr& instance);
 
 		// These function calls bound the drawing of the processed image to the
 		// backbuffer.
@@ -64,22 +64,22 @@ namespace Rendering
 		int mNumCols, mNumRows, mNumColsM1, mNumRowsM1;
 		int mNumTargets;
 		float mColSpacing, mRowSpacing;
-		CameraSmartPointer mCamera;
-		TrianglesMeshSmartPointer mRectangle;
-		VertexShaderSmartPointer mVertexShader;
-		ProjectionViewWorldMatrixConstantSmartPointer mPVWMatrixConstant;
-		RenderTargetSmartPointer* mTargets;
+		CameraSharedPtr mCamera;
+		TrianglesMeshSharedPtr mRectangle;
+		VertexShaderSharedPtr mVertexShader;
+		ProjectionViewWorldMatrixConstantSharedPtr mPVWMatrixConstant;
+		RenderTargetSharedPtr* mTargets;
 
 		// Support for the standard image processing pipeline.
-		Texture2DSmartPointer mMainTexture;
-		VisualEffectSmartPointer mMainEffect;
-		VisualEffectInstanceSmartPointer mMainEffectInstance;
-		VisualEffectSmartPointer mBoundaryEffect;
-		VisualEffectInstanceSmartPointer mBoundaryEffectInstance;
-		VisualEffectSmartPointer mDrawEffect;
-		VisualEffectInstanceSmartPointer mDrawEffectInstance;
-		VisualEffectSmartPointer mDrawInput;
-		VisualEffectInstanceSmartPointer mDrawInputInstance;
+		Texture2DSharedPtr mMainTexture;
+		VisualEffectSharedPtr mMainEffect;
+		VisualEffectInstanceSharedPtr mMainEffectInstance;
+		VisualEffectSharedPtr mBoundaryEffect;
+		VisualEffectInstanceSharedPtr mBoundaryEffectInstance;
+		VisualEffectSharedPtr mDrawEffect;
+		VisualEffectInstanceSharedPtr mDrawEffectInstance;
+		VisualEffectSharedPtr mDrawInput;
+		VisualEffectInstanceSharedPtr mDrawInputInstance;
 
 		static int msDx9VRegisters[1];
 		static int msOglVRegisters[1];

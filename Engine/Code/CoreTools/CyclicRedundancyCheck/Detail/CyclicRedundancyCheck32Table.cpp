@@ -9,7 +9,7 @@
 #include "CyclicRedundancyCheck32Table.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 CoreTools::CyclicRedundancyCheck32Table
 	::CyclicRedundancyCheck32Table() noexcept
 	:m_Table{}

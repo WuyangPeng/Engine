@@ -134,7 +134,6 @@ loki（引擎不关联）
 2. 官方网站：http://loki-lib.sourceforge.net/。 
 3. SmallObj.cpp第1132行改成throw std::bad_alloc();。
 4. SafeFormat.h
-   第33行增加#include <algorithm>。
    117行增加
    #if (defined(_WIN64))
         LOKI_PRINTF_STATE_FORWARD(unsigned int)
@@ -165,3 +164,15 @@ shwild（引擎不关联）
 cppunit（引擎不关联）
 1. 版本：1.12.1。
 2. 官方网站：https://sourceforge.net/projects/cppunit/。
+
+libpng（引擎不关联）
+1. 版本：1.6.37。
+2. 官方网站：http://www.libpng.org/pub/png/libpng.html。
+
+libxml++（引擎不关联）
+1. 版本：4.9.1。
+2. 官方网站：http://libxmlplusplus.sourceforge.net/。
+
+mysql++（引擎不关联）
+1. 版本：3.2.5。
+2. 官方网站：https://tangentsoft.com/mysqlpp/home。

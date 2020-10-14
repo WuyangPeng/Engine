@@ -10,8 +10,9 @@
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h" 
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
  #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -33,7 +34,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexColor4TextureEffect);
 Rendering::VertexColor4TextureEffect
 	::VertexColor4TextureEffect (ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0,ShaderFlags::SamplerCoordinate coordinate1)
 {
-    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>("Wm5.VertexColorTexture", 3, 3, 1, 0) };
+    VertexShaderSharedPtr vshader{ std::make_shared < VertexShader>("Wm5.VertexColorTexture", 3, 3, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float2,ShaderFlags::VariableSemantic::TextureCoord0);
     vshader->SetInput(2, "modelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -53,7 +54,7 @@ Rendering::VertexColor4TextureEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.VertexColorTexture",2, 1, 0, 1) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.VertexColorTexture",2, 1, 0, 1) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
     pshader->SetInput(1, "vertexTCoord", ShaderFlags::VariableType::Float2,ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -71,17 +72,17 @@ Rendering::VertexColor4TextureEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{ std::make_shared < VisualPass>() };
+	VisualPassSharedPtr pass{ std::make_shared < VisualPass>() };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-        pass->SetAlphaState(AlphaStateSmartPointer{ std::make_shared<AlphaState>() });
-        pass->SetCullState(CullStateSmartPointer{ std::make_shared<CullState>() });
-        pass->SetDepthState(DepthStateSmartPointer{ std::make_shared<DepthState>() });
-        pass->SetOffsetState(OffsetStateSmartPointer{ std::make_shared<OffsetState>() });
-        pass->SetStencilState(StencilStateSmartPointer{ std::make_shared<StencilState>   () });
-        pass->SetWireState(WireStateSmartPointer{ std::make_shared<WireState>() });
+        pass->SetAlphaState(AlphaStateSharedPtr{ std::make_shared<AlphaState>() });
+        pass->SetCullState(CullStateSharedPtr{ std::make_shared<CullState>() });
+        pass->SetDepthState(DepthStateSharedPtr{ std::make_shared<DepthState>() });
+        pass->SetOffsetState(OffsetStateSharedPtr{ std::make_shared<OffsetState>() });
+        pass->SetStencilState(StencilStateSharedPtr{ std::make_shared<StencilState>   () });
+        pass->SetWireState(WireStateSharedPtr{ std::make_shared<WireState>() });
 
-	VisualTechniqueSmartPointer technique{ std::make_shared<VisualTechnique>() };
+	VisualTechniqueSharedPtr technique{ std::make_shared<VisualTechnique>() };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
@@ -98,9 +99,9 @@ Rendering::PixelShader* Rendering::VertexColor4TextureEffect
 Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect
 	::CreateInstance (Texture2D* texture) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared< ProjectionViewMatrixConstant>()));
-    instance->SetPixelTexture(0, 0, TextureSmartPointer(texture));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+	instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared< ProjectionViewMatrixConstant>()));
+    instance->SetPixelTexture(0, 0, TextureSharedPtr(texture));
 
 	const ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
 	if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::Linear
@@ -134,7 +135,7 @@ Rendering::VertexColor4TextureEffect
 }
 
 void Rendering::VertexColor4TextureEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -144,7 +145,7 @@ void Rendering::VertexColor4TextureEffect
 }
 
 void Rendering::VertexColor4TextureEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     VisualEffect::Link(source);
 }

@@ -11,7 +11,6 @@
  
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/FirstSubclassSmartPointer.h"
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
 #include <type_traits>
 #include "System/Helper/PragmaWarning.h"
@@ -89,7 +88,7 @@ void CoreTools::ObjectLink
 	const auto uniqueID = object.GetAddress();
 	if (uniqueID != 0)
 	{
-		object = GetObjectPtr(uniqueID).PolymorphicCastObjectSmartPointer<T>();
+		object = GetObjectPtr(uniqueID);
 	}
 }
 
@@ -116,7 +115,7 @@ void CoreTools::ObjectLink
 	auto uniqueID = object.GetAddress();
 	if (uniqueID != 0)
 	{
-		object = GetObjectPtr(uniqueID).PolymorphicCastConstObjectSmartPointer<T>();
+		object = GetObjectPtr(uniqueID);
 	}
 }
 

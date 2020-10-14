@@ -59,13 +59,12 @@ const Rendering::CollapseRecord Rendering::CollapseRecordArrayImpl
 	return m_CollapseRecord.at(index);
 }
 
-void Rendering::CollapseRecordArrayImpl
-	::Load(BufferSource& source)
+void Rendering::CollapseRecordArrayImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	int numRecords{ 0 };
-	source.Read(numRecords);
+	source->Read(numRecords);
 
 	m_CollapseRecord.resize(numRecords);
 

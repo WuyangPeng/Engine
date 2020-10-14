@@ -1,0 +1,10 @@
+领域驱动设计和模式实战（Applying Domain-Driven Design and Patterns）
+
+官方网站：
+http://www.jnsk.se/adddp
+
+★
+作者：Jimmy Nilsson
+
+知识点 
+1.	软件开发基础知识。

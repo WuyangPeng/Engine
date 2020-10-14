@@ -14,8 +14,8 @@
 #include "Texture3D.h"
 #include "TextureCube.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointer.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointer.h"
+
+
 
 #include <string>
 
@@ -37,11 +37,11 @@ namespace Rendering
 		// 加载纹理从.trt文件外的流媒体系统。
 		// 纹理对象可以是1D, 2D, 3D 或者 cube。
 		// 调用者可以查询返回的纹理类型。
-		static TextureSmartPointer LoadFromFile(const System::String& name);
-		static Texture1DSmartPointer Load1DFromFile(const System::String& name);
-		static Texture2DSmartPointer Load2DFromFile(const System::String& name);
-		static Texture3DSmartPointer Load3DFromFile(const System::String& name);
-		static TextureCubeSmartPointer LoadCubeFromFile(const System::String& name);
+		static TextureSharedPtr LoadFromFile(const System::String& name);
+		static Texture1DSharedPtr Load1DFromFile(const System::String& name);
+		static Texture2DSharedPtr Load2DFromFile(const System::String& name);
+		static Texture3DSharedPtr Load3DFromFile(const System::String& name);
+		static TextureCubeSharedPtr LoadCubeFromFile(const System::String& name);
                
 	private:
 		using ReadFileManager = CoreTools::ReadFileManager;

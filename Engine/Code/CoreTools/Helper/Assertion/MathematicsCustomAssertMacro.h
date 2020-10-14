@@ -5,14 +5,12 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/27 13:03)
+//	引擎版本：0.5.1.1 (2020/09/28 13:26)
 
 #ifndef CORE_TOOLS_HELPER_MATHEMATICS_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_MATHEMATICS_CUSTOM_ASSERT_MACRO_H
 
-#include "System/Helper/ConfigMacro.h"
-
-#include "CoreTools/Assert/Assertion.h"
+#include "CoreTools/Contract/Assertion.h"
 
 #if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
     #define MATHEMATICS_ASSERT_LEVEL 0

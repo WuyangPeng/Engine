@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
@@ -195,66 +195,65 @@ void Rendering::KeyframeControllerImpl
 	}
 }
 
-void Rendering::KeyframeControllerImpl
-	::Load(CoreTools::BufferSource& source)
+void Rendering::KeyframeControllerImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_NumCommonTimes);
+	source->Read(m_NumCommonTimes);
 
 	if (0 < m_NumCommonTimes)
 	{
 		m_CommonTimes.resize(m_NumCommonTimes);
-		source.Read(m_NumCommonTimes, &m_CommonTimes[0]);
+            source->Read(m_NumCommonTimes, &m_CommonTimes[0]);
 
-		source.Read(m_NumTranslations);
+		source->Read(m_NumTranslations);
 		m_Translations.resize(m_NumTranslations);
 		if (0 < m_NumTranslations)
 		{
-			source.ReadAggregate(m_NumTranslations, &m_Translations[0]);
+                    source->ReadAggregate(m_NumTranslations, &m_Translations[0]);
 		}
 
-		source.Read(m_NumRotations);
+		source->Read(m_NumRotations);
 		m_Rotations.resize(m_NumRotations);
 		if (0 < m_NumRotations)
 		{
-			source.ReadAggregate(m_NumRotations, &m_Rotations[0]);
+                    source->ReadAggregate(m_NumRotations, &m_Rotations[0]);
 		}
 
-		source.Read(m_NumScales);
+		source->Read(m_NumScales);
 		m_Scales.resize(m_NumScales);
 		if (0 < m_NumScales)
 		{
-			source.Read(m_NumScales, &m_Scales[0]);
+                    source->Read(m_NumScales, &m_Scales[0]);
 		}		  
 	}
 	else
 	{
-		source.Read(m_NumTranslations);
+            source->Read(m_NumTranslations);
 		m_TranslationTimes.resize(m_NumTranslations);
 		m_Translations.resize(m_NumTranslations);
 		if (0 < m_NumTranslations)
 		{
-			source.Read(m_NumTranslations, &m_TranslationTimes[0]);
-			source.ReadAggregate(m_NumTranslations, &m_Translations[0]);
+                    source->Read(m_NumTranslations, &m_TranslationTimes[0]);
+                    source->ReadAggregate(m_NumTranslations, &m_Translations[0]);
 		}
 
-		source.Read(m_NumRotations);
+		source->Read(m_NumRotations);
 		m_RotationTimes.resize(m_NumRotations);
 		m_Rotations.resize(m_NumRotations);
 		if (0 < m_NumRotations)
 		{
-			source.Read(m_NumRotations, &m_RotationTimes[0]);
-			source.ReadAggregate(m_NumRotations, &m_Rotations[0]);
+                    source->Read(m_NumRotations, &m_RotationTimes[0]);
+                    source->ReadAggregate(m_NumRotations, &m_Rotations[0]);
 		}
 
-		source.Read(m_NumScales);
+		source->Read(m_NumScales);
 		m_ScaleTimes.resize(m_NumRotations);
 		m_Scales.resize(m_NumScales);
 		if (0 < m_NumScales)
 		{
-			source.Read(m_NumScales, &m_Scales[0]);
-			source.Read(m_NumScales, &m_Scales[0]);
+                    source->Read(m_NumScales, &m_Scales[0]);
+                    source->Read(m_NumScales, &m_Scales[0]);
 		}
  	}
 }

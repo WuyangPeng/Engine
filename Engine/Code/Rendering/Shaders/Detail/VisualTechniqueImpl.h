@@ -41,33 +41,33 @@ namespace Rendering
 
 		int GetStreamingSize() const;
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-		void Load(BufferSource& source);
-		void Link(ObjectLink& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
+		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
 		CORE_TOOLS_NAMES_IMPL_DECLARE;
 		
 		// 支持延迟构造。函数追加新的pass到数组的末尾。
-		void InsertPass (const VisualPassSmartPointer& pass);
+		void InsertPass (const VisualPassSharedPtr& pass);
 		
 		int GetNumPasses () const;
-		const ConstVisualPassSmartPointer GetPass (int passIndex) const;
+		const ConstVisualPassSharedPtr GetPass (int passIndex) const;
 		
 		// 访问pass的组件。
-		const ConstVertexShaderSmartPointer GetVertexShader (int passIndex) const;
-		const ConstPixelShaderSmartPointer GetPixelShader (int passIndex) const;
-		const ConstAlphaStateSmartPointer GetAlphaState (int passIndex) const;
-		const ConstCullStateSmartPointer GetCullState (int passIndex) const;
-		const ConstDepthStateSmartPointer GetDepthState (int passIndex) const;
-		const ConstOffsetStateSmartPointer GetOffsetState (int passIndex) const;
-		const ConstStencilStateSmartPointer GetStencilState (int passIndex) const;
-		const ConstWireStateSmartPointer GetWireState (int passIndex) const;
+		const ConstVertexShaderSharedPtr GetVertexShader (int passIndex) const;
+		const ConstPixelShaderSharedPtr GetPixelShader (int passIndex) const;
+		const ConstAlphaStateSharedPtr GetAlphaState (int passIndex) const;
+		const ConstCullStateSharedPtr GetCullState (int passIndex) const;
+		const ConstDepthStateSharedPtr GetDepthState (int passIndex) const;
+		const ConstOffsetStateSharedPtr GetOffsetState (int passIndex) const;
+		const ConstStencilStateSharedPtr GetStencilState (int passIndex) const;
+		const ConstWireStateSharedPtr GetWireState (int passIndex) const;
 
 		void SaveVisualPass(WriteFileManager& manager) const;
 		void LoadVisualPass(ReadFileManager& manager);
 
 	private:
-		std::vector<VisualPassSmartPointer> m_Passes;
+		std::vector<VisualPassSharedPtr> m_Passes;
 	};
 }
 

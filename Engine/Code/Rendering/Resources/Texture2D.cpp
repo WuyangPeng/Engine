@@ -163,7 +163,7 @@ void Rendering::Texture2D
 }
 
 void Rendering::Texture2D
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 	    
@@ -179,7 +179,7 @@ void Rendering::Texture2D
 }
 
 void Rendering::Texture2D
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -193,12 +193,12 @@ void Rendering::Texture2D
 }
 
 
-Rendering::TextureSmartPointer Rendering::Texture2D
+Rendering::TextureSharedPtr Rendering::Texture2D
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return TextureSmartPointer{ std::make_shared<ClassType>(*this) };
+	return TextureSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::Texture2D::CloneObject() const

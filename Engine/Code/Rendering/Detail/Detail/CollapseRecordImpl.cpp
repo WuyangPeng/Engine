@@ -130,16 +130,15 @@ void Rendering::CollapseRecordImpl
 	m_VThrow = vThrow;
 }
 
-void Rendering::CollapseRecordImpl
-	::Load(BufferSource& source)
+void Rendering::CollapseRecordImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.Read(m_VKeep);
-	source.Read(m_VThrow);
-	source.Read(m_NumVertices);
-	source.Read(m_NumTriangles);
-	source.Read(m_Indices); 
+	source->Read(m_VKeep);
+	source->Read(m_VThrow);
+	source->Read(m_NumVertices);
+	source->Read(m_NumTriangles);
+	source->Read(m_Indices); 
 }
 
 void Rendering::CollapseRecordImpl

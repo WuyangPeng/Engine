@@ -12,7 +12,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
@@ -40,11 +40,7 @@ Rendering::DlodNode
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::DlodNode
-	::~DlodNode()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, DlodNode)
 
@@ -76,7 +72,7 @@ void Rendering::DlodNode
 }
 
 void Rendering::DlodNode
-	::SelectLevelOfDetail( const ConstCameraSmartPointer& camera )
+	::SelectLevelOfDetail( const ConstCameraSharedPtr& camera )
 {
 	// 一个DlodNode的子节点数组被压缩 
 	// 这里没有空的插槽和子节点的数量是m_Child.size()，

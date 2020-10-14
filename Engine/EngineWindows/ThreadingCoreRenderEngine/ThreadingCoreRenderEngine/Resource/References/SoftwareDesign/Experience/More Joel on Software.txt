@@ -1,0 +1,10 @@
+软件随想录：程序员部落酋长Joel谈软件（More Joel on Software）
+
+官方网站：
+http://www.joelonsoftware.com
+
+★★
+作者： Joel Spolsky
+
+知识点 
+1.	软件开发经验基础知识。

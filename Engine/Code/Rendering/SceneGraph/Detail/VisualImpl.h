@@ -47,42 +47,42 @@ namespace Rendering
 
     public:
         explicit VisualImpl(VisualPrimitiveType type = VisualPrimitiveType::None);
-        VisualImpl(VisualPrimitiveType type, const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer, const IndexBufferSmartPointer& indexbuffer);
+        VisualImpl(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer);
 
         CLASS_INVARIANT_DECLARE;
 
         VisualPrimitiveType GetPrimitiveType() const;
 
-        void SetVertexFormat(const VertexFormatSmartPointer& vertexformat);
-        ConstVertexFormatSmartPointer GetConstVertexFormat() const;
-        VertexFormatSmartPointer GetVertexFormat();
+        void SetVertexFormat(const VertexFormatSharedPtr& vertexformat);
+        ConstVertexFormatSharedPtr GetConstVertexFormat() const;
+        VertexFormatSharedPtr GetVertexFormat();
 
-        void SetVertexBuffer(const VertexBufferSmartPointer& vertexbuffer);
-        ConstVertexBufferSmartPointer GetConstVertexBuffer() const;
-        VertexBufferSmartPointer GetVertexBuffer();
+        void SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer);
+        ConstVertexBufferSharedPtr GetConstVertexBuffer() const;
+        VertexBufferSharedPtr GetVertexBuffer();
 
-        void SetIndexBuffer(const IndexBufferSmartPointer& indexbuffer);
-        ConstIndexBufferSmartPointer GetConstIndexBuffer() const;
-        IndexBufferSmartPointer GetIndexBuffer();
+        void SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer);
+        ConstIndexBufferSharedPtr GetConstIndexBuffer() const;
+        IndexBufferSharedPtr GetIndexBuffer();
 
         const FloatBound& GetModelBound() const noexcept;
         FloatBound& GetModelBound() noexcept;
 
         // 存取绘制对象的视觉效果。
-        void SetEffectInstance(const VisualEffectInstanceSmartPointer& effect) noexcept;
-        const ConstVisualEffectInstanceSmartPointer GetConstEffectInstance() const noexcept;
-        const VisualEffectInstanceSmartPointer GetEffectInstance() noexcept;
+        void SetEffectInstance(const VisualEffectInstanceSharedPtr& effect) noexcept;
+        const ConstVisualEffectInstanceSharedPtr GetConstEffectInstance() const noexcept;
+        const VisualEffectInstanceSharedPtr GetEffectInstance() noexcept;
 
         // 对几何更新的支持。
         const FloatBound GetWorldBound(const FloatTransform& worldTransform);
         void UpdateModelBound();
         void ComputeBounding(const std::vector<APoint>& positions);
 
-        void Load(BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const;
         void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
-        void Link(ObjectLink& source);
+        void Link(const CoreTools:: ObjectLinkSharedPtr& source);
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 
@@ -94,7 +94,7 @@ namespace Rendering
         FloatBound m_ModelBound;
 
         // 着色器效果用来绘制视觉。
-        VisualEffectInstanceSmartPointer m_Effect;
+        VisualEffectInstanceSharedPtr m_Effect;
     };
 }
 

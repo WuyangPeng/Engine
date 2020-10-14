@@ -1,0 +1,10 @@
+DirectX 10 3D游戏编程深度探索（Advanced 3D Game Programming with DirectX 10.0）
+
+官方网站：
+http://www.wordware.com/files/dx10 （已失效）、 http://www.jblearning.com/Catalog/9781598220544/student
+
+★
+作者：Peter Walsh
+
+知识点 
+1.	DirectX基础知识。   

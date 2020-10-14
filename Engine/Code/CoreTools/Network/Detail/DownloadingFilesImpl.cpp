@@ -15,7 +15,7 @@
 #include "CoreTools/FileManager/OFStreamManager.h" 
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/CharacterString/CaseInsensitiveStringDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"  
 
 #include <vector>

@@ -18,7 +18,7 @@
 #include "System/Window/Flags/WindowMessagesFlags.h"
 #include "System/Window/Flags/WindowDisplayFlags.h"
 #include "System/Window/Flags/WindowsKeyCodesFlags.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
@@ -420,7 +420,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::EraseBackgroundMess
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	// 这告诉Windows不擦除背景（由OpenGL或DirectX来完成）。
  

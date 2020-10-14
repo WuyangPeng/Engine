@@ -32,7 +32,7 @@ namespace Rendering
         // the constructor.  If you have none, set tcoordMin and tcoordMax to
         // null.
         RectangleSurface(Mathematics::ParametricSurfacef* surface, int numUSamples, int numVSamples,
-                         VertexFormatSmartPointer vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax);
+                         VertexFormatSharedPtr vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax);
 
         ~RectangleSurface();
         RectangleSurface(const RectangleSurface&) = default;
@@ -59,7 +59,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(RectangleSurface);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, RectangleSurface);
+    CORE_TOOLS_SHARED_PTR_DECLARE( RectangleSurface);
 }
 
 #endif  // RENDERING_CURVES_SURFACES_RECTANGLE_SURFACE_H

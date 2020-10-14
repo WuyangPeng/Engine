@@ -23,16 +23,13 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE TransformController : public Controller
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(TransformController);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(TransformController, = default);
 		using ParentType = Controller;
 		using APoint = Mathematics::FloatAPoint;
 		using Matrix = Mathematics::FloatMatrix;
 
 	public:
-		explicit TransformController(const FloatTransform& localTransform);
-		  ~TransformController();
-	TransformController(TransformController&&) = default;
-		  TransformController& operator=(TransformController&&) = default;
+		explicit TransformController(const FloatTransform& localTransform); 
 		  
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -55,7 +52,7 @@ namespace Rendering
 		// 在这个意义上，TransformController表示一个所有时间为常数的transform。
 		 bool Update(double applicationTime) override;
 
-		 ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSharedPtr Clone() const override;
                  ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
 		IMPL_TYPE_DECLARE(TransformController);
@@ -65,7 +62,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(TransformController);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, TransformController); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( TransformController); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_H

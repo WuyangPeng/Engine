@@ -16,13 +16,13 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
  #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
  #include SYSTEM_WARNING_DISABLE(26418)
 Rendering::PickerImpl 
-	::PickerImpl(const ConstSpatialSmartPointer& scene, const APoint& origin,const AVector& direction, float tMin, float tMax)
+	::PickerImpl(const ConstSpatialSharedPtr& scene, const APoint& origin,const AVector& direction, float tMin, float tMax)
 	:m_Origin{ origin }, m_Direction{ direction }, m_TMin{ tMin }, m_TMax{ tMax }, m_Records{}
 {
 	ExecuteRecursive(scene);
@@ -32,7 +32,7 @@ Rendering::PickerImpl
 
 // private
 void Rendering::PickerImpl
-	::ExecuteRecursive(const ConstSpatialSmartPointer& object)
+	::ExecuteRecursive(const ConstSpatialSharedPtr& object)
 {
 	m_Records = object->ExecuteRecursive(m_Origin, m_Direction, m_TMin, m_TMax);
 }

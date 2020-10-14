@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
@@ -50,25 +50,23 @@ void Rendering::VisualTechniqueImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.WriteSmartPointer(m_Passes);
+	//target.WriteSharedPtr(m_Passes);
 }
 
-void Rendering::VisualTechniqueImpl
-	::Load( BufferSource& source )
+void Rendering::VisualTechniqueImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ReadSmartPointer(m_Passes);
+	//source.ReadSharedPtr(m_Passes);
 }
 
-void Rendering::VisualTechniqueImpl
-	::Link( ObjectLink& source )
+void Rendering::VisualTechniqueImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
 	if (!m_Passes.empty())
 	{
-		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
+		//source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
 	} 
 }
 
@@ -78,12 +76,12 @@ void Rendering::VisualTechniqueImpl ::Register(const CoreTools::ObjectRegisterSh
     target;
 	if (!m_Passes.empty())
 	{
-		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
+		//target.RegisterSharedPtr(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
 	} 
 }
 
 void Rendering::VisualTechniqueImpl
-	::InsertPass( const VisualPassSmartPointer& pass )
+	::InsertPass( const VisualPassSharedPtr& pass )
 {
 	RENDERING_CLASS_IS_VALID_9;
 	RENDERING_ASSERTION_2(pass!=nullptr ,"输入的pass必须是有效的。");
@@ -99,7 +97,7 @@ int Rendering::VisualTechniqueImpl
 	return boost::numeric_cast<int>(m_Passes.size());
 }
 
-const Rendering::ConstVisualPassSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstVisualPassSharedPtr Rendering::VisualTechniqueImpl
 	::GetPass( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -108,7 +106,7 @@ const Rendering::ConstVisualPassSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex];
 }
 
-const Rendering::ConstVertexShaderSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstVertexShaderSharedPtr Rendering::VisualTechniqueImpl
 	::GetVertexShader( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -117,7 +115,7 @@ const Rendering::ConstVertexShaderSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex]->GetVertexShader();
 }
 
-const Rendering::ConstPixelShaderSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstPixelShaderSharedPtr Rendering::VisualTechniqueImpl
 	::GetPixelShader( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -126,7 +124,7 @@ const Rendering::ConstPixelShaderSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex]->GetPixelShader();
 }
 
-const Rendering::ConstAlphaStateSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstAlphaStateSharedPtr Rendering::VisualTechniqueImpl
 	::GetAlphaState( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -135,7 +133,7 @@ const Rendering::ConstAlphaStateSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex]->GetAlphaState();
 }
 
-const Rendering::ConstCullStateSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstCullStateSharedPtr Rendering::VisualTechniqueImpl
 	::GetCullState( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -144,7 +142,7 @@ const Rendering::ConstCullStateSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex]->GetCullState();
 }
 
-const Rendering::ConstDepthStateSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstDepthStateSharedPtr Rendering::VisualTechniqueImpl
 	::GetDepthState( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -153,7 +151,7 @@ const Rendering::ConstDepthStateSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex]->GetDepthState();
 }
 
-const Rendering::ConstOffsetStateSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstOffsetStateSharedPtr Rendering::VisualTechniqueImpl
 	::GetOffsetState( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -162,7 +160,7 @@ const Rendering::ConstOffsetStateSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex]->GetOffsetState();
 }
 
-const Rendering::ConstStencilStateSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstStencilStateSharedPtr Rendering::VisualTechniqueImpl
 	::GetStencilState( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -171,7 +169,7 @@ const Rendering::ConstStencilStateSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex]->GetStencilState();
 }
 
-const Rendering::ConstWireStateSmartPointer Rendering::VisualTechniqueImpl
+const Rendering::ConstWireStateSharedPtr Rendering::VisualTechniqueImpl
 	::GetWireState( int passIndex ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -180,7 +178,7 @@ const Rendering::ConstWireStateSmartPointer Rendering::VisualTechniqueImpl
 	return m_Passes[passIndex]->GetWireState();
 }
 
-const CoreTools::ObjectSmartPointer Rendering::VisualTechniqueImpl
+const CoreTools::ObjectSharedPtr Rendering::VisualTechniqueImpl
 	::GetObjectByName( const string& name )
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -194,15 +192,15 @@ const CoreTools::ObjectSmartPointer Rendering::VisualTechniqueImpl
 		}
 	}
 
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::VisualTechniqueImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::VisualTechniqueImpl
 	::GetAllObjectsByName( const string& name )
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	vector<CoreTools::ObjectSmartPointer> objects;
+	vector<CoreTools::ObjectSharedPtr> objects;
 
 	for (auto& pointer:m_Passes)
 	{		
@@ -214,7 +212,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::VisualTechniqueImpl
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::VisualTechniqueImpl
+const CoreTools::ConstObjectSharedPtr Rendering::VisualTechniqueImpl
 	::GetConstObjectByName( const string& name ) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -228,15 +226,15 @@ const CoreTools::ConstObjectSmartPointer Rendering::VisualTechniqueImpl
 		}
 	}
 
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualTechniqueImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualTechniqueImpl
 	::GetAllConstObjectsByName( const string& name ) const
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	vector<CoreTools::ConstObjectSmartPointer> objects;
+	vector<CoreTools::ConstObjectSharedPtr> objects;
 
 	for (const auto& pointer:m_Passes)
 	{		
@@ -272,7 +270,7 @@ void Rendering::VisualTechniqueImpl
 
 	for (auto i = 0; i < numPasses; ++i)
 	{
-		VisualPassSmartPointer pass{ std::make_shared< VisualPass>() };
+		VisualPassSharedPtr pass{ std::make_shared< VisualPass>() };
 
 		pass->LoadShader(manager);
 		pass->LoadState(manager);

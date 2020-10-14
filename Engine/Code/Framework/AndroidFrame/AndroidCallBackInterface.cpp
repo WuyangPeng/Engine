@@ -8,7 +8,7 @@
 
 #include "AndroidCallBackInterface.h"
 
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 
@@ -26,7 +26,7 @@ bool Framework::AndroidCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -36,7 +36,7 @@ bool Framework::AndroidCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -46,7 +46,7 @@ void Framework::AndroidCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Framework::AndroidCallBackInterface
@@ -54,7 +54,7 @@ void Framework::AndroidCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 int Framework::AndroidCallBackInterface
@@ -70,7 +70,7 @@ void Framework::AndroidCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	m_State = androidApp;
 }
@@ -81,7 +81,7 @@ void Framework::AndroidCallBackInterface ::ResizedMessage([[maybe_unused]] Andro
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Framework::AndroidCallBackInterface ::TermMessage([[maybe_unused]] AndroidApp* androidApp)
@@ -89,7 +89,7 @@ void Framework::AndroidCallBackInterface ::TermMessage([[maybe_unused]] AndroidA
 	FRAMEWORK_CLASS_IS_VALID_9;
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Framework::AndroidCallBackInterface ::RedrawNeededMessage([[maybe_unused]] AndroidApp* androidApp)
@@ -98,7 +98,7 @@ void Framework::AndroidCallBackInterface ::RedrawNeededMessage([[maybe_unused]] 
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Framework::AndroidCallBackInterface ::Display([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] int64_t timeDelta)
@@ -107,7 +107,7 @@ void Framework::AndroidCallBackInterface ::Display([[maybe_unused]] AndroidApp* 
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Framework::AndroidCallBackInterface ::NotDealCmdMessage([[maybe_unused]] AndroidApp* androidApp)
@@ -116,7 +116,7 @@ void Framework::AndroidCallBackInterface ::NotDealCmdMessage([[maybe_unused]] An
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 int Framework::AndroidCallBackInterface ::NotDealInputMessage([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidInputEvent* androidInputEvent)
@@ -125,7 +125,7 @@ int Framework::AndroidCallBackInterface ::NotDealInputMessage([[maybe_unused]] A
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }
@@ -136,7 +136,7 @@ void Framework::AndroidCallBackInterface ::RectChanged([[maybe_unused]] AndroidA
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 int Framework::AndroidCallBackInterface ::KeyDownMessage([[maybe_unused]] AndroidApp* androidApp, [[maybe_unused]] AndroidInputEvent* androidInputEvent)
@@ -144,7 +144,7 @@ int Framework::AndroidCallBackInterface ::KeyDownMessage([[maybe_unused]] Androi
 	FRAMEWORK_CLASS_IS_VALID_9;
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }
@@ -156,7 +156,7 @@ int Framework::AndroidCallBackInterface ::KeyUpMessage([[maybe_unused]] AndroidA
  
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }
@@ -168,7 +168,7 @@ int Framework::AndroidCallBackInterface ::ActionDownMessage([[maybe_unused]] And
  
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }
@@ -179,7 +179,7 @@ int Framework::AndroidCallBackInterface ::ActionUpMessage([[maybe_unused]] Andro
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }
@@ -190,7 +190,7 @@ int Framework::AndroidCallBackInterface ::ActionMoveMessage([[maybe_unused]] And
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }

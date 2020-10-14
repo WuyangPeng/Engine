@@ -58,12 +58,12 @@ void Rendering::ViewMatrixConstant
 	ParentType::SetNumRegisters(numRegisters);
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::ViewMatrixConstant
+Rendering::ShaderFloatSharedPtr Rendering::ViewMatrixConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 

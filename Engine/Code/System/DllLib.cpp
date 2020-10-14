@@ -12,25 +12,6 @@
 // 使用函数或类的静态成员函数来封装，且绝大部分函数被定义成noexcept，结果可能通过参数返回。
 // 当各平台使用的函数差别较大时，可能会舍去返回值或部分参数强制使用默认值，部分平台可能没有正确的实现。
 
-// 系统库包含以下模块：
-// 1.	Helper（帮助）
-// 2.	SystemOutput（系统输出）
-// 3.	DynamicLink（动态链接）
-// 4.	CharacterString（字符串）
-// 5.	Console（控制台）
-// 6.	MemoryTools（内存工具）
-// 7.	Threading（线程）
-// 8.	Time（时间）
-// 9.	FileManager（文件管理）
-// 10.	Security（安全性）
-// 11.	Network（网络）
-// 12.	Window（Window）
-// 13.	OpenGL（OpenGL）
-// 14.	DirectX（DirectX）
-// 15.	Linux（Linux）
-// 16.	Macintosh（Macintosh）
-// 17.	Android（Android）
-
 #include "System/SystemExport.h"
 
 #include "System/System.h"

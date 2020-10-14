@@ -10,7 +10,7 @@
 
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using std::ostream;
 using std::string;
@@ -34,7 +34,7 @@ void Database::ResultRowImpl ::Print([[maybe_unused]] std::ostream& os) const
 {
 	DATABASE_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
  
 }
 
@@ -124,7 +124,7 @@ int Database::ResultRowImpl
 {
 	DATABASE_CLASS_IS_VALID_CONST_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }

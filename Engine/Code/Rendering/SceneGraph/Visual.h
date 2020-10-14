@@ -28,19 +28,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Visual : public Spatial
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Visual);
+         COPY_UNSHARE_CLASSES_TYPE_DECLARE(Visual, DESTRUCTOR_STATEMENT);
         using ParentType = Spatial;
-        using VisualSmartPointer = std::shared_ptr<ClassType>;
-        using ConstVisualSmartPointer = std::shared_ptr<const ClassType>;
+        using VisualSharedPtr = std::shared_ptr<ClassType>;
+        using ConstVisualSharedPtr = std::shared_ptr<const ClassType>;
         using APoint = Mathematics::FloatAPoint;
 
     public:
         explicit Visual(VisualPrimitiveType type = VisualPrimitiveType::None);
-        Visual(VisualPrimitiveType type, const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer, const IndexBufferSmartPointer& indexbuffer);
-        ~Visual();
-        Visual(Visual&&) = default;
-        Visual& operator=(Visual&&) = default;
-
+        Visual(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer);
+        
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Visual);
@@ -48,25 +45,25 @@ namespace Rendering
 
         VisualPrimitiveType GetPrimitiveType() const;
 
-        void SetVertexFormat(const VertexFormatSmartPointer& vertexformat);
-        ConstVertexFormatSmartPointer GetConstVertexFormat() const;
-        VertexFormatSmartPointer GetVertexFormat();
+        void SetVertexFormat(const VertexFormatSharedPtr& vertexformat);
+        ConstVertexFormatSharedPtr GetConstVertexFormat() const;
+        VertexFormatSharedPtr GetVertexFormat();
 
-        void SetVertexBuffer(const VertexBufferSmartPointer& vertexbuffer);
-        ConstVertexBufferSmartPointer GetConstVertexBuffer() const;
-        VertexBufferSmartPointer GetVertexBuffer();
+        void SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer);
+        ConstVertexBufferSharedPtr GetConstVertexBuffer() const;
+        VertexBufferSharedPtr GetVertexBuffer();
 
-        void SetIndexBuffer(const IndexBufferSmartPointer& indexbuffer);
-        ConstIndexBufferSmartPointer GetConstIndexBuffer() const;
-        IndexBufferSmartPointer GetIndexBuffer();
+        void SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer);
+        ConstIndexBufferSharedPtr GetConstIndexBuffer() const;
+        IndexBufferSharedPtr GetIndexBuffer();
 
         const FloatBound& GetModelBound() const noexcept;
         FloatBound& GetModelBound() noexcept;
 
         // 存取绘制对象的视觉效果。
-        void SetEffectInstance(const VisualEffectInstanceSmartPointer& effect) noexcept;
-        const ConstVisualEffectInstanceSmartPointer GetConstEffectInstance() const noexcept;
-        const VisualEffectInstanceSmartPointer GetEffectInstance() noexcept;
+        void SetEffectInstance(const VisualEffectInstanceSharedPtr& effect) noexcept;
+        const ConstVisualEffectInstanceSharedPtr GetConstEffectInstance() const noexcept;
+        const VisualEffectInstanceSharedPtr GetEffectInstance() noexcept;
 
         virtual void UpdateModelSpace(VisualUpdateType type);
 
@@ -81,7 +78,7 @@ namespace Rendering
         // 对几何更新的支持。
         void UpdateWorldBound() override;
 
-        ConstVisualSmartPointer GetSmartPointer() const;
+        ConstVisualSharedPtr GetSharedPtr() const;
 
         void CloneData(const Visual& rhs);
         void CloneIndexBuffer(const Visual& rhs);
@@ -95,7 +92,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(Visual);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Sixth, Visual);
+    CORE_TOOLS_SHARED_PTR_DECLARE( Visual);
 }
 #include STSTEM_WARNING_POP
 #endif  // RENDERING_SCENE_GRAPH_VISUAL_H

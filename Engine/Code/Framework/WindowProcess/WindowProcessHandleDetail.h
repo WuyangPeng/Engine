@@ -9,7 +9,7 @@
 
 #include "WindowProcessHandle.h"
 #include "WindowProcessManager.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 template <typename WindowMessage>

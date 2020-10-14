@@ -38,7 +38,7 @@ namespace Rendering
 		TubeSurface (Mathematics::Curve3f* medial, RadialFunction radial, bool closed,
 					 const Mathematics::Vector3Df& upVector, int numMedialSamples, int mNumSliceSamples,
 					 bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin,
-					 const Mathematics::Float2* tcoordMax, VertexFormatSmartPointer vformat);
+					 const Mathematics::Float2* tcoordMax, VertexFormatSharedPtr vformat);
 
 		  ~TubeSurface ();
 		  
@@ -93,7 +93,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(TubeSurface);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, TubeSurface); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( TubeSurface); 
 	#include STSTEM_WARNING_POP
 }
 

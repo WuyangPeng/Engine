@@ -19,22 +19,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE IKJoint : public CoreTools::Object 
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKJoint);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKJoint, = default);
 		using ParentType = Object;
 		using APoint = Mathematics::FloatAPoint;
 		using AVector = Mathematics::FloatAVector;
-		using IKGoalSmartPointerVector = std::vector<IKGoalSmartPointer>;
+		using IKGoalSharedPtrVector = std::vector<IKGoalSharedPtr>;
 		using MatrixRotationAxis = Mathematics::MatrixRotationAxis;
 
 	public:		
-		IKJoint(const SpatialSmartPointer& object,const IKGoalSmartPointerVector& goals);
-		  ~IKJoint();
-
-		  #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-                IKJoint(IKJoint&&) = default;
-                IKJoint& operator=(IKJoint&&) = default;
-#include STSTEM_WARNING_POP
+		IKJoint(const SpatialSharedPtr& object,const IKGoalSharedPtrVector& goals);
+	
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -48,8 +42,8 @@ namespace Rendering
 		bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
 		bool UpdateLocalRotate(MatrixRotationAxis axisIndex);	
 
-		const ConstSpatialSmartPointer GetObjectSmartPointer() const noexcept;
-		const ConstIKGoalSmartPointer GetGoalsSmartPointer(int index) const;
+		const ConstSpatialSharedPtr GetObjectSharedPtr() const noexcept;
+		const ConstIKGoalSharedPtr GetGoalsSharedPtr(int index) const;
 		int GetGoalsNum() const;
 
 		void SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation);
@@ -66,7 +60,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(IKJoint);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, IKJoint); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( IKJoint); 
 }
 
 #endif // RENDERING_CONTROLLERS_IKJOINT_H

@@ -36,7 +36,7 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 #endif  // OPEN_CLASS_INVARIANT
 
-        void Load(BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const noexcept;
 

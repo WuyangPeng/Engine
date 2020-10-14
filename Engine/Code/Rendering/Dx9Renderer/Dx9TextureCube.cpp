@@ -10,12 +10,12 @@
  
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 Rendering::Dx9TextureCube ::Dx9TextureCube([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const TextureCube* texture)
 
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	 
 
 	/*
@@ -56,7 +56,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9TextureCube)
 void Rendering::Dx9TextureCube ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
 
@@ -70,7 +70,7 @@ void Rendering::Dx9TextureCube ::Enable([[maybe_unused]] Renderer* renderer, [[m
 void Rendering::Dx9TextureCube ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
 	HRESULT hr;
@@ -97,7 +97,7 @@ void Rendering::Dx9TextureCube ::Disable([[maybe_unused]] Renderer* renderer, [[
 void* Rendering::Dx9TextureCube ::Lock([[maybe_unused]] int face, [[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	/*
 	D3DLOCKED_RECT rect;
 	HRESULT hr = mTexture->LockRect((D3DCUBEMAP_FACES)face, (UINT)level,
@@ -116,7 +116,7 @@ void* Rendering::Dx9TextureCube ::Lock([[maybe_unused]] int face, [[maybe_unused
 void Rendering::Dx9TextureCube ::Unlock([[maybe_unused]] int face, [[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	/*
 	  HRESULT hr = mTexture->UnlockRect((D3DCUBEMAP_FACES)face, (UINT)level);
 	  WM5_UNUSED(hr);

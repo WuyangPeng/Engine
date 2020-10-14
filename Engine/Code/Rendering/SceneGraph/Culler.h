@@ -29,13 +29,13 @@ namespace Rendering
         using Plane = Mathematics::Plane<float>;
         using APoint = Mathematics::APoint<float>;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-        using VisualContainer = std::vector<VisualSmartPointer>;
+        using VisualContainer = std::vector<VisualSharedPtr>;
         using VisualContainerIter = VisualContainer::iterator;
 
     public:
         // 裁剪需要相机模型。如果需要修改相机，
         // 你应该在使用ComputeVisibleSet之前，调用SetCamera。
-        explicit Culler(const ConstCameraSmartPointer& camera);
+        explicit Culler(const ConstCameraSharedPtr& camera);
         virtual ~Culler() = default;
         Culler(const Culler&) = default;
         Culler& operator=(const Culler&) = default;
@@ -45,8 +45,8 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         // 访问相机，复制的平截头体和潜在可见集。
-        void SetCamera(const ConstCameraSmartPointer& camera);
-        ConstCameraSmartPointer GetCamera() const;
+        void SetCamera(const ConstCameraSharedPtr& camera);
+        ConstCameraSharedPtr GetCamera() const;
         void SetFrustum(const float* frustum);
         const float* GetFrustum() const;
 
@@ -54,10 +54,10 @@ namespace Rendering
         // 派生类可能会覆盖此行为。
         // 例如,数组排序数组可能保持最小化渲染状态改变或者
         // 也可能是/维护作为一个独特的门户系统的对象列表。
-        virtual void Insert(const VisualSmartPointer& visible);
+        virtual void Insert(const VisualSharedPtr& visible);
 
         int GetNumVisible() const;
-        const ConstVisualSmartPointer GetVisible(int index) const;
+        const ConstVisualSharedPtr GetVisible(int index) const;
 
         int GetPlaneQuantity() const;
         const Plane* GetPlanes() const;
@@ -83,7 +83,7 @@ namespace Rendering
 
         // 这是你应该使用的主要函数中使用的在场景图裁剪。
         // 遍历场景图,构建潜在可见集相对于世界平面。
-        void ComputeVisibleSet(SpatialSmartPointer scene);
+        void ComputeVisibleSet(SpatialSharedPtr scene);
 
         VisualContainerIter begin();
         VisualContainerIter end();

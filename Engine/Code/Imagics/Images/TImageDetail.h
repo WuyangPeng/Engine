@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -95,7 +95,7 @@ Imagics::TImage<T>& Imagics
 	::TImage<T>::operator= (const TImage& image)
 {
     Lattice::operator=(image);
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     DELETE1(mData);
     mData = NEW1<T>(mQuantity);

@@ -17,7 +17,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -41,11 +41,7 @@ Rendering::SkinController
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SkinController
-	::~SkinController() 
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, SkinController)
 
@@ -53,7 +49,7 @@ CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, SkinController)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SkinController,GetNumVertices,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SkinController,GetNumBones,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SkinController,GetBones,int,const Rendering::ConstNodeSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SkinController,GetBones,int,const Rendering::ConstNodeSharedPtr)
 
 
 float Rendering::SkinController
@@ -73,14 +69,14 @@ const Rendering::SkinController::APoint Rendering::SkinController
 }
 
 void Rendering::SkinController
-	::SetBones(int bonesIndex, const ConstNodeSmartPointer& node)
+	::SetBones(int bonesIndex, const ConstNodeSharedPtr& node)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->SetBones(bonesIndex, node);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SkinController,SetBones, std::vector<ConstNodeSmartPointer>,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SkinController,SetBones, std::vector<ConstNodeSharedPtr>,void)
 
 void Rendering::SkinController
 	::SetWeights(int bonesIndex, int verticesIndex, float weights) 
@@ -114,12 +110,12 @@ void Rendering::SkinController
 	return m_Impl->SetOffsets(bonesIndex,  offsets);
 }
 
-Rendering::ControllerInterfaceSmartPointer Rendering::SkinController
+Rendering::ControllerInterfaceSharedPtr Rendering::SkinController
 	::Clone() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 bool Rendering::SkinController
@@ -235,7 +231,7 @@ void Rendering::SkinController
 }
 
 void Rendering::SkinController
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -253,7 +249,7 @@ void Rendering::SkinController
 }
 
 void Rendering::SkinController
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     

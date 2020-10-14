@@ -33,7 +33,7 @@ namespace Rendering
 
 		  void SetNumRegisters(int numRegisters) override;
 
-		  ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSharedPtr Clone() const override;
 
 	private:
 		constexpr static auto sm_NumRegisters = 4;
@@ -42,7 +42,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(ProjectionMatrixConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, ProjectionMatrixConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( ProjectionMatrixConstant);
 }
 
 #endif // RENDERING_SHADER_FLOATS_PROJECTION_MATRIX_CONSTANT_H

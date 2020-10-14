@@ -54,18 +54,17 @@ bool Rendering::DlodNodeImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::DlodNodeImpl
-	::Load(BufferSource& source)
+void Rendering::DlodNodeImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.ReadAggregate(m_ModelLodCenter);
-	source.ReadAggregate(m_WorldLodCenter);
-	source.Read(m_NumLevelsOfDetail);
-	source.Read(m_ModelMinDistance);
-	source.Read(m_ModelMaxDistance);
-	source.Read(m_WorldMinDistance);
-	source.Read(m_WorldMaxDistance);
+	source->ReadAggregate(m_ModelLodCenter);
+	source->ReadAggregate(m_WorldLodCenter);
+	source->Read(m_NumLevelsOfDetail);
+	source->Read(m_ModelMinDistance);
+	source->Read(m_ModelMaxDistance);
+	source->Read(m_WorldMinDistance);
+	source->Read(m_WorldMaxDistance);
 }
 
 void Rendering::DlodNodeImpl

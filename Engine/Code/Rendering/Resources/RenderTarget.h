@@ -21,24 +21,17 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE RenderTarget : public CoreTools::Object 
     {
     public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(RenderTarget);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(RenderTarget, DESTRUCTOR_STATEMENT);
 		using ParentType = Object;
-     	using Texture2DSmartPointer = std::shared_ptr<Texture2D>;
-		using ConstTexture2DSmartPointer = std::shared_ptr< const Texture2D>;
-		using RenderTargetSmartPointer = std::shared_ptr<ClassType>;
-		using ConstRenderTargetSmartPointer =std::shared_ptr<const ClassType>; 
+     	using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
+		using ConstTexture2DSharedPtr = std::shared_ptr< const Texture2D>;
+		using RenderTargetSharedPtr = std::shared_ptr<ClassType>;
+		using ConstRenderTargetSharedPtr =std::shared_ptr<const ClassType>; 
 
     public:
 		// 支持目标的数量取决于图形硬件和驱动程序。“numTargets”必须至少1。
         RenderTarget (int numTargets, TextureFormat format,int width,int height, bool hasMipmaps,bool hasDepthStencil);
-        
-          ~RenderTarget ();
- 
-          #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-		   RenderTarget( RenderTarget&&) = default;
-		  RenderTarget& operator=( RenderTarget&&) = default;
-          		#include STSTEM_WARNING_POP
+         
 		  
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
@@ -49,8 +42,8 @@ namespace Rendering
         TextureFormat GetFormat () const;
         int GetWidth () const;
         int GetHeight () const;
-		ConstTexture2DSmartPointer GetColorTexture(int index) const ;
-		ConstTexture2DSmartPointer GetDepthStencilTexture() const noexcept;
+		ConstTexture2DSharedPtr GetColorTexture(int index) const ;
+		ConstTexture2DSharedPtr GetDepthStencilTexture() const noexcept;
         bool HasMipmaps () const noexcept;
         bool HasDepthStencil () const noexcept;
         ObjectInterfaceSharedPtr CloneObject() const override;
@@ -61,7 +54,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(RenderTarget);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, RenderTarget); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( RenderTarget); 
 }
 
 #endif // RENDERING_RESOURCES_RENDER_TARGET_H

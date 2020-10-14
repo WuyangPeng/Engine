@@ -1,17 +1,5 @@
 TODO Level 4
  
-0.0.2.1
+0.0.5.1
 
 1.  （Exception）对异常类进行重命名。
-2.  （Threading）封装System Threading其他线程相关的锁。 
-3.  （Threading）读写锁封装使用std::shared_mutex和boost库的相关类型。
-4.  （FileManager）将EnvironmentVariable.json的路径改成配置。
-5.  （LogManager）日志是否打印到控制台改成配置。
-6.  （DataTypes）对MinHeap进行性能优化。
-7.  （ObjectSystems）使用单例封装InitTerm。用std::array代替原来的静态数组。
-8.  （UnitTestSuite）单元测试增加对各个条件流程完整性运行进行判断的测试。
-9.  （UnitTestSuite）单元测试增加是否打印正在进行哪个测试的配置。
-
-0.0.2.4
-
-1.  （ObjectSystems）把GetStreamSize改成constexpr函数。

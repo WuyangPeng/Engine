@@ -1,0 +1,11 @@
+游戏编程入门（Beginning Game Programming）
+（第3版）
+
+官方网站：
+http://www.uat.edu
+
+☆
+作者：Jonathan S. Harbour
+
+知识点 
+1.	DirectX基础知识。   

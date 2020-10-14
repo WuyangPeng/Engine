@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 17:04)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/14 14:18)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -10,16 +13,10 @@
 #include "Detail/CopyFileToolsFactory.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-CoreTools::CopyFileTools
-	::CopyFileTools(const String& inFileName, const String& outFileName)
-	:m_Impl{ CopyFileToolsFactory::Create(inFileName,outFileName) }
+CoreTools::CopyFileTools::CopyFileTools(const String& inFileName, const String& outFileName)
+    : m_Impl{ CopyFileToolsFactory::Create(inFileName, outFileName) }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CopyFileTools)
-
-
-
-
-

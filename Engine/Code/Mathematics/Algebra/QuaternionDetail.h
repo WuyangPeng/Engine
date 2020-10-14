@@ -15,7 +15,7 @@
     #include "QuaternionSwingTwistDetail.h"
     #include "Vector3DTools.h"
     #include "System/Helper/PragmaWarning.h"
-    #include "CoreTools/ClassInvariant/Noexcept.h"
+    #include "CoreTools/Contract/Noexcept.h"
     #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
     #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
     #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -500,7 +500,7 @@ const Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Inverse() con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     auto norm = SquaredLength();
 

@@ -12,9 +12,10 @@
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446) 
 #include SYSTEM_WARNING_DISABLE(26481) 
@@ -31,8 +32,8 @@ Rendering::PlanarShadowEffect
 	::PlanarShadowEffect (int numPlanes, Node* shadowCaster)
 	:mNumPlanes{ numPlanes },mShadowCaster{ shadowCaster }
 {
-    mPlanes = NEW1<TrianglesMeshSmartPointer>(mNumPlanes);
-    mProjectors = NEW1<LightSmartPointer>(mNumPlanes);
+    mPlanes = NEW1<TrianglesMeshSharedPtr>(mNumPlanes);
+    mProjectors = NEW1<LightSharedPtr>(mNumPlanes);
     mShadowColors = NEW1<Mathematics::Float4>(mNumPlanes);
 
     mAlphaState = std::make_shared < AlphaState>();
@@ -44,7 +45,7 @@ Rendering::PlanarShadowEffect
     mMaterialEffectInstance.reset(mMaterialEffect->CreateInstance(mMaterial.get()));
 
     // The material diffuse color changes per plane on every draw call.
-    ConstShaderFloatSmartPointer sfloat = mMaterialEffectInstance->GetVertexConstant(0,"MaterialDiffuse");
+    ConstShaderFloatSharedPtr sfloat = mMaterialEffectInstance->GetVertexConstant(0,"MaterialDiffuse");
 
     const_cast<ShaderFloat*>(sfloat.get())->EnableUpdater();
 }
@@ -74,15 +75,15 @@ void Rendering::PlanarShadowEffect
     }
 
     // Save the current global state overrides for restoration later.
-    const ConstDepthStateSmartPointer saveDState = renderer->GetOverrideDepthState();
-    const ConstStencilStateSmartPointer saveSState = renderer->GetOverrideStencilState();
+    const ConstDepthStateSharedPtr saveDState = renderer->GetOverrideDepthState();
+    const ConstStencilStateSharedPtr saveSState = renderer->GetOverrideStencilState();
 
     // Override the global state to support this effect.
     renderer->SetOverrideDepthState(mDepthState);
     renderer->SetOverrideStencilState(mStencilState);
 
     // Get the camera to store post-world transformations.
-    ConstCameraSmartPointer camera = renderer->GetCamera();
+    ConstCameraSharedPtr camera = renderer->GetCamera();
 
     for (int i = 0; i < mNumPlanes; ++i)
     {
@@ -111,7 +112,7 @@ void Rendering::PlanarShadowEffect
         // where (rf,gf,bf) is the final color to be written to the frame
         // buffer, (rs,gs,bs,as) is the shadow color, and (rd,gd,bd) is the
         // current color of the frame buffer.
-        const ConstAlphaStateSmartPointer saveAState = renderer->GetOverrideAlphaState();
+        const ConstAlphaStateSharedPtr saveAState = renderer->GetOverrideAlphaState();
         renderer->SetOverrideAlphaState(mAlphaState);
         mAlphaState->SetBlendEnabled ( true);
         mAlphaState->SetSourceBlend ( AlphaStateFlags::SourceBlendMode::SourceAlpha);
@@ -148,7 +149,7 @@ void Rendering::PlanarShadowEffect
         for (auto& visual : visibleSet)
         {
             
-            ConstVisualEffectInstanceSmartPointer save = visual->GetConstEffectInstance();
+            ConstVisualEffectInstanceSharedPtr save = visual->GetConstEffectInstance();
            // visual->SetEffectInstance(mMaterialEffectInstance);
             renderer->Draw(visual);
 			// ÏÈÍ¨¹ý±àÒë
@@ -185,7 +186,7 @@ bool Rendering::PlanarShadowEffect
     }
 
     // Compute the projection matrix for the light source.
-    LightSmartPointer projector = mProjectors[i];
+    LightSharedPtr projector = mProjectors[i];
     Mathematics::FloatAVector normal = worldPlane.GetNormal();
     if (projector->GetType() == LightType::Directional)
     {
@@ -221,10 +222,10 @@ bool Rendering::PlanarShadowEffect
 
 
 // Name support.
-const CoreTools::ObjectSmartPointer Rendering::PlanarShadowEffect::
+const CoreTools::ObjectSharedPtr Rendering::PlanarShadowEffect::
 	GetObjectByName(const std::string& name)
 {
-	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
+	CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -232,7 +233,7 @@ const CoreTools::ObjectSmartPointer Rendering::PlanarShadowEffect::
 
 	for (int i = 0; i < mNumPlanes; ++i)
 	{
-		CoreTools::ObjectSmartPointer found2 = mPlanes[i]->GetObjectByName(name);
+		CoreTools::ObjectSharedPtr found2 = mPlanes[i]->GetObjectByName(name);
 		if (found2 )
 			return found2;
 
@@ -241,14 +242,14 @@ const CoreTools::ObjectSmartPointer Rendering::PlanarShadowEffect::
 			return found2;
 	}
 		// Avoid the cycle by not checking mShadowCaster.
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }     
 
-const std::vector<CoreTools::ObjectSmartPointer> Rendering::PlanarShadowEffect
+const std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarShadowEffect
 	::GetAllObjectsByName(const std::string& name)
 {
-	std::vector<CoreTools::ObjectSmartPointer> objects;
-	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
+	std::vector<CoreTools::ObjectSharedPtr> objects;
+	CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
 	if (found )
 	{
 		objects.push_back(found);
@@ -256,7 +257,7 @@ const std::vector<CoreTools::ObjectSmartPointer> Rendering::PlanarShadowEffect
 
 	for (int i = 0; i < mNumPlanes; ++i)
 	{
-		std::vector<CoreTools::ObjectSmartPointer> pointerObjects = mPlanes[i]->GetAllObjectsByName(name);
+		std::vector<CoreTools::ObjectSharedPtr> pointerObjects = mPlanes[i]->GetAllObjectsByName(name);
 
 		objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
@@ -268,10 +269,10 @@ const std::vector<CoreTools::ObjectSmartPointer> Rendering::PlanarShadowEffect
 	return objects;	
 }   
 
-const CoreTools::ConstObjectSmartPointer Rendering::PlanarShadowEffect
+const CoreTools::ConstObjectSharedPtr Rendering::PlanarShadowEffect
 	::GetConstObjectByName(const std::string& name) const
 {
-		CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
+		CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -279,7 +280,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::PlanarShadowEffect
 
 	for (int i = 0; i < mNumPlanes; ++i)
 	{
-		CoreTools::ConstObjectSmartPointer found2 = mPlanes[i]->GetConstObjectByName(name);
+		CoreTools::ConstObjectSharedPtr found2 = mPlanes[i]->GetConstObjectByName(name);
 		if (found2 )
 			return found2;
 
@@ -288,17 +289,17 @@ const CoreTools::ConstObjectSmartPointer Rendering::PlanarShadowEffect
 			return found2;
 	}
 		// Avoid the cycle by not checking mShadowCaster.
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 } 
 
-const std::vector<CoreTools::ConstObjectSmartPointer> Rendering::PlanarShadowEffect
+const std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarShadowEffect
 	::GetAllConstObjectsByName(const std::string& name) const 
 {
-	std::vector<CoreTools::ConstObjectSmartPointer> objects  = ParentType::GetAllConstObjectsByName(name);
+	std::vector<CoreTools::ConstObjectSharedPtr> objects  = ParentType::GetAllConstObjectsByName(name);
 
 	for (int i = 0; i < mNumPlanes; ++i)
 	{
-		std::vector<CoreTools::ObjectSmartPointer> pointerObjects = mPlanes[i]->GetAllObjectsByName(name);
+		std::vector<CoreTools::ObjectSharedPtr> pointerObjects = mPlanes[i]->GetAllObjectsByName(name);
 
 		objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
@@ -320,28 +321,28 @@ Rendering::PlanarShadowEffect
 }
 
 void Rendering::PlanarShadowEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     GlobalEffect::Load(source);
 
-    source.ReadAggregate(mNumPlanes, mShadowColors);
-   // source.ReadSmartPointer(mNumPlanes, mPlanes);
-   // source.ReadSmartPointer(mNumPlanes, mProjectors);
-   // source.ReadSmartPointer(mShadowCaster);
+    source->ReadAggregate(mNumPlanes, mShadowColors);
+   // source.ReadSharedPtr(mNumPlanes, mPlanes);
+   // source.ReadSharedPtr(mNumPlanes, mProjectors);
+   // source.ReadSharedPtr(mShadowCaster);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::PlanarShadowEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     GlobalEffect::Link(source);
 
- //   source.ResolveObjectSmartPointerLink(mNumPlanes, mPlanes);
-   // source.ResolveObjectSmartPointerLink(mNumPlanes, mProjectors);
-  //  source.ResolveObjectSmartPointerLink(mShadowCaster);
+ //   source.ResolveObjectSharedPtrLink(mNumPlanes, mPlanes);
+   // source.ResolveObjectSharedPtrLink(mNumPlanes, mProjectors);
+  //  source.ResolveObjectSharedPtrLink(mShadowCaster);
 }
 
 void Rendering::PlanarShadowEffect
@@ -362,9 +363,9 @@ uint64_t Rendering::PlanarShadowEffect ::Register(const CoreTools::ObjectRegiste
    const  uint64_t id = GlobalEffect::Register(target);
 	if(0 < id)
     {
-      //  target.RegisterSmartPointer(mNumPlanes, mPlanes);
-      //  target.RegisterSmartPointer(mNumPlanes, mProjectors);
-      //  target.RegisterSmartPointer(mShadowCaster);
+      //  target.RegisterSharedPtr(mNumPlanes, mPlanes);
+      //  target.RegisterSharedPtr(mNumPlanes, mProjectors);
+      //  target.RegisterSharedPtr(mShadowCaster);
         return id;
     }
     return id;
@@ -378,9 +379,9 @@ void Rendering::PlanarShadowEffect
     GlobalEffect::Save(target);
 
   //  target.WriteAggregateWithNumber(mNumPlanes, mShadowColors);
-  //  target.WriteSmartPointerWithNumber(mNumPlanes, mPlanes);
-  //  target.WriteSmartPointerWithNumber(mNumPlanes, mProjectors);
-  //  target.WriteSmartPointer(mShadowCaster);
+  //  target.WriteSharedPtrWithNumber(mNumPlanes, mPlanes);
+  //  target.WriteSharedPtrWithNumber(mNumPlanes, mProjectors);
+  //  target.WriteSharedPtr(mShadowCaster);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -406,7 +407,7 @@ int Rendering::PlanarShadowEffect
 }
 
 void Rendering::PlanarShadowEffect
-	::SetPlane (int i, TrianglesMeshSmartPointer plane)
+	::SetPlane (int i, TrianglesMeshSharedPtr plane)
 {
 	// The culling flag is set to "always" because this effect is responsible
 	// for drawing the TriMesh.  This prevents drawing attempts by another
@@ -415,7 +416,7 @@ void Rendering::PlanarShadowEffect
 	mPlanes[i]->SetCullingMode(CullingMode::Always);
 }
 
-Rendering::TrianglesMeshSmartPointer Rendering::PlanarShadowEffect ::GetPlane(int i) const noexcept
+Rendering::TrianglesMeshSharedPtr Rendering::PlanarShadowEffect ::GetPlane(int i) const noexcept
 {
 	return mPlanes[i];
 }

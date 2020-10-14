@@ -1,0 +1,10 @@
+DirectX 9.0 3D 游戏开发编程基础（Introduction to 3D Game Programming with DirectX 9.0c）
+
+官方网站：
+http://www.moon-labs.com （已失效）
+
+☆
+作者： Frank D.Luna、Rod Lopez
+
+知识点 
+1.	DirectX基础知识。   

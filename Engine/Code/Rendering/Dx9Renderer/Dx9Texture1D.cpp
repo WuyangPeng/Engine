@@ -9,12 +9,12 @@
 #include "Dx9Texture1D.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 Rendering::Dx9Texture1D ::Dx9Texture1D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture1D* texture)
 
 {	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
  
 
 	/*
@@ -54,7 +54,7 @@ void Rendering::Dx9Texture1D ::Enable([[maybe_unused]] Renderer* renderer, [[may
 	RENDERING_CLASS_IS_VALID_9;
 
  
-        CoreTools::DoNothing();
+        CoreTools::DisableNoexcept();
 
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
@@ -70,7 +70,7 @@ void Rendering::Dx9Texture1D ::Disable([[maybe_unused]] Renderer* renderer, [[ma
 	RENDERING_CLASS_IS_VALID_9;
 
  
-        CoreTools::DoNothing();
+        CoreTools::DisableNoexcept();
 	/*
 	IDirect3DDevice9* device = renderer->mData->mDevice;
 	HRESULT hr;
@@ -97,7 +97,7 @@ void* Rendering::Dx9Texture1D ::Lock([[maybe_unused]] int level, [[maybe_unused]
 	RENDERING_CLASS_IS_VALID_9;
 
  
-        CoreTools::DoNothing();
+        CoreTools::DisableNoexcept();
 	/*
 	 D3DLOCKED_RECT rect;
 	 HRESULT hr = mTexture->LockRect((UINT)level, &rect, 0,
@@ -119,7 +119,7 @@ void Rendering::Dx9Texture1D ::Unlock([[maybe_unused]] int level)
 	WM5_UNUSED(hr);
 	RENDERING_ASSERTION_0(hr == D3D_OK, "Failed to unlock level %u of 1D texture: %s\n",
 	level, DXGetErrorString(hr));*/
-        CoreTools::DoNothing();
+        CoreTools::DisableNoexcept();
  
 }
 

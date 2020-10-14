@@ -7,7 +7,7 @@
 #include "Network/NetworkExport.h"
 
 #include "MessageTypeConditionSpecific.h"
-#include "CoreTools/VersionInformation/Version.h"
+#include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 

@@ -20,7 +20,7 @@
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26485)
 Rendering::ImageProcessing2
-	::ImageProcessing2 (int bound0, int bound1, Mathematics::Float4* imageData,PixelShaderSmartPointer mainPShader, bool useDirichlet)
+	::ImageProcessing2 (int bound0, int bound1, Mathematics::Float4* imageData,PixelShaderSharedPtr mainPShader, bool useDirichlet)
     :ImageProcessingBase(bound0, bound1, 2), mBound0(bound0), mBound1(bound1)
 {
     mBound0M1 = mBound0 - 1;
@@ -28,8 +28,8 @@ Rendering::ImageProcessing2
     mDx = 1.0f/(float)mBound0M1;
     mDy = 1.0f/(float)mBound1M1;
 
-    VisualEffectSmartPointer effect;
-    VisualEffectInstanceSmartPointer instance;
+    VisualEffectSharedPtr effect;
+    VisualEffectInstanceSharedPtr instance;
 
     // Create the texture corresponding to the 2D image.
     mMainTexture = CreateImage(imageData);
@@ -74,16 +74,16 @@ Rendering::ImageProcessing2
 
  
 
-Rendering::Texture2DSmartPointer Rendering::ImageProcessing2 ::CreateImage(const Mathematics::Float4* imageData)
+Rendering::Texture2DSharedPtr Rendering::ImageProcessing2 ::CreateImage(const Mathematics::Float4* imageData)
 {
-    Texture2DSmartPointer reflected(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
+    Texture2DSharedPtr reflected(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
     memcpy(reflected->GetTextureData(0), imageData, mBound0*mBound1*sizeof(Mathematics::Float4));
     return reflected;
 }
 
 void Rendering::ImageProcessing2
-	::CreateBoundaryDirichletEffect (VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance)
+	::CreateBoundaryDirichletEffect (VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
 {
     // sampler2D MaskSampler = sampler_state
     // {
@@ -110,7 +110,7 @@ void Rendering::ImageProcessing2
     //     pixelColor = mask*state;
     // }
 
-    PixelShaderSmartPointer pshader(std::make_shared < PixelShader>("Wm5.BoundaryDirichlet2", 1, 1, 0, 2)); 
+    PixelShaderSharedPtr pshader(std::make_shared < PixelShader>("Wm5.BoundaryDirichlet2", 1, 1, 0, 2)); 
 	 
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
@@ -132,7 +132,7 @@ void Rendering::ImageProcessing2
     CreateEffect(pshader, effect, instance);
 
     // Create the mask texture.
-    Texture2DSmartPointer maskTexture(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
+    Texture2DSharedPtr maskTexture(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
     Mathematics::Float4* mask = (Mathematics::Float4*)maskTexture->GetTextureData(0);
     Mathematics::Float4 one(1.0f, 1.0f, 1.0f, 1.0f);
@@ -170,7 +170,7 @@ void Rendering::ImageProcessing2
 }
 
 void Rendering::ImageProcessing2
-	::CreateBoundaryNeumannEffect (VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance)
+	::CreateBoundaryNeumannEffect (VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
 {
     // sampler2D OffsetSampler = sampler_state
     // {
@@ -199,7 +199,7 @@ void Rendering::ImageProcessing2
     //     pixelColor = state;
     // }
 
-    PixelShaderSmartPointer pshader(std::make_shared < PixelShader>("Wm5.BoundaryNeumann2", 1, 1, 0, 2));
+    PixelShaderSharedPtr pshader(std::make_shared < PixelShader>("Wm5.BoundaryNeumann2", 1, 1, 0, 2));
 	 
 	 
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
@@ -222,7 +222,7 @@ void Rendering::ImageProcessing2
     CreateEffect(pshader, effect, instance);
 
     // Create the offset texture.
-    Texture2DSmartPointer offsetTexture(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
+    Texture2DSharedPtr offsetTexture(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
     Mathematics::Float4* offset = (Mathematics::Float4*)offsetTexture->GetTextureData(0);
     Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
@@ -263,7 +263,7 @@ void Rendering::ImageProcessing2
 }
 
 void Rendering::ImageProcessing2
-	::CreateDrawEffect (VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance)
+	::CreateDrawEffect (VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
 {
     // sampler2D StateSampler = sampler_state
     // {
@@ -281,7 +281,7 @@ void Rendering::ImageProcessing2
     //     pixelColor = tex2D(StateSampler, vertexTCoord);
     // }
 
-    PixelShaderSmartPointer pshader ( std::make_shared<PixelShader>("Wm5.DrawImage2",  1, 1, 0, 1));
+    PixelShaderSharedPtr pshader ( std::make_shared<PixelShader>("Wm5.DrawImage2",  1, 1, 0, 1));
 	// ÏÈÍ¨¹ý±àÒë
 	 
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);

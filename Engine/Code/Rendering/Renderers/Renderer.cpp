@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "Rendering/Renderers/RendererManager.h" 
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "CoreTools/Helper/ExceptionMacro.h" 
@@ -97,16 +97,16 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetColorFormat, Renderi
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetDepthStencilFormat, Rendering::TextureFormat)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetNumMultisamples, int)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexFormatSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstVertexFormatSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstVertexFormatSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstVertexFormatSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexFormatSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstVertexFormatSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstVertexFormatSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstVertexFormatSharedPtr, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexBufferSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstVertexBufferSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexBufferSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstVertexBufferSharedPtr, void)
 
 void Rendering::Renderer
-	::Enable(const ConstVertexBufferSmartPointer& vertexBuffer, int streamIndex, int offset)
+	::Enable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex, int offset)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -114,7 +114,7 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Disable(const ConstVertexBufferSmartPointer& vertexBuffer, int streamIndex)
+	::Disable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -122,37 +122,37 @@ void Rendering::Renderer
 }
 
 void* Rendering::Renderer
-	::Lock(const ConstVertexBufferSmartPointer& vertexBuffer, BufferLocking mode)
+	::Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Lock(vertexBuffer, mode);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unlock, ConstVertexBufferSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Update, ConstVertexBufferSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unlock, ConstVertexBufferSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Update, ConstVertexBufferSharedPtr, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstIndexBufferSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstIndexBufferSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstIndexBufferSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstIndexBufferSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstIndexBufferSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstIndexBufferSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstIndexBufferSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstIndexBufferSharedPtr, void)
 
 void* Rendering::Renderer
-	::Lock(const ConstIndexBufferSmartPointer& indexbuffer, BufferLocking mode)
+	::Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Lock(indexbuffer, mode);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unlock, ConstIndexBufferSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Update, ConstIndexBufferSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unlock, ConstIndexBufferSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Update, ConstIndexBufferSharedPtr, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture1DSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture1DSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture1DSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture1DSharedPtr, void)
 
 void Rendering::Renderer
-	::Enable(const ConstTexture1DSmartPointer& texture, int textureUnit)
+	::Enable(const ConstTexture1DSharedPtr& texture, int textureUnit)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -160,7 +160,7 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Disable(const ConstTexture1DSmartPointer& texture, int textureUnit)
+	::Disable(const ConstTexture1DSharedPtr& texture, int textureUnit)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -168,7 +168,7 @@ void Rendering::Renderer
 }
 
 void* Rendering::Renderer
-	::Lock(const ConstTexture1DSmartPointer& texture, int level, BufferLocking mode)
+	::Lock(const ConstTexture1DSharedPtr& texture, int level, BufferLocking mode)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -176,7 +176,7 @@ void* Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Unlock(const ConstTexture1DSmartPointer& texture, int level)
+	::Unlock(const ConstTexture1DSharedPtr& texture, int level)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -184,18 +184,18 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Update(const ConstTexture1DSmartPointer& texture, int level)
+	::Update(const ConstTexture1DSharedPtr& texture, int level)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Update(texture, level);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture2DSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture2DSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture2DSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture2DSharedPtr, void)
 
 void Rendering::Renderer
-	::Enable(const ConstTexture2DSmartPointer& texture, int textureUnit)
+	::Enable(const ConstTexture2DSharedPtr& texture, int textureUnit)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -203,7 +203,7 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Disable(const ConstTexture2DSmartPointer& texture, int textureUnit)
+	::Disable(const ConstTexture2DSharedPtr& texture, int textureUnit)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -211,7 +211,7 @@ void Rendering::Renderer
 }
 
 void* Rendering::Renderer
-	::Lock(const ConstTexture2DSmartPointer& texture, int level, BufferLocking mode)
+	::Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -219,7 +219,7 @@ void* Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Unlock(const ConstTexture2DSmartPointer& texture, int level)
+	::Unlock(const ConstTexture2DSharedPtr& texture, int level)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -227,18 +227,18 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Update(const ConstTexture2DSmartPointer& texture, int level)
+	::Update(const ConstTexture2DSharedPtr& texture, int level)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Update(texture, level);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture3DSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture3DSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture3DSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture3DSharedPtr, void)
 
 void Rendering::Renderer
-	::Enable(const ConstTexture3DSmartPointer& texture, int textureUnit)
+	::Enable(const ConstTexture3DSharedPtr& texture, int textureUnit)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -246,7 +246,7 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Disable(const ConstTexture3DSmartPointer& texture, int textureUnit)
+	::Disable(const ConstTexture3DSharedPtr& texture, int textureUnit)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -254,7 +254,7 @@ void Rendering::Renderer
 }
 
 void* Rendering::Renderer
-	::Lock(const ConstTexture3DSmartPointer& texture, int level, BufferLocking mode)
+	::Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -262,7 +262,7 @@ void* Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Unlock(const ConstTexture3DSmartPointer& texture, int level)
+	::Unlock(const ConstTexture3DSharedPtr& texture, int level)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -270,18 +270,18 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Update(const ConstTexture3DSmartPointer& texture, int level)
+	::Update(const ConstTexture3DSharedPtr& texture, int level)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Update(texture, level);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTextureCubeSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTextureCubeSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTextureCubeSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTextureCubeSharedPtr, void)
 
 void Rendering::Renderer
-	::Enable(const ConstTextureCubeSmartPointer& texture, int textureUnit)
+	::Enable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -289,7 +289,7 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Disable(const ConstTextureCubeSmartPointer& texture, int textureUnit)
+	::Disable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -297,7 +297,7 @@ void Rendering::Renderer
 }
 
 void* Rendering::Renderer
-	::Lock(const ConstTextureCubeSmartPointer& texture, int face, int level, BufferLocking mode)
+	::Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -305,7 +305,7 @@ void* Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Unlock(const ConstTextureCubeSmartPointer& texture, int face, int level)
+	::Unlock(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -313,31 +313,31 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Update(const ConstTextureCubeSmartPointer& texture, int face, int level)
+	::Update(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Update(texture, face, level);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstRenderTargetSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstRenderTargetSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstRenderTargetSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstRenderTargetSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstRenderTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstRenderTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstRenderTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstRenderTargetSharedPtr, void)
 
-Rendering::ConstTexture2DSmartPointer Rendering::Renderer
-	::ReadColor(int index, const ConstRenderTargetSmartPointer& renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::Renderer
+	::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->ReadColor(index, renderTarget);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexShaderSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstVertexShaderSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexShaderSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstVertexShaderSharedPtr, void)
 
 void Rendering::Renderer
-	::Enable(const ConstVertexShaderSmartPointer& vshader, const ConstShaderParametersSmartPointer& parameters)
+	::Enable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -345,18 +345,18 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Disable(const ConstVertexShaderSmartPointer& vshader, const ConstShaderParametersSmartPointer& parameters)
+	::Disable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Enable(vshader, parameters);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstPixelShaderSmartPointer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstPixelShaderSmartPointer, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstPixelShaderSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstPixelShaderSharedPtr, void)
 
 void Rendering::Renderer
-	::Enable(const ConstPixelShaderSmartPointer& vshader, const ConstShaderParametersSmartPointer& parameters)
+	::Enable(const ConstPixelShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -364,39 +364,39 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Disable(const ConstPixelShaderSmartPointer& vshader, const ConstShaderParametersSmartPointer& parameters)
+	::Disable(const ConstPixelShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Enable(vshader, parameters);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetAlphaState, const Rendering::ConstAlphaStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetCullState, const Rendering::ConstCullStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetDepthState, const Rendering::ConstDepthStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOffsetState, const Rendering::ConstOffsetStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetStencilState, const Rendering::ConstStencilStateSmartPointer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetWireState, const Rendering::ConstWireStateSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetAlphaState, const Rendering::ConstAlphaStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetCullState, const Rendering::ConstCullStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetDepthState, const Rendering::ConstDepthStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOffsetState, const Rendering::ConstOffsetStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetStencilState, const Rendering::ConstStencilStateSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetWireState, const Rendering::ConstWireStateSharedPtr)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideAlphaState, const Rendering::ConstAlphaStateSmartPointer);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideCullState, const Rendering::ConstCullStateSmartPointer);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideDepthState, const Rendering::ConstDepthStateSmartPointer);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideOffsetState, const Rendering::ConstOffsetStateSmartPointer);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideStencilState, const Rendering::ConstStencilStateSmartPointer);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideWireState, const Rendering::ConstWireStateSmartPointer);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideAlphaState, const Rendering::ConstAlphaStateSharedPtr);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideCullState, const Rendering::ConstCullStateSharedPtr);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideDepthState, const Rendering::ConstDepthStateSharedPtr);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideOffsetState, const Rendering::ConstOffsetStateSharedPtr);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideStencilState, const Rendering::ConstStencilStateSharedPtr);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetOverrideWireState, const Rendering::ConstWireStateSharedPtr);
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideAlphaState, ConstAlphaStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideCullState, ConstCullStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideDepthState, ConstDepthStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideOffsetState, ConstOffsetStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideStencilState, ConstStencilStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideWireState, ConstWireStateSmartPointer, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideAlphaState, ConstAlphaStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideCullState, ConstCullStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideDepthState, ConstDepthStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideOffsetState, ConstOffsetStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideStencilState, ConstStencilStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOverrideWireState, ConstWireStateSharedPtr, void);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Renderer, SetReverseCullOrder, bool, void);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetReverseCullOrder, bool)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetCamera, CameraSmartPointer, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetCamera, const Rendering::ConstCameraSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetCamera, const Rendering::CameraSmartPointer)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetCamera, CameraSharedPtr, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetCamera, const Rendering::ConstCameraSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetCamera, const Rendering::CameraSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetViewMatrix, const Rendering::Renderer::Matrix)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetProjectionMatrix, const Rendering::Renderer::Matrix)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetPostProjectionMatrix, const Rendering::Renderer::Matrix)
@@ -426,7 +426,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Renderer, SetAllowBlue, boo
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Renderer, SetAllowAlpha, bool, void); 
 
 void Rendering::Renderer
-	::Draw(VisibleSet& visibleSet, const GlobalEffectSmartPointer& globalEffect)
+	::Draw(VisibleSet& visibleSet, const GlobalEffectSharedPtr& globalEffect)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -434,7 +434,7 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Draw(const VisualSmartPointer& visual)
+	::Draw(const VisualSharedPtr& visual)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -442,19 +442,19 @@ void Rendering::Renderer
 }
 
 void Rendering::Renderer
-	::Draw(const VisualSmartPointer& visual, const VisualEffectInstanceSmartPointer& instance)
+	::Draw(const VisualSharedPtr& visual, const VisualEffectInstanceSharedPtr& instance)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	return m_Impl->Draw(visual, instance);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetAlphaState, ConstAlphaStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetCullState, ConstCullStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetDepthState, ConstDepthStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOffsetState, ConstOffsetStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetStencilState, ConstStencilStateSmartPointer, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetWireState, ConstWireStateSmartPointer, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetAlphaState, ConstAlphaStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetCullState, ConstCullStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetDepthState, ConstDepthStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetOffsetState, ConstOffsetStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetStencilState, ConstStencilStateSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetWireState, ConstWireStateSharedPtr, void);
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetViewport, Viewport, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetViewport, Rendering::Viewport)
@@ -542,10 +542,10 @@ void Rendering::Renderer
 	return m_Impl->Draw(x, y, color, message);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, InTexture2DMap, ConstTexture2DSmartPointer, bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, InTexture2DMap, ConstTexture2DSharedPtr, bool)
 
 void Rendering::Renderer
-	::InsertInTexture2DMap(const ConstTexture2DSmartPointer& texture, const PlatformTexture2DSharedPtr& platformTexture)
+	::InsertInTexture2DMap(const ConstTexture2DSharedPtr& texture, const PlatformTexture2DSharedPtr& platformTexture)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 

@@ -12,7 +12,7 @@
 #include "Flags/DepthStateFlags.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 
 namespace CoreTools
 {
@@ -27,20 +27,14 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE OffsetState : public CoreTools::Object
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(OffsetState);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(OffsetState, DESTRUCTOR_STATEMENT);
 		using ParentType = Object;
 		using WriteFileManager = CoreTools::WriteFileManager;
 		using ReadFileManager = CoreTools::ReadFileManager;
 
 	public:
 		OffsetState();
-		  ~OffsetState();
-
-		  #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-                OffsetState(OffsetState&&) noexcept = default;
-                  OffsetState& operator=(OffsetState&&) noexcept = default;
-				     #include STSTEM_WARNING_POP
+	 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -68,7 +62,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(OffsetState);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, OffsetState);
+	CORE_TOOLS_SHARED_PTR_DECLARE( OffsetState);
 }
 
 #endif // RENDERING_SHADERS_OFFSET_STATE_H

@@ -19,11 +19,11 @@ namespace Rendering
 		using ClassType = Polypoint;
 		using ParentType = Visual;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
-		using PolypointSmartPointer = CoreTools::SeventhSubclassSmartPointer<ClassType>;
-		using ConstPolypointSmartPointer = CoreTools::ConstSeventhSubclassSmartPointer<ClassType>;
+		using PolypointSharedPtr = std::shared_ptr<ClassType>;
+		using ConstPolypointSharedPtr = std::shared_ptr<ClassType>;
 
 	public:
-		Polypoint(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer);
+		Polypoint(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer);
 	 
                 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -35,7 +35,7 @@ namespace Rendering
 		void SetNumPoints (int numPoints);
                 int GetNumPoints() const noexcept;
 
-		  ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSharedPtr Clone() const override;
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:	
 		// 当前活动点的数量。
@@ -46,7 +46,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(Polypoint);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, Polypoint); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( Polypoint); 
 }
 
 #endif // RENDERING_SCENE_GRAPH_POLYPOINT_H

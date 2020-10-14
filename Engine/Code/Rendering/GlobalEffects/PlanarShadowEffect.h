@@ -43,8 +43,8 @@ namespace Rendering
 
         // Member access.
         int GetNumPlanes() const noexcept;
-        void SetPlane(int i, TrianglesMeshSmartPointer plane);
-        TrianglesMeshSmartPointer GetPlane(int i) const noexcept;
+        void SetPlane(int i, TrianglesMeshSharedPtr plane);
+        TrianglesMeshSharedPtr GetPlane(int i) const noexcept;
         void SetProjector(int i, Light* projector) ;
         Light* GetProjector(int i) const noexcept;
         void SetShadowColor(int i, const Mathematics::Float4& shadowColor) noexcept;
@@ -54,26 +54,26 @@ namespace Rendering
         bool GetProjectionMatrix(int i, Mathematics::FloatMatrix& projection);
 
         int mNumPlanes;
-        TrianglesMeshSmartPointer* mPlanes;
-        LightSmartPointer* mProjectors;
+        TrianglesMeshSharedPtr* mPlanes;
+        LightSharedPtr* mProjectors;
         Mathematics::Float4* mShadowColors;
-        NodeSmartPointer mShadowCaster;  // 可能是数组
+        NodeSharedPtr mShadowCaster;  // 可能是数组
 
         // Global render state for drawing.
-        AlphaStateSmartPointer mAlphaState;
-        DepthStateSmartPointer mDepthState;
-        StencilStateSmartPointer mStencilState;
+        AlphaStateSharedPtr mAlphaState;
+        DepthStateSharedPtr mDepthState;
+        StencilStateSharedPtr mStencilState;
 
         // Override effect for drawing the shadows.
-        MaterialSmartPointer mMaterial;
-        MaterialEffectSmartPointer mMaterialEffect;
-        VisualEffectInstanceSmartPointer mMaterialEffectInstance;
+        MaterialSharedPtr mMaterial;
+        MaterialEffectSharedPtr mMaterialEffect;
+        VisualEffectInstanceSharedPtr mMaterialEffectInstance;
     };
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(PlanarShadowEffect);
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, PlanarShadowEffect);
+    CORE_TOOLS_SHARED_PTR_DECLARE( PlanarShadowEffect);
 #include STSTEM_WARNING_POP
 
 }

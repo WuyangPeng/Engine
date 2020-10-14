@@ -23,10 +23,10 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Particles : public TrianglesMesh
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Particles);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Particles, DESTRUCTOR_STATEMENT);
         using ParentType = TrianglesMesh;
-        using ParticlesSmartPointer = CoreTools::NinthSubclassSmartPointer<ClassType>;
-        using ConstParticlesSmartPointer = CoreTools::ConstNinthSubclassSmartPointer<ClassType>;
+        using ParticlesSharedPtr = std::shared_ptr<ClassType>;
+        using ConstParticlesSharedPtr = std::shared_ptr<ClassType>;
 
     public:
         // VertexFormat对象必须包含3元组位置。
@@ -36,11 +36,9 @@ namespace Rendering
         // 元素的粒子数量的是1/4 vertexbuffer元素的个数。
         // 索引缓冲区是自动生成的。
         // 'positionSizes'包含位置在开始的三元组和大小在第四元组。
-        Particles(const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer, int indexSize,
+        Particles(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, int indexSize,
                   const std::vector<APoint>& positions, const std::vector<float>& sizes, float sizeAdjust);
-        ~Particles();
-        Particles(Particles&&) noexcept = default;
-        Particles& operator=(Particles&&) noexcept = default;
+        
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -60,9 +58,9 @@ namespace Rendering
         int GetNumActive() const noexcept;
 
         // 粒子是广告牌，总是面对镜头。
-        void GenerateParticles(const ConstCameraSmartPointer& camera);
+        void GenerateParticles(const ConstCameraSharedPtr& camera);
 
-          ControllerInterfaceSmartPointer Clone() const override;
+          ControllerInterfaceSharedPtr Clone() const override;
 
           void GetVisibleSet(Culler& culler, bool noCull) override;
 
@@ -78,7 +76,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(Particles);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, Particles);
+    CORE_TOOLS_SHARED_PTR_DECLARE(  Particles);
 }
 #include STSTEM_WARNING_POP
 #endif  // RENDERING_SCENE_GRAPH_PARTICLES_H

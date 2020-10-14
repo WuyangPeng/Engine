@@ -10,37 +10,37 @@
 #include "Camera.h"
 #include "Rendering/Shaders/ShaderManager.h"
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
  #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
  #include SYSTEM_WARNING_DISABLE(26418)
 using std::vector;
 
-const Rendering::CameraSmartPointer Rendering::ScreenTarget
+const Rendering::CameraSharedPtr Rendering::ScreenTarget
 	::CreateCamera()
 {
 	// 场景摄像机映射  (x,y,z)  [0,1]^3 到 (x',y,'z') 在
     // [-1,1]^2 x [0,1].
-	CameraSmartPointer camera{ std::make_shared<Camera>(false) };
+	CameraSharedPtr camera{ std::make_shared<Camera>(false) };
     camera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
     camera->SetFrame(Mathematics::Float::g_Origin, Mathematics::Float::g_UnitZ, Mathematics::Float::g_UnitY,Mathematics::Float::g_UnitX);
 
     return camera;
 }
 
-const Rendering::TrianglesMeshSmartPointer Rendering::ScreenTarget
-   ::CreateRectangle(const VertexFormatSmartPointer& vertexFormat,int renderTargetWidth, int renderTargetHeight, 
+const Rendering::TrianglesMeshSharedPtr Rendering::ScreenTarget
+   ::CreateRectangle(const VertexFormatSharedPtr& vertexFormat,int renderTargetWidth, int renderTargetHeight, 
 					 float xMin, float xMax, float yMin, float yMax, float zValue)
 {
 	if (ValidFormat(vertexFormat) && ValidSizes(renderTargetWidth, renderTargetHeight))
     {
 		int vstride = vertexFormat->GetStride();
-		VertexBufferSmartPointer vertexBuffer{ std::make_shared<VertexBuffer>(4, vstride) };
+		VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>(4, vstride) };
 		VertexBufferAccessor vertexBufferAccessor{ vertexFormat ,
 												   vertexBuffer  };
 
@@ -72,13 +72,13 @@ const Rendering::TrianglesMeshSmartPointer Rendering::ScreenTarget
 		vertexBuffer->SetPosition(vertexBufferAccessor, 3, APoint(xMin, yMax, zValue)); 
 
    		// 创建正方形的索引缓冲区
-		IndexBufferSmartPointer indexBuffer{ std::make_shared< IndexBuffer>(6, (int)sizeof(int)) };
+		IndexBufferSharedPtr indexBuffer{ std::make_shared< IndexBuffer>(6, (int)sizeof(int)) };
 		indexBuffer->InitIndexBufferInParticles();      
 
-		return TrianglesMeshSmartPointer{ std::make_shared < TrianglesMesh>(vertexFormat, vertexBuffer, indexBuffer) };
+		return TrianglesMeshSharedPtr{ std::make_shared < TrianglesMesh>(vertexFormat, vertexBuffer, indexBuffer) };
     }
 
-	return TrianglesMeshSmartPointer();
+	return TrianglesMeshSharedPtr();
 }
 
 // private
@@ -90,7 +90,7 @@ bool Rendering::ScreenTarget
 		return true;
 	}
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	RENDERING_ASSERTION_1(false, "无效的维度。\n");
 
@@ -99,7 +99,7 @@ bool Rendering::ScreenTarget
 
 // private
 bool Rendering::ScreenTarget
-	::ValidFormat(const VertexFormatSmartPointer& vertexFormat)
+	::ValidFormat(const VertexFormatSharedPtr& vertexFormat)
 {
 	auto index = vertexFormat->GetIndex(VertexFormatFlags::AttributeUsage::Position, 0);
 	if (index < 0)

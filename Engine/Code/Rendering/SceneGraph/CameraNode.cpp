@@ -12,7 +12,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
@@ -34,7 +34,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering,CameraNode);
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering,CameraNode);
 
 Rendering::CameraNode
-	::CameraNode(const CameraSmartPointer& camera)
+	::CameraNode(const CameraSharedPtr& camera)
      :ParentType{},m_Impl{ make_shared<ImplType>(camera) }
 {
 	if (!m_Impl->IsNullPtr())
@@ -56,7 +56,7 @@ Rendering::CameraNode
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,CameraNode)
 
 void Rendering::CameraNode
-    ::SetCamera (const CameraSmartPointer& camera)
+    ::SetCamera (const CameraSharedPtr& camera)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -72,7 +72,7 @@ void Rendering::CameraNode
 	}    
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CameraNode,GetCamera,const Rendering::ConstCameraSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CameraNode,GetCamera,const Rendering::ConstCameraSharedPtr)
 
 bool Rendering::CameraNode
     ::UpdateWorldData (double applicationTime)
@@ -97,7 +97,7 @@ bool Rendering::CameraNode
 	return result;
 }
 
-const CoreTools::ObjectSmartPointer Rendering::CameraNode
+const CoreTools::ObjectSharedPtr Rendering::CameraNode
     ::GetObjectByName(const string& name)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
@@ -115,12 +115,12 @@ const CoreTools::ObjectSmartPointer Rendering::CameraNode
 		}
 		else
 		{
-			return  CoreTools::ObjectSmartPointer();
+			return  CoreTools::ObjectSharedPtr();
 		}
     }
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::CameraNode
+const vector<CoreTools::ObjectSharedPtr> Rendering::CameraNode
     ::GetAllObjectsByName(const string& name)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
@@ -136,7 +136,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::CameraNode
 	return parentObjects;   
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::CameraNode
+const CoreTools::ConstObjectSharedPtr Rendering::CameraNode
     ::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -154,12 +154,12 @@ const CoreTools::ConstObjectSmartPointer Rendering::CameraNode
 		}
 		else
 		{
-			return  CoreTools::ConstObjectSmartPointer{};
+			return  CoreTools::ConstObjectSharedPtr{};
 		}
     }
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::CameraNode
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNode
     ::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -177,7 +177,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::CameraNode
 
 Rendering::CameraNode
     ::CameraNode (LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>(CameraSmartPointer{}) }
+	:ParentType{ value }, m_Impl{ make_shared<ImplType>(CameraSharedPtr{}) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -223,7 +223,7 @@ void Rendering::CameraNode
 }
 
 void Rendering::CameraNode
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -241,7 +241,7 @@ void Rendering::CameraNode
 }
 
 void Rendering::CameraNode
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -254,12 +254,12 @@ void Rendering::CameraNode
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::CameraNode::ControllerInterfaceSmartPointer Rendering::CameraNode
+Rendering::CameraNode::ControllerInterfaceSharedPtr Rendering::CameraNode
       ::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::CameraNode::CloneObject() const

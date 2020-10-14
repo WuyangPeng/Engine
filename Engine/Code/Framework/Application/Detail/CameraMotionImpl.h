@@ -22,7 +22,7 @@ namespace Framework
 	public:
 		using ClassType = CameraMotionImpl;
 		using Camera = Rendering::Camera;
-		using CameraSmartPointer = Rendering::CameraSmartPointer;	
+		using CameraSmartPointer = Rendering::CameraSharedPtr;	
 
 	public:
 		CameraMotionImpl(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor);

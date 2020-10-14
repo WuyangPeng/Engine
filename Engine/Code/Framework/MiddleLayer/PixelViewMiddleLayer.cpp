@@ -8,7 +8,7 @@
 
 #include "PixelViewMiddleLayer.h"
 #include "Detail/PixelViewMiddleLayerImpl.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"  
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 #include "Rendering/Renderers/Renderer.h"
@@ -139,7 +139,7 @@ void Framework::PixelViewMiddleLayer
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
 	// 存根在派生类。
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
  
 void Framework::PixelViewMiddleLayer

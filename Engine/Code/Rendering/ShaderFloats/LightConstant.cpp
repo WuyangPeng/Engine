@@ -28,10 +28,10 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, LightConstant);
 CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, LightConstant);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, LightConstant);
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, LightConstant);
+COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(Rendering, LightConstant);
 
 Rendering::LightConstant
-	::LightConstant(const LightSmartPointer& light)
+	::LightConstant(const LightSharedPtr& light)
 	:ParentType{ sm_NumRegisters }, m_Impl{ make_shared<ImplType>(light) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -50,7 +50,7 @@ void Rendering::LightConstant
 	ParentType::SetNumRegisters(numRegisters);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, LightConstant,GetLight, const Rendering::ConstLightSmartPointer )
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, LightConstant,GetLight, const Rendering::ConstLightSharedPtr )
 
 
 

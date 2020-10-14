@@ -262,26 +262,26 @@ const auto orthonormalBasis = GenerateOrthonormalBasis(direction, m_Epsilon);
     m_DirectionVector = orthonormalBasis.GetWVector();
 }
 
-void Rendering::LightImpl ::Load(BufferSource& source)
+void Rendering::LightImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    source.ReadEnum(m_LightType);
-    source.ReadAggregate(m_Ambient);
-    source.ReadAggregate(m_Diffuse);
-    source.ReadAggregate(m_Specular);
-    source.Read(m_Constant);
-    source.Read(m_Linear);
-    source.Read(m_Quadratic);
-    source.Read(m_Intensity);
-    source.Read(m_Angle);
-    source.Read(m_CosAngle);
-    source.Read(m_SinAngle);
-    source.Read(m_Exponent);
-    source.ReadAggregate(m_Position);
-    source.ReadAggregate(m_DirectionVector);
-    source.ReadAggregate(m_UpVector);
-    source.ReadAggregate(m_RightVector);
+    source->ReadEnum(m_LightType);
+    source->ReadAggregate(m_Ambient);
+    source->ReadAggregate(m_Diffuse);
+    source->ReadAggregate(m_Specular);
+    source->Read(m_Constant);
+    source->Read(m_Linear);
+    source->Read(m_Quadratic);
+    source->Read(m_Intensity);
+    source->Read(m_Angle);
+    source->Read(m_CosAngle);
+    source->Read(m_SinAngle);
+    source->Read(m_Exponent);
+    source->ReadAggregate(m_Position);
+    source->ReadAggregate(m_DirectionVector);
+    source->ReadAggregate(m_UpVector);
+    source->ReadAggregate(m_RightVector);
 }
 
 void Rendering::LightImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const

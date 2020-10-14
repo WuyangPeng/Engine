@@ -1,0 +1,7 @@
+程序开发心理学（The Psychology of Computer Programming）
+
+☆
+作者：Gerald M Weinberg
+
+知识点 
+1.	软件开发基础知识。

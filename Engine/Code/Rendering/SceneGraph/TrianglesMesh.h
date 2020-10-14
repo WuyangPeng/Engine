@@ -21,7 +21,7 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
-		TrianglesMesh(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer);
+		TrianglesMesh(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,const IndexBufferSharedPtr& indexbuffer);
  
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -34,7 +34,7 @@ namespace Rendering
 		  int GetNumTriangles() const override;
 		  const TriangleIndex GetTriangle(int index) const override;
 
-		  ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSharedPtr Clone() const override;
                   ObjectInterfaceSharedPtr CloneObject() const override;
 	};
 
@@ -42,7 +42,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(TrianglesMesh);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Eighth, TrianglesMesh); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( TrianglesMesh); 
 }
 
 #endif // RENDERING_SCENE_GRAPH_TRIANGLES_MESH_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/18 10:22)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/09/30 9:44)
 
 // 成员函数所需要的宏
 #ifndef CORE_TOOLS_HELPER_MEMBER_FUNCTION_MACRO_H
@@ -172,9 +175,71 @@
 #define NON_CONST_MEMBER_CALL_CONST_MEMBER(returnType, function) \
     const_cast<returnType>(static_cast<const ClassType*>(this)->function())
 
+#define NON_CONST_MEMBER_CALL_CONST_MEMBER_USE_PARAMETER(returnType, function, parameter) \
+    const_cast<returnType>(static_cast<const ClassType*>(this)->function(parameter))
+
 #define COPY_CONSTRUCTION_DEFINE(namespaceName, className)                                  \
     namespaceName::className::className(const className& rhs)                               \
         : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }                                 \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                       \
+        std::swap(m_Impl, rhs.m_Impl);                                                      \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : m_Impl{ std::move(rhs.m_Impl) }                                                   \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        m_Impl = std::move(rhs.m_Impl);                                                     \
+        return *this;                                                                       \
+    }
+
+#define COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE(namespaceName, className)                  \
+    namespaceName::className::className(const className& rhs)                               \
+        : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }                                 \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        m_Impl = std::make_shared<ImplType>(*rhs.m_Impl);                                   \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                       \
+        std::swap(m_Impl, rhs.m_Impl);                                                      \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : m_Impl{ std::move(rhs.m_Impl) }                                                   \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        m_Impl = std::move(rhs.m_Impl);                                                     \
+        return *this;                                                                       \
+    }
+
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }              \
     {                                                                                       \
         IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
         SELF_CLASS_IS_VALID_0;                                                              \
@@ -188,95 +253,112 @@
     }                                                                                       \
     void namespaceName::className::Swap(className& rhs) noexcept                            \
     {                                                                                       \
+        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                       \
+        std::swap(m_Impl, rhs.m_Impl);                                                      \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, m_Impl{ std::move(rhs.m_Impl) }                     \
+    {                                                                                       \
         IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        m_Impl = std::move(rhs.m_Impl);                                                     \
+        return *this;                                                                       \
+    }
+
+#define COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(namespaceName, className)      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }              \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(rhs);                                                         \
+        m_Impl = std::make_shared<ImplType>(*rhs.m_Impl);                                   \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                       \
+        std::swap(m_Impl, rhs.m_Impl);                                                      \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, m_Impl{ std::move(rhs.m_Impl) }                     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        m_Impl = std::move(rhs.m_Impl);                                                     \
+        return *this;                                                                       \
+    }
+
+#define COPY_CONSTRUCTION_CLONE_DEFINE(namespaceName, className)                            \
+    namespaceName::className::className(const className& rhs)                               \
+        : m_Impl{ rhs.m_Impl->Clone() }                                                     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        m_Impl = rhs.m_Impl->Clone();                                                       \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                       \
         std::swap(m_Impl, rhs.m_Impl);                                                      \
     }                                                                                       \
     namespaceName::className::className(className&& rhs) noexcept                           \
         : m_Impl{ std::move(rhs.m_Impl) }                                                   \
     {                                                                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
     }                                                                                       \
     namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
     {                                                                                       \
-        CLASS_IS_VALID_0;                                                                   \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
         m_Impl = std::move(rhs.m_Impl);                                                     \
         return *this;                                                                       \
     }
 
-#define OLD_COPY_CONSTRUCTION_DEFINE(namespaceName, className)                          \
-    namespaceName::className::className(const className& rhs)                           \
-        : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }                             \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        SELF_CLASS_IS_VALID_0;                                                          \
-    }                                                                                   \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs) \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        className temp{ rhs };                                                          \
-        Swap(temp);                                                                     \
-        return *this;                                                                   \
-    }                                                                                   \
-    void namespaceName::className::Swap(className& rhs) noexcept                        \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        std::swap(m_Impl, rhs.m_Impl);                                                  \
-    }
-
-#define COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE(namespaceName, className)              \
-    namespaceName::className::className(const className& rhs)                           \
-        : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }                             \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        SELF_CLASS_IS_VALID_0;                                                          \
-    }                                                                                   \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs) \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        m_Impl = std::make_shared<ImplType>(*rhs.m_Impl);                               \
-        return *this;                                                                   \
-    }
-
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                  \
-    namespaceName::className::className(const className& rhs)                           \
-        : ParentType{ rhs }, m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }          \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        SELF_CLASS_IS_VALID_0;                                                          \
-    }                                                                                   \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs) \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        ParentType::operator=(rhs);                                                     \
-        m_Impl = std::make_shared<ImplType>(*rhs.m_Impl);                               \
-        return *this;                                                                   \
-    }
-
-#define COPY_CONSTRUCTION_CLONE_DEFINE(namespaceName, className)                              \
-    namespaceName::className::className(const className& rhs) : m_Impl{ rhs.m_Impl->Clone() } \
-    {                                                                                         \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                         \
-        SELF_CLASS_IS_VALID_0;                                                                \
-    }                                                                                         \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)       \
-    {                                                                                         \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                         \
-        m_Impl = rhs.m_Impl->Clone();                                                         \
-        return *this;                                                                         \
-    }
-
-#define COPY_CONSTRUCTION_CLONE_DEFINE_WITH_PARENT(namespaceName, className)                                     \
-    namespaceName::className::className(const className& rhs) : ParentType{ rhs }, m_Impl{ rhs.m_Impl->Clone() } \
-    {                                                                                                            \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                                            \
-        SELF_CLASS_IS_VALID_0;                                                                                   \
-    }                                                                                                            \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)                          \
-    {                                                                                                            \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                                            \
-        ParentType::operator=(rhs);                                                                              \
-        m_Impl = rhs.m_Impl->Clone();                                                                            \
-        return *this;                                                                                            \
+#define COPY_CONSTRUCTION_CLONE_DEFINE_WITH_PARENT(namespaceName, className)                \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, m_Impl{ rhs.m_Impl->Clone() }                                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(rhs);                                                         \
+        m_Impl = rhs.m_Impl->Clone();                                                       \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                       \
+        std::swap(m_Impl, rhs.m_Impl);                                                      \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ rhs }, m_Impl{ std::move(rhs.m_Impl) }                                \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        m_Impl = std::move(rhs.m_Impl);                                                     \
+        return *this;                                                                       \
     }
 
 #define DELAY_COPY_CONSTRUCTION_DEFINE(namespaceName, className)                                                                                                               \
@@ -300,49 +382,5 @@
             m_Impl = m_Impl->Clone();                                                                                                                                          \
         }                                                                                                                                                                      \
     }
-
-#define DELAY_COPY_CONSTRUCTION_SHALLOW_COPY_DEFINE(namespaceName, className)           \
-    namespaceName::className::className(const className& rhs) : m_Impl{ rhs.m_Impl }    \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        SELF_CLASS_IS_VALID_0;                                                          \
-    }                                                                                   \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs) \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        SELF_CLASS_IS_VALID_0;                                                          \
-        m_Impl = rhs.m_Impl;                                                            \
-        return *this;                                                                   \
-    }
-
-#define PERFORMANCE_COPY_CONSTRUCTION_DEFINE(namespaceName, className)                  \
-    namespaceName::className::className(const className& rhs) : m_Impl{ rhs.m_Impl }    \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        SELF_CLASS_IS_VALID_0;                                                          \
-    }                                                                                   \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs) \
-    {                                                                                   \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                   \
-        SELF_CLASS_IS_VALID_0;                                                          \
-        m_Impl = rhs.m_Impl;                                                            \
-        return *this;                                                                   \
-    }
-
-#define IMPL_MOVE_OPERATOR_DEFINE(namespaceName, className)                                         \
-    namespaceName::className::className(className&& rhs) noexcept : m_Impl{ std::move(rhs.m_Impl) } \
-    {                                                                                               \
-        SELF_CLASS_IS_VALID_0;                                                                      \
-    }                                                                                               \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept         \
-    {                                                                                               \
-        CLASS_IS_VALID_0;                                                                           \
-        m_Impl = std::move(rhs.m_Impl);                                                             \
-        return *this;                                                                               \
-    }
-
-#define IMPL_MOVE_OPERATOR_COMPLETE_DEFINE(namespaceName, className) \
-    IMPL_MOVE_OPERATOR_DEFINE(namespaceName, className);             \
-    CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(namespaceName, className);
 
 #endif  // CORE_TOOLS_HELPER_MEMBER_FUNCTION_MACRO_H

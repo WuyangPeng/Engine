@@ -14,7 +14,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
@@ -186,25 +186,25 @@ void Rendering::PointControllerImpl ::SetSystemAngularAxis(const AVector& system
 }
  
 void Rendering::PointControllerImpl
-	::Load(CoreTools::BufferSource& source) 
+	::Load(const CoreTools::BufferSourceSharedPtr& source) 
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_SystemLinearSpeed);
-	source.Read(m_SystemAngularSpeed);
-	source.ReadAggregate(m_SystemLinearAxis);
-	source.ReadAggregate(m_SystemAngularAxis);
-	source.Read(m_NumPoints);
+	source->Read(m_SystemLinearSpeed);
+        source->Read(m_SystemAngularSpeed);
+        source->ReadAggregate(m_SystemLinearAxis);
+        source->ReadAggregate(m_SystemAngularAxis);
+        source->Read(m_NumPoints);
 
 	m_PointLinearSpeed.resize(m_NumPoints);
 	m_PointAngularSpeed.resize(m_NumPoints);
 	m_PointLinearAxis.resize(m_NumPoints);
 	m_PointAngularAxis.resize(m_NumPoints);
 
-	source.Read(m_NumPoints, &m_PointLinearSpeed[0]);
-	source.Read(m_NumPoints, &m_PointAngularSpeed[0]);
-	source.ReadAggregate(m_NumPoints, &m_PointLinearAxis[0]);
-	source.ReadAggregate(m_NumPoints, &m_PointAngularAxis[0]);
+	source->Read(m_NumPoints, &m_PointLinearSpeed[0]);
+        source->Read(m_NumPoints, &m_PointAngularSpeed[0]);
+        source->ReadAggregate(m_NumPoints, &m_PointLinearAxis[0]);
+        source->ReadAggregate(m_NumPoints, &m_PointAngularAxis[0]);
 } 
 
 void Rendering::PointControllerImpl

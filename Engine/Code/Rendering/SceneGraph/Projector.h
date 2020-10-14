@@ -18,8 +18,8 @@ namespace Rendering
 		using ClassType = Projector;
 		using ParentType = Camera;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
-        using ProjectorSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
-		using ConstProjectorSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>;
+        using ProjectorSharedPtr = std::shared_ptr<ClassType>;
+		using ConstProjectorSharedPtr = std::shared_ptr<ClassType>;
 		using Matrix = Mathematics::FloatMatrix;
 
 	public:
@@ -41,7 +41,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(Projector);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, Projector); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( Projector); 
 }
 
 #endif // RENDERING_SCENE_GRAPH_PROJECTOR_H

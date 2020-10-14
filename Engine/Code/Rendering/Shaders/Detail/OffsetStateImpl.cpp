@@ -26,16 +26,15 @@ Rendering::OffsetStateImpl ::OffsetStateImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, OffsetStateImpl)
 
-void Rendering::OffsetStateImpl
-	::Load(BufferSource& source)
+void Rendering::OffsetStateImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	
 
-	m_FillEnabled = source.ReadBool();
-	m_LineEnabled = source.ReadBool();
-	m_PointEnabled = source.ReadBool();
-	source.Read(m_Scale);
-	source.Read(m_Bias); 
+	m_FillEnabled = source->ReadBool();
+	m_LineEnabled = source->ReadBool();
+	m_PointEnabled = source->ReadBool();
+	source->Read(m_Scale);
+	source->Read(m_Bias); 
 }
 
 void Rendering::OffsetStateImpl

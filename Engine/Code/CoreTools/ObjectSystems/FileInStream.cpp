@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/VersionInformation/Version.h"
+#include "CoreTools/Base/Version.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
@@ -48,11 +48,11 @@ void CoreTools::FileInStream
 		THROW_EXCEPTION(fileName + SYSTEM_TEXT("版本字符串不存在或者存储的版本字符串不够大"));
 	}
 
-	FileBuffer bufferInformation{ boost::numeric_cast<size_t>(readSize) };
+	FileBufferSharedPtr bufferInformation{ std::make_shared<FileBuffer>(boost::numeric_cast<size_t>(readSize)) };
 
-	manager.Read(sizeof(char), boost::numeric_cast<int>(bufferInformation.GetSize()), bufferInformation.GetBufferBegin());
+	manager.Read(sizeof(char), boost::numeric_cast<int>(bufferInformation->GetSize()), bufferInformation->GetBufferBegin());
 
-	string fileVersion{ bufferInformation.GetBufferBegin(), length };
+	string fileVersion{ bufferInformation->GetBufferBegin(), length };
 
 	// 比较所需的文件版本。
 	if (fileVersion != version)

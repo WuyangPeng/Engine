@@ -14,14 +14,14 @@
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 Rendering::VertexBufferAccessorImpl
-	::VertexBufferAccessorImpl(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer)
+	::VertexBufferAccessorImpl(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer)
 	:m_VertexFormat{ vertexformat }, m_VertexBuffer{ vertexbuffer }, m_Stride{ m_VertexFormat->GetStride() },
 	 m_Data{ m_VertexBuffer->GetReadOnlyData() }, m_Position{ m_VertexFormat, m_VertexBuffer }, m_Normal{ m_VertexFormat, m_VertexBuffer },
 	 m_Tangent{ m_VertexFormat, m_VertexBuffer }, m_Binormal{ m_VertexFormat, m_VertexBuffer }, m_TextureCoord{ m_VertexFormat, m_VertexBuffer },
@@ -53,7 +53,7 @@ bool Rendering::VertexBufferAccessorImpl
 
 
 void Rendering::VertexBufferAccessorImpl
-	::ApplyTo(const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer)
+	::ApplyTo(const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

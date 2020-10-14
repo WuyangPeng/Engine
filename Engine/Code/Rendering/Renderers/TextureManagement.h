@@ -11,7 +11,7 @@
 
 #include <map>
 #include <memory>
-#include "CoreTools/MemoryTools/SubclassSmartPointer.h"
+
 namespace Rendering
 {
 	class Renderer;

@@ -1,0 +1,7 @@
+AI游戏引擎程序设计（AI Game Engine Programming）
+
+★
+作者： Brian Schwab
+
+知识点 
+1.	游戏人工智能基础知识。   

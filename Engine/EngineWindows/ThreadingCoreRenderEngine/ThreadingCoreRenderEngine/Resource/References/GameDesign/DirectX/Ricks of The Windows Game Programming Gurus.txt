@@ -1,0 +1,11 @@
+Windows 游戏编程大师技巧（Ricks of The Windows Game Programming Gurus）
+（第2版）
+
+官方网站：
+http://www.cs.mcgill.ca/~savs/3dgpl （已失效）
+
+○
+作者： Andre LaMothe
+
+知识点 
+1.	DirectX基础知识。   

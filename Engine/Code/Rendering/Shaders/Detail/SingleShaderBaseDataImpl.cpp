@@ -64,14 +64,13 @@ Rendering::ShaderFlags::VariableSemantic Rendering::SingleShaderBaseDataImpl ::G
 	return m_Semantic;
 }
 
-void Rendering::SingleShaderBaseDataImpl
-	::Load( BufferSource& source )
+void Rendering::SingleShaderBaseDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Name = source.ReadString();
-	source.ReadEnum(m_Type);
-	source.ReadEnum(m_Semantic);
+	m_Name = source->ReadString();
+	source->ReadEnum(m_Type);
+	source->ReadEnum(m_Semantic);
 }
 
 void Rendering::SingleShaderBaseDataImpl

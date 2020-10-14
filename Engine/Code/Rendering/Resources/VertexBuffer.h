@@ -26,8 +26,8 @@ namespace Rendering
 	public:
 		using ClassType = VertexBuffer;
 		using ParentType = Buffer;
-		using VertexBufferSmartPointer = std::shared_ptr<ClassType>;
-		using ConstVertexBufferSmartPointer = std::shared_ptr<const ClassType>;
+		using VertexBufferSharedPtr = std::shared_ptr<ClassType>;
+		using ConstVertexBufferSharedPtr = std::shared_ptr<const ClassType>;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 		using AVector = Mathematics::FloatAVector;
 		using APoint = Mathematics::FloatAPoint;
@@ -48,8 +48,8 @@ namespace Rendering
 		CORE_TOOLS_RTTI_OVERRIDE_DECLARE; 
 
 		// 支持文件读取和写入（字节排列顺序）
-		void SaveToFile(WriteFileManager& outFile,const ConstVertexFormatSmartPointer& vertexformat) const;
-		void ReadFromFile(ReadFileManager& inFile,const ConstVertexFormatSmartPointer& vertexformat);
+		void SaveToFile(WriteFileManager& outFile,const ConstVertexFormatSharedPtr& vertexformat) const;
+		void ReadFromFile(ReadFileManager& inFile,const ConstVertexFormatSharedPtr& vertexformat);
 
 		void ClearModelNormals(const VertexBufferAccessor& vertexBufferAccessor);
 		void NormalizeModelNormals(const VertexBufferAccessor& vertexBufferAccessor);
@@ -67,14 +67,14 @@ namespace Rendering
 
 		void SetTextureCoord(const VertexBufferAccessor& vertexBufferAccessor, int index, const Vector2D& textureCoord,int unit = 0);
 
-		virtual VertexBufferSmartPointer Clone() const;
+		virtual VertexBufferSharedPtr Clone() const;
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(VertexBuffer);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, VertexBuffer); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( VertexBuffer); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_VERTEX_BUFFER_H

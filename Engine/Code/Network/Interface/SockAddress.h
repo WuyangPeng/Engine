@@ -26,15 +26,15 @@ namespace Network
     {
     public:
         // 类会返回内部变量的引用，所以无法使用延迟复制。
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE_USE_SWAP(SockAddress);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(SockAddress, = default);
 
     public:
         explicit SockAddress(const ConfigurationStrategy& configurationStrategy);
         SockAddress(const std::string& hostName, int port, const ConfigurationStrategy& configurationStrategy);
         SockAddress(int port, const ConfigurationStrategy& configurationStrategy);
-        ~SockAddress() = default;
+        
 
-        IMPL_MOVE_OPERATOR_COMPLETE_DECLARE(SockAddress);
+       CLASS_INVARIANT_DECLARE;
 
         // ACE 专用，其他类调用抛出异常。
         const ACEInetAddressType& GetACEInetAddress() const;

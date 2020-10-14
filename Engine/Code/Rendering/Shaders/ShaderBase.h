@@ -13,7 +13,7 @@
 #include "Flags/ShaderFlags.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "CoreTools/ObjectSystems/Object.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 
 #include <string>
 
@@ -30,7 +30,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderBase : public CoreTools::Object
     {
     public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderBase);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderBase, DESTRUCTOR_PURE_VIRTUAL);
 		using ParentType = Object;
 		using Colour = Colour<float>;
 		using WriteFileManager = CoreTools::WriteFileManager;
@@ -50,13 +50,7 @@ namespace Rendering
 		// 直到通过SetProgram函数提供的所有程序（用于各种型材）
 		// 着色器的结构是不完整的。
         ShaderBase (const std::string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers);    
-          ~ShaderBase () = 0;
-
-		  #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        ShaderBase(ShaderBase&&) noexcept = default;
-        ShaderBase& operator=(ShaderBase&&) noexcept = default;
-		 #include STSTEM_WARNING_POP
+          
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
@@ -101,10 +95,10 @@ namespace Rendering
 		void SaveShader(WriteFileManager& manager) const;
 		void LoadShader(ReadFileManager& manager, int numProfiles);
 
-		void SetProfile(const ShaderProfileDataSmartPointer& profile) noexcept;
-                const ConstShaderProfileDataSmartPointer GetProfile() const noexcept;
+		void SetProfile(const ShaderProfileDataSharedPtr& profile) noexcept;
+                const ConstShaderProfileDataSharedPtr GetProfile() const noexcept;
 
-		ShaderProfileDataSmartPointer GetProfile() noexcept;
+		ShaderProfileDataSharedPtr GetProfile() noexcept;
 
     private:
 		IMPL_TYPE_DECLARE(ShaderBase);
@@ -113,7 +107,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(ShaderBase);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ShaderBase);
+	CORE_TOOLS_SHARED_PTR_DECLARE( ShaderBase);
 }
 
 #endif // RENDERING_SHADERS_SHADER_H

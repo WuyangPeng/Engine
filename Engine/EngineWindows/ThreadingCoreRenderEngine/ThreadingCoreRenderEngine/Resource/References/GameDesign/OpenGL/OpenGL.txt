@@ -1,0 +1,9 @@
+参考文献·游戏设计·OpenGL
+ 
+1.	OpenGL 超级宝典
+2.  OpenGL 着色语言
+3.  OpenGL 编程指南
+4.	OpenGL ES 3.0编程指南
+5.  OpenGL 参考手册
+6.  计算机图形学（OpenGL）
+7.  计算机图形学（OpenGL版）

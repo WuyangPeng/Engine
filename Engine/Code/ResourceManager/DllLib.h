@@ -15,4 +15,6 @@
 	
 #endif // TCRE_USE_MSVC
 
+#include "System/SystemLib.h"
+
 #endif // RESOURCE_MANAGER_DLL_LIB_H

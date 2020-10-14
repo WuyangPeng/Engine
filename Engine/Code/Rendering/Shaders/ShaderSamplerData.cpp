@@ -112,7 +112,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,GetAnisotropy
  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,GetBorderColor,int, Rendering::ShaderSamplerData::Colour) 
  
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderSamplerData,Load,BufferSource&,void)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderSamplerData, Load,  CoreTools::BufferSourceSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderSamplerData, Save, CoreTools::BufferTargetSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ShaderSamplerData,GetStreamingSize,int) 
 

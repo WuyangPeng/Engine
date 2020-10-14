@@ -25,7 +25,7 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 
 		// 从外部的视频流系统的*.trve文件读取视觉效果。
-		static const VisualEffectSmartPointer Load(const System::String& fileName);
+		static const VisualEffectSharedPtr Load(const System::String& fileName);
 	};
 }
 

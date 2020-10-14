@@ -21,8 +21,8 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
-		TrianglesFan(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,int indexSize);
-		TrianglesFan(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer);
+		TrianglesFan(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,int indexSize);
+		TrianglesFan(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,const IndexBufferSharedPtr& indexbuffer);
 		 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -35,14 +35,14 @@ namespace Rendering
 		  int GetNumTriangles() const override;
 		  const TriangleIndex GetTriangle(int index) const override;
                   ObjectInterfaceSharedPtr CloneObject() const override;
-		  ControllerInterfaceSmartPointer Clone() const override;
+		  ControllerInterfaceSharedPtr Clone() const override;
 	};
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(TrianglesFan);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Eighth, TrianglesFan); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( TrianglesFan); 
 }
 
 #endif // RENDERING_SCENE_GRAPH_TRIANGLES_FAN_H

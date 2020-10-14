@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/17 16:18)
+//	引擎版本：0.5.1.1 (2020/10/13 20:26)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENDIAN_H
 #define CORE_TOOLS_FILE_MANAGER_ENDIAN_H
@@ -17,23 +17,19 @@
 // 字节存储顺序，结果将通过参数返回，调用者必须保持迭代器的有效性。
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Endian
+    class CORE_TOOLS_DEFAULT_DECLARE Endian final
     {
     public:
-        using ClassType = Endian;
-        using DefaultContainer = std::vector<char>;
-        using DefaultContainerIter = DefaultContainer::iterator;
+        using ClassType = Endian; 
 
     public:
         // 测试机器的字节顺序是否是big endian。
-        static bool IsBigEndian();
+        [[nodiscard]] static bool IsBigEndian();
 
         // 测试机器的字节顺序是否是little endian。
-        static bool IsLittleEndian();
+        [[nodiscard]] static bool IsLittleEndian();
 
         // 交换字节顺序
-        static void Swap2ByteOrder(DefaultContainerIter begin, DefaultContainerIter end);
-
         static void Swap2ByteOrder(void* data) noexcept;
         static void Swap2ByteOrder(size_t itemsNumber, void* data) noexcept;
         static void Swap4ByteOrder(void* data) noexcept;

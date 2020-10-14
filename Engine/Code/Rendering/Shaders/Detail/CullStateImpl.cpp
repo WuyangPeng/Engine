@@ -53,13 +53,12 @@ void Rendering::CullStateImpl ::SetCCWOrder(bool cCWOrder) noexcept
 	m_CCWOrder = cCWOrder;
 }
 
-void Rendering::CullStateImpl
-	::Load(BufferSource& source)
+void Rendering::CullStateImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source.ReadBool();
-	m_CCWOrder = source.ReadBool();
+	m_Enabled = source->ReadBool();
+	m_CCWOrder = source->ReadBool();
 }
 
 void Rendering::CullStateImpl

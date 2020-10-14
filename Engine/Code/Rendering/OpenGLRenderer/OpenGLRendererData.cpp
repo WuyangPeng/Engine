@@ -9,7 +9,7 @@
 #include "OpenGLRendererData.h"
 #include "OpenGLMapping.h"
 #include "Rendering/Shaders/AlphaState.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 using namespace Rendering;
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
@@ -21,7 +21,7 @@ using namespace Rendering;
 
 void RendererData::DrawCharacter (const BitmapFont& font, char c)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	font; c;
 	/*
     const BitmapFontChar* bfc = font.mCharacters[(unsigned int)c];
@@ -68,7 +68,7 @@ void RendererData::RenderState
 	::Initialize (const AlphaState* astate,const CullState* cstate, const DepthState* dstate,
 				  const OffsetState* ostate, const StencilState* sstate,const WireState* wstate)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	astate; cstate; dstate; ostate; sstate; wstate;
     // AlphaState
     /*mAlphaBlendEnabled = astate->BlendEnabled;
@@ -156,7 +156,7 @@ void RendererData::SamplerState
 	::GetCurrent (GLenum target)
 {
     target;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
    /* glGetTexParameterfv(target, GL_TEXTURE_MAX_ANISOTROPY_EXT, &mAnisotropy);
     glGetTexEnvfv(GL_TEXTURE_FILTER_CONTROL, GL_TEXTURE_LOD_BIAS, &mLodBias);
     glGetTexParameteriv(target, GL_TEXTURE_MAG_FILTER, &mMagFilter);

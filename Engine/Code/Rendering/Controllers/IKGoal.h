@@ -19,27 +19,23 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE IKGoal : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKGoal);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKGoal, = default);
         using ParentType = Object;
         using APoint = Mathematics::FloatAPoint;
 
     public:
-        IKGoal(const SpatialSmartPointer& target, const SpatialSmartPointer& effector, float weight = 1.0f);
-        ~IKGoal();
+        IKGoal(const SpatialSharedPtr& target, const SpatialSharedPtr& effector, float weight = 1.0f);
+     
    
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        IKGoal(IKGoal&&) = default;
-        IKGoal& operator=(IKGoal&&) = default;
-#include STSTEM_WARNING_POP
+ 
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(IKGoal);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        const ConstSpatialSmartPointer GetTarget() const noexcept;
-        const ConstSpatialSmartPointer GetEffector() const noexcept;
+        const ConstSpatialSharedPtr GetTarget() const noexcept;
+        const ConstSpatialSharedPtr GetEffector() const noexcept;
         const APoint GetTargetPosition() const;
         const APoint GetEffectorPosition() const;
 
@@ -56,7 +52,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(IKGoal);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, IKGoal);
+    CORE_TOOLS_SHARED_PTR_DECLARE( IKGoal);
 }
 
 #endif  // RENDERING_CONTROLLERS_IKGOAL_H

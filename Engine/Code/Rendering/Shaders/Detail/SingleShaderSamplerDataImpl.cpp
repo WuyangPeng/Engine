@@ -146,20 +146,19 @@ Rendering::SingleShaderSamplerDataImpl::Colour Rendering::SingleShaderSamplerDat
 	return m_BorderColor;
 }
 
-void Rendering::SingleShaderSamplerDataImpl
-	::Load( BufferSource& source )
+void Rendering::SingleShaderSamplerDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_SamplerName = source.ReadString();
-	source.ReadEnum(m_SamplerType);
-	source.ReadEnum(m_Filter);
-	source.ReadEnum(m_Coordinate[0]);
-	source.ReadEnum(m_Coordinate[1]);
-	source.ReadEnum(m_Coordinate[2]);
-	source.Read(m_LodBias);
-	source.Read(m_Anisotropy);
-	source.ReadAggregate(m_BorderColor);
+	m_SamplerName = source->ReadString();
+	source->ReadEnum(m_SamplerType);
+	source->ReadEnum(m_Filter);
+	source->ReadEnum(m_Coordinate[0]);
+	source->ReadEnum(m_Coordinate[1]);
+	source->ReadEnum(m_Coordinate[2]);
+	source->Read(m_LodBias);
+	source->Read(m_Anisotropy);
+	source->ReadAggregate(m_BorderColor);
 }
 
 void Rendering::SingleShaderSamplerDataImpl

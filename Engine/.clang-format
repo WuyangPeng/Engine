@@ -99,14 +99,16 @@ IncludeCategories:
     Priority:        1 
   - Regex:           '^<gsl.*>'
     Priority:        15
-  - Regex:           '^<.*\.h>'
+  - Regex:           '^<boost.*>'
     Priority:        16
+  - Regex:           '^<.*\.h>'
+    Priority:        17
   - Regex:           '^<.*'
-    Priority:        17  
+    Priority:        18  
   - Regex:           '.*'
-    Priority:        18 
+    Priority:        19 
 IncludeIsMainRegex: '^".*(Export|Dll).h' 
-IndentCaseLabels: false
+IndentCaseLabels: true
 IndentGotoLabels: false
 IndentPPDirectives: BeforeHash
 IndentWidth: 4

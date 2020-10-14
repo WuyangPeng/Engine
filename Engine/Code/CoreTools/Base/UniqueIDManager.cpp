@@ -8,9 +8,8 @@
 
 #include "UniqueIDManagerDetail.h"
 
-#include "Detail/UniqueIDManagerImpl.h"
 #include "Flags/UniqueIDSelectFlags.h"
-
+#include "Detail/UniqueIDManagerImpl.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
 #include <memory>
@@ -21,29 +20,27 @@ using std::string;
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, UniqueIDManager);
 
-CoreTools::UniqueIDManager::UniqueIDManagerUniquePtr CoreTools::UniqueIDManager ::sm_UniqueIDManager{};
+CoreTools::UniqueIDManager::UniqueIDManagerUniquePtr CoreTools::UniqueIDManager::sm_UniqueIDManager{};
 
-void CoreTools::UniqueIDManager ::Create(int count)
+void CoreTools::UniqueIDManager::Create(int count)
 {
     sm_UniqueIDManager = make_unique<CoreTools::UniqueIDManager>(count, UniqueIDManagerCreate::Init);
 }
 
-void CoreTools::UniqueIDManager ::Destroy() noexcept
+void CoreTools::UniqueIDManager::Destroy() noexcept
 {
     sm_UniqueIDManager.reset();
 }
 
-CoreTools::UniqueIDManager ::UniqueIDManager(int count, [[maybe_unused]] UniqueIDManagerCreate uniqueIDManagerCreate)
+CoreTools::UniqueIDManager::UniqueIDManager(int count, [[maybe_unused]] UniqueIDManagerCreate uniqueIDManagerCreate)
     : m_Impl{ make_shared<ImplType>(count) }
 {
-   
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, UniqueIDManager)
 
-uint64_t CoreTools::UniqueIDManager ::NextDefaultUniqueID()
+uint64_t CoreTools::UniqueIDManager::NextDefaultUniqueID()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -52,7 +49,7 @@ uint64_t CoreTools::UniqueIDManager ::NextDefaultUniqueID()
     return NextUniqueID(UniqueIDSelect::Default);
 }
 
-uint64_t CoreTools::UniqueIDManager ::NextUniqueID(int index)
+uint64_t CoreTools::UniqueIDManager::NextUniqueID(int index)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 

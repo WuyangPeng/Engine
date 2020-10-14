@@ -11,5 +11,9 @@
 #include "MillisecondTimer.h"
 #include "SecondTimer.h"
 #include "CustomTime.h"
+#include "Year.h"
+#include "Month.h"
+#include "Day.h"
+#include "Date.h"
 
 #endif // CORE_TOOLS_TIME_H

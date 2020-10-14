@@ -23,16 +23,14 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE ParticleController : public Controller
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ParticleController);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(ParticleController, = default);
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 
 	public:
 		// 所连接的对象必须是Particles。
 		ParticleController();
-		  ~ParticleController();
-		  ParticleController(ParticleController&&) = default;
-		  ParticleController& operator=(ParticleController&&) = default;
+		  
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -86,7 +84,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(ParticleController);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, ParticleController); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( ParticleController); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_CONTROLLERS_PARTICLE_CONTROLLER_H

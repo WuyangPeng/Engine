@@ -19,7 +19,7 @@
 
 using std::vector;
 #include "System/Helper/PragmaWarning.h" 
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26455)
@@ -106,7 +106,7 @@ void Rendering::ParticlesImpl
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	if (0.0f < sizeAdjust)
 	{
@@ -150,22 +150,21 @@ int Rendering::ParticlesImpl ::GetNumActive() const noexcept
 	return m_NumActive;
 }
 
-void Rendering::ParticlesImpl
-	::Load(BufferSource& source) 
+void Rendering::ParticlesImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	uint32_t size{ 0 };
-	source.Read(size);
+	source->Read(size);
 
 	m_Positions.resize(size);
 	m_Sizes.resize(size);
 
-	source.ReadAggregate(size, &m_Positions[0]);
-	source.Read(size, &m_Sizes[0]);
+	source->ReadAggregate(size, &m_Positions[0]);
+	source->Read(size, &m_Sizes[0]);
 
-	source.Read(m_SizeAdjust);
-	source.Read(m_NumActive);
+	source->Read(m_SizeAdjust);
+	source->Read(m_NumActive);
 }
 
 void Rendering::ParticlesImpl

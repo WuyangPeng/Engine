@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -27,7 +27,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering,ShaderBase);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ShaderBase);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ShaderBase); 
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering,ShaderBase);
+COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(Rendering, ShaderBase);
 
 CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, ShaderBase);
 
@@ -45,7 +45,7 @@ Rendering::ShaderBase
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
+ 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ShaderBase)
 
 void Rendering::ShaderBase
@@ -170,10 +170,10 @@ void Rendering::ShaderBase
 	return m_Impl->LoadShader(manager, numProfiles);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderBase,GetProfile,const Rendering::ConstShaderProfileDataSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderBase, GetProfile, Rendering::ShaderProfileDataSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderBase,GetProfile,const Rendering::ConstShaderProfileDataSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderBase, GetProfile, Rendering::ShaderProfileDataSharedPtr)
 									  
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, ShaderBase, SetProfile, ShaderProfileDataSmartPointer, void)							
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, ShaderBase, SetProfile, ShaderProfileDataSharedPtr, void)							
 									
  
 #include STSTEM_WARNING_POP

@@ -8,7 +8,7 @@
 
 #include "MiddleLayerInterface.h"
 
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
@@ -45,7 +45,7 @@ bool Framework::MiddleLayerInterface ::PreCreate([[maybe_unused]] const Environm
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -55,7 +55,7 @@ bool Framework::MiddleLayerInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -65,7 +65,7 @@ bool Framework::MiddleLayerInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -75,7 +75,7 @@ bool Framework::MiddleLayerInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -85,7 +85,7 @@ void Framework::MiddleLayerInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Framework::MiddleLayerInterface
@@ -93,7 +93,7 @@ void Framework::MiddleLayerInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 bool Framework::MiddleLayerInterface ::Idle([[maybe_unused]] int64_t timeDelta)
@@ -102,7 +102,7 @@ bool Framework::MiddleLayerInterface ::Idle([[maybe_unused]] int64_t timeDelta)
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -112,7 +112,7 @@ bool Framework::MiddleLayerInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -123,7 +123,7 @@ bool Framework::MiddleLayerInterface ::Move([[maybe_unused]] const WindowPoint& 
 
 	 
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -134,7 +134,7 @@ bool Framework::MiddleLayerInterface ::Resize([[maybe_unused]] WindowDisplay win
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -145,7 +145,7 @@ bool Framework::MiddleLayerInterface ::KeyUp([[maybe_unused]] int key, [[maybe_u
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -156,7 +156,7 @@ bool Framework::MiddleLayerInterface ::KeyDown([[maybe_unused]] int key, [[maybe
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -166,7 +166,7 @@ bool Framework::MiddleLayerInterface ::SpecialKeyUp([[maybe_unused]] int key, [[
 	FRAMEWORK_CLASS_IS_VALID_9;
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -177,7 +177,7 @@ bool Framework::MiddleLayerInterface ::SpecialKeyDown([[maybe_unused]] int key, 
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -188,7 +188,7 @@ bool Framework::MiddleLayerInterface ::PassiveMotion([[maybe_unused]] const Wind
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -199,7 +199,7 @@ bool Framework::MiddleLayerInterface ::Motion([[maybe_unused]] const WindowPoint
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -210,7 +210,7 @@ bool Framework::MiddleLayerInterface ::MouseWheel([[maybe_unused]] int delta, [[
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -220,7 +220,7 @@ bool Framework::MiddleLayerInterface ::MouseClick([[maybe_unused]] MouseButtonsT
 	FRAMEWORK_CLASS_IS_VALID_9;
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }

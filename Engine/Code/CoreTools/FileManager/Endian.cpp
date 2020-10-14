@@ -5,19 +5,18 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/17 16:27)
+//	引擎版本：0.5.1.1 (2020/10/14 14:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "Endian.h"
+#include "System/Helper/PragmaWarning/Span.h"
 #include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26472)
-#include <gsl/span>
+
 #include <algorithm>
-#include STSTEM_WARNING_POP
+
 using std::swap;
 
 bool CoreTools::Endian::IsLittleEndian()
@@ -41,21 +40,6 @@ bool CoreTools::Endian::IsLittleEndian()
 bool CoreTools::Endian::IsBigEndian()
 {
     return !IsLittleEndian();
-}
-
-void CoreTools::Endian::Swap2ByteOrder(DefaultContainerIter begin, DefaultContainerIter end)
-{
-    auto iter = begin;
-    while (iter != end)
-    {
-        auto next = iter + 1;
-        if (next != end)
-        {
-            iter_swap(iter, next);
-        }
-
-        iter = ++next;
-    }
 }
 
 void CoreTools::Endian::Swap2ByteOrder(void* data) noexcept
@@ -139,91 +123,72 @@ void CoreTools::Endian::Swap8ByteOrder(size_t itemsNumber, void* data) noexcept
 
 void CoreTools::Endian::SwapByteOrder(int itemSize, void* data)
 {
-    EXCEPTION_TRY
+    CORE_TOOLS_ASSERTION_0(data != nullptr, "指针无效！");
+    CORE_TOOLS_ASSERTION_2(itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为2，4或8\n");
+
+    const auto halfSize = itemSize / 2;
+    auto bytes = static_cast<char*>(data);
+
+    for (auto begin = 0, end = itemSize - 1; begin < halfSize; ++begin, --end)
     {
-        CORE_TOOLS_ASSERTION_0(data != nullptr, "指针无效！");
-        CORE_TOOLS_ASSERTION_2(itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为2，4或8\n");
-
-        const auto halfSize = itemSize / 2;
-        auto bytes = static_cast<char*>(data);
-
-        for (auto begin = 0, end = itemSize - 1; begin < halfSize; ++begin, --end)
+        if (bytes != nullptr)
         {
-            if (bytes != nullptr)
-            {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-                swap(bytes[begin], bytes[end]);
+            swap(bytes[begin], bytes[end]);
 #include STSTEM_WARNING_POP
-            }
         }
     }
-    EXCEPTION_ALL_CATCH(CoreTools)
 }
 
 void CoreTools::Endian::SwapByteOrder(int itemSize, int itemsNumber, void* data)
 {
-    EXCEPTION_TRY
+    CORE_TOOLS_ASSERTION_0(data != nullptr, "指针无效！");
+    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
+    CORE_TOOLS_ASSERTION_2(itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为2，4或8\n");
+
+    auto bytes = static_cast<char*>(data);
+
+    for (auto i = 0; i < itemsNumber; ++i)
     {
-        CORE_TOOLS_ASSERTION_0(data != nullptr, "指针无效！");
-        CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
-        CORE_TOOLS_ASSERTION_2(itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为2，4或8\n");
+        SwapByteOrder(itemSize, bytes);
 
-        auto bytes = static_cast<char*>(data);
-
-        for (auto i = 0; i < itemsNumber; ++i)
-        {
-            SwapByteOrder(itemSize, bytes);
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-            bytes += itemSize;
+        bytes += itemSize;
 #include STSTEM_WARNING_POP
-        }
     }
-    EXCEPTION_ALL_CATCH(CoreTools)
 }
 
 void CoreTools::Endian::Swap2ByteOrderToTarget(int itemsNumber, const uint16_t* source, uint16_t* target)
 {
-    EXCEPTION_TRY
-    {
-        CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");
-        CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
-        CORE_TOOLS_ASSERTION_0(target != nullptr, "指针无效！");
+    CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");
+    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
+    CORE_TOOLS_ASSERTION_0(target != nullptr, "指针无效！");
 
-        System::MemoryCopy(target, source, itemsNumber * sizeof(uint16_t));
+    System::MemoryCopy(target, source, itemsNumber * sizeof(uint16_t));
 
-        Endian::Swap2ByteOrder(itemsNumber, target);
-    }
-    EXCEPTION_ALL_CATCH(CoreTools)
+    Endian::Swap2ByteOrder(itemsNumber, target);
 }
 
 void CoreTools::Endian::Swap4ByteOrderToTarget(int itemsNumber, const uint32_t* source, uint32_t* target)
 {
-    EXCEPTION_TRY
-    {
-        CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");
-        CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
-        CORE_TOOLS_ASSERTION_0(target != nullptr, "指针无效！");
+    CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");
+    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
+    CORE_TOOLS_ASSERTION_0(target != nullptr, "指针无效！");
 
-        System::MemoryCopy(target, source, itemsNumber * sizeof(uint32_t));
+    System::MemoryCopy(target, source, itemsNumber * sizeof(uint32_t));
 
-        Endian::Swap4ByteOrder(itemsNumber, target);
-    }
-    EXCEPTION_ALL_CATCH(CoreTools)
+    Endian::Swap4ByteOrder(itemsNumber, target);
 }
 
 void CoreTools::Endian::Swap8ByteOrderToTarget(int itemsNumber, const uint64_t* source, uint64_t* target)
 {
-    EXCEPTION_TRY
-    {
-        CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");
-        CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
-        CORE_TOOLS_ASSERTION_0(target != nullptr, "指针无效！");
+    CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");
+    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
+    CORE_TOOLS_ASSERTION_0(target != nullptr, "指针无效！");
 
-        System::MemoryCopy(target, source, itemsNumber * sizeof(uint64_t));
+    System::MemoryCopy(target, source, itemsNumber * sizeof(uint64_t));
 
-        Endian::Swap8ByteOrder(itemsNumber, target);
-    }
-    EXCEPTION_ALL_CATCH(CoreTools)
+    Endian::Swap8ByteOrder(itemsNumber, target);
 }

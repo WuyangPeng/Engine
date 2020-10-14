@@ -14,7 +14,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
-#include "CoreTools/ClassInvariant/ClassInvariantFwd.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
 #include <type_traits>
 #include <string>

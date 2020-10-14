@@ -21,7 +21,7 @@ namespace Rendering
 		using ClassType = ClodMeshTriangleMesh;
 		
 	public:
-		explicit ClodMeshTriangleMesh(TrianglesMeshSmartPointer mesh);
+		explicit ClodMeshTriangleMesh(TrianglesMeshSharedPtr mesh);
 
 		CLASS_INVARIANT_DECLARE;
 
@@ -45,8 +45,8 @@ namespace Rendering
 		int m_NumVertices;
 		int m_NumIndices;
 		int m_NumTriangles;
-		IndexBufferSmartPointer m_IndixBuffer;
-		VertexBufferSmartPointer m_VertexBuffer;
+		IndexBufferSharedPtr m_IndixBuffer;
+		VertexBufferSharedPtr m_VertexBuffer;
 		VertexBufferAccessor m_VertexBufferAccessor;
 	};
 }

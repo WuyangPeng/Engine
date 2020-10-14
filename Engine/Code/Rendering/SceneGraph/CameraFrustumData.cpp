@@ -9,7 +9,7 @@
 #include "CameraFrustumData.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 Rendering::CameraFrustumData
     ::CameraFrustumData () noexcept
@@ -33,7 +33,7 @@ float Rendering::CameraFrustumData
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(m_Symmetric,"参数是无效的。");
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     
     return m_UpFieldOfViewDegrees;
 }
@@ -43,7 +43,7 @@ float Rendering::CameraFrustumData
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(m_Symmetric,"参数是无效的。");
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     return m_AspectRatio;
 }
 
@@ -52,7 +52,7 @@ float Rendering::CameraFrustumData
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(m_Symmetric,"参数是无效的。");
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     return m_DirectionMin;
 }
 
@@ -61,7 +61,7 @@ float Rendering::CameraFrustumData
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(m_Symmetric,"参数是无效的。"); 
-     CoreTools::DoNothing();
+     CoreTools::DisableNoexcept();
     return m_DirectionMax;
 }
 

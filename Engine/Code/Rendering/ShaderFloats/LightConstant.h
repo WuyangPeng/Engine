@@ -22,14 +22,12 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE LightConstant : public ShaderFloat
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(LightConstant);
+             COPY_UNSHARE_CLASSES_TYPE_DECLARE(LightConstant, DESTRUCTOR_DEFAULT);
 		using ParentType = ShaderFloat;
 
 	public:
-		explicit LightConstant(const LightSmartPointer& light);
-            ~LightConstant() = default;
-                LightConstant(LightConstant&&) noexcept = default;
-            LightConstant& operator=(LightConstant&&) noexcept = default;
+		explicit LightConstant(const LightSharedPtr& light);
+           
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -40,7 +38,7 @@ namespace Rendering
 
 		  void SetNumRegisters(int numRegisters) override;
 
-		const ConstLightSmartPointer GetLight() const;
+		const ConstLightSharedPtr GetLight() const;
 
 	private:
 		constexpr static auto sm_NumRegisters = 1;
@@ -53,7 +51,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(LightConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, LightConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( LightConstant);
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_SHADER_FLOATS_LIGHT_CONSTANT_H

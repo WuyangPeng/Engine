@@ -8,7 +8,7 @@
 
 #include "RendererImpl.h"
 
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
@@ -145,7 +145,7 @@ int Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstVertexFormatSmartPointer& vertexFormat)
+	::Bind(const ConstVertexFormatSharedPtr& vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -153,7 +153,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstVertexFormatSmartPointer& vertexFormat)
+	::Unbind(const ConstVertexFormatSharedPtr& vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -161,7 +161,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstVertexFormatSmartPointer& vertexFormat)
+	::Enable(const ConstVertexFormatSharedPtr& vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -169,7 +169,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstVertexFormatSmartPointer& vertexFormat)
+	::Disable(const ConstVertexFormatSharedPtr& vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -177,7 +177,7 @@ void Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformVertexFormatSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstVertexFormatSmartPointer& vertexFormat)
+	::GetResource(const ConstVertexFormatSharedPtr& vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -185,7 +185,7 @@ Rendering::RendererImpl::PlatformVertexFormatSharedPtr Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstVertexBufferSmartPointer& vertexBuffer)
+	::Bind(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -193,7 +193,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstVertexBufferSmartPointer& vertexBuffer)
+	::Unbind(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -201,7 +201,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstVertexBufferSmartPointer& vertexBuffer, int streamIndex, int offset)
+	::Enable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex, int offset)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -209,7 +209,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstVertexBufferSmartPointer& vertexBuffer, int streamIndex)
+	::Disable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -217,7 +217,7 @@ void Rendering::RendererImpl
 }
 
 void* Rendering::RendererImpl
-	::Lock(const ConstVertexBufferSmartPointer& vertexBuffer, BufferLocking mode)
+	::Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -225,7 +225,7 @@ void* Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unlock(const ConstVertexBufferSmartPointer& vertexBuffer)
+	::Unlock(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -233,7 +233,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Update(const ConstVertexBufferSmartPointer& vertexBuffer)
+	::Update(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -241,7 +241,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstIndexBufferSmartPointer& indexbuffer)
+	::Bind(const ConstIndexBufferSharedPtr& indexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -249,7 +249,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstIndexBufferSmartPointer& indexbuffer)
+	::Unbind(const ConstIndexBufferSharedPtr& indexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -257,7 +257,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstIndexBufferSmartPointer& indexbuffer)
+	::Enable(const ConstIndexBufferSharedPtr& indexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -265,7 +265,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstIndexBufferSmartPointer& indexbuffer)
+	::Disable(const ConstIndexBufferSharedPtr& indexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -273,7 +273,7 @@ void Rendering::RendererImpl
 }
 
 void* Rendering::RendererImpl
-	::Lock(const ConstIndexBufferSmartPointer& indexbuffer, BufferLocking mode)
+	::Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -281,7 +281,7 @@ void* Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unlock(const ConstIndexBufferSmartPointer& indexbuffer)
+	::Unlock(const ConstIndexBufferSharedPtr& indexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -289,7 +289,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Update(const ConstIndexBufferSmartPointer& indexbuffer)
+	::Update(const ConstIndexBufferSharedPtr& indexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -297,7 +297,7 @@ void Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformVertexBufferSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstVertexBufferSmartPointer& vertexBuffer)
+	::GetResource(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -305,7 +305,7 @@ Rendering::RendererImpl::PlatformVertexBufferSharedPtr Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformIndexBufferSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstIndexBufferSmartPointer& indexBuffer)
+	::GetResource(const ConstIndexBufferSharedPtr& indexBuffer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -313,7 +313,7 @@ Rendering::RendererImpl::PlatformIndexBufferSharedPtr Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstTexture1DSmartPointer& texture)
+	::Bind(const ConstTexture1DSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -321,7 +321,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstTexture1DSmartPointer& texture)
+	::Unbind(const ConstTexture1DSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -329,7 +329,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstTexture1DSmartPointer& texture, int textureUnit)
+	::Enable(const ConstTexture1DSharedPtr& texture, int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -337,7 +337,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstTexture1DSmartPointer& texture, int textureUnit)
+	::Disable(const ConstTexture1DSharedPtr& texture, int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -345,7 +345,7 @@ void Rendering::RendererImpl
 }
 
 void* Rendering::RendererImpl
-	::Lock(const ConstTexture1DSmartPointer& texture,int level, BufferLocking mode)
+	::Lock(const ConstTexture1DSharedPtr& texture,int level, BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -353,7 +353,7 @@ void* Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unlock(const ConstTexture1DSmartPointer& texture, int level)
+	::Unlock(const ConstTexture1DSharedPtr& texture, int level)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -361,7 +361,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Update(const ConstTexture1DSmartPointer& texture, int level)
+	::Update(const ConstTexture1DSharedPtr& texture, int level)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -369,7 +369,7 @@ void Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformTexture1DSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstTexture1DSmartPointer& texture1D)
+	::GetResource(const ConstTexture1DSharedPtr& texture1D)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -377,7 +377,7 @@ Rendering::RendererImpl::PlatformTexture1DSharedPtr Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstTexture2DSmartPointer& texture)
+	::Bind(const ConstTexture2DSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -385,7 +385,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstTexture2DSmartPointer& texture)
+	::Unbind(const ConstTexture2DSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -393,7 +393,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstTexture2DSmartPointer& texture, int textureUnit)
+	::Enable(const ConstTexture2DSharedPtr& texture, int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -401,7 +401,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstTexture2DSmartPointer& texture, int textureUnit)
+	::Disable(const ConstTexture2DSharedPtr& texture, int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -409,7 +409,7 @@ void Rendering::RendererImpl
 }
 
 void* Rendering::RendererImpl
-	::Lock(const ConstTexture2DSmartPointer& texture, int level, BufferLocking mode)
+	::Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -417,7 +417,7 @@ void* Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unlock(const ConstTexture2DSmartPointer& texture, int level)
+	::Unlock(const ConstTexture2DSharedPtr& texture, int level)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -425,7 +425,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Update(const ConstTexture2DSmartPointer& texture, int level)
+	::Update(const ConstTexture2DSharedPtr& texture, int level)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -433,7 +433,7 @@ void Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformTexture2DSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstTexture2DSmartPointer& texture2D)
+	::GetResource(const ConstTexture2DSharedPtr& texture2D)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -441,7 +441,7 @@ Rendering::RendererImpl::PlatformTexture2DSharedPtr Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstTexture3DSmartPointer& texture)
+	::Bind(const ConstTexture3DSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -449,7 +449,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstTexture3DSmartPointer& texture)
+	::Unbind(const ConstTexture3DSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -457,7 +457,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstTexture3DSmartPointer& texture, int textureUnit)
+	::Enable(const ConstTexture3DSharedPtr& texture, int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -465,7 +465,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstTexture3DSmartPointer& texture, int textureUnit)
+	::Disable(const ConstTexture3DSharedPtr& texture, int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -473,7 +473,7 @@ void Rendering::RendererImpl
 }
 
 void* Rendering::RendererImpl
-	::Lock(const ConstTexture3DSmartPointer& texture, int level, BufferLocking mode)
+	::Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -481,7 +481,7 @@ void* Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unlock(const ConstTexture3DSmartPointer& texture, int level)
+	::Unlock(const ConstTexture3DSharedPtr& texture, int level)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -489,7 +489,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Update(const ConstTexture3DSmartPointer& texture, int level)
+	::Update(const ConstTexture3DSharedPtr& texture, int level)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -497,7 +497,7 @@ void Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformTexture3DSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstTexture3DSmartPointer& texture3D)
+	::GetResource(const ConstTexture3DSharedPtr& texture3D)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -505,7 +505,7 @@ Rendering::RendererImpl::PlatformTexture3DSharedPtr Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstTextureCubeSmartPointer& texture)
+	::Bind(const ConstTextureCubeSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -513,7 +513,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstTextureCubeSmartPointer& texture)
+	::Unbind(const ConstTextureCubeSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -521,7 +521,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstTextureCubeSmartPointer& texture, int textureUnit)
+	::Enable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -529,7 +529,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstTextureCubeSmartPointer& texture, int textureUnit)
+	::Disable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -537,7 +537,7 @@ void Rendering::RendererImpl
 }
 
 void* Rendering::RendererImpl
-	::Lock(const ConstTextureCubeSmartPointer& texture, int face, int level, BufferLocking mode)
+	::Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -545,7 +545,7 @@ void* Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unlock(const ConstTextureCubeSmartPointer& texture, int face, int level)
+	::Unlock(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -553,7 +553,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Update(const ConstTextureCubeSmartPointer& texture, int face, int level)
+	::Update(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -561,7 +561,7 @@ void Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformTextureCubeSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstTextureCubeSmartPointer& textureCube)
+	::GetResource(const ConstTextureCubeSharedPtr& textureCube)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -569,7 +569,7 @@ Rendering::RendererImpl::PlatformTextureCubeSharedPtr Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstRenderTargetSmartPointer& renderTarget)
+	::Bind(const ConstRenderTargetSharedPtr& renderTarget)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -577,7 +577,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstRenderTargetSmartPointer& renderTarget)
+	::Unbind(const ConstRenderTargetSharedPtr& renderTarget)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -585,7 +585,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstRenderTargetSmartPointer& renderTarget)
+	::Enable(const ConstRenderTargetSharedPtr& renderTarget)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -593,15 +593,15 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstRenderTargetSmartPointer& renderTarget)
+	::Disable(const ConstRenderTargetSharedPtr& renderTarget)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	return m_RenderTargetManagement->Disable(renderTarget);
 }
 
-Rendering::ConstTexture2DSmartPointer Rendering::RendererImpl
-	::ReadColor(int index, const ConstRenderTargetSmartPointer& renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::RendererImpl
+	::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -609,7 +609,7 @@ Rendering::ConstTexture2DSmartPointer Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformRenderTargetSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstRenderTargetSmartPointer& renderTarget)
+	::GetResource(const ConstRenderTargetSharedPtr& renderTarget)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -617,7 +617,7 @@ Rendering::RendererImpl::PlatformRenderTargetSharedPtr Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstVertexShaderSmartPointer& vertexShader)
+	::Bind(const ConstVertexShaderSharedPtr& vertexShader)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -625,7 +625,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstVertexShaderSmartPointer& vertexShader)
+	::Unbind(const ConstVertexShaderSharedPtr& vertexShader)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -633,7 +633,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstVertexShaderSmartPointer& vertexShader, const ConstShaderParametersSmartPointer& parameters)
+	::Enable(const ConstVertexShaderSharedPtr& vertexShader, const ConstShaderParametersSharedPtr& parameters)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -641,7 +641,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstVertexShaderSmartPointer& vertexShader, const ConstShaderParametersSmartPointer& parameters)
+	::Disable(const ConstVertexShaderSharedPtr& vertexShader, const ConstShaderParametersSharedPtr& parameters)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -649,7 +649,7 @@ void Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformVertexShaderSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstVertexShaderSmartPointer& vertexShader)
+	::GetResource(const ConstVertexShaderSharedPtr& vertexShader)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -657,7 +657,7 @@ Rendering::RendererImpl::PlatformVertexShaderSharedPtr Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Bind(const ConstPixelShaderSmartPointer& pixelShader)
+	::Bind(const ConstPixelShaderSharedPtr& pixelShader)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -665,7 +665,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Unbind(const ConstPixelShaderSmartPointer& pixelShader)
+	::Unbind(const ConstPixelShaderSharedPtr& pixelShader)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -673,7 +673,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Enable(const ConstPixelShaderSmartPointer& pixelShader, const ConstShaderParametersSmartPointer& parameters)
+	::Enable(const ConstPixelShaderSharedPtr& pixelShader, const ConstShaderParametersSharedPtr& parameters)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -681,7 +681,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Disable(const ConstPixelShaderSmartPointer& pixelShader, const ConstShaderParametersSmartPointer& parameters)
+	::Disable(const ConstPixelShaderSharedPtr& pixelShader, const ConstShaderParametersSharedPtr& parameters)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -689,14 +689,14 @@ void Rendering::RendererImpl
 }
 
 Rendering::RendererImpl::PlatformPixelShaderSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstPixelShaderSmartPointer& pixelShader)
+	::GetResource(const ConstPixelShaderSharedPtr& pixelShader)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	return m_PixelShaderManagement->GetResource(pixelShader);
 }
 
-const Rendering::ConstAlphaStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstAlphaStateSharedPtr Rendering::RendererImpl
 	::GetAlphaState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -704,7 +704,7 @@ const Rendering::ConstAlphaStateSmartPointer Rendering::RendererImpl
 	return m_AlphaState;
 }
 
-const Rendering::ConstCullStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstCullStateSharedPtr Rendering::RendererImpl
 	::GetCullState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -712,7 +712,7 @@ const Rendering::ConstCullStateSmartPointer Rendering::RendererImpl
 	return m_CullState;
 }
 
-const Rendering::ConstDepthStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstDepthStateSharedPtr Rendering::RendererImpl
 	::GetDepthState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -720,7 +720,7 @@ const Rendering::ConstDepthStateSmartPointer Rendering::RendererImpl
 	return m_DepthState;
 }
 
-const Rendering::ConstOffsetStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstOffsetStateSharedPtr Rendering::RendererImpl
 	::GetOffsetState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -728,7 +728,7 @@ const Rendering::ConstOffsetStateSmartPointer Rendering::RendererImpl
 	return m_OffsetState;
 }
 
-const Rendering::ConstStencilStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstStencilStateSharedPtr Rendering::RendererImpl
 	::GetStencilState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -736,7 +736,7 @@ const Rendering::ConstStencilStateSmartPointer Rendering::RendererImpl
 	return m_StencilState;
 }
 
-const Rendering::ConstWireStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstWireStateSharedPtr Rendering::RendererImpl
 	::GetWireState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -744,7 +744,7 @@ const Rendering::ConstWireStateSmartPointer Rendering::RendererImpl
 	return m_WireState;
 }
 
-const Rendering::ConstAlphaStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstAlphaStateSharedPtr Rendering::RendererImpl
 	::GetOverrideAlphaState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -752,7 +752,7 @@ const Rendering::ConstAlphaStateSmartPointer Rendering::RendererImpl
 	return m_OverrideAlphaState;
 }
 
-const Rendering::ConstCullStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstCullStateSharedPtr Rendering::RendererImpl
 	::GetOverrideCullState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -760,7 +760,7 @@ const Rendering::ConstCullStateSmartPointer Rendering::RendererImpl
 	return m_OverrideCullState;
 }
 
-const Rendering::ConstDepthStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstDepthStateSharedPtr Rendering::RendererImpl
 	::GetOverrideDepthState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -768,7 +768,7 @@ const Rendering::ConstDepthStateSmartPointer Rendering::RendererImpl
 	return m_OverrideDepthState;
 }
 
-const Rendering::ConstOffsetStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstOffsetStateSharedPtr Rendering::RendererImpl
 	::GetOverrideOffsetState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -776,7 +776,7 @@ const Rendering::ConstOffsetStateSmartPointer Rendering::RendererImpl
 	return m_OverrideOffsetState;
 }
 
-const Rendering::ConstStencilStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstStencilStateSharedPtr Rendering::RendererImpl
 	::GetOverrideStencilState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -784,7 +784,7 @@ const Rendering::ConstStencilStateSmartPointer Rendering::RendererImpl
 	return m_OverrideStencilState;
 }
 
-const Rendering::ConstWireStateSmartPointer Rendering::RendererImpl
+const Rendering::ConstWireStateSharedPtr Rendering::RendererImpl
 	::GetOverrideWireState() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -793,7 +793,7 @@ const Rendering::ConstWireStateSmartPointer Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::SetOverrideAlphaState(const ConstAlphaStateSmartPointer& alphaState)
+	::SetOverrideAlphaState(const ConstAlphaStateSharedPtr& alphaState)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -809,7 +809,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::SetOverrideCullState(const ConstCullStateSmartPointer& cullState)
+	::SetOverrideCullState(const ConstCullStateSharedPtr& cullState)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -825,7 +825,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::SetOverrideDepthState(const ConstDepthStateSmartPointer& depthState)
+	::SetOverrideDepthState(const ConstDepthStateSharedPtr& depthState)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -841,7 +841,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::SetOverrideOffsetState(const ConstOffsetStateSmartPointer& offsetState)
+	::SetOverrideOffsetState(const ConstOffsetStateSharedPtr& offsetState)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -857,7 +857,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::SetOverrideStencilState(const ConstStencilStateSmartPointer& stencilState)
+	::SetOverrideStencilState(const ConstStencilStateSharedPtr& stencilState)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -873,7 +873,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::SetOverrideWireState(const ConstWireStateSmartPointer& wireState)
+	::SetOverrideWireState(const ConstWireStateSharedPtr& wireState)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -905,14 +905,14 @@ bool Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::SetCamera(const CameraSmartPointer& camera)
+	::SetCamera(const CameraSharedPtr& camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_Camera = camera;
 }
 
-const Rendering::ConstCameraSmartPointer Rendering::RendererImpl
+const Rendering::ConstCameraSharedPtr Rendering::RendererImpl
 	::GetCamera() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -920,7 +920,7 @@ const Rendering::ConstCameraSmartPointer Rendering::RendererImpl
 	return m_Camera;
 }
 
-const Rendering::CameraSmartPointer Rendering::RendererImpl
+const Rendering::CameraSharedPtr Rendering::RendererImpl
 	::GetCamera()
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -1131,7 +1131,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Draw(VisibleSet& visibleSet, GlobalEffectSmartPointer globalEffect)
+	::Draw(VisibleSet& visibleSet, GlobalEffectSharedPtr globalEffect)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -1154,7 +1154,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Draw(VisualSmartPointer visual)
+	::Draw(VisualSharedPtr visual)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -1164,7 +1164,7 @@ void Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::Draw(const VisualSmartPointer& visual, VisualEffectInstanceSmartPointer instance)
+	::Draw(const VisualSharedPtr& visual, VisualEffectInstanceSharedPtr instance)
 {	 
 	RENDERING_ASSERTION_0(visual != nullptr , "visual对象必须存在。\n");	
 	RENDERING_ASSERTION_0(instance != nullptr, "visual对象必须具有effect实例。\n");
@@ -1234,7 +1234,7 @@ void Rendering::RendererImpl
 } 
 
 bool Rendering::RendererImpl
-	::InTexture2DMap(const ConstTexture2DSmartPointer& texture)
+	::InTexture2DMap(const ConstTexture2DSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -1242,7 +1242,7 @@ bool Rendering::RendererImpl
 }
 
 void Rendering::RendererImpl
-	::InsertInTexture2DMap(const ConstTexture2DSmartPointer& texture, const PlatformTexture2DSharedPtr& platformTexture)
+	::InsertInTexture2DMap(const ConstTexture2DSharedPtr& texture, const PlatformTexture2DSharedPtr& platformTexture)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

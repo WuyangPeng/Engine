@@ -16,14 +16,14 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::string;
 using std::vector;
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26489)
@@ -153,7 +153,7 @@ int Rendering::RenderTargetImpl
     return m_ColorTextures[0]->GetHeight();
 }
 
-Rendering::RenderTargetImpl::ConstTexture2DSmartPointer Rendering::RenderTargetImpl
+Rendering::RenderTargetImpl::ConstTexture2DSharedPtr Rendering::RenderTargetImpl
     ::GetColorTexture (int index) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
@@ -162,7 +162,7 @@ Rendering::RenderTargetImpl::ConstTexture2DSmartPointer Rendering::RenderTargetI
 	return m_ColorTextures[index] ;
 }
 
-Rendering::RenderTargetImpl::ConstTexture2DSmartPointer Rendering::RenderTargetImpl
+Rendering::RenderTargetImpl::ConstTexture2DSharedPtr Rendering::RenderTargetImpl
        ::GetDepthStencilTexture () const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
@@ -184,11 +184,11 @@ bool Rendering::RenderTargetImpl ::HasDepthStencil() const noexcept
     return m_DepthStencilTexture != nullptr;
 }
 
-const CoreTools::ObjectSmartPointer Rendering::RenderTargetImpl
+const CoreTools::ObjectSharedPtr Rendering::RenderTargetImpl
     ::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
 		if (m_ColorTextures[i]->GetName() == name)
@@ -202,15 +202,15 @@ const CoreTools::ObjectSmartPointer Rendering::RenderTargetImpl
 		return m_DepthStencilTexture;
 	}        
     
-    return CoreTools::ObjectSmartPointer();
+    return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::RenderTargetImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::RenderTargetImpl
     ::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DoNothing();
-    vector<CoreTools::ObjectSmartPointer> objects;
+    CoreTools::DisableNoexcept();
+    vector<CoreTools::ObjectSharedPtr> objects;
     
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
@@ -228,11 +228,11 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::RenderTargetImpl
     return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::RenderTargetImpl
+const CoreTools::ConstObjectSharedPtr Rendering::RenderTargetImpl
     ::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     for (unsigned i = 0; i < m_ColorTextures.size(); ++i)
     {
 		if (m_ColorTextures[i]->GetName() == name)
@@ -246,15 +246,15 @@ const CoreTools::ConstObjectSmartPointer Rendering::RenderTargetImpl
 		return m_DepthStencilTexture ;
 	}        
     
-    return CoreTools::ConstObjectSmartPointer();
+    return CoreTools::ConstObjectSharedPtr();
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::RenderTargetImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::RenderTargetImpl
     ::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DoNothing();
-    vector<CoreTools::ConstObjectSmartPointer> objects;
+    CoreTools::DisableNoexcept();
+    vector<CoreTools::ConstObjectSharedPtr> objects;
     
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
@@ -290,50 +290,48 @@ void Rendering::RenderTargetImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_4;
     
- //   target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
- //   target.WriteSmartPointer(m_DepthStencilTexture);
+ //   target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
+ //   target.WriteSharedPtr(m_DepthStencilTexture);
     target->Write(m_HasMipmaps);
 }
 
-void Rendering::RenderTargetImpl
-    ::Load (BufferSource& source)
+void Rendering::RenderTargetImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_4;
     
     auto numTargets = 0;
     
-    source.Read(numTargets);
+    source->Read(numTargets);
     m_ColorTextures.resize(numTargets);
     
-    //source.ReadSmartPointer(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
-   // source.ReadSmartPointer(m_DepthStencilTexture);
-    m_HasMipmaps = source.ReadBool();
+    //source.ReadSharedPtr(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
+   // source.ReadSharedPtr(m_DepthStencilTexture);
+    m_HasMipmaps = source->ReadBool();
 }
 
-void Rendering::RenderTargetImpl
-    ::Link (ObjectLink& source)
+void Rendering::RenderTargetImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     source;
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
-        //source.ResolveObjectSmartPointerLink(m_ColorTextures[i]);
+        //source.ResolveObjectSharedPtrLink(m_ColorTextures[i]);
     }
-   // source.ResolveObjectSmartPointerLink(m_DepthStencilTexture);
+   // source.ResolveObjectSharedPtrLink(m_DepthStencilTexture);
 }
 
 void Rendering::RenderTargetImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     target;
     for (auto i = 0u; i < m_ColorTextures.size(); ++i)
     {
-       // target.RegisterSmartPointer(m_ColorTextures[i]);
+       // target.RegisterSharedPtr(m_ColorTextures[i]);
     }
     
-   // target.RegisterSmartPointer(m_DepthStencilTexture);
+   // target.RegisterSharedPtr(m_DepthStencilTexture);
 }
 
  #include STSTEM_WARNING_POP

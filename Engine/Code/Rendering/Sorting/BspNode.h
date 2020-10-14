@@ -38,22 +38,22 @@ namespace Rendering
 
 		// These methods should be used instead of the attach/detach methods in
 		// the Node base class.
-		SpatialSmartPointer AttachPositiveChild(SpatialSmartPointer child);
-		SpatialSmartPointer AttachCoplanarChild(SpatialSmartPointer child);
-		SpatialSmartPointer AttachNegativeChild(SpatialSmartPointer child);
-		 SpatialSmartPointer DetachPositiveChild();
-		 SpatialSmartPointer DetachCoplanarChild();
-		 SpatialSmartPointer DetachNegativeChild();
-		 SpatialSmartPointer GetPositiveChild();
-		 SpatialSmartPointer GetCoplanarChild();
-		 SpatialSmartPointer GetNegativeChild();
+		SpatialSharedPtr AttachPositiveChild(SpatialSharedPtr child);
+		SpatialSharedPtr AttachCoplanarChild(SpatialSharedPtr child);
+		SpatialSharedPtr AttachNegativeChild(SpatialSharedPtr child);
+		 SpatialSharedPtr DetachPositiveChild();
+		 SpatialSharedPtr DetachCoplanarChild();
+		 SpatialSharedPtr DetachNegativeChild();
+		 SpatialSharedPtr GetPositiveChild();
+		 SpatialSharedPtr GetCoplanarChild();
+		 SpatialSharedPtr GetNegativeChild();
 
 		// Member access.
 		 Mathematics::FloatPlane ModelPlane;
                  const Mathematics::FloatPlane& GetWorldPlane() const noexcept;
 
 		// Determine the portion of the scene that contains the point.
-		 SpatialSmartPointer GetContainingNode(const Mathematics::FloatAPoint& point);
+		 SpatialSharedPtr GetContainingNode(const Mathematics::FloatAPoint& point);
                  ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		// Support for the geometric update. 
@@ -68,7 +68,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(BspNode);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Seventh, BspNode);
+	CORE_TOOLS_SHARED_PTR_DECLARE( BspNode);
 	#include STSTEM_WARNING_POP
 }
 

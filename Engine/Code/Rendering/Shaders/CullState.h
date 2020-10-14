@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 
 namespace CoreTools
@@ -26,21 +26,13 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE CullState : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CullState);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(CullState, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        CullState();
-        ~CullState();
-
-        #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        CullState(CullState&&) noexcept = default;
-        CullState& operator=(CullState&&) noexcept = default;
-
-        #include STSTEM_WARNING_POP
+        CullState(); 
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -62,7 +54,7 @@ namespace Rendering
     CORE_TOOLS_STREAM_REGISTER(CullState);
 #include STSTEM_WARNING_POP
 
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, CullState);
+    CORE_TOOLS_SHARED_PTR_DECLARE( CullState);
 }
 
 #endif  // RENDERING_SHADERS_CULL_STATE_H

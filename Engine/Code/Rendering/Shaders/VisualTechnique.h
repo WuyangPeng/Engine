@@ -11,7 +11,7 @@
 
 #include "VisualPass.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 
 RENDERING_EXPORT_SHARED_PTR(VisualTechniqueImpl);
@@ -27,20 +27,13 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VisualTechnique : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualTechnique);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualTechnique, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        VisualTechnique();
-        ~VisualTechnique();
-
-          #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        VisualTechnique(VisualTechnique&&) noexcept = default;
-        VisualTechnique& operator=(VisualTechnique&&) noexcept = default;
-         #include STSTEM_WARNING_POP
+        VisualTechnique(); 
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -48,20 +41,20 @@ namespace Rendering
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
         // 支持延迟构造。函数追加新的pass到数组的末尾。
-        void InsertPass(const VisualPassSmartPointer& pass);
+        void InsertPass(const VisualPassSharedPtr& pass);
 
         int GetNumPasses() const;
-        const ConstVisualPassSmartPointer GetPass(int passIndex) const;
+        const ConstVisualPassSharedPtr GetPass(int passIndex) const;
 
         // 访问pass的组件。
-        const ConstVertexShaderSmartPointer GetVertexShader(int passIndex) const;
-        const ConstPixelShaderSmartPointer GetPixelShader(int passIndex) const;
-        const ConstAlphaStateSmartPointer GetAlphaState(int passIndex) const;
-        const ConstCullStateSmartPointer GetCullState(int passIndex) const;
-        const ConstDepthStateSmartPointer GetDepthState(int passIndex) const;
-        const ConstOffsetStateSmartPointer GetOffsetState(int passIndex) const;
-        const ConstStencilStateSmartPointer GetStencilState(int passIndex) const;
-        const ConstWireStateSmartPointer GetWireState(int passIndex) const;
+        const ConstVertexShaderSharedPtr GetVertexShader(int passIndex) const;
+        const ConstPixelShaderSharedPtr GetPixelShader(int passIndex) const;
+        const ConstAlphaStateSharedPtr GetAlphaState(int passIndex) const;
+        const ConstCullStateSharedPtr GetCullState(int passIndex) const;
+        const ConstDepthStateSharedPtr GetDepthState(int passIndex) const;
+        const ConstOffsetStateSharedPtr GetOffsetState(int passIndex) const;
+        const ConstStencilStateSharedPtr GetStencilState(int passIndex) const;
+        const ConstWireStateSharedPtr GetWireState(int passIndex) const;
 
         void SaveVisualPass(WriteFileManager& manager) const;
         void LoadVisualPass(ReadFileManager& manager);
@@ -73,7 +66,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(VisualTechnique);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, VisualTechnique);
+    CORE_TOOLS_SHARED_PTR_DECLARE( VisualTechnique);
 }
 
 #endif  // RENDERING_SHADERS_VISUAL_TECHNIQUE_H

@@ -9,10 +9,11 @@
 #include "DefaultEffect.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -32,7 +33,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, DefaultEffect);
 Rendering::DefaultEffect
 	::DefaultEffect()
 {
-    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>( "Wm5.Default", 1, 1, 1, 0 ) };
+    VertexShaderSharedPtr vshader{ std::make_shared < VertexShader>( "Wm5.Default", 1, 1, 1, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float, ShaderFlags::VariableSemantic::Position);
     vshader->SetConstant(0, "PVWMatrix", 4);
@@ -50,7 +51,7 @@ Rendering::DefaultEffect
 	}
 	
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.Default",  1, 1, 0, 0 ) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.Default",  1, 1, 0, 0 ) };
     pshader->SetInput(0, "vertexTCoord",  ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0  );
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0 );
 
@@ -61,17 +62,17 @@ Rendering::DefaultEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{ std::make_shared < VisualPass>() };
+	VisualPassSharedPtr pass{ std::make_shared < VisualPass>() };
     pass->SetVertexShader(vshader);
     pass->SetPixelShader(pshader);
-    pass->SetAlphaState(AlphaStateSmartPointer{ std::make_shared<AlphaState>() });
-    pass->SetCullState(CullStateSmartPointer{ std::make_shared<CullState>() });
-    pass->SetDepthState(DepthStateSmartPointer{ std::make_shared<DepthState>() });
-    pass->SetOffsetState(OffsetStateSmartPointer{ std::make_shared<OffsetState>() });
-    pass->SetStencilState(StencilStateSmartPointer{ std::make_shared<StencilState>() });
-    pass->SetWireState(WireStateSmartPointer{ std::make_shared<WireState>() });
+    pass->SetAlphaState(AlphaStateSharedPtr{ std::make_shared<AlphaState>() });
+    pass->SetCullState(CullStateSharedPtr{ std::make_shared<CullState>() });
+    pass->SetDepthState(DepthStateSharedPtr{ std::make_shared<DepthState>() });
+    pass->SetOffsetState(OffsetStateSharedPtr{ std::make_shared<OffsetState>() });
+    pass->SetStencilState(StencilStateSharedPtr{ std::make_shared<StencilState>() });
+    pass->SetWireState(WireStateSharedPtr{ std::make_shared<WireState>() });
 
-	VisualTechniqueSmartPointer technique{ std::make_shared<VisualTechnique>() };
+	VisualTechniqueSharedPtr technique{ std::make_shared<VisualTechnique>() };
     technique->InsertPass(pass);
     InsertTechnique(technique);
 }
@@ -80,8 +81,8 @@ Rendering::DefaultEffect
 Rendering::VisualEffectInstance* Rendering::DefaultEffect
 	::CreateInstance() const
 {
-	VisualEffectInstance* instance = CoreTools::New0<VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared< ProjectionViewMatrixConstant>()));
+	VisualEffectInstance* instance = CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+	instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared< ProjectionViewMatrixConstant>()));
     return instance;
 }
 
@@ -95,7 +96,7 @@ Rendering::DefaultEffect
 }
 
 void Rendering::DefaultEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -105,7 +106,7 @@ void Rendering::DefaultEffect
 }
 
 void Rendering::DefaultEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	ParentType::Link(source);
 }

@@ -10,20 +10,20 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointer.h"
+
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using std::string;
 using std::vector;
 #include STSTEM_WARNING_PUSH 
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-Rendering::CameraNodeImpl ::CameraNodeImpl(const CameraSmartPointer& camera) noexcept
+Rendering::CameraNodeImpl ::CameraNodeImpl(const CameraSharedPtr& camera) noexcept
     : m_Camera{ camera }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -31,14 +31,14 @@ Rendering::CameraNodeImpl ::CameraNodeImpl(const CameraSmartPointer& camera) noe
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, CameraNodeImpl)
 
-void Rendering::CameraNodeImpl ::SetCamera(const CameraSmartPointer& camera) noexcept
+void Rendering::CameraNodeImpl ::SetCamera(const CameraSharedPtr& camera) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_Camera = camera;
 }
 
-const Rendering::ConstCameraSmartPointer Rendering::CameraNodeImpl ::GetCamera() const noexcept
+const Rendering::ConstCameraSharedPtr Rendering::CameraNodeImpl ::GetCamera() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -69,7 +69,7 @@ void Rendering::CameraNodeImpl ::SetFrame(const APoint& position, const AVector&
     m_Camera->SetFrame(position, directionVector, upVector, rightVector);
 }
 
-const CoreTools::ObjectSmartPointer Rendering::CameraNodeImpl ::GetObjectByName(const string& name)
+const CoreTools::ObjectSharedPtr Rendering::CameraNodeImpl ::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -77,7 +77,7 @@ const CoreTools::ObjectSmartPointer Rendering::CameraNodeImpl ::GetObjectByName(
     return m_Camera->GetObjectByName(name);
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::CameraNodeImpl ::GetAllObjectsByName(const string& name)
+const vector<CoreTools::ObjectSharedPtr> Rendering::CameraNodeImpl ::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -85,7 +85,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::CameraNodeImpl ::GetAllOb
     return m_Camera->GetAllObjectsByName(name);
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::CameraNodeImpl ::GetConstObjectByName(const string& name) const
+const CoreTools::ConstObjectSharedPtr Rendering::CameraNodeImpl ::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -93,7 +93,7 @@ const CoreTools::ConstObjectSmartPointer Rendering::CameraNodeImpl ::GetConstObj
     return m_Camera->GetConstObjectByName(name);
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::CameraNodeImpl ::GetAllConstObjectsByName(const string& name) const
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNodeImpl ::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -123,24 +123,24 @@ void Rendering::CameraNodeImpl ::Save(const CoreTools::BufferTargetSharedPtr& ta
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
     target;
-    CoreTools::DoNothing();
-    //target.WriteSmartPointer(m_Camera);
+    CoreTools::DisableNoexcept();
+    //target.WriteSharedPtr(m_Camera);
 }
 
-void Rendering::CameraNodeImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::CameraNodeImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
-    CoreTools::DoNothing();
-    // source.ResolveObjectSmartPointerLink(m_Camera);
+    CoreTools::DisableNoexcept();
+    // source.ResolveObjectSharedPtrLink(m_Camera);
 }
 
-void Rendering::CameraNodeImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::CameraNodeImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
-    CoreTools::DoNothing();
-    // source.ReadSmartPointer(m_Camera);
+    CoreTools::DisableNoexcept();
+    // source.ReadSharedPtr(m_Camera);
 }
 
 bool Rendering::CameraNodeImpl ::IsNullPtr() const noexcept

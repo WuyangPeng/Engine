@@ -8,7 +8,7 @@
 
 #include "PixelScreenImpl.h"
 #include "PixelScreenDrawLine.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Rendering/Renderers/Renderer.h"
@@ -32,7 +32,7 @@ Framework::PixelScreenImpl
 bool Framework::PixelScreenImpl
 	::IsValid() const noexcept
 {
-	return CoreTools::Noexcept(*this,&ClassType::IsScreenSizeValid,false);
+    return CoreTools::Noexcept<bool, ClassType>(*this, &ClassType::IsScreenSizeValid, false);
 }
 
 bool Framework::PixelScreenImpl

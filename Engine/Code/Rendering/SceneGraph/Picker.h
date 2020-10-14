@@ -25,7 +25,7 @@ namespace Rendering
 		using AVector = Mathematics::AVector<float>;
 
 	public:
-		Picker(const ConstSpatialSmartPointer& scene, const APoint& origin, const AVector& direction, float tMin, float tMax);
+		Picker(const ConstSpatialSharedPtr& scene, const APoint& origin, const AVector& direction, float tMin, float tMax);
 
 		CLASS_INVARIANT_DECLARE;
 

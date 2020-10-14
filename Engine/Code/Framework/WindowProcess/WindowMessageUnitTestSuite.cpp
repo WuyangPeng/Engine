@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "System/Helper/EnumCast.h"
 
 using std::string;
 using std::make_shared;

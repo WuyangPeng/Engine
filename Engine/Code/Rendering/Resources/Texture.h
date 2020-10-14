@@ -13,8 +13,8 @@
 #include "Flags/TextureFlags.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "CoreTools/ObjectSystems/Object.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointer.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointer.h"
+
+
 
 namespace CoreTools
 {
@@ -38,8 +38,8 @@ namespace Rendering
 		using ReadFileManager = CoreTools::ReadFileManager;
 		using FileBuffer = CoreTools::FileBuffer;
         using FileBufferPtr = std::shared_ptr<FileBuffer>;
-		using TextureSmartPointer = std::shared_ptr<ClassType>;
-		using ConstTextureSmartPointer = std::shared_ptr<const ClassType>;
+		using TextureSharedPtr = std::shared_ptr<ClassType>;
+		using ConstTextureSharedPtr = std::shared_ptr<const ClassType>;
 
  	public:
         Texture ();
@@ -77,13 +77,13 @@ namespace Rendering
      	virtual void SaveToFile (WriteFileManager& outFile) const = 0;
 		virtual void ReadFromFile (ReadFileManager& inFile) = 0;
 
-		virtual TextureSmartPointer Clone() const = 0;
+		virtual TextureSharedPtr Clone() const = 0;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)     
 	CORE_TOOLS_STREAM_REGISTER(Texture);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, Texture); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( Texture); 
 }
 
 #endif // RENDERING_RESOURCES_TEXTURE_H

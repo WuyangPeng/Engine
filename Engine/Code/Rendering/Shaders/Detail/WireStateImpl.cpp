@@ -27,11 +27,11 @@ Rendering::WireStateImpl
 CLASS_INVARIANT_STUB_DEFINE(Rendering, WireStateImpl)
 
 void Rendering::WireStateImpl
-	::Load(BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source.ReadBool();
+	m_Enabled = source->ReadBool();
 }
 
 void Rendering::WireStateImpl

@@ -17,11 +17,11 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26451)
@@ -83,7 +83,7 @@ void Rendering::BufferImpl
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(numElements <= boost::numeric_cast<int>(m_Data.size()) / m_ElementSize, "设置的长度溢出！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	m_NumElements = numElements;
 }
@@ -119,19 +119,19 @@ const char* Rendering::BufferImpl
 }
 
 void Rendering::BufferImpl
-	::Load( CoreTools::BufferSource& source )
+	::Load( const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_NumElements);
-	source.Read(m_ElementSize);
-	source.ReadEnum(m_Usage);
+	source->Read(m_NumElements);
+	source->Read(m_ElementSize);
+	source->ReadEnum(m_Usage);
 
 	auto size = 0;
-	source.Read(size);
+	source->Read(size);
 	m_Data.resize(size);
 
-	source.Read(boost::numeric_cast<int>(m_Data.size()), &m_Data[0]);
+	source->Read(boost::numeric_cast<int>(m_Data.size()), &m_Data[0]);
 }
 
 void Rendering::BufferImpl
@@ -175,7 +175,7 @@ void Rendering::BufferImpl
 }
 
 void Rendering::BufferImpl
-	::SaveBufferDataToFile(WriteFileManager& outFile,const ConstVertexFormatSmartPointer& vertexformat) const 
+	::SaveBufferDataToFile(WriteFileManager& outFile,const ConstVertexFormatSharedPtr& vertexformat) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -243,7 +243,7 @@ void Rendering::BufferImpl
 }
 
 void Rendering::BufferImpl
-	::ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSmartPointer& vertexformat)
+	::ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSharedPtr& vertexformat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

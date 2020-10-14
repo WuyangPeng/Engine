@@ -8,7 +8,7 @@
 
 #include "CurveSegment.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Base/MathDetail.h"
@@ -128,19 +128,19 @@ Rendering::CurveSegment ::CurveSegment(LoadConstructor value)
 {
 }
 
-void Rendering::CurveSegment ::Load(CoreTools::BufferSource& source)
+void Rendering::CurveSegment ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Object::Load(source);
 
-    source.Read(mUMin);
-    source.Read(mUMax);
+    source->Read(mUMin);
+    source->Read(mUMax);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::CurveSegment ::Link(CoreTools::ObjectLink& source)
+void Rendering::CurveSegment ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     Object::Link(source);
 }

@@ -34,16 +34,16 @@ namespace Rendering
 		 
        // 顶点格式管理。顶点格式对象必须是已经分配，
        // 它的属性和跨距由应用程序代码进行设置。
-       void Bind (ConstVertexFormatSmartPointer vertexFormat); 
-       void Unbind (ConstVertexFormatSmartPointer vertexFormat);
+       void Bind (ConstVertexFormatSharedPtr vertexFormat); 
+       void Unbind (ConstVertexFormatSharedPtr vertexFormat);
  
-       void Enable (ConstVertexFormatSmartPointer vertexFormat);
-       void Disable (ConstVertexFormatSmartPointer vertexFormat);
+       void Enable (ConstVertexFormatSharedPtr vertexFormat);
+       void Disable (ConstVertexFormatSharedPtr vertexFormat);
 
-       PlatformVertexFormatSharedPtr GetResource (ConstVertexFormatSmartPointer vertexFormat);
+       PlatformVertexFormatSharedPtr GetResource (ConstVertexFormatSharedPtr vertexFormat);
 
 	private:
-       using VertexFormatMap = std::map<ConstVertexFormatSmartPointer, PlatformVertexFormatSharedPtr>;
+       using VertexFormatMap = std::map<ConstVertexFormatSharedPtr, PlatformVertexFormatSharedPtr>;
 
 	private:
 		std::weak_ptr<Renderer> m_Renderer;

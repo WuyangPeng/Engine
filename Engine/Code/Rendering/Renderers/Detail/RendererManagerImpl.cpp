@@ -9,11 +9,11 @@
 #include "RendererManagerImpl.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+ 
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/MemoryTools/SmartPointerManager.h"
 
 using std::string;
 
@@ -61,7 +61,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexFormat))
 	{
-		ConstVertexFormatSmartPointer pointer{ vertexFormat };
+		ConstVertexFormatSharedPtr pointer{ vertexFormat };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{	
@@ -82,7 +82,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexBuffer))
 	{
-		ConstVertexBufferSmartPointer pointer{ vertexBuffer };
+		ConstVertexBufferSharedPtr pointer{ vertexBuffer };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -102,7 +102,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(indexBuffer))
 	{
-		ConstIndexBufferSmartPointer pointer{ indexBuffer };
+		ConstIndexBufferSharedPtr pointer{ indexBuffer };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin(); iter != end; ++iter)
 		{
@@ -122,7 +122,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture1DSmartPointer pointer{ texture };
+		ConstTexture1DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -142,7 +142,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture2DSmartPointer pointer{ texture };
+		ConstTexture2DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -162,7 +162,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture3DSmartPointer pointer{ texture };
+		ConstTexture3DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -182,7 +182,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTextureCubeSmartPointer pointer{ texture };
+		ConstTextureCubeSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -202,7 +202,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(renderTarget))
 	{
-		ConstRenderTargetSmartPointer pointer{ renderTarget };
+		ConstRenderTargetSharedPtr pointer{ renderTarget };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -219,7 +219,7 @@ void Rendering::RendererManagerImpl
 	::BindAll( VertexShaderConstPtr vertexShader )
 {
 	RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
    // for (auto iter = m_Renderers.begin(),end = m_Renderers.end();iter != end; ++iter)
     {
@@ -237,7 +237,7 @@ void Rendering::RendererManagerImpl
 	::BindAll( PixelShaderConstPtr pixelShader )
 {
 	RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     //    for (auto iter = m_Renderers.begin(),end = m_Renderers.end();iter != end; ++iter)
     {
 		pixelShader;
@@ -255,7 +255,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexFormat))
 	{
-		ConstVertexFormatSmartPointer pointer{ vertexFormat };
+		ConstVertexFormatSharedPtr pointer{ vertexFormat };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -275,7 +275,7 @@ void Rendering::RendererManagerImpl
 	RENDERING_CLASS_IS_VALID_9;
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexBuffer))
 	{
-		ConstVertexBufferSmartPointer pointer{ vertexBuffer };
+		ConstVertexBufferSharedPtr pointer{ vertexBuffer };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ;iter != end; ++iter)
 		{		
@@ -295,7 +295,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(indexBuffer))
 	{
-		ConstIndexBufferSmartPointer pointer{ indexBuffer };
+		ConstIndexBufferSharedPtr pointer{ indexBuffer };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -315,7 +315,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture1DSmartPointer pointer{ texture };
+		ConstTexture1DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -335,7 +335,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture2DSmartPointer pointer{ texture };
+		ConstTexture2DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -355,7 +355,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture3DSmartPointer pointer{ texture };
+		ConstTexture3DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin(); iter != end; ++iter)
 		{
@@ -375,7 +375,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTextureCubeSmartPointer pointer{ texture };
+		ConstTextureCubeSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -395,7 +395,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(renderTarget))
 	{
-		ConstRenderTargetSmartPointer pointer{ renderTarget };
+		ConstRenderTargetSharedPtr pointer{ renderTarget };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -412,7 +412,7 @@ void Rendering::RendererManagerImpl
 	::UnbindAll( VertexShaderConstPtr vertexShader )
 {
 	RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     //    for (auto iter = m_Renderers.begin(),end = m_Renderers.end();iter != end; ++iter)
     {
 		vertexShader;
@@ -427,7 +427,7 @@ void Rendering::RendererManagerImpl
 	::UnbindAll( PixelShaderConstPtr pixelShader )
 {
 	RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     //    for (auto iter = m_Renderers.begin(),end = m_Renderers.end();iter != end; ++iter)
     {
 		pixelShader;
@@ -445,7 +445,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexBuffer))
 	{
-		ConstVertexBufferSmartPointer pointer{ vertexBuffer };
+		ConstVertexBufferSharedPtr pointer{ vertexBuffer };
 
 		 const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
@@ -465,7 +465,7 @@ void Rendering::RendererManagerImpl
 	RENDERING_CLASS_IS_VALID_9;
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(indexBuffer))
 	{
-		ConstIndexBufferSmartPointer pointer{ indexBuffer };
+		ConstIndexBufferSharedPtr pointer{ indexBuffer };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -485,7 +485,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture1DSmartPointer pointer{ texture };
+		ConstTexture1DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -505,7 +505,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture2DSmartPointer pointer{ texture };
+		ConstTexture2DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -525,7 +525,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTexture3DSmartPointer pointer{ texture };
+		ConstTexture3DSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{
@@ -545,7 +545,7 @@ void Rendering::RendererManagerImpl
 
 	if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
 	{
-		ConstTextureCubeSmartPointer pointer{ texture };
+		ConstTextureCubeSharedPtr pointer{ texture };
             const auto end = m_Renderers.end();
 		for (auto iter = m_Renderers.begin() ; iter != end; ++iter)
 		{

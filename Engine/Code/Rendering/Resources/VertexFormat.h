@@ -29,34 +29,27 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VertexFormat : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VertexFormat);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VertexFormat, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
-        using VertexFormatSmartPointer = std::shared_ptr<ClassType>;
-        using ConstVertexFormatSmartPointer = std::shared_ptr<const ClassType>;
+        using VertexFormatSharedPtr = std::shared_ptr<ClassType>;
+        using ConstVertexFormatSharedPtr = std::shared_ptr<const ClassType>;
         using AttributeType = VertexFormatFlags::AttributeType;
         using AttributeUsage = VertexFormatFlags::AttributeUsage;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
 
-    public:
-        ~VertexFormat();
-
-        #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        VertexFormat(VertexFormat&&) = default;
-        VertexFormat& operator=(VertexFormat&&) = default;
-        #include STSTEM_WARNING_POP
+    public:        
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VertexFormat)
         // 便利函数用于创建一个顶点格式通过指定它的所有属性。
         // 现在这个工作只有一个通用的流索引为零(流索引尚未实现任何数值)。
-        static VertexFormatSmartPointer Create(const std::vector<VertexFormatType> triple);
+        static VertexFormatSharedPtr Create(const std::vector<VertexFormatType> triple);
 
-        static VertexFormatSmartPointer Create(const std::vector<VertexFormatElement> triple);
+        static VertexFormatSharedPtr Create(const std::vector<VertexFormatElement> triple);
 
-        static VertexFormatSmartPointer LoadFromFile(ReadFileManager& manager);
+        static VertexFormatSharedPtr LoadFromFile(ReadFileManager& manager);
 
         // 支持延迟构造。调用构造函数之后，必须通过使用 SetAttribute 'numAttributes'次设置所有属性。
         // 当完成时，调用SetStride，这是一个信号，即构造已完成。然后创建相关的渲染资源。
@@ -93,7 +86,7 @@ namespace Rendering
         void SaveToFile(WriteFileManager& outFile) const;
         void ReadFromFile(ReadFileManager& inFile);
 
-        virtual VertexFormatSmartPointer Clone() const;
+        virtual VertexFormatSharedPtr Clone() const;
 
         void SetStride(int stride);
         ObjectInterfaceSharedPtr CloneObject() const override;
@@ -113,7 +106,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(VertexFormat);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, VertexFormat);
+    CORE_TOOLS_SHARED_PTR_DECLARE( VertexFormat);
 }
 
 #endif  // RENDERING_RESOURCES_VERTEX_FORMAT_H

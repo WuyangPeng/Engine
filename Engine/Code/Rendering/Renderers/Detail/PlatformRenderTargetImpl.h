@@ -37,7 +37,7 @@ namespace Rendering
         // 渲染目标的操作。
         virtual void Enable(Renderer* renderer) = 0;
         virtual void Disable(Renderer* renderer) = 0;
-        virtual ConstTexture2DSmartPointer ReadColor(int index, Renderer* renderer) = 0;
+        virtual ConstTexture2DSharedPtr ReadColor(int index, Renderer* renderer) = 0;
 
         static PlatformRenderTargetPtr Create(Renderer* renderer, const RenderTarget* renderTarget);
 

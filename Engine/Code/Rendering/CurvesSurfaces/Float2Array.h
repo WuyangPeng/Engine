@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Mathematics/Base/Float2.h"
 
@@ -23,20 +23,14 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Float2Array : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Float2Array);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Float2Array, = default);
         using ParentType = Object;
         using Float2 = Mathematics::Float2;
         using Float2Vector = std::vector<Float2>;
 
     public:
         explicit Float2Array(const Float2Vector& data);
-        ~Float2Array() = default;
-
-        #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        Float2Array(Float2Array&&) = default;
-        Float2Array& operator=(Float2Array&&) = default;
-          #include STSTEM_WARNING_POP
+        
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -55,7 +49,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(Float2Array);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, Float2Array);
+    CORE_TOOLS_SHARED_PTR_DECLARE( Float2Array);
 }
 
 #endif  // RENDERING_CURVES_SURFACES_FLOAT2_ARRAY_H

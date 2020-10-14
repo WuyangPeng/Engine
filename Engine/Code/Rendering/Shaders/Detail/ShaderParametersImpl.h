@@ -38,14 +38,14 @@ namespace Rendering
 		using ObjectRegister = CoreTools::ObjectRegister;
 		using ObjectLink = CoreTools::ObjectLink;
 		using Object = CoreTools::Object;
-		using ShaderFloatSmartPointerGather = std::vector<ShaderFloatSmartPointer>;
-		using TextureSmartPointerGather = std::vector<TextureSmartPointer>;
-		using ConstShaderFloatSmartPointerGather = std::vector<ConstShaderFloatSmartPointer>;
-		using ConstTextureSmartPointerGather = std::vector<ConstTextureSmartPointer>;
+		using ShaderFloatSharedPtrGather = std::vector<ShaderFloatSharedPtr>;
+		using TextureSharedPtrGather = std::vector<TextureSharedPtr>;
+		using ConstShaderFloatSharedPtrGather = std::vector<ConstShaderFloatSharedPtr>;
+		using ConstTextureSharedPtrGather = std::vector<ConstTextureSharedPtr>;
 
 	public:
                 ShaderParametersImpl() noexcept;
-		explicit ShaderParametersImpl(const ConstShaderBaseSmartPointer& shader);
+		explicit ShaderParametersImpl(const ConstShaderBaseSharedPtr& shader);
 
 		ShaderParametersImpl(const ShaderParametersImpl& rhs);
 		ShaderParametersImpl& operator=(const ShaderParametersImpl& rhs);
@@ -55,48 +55,48 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 
-		void Load(BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize() const;
-		void Link(ObjectLink& source);
+		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
 		CORE_TOOLS_NAMES_IMPL_DECLARE;
 	
 		int GetNumConstants () const;
 		int GetNumTextures () const;
-		const ConstShaderFloatSmartPointerGather GetConstants() const;
-		const ConstTextureSmartPointerGather GetTextures() const;
+		const ConstShaderFloatSharedPtrGather GetConstants() const;
+		const ConstTextureSharedPtrGather GetTextures() const;
 		
 		// 这些函数设定常理/纹理。
 		// 如果成功，返回值为非负值，并且是到相应的阵列的索引。
 		// 该索引可能会传递到Set*函数具有参数“handle”。
 		// 该机制允许您直接通过索引设置，
 		// 避免与Set*函数出现与参数“const std::string& name”的名字比较。
-		int SetConstant(const std::string& name, const ShaderFloatSmartPointer& shaderFloat);
-		int SetTexture (const std::string& name, const TextureSmartPointer& texture);
+		int SetConstant(const std::string& name, const ShaderFloatSharedPtr& shaderFloat);
+		int SetTexture (const std::string& name, const TextureSharedPtr& texture);
 		
 		// “handle”是上述的Set*函数的返回值。
-		void SetConstant(int handle, const ShaderFloatSmartPointer& shaderFloat);
-		void SetTexture(int handle, const TextureSmartPointer& texture);
+		void SetConstant(int handle, const ShaderFloatSharedPtr& shaderFloat);
+		void SetTexture(int handle, const TextureSharedPtr& texture);
 	
-		const ConstShaderFloatSmartPointer GetConstant(const std::string& name) const;
-		const ConstTextureSmartPointer GetTexture(const std::string& name) const;
+		const ConstShaderFloatSharedPtr GetConstant(const std::string& name) const;
+		const ConstTextureSharedPtr GetTexture(const std::string& name) const;
 		
 		// “handle”是上述的Set*函数的返回值。
-		const ConstShaderFloatSmartPointer GetConstant(int handle) const;
-		const ConstTextureSmartPointer GetTexture(int handle) const;
+		const ConstShaderFloatSharedPtr GetConstant(int handle) const;
+		const ConstTextureSharedPtr GetTexture(int handle) const;
 		
 		// 更新着色器常量在绘制调用期间。
-		void UpdateConstants (const VisualSmartPointer& visual, const CameraSmartPointer& camera);
+		void UpdateConstants (const VisualSharedPtr& visual, const CameraSharedPtr& camera);
 
 	private:
 		void Swap(ShaderParametersImpl& rhs);
 		
 	private:
-		ConstShaderBaseSmartPointer m_Shader;
-		ShaderFloatSmartPointerGather m_Constants;
-		TextureSmartPointerGather m_Textures;
+		ConstShaderBaseSharedPtr m_Shader;
+		ShaderFloatSharedPtrGather m_Constants;
+		TextureSharedPtrGather m_Textures;
 	};
 }
 

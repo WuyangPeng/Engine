@@ -115,113 +115,113 @@ namespace Rendering
 		//          这是推荐更新资源的方式（更新系统内存，然后调用Update）。更新是为渲染调用函数。
 
 		// 顶点格式管理。顶点格式对象必须是已经分配，它的属性和跨距由应用程序代码进行设置。
-		void Bind(const ConstVertexFormatSmartPointer& vertexFormat);
-		void Unbind(const ConstVertexFormatSmartPointer& vertexFormat);
-		void Enable(const ConstVertexFormatSmartPointer& vertexFormat);
-		void Disable(const ConstVertexFormatSmartPointer& vertexFormat);
+		void Bind(const ConstVertexFormatSharedPtr& vertexFormat);
+		void Unbind(const ConstVertexFormatSharedPtr& vertexFormat);
+		void Enable(const ConstVertexFormatSharedPtr& vertexFormat);
+		void Disable(const ConstVertexFormatSharedPtr& vertexFormat);
 
 		// 顶点缓冲区管理。顶点缓冲区对象必须是已经由应用程序代码分配。
-		void Bind(const ConstVertexBufferSmartPointer& vertexBuffer);
-		void Unbind(const ConstVertexBufferSmartPointer& vertexBuffer);
-		void Enable(const ConstVertexBufferSmartPointer& vertexBuffer, int streamIndex = 0, int offset = 0);
-		void Disable(const ConstVertexBufferSmartPointer& vertexBuffer, int streamIndex = 0);
-		void* Lock(const ConstVertexBufferSmartPointer& vertexBuffer, BufferLocking mode);
-		void Unlock(const ConstVertexBufferSmartPointer& vertexBuffer);
-		void Update(const ConstVertexBufferSmartPointer& vertexBuffer);
+		void Bind(const ConstVertexBufferSharedPtr& vertexBuffer);
+		void Unbind(const ConstVertexBufferSharedPtr& vertexBuffer);
+		void Enable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex = 0, int offset = 0);
+		void Disable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex = 0);
+		void* Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode);
+		void Unlock(const ConstVertexBufferSharedPtr& vertexBuffer);
+		void Update(const ConstVertexBufferSharedPtr& vertexBuffer);
 
 		// 索引缓冲区管理。索引缓冲区对象必须是已经由应用程序代码分配。
-		void Bind(const ConstIndexBufferSmartPointer& indexbuffer);
-		void Unbind(const ConstIndexBufferSmartPointer& indexbuffer);
-		void Enable(const ConstIndexBufferSmartPointer& indexbuffer);
-		void Disable(const ConstIndexBufferSmartPointer& indexbuffer);
-		void* Lock(const ConstIndexBufferSmartPointer& indexbuffer, BufferLocking mode);
-		void Unlock(const ConstIndexBufferSmartPointer& indexbuffer);
-		void Update(const ConstIndexBufferSmartPointer& indexbuffer);
+		void Bind(const ConstIndexBufferSharedPtr& indexbuffer);
+		void Unbind(const ConstIndexBufferSharedPtr& indexbuffer);
+		void Enable(const ConstIndexBufferSharedPtr& indexbuffer);
+		void Disable(const ConstIndexBufferSharedPtr& indexbuffer);
+		void* Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode);
+		void Unlock(const ConstIndexBufferSharedPtr& indexbuffer);
+		void Update(const ConstIndexBufferSharedPtr& indexbuffer);
 
 		// 1D纹理对象管理。纹理对象必须是已经由应用程序代码分配。
-		void Bind(const ConstTexture1DSmartPointer& texture);
-		void Unbind(const ConstTexture1DSmartPointer& texture);
-		void Enable(const ConstTexture1DSmartPointer& texture, int textureUnit);
-		void Disable(const ConstTexture1DSmartPointer& texture, int textureUnit);
-		void* Lock(const ConstTexture1DSmartPointer& texture, int level, BufferLocking mode);
-		void Unlock(const ConstTexture1DSmartPointer& texture, int level);
-		void Update(const ConstTexture1DSmartPointer& texture, int level);
+		void Bind(const ConstTexture1DSharedPtr& texture);
+		void Unbind(const ConstTexture1DSharedPtr& texture);
+		void Enable(const ConstTexture1DSharedPtr& texture, int textureUnit);
+		void Disable(const ConstTexture1DSharedPtr& texture, int textureUnit);
+		void* Lock(const ConstTexture1DSharedPtr& texture, int level, BufferLocking mode);
+		void Unlock(const ConstTexture1DSharedPtr& texture, int level);
+		void Update(const ConstTexture1DSharedPtr& texture, int level);
 
 		// 2D纹理对象管理。纹理对象必须是已经由应用程序代码分配。
-		void Bind(const ConstTexture2DSmartPointer& texture);
-		void Unbind(const ConstTexture2DSmartPointer& texture);
-		void Enable(const ConstTexture2DSmartPointer& texture, int textureUnit);
-		void Disable(const ConstTexture2DSmartPointer& texture, int textureUnit);
-		void* Lock(const ConstTexture2DSmartPointer& texture, int level, BufferLocking mode);
-		void Unlock(const ConstTexture2DSmartPointer& texture, int level);
-		void Update(const ConstTexture2DSmartPointer& texture, int level);
+		void Bind(const ConstTexture2DSharedPtr& texture);
+		void Unbind(const ConstTexture2DSharedPtr& texture);
+		void Enable(const ConstTexture2DSharedPtr& texture, int textureUnit);
+		void Disable(const ConstTexture2DSharedPtr& texture, int textureUnit);
+		void* Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode);
+		void Unlock(const ConstTexture2DSharedPtr& texture, int level);
+		void Update(const ConstTexture2DSharedPtr& texture, int level);
 
 		// 3D纹理对象管理。纹理对象必须是已经由应用程序代码分配。
-		void Bind(const ConstTexture3DSmartPointer& texture);
-		void Unbind(const ConstTexture3DSmartPointer& texture);
-		void Enable(const ConstTexture3DSmartPointer& texture, int textureUnit);
-		void Disable(const ConstTexture3DSmartPointer& texture, int textureUnit);
-		void* Lock(const ConstTexture3DSmartPointer& texture, int level, BufferLocking mode);
-		void Unlock(const ConstTexture3DSmartPointer& texture, int level);
-		void Update(const ConstTexture3DSmartPointer& texture, int level);
+		void Bind(const ConstTexture3DSharedPtr& texture);
+		void Unbind(const ConstTexture3DSharedPtr& texture);
+		void Enable(const ConstTexture3DSharedPtr& texture, int textureUnit);
+		void Disable(const ConstTexture3DSharedPtr& texture, int textureUnit);
+		void* Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode);
+		void Unlock(const ConstTexture3DSharedPtr& texture, int level);
+		void Update(const ConstTexture3DSharedPtr& texture, int level);
 
 		// Cube纹理对象管理。纹理对象必须是已经由应用程序代码分配。
-		void Bind(const ConstTextureCubeSmartPointer& texture);
-		void Unbind(const ConstTextureCubeSmartPointer& texture);
-		void Enable(const ConstTextureCubeSmartPointer& texture, int textureUnit);
-		void Disable(const ConstTextureCubeSmartPointer& texture, int textureUnit);
-		void* Lock(const ConstTextureCubeSmartPointer& texture, int face, int level, BufferLocking mode);
-		void Unlock(const ConstTextureCubeSmartPointer& texture, int face, int level);
-		void Update(const ConstTextureCubeSmartPointer& texture, int face, int level);
+		void Bind(const ConstTextureCubeSharedPtr& texture);
+		void Unbind(const ConstTextureCubeSharedPtr& texture);
+		void Enable(const ConstTextureCubeSharedPtr& texture, int textureUnit);
+		void Disable(const ConstTextureCubeSharedPtr& texture, int textureUnit);
+		void* Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode);
+		void Unlock(const ConstTextureCubeSharedPtr& texture, int face, int level);
+		void Update(const ConstTextureCubeSharedPtr& texture, int face, int level);
 
 		// 渲染目标管理。渲染目标对象必须是已经由应用程序代码分配。
 		// 在ReadColor的索引index是在多个渲染目标对象的目标索引。 
-		void Bind(const ConstRenderTargetSmartPointer& renderTarget);
-		void Unbind(const ConstRenderTargetSmartPointer& renderTarget);
-		void Enable(const ConstRenderTargetSmartPointer& renderTarget);
-		void Disable(const ConstRenderTargetSmartPointer& renderTarget);
-		ConstTexture2DSmartPointer ReadColor(int index, const ConstRenderTargetSmartPointer& renderTarget);	
+		void Bind(const ConstRenderTargetSharedPtr& renderTarget);
+		void Unbind(const ConstRenderTargetSharedPtr& renderTarget);
+		void Enable(const ConstRenderTargetSharedPtr& renderTarget);
+		void Disable(const ConstRenderTargetSharedPtr& renderTarget);
+		ConstTexture2DSharedPtr ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget);	
  
 		// 顶点着色器管理。顶点着色器对象必须已经由应用程序代码分配。
-		void Bind(const ConstVertexShaderSmartPointer& vshader);
-		void Unbind(const ConstVertexShaderSmartPointer& vshader);
-		void Enable(const ConstVertexShaderSmartPointer& vshader, const ConstShaderParametersSmartPointer& parameters);
-		void Disable(const ConstVertexShaderSmartPointer& vshader, const ConstShaderParametersSmartPointer& parameters);
+		void Bind(const ConstVertexShaderSharedPtr& vshader);
+		void Unbind(const ConstVertexShaderSharedPtr& vshader);
+		void Enable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters);
+		void Disable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters);
  
 		// 像素着色器管理。像素着色器对象必须已经由应用程序代码分配。
-		void Bind(const ConstPixelShaderSmartPointer& pshader);
-		void Unbind(const ConstPixelShaderSmartPointer& pshader);
-		void Enable(const ConstPixelShaderSmartPointer& pshader, const ConstShaderParametersSmartPointer& parameters);
-		void Disable(const ConstPixelShaderSmartPointer& pshader, const ConstShaderParametersSmartPointer& parameters);
+		void Bind(const ConstPixelShaderSharedPtr& pshader);
+		void Unbind(const ConstPixelShaderSharedPtr& pshader);
+		void Enable(const ConstPixelShaderSharedPtr& pshader, const ConstShaderParametersSharedPtr& parameters);
+		void Disable(const ConstPixelShaderSharedPtr& pshader, const ConstShaderParametersSharedPtr& parameters);
 
 		// 访问当前的全局状态。
-		const ConstAlphaStateSmartPointer GetAlphaState() const;
-		const ConstCullStateSmartPointer GetCullState() const;
-		const ConstDepthStateSmartPointer GetDepthState() const;
-		const ConstOffsetStateSmartPointer GetOffsetState() const;
-		const ConstStencilStateSmartPointer GetStencilState() const;
-		const ConstWireStateSmartPointer GetWireState() const;		
+		const ConstAlphaStateSharedPtr GetAlphaState() const;
+		const ConstCullStateSharedPtr GetCullState() const;
+		const ConstDepthStateSharedPtr GetDepthState() const;
+		const ConstOffsetStateSharedPtr GetOffsetState() const;
+		const ConstStencilStateSharedPtr GetStencilState() const;
+		const ConstWireStateSharedPtr GetWireState() const;		
 
 		// 覆盖全局状态。 如果被覆盖，则在图形调用期间使用此状态代替VisualPass状态。 要撤消覆盖，请传递空指针。
-		const ConstAlphaStateSmartPointer GetOverrideAlphaState() const;
-		const ConstCullStateSmartPointer GetOverrideCullState() const;
-		const ConstDepthStateSmartPointer GetOverrideDepthState() const;
-		const ConstOffsetStateSmartPointer GetOverrideOffsetState() const;
-		const ConstStencilStateSmartPointer GetOverrideStencilState() const;
-		const ConstWireStateSmartPointer GetOverrideWireState() const;
-		void SetOverrideAlphaState(const ConstAlphaStateSmartPointer& alphaState);
-		void SetOverrideCullState(const ConstCullStateSmartPointer& cullState);
-		void SetOverrideDepthState(const ConstDepthStateSmartPointer& depthState);
-		void SetOverrideOffsetState(const ConstOffsetStateSmartPointer& offsetState);
-		void SetOverrideStencilState(const ConstStencilStateSmartPointer& stencilState);
-		void SetOverrideWireState(const ConstWireStateSmartPointer& wireState);		
+		const ConstAlphaStateSharedPtr GetOverrideAlphaState() const;
+		const ConstCullStateSharedPtr GetOverrideCullState() const;
+		const ConstDepthStateSharedPtr GetOverrideDepthState() const;
+		const ConstOffsetStateSharedPtr GetOverrideOffsetState() const;
+		const ConstStencilStateSharedPtr GetOverrideStencilState() const;
+		const ConstWireStateSharedPtr GetOverrideWireState() const;
+		void SetOverrideAlphaState(const ConstAlphaStateSharedPtr& alphaState);
+		void SetOverrideCullState(const ConstCullStateSharedPtr& cullState);
+		void SetOverrideDepthState(const ConstDepthStateSharedPtr& depthState);
+		void SetOverrideOffsetState(const ConstOffsetStateSharedPtr& offsetState);
+		void SetOverrideStencilState(const ConstStencilStateSharedPtr& stencilState);
+		void SetOverrideWireState(const ConstWireStateSharedPtr& wireState);		
 		void SetReverseCullOrder(bool reverseCullOrder);
 		bool GetReverseCullOrder() const;
 
 		// 访问当前相机状态。
-		void SetCamera(const CameraSmartPointer& camera);
-		const ConstCameraSmartPointer GetCamera() const;
-		const CameraSmartPointer GetCamera();
+		void SetCamera(const CameraSharedPtr& camera);
+		const ConstCameraSharedPtr GetCamera() const;
+		const CameraSharedPtr GetCamera();
 		const Matrix GetViewMatrix() const;
 		const Matrix GetProjectionMatrix() const;
 		const Matrix GetPostProjectionMatrix() const;
@@ -250,22 +250,22 @@ namespace Rendering
 		void SetAllowAlpha(bool allowAlpha);
 
 		// 绘制场景图的可见集合的入口点。
-		void Draw(VisibleSet& visibleSet, const GlobalEffectSmartPointer& globalEffect = GlobalEffectSmartPointer{});
+		void Draw(VisibleSet& visibleSet, const GlobalEffectSharedPtr& globalEffect = GlobalEffectSharedPtr{});
 
 		// 绘制单个对象的入口点。
-		void Draw(const VisualSmartPointer& visual);
-		void Draw(const VisualSmartPointer& visual, const VisualEffectInstanceSmartPointer& instance);
+		void Draw(const VisualSharedPtr& visual);
+		void Draw(const VisualSharedPtr& visual, const VisualEffectInstanceSharedPtr& instance);
 
 	public:
 		// 接口的平台相关部分。
 
 		// 视觉状态管理。
-		void SetAlphaState(const ConstAlphaStateSmartPointer& alphaState);
-		void SetCullState(const ConstCullStateSmartPointer& cullState);
-		void SetDepthState(const ConstDepthStateSmartPointer& depthState);
-		void SetOffsetState(const ConstOffsetStateSmartPointer& offsetState);
-		void SetStencilState(const ConstStencilStateSmartPointer& stencilState);
-		void SetWireState(const ConstWireStateSmartPointer& wireState);
+		void SetAlphaState(const ConstAlphaStateSharedPtr& alphaState);
+		void SetCullState(const ConstCullStateSharedPtr& cullState);
+		void SetDepthState(const ConstDepthStateSharedPtr& depthState);
+		void SetOffsetState(const ConstOffsetStateSharedPtr& offsetState);
+		void SetStencilState(const ConstStencilStateSharedPtr& stencilState);
+		void SetWireState(const ConstWireStateSharedPtr& wireState);
 
 		// 视口管理。 视口以右手屏幕坐标指定。 原点是屏幕的左下角，y轴指向上方，x轴指向右侧。
 		void SetViewport(const Viewport& viewport);
@@ -305,8 +305,8 @@ namespace Rendering
 		// 绘制2D文本的入口点。
 		void Draw(int x, int y, const Colour& color, const std::string& message);
 
-		bool InTexture2DMap(const ConstTexture2DSmartPointer& texture);
-		void InsertInTexture2DMap(const ConstTexture2DSmartPointer& texture,const PlatformTexture2DSharedPtr& platformTexture);
+		bool InTexture2DMap(const ConstTexture2DSharedPtr& texture);
+		void InsertInTexture2DMap(const ConstTexture2DSharedPtr& texture,const PlatformTexture2DSharedPtr& platformTexture);
 
 		RendererTypes GetRendererType() const;	 
 

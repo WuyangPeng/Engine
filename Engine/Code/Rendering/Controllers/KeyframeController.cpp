@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -134,12 +134,12 @@ void Rendering::KeyframeController
 	ParentType::SetObject(object);
 }
 
-Rendering::ControllerInterfaceSmartPointer Rendering::KeyframeController
+Rendering::ControllerInterfaceSharedPtr Rendering::KeyframeController
 	::Clone() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, KeyframeController,GetTranslate, ControllerKeyInfo,const Rendering::KeyframeController::APoint)
@@ -259,8 +259,7 @@ void Rendering::KeyframeController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::KeyframeController
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::KeyframeController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -275,8 +274,7 @@ void Rendering::KeyframeController
 	ParentType::PostLink();	 
 }
 
-void Rendering::KeyframeController
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::KeyframeController ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     

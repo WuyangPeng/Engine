@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/18 13:25)
+//	引擎版本：0.5.1.1 (2020/10/12 11:04)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
@@ -237,7 +237,7 @@ void CoreTools::SpanIterator<Iter>::Increase(T value)
     result = value;
 
     *this += sizeof(T);
-} 
+}
 
 template <typename Iter>
 typename Iter::difference_type CoreTools::operator-(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs)

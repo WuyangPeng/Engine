@@ -15,6 +15,7 @@
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -22,6 +23,7 @@
 #include SYSTEM_WARNING_DISABLE(6386)
 #include SYSTEM_WARNING_DISABLE(6385)
 #include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 Rendering::TextureUserField
     ::TextureUserField ()     noexcept
 {
@@ -54,18 +56,18 @@ int Rendering::TextureUserField
 }
 
 void Rendering::TextureUserField
-    ::Load( CoreTools::BufferSource& source )
+    ::Load( const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
     
-	source.Read(TextureMaxUserFields, m_UserField);   
+	source->Read(TextureMaxUserFields, m_UserField);   
 }
 
 void Rendering::TextureUserField
     ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     target;
     //target.WriteWithoutNumber(TextureMaxUserFields,m_UserField);    
 }

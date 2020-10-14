@@ -26,7 +26,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightSpotConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, LightSpotConstant);
 
 Rendering::LightSpotConstant
-	::LightSpotConstant(const LightSmartPointer& light)
+	::LightSpotConstant(const LightSharedPtr& light)
 	:ParentType{ light }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -49,12 +49,12 @@ void Rendering::LightSpotConstant ::Update([[maybe_unused]] const Visual* visual
  ;
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::LightSpotConstant
+Rendering::ShaderFloatSharedPtr Rendering::LightSpotConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 

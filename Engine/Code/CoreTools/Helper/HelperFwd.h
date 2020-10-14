@@ -1,33 +1,36 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/18 09:36)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/09/28 13:19)
 
 #ifndef CORE_TOOLS_HELPER_FWD_H
 #define CORE_TOOLS_HELPER_FWD_H
 
-#include "FunctionDescribedMacro.h"
 #include "AssertMacro.h"
 #include "ClassInvariantMacro.h"
-#include "ModuleClassInvariantMacro.h"
 #include "CustomAssertMacro.h"
-#include "ModuleCustomAssertMacro.h"
+#include "ExceptionMacro.h"
 #include "ExportMacro.h"
-#include "LogMacro.h"
+#include "FunctionDescribedMacro.h"
 #include "InitializeTerminatorMacro.h"
+#include "LogMacro.h"
 #include "MainFunctionMacro.h"
 #include "MemberFunctionMacro.h"
 #include "MemoryMacro.h"
-#include "RttiMacro.h"
-#include "SingletonMacro.h"
+#include "ModuleClassInvariantMacro.h"
+#include "ModuleCustomAssertMacro.h"
 #include "NameMacro.h"
+#include "PropertiesMacro.h"
+#include "RttiMacro.h"
+#include "SafetyLimitMacro.h"
+#include "SingletonMacro.h"
 #include "StreamMacro.h"
+#include "SharedPtrMacro.h"
 #include "TemplateToolsMacro.h"
 #include "UnitTestSuiteMacro.h"
-#include "SubclassSmartPointerMacro.h"
-#include "ThirdSubclassSmartPointerMacro.h"
-#include "ExceptionMacro.h"
-#include "PropertiesMacro.h" 
 
-#endif // CORE_TOOLS_HELPER_FWD_H
+#endif  // CORE_TOOLS_HELPER_FWD_H

@@ -10,7 +10,7 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
@@ -18,6 +18,7 @@
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/StandardMesh.h"
 #include "Rendering/DataTypes/TransformDetail.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -30,8 +31,8 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RevolutionSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RevolutionSurface);
 
 Rendering::RevolutionSurface ::RevolutionSurface(Mathematics::Curve2f* curve, float xCenter, TopologyType topology, int numCurveSamples,
-                                                 int numRadialSamples, bool sampleByArcLength, bool outsideView, VertexFormatSmartPointer vformat)
-    : ParentType(vformat, VertexBufferSmartPointer(), IndexBufferSmartPointer()), mCurve(curve), mXCenter(xCenter), mTopology(topology),
+                                                 int numRadialSamples, bool sampleByArcLength, bool outsideView, VertexFormatSharedPtr vformat)
+    : ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mCurve(curve), mXCenter(xCenter), mTopology(topology),
       mNumCurveSamples(numCurveSamples), mNumRadialSamples(numRadialSamples), mSin(0), mCos(0), mSamples(0), mSampleByArcLength(sampleByArcLength)
 {
     ComputeSampleData();
@@ -39,7 +40,7 @@ Rendering::RevolutionSurface ::RevolutionSurface(Mathematics::Curve2f* curve, fl
     // The topology of the meshes is all that matters.  The vertices will be
     // modified later based on the curve of revolution.
     StandardMesh stdmesh(vformat, !outsideView);
-    TrianglesMeshSmartPointer mesh;
+    TrianglesMeshSharedPtr mesh;
     switch (mTopology)
     {
     case TopologyType::REV_DISK_TOPOLOGY:
@@ -69,7 +70,7 @@ Rendering::RevolutionSurface ::RevolutionSurface(Mathematics::Curve2f* curve, fl
     // Setting mIBuffer to zero acts as a flag that tells UpdateSurface
     // *not* to call Renderer::UpdateVertexBuffer(mVBuffer).  Only when the
     // application has constructed a RevolutionSurface wlil the update occur.
-    SetIndexBuffer(IndexBufferSmartPointer());
+    SetIndexBuffer(IndexBufferSharedPtr());
     UpdateSurface();
 
     SetIndexBuffer(mesh->GetIndexBuffer());
@@ -79,9 +80,9 @@ Rendering::RevolutionSurface ::~RevolutionSurface()
 {
     EXCEPTION_TRY
     {
-        DELETE1(mSin);
-        DELETE1(mCos);
-        DELETE1(mSamples);
+        //DELETE1(mSin);
+       // DELETE1(mCos);
+        //DELETE1(mSamples);
     }
     EXCEPTION_ALL_CATCH(Rendering)
 }
@@ -344,19 +345,19 @@ Rendering::RevolutionSurface ::RevolutionSurface(LoadConstructor value)
 {
 }
 
-void Rendering::RevolutionSurface ::Load(CoreTools::BufferSource& source)
+void Rendering::RevolutionSurface ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source.Read(mXCenter);
-    source.ReadEnum(mTopology);
-    source.Read(mNumCurveSamples);
-    source.Read(mNumRadialSamples);
-    source.Read(mNumRadialSamples + 1, mSin);
-    source.Read(mNumRadialSamples + 1, mCos);
-    mSampleByArcLength = source.ReadBool();
+    source->Read(mXCenter);
+    source->ReadEnum(mTopology);
+    source->Read(mNumCurveSamples);
+    source->Read(mNumRadialSamples);
+    source->Read(mNumRadialSamples + 1, mSin);
+    source->Read(mNumRadialSamples + 1, mCos);
+    mSampleByArcLength = source->ReadBool();
 
     // TODO.  See note in RevolutionSurface::Save.
     mCurve = 0;
@@ -364,7 +365,7 @@ void Rendering::RevolutionSurface ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::RevolutionSurface ::Link(CoreTools::ObjectLink& source)
+void Rendering::RevolutionSurface ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     ParentType::Link(source);
 }

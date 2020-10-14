@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 #include <sstream>
 #include <exception>
@@ -658,7 +658,7 @@ void CoreTools::UnitTest
 		}
 	}
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 #endif // CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H

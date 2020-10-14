@@ -55,7 +55,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
  
 	CORE_TOOLS_STREAM_REGISTER(Texture2AddEffect);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, Texture2AddEffect);
+	CORE_TOOLS_SHARED_PTR_DECLARE( Texture2AddEffect);
 	#include STSTEM_WARNING_POP
 }
 

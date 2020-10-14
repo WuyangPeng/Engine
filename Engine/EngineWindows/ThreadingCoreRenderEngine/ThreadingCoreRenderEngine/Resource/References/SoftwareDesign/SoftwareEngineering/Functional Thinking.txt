@@ -1,0 +1,7 @@
+函数式编程思维（Functional Thinking）
+
+☆
+作者：Neal Ford
+
+知识点 
+1.	软件开发基础知识。

@@ -12,7 +12,7 @@
 #include "ObjectInterface.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/FileManager/ReadBufferIO.h"
-
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "WeakPtr.h"
 #include <array>
 #include <vector>
@@ -29,7 +29,7 @@ namespace CoreTools
         using ClassShareType = CoreTools::NonCopyClasses;
 
     public:
-        explicit BufferSource(const FileBuffer& fileBuffer);
+        explicit BufferSource(const ConstFileBufferSharedPtr& fileBuffer);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -87,13 +87,16 @@ namespace CoreTools
 
         // °ïÖúº¯Êý
         int GetBytesRead() const noexcept;
-        int GetBytesTotal() const noexcept;
-        void IncrementBytesProcessed(int bytesNumber) noexcept;
+        int GetBytesTotal() const  ;
+        void IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
         void ReadUniqueID(ObjectInterfaceSharedPtr object);
 
     private:
         ReadBufferIO m_Source;
     };
+
+     using BufferSourceSharedPtr = std::shared_ptr<BufferSource>;
+    using ConstBufferSourceSharedPtr = std::shared_ptr<const BufferSource>;
 
 }
 

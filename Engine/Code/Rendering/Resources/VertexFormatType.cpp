@@ -99,13 +99,13 @@ void Rendering::VertexFormatType
 }
 
 void Rendering::VertexFormatType
-	::Load( CoreTools::BufferSource& source )
+	::Load( const CoreTools::BufferSourceSharedPtr& source )
 {	
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.ReadEnum(m_Type);
-	source.ReadEnum(m_Usage);
-	source.Read(m_UsageIndex);
+	source->ReadEnum(m_Type);
+	source->ReadEnum(m_Usage);
+	source->Read(m_UsageIndex);
 }
 
 void Rendering::VertexFormatType

@@ -18,7 +18,7 @@ using std::make_shared;
 DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, Picker)
 
 Rendering::Picker
-	::Picker(const ConstSpatialSmartPointer& scene, const APoint& origin, const AVector& direction, float tMin, float tMax) 
+	::Picker(const ConstSpatialSharedPtr& scene, const APoint& origin, const AVector& direction, float tMin, float tMax) 
 	:m_Impl{ make_shared<ImplType>(scene,origin,direction,tMin,tMax) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;

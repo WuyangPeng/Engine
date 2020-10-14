@@ -16,7 +16,7 @@
 
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -42,6 +42,8 @@ Rendering::ShaderFloat
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
+
+ 
 
 Rendering::ShaderFloat
 	::ShaderFloat(const FloatVector& data)
@@ -121,17 +123,17 @@ void Rendering::ShaderFloat ::Update([[maybe_unused]] const Visual* visual, [[ma
     // ≈……˙¿‡¥Ê∏˘°£
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 }
 
-Rendering::ShaderFloat::ShaderFloatSmartPointer Rendering::ShaderFloat
+Rendering::ShaderFloat::ShaderFloatSharedPtr Rendering::ShaderFloat
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::ShaderFloat::CloneObject() const

@@ -9,7 +9,7 @@
 #include "RectangleSurface.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/Vector3DDetail.h"
@@ -27,8 +27,8 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RectangleSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RectangleSurface);
 
 Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* surface, int numUSamples, int numVSamples,
-                                               VertexFormatSmartPointer vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax)
-    : ParentType(vformat, VertexBufferSmartPointer(), IndexBufferSmartPointer()), mSurface(surface), mNumUSamples(numUSamples), mNumVSamples(numVSamples)
+                                               VertexFormatSharedPtr vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax)
+    : ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mSurface(surface), mNumUSamples(numUSamples), mNumVSamples(numVSamples)
 {
     RENDERING_ASSERTION_0(surface && surface->IsRectangular(), "Invalid surface\n");
 
@@ -44,7 +44,7 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
     // Compute the vertices, normals, and texture coordinates.
     const int numVertices = mNumUSamples * mNumVSamples;
     const int vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBufferSmartPointer(std::make_shared<VertexBuffer>(numVertices, vstride)));
+    SetVertexBuffer(VertexBufferSharedPtr(std::make_shared<VertexBuffer>(numVertices, vstride)));
     VertexBufferAccessor vba(vformat, GetVertexBuffer());
 
     float tuDelta = 0.0f, tvDelta = 0.0f;
@@ -96,7 +96,7 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
     // Compute the surface triangle indices.
     const int numTriangles = 2 * (mNumUSamples - 1) * (mNumVSamples - 1);
     int numIndices = 3 * numTriangles;
-    SetIndexBuffer(IndexBufferSmartPointer(std::make_shared<IndexBuffer>(numIndices, (int)sizeof(int))));
+    SetIndexBuffer(IndexBufferSharedPtr(std::make_shared<IndexBuffer>(numIndices, (int)sizeof(int))));
     // ÏÈÍ¨¹ý±àÒë
 
     int* indices = (int*)GetIndexBuffer()->GetReadOnlyData();
@@ -129,7 +129,7 @@ Rendering::RectangleSurface ::~RectangleSurface()
 {
     EXCEPTION_TRY
     {
-        DELETE0(mSurface);
+       // DELETE0(mSurface);
     }
     EXCEPTION_ALL_CATCH(Rendering)
   
@@ -173,14 +173,14 @@ Rendering::RectangleSurface ::RectangleSurface(LoadConstructor value)
 {
 }
 
-void Rendering::RectangleSurface ::Load(CoreTools::BufferSource& source)
+void Rendering::RectangleSurface ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source.Read(mNumUSamples);
-    source.Read(mNumVSamples);
+    source->Read(mNumUSamples);
+    source->Read(mNumVSamples);
 
     // TODO.  See note in RectangleSurface::Save.
     mSurface = 0;
@@ -188,7 +188,7 @@ void Rendering::RectangleSurface ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::RectangleSurface ::Link(CoreTools::ObjectLink& source)
+void Rendering::RectangleSurface ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     ParentType::Link(source);
 }

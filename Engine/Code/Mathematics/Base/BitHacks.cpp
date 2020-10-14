@@ -9,7 +9,7 @@
 #include "BitHacks.h"
 #include "ScaledFloatToInt.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 int Mathematics::BitHacks
 	::ScaledFloatToInt(float value, int power)
@@ -17,7 +17,7 @@ int Mathematics::BitHacks
 	MATHEMATICS_ASSERTION_3(0 <= value && value <= 1, "value的区间为[0,1]。");
 	MATHEMATICS_ASSERTION_3(0 <= power && power <= 24, "power的区间为[0,24]。");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	const Mathematics::ScaledFloatToInt scaledFloatToInt{ value,power };
 

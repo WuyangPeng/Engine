@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
@@ -31,7 +31,7 @@ using std::swap;
  #include SYSTEM_WARNING_DISABLE(26489)
  #include SYSTEM_WARNING_DISABLE(26440)
 Rendering::ShaderParametersImpl
-	::ShaderParametersImpl(const ConstShaderBaseSmartPointer& shader)
+	::ShaderParametersImpl(const ConstShaderBaseSharedPtr& shader)
 	:m_Shader{ shader }, m_Constants{}, m_Textures{}
 {
     const auto numConstants = m_Shader->GetNumConstants();
@@ -94,14 +94,13 @@ void Rendering::ShaderParametersImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,ShaderParametersImpl)
 
-void Rendering::ShaderParametersImpl
-	::Load( BufferSource& source )
+void Rendering::ShaderParametersImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ReadSmartPointer(m_Shader);
-	//source.ReadSmartPointer(m_Constants);
-	//source.ReadSmartPointer(m_Textures);
+	//source.ReadSharedPtr(m_Shader);
+	//source.ReadSharedPtr(m_Constants);
+	//source.ReadSharedPtr(m_Textures);
 }
 
 void Rendering::ShaderParametersImpl
@@ -109,9 +108,9 @@ void Rendering::ShaderParametersImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.WriteSmartPointer(m_Shader);
-	//target.WriteSmartPointer(m_Constants);
-	//target.WriteSmartPointer(m_Textures);
+	//target.WriteSharedPtr(m_Shader);
+	//target.WriteSharedPtr(m_Constants);
+	//target.WriteSharedPtr(m_Textures);
 }
 
 int Rendering::ShaderParametersImpl
@@ -127,21 +126,20 @@ int Rendering::ShaderParametersImpl
 	return size;
 }
 
-void Rendering::ShaderParametersImpl
-	::Link(ObjectLink& source)
+void Rendering::ShaderParametersImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-	//source.ResolveObjectConstSmartPointerLink(m_Shader);
+	//source.ResolveObjectConstSharedPtrLink(m_Shader);
 
 	if (0 < m_Constants.size())
 	{
-		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Constants.size()),&m_Constants[0]);
+		//source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Constants.size()),&m_Constants[0]);
 	}
 
 	if (0 < m_Textures.size())
 	{
-		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Textures.size()), &m_Textures[0]);
+		//source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Textures.size()), &m_Textures[0]);
 	}
 }
 
@@ -149,20 +147,20 @@ void Rendering::ShaderParametersImpl ::Register(const CoreTools::ObjectRegisterS
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.RegisterSmartPointer(m_Shader);
+	//target.RegisterSharedPtr(m_Shader);
 
 	if (0 < m_Constants.size())
 	{
-		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Constants.size()), &m_Constants[0]);
+		//target.RegisterSharedPtr(boost::numeric_cast<int>(m_Constants.size()), &m_Constants[0]);
 	}
 
 	if (0 < m_Textures.size())
 	{
-		//target.RegisterSmartPointer(boost::numeric_cast<int>(m_Textures.size()), &m_Textures[0]);
+		//target.RegisterSharedPtr(boost::numeric_cast<int>(m_Textures.size()), &m_Textures[0]);
 	}
 }
 
-const CoreTools::ObjectSmartPointer Rendering::ShaderParametersImpl
+const CoreTools::ObjectSharedPtr Rendering::ShaderParametersImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -185,15 +183,15 @@ const CoreTools::ObjectSmartPointer Rendering::ShaderParametersImpl
 		}
 	}
 	
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::ShaderParametersImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::ShaderParametersImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	vector<CoreTools::ObjectSmartPointer> objects;
+	vector<CoreTools::ObjectSharedPtr> objects;
 
 	for (auto& pointer: m_Constants)
 	{
@@ -210,7 +208,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::ShaderParametersImpl
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::ShaderParametersImpl
+const CoreTools::ConstObjectSharedPtr Rendering::ShaderParametersImpl
 	::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -242,10 +240,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::ShaderParametersImpl
 		}
 	}
 
-	return CoreTools::ConstObjectSmartPointer{};
+	return CoreTools::ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::ShaderParametersImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::ShaderParametersImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -283,12 +281,12 @@ int Rendering::ShaderParametersImpl
 	return boost::numeric_cast<int>(m_Textures.size());
 }
 
-const Rendering::ShaderParametersImpl::ConstShaderFloatSmartPointerGather Rendering::ShaderParametersImpl
+const Rendering::ShaderParametersImpl::ConstShaderFloatSharedPtrGather Rendering::ShaderParametersImpl
 	::GetConstants() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	ConstShaderFloatSmartPointerGather gather;
+	ConstShaderFloatSharedPtrGather gather;
 
 	for (const auto& pointer: m_Constants)
 	{
@@ -298,12 +296,12 @@ const Rendering::ShaderParametersImpl::ConstShaderFloatSmartPointerGather Render
 	return gather;
 }
 
-const Rendering::ShaderParametersImpl::ConstTextureSmartPointerGather Rendering::ShaderParametersImpl
+const Rendering::ShaderParametersImpl::ConstTextureSharedPtrGather Rendering::ShaderParametersImpl
 	::GetTextures() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	ConstTextureSmartPointerGather gather;
+	ConstTextureSharedPtrGather gather;
 
 	for (const auto& pointer: m_Textures)
 	{
@@ -314,7 +312,7 @@ const Rendering::ShaderParametersImpl::ConstTextureSmartPointerGather Rendering:
 }
 
 int Rendering::ShaderParametersImpl
-	::SetConstant(const string& name, const ShaderFloatSmartPointer& shaderFloat)
+	::SetConstant(const string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -333,7 +331,7 @@ const auto numConstants = GetNumConstants();
 }
 
 void Rendering::ShaderParametersImpl
-	::SetConstant(int handle, const ShaderFloatSmartPointer& shaderFloat)
+	::SetConstant(int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
 	RENDERING_CLASS_IS_VALID_9;
 	RENDERING_ASSERTION_0(0 <= handle && handle < GetNumConstants(), "索引越界！\n");
@@ -342,7 +340,7 @@ void Rendering::ShaderParametersImpl
 }
 
 int Rendering::ShaderParametersImpl
-	::SetTexture(const string& name, const TextureSmartPointer& texture)
+	::SetTexture(const string& name, const TextureSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -361,7 +359,7 @@ const auto numTextures = GetNumTextures();
 }
 
 void Rendering::ShaderParametersImpl
-	::SetTexture(int handle, const TextureSmartPointer& texture)
+	::SetTexture(int handle, const TextureSharedPtr& texture)
 {
 	RENDERING_CLASS_IS_VALID_9;
 	RENDERING_ASSERTION_0(0 <= handle && handle < GetNumTextures(), "索引越界！\n");
@@ -369,7 +367,7 @@ void Rendering::ShaderParametersImpl
 	m_Textures[handle] = texture;
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::ShaderParametersImpl
+const Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl
 	::GetConstant(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -387,7 +385,7 @@ const auto numConstants = GetNumConstants();
 	THROW_EXCEPTION(SYSTEM_TEXT("找不到常量！\n"s));
 }
 
-const Rendering::ConstShaderFloatSmartPointer Rendering::ShaderParametersImpl
+const Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl
 	::GetConstant(int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -396,7 +394,7 @@ const Rendering::ConstShaderFloatSmartPointer Rendering::ShaderParametersImpl
 	return m_Constants[handle] ;
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
+const Rendering::ConstTextureSharedPtr Rendering::ShaderParametersImpl
 	::GetTexture(const std::string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -414,7 +412,7 @@ const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
 	THROW_EXCEPTION(SYSTEM_TEXT("找不到纹理！\n"s));
 }
 
-const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
+const Rendering::ConstTextureSharedPtr Rendering::ShaderParametersImpl
 	::GetTexture(int handle) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -424,7 +422,7 @@ const Rendering::ConstTextureSmartPointer Rendering::ShaderParametersImpl
 }
 
 void Rendering::ShaderParametersImpl
-	::UpdateConstants(const VisualSmartPointer& visual, const CameraSmartPointer& camera)
+	::UpdateConstants(const VisualSharedPtr& visual, const CameraSharedPtr& camera)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

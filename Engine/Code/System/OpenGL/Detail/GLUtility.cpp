@@ -14,7 +14,7 @@
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
 #include "System/Helper/Platform.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
-#include "System/UserInterface/OpenGLWglPrototypes.h"
+#include "System/OpenGL/OpenGLWglPrototypes.h"
 
 #include <array>
 

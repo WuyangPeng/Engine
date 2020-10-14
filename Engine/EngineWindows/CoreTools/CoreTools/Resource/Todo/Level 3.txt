@@ -1,13 +1,8 @@
 TODO Level 3
  
-0.0.2.1
+0.0.5.1
 
-1.  （ImplHelper）考虑修改Impl模式，使用继承代替宏，在基类中调用静态断言和Copy函数。
-2.  （ImplHelper）检查Impl模式中的移动运算符。
-3.  （CharacterString）将类MultiByteConversionWideChar和WideCharConversionMultiByte中使用的堆指针改成vector，简化代码。
-4.  （MemoryTools）重构类Memory的实现。
-5.  （ObjectSystems）将模块使用的子类智能指针改成std::shared_ptr。
-
-0.1.0.2
-
-1.  （UnitTest）单元测试增加以随机顺序运行测试。
+1.  （Threading）依照boost库封装std::thread组。
+2.  （Threading）封装System Threading其他线程相关的锁。 
+3.  （Threading）读写锁封装使用std::shared_mutex和boost库的相关类型。
+4.  （Threading）封装条件变量类型。

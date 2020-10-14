@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "IKGoalImpl.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using std::string;
 using std::vector;
@@ -23,7 +23,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26415)
 Rendering::IKGoalImpl
-	::IKGoalImpl(const SpatialSmartPointer& target,const SpatialSmartPointer& effector,float weight) noexcept
+	::IKGoalImpl(const SpatialSharedPtr& target,const SpatialSharedPtr& effector,float weight) noexcept
 	:m_Target{ target }, m_Effector{ effector }, m_Weight{ weight }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -56,28 +56,27 @@ void Rendering::IKGoalImpl
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	target->Write(m_Weight);
-	//target.WriteSmartPointer(m_Target);
-	//target.WriteSmartPointer(m_Effector);
+	//target.WriteSharedPtr(m_Target);
+	//target.WriteSharedPtr(m_Effector);
 }
 
 void Rendering::IKGoalImpl
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.Read(m_Weight);
-	//source.ReadSmartPointer(m_Target);
-	//source.ReadSmartPointer(m_Effector);
+	source->Read(m_Weight);
+	//source.ReadSharedPtr(m_Target);
+	//source.ReadSharedPtr(m_Effector);
 }
 
-void Rendering::IKGoalImpl
-	::Link(CoreTools::ObjectLink& source)
+void Rendering::IKGoalImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 	source;
-	//source.ResolveObjectSmartPointerLink(m_Target);
-	//source.ResolveObjectSmartPointerLink(m_Effector);
+	//source.ResolveObjectSharedPtrLink(m_Target);
+	//source.ResolveObjectSharedPtrLink(m_Effector);
 }
 
 void Rendering::IKGoalImpl
@@ -85,12 +84,12 @@ void Rendering::IKGoalImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-    CoreTools::DoNothing();
-	//target.RegisterSmartPointer(m_Target);
-	//target.RegisterSmartPointer(m_Effector);
+    CoreTools::DisableNoexcept();
+	//target.RegisterSharedPtr(m_Target);
+	//target.RegisterSharedPtr(m_Effector);
 }
 
-const Rendering::ConstSpatialSmartPointer Rendering::IKGoalImpl
+const Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl
 	::GetTarget() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -98,7 +97,7 @@ const Rendering::ConstSpatialSmartPointer Rendering::IKGoalImpl
 	return m_Target;
 }
 
-const Rendering::ConstSpatialSmartPointer Rendering::IKGoalImpl ::GetEffector() const noexcept
+const Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl ::GetEffector() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -135,7 +134,7 @@ float Rendering::IKGoalImpl ::GetWeight() const noexcept
 	return m_Weight;
 }
 
-const CoreTools::ObjectSmartPointer Rendering::IKGoalImpl
+const CoreTools::ObjectSharedPtr Rendering::IKGoalImpl
 	::GetObjectByName(const string& name) 
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -152,11 +151,11 @@ const CoreTools::ObjectSmartPointer Rendering::IKGoalImpl
 		if (effectorObject != nullptr)
 			return effectorObject;
 		else
-			return CoreTools::ObjectSmartPointer{};
+			return CoreTools::ObjectSharedPtr{};
 	}		
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::IKGoalImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::IKGoalImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -169,7 +168,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::IKGoalImpl
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::IKGoalImpl
+const CoreTools::ConstObjectSharedPtr Rendering::IKGoalImpl
 	::GetConstObjectByName(const string& name) const 
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -186,11 +185,11 @@ const CoreTools::ConstObjectSmartPointer Rendering::IKGoalImpl
 		if (effectorObject != nullptr)
 			return effectorObject;
 		else
-			return CoreTools::ConstObjectSmartPointer{};
+			return CoreTools::ConstObjectSharedPtr{};
 	}		
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::IKGoalImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::IKGoalImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;

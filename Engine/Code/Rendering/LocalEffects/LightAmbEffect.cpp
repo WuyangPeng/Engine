@@ -14,8 +14,9 @@
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -35,7 +36,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightAmbEffect);
 Rendering::LightAmbEffect
 	::LightAmbEffect()
 {
-    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>( "Wm5.LightAmb", 1, 2, 5, 0 ) };
+    VertexShaderSharedPtr vshader{ std::make_shared < VertexShader>( "Wm5.LightAmb", 1, 2, 5, 0 ) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
@@ -57,7 +58,7 @@ Rendering::LightAmbEffect
 		profile->SetProgram(i, msVPrograms[i]);
 	} 
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.LightAmb",1, 1, 0, 0) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.LightAmb",1, 1, 0, 0) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
 
@@ -68,17 +69,17 @@ Rendering::LightAmbEffect
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{ std::make_shared < VisualPass>() };
+	VisualPassSharedPtr pass{ std::make_shared < VisualPass>() };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-        pass->SetAlphaState(AlphaStateSmartPointer{ std::make_shared<AlphaState>() });
-        pass->SetCullState(CullStateSmartPointer{ std::make_shared<CullState>() });
-        pass->SetDepthState(DepthStateSmartPointer{ std::make_shared<DepthState>() });
-        pass->SetOffsetState(OffsetStateSmartPointer{ std::make_shared<OffsetState>() });
-        pass->SetStencilState(StencilStateSmartPointer{ std::make_shared<StencilState>() });
-        pass->SetWireState(WireStateSmartPointer{ std::make_shared<WireState>() });
+        pass->SetAlphaState(AlphaStateSharedPtr{ std::make_shared<AlphaState>() });
+        pass->SetCullState(CullStateSharedPtr{ std::make_shared<CullState>() });
+        pass->SetDepthState(DepthStateSharedPtr{ std::make_shared<DepthState>() });
+        pass->SetOffsetState(OffsetStateSharedPtr{ std::make_shared<OffsetState>() });
+        pass->SetStencilState(StencilStateSharedPtr{ std::make_shared<StencilState>() });
+        pass->SetWireState(WireStateSharedPtr{ std::make_shared<WireState>() });
 
-	VisualTechniqueSmartPointer technique{ std::make_shared<VisualTechnique>() };
+	VisualTechniqueSharedPtr technique{ std::make_shared<VisualTechnique>() };
 	technique->InsertPass(pass);
 	InsertTechnique(technique);
 }
@@ -87,12 +88,12 @@ Rendering::LightAmbEffect
 Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 	::CreateInstance(Light* light,  Material* material) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(std::make_shared< ProjectionViewMatrixConstant>()));
-        instance->SetVertexConstant(0, 1, ShaderFloatSmartPointer(std::make_shared < MaterialEmissiveConstant>(MaterialSmartPointer(material))));
-        instance->SetVertexConstant(0, 2, ShaderFloatSmartPointer(std::make_shared < MaterialAmbientConstant>(MaterialSmartPointer(material))));
-        instance->SetVertexConstant(0, 3, ShaderFloatSmartPointer(std::make_shared < LightAmbientConstant>(LightSmartPointer(light))));
-        instance->SetVertexConstant(0, 4, ShaderFloatSmartPointer(std::make_shared < LightAttenuationConstant>(LightSmartPointer(light))));
+    VisualEffectInstance* instance = CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+	instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared< ProjectionViewMatrixConstant>()));
+        instance->SetVertexConstant(0, 1, ShaderFloatSharedPtr(std::make_shared < MaterialEmissiveConstant>(MaterialSharedPtr(material))));
+        instance->SetVertexConstant(0, 2, ShaderFloatSharedPtr(std::make_shared < MaterialAmbientConstant>(MaterialSharedPtr(material))));
+        instance->SetVertexConstant(0, 3, ShaderFloatSharedPtr(std::make_shared < LightAmbientConstant>(LightSharedPtr(light))));
+        instance->SetVertexConstant(0, 4, ShaderFloatSharedPtr(std::make_shared < LightAttenuationConstant>(LightSharedPtr(light))));
 
     return instance;
 }
@@ -114,7 +115,7 @@ Rendering::LightAmbEffect
 }
 
 void Rendering::LightAmbEffect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -124,7 +125,7 @@ void Rendering::LightAmbEffect
 }
 
 void Rendering::LightAmbEffect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     VisualEffect::Link(source);
 }

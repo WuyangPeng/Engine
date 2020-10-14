@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -42,12 +42,7 @@ Rendering::ControlledObject
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ControlledObject
-    ::~ControlledObject()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
+ 
 Rendering::ControlledObject
     ::ControlledObject(const ControlledObject& rhs)
 	:ParentType(rhs), m_Impl{}, m_Object{ rhs.m_Object }
@@ -75,6 +70,29 @@ Rendering::ControlledObject& Rendering::ControlledObject
 	return *this;
 } 
 
+Rendering::ControlledObject ::ControlledObject(ControlledObject&& rhs) noexcept
+    : ParentType(std::move(rhs)), m_Impl{ std::move(rhs.m_Impl) }, m_Object{ std::move(rhs.m_Object) }
+{
+   
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+Rendering::ControlledObject& Rendering::ControlledObject ::operator=(ControlledObject&& rhs) noexcept
+{
+
+
+    ParentType::operator=(std::move(rhs));
+
+    m_Impl = std::move(rhs.m_Impl);
+
+  
+
+    m_Object = std::move(rhs.m_Object);
+
+    return *this;
+} 
+
 // private
 void Rendering::ControlledObject
 	::AttachControllerInCopy(const ControlledObject& rhs)
@@ -83,7 +101,7 @@ void Rendering::ControlledObject
 	
 	for(int index = 0; index < count;++ index)
 	{
-		ControllerInterfaceSmartPointer controller{ rhs.GetConstController(index)->Clone() };
+		ControllerInterfaceSharedPtr controller{ rhs.GetConstController(index)->Clone() };
 		
 		m_Impl->AttachControllerInCopy(controller);
 	}
@@ -116,10 +134,10 @@ void Rendering::ControlledObject ::SetObject(ControllerInterface* object) noexce
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ControlledObject,GetNumControllers,int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,GetConstController,int,Rendering::ConstControllerInterfaceSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,GetController,int,Rendering::ControllerInterfaceSmartPointer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,AttachController,ControllerInterfaceSmartPointer ,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,DetachController,ControllerInterfaceSmartPointer ,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,GetConstController,int,Rendering::ConstControllerInterfaceSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,GetController,int,Rendering::ControllerInterfaceSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,AttachController,ControllerInterfaceSharedPtr ,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,DetachController,ControllerInterfaceSharedPtr ,void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ControlledObject,DetachAllControllers,void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,UpdateControllers,double,bool)
 
@@ -178,7 +196,7 @@ void Rendering::ControlledObject ::Save(const CoreTools::BufferTargetSharedPtr& 
 }
 
 void Rendering::ControlledObject
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -186,9 +204,9 @@ void Rendering::ControlledObject
 
     m_Impl->Link(source);
 
-	/*ControllerInterfaceSmartPointer object { m_ObjectID, nullptr };
+	/*ControllerInterfaceSharedPtr object { m_ObjectID, nullptr };
 	  
-    source.ResolveObjectSmartPointerLink(object);
+    source.ResolveObjectSharedPtrLink(object);
 
 	m_Object = object.GetData();*/
 }
@@ -201,8 +219,7 @@ void Rendering::ControlledObject
 	ParentType::PostLink();
 }
 
-void Rendering::ControlledObject
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::ControlledObject ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -212,9 +229,9 @@ void Rendering::ControlledObject
 	
 	m_Impl->Load(source);
 
-	ControllerInterfaceSmartPointer object;
+	ControllerInterfaceSharedPtr object;
 
-//    source.ReadSmartPointer(object);
+//    source.ReadSharedPtr(object);
 
 	//m_ObjectID = object.GetAddress();
     

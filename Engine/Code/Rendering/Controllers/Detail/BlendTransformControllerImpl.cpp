@@ -17,9 +17,9 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using std::string;
 using std::vector;
@@ -34,7 +34,7 @@ Rendering::BlendTransformControllerImpl
 }
 
 Rendering::BlendTransformControllerImpl
-	::BlendTransformControllerImpl(const TransformControllerSmartPointer& firstController,const TransformControllerSmartPointer& secondController, 
+	::BlendTransformControllerImpl(const TransformControllerSharedPtr& firstController,const TransformControllerSharedPtr& secondController, 
 								   bool rotationScaleMatrices, bool geometricRotation,bool geometricScale) noexcept
 	:m_FirstController{ firstController },m_SecondController{ secondController },m_Weight{ 0.0f },
 	 m_RotationScaleMatrices{ rotationScaleMatrices },m_GeometricRotation{ geometricRotation },m_GeometricScale{ geometricScale }
@@ -73,8 +73,8 @@ void Rendering::BlendTransformControllerImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	//target.WriteSmartPointer(m_FirstController);
-	//target.WriteSmartPointer(m_SecondController);
+	//target.WriteSharedPtr(m_FirstController);
+	//target.WriteSharedPtr(m_SecondController);
 	target->Write(m_Weight);
 	target->Write(m_RotationScaleMatrices);
 	target->Write(m_GeometricRotation);
@@ -82,16 +82,16 @@ void Rendering::BlendTransformControllerImpl
 }
 
 void Rendering::BlendTransformControllerImpl
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;	 
 
-//	source.ReadSmartPointer(m_FirstController);
-//	source.ReadSmartPointer(m_SecondController);
-	source.Read(m_Weight);
-	m_RotationScaleMatrices = source.ReadBool();
-	m_GeometricRotation = source.ReadBool();
-	m_GeometricScale = source.ReadBool();	
+//	source.ReadSharedPtr(m_FirstController);
+//	source.ReadSharedPtr(m_SecondController);
+        source->Read(m_Weight);
+        m_RotationScaleMatrices = source->ReadBool();
+        m_GeometricRotation = source->ReadBool();
+        m_GeometricScale = source->ReadBool();
 }
 
 bool Rendering::BlendTransformControllerImpl ::IsGeometricRotation() const noexcept
@@ -109,13 +109,13 @@ bool Rendering::BlendTransformControllerImpl ::IsGeometricScale() const noexcept
 }
 
 void Rendering::BlendTransformControllerImpl
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     source;
-    //	source.ResolveObjectSmartPointerLink(m_FirstController);
-	//source.ResolveObjectSmartPointerLink(m_SecondController);
+    //	source.ResolveObjectSharedPtrLink(m_FirstController);
+	//source.ResolveObjectSharedPtrLink(m_SecondController);
 }
 
 void Rendering::BlendTransformControllerImpl
@@ -123,12 +123,12 @@ void Rendering::BlendTransformControllerImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
-        CoreTools::DoNothing();
-	//target.RegisterSmartPointer(m_FirstController);
-	//target.RegisterSmartPointer(m_SecondController);
+        CoreTools::DisableNoexcept();
+	//target.RegisterSharedPtr(m_FirstController);
+	//target.RegisterSharedPtr(m_SecondController);
 }
 
-const CoreTools::ObjectSmartPointer Rendering::BlendTransformControllerImpl
+const CoreTools::ObjectSharedPtr Rendering::BlendTransformControllerImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -148,10 +148,10 @@ const CoreTools::ObjectSmartPointer Rendering::BlendTransformControllerImpl
 		}
 	}
 
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::BlendTransformControllerImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::BlendTransformControllerImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -164,7 +164,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::BlendTransformControllerI
 	return firstObjects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::BlendTransformControllerImpl
+const CoreTools::ConstObjectSharedPtr Rendering::BlendTransformControllerImpl
 	::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -184,10 +184,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::BlendTransformControllerImpl
 		}
 	}
 
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::BlendTransformControllerImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::BlendTransformControllerImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -200,7 +200,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::BlendTransformContro
 	return firstObjects;
 }
 
-const Rendering::ConstTransformControllerSmartPointer Rendering::BlendTransformControllerImpl ::GetFirstController() const noexcept
+const Rendering::ConstTransformControllerSharedPtr Rendering::BlendTransformControllerImpl ::GetFirstController() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -214,7 +214,7 @@ bool Rendering::BlendTransformControllerImpl ::IsRotationScaleMatrices() const n
 	return m_RotationScaleMatrices;
 }
 
-const Rendering::ConstTransformControllerSmartPointer Rendering::BlendTransformControllerImpl ::GetSecondController() const noexcept
+const Rendering::ConstTransformControllerSharedPtr Rendering::BlendTransformControllerImpl ::GetSecondController() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	

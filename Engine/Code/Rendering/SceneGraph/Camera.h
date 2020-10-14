@@ -15,8 +15,8 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "CoreTools/ObjectSystems/Object.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointer.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointer.h"
+
+
 
 RENDERING_EXPORT_SHARED_PTR(CameraImpl);
 
@@ -25,10 +25,10 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Camera : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Camera);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Camera, = default);
         using ParentType = Object;
-        using CameraSmartPointer = CoreTools::ThirdSubclassSmartPointer<ClassType>;
-	    using ConstCameraSmartPointer = CoreTools::ConstThirdSubclassSmartPointer<ClassType>;
+        using CameraSharedPtr = std::shared_ptr<ClassType>;
+	    using ConstCameraSharedPtr = std::shared_ptr<ClassType>;
         using APoint = Mathematics::APoint<float>;
         using AVector = Mathematics::AVector<float>;
         using Matrix = Mathematics::Matrix<float>;
@@ -37,13 +37,6 @@ namespace Rendering
         
     public:
         Camera (bool isPerspective = true,float epsilon = Math::GetZeroTolerance());
-          ~Camera ();
-
-          #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-          Camera(Camera&&) = default;
-          Camera& operator=(Camera&&) = default;
-          #include STSTEM_WARNING_POP
 
             ObjectInterfaceSharedPtr CloneObject() const override;
 		CLASS_INVARIANT_OVERRIDE_DECLARE;    
@@ -113,7 +106,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)  
     CORE_TOOLS_STREAM_REGISTER(Camera);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, Camera); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( Camera); 
 }
 
 #endif // RENDERING_SCENE_GRAPH_CAMERA_H

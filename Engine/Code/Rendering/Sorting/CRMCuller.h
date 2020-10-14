@@ -19,16 +19,16 @@ namespace Rendering
 	{
 	public:
 		// Construction and destruction.
-		CRMCuller(const ConstCameraSmartPointer& camera = ConstCameraSmartPointer())  ;
+		CRMCuller(const ConstCameraSharedPtr& camera = ConstCameraSharedPtr())  ;
  
 
 		// Two portals leading into the room can be visible to the camera.  The
 		// Culler would store visible objects twice.  CRMCuller maintains a set
 		// of unique objects.
-		 void Insert(const VisualSmartPointer& visible) override;
+		 void Insert(const VisualSharedPtr& visible) override;
 
 	protected:
-		std::set<ConstSpatialSmartPointer> mUnique;
+		std::set<ConstSpatialSharedPtr> mUnique;
 	};
 }
 

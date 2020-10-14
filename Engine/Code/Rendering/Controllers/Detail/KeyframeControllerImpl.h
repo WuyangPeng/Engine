@@ -50,7 +50,7 @@ namespace Rendering
 
 		int GetStreamingSize() const noexcept;
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-		void Load(CoreTools::BufferSource& source);
+                void Load(const CoreTools::BufferSourceSharedPtr& source);
  
 	public:		
 		// 调用构造函数后，您必须设置数据使用这些函数。

@@ -246,7 +246,7 @@ int Rendering::TextureImpl
 }
 
 void Rendering::TextureImpl
-    ::Load( CoreTools::BufferSource& source )
+    ::Load( const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
     

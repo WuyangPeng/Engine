@@ -12,7 +12,7 @@
 
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
@@ -75,7 +75,7 @@ bool Framework::OpenGLGlutCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -85,7 +85,7 @@ bool Framework::OpenGLGlutCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -95,7 +95,7 @@ void Framework::OpenGLGlutCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Framework::OpenGLGlutCallBackInterface
@@ -103,7 +103,7 @@ void Framework::OpenGLGlutCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
  
 bool Framework::OpenGLGlutCallBackInterface
@@ -115,7 +115,7 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	System::GlutSwapBuffers();
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -128,7 +128,7 @@ bool Framework::OpenGLGlutCallBackInterface
 	System::GlutPostWindowRedisplay(m_WindowID);
 	System::SetGlViewport(0, 0, boost::numeric_cast<System::OpenGLSize>(width), boost::numeric_cast<System::OpenGLSize>(height));
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -139,7 +139,7 @@ bool Framework::OpenGLGlutCallBackInterface ::SpecialKeysDown([[maybe_unused]] i
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 
@@ -152,7 +152,7 @@ bool Framework::OpenGLGlutCallBackInterface ::KeyboardDown([[maybe_unused]] int 
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 
@@ -165,7 +165,7 @@ bool Framework::OpenGLGlutCallBackInterface ::SpecialKeysUp([[maybe_unused]] int
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 
@@ -178,7 +178,7 @@ bool Framework::OpenGLGlutCallBackInterface ::KeyboardUp([[maybe_unused]] int ke
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	 
 
@@ -191,7 +191,7 @@ bool Framework::OpenGLGlutCallBackInterface ::PassiveMotion([[maybe_unused]] int
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 
@@ -204,7 +204,7 @@ bool Framework::OpenGLGlutCallBackInterface ::MouseClick([[maybe_unused]] int bu
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 
@@ -217,7 +217,7 @@ bool Framework::OpenGLGlutCallBackInterface ::MotionFunction([[maybe_unused]] in
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 	return true;
@@ -230,7 +230,7 @@ bool Framework::OpenGLGlutCallBackInterface
 
 	System::GlutPostWindowRedisplay(m_WindowID);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -244,7 +244,7 @@ bool Framework::OpenGLGlutCallBackInterface
 	System::GlutPostWindowRedisplay(m_WindowID);
 	System::GlutTimerFunc(GetMillisecond(), callback, 1);
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -255,7 +255,7 @@ bool Framework::OpenGLGlutCallBackInterface ::ProcessMenu([[maybe_unused]] int m
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }

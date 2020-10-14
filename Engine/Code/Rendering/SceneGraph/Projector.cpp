@@ -79,7 +79,7 @@ void Rendering::Projector
 }
 
 void Rendering::Projector
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -95,7 +95,7 @@ void Rendering::Projector
 }
 
 void Rendering::Projector
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
   
@@ -104,7 +104,7 @@ void Rendering::Projector
     ParentType::Load(source);
 
 	auto depthType = DepthType::Quantity;	
-	source.ReadEnum(depthType);
+	source->ReadEnum(depthType);
 	SetDepthType(depthType);	
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);

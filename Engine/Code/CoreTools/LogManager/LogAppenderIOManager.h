@@ -15,7 +15,7 @@
 #include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
-#include "CoreTools/ClassInvariant/ClassInvariantFwd.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
 #include <boost/noncopyable.hpp>
 

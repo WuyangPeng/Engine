@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 11:14)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/12 18:05)
 
 #ifndef CORE_TOOLS_THREADING_SEMAPHORE_H
 #define CORE_TOOLS_THREADING_SEMAPHORE_H
@@ -18,25 +21,25 @@ EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE Semaphore : private boost::noncopyable
-	{
-	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(Semaphore);
+    class CORE_TOOLS_DEFAULT_DECLARE Semaphore final : private boost::noncopyable
+    {
+    public:
+        NON_COPY_CLASSES_TYPE_DECLARE(Semaphore);
 
-	public:
-		Semaphore(int initialCount, int maximumCount);
+    public:
+        Semaphore(int initialCount, int maximumCount);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void Release(int releaseCount);
-		void Wait();
+        void Release(int releaseCount);
+        void Wait();
 
-		int GetCurrentCount() const noexcept;
-		int GetMaximumCount() const noexcept;
+        [[nodiscard]] int GetCurrentCount() const noexcept;
+        [[nodiscard]] int GetMaximumCount() const noexcept;
 
-	private:
-		IMPL_TYPE_DECLARE(Semaphore);
-	};
+    private:
+        IMPL_TYPE_DECLARE(Semaphore);
+    };
 }
 
-#endif // CORE_TOOLS_THREADING_SEMAPHORE_H
+#endif  // CORE_TOOLS_THREADING_SEMAPHORE_H

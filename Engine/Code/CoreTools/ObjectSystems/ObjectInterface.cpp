@@ -13,7 +13,7 @@
 
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "CoreTools/Helper/MainFunctionMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "InitTermRegisterFactory.h"
 #include STSTEM_WARNING_PUSH

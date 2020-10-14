@@ -23,7 +23,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE MorphController : public Controller
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MorphController);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(MorphController, = default);
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 		using APoint = Mathematics::FloatAPoint;
@@ -40,9 +40,7 @@ namespace Rendering
 		// numKeys:  键的数目，每个键发生在一个特定的时间。
 
 		MorphController(int numVertices, int numTargets, int numKeys);
-		  ~MorphController ();
-		  MorphController(MorphController&&) = default;
-		   MorphController& operator=(MorphController&&) = default;
+	 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -65,7 +63,7 @@ namespace Rendering
 		 void SetObject(ControllerInterface* object) override;
 		 void SetObjectInCopy(ControllerInterface* object) override;
 
-		 ControllerInterfaceSmartPointer Clone() const override;
+		 ControllerInterfaceSharedPtr Clone() const override;
                  ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		// 查找边界上的键。
@@ -79,7 +77,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(MorphController);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, MorphController); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( MorphController); 
 }
 #include STSTEM_WARNING_POP
 

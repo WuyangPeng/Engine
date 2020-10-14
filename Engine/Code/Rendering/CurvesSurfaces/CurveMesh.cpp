@@ -11,10 +11,10 @@
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -29,14 +29,14 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, CurveMesh);
  
 Rendering::CurveMesh
-	::CurveMesh(VertexFormatSmartPointer vformat, VertexBufferSmartPointer vbuffer, CurveSegmentSmartPointer* segments,
+	::CurveMesh(VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, CurveSegmentSharedPtr* segments,
 				FloatArray* params, bool allowDynamicChange)
     :Polysegment(vformat, vbuffer, true), mOrigVBuffer(vbuffer), mOrigParams(params), mSegments(segments),
      mNumFullVertices(vbuffer->GetNumElements()), mNumSegments(vbuffer->GetNumElements() - 1), mLevel(0),mAllowDynamicChange(allowDynamicChange)
 {
     if (mAllowDynamicChange)
     {
-        mCInfo = NEW1<CurveInfo>(mNumFullVertices);
+        //mCInfo = NEW1<CurveInfo>(mNumFullVertices);
         InitializeCurveInfo();
     }
     else
@@ -50,8 +50,8 @@ Rendering::CurveMesh
 {
     EXCEPTION_TRY
     {
-        DELETE1(mSegments);
-        DELETE1(mCInfo);
+       // DELETE1(mSegments);
+        //DELETE1(mCInfo);
     }
     EXCEPTION_ALL_CATCH(Rendering)
     
@@ -98,7 +98,7 @@ void Rendering::CurveMesh
 
 	UpdateModelSpace(VisualUpdateType::Normals);
 
-    DELETE1(edges);
+   // DELETE1(edges);
     OnDynamicChange();
 	RENDERER_MANAGE_SINGLETON.BindAll(GetVertexBuffer().get());
 }
@@ -130,12 +130,12 @@ void Rendering::CurveMesh
 
     // Allocate storage for the subdivision.
     int vstride = GetVertexFormat()->GetStride();
-	SetVertexBuffer(VertexBufferSmartPointer(std::make_shared<VertexBuffer>(numTotalVertices, vstride)));
-    edges = NEW1<Edge>(numTotalEdges);
+	SetVertexBuffer(VertexBufferSharedPtr(std::make_shared<VertexBuffer>(numTotalVertices, vstride)));
+   // edges = NEW1<Edge>(numTotalEdges);
     if (mAllowDynamicChange)
     {
-        DELETE1(mCInfo);
-        mCInfo = NEW1<CurveInfo>(numTotalVertices);
+        //DELETE1(mCInfo);
+      //  mCInfo = NEW1<CurveInfo>(numTotalVertices);
         InitializeCurveInfo();
     }
 
@@ -291,12 +291,12 @@ void Rendering::CurveMesh
 void Rendering::CurveMesh
 	::Lock ()  
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     if (mOrigVBuffer)
     {
 		mOrigVBuffer.reset(); 
 		mOrigParams.reset();
-        DELETE1(mSegments);
+       // DELETE1(mSegments);
         mSegments = 0;
     }
 
@@ -348,10 +348,10 @@ Rendering::CurveMesh::CurveInfo ::CurveInfo() noexcept
 
 
 // Name support.
-const CoreTools::ObjectSmartPointer Rendering::CurveMesh
+const CoreTools::ObjectSharedPtr Rendering::CurveMesh
 	::GetObjectByName(const std::string& name)
 {
-	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
+	CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -373,21 +373,21 @@ const CoreTools::ObjectSmartPointer Rendering::CurveMesh
 	{
 		for (int i = 0; i < mNumSegments; ++i)
 		{
-			CoreTools::ObjectSmartPointer found2 = mSegments[i]->GetObjectByName(name);
+			CoreTools::ObjectSharedPtr found2 = mSegments[i]->GetObjectByName(name);
 			if (found2)
 				return found2;
 		}
 	}
 	 
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ObjectSmartPointer> Rendering::CurveMesh
+const std::vector<CoreTools::ObjectSharedPtr> Rendering::CurveMesh
 	::GetAllObjectsByName(const std::string& name)
 {
-	std::vector<CoreTools::ObjectSmartPointer> objects = ParentType::GetAllObjectsByName(name);
+	std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 		 
-	std::vector<CoreTools::ObjectSmartPointer> pointerObjects = mOrigVBuffer->GetAllObjectsByName(name);
+	std::vector<CoreTools::ObjectSharedPtr> pointerObjects = mOrigVBuffer->GetAllObjectsByName(name);
 	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 	 
 	pointerObjects = mOrigParams->GetAllObjectsByName(name);
@@ -406,10 +406,10 @@ const std::vector<CoreTools::ObjectSmartPointer> Rendering::CurveMesh
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::CurveMesh
+const CoreTools::ConstObjectSharedPtr Rendering::CurveMesh
 	::GetConstObjectByName(const std::string& name) const
 {
-	CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
+	CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
 	if (found)
 	{
 		return found;
@@ -431,21 +431,21 @@ const CoreTools::ConstObjectSmartPointer Rendering::CurveMesh
 	{
 		for (int i = 0; i < mNumSegments; ++i)
 		{
-			CoreTools::ConstObjectSmartPointer found2 = mSegments[i]->GetConstObjectByName(name);
+			CoreTools::ConstObjectSharedPtr found2 = mSegments[i]->GetConstObjectByName(name);
 			if (found2)
 				return found2;
 		}
 	}
 
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ConstObjectSmartPointer> Rendering::CurveMesh
+const std::vector<CoreTools::ConstObjectSharedPtr> Rendering::CurveMesh
 	::GetAllConstObjectsByName(const std::string& name) const
 {
-	std::vector<CoreTools::ConstObjectSmartPointer> objects = ParentType::GetAllConstObjectsByName(name);
+	std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
-	std::vector<CoreTools::ConstObjectSmartPointer> pointerObjects = mOrigVBuffer->GetAllConstObjectsByName(name);
+	std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = mOrigVBuffer->GetAllConstObjectsByName(name);
 	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
 	pointerObjects = mOrigParams->GetAllConstObjectsByName(name);
@@ -476,32 +476,32 @@ Rendering::CurveMesh
 }
 
 void Rendering::CurveMesh
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Polysegment::Load(source);
 
-    source.Read(mNumFullVertices);
-    source.Read(mNumSegments);
-    source.Read(mLevel);
-	mAllowDynamicChange = source.ReadBool();
-//	source.ReadSmartPointer(mOrigVBuffer);
-	//source.ReadSmartPointer(mOrigParams);
+    source->Read(mNumFullVertices);
+    source->Read(mNumSegments);
+    source->Read(mLevel);
+	mAllowDynamicChange = source->ReadBool();
+//	source.ReadSharedPtr(mOrigVBuffer);
+	//source.ReadSharedPtr(mOrigParams);
 
     const bool locked = (!mOrigVBuffer);
     if (!locked)
     {
-      //  source.ReadSmartPointer(mNumSegments, mSegments);
+      //  source.ReadSharedPtr(mNumSegments, mSegments);
     }
 
     if (mAllowDynamicChange)
     {
-        mCInfo = NEW1<CurveInfo>(mNumFullVertices);
+      //  mCInfo = NEW1<CurveInfo>(mNumFullVertices);
         for (int i = 0; i < mNumFullVertices; ++i)
         {
-         //   source.ReadSmartPointer(mCInfo[i].Segment);
-            source.Read(mCInfo[i].Param);
+         //   source.ReadSharedPtr(mCInfo[i].Segment);
+            source->Read(mCInfo[i].Param);
         }
     }
 
@@ -509,18 +509,18 @@ void Rendering::CurveMesh
 }
 
 void Rendering::CurveMesh
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     Polysegment::Link(source);
 
-	//source.ResolveObjectSmartPointerLink(mOrigVBuffer);
-	//source.ResolveObjectSmartPointerLink(mOrigParams);
-	//source.ResolveObjectSmartPointerLink(mNumSegments, mSegments);
+	//source.ResolveObjectSharedPtrLink(mOrigVBuffer);
+	//source.ResolveObjectSharedPtrLink(mOrigParams);
+	//source.ResolveObjectSharedPtrLink(mNumSegments, mSegments);
     if (mCInfo)
     {
         for (int i = 0; i < mNumFullVertices; ++i)
         {
-          //  source.ResolveObjectSmartPointerLink(mCInfo[i].Segment);
+          //  source.ResolveObjectSharedPtrLink(mCInfo[i].Segment);
         }
     }
 }
@@ -536,14 +536,14 @@ uint64_t Rendering::CurveMesh ::Register(const CoreTools::ObjectRegisterSharedPt
     const uint64_t id = Polysegment::Register(target);
     if (0 < id)
     {
-      //  target.RegisterSmartPointer(mOrigVBuffer);
-		//target.RegisterSmartPointer(mOrigParams);
-		//target.RegisterSmartPointer(mNumSegments, mSegments);
+      //  target.RegisterSharedPtr(mOrigVBuffer);
+		//target.RegisterSharedPtr(mOrigParams);
+		//target.RegisterSharedPtr(mNumSegments, mSegments);
         if (mCInfo)
         {
             for (int i = 0; i < mNumFullVertices; ++i)
             {
-              //  target.RegisterSmartPointer(mCInfo[i].Segment);
+              //  target.RegisterSharedPtr(mCInfo[i].Segment);
             }
         }
 		return id;
@@ -562,15 +562,15 @@ void Rendering::CurveMesh
     target->Write(mNumSegments);
     target->Write(mLevel);
     target->Write(mAllowDynamicChange);
-  //  target.WriteSmartPointer(mOrigVBuffer);
-	//target.WriteSmartPointer(mOrigParams);
-   // target.WriteSmartPointerWithNumber(mNumSegments, mSegments);
+  //  target.WriteSharedPtr(mOrigVBuffer);
+	//target.WriteSharedPtr(mOrigParams);
+   // target.WriteSharedPtrWithNumber(mNumSegments, mSegments);
 
     if (mCInfo)
     {
         for (int i = 0; i < mNumFullVertices; ++i)
         {
-           // target.WriteSmartPointer(mCInfo[i].Segment);
+           // target.WriteSharedPtr(mCInfo[i].Segment);
             target->Write(mCInfo[i].Param);
         }
     }

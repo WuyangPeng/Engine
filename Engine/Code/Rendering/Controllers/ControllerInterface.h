@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/ObjectSystems/Object.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointer.h"
+
 
 namespace Rendering
 {
@@ -19,8 +19,8 @@ namespace Rendering
 	public:
 		using ClassType = ControllerInterface;
         using ParentType = Object;
-		using ControllerInterfaceSmartPointer = std::shared_ptr<ClassType>;
-	    using ConstControllerInterfaceSmartPointer = std::shared_ptr<const ClassType>;
+		using ControllerInterfaceSharedPtr = std::shared_ptr<ClassType>;
+	    using ConstControllerInterfaceSharedPtr = std::shared_ptr<const ClassType>;
 
 	public:
 		ControllerInterface();
@@ -37,10 +37,10 @@ namespace Rendering
 
 		virtual bool Update (double applicationTime) = 0;
 
-		virtual void AttachController (ControllerInterfaceSmartPointer  controller);
-		virtual void DetachController (ControllerInterfaceSmartPointer  controller);
+		virtual void AttachController (ControllerInterfaceSharedPtr  controller);
+		virtual void DetachController (ControllerInterfaceSharedPtr  controller);
 
-		virtual ControllerInterfaceSmartPointer Clone() const = 0;
+		virtual ControllerInterfaceSharedPtr Clone() const = 0;
 
 		virtual int GetNumControllers () const;
 		virtual void SetObjectInCopy(ControllerInterface* object);
@@ -49,7 +49,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426) 
     CORE_TOOLS_STREAM_REGISTER(ControllerInterface);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ControllerInterface); 
+	CORE_TOOLS_SHARED_PTR_DECLARE(ControllerInterface); 
 }
 
 #endif // RENDERING_CONTROLLERS_CONTROLLER_INTERFACE_H

@@ -27,10 +27,10 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, ProjectorWorldPositionConstant);
 CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, ProjectorWorldPositionConstant);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ProjectorWorldPositionConstant);
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ProjectorWorldPositionConstant);
+ 
 
 Rendering::ProjectorWorldPositionConstant
-	::ProjectorWorldPositionConstant(const ProjectorSmartPointer& projector)
+	::ProjectorWorldPositionConstant(const ProjectorSharedPtr& projector)
 	:ParentType{ sm_NumRegisters }, m_Impl{ make_shared<ImplType>(projector) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -49,7 +49,7 @@ void Rendering::ProjectorWorldPositionConstant
 	ParentType::SetNumRegisters(numRegisters);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ProjectorWorldPositionConstant,GetProjector, const Rendering::ConstProjectorSmartPointer )
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ProjectorWorldPositionConstant,GetProjector, const Rendering::ConstProjectorSharedPtr )
 
 void Rendering::ProjectorWorldPositionConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
@@ -62,12 +62,12 @@ void Rendering::ProjectorWorldPositionConstant ::Update([[maybe_unused]] const V
  
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::ProjectorWorldPositionConstant
+Rendering::ShaderFloatSharedPtr Rendering::ProjectorWorldPositionConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
  #include STSTEM_WARNING_POP

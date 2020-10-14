@@ -10,14 +10,14 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Meshes/EdgeKey.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include <set>
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -32,14 +32,14 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, SurfaceMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SurfaceMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SurfaceMesh);
 
-Rendering::SurfaceMesh ::SurfaceMesh(VertexFormatSmartPointer vformat, VertexBufferSmartPointer vbuffer, IndexBufferSmartPointer ibuffer,
-                                     Float2ArraySmartPointer params, SurfacePatchSmartPointer* patches, bool allowDynamicChange)
+Rendering::SurfaceMesh ::SurfaceMesh(VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, IndexBufferSharedPtr ibuffer,
+                                     Float2ArraySharedPtr params, SurfacePatchSharedPtr* patches, bool allowDynamicChange)
     : ParentType(vformat, vbuffer, ibuffer), mOrigVBuffer(vbuffer), mOrigIBuffer(ibuffer), mOrigParams(params), mPatches(patches),
       mNumFullVertices(vbuffer->GetNumElements()), mNumPatches(ibuffer->GetNumElements() / 3), mLevel(0), mAllowDynamicChange(allowDynamicChange)
 {
     if (mAllowDynamicChange)
     {
-        mSInfo = NEW1<SurfaceInfo>(mNumFullVertices);
+   //     mSInfo = NEW1<SurfaceInfo>(mNumFullVertices);
         InitializeSurfaceInfo();
     }
     else
@@ -52,8 +52,8 @@ Rendering::SurfaceMesh ::~SurfaceMesh()
 {
     EXCEPTION_TRY
     {
-        DELETE1(mPatches);
-        DELETE1(mSInfo);
+        //DELETE1(mPatches);
+        //DELETE1(mSInfo);
     }
     EXCEPTION_ALL_CATCH(Rendering)
 }
@@ -100,7 +100,7 @@ void Rendering::SurfaceMesh ::SetLevel(int level)
     mNumFullVertices = numTotalVertices;
 
     const int numTotalIndices = 3 * numTotalTriangles;
-    SetIndexBuffer(IndexBufferSmartPointer(std::make_shared< IndexBuffer>(numTotalIndices, (int)sizeof(int))));
+    SetIndexBuffer(IndexBufferSharedPtr(std::make_shared< IndexBuffer>(numTotalIndices, (int)sizeof(int))));
 
     int* indices = (int*)GetIndexBuffer()->GetReadOnlyData();
     for (i = 0; i < numTotalTriangles; ++i)
@@ -113,7 +113,7 @@ void Rendering::SurfaceMesh ::SetLevel(int level)
     }
     RENDERER_MANAGE_SINGLETON.UpdateAll(GetIndexBuffer().get());
 
-    DELETE1(triangles);
+ //   DELETE1(triangles);
     OnDynamicChange();
     UpdateModelSpace(VisualUpdateType::Normals);
 }
@@ -165,12 +165,12 @@ void Rendering::SurfaceMesh ::Allocate(int& numTotalVertices, int& numTotalEdges
 
     // Allocate storage for the subdivision.
     int vstride = GetVertexFormat()->GetStride();
-    SetVertexBuffer(VertexBufferSmartPointer(std::make_shared < VertexBuffer>(numTotalVertices, vstride)));
-    triangles = NEW1<Triangle>(numTotalTriangles);
+    SetVertexBuffer(VertexBufferSharedPtr(std::make_shared < VertexBuffer>(numTotalVertices, vstride)));
+   // triangles = NEW1<Triangle>(numTotalTriangles);
     if (mAllowDynamicChange)
     {
-        DELETE1(mSInfo);
-        mSInfo = NEW1<SurfaceInfo>(numTotalVertices);
+      //  DELETE1(mSInfo);
+      //  mSInfo = NEW1<SurfaceInfo>(numTotalVertices);
         InitializeSurfaceInfo();
     }
 
@@ -380,7 +380,7 @@ void Rendering::SurfaceMesh ::Subdivide(int& numVertices, int& numEdges, EdgeMap
     numEdges = (int)edgeMap.size();
 }
 
-void Rendering::SurfaceMesh ::InsertInto(EdgeMap& edgeMap, SurfacePatchSmartPointer patch, int v0, int v1, const Mathematics::Float2& param0, const Mathematics::Float2& param1, int newReferences)
+void Rendering::SurfaceMesh ::InsertInto(EdgeMap& edgeMap, SurfacePatchSharedPtr patch, int v0, int v1, const Mathematics::Float2& param0, const Mathematics::Float2& param1, int newReferences)
 {
     Mathematics::EdgeKey key(v0, v1);
     const EdgeMap::iterator iter = edgeMap.find(key);
@@ -417,13 +417,13 @@ void Rendering::SurfaceMesh ::OnDynamicChange()
 
 void Rendering::SurfaceMesh ::Lock()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     if (mOrigVBuffer)
     {
         mOrigVBuffer.reset();
         mOrigIBuffer.reset();
         mOrigParams.reset();
-        DELETE1(mPatches);
+       // DELETE1(mPatches);
         mPatches = nullptr;
     }
 
@@ -493,9 +493,9 @@ Rendering::SurfaceMesh::SurfaceInfo ::SurfaceInfo()
 }
 // Name support.
 
-const CoreTools::ObjectSmartPointer Rendering::SurfaceMesh ::GetObjectByName(const std::string& name)
+const CoreTools::ObjectSharedPtr Rendering::SurfaceMesh ::GetObjectByName(const std::string& name)
 {
-    CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
+    CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
     if (found)
     {
         return found;
@@ -523,20 +523,20 @@ const CoreTools::ObjectSmartPointer Rendering::SurfaceMesh ::GetObjectByName(con
     {
         for (int i = 0; i < mNumPatches; ++i)
         {
-            CoreTools::ObjectSmartPointer found2 = mPatches[i]->GetObjectByName(name);
+            CoreTools::ObjectSharedPtr found2 = mPatches[i]->GetObjectByName(name);
             if (found2)
                 return found2;
         }
     }
 
-    return CoreTools::ObjectSmartPointer();
+    return CoreTools::ObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ObjectSmartPointer> Rendering::SurfaceMesh ::GetAllObjectsByName(const std::string& name)
+const std::vector<CoreTools::ObjectSharedPtr> Rendering::SurfaceMesh ::GetAllObjectsByName(const std::string& name)
 {
-    std::vector<CoreTools::ObjectSmartPointer> objects = ParentType::GetAllObjectsByName(name);
+    std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
-    std::vector<CoreTools::ObjectSmartPointer> pointerObjects = mOrigVBuffer->GetAllObjectsByName(name);
+    std::vector<CoreTools::ObjectSharedPtr> pointerObjects = mOrigVBuffer->GetAllObjectsByName(name);
     objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
     pointerObjects = mOrigIBuffer->GetAllObjectsByName(name);
@@ -556,9 +556,9 @@ const std::vector<CoreTools::ObjectSmartPointer> Rendering::SurfaceMesh ::GetAll
     return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::SurfaceMesh ::GetConstObjectByName(const std::string& name) const
+const CoreTools::ConstObjectSharedPtr Rendering::SurfaceMesh ::GetConstObjectByName(const std::string& name) const
 {
-    CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
+    CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
     if (found)
     {
         return found;
@@ -586,20 +586,20 @@ const CoreTools::ConstObjectSmartPointer Rendering::SurfaceMesh ::GetConstObject
     {
         for (int i = 0; i < mNumPatches; ++i)
         {
-            CoreTools::ConstObjectSmartPointer found2 = mPatches[i]->GetConstObjectByName(name);
+            CoreTools::ConstObjectSharedPtr found2 = mPatches[i]->GetConstObjectByName(name);
             if (found2)
                 return found2;
         }
     }
 
-    return CoreTools::ConstObjectSmartPointer();
+    return CoreTools::ConstObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ConstObjectSmartPointer> Rendering::SurfaceMesh ::GetAllConstObjectsByName(const std::string& name) const
+const std::vector<CoreTools::ConstObjectSharedPtr> Rendering::SurfaceMesh ::GetAllConstObjectsByName(const std::string& name) const
 {
-    std::vector<CoreTools::ConstObjectSmartPointer> objects = ParentType::GetAllConstObjectsByName(name);
+    std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
-    std::vector<CoreTools::ConstObjectSmartPointer> pointerObjects = mOrigVBuffer->GetAllConstObjectsByName(name);
+    std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = mOrigVBuffer->GetAllConstObjectsByName(name);
     objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
     pointerObjects = mOrigIBuffer->GetAllConstObjectsByName(name);
@@ -626,52 +626,52 @@ Rendering::SurfaceMesh ::SurfaceMesh(LoadConstructor value)
 {
 }
 
-void Rendering::SurfaceMesh ::Load(CoreTools::BufferSource& source)
+void Rendering::SurfaceMesh ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source.Read(mNumFullVertices);
-    source.Read(mNumPatches);
-    source.Read(mLevel);
-    mAllowDynamicChange = source.ReadBool();
-    //source.ReadSmartPointer(mOrigVBuffer);
-    //source.ReadSmartPointer(mOrigIBuffer);
-    //source.ReadSmartPointer(mOrigParams);
+    source->Read(mNumFullVertices);
+    source->Read(mNumPatches);
+    source->Read(mLevel);
+    mAllowDynamicChange = source->ReadBool();
+    //source.ReadSharedPtr(mOrigVBuffer);
+    //source.ReadSharedPtr(mOrigIBuffer);
+    //source.ReadSharedPtr(mOrigParams);
 
     const bool locked = (!mOrigVBuffer);
     if (!locked)
     {
-        //source.ReadSmartPointer(mNumPatches, mPatches);
+        //source.ReadSharedPtr(mNumPatches, mPatches);
     }
 
     if (mAllowDynamicChange)
     {
-        mSInfo = NEW1<SurfaceInfo>(mNumFullVertices);
+        //mSInfo = NEW1<SurfaceInfo>(mNumFullVertices);
         for (int i = 0; i < mNumFullVertices; ++i)
         {
-            //source.ReadSmartPointer(mSInfo[i].Patch);
-            //source.ReadAggregate(mSInfo[i].Param);
+            //source.ReadSharedPtr(mSInfo[i].Patch);
+            //source->ReadAggregate(mSInfo[i].Param);
         }
     }
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::SurfaceMesh ::Link(CoreTools::ObjectLink& source)
+void Rendering::SurfaceMesh ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     ParentType::Link(source);
 
-    //source.ResolveObjectSmartPointerLink(mOrigVBuffer);
-    //source.ResolveObjectSmartPointerLink(mOrigIBuffer);
-    //source.ResolveObjectSmartPointerLink(mOrigParams);
-    //source.ResolveObjectSmartPointerLink(mNumPatches, mPatches);
+    //source.ResolveObjectSharedPtrLink(mOrigVBuffer);
+    //source.ResolveObjectSharedPtrLink(mOrigIBuffer);
+    //source.ResolveObjectSharedPtrLink(mOrigParams);
+    //source.ResolveObjectSharedPtrLink(mNumPatches, mPatches);
     if (mSInfo)
     {
         for (int i = 0; i < mNumFullVertices; ++i)
         {
-            //source.ResolveObjectSmartPointerLink(mSInfo[i].Patch);
+            //source.ResolveObjectSharedPtrLink(mSInfo[i].Patch);
         }
     }
 }
@@ -686,15 +686,15 @@ uint64_t Rendering::SurfaceMesh ::Register(const CoreTools::ObjectRegisterShared
     const uint64_t id = ParentType::Register(target);
     if (0 < id)
     {
-        //target.RegisterSmartPointer(mOrigVBuffer);
-        //target.RegisterSmartPointer(mOrigIBuffer);
-        //target.RegisterSmartPointer(mOrigParams);
-        //target.RegisterSmartPointer(mNumPatches, mPatches);
+        //target.RegisterSharedPtr(mOrigVBuffer);
+        //target.RegisterSharedPtr(mOrigIBuffer);
+        //target.RegisterSharedPtr(mOrigParams);
+        //target.RegisterSharedPtr(mNumPatches, mPatches);
         if (mSInfo)
         {
             for (int i = 0; i < mNumFullVertices; ++i)
             {
-                //target.RegisterSmartPointer(mSInfo[i].Patch);
+                //target.RegisterSharedPtr(mSInfo[i].Patch);
             }
         }
         return id;
@@ -712,16 +712,16 @@ void Rendering::SurfaceMesh ::Save(const CoreTools::BufferTargetSharedPtr& targe
     target->Write(mNumPatches);
     target->Write(mLevel);
     target->Write(mAllowDynamicChange);
-    //target.WriteSmartPointer(mOrigVBuffer);
-    //target.WriteSmartPointer(mOrigIBuffer);
-    //target.WriteSmartPointer(mOrigParams);
-    //target.WriteSmartPointerWithNumber(mNumPatches, mPatches);
+    //target.WriteSharedPtr(mOrigVBuffer);
+    //target.WriteSharedPtr(mOrigIBuffer);
+    //target.WriteSharedPtr(mOrigParams);
+    //target.WriteSharedPtrWithNumber(mNumPatches, mPatches);
 
     if (mSInfo)
     {
         for (int i = 0; i < mNumFullVertices; i++)
         {
-            //target.WriteSmartPointer(mSInfo[i].Patch);
+            //target.WriteSharedPtr(mSInfo[i].Patch);
             //target.WriteAggregate(mSInfo[i].Param);
         }
     }

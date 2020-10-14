@@ -11,10 +11,11 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
+ 
 #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -81,10 +82,10 @@ void Rendering::ConvexRegion
 
 
 // Name support.
-const CoreTools::ObjectSmartPointer Rendering::ConvexRegion
+const CoreTools::ObjectSharedPtr Rendering::ConvexRegion
 	:: GetObjectByName(const std::string& name)
 {
-	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
+	CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -98,17 +99,17 @@ const CoreTools::ObjectSmartPointer Rendering::ConvexRegion
 			return found;
 		}
 	} 
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ObjectSmartPointer> Rendering::ConvexRegion
+const std::vector<CoreTools::ObjectSharedPtr> Rendering::ConvexRegion
 	::GetAllObjectsByName(const std::string& name)
 {
-	std::vector<CoreTools::ObjectSmartPointer> objects = ParentType::GetAllObjectsByName(name);
+	std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
 	for (int i = 0; i < mNumPortals; ++i)
 	{
-		std::vector<CoreTools::ObjectSmartPointer> pointerObjects = mPortals[i]->GetAllObjectsByName(name);
+		std::vector<CoreTools::ObjectSharedPtr> pointerObjects = mPortals[i]->GetAllObjectsByName(name);
 
 		objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 	}
@@ -118,10 +119,10 @@ const std::vector<CoreTools::ObjectSmartPointer> Rendering::ConvexRegion
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::ConvexRegion
+const CoreTools::ConstObjectSharedPtr Rendering::ConvexRegion
 	::GetConstObjectByName(const std::string& name) const
 {
-	CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
+	CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -138,19 +139,19 @@ const CoreTools::ConstObjectSmartPointer Rendering::ConvexRegion
 	}
 
 
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ConstObjectSmartPointer> Rendering::ConvexRegion
+const std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ConvexRegion
 	::GetAllConstObjectsByName(const std::string& name) const
 {
-	std::vector<CoreTools::ConstObjectSmartPointer> objects = ParentType::GetAllConstObjectsByName(name);
+	std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
  
 
 	for (int i = 0; i < mNumPortals; ++i)
 	{
-		std::vector<CoreTools::ConstObjectSmartPointer> pointerObjects = mPortals[i]->GetAllConstObjectsByName(name);
+		std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = mPortals[i]->GetAllConstObjectsByName(name);
 
 		objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 	}
@@ -167,19 +168,19 @@ Rendering::ConvexRegion
 }
 
 void Rendering::ConvexRegion
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Node::Load(source);
 
-    // source.ReadSmartPointer(mNumPortals, mPortals);
+    // source.ReadSharedPtr(mNumPortals, mPortals);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::ConvexRegion
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     Node::Link(source);
 

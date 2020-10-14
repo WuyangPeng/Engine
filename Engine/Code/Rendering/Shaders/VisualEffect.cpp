@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
@@ -48,12 +48,12 @@ Rendering::VisualEffect
 
 CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, VisualEffect)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualEffect,InsertTechnique,VisualTechniqueSmartPointer,void)  
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualEffect,InsertTechnique,VisualTechniqueSharedPtr,void)  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffect,GetNumTechniques,int)  
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffect,GetTechnique,int,const Rendering::ConstVisualTechniqueSmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffect,GetTechnique,int,const Rendering::ConstVisualTechniqueSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffect,GetNumPasses,int,int)
  
-const Rendering::ConstVertexShaderSmartPointer Rendering::VisualEffect
+const Rendering::ConstVertexShaderSharedPtr Rendering::VisualEffect
 	::GetVertexShader(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -61,7 +61,7 @@ const Rendering::ConstVertexShaderSmartPointer Rendering::VisualEffect
 	return m_Impl->GetVertexShader(techniqueIndex, passIndex);
 }
 
-const Rendering::ConstPixelShaderSmartPointer Rendering::VisualEffect
+const Rendering::ConstPixelShaderSharedPtr Rendering::VisualEffect
 	::GetPixelShader(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -69,7 +69,7 @@ const Rendering::ConstPixelShaderSmartPointer Rendering::VisualEffect
 	return m_Impl->GetPixelShader(techniqueIndex, passIndex);
 }
 
-const Rendering::ConstAlphaStateSmartPointer Rendering::VisualEffect
+const Rendering::ConstAlphaStateSharedPtr Rendering::VisualEffect
 	::GetAlphaState(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -77,7 +77,7 @@ const Rendering::ConstAlphaStateSmartPointer Rendering::VisualEffect
 	return m_Impl->GetAlphaState(techniqueIndex, passIndex);
 }
 
-const Rendering::ConstCullStateSmartPointer Rendering::VisualEffect
+const Rendering::ConstCullStateSharedPtr Rendering::VisualEffect
 	::GetCullState(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -85,7 +85,7 @@ const Rendering::ConstCullStateSmartPointer Rendering::VisualEffect
 	return m_Impl->GetCullState(techniqueIndex, passIndex);
 }
 
-const Rendering::ConstDepthStateSmartPointer Rendering::VisualEffect
+const Rendering::ConstDepthStateSharedPtr Rendering::VisualEffect
 	::GetDepthState(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -93,7 +93,7 @@ const Rendering::ConstDepthStateSmartPointer Rendering::VisualEffect
 	return m_Impl->GetDepthState(techniqueIndex, passIndex);
 }
 
-const Rendering::ConstOffsetStateSmartPointer Rendering::VisualEffect
+const Rendering::ConstOffsetStateSharedPtr Rendering::VisualEffect
 	::GetOffsetState(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -101,7 +101,7 @@ const Rendering::ConstOffsetStateSmartPointer Rendering::VisualEffect
 	return m_Impl->GetOffsetState(techniqueIndex, passIndex);
 }
 
-const Rendering::ConstStencilStateSmartPointer Rendering::VisualEffect
+const Rendering::ConstStencilStateSharedPtr Rendering::VisualEffect
 	::GetStencilState(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -109,7 +109,7 @@ const Rendering::ConstStencilStateSmartPointer Rendering::VisualEffect
 	return m_Impl->GetStencilState(techniqueIndex, passIndex);
 }
 
-const Rendering::ConstWireStateSmartPointer Rendering::VisualEffect
+const Rendering::ConstWireStateSharedPtr Rendering::VisualEffect
 	::GetWireState(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -117,7 +117,7 @@ const Rendering::ConstWireStateSmartPointer Rendering::VisualEffect
 	return m_Impl->GetWireState(techniqueIndex, passIndex);
 }
 
-const Rendering::ConstVisualPassSmartPointer Rendering::VisualEffect
+const Rendering::ConstVisualPassSharedPtr Rendering::VisualEffect
 	::GetPass(int techniqueIndex, int passIndex) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;

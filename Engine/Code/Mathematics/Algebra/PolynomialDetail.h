@@ -346,7 +346,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator/=(Real sc
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
     if (Math::GetZeroTolerance() < Math::FAbs(scalar))
     {

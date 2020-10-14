@@ -26,7 +26,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering,OpenGLRenderTargetD
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, OpenGLRenderTargetData,Disable,Renderer*,void)
 
-Rendering::ConstTexture2DSmartPointer Rendering::OpenGLRenderTargetData
+Rendering::ConstTexture2DSharedPtr Rendering::OpenGLRenderTargetData
 	::ReadColor( int index,Renderer* renderer )
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;

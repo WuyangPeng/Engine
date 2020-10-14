@@ -22,17 +22,13 @@ namespace CoreTools
     {
     public:
    
-        TYPE_DECLARE(BaseResource);
-        BaseResource(const BaseResource& rhs);
-        virtual BaseResource& operator=(const BaseResource& rhs);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        COPY_UNSHARE_CLASSES_BASE_TYPE_DECLARE(BaseResource, DESTRUCTOR_DEFAULT); 
 
     public:
         explicit BaseResource(PriorityType priority);
-        virtual ~BaseResource();
+    
 
-        BaseResource(BaseResource&&) noexcept = default;
-        virtual BaseResource& operator=(BaseResource&&) noexcept = default;
+      
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -53,6 +49,7 @@ namespace CoreTools
 
         virtual void SetData(int32_t index, uint8_t value) = 0;
         virtual uint8_t GetData(int32_t index) const = 0;
+   
 
     private:
         IMPL_TYPE_DECLARE(BaseResource);

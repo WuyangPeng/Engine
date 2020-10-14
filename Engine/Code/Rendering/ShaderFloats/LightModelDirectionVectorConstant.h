@@ -21,7 +21,7 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
-		explicit LightModelDirectionVectorConstant(const LightSmartPointer& light);
+		explicit LightModelDirectionVectorConstant(const LightSharedPtr& light);
 		 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -31,14 +31,14 @@ namespace Rendering
 
 		  void Update(const Visual* visual, const Camera* camera) override;
 
-		  ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSharedPtr Clone() const override;
 	};
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 
 	CORE_TOOLS_STREAM_REGISTER(LightModelDirectionVectorConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, LightModelDirectionVectorConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( LightModelDirectionVectorConstant);
 }
 
 #endif // RENDERING_SHADER_FLOATS_LIGHT_MODEL_DIRECTION_VECTOR_CONSTANT_CONSTANT_H

@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 
 RENDERING_EXPORT_SHARED_PTR(WireStateImpl);
@@ -26,20 +26,13 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE WireState : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(WireState);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(WireState, DESTRUCTOR_DEFAULT);
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        WireState();
-        ~WireState() = default;
-
-         #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        WireState(WireState&&) noexcept = default;
-        WireState& operator=(WireState&&) noexcept = default;
-         #include STSTEM_WARNING_POP
+        WireState(); 
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -60,7 +53,7 @@ namespace Rendering
     CORE_TOOLS_STREAM_REGISTER(WireState);
 #include STSTEM_WARNING_POP
 
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, WireState);
+    CORE_TOOLS_SHARED_PTR_DECLARE( WireState);
 }
 
 #endif  // RENDERING_SHADERS_WIRE_STATE_H

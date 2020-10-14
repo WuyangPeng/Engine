@@ -26,7 +26,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering,Buffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Buffer);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Buffer); 
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Buffer);
+COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(Rendering, Buffer);
 
 Rendering::Buffer
     ::Buffer()
@@ -101,7 +101,7 @@ void Rendering::Buffer
 }
 
 void Rendering::Buffer
-	::Link (CoreTools::ObjectLink& source)
+	::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {	
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -117,7 +117,7 @@ void Rendering::Buffer
 }
 
 void Rendering::Buffer
-	::Load (CoreTools::BufferSource& source)
+	::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -139,7 +139,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Buffer,SaveHeadToFile,WriteFileM
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Buffer,ReadHeadFromFile, ReadFileManager&, void)
 										  
 void Rendering::Buffer
-	::ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSmartPointer& vertexformat)
+	::ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSharedPtr& vertexformat)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -148,7 +148,7 @@ void Rendering::Buffer
 
 
 void Rendering::Buffer
-	::SaveBufferDataToFile(WriteFileManager& outFile,const ConstVertexFormatSmartPointer& vertexformat) const 
+	::SaveBufferDataToFile(WriteFileManager& outFile,const ConstVertexFormatSharedPtr& vertexformat) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

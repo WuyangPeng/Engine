@@ -29,27 +29,27 @@ namespace Rendering
         using Math = Mathematics::Math<float>;
         using AVector = Mathematics::AVector<float>;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-        using VisualContainer = std::vector<VisualSmartPointer>;
+        using VisualContainer = std::vector<VisualSharedPtr>;
         using VisualContainerIter = VisualContainer::iterator;
 
     public:
         // 裁剪需要相机模型。如果需要修改相机，
         // 你应该在使用ComputeVisibleSet之前，调用SetCamera。
-        explicit CullerImpl(const ConstCameraSmartPointer& camera);
+        explicit CullerImpl(const ConstCameraSharedPtr& camera);
 
         CLASS_INVARIANT_DECLARE;
 
         // 访问相机，复制的平截头体和潜在可见集。
-        void SetCamera(const ConstCameraSmartPointer& camera) noexcept;
-        ConstCameraSmartPointer GetCamera() const noexcept;
+        void SetCamera(const ConstCameraSharedPtr& camera) noexcept;
+        ConstCameraSharedPtr GetCamera() const noexcept;
         void SetFrustum(const float* frustum)  ;
         const float* GetFrustum() const noexcept;
 
         // 基类的行为是可见的对象附加到可见集(存储为一个数组)。
-        void Insert(const VisualSmartPointer& visible);
+        void Insert(const VisualSharedPtr& visible);
 
         int GetNumVisible() const;
-        const ConstVisualSmartPointer GetVisible(int index) const;
+        const ConstVisualSharedPtr GetVisible(int index) const;
 
         int GetPlaneQuantity() const noexcept;
         const Plane* GetPlanes() const noexcept;
@@ -82,7 +82,7 @@ namespace Rendering
 
     private:
         // 输入相机信息,可能需要裁剪场景。
-        ConstCameraSmartPointer m_Camera;
+        ConstCameraSharedPtr m_Camera;
 
         // 复制视图平截头体的输入相机。这允许各种子系统改变在裁剪的平截头体参数(例如,门户系统)而不影响相机,
         // 渲染器的初始状态是必要的。

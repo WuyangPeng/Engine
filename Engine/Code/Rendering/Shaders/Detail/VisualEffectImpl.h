@@ -41,35 +41,35 @@ namespace Rendering
 
 		int GetStreamingSize() const;
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-		void Load(BufferSource& source);
-		void Link(ObjectLink& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
+		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
 		CORE_TOOLS_NAMES_IMPL_DECLARE;
 
 		// 支持延迟构造。函数追加新的technique到数组的末尾。
-		void InsertTechnique(const VisualTechniqueSmartPointer& technique);
+		void InsertTechnique(const VisualTechniqueSharedPtr& technique);
 
 		int GetNumTechniques() const;
-		const ConstVisualTechniqueSmartPointer GetTechnique(int techniqueIndex) const;
+		const ConstVisualTechniqueSharedPtr GetTechnique(int techniqueIndex) const;
 
 		// 获得的effect的组件。
 		int GetNumPasses(int techniqueIndex) const;
-		const ConstVisualPassSmartPointer GetPass(int techniqueIndex, int passIndex) const;
-		const ConstVertexShaderSmartPointer GetVertexShader(int techniqueIndex, int passIndex) const;
-		const ConstPixelShaderSmartPointer GetPixelShader(int techniqueIndex, int passIndex) const;
-		const ConstAlphaStateSmartPointer GetAlphaState(int techniqueIndex, int passIndex) const;
-		const ConstCullStateSmartPointer GetCullState(int techniqueIndex, int passIndex) const;
-		const ConstDepthStateSmartPointer GetDepthState(int techniqueIndex, int passIndex) const;
-		const ConstOffsetStateSmartPointer GetOffsetState(int techniqueIndex, int passIndex) const;
-		const ConstStencilStateSmartPointer GetStencilState(int techniqueIndex, int passIndex) const;
-		const ConstWireStateSmartPointer GetWireState(int techniqueIndex, int passIndex) const;
+		const ConstVisualPassSharedPtr GetPass(int techniqueIndex, int passIndex) const;
+		const ConstVertexShaderSharedPtr GetVertexShader(int techniqueIndex, int passIndex) const;
+		const ConstPixelShaderSharedPtr GetPixelShader(int techniqueIndex, int passIndex) const;
+		const ConstAlphaStateSharedPtr GetAlphaState(int techniqueIndex, int passIndex) const;
+		const ConstCullStateSharedPtr GetCullState(int techniqueIndex, int passIndex) const;
+		const ConstDepthStateSharedPtr GetDepthState(int techniqueIndex, int passIndex) const;
+		const ConstOffsetStateSharedPtr GetOffsetState(int techniqueIndex, int passIndex) const;
+		const ConstStencilStateSharedPtr GetStencilState(int techniqueIndex, int passIndex) const;
+		const ConstWireStateSharedPtr GetWireState(int techniqueIndex, int passIndex) const;
 
 		void SaveVisualTechnique(WriteFileManager& manager) const;
 		void LoadVisualTechnique(ReadFileManager& manager);
 
 	private:
-		std::vector<VisualTechniqueSmartPointer> m_Techniques;
+		std::vector<VisualTechniqueSharedPtr> m_Techniques;
 	};
 }
 

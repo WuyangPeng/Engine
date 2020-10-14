@@ -24,7 +24,7 @@ namespace CoreTools
     class CORE_TOOLS_DEFAULT_DECLARE ObjectName
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectName);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectName, = default);
 
     public:
         explicit ObjectName(const std::string& name);
@@ -35,6 +35,8 @@ namespace CoreTools
         [[nodiscard]] bool IsExactly(const ObjectName& name) const noexcept;
 
         void SetName(const std::string& name);
+
+        void SwapObjectName(ObjectName& name) noexcept;
 
     private:
         IMPL_TYPE_DECLARE(ObjectName);

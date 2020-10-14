@@ -25,14 +25,12 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE MaterialConstant : public ShaderFloat
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MaterialConstant);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(MaterialConstant, DESTRUCTOR_DEFAULT);
 		using ParentType = ShaderFloat;
 
 	public:
-		explicit MaterialConstant(const MaterialSmartPointer& Material);
-            ~MaterialConstant() = default;
-                MaterialConstant(MaterialConstant&&) noexcept = default;
-            MaterialConstant& operator=(MaterialConstant&&) noexcept = default;
+		explicit MaterialConstant(const MaterialSharedPtr& Material);
+            
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
@@ -43,7 +41,7 @@ namespace Rendering
 
 		  void SetNumRegisters(int numRegisters) override;
 
-		const ConstMaterialSmartPointer GetMaterial() const;
+		const ConstMaterialSharedPtr GetMaterial() const;
 
 	private:
 		constexpr static auto sm_NumRegisters = 1;
@@ -55,7 +53,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(MaterialConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, MaterialConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( MaterialConstant);
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_SHADER_FLOATS_MATERIAL_CONSTANT_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 13:41)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/13 20:17)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_OFSTREAM_SEEK_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_OFSTREAM_SEEK_MANAGER_H
@@ -11,42 +14,41 @@
 
 #include "System/Helper/UnicodeUsing.h"
 
-#include <boost/noncopyable.hpp>
 #include <fstream>
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE OFStreamSeekManager : private boost::noncopyable
-	{
-	public:
-		using ClassType = OFStreamSeekManager;
-		using MasterType = System::OFileStream;
-		using MasterTypeReference = System::OFileStream&;
+    class CORE_TOOLS_HIDDEN_DECLARE OFStreamSeekManager final
+    {
+    public:
+        using ClassType = OFStreamSeekManager;
+        using MasterType = System::OFileStream;
+        using MasterTypeReference = System::OFileStream&;
 
-	public:
-		explicit OFStreamSeekManager(MasterTypeReference master);
-		~OFStreamSeekManager();
+    public:
+        explicit OFStreamSeekManager(MasterTypeReference master);
+        ~OFStreamSeekManager() noexcept;
 
-		OFStreamSeekManager(const OFStreamSeekManager&) = delete;
-		OFStreamSeekManager operator=(const OFStreamSeekManager&) = delete;
-		OFStreamSeekManager(OFStreamSeekManager&&) = delete;
-		OFStreamSeekManager operator=(OFStreamSeekManager&&) = delete;
+        OFStreamSeekManager(const OFStreamSeekManager&) = delete;
+        OFStreamSeekManager operator=(const OFStreamSeekManager&) = delete;
+        OFStreamSeekManager(OFStreamSeekManager&&) noexcept = delete;
+        OFStreamSeekManager operator=(OFStreamSeekManager&&) noexcept = delete;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-	private:
-		using MasterPosType = MasterType::pos_type;
+    private:
+        using MasterPosType = MasterType::pos_type;
 
-	private:
-		static const MasterPosType sm_ErrorPosition;
+    private:
+        [[nodiscard]] static MasterPosType GetErrorPosition();
 
-	private:
-		void SeekBeginPosition();
+    private:
+        void SeekBeginPosition();
 
-	private:
-		MasterTypeReference m_Master;
-		MasterPosType m_CurrentPosition;
-	};
+    private:
+        MasterTypeReference m_Master;
+        MasterPosType m_CurrentPosition;
+    };
 }
 
-#endif // CORE_TOOLS_FILE_MANAGER_OFSTREAM_SEEK_MANAGER_H
+#endif  // CORE_TOOLS_FILE_MANAGER_OFSTREAM_SEEK_MANAGER_H

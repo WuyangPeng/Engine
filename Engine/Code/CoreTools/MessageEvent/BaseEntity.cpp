@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using namespace std::literals;
 
@@ -76,7 +76,7 @@ void CoreTools::BaseEntity
 void CoreTools::BaseEntity
 ::DoRegister()
 {
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 #include STSTEM_WARNING_POP

@@ -20,6 +20,7 @@
 
 using std::vector;
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26451)
@@ -104,7 +105,7 @@ void Rendering::Texture1DImpl
 void Rendering::Texture1DImpl
     ::VerifyNumLevels()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     const	auto format = GetFormat();
     const auto numLevels = GetNumLevels();
     
@@ -252,8 +253,7 @@ void Rendering::Texture1DImpl
     }
 }
 
-void Rendering::Texture1DImpl
-    ::LoadLevelData (CoreTools::BufferSource& source)
+void Rendering::Texture1DImpl ::LoadLevelData(const CoreTools::BufferSourceSharedPtr& source)
 {
     m_TextureLevelData.Load(source);
 }

@@ -20,7 +20,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE BlendTransformController : public TransformController
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(BlendTransformController);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(BlendTransformController, = default);
         using ParentType = TransformController;
         using APoint = Mathematics::FloatAPoint;
         using Matrix = Mathematics::FloatMatrix;
@@ -48,12 +48,10 @@ namespace Rendering
 
         // 设置“rotationScaleMatrices'为'假'时，当mIsRotationMatrix是'假'对每个变换。
         // 在这种情况下，所有的变换使用加权平均值计算。这是不推荐的，因为视觉效果是难以预料的。
-        BlendTransformController(const TransformControllerSmartPointer& firstController, const TransformControllerSmartPointer& secondController,
+        BlendTransformController(const TransformControllerSharedPtr& firstController, const TransformControllerSharedPtr& secondController,
                                  bool rotationScaleMatrices, bool geometricRotation = false, bool geometricScale = false);
 
-        ~BlendTransformController() = default;
-        BlendTransformController(BlendTransformController&&) noexcept = default;
-        BlendTransformController& operator=(BlendTransformController&&) noexcept = default;
+
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -61,8 +59,8 @@ namespace Rendering
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
         // 权重w是一个数字的量0 <= w <= 1。
-        const ConstTransformControllerSmartPointer GetFirstController() const noexcept;
-        const ConstTransformControllerSmartPointer GetSecondController() const noexcept;
+        const ConstTransformControllerSharedPtr GetFirstController() const noexcept;
+        const ConstTransformControllerSharedPtr GetSecondController() const noexcept;
         bool IsRotationScaleMatrices() const noexcept;
         void SetWeight(float weight) noexcept;
         float GetWeight() const noexcept;
@@ -73,7 +71,7 @@ namespace Rendering
         // 动画更新。应用程序时间以毫秒为单位。
         bool Update(double applicationTime) override;
 
-        ControllerInterfaceSmartPointer Clone() const override;
+        ControllerInterfaceSharedPtr Clone() const override;
         
         ObjectInterfaceSharedPtr CloneObject() const override;
 
@@ -89,7 +87,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(BlendTransformController);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Sixth, BlendTransformController);
+    CORE_TOOLS_SHARED_PTR_DECLARE( BlendTransformController);
 }
 #include STSTEM_WARNING_POP
 #endif  // RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_H

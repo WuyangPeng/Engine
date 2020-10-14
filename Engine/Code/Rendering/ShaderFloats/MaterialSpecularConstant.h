@@ -21,7 +21,7 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 
 	public:
-		explicit MaterialSpecularConstant(const MaterialSmartPointer& material);
+		explicit MaterialSpecularConstant(const MaterialSharedPtr& material);
 		 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -31,13 +31,13 @@ namespace Rendering
 
 		  void Update(const Visual* visual, const Camera* camera) override;
 
-		  ShaderFloatSmartPointer Clone() const override;
+		  ShaderFloatSharedPtr Clone() const override;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(MaterialSpecularConstant);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fifth, MaterialSpecularConstant);
+	CORE_TOOLS_SHARED_PTR_DECLARE( MaterialSpecularConstant);
 }
 
 #endif // RENDERING_SHADER_FLOATS_MATERIAL_SPECULAR_CONSTANT_CONSTANT_H

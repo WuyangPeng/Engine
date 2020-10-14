@@ -22,7 +22,7 @@ namespace Rendering
     {
     public:
         using ClassType = VisibleSetImpl;
-        using VisualContainer = std::vector<VisualSmartPointer>;
+        using VisualContainer = std::vector<VisualSharedPtr>;
         using VisualContainerIter = VisualContainer::iterator;
 
     public:
@@ -32,10 +32,10 @@ namespace Rendering
 
         // 获得可见的元素集。
         int GetNumVisible() const;
-        const ConstVisualSmartPointer GetVisible(int index) const;
+        const ConstVisualSharedPtr GetVisible(int index) const;
 
         // 插入一个可见的对象。
-        void Insert(const VisualSmartPointer& visible);
+        void Insert(const VisualSharedPtr& visible);
 
         // 设置集合元素的个数为零。
         void Clear() noexcept;
@@ -44,7 +44,7 @@ namespace Rendering
         VisualContainerIter end() noexcept;
 
     private:
-        std::vector<VisualSmartPointer> m_Visible;
+        std::vector<VisualSharedPtr> m_Visible;
     };
 }
 

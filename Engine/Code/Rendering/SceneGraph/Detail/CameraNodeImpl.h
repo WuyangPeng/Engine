@@ -51,7 +51,7 @@ namespace Rendering
         //   local rotation column 0 = camera direction
         //   local rotation column 1 = camera up
         //   local rotation column 2 = camera right
-        explicit CameraNodeImpl(const CameraSmartPointer& camera) noexcept;
+        explicit CameraNodeImpl(const CameraSharedPtr& camera) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -60,23 +60,23 @@ namespace Rendering
         // 当你设置摄像机，节点的本地转换将设置为当前相机的当前坐标系统。
         // 节点的世界变换将被计算,
         // 和相机的坐标系使用节点的世界转换。
-        void SetCamera(const CameraSmartPointer& camera) noexcept;
-        const ConstCameraSmartPointer GetCamera() const noexcept;
+        void SetCamera(const CameraSharedPtr& camera) noexcept;
+        const ConstCameraSharedPtr GetCamera() const noexcept;
 
         const FloatTransform GetLocalTransform() const;
 
         void SetFrame(const APoint& position, const AVector& directionVector, const AVector& upVector, const AVector& rightVector);
 
-        void Load(BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const noexcept;
         uint64_t Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
-        void Link(CoreTools::ObjectLink& source);
+        void Link(const CoreTools::ObjectLinkSharedPtr& source);
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 
     private:
-        CameraSmartPointer m_Camera;
+        CameraSharedPtr m_Camera;
     };
 }
 

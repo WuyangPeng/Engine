@@ -13,8 +13,7 @@
 #include "ObjectName.h"
 #include "CoreTools/Helper/NameMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointer.h"
+#include "CoreTools/Helper/SharedPtrMacro.h"
 
 #include <string>
 #include <vector>
@@ -28,8 +27,8 @@ namespace CoreTools
 	public:
 		using ClassType = Object;
 		using ParentType = ObjectInterface;
-		using ObjectSmartPointer = std::shared_ptr<Object>;
-		using ConstObjectSmartPointer = std::shared_ptr<const Object>;
+		using ObjectSharedPtr = std::shared_ptr<Object>;
+		using ConstObjectSharedPtr = std::shared_ptr<const Object>;
 
 	public:
 		explicit Object(const std::string& name); 
@@ -68,7 +67,7 @@ namespace CoreTools
 	CORE_TOOLS_STREAM_REGISTER(Object);
 #include STSTEM_WARNING_POP
 
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Second, Object);
+	CORE_TOOLS_SHARED_PTR_DECLARE(Object);
 }
 
 #endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H

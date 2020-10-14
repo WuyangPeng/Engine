@@ -18,7 +18,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -42,11 +42,7 @@ Rendering::ParticleController
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ParticleController
-	::~ParticleController() 
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+ 
 
 Rendering::ParticleController
 	::ParticleController(const ParticleController& rhs) 
@@ -268,7 +264,7 @@ void Rendering::ParticleController
 }
 
 void Rendering::ParticleController
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -290,7 +286,7 @@ void Rendering::ParticleController
 }
 
 void Rendering::ParticleController
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     

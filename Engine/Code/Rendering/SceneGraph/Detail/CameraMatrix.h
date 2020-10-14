@@ -115,7 +115,7 @@ namespace Rendering
         // 计算投影矩阵在平截头体的变化后。
         void OnFrustumChange(const CameraFrustum& cameraFrustum);
 
-        void Load(BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const;
 

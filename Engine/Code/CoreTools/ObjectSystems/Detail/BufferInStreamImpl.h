@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/ObjectLink.h"
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
-
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 namespace CoreTools
 {
 	class CORE_TOOLS_HIDDEN_DECLARE BufferInStreamImpl : private boost::noncopyable
@@ -23,7 +23,7 @@ namespace CoreTools
 		using FileBufferPtr = std::shared_ptr<FileBuffer>;
 
 	public:
-		explicit BufferInStreamImpl(const FileBuffer& bufferInformation, int startPoint = 0);
+                explicit BufferInStreamImpl(const ConstFileBufferSharedPtr& fileBuffer, int startPoint = 0);
  
 		CLASS_INVARIANT_DECLARE;
 
@@ -31,7 +31,7 @@ namespace CoreTools
 
 	private:
 		void AnalysisBuffer();
-		void IncrementBytesProcessed() noexcept;
+            void IncrementBytesProcessed() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
 		void ReadObject();
 		void CreateObject(bool isTopLevel, const std::string& name);
 		void DoCreateObject(bool isTopLevel, const std::string& name);
@@ -41,8 +41,8 @@ namespace CoreTools
 	private:
 		int m_StartPoint;
 		InTopLevel m_TopLevel;
-		BufferSource m_Source;
-		ObjectLink m_ObjectLink;
+                BufferSourceSharedPtr m_Source;
+		ObjectLinkSharedPtr m_ObjectLink;
 	};
 }
 

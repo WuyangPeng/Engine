@@ -1,23 +1,25 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/19 15:20)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/14 11:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CFileManagerImpl.h"
 #include "EnvironmentImpl.h"
 #include "System/FileManager/CFile.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
 using namespace std::literals;
 
-CoreTools::EnvironmentImpl ::EnvironmentImpl() noexcept
+CoreTools::EnvironmentImpl::EnvironmentImpl() noexcept
     : m_Directories{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -25,14 +27,14 @@ CoreTools::EnvironmentImpl ::EnvironmentImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, EnvironmentImpl)
 
-int CoreTools::EnvironmentImpl ::GetNumDirectories() const
+int CoreTools::EnvironmentImpl::GetNumDirectories() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_Directories.size());
 }
 
-bool CoreTools::EnvironmentImpl ::InsertDirectory(const String& directory)
+bool CoreTools::EnvironmentImpl::InsertDirectory(const String& directory)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -41,7 +43,7 @@ bool CoreTools::EnvironmentImpl ::InsertDirectory(const String& directory)
     return returnValue.second;
 }
 
-bool CoreTools::EnvironmentImpl ::EraseDirectory(const String& directory)
+bool CoreTools::EnvironmentImpl::EraseDirectory(const String& directory)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -50,36 +52,36 @@ bool CoreTools::EnvironmentImpl ::EraseDirectory(const String& directory)
     return (eraseNumber != 0);
 }
 
-void CoreTools::EnvironmentImpl ::EraseAllDirectories() noexcept
+void CoreTools::EnvironmentImpl::EraseAllDirectories() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     m_Directories.clear();
 }
 
-System::String CoreTools::EnvironmentImpl ::GetPathReading(const String& fileName) const
+System::String CoreTools::EnvironmentImpl::GetPathReading(const String& fileName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetPath(fileName, SYSTEM_TEXT("r"));
+    return GetPath(fileName, SYSTEM_TEXT("r"s));
 }
 
-System::String CoreTools::EnvironmentImpl ::GetPathWriting(const String& fileName) const
+System::String CoreTools::EnvironmentImpl::GetPathWriting(const String& fileName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetPath(fileName, SYSTEM_TEXT("w"));
+    return GetPath(fileName, SYSTEM_TEXT("w"s));
 }
 
-System::String CoreTools::EnvironmentImpl ::GetPathReadingAndWriting(const String& fileName) const
+System::String CoreTools::EnvironmentImpl::GetPathReadingAndWriting(const String& fileName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetPath(fileName, SYSTEM_TEXT("r+"));
+    return GetPath(fileName, SYSTEM_TEXT("r+"s));
 }
 
 // private
-System::String CoreTools::EnvironmentImpl ::GetPath(const String& fileName, const String& attributes) const
+System::String CoreTools::EnvironmentImpl::GetPath(const String& fileName, const String& attributes) const
 {
     for (const auto& path : m_Directories)
     {
@@ -94,7 +96,7 @@ System::String CoreTools::EnvironmentImpl ::GetPath(const String& fileName, cons
 }
 
 // private
-bool CoreTools::EnvironmentImpl ::IsFileInPathExist(const String& decorated, const String& attributes) const
+bool CoreTools::EnvironmentImpl::IsFileInPathExist(const String& decorated, const String& attributes) const
 {
     FILE* file{ nullptr };
 
@@ -103,7 +105,17 @@ bool CoreTools::EnvironmentImpl ::IsFileInPathExist(const String& decorated, con
 
     if (System::OpenCFile(file, decoratedConversion, attributesConversion))
     {
-        [[maybe_unused]] const auto result = System::CloseCFile(file);
+        const auto result = System::CloseCFile(file);
+
+        if (!result)
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
+                << SYSTEM_TEXT("文件")
+                << decorated
+                << SYSTEM_TEXT("关闭失败！")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
+        }
+
         return true;
     }
     else
@@ -112,14 +124,14 @@ bool CoreTools::EnvironmentImpl ::IsFileInPathExist(const String& decorated, con
     }
 }
 
-void CoreTools::EnvironmentImpl ::SetConfigurationPath(const String& configurationPath)
+void CoreTools::EnvironmentImpl::SetConfigurationPath(const String& configurationPath)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     m_ConfigurationPath = configurationPath;
 }
 
-const System::String CoreTools::EnvironmentImpl ::GetConfigurationPath() const
+const System::String CoreTools::EnvironmentImpl::GetConfigurationPath() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

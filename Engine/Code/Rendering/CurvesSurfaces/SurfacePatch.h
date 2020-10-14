@@ -12,7 +12,7 @@
 #include "PrincipalCurvatureInfo.h"
 #include "SurfacePatchFrame.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
@@ -24,20 +24,14 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE SurfacePatch : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(SurfacePatch);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(SurfacePatch, = default);
         using ParentType = Object;
         using AVector = Mathematics::FloatAVector;
         using APoint = Mathematics::FloatAPoint;
 
     public:
         SurfacePatch(float uMin, float uMax, float vMin, float vMax, bool rectangular);
-        ~SurfacePatch() = default;
-
-          #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        SurfacePatch(SurfacePatch&&) = default;
-        SurfacePatch& operator=(SurfacePatch&&) = default;
-          #include STSTEM_WARNING_POP
+         
 
 #ifdef OPEN_CLASS_INVARIANT
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -80,7 +74,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(SurfacePatch);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, SurfacePatch);
+    CORE_TOOLS_SHARED_PTR_DECLARE( SurfacePatch);
 }
 
 #endif  // RENDERING_CURVES_SURFACES_SURFACE_PATCH_H

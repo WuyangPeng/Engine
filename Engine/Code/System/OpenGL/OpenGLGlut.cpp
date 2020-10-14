@@ -14,7 +14,7 @@
 
 using std::string;
 
-void System::GlutInit(int* pargc, char** argv) noexcept
+void System::GlutInit([[maybe_unused]] int* pargc, [[maybe_unused]] char** argv) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutInit(pargc, argv);
@@ -23,7 +23,7 @@ void System::GlutInit(int* pargc, char** argv) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-int System::GlutCreateWindow(const string& title) noexcept
+int System::GlutCreateWindow([[maybe_unused]] const string& title) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     return ::glutCreateWindow(title.c_str());
@@ -33,7 +33,7 @@ int System::GlutCreateWindow(const string& title) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutInitWindowSize(int width, int height) noexcept
+void System::GlutInitWindowSize([[maybe_unused]] int width, [[maybe_unused]] int height) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutInitWindowSize(width, height);
@@ -42,7 +42,7 @@ void System::GlutInitWindowSize(int width, int height) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutInitContextVersion(int majorVersion, int minorVersion) noexcept
+void System::GlutInitContextVersion([[maybe_unused]] int majorVersion, [[maybe_unused]] int minorVersion) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutInitContextVersion(majorVersion, minorVersion);
@@ -51,7 +51,7 @@ void System::GlutInitContextVersion(int majorVersion, int minorVersion) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutDestroyWindow(int window) noexcept
+void System::GlutDestroyWindow([[maybe_unused]] int window) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutDestroyWindow(window);
@@ -69,7 +69,7 @@ void System::GlutSwapBuffers() noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutPostWindowRedisplay(int window) noexcept
+void System::GlutPostWindowRedisplay([[maybe_unused]] int window) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutPostWindowRedisplay(window);
@@ -78,7 +78,7 @@ void System::GlutPostWindowRedisplay(int window) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutTimerFunc(unsigned millisecond, TimerFunctionCallback callback, int value) noexcept
+void System::GlutTimerFunc([[maybe_unused]] unsigned millisecond, [[maybe_unused]] TimerFunctionCallback callback, [[maybe_unused]] int value) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutTimerFunc(millisecond, callback, value);
@@ -96,7 +96,7 @@ int System::GlutGetModifiers() noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutInitDisplayMode(bool multiSample) noexcept
+void System::GlutInitDisplayMode([[maybe_unused]] bool multiSample) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     constexpr auto glutMacro = GlutMacro::Double | GlutMacro::Rgba | GlutMacro::Depth | GlutMacro::Stencil | GlutMacro::Accum;
@@ -114,7 +114,7 @@ void System::GlutInitDisplayMode(bool multiSample) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutInitWindowPosition(int x, int y) noexcept
+void System::GlutInitWindowPosition([[maybe_unused]] int x, [[maybe_unused]] int y) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutInitWindowPosition(x, y);
@@ -123,7 +123,7 @@ void System::GlutInitWindowPosition(int x, int y) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutReshapeFunc(ChangeSizeCallback callback) noexcept
+void System::GlutReshapeFunc([[maybe_unused]] ChangeSizeCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutReshapeFunc(callback);
@@ -132,7 +132,7 @@ void System::GlutReshapeFunc(ChangeSizeCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutDisplayFunc(RenderSceneCallback callback) noexcept
+void System::GlutDisplayFunc([[maybe_unused]] RenderSceneCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutDisplayFunc(callback);
@@ -141,7 +141,7 @@ void System::GlutDisplayFunc(RenderSceneCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutIdleFunc(IdleFunctionCallback callback) noexcept
+void System::GlutIdleFunc([[maybe_unused]] IdleFunctionCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutIdleFunc(callback);
@@ -150,7 +150,7 @@ void System::GlutIdleFunc(IdleFunctionCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutKeyboardFunc(KeyboardDownCallback callback) noexcept
+void System::GlutKeyboardFunc([[maybe_unused]] KeyboardDownCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutKeyboardFunc(callback);
@@ -159,7 +159,7 @@ void System::GlutKeyboardFunc(KeyboardDownCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutSpecialFunc(SpecialKeysDownCallback callback) noexcept
+void System::GlutSpecialFunc([[maybe_unused]] SpecialKeysDownCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutSpecialFunc(callback);
@@ -168,7 +168,7 @@ void System::GlutSpecialFunc(SpecialKeysDownCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutKeyboardUpFunc(KeyboardUpCallback callback) noexcept
+void System::GlutKeyboardUpFunc([[maybe_unused]] KeyboardUpCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutKeyboardUpFunc(callback);
@@ -177,7 +177,7 @@ void System::GlutKeyboardUpFunc(KeyboardUpCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutSpecialUpFunc(SpecialKeysUpCallback callback) noexcept
+void System::GlutSpecialUpFunc([[maybe_unused]] SpecialKeysUpCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutSpecialUpFunc(callback);
@@ -186,7 +186,7 @@ void System::GlutSpecialUpFunc(SpecialKeysUpCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutMouseFunc(MouseFunctionCallback callback) noexcept
+void System::GlutMouseFunc([[maybe_unused]] MouseFunctionCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutMouseFunc(callback);
@@ -195,7 +195,7 @@ void System::GlutMouseFunc(MouseFunctionCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutMotionFunc(MotionFunctionCallback callback) noexcept
+void System::GlutMotionFunc([[maybe_unused]] MotionFunctionCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutMotionFunc(callback);
@@ -204,7 +204,7 @@ void System::GlutMotionFunc(MotionFunctionCallback callback) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutPassiveMotionFunc(PassiveMotionFunctionCallback callback) noexcept
+void System::GlutPassiveMotionFunc([[maybe_unused]] PassiveMotionFunctionCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     ::glutPassiveMotionFunc(callback);
@@ -213,7 +213,7 @@ void System::GlutPassiveMotionFunc(PassiveMotionFunctionCallback callback) noexc
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-int System::GlutCreateMenu(ProcessMenuCallback callback) noexcept
+int System::GlutCreateMenu([[maybe_unused]] ProcessMenuCallback callback) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     return ::glutCreateMenu(callback);
@@ -250,7 +250,7 @@ int System::GlutGetWindow() noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutSetWindow(int window) noexcept
+void System::GlutSetWindow([[maybe_unused]] int window) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     return ::glutSetWindow(window);
@@ -259,7 +259,7 @@ void System::GlutSetWindow(int window) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutSetOption(GLenum what, int value) noexcept
+void System::GlutSetOption([[maybe_unused]] GLenum what, [[maybe_unused]] int value) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
     return ::glutSetOption(what, value);

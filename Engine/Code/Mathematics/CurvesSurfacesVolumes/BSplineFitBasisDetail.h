@@ -12,7 +12,7 @@
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL)
 
 #include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/Assert/Assert.h"
+#include "CoreTools/Contract/Assertion.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/MathDetail.h"

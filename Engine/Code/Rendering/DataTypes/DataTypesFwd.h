@@ -27,7 +27,7 @@ namespace Rendering
     struct ColourDefaultTraits;
 
     template <typename T>
-    class RENDERING_TEMPLATE_DEFAULT_DECLARE Colour;
+    class Colour;
 
     using ByteColour = Colour<uint8_t>;
     using IntColour = Colour<int>;
@@ -41,13 +41,13 @@ namespace Rendering
     class TextureColour;
 
     template <typename T>
-    class RENDERING_TEMPLATE_DEFAULT_DECLARE Bound;
+    class Bound;
 
     using FloatBound = Bound<float>;
     using DoubleBound = Bound<double>;
 
     template <typename Real>
-    class RENDERING_TEMPLATE_DEFAULT_DECLARE Transform;
+    class Transform;
 
     using FloatTransform = Transform<float>;
     using DoubleTransform = Transform<double>;

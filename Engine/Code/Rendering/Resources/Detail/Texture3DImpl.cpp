@@ -18,6 +18,7 @@
 
 #include <vector>
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -143,7 +144,7 @@ int  Rendering::Texture3DImpl
 void Rendering::Texture3DImpl
     ::VerifyNumLevels()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	const auto format = GetFormat();
 const	auto numLevels = GetNumLevels();
     
@@ -347,8 +348,7 @@ auto toFunction = ColourConvertTo::GetConvertToFunction(format);
     }
 }
 
-void Rendering::Texture3DImpl
-    ::LoadLevelData (CoreTools::BufferSource& source)
+void Rendering::Texture3DImpl ::LoadLevelData(const CoreTools::BufferSourceSharedPtr& source)
 {
     m_TextureLevelData.Load(source);
 }

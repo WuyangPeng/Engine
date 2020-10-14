@@ -11,10 +11,11 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -108,7 +109,7 @@ bool Rendering::Portal
     // are updated accordingly.  This avoids computing d-signs twice per
     // vertex.
 
-    const ConstCameraSmartPointer camera = culler.GetCamera();
+    const ConstCameraSharedPtr camera = culler.GetCamera();
     const float* frustum = culler.GetFrustum();
     float rmin = +Mathematics::FloatMath::sm_MaxReal;  // left
     float rmax = -Mathematics::FloatMath::sm_MaxReal;  // right
@@ -335,7 +336,7 @@ void Rendering::Portal
     // from the current room containing the camera.  Such portals might
     // have a back-facing polygon relative to the camera.  It is not possible
     // to see through these, so cull them.
-    const ConstCameraSmartPointer camera = culler.GetCamera();
+    const ConstCameraSharedPtr camera = culler.GetCamera();
     if (mWorldPlane.WhichSide(camera->GetPosition()) < Mathematics::NumericalValueSymbol::Zero)
     {
         return;
@@ -369,10 +370,10 @@ void Rendering::Portal
 
 // Name support.
 
-const CoreTools::ObjectSmartPointer Rendering::Portal
+const CoreTools::ObjectSharedPtr Rendering::Portal
 	::GetObjectByName(const std::string& name)
 {
-	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
+	CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -386,25 +387,25 @@ const CoreTools::ObjectSmartPointer Rendering::Portal
 
 	 
 
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ObjectSmartPointer> Rendering::Portal
+const std::vector<CoreTools::ObjectSharedPtr> Rendering::Portal
 	::GetAllObjectsByName(const std::string& name)
 {
-	std::vector<CoreTools::ObjectSmartPointer> objects = ParentType::GetAllObjectsByName(name);
+	std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
-	std::vector<CoreTools::ObjectSmartPointer> pointerObjects = AdjacentRegion->GetAllObjectsByName(name);
+	std::vector<CoreTools::ObjectSharedPtr> pointerObjects = AdjacentRegion->GetAllObjectsByName(name);
 	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
  
 
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::Portal
+const CoreTools::ConstObjectSharedPtr Rendering::Portal
 	::GetConstObjectByName(const std::string& name) const
 {
-	CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
+	CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -417,15 +418,15 @@ const CoreTools::ConstObjectSmartPointer Rendering::Portal
 	}
 	 
 
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ConstObjectSmartPointer> Rendering::Portal
+const std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Portal
 	::GetAllConstObjectsByName(const std::string& name) const
 {
-	std::vector<CoreTools::ConstObjectSmartPointer> objects = ParentType::GetAllConstObjectsByName(name);
+	std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
-	std::vector<CoreTools::ConstObjectSmartPointer> pointerObjects = AdjacentRegion->GetAllConstObjectsByName(name);
+	std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = AdjacentRegion->GetAllConstObjectsByName(name);
 	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
 	 
@@ -444,16 +445,16 @@ Rendering::Portal
 }
 
 void Rendering::Portal
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Object::Load(source);
 
-	source.ReadAggregate(mNumVertices, mModelVertices);
-    source.ReadAggregate(mModelPlane);
-	Open = source.ReadBool();
-//    source.ReadSmartPointer(AdjacentRegion);
+	source->ReadAggregate(mNumVertices, mModelVertices);
+    source->ReadAggregate(mModelPlane);
+	Open = source->ReadBool();
+//    source.ReadSharedPtr(AdjacentRegion);
 
     mWorldVertices = NEW1<Mathematics::FloatAPoint>(mNumVertices);
 
@@ -461,7 +462,7 @@ void Rendering::Portal
 }
 
 void Rendering::Portal
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     Object::Link(source);
 

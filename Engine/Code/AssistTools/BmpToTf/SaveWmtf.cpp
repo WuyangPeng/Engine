@@ -15,6 +15,7 @@
 
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/EnumCast.h"
+#include <cassert>
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26446)

@@ -14,6 +14,7 @@
 #include "CoreTools/FileManager/FileManagerFwd.h"
 
 #include <boost/noncopyable.hpp>
+#include "../FileManager/FileBuffer.h"
 
 CORE_TOOLS_EXPORT_SHARED_PTR(BufferInStreamImpl);
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
@@ -27,7 +28,7 @@ namespace CoreTools
 		using FileBufferPtr = std::shared_ptr<FileBuffer>;
 
 	public:
-		explicit BufferInStream(const FileBuffer& bufferInformation, int startPoint = 0);
+                explicit BufferInStream(const ConstFileBufferSharedPtr&  bufferInformation, int startPoint = 0);
 
 		CLASS_INVARIANT_DECLARE;
 

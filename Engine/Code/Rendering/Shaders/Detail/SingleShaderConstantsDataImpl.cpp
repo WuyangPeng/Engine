@@ -65,13 +65,12 @@ int Rendering::SingleShaderConstantsDataImpl ::GetNumRegistersUsed() const noexc
 	return m_NumRegistersUsed;
 }
 
-void Rendering::SingleShaderConstantsDataImpl
-	::Load( BufferSource& source )
+void Rendering::SingleShaderConstantsDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	m_Name = source.ReadString();
-	source.Read(m_NumRegistersUsed);
+	m_Name = source->ReadString();
+	source->Read(m_NumRegistersUsed);
 }
 
 void Rendering::SingleShaderConstantsDataImpl

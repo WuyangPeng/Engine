@@ -15,12 +15,12 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h" 
+ 
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using std::string;
 using std::vector;
@@ -34,7 +34,7 @@ Rendering::IKControllerImpl ::IKControllerImpl() noexcept
 }
 
 Rendering::IKControllerImpl
-	::IKControllerImpl(const IKJointSmartPointerVector& joints) 
+	::IKControllerImpl(const IKJointSharedPtrVector& joints) 
 	:m_Iterations{ 128 }, m_OrderEndToRoot{ true }, m_Joints{ joints }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -80,39 +80,39 @@ void Rendering::IKControllerImpl
 
 	if (!m_Joints.empty())
 	{
-		//target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
+		//target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
 	}		
 }
 
 void Rendering::IKControllerImpl
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_Iterations);
-	m_OrderEndToRoot = source.ReadBool();
+	source->Read(m_Iterations);
+        m_OrderEndToRoot = source->ReadBool();
 
 	auto size = 0;
-	source.Read(size);
+	source->Read(size);
 
 	if (0 < size)
 	{
 		m_Joints.resize(size);
-		//source.ReadSmartPointer(size, &m_Joints[0]);
+		//source.ReadSharedPtr(size, &m_Joints[0]);
 	}
 }
 
 void Rendering::IKControllerImpl
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	if (0 < m_Joints.size())
         {
             source;
-		//source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
+		//source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
 	}
 }
 
@@ -120,15 +120,15 @@ void Rendering::IKControllerImpl
 	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	if (0 < m_Joints.size())
         {
             target;
-	//	target.RegisterSmartPointer(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
+	//	target.RegisterSharedPtr(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
 	}
 }
 
-const CoreTools::ObjectSmartPointer Rendering::IKControllerImpl
+const CoreTools::ObjectSharedPtr Rendering::IKControllerImpl
 	::GetObjectByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -142,15 +142,15 @@ const CoreTools::ObjectSmartPointer Rendering::IKControllerImpl
 		}				
 	}
 
-	return CoreTools::ObjectSmartPointer{};
+	return CoreTools::ObjectSharedPtr{};
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::IKControllerImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::IKControllerImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	vector<CoreTools::ObjectSmartPointer> objects;
+	vector<CoreTools::ObjectSharedPtr> objects;
 
 	for (auto& pointer : m_Joints)
 	{
@@ -162,7 +162,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::IKControllerImpl
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::IKControllerImpl
+const CoreTools::ConstObjectSharedPtr Rendering::IKControllerImpl
 	::GetConstObjectByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_1;
@@ -176,15 +176,15 @@ const CoreTools::ConstObjectSmartPointer Rendering::IKControllerImpl
 		}				
 	}
 
-	return CoreTools::ConstObjectSmartPointer{};
+	return CoreTools::ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::IKControllerImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::IKControllerImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	vector<CoreTools::ConstObjectSmartPointer> objects;
+	vector<CoreTools::ConstObjectSharedPtr> objects;
 
 	for (const auto& pointer : m_Joints)
 	{
@@ -233,8 +233,8 @@ int Rendering::IKControllerImpl
 	return boost::numeric_cast<int>(m_Joints.size());
 }
 
-const Rendering::IKJointSmartPointer Rendering::IKControllerImpl
-	::GetJointsSmartPointer(int index)
+const Rendering::IKJointSharedPtr Rendering::IKControllerImpl
+	::GetJointsSharedPtr(int index)
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Joints.size()), "Ë÷Òý´íÎó£¡");

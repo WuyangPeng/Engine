@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 template <typename Real>
 Mathematics::Torus3<Real>
@@ -62,7 +62,7 @@ typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 	MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= static_cast<Real>(1) && Math::GetValue(0) <= t && t <= static_cast<Real>(1), "s和t必须在0和1之间");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto twoPiS = Math::GetTwoPI() * s;
 	auto twoPiT = Math::GetTwoPI() * t;

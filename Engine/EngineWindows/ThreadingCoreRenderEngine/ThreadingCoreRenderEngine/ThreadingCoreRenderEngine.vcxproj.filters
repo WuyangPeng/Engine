@@ -828,6 +828,474 @@
     <Text Include="Resource\References\Cpp\Experience\C++ Coding Standards.txt">
       <Filter>资源文件\References\Cpp\Experience</Filter>
     </Text>
+    <Text Include="Resource\References\Cpp\StandardLibrary\StandardLibrary.txt">
+      <Filter>资源文件\References\Cpp\StandardLibrary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\StandardLibrary\The C++ Standard Library.txt">
+      <Filter>资源文件\References\Cpp\StandardLibrary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\StandardLibrary\C++ STL.txt">
+      <Filter>资源文件\References\Cpp\StandardLibrary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\StandardLibrary\Generic Programming and the STL.txt">
+      <Filter>资源文件\References\Cpp\StandardLibrary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\StandardLibrary\Extended STL.txt">
+      <Filter>资源文件\References\Cpp\StandardLibrary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\StandardLibrary\Standard C++ IOStreams and Locales.txt">
+      <Filter>资源文件\References\Cpp\StandardLibrary</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Template\Template.txt">
+      <Filter>资源文件\References\Cpp\Template</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Template\C++ Templates.txt">
+      <Filter>资源文件\References\Cpp\Template</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Template\C++ Template Metaprogramming.txt">
+      <Filter>资源文件\References\Cpp\Template</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\Advanced.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\The Design and Evolution of C++.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\Cross-Platform Development in C++.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\API Design for C++.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\Modern C++ Design.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\The Art of C++.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\Inside The C++ Object Model.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\Large-Scale C++ Software Design.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\Secure Coding in C and C++.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\Designing and Coding Reusable C++.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Advanced\Multi-Paradigm Design for C++.txt">
+      <Filter>资源文件\References\Cpp\Advanced</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Boost\Boost.txt">
+      <Filter>资源文件\References\Cpp\Boost</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Boost\The C++ Standard Library Extensions.txt">
+      <Filter>资源文件\References\Cpp\Boost</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Boost\Beyond the C++ Standard Library An Introduction to Boost.txt">
+      <Filter>资源文件\References\Cpp\Boost</Filter>
+    </Text>
+    <Text Include="Resource\References\Cpp\Boost\Boost C++ Application Development Cookbook.txt">
+      <Filter>资源文件\References\Cpp\Boost</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\CoreTools\libxml++.txt">
+      <Filter>资源文件\References\Libs\CoreTools</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Database\mysql++.txt">
+      <Filter>资源文件\References\Libs\Database</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Debugging\Debugging.txt">
+      <Filter>资源文件\References\OperatingSystem\Debugging</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Debugging\Safe C++.txt">
+      <Filter>资源文件\References\OperatingSystem\Debugging</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Debugging\Debugging C++.txt">
+      <Filter>资源文件\References\OperatingSystem\Debugging</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Debugging\Advanced Windows Debugging.txt">
+      <Filter>资源文件\References\OperatingSystem\Debugging</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Debugging\The Developer%27s Guide to Debugging.txt">
+      <Filter>资源文件\References\OperatingSystem\Debugging</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\ConcurrentProgramming.txt">
+      <Filter>资源文件\References\OperatingSystem\ConcurrentProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Concurrent Programming On Windows.txt">
+      <Filter>资源文件\References\OperatingSystem\ConcurrentProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Parallel and Distributed Programming Using C++.txt">
+      <Filter>资源文件\References\OperatingSystem\ConcurrentProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\C++ Concurrency In Action.txt">
+      <Filter>资源文件\References\OperatingSystem\ConcurrentProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\C++ Multithreading Cookbook.txt">
+      <Filter>资源文件\References\OperatingSystem\ConcurrentProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Multithreading Applications in Win32.txt">
+      <Filter>资源文件\References\OperatingSystem\ConcurrentProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Professional Multicore Programming.txt">
+      <Filter>资源文件\References\OperatingSystem\ConcurrentProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Object-Oriented Multithreading Using C++.txt">
+      <Filter>资源文件\References\OperatingSystem\ConcurrentProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Linux\Linux.txt">
+      <Filter>资源文件\References\OperatingSystem\Linux</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Linux\Beginning Linux Programming.txt">
+      <Filter>资源文件\References\OperatingSystem\Linux</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Linux\Linux Command Line and Shell Scripting Bible.txt">
+      <Filter>资源文件\References\OperatingSystem\Linux</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Linux\How Linux Works.txt">
+      <Filter>资源文件\References\OperatingSystem\Linux</Filter>
+    </Text>
+    <Text Include="Resource\References\OperatingSystem\Linux\Professional Linux Kernel Architecture.txt">
+      <Filter>资源文件\References\OperatingSystem\Linux</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\AlgorithmicTechnique.txt">
+      <Filter>资源文件\References\GameDesign\AlgorithmicTechnique</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Real-Time Collision Detection.txt">
+      <Filter>资源文件\References\GameDesign\AlgorithmicTechnique</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Ray Tracing from the Ground Up.txt">
+      <Filter>资源文件\References\GameDesign\AlgorithmicTechnique</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Real-time Cameras.txt">
+      <Filter>资源文件\References\GameDesign\AlgorithmicTechnique</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Real-Time Shadows.txt">
+      <Filter>资源文件\References\GameDesign\AlgorithmicTechnique</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Computer Animation Algorithms and Techniques.txt">
+      <Filter>资源文件\References\GameDesign\AlgorithmicTechnique</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Game Programming Algorithms an Techniques.txt">
+      <Filter>资源文件\References\GameDesign\AlgorithmicTechnique</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\RenderingTechnology\RenderingTechnology.txt">
+      <Filter>资源文件\References\GameDesign\RenderingTechnology</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\RenderingTechnology\GPU Gems.txt">
+      <Filter>资源文件\References\GameDesign\RenderingTechnology</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\RenderingTechnology\Graphics Shaders.txt">
+      <Filter>资源文件\References\GameDesign\RenderingTechnology</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL.txt">
+      <Filter>资源文件\References\GameDesign\OpenGL</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL SuperBible.txt">
+      <Filter>资源文件\References\GameDesign\OpenGL</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL Shading Language.txt">
+      <Filter>资源文件\References\GameDesign\OpenGL</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL Programming Guide.txt">
+      <Filter>资源文件\References\GameDesign\OpenGL</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL ES 3.0 Programming Guide.txt">
+      <Filter>资源文件\References\GameDesign\OpenGL</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL Reference Manual.txt">
+      <Filter>资源文件\References\GameDesign\OpenGL</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\OpenGL\Computer Graphics with OpenGL.txt">
+      <Filter>资源文件\References\GameDesign\OpenGL</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\OpenGL\Computer Graphics Using OpenGL.txt">
+      <Filter>资源文件\References\GameDesign\OpenGL</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\DirectX.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Introduction to 3D Game Programming with DirectX 9.0c.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Advanced 3D Game Programming with DirectX 10.0.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Game Coding Complete.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Multiplayer Game Programming.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Beginning Game Programming.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Real-Time Rendering Tricks and Techniques in DirectX.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Advanced Animation with DirectX.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Programming Role Playing Games with DirectX.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Ricks of The Windows Game Programming Gurus.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Tricks Of The 3D Game Programming Gurus.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\DirectX\Game Programming All in One.txt">
+      <Filter>资源文件\References\GameDesign\DirectX</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\SoundProgramming\SoundProgramming.txt">
+      <Filter>资源文件\References\GameDesign\SoundProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\SoundProgramming\Beginning Game Audio Programming.txt">
+      <Filter>资源文件\References\GameDesign\SoundProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\ArtificialIntellegence.txt">
+      <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\Programming Game AI by Example.txt">
+      <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI Techniques for Game Programming.txt">
+      <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI for Game Developers.txt">
+      <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI Game Engine Programming.txt">
+      <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI Game Programming Wisdom.txt">
+      <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\The Nature of Code.txt">
+      <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameDesign\GameDesign.txt">
+      <Filter>资源文件\References\GameDesign\GameDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameDesign\The Art of Game Design A Book of Lenses.txt">
+      <Filter>资源文件\References\GameDesign\GameDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameDesign\Game Design Theory and Practice.txt">
+      <Filter>资源文件\References\GameDesign\GameDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameDesign\Object-Oriented Game Development.txt">
+      <Filter>资源文件\References\GameDesign\GameDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameDesign\Massively Multiplayer Game Development.txt">
+      <Filter>资源文件\References\GameDesign\GameDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameDesign\Game Design Workshop.txt">
+      <Filter>资源文件\References\GameDesign\GameDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameDesign\Designing Games.txt">
+      <Filter>资源文件\References\GameDesign\GameDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameDesign\236 Tips for Game Design.txt">
+      <Filter>资源文件\References\GameDesign\GameDesign</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameProgramming\GameProgramming.txt">
+      <Filter>资源文件\References\GameDesign\GameProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameProgramming\Game Programming Gems.txt">
+      <Filter>资源文件\References\GameDesign\GameProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameProgramming\Game Programming Patterns.txt">
+      <Filter>资源文件\References\GameDesign\GameProgramming</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameEngine\GameEngine.txt">
+      <Filter>资源文件\References\GameDesign\GameEngine</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameEngine\3D Game Engine Design.txt">
+      <Filter>资源文件\References\GameDesign\GameEngine</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameEngine\Mastering Unreal Technology.txt">
+      <Filter>资源文件\References\GameDesign\GameEngine</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\GameEngine\Game Engine Architecture.txt">
+      <Filter>资源文件\References\GameDesign\GameEngine</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ImageProcessing\ImageProcessing.txt">
+      <Filter>资源文件\References\GameDesign\ImageProcessing</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ImageProcessing\Image Processing,The Fundamentals.txt">
+      <Filter>资源文件\References\GameDesign\ImageProcessing</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ImageProcessing\Image Processing,Analysis,And Machine Vision.txt">
+      <Filter>资源文件\References\GameDesign\ImageProcessing</Filter>
+    </Text>
+    <Text Include="Resource\References\GameDesign\ImageProcessing\Pattern Recognition with Neural Networks in C++.txt">
+      <Filter>资源文件\References\GameDesign\ImageProcessing</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Refactoring\Refactoring.txt">
+      <Filter>资源文件\References\SoftwareDesign\Refactoring</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Refactoring\Refactoring Improving the Design of Existing Code.txt">
+      <Filter>资源文件\References\SoftwareDesign\Refactoring</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Refactoring\Refactoring to Patterns.txt">
+      <Filter>资源文件\References\SoftwareDesign\Refactoring</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Refactoring\Refactoring Workbook.txt">
+      <Filter>资源文件\References\SoftwareDesign\Refactoring</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\TestDrive\TestDrive.txt">
+      <Filter>资源文件\References\SoftwareDesign\TestDrive</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\TestDrive\Test-Driven Development By Example.txt">
+      <Filter>资源文件\References\SoftwareDesign\TestDrive</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\TestDrive\Test-Driven Development A Practical Guide.txt">
+      <Filter>资源文件\References\SoftwareDesign\TestDrive</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\TestDrive\Test Driven Practical TDD and Acceptance TDD for Jave Developers.txt">
+      <Filter>资源文件\References\SoftwareDesign\TestDrive</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\TestDrive\Growing Object-Oriented Software,Guided by Tests.txt">
+      <Filter>资源文件\References\SoftwareDesign\TestDrive</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\AgileDevelopment.txt">
+      <Filter>资源文件\References\SoftwareDesign\AgileDevelopment</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Agile Software Development Principles,Patterns,and Practices.txt">
+      <Filter>资源文件\References\SoftwareDesign\AgileDevelopment</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Extreme Programming Explained.txt">
+      <Filter>资源文件\References\SoftwareDesign\AgileDevelopment</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Agile Modeling.txt">
+      <Filter>资源文件\References\SoftwareDesign\AgileDevelopment</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Practices of an Agile Developer.txt">
+      <Filter>资源文件\References\SoftwareDesign\AgileDevelopment</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Essential Skills for the Agile Developer.txt">
+      <Filter>资源文件\References\SoftwareDesign\AgileDevelopment</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Clean Agile.txt">
+      <Filter>资源文件\References\SoftwareDesign\AgileDevelopment</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Experience\Experience.txt">
+      <Filter>资源文件\References\SoftwareDesign\Experience</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Experience\Pragmatic Thinking and Learning Refactor Your Wetware.txt">
+      <Filter>资源文件\References\SoftwareDesign\Experience</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Experience\The Mythical Man-month.txt">
+      <Filter>资源文件\References\SoftwareDesign\Experience</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Experience\More Joel on Software.txt">
+      <Filter>资源文件\References\SoftwareDesign\Experience</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ObjectOriented\ObjectOriented.txt">
+      <Filter>资源文件\References\SoftwareDesign\ObjectOriented</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ObjectOriented\Object-Oriented Analysis and Design with Applications.txt">
+      <Filter>资源文件\References\SoftwareDesign\ObjectOriented</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ObjectOriented\Object-Oriented Analysis &amp; Design.txt">
+      <Filter>资源文件\References\SoftwareDesign\ObjectOriented</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ObjectOriented\The Object-Oriented Thought Process.txt">
+      <Filter>资源文件\References\SoftwareDesign\ObjectOriented</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\SoftwareEngineering.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Catastrophe Disentanglement Getting Software Projects Back on Track.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Fuzzing Brute Force Vulnerability Discovery.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Code Optimization Effective Memory Usage.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Continuous Integration Improving Software Quality and Reducing Risk.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Beautiful Architecture.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Clean Architecture.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Applying Domain-Driven Design and Patterns.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Anti Patterns Refactoring Software,Architectures,and Projects in Crisis.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Functional Thinking.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Writing Effective Use Cases.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Software Engineering.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Analysis Patterns Reusable Object Models.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Beautiful Teams.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Beautiful Security.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\The Productive Programmer.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Software Estimation.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\The Psychology of Computer Programming.txt">
+      <Filter>资源文件\References\SoftwareDesign\SoftwareEngineering</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Compile\Compile.txt">
+      <Filter>资源文件\References\SoftwareDesign\Compile</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Compile\Language Implementation Patterns.txt">
+      <Filter>资源文件\References\SoftwareDesign\Compile</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Compile\Compilers Principles,techniques and Tools.txt">
+      <Filter>资源文件\References\SoftwareDesign\Compile</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Compile\Advanced Compiler Design and Implementation.txt">
+      <Filter>资源文件\References\SoftwareDesign\Compile</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Compile\Modern Compiler Implementation in C.txt">
+      <Filter>资源文件\References\SoftwareDesign\Compile</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Compile\Structure and Interpretation of Computer Programs.txt">
+      <Filter>资源文件\References\SoftwareDesign\Compile</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\ArtificialIntellegence.txt">
+      <Filter>资源文件\References\SoftwareDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\Artificial Intelligence Structures and Strategies,for Complex Problem Solving.txt">
+      <Filter>资源文件\References\SoftwareDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\Artificial Intelligence A Modern Approach.txt">
+      <Filter>资源文件\References\SoftwareDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\Deep Learning.txt">
+      <Filter>资源文件\References\SoftwareDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\Macbine Learning for Hackers.txt">
+      <Filter>资源文件\References\SoftwareDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\References\SoftwareDesign\Experience\The Pragmatic Programmer.txt">
+      <Filter>资源文件\References\SoftwareDesign\Experience</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h">

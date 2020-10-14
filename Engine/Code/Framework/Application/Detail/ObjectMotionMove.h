@@ -26,7 +26,7 @@ namespace Framework
 		using AVector = Mathematics::FloatAVector;
 		using Spatial = Rendering::Spatial;
 		using Transform = Rendering::FloatTransform;		
-		using SpatialSmartPointer = Rendering::SpatialSmartPointer;
+		using SpatialSmartPointer = Rendering::SpatialSharedPtr;
 
 	public:
 		explicit ObjectMotionMove(const SpatialSmartPointer& motionObject, int doRoll, int doYaw, int doPitch, float rotationSpeed);

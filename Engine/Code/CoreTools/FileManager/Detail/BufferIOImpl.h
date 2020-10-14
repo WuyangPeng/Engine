@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 13:38)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/13 10:10)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_BUFFERIO_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_BUFFERIO_IMPL_H
@@ -17,43 +20,39 @@
 
 // BufferIO类被设计为将整个文件加载到缓冲区，然后解析缓冲区。
 
-#include "CoreTools/FileManager/Flags/BufferIOFlags.h"
+#include "CoreTools/FileManager/FileManagerFwd.h"
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE BufferIOImpl 
-	{
-	public:
-		using ClassType = BufferIOImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE BufferIOImpl
+    {
+    public:
+        using ClassType = BufferIOImpl;
 
-	public:
-		// 调用者提供缓冲区的内存，以及是否读取或写入，并负责管理内存。缓冲器不必进行动态分配。
-		BufferIOImpl(int bytesTotal, BufferIO type) noexcept;
-		virtual ~BufferIOImpl() noexcept = default;
+    public:
+        BufferIOImpl() noexcept;
+        virtual ~BufferIOImpl() noexcept = default;
 
-		BufferIOImpl(const BufferIOImpl&) = delete;
-		BufferIOImpl& operator=(const BufferIOImpl&) = delete;
-		BufferIOImpl(BufferIOImpl&&) noexcept = delete;
-		BufferIOImpl& operator=(BufferIOImpl&&) noexcept = delete;
+        BufferIOImpl(const BufferIOImpl&) = delete;
+        BufferIOImpl& operator=(const BufferIOImpl&) = delete;
+        BufferIOImpl(BufferIOImpl&&) noexcept = delete;
+        BufferIOImpl& operator=(BufferIOImpl&&) noexcept = delete;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		virtual const char* GetBuffer() const = 0;
+        [[nodiscard]] virtual int GetBytesTotal() const = 0;
+        [[nodiscard]] virtual BufferIO GetBufferIOType() const noexcept = 0;
 
-		int GetBytesTotal() const noexcept;
-		int GetBytesProcessed() const noexcept;
+        [[nodiscard]] int GetBytesProcessed() const noexcept;
+        void IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
 
-		void IncrementBytesProcessed(int bytesNumber) noexcept;
+    protected:
+        void SetBytesProcessed(int bytesProcessed) noexcept;
 
-	protected:
-		BufferIO GetBufferIOType() const noexcept;
-		void SetBytesProcessed(int bytesProcessed) noexcept;
-
-	private:
-		int m_BytesTotal;
-		int m_BytesProcessed;
-		BufferIO m_BufferIOType;
-	};
+    private:
+        int m_BytesProcessed;
+    };
 }
 
-#endif // CORE_TOOLS_FILE_MANAGER_BUFFERIO_IMPL_H
+#endif  // CORE_TOOLS_FILE_MANAGER_BUFFERIO_IMPL_H

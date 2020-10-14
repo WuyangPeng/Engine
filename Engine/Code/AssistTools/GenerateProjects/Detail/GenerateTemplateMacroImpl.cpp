@@ -392,7 +392,7 @@ UserMacro.h
 
 #include "Framework/Macro/UserMacro.h" 
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Assert/Assertion.h"
+#include "CoreTools/Contract/Assertion.h"
 
 #if !defined(%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL)
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL 8

@@ -46,12 +46,12 @@ namespace Rendering
 
 		VisualPrimitiveType GetPrimitiveType() const;
 		 
-		VertexFormatSmartPointer GetVertexFormat();		 
-		VertexBufferSmartPointer GetVertexBuffer();	 
-		IndexBufferSmartPointer GetIndexBuffer();
+		VertexFormatSharedPtr GetVertexFormat();		 
+		VertexBufferSharedPtr GetVertexBuffer();	 
+		IndexBufferSharedPtr GetIndexBuffer();
 
-		static VisualSmartPointer CreateFromFile(const System::String& name);
-		static VisualSmartPointer CreateFromFile(const System::String& name, int indexSize);
+		static VisualSharedPtr CreateFromFile(const System::String& name);
+		static VisualSharedPtr CreateFromFile(const System::String& name, int indexSize);
 
 	private:
 		using VisualDataPtr = std::shared_ptr<VisualData>;

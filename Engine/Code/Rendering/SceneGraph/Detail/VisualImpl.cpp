@@ -9,7 +9,7 @@
 #include "VisualImpl.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Shaders/VisualEffectInstance.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
@@ -32,7 +32,7 @@ Rendering::VisualImpl
 }
 
 Rendering::VisualImpl
-	::VisualImpl(VisualPrimitiveType type,const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer)
+	::VisualImpl(VisualPrimitiveType type,const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,const IndexBufferSharedPtr& indexbuffer)
 	:m_VisualData{ type,vertexformat,vertexbuffer,indexbuffer }, m_ModelBound{}, m_Effect{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -48,7 +48,7 @@ Rendering::VisualPrimitiveType
 	return m_VisualData.GetPrimitiveType();
 }
 
-Rendering::ConstVertexFormatSmartPointer 
+Rendering::ConstVertexFormatSharedPtr 
 	Rendering::VisualImpl::GetConstVertexFormat() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -56,7 +56,7 @@ Rendering::ConstVertexFormatSmartPointer
 	return m_VisualData.GetConstVertexFormat();
 }
 
-const Rendering::VisualEffectInstanceSmartPointer Rendering::VisualImpl
+const Rendering::VisualEffectInstanceSharedPtr Rendering::VisualImpl
 	::GetEffectInstance() noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -64,14 +64,14 @@ const Rendering::VisualEffectInstanceSmartPointer Rendering::VisualImpl
 	return m_Effect;
 }
 
-const Rendering::ConstVisualEffectInstanceSmartPointer Rendering::VisualImpl ::GetConstEffectInstance() const noexcept
+const Rendering::ConstVisualEffectInstanceSharedPtr Rendering::VisualImpl ::GetConstEffectInstance() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Effect ;
 }
 
-void Rendering::VisualImpl ::SetEffectInstance(const VisualEffectInstanceSmartPointer& effect) noexcept
+void Rendering::VisualImpl ::SetEffectInstance(const VisualEffectInstanceSharedPtr& effect) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -93,7 +93,7 @@ const Rendering::FloatBound& Rendering::VisualImpl
 	return m_ModelBound;
 }
 
-Rendering::IndexBufferSmartPointer
+Rendering::IndexBufferSharedPtr
 	Rendering::VisualImpl
 	::GetIndexBuffer()
 {
@@ -102,7 +102,7 @@ Rendering::IndexBufferSmartPointer
 	return m_VisualData.GetIndexBuffer();
 }
 
-Rendering::VertexBufferSmartPointer
+Rendering::VertexBufferSharedPtr
 	Rendering::VisualImpl
 	::GetVertexBuffer()
 {
@@ -111,7 +111,7 @@ Rendering::VertexBufferSmartPointer
 	return m_VisualData.GetVertexBuffer();
 }
 
-Rendering::ConstIndexBufferSmartPointer 
+Rendering::ConstIndexBufferSharedPtr 
 	Rendering::VisualImpl
 	::GetConstIndexBuffer() const 
 {
@@ -121,14 +121,14 @@ Rendering::ConstIndexBufferSmartPointer
 }
 
 void Rendering::VisualImpl
-	::SetIndexBuffer(const IndexBufferSmartPointer& indexbuffer)
+	::SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_VisualData.SetIndexBuffer(indexbuffer);
 }
 
-Rendering::ConstVertexBufferSmartPointer
+Rendering::ConstVertexBufferSharedPtr
 	Rendering::VisualImpl
 	::GetConstVertexBuffer() const
 {
@@ -139,14 +139,14 @@ Rendering::ConstVertexBufferSmartPointer
 }
 
 void Rendering::VisualImpl
-	::SetVertexBuffer(const VertexBufferSmartPointer& vertexbuffer) 
+	::SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer) 
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_VisualData.SetVertexBuffer(vertexbuffer);
 }
 
-Rendering::VertexFormatSmartPointer	Rendering::VisualImpl
+Rendering::VertexFormatSharedPtr	Rendering::VisualImpl
 	::GetVertexFormat() 
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -155,7 +155,7 @@ Rendering::VertexFormatSmartPointer	Rendering::VisualImpl
 }
 
 void Rendering::VisualImpl
-	::SetVertexFormat(const VertexFormatSmartPointer& vertexformat)
+	::SetVertexFormat(const VertexFormatSharedPtr& vertexformat)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -176,7 +176,7 @@ void Rendering::VisualImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	if (m_VisualData.IsVertexSmartPointerValid())
+	if (m_VisualData.IsVertexSharedPtrValid())
 	{
 		DoUpdateModelBound();
 	}	
@@ -201,14 +201,13 @@ const	auto numVertices = m_VisualData.GetVertexBufferNumElements();
 	//m_ModelBound.ComputeFromData(numVertices, stride, data + positionOffset);
 }
 
-void Rendering::VisualImpl
-	::Load(BufferSource& source)
+void Rendering::VisualImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_VisualData.Load(source);
-	source.ReadAggregate(m_ModelBound);
-	//source.ReadSmartPointer(m_Effect);
+	source->ReadAggregate(m_ModelBound);
+	//source.ReadSharedPtr(m_Effect);
 }
 
 void Rendering::VisualImpl
@@ -218,7 +217,7 @@ void Rendering::VisualImpl
 
 	m_VisualData.Save(target);
         target->WriteAggregate(m_ModelBound);
-        //	target.WriteSmartPointer(m_Effect);
+        //	target.WriteSharedPtr(m_Effect);
 }
 
 int Rendering::VisualImpl
@@ -239,19 +238,18 @@ void Rendering::VisualImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& 
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	m_VisualData.Register(target);
-//	target.RegisterSmartPointer(m_Effect);
+//	target.RegisterSharedPtr(m_Effect);
 }
 
-void Rendering::VisualImpl
-	::Link(ObjectLink& source)
+void Rendering::VisualImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	
 
 	m_VisualData.Link(source);
-	//source.ResolveObjectSmartPointerLink(m_Effect);
+	//source.ResolveObjectSharedPtrLink(m_Effect);
 }
 
-const CoreTools::ObjectSmartPointer Rendering::VisualImpl
+const CoreTools::ObjectSharedPtr Rendering::VisualImpl
 	::GetObjectByName(const string& name) 
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -264,10 +262,10 @@ const CoreTools::ObjectSmartPointer Rendering::VisualImpl
 	if (object != nullptr)
 		return object;
 	else
-		return CoreTools::ObjectSmartPointer{};
+		return CoreTools::ObjectSharedPtr{};
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::VisualImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -275,7 +273,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::VisualImpl
 	auto visualDataObjects = m_VisualData.GetAllObjectsByName(name);
 	auto effectObjects = m_Effect->GetAllObjectsByName(name);
 
-	vector<CoreTools::ObjectSmartPointer> entirelyObjects;
+	vector<CoreTools::ObjectSharedPtr> entirelyObjects;
 
 	entirelyObjects.insert(entirelyObjects.end(),visualDataObjects.begin(),visualDataObjects.end());	 
 
@@ -284,7 +282,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::VisualImpl
 	return entirelyObjects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::VisualImpl
+const CoreTools::ConstObjectSharedPtr Rendering::VisualImpl
 	::GetConstObjectByName(const string& name) const 
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -297,10 +295,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::VisualImpl
 	if (object != nullptr)
 		return object;
 	else
-		return CoreTools::ConstObjectSmartPointer{};
+		return CoreTools::ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -308,7 +306,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualImpl
 	auto visualDataObjects = m_VisualData.GetAllConstObjectsByName(name);
 	auto effectObjects = m_Effect->GetAllConstObjectsByName(name);
 
-	vector<CoreTools::ConstObjectSmartPointer> entirelyObjects;
+	vector<CoreTools::ConstObjectSharedPtr> entirelyObjects;
 
 	entirelyObjects.insert(entirelyObjects.end(),visualDataObjects.begin(),visualDataObjects.end());	 
 

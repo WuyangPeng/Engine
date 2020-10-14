@@ -193,17 +193,16 @@ void Rendering::ControllerImpl ::SetActive(bool active) noexcept
     m_Active = active;
 }
 
-void Rendering::ControllerImpl
-    ::Load( BufferSource& source )
+void Rendering::ControllerImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     
-    source.ReadEnum(m_Repeat);
-    source.Read(m_MinTime);
-    source.Read(m_MaxTime);
-    source.Read(m_Phase);
-    source.Read(m_Frequency);
-    m_Active = source.ReadBool();
+    source->ReadEnum(m_Repeat);
+    source->Read(m_MinTime);
+    source->Read(m_MaxTime);
+    source->Read(m_Phase);
+    source->Read(m_Frequency);
+    m_Active = source->ReadBool();
     
     m_ApplicationTime = -Mathematics::DoubleMath::sm_MaxReal;
 }

@@ -7,14 +7,14 @@
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLPixelShader.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
  
 using namespace Rendering;
 
 
 PdrPixelShader::PdrPixelShader (Renderer*, const PixelShader* pshader)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	pshader;
    /* const char* programText = pshader->GetProgram(PixelShader::GetProfile())->c_str();
     int programLength = (int)strlen(programText);
@@ -33,7 +33,7 @@ PdrPixelShader::~PdrPixelShader ()
 
 void PdrPixelShader::Enable (Renderer* renderer, const PixelShader* pshader,const ShaderParameters* parameters)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	renderer; pshader; parameters;
 	/*
     // Enable the buffer by setting the state.
@@ -62,7 +62,7 @@ void PdrPixelShader::Enable (Renderer* renderer, const PixelShader* pshader,cons
 void PdrPixelShader::Disable (Renderer* renderer, const PixelShader* pshader,
     const ShaderParameters* parameters)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 	renderer; pshader; parameters;
    /* glDisable(GL_FRAGMENT_PROGRAM_ARB);
     int profile = PixelShader::GetProfile();

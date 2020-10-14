@@ -30,28 +30,28 @@ namespace Rendering
 		using ClassType = IKGoalImpl;
 		using APoint = Mathematics::FloatAPoint;
 		using Object = CoreTools::Object;
-		using ObjectSmartPointer = CoreTools::ObjectSmartPointer;
-		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
+		using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
+		using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
 
 	public:
                 IKGoalImpl() noexcept;
-            IKGoalImpl(const SpatialSmartPointer& target, const SpatialSmartPointer& effector, float weight = 1.0f) noexcept;
+            IKGoalImpl(const SpatialSharedPtr& target, const SpatialSharedPtr& effector, float weight = 1.0f) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		int GetStreamingSize() const noexcept;
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-		void Load(CoreTools::BufferSource& source);
-		void Link(CoreTools::ObjectLink& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
+		void Link(const CoreTools::ObjectLinkSharedPtr& source);
 		void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 		
-		const ObjectSmartPointer GetObjectByName(const std::string& name); 
-		const std::vector<ObjectSmartPointer> GetAllObjectsByName(const std::string& name); 
-		const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const;
-		const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;
+		const ObjectSharedPtr GetObjectByName(const std::string& name); 
+		const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name); 
+		const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+		const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
 
-		const ConstSpatialSmartPointer GetTarget() const noexcept;
-                const ConstSpatialSmartPointer GetEffector() const noexcept;
+		const ConstSpatialSharedPtr GetTarget() const noexcept;
+                const ConstSpatialSharedPtr GetEffector() const noexcept;
 		const APoint GetTargetPosition() const;
 		const APoint GetEffectorPosition() const;
 
@@ -60,8 +60,8 @@ namespace Rendering
 
 	private:
 		float m_Weight;  // д╛хо = 1
-		SpatialSmartPointer m_Target;
-		SpatialSmartPointer m_Effector;
+		SpatialSharedPtr m_Target;
+		SpatialSharedPtr m_Effector;
 	};
 }
 

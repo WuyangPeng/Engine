@@ -18,16 +18,14 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE TextureCube : public Texture
     {
     public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(TextureCube);
+         COPY_UNSHARE_CLASSES_TYPE_DECLARE(TextureCube, DESTRUCTOR_STATEMENT);
 		using ParentType = Texture;
-		using TextureCubeSmartPointer = CoreTools::FourthSubclassSmartPointer<ClassType>;
-		using ConstTextureCubeSmartPointer = CoreTools::ConstFourthSubclassSmartPointer<ClassType>;
+		using TextureCubeSharedPtr = std::shared_ptr<ClassType>;
+		using ConstTextureCubeSharedPtr = std::shared_ptr<ClassType>;
         
     public:
 		TextureCube (TextureFormat format, int dimension, int numLevels, BufferUsage usage = BufferUsage::Texture);
-		  ~TextureCube();
-                TextureCube(TextureCube&&) = default;
-                  TextureCube& operator=(TextureCube&&) = default;
+		 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;        
         
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TextureCube); 
@@ -61,7 +59,7 @@ namespace Rendering
         char* GetTextureData (int face,int level);
 		const char* GetTextureData (int face,int level) const;
 
-		  TextureSmartPointer Clone() const override;
+		  TextureSharedPtr Clone() const override;
                 ObjectInterfaceSharedPtr CloneObject() const override;
     private:
 		IMPL_TYPE_DECLARE(TextureCube);
@@ -70,7 +68,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)  
     CORE_TOOLS_STREAM_REGISTER(TextureCube);
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Fourth, TextureCube); 
+	CORE_TOOLS_SHARED_PTR_DECLARE( TextureCube); 
 }
 #include STSTEM_WARNING_POP
 #endif // RENDERING_RESOURCES_TEXTURE_CUBE_H

@@ -20,11 +20,8 @@ CoreTools::BaseResource
 	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::BaseResource
-	::~BaseResource()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+ 
+ 
 
 COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE(CoreTools, BaseResource)
 

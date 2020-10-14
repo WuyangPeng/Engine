@@ -19,14 +19,11 @@ namespace CoreTools
 	class CORE_TOOLS_DEFAULT_DECLARE CommonDataResource : public BaseResource
 	{
 	public:
-		OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CommonDataResource);
+            COPY_UNSHARE_CLASSES_TYPE_DECLARE(CommonDataResource, = default);
 		using ParentType = BaseResource;
 
 	public:
-		CommonDataResource(PriorityType priority, uint32_t size);
-		~CommonDataResource() = default;
-		CommonDataResource(CommonDataResource&&) noexcept = default;
-		CommonDataResource& operator=(CommonDataResource&&) noexcept = default;
+		CommonDataResource(PriorityType priority, uint32_t size); 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 

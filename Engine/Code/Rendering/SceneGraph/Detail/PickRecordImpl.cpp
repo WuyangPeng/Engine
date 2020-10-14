@@ -11,6 +11,7 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -26,7 +27,7 @@ Rendering::PickRecordImpl ::PickRecordImpl() noexcept
 }
 
 Rendering::PickRecordImpl ::PickRecordImpl(const PickRecordImpl& rhs)
-    : m_Intersected{ (rhs.m_Intersected == nullptr) ? ConstSpatialSmartPointer() : boost::polymorphic_pointer_cast<Spatial>(rhs.m_Intersected->Clone()) },
+    : m_Intersected{ (rhs.m_Intersected == nullptr) ? ConstSpatialSharedPtr() : boost::polymorphic_pointer_cast<Spatial>(rhs.m_Intersected->Clone()) },
       m_Parameter{ rhs.m_Parameter }, m_Triangle{ rhs.m_Triangle }
 {
     m_Bary[0] = rhs.m_Bary[0];
@@ -115,7 +116,7 @@ float Rendering::PickRecordImpl ::GetBary(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_1(0 <= index && index < sm_BarySize, "索引越界");
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     if (0 <= index && index < sm_BarySize)
     {
         return m_Bary[index];
@@ -129,7 +130,7 @@ float Rendering::PickRecordImpl ::GetBary(int index) const
 void Rendering::PickRecordImpl ::SetBary(float firstBary, float secondBary)
 {
     RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     RENDERING_ASSERTION_1(0.0f <= firstBary && firstBary <= 1.0f, "firstBary的取值在0.0和1.0之间");
     RENDERING_ASSERTION_1(0.0f <= secondBary && secondBary <= 1.0f, "secondBary的取值在0.0和1.0之间");
 
@@ -138,14 +139,14 @@ void Rendering::PickRecordImpl ::SetBary(float firstBary, float secondBary)
     m_Bary[2] = 1.0f - firstBary - secondBary;
 }
 
-Rendering::ConstSpatialSmartPointer Rendering::PickRecordImpl ::GetIntersected() const noexcept
+Rendering::ConstSpatialSharedPtr Rendering::PickRecordImpl ::GetIntersected() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_Intersected;
 }
 
-void Rendering::PickRecordImpl ::SetIntersected(const ConstSpatialSmartPointer& intersected) noexcept
+void Rendering::PickRecordImpl ::SetIntersected(const ConstSpatialSharedPtr& intersected) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 

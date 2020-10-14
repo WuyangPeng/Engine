@@ -39,8 +39,8 @@ namespace Rendering
         // set to 'true' when you plan on dynamically changing the surface
         // patches.  For example, you might modify the control points in a Bezier
         // surface patch.
-        SurfaceMesh(VertexFormatSmartPointer vformat, VertexBufferSmartPointer vbuffer, IndexBufferSmartPointer ibuffer,
-                    Float2ArraySmartPointer params, SurfacePatchSmartPointer* patches, bool allowDynamicChange);
+        SurfaceMesh(VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, IndexBufferSharedPtr ibuffer,
+                    Float2ArraySharedPtr params, SurfacePatchSharedPtr* patches, bool allowDynamicChange);
 
         ~SurfaceMesh();
         SurfaceMesh(const SurfaceMesh&) = default;
@@ -63,10 +63,10 @@ namespace Rendering
         bool IsLocked() const noexcept;
 
     protected:
-        VertexBufferSmartPointer mOrigVBuffer;
-        IndexBufferSmartPointer mOrigIBuffer;
-        Float2ArraySmartPointer mOrigParams;
-        SurfacePatchSmartPointer* mPatches;
+        VertexBufferSharedPtr mOrigVBuffer;
+        IndexBufferSharedPtr mOrigIBuffer;
+        Float2ArraySharedPtr mOrigParams;
+        SurfacePatchSharedPtr* mPatches;
         int mNumFullVertices, mNumPatches, mLevel;
 
     private:
@@ -80,7 +80,7 @@ namespace Rendering
             bool operator<(const Edge& edge) const;
 
             // Surface for subdivision evaluations.
-            SurfacePatchSmartPointer Patch;
+            SurfacePatchSharedPtr Patch;
 
             // Indices for the vertices.
             int V[2]{};
@@ -106,7 +106,7 @@ namespace Rendering
             Triangle() noexcept;
 
             // The surface for subdivision evaluations.
-            SurfacePatchSmartPointer Patch;
+            SurfacePatchSharedPtr Patch;
 
             // Indices for the vertices.
             int V[3]{};
@@ -116,7 +116,7 @@ namespace Rendering
 
         void Subdivide(int& numVertices, int& numEdges, EdgeMap& edgeMap, int& numTriangles, Triangle* triangles);
 
-        void InsertInto(EdgeMap& edgeMap, SurfacePatchSmartPointer patch, int v0, int v1, const Mathematics::Float2& param0, const Mathematics::Float2& param1, int newReferences);
+        void InsertInto(EdgeMap& edgeMap, SurfacePatchSharedPtr patch, int v0, int v1, const Mathematics::Float2& param0, const Mathematics::Float2& param1, int newReferences);
 
         // Support for dynamic changes in the surface patches.
         class SurfaceInfo
@@ -124,7 +124,7 @@ namespace Rendering
         public:
             SurfaceInfo()  ;
 
-            SurfacePatchSmartPointer Patch;
+            SurfacePatchSharedPtr Patch;
             Mathematics::Float2 Param;
         };
 
@@ -137,7 +137,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(SurfaceMesh);
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, SurfaceMesh);
+    CORE_TOOLS_SHARED_PTR_DECLARE( SurfaceMesh);
 #include STSTEM_WARNING_POP
 }
 

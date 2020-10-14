@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/17 16:16)
+//	引擎版本：0.5.1.1 (2020/10/13 9:45)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_BUFFERIO_FLAGS_H
 #define CORE_TOOLS_FILE_MANAGER_BUFFERIO_FLAGS_H

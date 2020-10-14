@@ -42,11 +42,11 @@ namespace Rendering
 		using TriangleKey = Mathematics::TriangleKey;
 
 	public:
-		explicit CreateClodMeshImpl(TrianglesMeshSmartPointer mesh);
+		explicit CreateClodMeshImpl(TrianglesMeshSharedPtr mesh);
 
 		CLASS_INVARIANT_DECLARE;
 
-		CollapseRecordArraySmartPointer GetCollapseRecordArray() const;
+		CollapseRecordArraySharedPtr GetCollapseRecordArray() const;
 
 	private:
 		void Compute();	 

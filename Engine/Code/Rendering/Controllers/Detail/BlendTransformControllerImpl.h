@@ -29,30 +29,30 @@ namespace Rendering
 		using Object = CoreTools::Object;
 		using APoint = Mathematics::FloatAPoint;
 		using Matrix = Mathematics::FloatMatrix;
-		using ObjectSmartPointer = CoreTools::ObjectSmartPointer;
-		using ConstObjectSmartPointer = CoreTools::ConstObjectSmartPointer;
+		using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
+		using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
 
 	public:		
 		BlendTransformControllerImpl() noexcept;
-		BlendTransformControllerImpl(const TransformControllerSmartPointer& firstController,const TransformControllerSmartPointer& secondController,
+		BlendTransformControllerImpl(const TransformControllerSharedPtr& firstController,const TransformControllerSharedPtr& secondController,
                                              bool rotationScaleMatrices, bool geometricRotation = false, bool geometricScale = false) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 
 		int GetStreamingSize() const noexcept;
 		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-		void Load(CoreTools::BufferSource& source);
-		void Link(CoreTools::ObjectLink& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
+		void Link(const CoreTools::ObjectLinkSharedPtr& source);
 		void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
-		const ObjectSmartPointer GetObjectByName(const std::string& name); 
-		const std::vector<ObjectSmartPointer> GetAllObjectsByName(const std::string& name); 
-		const ConstObjectSmartPointer GetConstObjectByName(const std::string& name) const;
-		const std::vector<ConstObjectSmartPointer> GetAllConstObjectsByName(const std::string& name) const;	
+		const ObjectSharedPtr GetObjectByName(const std::string& name); 
+		const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name); 
+		const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+		const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;	
 		
  		// 权重w是一个数字的量0 <= w <= 1。
-                const ConstTransformControllerSmartPointer GetFirstController() const noexcept;
-                const ConstTransformControllerSmartPointer GetSecondController() const noexcept;
+                const ConstTransformControllerSharedPtr GetFirstController() const noexcept;
+                const ConstTransformControllerSharedPtr GetSecondController() const noexcept;
                 bool IsRotationScaleMatrices() const noexcept;
                 void SetWeight(float weight) noexcept;
                 float GetWeight() const noexcept;
@@ -69,8 +69,8 @@ namespace Rendering
 		const Matrix GetMatrix() const;
 	
 	 private:
-		 TransformControllerSmartPointer m_FirstController;
-		 TransformControllerSmartPointer m_SecondController;
+		 TransformControllerSharedPtr m_FirstController;
+		 TransformControllerSharedPtr m_SecondController;
 		 float m_Weight;
 		 bool m_RotationScaleMatrices;
 		 bool m_GeometricRotation;

@@ -45,7 +45,7 @@ namespace Rendering
 
         // Use this constructor for the standard image processing pipeline.
         ImageProcessing3(int bound0, int bound1, int factor0, int factor1, Mathematics::Float4* imageData,
-                         PixelShaderSmartPointer mainPShader, const Mathematics::Float4& boundaryColor, bool useDirichlet);
+                         PixelShaderSharedPtr mainPShader, const Mathematics::Float4& boundaryColor, bool useDirichlet);
 
         // Use this constructor when you want to set up your own pipeline for
         // processing the image.
@@ -71,17 +71,17 @@ namespace Rendering
         int Map3Dto1D(int x, int y, int z) noexcept;
 
         // Create a tiled image corresponding to the 3D image data.
-        Texture2DSmartPointer CreateTiledImage(const Mathematics::Float4* imageData);
+        Texture2DSharedPtr CreateTiledImage(const Mathematics::Float4* imageData);
 
         // Set boundary pixels to (0,0,0,0).
-        void CreateBoundaryDirichletEffect(VisualEffectSmartPointer& effect,
-                                           VisualEffectInstanceSmartPointer& instance);
+        void CreateBoundaryDirichletEffect(VisualEffectSharedPtr& effect,
+                                           VisualEffectInstanceSharedPtr& instance);
 
         // Set boundary pixels so that boundary derivatives are zero.
-        void CreateBoundaryNeumannEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance);
+        void CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
 
         // Draw the tiled image using the boundary color for boundary voxels.
-        void CreateDrawEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance, const Mathematics::Float4& boundaryColor);
+        void CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance, const Mathematics::Float4& boundaryColor);
 
     private:
         int mBound0, mBound1, mBound2, mBound0M1, mBound1M1, mBound2M1;

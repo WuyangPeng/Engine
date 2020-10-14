@@ -26,7 +26,7 @@ namespace Rendering
 	public:
 		// Construction and destruction.  The following is required:
 		// size = 2^p + 1, p <= 7 (size = 3, 5, 9, 17, 33, 65, 129)
-		TerrainPage(VertexFormatSmartPointer vformat, int size, unsigned short* heights, const Mathematics::Float2& origin,
+		TerrainPage(VertexFormatSharedPtr vformat, int size, unsigned short* heights, const Mathematics::Float2& origin,
 				    float minElevation, float maxElevation,float spacing);
 
 		  ~TerrainPage();
@@ -65,7 +65,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 	CORE_TOOLS_STREAM_REGISTER(TerrainPage);
-	CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Ninth, TerrainPage);
+	CORE_TOOLS_SHARED_PTR_DECLARE( TerrainPage);
 	#include STSTEM_WARNING_POP
 }
 

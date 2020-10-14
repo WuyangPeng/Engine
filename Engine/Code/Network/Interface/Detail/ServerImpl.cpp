@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(26418)
@@ -54,13 +54,13 @@ void Network::ServerImpl ::Send([[maybe_unused]] uint64_t socketID, [[maybe_unus
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 bool Network::ServerImpl
 	::WaitForMultipleEvents()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -69,7 +69,7 @@ bool Network::ServerImpl ::HandleConnections([[maybe_unused]] const SocketManage
 {
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -78,7 +78,7 @@ bool Network::ServerImpl ::HandleData([[maybe_unused]] const SocketManagerShared
 {
 	 
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -86,14 +86,14 @@ bool Network::ServerImpl ::HandleData([[maybe_unused]] const SocketManagerShared
 bool Network::ServerImpl
 	::ImmediatelySend()
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
 	return true;
 }
 
 bool Network::ServerImpl ::ImmediatelySend([[maybe_unused]] uint64_t socketID)
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
  
 	return true;
@@ -103,7 +103,7 @@ void Network::ServerImpl ::AsyncSend([[maybe_unused]] uint64_t socketID, [[maybe
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	 
 }
@@ -112,7 +112,7 @@ void Network::ServerImpl ::ImmediatelyAsyncSend([[maybe_unused]] uint64_t socket
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 }
@@ -138,7 +138,7 @@ bool Network::ServerImpl ::EventFunction([[maybe_unused]] const CoreTools::Callb
 {
 	NETWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
  
 

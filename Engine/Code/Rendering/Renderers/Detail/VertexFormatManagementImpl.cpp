@@ -32,7 +32,7 @@ bool Rendering::VertexFormatManagementImpl
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::VertexFormatManagementImpl
-	::Bind (ConstVertexFormatSmartPointer vertexFormat)
+	::Bind (ConstVertexFormatSharedPtr vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -48,7 +48,7 @@ void Rendering::VertexFormatManagementImpl
 }
 
 void Rendering::VertexFormatManagementImpl
-	::Unbind (ConstVertexFormatSmartPointer vertexFormat)
+	::Unbind (ConstVertexFormatSharedPtr vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -56,7 +56,7 @@ void Rendering::VertexFormatManagementImpl
 }
  
 void Rendering::VertexFormatManagementImpl
-	::Enable (ConstVertexFormatSmartPointer vertexFormat)
+	::Enable (ConstVertexFormatSharedPtr vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -85,7 +85,7 @@ void Rendering::VertexFormatManagementImpl
 }
 
 void Rendering::VertexFormatManagementImpl
-	::Disable (ConstVertexFormatSmartPointer vertexFormat)
+	::Disable (ConstVertexFormatSharedPtr vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -104,7 +104,7 @@ void Rendering::VertexFormatManagementImpl
 }
 
 Rendering::VertexFormatManagementImpl::PlatformVertexFormatSharedPtr Rendering::VertexFormatManagementImpl
-	::GetResource (ConstVertexFormatSmartPointer vertexFormat)
+	::GetResource (ConstVertexFormatSharedPtr vertexFormat)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

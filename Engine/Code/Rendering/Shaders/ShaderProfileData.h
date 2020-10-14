@@ -11,7 +11,7 @@
 
 #include "Flags/ShaderFlags.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/SubclassSmartPointerMacro.h"
+
 #include "CoreTools/ObjectSystems/Object.h"
 
 #include <string>
@@ -23,18 +23,12 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderProfileData : public CoreTools::Object
     {
     public:
-        OLD_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderProfileData);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderProfileData, DESTRUCTOR_STATEMENT);
         using ParentType = Object;
 
     public:
         ShaderProfileData(int numConstants, int numSamplers);
-        ~ShaderProfileData();
-
-        #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        ShaderProfileData(ShaderProfileData&&) noexcept = default;
-        ShaderProfileData& operator=(ShaderProfileData&&) noexcept = default;
-         #include STSTEM_WARNING_POP
+    
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -58,7 +52,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(ShaderProfileData);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SUBCLASS_SMART_POINTER_DECLARE(Third, ShaderProfileData);
+    CORE_TOOLS_SHARED_PTR_DECLARE( ShaderProfileData);
 }
 
 #endif  // RENDERING_SHADERS_SHADER_PROFILE_DATA_H

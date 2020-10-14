@@ -59,11 +59,11 @@ void Rendering::ProjectionViewMatrixConstant
 	ParentType::SetNumRegisters(numRegisters);
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::ProjectionViewMatrixConstant
+Rendering::ShaderFloatSharedPtr Rendering::ProjectionViewMatrixConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 #include STSTEM_WARNING_POP

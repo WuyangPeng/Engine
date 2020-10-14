@@ -8,8 +8,7 @@
 
 #include "CullerImpl.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
-#include "CoreTools/MemoryTools/ThirdSubclassSmartPointerDetail.h"
-#include "CoreTools/MemoryTools/ConstThirdSubclassSmartPointerDetail.h"
+ 
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
@@ -23,7 +22,7 @@
 #include SYSTEM_WARNING_DISABLE(26429)
 
 Rendering::CullerImpl
-    ::CullerImpl (const ConstCameraSmartPointer& camera)
+    ::CullerImpl (const ConstCameraSharedPtr& camera)
 	:m_Camera{ camera }, m_Frustum{ false }, m_PlaneQuantity{ System::EnumCastUnderlying(ViewFrustum::Quantity) }, m_PlaneState{ 0 }, m_VisibleSet{}
 {
     // 数据成员m_Frustum, m_Plane,和 m_PlaneState是未初始化的。
@@ -43,14 +42,14 @@ bool Rendering::CullerImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::CullerImpl ::SetCamera(const ConstCameraSmartPointer& camera) noexcept
+void Rendering::CullerImpl ::SetCamera(const ConstCameraSharedPtr& camera) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Camera = camera;
 }
 
-Rendering::ConstCameraSmartPointer Rendering::CullerImpl ::GetCamera() const noexcept
+Rendering::ConstCameraSharedPtr Rendering::CullerImpl ::GetCamera() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -130,7 +129,7 @@ const float* Rendering::CullerImpl ::GetFrustum() const noexcept
 } 
 
 void Rendering::CullerImpl
-    ::Insert(const VisualSmartPointer& visible)
+    ::Insert(const VisualSharedPtr& visible)
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -428,7 +427,7 @@ int  Rendering::CullerImpl
     return m_VisibleSet.GetNumVisible ();
 }
 
-const Rendering::ConstVisualSmartPointer  Rendering::CullerImpl
+const Rendering::ConstVisualSharedPtr  Rendering::CullerImpl
     ::GetVisible (int index) const
 {
     RENDERING_CLASS_IS_VALID_1;

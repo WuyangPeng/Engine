@@ -1,0 +1,10 @@
+光线跟踪算法技术（Ray Tracing from the Ground Up）
+
+官方网站：
+http://www.raytracegroundup.com
+
+★★★
+作者： Kevin Suffern
+
+知识点 
+1.	算法技术基础知识。   

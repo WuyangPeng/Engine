@@ -18,7 +18,7 @@
 #include <memory>
 #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26429)
@@ -201,7 +201,7 @@ template <typename Real>
 void Mathematics::BSplineBasis<Real>
 	::Deallocate (Real** data)   
 {
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     DELETE2(data);
 }
@@ -264,7 +264,7 @@ Real Mathematics::BSplineBasis<Real>
 
     MATHEMATICS_ASSERTION_0(false, "Knot index out of range.\n");
 	
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 	
     return Math<Real>::sm_MaxReal;
 }

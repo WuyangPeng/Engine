@@ -8,7 +8,7 @@
 
 #include "WindowMessageInterface.h"
 #include "System/Window/Flags/WindowMessagesFlags.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
@@ -28,7 +28,7 @@ bool Framework::WindowMessageInterface ::PreCreate([[maybe_unused]] const Enviro
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -38,7 +38,7 @@ bool Framework::WindowMessageInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }
@@ -48,7 +48,7 @@ void Framework::WindowMessageInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 void Framework::WindowMessageInterface
@@ -56,7 +56,7 @@ void Framework::WindowMessageInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
  
 System::WindowLResult Framework::WindowMessageInterface
@@ -70,7 +70,7 @@ System::WindowLResult Framework::WindowMessageInterface
 		m_Hwnd = hwnd;
 	}
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Create, wParam, lParam);
 }
@@ -81,7 +81,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Size, wParam, lParam);
 }
@@ -92,7 +92,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Close, wParam, lParam);
 }
@@ -103,7 +103,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Move, wParam, lParam);
 }
@@ -114,7 +114,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Char, wParam, lParam);
 }
@@ -125,7 +125,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::KeyDown, wParam, lParam);
 }
@@ -136,7 +136,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::KeyUp, wParam, lParam);
 }
@@ -147,7 +147,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::LButtonDown, wParam, lParam);
 }
@@ -158,7 +158,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::LButtonUp, wParam, lParam);
 }
@@ -169,7 +169,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::MButtonDown, wParam, lParam);
 }
@@ -180,7 +180,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::MButtonUp, wParam, lParam);
 }
@@ -191,7 +191,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::RButtonDown, wParam, lParam);
 }
@@ -202,7 +202,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::RButtonUp, wParam, lParam);
 }
@@ -213,7 +213,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::MouseMove, wParam, lParam);
 }
@@ -224,7 +224,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::MouseWheel, wParam, lParam);
 }
@@ -235,7 +235,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	// 只收到主窗口销毁时才退出程序。
 	if (hwnd == m_Hwnd)
@@ -256,7 +256,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Paint, wParam, lParam);
 }
@@ -267,7 +267,7 @@ System::WindowLResult Framework::WindowMessageInterface
 	FRAMEWORK_CLASS_IS_VALID_9;
 	FRAMEWORK_ASSERTION_2(m_Hwnd != nullptr, "窗口还未创建！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return System::DefSystemWindowProc(hwnd, System::WindowMessages::EraseBkgnd, wParam, lParam);
 }
@@ -279,7 +279,7 @@ void Framework::WindowMessageInterface ::Display([[maybe_unused]] HWnd hwnd, [[m
 
  
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 int Framework::WindowMessageInterface
@@ -307,7 +307,7 @@ void Framework::WindowMessageInterface
 	// 修改主窗口
 	m_Hwnd = hwnd;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 int64_t Framework::WindowMessageInterface

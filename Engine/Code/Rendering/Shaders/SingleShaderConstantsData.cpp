@@ -48,7 +48,7 @@ void Rendering::SingleShaderConstantsData
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderConstantsData,GetConstantName,const string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderConstantsData,GetNumRegistersUsed,int) 
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderConstantsData,Load,BufferSource&,void)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderConstantsData, Load, CoreTools::BufferSourceSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,SingleShaderConstantsData,Save,CoreTools::BufferTargetSharedPtr,void)  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,SingleShaderConstantsData,GetStreamingSize,int) 
 #include STSTEM_WARNING_POP

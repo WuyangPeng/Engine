@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 10:45)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/12 14:20)
 
 #ifndef CORE_TOOLS_EXCEPTION_ERROR_FACTORY_H
 #define CORE_TOOLS_EXCEPTION_ERROR_FACTORY_H
@@ -11,27 +14,25 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Window/Fwd/WindowFlagsFwd.h"
-#include "CoreTools/Exception/ExceptionFwd.h"
-#include "CoreTools/ClassInvariant/ClassInvariantFwd.h"
+#include "CoreTools/Contract/ContractFwd.h"
+#include "CoreTools/Exception/ExceptionInternalFwd.h"
 
 #include <memory>
 #include <string>
 
 namespace CoreTools
 {
-	class ErrorImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE ErrorFactory final
+    {
+    public:
+        using ClassType = ErrorFactory;
+        using String = System::String;
+        using WindowError = System::WindowError;
+        using ErrorImplPtr = std::shared_ptr<ErrorImpl>;
 
-	class CORE_TOOLS_HIDDEN_DECLARE ErrorFactory
-	{
-	public:
-		using ClassType = ErrorFactory;
-		using String = System::String;
-		using WindowError = System::WindowError;
-		using ErrorImplPtr = std::shared_ptr<ErrorImpl>;
-
-		static ErrorImplPtr CreateError(const FunctionDescribed& functionDescribed, const LastError& lastError, const String& message);
-		static ErrorImplPtr CreateError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message);
-	};
+        [[nodiscard]] static ErrorImplPtr CreateError(const FunctionDescribed& functionDescribed, const LastError& lastError, const String& message);
+        [[nodiscard]] static ErrorImplPtr CreateError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message);
+    };
 }
 
-#endif // CORE_TOOLS_EXCEPTION_ERROR_FACTORY_H
+#endif  // CORE_TOOLS_EXCEPTION_ERROR_FACTORY_H

@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "MemoryManager.h"
-#include "CoreTools/ClassInvariant/ClassInvariantFwd.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
 // ÄÚ´æ¸ú×Ùµ÷ÊÔ¡£
 namespace CoreTools

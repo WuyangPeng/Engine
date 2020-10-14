@@ -53,11 +53,11 @@ void Rendering::TransformControllerImpl
 }
 
 void Rendering::TransformControllerImpl
-	::Load(CoreTools::BufferSource& source) 
+	::Load(const CoreTools::BufferSourceSharedPtr& source) 
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.ReadAggregate(m_LocalTransform);
+	source->ReadAggregate(m_LocalTransform);
 }
 
 void Rendering::TransformControllerImpl

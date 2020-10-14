@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -34,7 +34,7 @@ Rendering::VisualData
 }
 
 Rendering::VisualData
-	::VisualData(VisualPrimitiveType type,const VertexFormatSmartPointer& vertexformat, const VertexBufferSmartPointer& vertexbuffer,const IndexBufferSmartPointer& indexbuffer)
+	::VisualData(VisualPrimitiveType type,const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer,const IndexBufferSharedPtr& indexbuffer)
 	:m_Type{ type },m_VertexFormat{ vertexformat },m_VertexBuffer{ vertexbuffer },m_IndexBuffer{ indexbuffer }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -58,7 +58,7 @@ Rendering::VisualPrimitiveType
 	return m_Type;
 }
 
-Rendering::ConstVertexFormatSmartPointer 
+Rendering::ConstVertexFormatSharedPtr 
 	Rendering::VisualData::GetConstVertexFormat() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -111,7 +111,7 @@ int Rendering::VisualData
 }
 
 bool Rendering::VisualData
-	::IsVertexSmartPointerValid() const
+	::IsVertexSharedPtrValid() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -125,7 +125,7 @@ bool Rendering::VisualData
 	}
 } 
 
-Rendering::IndexBufferSmartPointer Rendering::VisualData
+Rendering::IndexBufferSharedPtr Rendering::VisualData
 	::GetIndexBuffer()
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -133,7 +133,7 @@ Rendering::IndexBufferSmartPointer Rendering::VisualData
 	return m_IndexBuffer;
 }
 
-Rendering::VertexBufferSmartPointer Rendering::VisualData
+Rendering::VertexBufferSharedPtr Rendering::VisualData
 	::GetVertexBuffer()
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -142,7 +142,7 @@ Rendering::VertexBufferSmartPointer Rendering::VisualData
 }
 
 
-Rendering::ConstIndexBufferSmartPointer Rendering::VisualData
+Rendering::ConstIndexBufferSharedPtr Rendering::VisualData
 	::GetConstIndexBuffer() const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -151,14 +151,14 @@ Rendering::ConstIndexBufferSmartPointer Rendering::VisualData
 }
 
 void Rendering::VisualData
-	::SetIndexBuffer(const IndexBufferSmartPointer& indexbuffer)
+	::SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_IndexBuffer = indexbuffer;
 }
 
-Rendering::ConstVertexBufferSmartPointer Rendering::VisualData
+Rendering::ConstVertexBufferSharedPtr Rendering::VisualData
 	::GetConstVertexBuffer() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -168,14 +168,14 @@ Rendering::ConstVertexBufferSmartPointer Rendering::VisualData
 }
 
 void Rendering::VisualData
-	::SetVertexBuffer(const VertexBufferSmartPointer& vertexbuffer) 
+	::SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer) 
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_VertexBuffer = vertexbuffer;
 }
 
-Rendering::VertexFormatSmartPointer Rendering::VisualData
+Rendering::VertexFormatSharedPtr Rendering::VisualData
 	::GetVertexFormat() 
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -184,22 +184,21 @@ Rendering::VertexFormatSmartPointer Rendering::VisualData
 }
 
 void Rendering::VisualData
-	::SetVertexFormat(const VertexFormatSmartPointer& vertexformat)
+	::SetVertexFormat(const VertexFormatSharedPtr& vertexformat)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_VertexFormat = vertexformat;
 }
  
-void Rendering::VisualData
-	::Load(BufferSource& source)
+void Rendering::VisualData ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.ReadEnum(m_Type);
-	//source.ReadSmartPointer(m_VertexFormat);
-	//source.ReadSmartPointer(m_VertexBuffer);
-	//source.ReadSmartPointer(m_IndexBuffer);	
+	source->ReadEnum(m_Type);
+	//source.ReadSharedPtr(m_VertexFormat);
+	//source.ReadSharedPtr(m_VertexBuffer);
+	//source.ReadSharedPtr(m_IndexBuffer);	
 }
 
 void Rendering::VisualData
@@ -208,9 +207,9 @@ void Rendering::VisualData
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	target->WriteEnum(m_Type);
-	//target.WriteSmartPointer(m_VertexFormat);
-	//target.WriteSmartPointer(m_VertexBuffer);
-	//target.WriteSmartPointer(m_IndexBuffer);	
+	//target.WriteSharedPtr(m_VertexFormat);
+	//target.WriteSharedPtr(m_VertexBuffer);
+	//target.WriteSharedPtr(m_IndexBuffer);	
 }
 
 int Rendering::VisualData
@@ -231,24 +230,23 @@ void Rendering::VisualData ::Register(const CoreTools::ObjectRegisterSharedPtr& 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-	//target.RegisterSmartPointer(m_VertexFormat);
-	//target.RegisterSmartPointer(m_VertexBuffer);
-	//target.RegisterSmartPointer(m_IndexBuffer);
+	//target.RegisterSharedPtr(m_VertexFormat);
+	//target.RegisterSharedPtr(m_VertexBuffer);
+	//target.RegisterSharedPtr(m_IndexBuffer);
 }
 
 
-void Rendering::VisualData
-	::Link(ObjectLink& source)
+void Rendering::VisualData ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	
 	source;
-	//source.ResolveObjectSmartPointerLink(m_VertexFormat);
-	//source.ResolveObjectSmartPointerLink(m_VertexBuffer);
-	//source.ResolveObjectSmartPointerLink(m_IndexBuffer);	
+	//source.ResolveObjectSharedPtrLink(m_VertexFormat);
+	//source.ResolveObjectSharedPtrLink(m_VertexBuffer);
+	//source.ResolveObjectSharedPtrLink(m_IndexBuffer);	
 }
 
 
-const CoreTools::ObjectSmartPointer Rendering::VisualData
+const CoreTools::ObjectSharedPtr Rendering::VisualData
 	::GetObjectByName(const string& name) 
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -265,10 +263,10 @@ const CoreTools::ObjectSmartPointer Rendering::VisualData
 	if (object != nullptr)
 		return object;
 	else
-		return CoreTools::ObjectSmartPointer();
+		return CoreTools::ObjectSharedPtr();
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::VisualData
+const vector<CoreTools::ObjectSharedPtr> Rendering::VisualData
 	::GetAllObjectsByName(const string& name)
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -277,7 +275,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::VisualData
 	auto vertexBufferObjects = m_VertexBuffer->GetAllObjectsByName(name);
 	auto indexBufferObjects = m_IndexBuffer->GetAllObjectsByName(name);
 
-	vector<CoreTools::ObjectSmartPointer> entirelyObjects;
+	vector<CoreTools::ObjectSharedPtr> entirelyObjects;
 
 	entirelyObjects.insert(entirelyObjects.end(),vertexFormatObjects.begin(),vertexFormatObjects.end());
 	
@@ -288,7 +286,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::VisualData
 	return entirelyObjects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::VisualData
+const CoreTools::ConstObjectSharedPtr Rendering::VisualData
 	::GetConstObjectByName(const string& name)  const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -305,10 +303,10 @@ const CoreTools::ConstObjectSmartPointer Rendering::VisualData
 	if (object != nullptr)
 		return object;
 	else
-		return CoreTools::ConstObjectSmartPointer();
+		return CoreTools::ConstObjectSharedPtr();
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualData
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualData
 	::GetAllConstObjectsByName(const string& name) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -317,7 +315,7 @@ const vector<CoreTools::ConstObjectSmartPointer> Rendering::VisualData
 	auto vertexBufferObjects = m_VertexBuffer->GetAllConstObjectsByName(name);
 	auto indexBufferObjects = m_IndexBuffer->GetAllConstObjectsByName(name);
 
-	vector<CoreTools::ConstObjectSmartPointer> entirelyObjects;
+	vector<CoreTools::ConstObjectSharedPtr> entirelyObjects;
 
 	entirelyObjects.insert(entirelyObjects.end(),vertexFormatObjects.begin(), vertexFormatObjects.end());
 	

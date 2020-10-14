@@ -10,7 +10,7 @@
 #include "OutTopLevel.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/FileManager/CFileManagerHelper.h"
-#include "CoreTools/VersionInformation/Version.h"
+#include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 

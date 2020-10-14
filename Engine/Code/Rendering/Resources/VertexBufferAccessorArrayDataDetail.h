@@ -29,7 +29,7 @@ Rendering::VertexBufferAccessorArrayData<usage, number>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
 Rendering::VertexBufferAccessorArrayData<usage, number>
-	::VertexBufferAccessorArrayData(const ConstVertexFormatSmartPointer& vertexformat, const ConstVertexBufferSmartPointer& vertexbuffer)
+	::VertexBufferAccessorArrayData(const ConstVertexFormatSharedPtr& vertexformat, const ConstVertexBufferSharedPtr& vertexbuffer)
 {
 	Init(vertexformat, vertexbuffer);
 
@@ -47,7 +47,7 @@ bool Rendering::VertexBufferAccessorArrayData<usage,number>
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
 void Rendering::VertexBufferAccessorArrayData<usage,number>
-	::Init( const ConstVertexFormatSmartPointer& vertexformat,const ConstVertexBufferSmartPointer& vertexbuffer )
+	::Init( const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer )
 {
 	RENDERING_CLASS_IS_VALID_9;
 

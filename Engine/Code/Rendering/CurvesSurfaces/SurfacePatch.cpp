@@ -26,7 +26,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SurfacePatch);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, SurfacePatch); 
 CORE_TOOLS_IMPL_NON_OBJECT_PTR_DEFAULT_STREAM(Rendering, SurfacePatch);
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, SurfacePatch);
+COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(Rendering, SurfacePatch);
 
 Rendering::SurfacePatch
 	::SurfacePatch(float uMin, float uMax, float vMin, float vMax, bool rectangular)

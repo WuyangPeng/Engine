@@ -14,5 +14,6 @@
 #include "OpenGLGlut.h"
 #include "OpenGLInit.h"
 #include "OpenGLUtility.h"
+#include "OpenGLWglPrototypes.h"
 
 #endif  // SYSTEM_OPENGL_H

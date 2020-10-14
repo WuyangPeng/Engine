@@ -1,0 +1,7 @@
+C++ 并行与分布式编程 （Parallel and Distributed Programming Using C++）
+
+★
+作者：Cameron Hughes 、Tracey Hughes
+
+知识点 
+1.	并发编程基础知识。 

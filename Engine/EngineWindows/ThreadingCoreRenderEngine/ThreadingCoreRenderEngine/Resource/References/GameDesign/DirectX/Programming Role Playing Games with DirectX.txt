@@ -1,0 +1,8 @@
+DirectX 角色扮演游戏编程（Programming Role Playing Games with DirectX）
+（第2版）
+
+○
+作者：Jim Adams
+
+知识点 
+1.	DirectX基础知识。   

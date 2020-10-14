@@ -10,8 +10,9 @@
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h" 
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
  #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -30,7 +31,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexColor3Effect);
 
 Rendering::VertexColor3Effect::VertexColor3Effect ()
 {
-    VertexShaderSmartPointer vshader{ std::make_shared < VertexShader>("Wm5.VertexColor3", 2, 2, 1, 0) };
+    VertexShaderSharedPtr vshader{ std::make_shared < VertexShader>("Wm5.VertexColor3", 2, 2, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelColor", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Color0);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
@@ -48,7 +49,7 @@ Rendering::VertexColor3Effect::VertexColor3Effect ()
 		profile->SetProgram(i, msVPrograms[i]);
 	}
 
-	PixelShaderSmartPointer pshader{ std::make_shared<PixelShader>("Wm5.VertexColor3", 1, 1, 0, 0) };
+	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.VertexColor3", 1, 1, 0, 0) };
     pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Color0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
 	profile = pshader->GetProfile();
@@ -58,17 +59,17 @@ Rendering::VertexColor3Effect::VertexColor3Effect ()
 		profile->SetProgram(i, msPPrograms[i]);
 	}
 
-	VisualPassSmartPointer pass{   };
+	VisualPassSharedPtr pass{   };
 	pass->SetVertexShader(vshader);
 	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSmartPointer{   });
-	pass->SetCullState(CullStateSmartPointer{   });
-	pass->SetDepthState(DepthStateSmartPointer{   });
-	pass->SetOffsetState(OffsetStateSmartPointer{   });
-	pass->SetStencilState(StencilStateSmartPointer{   });
-	pass->SetWireState(WireStateSmartPointer{   });
+	pass->SetAlphaState(AlphaStateSharedPtr{   });
+	pass->SetCullState(CullStateSharedPtr{   });
+	pass->SetDepthState(DepthStateSharedPtr{   });
+	pass->SetOffsetState(OffsetStateSharedPtr{   });
+	pass->SetStencilState(StencilStateSharedPtr{   });
+	pass->SetWireState(WireStateSharedPtr{   });
 
-	VisualTechniqueSmartPointer technique{   };
+	VisualTechniqueSharedPtr technique{   };
 	technique->InsertPass(pass);
 	InsertTechnique(technique); 
 }
@@ -77,8 +78,8 @@ Rendering::VertexColor3Effect::VertexColor3Effect ()
 Rendering::VisualEffectInstance* Rendering::VertexColor3Effect
 	::CreateInstance () const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSmartPointer((VisualEffect*)this), 0);
-	instance->SetVertexConstant(0, 0, ShaderFloatSmartPointer(CoreTools::New0 < ProjectionViewMatrixConstant>()));
+	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+	instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(CoreTools::New0 < ProjectionViewMatrixConstant>()));
     return instance;
 }
 
@@ -100,7 +101,7 @@ Rendering::VertexColor3Effect
 }
 
 void Rendering::VertexColor3Effect
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -110,7 +111,7 @@ void Rendering::VertexColor3Effect
 }
 
 void Rendering::VertexColor3Effect
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     VisualEffect::Link(source);
 }

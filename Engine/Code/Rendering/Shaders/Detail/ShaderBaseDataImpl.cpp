@@ -90,13 +90,12 @@ Rendering::ShaderFlags::VariableSemantic Rendering::ShaderBaseDataImpl
 	return m_SingleShaderBaseData[index].GetSemantic();
 }
 
-void Rendering::ShaderBaseDataImpl
-	::Load( BufferSource& source )
+void Rendering::ShaderBaseDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	uint32_t number{ 0 };
-	source.Read(number);
+	source->Read(number);
 	m_SingleShaderBaseData.resize(number);
 	 
 	for_each(m_SingleShaderBaseData.begin(),m_SingleShaderBaseData.end(),std::bind(&SingleShaderBaseData::Load,std::placeholders::_1,std::ref(source)));	 

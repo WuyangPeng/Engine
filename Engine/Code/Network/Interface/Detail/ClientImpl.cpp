@@ -12,7 +12,7 @@
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/Interface/SockAddress.h"
 
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include <vector>
 
 using std::string;
@@ -34,7 +34,7 @@ uint64_t Network::ClientImpl ::Connect()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     return 0;
 }
@@ -43,14 +43,14 @@ void Network::ClientImpl ::AsyncConnect()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 void Network::ClientImpl ::AsyncReceive()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 void Network::ClientImpl ::Send([[maybe_unused]] uint64_t socketID, [[maybe_unused]] const MessageInterfaceSharedPtr& message)
@@ -59,7 +59,7 @@ void Network::ClientImpl ::Send([[maybe_unused]] uint64_t socketID, [[maybe_unus
 
  
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 void Network::ClientImpl ::ImmediatelySend([[maybe_unused]] uint64_t socketID)
@@ -68,14 +68,14 @@ void Network::ClientImpl ::ImmediatelySend([[maybe_unused]] uint64_t socketID)
 
    
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 void Network::ClientImpl ::Receive()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 Network::ConfigurationStrategy Network::ClientImpl ::GetConfigurationStrategy() const noexcept
@@ -91,7 +91,7 @@ void Network::ClientImpl ::AsyncSend([[maybe_unused]] uint64_t socketID, [[maybe
 
      
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 void Network::ClientImpl ::ImmediatelyAsyncSend([[maybe_unused]] uint64_t socketID)
@@ -100,14 +100,14 @@ void Network::ClientImpl ::ImmediatelyAsyncSend([[maybe_unused]] uint64_t socket
 
      
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 uint64_t Network::ClientImpl ::GetSocketID() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     return 0;
 }
@@ -118,7 +118,7 @@ bool Network::ClientImpl ::EventFunction([[maybe_unused]] const CoreTools::Callb
 
  
 
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 
     return false;
 }

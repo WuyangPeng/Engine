@@ -38,7 +38,7 @@ void Rendering::OpenGLRenderTarget
     return m_OpenGLRenderTargetData.Disable(renderer);  
 }
 
-Rendering::ConstTexture2DSmartPointer Rendering::OpenGLRenderTarget
+Rendering::ConstTexture2DSharedPtr Rendering::OpenGLRenderTarget
     ::ReadColor(int index,Renderer* renderer)
 {
     RENDERING_CLASS_IS_VALID_9;  

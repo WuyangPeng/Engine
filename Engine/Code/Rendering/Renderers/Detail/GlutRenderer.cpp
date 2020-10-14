@@ -28,32 +28,32 @@ Rendering::RendererTypes Rendering::GlutRenderer
 	return RendererTypes::Glut;
 }
 
-void Rendering::GlutRenderer::SetAlphaState(const ConstAlphaStateSmartPointer& alphaState)
+void Rendering::GlutRenderer::SetAlphaState(const ConstAlphaStateSharedPtr& alphaState)
 {
 	alphaState;
 }
 
-void Rendering::GlutRenderer::SetCullState(const ConstCullStateSmartPointer& cullState)
+void Rendering::GlutRenderer::SetCullState(const ConstCullStateSharedPtr& cullState)
 {
 	cullState;
 }
 
-void Rendering::GlutRenderer::SetDepthState(const ConstDepthStateSmartPointer& depthState)
+void Rendering::GlutRenderer::SetDepthState(const ConstDepthStateSharedPtr& depthState)
 {
 	depthState;
 }
 
-void Rendering::GlutRenderer::SetOffsetState(const ConstOffsetStateSmartPointer& offsetState)
+void Rendering::GlutRenderer::SetOffsetState(const ConstOffsetStateSharedPtr& offsetState)
 {
 	offsetState;
 }
 
-void Rendering::GlutRenderer::SetStencilState(const ConstStencilStateSmartPointer& stencilState)
+void Rendering::GlutRenderer::SetStencilState(const ConstStencilStateSharedPtr& stencilState)
 {
 	stencilState;
 }
 
-void Rendering::GlutRenderer::SetWireState(const ConstWireStateSmartPointer& wireState)
+void Rendering::GlutRenderer::SetWireState(const ConstWireStateSharedPtr& wireState)
 {
 	wireState;
 }
@@ -128,7 +128,7 @@ void Rendering::GlutRenderer::Draw(const uint8_t* screenBuffer, bool reflectY)
 	screenBuffer; reflectY;
 }
 
-void Rendering::GlutRenderer::DrawPrimitive(const ConstVisualSmartPointer& visual)
+void Rendering::GlutRenderer::DrawPrimitive(const ConstVisualSharedPtr& visual)
 {
 	visual;
 }

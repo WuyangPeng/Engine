@@ -59,10 +59,10 @@ namespace Rendering
         void ReadBufferDataFromFile(ReadFileManager& inFile);
         void ReadHeadFromFile(ReadFileManager& inFile);
         void SaveHeadToFile(WriteFileManager& outFile) const;
-        void ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSmartPointer& vertexformat);
-        void SaveBufferDataToFile(WriteFileManager& outFile, const ConstVertexFormatSmartPointer& vertexformat) const;
+        void ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSharedPtr& vertexformat);
+        void SaveBufferDataToFile(WriteFileManager& outFile, const ConstVertexFormatSharedPtr& vertexformat) const;
 
-        void Load(CoreTools::BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const;
 

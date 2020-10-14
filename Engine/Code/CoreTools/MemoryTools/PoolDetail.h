@@ -18,7 +18,7 @@
 #include <algorithm>
  
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 
  
 #include STSTEM_WARNING_PUSH
@@ -119,7 +119,7 @@ template<class T>
 bool CoreTools::Pool<T>::ConformCondition([[maybe_unused]] T* ptr)
 {
  
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return true;
 }

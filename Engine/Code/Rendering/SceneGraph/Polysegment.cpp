@@ -23,8 +23,8 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Polysegment);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Polysegment);
 
 Rendering::Polysegment
-	::Polysegment(const VertexFormatSmartPointer& vertexformat,const VertexBufferSmartPointer& vertexbuffer,bool contiguous) 
-	:ParentType{ contiguous ? VisualPrimitiveType::PolysegmentsContiguous : VisualPrimitiveType::PolysegmentsDisjoint,vertexformat, vertexbuffer,IndexBufferSmartPointer() },
+	::Polysegment(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,bool contiguous) 
+	:ParentType{ contiguous ? VisualPrimitiveType::PolysegmentsContiguous : VisualPrimitiveType::PolysegmentsDisjoint,vertexformat, vertexbuffer,IndexBufferSharedPtr() },
 	 m_NumSegments{ 0 }, m_Contiguous{ contiguous }
 {
     const auto numVertices = vertexbuffer->GetNumElements();
@@ -42,6 +42,8 @@ Rendering::Polysegment
 	}
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
+
+	 
 }
 
    
@@ -115,12 +117,12 @@ bool Rendering::Polysegment ::GetContiguous() const noexcept
 	return m_Contiguous;
 }
 
-Rendering::ControllerInterfaceSmartPointer Rendering::Polysegment
+Rendering::ControllerInterfaceSharedPtr Rendering::Polysegment
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 Rendering::Polysegment
@@ -167,7 +169,7 @@ void Rendering::Polysegment
 }
 
 void Rendering::Polysegment
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -183,7 +185,7 @@ void Rendering::Polysegment
 }
 
 void Rendering::Polysegment
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -191,8 +193,8 @@ void Rendering::Polysegment
     
     ParentType::Load(source);
 	
-	source.Read(m_NumSegments);
-	m_Contiguous = source.ReadBool();
+	source->Read(m_NumSegments);
+	m_Contiguous = source->ReadBool();
         
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

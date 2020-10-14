@@ -12,12 +12,13 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
  #include "System/Helper/PragmaWarning.h"
  #include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -30,14 +31,14 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainBase);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainBase);
 
 Rendering::TerrainBase
-	::TerrainBase(const System::String& heightName, VertexFormatSmartPointer vformat, CameraSmartPointer camera )
+	::TerrainBase(const System::String& heightName, VertexFormatSharedPtr vformat, CameraSharedPtr camera )
     : mMode(0),mVFormat(vformat), mCameraRow(-1), mCameraCol(-1), mCamera(camera)
 {
     // Load global terrain information.
     LoadHeader(heightName);
 
     // Load terrain pages.
-	mPages = NEW2<TerrainPageSmartPointer>(mNumCols, mNumRows);
+	mPages = NEW2<TerrainPageSharedPtr>(mNumCols, mNumRows);
     int row = 0, col = 0;
     for (row = 0; row < mNumRows; ++row)
     {
@@ -80,7 +81,7 @@ EXCEPTION_ALL_CATCH(Rendering)
     
 }
 
-Rendering::TerrainPageSmartPointer Rendering::TerrainBase
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase
 	::GetPage(int row, int col)
 {
     if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
@@ -89,10 +90,10 @@ Rendering::TerrainPageSmartPointer Rendering::TerrainBase
     }
 
     RENDERING_ASSERTION_0(false, "Invalid row or column index\n");
-	return TerrainPageSmartPointer();
+	return TerrainPageSharedPtr();
 }
 
-Rendering::TerrainPageSmartPointer Rendering::TerrainBase
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase
 	::GetCurrentPage(float x, float y) const noexcept
 {
     const float invLength = 1.0f/(mSpacing*(float)(mSize - 1));
@@ -117,7 +118,7 @@ Rendering::TerrainPageSmartPointer Rendering::TerrainBase
 float Rendering::TerrainBase
 	::GetHeight (float x, float y) const
 {
-	TerrainPageSmartPointer page = GetCurrentPage(x, y);
+	TerrainPageSharedPtr page = GetCurrentPage(x, y);
 
     // Subtract off the translation due to wrap-around.
     x -= page->GetLocalTransform().GetTranslate()[0];
@@ -134,7 +135,7 @@ Mathematics::FloatAVector Rendering::TerrainBase
    const float yp = y + mSpacing;
     const float ym = y - mSpacing;
 
-	TerrainPageSmartPointer page = GetCurrentPage(xp, y);
+	TerrainPageSharedPtr page = GetCurrentPage(xp, y);
     float xtmp = xp - page->GetLocalTransform().GetTranslate()[0];
 	float ytmp = y - page->GetLocalTransform().GetTranslate()[1];
    const float hpz = page->GetHeight(xtmp,ytmp);
@@ -204,37 +205,37 @@ void Rendering::TerrainBase
 
   const  float length = mSpacing*(float)(mSize - 1);
    Mathematics::  Float2 origin(col*length, row*length);
-   TerrainPageSmartPointer page(std::make_shared<TerrainPage>(mVFormat, mSize, heights, origin, mMinElevation, mMaxElevation, mSpacing));
+   TerrainPageSharedPtr page(std::make_shared<TerrainPage>(mVFormat, mSize, heights, origin, mMinElevation, mMaxElevation, mSpacing));
 
     mPages[row][col] = page;
 }
 
-Rendering::TerrainPageSmartPointer Rendering::TerrainBase
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase
 	::ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix)
 {
     if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
     {
-		TerrainPageSmartPointer save = mPages[row][col];
+		TerrainPageSharedPtr save = mPages[row][col];
         LoadPage(row, col, heightName, heightSuffix);
         return save;
     }
 
     RENDERING_ASSERTION_0(false, "Invalid row or column index\n");
-	return TerrainPageSmartPointer();
+	return TerrainPageSharedPtr();
 }
 
-Rendering::TerrainPageSmartPointer Rendering::TerrainBase
-	::ReplacePage(int row, int col, TerrainPageSmartPointer newPage)
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase
+	::ReplacePage(int row, int col, TerrainPageSharedPtr newPage)
 {
     if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
     {
-		TerrainPageSmartPointer save = mPages[row][col];
+		TerrainPageSharedPtr save = mPages[row][col];
         mPages[row][col] = newPage;
         return save;
     }
 
     RENDERING_ASSERTION_0(false, "Invalid row or column index\n");
-	return TerrainPageSmartPointer();
+	return TerrainPageSharedPtr();
 }
 
 void Rendering::TerrainBase
@@ -284,7 +285,7 @@ void Rendering::TerrainBase
             int cO = cminO, cP = cminP;
             for (int col = 0; col < mNumCols; ++col)
             {
-                TerrainPageSmartPointer page = mPages[rP][cP];
+                TerrainPageSharedPtr page = mPages[rP][cP];
 				Mathematics::Float2 oldOrigin = page->GetOrigin();
 				Mathematics::Float2 newOrigin(cO*length, rO*length);
 				Mathematics::FloatAPoint pageTrn(newOrigin.GetFirstValue() - oldOrigin.GetFirstValue(),
@@ -314,10 +315,10 @@ void Rendering::TerrainBase
 
 // Name support.
 
-const CoreTools::ObjectSmartPointer Rendering::TerrainBase
+const CoreTools::ObjectSharedPtr Rendering::TerrainBase
 	::GetObjectByName(const std::string& name)
 {
-	CoreTools::ObjectSmartPointer found = ParentType::GetObjectByName(name);
+	CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -346,15 +347,15 @@ const CoreTools::ObjectSmartPointer Rendering::TerrainBase
 		}
 	} 
 
-	return CoreTools::ObjectSmartPointer();
+	return CoreTools::ObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ObjectSmartPointer> Rendering::TerrainBase
+const std::vector<CoreTools::ObjectSharedPtr> Rendering::TerrainBase
 	::GetAllObjectsByName(const std::string& name)
 {
-	std::vector<CoreTools::ObjectSmartPointer> objects = ParentType::GetAllObjectsByName(name);
+	std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
-	std::vector<CoreTools::ObjectSmartPointer> pointerObjects = mVFormat->GetAllObjectsByName(name);
+	std::vector<CoreTools::ObjectSharedPtr> pointerObjects = mVFormat->GetAllObjectsByName(name);
 	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 	pointerObjects = mCamera->GetAllObjectsByName(name);
 	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
@@ -372,10 +373,10 @@ const std::vector<CoreTools::ObjectSmartPointer> Rendering::TerrainBase
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::TerrainBase
+const CoreTools::ConstObjectSharedPtr Rendering::TerrainBase
 	::GetConstObjectByName(const std::string& name) const
 {
-	CoreTools::ConstObjectSmartPointer found = ParentType::GetConstObjectByName(name);
+	CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
 	if (found )
 	{
 		return found;
@@ -405,15 +406,15 @@ const CoreTools::ConstObjectSmartPointer Rendering::TerrainBase
 		}
 	}
 
-	return CoreTools::ConstObjectSmartPointer();
+	return CoreTools::ConstObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ConstObjectSmartPointer> Rendering::TerrainBase
+const std::vector<CoreTools::ConstObjectSharedPtr> Rendering::TerrainBase
 	::GetAllConstObjectsByName(const std::string& name) const
 {
-	std::vector<CoreTools::ConstObjectSmartPointer> objects = ParentType::GetAllConstObjectsByName(name);
+	std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
-	std::vector<CoreTools::ConstObjectSmartPointer> pointerObjects = mVFormat->GetAllConstObjectsByName(name);
+	std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = mVFormat->GetAllConstObjectsByName(name);
 	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 	pointerObjects = mCamera->GetAllConstObjectsByName(name);
 	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
@@ -456,30 +457,30 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::TerrainBase::CloneObject() const
 }
 
 void Rendering::TerrainBase
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Node::Load(source);
 
-    source.Read(mMode);
-    source.Read(mNumRows);
-    source.Read(mNumCols);
-    source.Read(mSize);
-    source.Read(mMinElevation);
-    source.Read(mMaxElevation);
-    source.Read(mSpacing);
-    source.Read(mCameraRow);
-    source.Read(mCameraCol);
-  //  source.ReadSmartPointer(mVFormat);
-	//source.ReadSmartPointer(mCamera);
+    source->Read(mMode);
+    source->Read(mNumRows);
+    source->Read(mNumCols);
+    source->Read(mSize);
+    source->Read(mMinElevation);
+    source->Read(mMaxElevation);
+    source->Read(mSpacing);
+    source->Read(mCameraRow);
+    source->Read(mCameraCol);
+  //  source.ReadSharedPtr(mVFormat);
+	//source.ReadSharedPtr(mCamera);
 
-	mPages = NEW2<TerrainPageSmartPointer>(mNumCols, mNumRows);
+	mPages = NEW2<TerrainPageSharedPtr>(mNumCols, mNumRows);
     for (int row = 0; row < mNumRows; ++row)
     {
         for (int col = 0; col < mNumCols; ++col)
         {
-			//source.ReadSmartPointer(mPages[row][col]);
+			//source.ReadSharedPtr(mPages[row][col]);
         }
     }
 
@@ -487,17 +488,17 @@ void Rendering::TerrainBase
 }
 
 void Rendering::TerrainBase
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
     Node::Link(source);
 
-   // source.ResolveObjectSmartPointerLink(mVFormat);
-	//source.ResolveObjectSmartPointerLink(mCamera);
+   // source.ResolveObjectSharedPtrLink(mVFormat);
+	//source.ResolveObjectSharedPtrLink(mCamera);
     for (int row = 0; row < mNumRows; ++row)
     {
         for (int col = 0; col < mNumCols; ++col)
         {
-			//source.ResolveObjectSmartPointerLink(mPages[row][col]);
+			//source.ResolveObjectSharedPtrLink(mPages[row][col]);
         }
     }
 }
@@ -514,13 +515,13 @@ uint64_t Rendering::TerrainBase
 	const uint64_t id = Node::Register(target);
 	if (0 < id)
     {
-       // target.RegisterSmartPointer(mVFormat);
-		//target.RegisterSmartPointer(mCamera);
+       // target.RegisterSharedPtr(mVFormat);
+		//target.RegisterSharedPtr(mCamera);
         for (int row = 0; row < mNumRows; ++row)
         {
             for (int col = 0; col < mNumCols; ++col)
             {
-				//target.RegisterSmartPointer(mPages[row][col]);
+				//target.RegisterSharedPtr(mPages[row][col]);
             }
         }
 		return id;
@@ -544,14 +545,14 @@ void Rendering::TerrainBase
     target->Write(mSpacing);
     target->Write(mCameraRow);
     target->Write(mCameraCol);
-   // target.WriteSmartPointer(mVFormat);
-	//target.WriteSmartPointer(mCamera);
+   // target.WriteSharedPtr(mVFormat);
+	//target.WriteSharedPtr(mCamera);
 
     for (int row = 0; row < mNumRows; ++row)
     {
         for (int col = 0; col < mNumCols; ++col)
         {
-			//target.WriteSmartPointer(mPages[row][col]);
+			//target.WriteSharedPtr(mPages[row][col]);
         }
     }
 

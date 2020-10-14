@@ -425,19 +425,18 @@ void Rendering::CameraMatrix
     UpdateProjectionViewMatrix();
 }
 
-void Rendering::CameraMatrix
-    ::Load( BufferSource& source )
+void Rendering::CameraMatrix ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     
     m_WorldCoordinateFrame.Load(source);
     m_CameraFrustum.Load(source);
  
-    source.ReadAggregate(m_PreViewMatrix);
-    m_PreViewIsIdentity = source.ReadBool();
-    source.ReadAggregate(m_PostProjectionMatrix);
-    m_PostProjectionIsIdentity = source.ReadBool();
-    source.Read(m_Epsilon);
+    source->ReadAggregate(m_PreViewMatrix);
+    m_PreViewIsIdentity = source->ReadBool();
+    source->ReadAggregate(m_PostProjectionMatrix);
+    m_PostProjectionIsIdentity = source->ReadBool();
+    source->Read(m_Epsilon);
     
     // º∆À„m_ProjectionMatrix[].
     OnFrustumChange();

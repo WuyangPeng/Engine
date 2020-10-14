@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/AndroidFrame/AndroidCallBackInterface.h"
-
+#include "CoreTools/Helper/MainFunctionMacro.h"
 CORE_TOOLS_MUTEX_EXTERN(Framework);
 
 using std::make_shared;

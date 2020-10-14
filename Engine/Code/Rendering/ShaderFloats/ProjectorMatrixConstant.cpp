@@ -32,7 +32,7 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ProjectorMatrixConstant);
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ProjectorMatrixConstant);
 
 Rendering::ProjectorMatrixConstant
-	::ProjectorMatrixConstant(const ProjectorSmartPointer& projector,bool biased, int biasScaleMatrixIndex)
+	::ProjectorMatrixConstant(const ProjectorSharedPtr& projector,bool biased, int biasScaleMatrixIndex)
 	:ParentType(sm_NumRegisters),  m_Impl{ make_shared<ImplType>(projector,biased,biasScaleMatrixIndex) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -51,7 +51,7 @@ void Rendering::ProjectorMatrixConstant
 	ParentType::SetNumRegisters(numRegisters);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ProjectorMatrixConstant,GetProjector, const Rendering::ConstProjectorSmartPointer )
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ProjectorMatrixConstant,GetProjector, const Rendering::ConstProjectorSharedPtr )
 									
 void Rendering::ProjectorMatrixConstant ::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
@@ -67,12 +67,12 @@ void Rendering::ProjectorMatrixConstant ::Update(const Visual* visual, [[maybe_u
 	 
 }
 
-Rendering::ShaderFloatSmartPointer Rendering::ProjectorMatrixConstant
+Rendering::ShaderFloatSharedPtr Rendering::ProjectorMatrixConstant
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSmartPointer{ std::make_shared<ClassType>(*this) };
+	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
  #include STSTEM_WARNING_POP

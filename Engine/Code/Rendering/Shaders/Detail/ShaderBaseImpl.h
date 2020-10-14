@@ -89,25 +89,25 @@ namespace Rendering
 		float GetAnisotropy (int index) const;
 		Colour GetBorderColor (int index) const;
 
-		void Load (BufferSource& source);
+		void Load(const CoreTools::BufferSourceSharedPtr& source);
 		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
 		int GetStreamingSize () const;
-		void Link(ObjectLink& source);
+		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
                 void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
 
 		void SaveShader(WriteFileManager& manager) const;
 		void LoadShader(ReadFileManager& manager, int numProfiles);
 
-		void SetProfile(const ShaderProfileDataSmartPointer& profile) noexcept;
-                const ConstShaderProfileDataSmartPointer GetProfile() const noexcept;
-                ShaderProfileDataSmartPointer GetProfile() noexcept;
+		void SetProfile(const ShaderProfileDataSharedPtr& profile) noexcept;
+                const ConstShaderProfileDataSharedPtr GetProfile() const noexcept;
+                ShaderProfileDataSharedPtr GetProfile() noexcept;
 
 	private:
 		ShaderBaseData m_Input;
 		ShaderBaseData m_Output;
 		ShaderConstantsData m_Constants;
 		ShaderSamplerData m_Sampler;	
-		ShaderProfileDataSmartPointer m_Profile;
+		ShaderProfileDataSharedPtr m_Profile;
 	};
 }
 

@@ -1,38 +1,33 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/18 10:21)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/09/29 15:25)
 
 #ifndef CORE_TOOLS_HELPER_INITIALIZE_TERMINATE_MACRO_H
 #define CORE_TOOLS_HELPER_INITIALIZE_TERMINATE_MACRO_H
 
-#include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/InitTermRegisterFactory.h"
 
-#define CORE_TOOLS_INIT_TERM_INITIALIZE_DECLARE \
-        public: static bool RegisterInitialize (); static void Initialize (); \
-        private: static bool sm_InitializeRegistered;
+#define CORE_TOOLS_INIT_TERM_DECLARE             \
+    [[nodiscard]] static bool RegisterFactory(); \
+    static void InitializeFactory();             \
+    static void TerminateFactory();
 
-#define CORE_TOOLS_INIT_TERM_INITIALIZE_DEFINE(namespaceName,className) \
-        bool namespaceName::className::sm_InitializeRegistered { false }; \
-		bool namespaceName::className::RegisterInitialize() { \
-		if (!sm_InitializeRegistered) { InitTerm::AddInitializer(className::Initialize); \
-        sm_InitializeRegistered = true; } return sm_InitializeRegistered; }
+#define CORE_TOOLS_INIT_TERM_DEFINE(namespaceName, className)                                                        \
+    bool namespaceName::className::RegisterFactory()                                                                 \
+    {                                                                                                                \
+        static InitTermRegisterFactory registerFactory{ ClassType::InitializeFactory, ClassType::TerminateFactory }; \
+        return true;                                                                                                 \
+    }
 
-#define CORE_TOOLS_INIT_TERM_INITIALIZE_REGISTER(namespaceName,className) \
-	    namespace { auto SYSTEM_MULTIPLE_CONCATENATOR(g_InitializeRegistered,namespaceName,className) = namespaceName::className::RegisterInitialize(); }
+#define CORE_TOOLS_INIT_TERM_REGISTER(namespaceName, className)                                          \
+    namespace namespaceName                                                                              \
+    {                                                                                                    \
+        const auto SYSTEM_MULTIPLE_CONCATENATOR(g_Registered, className) = className::RegisterFactory(); \
+    }
 
-#define CORE_TOOLS_INIT_TERM_TERMINATE_DECLARE \
-        public: static bool RegisterTerminate (); static void Terminate (); \
-        private: static bool sm_TerminateRegistered;
-
-#define CORE_TOOLS_INIT_TERM_TERMINATE_DEFINE(namespaceName,className) \
-        bool namespaceName::className::sm_TerminateRegistered { false }; \
-		bool namespaceName::className::RegisterTerminate() { \
-		if (!sm_TerminateRegistered) { InitTerm::AddTerminator(className::Terminate); \
-        sm_TerminateRegistered = true;  } return sm_TerminateRegistered; }
-
-#define CORE_TOOLS_INIT_TERM_TERMINATE_REGISTER(namespaceName,className) \
-	    namespace {	auto SYSTEM_MULTIPLE_CONCATENATOR(g_TerminateRegistered,namespaceName,className) = namespaceName::className::RegisterTerminate(); }
-
-#endif // CORE_TOOLS_HELPER_INITIALIZE_TERMINATE_MACRO_H
+#endif  // CORE_TOOLS_HELPER_INITIALIZE_TERMINATE_MACRO_H

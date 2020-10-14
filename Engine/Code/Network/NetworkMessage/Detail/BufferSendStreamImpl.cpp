@@ -9,7 +9,7 @@
 #include "BufferSendStreamImpl.h" 
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/FileManager/Endian.h"
-#include "CoreTools/VersionInformation/Version.h"
+#include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"

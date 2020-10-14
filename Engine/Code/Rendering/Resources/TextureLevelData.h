@@ -42,7 +42,7 @@ namespace Rendering
         int GetNumTotalBytes() const noexcept;
         int GetLevelOffset(int level) const;
 
-        void Load(CoreTools::BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
         int GetStreamingSize() const noexcept;
 

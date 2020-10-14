@@ -14,14 +14,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 using std::vector;
 using std::string;
 
 #include "System/Helper/PragmaWarning.h"
 #include <gsl/gsl_util>
-#include "../../ClassInvariant/Noexcept.h"
+#include "../../Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -334,7 +334,7 @@ int CoreTools::BufferStreamImpl
 {
 	CORE_TOOLS_ASSERTION_2(0 < copyBufferLength, "要复制的数组大小小于或等于零！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	if (0 <= position && position < ptr->GetSize())
 	{
@@ -474,7 +474,7 @@ void CoreTools::BufferStreamImpl
 
 	m_ReadLength = totalLength;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 int CoreTools::BufferStreamImpl
@@ -502,7 +502,7 @@ void CoreTools::BufferStreamImpl
 	m_ReadLength -= (m_StartDataPosition + position - m_ReadPosition);
 	m_ReadPosition = m_StartDataPosition + position;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 }
 
 uint32_t CoreTools::BufferStreamImpl
@@ -719,7 +719,7 @@ int CoreTools::BufferStreamImpl
 {
 	CORE_TOOLS_ASSERTION_2(0 < copyBufferLength, "要复制的数组大小小于或等于零！");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	if (0 <= position && position < ptr->GetSize())
 	{

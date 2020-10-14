@@ -16,6 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26455)
@@ -36,22 +37,22 @@ Rendering::ControllerInterface
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ControllerInterface)
 
-void Rendering::ControllerInterface ::AttachController([[maybe_unused]] ControllerInterfaceSmartPointer controller)
+void Rendering::ControllerInterface ::AttachController([[maybe_unused]] ControllerInterfaceSharedPtr controller)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(false,"Controller禁止调用AttachController");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	 
 }
 
-void Rendering::ControllerInterface ::DetachController([[maybe_unused]] ControllerInterfaceSmartPointer controller)
+void Rendering::ControllerInterface ::DetachController([[maybe_unused]] ControllerInterfaceSharedPtr controller)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(false,"Controller禁止调用DetachController");
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	 
 }
@@ -61,7 +62,7 @@ int Rendering::ControllerInterface
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	return 0;
 }
@@ -71,7 +72,7 @@ void Rendering::ControllerInterface
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	SetObject(object);
 }

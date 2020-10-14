@@ -55,7 +55,7 @@ namespace Rendering
 
         int GetStreamingSize() const noexcept;
         void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(BufferSource& source);
+        void Load(const CoreTools::BufferSourceSharedPtr& source);
 
         void SaveToFile(WriteFileManager& outFile) const;
         void ReadFromFile(ReadFileManager& inFile);

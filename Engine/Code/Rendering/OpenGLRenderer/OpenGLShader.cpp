@@ -11,7 +11,7 @@
 
 using namespace Rendering;
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 
@@ -184,7 +184,7 @@ void OpenGLShader::SetSamplerState(Renderer* renderer, const ShaderBase* shader,
         }
     }
 	*/
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 void OpenGLShader::DisableTextures(Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, int maxSamplers)
@@ -231,7 +231,7 @@ void OpenGLShader::DisableTextures(Renderer* renderer, const ShaderBase* shader,
         }
     }
 	*/
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
 }
 
 #include STSTEM_WARNING_POP

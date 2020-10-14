@@ -114,7 +114,7 @@ namespace AssistTools
 
 		bool GetSampler(const TokenArray& tokens, const std::string& name, Rendering::ShaderFlags::SamplerType type, SamplerArray& samplers);
 
-		Rendering::ShaderBaseSmartPointer CreateShader(bool isVShader, const Program& program, InputArray& inputs, OutputArray& outputs, ConstantArray& constants,  SamplerArray& samplers);
+		Rendering::ShaderBaseSharedPtr CreateShader(bool isVShader, const Program& program, InputArray& inputs, OutputArray& outputs, ConstantArray& constants,  SamplerArray& samplers);
 
 		bool UpdateShader(Rendering::ShaderBase* shader, const Program& program, InputArray& inputs, OutputArray& outputs, ConstantArray& constants, SamplerArray& samplers);
 
@@ -131,8 +131,8 @@ namespace AssistTools
 
 		int mActiveProfile;
 		Rendering::VisualEffect* mEffect;
-		Rendering::VertexShaderSmartPointer mVShader;
-		Rendering::PixelShaderSmartPointer mPShader;
+		Rendering::VertexShaderSharedPtr mVShader;
+		Rendering::PixelShaderSharedPtr mPShader;
 		bool mAlreadyCompiled;
 
 		static const std::string msVProfileName[System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)];

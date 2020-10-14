@@ -56,6 +56,9 @@ namespace CoreTools
 	private:
 		IMPL_TYPE_DECLARE(ObjectLink);
 	};
+
+	    using ObjectLinkSharedPtr = std::shared_ptr<ObjectLink>;
+        using ConstObjectLinkSharedPtr = std::shared_ptr<const ObjectLink>;
 }
 
 #endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H

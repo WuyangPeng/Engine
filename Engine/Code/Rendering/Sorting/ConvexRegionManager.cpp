@@ -9,7 +9,7 @@
 #include "ConvexRegionManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
  #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
@@ -34,8 +34,8 @@ Rendering::ConvexRegionManager
 
  
 
-Rendering::SpatialSmartPointer Rendering::ConvexRegionManager
-	::AttachOutside(SpatialSmartPointer outside)
+Rendering::SpatialSharedPtr Rendering::ConvexRegionManager
+	::AttachOutside(SpatialSharedPtr outside)
 {
  
 	 AttachChild(outside);	
@@ -43,19 +43,19 @@ Rendering::SpatialSmartPointer Rendering::ConvexRegionManager
    // return SetChild(1, outside);
 }
 
-Rendering::SpatialSmartPointer Rendering::ConvexRegionManager
+Rendering::SpatialSharedPtr Rendering::ConvexRegionManager
 	::DetachOutside()
 {
     return DetachChildAt(1);
 }
 
-Rendering::SpatialSmartPointer Rendering::ConvexRegionManager
+Rendering::SpatialSharedPtr Rendering::ConvexRegionManager
 	::GetOutside()
 {
     return GetChild(1);
 }
 
-Rendering::ConvexRegionSmartPointer Rendering::ConvexRegionManager
+Rendering::ConvexRegionSharedPtr Rendering::ConvexRegionManager
 	::GetContainingRegion(const  Mathematics::FloatAPoint& point)
 {
     return boost::polymorphic_pointer_cast<ConvexRegion>(GetContainingNode(point));
@@ -64,7 +64,7 @@ Rendering::ConvexRegionSmartPointer Rendering::ConvexRegionManager
 void Rendering::ConvexRegionManager
 	::GetVisibleSet (Culler& culler, bool noCull)
 {
-	ConvexRegionSmartPointer region = GetContainingRegion(culler.GetCamera()->GetPosition());
+	ConvexRegionSharedPtr region = GetContainingRegion(culler.GetCamera()->GetPosition());
 
     if (region )
     {

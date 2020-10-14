@@ -8,7 +8,7 @@
 
 #include "CameraModelMiddleLayerImpl.h" 
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Rendering/SceneGraph/Node.h" 
@@ -60,7 +60,7 @@ void Framework::CameraModelMiddleLayerImpl
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
-	Rendering::SpatialSmartPointer spatial{ CoreTools::New0<Rendering::Node>() };
+	Rendering::SpatialSharedPtr spatial{ std::make_shared<Rendering::Node>() };
 
 	m_ObjectMotion = make_shared<ObjectMotion>(spatial);
 }

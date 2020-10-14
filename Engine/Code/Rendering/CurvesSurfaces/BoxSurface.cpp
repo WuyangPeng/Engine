@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Helper/PragmaWarning.h"
@@ -42,11 +42,11 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, BoxSurface);
 
 
 Rendering::BoxSurface
-	::BoxSurface(Mathematics::BSplineVolumef* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSmartPointer vformat[6])
+	::BoxSurface(Mathematics::BSplineVolumef* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSharedPtr vformat[6])
 	: mVolume{ volume }, mNumUSamples{ numUSamples }, mNumVSamples{ numVSamples }, mNumWSamples{ numWSamples }, mDoSort{ false }
 {
 	int permute[3];
-	TrianglesMeshSmartPointer mesh;
+	TrianglesMeshSharedPtr mesh;
 
 	// u faces
 	permute[0] = 1;
@@ -106,12 +106,12 @@ EXCEPTION_ALL_CATCH(Rendering)
 	
 }
 
-Rendering::TrianglesMeshSmartPointer Rendering::BoxSurface
-	::CreateFace(int numRows, int numCols, VertexFormatSmartPointer vformat, bool ccw, float faceValue, int permute[3])
+Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface
+	::CreateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, bool ccw, float faceValue, int permute[3])
 {
 	const auto numVertices = numRows * numCols;
 	const auto vstride = vformat->GetStride();
-        VertexBufferSmartPointer vbuffer{ std::make_shared<VertexBuffer>(numVertices, vstride) };
+        VertexBufferSharedPtr vbuffer{ std::make_shared<VertexBuffer>(numVertices, vstride) };
 	VertexBufferAccessor vba{ vformat, vbuffer };
 
 	float param[3];
@@ -150,7 +150,7 @@ Rendering::TrianglesMeshSmartPointer Rendering::BoxSurface
 	}
 
 	const auto numTriangles = 2 * (numRows - 1)*(numCols - 1);
-        IndexBufferSmartPointer ibuffer = std::make_shared < IndexBuffer>(3 * numTriangles,(int) sizeof(int))  ;
+        IndexBufferSharedPtr ibuffer = std::make_shared < IndexBuffer>(3 * numTriangles,(int) sizeof(int))  ;
 
 	int* indices = (int*)ibuffer.get();
 	for (row = 0, i = 0; row < numRows - 1; ++row)
@@ -183,12 +183,12 @@ Rendering::TrianglesMeshSmartPointer Rendering::BoxSurface
 		}
 	}
 
-	TrianglesMeshSmartPointer mesh{ std::make_shared < TrianglesMesh>(vformat, vbuffer, ibuffer) };
+	TrianglesMeshSharedPtr mesh{ std::make_shared < TrianglesMesh>(vformat, vbuffer, ibuffer) };
 	return mesh;
 }
 
 void Rendering::BoxSurface
-	::UpdateFace(int numRows, int numCols, VertexFormatSmartPointer vformat, VertexBufferSmartPointer vbuffer, bool ccw, float faceValue, int permute[3])
+	::UpdateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, bool ccw, float faceValue, int permute[3])
 {
 	VertexBufferAccessor vba{ vformat, vbuffer };
 
@@ -222,9 +222,9 @@ void Rendering::BoxSurface
 	::UpdateSurface()
 {
 	int permute[3];
-	TrianglesMeshSmartPointer mesh;
-	VertexFormatSmartPointer vformat;
-	VertexBufferSmartPointer vbuffer;
+	TrianglesMeshSharedPtr mesh;
+	VertexFormatSharedPtr vformat;
+	VertexBufferSharedPtr vbuffer;
 
 	// u faces
 	permute[0] = 1;
@@ -355,7 +355,7 @@ void Rendering::BoxSurface
 
 	// Store back-facing faces in the front of the array.  Store front-facing
 	// faces in the rear of the array.
-	SpatialSmartPointer sorted[6];
+	SpatialSharedPtr sorted[6];
 	int backFace = 0, frontFace = 5;
  
 	for (auto i = 0; i < 6; ++i)
@@ -458,7 +458,7 @@ Rendering::BoxSurface
 }
 
 void Rendering::BoxSurface
-	::Load(CoreTools::BufferSource& source)
+	::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -466,12 +466,12 @@ void Rendering::BoxSurface
 
 	int numUCtrlPoints, numVCtrlPoints, numWCtrlPoints;
 	int uDegree, vDegree, wDegree;
-	source.Read(numUCtrlPoints);
-	source.Read(numVCtrlPoints);
-	source.Read(numWCtrlPoints);
-	source.Read(uDegree);
-	source.Read(vDegree);
-	source.Read(wDegree);
+	source->Read(numUCtrlPoints);
+	source->Read(numVCtrlPoints);
+	source->Read(numWCtrlPoints);
+	source->Read(uDegree);
+	source->Read(vDegree);
+	source->Read(wDegree);
 	mVolume = NEW0 Mathematics::BSplineVolumef(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints, uDegree, vDegree, wDegree);
 	for (int u = 0; u < numUCtrlPoints; ++u)
 	{
@@ -480,22 +480,22 @@ void Rendering::BoxSurface
 			for (int w = 0; w < numWCtrlPoints; ++w)
 			{
 				Mathematics::Vector3Df ctrl;
-				source.ReadAggregate(ctrl);
+                            source->ReadAggregate(ctrl);
 				mVolume->SetControlPoint(u, v, w, ctrl);
 			}
 		}
 	}
 
-	source.Read(mNumUSamples);
-	source.Read(mNumVSamples);
-	source.Read(mNumWSamples);
-	mDoSort = source.ReadBool();
+	source->Read(mNumUSamples);
+	source->Read(mNumVSamples);
+	source->Read(mNumWSamples);
+        mDoSort = source->ReadBool();
 
 	CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::BoxSurface
-	::Link(CoreTools::ObjectLink& source)
+	::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
 	Node::Link(source);
 }

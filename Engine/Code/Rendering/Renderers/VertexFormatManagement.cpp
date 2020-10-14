@@ -11,7 +11,7 @@
 #include "Detail/VertexFormatManagementImpl.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 
 using std::make_shared;
 
@@ -24,11 +24,11 @@ Rendering::VertexFormatManagement
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,VertexFormatManagement)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,Bind, ConstVertexFormatSmartPointer,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,Bind, ConstVertexFormatSharedPtr,void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,Unbind, ConstVertexFormatSmartPointer,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,Unbind, ConstVertexFormatSharedPtr,void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,Enable, ConstVertexFormatSmartPointer,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,Disable, ConstVertexFormatSmartPointer,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,GetResource, ConstVertexFormatSmartPointer,Rendering::VertexFormatManagement::PlatformVertexFormatPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,Enable, ConstVertexFormatSharedPtr,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,Disable, ConstVertexFormatSharedPtr,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormatManagement,GetResource, ConstVertexFormatSharedPtr,Rendering::VertexFormatManagement::PlatformVertexFormatPtr)
  

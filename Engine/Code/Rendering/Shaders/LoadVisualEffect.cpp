@@ -8,7 +8,7 @@
 
 #include "LoadVisualEffect.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::LoadVisualEffect
@@ -19,14 +19,14 @@ Rendering::LoadVisualEffect
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,LoadVisualEffect)
 
-const Rendering::VisualEffectSmartPointer Rendering::LoadVisualEffect
+const Rendering::VisualEffectSharedPtr Rendering::LoadVisualEffect
 	::Load( const System::String& fileName )
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	CoreTools::ReadFileManager manager{ fileName };
 
-	VisualEffectSmartPointer effect{ std::make_shared < VisualEffect>() };
+	VisualEffectSharedPtr effect{ std::make_shared < VisualEffect>() };
 
 	effect->LoadVisualTechnique(manager);
 

@@ -21,7 +21,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/ClassInvariant/Noexcept.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -463,7 +463,7 @@ const Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	CoreTools::DoNothing();
+	CoreTools::DisableNoexcept();
 
 	auto norm = SquaredLength();
 

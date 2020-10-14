@@ -335,8 +335,7 @@ const	auto worldViewProjectionMatrix = viewProjectionMatrix * worldMatrix;
 	return AxesAlignBoundingBox2D{ xmin,xmax,ymin,ymax };
 }
 
-void Rendering::CameraImpl
-    ::Load( BufferSource& source )
+void Rendering::CameraImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     

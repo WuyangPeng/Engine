@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 #include "Network/Configuration/ConfigurationSubStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "CoreTools/ClassInvariant/NoexceptDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH

@@ -23,7 +23,7 @@ namespace Rendering
         // OnInitialize or later.
 
         // Use this constructor for the standard image processing pipeline.
-        ImageProcessing2(int bound0, int bound1, Mathematics::Float4* imageData, PixelShaderSmartPointer mainPShader, bool useDirichlet);
+        ImageProcessing2(int bound0, int bound1, Mathematics::Float4* imageData, PixelShaderSharedPtr mainPShader, bool useDirichlet);
 
         // Use this constructor when you want to set up your own pipeline for
         // processing the image.
@@ -36,16 +36,16 @@ namespace Rendering
         float GetDy() const noexcept;
 
         // Create a texture corresponding to the 2D image data.
-        Texture2DSmartPointer CreateImage(const Mathematics::Float4* imageData);
+        Texture2DSharedPtr CreateImage(const Mathematics::Float4* imageData);
 
         // Set boundary pixels to (0,0,0,0).
-        void CreateBoundaryDirichletEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance);
+        void CreateBoundaryDirichletEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
 
         // Set boundary pixels so that boundary derivatives are zero.
-        void CreateBoundaryNeumannEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance);
+        void CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
 
         // Draw the image.
-        void CreateDrawEffect(VisualEffectSmartPointer& effect, VisualEffectInstanceSmartPointer& instance);
+        void CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
 
     private:
         void CreateVertexShader();

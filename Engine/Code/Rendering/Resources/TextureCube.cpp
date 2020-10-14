@@ -181,7 +181,7 @@ void Rendering::TextureCube
 }
 
 void Rendering::TextureCube
-    ::Link (CoreTools::ObjectLink& source)
+    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
@@ -197,7 +197,7 @@ void Rendering::TextureCube
 }
 
 void Rendering::TextureCube
-    ::Load (CoreTools::BufferSource& source)
+    ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
     
@@ -210,12 +210,12 @@ void Rendering::TextureCube
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::TextureSmartPointer Rendering::TextureCube
+Rendering::TextureSharedPtr Rendering::TextureCube
 	::Clone() const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return TextureSmartPointer{ std::make_shared<ClassType>(*this) };
+	return TextureSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TextureCube::CloneObject() const

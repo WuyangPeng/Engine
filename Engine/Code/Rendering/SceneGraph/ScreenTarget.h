@@ -24,13 +24,13 @@ namespace Rendering
 
 	public:
 		// 创建一个空间相机在渲染目标中使用。
-		static const CameraSmartPointer CreateCamera ();
+		static const CameraSharedPtr CreateCamera ();
 		
 		// 使用指定的尺寸创建一个矩形空间内的渲染目标。
 		// 顶点格式必须包含三元数组的位置和在单位0的二元数组纹理坐标。
 		// 这些属性被函数填充。任何其他属性不被处理。
 		// 矩形[xmin,xmax] x [ymin,ymax]必须包含在[0,1] x [0,1]。
-		static const TrianglesMeshSmartPointer CreateRectangle(const VertexFormatSmartPointer& vertexFormat,int renderTargetWidth, int renderTargetHeight,
+		static const TrianglesMeshSharedPtr CreateRectangle(const VertexFormatSharedPtr& vertexFormat,int renderTargetWidth, int renderTargetHeight,
 															   float xMin, float xMax,float yMin, float yMax,float zValue);
 		
 		// 返回矩形空间内位置。
@@ -41,7 +41,7 @@ namespace Rendering
 		
 	private:
 		static bool ValidSizes(int renderTargetWidth, int renderTargetHeight);
-		static bool ValidFormat(const VertexFormatSmartPointer& vertexFormat);
+		static bool ValidFormat(const VertexFormatSharedPtr& vertexFormat);
 	};
 }
 

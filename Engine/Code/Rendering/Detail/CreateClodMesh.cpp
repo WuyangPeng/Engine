@@ -14,7 +14,7 @@
 using std::make_shared;
 
 Rendering::CreateClodMesh
-	::CreateClodMesh(TrianglesMeshSmartPointer mesh)
+	::CreateClodMesh(TrianglesMeshSharedPtr mesh)
 	:m_Impl{ make_shared<ImplType>(mesh) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -22,4 +22,4 @@ Rendering::CreateClodMesh
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, CreateClodMesh)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CreateClodMesh,GetCollapseRecordArray, Rendering::CollapseRecordArraySmartPointer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CreateClodMesh,GetCollapseRecordArray, Rendering::CollapseRecordArraySharedPtr)

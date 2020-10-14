@@ -18,7 +18,7 @@
 #include "System/Helper/WindowsMacro.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
-#include "System/UserInterface/OpenGLWglPrototypes.h"
+#include "System/OpenGL/OpenGLWglPrototypes.h"
 
 #include <iostream>
 #include <vector>

@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/DataTypes/TransformDetail.h"
@@ -28,6 +28,7 @@
 #include SYSTEM_WARNING_DISABLE(26485)
 #include SYSTEM_WARNING_DISABLE(26496)
 #include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 using std::string;
 using std::vector;
 
@@ -40,7 +41,7 @@ Rendering::IKJointImpl ::IKJointImpl() noexcept
 }
 
 Rendering::IKJointImpl
-	::IKJointImpl( const SpatialSmartPointer& object,const IKGoalSmartPointerVector& goals )
+	::IKJointImpl( const SpatialSharedPtr& object,const IKGoalSharedPtrVector& goals )
 	:m_Object{ object }, m_Goals{ goals }
 {
 	Init();
@@ -91,7 +92,7 @@ void Rendering::IKJointImpl
 	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-    CoreTools::DoNothing();
+    CoreTools::DisableNoexcept();
     target;
 	//target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowTranslation);
 	//target.WriteWithoutNumber(sm_NumAxis, m_MinTranslation);
@@ -99,40 +100,40 @@ void Rendering::IKJointImpl
 	//target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowRotation);
 	//target.WriteWithoutNumber(sm_NumAxis, m_MinRotation);
 	//target.WriteWithoutNumber(sm_NumAxis, m_MaxRotation);
-//	target.WriteSmartPointer(m_Object);
-	//target.WriteSmartPointerWithNumber(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+//	target.WriteSharedPtr(m_Object);
+	//target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
 void Rendering::IKJointImpl
-	::Load( CoreTools::BufferSource& source )
+	::Load( const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source.ReadBool(sm_NumAxis, m_AllowTranslation);
-	source.Read(sm_NumAxis, m_MinTranslation);
-	source.Read(sm_NumAxis, m_MaxTranslation);
-	source.ReadBool(sm_NumAxis, m_AllowRotation);
-	source.Read(sm_NumAxis, m_MinRotation);
-	source.Read(sm_NumAxis, m_MaxRotation);
-//	source.ReadSmartPointer(m_Object);
+	source->ReadBool(sm_NumAxis, m_AllowTranslation);
+        source->Read(sm_NumAxis, m_MinTranslation);
+        source->Read(sm_NumAxis, m_MaxTranslation);
+        source->ReadBool(sm_NumAxis, m_AllowRotation);
+        source->Read(sm_NumAxis, m_MinRotation);
+        source->Read(sm_NumAxis, m_MaxRotation);
+        //	source.ReadSharedPtr(m_Object);
 
 	int size{ 0 };
-	source.Read(size);
+        source->Read(size);
 	if(0 < size)
 	{
 		m_Goals.resize(size);
-		//source.ReadSmartPointer(size, &m_Goals[0]);
+		//source.ReadSharedPtr(size, &m_Goals[0]);
 	}	
 }
 
 void Rendering::IKJointImpl
-	::Link( CoreTools::ObjectLink& source )
+	::Link(const  CoreTools::ObjectLinkSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
-        CoreTools::DoNothing();
-    // 	source.ResolveObjectSmartPointerLink(m_Object);
-//	source.ResolveObjectSmartPointerLink(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+        CoreTools::DisableNoexcept();
+    // 	source.ResolveObjectSharedPtrLink(m_Object);
+//	source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
 void Rendering::IKJointImpl
@@ -140,12 +141,12 @@ void Rendering::IKJointImpl
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
-        CoreTools::DoNothing();
-    //	target.RegisterSmartPointer(m_Object);
-//	target.RegisterSmartPointer(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+        CoreTools::DisableNoexcept();
+    //	target.RegisterSharedPtr(m_Object);
+//	target.RegisterSharedPtr(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
-const CoreTools::ObjectSmartPointer Rendering::IKJointImpl
+const CoreTools::ObjectSharedPtr Rendering::IKJointImpl
 	::GetObjectByName( const string& name )
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -166,11 +167,11 @@ const CoreTools::ObjectSmartPointer Rendering::IKJointImpl
 			}				
 		}
 
-		return CoreTools::ObjectSmartPointer{};
+		return CoreTools::ObjectSharedPtr{};
 	}		
 }
 
-const vector<CoreTools::ObjectSmartPointer> Rendering::IKJointImpl
+const vector<CoreTools::ObjectSharedPtr> Rendering::IKJointImpl
 	::GetAllObjectsByName( const string& name )
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -186,7 +187,7 @@ const vector<CoreTools::ObjectSmartPointer> Rendering::IKJointImpl
 	return objects;
 }
 
-const CoreTools::ConstObjectSmartPointer Rendering::IKJointImpl
+const CoreTools::ConstObjectSharedPtr Rendering::IKJointImpl
 	::GetConstObjectByName( const string& name ) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -208,11 +209,11 @@ const CoreTools::ConstObjectSmartPointer Rendering::IKJointImpl
 			}				
 		}
 
-		return CoreTools::ConstObjectSmartPointer{};
+		return CoreTools::ConstObjectSharedPtr{};
 	}		
 }
 
-const vector<CoreTools::ConstObjectSmartPointer> Rendering::IKJointImpl
+const vector<CoreTools::ConstObjectSharedPtr> Rendering::IKJointImpl
 	::GetAllConstObjectsByName( const string& name ) const
 {
 	RENDERING_CLASS_IS_VALID_9;
@@ -448,16 +449,16 @@ bool Rendering::IKJointImpl
 	return true;
 }
 
-const Rendering::ConstSpatialSmartPointer Rendering::IKJointImpl
-	::GetObjectSmartPointer() const noexcept
+const Rendering::ConstSpatialSharedPtr Rendering::IKJointImpl
+	::GetObjectSharedPtr() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Object;
 }
 
-const Rendering::ConstIKGoalSmartPointer Rendering::IKJointImpl
-	::GetGoalsSmartPointer(int index) const 
+const Rendering::ConstIKGoalSharedPtr Rendering::IKJointImpl
+	::GetGoalsSharedPtr(int index) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Goals.size()), "Ë÷Òý´íÎó£¡");
