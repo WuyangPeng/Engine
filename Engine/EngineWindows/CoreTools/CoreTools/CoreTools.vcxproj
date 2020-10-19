@@ -404,6 +404,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypes.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypesFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Detail\MinHeapRecordIndexImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeap.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecord.h" />
@@ -536,6 +537,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogLevelManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManagerFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManagerInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessage.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessagePostfix.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessagePrefix.h" />
@@ -609,13 +611,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\MainFunctionHelper.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\MainFunctionHelperFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\TestingInformationHelper.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferPool.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemory.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemoryDetail.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferPoolImpl.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferStreamImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MD5ContextImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryInformation.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryManagerImpl.h" />
@@ -630,8 +627,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryTools.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryToolsFwd.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Pool.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\PoolDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Random.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArray.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArrayDetail.h" />
@@ -960,6 +955,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\IntelCheckSum.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SevenModElevenCheckSum.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\Detail\MinHeapRecordIndexImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\DllMain.cpp" />
@@ -1060,11 +1056,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\Detail\TestingInformationHelperImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\DllFunctionHelper.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\TestingInformationHelper.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\BufferPool.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferPoolImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferStreamImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MD5ContextImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryInformation.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MemoryManagerImpl.cpp" />

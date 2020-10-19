@@ -1,28 +1,27 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/20 16:38)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/19 11:40)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_H
 #define CORE_TOOLS_MEMORY_TOOLS_H
 
-#include "HeapAllocateDetail.h"
 #include "DefaultMemoryDetail.h"
-#include "MemoryManager.h"
+#include "HeapAllocateDetail.h"
+#include "MD5.h"
+#include "MD5Context.h"
 #include "MemoryDetail.h"
-#include "SmartPointerManager.h"
-#include "SmartPointerSingleDetail.h"
+#include "MemoryManager.h"
+#include "Random.h"
 #include "SmartPointer1DArrayDetail.h"
 #include "SmartPointer2DArrayDetail.h"
 #include "SmartPointer3DArrayDetail.h"
 #include "SmartPointer4DArrayDetail.h"
-#include "MD5Context.h"
-#include "MD5.h"
-#include "Random.h"
-#include "PoolDetail.h"
-#include "BufferPool.h"
-#include "Buffer.h"
-#include "BufferStream.h"
+#include "SmartPointerManager.h"
+#include "SmartPointerSingleDetail.h"
 
-#endif // CORE_TOOLS_MEMORY_TOOLS_H
+#endif  // CORE_TOOLS_MEMORY_TOOLS_H

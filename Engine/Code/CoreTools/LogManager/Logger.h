@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 18:07)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/15 11:46)
 
 // 记录器类外部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOGGER_H
@@ -17,24 +20,24 @@ CORE_TOOLS_EXPORT_SHARED_PTR(LoggerImpl);
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE Logger
-	{
-	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Logger);
+    class CORE_TOOLS_DEFAULT_DECLARE Logger final
+    {
+    public:
+        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Logger);
 
-	public:
-		Logger(LogFilter logFilter, LogLevel logLevel);
+    public:
+        Logger(LogFilter logFilter, LogLevel logLevel);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		LogFilter GetLogFilterType() const noexcept;
-		LogLevel GetLogLevel() const noexcept;
+        [[nodiscard]] LogFilter GetLogFilterType() const noexcept;
+        [[nodiscard]] LogLevel GetLogLevel() const noexcept;
 
-		void SetLogLevel(LogLevel level);
+        void SetLogLevel(LogLevel level);
 
-	private:
-		IMPL_TYPE_DECLARE(Logger);
-	};
+    private:
+        IMPL_TYPE_DECLARE(Logger);
+    };
 }
 
-#endif // CORE_TOOLS_LOG_MANAGER_LOGGER_H
+#endif  // CORE_TOOLS_LOG_MANAGER_LOGGER_H

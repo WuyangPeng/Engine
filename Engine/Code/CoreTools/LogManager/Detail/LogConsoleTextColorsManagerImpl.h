@@ -1,44 +1,45 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 18:06)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/15 11:02)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_CONSOLE_TEXT_COLOR_MANAGER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_CONSOLE_TEXT_COLOR_MANAGER_IMPL_H
 
+#include "CoreTools/Console/ConsoleFwd.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-#include "CoreTools/Console/Flags/ConsoleColorsFlags.h"
-
-#include <boost/noncopyable.hpp>
 
 namespace CoreTools
 {
-	class LogConsoleTextColorsManagerImpl : protected boost::noncopyable
-	{
-	public:
-		using ClassType = LogConsoleTextColorsManagerImpl;
+    class LogConsoleTextColorsManagerImpl
+    {
+    public:
+        using ClassType = LogConsoleTextColorsManagerImpl;
 
-	public:
-		explicit LogConsoleTextColorsManagerImpl(LogLevel logLevel) noexcept;
-		virtual ~LogConsoleTextColorsManagerImpl() noexcept;
+    public:
+        explicit LogConsoleTextColorsManagerImpl(LogLevel logLevel) noexcept;
+        virtual ~LogConsoleTextColorsManagerImpl() noexcept = default;
 
-		LogConsoleTextColorsManagerImpl(const LogConsoleTextColorsManagerImpl&) = delete;
-		LogConsoleTextColorsManagerImpl& operator=(const LogConsoleTextColorsManagerImpl&) = delete;
-		LogConsoleTextColorsManagerImpl(LogConsoleTextColorsManagerImpl&&) noexcept = delete;
-		LogConsoleTextColorsManagerImpl& operator=(LogConsoleTextColorsManagerImpl&&) noexcept = delete;
+        LogConsoleTextColorsManagerImpl(const LogConsoleTextColorsManagerImpl&) = delete;
+        LogConsoleTextColorsManagerImpl& operator=(const LogConsoleTextColorsManagerImpl&) = delete;
+        LogConsoleTextColorsManagerImpl(LogConsoleTextColorsManagerImpl&&) noexcept = delete;
+        LogConsoleTextColorsManagerImpl& operator=(LogConsoleTextColorsManagerImpl&&) noexcept = delete;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		LogLevel GetLogLevel() const noexcept;
+        [[nodiscard]] LogLevel GetLogLevel() const noexcept;
 
-	protected:
-		static TextColour GetTextColor(LogLevel logLevel) noexcept;
-		static bool GetIntensified(LogLevel logLevel) noexcept;
+    protected:
+        [[nodiscard]] static TextColour GetTextColor(LogLevel logLevel) noexcept;
+        [[nodiscard]] bool GetIntensified(LogLevel logLevel) noexcept;
 
-	private:
-		LogLevel m_LogLevel;
-	};
+    private:
+        LogLevel m_LogLevel;
+    };
 }
 
-#endif // CORE_TOOLS_LOG_MANAGER_LOG_CONSOLE_TEXT_COLOR_MANAGER_IMPL_H
+#endif  // CORE_TOOLS_LOG_MANAGER_LOG_CONSOLE_TEXT_COLOR_MANAGER_IMPL_H

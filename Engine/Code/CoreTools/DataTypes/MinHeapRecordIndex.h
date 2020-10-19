@@ -1,52 +1,49 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/20 15:03)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/16 11:40)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_INDEX_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_INDEX_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/Helper/ExportMacro.h"
+
+CORE_TOOLS_EXPORT_SHARED_PTR(MinHeapRecordIndexImpl);
+
 namespace CoreTools
 {
-	// 由唯一标识索引UniqueIndex获取堆位置索引HeapIndex
-	class CORE_TOOLS_DEFAULT_DECLARE MinHeapRecordIndex
-	{
-	public:
-		using ClassType = MinHeapRecordIndex;
+    // 由唯一标识索引UniqueIndex获取堆位置索引HeapIndex
+    class CORE_TOOLS_DEFAULT_DECLARE MinHeapRecordIndex final
+    {
+    public:
+        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MinHeapRecordIndex);
 
-	public:
-		explicit MinHeapRecordIndex(int maxElements);
-		MinHeapRecordIndex(int newMaxElements, const ClassType& oldIndex);
-		~MinHeapRecordIndex() noexcept;
+    public:
+        explicit MinHeapRecordIndex(int maxElements);
+        MinHeapRecordIndex(int newMaxElements, const MinHeapRecordIndex& oldIndex);
 
-		MinHeapRecordIndex(const MinHeapRecordIndex& rhs);
-		MinHeapRecordIndex& operator= (const MinHeapRecordIndex& rhs);
+#ifdef OPEN_CLASS_INVARIANT
+        CLASS_INVARIANT_DECLARE;
+        void PrintIndexInLog() const noexcept;
+#endif  // OPEN_CLASS_INVARIANT
 
-		MinHeapRecordIndex(MinHeapRecordIndex&& rhs) noexcept = default;
-		MinHeapRecordIndex& operator= (MinHeapRecordIndex&& rhs) noexcept = default;
+        [[nodiscard]] int GetMaxElements() const;
+        [[nodiscard]] int GetHeapIndex(int uniqueIndex) const;
 
-#ifdef OPEN_CLASS_INVARIANT		
-		CLASS_INVARIANT_DECLARE;
-		bool IndexIsValid() const noexcept;
-		void PrintIndexInLog() const noexcept;
-#endif // OPEN_CLASS_INVARIANT		
+        // 交换唯一标识索引对应的堆位置索引
+        void ChangeIndex(int lhsIndex, int rhsIndex);
 
-		int GetMaxElements() const noexcept;
-		int GetHeapIndex(int uniqueIndex) const;
+        void GrowBy(int newMaxElements);
 
-		// 交换唯一标识索引对应的堆位置索引
-		void ChangeIndex(int lhsIndex, int rhsIndex) noexcept;
-
-	private:
-		void Swap(ClassType& rhs) noexcept;
-
-	private:
-		int m_MaxElements;
-		int* m_RecordIndexs;
-	};
+    private:
+        IMPL_TYPE_DECLARE(MinHeapRecordIndex);
+    };
 }
 
-#endif // CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_INDEX_H
+#endif  // CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_INDEX_H

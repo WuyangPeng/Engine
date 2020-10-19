@@ -1,0 +1,12 @@
+Python 技术手册  （Python in a Nutsbell）
+（第2版）
+
+官方网站：
+http://www.oreilly.com/catalog/pythonian2 、https://www.oreilly.com/
+
+☆
+作者：Alex Martelli
+
+知识点 
+1.	Python 基础知识。
+

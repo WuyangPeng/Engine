@@ -2,6 +2,7 @@ TODO Level 1
  
 0.0.5.1
 
-1.  ��Contract������ʹ�ÿɱ�ģ�����������ԭ�Ȳ���ȫ�Ŀɱ������
-2.  ��Contract���಻��ʽ��Debug��������������⣬Ŀǰͨ���಻��ʽ�������п�����رա�   
-3.  ��Contract�������޸�Implģʽ��ʹ�ü̳д���꣬�ڻ����е��þ�̬���Ժ�Copy������
+1.  （Contract）考虑使用可变模板参数来代替原先不安全的可变参数。
+2.  （Contract）类不变式对Debug版出现了性能问题，目前通过类不变式级别宏进行开启或关闭。   
+3.  （Contract）考虑修改Impl模式，使用继承代替宏，在基类中调用静态断言和Copy函数。
+4.  （DataTypes）对MinHeap进行性能优化。

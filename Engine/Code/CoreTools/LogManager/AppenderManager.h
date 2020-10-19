@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 18:06)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/15 11:38)
 
 // 输出位置管理器类外部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_H
@@ -12,6 +15,7 @@
 
 #include "LogManagerFwd.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include <boost/noncopyable.hpp>
@@ -22,38 +26,38 @@ EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE AppenderManager : private boost::noncopyable
-	{
-	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(AppenderManager);
-		using String = System::String;
+    class CORE_TOOLS_DEFAULT_DECLARE AppenderManager final : private boost::noncopyable
+    {
+    public:
+        NON_COPY_CLASSES_TYPE_DECLARE(AppenderManager);
+        using String = System::String;
 
-	public:
-		AppenderManager();
+    public:
+        explicit AppenderManager(DisableNotThrow disableNotThrow);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool IsAppenderExist(const String& name) const;
+        [[nodiscard]] bool IsAppenderExist(const String& name) const;
 
-		bool InsertLogger(const Logger& logger);
-		bool RemoveLogger(LogFilter logFilter);
-		bool InsertAppender(const String& name, const Appender& appender);
-		bool InsertConsoleAppender(const Appender& appender);
-		bool RemoveAppender(const String& name);
-		void Clear() noexcept;
+        [[nodiscard]] bool InsertLogger(const Logger& logger);
+        [[nodiscard]] bool RemoveLogger(LogFilter logFilter);
+        [[nodiscard]] bool InsertAppender(const String& name, const Appender& appender);
+        [[nodiscard]] bool InsertConsoleAppender(const Appender& appender);
+        [[nodiscard]] bool RemoveAppender(const String& name);
+        void Clear() noexcept;
 
-		void Write(const LogMessage& message);
-		void Write(const String& name, const LogMessage& message);
-		void WriteToConsole(const LogMessage& message);
+        void Write(const LogMessage& message);
+        void Write(const String& name, const LogMessage& message);
+        void WriteToConsole(const LogMessage& message);
 
-		void ReloadAppenderFile();
+        void ReloadAppenderFile();
 
-		static const String GetConsoleAppenderName();
-		static const String GetDefaultAppenderName();
+        [[nodiscard]] static const String GetConsoleAppenderName();
+        [[nodiscard]] static const String GetDefaultAppenderName();
 
-	private:
-		IMPL_TYPE_DECLARE(AppenderManager);
-	};
+    private:
+        IMPL_TYPE_DECLARE(AppenderManager);
+    };
 }
 
-#endif // CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_H
+#endif  // CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_H

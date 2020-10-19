@@ -4,6 +4,9 @@
 http://gameprogrammingpatterns.com/ 、http://journal.stuffwithstuff.com/ 、
 https://www.ptpress.com.cn/shopping/buy?bookId=bbf95882-dea0-43ad-b798-efd6546f9748
 
+参考网站：
+责任链模式：https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern （已失效）
+
 ★★★
 作者：Robert Nystrom
 
@@ -11,6 +14,7 @@ https://www.ptpress.com.cn/shopping/buy?bookId=bbf95882-dea0-43ad-b798-efd6546f9
 1.	游戏编程模式基础知识。
 
 代码
+1.	command.h（第2章 命令模式）
 
 要点
 1.	一味追求可扩展性让无数开发者在一个“引擎”上花费数年却没有搞清楚引擎空间是用来做什么的。（1.2 有什么代价）
@@ -36,3 +40,8 @@ https://www.ptpress.com.cn/shopping/buy?bookId=bbf95882-dea0-43ad-b798-efd6546f9
 	4.	如果你将要删除代码，那么不要浪费时间将它整理得很整洁。
 第2篇 再探设计模式
 	第2章 命令模式
+		★	将一个请求封装成一个对象，从而允许你使用不同的请求、队列或日志将客户端参数化，同时支持请求操作的撤销与恢复。
+		★	命令就是一个对象化的方法调用。
+		★	将某种概念转化为一块数据、一个对象，或者你可以认为是传入函数的变量等。
+		★	命令就是面向对象化的回调。
+	第3章 享元模式

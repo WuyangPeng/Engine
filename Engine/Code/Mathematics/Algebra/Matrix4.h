@@ -104,7 +104,7 @@ namespace Mathematics
         void MakeOrthoNormalMatrix44(const Vector3D& xDirection, const Vector3D& yDirection, const Vector3D& zDirection);
 
         [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
-        void Set(const ArrayType& coordinate) noexcept;
+        void Set(const ArrayType& coordinate)  ;
 
         // Ãÿ ‚æÿ’Û°£
         static const Matrix4 sm_Zero;

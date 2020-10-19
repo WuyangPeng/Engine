@@ -1,197 +1,51 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/20 15:02)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/16 11:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "MinHeapRecordIndex.h"
-#include "System/Helper/UnicodeUsing.h"
-#include "System/MemoryTools/MemoryHelper.h"
-#include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+#include "Detail/MinHeapRecordIndexImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include <vector>
-#include <cstring>
-#include <utility>
+using std::make_shared;
 
-using std::swap;
-using std::move;
-using std::vector;
+DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, MinHeapRecordIndex)
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26487)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26446)
-
-CoreTools::MinHeapRecordIndex
-	::MinHeapRecordIndex(int maxElements)
-	:m_MaxElements{ maxElements }, m_RecordIndexs{ NEW1<int>(m_MaxElements) }
+CoreTools::MinHeapRecordIndex::MinHeapRecordIndex(int maxElements)
+    : m_Impl{ make_shared<ImplType>(maxElements) }
 {
-	for (auto index = 0; index < m_MaxElements; ++index)
-	{
-		m_RecordIndexs[index] = index;
-	}
-
-	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::MinHeapRecordIndex
-	::MinHeapRecordIndex(int newMaxElements, const ClassType& oldIndex)
-	:m_MaxElements{ newMaxElements }, m_RecordIndexs{ NEW1<int>(m_MaxElements) }
+CoreTools::MinHeapRecordIndex::MinHeapRecordIndex(int newMaxElements, const MinHeapRecordIndex& oldIndex)
+    : m_Impl{ make_shared<ImplType>(newMaxElements, *oldIndex.m_Impl) }
 {
-	const auto oldMaxElements = oldIndex.GetMaxElements();
-	const auto minElements = m_MaxElements < oldMaxElements ? m_MaxElements : oldMaxElements;
-
-	const auto size = minElements * sizeof(int);
-	System::MemoryCopy(m_RecordIndexs, oldIndex.m_RecordIndexs, boost::numeric_cast<uint32_t>(size));
-
-	for (auto index = oldMaxElements; index < m_MaxElements; ++index)
-	{
-		m_RecordIndexs[index] = index;
-	}
-
-	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::MinHeapRecordIndex
-	::~MinHeapRecordIndex() noexcept
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
-
-	EXCEPTION_TRY
-	{		
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-		DELETE1(m_RecordIndexs);
-#include STSTEM_WARNING_POP
-	}
-	EXCEPTION_ALL_CATCH(CoreTools);
-}
-
-CoreTools::MinHeapRecordIndex
-	::MinHeapRecordIndex(const MinHeapRecordIndex& rhs)
-	:m_MaxElements{ rhs.m_MaxElements }, m_RecordIndexs{ NEW1<int>(m_MaxElements) }
-{
-	const auto size = m_MaxElements * sizeof(int);
-	System::MemoryCopy(m_RecordIndexs, rhs.m_RecordIndexs, boost::numeric_cast<uint32_t>(size));
-
-	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
-}
-
-CoreTools::MinHeapRecordIndex& CoreTools::MinHeapRecordIndex
-	::operator=(const MinHeapRecordIndex& rhs)
-{
-	CORE_TOOLS_CLASS_IS_VALID_8;
-
-	ClassType temp{ rhs };
-	Swap(temp);
-
-	return *this;
-} 
-
-void CoreTools::MinHeapRecordIndex
-	::Swap(ClassType& rhs) noexcept
-{
-	swap(m_RecordIndexs, rhs.m_RecordIndexs);
-	swap(m_MaxElements, rhs.m_MaxElements);
-}
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, MinHeapRecordIndex)
 
 #ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::MinHeapRecordIndex
-	::IsValid() const noexcept
+void CoreTools::MinHeapRecordIndex::PrintIndexInLog() const noexcept
 {
-	if (0 < m_MaxElements && m_RecordIndexs != nullptr && IndexIsValid())
-	{
-		return true;
-	}
-	else
-	{
-		PrintIndexInLog();
-
-		return false;
-	}
+    m_Impl->PrintIndexInLog();
 }
+#endif  // OPEN_CLASS_INVARIANT
 
-bool CoreTools::MinHeapRecordIndex
-	::IndexIsValid() const noexcept
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, MinHeapRecordIndex, GetMaxElements, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, MinHeapRecordIndex, GetHeapIndex, int, int)
+IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, MinHeapRecordIndex, GrowBy, int, void) 
+
+void CoreTools::MinHeapRecordIndex::ChangeIndex(int lhsIndex, int rhsIndex)
 {
-	try
-	{
-		vector<int> indexVector(m_MaxElements, -1);
+    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-		for (int i = 0; i < m_MaxElements; ++i)
-		{
-			const int index = m_RecordIndexs[i];
-
-			if (index < 0 || m_MaxElements <= index || indexVector[index] != -1)
-				return false;
-
-			indexVector[index] = i;
-		}
-
-		return true;
-	}
-	catch (...)
-	{
-		return false;
-	}
+    m_Impl->ChangeIndex(lhsIndex, rhsIndex);
 }
-
-void CoreTools::MinHeapRecordIndex
-	::PrintIndexInLog() const noexcept
-{
-	LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-		<< SYSTEM_TEXT("索引信息\n");
-
-	for (int index = 0; index < m_MaxElements; ++index)
-	{
-		LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-			<< index
-			<< SYSTEM_TEXT(": realIndex = ")
-			<< m_RecordIndexs[index]
-			<< LogAppenderIOManageSign::Newline;
-	}
-}
-#endif // OPEN_CLASS_INVARIANT
-
-int CoreTools::MinHeapRecordIndex
-	::GetMaxElements() const noexcept
-{
-	CORE_TOOLS_CLASS_IS_VALID_CONST_8;
-
-	return m_MaxElements;
-}
-
-int CoreTools::MinHeapRecordIndex
-	::GetHeapIndex(int uniqueIndex) const
-{
-	CORE_TOOLS_CLASS_IS_VALID_CONST_8;
-	CORE_TOOLS_ASSERTION_0(0 <= uniqueIndex && uniqueIndex < m_MaxElements, "无效索引！\n");
-
-	return m_RecordIndexs[uniqueIndex];
-}
-
-void CoreTools::MinHeapRecordIndex
-	::ChangeIndex(int lhsIndex, int rhsIndex) noexcept
-{
-	CORE_TOOLS_CLASS_IS_VALID_8;
-
-	EXCEPTION_TRY
-	{
-		CORE_TOOLS_ASSERTION_0(0 <= lhsIndex && rhsIndex < m_MaxElements, "无效索引！\n");
-		CORE_TOOLS_ASSERTION_0(0 <= lhsIndex && rhsIndex < m_MaxElements, "无效索引！\n");
-	}
-	EXCEPTION_ALL_CATCH(CoreTools)
-
-	swap(m_RecordIndexs[lhsIndex], m_RecordIndexs[rhsIndex]);
-}
-#include STSTEM_WARNING_POP

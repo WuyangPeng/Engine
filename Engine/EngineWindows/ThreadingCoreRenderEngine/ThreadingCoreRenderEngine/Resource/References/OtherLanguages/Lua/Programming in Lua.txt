@@ -1,0 +1,9 @@
+Lua程序设计（Programming in Lua）
+（第4版）
+ 
+☆
+作者：Roberto lerusalimschy
+
+知识点 
+1.	Lua 基础知识。
+

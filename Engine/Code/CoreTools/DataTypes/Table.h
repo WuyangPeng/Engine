@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/20 15:57)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/16 14:04)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TABLE_H
 #define CORE_TOOLS_DATA_TYPE_TABLE_H
@@ -15,17 +18,15 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "DataTypesFwd.h"
+#include "System/Helper/PragmaWarning/Operators.h"
 #include "CoreTools/TemplateTools/ParamType.h"
 
-#include "System/Helper/PragmaWarning/Operators.h"
 #include <array>
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
+
 namespace CoreTools
 {
     template <int Rows, int Columns, typename Type>
-    class Table : private boost::totally_ordered<Table<Rows, Columns, Type>>
+    class Table final : private boost::totally_ordered<Table<Rows, Columns, Type>>
     {
     public:
         using ClassType = Table<Rows, Columns, Type>;
@@ -33,15 +34,14 @@ namespace CoreTools
         using RowTuple = Tuple<Rows, Type>;
         using ParamType = typename ParamType<Type>::type;
 
+        // 该数组存储为行主序。
+        static constexpr auto sm_EnteriesNumber = Rows * Columns;
+
+        using ArrayType = std::array<Type, sm_EnteriesNumber>;
+        using ArrayTypeConstIter = typename ArrayType::const_iterator;
+
     public:
         Table() noexcept;
-        ~Table();
-
-        Table(const Table& rhs);
-        Table& operator=(const Table& rhs) noexcept;
-
-        Table(Table&& rhs) = default;
-        Table& operator=(Table&& rhs) = default;
 
         Table(ParamType member00, ParamType member01, ParamType member10, ParamType member11) noexcept;
 
@@ -56,24 +56,23 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        const Type* operator[](int row) const noexcept;
-        Type* operator[](int row) noexcept;
-        const Type& operator()(int row, int column) const noexcept;
-        Type& operator()(int row, int column) noexcept;
+        [[nodiscard]] const Type* operator[](int row) const;
+        [[nodiscard]] Type* operator[](int row);
+        [[nodiscard]] const Type& operator()(int row, int column) const;
+        [[nodiscard]] Type& operator()(int row, int column);
+
+        [[nodiscard]] ArrayTypeConstIter begin() const noexcept;
+        [[nodiscard]] ArrayTypeConstIter end() const noexcept;
 
         void SetRow(int row, const ColumnTuple& tuple);
-        ColumnTuple GetRow(int row) const;
+        [[nodiscard]] ColumnTuple GetRow(int row) const;
         void SetColumn(int column, const RowTuple& tuple);
-        RowTuple GetColumn(int column) const;
+        [[nodiscard]] RowTuple GetColumn(int column) const;
+
+        [[nodiscard]] ArrayType GetCoordinate() const noexcept;
 
     private:
-        void Set(const Table& rhs) noexcept;
-
-    private:
-        // 该数组存储为行主序。
-        static constexpr int sm_EnteriesNumber{ Rows * Columns };
-
-        std::array<Type, sm_EnteriesNumber> m_Entry;
+        ArrayType m_Entry;
     };
 
     template <int Rows, int Columns, typename Type>
@@ -82,5 +81,5 @@ namespace CoreTools
     template <int Rows, int Columns, typename Type>
     bool operator<(const Table<Rows, Columns, Type>& lhs, const Table<Rows, Columns, Type>& rhs);
 }
-#include STSTEM_WARNING_POP
+
 #endif  // CORE_TOOLS_DATA_TYPE_TABLE_H

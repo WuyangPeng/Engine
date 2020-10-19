@@ -1,30 +1,28 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/20 11:00)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/15 18:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "Appender.h"
 #include "AppenderManager.h"
 #include "Logger.h"
-#include "Appender.h"
 #include "Detail/AppenderManagerImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::make_shared;
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-CoreTools::AppenderManager
-	::AppenderManager()
-	:m_Impl{ make_shared<AppenderManagerImpl>() }
+CoreTools::AppenderManager::AppenderManager([[maybe_unused]] DisableNotThrow disableNotThrow)
+    : m_Impl{ make_shared<AppenderManagerImpl>() }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, AppenderManager)
 
@@ -38,33 +36,26 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, AppenderManager, Cle
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, AppenderManager, ReloadAppenderFile, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, IsAppenderExist, String, bool)
 
-bool CoreTools::AppenderManager
-	::InsertAppender(const String& name, const Appender& appender)
+bool CoreTools::AppenderManager::InsertAppender(const String& name, const Appender& appender)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->InsertAppender(name, appender);
+    return m_Impl->InsertAppender(name, appender);
 }
 
-void CoreTools::AppenderManager
-	::Write(const String& name, const LogMessage& message)
+void CoreTools::AppenderManager::Write(const String& name, const LogMessage& message)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Write(name, message);
+    return m_Impl->Write(name, message);
 }
 
-const System::String CoreTools::AppenderManager
-	::GetConsoleAppenderName()
+const System::String CoreTools::AppenderManager::GetConsoleAppenderName()
 {
-	return ImplType::GetConsoleAppenderName();
+    return ImplType::GetConsoleAppenderName();
 }
 
-const System::String CoreTools::AppenderManager
-	::GetDefaultAppenderName()
+const System::String CoreTools::AppenderManager ::GetDefaultAppenderName()
 {
-	return ImplType::GetDefaultAppenderName();
+    return ImplType::GetDefaultAppenderName();
 }
-
-
-

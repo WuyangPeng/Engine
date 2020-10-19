@@ -220,7 +220,7 @@ namespace Mathematics
         // ExtractEulerResultType::Sum：xAngle + zAngle = c
         // ExtractEulerResultType::Difference：xAngle - zAngle = c
         // 对一些角度c。
-        const Euler ExtractEulerZYX() const noexcept;
+        const Euler ExtractEulerZYX() const  ;
 
         // 返回值顺序为x0Angle、yAngle、x1Angle
         // 且在指定的范围内：
@@ -289,7 +289,7 @@ namespace Mathematics
         void Slerp(Real t, const Matrix3& firstRot, const Matrix3& secondRot);
 
         [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
-        void Set(const ArrayType& coordinate) noexcept;
+        void Set(const ArrayType& coordinate)  ;
 
         // 特殊矩阵。
         static const Matrix3 sm_Zero;

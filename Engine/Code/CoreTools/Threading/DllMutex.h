@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 18:03)
+//	引擎版本：0.5.1.2 (2020/10/15 11:52)
 
 #ifndef CORE_TOOLS_THREADING_DLL_MUTEX_H
 #define CORE_TOOLS_THREADING_DLL_MUTEX_H
@@ -30,9 +30,9 @@ namespace CoreTools
         explicit DllMutex(MutexCreate mutexCreate = MutexCreate::UseCriticalSection);
         virtual ~DllMutex() noexcept = default;
         DllMutex(const DllMutex&) = delete;
-        DllMutex& operator=(const DllMutex&) = delete;
-        DllMutex(DllMutex&&) noexcept = delete;
-        DllMutex& operator=(DllMutex&&) noexcept = delete;
+        virtual DllMutex& operator=(const DllMutex&) = delete;
+        DllMutex(DllMutex&& rhs) noexcept;
+        virtual DllMutex& operator=(DllMutex&& rhs) noexcept;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

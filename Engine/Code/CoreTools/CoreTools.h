@@ -18,14 +18,11 @@
 #include "Console/Console.h"
 #include "Exception/Exception.h"
 #include "FileManager/FileManager.h"
+#include "TextParsing/TextParsing.h"
 #include "Threading/Threading.h"
 
-#include "TextParsing/TextParsing.h"
-
-#include "LogManager/LogManager.h"
-
 #include "DataTypes/DataTypes.h"
-
+#include "LogManager/LogManager.h"
 #include "MemoryTools/MemoryTools.h"
 
 #include "ObjectSystems/ObjectSystems.h"

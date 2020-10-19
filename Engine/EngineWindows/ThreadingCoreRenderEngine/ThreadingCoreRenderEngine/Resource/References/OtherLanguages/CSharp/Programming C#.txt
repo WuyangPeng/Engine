@@ -1,0 +1,11 @@
+Programming C#  
+
+官方网站： 
+http://www.LibertyAssociates.com （已失效）
+
+○
+作者：Jesse Liberty
+
+知识点 
+1.	C# 基础知识。 
+

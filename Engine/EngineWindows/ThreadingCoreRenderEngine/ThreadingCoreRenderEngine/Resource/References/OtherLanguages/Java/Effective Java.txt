@@ -1,0 +1,25 @@
+Effective Java 
+ （第3版）
+
+官方网站：
+http://joshbloch.com/effectivejava、 https://github.com/jbloch/effective-java-3e-source-code。
+
+★★
+作者：Joshua Bloch
+其他书籍：《Java 并发编程实战》、《Java 解惑》。
+
+知识点 
+1.	Java 基础知识。
+
+代码
+
+要点
+
+第1章 引言
+	★	基本的原则：
+		1.	清晰性和简洁性最为重要 ：组件的用户永远也不应该被其行为所迷惑。
+		2.	组件要尽可能小，但又不能太小。
+		3.	代码应该被重用，而不是被拷贝。
+		4.	组件之间的依赖性应该尽可能地降到最小。
+		5.	错误应该尽早被检测出来，最好是在编译时就发现并解决。
+第2章 创建和销毁对象

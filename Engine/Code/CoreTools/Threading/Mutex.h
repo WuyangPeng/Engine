@@ -27,8 +27,8 @@ namespace CoreTools
         ~Mutex() noexcept;
         Mutex(const Mutex&) = delete;
         Mutex& operator=(const Mutex&) = delete;
-        Mutex(Mutex&&) noexcept = delete;
-        Mutex& operator=(Mutex&&) noexcept = delete;
+        Mutex(Mutex&& rhs) noexcept;
+        Mutex& operator=(Mutex&& rhs) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

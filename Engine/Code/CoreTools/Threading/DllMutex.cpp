@@ -25,6 +25,21 @@ CoreTools::DllMutex::DllMutex(MutexCreate mutexCreate)
 }
 #include STSTEM_WARNING_POP
 
+CoreTools::DllMutex::DllMutex(DllMutex&& rhs) noexcept
+    : m_Impl{ std::move(rhs.m_Impl) }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::DllMutex& CoreTools::DllMutex::operator=(DllMutex&& rhs) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    m_Impl = std::move(rhs.m_Impl);
+
+    return *this;
+}
+
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, DllMutex)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, DllMutex, Initialize, void)

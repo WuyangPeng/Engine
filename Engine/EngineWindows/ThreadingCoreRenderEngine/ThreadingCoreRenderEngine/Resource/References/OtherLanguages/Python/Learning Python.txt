@@ -1,0 +1,11 @@
+Python 学习手册 （Learning Python）
+ 
+官方网站： 
+http://www.oreilly.com/catalog/9780596158064、 http://www.rmi.net/~lutz
+
+☆
+作者：Mark Lutz
+
+知识点 
+1.	Python 基础知识。
+

@@ -621,7 +621,7 @@ typename const Mathematics::Quaternion<Real>::Vector3D Mathematics::Quaternion<R
     // 需要比矩阵较少的空间和更多的时间来计算旋转后的向量。
     // 典型的空间——时间权衡……
 
-    auto matrix = ToRotationMatrix();
+    const auto matrix = ToRotationMatrix();
 
     return matrix * vector;
 }

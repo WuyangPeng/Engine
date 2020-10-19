@@ -26,8 +26,10 @@ const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::sm_Zero{ MatrixInit
 template <typename Real>
 const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::sm_Identity{ MatrixInitType::Identity };
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 template <typename Real>
-Mathematics::Matrix2<Real>::Matrix2(MatrixInitType flag) noexcept
+Mathematics::Matrix2<Real>::Matrix2(MatrixInitType flag)  
     : m_Entry{}
 {
     if (flag == MatrixInitType::Identity)
@@ -37,7 +39,7 @@ Mathematics::Matrix2<Real>::Matrix2(MatrixInitType flag) noexcept
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 template <typename Real>
 Mathematics::Matrix2<Real>::Matrix2(Real member00, Real member01, Real member10, Real member11)
     : m_Entry{ member00, member01, member10, member11 }
@@ -160,7 +162,7 @@ void Mathematics::Matrix2<Real>::MakeZero()
 }
 
 template <typename Real>
-void Mathematics::Matrix2<Real>::MakeIdentity() noexcept
+void Mathematics::Matrix2<Real>::MakeIdentity()  
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -475,11 +477,11 @@ typename const Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics
 template <typename T>
 const typename Mathematics::Matrix2<T>::ArrayType Mathematics::Matrix2<T>::GetCoordinate() const noexcept
 {
-    return ArrayType{ m_Entry(0, 0), m_Entry(0, 1), m_Entry(1, 0), m_Entry(1, 1) };
+    return m_Entry.GetCoordinate();
 }
 
 template <typename T>
-void Mathematics::Matrix2<T>::Set(const ArrayType& coordinate) noexcept
+void Mathematics::Matrix2<T>::Set(const ArrayType& coordinate)  
 {
     for (int i = 0; i < sm_MatrixSize; ++i)
     {

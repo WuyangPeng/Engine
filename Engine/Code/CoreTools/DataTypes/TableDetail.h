@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/20 16:14)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/16 14:07)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TABLE_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_TABLE_DETAIL_H
@@ -13,12 +16,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26492)
-#include SYSTEM_WARNING_DISABLE(26456)
 template <int Rows, int Columns, typename Type>
 CoreTools::Table<Rows, Columns, Type>::Table() noexcept
     : m_Entry{}
@@ -62,36 +59,6 @@ CoreTools::Table<Rows, Columns, Type>::Table(ParamType member00, ParamType membe
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <int Rows, int Columns, typename Type>
-CoreTools::Table<Rows, Columns, Type>::~Table()
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-template <int Rows, int Columns, typename Type>
-CoreTools::Table<Rows, Columns, Type>::Table(const Table& rhs)
-    : m_Entry{ rhs.m_Entry }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-template <int Rows, int Columns, typename Type>
-CoreTools::Table<Rows, Columns, Type>& CoreTools::Table<Rows, Columns, Type>::operator=(const Table& rhs) noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    Set(rhs);
-
-    return *this;
-}
-
-// private
-template <int Rows, int Columns, typename Type>
-void CoreTools::Table<Rows, Columns, Type>::Set(const Table& rhs) noexcept
-{
-    m_Entry = rhs.m_Entry;
-}
-
 #ifdef OPEN_CLASS_INVARIANT
 template <int Rows, int Columns, typename Type>
 bool CoreTools::Table<Rows, Columns, Type>::IsValid() const noexcept
@@ -101,63 +68,42 @@ bool CoreTools::Table<Rows, Columns, Type>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int Rows, int Columns, typename Type>
-const Type* CoreTools::Table<Rows, Columns, Type>::operator[](int row) const noexcept
+const Type* CoreTools::Table<Rows, Columns, Type>::operator[](int row) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    EXCEPTION_TRY
-    {
-        CORE_TOOLS_ASSERTION_0(0 <= Columns * row && Columns * row < sm_EnteriesNumber, "索引无效！");
-    }
-    EXCEPTION_ALL_CATCH(CoreTools)
-
     const auto index = Columns * row;
 
-    return &m_Entry[index];
+    return &m_Entry.at(index);
 }
 
 template <int Rows, int Columns, typename Type>
-Type* CoreTools::Table<Rows, Columns, Type>::operator[](int row) noexcept
+Type* CoreTools::Table<Rows, Columns, Type>::operator[](int row)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    EXCEPTION_TRY
-    {
-        CORE_TOOLS_ASSERTION_0(0 <= Columns * row && Columns * row < sm_EnteriesNumber, "索引无效！");
-    }
-    EXCEPTION_ALL_CATCH(CoreTools)
 
     return OPERATOR_SQUARE_BRACKETS_TO_POINTER(Type, row);
 }
 
 template <int Rows, int Columns, typename Type>
-const Type& CoreTools::Table<Rows, Columns, Type>::operator()(int row, int column) const noexcept
+const Type& CoreTools::Table<Rows, Columns, Type>::operator()(int row, int column) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    EXCEPTION_TRY
-    {
-        CORE_TOOLS_ASSERTION_0(0 <= column + Columns * row && column + Columns * row < sm_EnteriesNumber, "索引无效！");
-    }
-    EXCEPTION_ALL_CATCH(CoreTools)
-
     const auto index = column + Columns * row;
 
-    return m_Entry[index];
+    return m_Entry.at(index);
 }
 
 template <int Rows, int Columns, typename Type>
-Type& CoreTools::Table<Rows, Columns, Type>::operator()(int row, int column) noexcept
+Type& CoreTools::Table<Rows, Columns, Type>::operator()(int row, int column)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    EXCEPTION_TRY
-    {
-        CORE_TOOLS_ASSERTION_0(0 <= column + Columns * row && column + Columns * row < sm_EnteriesNumber, "索引无效！");
-    }
-    EXCEPTION_ALL_CATCH(CoreTools)
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
     return const_cast<Type&>(static_cast<const ClassType&>(*this)(row, column));
+#include STSTEM_WARNING_POP
 }
 
 template <int Rows, int Columns, typename Type>
@@ -165,9 +111,12 @@ void CoreTools::Table<Rows, Columns, Type>::SetRow(int row, const ColumnTuple& t
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    for (auto column = 0, index = Columns * row; column < Columns; ++column, ++index)
+    auto index = Columns * row;
+    for (auto column = 0; column < Columns; ++column)
     {
         m_Entry[index] = tuple[column];
+
+        ++index;
     }
 }
 
@@ -176,11 +125,14 @@ typename CoreTools::Table<Rows, Columns, Type>::ColumnTuple CoreTools::Table<Row
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    Tuple<Columns, Type> result{};
+    ColumnTuple result{};
 
-    for (auto column = 0, index = Columns * row; column < Columns; ++column, ++index)
+    auto index = Columns * row;
+    for (auto column = 0; column < Columns; ++column)
     {
         result[column] = m_Entry[index];
+
+        ++index;
     }
 
     return result;
@@ -191,9 +143,12 @@ void CoreTools::Table<Rows, Columns, Type>::SetColumn(int column, const RowTuple
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    for (auto row = 0, index = column; row < Rows; ++row, index += Columns)
+    auto index = column;
+    for (auto row = 0; row < Rows; ++row)
     {
         m_Entry[index] = tuple[row];
+
+        index += Columns;
     }
 }
 
@@ -202,48 +157,54 @@ typename CoreTools::Table<Rows, Columns, Type>::RowTuple CoreTools::Table<Rows, 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    Tuple<Rows, Type> result{};
+    RowTuple result{};
 
-    for (auto row = 0, index = column; row < Rows; ++row, index += Columns)
+    auto index = column;
+    for (auto row = 0; row < Rows; ++row)
     {
         result[row] = m_Entry[index];
+
+        index += Columns;
     }
+
     return result;
+}
+
+template <int Rows, int Columns, typename Type>
+typename CoreTools::Table<Rows, Columns, Type>::ArrayTypeConstIter CoreTools::Table<Rows, Columns, Type>::begin() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return m_Entry.begin();
+}
+
+template <int Rows, int Columns, typename Type>
+typename CoreTools::Table<Rows, Columns, Type>::ArrayTypeConstIter CoreTools::Table<Rows, Columns, Type>::end() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return m_Entry.end();
+}
+
+template <int Rows, int Columns, typename Type>
+typename CoreTools::Table<Rows, Columns, Type>::ArrayType CoreTools::Table<Rows, Columns, Type>::GetCoordinate() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return m_Entry;
 }
 
 // 非成员函数
 template <int Rows, int Columns, typename Type>
-bool CoreTools ::operator==(const Table<Rows, Columns, Type>& lhs, const Table<Rows, Columns, Type>& rhs)
+bool CoreTools::operator==(const Table<Rows, Columns, Type>& lhs, const Table<Rows, Columns, Type>& rhs)
 {
-    for (auto column = 0; column < Columns; ++column)
-    {
-        for (auto row = 0; row < Rows; ++row)
-        {
-            if (lhs(row, column) != rhs(row, column))
-            {
-                return false;
-            }
-        }
-    }
-
-    return true;
+    return std::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
 template <int Rows, int Columns, typename Type>
-bool CoreTools ::operator<(const Table<Rows, Columns, Type>& lhs, const Table<Rows, Columns, Type>& rhs)
+bool CoreTools::operator<(const Table<Rows, Columns, Type>& lhs, const Table<Rows, Columns, Type>& rhs)
 {
-    for (auto column = 0; column < Columns; ++column)
-    {
-        for (auto row = 0; row < Rows; ++row)
-        {
-            if (lhs(row, column) < rhs(row, column))
-                return true;
-            else if (rhs(row, column) < lhs(row, column))
-                return false;
-        }
-    }
-
-    return false;
+    return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
-#include STSTEM_WARNING_POP
+
 #endif  // CORE_TOOLS_DATA_TYPE_TABLE_DETAIL_H

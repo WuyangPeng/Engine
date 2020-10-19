@@ -25,6 +25,21 @@ CoreTools::Mutex::Mutex(MutexCreate mutexCreate)
 }
 #include STSTEM_WARNING_POP
 
+CoreTools::Mutex::Mutex(Mutex&& rhs) noexcept
+    : ParentType{ std::move(rhs) }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::Mutex& CoreTools::Mutex::operator=(Mutex&& rhs) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    ParentType::operator=(std::move(rhs));
+
+    return *this;
+}
+
 CoreTools::Mutex::~Mutex() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

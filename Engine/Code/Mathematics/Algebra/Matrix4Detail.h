@@ -813,14 +813,11 @@ void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3D& xDirect
 template <typename T>
 const typename Mathematics::Matrix4<T>::ArrayType Mathematics::Matrix4<T>::GetCoordinate() const noexcept
 {
-    return ArrayType{ m_Entry(0, 0), m_Entry(0, 1), m_Entry(0, 2), m_Entry(0, 3),
-                      m_Entry(1, 0), m_Entry(1, 1), m_Entry(1, 2), m_Entry(1, 3),
-                      m_Entry(2, 0), m_Entry(2, 1), m_Entry(2, 2), m_Entry(2, 3),
-                      m_Entry(3, 0), m_Entry(3, 1), m_Entry(3, 2), m_Entry(3, 3) };
+    return m_Entry.GetCoordinate();
 }
 
 template <typename T>
-void Mathematics::Matrix4<T>::Set(const ArrayType& coordinate) noexcept
+void Mathematics::Matrix4<T>::Set(const ArrayType& coordinate)  
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)

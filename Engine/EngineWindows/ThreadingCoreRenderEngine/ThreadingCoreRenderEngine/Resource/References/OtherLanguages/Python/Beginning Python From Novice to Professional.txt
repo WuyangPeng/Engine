@@ -1,0 +1,12 @@
+Python 基础教程 （Beginning Python From Novice to Professional）
+（第2版） 
+
+官方网站：
+http://www.apress.com
+
+☆
+作者：Magnus Lie Hetland
+
+知识点 
+1.	Python 基础知识。
+

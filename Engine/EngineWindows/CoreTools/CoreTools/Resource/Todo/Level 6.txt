@@ -2,3 +2,8 @@ TODO Level 6
  
 0.0.5.1
 
+1.  （MemoryTools）重构类Memory的实现。
+2.  （MemoryTools）内存库使用地址做键值，可能会导致错误。
+3.  （MemoryTools）修改MD5类，使其更加安全。 
+4.  （MemoryTools）修改内存池相关类，使用智能指针代替裸指针。
+5.  （MemoryTools）使用atomic增加引用计数，而不是锁。

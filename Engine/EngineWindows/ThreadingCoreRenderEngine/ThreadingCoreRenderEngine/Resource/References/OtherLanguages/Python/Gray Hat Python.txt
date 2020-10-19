@@ -1,0 +1,11 @@
+Python 灰帽子（Gray Hat Python） 
+
+官方网站： 
+http://www.nostarch.com/ghpython.htm
+
+☆
+作者：Justin Seitz
+
+知识点 
+1.	Python 基础知识。
+

@@ -18,14 +18,11 @@
 #include "Console/ConsoleFwd.h"
 #include "Exception/ExceptionFwd.h"
 #include "FileManager/FileManagerFwd.h"
+#include "TextParsing/TextParsingFwd.h"
 #include "Threading/ThreadingFwd.h"
 
-#include "TextParsing/TextParsingFwd.h"
-
-#include "LogManager/LogManagerFwd.h"
-
 #include "DataTypes/DataTypesFwd.h"
-
+#include "LogManager/LogManagerFwd.h"
 #include "MemoryTools/MemoryToolsFwd.h"
 
 #include "ObjectSystems/ObjectSystemsFwd.h"

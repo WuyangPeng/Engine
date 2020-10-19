@@ -175,9 +175,6 @@
     <Filter Include="资源文件\References\OtherLanguages\Lua">
       <UniqueIdentifier>{788a77c0-67bf-4b8c-bbe5-064607d23820}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\References\OtherLanguages\Perl">
-      <UniqueIdentifier>{95652bdc-a11c-41a0-b752-33b7f5ee8827}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\References\Libs">
       <UniqueIdentifier>{9803534a-88d9-48d5-960e-774dc6d35e43}</UniqueIdentifier>
     </Filter>
@@ -1295,6 +1292,117 @@
     </Text>
     <Text Include="Resource\References\SoftwareDesign\Experience\The Pragmatic Programmer.txt">
       <Filter>资源文件\References\SoftwareDesign\Experience</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Java\Java.txt">
+      <Filter>资源文件\References\OtherLanguages\Java</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Java\Thinking in Java.txt">
+      <Filter>资源文件\References\OtherLanguages\Java</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Java\Core Java.txt">
+      <Filter>资源文件\References\OtherLanguages\Java</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Java\Effective Java.txt">
+      <Filter>资源文件\References\OtherLanguages\Java</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Java\Java Concurrency in Practice.txt">
+      <Filter>资源文件\References\OtherLanguages\Java</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\CSharp.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\Beginning C# 6 Programming with Visual Studio 2015.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\Pro C# 2010 and the .NET 4 Platform.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\Professional C# 6 and .NET Core 1.0.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\Effective C#.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\Microsoft Visual C# 2010 Step by Step.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\Essential C# 5.0.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\C# in Depth.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\Programming C#.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\Illstrated C# 2012.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\CSharp\CLR via C#.txt">
+      <Filter>资源文件\References\OtherLanguages\CSharp</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Python.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Core Python Applications Programming.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Expert Python Programming.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Programming Collective Intelligence.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Gray Hat Python.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Python Cookbook.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Python in a Nutsbell.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Programming in Python 3.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Python Essential Reference.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Learning Python.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Python\Beginning Python From Novice to Professional.txt">
+      <Filter>资源文件\References\OtherLanguages\Python</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\RegularExpression\RegularExpression.txt">
+      <Filter>资源文件\References\OtherLanguages\RegularExpression</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\RegularExpression\Beginning Regular Expressions.txt">
+      <Filter>资源文件\References\OtherLanguages\RegularExpression</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\RegularExpression\Sams Teach Yourself Regular Expressions in 10 Minutes.txt">
+      <Filter>资源文件\References\OtherLanguages\RegularExpression</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\RegularExpression\Mastering Regular Expressions.txt">
+      <Filter>资源文件\References\OtherLanguages\RegularExpression</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\RegularExpression\Regular Expressions Cookbook.txt">
+      <Filter>资源文件\References\OtherLanguages\RegularExpression</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Redis\Redis.txt">
+      <Filter>资源文件\References\OtherLanguages\Redis</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Redis\Redis In Action.txt">
+      <Filter>资源文件\References\OtherLanguages\Redis</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Lua\Lua.txt">
+      <Filter>资源文件\References\OtherLanguages\Lua</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Lua\Programming in Lua.txt">
+      <Filter>资源文件\References\OtherLanguages\Lua</Filter>
+    </Text>
+    <Text Include="Resource\References\OtherLanguages\Java\Java Puzzlers.txt">
+      <Filter>资源文件\References\OtherLanguages\Java</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

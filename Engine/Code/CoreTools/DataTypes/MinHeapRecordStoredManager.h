@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/20 15:56)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/19 9:57)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_MANAGER_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_MANAGER_H
 
+#include "MinHeapRecord.h"
 #include "MinHeapRecordIndex.h"
 #include "MinHeapRecordStored.h"
 
@@ -27,20 +31,15 @@ namespace CoreTools
 
     public:
         explicit MinHeapRecordStoredManager(int maxElements, Scalar initialValue);
-        MinHeapRecordStoredManager(int newMaxElements, const ClassType& oldRecordStoredManage);
-        ~MinHeapRecordStoredManager();
-        MinHeapRecordStoredManager(const MinHeapRecordStoredManager&) = default;
-        MinHeapRecordStoredManager& operator=(const MinHeapRecordStoredManager&) = default;
-        MinHeapRecordStoredManager(MinHeapRecordStoredManager&&) = default;
-        MinHeapRecordStoredManager& operator=(MinHeapRecordStoredManager&&) = default;
+        MinHeapRecordStoredManager(int newMaxElements, const MinHeapRecordStoredManager& oldRecordStoredManage);
 
 #ifdef OPEN_CLASS_INVARIANT
         CLASS_INVARIANT_DECLARE;
-        bool IndexIsValid() const noexcept;
+        bool IndexIsValid() const;
         void PrintIndexInLog() const noexcept;
 #endif  // OPEN_CLASS_INVARIANT
 
-        int GetMaxElements() const noexcept;
+        int GetMaxElements() const;
 
         // 使用UniqueIndex进行搜索
         Scalar GetValueByUniqueIndex(int uniqueIndex) const;
@@ -61,9 +60,10 @@ namespace CoreTools
         void SetGeneratorByHeapIndex(int uniqueIndex, Generator generator);
         void ChangeValue(int lhsHeapIndex, int rhsHeapIndex);
 
+        void GrowBy(int newMaxElements);
+
     private:
-        // 这个两级的系统避免了大量的分配和释放的发生，
-        // 如果Records的每个元素都被单独的分配/释放。
+        // 这个两级的系统避免了大量的分配和释放的发生，如果Records的每个元素都被单独的分配/释放。
         RecordStoredType m_RecordStoreds;
         RecordIndexType m_RecordIndexes;
     };

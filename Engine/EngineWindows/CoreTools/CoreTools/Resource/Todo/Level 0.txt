@@ -2,7 +2,8 @@ TODO Level 0
  
 0.0.5.1
 
-1.  ��Helper������Ϸ�ж��಻��ʽ�Ͷ��Եĺ�ĳ�USER_CLASS_IS_VALID��USER_CLASS_IS_VALID��USER_ASSERTION��ء� 
-2.  ��Base��ʹ��UniqueIDManager������ΨһID���滻ԭ�ȵ�ID��
-3.  ��Base�������ھ�̬��Ͷ�̬�����ʱ�������⣬���澲̬������Ϸ��̬����ʱ��Game dll���Ӵ������浥����������exe���á�
-		    ���涯̬������Ϸ��̬����ʱ��Game dll���Ӵ�����Ϸ������������exe���á�
+1.  （Helper）将游戏中对类不变式和断言的宏改成USER_CLASS_IS_VALID、USER_CLASS_IS_VALID和USER_ASSERTION相关。 
+2.  （Base）使用UniqueIDManager来管理唯一ID，替换原先的ID。
+3.  （Base）单例在静态库和动态库混用时产生问题，引擎静态链接游戏动态链接时，Game dll增加创建引擎单例函数，由exe调用。
+		    引擎动态链接游戏静态链接时，Game dll增加创建游戏单例函数，由exe调用。
+4.	（DataTypes）实现一个无锁数据结构。

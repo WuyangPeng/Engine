@@ -1,0 +1,12 @@
+Python Cookbook 
+ 
+
+官方网站： 
+http://aspn.activestate.com/ASPN/Cookbook/Python
+
+☆
+作者：Alex Martelli、Anna Martelli Ravenscroft
+
+知识点 
+1.	Python 基础知识。
+

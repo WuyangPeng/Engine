@@ -1,0 +1,12 @@
+C# 本质论  （Essential C# 5.0）
+ （第4版）
+
+官方网站： 
+http://intellitect.com/essentialcsharp、 http://Informit.com/mswinseries
+
+○
+作者：Mark Michaelis
+
+知识点 
+1.	C# 基础知识。 
+

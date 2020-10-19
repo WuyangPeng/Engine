@@ -1,213 +1,178 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/20 11:01)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/15 18:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "Log.h"
 #include "Appender.h"
+#include "Log.h"
 #include "Detail/LogImpl.h"
-#include "CoreTools/Threading/Mutex.h"
-#include "CoreTools/Threading/ScopedMutex.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Threading/Mutex.h"
+#include "CoreTools/Threading/ScopedMutex.h"
 
-using std::string;
 using std::make_shared;
 using std::make_unique;
+using std::string;
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26487)
 SINGLETON_GET_PTR_DEFINE(CoreTools, Log);
 
-CoreTools::Log::LogUniquePtr CoreTools::Log
-::sm_Log{ };
+CoreTools::Log::LogUniquePtr CoreTools::Log::sm_Log{};
 
-void CoreTools::Log
-::Create()
+void CoreTools::Log::Create()
 {
-	sm_Log = make_unique<CoreTools::Log>(LogCreate::Init);
+    sm_Log = make_unique<CoreTools::Log>(LogCreate::Init);
 }
 
-void CoreTools::Log
-::Destroy() noexcept
+void CoreTools::Log::Destroy() noexcept
 {
-	sm_Log.reset();
+    sm_Log.reset();
 }
 
-CoreTools::Log ::Log([[maybe_unused]] LogCreate logCreate)
-    : m_Impl{ make_shared<ImplType>() }
+CoreTools::Log::Log([[maybe_unused]] LogCreate logCreate)
+    : m_Impl{ make_shared<ImplType>(DisableNotThrow::Disable) }
 {
- 
-
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Log)
 
-void CoreTools::Log
-	::InsertAppender(const String& name, const Appender& appenderPtr)
+void CoreTools::Log::InsertAppender(const String& name, const Appender& appenderPtr)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->InsertAppender(name, appenderPtr);
+    return m_Impl->InsertAppender(name, appenderPtr);
 }
 
-void CoreTools::Log
-	::RemoveAppender(const String& name)
+void CoreTools::Log::RemoveAppender(const String& name)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->RemoveAppender(name);
+    return m_Impl->RemoveAppender(name);
 }
 
-void CoreTools::Log
-	::LoadConfiguration(const string& fileName)
+void CoreTools::Log::LoadConfiguration(const string& fileName)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->LoadConfiguration(fileName);
+    return m_Impl->LoadConfiguration(fileName);
 }
 
-CoreTools::LogAppenderIOManager& CoreTools::Log
-	::OutTrace() noexcept
+CoreTools::LogAppenderIOManager& CoreTools::Log::OutTrace() noexcept
 {
-	try
-	{
-		 
-#include STSTEM_WARNING_PUSH
-		#include SYSTEM_WARNING_DISABLE(26447)
-		SINGLETON_MUTEX_ENTER_MEMBER;
-		#include STSTEM_WARNING_POP
-	}
-	catch (...)
-	{
-		 
-	}	
+    try
+    {
+        SINGLETON_MUTEX_ENTER_MEMBER;
+    }
+    catch (...)
+    {
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutTrace抛出异常"));
+    }
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->OutTrace();
+    return m_Impl->OutTrace();
 }
 
-CoreTools::LogAppenderIOManager& CoreTools::Log
-	::OutDebug() noexcept
+CoreTools::LogAppenderIOManager& CoreTools::Log::OutDebug() noexcept
 {
-	try
-	{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-		SINGLETON_MUTEX_ENTER_MEMBER;
-#include STSTEM_WARNING_POP
-	}
-	catch (...)
-	{
+    try
+    {
+        SINGLETON_MUTEX_ENTER_MEMBER;
+    }
+    catch (...)
+    {
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutDebug抛出异常"));
+    }
 
-	}
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->OutDebug();
+    return m_Impl->OutDebug();
 }
 
-CoreTools::LogAppenderIOManager& CoreTools::Log
-	::OutInfo() noexcept
+CoreTools::LogAppenderIOManager& CoreTools::Log::OutInfo() noexcept
 {
-	try
-	{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-		SINGLETON_MUTEX_ENTER_MEMBER;
-#include STSTEM_WARNING_POP
-	}
-	catch (...)
-	{
+    try
+    {
+        SINGLETON_MUTEX_ENTER_MEMBER;
+    }
+    catch (...)
+    {
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutInfo抛出异常"));
+    }
 
-	}
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->OutInfo();
+    return m_Impl->OutInfo();
 }
 
-CoreTools::LogAppenderIOManager& CoreTools::Log
-	::OutWarn() noexcept
+CoreTools::LogAppenderIOManager& CoreTools::Log::OutWarn() noexcept
 {
-	try
-	{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-		SINGLETON_MUTEX_ENTER_MEMBER;
-#include STSTEM_WARNING_POP
-	}
-	catch (...)
-	{
+    try
+    {
+        SINGLETON_MUTEX_ENTER_MEMBER;
+    }
+    catch (...)
+    {
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutWarn抛出异常"));
+    }
 
-	}
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->OutWarn();
+    return m_Impl->OutWarn();
 }
 
-CoreTools::LogAppenderIOManager& CoreTools::Log
-	::OutError() noexcept
+CoreTools::LogAppenderIOManager& CoreTools::Log::OutError() noexcept
 {
-	try
-	{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-		SINGLETON_MUTEX_ENTER_MEMBER;
-#include STSTEM_WARNING_POP
-	}
-	catch (...)
-	{
+    try
+    {
+        SINGLETON_MUTEX_ENTER_MEMBER;
+    }
+    catch (...)
+    {
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutError抛出异常"));
+    }
 
-	}
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->OutError();
+    return m_Impl->OutError();
 }
 
-CoreTools::LogAppenderIOManager& CoreTools::Log
-	::OutFatal() noexcept
+CoreTools::LogAppenderIOManager& CoreTools::Log::OutFatal() noexcept
 {
-	try
-	{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-		SINGLETON_MUTEX_ENTER_MEMBER;
-#include STSTEM_WARNING_POP
-	}
-	catch (...)
-	{
+    try
+    {
+        SINGLETON_MUTEX_ENTER_MEMBER;
+    }
+    catch (...)
+    {
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutFatal抛出异常"));
+    }
 
-	}
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->OutFatal();
+    return m_Impl->OutFatal();
 }
 
-void CoreTools::Log
-	::ReloadAppenderFile()
+void CoreTools::Log::ReloadAppenderFile()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->ReloadAppenderFile();
+    return m_Impl->ReloadAppenderFile();
 }
-#include STSTEM_WARNING_POP

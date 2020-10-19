@@ -1,0 +1,12 @@
+Python3 程序开发指南  （Programming in Python 3）
+（第2版） 
+
+官方网站： 
+http://www.qtrac.eu/py3book.html （已失效）
+
+☆
+作者：Mark Summerfield
+
+知识点 
+1.	Python 基础知识。
+

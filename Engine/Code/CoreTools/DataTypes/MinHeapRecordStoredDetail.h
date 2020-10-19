@@ -1,178 +1,151 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/20 16:11)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.2 (2020/10/19 10:01)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_DETAIL_H
 
-#include "MinHeapRecordStored.h"
 #include "MinHeapRecordDetail.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
+#include "MinHeapRecordStored.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <gsl/gsl_util>
-
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
 template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::MinHeapRecordStored(int maxElements, Scalar initialValue)
-	:m_MaxElements{ 0 < maxElements ? maxElements : 1 }, m_InitialValue{ initialValue }, m_Records{}
+CoreTools::MinHeapRecordStored<Generator, Scalar>::MinHeapRecordStored(int maxElements, Scalar initialValue)
+    : m_InitialValue{ initialValue }, m_Records{}
 {
-	for (auto i = 0; i < m_MaxElements; ++i)
-	{
-		m_Records.emplace_back(i, m_InitialValue);
-	}
+    for (auto i = 0; i < maxElements; ++i)
+    {
+        m_Records.emplace_back(i, m_InitialValue);
+    }
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_8;
 }
 
 template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::MinHeapRecordStored(int newMaxElements, const ClassType& oldRecordStored)
-	:m_MaxElements{ 0 < newMaxElements ? newMaxElements : 1 }, m_InitialValue{ oldRecordStored.m_InitialValue }, m_Records{}
+CoreTools::MinHeapRecordStored<Generator, Scalar>::MinHeapRecordStored(int newMaxElements, const MinHeapRecordStored& oldRecordStored)
+    : m_InitialValue{ oldRecordStored.m_InitialValue }, m_Records{ oldRecordStored.m_Records }
 {
-	// 复制旧记录信息到新的存储位置。
-	const auto oldMaxElements = oldRecordStored.GetMaxElements();
-	const auto minElements = m_MaxElements < oldMaxElements ? m_MaxElements : oldMaxElements;
+    GrowBy(newMaxElements);
 
-	for (auto i = 0; i < minElements; ++i)
-	{
-		m_Records.push_back(oldRecordStored.m_Records[i]);
-	}
-
-	// 初始化新的存储位置的剩余信息。
-	for (auto i = oldMaxElements; i < m_MaxElements; ++i)
-	{
-		m_Records.emplace_back(i, m_InitialValue);
-	}
-
-	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
-}
-
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::~MinHeapRecordStored()
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_8;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_8;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Generator, typename Scalar>
-bool CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::IsValid() const noexcept
+bool CoreTools::MinHeapRecordStored<Generator, Scalar>::IsValid() const noexcept
 {
-	if (0 < m_MaxElements && gsl::narrow_cast<int>(m_Records.size()) == m_MaxElements && IndexIsValid())
-		return true;
-	else
-		return false;
+    if (!m_Records.empty() && IndexIsValid())
+        return true;
+    else
+        return false;
 }
 
 template <typename Generator, typename Scalar>
-bool CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::IndexIsValid() const noexcept
+bool CoreTools::MinHeapRecordStored<Generator, Scalar>::IndexIsValid() const noexcept
 {
-	try
-	{
-		std::vector<int> indexVector(m_MaxElements, -1);
+    try
+    {
+        std::vector<int> indexVector(m_Records.size(), -1);
 
-		for (auto i = 0; i < m_MaxElements; ++i)
-		{
-			const int index = m_Records[i].GetUniqueIndex();
+        auto index = 0;
+        for (auto value : m_Records)
+        {
+            const int uniqueIndex = value.GetUniqueIndex();
 
-			if (index < 0 || m_MaxElements <= index || indexVector[index] != -1)
-				return false;
+            auto& record = indexVector.at(uniqueIndex);
+            if (record != -1)
+                return false;
 
-			indexVector[index] = i;
-		}
+            record = index;
+            ++index;
+        }
 
-		return true;
-	}
-	catch (...)
-	{
-		return false;
-	}
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
 
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Generator, typename Scalar>
-int CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::GetMaxElements() const noexcept
+int CoreTools::MinHeapRecordStored<Generator, Scalar>::GetMaxElements() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_8;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-	return m_MaxElements;
-}
-
-template <typename Generator, typename Scalar>
-Scalar CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::GetValue(int heapIndex) const
-{
-	CORE_TOOLS_CLASS_IS_VALID_CONST_8;
-	CORE_TOOLS_ASSERTION_0(0 <= heapIndex && heapIndex < m_MaxElements, "无效索引！\n");
-
-	return m_Records[heapIndex].GetValue();
+    return boost::numeric_cast<int>(m_Records.size());
 }
 
 template <typename Generator, typename Scalar>
-Generator CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::GetGenerator(int heapIndex) const
+Scalar CoreTools::MinHeapRecordStored<Generator, Scalar>::GetValue(int heapIndex) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_8;
-	CORE_TOOLS_ASSERTION_0(0 <= heapIndex && heapIndex < m_MaxElements, "无效索引！\n");
+    CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-	return m_Records[heapIndex].GetGenerator();
+    return m_Records.at(heapIndex).GetValue();
 }
 
 template <typename Generator, typename Scalar>
-int CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::GetUniqueIndex(int heapIndex) const
+Generator CoreTools::MinHeapRecordStored<Generator, Scalar>::GetGenerator(int heapIndex) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_8;
-	CORE_TOOLS_ASSERTION_0(0 <= heapIndex && heapIndex < m_MaxElements, "无效索引！\n");
+    CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-	return m_Records[heapIndex].GetUniqueIndex();
+    return m_Records.at(heapIndex).GetGenerator();
 }
 
 template <typename Generator, typename Scalar>
-void CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::SetValue(int heapIndex, Scalar value)
+int CoreTools::MinHeapRecordStored<Generator, Scalar>::GetUniqueIndex(int heapIndex) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_8;
-	CORE_TOOLS_ASSERTION_0(0 <= heapIndex && heapIndex < m_MaxElements, "无效索引！\n");
+    CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-	m_Records[heapIndex].SetValue(value);
+    return m_Records.at(heapIndex).GetUniqueIndex();
 }
 
 template <typename Generator, typename Scalar>
-void CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::SetGenerator(int heapIndex, Generator generator)
+void CoreTools::MinHeapRecordStored<Generator, Scalar>::SetValue(int heapIndex, Scalar value)
 {
-	CORE_TOOLS_CLASS_IS_VALID_8;
-	CORE_TOOLS_ASSERTION_0(0 <= heapIndex && heapIndex < m_MaxElements, "无效索引！\n");
+    CORE_TOOLS_CLASS_IS_VALID_8;
 
-	m_Records[heapIndex].SetGenerator(generator);
+    m_Records.at(heapIndex).SetValue(value);
 }
 
 template <typename Generator, typename Scalar>
-void CoreTools::MinHeapRecordStored<Generator, Scalar>
-	::ChangeValue(int lhsIndex, int rhsIndex) noexcept
+void CoreTools::MinHeapRecordStored<Generator, Scalar>::SetGenerator(int heapIndex, Generator generator)
 {
-	CORE_TOOLS_CLASS_IS_VALID_8;
+    CORE_TOOLS_CLASS_IS_VALID_8;
 
-	EXCEPTION_TRY
-	{
-		CORE_TOOLS_ASSERTION_0(0 <= lhsIndex && lhsIndex < m_MaxElements,"无效索引！\n");
-		CORE_TOOLS_ASSERTION_0(0 <= rhsIndex && rhsIndex < m_MaxElements,"无效索引！\n");
-	}
-	EXCEPTION_ALL_CATCH(CoreTools)
-
-	std::swap(m_Records[lhsIndex], m_Records[rhsIndex]);
+    m_Records.at(heapIndex).SetGenerator(generator);
 }
-#include STSTEM_WARNING_POP
-#endif // CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_DETAIL_H
+
+template <typename Generator, typename Scalar>
+void CoreTools::MinHeapRecordStored<Generator, Scalar>::ChangeValue(int lhsIndex, int rhsIndex)
+{
+    CORE_TOOLS_CLASS_IS_VALID_8;
+
+    std::swap(m_Records.at(lhsIndex), m_Records.at(rhsIndex));
+}
+
+template <typename Generator, typename Scalar>
+void CoreTools::MinHeapRecordStored<Generator, Scalar>::GrowBy(int newMaxElements)
+{
+    CORE_TOOLS_CLASS_IS_VALID_8;
+
+    // 复制旧记录信息到新的存储位置。
+    const auto oldMaxElements = boost::numeric_cast<int>(m_Records.size());
+
+    // 初始化新的存储位置的剩余信息。
+    for (auto i = oldMaxElements; i < newMaxElements; ++i)
+    {
+        m_Records.emplace_back(i, m_InitialValue);
+    }
+}
+
+#endif  // CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_DETAIL_H

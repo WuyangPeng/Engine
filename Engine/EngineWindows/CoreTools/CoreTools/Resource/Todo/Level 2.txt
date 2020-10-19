@@ -2,8 +2,10 @@ TODO Level 2
  
 0.0.5.1
 
-1.  £¨Contract£©Íê³ÉÀà²»±äÊ½·ÇMicrosoft Visual StudioµÄÊµÏÖ¡£ 
-2.  £¨Contract£©Íê³É¶ÏÑÔÀà·ÇMicrosoft Visual StudioµÄÊµÏÖ¡£ 
-3.  £¨CharacterString£©½«ÀàMultiByteConversionWideCharºÍWideCharConversionMultiByteÖÐÊ¹ÓÃµÄ¶ÑÖ¸Õë¸Ä³Évector£¬¼ò»¯´úÂë¡£
-4.  £¨FileManager£©FileManagerÔö¼Óoperator>>ºÍoperator<<½Ó¿Ú¡£
-5.  £¨FileManager£©½«EnvironmentVariable.jsonµÄÂ·¾¶¸Ä³ÉÅäÖÃ¡£
+1.  ï¼ˆContractï¼‰å®Œæˆç±»ä¸å˜å¼éžMicrosoft Visual Studioçš„å®žçŽ°ã€‚ 
+2.  ï¼ˆContractï¼‰å®Œæˆæ–­è¨€ç±»éžMicrosoft Visual Studioçš„å®žçŽ°ã€‚ 
+3.  ï¼ˆCharacterStringï¼‰å°†ç±»MultiByteConversionWideCharå’ŒWideCharConversionMultiByteä¸­ä½¿ç”¨çš„å †æŒ‡é’ˆæ”¹æˆvectorï¼Œç®€åŒ–ä»£ç ã€‚
+4.  ï¼ˆFileManagerï¼‰FileManagerå¢žåŠ operator>>å’Œoperator<<æŽ¥å£ã€‚
+5.  ï¼ˆFileManagerï¼‰å°†EnvironmentVariable.jsonçš„è·¯å¾„æ”¹æˆé…ç½®ã€‚
+6.  ï¼ˆTextParsingï¼‰å®ŒæˆTextParsingæ¨¡å—çš„ç›¸å…³å†…å®¹ï¼šå¢žåŠ ä¸€ä¸ªæ–‡æœ¬è§£æžç±»ï¼Œå¯¹é…ç½®è¿›è¡Œè¯»å–ã€‚ 
+7.  ï¼ˆTextParsingï¼‰å®ŒæˆTextParsingæ¨¡å—çš„ç›¸å…³å†…å®¹ï¼šå¢žåŠ ä¸€ä¸ªäºŒç»´è¡¨è§£æžç±»ï¼Œå¯¹äºŒç»´è¡¨è¿›è¡Œè¯»å–ã€‚ 

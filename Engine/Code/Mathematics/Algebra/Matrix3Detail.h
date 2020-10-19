@@ -930,9 +930,9 @@ void Mathematics::Matrix3<Real>::MakeEulerZYX(Real zAngle, Real yAngle, Real xAn
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Matrix3 zMat{ MatrixRotationAxis::Z, zAngle };
-    Matrix3 yMat{ MatrixRotationAxis::Y, yAngle };
-    Matrix3 xMat{ MatrixRotationAxis::X, xAngle };
+    const Matrix3 zMat{ MatrixRotationAxis::Z, zAngle };
+    const Matrix3 yMat{ MatrixRotationAxis::Y, yAngle };
+    const Matrix3 xMat{ MatrixRotationAxis::X, xAngle };
 
     *this = zMat * (yMat * xMat);
 }
@@ -1258,7 +1258,7 @@ typename const Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::Ext
 }
 
 template <typename Real>
-typename const Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZYX() const noexcept
+typename const Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZYX() const  
 {
     // +-           -+   +-                                      -+
     // | r00 r01 r02 |   |  cy*cz  cz*sx*sy-cx*sz  cx*cz*sy+sx*sz |
@@ -1616,16 +1616,15 @@ void Mathematics::Matrix3<Real>::Slerp(Real t, const Matrix3& firstRot, const Ma
 template <typename T>
 const typename Mathematics::Matrix3<T>::ArrayType Mathematics::Matrix3<T>::GetCoordinate() const noexcept
 {
-    return ArrayType{ m_Entry(0, 0), m_Entry(0, 1), m_Entry(0, 2),
-                      m_Entry(1, 0), m_Entry(1, 1), m_Entry(1, 2),
-                      m_Entry(2, 0), m_Entry(2, 1), m_Entry(2, 2) };
+    return m_Entry.GetCoordinate();
 }
 
 template <typename T>
-void Mathematics::Matrix3<T>::Set(const ArrayType& coordinate) noexcept
+void Mathematics::Matrix3<T>::Set(const ArrayType& coordinate)  
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
     for (int i = 0; i < sm_MatrixSize; ++i)
     {
         m_Entry(i / 3, i % 3) = coordinate[i];

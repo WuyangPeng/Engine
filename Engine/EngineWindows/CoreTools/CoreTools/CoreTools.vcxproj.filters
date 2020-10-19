@@ -415,6 +415,12 @@
     <Filter Include="Contract 源文件">
       <UniqueIdentifier>{dcdb5e83-2e97-4cee-8140-9082ffd2cc93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DataTypes 头文件\Detail">
+      <UniqueIdentifier>{e76ad2b5-48ff-4b01-9acd-cc4c950ed00a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataTypes 源文件\Detail">
+      <UniqueIdentifier>{7543a415-2899-45d4-8f3a-85be236de651}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\ReadMe.txt">
@@ -1241,9 +1247,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\TestingInformationHelper.h">
       <Filter>MainFunctionHelper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferStreamImpl.h">
-      <Filter>MemoryTools 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MD5ContextImpl.h">
       <Filter>MemoryTools 头文件\Detail</Filter>
     </ClInclude>
@@ -1256,20 +1259,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\SmartPointerManagerImpl.h">
       <Filter>MemoryTools 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferPoolImpl.h">
-      <Filter>MemoryTools 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Flags\MD5ContextStatus.h">
       <Filter>MemoryTools 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferPool.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.h">
-      <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\DefaultMemory.h">
       <Filter>MemoryTools 头文件</Filter>
@@ -1293,9 +1284,6 @@
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryToolsFwd.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Pool.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Random.h">
@@ -1326,9 +1314,6 @@
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryDetail.h">
-      <Filter>MemoryTools 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\PoolDetail.h">
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SmartPointer1DArrayDetail.h">
@@ -2261,6 +2246,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManagerInternalFwd.h">
       <Filter>FileManager 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManagerInternalFwd.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Detail\MinHeapRecordIndexImpl.h">
+      <Filter>DataTypes 头文件\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -2680,12 +2671,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\TestingInformationHelper.cpp">
       <Filter>MainFunctionHelper 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferPoolImpl.cpp">
-      <Filter>MemoryTools 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\BufferStreamImpl.cpp">
-      <Filter>MemoryTools 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\MD5ContextImpl.cpp">
       <Filter>MemoryTools 源文件\Detail</Filter>
     </ClCompile>
@@ -2697,15 +2682,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Detail\SmartPointerManagerImpl.cpp">
       <Filter>MemoryTools 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\Buffer.cpp">
-      <Filter>MemoryTools 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\BufferPool.cpp">
-      <Filter>MemoryTools 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\BufferStream.cpp">
-      <Filter>MemoryTools 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\MemoryTools\MD5Context.cpp">
       <Filter>MemoryTools 源文件</Filter>
@@ -3069,6 +3045,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\Base\LoadingLibrary.cpp">
       <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\Detail\MinHeapRecordIndexImpl.cpp">
+      <Filter>DataTypes 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

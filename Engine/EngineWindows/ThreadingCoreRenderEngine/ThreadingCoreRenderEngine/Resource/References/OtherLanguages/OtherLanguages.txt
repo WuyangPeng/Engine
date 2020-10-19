@@ -9,4 +9,3 @@
 7.	RegularExpression（正则表达式）
 8.	Redis
 9.	Lua
-10.	Perl

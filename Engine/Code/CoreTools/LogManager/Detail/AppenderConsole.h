@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/19 18:02)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.1.1 (2020/10/15 9:47)
 
 // 输出位置：控制台类
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_CONSOLE_H
@@ -14,24 +17,24 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE AppenderConsole : public AppenderImpl
-	{
-	public:
-		using ClassType = AppenderConsole;
-		using ParentType = AppenderImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE AppenderConsole final : public AppenderImpl
+    {
+    public:
+        using ClassType = AppenderConsole;
+        using ParentType = AppenderImpl;
 
-	public:
-		explicit AppenderConsole(AppenderPrint appenderFlags, LogLevel logLevel = LogLevel::Disabled);
+    public:
+        explicit AppenderConsole(AppenderPrint appenderFlags, LogLevel logLevel = LogLevel::Disabled);
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		AppenderType GetAppenderType() const noexcept override;
+        [[nodiscard]] AppenderType GetAppenderType() const noexcept final;
 
-		const AppenderImplPtr Clone() const override;
+        [[nodiscard]] const AppenderImplPtr Clone() const final;
 
-	private:
-		void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) override;
-	};
+    private:
+        void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) final;
+    };
 }
 
-#endif // CORE_TOOLS_LOG_MANAGER_APPENDER_CONSOLE_H
+#endif  // CORE_TOOLS_LOG_MANAGER_APPENDER_CONSOLE_H
