@@ -1,6 +1,6 @@
 TODO Level 3
  
-0.0.5.1
+0.5.2.0
 
 1.  （Threading）依照boost库封装std::thread组。
 2.  （Threading）封装System Threading其他线程相关的锁。 

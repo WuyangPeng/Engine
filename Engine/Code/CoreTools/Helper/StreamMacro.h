@@ -97,11 +97,11 @@ public:                                              \
     }                                                                                                                           \
     void namespaceName::className::InitializeFactory()                                                                          \
     {                                                                                                                           \
-        OBJECT_MANAGER_SINGLETON.Insert(sm_Type.GetName(), Factory);                                                            \
+        OBJECT_MANAGER_SINGLETON.Insert(GetCurrentRttiType().GetName(), Factory);                                                      \
     }                                                                                                                           \
     void namespaceName::className::TerminateFactory()                                                                           \
     {                                                                                                                           \
-        OBJECT_MANAGER_SINGLETON.Remove(sm_Type.GetName());                                                                     \
+        OBJECT_MANAGER_SINGLETON.Remove(GetCurrentRttiType().GetName());                                                               \
     }
 
 #define CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(namespaceName, className) \

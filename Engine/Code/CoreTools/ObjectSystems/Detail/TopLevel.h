@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/13 14:03)
+//	引擎版本：0.5.2.0 (2020/10/21 10:24)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_TOP_LEVEL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_TOP_LEVEL_H
@@ -16,13 +16,13 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE TopLevel
+    class CORE_TOOLS_HIDDEN_DECLARE TopLevel final
     {
     public:
         using ClassType = TopLevel;
 
     public:
-        static std::string GetTopLevelDescription();
+        [[nodiscard]] static std::string GetTopLevelDescription();
     };
 }
 

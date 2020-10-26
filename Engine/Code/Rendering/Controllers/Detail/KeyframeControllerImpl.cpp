@@ -204,27 +204,27 @@ void Rendering::KeyframeControllerImpl ::Load(const CoreTools::BufferSourceShare
 	if (0 < m_NumCommonTimes)
 	{
 		m_CommonTimes.resize(m_NumCommonTimes);
-            source->Read(m_NumCommonTimes, &m_CommonTimes[0]);
+        //    source->Read(m_NumCommonTimes, &m_CommonTimes[0]);
 
 		source->Read(m_NumTranslations);
 		m_Translations.resize(m_NumTranslations);
 		if (0 < m_NumTranslations)
 		{
-                    source->ReadAggregate(m_NumTranslations, &m_Translations[0]);
+                    source->ReadAggregateContainer(m_NumTranslations, m_Translations);
 		}
 
 		source->Read(m_NumRotations);
 		m_Rotations.resize(m_NumRotations);
 		if (0 < m_NumRotations)
 		{
-                    source->ReadAggregate(m_NumRotations, &m_Rotations[0]);
+                    source->ReadAggregateContainer(m_NumRotations, m_Rotations);
 		}
 
 		source->Read(m_NumScales);
 		m_Scales.resize(m_NumScales);
 		if (0 < m_NumScales)
 		{
-                    source->Read(m_NumScales, &m_Scales[0]);
+                 //   source->Read(m_NumScales, &m_Scales[0]);
 		}		  
 	}
 	else
@@ -234,8 +234,8 @@ void Rendering::KeyframeControllerImpl ::Load(const CoreTools::BufferSourceShare
 		m_Translations.resize(m_NumTranslations);
 		if (0 < m_NumTranslations)
 		{
-                    source->Read(m_NumTranslations, &m_TranslationTimes[0]);
-                    source->ReadAggregate(m_NumTranslations, &m_Translations[0]);
+                 //   source->Read(m_NumTranslations, &m_TranslationTimes[0]);
+                    source->ReadAggregateContainer(m_NumTranslations, m_Translations);
 		}
 
 		source->Read(m_NumRotations);
@@ -243,8 +243,8 @@ void Rendering::KeyframeControllerImpl ::Load(const CoreTools::BufferSourceShare
 		m_Rotations.resize(m_NumRotations);
 		if (0 < m_NumRotations)
 		{
-                    source->Read(m_NumRotations, &m_RotationTimes[0]);
-                    source->ReadAggregate(m_NumRotations, &m_Rotations[0]);
+                 //   source->Read(m_NumRotations, &m_RotationTimes[0]);
+                    source->ReadAggregateContainer(m_NumRotations, m_Rotations);
 		}
 
 		source->Read(m_NumScales);
@@ -252,8 +252,8 @@ void Rendering::KeyframeControllerImpl ::Load(const CoreTools::BufferSourceShare
 		m_Scales.resize(m_NumScales);
 		if (0 < m_NumScales)
 		{
-                    source->Read(m_NumScales, &m_Scales[0]);
-                    source->Read(m_NumScales, &m_Scales[0]);
+                  //  source->Read(m_NumScales, &m_Scales[0]);
+                  //  source->Read(m_NumScales, &m_Scales[0]);
 		}
  	}
 }

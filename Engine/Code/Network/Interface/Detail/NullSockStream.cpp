@@ -61,7 +61,9 @@ void Network::NullSockStream ::AsyncSend(const EventInterfaceSharedPtr& eventInt
     CoreTools::CallbackParameters callbackParameters{};
     callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Null));
-    eventInterface->EventFunction(callbackParameters);
+   if(! eventInterface->EventFunction(callbackParameters))
+    {
+    }
 }
 
 void Network::NullSockStream ::AsyncReceive([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const MessageBufferSharedPtr& messageBuffer) noexcept

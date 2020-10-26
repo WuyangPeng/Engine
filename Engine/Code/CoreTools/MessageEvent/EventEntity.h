@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 17:02)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 15:21)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_BASE_EVENT_ENTITY_H
 #define CORE_TOOLS_MESSAGE_EVENT_BASE_EVENT_ENTITY_H
@@ -14,23 +17,22 @@
 
 namespace CoreTools
 {
-	template <typename EventType = int>
-	class EventEntity : public BaseEntity
-	{
-	public:
-		using ClassType = EventEntity<EventType>;
-		using ParentType = BaseEntity;
-		using Telegram = Telegram<EventType>;
-		using EntityEventType = EventType;
+    template <typename EventType = int>
+    class EventEntity : public BaseEntity
+    {
+    public:
+        using ClassType = EventEntity<EventType>;
+        using ParentType = BaseEntity;
+        using Telegram = Telegram<EventType>;
+        using EntityEventType = EventType;
 
-	public:
-		EventEntity();
-		virtual ~EventEntity();
+    public:
+        EventEntity();
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		virtual bool EventFunction(const Telegram& telegram) = 0;
-	};
+        [[nodiscard]] virtual bool EventFunction(const Telegram& telegram) = 0;
+    };
 }
 
-#endif // CORE_TOOLS_MESSAGE_EVENT_BASE_EVENT_ENTITY_H
+#endif  // CORE_TOOLS_MESSAGE_EVENT_BASE_EVENT_ENTITY_H

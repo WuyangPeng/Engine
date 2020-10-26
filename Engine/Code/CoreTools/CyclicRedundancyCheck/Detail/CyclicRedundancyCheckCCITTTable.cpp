@@ -1,60 +1,61 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:50)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 13:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CyclicRedundancyCheckCCITTTable.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
-#include "CoreTools/Contract/Noexcept.h"
-CoreTools::CyclicRedundancyCheckCCITTTable
-	::CyclicRedundancyCheckCCITTTable() noexcept
-	:m_Table{}
-{
-	CoreTools::NoexceptNoReturn(*this,&ClassType::Calculate);
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+CoreTools::CyclicRedundancyCheckCCITTTable::CyclicRedundancyCheckCCITTTable() noexcept
+    : m_Table{}
+{
+    Calculate();
+
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheckCCITTTable)
 
-void CoreTools::CyclicRedundancyCheckCCITTTable
-	::Calculate()
+void CoreTools::CyclicRedundancyCheckCCITTTable::Calculate() noexcept
 {
-	for (auto index = 0; index < sm_TableSize; index++)
-	{
-		m_Table.at(index) = CalculateCCITT(index);
-	}
+    auto index = 0;
+    for (auto& value : m_Table)
+    {
+        value = CalculateCCITT(index);
+
+        ++index;
+    }
 }
 
-uint16_t CoreTools::CyclicRedundancyCheckCCITTTable
-	::CalculateCCITT(uint32_t index) noexcept
+uint16_t CoreTools::CyclicRedundancyCheckCCITTTable::CalculateCCITT(uint32_t index) noexcept
 {
-	uint16_t value{ 0 };
-	constexpr uint32_t bitSize{ 8 };
-	index <<= bitSize;
+    uint16_t value{ 0 };
+    constexpr auto bitSize = 8;
+    index <<= bitSize;
 
-	for (uint32_t i = bitSize; 0 < i; --i)
-	{
-		if (((index ^ value) & 0x8000) != 0)
-			value = (value << 1) ^ 0x1021;
-		else
-			value <<= 1;
+    for (auto i = bitSize; 0 < i; --i)
+    {
+        if (((index ^ value) & 0x8000) != 0)
+            value = (value << 1) ^ 0x1021;
+        else
+            value <<= 1;
 
-		index <<= 1;
-	}
+        index <<= 1;
+    }
 
-	return value;
+    return value;
 }
 
-uint16_t CoreTools::CyclicRedundancyCheckCCITTTable
-	::GetCCITT(int index) const
+uint16_t CoreTools::CyclicRedundancyCheckCCITTTable::GetCCITT(int index) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-	CORE_TOOLS_ASSERTION_0(0 <= index && index < sm_TableSize, "索引错误\n");
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_Table.at(index);
+    return m_Table.at(index);
 }

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/16 19:20)
+//	引擎版本：0.5.2.0 (2020/10/21 14:27)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H
@@ -22,7 +22,7 @@ CORE_TOOLS_EXPORT_SHARED_PTR(BufferTargetImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE BufferTarget : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE BufferTarget final : private boost::noncopyable
     {
     public:
         NON_COPY_CLASSES_TYPE_DECLARE(BufferTarget);
@@ -125,8 +125,7 @@ namespace CoreTools
         IMPL_TYPE_DECLARE(BufferTarget);
     };
 
-    using BufferTargetSharedPtr = std::shared_ptr<BufferTarget>;
-    using ConstBufferTargetSharedPtr = std::shared_ptr<const BufferTarget>;
+    CORE_TOOLS_SHARED_PTR_DECLARE(BufferTarget);
 }
 
 #endif  // CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H

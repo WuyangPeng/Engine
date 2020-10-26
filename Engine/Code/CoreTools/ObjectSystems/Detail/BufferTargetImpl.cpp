@@ -5,12 +5,13 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/16 10:17)
+//	引擎版本：0.5.2.0 (2020/10/22 14:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BufferTargetImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
@@ -48,5 +49,6 @@ void CoreTools::BufferTargetImpl::WriteUniqueID(const ConstObjectInterfaceShared
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     const auto uniqueID = m_ObjectRegister->GetUniqueID(object);
-    Write(GetStreamSize(uniqueID), &uniqueID);
+
+    Write(CORE_TOOLS_STREAM_SIZE(uniqueID), &uniqueID);
 }

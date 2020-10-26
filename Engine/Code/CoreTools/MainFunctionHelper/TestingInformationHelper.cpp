@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 12:00)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 10:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -10,59 +13,49 @@
 #include "Detail/TestingInformationHelperImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
 using std::make_shared;
+using std::string;
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-CoreTools::TestingInformationHelper
-	::TestingInformationHelper()
-	:m_Impl{ make_shared<ImplType>() }
+CoreTools::TestingInformationHelper::TestingInformationHelper(DisableNotThrow disableNotThrow)
+    : m_Impl{ make_shared<ImplType>(disableNotThrow) }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-#include STSTEM_WARNING_POP
-
-CoreTools::TestingInformationHelper
-	::TestingInformationHelper(TestingInformationHelper&& rhs) noexcept
-	:m_Impl{ std::move(rhs.m_Impl) }
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::TestingInformationHelper& CoreTools::TestingInformationHelper
-	::operator=(TestingInformationHelper&& rhs) noexcept
+CoreTools::TestingInformationHelper::TestingInformationHelper(TestingInformationHelper&& rhs) noexcept
+    : m_Impl{ std::move(rhs.m_Impl) }
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-	m_Impl = std::move(rhs.m_Impl);
+CoreTools::TestingInformationHelper& CoreTools::TestingInformationHelper::operator=(TestingInformationHelper&& rhs) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	return *this;
+    m_Impl = std::move(rhs.m_Impl);
+
+    return *this;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, TestingInformationHelper)
 
-int CoreTools::TestingInformationHelper
-	::GetLoopCount(const string& suiteName, const string& testingName) const
+int CoreTools::TestingInformationHelper::GetLoopCount(const string& suiteName, const string& testingName) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetLoopCount(suiteName, testingName);
+    return m_Impl->GetLoopCount(suiteName, testingName);
 }
 
-bool CoreTools::TestingInformationHelper
-	::IsPrintRun() const noexcept
+bool CoreTools::TestingInformationHelper::IsPrintRun() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->IsPrintRun();
+    return m_Impl->IsPrintRun();
 }
 
-int CoreTools::TestingInformationHelper
-	::GetRandomSeed() const noexcept
+int CoreTools::TestingInformationHelper::GetRandomSeed() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetRandomSeed();
+    return m_Impl->GetRandomSeed();
 }

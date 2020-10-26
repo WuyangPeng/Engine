@@ -55,7 +55,7 @@ bool CoreTools::MinHeapRecordStored<Generator, Scalar>::IndexIsValid() const noe
         std::vector<int> indexVector(m_Records.size(), -1);
 
         auto index = 0;
-        for (auto value : m_Records)
+        for (const auto& value : m_Records)
         {
             const int uniqueIndex = value.GetUniqueIndex();
 

@@ -1,152 +1,146 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.2.2 (2020/01/22 17:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "DownloadingFilesImpl.h"  
+#include "DownloadingFilesImpl.h"
 #include "InternetConnection.h"
 #include "OpenUrlInternet.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
-#include "System/Network/WindowsInternet.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Network/Flags/WindowsInternetFlags.h"
-#include "CoreTools/FileManager/OFStreamManager.h" 
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "System/Network/WindowsInternet.h"
 #include "CoreTools/CharacterString/CaseInsensitiveStringDetail.h"
+#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/FileManager/OFStreamManager.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"  
-
-#include <vector>
 #include <array>
-#include <gsl/gsl_util>
+#include <vector>
 
 using std::array;
-using std::vector;
 using std::string;
+using std::vector;
 using namespace std::literals;
 
-CoreTools::DownloadingFilesImpl
-	::DownloadingFilesImpl(const System::String& url, bool restart, const DownloadingFilesEventSharedPointer& downloadingFilesEvent)
-	:m_Url{ url }, m_Restart{ restart }, m_DownloadingFilesEvent{ downloadingFilesEvent }
+CoreTools::DownloadingFilesImpl::DownloadingFilesImpl(const String& url, bool restart, const DownloadingFilesEventSharedPtr& downloadingFilesEvent)
+    : m_Url{ url }, m_Restart{ restart }, m_DownloadingFilesEvent{ downloadingFilesEvent }
 {
-	Download();
+    Download();
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, DownloadingFilesImpl)
 
 // private
-void CoreTools::DownloadingFilesImpl
-	::Download()
+void CoreTools::DownloadingFilesImpl::Download()
 {
-	// 下载文件 
-	// 要重新加载文件，请传递给重新加载。
+    // 下载文件
+    // 要重新加载文件，请传递给重新加载。
 
-	// 要指定在读取每个缓冲区之后调用的更新函数，指定downloadingFilesEvent。
-	// 如果不需要更新功能，那么让第三个参数默认为DownloadingFilesEventSmartPointer()。
+    // 要指定在读取每个缓冲区之后调用的更新函数，指定downloadingFilesEvent。
+    // 如果不需要更新功能，那么让第三个参数默认为DownloadingFilesEventSmartPointer()。
 
-	CheckUrl();
-	CheckInternetAttemptConnect();
+    CheckUrl();
+    CheckInternetAttemptConnect();
 
-	InternetConnection internetConnection{ SYSTEM_TEXT("downloader") };
+    InternetConnection internetConnection{ SYSTEM_TEXT("downloader"s) };
 
-	System::String fileName = GetFileName();
-	OFStreamManager manager{ fileName, !m_Restart };
-	manager.SetSimplifiedChinese();
-	const auto fileLength = gsl::narrow_cast<uint32_t>(manager.GetOFStreamSize());
+    auto fileName = GetFileName();
+    OFStreamManager manager{ fileName, !m_Restart };
+    manager.SetSimplifiedChinese();
+    const auto fileLength = boost::numeric_cast<uint32_t>(manager.GetOFStreamSize());
 
-	System::String header{ SYSTEM_TEXT("Range:bytes=") + System::ToString(fileLength) + SYSTEM_TEXT("-") };
+    System::String header{ SYSTEM_TEXT("Range:bytes="s) + System::ToString(fileLength) + SYSTEM_TEXT("-"s) };
 
-	OpenUrlInternet openUrlInternet{ internetConnection.GetInternet(), m_Url, header };
+    OpenUrlInternet openUrlInternet{ internetConnection.GetInternet(), m_Url, header };
 
-	System::WindowDWord contentLength{ 79 };
-	System::WindowDWord length{ sizeof(contentLength) };
-	const auto infoLevel = System::QueryInfo::Number | System::QueryInfo::ContentLength;
+    System::WindowDWord contentLength{ 79 };
+    System::WindowDWord length{ sizeof(contentLength) };
+    const auto infoLevel = System::QueryInfo::Number | System::QueryInfo::ContentLength;
 
-	if (!System::GetHttpQueryInfo(openUrlInternet.GetInternet(), infoLevel, &contentLength, &length, nullptr))
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("未找到文件或内容长度。"s));
-	}
+    if (!System::GetHttpQueryInfo(openUrlInternet.GetInternet(), infoLevel, &contentLength, &length, nullptr))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到文件或内容长度。"s));
+    }
 
-	// 如果现有文件（如果有）未完成，则完成下载。	
+    // 如果现有文件（如果有）未完成，则完成下载。
 
-	constexpr int bufferSize{ 256 };
-	array<char, bufferSize> buffer{ };
+    constexpr auto bufferSize = 256;
+    array<char, bufferSize> buffer{};
 
-	if (fileLength != contentLength && 0 < contentLength)
-	{
-		int total{ 0 };
-		System::WindowDWord numberOfBytesRead{ 0 };
+    if (fileLength != contentLength && 0 < contentLength)
+    {
+        auto total = 0;
+        System::WindowDWord numberOfBytesRead{ 0 };
 
-		do
-		{
-			if (!System::ReadFileInternet(openUrlInternet.GetInternet(), buffer.data(), bufferSize, &numberOfBytesRead))
-			{
-				THROW_EXCEPTION(SYSTEM_TEXT("下载时发生错误。"s));
-			}
+        do
+        {
+            if (!System::ReadFileInternet(openUrlInternet.GetInternet(), buffer.data(), bufferSize, &numberOfBytesRead))
+            {
+                THROW_EXCEPTION(SYSTEM_TEXT("下载时发生错误。"s));
+            }
 
-			string writeToDisk{ buffer.data() };
-			manager << StringConversion::MultiByteConversionStandard(writeToDisk);
+            string writeToDisk{ buffer.data() };
+            manager << StringConversion::MultiByteConversionStandard(writeToDisk);
 
-			total += numberOfBytesRead;
+            total += numberOfBytesRead;
 
-			auto downloadingFilesEvent = m_DownloadingFilesEvent.lock();
+            auto downloadingFilesEvent = m_DownloadingFilesEvent.lock();
 
-			if (downloadingFilesEvent && 0 < numberOfBytesRead)
-			{
-				downloadingFilesEvent->Update(fileName, contentLength, total + fileLength);
-			}
+            if (downloadingFilesEvent && 0 < numberOfBytesRead)
+            {
+                downloadingFilesEvent->Update(fileName, contentLength, total + fileLength);
+            }
 
-		} while (0 < numberOfBytesRead);
-	}
-	else
-	{
-		auto downloadingFilesEvent = m_DownloadingFilesEvent.lock();
+        } while (0 < numberOfBytesRead);
+    }
+    else
+    {
+        auto downloadingFilesEvent = m_DownloadingFilesEvent.lock();
 
-		if (downloadingFilesEvent)
-		{
-			downloadingFilesEvent->Update(fileName, fileLength, fileLength);
-		}
-	}
+        if (downloadingFilesEvent)
+        {
+            downloadingFilesEvent->Update(fileName, fileLength, fileLength);
+        }
+    }
 }
 
-void CoreTools::DownloadingFilesImpl
-	::CheckUrl()
+void CoreTools::DownloadingFilesImpl::CheckUrl()
 {
-	CaseInsensitiveTString caseInsensitiveTString{ m_Url.c_str() };
+    CaseInsensitiveTString caseInsensitiveTString{ m_Url.c_str() };
 
-	if (caseInsensitiveTString.find(SYSTEM_TEXT("http")) != 0)
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("必须是 HTTP url"s));
-	}
+    if (caseInsensitiveTString.find(SYSTEM_TEXT("http")) != 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("必须是 HTTP url"s));
+    }
 }
 
-void CoreTools::DownloadingFilesImpl
-	::CheckInternetAttemptConnect()
+void CoreTools::DownloadingFilesImpl::CheckInternetAttemptConnect()
 {
-	// 查看是否有Internet连接可用。
-	if (!System::IsInternetAttemptConnect())
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("无法连接。"s));
-	}
+    // 查看是否有Internet连接可用。
+    if (!System::IsInternetAttemptConnect())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("无法连接。"s));
+    }
 }
 
-System::String CoreTools::DownloadingFilesImpl
-	::GetFileName() const
+System::String CoreTools::DownloadingFilesImpl::GetFileName() const
 {
-	vector<System::String> fileName;
+    vector<String> fileName;
 
-	split(fileName, m_Url, boost::is_any_of(SYSTEM_TEXT("/")), boost::token_compress_on);
+    split(fileName, m_Url, boost::is_any_of(SYSTEM_TEXT("/"s)), boost::token_compress_on);
 
-	if (fileName.empty())
-	{
-		return SYSTEM_TEXT("error");
-	}
-	else
-	{
-		return fileName.at(fileName.size() - 1);
-	}
+    if (fileName.empty())
+    {
+        return SYSTEM_TEXT("error"s);
+    }
+    else
+    {
+        return fileName.at(fileName.size() - 1);
+    }
 }

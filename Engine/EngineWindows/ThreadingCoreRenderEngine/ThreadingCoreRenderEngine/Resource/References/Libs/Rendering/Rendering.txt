@@ -1,0 +1,12 @@
+参考文献·开源库·渲染
+
+1.	ogre
+2.  imgui 
+3.	ogre-next
+4.  DirectX 
+5.	Wild Magic
+6.  Geometric Tools 
+7.	irrlicht
+8.  glew 
+9.	libpng
+ 

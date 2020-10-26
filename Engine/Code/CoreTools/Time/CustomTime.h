@@ -1,10 +1,13 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.3.0 (2020/03/26 11:31)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/22 18:44)
 
-#ifndef CORE_TOOLS_TIME_CUSTOM_TIME_H 
+#ifndef CORE_TOOLS_TIME_CUSTOM_TIME_H
 #define CORE_TOOLS_TIME_CUSTOM_TIME_H
 
 #include "CoreTools/CoreToolsDll.h"
@@ -15,35 +18,35 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE CustomTime
-	{
-	public:
-		using ClassType = CustomTime;
-		using String = System::String;
+    class CORE_TOOLS_DEFAULT_DECLARE CustomTime final
+    {
+    public:
+        using ClassType = CustomTime;
+        using String = System::String;
 
-	public:
-		CustomTime() noexcept;
+    public:
+        CustomTime() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void ResetCustomTime() noexcept;
-		int64_t GetThisElapsedTime() noexcept;
-		int64_t GetNowTime() noexcept;
+        void ResetCustomTime() noexcept;
+        [[nodiscard]] int64_t GetThisElapsedTime() noexcept;
+        [[nodiscard]] int64_t GetNowTime() noexcept;
 
-		int64_t GetThisElapsedMillisecondTime() noexcept;
-		int64_t GetNowMillisecondTime() noexcept;
+        [[nodiscard]] int64_t GetThisElapsedMillisecondTime() noexcept;
+        [[nodiscard]] int64_t GetNowMillisecondTime() noexcept;
 
-		static String GetSystemTimeDescribe();
-		static String GetSystemTimeDescribe(const String& dateFormat);
+        [[nodiscard]] static String GetSystemTimeDescribe();
+        [[nodiscard]] static String GetSystemTimeDescribe(const String& dateFormat);
 
-	private:
-		void MarkTimeThisTick() noexcept;
+    private:
+        void MarkTimeThisTick() noexcept;
 
-	private:
-		int64_t m_StartTime;
-		int64_t m_CurrentTime;
-		int64_t m_TimeLastTick;
-	};
+    private:
+        int64_t m_StartTime;
+        int64_t m_CurrentTime;
+        int64_t m_TimeLastTick;
+    };
 }
 
-#endif // CORE_TOOLS_TIME_CUSTOM_TIME_H
+#endif  // CORE_TOOLS_TIME_CUSTOM_TIME_H

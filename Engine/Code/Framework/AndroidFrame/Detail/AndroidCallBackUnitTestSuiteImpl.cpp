@@ -12,13 +12,14 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 using std::string;
 using std::make_shared;
 
 Framework::AndroidCallBackUnitTestSuiteImpl
 	::AndroidCallBackUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
-	:m_TestingInformationHelper{ }, m_Suite{ make_shared<Suite>(name, streamShared, m_TestingInformationHelper.IsPrintRun()) }
+    : m_TestingInformationHelper{ CoreTools::DisableNotThrow::Disable }, m_Suite{ make_shared<Suite>(name, streamShared, m_TestingInformationHelper.IsPrintRun()) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 17:52)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 9:37)
 
 // 将信息输出至指定的ostream。EquilongReportOutputImpl为内部接口子类。实现输出边界线的功能。
 
@@ -13,26 +16,25 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE EquilongReportOutputImpl : public ReportOutput
-	{
-	public:
-		using ClassType = EquilongReportOutputImpl;
-		using ParentType = ReportOutput;
+    class CORE_TOOLS_HIDDEN_DECLARE EquilongReportOutputImpl : public ReportOutput
+    {
+    public:
+        using ClassType = EquilongReportOutputImpl;
+        using ParentType = ReportOutput;
 
-	public:
-		explicit EquilongReportOutputImpl(int borderLineLength, const OStreamShared& osPtr ) noexcept;
- 
+    public:
+        explicit EquilongReportOutputImpl(int borderLineLength, const OStreamShared& streamShared) noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void PrintBorderLine(char character);
+        void PrintBorderLine(char character);
 
-	protected:
-		int GetBorderLineLength() const noexcept;
+    protected:
+        [[nodiscard]] int GetBorderLineLength() const noexcept;
 
-	private:
-		int m_BorderLineLength;
-	};
+    private:
+        int m_BorderLineLength;
+    };
 }
 
-#endif // CORE_TOOLS_REPORT_OUTPUT_EQUILONG_REPORT_OUTPUT_IMPL_H
+#endif  // CORE_TOOLS_REPORT_OUTPUT_EQUILONG_REPORT_OUTPUT_IMPL_H

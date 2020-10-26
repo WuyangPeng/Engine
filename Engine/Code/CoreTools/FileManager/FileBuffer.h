@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/SharedPtrMacro.h"
 
 #include <vector>
 
@@ -51,8 +52,7 @@ namespace CoreTools
         IMPL_TYPE_DECLARE(FileBuffer);
     };
 
-    using FileBufferSharedPtr = std::shared_ptr<FileBuffer>;
-    using ConstFileBufferSharedPtr = std::shared_ptr<const FileBuffer>;
+    CORE_TOOLS_SHARED_PTR_DECLARE(FileBuffer);
 }
 
 #endif  // CORE_TOOLS_FILE_MANAGER_FILE_BUFFER_H

@@ -39,7 +39,7 @@ void Rendering::FloatArrayImpl ::Load(const CoreTools::BufferSourceSharedPtr& so
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source->Read(m_Elements);
+	m_Elements = source->ReadVectorWithoutNumber<float>();
 }
 
 void Rendering::FloatArrayImpl

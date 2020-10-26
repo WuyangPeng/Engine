@@ -1,4 +1,9 @@
 TODO Level 8
  
-0.0.5.1
+0.5.2.0
 
+1.	（PerformanceProfiler）程序复杂度的检测程序。（参考代码大全19.6）
+2.  （Properties）类MethodPropertySet的引用类型改成const引用类型。
+3.  （Properties）优化属性类。
+4.  （zlib）完成zlib库的封装。
+5.  （Freetype）完成Freetype库的封装。

@@ -169,7 +169,9 @@ void Network::ACESockStream
 	CoreTools::CallbackParameters callbackParameters{};
 	callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
 	callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-	eventInterface->EventFunction(callbackParameters);
+        if (!eventInterface->EventFunction(callbackParameters))
+        {
+        }
 }
 
 void Network::ACESockStream
@@ -211,7 +213,9 @@ void Network::ACESockStream
 		CoreTools::CallbackParameters callbackParameters{};
 		callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncReceive));
 		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-		eventInterface->EventFunction(callbackParameters);
+                if (!eventInterface->EventFunction(callbackParameters))
+                {
+                }
 	}
 	else
 	{

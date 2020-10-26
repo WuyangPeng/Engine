@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/06 20:23)
+//	引擎版本：0.5.2.0 (2020/10/22 19:26)
 
 #ifndef CORE_TOOLS_TIME_MONTH_H
 #define CORE_TOOLS_TIME_MONTH_H
@@ -14,81 +14,30 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Month
+    class CORE_TOOLS_DEFAULT_DECLARE Month final
     {
     public:
         using ClassType = Month;
 
     public:
-        explicit Month(int month) noexcept
-            : m_Month{ month }
-        {
-        }
+        explicit Month(int month) noexcept;
 
-        int GetMonth() const noexcept
-        {
-            return m_Month;
-        }
+        CLASS_INVARIANT_DECLARE;
 
-        static Month Jan() noexcept
-        {
-            return Month{ 1 };
-        }
+        int GetMonth() const noexcept;
 
-        static Month Feb() noexcept
-        {
-            return Month{ 2 };
-        }
-
-        static Month Mar() noexcept
-        {
-            return Month{ 3 };
-        }
-
-        static Month Apr() noexcept
-        {
-            return Month{ 4 };
-        }
-
-        static Month May() noexcept
-        {
-            return Month{ 5 };
-        }
-
-        static Month Jun() noexcept
-        {
-            return Month{ 6 };
-        }
-
-        static Month Jul() noexcept
-        {
-            return Month{ 7 };
-        }
-
-        static Month Aug() noexcept
-        {
-            return Month{ 8 };
-        }
-
-        static Month Sep() noexcept
-        {
-            return Month{ 9 };
-        }
-
-        static Month Oct() noexcept
-        {
-            return Month{ 10 };
-        }
-
-        static Month Nov() noexcept
-        {
-            return Month{ 11 };
-        }
-
-        static Month Dec() noexcept
-        {
-            return Month{ 12 };
-        }
+        static Month Jan() noexcept;
+        static Month Feb() noexcept;
+        static Month Mar() noexcept;
+        static Month Apr() noexcept;
+        static Month May() noexcept;
+        static Month Jun() noexcept;
+        static Month Jul() noexcept;
+        static Month Aug() noexcept;
+        static Month Sep() noexcept;
+        static Month Oct() noexcept;
+        static Month Nov() noexcept;
+        static Month Dec() noexcept;
 
     private:
         int m_Month;

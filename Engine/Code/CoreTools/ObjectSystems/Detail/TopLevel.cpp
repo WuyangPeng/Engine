@@ -5,17 +5,16 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/13 14:03)
+//	引擎版本：0.5.2.0 (2020/10/22 14:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "TopLevel.h" 
+#include "TopLevel.h"
 
 using std::string;
 using namespace std::literals;
 
-string CoreTools::TopLevel
-	::GetTopLevelDescription()
+string CoreTools::TopLevel::GetTopLevelDescription()
 {
-	return "Top Level"s;
+    return "Top Level"s;
 }

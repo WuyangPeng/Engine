@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 10:31)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 14:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -10,39 +13,24 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include <iostream>
-
-using std::ostream;
-
-CoreTools::UnitTestStream
-	::UnitTestStream(const OStreamShared& osPtr) noexcept
-	:m_OsPtr{ osPtr }
+CoreTools::UnitTestStream::UnitTestStream(const OStreamShared& streamShared) noexcept
+    : m_StreamShared{ streamShared }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
- 
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, UnitTestStream)
 
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::UnitTestStream
-	::IsValid() const noexcept
-{ 
-	return true; 
-}
-#endif // OPEN_CLASS_INVARIANT
-
-CoreTools::OStreamShared& CoreTools::UnitTestStream
-	::GetStream() noexcept
+CoreTools::OStreamShared& CoreTools::UnitTestStream::GetStream() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	return m_OsPtr;
+    return m_StreamShared;
 }
 
 bool CoreTools::UnitTestStream::IsStreamSharedFile() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	return m_OsPtr.IsFile();
+    return m_StreamShared.IsFile();
 }
-

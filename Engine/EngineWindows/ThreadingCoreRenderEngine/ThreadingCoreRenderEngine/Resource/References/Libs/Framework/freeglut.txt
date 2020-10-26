@@ -1,0 +1,10 @@
+freeglut
+ 
+官方网站 
+http://freeglut.sourceforge.net/
+
+★
+
+知识点 
+1.	freeglut。
+

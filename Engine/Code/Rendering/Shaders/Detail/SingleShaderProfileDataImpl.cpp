@@ -110,8 +110,8 @@ void Rendering::SingleShaderProfileDataImpl ::Load(const CoreTools::BufferSource
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	source->Read(m_BaseRegister);
-	source->Read(m_TextureUnit);
+//	source->Read(m_BaseRegister);
+//	source->Read(m_TextureUnit);
         m_Program = source->ReadString();
 }
 

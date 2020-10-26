@@ -176,3 +176,7 @@ libxml++（引擎不关联）
 mysql++（引擎不关联）
 1. 版本：3.2.5。
 2. 官方网站：https://tangentsoft.com/mysqlpp/home。
+
+SDL2（引擎不关联）
+1. 版本：2.0.12。
+2. 官方网站：http://www.libsdl.org/。

@@ -1,51 +1,48 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 17:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 9:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "EquilongReportOutputImpl.h"
+#include "EquilongReportOutputImpl.h" 
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 using std::string;
-using std::ostream;
 
-CoreTools::EquilongReportOutputImpl
-	::EquilongReportOutputImpl(int borderLineLength, const OStreamShared& osPtr) noexcept
-	:ParentType{ osPtr }, m_BorderLineLength{ borderLineLength }
+CoreTools::EquilongReportOutputImpl::EquilongReportOutputImpl(int borderLineLength, const OStreamShared& streamShared) noexcept
+    : ParentType{ streamShared }, m_BorderLineLength{ borderLineLength }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
- 
 #ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::EquilongReportOutputImpl
-	::IsValid() const noexcept
+bool CoreTools::EquilongReportOutputImpl::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && 0 < m_BorderLineLength)
-		return true;
-	else
-		return false;
+    if (ParentType::IsValid() && 0 < m_BorderLineLength)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
-void CoreTools::EquilongReportOutputImpl
-	::PrintBorderLine(char character)
+void CoreTools::EquilongReportOutputImpl::PrintBorderLine(char character)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	string borderLine(m_BorderLineLength, character);
+    string borderLine(m_BorderLineLength, character);
 
-	PrintString(borderLine);
+    PrintString(borderLine);
 }
 
 // protected
-int CoreTools::EquilongReportOutputImpl
-	::GetBorderLineLength() const noexcept
+int CoreTools::EquilongReportOutputImpl::GetBorderLineLength() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_BorderLineLength;
+    return m_BorderLineLength;
 }

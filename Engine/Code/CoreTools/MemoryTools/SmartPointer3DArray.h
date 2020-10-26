@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/20 16:42)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/19 16:49)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_3D_ARRAY_H
 #define CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_3D_ARRAY_H
@@ -11,44 +14,50 @@
 
 namespace CoreTools
 {
-	template <typename T>
-	class SmartPointer3DArray : private boost::equality_comparable<SmartPointer3DArray<T>,
-										boost::equality_comparable<SmartPointer3DArray<T>, T***>>
-	{
-	public:
-		using ClassType = SmartPointer3DArray<T>;
+    template <typename T>
+    class SmartPointer3DArray final : private boost::equality_comparable<SmartPointer3DArray<T>, boost::equality_comparable<SmartPointer3DArray<T>, T***>>
+    {
+    public:
+        using ClassType = SmartPointer3DArray<T>;
+        using PointerType = T***;
+        using ReferenceType = T**&;
+        using ConstPointerType = T*** const;
+        using ConstReferenceType = T** const&;
 
-	public:
-		// 允许T***到SmartPointer3DArray的隐式转换。如果要禁止，请同时删除SmartPointer3DArray& operator= (T*** data);
-		SmartPointer3DArray(T*** data = nullptr);
-		~SmartPointer3DArray();
+    public:
+        // 允许T***到SmartPointer3DArray的隐式转换。如果要禁止，请同时删除SmartPointer3DArray& operator= (T*** data);
+        SmartPointer3DArray(PointerType data = nullptr);
+        ~SmartPointer3DArray() noexcept;
 
-		SmartPointer3DArray(const ClassType& rhs);
-		SmartPointer3DArray& operator= (T*** data);
-		SmartPointer3DArray& operator= (const ClassType& rhs);
+        SmartPointer3DArray(const SmartPointer3DArray& rhs);
+        SmartPointer3DArray& operator=(PointerType data);
+        SmartPointer3DArray& operator=(const SmartPointer3DArray& rhs);
 
-		CLASS_INVARIANT_DECLARE;
+        SmartPointer3DArray(SmartPointer3DArray&& rhs) noexcept;
+        SmartPointer3DArray& operator=(SmartPointer3DArray&& rhs) noexcept;
 
-		T*** const GetData() const noexcept;
-		operator T*** const () const noexcept;
-		T** const& operator* () const noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-		T*** GetData() noexcept;
-		operator T*** () noexcept;
-		T**& operator* () noexcept;
+        [[nodiscard]] ConstPointerType GetData() const noexcept;
+        [[nodiscard]] operator ConstPointerType() const noexcept;
+        [[nodiscard]] ConstReferenceType operator*() const noexcept;
 
-	private:
-		void Swap(ClassType& rhs) noexcept;
+        [[nodiscard]] PointerType GetData() noexcept;
+        [[nodiscard]] operator PointerType() noexcept;
+        [[nodiscard]] ReferenceType operator*() noexcept;
 
-	private:
-		T*** m_Data;
-	};
+    private:
+        void Swap(SmartPointer3DArray& rhs) noexcept;
 
-	template <typename T>
-	bool operator== (const SmartPointer3DArray<T>& lhs, T*** data) noexcept;
+    private:
+        PointerType m_Data;
+    };
 
-	template <typename T>
-	bool operator== (const SmartPointer3DArray<T>& lhs, const SmartPointer3DArray<T>& rhs) noexcept;
+    template <typename T>
+    bool operator==(const SmartPointer3DArray<T>& lhs, T*** data) noexcept;
+
+    template <typename T>
+    bool operator==(const SmartPointer3DArray<T>& lhs, const SmartPointer3DArray<T>& rhs) noexcept;
 }
 
-#endif // CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_3D_ARRAY_H
+#endif  // CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_3D_ARRAY_H

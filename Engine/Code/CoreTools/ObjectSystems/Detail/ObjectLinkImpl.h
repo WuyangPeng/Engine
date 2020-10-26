@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:32)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/21 10:21)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_IMPL_H
@@ -16,33 +19,39 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE ObjectLinkImpl
-	{
-	public:
-		using ClassType = ObjectLinkImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE ObjectLinkImpl final
+    {
+    public:
+        using ClassType = ObjectLinkImpl;
+        using LinkSequentialContainer = std::vector<ObjectInterfaceSharedPtr>;
+        using LinkSequentialContainerIter = LinkSequentialContainer::iterator;
+        using LinkSequentialContainerConstIter = LinkSequentialContainer::const_iterator;
 
-	public:
-		ObjectLinkImpl() noexcept;
+    public:
+        ObjectLinkImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		ObjectInterfaceSharedPtr GetObjectPtr(uint64_t uniqueID);
-		int GetOrderedSize() const;
-		ObjectInterfaceSharedPtr& operator [](int index);
+        [[nodiscard]] ObjectInterfaceSharedPtr GetObjectInterface(uint64_t uniqueID);
+        [[nodiscard]] int GetOrderedSize() const;
 
-		void Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& ptr);
+        void Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& object);
 
-		void Sort();
+        void Sort();
 
-	private:
-		using LinkAssociatedContainer = std::map<uint64_t, ObjectInterfaceSharedPtr>;
-		using LinkSequentialContainer = std::vector<ObjectInterfaceSharedPtr>;
+        [[nodiscard]] LinkSequentialContainerConstIter begin() const noexcept;
+        [[nodiscard]] LinkSequentialContainerConstIter end() const noexcept;
+        [[nodiscard]] LinkSequentialContainerIter begin() noexcept;
+        [[nodiscard]] LinkSequentialContainerIter end() noexcept;
 
-	private:
-		// 存储图形加载过程中的顶层对象。
-		LinkAssociatedContainer m_Linked;
-		LinkSequentialContainer m_Ordered;
-	};
+    private:
+        using LinkAssociatedContainer = std::map<uint64_t, ObjectInterfaceSharedPtr>;
+
+    private:
+        // 存储图形加载过程中的顶层对象。
+        LinkAssociatedContainer m_Linked;
+        LinkSequentialContainer m_Ordered;
+    };
 }
 
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_IMPL_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_IMPL_H

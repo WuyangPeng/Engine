@@ -5,16 +5,16 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 14:13)
+//	引擎版本：0.5.2.1 (2020/10/26 16:17)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "../Helper/ExceptionMacro.h"
 #include "CFileManagerHelper.h"
 #include "Environment.h"
 #include "Detail/CFileManagerImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 using namespace std::literals;
 

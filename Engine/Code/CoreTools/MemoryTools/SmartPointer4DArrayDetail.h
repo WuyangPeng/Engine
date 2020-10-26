@@ -1,162 +1,169 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 11:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/20 18:40)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_4D_ARRAY_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_4D_ARRAY_DETAIL_H
 
 #include "SmartPointer4DArray.h"
 #include "SmartPointerManager.h"
-#include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 
 template <typename T>
-CoreTools::SmartPointer4DArray<T>
-	::SmartPointer4DArray(T**** data)
-	:m_Data{ data }
+CoreTools::SmartPointer4DArray<T>::SmartPointer4DArray(PointerType data)
+    : m_Data{ data }
 {
-	SMART_POINTER_SINGLETON.IncreaseReference(m_Data);
+    SMART_POINTER_SINGLETON.IncreaseReference(m_Data);
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename T>
-CoreTools::SmartPointer4DArray<T>
-	::~SmartPointer4DArray()
+CoreTools::SmartPointer4DArray<T>::~SmartPointer4DArray() noexcept
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-	auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
+    EXCEPTION_TRY
+    {
+        auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
 
-	if (reference == 0)
-	{
-		DELETE4(m_Data);
-	}
+        if (reference == 0)
+        {
+            DELETE4(m_Data);
+        }
+    }
+    EXCEPTION_ALL_CATCH(CoreTools)
 }
 
 template <typename T>
-CoreTools::SmartPointer4DArray<T>
-	::SmartPointer4DArray(const ClassType& rhs)
-	:m_Data{ rhs.m_Data }
+CoreTools::SmartPointer4DArray<T>::SmartPointer4DArray(const SmartPointer4DArray& rhs)
+    : m_Data{ rhs.m_Data }
 {
-	SMART_POINTER_SINGLETON.CopyIncreaseReference(m_Data);
+    [[maybe_unused]] const auto reference = SMART_POINTER_SINGLETON.CopyIncreaseReference(m_Data);
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename T>
-CoreTools::SmartPointer4DArray<T>& CoreTools::SmartPointer4DArray<T>
-	::operator=(const ClassType& rhs)
+CoreTools::SmartPointer4DArray<T>& CoreTools::SmartPointer4DArray<T>::operator=(const SmartPointer4DArray& rhs)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	ClassType temp{ rhs };
-	Swap(temp);
+    ClassType temp{ rhs };
+    Swap(temp);
 
-	return *this;
+    return *this;
 }
 
 template <typename T>
-CoreTools::SmartPointer4DArray<T>& CoreTools::SmartPointer4DArray<T>
-	::operator=(T**** data)
+CoreTools::SmartPointer4DArray<T>& CoreTools::SmartPointer4DArray<T>::operator=(PointerType data)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	ClassType temp{ data };
-	Swap(temp);
+    ClassType temp{ data };
+    Swap(temp);
 
-	return *this;
+    return *this;
+}
+
+template <typename T>
+CoreTools::SmartPointer4DArray<T>::SmartPointer4DArray(SmartPointer4DArray&& rhs) noexcept
+    : m_Data{ std::move(rhs.m_Data) }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename T>
+CoreTools::SmartPointer4DArray<T>& CoreTools::SmartPointer4DArray<T>::operator=(SmartPointer4DArray&& rhs) noexcept
+{
+    m_Data = std::move(rhs.m_Data);
+
+    return *this;
 }
 
 // private
 template <typename T>
-void CoreTools::SmartPointer4DArray<T>
-	::Swap(ClassType& rhs) noexcept
+void CoreTools::SmartPointer4DArray<T>::Swap(SmartPointer4DArray& rhs) noexcept
 {
-	std::swap(m_Data, rhs.m_Data);
+    std::swap(m_Data, rhs.m_Data);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename T>
-bool CoreTools::SmartPointer4DArray<T>
-	::IsValid() const noexcept
+bool CoreTools::SmartPointer4DArray<T>::IsValid() const noexcept
 {
-	return true;
+    return true;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-T**** const CoreTools::SmartPointer4DArray<T>
-	::GetData() const noexcept
+typename CoreTools::SmartPointer4DArray<T>::ConstPointerType const CoreTools::SmartPointer4DArray<T>::GetData() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_Data;
+    return m_Data;
 }
 
 template <typename T>
-CoreTools::SmartPointer4DArray<T>
-	::operator T**** const() const noexcept
+CoreTools::SmartPointer4DArray<T>::operator ConstPointerType() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return GetData();
+    return GetData();
 }
 
 template <typename T>
-T*** const& CoreTools::SmartPointer4DArray<T>
-	::operator* () const noexcept
+typename CoreTools::SmartPointer4DArray<T>::ConstReferenceType CoreTools::SmartPointer4DArray<T>::operator*() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return *GetData();
+    return *GetData();
 }
 
 template <typename T>
-T**** CoreTools::SmartPointer4DArray<T>
-	::GetData() noexcept
+typename CoreTools::SmartPointer4DArray<T>::PointerType CoreTools::SmartPointer4DArray<T>::GetData() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return NON_CONST_MEMBER_CALL_CONST_MEMBER(T****, GetData);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(PointerType, GetData);
 }
 
 template <typename T>
-CoreTools::SmartPointer4DArray<T>
-	::operator T****()  noexcept
+CoreTools::SmartPointer4DArray<T>::operator PointerType() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return GetData();
+    return GetData();
 }
 
 template <typename T>
-T***& CoreTools::SmartPointer4DArray<T>
-	::operator* () noexcept
+typename CoreTools::SmartPointer4DArray<T>::ReferenceType CoreTools::SmartPointer4DArray<T>::operator*() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return *GetData();
+    return *GetData();
 }
 
 template <typename T>
-bool CoreTools
-	::operator==(const SmartPointer4DArray<T>& lhs, T**** data) noexcept
+bool CoreTools::operator==(const SmartPointer4DArray<T>& lhs, T**** data) noexcept
 {
-	if (lhs.GetData() == data)
-		return true;
-	else
-		return false;
+    if (lhs.GetData() == data)
+        return true;
+    else
+        return false;
 }
 
 template <typename T>
-bool CoreTools
-	::operator==(const SmartPointer4DArray<T>& lhs, const SmartPointer4DArray<T>& rhs) noexcept
+bool CoreTools::operator==(const SmartPointer4DArray<T>& lhs, const SmartPointer4DArray<T>& rhs) noexcept
 {
-	return lhs.GetData() == rhs.GetData();
+    return lhs.GetData() == rhs.GetData();
 }
 
-#endif // CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_4D_ARRAY_DETAIL_H
+#endif  // CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_4D_ARRAY_DETAIL_H

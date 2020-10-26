@@ -1,6 +1,6 @@
 TODO Level 0
  
-0.0.5.1
+0.5.2.0
 
 1.  （Helper）将游戏中对类不变式和断言的宏改成USER_CLASS_IS_VALID、USER_CLASS_IS_VALID和USER_ASSERTION相关。 
 2.  （Base）使用UniqueIDManager来管理唯一ID，替换原先的ID。

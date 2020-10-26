@@ -1,50 +1,47 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.1.0.0 (2020/04/08 14:31)
- 
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 11:21)
+
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_IMPL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_IMPL_H
 
 #include "CoreTools/CoreToolsDll.h"
 
 #include <boost/noncopyable.hpp>
-#include <string>
 #include <iostream>
+#include <string>
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE OStreamImpl : private boost::noncopyable
-	{
-	public:
-		using ClassType = OStreamImpl; 
+    class CORE_TOOLS_HIDDEN_DECLARE OStreamImpl final : private boost::noncopyable
+    {
+    public:
+        using ClassType = OStreamImpl;
 
-	public:
-		explicit OStreamImpl(bool isCout) noexcept;
-		explicit OStreamImpl(const std::string& fileName);
-		~OStreamImpl() = default;
+    public:
+        explicit OStreamImpl(bool isCout) noexcept;
+        explicit OStreamImpl(const std::string& fileName);
 
-		OStreamImpl(const OStreamImpl& rhs) noexcept = delete;
-		OStreamImpl& operator=(const OStreamImpl& rhs) noexcept = delete;
-		OStreamImpl(OStreamImpl&& rhs) noexcept = delete;
-		OStreamImpl& operator=(OStreamImpl&& rhs) noexcept = delete;
+        CLASS_INVARIANT_DECLARE;
 
-		CLASS_INVARIANT_DECLARE;
-		 
-		std::ostream& GetStream() noexcept;
+        [[nodiscard]] std::ostream& GetStream() noexcept;
 
-		bool IsCout() const noexcept;
-		bool IsCerr() const noexcept;
-		bool IsFile() const noexcept;
+        [[nodiscard]] bool IsCout() const noexcept;
+        [[nodiscard]] bool IsCerr() const noexcept;
+        [[nodiscard]] bool IsFile() const noexcept;
 
-	private:
-		using OstreamSharedPtr = std::shared_ptr<std::ostream>;
+    private:
+        using OstreamSharedPtr = std::shared_ptr<std::ostream>;
 
-	private:
-		OstreamSharedPtr m_OStream;
-		bool m_IsCout;
-	};
+    private:
+        OstreamSharedPtr m_OStream;
+        bool m_IsCout;
+    };
 }
 
-#endif // CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_IMPL_H
+#endif  // CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_IMPL_H

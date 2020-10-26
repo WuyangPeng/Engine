@@ -1,9 +1,12 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.1.0.0 (2020/04/08 14:31)
- 
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 11:32)
+
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_SHARED_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_SHARED_H
 
@@ -13,40 +16,36 @@
 
 CORE_TOOLS_EXPORT_SHARED_PTR(OStreamImpl);
 
-#include <string>
 #include <iostream>
+#include <string>
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE OStreamShared
-	{
-	public:	
-		using OStreamSharedImpl = OStreamImpl;
-		SHARE_CLASSES_TYPE_DECLARE(OStreamShared);
+    // 共享类
+    class CORE_TOOLS_DEFAULT_DECLARE OStreamShared final
+    {
+    public:
+        using OStreamSharedImpl = OStreamImpl;
+        SHARE_CLASSES_TYPE_DECLARE(OStreamShared);
 
-	public:
-		explicit OStreamShared(bool isCout = true);
-		explicit OStreamShared(const std::string& fileName); 
+    public:
+        explicit OStreamShared(bool isCout = true);
+        explicit OStreamShared(const std::string& fileName);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		template<typename T>
-		OStreamShared& operator<<(const T& value)
-		{
-			GetStream() << value;
+        template <typename T>
+        OStreamShared& operator<<(const T& value);
 
-			return *this;
-		}
-		 
-		std::ostream& GetStream() noexcept;
+        [[nodiscard]] std::ostream& GetStream() noexcept;
 
-		bool IsCout() const noexcept;
-		bool IsCerr() const noexcept;
-		bool IsFile() const noexcept;
+        [[nodiscard]] bool IsCout() const noexcept;
+        [[nodiscard]] bool IsCerr() const noexcept;
+        [[nodiscard]] bool IsFile() const noexcept;
 
-	private:
-		IMPL_TYPE_DECLARE(OStreamShared);
-	};
+    private:
+        IMPL_TYPE_DECLARE(OStreamShared);
+    };
 }
 
-#endif // CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_SHARED_H
+#endif  // CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_SHARED_H

@@ -458,8 +458,8 @@ void Rendering::TubeSurface
     source->Read(mNumMedialSamples);
     source->Read(mNumSliceSamples);
     source->ReadAggregate(mUpVector);
-    source->Read(mNumSliceSamples+1, mSin);
-    source->Read(mNumSliceSamples+1, mCos);
+ //   source->Read(mNumSliceSamples+1, mSin);
+ //   source->Read(mNumSliceSamples+1, mCos);
     mClosed =source->ReadBool();
    mSampleByArcLength = source->ReadBool();
 

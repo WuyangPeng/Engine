@@ -160,8 +160,8 @@ void Rendering::ParticlesImpl ::Load(const CoreTools::BufferSourceSharedPtr& sou
 	m_Positions.resize(size);
 	m_Sizes.resize(size);
 
-	source->ReadAggregate(size, &m_Positions[0]);
-	source->Read(size, &m_Sizes[0]);
+	source->ReadAggregateContainer(size, m_Positions);
+        //	source->Read(size, &m_Sizes[0]);
 
 	source->Read(m_SizeAdjust);
 	source->Read(m_NumActive);

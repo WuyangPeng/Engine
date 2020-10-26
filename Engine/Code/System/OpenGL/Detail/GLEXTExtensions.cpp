@@ -96,7 +96,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlExtPolygonOffset() noexcept
 
 namespace System
 {
-    typedef void(OPENGL_STDCALL* PgglPolygonOffsetEXT)(GLfloat, GLfloat);
+    using PgglPolygonOffsetEXT = void(OPENGL_STDCALL*)(GLfloat, GLfloat);
 }
 
 namespace System

@@ -1,35 +1,35 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 10:45)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 15:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "Fibonacci.h"
-
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
-uint32_t CoreTools
-	::RecursiveFibonacci(uint32_t integer) noexcept
+uint32_t CoreTools::RecursiveFibonacci(uint32_t integer) noexcept
 {
-	if (integer <= 1)
-		return integer;
+    if (integer <= 1)
+        return integer;
 
-	return RecursiveFibonacci(integer - 1) + RecursiveFibonacci(integer - 2);
+    return RecursiveFibonacci(integer - 1) + RecursiveFibonacci(integer - 2);
 }
 
-uint32_t CoreTools
-	::NonRecursiveFibonacci(uint32_t integer)  
+uint32_t CoreTools::NonRecursiveFibonacci(uint32_t integer)
 {
-	auto previous = -1;
-	auto result = 1;
-	for (auto i = 0u; i <= integer; ++i)
-	{
-		const auto sum = result + previous;
-		previous = result;
-		result = sum;
-	}
+    auto previous = -1;
+    auto result = 1;
+    for (auto i = 0u; i <= integer; ++i)
+    {
+        const auto sum = result + previous;
+        previous = result;
+        result = sum;
+    }
 
-	return boost::numeric_cast<uint32_t>(result);
+    return boost::numeric_cast<uint32_t>(result);
 }

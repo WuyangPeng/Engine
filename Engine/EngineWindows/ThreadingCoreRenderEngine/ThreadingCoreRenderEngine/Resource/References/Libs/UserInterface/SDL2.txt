@@ -1,0 +1,10 @@
+SDL2
+ 
+官方网站 
+http://www.libsdl.org/
+
+☆
+
+知识点 
+1.	SDL2。
+

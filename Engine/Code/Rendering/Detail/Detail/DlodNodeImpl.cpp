@@ -61,10 +61,10 @@ void Rendering::DlodNodeImpl ::Load(const CoreTools::BufferSourceSharedPtr& sour
 	source->ReadAggregate(m_ModelLodCenter);
 	source->ReadAggregate(m_WorldLodCenter);
 	source->Read(m_NumLevelsOfDetail);
-	source->Read(m_ModelMinDistance);
-	source->Read(m_ModelMaxDistance);
-	source->Read(m_WorldMinDistance);
-	source->Read(m_WorldMaxDistance);
+//	source->Read(m_ModelMinDistance);
+//	source->Read(m_ModelMaxDistance);
+//	source->Read(m_WorldMinDistance);
+//	source->Read(m_WorldMaxDistance);
 }
 
 void Rendering::DlodNodeImpl

@@ -1,47 +1,55 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 17:26)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 15:59)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
-#define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H 
+#define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
 namespace CoreTools
 {
-	template<typename Derived, typename State = uint32_t>
-	class StateMachine
-	{
-	public:
-		using StateType = State;
-		using ClassType = StateMachine<Derived, StateType>;
+    template <typename Derived, typename State = int>
+    class StateMachine
+    {
+    public:
+        using StateType = State;
+        using ClassType = StateMachine<Derived, StateType>;
 
-	public:
-		StateMachine();
-		virtual ~StateMachine() = 0;
+    public:
+        StateMachine();
+        virtual ~StateMachine() noexcept = 0;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        StateMachine(const StateMachine& rhs) noexcept = default;
+        StateMachine& operator=(const StateMachine& rhs) noexcept = default;
+        StateMachine(StateMachine&& rhs) noexcept = default;
+        StateMachine& operator=(StateMachine&& rhs) noexcept = default;
 
-	public:
-		template <typename EventType>
-		StateType CallNoTransition(StateType state, const EventType& eventType);
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		template<typename EventType>
-		StateType ProcessEvent(const EventType& eventType);
+    public:
+        template <typename EventType>
+        [[nodiscard]] StateType CallNoTransition(StateType state, const EventType& eventType);
 
-		template <typename EventType>
-		StateType NoTransition(StateType state, const EventType& eventType);
+        template <typename EventType>
+        [[nodiscard]] StateType ProcessEvent(const EventType& eventType);
 
-		StateType GetStateType() const;
+        template <typename EventType>
+        [[nodiscard]] StateType NoTransition(StateType state, const EventType& eventType);
 
-	protected:
-		void SetStateType(StateType stateType);
+        [[nodiscard]] StateType GetStateType() const;
 
-	private:
-		StateType m_State;
-	};
+    protected:
+        void SetStateType(StateType stateType);
+
+    private:
+        StateType m_State;
+    };
 }
 
 // 使用StateMachiner的方式：
@@ -67,19 +75,19 @@ namespace CoreTools
 //                 Derived  States  Start            Event      Next             Action
 // StateMachineRow <Player, States, States::Stopped, Play,      States::Playing, &Player::StartPlayback>,
 // StateMachineRow <Player, States, States::Stopped, OpenClose, States::Open,    &Player::OpenDrawer>,
-// StateMachineRow <Player, States, States::Open,    OpenClose, States::Empty,   &Player::CloseDrawer>,	 
+// StateMachineRow <Player, States, States::Open,    OpenClose, States::Empty,   &Player::CloseDrawer>,
 // StateMachineRow <Player, States, States::Empty,   OpenClose, States::Open,    &Player::OpenDrawer>,
-// StateMachineRow <Player, States, States::Empty,   CdDetected,States::Stopped, &Player::StoreCdInfo>,	 
+// StateMachineRow <Player, States, States::Empty,   CdDetected,States::Stopped, &Player::StoreCdInfo>,
 // StateMachineRow <Player, States, States::Playing, Stop,      States::Stopped, &Player::StopPlayback>,
 // StateMachineRow <Player, States, States::Playing, Pause,     States::Paused,  &Player::PausePlayback>,
-// StateMachineRow <Player, States, States::Playing, OpenClose, States::Open,    &Player::StopAndOpen>,	 
+// StateMachineRow <Player, States, States::Playing, OpenClose, States::Open,    &Player::StopAndOpen>,
 // StateMachineRow <Player, States, States::Paused,  Play,      States::Playing, &Player::ResumePlayback>,
 // StateMachineRow <Player, States, States::Paused,  Stop,      States::Stopped, &Player::StopPlayback>,
 // StateMachineRow <Player, States, States::Paused,  OpenClose, States::Open,    &Player::StopAndOpen>
 // > {};
 
 // 使用：
-// Player player;                
+// Player player;
 // player.ProcessEvent(OpenClose());
 // player.ProcessEvent(OpenClose());
 // player.ProcessEvent(CdDetected("louie, louie", std::vector<std::clock_t>()));
@@ -88,5 +96,4 @@ namespace CoreTools
 // player.ProcessEvent(Play());
 // player.ProcessEvent(Stop());
 
-#endif //  CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
-
+#endif  //  CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/06 20:23)
+//	引擎版本：0.5.2.0 (2020/10/22 19:28)
 
 #ifndef CORE_TOOLS_TIME_TEAR_H
 #define CORE_TOOLS_TIME_TEAR_H
@@ -20,15 +20,11 @@ namespace CoreTools
         using ClassType = Year;
 
     public:
-        explicit Year(int year) noexcept
-            : m_Year{ year }
-        {
-        }
+        explicit Year(int year) noexcept;
 
-        int GetYear() const noexcept
-        {
-            return m_Year;
-        }
+        CLASS_INVARIANT_DECLARE;
+
+        int GetYear() const noexcept;
 
     private:
         int m_Year;

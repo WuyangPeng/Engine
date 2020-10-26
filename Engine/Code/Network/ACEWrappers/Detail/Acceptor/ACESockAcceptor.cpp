@@ -1,189 +1,181 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.2.4 (2020/03/11 13:44)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #ifdef NETWORK_USE_ACE
 
-#include "ACESockAcceptor.h"
-#include "System/Helper/EnumCast.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/MessageEvent/EventInterface.h"
-#include "CoreTools/MessageEvent/CallbackParameters.h"
-#include "Network/Interface/SockStream.h"
-#include "Network/Interface/SockAddress.h"
-#include "Network/ACEWrappers/Using/ACEUsing.h"
-#include "Network/ACEWrappers/Detail/Address/ACESockInetAddress.h"
-#include "Network/NetworkMessage/Flags/MessageEventFlags.h"
-#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
+    #include "ACESockAcceptor.h"
+    #include "System/Helper/EnumCast.h"
+    #include "System/Helper/PragmaWarning.h"
+    #include "System/Helper/PragmaWarning/NumericCast.h"
+    #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+    #include "CoreTools/Helper/ExceptionMacro.h"
+    #include "CoreTools/MessageEvent/CallbackParameters.h"
+    #include "CoreTools/MessageEvent/EventInterface.h"
+    #include "Network/ACEWrappers/Detail/Address/ACESockInetAddress.h"
+    #include "Network/ACEWrappers/Using/ACEUsing.h"
+    #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+    #include "Network/Interface/SockAddress.h"
+    #include "Network/Interface/SockStream.h"
+    #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26415)
+    #include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 
-Network::ACESockAcceptor
-	::ACESockAcceptor(int port)
-	:ParentType{}, m_ACESockAcceptor{}
+Network::ACESockAcceptor ::ACESockAcceptor(int port)
+    : ParentType{}, m_ACESockAcceptor{}
 {
-	ACEInetAddress inetAddress;
+    ACEInetAddress inetAddress;
 
-	if (inetAddress.set(boost::numeric_cast<uint16_t>(port)) != 0 || m_ACESockAcceptor.open(inetAddress) != 0)
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("…Ë÷√µÿ÷∑ ß∞‹£°"s));
-	}
+    if (inetAddress.set(boost::numeric_cast<uint16_t>(port)) != 0 || m_ACESockAcceptor.open(inetAddress) != 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("…Ë÷√µÿ÷∑ ß∞‹£°"s));
+    }
 
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockAcceptor
-	::ACESockAcceptor(const string& hostName, int port)
-	:ParentType{}, m_ACESockAcceptor{}
+Network::ACESockAcceptor ::ACESockAcceptor(const string& hostName, int port)
+    : ParentType{}, m_ACESockAcceptor{}
 {
-	ACEInetAddress inetAddress;
+    ACEInetAddress inetAddress;
 
-	if (inetAddress.set(boost::numeric_cast<uint16_t>(port), hostName.c_str()) != 0 || m_ACESockAcceptor.open(inetAddress) != 0)
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("…Ë÷√µÿ÷∑ ß∞‹£°"s));
-	}
+    if (inetAddress.set(boost::numeric_cast<uint16_t>(port), hostName.c_str()) != 0 || m_ACESockAcceptor.open(inetAddress) != 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("…Ë÷√µÿ÷∑ ß∞‹£°"s));
+    }
 
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockAcceptor
-	::~ACESockAcceptor()
+Network::ACESockAcceptor ::~ACESockAcceptor()
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26447)
 
-	EXCEPTION_TRY
-	{
-		m_ACESockAcceptor.close();
-	}
-	EXCEPTION_ALL_CATCH(Network)
+    EXCEPTION_TRY
+    {
+        m_ACESockAcceptor.close();
+    }
+    EXCEPTION_ALL_CATCH(Network)
 
-#include STSTEM_WARNING_POP	
+    #include STSTEM_WARNING_POP
 
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ACESockAcceptor)
 
-bool Network::ACESockAcceptor
-	::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+bool Network::ACESockAcceptor ::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	if (m_ACESockAcceptor.accept(sockStream->GetACESockStream(), &sockAddress->GetACEInetAddress()) == 0)
-		return true;
-	else
-		return false;
+    if (m_ACESockAcceptor.accept(sockStream->GetACESockStream(), &sockAddress->GetACEInetAddress()) == 0)
+        return true;
+    else
+        return false;
 }
 
-bool Network::ACESockAcceptor
-	::Accept(const SockStreamSharedPtr& sockStream)
+bool Network::ACESockAcceptor ::Accept(const SockStreamSharedPtr& sockStream)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	if (m_ACESockAcceptor.accept(sockStream->GetACESockStream()) == 0)
-		return true;
-	else
-		return false;
+    if (m_ACESockAcceptor.accept(sockStream->GetACESockStream()) == 0)
+        return true;
+    else
+        return false;
 }
 
-Network::ACEHandle Network::ACESockAcceptor
-	::GetACEHandle()
+Network::ACEHandle Network::ACESockAcceptor ::GetACEHandle()
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	return m_ACESockAcceptor.get_handle();
+    return m_ACESockAcceptor.get_handle();
 }
 
-bool Network::ACESockAcceptor
-	::EnableNonBlock()
+bool Network::ACESockAcceptor ::EnableNonBlock()
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	if (m_ACESockAcceptor.enable(g_NonBlock) == 0)
-		return true;
-	else
-		return false;
+    if (m_ACESockAcceptor.enable(g_NonBlock) == 0)
+        return true;
+    else
+        return false;
 }
 
-void Network::ACESockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
+void Network::ACESockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	const auto result = m_ACESockAcceptor.accept(sockStream->GetACESockStream());
+    const auto result = m_ACESockAcceptor.accept(sockStream->GetACESockStream());
 
-	if (result == 0)
-	{
-		CoreTools::CallbackParameters callbackParameters{};
-		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
-		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
+    if (result == 0)
+    {
+        CoreTools::CallbackParameters callbackParameters{};
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
 
-		eventInterface->EventFunction(callbackParameters);
-	}
+        if (!eventInterface->EventFunction(callbackParameters))
+        {
+        }
+    }
 }
 
-void Network::ACESockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::ACESockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	const auto result = m_ACESockAcceptor.accept(sockStream->GetACESockStream(), &sockAddress->GetACEInetAddress());
+    const auto result = m_ACESockAcceptor.accept(sockStream->GetACESockStream(), &sockAddress->GetACEInetAddress());
 
-	if (result == 0)
-	{
-		CoreTools::CallbackParameters callbackParameters{};
-		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
-		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-		callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
+    if (result == 0)
+    {
+        CoreTools::CallbackParameters callbackParameters{};
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
 
-		eventInterface->EventFunction(callbackParameters);
-	}
+         if (!eventInterface->EventFunction(callbackParameters))
+        {
+        }
+    }
 }
 
-const std::string Network::ACESockAcceptor
-	::GetAddress() const
+const std::string Network::ACESockAcceptor ::GetAddress() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	ACESockInetAddress address;
+    ACESockInetAddress address;
 
-	if (m_ACESockAcceptor.get_local_addr(address.GetACEInetAddress()) == 0)
-	{
-		return address.GetAddress();
-	}
-	else
-	{
-		return "";
-	}
+    if (m_ACESockAcceptor.get_local_addr(address.GetACEInetAddress()) == 0)
+    {
+        return address.GetAddress();
+    }
+    else
+    {
+        return "";
+    }
 }
 
-int Network::ACESockAcceptor
-	::GetPort() const
+int Network::ACESockAcceptor ::GetPort() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	ACESockInetAddress address;
+    ACESockInetAddress address;
 
-	if (m_ACESockAcceptor.get_local_addr(address.GetACEInetAddress()) == 0)
-	{
-		return address.GetPort();
-	}
-	else
-	{
-		return 0;
-	}
+    if (m_ACESockAcceptor.get_local_addr(address.GetACEInetAddress()) == 0)
+    {
+        return address.GetPort();
+    }
+    else
+    {
+        return 0;
+    }
 }
-#include STSTEM_WARNING_POP
-#endif // NETWORK_USE_ACE
+    #include STSTEM_WARNING_POP
+#endif  // NETWORK_USE_ACE

@@ -31,7 +31,7 @@ namespace Rendering
 
 		  void Update(const Visual* visual, const Camera* camera) override;
 
-		  ShaderFloatSharedPtr Clone() const override;
+		  ShaderFloatSharedPtr Clone() const override; 
 	};
 
 #include STSTEM_WARNING_PUSH

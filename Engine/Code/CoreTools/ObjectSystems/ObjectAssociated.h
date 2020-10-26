@@ -5,19 +5,18 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/12 22:53)
+//	引擎版本：0.5.2.0 (2020/10/22 9:57)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_ASSOCIATED_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_ASSOCIATED_H
 
 #include "ObjectInterface.h"
 #include "ObjectType.h"
-#include "System/Helper/PragmaWarning/MultiIndex.h"
 
 namespace CoreTools
 {
     template <typename T>
-    struct ObjectAssociated
+    struct ObjectAssociated final
     {
         static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
 

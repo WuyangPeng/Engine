@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:48)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 13:50)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_16_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_16_H
@@ -11,24 +14,24 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE CyclicRedundancyCheck16
-	{
-	public:
-		using ClassType = CyclicRedundancyCheck16;
+    class CORE_TOOLS_DEFAULT_DECLARE CyclicRedundancyCheck16 final
+    {
+    public:
+        using ClassType = CyclicRedundancyCheck16;
 
-	public:
-		CyclicRedundancyCheck16(const char* data, int length);
+    public:
+        CyclicRedundancyCheck16(const char* data, int length);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		uint16_t GetCyclicRedundancyCheck16() const noexcept;
+        [[nodiscard]] uint16_t GetCyclicRedundancyCheck16() const noexcept;
 
-	private:
-		void Calculation(const char* data, int length);
+    private:
+        void Calculation(const char* data, int length);
 
-	private:
-		uint16_t m_CyclicRedundancyCheck;
-	};
+    private:
+        uint16_t m_CyclicRedundancyCheck;
+    };
 }
 
-#endif // CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_16_H
+#endif  // CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_16_H

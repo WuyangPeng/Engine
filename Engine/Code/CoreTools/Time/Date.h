@@ -5,33 +5,32 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/06 20:23)
+//	引擎版本：0.5.2.0 (2020/10/22 18:44)
 
 #ifndef CORE_TOOLS_TIME_DATE_H
 #define CORE_TOOLS_TIME_DATE_H
 
+#include "CoreTools/CoreToolsDll.h"
+
 #include "Day.h"
 #include "Month.h"
 #include "Year.h"
-#include "CoreTools/CoreToolsDll.h"
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Date
+    class CORE_TOOLS_DEFAULT_DECLARE Date final
     {
     public:
         using ClassType = Date;
 
     public:
-        Date(const Year& year, const Month& month, const Day& day) noexcept
-            : m_Year{ year }, m_Month{ month }, m_Day{ day }
-        {
-        }
+        Date(const Year& year, const Month& month, const Day& day) noexcept;
 
-        Year GetYear() const noexcept
-        {
-            return m_Year;
-        }
+        CLASS_INVARIANT_DECLARE;
+
+        [[nodiscard]] Year GetYear() const noexcept;
+        [[nodiscard]] Month GetMonth() const noexcept;
+        [[nodiscard]] Day GetDay() const noexcept;
 
     private:
         Year m_Year;

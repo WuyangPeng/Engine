@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:20)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 13:13)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_H
@@ -13,28 +16,28 @@
 
 namespace CoreTools
 {
-	template<typename T, typename ConstReference, ConstReference(T::*PF)() const>
-	class PropertyGetExternal
-	{
-	public:
-		static_assert(std::is_const_v<std::remove_reference_t<ConstReference>>, "ConstReference is not const.");
-		static_assert(std::is_reference_v<ConstReference>, "ConstReference is not reference.");
+    template <typename T, typename ConstReference, ConstReference (T::*PF)() const>
+    class PropertyGetExternal final
+    {
+    public:
+        static_assert(std::is_const_v<std::remove_reference_t<ConstReference>>, "ConstReference is not const.");
+        static_assert(std::is_reference_v<ConstReference>, "ConstReference is not reference.");
 
-		using ConstReferenceType = ConstReference;
-		using ClassType = PropertyGetExternal<T, ConstReferenceType, PF>;
+        using ConstReferenceType = ConstReference;
+        using ClassType = PropertyGetExternal<T, ConstReferenceType, PF>;
 
-	public:
-		explicit PropertyGetExternal(const T& object);
+    public:
+        explicit PropertyGetExternal(const T& object);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		operator ConstReferenceType () const;
+        [[nodiscard]] operator ConstReferenceType() const;
 
-		PropertyGetExternal& operator=(const PropertyGetExternal& rhs) = delete;
+        PropertyGetExternal& operator=(const PropertyGetExternal& rhs) = delete;
 
-	private:
-		const T& m_Object;
-	};
+    private:
+        const T& m_Object;
+    };
 }
 
-#endif // CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_H
+#endif  // CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_H

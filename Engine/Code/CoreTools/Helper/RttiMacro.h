@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/07 18:58)
+//	引擎版本：0.5.2.0 (2020/10/22 16:25)
 
 #ifndef CORE_TOOLS_HELPER_RTTI_MACRO_H
 #define CORE_TOOLS_HELPER_RTTI_MACRO_H
@@ -15,25 +15,32 @@
 #define CORE_TOOLS_RTTI_DECLARE                                                \
 public:                                                                        \
     [[nodiscard]] virtual const CoreTools::Rtti& GetRttiType() const noexcept; \
-    static const CoreTools::Rtti sm_Type;
+    [[nodiscard]] static const CoreTools::Rtti& GetCurrentRttiType() noexcept;
 
 #define CORE_TOOLS_RTTI_OVERRIDE_DECLARE                                        \
 public:                                                                         \
     [[nodiscard]] const CoreTools::Rtti& GetRttiType() const noexcept override; \
-    static const CoreTools::Rtti sm_Type;
+    [[nodiscard]] static const CoreTools::Rtti& GetCurrentRttiType() noexcept;
 
-#define CORE_TOOLS_RTTI_DEFINE(namespaceName, className)                          \
-    const CoreTools::Rtti& namespaceName::className::GetRttiType() const noexcept \
-    {                                                                             \
-        return sm_Type;                                                           \
-    }                                                                             \
-    const CoreTools::Rtti namespaceName::className::sm_Type{ SYSTEM_STRINGIZE(namespaceName) "." SYSTEM_STRINGIZE(className), &ParentType::sm_Type };
+#define CORE_TOOLS_RTTI_DEFINE(namespaceName, className)                                                                                         \
+    const CoreTools::Rtti& namespaceName::className::GetRttiType() const noexcept                                                                \
+    {                                                                                                                                            \
+        return GetCurrentRttiType();                                                                                                             \
+    }                                                                                                                                            \
+    const CoreTools::Rtti& namespaceName::className::GetCurrentRttiType() noexcept                                                               \
+    {                                                                                                                                            \
+        static const CoreTools::Rtti rtti{ SYSTEM_STRINGIZE(namespaceName) "." SYSTEM_STRINGIZE(className), &ParentType::GetCurrentRttiType() }; \
+        return rtti;                                                                                                                             \
+    }
 
-#define CORE_TOOLS_RTTI_BASE_DEFINE(namespaceName, className)                     \
-    const CoreTools::Rtti& namespaceName::className::GetRttiType() const noexcept \
-    {                                                                             \
-        return sm_Type;                                                           \
-    }                                                                             \
-    const CoreTools::Rtti namespaceName::className::sm_Type{ SYSTEM_STRINGIZE(namespaceName) "." SYSTEM_STRINGIZE(className), nullptr };
-
+#define CORE_TOOLS_RTTI_BASE_DEFINE(namespaceName, className)                                                          \
+    const CoreTools::Rtti& namespaceName::className::GetRttiType() const noexcept                                      \
+    {                                                                                                                  \
+        return GetCurrentRttiType();                                                                                   \
+    }                                                                                                                  \
+    const CoreTools::Rtti& namespaceName::className::GetCurrentRttiType() noexcept                                     \
+    {                                                                                                                  \
+        static const CoreTools::Rtti rtti{ SYSTEM_STRINGIZE(namespaceName) "." SYSTEM_STRINGIZE(className), nullptr }; \
+        return rtti;                                                                                                   \
+    }
 #endif  // CORE_TOOLS_HELPER_RTTI_MACRO_H

@@ -59,8 +59,9 @@ void Rendering::TextureUserField
     ::Load( const CoreTools::BufferSourceSharedPtr& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
-    
-	source->Read(TextureMaxUserFields, m_UserField);   
+    CoreTools::DisableNoexcept();
+    source;
+    //	source->Read(TextureMaxUserFields, m_UserField);   
 }
 
 void Rendering::TextureUserField

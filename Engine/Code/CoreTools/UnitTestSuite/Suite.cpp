@@ -1,44 +1,44 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 10:21)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 14:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "Suite.h"
 #include "UnitTest.h"
 #include "Detail/SuiteImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::string;
-using std::ostream;
 using std::make_shared;
+using std::ostream;
+using std::string;
 
-CoreTools::Suite
-	::Suite(const string& name, const OStreamShared& osPtr, bool printRunUnitTest)
-	:m_Impl{ make_shared<SuiteImpl>(name,osPtr,printRunUnitTest) }
+CoreTools::Suite::Suite(const string& name, const OStreamShared& streamShared, bool printRunUnitTest)
+    : m_Impl{ make_shared<SuiteImpl>(name, streamShared, printRunUnitTest) }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::Suite
-	::Suite(Suite&& rhs) noexcept
-	:m_Impl{ std::move(rhs.m_Impl) }
+CoreTools::Suite::Suite(Suite&& rhs) noexcept
+    : m_Impl{ std::move(rhs.m_Impl) }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::Suite& CoreTools::Suite
-	::operator=(Suite&& rhs) noexcept
+CoreTools::Suite& CoreTools::Suite::operator=(Suite&& rhs) noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	m_Impl = std::move(rhs.m_Impl);
+    m_Impl = std::move(rhs.m_Impl);
 
-	return *this;
+    return *this;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Suite)
@@ -53,21 +53,18 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, PrintReport, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, ClearUnitTestCollection, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, RunUnitTest, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, ResetTestData, void)
- 
 
-void CoreTools::Suite
-	::AddTest(const UnitTestPtr& unitTest)
+void CoreTools::Suite::AddTest(const UnitTestPtr& unitTest)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
-	CORE_TOOLS_ASSERTION_0(unitTest != nullptr, "指针无效");
+    CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_ASSERTION_0(unitTest != nullptr, "指针无效");
 
-	return m_Impl->AddUnitTest(unitTest);
+    return m_Impl->AddUnitTest(unitTest);
 }
 
-void CoreTools::Suite
-	::AddSuite(const Suite& suite)
+void CoreTools::Suite::AddSuite(const Suite& suite)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	return m_Impl->AddUnitTest(suite.m_Impl);
+    return m_Impl->AddUnitTest(suite.m_Impl);
 }

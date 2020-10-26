@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/15 13:13)
+//	引擎版本：0.5.2.0 (2020/10/22 11:33)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_H
@@ -25,13 +25,13 @@ template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE ObjectRegister : public std::enable_shared_from_this<ObjectRegister>
+    class CORE_TOOLS_DEFAULT_DECLARE ObjectRegister final : public std::enable_shared_from_this<ObjectRegister>
     {
     public:
         DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectRegister);
 
     public:
-        ObjectRegister();
+        explicit ObjectRegister(DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -56,8 +56,7 @@ namespace CoreTools
         IMPL_TYPE_DECLARE(ObjectRegister);
     };
 
-    using ObjectRegisterSharedPtr = std::shared_ptr<ObjectRegister>;
-    using ConstObjectRegisterSharedPtr = std::shared_ptr<const ObjectRegister>;
+    CORE_TOOLS_SHARED_PTR_DECLARE(ObjectRegister);
 }
 
 #endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_H

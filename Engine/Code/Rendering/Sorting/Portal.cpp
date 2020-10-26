@@ -451,7 +451,7 @@ void Rendering::Portal
 
     Object::Load(source);
 
-	source->ReadAggregate(mNumVertices, mModelVertices);
+	//source->ReadAggregate(mNumVertices, mModelVertices);
     source->ReadAggregate(mModelPlane);
 	Open = source->ReadBool();
 //    source.ReadSharedPtr(AdjacentRegion);

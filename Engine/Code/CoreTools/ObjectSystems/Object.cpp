@@ -1,241 +1,219 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:53)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/22 15:15)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "Object.h"
-#include "InitTerm.h"
 #include "BufferInStream.h"
-#include "ObjectManager.h"
-#include "ObjectRegister.h"
 #include "BufferSource.h"
 #include "BufferTargetDetail.h"
-
-#include "CoreTools/Helper/StreamMacro.h"
+#include "InitTerm.h"
+#include "Object.h"
+#include "ObjectManager.h"
+#include "ObjectRegister.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/UniqueIDManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
- 
 
 using std::string;
-using std::vector;
 using std::swap;
+using std::vector;
 
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include "../Helper/ExceptionMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 CORE_TOOLS_RTTI_DEFINE(CoreTools, Object);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, Object);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(CoreTools, Object);
 
-CoreTools::Object
-	::Object(const string& name)
-	:ParentType{},
-	m_Name{ name }
+CoreTools::Object::Object(const string& name)
+    : ParentType{}, m_Name{ name }
 {
-	SetUniqueID(OBJECT_MANAGER_SINGLETON.NextUniqueID());
+    SetUniqueID(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Object));
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::Object
-	::Object(LoadConstructor value)
-	:ParentType{ value },
-	m_Name{""}
+CoreTools::Object::Object(LoadConstructor value)
+    : ParentType{ value }, m_Name{ "" }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
- 
+CoreTools::Object::~Object()
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, Object);
 
 // 名字
-  string  CoreTools::Object
-	::GetName() const  
+string CoreTools::Object::GetName() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_Name.GetName();
+    return m_Name.GetName();
 }
 
-void CoreTools::Object
-	::SetName(const string& name)
+void CoreTools::Object::SetName(const string& name)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	m_Name.SetName(name);
+    m_Name.SetName(name);
 }
 
 // private
-void CoreTools::Object
-	::Swap(Object& rhs) noexcept
+void CoreTools::Object::Swap(Object& rhs) noexcept
 {
     m_Name.SwapObjectName(rhs.m_Name);
 }
 
-int CoreTools::Object
-	::GetStreamingSize() const
+int CoreTools::Object::GetStreamingSize() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	// RTTI名
-	int size = CORE_TOOLS_STREAM_SIZE(GetRttiType().GetName());
+    // RTTI名
+    int size = CORE_TOOLS_STREAM_SIZE(GetRttiType().GetName());
 
-	// UniqueID
-	size += CORE_TOOLS_STREAM_SIZE(this);
+    // UniqueID
+    size += CORE_TOOLS_STREAM_SIZE(this);
 
-	// 对象名
-	size += CORE_TOOLS_STREAM_SIZE(m_Name.GetName());
+    // 对象名
+    size += CORE_TOOLS_STREAM_SIZE(m_Name.GetName());
 
-	return size;
+    return size;
 }
 
-uint64_t CoreTools::Object ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t CoreTools::Object::Register(const ObjectRegisterSharedPtr& target) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
-	{
-		return target->RegisterRoot(ConstObjectInterfaceSharedPtr{ this });
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要注册的指针不是由SmartPointer系统创建。"s));
-	}
+    auto modify = target;
+
+    return modify->RegisterRoot(shared_from_this());
 }
 
-void CoreTools::Object
-	::Save(const BufferTargetSharedPtr& target) const
+void CoreTools::Object::Save(const BufferTargetSharedPtr& target) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+    auto modify = target;
 
-	// 写入RTTI名用于加载期间查找工厂函数。
-	target->Write(GetRttiType().GetName());
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(modify);
 
-	// 写入对象的唯一标识符。这是加载和链接时使用。
-	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
-	{
-		ConstObjectInterfaceSharedPtr smartPointer{ this };
+    // 写入RTTI名用于加载期间查找工厂函数。
+    modify->Write(GetRttiType().GetName());
 
-		target->WriteUniqueID(smartPointer);
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要写入的指针不是由SmartPointer系统创建。"s));
-	}
+    // 写入对象的唯一标识符。这是加载和链接时使用。
+    modify->WriteUniqueID(shared_from_this());
 
-	// 写入对象的名字。
-	target->Write(m_Name.GetName());
+    // 写入对象的名字。
+    modify->Write(m_Name.GetName());
 
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(modify);
 }
 
-void CoreTools::Object ::Link([[maybe_unused]]const ObjectLinkSharedPtr& source)
+void CoreTools::Object::Link(const ObjectLinkSharedPtr& source)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	// Object没有Object*成员。
+    // Object没有Object*成员。
 
- 
-	CoreTools::DisableNoexcept();
+    [[maybe_unused]] auto modify = source;
+
+    CoreTools::DisableNoexcept();
 }
 
-void CoreTools::Object
-	::PostLink()
+void CoreTools::Object::PostLink()
 {
-	// Object 没有后链接语义。
+    // Object 没有后链接语义。
 
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	CoreTools::DisableNoexcept();
+    CoreTools::DisableNoexcept();
 }
 
-void CoreTools::Object ::Load(const BufferSourceSharedPtr& source)
+void CoreTools::Object::Load(const BufferSourceSharedPtr& source)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
+    auto modify = source;
 
-	// RTTI名已经在流中读取，以查找正确的对象加载函数。
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(modify);
 
-	// 读取的对象的唯一标识符。这提供信息在链接阶段。 
-	if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
-	{
-		ObjectInterfaceSharedPtr smartPointer{ this };
+    // RTTI名已经在流中读取，以查找正确的对象加载函数。
 
-		source->ReadUniqueID(smartPointer);
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("要载入的指针不是由SmartPointer系统创建。"s));
-	}
+    // 读取的对象的唯一标识符。这提供信息在链接阶段。
+    modify->ReadUniqueID(shared_from_this());
 
-	// 读取对象名字。
-        auto name = source->ReadString();
+    // 读取对象名字。
+    auto name = modify->ReadString();
 
-	SetName(name);
+    SetName(name);
 
-	CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+    CORE_TOOLS_END_DEBUG_STREAM_LOAD(modify);
 }
 
-const CoreTools::ObjectSharedPtr CoreTools::Object
-	::GetObjectByName(const string& name)
+const CoreTools::ObjectSharedPtr CoreTools::Object::GetObjectByName(const string& name)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	if (name == m_Name.GetName() && SMART_POINTER_SINGLETON.IsSmartPointer(this))
-		return ObjectSharedPtr{ this };
-	else
-		return ObjectSharedPtr{};
+    if (name == m_Name.GetName())
+        return ObjectSharedFromThis();
+    else
+        return ObjectSharedPtr{};
 }
 
-const vector<CoreTools::ObjectSharedPtr> CoreTools::Object
-	::GetAllObjectsByName(const string& name)
+const vector<CoreTools::ObjectSharedPtr> CoreTools::Object::GetAllObjectsByName(const string& name)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	vector<ObjectSharedPtr> objects{};
+    vector<ObjectSharedPtr> objects{};
 
-	if (name == m_Name.GetName() && SMART_POINTER_SINGLETON.IsSmartPointer(this))
-	{
-		objects.emplace_back(this);
-	}
+    if (name == m_Name.GetName())
+    {
+        objects.emplace_back(ObjectSharedFromThis());
+    }
 
-	return objects;
+    return objects;
 }
 
-const CoreTools::ConstObjectSharedPtr CoreTools::Object
-	::GetConstObjectByName(const string& name) const
+const CoreTools::ConstObjectSharedPtr CoreTools::Object::GetConstObjectByName(const string& name) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	if (name == m_Name.GetName() && SMART_POINTER_SINGLETON.IsSmartPointer(this))
-		return ConstObjectSharedPtr{ this };
-	else
-		return ConstObjectSharedPtr{};
+    if (name == m_Name.GetName())
+        return ObjectSharedFromThis();
+    else
+        return ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSharedPtr> CoreTools::Object
-	::GetAllConstObjectsByName(const string& name) const
+const vector<CoreTools::ConstObjectSharedPtr> CoreTools::Object::GetAllConstObjectsByName(const string& name) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	vector<ConstObjectSharedPtr> objects;
+    vector<ConstObjectSharedPtr> objects{};
 
-	if (name == m_Name.GetName() && SMART_POINTER_SINGLETON.IsSmartPointer(this))
-	{
-		objects.emplace_back(this);
-	}
+    if (name == m_Name.GetName())
+    {
+        objects.emplace_back(ObjectSharedFromThis());
+    }
 
-	return objects;
+    return objects;
 }
-#include STSTEM_WARNING_POP
+
+CoreTools::Object::ObjectSharedPtr CoreTools::Object::ObjectSharedFromThis()
+{
+    return std::const_pointer_cast<Object>(static_cast<const ClassType&>(*this).ObjectSharedFromThis());
+}
+
+CoreTools::Object::ConstObjectSharedPtr CoreTools::Object::ObjectSharedFromThis() const
+{
+    return boost::polymorphic_pointer_cast<const Object>(shared_from_this());
+}

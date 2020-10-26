@@ -171,7 +171,7 @@ void Rendering::SkinController
 	::SetObject(ControllerInterface* object)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::sm_Type), "无效类\n");
+    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
 	
 	ParentType::SetObject(object);
 }

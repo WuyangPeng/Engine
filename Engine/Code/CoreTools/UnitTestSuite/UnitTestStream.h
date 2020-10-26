@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 10:16)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 13:27)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H
@@ -11,35 +14,36 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
+#include "OStreamShared.h"
+
 #include <boost/noncopyable.hpp>
 #include <iosfwd>
-#include "OStreamShared.h"
 
 EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE UnitTestStream  
-	{
-	public:
-		using ClassType = UnitTestStream;
+    class CORE_TOOLS_DEFAULT_DECLARE UnitTestStream
+    {
+    public:
+        using ClassType = UnitTestStream;
 
-	public:
-		explicit UnitTestStream(const OStreamShared& osPtr) noexcept;
-		virtual ~UnitTestStream() = default;
+    public:
+        explicit UnitTestStream(const OStreamShared& streamShared) noexcept;
+        virtual ~UnitTestStream() = default;
 
-		UnitTestStream(const UnitTestStream&) = default;
-		UnitTestStream& operator=(const UnitTestStream&) = default;
-		UnitTestStream(UnitTestStream&&) noexcept = default;
-		UnitTestStream& operator=(UnitTestStream&&) noexcept = default;
+        UnitTestStream(const UnitTestStream& rhs) = default;
+        UnitTestStream& operator=(const UnitTestStream& rhs) = default;
+        UnitTestStream(UnitTestStream&& rhs) noexcept = default;
+        UnitTestStream& operator=(UnitTestStream&& rhs) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		OStreamShared& GetStream() noexcept;
-		bool IsStreamSharedFile() const noexcept;
+        [[nodiscard]] OStreamShared& GetStream() noexcept;
+        [[nodiscard]] bool IsStreamSharedFile() const noexcept;
 
-	private:
-		OStreamShared m_OsPtr;
-	};
+    private:
+        OStreamShared m_StreamShared;
+    };
 }
-#endif // CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H
+#endif  // CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H

@@ -224,8 +224,8 @@ void Rendering::SkinControllerImpl
 	m_Offsets.resize(m_Size);
 	 
 //	source.ReadSharedPtr(m_NumBones, &m_Bones[0]);
-        source->Read(m_Size, &m_Weights[0]);
-        source->ReadAggregate(m_Size, &m_Offsets[0]);
+        m_Weights = source->ReadVectorWithNumber<float>(m_Size);
+        source->ReadAggregateContainer(m_Size, m_Offsets);
 }
 
 void Rendering::SkinControllerImpl

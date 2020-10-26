@@ -232,9 +232,9 @@ void Rendering::ParticleControllerImpl
 	m_ParticleLinearAxis.resize(m_NumParticles);
 	m_ParticleSizeChange.resize(m_NumParticles); 
 
-	source->Read(m_NumParticles, &m_ParticleLinearSpeed[0]);
-        source->ReadAggregate(m_NumParticles, &m_ParticleLinearAxis[0]);
-        source->Read(m_NumParticles, &m_ParticleSizeChange[0]);
+//	source->Read(m_NumParticles, &m_ParticleLinearSpeed[0]);
+        source->ReadAggregateContainer(m_NumParticles, m_ParticleLinearAxis);
+   //     source->Read(m_NumParticles, &m_ParticleSizeChange[0]);
 }
 
 

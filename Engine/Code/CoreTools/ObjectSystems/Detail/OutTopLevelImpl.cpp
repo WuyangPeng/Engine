@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/14 16:22)
+//	引擎版本：0.5.2.0 (2020/10/22 14:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::OutTopLevelImpl::OutTopLevelImpl() noexcept
-    : m_TopLevel{} 
+    : m_TopLevel{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -56,5 +56,5 @@ void CoreTools::OutTopLevelImpl::Insert(const ObjectInterfaceSharedPtr& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_TopLevel.emplace_back(object); 
+    m_TopLevel.emplace_back(object);
 }

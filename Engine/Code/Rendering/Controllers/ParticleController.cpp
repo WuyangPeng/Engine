@@ -132,7 +132,7 @@ void Rendering::ParticleController
 	::SetObject(ControllerInterface* object)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Particles::sm_Type), "无效类\n");
+    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Particles::GetCurrentRttiType()), "无效类\n");
 
 	ParentType::SetObject(object);
 
@@ -280,7 +280,7 @@ void Rendering::ParticleController
 
 	auto object = GetControllerObject();
 
-	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Particles::sm_Type), "无效类\n");
+	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Particles::GetCurrentRttiType()), "无效类\n");
 
 	m_Particles = dynamic_cast<Particles*>(object);
 }

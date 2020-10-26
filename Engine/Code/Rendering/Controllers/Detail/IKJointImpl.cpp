@@ -109,12 +109,12 @@ void Rendering::IKJointImpl
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source->ReadBool(sm_NumAxis, m_AllowTranslation);
-        source->Read(sm_NumAxis, m_MinTranslation);
-        source->Read(sm_NumAxis, m_MaxTranslation);
-        source->ReadBool(sm_NumAxis, m_AllowRotation);
-        source->Read(sm_NumAxis, m_MinRotation);
-        source->Read(sm_NumAxis, m_MaxRotation);
+//	source->ReadBool(sm_NumAxis, m_AllowTranslation);
+       // source->Read(sm_NumAxis, m_MinTranslation);
+       // source->Read(sm_NumAxis, m_MaxTranslation);
+     //   source->ReadBool(sm_NumAxis, m_AllowRotation);
+       // source->Read(sm_NumAxis, m_MinRotation);
+       // source->Read(sm_NumAxis, m_MaxRotation);
         //	source.ReadSharedPtr(m_Object);
 
 	int size{ 0 };

@@ -1,35 +1,32 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// ÒýÇæ°æ±¾£º0.0.2.1 (2020/01/21 15:54)
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.0 (2020/10/22 16:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BufferInStream.h"
 #include "InitTerm.h"
+#include "InitTermRegisterFactory.h"
 #include "ObjectInterface.h"
 #include "ObjectManager.h"
-
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include "InitTermRegisterFactory.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
 
-CoreTools::ObjectInterface ::ObjectInterface() noexcept
+CoreTools::ObjectInterface::ObjectInterface() noexcept
     : m_UniqueID{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::ObjectInterface ::ObjectInterface([[maybe_unused]] LoadConstructor value) noexcept
+CoreTools::ObjectInterface::ObjectInterface([[maybe_unused]] LoadConstructor value) noexcept
     : m_UniqueID{ 0 }
 {
- 
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -49,57 +46,55 @@ bool CoreTools::ObjectInterface::RegisterFactory()
 }
 
 // static
-void CoreTools::ObjectInterface ::InitializeFactory()
+void CoreTools::ObjectInterface::InitializeFactory()
 {
-    OBJECT_MANAGER_SINGLETON.Insert(sm_Type.GetName(), Factory);
+    OBJECT_MANAGER_SINGLETON.Insert(GetCurrentRttiType().GetName(), Factory);
 }
 
 // static
-void CoreTools::ObjectInterface ::TerminateFactory()
+void CoreTools::ObjectInterface::TerminateFactory()
 {
-    OBJECT_MANAGER_SINGLETON.Remove(sm_Type.GetName());
+    OBJECT_MANAGER_SINGLETON.Remove(GetCurrentRttiType().GetName());
 }
 
-uint64_t CoreTools::ObjectInterface ::GetUniqueID() const noexcept
+uint64_t CoreTools::ObjectInterface::GetUniqueID() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return m_UniqueID;
 }
 
-void CoreTools::ObjectInterface ::SetUniqueID(uint64_t uniqueID) noexcept
+void CoreTools::ObjectInterface::SetUniqueID(uint64_t uniqueID) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     m_UniqueID = uniqueID;
 }
 
-bool CoreTools::ObjectInterface ::IsExactly(const Rtti& type) const noexcept
+bool CoreTools::ObjectInterface::IsExactly(const Rtti& type) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetRttiType().IsExactly(type);
+    return GetCurrentRttiType().IsExactly(type);
 }
 
-bool CoreTools::ObjectInterface ::IsDerived(const Rtti& type) const noexcept
+bool CoreTools::ObjectInterface::IsDerived(const Rtti& type) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetRttiType().IsDerived(type);
+    return GetCurrentRttiType().IsDerived(type);
 }
 
-bool CoreTools::ObjectInterface ::IsExactlyTypeOf(const ObjectInterface* object) const noexcept
+bool CoreTools::ObjectInterface::IsExactlyTypeOf(const ObjectInterface* object) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return object != nullptr && GetRttiType().IsExactly(object->GetRttiType());
 }
 
-bool CoreTools::ObjectInterface ::IsDerivedTypeOf(const ObjectInterface* object) const noexcept
+bool CoreTools::ObjectInterface::IsDerivedTypeOf(const ObjectInterface* object) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return object != nullptr && GetRttiType().IsDerived(object->GetRttiType());
 }
-
-#include STSTEM_WARNING_POP

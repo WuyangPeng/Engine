@@ -1,0 +1,10 @@
+ogre-next
+ 
+官方网站 
+https://www.ogre3d.org/download/sdk/sdk-ogre-next
+
+★★★
+
+知识点 
+1.	ogre-next。
+

@@ -5,13 +5,13 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/14 18:52)
+//	引擎版本：0.5.2.0 (2020/10/22 14:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ObjectRegisterImpl.h"
 #include "TopLevel.h"
-#include "System/Helper/PragmaWarning/NumericCast.h" 
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 

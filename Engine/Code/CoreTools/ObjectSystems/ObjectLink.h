@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:39)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/22 10:15)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H
@@ -16,49 +19,41 @@ CORE_TOOLS_EXPORT_SHARED_PTR(ObjectLinkImpl);
 
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE ObjectLink
-	{
-	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectLink);
+    class CORE_TOOLS_DEFAULT_DECLARE ObjectLink final
+    {
+    public:
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectLink, = default);
+        using LinkSequentialContainer = std::vector<ObjectInterfaceSharedPtr>;
+        using LinkSequentialContainerIter = LinkSequentialContainer::iterator;
+        using LinkSequentialContainerConstIter = LinkSequentialContainer::const_iterator;
 
-	public:
-		ObjectLink();
+    public:
+        explicit ObjectLink(DisableNotThrow disableNotThrow);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		ObjectInterfaceSharedPtr GetObjectPtr(uint64_t uniqueID);
-		int GetOrderedSize() const;
-		ObjectInterfaceSharedPtr& operator [](int index);
+        [[nodiscard]] ObjectInterfaceSharedPtr GetObjectInterface(uint64_t uniqueID);
+        [[nodiscard]] int GetOrderedSize() const;
 
-		void Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& ptr);
+        void Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& object);
 
-		void Sort();
+        void Sort();
 
-		template <typename T>
-		void ResolveObjectLink(T*& object);
-		template <typename T>
-		void ResolveObjectLink(int elementsNumber, T** object);
+        [[nodiscard]] LinkSequentialContainerConstIter begin() const noexcept;
+        [[nodiscard]] LinkSequentialContainerConstIter end() const noexcept;
+        [[nodiscard]] LinkSequentialContainerIter begin() noexcept;
+        [[nodiscard]] LinkSequentialContainerIter end() noexcept;
 
-		template <typename T>
-		void ResolveLink(T*& object);
-		template <typename T>
-		void ResolveLink(int elementsNumber, T** object);
+        template <typename T>
+        void ResolveLink(T& object);
+        template <typename T>
+        void ResolveLinkContainer(T& object);
 
-		template <typename T>
-		void ResolveObjectSmartPointerLink(T& object);
-		template <typename T>
-		void ResolveObjectConstSmartPointerLink(T& object);
-		template <typename T>
-		void ResolveObjectSmartPointerLink(int elementsNumber, T* object);
-		template <typename T>
-		void ResolveObjectConstSmartPointerLink(int elementsNumber, T* object);
+    private:
+        IMPL_TYPE_DECLARE(ObjectLink);
+    };
 
-	private:
-		IMPL_TYPE_DECLARE(ObjectLink);
-	};
-
-	    using ObjectLinkSharedPtr = std::shared_ptr<ObjectLink>;
-        using ConstObjectLinkSharedPtr = std::shared_ptr<const ObjectLink>;
+    CORE_TOOLS_SHARED_PTR_DECLARE(ObjectLink);
 }
 
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H

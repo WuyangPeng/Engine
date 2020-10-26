@@ -3,8 +3,48 @@ loki
 官方网站 
 http://loki-lib.sourceforge.net/
 
+作者： 
+Andrei Alexandrescu、Richard Sposato、Peter Kuemmel
+
+最终版本：
+0.1.7
+
 ☆
 
 知识点 
 1.	设计模式库。
 
+代码
+1.	library
+2.	CachedFactory
+3.	Checker
+4.	CheckReturn
+5.	DefaultAlloc
+6.	DeletableSingleton
+7.	Factory
+8.	flex_string
+9.	Function
+10.	LevelMutex
+11.	LockingPtr
+12.	Longevity
+13.	MSVCUnitTest
+14.	OrderedStatic
+15.	Pimpl
+16.	SafeBits
+17.	SafeFormat
+18.	ScopeGuard
+19.	Singleton
+20.	SmallObjCompare
+21.	SmallObjSingleton
+22.	SmartPtr
+23.	Visitor
+24.	Register/RegisterFoo
+25.	Register/main
+26.	SingletonDll/Foo
+27.	SingletonDll/SingletonDll
+28.	SingletonDll/Client
+
+要点
+
+LevelMutex
+	★	

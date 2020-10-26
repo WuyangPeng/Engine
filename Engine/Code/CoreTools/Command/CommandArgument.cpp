@@ -1,33 +1,34 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 11:16)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 16:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CommandArgument.h"
-#include "Detail/CommandArgumentImpl.h"
 #include "Detail/CommandArgumentFactory.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Detail/CommandArgumentImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::string;
 
 DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(CoreTools, CommandArgument)
 
-CoreTools::CommandArgument
-	::CommandArgument(int index, const string& arguments, const string& value)
-	:m_Impl{ CommandArgumentFactory::Create(index,arguments,value) }
+CoreTools::CommandArgument::CommandArgument(int index, const string& arguments, const string& value)
+    : m_Impl{ CommandArgumentFactory::Create(index, arguments, value) }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::CommandArgument
-	::CommandArgument(int index, const string& arguments)
-	:m_Impl{ CommandArgumentFactory::Create(index,arguments) }
+CoreTools::CommandArgument::CommandArgument(int index, const string& arguments)
+    : m_Impl{ CommandArgumentFactory::Create(index, arguments) }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CommandArgument)
@@ -49,26 +50,24 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsUsed,
 
 IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, SetUsed, void)
 
-void CoreTools::CommandArgument
-	::AddEndArgumentValue(const string& value)
+void CoreTools::CommandArgument::AddEndArgumentValue(const string& value)
 {
-	static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "Non-const copy member functions are forbidden");
+    static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "Non-const copy member functions are forbidden");
 
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	if (m_Impl->IsNoValue())
-	{
-		// 由于重设了m_Impl，不进行Copy调用。
-		const auto index = m_Impl->GetIndex();
-		auto arguments = m_Impl->GetName();
+    if (m_Impl->IsNoValue())
+    {
+        // 由于重设了m_Impl，不进行Copy调用。
+        const auto index = m_Impl->GetIndex();
+        auto arguments = m_Impl->GetName();
 
-		m_Impl = CommandArgumentFactory::Create(index, arguments, value);
-	}
-	else
-	{
-		Copy();
+        m_Impl = CommandArgumentFactory::Create(index, arguments, value);
+    }
+    else
+    {
+        Copy();
 
-		m_Impl->AddArgumentValue(value);
-	}
+        m_Impl->AddArgumentValue(value);
+    }
 }
-

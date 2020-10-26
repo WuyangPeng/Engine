@@ -5,10 +5,14 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 17:11)
+//	引擎版本：0.5.2.0 (2020/10/21 10:18)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FWD_H
 #define CORE_TOOLS_FILE_MANAGER_FWD_H
+
+#include "CoreTools/Helper/SharedPtrMacro.h"
+
+#include <memory>
 
 namespace CoreTools
 {
@@ -16,7 +20,6 @@ namespace CoreTools
 
     class Endian;
     class FileBuffer;
-
     class CFileManagerHelper;
     class CReadFileManager;
     class CWriteFileManager;
@@ -35,6 +38,8 @@ namespace CoreTools
     class WriteBufferIO;
     class EnvironmentVariable;
     class Environment;
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(FileBuffer);
 }
 
 #endif  // CORE_TOOLS_FILE_MANAGER_FWD_H

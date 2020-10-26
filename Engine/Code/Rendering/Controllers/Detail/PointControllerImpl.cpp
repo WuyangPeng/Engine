@@ -201,10 +201,10 @@ void Rendering::PointControllerImpl
 	m_PointLinearAxis.resize(m_NumPoints);
 	m_PointAngularAxis.resize(m_NumPoints);
 
-	source->Read(m_NumPoints, &m_PointLinearSpeed[0]);
-        source->Read(m_NumPoints, &m_PointAngularSpeed[0]);
-        source->ReadAggregate(m_NumPoints, &m_PointLinearAxis[0]);
-        source->ReadAggregate(m_NumPoints, &m_PointAngularAxis[0]);
+	//source->Read(m_NumPoints, &m_PointLinearSpeed[0]);
+ //       source->Read(m_NumPoints, &m_PointAngularSpeed[0]);
+        source->ReadAggregateContainer(m_NumPoints, m_PointLinearAxis);
+        source->ReadAggregateContainer(m_NumPoints, m_PointAngularAxis);
 } 
 
 void Rendering::PointControllerImpl

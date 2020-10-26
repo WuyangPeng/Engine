@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 15:14)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_IMPL_H
 #define CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_IMPL_H
@@ -16,31 +19,29 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE EntityManagerImpl
-	{
-	public:
-		using ClassType = EntityManagerImpl;
-		using EntityPtr = std::shared_ptr<BaseEntity>;
-		using EntityWeakPtr = std::weak_ptr<BaseEntity>;
+    class CORE_TOOLS_HIDDEN_DECLARE EntityManagerImpl final
+    {
+    public:
+        using ClassType = EntityManagerImpl;
+        using EntitySharedPtr = std::shared_ptr<BaseEntity>;
+        using EntityWeakPtr = std::weak_ptr<BaseEntity>;
 
-	public:
-		EntityManagerImpl() noexcept;
+    public:
+        EntityManagerImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		uint64_t NextUniqueID();
+        [[nodiscard]] bool Register(const EntitySharedPtr& entity);
+        [[nodiscard]] bool Unregister(uint64_t entityID);
 
-		bool Register(const EntityPtr& entity);
-		bool Unregister(uint64_t entityID);
+        [[nodiscard]] EntitySharedPtr GetEntity(uint64_t entityID) const;
 
-		EntityPtr GetEntity(uint64_t entityID) const;
+    private:
+        using EntityWeakPtrContainer = std::map<uint64_t, EntityWeakPtr>;
 
-	private:
-		using EntityWeakPtrContainer = std::map<uint64_t, EntityWeakPtr>;
-
-	private:
-		EntityWeakPtrContainer m_Container;
-	};
+    private:
+        EntityWeakPtrContainer m_Container;
+    };
 }
 
-#endif // CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_IMPL_H
+#endif  // CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_IMPL_H

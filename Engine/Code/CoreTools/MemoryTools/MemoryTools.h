@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/19 11:40)
+//	引擎版本：0.5.2.0 (2020/10/19 16:46)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_H
 #define CORE_TOOLS_MEMORY_TOOLS_H

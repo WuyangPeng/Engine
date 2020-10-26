@@ -43,20 +43,20 @@ bool Network::StringDoubleMessage<E>
 }
 #endif // OPEN_CLASS_INVARIANT
 
-template<typename E>
-const CoreTools::Rtti& Network::StringDoubleMessage<E>
-	::GetRttiType() const noexcept
+template <typename E>
+const CoreTools::Rtti& Network::StringDoubleMessage<E>::GetRttiType() const noexcept
 {
-	return sm_Type;
+    return GetCurrentRttiType();
 }
 
-template<typename E>
-const CoreTools::Rtti Network::StringDoubleMessage<E>
-	::sm_Type
+template <typename E>
+const CoreTools::Rtti& Network::StringDoubleMessage<E>::GetCurrentRttiType() noexcept
 {
-	typeid(ClassType).name(),&ParentType::sm_Type
-};
+    static const auto rtti = CoreTools::Rtti{ typeid(ClassType).name(), &ParentType::GetCurrentRttiType() };
 
+    return rtti;
+}
+ 
 template<typename E>
 Network::MessageInterfaceSharedPtr Network::StringDoubleMessage<E>
 	::Factory(const MessageSourceSharedPtr& source, int64_t messageID)

@@ -172,12 +172,12 @@ void Rendering::TextureLevelData<WindowSize>
 
 	for(auto i = 0;i < WindowSize;++i)
 	{
-		source->Read(TextureMaximumMipmapLevels, m_Dimension[i]);
+		//source->Read(TextureMaximumMipmapLevels, m_Dimension[i]);
 	}   
 
-	source->Read(TextureMaximumMipmapLevels, m_NumLevelBytes);
+	//source->Read(TextureMaximumMipmapLevels, m_NumLevelBytes);
 	source->Read(m_NumTotalBytes);
-	source->Read(TextureMaximumMipmapLevels, m_LevelOffsets);
+//	source->Read(TextureMaximumMipmapLevels, m_LevelOffsets);
 }
 
 template <int WindowSize>

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/14 17:38)
+//	引擎版本：0.5.2.0 (2020/10/22 15:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,14 +16,11 @@
 
 using std::make_shared;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)  // 导出类允许默认构造函数抛出异常。
-CoreTools::InTopLevel::InTopLevel()
+CoreTools::InTopLevel::InTopLevel([[maybe_unused]] DisableNotThrow disableNotThrow)
     : m_Impl{ make_shared<ImplType>() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
 
 DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, InTopLevel)
 

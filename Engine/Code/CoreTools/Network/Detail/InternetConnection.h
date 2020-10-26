@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 17:40)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 14:45)
 
 #ifndef CORE_TOOLS_INTERNET_CONNECTION_H
 #define CORE_TOOLS_INTERNET_CONNECTION_H
@@ -12,32 +15,32 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Network/Using/WindowsInternetUsing.h"
 
-#include <boost/noncopyable.hpp>
 #include <string>
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE InternetConnection : private boost::noncopyable
-	{
-	public:
-		using ClassType = InternetConnection;
-		using InternetHandle = System::InternetHandle;
+    class CORE_TOOLS_HIDDEN_DECLARE InternetConnection final
+    {
+    public:
+        using ClassType = InternetConnection;
+        using String = System::String;
+        using InternetHandle = System::InternetHandle;
 
-	public:
-		explicit InternetConnection(const System::String& agent);
-		~InternetConnection();
-		InternetConnection(const InternetConnection&) noexcept = delete;
-		InternetConnection& operator=(const InternetConnection&) noexcept = delete;
-		InternetConnection(InternetConnection&&) noexcept = delete;
-		InternetConnection& operator=(InternetConnection&&) noexcept = delete;
+    public:
+        explicit InternetConnection(const System::String& agent);
+        ~InternetConnection() noexcept;
+        InternetConnection(const InternetConnection&) noexcept = delete;
+        InternetConnection& operator=(const InternetConnection&) noexcept = delete;
+        InternetConnection(InternetConnection&&) noexcept = delete;
+        InternetConnection& operator=(InternetConnection&&) noexcept = delete;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		InternetHandle GetInternet() const noexcept;
+        [[nodiscard]] InternetHandle GetInternet() const noexcept;
 
-	private:
-		InternetHandle m_Internet;
-	};	
+    private:
+        InternetHandle m_Internet;
+    };
 }
 
-#endif // CORE_TOOLS_INTERNET_CONNECTION_H
+#endif  // CORE_TOOLS_INTERNET_CONNECTION_H

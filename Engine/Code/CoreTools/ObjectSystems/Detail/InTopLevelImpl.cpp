@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/14 17:36)
+//	引擎版本：0.5.2.0 (2020/10/22 14:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,7 +28,7 @@ bool CoreTools::InTopLevelImpl::IsTopLevel(const ObjectInterfaceSharedPtr& objec
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto& container = m_TopLevel.get<UniqueObject>();
- 
+
     return container.find(object) != container.cend();
 }
 

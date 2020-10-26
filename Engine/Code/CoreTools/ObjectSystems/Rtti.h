@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/11 12:56)
+//	引擎版本：0.5.2.0 (2020/10/22 11:36)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_RTTI_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_RTTI_H
@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Rtti
+    class CORE_TOOLS_DEFAULT_DECLARE Rtti final
     {
     public:
         using ClassType = Rtti;

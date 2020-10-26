@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/16 11:25)
+//	引擎版本：0.5.2.0 (2020/10/22 13:23)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_DETAIL_H
@@ -15,6 +15,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/StreamMacro.h"
 
 #include <type_traits>
 
@@ -29,7 +30,7 @@ void CoreTools::BufferTarget::WriteBoolContainerWithNumber(const T& objects)
 
     auto size = boost::numeric_cast<int32_t>(objects.size());
 
-    Write(CoreTools::GetStreamSize(size), &size);
+    Write(size);
 
     WriteBoolContainerWithoutNumber(objects);
 }
@@ -68,7 +69,7 @@ void CoreTools::BufferTarget::WriteStringContainerWithNumber(const T& objects)
 
     auto size = boost::numeric_cast<int32_t>(objects.size());
 
-    Write(CoreTools::GetStreamSize(size), &size);
+    Write(size);
 
     WriteStringContainerWithoutNumber(objects);
 }
@@ -100,9 +101,10 @@ template <typename T>
 void CoreTools::BufferTarget::Write(T datum)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    Write(CoreTools::GetStreamSize(datum), &datum);
+    Write(CORE_TOOLS_STREAM_SIZE(datum), &datum);
 }
 
 template <typename T>
@@ -111,11 +113,12 @@ void CoreTools::BufferTarget::WriteContainerWithNumber(const T& objects)
     using ValueType = typename T::value_type;
 
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     auto size = boost::numeric_cast<int32_t>(objects.size());
 
-    Write(CoreTools::GetStreamSize(size), &size);
+    Write(size);
 
     WriteContainerWithoutNumber(objects);
 }
@@ -126,6 +129,7 @@ void CoreTools::BufferTarget::WriteContainerWithoutNumber(const T& objects)
     using ValueType = typename T::value_type;
 
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     for (auto object : objects)
@@ -138,18 +142,20 @@ template <typename T, int Size>
 void CoreTools::BufferTarget::WriteContainer(const std::array<T, Size>& objects)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    Write(sizeof(T), objects.size(), objects.data());
+    Write(CoreTools::GetStreamSize<T>(), objects.size(), objects.data());
 }
 
 template <typename T>
 void CoreTools::BufferTarget::WriteEnum(const T datum)
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    Write(CoreTools::GetStreamSize(datum), &datum);
+    Write(CORE_TOOLS_STREAM_SIZE(datum), &datum);
 }
 
 template <typename T>
@@ -158,11 +164,12 @@ void CoreTools::BufferTarget::WriteEnumContainerWithNumber(const T& objects)
     using ValueType = typename T::value_type;
 
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     auto size = boost::numeric_cast<int32_t>(objects.size());
 
-    Write(CoreTools::GetStreamSize(size), &size);
+    Write(size);
 
     WriteEnumContainerWithoutNumber(objects);
 }
@@ -173,6 +180,7 @@ void CoreTools::BufferTarget::WriteEnumContainerWithoutNumber(const T& objects)
     using ValueType = typename T::value_type;
 
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     for (auto object : objects)
@@ -185,9 +193,10 @@ template <typename T, int Size>
 void CoreTools::BufferTarget::WriteEnumContainer(const std::array<T, Size>& objects)
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    Write(sizeof(T), objects.size(), objects.data());
+    Write(CoreTools::GetStreamSize<T>(), objects.size(), objects.data());
 }
 
 template <typename T>
@@ -197,7 +206,7 @@ void CoreTools::BufferTarget::WriteAggregateContainerWithNumber(const T& objects
 
     auto size = boost::numeric_cast<int32_t>(objects.size());
 
-    Write(CoreTools::GetStreamSize(size), &size);
+    Write(size);
 
     WriteAggregateContainerWithoutNumber(objects);
 }
@@ -227,6 +236,7 @@ void CoreTools::BufferTarget::WriteObjectAssociated(const T& object)
     using ValueType = typename T::value_type;
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     if (object.m_Object != nullptr)
@@ -245,11 +255,12 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithNumber(const T& 
     using ValueType = typename T::value_type;
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     auto size = boost::numeric_cast<int32_t>(objects.size());
 
-    Write(CoreTools::GetStreamSize(size), &size);
+    Write(size);
 
     WriteObjectAssociatedContainerWithoutNumber(objects);
 }
@@ -260,6 +271,7 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithoutNumber(const 
     using ValueType = typename T::value_type;
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     for (const auto& object : objects)
@@ -274,6 +286,7 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainer(const std::array<T,
     using ValueType = typename T::value_type;
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     WriteObjectAssociatedContainerWithoutNumber(objects);

@@ -524,7 +524,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureBorderClamp() noexcep
     return g_ExistsGlArbTextureBorderClamp;
 }
 
-void System::InitGlArbTextureBorderClamp()  
+void System::InitGlArbTextureBorderClamp()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_border_clamp"))
     {
@@ -777,7 +777,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureEnvCombine() noexcept
     return g_ExistsGlArbTextureEnvCombine;
 }
 
-void System::InitGlArbTextureEnvCombine()  
+void System::InitGlArbTextureEnvCombine()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_env_combine"))
     {
@@ -801,7 +801,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureEnvCrossbar() noexcep
     return g_ExistsGlArbTextureEnvCrossbar;
 }
 
-void System::InitGlArbTextureEnvCrossbar()  
+void System::InitGlArbTextureEnvCrossbar()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_env_crossbar"))
     {
@@ -825,7 +825,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureEnvDot3() noexcept
     return g_ExistsGlArbTextureEnvDot3;
 }
 
-void System::InitGlArbTextureEnvDot3()  
+void System::InitGlArbTextureEnvDot3()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_env_dot3"))
     {
@@ -849,7 +849,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureMirroredRepeat() noex
     return g_ExistsGlArbTextureMirroredRepeat;
 }
 
-void System::InitGlArbTextureMirroredRepeat()  
+void System::InitGlArbTextureMirroredRepeat()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_mirrored_repeat"))
     {
@@ -873,7 +873,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbDepthTexture() noexcept
     return g_ExistsGlArbDepthTexture;
 }
 
-void System::InitGlArbDepthTexture()  
+void System::InitGlArbDepthTexture()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_depth_texture"))
     {
@@ -897,7 +897,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbShadow() noexcept
     return g_ExistsGlArbShadow;
 }
 
-void System::InitGlArbShadow()  
+void System::InitGlArbShadow()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_shadow"))
     {
@@ -921,7 +921,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbShadowAmbient() noexcept
     return g_ExistsGlArbShadowAmbient;
 }
 
-void System::InitGlArbShadowAmbient()  
+void System::InitGlArbShadowAmbient()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_shadow_ambient"))
     {
@@ -1572,7 +1572,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbFragmentProgram() noexcept
     return g_ExistsGlArbFragmentProgram;
 }
 
-void System::InitGlArbFragmentProgram()  
+void System::InitGlArbFragmentProgram()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_fragment_program"))
     {
@@ -2160,7 +2160,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbFragmentShader() noexcept
     return g_ExistsGlArbFragmentShader;
 }
 
-void System::InitGlArbFragmentShader()  
+void System::InitGlArbFragmentShader()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_fragment_shader"))
     {
@@ -2184,7 +2184,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbShadingLanguage100() noexcep
     return g_ExistsGlArbShadingLanguage100;
 }
 
-void System::InitGlArbShadingLanguage100()  
+void System::InitGlArbShadingLanguage100()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_shading_language_100"))
     {
@@ -2208,7 +2208,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureNonpowerOfTwo() noexc
     return g_ExistsGlArbTextureNonpowerOfTwo;
 }
 
-void System::InitGlArbTextureNonpowerOfTwo()  
+void System::InitGlArbTextureNonpowerOfTwo()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_non_power_of_two"))
     {
@@ -2232,7 +2232,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbPointSprite() noexcept
     return g_ExistsGlArbPointSprite;
 }
 
-void System::InitGlArbPointSprite()  
+void System::InitGlArbPointSprite()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_point_sprite"))
     {
@@ -2256,7 +2256,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbFragmentProgramShadow() noex
     return g_ExistsGlArbFragmentProgramShadow;
 }
 
-void System::InitGlArbFragmentProgramShadow()  
+void System::InitGlArbFragmentProgramShadow()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_fragment_program_shadow"))
     {
@@ -2316,7 +2316,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureRectangle() noexcept
     return g_ExistsGlArbTextureRectangle;
 }
 
-void System::InitGlArbTextureRectangle()  
+void System::InitGlArbTextureRectangle()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_rectangle"))
     {
@@ -2381,7 +2381,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbHalfFloatPixel() noexcept
     return g_ExistsGlArbHalfFloatPixel;
 }
 
-void System::InitGlArbHalfFloatPixel()  
+void System::InitGlArbHalfFloatPixel()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_half_float_pixel"))
     {
@@ -2405,7 +2405,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureFloat() noexcept
     return g_ExistsGlArbTextureFloat;
 }
 
-void System::InitGlArbTextureFloat()  
+void System::InitGlArbTextureFloat()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_float"))
     {
@@ -2429,7 +2429,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbPixelBufferObject() noexcept
     return g_ExistsGlArbPixelBufferObject;
 }
 
-void System::InitGlArbPixelBufferObject()  
+void System::InitGlArbPixelBufferObject()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_pixel_buffer_object"))
     {
@@ -2453,7 +2453,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbDepthBufferFloat() noexcept
     return g_ExistsGlArbDepthBufferFloat;
 }
 
-void System::InitGlArbDepthBufferFloat()  
+void System::InitGlArbDepthBufferFloat()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_depth_buffer_float"))
     {
@@ -2477,7 +2477,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbDrawInstanced() noexcept
     return g_ExistsGlArbDrawInstanced;
 }
 
-void System::InitGlArbDrawInstanced()  
+void System::InitGlArbDrawInstanced()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_draw_instanced"))
     {
@@ -2694,7 +2694,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbFramebufferSRGB() noexcept
     return g_ExistsGlArbFramebufferSRGB;
 }
 
-void System::InitGlArbFramebufferSRGB()  
+void System::InitGlArbFramebufferSRGB()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_framebuffer_sRGB"))
     {
@@ -2783,7 +2783,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbHalfFloatVertex() noexcept
     return g_ExistsGlArbHalfFloatVertex;
 }
 
-void System::InitGlArbHalfFloatVertex()  
+void System::InitGlArbHalfFloatVertex()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_half_float_vertex"))
     {
@@ -2954,7 +2954,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbTextureCompressionRgtc() noe
     return g_ExistsGlArbTextureCompressionRgtc;
 }
 
-void System::InitGlArbTextureCompressionRgtc()  
+void System::InitGlArbTextureCompressionRgtc()
 {
     if (IsOpenGLSupportsExtension("GL_ARB_texture_compression_rgtc"))
     {
@@ -7146,7 +7146,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbInternalformatQuery2() noexc
 
 namespace System
 {
-    typedef void(OPENGL_STDCALL* PgglGetInternalformati64v)(GLenum target, GLenum internalformat, GLenum parameterName, GLsizei bufSize, GLint64* params);
+    using PgglGetInternalformati64v = void(OPENGL_STDCALL*)(GLenum target, GLenum internalformat, GLenum parameterName, GLsizei bufSize, GLint64* params);
 }
 
 namespace System
@@ -7513,7 +7513,7 @@ namespace System
 {
     using PgglTexBufferRange = void(OPENGL_STDCALL*)(GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size);
 
-    typedef void(OPENGL_STDCALL* PgglTextureBufferRangeEXT)(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size);
+    using PgglTextureBufferRangeEXT = void(OPENGL_STDCALL*)(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size);
 }
 
 namespace System
@@ -9310,7 +9310,7 @@ System::ExistsOpenGLExtensions System::IsExistsGlArbShaderTextureImageSamples() 
 
 namespace System
 {
-    typedef void(OPENGL_STDCALL* PgglTextureBarrier)(void);
+    using PgglTextureBarrier = void(OPENGL_STDCALL*)(void);
 }
 
 namespace System

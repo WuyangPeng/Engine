@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/11 12:58)
+//	引擎版本：0.5.2.0 (2020/10/21 10:23)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_IMPL_H
@@ -17,7 +17,7 @@
 namespace CoreTools
 {
     // Object类的名字
-    class CORE_TOOLS_HIDDEN_DECLARE ObjectNameImpl
+    class CORE_TOOLS_HIDDEN_DECLARE ObjectNameImpl final
     {
     public:
         using ClassType = ObjectNameImpl;

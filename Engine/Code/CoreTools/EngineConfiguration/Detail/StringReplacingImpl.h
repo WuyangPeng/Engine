@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:15)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 11:17)
 
 #ifndef CORE_TOOLS_ENGINE_CONFIGURATION_STRING_REPLACING_IMPL_H
 #define CORE_TOOLS_ENGINE_CONFIGURATION_STRING_REPLACING_IMPL_H
@@ -11,32 +14,33 @@
 
 #include "System/Helper/UnicodeUsing.h"
 
-#include <string>
 #include <map>
+#include <string>
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE StringReplacingImpl
-	{
-	public:
-		using ClassType = StringReplacingImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE StringReplacingImpl final
+    {
+    public:
+        using ClassType = StringReplacingImpl;
+        using String = System::String;
 
-	public:
-		explicit StringReplacingImpl(const std::string& configurationFileName);
+    public:
+        explicit StringReplacingImpl(const std::string& configurationFileName);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const System::String GetReplacing(const System::String& original) const;
+        [[nodiscard]] const String GetReplacing(const String& original) const;
 
-	private:
-		using Replacing = std::map<System::String, System::String>;
+    private:
+        using Replacing = std::map<String, String>;
 
-	private:
-		void InitReplacing(const std::string& configurationFileName);
+    private:
+        void InitReplacing(const std::string& configurationFileName);
 
-	private:
-		Replacing m_Replacing;
-	};
+    private:
+        Replacing m_Replacing;
+    };
 }
 
-#endif // CORE_TOOLS_ENGINE_CONFIGURATION_STRING_REPLACING_IMPL_H
+#endif  // CORE_TOOLS_ENGINE_CONFIGURATION_STRING_REPLACING_IMPL_H

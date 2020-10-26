@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:20)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 13:14)
 
 #ifndef CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_H
@@ -13,29 +16,29 @@
 
 namespace CoreTools
 {
-	template<typename Value, typename ConstReference>
-	class SimplePropertyGetExternal
-	{
-	public:
-		static_assert(std::is_const_v<std::remove_reference_t<ConstReference>>, "ConstReference is not const.");
-		static_assert(std::is_reference_v<ConstReference>, "ConstReference is not reference.");
+    template <typename Value, typename ConstReference>
+    class SimplePropertyGetExternal final
+    {
+    public:
+        static_assert(std::is_const_v<std::remove_reference_t<ConstReference>>, "ConstReference is not const.");
+        static_assert(std::is_reference_v<ConstReference>, "ConstReference is not reference.");
 
-		using ValueType = Value;
-		using ConstReferenceType = ConstReference;
-		using ClassType = SimplePropertyGetExternal<ValueType, ConstReferenceType>;
+        using ValueType = Value;
+        using ConstReferenceType = ConstReference;
+        using ClassType = SimplePropertyGetExternal<ValueType, ConstReferenceType>;
 
-	public:
-		explicit SimplePropertyGetExternal(const ValueType& value);
+    public:
+        explicit SimplePropertyGetExternal(const ValueType& value);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		operator ConstReferenceType () const noexcept;
+        [[nodiscard]] operator ConstReferenceType() const noexcept;
 
-		SimplePropertyGetExternal& operator=(const SimplePropertyGetExternal& rhs) = delete;
+        SimplePropertyGetExternal& operator=(const SimplePropertyGetExternal& rhs) = delete;
 
-	private:
-		const ValueType& m_Value;
-	};
+    private:
+        const ValueType& m_Value;
+    };
 }
 
-#endif // CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_H
+#endif  // CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_H

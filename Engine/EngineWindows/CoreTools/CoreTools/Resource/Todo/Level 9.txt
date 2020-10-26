@@ -1,41 +1,7 @@
 TODO Level 9
  
-0.0.5.1
+0.5.2.0 
 
-2.  （ObjectSystems）使用智能指针重新设计对象系统。
-17. （ObjectSystems）C++11保证局部静态变量只初始化一次，看需要不需要修改ObjectInterface的注册方式。
-23. （Time）增加获取当前时间相关的信息，如月份，零点时间，周日时间等。
-24. （Time）创建一个类型安全的秒、毫秒和微秒类。
-3.  （ObjectSystems）将模块使用的子类智能指针改成std::shared_ptr。
-4.  （UnitTest）单元测试增加以随机顺序运行测试。
-7.  （ObjectSystems）使用单例封装InitTerm。用std::array代替原来的静态数组。
-8.  （UnitTestSuite）单元测试增加对各个条件流程完整性运行进行判断的测试。
-9.  （UnitTestSuite）单元测试增加是否打印正在进行哪个测试的配置。
-10. （ObjectSystems）把GetStreamSize改成constexpr函数。
-11.	（综合）程序复杂度的检测程序。（参考代码大全19.6）
-8.  （ObjectSystems）考虑ObjectRegister、BufferTarget、BufferSource、ObjectLink保留裸指针的接口是否必须。 
-9.  （UnitTestSuite）单元测试打印正在运行的测试，顶层信息未打出。
-10. （UnitTestSuite）单元测试打印测试的引擎、游戏版本号。
-11. （UnitTestSuite）同名但不同文件的单元测试出现问题，需要修改。
-12. （ResourceManager）将资源管理的键ID改成uint64_t。
-13. （ModuleInitializerTerminator）增加一个需要加载模块配置类，对配置进行读取。 
-14. （ModuleInitializerTerminator）增加一个模块自动加载及终止类。
-15. （ModuleInitializerTerminator）终止已加载的模块，并加载新的模块。			  
-16. （SyntacticParser）增加语法分析器。 
-17. （PerformanceProfiler）增加性能剖析器。
-18. （PerformanceProfiler）增加统计采集类。
-19. （PerformanceProfiler）在框架各个循环监测各模块使用的时间。 
-20. （EngineConfiguration）增加引擎配置类。
-21. （CyclicRedundancyCheck）将SpecifyCheckSum和SpecifyCheckSum的数组改成array，并移到实现文件。
-22. （RegularExpression）增加正则表达式解析类。
-23. （Network）完成Network模块。 
-24. （Properties）类MethodPropertySet的引用类型改成const引用类型。
-25. （zlib）完成zlib库的封装。
-26. （Freetype）完成Freetype库的封装。
-1. （HandleManager）优化句柄管理类。
-2. （ResourceManager）优化资源管理类。
-3. （FrameMemorySystem）优化帧内存系统。
-4. （BitArray）优化位数组类。
-5. （Properties）优化属性类。
-6. （MessageEvent）优化消息事件类。
-7. （StateMachineManager）优化状态机类。
+1. （Network）完成Network模块。 
+2. （MessageEvent）优化消息事件类。
+3. （StateMachineManager）优化状态机类。

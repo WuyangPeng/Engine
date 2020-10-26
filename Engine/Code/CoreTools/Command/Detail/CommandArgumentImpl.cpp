@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 11:13)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 16:41)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -11,53 +14,46 @@
 
 using std::string;
 
-CoreTools::CommandArgumentImpl
-	::CommandArgumentImpl(int index, const std::string& name)
-	:m_Index{ index }, m_Name{ name }, m_Used{ false }
+CoreTools::CommandArgumentImpl::CommandArgumentImpl(int index, const std::string& name)
+    : m_Index{ index }, m_Name{ name }, m_Used{ false }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-} 
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 #ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::CommandArgumentImpl
-	::IsValid() const noexcept
+bool CoreTools::CommandArgumentImpl::IsValid() const noexcept
 {
-	if (1 <= m_Index)
-		return true;
-	else
-		return false;
+    if (1 <= m_Index)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
-int CoreTools::CommandArgumentImpl
-	::GetIndex() const noexcept
+int CoreTools::CommandArgumentImpl::GetIndex() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Index;
+    return m_Index;
 }
 
-const string CoreTools::CommandArgumentImpl
-	::GetName() const
+const string CoreTools::CommandArgumentImpl::GetName() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Name;
+    return m_Name;
 }
 
-bool CoreTools::CommandArgumentImpl
-	::IsUsed() const noexcept
+bool CoreTools::CommandArgumentImpl::IsUsed() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Used;
+    return m_Used;
 }
 
-void CoreTools::CommandArgumentImpl
-	::SetUsed() noexcept
+void CoreTools::CommandArgumentImpl::SetUsed() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	m_Used = true;
+    m_Used = true;
 }
-

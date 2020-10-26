@@ -64,7 +64,10 @@ bool Network::IterativeServer ::HandleConnections(const SocketManagerSharedPtr& 
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), 0);
 
-        socketManager->EventFunction(callbackParameters);
+        if(!socketManager->EventFunction(callbackParameters))
+        {
+        
+        }
     }
 
     return true;

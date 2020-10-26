@@ -1,0 +1,10 @@
+libpng
+ 
+官方网站 
+http://www.libpng.org/pub/png/libpng.html
+
+☆
+
+知识点 
+1.	libpng。
+

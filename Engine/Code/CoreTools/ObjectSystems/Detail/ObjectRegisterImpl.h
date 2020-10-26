@@ -5,16 +5,16 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/15 12:55)
+//	引擎版本：0.5.2.0 (2020/10/21 10:23)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_IMPL_H
 
-#include "CoreTools/ObjectSystems/ConstObjectAssociated.h" 
+#include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
 
 namespace CoreTools
 {
-    class ObjectRegisterImpl
+    class CORE_TOOLS_HIDDEN_DECLARE ObjectRegisterImpl final
     {
     public:
         using ClassType = ObjectRegisterImpl;

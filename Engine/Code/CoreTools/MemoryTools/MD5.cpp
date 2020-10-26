@@ -1,128 +1,139 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 13:33)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/20 10:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "MD5.h"
 #include "MD5Context.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <array>
-#include <sstream>
 #include <iomanip>
+#include <sstream>
 #include <vector>
 
+using std::array;
+using std::hex;
+using std::setfill;
+using std::setw;
 using std::string;
 using std::stringstream;
-using std::setw;
-using std::setfill;
-using std::vector;
-using std::hex;
 using std::uppercase;
-using std::array;
+using std::vector;
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-
-CoreTools::MD5
-	::MD5()
-	:m_MD5Context{}
+CoreTools::MD5::MD5(DisableNotThrow disableNotThrow)
+    : m_MD5Context{ disableNotThrow }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, MD5)
 
-void CoreTools::MD5
-	::MessageDigestAlgorithm5(uint8_t const* buffer, uint32_t length, uint8_t* digest)
+void CoreTools::MD5::MessageDigestAlgorithm5(uint8_t const* buffer, uint32_t length, uint8_t* digest)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
-	CORE_TOOLS_ASSERTION_0(digest != nullptr, "返回的缓冲区为空！");
+    CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_ASSERTION_0(digest != nullptr, "返回的缓冲区为空！");
 
-	m_MD5Context.MD5Init();
+    m_MD5Context.MD5Init();
 
-	m_MD5Context.MD5Update(buffer, length);
+    m_MD5Context.MD5Update(buffer, length);
 
-	return m_MD5Context.MD5Final(digest);
+    return m_MD5Context.MD5Final(digest);
 }
 
-const string CoreTools::MD5
-	::MessageDigestAlgorithm5(uint8_t const* buffer, uint32_t length)
+const string CoreTools::MD5::MessageDigestAlgorithm5(uint8_t const* buffer, uint32_t length)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	array<uint8_t, sm_DigestSize> digest{};
+    array<uint8_t, sm_DigestSize> digest{};
 
-	MessageDigestAlgorithm5(buffer, length, digest.data());
+    MessageDigestAlgorithm5(buffer, length, digest.data());
 
-	return GetHexDigestWithLowercase(digest.data());
+    return GetHexDigestWithLowercase(digest.data());
 }
 
-const string CoreTools::MD5
-	::MessageDigestAlgorithm5(const string& source)
+const string CoreTools::MD5::MessageDigestAlgorithm5(const string& source)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	m_MD5Context.MD5Init();
+    m_MD5Context.MD5Init();
 
-	if (!source.empty())
-	{
-		vector<char> buffer{ source.begin(),source.end() };
+    if (!source.empty())
+    {
+        vector<char> buffer{ source.begin(), source.end() };
 
-		m_MD5Context.MD5Update(reinterpret_cast<const uint8_t*>(buffer.data()),boost::numeric_cast<uint32_t>(buffer.size()));
-	}
-	else
-	{
-		m_MD5Context.MD5Update(nullptr, 0);
-	}
-
-	array<uint8_t, sm_DigestSize> digest{};
-
-	m_MD5Context.MD5Final(digest.data());
-
-	return GetHexDigestWithLowercase(digest.data());
-}
-
-const string CoreTools::MD5
-	::GetHexDigestWithUppercase(const uint8_t* digest)
-{
-	stringstream ss{};
-
-	for (auto i = 0; i < sm_DigestSize; ++i)
-	{
-		ss << hex << uppercase << setw(2) << setfill('0')
-		   << static_cast<uint32_t>(digest[i]);
-	}
-
-	return ss.str();
-}
-
-const string CoreTools::MD5
-	::GetHexDigestWithLowercase(const uint8_t* digest)
-{
-	stringstream ss{};
-
-	for (auto i = 0; i < sm_DigestSize; ++i)
-	{
-		ss << hex << setw(2) << setfill('0')
-		   << static_cast<uint32_t>(digest[i]);
-	}
-
-	return ss.str();
-}
-
-int CoreTools::MD5
-	::GetDigestSize() noexcept
-{
-	return sm_DigestSize;
-}
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+        m_MD5Context.MD5Update(reinterpret_cast<const uint8_t*>(buffer.data()), boost::numeric_cast<uint32_t>(buffer.size()));
 #include STSTEM_WARNING_POP
+    }
+    else
+    {
+        m_MD5Context.MD5Update(nullptr, 0);
+    }
+
+    array<uint8_t, sm_DigestSize> digest{};
+
+    m_MD5Context.MD5Final(digest.data());
+
+    return GetHexDigestWithLowercase(digest.data());
+}
+
+const string CoreTools::MD5::GetHexDigestWithUppercase(const uint8_t* digest)
+{
+    if (digest != nullptr)
+    {
+        stringstream ss{};
+
+        for (auto i = 0; i < sm_DigestSize; ++i)
+        {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+            ss << hex << uppercase << setw(2) << setfill('0')
+               << static_cast<int>(digest[i]);
+#include STSTEM_WARNING_POP
+        }
+
+        return ss.str();
+    }
+    else
+    {
+        return string{};
+    }
+}
+
+const string CoreTools::MD5::GetHexDigestWithLowercase(const uint8_t* digest)
+{
+    if (digest != nullptr)
+    {
+        stringstream ss{};
+
+        for (auto i = 0; i < sm_DigestSize; ++i)
+        {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+            ss << hex << setw(2) << setfill('0')
+               << static_cast<int>(digest[i]);
+#include STSTEM_WARNING_POP
+        }
+
+        return ss.str();
+    }
+    else
+    {
+        return string{};
+    }
+}
+
+int CoreTools::MD5::GetDigestSize() noexcept
+{
+    return sm_DigestSize;
+}

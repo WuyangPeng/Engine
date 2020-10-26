@@ -77,7 +77,9 @@ void Network::ACEIovecSockStream
 	CoreTools::CallbackParameters callbackParameters{};
 	callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
 	callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-	eventInterface->EventFunction(callbackParameters);
+        if (!eventInterface->EventFunction(callbackParameters))
+        {
+        }
 }
 #include STSTEM_WARNING_POP
 #endif // NETWORK_USE_ACE

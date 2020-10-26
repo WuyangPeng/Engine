@@ -1,39 +1,41 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 17:05)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 15:32)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_H
 
-#include "CoreTools/CoreToolsDll.h"  
+#include "CoreTools/CoreToolsDll.h"
+
+#include "MessageEventFwd.h"
 
 namespace CoreTools
 {
-	template <typename EventType>
-	class Telegram;
+    template <typename EventType>
+    class TelegramLess final
+    {
+    public:
+        using ClassType = TelegramLess<EventType>;
+        using Telegram = Telegram<EventType>;
 
-	template <typename EventType>
-	class TelegramLess
-	{
-	public:
-		using ClassType = TelegramLess<EventType>;
-		using Telegram = Telegram<EventType>;
+    public:
+        explicit TelegramLess(int64_t difference);
 
-	public:
-		explicit TelegramLess(int64_t difference);
+        CLASS_INVARIANT_DECLARE;
 
-		CLASS_INVARIANT_DECLARE;
+        [[nodiscard]] bool operator()(const Telegram& lhs, const Telegram& rhs) const;
 
-		bool operator()(const Telegram& lhs, const Telegram& rhs) const;
+    private:
+        [[nodiscard]] bool DonotCompareTime(const Telegram& lhs, const Telegram& rhs) const;
 
-	private:
-		bool DonotCompareTime(const Telegram& lhs, const Telegram& rhs) const;
-
-	private:
-		int64_t m_Difference;
-	};
+    private:
+        int64_t m_Difference;
+    };
 }
 
-#endif // CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_H
+#endif  // CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_H

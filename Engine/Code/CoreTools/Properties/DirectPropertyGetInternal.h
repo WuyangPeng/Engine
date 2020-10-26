@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:16)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 13:05)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
@@ -31,39 +34,39 @@
 
 namespace CoreTools
 {
-	template<typename Value, // 实际属性值类型
-			 typename Reference, // 引用类型
-			 typename Container> // 封闭类	
-	class DirectPropertyGetInternal : private boost::noncopyable
-	{
-	public:
-		using ValueType = Value;
-		using ReferenceType = Reference;
-		using ContainerType = Container;
-		using ClassType = DirectPropertyGetInternal<ValueType, ReferenceType, ContainerType>;
+    template <typename Value,  // 实际属性值类型
+              typename Reference,  // 引用类型
+              typename Container>  // 封闭类
+    class DirectPropertyGetInternal final : private boost::noncopyable
+    {
+    public:
+        using ValueType = Value;
+        using ReferenceType = Reference;
+        using ContainerType = Container;
+        using ClassType = DirectPropertyGetInternal<ValueType, ReferenceType, ContainerType>;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
 #if defined(TCRE_USE_DIGITAL_MARS)
-	public:
-#else // TCRE_USE_DIGITAL_MARS
-	private:
-#endif // TCRE_USE_DIGITAL_MARS 
-		DirectPropertyGetInternal();
+    public:
+#else  // TCRE_USE_DIGITAL_MARS
+    private:
+#endif  // TCRE_USE_DIGITAL_MARS
+        DirectPropertyGetInternal();
 
-	private:
-		explicit DirectPropertyGetInternal(ReferenceType value);
-		ClassType& operator=(ReferenceType value);
+    private:
+        explicit DirectPropertyGetInternal(ReferenceType value);
+        ClassType& operator=(ReferenceType value);
 
-		TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(ContainerType);
+        TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(ContainerType);
 
-	public:
-		// 提供对该属性的只读访问
-		operator ReferenceType () const;
+    public:
+        // 提供对该属性的只读访问
+        [[nodiscard]] operator ReferenceType() const;
 
-	private:
-		ValueType m_Value;
-	};
+    private:
+        ValueType m_Value;
+    };
 }
 
-#endif // CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
+#endif  // CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H

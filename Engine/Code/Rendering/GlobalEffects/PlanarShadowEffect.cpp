@@ -327,7 +327,7 @@ void Rendering::PlanarShadowEffect
 
     GlobalEffect::Load(source);
 
-    source->ReadAggregate(mNumPlanes, mShadowColors);
+   // source->ReadAggregate(mNumPlanes, mShadowColors);
    // source.ReadSharedPtr(mNumPlanes, mPlanes);
    // source.ReadSharedPtr(mNumPlanes, mProjectors);
    // source.ReadSharedPtr(mShadowCaster);

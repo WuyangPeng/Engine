@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 11:53)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 18:29)
 
 #ifndef CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
@@ -13,63 +16,54 @@
 
 #include "CMainFunctionHelper.h"
 #include "TestingInformationHelper.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace CoreTools
 {
-	class Suite;
-	class UnitTestComposite;
+    class CORE_TOOLS_DEFAULT_DECLARE CMainFunctionTestingHelper : public CMainFunctionHelper
+    {
+    public:
+        using ClassType = CMainFunctionTestingHelper;
+        using ParentType = CMainFunctionHelper;
+        using UnitTestSharedPtr = std::shared_ptr<UnitTestComposite>;
 
-	class CORE_TOOLS_DEFAULT_DECLARE CMainFunctionTestingHelper : public CMainFunctionHelper
-	{
-	public:
-		using ClassType = CMainFunctionTestingHelper;
-		using ParentType = CMainFunctionHelper;
-		using UnitTestPtr = std::shared_ptr<UnitTestComposite>;		
-		using Suite = CoreTools::Suite;
+    public:
+        CMainFunctionTestingHelper(int argc, char** argv);
+        CMainFunctionTestingHelper(int argc, char** argv, const std::string& suiteName);
+        ~CMainFunctionTestingHelper() = 0;
 
-	public:
-		CMainFunctionTestingHelper(int argc, char** argv);
-		CMainFunctionTestingHelper(int argc, char** argv,const std::string& suiteName);
-		~CMainFunctionTestingHelper() = 0; 
+        CMainFunctionTestingHelper(const CMainFunctionTestingHelper& rhs) = delete;
+        CMainFunctionTestingHelper& operator=(const CMainFunctionTestingHelper& rhs) = delete;
+        CMainFunctionTestingHelper(CMainFunctionTestingHelper&& rhs) noexcept;
+        CMainFunctionTestingHelper& operator=(CMainFunctionTestingHelper&& rhs) noexcept;
 
-		CMainFunctionTestingHelper(const CMainFunctionTestingHelper& rhs) = delete;
-		CMainFunctionTestingHelper& operator=(const CMainFunctionTestingHelper& rhs) = delete;
-		CMainFunctionTestingHelper(CMainFunctionTestingHelper&& rhs) noexcept = delete;
-		CMainFunctionTestingHelper& operator=(CMainFunctionTestingHelper&& rhs) noexcept = delete;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+    protected:
+        using SuiteSharedPtr = std::shared_ptr<Suite>;
 
-	protected:
-		using SuiteSharedPtr = std::shared_ptr<Suite>;
+    protected:
+        void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
 
-	protected:
-		void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestPtr& unitTest);
+        [[nodiscard]] bool IsPrintRun() const noexcept;
 
-		bool IsPrintRun() const noexcept;
+        [[nodiscard]] int RunSuite();
 
-		int RunSuite();
+        void AddSuite(const Suite& suite);
 
-		void AddSuite(const Suite& suite);
+        template <typename TestType, typename... Types>
+        void AddTest(Suite& suite, const std::string& suiteName, const std::string& testName, Types&&... args);
 
-		template<typename TestType, typename... Types>
-		void AddTest(Suite& suite, const std::string& suiteName, const std::string& testName, Types&&... args)
-		{
-			auto unitTest = std::make_shared<TestType>(GetStreamShared(), std::forward<Types>(args)...);
+        [[nodiscard]] Suite GenerateSuite(const std::string& name);
 
-			AddTest(suiteName, suite, testName, unitTest);
-		} 
+    private:
+        [[nodiscard]] int DoRun() override;
 
-		Suite GenerateSuite(const std::string& name); 
-
-	private:
-		int DoRun() override;
-
-	private:
-		TestingInformationHelper m_TestingInformationHelper;
-		Suite m_Suite;
-	};
+    private:
+        TestingInformationHelper m_TestingInformationHelper;
+        Suite m_Suite;
+    };
 }
 
-#endif // CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
+#endif  // CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H

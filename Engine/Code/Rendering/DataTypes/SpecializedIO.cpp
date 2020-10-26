@@ -88,8 +88,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    array<Rendering::FloatColour::ValueType, Rendering::FloatColour::sm_ArraySize> colour{};
-    Read(Rendering::FloatColour::sm_ArraySize, colour.data());
+    auto colour = ReadContainer<Rendering::FloatColour::ValueType, Rendering::FloatColour::sm_ArraySize>();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
@@ -111,8 +110,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleColour& datum)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    array<Rendering::DoubleColour::ValueType, Rendering::DoubleColour::sm_ArraySize> colour{};
-    Read(Rendering::DoubleColour::sm_ArraySize, colour.data());
+    auto colour = ReadContainer<Rendering::DoubleColour::ValueType, Rendering::DoubleColour::sm_ArraySize>();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
@@ -134,8 +132,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::ByteColour& datum)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    array<Rendering::ByteColour::ValueType, Rendering::ByteColour::sm_ArraySize> colour{};
-    Read(Rendering::ByteColour::sm_ArraySize, colour.data());
+    auto colour = ReadContainer<Rendering::ByteColour::ValueType, Rendering::ByteColour::sm_ArraySize>();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
@@ -157,8 +154,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::IntColour& datum)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    array<Rendering::IntColour::ValueType, Rendering::IntColour::sm_ArraySize> colour{};
-    Read(Rendering::IntColour::sm_ArraySize, colour.data());
+    auto colour = ReadContainer<Rendering::IntColour::ValueType, Rendering::IntColour::sm_ArraySize>();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。

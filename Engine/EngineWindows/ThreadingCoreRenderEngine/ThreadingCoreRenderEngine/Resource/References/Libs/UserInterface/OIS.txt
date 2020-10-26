@@ -1,0 +1,10 @@
+OIS
+ 
+官方网站 
+http://wiki.ogre3d.org/OIS
+
+☆
+
+知识点 
+1.	OIS。
+

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/15 10:34)
+//	引擎版本：0.5.2.0 (2020/10/22 11:35)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_H
@@ -21,13 +21,13 @@ CORE_TOOLS_EXPORT_SHARED_PTR(OutTopLevelImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE OutTopLevel
+    class CORE_TOOLS_DEFAULT_DECLARE OutTopLevel final
     {
     public:
         DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(OutTopLevel);
 
     public:
-        OutTopLevel();
+        explicit OutTopLevel(DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_DECLARE;
 

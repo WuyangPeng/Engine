@@ -374,7 +374,7 @@ void Rendering::PlanarReflectionEffect
 
 	GlobalEffect::Load(source);
 
-	source->Read(mNumPlanes, mReflectances);
+	//source->Read(mNumPlanes, mReflectances);
 //	source.ReadSharedPtr(mNumPlanes, mPlanes);
 
 	CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);

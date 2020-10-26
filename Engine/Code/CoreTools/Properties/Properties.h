@@ -1,34 +1,35 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:19)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 13:05)
 
 #ifndef CORE_TOOLS_PROPERTIES_H
 #define CORE_TOOLS_PROPERTIES_H
 
-#include "SimplePropertyGetExternalDetail.h"
-#include "SimplePropertySetExternalDetail.h"
-#include "PropertyGetExternalDetail.h"
-#include "PropertySetExternalDetail.h"
-#include "PropertyGetSetExternalDetail.h"
-#include "StaticPropertyGetExternalDetail.h"
-#include "StaticPropertySetExternalDetail.h"
-#include "StaticPropertyGetSetExternalDetail.h"
 #include "DirectPropertyGetInternalDetail.h"
 #include "DirectPropertySetInternalDetail.h"
-#include "PropertyGetExternalOffsetDetail.h"
-#include "PropertyGetInternalOffsetDetail.h"
 #include "MethodPropertyGetDetail.h"
-#include "MethodPropertySetDetail.h"
-#include "MethodPropertyGetSetDetail.h"
 #include "MethodPropertyGetExternalDetail.h"
-#include "MethodPropertySetExternalDetail.h"
+#include "MethodPropertyGetSetDetail.h"
 #include "MethodPropertyGetSetExternalDetail.h"
-#include "StaticPropertyGetSetDetail.h"
+#include "MethodPropertySetDetail.h"
+#include "MethodPropertySetExternalDetail.h"
 #include "PropertyBaseDetail.h"
 #include "PropertyDetail.h"
+#include "PropertyGetExternalDetail.h"
+#include "PropertyGetExternalOffsetDetail.h"
+#include "PropertyGetInternalOffsetDetail.h"
+#include "PropertyGetSetExternalDetail.h"
+#include "PropertySetExternalDetail.h"
+#include "SimplePropertyGetExternalDetail.h"
+#include "SimplePropertySetExternalDetail.h"
+#include "StaticPropertyGetExternalDetail.h"
+#include "StaticPropertyGetSetDetail.h"
+#include "StaticPropertyGetSetExternalDetail.h"
+#include "StaticPropertySetExternalDetail.h"
 
-#endif // CORE_TOOLS_PROPERTIES_H
-
- 
+#endif  // CORE_TOOLS_PROPERTIES_H

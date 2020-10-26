@@ -1,34 +1,36 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 11:10)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/20 11:08)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_1D_ARRAY_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_1D_ARRAY_DETAIL_H
 
 #include "SmartPointer1DArray.h"
 #include "SmartPointerManager.h"
-#include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/MemoryMacro.h"
 
 template <typename T>
-CoreTools::SmartPointer1DArray<T>
-	::SmartPointer1DArray(T* data)
-	:m_Data{ data }
+CoreTools::SmartPointer1DArray<T>::SmartPointer1DArray(PointerType data)
+    : m_Data{ data }
 {
-	SMART_POINTER_SINGLETON.IncreaseReference(m_Data);
+    SMART_POINTER_SINGLETON.IncreaseReference(m_Data);
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename T>
-CoreTools::SmartPointer1DArray<T>
-	::~SmartPointer1DArray()
+CoreTools::SmartPointer1DArray<T>::~SmartPointer1DArray() noexcept
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+
     EXCEPTION_TRY
     {
         const auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
@@ -38,148 +40,147 @@ CoreTools::SmartPointer1DArray<T>
             DELETE1(m_Data);
         }
     }
-    EXCEPTION_ALL_CATCH(CoreTools)		
-	
+    EXCEPTION_ALL_CATCH(CoreTools)
 }
 
 template <typename T>
-CoreTools::SmartPointer1DArray<T>
-	::SmartPointer1DArray(const ClassType& rhs)
-	:m_Data{ rhs.m_Data }
+CoreTools::SmartPointer1DArray<T>::SmartPointer1DArray(const SmartPointer1DArray& rhs)
+    : m_Data{ rhs.m_Data }
 {
-	SMART_POINTER_SINGLETON.CopyIncreaseReference(m_Data);
+    [[maybe_unused]] const auto reference = SMART_POINTER_SINGLETON.CopyIncreaseReference(m_Data);
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename T>
-CoreTools::SmartPointer1DArray<T>& CoreTools::SmartPointer1DArray<T>
-	::operator=(const ClassType& rhs)
+CoreTools::SmartPointer1DArray<T>& CoreTools::SmartPointer1DArray<T>::operator=(const SmartPointer1DArray& rhs)
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	ClassType temp{ rhs };
-	Swap(temp);
+    ClassType temp{ rhs };
+    Swap(temp);
 
-	return *this;
+    return *this;
 }
 
 template <typename T>
-CoreTools::SmartPointer1DArray<T>& CoreTools::SmartPointer1DArray<T>
-	::operator=(T* data)
+CoreTools::SmartPointer1DArray<T>::SmartPointer1DArray(SmartPointer1DArray&& rhs) noexcept
+    : m_Data{ std::move(rhs.m_Data) }
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
 
-	ClassType temp{ data };
-	Swap(temp);
+template <typename T>
+CoreTools::SmartPointer1DArray<T>& CoreTools::SmartPointer1DArray<T>::operator=(SmartPointer1DArray&& rhs) noexcept
+{
+    m_Data = std::move(rhs.m_Data);
 
-	return *this;
+    return *this;
+}
+
+template <typename T>
+CoreTools::SmartPointer1DArray<T>& CoreTools::SmartPointer1DArray<T>::operator=(PointerType data)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    ClassType temp{ data };
+    Swap(temp);
+
+    return *this;
 }
 
 // private
 template <typename T>
-void CoreTools::SmartPointer1DArray<T>
-	::Swap(ClassType& rhs) noexcept
+void CoreTools::SmartPointer1DArray<T>::Swap(SmartPointer1DArray& rhs) noexcept
 {
-	std::swap(m_Data, rhs.m_Data);
+    std::swap(m_Data, rhs.m_Data);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename T>
-bool CoreTools::SmartPointer1DArray<T>
-	::IsValid() const noexcept
+bool CoreTools::SmartPointer1DArray<T>::IsValid() const noexcept
 {
-	return true;
+    return true;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-const T* CoreTools::SmartPointer1DArray<T>
-	::GetData() const noexcept
+typename CoreTools::SmartPointer1DArray<T>::ConstPointerType CoreTools::SmartPointer1DArray<T>::GetData() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_Data;
+    return m_Data;
 }
 
 template <typename T>
-CoreTools::SmartPointer1DArray<T>
-	::operator const T*() const noexcept
+CoreTools::SmartPointer1DArray<T>::operator ConstPointerType() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return GetData();
+    return GetData();
 }
 
 template <typename T>
-const T& CoreTools::SmartPointer1DArray<T>
-	::operator* () const noexcept
+typename CoreTools::SmartPointer1DArray<T>::ConstReferenceType CoreTools::SmartPointer1DArray<T>::operator*() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return *GetData();
+    return *GetData();
 }
 
 template <typename T>
-const T* CoreTools::SmartPointer1DArray<T>
-	::operator-> () const noexcept
+typename CoreTools::SmartPointer1DArray<T>::ConstPointerType CoreTools::SmartPointer1DArray<T>::operator->() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return GetData();
+    return GetData();
 }
 
 template <typename T>
-T* CoreTools::SmartPointer1DArray<T>
-	::GetData() noexcept
+typename CoreTools::SmartPointer1DArray<T>::PointerType CoreTools::SmartPointer1DArray<T>::GetData() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return NON_CONST_MEMBER_CALL_CONST_MEMBER(T*, GetData);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(PointerType, GetData);
 }
 
 template <typename T>
-CoreTools::SmartPointer1DArray<T>
-	::operator T*() noexcept
+CoreTools::SmartPointer1DArray<T>::operator PointerType() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return GetData();
+    return GetData();
 }
 
 template <typename T>
-T& CoreTools::SmartPointer1DArray<T>
-	::operator* () noexcept
+typename CoreTools::SmartPointer1DArray<T>::ReferenceType CoreTools::SmartPointer1DArray<T>::operator*() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return *GetData();
+    return *GetData();
 }
 
 template <typename T>
-T* CoreTools::SmartPointer1DArray<T>
-	::operator-> () noexcept
+typename CoreTools::SmartPointer1DArray<T>::PointerType CoreTools::SmartPointer1DArray<T>::operator->() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return GetData();
+    return GetData();
 }
 
 template <typename T>
-bool CoreTools
-	::operator==(const SmartPointer1DArray<T>& lhs, T* data) noexcept
+bool CoreTools::operator==(const SmartPointer1DArray<T>& lhs, T* data) noexcept
 {
-	if (lhs.GetData() == data)
-		return true;
-	else
-		return false;
+    if (lhs.GetData() == data)
+        return true;
+    else
+        return false;
 }
 
 template <typename T>
-bool CoreTools
-	::operator==(const SmartPointer1DArray<T>& lhs, const SmartPointer1DArray<T>& rhs) noexcept
+bool CoreTools::operator==(const SmartPointer1DArray<T>& lhs, const SmartPointer1DArray<T>& rhs) noexcept
 {
-	return lhs.GetData() == rhs.GetData();
+    return lhs.GetData() == rhs.GetData();
 }
 
-#endif // CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_1D_ARRAY_DETAIL_H
+#endif  // CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_1D_ARRAY_DETAIL_H

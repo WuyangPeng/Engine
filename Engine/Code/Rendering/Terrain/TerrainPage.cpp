@@ -151,7 +151,7 @@ void Rendering::TerrainPage
 
     source->Read(mSize);
     const int numVertices = mSize*mSize;
-    source->Read(numVertices, mHeights);
+  //  source->Read(numVertices, mHeights);
     source->ReadAggregate(mOrigin);
     source->Read(mMinElevation);
     source->Read(mMaxElevation);

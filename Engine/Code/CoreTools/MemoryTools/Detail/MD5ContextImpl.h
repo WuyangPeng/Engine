@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/MemoryTools/MemoryToolsFwd.h"
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
 #include <array>
 
@@ -24,14 +25,14 @@ namespace CoreTools
         using ClassType = MD5ContextImpl;
 
     public:
-        MD5ContextImpl();
+        MD5ContextImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         void MD5Init();
 
         // 允许多次调用MD5Update用于对多个数组进行更新
-        void MD5Update(uint8_t const* buffer, uint32_t length);
+        void MD5Update(uint8_t const* buffer, uint32_t length) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
 
         void MD5Final(uint8_t* digest);
 
@@ -40,7 +41,7 @@ namespace CoreTools
 
     private:
         [[nodiscard]] uint32_t UpdateBitCount() noexcept;
-        bool HandleOddSizedChunks(uint32_t originalLength) noexcept;
+        [[nodiscard]] bool HandleOddSizedChunks(uint32_t originalLength) noexcept;
         void ProcessDataIn64Byte() noexcept;
         void InByteReverse() noexcept;
         void BufferByteReverse() noexcept;
@@ -75,7 +76,10 @@ namespace CoreTools
         static constexpr auto sm_BufferSize = 4;
         static constexpr auto sm_DealBufferSize = sm_DealBufferByte / sizeof(uint32_t);
 
-        std::array<uint32_t, sm_BufferSize> m_Buffer;
+        using BufferType = std::array<uint32_t, sm_BufferSize>;
+
+    private:
+        BufferType m_Buffer;
 
         // 以64位二进制表示的填充前信息长度（单位为Bit），
         // 如果二进制表示的填充前信息长度超过64位，则取低64位。

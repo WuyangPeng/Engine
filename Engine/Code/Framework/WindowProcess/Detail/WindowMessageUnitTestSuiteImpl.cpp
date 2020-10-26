@@ -20,7 +20,7 @@ using namespace std::literals;
 
 Framework::WindowMessageUnitTestSuiteImpl
 	::WindowMessageUnitTestSuiteImpl(const string& name, const  OStreamShared& streamShared)
-    : m_Alloc{ CoreTools::DisableNotThrow::Disable }, m_TestingInformationHelper{},
+    : m_Alloc{ CoreTools::DisableNotThrow::Disable }, m_TestingInformationHelper{ CoreTools::DisableNotThrow::Disable },
 	 m_Suite{ make_unique<Suite>(name, streamShared, m_TestingInformationHelper.IsPrintRun()) },
 	 m_Process{ { System::WindowsKeyCodes::F1,&ClassType::ResetTestDataOnMessage },
 			    { System::WindowsKeyCodes::F5,&ClassType::RunUnitTestOnMessage } }

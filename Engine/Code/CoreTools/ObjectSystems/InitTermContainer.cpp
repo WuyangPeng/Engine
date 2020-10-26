@@ -5,12 +5,13 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/11 10:58)
+//	引擎版本：0.5.2.0 (2020/10/22 15:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "InitTermContainer.h"
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
@@ -48,11 +49,12 @@ void CoreTools::InitTermContainer::AddExecuteFunction(ExecuteFunction function)
     }
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440) // 无法保证function()调用不抛出异常，编译器误报。
 void CoreTools::InitTermContainer::Execute()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
+
+    // 无法保证function()调用不抛出异常，编译器误报。
+    CoreTools::DisableNoexcept();
 
     int index = 0;
     for (auto function : m_ExecuteFunction)
@@ -72,4 +74,3 @@ void CoreTools::InitTermContainer::Execute()
         ++index;
     }
 }
-#include STSTEM_WARNING_POP

@@ -56,7 +56,9 @@ void Network::NullSockConnector ::AsyncConnect(const EventInterfaceSharedPtr& ev
 	callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Null));
 	callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), 0);
 
-	eventInterface->EventFunction(callbackParameters);
+	 if (!eventInterface->EventFunction(callbackParameters))
+        {
+        }
 }
 
 const Network::NullSockConnector::SockConnectorPtr Network::NullSockConnector

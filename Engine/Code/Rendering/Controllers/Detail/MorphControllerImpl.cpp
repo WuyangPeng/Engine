@@ -236,13 +236,13 @@ void Rendering::MorphControllerImpl
 
 	const auto numTotalVertices = m_NumVertices * m_NumTargets;
 	m_Vertices.resize(numTotalVertices);
-        source->ReadAggregate(numTotalVertices, &m_Vertices[0]);
+        source->ReadAggregateContainer(numTotalVertices, m_Vertices);
 
 	m_Times.resize(m_NumKeys);
-        source->Read(m_NumKeys, &m_Times[0]);
+   //     source->Read(m_NumKeys, &m_Times[0]);
 
 	const auto numTotalWeights = m_NumKeys * (m_NumTargets - 1);
 	m_Weights.resize(numTotalWeights);
-        source->Read(numTotalWeights, &m_Weights[0]);
+   //     source->Read(numTotalWeights, &m_Weights[0]);
 }
  #include STSTEM_WARNING_POP

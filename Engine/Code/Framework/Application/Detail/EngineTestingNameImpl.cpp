@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
- 
+ #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 using std::string;
 using std::for_each;
 using namespace std::literals;

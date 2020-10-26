@@ -138,7 +138,7 @@ void Rendering::CollapseRecordImpl ::Load(const CoreTools::BufferSourceSharedPtr
 	source->Read(m_VThrow);
 	source->Read(m_NumVertices);
 	source->Read(m_NumTriangles);
-	source->Read(m_Indices); 
+        m_Indices = source->ReadVectorWithoutNumber<int>();
 }
 
 void Rendering::CollapseRecordImpl

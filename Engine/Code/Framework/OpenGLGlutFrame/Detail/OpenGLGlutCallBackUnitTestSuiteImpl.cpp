@@ -13,13 +13,14 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 using std::string;
 using std::make_shared;
 
 Framework::OpenGLGlutCallBackUnitTestSuiteImpl
 	::OpenGLGlutCallBackUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
-	: m_TestingInformationHelper{ }, m_Suite{ make_shared<Suite>(name,streamShared,m_TestingInformationHelper.IsPrintRun()) },
+    : m_TestingInformationHelper{ CoreTools::DisableNotThrow::Disable }, m_Suite{ make_shared<Suite>(name, streamShared, m_TestingInformationHelper.IsPrintRun()) },
 	  m_Process{ { System::WindowsKeyCodes::F1,&ClassType::ResetTestDataOnMessage },
 				 { System::WindowsKeyCodes::F5,&ClassType::RunUnitTestOnMessage } }
 {

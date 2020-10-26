@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/12 22:53)
+//	引擎版本：0.5.2.0 (2020/10/21 20:12)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_CONST_OBJECT_ASSOCIATED_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_CONST_OBJECT_ASSOCIATED_H
@@ -17,7 +17,7 @@
 namespace CoreTools
 {
     template <typename T>
-    struct ConstObjectAssociated
+    struct ConstObjectAssociated final
     {
         static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
 

@@ -1,13 +1,17 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/21 15:47)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/22 14:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BufferOutStreamImpl.h"
 #include "TopLevel.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -18,12 +22,9 @@
 using std::make_pair;
 using std::make_shared;
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26486)
 
-CoreTools::BufferOutStreamImpl ::BufferOutStreamImpl(const OutTopLevel& topLevel)
-    : m_TopLevel{ topLevel }, m_ObjectRegister{ make_shared<ObjectRegister>() }, m_BufferPtr{}, m_TargetPtr{}
+CoreTools::BufferOutStreamImpl::BufferOutStreamImpl(const OutTopLevel& topLevel)
+    : m_TopLevel{ topLevel }, m_ObjectRegister{ make_shared<ObjectRegister>(DisableNotThrow::Disable) }, m_Buffer{}, m_Target{}
 {
     GenerateBuffer();
 
@@ -31,7 +32,7 @@ CoreTools::BufferOutStreamImpl ::BufferOutStreamImpl(const OutTopLevel& topLevel
 }
 
 // private
-void CoreTools::BufferOutStreamImpl ::GenerateBuffer()
+void CoreTools::BufferOutStreamImpl::GenerateBuffer()
 {
     Register();
 
@@ -45,25 +46,26 @@ void CoreTools::BufferOutStreamImpl ::GenerateBuffer()
 }
 
 // private
-void CoreTools::BufferOutStreamImpl ::Register()
+void CoreTools::BufferOutStreamImpl::Register()
 {
-    // 插入空指针和零索引的配对。
-    //m_ObjectRegister.RegisterRoot(ConstObjectInterfaceSharedPtr());
-
     // 创建唯一对象集合在对象图中。
     // 使我们可以创建用于写入缓冲区所需的数据流的字节数的确切大小。
     for (const auto& object : m_TopLevel)
     {
-        object->Register(m_ObjectRegister);
+        const auto uniqueID = object->Register(m_ObjectRegister);
+        if (uniqueID == 0)
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
+                << SYSTEM_TEXT("uniqueID == 0")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
+        }
     }
 }
 
 // private
-int CoreTools::BufferOutStreamImpl ::GetBufferSize()
+int CoreTools::BufferOutStreamImpl::GetBufferSize()
 {
     auto bufferSize = 0;
-
-    // 从1开始计数
 
     for (const auto& value : *m_ObjectRegister)
     {
@@ -71,52 +73,49 @@ int CoreTools::BufferOutStreamImpl ::GetBufferSize()
     }
 
     // 调整缓冲区大小考虑到了“Top Level”字符串。
-    auto topLevelBytesNumber = Stream::GetStreamingSize(TopLevel::GetTopLevelDescription());
+    const auto topLevelBytesNumber = Stream::GetStreamingSize(TopLevel::GetTopLevelDescription());
     bufferSize += topLevelBytesNumber * m_TopLevel.GetTopLevelSize();
 
     return bufferSize;
 }
 
 // private
-void CoreTools::BufferOutStreamImpl ::ResetBufferSize(int bufferSize)
+void CoreTools::BufferOutStreamImpl::ResetBufferSize(int bufferSize)
 {
     CORE_TOOLS_ASSERTION_0(0 < bufferSize, "缓冲区大小小于或等于0！");
 
     // 创建对象将要被写入的缓冲区。
-    m_BufferPtr = make_shared<FileBuffer>(bufferSize);
-    m_TargetPtr = make_shared<BufferTarget>(bufferSize, m_ObjectRegister);
+    m_Buffer = make_shared<FileBuffer>(bufferSize);
+    m_Target = make_shared<BufferTarget>(bufferSize, m_ObjectRegister);
 }
 
-void CoreTools::BufferOutStreamImpl ::SaveToBuffer()
+void CoreTools::BufferOutStreamImpl::SaveToBuffer()
 {
     // 保存对象到目标缓冲区。
-    // 从1开始计数
 
     for (const auto& value : *m_ObjectRegister)
     {
         if (m_TopLevel.IsTopLevel(value.m_Object))
         {
-            m_TargetPtr->Write(TopLevel::GetTopLevelDescription());
+            m_Target->Write(TopLevel::GetTopLevelDescription());
         }
-        value.m_Object->Save(m_TargetPtr);
+        value.m_Object->Save(m_Target);
     }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::BufferOutStreamImpl ::IsValid() const noexcept
+bool CoreTools::BufferOutStreamImpl::IsValid() const noexcept
 {
-    if (m_BufferPtr != nullptr && m_TargetPtr != nullptr)
+    if (m_Buffer != nullptr && m_Target != nullptr)
         return true;
     else
         return false;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
-CoreTools::BufferOutStreamImpl::FileBufferPtr CoreTools::BufferOutStreamImpl ::GetBufferOutStreamInformation() const noexcept
+CoreTools::FileBufferSharedPtr CoreTools::BufferOutStreamImpl::GetBufferOutStreamInformation() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_BufferPtr;
+    return m_Buffer;
 }
-
-#include STSTEM_WARNING_POP

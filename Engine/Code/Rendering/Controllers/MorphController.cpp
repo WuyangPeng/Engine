@@ -153,7 +153,7 @@ void Rendering::MorphController
 	::SetObject(ControllerInterface* object) 
 {
 	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::sm_Type), "无效类\n");
+    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
 	
 	ParentType::SetObject(object);
 }

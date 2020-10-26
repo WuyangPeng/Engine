@@ -1,118 +1,103 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 11:14)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 16:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "NoValueCommandArgument.h"
-
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::string;
 using std::make_shared;
-using namespace std::literals;
+using std::string;
 
-CoreTools::NoValueCommandArgument
-	::NoValueCommandArgument(int index, const string& name)
-	:ParentType{ index, name }
+CoreTools::NoValueCommandArgument::NoValueCommandArgument(int index, const string& name)
+    : ParentType{ index, name }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
- 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, NoValueCommandArgument)
 
-int CoreTools::NoValueCommandArgument
-	::GetInteger() const
+int CoreTools::NoValueCommandArgument::GetInteger() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是整数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是整数！"s));
 }
 
-float CoreTools::NoValueCommandArgument
-	::GetFloat() const
+float CoreTools::NoValueCommandArgument::GetFloat() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s));
 }
 
-double CoreTools::NoValueCommandArgument
-	::GetDouble() const
+double CoreTools::NoValueCommandArgument::GetDouble() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s));
 }
 
-const string CoreTools::NoValueCommandArgument
-	::GetString() const
+const string CoreTools::NoValueCommandArgument::GetString() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是字符串！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是字符串！"s));
 }
 
-bool CoreTools::NoValueCommandArgument
-	::IsInteger() const noexcept
+bool CoreTools::NoValueCommandArgument::IsInteger() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return false;
+    return false;
 }
 
-bool CoreTools::NoValueCommandArgument
-	::IsFloat() const noexcept
+bool CoreTools::NoValueCommandArgument::IsFloat() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return false;
+    return false;
 }
 
-bool CoreTools::NoValueCommandArgument
-	::IsDouble() const noexcept
+bool CoreTools::NoValueCommandArgument::IsDouble() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return false;
+    return false;
 }
 
-bool CoreTools::NoValueCommandArgument
-	::IsString() const noexcept
+bool CoreTools::NoValueCommandArgument::IsString() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return false;
+    return false;
 }
 
-bool CoreTools::NoValueCommandArgument
-	::IsNoValue() const noexcept
+bool CoreTools::NoValueCommandArgument::IsNoValue() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return true;
+    return true;
 }
 
-CoreTools::NoValueCommandArgument::CommandArgumentSharedPtr CoreTools::NoValueCommandArgument
-	::Clone() const
+CoreTools::NoValueCommandArgument::CommandArgumentSharedPtr CoreTools::NoValueCommandArgument::Clone() const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return make_shared<NoValueCommandArgument>(*this);
+    return make_shared<NoValueCommandArgument>(*this);
 }
 
-void CoreTools::NoValueCommandArgument ::AddArgumentValue([[maybe_unused]] const string& value)
+void CoreTools::NoValueCommandArgument::AddArgumentValue([[maybe_unused]] const string& value)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-	 
-
-	THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument没有值！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument没有值！"s));
 }
-

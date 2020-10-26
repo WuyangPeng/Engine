@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 15:37)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/21 10:22)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_IMPL_H
@@ -14,30 +17,28 @@
 
 namespace CoreTools
 {
-	class ObjectManagerImpl
-	{
-	public:
-		using ClassType = ObjectManagerImpl;
-		using FactoryFunction = ObjectInterface::FactoryFunction;
+    class CORE_TOOLS_HIDDEN_DECLARE ObjectManagerImpl final
+    {
+    public:
+        using ClassType = ObjectManagerImpl;
+        using FactoryFunction = ObjectInterface::FactoryFunction;
 
-	public:
-		ObjectManagerImpl() noexcept;
+    public:
+        ObjectManagerImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-	public:
-		FactoryFunction Find(const std::string& name) const;
-		void Insert(const std::string& name, FactoryFunction function);
-		void Remove(const std::string& name);
+    public:
+        [[nodiscard]] FactoryFunction Find(const std::string& name) const;
+        void Insert(const std::string& name, FactoryFunction function);
+        void Remove(const std::string& name);
 
-		uint64_t NextUniqueID();
+    private:
+        using FactoryContainer = std::map<std::string, FactoryFunction>;
 
-	private:
-		using FactoryContainer = std::map<std::string, FactoryFunction>;
-
-	private:
-		FactoryContainer m_Factories;
-	};
+    private:
+        FactoryContainer m_Factories;
+    };
 }
 
-#endif // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_IMPL_H
+#endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_IMPL_H

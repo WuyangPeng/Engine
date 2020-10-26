@@ -161,7 +161,7 @@ void Rendering::BlendTransformController
 	::SetObject(ControllerInterface* object) 
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::sm_Type), "无效类\n");
+	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "无效类\n");
 	
 	ParentType::SetObject(object);
 	m_Impl->SetObject(object); 

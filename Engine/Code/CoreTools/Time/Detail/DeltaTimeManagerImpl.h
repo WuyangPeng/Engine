@@ -1,10 +1,13 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 16:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/22 18:43)
 
-#ifndef CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H 
+#ifndef CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H
 #define CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H
 
 #include "CoreTools/CoreToolsDll.h"
@@ -13,25 +16,25 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE DeltaTimeManagerImpl
-	{
-	public:
-		using ClassType = DeltaTimeManagerImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE DeltaTimeManagerImpl final
+    {
+    public:
+        using ClassType = DeltaTimeManagerImpl;
 
-	public:
-		DeltaTimeManagerImpl() noexcept;
+    public:
+        DeltaTimeManagerImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void ResetCurrentTime() noexcept;
-		uint64_t GetElapsedTimeInMicroseconds() const noexcept;
-		uint64_t GetElapsedTimeInSeconds() const noexcept;
-		uint64_t GetNowTimeInMicroseconds() const noexcept;
-		uint64_t GetNowTimeInSeconds() const noexcept;
+        [[nodiscard]] void ResetCurrentTime() noexcept;
+        [[nodiscard]] uint64_t GetElapsedTimeInMicroseconds() const noexcept;
+        [[nodiscard]] uint64_t GetElapsedTimeInSeconds() const noexcept;
+        [[nodiscard]] uint64_t GetNowTimeInMicroseconds() const noexcept;
+        [[nodiscard]] uint64_t GetNowTimeInSeconds() const noexcept;
 
-	private:
-		System::DeltaTimeValueData m_Initial;
-	};
+    private:
+        System::DeltaTimeValueData m_Initial;
+    };
 }
 
-#endif // CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H
+#endif  // CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H

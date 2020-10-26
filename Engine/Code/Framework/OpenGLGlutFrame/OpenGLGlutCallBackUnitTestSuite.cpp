@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
-
+#include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 using std::move;
 using std::string; 
 using std::make_shared;

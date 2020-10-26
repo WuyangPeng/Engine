@@ -1,37 +1,45 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 16:20)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 13:12)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_BASE_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_BASE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CoreTools/Helper/PropertiesMacro.h" 
+#include "CoreTools/Helper/PropertiesMacro.h"
 
 namespace CoreTools
 {
-	// 需要通过宏TCRE_DEFINE_PROPERTY定义m_Offset
-	template<typename ID, typename T>
-	class PropertyBase
-	{
-	public:
-		using ClassType = PropertyBase<ID, T>;
+    // 需要通过宏TCRE_DEFINE_PROPERTY定义m_Offset
+    template <typename ID, typename T>
+    class PropertyBase
+    {
+    public:
+        using ClassType = PropertyBase<ID, T>;
 
-	public:
-		virtual ~PropertyBase();
+    public:
+        virtual ~PropertyBase() = default;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        PropertyBase(const PropertyBase& rhs) noexcept = default;
+        PropertyBase& operator=(const PropertyBase& rhs) noexcept = default;
+        PropertyBase(PropertyBase&& rhs) noexcept = default;
+        PropertyBase& operator=(PropertyBase&& rhs) noexcept = default;
 
-	protected:
-		T* Holder();
-		const T* Holder() const;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-	private:
-		static const ptrdiff_t m_Offset;
-	};
+    protected:
+        T* Holder();
+        const T* Holder() const;
+
+    private:
+        static const ptrdiff_t m_Offset;
+    };
 }
 
-#endif // CORE_TOOLS_PROPERTIES_PROPERTY_BASE_H
+#endif  // CORE_TOOLS_PROPERTIES_PROPERTY_BASE_H

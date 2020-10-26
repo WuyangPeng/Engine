@@ -206,7 +206,10 @@ bool Network::CacheClient
 		{
 			m_SocketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
 			GetSocketManagerSharedPtr()->Insert(m_SocketID);
-			GetSocketManagerSharedPtr()->EventFunction(callbackParameters);
+			if(!GetSocketManagerSharedPtr()->EventFunction(callbackParameters))
+                        {
+                        
+			}
 
 			return true;
 		}
@@ -218,7 +221,10 @@ bool Network::CacheClient
 		BufferReceiveStream bufferReceiveStream{ m_ReceiveBuffer,GetConfigurationStrategy().GetParserStrategy() };
 		bufferReceiveStream.OnEvent(m_SocketID, GetSocketManagerSharedPtr());
 
-		GetSocketManagerSharedPtr()->EventFunction(callbackParameters);
+		if(!GetSocketManagerSharedPtr()->EventFunction(callbackParameters))
+                {
+                
+		}
 
 		return true;
 	}

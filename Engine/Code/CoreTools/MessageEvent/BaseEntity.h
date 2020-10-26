@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.1 (2019/06/28 17:50)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 15:14)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H
 #define CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H
@@ -10,40 +13,44 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "MessageEventFwd.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::BaseEntity>;
 template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools::BaseEntity>;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
+
 namespace CoreTools
 {
-	class CORE_TOOLS_DEFAULT_DECLARE BaseEntity : public std::enable_shared_from_this<BaseEntity>
-	{
-	public:
-		using ClassType = BaseEntity;
+    class CORE_TOOLS_DEFAULT_DECLARE BaseEntity : public std::enable_shared_from_this<BaseEntity>
+    {
+    public:
+        using ClassType = BaseEntity;
 
-	public:
-		BaseEntity();
-		virtual ~BaseEntity() noexcept = 0;
-		BaseEntity(const BaseEntity&) = default;
-		BaseEntity& operator= (const BaseEntity&) = default;
-		BaseEntity(BaseEntity&&) noexcept = default;
-		BaseEntity& operator= (BaseEntity&&) noexcept = default;
+    public:
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        BaseEntity();
+        virtual ~BaseEntity() noexcept = 0;
+        BaseEntity(const BaseEntity& rhs) = default;
+        BaseEntity& operator=(const BaseEntity& rhs) = default;
+        BaseEntity(BaseEntity&& rhs) noexcept = default;
+        BaseEntity& operator=(BaseEntity&& rhs) noexcept = default;
 
-		uint64_t GetEntityID() const noexcept;
- 
-		void Register();
-
-	private:
-		virtual void DoRegister();
-
-	private:
-		uint64_t m_EntityID;
-	};
-}
 #include STSTEM_WARNING_POP
-#endif // CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H
+
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
+
+        [[nodiscard]] uint64_t GetEntityID() const noexcept;
+
+        void Register();
+
+    private:
+        virtual void DoRegister();
+
+    private:
+        uint64_t m_EntityID;
+    };
+}
+
+#endif  // CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H

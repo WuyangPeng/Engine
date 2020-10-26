@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 17:26)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 15:58)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
@@ -10,43 +13,42 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "StateMachineBase.h"
-#include "CoreTools/MessageEvent/EventEntity.h" 
+#include "CoreTools/MessageEvent/EventEntity.h"
 
 namespace CoreTools
 {
-	template <typename Subclass, typename EventType = int>
-	class StateEntity : public EventEntity<EventType>
-	{
-	public:
-		using ClassType = StateEntity<Subclass, EventType>;
-		using ParentType = EventEntity<EventType>;
-		using StateMachineBase = StateMachineBase<Subclass, EventType>;
-		using State = State<Subclass>;
-		using StatePtr = std::shared_ptr<State>;
-		using ConstStatePtr = std::shared_ptr<const State>;
-		using Telegram = Telegram<EventType>;
+    template <typename Subclass, typename EventType = int>
+    class StateEntity : public EventEntity<EventType>
+    {
+    public:
+        using ClassType = StateEntity<Subclass, EventType>;
+        using ParentType = EventEntity<EventType>;
+        using StateMachineBase = StateMachineBase<Subclass, EventType>;
+        using State = State<Subclass>;
+        using StateSharedPtr = std::shared_ptr<State>;
+        using ConstStateSharedPtr = std::shared_ptr<const State>;
+        using Telegram = Telegram<EventType>;
 
-	public:
-		explicit StateEntity(StatePtr currentState);
-		explicit StateEntity(StatePtr currentState, StatePtr globalState);
-		virtual ~StateEntity();
+    public:
+        explicit StateEntity(StateSharedPtr currentState);
+        explicit StateEntity(StateSharedPtr currentState, StateSharedPtr globalState);
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		bool EventFunction(const Telegram& telegram);
+        [[nodiscard]] bool EventFunction(const Telegram& telegram);
 
-		void Update(int64_t timeInterval);
+        void Update(int64_t timeInterval);
 
-		ConstStatePtr GetCurrentState() const;
-		ConstStatePtr GetGlobalState() const;
-		StatePtr GetPossiblePreviousState();
+        [[nodiscard]] ConstStateSharedPtr GetCurrentState() const;
+        [[nodiscard]] ConstStateSharedPtr GetGlobalState() const;
+        [[nodiscard]] StateSharedPtr GetPossiblePreviousState();
 
-	private:
-		  void DoRegister() override;
+    private:
+        void DoRegister() override;
 
-	private:
-		StateMachineBase m_StateMachineBase;
-	};
+    private:
+        StateMachineBase m_StateMachineBase;
+    };
 }
 
-#endif // CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
+#endif  // CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H

@@ -34,7 +34,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        bool IsSuccess() const noexcept;
+        [[nodiscard]] bool IsSuccess() const noexcept;
 
     private:
         MasterType& m_Mutex;

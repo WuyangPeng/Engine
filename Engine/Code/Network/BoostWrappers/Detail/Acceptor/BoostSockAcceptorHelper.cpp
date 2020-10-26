@@ -41,7 +41,9 @@ void Network::BoostSockAcceptorHelper ::EventFunction(const ErrorCodeType& error
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Async), System::EnumCastUnderlying<int>(SocketManagerEvent::AsyncAcceptor));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::BytesTransferred), 0);
 
-    eventInterface->EventFunction(callbackParameters);
+    if (!eventInterface->EventFunction(callbackParameters))
+    {
+    }
 
     PrintAcceptSuccessLog(g_AsynchronousAcceptSuccessDescription, addressData);
 }

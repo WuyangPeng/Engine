@@ -1,30 +1,26 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.1 (2020/01/21 15:50)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/22 14:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "BufferSource.h"
+#include "BufferSourceDetail.h"
 #include "ObjectInterface.h"
 #include "StreamSize.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 
-CoreTools::BufferSource ::BufferSource(const ConstFileBufferSharedPtr& fileBuffer)
+CoreTools::BufferSource::BufferSource(const ConstFileBufferSharedPtr& fileBuffer)
     : m_Source{ fileBuffer }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -32,33 +28,31 @@ CoreTools::BufferSource ::BufferSource(const ConstFileBufferSharedPtr& fileBuffe
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferSource)
 
-bool CoreTools::BufferSource ::ReadBool()
+bool CoreTools::BufferSource::ReadBool()
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     uint32_t value{ 0 };
 
-    m_Source.Read(sizeof(uint32_t), &value);
+    Read(value);
 
     return (value != 0);
 }
 
-void CoreTools::BufferSource ::ReadBool(int elementsNumber, bool* data)
+void CoreTools::BufferSource::Read(bool& value)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    for (auto i = 0; i < elementsNumber; ++i)
-    {
-        data[i] = ReadBool();
-    }
+    value = ReadBool();
 }
 
-string CoreTools::BufferSource ::ReadString()
+string CoreTools::BufferSource::ReadString()
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     int32_t length{ 0 };
-    m_Source.Read(sizeof(int32_t), &length);
+    Read(length);
+
     if (0 < length)
     {
         // 字符串被写入为4字节的倍数。
@@ -76,48 +70,67 @@ string CoreTools::BufferSource ::ReadString()
     }
     else
     {
-        return "";
+        return string{};
     }
 }
 
-void CoreTools::BufferSource ::ReadString(int elementsNumber, string* data)
+void CoreTools::BufferSource::Read(string& value)
+{
+    value = ReadString();
+}
+
+void CoreTools::BufferSource::ReadBoolContainer(int elementsNumber, std::set<bool>& container)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
-        data[i] = ReadString();
+        container.emplace(ReadBool());
     }
 }
 
-int CoreTools::BufferSource ::GetBytesRead() const noexcept
+void CoreTools::BufferSource::ReadStringContainer(int elementsNumber, std::set<std::string>& container)
+{
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    for (auto i = 0; i < elementsNumber; ++i)
+    {
+        container.emplace(ReadString());
+    }
+}
+
+int CoreTools::BufferSource::GetBytesRead() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return m_Source.GetBytesProcessed();
 }
 
-int CoreTools::BufferSource ::GetBytesTotal() const
+int CoreTools::BufferSource::GetBytesTotal() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return m_Source.GetBytesTotal();
 }
 
-void CoreTools::BufferSource ::IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+void CoreTools::BufferSource::IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     m_Source.IncrementBytesProcessed(bytesNumber);
 }
 
-void CoreTools::BufferSource ::ReadUniqueID(ObjectInterfaceSharedPtr object)
+void CoreTools::BufferSource::ReadUniqueID(const ObjectInterfaceSharedPtr& object)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    uint64_t uniqueID{ 0 };
-    m_Source.Read(sizeof(uint64_t), &uniqueID);
-    object->SetUniqueID(uniqueID);
+    auto modify = object;
+
+    auto uniqueID = Read<uint64_t>();
+    modify->SetUniqueID(uniqueID);
 }
 
-#include STSTEM_WARNING_POP
+int32_t CoreTools::BufferSource::GetElementsNumber()
+{
+    return Read<int32_t>();
+}

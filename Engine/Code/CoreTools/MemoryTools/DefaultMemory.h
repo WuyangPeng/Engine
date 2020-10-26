@@ -17,7 +17,7 @@
 // 默认内存分配。
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE DefaultMemory
+    class CORE_TOOLS_DEFAULT_DECLARE DefaultMemory final
     {
     public:
         using ClassType = DefaultMemory;
@@ -25,19 +25,19 @@ namespace CoreTools
     public:
         // 对 1D 数组:  data[bound]
         template <typename T>
-        static T* New1DArray(const int bound);
+        [[nodiscard]] static T* New1DArray(const int bound);
 
         // 对 2D 数组:  data[bound2][bound1]
         template <typename T>
-        static T** New2DArray(const int bound1, const int bound2);
+        [[nodiscard]] static T** New2DArray(const int bound1, const int bound2);
 
         // 对 3D 数组:  data[bound3][bound2][bound1]
         template <typename T>
-        static T*** New3DArray(const int bound1, const int bound2, const int bound3);
+        [[nodiscard]] static T*** New3DArray(const int bound1, const int bound2, const int bound3);
 
         // 对 4D 数组:  data[bound4][bound3][bound2][bound1]
         template <typename T>
-        static T**** New4DArray(const int bound1, const int bound2, const int bound3, const int bound4);
+        [[nodiscard]] static T**** New4DArray(const int bound1, const int bound2, const int bound3, const int bound4);
 
         // 对单例
         template <typename T>

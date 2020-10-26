@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 10:54)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 15:52)
 
 #ifndef CORE_TOOLS_COMMAND_NO_VALUE_COMMAND_ARGUMENT_H
 #define CORE_TOOLS_COMMAND_NO_VALUE_COMMAND_ARGUMENT_H
@@ -13,32 +16,32 @@
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE NoValueCommandArgument : public CommandArgumentImpl
-	{
-	public:
-		using ClassType = NoValueCommandArgument;
-		using ParentType = CommandArgumentImpl;
+    class CORE_TOOLS_HIDDEN_DECLARE NoValueCommandArgument final : public CommandArgumentImpl
+    {
+    public:
+        using ClassType = NoValueCommandArgument;
+        using ParentType = CommandArgumentImpl;
 
-	public:
-		NoValueCommandArgument(int index, const std::string& name); 
+    public:
+        NoValueCommandArgument(int index, const std::string& name);
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		int GetInteger() const override;
-		float GetFloat() const override;
-		double GetDouble() const override;
-		const std::string GetString() const override;
+        [[nodiscard]] int GetInteger() const final;
+        [[nodiscard]] float GetFloat() const final;
+        [[nodiscard]] double GetDouble() const final;
+        [[nodiscard]] const std::string GetString() const final;
 
-		bool IsInteger() const noexcept override;
-		bool IsFloat() const noexcept override;
-		bool IsDouble() const noexcept override;
-		bool IsString() const noexcept override;
-		bool IsNoValue() const noexcept override;
+        [[nodiscard]] bool IsInteger() const noexcept final;
+        [[nodiscard]] bool IsFloat() const noexcept final;
+        [[nodiscard]] bool IsDouble() const noexcept final;
+        [[nodiscard]] bool IsString() const noexcept final;
+        [[nodiscard]] bool IsNoValue() const noexcept final;
 
-		CommandArgumentSharedPtr Clone() const override;
+        [[nodiscard]] CommandArgumentSharedPtr Clone() const final;
 
-		void AddArgumentValue(const std::string& value) override;
-	};
+        void AddArgumentValue(const std::string& value) final;
+    };
 }
 
-#endif // CORE_TOOLS_COMMAND_NO_VALUE_COMMAND_ARGUMENT_H
+#endif  // CORE_TOOLS_COMMAND_NO_VALUE_COMMAND_ARGUMENT_H

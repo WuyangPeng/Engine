@@ -1,11 +1,14 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 17:26)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 16:00)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_BASE_H
-#define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_BASE_H 
+#define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_BASE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
@@ -15,50 +18,54 @@
 
 namespace CoreTools
 {
-	template <typename EntityType, typename EventType>
-	class StateMachineBase
-	{
-	public:
-		using ClassType = StateMachineBase<EntityType, EventType>;
-		using EntityTypePtr = std::shared_ptr<EntityType>;
-		using EntityEventType = EventType;
-		using Telegram = Telegram<EntityEventType>;
-		using EntityTypeWeakPtr = std::weak_ptr<EntityType>;
-		using State = State<EntityType>;
-		using StatePtr = std::shared_ptr<State>;
-		using ConstStatePtr = std::shared_ptr<const State>;
+    template <typename EntityType, typename EventType>
+    class StateMachineBase
+    {
+    public:
+        using ClassType = StateMachineBase<EntityType, EventType>;
+        using EntityTypePtr = std::shared_ptr<EntityType>;
+        using EntityEventType = EventType;
+        using Telegram = Telegram<EntityEventType>;
+        using EntityTypeWeakPtr = std::weak_ptr<EntityType>;
+        using State = State<EntityType>;
+        using StateSharedPtr = std::shared_ptr<State>;
+        using ConstStateSharedPtr = std::shared_ptr<const State>;
 
-	public:
-		explicit StateMachineBase(StatePtr currentState);
-		StateMachineBase(StatePtr currentState, StatePtr globalState);
-		virtual ~StateMachineBase();
+    public:
+        explicit StateMachineBase(StateSharedPtr currentState);
+        StateMachineBase(StateSharedPtr currentState, StateSharedPtr globalState);
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        virtual ~StateMachineBase() noexcept = default;
+        StateMachineBase(const StateMachineBase& rhs) noexcept = default;
+        StateMachineBase& operator=(const StateMachineBase& rhs) noexcept = default;
+        StateMachineBase(StateMachineBase&& rhs) noexcept = default;
+        StateMachineBase& operator=(StateMachineBase&& rhs) noexcept = default;
 
-		void Register(EntityTypePtr owner);
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		void Update(int64_t timeInterval);
+        void Register(EntityTypePtr owner);
 
-		bool HandleMessage(const Telegram& msg);
+        void Update(int64_t timeInterval);
 
-		bool IsInState(const State& state) const;
+        [[nodiscard]] bool HandleMessage(const Telegram& msg);
 
-		ConstStatePtr GetCurrentState() const;
-		ConstStatePtr GetGlobalState() const;
-		ConstStatePtr GetPreviousState() const;
-		ConstStatePtr GetPossiblePreviousState() const;
+        [[nodiscard]] bool IsInState(const State& state) const;
 
-		StatePtr GetPossiblePreviousState();
+        [[nodiscard]] ConstStateSharedPtr GetCurrentState() const;
+        [[nodiscard]] ConstStateSharedPtr GetGlobalState() const;
+        [[nodiscard]] ConstStateSharedPtr GetPreviousState() const;
+        [[nodiscard]] ConstStateSharedPtr GetPossiblePreviousState() const;
 
-	private:
-		void ChangeState(StatePtr newState);
+        [[nodiscard]] StateSharedPtr GetPossiblePreviousState();
 
-	private:
-		StatePtr m_CurrentState;
-		StatePtr m_PreviousState;
-		StatePtr m_GlobalState;
-	};
+    private:
+        void ChangeState(StateSharedPtr newState);
+
+    private:
+        StateSharedPtr m_CurrentState;
+        StateSharedPtr m_PreviousState;
+        StateSharedPtr m_GlobalState;
+    };
 }
 
-#endif //  CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_BASE_H
-
+#endif  //  CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_BASE_H

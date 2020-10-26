@@ -5,15 +5,15 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/11 10:58)
+//	引擎版本：0.5.2.0 (2020/10/22 15:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "InitTerm.h"
 #include "InitTermContainer.h"
 #include "ObjectManager.h"
-#include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
+#include "CoreTools/Helper/SingletonMacro.h"
 
 #include <array>
 

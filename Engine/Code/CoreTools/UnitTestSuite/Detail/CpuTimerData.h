@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 10:12)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 11:20)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_CPU_TIMER_DATA_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_CPU_TIMER_DATA_H
@@ -14,35 +17,35 @@
 
 namespace boost
 {
-	namespace timer
-	{
-		class cpu_timer;
-	}
+    namespace timer
+    {
+        class cpu_timer;
+    }
 }
 
 namespace CoreTools
 {
-	class CORE_TOOLS_HIDDEN_DECLARE CpuTimerData : private boost::noncopyable
-	{
-	public:
-		using ClassType = CpuTimerData;
-		using CpuTimer = boost::timer::cpu_timer;
-		using CpuTimerPtr = std::shared_ptr<CpuTimer>;
+    class CORE_TOOLS_HIDDEN_DECLARE CpuTimerData final : private boost::noncopyable
+    {
+    public:
+        using ClassType = CpuTimerData;
+        using CpuTimer = boost::timer::cpu_timer;
+        using CpuTimerSharedPtr = std::shared_ptr<CpuTimer>;
 
-	public:
-		CpuTimerData();
+    public:
+        CpuTimerData();
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const CpuTimerPtr GetCpuTimerPtr() const noexcept;
+        [[nodiscard]] const CpuTimerSharedPtr GetCpuTimer() const noexcept;
 
-		void Start() noexcept;
-		void Resume() noexcept;
-		void Stop() noexcept;
+        void Start() noexcept;
+        void Resume() noexcept;
+        void Stop() noexcept;
 
-	private:
-		CpuTimerPtr m_CpuTimerPtr;
-	};
+    private:
+        CpuTimerSharedPtr m_CpuTimer;
+    };
 }
 
-#endif // CORE_TOOLS_UNIT_TEST_SUITE_CPU_TIMER_DATA_H
+#endif  // CORE_TOOLS_UNIT_TEST_SUITE_CPU_TIMER_DATA_H

@@ -61,7 +61,7 @@ void Rendering::TransformController
 	::SetObject(ControllerInterface* object) 
 {
 	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::sm_Type), "无效类\n");
+    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "无效类\n");
 
 	ParentType::SetObject(object);
 }

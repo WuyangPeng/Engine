@@ -149,7 +149,7 @@ void Rendering::BSplineSurfacePatch ::Load(const CoreTools::BufferSourceSharedPt
     case 2:
         open0 = source->ReadBool();
         numKnots1 = numCtrlPoints1 - degree1 - 1;
-        source->Read(numKnots1, knot1);
+     //   source->Read(numKnots1, knot1);
 
         mPatch = NEW0 Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, knot1);
 
@@ -157,7 +157,7 @@ void Rendering::BSplineSurfacePatch ::Load(const CoreTools::BufferSourceSharedPt
         break;
     case 3:
         numKnots0 = numCtrlPoints0 - degree0 - 1;
-        source->Read(numKnots0, knot0);
+    //    source->Read(numKnots0, knot0);
         open1 = source->ReadBool();
 
         mPatch = NEW0 Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, open1);
@@ -166,9 +166,9 @@ void Rendering::BSplineSurfacePatch ::Load(const CoreTools::BufferSourceSharedPt
         break;
     case 4:
         numKnots0 = numCtrlPoints0 - degree0 - 1;
-        source->Read(numKnots0, knot0);
+     //   source->Read(numKnots0, knot0);
         numKnots1 = numCtrlPoints1 - degree1 - 1;
-        source->Read(numKnots1, knot1);
+     //   source->Read(numKnots1, knot1);
 
         mPatch = NEW0 Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, knot1);
 

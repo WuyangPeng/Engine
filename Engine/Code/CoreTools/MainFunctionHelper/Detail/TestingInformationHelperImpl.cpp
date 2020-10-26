@@ -1,127 +1,113 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 11:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 9:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "TestingInformationHelperImpl.h" 
-#include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
+#include "TestingInformationHelperImpl.h"
+#include "CoreTools/FileManager/EnvironmentVariable.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/FileManager/EnvironmentVariable.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <iostream>
-#include "CoreTools/Contract/Noexcept.h"
 
 using boost::property_tree::ptree;
 using std::cerr;
-using std::string; 
+using std::string;
+using namespace std::literals;
 
-CoreTools::TestingInformationHelperImpl
-	::TestingInformationHelperImpl() noexcept
-	:m_TestingInformation{}, m_File{}, m_IsPrintRun{ false }, m_RandomSeed{ 0 }
+CoreTools::TestingInformationHelperImpl::TestingInformationHelperImpl([[maybe_unused]] DisableNotThrow disableNotThrow)
+    : m_TestingInformation{}, m_File{}, m_IsPrintRun{ false }, m_RandomSeed{ 0 }
 {
-    CoreTools::NoexceptNoReturn(*this,&ClassType::Analysis);
+    Analysis();
 
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, TestingInformationHelperImpl)
 
-void CoreTools::TestingInformationHelperImpl
-	::Analysis()
+void CoreTools::TestingInformationHelperImpl::Analysis()
 {
-	EXCEPTION_TRY
-	{
-		AnalysisFile();
-		AnalysisJson();
-		AnalysisTestingInformation();
-	}
-	EXCEPTION_ALL_CATCH(CoreTools)
+    AnalysisFile();
+    AnalysisJson();
+    AnalysisTestingInformation();
 }
 
-void CoreTools::TestingInformationHelperImpl
-	::AnalysisFile()
+void CoreTools::TestingInformationHelperImpl::AnalysisFile()
 {
-	Tree mainTree{};
-	read_json("Configuration/Testing.json", mainTree);
+    Tree mainTree{};
+    read_json("Configuration/Testing.json", mainTree);
 
-	for (const auto& ptree : mainTree)
-	{
-		auto isOpen = ptree.second.get_value(0);
-		if (isOpen != 0)
-		{
-			m_File.emplace_back(ptree.first);
-		}
-	}
+    for (const auto& ptree : mainTree)
+    {
+        auto isOpen = ptree.second.get_value(0);
+        if (isOpen != 0)
+        {
+            m_File.emplace_back(ptree.first);
+        }
+    }
 }
 
-void CoreTools::TestingInformationHelperImpl
-	::AnalysisJson()
+void CoreTools::TestingInformationHelperImpl::AnalysisJson()
 {
-	for (const auto& fileName : m_File)
-	{
-		Tree tree{};
-		read_json("Configuration/" + fileName + ".json", tree);
-		AnalysisInformation(tree);
-	}
+    for (const auto& fileName : m_File)
+    {
+        Tree tree{};
+        read_json("Configuration/"s + fileName + ".json"s, tree);
+        AnalysisInformation(tree);
+    }
 }
 
-void CoreTools::TestingInformationHelperImpl
-	::AnalysisInformation(Tree& tree)
+void CoreTools::TestingInformationHelperImpl::AnalysisInformation(Tree& tree)
 {
-	for (const auto& ptree : tree)
-	{
-		for (const auto& information : ptree.second)
-		{
-			m_TestingInformation.Insert(ptree.first, information.first, information.second.get_value(0));
-		}
-	}
+    for (const auto& ptree : tree)
+    {
+        for (const auto& information : ptree.second)
+        {
+            m_TestingInformation.Insert(ptree.first, information.first, information.second.get_value(0));
+        }
+    }
 }
 
-void CoreTools::TestingInformationHelperImpl
-	::AnalysisTestingInformation()
+void CoreTools::TestingInformationHelperImpl::AnalysisTestingInformation()
 {
-	EnvironmentVariable environmentVariable{ SYSTEM_TEXT("PrintRun") };
-	if (environmentVariable.GetVariable() != SYSTEM_TEXT("0"))
-	{
-		m_IsPrintRun = true;
-	}
-	else
-	{
-		m_IsPrintRun = false;
-	}
+    EnvironmentVariable environmentVariable{ SYSTEM_TEXT("PrintRun"s) };
+    if (environmentVariable.GetVariable() != SYSTEM_TEXT("0"s))
+    {
+        m_IsPrintRun = true;
+    }
+    else
+    {
+        m_IsPrintRun = false;
+    }
 
-	EnvironmentVariable randomSeed{ SYSTEM_TEXT("RandomSeed") };
+    EnvironmentVariable randomSeed{ SYSTEM_TEXT("RandomSeed"s) };
 
-	m_RandomSeed = std::stoi(randomSeed.GetVariable());
+    m_RandomSeed = std::stoi(randomSeed.GetVariable());
 }
 
-int CoreTools::TestingInformationHelperImpl
-	::GetLoopCount(const string& suiteName, const string& testingName) const
+int CoreTools::TestingInformationHelperImpl::GetLoopCount(const string& suiteName, const string& testingName) const
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_TestingInformation.GetLoopCount(suiteName, testingName);
+    return m_TestingInformation.GetLoopCount(suiteName, testingName);
 }
 
-bool CoreTools::TestingInformationHelperImpl
-	::IsPrintRun() const noexcept
+bool CoreTools::TestingInformationHelperImpl::IsPrintRun() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_IsPrintRun;
+    return m_IsPrintRun;
 }
 
-int CoreTools::TestingInformationHelperImpl
-	::GetRandomSeed() const noexcept
+int CoreTools::TestingInformationHelperImpl::GetRandomSeed() const noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_RandomSeed;
+    return m_RandomSeed;
 }
-
-
-

@@ -355,8 +355,8 @@ void Rendering::RevolutionSurface ::Load(const CoreTools::BufferSourceSharedPtr&
     source->ReadEnum(mTopology);
     source->Read(mNumCurveSamples);
     source->Read(mNumRadialSamples);
-    source->Read(mNumRadialSamples + 1, mSin);
-    source->Read(mNumRadialSamples + 1, mCos);
+ //   source->Read(mNumRadialSamples + 1, mSin);
+ //   source->Read(mNumRadialSamples + 1, mCos);
     mSampleByArcLength = source->ReadBool();
 
     // TODO.  See note in RevolutionSurface::Save.

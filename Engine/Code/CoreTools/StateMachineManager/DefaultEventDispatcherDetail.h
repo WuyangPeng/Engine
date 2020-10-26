@@ -1,22 +1,23 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 17:29)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 16:02)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_DEFAULT_EVENT_DISPATCHER_DETAIL_H
-#define CORE_TOOLS_STATE_MACHINE_DEFAULT_EVENT_DISPATCHER_DETAIL_H 
+#define CORE_TOOLS_STATE_MACHINE_DEFAULT_EVENT_DISPATCHER_DETAIL_H
 
 #include "DefaultEventDispatcher.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template<typename State>
-template<typename FsmType, typename EventType>
-typename CoreTools::DefaultEventDispatcher<State>::StateType CoreTools::DefaultEventDispatcher<State>
-	::Dispatch(StateMachine<FsmType, StateType>& fsm, StateType state, const EventType& eventType)
+template <typename State>
+template <typename FsmType, typename EventType>
+typename CoreTools::DefaultEventDispatcher<State>::StateType CoreTools::DefaultEventDispatcher<State>::Dispatch(StateMachine<FsmType, StateType>& fsm, StateType state, const EventType& eventType)
 {
-	return fsm.CallNoTransition(state, eventType);
+    return fsm.CallNoTransition(state, eventType);
 }
 
-#endif //  CORE_TOOLS_STATE_MACHINE_DEFAULT_EVENT_DISPATCHER_DETAIL_H
-
+#endif  //  CORE_TOOLS_STATE_MACHINE_DEFAULT_EVENT_DISPATCHER_DETAIL_H

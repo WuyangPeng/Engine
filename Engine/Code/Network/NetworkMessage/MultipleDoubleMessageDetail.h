@@ -53,13 +53,17 @@ bool Network::MultipleDoubleMessage<E, ByteType, Types...>::IsValid() const noex
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 const CoreTools::Rtti& Network::MultipleDoubleMessage<E, ByteType, Types...>::GetRttiType() const noexcept
 {
-    return sm_Type;
+    return GetCurrentRttiType();
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-const CoreTools::Rtti Network::MultipleDoubleMessage<E, ByteType, Types...>::
-    sm_Type{ typeid(ClassType).name(), &ParentType::sm_Type };
+const CoreTools::Rtti& Network::MultipleDoubleMessage<E, ByteType, Types...>::GetCurrentRttiType() noexcept
+{
+    static const auto rtti = CoreTools::Rtti{ typeid(ClassType).name(), &ParentType::GetCurrentRttiType() };
 
+    return rtti;
+}
+ 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 Network::MessageInterfaceSharedPtr Network::MultipleDoubleMessage<E, ByteType, Types...>::
     Factory(const MessageSourceSharedPtr& source, int64_t messageID)

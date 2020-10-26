@@ -34,15 +34,15 @@
 #include <array>
 
 using std::array;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26496)
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatHomogeneousPoint& datum)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    Mathematics::FloatHomogeneousPoint::ArrayType homogeneousPoint{};
-
-    Read(homogeneousPoint);
+    const auto homogeneousPoint = ReadContainer<Mathematics::FloatHomogeneousPoint::ArrayType::value_type, Mathematics::FloatHomogeneousPoint::sm_PointSize>();
 
     datum.Set(homogeneousPoint);
 }
@@ -60,9 +60,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleHomogeneousPoint&
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    Mathematics::DoubleHomogeneousPoint::ArrayType homogeneousPoint{};
-
-    Read(homogeneousPoint);
+    const auto homogeneousPoint = ReadContainer<Mathematics::DoubleHomogeneousPoint::ArrayType::value_type, Mathematics::DoubleHomogeneousPoint::sm_PointSize>();
 
     datum.Set(homogeneousPoint);
 }
@@ -82,7 +80,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector2Df& datum)
 
     Mathematics::Vector2Df::ArrayType vector2D{};
 
-    Read(vector2D);
+    //    Read(vector2D);
 
     datum.SetCoordinate(vector2D);
 }
@@ -102,7 +100,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector2Dd& datum)
 
     Mathematics::Vector2Dd::ArrayType vector2D{};
 
-    Read(vector2D);
+    //    Read(vector2D);
 
     datum.SetCoordinate(vector2D);
 }
@@ -122,7 +120,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector3Df& datum)
 
     Mathematics::Vector3Df::ArrayType vector3D{};
 
-    Read(vector3D);
+    //   Read(vector3D);
 
     datum.SetCoordinate(vector3D);
 }
@@ -142,7 +140,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector3Dd& datum)
 
     Mathematics::Vector3Dd::ArrayType vector3D{};
 
-    Read(vector3D);
+    //   Read(vector3D);
 
     datum.SetCoordinate(vector3D);
 }
@@ -162,7 +160,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector4Df& datum)
 
     Mathematics::Vector4Df::ArrayType vector4D{};
 
-    Read(vector4D);
+    // Read(vector4D);
 
     datum.SetCoordinate(vector4D);
 }
@@ -182,7 +180,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector4Dd& datum)
 
     Mathematics::Vector4Dd::ArrayType vector4D{};
 
-    Read(vector4D);
+    //  Read(vector4D);
 
     datum.SetCoordinate(vector4D);
 }
@@ -202,7 +200,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAVector& datum)
 
     Mathematics::FloatAVector::ArrayType homogeneousPoint{};
 
-    Read(homogeneousPoint);
+    //    Read(homogeneousPoint);
 
     datum.Set(homogeneousPoint);
 }
@@ -222,7 +220,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAVector& datum)
 
     Mathematics::DoubleAVector::ArrayType homogeneousPoint{};
 
-    Read(homogeneousPoint);
+    //  Read(homogeneousPoint);
 
     datum.Set(homogeneousPoint);
 }
@@ -242,7 +240,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAPoint& datum)
 
     Mathematics::FloatAPoint::ArrayType homogeneousPoint{};
 
-    Read(homogeneousPoint);
+    //  Read(homogeneousPoint);
 
     datum.Set(homogeneousPoint);
 }
@@ -262,7 +260,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAPoint& datum)
 
     Mathematics::DoubleAPoint::ArrayType homogeneousPoint{};
 
-    Read(homogeneousPoint);
+    //  Read(homogeneousPoint);
 
     datum.Set(homogeneousPoint);
 }
@@ -284,7 +282,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableLengthVectorf& 
     Read(size);
     datum.ResetSize(size);
 
-    Read(size, datum.GetElements());
+    //  Read(size, datum.GetElements());
 }
 
 template <>
@@ -304,7 +302,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableLengthVectord& 
     Read(size);
     datum.ResetSize(size);
 
-    Read(size, datum.GetElements());
+    // Read(size, datum.GetElements());
 }
 
 template <>
@@ -382,7 +380,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Polynomialf& datum)
     Read(degree);
     datum.ResetDegree(degree - 1);
 
-    Read(degree, datum.GetElements());
+    // Read(degree, datum.GetElements());
 }
 
 template <>
@@ -402,7 +400,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Polynomiald& datum)
     Read(degree);
     datum.ResetDegree(degree - 1);
 
-    Read(degree, datum.GetElements());
+    //  Read(degree, datum.GetElements());
 }
 
 template <>
@@ -420,7 +418,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix2f& datum)
 
     Mathematics::Matrix2f::ArrayType matrix{};
 
-    Read(matrix);
+    //    Read(matrix);
 
     datum.Set(matrix);
 }
@@ -440,7 +438,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix2d& datum)
 
     Mathematics::Matrix2d::ArrayType matrix{};
 
-    Read(matrix);
+    //  Read(matrix);
 
     datum.Set(matrix);
 }
@@ -460,7 +458,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix3f& datum)
 
     Mathematics::Matrix3f::ArrayType matrix{};
 
-    Read(matrix);
+    //   Read(matrix);
 
     datum.Set(matrix);
 }
@@ -480,7 +478,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix3d& datum)
 
     Mathematics::Matrix3d::ArrayType matrix{};
 
-    Read(matrix);
+    //  Read(matrix);
 
     datum.Set(matrix);
 }
@@ -500,7 +498,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix4f& datum)
 
     Mathematics::Matrix4f::ArrayType matrix{};
 
-    Read(matrix);
+    //  Read(matrix);
 
     datum.Set(matrix);
 }
@@ -520,7 +518,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix4d& datum)
 
     Mathematics::Matrix4d::ArrayType matrix{};
 
-    Read(matrix);
+    //  Read(matrix);
 
     datum.Set(matrix);
 }
@@ -540,7 +538,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix& datum)
 
     Mathematics::FloatMatrix::EntryType data{};
 
-    Read(data);
+    // Read(data);
 
     datum.Set(data);
 }
@@ -560,7 +558,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix& datum)
 
     Mathematics::DoubleMatrix::EntryType data{};
 
-    Read(data);
+    // Read(data);
 
     datum.Set(data);
 }
@@ -585,7 +583,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableMatrixf& datum)
 
     datum.ResetSize(rowsNumber, columnsNumber);
 
-    Read(datum.GetElementsNumber(), datum.GetElements());
+    //  Read(datum.GetElementsNumber(), datum.GetElements());
 }
 
 template <>
@@ -610,7 +608,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableMatrixd& datum)
 
     datum.ResetSize(rowsNumber, columnsNumber);
 
-    Read(datum.GetElementsNumber(), datum.GetElements());
+    //  Read(datum.GetElementsNumber(), datum.GetElements());
 }
 
 template <>
@@ -639,18 +637,18 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixf& datum)
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber);
 
-    Read(size, datum.GetDiagonalBand());
+    //  Read(size, datum.GetDiagonalBand());
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        Read(lowerSize, datum.GetLowerBand(i));
+        // Read(lowerSize, datum.GetLowerBand(i));
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        Read(upperSize, datum.GetUpperBand(i));
+        // Read(upperSize, datum.GetUpperBand(i));
     }
 }
 
@@ -698,18 +696,18 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixd& datum)
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber);
 
-    Read(size, datum.GetDiagonalBand());
+    //  Read(size, datum.GetDiagonalBand());
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        Read(lowerSize, datum.GetLowerBand(i));
+        // Read(lowerSize, datum.GetLowerBand(i));
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        Read(upperSize, datum.GetUpperBand(i));
+        // Read(upperSize, datum.GetUpperBand(i));
     }
 }
 
@@ -760,18 +758,18 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixSolvef& dat
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber, epsilon);
 
-    Read(size, datum.GetDiagonalBand());
+    // Read(size, datum.GetDiagonalBand());
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        Read(lowerSize, datum.GetLowerBand(i));
+        // Read(lowerSize, datum.GetLowerBand(i));
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        Read(upperSize, datum.GetUpperBand(i));
+        //  Read(upperSize, datum.GetUpperBand(i));
     }
 }
 
@@ -823,18 +821,18 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixSolved& dat
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber, epsilon);
 
-    Read(size, datum.GetDiagonalBand());
+    // Read(size, datum.GetDiagonalBand());
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        Read(lowerSize, datum.GetLowerBand(i));
+        //  Read(lowerSize, datum.GetLowerBand(i));
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        Read(upperSize, datum.GetUpperBand(i));
+        //  Read(upperSize, datum.GetUpperBand(i));
     }
 }
 
@@ -874,7 +872,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Quaternionf& datum)
 
     Mathematics::Quaternionf::ArrayType quaternion{};
 
-    Read(quaternion);
+    //    Read(quaternion);
 
     datum.Set(quaternion);
 }
@@ -894,7 +892,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Quaterniond& datum)
 
     Mathematics::Quaterniond::ArrayType quaternion{};
 
-    Read(quaternion);
+    //Read(quaternion);
 
     datum.Set(quaternion);
 }
@@ -914,7 +912,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::AQuaternionf& datum)
 
     Mathematics::AQuaternionf::ArrayType quaternion{};
 
-    Read(quaternion);
+    // Read(quaternion);
 
     datum.Set(quaternion);
 }
@@ -934,7 +932,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::AQuaterniond& datum)
 
     Mathematics::AQuaterniond::ArrayType quaternion{};
 
-    Read(quaternion);
+    // Read(quaternion);
 
     datum.Set(quaternion);
 }
@@ -976,7 +974,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float2& datum)
 
     std::array<float, 2> value{};
 
-    Read(2, value.data());
+    //  Read(2, value.data());
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -1002,7 +1000,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float3& datum)
 
     std::array<float, 3> value{ 0.0f, 0.0f, 0.0f };
 
-    Read(3, value.data());
+    //  Read(3, value.data());
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -1029,7 +1027,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float4& datum)
 
     std::array<float, 4> value{ 0.0f, 0.0f, 0.0f, 0.0f };
 
-    Read(4, value.data());
+    //  Read(4, value.data());
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -1049,3 +1047,4 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float4& datum)
 
     WriteContainer(value);
 }
+#include STSTEM_WARNING_POP

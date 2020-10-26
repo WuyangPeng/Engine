@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/11 10:35)
+//	引擎版本：0.5.2.0 (2020/10/21 20:59)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_H
@@ -16,7 +16,7 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE InitTerm
+    class CORE_TOOLS_DEFAULT_DECLARE InitTerm final
     {
     public:
         using ClassType = InitTerm;
@@ -29,7 +29,7 @@ namespace CoreTools
         static void AddTerminator(Terminator function);
         static void ExecuteTerminators();
 
-    private: 
+    private:
         [[nodiscard]] static InitTermContainer& GetInitializer() noexcept;
         [[nodiscard]] static InitTermContainer& GetTerminator() noexcept;
     };

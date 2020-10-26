@@ -111,7 +111,7 @@ void Rendering::TextureBuffer
 	{
 		m_Data = make_shared<FileBuffer>(numTotalBytes); 
 		
-		source->Read(boost::numeric_cast<int>(m_Data->GetSize()), m_Data->GetBufferBegin());
+		//source->Read(boost::numeric_cast<int>(m_Data->GetSize()), m_Data->GetBufferBegin());
 	}	
 }
 

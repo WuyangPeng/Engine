@@ -121,7 +121,7 @@ void Rendering::PointController ::Reallocate(int numPoints)
 void Rendering::PointController ::SetObject(ControllerInterface* object)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::sm_Type), "无效类\n");
+    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
 
     ParentType::SetObject(object);
 
@@ -267,7 +267,7 @@ void Rendering::PointController ::PostLink()
 
     auto object = GetControllerObject();
 
-    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::sm_Type), "无效类\n");
+    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
 
     m_Points = dynamic_cast<Polypoint*>(object);
 }

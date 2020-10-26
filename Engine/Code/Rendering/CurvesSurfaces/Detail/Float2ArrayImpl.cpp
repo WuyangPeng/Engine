@@ -41,7 +41,7 @@ void Rendering::Float2ArrayImpl ::Load(const CoreTools::BufferSourceSharedPtr& s
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source->ReadAggregate(m_Elements);
+	source->ReadAggregateContainer(m_Elements);
 }
 
 void Rendering::Float2ArrayImpl

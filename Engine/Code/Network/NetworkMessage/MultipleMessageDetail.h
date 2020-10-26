@@ -52,19 +52,21 @@ bool Network::MultipleMessage<E, ByteType, Types...>
 }
 #endif // OPEN_CLASS_INVARIANT
 
-template<typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-const CoreTools::Rtti& Network::MultipleMessage<E, ByteType, Types...>
-	::GetRttiType() const noexcept
+template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+const CoreTools::Rtti& Network::MultipleMessage<E, ByteType, Types...>::GetRttiType() const noexcept
 {
-	return sm_Type;
+    return GetCurrentRttiType();
 }
 
-template<typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-const CoreTools::Rtti Network::MultipleMessage<E, ByteType, Types...>
-	::sm_Type
+template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+const CoreTools::Rtti& Network::MultipleMessage<E, ByteType, Types...>::GetCurrentRttiType() noexcept
 {
-	typeid(ClassType).name(),&ParentType::sm_Type
-};
+    static const auto rtti = CoreTools::Rtti{ typeid(ClassType).name(), &ParentType::GetCurrentRttiType() };
+
+    return rtti;
+}
+
+ 
 
 template<typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 Network::MessageInterfaceSharedPtr Network::MultipleMessage<E, ByteType, Types...>

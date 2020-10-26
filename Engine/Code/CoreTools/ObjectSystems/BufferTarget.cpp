@@ -5,11 +5,11 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/16 19:20)
+//	引擎版本：0.5.2.0 (2020/10/22 15:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "BufferTarget.h"
+#include "BufferTargetDetail.h"
 #include "ObjectRegister.h"
 #include "StreamSize.h"
 #include "Detail/BufferTargetImpl.h"
@@ -34,7 +34,7 @@ void CoreTools::BufferTarget::Write(const bool datum)
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
-    Write(GetStreamSize(value), &value);
+    Write(CORE_TOOLS_STREAM_SIZE(value), &value);
 }
 
 void CoreTools::BufferTarget::Write(const char* datum)
@@ -49,7 +49,7 @@ void CoreTools::BufferTarget::Write(const string& datum)
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
     auto length = boost::numeric_cast<int32_t>(datum.length());
-    Write(GetStreamSize(length), &length);
+    Write(length);
 
     if (0 < length)
     {
@@ -61,7 +61,7 @@ void CoreTools::BufferTarget::Write(const string& datum)
         if (0 < padding)
         {
             padding = g_DefaultSize - padding;
-            Write(sizeof(char), padding, zero.data());
+            Write(CoreTools::GetStreamSize<char>(), padding, zero.data());
         }
     }
 }

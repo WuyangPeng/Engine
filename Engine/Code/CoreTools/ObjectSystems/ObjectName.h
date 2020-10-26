@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/11 13:00)
+//	引擎版本：0.5.2.0 (2020/10/22 11:19)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
@@ -21,7 +21,7 @@ CORE_TOOLS_EXPORT_SHARED_PTR(ObjectNameImpl);
 namespace CoreTools
 {
     // Object类的名字
-    class CORE_TOOLS_DEFAULT_DECLARE ObjectName
+    class CORE_TOOLS_DEFAULT_DECLARE ObjectName final
     {
     public:
         COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectName, = default);

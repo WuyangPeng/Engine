@@ -190,17 +190,8 @@
     <Filter Include="资源文件\References\Libs\Script">
       <UniqueIdentifier>{2f57dbcb-512e-4273-91c6-b2ae85c934b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\References\Libs\Mathematics">
-      <UniqueIdentifier>{e32a4b0e-8587-4bf4-ac7b-166091f8e2ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\References\Libs\SoundEffect">
       <UniqueIdentifier>{99fecbca-1830-49af-9d74-3f7ecf5dead6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\References\Libs\InputOutput">
-      <UniqueIdentifier>{e78976f8-217a-430e-afd8-8a662b1597bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\References\Libs\ResourceManager">
-      <UniqueIdentifier>{659dbd72-f532-4453-af23-e0e5cdedf4c1}</UniqueIdentifier>
     </Filter>
     <Filter Include="资源文件\References\Libs\Rendering">
       <UniqueIdentifier>{2d29e1c4-5576-4867-b784-466944e78549}</UniqueIdentifier>
@@ -211,17 +202,8 @@
     <Filter Include="资源文件\References\Libs\Imagics">
       <UniqueIdentifier>{282352f2-ef89-461f-a15c-a3236ea18525}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\References\Libs\Animation">
-      <UniqueIdentifier>{1022eca4-31e8-4877-a436-5ef7e8e2c8f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\References\Libs\ArtificialIntellegence">
-      <UniqueIdentifier>{d5fa385f-3010-4999-b993-4ffd73a11e71}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\References\Libs\UserInterface">
       <UniqueIdentifier>{d7f4ca98-9108-43e6-842d-04016da1e34e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\References\Libs\AssistTools">
-      <UniqueIdentifier>{8d02518f-d684-46dc-a6fb-70f5036cc791}</UniqueIdentifier>
     </Filter>
     <Filter Include="资源文件\References\Libs\Framework">
       <UniqueIdentifier>{20fa88b7-855a-4f56-8f44-ed2ee5d6f5b0}</UniqueIdentifier>
@@ -1403,6 +1385,96 @@
     </Text>
     <Text Include="Resource\References\OtherLanguages\Java\Java Puzzlers.txt">
       <Filter>资源文件\References\OtherLanguages\Java</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Script\Script.txt">
+      <Filter>资源文件\References\Libs\Script</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Script\lua.txt">
+      <Filter>资源文件\References\Libs\Script</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Script\perl.txt">
+      <Filter>资源文件\References\Libs\Script</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\SoundEffect\SoundEffect.txt">
+      <Filter>资源文件\References\Libs\SoundEffect</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\SoundEffect\OpenAL Soft.txt">
+      <Filter>资源文件\References\Libs\SoundEffect</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\SoundEffect\ogg.txt">
+      <Filter>资源文件\References\Libs\SoundEffect</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\SoundEffect\vorbis.txt">
+      <Filter>资源文件\References\Libs\SoundEffect</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\SoundEffect\freealut.txt">
+      <Filter>资源文件\References\Libs\SoundEffect</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\SoundEffect\OgreAL.txt">
+      <Filter>资源文件\References\Libs\SoundEffect</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\Rendering.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\ogre.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\imgui.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\ogre-next.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\DirectX.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\Wild Magic.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\Geometric Tools.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\irrlicht.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\glew.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Rendering\libpng.txt">
+      <Filter>资源文件\References\Libs\Rendering</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Physics\Physics.txt">
+      <Filter>资源文件\References\Libs\Physics</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Physics\chipmunk2D physics.txt">
+      <Filter>资源文件\References\Libs\Physics</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Imagics\Imagics.txt">
+      <Filter>资源文件\References\Libs\Imagics</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Imagics\opencv.txt">
+      <Filter>资源文件\References\Libs\Imagics</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\UserInterface\UserInterface.txt">
+      <Filter>资源文件\References\Libs\UserInterface</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\UserInterface\wxWidgets.txt">
+      <Filter>资源文件\References\Libs\UserInterface</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\UserInterface\FLTK.txt">
+      <Filter>资源文件\References\Libs\UserInterface</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\UserInterface\OIS.txt">
+      <Filter>资源文件\References\Libs\UserInterface</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\UserInterface\SDL2.txt">
+      <Filter>资源文件\References\Libs\UserInterface</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Framework\Framework.txt">
+      <Filter>资源文件\References\Libs\Framework</Filter>
+    </Text>
+    <Text Include="Resource\References\Libs\Framework\freeglut.txt">
+      <Filter>资源文件\References\Libs\Framework</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

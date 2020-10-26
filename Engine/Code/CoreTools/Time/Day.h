@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/06 20:23)
+//	引擎版本：0.5.2.0 (2020/10/22 19:15)
 
 #ifndef CORE_TOOLS_TIME_DAY_H
 #define CORE_TOOLS_TIME_DAY_H
@@ -14,21 +14,17 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Day
+    class CORE_TOOLS_DEFAULT_DECLARE Day final
     {
     public:
         using ClassType = Day;
 
     public:
-        explicit Day(int day) noexcept
-            : m_Day{ day }
-        {
-        }
+        explicit Day(int day) noexcept;
 
-        int GetDay() const noexcept
-        {
-            return m_Day;
-        }
+        CLASS_INVARIANT_DECLARE;
+
+        [[nodiscard]] int GetDay() const noexcept;
 
     private:
         int m_Day;

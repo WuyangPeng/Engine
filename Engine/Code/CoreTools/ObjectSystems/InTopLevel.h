@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/14 17:38)
+//	引擎版本：0.5.2.0 (2020/10/22 9:49)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_IN_TOP_LEVEL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_IN_TOP_LEVEL_H
@@ -22,13 +22,13 @@ CORE_TOOLS_EXPORT_SHARED_PTR(InTopLevelImpl);
 namespace CoreTools
 {
     // 被加载的顶层对象。
-    class CORE_TOOLS_DEFAULT_DECLARE InTopLevel
+    class CORE_TOOLS_DEFAULT_DECLARE InTopLevel final
     {
     public:
         DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(InTopLevel);
 
     public:
-        InTopLevel();
+        explicit InTopLevel(DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_DECLARE;
 

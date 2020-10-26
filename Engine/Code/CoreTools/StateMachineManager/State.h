@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.2 (2020/01/22 17:25)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/26 15:55)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
@@ -10,57 +13,66 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/Helper/RttiMacro.h"
-#include "CoreTools/MessageEvent/EventEntity.h" 
+#include "CoreTools/MessageEvent/EventEntity.h"
 
 #include <memory>
 
 namespace CoreTools
 {
-	template <typename EntityType>
-	class State : public std::enable_shared_from_this<State<EntityType>>
-	{
-	public:
-		using ClassType = State<EntityType>;
-		using EntityTypePtr = std::shared_ptr<EntityType>;
-		using EntityEventType = typename EntityType::EntityEventType;
-		using Telegram = Telegram<EntityEventType>;
-		using EntityTypeWeakPtr = std::weak_ptr<EntityType>;
-		using StatePtr = std::shared_ptr<ClassType>;
-		using ConstStatePtr = std::shared_ptr<const ClassType>;
-		using MessageResult = std::pair<StatePtr, bool>;
+    template <typename EntityType>
+    class State : public std::enable_shared_from_this<State<EntityType>>
+    {
+    public:
+        using ClassType = State<EntityType>;
+        using EntityTypeSharedPtr = std::shared_ptr<EntityType>;
+        using EntityEventType = typename EntityType::EntityEventType;
+        using Telegram = Telegram<EntityEventType>;
+        using EntityTypeWeakPtr = std::weak_ptr<EntityType>;
+        using StateSharedPtr = std::shared_ptr<ClassType>;
+        using ConstStateSharedPtr = std::shared_ptr<const ClassType>;
+        using MessageResult = std::pair<StateSharedPtr, bool>;
 
-	public:
-		State();
-		virtual ~State();
+    public:
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
+        State();
+        virtual ~State() noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        State(const State& rhs) noexcept = default;
+        State& operator=(const State& rhs) noexcept = default;
+        State(State&& rhs) noexcept = default;
+        State& operator=(State&& rhs) noexcept = default;
 
-		void Enter(EntityTypePtr entity);
+#include STSTEM_WARNING_POP
 
-		virtual StatePtr Execute(int64_t timeInterval) = 0;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		virtual void Exit() = 0;
+        void Enter(EntityTypeSharedPtr entity);
 
-		virtual MessageResult OnMessage(const Telegram& telegram) = 0;
+        [[nodiscard]] virtual StateSharedPtr Execute(int64_t timeInterval) = 0;
 
-		template<typename StateType, typename ResultType = StateType, typename... Args>
-		static std::shared_ptr<ResultType> MakeState(Args&&... args);
+        virtual void Exit() = 0;
 
-		EntityTypePtr GetOwner();
+        [[nodiscard]] virtual MessageResult OnMessage(const Telegram& telegram) = 0;
 
-		bool IsExactly(const Rtti& rtti) const;
+        template <typename StateType, typename ResultType = StateType, typename... Args>
+        [[nodiscard]] static std::shared_ptr<ResultType> MakeState(Args&&... args);
 
-		CORE_TOOLS_RTTI_DECLARE;
+        [[nodiscard]] EntityTypeSharedPtr GetOwner();
 
-	protected:
-		StatePtr GetPossiblePreviousState();
+        [[nodiscard]] bool IsExactly(const Rtti& rtti) const;
 
-	private:
-		virtual void DoEnter() = 0;
+        CORE_TOOLS_RTTI_DECLARE;
 
-	private:
-		EntityTypeWeakPtr m_Entity;
-	};
+    protected:
+        [[nodiscard]] StateSharedPtr GetPossiblePreviousState();
+
+    private:
+        virtual void DoEnter() = 0;
+
+    private:
+        EntityTypeWeakPtr m_Entity;
+    };
 }
 
-#endif // CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
+#endif  // CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H

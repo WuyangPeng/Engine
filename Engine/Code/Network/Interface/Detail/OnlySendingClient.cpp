@@ -172,7 +172,9 @@ bool Network::OnlySendingClient ::EventFunction(const CoreTools::CallbackParamet
         {
             const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
             GetSocketManagerSharedPtr()->Insert(socketID);
-            GetSocketManagerSharedPtr()->EventFunction(callbackParameters);
+           if(! GetSocketManagerSharedPtr()->EventFunction(callbackParameters))
+            {
+            }
 
             return true;
         }

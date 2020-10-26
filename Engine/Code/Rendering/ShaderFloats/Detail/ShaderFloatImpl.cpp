@@ -236,7 +236,7 @@ void Rendering::ShaderFloatImpl ::Load(const CoreTools::BufferSourceSharedPtr& s
 {
 	RENDERING_CLASS_IS_VALID_1;
 	 
-	source->Read(m_Data);
+//	source->Read(m_Data);
 	m_AllowUpdater = source->ReadBool();
 }
 

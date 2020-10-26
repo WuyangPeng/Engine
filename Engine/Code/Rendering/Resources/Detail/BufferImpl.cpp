@@ -131,7 +131,7 @@ void Rendering::BufferImpl
 	source->Read(size);
 	m_Data.resize(size);
 
-	source->Read(boost::numeric_cast<int>(m_Data.size()), &m_Data[0]);
+//	source->Read(boost::numeric_cast<int>(m_Data.size()), &m_Data[0]);
 }
 
 void Rendering::BufferImpl

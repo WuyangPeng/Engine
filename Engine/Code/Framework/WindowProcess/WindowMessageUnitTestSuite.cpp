@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "System/Helper/EnumCast.h"
-
+#include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 using std::string;
 using std::make_shared;
 

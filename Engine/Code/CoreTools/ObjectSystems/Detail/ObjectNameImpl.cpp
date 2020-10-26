@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/11 12:58)
+//	引擎版本：0.5.2.0 (2020/10/22 14:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,7 @@ CoreTools::ObjectNameImpl::ObjectNameImpl(const string& name)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectNameImpl)
 
-string CoreTools::ObjectNameImpl::GetName() const  
+string CoreTools::ObjectNameImpl::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

@@ -40,7 +40,10 @@ void Network::BoostSockConnectorHelper ::EventFunction(const ErrorCodeType& erro
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Async), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::BytesTransferred), 0);
 
-    eventInterface->EventFunction(callbackParameters);
+  if(!  eventInterface->EventFunction(callbackParameters))
+    {
+    
+  }
 
     PrintConnectorSuccessLog(g_AsynchronousConnectorSuccessDescription, addressData);
 }

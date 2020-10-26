@@ -1,72 +1,54 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.1 (2020/01/21 17:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.0 (2020/10/23 10:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ReportOutput.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 
-using std::string;
 using std::ostream;
+using std::string;
 
-CoreTools::ReportOutput
-	::ReportOutput(const OStreamShared& osPtr) noexcept
-	:m_OsPtr{ osPtr }
+CoreTools::ReportOutput::ReportOutput(const OStreamShared& streamShared) noexcept
+    : m_StreamShared{ streamShared }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::ReportOutput
-	::~ReportOutput()
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, ReportOutput)
+
+void CoreTools::ReportOutput::PrintString(const string& characterString)
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    m_StreamShared << characterString;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::ReportOutput
-	::IsValid() const noexcept
+void CoreTools::ReportOutput::PrintNewLine()
 {
- 
-		return true; 
-}
-#endif // OPEN_CLASS_INVARIANT
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-void CoreTools::ReportOutput
-	::PrintString(const string& characterString)
-{
-	CORE_TOOLS_CLASS_IS_VALID_1;
-
-	m_OsPtr << characterString;
+    m_StreamShared << '\n';
 }
 
-void CoreTools::ReportOutput
-	::PrintNewLine()
+void CoreTools::ReportOutput::PrintNumber(int number)
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	m_OsPtr << '\n';
-}
-
-void CoreTools::ReportOutput
-	::PrintNumber(int number)
-{
-	CORE_TOOLS_CLASS_IS_VALID_1;
-
-	m_OsPtr << number;
+    m_StreamShared << number;
 }
 
 // protected
-CoreTools::OStreamShared  CoreTools::ReportOutput
-	::GetStream() noexcept   
+CoreTools::OStreamShared CoreTools::ReportOutput::GetStream() noexcept
 {
-	CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return m_OsPtr;
+    return m_StreamShared;
 }
-
-
-
-

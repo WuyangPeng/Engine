@@ -151,7 +151,7 @@ void Rendering::CameraFrustum ::Load(const CoreTools::BufferSourceSharedPtr& sou
 {
 	RENDERING_CLASS_IS_VALID_9;
  
-    source->Read(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
+   // source->Read(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
     m_IsPerspective = source->ReadBool();
 }
 
