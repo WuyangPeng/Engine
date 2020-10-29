@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 09:59)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:26)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_STREAM_H
@@ -13,7 +16,7 @@
 
 #include "NetworkInternalFwd.h"
 
-#include <boost/noncopyable.hpp> 
+#include <boost/noncopyable.hpp>
 
 template class NETWORK_DEFAULT_DECLARE std::weak_ptr<Network::SockStream>;
 template class NETWORK_DEFAULT_DECLARE std::enable_shared_from_this<Network::SockStream>;
@@ -22,46 +25,46 @@ NETWORK_EXPORT_SHARED_PTR(SockStreamImpl);
 EXPORT_NONCOPYABLE_CLASS(NETWORK);
 
 namespace Network
-{ 
-	class NETWORK_DEFAULT_DECLARE SockStream : private boost::noncopyable, public std::enable_shared_from_this<SockStream>
-	{
-	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(SockStream);
+{
+    class NETWORK_DEFAULT_DECLARE SockStream final : private boost::noncopyable, public std::enable_shared_from_this<SockStream>
+    {
+    public:
+        NON_COPY_CLASSES_TYPE_DECLARE(SockStream);
 
-	public:
-		explicit SockStream(const ConfigurationStrategy& configurationStrategy);
+    public:
+        explicit SockStream(const ConfigurationStrategy& configurationStrategy);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		int Send(const MessageBufferSharedPtr& messageBuffer);
-		int Receive(const MessageBufferSharedPtr& messageBuffer);
+        [[nodiscard]] int Send(const MessageBufferSharedPtr& messageBuffer);
+        [[nodiscard]] int Receive(const MessageBufferSharedPtr& messageBuffer);
 
-		// 异步回调，必须保证this、EventInterface和MessageBuffer的生命周期和线程安全。
-		void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
-		void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
+        // 异步回调，必须保证this、EventInterface和MessageBuffer的生命周期和线程安全。
+        void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
+        void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
 
-		ACESockStreamType& GetACESockStream();
-		BoostSockStreamType& GetBoostSockStream();
-		WinSocketStreamType& GetNetworkSockStream();
+        [[nodiscard]] ACESockStreamType& GetACESockStream();
+        [[nodiscard]] BoostSockStreamType& GetBoostSockStream();
+        [[nodiscard]] WinSocketStreamType& GetNetworkSockStream();
 
-		ACEHandleType GetACEHandle() const;
+        [[nodiscard]] ACEHandleType GetACEHandle() const;
 
-		void SetACEHandle(ACEHandleType handle);
-		void SetNetworkHandle(WinSocketStreamType winSocket);
+        void SetACEHandle(ACEHandleType handle);
+        void SetNetworkHandle(WinSocketStreamType winSocket);
 
-		bool CloseHandle();
+        [[nodiscard]] bool CloseHandle();
 
-		bool EnableNonBlock();
+        [[nodiscard]] bool EnableNonBlock();
 
-		const std::string GetRemoteAddress() const;
-		int GetRemotePort() const;
+        [[nodiscard]] const std::string GetRemoteAddress() const;
+        [[nodiscard]] int GetRemotePort() const;
 
-	private:
-		IMPL_TYPE_DECLARE(SockStream);
-	};
+    private:
+        IMPL_TYPE_DECLARE(SockStream);
+    };
 
-	using SockStreamSharedPtr = std::shared_ptr<SockStream>;
-	using ConstSockStreamSharedPtr = std::shared_ptr<const SockStream>;
+    using SockStreamSharedPtr = std::shared_ptr<SockStream>;
+    using ConstSockStreamSharedPtr = std::shared_ptr<const SockStream>;
 }
 
-#endif // NETWORK_NETWORK_INTERFACE_SOCK_STREAM_H
+#endif  // NETWORK_NETWORK_INTERFACE_SOCK_STREAM_H

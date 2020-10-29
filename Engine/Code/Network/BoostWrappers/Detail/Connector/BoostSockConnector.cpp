@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 15:56)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 17:54)
 
 #include "Network/NetworkExport.h"
 
@@ -23,27 +26,41 @@ using boost::asio::async_connect;
 using boost::asio::connect;
 using TcpType = boost::asio::ip::tcp;
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 namespace
 {
-    const auto g_SynchronizeConnectorDescription = SYSTEM_TEXT("准备进行同步连接，地址："s);
-    const auto g_AsynchronousConnectorDescription = SYSTEM_TEXT("准备进行异步连接，地址："s);
-    const auto g_SynchronizeConnectorSuccessDescription = SYSTEM_TEXT("同步连接成功，地址："s);
+    const auto GetSynchronizeConnectorDescription()
+    {
+        static const auto synchronizeConnector = SYSTEM_TEXT("准备进行同步连接，地址："s);
+
+        return synchronizeConnector;
+    }
+
+    const auto GetAsynchronousConnectorDescription()
+    {
+        static const auto asynchronousConnector = SYSTEM_TEXT("准备进行异步连接，地址："s);
+
+        return asynchronousConnector;
+    }
+
+    const auto GetSynchronizeConnectorSuccessDescription()
+    {
+        static const auto synchronizeConnectorSuccess = SYSTEM_TEXT("同步连接成功，地址："s);
+
+        return synchronizeConnectorSuccess;
+    }
 }
 
-Network::BoostSockConnector ::BoostSockConnector() noexcept
+Network::BoostSockConnector::BoostSockConnector() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostSockConnector)
 
-bool Network::BoostSockConnector ::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+bool Network::BoostSockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -52,13 +69,13 @@ bool Network::BoostSockConnector ::Connect(const SockStreamSharedPtr& sockStream
     TcpType::resolver resolver{ ioService };
     ErrorCodeType errorCode;
 
-    BoostSockConnectorHelper::PrintConnectorLog(g_SynchronizeConnectorDescription, AddressData{ sockAddress });
+    BoostSockConnectorHelper::PrintConnectorLog(GetSynchronizeConnectorDescription(), AddressData{ *sockAddress });
 
     connect(sockStream->GetBoostSockStream(), resolver.resolve(sockAddress->GetBoostInetAddress()), errorCode);
 
     if (errorCode == ErrorCodeType{})
     {
-        BoostSockConnectorHelper::PrintConnectorSuccessLog(g_SynchronizeConnectorSuccessDescription, AddressData{ sockAddress });
+        BoostSockConnectorHelper::PrintConnectorSuccessLog(GetSynchronizeConnectorSuccessDescription(), AddressData{ *sockAddress });
 
         return true;
     }
@@ -68,7 +85,7 @@ bool Network::BoostSockConnector ::Connect(const SockStreamSharedPtr& sockStream
     }
 }
 
-void Network::BoostSockConnector ::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::BoostSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -76,18 +93,17 @@ void Network::BoostSockConnector ::AsyncConnect(const EventInterfaceSharedPtr& e
 
     TcpType::resolver resolver{ ioService };
 
-    BoostSockConnectorHelper::PrintConnectorLog(g_AsynchronousConnectorDescription, AddressData{ sockAddress });
+    BoostSockConnectorHelper::PrintConnectorLog(GetAsynchronousConnectorDescription(), AddressData{ *sockAddress });
 
     async_connect(sockStream->GetBoostSockStream(), resolver.resolve(sockAddress->GetBoostInetAddress()), [eventInterface](const ErrorCodeType& errorCode, const BoostInetAddressType& endpoint) {
         BoostSockConnectorHelper::EventFunction(errorCode, eventInterface, AddressData{ endpoint.address().to_string() + ":" + to_string(endpoint.port()), endpoint.port() });
     });
 }
+#include STSTEM_WARNING_POP
 
-const Network::BoostSockConnector::SockConnectorPtr Network::BoostSockConnector ::Clone() const
+const Network::BoostSockConnector::SockConnectorPtr Network::BoostSockConnector::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

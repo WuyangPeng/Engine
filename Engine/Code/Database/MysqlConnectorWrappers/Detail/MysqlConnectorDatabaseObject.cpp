@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 12:49)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 13:43)
 
 #include "Database/DatabaseExport.h"
 
@@ -15,7 +18,7 @@ using std::make_unique;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-Database::MysqlConnectorDatabaseObject ::MysqlConnectorDatabaseObject(const ConfigurationStrategy& configurationStrategy)
+Database::MysqlConnectorDatabaseObject::MysqlConnectorDatabaseObject(const ConfigurationStrategy& configurationStrategy)
     : ParentType{ configurationStrategy },
       m_MysqlxClient{ make_unique<MysqlxClient>(mysqlx::SessionOption::USER, configurationStrategy.GetDBUserName(),
                                                 mysqlx::SessionOption::PWD, configurationStrategy.GetDBPassword(),
@@ -32,14 +35,11 @@ Database::MysqlConnectorDatabaseObject ::MysqlConnectorDatabaseObject(const Conf
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::MysqlConnectorDatabaseObject ::~MysqlConnectorDatabaseObject()
+Database::MysqlConnectorDatabaseObject::~MysqlConnectorDatabaseObject() noexcept
 {
     EXCEPTION_TRY
     {
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26447)
         m_MysqlxClient->close();
-    #include STSTEM_WARNING_POP
     }
     EXCEPTION_ALL_CATCH(Database)
 
@@ -47,7 +47,7 @@ Database::MysqlConnectorDatabaseObject ::~MysqlConnectorDatabaseObject()
 }
 
     #ifdef OPEN_CLASS_INVARIANT
-bool Database::MysqlConnectorDatabaseObject ::IsValid() const noexcept
+bool Database::MysqlConnectorDatabaseObject::IsValid() const noexcept
 {
     if (ParentType::IsValid() && m_MysqlxClient)
         return true;
@@ -56,7 +56,7 @@ bool Database::MysqlConnectorDatabaseObject ::IsValid() const noexcept
 }
     #endif  // OPEN_CLASS_INVARIANT
 
-Database::DatabaseObjectImpl::MysqlxSessionPtr Database::MysqlConnectorDatabaseObject ::GetMysqlxSessionPtr()
+Database::DatabaseObjectImpl::MysqlxSessionPtr Database::MysqlConnectorDatabaseObject::GetMysqlxSessionPtr()
 {
     DATABASE_CLASS_IS_VALID_1;
 

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 11:11)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 11:23)
 
 #include "Network/NetworkExport.h"
 
@@ -16,7 +19,7 @@
 
 using std::make_shared;
 
-Network::HandleSetIteratorFactory ::HandleSetIteratorFactory() noexcept
+Network::HandleSetIteratorFactory::HandleSetIteratorFactory() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -24,17 +27,17 @@ Network::HandleSetIteratorFactory ::HandleSetIteratorFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, HandleSetIteratorFactory)
 
 // static
-const Network::HandleSetIteratorFactory::ImplTypePtr Network::HandleSetIteratorFactory ::Create(const ConfigurationStrategy& configurationStrategy, const HandleSet& handleSet)
+const Network::HandleSetIteratorFactory::ImplTypePtr Network::HandleSetIteratorFactory::Create(const ConfigurationStrategy& configurationStrategy, const HandleSet& handleSet)
 {
     const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-    case WrappersStrategy::ACE:
-        return make_shared<SockACEHandleSetIterator>(handleSet.GetACEHandleSet());
+        case WrappersStrategy::ACE:
+            return make_shared<SockACEHandleSetIterator>(handleSet.GetACEHandleSet());
 #endif  // NETWORK_USE_ACE
-    default:
-        return make_shared<ImplType>();
+        default:
+            return make_shared<ImplType>();
     }
 }

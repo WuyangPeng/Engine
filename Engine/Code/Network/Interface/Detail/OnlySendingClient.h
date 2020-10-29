@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:08)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:09)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SENDING_A_TRIP_CLIENT_H
 #define NETWORK_NETWORK_INTERFACE_SENDING_A_TRIP_CLIENT_H
@@ -28,7 +31,7 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        uint64_t Connect() override;
+        [[nodiscard]] uint64_t Connect() override;
         void AsyncConnect() override;
 
         void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
@@ -43,7 +46,7 @@ namespace Network
         using BufferType = std::vector<char>;
 
     private:
-        bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
+        [[nodiscard]] bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
 
     private:
         SockConnector m_SockConnector;

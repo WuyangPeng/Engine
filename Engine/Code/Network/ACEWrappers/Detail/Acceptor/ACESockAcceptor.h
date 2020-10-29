@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 13:41)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 14:15)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
 #define NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
@@ -11,47 +14,46 @@
 
 #ifdef NETWORK_USE_ACE
 
-#include "Network/Interface/Detail/SockAcceptorImpl.h"
-
-#include "System/Helper/PragmaWarning/ACE.h"
+    #include "System/Helper/PragmaWarning/ACE.h"
+    #include "Network/Interface/Detail/SockAcceptorImpl.h"
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE ACESockAcceptor : public SockAcceptorImpl
-	{
-	public:
-		using ClassType = ACESockAcceptor;
-		using ParentType = SockAcceptorImpl;
+    class NETWORK_HIDDEN_DECLARE ACESockAcceptor : public SockAcceptorImpl
+    {
+    public:
+        using ClassType = ACESockAcceptor;
+        using ParentType = SockAcceptorImpl;
 
-	public:
-		explicit ACESockAcceptor(int port);
-		ACESockAcceptor(const std::string& hostName, int port);
-		~ACESockAcceptor();
-		ACESockAcceptor(const ACESockAcceptor&) = delete;
-		ACESockAcceptor& operator=(const ACESockAcceptor&) = delete;
-		ACESockAcceptor(ACESockAcceptor&&) noexcept = delete;
-		ACESockAcceptor& operator=(ACESockAcceptor&&) noexcept = delete;
+    public:
+        explicit ACESockAcceptor(int port);
+        ACESockAcceptor(const std::string& hostName, int port);
+        ~ACESockAcceptor() noexcept;
+        ACESockAcceptor(const ACESockAcceptor& rhs) = delete;
+        ACESockAcceptor& operator=(const ACESockAcceptor& rhs) = delete;
+        ACESockAcceptor(ACESockAcceptor&& rhs) noexcept = delete;
+        ACESockAcceptor& operator=(ACESockAcceptor&& rhs) noexcept = delete;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
-		bool Accept(const SockStreamSharedPtr& sockStream) override;
+        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream) override;
 
-		void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
-		void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
+        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-		bool EnableNonBlock() override;
+        [[nodiscard]] bool EnableNonBlock() override;
 
-		ACEHandle GetACEHandle() override;
+        [[nodiscard]] ACEHandle GetACEHandle() override;
 
-		const std::string GetAddress() const override;
-		int GetPort() const override;
+        [[nodiscard]] const std::string GetAddress() const override;
+        [[nodiscard]] int GetPort() const override;
 
-	private:
-		ACE_SOCK_Acceptor m_ACESockAcceptor;
-	};
+    private:
+        ACE_SOCK_Acceptor m_ACESockAcceptor;
+    };
 }
 
-#endif // NETWORK_USE_ACE
+#endif  // NETWORK_USE_ACE
 
-#endif // NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
+#endif  // NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H

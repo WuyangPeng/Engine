@@ -1,116 +1,103 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 16:22)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 13:35)
 
 #include "Network/NetworkExport.h"
 
 #include "MessageEventManagerImpl.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Threading/ScopedMutex.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
 using std::make_unique;
 
-#define MUTEX_ENTER_MEMBER CoreTools::ScopedMutex holder{ *m_Mutex }
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26486)
-Network::MessageEventManagerImpl
-	::MessageEventManagerImpl()
-	:m_EventContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>() }
+#define MUTEX_ENTER_MEMBER const CoreTools::ScopedMutex holder{ *m_Mutex };
+
+Network::MessageEventManagerImpl::MessageEventManagerImpl([[maybe_unused]] CoreTools::DisableNotThrow disableNotThrow)
+    : m_EventContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>() }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-
-Network::MessageEventManagerImpl
-	::MessageEventManagerImpl(const MessageEventManagerImpl& rhs)
-	:m_EventContainer{ rhs.m_EventContainer }, m_Mutex{ make_unique<CoreTools::Mutex>() }
+Network::MessageEventManagerImpl::MessageEventManagerImpl(const MessageEventManagerImpl& rhs)
+    : m_EventContainer{ rhs.m_EventContainer }, m_Mutex{ make_unique<CoreTools::Mutex>() }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageEventManagerImpl& Network::MessageEventManagerImpl
-	::operator=(const MessageEventManagerImpl& rhs)
+Network::MessageEventManagerImpl& Network::MessageEventManagerImpl::operator=(const MessageEventManagerImpl& rhs)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_EventContainer = rhs.m_EventContainer;
-	m_Mutex = make_unique<CoreTools::Mutex>();
+    m_EventContainer = rhs.m_EventContainer;
+    m_Mutex = make_unique<CoreTools::Mutex>();
 
-	return *this;
+    return *this;
 }
 
-Network::MessageEventManagerImpl
-	::MessageEventManagerImpl(MessageEventManagerImpl&& rhs) noexcept
-	:m_EventContainer{ move(rhs.m_EventContainer) }, m_Mutex{ move(rhs.m_Mutex) }
+Network::MessageEventManagerImpl::MessageEventManagerImpl(MessageEventManagerImpl&& rhs) noexcept
+    : m_EventContainer{ move(rhs.m_EventContainer) }, m_Mutex{ move(rhs.m_Mutex) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageEventManagerImpl& Network::MessageEventManagerImpl
-	::operator=(MessageEventManagerImpl&& rhs) noexcept
+Network::MessageEventManagerImpl& Network::MessageEventManagerImpl::operator=(MessageEventManagerImpl&& rhs) noexcept
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_EventContainer = move(rhs.m_EventContainer);
-	m_Mutex = move(rhs.m_Mutex);
+    m_EventContainer = move(rhs.m_EventContainer);
+    m_Mutex = move(rhs.m_Mutex);
 
-	return *this;
+    return *this;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageEventManagerImpl)
 
-void Network::MessageEventManagerImpl
-	::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
+void Network::MessageEventManagerImpl::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
 {
-	MUTEX_ENTER_MEMBER;
+    MUTEX_ENTER_MEMBER;
 
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_EventContainer[messageID].Insert(messageEvent);
+    m_EventContainer[messageID].Insert(messageEvent);
 }
 
-void Network::MessageEventManagerImpl
-	::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
+void Network::MessageEventManagerImpl::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
 {
-	MUTEX_ENTER_MEMBER;
+    MUTEX_ENTER_MEMBER;
 
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_EventContainer[messageID].Insert(messageEvent, priority);
+    m_EventContainer[messageID].Insert(messageEvent, priority);
 }
 
-void Network::MessageEventManagerImpl
-	::Remove(int64_t messageID)
+void Network::MessageEventManagerImpl::Remove(int64_t messageID)
 {
-	MUTEX_ENTER_MEMBER;
+    MUTEX_ENTER_MEMBER;
 
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_EventContainer.erase(messageID);
+    m_EventContainer.erase(messageID);
 }
 
-void Network::MessageEventManagerImpl
-	::Remove(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
+void Network::MessageEventManagerImpl::Remove(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
 {
-	MUTEX_ENTER_MEMBER;
+    MUTEX_ENTER_MEMBER;
 
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_EventContainer[messageID].Remove(messageEvent);
+    m_EventContainer[messageID].Remove(messageEvent);
 }
 
-void Network::MessageEventManagerImpl
-	::OnEvent(int64_t messageID, uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::MessageEventManagerImpl::OnEvent(int64_t messageID, uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
 {
-	MUTEX_ENTER_MEMBER;
+    MUTEX_ENTER_MEMBER;
 
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_EventContainer[messageID].OnEvent(socketID, message);
+    m_EventContainer[messageID].OnEvent(socketID, message);
 }
-
-#include STSTEM_WARNING_POP

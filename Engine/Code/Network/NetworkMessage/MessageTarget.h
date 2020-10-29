@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 14:32)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 10:05)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_H
@@ -12,7 +15,6 @@
 #include "MessageBuffer.h"
 #include "NetworkMessageInternalFwd.h"
 
-#include <boost/noncopyable.hpp>
 #include <string>
 #include <vector>
 
@@ -20,7 +22,7 @@ EXPORT_NONCOPYABLE_CLASS(NETWORK);
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE MessageTarget : private boost::noncopyable
+    class NETWORK_DEFAULT_DECLARE MessageTarget final
     {
     public:
         using ClassType = MessageTarget;
@@ -28,7 +30,7 @@ namespace Network
 
     public:
         explicit MessageTarget(const MessageBufferSharedPtr& messageBuffer) noexcept;
-        ~MessageTarget() = default;
+        ~MessageTarget() noexcept = default;
         MessageTarget(const MessageTarget& rhs) = delete;
         MessageTarget& operator=(const MessageTarget& rhs) = delete;
         MessageTarget(MessageTarget&& rhs) noexcept;
@@ -74,7 +76,7 @@ namespace Network
         void WriteEnumWithoutNumber(int32_t elementsNumber, const T* data);
 
         // 帮助函数
-        int GetBytesWritten() const noexcept;
+        [[nodiscard]] int GetBytesWritten() const noexcept;
 
     private:
         MessageBufferSharedPtr m_Target;

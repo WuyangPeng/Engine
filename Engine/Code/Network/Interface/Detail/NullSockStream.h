@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:07)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:09)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_NULL_SOCK_STREAM_H
@@ -13,7 +16,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE NullSockStream : public SockStreamImpl
+    class NETWORK_HIDDEN_DECLARE NullSockStream final : public SockStreamImpl
     {
     public:
         using ClassType = NullSockStream;
@@ -22,20 +25,20 @@ namespace Network
     public:
         NullSockStream() noexcept;
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-        int Send(const MessageBufferSharedPtr& messageBuffer) noexcept override;
-        int Receive(const MessageBufferSharedPtr& messageBuffer) noexcept override;
+        [[nodiscard]] int Send(const MessageBufferSharedPtr& messageBuffer) noexcept final;
+        [[nodiscard]] int Receive(const MessageBufferSharedPtr& messageBuffer) noexcept final;
 
-        void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
-        void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) noexcept override;
+        void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) final;
+        void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) noexcept final;
 
-        bool CloseHandle() noexcept override;
+        [[nodiscard]] bool CloseHandle() noexcept final;
 
-        bool EnableNonBlock() noexcept override;
+        [[nodiscard]] bool EnableNonBlock() noexcept final;
 
-        const std::string GetRemoteAddress() const override;
-        int GetRemotePort() const noexcept override;
+        [[nodiscard]] const std::string GetRemoteAddress() const noexcept final;
+        [[nodiscard]] int GetRemotePort() const noexcept final;
     };
 }
 

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:06)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:07)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_SOCK_ACCEPTOR_H
 #define NETWORK_NETWORK_INTERFACE_NULL_SOCK_ACCEPTOR_H
@@ -13,7 +16,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE NullSockAcceptor : public SockAcceptorImpl
+    class NETWORK_HIDDEN_DECLARE NullSockAcceptor final : public SockAcceptorImpl
     {
     public:
         using ClassType = NullSockAcceptor;
@@ -22,18 +25,18 @@ namespace Network
     public:
         NullSockAcceptor() noexcept;
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     public:
-        bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept override;
-        bool Accept(const SockStreamSharedPtr& sockStream) noexcept override;
-        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) noexcept override;
-        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept override;
+        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept final;
+        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream) noexcept final;
+        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) noexcept final;
+        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept final;
 
-        bool EnableNonBlock() noexcept override;
+        [[nodiscard]] bool EnableNonBlock() noexcept final;
 
-        const std::string GetAddress() const noexcept override;
-        int GetPort() const noexcept override;
+        [[nodiscard]] const std::string GetAddress() const noexcept final;
+        [[nodiscard]] int GetPort() const noexcept final;
     };
 }
 

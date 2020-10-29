@@ -1,31 +1,34 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 15:55)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 17:52)
 
 #include "Network/NetworkExport.h"
 
-#include "CoreTools/Exception/Error.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/LogMacro.h"
 #include "ExecutorWorkGuardContext.h"
 #include "System/Helper/PragmaWarning/AsioPost.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 using boost::asio::post;
 using boost::system::system_error;
 using CoreTools::Error;
 using std::bind;
 using std::exception;
-#include "System/Helper/PragmaWarning.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Network::ExecutorWorkGuardContext ::ExecutorWorkGuardContext()
+Network::ExecutorWorkGuardContext::ExecutorWorkGuardContext()
     : m_IOContext{}, m_Work{ make_work_guard(m_IOContext) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 #include STSTEM_WARNING_POP
+
 CLASS_INVARIANT_STUB_DEFINE(Network, ExecutorWorkGuardContext)
 
 void Network::ExecutorWorkGuardContext::Run()
@@ -66,35 +69,35 @@ void Network::ExecutorWorkGuardContext::Run()
     }
 }
 
-Network::IOContextType& Network::ExecutorWorkGuardContext ::GetIOContext() noexcept
+Network::IOContextType& Network::ExecutorWorkGuardContext::GetIOContext() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
     return m_IOContext;
 }
 
-void Network::ExecutorWorkGuardContext ::PostStopContext()
+void Network::ExecutorWorkGuardContext::PostStopContext()
 {
     NETWORK_CLASS_IS_VALID_9;
 
     post(m_IOContext, bind(&IOContextType::stop, &m_IOContext));
 }
 
-bool Network::ExecutorWorkGuardContext ::IsContextStop() const
+bool Network::ExecutorWorkGuardContext::IsContextStop() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return m_IOContext.stopped();
 }
 
-void Network::ExecutorWorkGuardContext ::RestartContext()
+void Network::ExecutorWorkGuardContext::RestartContext()
 {
     NETWORK_CLASS_IS_VALID_9;
 
     m_IOContext.restart();
 }
 
-void Network::ExecutorWorkGuardContext ::DispatchStopContext()
+void Network::ExecutorWorkGuardContext::DispatchStopContext()
 {
     m_IOContext.stop();
 }

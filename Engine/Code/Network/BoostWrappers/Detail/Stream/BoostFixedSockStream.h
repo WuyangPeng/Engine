@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 15:47)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 16:28)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_FIXED_SOCK_STREAM_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_FIXED_SOCK_STREAM_H
@@ -24,7 +27,7 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        int Receive(const MessageBufferSharedPtr& messageBuffer) override;
+        [[nodiscard]] int Receive(const MessageBufferSharedPtr& messageBuffer) override;
         void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
     private:

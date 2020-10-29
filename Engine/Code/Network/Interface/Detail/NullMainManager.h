@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:06)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:06)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_MAIN_MANAGER_H
 #define NETWORK_NETWORK_INTERFACE_NULL_MAIN_MANAGER_H
@@ -13,7 +16,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE NullMainManager : public BaseMainManagerImpl
+    class NETWORK_HIDDEN_DECLARE NullMainManager final : public BaseMainManagerImpl
     {
     public:
         using ClassType = NullMainManager;
@@ -22,13 +25,13 @@ namespace Network
     public:
         NullMainManager() noexcept;
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-        void Run() noexcept override;
+        void Run() noexcept final;
 
-        void StopContext() noexcept override;
-        bool IsContextStop() const noexcept override;
-        void RestartContext() noexcept override;
+        void StopContext() noexcept final;
+        [[nodiscard]] bool IsContextStop() const noexcept final;
+        void RestartContext() noexcept final;
     };
 }
 

@@ -1,13 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 11:23)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 11:55)
 
 #include "Network/NetworkExport.h"
 
 #include "OnlySendingClient.h"
-
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
@@ -20,15 +23,15 @@
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <vector>
 
 using std::make_shared;
 using std::string;
 using std::vector;
 
-Network::OnlySendingClient ::OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager)
-    : ParentType{ configurationStrategy, socketManager }, m_SockConnector{ configurationStrategy },
+Network::OnlySendingClient::OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager)
+    : ParentType{ configurationStrategy, socketManager },
+      m_SockConnector{ configurationStrategy },
       m_SockStream{ make_shared<SockStream>(configurationStrategy) },
       m_BufferSendStream{ configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy() },
       m_Buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
@@ -38,11 +41,11 @@ Network::OnlySendingClient ::OnlySendingClient(const ConfigurationStrategy& conf
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, OnlySendingClient)
 
-uint64_t Network::OnlySendingClient ::Connect()
+uint64_t Network::OnlySendingClient::Connect()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    auto configurationStrategy = GetConfigurationStrategy();
+    const auto configurationStrategy = GetConfigurationStrategy();
 
     SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), GetConfigurationStrategy()) };
 
@@ -56,22 +59,20 @@ uint64_t Network::OnlySendingClient ::Connect()
     }
 }
 
-void Network::OnlySendingClient ::AsyncConnect()
+void Network::OnlySendingClient::AsyncConnect()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    auto configurationStrategy = GetConfigurationStrategy();
+    const auto configurationStrategy = GetConfigurationStrategy();
 
     SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), GetConfigurationStrategy()) };
 
     m_SockConnector.AsyncConnect(GetSocketManagerSharedPtr(), m_SockStream, sockAddress);
 }
 
-void Network::OnlySendingClient ::Send([[maybe_unused]] uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::OnlySendingClient::Send([[maybe_unused]] uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
-
- 
 
     if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Cache)
     {
@@ -90,7 +91,7 @@ void Network::OnlySendingClient ::Send([[maybe_unused]] uint64_t socketID, const
     }
 }
 
-void Network::OnlySendingClient ::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::OnlySendingClient::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
     if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Cache)
     {
@@ -109,27 +110,23 @@ void Network::OnlySendingClient ::AsyncSend(uint64_t socketID, const MessageInte
     }
 }
 
-void Network::OnlySendingClient ::ImmediatelySend([[maybe_unused]] uint64_t socketID)
+void Network::OnlySendingClient::ImmediatelySend([[maybe_unused]] uint64_t socketID)
 {
     NETWORK_CLASS_IS_VALID_9;
-
- 
 
     if (!m_BufferSendStream.IsEmpty())
     {
         m_BufferSendStream.Save(m_Buffer);
 
-        m_SockStream->Send(m_Buffer);
+        [[maybe_unused]] const auto index = m_SockStream->Send(m_Buffer);
 
         m_BufferSendStream.Clear();
     }
 }
 
-void Network::OnlySendingClient ::ImmediatelyAsyncSend([[maybe_unused]] uint64_t socketID)
+void Network::OnlySendingClient::ImmediatelyAsyncSend([[maybe_unused]] uint64_t socketID)
 {
     NETWORK_CLASS_IS_VALID_9;
-
- 
 
     if (!m_BufferSendStream.IsEmpty())
     {
@@ -141,7 +138,7 @@ void Network::OnlySendingClient ::ImmediatelyAsyncSend([[maybe_unused]] uint64_t
     }
 }
 
-void Network::OnlySendingClient ::Receive()  noexcept
+void Network::OnlySendingClient::Receive() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -150,7 +147,7 @@ void Network::OnlySendingClient ::Receive()  noexcept
         << LOG_SINGLETON_TRIGGER_ASSERT;
 }
 
-void Network::OnlySendingClient ::AsyncReceive() noexcept
+void Network::OnlySendingClient::AsyncReceive() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -159,30 +156,34 @@ void Network::OnlySendingClient ::AsyncReceive() noexcept
         << LOG_SINGLETON_TRIGGER_ASSERT;
 }
 
-bool Network::OnlySendingClient ::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
+bool Network::OnlySendingClient::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
 {
     auto eventType = System::UnderlyingCastEnum<SocketManagerEvent>(callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::Event)));
 
     switch (eventType)
     {
-    case SocketManagerEvent::AsyncConnect: {
-        const auto wrappersStrategy = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy));
-        const auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::Error));
-        if (System::UnderlyingCastEnum<WrappersStrategy>(wrappersStrategy) == WrappersStrategy::ACE && result == 0)
+        case SocketManagerEvent::AsyncConnect:
         {
-            const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
-            GetSocketManagerSharedPtr()->Insert(socketID);
-           if(! GetSocketManagerSharedPtr()->EventFunction(callbackParameters))
+            const auto wrappersStrategy = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy));
+            const auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::Error));
+            if (System::UnderlyingCastEnum<WrappersStrategy>(wrappersStrategy) == WrappersStrategy::ACE && result == 0)
             {
+                const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
+                GetSocketManagerSharedPtr()->InsertSocket(socketID);
+                if (!GetSocketManagerSharedPtr()->EventFunction(callbackParameters))
+                {
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                        << SYSTEM_TEXT("消息事件触发失败。")
+                        << LOG_SINGLETON_TRIGGER_ASSERT;
+                }
+
+                return true;
             }
-
-            return true;
         }
-    }
-    break;
-
-    default:
         break;
+
+        default:
+            break;
     }
 
     return false;

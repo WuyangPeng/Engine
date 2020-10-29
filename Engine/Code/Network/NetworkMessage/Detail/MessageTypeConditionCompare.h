@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 14:24)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 20:39)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_COMPARE_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_COMPARE_H
@@ -14,7 +17,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE MessageTypeConditionCompare : public MessageTypeConditionImpl
+    class NETWORK_HIDDEN_DECLARE MessageTypeConditionCompare final : public MessageTypeConditionImpl
     {
     public:
         using ClassType = MessageTypeConditionCompare;
@@ -23,12 +26,12 @@ namespace Network
     public:
         MessageTypeConditionCompare(VersionsCondition condition, int version) noexcept;
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     public:
-        bool IsVersionsConform(int version) const noexcept override;
-        int GetMinVersion() const override;
-        int GetMaxVersion() const override;
+        [[nodiscard]] bool IsVersionsConform(int version) const noexcept final;
+        [[nodiscard]] int GetMinVersion() const final;
+        [[nodiscard]] int GetMaxVersion() const final;
 
     private:
         VersionsCondition m_Condition;

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 14:30)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 10:01)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_H
@@ -18,42 +21,41 @@ namespace Network
     class NETWORK_DEFAULT_DECLARE MessageInterface
     {
     public:
-        using MessageInterfaceSharedPtr = std::shared_ptr<MessageInterface>;
-        using ConstMessageInterfaceSharedPtr = std::shared_ptr<const MessageInterface>;
         using ClassType = MessageInterface;
+        CORE_TOOLS_SHARED_PTR_DECLARE(MessageInterface);
         using Rtti = CoreTools::Rtti;
         using FactoryFunction = MessageInterfaceSharedPtr (*)(const MessageSourceSharedPtr& stream, int64_t messageID);
 
     public:
         explicit MessageInterface(int64_t messageID) noexcept;
-        virtual ~MessageInterface() = 0;
-        MessageInterface(const MessageInterface&) = default;
-        MessageInterface& operator=(const MessageInterface&) = default;
-        MessageInterface(MessageInterface&&) = default;
-        MessageInterface& operator=(MessageInterface&&) = default;
+        virtual ~MessageInterface() noexcept = 0;
+        MessageInterface(const MessageInterface& rhs) = default;
+        MessageInterface& operator=(const MessageInterface& rhs) = default;
+        MessageInterface(MessageInterface&& rhs) noexcept = default;
+        MessageInterface& operator=(MessageInterface&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
         CORE_TOOLS_RTTI_DECLARE;
 
-        bool IsExactly(const Rtti& type) const noexcept;
-        bool IsDerived(const Rtti& type) const noexcept;
-        bool IsExactlyTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept;
-        bool IsDerivedTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept;
+        [[nodiscard]] bool IsExactly(const Rtti& type) const noexcept;
+        [[nodiscard]] bool IsDerived(const Rtti& type) const noexcept;
+        [[nodiscard]] bool IsExactlyTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept;
+        [[nodiscard]] bool IsDerivedTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept;
 
-        static MessageInterfaceSharedPtr Factory(const MessageSourceSharedPtr& source, int64_t messageID);
+        [[nodiscard]] static MessageInterfaceSharedPtr Factory(const MessageSourceSharedPtr& source, int64_t messageID);
 
-        virtual int GetStreamingSize() const;
+        [[nodiscard]] virtual int GetStreamingSize() const;
         virtual void Save(const MessageTargetSharedPtr& target) const;
         virtual void Load(const MessageSourceSharedPtr& source);
 
-        virtual int GetMessageID() const;
-        virtual int GetSubMessageID() const;
-        int64_t GetFullMessageID() const noexcept;
+        [[nodiscard]] virtual int GetMessageID() const;
+        [[nodiscard]] virtual int GetSubMessageID() const;
+        [[nodiscard]] int64_t GetFullMessageID() const noexcept;
 
         // int32_t 总长度
         // int32_t 版本号
         // int64_t 时间戳
-        static constexpr int GetMessageHeadSize()
+        [[nodiscard]] static constexpr int GetMessageHeadSize()
         {
             return sizeof(int32_t) + sizeof(int32_t) + sizeof(int64_t);
         }

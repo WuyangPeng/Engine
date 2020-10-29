@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 13:47)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 15:10)
 
 #include "Network/NetworkExport.h"
 
@@ -20,12 +23,8 @@
     #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 
 using std::make_shared;
-    #include "System/Helper/PragmaWarning.h"
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26455)
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
-Network::ACESockConnector ::ACESockConnector()
+
+Network::ACESockConnector::ACESockConnector() noexcept
     : m_ACESockConnector{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -33,7 +32,10 @@ Network::ACESockConnector ::ACESockConnector()
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ACESockConnector)
 
-bool Network::ACESockConnector ::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26415)
+    #include SYSTEM_WARNING_DISABLE(26418)
+bool Network::ACESockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -42,8 +44,12 @@ bool Network::ACESockConnector ::Connect(const SockStreamSharedPtr& sockStream, 
     else
         return false;
 }
+    #include STSTEM_WARNING_POP
 
-void Network::ACESockConnector ::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26415)
+    #include SYSTEM_WARNING_DISABLE(26418)
+void Network::ACESockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -59,16 +65,19 @@ void Network::ACESockConnector ::AsyncConnect(const EventInterfaceSharedPtr& eve
 
         if (!eventInterface->EventFunction(callbackParameters))
         {
-
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                << SYSTEM_TEXT("事件回调执行失败！")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
         }
     }
 }
+    #include STSTEM_WARNING_POP
 
-const Network::ACESockConnector::SockConnectorPtr Network::ACESockConnector ::Clone() const
+const Network::ACESockConnector::SockConnectorPtr Network::ACESockConnector::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return make_shared<ClassType>(*this);
 }
-    #include STSTEM_WARNING_POP
+
 #endif  // NETWORK_USE_ACE

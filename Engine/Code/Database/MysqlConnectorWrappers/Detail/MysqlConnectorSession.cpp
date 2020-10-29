@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 12:52)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 13:46)
 
 #include "Database/DatabaseExport.h"
 
@@ -18,10 +21,8 @@ using std::make_unique;
 using std::string;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
-    #include "System/Helper/PragmaWarning.h"
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26486)
-Database::MysqlConnectorSession ::MysqlConnectorSession(const ConfigurationStrategy& configurationStrategy)
+ 
+Database::MysqlConnectorSession::MysqlConnectorSession(const ConfigurationStrategy& configurationStrategy)
     : ParentType{ configurationStrategy },
       m_MysqlxSession{ make_unique<MysqlxSession>(mysqlx::SessionOption::USER, configurationStrategy.GetDBUserName(),
                                                   mysqlx::SessionOption::PWD, configurationStrategy.GetDBPassword(),
@@ -34,7 +35,7 @@ Database::MysqlConnectorSession ::MysqlConnectorSession(const ConfigurationStrat
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::MysqlConnectorSession ::MysqlConnectorSession(const DatabaseObject& databaseObject)
+Database::MysqlConnectorSession::MysqlConnectorSession(const DatabaseObject& databaseObject)
     : ParentType{ databaseObject.GetConfigurationStrategy() },
       m_MysqlxSession{ GetMysqlxSessionPtr(databaseObject) }
 {
@@ -43,22 +44,17 @@ Database::MysqlConnectorSession ::MysqlConnectorSession(const DatabaseObject& da
 
 Database::MysqlConnectorSession ::~MysqlConnectorSession()
 {
-    try
+    EXCEPTION_TRY
     {
         m_MysqlxSession->close();
     }
-    catch (const std::exception& error)
-    {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Database)
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
-    }
+    EXCEPTION_ALL_CATCH(Database)
 
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
     #ifdef OPEN_CLASS_INVARIANT
-bool Database::MysqlConnectorSession ::IsValid() const noexcept
+bool Database::MysqlConnectorSession::IsValid() const noexcept
 {
     if (ParentType::IsValid() && m_MysqlxSession)
         return true;
@@ -67,14 +63,14 @@ bool Database::MysqlConnectorSession ::IsValid() const noexcept
 }
     #endif  // OPEN_CLASS_INVARIANT
 
-Database::MysqlConnectorSession::MysqlxSchemaPtr Database::MysqlConnectorSession ::GetMysqlxSchemaPtr()
+Database::MysqlConnectorSession::MysqlxSchemaPtr Database::MysqlConnectorSession::GetMysqlxSchemaPtr()
 {
     DATABASE_CLASS_IS_VALID_1;
 
     return make_unique<MysqlxSchema>(m_MysqlxSession->getDefaultSchema());
 }
 
-Database::SessionImpl::MysqlxSchemaPtr Database::MysqlConnectorSession ::GetMysqlxSchemaPtr(int dbIndex)
+Database::SessionImpl::MysqlxSchemaPtr Database::MysqlConnectorSession::GetMysqlxSchemaPtr(int dbIndex)
 {
     DATABASE_CLASS_IS_VALID_1;
 
@@ -83,7 +79,7 @@ Database::SessionImpl::MysqlxSchemaPtr Database::MysqlConnectorSession ::GetMysq
     return make_unique<MysqlxSchema>(m_MysqlxSession->getSchema(configurationStrategy.GetDBName(dbIndex)));
 }
 
-Database::MysqlConnectorSession::MysqlxSessionPtr Database::MysqlConnectorSession ::GetMysqlxSessionPtr(const DatabaseObject& databaseObject)
+Database::MysqlConnectorSession::MysqlxSessionPtr Database::MysqlConnectorSession::GetMysqlxSessionPtr(const DatabaseObject& databaseObject)
 {
     auto implPtr = databaseObject.GetImplType().lock();
 
@@ -97,7 +93,7 @@ Database::MysqlConnectorSession::MysqlxSessionPtr Database::MysqlConnectorSessio
     }
 }
 
-Database::SessionImpl::SchemaContainer Database::MysqlConnectorSession ::GetSchemaContainer()
+Database::SessionImpl::SchemaContainer Database::MysqlConnectorSession::GetSchemaContainer()
 {
     DATABASE_CLASS_IS_VALID_1;
 
@@ -107,52 +103,52 @@ Database::SessionImpl::SchemaContainer Database::MysqlConnectorSession ::GetSche
 
     for (auto schema : schemas)
     {
-        schemaContainer.push_back(make_unique<Schema>(GetConfigurationStrategy(), schema));
+        schemaContainer.emplace_back(make_unique<Schema>(GetConfigurationStrategy(), schema));
     }
 
     return schemaContainer;
 }
 
-Database::SessionImpl::ResultPtr Database::MysqlConnectorSession ::ExecuteResult(const string& findStatement, int bindStatement)
+Database::SessionImpl::ResultPtr Database::MysqlConnectorSession::ExecuteResult(const string& findStatement, int bindStatement)
 {
     DATABASE_CLASS_IS_VALID_1;
 
     return make_shared<Result>(GetConfigurationStrategy(), make_shared<MysqlxRowResult>(m_MysqlxSession->sql(findStatement).bind(bindStatement).execute()));
 }
 
-void Database::MysqlConnectorSession ::Execute(const string& findStatement, int bindStatement)
+void Database::MysqlConnectorSession::Execute(const string& findStatement, int bindStatement)
 {
     DATABASE_CLASS_IS_VALID_1;
 
     m_MysqlxSession->sql(findStatement).bind(bindStatement).execute();
 }
 
-void Database::MysqlConnectorSession ::Execute(const string& findStatement)
+void Database::MysqlConnectorSession::Execute(const string& findStatement)
 {
     DATABASE_CLASS_IS_VALID_1;
 
     m_MysqlxSession->sql(findStatement).execute();
 }
 
-Database::SessionImpl::ResultPtr Database::MysqlConnectorSession ::ExecuteResult(const string& findStatement)
+Database::SessionImpl::ResultPtr Database::MysqlConnectorSession::ExecuteResult(const string& findStatement)
 {
     DATABASE_CLASS_IS_VALID_1;
 
     return make_shared<Result>(GetConfigurationStrategy(), make_shared<MysqlxRowResult>(m_MysqlxSession->sql(findStatement).execute()));
 }
 
-Database::SessionImpl::ResultPtr Database::MysqlConnectorSession ::ExecuteResult(const string& findStatement, const string& bindStatement)
+Database::SessionImpl::ResultPtr Database::MysqlConnectorSession::ExecuteResult(const string& findStatement, const string& bindStatement)
 {
     DATABASE_CLASS_IS_VALID_1;
 
     return make_shared<Result>(GetConfigurationStrategy(), make_shared<MysqlxRowResult>(m_MysqlxSession->sql(findStatement).bind(bindStatement).execute()));
 }
 
-void Database::MysqlConnectorSession ::Execute(const string& findStatement, const string& bindStatement)
+void Database::MysqlConnectorSession::Execute(const string& findStatement, const string& bindStatement)
 {
     DATABASE_CLASS_IS_VALID_1;
 
     m_MysqlxSession->sql(findStatement).bind(bindStatement).execute();
 }
-#include STSTEM_WARNING_POP
+ 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR

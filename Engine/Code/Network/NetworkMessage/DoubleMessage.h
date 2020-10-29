@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 14:28)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 9:54)
 
 #ifndef NETWORK_NETWORK_MESSAGE_DOUBLE_MESSAGE_H
 #define NETWORK_NETWORK_MESSAGE_DOUBLE_MESSAGE_H
@@ -27,16 +30,15 @@ namespace Network
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
         NETWORK_STREAM_DECLARE(DoubleMessage);
 
-        int GetMessageID() const override;
-        int GetSubMessageID() const override;
+        [[nodiscard]] int GetMessageID() const override;
+        [[nodiscard]] int GetSubMessageID() const override;
 
     private:
         static constexpr auto sm_MessageBytes = 32LL;
         static constexpr auto sm_MaxMessageID = (1LL << sm_MessageBytes) - 1LL;
     };
 
-    using DoubleMessageSharedPtr = std::shared_ptr<DoubleMessage>;
-    using ConstDoubleMessageSharedPtr = std::shared_ptr<const DoubleMessage>;
+    CORE_TOOLS_SHARED_PTR_DECLARE(DoubleMessage);
 }
 
 #endif  // NETWORK_NETWORK_MESSAGE_DOUBLE_MESSAGE_H

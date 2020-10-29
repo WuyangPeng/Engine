@@ -1,32 +1,33 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/10 16:35)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/27 14:05)
 
 #include "Network/NetworkExport.h"
 
-#include "MessageInterfaceSharedPtrLess.h"
 #include "MessageInterface.h"
+#include "MessageInterfaceSharedPtrLess.h"
 
 using std::string;
-#include "System/Helper/PragmaWarning.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-
-bool Network::MessageInterfaceSharedPtrLess
-	::operator()(const ConstMessageInterfaceSharedPtr& lhs, const ConstMessageInterfaceSharedPtr& rhs)
+bool Network::MessageInterfaceSharedPtrLess::operator()(const ConstMessageInterfaceSharedPtr& lhs, const ConstMessageInterfaceSharedPtr& rhs) const
 {
-	if (lhs->GetMessageID() < rhs->GetMessageID())
-		return true;
-	else if (rhs->GetMessageID() < lhs->GetMessageID())
-		return false;
-	if (lhs->GetSubMessageID() < rhs->GetSubMessageID())
-		return true;
-	else if (rhs->GetSubMessageID() < lhs->GetSubMessageID())
-		return false;
-	else
-		return string{ lhs->GetRttiType().GetName() } < string{ rhs->GetRttiType().GetName() };
+    if (lhs->GetMessageID() < rhs->GetMessageID())
+        return true;
+    else if (rhs->GetMessageID() < lhs->GetMessageID())
+        return false;
+    if (lhs->GetSubMessageID() < rhs->GetSubMessageID())
+        return true;
+    else if (rhs->GetSubMessageID() < lhs->GetSubMessageID())
+        return false;
+    else
+        return string{ lhs->GetRttiType().GetName() } < string{ rhs->GetRttiType().GetName() };
 }
 #include STSTEM_WARNING_POP

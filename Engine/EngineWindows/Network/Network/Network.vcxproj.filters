@@ -199,9 +199,6 @@
     <Filter Include="Openssl 头文件">
       <UniqueIdentifier>{17599d27-70d6-412f-afb7-cbbd9251ff75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SocketWrappers 头文件">
-      <UniqueIdentifier>{5ea37813-4fc2-4f84-b426-b64a81594ade}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NetworkMessage 模板文件\Detail">
       <UniqueIdentifier>{431eab48-5b1d-4b48-9be8-846b89a309cf}</UniqueIdentifier>
     </Filter>
@@ -620,6 +617,15 @@
     <ClCompile Include="..\..\..\Code\Network\Interface\SendSocketManager.cpp">
       <Filter>Interface 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NetworkInternal.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SendSocketManagerImpl.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\SocketData.cpp">
+      <Filter>Interface 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Network\NetworkDll.h">
@@ -1009,12 +1015,6 @@
     <ClInclude Include="..\..\..\Code\Network\Openssl\OpensslFwd.h">
       <Filter>Openssl 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\SocketWrappers\SocketWrappers.h">
-      <Filter>SocketWrappers 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\SocketWrappers\SocketWrappersFwd.h">
-      <Filter>SocketWrappers 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\DllLib.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -1196,6 +1196,18 @@
       <Filter>ACEWrappers 头文件\Detail\BaseMainManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\Interface\SendSocketManager.h">
+      <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationInternalFwd.h">
+      <Filter>Configuration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NetworkInternal.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SendSocketManagerImpl.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\SocketData.h">
       <Filter>Interface 头文件</Filter>
     </ClInclude>
   </ItemGroup>

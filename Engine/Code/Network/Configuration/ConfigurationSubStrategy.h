@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 12:31)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 19:07)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_SUB_STRATEGY_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_SUB_STRATEGY_H
@@ -10,30 +13,30 @@
 #include "Network/NetworkDll.h"
 
 #include "ConfigurationFwd.h"
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 NETWORK_EXPORT_SHARED_PTR(ConfigurationSubStrategyImpl);
 
 namespace Network
 {
-	class NETWORK_DEFAULT_DECLARE ConfigurationSubStrategy
-	{
-	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationSubStrategy);
+    class NETWORK_DEFAULT_DECLARE ConfigurationSubStrategy final
+    {
+    public:
+        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationSubStrategy);
 
-	public:
-		ConfigurationSubStrategy();
+    public:
+        ConfigurationSubStrategy();
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool IsExist(WrappersSubStrategy wrappersSubStrategy) const;
-		int GetValue(WrappersSubStrategy wrappersSubStrategy) const;
+        [[nodiscard]] bool IsExist(WrappersSubStrategy wrappersSubStrategy) const;
+        [[nodiscard]] int GetValue(WrappersSubStrategy wrappersSubStrategy) const;
 
-		void Insert(WrappersSubStrategy wrappersSubStrategy, int value);
+        void Insert(WrappersSubStrategy wrappersSubStrategy, int value);
 
-	private:
-		IMPL_TYPE_DECLARE(ConfigurationSubStrategy);
-	};
+    private:
+        IMPL_TYPE_DECLARE(ConfigurationSubStrategy);
+    };
 }
 
-#endif // NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_SUB_STRATEGY_H
+#endif  // NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_SUB_STRATEGY_H

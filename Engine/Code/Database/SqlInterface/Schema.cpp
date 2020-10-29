@@ -1,30 +1,31 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/16 12:35)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 10:43)
 
 #include "Database/DatabaseExport.h"
 
 #include "Schema.h"
 #include "Detail/SchemaFactory.h"
 #include "Detail/SchemaImpl.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
-Database::Schema
-	::Schema(const Session& session)
-	: m_Impl{ SchemaFactory::Create(session) }
+Database::Schema::Schema(const Session& session)
+    : m_Impl{ SchemaFactory::Create(session) }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::Schema
-	::Schema(const Session& session, int dbIndex)
-	: m_Impl{ SchemaFactory::Create(session,dbIndex) }
+Database::Schema::Schema(const Session& session, int dbIndex)
+    : m_Impl{ SchemaFactory::Create(session, dbIndex) }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, Schema)
@@ -32,19 +33,17 @@ CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, Schema)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, Schema, GetConfigurationStrategy, Database::ConfigurationStrategy)
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
-Database::Schema::SchemaWeakPtr Database::Schema
-	::GetImplType() const noexcept
+Database::Schema::SchemaWeakPtr Database::Schema::GetImplType() const noexcept
 {
-	DATABASE_CLASS_IS_VALID_CONST_1;
+    DATABASE_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl;
+    return m_Impl;
 }
 
-Database::Schema
-	::Schema(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema)
-	: m_Impl{ SchemaFactory::Create(configurationStrategy,mysqlxSchema) }
+Database::Schema::Schema(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema)
+    : m_Impl{ SchemaFactory::Create(configurationStrategy, mysqlxSchema) }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+#endif  // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)

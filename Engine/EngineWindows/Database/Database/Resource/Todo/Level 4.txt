@@ -1,32 +1,12 @@
 TODO Level 4
 
-0.0.2.5
+0.5.2.1
   
-1.  （MysqlWrappers）完成MysqlWrappers模块。
-2.  （MysqlWrappers）完成MysqlWrappers模块的数据对象。
-3.  （MysqlWrappers）完成MysqlWrappers模块的会话。
-4.  （MysqlWrappers）完成MysqlWrappers模块的架构。
-5.  （MysqlWrappers）完成MysqlWrappers模块的采集。
-6.  （MysqlWrappers）完成MysqlWrappers模块的结果。
-7.  （MysqlWrappers）完成MysqlWrappers模块的表。 
-8.  （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块。
-9.  （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的数据对象。
-10. （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的会话。
-11. （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的架构。
-12. （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的采集。
-13. （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的结果。
-14. （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的表。 
-15. （SqlServerWrappers）完成SqlServerWrappers模块。
-16. （SqlServerWrappers）完成SqlServerWrappers模块的数据对象。
-17. （SqlServerWrappers）完成SqlServerWrappers模块的会话。
-18. （SqlServerWrappers）完成SqlServerWrappers模块的架构。
-19. （SqlServerWrappers）完成SqlServerWrappers模块的采集。
-20. （SqlServerWrappers）完成SqlServerWrappers模块的结果。
-21. （SqlServerWrappers）完成SqlServerWrappers模块的表。 
-22. （SQLiteWrappers）完成SQLiteWrappers模块。
-23. （SQLiteWrappers）完成SQLiteWrappers模块的数据对象。
-24. （SQLiteWrappers）完成SQLiteWrappers模块的会话。
-25. （SQLiteWrappers）完成SQLiteWrappers模块的架构。
-26. （SQLiteWrappers）完成SQLiteWrappers模块的采集。
-27. （SQLiteWrappers）完成SQLiteWrappers模块的结果。
-28. （SQLiteWrappers）完成SQLiteWrappers模块的表。 
+1.  （Helper）完成帮助模块。
+2.  （MysqlWrappers）完成MysqlWrappers模块。
+3.  （MysqlWrappers）完成MysqlWrappers模块的数据对象。
+4.  （MysqlWrappers）完成MysqlWrappers模块的会话。
+5.  （MysqlWrappers）完成MysqlWrappers模块的架构。
+6.  （MysqlWrappers）完成MysqlWrappers模块的采集。
+7.  （MysqlWrappers）完成MysqlWrappers模块的结果。
+8.  （MysqlWrappers）完成MysqlWrappers模块的表。 

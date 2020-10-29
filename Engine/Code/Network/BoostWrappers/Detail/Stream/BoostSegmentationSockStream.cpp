@@ -1,14 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 15:58)
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/28 18:14)
 
 #include "Network/NetworkExport.h"
 
 #include "BoostSegmentationSockStream.h"
 #include "BoostSockStreamHelper.h"
-
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/Interface/Data/AddressData.h"
@@ -18,12 +20,7 @@
 using boost::asio::detail::throw_error;
 using std::string;
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
-Network::BoostSegmentationSockStream ::BoostSegmentationSockStream() noexcept
+Network::BoostSegmentationSockStream::BoostSegmentationSockStream() noexcept
     : ParentType{}, m_StreamReceive{ StreamReceive::Head }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -31,7 +28,7 @@ Network::BoostSegmentationSockStream ::BoostSegmentationSockStream() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostSegmentationSockStream)
 
-int Network::BoostSegmentationSockStream ::Receive(const MessageBufferSharedPtr& messageBuffer)
+int Network::BoostSegmentationSockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -39,15 +36,18 @@ int Network::BoostSegmentationSockStream ::Receive(const MessageBufferSharedPtr&
     {
         switch (m_StreamReceive)
         {
-        case StreamReceive::Head: {
-            return ReceiveHead(messageBuffer);
-        }
-        case StreamReceive::Content: {
-            return ReceiveContent(messageBuffer);
-        }
-        default: {
-            break;
-        }
+            case StreamReceive::Head:
+            {
+                return ReceiveHead(messageBuffer);
+            }
+            case StreamReceive::Content:
+            {
+                return ReceiveContent(messageBuffer);
+            }
+            default:
+            {
+                break;
+            }
         }
 
         return 0;
@@ -59,7 +59,7 @@ int Network::BoostSegmentationSockStream ::Receive(const MessageBufferSharedPtr&
     }
 }
 
-int Network::BoostSegmentationSockStream ::ReceiveHead(const MessageBufferSharedPtr& messageBuffer)
+int Network::BoostSegmentationSockStream::ReceiveHead(const MessageBufferSharedPtr& messageBuffer)
 {
     messageBuffer->ClearCurrentIndex();
     messageBuffer->CheckingMessageHeadSize();
@@ -81,7 +81,7 @@ int Network::BoostSegmentationSockStream ::ReceiveHead(const MessageBufferShared
     return receiveSize;
 }
 
-int Network::BoostSegmentationSockStream ::ReceiveContent(const MessageBufferSharedPtr& messageBuffer)
+int Network::BoostSegmentationSockStream::ReceiveContent(const MessageBufferSharedPtr& messageBuffer)
 {
     messageBuffer->CheckingMessageContentSize();
     messageBuffer->SetMessageContentReceiveCount();
@@ -101,7 +101,7 @@ int Network::BoostSegmentationSockStream ::ReceiveContent(const MessageBufferSha
     return receiveSize;
 }
 
-void Network::BoostSegmentationSockStream ::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::BoostSegmentationSockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -109,12 +109,12 @@ void Network::BoostSegmentationSockStream ::AsyncReceive(const EventInterfaceSha
     {
         switch (m_StreamReceive)
         {
-        case StreamReceive::Head:
-            return AsyncReceiveHead(eventInterface, messageBuffer);
-        case StreamReceive::Content:
-            return AsyncReceiveContent(eventInterface, messageBuffer, messageBuffer->GetCurrentWriteIndex());
-        default:
-            break;
+            case StreamReceive::Head:
+                return AsyncReceiveHead(eventInterface, messageBuffer);
+            case StreamReceive::Content:
+                return AsyncReceiveContent(eventInterface, messageBuffer, messageBuffer->GetCurrentWriteIndex());
+            default:
+                break;
         }
     }
     catch (...)
@@ -124,7 +124,7 @@ void Network::BoostSegmentationSockStream ::AsyncReceive(const EventInterfaceSha
     }
 }
 
-void Network::BoostSegmentationSockStream ::AsyncReceiveHead(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::BoostSegmentationSockStream::AsyncReceiveHead(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     messageBuffer->ClearCurrentIndex();
     messageBuffer->CheckingMessageHeadSize();
@@ -133,7 +133,7 @@ void Network::BoostSegmentationSockStream ::AsyncReceiveHead(const EventInterfac
     HandleAsyncReceive(eventInterface, messageBuffer, messageBuffer->GetCurrentWriteIndex());
 }
 
-void Network::BoostSegmentationSockStream ::AsyncReceiveContent(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
+void Network::BoostSegmentationSockStream::AsyncReceiveContent(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
     messageBuffer->CheckingMessageContentSize();
     messageBuffer->SetMessageContentReceiveCount();
@@ -141,18 +141,18 @@ void Network::BoostSegmentationSockStream ::AsyncReceiveContent(const EventInter
     HandleAsyncReceive(eventInterface, messageBuffer, originalWriteIndex);
 }
 
-void Network::BoostSegmentationSockStream ::SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
+void Network::BoostSegmentationSockStream::SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
     try
     {
         switch (m_StreamReceive)
         {
-        case StreamReceive::Head:
-            return SubclassAsyncReceiveHeadEvent(errorCode, eventInterface, messageBuffer, originalWriteIndex);
-        case StreamReceive::Content:
-            return SubclassAsyncReceiveContentEvent(errorCode, eventInterface, messageBuffer, originalWriteIndex);
-        default:
-            break;
+            case StreamReceive::Head:
+                return SubclassAsyncReceiveHeadEvent(errorCode, eventInterface, messageBuffer, originalWriteIndex);
+            case StreamReceive::Content:
+                return SubclassAsyncReceiveContentEvent(errorCode, eventInterface, messageBuffer, originalWriteIndex);
+            default:
+                break;
         }
     }
     catch (...)
@@ -162,7 +162,7 @@ void Network::BoostSegmentationSockStream ::SubclassAsyncReceiveEvent(const Erro
     }
 }
 
-void Network::BoostSegmentationSockStream ::SubclassAsyncReceiveHeadEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
+void Network::BoostSegmentationSockStream::SubclassAsyncReceiveHeadEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
     if (errorCode != ErrorCodeType{})
     {
@@ -181,11 +181,13 @@ void Network::BoostSegmentationSockStream ::SubclassAsyncReceiveHeadEvent(const 
     }
 }
 
-void Network::BoostSegmentationSockStream ::SubclassAsyncReceiveContentEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+void Network::BoostSegmentationSockStream::SubclassAsyncReceiveContentEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
     m_StreamReceive = StreamReceive::Head;
 
     BoostSockStreamHelper::EventReceiveFunction(errorCode, eventInterface, AddressData{ *this }, messageBuffer->GetCurrentWriteIndex() - originalWriteIndex);
 }
-
 #include STSTEM_WARNING_POP

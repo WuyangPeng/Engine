@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:27)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 9:52)
 
 #ifndef DATABASE_SQL_INTERFACE_SCHEMA_IMPL_H
 #define DATABASE_SQL_INTERFACE_SCHEMA_IMPL_H
@@ -24,18 +27,18 @@ namespace Database
 
     public:
         explicit SchemaImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
-        virtual ~SchemaImpl() = 0;
-        SchemaImpl(const SchemaImpl&) = default;
-        SchemaImpl& operator=(const SchemaImpl&) = default;
-        SchemaImpl(SchemaImpl&&) = default;
-        SchemaImpl& operator=(SchemaImpl&&) = default;
+        virtual ~SchemaImpl() noexcept = 0;
+        SchemaImpl(const SchemaImpl& rhs) = default;
+        SchemaImpl& operator=(const SchemaImpl& rhs) = default;
+        SchemaImpl(SchemaImpl&& rhs) noexcept = default;
+        SchemaImpl& operator=(SchemaImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
-        virtual MysqlxCollectionPtr GetCollection(const std::string& collectionName);
-        virtual MysqlxTablePtr GetTable(const std::string& tableonName);
+        [[nodiscard]] virtual MysqlxCollectionPtr GetCollection(const std::string& collectionName);
+        [[nodiscard]] virtual MysqlxTablePtr GetTable(const std::string& tableonName);
 
     public:
         ConfigurationStrategy m_ConfigurationStrategy;

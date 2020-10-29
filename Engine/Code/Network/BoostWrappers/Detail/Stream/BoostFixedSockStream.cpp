@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 15:58)
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/28 18:13)
 
 #include "Network/NetworkExport.h"
 
@@ -13,13 +16,9 @@
 #include "Network/Interface/Data/AddressData.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 
-Network::BoostFixedSockStream ::BoostFixedSockStream() noexcept
+Network::BoostFixedSockStream::BoostFixedSockStream() noexcept
     : ParentType{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -27,7 +26,7 @@ Network::BoostFixedSockStream ::BoostFixedSockStream() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostFixedSockStream)
 
-int Network::BoostFixedSockStream ::Receive(const MessageBufferSharedPtr& messageBuffer)
+int Network::BoostFixedSockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -43,7 +42,7 @@ int Network::BoostFixedSockStream ::Receive(const MessageBufferSharedPtr& messag
     return receiveSize;
 }
 
-void Network::BoostFixedSockStream ::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::BoostFixedSockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -52,7 +51,10 @@ void Network::BoostFixedSockStream ::AsyncReceive(const EventInterfaceSharedPtr&
     HandleAsyncReceive(eventInterface, messageBuffer, messageBuffer->GetCurrentWriteIndex());
 }
 
-void Network::BoostFixedSockStream ::SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+void Network::BoostFixedSockStream::SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
     BoostSockStreamHelper::EventReceiveFunction(errorCode, eventInterface, AddressData{ *this }, messageBuffer->GetCurrentWriteIndex() - originalWriteIndex);
 }

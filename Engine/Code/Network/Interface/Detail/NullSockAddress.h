@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:06)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:07)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_SOCK_ADDRESS_H
 #define NETWORK_NETWORK_INTERFACE_NULL_SOCK_ADDRESS_H
@@ -13,7 +16,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE NullSockAddress : public SockAddressImpl
+    class NETWORK_HIDDEN_DECLARE NullSockAddress final : public SockAddressImpl
     {
     public:
         using ClassType = NullSockAddress;
@@ -22,12 +25,12 @@ namespace Network
     public:
         NullSockAddress(const std::string& address, int ip);
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-        const SockAddressPtr Clone() const override;
+        [[nodiscard]] const SockAddressPtr Clone() const final;
 
-        const std::string GetAddress() const override;
-        int GetPort() const noexcept override;
+        [[nodiscard]] const std::string GetAddress() const final;
+        [[nodiscard]] int GetPort() const noexcept final;
 
     private:
         std::string m_Address;

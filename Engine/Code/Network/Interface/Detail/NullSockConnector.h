@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:07)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:08)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_SOCK_CONNECTOR_H
 #define NETWORK_NETWORK_INTERFACE_NULL_SOCK_CONNECTOR_H
@@ -13,7 +16,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE NullSockConnector : public SockConnectorImpl
+    class NETWORK_HIDDEN_DECLARE NullSockConnector final : public SockConnectorImpl
     {
     public:
         using ClassType = NullSockConnector;
@@ -22,12 +25,12 @@ namespace Network
     public:
         NullSockConnector() noexcept;
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-        bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept override;
-        void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        [[nodiscard]] bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept final;
+        void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) final;
 
-        const SockConnectorPtr Clone() const override;
+        [[nodiscard]] const SockConnectorPtr Clone() const final;
     };
 }
 

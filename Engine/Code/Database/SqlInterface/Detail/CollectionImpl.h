@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:24)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 9:45)
 
 #ifndef DATABASE_SQL_INTERFACE_COLLECTION_IMPL_H
 #define DATABASE_SQL_INTERFACE_COLLECTION_IMPL_H
@@ -24,17 +27,17 @@ namespace Database
 
     public:
         explicit CollectionImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
-        virtual ~CollectionImpl() = 0;
-        CollectionImpl(const CollectionImpl&) = default;
-        CollectionImpl& operator=(const CollectionImpl&) = default;
-        CollectionImpl(CollectionImpl&&) = default;
-        CollectionImpl& operator=(CollectionImpl&&) = default;
+        virtual ~CollectionImpl() noexcept = 0;
+        CollectionImpl(const CollectionImpl& rhs) = default;
+        CollectionImpl& operator=(const CollectionImpl& rhs) = default;
+        CollectionImpl(CollectionImpl&& rhs) noexcept = default;
+        CollectionImpl& operator=(CollectionImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual ResultPtr ExecuteDoc(const std::string& findStatement, const BindStatementType& bindStatement, int limitStatement);
+        [[nodiscard]] virtual ResultPtr ExecuteDoc(const std::string& findStatement, const BindStatementType& bindStatement, int limitStatement);
 
-        ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
     public:
         ConfigurationStrategy m_ConfigurationStrategy;

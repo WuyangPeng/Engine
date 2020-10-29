@@ -1,29 +1,30 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/16 11:02)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 20:21)
 
-#ifndef DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
-#define DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
+#ifndef DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
+#define DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 
 #include "System/Helper/EnumMacro.h"
 
-#include <iostream>
-
 namespace Database
 {
-	enum class WrappersStrategy  
-	{
-		Null = 0,
-		Mysql = 1,
-		MysqlConnector = 2,
-		SqlServer = 3,
-		SQLite = 4,		
-		PostgreSQL = 5,
-		Oracle = 6,
-		FlatFile = 7,
-	}; 
+    enum class WrappersStrategy
+    {
+        Null = 0,
+        Mysql = 1,
+        MysqlConnector = 2,
+        SqlServer = 3,
+        SQLite = 4,
+        PostgreSQL = 5,
+        Oracle = 6,
+        FlatFile = 7,
+    };
 }
 
-#endif // DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
+#endif  // DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H

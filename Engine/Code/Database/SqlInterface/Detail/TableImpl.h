@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:28)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 9:54)
 
 #ifndef DATABASE_SQL_INTERFACE_TABLE_IMPL_H
 #define DATABASE_SQL_INTERFACE_TABLE_IMPL_H
@@ -26,18 +29,18 @@ namespace Database
 
     public:
         explicit TableImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
-        virtual ~TableImpl();
-        TableImpl(const TableImpl&) = default;
-        TableImpl& operator=(const TableImpl&) = default;
-        TableImpl(TableImpl&&) = default;
-        TableImpl& operator=(TableImpl&&) = default;
+        virtual ~TableImpl() noexcept = default;
+        TableImpl(const TableImpl& rhs) = default;
+        TableImpl& operator=(const TableImpl& rhs) = default;
+        TableImpl(TableImpl&& rhs) noexcept = default;
+        TableImpl& operator=(TableImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
-        virtual ResultPtr Select(std::initializer_list<std::string> selectStatement, const std::string& whereStatement,
-                                 const std::string& orderByStatement, const BindStatementType& bindStatement);
+        [[nodiscard]] virtual ResultPtr Select(std::initializer_list<std::string> selectStatement, const std::string& whereStatement,
+                                               const std::string& orderByStatement, const BindStatementType& bindStatement);
 
     public:
         ConfigurationStrategy m_ConfigurationStrategy;

@@ -169,7 +169,7 @@
     <LinkIncremental>true</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -259,7 +259,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -358,6 +358,7 @@
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\HandleSetIteratorFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\HandleSetIteratorImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\IterativeServer.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NetworkInternal.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullMainManager.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullSockAcceptor.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullSockAddress.cpp" />
@@ -365,6 +366,7 @@
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullSockStream.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\OnlySendingClient.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\ReactiveServer.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SendSocketManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\ServerFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\ServerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SockAcceptorFactory.cpp" />
@@ -384,6 +386,7 @@
     <ClCompile Include="..\..\..\Code\Network\Interface\SockAcceptor.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\SockAddress.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\SockConnector.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\Interface\SocketData.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Interface\SockStream.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\BufferReceiveStream.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\BufferSendStream.cpp" />
@@ -463,6 +466,7 @@
     <ClInclude Include="..\..\..\Code\Network\Configuration\AnalysisNetworkConfiguration.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\Configuration.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationParameter.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationStrategy.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationSubStrategy.h" />
@@ -494,6 +498,7 @@
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\HandleSetIteratorFactory.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\HandleSetIteratorImpl.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\IterativeServer.h" />
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NetworkInternal.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullMainManager.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullSockAcceptor.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullSockAddress.h" />
@@ -501,6 +506,7 @@
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullSockStream.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\OnlySendingClient.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\ReactiveServer.h" />
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SendSocketManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\ServerFactory.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\ServerImpl.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SockAcceptorFactory.h" />
@@ -524,6 +530,7 @@
     <ClInclude Include="..\..\..\Code\Network\Interface\SockAcceptor.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\SockAddress.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\SockConnector.h" />
+    <ClInclude Include="..\..\..\Code\Network\Interface\SocketData.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\SockStream.h" />
     <ClInclude Include="..\..\..\Code\Network\Network.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkDll.h" />
@@ -622,8 +629,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\NetworkWrappersFwd.h" />
     <ClInclude Include="..\..\..\Code\Network\Openssl\Openssl.h" />
     <ClInclude Include="..\..\..\Code\Network\Openssl\OpensslFwd.h" />
-    <ClInclude Include="..\..\..\Code\Network\SocketWrappers\SocketWrappers.h" />
-    <ClInclude Include="..\..\..\Code\Network\SocketWrappers\SocketWrappersFwd.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

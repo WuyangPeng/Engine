@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:27)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 9:53)
 
 #ifndef DATABASE_SQL_INTERFACE_SESSION_IMPL_H
 #define DATABASE_SQL_INTERFACE_SESSION_IMPL_H
@@ -28,23 +31,23 @@ namespace Database
 
     public:
         explicit SessionImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
-        virtual ~SessionImpl() = 0;
-        SessionImpl(const SessionImpl&) = default;
-        SessionImpl& operator=(const SessionImpl&) = default;
-        SessionImpl(SessionImpl&&) = default;
-        SessionImpl& operator=(SessionImpl&&) = default;
+        virtual ~SessionImpl() noexcept = 0;
+        SessionImpl(const SessionImpl& rhs) = default;
+        SessionImpl& operator=(const SessionImpl& rhs) = default;
+        SessionImpl(SessionImpl&& rhs) noexcept = default;
+        SessionImpl& operator=(SessionImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
-        virtual MysqlxSchemaPtr GetMysqlxSchemaPtr();
-        virtual MysqlxSchemaPtr GetMysqlxSchemaPtr(int dbIndex);
-        virtual SchemaContainer GetSchemaContainer();
+        [[nodiscard]] virtual MysqlxSchemaPtr GetMysqlxSchemaPtr();
+        [[nodiscard]] virtual MysqlxSchemaPtr GetMysqlxSchemaPtr(int dbIndex);
+        [[nodiscard]] virtual SchemaContainer GetSchemaContainer();
 
-        virtual ResultPtr ExecuteResult(const std::string& findStatement, int bindStatement);
-        virtual ResultPtr ExecuteResult(const std::string& findStatement);
-        virtual ResultPtr ExecuteResult(const std::string& findStatement, const std::string& bindStatement);
+        [[nodiscard]] virtual ResultPtr ExecuteResult(const std::string& findStatement, int bindStatement);
+        [[nodiscard]] virtual ResultPtr ExecuteResult(const std::string& findStatement);
+        [[nodiscard]] virtual ResultPtr ExecuteResult(const std::string& findStatement, const std::string& bindStatement);
         virtual void Execute(const std::string& findStatement, int bindStatement);
         virtual void Execute(const std::string& findStatement, const std::string& bindStatement);
         virtual void Execute(const std::string& findStatement);

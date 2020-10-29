@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 11:12)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 11:23)
 
 #include "Network/NetworkExport.h"
 
@@ -18,6 +21,7 @@
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/SocketManager.h"
+
 #include <vector>
 
 using std::make_pair;
@@ -25,37 +29,45 @@ using std::make_shared;
 using std::string;
 using std::vector;
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
-Network::IterativeServer ::IterativeServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
+Network::IterativeServer::IterativeServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
     : ParentType{ socketManager, configurationStrategy },
       m_SockAcceptor{ configurationStrategy.GetPort(), configurationStrategy },
       m_StreamContainer{},
       m_ReceiveBuffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy())),
       m_SendBuffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
 {
-    m_SockAcceptor.EnableNonBlock();
+    if (!m_SockAcceptor.EnableNonBlock())
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+            << SYSTEM_TEXT("设置非阻塞失败！")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, IterativeServer)
 
-bool Network::IterativeServer ::HandleConnections(const SocketManagerSharedPtr& socketManager)
+bool Network::IterativeServer::HandleConnections(const SocketManagerSharedPtr& socketManager)
 {
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(GetConfigurationStrategy()) };
-    SockStreamSharedPtr sockStreamSharedPtr{ make_shared<SockStream>(GetConfigurationStrategy()) };
+    auto process = socketManager;
 
-    if (m_SockAcceptor.Accept(sockStreamSharedPtr->shared_from_this(), sockAddress))
+    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(GetConfigurationStrategy()) };
+    SockStreamSharedPtr sockStream{ make_shared<SockStream>(GetConfigurationStrategy()) };
+
+    if (m_SockAcceptor.Accept(sockStream->shared_from_this(), sockAddress))
     {
         auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
-        socketManager->Insert(socketID);
+        process->InsertSocket(socketID);
 
-        sockStreamSharedPtr->EnableNonBlock();
-        StreamContainer streamContainer{ GetConfigurationStrategy(), sockStreamSharedPtr };
+        if (!sockStream->EnableNonBlock())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                << SYSTEM_TEXT("设置非阻塞失败！")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
+        }
+
+        StreamContainer streamContainer{ GetConfigurationStrategy(), sockStream };
 
         m_StreamContainer.insert({ socketID, streamContainer });
 
@@ -64,25 +76,27 @@ bool Network::IterativeServer ::HandleConnections(const SocketManagerSharedPtr& 
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), 0);
 
-        if(!socketManager->EventFunction(callbackParameters))
+        if (!process->EventFunction(callbackParameters))
         {
-        
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                << SYSTEM_TEXT("回调函数执行错误！")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
         }
     }
 
     return true;
 }
 
-bool Network::IterativeServer ::HandleData(const SocketManagerSharedPtr& socketManager)
+bool Network::IterativeServer::HandleData(const SocketManagerSharedPtr& socketManager)
 {
     for (auto iter = m_StreamContainer.begin(); iter != m_StreamContainer.end();)
     {
-        auto sockStreamSharedPtr = iter->second.GetSockStreamSharedPtr();
+        auto sockStream = iter->second.GetSockStream();
 
         try
         {
             m_ReceiveBuffer->ClearCurrentIndex();
-            const auto result = sockStreamSharedPtr->Receive(m_ReceiveBuffer);
+            const auto result = sockStream->Receive(m_ReceiveBuffer);
             if (0 < result)
             {
                 BufferReceiveStream bufferReceiveStream(m_ReceiveBuffer, GetConfigurationStrategy().GetParserStrategy());
@@ -92,8 +106,13 @@ bool Network::IterativeServer ::HandleData(const SocketManagerSharedPtr& socketM
             }
             else if (result < 0)
             {
-                sockStreamSharedPtr->CloseHandle();
-                socketManager->Remove(iter->first);
+                if (!sockStream->CloseHandle())
+                {
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                        << SYSTEM_TEXT("关闭句柄失败！")
+                        << LOG_SINGLETON_TRIGGER_ASSERT;
+                }
+                socketManager->RemoveSocket(iter->first);
                 m_StreamContainer.erase(iter++);
             }
             else
@@ -103,8 +122,13 @@ bool Network::IterativeServer ::HandleData(const SocketManagerSharedPtr& socketM
         }
         catch (CoreTools::Error&)
         {
-            sockStreamSharedPtr->CloseHandle();
-            socketManager->Remove(iter->first);
+            if (!sockStream->CloseHandle())
+            {
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                    << SYSTEM_TEXT("关闭句柄失败！")
+                    << LOG_SINGLETON_TRIGGER_ASSERT;
+            }
+            socketManager->RemoveSocket(iter->first);
             m_StreamContainer.erase(iter++);
         }
     }
@@ -112,12 +136,12 @@ bool Network::IterativeServer ::HandleData(const SocketManagerSharedPtr& socketM
     return true;
 }
 
-bool Network::IterativeServer ::ImmediatelySend() noexcept
+bool Network::IterativeServer::ImmediatelySend() noexcept
 {
     return true;
 }
 
-void Network::IterativeServer ::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::IterativeServer::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -125,7 +149,7 @@ void Network::IterativeServer ::Send(uint64_t socketID, const MessageInterfaceSh
 
     if (iter != m_StreamContainer.cend())
     {
-        auto sockStreamSharedPtr = iter->second.GetSockStreamSharedPtr();
+        auto sockStream = iter->second.GetSockStream();
         auto& bufferSendStream = iter->second.GetBufferSendStream();
 
         if (bufferSendStream.Insert(message))
@@ -133,14 +157,14 @@ void Network::IterativeServer ::Send(uint64_t socketID, const MessageInterfaceSh
             m_SendBuffer->ClearCurrentIndex();
             bufferSendStream.Save(m_SendBuffer);
 
-            sockStreamSharedPtr->Send(m_SendBuffer);
+            [[maybe_unused]] const auto index = sockStream->Send(m_SendBuffer);
 
             bufferSendStream.Clear();
         }
     }
 }
 
-void Network::IterativeServer ::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::IterativeServer::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -148,7 +172,7 @@ void Network::IterativeServer ::AsyncSend(uint64_t socketID, const MessageInterf
 
     if (iter != m_StreamContainer.cend())
     {
-        auto sockStreamSharedPtr = iter->second.GetSockStreamSharedPtr();
+        auto sockStream = iter->second.GetSockStream();
         auto& bufferSendStream = iter->second.GetBufferSendStream();
 
         if (bufferSendStream.Insert(message))
@@ -156,10 +180,9 @@ void Network::IterativeServer ::AsyncSend(uint64_t socketID, const MessageInterf
             m_SendBuffer->ClearCurrentIndex();
             bufferSendStream.Save(m_SendBuffer);
 
-            sockStreamSharedPtr->AsyncSend(GetSocketManagerSharedPtr(), m_SendBuffer);
+            sockStream->AsyncSend(GetSocketManagerSharedPtr(), m_SendBuffer);
 
             bufferSendStream.Clear();
         }
     }
 }
-#include STSTEM_WARNING_POP

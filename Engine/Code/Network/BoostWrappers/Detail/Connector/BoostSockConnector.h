@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 15:47)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 16:27)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_CONNECTOR_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_CONNECTOR_H
@@ -24,10 +27,10 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        [[nodiscard]] bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
         void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-        const SockConnectorPtr Clone() const override;
+        [[nodiscard]] const SockConnectorPtr Clone() const override;
     };
 }
 

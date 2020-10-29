@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 12:48)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 13:41)
 
 #include "Database/DatabaseExport.h"
 
@@ -17,18 +20,14 @@ using std::string;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-    #include "System/Helper/PragmaWarning.h"
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26486)
-
-Database::MysqlConnectorCollection ::MysqlConnectorCollection(const Schema& schema, const string& collectionName)
+Database::MysqlConnectorCollection::MysqlConnectorCollection(const Schema& schema, const string& collectionName)
     : ParentType{ schema.GetConfigurationStrategy() }, m_MysqlxCollection{ GetMysqlxCollectionPtr(schema, collectionName) }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
     #ifdef OPEN_CLASS_INVARIANT
-bool Database::MysqlConnectorCollection ::IsValid() const noexcept
+bool Database::MysqlConnectorCollection::IsValid() const noexcept
 {
     if (ParentType::IsValid() && m_MysqlxCollection)
         return true;
@@ -37,7 +36,7 @@ bool Database::MysqlConnectorCollection ::IsValid() const noexcept
 }
     #endif  // OPEN_CLASS_INVARIANT
 
-Database::MysqlConnectorCollection::MysqlxCollectionPtr Database::MysqlConnectorCollection ::GetMysqlxCollectionPtr(const Schema& schema, const string& collectionName)
+Database::MysqlConnectorCollection::MysqlxCollectionPtr Database::MysqlConnectorCollection::GetMysqlxCollectionPtr(const Schema& schema, const string& collectionName)
 {
     auto implPtr = schema.GetImplType().lock();
 
@@ -51,7 +50,7 @@ Database::MysqlConnectorCollection::MysqlxCollectionPtr Database::MysqlConnector
     }
 }
 
-Database::MysqlConnectorCollection::ResultPtr Database::MysqlConnectorCollection ::ExecuteDoc(const string& findStatement, const BindStatementType& bindStatement, int limitStatement)
+Database::MysqlConnectorCollection::ResultPtr Database::MysqlConnectorCollection::ExecuteDoc(const string& findStatement, const BindStatementType& bindStatement, int limitStatement)
 {
     DATABASE_CLASS_IS_VALID_1;
 
@@ -73,7 +72,5 @@ Database::MysqlConnectorCollection::ResultPtr Database::MysqlConnectorCollection
 
     return make_shared<Result>(GetConfigurationStrategy(), mysqlxDocResult);
 }
-
-    #include STSTEM_WARNING_POP
 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR

@@ -39,6 +39,7 @@ namespace System
     constexpr auto g_InAddrAny = INADDR_ANY;
     constexpr auto g_FdSetSize = FD_SETSIZE;
     constexpr auto g_InAddrLoopback = INADDR_LOOPBACK;
+    constexpr auto g_SoMaxConn = SOMAXCONN;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -133,6 +134,7 @@ namespace System
     constexpr auto g_SocketError = -1;
     constexpr auto g_InAddrAny = 0x00000000;
     constexpr auto g_InAddrLoopback = 0x7f000001;
+    constexpr auto g_SoMaxConn = 0x7fffffff;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

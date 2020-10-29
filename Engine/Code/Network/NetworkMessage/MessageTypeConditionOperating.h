@@ -1,32 +1,34 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 14:32)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 10:05)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_OPERATING_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_OPERATING_H
 
-#include "Network/NetworkDll.h" 
+#include "Network/NetworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "NetworkMessageFwd.h"
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace Network
 {
-	class MessageTypeCondition;
+    class NETWORK_DEFAULT_DECLARE MessageTypeConditionOperating final
+    {
+    public:
+        using ClassType = MessageTypeConditionOperating;
 
-	class NETWORK_DEFAULT_DECLARE MessageTypeConditionOperating
-	{
-	public:
-		using ClassType = MessageTypeConditionOperating;
+    public:
+        MessageTypeConditionOperating() noexcept;
 
-	public:
-		MessageTypeConditionOperating() noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-		CLASS_INVARIANT_DECLARE;
-
-		bool operator()(const MessageTypeCondition& lhs, const MessageTypeCondition& rhs) const;
-	};
+        [[nodiscard]] bool operator()(const MessageTypeCondition& lhs, const MessageTypeCondition& rhs) const;
+    };
 }
 
-#endif // NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_OPERATING_H
+#endif  // NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_OPERATING_H

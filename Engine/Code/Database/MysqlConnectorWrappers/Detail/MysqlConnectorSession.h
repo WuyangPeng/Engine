@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 12:48)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 13:39)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_SESSION_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_SESSION_H
@@ -26,22 +29,22 @@ namespace Database
     public:
         explicit MysqlConnectorSession(const ConfigurationStrategy& configurationStrategy);
         explicit MysqlConnectorSession(const DatabaseObject& databaseObject);
-        ~MysqlConnectorSession();
+        ~MysqlConnectorSession() noexcept;
 
-        MysqlConnectorSession(const MysqlConnectorSession&) = default;
-        MysqlConnectorSession& operator=(const MysqlConnectorSession&) = default;
-        MysqlConnectorSession(MysqlConnectorSession&&) = default;
-        MysqlConnectorSession& operator=(MysqlConnectorSession&&) = default;
+        MysqlConnectorSession(const MysqlConnectorSession& rhs) = default;
+        MysqlConnectorSession& operator=(const MysqlConnectorSession& rhs) = default;
+        MysqlConnectorSession(MysqlConnectorSession&& rhs) noexcept = default;
+        MysqlConnectorSession& operator=(MysqlConnectorSession&& rhs) noexcept = default;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        MysqlxSchemaPtr GetMysqlxSchemaPtr() override;
-        MysqlxSchemaPtr GetMysqlxSchemaPtr(int dbIndex) override;
-        SchemaContainer GetSchemaContainer() override;
+        [[nodiscard]] MysqlxSchemaPtr GetMysqlxSchemaPtr() override;
+        [[nodiscard]] MysqlxSchemaPtr GetMysqlxSchemaPtr(int dbIndex) override;
+        [[nodiscard]] SchemaContainer GetSchemaContainer() override;
 
-        ResultPtr ExecuteResult(const std::string& findStatement, int bindStatement) override;
-        ResultPtr ExecuteResult(const std::string& findStatement) override;
-        ResultPtr ExecuteResult(const std::string& findStatement, const std::string& bindStatement) override;
+        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement, int bindStatement) override;
+        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement) override;
+        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement, const std::string& bindStatement) override;
         void Execute(const std::string& findStatement, int bindStatement) override;
         void Execute(const std::string& findStatement) override;
         void Execute(const std::string& findStatement, const std::string& bindStatement) override;
@@ -50,7 +53,7 @@ namespace Database
         using MysqlxSessionPtr = std::unique_ptr<MysqlxSession>;
 
     private:
-        static MysqlxSessionPtr GetMysqlxSessionPtr(const DatabaseObject& databaseObject);
+        [[nodiscard]] static MysqlxSessionPtr GetMysqlxSessionPtr(const DatabaseObject& databaseObject);
 
     private:
         MysqlxSessionPtr m_MysqlxSession;

@@ -1,74 +1,65 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 10:51)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/28 10:52)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "AddressData.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/Interface/SockStream.h"
-#include "Network/Interface/SockAddress.h"
-#include "Network/BoostWrappers/Detail/Stream/BoostSockStream.h"
 #include "Network/BoostWrappers/Detail/Acceptor/BoostSockAcceptor.h"
+#include "Network/BoostWrappers/Detail/Stream/BoostSockStream.h"
+#include "Network/Interface/SockAddress.h"
+#include "Network/Interface/SockStream.h"
 
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Network::AddressData
-	::AddressData(const string& address, int port)
-	:m_Address{ address }, m_Port{ port }
+
+Network::AddressData::AddressData(const string& address, int port)
+    : m_Address{ address }, m_Port{ port }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::AddressData
-	::AddressData(const SockStreamSharedPtr& sockStream)
-	:m_Address{ sockStream->GetRemoteAddress() }, m_Port{ sockStream->GetRemotePort() }
+Network::AddressData::AddressData(const SockStream& sockStream)
+    : m_Address{ sockStream.GetRemoteAddress() }, m_Port{ sockStream.GetRemotePort() }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::AddressData
-	::AddressData(const BoostSockAcceptor& boostSockAcceptor)
-	:m_Address{ boostSockAcceptor.GetAddress() }, m_Port{ boostSockAcceptor.GetPort() }
+Network::AddressData::AddressData(const BoostSockAcceptor& boostSockAcceptor)
+    : m_Address{ boostSockAcceptor.GetAddress() }, m_Port{ boostSockAcceptor.GetPort() }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::AddressData
-	::AddressData(const BoostSockStream& boostSockStream)
-	:m_Address{ boostSockStream.GetRemoteAddress() }, m_Port{ boostSockStream.GetRemotePort() }
+Network::AddressData::AddressData(const BoostSockStream& boostSockStream)
+    : m_Address{ boostSockStream.GetRemoteAddress() }, m_Port{ boostSockStream.GetRemotePort() }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::AddressData
-	::AddressData(const SockAddressSharedPtr& sockAddress)
-	:m_Address{ sockAddress->GetAddress() }, m_Port{ sockAddress->GetPort() }
+Network::AddressData::AddressData(const SockAddress& sockAddress)
+    : m_Address{ sockAddress.GetAddress() }, m_Port{ sockAddress.GetPort() }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, AddressData)
 
-string Network::AddressData
-	::GetAddress() const
+string Network::AddressData::GetAddress() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Address;
+    return m_Address;
 }
 
-int Network::AddressData
-	::GetPort() const noexcept
+int Network::AddressData::GetPort() const noexcept
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Port;
+    return m_Port;
 }
-
-#include STSTEM_WARNING_POP

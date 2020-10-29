@@ -1,35 +1,24 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 11:11)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 11:23)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "HandleSetIteratorImpl.h"
 
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
-
-Network::HandleSetIteratorImpl
-	::HandleSetIteratorImpl() noexcept
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Network::HandleSetIteratorImpl
-	::~HandleSetIteratorImpl()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
 
 CLASS_INVARIANT_STUB_DEFINE(Network, HandleSetIteratorImpl)
 
-Network::ACEHandle Network::HandleSetIteratorImpl
-	::operator()()
+Network::ACEHandle Network::HandleSetIteratorImpl::operator()()
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("获取句柄失败！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("获取句柄失败！"s));
 }
-

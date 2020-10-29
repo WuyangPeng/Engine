@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 14:31)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 10:04)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_H
@@ -12,7 +15,6 @@
 #include "MessageBuffer.h"
 #include "NetworkMessageInternalFwd.h"
 
-#include <boost/noncopyable.hpp>
 #include <string>
 #include <vector>
 
@@ -20,7 +22,7 @@ EXPORT_NONCOPYABLE_CLASS(NETWORK);
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE MessageSource : private boost::noncopyable
+    class NETWORK_DEFAULT_DECLARE MessageSource final
     {
     public:
         using ClassType = MessageSource;
@@ -29,7 +31,7 @@ namespace Network
     public:
         explicit MessageSource(const MessageBufferSharedPtr& messageBuffer) noexcept;
 
-        ~MessageSource() = default;
+        ~MessageSource() noexcept = default;
         MessageSource(const MessageSource& rhs) = delete;
         MessageSource& operator=(const MessageSource& rhs) = delete;
         MessageSource(MessageSource&& rhs) noexcept;
@@ -38,11 +40,11 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
         // 读取bool值为4字节
-        bool ReadBool();
+        [[nodiscard]] bool ReadBool();
         void ReadBool(int elementsNumber, bool* data);
 
         // 读取字符串，在字符串之前读取4个字节代表长度。没有空终止符。
-        std::string ReadString();
+        [[nodiscard]] std::string ReadString();
         void ReadString(int elementsNumber, std::string* data);
 
         // 原生数据读取函数
@@ -64,8 +66,8 @@ namespace Network
         void ReadEnum(int elementsNumber, T* data);
 
         // 帮助函数
-        int GetBytesRead() const noexcept;
-        int GetBytesTotal() const noexcept;
+        [[nodiscard]] int GetBytesRead() const noexcept;
+        [[nodiscard]] int GetBytesTotal() const noexcept;
         void IncrementBytesProcessed(int bytesNumber);
 
     private:

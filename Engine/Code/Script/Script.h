@@ -1,14 +1,17 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/17 10:56)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 14:33)
 
 #ifndef SCRIPT_H
 #define SCRIPT_H
 
-#include "Helper/Helper.h"
 #include "Configuration/Configuration.h"
+#include "Helper/Helper.h"
 #include "Interface/Interface.h"
 #include "Java/Java.h"
 #include "Lua/Lua.h"
@@ -16,4 +19,4 @@
 #include "Python/Python.h"
 #include "TCREScript/TCREScript.h"
 
-#endif // SCRIPT_H
+#endif  // SCRIPT_H

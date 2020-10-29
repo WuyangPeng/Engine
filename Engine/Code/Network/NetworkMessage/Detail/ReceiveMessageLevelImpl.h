@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 14:27)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 20:44)
 
 #ifndef NETWORK_NETWORK_MESSAGE_RECEIVE_MESSAGE_LEVEL_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_RECEIVE_MESSAGE_LEVEL_IMPL_H
@@ -16,31 +19,31 @@
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE ReceiveMessageLevelImpl
-	{
-	public:
-		using ClassType = ReceiveMessageLevelImpl;
-		using MessageContainer = std::vector<MessageInterfaceSharedPtr>;
-		using MessageContainerConstIter = MessageContainer::const_iterator;
+    class NETWORK_HIDDEN_DECLARE ReceiveMessageLevelImpl final
+    {
+    public:
+        using ClassType = ReceiveMessageLevelImpl;
+        using MessageContainer = std::vector<MessageInterfaceSharedPtr>;
+        using MessageContainerConstIter = MessageContainer::const_iterator;
 
-	public:
-		ReceiveMessageLevelImpl() noexcept;
+    public:
+        ReceiveMessageLevelImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		int GetTopLevelSize() const;
-		const ConstMessageInterfaceSharedPtr operator [](int index) const;
+        [[nodiscard]] int GetTopLevelSize() const;
+        [[nodiscard]] const ConstMessageInterfaceSharedPtr operator[](int index) const;
 
-		// 对顶层的对象进行保存。
-		void Insert(const MessageInterfaceSharedPtr& message);
+        // 对顶层的对象进行保存。
+        void Insert(const MessageInterfaceSharedPtr& message);
 
-		MessageContainerConstIter begin() const noexcept;
-		MessageContainerConstIter end() const noexcept;
+        [[nodiscard]] MessageContainerConstIter begin() const noexcept;
+        [[nodiscard]] MessageContainerConstIter end() const noexcept;
 
-	private:
-		// 顶层对象的流。
-		MessageContainer m_TopLevel;
-	};
+    private:
+        // 顶层对象的流。
+        MessageContainer m_TopLevel;
+    };
 }
 
-#endif // NETWORK_NETWORK_MESSAGE_RECEIVE_MESSAGE_LEVEL_IMPL_H
+#endif  // NETWORK_NETWORK_MESSAGE_RECEIVE_MESSAGE_LEVEL_IMPL_H

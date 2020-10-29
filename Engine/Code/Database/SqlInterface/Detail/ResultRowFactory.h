@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:26)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 9:50)
 
 #ifndef DATABASE_SQL_INTERFACE_DOC_RESULT_ROW_FACTORY_H
 #define DATABASE_SQL_INTERFACE_DOC_RESULT_ROW_FACTORY_H
@@ -15,7 +18,7 @@
 
 namespace Database
 {
-    class DATABASE_HIDDEN_DECLARE ResultRowFactory
+    class DATABASE_HIDDEN_DECLARE ResultRowFactory final
     {
     public:
         using ClassType = ResultRowFactory;
@@ -29,9 +32,9 @@ namespace Database
 
         CLASS_INVARIANT_DECLARE;
 
-        static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy);
-        static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc);
-        static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow);
+        [[nodiscard]] static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy);
+        [[nodiscard]] static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc);
+        [[nodiscard]] static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow);
     };
 }
 

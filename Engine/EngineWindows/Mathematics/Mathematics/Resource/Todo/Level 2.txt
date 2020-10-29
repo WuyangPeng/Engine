@@ -1,15 +1,4 @@
 TODO Level 2
 
-0.0.0.2
+0.5.2.2
  
-1.  （综合）增加数值精度的断言和不变式。 
-2.  （综合）根据用户宏的五个断言宏在模块中使用断言。
-3.  （综合）静态数组改成std::array。
-
-0.0.0.5
-
-1.  （综合）考虑使用Math::FloatingPointEqual替换Math::Approximate来比较浮点数的近似相等。
-
-0.0.2.5
-
-1.  （Base）Math中的常量改成constexpr，由于HalfFloat无法实现，看下是否能修改。 

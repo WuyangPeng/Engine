@@ -70,75 +70,13 @@ Framework::NetworkManagerImpl::ConstSendSocketManagerSharedPtr Framework::Networ
 	return m_SendSocketManager;
 }
 
-void Framework::NetworkManagerImpl
-	::Send(SocketType socketType, int serverID, uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Framework::NetworkManagerImpl ::Send(const Network::SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
 
 	if (m_SendSocketManager != nullptr)
 	{
-		m_SendSocketManager->Send(socketType, serverID, socketID, message);
+            m_SendSocketManager->Send(socketData, socketID, message);
 	}
 }
-
-void Framework::NetworkManagerImpl
-	::Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
-{
-	FRAMEWORK_CLASS_IS_VALID_9;
-
-	if (m_SendSocketManager != nullptr)
-	{
-		m_SendSocketManager->Insert(socketType, serverID, messageID, messageEvent);
-	}
-}
-
-void Framework::NetworkManagerImpl
-	::Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
-{
-	FRAMEWORK_CLASS_IS_VALID_9;
-
-	if (m_SendSocketManager != nullptr)
-	{
-		m_SendSocketManager->Insert(socketType, serverID, messageID, messageEvent, priority);
-	}
-}
-
-void Framework::NetworkManagerImpl
-	::Remove(SocketType socketType, int serverID, int64_t messageID)
-{
-	FRAMEWORK_CLASS_IS_VALID_9;
-
-	if (m_SendSocketManager != nullptr)
-	{
-		m_SendSocketManager->Remove(socketType, serverID, messageID);
-	}
-}
-
-void Framework::NetworkManagerImpl
-	::Remove(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
-{
-	FRAMEWORK_CLASS_IS_VALID_9;
-
-	if (m_SendSocketManager != nullptr)
-	{
-		m_SendSocketManager->Remove(socketType, serverID, messageID, messageEvent);
-	}
-}
-
-void Framework::NetworkManagerImpl
-	::HandlingMessages()
-{
-	if (m_SendSocketManager != nullptr)
-	{
-		m_SendSocketManager->HandlingMessages();
-	}
-}
-
-void Framework::NetworkManagerImpl
-	::Destroy()
-{
-	if (m_SendSocketManager != nullptr)
-	{
-		m_SendSocketManager->Destroy();
-	}
-}
+ 

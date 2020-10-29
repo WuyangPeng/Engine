@@ -1,118 +1,86 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 16:38)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 14:15)
 
 #include "Network/NetworkExport.h"
 
 #include "SocketManager.h"
 #include "Detail/SocketManagerImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::make_shared;
 using std::make_unique;
-#include "System/Helper/PragmaWarning.h"
+
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26455)
-Network::SocketManager
-	::SocketManager()
-	:m_Impl{ make_shared<ImplType>() }
+Network::SocketManager::SocketManager()
+    : m_Impl{ make_shared<ImplType>() }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
- 
-
- 
- 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SocketManager)
 
-void Network::SocketManager
-	::Insert(uint64_t socketID)
+void Network::SocketManager::InsertSocket(uint64_t socketID)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	m_Impl->Insert(socketID);
+    m_Impl->InsertSocket(socketID);
 
-	InitEvent(socketID);
+    InitEvent(socketID);
 }
 
-void Network::SocketManager
-	::Insert(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer)
+void Network::SocketManager::InsertEvent(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Insert(socketID, messageID, smartPointer);
+    return m_Impl->InsertEvent(socketID, messageID, smartPointer);
 }
 
-void Network::SocketManager
-	::Insert(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer, MessageEventPriority priority)
+void Network::SocketManager::InsertEvent(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer, MessageEventPriority priority)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Insert(socketID, messageID, smartPointer, priority);
+    return m_Impl->InsertEvent(socketID, messageID, smartPointer, priority);
 }
 
-void Network::SocketManager::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
+void Network::SocketManager::OnEvent(uint64_t socketID, int64_t messageID, const ConstMessageInterfaceSharedPtr& message)
 {
-	messageID; messageEvent;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    m_Impl->OnEvent(socketID, messageID, message);
 }
 
-void Network::SocketManager::Remove(int64_t messageID)
+void Network::SocketManager::RemoveEvent(uint64_t socketID, int64_t messageID)
 {
-	messageID;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    return m_Impl->RemoveEvent(socketID, messageID);
 }
 
-void Network::SocketManager::Remove(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
+void Network::SocketManager::RemoveEvent(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer)
 {
-	messageID; messageEvent;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    return m_Impl->RemoveEvent(socketID, messageID, smartPointer);
 }
 
-void Network::SocketManager::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
+void Network::SocketManager::RemoveSocket(uint64_t socketID)
 {
-	messageID; messageEvent; priority;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+
+    return m_Impl->RemoveSocket(socketID);
 }
 
-void Network::SocketManager
-	::OnEvent(uint64_t socketID, int64_t messageID, const ConstMessageInterfaceSharedPtr& message)
+int Network::SocketManager::GetSocketSize() const
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_CONST_1;
 
-	m_Impl->OnEvent(socketID, messageID, message);
+    return m_Impl->GetSocketSize();
 }
-
-void Network::SocketManager
-	::Remove(uint64_t socketID, int64_t messageID)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->Remove(socketID, messageID);
-}
-
-void Network::SocketManager
-	::Remove(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->Remove(socketID, messageID, smartPointer);
-}
-
-void Network::SocketManager
-	::Remove(uint64_t socketID)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->Remove(socketID);
-}
-
-int Network::SocketManager
-	::GetSocketSize() const
-{
-	NETWORK_CLASS_IS_VALID_CONST_1;
-
-	return m_Impl->GetSocketSize();
-}
-#include STSTEM_WARNING_POP

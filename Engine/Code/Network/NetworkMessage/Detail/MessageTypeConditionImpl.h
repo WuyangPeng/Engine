@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 14:24)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 20:39)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_IMPL_H
@@ -18,7 +21,7 @@ namespace Network
 
     public:
         MessageTypeConditionImpl() noexcept;
-        virtual ~MessageTypeConditionImpl();
+        virtual ~MessageTypeConditionImpl() noexcept = default;
         MessageTypeConditionImpl(const MessageTypeConditionImpl&) = default;
         MessageTypeConditionImpl& operator=(const MessageTypeConditionImpl&) = default;
         MessageTypeConditionImpl(MessageTypeConditionImpl&&) noexcept = default;
@@ -27,9 +30,9 @@ namespace Network
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
     public:
-        virtual bool IsVersionsConform(int version) const = 0;
-        virtual int GetMinVersion() const = 0;
-        virtual int GetMaxVersion() const = 0;
+        [[nodiscard]] virtual bool IsVersionsConform(int version) const = 0;
+        [[nodiscard]] virtual int GetMinVersion() const = 0;
+        [[nodiscard]] virtual int GetMaxVersion() const = 0;
     };
 
     bool operator<(const MessageTypeConditionImpl& lhs, const MessageTypeConditionImpl& rhs);

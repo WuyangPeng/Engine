@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 13:43)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 14:33)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_ACE_SOCK_STREAM_H
@@ -11,49 +14,49 @@
 
 #ifdef NETWORK_USE_ACE
 
-#include "Network/Interface/Detail/SockStreamImpl.h" 
+    #include "Network/Interface/Detail/SockStreamImpl.h"
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE ACESockStream : public SockStreamImpl
-	{
-	public:
-		using ClassType = ACESockStream;
-		using ParentType = SockStreamImpl;
+    class NETWORK_HIDDEN_DECLARE ACESockStream : public SockStreamImpl
+    {
+    public:
+        using ClassType = ACESockStream;
+        using ParentType = SockStreamImpl;
 
-	public:
-		ACESockStream();
-		~ACESockStream();
-		ACESockStream(const ACESockStream&) = delete;
-		ACESockStream& operator=(const ACESockStream&) = delete;
-		ACESockStream(ACESockStream&&) noexcept = delete;
-		ACESockStream& operator=(ACESockStream&&) noexcept = delete;
+    public:
+        ACESockStream() noexcept;
+        ~ACESockStream() noexcept;
+        ACESockStream(const ACESockStream& rhs) = delete;
+        ACESockStream& operator=(const ACESockStream& rhs) = delete;
+        ACESockStream(ACESockStream&& rhs) noexcept = delete;
+        ACESockStream& operator=(ACESockStream&& rhs) noexcept = delete;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		ACESockStreamNativeType& GetACESockStream() noexcept override;
+        [[nodiscard]] ACESockStreamNativeType& GetACESockStream() noexcept override;
 
-		int Send(const MessageBufferSharedPtr& messageBuffer) override;
-		int Receive(const MessageBufferSharedPtr& messageBuffer) override;
+        [[nodiscard]] int Send(const MessageBufferSharedPtr& messageBuffer) override;
+        [[nodiscard]] int Receive(const MessageBufferSharedPtr& messageBuffer) override;
 
-		void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
-		void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
+        void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
+        void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
-		ACEHandle GetACEHandle() const override;
+        [[nodiscard]] ACEHandle GetACEHandle() const override;
 
-		void SetACEHandle(ACEHandle handle) override;
-		bool CloseHandle() override;
+        void SetACEHandle(ACEHandle handle) override;
+        [[nodiscard]] bool CloseHandle() override;
 
-		const std::string GetRemoteAddress() const override;
-		int GetRemotePort() const override;
+        [[nodiscard]] const std::string GetRemoteAddress() const override;
+        [[nodiscard]] int GetRemotePort() const override;
 
-		bool EnableNonBlock() override;
+        [[nodiscard]] bool EnableNonBlock() override;
 
-	private:
-		ACE_SOCK_Stream m_ACESockStream;
-	};
+    private:
+        ACE_SOCK_Stream m_ACESockStream;
+    };
 }
 
-#endif // NETWORK_USE_ACE
+#endif  // NETWORK_USE_ACE
 
-#endif // NETWORK_NETWORK_INTERFACE_ACE_SOCK_STREAM_H
+#endif  // NETWORK_NETWORK_INTERFACE_ACE_SOCK_STREAM_H

@@ -1,28 +1,34 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/16 10:06)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 19:26)
 
 #ifndef DATABASE_DLL_LIB_H
 #define DATABASE_DLL_LIB_H
 
 #include "Helper/UserMacro.h"
 
-#if defined(_MSC_VER) 
+#include "System/SystemLib.h"
+#include "CoreTools/CoreToolsLib.h"
 
-	#ifdef DATABASE_USE_MYSQL 	 
+#if defined(_MSC_VER)
 
-		#ifdef DATABASE_USE_MYSQL_C_API
-			#pragma comment(lib,"mysqlclient.lib")	 
-		#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR	
+    #ifdef DATABASE_USE_MYSQL
 
-		#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR 
-			#pragma comment(lib,"mysqlcppconn8.lib")	 
-		#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR	
+        #ifdef DATABASE_USE_MYSQL_C_API
+            #pragma comment(lib, "mysqlclient.lib")
+        #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-	#endif // DATABASE_USE_MYSQL
-	
-#endif // _MSC_VER
+        #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
+            #pragma comment(lib, "mysqlcppconn8.lib")
+        #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-#endif // DATABASE_DLL_LIB_H
+    #endif  // DATABASE_USE_MYSQL
+
+#endif  // _MSC_VER
+
+#endif  // DATABASE_DLL_LIB_H

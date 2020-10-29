@@ -119,7 +119,7 @@ bool Framework::NetworkManagerInterface
 
 	if (ParentType::Destroy())
 	{		
-		m_NetworkManager->Destroy();		
+	 	
 
 		return true;
 	}		
@@ -137,7 +137,7 @@ bool Framework::NetworkManagerInterface
 	if (ParentType::Idle(timeDelta))
 	{
 		// 发送和接收消息		
-		m_NetworkManager->HandlingMessages();		
+		 		
 
 		return true;
 	}		
@@ -147,45 +147,13 @@ bool Framework::NetworkManagerInterface
 	}	
 }
 
-void Framework::NetworkManagerInterface
-	::Send(SocketType socketType, int serverID, uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Framework::NetworkManagerInterface ::Send(const Network::SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
 	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	m_NetworkManager->Send(socketType,serverID,socketID,message);
+	m_NetworkManager->Send(socketData, socketID, message);
 }
-
-void Framework::NetworkManagerInterface
-	::Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-	
-	m_NetworkManager->Insert(socketType, serverID, messageID, messageEvent);	
-}
-
-void Framework::NetworkManagerInterface
-	::Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	m_NetworkManager->Insert(socketType, serverID, messageID, messageEvent, priority);	
-}
-
-void Framework::NetworkManagerInterface
-	::Remove(SocketType socketType, int serverID, int64_t messageID)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	m_NetworkManager->Remove(socketType, serverID, messageID);	
-}
-
-void Framework::NetworkManagerInterface
-	::Remove(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
-{
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	m_NetworkManager->Remove(socketType, serverID, messageID, messageEvent);
-}
+ 
 
 // protected
 Framework::NetworkManagerInterface::SendSocketManagerSharedPtr Framework::NetworkManagerInterface

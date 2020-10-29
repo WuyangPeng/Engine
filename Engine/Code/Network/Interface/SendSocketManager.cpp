@@ -1,103 +1,36 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 10:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 13:11)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "SendSocketManager.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Detail/SendSocketManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
+using std::make_shared;
+using std::string;
 
-Network::SendSocketManager
-	::SendSocketManager(const std::string& fileName)
+Network::SendSocketManager::SendSocketManager(const string& fileName)
+    : m_Impl{ make_shared<ImplType>(fileName) }
 {
-	fileName;
-
-	CoreTools::DisableNoexcept();
-
-	NETWORK_SELF_CLASS_IS_VALID_9;
-} 
-
-CLASS_INVARIANT_STUB_DEFINE(Network, SendSocketManager)
-
-void Network::SendSocketManager
-	::Send(SocketType socketType, int serverID, uint64_t socketID, const MessageInterfaceSharedPtr& message)
-{
-	NETWORK_CLASS_IS_VALID_9;
-
-	socketID;
-
-	message;
-
-	socketType;
-	 
-	serverID;
-        CoreTools::DisableNoexcept();
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
+CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SendSocketManager)
 
-
-Network::SocketManagerSharedPtr Network::SendSocketManager::GetSocketManager(SocketType socketType, int serverID)
+void Network::SendSocketManager::Send(const SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	socketType;
-        CoreTools::DisableNoexcept();
-	serverID;
-
-	return nullptr;
+    return m_Impl->Send(socketData, socketID, message);
 }
 
-void Network::SendSocketManager::Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
-{
-    CoreTools::DisableNoexcept();
-	socketType; serverID; messageID; messageEvent;
-}
-
-void Network::SendSocketManager::Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
-{
-    CoreTools::DisableNoexcept();
-	socketType; serverID; messageID; messageEvent; priority;
-}
-
-void Network::SendSocketManager::Remove(SocketType socketType, int serverID, int64_t messageID)
-{
-    CoreTools::DisableNoexcept();
-	socketType; serverID; messageID;
-}
-
-void Network::SendSocketManager::HandlingMessages()
-{
-    CoreTools::DisableNoexcept();
-}
-
-void Network::SendSocketManager::Destroy()
-{
-    CoreTools::DisableNoexcept();
-}
-
-void Network::SendSocketManager::Remove(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
-{
-    CoreTools::DisableNoexcept();
-	socketType; serverID; messageID; messageEvent;
-}
-
-std::vector<std::pair<Network::SocketType, int>>::const_iterator Network::SendSocketManager::begin()
-{
-    CoreTools::DisableNoexcept();
-	return std::vector<std::pair<SocketType, int>>::const_iterator();
-}
-
-std::vector<std::pair<Network::SocketType, int>>::const_iterator Network::SendSocketManager::end()
-{
-    CoreTools::DisableNoexcept();
-	return std::vector<std::pair<SocketType, int>>::const_iterator();
-}
-#include STSTEM_WARNING_POP
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, SendSocketManager, GetSendSocket, SocketData, Network::SendSocketSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, SendSocketManager, GetSocketManager, Network::SocketManagerSharedPtr)

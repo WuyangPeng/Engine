@@ -1,24 +1,24 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 15:54)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 11:36)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_DOUBLE_MESSAGE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_DOUBLE_MESSAGE_DETAIL_H
 
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "MessageContainerDetail.h"
 #include "MessageManager.h"
 #include "MessageSourceDetail.h"
 #include "MessageTargetDetail.h"
 #include "MultipleDoubleMessage.h"
-
-#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-Network::MultipleDoubleMessage<E, ByteType, Types...>::MultipleDoubleMessage(int64_t messageID,
-                                                                             const MessageType& messageType)
+Network::MultipleDoubleMessage<E, ByteType, Types...>::MultipleDoubleMessage(int64_t messageID, const MessageType& messageType)
     : ParentType{ messageID }, m_Message{ messageType }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -26,15 +26,8 @@ Network::MultipleDoubleMessage<E, ByteType, Types...>::MultipleDoubleMessage(int
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 template <typename T, typename... OtherTypes>
-Network::MultipleDoubleMessage<E, ByteType, Types...>::MultipleDoubleMessage(int64_t messageID, T value,
-                                                                             OtherTypes... otherValue)
+Network::MultipleDoubleMessage<E, ByteType, Types...>::MultipleDoubleMessage(int64_t messageID, T value, OtherTypes... otherValue)
     : ParentType{ messageID }, m_Message{ value, otherValue... }
-{
-    NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-Network::MultipleDoubleMessage<E, ByteType, Types...>::~MultipleDoubleMessage()
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -63,10 +56,9 @@ const CoreTools::Rtti& Network::MultipleDoubleMessage<E, ByteType, Types...>::Ge
 
     return rtti;
 }
- 
+
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-Network::MessageInterfaceSharedPtr Network::MultipleDoubleMessage<E, ByteType, Types...>::
-    Factory(const MessageSourceSharedPtr& source, int64_t messageID)
+Network::MessageInterfaceSharedPtr Network::MultipleDoubleMessage<E, ByteType, Types...>::Factory(const MessageSourceSharedPtr& source, int64_t messageID)
 {
     MessageInterfaceSharedPtr object{ std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageID) };
 
@@ -83,9 +75,7 @@ Network::MultipleDoubleMessage<E, ByteType, Types...>::MultipleDoubleMessage(Loa
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-void Network::MultipleDoubleMessage<E, ByteType, Types...>
-
-    ::Load(const MessageSourceSharedPtr& source)
+void Network::MultipleDoubleMessage<E, ByteType, Types...>::Load(const MessageSourceSharedPtr& source)
 {
     NETWORK_CLASS_IS_VALID_9;
 

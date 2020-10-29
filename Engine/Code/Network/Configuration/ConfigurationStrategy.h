@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 12:30)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 19:06)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_H
@@ -19,7 +22,7 @@ NETWORK_EXPORT_SHARED_PTR(ConfigurationStrategyImpl);
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE ConfigurationStrategy
+    class NETWORK_DEFAULT_DECLARE ConfigurationStrategy final
     {
     public:
         PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationStrategy);
@@ -37,24 +40,24 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        WrappersStrategy GetWrappersStrategy() const noexcept;
-        ServerStrategy GetPatternStrategy() const noexcept;
-        MessageStrategy GetMessageStrategy() const noexcept;
-        ClientStrategy GetClientStrategy() const noexcept;
-        ConnectStrategy GetConnectStrategy() const noexcept;
-        ParserStrategy GetParserStrategy() const noexcept;
-        OpenSSLStrategy GetOpenSSLStrategy() const noexcept;
-        SocketSendMessage GetSocketSendMessage() const noexcept;
+        [[nodiscard]] WrappersStrategy GetWrappersStrategy() const noexcept;
+        [[nodiscard]] ServerStrategy GetPatternStrategy() const noexcept;
+        [[nodiscard]] MessageStrategy GetMessageStrategy() const noexcept;
+        [[nodiscard]] ClientStrategy GetClientStrategy() const noexcept;
+        [[nodiscard]] ConnectStrategy GetConnectStrategy() const noexcept;
+        [[nodiscard]] ParserStrategy GetParserStrategy() const noexcept;
+        [[nodiscard]] OpenSSLStrategy GetOpenSSLStrategy() const noexcept;
+        [[nodiscard]] SocketSendMessage GetSocketSendMessage() const noexcept;
 
-        const ConfigurationSubStrategy GetConfigurationSubStrategy() const noexcept;
-        bool IsExist(WrappersSubStrategy wrappersSubStrategy) const;
+        [[nodiscard]] const ConfigurationSubStrategy GetConfigurationSubStrategy() const noexcept;
+        [[nodiscard]] bool IsExist(WrappersSubStrategy wrappersSubStrategy) const;
 
-        const ConfigurationParameter GetConfigurationParameter() const noexcept;
+        [[nodiscard]] const ConfigurationParameter GetConfigurationParameter() const noexcept;
 
-        int GetBufferSize() const;
+        [[nodiscard]] int GetBufferSize() const;
 
-        std::string GetIP() const;
-        int GetPort() const noexcept;
+        [[nodiscard]] std::string GetIP() const;
+        [[nodiscard]] int GetPort() const noexcept;
 
     private:
         IMPL_TYPE_DECLARE(ConfigurationStrategy);

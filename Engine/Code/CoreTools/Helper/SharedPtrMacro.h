@@ -16,4 +16,8 @@
     using SYSTEM_CONCATENATOR(className, SharedPtr) = std::shared_ptr<className>; \
     using SYSTEM_MULTIPLE_CONCATENATOR(Const, className, SharedPtr) = std::shared_ptr<const className>;
 
+#define CORE_TOOLS_WEAK_PTR_DECLARE(className)                                \
+    using SYSTEM_CONCATENATOR(className, WeakPtr) = std::weak_ptr<className>; \
+    using SYSTEM_MULTIPLE_CONCATENATOR(Const, className, WeakPtr) = std::weak_ptr<const className>;
+
 #endif  // CORE_TOOLS_HELPER_SHARED_PTR_MACRO_H

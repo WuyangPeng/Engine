@@ -1,13 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 14:21)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 20:35)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_H
 
-#include "Network/NetworkDll.h" 
+#include "Network/NetworkDll.h"
 
 #include "MessageBufferImpl.h"
 #include "System/Helper/EnumCast.h"
@@ -16,31 +19,31 @@
 
 namespace Network
 {
-	template<BuffBlockSize buffBlockSize>
-	class MessageArrayBuffer : public MessageBufferImpl
-	{
-	public:
-		using ClassType = MessageArrayBuffer<buffBlockSize>;
-		using ParentType = MessageBufferImpl;
+    template <BuffBlockSize buffBlockSize>
+    class MessageArrayBuffer final : public MessageBufferImpl
+    {
+    public:
+        using ClassType = MessageArrayBuffer<buffBlockSize>;
+        using ParentType = MessageBufferImpl;
 
-	public:
-		explicit MessageArrayBuffer(ParserStrategy parserStrategy) noexcept;
+    public:
+        explicit MessageArrayBuffer(ParserStrategy parserStrategy) noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		const char* GetInitialBufferedPtr() const noexcept override;
-		char* GetInitialBufferedPtr() noexcept override;
+        [[nodiscard]] const char* GetInitialBufferedPtr() const noexcept final;
+        [[nodiscard]] char* GetInitialBufferedPtr() noexcept final;
 
-		ImplPtr Clone() const override;
+        [[nodiscard]] ImplPtr Clone() const final;
 
-		BuffBlockSize GetBuffBlockSize() const noexcept override;
-		int GetSize() const noexcept override;
+        [[nodiscard]] BuffBlockSize GetBuffBlockSize() const noexcept final;
+        [[nodiscard]] int GetSize() const noexcept final;
 
-		ImplPtr Expansion(int count) const override;
+        [[nodiscard]] ImplPtr Expansion(int count) const final;
 
-	private:
-		std::array<char, System::EnumCastUnderlying(buffBlockSize)> m_Buffer;
-	};
+    private:
+        std::array<char, System::EnumCastUnderlying(buffBlockSize)> m_Buffer;
+    };
 }
 
-#endif // NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_H
+#endif  // NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_H

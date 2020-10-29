@@ -1,64 +1,61 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 10:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/28 13:12)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "SockAcceptor.h"
-#include "Detail/SockAcceptorImpl.h"
 #include "Detail/SockAcceptorFactory.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Detail/SockAcceptorImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::string;
 
-Network::SockAcceptor
-	::SockAcceptor(int port, const ConfigurationStrategy& configurationStrategy)
-	:m_Impl{ SockAcceptorFactory::Create(port,configurationStrategy) }
+Network::SockAcceptor::SockAcceptor(int port, const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ SockAcceptorFactory::Create(port, configurationStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::SockAcceptor
-	::SockAcceptor(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
-	:m_Impl{ SockAcceptorFactory::Create(hostName,port, configurationStrategy) }
+Network::SockAcceptor::SockAcceptor(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ SockAcceptorFactory::Create(hostName, port, configurationStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::SockAcceptor
-::SockAcceptor(const ConfigurationStrategy& configurationStrategy)
-	: m_Impl{ SockAcceptorFactory::Create(configurationStrategy) }
+Network::SockAcceptor::SockAcceptor(const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ SockAcceptorFactory::Create(configurationStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockAcceptor)
 
-bool Network::SockAcceptor
-	::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+bool Network::SockAcceptor::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Accept(sockStream, sockAddress);
+    return m_Impl->Accept(sockStream, sockAddress);
 }
 
-void Network::SockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
+void Network::SockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->AsyncAccept(eventInterface, sockStream);
+    return m_Impl->AsyncAccept(eventInterface, sockStream);
 }
 
-void Network::SockAcceptor
-	::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::SockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->AsyncAccept(eventInterface, sockStream, sockAddress);
+    return m_Impl->AsyncAccept(eventInterface, sockStream, sockAddress);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, SockAcceptor, Accept, SockStreamSharedPtr, bool)

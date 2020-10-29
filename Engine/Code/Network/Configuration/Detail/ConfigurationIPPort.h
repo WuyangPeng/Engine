@@ -1,36 +1,39 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 12:18)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 19:03)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_IMPL_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_IMPL_H
 
-#include "Network/NetworkDll.h" 
+#include "Network/NetworkDll.h"
 
 #include <string>
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE ConfigurationIPPort
-	{
-	public:
-		using ClassType = ConfigurationIPPort;
+    class NETWORK_HIDDEN_DECLARE ConfigurationIPPort final
+    {
+    public:
+        using ClassType = ConfigurationIPPort;
 
-	public:
-		ConfigurationIPPort(const std::string& ip, int port);
-		ConfigurationIPPort() noexcept;
+    public:
+        ConfigurationIPPort(const std::string& ip, int port);
+        ConfigurationIPPort() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		std::string GetIP() const;
-		int GetPort() const noexcept;
+        [[nodiscard]] std::string GetIP() const;
+        [[nodiscard]] int GetPort() const noexcept;
 
-	private:
-		std::string m_IP;
-		int m_Port;
-	};
+    private:
+        std::string m_IP;
+        int m_Port;
+    };
 }
 
-#endif // NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_IMPL_H
+#endif  // NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_IMPL_H

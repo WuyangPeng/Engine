@@ -1,36 +1,27 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 14:19)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 9:40)
 
 #ifndef NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_INTERNAL_FWD_H
 #define NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_INTERNAL_FWD_H
 
-#include "Network/NetworkDll.h"  
+#include "Network/NetworkDll.h"
 
 #include "NetworkMessageFwd.h"
+#include "Network/Configuration/ConfigurationFwd.h"
 
 #include <memory>
 
 namespace Network
-{	 
-	enum class ParserStrategy;
+{
+    class MessageBufferImpl;
+    class MessageEventContainerImpl;
+    class MultiMessageEventContainerImpl;
+}
 
-	class MessageBufferImpl;
-	class MessageEventContainerImpl;
-	class MultiMessageEventContainerImpl; 
-
-	using MessageSourceSharedPtr = std::shared_ptr<MessageSource>;
-	using MessageTargetSharedPtr = std::shared_ptr<MessageTarget>;	
-	using MessageBufferSharedPtr = std::shared_ptr<MessageBuffer>;
-	using SocketManagerSharedPtr = std::shared_ptr<SocketManager>;
-	using MessageInterfaceSharedPtr = std::shared_ptr<MessageInterface>;
-	using ConstMessageInterfaceSharedPtr = std::shared_ptr<const MessageInterface>;
-	using NetworkMessageEventSharedPtr = std::shared_ptr<NetworkMessageEvent>;
-	using ConstNetworkMessageEventSharedPtr = std::shared_ptr<const NetworkMessageEvent>;
-	using NetworkMessageEventWeakPtr = std::weak_ptr<NetworkMessageEvent>;
-	using ConstNetworkMessageEventWeakPtr = std::weak_ptr<const NetworkMessageEvent>;	 
-} 
-
-#endif // NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_INTERNAL_FWD_H
+#endif  // NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_INTERNAL_FWD_H

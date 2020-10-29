@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 13:44)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 14:48)
 
 #include "Network/NetworkExport.h"
 
@@ -22,12 +25,10 @@
     #include "Network/Interface/SockAddress.h"
     #include "Network/Interface/SockStream.h"
     #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
+
 using std::string;
 
-Network::ACESockAcceptor ::ACESockAcceptor(int port)
+Network::ACESockAcceptor::ACESockAcceptor(int port)
     : ParentType{}, m_ACESockAcceptor{}
 {
     ACEInetAddress inetAddress;
@@ -40,7 +41,7 @@ Network::ACESockAcceptor ::ACESockAcceptor(int port)
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockAcceptor ::ACESockAcceptor(const string& hostName, int port)
+Network::ACESockAcceptor::ACESockAcceptor(const string& hostName, int port)
     : ParentType{}, m_ACESockAcceptor{}
 {
     ACEInetAddress inetAddress;
@@ -53,25 +54,23 @@ Network::ACESockAcceptor ::ACESockAcceptor(const string& hostName, int port)
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockAcceptor ::~ACESockAcceptor()
+Network::ACESockAcceptor::~ACESockAcceptor() noexcept
 {
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26447)
-
     EXCEPTION_TRY
     {
         m_ACESockAcceptor.close();
     }
     EXCEPTION_ALL_CATCH(Network)
 
-    #include STSTEM_WARNING_POP
-
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ACESockAcceptor)
 
-bool Network::ACESockAcceptor ::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26415)
+    #include SYSTEM_WARNING_DISABLE(26418)
+bool Network::ACESockAcceptor::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -80,8 +79,12 @@ bool Network::ACESockAcceptor ::Accept(const SockStreamSharedPtr& sockStream, co
     else
         return false;
 }
+    #include STSTEM_WARNING_POP
 
-bool Network::ACESockAcceptor ::Accept(const SockStreamSharedPtr& sockStream)
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26415)
+    #include SYSTEM_WARNING_DISABLE(26418)
+bool Network::ACESockAcceptor::Accept(const SockStreamSharedPtr& sockStream)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -90,15 +93,16 @@ bool Network::ACESockAcceptor ::Accept(const SockStreamSharedPtr& sockStream)
     else
         return false;
 }
+    #include STSTEM_WARNING_POP
 
-Network::ACEHandle Network::ACESockAcceptor ::GetACEHandle()
+Network::ACEHandle Network::ACESockAcceptor::GetACEHandle()
 {
     NETWORK_CLASS_IS_VALID_9;
 
     return m_ACESockAcceptor.get_handle();
 }
 
-bool Network::ACESockAcceptor ::EnableNonBlock()
+bool Network::ACESockAcceptor::EnableNonBlock()
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -108,7 +112,10 @@ bool Network::ACESockAcceptor ::EnableNonBlock()
         return false;
 }
 
-void Network::ACESockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26415)
+    #include SYSTEM_WARNING_DISABLE(26418)
+void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -123,11 +130,18 @@ void Network::ACESockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& event
 
         if (!eventInterface->EventFunction(callbackParameters))
         {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                << SYSTEM_TEXT("事件回调执行失败！")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
         }
     }
 }
+    #include STSTEM_WARNING_POP
 
-void Network::ACESockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26415)
+    #include SYSTEM_WARNING_DISABLE(26418)
+void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -140,17 +154,21 @@ void Network::ACESockAcceptor ::AsyncAccept(const EventInterfaceSharedPtr& event
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
 
-         if (!eventInterface->EventFunction(callbackParameters))
+        if (!eventInterface->EventFunction(callbackParameters))
         {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                << SYSTEM_TEXT("事件回调执行失败！")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
         }
     }
 }
+    #include STSTEM_WARNING_POP
 
-const std::string Network::ACESockAcceptor ::GetAddress() const
+const string Network::ACESockAcceptor::GetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    ACESockInetAddress address;
+    ACESockInetAddress address{};
 
     if (m_ACESockAcceptor.get_local_addr(address.GetACEInetAddress()) == 0)
     {
@@ -158,15 +176,15 @@ const std::string Network::ACESockAcceptor ::GetAddress() const
     }
     else
     {
-        return "";
+        return string{};
     }
 }
 
-int Network::ACESockAcceptor ::GetPort() const
+int Network::ACESockAcceptor::GetPort() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    ACESockInetAddress address;
+    ACESockInetAddress address{};
 
     if (m_ACESockAcceptor.get_local_addr(address.GetACEInetAddress()) == 0)
     {
@@ -177,5 +195,5 @@ int Network::ACESockAcceptor ::GetPort() const
         return 0;
     }
 }
-    #include STSTEM_WARNING_POP
+
 #endif  // NETWORK_USE_ACE

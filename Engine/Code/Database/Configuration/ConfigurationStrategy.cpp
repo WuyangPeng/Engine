@@ -1,37 +1,38 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/16 11:07)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 20:30)
 
-#include "Database/DatabaseExport.h" 
+#include "Database/DatabaseExport.h"
 
 #include "ConfigurationStrategy.h"
 #include "Detail/ConfigurationStrategyImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
+using std::make_shared;
 using std::map;
 using std::string;
 using std::vector;
-using std::make_shared;
 
-Database::ConfigurationStrategy
-	::ConfigurationStrategy(WrappersStrategy wrappersStrategy, const string& ip, int port,
-							const string& hostName, const string& userName, const string& password)
-	:m_Impl{ make_shared<ImplType>(wrappersStrategy,ip,port,hostName,userName,password) }
+Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, const string& ip, int port,
+                                                       const string& hostName, const string& userName, const string& password)
+    : m_Impl{ make_shared<ImplType>(wrappersStrategy, ip, port, hostName, userName, password) }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::ConfigurationStrategy
-	::ConfigurationStrategy(WrappersStrategy wrappersStrategy, const string& ip, int port, const string& hostName,
-							const string& userName, const string& password, bool pooling, int poolMaxSize,
-							int poolQueueTimeout, int poolMaxIdleTime, const FlagsOption& flagsOption, const StringOption& stringOption,
-							const BooleanOption& booleanOption, const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping)
-	:m_Impl{ make_shared<ImplType>(wrappersStrategy,ip,port,hostName,userName,password,pooling,poolMaxSize,poolQueueTimeout,poolMaxIdleTime,flagsOption,stringOption,booleanOption,intOption,sslOption,dbMapping) }
+Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, const string& ip, int port, const string& hostName,
+                                                       const string& userName, const string& password, bool pooling, int poolMaxSize,
+                                                       int poolQueueTimeout, int poolMaxIdleTime, const FlagsOption& flagsOption, const StringOption& stringOption,
+                                                       const BooleanOption& booleanOption, const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping)
+    : m_Impl{ make_shared<ImplType>(wrappersStrategy, ip, port, hostName, userName, password, pooling, poolMaxSize, poolQueueTimeout, poolMaxIdleTime, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping) }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, ConfigurationStrategy)
@@ -55,4 +56,3 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, Ge
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolMaxSize, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolQueueTimeout, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolMaxIdleTime, int)
-

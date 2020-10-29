@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:16)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:18)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_CONNECTOR_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_CONNECTOR_IMPL_H
@@ -20,19 +23,19 @@ namespace Network
         using SockConnectorPtr = std::shared_ptr<ClassType>;
 
     public:
-        SockConnectorImpl() noexcept;
-        virtual ~SockConnectorImpl();
-        SockConnectorImpl(const SockConnectorImpl&) = default;
-        SockConnectorImpl& operator=(const SockConnectorImpl&) = default;
-        SockConnectorImpl(SockConnectorImpl&&) noexcept = default;
-        SockConnectorImpl& operator=(SockConnectorImpl&&) noexcept = default;
+        SockConnectorImpl() noexcept = default;
+        virtual ~SockConnectorImpl() noexcept = default;
+        SockConnectorImpl(const SockConnectorImpl& rhs) = default;
+        SockConnectorImpl& operator=(const SockConnectorImpl& rhs) = default;
+        SockConnectorImpl(SockConnectorImpl&& rhs) noexcept = default;
+        SockConnectorImpl& operator=(SockConnectorImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
-        virtual void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
+        [[nodiscard]] virtual bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
+        [[nodiscard]] virtual void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
 
-        virtual const SockConnectorPtr Clone() const = 0;
+        [[nodiscard]] virtual const SockConnectorPtr Clone() const = 0;
     };
 }
 

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 12:29)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 19:06)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_H
@@ -10,34 +13,34 @@
 #include "Network/NetworkDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
-#include <string>
 #include <set>
+#include <string>
 
 NETWORK_EXPORT_SHARED_PTR(ConfigurationParameterImpl);
 
 namespace Network
 {
-	class NETWORK_DEFAULT_DECLARE ConfigurationParameter
-	{
-	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationParameter);
-		using String = System::String;
-		using Parameter = std::set<System::String>;
+    class NETWORK_DEFAULT_DECLARE ConfigurationParameter final
+    {
+    public:
+        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationParameter);
+        using String = System::String;
+        using Parameter = std::set<System::String>;
 
-	public:
-		ConfigurationParameter();
+    public:
+        ConfigurationParameter();
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void AddParameter(const String& key, const String& parameter);
-		bool IsParameterExist(const String& key, const String& parameter) const;
-		const Parameter GetParameter(const String& key) const;
+        void AddParameter(const String& key, const String& parameter);
+        [[nodiscard]] bool IsParameterExist(const String& key, const String& parameter) const;
+        [[nodiscard]] const Parameter GetParameter(const String& key) const;
 
-	private:
-		IMPL_TYPE_DECLARE(ConfigurationParameter);
-	};
+    private:
+        IMPL_TYPE_DECLARE(ConfigurationParameter);
+    };
 }
 
-#endif // NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_H
+#endif  // NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_H

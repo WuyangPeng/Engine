@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:04)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:04)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_ITERATOR_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_ITERATOR_IMPL_H
@@ -19,8 +22,8 @@ namespace Network
         using ClassType = HandleSetIteratorImpl;
 
     public:
-        HandleSetIteratorImpl() noexcept;
-        virtual ~HandleSetIteratorImpl();
+        HandleSetIteratorImpl() noexcept = default;
+        virtual ~HandleSetIteratorImpl() noexcept = default;
         HandleSetIteratorImpl(const HandleSetIteratorImpl&) = default;
         HandleSetIteratorImpl& operator=(const HandleSetIteratorImpl&) = default;
         HandleSetIteratorImpl(HandleSetIteratorImpl&&) noexcept = default;
@@ -28,7 +31,7 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual ACEHandle operator()();
+        [[nodiscard]] virtual ACEHandle operator()();
     };
 }
 

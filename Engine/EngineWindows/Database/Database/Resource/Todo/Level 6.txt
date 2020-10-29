@@ -1,11 +1,4 @@
 TODO Level 6
  
-0.0.2.5
+0.5.2.1
 
-1. （FlatFileWrappers）完成FlatFileWrappers模块。
-2. （FlatFileWrappers）完成FlatFileWrappers模块的数据对象。
-3. （FlatFileWrappers）完成FlatFileWrappers模块的会话。
-4. （FlatFileWrappers）完成FlatFileWrappers模块的架构。
-5. （FlatFileWrappers）完成FlatFileWrappers模块的采集。
-6. （FlatFileWrappers）完成FlatFileWrappers模块的结果。
-7. （FlatFileWrappers）完成FlatFileWrappers模块的表。 

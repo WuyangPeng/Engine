@@ -1,11 +1,14 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 10:52)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 20:25)
 
-#ifndef DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
-#define DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
+#ifndef DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
+#define DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
 
 #include "Database/DatabaseDll.h"
 
@@ -17,7 +20,7 @@
 
 namespace Database
 {
-    class DATABASE_HIDDEN_DECLARE ConfigurationStrategyImpl
+    class DATABASE_HIDDEN_DECLARE ConfigurationStrategyImpl final
     {
     public:
         using ClassType = ConfigurationStrategyImpl;
@@ -39,27 +42,27 @@ namespace Database
 
         CLASS_INVARIANT_DECLARE;
 
-        WrappersStrategy GetWrappersStrategy() const noexcept;
+        [[nodiscard]] WrappersStrategy GetWrappersStrategy() const noexcept;
 
-        std::string GetIP() const;
-        int GetPort() const noexcept;
-        std::string GetDBHostName() const;
-        std::string GetDBUserName() const;
-        std::string GetDBPassword() const;
+        [[nodiscard]] std::string GetIP() const;
+        [[nodiscard]] int GetPort() const noexcept;
+        [[nodiscard]] std::string GetDBHostName() const;
+        [[nodiscard]] std::string GetDBUserName() const;
+        [[nodiscard]] std::string GetDBPassword() const;
 
-        FlagsOption GetFlagsOption() const;
-        StringOption GetStringOptions() const;
-        BooleanOption GetBooleanOptions() const;
-        IntOption GetIntOptions() const;
-        SSLOption GetSSLOptions() const;
-        DBMapping GetDBMapping() const;
-        bool IsUseSSL() const noexcept;
-        std::string GetDBName(int dbIndex) const;
+        [[nodiscard]] FlagsOption GetFlagsOption() const;
+        [[nodiscard]] StringOption GetStringOptions() const;
+        [[nodiscard]] BooleanOption GetBooleanOptions() const;
+        [[nodiscard]] IntOption GetIntOptions() const;
+        [[nodiscard]] SSLOption GetSSLOptions() const;
+        [[nodiscard]] DBMapping GetDBMapping() const;
+        [[nodiscard]] bool IsUseSSL() const noexcept;
+        [[nodiscard]] std::string GetDBName(int dbIndex) const;
 
-        bool GetPooling() const noexcept;
-        int GetPoolMaxSize() const noexcept;
-        int GetPoolQueueTimeout() const noexcept;
-        int GetPoolMaxIdleTime() const noexcept;
+        [[nodiscard]] bool GetPooling() const noexcept;
+        [[nodiscard]] int GetPoolMaxSize() const noexcept;
+        [[nodiscard]] int GetPoolQueueTimeout() const noexcept;
+        [[nodiscard]] int GetPoolMaxIdleTime() const noexcept;
 
     private:
         WrappersStrategy m_WrappersStrategyFlag;
@@ -82,4 +85,4 @@ namespace Database
     };
 }
 
-#endif  // DATABASE_DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
+#endif  // DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H

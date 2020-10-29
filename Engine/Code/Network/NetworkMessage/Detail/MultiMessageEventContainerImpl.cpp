@@ -1,84 +1,76 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/10 16:28)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/27 13:49)
 
 #include "Network/NetworkExport.h"
 
 #include "MultiMessageEventContainerImpl.h"
 #include "PriorityMessageEventContainer.h"
-
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 using std::make_shared;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26486)
-Network::MultiMessageEventContainerImpl
-	::MultiMessageEventContainerImpl() noexcept
-	:m_MessageEventContainer{} 
+
+Network::MultiMessageEventContainerImpl::MultiMessageEventContainerImpl() noexcept
+    : m_MessageEventContainer{}
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MultiMessageEventContainerImpl
-	::MultiMessageEventContainerImpl(const NetworkMessageEventSharedPtr& messageEvent)
-	:m_MessageEventContainer{ messageEvent }
+Network::MultiMessageEventContainerImpl::MultiMessageEventContainerImpl(const NetworkMessageEventSharedPtr& messageEvent)
+    : m_MessageEventContainer{ messageEvent }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MultiMessageEventContainerImpl)
 
-void Network::MultiMessageEventContainerImpl
-	::Insert(const NetworkMessageEventSharedPtr& messageEvent)
+void Network::MultiMessageEventContainerImpl::Insert(const NetworkMessageEventSharedPtr& messageEvent)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_MessageEventContainer.insert(messageEvent);
+    m_MessageEventContainer.insert(messageEvent);
 }
 
-void Network::MultiMessageEventContainerImpl
-	::Remove(const NetworkMessageEventSharedPtr& messageEvent) noexcept
+void Network::MultiMessageEventContainerImpl::Remove(const NetworkMessageEventSharedPtr& messageEvent) noexcept
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	m_MessageEventContainer.erase(messageEvent);
+    m_MessageEventContainer.erase(messageEvent);
 }
 
-void Network::MultiMessageEventContainerImpl
-	::OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::MultiMessageEventContainerImpl::OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	for (const auto& messageEventWeakPtr : m_MessageEventContainer)
-	{
-		auto messageEventSharedPtr = messageEventWeakPtr.lock();
-		if (messageEventSharedPtr)
-		{
-			messageEventSharedPtr->CallBackEvent(socketID, message);
-		}
-	}
+    for (const auto& messageEventWeakPtr : m_MessageEventContainer)
+    {
+        auto messageEventSharedPtr = messageEventWeakPtr.lock();
+        if (messageEventSharedPtr)
+        {
+            messageEventSharedPtr->CallBackEvent(socketID, message);
+        }
+    }
 }
 
-Network::MultiMessageEventContainerImpl::ImplPtr Network::MultiMessageEventContainerImpl
-	::CloneToPriorityMessage(MessageEventPriority priority) const
+Network::MultiMessageEventContainerImpl::ImplPtr Network::MultiMessageEventContainerImpl::CloneToPriorityMessage(MessageEventPriority priority) const
 {
-	CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	auto priorityMessageEventContainer = make_shared<PriorityMessageEventContainer>();
+    auto priorityMessageEventContainer = make_shared<PriorityMessageEventContainer>();
 
-	for (const auto& messageEventWeakPtr : m_MessageEventContainer)
-	{
-		auto messageEventSharedPtr = messageEventWeakPtr.lock();
-		if (messageEventSharedPtr)
-		{
-			priorityMessageEventContainer->Insert(messageEventSharedPtr, priority);
-		}
-	}
+    for (const auto& messageEventWeakPtr : m_MessageEventContainer)
+    {
+        auto messageEventSharedPtr = messageEventWeakPtr.lock();
+        if (messageEventSharedPtr)
+        {
+            priorityMessageEventContainer->Insert(messageEventSharedPtr, priority);
+        }
+    }
 
-	return priorityMessageEventContainer;
+    return priorityMessageEventContainer;
 }
-
-#include STSTEM_WARNING_POP

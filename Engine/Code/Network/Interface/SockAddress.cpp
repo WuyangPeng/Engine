@@ -1,43 +1,45 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 10:56)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 13:12)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "SockAddress.h"
 #include "Detail/SockAddressFactory.h"
 #include "Detail/SockAddressImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::string;
-#include "System/Helper/PragmaWarning.h"
+
+Network::SockAddress::SockAddress(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ SockAddressFactory::Create(hostName, port, configurationStrategy) }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+Network::SockAddress::SockAddress(int port, const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ SockAddressFactory::Create(port, configurationStrategy) }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+Network::SockAddress::SockAddress(const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ SockAddressFactory::Create(configurationStrategy) }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
-Network::SockAddress
-	::SockAddress(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
-	:m_Impl{ SockAddressFactory::Create(hostName, port, configurationStrategy) }
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Network::SockAddress
-	::SockAddress(int port, const ConfigurationStrategy& configurationStrategy)
-	:m_Impl{ SockAddressFactory::Create(port, configurationStrategy) }
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Network::SockAddress
-	::SockAddress(const ConfigurationStrategy& configurationStrategy)
-	:m_Impl{ SockAddressFactory::Create(configurationStrategy) }
-{
-	NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
 COPY_CONSTRUCTION_CLONE_DEFINE(Network, SockAddress)
+#include STSTEM_WARNING_POP
+
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockAddress)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetACEInetAddress, const Network::ACEInetAddressType&)
@@ -49,4 +51,3 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetWinSockInetAddr
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetAddress, const string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetPort, int)
-#include STSTEM_WARNING_POP

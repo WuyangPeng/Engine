@@ -1,20 +1,22 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/09 19:16)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 17:04)
 
 #ifndef NETWORK_FWD_H
 #define NETWORK_FWD_H
 
-#include "Helper/HelperFwd.h"
-#include "Configuration/ConfigurationFwd.h"
-#include "NetworkMessage/NetworkMessageFwd.h"
-#include "Interface/InterfaceFwd.h"
 #include "ACEWrappers/ACEWrappersFwd.h"
 #include "BoostWrappers/BoostWrappersFwd.h"
+#include "Configuration/ConfigurationFwd.h"
+#include "Helper/HelperFwd.h"
+#include "Interface/InterfaceFwd.h"
+#include "NetworkMessage/NetworkMessageFwd.h"
 #include "NetworkWrappers/NetworkWrappersFwd.h"
-#include "SocketWrappers/SocketWrappersFwd.h"
 #include "Openssl/OpensslFwd.h"
- 
-#endif // NETWORK_FWD_H
+
+#endif  // NETWORK_FWD_H

@@ -4,9 +4,6 @@
 http://gameprogrammingpatterns.com/ 、http://journal.stuffwithstuff.com/ 、
 https://www.ptpress.com.cn/shopping/buy?bookId=bbf95882-dea0-43ad-b798-efd6546f9748
 
-参考网站：
-责任链模式：https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern （已失效）
-
 ★★★
 作者：Robert Nystrom
 
@@ -15,6 +12,7 @@ https://www.ptpress.com.cn/shopping/buy?bookId=bbf95882-dea0-43ad-b798-efd6546f9
 
 代码
 1.	command.h（第2章 命令模式）
+2.	flyweight.h（第3章 享元模式）
 
 要点
 1.	一味追求可扩展性让无数开发者在一个“引擎”上花费数年却没有搞清楚引擎空间是用来做什么的。（1.2 有什么代价）
@@ -45,3 +43,10 @@ https://www.ptpress.com.cn/shopping/buy?bookId=bbf95882-dea0-43ad-b798-efd6546f9
 		★	将某种概念转化为一块数据、一个对象，或者你可以认为是传入函数的变量等。
 		★	命令就是面向对象化的回调。
 	第3章 享元模式
+		★	类型对象通过把“类型”对象化，可以尽可能减少定义新类型的数量。
+			而享元模式中产生的内存共享只是额外的奖励。而享元模式却更注重效率。
+		★	享元模式通过将对象数据切分成两种类型来解决问题：
+			1.	不属于单一实例对象并且能够被所有对象共享的数据。
+			2.	其他数据便是外部状态，对于每一个实例它们都是唯一的。
+		★	享元模式不仅具有面向对象的优点，而且不会因数量巨大而产生开销。
+	第4章 观察者模式

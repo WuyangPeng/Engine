@@ -1,48 +1,50 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 15:47)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 16:27)
 
 #ifndef NETWORK_BOOST_WRAPPERS_EXECUTOR_WORK_GUARD_CONTEXT_H
 #define NETWORK_BOOST_WRAPPERS_EXECUTOR_WORK_GUARD_CONTEXT_H
 
 #include "Network/NetworkDll.h"
 
+#include "System/Helper/PragmaWarning/ExecutorWorkGuard.h"
 #include "Network/Interface/NetworkInternalFwd.h"
 
-#include <boost/noncopyable.hpp> 
-
-#include "System/Helper/PragmaWarning/ExecutorWorkGuard.h"
+#include <boost/noncopyable.hpp>
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE ExecutorWorkGuardContext : private boost::noncopyable
-	{
-	public:
-		using ClassType = ExecutorWorkGuardContext;
+    class NETWORK_HIDDEN_DECLARE ExecutorWorkGuardContext : private boost::noncopyable
+    {
+    public:
+        using ClassType = ExecutorWorkGuardContext;
 
-	public:
-		ExecutorWorkGuardContext();
+    public:
+        ExecutorWorkGuardContext();
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-	public:
-		void Run();
+    public:
+        void Run();
 
-		IOContextType& GetIOContext() noexcept;
-		void PostStopContext();
-		void DispatchStopContext();
-		bool IsContextStop() const;
-		void RestartContext();
+        [[nodiscard]] IOContextType& GetIOContext() noexcept;
+        void PostStopContext();
+        void DispatchStopContext();
+        [[nodiscard]] bool IsContextStop() const;
+        void RestartContext();
 
-	private:
-		using ExecutorWorkGuard = boost::asio::executor_work_guard<IOContextType::executor_type>;
+    private:
+        using ExecutorWorkGuard = boost::asio::executor_work_guard<IOContextType::executor_type>;
 
-	private:
-		IOContextType m_IOContext;
-		ExecutorWorkGuard m_Work;
-	};
+    private:
+        IOContextType m_IOContext;
+        ExecutorWorkGuard m_Work;
+    };
 }
 
-#endif // NETWORK_BOOST_WRAPPERS_EXECUTOR_WORK_GUARD_CONTEXT_H
+#endif  // NETWORK_BOOST_WRAPPERS_EXECUTOR_WORK_GUARD_CONTEXT_H

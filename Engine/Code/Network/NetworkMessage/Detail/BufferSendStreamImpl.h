@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 14:20)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 20:34)
 
 #ifndef NETWORK_NETWORK_MESSAGE_BUFFER_SEND_STREAM_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_BUFFER_SEND_STREAM_IMPL_H
@@ -10,33 +13,32 @@
 #include "Network/NetworkDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
 #include "Network/NetworkMessage/SendMessageLevel.h"
-#include "Network/NetworkMessage/NetworkMessageInternalFwd.h" 
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE BufferSendStreamImpl
-	{
-	public:
-		using ClassType = BufferSendStreamImpl;
+    class NETWORK_HIDDEN_DECLARE BufferSendStreamImpl final
+    {
+    public:
+        using ClassType = BufferSendStreamImpl;
 
-	public:
-		BufferSendStreamImpl(int bytesTotal, ParserStrategy parserStrategy);
+    public:
+        BufferSendStreamImpl(int bytesTotal, ParserStrategy parserStrategy);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool Insert(const MessageInterfaceSharedPtr& message);
-		void Save(const MessageBufferSharedPtr& messageBuffer);
-		void Clear();
+        [[nodiscard]] bool Insert(const MessageInterfaceSharedPtr& message);
+        void Save(const MessageBufferSharedPtr& messageBuffer);
+        void Clear();
 
-		bool IsEmpty() const noexcept;
-		int GetCurrentSize() const;
+        [[nodiscard]] bool IsEmpty() const noexcept;
+        [[nodiscard]] int GetCurrentSize() const;
 
-	private:
-		SendMessageLevel m_TopLevel;
-		ParserStrategy m_ParserStrategy;
-	};
+    private:
+        SendMessageLevel m_TopLevel;
+        ParserStrategy m_ParserStrategy;
+    };
 }
 
-#endif // NETWORK_NETWORK_MESSAGE_BUFFER_SEND_STREAM_IMPL_H
+#endif  // NETWORK_NETWORK_MESSAGE_BUFFER_SEND_STREAM_IMPL_H

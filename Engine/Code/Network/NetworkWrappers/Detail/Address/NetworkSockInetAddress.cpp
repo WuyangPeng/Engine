@@ -1,105 +1,97 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 16:31)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 19:10)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "NetworkSockInetAddress.h"
-#include "System/Network/SocketPrototypes.h"
-#include "System/Network/Flags/SocketPrototypesFlags.h"
-#include "System/MemoryTools/MemoryHelperDetail.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/MemoryTools/MemoryHelperDetail.h"
+#include "System/Network/Flags/SocketPrototypesFlags.h"
+#include "System/Network/SocketPrototypes.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
+using std::make_shared;
 using std::string;
 using std::to_string;
-using std::make_shared;
-#include "System/Helper/PragmaWarning/NumericCast.h"
+using namespace std::literals;
+
+Network::NetworkSockInetAddress::NetworkSockInetAddress(const string& hostName, int port)
+    : m_InetAddress{}, m_AddressName{ hostName }
+{
+    System::FillMemoryToZero(m_InetAddress);
+
+    m_InetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
+    m_InetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
+    m_InetAddress.sin_addr.s_addr = System::GetInetAddr(hostName.c_str());
+
+    NETWORK_SELF_CLASS_IS_VALID_9;
+}
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Network::NetworkSockInetAddress
-	::NetworkSockInetAddress(const string& hostName, int port)
-	:m_InetAddress{}, m_AddressName{ hostName }
+Network::NetworkSockInetAddress::NetworkSockInetAddress()
+    : m_InetAddress{}, m_AddressName{ "0.0.0.0" }
 {
-	System::FillMemoryToZero(m_InetAddress);
+    m_InetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
+    m_InetAddress.sin_port = System::GetHostToNetShort(0);
+    m_InetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::g_InAddrAny);
 
-	m_InetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
-	m_InetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
-	m_InetAddress.sin_addr.s_addr = System::GetInetAddr(hostName.c_str());
-
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Network::NetworkSockInetAddress
-	::NetworkSockInetAddress()
-	:m_InetAddress{}, m_AddressName{ "0.0.0.0" }
-{
-	System::FillMemoryToZero(m_InetAddress);
-
-	m_InetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
-	m_InetAddress.sin_port = System::GetHostToNetShort(0);
-	m_InetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::g_InAddrAny);
-
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 #include STSTEM_WARNING_POP
-Network::NetworkSockInetAddress
-	::NetworkSockInetAddress(int port)
-	:m_InetAddress{}, m_AddressName{ "0.0.0.0" }
+
+Network::NetworkSockInetAddress::NetworkSockInetAddress(int port)
+    : m_InetAddress{}, m_AddressName{ "0.0.0.0" }
 {
-	System::FillMemoryToZero(m_InetAddress);
+    System::FillMemoryToZero(m_InetAddress);
 
-	m_InetAddress.sin_family = boost::numeric_cast<int16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
-	m_InetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
-	m_InetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::g_InAddrAny);
+    m_InetAddress.sin_family = boost::numeric_cast<int16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
+    m_InetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
+    m_InetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::g_InAddrAny);
 
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
-
- 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkSockInetAddress)
 
-const Network::WinSockInetAddressType& Network::NetworkSockInetAddress
-	::GetWinSockInetAddress() const noexcept
+const Network::WinSockInetAddressType& Network::NetworkSockInetAddress::GetWinSockInetAddress() const noexcept
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_InetAddress;
+    return m_InetAddress;
 }
 
-Network::WinSockInetAddressType& Network::NetworkSockInetAddress
-	::GetWinSockInetAddress()
+Network::WinSockInetAddressType& Network::NetworkSockInetAddress::GetWinSockInetAddress()
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	return ParentType::GetWinSockInetAddress();
+    return ParentType::GetWinSockInetAddress();
 }
 
-const Network::NetworkSockInetAddress::SockAddressPtr Network::NetworkSockInetAddress
-	::Clone() const
+const Network::NetworkSockInetAddress::SockAddressPtr Network::NetworkSockInetAddress::Clone() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return make_shared<ClassType>(*this);
+    return make_shared<ClassType>(*this);
 }
 
-const std::string Network::NetworkSockInetAddress
-	::GetAddress() const
+const string Network::NetworkSockInetAddress::GetAddress() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_AddressName + ":" + to_string(GetPort());
+    return m_AddressName + ":"s + to_string(GetPort());
 }
 
-int Network::NetworkSockInetAddress
-	::GetPort() const
+int Network::NetworkSockInetAddress::GetPort() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return System::GetNetToHostShort(boost::numeric_cast<uint16_t>(m_InetAddress.sin_port));
+    return System::GetNetToHostShort(boost::numeric_cast<uint16_t>(m_InetAddress.sin_port));
 }

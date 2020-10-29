@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 15:45)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 16:24)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_INET_ADDRESS_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_INET_ADDRESS_H
@@ -23,7 +26,7 @@ namespace Network
         BoostSockInetAddress() noexcept;
         explicit BoostSockInetAddress(int port);
         BoostSockInetAddress(const std::string& hostName, int port);
-        ~BoostSockInetAddress();
+        ~BoostSockInetAddress() noexcept = default;
 
         BoostSockInetAddress(const BoostSockInetAddress& rhs) noexcept;
         BoostSockInetAddress& operator=(const BoostSockInetAddress& rhs) noexcept;
@@ -32,13 +35,13 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        const BoostInetAddressType& GetBoostInetAddress() const noexcept override;
-        BoostInetAddressType& GetBoostInetAddress() override;
+        [[nodiscard]] const BoostInetAddressType& GetBoostInetAddress() const noexcept override;
+        [[nodiscard]] BoostInetAddressType& GetBoostInetAddress() override;
 
-        const SockAddressPtr Clone() const override;
+        [[nodiscard]] const SockAddressPtr Clone() const override;
 
-        const std::string GetAddress() const override;
-        int GetPort() const noexcept override;
+        [[nodiscard]] const std::string GetAddress() const override;
+        [[nodiscard]] int GetPort() const noexcept override;
 
     private:
         BoostInetAddressType m_Endpoint;

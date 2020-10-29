@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:11)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:12)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SERVER_FACTORY_H
 #define NETWORK_NETWORK_INTERFACE_SERVER_FACTORY_H
@@ -16,7 +19,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE ServerFactory
+    class NETWORK_HIDDEN_DECLARE ServerFactory final
     {
     public:
         using ClassType = ServerFactory;
@@ -28,7 +31,7 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        static const ImplTypePtr Create(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
+        [[nodiscard]] static const ImplTypePtr Create(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
     };
 }
 

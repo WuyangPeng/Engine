@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:24)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 9:47)
 
 #ifndef DATABASE_SQL_INTERFACE_DATABASE_OBJECT_IMPL_H
 #define DATABASE_SQL_INTERFACE_DATABASE_OBJECT_IMPL_H
@@ -23,17 +26,17 @@ namespace Database
 
     public:
         explicit DatabaseObjectImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
-        virtual ~DatabaseObjectImpl() = 0;
-        DatabaseObjectImpl(const DatabaseObjectImpl&) = default;
-        DatabaseObjectImpl& operator=(const DatabaseObjectImpl&) = default;
-        DatabaseObjectImpl(DatabaseObjectImpl&&) = default;
-        DatabaseObjectImpl& operator=(DatabaseObjectImpl&&) = default;
+        virtual ~DatabaseObjectImpl() noexcept = 0;
+        DatabaseObjectImpl(const DatabaseObjectImpl& rhs) = default;
+        DatabaseObjectImpl& operator=(const DatabaseObjectImpl& rhs) = default;
+        DatabaseObjectImpl(DatabaseObjectImpl&& rhs) noexcept = default;
+        DatabaseObjectImpl& operator=(DatabaseObjectImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
     public:
-        ConfigurationStrategy GetConfigurationStrategy() const noexcept;
-        virtual MysqlxSessionPtr GetMysqlxSessionPtr();
+        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        [[nodiscard]] virtual MysqlxSessionPtr GetMysqlxSessionPtr();
 
     private:
         ConfigurationStrategy m_ConfigurationStrategy;

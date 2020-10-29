@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 15:33)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 16:22)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
@@ -23,7 +26,7 @@ namespace Network
         // hostName默认为"0.0.0.0"。
         explicit BoostSockAcceptor(int port);
         BoostSockAcceptor(const std::string& hostName, int port);
-        ~BoostSockAcceptor();
+        ~BoostSockAcceptor() noexcept = default;
 
         BoostSockAcceptor(const BoostSockAcceptor& rhs) = delete;
         BoostSockAcceptor& operator=(const BoostSockAcceptor& rhs) = delete;
@@ -33,19 +36,19 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        bool Accept(const SockStreamSharedPtr& sockStream) override;
-        bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream) override;
+        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
         // 异步回调来自另一个线程，需要对事件管理进行加锁处理。
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-        BoostHandleType GetBoostHandle() override;
+        [[nodiscard]] BoostHandleType GetBoostHandle() override;
 
-        bool EnableNonBlock() override;
+        [[nodiscard]] bool EnableNonBlock() override;
 
-        const std::string GetAddress() const override;
-        int GetPort() const override;
+        [[nodiscard]] const std::string GetAddress() const override;
+        [[nodiscard]] int GetPort() const override;
 
     private:
         using AcceptorType = boost::asio::ip::tcp::acceptor;

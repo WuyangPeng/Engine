@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:26)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 9:50)
 
 #ifndef DATABASE_SQL_INTERFACE_RESULT_DOC_ROW_IMPL_H
 #define DATABASE_SQL_INTERFACE_RESULT_DOC_ROW_IMPL_H
@@ -23,26 +26,26 @@ namespace Database
 
     public:
         explicit ResultRowImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
-        virtual ~ResultRowImpl();
-        ResultRowImpl(const ResultRowImpl&) = default;
-        ResultRowImpl& operator=(const ResultRowImpl&) = default;
-        ResultRowImpl(ResultRowImpl&&) = default;
-        ResultRowImpl& operator=(ResultRowImpl&&) = default;
+        virtual ~ResultRowImpl() noexcept = default;
+        ResultRowImpl(const ResultRowImpl& rhs) = default;
+        ResultRowImpl& operator=(const ResultRowImpl& rhs) = default;
+        ResultRowImpl(ResultRowImpl&& rhs) noexcept = default;
+        ResultRowImpl& operator=(ResultRowImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         virtual void Print(std::ostream& os) const;
 
-        virtual int GetIntValue(int pos) const;
-        virtual uint32_t GetUIntValue(int pos) const;
-        virtual int64_t GetInt64Value(int pos) const;
-        virtual uint64_t GetUInt64Value(int pos) const;
-        virtual float GetFloatValue(int pos) const;
-        virtual double GetDoubleValue(int pos) const;
-        virtual bool GetBoolValue(int pos) const;
-        virtual std::string GetStringValue(int pos) const;
-        virtual std::wstring GetWStringValue(int pos) const;
-        virtual int GetColCount() const;
+        [[nodiscard]] virtual int GetIntValue(int pos) const;
+        [[nodiscard]] virtual uint32_t GetUIntValue(int pos) const;
+        [[nodiscard]] virtual int64_t GetInt64Value(int pos) const;
+        [[nodiscard]] virtual uint64_t GetUInt64Value(int pos) const;
+        [[nodiscard]] virtual float GetFloatValue(int pos) const;
+        [[nodiscard]] virtual double GetDoubleValue(int pos) const;
+        [[nodiscard]] virtual bool GetBoolValue(int pos) const;
+        [[nodiscard]] virtual std::string GetStringValue(int pos) const;
+        [[nodiscard]] virtual std::wstring GetWStringValue(int pos) const;
+        [[nodiscard]] virtual int GetColCount() const;
 
     public:
         ConfigurationStrategy m_ConfigurationStrategy;

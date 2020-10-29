@@ -1,13 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/09 19:18)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 18:39)
 
 #ifndef NETWORK_NETWORK_HELPER_H
 #define NETWORK_NETWORK_HELPER_H
- 
-#include "UserMacro.h" 
-#include "StreamMacro.h"
 
-#endif // NETWORK_NETWORK_HELPER_H
+#include "StreamMacro.h"
+#include "UserMacro.h"
+
+#endif  // NETWORK_NETWORK_HELPER_H

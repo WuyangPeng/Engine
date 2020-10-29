@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 09:56)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 15:31)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
 #define NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
@@ -17,36 +20,36 @@
 
 namespace Network
 {
-	struct NETWORK_HIDDEN_DECLARE BufferSendStreamMultiIndexContainer
-	{
-	public:
-		using ClassType = BufferSendStreamMultiIndexContainer;
-		using BufferSendStreamContainerSharedPtr = std::shared_ptr<BufferSendStreamContainer>;
-		using BufferSendStreamContainerWeakPtr = std::weak_ptr<BufferSendStreamContainer>;
-		using SocketIDContainer = std::map<uint64_t, BufferSendStreamContainerSharedPtr>;
-		using SocketIDContainerConstIter = SocketIDContainer::const_iterator;
+    class NETWORK_HIDDEN_DECLARE BufferSendStreamMultiIndexContainer final
+    {
+    public:
+        using ClassType = BufferSendStreamMultiIndexContainer;
+        using BufferSendStreamContainerSharedPtr = std::shared_ptr<BufferSendStreamContainer>;
+        using BufferSendStreamContainerWeakPtr = std::weak_ptr<BufferSendStreamContainer>;
+        using SocketIDContainer = std::map<uint64_t, BufferSendStreamContainerSharedPtr>;
+        using SocketIDContainerConstIter = SocketIDContainer::const_iterator;
 
-	public:
-		BufferSendStreamMultiIndexContainer() noexcept;
+    public:
+        BufferSendStreamMultiIndexContainer() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void Insert(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy);
+        void Insert(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy);
 
-		BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerPtrBySocketID(uint64_t socketID);
-		BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerPtrByHandle(ACEHandle handle);
+        [[nodiscard]] BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerBySocketID(uint64_t socketID);
+        [[nodiscard]] BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerByHandle(ACEHandle handle);
 
-		void Erase(uint64_t socketID);
-		SocketIDContainerConstIter begin() const noexcept;
-		SocketIDContainerConstIter end() const noexcept;
+        void Erase(uint64_t socketID);
+        [[nodiscard]] SocketIDContainerConstIter begin() const noexcept;
+        [[nodiscard]] SocketIDContainerConstIter end() const noexcept;
 
-	private:
-		using HandleIDContainer = std::map<ACEHandle, BufferSendStreamContainerWeakPtr>;
+    private:
+        using HandleIDContainer = std::map<ACEHandle, BufferSendStreamContainerWeakPtr>;
 
-	private:
-		SocketIDContainer m_SocketIDContainer;
-		HandleIDContainer m_HandleIDContainer;
-	};
+    private:
+        SocketIDContainer m_SocketIDContainer;
+        HandleIDContainer m_HandleIDContainer;
+    };
 }
 
-#endif // NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
+#endif  // NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H

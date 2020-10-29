@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 09:58)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:23)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SEND_SOCKET_H
 #define NETWORK_NETWORK_INTERFACE_SEND_SOCKET_H
@@ -14,13 +17,9 @@
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/NetworkMessage/MessageInterface.h"
 
-#include <boost/noncopyable.hpp>
-
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
-
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE SendSocket : private boost::noncopyable
+    class NETWORK_DEFAULT_DECLARE SendSocket
     {
     public:
         using ClassType = SendSocket;
@@ -28,11 +27,11 @@ namespace Network
 
     public:
         SendSocket() noexcept;
-        virtual ~SendSocket();
-        SendSocket(const SendSocket&) = delete;
-        SendSocket& operator=(const SendSocket&) = delete;
-        SendSocket(SendSocket&&) noexcept = delete;
-        SendSocket& operator=(SendSocket&&) noexcept = delete;
+        virtual ~SendSocket() noexcept = default;
+        SendSocket(const SendSocket& rhs) = delete;
+        SendSocket& operator=(const SendSocket& rhs) = delete;
+        SendSocket(SendSocket&& rhs) noexcept = delete;
+        SendSocket& operator=(SendSocket&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

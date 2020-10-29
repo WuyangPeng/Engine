@@ -46,5 +46,10 @@ Andrei Alexandrescu、Richard Sposato、Peter Kuemmel
 
 要点
 
-LevelMutex
-	★	
+
+library
+	AbstractFactory.h
+	Allocator.h
+	AssocVector.h
+	CachedFactory.h
+	Checker.h

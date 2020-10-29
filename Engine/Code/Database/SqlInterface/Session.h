@@ -1,20 +1,23 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/16 11:31)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 10:02)
 
 #ifndef DATABASE_SQL_INTERFACE_SESSION_H
 #define DATABASE_SQL_INTERFACE_SESSION_H
 
 #include "Database/DatabaseDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"  
+#include "CoreTools/Helper/ExportMacro.h"
 
+#include "Result.h"
 #include "Schema.h"
-#include "Result.h" 
-#include "Database/SqlInterface/SqlInterfaceFwd.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
+#include "Database/SqlInterface/SqlInterfaceFwd.h"
 
 #include <boost/noncopyable.hpp>
 
@@ -22,42 +25,42 @@ DATABASE_EXPORT_SHARED_PTR(SessionImpl);
 
 namespace Database
 {
-	class DATABASE_DEFAULT_DECLARE Session : private boost::noncopyable
-	{
-	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(Session);
-		using SchemaPtr = std::unique_ptr<Schema>;
-		using SchemaContainer = std::vector<SchemaPtr>;
-		using ResultPtr = std::shared_ptr<Result>;
+    class DATABASE_DEFAULT_DECLARE Session final : private boost::noncopyable
+    {
+    public:
+        NON_COPY_CLASSES_TYPE_DECLARE(Session);
+        using SchemaPtr = std::unique_ptr<Schema>;
+        using SchemaContainer = std::vector<SchemaPtr>;
+        using ResultPtr = std::shared_ptr<Result>;
 
-	public:
-		explicit Session(const ConfigurationStrategy& configurationStrategy);
-		explicit Session(const DatabaseObject& databaseObject);
+    public:
+        explicit Session(const ConfigurationStrategy& configurationStrategy);
+        explicit Session(const DatabaseObject& databaseObject);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
-		SchemaContainer GetSchemaContainer();
+        [[nodiscard]] SchemaContainer GetSchemaContainer();
 
-		ResultPtr ExecuteResult(const std::string& findStatement, int bindStatement);
-		ResultPtr ExecuteResult(const std::string& findStatement, const std::string& bindStatement);
-		ResultPtr ExecuteResult(const std::string& findStatement);
-		void Execute(const std::string& findStatement, int bindStatement);
-		void Execute(const std::string& findStatement, const std::string& bindStatement);
-		void Execute(const std::string& findStatement);
+        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement, int bindStatement);
+        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement, const std::string& bindStatement);
+        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement);
+        void Execute(const std::string& findStatement, int bindStatement);
+        void Execute(const std::string& findStatement, const std::string& bindStatement);
+        void Execute(const std::string& findStatement);
 
-	private:
-		IMPL_TYPE_DECLARE(Session);
+    private:
+        IMPL_TYPE_DECLARE(Session);
 
-	#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
-	public:
-		using SessionWeakPtr = std::weak_ptr<ImplType>;
+#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+    public:
+        using SessionWeakPtr = std::weak_ptr<ImplType>;
 
-	public:
-		SessionWeakPtr GetImplType() const noexcept;
-	#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
-	};
+    public:
+        [[nodiscard]] SessionWeakPtr GetImplType() const noexcept;
+#endif  // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+    };
 }
 
-#endif // DATABASE_SQL_INTERFACE_SESSION_H
+#endif  // DATABASE_SQL_INTERFACE_SESSION_H

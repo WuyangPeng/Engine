@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:04)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:03)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
@@ -22,32 +25,32 @@ namespace Network
         using ImplTypePtr = std::shared_ptr<ClassType>;
 
     public:
-        HandleSetImpl() noexcept;
-        virtual ~HandleSetImpl();
+        HandleSetImpl() noexcept = default;
+        virtual ~HandleSetImpl() noexcept = default;
         HandleSetImpl(const HandleSetImpl&) = default;
         HandleSetImpl& operator=(const HandleSetImpl&) = default;
         HandleSetImpl(HandleSetImpl&&) noexcept = default;
         HandleSetImpl& operator=(HandleSetImpl&&) noexcept = default;
-        
+
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         virtual void SetBit(ACEHandle handle);
-        virtual int64_t GetMaxSet() const;
-        virtual SockFdSet* GetFdSet();
+        [[nodiscard]] virtual int64_t GetMaxSet() const;
+        [[nodiscard]] virtual SockFdSet* GetFdSet();
         virtual void Sync(ACEHandle maxHandle);
-        virtual bool IsSet(ACEHandle handle) const;
+        [[nodiscard]] virtual bool IsSet(ACEHandle handle) const;
         virtual void ClearBit(ACEHandle handle);
 
-        virtual ImplTypePtr Clone() const;
+        [[nodiscard]] virtual ImplTypePtr Clone() const;
 
-        virtual const ACEHandleSet& GetACEHandleSet() const;
+        [[nodiscard]] virtual const ACEHandleSet& GetACEHandleSet() const;
 
-        virtual bool IsFdSetFull() const;
-        virtual int IsFdSetCount() const;
+        [[nodiscard]] virtual bool IsFdSetFull() const;
+        [[nodiscard]] virtual int IsFdSetCount() const;
 
-        virtual bool Select(int width);
+        [[nodiscard]] virtual bool Select(int width);
 
-        bool IsFdSetCountIsOne() const;
+        [[nodiscard]] bool IsFdSetCountIsOne() const;
     };
 }
 

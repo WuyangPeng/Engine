@@ -1,5 +1,14 @@
 TODO Level 9
  
-0.0.2.4
+0.5.2.1 
 
- 1.  （综合）去掉网络库对系统库的依赖，将函数封装在核心工具库中。
+1.  （综合）去掉网络库对系统库的依赖，将函数封装在核心工具库中。
+2.  （综合）BufferSendStreamContainer、BufferSendStreamMultiIndexContainer目前只有ACE的实现，使用Impl惯用法进行封装，但不导出以减少复杂度。
+3.  （综合）SockConnector增加一个链接多个地址的接口。  
+4.  （综合）完成SockAcceptorImpl的其他子类。
+5.	（NetworkWrappers）完成Network基础主管理。
+6.	（NetworkWrappers）完成Network网络地址。
+7.	（NetworkWrappers）完成Network接受器。
+8.	（NetworkWrappers）完成Network连接器。
+9.	（NetworkWrappers）完成Network流。
+

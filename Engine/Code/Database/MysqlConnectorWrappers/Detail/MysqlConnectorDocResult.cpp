@@ -1,64 +1,62 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/16 12:49)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/29 13:43)
 
 #include "Database/DatabaseExport.h"
 
 #include "MysqlConnectorDocResult.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
 using std::make_shared;
 using std::make_unique;
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-Database::MysqlConnectorDocResult ::MysqlConnectorDocResult(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultPtr& mysqlxDocResult) noexcept
+Database::MysqlConnectorDocResult::MysqlConnectorDocResult(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultPtr& mysqlxDocResult) noexcept
     : ParentType{ configurationStrategy }, m_MysqlxDocResult{ mysqlxDocResult }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
- 
-
-#ifdef OPEN_CLASS_INVARIANT
-bool Database::MysqlConnectorDocResult
-	::IsValid() const noexcept
+    #ifdef OPEN_CLASS_INVARIANT
+bool Database::MysqlConnectorDocResult ::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_MysqlxDocResult)
-		return true;
-	else
-		return false;
+    if (ParentType::IsValid() && m_MysqlxDocResult)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+    #endif  // OPEN_CLASS_INVARIANT
 
-Database::ResultImpl::ResultRowPtr Database::MysqlConnectorDocResult
-	::FetchOne()
+Database::ResultImpl::ResultRowPtr Database::MysqlConnectorDocResult::FetchOne()
 {
-	DATABASE_CLASS_IS_VALID_1;
+    DATABASE_CLASS_IS_VALID_1;
 
-	auto result = m_MysqlxDocResult->fetchOne();
+    auto result = m_MysqlxDocResult->fetchOne();
 
-	return make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxDbDoc>(result));
+    return make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxDbDoc>(result));
 }
 
-Database::ResultImpl::ResultRowContainer Database::MysqlConnectorDocResult
-	::FetchAll()
+Database::ResultImpl::ResultRowContainer Database::MysqlConnectorDocResult::FetchAll()
 {
-	DATABASE_CLASS_IS_VALID_1;
+    DATABASE_CLASS_IS_VALID_1;
 
-	ResultRowContainer container;
+    ResultRowContainer container{};
 
-	auto result = m_MysqlxDocResult->fetchAll();
+    auto result = m_MysqlxDocResult->fetchAll();
 
-	for (const auto& value : result)
-	{
-		container.push_back(make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxDbDoc>(value)));
-	}
+    for (const auto& value : result)
+    {
+        container.emplace_back(make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxDbDoc>(value)));
+    }
 
-	return container;
+    return container;
 }
 
-#endif // DATABASE_USE_MYSQL_CPP_CONNECTOR
+#endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR

@@ -1,45 +1,45 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/16 12:35)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 10:43)
 
 #include "Database/DatabaseExport.h"
 
 #include "ResultRow.h"
 #include "Detail/ResultRowFactory.h"
 #include "Detail/ResultRowImpl.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h" 
 
 using std::ostream;
 using std::string;
 using std::wstring;
 
-Database::ResultRow
-	::ResultRow(const ConfigurationStrategy& configurationStrategy)
-	: m_Impl{ ResultRowFactory::Create(configurationStrategy) }
+Database::ResultRow::ResultRow(const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ ResultRowFactory::Create(configurationStrategy) }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
-Database::ResultRow
-	::ResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc)
-	: m_Impl{ ResultRowFactory::Create(configurationStrategy,mysqlxDbDoc) }
+Database::ResultRow::ResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc)
+    : m_Impl{ ResultRowFactory::Create(configurationStrategy, mysqlxDbDoc) }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::ResultRow
-	::ResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow)
-	: m_Impl{ ResultRowFactory::Create(configurationStrategy,mysqlxRow) }
+Database::ResultRow::ResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow)
+    : m_Impl{ ResultRowFactory::Create(configurationStrategy, mysqlxRow) }
 {
-	DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-#endif // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
+#endif  // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, ResultRow)
 
@@ -55,11 +55,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetStringValue, int, 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetWStringValue, int, wstring)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ResultRow, GetColCount, int)
 
-ostream& Database
-	::operator<<(ostream& out, const ResultRow& docResultRow)
+ostream& Database::operator<<(ostream& out, const ResultRow& docResultRow)
 {
-	docResultRow.Print(out);
+    docResultRow.Print(out);
 
-	return out;
+    return out;
 }
-

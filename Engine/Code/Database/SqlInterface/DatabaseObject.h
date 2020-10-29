@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:29)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 10:01)
 
 #ifndef DATABASE_SQL_INTERFACE_DATABASE_OBJECT_H
 #define DATABASE_SQL_INTERFACE_DATABASE_OBJECT_H
@@ -17,7 +20,7 @@ EXPORT_NONCOPYABLE_CLASS(DATABASE);
 
 namespace Database
 {
-    class DATABASE_DEFAULT_DECLARE DatabaseObject : private boost::noncopyable
+    class DATABASE_DEFAULT_DECLARE DatabaseObject final : private boost::noncopyable
     {
     public:
         NON_COPY_CLASSES_TYPE_DECLARE(DatabaseObject);
@@ -27,7 +30,7 @@ namespace Database
 
         CLASS_INVARIANT_DECLARE;
 
-        ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
     private:
         IMPL_TYPE_DECLARE(DatabaseObject);
@@ -37,7 +40,7 @@ namespace Database
         using DatabaseObjectWeakPtr = std::weak_ptr<ImplType>;
 
     public:
-        DatabaseObjectWeakPtr GetImplType() const noexcept;
+        [[nodiscard]] DatabaseObjectWeakPtr GetImplType() const noexcept;
 #endif  // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
     };
 }

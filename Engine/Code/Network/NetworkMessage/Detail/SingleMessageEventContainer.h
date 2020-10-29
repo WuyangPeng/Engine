@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 14:27)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 20:44)
 
 #ifndef NETWORK_NETWORK_MESSAGE_SINGLE_MESSAGE_EVENT_CONTAINER_H
 #define NETWORK_NETWORK_MESSAGE_SINGLE_MESSAGE_EVENT_CONTAINER_H
@@ -13,39 +16,33 @@
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE SingleMessageEventContainer : public MessageEventContainerImpl
-	{
-	public:
-		using ClassType = SingleMessageEventContainer;
-		using ParentType = MessageEventContainerImpl;
+    class NETWORK_HIDDEN_DECLARE SingleMessageEventContainer final : public MessageEventContainerImpl
+    {
+    public:
+        using ClassType = SingleMessageEventContainer;
+        using ParentType = MessageEventContainerImpl;
 
-	public:
-		SingleMessageEventContainer() noexcept;
-		  ~SingleMessageEventContainer();
+    public:
+        SingleMessageEventContainer() noexcept; 
 
-		SingleMessageEventContainer(const SingleMessageEventContainer& rhs) noexcept;
-		SingleMessageEventContainer& operator=(const SingleMessageEventContainer& rhs) noexcept;
-		SingleMessageEventContainer(SingleMessageEventContainer&& rhs) noexcept;
-		SingleMessageEventContainer& operator=(SingleMessageEventContainer&& rhs) noexcept;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        void Insert(const NetworkMessageEventSharedPtr& messageEvent) final;
+        void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority) final;
+        void Remove(const NetworkMessageEventSharedPtr& messageEvent) final;
 
-		 void Insert(const NetworkMessageEventSharedPtr& messageEvent) override;
-		 void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority) override;
-		 void Remove(const NetworkMessageEventSharedPtr& messageEvent) override;
+        void OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) final;
 
-		 void OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) override;
+        [[nodiscard]] ImplPtr Clone() const final;
+        [[nodiscard]] ImplPtr CloneToMultiMessage() const final;
+        [[nodiscard]] ImplPtr CloneToPriorityMessage() const final;
 
-		 ImplPtr Clone() const override;
-		 ImplPtr CloneToMultiMessage() const override;
-		 ImplPtr CloneToPriorityMessage() const override;
+        [[nodiscard]] bool IsCanInsert() const noexcept final;
+        [[nodiscard]] bool IsPrioritySame(MessageEventPriority priority) const noexcept final;
 
-		 bool IsCanInsert() const noexcept override;
-		 bool IsPrioritySame(MessageEventPriority priority) const noexcept override;
-
-	private:
-		NetworkMessageEventWeakPtr m_MessageEvent;
-	};
+    private:
+        NetworkMessageEventWeakPtr m_MessageEvent;
+    };
 }
 
-#endif // NETWORK_NETWORK_MESSAGE_SINGLE_MESSAGE_EVENT_CONTAINER_H
+#endif  // NETWORK_NETWORK_MESSAGE_SINGLE_MESSAGE_EVENT_CONTAINER_H

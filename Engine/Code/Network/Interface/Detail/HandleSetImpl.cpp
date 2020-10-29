@@ -1,141 +1,113 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 11:09)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 11:22)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "HandleSetImpl.h"
-
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"  
 #include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 using std::make_shared;
 
-Network::HandleSetImpl
-	::HandleSetImpl() noexcept
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Network::HandleSetImpl
-	::~HandleSetImpl()
-{
-	NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
 CLASS_INVARIANT_STUB_DEFINE(Network, HandleSetImpl)
 
-void Network::HandleSetImpl ::SetBit([[maybe_unused]] ACEHandle handle)
+void Network::HandleSetImpl::SetBit([[maybe_unused]] ACEHandle handle)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	 
-
-	CoreTools::DisableNoexcept();
+    CoreTools::DisableNoexcept();
 }
 
-int64_t Network::HandleSetImpl
-	::GetMaxSet() const
+int64_t Network::HandleSetImpl::GetMaxSet() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	CoreTools::DisableNoexcept();
+    CoreTools::DisableNoexcept();
 
-	return 0;
+    return 0;
 }
 
-Network::SockFdSet* Network::HandleSetImpl
-	::GetFdSet()
+Network::SockFdSet* Network::HandleSetImpl::GetFdSet()
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("获取fdset失败！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("获取fdset失败！"s));
 }
 
-void Network::HandleSetImpl ::Sync([[maybe_unused]] ACEHandle maxHandle)
+void Network::HandleSetImpl::Sync([[maybe_unused]] ACEHandle maxHandle)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DisableNoexcept();
-
- 
+    CoreTools::DisableNoexcept();
 }
 
-bool Network::HandleSetImpl ::IsSet([[maybe_unused]] ACEHandle handle) const
+bool Network::HandleSetImpl::IsSet([[maybe_unused]] ACEHandle handle) const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	 
+    CoreTools::DisableNoexcept();
 
-	CoreTools::DisableNoexcept();
-
-	return false;
+    return false;
 }
 
-void Network::HandleSetImpl ::ClearBit([[maybe_unused]] ACEHandle handle)
+void Network::HandleSetImpl::ClearBit([[maybe_unused]] ACEHandle handle)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	CoreTools::DisableNoexcept();
-
-	 
+    CoreTools::DisableNoexcept();
 }
 
-Network::HandleSetImpl::ImplTypePtr Network::HandleSetImpl
-	::Clone() const
+Network::HandleSetImpl::ImplTypePtr Network::HandleSetImpl::Clone() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return make_shared<ClassType>(*this);
+    return make_shared<ClassType>(*this);
 }
 
-const Network::ACEHandleSet& Network::HandleSetImpl
-	::GetACEHandleSet() const
+const Network::ACEHandleSet& Network::HandleSetImpl::GetACEHandleSet() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	THROW_EXCEPTION(SYSTEM_TEXT("获取ACEHandleSet失败！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("获取ACEHandleSet失败！"s));
 }
 
-bool Network::HandleSetImpl
-	::IsFdSetFull() const
+bool Network::HandleSetImpl::IsFdSetFull() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	CoreTools::DisableNoexcept();
+    CoreTools::DisableNoexcept();
 
-	return true;
+    return true;
 }
 
-int Network::HandleSetImpl
-	::IsFdSetCount() const
+int Network::HandleSetImpl::IsFdSetCount() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	CoreTools::DisableNoexcept();
+    CoreTools::DisableNoexcept();
 
-	return 0;
+    return 0;
 }
 
-bool Network::HandleSetImpl ::Select([[maybe_unused]] int width)
+bool Network::HandleSetImpl::Select([[maybe_unused]] int width)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
- 
+    CoreTools::DisableNoexcept();
 
-	CoreTools::DisableNoexcept();
-
-	return false;
+    return false;
 }
 
-bool Network::HandleSetImpl
-	::IsFdSetCountIsOne() const
+bool Network::HandleSetImpl::IsFdSetCountIsOne() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return IsFdSetCount() == 1;
+    return IsFdSetCount() == 1;
 }
-

@@ -1,14 +1,12 @@
 TODO Level 3
  
-0.0.1.0
+0.5.2.1 
 
-1.  （综合）完成SockAcceptorImpl的其他子类。
-
-0.0.2.4
-
-1.  （NetworkMessage）完成消息接口。
-2.  （NetworkMessage）完成消息事件。
-3.  （NetworkMessage）完成消息类型。
-4.  （NetworkMessage）完成消息流。
-5.  （NetworkMessage）完成套接字管理。
-6.  （NetworkMessage）使用json来解析消息。 
+1.  （NetworkMessage）使用protobuf来解析消息。
+2.  （NetworkMessage）简单化消息类的设计。
+3.  （NetworkMessage）完成消息接口。
+4.  （NetworkMessage）完成消息事件。
+5.  （NetworkMessage）完成消息类型。
+6.  （NetworkMessage）完成消息流。
+7.  （NetworkMessage）完成套接字管理。
+8.  （NetworkMessage）使用json来解析消息。  

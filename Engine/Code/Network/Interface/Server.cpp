@@ -1,42 +1,40 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 10:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/28 13:11)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "Server.h"
-#include "Detail/ServerImpl.h"
 #include "Detail/ServerFactory.h"
+#include "Detail/ServerImpl.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
-Network::Server
-	::Server(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
-	:ParentType{}, m_Impl{ ServerFactory::Create(socketManager, configurationStrategy) }
+Network::Server::Server(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
+    : ParentType{}, m_Impl{ ServerFactory::Create(socketManager, configurationStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
- 
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, Server)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, Server, RunServer, bool)
 
-void Network::Server
-	::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::Server::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Send(socketID, message);
+    return m_Impl->Send(socketID, message);
 }
 
-void Network::Server
-	::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::Server::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->AsyncSend(socketID, message);
+    return m_Impl->AsyncSend(socketID, message);
 }
-

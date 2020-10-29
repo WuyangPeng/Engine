@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 09:57)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:22)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_H
@@ -17,7 +20,7 @@ NETWORK_EXPORT_SHARED_PTR(HandleSetImpl);
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE HandleSet
+    class NETWORK_DEFAULT_DECLARE HandleSet final
     {
     public:
         DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(HandleSet);
@@ -28,20 +31,20 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
         void SetBit(ACEHandle handle);
-        int64_t GetMaxSet() const;
-        SockFdSet* GetFdSet();
+        [[nodiscard]] int64_t GetMaxSet() const;
+        [[nodiscard]] SockFdSet* GetFdSet();
         void Sync(ACEHandle maxHandle);
-        bool IsSet(ACEHandle handle) const;
+        [[nodiscard]] bool IsSet(ACEHandle handle) const;
         void ClearBit(ACEHandle handle);
 
-        const ACEHandleSet& GetACEHandleSet() const;
+        [[nodiscard]] const ACEHandleSet& GetACEHandleSet() const;
 
-        bool IsFdSetFull() const;
-        int IsFdSetCount() const;
+        [[nodiscard]] bool IsFdSetFull() const;
+        [[nodiscard]] int IsFdSetCount() const;
 
-        bool IsFdSetCountIsOne() const;
+        [[nodiscard]] bool IsFdSetCountIsOne() const;
 
-        bool Select(int width);
+        [[nodiscard]] bool Select(int width);
 
     private:
         IMPL_TYPE_DECLARE(HandleSet);

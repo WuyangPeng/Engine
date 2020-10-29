@@ -1,4 +1,11 @@
 TODO Level 2
 
-0.0.2.5
- 
+0.5.2.1
+
+1.  （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块。
+2.  （MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的数据对象。
+3.	（MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的会话。
+4.	（MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的架构。
+5.	（MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的采集。
+6.	（MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的结果。
+7.	（MysqlConnectorWrappers）完成MysqlConnectorWrappers模块的表。 

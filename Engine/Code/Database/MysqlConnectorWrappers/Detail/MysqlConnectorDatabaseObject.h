@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 12:47)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 13:37)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_DATABASE_OBJECT_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_DATABASE_OBJECT_H
@@ -24,16 +27,16 @@ namespace Database
 
     public:
         explicit MysqlConnectorDatabaseObject(const ConfigurationStrategy& configurationStrategy);
-        ~MysqlConnectorDatabaseObject();
+        ~MysqlConnectorDatabaseObject() noexcept;
 
-        MysqlConnectorDatabaseObject(const MysqlConnectorDatabaseObject&) = default;
-        MysqlConnectorDatabaseObject& operator=(const MysqlConnectorDatabaseObject&) = default;
-        MysqlConnectorDatabaseObject(MysqlConnectorDatabaseObject&&) = default;
-        MysqlConnectorDatabaseObject& operator=(MysqlConnectorDatabaseObject&&) = default;
+        MysqlConnectorDatabaseObject(const MysqlConnectorDatabaseObject& rhs) = default;
+        MysqlConnectorDatabaseObject& operator=(const MysqlConnectorDatabaseObject& rhs) = default;
+        MysqlConnectorDatabaseObject(MysqlConnectorDatabaseObject&& rhs) noexcept = default;
+        MysqlConnectorDatabaseObject& operator=(MysqlConnectorDatabaseObject&& rhs) noexcept = default;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        MysqlxSessionPtr GetMysqlxSessionPtr() override;
+        [[nodiscard]] MysqlxSessionPtr GetMysqlxSessionPtr() override;
 
     private:
         using MysqlxClientPtr = std::unique_ptr<MysqlxClient>;

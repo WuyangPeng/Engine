@@ -1,51 +1,54 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 13:41)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 14:31)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
 #define NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
 
-#include "Network/NetworkDll.h" 
+#include "Network/NetworkDll.h"
 
 #ifdef NETWORK_USE_ACE
 
-#include "Network/Interface/Detail/HandleSetImpl.h"  
+    #include "Network/Interface/Detail/HandleSetImpl.h"
 
 namespace Network
 {
-	class NETWORK_HIDDEN_DECLARE SockACEHandleSet : public HandleSetImpl
-	{
-	public:
-		using ClassType = SockACEHandleSet;
-		using ParentType = HandleSetImpl;
+    class NETWORK_HIDDEN_DECLARE SockACEHandleSet : public HandleSetImpl
+    {
+    public:
+        using ClassType = SockACEHandleSet;
+        using ParentType = HandleSetImpl;
 
-	public:
-		SockACEHandleSet(); 
+    public:
+        SockACEHandleSet() noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void SetBit(ACEHandle handle) override;
-		int64_t GetMaxSet() const override;
-		SockFdSet* GetFdSet() override;
-		void Sync(ACEHandle maxHandle) override;
-		bool IsSet(ACEHandle handle) const override;
-		void ClearBit(ACEHandle handle) override;
-		bool IsFdSetFull() const override;
-		int IsFdSetCount() const override;
+        void SetBit(ACEHandle handle) override;
+        [[nodiscard]] int64_t GetMaxSet() const override;
+        [[nodiscard]] SockFdSet* GetFdSet() override;
+        void Sync(ACEHandle maxHandle) override;
+        [[nodiscard]] bool IsSet(ACEHandle handle) const override;
+        void ClearBit(ACEHandle handle) override;
+        [[nodiscard]] bool IsFdSetFull() const override;
+        [[nodiscard]] int IsFdSetCount() const override;
 
-		ImplTypePtr Clone() const override;
+        [[nodiscard]] ImplTypePtr Clone() const override;
 
-		const ACEHandleSet& GetACEHandleSet() const noexcept override;
+        [[nodiscard]] const ACEHandleSet& GetACEHandleSet() const noexcept override;
 
-		bool Select(int width) override;
+        [[nodiscard]] bool Select(int width) override;
 
-	private:
-		ACEHandleSet m_ACEHandleSet;
-	};
+    private:
+        ACEHandleSet m_ACEHandleSet;
+    };
 }
 
-#endif // NETWORK_USE_ACE
+#endif  // NETWORK_USE_ACE
 
-#endif // NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
+#endif  // NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H

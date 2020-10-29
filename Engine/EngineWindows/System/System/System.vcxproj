@@ -589,6 +589,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6001.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6255.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6258.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6262.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6320.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6330.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6385.h" />

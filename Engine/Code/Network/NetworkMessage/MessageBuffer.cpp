@@ -1,51 +1,48 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 16:33)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 13:59)
 
 #include "Network/NetworkExport.h"
 
 #include "MessageBuffer.h"
-#include "Detail/MessageBufferImpl.h" 
 #include "Detail/MessageBufferFactory.h"
+#include "Detail/MessageBufferImpl.h"
 #include "System/Helper/EnumCast.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+
 using std::make_shared;
 
 COPY_CONSTRUCTION_CLONE_DEFINE(Network, MessageBuffer)
 
-Network::MessageBuffer
-	::MessageBuffer(BuffBlockSize buffBlockSize, int count, ParserStrategy parserStrategy)
-	:m_Impl{ MessageBufferFactory::Create(buffBlockSize,count,parserStrategy) }
+Network::MessageBuffer::MessageBuffer(BuffBlockSize buffBlockSize, int count, ParserStrategy parserStrategy)
+    : m_Impl{ MessageBufferFactory::Create(buffBlockSize, count, parserStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::MessageBuffer
-	::MessageBuffer(const ImplTypeSharedPtr& messageBuffer) noexcept
-	:m_Impl{ messageBuffer }
+Network::MessageBuffer::MessageBuffer(const ImplTypeSharedPtr& messageBuffer) noexcept
+    : m_Impl{ messageBuffer }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::MessageBuffer
-	::MessageBuffer(BuffBlockSize buffBlockSize, ParserStrategy parserStrategy)
-	:m_Impl{ MessageBufferFactory::Create(buffBlockSize,0,parserStrategy) }
+Network::MessageBuffer::MessageBuffer(BuffBlockSize buffBlockSize, ParserStrategy parserStrategy)
+    : m_Impl{ MessageBufferFactory::Create(buffBlockSize, 0, parserStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::MessageBuffer
-	::MessageBuffer(int count, ParserStrategy parserStrategy)
-	:m_Impl{ MessageBufferFactory::Create(System::UnderlyingCastEnum<BuffBlockSize>(count),count,parserStrategy) }
+Network::MessageBuffer::MessageBuffer(int count, ParserStrategy parserStrategy)
+    : m_Impl{ MessageBufferFactory::Create(System::UnderlyingCastEnum<BuffBlockSize>(count), count, parserStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageBuffer)
@@ -83,59 +80,51 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, IsMessageReceiveEnd,
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, CheckingMessageHeadSize, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, CheckingMessageContentSize, void)
 
-void Network::MessageBuffer
-	::Read(int itemSize, void* data)
+void Network::MessageBuffer::Read(int itemSize, void* data)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Read(itemSize, data);
+    return m_Impl->Read(itemSize, data);
 }
 
-void Network::MessageBuffer
-	::Read(int itemSize, int itemsNumber, void* data)
+void Network::MessageBuffer::Read(int itemSize, int itemsNumber, void* data)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Read(itemSize, itemsNumber, data);
+    return m_Impl->Read(itemSize, itemsNumber, data);
 }
 
-void Network::MessageBuffer
-	::Write(int itemSize, const void* data)
+void Network::MessageBuffer::Write(int itemSize, const void* data)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Write(itemSize, data);
+    return m_Impl->Write(itemSize, data);
 }
 
-void Network::MessageBuffer
-	::Write(int itemSize, int itemsNumber, const void* data)
+void Network::MessageBuffer::Write(int itemSize, int itemsNumber, const void* data)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Write(itemSize, itemsNumber, data);
+    return m_Impl->Write(itemSize, itemsNumber, data);
 }
 
-void Network::MessageBuffer
-	::PushBack(const ConstMessageBufferSharedPtr& messageBuffer)
+void Network::MessageBuffer::PushBack(const MessageBuffer& messageBuffer)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->PushBack(messageBuffer->m_Impl);
+    return m_Impl->PushBack(messageBuffer.m_Impl);
 }
 
-Network::MessageBuffer::MessageBufferSharedPtr Network::MessageBuffer
-	::Expansion(int count) const
+Network::MessageBuffer::MessageBufferSharedPtr Network::MessageBuffer::Expansion(int count) const
 {
-	NETWORK_CLASS_IS_VALID_CONST_1;
+    NETWORK_CLASS_IS_VALID_CONST_1;
 
-	return make_shared<MessageBuffer>(m_Impl->Expansion(count));
+    return make_shared<MessageBuffer>(m_Impl->Expansion(count));
 }
 
-Network::MessageBuffer::MessageBufferSharedPtr Network::MessageBuffer
-	::Clone() const
+Network::MessageBuffer::MessageBufferSharedPtr Network::MessageBuffer::Clone() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_1;
+    NETWORK_CLASS_IS_VALID_CONST_1;
 
-	return make_shared<MessageBuffer>(m_Impl->Clone());
+    return make_shared<MessageBuffer>(m_Impl->Clone());
 }
-#include STSTEM_WARNING_POP

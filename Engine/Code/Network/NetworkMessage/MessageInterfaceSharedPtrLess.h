@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 14:30)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 10:02)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_SHARED_PTR_LESS_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_SHARED_PTR_LESS_H
@@ -13,14 +16,14 @@
 
 namespace Network
 {
-	class NETWORK_DEFAULT_DECLARE MessageInterfaceSharedPtrLess
-	{
-	public:
-		using ClassType = MessageInterfaceSharedPtrLess;
+    class NETWORK_DEFAULT_DECLARE MessageInterfaceSharedPtrLess final
+    {
+    public:
+        using ClassType = MessageInterfaceSharedPtrLess;
 
-	public:
-		bool operator()(const ConstMessageInterfaceSharedPtr& lhs, const ConstMessageInterfaceSharedPtr& rhs);
-	};
+    public:
+        [[nodiscard]] bool operator()(const ConstMessageInterfaceSharedPtr& lhs, const ConstMessageInterfaceSharedPtr& rhs) const;
+    };
 }
 
-#endif // NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_SHARED_PTR_LESS_H
+#endif  // NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_SHARED_PTR_LESS_H

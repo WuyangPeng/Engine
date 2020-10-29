@@ -1,13 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 11:24)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 11:57)
 
 #include "Network/NetworkExport.h"
 
 #include "ReactiveServer.h"
-
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Network/SocketPrototypes.h"
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
@@ -19,18 +22,11 @@
 #include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/SocketManager.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <vector>
 
 using std::make_pair;
 using std::make_shared;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26486)
 
 Network::ReactiveServer::ReactiveServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
     : ParentType{ socketManager, configurationStrategy },
@@ -47,7 +43,7 @@ Network::ReactiveServer::ReactiveServer(const SocketManagerSharedPtr& socketMana
 }
 
 // private
-void Network::ReactiveServer ::Init()
+void Network::ReactiveServer::Init()
 {
     if (!m_SockAcceptor.EnableNonBlock())
     {
@@ -55,27 +51,29 @@ void Network::ReactiveServer ::Init()
     }
 }
 
-Network::ReactiveServer ::~ReactiveServer()
+Network::ReactiveServer::~ReactiveServer() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 
     EXCEPTION_TRY
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
         for (const auto& stream : m_BufferSendStream)
         {
             m_SockStream->SetACEHandle(stream.second->GetACEHandle());
-            m_SockStream->CloseHandle();
+            if (!m_SockStream->CloseHandle())
+            {
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                    << SYSTEM_TEXT("关闭句柄失败。")
+                    << LOG_SINGLETON_TRIGGER_ASSERT;
+            }
         }
-#include STSTEM_WARNING_POP
     }
     EXCEPTION_ALL_CATCH(Network)
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ReactiveServer)
 
-bool Network::ReactiveServer ::WaitForMultipleEvents()
+bool Network::ReactiveServer::WaitForMultipleEvents()
 {
     m_ActiveHandles = m_MasterHandleSet.GetCurrentHandleSet();
 
@@ -85,12 +83,20 @@ bool Network::ReactiveServer ::WaitForMultipleEvents()
         return false;
     }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
     m_ActiveHandles.Sync(reinterpret_cast<ACEHandle>(m_ActiveHandles.GetMaxSet() + 1));
+
+#include STSTEM_WARNING_POP
 
     return true;
 }
 
-bool Network::ReactiveServer ::HandleConnections(const SocketManagerSharedPtr& socketManager)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+bool Network::ReactiveServer::HandleConnections(const SocketManagerSharedPtr& socketManager)
 {
     if (m_ActiveHandles.IsSet(m_SockAcceptor.GetACEHandle()))
     {
@@ -99,48 +105,62 @@ bool Network::ReactiveServer ::HandleConnections(const SocketManagerSharedPtr& s
             m_MasterHandleSet.SetBit(m_SockStream->GetACEHandle());
 
             const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
-            socketManager->Insert(socketID);
+            socketManager->InsertSocket(socketID);
 
-            m_BufferSendStream.Insert(socketID, m_SockStream->GetACEHandle(), 1024, GetConfigurationStrategy().GetParserStrategy());
+            m_BufferSendStream.Insert(socketID, m_SockStream->GetACEHandle(), GetConfigurationStrategy().GetBufferSize(), GetConfigurationStrategy().GetParserStrategy());
         }
 
         m_ActiveHandles.ClearBit(m_SockAcceptor.GetACEHandle());
     }
     return true;
 }
+#include STSTEM_WARNING_POP
 
-bool Network::ReactiveServer ::HandleData(const SocketManagerSharedPtr& socketManager)
+bool Network::ReactiveServer::HandleData(const SocketManagerSharedPtr& socketManager)
 {
     HandleSetIterator handleSetIterator{ GetConfigurationStrategy(), m_ActiveHandles };
 
     auto handle = handleSetIterator();
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
     while (System::IsSocketValid(reinterpret_cast<System::WinSocket>(handle)))
+#include STSTEM_WARNING_POP
     {
         m_SockStream->SetACEHandle(handle);
 
-        auto ptr = m_BufferSendStream.GetBufferSendStreamContainerPtrByHandle(handle);
+        auto container = m_BufferSendStream.GetBufferSendStreamContainerByHandle(handle);
 
         try
         {
             if (m_SockStream->Receive(m_Buffer))
             {
                 BufferReceiveStream bufferReceiveStream(m_Buffer, GetConfigurationStrategy().GetParserStrategy());
-                bufferReceiveStream.OnEvent(ptr->GetSocketID(), socketManager);
+                bufferReceiveStream.OnEvent(container->GetSocketID(), socketManager);
                 m_Buffer->ClearCurrentWriteIndex();
             }
             else
             {
                 m_MasterHandleSet.ClearBit(handle);
-                m_SockStream->CloseHandle();
-                m_BufferSendStream.Erase(ptr->GetSocketID());
+                if (!m_SockStream->CloseHandle())
+                {
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                        << SYSTEM_TEXT("关闭句柄失败。")
+                        << LOG_SINGLETON_TRIGGER_ASSERT;
+                }
+                m_BufferSendStream.Erase(container->GetSocketID());
             }
         }
         catch (CoreTools::Error&)
         {
             m_MasterHandleSet.ClearBit(handle);
-            m_SockStream->CloseHandle();
-            m_BufferSendStream.Erase(ptr->GetSocketID());
+            if (!m_SockStream->CloseHandle())
+            {
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                    << SYSTEM_TEXT("关闭句柄失败。")
+                    << LOG_SINGLETON_TRIGGER_ASSERT;
+            }
+            m_BufferSendStream.Erase(container->GetSocketID());
         }
 
         handle = handleSetIterator();
@@ -151,51 +171,71 @@ bool Network::ReactiveServer ::HandleData(const SocketManagerSharedPtr& socketMa
     return true;
 }
 
-void Network::ReactiveServer ::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::ReactiveServer::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    auto ptr = m_BufferSendStream.GetBufferSendStreamContainerPtrBySocketID(socketID);
+    auto container = m_BufferSendStream.GetBufferSendStreamContainerBySocketID(socketID);
 
-    if (ptr->Insert(message))
+    if (container->Insert(message))
     {
         if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Immediately)
         {
-            ImmediatelySend(socketID);
+            if (!ImmediatelySend(socketID))
+            {
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                    << SYSTEM_TEXT("消息发送失败。")
+                    << LOG_SINGLETON_TRIGGER_ASSERT;
+            }
         }
     }
     else
     {
-        ImmediatelySend(socketID);
+        if (!ImmediatelySend(socketID))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                << SYSTEM_TEXT("消息发送失败。")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
+        }
 
-        ptr->Insert(message);
+        if (!container->Insert(message))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                << SYSTEM_TEXT("消息发送失败。")
+                << LOG_SINGLETON_TRIGGER_ASSERT;
+        }
 
         if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Immediately)
         {
-            ImmediatelySend(socketID);
+            if (!ImmediatelySend(socketID))
+            {
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
+                    << SYSTEM_TEXT("消息发送失败。")
+                    << LOG_SINGLETON_TRIGGER_ASSERT;
+            }
         }
     }
 }
 
-bool Network::ReactiveServer ::ImmediatelySend(uint64_t socketID)
+bool Network::ReactiveServer::ImmediatelySend(uint64_t socketID)
 {
-    auto ptr = m_BufferSendStream.GetBufferSendStreamContainerPtrBySocketID(socketID);
+    auto container = m_BufferSendStream.GetBufferSendStreamContainerBySocketID(socketID);
 
-    if (!ptr->IsEmpty())
+    if (!container->IsEmpty())
     {
-        m_SockStream->SetACEHandle(ptr->GetACEHandle());
+        m_SockStream->SetACEHandle(container->GetACEHandle());
 
-        ptr->Save(m_Buffer);
+        container->Save(m_Buffer);
 
-        m_SockStream->Send(m_Buffer);
+        [[maybe_unused]] const auto index = m_SockStream->Send(m_Buffer);
 
-        ptr->Clear();
+        container->Clear();
     }
 
     return true;
 }
 
-bool Network::ReactiveServer ::ImmediatelySend()
+bool Network::ReactiveServer::ImmediatelySend()
 {
     for (const auto& value : m_BufferSendStream)
     {
@@ -205,7 +245,7 @@ bool Network::ReactiveServer ::ImmediatelySend()
 
             value.second->Save(m_Buffer);
 
-            m_SockStream->Send(m_Buffer);
+            [[maybe_unused]] const auto index = m_SockStream->Send(m_Buffer);
 
             value.second->Clear();
         }
@@ -213,4 +253,3 @@ bool Network::ReactiveServer ::ImmediatelySend()
 
     return true;
 }
-#include STSTEM_WARNING_POP

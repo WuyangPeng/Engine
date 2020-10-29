@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.5 (2020/03/16 11:26)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/29 9:52)
 
 #ifndef DATABASE_SQL_INTERFACE_SCHEMA_FACTORY_H
 #define DATABASE_SQL_INTERFACE_SCHEMA_FACTORY_H
@@ -15,7 +18,7 @@
 
 namespace Database
 {
-    class DATABASE_HIDDEN_DECLARE SchemaFactory
+    class DATABASE_HIDDEN_DECLARE SchemaFactory final
     {
     public:
         using ClassType = SchemaFactory;
@@ -27,9 +30,9 @@ namespace Database
 
         CLASS_INVARIANT_DECLARE;
 
-        static ImplTypePtr Create(const Session& session);
-        static ImplTypePtr Create(const Session& session, int dbIndex);
-        static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema);
+        [[nodiscard]] static ImplTypePtr Create(const Session& session);
+        [[nodiscard]] static ImplTypePtr Create(const Session& session, int dbIndex);
+        [[nodiscard]] static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema);
     };
 }
 

@@ -1,29 +1,31 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 12:38)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 19:15)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "AnalysisNetworkConfiguration.h"
 #include "Detail/AnalysisNetworkConfigurationImpl.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h" 
 
-using std::string;
 using std::make_shared;
- 
-Network::AnalysisNetworkConfiguration
-	::AnalysisNetworkConfiguration(const string& fileName)
-	:m_Impl{ make_shared<ImplType>(fileName) }
+using std::string;
+
+Network::AnalysisNetworkConfiguration::AnalysisNetworkConfiguration(const string& fileName)
+    : m_Impl{ make_shared<ImplType>(fileName) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
- 
+
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, AnalysisNetworkConfiguration)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, AnalysisNetworkConfiguration, GetConfigurationStrategy, String, Network::ConfigurationStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, AnalysisNetworkConfiguration, GetBegin, Network::AnalysisNetworkConfiguration::ContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, AnalysisNetworkConfiguration, GetEnd, Network::AnalysisNetworkConfiguration::ContainerConstIter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, AnalysisNetworkConfiguration, begin, Network::AnalysisNetworkConfiguration::ContainerConstIter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, AnalysisNetworkConfiguration, end, Network::AnalysisNetworkConfiguration::ContainerConstIter)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, AnalysisNetworkConfiguration, GetSize, int)

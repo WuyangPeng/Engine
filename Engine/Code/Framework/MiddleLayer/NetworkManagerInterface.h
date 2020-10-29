@@ -50,13 +50,9 @@ namespace Framework
 		bool Destroy() override;
 		bool Idle(int64_t timeDelta) override;
 
-		void Send(SocketType socketType, int serverID, uint64_t socketID, const MessageInterfaceSharedPtr& message);
+		void Send(const Network::SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message);
 
-		void Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);
-		void Insert(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority);
-		void Remove(SocketType socketType, int serverID, int64_t messageID);
-		void Remove(SocketType socketType, int serverID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);		
-
+	 
 		// 渲染中间层处理
 		bool Paint() final;
 		bool Move(const WindowPoint& point) final;

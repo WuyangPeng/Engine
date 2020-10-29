@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/11 09:55)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 15:31)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_CONTAINER_H
 #define NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_CONTAINER_H
@@ -14,34 +17,34 @@
 
 namespace Network
 {
-	struct NETWORK_HIDDEN_DECLARE BufferSendStreamContainer
-	{
-	public:
-		using ClassType = BufferSendStreamContainer;
+    class NETWORK_HIDDEN_DECLARE BufferSendStreamContainer final
+    {
+    public:
+        using ClassType = BufferSendStreamContainer;
 
-	public:
-		BufferSendStreamContainer(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy);
+    public:
+        BufferSendStreamContainer(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool Insert(const MessageInterfaceSharedPtr& message);
+        [[nodiscard]] bool Insert(const MessageInterfaceSharedPtr& message);
 
-		void Save(const MessageBufferSharedPtr& messageBuffer);
+        void Save(const MessageBufferSharedPtr& messageBuffer);
 
-		void Clear();
+        void Clear();
 
-		bool IsEmpty() const noexcept;
+        [[nodiscard]] bool IsEmpty() const noexcept;
 
-		uint32_t GetCurrentSize() const;
+        [[nodiscard]] uint32_t GetCurrentSize() const;
 
-		ACEHandle GetACEHandle() const noexcept;
-		uint64_t GetSocketID() const noexcept;
+        [[nodiscard]] ACEHandle GetACEHandle() const noexcept;
+        [[nodiscard]] uint64_t GetSocketID() const noexcept;
 
-	private:
-		uint64_t m_SocketID;
-		ACEHandle m_Handle;
-		BufferSendStream m_BufferSendStream;
-	};
+    private:
+        uint64_t m_SocketID;
+        ACEHandle m_Handle;
+        BufferSendStream m_BufferSendStream;
+    };
 }
 
-#endif // NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H
+#endif  // NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H

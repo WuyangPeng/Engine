@@ -1,39 +1,36 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 16:34)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 14:02)
 
 #include "Network/NetworkExport.h"
 
 #include "MessageInterface.h"
 #include "MessageSourceDetail.h"
 #include "MessageTargetDetail.h"
-
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26426)
-Network::MessageInterface ::MessageInterface(int64_t messageID) noexcept
-    : m_MessageID{ messageID }
-{
-    NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Network::MessageInterface ::MessageInterface([[maybe_unused]] LoadConstructor value, int64_t messageID) noexcept
-    : m_MessageID{ messageID }
-{
  
-
+Network::MessageInterface::MessageInterface(int64_t messageID) noexcept
+    : m_MessageID{ messageID }
+{
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageInterface ::~MessageInterface()
+Network::MessageInterface::MessageInterface([[maybe_unused]] LoadConstructor value, int64_t messageID) noexcept
+    : m_MessageID{ messageID }
+{
+    NETWORK_SELF_CLASS_IS_VALID_9;
+}
+
+Network::MessageInterface::~MessageInterface()
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -42,35 +39,35 @@ CLASS_INVARIANT_STUB_DEFINE(Network, MessageInterface);
 CORE_TOOLS_RTTI_BASE_DEFINE(Network, MessageInterface);
 NETWORK_ABSTRACT_FACTORY_DEFINE(Network, MessageInterface);
 
-bool Network::MessageInterface ::IsExactly(const Rtti& type) const noexcept
+bool Network::MessageInterface::IsExactly(const Rtti& type) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return GetRttiType().IsExactly(type);
 }
 
-bool Network::MessageInterface ::IsDerived(const Rtti& type) const noexcept
+bool Network::MessageInterface::IsDerived(const Rtti& type) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return GetRttiType().IsDerived(type);
 }
 
-bool Network::MessageInterface ::IsExactlyTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept
+bool Network::MessageInterface::IsExactlyTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return message && GetRttiType().IsExactly(message->GetRttiType());
+    return (message != nullptr) && (GetRttiType().IsExactly(message->GetRttiType()));
 }
 
-bool Network::MessageInterface ::IsDerivedTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept
+bool Network::MessageInterface::IsDerivedTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return message && GetRttiType().IsDerived(message->GetRttiType());
+    return (message != nullptr) && (GetRttiType().IsDerived(message->GetRttiType()));
 }
 
-int Network::MessageInterface ::GetStreamingSize() const 
+int Network::MessageInterface::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -82,37 +79,41 @@ int Network::MessageInterface ::GetStreamingSize() const
     return size;
 }
 
-void Network::MessageInterface ::Save(const MessageTargetSharedPtr& target) const
+void Network::MessageInterface::Save(const MessageTargetSharedPtr& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    NETWORK_BEGIN_STREAM_SAVE(target);
+    auto process = target;
+
+    NETWORK_BEGIN_STREAM_SAVE(process);
 
     // 写入消息号
-    target->Write(m_MessageID);
+    process->Write(m_MessageID);
 
-    NETWORK_END_STREAM_SAVE(target);
+    NETWORK_END_STREAM_SAVE(process);
 }
 
-void Network::MessageInterface ::Load(const MessageSourceSharedPtr& source)
+void Network::MessageInterface::Load(const MessageSourceSharedPtr& source)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    NETWORK_BEGIN_STREAM_LOAD(source);
+     auto process = source;
+
+    NETWORK_BEGIN_STREAM_LOAD(process);
 
     // 消息号已经在外层读取。
 
-    NETWORK_END_STREAM_LOAD(source);
+    NETWORK_END_STREAM_LOAD(process);
 }
 
-int Network::MessageInterface ::GetMessageID() const
+int Network::MessageInterface::GetMessageID() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_MessageID);
 }
 
-int Network::MessageInterface ::GetSubMessageID() const  
+int Network::MessageInterface::GetSubMessageID() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -121,10 +122,9 @@ int Network::MessageInterface ::GetSubMessageID() const
     return 0;
 }
 
-int64_t Network::MessageInterface ::GetFullMessageID() const noexcept
+int64_t Network::MessageInterface::GetFullMessageID() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return m_MessageID;
 }
-#include STSTEM_WARNING_POP

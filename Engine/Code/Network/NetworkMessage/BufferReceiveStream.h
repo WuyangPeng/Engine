@@ -1,42 +1,44 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.4 (2020/03/10 14:27)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 9:53)
 
 #ifndef NETWORK_NETWORK_MESSAGE_BUFFER_RECEIVE_STREAM_H
 #define NETWORK_NETWORK_MESSAGE_BUFFER_RECEIVE_STREAM_H
 
 #include "Network/NetworkDll.h"
 
+#include "NetworkMessageInternalFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include "NetworkMessageInternalFwd.h" 
 
 NETWORK_EXPORT_SHARED_PTR(BufferReceiveStreamImpl);
 
 namespace Network
 {
-	class NETWORK_DEFAULT_DECLARE BufferReceiveStream
-	{
-	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(BufferReceiveStream);
+    class NETWORK_DEFAULT_DECLARE BufferReceiveStream final
+    {
+    public:
+        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(BufferReceiveStream);
 
-	public:
-		explicit BufferReceiveStream(const MessageBufferSharedPtr& messageBuffer, ParserStrategy parserStrategy);
-	
-		CLASS_INVARIANT_DECLARE;
+    public:
+        explicit BufferReceiveStream(const MessageBufferSharedPtr& messageBuffer, ParserStrategy parserStrategy);
 
-		void OnEvent(uint64_t socketID, const SocketManagerSharedPtr& socketManager);
+        CLASS_INVARIANT_DECLARE;
 
-		// 如果读取未完成，需要继续解析
-		bool IsFinish() const noexcept;
+        void OnEvent(uint64_t socketID, const SocketManagerSharedPtr& socketManager);
 
-		void PushBack(const MessageBufferSharedPtr& messageBuffer);
+        // 如果读取未完成，需要继续解析
+        [[nodiscard]] bool IsFinish() const noexcept;
 
-	private:
-		IMPL_TYPE_DECLARE(BufferReceiveStream);
-	};
+        void PushBack(const MessageBufferSharedPtr& messageBuffer);
+
+    private:
+        IMPL_TYPE_DECLARE(BufferReceiveStream);
+    };
 }
 
-#endif // NETWORK_NETWORK_MESSAGE_BUFFER_RECEIVE_STREAM_H
+#endif  // NETWORK_NETWORK_MESSAGE_BUFFER_RECEIVE_STREAM_H

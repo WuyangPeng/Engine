@@ -1,16 +1,15 @@
 TODO Level 2
  
-0.0.0.2
+0.5.2.1 
 
-1.  （综合）BufferSendStreamContainer、BufferSendStreamMultiIndexContainer目前只有ACE的实现，使用Impl惯用法进行封装，但不导出以减少复杂度。
-
-0.0.1.0
-
-1.  （综合）SockConnector增加一个链接多个地址的接口。
-         
-0.0.2.4
-
-1.  （NetworkMessage）简单化消息类的设计。 
-
-
-	 
+1.	（Configuration） 完成配置模块。
+2.  （ACEWrappers）完成ACE基础主管理。
+3.  （ACEWrappers）完成ACE网络地址。
+4.  （ACEWrappers）完成ACE接受器。
+5.  （ACEWrappers）完成ACE连接器。
+6.  （ACEWrappers）完成ACE流。
+7.  （BoostWrappers）完成boost流。
+8.  （BoostWrappers）完成boost基础主管理。
+9.  （BoostWrappers）完成boost网络地址。
+10. （BoostWrappers）完成boost接受器。
+11. （BoostWrappers）完成boost连接器。

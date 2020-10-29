@@ -1,14 +1,18 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 14:23)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 20:38)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_MANAGER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_MANAGER_IMPL_H
 
 #include "Network/NetworkDll.h"
 
+#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Threading/Mutex.h"
 #include "Network/NetworkMessage/MessageEventContainer.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
@@ -18,13 +22,13 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE MessageEventManagerImpl
+    class NETWORK_HIDDEN_DECLARE MessageEventManagerImpl final
     {
     public:
         using ClassType = MessageEventManagerImpl;
 
     public:
-        MessageEventManagerImpl();
+        explicit MessageEventManagerImpl(CoreTools::DisableNotThrow disableNotThrow);
         ~MessageEventManagerImpl() noexcept = default;
 
         MessageEventManagerImpl(const MessageEventManagerImpl& rhs);

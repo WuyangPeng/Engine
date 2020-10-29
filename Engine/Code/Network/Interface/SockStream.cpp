@@ -1,24 +1,26 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.4 (2020/03/11 10:56)
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
+//
+//	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//	ÁªÏµ×÷Õß£º94458936@qq.com
+//
+//	±ê×¼£ºstd:c++17
+//	ÒýÇæ°æ±¾£º0.5.2.1 (2020/10/28 13:12)
 
-#include "Network/NetworkExport.h" 
+#include "Network/NetworkExport.h"
 
 #include "SockStream.h"
 #include "Detail/SockStreamFactory.h"
 #include "Detail/SockStreamImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::string;
 
-Network::SockStream
-	::SockStream(const ConfigurationStrategy& configurationStrategy)
-	:m_Impl{ SockStreamFactory::Create(configurationStrategy) }
+Network::SockStream::SockStream(const ConfigurationStrategy& configurationStrategy)
+    : m_Impl{ SockStreamFactory::Create(configurationStrategy) }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockStream)
@@ -34,34 +36,30 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, EnableNonBlock, boo
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemoteAddress, const string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemotePort, int)
 
-int Network::SockStream
-	::Send(const MessageBufferSharedPtr& messageBuffer)
+int Network::SockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Send(messageBuffer);
+    return m_Impl->Send(messageBuffer);
 }
 
-int Network::SockStream
-	::Receive(const MessageBufferSharedPtr& messageBuffer)
+int Network::SockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Receive(messageBuffer);
+    return m_Impl->Receive(messageBuffer);
 }
 
-void Network::SockStream
-	::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::SockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->AsyncSend(eventInterface, messageBuffer);
+    return m_Impl->AsyncSend(eventInterface, messageBuffer);
 }
 
-void Network::SockStream
-	::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::SockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->AsyncReceive(eventInterface, messageBuffer);
+    return m_Impl->AsyncReceive(eventInterface, messageBuffer);
 }

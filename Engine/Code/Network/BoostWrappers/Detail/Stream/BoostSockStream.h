@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 15:48)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 16:28)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_STREAM_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_STREAM_H
@@ -21,28 +24,28 @@ namespace Network
 
     public:
         BoostSockStream();
-        ~BoostSockStream() = 0;
-        BoostSockStream(const BoostSockStream&) = default;
-        BoostSockStream& operator=(const BoostSockStream&) = default;
-        BoostSockStream(BoostSockStream&&) noexcept = default;
-        BoostSockStream& operator=(BoostSockStream&&) noexcept = default;
+        ~BoostSockStream() noexcept = 0;
+        BoostSockStream(const BoostSockStream& rhs) = default;
+        BoostSockStream& operator=(const BoostSockStream& rhs) = default;
+        BoostSockStream(BoostSockStream&& rhs) noexcept = default;
+        BoostSockStream& operator=(BoostSockStream&& rhs) noexcept = default;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        BoostSockStreamType& GetBoostSockStream() noexcept override;
+        [[nodiscard]] BoostSockStreamType& GetBoostSockStream() noexcept override;
 
-        int Send(const MessageBufferSharedPtr& messageBuffer) override;
+        [[nodiscard]] int Send(const MessageBufferSharedPtr& messageBuffer) override;
         void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
-        bool CloseHandle() override;
+        [[nodiscard]] bool CloseHandle() override;
 
-        bool EnableNonBlock() override;
+        [[nodiscard]] bool EnableNonBlock() override;
 
-        const std::string GetRemoteAddress() const override;
-        int GetRemotePort() const override;
+        [[nodiscard]] const std::string GetRemoteAddress() const override;
+        [[nodiscard]] int GetRemotePort() const override;
 
     protected:
-        int HandleReceive(const MessageBufferSharedPtr& messageBuffer);
+        [[nodiscard]] int HandleReceive(const MessageBufferSharedPtr& messageBuffer);
         void HandleAsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex);
 
     private:

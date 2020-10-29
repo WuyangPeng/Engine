@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:08)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 20:10)
 
 #ifndef NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H
 #define NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H
@@ -25,11 +28,11 @@ namespace Network
 
     public:
         explicit ReactiveServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
-        ~ReactiveServer();
-        ReactiveServer(const ReactiveServer&) noexcept = default;
-        ReactiveServer& operator=(const ReactiveServer&) noexcept = default;
-        ReactiveServer(ReactiveServer&&) noexcept = default;
-        ReactiveServer& operator=(ReactiveServer&&) noexcept = default;
+        ~ReactiveServer() noexcept;
+        ReactiveServer(const ReactiveServer& rhs) noexcept = default;
+        ReactiveServer& operator=(const ReactiveServer& rhs) noexcept = default;
+        ReactiveServer(ReactiveServer&& rhs) noexcept = default;
+        ReactiveServer& operator=(ReactiveServer&& rhs) noexcept = default;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -41,11 +44,11 @@ namespace Network
     private:
         void Init();
 
-        bool WaitForMultipleEvents() override;
-        bool HandleConnections(const SocketManagerSharedPtr& socketManager) override;
-        bool HandleData(const SocketManagerSharedPtr& socketManager) override;
-        bool ImmediatelySend(uint64_t socketID) override;
-        bool ImmediatelySend() override;
+        [[nodiscard]] bool WaitForMultipleEvents() override;
+        [[nodiscard]] bool HandleConnections(const SocketManagerSharedPtr& socketManager) override;
+        [[nodiscard]] bool HandleData(const SocketManagerSharedPtr& socketManager) override;
+        [[nodiscard]] bool ImmediatelySend(uint64_t socketID) override;
+        [[nodiscard]] bool ImmediatelySend() override;
 
     private:
         SockAcceptor m_SockAcceptor;

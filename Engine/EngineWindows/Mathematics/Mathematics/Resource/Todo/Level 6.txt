@@ -1,7 +1,4 @@
 TODO Level 6
  
-0.0.2.5
+0.5.2.2 
 
-1.  （Helper）完成帮助模块。
-2.  （Base）修改Float1Impl、Float2Impl、Float3Impl、Float4Impl的实现，改成直接用array。
-3.  （Base）修改Float1、Float2、Float3、Float4的接口，实现operator[]。

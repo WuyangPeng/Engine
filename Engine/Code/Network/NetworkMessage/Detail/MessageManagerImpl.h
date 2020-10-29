@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 14:24)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/26 20:38)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_MANAGER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_MANAGER_IMPL_H
@@ -18,7 +21,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE MessageManagerImpl
+    class NETWORK_HIDDEN_DECLARE MessageManagerImpl final
     {
     public:
         using ClassType = MessageManagerImpl;
@@ -30,13 +33,13 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
     public:
-        FactoryFunction Find(int64_t messageID, int version) const;
+        [[nodiscard]] FactoryFunction Find(int64_t messageID, int version) const;
         void Insert(int64_t messageID, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
         void Remove(int64_t messageID, const MessageTypeCondition& messageTypeCondition);
         void Remove(int64_t messageID);
 
         void SetFullVersion(int fullVersion) noexcept;
-        int GetFullVersion() const noexcept;
+        [[nodiscard]] int GetFullVersion() const noexcept;
 
     private:
         using ConditionContainer = std::map<MessageTypeCondition, FactoryFunction, MessageTypeConditionOperating>;

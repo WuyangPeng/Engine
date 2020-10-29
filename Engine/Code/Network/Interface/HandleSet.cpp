@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/11 10:55)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/28 13:11)
 
 #include "Network/NetworkExport.h"
 
@@ -12,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-Network::HandleSet ::HandleSet(const ConfigurationStrategy& configurationStrategy)
+Network::HandleSet::HandleSet(const ConfigurationStrategy& configurationStrategy)
     : m_Impl{ HandleSetFactory::Create(configurationStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;

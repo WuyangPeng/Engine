@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
+//	Copyright (c) 2011-2020
+//	Threading Core Render Engine
 //
-// 引擎版本：0.0.2.4 (2020/03/10 15:43)
+//	作者：彭武阳，彭晔恩，彭晔泽
+//	联系作者：94458936@qq.com
+//
+//	标准：std:c++17
+//	引擎版本：0.5.2.1 (2020/10/27 11:32)
 
 #ifndef NETWORK_NETWORK_MESSAGE_INTEGER_MESSAGE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_INTEGER_MESSAGE_DETAIL_H
@@ -14,17 +17,9 @@
 #include "MessageTargetDetail.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
 template <typename E>
 Network::IntegerMessage<E>::IntegerMessage(int64_t messageID, const IntegerType& integerType)
     : ParentType{ messageID }, m_Integer{ integerType }
-{
-    NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-template <typename E>
-Network::IntegerMessage<E>::~IntegerMessage()
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -53,8 +48,6 @@ const CoreTools::Rtti& Network::IntegerMessage<E>::GetCurrentRttiType() noexcept
 
     return rtti;
 }
-
- 
 
 template <typename E>
 Network::MessageInterfaceSharedPtr Network::IntegerMessage<E>::Factory(const MessageSourceSharedPtr& source, int64_t messageID)

@@ -1,20 +1,16 @@
 TODO Level 5
  
-0.0.0.2
+0.5.2.1 
 
-1.  （综合）实现一个可用的网络库。考虑设计以下类：
-			接口：SockStream、Client、Server。
-			实现类：SockStream、Client、ProactorServer、SockAcceptor、SockConnector、
-					BufferSendStream、BufferReceiveStream、Encryptor、PackParser、WriteWork。
-2.  （NetworkMessage）考虑增加一个主消息ID和副消息ID的设计。
-3.  （NetworkMessage）MessageEventContainer增加一个监听某个消息段和所有消息的接口。
-4.  （综合）完成其他类型的服务器和客户端的接口。
-5.  （综合）封装其他网络相关的类。
-6.  （综合）完成网络类所有公共接口。
-7.  （综合）完成一个多进程网络框架。
-8.  （综合）完成一个多线程网络框架。 
-9.  （综合）目前网络接口都被设计成禁止复制，待设计决定后修正。
-10. （NetworkMessage）加密策略：整数，加密策略，次数。根据整数计算可预测随机数。运行次数。
-11. （Openssl）完成OpenSSL。
-12. （SocketWrappers）完成SocketWrappers。
-13. （综合）添加必要的地址类相关接口。
+1.  （ACEWrappers）实现C++NPv1_Iterative_Logging_Server。
+2.  （ACEWrappers）实现C++NPv1_Logging_Client。
+3.  （ACEWrappers）实现C++NPv1_PPC_Logging_Server。
+4.  （ACEWrappers）实现C++NPv1_Reactive_Logging_Server。
+5.  （ACEWrappers）实现C++NPv1_RTTPC_Logging_Server。
+6.  （ACEWrappers）实现C++NPv1_TPC_Logging_Server。
+7.  （ACEWrappers）实现C++NPv2_Configurable_Log_Server。
+8.  （ACEWrappers）实现C++NPv2_Reactor_Log_Server。
+9.  （ACEWrappers）实现C++NPv2_Select_Reactor_Log_Server。
+10. （ACEWrappers）实现C++NPv2_SR_Configurable_Log_Server。
+11. （ACEWrappers）实现C++NPv2_TP_Reactor_Log_Server。
+12. （ACEWrappers）实现C++NPv2_WFMO_Reactor_Log_Server。
