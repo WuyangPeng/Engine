@@ -1,27 +1,23 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 09:42)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 10:49)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "BitHacks.h"
 #include "ScaledFloatToInt.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Contract/Noexcept.h"
 
-int Mathematics::BitHacks
-	::ScaledFloatToInt(float value, int power)
+int32_t Mathematics::BitHacks::ScaledFloatToInt(float value, int power) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-	MATHEMATICS_ASSERTION_3(0 <= value && value <= 1, "value的区间为[0,1]。");
-	MATHEMATICS_ASSERTION_3(0 <= power && power <= 24, "power的区间为[0,24]。");
+    MATHEMATICS_ASSERTION_3(0 <= value && value <= 1, "value的区间为[0,1]。");
+    MATHEMATICS_ASSERTION_3(0 <= power && power <= 24, "power的区间为[0,24]。");
 
-	CoreTools::DisableNoexcept();
+    const Mathematics::ScaledFloatToInt scaledFloatToInt{ value, power };
 
-	const Mathematics::ScaledFloatToInt scaledFloatToInt{ value,power };
-
-	return scaledFloatToInt.GetScaledResult();
+    return scaledFloatToInt.GetScaledResult();
 }
-
-

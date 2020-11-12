@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/27 21:27)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/03 13:13)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_A_POINT_ACHIEVE_H
@@ -16,13 +16,27 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T>
-Mathematics::APoint<T>::APoint(const Vector3D& rhs)
-    : APoint{ rhs.GetXCoordinate(), rhs.GetYCoordinate(), rhs.GetZCoordinate() }
+Mathematics::APoint<T>::APoint(const Vector3D& rhs) noexcept
+    : APoint{ rhs.GetX(), rhs.GetY(), rhs.GetZ() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+template <typename T>
+Mathematics::APoint<T>::APoint(const ArrayType& rhs) noexcept
+    : APoint{ rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)],
+              rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)],
+              rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)] }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename T>
@@ -40,7 +54,7 @@ const Mathematics::Vector3D<T> Mathematics::APoint<T>::GetVector3D() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector3D{ m_HomogeneousPoint.GetX(), m_HomogeneousPoint.GetY(), m_HomogeneousPoint.GetZ() };
+    return Vector3D{ GetX(), GetY(), GetZ() };
 }
 
 template <typename T>
@@ -66,10 +80,7 @@ T& Mathematics::APoint<T>::operator[](int index)
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_0(0 <= index && index < sm_APointSize, "索引错误！");
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-    return const_cast<T&>(static_cast<const ClassType&>(*this)[index]);
-#include STSTEM_WARNING_POP
+    return OPERATOR_SQUARE_BRACKETS(T, index);
 }
 
 template <typename T>
@@ -166,7 +177,7 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator-=(const APoint& rhs)
 
     for (auto i = 0; i < sm_APointSize; ++i)
     {
-        m_HomogeneousPoint[i] += rhs[i];
+        m_HomogeneousPoint[i] -= rhs[i];
     }
 
     return *this;
@@ -217,15 +228,12 @@ T Mathematics::APoint<T>::GetNorm() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto maxValue = Math::FAbs(GetX());
-    if (maxValue < Math::FAbs(GetY()))
-    {
-        maxValue = Math::FAbs(GetY());
-    }
-    if (maxValue < Math::FAbs(GetZ()))
-    {
-        maxValue = Math::FAbs(GetZ());
-    }
+    const auto xFabs = Math::FAbs(GetX());
+    const auto yFabs = Math::FAbs(GetY());
+    const auto zFabs = Math::FAbs(GetZ());
+
+    const auto maxValue = std::max(xFabs, std::max(yFabs, zFabs));
+
     return maxValue;
 }
 
@@ -240,9 +248,10 @@ void Mathematics::APoint<T>::Set(const ArrayType& coordinate) noexcept
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-    SetX(coordinate[0]);
-    SetY(coordinate[1]);
-    SetZ(coordinate[2]);
+#include SYSTEM_WARNING_DISABLE(26482)
+    SetX(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)]);
+    SetY(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)]);
+    SetZ(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)]);
 #include STSTEM_WARNING_POP
 }
 

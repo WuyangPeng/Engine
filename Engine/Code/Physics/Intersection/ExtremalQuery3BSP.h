@@ -30,7 +30,7 @@ namespace Physics
           ExtremalQuery3BSP& operator=(ExtremalQuery3BSP&&) = delete;
         // Compute the extreme vertices in the specified direction and return the
         // indices of the vertices in the polyhedron vertex array.
-          void GetExtremeVertices(const ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection, int& negativeDirection) override;
+          void GetExtremeVertices(const ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection, int& negativeDirection) noexcept override;
 
         // Tree statistics.
         int GetNumNodes() const noexcept;

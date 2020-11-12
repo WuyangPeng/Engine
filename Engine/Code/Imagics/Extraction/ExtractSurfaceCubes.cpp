@@ -23,7 +23,7 @@
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(6385)
 
-typedef std::map<Mathematics::Vector3Df,int> VMap;
+typedef std::map<Mathematics::FloatVector3D,int> VMap;
 typedef VMap::iterator VMapIterator;
 typedef std::map<Mathematics::TriangleKey,int> TMap;
 typedef TMap::iterator TMapIterator;
@@ -39,7 +39,7 @@ Imagics::ExtractSurfaceCubes
 }
 
 void Imagics::ExtractSurfaceCubes
-	::ExtractContour (float level, std::vector<Mathematics::Vector3Df>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
+	::ExtractContour (float level, std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
 {
     vertices.clear();
     triangles.clear();
@@ -72,7 +72,7 @@ void Imagics::ExtractSurfaceCubes
 }
 
 void Imagics::ExtractSurfaceCubes
-	::MakeUnique (std::vector<Mathematics::Vector3Df>& vertices,std::vector<Mathematics::TriangleKey>& triangles)
+	::MakeUnique (std::vector<Mathematics::FloatVector3D>& vertices,std::vector<Mathematics::TriangleKey>& triangles)
 {
     const int numVertices = (int)vertices.size();
     const int numTriangles = (int)triangles.size();
@@ -137,7 +137,7 @@ void Imagics::ExtractSurfaceCubes
 }
 
 void Imagics::ExtractSurfaceCubes
-	::OrientTriangles (std::vector<Mathematics::Vector3Df>& vertices,std::vector<Mathematics::TriangleKey>& triangles, bool sameDir)
+	::OrientTriangles (std::vector<Mathematics::FloatVector3D>& vertices,std::vector<Mathematics::TriangleKey>& triangles, bool sameDir)
 {
     const int numTriangles = (int)triangles.size();
     for (int i = 0; i < numTriangles; ++i)
@@ -145,25 +145,25 @@ void Imagics::ExtractSurfaceCubes
         Mathematics::TriangleKey& tri = triangles[i];
 
         // Get triangle vertices.
-        const Mathematics::Vector3Df v0 = vertices[tri.GetKey(0)];
-        const Mathematics::Vector3Df v1 = vertices[tri.GetKey(1)];
-        const Mathematics::Vector3Df v2 = vertices[tri.GetKey(2)];
+        const Mathematics::FloatVector3D v0 = vertices[tri.GetKey(0)];
+        const Mathematics::FloatVector3D v1 = vertices[tri.GetKey(1)];
+        const Mathematics::FloatVector3D v2 = vertices[tri.GetKey(2)];
         
         // Construct triangle normal based on current orientation.
-        const Mathematics::Vector3Df edge1 = v1 - v0;
-        const Mathematics::Vector3Df edge2 = v2 - v0;
-        const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
+        const Mathematics::FloatVector3D edge1 = v1 - v0;
+        const Mathematics::FloatVector3D edge2 = v2 - v0;
+        const Mathematics::FloatVector3D normal = Mathematics::FloatVector3DTools::CrossProduct(edge1, edge2);
 
         // Get the image gradient at the vertices.
-        const Mathematics::Vector3Df grad0 = GetGradient(v0);
-        const Mathematics::Vector3Df grad1 = GetGradient(v1);
-        const Mathematics::Vector3Df grad2 = GetGradient(v2);
+        const Mathematics::FloatVector3D grad0 = GetGradient(v0);
+        const Mathematics::FloatVector3D grad1 = GetGradient(v1);
+        const Mathematics::FloatVector3D grad2 = GetGradient(v2);
 
         // Compute the average gradient.
-        const Mathematics::Vector3Df gradAvr = (grad0 + grad1 + grad2)/3.0f;
+        const Mathematics::FloatVector3D gradAvr = (grad0 + grad1 + grad2)/3.0f;
         
         // Compute the dot product of normal and average gradient.
-        const float dot = Mathematics::Vector3DToolsf::DotProduct(gradAvr, normal);
+        const float dot = Mathematics::FloatVector3DTools::DotProduct(gradAvr, normal);
 
         // Choose triangle orientation based on gradient direction.
         int save = 0;
@@ -191,7 +191,7 @@ void Imagics::ExtractSurfaceCubes
 }
 
 void Imagics::ExtractSurfaceCubes
-	::ComputeNormals ( const std::vector<Mathematics::Vector3Df>& vertices,const std::vector<Mathematics::TriangleKey>& triangles, std::vector<Mathematics::Vector3Df>& normals)
+	::ComputeNormals ( const std::vector<Mathematics::FloatVector3D>& vertices,const std::vector<Mathematics::TriangleKey>& triangles, std::vector<Mathematics::FloatVector3D>& normals)
 {
     // Maintain a running sum of triangle normals at each vertex.
     const int numVertices = (int)vertices.size();
@@ -200,20 +200,20 @@ void Imagics::ExtractSurfaceCubes
     int i;
     for (i = 0; i < numVertices; ++i)
     {
-        normals[i] = Mathematics::Vector3Df::sm_Zero;
+        normals[i] = Mathematics::FloatVector3D::GetZero();
     }
 
     for (i = 0; i < numTriangles; ++i)
     {
         const Mathematics::TriangleKey& key = triangles[i];
-        const Mathematics::Vector3Df v0 = vertices[key.GetKey(0)];
-        const Mathematics::Vector3Df v1 = vertices[key.GetKey(1)];
-        const Mathematics::Vector3Df v2 = vertices[key.GetKey(2)];
+        const Mathematics::FloatVector3D v0 = vertices[key.GetKey(0)];
+        const Mathematics::FloatVector3D v1 = vertices[key.GetKey(1)];
+        const Mathematics::FloatVector3D v2 = vertices[key.GetKey(2)];
 
         // Construct triangle normal.
-        const Mathematics::Vector3Df edge1 = v1 - v0;
-        const Mathematics::Vector3Df edge2 = v2 - v0;
-        const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
+        const Mathematics::FloatVector3D edge1 = v1 - v0;
+        const Mathematics::FloatVector3D edge2 = v2 - v0;
+        const Mathematics::FloatVector3D normal = Mathematics::FloatVector3DTools::CrossProduct(edge1,edge2);
 
         // Maintain the sum of normals at each vertex.
         normals[key.GetKey(0)] += normal;
@@ -266,7 +266,7 @@ int Imagics::
     {
         type |= EB_XMIN_YMIN;
         table.Insert(EI_XMIN_YMIN,
-            Mathematics::Vector3Df(x0, y0, z0 + diff0/(f001 - f000)));
+            Mathematics::FloatVector3D(x0, y0, z0 + diff0/(f001 - f000)));
     }
 
     // xmin-ymax edge
@@ -276,7 +276,7 @@ int Imagics::
     {
         type |= EB_XMIN_YMAX;
         table.Insert(EI_XMIN_YMAX,
-            Mathematics::Vector3Df(x0, y1, z0 + diff0/(f011 - f010)));
+            Mathematics::FloatVector3D(x0, y1, z0 + diff0/(f011 - f010)));
     }
 
     // xmax-ymin edge
@@ -285,7 +285,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_XMAX_YMIN;
-        table.Insert(EI_XMAX_YMIN, Mathematics::Vector3Df(x1, y0, z0 + diff0/(f101 - f100)));
+        table.Insert(EI_XMAX_YMIN, Mathematics::FloatVector3D(x1, y0, z0 + diff0/(f101 - f100)));
     }
 
     // xmax-ymax edge
@@ -294,7 +294,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_XMAX_YMAX;
-        table.Insert(EI_XMAX_YMAX, Mathematics::Vector3Df(x1, y1, z0 + diff0/(f111 - f110)));
+        table.Insert(EI_XMAX_YMAX, Mathematics::FloatVector3D(x1, y1, z0 + diff0/(f111 - f110)));
     }
 
     // xmin-zmin edge
@@ -303,7 +303,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_XMIN_ZMIN;
-        table.Insert(EI_XMIN_ZMIN,Mathematics::Vector3Df(x0, y0 + diff0/(f010 - f000), z0));
+        table.Insert(EI_XMIN_ZMIN,Mathematics::FloatVector3D(x0, y0 + diff0/(f010 - f000), z0));
     }
 
     // xmin-zmax edge
@@ -312,7 +312,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_XMIN_ZMAX;
-        table.Insert(EI_XMIN_ZMAX,Mathematics::Vector3Df(x0, y0 + diff0/(f011 - f001), z1));
+        table.Insert(EI_XMIN_ZMAX,Mathematics::FloatVector3D(x0, y0 + diff0/(f011 - f001), z1));
     }
 
     // xmax-zmin edge
@@ -321,7 +321,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_XMAX_ZMIN;
-        table.Insert(EI_XMAX_ZMIN,Mathematics::Vector3Df(x1, y0 + diff0/(f110 - f100), z0));
+        table.Insert(EI_XMAX_ZMIN,Mathematics::FloatVector3D(x1, y0 + diff0/(f110 - f100), z0));
     }
 
     // xmax-zmax edge
@@ -330,7 +330,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_XMAX_ZMAX;
-        table.Insert(EI_XMAX_ZMAX, Mathematics::Vector3Df(x1, y0 + diff0/(f111 - f101), z1));
+        table.Insert(EI_XMAX_ZMAX, Mathematics::FloatVector3D(x1, y0 + diff0/(f111 - f101), z1));
     }
 
     // ymin-zmin edge
@@ -339,7 +339,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_YMIN_ZMIN;
-        table.Insert(EI_YMIN_ZMIN,Mathematics::Vector3Df(x0 + diff0/(f100 - f000), y0, z0));
+        table.Insert(EI_YMIN_ZMIN,Mathematics::FloatVector3D(x0 + diff0/(f100 - f000), y0, z0));
     }
 
     // ymin-zmax edge
@@ -348,7 +348,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_YMIN_ZMAX;
-        table.Insert(EI_YMIN_ZMAX,Mathematics::Vector3Df(x0 + diff0/(f101 - f001), y0, z1));
+        table.Insert(EI_YMIN_ZMAX,Mathematics::FloatVector3D(x0 + diff0/(f101 - f001), y0, z1));
     }
 
     // ymax-zmin edge
@@ -357,7 +357,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_YMAX_ZMIN;
-        table.Insert(EI_YMAX_ZMIN,Mathematics::Vector3Df(x0 + diff0/(f110 - f010), y1, z0));
+        table.Insert(EI_YMAX_ZMIN,Mathematics::FloatVector3D(x0 + diff0/(f110 - f010), y1, z0));
     }
 
     // ymax-zmax edge
@@ -366,7 +366,7 @@ int Imagics::
     if (diff0*diff1 < 0.0f)
     {
         type |= EB_YMAX_ZMAX;
-        table.Insert(EI_YMAX_ZMAX,Mathematics::Vector3Df(x0 + diff0/(f111 - f011), y1, z1));
+        table.Insert(EI_YMAX_ZMAX,Mathematics::FloatVector3D(x0 + diff0/(f111 - f011), y1, z1));
     }
 
     return type;
@@ -430,7 +430,7 @@ void Imagics::ExtractSurfaceCubes
         else
         {
             // Plus-sign configuration, add branch point to tessellation.
-            table.Insert(FI_XMIN, Mathematics::Vector3Df(table.GetX(EI_XMIN_ZMIN),
+            table.Insert(FI_XMIN, Mathematics::FloatVector3D(table.GetX(EI_XMIN_ZMIN),
                 table.GetY(EI_XMIN_ZMIN), table.GetZ(EI_XMIN_YMIN)));
 
             // Add edges sharing the branch point.
@@ -505,7 +505,7 @@ void Imagics::ExtractSurfaceCubes
         else
         {
             // Plus-sign configuration, add branch point to tessellation.
-            table.Insert(FI_XMAX,Mathematics::Vector3Df(table.GetX(EI_XMAX_ZMIN),
+            table.Insert(FI_XMAX,Mathematics::FloatVector3D(table.GetX(EI_XMAX_ZMIN),
                 table.GetY(EI_XMAX_ZMIN), table.GetZ(EI_XMAX_YMIN)));
 
             // Add edges sharing the branch point.
@@ -580,7 +580,7 @@ void Imagics::ExtractSurfaceCubes
         else
         {
             // Plus-sign configuration, add branch point to tessellation.
-            table.Insert(FI_YMIN,Mathematics::Vector3Df(table.GetX(EI_YMIN_ZMIN),
+            table.Insert(FI_YMIN,Mathematics::FloatVector3D(table.GetX(EI_YMIN_ZMIN),
                 table.GetY(EI_XMIN_YMIN), table.GetZ(EI_XMIN_YMIN)));
 
             // Add edges sharing the branch point.
@@ -655,7 +655,7 @@ void Imagics::ExtractSurfaceCubes
         else
         {
             // Plus-sign configuration, add branch point to tessellation.
-            table.Insert(FI_YMAX,Mathematics::Vector3Df(table.GetX(EI_YMAX_ZMIN),table.GetY(EI_XMIN_YMAX), table.GetZ(EI_XMIN_YMAX)));
+            table.Insert(FI_YMAX,Mathematics::FloatVector3D(table.GetX(EI_YMAX_ZMIN),table.GetY(EI_XMIN_YMAX), table.GetZ(EI_XMIN_YMAX)));
 
             // Add edges sharing the branch point.
             table.Insert(EI_XMIN_YMAX, FI_YMAX);
@@ -729,7 +729,7 @@ void Imagics::ExtractSurfaceCubes
         else
         {
             // Plus-sign configuration, add branch point to tessellation.
-            table.Insert(FI_ZMIN,Mathematics::Vector3Df(table.GetX(EI_YMIN_ZMIN),
+            table.Insert(FI_ZMIN,Mathematics::FloatVector3D(table.GetX(EI_YMIN_ZMIN),
                 table.GetY(EI_XMIN_ZMIN), table.GetZ(EI_XMIN_ZMIN)));
 
             // Add edges sharing the branch point.
@@ -804,7 +804,7 @@ void Imagics::ExtractSurfaceCubes
         else
         {
             // Plus-sign configuration, add branch point to tessellation.
-            table.Insert(FI_ZMAX,Mathematics::Vector3Df(table.GetX(EI_YMIN_ZMAX),
+            table.Insert(FI_ZMAX,Mathematics::FloatVector3D(table.GetX(EI_YMIN_ZMAX),
                 table.GetY(EI_XMIN_ZMAX), table.GetZ(EI_XMIN_ZMAX)));
 
             // Add edges sharing the branch point.
@@ -821,25 +821,24 @@ void Imagics::ExtractSurfaceCubes
     }
 }
 
-Mathematics::Vector3Df Imagics::ExtractSurfaceCubes
-	::GetGradient (Mathematics::Vector3Df P)
+Mathematics::FloatVector3D Imagics::ExtractSurfaceCubes ::GetGradient(Mathematics::FloatVector3D P) noexcept
 {
-    const int x = (int)P.GetXCoordinate();
+    const int x = (int)P.GetX();
     if (x < 0 || x >= mXBound-1)
     {
-        return Mathematics::Vector3Df::sm_Zero;
+        return Mathematics::FloatVector3D::GetZero();
     }
 
-    const int y = (int)P.GetYCoordinate();
+    const int y = (int)P.GetY();
     if (y < 0 || y >= mYBound-1)
     {
-        return Mathematics::Vector3Df::sm_Zero;
+        return Mathematics::FloatVector3D::GetZero();
     }
 
-    const int z = (int)P.GetZCoordinate();
+    const int z = (int)P.GetZ();
     if (z < 0 || z >= mZBound-1)
     {
-        return Mathematics::Vector3Df::sm_Zero;
+        return Mathematics::FloatVector3D::GetZero();
     }
 
     // Get image values at corners of voxel.
@@ -860,26 +859,26 @@ Mathematics::Vector3Df Imagics::ExtractSurfaceCubes
     const float f011 = (float)mData[i011];
     const float f111 = (float)mData[i111];
 
-	P.SetXCoordinate(P.GetXCoordinate() - x); 
-	P.SetYCoordinate(P.GetYCoordinate() - y);
-	P.SetZCoordinate(P.GetZCoordinate() - z); 
-    const float oneMX = 1.0f - P.GetXCoordinate();
-    const float oneMY = 1.0f - P.GetYCoordinate();
-    const float oneMZ = 1.0f - P.GetZCoordinate();
+	P.SetX(P.GetX() - x); 
+	P.SetY(P.GetY() - y);
+	P.SetZ(P.GetZ() - z); 
+    const float oneMX = 1.0f - P.GetX();
+    const float oneMY = 1.0f - P.GetY();
+    const float oneMZ = 1.0f - P.GetZ();
 
-    Mathematics::Vector3Df grad;
+    Mathematics::FloatVector3D grad;
 
-    float tmp0 = oneMY*(f100 - f000) + P.GetYCoordinate()*(f110 - f010);
-	float tmp1 = oneMY*(f101 - f001) + P.GetYCoordinate()*(f111 - f011);
-    grad.SetXCoordinate(oneMZ*tmp0 + P.GetZCoordinate()*tmp1);
+    float tmp0 = oneMY*(f100 - f000) + P.GetY()*(f110 - f010);
+	float tmp1 = oneMY*(f101 - f001) + P.GetY()*(f111 - f011);
+    grad.SetX(oneMZ*tmp0 + P.GetZ()*tmp1);
     
-    tmp0 = oneMX*(f010 - f000) + P.GetXCoordinate()*(f110 - f100);
-	tmp1 = oneMX*(f011 - f001) + P.GetXCoordinate()*(f111 - f101);
-	grad.SetYCoordinate(oneMZ*tmp0 + P.GetZCoordinate()*tmp1);
+    tmp0 = oneMX*(f010 - f000) + P.GetX()*(f110 - f100);
+	tmp1 = oneMX*(f011 - f001) + P.GetX()*(f111 - f101);
+	grad.SetY(oneMZ*tmp0 + P.GetZ()*tmp1);
     
-	tmp0 = oneMX*(f001 - f000) + P.GetXCoordinate()*(f101 - f100);
-	tmp1 = oneMX*(f011 - f010) + P.GetXCoordinate()*(f111 - f110);
-	grad.SetZCoordinate(oneMY*tmp0 + P.GetYCoordinate()*tmp1);
+	tmp0 = oneMX*(f001 - f000) + P.GetX()*(f101 - f100);
+	tmp1 = oneMX*(f011 - f010) + P.GetX()*(f111 - f110);
+	grad.SetZ(oneMY*tmp0 + P.GetY()*tmp1);
 
     return grad;
 }
@@ -904,25 +903,25 @@ float Imagics::ExtractSurfaceCubes::VETable
 	::GetX (int i) const
 {
     IMAGICS_ASSERTION_0(0 <= i && i < 18, "Invalid index\n");
-    return mVertex[i].P.GetXCoordinate();
+    return mVertex[i].P.GetX();
 }
 
 float Imagics::ExtractSurfaceCubes::VETable
 	::GetY (int i) const
 {
     IMAGICS_ASSERTION_0(0 <= i && i < 18, "Invalid index\n");
-	return mVertex[i].P.GetYCoordinate();
+	return mVertex[i].P.GetY();
 }
 
 float Imagics::ExtractSurfaceCubes::VETable
 	::GetZ (int i) const
 {
     IMAGICS_ASSERTION_0(0 <= i && i < 18, "Invalid index\n");
-    return mVertex[i].P.GetZCoordinate();
+    return mVertex[i].P.GetZ();
 }
 
 void Imagics::ExtractSurfaceCubes::VETable
-	::Insert (int i, const Mathematics::Vector3Df& P)
+	::Insert (int i, const Mathematics::FloatVector3D& P)
 {
     IMAGICS_ASSERTION_0(0 <= i && i < 18, "Invalid index\n");
     Vertex& vertex = mVertex[i];
@@ -951,7 +950,7 @@ void Imagics::ExtractSurfaceCubes::VETable
 }
 
 void Imagics::ExtractSurfaceCubes::VETable
-	::RemoveTriangles ( std::vector<Mathematics::Vector3Df>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
+	::RemoveTriangles ( std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
 {
     // ear-clip the wireframe to get the triangles
     Mathematics::TriangleKey tri(0,0,0);

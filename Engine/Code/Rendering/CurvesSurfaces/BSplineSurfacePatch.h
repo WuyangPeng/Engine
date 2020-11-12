@@ -38,16 +38,16 @@ namespace Rendering
         // constructors below represent these choices.
 
         // (OU,OU), (OU,PU), (PU,OU), or (PU,PU)
-        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3Df** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);
+        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::FloatVector3D** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);
 
         // (OU,ON) or (PU,ON)
-        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3Df** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots);
+        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::FloatVector3D** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots);
 
         // (ON,OU) or (ON,PU)
-        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3Df** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen);
+        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::FloatVector3D** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen);
 
         // (ON,ON)
-        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3Df** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots);
+        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::FloatVector3D** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots);
 
         ~BSplineSurfacePatch();
 

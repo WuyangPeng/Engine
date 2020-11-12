@@ -10,6 +10,8 @@
 #ifndef CORE_TOOLS_FILE_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_H
 
+#include "ByteSwap.h"
+#include "ByteSwapper.h"
 #include "CFileManagerHelper.h"
 #include "CReadFileManager.h"
 #include "CWriteFileManager.h"
@@ -27,6 +29,7 @@
 #include "ReadBufferIO.h"
 #include "ReadFileHandle.h"
 #include "ReadFileManager.h"
+#include "TypeAliaser.h"
 #include "WriteBufferIO.h"
 #include "WriteFileHandle.h"
 #include "WriteFileManager.h"

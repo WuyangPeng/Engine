@@ -34,9 +34,9 @@ namespace Mathematics
 		const Triangle3 GetTriangle() const;
                 Real GetDirectionDotNormal() const noexcept;
 
-		Vector3D GetOriginCrossEdge2() const;
-		Vector3D GetEdge1CrossOrigin() const;
-		Real GetOriginDotNormal() const;
+		Vector3D GetOriginCrossEdge2() const noexcept;
+                Vector3D GetEdge1CrossOrigin() const noexcept;
+                Real GetOriginDotNormal() const noexcept;
 
 	private:
 		void CalculateDirectionDotNormal();

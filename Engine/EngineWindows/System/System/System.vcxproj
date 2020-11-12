@@ -485,6 +485,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\GLExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\MarkMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\NetworkMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Noexcept.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Platform.h" />

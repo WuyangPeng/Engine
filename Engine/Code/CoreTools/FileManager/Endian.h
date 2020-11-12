@@ -20,7 +20,10 @@ namespace CoreTools
     class CORE_TOOLS_DEFAULT_DECLARE Endian final
     {
     public:
-        using ClassType = Endian; 
+        using ClassType = Endian;
+
+    private:
+        Endian() = delete;
 
     public:
         // 测试机器的字节顺序是否是big endian。

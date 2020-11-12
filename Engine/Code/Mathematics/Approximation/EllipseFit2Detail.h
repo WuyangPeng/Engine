@@ -44,18 +44,18 @@ void Mathematics::EllipseFit2<Real>
 
 	std::vector<Real> begin{ static_cast<Real>(0.5) * m_FirstExtent,
 							 static_cast<Real>(0.5) * m_SecondExtent,
-							 m_Center.GetXCoordinate() - firstExtent,
-							 m_Center.GetYCoordinate() - secondExtent,
+							 m_Center.GetX() - firstExtent,
+							 m_Center.GetY() - secondExtent,
 							 -Math<Real>::GetPI() };
 
 	std::vector<Real> end{ static_cast<Real>(2) * m_FirstExtent,
 						   static_cast<Real>(2) * m_SecondExtent,
-						   m_Center.GetXCoordinate() + firstExtent,
-						   m_Center.GetYCoordinate() + secondExtent,
+						   m_Center.GetX() + firstExtent,
+						   m_Center.GetY() + secondExtent,
 						   Math<Real>::GetPI() };
 
-	std::vector<Real> initial{ m_FirstExtent, m_SecondExtent, m_Center.GetXCoordinate(),
-							   m_Center.GetYCoordinate(), angle };
+	std::vector<Real> initial{ m_FirstExtent, m_SecondExtent, m_Center.GetX(),
+							   m_Center.GetY(), angle };
 
 	MinimizeN<Real, ClassType> minimizer{ 5, Energy, 8, 8, 32, this };
 
@@ -80,10 +80,10 @@ void Mathematics::EllipseFit2<Real>
 	auto box = ContBox2<Real>::ContOrientedBox(m_Points);
 
 	m_Center = box.GetCenter();
-	m_Rotate[0][0] = box.GetFirstAxis().GetXCoordinate();
-	m_Rotate[0][1] = box.GetFirstAxis().GetYCoordinate();
-	m_Rotate[1][0] = box.GetSecondAxis().GetXCoordinate();
-	m_Rotate[1][1] = box.GetSecondAxis().GetYCoordinate();
+	m_Rotate[0][0] = box.GetFirstAxis().GetX();
+	m_Rotate[0][1] = box.GetFirstAxis().GetY();
+	m_Rotate[1][0] = box.GetSecondAxis().GetX();
+	m_Rotate[1][1] = box.GetSecondAxis().GetY();
 	m_FirstExtent = box.GetFirstExtent();
 	m_SecondExtent = box.GetSecondExtent();
 }
@@ -109,8 +109,8 @@ Real Mathematics::EllipseFit2<Real>
 
 	for (auto i = 0; i < numPoints; ++i)
 	{
-		Vector2D diff{ self.GetPoint(i).GetXCoordinate() - input[2],
-					   self.GetPoint(i).GetYCoordinate() - input[3] };
+		Vector2D diff{ self.GetPoint(i).GetX() - input[2],
+					   self.GetPoint(i).GetY() - input[3] };
 
 		auto point = rotate * diff;
 

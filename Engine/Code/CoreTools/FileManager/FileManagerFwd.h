@@ -40,6 +40,12 @@ namespace CoreTools
     class Environment;
 
     CORE_TOOLS_SHARED_PTR_DECLARE(FileBuffer);
+
+    template <typename T, size_t Size>
+    class ByteSwapper;
+
+    template <typename From, typename To>
+    class TypeAliaser;
 }
 
 #endif  // CORE_TOOLS_FILE_MANAGER_FWD_H

@@ -1,29 +1,30 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 09:43)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 15:30)
 
 #include "Mathematics/MathematicsExport.h"
 
 #ifdef MATHEMATICS_EXPORT_TEMPLATE
 
-#ifndef MATHEMATICS_INCLUDED_RANDOM_DETAIL
-	#define MATHEMATICS_INCLUDED_RANDOM_DETAIL
-#endif // MATHEMATICS_INCLUDED_RANDOM_DETAIL
+    #ifndef MATHEMATICS_INCLUDED_RANDOM_DETAIL
+        #define MATHEMATICS_INCLUDED_RANDOM_DETAIL
+    #endif  // MATHEMATICS_INCLUDED_RANDOM_DETAIL
 
-#include "RandomDetail.h" 
+#endif  // MATHEMATICS_EXPORT_TEMPLATE
+
+#include "RandomDetail.h"
+
+#ifdef MATHEMATICS_EXPORT_TEMPLATE
 
 namespace Mathematics
 {
-	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
-	class Random<float>;
-
-	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
-	class Random<double>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Random<float>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Random<double>;
 }
 
-#endif // MATHEMATICS_EXPORT_TEMPLATE
-
-
-
+#endif  // MATHEMATICS_EXPORT_TEMPLATE

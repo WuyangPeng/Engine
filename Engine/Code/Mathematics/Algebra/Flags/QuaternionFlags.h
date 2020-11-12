@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 09:48)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 18:37)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_FLAGS_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_FLAGS_H
@@ -11,26 +14,24 @@
 
 namespace Mathematics
 {
-	enum class QuaternionClosestAxis
-	{
-		X = 1,
-		Y = 2,
-		Z = 3
-	};
+    enum class QuaternionClosestAxis
+    {
+        X = 1,
+        Y = 2,
+        Z = 3
+    };
 
-	static_assert(System::EnumCastUnderlying(QuaternionClosestAxis::X) == 1 &&
-				  System::EnumCastUnderlying(QuaternionClosestAxis::Y) == 2 &&
-				  System::EnumCastUnderlying(QuaternionClosestAxis::Z) == 3, "QuaternionClosestAxis is error.");
+    static_assert(System::EnumCastUnderlying(QuaternionClosestAxis::X) == 1 && System::EnumCastUnderlying(QuaternionClosestAxis::Y) == 2 && System::EnumCastUnderlying(QuaternionClosestAxis::Z) == 3, "QuaternionClosestAxis is error.");
 
-	enum class QuaternionFactorFlags
-	{
-		XYZ,
-		XZY,
-		YZX,
-		YXZ,
-		ZXY,
-		ZYX
-	};
+    enum class QuaternionFactorFlags
+    {
+        XYZ,
+        XZY,
+        YZX,
+        YXZ,
+        ZXY,
+        ZYX
+    };
 }
 
-#endif // MATHEMATICS_ALGEBRA_QUATERNION_FLAGS_H
+#endif  // MATHEMATICS_ALGEBRA_QUATERNION_FLAGS_H

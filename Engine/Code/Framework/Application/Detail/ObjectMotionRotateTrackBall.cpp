@@ -103,7 +103,7 @@ void Framework::ObjectMotionRotateTrackBall
 		else
 		{
 			// 0»¡¶ÈÐý×ª¡£ 
-			axis = Mathematics::Float::g_UnitX;
+			axis = Mathematics::FloatAVector::GetUnitX();
 			angle = 0.0f;
 		}
 	}

@@ -48,10 +48,10 @@ private:
     int mBasis[2], mIndex[2];
 };
 
-using BSplineReduction2f = BSplineReduction<float,Vector2Df>;
-using BSplineReduction2d = BSplineReduction<double,Vector2Dd>;
-using BSplineReduction3f = BSplineReduction<float,Vector3Df>;
-using BSplineReduction3d = BSplineReduction<double,Vector3Dd>;
+using BSplineReduction2f = BSplineReduction<float,FloatVector2D>;
+using BSplineReduction2d = BSplineReduction<double,DoubleVector2D>;
+using BSplineReduction3f = BSplineReduction<float,FloatVector3D>;
+using BSplineReduction3d = BSplineReduction<double,DoubleVector3D>;
 
 }
 

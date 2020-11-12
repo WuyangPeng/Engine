@@ -2,3 +2,5 @@ TODO Level 8
  
 0.5.2.2 
 
+1.  （Base）在我们支持实现的平台上提供Math类的SIMD版本。 
+2.  （Base）定义类ScaledFloatToInt中的常量。

@@ -39,10 +39,10 @@ void Mathematics::HeightLineFit2<Real>
 	auto numPoints = points.size();
 	for (auto i = 0u; i < numPoints; ++i)
 	{
-		sumX += points[i].GetXCoordinate();
-		sumY += points[i].GetYCoordinate();
-		sumXX += points[i].GetXCoordinate() * points[i].GetXCoordinate();
-		sumXY += points[i].GetXCoordinate() * points[i].GetYCoordinate();
+		sumX += points[i].GetX();
+		sumY += points[i].GetY();
+		sumXX += points[i].GetX() * points[i].GetX();
+		sumXY += points[i].GetX() * points[i].GetY();
 	}
 
 	Real matrix[2][2]

@@ -73,12 +73,6 @@
     <Filter Include="Base 源文件">
       <UniqueIdentifier>{a25c4718-7007-449c-9333-67d25bd5773a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Base 头文件\Detail">
-      <UniqueIdentifier>{ce4cb405-e22d-415f-b7eb-46df50dcff12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Base 源文件\Detail">
-      <UniqueIdentifier>{7ca0db51-f690-417f-a8b3-e065a1170853}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Base 模板文件">
       <UniqueIdentifier>{b2ffde0d-8ae0-4752-a88d-f8f5b2bb73ab}</UniqueIdentifier>
     </Filter>
@@ -238,6 +232,12 @@
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{9755c861-5088-4782-83bd-cc2cb7f6c3fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Algebra 模板文件\Detail">
+      <UniqueIdentifier>{04549527-4e0e-4a28-bf2c-2f7e2f6fc29e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 头文件\Detail">
+      <UniqueIdentifier>{35a980de-c8cc-49cc-9a17-59319e195292}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -326,15 +326,6 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\VariableLengthVector.cpp">
       <Filter>Algebra 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Base\Detail\Float1Impl.cpp">
-      <Filter>Base 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Base\Detail\Float2Impl.cpp">
-      <Filter>Base 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Base\Detail\Float3Impl.cpp">
-      <Filter>Base 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Base\BitHacks.cpp">
       <Filter>Base 源文件</Filter>
     </ClCompile>
@@ -342,18 +333,6 @@
       <Filter>Base 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Base\FastTrigonometric.cpp">
-      <Filter>Base 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Base\Float1.cpp">
-      <Filter>Base 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Base\Float2.cpp">
-      <Filter>Base 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Base\Float3.cpp">
-      <Filter>Base 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Base\Float4.cpp">
       <Filter>Base 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Base\Math.cpp">
@@ -512,9 +491,6 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\Int64Vector2.cpp">
       <Filter>Rational 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Base\Detail\Float4Impl.cpp">
-      <Filter>Base 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\FloatingPointAnalysis.cpp">
       <Filter>Rational 源文件</Filter>
     </ClCompile>
@@ -531,6 +507,75 @@
       <Filter>Algebra 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Plane.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector2D.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector3D.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector4D.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox2D.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox3D.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox4D.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BandedMatrixSolve.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix2.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix2EigenDecomposition.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix3.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecomposition.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix3Extract.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix4.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\PolynomialDivide.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\QuaternionFactor.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\QuaternionSwingTwist.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Tridiagonalize.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector2DInformation.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector2DOrthonormalBasis.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector2DOrthonormalize.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector3DInformation.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalBasis.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalize.cpp">
       <Filter>Algebra 源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -560,9 +605,6 @@
       <Filter>Algebra 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraStreamSize.h">
-      <Filter>Algebra 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraTraits.h">
       <Filter>Algebra 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APoint.h">
@@ -1015,18 +1057,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\SphereFit3Detail.h">
       <Filter>Approximation 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\Detail\Float2Impl.h">
-      <Filter>Base 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\Detail\Float3Impl.h">
-      <Filter>Base 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\Detail\Float4Impl.h">
-      <Filter>Base 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\Detail\Float1Impl.h">
-      <Filter>Base 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Base\Random.h">
       <Filter>Base 头文件</Filter>
     </ClInclude>
@@ -1046,18 +1076,6 @@
       <Filter>Base 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Base\FastTrigonometric.h">
-      <Filter>Base 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float1.h">
-      <Filter>Base 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float2.h">
-      <Filter>Base 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float3.h">
-      <Filter>Base 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float4.h">
       <Filter>Base 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Base\Log2OfPowerOfTwo.h">
@@ -3926,6 +3944,162 @@
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\MatrixAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Float.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\FastNegativeExpAchieve.h">
+      <Filter>Base 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\FastTrigonometricAchieve.h">
+      <Filter>Base 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\RandomAchieve.h">
+      <Filter>Base 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AQuaternionAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4DAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox2DAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox4DAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxesAlignBoundingBox3DAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\BandedMatrixDataDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\BandedMatrixData.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\BandedMatrixImpl.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\BandedMatrixImplDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BandedMatrixAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BandedMatrixSolveAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\EulerAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix2Achieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix2EigenDecompositionAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3Achieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecompositionAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3ExtractAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4Achieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PolynomialAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\PolynomialImpl.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\PolynomialImplDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PolynomialDivideAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionConstraintsAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionFactorAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionSwingTwistAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\TridiagonalizeAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\VariableLengthVectorImplDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\VariableLengthVectorImpl.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\VariableMatrixImpl.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\VariableMatrixImplDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\VariableLengthVectorAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\VariableMatrixAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\Vector2DInformationImpl.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\Vector2DInformationImplDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DInformationAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DOrthonormalBasisAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DOrthonormalizeAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DToolsAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4DToolsAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\Vector3DInformationImpl.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\Vector3DInformationImplDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DInformationAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalBasisAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalizeAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DToolsAchieve.h">
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
   </ItemGroup>

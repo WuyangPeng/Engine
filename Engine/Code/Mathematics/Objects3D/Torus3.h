@@ -57,7 +57,7 @@ namespace Mathematics
 		const Vector3D GetNormal(Real s, Real t) const;
 
 		// 返回值第一部分为s，第二部分为t
-		const Torus3Parameters GetParameters(const Vector3D& position) const;
+                const Torus3Parameters GetParameters(const Vector3D& position) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
 	private:
 		Real m_OuterRadius;

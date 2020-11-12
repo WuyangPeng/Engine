@@ -61,7 +61,7 @@ T Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::Vector2Df Rendering::VertexBufferAccessor
+RENDERING_DEFAULT_DECLARE Mathematics::FloatVector2D Rendering::VertexBufferAccessor
 	::GetTextureCoord(int unit, int index) const;
 
 template <typename T>

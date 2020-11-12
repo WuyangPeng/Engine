@@ -181,7 +181,7 @@ Mathematics::Vector2D<Real> Mathematics::BezierCurve2<Real>
 {
     if (mDegree < 3)
     {
-        return Vector2D<Real>::sm_Zero;
+        return Vector2D<Real>::GetZero();
     }
 
 	auto oneMinusT = static_cast<Real>(1) - t;

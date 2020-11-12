@@ -102,7 +102,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	{
 		// The line is parallel to the capsule axis.  Determine whether the
 		// line intersects the capsule hemispheres.
-		auto radialSqrDist = rSqr - P.GetXCoordinate()*P.GetXCoordinate() - P.GetYCoordinate()*P.GetYCoordinate();
+		auto radialSqrDist = rSqr - P.GetX()*P.GetX() - P.GetY()*P.GetY();
 		if (radialSqrDist < Math::GetValue(0))
 		{
 			// Line outside the cylinder of the capsule, no intersection.
@@ -113,13 +113,13 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 		auto zOffset = Math::Sqrt(radialSqrDist) + extent;
 		if (dz > Math::GetValue(0))
 		{
-			t[0] = -P.GetZCoordinate() - zOffset;
-			t[1] = -P.GetZCoordinate() + zOffset;
+			t[0] = -P.GetZ() - zOffset;
+			t[1] = -P.GetZ() + zOffset;
 		}
 		else
 		{
-			t[0] = P.GetZCoordinate() - zOffset;
-			t[1] = P.GetZCoordinate() + zOffset;
+			t[0] = P.GetZ() - zOffset;
+			t[1] = P.GetZ() + zOffset;
 		}
 		return 2;
 	}
@@ -131,9 +131,9 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	// This reduces to computing the roots of a quadratic equation.  If
 	// P = (px,py,pz) and D = (dx,dy,dz), then the quadratic equation is
 	//   (dx^2+dy^2)*t^2 + 2*(px*dx+py*dy)*t + (px^2+py^2-r^2) = 0
-	auto a0 = P.GetXCoordinate()*P.GetXCoordinate() + P.GetYCoordinate()*P.GetYCoordinate() - rSqr;
-	auto a1 = P.GetXCoordinate()*D.GetXCoordinate() + P.GetYCoordinate()*D.GetYCoordinate();
-	auto a2 = D.GetXCoordinate()*D.GetXCoordinate() + D.GetYCoordinate()*D.GetYCoordinate();
+	auto a0 = P.GetX()*P.GetX() + P.GetY()*P.GetY() - rSqr;
+	auto a1 = P.GetX()*D.GetX() + P.GetY()*D.GetY();
+	auto a2 = D.GetX()*D.GetX() + D.GetY()*D.GetY();
 	auto discr = a1 * a1 - a0 * a2;
 	if (discr < Math::GetValue(0))
 	{
@@ -149,14 +149,14 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 		root = Math::Sqrt(discr);
 		inv = (static_cast<Real>(1)) / a2;
 		tValue = (-a1 - root)*inv;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (Math::FAbs(zValue) <= extent)
 		{
 			t[quantity++] = tValue;
 		}
 
 		tValue = (-a1 + root)*inv;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (Math::FAbs(zValue) <= extent)
 		{
 			t[quantity++] = tValue;
@@ -172,7 +172,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	{
 		// Line is tangent to infinite cylinder.
 		tValue = -a1 / a2;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (Math::FAbs(zValue) <= extent)
 		{
 			t[0] = tValue;
@@ -185,15 +185,15 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	// Use the fact that currently a1 = px*dx+py*dy and a0 = px^2+py^2-r^2.
 	// The leading coefficient is a2 = 1, so no need to include in the
 	// construction.
-	auto PZpE = P.GetZCoordinate() + extent;
-	a1 += PZpE * D.GetZCoordinate();
+	auto PZpE = P.GetZ() + extent;
+	a1 += PZpE * D.GetZ();
 	a0 += PZpE * PZpE;
 	discr = a1 * a1 - a0;
 	if (discr > Math::GetZeroTolerance())
 	{
 		root = Math::Sqrt(discr);
 		tValue = -a1 - root;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (zValue <= -extent)
 		{
 			t[quantity++] = tValue;
@@ -210,7 +210,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 		}
 
 		tValue = -a1 + root;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (zValue <= -extent)
 		{
 			t[quantity++] = tValue;
@@ -229,7 +229,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	else if (Math::FAbs(discr) <= Math::GetZeroTolerance())
 	{
 		tValue = -a1;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (zValue <= -extent)
 		{
 			t[quantity++] = tValue;
@@ -251,14 +251,14 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	// Use the fact that currently a1 = px*dx+py*dy+(pz+e)*dz and
 	// a0 = px^2+py^2+(pz+e)^2-r^2.  The leading coefficient is a2 = 1, so
 	// no need to include in the construction.
-	a1 -= (static_cast<Real>(2))*extent*D.GetZCoordinate();
-	a0 -= (static_cast<Real>(4))*extent*P.GetZCoordinate();
+	a1 -= (static_cast<Real>(2))*extent*D.GetZ();
+	a0 -= (static_cast<Real>(4))*extent*P.GetZ();
 	discr = a1 * a1 - a0;
 	if (discr > Math::GetZeroTolerance())
 	{
 		root = Math::Sqrt(discr);
 		tValue = -a1 - root;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (zValue >= extent)
 		{
 			t[quantity++] = tValue;
@@ -275,7 +275,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 		}
 
 		tValue = -a1 + root;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (zValue >= extent)
 		{
 			t[quantity++] = tValue;
@@ -294,7 +294,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	else if (Math::FAbs(discr) <= Math::GetZeroTolerance())
 	{
 		tValue = -a1;
-		zValue = P.GetZCoordinate() + tValue * D.GetZCoordinate();
+		zValue = P.GetZ() + tValue * D.GetZ();
 		if (zValue >= extent)
 		{
 			t[quantity++] = tValue;

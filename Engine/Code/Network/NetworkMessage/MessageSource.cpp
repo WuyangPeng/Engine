@@ -53,7 +53,7 @@ bool Network::MessageSource::ReadBool()
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    uint32_t value{ 0 };
+    uint8_t value{ 0 };
 
     Read(value);
 

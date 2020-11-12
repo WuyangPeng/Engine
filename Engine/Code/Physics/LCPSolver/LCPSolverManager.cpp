@@ -14,6 +14,7 @@
 #include <ctime>
 #include <iostream>
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Contract/Noexcept.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26429)

@@ -1,38 +1,39 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/18 19:01)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 13:18)
 
 #ifndef MATHEMATICS_LIB_H
 #define MATHEMATICS_LIB_H
 
-#include "Helper/UserMacro.h" 
+#include "Helper/UserMacro.h"
 
-#if defined(TCRE_USE_MSVC) 
+#if defined(TCRE_USE_MSVC)
 
-	#ifndef BUILDING_MATHEMATICS_STATIC
+    #ifndef BUILDING_MATHEMATICS_STATIC
 
-		#ifdef _DEBUG 
-			#pragma comment(lib,"MathematicsD.lib")
-		#else // !_DEBUG
-			#pragma comment(lib,"Mathematics.lib")
-		#endif // _DEBUG
+        #ifdef _DEBUG
+            #pragma comment(lib, "MathematicsD.lib")
+        #else  // !_DEBUG
+            #pragma comment(lib, "Mathematics.lib")
+        #endif  // _DEBUG
 
-	#else // !BUILDING_MATHEMATICS_STATIC
+    #else  // !BUILDING_MATHEMATICS_STATIC
 
-		#include "DllLib.h"
-		#include "System/SystemLib.h"
-		#include "CoreTools/CoreToolsLib.h"
+        #include "DllLib.h"
 
-		#ifdef _DEBUG 
-			#pragma comment(lib,"MathematicsStaticD.lib")
-		#else // !_DEBUG
-			#pragma comment(lib,"MathematicsStatic.lib")
-		#endif // _DEBUG
+        #ifdef _DEBUG
+            #pragma comment(lib, "MathematicsStaticD.lib")
+        #else  // !_DEBUG
+            #pragma comment(lib, "MathematicsStatic.lib")
+        #endif  // _DEBUG
 
-	#endif // BUILDING_MATHEMATICS_STATIC
+    #endif  // BUILDING_MATHEMATICS_STATIC
 
-#endif // TCRE_USE_MSVC
+#endif  // TCRE_USE_MSVC
 
-#endif // MATHEMATICS_LIB_H
+#endif  // MATHEMATICS_LIB_H

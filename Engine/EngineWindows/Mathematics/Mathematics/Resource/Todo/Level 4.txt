@@ -2,5 +2,9 @@ TODO Level 4
 
 0.5.2.2 
 
-
- 
+1.  （Helper）完成帮助模块。
+2.  （Algebra）AQuaternion类FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。
+3.  （Algebra）Matrix3类的ExtractAngleAxis、Orthonormalize、ExtractEuler系列函数增加断言，判断矩阵是否是旋转矩阵。
+4.  （Algebra）Quaternion类的FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。
+5.  （Algebra）对有实现operator[]的类实现data函数。
+6.  （Algebra）修改部分函数返回int，但AlgebraAggregate需要int32_t。  

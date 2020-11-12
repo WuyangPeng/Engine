@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 11:26)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/31 2:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -27,14 +27,14 @@ CoreTools::LoadingLibraryImpl::LoadingLibraryImpl(const String& fileName, LoadLi
         THROW_EXCEPTION(SYSTEM_TEXT("加载（"s) + m_FileName + SYSTEM_TEXT("）动态链接库失败。"s));
     }
 
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::LoadingLibraryImpl::~LoadingLibraryImpl() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-    if (m_Library != nullptr && !System::FreeDynamicLibrary(m_Library))
+    if (!System::FreeDynamicLibrary(m_Library))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
             << SYSTEM_TEXT("释放已加载的（")
@@ -43,19 +43,26 @@ CoreTools::LoadingLibraryImpl::~LoadingLibraryImpl() noexcept
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
 }
-
-CLASS_INVARIANT_STUB_DEFINE(CoreTools, LoadingLibraryImpl)
+#ifdef OPEN_CLASS_INVARIANT
+bool CoreTools::LoadingLibraryImpl::IsValid() const noexcept
+{
+    if (m_Library != nullptr)
+        return true;
+    else
+        return false;
+}
+#endif  // OPEN_CLASS_INVARIANT
 
 CoreTools::LoadingLibraryImpl::DynamicLinkModule CoreTools::LoadingLibraryImpl::GetLoadedModule() noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     return m_Library;
 }
 
 CoreTools::LoadingLibraryImpl::DynamicLinkProcess CoreTools::LoadingLibraryImpl::GetProcessAddress(const string& processName)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     auto process = System::GetProcessAddress(m_Library, processName.c_str());
 

@@ -297,14 +297,14 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	// Project triangles onto coordinate plane most aligned with plane
 	// normal.
 	auto maxNormal = 0;
-	auto fmax = Math::FAbs(plane.GetNormal().GetXCoordinate());
-	auto absMax = Math::FAbs(plane.GetNormal().GetYCoordinate());
+	auto fmax = Math::FAbs(plane.GetNormal().GetX());
+	auto absMax = Math::FAbs(plane.GetNormal().GetY());
 	if (absMax > fmax)
 	{
 		maxNormal = 1;
 		fmax = absMax;
 	}
-	absMax = Math::FAbs(plane.GetNormal().GetZCoordinate());
+	absMax = Math::FAbs(plane.GetNormal().GetZ());
 	if (absMax > fmax)
 	{
 		maxNormal = 2;
@@ -319,10 +319,10 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		// Project onto yz-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTri0V[i][0] = tri0.GetVertex()[i].GetYCoordinate();
-			projTri0V[i][1] = tri0.GetVertex()[i].GetZCoordinate();
-			projTri1V[i][0] = tri1.GetVertex()[i].GetYCoordinate();
-			projTri1V[i][1] = tri1.GetVertex()[i].GetZCoordinate();
+			projTri0V[i][0] = tri0.GetVertex()[i].GetY();
+			projTri0V[i][1] = tri0.GetVertex()[i].GetZ();
+			projTri1V[i][0] = tri1.GetVertex()[i].GetY();
+			projTri1V[i][1] = tri1.GetVertex()[i].GetZ();
 		}
 	}
 	else if (maxNormal == 1)
@@ -330,10 +330,10 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		// Project onto xz-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTri0V[i][0] = tri0.GetVertex()[i].GetXCoordinate();
-			projTri0V[i][1] = tri0.GetVertex()[i].GetZCoordinate();
-			projTri1V[i][0] = tri1.GetVertex()[i].GetXCoordinate();
-			projTri1V[i][1] = tri1.GetVertex()[i].GetZCoordinate();
+			projTri0V[i][0] = tri0.GetVertex()[i].GetX();
+			projTri0V[i][1] = tri0.GetVertex()[i].GetZ();
+			projTri1V[i][0] = tri1.GetVertex()[i].GetX();
+			projTri1V[i][1] = tri1.GetVertex()[i].GetZ();
 		}
 	}
 	else
@@ -341,10 +341,10 @@ bool Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		// Project onto xy-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTri0V[i][0] = tri0.GetVertex()[i].GetXCoordinate();
-			projTri0V[i][1] = tri0.GetVertex()[i].GetYCoordinate();
-			projTri1V[i][0] = tri1.GetVertex()[i].GetXCoordinate();
-			projTri1V[i][1] = tri1.GetVertex()[i].GetYCoordinate();
+			projTri0V[i][0] = tri0.GetVertex()[i].GetX();
+			projTri0V[i][1] = tri0.GetVertex()[i].GetY();
+			projTri1V[i][0] = tri1.GetVertex()[i].GetX();
+			projTri1V[i][1] = tri1.GetVertex()[i].GetY();
 		}
 	}
 

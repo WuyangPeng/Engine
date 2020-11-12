@@ -45,8 +45,8 @@ void Mathematics::StaticFindIntersectorLine3Torus3<Real>
 	auto value = Vector3DTools::DotProduct(mLine.GetOrigin(),mLine.GetOrigin()) - (ro2 + ri2);
 
 	Polynomial<Real> poly{ 4 };
-	auto zOrigin = mLine.GetOrigin().GetZCoordinate();
-	auto zDir = mLine.GetDirection().GetZCoordinate();
+	auto zOrigin = mLine.GetOrigin().GetZ();
+	auto zDir = mLine.GetDirection().GetZ();
     poly[0] = value*value - ((Real)4)*ro2*(ri2 - zOrigin*zOrigin);
     poly[1] = ((Real)4)*de*value + ((Real)8)*ro2*zDir*zOrigin;
     poly[2] = (static_cast<Real>(2))*dd*value + ((Real)4)*de*de + ((Real)4)*ro2*zDir*zDir;

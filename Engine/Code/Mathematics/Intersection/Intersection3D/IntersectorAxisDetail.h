@@ -139,7 +139,7 @@ bool Mathematics::IntersectorAxis<Real>
 
 template <typename Real>
 void Mathematics::IntersectorAxis<Real>
-	::GetProjection(const Vector3D<Real>& axis, const Vector3D<Real> segment[2], Real& imin, Real& imax)
+	::GetProjection(const Vector3D<Real>& axis, const Vector3D<Real> segment[2], Real& imin, Real& imax) noexcept
 {
 	Real dot[2]{ Vector3DTools<Real>::DotProduct(axis,segment[0]),Vector3DTools<Real>::DotProduct(axis,segment[1]) };
 
@@ -157,8 +157,7 @@ void Mathematics::IntersectorAxis<Real>
 }
 
 template <typename Real>
-void Mathematics::IntersectorAxis<Real>
-	::GetProjection(const Vector3D<Real>& axis, const Triangle3<Real>& triangle, Real& imin, Real& imax)
+void Mathematics::IntersectorAxis<Real>::GetProjection(const Vector3D<Real>& axis, const Triangle3<Real>& triangle, Real& imin, Real& imax)  
 {
 	Real dot[3]{ Vector3DTools<Real>::DotProduct(axis,triangle.GetVertex(0)),
 				  Vector3DTools<Real>::DotProduct(axis,triangle.GetVertex(1)),
@@ -187,8 +186,7 @@ void Mathematics::IntersectorAxis<Real>
 }
 
 template <typename Real>
-void Mathematics::IntersectorAxis<Real>
-	::GetProjection(const Vector3D<Real>& axis, const Box3<Real>& box, Real& imin, Real& imax)
+void Mathematics::IntersectorAxis<Real>::GetProjection(const Vector3D<Real>& axis, const Box3<Real>& box, Real& imin, Real& imax)  
 {
 	auto origin = Vector3DTools<Real>::DotProduct(axis, box.GetCenter());
 	auto maximumExtent = Math<Real>::FAbs(box.GetExtent(0)*Vector3DTools<Real>::DotProduct(axis, box.GetAxis(0))) +
@@ -200,8 +198,7 @@ void Mathematics::IntersectorAxis<Real>
 }
 
 template <typename Real>
-void Mathematics::IntersectorAxis<Real>
-	::GetConfiguration(const Vector3D<Real>& axis, const Vector3D<Real> segment[2], IntersectorConfiguration<Real>& cfg)
+void Mathematics::IntersectorAxis<Real>::GetConfiguration(const Vector3D<Real>& axis, const Vector3D<Real> segment[2], IntersectorConfiguration<Real>& cfg) noexcept
 {
 	Real dot[2]{ Vector3DTools<Real>::DotProduct(axis,segment[0]),Vector3DTools<Real>::DotProduct(axis,segment[1]) };
 
@@ -656,7 +653,7 @@ void Mathematics::IntersectorAxis<Real>
 
 template <typename Real>
 bool Mathematics::IntersectorAxis<Real>
-	::Test(const Vector3D<Real>& axis, const Vector3D<Real>& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax, Real& tfirst, Real& tlast)
+	::Test(const Vector3D<Real>& axis, const Vector3D<Real>& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax, Real& tfirst, Real& tlast) noexcept
 {
 	// Static separating axis test.  Returns false iff object0 and object1
 	// do not intersect in the interval [0,TMax] on any separating axis
@@ -777,7 +774,7 @@ bool Mathematics::IntersectorAxis<Real>
 template <typename Real>
 bool Mathematics::IntersectorAxis<Real>
 	::Find(const Vector3D<Real>& axis, const Vector3D<Real>& velocity, const IntersectorConfiguration<Real>& cfg0Start, const IntersectorConfiguration<Real>& cfg1Start, Real tmax,
-		   int& side, IntersectorConfiguration<Real>& cfg0Final, IntersectorConfiguration<Real>& cfg1Final, Real& tfirst, Real& tlast)
+                                              int& side, IntersectorConfiguration<Real>& cfg0Final, IntersectorConfiguration<Real>& cfg1Final, Real& tfirst, Real& tlast) noexcept
 {
 	// Constant velocity separating axis test.  The configurations cfg0Start
 	// and cfg1Start are the current potential configurations for contact,

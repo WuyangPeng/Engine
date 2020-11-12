@@ -288,8 +288,8 @@ void Rendering::TerrainBase
                 TerrainPageSharedPtr page = mPages[rP][cP];
 				Mathematics::Float2 oldOrigin = page->GetOrigin();
 				Mathematics::Float2 newOrigin(cO*length, rO*length);
-				Mathematics::FloatAPoint pageTrn(newOrigin.GetFirstValue() - oldOrigin.GetFirstValue(),
-											 newOrigin.GetSecondValue() - oldOrigin.GetSecondValue(),
+                                Mathematics::FloatAPoint pageTrn(newOrigin[0] - oldOrigin[0],
+                                                                 newOrigin[1] - oldOrigin[1],
 											 page->GetLocalTransform().GetTranslate()[2]);
 				 
 				 page->SetLocalTransformTranslate(pageTrn);

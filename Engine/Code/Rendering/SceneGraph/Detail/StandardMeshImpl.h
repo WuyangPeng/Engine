@@ -23,7 +23,7 @@ namespace Rendering
         using ClassType = StandardMeshImpl;
         using APoint = Mathematics::FloatAPoint;
         using AVector = Mathematics::FloatAVector;
-        using Vector2D = Mathematics::Vector2Df;
+        using Vector2D = Mathematics::FloatVector2D;
         using Math = Mathematics::FloatMath;
 
     public:

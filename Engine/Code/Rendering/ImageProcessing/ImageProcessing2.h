@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "ImageProcessingBase.h"
-#include "Mathematics/Base/Float4.h"
+#include "Mathematics/Base/Float.h"
 
 namespace Rendering
 {

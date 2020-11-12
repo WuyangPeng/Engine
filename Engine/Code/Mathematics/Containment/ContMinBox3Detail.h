@@ -80,8 +80,8 @@ Mathematics::MinBox3<Real>
         for (i = 0; i < numPoints; ++i)
         {
             diff = points[i] - origin;
-			points2[i].SetXCoordinate(Vector2DTools<Real>::DotProduct(U, diff));
-			points2[i].SetYCoordinate(Vector2DTools<Real>::DotProduct(V, diff));
+			points2[i].SetX(Vector2DTools<Real>::DotProduct(U, diff));
+			points2[i].SetY(Vector2DTools<Real>::DotProduct(V, diff));
         }
 
         // Compute the minimum area box in 2D.
@@ -89,9 +89,9 @@ Mathematics::MinBox3<Real>
  
 
         // Lift the values into 3D.
-		mMinBox.Set(origin + box2.GetCenter().GetXCoordinate()*U + box2.GetCenter().GetYCoordinate()*V,
-					box2.GetFirstAxis().GetXCoordinate()*U + box2.GetFirstAxis().GetYCoordinate()*V,
-					box2.GetSecondAxis().GetXCoordinate()*U + box2.GetSecondAxis().GetYCoordinate()*V,
+		mMinBox.Set(origin + box2.GetCenter().GetX()*U + box2.GetCenter().GetY()*V,
+					box2.GetFirstAxis().GetX()*U + box2.GetFirstAxis().GetY()*V,
+					box2.GetSecondAxis().GetX()*U + box2.GetSecondAxis().GetY()*V,
 					W,
 					box2.GetFirstExtent(),
 					box2.GetSecondExtent() ,
@@ -165,8 +165,8 @@ Mathematics::MinBox3<Real>
         {
 			auto index = *iter++;
             diff = points[index] - origin;
-			points2[j].SetXCoordinate(Vector3DTools<Real>::DotProduct(U,diff));
-			points2[j].SetYCoordinate(Vector3DTools<Real>::DotProduct(V,diff));
+			points2[j].SetX(Vector3DTools<Real>::DotProduct(U,diff));
+			points2[j].SetY(Vector3DTools<Real>::DotProduct(V,diff));
 			height = Vector3DTools<Real>::DotProduct(W,diff);
             if (height > maxHeight)
             {
@@ -197,10 +197,10 @@ Mathematics::MinBox3<Real>
 			auto extent0 = box2.GetFirstExtent();
 			auto extent1 = box2.GetSecondExtent();
 			auto extent2 = (Real{0.5})*maxHeight;
-			auto axis0 = box2.GetFirstAxis().GetXCoordinate()*U + box2.GetFirstAxis().GetYCoordinate()*V;
-			auto axis1 = box2.GetSecondAxis().GetXCoordinate()*U + box2.GetSecondAxis().GetYCoordinate()*V;
+			auto axis0 = box2.GetFirstAxis().GetX()*U + box2.GetFirstAxis().GetY()*V;
+			auto axis1 = box2.GetSecondAxis().GetX()*U + box2.GetSecondAxis().GetY()*V;
 			auto axis2 = W;
-			auto center = origin + box2.GetCenter().GetXCoordinate()*U +box2.GetCenter().GetYCoordinate()*V+ mMinBox.GetThirdExtent()*W;
+			auto center = origin + box2.GetCenter().GetX()*U +box2.GetCenter().GetY()*V+ mMinBox.GetThirdExtent()*W;
 
 			mMinBox.Set(center, axis0, axis1, axis2, extent0, extent1, extent2);
         }

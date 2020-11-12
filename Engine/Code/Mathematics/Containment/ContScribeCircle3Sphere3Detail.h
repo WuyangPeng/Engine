@@ -36,18 +36,18 @@ bool Mathematics
 	auto normal = Vector3DTools<Real>::UnitCrossProduct(E02, E12);
 	Vector3D<Real> direction0;
 
-	if (Math<Real>::FAbs(normal.GetXCoordinate()) >= Math<Real>::FAbs(normal.GetYCoordinate())&& Math<Real>::FAbs(normal.GetXCoordinate()) >= Math<Real>::FAbs(normal.GetZCoordinate()))
+	if (Math<Real>::FAbs(normal.GetX()) >= Math<Real>::FAbs(normal.GetY())&& Math<Real>::FAbs(normal.GetX()) >= Math<Real>::FAbs(normal.GetZ()))
     {
 		 
-		direction0.SetXCoordinate(-normal.GetYCoordinate());
-		direction0.SetYCoordinate(normal.GetXCoordinate());
-		direction0.SetZCoordinate(Math<Real>::GetValue(0));
+		direction0.SetX(-normal.GetY());
+		direction0.SetY(normal.GetX());
+		direction0.SetZ(Math<Real>::GetValue(0));
     }
     else
     {
-		direction0.SetXCoordinate(Math<Real>::GetValue(0));
-		direction0.SetYCoordinate(normal.GetZCoordinate());
-		direction0.SetZCoordinate(-normal.GetYCoordinate());        
+		direction0.SetX(Math<Real>::GetValue(0));
+		direction0.SetY(normal.GetZ());
+		direction0.SetZ(-normal.GetY());        
     }
 
 	direction0.Normalize();
@@ -68,9 +68,9 @@ bool Mathematics
 
     Real A[3][3]
     {
-        {E10.GetXCoordinate(), E10.GetYCoordinate(), E10.GetZCoordinate()},
-		{ E20.GetXCoordinate(), E20.GetYCoordinate(), E20.GetZCoordinate() },
-		{ E30.GetXCoordinate(), E30.GetYCoordinate(), E30.GetZCoordinate() }
+        {E10.GetX(), E10.GetY(), E10.GetZ()},
+		{ E20.GetX(), E20.GetY(), E20.GetZ() },
+		{ E30.GetX(), E30.GetY(), E30.GetZ() }
     };
 
     Real B[3] 
@@ -187,9 +187,9 @@ bool Mathematics
 
     Real A[3][3] 
     {
-		{ N1.GetXCoordinate() - N0.GetXCoordinate(), N1.GetYCoordinate() - N0.GetYCoordinate(), N1.GetZCoordinate() - N0.GetZCoordinate() },
-		{ N2.GetXCoordinate() - N0.GetXCoordinate(), N2.GetYCoordinate() - N0.GetYCoordinate(), N2.GetZCoordinate() - N0.GetZCoordinate() },
-		{ N3.GetXCoordinate() - N0.GetXCoordinate(), N3.GetYCoordinate() - N0.GetYCoordinate(), N3.GetZCoordinate() - N0.GetZCoordinate() }
+		{ N1.GetX() - N0.GetX(), N1.GetY() - N0.GetY(), N1.GetZ() - N0.GetZ() },
+		{ N2.GetX() - N0.GetX(), N2.GetY() - N0.GetY(), N2.GetZ() - N0.GetZ() },
+		{ N3.GetX() - N0.GetX(), N3.GetY() - N0.GetY(), N3.GetZ() - N0.GetZ() }
     };
 
     Real B[3] 

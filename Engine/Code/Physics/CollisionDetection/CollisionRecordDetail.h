@@ -13,6 +13,7 @@
 #include "Mathematics/Intersection/Intersection3D/DynamicTestIntersectorTriangle3Triangle3.h"
 #include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorTriangle3Triangle3.h"
 #include "Mathematics/Intersection/Intersection3D/DynamicFindIntersectorTriangle3Triangle3.h"
+#include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorTriangle3Triangle3.h"
 
 template <typename MeshSmartPointer, typename Bound>
 Physics::CollisionRecord<MeshSmartPointer, Bound>
@@ -312,8 +313,8 @@ void Physics
 	auto rhsWorldBound = rhsRecord.GetWorldBound();
 
 	// TODO: Add glue until the Mathematics library uses APoint and AVector.
-	Mathematics::Vector3Df velocity0{ lhsRecord.GetVelocity().GetVector3D() };
-	Mathematics::Vector3Df velocity1{ rhsRecord.GetVelocity().GetVector3D() };
+	Mathematics::FloatVector3D velocity0{ lhsRecord.GetVelocity().GetVector3D() };
+	Mathematics::FloatVector3D velocity1{ rhsRecord.GetVelocity().GetVector3D() };
 
 	if (TestIntersection(lhsWorldBound,velocity0, rhsWorldBound, velocity1,tmax ))
 	{
@@ -405,8 +406,8 @@ void Physics
 	auto rhsWorldBound = rhsRecord.GetWorldBound();
 
 	// TODO: Add glue until the Mathematics library uses APoint and AVector.
-	Mathematics::Vector3Df velocity0{ lhsRecord.GetVelocity().GetVector3D() };
-	Mathematics::Vector3Df velocity1{ rhsRecord.GetVelocity().GetVector3D() };
+	Mathematics::FloatVector3D velocity0{ lhsRecord.GetVelocity().GetVector3D() };
+	Mathematics::FloatVector3D velocity1{ rhsRecord.GetVelocity().GetVector3D() };
 
 	if (TestIntersection(lhsWorldBound,velocity0, rhsWorldBound, velocity1,tmax ))
 	{

@@ -87,27 +87,26 @@ typename const Mathematics::Torus3<Real>::Vector3D Mathematics::Torus3<Real>
 	auto sinTwoPiS = Math::Sin(twoPiS);
 	const auto position = GetPosition(s, t);
 
-	Vector3D normal{ position.GetXCoordinate() - m_OuterRadius * cosTwoPiS,
-					 position.GetYCoordinate() - m_OuterRadius * sinTwoPiS,
-					 position.GetZCoordinate() };
+	Vector3D normal{ position.GetX() - m_OuterRadius * cosTwoPiS,
+					 position.GetY() - m_OuterRadius * sinTwoPiS,
+					 position.GetZ() };
 	normal.Normalize();
 
 	return normal;
 }
 
 template <typename Real>
-typename const Mathematics::Torus3<Real>::Torus3Parameters Mathematics::Torus3<Real>
-	::GetParameters(const Vector3D& position) const
+typename const Mathematics::Torus3<Real>::Torus3Parameters Mathematics::Torus3<Real>::GetParameters(const Vector3D& position) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	auto radius = Math::Sqrt(position.GetXCoordinate() * position.GetXCoordinate() + position.GetYCoordinate() * position.GetYCoordinate());
+	auto radius = Math::Sqrt(position.GetX() * position.GetX() + position.GetY() * position.GetY());
 
 	auto s = Math::GetValue(0);
 
 	if (Math::GetZeroTolerance() < radius)
 	{
-		auto angle = Math::ATan2(position.GetYCoordinate(), position.GetXCoordinate());
+		auto angle = Math::ATan2(position.GetY(), position.GetX());
 		if (Math::GetValue(0) <= angle)
 		{
 			s = angle * Math::GetInverseTwoPI();
@@ -122,13 +121,13 @@ typename const Mathematics::Torus3<Real>::Torus3Parameters Mathematics::Torus3<R
 
 	auto t = Math::GetValue(0);
 
-	if (Math::FAbs(diff) < Math::GetZeroTolerance() &&  Math::FAbs(position.GetZCoordinate()) < Math::GetZeroTolerance())
+	if (Math::FAbs(diff) < Math::GetZeroTolerance() &&  Math::FAbs(position.GetZ()) < Math::GetZeroTolerance())
 	{
 		t = Math::GetValue(0);
 	}
 	else
 	{
-		auto angle = Math::ATan2(position.GetZCoordinate(), diff);
+		auto angle = Math::ATan2(position.GetZ(), diff);
 		if (Math::GetValue(0) <= angle)
 		{
 			t = angle * Math::GetInverseTwoPI();

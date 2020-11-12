@@ -15,35 +15,35 @@ namespace Mathematics
 	static void GetDirections(const Vector2D<Real>& W, Real a,Vector2D<Real>& dir0, Vector2D<Real>& dir1)
 	{
 		Real a2 = a * a;
-		Real wx2 = W.GetXCoordinate()*W.GetXCoordinate();
-		Real wy2 = W.GetYCoordinate()*W.GetYCoordinate();
+		Real wx2 = W.GetX()*W.GetX();
+		Real wy2 = W.GetY()*W.GetY();
 		Real c2 = wx2 + wy2;
 		Real minusHalfInvC2 = ((Real)-0.5) / c2;
 		Real c0, c1, discr, root, inv;
 
-		if (Math<Real>::FAbs(W.GetXCoordinate()) >= Math<Real>::FAbs(W.GetYCoordinate()))
+		if (Math<Real>::FAbs(W.GetX()) >= Math<Real>::FAbs(W.GetY()))
 		{
 			c0 = a2 - wx2;
-			c1 = -(static_cast<Real>(2))*a*W.GetYCoordinate();
+			c1 = -(static_cast<Real>(2))*a*W.GetY();
 			discr = c1 * c1 - ((Real)4.0)*c0*c2;
 			root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
-			inv = (static_cast<Real>(1)) / W.GetXCoordinate();
+			inv = (static_cast<Real>(1)) / W.GetX();
 			dir0[1] = (c1 + root)*minusHalfInvC2;
-			dir0[0] = (a - W.GetYCoordinate()*dir0.GetYCoordinate())*inv;
+			dir0[0] = (a - W.GetY()*dir0.GetY())*inv;
 			dir1[1] = (c1 - root)*minusHalfInvC2;
-			dir1[0] = (a - W.GetYCoordinate()*dir1.GetYCoordinate())*inv;
+			dir1[0] = (a - W.GetY()*dir1.GetY())*inv;
 		}
 		else
 		{
 			c0 = a2 - wy2;
-			c1 = -(static_cast<Real>(2))*a*W.GetXCoordinate();
+			c1 = -(static_cast<Real>(2))*a*W.GetX();
 			discr = c1 * c1 - ((Real)4.0)*c0*c2;
 			root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
-			inv = (static_cast<Real>(1)) / W.GetYCoordinate();
+			inv = (static_cast<Real>(1)) / W.GetY();
 			dir0[0] = (c1 + root)*minusHalfInvC2;
-			dir0[1] = (a - W.GetXCoordinate()*dir0.GetXCoordinate())*inv;
+			dir0[1] = (a - W.GetX()*dir0.GetX())*inv;
 			dir1[0] = (c1 - root)*minusHalfInvC2;
-			dir1[1] = (a - W.GetXCoordinate()*dir1.GetXCoordinate())*inv;
+			dir1[1] = (a - W.GetX()*dir1.GetX())*inv;
 		}
 	}
 
@@ -143,11 +143,11 @@ namespace Mathematics
 			//   1.  D = W
 			//   2.  a. P = mid+R0*perp(W), perp(a,b) = (b,-a)
 			//       b. P = mid-R0*perp(W)
-			line[2].SetOrigin(Vector2D<Real>(mid.GetXCoordinate() + circle0.GetRadius()*W.GetYCoordinate(),
-				mid.GetYCoordinate() - circle0.GetRadius()*W.GetXCoordinate()));
+			line[2].SetOrigin(Vector2D<Real>(mid.GetX() + circle0.GetRadius()*W.GetY(),
+				mid.GetY() - circle0.GetRadius()*W.GetX()));
 			line[2].SetDirection(W);
-			line[3].SetOrigin(Vector2D<Real>(mid.GetXCoordinate() - circle0.GetRadius()*W.GetYCoordinate(),
-				mid.GetYCoordinate() + circle0.GetRadius()*W.GetXCoordinate()));
+			line[3].SetOrigin(Vector2D<Real>(mid.GetX() - circle0.GetRadius()*W.GetY(),
+				mid.GetY() + circle0.GetRadius()*W.GetX()));
 			line[3].SetDirection(W);
 		}
 

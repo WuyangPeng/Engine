@@ -115,11 +115,11 @@ int Rendering::ClodMeshTriangleMesh
 	return m_NumTriangles;
 }
 
-const Mathematics::Vector3Df Rendering::ClodMeshTriangleMesh ::GetPosition(int index) const noexcept
+const Mathematics::FloatVector3D Rendering::ClodMeshTriangleMesh ::GetPosition(int index) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_VertexBufferAccessor.GetPosition<Mathematics::Vector3Df>(index);
+	return m_VertexBufferAccessor.GetPosition<Mathematics::FloatVector3D>(index);
 }
 
 const char* Rendering::ClodMeshTriangleMesh ::GetVertexBufferReadOnlyData() const noexcept

@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/29 0:03)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/02 17:24)
 
 #ifndef MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_H
 #define MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_H
@@ -21,7 +21,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AVectorOrthonormalize
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AVectorOrthonormalize final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
@@ -39,9 +39,9 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        const AVector GetUVector() const noexcept;
-        const AVector GetVVector() const noexcept;
-        const AVector GetWVector() const noexcept;
+        [[nodiscard]] const AVector GetUVector() const noexcept;
+        [[nodiscard]] const AVector GetVVector() const noexcept;
+        [[nodiscard]] const AVector GetWVector() const noexcept;
 
     private:
         void Generate();
@@ -53,8 +53,8 @@ namespace Mathematics
         Real m_Epsilon;
     };
 
-    using AVectorOrthonormalizef = AVectorOrthonormalize<float>;
-    using AVectorOrthonormalized = AVectorOrthonormalize<double>;
+    using FloatAVectorOrthonormalize = AVectorOrthonormalize<float>;
+    using DoubleAVectorOrthonormalize = AVectorOrthonormalize<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_H

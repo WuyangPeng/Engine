@@ -681,8 +681,8 @@ int Mathematics::IncrementalDelaunay2<Real>
 
     // Compute the determinant using exact rational arithmetic.
     QRVector ratTest;
-    ratTest.SetX(QRational(test.GetXCoordinate()));
-    ratTest.SetY(QRational(test.GetYCoordinate()));
+    ratTest.SetX(QRational(test.GetX()));
+    ratTest.SetY(QRational(test.GetY()));
     int indices[2] = { v0, v1 };
     for (int i = 0; i < 2; ++i)
     {

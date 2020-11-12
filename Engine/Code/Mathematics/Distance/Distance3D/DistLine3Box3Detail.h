@@ -86,11 +86,11 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 	Real sqrDistance{};
 	mLineParameter = Math<Real>::GetValue(0);
 
-	if (direction.GetXCoordinate() > Math<Real>::GetValue(0))
+	if (direction.GetX() > Math<Real>::GetValue(0))
 	{
-		if (direction.GetYCoordinate() > Math<Real>::GetValue(0))
+		if (direction.GetY() > Math<Real>::GetValue(0))
 		{
-			if (direction.GetZCoordinate() > Math<Real>::GetValue(0))  // (+,+,+)
+			if (direction.GetZ() > Math<Real>::GetValue(0))  // (+,+,+)
 			{
 				CaseNoZeros(point, direction, sqrDistance);
 			}
@@ -101,7 +101,7 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 		}
 		else
 		{
-			if (direction.GetZCoordinate() > Math<Real>::GetValue(0))  // (+,0,+)
+			if (direction.GetZ() > Math<Real>::GetValue(0))  // (+,0,+)
 			{
 				Case0(0, 2, 1, point, direction, sqrDistance);
 			}
@@ -113,9 +113,9 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 	}
 	else
 	{
-		if (direction.GetYCoordinate() > Math<Real>::GetValue(0))
+		if (direction.GetY() > Math<Real>::GetValue(0))
 		{
-			if (direction.GetZCoordinate() > Math<Real>::GetValue(0))  // (0,+,+)
+			if (direction.GetZ() > Math<Real>::GetValue(0))  // (0,+,+)
 			{
 				Case0(1, 2, 0, point, direction, sqrDistance);
 			}
@@ -126,7 +126,7 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 		}
 		else
 		{
-			if (direction.GetZCoordinate() > Math<Real>::GetValue(0))  // (0,0,+)
+			if (direction.GetZ() > Math<Real>::GetValue(0))  // (0,0,+)
 			{
 				Case00(2, 0, 1, point, direction, sqrDistance);
 			}
@@ -337,10 +337,10 @@ template <typename Real>
 void Mathematics::DistLine3Box3<Real>
 	::CaseNoZeros(Vector3D& pnt, const Vector3D& dir, Real& sqrDistance) const
 {
-	Vector3D PmE{ pnt.GetXCoordinate() - mBox.GetExtent(0),	pnt.GetYCoordinate() - mBox.GetExtent(1),pnt.GetZCoordinate() - mBox.GetExtent(2) };
+	Vector3D PmE{ pnt.GetX() - mBox.GetExtent(0),	pnt.GetY() - mBox.GetExtent(1),pnt.GetZ() - mBox.GetExtent(2) };
 
-	auto prodDxPy = dir.GetXCoordinate() * PmE.GetYCoordinate();
-	auto prodDyPx = dir.GetYCoordinate() * PmE.GetXCoordinate();
+	auto prodDxPy = dir.GetX() * PmE.GetY();
+	auto prodDyPx = dir.GetY() * PmE.GetX();
 	auto prodDzPx = Math<Real>::GetValue(0);
 	auto prodDxPz = Math<Real>::GetValue(0); 
 	auto prodDzPy = Math<Real>::GetValue(0);
@@ -348,8 +348,8 @@ void Mathematics::DistLine3Box3<Real>
 
 	if (prodDyPx >= prodDxPy)
 	{
-		prodDzPx = dir.GetZCoordinate() * PmE.GetXCoordinate();
-		prodDxPz = dir.GetXCoordinate() * PmE.GetZCoordinate();
+		prodDzPx = dir.GetZ() * PmE.GetX();
+		prodDxPz = dir.GetX() * PmE.GetZ();
 		if (prodDzPx >= prodDxPz)
 		{
 			// line intersects x = e0
@@ -363,8 +363,8 @@ void Mathematics::DistLine3Box3<Real>
 	}
 	else
 	{
-		prodDzPy = dir.GetZCoordinate()*PmE.GetYCoordinate();
-		prodDyPz = dir.GetYCoordinate()*PmE.GetZCoordinate();
+		prodDzPy = dir.GetZ()*PmE.GetY();
+		prodDyPz = dir.GetY()*PmE.GetZ();
 		if (prodDzPy >= prodDyPz)
 		{
 			// line intersects y = e1
@@ -490,43 +490,43 @@ void Mathematics::DistLine3Box3<Real>
 {
 	auto delta = Math<Real>::GetValue(0);
 
-	if (pnt.GetXCoordinate() < -mBox.GetExtent(0))
+	if (pnt.GetX() < -mBox.GetExtent(0))
 	{
-		delta = pnt.GetXCoordinate() + mBox.GetExtent(0);
+		delta = pnt.GetX() + mBox.GetExtent(0);
 		sqrDistance += delta * delta;
-		pnt.SetXCoordinate(-mBox.GetExtent(0));
+		pnt.SetX(-mBox.GetExtent(0));
 	}
-	else if (pnt.GetXCoordinate() > mBox.GetExtent(0))
+	else if (pnt.GetX() > mBox.GetExtent(0))
 	{
-		delta = pnt.GetXCoordinate() - mBox.GetExtent(0);
+		delta = pnt.GetX() - mBox.GetExtent(0);
 		sqrDistance += delta * delta;
-		pnt.SetXCoordinate(mBox.GetExtent(0));
-	}
-
-	if (pnt.GetYCoordinate() < -mBox.GetExtent(1))
-	{
-		delta = pnt.GetYCoordinate() + mBox.GetExtent(1);
-		sqrDistance += delta * delta;
-		pnt.SetYCoordinate(-mBox.GetExtent(1));
-	}
-	else if (pnt.GetYCoordinate() > mBox.GetExtent(1))
-	{
-		delta = pnt.GetYCoordinate() - mBox.GetExtent(1);
-		sqrDistance += delta * delta;
-		pnt.SetYCoordinate(mBox.GetExtent(1));
+		pnt.SetX(mBox.GetExtent(0));
 	}
 
-	if (pnt.GetZCoordinate() < -mBox.GetExtent(2))
+	if (pnt.GetY() < -mBox.GetExtent(1))
 	{
-		delta = pnt.GetZCoordinate() + mBox.GetExtent(2);
+		delta = pnt.GetY() + mBox.GetExtent(1);
 		sqrDistance += delta * delta;
-		pnt.SetZCoordinate(-mBox.GetExtent(2));
+		pnt.SetY(-mBox.GetExtent(1));
 	}
-	else if (pnt.GetZCoordinate() > mBox.GetExtent(2))
+	else if (pnt.GetY() > mBox.GetExtent(1))
 	{
-		delta = pnt.GetZCoordinate() - mBox.GetExtent(2);
+		delta = pnt.GetY() - mBox.GetExtent(1);
 		sqrDistance += delta * delta;
-		pnt.SetZCoordinate(mBox.GetExtent(2));
+		pnt.SetY(mBox.GetExtent(1));
+	}
+
+	if (pnt.GetZ() < -mBox.GetExtent(2))
+	{
+		delta = pnt.GetZ() + mBox.GetExtent(2);
+		sqrDistance += delta * delta;
+		pnt.SetZ(-mBox.GetExtent(2));
+	}
+	else if (pnt.GetZ() > mBox.GetExtent(2))
+	{
+		delta = pnt.GetZ() - mBox.GetExtent(2);
+		sqrDistance += delta * delta;
+		pnt.SetZ(mBox.GetExtent(2));
 	}
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.1 (2020/08/29 15:44)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/09 17:01)
 
 #ifndef MATHEMATICS_ALGEBRA_PLANE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_PLANE_ACHIEVE_H
@@ -15,6 +15,7 @@
 #include "Plane.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T>
 Mathematics::Plane<T>::Plane(const T epsilon) noexcept
@@ -120,10 +121,7 @@ T& Mathematics::Plane<T>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-    return const_cast<T&>(static_cast<const ClassType&>(*this)[index]);
-#include STSTEM_WARNING_POP
+    return OPERATOR_SQUARE_BRACKETS(T, index);
 }
 
 template <typename T>

@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.1 (2020/09/03 8:53)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/06 0:18)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX_ACHIEVE_H
@@ -16,6 +16,7 @@
 #include "Matrix3Detail.h"
 #include "Vector4DDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <gsl/gsl_util>
 
@@ -55,10 +56,10 @@ Mathematics::Matrix<Real>::Matrix(const ContainerType& entry, MatrixMajorFlags m
 
 template <typename Real>
 Mathematics::Matrix<Real>::Matrix(const Vector4D& vector0, const Vector4D& vector1, const Vector4D& vector2, const Vector4D& vector3, MatrixMajorFlags majorFlag)
-    : m_Entry{ Create(vector0.GetXCoordinate(), vector0.GetYCoordinate(), vector0.GetZCoordinate(), vector0.GetWCoordinate(),
-                      vector1.GetXCoordinate(), vector1.GetYCoordinate(), vector1.GetZCoordinate(), vector1.GetWCoordinate(),
-                      vector2.GetXCoordinate(), vector2.GetYCoordinate(), vector2.GetZCoordinate(), vector2.GetWCoordinate(),
-                      vector3.GetXCoordinate(), vector3.GetYCoordinate(), vector3.GetZCoordinate(), vector3.GetWCoordinate(), majorFlag) }
+    : m_Entry{ Create(vector0.GetX(), vector0.GetY(), vector0.GetZ(), vector0.GetW(),
+                      vector1.GetX(), vector1.GetY(), vector1.GetZ(), vector1.GetW(),
+                      vector2.GetX(), vector2.GetY(), vector2.GetZ(), vector2.GetW(),
+                      vector3.GetX(), vector3.GetY(), vector3.GetZ(), vector3.GetW(), majorFlag) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -104,6 +105,25 @@ bool Mathematics::Matrix<Real>::IsValid() const noexcept
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+template <int Index>
+void Mathematics::Matrix<Real>::Divide(Real value)
+{
+    static_assert(0 <= Index && Index < sm_EntrySize);
+
+    if (Math::GetZeroTolerance() < Math::FAbs(value))
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+        m_Entry[Index] /= value;
+#include STSTEM_WARNING_POP
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
+    }
+}
 
 template <typename Real>
 typename Mathematics::Matrix<Real>::EntryTypeConstIter Mathematics::Matrix<Real>::begin() const noexcept
@@ -217,6 +237,7 @@ void Mathematics::Matrix<Real>::SetColumn(int column, const HomogeneousPoint& po
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
             m_Entry[index] = point[i];
 #include STSTEM_WARNING_POP
         }
@@ -238,6 +259,7 @@ typename const Mathematics::Matrix<Real>::HomogeneousPoint Mathematics::Matrix<R
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
         return HomogeneousPoint{ m_Entry[index], m_Entry[sm_ColumnSize + index], m_Entry[sm_ColumnSize * 2 + index], m_Entry[sm_ColumnSize * 3 + index] };
 #include STSTEM_WARNING_POP
     }

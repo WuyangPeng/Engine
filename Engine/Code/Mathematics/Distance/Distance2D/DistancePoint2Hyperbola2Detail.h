@@ -33,7 +33,7 @@ template <typename Real>
 bool Mathematics::DistancePoint2Hyperbola2<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Math::GetValue(0) < m_Extent.GetXCoordinate() && Math::GetValue(0) < m_Extent.GetYCoordinate())
+	if (ParentType::IsValid() && Math::GetValue(0) < m_Extent.GetX() && Math::GetValue(0) < m_Extent.GetY())
 		return true;
 	else
 		return false;

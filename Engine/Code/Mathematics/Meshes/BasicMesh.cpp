@@ -13,6 +13,7 @@
 
 #include "System/Helper/PragmaWarning.h"
 #include <map>
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26446)

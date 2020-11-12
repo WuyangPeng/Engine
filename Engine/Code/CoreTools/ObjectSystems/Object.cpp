@@ -41,7 +41,7 @@ CoreTools::Object::Object(const string& name)
 }
 
 CoreTools::Object::Object(LoadConstructor value)
-    : ParentType{ value }, m_Name{ "" }
+    : ParentType{ value }, m_Name{ string{} }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

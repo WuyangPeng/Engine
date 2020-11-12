@@ -22,8 +22,8 @@ Mathematics::ContEllipse2MinCR<Real>
     {
 		auto diff = points[i] - C;  // P[i] - C
 		auto prod = diff*R;  // Real^T*(P[i] - C) = (u,v)
-        A[i].SetXCoordinate(prod.GetXCoordinate()*prod.GetXCoordinate());  // u^2
-        A[i].SetYCoordinate(prod.GetYCoordinate()*prod.GetYCoordinate());  // v^2
+        A[i].SetX(prod.GetX()*prod.GetX());  // u^2
+        A[i].SetY(prod.GetY()*prod.GetY());  // v^2
     }
 
     // Sort to eliminate redundant constraints.
@@ -52,48 +52,48 @@ template <typename Real>
 bool Mathematics::ContEllipse2MinCR<Real>
 	::XGreater (const Vector2D<Real>& P0, const Vector2D<Real>& P1)
 {
-    if (P0.GetXCoordinate() > P1.GetXCoordinate())
+    if (P0.GetX() > P1.GetX())
     {
         return true;
     }
 
-    if (P0.GetXCoordinate() < P1.GetXCoordinate())
+    if (P0.GetX() < P1.GetX())
     {
         return false;
     }
 
-    return P0.GetYCoordinate() > P1.GetYCoordinate();
+    return P0.GetY() > P1.GetY();
 }
 
 template <typename Real>
 bool Mathematics::ContEllipse2MinCR<Real>
 	::XEqual (const Vector2D<Real>& P0, const Vector2D<Real>& P1)
 {
-    return P0.GetXCoordinate() == P1.GetXCoordinate();
+    return P0.GetX() == P1.GetX();
 }
 
 template <typename Real>
 bool Mathematics::ContEllipse2MinCR<Real>
 	::YGreater (const Vector2D<Real>& P0, const Vector2D<Real>& P1)
 {
-    if (P0.GetYCoordinate() > P1.GetYCoordinate())
+    if (P0.GetY() > P1.GetY())
     {
         return true;
     }
 
-    if (P0.GetYCoordinate() < P1.GetYCoordinate())
+    if (P0.GetY() < P1.GetY())
     {
         return false;
     }
 
-    return P0.GetXCoordinate() > P1.GetXCoordinate();
+    return P0.GetX() > P1.GetX();
 }
 
 template <typename Real>
 bool Mathematics::ContEllipse2MinCR<Real>
 	::YEqual (const Vector2D<Real>& P0,  const Vector2D<Real>& P1)
 {
-    return P0.GetYCoordinate() == P1.GetYCoordinate();
+    return P0.GetY() == P1.GetY();
 }
 
 template <typename Real>
@@ -119,17 +119,17 @@ void Mathematics::ContEllipse2MinCR<Real>
     {
         // The minimum x-intercept is 1/A[iXMin].X() for A[iXMin].X() the
         // maximum of the A[i].X().
-        if (A[i].GetXCoordinate() > axMax)
+        if (A[i].GetX() > axMax)
         {
-            axMax = A[i].GetXCoordinate();
+            axMax = A[i].GetX();
             iXMin = i;
         }
 
         // The minimum y-intercept is 1/A[iYMin].Y() for A[iYMin].Y() the
         // maximum of the A[i].Y().
-        if (A[i].GetYCoordinate() > ayMax)
+        if (A[i].GetY() > ayMax)
         {
-            ayMax = A[i].GetYCoordinate();
+            ayMax = A[i].GetY();
             iYMin = i;
         }
     }
@@ -169,7 +169,7 @@ void Mathematics::ContEllipse2MinCR<Real>
                     // (x1,y1).  There may be floating point error issues in
                     // the comparision 'D[0] <= fX1'.  Consider modifying to
                     // 'D[0] <= fX1+epsilon'.
-                    D[0] = (A[i].GetYCoordinate() - A[iYMin].GetYCoordinate())/det;
+                    D[0] = (A[i].GetY() - A[iYMin].GetY())/det;
                     if (x0 < D[0] && D[0] <= x1)
                     {
                         line = i;
@@ -190,24 +190,24 @@ void Mathematics::ContEllipse2MinCR<Real>
         // and the comparisons are made between 1/2 = a0*r and a0*x0 or a0*x1.
 
         // Compare r < x0.
-        if (Real{0.5} < A[iYMin].GetXCoordinate()*x0)
+        if (Real{0.5} < A[iYMin].GetX()*x0)
         {
             // The maximum is f(x0) since the quadratic f decreases for
             // x > r.
             D[0] = x0;
-            D[1] = (static_cast<Real>(1) - A[iYMin].GetXCoordinate()*D[0])/A[iYMin].GetYCoordinate();  // = f(x0)
+            D[1] = (static_cast<Real>(1) - A[iYMin].GetX()*D[0])/A[iYMin].GetY();  // = f(x0)
             break;
         }
 
         // Compare r < x1.
-        if (Real{0.5} < A[iYMin].GetXCoordinate()*x1)
+        if (Real{0.5} < A[iYMin].GetX()*x1)
         {
             // The maximum is f(r).  The search ends here because the
             // current line is tangent to the level curve of f(x)=f(r)
             // and x*y can therefore only decrease as we traverse further
             // around the hull in the clockwise direction.
-            D[0] = (Real{0.5})/A[iYMin].GetXCoordinate();
-            D[1] = (Real{0.5})/A[iYMin].GetYCoordinate();  // = f(r)
+            D[0] = (Real{0.5})/A[iYMin].GetX();
+            D[1] = (Real{0.5})/A[iYMin].GetY();  // = f(r)
             break;
         }
 

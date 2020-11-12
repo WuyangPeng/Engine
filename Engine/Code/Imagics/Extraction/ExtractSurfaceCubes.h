@@ -27,11 +27,11 @@ namespace Imagics
 		
 		// The level value *must* not be exactly an integer.  This simplifies the
 		// level surface construction immensely.
-		void ExtractContour (float level, std::vector<Mathematics::Vector3Df>& vertices, std::vector<Mathematics::TriangleKey>& triangles);
+		void ExtractContour (float level, std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles);
 		
 		// The extraction has duplicate vertices on edges shared by voxels.  This
 		// function will eliminate the duplication.
-		void MakeUnique (std::vector<Mathematics::Vector3Df>& vertices,std::vector<Mathematics::TriangleKey>& triangles);
+		void MakeUnique (std::vector<Mathematics::FloatVector3D>& vertices,std::vector<Mathematics::TriangleKey>& triangles);
 		
 		// The extraction does not use any topological information about the level
 		// surface.  The triangles can be a mixture of clockwise-ordered and
@@ -43,10 +43,10 @@ namespace Imagics
 		// fast.  A consistent order can be computed if you build a table of
 		// vertex, edge, and face adjacencies, but the resulting data structure
 		// is very expensive to process to reorient triangles.
-		void OrientTriangles (std::vector<Mathematics::Vector3Df>& vertices, std::vector<Mathematics::TriangleKey>& triangles, bool sameDir);
+		void OrientTriangles (std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles, bool sameDir);
 		
 		// In case you want vertex normals for dynamic lighting of the mesh.
-		void ComputeNormals (const std::vector<Mathematics::Vector3Df>& vertices,  const std::vector<Mathematics::TriangleKey>& triangles,  std::vector<Mathematics::Vector3Df>& normals);
+		void ComputeNormals (const std::vector<Mathematics::FloatVector3D>& vertices,  const std::vector<Mathematics::TriangleKey>& triangles,  std::vector<Mathematics::FloatVector3D>& normals);
 
 	protected:
 		enum
@@ -100,9 +100,9 @@ namespace Imagics
 			float GetX (int i) const;
 			float GetY (int i) const;
 			float GetZ (int i) const;
-			void Insert (int i, const Mathematics::Vector3Df& P);
+			void Insert (int i, const Mathematics::FloatVector3D& P);
 			void Insert (int i0, int i1);
-			void RemoveTriangles (std::vector<Mathematics::Vector3Df>& vertices, std::vector<Mathematics::TriangleKey>& triangles);
+			void RemoveTriangles (std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles);
 			
 		protected:
 			void RemoveVertex (int i);
@@ -113,7 +113,7 @@ namespace Imagics
 			public:
 				Vertex () noexcept;
 				
-				Mathematics::Vector3Df P;
+				Mathematics::FloatVector3D P;
 				int NumAdjacents;
 				int Adj[4]{ };
 				bool Valid;
@@ -131,7 +131,7 @@ namespace Imagics
 		void GetZMinEdges (int x, int y, int z, int type, VETable& table);
 		void GetZMaxEdges (int x, int y, int z, int type, VETable& table);
 		
-		Mathematics::Vector3Df GetGradient (Mathematics::Vector3Df P);
+		Mathematics::FloatVector3D GetGradient(Mathematics::FloatVector3D P) noexcept;
 		
 		int mXBound, mYBound, mZBound, mXYBound;
 		int* mData;

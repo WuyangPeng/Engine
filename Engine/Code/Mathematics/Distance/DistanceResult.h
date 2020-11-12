@@ -68,10 +68,10 @@ namespace Mathematics
 		IMPL_TYPE_DECLARE(DistanceResult);
 	};
 
-	using DistanceResult2f = DistanceResult<float, Vector2Df>;
-	using DistanceResult3f = DistanceResult<float, Vector3Df>;
-	using DistanceResult2d = DistanceResult<double, Vector2Dd>;
-	using DistanceResult3d = DistanceResult<double, Vector3Dd>;
+	using DistanceResult2f = DistanceResult<float, FloatVector2D>;
+	using DistanceResult3f = DistanceResult<float, FloatVector3D>;
+	using DistanceResult2d = DistanceResult<double, DoubleVector2D>;
+	using DistanceResult3d = DistanceResult<double, DoubleVector3D>;
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_RESULT_H

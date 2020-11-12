@@ -69,10 +69,10 @@ bool Mathematics::StaticFindIntersectorLine2Box2<Real>
 
 	auto saveT0 = t0;
 	auto saveT1 = t1;
-	auto notAllClipped = Clip(+BDirection.GetXCoordinate(), -BOrigin.GetXCoordinate() - box.GetFirstExtent(), t0, t1) &&
-						 Clip(-BDirection.GetXCoordinate(), +BOrigin.GetXCoordinate() - box.GetFirstExtent(), t0, t1) &&
-						 Clip(+BDirection.GetYCoordinate(), -BOrigin.GetYCoordinate() - box.GetSecondExtent(), t0, t1) &&
-						 Clip(-BDirection.GetYCoordinate(), +BOrigin.GetYCoordinate() - box.GetSecondExtent(), t0, t1);
+	auto notAllClipped = Clip(+BDirection.GetX(), -BOrigin.GetX() - box.GetFirstExtent(), t0, t1) &&
+						 Clip(-BDirection.GetX(), +BOrigin.GetX() - box.GetFirstExtent(), t0, t1) &&
+						 Clip(+BDirection.GetY(), -BOrigin.GetY() - box.GetSecondExtent(), t0, t1) &&
+						 Clip(-BDirection.GetY(), +BOrigin.GetY() - box.GetSecondExtent(), t0, t1);
 
 	if (notAllClipped && (solid || t0 != saveT0 || t1 != saveT1))
 	{

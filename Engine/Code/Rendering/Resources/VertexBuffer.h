@@ -31,7 +31,7 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 		using AVector = Mathematics::FloatAVector;
 		using APoint = Mathematics::FloatAPoint;
-		using Vector2D = Mathematics::Vector2Df;
+		using Vector2D = Mathematics::FloatVector2D;
 
 	public:
                 VertexBuffer() noexcept;

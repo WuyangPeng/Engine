@@ -140,7 +140,7 @@ float Rendering::CreateClodMeshImpl
 		auto end0 = m_ClodMeshTriangleMesh.GetPosition(edgeKey.GetKey(0));
 		auto end1 = m_ClodMeshTriangleMesh.GetPosition(edgeKey.GetKey(1));
 		auto difference = end1 - end0;
-        float metric = lengthWeight * Mathematics::Vector3DToolsf::VectorMagnitude(difference);
+        float metric = lengthWeight * Mathematics::FloatVector3DTools::VectorMagnitude(difference);
 
         // 角度/区域的贡献。
 		auto triangleKey = edge.GetBeginTriangleKey();
@@ -149,8 +149,8 @@ float Rendering::CreateClodMeshImpl
 		triangleKey = edge.GetEndTriangleKey();
 		auto endNormal = GetNormal(triangleKey);
 
-		auto cross = Mathematics::Vector3DToolsf::CrossProduct(beginNormal,endNormal);
-		metric += angleWeight * Mathematics::Vector3DToolsf::VectorMagnitude(cross);
+		auto cross = Mathematics::FloatVector3DTools::CrossProduct(beginNormal,endNormal);
+		metric += angleWeight * Mathematics::FloatVector3DTools::VectorMagnitude(cross);
 
         return metric;
     }
@@ -160,7 +160,7 @@ float Rendering::CreateClodMeshImpl
 }
 
 
-const Mathematics::Vector3Df Rendering::CreateClodMeshImpl
+const Mathematics::FloatVector3D Rendering::CreateClodMeshImpl
 	::GetNormal( const TriangleKey& triangleKey )
 {
 	auto position0 = m_ClodMeshTriangleMesh.GetPosition(triangleKey.GetKey(0));
@@ -169,7 +169,7 @@ const Mathematics::Vector3Df Rendering::CreateClodMeshImpl
 	auto edgeDirection0 = position1 - position0;
 	auto edgeDirection1 = position2 - position0;
 
-	return Mathematics::Vector3DToolsf::CrossProduct(edgeDirection0,edgeDirection1);
+	return Mathematics::FloatVector3DTools::CrossProduct(edgeDirection0,edgeDirection1);
 }
 
 int Rendering::CreateClodMeshImpl
@@ -215,16 +215,16 @@ int Rendering::CreateClodMeshImpl
 		auto positionPlus = m_ClodMeshTriangleMesh.GetPosition(trianglKey.GetKey(plusIndex));
 		auto dirPlus = positionPlus - positionThrow;
 		auto dirMinus = positionMinus - positionThrow;
-		auto normalThrow = Mathematics::Vector3DToolsf::CrossProduct(dirPlus,dirMinus);
+		auto normalThrow = Mathematics::FloatVector3DTools::CrossProduct(dirPlus,dirMinus);
 
 		// 现在由keep位置代替throw位置
 		// 并计算由三角形的顶点确定的平面的法线向量（使用CCW顺序）。
         dirPlus = positionPlus - positionKeep;
         dirMinus = positionMinus - positionKeep;
-		auto normalKeep = Mathematics::Vector3DToolsf::CrossProduct(dirPlus,dirMinus);
+		auto normalKeep = Mathematics::FloatVector3DTools::CrossProduct(dirPlus,dirMinus);
 
 		// 当两个法线之间的角度是大于90度时崩塌是不允许的。
-		if (Mathematics::Vector3DToolsf::DotProduct(normalThrow,normalKeep) < 0.0f)
+		if (Mathematics::FloatVector3DTools::DotProduct(normalThrow,normalKeep) < 0.0f)
         {
             return -1;
         }

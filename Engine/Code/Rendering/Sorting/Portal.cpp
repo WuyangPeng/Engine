@@ -116,7 +116,7 @@ bool Rendering::Portal
     float umin = +Mathematics::FloatMath::sm_MaxReal;  // bottom
     float umax = -Mathematics::FloatMath::sm_MaxReal;  // top
 
-    Mathematics::FloatAVector diff{ Mathematics ::Float ::g_Zero};
+    Mathematics::FloatAVector diff{  };
 	Mathematics::FloatAPoint vertexCam;
     int i = 0;
 
@@ -125,8 +125,8 @@ bool Rendering::Portal
         constexpr float epsilon = 1e-6f, invEpsilon = 1e+6f;
         int firstSign = 0, lastSign = 0;  // in {-1,0,1}
         bool signChange = false;
-		Mathematics::FloatAPoint firstVertex = Mathematics::Float::g_Origin;
-		Mathematics::FloatAPoint lastVertex = Mathematics::Float::g_Origin;
+        Mathematics::FloatAPoint firstVertex = Mathematics::FloatAPoint::GetOrigin();
+        Mathematics::FloatAPoint lastVertex = Mathematics::FloatAPoint::GetOrigin();
         float NdD = 0.0f, UdD= 0.0f, RdD= 0.0f, t= 0.0f;
 
         for (i = 0; i < mNumVertices; i++)

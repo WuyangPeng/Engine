@@ -148,8 +148,8 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 	auto E10 = P1 - P0;
 	auto E20 = P2 - P0;
 
-    Real A[2][2] { { E10.GetXCoordinate(), E10.GetYCoordinate() },
-				   { E20.GetXCoordinate(), E20.GetYCoordinate() } };
+    Real A[2][2] { { E10.GetX(), E10.GetY() },
+				   { E20.GetX(), E20.GetY() } };
 
     Real B[2] { (Real{0.5})*Vector2DTools<Real>::VectorMagnitudeSquared(E10),
 				(Real{0.5})*Vector2DTools<Real>::VectorMagnitudeSquared(E20)  };
@@ -163,8 +163,8 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
     {
 		auto invDet = (static_cast<Real>(1))/det;
         Vector2D<Real> Q;
-		Q.SetXCoordinate((A[1][1] * B[0] - A[0][1] * B[1])*invDet);
-		Q.SetYCoordinate((A[0][0] * B[1] - A[1][0] * B[0])*invDet);
+		Q.SetX((A[1][1] * B[0] - A[0][1] * B[1])*invDet);
+		Q.SetY((A[0][0] * B[1] - A[1][0] * B[0])*invDet);
 		center = P0 + Q;
 		radius = Vector2DTools<Real>::VectorMagnitudeSquared(Q);
     }

@@ -1,36 +1,31 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 11:18)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/10 15:58)
 
 #include "Mathematics/MathematicsExport.h"
 
 #ifdef MATHEMATICS_EXPORT_TEMPLATE
 
-#ifndef MATHEMATICS_INCLUDED_QUATERNION_DETAIL
-	#define MATHEMATICS_INCLUDED_QUATERNION_DETAIL
-#endif // MATHEMATICS_INCLUDED_QUATERNION_DETAIL
+    #ifndef MATHEMATICS_INCLUDED_QUATERNION_ACHIEVE
+        #define MATHEMATICS_INCLUDED_QUATERNION_ACHIEVE
+    #endif  // MATHEMATICS_INCLUDED_QUATERNION_ACHIEVE
 
-#include "QuaternionDetail.h" 
-#include "Matrix3Detail.h"
-#include "Vector3DDetail.h"
-#include "Vector3DToolsDetail.h"
+#endif  // MATHEMATICS_EXPORT_TEMPLATE
+
+#include "QuaternionDetail.h"
 #include "QuaternionFactorDetail.h"
- #include "System/Helper/PragmaWarning.h"
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26446)
-    #include SYSTEM_WARNING_DISABLE(26482)
+
+#ifdef MATHEMATICS_EXPORT_TEMPLATE
+
 namespace Mathematics
 {
-	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
-	class Quaternion<float>;
-
-	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
-	class Quaternion<double>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Quaternion<float>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Quaternion<double>;
 }
-#include STSTEM_WARNING_POP
-#endif // MATHEMATICS_EXPORT_TEMPLATE
 
-
-
+#endif  // MATHEMATICS_EXPORT_TEMPLATE

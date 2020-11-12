@@ -242,17 +242,17 @@ void NaturalSpline2<Real>::CreateClosedSpline ()
 
     for (i = 0; i <= mNumSegments; ++i)
     {
-		input[i] = mC[i].GetXCoordinate();
+		input[i] = mC[i].GetX();
     }
     LinearSystem<Real>().Solve(mat, input, output);
     for (i = 0; i <= mNumSegments; ++i)
     {
-		mC[i].SetXCoordinate(output[i]);
+		mC[i].SetX(output[i]);
     }
 
     for (i = 0; i <= mNumSegments; ++i)
     {
-		input[i] = mC[i].GetYCoordinate();
+		input[i] = mC[i].GetY();
     }
     LinearSystem<Real>().Solve(mat, input, output);
     for (i = 0; i <= mNumSegments; ++i)

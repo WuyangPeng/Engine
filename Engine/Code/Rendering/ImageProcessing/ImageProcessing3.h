@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "ImageProcessingBase.h"
-#include "Mathematics/Base/Float4.h"
+#include "Mathematics/Base/Float.h"
 
 // This class supports processing of a 3D image that is stored as a tiled
 // 2D image.  Let the image have b0 voxels in the x-direction, b1 voxels

@@ -76,7 +76,7 @@ Real Mathematics::IntersectorLine3Triangle3Data<Real>::GetDirectionDotNormal() c
 
 template <typename Real>
 Mathematics::Vector3D<Real> Mathematics::IntersectorLine3Triangle3Data<Real>
-	::GetOriginCrossEdge2() const
+	::GetOriginCrossEdge2() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -84,8 +84,7 @@ Mathematics::Vector3D<Real> Mathematics::IntersectorLine3Triangle3Data<Real>
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::IntersectorLine3Triangle3Data<Real>
-	::GetEdge1CrossOrigin() const
+Mathematics::Vector3D<Real> Mathematics::IntersectorLine3Triangle3Data<Real>::GetEdge1CrossOrigin() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -93,8 +92,7 @@ Mathematics::Vector3D<Real> Mathematics::IntersectorLine3Triangle3Data<Real>
 }
 
 template <typename Real>
-Real Mathematics::IntersectorLine3Triangle3Data<Real>
-	::GetOriginDotNormal() const
+Real Mathematics::IntersectorLine3Triangle3Data<Real>::GetOriginDotNormal() const noexcept
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

@@ -68,7 +68,7 @@ namespace Physics
 	}
 
 	template <typename Real>
-	void ExtremalQuery3BSP<Real>::GetExtremeVertices(const  ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection,int& negativeDirection)
+	void ExtremalQuery3BSP<Real>::GetExtremeVertices(const  ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection,int& negativeDirection) noexcept
 	{
 		// Do a nonrecursive depth-first search of the BSP tree to determine
 		// spherical polygon contains the incoming direction D.  Index 0 is the

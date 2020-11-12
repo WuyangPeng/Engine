@@ -1,53 +1,19 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 14:15)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/10 13:26)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H
 
-#include "Polynomial.h"
-#include "AlgebraTraits.h"
-#include "PolynomialDivide.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Base/MathDetail.h"
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_POLYNOMIAL_DIVIDE_ACHIEVE)
 
-template <typename Real>
-Mathematics::PolynomialDivide <Real>
-	::PolynomialDivide(const Polynomial& quotient, const Polynomial& remainder)
-	: m_Quotient{ quotient }, m_Remainder{ remainder }
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+    #include "PolynomialDivideAchieve.h"
 
-#ifdef OPEN_CLASS_INVARIANT
-template <typename Real>
-bool Mathematics::PolynomialDivide <Real>
-	::IsValid() const noexcept
-{
-	return true;
-}
-#endif	// OPEN_CLASS_INVARIANT
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_POLYNOMIAL_DIVIDE_ACHIEVE)
 
-template <typename Real>
-typename const Mathematics::PolynomialDivide<Real>::Polynomial Mathematics::PolynomialDivide<Real>
-	::GetQuotient() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-	return m_Quotient;
-}
-
-template <typename Real>
-typename const Mathematics::PolynomialDivide<Real>::Polynomial Mathematics::PolynomialDivide<Real>
-	::GetRemainder() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-	return m_Remainder;
-}
-
-#endif // MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H
+#endif  // MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H

@@ -78,10 +78,10 @@ namespace Mathematics
 		Real m_InverseTwoDifferenceStep;
 	};
 
-	using Distance2f = DistanceBase<float, Vector2Df>;
-	using Distance3f = DistanceBase<float, Vector3Df>;
-	using Distance2d = DistanceBase<double, Vector2Dd>;
-	using Distance3d = DistanceBase<double, Vector3Dd>;
+	using Distance2f = DistanceBase<float, FloatVector2D>;
+	using Distance3f = DistanceBase<float, FloatVector3D>;
+	using Distance2d = DistanceBase<double, DoubleVector2D>;
+	using Distance3d = DistanceBase<double, DoubleVector3D>;
 }
 
 #endif // MATHEMATICS_DISTANCE_DISTANCE_H

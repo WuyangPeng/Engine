@@ -1,29 +1,30 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 11:14)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/05 17:08)
 
 #include "Mathematics/MathematicsExport.h"
 
 #ifdef MATHEMATICS_EXPORT_TEMPLATE
 
-#ifndef MATHEMATICS_INCLUDED_EULER_DETAIL
-	#define MATHEMATICS_INCLUDED_EULER_DETAIL
-#endif // MATHEMATICS_INCLUDED_EULER_DETAIL
+    #ifndef MATHEMATICS_INCLUDED_EULER_ACHIEVE
+        #define MATHEMATICS_INCLUDED_EULER_ACHIEVE
+    #endif  // MATHEMATICS_INCLUDED_EULER_ACHIEVE
 
-#include "EulerDetail.h" 
+#endif  // MATHEMATICS_EXPORT_TEMPLATE
+
+#include "EulerDetail.h"
+
+#ifdef MATHEMATICS_EXPORT_TEMPLATE
 
 namespace Mathematics
 {
-	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
-	class Euler<float>;
-
-	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
-	class Euler<double>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Euler<float>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Euler<double>;
 }
 
-#endif // MATHEMATICS_EXPORT_TEMPLATE
-
-
-
+#endif  // MATHEMATICS_EXPORT_TEMPLATE

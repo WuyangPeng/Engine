@@ -1,53 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 14:53)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/10 19:03)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_DETAIL_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_DETAIL_H
 
 #include "QuaternionSwingTwist.h"
-#include "Quaternion.h"
-#include "AlgebraTraits.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Base/MathDetail.h"
+ 
+ #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_QUATERNION_SWING_TWIST_ACHIEVE)
 
-template <typename Real>
-Mathematics::QuaternionSwingTwist <Real>
-	::QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist) noexcept
-	: m_Swing{ swing }, m_Twist{ twist }
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+    #include "QuaternionSwingTwistAchieve.h"
 
-#ifdef OPEN_CLASS_INVARIANT
-template <typename Real>
-bool Mathematics::QuaternionSwingTwist<Real>
-	::IsValid() const noexcept
-{
-	return true;
-}
-#endif	// OPEN_CLASS_INVARIANT
-
-template <typename Real>
-typename const Mathematics::QuaternionSwingTwist<Real>::Quaternion Mathematics::QuaternionSwingTwist<Real>
-	::GetTwist() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-	return m_Twist;
-}
-
-template <typename Real>
-typename const Mathematics::QuaternionSwingTwist<Real>::Quaternion Mathematics::QuaternionSwingTwist<Real>
-	::GetSwing() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-	return m_Swing;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_QUATERNION_SWING_TWIST_ACHIEVE)
 
 #endif // MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_DETAIL_H

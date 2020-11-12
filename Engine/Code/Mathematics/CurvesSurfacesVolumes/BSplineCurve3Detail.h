@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26429)
@@ -183,7 +184,7 @@ void Mathematics::BSplineCurve3<Real>
 
     if (pos)
     {
-        *pos = Vector3D<Real>::sm_Zero;
+        *pos = Vector3D<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *pos += mBasis.GetD0(i)*mCtrlPoint[i];
@@ -192,7 +193,7 @@ void Mathematics::BSplineCurve3<Real>
 
     if (der1)
     {
-        *der1 = Vector3D<Real>::sm_Zero;
+        *der1 = Vector3D<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der1 += mBasis.GetD1(i)*mCtrlPoint[i];
@@ -201,7 +202,7 @@ void Mathematics::BSplineCurve3<Real>
 
     if (der2)
     {
-        *der2 = Vector3D<Real>::sm_Zero;
+        *der2 = Vector3D<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der2 += mBasis.GetD2(i)*mCtrlPoint[i];
@@ -210,7 +211,7 @@ void Mathematics::BSplineCurve3<Real>
 
     if (der3)
     {
-        *der3 = Vector3D<Real>::sm_Zero;
+        *der3 = Vector3D<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der3 += mBasis.GetD3(i)*mCtrlPoint[i];

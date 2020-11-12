@@ -11,7 +11,7 @@
 
 #include "GlobalEffect.h"
 #include "Mathematics/Algebra/Matrix.h"
-#include "Mathematics/Base/Float4.h"
+#include "Mathematics/Base/Float.h"
 #include "Rendering/LocalEffects/MaterialEffect.h"
 #include "Rendering/SceneGraph/Light.h"
 #include "Rendering/SceneGraph/Node.h"

@@ -48,8 +48,8 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>
 	for (auto i1 = 2, i0 = 0; i0 < 3; i1 = i0++)
 	{
 		// Clip against edge <V0[i1],V0[i0]>.
-		Vector2D N{ mTriangle0.GetVertex()[i1].GetYCoordinate() - mTriangle0.GetVertex()[i0].GetYCoordinate(),
-					mTriangle0.GetVertex()[i0].GetXCoordinate() - mTriangle0.GetVertex()[i1].GetXCoordinate() };
+		Vector2D N{ mTriangle0.GetVertex()[i1].GetY() - mTriangle0.GetVertex()[i0].GetY(),
+					mTriangle0.GetVertex()[i0].GetX() - mTriangle0.GetVertex()[i1].GetX() };
 		auto c = Vector2DTools::DotProduct(N, mTriangle0.GetVertex()[i1]);
 		ClipConvexPolygonAgainstLine(N, c, mQuantity, mPoint);
 		if (mQuantity == 0)

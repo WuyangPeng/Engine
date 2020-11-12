@@ -105,7 +105,7 @@ void Rendering::RevolutionSurface ::ComputeSampleData()
     mCos[mNumRadialSamples] = mCos[0];
 
     // Allocate storage for curve samples.
-    mSamples = NEW1<Mathematics::Vector3Df>(mNumCurveSamples);
+    mSamples = NEW1<Mathematics::FloatVector3D>(mNumCurveSamples);
 }
 
 void Rendering::RevolutionSurface ::UpdateSurface()
@@ -139,10 +139,10 @@ void Rendering::RevolutionSurface ::UpdateSurface()
             t = tMin + i * tRange * invNumCurveSamplesM1;
         }
 
-        const Mathematics::Vector2Df position = mCurve->GetPosition(t);
-        mSamples[i][0] =(position.GetXCoordinate());
+        const Mathematics::FloatVector2D position = mCurve->GetPosition(t);
+        mSamples[i][0] =(position.GetX());
         mSamples[i][1] = (0.0f);
-        mSamples[i][2] = (position.GetYCoordinate());
+        mSamples[i][2] = (position.GetY());
     }
 
     // Store the samples and their rotated equivalents.  The storage layout

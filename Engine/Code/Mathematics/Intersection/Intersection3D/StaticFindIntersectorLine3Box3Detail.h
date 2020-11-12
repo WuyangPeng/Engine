@@ -67,12 +67,12 @@ bool Mathematics::StaticFindIntersectorLine3Box3<Real>
 
 	auto saveT0 = t0;
 	auto saveT1 = t1;
-	auto notAllClipped = Clip(+BDirection.GetXCoordinate(), -BOrigin.GetXCoordinate() - box.GetExtent(0), t0, t1) &&
-						 Clip(-BDirection.GetXCoordinate(), +BOrigin.GetXCoordinate() - box.GetExtent(0), t0, t1) &&
-						 Clip(+BDirection.GetYCoordinate(), -BOrigin.GetYCoordinate() - box.GetExtent(1), t0, t1) &&
-						 Clip(-BDirection.GetYCoordinate(), +BOrigin.GetYCoordinate() - box.GetExtent(1), t0, t1) &&
-						 Clip(+BDirection.GetZCoordinate(), -BOrigin.GetZCoordinate() - box.GetExtent(2), t0, t1) &&
-						 Clip(-BDirection.GetZCoordinate(), +BOrigin.GetZCoordinate() - box.GetExtent(2), t0, t1);
+	auto notAllClipped = Clip(+BDirection.GetX(), -BOrigin.GetX() - box.GetExtent(0), t0, t1) &&
+						 Clip(-BDirection.GetX(), +BOrigin.GetX() - box.GetExtent(0), t0, t1) &&
+						 Clip(+BDirection.GetY(), -BOrigin.GetY() - box.GetExtent(1), t0, t1) &&
+						 Clip(-BDirection.GetY(), +BOrigin.GetY() - box.GetExtent(1), t0, t1) &&
+						 Clip(+BDirection.GetZ(), -BOrigin.GetZ() - box.GetExtent(2), t0, t1) &&
+						 Clip(-BDirection.GetZ(), +BOrigin.GetZ() - box.GetExtent(2), t0, t1);
 
 	if (notAllClipped && (solid || t0 != saveT0 || t1 != saveT1))
 	{

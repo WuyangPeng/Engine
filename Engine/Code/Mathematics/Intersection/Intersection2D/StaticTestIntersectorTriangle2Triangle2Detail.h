@@ -43,8 +43,8 @@ void Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>
 	for (i0 = 0, i1 = 2; i0 < 3; i1 = i0++)
 	{
 		// Test axis V0[i1] + t*perp(V0[i0]-V0[i1]), perp(x,y) = (y,-x).
-		dir.SetXCoordinate(mTriangle0.GetVertex()[i0].GetYCoordinate() - mTriangle0.GetVertex()[i1].GetYCoordinate());
-		dir.SetYCoordinate(mTriangle0.GetVertex()[i1].GetXCoordinate() - mTriangle0.GetVertex()[i0].GetXCoordinate());
+		dir.SetX(mTriangle0.GetVertex()[i0].GetY() - mTriangle0.GetVertex()[i1].GetY());
+		dir.SetY(mTriangle0.GetVertex()[i1].GetX() - mTriangle0.GetVertex()[i0].GetX());
 		if (WhichSide(mTriangle1.GetVertex(), mTriangle0.GetVertex()[i1], dir) > 0)
 		{
 			// Triangle1 is entirely on positive side of triangle0 edge.
@@ -57,8 +57,8 @@ void Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>
 	for (i0 = 0, i1 = 2; i0 < 3; i1 = i0++)
 	{
 		// Test axis V1[i1] + t*perp(V1[i0]-V1[i1]), perp(x,y) = (y,-x).
-		dir.SetXCoordinate(mTriangle1.GetVertex()[i0].GetYCoordinate() - mTriangle1.GetVertex()[i1].GetYCoordinate());
-		dir.SetYCoordinate(mTriangle1.GetVertex()[i1].GetXCoordinate() - mTriangle1.GetVertex()[i0].GetXCoordinate());
+		dir.SetX(mTriangle1.GetVertex()[i0].GetY() - mTriangle1.GetVertex()[i1].GetY());
+		dir.SetY(mTriangle1.GetVertex()[i1].GetX() - mTriangle1.GetVertex()[i0].GetX());
 		if (WhichSide(mTriangle0.GetVertex(), mTriangle1.GetVertex()[i1], dir) > 0)
 		{
 			// Triangle0 is entirely on positive side of triangle1 edge.

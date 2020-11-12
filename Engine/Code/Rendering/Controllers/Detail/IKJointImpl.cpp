@@ -241,15 +241,15 @@ const Rendering::IKJointImpl::AVector Rendering::IKJointImpl
 	}
 	else if (axisIndex == Mathematics::MatrixRotationAxis::X)
 	{
-		return Mathematics::Float::g_UnitX;
+		return Mathematics::FloatAVector::GetUnitX();
 	}
 	else if (axisIndex == Mathematics::MatrixRotationAxis::Y)
 	{
-		return Mathematics::Float::g_UnitY;
+            return Mathematics::FloatAVector::GetUnitY(); 
 	}
 	else  //  axisIndex == MatrixRotationAxis::Z
 	{
-		return Mathematics::Float::g_UnitZ;
+            return Mathematics::FloatAVector::GetUnitZ();  
 	}
 }
 

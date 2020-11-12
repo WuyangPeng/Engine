@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/26 12:56)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 15:13)
 
 #ifndef MATHEMATICS_BASE_MATH_DETAIL_H
 #define MATHEMATICS_BASE_MATH_DETAIL_H
@@ -53,13 +53,13 @@ constexpr double Mathematics::Math<double>::GetPI() noexcept
 template <typename Real>
 constexpr Real Mathematics::Math<Real>::GetZeroTolerance() noexcept
 {
-    return 0;
+    return GetValue(0);
 }
 
 template <typename Real>
 constexpr Real Mathematics::Math<Real>::GetPI() noexcept
 {
-    return 3;
+    return GetValue(3);
 }
 
 template <typename Real>

@@ -20,7 +20,7 @@
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26446)
-typedef std::map<Mathematics::Vector3Df,int> VMap;
+typedef std::map<Mathematics::FloatVector3D,int> VMap;
 typedef VMap::iterator VMapIterator;
 typedef std::map<Mathematics::TriangleKey,int> TMap;
 typedef TMap::iterator TMapIterator;
@@ -37,30 +37,29 @@ Imagics::ExtractSurfaceTetra
 {
 }
 
-float Imagics::ExtractSurfaceTetra
-	::GetFunction (const Mathematics::Vector3Df& P) const  
+float Imagics::ExtractSurfaceTetra ::GetFunction(const Mathematics::FloatVector3D& P) const noexcept
 {
-    const int x = (int)P.GetXCoordinate();
+    const int x = (int)P.GetX();
     if (x < 0 || x >= mXBound-1)
     {
         return 0.0f;
     }
 
-    const int y = (int)P.GetYCoordinate();
+    const int y = (int)P.GetY();
     if (y < 0 || y >= mYBound-1)
     {
         return 0.0f;
     }
 
-    const int z = (int)P.GetZCoordinate();
+    const int z = (int)P.GetZ();
     if (z < 0 || z >= mZBound-1)
     {
         return 0.0f;
     }
 
-    const float dx = P.GetXCoordinate() - x;
-	const float	dy = P.GetYCoordinate() - y;
-	const float dz = P.GetZCoordinate() - z;
+    const float dx = P.GetX() - x;
+	const float	dy = P.GetY() - y;
+	const float dz = P.GetZ() - z;
 
     const int i000 = x + mXBound*(y + mYBound*z);
     const int i100 = i000 + 1;
@@ -186,30 +185,29 @@ float Imagics::ExtractSurfaceTetra
     return interp;
 }
 
-Mathematics::Vector3Df Imagics::ExtractSurfaceTetra
-	::GetGradient (const Mathematics::Vector3Df& P) const
+Mathematics::FloatVector3D Imagics::ExtractSurfaceTetra ::GetGradient(const Mathematics::FloatVector3D& P) const noexcept
 {
-    const int x = (int)P.GetXCoordinate();
+    const int x = (int)P.GetX();
     if (x < 0 || x >= mXBound-1)
     {
-        return Mathematics::Vector3Df::sm_Zero;
+        return Mathematics::FloatVector3D::GetZero();
     }
 
-    const int y = (int)P.GetYCoordinate();
+    const int y = (int)P.GetY();
     if (y < 0 || y >= mYBound-1)
     {
-        return Mathematics::Vector3Df::sm_Zero;
+        return Mathematics::FloatVector3D::GetZero();
     }
 
-    const int z = (int)P.GetZCoordinate();
+    const int z = (int)P.GetZ();
     if (z < 0 || z >= mZBound-1)
     {
-        return Mathematics::Vector3Df::sm_Zero;
+        return Mathematics::FloatVector3D::GetZero();
     }
 
-    const float dx = P.GetXCoordinate() - x;
-    const auto dy = P.GetYCoordinate() - y;
-    const auto dz = P.GetZCoordinate() - z;
+    const float dx = P.GetX() - x;
+    const auto dy = P.GetY() - y;
+    const auto dz = P.GetZ() - z;
 
     const int i000 = x + mXBound*(y + mYBound*z);
     const int i100 = i000 + 1;
@@ -227,44 +225,44 @@ Mathematics::Vector3Df Imagics::ExtractSurfaceTetra
     const float f101 = (float)mData[i101];
     const float f011 = (float)mData[i011];
     const float f111 = (float)mData[i111];
-    Mathematics::Vector3Df interp;
+    Mathematics::FloatVector3D interp;
 
     if ((x & 1) ^ (y & 1) ^ (z & 1))
     {
         if (dx - dy - dz >= 0.0f)
         {
             // 1205
-            interp.SetXCoordinate(+ f100 - f000);
-            interp.SetYCoordinate(- f100 + f110);
-            interp.SetZCoordinate(- f100 + f101); 
+            interp.SetX(+ f100 - f000);
+            interp.SetY(- f100 + f110);
+            interp.SetZ(- f100 + f101); 
         }
         else if (dx - dy + dz <= 0.0f)
         {
             // 3027
-            interp.SetXCoordinate(- f010 + f110);
-            interp.SetYCoordinate(+ f010 - f000);
-            interp.SetZCoordinate(- f010 + f011);
+            interp.SetX(- f010 + f110);
+            interp.SetY(+ f010 - f000);
+            interp.SetZ(- f010 + f011);
         }
         else if (dx + dy - dz <= 0.0f)
         {
             // 4750
-            interp.SetXCoordinate(- f001 + f101);
-            interp.SetYCoordinate(- f001 + f011);
-            interp.SetZCoordinate(+ f001 - f000);
+            interp.SetX(- f001 + f101);
+            interp.SetY(- f001 + f011);
+            interp.SetZ(+ f001 - f000);
         }
         else if (dx + dy + dz >= 2.0f)
         {
             // 6572
-            interp.SetXCoordinate(+ f111 - f011);
-            interp.SetYCoordinate(+ f111 - f101);
-            interp.SetZCoordinate(+ f111 - f110);
+            interp.SetX(+ f111 - f011);
+            interp.SetY(+ f111 - f101);
+            interp.SetZ(+ f111 - f110);
         }
         else
         {
             // 0752
-            interp.SetXCoordinate(0.5f*(-f000-f011+f101+f110));
-            interp.SetYCoordinate(0.5f*(-f000+f011-f101+f110));
-            interp.SetZCoordinate(0.5f*(-f000+f011+f101-f110));
+            interp.SetX(0.5f*(-f000-f011+f101+f110));
+            interp.SetY(0.5f*(-f000+f011-f101+f110));
+            interp.SetZ(0.5f*(-f000+f011+f101-f110));
         }
     }
     else
@@ -272,37 +270,37 @@ Mathematics::Vector3Df Imagics::ExtractSurfaceTetra
         if (dx + dy + dz <= 1.0f)
         {
             // 0134
-            interp.SetXCoordinate(- f000 + f100);
-            interp.SetYCoordinate(- f000 + f010);
-            interp.SetZCoordinate(- f000 + f001);
+            interp.SetX(- f000 + f100);
+            interp.SetY(- f000 + f010);
+            interp.SetZ(- f000 + f001);
         }
         else if (dx + dy - dz >= 1.0f)
         {
             // 2316
-            interp.SetXCoordinate(+ f110 - f010);
-            interp.SetYCoordinate(+ f110 - f100);
-            interp.SetZCoordinate(- f110 + f111);
+            interp.SetX(+ f110 - f010);
+            interp.SetY(+ f110 - f100);
+            interp.SetZ(- f110 + f111);
         }
         else if (dx - dy + dz >= 1.0f)
         {
             // 5461
-            interp.SetXCoordinate(+ f101 - f001);
-            interp.SetYCoordinate(- f101 + f111);
-            interp.SetZCoordinate(+ f101 - f100);
+            interp.SetX(+ f101 - f001);
+            interp.SetY(- f101 + f111);
+            interp.SetZ(+ f101 - f100);
         }
         else if (-dx + dy + dz >= 1.0f)
         {
             // 7643
-            interp.SetXCoordinate(- f011 + f111);
-            interp.SetYCoordinate(+ f011 - f001);
-            interp.SetZCoordinate(+ f011 - f010);
+            interp.SetX(- f011 + f111);
+            interp.SetY(+ f011 - f001);
+            interp.SetZ(+ f011 - f010);
         }
         else
         {
             // 6314
-            interp.SetXCoordinate(0.5f*(f111-f010+f100-f001));
-            interp.SetYCoordinate(0.5f*(f111+f010-f100-f001));
-            interp.SetZCoordinate(0.5f*(f111-f010-f100+f001));
+            interp.SetX(0.5f*(f111-f010+f100-f001));
+            interp.SetY(0.5f*(f111+f010-f100-f001));
+            interp.SetZ(0.5f*(f111-f010-f100+f001));
         }
     }
 
@@ -310,7 +308,7 @@ Mathematics::Vector3Df Imagics::ExtractSurfaceTetra
 }
 
 void Imagics::ExtractSurfaceTetra
-	::ExtractContour (int level,std::vector<Mathematics::Vector3Df>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
+	::ExtractContour (int level,std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
 {
     // NOTE:  Isolated edges are computed, but not reported to the caller.
     // You can modify the code to return these if so desired.
@@ -459,7 +457,7 @@ void Imagics::ExtractSurfaceTetra
 }
 
 void Imagics::ExtractSurfaceTetra
-	::MakeUnique (std::vector<Mathematics::Vector3Df>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
+	::MakeUnique (std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles)
 {
     const int numVertices = (int)vertices.size();
      const int numTriangles = (int)triangles.size();
@@ -526,7 +524,7 @@ void Imagics::ExtractSurfaceTetra
 }
 
 void Imagics::ExtractSurfaceTetra
-	::OrientTriangles (std::vector<Mathematics::Vector3Df>& vertices,
+	::OrientTriangles (std::vector<Mathematics::FloatVector3D>& vertices,
                        std::vector<Mathematics::TriangleKey>& triangles, bool sameDir)
 {
     const int numTriangles = (int)triangles.size();
@@ -535,25 +533,25 @@ void Imagics::ExtractSurfaceTetra
         Mathematics::TriangleKey& tri = triangles[i];
 
         // Get triangle vertices.
-        const Mathematics::Vector3Df v0 = vertices[tri.GetKey(0)];
-        const Mathematics::Vector3Df v1 = vertices[tri.GetKey(1)];
-        const Mathematics::Vector3Df v2 = vertices[tri.GetKey(2)];
+        const Mathematics::FloatVector3D v0 = vertices[tri.GetKey(0)];
+        const Mathematics::FloatVector3D v1 = vertices[tri.GetKey(1)];
+        const Mathematics::FloatVector3D v2 = vertices[tri.GetKey(2)];
         
         // Construct triangle normal based on current orientation.
-        const Mathematics::Vector3Df edge1 = v1 - v0;
-        const Mathematics::Vector3Df edge2 = v2 - v0;
-        const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
+        const Mathematics::FloatVector3D edge1 = v1 - v0;
+        const Mathematics::FloatVector3D edge2 = v2 - v0;
+        const Mathematics::FloatVector3D normal = Mathematics::FloatVector3DTools::CrossProduct(edge1,edge2);
 
         // Get the image gradient at the vertices.
-        const Mathematics::Vector3Df grad0 = GetGradient(v0);
-        const Mathematics::Vector3Df grad1 = GetGradient(v1);
-        const Mathematics::Vector3Df grad2 = GetGradient(v2);
+        const Mathematics::FloatVector3D grad0 = GetGradient(v0);
+        const Mathematics::FloatVector3D grad1 = GetGradient(v1);
+        const Mathematics::FloatVector3D grad2 = GetGradient(v2);
 
         // Compute the average gradient.
-        const Mathematics::Vector3Df gradAvr = (grad0 + grad1 + grad2)/3.0f;
+        const Mathematics::FloatVector3D gradAvr = (grad0 + grad1 + grad2)/3.0f;
         
         // Compute the dot product of normal and average gradient.
-        const float dot = Mathematics::Vector3DToolsf::DotProduct(gradAvr,normal);
+        const float dot = Mathematics::FloatVector3DTools::DotProduct(gradAvr,normal);
 
         // Choose triangle orientation based on gradient direction.
         int save = 0;
@@ -581,7 +579,7 @@ void Imagics::ExtractSurfaceTetra
 }
 
 void Imagics::ExtractSurfaceTetra
-	::ComputeNormals (const std::vector<Mathematics::Vector3Df>& vertices,const std::vector<Mathematics::TriangleKey>& triangles,  std::vector<Mathematics::Vector3Df>& normals)
+	::ComputeNormals (const std::vector<Mathematics::FloatVector3D>& vertices,const std::vector<Mathematics::TriangleKey>& triangles,  std::vector<Mathematics::FloatVector3D>& normals)
 {
     // Maintain a running sum of triangle normals at each vertex.
    const int numVertices = (int)vertices.size();
@@ -590,20 +588,20 @@ void Imagics::ExtractSurfaceTetra
     int i;
     for (i = 0; i < numVertices; ++i)
     {
-        normals[i] = Mathematics::Vector3Df::sm_Zero;
+        normals[i] = Mathematics::FloatVector3D::GetZero();
     }
 
     for (i = 0; i < numTriangles; ++i)
     {
         const Mathematics::TriangleKey& key = triangles[i];
-       const Mathematics::Vector3Df v0 = vertices[key.GetKey(0)];
-       const Mathematics::Vector3Df v1 = vertices[key.GetKey(1)];
-       const Mathematics::Vector3Df v2 = vertices[key.GetKey(2)];
+       const Mathematics::FloatVector3D v0 = vertices[key.GetKey(0)];
+       const Mathematics::FloatVector3D v1 = vertices[key.GetKey(1)];
+       const Mathematics::FloatVector3D v2 = vertices[key.GetKey(2)];
 
         // Construct triangle normal.
-       const Mathematics::Vector3Df edge1 = v1 - v0;
-       const Mathematics::Vector3Df edge2 = v2 - v0;
-       const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge1,edge2);
+       const Mathematics::FloatVector3D edge1 = v1 - v0;
+       const Mathematics::FloatVector3D edge2 = v2 - v0;
+       const Mathematics::FloatVector3D normal = Mathematics::FloatVector3DTools::CrossProduct(edge1,edge2);
 
         // Maintain the sum of normals at each vertex.
         normals[key.GetKey(0)] += normal;
@@ -689,29 +687,29 @@ void Imagics::ExtractSurfaceTetra
     edgeSet.insert(Mathematics::EdgeKey(v2, v0));
 
     // Compute triangle normal assuming counterclockwise ordering.
-   const Mathematics::Vector3Df pos0(
+   const Mathematics::FloatVector3D pos0(
         xNumer0/(float)xDenom0,
         yNumer0/(float)yDenom0,
         zNumer0/(float)zDenom0);
 
-   const Mathematics::Vector3Df pos1(
+   const Mathematics::FloatVector3D pos1(
         xNumer1/(float)xDenom1,
         yNumer1/(float)yDenom1,
         zNumer1/(float)zDenom1);
 
-   const Mathematics::Vector3Df pos2(
+   const Mathematics::FloatVector3D pos2(
         xNumer2/(float)xDenom2,
         yNumer2/(float)yDenom2,
         zNumer2/(float)zDenom2);
 
-   const Mathematics::Vector3Df edge0 = pos1 - pos0;
-   const Mathematics::Vector3Df edge1 = pos2 - pos0;
-   const Mathematics::Vector3Df normal = Mathematics::Vector3DToolsf::CrossProduct(edge0,edge1);
+   const Mathematics::FloatVector3D edge0 = pos1 - pos0;
+   const Mathematics::FloatVector3D edge1 = pos2 - pos0;
+   const Mathematics::FloatVector3D normal = Mathematics::FloatVector3DTools::CrossProduct(edge0,edge1);
 
     // Choose triangle orientation based on gradient direction.
-   const Mathematics::Vector3Df centroid = (pos0 + pos1 + pos2)/3.0f;
-   const Mathematics::Vector3Df grad = GetGradient(centroid);
-    if (Mathematics::Vector3DToolsf::DotProduct(grad,normal) <= 0.0f)
+   const Mathematics::FloatVector3D centroid = (pos0 + pos1 + pos2)/3.0f;
+   const Mathematics::FloatVector3D grad = GetGradient(centroid);
+    if (Mathematics::FloatVector3DTools::DotProduct(grad,normal) <= 0.0f)
     {
         triangleSet.insert(Mathematics::TriangleKey(v0, v1, v2));
     }
@@ -1363,12 +1361,11 @@ bool Imagics::ExtractSurfaceTetra::Vertex
     return false;
 }
 
-void Imagics::ExtractSurfaceTetra::Vertex
-	::GetTriple (Mathematics::Vector3Df& meshVertex) const
+void Imagics::ExtractSurfaceTetra::Vertex ::GetTriple(Mathematics::FloatVector3D& meshVertex) const noexcept
 {
-    meshVertex.SetXCoordinate(float(XNumer)/float(XDenom));
-    meshVertex.SetYCoordinate(float(YNumer)/float(YDenom));
-    meshVertex.SetZCoordinate(float(ZNumer)/float(ZDenom));
+    meshVertex.SetX(float(XNumer)/float(XDenom));
+    meshVertex.SetY(float(YNumer)/float(YDenom));
+    meshVertex.SetZ(float(ZNumer)/float(ZDenom));
 }
 
 #include STSTEM_WARNING_POP

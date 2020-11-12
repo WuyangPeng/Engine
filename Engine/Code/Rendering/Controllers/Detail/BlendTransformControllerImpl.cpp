@@ -283,14 +283,14 @@ const Rendering::BlendTransformControllerImpl::Matrix Rendering::BlendTransformC
 	const auto firstRotate = firstTransform.GetRotate();
 	const auto secondRotate = secondTransform.GetRotate();
 
-	const Mathematics::AQuaternionf firstQuaternion{ firstRotate };
-        const Mathematics::AQuaternionf secondQuaternion{ secondRotate };
+	const Mathematics::FloatAQuaternion firstQuaternion{ firstRotate };
+        const Mathematics::FloatAQuaternion secondQuaternion{ secondRotate };
 	if (Dot(firstQuaternion,secondQuaternion) < 0.0f)
 	{
 		//secondQuaternion = -secondQuaternion;
 	}
 
-	Mathematics::AQuaternionf blendQuaternion;
+	Mathematics::FloatAQuaternion blendQuaternion;
 
 	if (m_GeometricRotation)
 	{

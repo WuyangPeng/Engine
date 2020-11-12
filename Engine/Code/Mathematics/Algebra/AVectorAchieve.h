@@ -1,26 +1,40 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/28 0:18)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/03 17:35)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H
 
 #include "AVector.h"
-
 #include "Vector3D.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T>
-Mathematics::AVector<T>::AVector(const Vector3D& rhs)
-    : AVector{ rhs.GetXCoordinate(), rhs.GetYCoordinate(), rhs.GetZCoordinate() }
+Mathematics::AVector<T>::AVector(const Vector3D& rhs) noexcept
+    : AVector{ rhs.GetX(), rhs.GetY(), rhs.GetZ() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+template <typename T>
+Mathematics::AVector<T>::AVector(const ArrayType& rhs) noexcept
+    : AVector{ rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)],
+               rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)],
+               rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)] }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+#include STSTEM_WARNING_POP
 
 template <typename T>
 Mathematics::AVector<T>::AVector(const HomogeneousPoint& homogeneousPoint) noexcept
@@ -65,10 +79,7 @@ T& Mathematics::AVector<T>::operator[](int index)
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= index && index < sm_AVectorSize, "索引错误！");
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-    return const_cast<T&>(static_cast<const ClassType&>(*this)[index]);
-#include STSTEM_WARNING_POP
+    return OPERATOR_SQUARE_BRACKETS(T, index);
 }
 
 template <typename T>
@@ -218,8 +229,6 @@ void Mathematics::AVector<T>::Normalize(const T epsilon)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("除零错误。"s));
     }
-
-    *this /= length;
 }
 
 template <typename T>
@@ -267,9 +276,10 @@ void Mathematics::AVector<T>::Set(const ArrayType& coordinate) noexcept
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-    SetX(coordinate[0]);
-    SetY(coordinate[1]);
-    SetZ(coordinate[2]);
+#include SYSTEM_WARNING_DISABLE(26482)
+    SetX(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)]);
+    SetY(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)]);
+    SetZ(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)]);
 #include STSTEM_WARNING_POP
 }
 

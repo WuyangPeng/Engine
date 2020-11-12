@@ -135,8 +135,8 @@ void Rendering::ImageProcessing2
     Texture2DSharedPtr maskTexture(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
     Mathematics::Float4* mask = (Mathematics::Float4*)maskTexture->GetTextureData(0);
-    Mathematics::Float4 one(1.0f, 1.0f, 1.0f, 1.0f);
-    Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
+    const Mathematics::Float4 one(1.0f, 1.0f, 1.0f, 1.0f);
+    const Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
     int x = 0, y = 0;
 
     // Interior.
@@ -225,11 +225,11 @@ void Rendering::ImageProcessing2
     Texture2DSharedPtr offsetTexture(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
     Mathematics::Float4* offset = (Mathematics::Float4*)offsetTexture->GetTextureData(0);
-    Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
-    Mathematics::Float4 x0EdgeOffset(+mDx, 0.0f, 0.0f, 0.0f);
-    Mathematics::Float4 x1EdgeOffset(-mDx, 0.0f, 0.0f, 0.0f);
-    Mathematics::Float4 y0EdgeOffset(0.0f, +mDy, 0.0f, 0.0f);
-    Mathematics::Float4 y1EdgeOffset(0.0f, -mDy, 0.0f, 0.0f);
+    const Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
+    const Mathematics::Float4 x0EdgeOffset(+mDx, 0.0f, 0.0f, 0.0f);
+    const Mathematics::Float4 x1EdgeOffset(-mDx, 0.0f, 0.0f, 0.0f);
+    const Mathematics::Float4 y0EdgeOffset(0.0f, +mDy, 0.0f, 0.0f);
+    const Mathematics::Float4 y1EdgeOffset(0.0f, -mDy, 0.0f, 0.0f);
     int x = 0, y = 0;
 
     // Interior.

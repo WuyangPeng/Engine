@@ -255,8 +255,8 @@ void Rendering::Triangles ::UpdateModelTangentsUseTextureCoords(const VertexBuff
 const        auto triangleIndex = GetTriangle(index);
 
         vector<APoint> localPosition(3);
-vector<AVector> localNormal(3, Mathematics::Float::g_Zero);
-        vector<AVector> localTangent(3, Mathematics::Float::g_Zero);
+vector<AVector> localNormal(3, Mathematics::FloatAVector::GetZero());
+        vector<AVector> localTangent(3, Mathematics::FloatAVector::GetZero());
         vector<Vector2D> localTextureCoord(3);
 
         for (auto current = 0; current < 3; ++current)
@@ -271,7 +271,7 @@ vector<AVector> localNormal(3, Mathematics::Float::g_Zero);
         for (auto current = 0; current < 3; ++current)
         {
             const auto& currLocTangent = localTangent[current];
-            if (!Approximate(currLocTangent, Mathematics::Float::g_Zero))
+            if (!Approximate(currLocTangent, Mathematics::FloatAVector::GetZero()))
             {
                 // 这个顶点已被访问。
                 continue;
@@ -322,7 +322,7 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
         Mathematics::FloatMath::FAbs(differenceP2P0.Length()) < Mathematics::FloatMath::GetZeroTolerance())
     {
         // 这个三角形是非常小的，称之为退化退化三角形。
-        return Mathematics::Float::g_Zero;
+        return Mathematics::FloatAVector::GetZero();
     }
 
     // 计算顶点P0纹理坐标在边缘P1-P0的方向上的变化。
@@ -335,7 +335,7 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
         {
             // 三角形实际上在纹理坐标u上没有变化。
             // 由于纹理坐标不改变这个三角形，把它当作一个退化参数曲面。
-            return Mathematics::Float::g_Zero;
+            return Mathematics::FloatAVector::GetZero();
         }
 
         // 变化在所有u上是有效，所以设置切向量为T = dP / du。
@@ -349,7 +349,7 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
     if (Mathematics::FloatMath::FAbs(det) < Mathematics::FloatMath::GetZeroTolerance())
     {
         // 三角形顶点是共线的参数空间，所以把它当作一个退化参数曲面。
-        return Mathematics::Float::g_Zero;
+        return Mathematics::FloatAVector::GetZero();
     }
 
     // 三角形顶点是不共线的参数空间，所以选择切线为

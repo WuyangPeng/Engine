@@ -2028,6 +2028,9 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6262.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\MarkMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">

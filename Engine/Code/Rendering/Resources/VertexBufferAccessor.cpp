@@ -193,7 +193,7 @@ Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetBinormal(int inde
 }
 
 template <>
-Mathematics::Vector2Df Rendering::VertexBufferAccessor
+Mathematics::FloatVector2D Rendering::VertexBufferAccessor
 	::GetTextureCoord(int unit, int index) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
@@ -201,7 +201,7 @@ Mathematics::Vector2Df Rendering::VertexBufferAccessor
 	auto firstTextureCoord = *(reinterpret_cast<const float*>(GetTextureCoord(unit, index)));
 	auto secondTextureCoord = *(reinterpret_cast<const float*>(GetTextureCoord(unit, index) + sizeof(float)));
 	 
-	Mathematics::Vector2Df textureCoord{ firstTextureCoord, secondTextureCoord };
+	Mathematics::FloatVector2D textureCoord{ firstTextureCoord, secondTextureCoord };
 
 	return textureCoord; 
 }

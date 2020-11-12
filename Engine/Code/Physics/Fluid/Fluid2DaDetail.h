@@ -481,16 +481,16 @@ void Physics::Fluid2Da<Real>
 	}
 
 	// (u,v) = (0,0) at corner (0,0)
-	mVelocity1[0][0] = Vector2D::sm_Zero;
+        mVelocity1[0][0] = Vector2D::GetZero();
 
 	// (u,v) = (0,0) at corner (imax,0)
-	mVelocity1[0][mIMax] = Vector2D::sm_Zero;
+        mVelocity1[0][mIMax] = Vector2D::GetZero();
 
 	// (u,v) = (0,0) at corner (0,jmax)
-	mVelocity1[mJMax][0] = Vector2D::sm_Zero;
+        mVelocity1[mJMax][0] = Vector2D::GetZero();
 
 	// (u,v) = (0,0) at corner (imax,jmax)
-	mVelocity1[mJMax][mIMax] = Vector2D::sm_Zero;
+        mVelocity1[mJMax][mIMax] = Vector2D::GetZero();
 }
 
 template <typename Real>

@@ -213,7 +213,7 @@ namespace Physics
 
 		// A1 = G(T,S0), B1 = S0 + (DT/2)*A1
 		Vector3D A1DXDT = mLinearVelocity;
-		Quaternion W = Quaternion((Real)0, mAngularVelocity.GetXCoordinate(),mAngularVelocity.GetYCoordinate(), mAngularVelocity.GetZCoordinate());
+		Quaternion W = Quaternion((Real)0, mAngularVelocity.GetX(),mAngularVelocity.GetY(), mAngularVelocity.GetZ());
 		Quaternion A1DQDT = ((Real)0.5)*W*mQuatOrient;
 
 		Vector3D A1DPDT = mForce(t, mMass, mPosition, mQuatOrient,mLinearMomentum, mAngularMomentum, mRotOrient, mLinearVelocity,mAngularVelocity);
@@ -230,7 +230,7 @@ namespace Physics
 
 		// A2 = G(T+DT/2,B1), B2 = S0 + (DT/2)*A2
 		Vector3D A2DXDT = newLinearVelocity;
-		W = Quaternion((Real)0, newAngularVelocity.GetXCoordinate(),newAngularVelocity.GetYCoordinate(), newAngularVelocity.GetZCoordinate());
+		W = Quaternion((Real)0, newAngularVelocity.GetX(),newAngularVelocity.GetY(), newAngularVelocity.GetZ());
 		Quaternion A2DQDT = ((Real)0.5)*W*newQuatOrient;
 
 		Vector3D A2DPDT = mForce(TpHalfDT, mMass, newPosition,newQuatOrient, newLinearMomentum, newAngularMomentum, newRotOrient,newLinearVelocity, newAngularVelocity);
@@ -247,7 +247,7 @@ namespace Physics
 
 		// A3 = G(T+DT/2,B2), B3 = S0 + DT*A3
 		Vector3D A3DXDT = newLinearVelocity;
-		W = Quaternion((Real)0, newAngularVelocity.GetXCoordinate(),newAngularVelocity.GetYCoordinate(), newAngularVelocity.GetZCoordinate());
+		W = Quaternion((Real)0, newAngularVelocity.GetX(),newAngularVelocity.GetY(), newAngularVelocity.GetZ());
 		Quaternion A3DQDT = ((Real)0.5)*W*newQuatOrient;
 
 		Vector3D A3DPDT = mForce(TpHalfDT, mMass, newPosition,newQuatOrient, newLinearMomentum, newAngularMomentum, newRotOrient,newLinearVelocity, newAngularVelocity);
@@ -264,7 +264,7 @@ namespace Physics
 
 		// A4 = G(T+DT,B3), S1 = S0 + (DT/6)*(A1+2*(A2+A3)+A4)
 		Vector3D A4DXDT = newLinearVelocity;
-		W = Quaternion((Real)0, newAngularVelocity.GetXCoordinate(),newAngularVelocity.GetYCoordinate(), newAngularVelocity.GetZCoordinate());
+		W = Quaternion((Real)0, newAngularVelocity.GetX(),newAngularVelocity.GetY(), newAngularVelocity.GetZ());
 		Quaternion A4DQDT = ((Real)0.5)*W*newQuatOrient;
 
 		Vector3D A4DPDT = mForce(TpDT, mMass, newPosition,newQuatOrient, newLinearMomentum, newAngularMomentum, newRotOrient,newLinearVelocity, newAngularVelocity);

@@ -127,7 +127,7 @@ Mathematics::ConformalMap<Real>
 	}
 	for (i = 0; i < numPoints; ++i)
 	{
-		mPlanes[i].SetXCoordinate(result[i]);
+		mPlanes[i].SetX(result[i]);
 	}
 
 	// Solve sparse system for imaginary parts.
@@ -148,7 +148,7 @@ Mathematics::ConformalMap<Real>
 
 	for (i = 0; i < numPoints; ++i)
 	{
-		mPlanes[i].SetYCoordinate(result[i]);
+		mPlanes[i].SetY(result[i]);
 	}
 	DELETE1(tmp);
 	DELETE1(result);
@@ -157,32 +157,32 @@ Mathematics::ConformalMap<Real>
 
 
 	// Scale to [-1,1]^2 for numerical conditioning in later steps.
-	Real fmin = mPlanes[0].GetXCoordinate(), fmax = fmin;
+	Real fmin = mPlanes[0].GetX(), fmax = fmin;
 	for (i = 0; i < numPoints; i++)
 	{
-		if (mPlanes[i].GetXCoordinate() < fmin)
+		if (mPlanes[i].GetX() < fmin)
 		{
-			fmin = mPlanes[i].GetXCoordinate();
+			fmin = mPlanes[i].GetX();
 		}
-		else if (mPlanes[i].GetXCoordinate() > fmax)
+		else if (mPlanes[i].GetX() > fmax)
 		{
-			fmax = mPlanes[i].GetXCoordinate();
+			fmax = mPlanes[i].GetX();
 		}
-		if (mPlanes[i].GetYCoordinate() < fmin)
+		if (mPlanes[i].GetY() < fmin)
 		{
-			fmin = mPlanes[i].GetYCoordinate();
+			fmin = mPlanes[i].GetY();
 		}
-		else if (mPlanes[i].GetYCoordinate() > fmax)
+		else if (mPlanes[i].GetY() > fmax)
 		{
-			fmax = mPlanes[i].GetYCoordinate();
+			fmax = mPlanes[i].GetY();
 		}
 	}
 	Real halfRange = (static_cast<Real>(0.5))*(fmax - fmin);
 	Real invHalfRange = (static_cast<Real>(1)) / halfRange;
 	for (i = 0; i < numPoints; ++i)
 	{
-		mPlanes[i].SetXCoordinate(-static_cast<Real>(1) + invHalfRange * (mPlanes[i].GetXCoordinate() - fmin));
-		mPlanes[i].SetYCoordinate(-static_cast<Real>(1) + invHalfRange * (mPlanes[i].GetYCoordinate() - fmin));
+		mPlanes[i].SetX(-static_cast<Real>(1) + invHalfRange * (mPlanes[i].GetX() - fmin));
+		mPlanes[i].SetY(-static_cast<Real>(1) + invHalfRange * (mPlanes[i].GetY() - fmin));
 	}
 
 	// Map plane points to sphere using inverse stereographic projection.
@@ -208,22 +208,22 @@ Mathematics::ConformalMap<Real>
 	mPlaneMax = mPlanes[0];
 	for (i = 1; i < numPoints; ++i)
 	{
-		if (mPlanes[i].GetXCoordinate() < mPlaneMin.GetXCoordinate())
+		if (mPlanes[i].GetX() < mPlaneMin.GetX())
 		{
-			mPlaneMin.SetXCoordinate(mPlanes[i].GetXCoordinate());
+			mPlaneMin.SetX(mPlanes[i].GetX());
 		}
-		else if (mPlanes[i].GetXCoordinate() > mPlaneMax.GetXCoordinate())
+		else if (mPlanes[i].GetX() > mPlaneMax.GetX())
 		{
-			mPlaneMax.SetXCoordinate(mPlanes[i].GetXCoordinate());
+			mPlaneMax.SetX(mPlanes[i].GetX());
 		}
 
-		if (mPlanes[i].GetYCoordinate() < mPlaneMin.GetYCoordinate())
+		if (mPlanes[i].GetY() < mPlaneMin.GetY())
 		{
-			mPlaneMin.SetYCoordinate(mPlanes[i].GetYCoordinate());
+			mPlaneMin.SetY(mPlanes[i].GetY());
 		}
-		else if (mPlanes[i].GetYCoordinate() > mPlaneMax.GetYCoordinate())
+		else if (mPlanes[i].GetY() > mPlaneMax.GetY())
 		{
-			mPlaneMax.SetYCoordinate(mPlanes[i].GetYCoordinate());
+			mPlaneMax.SetY(mPlanes[i].GetY());
 		}
 	}
 
@@ -250,8 +250,8 @@ Mathematics::ConformalMap<Real>
 	{
 		Real rSqr = Vector3DTools<Real>::VectorMagnitudeSquared(mPlanes[i]);
 		Real mult = (static_cast<Real>(1)) / (rSqr + radiusSqr);
-		Real x = (static_cast<Real>(2))*mult*radiusSqr*mPlanes[i].GetXCoordinate();
-		Real y = (static_cast<Real>(2))*mult*radiusSqr*mPlanes[i].GetYCoordinate();
+		Real x = (static_cast<Real>(2))*mult*radiusSqr*mPlanes[i].GetX();
+		Real y = (static_cast<Real>(2))*mult*radiusSqr*mPlanes[i].GetY();
 		Real z = mult * mRadius*(rSqr - radiusSqr);
 		mSpheres[i] = Vector3D<Real>(x, y, z) / mRadius;
 	}
@@ -309,14 +309,14 @@ Real Mathematics::ConformalMap<Real>
 	Real r2Sqr = Vector3DTools<Real>::VectorMagnitudeSquared(V2);
 	Real diffR10 = r1Sqr - r0Sqr;
 	Real diffR20 = r2Sqr - r0Sqr;
-	Real diffX10 = V1.GetXCoordinate() - V0.GetXCoordinate();
-	Real diffY10 = V1.GetYCoordinate() - V0.GetYCoordinate();
-	Real diffX20 = V2.GetXCoordinate() - V0.GetXCoordinate();
-	Real diffY20 = V2.GetYCoordinate() - V0.GetYCoordinate();
-	Real diffRX10 = V1.GetXCoordinate()*r0Sqr - V0.GetXCoordinate()*r1Sqr;
-	Real diffRY10 = V1.GetYCoordinate()*r0Sqr - V0.GetYCoordinate()*r1Sqr;
-	Real diffRX20 = V2.GetXCoordinate()*r0Sqr - V0.GetXCoordinate()*r2Sqr;
-	Real diffRY20 = V2.GetYCoordinate()*r0Sqr - V0.GetYCoordinate()*r2Sqr;
+	Real diffX10 = V1.GetX() - V0.GetX();
+	Real diffY10 = V1.GetY() - V0.GetY();
+	Real diffX20 = V2.GetX() - V0.GetX();
+	Real diffY20 = V2.GetY() - V0.GetY();
+	Real diffRX10 = V1.GetX()*r0Sqr - V0.GetX()*r1Sqr;
+	Real diffRY10 = V1.GetY()*r0Sqr - V0.GetY()*r1Sqr;
+	Real diffRX20 = V2.GetX()*r0Sqr - V0.GetX()*r2Sqr;
+	Real diffRY20 = V2.GetY()*r0Sqr - V0.GetY()*r2Sqr;
 
 	Real c0 = diffR20 * diffRY10 - diffR10 * diffRY20;
 	Real c1 = diffR20 * diffY10 - diffR10 * diffY20;

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 10:11)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/05 17:06)
 
 #ifndef MATHEMATICS_ALGEBRA_EULER_H
 #define MATHEMATICS_ALGEBRA_EULER_H
@@ -10,54 +13,52 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
-#include "Flags/MatrixFlags.h"
-#include "Flags/ExtractEulerResultType.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
 
 namespace Mathematics
 {
-	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Euler
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Euler final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		using ClassType = Euler<Real>;
-		using Math = Math<Real>;
+        using ClassType = Euler<Real>;
+        using Math = Math<Real>;
 
-	public:
-		Euler(ExtractEulerResultType type, ExtractEulerResultOrder order,
-			  Real x0Angle, Real y0Angle, Real z0Angle,
-			  Real x1Angle, Real y1Angle, Real z1Angle) noexcept;
+    public:
+        Euler(ExtractEulerResultType type, ExtractEulerResultOrder order,
+              Real x0Angle, Real y0Angle, Real z0Angle,
+              Real x1Angle, Real y1Angle, Real z1Angle) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		ExtractEulerResultType GetType() const noexcept;
-		ExtractEulerResultOrder GetOrder() const noexcept;
-		Real GetX0Angle() const noexcept;
-		Real GetY0Angle() const noexcept;
-		Real GetZ0Angle() const noexcept;
-		Real GetX1Angle() const noexcept;
-		Real GetY1Angle() const noexcept;
-		Real GetZ1Angle() const noexcept;
-		Real GetAngle(MatrixRotationAxis axisIndex) const noexcept;
-		void SetAngle(MatrixRotationAxis axisIndex, Real angle) noexcept;
+        [[nodiscard]] ExtractEulerResultType GetType() const noexcept;
+        [[nodiscard]] ExtractEulerResultOrder GetOrder() const noexcept;
+        [[nodiscard]] Real GetX0Angle() const noexcept;
+        [[nodiscard]] Real GetY0Angle() const noexcept;
+        [[nodiscard]] Real GetZ0Angle() const noexcept;
+        [[nodiscard]] Real GetX1Angle() const noexcept;
+        [[nodiscard]] Real GetY1Angle() const noexcept;
+        [[nodiscard]] Real GetZ1Angle() const noexcept;
+        [[nodiscard]] Real GetAngle(MatrixRotationAxis axisIndex) const noexcept;
+        void SetAngle(MatrixRotationAxis axisIndex, Real angle) noexcept;
 
-	private:
-		ExtractEulerResultType m_Type;
-		ExtractEulerResultOrder m_Order;
-		Real m_X0Angle;
-		Real m_Y0Angle;
-		Real m_Z0Angle;
-		Real m_X1Angle;
-		Real m_Y1Angle;
-		Real m_Z1Angle;
-	};
+    private:
+        ExtractEulerResultType m_Type;
+        ExtractEulerResultOrder m_Order;
+        Real m_X0Angle;
+        Real m_Y0Angle;
+        Real m_Z0Angle;
+        Real m_X1Angle;
+        Real m_Y1Angle;
+        Real m_Z1Angle;
+    };
 
-	using Eulerf = Euler<float>;
-	using Eulerd = Euler<double>;
+    using FloatEuler = Euler<float>;
+    using DoubleEuler = Euler<double>;
 }
 
-#endif // MATHEMATICS_ALGEBRA_EULER_H
+#endif  // MATHEMATICS_ALGEBRA_EULER_H

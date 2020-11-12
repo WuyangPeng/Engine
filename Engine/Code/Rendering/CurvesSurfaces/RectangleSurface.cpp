@@ -50,8 +50,8 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
     float tuDelta = 0.0f, tvDelta = 0.0f;
     if (tcoordMin && tcoordMax)
     {
-        tuDelta = ((*tcoordMax).GetFirstValue() - (*tcoordMin).GetFirstValue()) / uRange;
-        tvDelta = ((*tcoordMax).GetSecondValue() - (*tcoordMin).GetSecondValue()) / vRange;
+        tuDelta = ((*tcoordMax)[0] - (*tcoordMin)[0]) / uRange;
+        tvDelta = ((*tcoordMax)[1] - (*tcoordMin)[1]) / vRange;
     }
 
     int uIndex = 0, vIndex = 0, i = 0;
@@ -68,7 +68,7 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
 
             if (vba.HasNormal())
             {
-                Mathematics::Vector3Df pos, tan0, tan1, normal;
+                Mathematics::FloatVector3D pos, tan0, tan1, normal;
                 mSurface->GetFrame(u, v, pos, tan0, tan1, normal);
 
                 //vba.Normal<Mathematics::Vector3Df>(i) = normal;
@@ -80,7 +80,7 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
             }
 
             constexpr int numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
-            const Mathematics::Vector2Df tcoord((*tcoordMin).GetFirstValue() + tuDelta * uIncr, (*tcoordMin).GetSecondValue() + tvDelta * vIncr);
+            const Mathematics::FloatVector2D tcoord((*tcoordMin)[0] + tuDelta * uIncr, (*tcoordMin)[1] + tvDelta * vIncr);
             for (int unit = 0; unit < numTCoords; ++unit)
             {
                 if (vba.HasTextureCoord(unit))
@@ -129,17 +129,16 @@ Rendering::RectangleSurface ::~RectangleSurface()
 {
     EXCEPTION_TRY
     {
-       // DELETE0(mSurface);
+        // DELETE0(mSurface);
     }
     EXCEPTION_ALL_CATCH(Rendering)
-  
 }
 
 void Rendering::RectangleSurface ::UpdateSurface()
 {
-   const  float uMin = mSurface->GetUMin();
+    const float uMin = mSurface->GetUMin();
     const float uDelta = (mSurface->GetUMax() - uMin) / (float)(mNumUSamples - 1);
-   const float vMin = mSurface->GetVMin();
+    const float vMin = mSurface->GetVMin();
     const float vDelta = (mSurface->GetVMax() - vMin) / (float)(mNumVSamples - 1);
 
     VertexBufferAccessor vba(GetVertexFormat(), GetVertexBuffer());
@@ -154,7 +153,7 @@ void Rendering::RectangleSurface ::UpdateSurface()
 
             if (vba.HasNormal())
             {
-                Mathematics::Vector3Df pos, tan0, tan1, normal;
+                Mathematics::FloatVector3D pos, tan0, tan1, normal;
                 mSurface->GetFrame(u, v, pos, tan0, tan1, normal);
 
                 // vba.Normal<Mathematics::Vector3Df>(i) = normal;

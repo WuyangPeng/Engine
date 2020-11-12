@@ -48,7 +48,7 @@ void Network::MessageTarget::WriteBool(const bool datum)
 {
     IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
+    const uint8_t value{ datum ? 1u : 0u };
     Write(value);
 }
 

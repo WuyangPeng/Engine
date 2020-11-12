@@ -45,15 +45,15 @@ void Mathematics::EllipsoidFit3<Real>
 							  m_FirstExtent * Math<Real>::FAbs(m_Rotate[2][0]) + m_SecondExtent * Math<Real>::FAbs(m_Rotate[2][1]) + m_ThirdExtent * Math<Real>::FAbs(m_Rotate[2][2]) };
 
 	std::vector<Real> begin{ static_cast<Real>(0.5) * m_FirstExtent,static_cast<Real>(0.5) * m_SecondExtent,static_cast<Real>(0.5) * m_ThirdExtent,
-							 m_Center.GetXCoordinate() - extent[0], m_Center.GetYCoordinate() - extent[1], m_Center.GetZCoordinate() - extent[2],
+							 m_Center.GetX() - extent[0], m_Center.GetY() - extent[1], m_Center.GetZ() - extent[2],
 							 -Math<Real>::GetPI(), Math<Real>::GetValue(0), Math<Real>::GetValue(0) };
 
 	std::vector<Real> end{ static_cast<Real>(2) * m_FirstExtent, static_cast<Real>(2) * m_SecondExtent,static_cast<Real>(2) * m_ThirdExtent,
-						   m_Center.GetXCoordinate() + extent[0], m_Center.GetYCoordinate() + extent[1], m_Center.GetZCoordinate() + extent[2],
+						   m_Center.GetX() + extent[0], m_Center.GetY() + extent[1], m_Center.GetZ() + extent[2],
 						   Math<Real>::GetPI(), Math<Real>::GetPI(), Math<Real>::GetPI() };
 
-	std::vector<Real> initial{ m_FirstExtent, m_SecondExtent,m_ThirdExtent, m_Center.GetXCoordinate(), m_Center.GetYCoordinate(),
-							   m_Center.GetZCoordinate(), angle[0],  angle[1],  angle[2] };
+	std::vector<Real> initial{ m_FirstExtent, m_SecondExtent,m_ThirdExtent, m_Center.GetX(), m_Center.GetY(),
+							   m_Center.GetZ(), angle[0],  angle[1],  angle[2] };
 
 	MinimizeN<Real, ClassType> minimizer{ 9, Energy, 8, 8, 32, this };
 	auto data = minimizer.GetMinimum(begin, end, initial);
@@ -79,15 +79,15 @@ void Mathematics::EllipsoidFit3<Real>
 	auto box = ContBox3<Real>::ContOrientedBox(m_Points);
 
 	m_Center = box.GetCenter();
-	m_Rotate[0][0] = box.GetFirstAxis().GetXCoordinate();
-	m_Rotate[0][1] = box.GetFirstAxis().GetYCoordinate();
-	m_Rotate[0][2] = box.GetFirstAxis().GetZCoordinate();
-	m_Rotate[1][0] = box.GetSecondAxis().GetXCoordinate();
-	m_Rotate[1][1] = box.GetSecondAxis().GetYCoordinate();
-	m_Rotate[1][2] = box.GetSecondAxis().GetZCoordinate();
-	m_Rotate[2][0] = box.GetThirdAxis().GetXCoordinate();
-	m_Rotate[2][1] = box.GetThirdAxis().GetYCoordinate();
-	m_Rotate[2][2] = box.GetThirdAxis().GetZCoordinate();
+	m_Rotate[0][0] = box.GetFirstAxis().GetX();
+	m_Rotate[0][1] = box.GetFirstAxis().GetY();
+	m_Rotate[0][2] = box.GetFirstAxis().GetZ();
+	m_Rotate[1][0] = box.GetSecondAxis().GetX();
+	m_Rotate[1][1] = box.GetSecondAxis().GetY();
+	m_Rotate[1][2] = box.GetSecondAxis().GetZ();
+	m_Rotate[2][0] = box.GetThirdAxis().GetX();
+	m_Rotate[2][1] = box.GetThirdAxis().GetY();
+	m_Rotate[2][2] = box.GetThirdAxis().GetZ();
 	m_FirstExtent = box.GetFirstExtent();
 	m_SecondExtent = box.GetSecondExtent();
 	m_ThirdExtent = box.GetThirdExtent();
@@ -125,9 +125,9 @@ Real Mathematics::EllipsoidFit3<Real>
 
 	for (auto i = 0; i < numPoints; ++i)
 	{
-		Vector3D diff{ self.GetPoint(i).GetXCoordinate() - input[3],
-					   self.GetPoint(i).GetYCoordinate() - input[4],
-					   self.GetPoint(i).GetZCoordinate() - input[5] };
+		Vector3D diff{ self.GetPoint(i).GetX() - input[3],
+					   self.GetPoint(i).GetY() - input[4],
+					   self.GetPoint(i).GetZ() - input[5] };
 
 		auto point = rotate * diff / maxValue;
 
@@ -152,12 +152,12 @@ typename const Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit
 	Angle angle(3);
 	angle[2] = extract.GetAngle();
 
-	if (static_cast<Real>(-1) < axis.GetZCoordinate())
+	if (static_cast<Real>(-1) < axis.GetZ())
 	{
-		if (axis.GetZCoordinate() < static_cast<Real>(1))
+		if (axis.GetZ() < static_cast<Real>(1))
 		{
-			angle[0] = Math<Real>::ATan2(axis.GetYCoordinate(), axis.GetXCoordinate());
-			angle[1] = Math<Real>::ACos(axis.GetZCoordinate());
+			angle[0] = Math<Real>::ATan2(axis.GetY(), axis.GetX());
+			angle[1] = Math<Real>::ACos(axis.GetZ());
 		}
 		else
 		{

@@ -1476,6 +1476,9 @@
     <Text Include="Resource\References\Libs\Framework\freeglut.txt">
       <Filter>资源文件\References\Libs\Framework</Filter>
     </Text>
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\Game AI Pro.txt">
+      <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h">

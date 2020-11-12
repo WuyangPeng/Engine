@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/28 22:21)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/02 16:30)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_H
@@ -14,6 +14,7 @@
 
 #include "AlgebraFwd.h"
 #include "HomogeneousPoint.h"
+#include "Flags/MatrixFlags.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
@@ -23,7 +24,7 @@
 namespace Mathematics
 {
     template <typename T>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AVector : private boost::additive<AVector<T>, boost::multiplicative<AVector<T>, T>>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AVector final : private boost::additive<AVector<T>, boost::multiplicative<AVector<T>, T>>
     {
     public:
         static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
@@ -49,7 +50,8 @@ namespace Mathematics
         {
         }
 
-        AVector(const Vector3D& rhs);
+        explicit AVector(const Vector3D& rhs) noexcept;
+        explicit AVector(const ArrayType& rhs) noexcept;
         explicit AVector(const HomogeneousPoint& homogeneousPoint) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -82,6 +84,45 @@ namespace Mathematics
 
         [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate) noexcept;
+
+        // (0,0,0,0)
+        static constexpr AVector GetZero() noexcept
+        {
+            return AVector{};
+        };
+
+        // (1,0,0,0)
+        static constexpr AVector GetUnitX() noexcept
+        {
+            return AVector{ FloatMath::GetValue(1), FloatMath::GetValue(0), FloatMath::GetValue(0) };
+        };
+
+        // (0,1,0,0)
+        static constexpr AVector GetUnitY() noexcept
+        {
+            return AVector{ FloatMath::GetValue(0), FloatMath::GetValue(1), FloatMath::GetValue(0) };
+        };
+
+        // (0,0,1,0)
+        static constexpr AVector GetUnitZ() noexcept
+        {
+            return AVector{ FloatMath::GetValue(0), FloatMath::GetValue(0), FloatMath::GetValue(1) };
+        };
+
+        static constexpr AVector GetUnit(Mathematics::MatrixRotationAxis axisIndex) noexcept
+        {
+            switch (axisIndex)
+            {
+                case Mathematics::MatrixRotationAxis::X:
+                    return GetUnitX();
+                case Mathematics::MatrixRotationAxis::Y:
+                    return GetUnitY();
+                case Mathematics::MatrixRotationAxis::Z:
+                    return GetUnitZ();
+                default:
+                    return GetZero();
+            }
+        };
 
     private:
         HomogeneousPoint m_HomogeneousPoint;
@@ -118,31 +159,6 @@ namespace Mathematics
 
     using FloatAVector = AVector<float>;
     using DoubleAVector = AVector<double>;
-
-    // 特殊向量
-    namespace Float
-    {
-        // (0,0,0,0)
-        constexpr FloatAVector g_Zero{};
-        // (1,0,0,0)
-        constexpr FloatAVector g_UnitX{ FloatMath::GetValue(1), FloatMath::GetValue(0), FloatMath::GetValue(0) };
-        // (0,1,0,0)
-        constexpr FloatAVector g_UnitY{ FloatMath::GetValue(0), FloatMath::GetValue(1), FloatMath::GetValue(0) };
-        // (0,0,1,0)
-        constexpr FloatAVector g_UnitZ{ FloatMath::GetValue(0), FloatMath::GetValue(0), FloatMath::GetValue(1) };
-    }
-
-    namespace Double
-    {
-        // (0,0,0,0)
-        constexpr DoubleAVector g_Zero{};
-        // (1,0,0,0)
-        constexpr DoubleAVector g_UnitX{ DoubleMath::GetValue(1), DoubleMath::GetValue(0), DoubleMath::GetValue(0) };
-        // (0,1,0,0)
-        constexpr DoubleAVector g_UnitY{ DoubleMath::GetValue(0), DoubleMath::GetValue(1), DoubleMath::GetValue(0) };
-        // (0,0,1,0)
-        constexpr DoubleAVector g_UnitZ{ DoubleMath::GetValue(0), DoubleMath::GetValue(0), DoubleMath::GetValue(1) };
-    }
 }
 
 #endif  // MATHEMATICS_ALGEBRA_A_VECTOR_H

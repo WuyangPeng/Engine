@@ -116,7 +116,7 @@ void Rendering::NormalDerivatives ::ComputeNormalDerivativesMatrix()
             }
         }
 
-        m_ProjectMatrix[index].SetColumn(3,Mathematics::Float::g_Origin.GetHomogeneousPoint());
+        m_ProjectMatrix[index].SetColumn(3, Mathematics::FloatAPoint::GetOrigin().GetHomogeneousPoint());
         m_DerivativestNormal[index] = m_DifferentMatrix[index] * m_ProjectMatrix[index].Inverse();
     }
 }

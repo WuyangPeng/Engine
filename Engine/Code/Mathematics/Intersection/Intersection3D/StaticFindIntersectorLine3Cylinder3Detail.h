@@ -101,7 +101,7 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	{
 		// The line is parallel to the cylinder axis.  Determine if the line
 		// intersects the cylinder end disks.
-		auto radialSqrDist = rSqr - P.GetXCoordinate()*P.GetXCoordinate() - P.GetYCoordinate()*P.GetYCoordinate();
+		auto radialSqrDist = rSqr - P.GetX()*P.GetX() - P.GetY()*P.GetY();
 		if (radialSqrDist < Math<Real>::GetZero())
 		{
 			// Line outside the cylinder, no intersection.
@@ -111,13 +111,13 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 		// Line intersects the cylinder end disks.
 		if (dz > Math<Real>::GetZero())
 		{
-			t[0] = -P.GetZCoordinate() - halfHeight;
-			t[1] = -P.GetZCoordinate() + halfHeight;
+			t[0] = -P.GetZ() - halfHeight;
+			t[1] = -P.GetZ() + halfHeight;
 		}
 		else
 		{
-			t[0] = P.GetZCoordinate() - halfHeight;
-			t[1] = P.GetZCoordinate() + halfHeight;
+			t[0] = P.GetZ() - halfHeight;
+			t[1] = P.GetZ() + halfHeight;
 		}
 		return 2;
 	}
@@ -127,10 +127,10 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 
 	Real a0, a1, a2, discr, root, inv, tValue;
 
-	if (Math::FAbs(D.GetZCoordinate()) <= Math::GetZeroTolerance())
+	if (Math::FAbs(D.GetZ()) <= Math::GetZeroTolerance())
 	{
 		// The line is perpendicular to the cylinder axis.
-		if (Math::FAbs(P.GetZCoordinate()) > halfHeight)
+		if (Math::FAbs(P.GetZ()) > halfHeight)
 		{
 			// Line is outside the planes of the cylinder end disks.
 			return 0;
@@ -141,9 +141,9 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 		// quadratic equation.  If P = (px,py,pz) and D = (dx,dy,dz),
 		// then the quadratic equation is
 		//   (dx^2+dy^2)*t^2 + 2*(px*dx+py*dy)*t + (px^2+py^2-r^2) = 0
-		a0 = P.GetXCoordinate()*P.GetXCoordinate() + P.GetYCoordinate()*P.GetYCoordinate() - rSqr;
-		a1 = P.GetXCoordinate()*D.GetXCoordinate() + P.GetYCoordinate()*D.GetYCoordinate();
-		a2 = D.GetXCoordinate()*D.GetXCoordinate() + D.GetYCoordinate()*D.GetYCoordinate();
+		a0 = P.GetX()*P.GetX() + P.GetY()*P.GetY() - rSqr;
+		a1 = P.GetX()*D.GetX() + P.GetY()*D.GetY();
+		a2 = D.GetX()*D.GetX() + D.GetY()*D.GetY();
 		discr = a1 * a1 - a0 * a2;
 		if (discr < Math<Real>::GetZero())
 		{
@@ -169,20 +169,20 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 
 	// Test plane intersections first.
 	int quantity = 0;
-	inv = (static_cast<Real>(1.0)) / D.GetZCoordinate();
+	inv = (static_cast<Real>(1.0)) / D.GetZ();
 
-	auto t0 = (-halfHeight - P.GetZCoordinate())*inv;
-	auto xTmp = P.GetXCoordinate() + t0 * D.GetXCoordinate();
-	auto yTmp = P.GetYCoordinate() + t0 * D.GetYCoordinate();
+	auto t0 = (-halfHeight - P.GetZ())*inv;
+	auto xTmp = P.GetX() + t0 * D.GetX();
+	auto yTmp = P.GetY() + t0 * D.GetY();
 	if (xTmp*xTmp + yTmp * yTmp <= rSqr)
 	{
 		// Planar intersection inside the top cylinder end disk.
 		t[quantity++] = t0;
 	}
 
-	auto t1 = (+halfHeight - P.GetZCoordinate())*inv;
-	xTmp = P.GetXCoordinate() + t1 * D.GetXCoordinate();
-	yTmp = P.GetYCoordinate() + t1 * D.GetYCoordinate();
+	auto t1 = (+halfHeight - P.GetZ())*inv;
+	xTmp = P.GetX() + t1 * D.GetX();
+	yTmp = P.GetY() + t1 * D.GetY();
 	if (xTmp*xTmp + yTmp * yTmp <= rSqr)
 	{
 		// Planar intersection inside the bottom cylinder end disk.
@@ -205,9 +205,9 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	// single point somewhere between the end disks.  This case is detected
 	// in the following code that tests for intersection between line and
 	// cylinder wall.
-	a0 = P.GetXCoordinate()*P.GetXCoordinate() + P.GetYCoordinate()*P.GetYCoordinate() - rSqr;
-	a1 = P.GetXCoordinate()*D.GetXCoordinate() + P.GetYCoordinate()*D.GetYCoordinate();
-	a2 = D.GetXCoordinate()*D.GetXCoordinate() + D.GetYCoordinate()*D.GetYCoordinate();
+	a0 = P.GetX()*P.GetX() + P.GetY()*P.GetY() - rSqr;
+	a1 = P.GetX()*D.GetX() + P.GetY()*D.GetY();
+	a2 = D.GetX()*D.GetX() + D.GetY()*D.GetY();
 	discr = a1 * a1 - a0 * a2;
 	if (discr < Math<Real>::GetZero())
 	{

@@ -474,7 +474,7 @@ const Rendering::KeyframeControllerImpl::APoint Rendering::KeyframeControllerImp
 }
 
 const Rendering::KeyframeControllerImpl::Matrix Rendering::KeyframeControllerImpl
-	::GetRotate(const ControllerKeyInfo& keyInfo) const
+	::GetRotate(const ControllerKeyInfo& keyInfo) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	

@@ -231,10 +231,10 @@ void Rendering::SurfaceMesh ::Subdivide(int& numVertices, int& numEdges, EdgeMap
         // subdividing the triangles.
 
         Edge& edge = iter->second;
-        edge.ParamMid.SetFirstValue(0.5f * (edge.Param[0].GetFirstValue() + edge.Param[1].GetFirstValue()));
-        edge.ParamMid.SetSecondValue(0.5f * (edge.Param[0].GetSecondValue() + edge.Param[1].GetSecondValue()));
+        edge.ParamMid[0] = (0.5f * (edge.Param[0][0] + edge.Param[1][0]));
+        edge.ParamMid[1] = (0.5f * (edge.Param[0][1] + edge.Param[1][1]));
 
-        GetVertexBuffer()->SetPosition(vba, numVertices, edge.Patch->GetPosition(edge.ParamMid.GetFirstValue(), edge.ParamMid.GetSecondValue()));
+        GetVertexBuffer()->SetPosition(vba, numVertices, edge.Patch->GetPosition(edge.ParamMid[0], edge.ParamMid[1]));
 
         // Compute the average of vertex attributes.
         if (vba.HasNormal())
@@ -313,17 +313,17 @@ void Rendering::SurfaceMesh ::Subdivide(int& numVertices, int& numEdges, EdgeMap
         iter2 = edgeMap.find(key20);
         Edge& edge20 = iter2->second;
 
-        Mathematics::Float2 param0 = edge01.Param[edge01.V[0] == v0 ? 0 : 1];
-        Mathematics::Float2 param1 = edge12.Param[edge12.V[0] == v1 ? 0 : 1];
-        Mathematics::Float2 param2 = edge20.Param[edge20.V[0] == v2 ? 0 : 1];
+const        Mathematics::Float2 param0 = edge01.Param[edge01.V[0] == v0 ? 0 : 1];
+        const Mathematics::Float2 param1 = edge12.Param[edge12.V[0] == v1 ? 0 : 1];
+const Mathematics::Float2 param2 = edge20.Param[edge20.V[0] == v2 ? 0 : 1];
 
         // Get the midpoint information.
         const int v01 = edge01.VMid;
-        Mathematics::Float2 param01 = edge01.ParamMid;
+const Mathematics::Float2 param01 = edge01.ParamMid;
         const int v12 = edge12.VMid;
-        Mathematics::Float2 param12 = edge12.ParamMid;
+const Mathematics::Float2 param12 = edge12.ParamMid;
         const int v20 = edge20.VMid;
-        Mathematics::Float2 param20 = edge20.ParamMid;
+const Mathematics::Float2 param20 = edge20.ParamMid;
 
         // Tf done with edges, remove them.
         if (--edge01.References == 0)
@@ -408,7 +408,7 @@ void Rendering::SurfaceMesh ::OnDynamicChange()
         for (int i = 0; i < mNumFullVertices; ++i)
         {
             const SurfaceInfo& si = mSInfo[i];
-            GetVertexBuffer()->SetPosition(vba, i, si.Patch->GetPosition(si.Param.GetFirstValue(), si.Param.GetSecondValue()));
+            GetVertexBuffer()->SetPosition(vba, i, si.Patch->GetPosition(si.Param[0], si.Param[1]));
         }
 
         UpdateModelSpace(VisualUpdateType::Normals);

@@ -9,7 +9,7 @@
 #include "PickRay.h"
 #include "Detail/PickRayImpl.h"  
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH

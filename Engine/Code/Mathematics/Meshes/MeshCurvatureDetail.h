@@ -201,12 +201,12 @@ Mathematics::MeshCurvature<Real>
         if ( Vector2DTools<Real>::VectorMagnitudeSquared(W0) >= Vector2DTools<Real>::VectorMagnitudeSquared(W1))
         {
             W0.Normalize();
-            mMinDirections[i] = W0.GetXCoordinate()*U + W0.GetYCoordinate()*V;
+            mMinDirections[i] = W0.GetX()*U + W0.GetY()*V;
         }
         else
         {
             W1.Normalize();
-            mMinDirections[i] = W1.GetXCoordinate()*U + W1.GetYCoordinate()*V;
+            mMinDirections[i] = W1.GetX()*U + W1.GetY()*V;
         }
 
         W0 = Vector2D<Real>(S[0][1], mMaxCurvatures[i] - S[0][0]);
@@ -214,12 +214,12 @@ Mathematics::MeshCurvature<Real>
         if (Vector2DTools<Real>::VectorMagnitudeSquared(W0) >= Vector2DTools<Real>::VectorMagnitudeSquared(W1))
         {
             W0.Normalize();
-            mMaxDirections[i] = W0.GetXCoordinate()*U + W0.GetYCoordinate()*V;
+            mMaxDirections[i] = W0.GetX()*U + W0.GetY()*V;
         }
         else
         {
             W1.Normalize();
-            mMaxDirections[i] = W1.GetXCoordinate()*U + W1.GetYCoordinate()*V;
+            mMaxDirections[i] = W1.GetX()*U + W1.GetY()*V;
         }
     }
 

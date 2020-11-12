@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "CoreTools/ObjectSystems/Object.h"
-#include "Mathematics/Base/Float2.h"
+#include "Mathematics/Base/Float.h"
 
 #include <vector>
 

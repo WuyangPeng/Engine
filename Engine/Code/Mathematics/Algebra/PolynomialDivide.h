@@ -1,11 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 10:14)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/10 13:01)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/MathematicsFwd.h"
 
@@ -13,30 +18,30 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class PolynomialDivide
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialDivide final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		using ClassType = PolynomialDivide<Real>;
-		using Polynomial = Polynomial<Real>;
+        using ClassType = PolynomialDivide<Real>;
+        using Polynomial = Polynomial<Real>;
 
-	public:
-		PolynomialDivide(const Polynomial& quotient, const Polynomial& remainder);
+    public:
+        PolynomialDivide(const Polynomial& quotient, const Polynomial& remainder);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const Polynomial GetQuotient() const;
-		const Polynomial GetRemainder() const;
+        [[nodiscard]] const Polynomial GetQuotient() const;
+        [[nodiscard]] const Polynomial GetRemainder() const;
 
-	private:
-		Polynomial m_Quotient;
-		Polynomial m_Remainder;
-	};
+    private:
+        Polynomial m_Quotient;
+        Polynomial m_Remainder;
+    };
 
-	using PolynomialDividef = PolynomialDivide<float>;
-	using PolynomialDivided = PolynomialDivide<double>;
+    using PolynomialDividef = PolynomialDivide<float>;
+    using PolynomialDivided = PolynomialDivide<double>;
 }
 
-#endif // MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_H
+#endif  // MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_H

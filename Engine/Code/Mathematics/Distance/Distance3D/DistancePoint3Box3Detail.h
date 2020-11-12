@@ -74,49 +74,49 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 	auto squaredDistance = Math::GetValue(0);
 	auto delta = Math::GetValue(0);
 
-	if (closest.GetXCoordinate() < -m_Box.GetFirstExtent())
+	if (closest.GetX() < -m_Box.GetFirstExtent())
 	{
-		delta = closest.GetXCoordinate() + m_Box.GetFirstExtent();
+		delta = closest.GetX() + m_Box.GetFirstExtent();
 		squaredDistance += delta * delta;
-		closest.SetXCoordinate(-m_Box.GetFirstExtent());
+		closest.SetX(-m_Box.GetFirstExtent());
 	}
-	else if (m_Box.GetFirstExtent() < closest.GetXCoordinate())
+	else if (m_Box.GetFirstExtent() < closest.GetX())
 	{
-		delta = closest.GetXCoordinate() - m_Box.GetFirstExtent();
+		delta = closest.GetX() - m_Box.GetFirstExtent();
 		squaredDistance += delta * delta;
-		closest.SetXCoordinate(m_Box.GetFirstExtent());
-	}
-
-	if (closest.GetYCoordinate() < -m_Box.GetSecondExtent())
-	{
-		delta = closest.GetYCoordinate() + m_Box.GetSecondExtent();
-		squaredDistance += delta * delta;
-		closest.SetYCoordinate(-m_Box.GetSecondExtent());
-	}
-	else if (m_Box.GetSecondExtent() < closest.GetYCoordinate())
-	{
-		delta = closest.GetYCoordinate() - m_Box.GetSecondExtent();
-		squaredDistance += delta * delta;
-		closest.SetYCoordinate(m_Box.GetSecondExtent());
+		closest.SetX(m_Box.GetFirstExtent());
 	}
 
-	if (closest.GetZCoordinate() < -m_Box.GetThirdExtent())
+	if (closest.GetY() < -m_Box.GetSecondExtent())
 	{
-		delta = closest.GetZCoordinate() + m_Box.GetThirdExtent();
+		delta = closest.GetY() + m_Box.GetSecondExtent();
 		squaredDistance += delta * delta;
-		closest.SetZCoordinate(-m_Box.GetThirdExtent());
+		closest.SetY(-m_Box.GetSecondExtent());
 	}
-	else if (m_Box.GetThirdExtent() < closest.GetZCoordinate())
+	else if (m_Box.GetSecondExtent() < closest.GetY())
 	{
-		delta = closest.GetZCoordinate() - m_Box.GetThirdExtent();
+		delta = closest.GetY() - m_Box.GetSecondExtent();
 		squaredDistance += delta * delta;
-		closest.SetZCoordinate(m_Box.GetThirdExtent());
+		closest.SetY(m_Box.GetSecondExtent());
+	}
+
+	if (closest.GetZ() < -m_Box.GetThirdExtent())
+	{
+		delta = closest.GetZ() + m_Box.GetThirdExtent();
+		squaredDistance += delta * delta;
+		closest.SetZ(-m_Box.GetThirdExtent());
+	}
+	else if (m_Box.GetThirdExtent() < closest.GetZ())
+	{
+		delta = closest.GetZ() - m_Box.GetThirdExtent();
+		squaredDistance += delta * delta;
+		closest.SetZ(m_Box.GetThirdExtent());
 	}
 
 	return DistanceResult{ squaredDistance, Math::GetValue(0), m_Point,
-						   m_Box.GetCenter() + closest.GetXCoordinate() * m_Box.GetFirstAxis() +
-						   closest.GetYCoordinate() * m_Box.GetSecondAxis() +
-						   closest.GetZCoordinate() * m_Box.GetThirdAxis() };
+						   m_Box.GetCenter() + closest.GetX() * m_Box.GetFirstAxis() +
+						   closest.GetY() * m_Box.GetSecondAxis() +
+						   closest.GetZ() * m_Box.GetThirdAxis() };
 }
 
 template <typename Real>

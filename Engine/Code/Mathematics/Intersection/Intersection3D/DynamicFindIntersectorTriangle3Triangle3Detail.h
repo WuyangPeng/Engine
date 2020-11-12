@@ -338,14 +338,14 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	// Project the triangle and segment onto the coordinate plane most
 	// aligned with the plane normal.
 	auto maxNormal = 0;
-	auto fmax = Math::FAbs(plane.GetNormal().GetXCoordinate());
-	auto absMax = Math::FAbs(plane.GetNormal().GetYCoordinate());
+	auto fmax = Math::FAbs(plane.GetNormal().GetX());
+	auto absMax = Math::FAbs(plane.GetNormal().GetY());
 	if (absMax > fmax)
 	{
 		maxNormal = 1;
 		fmax = absMax;
 	}
-	absMax = Math::FAbs(plane.GetNormal().GetZCoordinate());
+	absMax = Math::FAbs(plane.GetNormal().GetZ());
 	if (absMax > fmax)
 	{
 		maxNormal = 2;
@@ -361,12 +361,12 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		// Project onto yz-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTriV[i][0] = triangle.GetVertex()[i].GetYCoordinate();
-			projTriV[i][1] = triangle.GetVertex()[i].GetZCoordinate();
-			projEnd0.SetXCoordinate(end0.GetYCoordinate());
-			projEnd0.SetYCoordinate(end0.GetZCoordinate());
-			projEnd1.SetXCoordinate(end1.GetYCoordinate());
-			projEnd1.SetYCoordinate(end1.GetZCoordinate());
+			projTriV[i][0] = triangle.GetVertex()[i].GetY();
+			projTriV[i][1] = triangle.GetVertex()[i].GetZ();
+			projEnd0.SetX(end0.GetY());
+			projEnd0.SetY(end0.GetZ());
+			projEnd1.SetX(end1.GetY());
+			projEnd1.SetY(end1.GetZ());
 		}
 	}
 	else if (maxNormal == 1)
@@ -374,12 +374,12 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		// Project onto xz-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTriV[i][0] = triangle.GetVertex()[i].GetXCoordinate();
-			projTriV[i][1] = triangle.GetVertex()[i].GetZCoordinate();
-			projEnd0.SetXCoordinate(end0.GetXCoordinate());
-			projEnd0[1] = end0.GetZCoordinate();
-			projEnd1.SetXCoordinate(end1.GetXCoordinate());
-			projEnd1[1] = end1.GetZCoordinate();
+			projTriV[i][0] = triangle.GetVertex()[i].GetX();
+			projTriV[i][1] = triangle.GetVertex()[i].GetZ();
+			projEnd0.SetX(end0.GetX());
+			projEnd0[1] = end0.GetZ();
+			projEnd1.SetX(end1.GetX());
+			projEnd1[1] = end1.GetZ();
 		}
 	}
 	else
@@ -387,12 +387,12 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		// Project onto xy-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTriV[i][0] = triangle.GetVertex()[i].GetXCoordinate();
-			projTriV[i][1] = triangle.GetVertex()[i].GetYCoordinate();
-			projEnd0.SetXCoordinate(end0.GetXCoordinate());
-			projEnd0[1] = end0.GetYCoordinate();
-			projEnd1.SetXCoordinate(end1.GetXCoordinate());
-			projEnd1[1] = end1.GetYCoordinate();
+			projTriV[i][0] = triangle.GetVertex()[i].GetX();
+			projTriV[i][1] = triangle.GetVertex()[i].GetY();
+			projEnd0.SetX(end0.GetX());
+			projEnd0[1] = end0.GetY();
+			projEnd1.SetX(end1.GetX());
+			projEnd1[1] = end1.GetY();
 		}
 	}
 
@@ -424,32 +424,32 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	// Unproject the segment of intersection.
 	if (maxNormal == 0)
 	{
-		auto invNX = (static_cast<Real>(1)) / plane.GetNormal().GetXCoordinate();
+		auto invNX = (static_cast<Real>(1)) / plane.GetNormal().GetX();
 		for (i = 0; i < mQuantity; ++i)
 		{
-			mPoint[i][1] = intr[i].GetXCoordinate();
-			mPoint[i][2] = intr[i].GetYCoordinate();
-			mPoint[i][0] = invNX * (plane.GetConstant() - plane.GetNormal().GetYCoordinate()*mPoint[i].GetYCoordinate() - plane.GetNormal().GetZCoordinate()*mPoint[i].GetZCoordinate());
+			mPoint[i][1] = intr[i].GetX();
+			mPoint[i][2] = intr[i].GetY();
+			mPoint[i][0] = invNX * (plane.GetConstant() - plane.GetNormal().GetY()*mPoint[i].GetY() - plane.GetNormal().GetZ()*mPoint[i].GetZ());
 		}
 	}
 	else if (maxNormal == 1)
 	{
-		auto invNY = (static_cast<Real>(1)) / plane.GetNormal().GetYCoordinate();
+		auto invNY = (static_cast<Real>(1)) / plane.GetNormal().GetY();
 		for (i = 0; i < mQuantity; ++i)
 		{
-			mPoint[i][0] = intr[i].GetXCoordinate();
-			mPoint[i][1] = intr[i].GetYCoordinate();
-			mPoint[i][2] = invNY * (plane.GetConstant() - plane.GetNormal().GetXCoordinate()*mPoint[i].GetXCoordinate() - plane.GetNormal().GetZCoordinate()*mPoint[i].GetZCoordinate());
+			mPoint[i][0] = intr[i].GetX();
+			mPoint[i][1] = intr[i].GetY();
+			mPoint[i][2] = invNY * (plane.GetConstant() - plane.GetNormal().GetX()*mPoint[i].GetX() - plane.GetNormal().GetZ()*mPoint[i].GetZ());
 		}
 	}
 	else
 	{
-		auto invNZ = (static_cast<Real>(1)) / plane.GetNormal().GetZCoordinate();
+		auto invNZ = (static_cast<Real>(1)) / plane.GetNormal().GetZ();
 		for (i = 0; i < mQuantity; ++i)
 		{
-			mPoint[i][0] = intr[i].GetXCoordinate();
-			mPoint[i][1] = intr[i].GetYCoordinate();
-			mPoint[i][2] = invNZ * (plane.GetConstant() - plane.GetNormal().GetXCoordinate()*mPoint[i].GetXCoordinate() - plane.GetNormal().GetYCoordinate()*mPoint[i].GetYCoordinate());
+			mPoint[i][0] = intr[i].GetX();
+			mPoint[i][1] = intr[i].GetY();
+			mPoint[i][2] = invNZ * (plane.GetConstant() - plane.GetNormal().GetX()*mPoint[i].GetX() - plane.GetNormal().GetY()*mPoint[i].GetY());
 		}
 	}
 
@@ -463,14 +463,14 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	// Project triangles onto coordinate plane most aligned with plane
 	// normal.
 	auto maxNormal = 0;
-	auto fmax = Math::FAbs(plane.GetNormal().GetXCoordinate());
-	auto absMax = Math::FAbs(plane.GetNormal().GetYCoordinate());
+	auto fmax = Math::FAbs(plane.GetNormal().GetX());
+	auto absMax = Math::FAbs(plane.GetNormal().GetY());
 	if (absMax > fmax)
 	{
 		maxNormal = 1;
 		fmax = absMax;
 	}
-	absMax = Math::FAbs(plane.GetNormal().GetZCoordinate());
+	absMax = Math::FAbs(plane.GetNormal().GetZ());
 	if (absMax > fmax)
 	{
 		maxNormal = 2;
@@ -485,10 +485,10 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		// Project onto yz-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTri0V[i][0] = tri0.GetVertex()[i].GetYCoordinate();
-			projTri0V[i][1] = tri0.GetVertex()[i].GetZCoordinate();
-			projTri1V[i][0] = tri1.GetVertex()[i].GetYCoordinate();
-			projTri1V[i][1] = tri1.GetVertex()[i].GetZCoordinate();
+			projTri0V[i][0] = tri0.GetVertex()[i].GetY();
+			projTri0V[i][1] = tri0.GetVertex()[i].GetZ();
+			projTri1V[i][0] = tri1.GetVertex()[i].GetY();
+			projTri1V[i][1] = tri1.GetVertex()[i].GetZ();
 		}
 	}
 	else if (maxNormal == 1)
@@ -496,10 +496,10 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		// Project onto xz-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTri0V[i][0] = tri0.GetVertex()[i].GetXCoordinate();
-			projTri0V[i][1] = tri0.GetVertex()[i].GetZCoordinate();
-			projTri1V[i][0] = tri1.GetVertex()[i].GetXCoordinate();
-			projTri1V[i][1] = tri1.GetVertex()[i].GetZCoordinate();
+			projTri0V[i][0] = tri0.GetVertex()[i].GetX();
+			projTri0V[i][1] = tri0.GetVertex()[i].GetZ();
+			projTri1V[i][0] = tri1.GetVertex()[i].GetX();
+			projTri1V[i][1] = tri1.GetVertex()[i].GetZ();
 		}
 	}
 	else
@@ -507,10 +507,10 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		// Project onto xy-plane.
 		for (i = 0; i < 3; ++i)
 		{
-			projTri0V[i][0] = tri0.GetVertex()[i].GetXCoordinate();
-			projTri0V[i][1] = tri0.GetVertex()[i].GetYCoordinate();
-			projTri1V[i][0] = tri1.GetVertex()[i].GetXCoordinate();
-			projTri1V[i][1] = tri1.GetVertex()[i].GetYCoordinate();
+			projTri0V[i][0] = tri0.GetVertex()[i].GetX();
+			projTri0V[i][1] = tri0.GetVertex()[i].GetY();
+			projTri1V[i][0] = tri1.GetVertex()[i].GetX();
+			projTri1V[i][1] = tri1.GetVertex()[i].GetY();
 		}
 	}
 
@@ -545,32 +545,32 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	mQuantity = intr.GetQuantity();
 	if (maxNormal == 0)
 	{
-		auto invNX = (static_cast<Real>(1)) / plane.GetNormal().GetXCoordinate();
+		auto invNX = (static_cast<Real>(1)) / plane.GetNormal().GetX();
 		for (i = 0; i < mQuantity; i++)
 		{
-			mPoint[i][1] = intr.GetPoint(i).GetXCoordinate();
-			mPoint[i][2] = intr.GetPoint(i).GetYCoordinate();
-			mPoint[i][0] = invNX * (plane.GetConstant() - plane.GetNormal().GetYCoordinate()*mPoint[i].GetYCoordinate() - plane.GetNormal().GetZCoordinate()*mPoint[i].GetZCoordinate());
+			mPoint[i][1] = intr.GetPoint(i).GetX();
+			mPoint[i][2] = intr.GetPoint(i).GetY();
+			mPoint[i][0] = invNX * (plane.GetConstant() - plane.GetNormal().GetY()*mPoint[i].GetY() - plane.GetNormal().GetZ()*mPoint[i].GetZ());
 		}
 	}
 	else if (maxNormal == 1)
 	{
-		auto invNY = (static_cast<Real>(1)) / plane.GetNormal().GetYCoordinate();
+		auto invNY = (static_cast<Real>(1)) / plane.GetNormal().GetY();
 		for (i = 0; i < mQuantity; i++)
 		{
-			mPoint[i][0] = intr.GetPoint(i).GetXCoordinate();
-			mPoint[i][2] = intr.GetPoint(i).GetYCoordinate();
-			mPoint[i][1] = invNY * (plane.GetConstant() - plane.GetNormal().GetXCoordinate()*mPoint[i].GetXCoordinate() - plane.GetNormal().GetZCoordinate()*mPoint[i].GetZCoordinate());
+			mPoint[i][0] = intr.GetPoint(i).GetX();
+			mPoint[i][2] = intr.GetPoint(i).GetY();
+			mPoint[i][1] = invNY * (plane.GetConstant() - plane.GetNormal().GetX()*mPoint[i].GetX() - plane.GetNormal().GetZ()*mPoint[i].GetZ());
 		}
 	}
 	else
 	{
-		auto invNZ = (static_cast<Real>(1)) / plane.GetNormal().GetZCoordinate();
+		auto invNZ = (static_cast<Real>(1)) / plane.GetNormal().GetZ();
 		for (i = 0; i < mQuantity; i++)
 		{
-			mPoint[i][0] = intr.GetPoint(i).GetXCoordinate();
-			mPoint[i][1] = intr.GetPoint(i).GetYCoordinate();
-			mPoint[i][2] = invNZ * (plane.GetConstant() - plane.GetNormal().GetXCoordinate()*mPoint[i].GetXCoordinate() - plane.GetNormal().GetYCoordinate()*mPoint[i].GetYCoordinate());
+			mPoint[i][0] = intr.GetPoint(i).GetX();
+			mPoint[i][1] = intr.GetPoint(i).GetY();
+			mPoint[i][2] = invNZ * (plane.GetConstant() - plane.GetNormal().GetX()*mPoint[i].GetX() - plane.GetNormal().GetY()*mPoint[i].GetY());
 		}
 	}
 

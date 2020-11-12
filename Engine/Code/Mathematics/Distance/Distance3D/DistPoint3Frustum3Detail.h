@@ -47,10 +47,10 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 
 	// Perform calculations in octant with nonnegative Real and U coordinates.
 	auto rSignChange = false;
-	if (test.GetXCoordinate() < Math<Real>::GetValue(0))
+	if (test.GetX() < Math<Real>::GetValue(0))
 	{
 		rSignChange = true;
-		test.SetXCoordinate(-test.GetXCoordinate());
+		test.SetX(-test.GetX());
 	}
 	else
 	{
@@ -58,10 +58,10 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 	}
 
 	auto uSignChange = false;
-	if (test.GetYCoordinate() < Math<Real>::GetValue(0))
+	if (test.GetY() < Math<Real>::GetValue(0))
 	{
 		uSignChange = true;
-		test.SetYCoordinate(-test.GetYCoordinate());
+		test.SetY(-test.GetY());
 	}
 	else
 	{
@@ -97,170 +97,170 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 	auto rEdgeDot = Math<Real>::GetValue(0);
 	auto uEdgeDot = Math<Real>::GetValue(0);
 	auto t = Math<Real>::GetValue(0);
-	if (test.GetZCoordinate() >= dmax)
+	if (test.GetZ() >= dmax)
 	{
-		if (test.GetXCoordinate() <= rmax)
+		if (test.GetX() <= rmax)
 		{
-			if (test.GetYCoordinate() <= umax)
+			if (test.GetY() <= umax)
 			{
 				// F-face
-				closest.SetXCoordinate(test.GetXCoordinate());
-				closest.SetYCoordinate(test.GetYCoordinate());
-				closest.SetZCoordinate(dmax);
+				closest.SetX(test.GetX());
+				closest.SetY(test.GetY());
+				closest.SetZ(dmax);
 			}
 			else
 			{
 				// UF-edge
-				closest.SetXCoordinate(test.GetXCoordinate());
-				closest.SetYCoordinate(umax);
-				closest.SetZCoordinate(dmax);
+				closest.SetX(test.GetX());
+				closest.SetY(umax);
+				closest.SetZ(dmax);
 			}
 		}
 		else
 		{
-			if (test.GetYCoordinate() <= umax)
+			if (test.GetY() <= umax)
 			{
 				// LF-edge
-				closest.SetXCoordinate(rmax);
-				closest.SetYCoordinate(test.GetYCoordinate());
-				closest.SetZCoordinate(dmax);
+				closest.SetX(rmax);
+				closest.SetY(test.GetY());
+				closest.SetZ(dmax);
 			}
 			else
 			{
 				// LUF-vertex
-				closest.SetXCoordinate(rmax);
-				closest.SetYCoordinate(umax);
-				closest.SetZCoordinate(dmax);
+				closest.SetX(rmax);
+				closest.SetY(umax);
+				closest.SetZ(dmax);
 			}
 		}
 	}
-	else if (test.GetZCoordinate() <= dmin)
+	else if (test.GetZ() <= dmin)
 	{
-		if (test.GetXCoordinate() <= rmin)
+		if (test.GetX() <= rmin)
 		{
-			if (test.GetYCoordinate() <= umin)
+			if (test.GetY() <= umin)
 			{
 				// N-face
-				closest.SetXCoordinate(test.GetXCoordinate());
-				closest.SetYCoordinate(test.GetYCoordinate());
-				closest.SetZCoordinate(dmin);
+				closest.SetX(test.GetX());
+				closest.SetY(test.GetY());
+				closest.SetZ(dmin);
 			}
 			else
 			{
-				udDot = umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
+				udDot = umin * test.GetY() + dmin * test.GetZ();
 				if (udDot >= maxUDDot)
 				{
 					// UF-edge
-					closest.SetXCoordinate(test.GetXCoordinate());
-					closest.SetYCoordinate(umax);
-					closest.SetZCoordinate(dmax);
+					closest.SetX(test.GetX());
+					closest.SetY(umax);
+					closest.SetZ(dmax);
 				}
 				else if (udDot >= minUDDot)
 				{
 					// U-face
-					uDot = dmin * test.GetYCoordinate() - umin * test.GetZCoordinate();
+					uDot = dmin * test.GetY() - umin * test.GetZ();
 					t = uDot / minUDDot;
-					closest.SetXCoordinate(test.GetXCoordinate());
-					closest.SetYCoordinate(test.GetYCoordinate() - t * dmin);
-					closest.SetZCoordinate(test.GetZCoordinate() + t * umin);
+					closest.SetX(test.GetX());
+					closest.SetY(test.GetY() - t * dmin);
+					closest.SetZ(test.GetZ() + t * umin);
 				}
 				else
 				{
 					// UN-edge
-					closest.SetXCoordinate(test.GetXCoordinate());
-					closest.SetYCoordinate(umin);
-					closest.SetZCoordinate(dmin);
+					closest.SetX(test.GetX());
+					closest.SetY(umin);
+					closest.SetZ(dmin);
 				}
 			}
 		}
 		else
 		{
-			if (test.GetYCoordinate() <= umin)
+			if (test.GetY() <= umin)
 			{
-				rdDot = rmin * test.GetXCoordinate() + dmin * test.GetZCoordinate();
+				rdDot = rmin * test.GetX() + dmin * test.GetZ();
 				if (rdDot >= maxRDDot)
 				{
 					// LF-edge
-					closest.SetXCoordinate(rmax);
-					closest.SetYCoordinate(test.GetYCoordinate());
-					closest.SetZCoordinate(dmax);
+					closest.SetX(rmax);
+					closest.SetY(test.GetY());
+					closest.SetZ(dmax);
 				}
 				else if (rdDot >= minRDDot)
 				{
 					// L-face
-					rDot = dmin * test.GetXCoordinate() - rmin * test.GetZCoordinate();
+					rDot = dmin * test.GetX() - rmin * test.GetZ();
 					t = rDot / minRDDot;
-					closest.SetXCoordinate(test.GetXCoordinate() - t * dmin);
-					closest.SetYCoordinate(test.GetYCoordinate());
-					closest.SetZCoordinate(test.GetZCoordinate() + t * rmin);
+					closest.SetX(test.GetX() - t * dmin);
+					closest.SetY(test.GetY());
+					closest.SetZ(test.GetZ() + t * rmin);
 				}
 				else
 				{
 					// LN-edge
-					closest.SetXCoordinate(rmin);
-					closest.SetYCoordinate(test.GetYCoordinate());
-					closest.SetZCoordinate(dmin);
+					closest.SetX(rmin);
+					closest.SetY(test.GetY());
+					closest.SetZ(dmin);
 				}
 			}
 			else
 			{
-				rudDot = rmin * test.GetXCoordinate() + umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
-				rEdgeDot = umin * rudDot - minRUDDot * test.GetYCoordinate();
+				rudDot = rmin * test.GetX() + umin * test.GetY() + dmin * test.GetZ();
+				rEdgeDot = umin * rudDot - minRUDDot * test.GetY();
 				if (rEdgeDot >= Math<Real>::GetValue(0))
 				{
-					rdDot = rmin * test.GetXCoordinate() + dmin * test.GetZCoordinate();
+					rdDot = rmin * test.GetX() + dmin * test.GetZ();
 					if (rdDot >= maxRDDot)
 					{
 						// LF-edge
-						closest.SetXCoordinate(rmax);
-						closest.SetYCoordinate(test.GetYCoordinate());
-						closest.SetZCoordinate(dmax);
+						closest.SetX(rmax);
+						closest.SetY(test.GetY());
+						closest.SetZ(dmax);
 					}
 					else if (rdDot >= minRDDot)
 					{
 						// L-face
-						rDot = dmin * test.GetXCoordinate() - rmin * test.GetZCoordinate();
+						rDot = dmin * test.GetX() - rmin * test.GetZ();
 						t = rDot / minRDDot;
-						closest.SetXCoordinate(test.GetXCoordinate() - t * dmin);
-						closest.SetYCoordinate(test.GetYCoordinate());
-						closest.SetZCoordinate(test.GetZCoordinate() + t * rmin);
+						closest.SetX(test.GetX() - t * dmin);
+						closest.SetY(test.GetY());
+						closest.SetZ(test.GetZ() + t * rmin);
 					}
 					else
 					{
 						// LN-edge
-						closest.SetXCoordinate(rmin);
-						closest.SetYCoordinate(test.GetYCoordinate());
-						closest.SetZCoordinate(dmin);
+						closest.SetX(rmin);
+						closest.SetY(test.GetY());
+						closest.SetZ(dmin);
 					}
 				}
 				else
 				{
-					uEdgeDot = rmin * rudDot - minRUDDot * test.GetXCoordinate();
+					uEdgeDot = rmin * rudDot - minRUDDot * test.GetX();
 					if (uEdgeDot >= Math<Real>::GetValue(0))
 					{
-						udDot = umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
+						udDot = umin * test.GetY() + dmin * test.GetZ();
 						if (udDot >= maxUDDot)
 						{
 							// UF-edge
-							closest.SetXCoordinate(test.GetXCoordinate());
-							closest.SetYCoordinate(umax);
-							closest.SetZCoordinate(dmax);
+							closest.SetX(test.GetX());
+							closest.SetY(umax);
+							closest.SetZ(dmax);
 						}
 						else if (udDot >= minUDDot)
 						{
 							// U-face
-							uDot = dmin * test.GetYCoordinate() - umin * test.GetZCoordinate();
+							uDot = dmin * test.GetY() - umin * test.GetZ();
 							t = uDot / minUDDot;
-							closest.SetXCoordinate(test.GetXCoordinate());
-							closest.SetYCoordinate(test.GetYCoordinate() - t * dmin);
-							closest.SetZCoordinate(test.GetZCoordinate() + t * umin);
+							closest.SetX(test.GetX());
+							closest.SetY(test.GetY() - t * dmin);
+							closest.SetZ(test.GetZ() + t * umin);
 						}
 						else
 						{
 							// UN-edge
-							closest.SetXCoordinate(test.GetXCoordinate());
-							closest.SetYCoordinate(umin);
-							closest.SetZCoordinate(dmin);
+							closest.SetX(test.GetX());
+							closest.SetY(umin);
+							closest.SetZ(dmin);
 						}
 					}
 					else
@@ -268,24 +268,24 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 						if (rudDot >= maxRUDDot)
 						{
 							// LUF-vertex
-							closest.SetXCoordinate(rmax);
-							closest.SetYCoordinate(umax);
-							closest.SetZCoordinate(dmax);
+							closest.SetX(rmax);
+							closest.SetY(umax);
+							closest.SetZ(dmax);
 						}
 						else if (rudDot >= minRUDDot)
 						{
 							// LU-edge
 							t = rudDot / minRUDDot;
-							closest.SetXCoordinate(t*rmin);
-							closest.SetYCoordinate(t*umin);
-							closest.SetZCoordinate(t*dmin);
+							closest.SetX(t*rmin);
+							closest.SetY(t*umin);
+							closest.SetZ(t*dmin);
 						}
 						else
 						{
 							// LUN-vertex
-							closest.SetXCoordinate(rmin);
-							closest.SetYCoordinate(umin);
-							closest.SetZCoordinate(dmin);
+							closest.SetX(rmin);
+							closest.SetY(umin);
+							closest.SetZ(dmin);
 						}
 					}
 				}
@@ -294,8 +294,8 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 	}
 	else
 	{
-		rDot = dmin * test.GetXCoordinate() - rmin * test.GetZCoordinate();
-		uDot = dmin * test.GetYCoordinate() - umin * test.GetZCoordinate();
+		rDot = dmin * test.GetX() - rmin * test.GetZ();
+		uDot = dmin * test.GetY() - umin * test.GetZ();
 		if (rDot <= Math<Real>::GetValue(0))
 		{
 			if (uDot <= Math<Real>::GetValue(0))
@@ -305,21 +305,21 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 			}
 			else
 			{
-				udDot = umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
+				udDot = umin * test.GetY() + dmin * test.GetZ();
 				if (udDot >= maxUDDot)
 				{
 					// UF-edge
-					closest.SetXCoordinate(test.GetXCoordinate());
-					closest.SetYCoordinate(umax);
-					closest.SetZCoordinate(dmax);
+					closest.SetX(test.GetX());
+					closest.SetY(umax);
+					closest.SetZ(dmax);
 				}
 				else
 				{
 					// U-face
 					t = uDot / minUDDot;
-					closest.SetXCoordinate(test.GetXCoordinate());
-					closest.SetYCoordinate(test.GetYCoordinate() - t * dmin);
-					closest.SetZCoordinate(test.GetZCoordinate() + t * umin);
+					closest.SetX(test.GetX());
+					closest.SetY(test.GetY() - t * dmin);
+					closest.SetZ(test.GetZ() + t * umin);
 				}
 			}
 		}
@@ -327,66 +327,66 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 		{
 			if (uDot <= Math<Real>::GetValue(0))
 			{
-				rdDot = rmin * test.GetXCoordinate() + dmin * test.GetZCoordinate();
+				rdDot = rmin * test.GetX() + dmin * test.GetZ();
 				if (rdDot >= maxRDDot)
 				{
 					// LF-edge
-					closest.SetXCoordinate(rmax);
-					closest.SetYCoordinate(test.GetYCoordinate());
-					closest.SetZCoordinate(dmax);
+					closest.SetX(rmax);
+					closest.SetY(test.GetY());
+					closest.SetZ(dmax);
 				}
 				else
 				{
 					// L-face
 					t = rDot / minRDDot;
-					closest.SetXCoordinate(test.GetXCoordinate() - t * dmin);
-					closest.SetYCoordinate(test.GetYCoordinate());
-					closest.SetZCoordinate(test.GetZCoordinate() + t * rmin);
+					closest.SetX(test.GetX() - t * dmin);
+					closest.SetY(test.GetY());
+					closest.SetZ(test.GetZ() + t * rmin);
 				}
 			}
 			else
 			{
-				rudDot = rmin * test.GetXCoordinate() + umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
-				rEdgeDot = umin * rudDot - minRUDDot * test.GetYCoordinate();
+				rudDot = rmin * test.GetX() + umin * test.GetY() + dmin * test.GetZ();
+				rEdgeDot = umin * rudDot - minRUDDot * test.GetY();
 				if (rEdgeDot >= Math<Real>::GetValue(0))
 				{
-					rdDot = rmin * test.GetXCoordinate() + dmin * test.GetZCoordinate();
+					rdDot = rmin * test.GetX() + dmin * test.GetZ();
 					if (rdDot >= maxRDDot)
 					{
 						// LF-edge
-						closest.SetXCoordinate(rmax);
-						closest.SetYCoordinate(test.GetYCoordinate());
-						closest.SetZCoordinate(dmax);
+						closest.SetX(rmax);
+						closest.SetY(test.GetY());
+						closest.SetZ(dmax);
 					}
 					else // assert( rdDot >= minRDDot ) from geometry
 					{
 						// L-face
 						t = rDot / minRDDot;
-						closest.SetXCoordinate(test.GetXCoordinate() - t * dmin);
-						closest.SetYCoordinate(test.GetYCoordinate());
-						closest.SetZCoordinate(test.GetZCoordinate() + t * rmin);
+						closest.SetX(test.GetX() - t * dmin);
+						closest.SetY(test.GetY());
+						closest.SetZ(test.GetZ() + t * rmin);
 					}
 				}
 				else
 				{
-					uEdgeDot = rmin * rudDot - minRUDDot * test.GetXCoordinate();
+					uEdgeDot = rmin * rudDot - minRUDDot * test.GetX();
 					if (uEdgeDot >= Math<Real>::GetValue(0))
 					{
-						udDot = umin * test.GetYCoordinate() + dmin * test.GetZCoordinate();
+						udDot = umin * test.GetY() + dmin * test.GetZ();
 						if (udDot >= maxUDDot)
 						{
 							// UF-edge
-							closest.SetXCoordinate(test.GetXCoordinate());
-							closest.SetYCoordinate(umax);
-							closest.SetZCoordinate(dmax);
+							closest.SetX(test.GetX());
+							closest.SetY(umax);
+							closest.SetZ(dmax);
 						}
 						else // assert( udDot >= minUDDot ) from geometry
 						{
 							// U-face
 							t = uDot / minUDDot;
-							closest.SetXCoordinate(test.GetXCoordinate());
-							closest.SetYCoordinate(test.GetYCoordinate() - t * dmin);
-							closest.SetZCoordinate(test.GetZCoordinate() + t * umin);
+							closest.SetX(test.GetX());
+							closest.SetY(test.GetY() - t * dmin);
+							closest.SetZ(test.GetZ() + t * umin);
 						}
 					}
 					else
@@ -394,17 +394,17 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 						if (rudDot >= maxRUDDot)
 						{
 							// LUF-vertex
-							closest.SetXCoordinate(rmax);
-							closest.SetYCoordinate(umax);
-							closest.SetZCoordinate(dmax);
+							closest.SetX(rmax);
+							closest.SetY(umax);
+							closest.SetZ(dmax);
 						}
 						else // assert( rudDot >= minRUDDot ) from geometry
 						{
 							// LU-edge
 							t = rudDot / minRUDDot;
-							closest.SetXCoordinate(t*rmin);
-							closest.SetYCoordinate(t*umin);
-							closest.SetZCoordinate(t*dmin);
+							closest.SetX(t*rmin);
+							closest.SetY(t*umin);
+							closest.SetZ(t*dmin);
 						}
 					}
 				}
@@ -417,19 +417,19 @@ typename const Mathematics::DistPoint3Frustum3<Real>::DistanceResult Mathematics
 	// Convert back to original quadrant.
 	if (rSignChange)
 	{
-		closest.SetXCoordinate(-closest.GetXCoordinate());
+		closest.SetX(-closest.GetX());
 	}
 
 	if (uSignChange)
 	{
-		closest.SetYCoordinate(-closest.GetYCoordinate());
+		closest.SetY(-closest.GetY());
 	}
 
 	mClosestPoint0 = mPoint;
 
 	// Convert back to original coordinates.
-	mClosestPoint1 = mFrustum.GetOrigin() + closest.GetXCoordinate()*mFrustum.GetRightVector() +
-					 closest.GetYCoordinate()*mFrustum.GetUpVector() + closest.GetZCoordinate()*mFrustum.GetDirectionVector();
+	mClosestPoint1 = mFrustum.GetOrigin() + closest.GetX()*mFrustum.GetRightVector() +
+					 closest.GetY()*mFrustum.GetUpVector() + closest.GetZ()*mFrustum.GetDirectionVector();
 
 	return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(diff), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }

@@ -22,9 +22,9 @@ Mathematics::ContEllipsoid3MinCR<Real>
 		auto diff = points[i] - C;  // P[i] - C
 		auto prod = diff*R;  // Real^T*(P[i] - C) = (u,v,w)
 
-		A[i].SetXCoordinate(prod.GetXCoordinate()*prod.GetXCoordinate());  // u^2
-		A[i].SetYCoordinate(prod.GetYCoordinate()*prod.GetYCoordinate());  // v^2
-		A[i].SetZCoordinate(prod.GetZCoordinate()*prod.GetZCoordinate());  // w^2
+		A[i].SetX(prod.GetX()*prod.GetX());  // u^2
+		A[i].SetY(prod.GetY()*prod.GetY());  // v^2
+		A[i].SetZ(prod.GetZ()*prod.GetZ());  // w^2
     }
 
     // TODO:  Sort the constraints to eliminate redundant ones.  It is clear

@@ -19,7 +19,7 @@ Rendering::PickRayImpl
 }
 
 Rendering::PickRayImpl ::PickRayImpl() noexcept
-    : m_Result{ false }, m_Origin{}, m_Direction{ Mathematics::Float::g_Zero }
+    : m_Result{ false }, m_Origin{}, m_Direction{   }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

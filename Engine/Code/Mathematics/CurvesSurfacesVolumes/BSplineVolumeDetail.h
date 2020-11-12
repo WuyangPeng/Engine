@@ -92,7 +92,7 @@ Vector3D<Real> BSplineVolume<Real>::GetPosition (Real u, Real v, Real w) const
     mBasis[1].Compute(v, 0, ivmin, ivmax);
     mBasis[2].Compute(w, 0, iwmin, iwmax);
 
-	auto pos = Vector3D<Real>::sm_Zero;
+	auto pos = Vector3D<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
 		auto tmp0 = mBasis[0].GetD0(iu);
@@ -119,7 +119,7 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivativeU (Real u, Real v, Real w)  con
     mBasis[1].Compute(v, 0, ivmin, ivmax);
     mBasis[2].Compute(w, 0, iwmin, iwmax);
 
-	auto derU = Vector3D<Real>::sm_Zero;
+	auto derU = Vector3D<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
 		auto tmp0 = mBasis[0].GetD1(iu);
@@ -146,7 +146,7 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivativeV (Real u, Real v, Real w) cons
     mBasis[1].Compute(v, 1, ivmin, ivmax);
     mBasis[2].Compute(w, 0, iwmin, iwmax);
 
-	auto derV = Vector3D<Real>::sm_Zero;
+	auto derV = Vector3D<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
 		auto tmp0 = mBasis[0].GetD0(iu);
@@ -173,7 +173,7 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivativeW (Real u, Real v, Real w)  con
     mBasis[1].Compute(v, 0, ivmin, ivmax);
     mBasis[2].Compute(w, 1, iwmin, iwmax);
 
-	auto derW = Vector3D<Real>::sm_Zero;
+	auto derW = Vector3D<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
 		auto tmp0 = mBasis[0].GetD0(iu);
@@ -212,7 +212,7 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivative (int i, Real pos[3]) const
     }
 
     MATHEMATICS_ASSERTION_0(false, "Derivatives larger than order 3 not supported\n");
-    return Vector3D<Real>::sm_Zero;
+    return Vector3D<Real>::GetZero();
 }
 
 }

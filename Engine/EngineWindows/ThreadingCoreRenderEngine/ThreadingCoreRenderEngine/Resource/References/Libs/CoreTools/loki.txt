@@ -53,3 +53,14 @@ library
 	AssocVector.h
 	CachedFactory.h
 	Checker.h
+		★	提供一种机制，程序员可以通过该机制确定哪些函数违反类/数据不变式。
+	CheckReturn.h
+	ConstPolicy.h
+	DataGenerators.h
+	EmptyType.h
+	Factory.h
+	Function.h
+	Functor.h
+	HierarchyGenerators.h
+	Key.h
+	LevelMutex.h

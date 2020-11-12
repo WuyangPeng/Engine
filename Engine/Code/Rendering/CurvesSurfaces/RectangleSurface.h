@@ -9,7 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Mathematics/Base/Float2.h"
+#include "Mathematics/Base/Float.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurface.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 
@@ -59,7 +59,7 @@ namespace Rendering
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(RectangleSurface);
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SHARED_PTR_DECLARE( RectangleSurface);
+    CORE_TOOLS_SHARED_PTR_DECLARE(RectangleSurface);
 }
 
 #endif  // RENDERING_CURVES_SURFACES_RECTANGLE_SURFACE_H

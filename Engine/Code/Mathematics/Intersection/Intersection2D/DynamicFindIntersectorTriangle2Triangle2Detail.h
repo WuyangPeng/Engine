@@ -56,8 +56,8 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	for (i0 = 1, i1 = 2, i2 = 0; i2 < 3; i0 = i1, i1 = i2++)
 	{
 		// Test axis V0[i1] + t*perp(V0[i2]-V0[i1]), perp(x,y) = (y,-x).
-		D.SetXCoordinate(mTriangle0.GetVertex()[i2].GetYCoordinate() - mTriangle0.GetVertex()[i1].GetYCoordinate());
-		D.SetYCoordinate(mTriangle0.GetVertex()[i1].GetXCoordinate() - mTriangle0.GetVertex()[i2].GetXCoordinate());
+		D.SetX(mTriangle0.GetVertex()[i2].GetY() - mTriangle0.GetVertex()[i1].GetY());
+		D.SetY(mTriangle0.GetVertex()[i1].GetX() - mTriangle0.GetVertex()[i2].GetX());
 		speed = Vector2DTools::DotProduct(D, W);
 
 		ComputeTwo(cfg0, mTriangle0.GetVertex(), D, i0, i1, i2);
@@ -74,8 +74,8 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 	for (i0 = 1, i1 = 2, i2 = 0; i2 < 3; i0 = i1, i1 = i2++)
 	{
 		// Test axis V1[i1] + t*perp(V1[i2]-V1[i1]), perp(x,y) = (y,-x).
-		D.SetXCoordinate(mTriangle1.GetVertex()[i2].GetYCoordinate() - mTriangle1.GetVertex()[i1].GetYCoordinate());
-		D.SetYCoordinate(mTriangle1.GetVertex()[i1].GetXCoordinate() - mTriangle1.GetVertex()[i2].GetXCoordinate());
+		D.SetX(mTriangle1.GetVertex()[i2].GetY() - mTriangle1.GetVertex()[i1].GetY());
+		D.SetY(mTriangle1.GetVertex()[i1].GetX() - mTriangle1.GetVertex()[i2].GetX());
 		speed = Vector2DTools::DotProduct(D, W);
 
 		ComputeTwo(cfg1, mTriangle1.GetVertex(), D, i0, i1, i2);

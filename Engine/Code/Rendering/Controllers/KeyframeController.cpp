@@ -143,7 +143,7 @@ Rendering::ControllerInterfaceSharedPtr Rendering::KeyframeController
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, KeyframeController,GetTranslate, ControllerKeyInfo,const Rendering::KeyframeController::APoint)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, KeyframeController,GetRotate, ControllerKeyInfo,const Rendering::KeyframeController::Matrix)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, KeyframeController, GetRotate, ControllerKeyInfo, const Rendering::KeyframeController::Matrix)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, KeyframeController,GetScale, ControllerKeyInfo,float)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetTranslateKeyInfo,float,const Rendering::ControllerKeyInfo)

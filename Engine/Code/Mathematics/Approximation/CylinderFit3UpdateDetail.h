@@ -120,7 +120,7 @@ void Mathematics::CylinderFit3Update<Real>
 	{
 		auto delta = data.GetDelta();
 		auto deltaCrossAxis = data.GetDeltaCrossAxis();
-		auto deltaCrossDescentDirection = Vector3DToolsd::CrossProduct(delta, descentDirection);
+                auto deltaCrossDescentDirection = Vector3DTools<Real>::CrossProduct(delta, descentDirection);
 		auto a = m_InverseRadiusSqrare * data.GetDeltaCrossAxisLengthQuartic() - static_cast<Real>(1);
 		auto b = m_InverseRadiusSqrare * Vector3DTools<Real>::DotProduct(deltaCrossAxis, deltaCrossDescentDirection);
 		auto c = m_InverseRadiusSqrare * Vector3DTools<Real>::VectorMagnitudeSquared(deltaCrossDescentDirection);
@@ -188,7 +188,7 @@ void Mathematics::CylinderFit3Update<Real>
 	for (const auto& data : m_UpdateData)
 	{
 		auto delta = data.GetPoint() - m_Center;
-		auto deltaCrossAxis = Vector3DToolsd::CrossProduct(delta, m_Axis);
+            auto deltaCrossAxis = Vector3DTools<Real>::CrossProduct(delta, m_Axis);
 		auto a = m_InverseRadiusSqrare * Vector3DTools<Real>::VectorMagnitude(deltaCrossAxis) - static_cast<Real>(1);
 
 		aMean += a;
@@ -210,7 +210,7 @@ void Mathematics::CylinderFit3Update<Real>
 	}
 
 	// 计算用于最快下降的线的四次多项式。
-	auto descentDirectionCrossAxis = Vector3DToolsd::CrossProduct(descentDirection, m_Axis);
+        auto descentDirectionCrossAxis = Vector3DTools<Real>::CrossProduct(descentDirection, m_Axis);
 	auto c = Vector3DTools<Real>::VectorMagnitude(descentDirectionCrossAxis) * inverseNumPoints * m_InverseRadiusSqrare;
 	auto bMean = Math::GetValue(0);
 	auto abMean = Math::GetValue(0);

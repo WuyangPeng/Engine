@@ -26,7 +26,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 	::ComputeSquaredDistance()
 {
 	// 确定m_InputVector的反射到第一象限。
-	bool reflect[3]{ m_InputVector.GetXCoordinate() < Math<Real>::GetValue(0),m_InputVector.GetYCoordinate() < Math<Real>::GetValue(0),m_InputVector.GetZCoordinate() < Math<Real>::GetValue(0) };
+	bool reflect[3]{ m_InputVector.GetX() < Math<Real>::GetValue(0),m_InputVector.GetY() < Math<Real>::GetValue(0),m_InputVector.GetZ() < Math<Real>::GetValue(0) };
 
 	// 确定递减辐度轴顺序。
 	int permute[3]{};

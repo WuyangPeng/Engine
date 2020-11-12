@@ -59,8 +59,8 @@ namespace Rendering
         transform1.SetUniformScale(uniformScale);
 
         [[maybe_unused]] const auto norm = transform1.GetNorm();
-        [[maybe_unused]] const auto aPoint = transform1 * Mathematics::Float::g_Origin;
-        [[maybe_unused]] const auto aVector = transform1 * Mathematics::Float::g_UnitX;
+        [[maybe_unused]] const auto aPoint = transform1 * Mathematics::FloatAPoint{};
+        [[maybe_unused]] const auto aVector = transform1 * Mathematics::FloatAVector::GetUnitX();
         transform1 *= transform2;
         [[maybe_unused]] const auto homogeneousMatrix = transform1.GetHomogeneousMatrix();
         [[maybe_unused]] const auto inverseMatrix = transform1.GetInverseMatrix();

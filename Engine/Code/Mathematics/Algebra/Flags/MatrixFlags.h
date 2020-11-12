@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 09:47)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 18:37)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_FLAGS_H
 #define MATHEMATICS_ALGEBRA_MATRIX_FLAGS_H
@@ -11,34 +14,34 @@
 
 namespace Mathematics
 {
-	enum class MatrixInitType
-	{
-		Zero,
-		Identity
-	};
+    enum class MatrixInitType
+    {
+        Zero,
+        Identity
+    };
 
-	enum class MatrixMajorFlags
-	{
-		Row, // 行矩阵
-		Column // 列矩阵
-	};
+    enum class MatrixMajorFlags
+    {
+        Row,  // 行矩阵
+        Column  // 列矩阵
+    };
 
-	enum class MatrixRotationAxis
-	{
-		X,
-		Y,
-		Z,
-		Count
-	};
+    enum class MatrixRotationAxis
+    {
+        X,
+        Y,
+        Z,
+        Count
+    };
 
-	enum class BandedMatrixSolveFlags
-	{
-		Unsolved,
-		Succeed,
-		Failure
-	};
+    enum class BandedMatrixSolveFlags
+    {
+        Unsolved,
+        Succeed,
+        Failure
+    };
 
-	ENUM_INCREMENTABLE_OPERATOR_DEFINE(MatrixRotationAxis);
+    ENUM_INCREMENTABLE_OPERATOR_DEFINE(MatrixRotationAxis);
 }
 
-#endif // MATHEMATICS_ALGEBRA_MATRIX_FLAGS_H
+#endif  // MATHEMATICS_ALGEBRA_MATRIX_FLAGS_H

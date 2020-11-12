@@ -15,6 +15,7 @@
     #include "CoreTools/Helper/MemoryMacro.h"
     #include "Mathematics/Algebra/Vector3DDetail.h"
     #include "Mathematics/Base/MathDetail.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
     #include STSTEM_WARNING_PUSH 
     #include SYSTEM_WARNING_DISABLE(26481)
     #include SYSTEM_WARNING_DISABLE(26489)
@@ -676,28 +677,28 @@ namespace Physics
         }
 
         // (u,v,w) = (0,0,0) at corner (0,0,0)
-        mVelocity1[0][0][0] = Vector3D::sm_Zero;
+        mVelocity1[0][0][0] = Vector3D::GetZero();
 
         // (u,v,w) = (0,0,0) at corner (imax,0,0)
-        mVelocity1[0][0][mIMax] = Vector3D::sm_Zero;
+        mVelocity1[0][0][mIMax] = Vector3D::GetZero();
 
         // (u,v,w) = (0,0,0) at corner (0,jmax,0)
-        mVelocity1[0][mJMax][0] = Vector3D::sm_Zero;
+        mVelocity1[0][mJMax][0] = Vector3D::GetZero();
 
         // (u,v,w) = (0,0,0) at corner (imax,jmax,0)
-        mVelocity1[0][mJMax][mIMax] = Vector3D::sm_Zero;
+        mVelocity1[0][mJMax][mIMax] = Vector3D::GetZero();
 
         // (u,v,w) = (0,0,0) at corner (0,0,kmax)
-        mVelocity1[mKMax][0][0] = Vector3D::sm_Zero;
+        mVelocity1[mKMax][0][0] = Vector3D::GetZero();
 
         // (u,v,w) = (0,0,0) at corner (imax,0,kmax)
-        mVelocity1[mKMax][0][mIMax] = Vector3D::sm_Zero;
+        mVelocity1[mKMax][0][mIMax] = Vector3D::GetZero();
 
         // (u,v,w) = (0,0,0) at corner (0,jmax,kmax)
-        mVelocity1[mKMax][mJMax][0] = Vector3D::sm_Zero;
+        mVelocity1[mKMax][mJMax][0] = Vector3D::GetZero();
 
         // (u,v,w) = (0,0,0) at corner (imax,jmax,kmax)
-        mVelocity1[mKMax][mJMax][mIMax] = Vector3D::sm_Zero;
+        mVelocity1[mKMax][mJMax][mIMax] = Vector3D::GetZero();
     }
 
     template <typename Real>

@@ -142,7 +142,7 @@ bool Rendering::SkinController
 				// 计算的皮肤顶点位置。
 				for (auto vertex = 0; vertex < m_Impl->GetNumVertices(); ++vertex)
 				{
-                                      auto position = Mathematics::Float::g_Origin;
+                                    auto position = Mathematics::FloatAPoint{};
 					for (auto bone = 0; bone < m_Impl->GetNumBones(); ++bone)
 					{
 						const auto weight = m_Impl->GetWeights(bone, vertex);

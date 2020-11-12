@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/25 17:11)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/05 17:48)
 
 #ifndef MATHEMATICS_ALGEBRA_HOMOGENEOUS_POINT_H
 #define MATHEMATICS_ALGEBRA_HOMOGENEOUS_POINT_H
@@ -17,8 +17,8 @@
 #include "Mathematics/Base/MathDetail.h"
 
 #include <array>
-#include <vector>
 #include <type_traits>
+#include <vector>
 
 // 当齐次点存储的值为浮点数时，比较两点相等，
 // 请使用函数Approximate，而不是==。
@@ -26,7 +26,7 @@
 namespace Mathematics
 {
     template <typename T>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE HomogeneousPoint : private boost::totally_ordered<HomogeneousPoint<T>>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE HomogeneousPoint final : private boost::totally_ordered<HomogeneousPoint<T>>
     {
     public:
         static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
@@ -44,6 +44,10 @@ namespace Mathematics
             Size
         };
 
+        static constexpr auto sm_X = System::EnumCastUnderlying(PointIndex::X);
+        static constexpr auto sm_Y = System::EnumCastUnderlying(PointIndex::Y);
+        static constexpr auto sm_Z = System::EnumCastUnderlying(PointIndex::Z);
+        static constexpr auto sm_W = System::EnumCastUnderlying(PointIndex::W);
         static constexpr auto sm_PointSize = System::EnumCastUnderlying(PointIndex::Size);
         using ArrayType = std::array<T, sm_PointSize>;
 
@@ -63,26 +67,26 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         // 坐标访问
-        const ArrayType GetCoordinate() const noexcept;
-        const T& operator[](int index) const;
-        T& operator[](int index);
-        T GetX() const noexcept;
+        [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
+        [[nodiscard]] const T& operator[](int index) const;
+        [[nodiscard]] T& operator[](int index);
+        [[nodiscard]] T GetX() const noexcept;
         void SetX(T x) noexcept;
-        T GetY() const noexcept;
+        [[nodiscard]] T GetY() const noexcept;
         void SetY(T y) noexcept;
-        T GetZ() const noexcept;
+        [[nodiscard]] T GetZ() const noexcept;
         void SetZ(T y) noexcept;
-        T GetW() const noexcept;
+        [[nodiscard]] T GetW() const noexcept;
         void SetW(T y) noexcept;
 
         void Set(const ArrayType& coordinate) noexcept;
 
-        static constexpr int GetPointByte() noexcept
+        [[nodiscard]] static constexpr int GetPointByte() noexcept
         {
             return GetPointSize() * sizeof(T);
         }
 
-        static constexpr int GetPointSize() noexcept
+        [[nodiscard]] static constexpr int GetPointSize() noexcept
         {
             return sm_PointSize;
         }
@@ -96,13 +100,13 @@ namespace Mathematics
 
     // 比较（仅供STL容器使用）
     template <typename T>
-    bool operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs);
+    [[nodiscard]] bool operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs);
 
     template <typename T>
-    bool operator<(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs) noexcept;
+    [[nodiscard]] bool operator<(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs) noexcept;
 
     template <typename T>
-    bool Approximate(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
+    [[nodiscard]] bool Approximate(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
 
     using FloatHomogeneousPoint = HomogeneousPoint<float>;
     using DoubleHomogeneousPoint = HomogeneousPoint<double>;

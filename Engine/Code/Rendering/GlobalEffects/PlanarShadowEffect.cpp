@@ -117,7 +117,7 @@ void Rendering::PlanarShadowEffect
         mAlphaState->SetBlendEnabled ( true);
         mAlphaState->SetSourceBlend ( AlphaStateFlags::SourceBlendMode::SourceAlpha);
         mAlphaState->SetDestinationBlend ( AlphaStateFlags::DestinationBlendMode::OneMinusSourceAlpha);
-        mMaterial->SetDiffuse (Colour<float>(mShadowColors[i].GetFirstValue(),mShadowColors[i].GetSecondValue(),mShadowColors[i].GetThirdValue(),mShadowColors[i].GetFourthValue()));
+        mMaterial->SetDiffuse(Colour<float>(mShadowColors[i][0], mShadowColors[i][1], mShadowColors[i][2], mShadowColors[i][3]));
 		 
         // Disable the depth buffer reading so that no depth-buffer fighting
         // occurs.  The drawing of pixels is controlled solely by the stencil

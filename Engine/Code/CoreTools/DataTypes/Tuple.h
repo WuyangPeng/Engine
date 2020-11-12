@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/16 17:00)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/03 10:20)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_H
@@ -29,6 +29,9 @@ namespace CoreTools
     class Tuple final : private boost::totally_ordered<Tuple<Dimension, Type>>
     {
     public:
+        using TupleType = Type;
+        static constexpr auto TupleDimension = Dimension;
+
         using ClassType = Tuple<Dimension, Type>;
         using ParamType = typename ParamType<Type>::type;
         using ArrayType = std::array<Type, Dimension>;
@@ -50,9 +53,11 @@ namespace CoreTools
         [[nodiscard]] ArrayTypeConstIter begin() const noexcept;
         [[nodiscard]] ArrayTypeConstIter end() const noexcept;
 
+        [[nodiscard]] Type GetSum() const noexcept;
+
     private:
         ArrayType m_Tuple;
-    };
+    };    
 
     // 类T可以是原生数据或数据类有下面的成员函数：
     // bool operator== (const T&,const T&);

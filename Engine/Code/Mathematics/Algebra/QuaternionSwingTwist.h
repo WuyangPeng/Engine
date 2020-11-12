@@ -1,11 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 10:15)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/10 19:00)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/MathematicsFwd.h"
 
@@ -13,30 +18,30 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class QuaternionSwingTwist
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QuaternionSwingTwist final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		using ClassType = QuaternionSwingTwist<Real>;
-		using Quaternion = Quaternion<Real>;
+        using ClassType = QuaternionSwingTwist<Real>;
+        using Quaternion = Quaternion<Real>;
 
-	public:
-		QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist) noexcept;
+    public:
+        QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const Quaternion GetTwist() const;
-		const Quaternion GetSwing() const;
+        [[nodiscard]] const Quaternion GetTwist() const noexcept;
+        [[nodiscard]] const Quaternion GetSwing() const noexcept;
 
-	private:
-		Quaternion m_Swing;
-		Quaternion m_Twist;
-	};
+    private:
+        Quaternion m_Swing;
+        Quaternion m_Twist;
+    };
 
-	using QuaternionSwingTwistf = QuaternionSwingTwist<float>;
-	using QuaternionSwingTwistd = QuaternionSwingTwist<double>;
+    using FloatQuaternionSwingTwist = QuaternionSwingTwist<float>;
+    using DoubleQuaternionSwingTwist = QuaternionSwingTwist<double>;
 }
 
-#endif // MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H
+#endif  // MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H

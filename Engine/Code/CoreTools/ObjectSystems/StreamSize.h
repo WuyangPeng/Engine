@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 11:36)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/02 10:27)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
@@ -25,7 +25,12 @@ namespace CoreTools
     template <typename T, typename Enable = void>
     struct StreamSize
     {
-        [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] T value = T{}) noexcept
+        [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] T value) noexcept
+        {
+            return GetStreamSize();
+        }
+
+        [[nodiscard]] constexpr static int GetStreamSize() noexcept
         {
             return sizeof(T);
         }
@@ -37,6 +42,11 @@ namespace CoreTools
     {
         [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] T value) noexcept
         {
+            return GetStreamSize();
+        }
+
+        [[nodiscard]] constexpr static int GetStreamSize() noexcept
+        {
             return g_ObjectSize;
         }
     };
@@ -44,7 +54,15 @@ namespace CoreTools
     template <typename T>
     struct StreamSize<std::shared_ptr<T>>
     {
-        [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] const std::shared_ptr<T>& value = std::shared_ptr<T>{}) noexcept
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+        [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] const std::shared_ptr<T>& value) noexcept
+        {
+            return GetStreamSize();
+        }
+#include STSTEM_WARNING_POP
+
+        [[nodiscard]] constexpr static int GetStreamSize() noexcept
         {
             return g_ObjectSize;
         }
@@ -53,7 +71,12 @@ namespace CoreTools
     template <typename T>
     struct StreamSize<std::weak_ptr<T>>
     {
-        [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] const std::weak_ptr<T>& value = std::weak_ptr<T>{}) noexcept
+        [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] const std::weak_ptr<T>& value) noexcept
+        {
+            return GetStreamSize();
+        }
+
+        [[nodiscard]] constexpr static int GetStreamSize() noexcept
         {
             return g_ObjectSize;
         }
@@ -62,7 +85,12 @@ namespace CoreTools
     template <typename T>
     struct StreamSize<std::unique_ptr<T>>
     {
-        [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] const std::unique_ptr<T>& value = std::unique_ptr<T>{}) noexcept
+        [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] const std::unique_ptr<T>& value) noexcept
+        {
+            return GetStreamSize();
+        }
+
+        [[nodiscard]] constexpr static int GetStreamSize() noexcept
         {
             return g_ObjectSize;
         }
@@ -74,6 +102,11 @@ namespace CoreTools
     {
         [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] bool value) noexcept
         {
+            return GetStreamSize();
+        }
+
+        [[nodiscard]] constexpr static int GetStreamSize() noexcept
+        {
             return g_DefaultSize;
         }
     };
@@ -82,6 +115,11 @@ namespace CoreTools
     struct StreamSize<T, typename std::enable_if_t<std::is_enum_v<T>>>
     {
         [[nodiscard]] constexpr static int GetStreamSize([[maybe_unused]] T value) noexcept
+        {
+            return GetStreamSize();
+        }
+
+        [[nodiscard]] constexpr static int GetStreamSize() noexcept
         {
             return sizeof(T);
         }
@@ -94,6 +132,11 @@ namespace CoreTools
         {
             return Stream::GetStreamingSize(value);
         }
+
+        [[nodiscard]] static int GetStreamSize()
+        {
+            return GetStreamSize(std::string{});
+        }
     };
 
     template <>
@@ -102,6 +145,11 @@ namespace CoreTools
         [[nodiscard]] static int GetStreamSize(const char* value)
         {
             return Stream::GetStreamingSize(value);
+        }
+
+        [[nodiscard]] static int GetStreamSize()
+        {
+            return StreamSize<std::string>::GetStreamSize();
         }
     };
 
@@ -119,6 +167,11 @@ namespace CoreTools
                 return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<T>::GetStreamSize());
             }
         }
+
+        [[nodiscard]] static int GetStreamSize() noexcept
+        {
+            return g_DefaultSize;
+        }
     };
 
     template <typename T>
@@ -134,6 +187,11 @@ namespace CoreTools
             {
                 return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<T>::GetStreamSize());
             }
+        }
+
+        [[nodiscard]] static int GetStreamSize() noexcept
+        {
+            return g_DefaultSize;
         }
     };
 
@@ -151,6 +209,11 @@ namespace CoreTools
                 return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<std::shared_ptr<T>>::GetStreamSize());
             }
         }
+
+        [[nodiscard]] static int GetStreamSize() noexcept
+        {
+            return g_DefaultSize;
+        }
     };
 
     template <typename T>
@@ -167,6 +230,11 @@ namespace CoreTools
                 return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<std::weak_ptr<T>>::GetStreamSize());
             }
         }
+
+        [[nodiscard]] static int GetStreamSize() noexcept
+        {
+            return g_DefaultSize;
+        }
     };
 
     template <typename T>
@@ -182,6 +250,11 @@ namespace CoreTools
             {
                 return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<std::unique_ptr<T>>::GetStreamSize());
             }
+        }
+
+        [[nodiscard]] static int GetStreamSize() noexcept
+        {
+            return g_DefaultSize;
         }
     };
 
@@ -204,6 +277,11 @@ namespace CoreTools
                 return size;
             }
         }
+
+        [[nodiscard]] static int GetStreamSize() noexcept
+        {
+            return g_DefaultSize;
+        }
     };
 
     template <typename T>
@@ -224,6 +302,11 @@ namespace CoreTools
                 }
                 return size;
             }
+        }
+
+        [[nodiscard]] static int GetStreamSize() noexcept
+        {
+            return g_DefaultSize;
         }
     };
 

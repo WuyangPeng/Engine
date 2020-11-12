@@ -29,11 +29,11 @@ namespace Imagics
 		ExtractCurveTris (int xBound, int yBound, int* data) noexcept;
 		
 		// Extract a level curve of the specified level value.
-		void ExtractContour (int level, std::vector<Mathematics::Vector2Df>& vertices, std::vector<EdgeKey>& edges);
+		void ExtractContour (int level, std::vector<Mathematics::FloatVector2D>& vertices, std::vector<EdgeKey>& edges);
 		
 		// The extraction has duplicate vertices on edges shared by pixels.  This
 		// function will eliminate the duplication.
-		void MakeUnique (std::vector<Mathematics::Vector2Df>& vertices, std::vector<EdgeKey>& edges);
+		void MakeUnique (std::vector<Mathematics::FloatVector2D>& vertices, std::vector<EdgeKey>& edges);
 
 	protected:
 		// Since the level value is an integer, the vertices of the extracted

@@ -30,8 +30,8 @@ Rendering::LightImpl ::LightImpl(LightType type, float epsilon)
     : m_Ambient{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } }, m_Diffuse{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } }, m_Specular{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } },
       m_Constant{ 1.0f }, m_Linear{ 0.0f }, m_Quadratic{ 0.0f },
       m_Intensity{ 1.0f }, m_Angle{ Math::GetPI() }, m_CosAngle{ -1.0f },
-      m_SinAngle{ 0.0f }, m_Exponent{ 1.0f }, m_Position{ Mathematics::Float::g_Origin },
-      m_DirectionVector{ -Mathematics::Float::g_UnitZ }, m_UpVector{ Mathematics::Float::g_UnitY }, m_RightVector{ Mathematics::Float::g_UnitX },
+      m_SinAngle{ 0.0f }, m_Exponent{ 1.0f }, m_Position{ Mathematics::FloatAPoint::GetOrigin() },
+      m_DirectionVector{ -Mathematics::FloatAVector::GetUnitZ() }, m_UpVector{ Mathematics::FloatAVector::GetUnitY() }, m_RightVector{ Mathematics::FloatAVector::GetUnitX() },
       m_LightType{ type }, m_Epsilon{ epsilon }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;

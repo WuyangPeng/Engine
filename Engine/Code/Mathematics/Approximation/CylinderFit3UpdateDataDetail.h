@@ -28,12 +28,12 @@ template <typename Real>
 typename const Mathematics::CylinderFit3UpdateData<Real>::Vector3D Mathematics::CylinderFit3UpdateData<Real>
 	::CalculateDescentDirection(const Vector3D& delta, const Vector3D& axis)
 {
-	return Vector3D{ axis.GetXCoordinate() * (delta.GetYCoordinate() * delta.GetYCoordinate() + delta.GetZCoordinate() * delta.GetZCoordinate()) -
-					 delta.GetXCoordinate() * (axis.GetYCoordinate() * delta.GetYCoordinate() + axis.GetZCoordinate() * delta.GetZCoordinate()),
-					 axis.GetYCoordinate() *	(delta.GetXCoordinate() * delta.GetXCoordinate() + delta.GetZCoordinate() * delta.GetZCoordinate()) -
-					 delta.GetYCoordinate() * (axis.GetXCoordinate() * delta.GetXCoordinate() + axis.GetZCoordinate() * delta.GetZCoordinate()),
-					 axis.GetZCoordinate() *	(delta.GetXCoordinate() * delta.GetXCoordinate() + delta.GetYCoordinate() * delta.GetYCoordinate()) -
-					 delta.GetZCoordinate() * (axis.GetXCoordinate() * delta.GetXCoordinate() + axis.GetYCoordinate() * delta.GetYCoordinate()) };
+	return Vector3D{ axis.GetX() * (delta.GetY() * delta.GetY() + delta.GetZ() * delta.GetZ()) -
+					 delta.GetX() * (axis.GetY() * delta.GetY() + axis.GetZ() * delta.GetZ()),
+					 axis.GetY() *	(delta.GetX() * delta.GetX() + delta.GetZ() * delta.GetZ()) -
+					 delta.GetY() * (axis.GetX() * delta.GetX() + axis.GetZ() * delta.GetZ()),
+					 axis.GetZ() *	(delta.GetX() * delta.GetX() + delta.GetY() * delta.GetY()) -
+					 delta.GetZ() * (axis.GetX() * delta.GetX() + axis.GetY() * delta.GetY()) };
 }
 
 #ifdef OPEN_CLASS_INVARIANT

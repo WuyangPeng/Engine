@@ -27,22 +27,22 @@ bool Mathematics::PointInPolygon2<Real>
         const auto& U1 = mPoints[j];
         Real rhs, lhs;
 
-		if (p.GetYCoordinate() < U1.GetYCoordinate())  // U1 above ray
+		if (p.GetY() < U1.GetY())  // U1 above ray
         {
-			if (U0.GetYCoordinate() <= p.GetYCoordinate())  // U0 on or below ray
+			if (U0.GetY() <= p.GetY())  // U0 on or below ray
             {
-				lhs = (p.GetYCoordinate() - U0.GetYCoordinate())*(U1.GetXCoordinate() - U0.GetXCoordinate());
-				rhs = (p.GetXCoordinate() - U0.GetXCoordinate())*(U1.GetYCoordinate() - U0.GetYCoordinate());
+				lhs = (p.GetY() - U0.GetY())*(U1.GetX() - U0.GetX());
+				rhs = (p.GetX() - U0.GetX())*(U1.GetY() - U0.GetY());
                 if (lhs > rhs)
                 {
                     inside = !inside;
                 }
             }
         }
-		else if (p.GetYCoordinate() < U0.GetYCoordinate())  // U1 on or below ray, U0 above ray
+		else if (p.GetY() < U0.GetY())  // U1 on or below ray, U0 above ray
         {
-			lhs = (p.GetYCoordinate() - U0.GetYCoordinate())*(U1.GetXCoordinate() - U0.GetXCoordinate());
-			rhs = (p.GetXCoordinate() - U0.GetXCoordinate())*(U1.GetYCoordinate() - U0.GetYCoordinate());
+			lhs = (p.GetY() - U0.GetY())*(U1.GetX() - U0.GetX());
+			rhs = (p.GetX() - U0.GetX())*(U1.GetY() - U0.GetY());
             if (lhs < rhs)
             {
                 inside = !inside;
@@ -58,10 +58,10 @@ bool Mathematics::PointInPolygon2<Real>
 {
     for (int i1 = 0, i0 = mNumPoints-1; i1 < mNumPoints; i0 = i1++)
     {
-		auto nx = mPoints[i1].GetYCoordinate() - mPoints[i0].GetYCoordinate();
-		auto ny = mPoints[i0].GetXCoordinate() - mPoints[i1].GetXCoordinate();
-		auto dx = p.GetXCoordinate() - mPoints[i0].GetXCoordinate();
-		auto dy = p.GetYCoordinate() - mPoints[i0].GetYCoordinate();
+		auto nx = mPoints[i1].GetY() - mPoints[i0].GetY();
+		auto ny = mPoints[i0].GetX() - mPoints[i1].GetX();
+		auto dx = p.GetX() - mPoints[i0].GetX();
+		auto dy = p.GetY() - mPoints[i0].GetY();
         if (nx*dx + ny*dy > Math<Real>::GetValue(0))
         {
             return false;
@@ -86,25 +86,25 @@ bool Mathematics::PointInPolygon2<Real>
         return false;
     }
 
-	auto nx = mPoints[2].GetYCoordinate() - mPoints[0].GetYCoordinate();
-	auto ny = mPoints[0].GetXCoordinate() - mPoints[2].GetXCoordinate();
-	auto dx = p.GetXCoordinate() - mPoints[0].GetXCoordinate();
-	auto dy = p.GetYCoordinate() - mPoints[0].GetYCoordinate();
+	auto nx = mPoints[2].GetY() - mPoints[0].GetY();
+	auto ny = mPoints[0].GetX() - mPoints[2].GetX();
+	auto dx = p.GetX() - mPoints[0].GetX();
+	auto dy = p.GetY() - mPoints[0].GetY();
 
     if (nx*dx + ny*dy > Math<Real>::GetValue(0))
     {
         // P potentially in <V0,V1,V2>
-		nx = mPoints[1].GetYCoordinate() - mPoints[0].GetYCoordinate();
-		ny = mPoints[0].GetXCoordinate() - mPoints[1].GetXCoordinate();
+		nx = mPoints[1].GetY() - mPoints[0].GetY();
+		ny = mPoints[0].GetX() - mPoints[1].GetX();
         if (nx*dx + ny*dy > Real{0.0})
         {
             return false;
         }
 
-		nx = mPoints[2].GetYCoordinate() - mPoints[1].GetYCoordinate();
-		ny = mPoints[1].GetXCoordinate() - mPoints[2].GetXCoordinate();
-		dx = p.GetXCoordinate() - mPoints[1].GetXCoordinate();
-		dy = p.GetYCoordinate() - mPoints[1].GetYCoordinate();
+		nx = mPoints[2].GetY() - mPoints[1].GetY();
+		ny = mPoints[1].GetX() - mPoints[2].GetX();
+		dx = p.GetX() - mPoints[1].GetX();
+		dy = p.GetY() - mPoints[1].GetY();
         if (nx*dx + ny*dy > Math<Real>::GetValue(0))
         {
             return false;
@@ -113,17 +113,17 @@ bool Mathematics::PointInPolygon2<Real>
     else
     {
         // P potentially in <V0,V2,V3>
-		nx = mPoints[0].GetYCoordinate() - mPoints[3].GetYCoordinate();
-		ny = mPoints[3].GetXCoordinate() - mPoints[0].GetXCoordinate();
+		nx = mPoints[0].GetY() - mPoints[3].GetY();
+		ny = mPoints[3].GetX() - mPoints[0].GetX();
         if (nx*dx + ny*dy > Math<Real>::GetValue(0))
         {
             return false;
         }
 
-		nx = mPoints[3].GetYCoordinate() - mPoints[2].GetYCoordinate();
-		ny = mPoints[2].GetXCoordinate() - mPoints[3].GetXCoordinate();
-		dx = p.GetXCoordinate() - mPoints[3].GetXCoordinate();
-		dy = p.GetYCoordinate() - mPoints[3].GetYCoordinate();
+		nx = mPoints[3].GetY() - mPoints[2].GetY();
+		ny = mPoints[2].GetX() - mPoints[3].GetX();
+		dx = p.GetX() - mPoints[3].GetX();
+		dy = p.GetY() - mPoints[3].GetY();
         if (nx*dx + ny*dy > Math<Real>::GetValue(0))
         {
             return false;
@@ -141,10 +141,10 @@ bool Mathematics::PointInPolygon2<Real>
     int diff = i1 - i0;
     if (diff == 1 || (diff < 0 && diff + mNumPoints == 1))
     {
-		nx = mPoints[i1].GetYCoordinate() - mPoints[i0].GetYCoordinate();
-		ny = mPoints[i0].GetXCoordinate() - mPoints[i1].GetXCoordinate();
-		dx = p.GetXCoordinate() - mPoints[i0].GetXCoordinate();
-		dy = p.GetYCoordinate() - mPoints[i0].GetYCoordinate();
+		nx = mPoints[i1].GetY() - mPoints[i0].GetY();
+		ny = mPoints[i0].GetX() - mPoints[i1].GetX();
+		dx = p.GetX() - mPoints[i0].GetX();
+		dy = p.GetY() - mPoints[i0].GetY();
         return nx*dx + ny*dy <= Math<Real>::GetValue(0);
     }
 
@@ -164,10 +164,10 @@ bool Mathematics::PointInPolygon2<Real>
     }
 
     // Determine which side of the splitting line contains the point.
-	nx = mPoints[mid].GetYCoordinate() - mPoints[i0].GetYCoordinate();
-	ny = mPoints[i0].GetXCoordinate() - mPoints[mid].GetXCoordinate();
-	dx = p.GetXCoordinate() - mPoints[i0].GetXCoordinate();
-	dy = p.GetYCoordinate() - mPoints[i0].GetYCoordinate();
+	nx = mPoints[mid].GetY() - mPoints[i0].GetY();
+	ny = mPoints[i0].GetX() - mPoints[mid].GetX();
+	dx = p.GetX() - mPoints[i0].GetX();
+	dy = p.GetY() - mPoints[i0].GetY();
     if (nx*dx + ny*dy > Math<Real>::GetValue(0))
     {
         // P potentially in <V(i0),V(i0+1),...,V(mid-1),V(mid)>

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/19 10:06)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/02 13:42)
 
 #ifndef MATHEMATICS_ALGEBRA_AQUATERNION_H
 #define MATHEMATICS_ALGEBRA_AQUATERNION_H
@@ -10,17 +13,17 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
+#include "System/Helper/PragmaWarning/Operators.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include "System/Helper/PragmaWarning/Operators.h"
+#include <array>
 #include <type_traits>
 
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AQuaternion : private boost::additive<AQuaternion<Real>,
-                                                                                     boost::multiplicative<AQuaternion<Real>, Real,
-                                                                                                           boost::totally_ordered<AQuaternion<Real>>>>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AQuaternion final : private boost::additive<AQuaternion<Real>, boost::multiplicative<AQuaternion<Real>, Real, boost::totally_ordered<AQuaternion<Real>>>>
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
@@ -29,77 +32,60 @@ namespace Mathematics
         using Math = Math<Real>;
         using Matrix = Matrix<Real>;
         using AVector = AVector<Real>;
-        using AlgebraTraits = AlgebraTraits<Real>;
 
-        constexpr static auto sm_EntrySize = 4;
+        enum class PointIndex
+        {
+            W = 0,
+            X,
+            Y,
+            Z,
+            Size
+        };
+
+        static constexpr auto sm_EntrySize = System::EnumCastUnderlying(PointIndex::Size);
+
         using ArrayType = std::array<Real, sm_EntrySize>;
 
     public:
         // 四元数q = w + x * i + y * j + z * k
         // 这里(w,x,y,z)不一定是单位长度的四维向量。
 
-        AQuaternion() noexcept;
-        AQuaternion(Real w, Real x, Real y, Real z) noexcept;
+        constexpr AQuaternion() noexcept
+            : m_W{}, m_X{}, m_Y{}, m_Z{}
+        {
+        }
+
+        constexpr AQuaternion(Real w, Real x, Real y, Real z) noexcept
+            : m_W{ w }, m_X{ x }, m_Y{ y }, m_Z{ z }
+        {
+        }
+
+        AQuaternion(const ArrayType& coordinate) noexcept;
 
         // 输入为旋转矩阵构造四元数
         AQuaternion(const Matrix& matrix);
 
         // 通过轴-角的旋转构造四元数
-        AQuaternion(const AVector& axis, Real angle);
-
-        AQuaternion(const AQuaternion&) noexcept = default;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        AQuaternion& operator=(const AQuaternion& rhs) noexcept = default;
-#include STSTEM_WARNING_POP
-        ~AQuaternion() noexcept = default;
-        AQuaternion(AQuaternion&& rhs) noexcept
-            : m_Tuple{}
-        {
-            for (int i = 0; i < 4; ++i)
-            {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-                m_Tuple[i] = rhs.m_Tuple[i];
-#include STSTEM_WARNING_POP
-            }
-        }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-        AQuaternion& operator=(AQuaternion&& rhs) noexcept
-        {
-            for (int i = 0; i < 4; ++i)
-            {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-                m_Tuple[i] = rhs.m_Tuple[i];
-#include STSTEM_WARNING_POP
-            }
-
-            return *this;
-        }
-#include STSTEM_WARNING_POP
+        AQuaternion(const AVector& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
         // 坐标访问类似于数组:  0 = w, 1 = x, 2 = y, 3 = z.
-        const Real& operator[](int index) const;
-        Real& operator[](int index);
-        Real GetW() const noexcept;
+        [[nodiscard]] const Real& operator[](int index) const;
+        [[nodiscard]] Real& operator[](int index);
+        [[nodiscard]] Real GetW() const noexcept;
         void SetW(Real w) noexcept;
-        Real GetX() const noexcept;
+        [[nodiscard]] Real GetX() const noexcept;
         void SetX(Real x) noexcept;
-        Real GetY() const noexcept;
+        [[nodiscard]] Real GetY() const noexcept;
         void SetY(Real y) noexcept;
-        Real GetZ() const noexcept;
+        [[nodiscard]] Real GetZ() const noexcept;
         void SetZ(Real z) noexcept;
 
         // 算术运算
-        AQuaternion& operator*=(const AQuaternion& rhs);
+        AQuaternion& operator*=(const AQuaternion& rhs) noexcept;
 
-        const AQuaternion operator-() const noexcept;
+        [[nodiscard]] const AQuaternion operator-() const noexcept;
 
         AQuaternion& operator+=(const AQuaternion& rhs) noexcept;
         AQuaternion& operator-=(const AQuaternion& rhs) noexcept;
@@ -108,84 +94,90 @@ namespace Mathematics
 
         // 四元数，矩阵和轴——角之间的转换。
         void FromRotationMatrix(const Matrix& matrix);
-        const Matrix ToRotationMatrix() const noexcept;
-        void FromAxisAngle(const AVector& axis, Real angle);
-        const AVector ToAxis() const;
-        Real ToAngle() const noexcept;
+        [[nodiscard]] const Matrix ToRotationMatrix() const noexcept;
+        void FromAxisAngle(const AVector& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        [[nodiscard]] const AVector ToAxis() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        [[nodiscard]] Real ToAngle() const noexcept;
 
         // 4-tuple的长度
-        Real Length() const;
+        [[nodiscard]] Real Length() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
         // 4-tuple的长度的平方
-        Real SquaredLength() const noexcept;
+        [[nodiscard]] Real SquaredLength() const noexcept;
 
-        void Normalize(Real epsilon = Math::GetZeroTolerance());
+        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // 适用于非零四元数
-        const AQuaternion Inverse() const;
+        [[nodiscard]] const AQuaternion Inverse() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // 取负数在 x, y, 和 z 上
-        const AQuaternion Conjugate() const noexcept;
+        [[nodiscard]] const AQuaternion Conjugate() const noexcept;
 
         // 适用于四元数 w = 0
-        const AQuaternion Exp() const;
+        [[nodiscard]] const AQuaternion Exp() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // 适用于单位长度四元数
-        const AQuaternion Log() const noexcept;
+        [[nodiscard]] const AQuaternion Log() const noexcept;
 
-        bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const;
+        [[nodiscard]] bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // 由四元数旋转向量。
-        const AVector Rotate(const AVector& vector) const;
+        [[nodiscard]] const AVector Rotate(const AVector& vector) const noexcept;
 
         // 球面线性插值
-        void Slerp(Real t, const AQuaternion& firstQuaternion, const AQuaternion& secondQuaternion);
+        void Slerp(Real t, const AQuaternion& quaternion0, const AQuaternion& quaternion1) noexcept;
 
         // 中间条款球面二次插值
-        void Intermediate(const AQuaternion& firstQuaternion, const AQuaternion& secondQuaternion, const AQuaternion& thirdQuaternion);
+        void Intermediate(const AQuaternion& quaternion0, const AQuaternion& quaternion1, const AQuaternion& quaternion2);
 
         // 球面二次插值。
-        void Squad(Real t, const AQuaternion& q0, const AQuaternion& a0,
-                   const AQuaternion& a1, const AQuaternion& q1);
+        void Squad(Real t, const AQuaternion& q0, const AQuaternion& a0, const AQuaternion& a1, const AQuaternion& q1) noexcept;
 
         [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate) noexcept;
 
         // 特殊四元数
-        static const AQuaternion sm_Zero;
-        static const AQuaternion sm_Identity;
+        static constexpr AQuaternion GetZero()
+        {
+            return AQuaternion{};
+        }
+
+        static constexpr AQuaternion GetIdentity()
+        {
+            return AQuaternion{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        }
 
     private:
         // 存储的顺序是(w,x,y,z)。
-        Real m_Tuple[4];
+        Real m_W;
+        Real m_X;
+        Real m_Y;
+        Real m_Z;
     };
 
     // 比较 (仅使用在 STL 容器).
     template <typename Real>
-    bool operator==(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs);
+    [[nodiscard]] bool operator==(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs);
 
     template <typename Real>
-    bool operator<(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs);
+    [[nodiscard]] bool operator<(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept;
 
     template <typename Real>
-    const AQuaternion<Real> operator*(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs);
+    [[nodiscard]] const AQuaternion<Real> operator*(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept;
 
     // 4元组的点积
     template <typename Real>
-    Real Dot(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs);
+    [[nodiscard]] Real Dot(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept;
 
     template <typename Real>
-    bool Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs, const Real epsilon);
-
-    template <typename Real>
-    bool Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs);
+    [[nodiscard]] bool Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance()) noexcept;
 
     // 调试输出
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const AQuaternion<Real>& quaternion);
 
-    using AQuaternionf = AQuaternion<float>;
-    using AQuaterniond = AQuaternion<double>;
+    using FloatAQuaternion = AQuaternion<float>;
+    using DoubleAQuaternion = AQuaternion<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_AQUATERNION_H

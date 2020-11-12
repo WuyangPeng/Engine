@@ -406,6 +406,7 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
     <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI Game Programming Wisdom.txt" />
     <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI Techniques for Game Programming.txt" />
     <Text Include="Resource\References\GameDesign\ArtificialIntellegence\ArtificialIntellegence.txt" />
+    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\Game AI Pro.txt" />
     <Text Include="Resource\References\GameDesign\ArtificialIntellegence\Programming Game AI by Example.txt" />
     <Text Include="Resource\References\GameDesign\ArtificialIntellegence\The Nature of Code.txt" />
     <Text Include="Resource\References\GameDesign\DirectX\Advanced 3D Game Programming with DirectX 10.0.txt" />

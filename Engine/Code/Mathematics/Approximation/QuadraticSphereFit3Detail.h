@@ -36,9 +36,9 @@ void Mathematics::QuadraticSphereFit3<Real>
 
 	for (auto i = 0u; i < numPoints; ++i)
 	{
-		auto x = points[i].GetXCoordinate();
-		auto y = points[i].GetYCoordinate();
-		auto z = points[i].GetZCoordinate();
+		auto x = points[i].GetX();
+		auto y = points[i].GetY();
+		auto z = points[i].GetZ();
 		auto x2 = x * x;
 		auto y2 = y * y;
 		auto z2 = z * z;

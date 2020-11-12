@@ -29,7 +29,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TubeSurface);  
 
 Rendering::TubeSurface
-	::TubeSurface (Mathematics::Curve3f* medial, RadialFunction radial, bool closed, const Mathematics::Vector3Df& upVector, int numMedialSamples,int numSliceSamples,
+	::TubeSurface (Mathematics::Curve3f* medial, RadialFunction radial, bool closed, const Mathematics::FloatVector3D& upVector, int numMedialSamples,int numSliceSamples,
 				   bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax,VertexFormatSharedPtr vformat)
     :ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mMedial(medial), mRadial(radial), mNumMedialSamples(numMedialSamples),
      mNumSliceSamples(numSliceSamples), mUpVector(upVector),mSin(0), mCos(0), mClosed(closed), mSampleByArcLength(sampleByArcLength)
@@ -149,8 +149,8 @@ void Rendering::TubeSurface
       //  float radius = mRadial(t);
 
         // Compute frame.
-        Mathematics::Vector3Df position, tangent, normal, binormal;
-        if (mUpVector != Mathematics::Vector3Df::sm_Zero)
+        Mathematics::FloatVector3D position, tangent, normal, binormal;
+        if (mUpVector != Mathematics::FloatVector3D::GetZero())
         {
             // Always use 'up' vector N rather than curve normal.  You must
             // constrain the curve so that T and N are never parallel.  To
@@ -160,8 +160,8 @@ void Rendering::TubeSurface
             //     N = Cross(B,T)/Length(Cross(B,T)).
             position = mMedial->GetPosition(t);
             tangent = mMedial->GetTangent(t);
-            binormal = Mathematics::Vector3DToolsf::UnitCrossProduct(tangent,mUpVector);
-            normal = Mathematics::Vector3DToolsf::UnitCrossProduct(binormal,tangent);
+            binormal = Mathematics::FloatVector3DTools::UnitCrossProduct(tangent, mUpVector);
+            normal = Mathematics::FloatVector3DTools::UnitCrossProduct(binormal, tangent);
         }
         else
         {
@@ -196,7 +196,7 @@ void Rendering::TubeSurface
 	::ComputeNormals ()
 {
     int s = 0, sM1= 0, sP1= 0, m= 0, mM1= 0, mP1= 0;
-    const Mathematics::Vector3Df dir0, dir1;
+    const Mathematics::FloatVector3D dir0, dir1;
 
     VertexBufferAccessor vba(this);
 
@@ -299,17 +299,17 @@ void Rendering::TubeSurface
 {
     VertexBufferAccessor vba(this);
 
-    Mathematics::Float2 tcoordRange(tcoordMax.GetFirstValue() - tcoordMin.GetFirstValue(), tcoordMax.GetSecondValue() - tcoordMin.GetSecondValue() );
+    Mathematics::Float2 tcoordRange(tcoordMax[0] - tcoordMin[0], tcoordMax[1] - tcoordMin[1]);
     const int mMax = (mClosed ? mNumMedialSamples : mNumMedialSamples - 1);
     for (int m = 0, v = 0; m <= mMax; m++)
     {
         const float mRatio = ((float)m)/((float)mMax);
-        const float mValue = tcoordMin.GetSecondValue() + mRatio*tcoordRange.GetSecondValue();
+        const float mValue = tcoordMin[1] + mRatio * tcoordRange[1];
         for (int s = 0; s <= mNumSliceSamples; ++s, ++v)
         {
            const float sRatio = ((float)s)/((float)mNumSliceSamples);
-           const float sValue = tcoordMin.GetFirstValue() + sRatio*tcoordRange.GetFirstValue();
-              Mathematics::Float2 tcoord(sValue, mValue);
+            const float sValue = tcoordMin[0] + sRatio * tcoordRange[0];
+           const Mathematics::Float2 tcoord(sValue, mValue);
             constexpr int numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
             for (int unit = 0; unit < numTCoords; ++unit)
             {
@@ -404,23 +404,23 @@ void Rendering::TubeSurface
 }
 
 void Rendering::TubeSurface
-	::GetTMinSlice (Mathematics::Vector3Df* slice)
+	::GetTMinSlice (Mathematics::FloatVector3D* slice)
 {
     VertexBufferAccessor vba(this);
     for (int i = 0; i <= mNumSliceSamples; ++i)
     {
-        slice[i] = vba.GetPosition<Mathematics::Vector3Df>(i);
+        slice[i] = vba.GetPosition<Mathematics::FloatVector3D>(i);
     }
 }
 
 void Rendering::TubeSurface
-	::GetTMaxSlice (Mathematics::Vector3Df* slice)
+	::GetTMaxSlice (Mathematics::FloatVector3D* slice)
 {
     VertexBufferAccessor vba(this);
     int j = GetVertexBuffer()->GetNumElements() - mNumSliceSamples - 1;
     for (int i = 0; i <= mNumSliceSamples; ++i, ++j)
     {
-        slice[i] = vba.GetPosition<Mathematics::Vector3Df>(j);
+        slice[i] = vba.GetPosition<Mathematics::FloatVector3D>(j);
     }
 }
 
@@ -443,7 +443,7 @@ void Rendering::TubeSurface
 
 Rendering::TubeSurface
 	::TubeSurface (LoadConstructor value)
-    :ParentType(value), mMedial(0),mRadial(0),mNumMedialSamples(0),mNumSliceSamples(0),mUpVector(Mathematics::Vector3Df::sm_Zero),
+    :ParentType(value), mMedial(0),mRadial(0),mNumMedialSamples(0),mNumSliceSamples(0),mUpVector( ),
     mSin(0), mCos(0), mClosed(false), mSampleByArcLength(false)
 {
 }
@@ -555,12 +555,12 @@ int Rendering::TubeSurface
 }
 
  void Rendering::TubeSurface
-	 ::SetUpVector(const Mathematics::Vector3Df& upVector) noexcept
+	 ::SetUpVector(const Mathematics::FloatVector3D& upVector) noexcept
 {
 	mUpVector = upVector;
 }
 
- const Mathematics::Vector3Df& Rendering::TubeSurface
+ const Mathematics::FloatVector3D& Rendering::TubeSurface
 	 ::GetUpVector() const noexcept
 {
 	return mUpVector;

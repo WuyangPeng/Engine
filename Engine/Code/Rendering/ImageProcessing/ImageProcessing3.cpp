@@ -175,8 +175,8 @@ void Rendering::ImageProcessing3
 	Texture2DSharedPtr maskTexture ( std::make_shared<Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mNumCols, mNumRows, 1));
 
 	Mathematics::Float4* mask = (Mathematics::Float4*)maskTexture->GetTextureData(0);
-	Mathematics::Float4 one(1.0f, 1.0f, 1.0f, 1.0f);
-	Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 one(1.0f, 1.0f, 1.0f, 1.0f);
+        const Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
         int x = 0, y = 0, z = 0;
 
     // Interior.
@@ -314,33 +314,33 @@ void Rendering::ImageProcessing3
 	Texture2DSharedPtr offsetTexture ( std::make_shared<Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mNumCols, mNumRows, 1));
 
 	Mathematics::Float4* offset = (Mathematics::Float4*)offsetTexture->GetTextureData(0);
-	Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 x0FaceOffset(+mColSpacing, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 x1FaceOffset(-mColSpacing, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 y0FaceOffset(0.0f, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 y1FaceOffset(0.0f, -mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 z0FaceOffset(+mBound0*mColSpacing, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 z1FaceOffset(-mBound0*mColSpacing, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 x00EdgeOffset(+mBound0*mColSpacing, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 x01EdgeOffset(-mBound0*mColSpacing, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 x10EdgeOffset(+mBound0*mColSpacing, -mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 x11EdgeOffset(-mBound0*mColSpacing, -mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 y00EdgeOffset((+mBound0 + 1)*mColSpacing, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 y01EdgeOffset((-mBound0 + 1)*mColSpacing, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 y10EdgeOffset((+mBound0 - 1)*mColSpacing, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 y11EdgeOffset((-mBound0 - 1)*mColSpacing, 0.0f, 0.0f, 0.0f);
-	Mathematics::Float4 z00EdgeOffset(+mColSpacing, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 z01EdgeOffset(+mColSpacing, -mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 z10EdgeOffset(-mColSpacing, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 z11EdgeOffset(-mColSpacing, -mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 c000Offset((+mBound0 + 1)*mColSpacing, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 c100Offset((+mBound0 - 1)*mColSpacing, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 c010Offset((+mBound0 + 1)*mColSpacing, -mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 c110Offset((+mBound0 - 1)*mColSpacing, -mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 c001Offset((-mBound0 + 1)*mColSpacing, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 c101Offset((-mBound0 - 1)*mColSpacing, +mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 c011Offset((-mBound0 + 1)*mColSpacing, -mRowSpacing, 0.0f, 0.0f);
-	Mathematics::Float4 c111Offset((-mBound0 - 1)*mColSpacing, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 x0FaceOffset(+mColSpacing, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 x1FaceOffset(-mColSpacing, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 y0FaceOffset(0.0f, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 y1FaceOffset(0.0f, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 z0FaceOffset(+mBound0 * mColSpacing, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 z1FaceOffset(-mBound0 * mColSpacing, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 x00EdgeOffset(+mBound0 * mColSpacing, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 x01EdgeOffset(-mBound0 * mColSpacing, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 x10EdgeOffset(+mBound0 * mColSpacing, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 x11EdgeOffset(-mBound0 * mColSpacing, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 y00EdgeOffset((+mBound0 + 1) * mColSpacing, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 y01EdgeOffset((-mBound0 + 1) * mColSpacing, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 y10EdgeOffset((+mBound0 - 1) * mColSpacing, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 y11EdgeOffset((-mBound0 - 1) * mColSpacing, 0.0f, 0.0f, 0.0f);
+        const Mathematics::Float4 z00EdgeOffset(+mColSpacing, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 z01EdgeOffset(+mColSpacing, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 z10EdgeOffset(-mColSpacing, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 z11EdgeOffset(-mColSpacing, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 c000Offset((+mBound0 + 1) * mColSpacing, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 c100Offset((+mBound0 - 1) * mColSpacing, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 c010Offset((+mBound0 + 1) * mColSpacing, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 c110Offset((+mBound0 - 1) * mColSpacing, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 c001Offset((-mBound0 + 1) * mColSpacing, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 c101Offset((-mBound0 - 1) * mColSpacing, +mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 c011Offset((-mBound0 + 1) * mColSpacing, -mRowSpacing, 0.0f, 0.0f);
+        const Mathematics::Float4 c111Offset((-mBound0 - 1) * mColSpacing, -mRowSpacing, 0.0f, 0.0f);
         int x = 0, y = 0, z = 0;
 
     // Interior.
@@ -486,16 +486,16 @@ void Rendering::ImageProcessing3
 
     ShaderFloatSharedPtr boundaryColorConstant ( std::make_shared<ShaderFloat>(1));
     float* data = boundaryColorConstant->GetData();
-    data[0] = boundaryColor.GetFirstValue();
-    data[1] = boundaryColor.GetSecondValue();
-    data[2] = boundaryColor.GetThirdValue();
-    data[3] = boundaryColor.GetFourthValue();
+    data[0] = boundaryColor[0];
+    data[1] = boundaryColor[1];
+    data[2] = boundaryColor[2];
+    data[3] = boundaryColor[3];
     instance->SetPixelConstant(0, "BoundaryColor", boundaryColorConstant);
 
 	Texture2DSharedPtr maskTexture ( std::make_shared<Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mNumCols, mNumRows, 1));
 	Mathematics::Float4* mask = (Mathematics::Float4*)maskTexture->GetTextureData(0);
 	memset(mask, 0, mNumCols*mNumRows*sizeof(Mathematics::Float4));
-	Mathematics::Float4 one(1.0f, 1.0f, 1.0f, 1.0f);
+        const Mathematics::Float4 one(1.0f, 1.0f, 1.0f, 1.0f);
 
     for (int z = 1; z < mBound2M1; ++z)
     {

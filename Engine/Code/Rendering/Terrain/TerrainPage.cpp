@@ -71,14 +71,14 @@ EXCEPTION_ALL_CATCH(Rendering)
 float Rendering::TerrainPage
 	::GetHeight (float x, float y) const
 {
-    const float xGrid = (x - mOrigin.GetFirstValue())*mInvSpacing;
+    const float xGrid = (x - mOrigin[0]) * mInvSpacing;
     if (xGrid < 0.0f || xGrid >= (float)mSizeM1)
     {
         // Location not in page.
         return Mathematics::FloatMath::sm_MaxReal;
     }
 
-    const float yGrid = (y - mOrigin.GetSecondValue())*mInvSpacing;
+    const float yGrid = (y - mOrigin[1])*mInvSpacing;
     if (yGrid < 0.0f || yGrid >= (float)mSizeM1)
     {
         // Location not in page.
@@ -253,14 +253,14 @@ int Rendering::TerrainPage
  float Rendering::TerrainPage
 	 ::GetX (int x) const
 {
-	return mOrigin.GetFirstValue() + mSpacing*(float)x;
-}
+     return mOrigin[0] + mSpacing * (float)x;
+ }
 
  float Rendering::TerrainPage
 	 ::GetY (int y) const
 {
-	return mOrigin.GetSecondValue() + mSpacing*(float)y;
-}
+     return mOrigin[1] + mSpacing * (float)y;
+ }
 
  float Rendering::TerrainPage
 	 ::GetHeight (int index) const noexcept

@@ -2,7 +2,6 @@ TODO Level 9
  
 0.5.2.2 
 
-1.  （综合）将数学库改成根据是否定义MATHEMATICS_EXPORT_TEMPLATE来决定是否实例化模板。
 2.  （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
 3.  （综合）修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
 4.  （综合）数学库的函数大部分要定义成noexcept。
@@ -12,26 +11,16 @@ TODO Level 9
 2.  （综合）根据用户宏的五个断言宏在模块中使用断言。
 3.  （综合）静态数组改成std::array。
 1.  （综合）考虑使用Math::FloatingPointEqual替换Math::Approximate来比较浮点数的近似相等。
-1.  （Base）Math中的常量改成constexpr，由于HalfFloat无法实现，看下是否能修改。
 1.   （综合）看是否能简化导出模板的宏定义。
-2.   （Algebra）代数类中向量、矩阵等存储的数据类型实用性不强，改成std::array。
-3.   （Algebra）BandedMatrixSolve的类不变式要实现为noexcept，对应的函数也需要修改。
 4.   （Objects2D）将Polygon2类中的CoreTools::SmartPointer1DArray<Vector2D>改成std::shared_ptr<Vector2D>。
 5.   （Objects2D）将ConvexPolygon2类中的CoreTools::SmartPointer1DArray<Line> 改成std::shared_ptr<Line>。
 6.   （综合）将数学库的智能指针改成std::shared_ptr。
 1.  （Objects3D）将Polyhedron3和ConvexPolyhedron3中的智能指针改成std::shared_ptr。
 2.  （Objects3D）将基本BSP算法用于ConvexPolyhedron3的Contains函数。这是一个O(log n)的算法。
 1.  （综合）替换掉boost库的静态断言为标准语法。
-2.  （Base）在我们支持实现的平台上提供Math类的SIMD版本。
-3.  （Base）考虑将Math类的常量改成constexpr。
-4.  （Algebra）将AlgebraStreamSize的GetStreamSize里使用的常量改成constexpr或可从类获取。
-5.  （Algebra）将ReadAggregate和WriteAggregate里使用的常量改成constexpr或可从类获取。
 6.  （综合）外部库引用数学库时，需要包含Detail.h头文件。改成根据MATHEMATICS_EXPORT_TEMPLATE是否定义包含不同的头文件。
-7.  （Algebra）AQuaternion类FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。
 8.  （综合）修改数学库中使用的static_cast<Real>(0.5)和Math<Real>::sm_Zero，改用其他方式简化。
 9.  （综合）各个类的GetStreamSize函数返回改成int。
-10. （Algebra）Matrix3类的ExtractAngleAxis、Orthonormalize、ExtractEuler系列函数增加断言，判断矩阵是否是旋转矩阵。
-11. （Algebra）Quaternion类的FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。
 12. （Objects2D）Segment2、Segment3类修正线段的值，按需求添加。
 13. （Objects2D）Polygon2类的类不变式判断多边形为简单多边形。
 14. （Objects2D）Triangle2类的类不变式判断三角形不共线。
@@ -42,9 +31,6 @@ TODO Level 9
 19. （NumericalAnalysis）将EquationResult的ImaginaryLess类提取出来。
 20. （NumericalAnalysis）PolynomialRoots类有一些TODO需要完成。
 21. （NumericalAnalysis）SingularValueDecomposition类的Calculate函数需要从“矩阵计算”实现其他QR分解和奇异值分解代码，然后给用户指定这里使用哪些方法的能力。 
-1.  （Helper）完成帮助模块。
-2.  （Base）修改Float1Impl、Float2Impl、Float3Impl、Float4Impl的实现，改成直接用array。
-3.  （Base）修改Float1、Float2、Float3、Float4的接口，实现operator[]。
 1.  （Objects2D）导出Objects2D中的类。
 2.  （Objects2D）将Objects2D中的数组改成array。
 3.  （Objects2D）将Polygon2中的指针改成shared_ptr。
@@ -62,22 +48,7 @@ TODO Level 9
 15. （Distance）补全Distance模块。
 16. （Intersection）重构Intersection模块。
 17. （Intersection）导出Intersection模块。
-18. （Intersection）补全Intersection模块。
-1.  （Base）定义类ScaledFloatToInt中的常量。
-2.  （Algebra）定义类AlgebraStreamSize中的常量和using声明。
-3.  （Algebra）删除AlgebraTraits类，改用Math中的常量。
-4.  （Algebra）导出APoint、AVector、AVectorOrthonormalBasis、AVectorOrthonormalize、AxesAlignBoundingBox2D、
-			   AxesAlignBoundingBox3D、AxesAlignBoundingBox4D、BandedMatrixSolve、Matrix2EigenDecomposition、
-			   Matrix3、Matrix3EigenDecomposition、Matrix3Extract、Matrix4、Plane、PolynomialDivide、QuaternionFactor、
-			   QuaternionSwingTwist、Tridiagonalize、Vector2D、Vector2DInformation、Vector2DOrthonormalBasis、
-			   Vector2DOrthonormalize、Vector3D、Vector3DOrthonormalize、Vector4D类。
-5.  （Algebra）对有实现operator[]的类实现data函数。
-6.  （Algebra）修改部分函数返回int，但AlgebraAggregate需要int32_t。  
-7.  （Algebra）使用array或vector代替原来的数据结构。
-8.  （Algebra）使用Impl惯用法修改Algebra模块。
-9.  （Algebra）修改BandedMatrix、Polynomial、VariableLengthVector、VariableMatrix，废弃NEW。
-10. （Algebra）明确宏MATHEMATICS_ASSERT_VARIABLE_VECTOR_OUT_OF_RANGE和MATHEMATICS_ASSERT_VARIABLE_MATRIX_OUT_OF_RANGE的用处，没用就删掉。
-11. （Algebra）明确宏MATHEMATICS_ASSERT_ON_BARYCENTRIC2_DEGENERATE、MATHEMATICS_ASSERT_ON_BARYCENTRIC3_DEGENERATE的用处，没用就删掉。
+18. （Intersection）补全Intersection模块。 
 12. （Rational）明确宏MATHEMATICS_ASSERT_ON_RATIONAL_CONVERT_NAN的用处，没用就删掉。
 13. （Rational）重构Rational模块。
 14. （Rational）将Rational模块的数组改成array。

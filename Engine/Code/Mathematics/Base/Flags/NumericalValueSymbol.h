@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/23 23:39)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 13:17)
 
 #ifndef MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H
 #define MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H
@@ -26,12 +26,6 @@ namespace Mathematics
 
     ENUM_NEGATE_OPERATOR_DEFINE(NumericalValueSymbol);
     ENUM_MULTIPLICATION_OPERATOR_DEFINE(NumericalValueSymbol);
-
-    template <typename T>
-    constexpr T operator*(T lhs, Mathematics::NumericalValueSymbol rhs) noexcept
-    {
-        return rhs * lhs;
-    }
 }
 
 #endif  // MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H

@@ -173,7 +173,7 @@ const typename Physics::BoundTreeChild<MeshSmartPointer, Bound>::Line3 Physics::
     }
 
     // 在子网格中创建一组连续的顶点
-	std::vector<Mathematics::Vector3Df> meshVertices;
+	std::vector<Mathematics::FloatVector3D> meshVertices;
     for (int i = 0; i < numVertices; ++i)
     {
         if (valid[i])

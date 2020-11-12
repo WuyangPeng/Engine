@@ -2087,6 +2087,18 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MainFunctionHelper\CMainFunctionTestingHelperDetail.h">
       <Filter>MainFunctionHelper 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ByteSwap.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ByteSwapper.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\TypeAliaser.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\GetRequiredBits.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">

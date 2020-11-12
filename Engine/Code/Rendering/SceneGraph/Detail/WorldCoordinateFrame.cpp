@@ -23,8 +23,8 @@
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
 Rendering::WorldCoordinateFrame ::WorldCoordinateFrame(float epsilon)  
-    : m_Position{ Mathematics::Float::g_Origin }, m_DirectionVector{ -Mathematics::Float::g_UnitZ }, m_UpVector{ Mathematics::Float::g_UnitY },
-	m_RightVector{ Mathematics::Float::g_UnitX }, m_ViewMatrix{ Mathematics::Float::g_ZeroMatrix }, m_Epsilon{ epsilon }
+    : m_Position{ Mathematics::FloatAPoint::GetOrigin() }, m_DirectionVector{ -Mathematics::FloatAVector::GetUnitZ() }, m_UpVector{ Mathematics::FloatAVector::GetUnitY() },
+      m_RightVector{ Mathematics::FloatAVector::GetUnitX() }, m_ViewMatrix{ Mathematics::FloatMatrix::GetZeroMatrix() }, m_Epsilon{ epsilon }
 {
     OnFrameChange ();
     

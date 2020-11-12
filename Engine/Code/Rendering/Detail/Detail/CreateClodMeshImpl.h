@@ -52,7 +52,7 @@ namespace Rendering
 		void Compute();	 
 		void CreateVertexEdgeTriangleGraph();
 		float ComputeMetric(const EdgeKey& edgeKey);
-		const Mathematics::Vector3Df GetNormal( const TriangleKey& triangleKey );
+		const Mathematics::FloatVector3D GetNormal( const TriangleKey& triangleKey );
 		int CanCollapse(const EdgeKey& edgeKey);
 		void Collapse(const EdgeKey& edgeKey, int indexThrow);
 		bool ValidResults ();

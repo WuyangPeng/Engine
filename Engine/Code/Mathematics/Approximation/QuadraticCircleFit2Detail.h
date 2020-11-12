@@ -34,8 +34,8 @@ void Mathematics::QuadraticCircleFit2<Real>
 
 	for (auto i = 0u; i < numPoints; ++i)
 	{
-		auto x = points[i].GetXCoordinate();
-		auto y = points[i].GetYCoordinate();
+		auto x = points[i].GetX();
+		auto y = points[i].GetY();
 		auto xSquare = x * x;
 		auto ySquare = y * y;
 		auto xMultiplyY = x * y;

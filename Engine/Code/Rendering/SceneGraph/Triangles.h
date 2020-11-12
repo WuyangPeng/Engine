@@ -31,8 +31,8 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 		using APoint = Mathematics::FloatAPoint;
 		using AVector = Mathematics::FloatAVector;
-		using Vector3D = Mathematics::Vector3Df;
-		using Vector2D = Mathematics::Vector2Df;
+		using Vector3D = Mathematics::FloatVector3D;
+		using Vector2D = Mathematics::FloatVector2D;
 		using Line3 = Mathematics::Line3f;
 		using Triangle3 = Mathematics::Triangle3f;
 		using TrianglesSharedPtr = std::shared_ptr<ClassType>;

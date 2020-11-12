@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:19)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/06 10:07)
 
 #ifndef SYSTEM_HELPER_USER_MACRO_H
 #define SYSTEM_HELPER_USER_MACRO_H
@@ -31,12 +31,12 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 
 // 是否使用Windows宏
 #ifdef SYSTEM_PLATFORM_WIN32
-    #define SYSTEM_USE_WINDOWS_MACRO
+    #define SYSTEM_USE_WINDOWS_MACRO static_cast<void>(0)
 #endif  // SYSTEM_PLATFORM_WIN32
 
 // 是否使用自旋锁
 #ifdef TCRE_USE_GCC
-    #define SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION
+    #define SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION static_cast<void>(0)
 #endif  // TCRE_USE_GCC
 
 // 有些OpenGL 2.x的驱动程序无法正确处理法线属性。
@@ -49,23 +49,23 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 // 这是因为我们正在使用OpenGL 1.x的扩展程序进行着色器编程。我们需要更新到OpenGL 2.x及更高版本。
 
 #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_OPENGL2_NORMAL_ATTRIBUTES) != CLOSE_OPENGL2_NORMAL_ATTRIBUTES
-    #define SYSTEM_USE_OPENGL2_NORMAL_ATTRIBUTES
+    #define SYSTEM_USE_OPENGL2_NORMAL_ATTRIBUTES static_cast<void>(0)
 #endif  // !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_OPENGL2_NORMAL_ATTRIBUTES) != CLOSE_OPENGL2_NORMAL_ATTRIBUTES
 
 #if !defined(SYSTEM_USE_OPENGL2_NORMAL_ATTRIBUTES) && defined(SYSTEM_PLATFORM_MACOS)
-    #define SYSTEM_USE_OPENGL2_NORMAL_ATTRIBUTES
+    #define SYSTEM_USE_OPENGL2_NORMAL_ATTRIBUTES static_cast<void>(0)
 #endif  // !defined(SYSTEM_USE_OPENGL2_NORMAL_ATTRIBUTES) && defined(SYSTEM_PLATFORM_MACOS)
 
 // 是否使用glut，默认使用
 #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_GLUT) != CLOSE_GLUT
-    #define SYSTEM_USE_GLUT
+    #define SYSTEM_USE_GLUT static_cast<void>(0)
 #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_GLUT) != CLOSE_GLUT
 
 #ifdef _DEBUG
 
     #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_ENABLE_GL_ERROR_CHECKING) != CLOSE_ENABLE_GL_ERROR_CHECKING
         // 是否检查GL错误。
-        #define SYSTEM_ENABLE_GL_ERROR_CHECKING
+        #define SYSTEM_ENABLE_GL_ERROR_CHECKING static_cast<void>(0)
     #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_ENABLE_GL_ERROR_CHECKING) != CLOSE_ENABLE_GL_ERROR_CHECKING
 
 #endif  // _DEBUG
@@ -74,9 +74,9 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 
     #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX) != CLOSE_DIRECTX
         // 是否使用DirectX
-        #define SYSTEM_USE_DIRECTX_9
-        #define SYSTEM_USE_DIRECTX_10
-        #define SYSTEM_USE_DIRECTX_11
+        #define SYSTEM_USE_DIRECTX_9 static_cast<void>(0)
+        #define SYSTEM_USE_DIRECTX_10 static_cast<void>(0)
+        #define SYSTEM_USE_DIRECTX_11 static_cast<void>(0)
     #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX) != CLOSE_DIRECTX
 
 #endif  // SYSTEM_PLATFORM_WIN32

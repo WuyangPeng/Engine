@@ -172,7 +172,7 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 	AVector derivativesVV = GetDerivativesVV(u, v);
 
 	// 计算度量张量。
-	Mathematics::Matrix2f metricTensor;
+	Mathematics::FloatMatrix2 metricTensor;
 	metricTensor(0,0) = Dot(derivativesU,derivativesU);
 	metricTensor(0,1) = Dot(derivativesU,derivativesV);
 	metricTensor(1,0) = metricTensor(0,1);
@@ -180,7 +180,7 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 
 	// 计算曲率张量。
 	AVector normal = UnitCross(derivativesU,derivativesV);
-	Mathematics::Matrix2f curvatureTensor;
+	Mathematics::FloatMatrix2 curvatureTensor;
 	curvatureTensor(0,0) = -Dot(normal,derivativesUU);
 	curvatureTensor(0,1) = -Dot(normal,derivativesUV);
 	curvatureTensor(1,0) = curvatureTensor(0,1);
@@ -206,7 +206,7 @@ const Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch
 	float a0 = curvatureTensor(0,1) - principalCurvature0 * metricTensor(0,1);
 	float a1 = principalCurvature0 * metricTensor(0,0) - curvatureTensor(0,0);
 	float length = Mathematics::FloatMath::Sqrt(a0 * a0 + a1 * a1);
-        AVector principalDirection0{ Mathematics ::Float::g_Zero };
+        AVector principalDirection0{ Mathematics::FloatAVector::GetZero() };
 	if (Mathematics::FloatMath::GetZeroTolerance() <= length)
 	{
 		principalDirection0 = a0 * derivativesU + a1 * derivativesV;

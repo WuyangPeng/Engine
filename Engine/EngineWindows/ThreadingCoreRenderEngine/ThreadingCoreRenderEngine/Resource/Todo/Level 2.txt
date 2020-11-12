@@ -1,5 +1,6 @@
 TODO Level 2
 
-0.5.2.0 
+0.5.2.2 
 
-1.	（其他语言）阅读《Effective Java》。
+1.	（软件设计）阅读《代码整洁之道》。
+2.	（其他语言）阅读《Effective Java》。

@@ -101,6 +101,21 @@ typename CoreTools::Tuple<Dimension, Type>::ArrayTypeConstIter CoreTools::Tuple<
     return m_Tuple.end();
 }
 
+template <int Dimension, typename Type>
+Type CoreTools::Tuple<Dimension, Type>::GetSum() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    Type sum{};
+
+    for (const auto& value : m_Tuple)
+    {
+        sum += value;
+    }
+
+    return sum;
+}
+
 // 非成员函数
 template <int Dimension, typename Type>
 bool CoreTools::operator==(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs)

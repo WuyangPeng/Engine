@@ -275,7 +275,7 @@ void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<R
 
     if (pos)
     {
-        *pos = Vector3D<Real>::sm_Zero;
+        *pos = Vector3D<Real>::GetZero();
         for (iu = iumin; iu <= iumax; ++iu)
         {
             for (iv = ivmin; iv <= ivmax; ++iv)
@@ -288,7 +288,7 @@ void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<R
 
     if (derU)
     {
-        *derU = Vector3D<Real>::sm_Zero;
+        *derU = Vector3D<Real>::GetZero();
         for (iu = iumin; iu <= iumax; ++iu)
         {
             for (iv = ivmin; iv <= ivmax; ++iv)
@@ -301,7 +301,7 @@ void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<R
 
     if (derV)
     {
-        *derV = Vector3D<Real>::sm_Zero;
+        *derV = Vector3D<Real>::GetZero();
         for (iu = iumin; iu <= iumax; ++iu)
         {
             for (iv = ivmin; iv <= ivmax; ++iv)
@@ -314,7 +314,7 @@ void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<R
 
     if (derUU)
     {
-        *derUU = Vector3D<Real>::sm_Zero;
+        *derUU = Vector3D<Real>::GetZero();
         for (iu = iumin; iu <= iumax; ++iu)
         {
             for (iv = ivmin; iv <= ivmax; ++iv)
@@ -327,7 +327,7 @@ void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<R
 
     if (derUV)
     {
-        *derUV = Vector3D<Real>::sm_Zero;
+        *derUV = Vector3D<Real>::GetZero();
         for (iu = iumin; iu <= iumax; ++iu)
         {
             for (iv = ivmin; iv <= ivmax; ++iv)
@@ -340,7 +340,7 @@ void BSplineRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos,Vector3D<R
 
     if (derVV)
     {
-        *derVV = Vector3D<Real>::sm_Zero;
+        *derVV = Vector3D<Real>::GetZero();
         for (iu = iumin; iu <= iumax; ++iu)
         {
             for (iv = ivmin; iv <= ivmax; ++iv)

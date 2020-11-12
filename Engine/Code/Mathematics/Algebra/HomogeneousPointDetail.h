@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/25 23:37)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/05 17:48)
 
 #ifndef MATHEMATICS_ALGEBRA_POINT_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POINT_DETAIL_H
@@ -19,7 +19,7 @@
 #endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_HOMOGENEOUS_POINT_ACHIEVE)
 
 template <typename T>
-bool Mathematics::operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs)  
+bool Mathematics::operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs)
 {
     return lhs.GetCoordinate() == rhs.GetCoordinate();
 }

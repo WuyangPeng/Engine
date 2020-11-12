@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/27 21:26)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/03 13:12)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_DETAIL_H
 #define MATHEMATICS_ALGEBRA_A_POINT_DETAIL_H
@@ -57,7 +57,7 @@ const Mathematics::APoint<T> Mathematics::operator+(const APoint<T>& lhs, const 
 }
 
 template <typename T>
-const Mathematics::APoint<T> Mathematics ::operator*(const APoint<T>& lhs, T scalar)
+const Mathematics::APoint<T> Mathematics::operator*(const APoint<T>& lhs, T scalar)
 {
     APoint<T> result{ lhs };
 

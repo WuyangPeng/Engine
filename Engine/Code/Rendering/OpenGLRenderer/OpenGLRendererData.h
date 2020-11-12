@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "OpenGLBitmapFont.h" 
-#include "Mathematics/Base/Float4.h"
+#include "Mathematics/Base/Float.h"
 #include "System/OpenGL/Using/Gl11ExtensionsUsing.h"
 
 namespace Rendering

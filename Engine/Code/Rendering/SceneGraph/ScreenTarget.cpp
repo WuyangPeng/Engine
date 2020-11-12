@@ -28,7 +28,7 @@ const Rendering::CameraSharedPtr Rendering::ScreenTarget
     // [-1,1]^2 x [0,1].
 	CameraSharedPtr camera{ std::make_shared<Camera>(false) };
     camera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-    camera->SetFrame(Mathematics::Float::g_Origin, Mathematics::Float::g_UnitZ, Mathematics::Float::g_UnitY,Mathematics::Float::g_UnitX);
+        camera->SetFrame(Mathematics::FloatAPoint::GetOrigin(), Mathematics::FloatAVector::GetUnitZ(), Mathematics::FloatAVector::GetUnitY(), Mathematics::FloatAVector::GetUnitX());
 
     return camera;
 }

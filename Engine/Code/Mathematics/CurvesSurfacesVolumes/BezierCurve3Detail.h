@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Algebra/Vector3DDetail.h"
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 template <typename Real>
@@ -184,7 +185,7 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
 {
     if (mDegree < 3)
     {
-        return Vector3D<Real>::sm_Zero;
+        return Vector3D<Real>::GetZero();
     }
 
 	auto oneMinusT = static_cast<Real>(1) - t;

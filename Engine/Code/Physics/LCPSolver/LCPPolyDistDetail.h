@@ -733,7 +733,7 @@ namespace Physics
 		{
 			for (int k = 0; k < mDimension; ++k)
 			{
-				points[j][k] *= 1.0 + mRandomWidth * Mathematics::Randomd::SymmetricRandom();
+				points[j][k] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
 			}
 		}
 	}
@@ -745,18 +745,18 @@ namespace Physics
 		int j, k;
 		for (j = 0; j < mNumFaces1; ++j)
 		{
-			mB1[j] *= 1.0 + mRandomWidth * Mathematics::Randomd::SymmetricRandom();
+                    mB1[j] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
 			for (k = 0; k < mDimension; ++k)
 			{
-				mA1[j][k] *= 1.0 + mRandomWidth * Mathematics::Randomd::SymmetricRandom();
+                            mA1[j][k] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
 			}
 		}
 		for (j = 0; j < mNumFaces2; ++j)
 		{
-			mB2[j] *= 1.0 + mRandomWidth * Mathematics::Randomd::SymmetricRandom();
+                    mB2[j] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
 			for (k = 0; k < mDimension; ++k)
 			{
-				mA2[j][k] *= 1.0 + mRandomWidth * Mathematics::Randomd::SymmetricRandom();
+                            mA2[j][k] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
 			}
 		}
 	}

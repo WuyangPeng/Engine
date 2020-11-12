@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/27 11:23)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 14:16)
 
 #ifndef MATHEMATICS_BASE_MATH_H
 #define MATHEMATICS_BASE_MATH_H
@@ -20,7 +20,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Math
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Math final
     {
     public:
         using ClassType = Math<Real>;
@@ -79,12 +79,12 @@ namespace Mathematics
         [[nodiscard]] static Real GetInverseSqrt2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
         [[nodiscard]] static Real GetSqrt3() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
         [[nodiscard]] static Real GetInverseSqrt3() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
- 
+
         [[nodiscard]] static constexpr Real GetValue(int value) noexcept
         {
             return static_cast<Real>(value);
-        } 
-    
+        }
+
         [[nodiscard]] static constexpr Real GetRational(int numerator, int denominator) noexcept
         {
             return GetValue(numerator) / GetValue(denominator);
@@ -97,12 +97,12 @@ namespace Mathematics
 
         [[nodiscard]] static constexpr Real GetRadianToDegree() noexcept
         {
-            return GetValue(180) / GetPI();
-        }  
+            return GetValue(1) / GetDegreeToRadian();
+        }
 
-        static constexpr Real sm_Epsilon = std::numeric_limits<Real>::epsilon();
-        static constexpr Real sm_MaxReal = std::numeric_limits<Real>::max();
-        static constexpr Real sm_MinReal = std::numeric_limits<Real>::min();
+        static constexpr auto sm_Epsilon = std::numeric_limits<Real>::epsilon();
+        static constexpr auto sm_MaxReal = std::numeric_limits<Real>::max();
+        static constexpr auto sm_MinReal = std::numeric_limits<Real>::min();
 
         [[nodiscard]] static constexpr Real GetZeroTolerance() noexcept;
         [[nodiscard]] static constexpr Real GetPI() noexcept;

@@ -184,7 +184,7 @@ void Mathematics::BSplineCurve2<Real>
 
     if (pos)
     {
-        *pos = Vector2D<Real>::sm_Zero;
+        *pos = Vector2D<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *pos += mCtrlPoint[i]*mBasis.GetD0(i);
@@ -193,7 +193,7 @@ void Mathematics::BSplineCurve2<Real>
 
     if (der1)
     {
-        *der1 = Vector2D<Real>::sm_Zero;
+        *der1 = Vector2D<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der1 += mCtrlPoint[i]*mBasis.GetD1(i);
@@ -202,7 +202,7 @@ void Mathematics::BSplineCurve2<Real>
 
     if (der2)
     {
-        *der2 = Vector2D<Real>::sm_Zero;
+        *der2 = Vector2D<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der2 += mCtrlPoint[i]*mBasis.GetD2(i);
@@ -211,7 +211,7 @@ void Mathematics::BSplineCurve2<Real>
 
     if (der3)
     {
-        *der3 = Vector2D<Real>::sm_Zero;
+        *der3 = Vector2D<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der3 += mCtrlPoint[i]*mBasis.GetD3(i);

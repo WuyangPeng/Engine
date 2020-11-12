@@ -82,10 +82,10 @@ namespace Physics
 		Real** mLengthsC;         // R-by-(C-1)
 	};
 
-	using MassSpringSurface2f = MassSpringSurface<float,Mathematics::Vector2Df>;
-	using MassSpringSurface2d = MassSpringSurface<double,Mathematics::Vector2Dd>;
-	using MassSpringSurface3f = MassSpringSurface<float,Mathematics::Vector3Df>;
-	using MassSpringSurface3d = MassSpringSurface<double,Mathematics::Vector3Dd>;
+	using MassSpringSurface2f = MassSpringSurface<float,Mathematics::FloatVector2D>;
+	using MassSpringSurface2d = MassSpringSurface<double,Mathematics::DoubleVector2D>;
+	using MassSpringSurface3f = MassSpringSurface<float,Mathematics::FloatVector3D>;
+	using MassSpringSurface3d = MassSpringSurface<double,Mathematics::DoubleVector3D>;
 }
 
 #endif // PHYSICS_PARTICLE_SYSTEM_MASS_SPRING_SURFACE_H

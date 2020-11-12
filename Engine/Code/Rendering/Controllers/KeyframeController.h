@@ -27,7 +27,7 @@ namespace Rendering
             COPY_UNSHARE_CLASSES_TYPE_DECLARE(KeyframeController, = default);
 		using ParentType = TransformController;
 		using Matrix = Mathematics::FloatMatrix;
-		using AQuaternion = Mathematics::AQuaternionf;
+		using AQuaternion = Mathematics::FloatAQuaternion;
 		using APoint = Mathematics::FloatAPoint;
 
 	public:
@@ -88,7 +88,7 @@ namespace Rendering
 		const ControllerKeyInfo GetCommonKeyInfo(float ctrlTime);
 
 		const APoint GetTranslate(const ControllerKeyInfo& keyInfo) const;
-		const Matrix GetRotate(const ControllerKeyInfo& keyInfo) const;
+                const Matrix GetRotate(const ControllerKeyInfo& keyInfo) const noexcept;
 		float GetScale(const ControllerKeyInfo& keyInfo) const noexcept;
 
 	private:

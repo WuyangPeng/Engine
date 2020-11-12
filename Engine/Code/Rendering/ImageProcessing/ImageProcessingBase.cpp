@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include "Mathematics/Base/Float2.h"
+#include "Mathematics/Base/Float.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/Shaders/ShaderManager.h"
@@ -39,7 +39,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     // [-1,1]^2 x [0,1].
     mCamera = std::make_shared<Camera>(false);
     mCamera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-    mCamera->SetFrame(Mathematics::Float::g_Origin, Mathematics::Float::g_UnitZ, Mathematics::Float::g_UnitY, Mathematics::Float::g_UnitX);
+    mCamera->SetFrame(Mathematics::FloatAPoint{}, Mathematics::FloatAVector::GetUnitZ(), Mathematics::FloatAVector::GetUnitY(), Mathematics::FloatAVector::GetUnitX());
 
     // Create the vertex format for the square.
     std::vector<VertexFormatType> triple;
@@ -91,10 +91,10 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     vbuffer->SetPosition(vba, 2, Mathematics::APoint(xmax, ymax, 0.0f));
     vbuffer->SetPosition(vba, 3, Mathematics::APoint(xmin, ymax, 0.0f));
 
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc0.GetFirstValue(), tc0.GetSecondValue()), 0);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc1.GetFirstValue(), tc1.GetSecondValue()), 1);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc2.GetFirstValue(), tc2.GetSecondValue()), 2);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2Df(tc3.GetFirstValue(), tc3.GetSecondValue()), 3);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc0[0], tc0[1]), 0);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc1[0], tc1[1]), 1);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc2[0], tc2[1]), 2);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc3[0], tc3[1]), 3);
 
     // Create the index buffer for the square.
     IndexBufferSharedPtr ibuffer(std::make_shared < IndexBuffer>(6,static_cast<int>( sizeof(int))));
@@ -182,7 +182,7 @@ void Rendering::ImageProcessingBase ::PostDraw()
 
     {
         // Remove the y-reflection.
-        mCamera->SetPostProjectionMatrix(Mathematics::Float::g_IdentityMatrix);
+        mCamera->SetPostProjectionMatrix(Mathematics::FloatMatrix::GetIdentityMatrix());
     }
 }
 

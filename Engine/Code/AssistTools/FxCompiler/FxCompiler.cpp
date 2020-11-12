@@ -954,9 +954,9 @@ Rendering::ShaderBaseSharedPtr AssistTools::FxCompiler
         shader->SetCoordinate(i, 2, sampler.Coordinate[2]);
         shader->SetLodBias(i, sampler.LodBias);
         shader->SetAnisotropy(i, sampler.Anisotropy);
-        const Rendering::Colour<float> borderColor(sampler.BorderColor.GetFirstValue(),
-			sampler.BorderColor.GetSecondValue(),sampler.BorderColor.GetThirdValue(),
-			sampler.BorderColor.GetFourthValue());
+        const Rendering::Colour<float> borderColor(sampler.BorderColor[0],
+                                                   sampler.BorderColor[1], sampler.BorderColor[2],
+                                                   sampler.BorderColor[3]);
 
         shader->SetBorderColor(i, borderColor);
         profile->SetTextureUnit(mActiveProfile, i, sampler.Unit);

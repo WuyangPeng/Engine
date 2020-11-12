@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.1 (2020/09/03 14:25)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/06 0:18)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_H
 #define MATHEMATICS_ALGEBRA_MATRIX_H
@@ -29,7 +29,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class Matrix : private boost::additive<Matrix<Real>, boost::multiplicative<Matrix<Real>, Real, boost::totally_ordered<Matrix<Real>>>>
+    class Matrix final : private boost::additive<Matrix<Real>, boost::multiplicative<Matrix<Real>, Real, boost::totally_ordered<Matrix<Real>>>>
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
@@ -174,15 +174,7 @@ namespace Mathematics
         }
 
         template <int Index>
-        constexpr void Divide(Real value) noexcept
-        {
-            static_assert(0 <= Index && Index < sm_EntrySize);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-            m_Entry[Index] /= value;
-#include STSTEM_WARNING_POP
-        }
+        void Divide(Real value);
 
         // 矩阵存储为行主序。将它们存储在指定的列主序的数组中，该数组有16个元素。
         [[nodiscard]] const ContainerType GetColumnMajor() const;
@@ -233,6 +225,18 @@ namespace Mathematics
         void MakeReflection(const APoint& origin, const AVector& normal);
 
         [[nodiscard]] Real GetNorm() const noexcept;
+
+        // 特殊矩阵。
+
+        static constexpr Matrix GetZeroMatrix()
+        {
+            return Matrix{};
+        }
+
+        static constexpr Matrix GetIdentityMatrix()
+        {
+            return Matrix{ MatrixInitType::Identity };
+        }
 
     private:
         [[nodiscard]] static constexpr EntryType Create(Real member00, Real member01, Real member02, Real member03,
@@ -338,19 +342,6 @@ namespace Mathematics
 
     using FloatMatrix = Matrix<float>;
     using DoubleMatrix = Matrix<double>;
-
-    // 特殊矩阵。
-    namespace Float
-    {
-        constexpr FloatMatrix g_ZeroMatrix{};
-        constexpr FloatMatrix g_IdentityMatrix{ MatrixInitType::Identity };
-    }
-
-    namespace Double
-    {
-        constexpr DoubleMatrix g_ZeroMatrix{};
-        constexpr DoubleMatrix g_IdentityMatrix{ MatrixInitType::Identity };
-    }
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX_H

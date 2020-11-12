@@ -85,30 +85,30 @@ Mathematics::MinBox2<Real>
     //   V[Real].X() >= V[i].X() for all i and V[(Real+1)%N].X() < V[Real].X()
     //   V[B].Y() <= V[i].Y() for all i and V[(B+1)%N].Y() > V[B].Y()
     //   V[T].Y() >= V[i].Y() for all i and V[(T+1)%N].Y() < V[T].Y()
-	Real xmin = hullPoints[0].GetXCoordinate(), xmax = xmin;
-	Real ymin = hullPoints[0].GetYCoordinate(), ymax = ymin;
+	Real xmin = hullPoints[0].GetX(), xmax = xmin;
+	Real ymin = hullPoints[0].GetY(), ymax = ymin;
     int LIndex = 0, RIndex = 0, BIndex = 0, TIndex = 0;
     for (i = 1; i < numPoints; ++i)
     {
-		if (hullPoints[i].GetXCoordinate() <= xmin)
+		if (hullPoints[i].GetX() <= xmin)
         {
-			xmin = hullPoints[i].GetXCoordinate();
+			xmin = hullPoints[i].GetX();
             LIndex = i;
         }
-		if (hullPoints[i].GetXCoordinate() >= xmax)
+		if (hullPoints[i].GetX() >= xmax)
         {
-			xmax = hullPoints[i].GetXCoordinate();
+			xmax = hullPoints[i].GetX();
             RIndex = i;
         }
 
-		if (hullPoints[i].GetYCoordinate() <= ymin)
+		if (hullPoints[i].GetY() <= ymin)
         {
-			ymin = hullPoints[i].GetYCoordinate();
+			ymin = hullPoints[i].GetY();
             BIndex = i;
         }
-		if (hullPoints[i].GetYCoordinate() >= ymax)
+		if (hullPoints[i].GetY() >= ymax)
         {
-			ymax = hullPoints[i].GetYCoordinate();
+			ymax = hullPoints[i].GetY();
             TIndex = i;
         }
     }
@@ -117,36 +117,36 @@ Mathematics::MinBox2<Real>
     // satisfied.
     if (LIndex == numPointsM1)
     {
-		if (hullPoints[0].GetXCoordinate() <= xmin)
+		if (hullPoints[0].GetX() <= xmin)
         {
-			xmin = hullPoints[0].GetXCoordinate();
+			xmin = hullPoints[0].GetX();
             LIndex = 0;
         }
     }
 
     if (RIndex == numPointsM1)
     {
-		if (hullPoints[0].GetXCoordinate() >= xmax)
+		if (hullPoints[0].GetX() >= xmax)
         {
-			xmax = hullPoints[0].GetXCoordinate();
+			xmax = hullPoints[0].GetX();
             RIndex = 0;
         }
     }
 
     if (BIndex == numPointsM1)
     {
-		if (hullPoints[0].GetYCoordinate() <= ymin)
+		if (hullPoints[0].GetY() <= ymin)
         {
-			ymin = hullPoints[0].GetYCoordinate();
+			ymin = hullPoints[0].GetY();
             BIndex = 0;
         }
     }
 
     if (TIndex == numPointsM1)
     {
-		if (hullPoints[0].GetYCoordinate() >= ymax)
+		if (hullPoints[0].GetY() >= ymax)
         {
-			ymax = hullPoints[0].GetYCoordinate();
+			ymax = hullPoints[0].GetY();
             TIndex = 0;
         }
     }

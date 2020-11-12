@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/25 23:38)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/05 17:55)
 
 #ifndef MATHEMATICS_ALGEBRA_POINT_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_POINT_ACHIEVE_H
@@ -39,16 +39,16 @@ const T& Mathematics::HomogeneousPoint<T>::operator[](int index) const
 
     switch (System::UnderlyingCastEnum<PointIndex>(index))
     {
-    case PointIndex::X:
-        return m_X;
-    case PointIndex::Y:
-        return m_Y;
-    case PointIndex::Z:
-        return m_Z;
-    case PointIndex::W:
-        return m_W;
-    default:
-        break;
+        case PointIndex::X:
+            return m_X;
+        case PointIndex::Y:
+            return m_Y;
+        case PointIndex::Z:
+            return m_Z;
+        case PointIndex::W:
+            return m_W;
+        default:
+            break;
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
@@ -135,11 +135,11 @@ void Mathematics::HomogeneousPoint<T>::Set(const ArrayType& coordinate) noexcept
     MATHEMATICS_CLASS_IS_VALID_9;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446) 
-    SetX(coordinate[0]);
-    SetY(coordinate[1]);
-    SetZ(coordinate[2]);
-    SetW(coordinate[3]);
+#include SYSTEM_WARNING_DISABLE(26446)
+    SetX(coordinate[sm_X]);
+    SetY(coordinate[sm_Y]);
+    SetZ(coordinate[sm_Z]);
+    SetW(coordinate[sm_W]);
 #include STSTEM_WARNING_POP
 }
 

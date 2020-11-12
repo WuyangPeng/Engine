@@ -1,20 +1,20 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/18 19:04)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/10/30 13:18)
 
 #ifndef MATHEMATICS_BASE_H
 #define MATHEMATICS_BASE_H
 
-#include "BitHacksDetail.h" 
-#include "FastTrigonometricDetail.h"
+#include "BitHacksDetail.h"
 #include "FastNegativeExpDetail.h"
-#include "RandomDetail.h"
+#include "FastTrigonometricDetail.h"
+#include "Float.h"
 #include "MathDetail.h"
-#include "Float1.h"
-#include "Float2.h"
-#include "Float3.h"
-#include "Float4.h"
+#include "RandomDetail.h"
 
-#endif // MATHEMATICS_BASE_H
+#endif  // MATHEMATICS_BASE_H

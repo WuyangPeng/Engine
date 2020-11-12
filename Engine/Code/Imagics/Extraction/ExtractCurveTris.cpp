@@ -28,7 +28,7 @@ Imagics::ExtractCurveTris
 }
 
 void Imagics::ExtractCurveTris
-	::ExtractContour (int level,  std::vector<Mathematics::Vector2Df>& vertices,  std::vector<EdgeKey>& edges)
+	::ExtractContour (int level,  std::vector<Mathematics::FloatVector2D>& vertices,  std::vector<EdgeKey>& edges)
 {
     // Adjust the image so that the level set is F(x, y) = 0.
     int i;
@@ -93,7 +93,7 @@ void Imagics::ExtractCurveTris
 }
 
 void Imagics::ExtractCurveTris
-	::MakeUnique (std::vector<Mathematics::Vector2Df>& vertices, std::vector<EdgeKey>& edges)
+	::MakeUnique (std::vector<Mathematics::FloatVector2D>& vertices, std::vector<EdgeKey>& edges)
 {
     int numVertices = (int)vertices.size();
     if (numVertices == 0)
@@ -102,8 +102,8 @@ void Imagics::ExtractCurveTris
     }
 
     // Use maps to generate unique storage.
-    typedef std::map<Mathematics::Vector2Df, int> VMap;
-    typedef std::map<Mathematics::Vector2Df, int>::iterator VIterator;
+    typedef std::map<Mathematics::FloatVector2D, int> VMap;
+    typedef std::map<Mathematics::FloatVector2D, int>::iterator VIterator;
     VMap vertexMap;
     for (int v = 0,  nextVertex = 0; v < numVertices; ++v)
     {

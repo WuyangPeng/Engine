@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.2 (2020/09/09 8:54)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/02 10:09)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_STREAM_SIZE_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_STREAM_SIZE_H
@@ -29,10 +29,7 @@
 #include "Vector3D.h"
 #include "Vector4D.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Base/Float1.h"
-#include "Mathematics/Base/Float2.h"
-#include "Mathematics/Base/Float3.h"
-#include "Mathematics/Base/Float4.h"
+#include "Mathematics/Base/Float.h"
 
 template <typename Real>
 struct CoreTools::StreamSize<Mathematics::HomogeneousPoint<Real>>
@@ -40,6 +37,11 @@ struct CoreTools::StreamSize<Mathematics::HomogeneousPoint<Real>>
     using HomogeneousPoint = Mathematics::HomogeneousPoint<Real>;
 
     constexpr static int GetStreamSize([[maybe_unused]] const HomogeneousPoint& value) noexcept
+    {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
     {
         return StreamSize<Real>::GetStreamSize() * HomogeneousPoint::GetPointSize();
     }
@@ -52,6 +54,11 @@ struct CoreTools::StreamSize<Mathematics::Vector2D<Real>>
 
     constexpr static int GetStreamSize([[maybe_unused]] const Vector2D& value) noexcept
     {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
+    {
         return StreamSize<Real>::GetStreamSize() * Vector2D::sm_PointSize;
     }
 };
@@ -62,6 +69,11 @@ struct CoreTools::StreamSize<Mathematics::Vector3D<Real>>
     using Vector3D = Mathematics::Vector3D<Real>;
 
     constexpr static int GetStreamSize([[maybe_unused]] const Vector3D& value) noexcept
+    {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
     {
         return StreamSize<Real>::GetStreamSize() * Vector3D::sm_PointSize;
     }
@@ -74,6 +86,11 @@ struct CoreTools::StreamSize<Mathematics::Vector4D<Real>>
 
     constexpr static int GetStreamSize([[maybe_unused]] const Vector4D& value) noexcept
     {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
+    {
         return StreamSize<Real>::GetStreamSize() * Vector4D::sm_PointSize;
     }
 };
@@ -83,9 +100,14 @@ struct CoreTools::StreamSize<Mathematics::AVector<Real>>
 {
     using AVector = Mathematics::AVector<Real>;
 
-    constexpr static int GetStreamSize(const AVector& value) noexcept
+    constexpr static int GetStreamSize([[maybe_unused]] const AVector& value) noexcept
     {
-        return StreamSize<Real>::GetStreamSize() * value.sm_AVectorSize;
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
+    {
+        return StreamSize<Real>::GetStreamSize() * AVector::sm_AVectorSize;
     }
 };
 
@@ -95,6 +117,11 @@ struct CoreTools::StreamSize<Mathematics::APoint<Real>>
     using APoint = Mathematics::APoint<Real>;
 
     constexpr static int GetStreamSize([[maybe_unused]] const APoint& value) noexcept
+    {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
     {
         return StreamSize<Real>::GetStreamSize() * APoint::sm_APointSize;
     }
@@ -109,6 +136,11 @@ struct CoreTools::StreamSize<Mathematics::VariableLengthVector<Real>>
     {
         return StreamSize<Real>::GetStreamSize() * value.GetSize() + StreamSize<int32_t>::GetStreamSize();
     }
+
+    static int GetStreamSize()
+    {
+        return GetStreamSize(VariableLengthVector{});
+    }
 };
 
 template <typename Real>
@@ -117,6 +149,11 @@ struct CoreTools::StreamSize<Mathematics::Plane<Real>>
     using Plane = Mathematics::Plane<Real>;
 
     constexpr static int GetStreamSize([[maybe_unused]] const Plane& value) noexcept
+    {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
     {
         return StreamSize<Real>::GetStreamSize() * Plane::sm_PlaneSize + StreamSize<Real>::GetStreamSize();
     }
@@ -131,6 +168,11 @@ struct CoreTools::StreamSize<Mathematics::Polynomial<Real>>
     {
         return StreamSize<Real>::GetStreamSize() * (value.GetDegree() + 1) + StreamSize<int32_t>::GetStreamSize();
     }
+
+    static int GetStreamSize()
+    {
+        return GetStreamSize(Polynomial{});
+    }
 };
 
 template <typename Real>
@@ -139,6 +181,11 @@ struct CoreTools::StreamSize<Mathematics::Matrix2<Real>>
     using Matrix2 = Mathematics::Matrix2<Real>;
 
     constexpr static int GetStreamSize([[maybe_unused]] const Matrix2& value)
+    {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize()
     {
         return StreamSize<Real>::GetStreamSize() * Matrix2::sm_MatrixSize;
     }
@@ -151,6 +198,11 @@ struct CoreTools::StreamSize<Mathematics::Matrix3<Real>>
 
     constexpr static int GetStreamSize([[maybe_unused]] const Matrix3& value)
     {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize()
+    {
         return StreamSize<Real>::GetStreamSize() * Matrix3::sm_MatrixSize;
     }
 };
@@ -162,6 +214,11 @@ struct CoreTools::StreamSize<Mathematics::Matrix4<Real>>
 
     constexpr static int GetStreamSize([[maybe_unused]] const Matrix4& value)
     {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize()
+    {
         return StreamSize<Real>::GetStreamSize() * Matrix4::sm_MatrixSize;
     }
 };
@@ -172,6 +229,11 @@ struct CoreTools::StreamSize<Mathematics::Matrix<Real>>
     using Matrix = Mathematics::Matrix<Real>;
 
     constexpr static int GetStreamSize([[maybe_unused]] const Matrix& value) noexcept
+    {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
     {
         return StreamSize<Real>::GetStreamSize() * Matrix::sm_EntrySize;
     }
@@ -185,6 +247,11 @@ struct CoreTools::StreamSize<Mathematics::VariableMatrix<Real>>
     static int GetStreamSize(const VariableMatrix& value) noexcept
     {
         return StreamSize<Real>::GetStreamSize() * value.GetElementsNumber() + StreamSize<int32_t>::GetStreamSize() * 2;
+    }
+
+    static int GetStreamSize()
+    {
+        return GetStreamSize(VariableMatrix{});
     }
 };
 
@@ -217,6 +284,11 @@ struct CoreTools::StreamSize<Mathematics::Quaternion<Real>>
 
     constexpr static int GetStreamSize([[maybe_unused]] const Quaternion& value) noexcept
     {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
+    {
         return StreamSize<Real>::GetStreamSize() * Quaternion::sm_EntrySize;
     }
 };
@@ -227,6 +299,11 @@ struct CoreTools::StreamSize<Mathematics::AQuaternion<Real>>
     using AQuaternion = Mathematics::AQuaternion<Real>;
 
     constexpr static int GetStreamSize([[maybe_unused]] const AQuaternion& value) noexcept
+    {
+        return GetStreamSize();
+    }
+
+    constexpr static int GetStreamSize() noexcept
     {
         return StreamSize<Real>::GetStreamSize() * AQuaternion::sm_EntrySize;
     }
@@ -244,20 +321,9 @@ struct CoreTools::StreamSize<Mathematics::Float1>
 template <>
 struct CoreTools::StreamSize<Mathematics::Float2>
 {
-    constexpr static int GetStreamSize([[maybe_unused]] const Mathematics::Float2& value = Mathematics::Float2{}) noexcept
+    constexpr static int GetStreamSize([[maybe_unused]] const Mathematics::Float2& value) noexcept
     {
         return StreamSize<float>::GetStreamSize() * 2;
-    }
-};
-
-template <>
-struct CoreTools::StreamSize<std::vector<Mathematics::Float2>>
-{
-    static int GetStreamSize(const std::vector<Mathematics::Float2>& value)
-    {
-        const auto elementsSize = value.size();
-
-        return StreamSize<int32_t>::GetStreamSize() + StreamSize<Mathematics::Float2>::GetStreamSize() * boost::numeric_cast<int>(elementsSize);
     }
 };
 

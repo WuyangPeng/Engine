@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/27 21:25)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.2 (2020/11/02 13:00)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_H
 #define MATHEMATICS_ALGEBRA_A_POINT_H
@@ -23,7 +23,7 @@
 namespace Mathematics
 {
     template <typename T>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE APoint
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE APoint final
     {
     public:
         static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
@@ -50,7 +50,8 @@ namespace Mathematics
         {
         }
 
-        explicit APoint(const Vector3D& rhs);
+        explicit APoint(const Vector3D& rhs) noexcept;
+        explicit APoint(const ArrayType& rhs) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -83,6 +84,11 @@ namespace Mathematics
 
         [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate) noexcept;
+
+        [[nodiscard]] static constexpr APoint GetOrigin() noexcept
+        {
+            return APoint{};
+        }
 
     private:
         HomogeneousPoint m_HomogeneousPoint;
@@ -142,18 +148,6 @@ namespace Mathematics
 
     using FloatAPoint = APoint<float>;
     using DoubleAPoint = APoint<double>;
-
-    namespace Float
-    {
-        // (0,0,0,1)
-        constexpr FloatAPoint g_Origin{};
-    }
-
-    namespace Double
-    {
-        // (0,0,0,1)
-        constexpr DoubleAPoint g_Origin{};
-    }
 }
 
 #endif  // MATHEMATICS_ALGEBRA_A_POINT_H
