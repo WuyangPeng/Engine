@@ -9,3 +9,19 @@
 
 !boost/stage/lib/*.lib
 
+!zlib/BuildWin32/Debug/*.lib
+!zlib/BuildWin32/Debug/*.dll
+!zlib/BuildWin32/Debug/*.exp
+!zlib/BuildWin32/Debug/*.ilk
+!zlib/BuildWin32/Release/*.lib
+!zlib/BuildWin32/Release/*.dll
+!zlib/BuildWin32/Release/*.exp
+!zlib/BuildWin32/Release/*.ilk
+!zlib/BuildX64/Debug/*.lib
+!zlib/BuildX64/Debug/*.dll
+!zlib/BuildX64/Debug/*.exp
+!zlib/BuildX64/Debug/*.ilk
+!zlib/BuildX64/Release/*.lib
+!zlib/BuildX64/Release/*.dll
+!zlib/BuildX64/Release/*.exp
+!zlib/BuildX64/Release/*.ilk
