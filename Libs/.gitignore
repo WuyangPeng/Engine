@@ -25,3 +25,8 @@
 !zlib/BuildX64/Release/*.dll
 !zlib/BuildX64/Release/*.exp
 !zlib/BuildX64/Release/*.ilk
+
+!freetype/BuildWin32/Debug/*.lib
+!freetype/BuildWin32/Release/*.lib
+!freetype/BuildX64/Debug/*.lib
+!freetype/BuildX64/Release/*.lib
