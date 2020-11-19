@@ -36,9 +36,9 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>
 	::ContAlignedBox(const Points& points)
 {
 	auto aabb =	Vector3DTools<Real>::ComputeExtremes(points);
-	auto halfDiagonal = static_cast<Real>(0.5) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
+	auto halfDiagonal =  Math::GetRational(1,2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
-	return Box3{ static_cast<Real>(0.5) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
+	return Box3{  Math::GetRational(1,2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
 				 Vector3D::sm_UnitX, Vector3D::sm_UnitY,Vector3D::sm_UnitZ,
 				 halfDiagonal[0], halfDiagonal[1], halfDiagonal[2] };
 }
@@ -84,13 +84,13 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>
 	auto thirdBoundary = std::minmax_element(thirdDotCollection.begin(), thirdDotCollection.end());
 
 	auto center = box.GetCenter() +
-		          (static_cast<Real>(0.5) * (*firstBoundary.first + *firstBoundary.second) * box.GetFirstAxis() +
-				  static_cast<Real>(0.5) * (*secondBoundary.first + *secondBoundary.second) * box.GetSecondAxis() +
-				  static_cast<Real>(0.5) * (*thirdBoundary.first + *thirdBoundary.second) * box.GetThirdAxis());
+		          ( Math::GetRational(1,2) * (*firstBoundary.first + *firstBoundary.second) * box.GetFirstAxis() +
+				   Math::GetRational(1,2) * (*secondBoundary.first + *secondBoundary.second) * box.GetSecondAxis() +
+				   Math::GetRational(1,2) * (*thirdBoundary.first + *thirdBoundary.second) * box.GetThirdAxis());
 
-	auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * static_cast<Real>(0.5);
-	auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * static_cast<Real>(0.5);
-	auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * static_cast<Real>(0.5);
+	auto firstExtent = (*firstBoundary.second - *firstBoundary.first) *  Math::GetRational(1,2);
+	auto secondExtent = (*secondBoundary.second - *secondBoundary.first) *  Math::GetRational(1,2);
+	auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) *  Math::GetRational(1,2);
 
 	return Box3{ center, box.GetFirstAxis(), box.GetSecondAxis(), box.GetThirdAxis(), firstExtent, secondExtent, thirdExtent };
 }
@@ -101,14 +101,14 @@ bool Mathematics::ContBox3<Real>
 	::InBox(const Vector3D& point, const Box3& box)
 {
 	auto diff = point - box.GetCenter();
-	auto firstCoeff = Vector3DTools<Real>::DotProduct(diff, box.GetFirstAxis());
+	auto firstCoeff = Vector3DTools<Real>::DotProduct(diff, box.GetAxis0());
 
-	if (box.GetFirstExtent() + box.GetEpsilon() < firstCoeff)
+	if (box.GetExtent0() + box.GetEpsilon() < firstCoeff)
 		return false;
 
-	auto secondCoeff = Vector3DTools<Real>::DotProduct(diff, box.GetSecondAxis());
+	auto secondCoeff = Vector3DTools<Real>::DotProduct(diff, box.GetAxis1());
 
-	if (box.GetSecondExtent() + box.GetEpsilon() < secondCoeff)
+	if (box.GetExtent1() + box.GetEpsilon() < secondCoeff)
 		return false;
 
 	auto thirdCoeff = Vector3DTools<Real>::DotProduct(diff, box.GetThirdAxis());
@@ -126,16 +126,16 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>
 {
 	// 在包围盒中心的第一个猜想。输入包围盒顶点投影到确定的平均包围盒的轴，
 	// 此值将在后面进行更新。
-	auto center = static_cast<Real>(0.5) * (lhs.GetCenter() + rhs.GetCenter()); 
+	auto center =  Math::GetRational(1,2) * (lhs.GetCenter() + rhs.GetCenter()); 
 
 	// 一个包围盒的轴，就像一个列矩阵形成一个旋转矩阵。
 	// 输入包围盒的轴被转换为四元数。
 	// 计算平均四元数，然后标准化为单位长度。
 	// 结果为具有t值为1/2的两个输入四元数的球面线性插值。
 	// 结果被转换回旋转矩阵和它的列被选择作为合并包围盒的轴。
-	std::vector<Vector3D> lhsRotationColumn{ lhs.GetFirstAxis(), lhs.GetSecondAxis(), lhs.GetThirdAxis() };
+	std::vector<Vector3D> lhsRotationColumn{ lhs.GetAxis0(), lhs.GetAxis1(), lhs.GetThirdAxis() };
 
-	std::vector<Vector3D> rhsRotationColumn{ rhs.GetFirstAxis(), rhs.GetSecondAxis(), rhs.GetThirdAxis() };
+	std::vector<Vector3D> rhsRotationColumn{ rhs.GetAxis0(), rhs.GetAxis1(), rhs.GetThirdAxis() };
 
 	Quaternion<Real> lhsQuaternion{ lhsRotationColumn };
 	Quaternion<Real> rhsQuaternion{ rhsRotationColumn };
@@ -193,13 +193,13 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>
     
 	// [min,max] 为合并后的包围盒的轴在坐标系中为轴对齐包围盒。
 	// 更新当前包围盒中心成为新包围盒的中心。计算基于新的中心的范围。
-	center += static_cast<Real>(0.5) * (*firstBoundary.first + *firstBoundary.second) * sumRotationColumn[0] +
-		      static_cast<Real>(0.5) * (*secondBoundary.first + *secondBoundary.second) * sumRotationColumn[1]  +
-			  static_cast<Real>(0.5) * (*thirdBoundary.first + *thirdBoundary.second) * sumRotationColumn[2];
+	center +=  Math::GetRational(1,2) * (*firstBoundary.first + *firstBoundary.second) * sumRotationColumn[0] +
+		       Math::GetRational(1,2) * (*secondBoundary.first + *secondBoundary.second) * sumRotationColumn[1]  +
+			   Math::GetRational(1,2) * (*thirdBoundary.first + *thirdBoundary.second) * sumRotationColumn[2];
 
-	auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * static_cast<Real>(0.5);
-	auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * static_cast<Real>(0.5);
-	auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * static_cast<Real>(0.5);
+	auto firstExtent = (*firstBoundary.second - *firstBoundary.first) *  Math::GetRational(1,2);
+	auto secondExtent = (*secondBoundary.second - *secondBoundary.first) *  Math::GetRational(1,2);
+	auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) *  Math::GetRational(1,2);
 
 	return Box3{ center, sumRotationColumn[0], sumRotationColumn[1], sumRotationColumn[2], firstExtent, secondExtent, thirdExtent };
 }

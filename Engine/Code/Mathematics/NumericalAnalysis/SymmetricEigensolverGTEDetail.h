@@ -383,7 +383,7 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 
 		// Compute the rank-1 offsets v*w^T and w*v^T.
 		auto invvdv = Math::GetValue(1) / vdv;
-		auto twoinvvdv = invvdv * static_cast<Real>(2);
+		auto twoinvvdv = invvdv * Math::GetValue(2);
 		auto pdvtvdv = Math::GetValue(0);
 		for (r = i; r < mSize; ++r)
 		{
@@ -411,7 +411,7 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 		{
 			auto vr = mVVector[r];
 			auto wr = mWVector[r];
-			auto offset = vr * wr * static_cast<Real>(2);
+			auto offset = vr * wr * Math::GetValue(2);
 			mMatrix[r + mSize * r] -= offset;
 			for (c = r + 1; c < mSize; ++c)
 			{
@@ -483,7 +483,7 @@ void Mathematics::SymmetricEigensolverGTE<Real>
 	auto a00 = mDiagonal[imax];
 	auto a01 = mSuperdiagonal[imax];
 	auto a11 = mDiagonal[imax + 1];
-	auto dif = (a00 - a11) * static_cast<Real>(0.5);
+	auto dif = (a00 - a11) *  Math::GetRational(1,2);
 	auto sgn = (dif >= Math::GetValue(0) ? Math::GetValue(1) : Math::GetValue(-1));
 	auto a01sqr = a01 * a01;
 	auto u = a11 - a01sqr / (dif + sgn * Math::Sqrt(dif*dif + a01sqr));

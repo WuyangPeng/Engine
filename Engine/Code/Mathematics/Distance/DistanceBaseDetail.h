@@ -24,7 +24,7 @@ const Real Mathematics::DistanceBase<Real, Vector>
 template <typename Real, typename Vector>
 Mathematics::DistanceBase<Real, Vector>
 	::DistanceBase()
-	:m_MaximumIterations{ sm_DefaultMaximumIterations }, m_ZeroThreshold{ sm_DefaultZeroThreshold }, m_DifferenceStep{ sm_DefaultDifferenceStep }, m_InverseTwoDifferenceStep{ static_cast<Real>(0.5) / m_DifferenceStep }
+	:m_MaximumIterations{ sm_DefaultMaximumIterations }, m_ZeroThreshold{ sm_DefaultZeroThreshold }, m_DifferenceStep{ sm_DefaultDifferenceStep }, m_InverseTwoDifferenceStep{  Math::GetRational(1,2) / m_DifferenceStep }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -42,7 +42,7 @@ bool Mathematics::DistanceBase<Real, Vector>
 	::IsValid() const noexcept
 {
 	if (0 < m_MaximumIterations && Math::GetValue(0) <= m_ZeroThreshold && Math::GetValue(0) < m_DifferenceStep &&
-		Math::Approximate(static_cast<Real>(0.5) / m_DifferenceStep, m_InverseTwoDifferenceStep, m_ZeroThreshold))
+		Math::Approximate( Math::GetRational(1,2) / m_DifferenceStep, m_InverseTwoDifferenceStep, m_ZeroThreshold))
 	{
 		return true;
 	}
@@ -61,7 +61,7 @@ void Mathematics::DistanceBase<Real, Vector>
 	MATHEMATICS_ASSERTION_2(Math::GetValue(0) < differenceStep, "无效的相差步进值\n");
 
 	m_DifferenceStep = differenceStep;
-	m_InverseTwoDifferenceStep = static_cast<Real>(0.5) / m_DifferenceStep;
+	m_InverseTwoDifferenceStep =  Math::GetRational(1,2) / m_DifferenceStep;
 }
 
 template <typename Real, typename Vector>
@@ -159,7 +159,7 @@ Real Mathematics::DistanceBase<Real, Vector>
 	auto distance = Get(t, lhsVelocity, rhsVelocity);
 	auto derivative = GetDerivative(t, lhsVelocity, rhsVelocity);
 
-	return static_cast<Real>(2) * distance.GetDistance() * derivative;
+	return Math::GetValue(2) * distance.GetDistance() * derivative;
 }
 
 template <typename Real, typename Vector>

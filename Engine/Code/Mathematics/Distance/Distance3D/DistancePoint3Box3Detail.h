@@ -68,36 +68,36 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 	auto difference = m_Point - m_Box.GetCenter();
 
 	// 计算平方距离和包围盒上的最近点。
-	Vector3D closest{ Vector3DTools::DotProduct(difference, m_Box.GetFirstAxis()),
-					  Vector3DTools::DotProduct(difference,m_Box.GetSecondAxis()),
+	Vector3D closest{ Vector3DTools::DotProduct(difference, m_Box.GetAxis0()),
+					  Vector3DTools::DotProduct(difference,m_Box.GetAxis1()),
 					  Vector3DTools::DotProduct(difference,m_Box.GetThirdAxis()) };
 	auto squaredDistance = Math::GetValue(0);
 	auto delta = Math::GetValue(0);
 
-	if (closest.GetX() < -m_Box.GetFirstExtent())
+	if (closest.GetX() < -m_Box.GetExtent0())
 	{
-		delta = closest.GetX() + m_Box.GetFirstExtent();
+		delta = closest.GetX() + m_Box.GetExtent0();
 		squaredDistance += delta * delta;
-		closest.SetX(-m_Box.GetFirstExtent());
+		closest.SetX(-m_Box.GetExtent0());
 	}
-	else if (m_Box.GetFirstExtent() < closest.GetX())
+	else if (m_Box.GetExtent0() < closest.GetX())
 	{
-		delta = closest.GetX() - m_Box.GetFirstExtent();
+		delta = closest.GetX() - m_Box.GetExtent0();
 		squaredDistance += delta * delta;
-		closest.SetX(m_Box.GetFirstExtent());
+		closest.SetX(m_Box.GetExtent0());
 	}
 
-	if (closest.GetY() < -m_Box.GetSecondExtent())
+	if (closest.GetY() < -m_Box.GetExtent1())
 	{
-		delta = closest.GetY() + m_Box.GetSecondExtent();
+		delta = closest.GetY() + m_Box.GetExtent1();
 		squaredDistance += delta * delta;
-		closest.SetY(-m_Box.GetSecondExtent());
+		closest.SetY(-m_Box.GetExtent1());
 	}
-	else if (m_Box.GetSecondExtent() < closest.GetY())
+	else if (m_Box.GetExtent1() < closest.GetY())
 	{
-		delta = closest.GetY() - m_Box.GetSecondExtent();
+		delta = closest.GetY() - m_Box.GetExtent1();
 		squaredDistance += delta * delta;
-		closest.SetY(m_Box.GetSecondExtent());
+		closest.SetY(m_Box.GetExtent1());
 	}
 
 	if (closest.GetZ() < -m_Box.GetThirdExtent())
@@ -114,8 +114,8 @@ const typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics
 	}
 
 	return DistanceResult{ squaredDistance, Math::GetValue(0), m_Point,
-						   m_Box.GetCenter() + closest.GetX() * m_Box.GetFirstAxis() +
-						   closest.GetY() * m_Box.GetSecondAxis() +
+						   m_Box.GetCenter() + closest.GetX() * m_Box.GetAxis0() +
+						   closest.GetY() * m_Box.GetAxis1() +
 						   closest.GetZ() * m_Box.GetThirdAxis() };
 }
 

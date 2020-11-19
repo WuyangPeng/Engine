@@ -185,7 +185,7 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
         Real m00, m01, m10, m11, d0, d1;
         if (AdA >= BdB)
         {
-            m00 = static_cast<Real>(1);
+            m00 = Math::GetValue(1);
             m01 = AdB/AdA;
             m10 = m01;
             m11 = BdB/AdA;
@@ -197,14 +197,14 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
             m00 = AdA/BdB;
             m01 = AdB/BdB;
             m10 = m01;
-            m11 = static_cast<Real>(1);
+            m11 = Math::GetValue(1);
             d0 = (Real{0.5})*m00;
             d1 = Real{0.5};
         }
-		auto invDet = (static_cast<Real>(1))/(m00*m11 - m01*m10);
+		auto invDet = (Math::GetValue(1))/(m00*m11 - m01*m10);
 		auto u0 = invDet*(m11*d0 - m01*d1);
 		auto u1 = invDet*(m00*d1 - m10*d0);
-		auto u2 = static_cast<Real>(1) - u0 - u1;
+		auto u2 = Math::GetValue(1) - u0 - u1;
 		center = u0*P0 + u1*P1 + u2*P2;
 		auto tmp = u0*A + u1*B;
 		radius = Vector3DTools<Real>::VectorMagnitudeSquared(tmp);
@@ -278,7 +278,7 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
     {
 		auto V = D*invM;
 		auto U = invM*V;
-		auto U3 = static_cast<Real>(1) - U[0] - U[1] - U[2];
+		auto U3 = Math::GetValue(1) - U[0] - U[1] - U[2];
 		center = U[0] * P0 + U[1] * P1 + U[2] * P2 + U3*P3;
 		auto tmp = U[0]*A + U[1]*B + U[2]*C;
 		radius = Vector3DTools<Real>::VectorMagnitudeSquared(tmp);

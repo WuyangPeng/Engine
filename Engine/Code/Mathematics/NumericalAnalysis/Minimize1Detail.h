@@ -90,11 +90,11 @@ void Mathematics::Minimize1<Real, UserDataType>
 		return;
 	}
 
-	auto middle = static_cast<Real>(0.5) * (begin + end);
+	auto middle =  Math::GetRational(1,2) * (begin + end);
 	auto middleFunction = m_Function(middle, m_UserData);
 	minimize1Data.CompareData(middle, middleFunction);
 
-	if (Math<Real>::GetValue(0) < beginFunction - (static_cast<Real>(2) * middleFunction + endFunction))
+	if (Math<Real>::GetValue(0) < beginFunction - (Math::GetValue(2) * middleFunction + endFunction))
 	{
 		// 二次拟合具有中点正二阶导数。
 		if (beginFunction < endFunction)
@@ -232,7 +232,7 @@ void Mathematics::Minimize1<Real, UserDataType>
 
 		// 测试收敛。
 
-		if (Math<Real>::FAbs(end - begin) <= static_cast<Real>(2) * Math<Real>::GetZeroTolerance() * Math<Real>::FAbs(middle) + Math<Real>::sm_Epsilon)
+		if (Math<Real>::FAbs(end - begin) <= Math::GetValue(2) * Math<Real>::GetZeroTolerance() * Math<Real>::FAbs(middle) + Math<Real>::sm_Epsilon)
 		{
 			break;
 		}
@@ -250,7 +250,7 @@ void Mathematics::Minimize1<Real, UserDataType>
 			return;
 		}
 
-		auto vertex = static_cast<Real>(0.5) * (endMinusMiddle * secondProduct - beginMinusMiddle * firstProduct) / denom + middle;
+		auto vertex =  Math::GetRational(1,2) * (endMinusMiddle * secondProduct - beginMinusMiddle * firstProduct) / denom + middle;
 
 		MATHEMATICS_ASSERTION_1(begin <= vertex && vertex <= end, "顶点不在区间\n");
 

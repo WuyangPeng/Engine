@@ -1169,9 +1169,9 @@ void Mathematics::Bisect3Storage<Real>
 	m_EndPointX = endNode->GetX();
 	m_EndPointY = endNode->GetY();
 	m_EndPointZ = endNode->GetZ();
-	m_MidpointX = (static_cast<Real>(0.5) * (m_BeginPointX + m_EndPointX));
-	m_MidpointY = (static_cast<Real>(0.5) * (m_BeginPointY + m_EndPointY));
-	m_MidpointZ = (static_cast<Real>(0.5) * (m_BeginPointZ + m_EndPointZ));
+	m_MidpointX = ( Math::GetRational(1,2) * (m_BeginPointX + m_EndPointX));
+	m_MidpointY = ( Math::GetRational(1,2) * (m_BeginPointY + m_EndPointY));
+	m_MidpointZ = ( Math::GetRational(1,2) * (m_BeginPointZ + m_EndPointZ));
 }
 
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_DETAIL_H

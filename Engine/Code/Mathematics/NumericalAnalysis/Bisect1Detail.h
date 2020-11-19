@@ -61,7 +61,7 @@ typename const Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real
 		return Bisect1Root{};
 	}
 
-	auto middlePoints = static_cast<Real>(0.5) * (beginPoint + endPoint);
+	auto middlePoints =  Math::GetRational(1,2) * (beginPoint + endPoint);
 
 	for (auto level = 0; level < m_MaxLevel; ++level)
 	{
@@ -82,7 +82,7 @@ typename const Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real
 			beginPointFunctionValue = middlePointFunctionValue;
 		}
 
-		middlePoints = static_cast<Real>(0.5) * (beginPoint + endPoint);
+		middlePoints =  Math::GetRational(1,2) * (beginPoint + endPoint);
 	}
 
 	// 循环超出了次数，返回一个中间值。

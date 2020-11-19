@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 16:44)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/13 11:39)
 
 #ifndef MATHEMATICS_OBJECTS2D_BOX2_H
 #define MATHEMATICS_OBJECTS2D_BOX2_H
@@ -11,59 +14,68 @@
 
 #include "Mathematics/Algebra/Vector2D.h"
 
-#include <vector>
 #include <iosfwd>
-#include <type_traits> 
+#include <type_traits>
+#include <vector>
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Box2
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class Box2Impl;
 
-		using ClassType = Box2<Real>;
-		using Math = Math<Real>;
-		using Vector2D = Vector2D<Real>;		
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Box2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Box2Impl<double>>;
 
-	public:
-		// 一个盒子有中心点C，轴方向U[0]和U[1]（垂直和单位长度的向量），
-		// 和范围e[0]和e[1]（非负数）。 
-		// A point X = C+y[0]*U[0]+y[1]*U[1]是在内部或在盒子上，
-		// 每当|y[i]| <= e[i]对于所有的i
-		Box2();
-		Box2(const Vector2D& center, const Vector2D& firstAxis, const Vector2D& secondAxis,
-			 const Real firstExtent, const Real secondExtent, const Real epsilon = Math::GetZeroTolerance());
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Box2Impl<Real>>;
 
-		CLASS_INVARIANT_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Box2 final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		const std::vector<Vector2D> ComputeVertices() const;
-		const Vector2D GetCenter() const;
-		const Vector2D GetFirstAxis() const;
-		const Vector2D GetSecondAxis() const;
-		Real GetFirstExtent() const;
-		Real GetSecondExtent() const;
-		Real GetEpsilon() const;
+        using Box2Impl = Box2Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Box2);
 
-		const ClassType GetMove(Real t, const Vector2D& velocity) const;
+        using ClassType = Box2<Real>;
+        using Math = Math<Real>;
+        using Vector2D = Vector2D<Real>;
+        using VerticesType = std::vector<Vector2D>;
 
-	private:
-		Vector2D m_Center;
-		Vector2D m_Axis[2];
-		Real m_Extent[2];
-		Real m_Epsilon;
-	};
+    public:
+        // 一个盒子有中心点C，轴方向U[0]和U[1]（垂直和单位长度的向量），
+        // 和范围e[0]和e[1]（非负数）。
+        // A point X = C + y[0] * U[0] + y[1] * U[1]是在内部或在盒子上，
+        // 每当|y[i]| <= e[i]对于所有的i
+        Box2();
+        Box2(const Vector2D& center, const Vector2D& axis0, const Vector2D& axis1, const Real extent0, const Real extent1, const Real epsilon = Math::GetZeroTolerance());
 
-	using Box2f = Box2<float>;
-	using Box2d = Box2<double>;
+        CLASS_INVARIANT_DECLARE;
 
-	template <typename Real>
-	bool Approximate(const Box2<Real>& lhs, const Box2<Real>& rhs, const Real epsilon);
+        [[nodiscard]] const VerticesType ComputeVertices() const;
+        [[nodiscard]] const Vector2D GetCenter() const noexcept;
+        [[nodiscard]] const Vector2D GetAxis0() const noexcept;
+        [[nodiscard]] const Vector2D GetAxis1() const noexcept;
+        [[nodiscard]] Real GetExtent0() const noexcept;
+        [[nodiscard]] Real GetExtent1() const noexcept;
+        [[nodiscard]] Real GetEpsilon() const noexcept;
 
-	// 调试输出
-	template <typename Real>
-	std::ostream& operator<< (std::ostream& outFile, const Box2<Real>& box);
+        [[nodiscard]] const Box2 GetMove(Real t, const Vector2D& velocity) const;
+
+    private:
+        IMPL_TYPE_DECLARE(Box2);
+    };
+
+    using FloatBox2 = Box2<float>;
+    using DoubleBox2 = Box2<double>;
+
+    template <typename Real>
+    [[nodiscard]] bool Approximate(const Box2<Real>& lhs, const Box2<Real>& rhs, const Real epsilon);
+
+    // 调试输出
+    template <typename Real>
+    std::ostream& operator<<(std::ostream& outFile, const Box2<Real>& box);
 }
 
-#endif // MATHEMATICS_OBJECTS2D_BOX2_H
+#endif  // MATHEMATICS_OBJECTS2D_BOX2_H

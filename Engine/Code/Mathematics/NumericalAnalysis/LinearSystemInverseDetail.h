@@ -99,9 +99,9 @@ template <typename Real>
 void Mathematics::LinearSystemInverse<Real>
 	::ScaleRow()
 {
-	auto inverse = static_cast<Real>(1) / m_Inverse(m_CurrentColumn, m_CurrentColumn);
+	auto inverse = Math::GetValue(1) / m_Inverse(m_CurrentColumn, m_CurrentColumn);
 
-	m_Inverse(m_CurrentColumn, m_CurrentColumn) = static_cast<Real>(1);
+	m_Inverse(m_CurrentColumn, m_CurrentColumn) = Math::GetValue(1);
 	for (auto index = 0; index < m_Size; index++)
 	{
 		m_Inverse(m_CurrentColumn, index) *= inverse;

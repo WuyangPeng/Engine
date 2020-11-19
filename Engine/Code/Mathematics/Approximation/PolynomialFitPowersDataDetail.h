@@ -176,7 +176,7 @@ void Mathematics::PolynomialFitPowersData<Real, S>
 
 	if (index == Size - 1)
 	{
-		m_InvTwoWScale = static_cast<Real>(0.5) / m_Scale[index];
+		m_InvTwoWScale =  Math::GetRational(1,2) / m_Scale[index];
 	}
 }
 

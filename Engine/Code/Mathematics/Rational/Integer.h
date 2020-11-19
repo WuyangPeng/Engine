@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 09:46)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/18 18:14)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_H
 #define MATHEMATICS_RATIONAL_INTEGER_H
@@ -11,11 +14,11 @@
 
 #include "IntegerData.h"
 #include "IntegerDivisionModulo.h"
+#include "System/Helper/PragmaWarning/Operators.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 
-#include "System/Helper/PragmaWarning/Operators.h"
-#include <vector>
 #include <iosfwd>
+#include <vector>
 
 // IntegerData只定义初始化和[]运算符。
 // IntegerDataAmend定义修改IntegerData的函数。
@@ -26,84 +29,82 @@
 // Integer只包含必要的外部接口。
 namespace Mathematics
 {
-	// N是你想要元整数的32位字节的数目。
-	template <int N>
-	class Integer : private boost::integer_arithmetic<Integer<N>,
-							boost::totally_ordered<Integer<N>,
-							boost::shiftable<Integer<N>>>>
-	{
-	public:
-		using ClassType = Integer<N>;
-		using IntegerDivisionModulo = IntegerDivisionModulo<N>;
+    // N是你想要元整数的32位字节的数目。
+    template <int N>
+    class Integer final : private boost::integer_arithmetic<Integer<N>, boost::totally_ordered<Integer<N>, boost::shiftable<Integer<N>>>>
+    {
+    public:
+        static_assert(1 <= N);
 
-	public:
-		Integer();
-		explicit Integer(const std::vector<uint16_t>& data);
-		Integer(int count, const uint16_t* data);
+        using ClassType = Integer<N>;
+        using IntegerDivisionModulo = IntegerDivisionModulo<N>;
+        using DataType = std::vector<uint16_t>;
+        using IntegerData = IntegerData<N>;
 
-		template<typename T>
-		explicit Integer(T value);
+    public:
+        Integer() noexcept;
+        explicit Integer(const DataType& data);
+        explicit Integer(const IntegerData& data) noexcept;
 
-		template <int Other>
-		Integer(const Integer<Other>& rhs);
+        template <typename T>
+        explicit Integer(T value);
 
-		CLASS_INVARIANT_DECLARE;
+        template <int Other>
+        explicit Integer(const Integer<Other>& rhs);
 
-		bool IsZero() const;
-		void SetZero();
-		NumericalValueSymbol GetSign() const;
+        CLASS_INVARIANT_DECLARE;
 
-		uint16_t& operator[](int index);
-		const uint16_t& operator[](int index) const;
+        [[nodiscard]] bool IsZero() const noexcept;
+        [[nodiscard]] void SetZero();
+        [[nodiscard]] NumericalValueSymbol GetSign() const noexcept;
 
-		// 算术运算。
-		const Integer operator- () const;
-		const Integer GetAbsoluteValue() const;
+        [[nodiscard]] uint16_t& operator[](int index);
+        [[nodiscard]] const uint16_t& operator[](int index) const;
 
-		// 算术更新。
-		Integer& operator+= (const Integer& rhs);
-		Integer& operator-= (const Integer& rhs);
-		Integer& operator*= (const Integer& rhs);
+        // 算术运算。
+        [[nodiscard]] const Integer operator-() const;
+        [[nodiscard]] const Integer GetAbsoluteValue() const;
 
-		// 如果要同时求出商和余数，
-		// 直接调用GetDivisionModulo
-		const IntegerDivisionModulo GetDivisionModulo(const Integer& rhs) const;
-		Integer& operator/= (const Integer& rhs);
-		Integer& operator%= (const Integer& rhs);
+        // 算术更新。
+        Integer& operator+=(const Integer& rhs);
+        Integer& operator-=(const Integer& rhs);
+        Integer& operator*=(const Integer& rhs);
 
-		// 移位更新。
-		Integer& operator<<= (int shift);
-		Integer& operator>>= (int shift);
+        // 如果要同时求出商和余数，直接调用GetDivisionModulo
+        [[nodiscard]] const IntegerDivisionModulo GetDivisionModulo(const Integer& rhs) const;
+        Integer& operator/=(const Integer& rhs);
+        Integer& operator%=(const Integer& rhs);
 
-		int GetLeadingBlock() const;
-		int GetTrailingBlock() const;
-		int GetLeadingBit(int index) const;
-		int GetTrailingBit(int index) const;
-		int GetLeadingBit() const;
-		int GetTrailingBit() const;
+        // 移位更新。
+        Integer& operator<<=(int shift);
+        Integer& operator>>=(int shift);
 
-		void SetBit(int index, bool on);
-		bool GetBit(int index) const;
+        [[nodiscard]] int GetLeadingBlock() const;
+        [[nodiscard]] int GetTrailingBlock() const;
+        [[nodiscard]] int GetLeadingBit(int index) const;
+        [[nodiscard]] int GetTrailingBit(int index) const;
+        [[nodiscard]] int GetLeadingBit() const;
+        [[nodiscard]] int GetTrailingBit() const;
 
-		// 比较	
-		bool operator== (const Integer& rhs) const;
-		bool operator< (const Integer& rhs) const;
+        void SetBit(int index, bool on);
+        [[nodiscard]] bool GetBit(int index) const;
 
-		// 返回值若被截断，抛出异常
-		template <typename T>
-		T GetValue() const;
+        // 比较
+        [[nodiscard]] bool operator==(const Integer& rhs) const;
+        [[nodiscard]] bool operator<(const Integer& rhs) const;
 
-		void Print(std::ostream& os) const;
+        // 返回值若被截断，抛出异常
+        template <typename T>
+        [[nodiscard]] T GetValue() const;
 
-	private:
-		typedef IntegerData<N> IntegerData;
+        void Print(std::ostream& os) const;
 
-	private:
-		IntegerData m_IntegerData;
-	};
+    private:
+        IntegerData m_IntegerData;
+    };
 
-	template <int N>
-	std::ostream& operator<< (std::ostream& os, const Integer<N>& integer);
+    template <int N>
+    std::ostream& operator<<(std::ostream& os, const Integer<N>& integer);
 }
 
-#endif // MATHEMATICS_RATIONAL_INTEGER_H
+#endif  // MATHEMATICS_RATIONAL_INTEGER_H

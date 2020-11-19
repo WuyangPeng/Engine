@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/23 23:25)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/19 10:27)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_TRAITS_H
 #define MATHEMATICS_RATIONAL_INTEGER_TRAITS_H
@@ -26,10 +26,10 @@ namespace Mathematics
     {
         using IntegerType = uint32_t;
         static constexpr IntegerType g_Symbol{ 0x80000000 };
-        static constexpr uint32_t g_SymbolShifting{ 31 };
+        static constexpr auto g_SymbolShifting = 31u;
         static constexpr IntegerType g_Exponent{ 0x7F800000 };
-        static constexpr uint32_t g_ExponentShifting{ 23 };
-        static constexpr uint32_t g_RealExponentDifference{ 0x7F };
+        static constexpr auto g_ExponentShifting = 23u;
+        static constexpr auto g_RealExponentDifference = 0x7Fu;
         static constexpr IntegerType g_Mantissa{ 0x007FFFFF };
         static constexpr IntegerType g_QuietNaN{ 0x00400000 };
         static constexpr auto g_ExponentDigits = g_SymbolShifting - g_ExponentShifting;
@@ -41,10 +41,10 @@ namespace Mathematics
     {
         using IntegerType = uint64_t;
         static constexpr IntegerType g_Symbol{ 0x8000000000000000ULL };
-        static constexpr uint32_t g_SymbolShifting{ 63 };
+        static constexpr auto g_SymbolShifting = 63u;
         static constexpr IntegerType g_Exponent{ 0x7FF0000000000000ULL };
-        static constexpr uint32_t g_ExponentShifting{ 52 };
-        static constexpr uint32_t g_RealExponentDifference{ 0x3FF };
+        static constexpr auto g_ExponentShifting = 52u;
+        static constexpr auto g_RealExponentDifference = 0x3FFu;
         static constexpr IntegerType g_Mantissa{ 0x000FFFFFFFFFFFFFULL };
         static constexpr IntegerType g_QuietNaN{ 0x0008000000000000ULL };
         static constexpr auto g_ExponentDigits = g_SymbolShifting - g_ExponentShifting;

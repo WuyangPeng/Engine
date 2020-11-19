@@ -410,21 +410,21 @@ void Mathematics::Matrix4<Real>::MakeReflection(const Vector3D& normal, const Ve
     //
     // 其中P是平面上的点，N是一个单位长度的平面法线。
 
-    auto twoDotNormalOrigin = static_cast<Real>(2) * Vector3DTools::DotProduct(normal, origin);
+    auto twoDotNormalOrigin = Math::GetValue(2) * Vector3DTools::DotProduct(normal, origin);
 
-    SetValue<0, 0>(Math::GetValue(1) - static_cast<Real>(2) * normal.GetX() * normal.GetX());
-    SetValue<0, 1>(-static_cast<Real>(2) * normal.GetX() * normal.GetY());
-    SetValue<0, 2>(-static_cast<Real>(2) * normal.GetX() * normal.GetZ());
+    SetValue<0, 0>(Math::GetValue(1) - Math::GetValue(2) * normal.GetX() * normal.GetX());
+    SetValue<0, 1>(-Math::GetValue(2) * normal.GetX() * normal.GetY());
+    SetValue<0, 2>(-Math::GetValue(2) * normal.GetX() * normal.GetZ());
     SetValue<0, 3>(twoDotNormalOrigin * normal.GetX());
 
-    SetValue<1, 0>(-static_cast<Real>(2) * normal.GetY() * normal.GetX());
-    SetValue<1, 1>(Math::GetValue(1) - static_cast<Real>(2) * normal.GetY() * normal.GetY());
-    SetValue<1, 2>(-static_cast<Real>(2) * normal.GetY() * normal.GetZ());
+    SetValue<1, 0>(-Math::GetValue(2) * normal.GetY() * normal.GetX());
+    SetValue<1, 1>(Math::GetValue(1) - Math::GetValue(2) * normal.GetY() * normal.GetY());
+    SetValue<1, 2>(-Math::GetValue(2) * normal.GetY() * normal.GetZ());
     SetValue<1, 3>(twoDotNormalOrigin * normal.GetY());
 
-    SetValue<2, 0>(-static_cast<Real>(2) * normal.GetZ() * normal.GetX());
-    SetValue<2, 1>(-static_cast<Real>(2) * normal.GetZ() * normal.GetY());
-    SetValue<2, 2>(Math::GetValue(1) - static_cast<Real>(2) * normal.GetZ() * normal.GetZ());
+    SetValue<2, 0>(-Math::GetValue(2) * normal.GetZ() * normal.GetX());
+    SetValue<2, 1>(-Math::GetValue(2) * normal.GetZ() * normal.GetY());
+    SetValue<2, 2>(Math::GetValue(1) - Math::GetValue(2) * normal.GetZ() * normal.GetZ());
     SetValue<2, 3>(twoDotNormalOrigin * normal.GetZ());
 
     SetValue<3, 0>(Math::GetValue(0));
@@ -443,13 +443,13 @@ void Mathematics::Matrix4<Real>::MakeFrustumMatrix44(Real left, Real right, Real
     auto height = top - bottom;
     auto depth = farDistance - nearDistance;
 
-    SetValue<0, 0>((static_cast<Real>(2) * nearDistance) / width);
+    SetValue<0, 0>((Math::GetValue(2) * nearDistance) / width);
     SetValue<0, 1>(Math::GetValue(0));
     SetValue<0, 2>(Math::GetValue(0));
     SetValue<0, 3>(Math::GetValue(0));
 
     SetValue<1, 0>(Math::GetValue(0));
-    SetValue<1, 1>((static_cast<Real>(2) * nearDistance) / height);
+    SetValue<1, 1>((Math::GetValue(2) * nearDistance) / height);
     SetValue<1, 2>(Math::GetValue(0));
     SetValue<1, 3>(Math::GetValue(0));
 
@@ -460,7 +460,7 @@ void Mathematics::Matrix4<Real>::MakeFrustumMatrix44(Real left, Real right, Real
 
     SetValue<3, 0>(Math::GetValue(0));
     SetValue<3, 1>(Math::GetValue(0));
-    SetValue<3, 2>(-(static_cast<Real>(2) * farDistance * nearDistance) / depth);
+    SetValue<3, 2>(-(Math::GetValue(2) * farDistance * nearDistance) / depth);
     SetValue<3, 3>(Math::GetValue(0));
 }
 

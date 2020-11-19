@@ -25,10 +25,10 @@ IntpBilinear2<Real>::IntpBilinear2 (int xBound, int yBound, Real xMin,  Real xSp
 
     mXMin = xMin;
     mXSpacing = xSpacing;
-    mInvXSpacing = (static_cast<Real>(1))/xSpacing;
+    mInvXSpacing = (Math::GetValue(1))/xSpacing;
     mYMin = yMin;
     mYSpacing = ySpacing;
-    mInvYSpacing = (static_cast<Real>(1))/ySpacing;
+    mInvYSpacing = (Math::GetValue(1))/ySpacing;
     mXMax = xMin + xSpacing*(xBound - 1);
     mYMax = yMin + ySpacing*(yBound - 1);
 
@@ -214,14 +214,14 @@ Real IntpBilinear2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)
     {
     case 0:
         dx = xIndex - ix;
-        U[0] = static_cast<Real>(1);
+        U[0] = Math::GetValue(1);
         U[1] = dx;
-        xMult = static_cast<Real>(1);
+        xMult = Math::GetValue(1);
         break;
     case 1:
         dx = xIndex - ix;
         U[0] = Math<Real>::GetValue(0);
-        U[1] = static_cast<Real>(1);
+        U[1] = Math::GetValue(1);
         xMult = mInvXSpacing;
         break;
     default:
@@ -233,14 +233,14 @@ Real IntpBilinear2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)
     {
     case 0:
         dy = yIndex - iy;
-        V[0] = static_cast<Real>(1);
+        V[0] = Math::GetValue(1);
         V[1] = dy;
-        yMult = static_cast<Real>(1);
+        yMult = Math::GetValue(1);
         break;
     case 1:
         dy = yIndex - iy;
         V[0] = Math<Real>::GetValue(0);
-        V[1] = static_cast<Real>(1);
+        V[1] = Math::GetValue(1);
         yMult = mInvYSpacing;
         break;
     default:

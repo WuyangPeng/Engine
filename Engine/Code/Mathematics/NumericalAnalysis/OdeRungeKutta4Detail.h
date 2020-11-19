@@ -14,7 +14,7 @@
 template <typename Real, typename UserDataType>
 Mathematics::OdeRungeKutta4<Real, UserDataType>
 	::OdeRungeKutta4(int dimension, Real step, Function function, const UserDataType* userData)
-	:ParentType{ dimension, step, function, userData }, m_HalfStep{ static_cast<Real>(0.5) * step }, m_SixthStep{ step / static_cast<Real>(6) }, m_FirstStepFunctionValue(dimension),
+	:ParentType{ dimension, step, function, userData }, m_HalfStep{  Math::GetRational(1,2) * step }, m_SixthStep{ step / static_cast<Real>(6) }, m_FirstStepFunctionValue(dimension),
 	 m_SecondStepFunctionValue(dimension), m_ThirdStepFunctionValue(dimension), m_FourthStepFunctionValue(dimension), m_SecondXIn(dimension)
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -86,7 +86,7 @@ void Mathematics::OdeRungeKutta4<Real, UserDataType>
 
 	for (auto i = 0; i < dimension; ++i)
 	{
-		xOut[i] = xIn[i] + m_SixthStep * (m_FirstStepFunctionValue[i] + static_cast<Real>(2) * (m_SecondStepFunctionValue[i] + m_ThirdStepFunctionValue[i]) + m_FourthStepFunctionValue[i]);
+		xOut[i] = xIn[i] + m_SixthStep * (m_FirstStepFunctionValue[i] + Math::GetValue(2) * (m_SecondStepFunctionValue[i] + m_ThirdStepFunctionValue[i]) + m_FourthStepFunctionValue[i]);
 	}
 }
 
@@ -97,7 +97,7 @@ void Mathematics::OdeRungeKutta4<Real, UserDataType>
 	MATHEMATICS_CLASS_IS_VALID_1;
 
 	ParentType::SetStepSize(step);
-	m_HalfStep = static_cast<Real>(0.5) * step;
+	m_HalfStep =  Math::GetRational(1,2) * step;
 	m_SixthStep = step / static_cast<Real>(6);
 }
 

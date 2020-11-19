@@ -48,9 +48,9 @@ typename const Mathematics::DistTriangle3Triangle3<Real>::DistanceResult Mathema
 	auto i1 = 0;
 	for (i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
 	{
-		auto center = (static_cast<Real>(0.5)) * (mTriangle0.GetVertex(i0) + mTriangle0.GetVertex(i1));
+		auto center = ( Math::GetRational(1,2)) * (mTriangle0.GetVertex(i0) + mTriangle0.GetVertex(i1));
 		auto direction = mTriangle0.GetVertex(i1) - mTriangle0.GetVertex(i0);
-		auto extent = (static_cast<Real>(0.5)) * Vector3DTools::VectorMagnitude(direction);
+		auto extent = ( Math::GetRational(1,2)) * Vector3DTools::VectorMagnitude(direction);
 
 		Segment3<Real> edge{ extent,center,direction };
 
@@ -63,8 +63,8 @@ typename const Mathematics::DistTriangle3Triangle3<Real>::DistanceResult Mathema
 			sqrDist = sqrDistTmp.GetDistance();
 
 			ratio = queryST.GetSegmentParameter() / edge.GetExtent();
-			mTriangleBary0[i0] = (static_cast<Real>(0.5))*(static_cast<Real>(1) - ratio);
-			mTriangleBary0[i1] = static_cast<Real>(1) - mTriangleBary0[i0];
+			mTriangleBary0[i0] = ( Math::GetRational(1,2))*(Math::GetValue(1) - ratio);
+			mTriangleBary0[i1] = Math::GetValue(1) - mTriangleBary0[i0];
 			mTriangleBary0[3 - i0 - i1] = Math<Real>::GetValue(0);
 			mTriangleBary1[0] = queryST.GetTriangleBary(0);
 			mTriangleBary1[1] = queryST.GetTriangleBary(1);
@@ -80,9 +80,9 @@ typename const Mathematics::DistTriangle3Triangle3<Real>::DistanceResult Mathema
 	// Compare edges of triangle1 to the interior of triangle0.
 	for (i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
 	{
-		auto center = (static_cast<Real>(0.5)) * (mTriangle1.GetVertex(i0) + mTriangle1.GetVertex(i1));
+		auto center = ( Math::GetRational(1,2)) * (mTriangle1.GetVertex(i0) + mTriangle1.GetVertex(i1));
 		auto direction = mTriangle1.GetVertex(i1) - mTriangle1.GetVertex(i0);
-		auto extent = (static_cast<Real>(0.5)) * Vector3DTools::VectorMagnitude(direction);
+		auto extent = ( Math::GetRational(1,2)) * Vector3DTools::VectorMagnitude(direction);
 
 		Segment3<Real> edge{ extent,center,direction };
 
@@ -95,8 +95,8 @@ typename const Mathematics::DistTriangle3Triangle3<Real>::DistanceResult Mathema
 			sqrDist = sqrDistTmp.GetDistance();
 
 			ratio = queryST.GetSegmentParameter() / edge.GetExtent();
-			mTriangleBary1[i0] = (static_cast<Real>(0.5)) * (static_cast<Real>(1) - ratio);
-			mTriangleBary1[i1] = static_cast<Real>(1) - mTriangleBary1[i0];
+			mTriangleBary1[i0] = ( Math::GetRational(1,2)) * (Math::GetValue(1) - ratio);
+			mTriangleBary1[i1] = Math::GetValue(1) - mTriangleBary1[i0];
 			mTriangleBary1[3 - i0 - i1] = Math<Real>::GetValue(0);
 			mTriangleBary0[0] = queryST.GetTriangleBary(0);
 			mTriangleBary0[1] = queryST.GetTriangleBary(1);

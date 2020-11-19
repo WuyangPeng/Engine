@@ -73,7 +73,7 @@ namespace Mathematics
 
 		// xslope[z][y][x]
 		Real*** slope = NEW3<Real>(mXBound + 3, mYBound, mZBound);
-		Real invDX = (static_cast<Real>(1)) / mXSpacing;
+		Real invDX = (Math::GetValue(1)) / mXSpacing;
 		for (iz = 0; iz < mZBound; ++iz)
 		{
 			for (iy = 0; iy < mYBound; ++iy)
@@ -83,10 +83,10 @@ namespace Mathematics
 					slope[iz][iy][ix + 2] = (mF[iz][iy][ix + 1] - mF[iz][iy][ix])*invDX;
 				}
 
-				slope[iz][iy][1] = (static_cast<Real>(2))*slope[iz][iy][2] - slope[iz][iy][3];
-				slope[iz][iy][0] = (static_cast<Real>(2))*slope[iz][iy][1] - slope[iz][iy][2];
-				slope[iz][iy][mXBound + 1] = (static_cast<Real>(2))*slope[iz][iy][mXBound] - slope[iz][iy][mXBound - 1];
-				slope[iz][iy][mXBound + 2] = (static_cast<Real>(2))*slope[iz][iy][mXBound + 1] - slope[iz][iy][mXBound];
+				slope[iz][iy][1] = (Math::GetValue(2))*slope[iz][iy][2] - slope[iz][iy][3];
+				slope[iz][iy][0] = (Math::GetValue(2))*slope[iz][iy][1] - slope[iz][iy][2];
+				slope[iz][iy][mXBound + 1] = (Math::GetValue(2))*slope[iz][iy][mXBound] - slope[iz][iy][mXBound - 1];
+				slope[iz][iy][mXBound + 2] = (Math::GetValue(2))*slope[iz][iy][mXBound + 1] - slope[iz][iy][mXBound];
 			}
 		}
 
@@ -113,7 +113,7 @@ namespace Mathematics
 
 		// yslope[z][x][y]
 		Real*** slope = NEW3<Real>(mYBound + 3, mXBound, mZBound);
-		Real invDY = (static_cast<Real>(1)) / mYSpacing;
+		Real invDY = (Math::GetValue(1)) / mYSpacing;
 		for (iz = 0; iz < mZBound; ++iz)
 		{
 			for (ix = 0; ix < mXBound; ++ix)
@@ -123,10 +123,10 @@ namespace Mathematics
 					slope[iz][ix][iy + 2] = (mF[iz][iy + 1][ix] - mF[iz][iy][ix])*invDY;
 				}
 
-				slope[iz][ix][1] = (static_cast<Real>(2))*slope[iz][ix][2] - slope[iz][ix][3];
-				slope[iz][ix][0] = (static_cast<Real>(2))*slope[iz][ix][1] - slope[iz][ix][2];
-				slope[iz][ix][mYBound + 1] = (static_cast<Real>(2))*slope[iz][ix][mYBound] - slope[iz][ix][mYBound - 1];
-				slope[iz][ix][mYBound + 2] = (static_cast<Real>(2))*slope[iz][ix][mYBound + 1] - slope[iz][ix][mYBound];
+				slope[iz][ix][1] = (Math::GetValue(2))*slope[iz][ix][2] - slope[iz][ix][3];
+				slope[iz][ix][0] = (Math::GetValue(2))*slope[iz][ix][1] - slope[iz][ix][2];
+				slope[iz][ix][mYBound + 1] = (Math::GetValue(2))*slope[iz][ix][mYBound] - slope[iz][ix][mYBound - 1];
+				slope[iz][ix][mYBound + 2] = (Math::GetValue(2))*slope[iz][ix][mYBound + 1] - slope[iz][ix][mYBound];
 			}
 		}
 
@@ -153,7 +153,7 @@ namespace Mathematics
 
 		// zslope[y][x][z]
 		Real*** slope = NEW3<Real>(mZBound + 3, mXBound, mYBound);
-		Real invDZ = (static_cast<Real>(1)) / mZSpacing;
+		Real invDZ = (Math::GetValue(1)) / mZSpacing;
 		for (iy = 0; iy < mYBound; ++iy)
 		{
 			for (ix = 0; ix < mXBound; ++ix)
@@ -163,10 +163,10 @@ namespace Mathematics
 					slope[iy][ix][iz + 2] = (mF[iz + 1][iy][ix] - mF[iz][iy][ix])*invDZ;
 				}
 
-				slope[iy][ix][1] = (static_cast<Real>(2))*slope[iy][ix][2] - slope[iy][ix][3];
-				slope[iy][ix][0] = (static_cast<Real>(2))*slope[iy][ix][1] - slope[iy][ix][2];
-				slope[iy][ix][mZBound + 1] = (static_cast<Real>(2))*slope[iy][ix][mZBound] - slope[iy][ix][mZBound - 1];
-				slope[iy][ix][mZBound + 2] = (static_cast<Real>(2))*slope[iy][ix][mZBound + 1] - slope[iy][ix][mZBound];
+				slope[iy][ix][1] = (Math::GetValue(2))*slope[iy][ix][2] - slope[iy][ix][3];
+				slope[iy][ix][0] = (Math::GetValue(2))*slope[iy][ix][1] - slope[iy][ix][2];
+				slope[iy][ix][mZBound + 1] = (Math::GetValue(2))*slope[iy][ix][mZBound] - slope[iy][ix][mZBound - 1];
+				slope[iy][ix][mZBound + 2] = (Math::GetValue(2))*slope[iy][ix][mZBound + 1] - slope[iy][ix][mZBound];
 			}
 		}
 
@@ -195,7 +195,7 @@ namespace Mathematics
 		int iy0 = mYBound - 1, iy1 = iy0 - 1, iy2 = iy1 - 1;
 
 		Real*** FXY = NEW3<Real>(mXBound, mYBound, mZBound);
-		Real invDXDY = (static_cast<Real>(1)) / (mXSpacing*mYSpacing);
+		Real invDXDY = (Math::GetValue(1)) / (mXSpacing*mYSpacing);
 		for (iz = 0; iz < mZBound; ++iz)
 		{
 			// corners of z-slice
@@ -253,7 +253,7 @@ namespace Mathematics
 		int iz0 = mZBound - 1, iz1 = iz0 - 1, iz2 = iz1 - 1;
 
 		Real*** FXZ = NEW3<Real>(mXBound, mYBound, mZBound);
-		Real invDXDZ = (static_cast<Real>(1)) / (mXSpacing*mZSpacing);
+		Real invDXDZ = (Math::GetValue(1)) / (mXSpacing*mZSpacing);
 		for (iy = 0; iy < mYBound; ++iy)
 		{
 			// corners of z-slice
@@ -310,7 +310,7 @@ namespace Mathematics
 		int iz0 = mZBound - 1, iz1 = iz0 - 1, iz2 = iz1 - 1;
 
 		Real*** FYZ = NEW3<Real>(mXBound, mYBound, mZBound);
-		Real invDYDZ = (static_cast<Real>(1)) / (mYSpacing*mZSpacing);
+		Real invDYDZ = (Math::GetValue(1)) / (mYSpacing*mZSpacing);
 		for (ix = 0; ix < mXBound; ++ix)
 		{
 			// corners of x-slice
@@ -398,13 +398,13 @@ namespace Mathematics
 		int ix, iy, iz, ix0, iy0, iz0;
 
 		Real*** FXYZ = NEW3<Real>(mXBound, mYBound, mZBound);
-		Real invDXDYDZ = (static_cast<Real>(1)) / (mXSpacing*mYSpacing*mZSpacing);
+		Real invDXDYDZ = (Math::GetValue(1)) / (mXSpacing*mYSpacing*mZSpacing);
 
 		// convolution masks
 		//   centered difference, O(h^2)
 		Real CDer[3] = { -Real{0.5}, Math<Real>::GetValue(0), Real{0.5} };
 		//   one-sided difference, O(h^2)
-		Real ODer[3] = { -static_cast<Real>(1.5), static_cast<Real>(2), -Real{0.5} };
+		Real ODer[3] = { -static_cast<Real>(1.5), Math::GetValue(2), -Real{0.5} };
 		Real mask;
 
 		// corners
@@ -891,7 +891,7 @@ namespace Mathematics
 				}
 				else
 				{
-					return (static_cast<Real>(0.5))*(slope[1] + slope[2]);
+					return ( Math::GetRational(1,2))*(slope[1] + slope[2]);
 				}
 			}
 		}
@@ -905,9 +905,9 @@ namespace Mathematics
 	void IntpAkimaUniform3<Real>::Construct(Polynomial& poly, Real F[2][2][2],Real FX[2][2][2], Real FY[2][2][2], Real FZ[2][2][2], Real FXY[2][2][2],Real FXZ[2][2][2], Real FYZ[2][2][2], Real FXYZ[2][2][2])
 	{
 		Real dx = mXSpacing, dy = mYSpacing, dz = mZSpacing;
-		Real invDX = (static_cast<Real>(1)) / dx, invDX2 = invDX * invDX;
-		Real invDY = (static_cast<Real>(1)) / dy, invDY2 = invDY * invDY;
-		Real invDZ = (static_cast<Real>(1)) / dz, invDZ2 = invDZ * invDZ;
+		Real invDX = (Math::GetValue(1)) / dx, invDX2 = invDX * invDX;
+		Real invDY = (Math::GetValue(1)) / dy, invDY2 = invDY * invDY;
+		Real invDZ = (Math::GetValue(1)) / dz, invDZ2 = invDZ * invDZ;
 		Real b0, b1, b2, b3, b4, b5, b6, b7;
 
 		poly.A(0, 0, 0) = F[0][0][0];
@@ -923,115 +923,115 @@ namespace Mathematics
 		b0 = (F[1][0][0] - poly(0, 0, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX2;
 		b1 = (FX[1][0][0] - poly(1, 0, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 0, 0) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(3, 0, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
+		poly.A(3, 0, 0) = (-(Math::GetValue(2))*b0 + b1)*invDX;
 
 		b0 = (F[0][1][0] - poly(0, 0, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY2;
 		b1 = (FY[0][1][0] - poly(0, 1, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY;
 		poly.A(0, 2, 0) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(0, 3, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
+		poly.A(0, 3, 0) = (-(Math::GetValue(2))*b0 + b1)*invDY;
 
 		b0 = (FY[1][0][0] - poly(0, 1, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX2;
 		b1 = (FXY[1][0][0] - poly(1, 1, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 1, 0) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(3, 1, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
+		poly.A(3, 1, 0) = (-(Math::GetValue(2))*b0 + b1)*invDX;
 
 		b0 = (FX[0][1][0] - poly(1, 0, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY2;
 		b1 = (FXY[0][1][0] - poly(1, 1, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY;
 		poly.A(1, 2, 0) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(1, 3, 0) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
+		poly.A(1, 3, 0) = (-(Math::GetValue(2))*b0 + b1)*invDY;
 
 		b0 = (F[1][1][0] - poly(0, 0, 0, dx, dy, Math<Real>::GetValue(0)))*invDX2*invDY2;
 		b1 = (FX[1][1][0] - poly(1, 0, 0, dx, dy, Math<Real>::GetValue(0)))*invDX*invDY2;
 		b2 = (FY[1][1][0] - poly(0, 1, 0, dx, dy, Math<Real>::GetValue(0)))*invDX2*invDY;
 		b3 = (FXY[1][1][0] - poly(1, 1, 0, dx, dy, Math<Real>::GetValue(0)))*invDX*invDY;
 		poly.A(2, 2, 0) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
-		poly.A(3, 2, 0) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
-		poly.A(2, 3, 0) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDY;
-		poly.A(3, 3, 0) = (((Real)4)*b0 - (static_cast<Real>(2))*b1 - (static_cast<Real>(2))*b2 + b3)*
+		poly.A(3, 2, 0) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (Math::GetValue(2))*b2 - b3)*invDX;
+		poly.A(2, 3, 0) = (-((Real)6)*b0 + (Math::GetValue(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDY;
+		poly.A(3, 3, 0) = (((Real)4)*b0 - (Math::GetValue(2))*b1 - (Math::GetValue(2))*b2 + b3)*
 			invDX*invDY;
 
 		// solve for Ai0k
 		b0 = (F[0][0][1] - poly(0, 0, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ2;
 		b1 = (FZ[0][0][1] - poly(0, 0, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ;
 		poly.A(0, 0, 2) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(0, 0, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDZ;
+		poly.A(0, 0, 3) = (-(Math::GetValue(2))*b0 + b1)*invDZ;
 
 		b0 = (FZ[1][0][0] - poly(0, 0, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX2;
 		b1 = (FXZ[1][0][0] - poly(1, 0, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 0, 1) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(3, 0, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
+		poly.A(3, 0, 1) = (-(Math::GetValue(2))*b0 + b1)*invDX;
 
 		b0 = (FX[0][0][1] - poly(1, 0, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ2;
 		b1 = (FXZ[0][0][1] - poly(1, 0, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ;
 		poly.A(1, 0, 2) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(1, 0, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDZ;
+		poly.A(1, 0, 3) = (-(Math::GetValue(2))*b0 + b1)*invDZ;
 
 		b0 = (F[1][0][1] - poly(0, 0, 0, dx, Math<Real>::GetValue(0), dz))*invDX2*invDZ2;
 		b1 = (FX[1][0][1] - poly(1, 0, 0, dx, Math<Real>::GetValue(0), dz))*invDX*invDZ2;
 		b2 = (FZ[1][0][1] - poly(0, 0, 1, dx, Math<Real>::GetValue(0), dz))*invDX2*invDZ;
 		b3 = (FXZ[1][0][1] - poly(1, 0, 1, dx, Math<Real>::GetValue(0), dz))*invDX*invDZ;
 		poly.A(2, 0, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
-		poly.A(3, 0, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
-		poly.A(2, 0, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
-		poly.A(3, 0, 3) = (((Real)4)*b0 - (static_cast<Real>(2))*b1 - (static_cast<Real>(2))*b2 + b3)*
+		poly.A(3, 0, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (Math::GetValue(2))*b2 - b3)*invDX;
+		poly.A(2, 0, 3) = (-((Real)6)*b0 + (Math::GetValue(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
+		poly.A(3, 0, 3) = (((Real)4)*b0 - (Math::GetValue(2))*b1 - (Math::GetValue(2))*b2 + b3)*
 			invDX*invDZ;
 
 		// solve for A0jk
 		b0 = (FZ[0][1][0] - poly(0, 0, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY2;
 		b1 = (FYZ[0][1][0] - poly(0, 1, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY;
 		poly.A(0, 2, 1) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(0, 3, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
+		poly.A(0, 3, 1) = (-(Math::GetValue(2))*b0 + b1)*invDY;
 
 		b0 = (FY[0][0][1] - poly(0, 1, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ2;
 		b1 = (FYZ[0][0][1] - poly(0, 1, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ;
 		poly.A(0, 1, 2) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(0, 1, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDZ;
+		poly.A(0, 1, 3) = (-(Math::GetValue(2))*b0 + b1)*invDZ;
 
 		b0 = (F[0][1][1] - poly(0, 0, 0, Math<Real>::GetValue(0), dy, dz))*invDY2*invDZ2;
 		b1 = (FY[0][1][1] - poly(0, 1, 0, Math<Real>::GetValue(0), dy, dz))*invDY*invDZ2;
 		b2 = (FZ[0][1][1] - poly(0, 0, 1, Math<Real>::GetValue(0), dy, dz))*invDY2*invDZ;
 		b3 = (FYZ[0][1][1] - poly(0, 1, 1, Math<Real>::GetValue(0), dy, dz))*invDY*invDZ;
 		poly.A(0, 2, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
-		poly.A(0, 3, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDY;
-		poly.A(0, 2, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
-		poly.A(0, 3, 3) = (((Real)4)*b0 - (static_cast<Real>(2))*b1 - (static_cast<Real>(2))*b2 + b3)*
+		poly.A(0, 3, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (Math::GetValue(2))*b2 - b3)*invDY;
+		poly.A(0, 2, 3) = (-((Real)6)*b0 + (Math::GetValue(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
+		poly.A(0, 3, 3) = (((Real)4)*b0 - (Math::GetValue(2))*b1 - (Math::GetValue(2))*b2 + b3)*
 			invDY*invDZ;
 
 		// solve for Aij1
 		b0 = (FYZ[1][0][0] - poly(0, 1, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX2;
 		b1 = (FXYZ[1][0][0] - poly(1, 1, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0)))*invDX;
 		poly.A(2, 1, 1) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(3, 1, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDX;
+		poly.A(3, 1, 1) = (-(Math::GetValue(2))*b0 + b1)*invDX;
 
 		b0 = (FXZ[0][1][0] - poly(1, 0, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY2;
 		b1 = (FXYZ[0][1][0] - poly(1, 1, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0)))*invDY;
 		poly.A(1, 2, 1) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(1, 3, 1) = (-(static_cast<Real>(2))*b0 + b1)*invDY;
+		poly.A(1, 3, 1) = (-(Math::GetValue(2))*b0 + b1)*invDY;
 
 		b0 = (FZ[1][1][0] - poly(0, 0, 1, dx, dy, Math<Real>::GetValue(0)))*invDX2*invDY2;
 		b1 = (FXZ[1][1][0] - poly(1, 0, 1, dx, dy, Math<Real>::GetValue(0)))*invDX*invDY2;
 		b2 = (FYZ[1][1][0] - poly(0, 1, 1, dx, dy, Math<Real>::GetValue(0)))*invDX2*invDY;
 		b3 = (FXYZ[1][1][0] - poly(1, 1, 1, dx, dy, Math<Real>::GetValue(0)))*invDX*invDY;
 		poly.A(2, 2, 1) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
-		poly.A(3, 2, 1) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
-		poly.A(2, 3, 1) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDY;
-		poly.A(3, 3, 1) = (((Real)4)*b0 - (static_cast<Real>(2))*b1 - (static_cast<Real>(2))*b2 + b3)*
+		poly.A(3, 2, 1) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (Math::GetValue(2))*b2 - b3)*invDX;
+		poly.A(2, 3, 1) = (-((Real)6)*b0 + (Math::GetValue(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDY;
+		poly.A(3, 3, 1) = (((Real)4)*b0 - (Math::GetValue(2))*b1 - (Math::GetValue(2))*b2 + b3)*
 			invDX*invDY;
 
 		// solve for Ai1k
 		b0 = (FXY[0][0][1] - poly(1, 1, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ2;
 		b1 = (FXYZ[0][0][1] - poly(1, 1, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz))*invDZ;
 		poly.A(1, 1, 2) = (static_cast<Real>(3))*b0 - b1;
-		poly.A(1, 1, 3) = (-(static_cast<Real>(2))*b0 + b1)*invDZ;
+		poly.A(1, 1, 3) = (-(Math::GetValue(2))*b0 + b1)*invDZ;
 
 		b0 = (FY[1][0][1] - poly(0, 1, 0, dx, Math<Real>::GetValue(0), dz))*invDX2*invDZ2;
 		b1 = (FXY[1][0][1] - poly(1, 1, 0, dx, Math<Real>::GetValue(0), dz))*invDX*invDZ2;
 		b2 = (FYZ[1][0][1] - poly(0, 1, 1, dx, Math<Real>::GetValue(0), dz))*invDX2*invDZ;
 		b3 = (FXYZ[1][0][1] - poly(1, 1, 1, dx, Math<Real>::GetValue(0), dz))*invDX*invDZ;
 		poly.A(2, 1, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
-		poly.A(3, 1, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDX;
-		poly.A(2, 1, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
-		poly.A(3, 1, 3) = (((Real)4)*b0 - (static_cast<Real>(2))*b1 - (static_cast<Real>(2))*b2 + b3)*
+		poly.A(3, 1, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (Math::GetValue(2))*b2 - b3)*invDX;
+		poly.A(2, 1, 3) = (-((Real)6)*b0 + (Math::GetValue(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
+		poly.A(3, 1, 3) = (((Real)4)*b0 - (Math::GetValue(2))*b1 - (Math::GetValue(2))*b2 + b3)*
 			invDX*invDZ;
 
 		// solve for A1jk
@@ -1040,9 +1040,9 @@ namespace Mathematics
 		b2 = (FXZ[0][1][1] - poly(1, 0, 1, Math<Real>::GetValue(0), dy, dz))*invDY2*invDZ;
 		b3 = (FXYZ[0][1][1] - poly(1, 1, 1, Math<Real>::GetValue(0), dy, dz))*invDY*invDZ;
 		poly.A(1, 2, 2) = ((Real)9)*b0 - (static_cast<Real>(3))*b1 - (static_cast<Real>(3))*b2 + b3;
-		poly.A(1, 3, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (static_cast<Real>(2))*b2 - b3)*invDY;
-		poly.A(1, 2, 3) = (-((Real)6)*b0 + (static_cast<Real>(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
-		poly.A(1, 3, 3) = (((Real)4)*b0 - (static_cast<Real>(2))*b1 - (static_cast<Real>(2))*b2 + b3)*
+		poly.A(1, 3, 2) = (-((Real)6)*b0 + (static_cast<Real>(3))*b1 + (Math::GetValue(2))*b2 - b3)*invDY;
+		poly.A(1, 2, 3) = (-((Real)6)*b0 + (Math::GetValue(2))*b1 + (static_cast<Real>(3))*b2 - b3)*invDZ;
+		poly.A(1, 3, 3) = (((Real)4)*b0 - (Math::GetValue(2))*b1 - (Math::GetValue(2))*b2 + b3)*
 			invDY*invDZ;
 
 		// solve for remaining Aijk with i >= 2, j >= 2, k >= 2
@@ -1055,13 +1055,13 @@ namespace Mathematics
 		b6 = (FYZ[1][1][1] - poly(0, 1, 1, dx, dy, dz))*invDX2*invDY*invDZ;
 		b7 = (FXYZ[1][1][1] - poly(1, 1, 1, dx, dy, dz))*invDX*invDY*invDZ;
 		poly.A(2, 2, 2) = (static_cast<Real>(27))*b0 - ((Real)9)*b1 - ((Real)9)*b2 -	((Real)9)*b3 + (static_cast<Real>(3))*b4 + (static_cast<Real>(3))*b5 + (static_cast<Real>(3))*b6 - b7;
-		poly.A(3, 2, 2) = (((Real)-18)*b0 + ((Real)9)*b1 + ((Real)6)*b2 +((Real)6)*b3 - (static_cast<Real>(3))*b4 - (static_cast<Real>(3))*b5 - (static_cast<Real>(2))*b6 + b7)*invDX;
-		poly.A(2, 3, 2) = (((Real)-18)*b0 + ((Real)6)*b1 + ((Real)9)*b2 +((Real)6)*b3 - (static_cast<Real>(3))*b4 - (static_cast<Real>(2))*b5 - (static_cast<Real>(3))*b6 + b7)*invDY;
-		poly.A(2, 2, 3) = (((Real)-18)*b0 + ((Real)6)*b1 + ((Real)6)*b2 +((Real)9)*b3 - (static_cast<Real>(2))*b4 - (static_cast<Real>(3))*b5 - (static_cast<Real>(3))*b6 + b7)*invDZ;
-		poly.A(3, 3, 2) = ((static_cast<Real>(12))*b0 - ((Real)6)*b1 - ((Real)6)*b2 -((Real)4)*b3 + (static_cast<Real>(3))*b4 + (static_cast<Real>(2))*b5 + (static_cast<Real>(2))*b6 - b7)*invDX*invDY;
-		poly.A(3, 2, 3) = ((static_cast<Real>(12))*b0 - ((Real)6)*b1 - ((Real)4)*b2 -((Real)6)*b3 + (static_cast<Real>(2))*b4 + (static_cast<Real>(3))*b5 + (static_cast<Real>(2))*b6 - b7)*	invDX*invDZ;
-		poly.A(2, 3, 3) = ((static_cast<Real>(12))*b0 - ((Real)4)*b1 - ((Real)6)*b2 -((Real)6)*b3 + (static_cast<Real>(2))*b4 + (static_cast<Real>(2))*b5 + (static_cast<Real>(3))*b6 - b7)*	invDY*invDZ;
-		poly.A(3, 3, 3) = (((Real)-8)*b0 + ((Real)4)*b1 + ((Real)4)*b2 +((Real)4)*b3 - (static_cast<Real>(2))*b4 - (static_cast<Real>(2))*b5 - (static_cast<Real>(2))*b6 + b7)*	invDX*invDY*invDZ;
+		poly.A(3, 2, 2) = (((Real)-18)*b0 + ((Real)9)*b1 + ((Real)6)*b2 +((Real)6)*b3 - (static_cast<Real>(3))*b4 - (static_cast<Real>(3))*b5 - (Math::GetValue(2))*b6 + b7)*invDX;
+		poly.A(2, 3, 2) = (((Real)-18)*b0 + ((Real)6)*b1 + ((Real)9)*b2 +((Real)6)*b3 - (static_cast<Real>(3))*b4 - (Math::GetValue(2))*b5 - (static_cast<Real>(3))*b6 + b7)*invDY;
+		poly.A(2, 2, 3) = (((Real)-18)*b0 + ((Real)6)*b1 + ((Real)6)*b2 +((Real)9)*b3 - (Math::GetValue(2))*b4 - (static_cast<Real>(3))*b5 - (static_cast<Real>(3))*b6 + b7)*invDZ;
+		poly.A(3, 3, 2) = ((static_cast<Real>(12))*b0 - ((Real)6)*b1 - ((Real)6)*b2 -((Real)4)*b3 + (static_cast<Real>(3))*b4 + (Math::GetValue(2))*b5 + (Math::GetValue(2))*b6 - b7)*invDX*invDY;
+		poly.A(3, 2, 3) = ((static_cast<Real>(12))*b0 - ((Real)6)*b1 - ((Real)4)*b2 -((Real)6)*b3 + (Math::GetValue(2))*b4 + (static_cast<Real>(3))*b5 + (Math::GetValue(2))*b6 - b7)*	invDX*invDZ;
+		poly.A(2, 3, 3) = ((static_cast<Real>(12))*b0 - ((Real)4)*b1 - ((Real)6)*b2 -((Real)6)*b3 + (Math::GetValue(2))*b4 + (Math::GetValue(2))*b5 + (static_cast<Real>(3))*b6 - b7)*	invDY*invDZ;
+		poly.A(3, 3, 3) = (((Real)-8)*b0 + ((Real)4)*b1 + ((Real)4)*b2 +((Real)4)*b3 - (Math::GetValue(2))*b4 - (Math::GetValue(2))*b5 - (Math::GetValue(2))*b6 + b7)*	invDX*invDY*invDZ;
 	}
 
 	template <typename Real>
@@ -1188,9 +1188,9 @@ namespace Mathematics
 	Real IntpAkimaUniform3<Real>::Polynomial::operator() (Real x, Real y, Real z)
 		const
 	{
-		Real xPow[4] = { static_cast<Real>(1), x, x*x, x*x*x };
-		Real yPow[4] = { static_cast<Real>(1), y, y*y, y*y*y };
-		Real zPow[4] = { static_cast<Real>(1), z, z*z, z*z*z };
+		Real xPow[4] = { Math::GetValue(1), x, x*x, x*x*x };
+		Real yPow[4] = { Math::GetValue(1), y, y*y, y*y*y };
+		Real zPow[4] = { Math::GetValue(1), z, z*z, z*z*z };
 
 		Real p = Math<Real>::GetValue(0);
 		for (int iz = 0; iz <= 3; ++iz)
@@ -1215,21 +1215,21 @@ namespace Mathematics
 		switch (xOrder)
 		{
 		case 0:
-			xPow[0] = static_cast<Real>(1);
+			xPow[0] = Math::GetValue(1);
 			xPow[1] = x;
 			xPow[2] = x * x;
 			xPow[3] = x * x*x;
 			break;
 		case 1:
 			xPow[0] = Math<Real>::GetValue(0);
-			xPow[1] = static_cast<Real>(1);
-			xPow[2] = (static_cast<Real>(2))*x;
+			xPow[1] = Math::GetValue(1);
+			xPow[2] = (Math::GetValue(2))*x;
 			xPow[3] = (static_cast<Real>(3))*x*x;
 			break;
 		case 2:
 			xPow[0] = Math<Real>::GetValue(0);
 			xPow[1] = Math<Real>::GetValue(0);
-			xPow[2] = static_cast<Real>(2);
+			xPow[2] = Math::GetValue(2);
 			xPow[3] = ((Real)6)*x;
 			break;
 		case 3:
@@ -1246,21 +1246,21 @@ namespace Mathematics
 		switch (yOrder)
 		{
 		case 0:
-			yPow[0] = static_cast<Real>(1);
+			yPow[0] = Math::GetValue(1);
 			yPow[1] = y;
 			yPow[2] = y * y;
 			yPow[3] = y * y*y;
 			break;
 		case 1:
 			yPow[0] = Math<Real>::GetValue(0);
-			yPow[1] = static_cast<Real>(1);
-			yPow[2] = (static_cast<Real>(2))*y;
+			yPow[1] = Math::GetValue(1);
+			yPow[2] = (Math::GetValue(2))*y;
 			yPow[3] = (static_cast<Real>(3))*y*y;
 			break;
 		case 2:
 			yPow[0] = Math<Real>::GetValue(0);
 			yPow[1] = Math<Real>::GetValue(0);
-			yPow[2] = static_cast<Real>(2);
+			yPow[2] = Math::GetValue(2);
 			yPow[3] = ((Real)6)*y;
 			break;
 		case 3:
@@ -1277,21 +1277,21 @@ namespace Mathematics
 		switch (zOrder)
 		{
 		case 0:
-			zPow[0] = static_cast<Real>(1);
+			zPow[0] = Math::GetValue(1);
 			zPow[1] = z;
 			zPow[2] = z * z;
 			zPow[3] = z * z*z;
 			break;
 		case 1:
 			zPow[0] = Math<Real>::GetValue(0);
-			zPow[1] = static_cast<Real>(1);
-			zPow[2] = (static_cast<Real>(2))*z;
+			zPow[1] = Math::GetValue(1);
+			zPow[2] = (Math::GetValue(2))*z;
 			zPow[3] = (static_cast<Real>(3))*z*z;
 			break;
 		case 2:
 			zPow[0] = Math<Real>::GetValue(0);
 			zPow[1] = Math<Real>::GetValue(0);
-			zPow[2] = static_cast<Real>(2);
+			zPow[2] = Math::GetValue(2);
 			zPow[3] = ((Real)6)*z;
 			break;
 		case 3:

@@ -35,9 +35,9 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>
 	::ContAlignedBox(const Points& points)
 {
 	auto aabb =	Vector2DTools<Real>::ComputeExtremes(points);
-	auto halfDiagonal = static_cast<Real>(0.5) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
+	auto halfDiagonal =  Math::GetRational(1,2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
-	return Box2{ static_cast<Real>(0.5) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
+	return Box2{  Math::GetRational(1,2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
 				 Vector2D::sm_UnitX, Vector2D::sm_UnitY,
 				 halfDiagonal[0], halfDiagonal[1] };
 }
@@ -76,11 +76,11 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>
 
 	auto secondBoundary = std::minmax_element(secondDotCollection.begin(), secondDotCollection.end());
  
-	auto center = box.GetCenter() + (static_cast<Real>(0.5) * (*firstBoundary.first + *firstBoundary.second) * box.GetFirstAxis() +
-				  static_cast<Real>(0.5) * (*secondBoundary.first + *secondBoundary.second) * box.GetSecondAxis());
+	auto center = box.GetCenter() + ( Math::GetRational(1,2) * (*firstBoundary.first + *firstBoundary.second) * box.GetFirstAxis() +
+				   Math::GetRational(1,2) * (*secondBoundary.first + *secondBoundary.second) * box.GetSecondAxis());
 
-	auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * static_cast<Real>(0.5);
-	auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * static_cast<Real>(0.5);
+	auto firstExtent = (*firstBoundary.second - *firstBoundary.first) *  Math::GetRational(1,2);
+	auto secondExtent = (*secondBoundary.second - *secondBoundary.first) *  Math::GetRational(1,2);
 
 	return Box2{ center, box.GetFirstAxis(), box.GetSecondAxis(), firstExtent, secondExtent };
 }
@@ -91,14 +91,14 @@ bool Mathematics::ContBox2<Real>
 	::InBox(const Vector2D& point, const Box2& box)
 {
 	auto diff = point - box.GetCenter();
-	auto firstCoeff = Vector2DTools<Real>::DotProduct(diff, box.GetFirstAxis());
+	auto firstCoeff = Vector2DTools<Real>::DotProduct(diff, box.GetAxis0());
 
-	if (box.GetFirstExtent() + box.GetEpsilon() < firstCoeff)
+	if (box.GetExtent0() + box.GetEpsilon() < firstCoeff)
 		return false;
 
-	auto secondCoeff = Vector2DTools<Real>::DotProduct(diff, box.GetSecondAxis());
+	auto secondCoeff = Vector2DTools<Real>::DotProduct(diff, box.GetAxis1());
 
-	if (box.GetSecondExtent() + box.GetEpsilon() < secondCoeff)
+	if (box.GetExtent1() + box.GetEpsilon() < secondCoeff)
 		return false;
     
     return true;
@@ -111,19 +111,19 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>
 {
 	// 在包围盒中心的第一个猜想。输入包围盒顶点投影到确定的平均包围盒的轴，
 	// 此值将在后面进行更新。
-	auto center = static_cast<Real>(0.5) * (lhs.GetCenter() + rhs.GetCenter());
+	auto center =  Math::GetRational(1,2) * (lhs.GetCenter() + rhs.GetCenter());
 
 	// 合并的包围盒的轴是输入包围盒轴的平均值。
 	// 如果需要的话，第二个包围盒的轴被取负，这样它们形成与第一个包围盒的轴线为锐角。
 	Vector2D firstAxis;
-	if (Math<Real>::GetValue(0) <= Vector2DTools<Real>::DotProduct(lhs.GetFirstAxis(),rhs.GetFirstAxis()))
+	if (Math<Real>::GetValue(0) <= Vector2DTools<Real>::DotProduct(lhs.GetAxis0(),rhs.GetAxis0()))
     {
-		firstAxis = static_cast<Real>(0.5) * (lhs.GetFirstAxis() + rhs.GetFirstAxis());
+		firstAxis =  Math::GetRational(1,2) * (lhs.GetAxis0() + rhs.GetAxis0());
 		firstAxis.Normalize();
     }
     else
     {
-		firstAxis = static_cast<Real>(0.5) * (lhs.GetFirstAxis() - rhs.GetFirstAxis());
+		firstAxis =  Math::GetRational(1,2) * (lhs.GetAxis0() - rhs.GetAxis0());
 		firstAxis.Normalize();
     }
 	auto secondAxis = -Vector2DTools<Real>::GetPerp(firstAxis);
@@ -164,11 +164,11 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>
 
 	// [min,max] 为合并后的包围盒的轴在坐标系中为轴对齐包围盒。
 	// 更新当前包围盒中心成为新包围盒的中心。计算基于新的中心的范围。
-	center += static_cast<Real>(0.5) * (*firstBoundary.first + *firstBoundary.second) * firstAxis +
-		      static_cast<Real>(0.5) * (*secondBoundary.first + *secondBoundary.second) * secondAxis;
+	center +=  Math::GetRational(1,2) * (*firstBoundary.first + *firstBoundary.second) * firstAxis +
+		       Math::GetRational(1,2) * (*secondBoundary.first + *secondBoundary.second) * secondAxis;
 
-	auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * static_cast<Real>(0.5);
-	auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * static_cast<Real>(0.5);
+	auto firstExtent = (*firstBoundary.second - *firstBoundary.first) *  Math::GetRational(1,2);
+	auto secondExtent = (*secondBoundary.second - *secondBoundary.first) *  Math::GetRational(1,2);
 
 	return Box2{ center, firstAxis, secondAxis, firstExtent, secondExtent };
 }

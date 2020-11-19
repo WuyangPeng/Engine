@@ -39,9 +39,9 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 	auto kMOrigin = mLine.GetOrigin() + t * lhsVelocity;
 	auto kMCenter = mBox.GetCenter() + t * rhsVelocity;
 	Line3 kMLine{ kMOrigin,mLine.GetDirection() };
-	Box3 kMBox{ kMCenter,mBox.GetFirstAxis(),
-				mBox.GetSecondAxis(),mBox.GetThirdAxis(),mBox.GetFirstExtent(),
-				mBox.GetSecondExtent(),mBox.GetThirdExtent() };
+	Box3 kMBox{ kMCenter,mBox.GetAxis0(),
+				mBox.GetAxis1(),mBox.GetThirdAxis(),mBox.GetExtent0(),
+				mBox.GetExtent1(),mBox.GetThirdExtent() };
 
 	return DistLine3Box3<Real>{ kMLine, kMBox }.GetSquared();
 }
@@ -59,11 +59,11 @@ typename const Mathematics::DistLine3Box3<Real>::DistanceResult Mathematics::Dis
 {
 	// Compute coordinates of line in box coordinate system.
 	auto diff = mLine.GetOrigin() - mBox.GetCenter();
-	Vector3D point{ Vector3DTools::DotProduct(diff,mBox.GetFirstAxis()),
-					Vector3DTools::DotProduct(diff,mBox.GetSecondAxis()),
+	Vector3D point{ Vector3DTools::DotProduct(diff,mBox.GetAxis0()),
+					Vector3DTools::DotProduct(diff,mBox.GetAxis1()),
 					Vector3DTools::DotProduct(diff,mBox.GetThirdAxis()) };
-	Vector3D direction{ Vector3DTools::DotProduct(mLine.GetDirection(),mBox.GetFirstAxis()),
-						Vector3DTools::DotProduct(mLine.GetDirection(),mBox.GetSecondAxis()),
+	Vector3D direction{ Vector3DTools::DotProduct(mLine.GetDirection(),mBox.GetAxis0()),
+						Vector3DTools::DotProduct(mLine.GetDirection(),mBox.GetAxis1()),
 						Vector3DTools::DotProduct(mLine.GetDirection(),mBox.GetThirdAxis()) };
 
 	// Apply reflections so that direction vector has nonnegative components.
@@ -186,7 +186,7 @@ void Mathematics::DistLine3Box3<Real>
 			// v[i1] >= -e[i1], v[i2] < -e[i2]
 			lenSqr = dir[i0] * dir[i0] + dir[i2] * dir[i2];
 			tmp = lenSqr * PpE[i1] - dir[i1] * (dir[i0] * PmE[i0] + dir[i2] * PpE[i2]);
-			if (tmp <= (static_cast<Real>(2) * lenSqr * mBox.GetExtent(i1)))
+			if (tmp <= (Math::GetValue(2) * lenSqr * mBox.GetExtent(i1)))
 			{
 				t = tmp / lenSqr;
 				lenSqr += dir[i1] * dir[i1];
@@ -221,7 +221,7 @@ void Mathematics::DistLine3Box3<Real>
 			// v[i1] < -e[i1], v[i2] >= -e[i2]
 			lenSqr = dir[i0] * dir[i0] + dir[i1] * dir[i1];
 			tmp = lenSqr * PpE[i2] - dir[i2] * (dir[i0] * PmE[i0] + dir[i1] * PpE[i1]);
-			if (tmp <= (static_cast<Real>(2))*lenSqr*mBox.GetExtent(i2))
+			if (tmp <= (Math::GetValue(2))*lenSqr*mBox.GetExtent(i2))
 			{
 				t = tmp / lenSqr;
 				lenSqr += dir[i2] * dir[i2];
@@ -256,7 +256,7 @@ void Mathematics::DistLine3Box3<Real>
 			if (tmp >= Math<Real>::GetValue(0))
 			{
 				// v[i1]-edge is closest
-				if (tmp <= (static_cast<Real>(2))*lenSqr*mBox.GetExtent(i1))
+				if (tmp <= (Math::GetValue(2))*lenSqr*mBox.GetExtent(i1))
 				{
 					t = tmp / lenSqr;
 					lenSqr += dir[i1] * dir[i1];
@@ -290,7 +290,7 @@ void Mathematics::DistLine3Box3<Real>
 			if (tmp >= Math<Real>::GetValue(0))
 			{
 				// v[i2]-edge is closest
-				if (tmp <= (static_cast<Real>(2))*lenSqr*mBox.GetExtent(i2))
+				if (tmp <= (Math::GetValue(2))*lenSqr*mBox.GetExtent(i2))
 				{
 					t = tmp / lenSqr;
 					lenSqr += dir[i2] * dir[i2];
@@ -399,14 +399,14 @@ void Mathematics::DistLine3Box3<Real>
 		delta = prod0 - dir[i0] * PpE1;
 		if (delta >= Math<Real>::GetValue(0))
 		{
-			invLSqr = (static_cast<Real>(1)) / (dir[i0] * dir[i0] + dir[i1] * dir[i1]);
+			invLSqr = (Math::GetValue(1)) / (dir[i0] * dir[i0] + dir[i1] * dir[i1]);
 			sqrDistance += delta * delta*invLSqr;
 			pnt[i1] = -mBox.GetExtent(i1);
 			mLineParameter = -(dir[i0] * PmE0 + dir[i1] * PpE1) * invLSqr;
 		}
 		else
 		{
-			inv = (static_cast<Real>(1)) / dir[i0];
+			inv = (Math::GetValue(1)) / dir[i0];
 			pnt[i1] -= prod0 * inv;
 			mLineParameter = -PmE0 * inv;
 		}
@@ -420,14 +420,14 @@ void Mathematics::DistLine3Box3<Real>
 		delta = prod1 - dir[i1] * PpE0;
 		if (delta >= Math<Real>::GetValue(0))
 		{
-			invLSqr = (static_cast<Real>(1)) / (dir[i0] * dir[i0] + dir[i1] * dir[i1]);
+			invLSqr = (Math::GetValue(1)) / (dir[i0] * dir[i0] + dir[i1] * dir[i1]);
 			sqrDistance += delta * delta*invLSqr;
 			pnt[i0] = -mBox.GetExtent(i0);
 			mLineParameter = -(dir[i0] * PpE0 + dir[i1] * PmE1)*invLSqr;
 		}
 		else
 		{
-			inv = (static_cast<Real>(1)) / dir[i1];
+			inv = (Math::GetValue(1)) / dir[i1];
 			pnt[i0] -= prod1 * inv;
 			mLineParameter = -PmE1 * inv;
 		}

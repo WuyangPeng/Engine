@@ -65,7 +65,7 @@ Mathematics::Delaunay3<Real>
     {
         // Transform the vertices to the cube [0,1]^3.
         mMin = info.GetMinExtreme();
-        mScale = (static_cast<Real>(1))/info.GetMaxRange();
+        mScale = (Math::GetValue(1))/info.GetMaxRange();
         for (i = 0; i < mNumVertices; ++i)
         {
             mSVertices[i] = (mVertices[i] - mMin)*mScale;
@@ -90,7 +90,7 @@ Mathematics::Delaunay3<Real>
         else // queryType == Query::QT_REAL
         {
             // No scaling for floating point.
-            expand = static_cast<Real>(1);
+            expand = Math::GetValue(1);
             mQuery = NEW0 Query3<Real>(mSVertices);
         }
 
@@ -104,7 +104,7 @@ Mathematics::Delaunay3<Real>
     {
         // No transformation needed for exact rational arithmetic.
         mMin = Vector3D<Real>::sm_Zero;
-        mScale = static_cast<Real>(1);
+        mScale = Math::GetValue(1);
         memcpy(&mSVertices[0], &mVertices[0], mNumVertices*sizeof(Vector3D<Real>));
 
         if (queryType == QueryType::Rational)

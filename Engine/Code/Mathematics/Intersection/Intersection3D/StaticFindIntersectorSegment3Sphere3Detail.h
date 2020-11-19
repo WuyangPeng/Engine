@@ -51,7 +51,7 @@ void Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
     }
 
 	auto tmp0 = mSegment.GetExtent()*mSegment.GetExtent() + a0;
-	auto tmp1 = (static_cast<Real>(2))*a1*mSegment.GetExtent();
+	auto tmp1 = (Math::GetValue(2))*a1*mSegment.GetExtent();
 	auto qm = tmp0 - tmp1;
 	auto qp = tmp0 + tmp1;
     Real root;

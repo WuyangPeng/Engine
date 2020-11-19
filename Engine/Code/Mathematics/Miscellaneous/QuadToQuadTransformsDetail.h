@@ -28,17 +28,17 @@ namespace Mathematics
 
 		// Compute homogeneous transform of quadrilateral
 		// {(0,0),(1,0),(a,b),(0,1)} to square {(0,0),(1,0),(1,1),(0,1)}.
-		mG[0] = (corner.GetY() - static_cast<Real>(1)) / corner.GetX();
-		mG[1] = (corner.GetX() - static_cast<Real>(1)) / corner.GetY();
-		mD[0] = static_cast<Real>(1) + mG.GetX();
-		mD[1] = static_cast<Real>(1) + mG.GetY();
+		mG[0] = (corner.GetY() - Math::GetValue(1)) / corner.GetX();
+		mG[1] = (corner.GetX() - Math::GetValue(1)) / corner.GetY();
+		mD[0] = Math::GetValue(1) + mG.GetX();
+		mD[1] = Math::GetValue(1) + mG.GetY();
 	}
 
 	template <typename Real>
 	Vector2D<Real> HmQuadToSqr<Real>::Transform(const Vector2D<Real>& P)
 	{
 		Vector2D<Real> prod = mM * (P - mT);
-		Real invDenom = (static_cast<Real>(1)) / (static_cast<Real>(1) + Vector2DTools<Real>::DotProduct(mG, prod));
+		Real invDenom = (Math::GetValue(1)) / (Math::GetValue(1) + Vector2DTools<Real>::DotProduct(mG, prod));
 		Vector2D<Real> result = invDenom * prod;
 		result[0] *= mD[0];
 		result[1] *= mD[1];
@@ -62,9 +62,9 @@ namespace Mathematics
 
 		// Compute homogeneous transform of square {(0,0),(1,0),(1,1),(0,1)} to
 		// quadrilateral {(0,0),(1,0),(a,b),(0,1)}.
-		Real invDenom = (static_cast<Real>(1)) / (corner.GetX() + corner.GetY() - static_cast<Real>(1));
-		mG[0] = invDenom * (static_cast<Real>(1) - corner.GetY());
-		mG[1] = invDenom * (static_cast<Real>(1) - corner.GetX());
+		Real invDenom = (Math::GetValue(1)) / (corner.GetX() + corner.GetY() - Math::GetValue(1));
+		mG[0] = invDenom * (Math::GetValue(1) - corner.GetY());
+		mG[1] = invDenom * (Math::GetValue(1) - corner.GetX());
 		mD[0] = invDenom * corner.GetX();
 		mD[1] = invDenom * corner.GetY();
 	}
@@ -72,7 +72,7 @@ namespace Mathematics
 	template <typename Real>
 	Vector2D<Real> HmSqrToQuad<Real>::Transform(const Vector2D<Real>& P)
 	{
-		Real invDenom = (static_cast<Real>(1)) / (static_cast<Real>(1) + Vector2DTools<Real>::DotProduct(mG, P));
+		Real invDenom = (Math::GetValue(1)) / (Math::GetValue(1) + Vector2DTools<Real>::DotProduct(mG, P));
 		Vector2D<Real> result(mD.GetX()*P.GetX(), mD.GetY()*P.GetY());
 		Vector2D<Real> prod = mM * result;
 		result[0] = invDenom * prod.GetX() + mT.GetX();
@@ -107,7 +107,7 @@ namespace Mathematics
 		if (Math<Real>::FAbs(k2) >= Math<Real>::GetZeroTolerance())
 		{
 			// The s-equation is quadratic.
-			Real inv = (static_cast<Real>(0.5)) / k2;
+			Real inv = ( Math::GetRational(1,2)) / k2;
 			Real discr = k1 * k1 - ((Real)4)*k0*k2;
 			Real root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
 
@@ -173,9 +173,9 @@ namespace Mathematics
 		{
 			deviation += SPoint.GetX()*SPoint.GetX();
 		}
-		else if (SPoint.GetX() > static_cast<Real>(1))
+		else if (SPoint.GetX() > Math::GetValue(1))
 		{
-			delta = SPoint.GetX() - static_cast<Real>(1);
+			delta = SPoint.GetX() - Math::GetValue(1);
 			deviation += delta * delta;
 		}
 
@@ -183,9 +183,9 @@ namespace Mathematics
 		{
 			deviation += SPoint.GetY()*SPoint.GetY();
 		}
-		else if (SPoint.GetY() > static_cast<Real>(1))
+		else if (SPoint.GetY() > Math::GetValue(1))
 		{
-			delta = SPoint.GetY() - static_cast<Real>(1);
+			delta = SPoint.GetY() - Math::GetValue(1);
 			deviation += delta * delta;
 		}
 
@@ -204,7 +204,7 @@ namespace Mathematics
 	template <typename Real>
 	Vector2D<Real> BiSqrToQuad<Real>::Transform(const Vector2D<Real>& P)
 	{
-		Vector2D<Real> oneMinusP(static_cast<Real>(1) - P.GetX(), static_cast<Real>(1) - P.GetY());
+		Vector2D<Real> oneMinusP(Math::GetValue(1) - P.GetX(), Math::GetValue(1) - P.GetY());
 		Vector2D<Real> result;
 		result[0] = oneMinusP.GetY()*(oneMinusP.GetX()*mS00.GetX() + P.GetX()*mS10.GetX()) +
 					P.GetY()*(oneMinusP.GetX()*mS01.GetX() + P.GetX()*mS11.GetX());

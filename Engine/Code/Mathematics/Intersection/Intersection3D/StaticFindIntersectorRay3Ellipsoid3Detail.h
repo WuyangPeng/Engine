@@ -48,7 +48,7 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
 	auto  matDiff = M*diff;
 	auto a2 = Vector3DTools::DotProduct(mRay.GetDirection(), matDir);
 	auto a1 = Vector3DTools::DotProduct(mRay.GetDirection(), matDiff);
-	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - static_cast<Real>(1);
+	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
 
     // Intersection occurs if Q(t) has real roots with t >= 0.
 	auto discr = a1*a1 - a0*a2;
@@ -61,7 +61,7 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
     else if (discr > Math<Real>::GetZero())
     {
 		auto root = Math::Sqrt(discr);
-		auto inv = (static_cast<Real>(1))/a2;
+		auto inv = (Math::GetValue(1))/a2;
         t[0] = (-a1 - root)*inv;
         t[1] = (-a1 + root)*inv;
 

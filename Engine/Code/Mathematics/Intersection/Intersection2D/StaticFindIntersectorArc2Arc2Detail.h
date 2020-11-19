@@ -46,9 +46,9 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>
 		// 圆弧是同个圆。 确定圆弧是否重叠。
 		// 令m_LhsArc为<A0，A1>，m_RhsArc为<B0，B1>，
 		// 点围绕圆弧逆时针排列。
-		if (m_RhsArc.Contains(m_LhsArc.GetFirstEnd()))
+		if (m_RhsArc.Contains(m_LhsArc.GetEnd0()))
 		{
-			if (m_RhsArc.Contains(m_LhsArc.GetSecondEnd()))
+			if (m_RhsArc.Contains(m_LhsArc.GetEnd1()))
 			{
 				// m_LhsArc的m_RhsArc里, <B0,A0,A1,B1>.
 				this->SetIntersectionType(IntersectionType::Other);
@@ -56,42 +56,42 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>
 			}
 			else
 			{
-				if (!Vector2DTools::Approximate(m_LhsArc.GetFirstEnd(), m_RhsArc.GetSecondEnd(), this->GetEpsilon()))
+				if (!Vector2DTools::Approximate(m_LhsArc.GetEnd0(), m_RhsArc.GetEnd1(), this->GetEpsilon()))
 				{
 					// m_LhsArc和m_RhsArc重叠, <B0,A0,B1,A1>.
 					this->SetIntersectionType(IntersectionType::Other);
 					m_IntersectionArc = Arc2{ m_LhsArc.GetCenter(),m_LhsArc.GetRadius(),
-											  m_LhsArc.GetFirstEnd(),m_RhsArc.GetSecondEnd(), this->GetEpsilon() };
+											  m_LhsArc.GetEnd0(),m_RhsArc.GetEnd1(), this->GetEpsilon() };
 				}
 				else
 				{
 					// m_LhsArc和m_RhsArc共享端点 <B0,A0,B1,A1>, A0 = B1.
 					this->SetIntersectionType(IntersectionType::Point);
-					m_Point.push_back((m_LhsArc.GetFirstEnd() + m_RhsArc.GetSecondEnd()) / static_cast<Real>(2));
+					m_Point.push_back((m_LhsArc.GetEnd0() + m_RhsArc.GetEnd1()) / Math::GetValue(2));
 				}
 			}
 			return;
 		}
 
-		if (m_RhsArc.Contains(m_LhsArc.GetSecondEnd()))
+		if (m_RhsArc.Contains(m_LhsArc.GetEnd1()))
 		{
-			if (!Vector2DTools::Approximate(m_LhsArc.GetSecondEnd(), m_RhsArc.GetFirstEnd(), this->GetEpsilon()))
+			if (!Vector2DTools::Approximate(m_LhsArc.GetEnd1(), m_RhsArc.GetEnd0(), this->GetEpsilon()))
 			{
 				// m_LhsArc和m_RhsArc重叠, <A0,B0,A1,B1>.
 				this->SetIntersectionType(IntersectionType::Other);
-				m_IntersectionArc = Arc2{ m_LhsArc.GetCenter(), m_LhsArc.GetRadius(), m_RhsArc.GetFirstEnd(), m_LhsArc.GetSecondEnd(), this->GetEpsilon() };
+				m_IntersectionArc = Arc2{ m_LhsArc.GetCenter(), m_LhsArc.GetRadius(), m_RhsArc.GetEnd0(), m_LhsArc.GetEnd1(), this->GetEpsilon() };
 			}
 			else
 			{
 				// m_LhsArc和m_RhsArc共享端点， <A0,B0,A1,B1>, B0 = A1.
 				this->SetIntersectionType(IntersectionType::Point);
-				m_Point.push_back((m_RhsArc.GetFirstEnd() + m_LhsArc.GetSecondEnd()) / static_cast<Real>(2));
+				m_Point.push_back((m_RhsArc.GetEnd0() + m_LhsArc.GetEnd1()) / Math::GetValue(2));
 			}
 
 			return;
 		}
 
-		if (m_LhsArc.Contains(m_RhsArc.GetFirstEnd()))
+		if (m_LhsArc.Contains(m_RhsArc.GetEnd0()))
 		{
 			// m_RhsArc在m_LhsArc里, <A0,B0,B1,A1>.
 			this->SetIntersectionType(IntersectionType::Other);

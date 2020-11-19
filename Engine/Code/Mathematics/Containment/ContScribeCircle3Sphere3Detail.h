@@ -130,11 +130,11 @@ bool Mathematics
         return false;
     }
 
-	auto invA0 = (static_cast<Real>(1))/a0;
-	auto invA1 = (static_cast<Real>(1))/a1;
-	auto invA2 = (static_cast<Real>(1))/a2;
+	auto invA0 = (Math::GetValue(1))/a0;
+	auto invA1 = (Math::GetValue(1))/a1;
+	auto invA2 = (Math::GetValue(1))/a2;
 
-	auto radius = (static_cast<Real>(1)) / (invA0 + invA1 + invA2);
+	auto radius = (Math::GetValue(1)) / (invA0 + invA1 + invA2);
 	auto center = circle.GetRadius()*(invA0*v0 + invA1*v1 + invA2*v2);
 
 	normal.Normalize();

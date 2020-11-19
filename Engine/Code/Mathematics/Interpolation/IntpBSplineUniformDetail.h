@@ -43,13 +43,13 @@ namespace Mathematics
 		for (i = 0; i < mDims; ++i)
 		{
 			Real domSup = (Real)(mDim[i] - mDegree + 1);
-			Real next = (static_cast<Real>(0.5))*(static_cast<Real>(1) + domSup);
+			Real next = ( Math::GetRational(1,2))*(Math::GetValue(1) + domSup);
 			do
 			{
 				mDomMax[i] = next;
-				next = (static_cast<Real>(0.5))*(next + domSup);
+				next = ( Math::GetRational(1,2))*(next + domSup);
 			} while (next < domSup);
-			mDomMin[i] = static_cast<Real>(1);
+			mDomMin[i] = Math::GetValue(1);
 		}
 
 		// Initialize grid extremes.
@@ -92,7 +92,7 @@ namespace Mathematics
 			mCoeff[row] = NEW1<Real>(mDp1);
 			for (int col = row; col <= mDegree; ++col)
 			{
-				mCoeff[row][col] = static_cast<Real>(1);
+				mCoeff[row][col] = Math::GetValue(1);
 				for (i = 0; i <= row - 1; ++i)
 				{
 					mCoeff[row][col] *= (Real)(col - i);
@@ -114,7 +114,7 @@ namespace Mathematics
 				temp /= mDp1;
 			}
 
-			mProduct[j] = static_cast<Real>(1);
+			mProduct[j] = Math::GetValue(1);
 			for (i = 0; i < mDims; ++i)
 			{
 				mProduct[j] *= mMatrix[coord[i]][coord[i + mDims]];
@@ -207,7 +207,7 @@ namespace Mathematics
 	template <typename Real>
 	void IntpBSplineUniform<Real>::SetPolynomial(int order, Real diff,Real* poly)
 	{
-		Real diffPower = static_cast<Real>(1);
+		Real diffPower = Math::GetValue(1);
 		for (int i = order; i <= mDegree; ++i)
 		{
 			poly[i] = mCoeff[order][i] * diffPower;
@@ -335,7 +335,7 @@ namespace Mathematics
 		{
 			factorial *= k;
 		}
-		Real invFactorial = (static_cast<Real>(1)) / factorial;
+		Real invFactorial = (Math::GetValue(1)) / factorial;
 		Real** matrix = NEW1<Real*>(degP1);
 		for (row = 0; row <= degree; ++row)
 		{

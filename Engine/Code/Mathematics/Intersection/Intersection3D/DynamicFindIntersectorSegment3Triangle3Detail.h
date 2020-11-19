@@ -103,7 +103,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>
 	auto dirSqrLen = Vector3DTools::VectorMagnitudeSquared(dirU);
 	auto norUSqrLen = Vector3DTools::VectorMagnitudeSquared(normU);
 	auto norVSqrLen = Vector3DTools::VectorMagnitudeSquared(normV);
-	auto oneMinusEpsilon = static_cast<Real>(1) - Math::GetZeroTolerance();
+	auto oneMinusEpsilon = Math::GetValue(1) - Math::GetZeroTolerance();
 
 	auto i0 = 0;
 	auto i1 = 0;

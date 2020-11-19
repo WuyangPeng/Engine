@@ -79,7 +79,7 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 
 	this->SetIntersectionType(IntersectionType::Point);
 
-	auto inv = (static_cast<Real>(1)) / a2;
+	auto inv = (Math::GetValue(1)) / a2;
 	if (discr < Math::GetZeroTolerance())
 	{
 		// One repeated root, the circle just touches the plane.

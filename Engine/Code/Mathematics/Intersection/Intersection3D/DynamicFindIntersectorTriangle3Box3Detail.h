@@ -81,7 +81,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 		auto NdA = Vector3DTools::DotProduct(triNorm, axis);
 		auto NdN = Vector3DTools::VectorMagnitudeSquared(triNorm);
 		auto AdA = Vector3DTools::VectorMagnitudeSquared(axis);
-		auto sn = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - NdA * NdA / (NdN*AdA)));
+		auto sn = Math::Sqrt(Math::FAbs(Math::GetValue(1) - NdA * NdA / (NdN*AdA)));
 		if (sn < Math::GetZeroTolerance())
 		{
 			coplanar = i0;

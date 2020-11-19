@@ -95,7 +95,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>
 			const auto maxLoop = 2 * std::numeric_limits<Real>::max_exponent;
 			for (auto i = 0; i < maxLoop; ++i)
 			{
-				middleT = static_cast<Real>(0.5) * (beginT + endT);
+				middleT =  Math::GetRational(1,2) * (beginT + endT);
 				if (Math<Real>::FAbs(middleT - beginT) <= m_ZeroThreshold || Math<Real>::FAbs(middleT - endT) <= m_ZeroThreshold)
 				{
 					break;
@@ -103,7 +103,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>
 
 				Vector2D r{ extentMultiplyQueryPoint[0] / (middleT + extentSquared[0]),
 							extentMultiplyQueryPoint[1] / (middleT + extentSquared[1]) };
-				auto lenghtSquaredMinusOne = Vector2DTools<Real>::VectorMagnitudeSquared(r) - static_cast<Real>(1);
+				auto lenghtSquaredMinusOne = Vector2DTools<Real>::VectorMagnitudeSquared(r) - Math::GetValue(1);
 
 				if (Math<Real>::GetValue(0) < lenghtSquaredMinusOne)
 				{
@@ -142,7 +142,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>
 			auto xDividedExtent = extentMultiplyQueryPoint / denom;
 			auto x0de0squared = xDividedExtent * xDividedExtent;
 			m_OutputVector[0] = extent[0] * xDividedExtent;
-			m_OutputVector[1] = extent[1] * Math<Real>::Sqrt(Math<Real>::FAbs(static_cast<Real>(1) - x0de0squared));
+			m_OutputVector[1] = extent[1] * Math<Real>::Sqrt(Math<Real>::FAbs(Math::GetValue(1) - x0de0squared));
 			auto xDifference = m_OutputVector[0] - queryPoint[0];
 			m_SquaredDistance = xDifference * xDifference + m_OutputVector[1] * m_OutputVector[1];
 		}

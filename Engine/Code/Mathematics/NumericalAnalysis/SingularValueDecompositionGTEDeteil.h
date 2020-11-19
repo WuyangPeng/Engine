@@ -187,7 +187,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 	std::fill(uMatrix, uMatrix + mNumRows * mNumRows, Math<Real>::GetZero());
 	for (int d = 0; d < mNumRows; ++d)
 	{
-		uMatrix[d + mNumRows * d] = static_cast<Real>(1);
+		uMatrix[d + mNumRows * d] = Math::GetValue(1);
 	}
 
 	// Multiply the Householder reflections using backward accumulation.
@@ -292,7 +292,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 	std::fill(vMatrix, vMatrix + mNumCols * mNumCols, Math<Real>::GetZero());
 	for (int d = 0; d < mNumCols; ++d)
 	{
-		vMatrix[d + mNumCols * d] = static_cast<Real>(1);
+		vMatrix[d + mNumCols * d] = Math::GetValue(1);
 	}
 
 	// Multiply the Householder reflections using backward accumulation.
@@ -427,7 +427,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 
 		// Compute the rank-1 offset u*w^T.
 		auto invudu = Math::GetValue(1) / udu;
-		auto twoinvudu = invudu * static_cast<Real>(2);
+		auto twoinvudu = invudu * Math::GetValue(2);
 		for (c = i; c < mNumCols; ++c)
 		{
 			mWVector[c] = Math::GetValue(0);
@@ -457,7 +457,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 				mVVector[c] = vc;
 				length += vc * vc;
 			}
-			auto vdv = static_cast<Real>(1);
+			auto vdv = Math::GetValue(1);
 			length = sqrt(length);
 			if (length > Math::GetValue(0))
 			{
@@ -475,7 +475,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 
 			// Compute the rank-1 offset w*v^T.
 			auto invvdv = Math::GetValue(1) / vdv;
-			auto twoinvvdv = invvdv * static_cast<Real>(2);
+			auto twoinvvdv = invvdv * Math::GetValue(2);
 			for (r = i; r < mNumRows; ++r)
 			{
 				mWVector[r] = Math::GetValue(0);
@@ -599,7 +599,7 @@ void Mathematics::SingularValueDecompositionGTE<Real>
 	auto a00 = d1 * d1 + f0 * f0;
 	auto a01 = d1 * f1;
 	auto a11 = d2 * d2 + f1 * f1;
-	auto dif = (a00 - a11) * static_cast<Real>(0.5);
+	auto dif = (a00 - a11) *  Math::GetRational(1,2);
 	auto sgn = (dif >= Math::GetValue(0) ? Math::GetValue(1) : Math::GetValue(-1));
 	auto a01sqr = a01 * a01;
 	auto u = a11 - a01sqr / (dif + sgn * Math::Sqrt(dif*dif + a01sqr));

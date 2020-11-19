@@ -61,12 +61,12 @@ typename const Mathematics::DistLine3Triangle3<Real>::DistanceResult Mathematics
 		auto VdE0 = Vector3DTools::DotProduct(V, edge0);
 		auto VdE1 = Vector3DTools::DotProduct(V, edge1);
 		auto VdDiff = Vector3DTools::DotProduct(V, diff);
-		auto invDet = (static_cast<Real>(1)) / (UdE0*VdE1 - UdE1 * VdE0);
+		auto invDet = (Math::GetValue(1)) / (UdE0*VdE1 - UdE1 * VdE0);
 
 		// Barycentric coordinates for the point of intersection.
 		auto b1 = (VdE1*UdDiff - UdE1 * VdDiff)*invDet;
 		auto b2 = (UdE0*VdDiff - VdE0 * UdDiff)*invDet;
-		auto b0 = static_cast<Real>(1) - b1 - b2;
+		auto b0 = Math::GetValue(1) - b1 - b2;
 
 		if (b0 >= Math<Real>::GetValue(0) && b1 >= Math<Real>::GetValue(0) && b2 >= Math<Real>::GetValue(0))
 		{
@@ -98,10 +98,10 @@ typename const Mathematics::DistLine3Triangle3<Real>::DistanceResult Mathematics
 	auto sqrDist = Math::sm_MaxReal;
 	for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
 	{
-		auto center = (static_cast<Real>(0.5)) * (mTriangle.GetVertex(i0) + mTriangle.GetVertex(i1));
+		auto center = ( Math::GetRational(1,2)) * (mTriangle.GetVertex(i0) + mTriangle.GetVertex(i1));
 		auto direction = mTriangle.GetVertex(i1) - mTriangle.GetVertex(i0);
 
-		auto extent = (static_cast<Real>(0.5)) * Vector3DTools::VectorMagnitude(direction);
+		auto extent = ( Math::GetRational(1,2)) * Vector3DTools::VectorMagnitude(direction);
 		Segment3<Real> segment{ extent, center, direction };
 
 		DistanceLine3Segment3<Real> queryLS{ mLine, segment };
@@ -114,8 +114,8 @@ typename const Mathematics::DistLine3Triangle3<Real>::DistanceResult Mathematics
 
 			mLineParameter = sqrDistTmp.GetLhsParameter();
 			auto ratio = sqrDistTmp.GetRhsParameter() / segment.GetExtent();
-			mTriangleBary[i0] = (static_cast<Real>(0.5)) * (static_cast<Real>(1) - ratio);
-			mTriangleBary[i1] = static_cast<Real>(1) - mTriangleBary[i0];
+			mTriangleBary[i0] = ( Math::GetRational(1,2)) * (Math::GetValue(1) - ratio);
+			mTriangleBary[i1] = Math::GetValue(1) - mTriangleBary[i0];
 			mTriangleBary[3 - i0 - i1] = Math<Real>::GetValue(0);
 		}
 	}

@@ -98,7 +98,7 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 		// contact by using the midpoint of the line segment connecting the
 		// sphere centers.
 		SetContactTime(Math::GetValue(0));
-		mContactPoint = (static_cast<Real>(0.5)) * (mSphere0.GetCenter() + mSphere1.GetCenter());
+		mContactPoint = ( Math::GetRational(1,2)) * (mSphere0.GetCenter() + mSphere1.GetCenter());
 		this->SetIntersectionType(IntersectionType::Other);
 		return;
 	}

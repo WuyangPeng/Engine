@@ -167,7 +167,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 			// queryPoint[]在轴对齐包围盒的子椭圆边界框。
 			// 这中间测试旨在防范除零错误，当对一些i，extentPos[i] == extent[N - 1]。
 			Real xde[3]{ };
-			auto discriminant = static_cast<Real>(1);
+			auto discriminant = Math::GetValue(1);
 			for (auto i = 0u; i < numPos; ++i)
 			{
 				xde[i] = extentMultiplyQueryPoint[i] / denom[i];
@@ -239,7 +239,7 @@ const std::vector<Real> Mathematics::DistancePoint3Ellipsoid3Tool<Real>
 	const auto max = 2 * std::numeric_limits<Real>::max_exponent;
 	for (auto index = 0; index < max; ++index)
 	{
-		middleT = static_cast<Real>(0.5) * (beginT + endT);
+		middleT =  Math::GetRational(1,2) * (beginT + endT);
 		if (Math<Real>::FAbs(middleT - beginT) <= m_ZeroThreshold || Math<Real>::FAbs(middleT - endT) <= m_ZeroThreshold)
 		{
 			break;

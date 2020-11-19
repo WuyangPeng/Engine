@@ -1,5 +1,8 @@
 TODO Level 5
 
-0.5.2.2 
+0.5.2.3 
  
-
+1. （Objects2D）Segment2、Segment3类修正线段的值，按需求添加。
+2. （Objects2D）Polygon2类的类不变式判断多边形为简单多边形。
+3. （Objects2D）Triangle2类的类不变式判断三角形不共线。
+4. （Objects2D）修改Triangle2的DistanceTo函数。

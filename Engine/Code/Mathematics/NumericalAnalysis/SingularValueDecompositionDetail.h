@@ -75,7 +75,7 @@ void Mathematics::SingularValueDecomposition<Real>
 				vector[i] /= beta;
 			}
 		}
-		vector[column] = static_cast<Real>(1);
+		vector[column] = Math::GetValue(1);
 
 		// ”…V-∑¥…‰æÿ’Û‘§≥ÀA°£
 		HouseholderPremultiply(vector, m_Diagonal);
@@ -113,7 +113,7 @@ typename const Mathematics::SingularValueDecomposition<Real>::VariableLengthVect
 		}
 	}
 
-	householderVector[0] = static_cast<Real>(1);
+	householderVector[0] = Math::GetValue(1);
 
 	return householderVector;
 }

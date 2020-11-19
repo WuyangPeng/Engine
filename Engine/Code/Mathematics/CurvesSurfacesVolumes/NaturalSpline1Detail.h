@@ -60,7 +60,7 @@ Real NaturalSpline1<Real>::GetFirstDerivative (Real t) const
     int key;
     Real dt;
     GetKeyInfo(t,key,dt);
-    return mB[key] + dt*(mC[key]*(static_cast<Real>(2)) + mD[key]*((static_cast<Real>(3))*dt));
+    return mB[key] + dt*(mC[key]*(Math::GetValue(2)) + mD[key]*((static_cast<Real>(3))*dt));
 }
 
 template <typename Real>
@@ -69,7 +69,7 @@ Real NaturalSpline1<Real>::GetSecondDerivative (Real t) const
     int key;
     Real dt;
     GetKeyInfo(t,key,dt);
-    return mC[key]*(static_cast<Real>(2)) + mD[key]*(((Real)6)*dt);
+    return mC[key]*(Math::GetValue(2)) + mD[key]*(((Real)6)*dt);
 }
 
 template <typename Real>
@@ -125,7 +125,7 @@ void NaturalSpline1<Real>::CreateFreeSpline ()
     for (i = 0; i < mNumSamples; ++i)
     {
         delta[i] = mTimes[i+1] - mTimes[i];
-        invDelta[i] = (static_cast<Real>(1))/delta[i];
+        invDelta[i] = (Math::GetValue(1))/delta[i];
         fDeriv[i] = (mA[i+1] - mA[i])*invDelta[i];
     }
 
@@ -134,7 +134,7 @@ void NaturalSpline1<Real>::CreateFreeSpline ()
 	auto rhs = NEW1<Real>(numSegmentsM1);
     for (i = 0; i < numSegmentsM1; ++i)
     {
-        diagonal[i] = (static_cast<Real>(2))*(delta[i+1] + delta[i]);
+        diagonal[i] = (Math::GetValue(2))*(delta[i+1] + delta[i]);
         rhs[i] = (static_cast<Real>(3))*(fDeriv[i+1] - fDeriv[i]);
     }
 
@@ -148,10 +148,10 @@ void NaturalSpline1<Real>::CreateFreeSpline ()
    // MATHEMATICS_ASSERTION_0(solved, "Failed to solve linear system\n");
     //WM5_UNUSED(solved);
 
-    const Real oneThird = (static_cast<Real>(1))/static_cast<Real>(3);
+    const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
     for (i = 0; i < mNumSegments; ++i)
     {
-        mB[i] = fDeriv[i] - delta[i]*oneThird*(mC[i+1] + (static_cast<Real>(2))*mC[i]);
+        mB[i] = fDeriv[i] - delta[i]*oneThird*(mC[i+1] + (Math::GetValue(2))*mC[i]);
         mD[i] = oneThird*(mC[i+1] - mC[i])*invDelta[i];
     }
 
@@ -176,7 +176,7 @@ void NaturalSpline1<Real>::CreateClampedSpline (Real slopeFirst, Real slopeLast)
     for (i = 0; i < mNumSamples; ++i)
     {
         delta[i] = mTimes[i+1] - mTimes[i];
-        invDelta[i] = (static_cast<Real>(1))/delta[i];
+        invDelta[i] = (Math::GetValue(1))/delta[i];
         fDeriv[i] = (mA[i+1] - mA[i])*invDelta[i];
     }
 
@@ -185,7 +185,7 @@ void NaturalSpline1<Real>::CreateClampedSpline (Real slopeFirst, Real slopeLast)
 	auto rhs = NEW1<Real>(numSegmentsM1);
     for (i = 0; i < numSegmentsM1; ++i)
     {
-        diagonal[i] = (static_cast<Real>(2))*(delta[i+1] + delta[i]);
+        diagonal[i] = (Math::GetValue(2))*(delta[i+1] + delta[i]);
         rhs[i] = (static_cast<Real>(3))*(delta[i]*fDeriv[i+1] + delta[i+1]*fDeriv[i]);
     }
     rhs[0] -= slopeFirst*delta[1];
@@ -201,11 +201,11 @@ void NaturalSpline1<Real>::CreateClampedSpline (Real slopeFirst, Real slopeLast)
    // MATHEMATICS_ASSERTION_0(solved, "Failed to solve linear system\n");
    // WM5_UNUSED(solved);
 
-    const auto oneThird = (static_cast<Real>(1))/static_cast<Real>(3);
+    const auto oneThird = (Math::GetValue(1))/static_cast<Real>(3);
     for (i = 0; i < mNumSegments; ++i)
     {
-        mC[i] = ((static_cast<Real>(3))*fDeriv[i] - mB[i+1] - (static_cast<Real>(2))*mB[i])*invDelta[i];
-        mD[i] = oneThird*(mB[i+1] - mB[i] -  (static_cast<Real>(2))*delta[i]*mC[i])*invDelta[i]*invDelta[i];
+        mC[i] = ((static_cast<Real>(3))*fDeriv[i] - mB[i+1] - (Math::GetValue(2))*mB[i])*invDelta[i];
+        mD[i] = oneThird*(mB[i+1] - mB[i] -  (Math::GetValue(2))*delta[i]*mC[i])*invDelta[i]*invDelta[i];
     }
 
     DELETE1(delta);
@@ -236,21 +236,21 @@ void NaturalSpline1<Real>::CreatePeriodicSpline ()
         delta2 = delta*delta;
         delta3 = delta*delta2;
 
-        mat[j+0][j+0] = static_cast<Real>(1);
+        mat[j+0][j+0] = Math::GetValue(1);
         mat[j+0][j+1] = Math<Real>::GetValue(0);
         mat[j+0][j+2] = Math<Real>::GetValue(0);
         mat[j+0][j+3] = Math<Real>::GetValue(0);
-        mat[j+1][j+0] = static_cast<Real>(1);
+        mat[j+1][j+0] = Math::GetValue(1);
         mat[j+1][j+1] = delta;
         mat[j+1][j+2] = delta2;
         mat[j+1][j+3] = delta3;
         mat[j+2][j+0] = Math<Real>::GetValue(0);
-        mat[j+2][j+1] = static_cast<Real>(1);
-        mat[j+2][j+2] = (static_cast<Real>(2))*delta;
+        mat[j+2][j+1] = Math::GetValue(1);
+        mat[j+2][j+2] = (Math::GetValue(2))*delta;
         mat[j+2][j+3] = (static_cast<Real>(3))*delta2;
         mat[j+3][j+0] = Math<Real>::GetValue(0);
         mat[j+3][j+1] = Math<Real>::GetValue(0);
-        mat[j+3][j+2] = static_cast<Real>(1);
+        mat[j+3][j+2] = Math::GetValue(1);
         mat[j+3][j+3] = (static_cast<Real>(3))*delta;
 
         k = j + 4;
@@ -276,21 +276,21 @@ void NaturalSpline1<Real>::CreatePeriodicSpline ()
     delta2 = delta*delta;
     delta3 = delta*delta2;
 
-    mat[j+0][j+0] = static_cast<Real>(1);
+    mat[j+0][j+0] = Math::GetValue(1);
     mat[j+0][j+1] = Math<Real>::GetValue(0);
     mat[j+0][j+2] = Math<Real>::GetValue(0);
     mat[j+0][j+3] = Math<Real>::GetValue(0);
-    mat[j+1][j+0] = static_cast<Real>(1);
+    mat[j+1][j+0] = Math::GetValue(1);
     mat[j+1][j+1] = delta;
     mat[j+1][j+2] = delta2;
     mat[j+1][j+3] = delta3;
     mat[j+2][j+0] = Math<Real>::GetValue(0);
-    mat[j+2][j+1] = static_cast<Real>(1);
-    mat[j+2][j+2] = (static_cast<Real>(2))*delta;
+    mat[j+2][j+1] = Math::GetValue(1);
+    mat[j+2][j+2] = (Math::GetValue(2))*delta;
     mat[j+2][j+3] = (static_cast<Real>(3))*delta2;
     mat[j+3][j+0] = Math<Real>::GetValue(0);
     mat[j+3][j+1] = Math<Real>::GetValue(0);
-    mat[j+3][j+2] = static_cast<Real>(1);
+    mat[j+3][j+2] = Math::GetValue(1);
     mat[j+3][j+3] = (static_cast<Real>(3))*delta;
 
     k = 0;
@@ -350,12 +350,12 @@ void NaturalSpline1<Real>::CreatePeriodicSpline ()
     for (i = 0; i < numSegmentsM1; i++)
     {
         delta = mTimes[i+1] - mTimes[i];
-        Real invDelta1 = (static_cast<Real>(1))/delta;
+        Real invDelta1 = (Math::GetValue(1))/delta;
         Real invDelta2 = invDelta1/delta;
         Real invDelta3 = invDelta2/delta;
 
         Matrix4<Real>& invMi = invM[i];
-        invMi[0][0] = static_cast<Real>(1);
+        invMi[0][0] = Math::GetValue(1);
         invMi[0][1] = Math<Real>::sm_Zero;
         invMi[0][2] = Math<Real>::sm_Zero;
         invMi[0][3] = Math<Real>::sm_Zero;
@@ -379,23 +379,23 @@ void NaturalSpline1<Real>::CreatePeriodicSpline ()
     Real delta3 = delta2*delta;
     Matrix4<Real> lastM
     (
-        static_cast<Real>(1), Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero,
-        static_cast<Real>(1), delta, delta2, delta3,
-        Math<Real>::sm_Zero, static_cast<Real>(1), (static_cast<Real>(2))*delta, (static_cast<Real>(3))*delta2,
-        Math<Real>::sm_Zero, Math<Real>::sm_Zero, static_cast<Real>(1), (static_cast<Real>(3))*delta
+        Math::GetValue(1), Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero,
+        Math::GetValue(1), delta, delta2, delta3,
+        Math<Real>::sm_Zero, Math::GetValue(1), (Math::GetValue(2))*delta, (static_cast<Real>(3))*delta2,
+        Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math::GetValue(1), (static_cast<Real>(3))*delta
     );
 
     // Matrix L.
     Matrix4<Real> LMat
     (
         Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero,
-        static_cast<Real>(1), Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero,
-        Math<Real>::sm_Zero, static_cast<Real>(1), Math<Real>::sm_Zero, Math<Real>::sm_Zero,
-        Math<Real>::sm_Zero, Math<Real>::sm_Zero, static_cast<Real>(1), Math<Real>::sm_Zero
+        Math::GetValue(1), Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math<Real>::sm_Zero,
+        Math<Real>::sm_Zero, Math::GetValue(1), Math<Real>::sm_Zero, Math<Real>::sm_Zero,
+        Math<Real>::sm_Zero, Math<Real>::sm_Zero, Math::GetValue(1), Math<Real>::sm_Zero
     );
 
     // Vector U.
-    Vector<4,Real> U(static_cast<Real>(1),Math<Real>::sm_Zero,Math<Real>::sm_Zero,Math<Real>::sm_Zero);
+    Vector<4,Real> U(Math::GetValue(1),Math<Real>::sm_Zero,Math<Real>::sm_Zero,Math<Real>::sm_Zero);
 
     // Initialize P = L and Q = f[n-2]*U.
     Matrix4<Real> P = LMat;

@@ -312,8 +312,8 @@ Mathematics::FindContactSet<Real>
 					 const Vector3D<Real>& box0Velocity, const Vector3D<Real>& box1Velocity, Real tfirst, int& quantity, Vector3D<Real>* P)
 {
 	// Move the boxes to their new positions.
-	const Box3<Real> box0Final{ box0.GetCenter() + tfirst * box0Velocity,box0.GetFirstAxis(),box0.GetSecondAxis(),box0.GetThirdAxis(),box0.GetFirstExtent(),box0.GetSecondExtent(),box0.GetThirdExtent() };
-	const Box3<Real> box1Final{ box1.GetCenter() + tfirst * box1Velocity,box1.GetFirstAxis(),box1.GetSecondAxis(),box1.GetThirdAxis(),box1.GetFirstExtent(),box1.GetSecondExtent(),box1.GetThirdExtent() };
+    const Box3<Real> box0Final{ box0.GetCenter() + tfirst * box0Velocity, box0.GetAxis0(), box0.GetAxis1(), box0.GetAxis2(), box0.GetExtent0(), box0.GetExtent1(), box0.GetExtent2() };
+        const Box3<Real> box1Final{ box1.GetCenter() + tfirst * box1Velocity, box1.GetAxis0(), box1.GetAxis1(), box1.GetAxis2(), box1.GetExtent0(), box1.GetExtent1(), box1.GetExtent2() };
 
 	const int* b0Index = box0Cfg.mIndex;
 	const int* b1Index = box1Cfg.mIndex;

@@ -80,7 +80,7 @@ namespace Mathematics
 				}
 				else
 				{
-					return (static_cast<Real>(0.5))*(slope[1] + slope[2]);
+					return ( Math::GetRational(1,2))*(slope[1] + slope[2]);
 				}
 			}
 		}
@@ -134,9 +134,9 @@ namespace Mathematics
 		case 0:
 			return mCoeff[0] + x * (mCoeff[1] + x * (mCoeff[2] + x * mCoeff[3]));
 		case 1:
-			return mCoeff[1] + x * ((static_cast<Real>(2))*mCoeff[2] + x * (static_cast<Real>(3))*mCoeff[3]);
+			return mCoeff[1] + x * ((Math::GetValue(2))*mCoeff[2] + x * (static_cast<Real>(3))*mCoeff[3]);
 		case 2:
-			return (static_cast<Real>(2))*mCoeff[2] + x * ((Real)6)*mCoeff[3];
+			return (Math::GetValue(2))*mCoeff[2] + x * ((Real)6)*mCoeff[3];
 		case 3:
 			return ((Real)6)*mCoeff[3];
 		}

@@ -1,30 +1,32 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 09:43)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/18 13:56)
 
 #ifndef MATHEMATICS_RATIONAL_H
 #define MATHEMATICS_RATIONAL_H
 
-#include "FloatingPointAnalysisDetail.h"
 #include "ConversionIntegerDetail.h"
-#include "IntegerDataDetail.h"
-#include "IntegerDataAnalysisDetail.h"
-#include "IntegerDataOperatorDetail.h"
-#include "IntegerMultiplicationDetail.h"
-#include "IntegerDivisionModuloDetail.h"
-#include "IntegerDataConversion.h"
-#include "IntegerDetail.h"
-#include "RationalConversionDetail.h"
 #include "ConversionRationalDetail.h"
-#include "RationalConversionDetail.h"
-#include "SignRationalDetail.h"
-#include "Int64VectorDetail.h"
+#include "FloatingPointAnalysisDetail.h"
 #include "Int64Vector2.h"
 #include "Int64Vector3.h"
-#include "RationalVectorDetail.h"
+#include "Int64VectorDetail.h"
+#include "IntegerDataAnalysisDetail.h"
+#include "IntegerDataConversion.h"
+#include "IntegerDataDetail.h"
+#include "IntegerDataOperatorDetail.h"
+#include "IntegerDetail.h"
+#include "IntegerDivisionModuloDetail.h"
+#include "IntegerMultiplicationDetail.h"
+#include "RationalConversionDetail.h"
 #include "RationalVector2Detail.h"
 #include "RationalVector3Detail.h"
+#include "RationalVectorDetail.h"
+#include "SignRationalDetail.h"
 
-#endif // MATHEMATICS_RATIONAL_H
+#endif  // MATHEMATICS_RATIONAL_H

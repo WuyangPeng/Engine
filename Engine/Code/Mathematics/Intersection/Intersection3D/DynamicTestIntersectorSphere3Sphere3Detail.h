@@ -55,7 +55,7 @@ void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>
 			}
 			else
 			{
-				result = this->GetTMax() * (this->GetTMax()*a + (static_cast<Real>(2)) * b) + c <= rSumSqr;
+				result = this->GetTMax() * (this->GetTMax()*a + (Math::GetValue(2)) * b) + c <= rSumSqr;
 			}
 		}
 	}

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 09:43)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/18 13:57)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR2_IMPL_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR2_IMPL_H
@@ -14,50 +17,50 @@
 
 namespace Mathematics
 {
-	class MATHEMATICS_HIDDEN_DECLARE Int64Vector2Impl
-	{
-	public:
-		using ClassType = Int64Vector2Impl;
+    class MATHEMATICS_HIDDEN_DECLARE Int64Vector2Impl final
+    {
+    public:
+        using ClassType = Int64Vector2Impl;
 
-	public:
-		Int64Vector2Impl() noexcept;
-		Int64Vector2Impl(const Int64Vector<2>& rhs) noexcept;
-		Int64Vector2Impl(const int64_t& x, const int64_t& y);
+    public:
+        Int64Vector2Impl() noexcept;
+        explicit Int64Vector2Impl(const Int64Vector<2>& rhs) noexcept;
+        Int64Vector2Impl(int64_t x, int64_t y) noexcept;
 
-		Int64Vector2Impl& operator= (const Int64Vector<2>& rhs) noexcept;
+        Int64Vector2Impl& operator=(const Int64Vector<2>& rhs) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		int64_t GetX() const;
-		void SetX(const int64_t& x);
-		int64_t GetY() const;
-		void SetY(const int64_t& y);
+        [[nodiscard]] int64_t GetX() const;
+        void SetX(int64_t x);
+        [[nodiscard]] int64_t GetY() const;
+        void SetY(int64_t y);
 
-		// 返回 (y,-x).
-		const Int64Vector2Impl Perp() const;
+        // 返回 (y,-x).
+        [[nodiscard]] const Int64Vector2Impl Perp() const;
 
-		const Int64Vector2Impl operator-() const noexcept;
+        [[nodiscard]] const Int64Vector2Impl operator-() const noexcept;
 
-		Int64Vector2Impl& operator+= (const Int64Vector2Impl& rhs) noexcept;
-		Int64Vector2Impl& operator-= (const Int64Vector2Impl& rhs) noexcept ;
-		Int64Vector2Impl& operator*= (const int64_t& scalar) noexcept;
-		Int64Vector2Impl& operator/= (const int64_t& scalar);
+        Int64Vector2Impl& operator+=(const Int64Vector2Impl& rhs) noexcept;
+        Int64Vector2Impl& operator-=(const Int64Vector2Impl& rhs) noexcept;
+        Int64Vector2Impl& operator*=(int64_t scalar) noexcept;
+        Int64Vector2Impl& operator/=(int64_t scalar);
 
-		int64_t SquaredLength() const noexcept;
+        [[nodiscard]] int64_t SquaredLength() const noexcept;
 
-	private:
-		Int64Vector<2> m_Tuple;
-	};
+    private:
+        Int64Vector<2> m_Tuple;
+    };
 
-	// 返回 Dot(lhs,rhs).
-	int64_t Dot(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
+    // 返回 Dot(lhs,rhs).
+    [[nodiscard]] int64_t Dot(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
 
-	// 返回 Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x.
-	int64_t DotPerp(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
+    // 返回 Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x.
+    [[nodiscard]] int64_t DotPerp(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
 
-	bool operator== (const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
+    [[nodiscard]] bool operator==(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
 
-	bool operator<  (const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
+    [[nodiscard]] bool operator<(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
 }
 
-#endif // MATHEMATICS_RATIONAL_INT64_VECTOR2_IMPL_H
+#endif  // MATHEMATICS_RATIONAL_INT64_VECTOR2_IMPL_H

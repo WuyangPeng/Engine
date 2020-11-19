@@ -65,13 +65,13 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 	MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 	Vector2D extentSquared{ m_Extent[0] * m_Extent[0], m_Extent[1] * m_Extent[1] };
-	Vector2D reciprocalExtentSquared{ static_cast<Real>(1) / extentSquared[0],static_cast<Real>(1) / extentSquared[1] };
+	Vector2D reciprocalExtentSquared{ Math::GetValue(1) / extentSquared[0],Math::GetValue(1) / extentSquared[1] };
 
 	// 初始化二分法。 与H(-a^2)= +无穷大和H(b^2)= -infinity不相关，
 	// 因此我们只需要用相应的有符号数字初始化函数值。
 	auto t0 = -extentSquared[0];
 	auto t1 = extentSquared[1];
-	auto tRoot = static_cast<Real>(0.5) * (t0 + t1);
+	auto tRoot =  Math::GetRational(1,2) * (t0 + t1);
 	auto hyperbolaRoot = GetHyperbola(tRoot, reciprocalExtentSquared);
 
 	// 迭代直到 H(troot)正好为零或直到一个浮点端点不再改变。 
@@ -89,14 +89,14 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 		if (Math::GetValue(0) < hyperbolaRoot)
 		{
 			t0 = tRoot;
-			tRoot = static_cast<Real>(0.5) * (t0 + t1);
+			tRoot =  Math::GetRational(1,2) * (t0 + t1);
 		}
 		else // hyperbolaRoot < Math<Real>::sm_Zero
 		{
 			t1 = tRoot;
 		}
 
-		tRoot = static_cast<Real>(0.5) * (t0 + t1);
+		tRoot =  Math::GetRational(1,2) * (t0 + t1);
 		hyperbolaRoot = GetHyperbola(tRoot, reciprocalExtentSquared);
 
 		if (loop + 1 == maximumIterations)
@@ -105,8 +105,8 @@ const typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathe
 		}
 	}
 
-	Vector2D closest{ m_Point[0] / (static_cast<Real>(1) + tRoot * reciprocalExtentSquared[0]),
-					  m_Point[1] / (static_cast<Real>(1) - tRoot * reciprocalExtentSquared[1]) };
+	Vector2D closest{ m_Point[0] / (Math::GetValue(1) + tRoot * reciprocalExtentSquared[0]),
+					  m_Point[1] / (Math::GetValue(1) - tRoot * reciprocalExtentSquared[1]) };
 
 	auto diff = m_Point - closest;
 
@@ -118,10 +118,10 @@ template <typename Real>
 Real Mathematics::DistancePoint2Hyperbola2<Real>
 	::GetHyperbola(Real t, const Vector2D& reciprocalExtentSquared) const
 {
-	auto ratio0 = m_Point[0] / (static_cast<Real>(1) + t * reciprocalExtentSquared[0]);
-	auto ratio1 = m_Point[1] / (static_cast<Real>(1) - t * reciprocalExtentSquared[1]);
+	auto ratio0 = m_Point[0] / (Math::GetValue(1) + t * reciprocalExtentSquared[0]);
+	auto ratio1 = m_Point[1] / (Math::GetValue(1) - t * reciprocalExtentSquared[1]);
 
-	return ratio0 * ratio0 - ratio1 * ratio1 - static_cast<Real>(1);
+	return ratio0 * ratio0 - ratio1 * ratio1 - Math::GetValue(1);
 }
 
 template <typename Real>

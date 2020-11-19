@@ -99,13 +99,13 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 	// 计算多项式 q0 = q00 + q01 * z + q02 * z^2.
 	Polynomial<Real> q0{ 2 };
 	q0[0] = a0 * a0 + a2 * a2 + a3 * a3 + a5 * a5;
-	q0[1] = static_cast<Real>(2) * (a0 * a1 + a3 * a4);
+	q0[1] = Math::GetValue(2) * (a0 * a1 + a3 * a4);
 	q0[2] = a1 * a1 - a2 * a2 + a4 * a4 - a5 * a5;
 
 	// 计算多项式 q1 = q10 + q11 * z.
 	Polynomial<Real> q1{ 1 };
-	q1[0] = static_cast<Real>(2) * (a0 * a2 + a3 * a5);
-	q1[1] = static_cast<Real>(2) * (a1 * a2 + a4 * a5);
+	q1[0] = Math::GetValue(2) * (a0 * a2 + a3 * a5);
+	q1[1] = Math::GetValue(2) * (a1 * a2 + a4 * a5);
 
 	// 计算系数 r0 = r00+r02*z^2.
 	Polynomial<Real> r0{ 2 };
@@ -116,40 +116,40 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 	// 计算多项式 r1 = r11 * z.
 	Polynomial<Real> r1{ 1 };
 	r1[0] = Math::GetValue(0);
-	r1[1] = static_cast<Real>(2) * b0 * b3;
+	r1[1] = Math::GetValue(2) * b0 * b3;
 
 	// 计算多项式 g0 = g00 + g01 * z + g02 * z^2 + g03 * z^3 + g04 * z^4.
 	Polynomial<Real> g0{ 4 };
 	g0[0] = p0[0] * p0[0] + p1[0] * p1[0] - q0[0] * r0[0];
-	g0[1] = static_cast<Real>(2) * (p0[0] * p0[1] + p1[0] * p1[1]) - q0[1] * r0[0] - q1[0] * r1[1];
-	g0[2] = p0[1] * p0[1] + static_cast<Real>(2) * p0[0] * p0[2] - p1[0] * p1[0] +
+	g0[1] = Math::GetValue(2) * (p0[0] * p0[1] + p1[0] * p1[1]) - q0[1] * r0[0] - q1[0] * r1[1];
+	g0[2] = p0[1] * p0[1] + Math::GetValue(2) * p0[0] * p0[2] - p1[0] * p1[0] +
 		    p1[1] * p1[1] - q0[2] * r0[0] - q0[0] * r0[2] - q1[1] * r1[1];
-	g0[3] = static_cast<Real>(2) *(p0[1] * p0[2] - p1[0] * p1[1]) - q0[1] * r0[2] + q1[0] * r1[1];
+	g0[3] = Math::GetValue(2) *(p0[1] * p0[2] - p1[0] * p1[1]) - q0[1] * r0[2] + q1[0] * r1[1];
 	g0[4] = p0[2] * p0[2] - p1[1] * p1[1] - q0[2] * r0[2] + q1[1] * r1[1];
 
 	// 计算多项式 g1 = g10 + g11 * z + g12 * z^2 + g13 * z^3.
 	Polynomial<Real> g1{ 3 };
-	g1[0] = static_cast<Real>(2) * p0[0] * p1[0] - q1[0] * r0[0];
-	g1[1] = static_cast<Real>(2) * (p0[1] * p1[0] + p0[0] * p1[1]) - q1[1] * r0[0] - q0[0] * r1[1];
-	g1[2] = static_cast<Real>(2) * (p0[2] * p1[0] + p0[1] * p1[1]) - q1[0] * r0[2] - q0[1] * r1[1];
-	g1[3] = static_cast<Real>(2) * p0[2] * p1[1] - q1[1] * r0[2] - q0[2] * r1[1];
+	g1[0] = Math::GetValue(2) * p0[0] * p1[0] - q1[0] * r0[0];
+	g1[1] = Math::GetValue(2) * (p0[1] * p1[0] + p0[0] * p1[1]) - q1[1] * r0[0] - q0[0] * r1[1];
+	g1[2] = Math::GetValue(2) * (p0[2] * p1[0] + p0[1] * p1[1]) - q1[0] * r0[2] - q0[1] * r1[1];
+	g1[3] = Math::GetValue(2) * p0[2] * p1[1] - q1[1] * r0[2] - q0[2] * r1[1];
 
 	// 计算多项式 h = sum_{i=0}^8 h_i z^i.
 	Polynomial<Real> h{ 8 };
 	h[0] = g0[0] * g0[0] - g1[0] * g1[0];
-	h[1] = static_cast<Real>(2)*(g0[0] * g0[1] - g1[0] * g1[1]);
+	h[1] = Math::GetValue(2)*(g0[0] * g0[1] - g1[0] * g1[1]);
 	h[2] = g0[1] * g0[1] + g1[0] * g1[0] - g1[1] * g1[1] +
-		   static_cast<Real>(2)*(g0[0] * g0[2] - g1[0] * g1[2]);
-	h[3] = static_cast<Real>(2)*(g0[1] * g0[2] + g0[0] * g0[3] + g1[0] * g1[1] -
+		   Math::GetValue(2)*(g0[0] * g0[2] - g1[0] * g1[2]);
+	h[3] = Math::GetValue(2)*(g0[1] * g0[2] + g0[0] * g0[3] + g1[0] * g1[1] -
 								 g1[1] * g1[2] - g1[0] * g1[3]);
 	h[4] = g0[2] * g0[2] + g1[1] * g1[1] - g1[2] * g1[2] +
-		   static_cast<Real>(2)*(g0[1] * g0[3] + g0[0] * g0[4] + g1[0] * g1[2] -
+		   Math::GetValue(2)*(g0[1] * g0[3] + g0[0] * g0[4] + g1[0] * g1[2] -
 							     g1[1] * g1[3]);
-	h[5] = static_cast<Real>(2)*(g0[2] * g0[3] + g0[1] * g0[4] + g1[1] * g1[2] +
+	h[5] = Math::GetValue(2)*(g0[2] * g0[3] + g0[1] * g0[4] + g1[1] * g1[2] +
 								 g1[0] * g1[3] - g1[2] * g1[3]);
 	h[6] = g0[3] * g0[3] + g1[2] * g1[2] - g1[3] * g1[3] +
-		   static_cast<Real>(2)*(g0[2] * g0[4] + g1[1] * g1[3]);
-	h[7] = static_cast<Real>(2)*(g0[3] * g0[4] + g1[2] * g1[3]);
+		   Math::GetValue(2)*(g0[2] * g0[4] + g1[1] * g1[3]);
+	h[7] = Math::GetValue(2)*(g0[3] * g0[4] + g1[2] * g1[3]);
 	h[8] = g0[4] * g0[4] + g1[3] * g1[3];
 
 	PolynomialRoots<Real> polyroots{ this->GetZeroThreshold() };
@@ -160,11 +160,11 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 
 	for (auto iter = polyroots.GetBegin(), end = polyroots.GetEnd(); iter != end; ++iter)
 	{
-		auto rhsCosValue = Math::GetNumericalRoundOff(*iter, static_cast<Real>(-1), static_cast<Real>(1));
+		auto rhsCosValue = Math::GetNumericalRoundOff(*iter, static_cast<Real>(-1), Math::GetValue(1));
 
 		// 你也可以尝试rhsSinValue = -g0（rhsCosValue）/ g1（rhsCosValue）避免sqrt调用，
 		// 但要小心g1几乎为零。 现在我使用g0和g1来确定rhsSinValue的符号。
-		auto rhsSinValue = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - rhsCosValue * rhsCosValue));
+		auto rhsSinValue = Math::Sqrt(Math::FAbs(Math::GetValue(1) - rhsCosValue * rhsCosValue));
 
 		auto g0cs1 = g0(rhsCosValue);
 		auto g1cs1 = g1(rhsCosValue);

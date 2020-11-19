@@ -32,7 +32,7 @@ Mathematics::MinimizeNGetMinimum<Real, UserDataType>
 
 	for (auto i = 0; i < dimensions; ++i)
 	{
-		m_Direction[i][i] = static_cast<Real>(1);
+		m_Direction[i][i] = Math::GetValue(1);
 	}
 
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;

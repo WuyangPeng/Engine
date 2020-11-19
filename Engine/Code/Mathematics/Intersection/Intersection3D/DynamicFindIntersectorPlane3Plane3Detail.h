@@ -36,13 +36,13 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>
 	::Find()
 {
 	auto dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), mPlane1.GetNormal());
-	if (Math::FAbs(dot) < static_cast<Real>(1) - Math::GetZeroTolerance())
+	if (Math::FAbs(dot) < Math::GetValue(1) - Math::GetZeroTolerance())
 	{
 		// The planes are initially intersecting.  Linear velocities will
 		// not change the fact that they are intersecting.
 		SetContactTime(Math::GetValue(0));
 
-		auto invDet = (static_cast<Real>(1)) / (static_cast<Real>(1) - dot * dot);
+		auto invDet = (Math::GetValue(1)) / (Math::GetValue(1) - dot * dot);
 		auto c0 = (mPlane0.GetConstant() - dot * mPlane1.GetConstant())*invDet;
 		auto c1 = (mPlane1.GetConstant() - dot * mPlane0.GetConstant())*invDet;
 		this->SetIntersectionType(IntersectionType::Line);

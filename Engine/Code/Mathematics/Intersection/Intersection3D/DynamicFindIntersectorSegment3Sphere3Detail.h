@@ -61,7 +61,7 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 	auto relSpeed = Vector3DTools::VectorMagnitude(relVelocity);
 	relVelocity.Normalize();// unit-length vector
-	Segment3 path{ (static_cast<Real>(0.5)) * this->GetTMax()*relSpeed,mSphere.GetCenter() + (static_cast<Real>(0.5)) * this->GetTMax() * relSpeed * relVelocity,relVelocity };
+	Segment3 path{ ( Math::GetRational(1,2)) * this->GetTMax()*relSpeed,mSphere.GetCenter() + ( Math::GetRational(1,2)) * this->GetTMax() * relSpeed * relVelocity,relVelocity };
 
 	StaticFindIntersectorSegment3Capsule3<Real> intr{ path, capsule };
 	if (!intr.IsIntersection())

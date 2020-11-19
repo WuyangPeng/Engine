@@ -161,7 +161,7 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 	Real radius;
     if (Math<Real>::FAbs(det) > mEpsilon)
     {
-		auto invDet = (static_cast<Real>(1))/det;
+		auto invDet = (Math::GetValue(1))/det;
         Vector2D<Real> Q;
 		Q.SetX((A[1][1] * B[0] - A[0][1] * B[1])*invDet);
 		Q.SetY((A[0][0] * B[1] - A[1][0] * B[0])*invDet);

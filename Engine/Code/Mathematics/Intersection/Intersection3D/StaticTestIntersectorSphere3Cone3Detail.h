@@ -35,7 +35,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorSphere3Cone3<Real>
 	::Test()
 {
-	auto invSin = (static_cast<Real>(1))/mCone.GetSinAngle();
+	auto invSin = (Math::GetValue(1))/mCone.GetSinAngle();
 	auto cosSqr = mCone.GetCosAngle()*mCone.GetCosAngle();
 
 	auto CmV = mSphere.GetCenter() - mCone.GetVertex();

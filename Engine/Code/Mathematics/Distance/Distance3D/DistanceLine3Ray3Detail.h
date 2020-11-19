@@ -78,8 +78,8 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
 			// 两个内部点最接近，一个在直线上，一个在射线上。
 			auto lhsT = tool.GetLhsT() / det;
 			rhsT /= det;
-			auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-								   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
+			auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
+								   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 								   tool.GetOriginDifferenceSquaredLength();
 
 			return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::GetValue(0), m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),

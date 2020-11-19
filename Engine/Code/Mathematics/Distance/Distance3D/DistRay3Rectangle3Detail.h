@@ -74,7 +74,7 @@ typename const Mathematics::DistRay3Rectangle3<Real>::DistanceResult Mathematics
 	auto movedOrigin = mRay.GetOrigin() + t * lhsVelocity;
 	auto movedCenter = mRectangle.GetCenter() + t * rhsVelocity;
 	Ray3 movedRay{ movedOrigin, mRay.GetDirection() };
-	Rectangle3 movedRectangle{ movedCenter, mRectangle.GetFirstAxis(),mRectangle.GetSecondAxis(),
+	Rectangle3 movedRectangle{ movedCenter, mRectangle.GetAxis0(),mRectangle.GetAxis1(),
 							   mRectangle.GetExtent(0),mRectangle.GetExtent(1) };
 	return DistRay3Rectangle3<Real>{ movedRay, movedRectangle }.GetSquared();
 }

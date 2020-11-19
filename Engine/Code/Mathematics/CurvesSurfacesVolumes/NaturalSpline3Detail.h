@@ -77,7 +77,7 @@ void NaturalSpline3<Real>::CreateFreeSpline ()
     for (i = 1; i < mNumSegments; ++i)
     {
         Vector3D<Real> numer = (static_cast<Real>(3))*(dt[i-1]*mA[i+1] - d2t[i]*mA[i] + dt[i]*mA[i-1]);
-        Real invDenom = (static_cast<Real>(1))/(dt[i-1]*dt[i]);
+        Real invDenom = (Math::GetValue(1))/(dt[i-1]*dt[i]);
         alpha[i] = invDenom*numer;
     }
 
@@ -86,17 +86,17 @@ void NaturalSpline3<Real>::CreateFreeSpline ()
     Vector3D<Real>* z = NEW1<Vector3D<Real> >(mNumSegments + 1);
     Real inv;
 
-    ell[0] = static_cast<Real>(1);
+    ell[0] = Math::GetValue(1);
     mu[0] = Math<Real>::GetValue(0);
     z[0] = Vector3D<Real>::sm_Zero;
     for (i = 1; i < mNumSegments; ++i)
     {
-        ell[i] = (static_cast<Real>(2))*d2t[i] - dt[i-1]*mu[i-1];
-        inv = (static_cast<Real>(1))/ell[i];
+        ell[i] = (Math::GetValue(2))*d2t[i] - dt[i-1]*mu[i-1];
+        inv = (Math::GetValue(1))/ell[i];
         mu[i] = inv*dt[i];
         z[i] = inv*(alpha[i] - dt[i-1]*z[i-1]);
     }
-    ell[mNumSegments] = static_cast<Real>(1);
+    ell[mNumSegments] = Math::GetValue(1);
     z[mNumSegments] = Vector3D<Real>::sm_Zero;
 
     mB = NEW1<Vector3D<Real> >(mNumSegments);
@@ -105,12 +105,12 @@ void NaturalSpline3<Real>::CreateFreeSpline ()
 
     mC[mNumSegments] = Vector3D<Real>::sm_Zero;
 
-    const Real oneThird = (static_cast<Real>(1))/static_cast<Real>(3);
+    const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
     for (i = mNumSegments-1; i >= 0; --i)
     {
         mC[i] = z[i] - mu[i]*mC[i+1];
-        inv = (static_cast<Real>(1))/dt[i];
-        mB[i] = inv*(mA[i+1] - mA[i]) - oneThird*dt[i]*(mC[i+1] + (static_cast<Real>(2))*mC[i]);
+        inv = (Math::GetValue(1))/dt[i];
+        mB[i] = inv*(mA[i+1] - mA[i]) - oneThird*dt[i]*(mC[i+1] + (Math::GetValue(2))*mC[i]);
         mD[i] = oneThird*inv*(mC[i+1] - mC[i]);
     }
 
@@ -139,14 +139,14 @@ void NaturalSpline3<Real>::CreateClampedSpline ( const Vector3D<Real>& derivativ
     }
 
     Vector3D<Real>* alpha = NEW1<Vector3D<Real> >(mNumSegments + 1);
-	auto inv = (static_cast<Real>(1))/dt[0];
+	auto inv = (Math::GetValue(1))/dt[0];
     alpha[0] = (static_cast<Real>(3))*(inv*(mA[1] - mA[0]) - derivativeStart);
-    inv = (static_cast<Real>(1))/dt[mNumSegments-1];
+    inv = (Math::GetValue(1))/dt[mNumSegments-1];
     alpha[mNumSegments] = (static_cast<Real>(3))*(derivativeFinal - inv*(mA[mNumSegments] - mA[mNumSegments-1]));
     for (i = 1; i < mNumSegments; ++i)
     {
         Vector3D<Real> numer = (static_cast<Real>(3))*(dt[i-1]*mA[i+1] - d2t[i]*mA[i] + dt[i]*mA[i-1]);
-        Real invDenom = (static_cast<Real>(1))/(dt[i-1]*dt[i]);
+        Real invDenom = (Math::GetValue(1))/(dt[i-1]*dt[i]);
         alpha[i] = invDenom*numer;
     }
 
@@ -154,20 +154,20 @@ void NaturalSpline3<Real>::CreateClampedSpline ( const Vector3D<Real>& derivativ
     Real* mu = NEW1<Real>(mNumSegments);
     Vector3D<Real>* z = NEW1<Vector3D<Real> >(mNumSegments + 1);
 
-    ell[0] = (static_cast<Real>(2))*dt[0];
+    ell[0] = (Math::GetValue(2))*dt[0];
     mu[0] = Real{0.5};
-    inv = (static_cast<Real>(1))/ell[0];
+    inv = (Math::GetValue(1))/ell[0];
     z[0] = inv*alpha[0];
 
     for (i = 1; i < mNumSegments; ++i)
     {
-        ell[i] = (static_cast<Real>(2))*d2t[i] - dt[i-1]*mu[i-1];
-        inv = (static_cast<Real>(1))/ell[i];
+        ell[i] = (Math::GetValue(2))*d2t[i] - dt[i-1]*mu[i-1];
+        inv = (Math::GetValue(1))/ell[i];
         mu[i] = inv*dt[i];
         z[i] = inv*(alpha[i] - dt[i-1]*z[i-1]);
     }
-    ell[mNumSegments] = dt[mNumSegments-1]*((static_cast<Real>(2)) - mu[mNumSegments-1]);
-    inv = (static_cast<Real>(1))/ell[mNumSegments];
+    ell[mNumSegments] = dt[mNumSegments-1]*((Math::GetValue(2)) - mu[mNumSegments-1]);
+    inv = (Math::GetValue(1))/ell[mNumSegments];
     z[mNumSegments] = inv*(alpha[mNumSegments] - dt[mNumSegments-1]* z[mNumSegments-1]);
 
     mB = NEW1<Vector3D<Real> >(mNumSegments);
@@ -176,12 +176,12 @@ void NaturalSpline3<Real>::CreateClampedSpline ( const Vector3D<Real>& derivativ
 
     mC[mNumSegments] = z[mNumSegments];
 
-    const Real oneThird = (static_cast<Real>(1))/static_cast<Real>(3);
+    const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
     for (i = mNumSegments-1; i >= 0; --i)
     {
         mC[i] = z[i] - mu[i]*mC[i+1];
-        inv = (static_cast<Real>(1))/dt[i];
-        mB[i] = inv*(mA[i+1] - mA[i]) - oneThird*dt[i]*(mC[i+1] + (static_cast<Real>(2))*mC[i]);
+        inv = (Math::GetValue(1))/dt[i];
+        mB[i] = inv*(mA[i+1] - mA[i]) - oneThird*dt[i]*(mC[i+1] + (Math::GetValue(2))*mC[i]);
         mD[i] = oneThird*inv*(mC[i+1] - mC[i]);
     }
 
@@ -210,16 +210,16 @@ void NaturalSpline3<Real>::CreateClosedSpline ()
 
     // Construct matrix of system.
     VariableMatrix<Real> mat(mNumSegments + 1, mNumSegments + 1);
-    mat[0][0] = static_cast<Real>(1);
+    mat[0][0] = Math::GetValue(1);
     mat[0][mNumSegments] = (Real)-1;
     for (i = 1; i <= mNumSegments-1; ++i)
     {
         mat[i][i-1] = dt[i-1];
-        mat[i][i  ] = (static_cast<Real>(2))*(dt[i-1] + dt[i]);
+        mat[i][i  ] = (Math::GetValue(2))*(dt[i-1] + dt[i]);
         mat[i][i+1] = dt[i];
     }
     mat[mNumSegments][mNumSegments - 1] = dt[mNumSegments - 1];
-    mat[mNumSegments][0] = (static_cast<Real>(2))*(dt[mNumSegments - 1] + dt[0]);
+    mat[mNumSegments][0] = (Math::GetValue(2))*(dt[mNumSegments - 1] + dt[0]);
     mat[mNumSegments][1] = dt[0];
 
     // Construct right-hand side of system.
@@ -228,12 +228,12 @@ void NaturalSpline3<Real>::CreateClosedSpline ()
     Real inv0, inv1;
     for (i = 1; i <= mNumSegments-1; ++i)
     {
-        inv0 = (static_cast<Real>(1))/dt[i];
-        inv1 = (static_cast<Real>(1))/dt[i-1];
+        inv0 = (Math::GetValue(1))/dt[i];
+        inv1 = (Math::GetValue(1))/dt[i-1];
         mC[i] = (static_cast<Real>(3))*(inv0*(mA[i+1] - mA[i]) - inv1*(mA[i] - mA[i-1]));
     }
-    inv0 = (static_cast<Real>(1))/dt[0];
-    inv1 = (static_cast<Real>(1))/dt[mNumSegments-1];
+    inv0 = (Math::GetValue(1))/dt[0];
+    inv1 = (Math::GetValue(1))/dt[mNumSegments-1];
     mC[mNumSegments] = (static_cast<Real>(3))*(inv0*(mA[1] - mA[0]) -inv1*(mA[0] - mA[mNumSegments-1]));
 
     // Solve the linear systems.
@@ -274,13 +274,13 @@ void NaturalSpline3<Real>::CreateClosedSpline ()
     DELETE1(output);
     // End linear system solving.
 
-    const Real oneThird = (static_cast<Real>(1))/static_cast<Real>(3);
+    const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
     mB = NEW1<Vector3D<Real> >(mNumSegments);
     mD = NEW1<Vector3D<Real> >(mNumSegments);
     for (i = 0; i < mNumSegments; ++i)
     {
-        inv0 = (static_cast<Real>(1))/dt[i];
-        mB[i] = inv0*(mA[i+1] - mA[i]) - oneThird*(mC[i+1] + (static_cast<Real>(2))*mC[i])*dt[i];
+        inv0 = (Math::GetValue(1))/dt[i];
+        mB[i] = inv0*(mA[i+1] - mA[i]) - oneThird*(mC[i+1] + (Math::GetValue(2))*mC[i])*dt[i];
         mD[i] = oneThird*inv0*(mC[i+1] - mC[i]);
     }
 
@@ -308,7 +308,7 @@ Vector3D<Real> NaturalSpline3<Real>::GetFirstDerivative (Real t) const
     int key;
     Real dt;
     GetKeyInfo(t, key, dt);
-    return mB[key] + dt*((static_cast<Real>(2))*mC[key] + (static_cast<Real>(3))*dt*mD[key]);
+    return mB[key] + dt*((Math::GetValue(2))*mC[key] + (static_cast<Real>(3))*dt*mD[key]);
 }
 
 template <typename Real>
@@ -317,7 +317,7 @@ Vector3D<Real> NaturalSpline3<Real>::GetSecondDerivative (Real t) const
     int key;
     Real dt;
     GetKeyInfo(t, key, dt);
-    return (static_cast<Real>(2))*mC[key] + ((Real)6)*dt*mD[key];
+    return (Math::GetValue(2))*mC[key] + ((Real)6)*dt*mD[key];
 }
 
 template <typename Real>
@@ -332,7 +332,7 @@ Vector3D<Real> NaturalSpline3<Real>::GetThirdDerivative (Real t) const
 template <typename Real>
 Real NaturalSpline3<Real>::GetSpeedKey (int key, Real t) const
 {
-    Vector3D<Real> velocity = mB[key] + t*((static_cast<Real>(2))*mC[key] +  (static_cast<Real>(3))*t*mD[key]);
+    Vector3D<Real> velocity = mB[key] + t*((Math::GetValue(2))*mC[key] +  (static_cast<Real>(3))*t*mD[key]);
 
     return  Vector3DTools<Real>::VectorMagnitude(velocity);
 }

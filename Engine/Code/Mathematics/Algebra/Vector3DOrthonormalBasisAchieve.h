@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Vector3DOrthonormalBasis<Real>::Vector3DOrthonormalBasis(const Vector3D& nonzeroVector, bool isUnit, const Real epsilon)
+Mathematics::Vector3DOrthonormalBasis<Real>::Vector3DOrthonormalBasis(const Vector3D& nonzeroVector, bool isUnit, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
     : m_IsUnit{ isUnit }, m_UVector{}, m_VVector{}, m_WVector{ nonzeroVector }, m_Epsilon{ epsilon }
 {
     MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(m_Epsilon), "输入必须是非零向量！");

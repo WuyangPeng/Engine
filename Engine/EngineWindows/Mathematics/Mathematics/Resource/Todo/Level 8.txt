@@ -1,6 +1,9 @@
 TODO Level 8
  
-0.5.2.2 
+0.5.2.3 
 
 1.  （Base）在我们支持实现的平台上提供Math类的SIMD版本。 
 2.  （Base）定义类ScaledFloatToInt中的常量。
+3.  （Rational）定义有理数的转换运算符。
+4.  （Rational）明确宏MATHEMATICS_ASSERT_ON_RATIONAL_CONVERT_NAN的用处，没用就删掉。
+5.  （Rational）重构Integer类。

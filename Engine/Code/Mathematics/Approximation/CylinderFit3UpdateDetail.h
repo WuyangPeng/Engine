@@ -74,9 +74,9 @@ void Mathematics::CylinderFit3Update<Real>
 	}
 
 	m_InverseRadiusSqrare = deltaCrossAxisLengthSquaredSum / deltaCrossAxisLengthQuarticSum;
-	m_Exactly = static_cast<Real>(1) - m_InverseRadiusSqrare * deltaCrossAxisLengthSquaredSum / static_cast<Real>(m_UpdateData.size());
+	m_Exactly = Math::GetValue(1) - m_InverseRadiusSqrare * deltaCrossAxisLengthSquaredSum / static_cast<Real>(m_UpdateData.size());
 
-	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "Îó²îÖµ´íÎó£¡");
+	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= Math::GetValue(1), "Îó²îÖµ´íÎó£¡");
 }
 
 // private
@@ -92,20 +92,20 @@ void Mathematics::CylinderFit3Update<Real>
 	for (const auto& data : m_UpdateData)
 	{
 		auto delta = data.GetDelta();
-		auto a = m_InverseRadiusSqrare * data.GetDeltaCrossAxisLengthQuartic() - static_cast<Real>(1);
+		auto a = m_InverseRadiusSqrare * data.GetDeltaCrossAxisLengthQuartic() - Math::GetValue(1);
 		aMean += a;
 		aaMean += a * a;
 		descentDirection += a * data.GetDescentDirection();
 	}
 
-	auto inverseNumPoints = static_cast<Real>(1) / static_cast<Real>(m_Points.size());
+	auto inverseNumPoints = Math::GetValue(1) / static_cast<Real>(m_Points.size());
 
 	aMean *= inverseNumPoints;
 	aaMean *= inverseNumPoints;
 	if (descentDirection.IsZero(m_Epsilon))
 	{
 		m_Exactly = aaMean;
-		MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "Îó²îÖµ´íÎó£¡");
+		MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= Math::GetValue(1), "Îó²îÖµ´íÎó£¡");
 
 		return;
 	}
@@ -121,7 +121,7 @@ void Mathematics::CylinderFit3Update<Real>
 		auto delta = data.GetDelta();
 		auto deltaCrossAxis = data.GetDeltaCrossAxis();
                 auto deltaCrossDescentDirection = Vector3DTools<Real>::CrossProduct(delta, descentDirection);
-		auto a = m_InverseRadiusSqrare * data.GetDeltaCrossAxisLengthQuartic() - static_cast<Real>(1);
+		auto a = m_InverseRadiusSqrare * data.GetDeltaCrossAxisLengthQuartic() - Math::GetValue(1);
 		auto b = m_InverseRadiusSqrare * Vector3DTools<Real>::DotProduct(deltaCrossAxis, deltaCrossDescentDirection);
 		auto c = m_InverseRadiusSqrare * Vector3DTools<Real>::VectorMagnitudeSquared(deltaCrossDescentDirection);
 		abMean += a * b;
@@ -138,7 +138,7 @@ void Mathematics::CylinderFit3Update<Real>
 	ccMean *= inverseNumPoints;
 
 	std::vector<Real> tuple{ aaMean, (static_cast<Real>(-4) * abMean),
-							(static_cast<Real>(2) * acMean + static_cast<Real>(4) * bbMean),
+							(Math::GetValue(2) * acMean + Math::GetValue(4) * bbMean),
 							(static_cast<Real>(-4) * bcMean), ccMean };
 
 	Polynomial<Real> polynomial{ tuple };
@@ -162,7 +162,7 @@ void Mathematics::CylinderFit3Update<Real>
 	}
 
 	m_Exactly = min;
-	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "Îó²îÖµ´íÎó£¡");
+	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= Math::GetValue(1), "Îó²îÖµ´íÎó£¡");
 
 	if (0 <= minIndex)
 	{
@@ -178,7 +178,7 @@ template <typename Real>
 void Mathematics::CylinderFit3Update<Real>
 	::UpdateCenter()
 {
-	auto inverseNumPoints = static_cast<Real>(1) / static_cast<Real>(m_UpdateData.size());
+	auto inverseNumPoints = Math::GetValue(1) / static_cast<Real>(m_UpdateData.size());
 
 	// ¼ÆËãµÄ×î¿ìÏÂ½µµÄ·½Ïò¡£    
 	Vector3D descentDirection;
@@ -189,7 +189,7 @@ void Mathematics::CylinderFit3Update<Real>
 	{
 		auto delta = data.GetPoint() - m_Center;
             auto deltaCrossAxis = Vector3DTools<Real>::CrossProduct(delta, m_Axis);
-		auto a = m_InverseRadiusSqrare * Vector3DTools<Real>::VectorMagnitude(deltaCrossAxis) - static_cast<Real>(1);
+		auto a = m_InverseRadiusSqrare * Vector3DTools<Real>::VectorMagnitude(deltaCrossAxis) - Math::GetValue(1);
 
 		aMean += a;
 		aaMean += a * a;
@@ -204,7 +204,7 @@ void Mathematics::CylinderFit3Update<Real>
 	if (descentDirection.IsZero(m_Epsilon))
 	{
 		m_Exactly = aaMean;
-		MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "Îó²îÖµ´íÎó£¡");
+		MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= Math::GetValue(1), "Îó²îÖµ´íÎó£¡");
 
 		return;
 	}
@@ -219,7 +219,7 @@ void Mathematics::CylinderFit3Update<Real>
 	for (const auto& data : m_UpdateData)
 	{
 		auto deltaCrossAxis = data.GetDeltaCrossAxis();
-		auto a = m_InverseRadiusSqrare * data.GetDeltaCrossAxisLengthQuartic() - static_cast<Real>(1);
+		auto a = m_InverseRadiusSqrare * data.GetDeltaCrossAxisLengthQuartic() - Math::GetValue(1);
 		auto b = m_InverseRadiusSqrare * (Vector3DTools<Real>::DotProduct(deltaCrossAxis, descentDirectionCrossAxis));
 		bMean += b;
 		abMean += a * b;
@@ -229,9 +229,9 @@ void Mathematics::CylinderFit3Update<Real>
 	abMean *= inverseNumPoints;
 	bbMean *= inverseNumPoints;
 
-	std::vector<Real> tuple{ aaMean, (static_cast<Real>(4) * abMean),
-							(static_cast<Real>(2) * c * aMean + static_cast<Real>(4) * bbMean),
-							(static_cast<Real>(4) * c * bMean), c * c };
+	std::vector<Real> tuple{ aaMean, (Math::GetValue(4) * abMean),
+							(Math::GetValue(2) * c * aMean + Math::GetValue(4) * bbMean),
+							(Math::GetValue(4) * c * bMean), c * c };
 
 	Polynomial<Real> polynomial{ tuple };
 
@@ -255,7 +255,7 @@ void Mathematics::CylinderFit3Update<Real>
 	}
 
 	m_Exactly = min;
-	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= static_cast<Real>(1), "Îó²îÖµ´íÎó£¡");
+	MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= m_Exactly && m_Exactly <= Math::GetValue(1), "Îó²îÖµ´íÎó£¡");
 
 	if (0 <= minIndex)
 	{

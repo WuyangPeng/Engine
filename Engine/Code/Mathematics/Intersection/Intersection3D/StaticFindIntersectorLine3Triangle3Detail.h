@@ -18,7 +18,7 @@
 #include SYSTEM_WARNING_DISABLE(26493)
 template <typename Real>
 Mathematics::StaticFindIntersectorLine3Triangle3<Real>::StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon)
-    : ParentType{ epsilon }, m_Line{ line }, m_Triangle{ triangle }, m_LineParameter{}, m_TriangleBary0{}, m_TriangleBary1{}, m_TriangleBary2{ static_cast<Real>(1) }
+    : ParentType{ epsilon }, m_Line{ line }, m_Triangle{ triangle }, m_LineParameter{}, m_TriangleBary0{}, m_TriangleBary1{}, m_TriangleBary2{ Math::GetValue(1) }
 {
     Find();
 
@@ -104,7 +104,7 @@ const    IntersectorLine3Triangle3Data<Real> data{ m_Line, m_Triangle };
                 m_LineParameter = originDotNormal / directionDotNormal;
                 m_TriangleBary1 = directionDotOriginCrossEdge2 / directionDotNormal;
                 m_TriangleBary2 = directionDotEdge1CrossOrigin / directionDotNormal;
-                m_TriangleBary0 = static_cast<Real>(1) - m_TriangleBary1 - m_TriangleBary2;
+                m_TriangleBary0 = Math::GetValue(1) - m_TriangleBary1 - m_TriangleBary2;
 
                 this->SetIntersectionType(IntersectionType::Point);
             }

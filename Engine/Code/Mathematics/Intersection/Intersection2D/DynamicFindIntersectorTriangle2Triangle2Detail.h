@@ -413,7 +413,7 @@ bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 		}
 
 		// Update first time.
-		invSpeed = (static_cast<Real>(1)) / speed;
+		invSpeed = (Math::GetValue(1)) / speed;
 		t = (cfg0.Min - cfg1.Max)*invSpeed;
 		if (t > tfirst)
 		{
@@ -452,7 +452,7 @@ bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 		}
 
 		// Update first time.
-		invSpeed = (static_cast<Real>(1)) / speed;
+		invSpeed = (Math::GetValue(1)) / speed;
 		t = (cfg0.Max - cfg1.Min)*invSpeed;
 		if (t > tfirst)
 		{
@@ -487,7 +487,7 @@ bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 		if (speed > Math::GetValue(0))
 		{
 			// Update last time.
-			invSpeed = (static_cast<Real>(1)) / speed;
+			invSpeed = (Math::GetValue(1)) / speed;
 			t = (cfg0.Max - cfg1.Min)*invSpeed;
 			if (t < tlast)
 			{
@@ -503,7 +503,7 @@ bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 		else if (speed < Math::GetValue(0))
 		{
 			// Update last time.
-			invSpeed = (static_cast<Real>(1)) / speed;
+			invSpeed = (Math::GetValue(1)) / speed;
 			t = (cfg0.Min - cfg1.Max)*invSpeed;
 			if (t < tlast)
 			{
@@ -548,13 +548,13 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 		{
 			origin = &V0[cfg0.Index[1]];
 			edge = V0[cfg0.Index[2]] - *origin;
-			invEdE = (static_cast<Real>(1)) / Vector2DTools::DotProduct(edge, edge);
+			invEdE = (Math::GetValue(1)) / Vector2DTools::DotProduct(edge, edge);
 			diff = V1[cfg1.Index[1]] - *origin;
 			emin = Vector2DTools::DotProduct(edge, diff)*invEdE;
 			diff = V1[cfg1.Index[0]] - *origin;
 			emax = Vector2DTools::DotProduct(edge, diff)*invEdE;
 			MATHEMATICS_ASSERTION_0(emin <= emax, "Unexpected condition\n");
-			StaticFindIntersector1<Real> intr{ Math::GetValue(0), static_cast<Real>(1), emin, emax };
+			StaticFindIntersector1<Real> intr{ Math::GetValue(0), Math::GetValue(1), emin, emax };
 			quantity = intr.GetNumIntersections();
 			MATHEMATICS_ASSERTION_0(quantity > 0, "Unexpected condition\n");
 			for (i = 0; i < quantity; ++i)
@@ -579,13 +579,13 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>
 		{
 			origin = &V1[cfg1.Index[1]];
 			edge = V1[cfg1.Index[2]] - *origin;
-			invEdE = (static_cast<Real>(1)) / Vector2DTools::DotProduct(edge, edge);
+			invEdE = (Math::GetValue(1)) / Vector2DTools::DotProduct(edge, edge);
 			diff = V0[cfg0.Index[1]] - *origin;
 			emin = Vector2DTools::DotProduct(edge, diff)*invEdE;
 			diff = V0[cfg0.Index[0]] - *origin;
 			emax = Vector2DTools::DotProduct(edge, diff)*invEdE;
 			MATHEMATICS_ASSERTION_0(emin <= emax, "Unexpected condition\n");
-			StaticFindIntersector1<Real> intr{ Math::GetValue(0), static_cast<Real>(1), emin, emax };
+			StaticFindIntersector1<Real> intr{ Math::GetValue(0), Math::GetValue(1), emin, emax };
 			quantity = intr.GetNumIntersections();
 			MATHEMATICS_ASSERTION_0(quantity > 0, "Unexpected condition\n");
 			for (i = 0; i < quantity; ++i)

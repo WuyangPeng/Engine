@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 09:48)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/19 10:22)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H
@@ -15,47 +18,47 @@
 
 namespace Mathematics
 {
-	// 支持除法和取模。
-	template <int N>
-	class IntegerDivisionMultiple : private boost::noncopyable
-	{
-	public:
-		using ClassType = IntegerDivisionMultiple<N>;
-		using IntegerData = IntegerData<N>;
-		using IntegerDataAnalysis = IntegerDataAnalysis<N>;
+    // 支持除法和取模。
+    template <int N>
+    class IntegerDivisionMultiple final : private boost::noncopyable
+    {
+    public:
+        using ClassType = IntegerDivisionMultiple<N>;
+        using IntegerData = IntegerData<N>;
+        using IntegerDataAnalysis = IntegerDataAnalysis<N>;
 
-	public:
-		IntegerDivisionMultiple(const IntegerData& absNumerator, const IntegerData& absDenominator);
+    public:
+        IntegerDivisionMultiple(const IntegerData& absNumerator, const IntegerData& absDenominator);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const IntegerData GetQuotient() const;
-		const IntegerData GetRemainder() const;
+        [[nodiscard]] const IntegerData GetQuotient() const noexcept;
+        [[nodiscard]] const IntegerData GetRemainder() const noexcept;
 
-	private:
-		void Calculate();
-		void Adjust();
-		void Recover();
-		void Calculate(int quotientInit);
+    private:
+        void Calculate();
+        void Adjust();
+        void Recover();
+        void Calculate(int quotientInit);
 
-	private:
-		static constexpr uint32_t sm_Low{ 0x0000FFFF };
-		static constexpr uint32_t sm_High{ 0xFFFF0000 };
-		static constexpr uint32_t sm_Carry{ 0x00010000 };
+    private:
+        static constexpr auto sm_Low = 0x0000FFFFu;
+        static constexpr auto sm_High = 0xFFFF0000u;
+        static constexpr auto sm_Carry = 0x00010000u;
 
-		const IntegerData& m_AbsNumerator;
-		const IntegerData& m_AbsDenominator;
-		IntegerData m_AdjustNumerator;
-		IntegerData m_AdjustDenominator;
-		int m_NumeratorInit;
-		int m_DenominatorInit;
-		int m_Adjust;
-		uint32_t m_FirstDigit;
-		uint32_t m_SecondDigit;
-		uint32_t m_RemainderHat;
-		IntegerData m_Quotient;
-		IntegerData m_Remainder;
-	};
+        const IntegerData& m_AbsNumerator;
+        const IntegerData& m_AbsDenominator;
+        IntegerData m_AdjustNumerator;
+        IntegerData m_AdjustDenominator;
+        int m_NumeratorInit;
+        int m_DenominatorInit;
+        int m_Adjust;
+        uint32_t m_FirstDigit;
+        uint32_t m_SecondDigit;
+        uint32_t m_RemainderHat;
+        IntegerData m_Quotient;
+        IntegerData m_Remainder;
+    };
 }
 
-#endif // MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H
+#endif  // MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H

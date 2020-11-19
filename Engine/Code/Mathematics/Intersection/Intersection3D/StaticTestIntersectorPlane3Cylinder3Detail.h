@@ -41,7 +41,7 @@ void Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>
     //   max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
 	auto sDist = mPlane.DistanceTo(mCylinder.GetAxis().GetOrigin());
 	auto absNdW = Math::FAbs(Vector3DTools::DotProduct(mPlane.GetNormal(),mCylinder.GetAxis().GetDirection()));
-	auto root = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - absNdW*absNdW));
+	auto root = Math::Sqrt(Math::FAbs(Math::GetValue(1) - absNdW*absNdW));
 	auto term = mCylinder.GetRadius()*root + (Real{0.5})*mCylinder.GetHeight()*absNdW;
 
     // Intersection occurs if and only if 0 is in the interval [min,max].
@@ -65,7 +65,7 @@ bool Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>
     //   max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
 	auto sDist = mPlane.DistanceTo(mCylinder.GetAxis().GetOrigin());
 	auto absNdW = Math::FAbs(Vector3DTools::DotProduct(mPlane.GetNormal(),mCylinder.GetAxis().GetDirection()));
-	auto root = Math::Sqrt(Math::FAbs(static_cast<Real>(1) - absNdW*absNdW));
+	auto root = Math::Sqrt(Math::FAbs(Math::GetValue(1) - absNdW*absNdW));
 	auto term = mCylinder.GetRadius()*root + (Real{0.5})*mCylinder.GetHeight()*absNdW;
 
     // Culling occurs if and only if max <= 0.

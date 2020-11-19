@@ -226,10 +226,10 @@ void Mathematics::EigenDecomposition<Real>
 	m_Diagonal[1] = m_Matrix[1][1];
 	m_Subdiagonal[0] = m_Matrix[0][1];
 	m_Subdiagonal[1] = Math::GetValue(0);
-	m_SolveMatrix[0][0] = static_cast<Real>(1);
+	m_SolveMatrix[0][0] = Math::GetValue(1);
 	m_SolveMatrix[0][1] = Math::GetValue(0);
 	m_SolveMatrix[1][0] = Math::GetValue(0);
-	m_SolveMatrix[1][1] = static_cast<Real>(1);
+	m_SolveMatrix[1][1] = Math::GetValue(1);
 
 	m_IsRotation = true;
 }
@@ -253,12 +253,12 @@ void Mathematics::EigenDecomposition<Real>
 		auto length = Math::Sqrt(m01 * m01 + m02 * m02);
 		m01 /= length;
 		m02 /= length;
-		Real q = static_cast<Real>(2) * m01 * m12 + m02 * (m22 - m11);
+		Real q = Math::GetValue(2) * m01 * m12 + m02 * (m22 - m11);
 		m_Diagonal[1] = m11 + m02 * q;
 		m_Diagonal[2] = m22 - m02 * q;
 		m_Subdiagonal[0] = length;
 		m_Subdiagonal[1] = m12 - m01 * q;
-		m_SolveMatrix[0][0] = static_cast<Real>(1);
+		m_SolveMatrix[0][0] = Math::GetValue(1);
 		m_SolveMatrix[0][1] = Math::GetValue(0);
 		m_SolveMatrix[0][2] = Math::GetValue(0);
 		m_SolveMatrix[1][0] = Math::GetValue(0);
@@ -276,15 +276,15 @@ void Mathematics::EigenDecomposition<Real>
 		m_Diagonal[2] = m22;
 		m_Subdiagonal[0] = m01;
 		m_Subdiagonal[1] = m12;
-		m_SolveMatrix[0][0] = static_cast<Real>(1);
+		m_SolveMatrix[0][0] = Math::GetValue(1);
 		m_SolveMatrix[0][1] = Math::GetValue(0);
 		m_SolveMatrix[0][2] = Math::GetValue(0);
 		m_SolveMatrix[1][0] = Math::GetValue(0);
-		m_SolveMatrix[1][1] = static_cast<Real>(1);
+		m_SolveMatrix[1][1] = Math::GetValue(1);
 		m_SolveMatrix[1][2] = Math::GetValue(0);
 		m_SolveMatrix[2][0] = Math::GetValue(0);
 		m_SolveMatrix[2][1] = Math::GetValue(0);
-		m_SolveMatrix[2][2] = static_cast<Real>(1);
+		m_SolveMatrix[2][2] = Math::GetValue(1);
 
 		m_IsRotation = true;
 	}
@@ -392,7 +392,7 @@ void Mathematics::EigenDecomposition<Real>
 		subdiagonalProduct += m_Subdiagonal[outerIndex] * m_SolveMatrix[index][outerIndex];
 	}
 
-	auto value = static_cast<Real>(0.5) * subdiagonalProduct / diagonaValue;
+	auto value =  Math::GetRational(1,2) * subdiagonalProduct / diagonaValue;
 	for (auto outerIndex = 0; outerIndex <= index - 1; ++outerIndex)
 	{
 		auto solveMatrixValue = m_SolveMatrix[index][outerIndex];
@@ -445,7 +445,7 @@ void Mathematics::EigenDecomposition<Real>
 			}
 		}
 		m_Diagonal[index] = m_SolveMatrix[index][index];
-		m_SolveMatrix[index][index] = static_cast<Real>(1);
+		m_SolveMatrix[index][index] = Math::GetValue(1);
 		for (auto innerIndex = 0; innerIndex <= index - 1; ++innerIndex)
 		{
 			m_SolveMatrix[innerIndex][index] = Math::GetValue(0);
@@ -524,8 +524,8 @@ void Mathematics::EigenDecomposition<Real>
 	::QLAlgorithmLoop(int totalIndex, int outerIndex)
 {
 	auto subdiagonalValue = GetQLAlgorithmSubdiagonalValue(totalIndex, outerIndex);
-	auto sine = static_cast<Real>(1);
-	auto cosine = static_cast<Real>(1);
+	auto sine = Math::GetValue(1);
+	auto cosine = Math::GetValue(1);
 	auto diagonalDifferenceValue = Math::GetValue(0);
 
 	for (auto innerIndex = outerIndex - 1; innerIndex >= totalIndex; --innerIndex)
@@ -536,24 +536,24 @@ void Mathematics::EigenDecomposition<Real>
 		if (Math::FAbs(subdiagonalValue) <= Math::FAbs(subdiagonalSineValue))
 		{
 			cosine = subdiagonalValue / subdiagonalSineValue;
-			auto cosineAmend = Math::Sqrt(cosine * cosine + static_cast<Real>(1));
+			auto cosineAmend = Math::Sqrt(cosine * cosine + Math::GetValue(1));
 			auto temp = innerIndex + 1;
 			m_Subdiagonal[temp] = subdiagonalSineValue * cosineAmend;
-			sine = static_cast<Real>(1) / cosineAmend;
+			sine = Math::GetValue(1) / cosineAmend;
 			cosine *= sine;
 		}
 		else
 		{
 			sine = subdiagonalSineValue / subdiagonalValue;
-			auto cosineAmend = Math::Sqrt(sine * sine + static_cast<Real>(1));
+			auto cosineAmend = Math::Sqrt(sine * sine + Math::GetValue(1));
 			auto temp = innerIndex + 1;
 			m_Subdiagonal[temp] = subdiagonalValue * cosineAmend;
-			cosine = static_cast<Real>(1) / cosineAmend;
+			cosine = Math::GetValue(1) / cosineAmend;
 			sine *= cosine;
 		}
 		auto temp = innerIndex + 1;
 		subdiagonalValue = m_Diagonal[temp] - diagonalDifferenceValue;
-		auto value = (m_Diagonal[innerIndex] - subdiagonalValue) * sine + static_cast<Real>(2) * subdiagonalCosineValue * cosine;
+		auto value = (m_Diagonal[innerIndex] - subdiagonalValue) * sine + Math::GetValue(2) * subdiagonalCosineValue * cosine;
 		diagonalDifferenceValue = sine * value;
 		m_Diagonal[temp] = subdiagonalValue + diagonalDifferenceValue;
 		subdiagonalValue = cosine * value - subdiagonalCosineValue;
@@ -572,9 +572,9 @@ Real Mathematics::EigenDecomposition<Real>
 	::GetQLAlgorithmSubdiagonalValue(int totalIndex, int outerIndex) const
 {
 	auto temp = totalIndex + 1;
-	auto value = (m_Diagonal[temp] - m_Diagonal[totalIndex]) / (static_cast<Real>(2) * m_Subdiagonal[totalIndex]);
+	auto value = (m_Diagonal[temp] - m_Diagonal[totalIndex]) / (Math::GetValue(2) * m_Subdiagonal[totalIndex]);
 
-	auto amendValue = Math::Sqrt(value * value + static_cast<Real>(1));
+	auto amendValue = Math::Sqrt(value * value + Math::GetValue(1));
 	if (value < Math::GetValue(0))
 	{
 		return m_Diagonal[outerIndex] - m_Diagonal[totalIndex] + m_Subdiagonal[totalIndex] / (value - amendValue);

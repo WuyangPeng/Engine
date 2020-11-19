@@ -38,9 +38,9 @@ void Mathematics::StaticTestIntersectorLine2Box2<Real>
 	auto diff = mLine.GetOrigin() - mBox.GetCenter();
 	auto perp = Vector2DTools::GetPerp(mLine.GetDirection());
 	auto LHS = Math::FAbs(Vector2DTools::DotProduct(perp, diff));
-	auto part0 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetFirstAxis()));
-	auto part1 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetSecondAxis()));
-	auto RHS = mBox.GetFirstExtent()*part0 + mBox.GetSecondExtent()*part1;
+	auto part0 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetAxis0()));
+	auto part1 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetAxis1()));
+	auto RHS = mBox.GetExtent0()*part0 + mBox.GetExtent1()*part1;
 	if (LHS <= RHS)
 	{
 		this->SetIntersectionType(IntersectionType::Point);

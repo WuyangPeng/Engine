@@ -65,7 +65,7 @@ template <typename Real>
 void Mathematics::BSplineFitBasis<Real>
 	::Compute (Real t, int& imin, int& imax) const
 {
-    MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= t && t <= static_cast<Real>(1), "Invalid input.\n");
+    MATHEMATICS_ASSERTION_0(Math::GetValue(0) <= t && t <= Math::GetValue(1), "Invalid input.\n");
 
     // Use scaled time and scaled knots so that 1/(Q-D) does not need to
     // be explicitly stored by the class object.  Determine the extreme
@@ -73,13 +73,13 @@ void Mathematics::BSplineFitBasis<Real>
 	const auto temp = mQuantity - mDegree;
 	auto QmD = static_cast<Real>(temp);
     Real tValue { };
-    if (t <= Math<Real>::GetValue(0))
+    if (t <= Math::GetValue(0))
     {
-        tValue = Math<Real>::GetValue(0);
+        tValue = Math::GetValue(0);
         imin = 0;
         imax = mDegree;
     }
-    else if (t >= static_cast<Real>(1))
+    else if (t >= Math::GetValue(1))
     {
         tValue = QmD;
         imax = mQuantity - 1;
@@ -97,7 +97,7 @@ void Mathematics::BSplineFitBasis<Real>
     {
         if (i1 <= mDegree)
         {
-            mKnot[i0] = Math<Real>::GetValue(0);
+            mKnot[i0] = Math::GetValue(0);
         }
         else if (i1 >= mQuantity)
         {
@@ -112,7 +112,7 @@ void Mathematics::BSplineFitBasis<Real>
 
     // Initialize the basis function evaluation table.  The first degree-1
     // entries are zero, but they do not have to be set explicitly.
-    mValue[mDegree] = static_cast<Real>(1);
+    mValue[mDegree] = Math::GetValue(1);
 
     // Update the basis function evaluation table, each iteration overwriting
     // the results from the previous iteration.
@@ -120,7 +120,7 @@ void Mathematics::BSplineFitBasis<Real>
     {
 		auto k0 = mDegree, k1 = row;
 		auto knot0 = mKnot[k0], knot1 = mKnot[k1];
-		auto invDenom = (static_cast<Real>(1))/(knot0 - knot1);
+		auto invDenom = (Math::GetValue(1))/(knot0 - knot1);
 		Real c1 = (knot0 - tValue)*invDenom;
 		Real c0{ };
         mValue[row] = c1*mValue[row + 1];
@@ -132,7 +132,7 @@ void Mathematics::BSplineFitBasis<Real>
 
             knot0 = mKnot[++k0];
             knot1 = mKnot[++k1];
-            invDenom = (static_cast<Real>(1))/(knot0 - knot1);
+            invDenom = (Math::GetValue(1))/(knot0 - knot1);
             c1 = (knot0 - tValue)*invDenom;
             mValue[col] += c1*mValue[col + 1];
         }

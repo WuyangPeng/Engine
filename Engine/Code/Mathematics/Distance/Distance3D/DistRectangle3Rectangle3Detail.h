@@ -93,9 +93,9 @@ typename const Mathematics::DistRectangle3Rectangle3<Real>::DistanceResult Mathe
 {
 	auto movedCenter0 = mRectangle0.GetCenter() + t * lhsVelocity;
 	auto movedCenter1 = mRectangle1.GetCenter() + t * rhsVelocity;
-	Rectangle3 movedRect0{ movedCenter0, mRectangle0.GetFirstAxis(),mRectangle0.GetSecondAxis(),
+	Rectangle3 movedRect0{ movedCenter0, mRectangle0.GetAxis0(),mRectangle0.GetAxis1(),
 						   mRectangle0.GetExtent(0),mRectangle0.GetExtent(1) };
-	Rectangle3 movedRect1{ movedCenter1, mRectangle1.GetFirstAxis(),mRectangle1.GetSecondAxis(),
+	Rectangle3 movedRect1{ movedCenter1, mRectangle1.GetAxis0(),mRectangle1.GetAxis1(),
 						   mRectangle1.GetExtent(0),mRectangle1.GetExtent(1) };
 	return DistRectangle3Rectangle3<Real>{ movedRect0, movedRect1 }.GetSquared();
 }

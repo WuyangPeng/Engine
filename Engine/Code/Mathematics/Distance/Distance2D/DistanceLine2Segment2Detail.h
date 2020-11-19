@@ -110,7 +110,7 @@ const typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathemat
 	::GetSquaredWithClosestPoints(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
 {
 	auto t = tool.GetLhsT(-rhsExtent);
-	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
+	auto rhsSquare = rhsExtent * (rhsExtent + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
 
 	return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
 						   Math::GetValue(0), m_Line.GetOrigin() + t * m_Line.GetDirection(),

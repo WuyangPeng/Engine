@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 17:24)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/17 16:03)
 
 #ifndef MATHEMATICS_OBJECTS3D_TETRAHEDRON3_H
 #define MATHEMATICS_OBJECTS3D_TETRAHEDRON3_H
@@ -12,56 +15,70 @@
 #include "Plane3.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
+#include <type_traits>
 #include <vector>
-#include <type_traits> 
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Tetrahedron3
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class Tetrahedron3Impl;
 
-		using ClassType = Tetrahedron3<Real>;
-		using Math = Math<Real>;
-		using Vector3D = Vector3D<Real>;
-		using Plane3 = Plane3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Tetrahedron3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Tetrahedron3Impl<double>>;
 
-	public:
-		// 该四面体被表示为四个顶点的数组：V0，V1，V2和V3。
-		// 顶点被排序，使得由四面体外的观察者观察时，
-		// 三角形的面是被逆时针排序的三角形：
-		//   面 0 = <V[0],V[2],V[1]>
-		//   面 1 = <V[0],V[1],V[3]>
-		//   面 2 = <V[0],V[3],V[2]>
-		//   面 3 = <V[1],V[2],V[3]>
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Tetrahedron3Impl<Real>>;
 
-		Tetrahedron3(const Vector3D& fristVertex, const Vector3D& secondVertex,
-					 const Vector3D& thirdVertex, const Vector3D& fourthVertex);
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Tetrahedron3 final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		Tetrahedron3(const std::vector<Vector3D> vertex);
+        using Tetrahedron3Impl = Tetrahedron3Impl<Real>;
+        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Tetrahedron3);
 
-		CLASS_INVARIANT_DECLARE;
+        using Math = Math<Real>;
+        using Plane3 = Plane3<Real>;
+        using Vector3D = Vector3D<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using ContainerType = std::vector<Vector3D>;
+        using IndicesType = std::vector<int>;
+        using PlaneContainerType = std::vector<Plane3>;
 
-		const Vector3D GetVertex(int index) const;
-		void SetVertex(int index, const Vector3D& vertex);
+    public:
+        // 该四面体被表示为四个顶点的数组：V0，V1，V2和V3。
+        // 顶点被排序，使得由四面体外的观察者观察时，
+        // 三角形的面是被逆时针排序的三角形：
+        //   面 0 = <V[0],V[2],V[1]>
+        //   面 1 = <V[0],V[1],V[3]>
+        //   面 2 = <V[0],V[3],V[2]>
+        //   面 3 = <V[1],V[2],V[3]>
 
-		// 获取顶点索引在指定的面。
-		static std::vector<int> GetFaceIndices(int face);
+        Tetrahedron3(const Vector3D& vertex0, const Vector3D& vertex1,
+                     const Vector3D& vertex2, const Vector3D& vertex3);
 
-		// 构造四面体面的平面。
-		// 该四面具有外部指向的法向量。
-		// 平面索引是同前面的GetFaceIndices返回的索引相同。
-		const std::vector<Plane3> GetPlanes() const;
+        explicit Tetrahedron3(const ContainerType& vertex);
 
-	private:
-		Vector3D m_Vertex[4];
-	};
+        CLASS_INVARIANT_DECLARE;
 
-	using Tetrahedron3f = Tetrahedron3<float>;
-	using Tetrahedron3d = Tetrahedron3<double>;
+        const Vector3D GetVertex(int index) const;
+        void SetVertex(int index, const Vector3D& vertex);
+
+        // 获取顶点索引在指定的面。
+        static IndicesType GetFaceIndices(int face);
+
+        // 构造四面体面的平面。
+        // 该四面具有外部指向的法向量。
+        // 平面索引是同前面的GetFaceIndices返回的索引相同。
+        const PlaneContainerType GetPlanes() const;
+
+    private:
+        IMPL_TYPE_DECLARE(Tetrahedron3);
+    };
+
+    using FloatTetrahedron3 = Tetrahedron3<float>;
+    using DoubleTetrahedron3 = Tetrahedron3<double>;
 }
 
-#endif // MATHEMATICS_OBJECTS3D_TETRAHEDRON3_H
+#endif  // MATHEMATICS_OBJECTS3D_TETRAHEDRON3_H

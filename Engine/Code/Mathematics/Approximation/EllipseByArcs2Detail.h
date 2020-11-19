@@ -37,7 +37,7 @@ void Mathematics::EllipseByArcs2<Real>
 	auto beginSquare = begin * begin;
 	auto endSquare = end * end;
 	auto aMultipliedB = begin * end;
-	auto inverseEndSquareMinusBeginSquare = static_cast<Real>(1) / (endSquare - beginSquare);
+	auto inverseEndSquareMinusBeginSquare = Math::GetValue(1) / (endSquare - beginSquare);
 
 	auto numArcs = boost::numeric_cast<int>(m_Circle.size());
 
@@ -54,11 +54,11 @@ void Mathematics::EllipseByArcs2<Real>
 	{
 		// 新点曲率为两端曲率加权平均值。
 		auto weight1 = static_cast<Real>(index) / static_cast<Real>(numArcs);
-		auto weight0 = static_cast<Real>(1) - weight1;
+		auto weight0 = Math::GetValue(1) - weight1;
 		auto curvature = weight0 * beginCurvature + weight1 * endCurvature;
 
 		// 使用曲率计算点。
-		auto pow = Math<Real>::Pow(aMultipliedB / curvature, static_cast<Real>(2) / static_cast<Real>(3));
+		auto pow = Math<Real>::Pow(aMultipliedB / curvature, Math::GetValue(2) / static_cast<Real>(3));
 		m_Points[index].SetCoordinate(begin * Math<Real>::Sqrt(Math<Real>::FAbs((pow - beginSquare) * inverseEndSquareMinusBeginSquare)),
 									  end * Math<Real>::Sqrt(Math<Real>::FAbs((pow - endSquare) * inverseEndSquareMinusBeginSquare)));
 	}

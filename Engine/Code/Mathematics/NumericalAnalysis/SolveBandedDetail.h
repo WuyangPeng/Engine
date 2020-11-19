@@ -65,7 +65,7 @@ void Mathematics::SolveBanded<Real>
 		THROW_EXCEPTION(SYSTEM_TEXT("支点必须非零！"));
 	}
 
-	m_Matrix(reduceRow, reduceRow) = static_cast<Real>(1);
+	m_Matrix(reduceRow, reduceRow) = Math::GetValue(1);
 
 	// 行相乘使对角线项为1一致
 	auto columnMin = reduceRow + 1;

@@ -43,18 +43,18 @@ void Mathematics::StaticTestIntersectorSegment2Box2<Real>
 	Real AWdU[2]{};
 	Real ADdU[2]{};
 	auto RHS = Math::GetValue(0);
-	AWdU[0] = Math::FAbs(Vector2DTools::DotProduct(mSegment.GetDirection(), mBox.GetFirstAxis()));
-	ADdU[0] = Math::FAbs(Vector2DTools::DotProduct(diff, mBox.GetFirstAxis()));
-	RHS = mBox.GetFirstExtent() + mSegment.GetExtent() * AWdU[0];
+	AWdU[0] = Math::FAbs(Vector2DTools::DotProduct(mSegment.GetDirection(), mBox.GetAxis0()));
+	ADdU[0] = Math::FAbs(Vector2DTools::DotProduct(diff, mBox.GetAxis0()));
+	RHS = mBox.GetExtent0() + mSegment.GetExtent() * AWdU[0];
 	if (ADdU[0] > RHS)
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
 		return;
 	}
 
-	AWdU[1] = Math::FAbs(Vector2DTools::DotProduct(mSegment.GetDirection(), mBox.GetSecondAxis()));
-	ADdU[1] = Math::FAbs(Vector2DTools::DotProduct(diff, mBox.GetSecondAxis()));
-	RHS = mBox.GetSecondExtent() + mSegment.GetExtent() * AWdU[1];
+	AWdU[1] = Math::FAbs(Vector2DTools::DotProduct(mSegment.GetDirection(), mBox.GetAxis1()));
+	ADdU[1] = Math::FAbs(Vector2DTools::DotProduct(diff, mBox.GetAxis1()));
+	RHS = mBox.GetExtent1() + mSegment.GetExtent() * AWdU[1];
 	if (ADdU[1] > RHS)
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
@@ -63,9 +63,9 @@ void Mathematics::StaticTestIntersectorSegment2Box2<Real>
 
 	auto perp = Vector2DTools::GetPerp(mSegment.GetDirection());
 	auto LHS = Math::FAbs(Vector2DTools::DotProduct(perp, diff));
-	auto part0 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetFirstAxis()));
-	auto part1 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetSecondAxis()));
-	RHS = mBox.GetFirstExtent() * part0 + mBox.GetSecondExtent()*part1;
+	auto part0 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetAxis0()));
+	auto part1 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetAxis1()));
+	RHS = mBox.GetExtent0() * part0 + mBox.GetExtent1()*part1;
 	if (LHS <= RHS)
 	{
 		this->SetIntersectionType(IntersectionType::Point);

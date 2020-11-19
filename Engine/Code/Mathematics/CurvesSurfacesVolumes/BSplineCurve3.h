@@ -19,6 +19,8 @@ namespace Mathematics
 	template <typename Real>
 	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BSplineCurve3 : public SingleCurve3<Real>
 	{
+        public:
+			using Math = Math<Real>;
 	public:
 		// Construction and destruction.  The caller is responsible for deleting
 		// the input arrays if they were dynamically allocated.  Internal copies

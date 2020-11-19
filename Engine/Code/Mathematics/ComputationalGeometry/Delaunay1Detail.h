@@ -190,10 +190,10 @@ bool Mathematics::Delaunay1<Real>
         }
         else
         {
-            bary[0] = static_cast<Real>(1);
+            bary[0] = Math::GetValue(1);
         }
 
-        bary[1] = static_cast<Real>(1) - bary[0];
+        bary[1] = Math::GetValue(1) - bary[0];
         return true;
     }
     return false;

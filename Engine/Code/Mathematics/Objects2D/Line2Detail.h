@@ -1,97 +1,36 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 16:55) 
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/13 16:16)
 
 #ifndef MATHEMATICS_OBJECTS2D_LINE2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_LINE2_DETAIL_H
 
 #include "Line2.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_LINE2_ACHIEVE)
+
+    #include "Line2Achieve.h"
+
+#endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_LINE2_ACHIEVE)
 
 template <typename Real>
-Mathematics::Line2<Real>
-	::Line2(const Vector2D& origin, const Vector2D& direction, const Real epsilon)
-	:m_Origin{ origin }, m_Direction{ direction }, m_Epsilon{ epsilon }
+bool Mathematics::Approximate(const Line2<Real>& lhs, const Line2<Real>& rhs, const Real epsilon)
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-template <typename Real>
-bool Mathematics::Line2<Real>
-	::IsValid() const noexcept
-{
-	if (m_Direction.IsNormalize(m_Epsilon))
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
-
-template <typename Real>
-typename const Mathematics::Line2<Real>::Vector2D Mathematics::Line2<Real>
-	::GetOrigin() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	return m_Origin;
+    return Vector2DTools<Real>::Approximate(lhs.GetOrigin(), rhs.GetOrigin(), epsilon) &&
+           Vector2DTools<Real>::Approximate(lhs.GetDirection(), rhs.GetDirection(), epsilon);
 }
 
 template <typename Real>
-typename const Mathematics::Line2<Real>::Vector2D Mathematics::Line2<Real>
-	::GetDirection() const
+std::ostream& Mathematics::operator<<(std::ostream& outFile, const Line2<Real>& line)
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    outFile << "origin=" << line.GetOrigin() << ",direction=" << line.GetDirection();
 
-	return m_Direction;
+    return outFile;
 }
 
-template <typename Real>
-void Mathematics::Line2<Real>
-	::SetDirection(const Vector2D& direction)
-{
-	MATHEMATICS_CLASS_IS_VALID_1;
-
-	m_Direction = direction;
-}
-
-template <typename Real>
-void Mathematics::Line2<Real>
-	::SetOrigin(const Vector2D& origin)
-{
-	MATHEMATICS_CLASS_IS_VALID_1;
-
-	m_Origin = origin;
-}
-
-template <typename Real>
-const typename Mathematics::Line2<Real>::ClassType Mathematics::Line2<Real>
-	::GetMove(Real t, const Vector2D& velocity) const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	return Line2{ m_Origin + t * velocity, m_Direction,m_Epsilon };
-}
-
-template <typename Real>
-bool Mathematics
-	::Approximate(const Line2<Real>& lhs, const Line2<Real>& rhs, const Real epsilon)
-{
-	return Vector2DTools<Real>::Approximate(lhs.GetOrigin(), rhs.GetOrigin(), epsilon) &&
-		   Vector2DTools<Real>::Approximate(lhs.GetDirection(), rhs.GetDirection(), epsilon);
-}
-
-template <typename Real>
-std::ostream& Mathematics
-	::operator<<(std::ostream& outFile, const Line2<Real>& line)
-{
-	outFile << "origin=" << line.GetOrigin() << ",direction=" << line.GetDirection();
-
-	return outFile;
-}
-
-#endif // MATHEMATICS_OBJECTS2D_LINE2_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS2D_LINE2_DETAIL_H

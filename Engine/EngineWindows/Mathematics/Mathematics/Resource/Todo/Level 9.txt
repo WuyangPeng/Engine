@@ -1,7 +1,17 @@
 TODO Level 9
  
-0.5.2.2 
-
+0.5.2.3
+ 
+18. （NumericalAnalysis）Integer除法和求余操作，在除数为零时，返回无效或有符号的无穷大？
+19. （NumericalAnalysis）将EquationResult的ImaginaryLess类提取出来。
+20. （NumericalAnalysis）PolynomialRoots类有一些TODO需要完成。
+21. （NumericalAnalysis）SingularValueDecomposition类的Calculate函数需要从“矩阵计算”实现其他QR分解和奇异值分解代码，然后给用户指定这里使用哪些方法的能力。 
+15. （NumericalAnalysis）重构NumericalAnalysis模块。
+16. （NumericalAnalysis）导出NumericalAnalysis模块。
+17. （NumericalAnalysis）将内部类ImaginaryLess提出。
+18. （NumericalAnalysis）修改NumericalAnalysis迭代器的设计，看能否改成std。
+19. （NumericalAnalysis）将NumericalAnalysis模块的数组改成array。
+20. （NumericalAnalysis）完成SingularValueDecompositionGTE、SymmetricEigensolverGTE类。
 2.  （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
 3.  （综合）修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
 4.  （综合）数学库的函数大部分要定义成noexcept。
@@ -11,34 +21,11 @@ TODO Level 9
 2.  （综合）根据用户宏的五个断言宏在模块中使用断言。
 3.  （综合）静态数组改成std::array。
 1.  （综合）考虑使用Math::FloatingPointEqual替换Math::Approximate来比较浮点数的近似相等。
-1.   （综合）看是否能简化导出模板的宏定义。
-4.   （Objects2D）将Polygon2类中的CoreTools::SmartPointer1DArray<Vector2D>改成std::shared_ptr<Vector2D>。
-5.   （Objects2D）将ConvexPolygon2类中的CoreTools::SmartPointer1DArray<Line> 改成std::shared_ptr<Line>。
+1.   （综合）看是否能简化导出模板的宏定义。 
 6.   （综合）将数学库的智能指针改成std::shared_ptr。
-1.  （Objects3D）将Polyhedron3和ConvexPolyhedron3中的智能指针改成std::shared_ptr。
-2.  （Objects3D）将基本BSP算法用于ConvexPolyhedron3的Contains函数。这是一个O(log n)的算法。
 1.  （综合）替换掉boost库的静态断言为标准语法。
 6.  （综合）外部库引用数学库时，需要包含Detail.h头文件。改成根据MATHEMATICS_EXPORT_TEMPLATE是否定义包含不同的头文件。
 8.  （综合）修改数学库中使用的static_cast<Real>(0.5)和Math<Real>::sm_Zero，改用其他方式简化。
-9.  （综合）各个类的GetStreamSize函数返回改成int。
-12. （Objects2D）Segment2、Segment3类修正线段的值，按需求添加。
-13. （Objects2D）Polygon2类的类不变式判断多边形为简单多边形。
-14. （Objects2D）Triangle2类的类不变式判断三角形不共线。
-15. （Objects3D）Rectangle3类的类不变式判断m_Axis[0]和m_Axis[1]是互相垂直的。
-16. （Objects3D）Tetrahedron3类的类不变式判断三角形的面是被逆时针排序的三角形。
-17. （Objects3D）Triangle3类的类不变式判断三角形不共线。
-18. （NumericalAnalysis）Integer除法和求余操作，在除数为零时，返回无效或有符号的无穷大？
-19. （NumericalAnalysis）将EquationResult的ImaginaryLess类提取出来。
-20. （NumericalAnalysis）PolynomialRoots类有一些TODO需要完成。
-21. （NumericalAnalysis）SingularValueDecomposition类的Calculate函数需要从“矩阵计算”实现其他QR分解和奇异值分解代码，然后给用户指定这里使用哪些方法的能力。 
-1.  （Objects2D）导出Objects2D中的类。
-2.  （Objects2D）将Objects2D中的数组改成array。
-3.  （Objects2D）将Polygon2中的指针改成shared_ptr。
-4.  （Objects2D）修改Triangle2的DistanceTo函数。
-5.  （Objects3D）导出Objects3D中的类。
-6.  （Objects3D）将Objects3D中的数组改成array。
-7.  （Objects3D）修改Triangle3的DistanceTo函数。
-8.  （Rational）定义有理数的转换运算符。
 9.  （Query）重构Query模块。
 10. （Query）Query3Rational、Query2Rational修改了原有的缓存机制，改成构造时直接转换，看下是否合适。
 11. （Approximation）重构Approximation模块。
@@ -49,12 +36,3 @@ TODO Level 9
 16. （Intersection）重构Intersection模块。
 17. （Intersection）导出Intersection模块。
 18. （Intersection）补全Intersection模块。 
-12. （Rational）明确宏MATHEMATICS_ASSERT_ON_RATIONAL_CONVERT_NAN的用处，没用就删掉。
-13. （Rational）重构Rational模块。
-14. （Rational）将Rational模块的数组改成array。
-15. （NumericalAnalysis）重构NumericalAnalysis模块。
-16. （NumericalAnalysis）导出NumericalAnalysis模块。
-17. （NumericalAnalysis）将内部类ImaginaryLess提出。
-18. （NumericalAnalysis）修改NumericalAnalysis迭代器的设计，看能否改成std。
-19. （NumericalAnalysis）将NumericalAnalysis模块的数组改成array。
-20. （NumericalAnalysis）完成SingularValueDecompositionGTE、SymmetricEigensolverGTE类。

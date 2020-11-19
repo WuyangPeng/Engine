@@ -369,8 +369,8 @@ void Mathematics::Bisect2Storage<Real>
 	m_BeginPointY = xNext->GetY();
 	m_BeginPointX = yNext->GetX();
 	m_EndPointY = yNext->GetY();
-	m_MidpointX = static_cast<Real>(0.5) * (m_BeginPointX + m_EndPointX);
-	m_MidpointY = static_cast<Real>(0.5) * (m_BeginPointY + m_EndPointY);
+	m_MidpointX =  Math::GetRational(1,2) * (m_BeginPointX + m_EndPointX);
+	m_MidpointY =  Math::GetRational(1,2) * (m_BeginPointY + m_EndPointY);
 }
 
 template <typename Real>

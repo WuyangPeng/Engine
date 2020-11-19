@@ -96,7 +96,7 @@ namespace Mathematics
 		{
 			if (Math<Real>::FAbs(FZ[i]) > Math<Real>::GetZeroTolerance())
 			{
-				Real inv = -(static_cast<Real>(1)) / FZ[i];
+				Real inv = -(Math::GetValue(1)) / FZ[i];
 				mFX[i] *= inv;
 				mFY[i] *= inv;
 			}
@@ -168,7 +168,7 @@ namespace Mathematics
 			else
 			{
 				// No adjacent triangle, use center of edge.
-				U[j] = (static_cast<Real>(0.5))*(V[(j + 2) % 3] + V[(j + 1) % 3]);
+				U[j] = ( Math::GetRational(1,2))*(V[(j + 2) % 3] + V[(j + 1) % 3]);
 			}
 		}
 
@@ -181,7 +181,7 @@ namespace Mathematics
 		m11 = U[0].GetX() - mTData[i].Center.GetX();
 		r0 = m00 * V[0].GetX() + m01 * V[0].GetY();
 		r1 = m10 * mTData[i].Center.GetX() + m11 * mTData[i].Center.GetY();
-		invDet = (static_cast<Real>(1)) / (m00*m11 - m01 * m10);
+		invDet = (Math::GetValue(1)) / (m00*m11 - m01 * m10);
 		mTData[i].Intersect[0][0] = (m11*r0 - m01 * r1)*invDet;
 		mTData[i].Intersect[0][1] = (m00*r1 - m10 * r0)*invDet;
 
@@ -192,7 +192,7 @@ namespace Mathematics
 		m11 = U[1].GetX() - mTData[i].Center.GetX();
 		r0 = m00 * V[1].GetX() + m01 * V[1].GetY();
 		r1 = m10 * mTData[i].Center.GetX() + m11 * mTData[i].Center.GetY();
-		invDet = (static_cast<Real>(1)) / (m00*m11 - m01 * m10);
+		invDet = (Math::GetValue(1)) / (m00*m11 - m01 * m10);
 		mTData[i].Intersect[1][0] = (m11*r0 - m01 * r1)*invDet;
 		mTData[i].Intersect[1][1] = (m00*r1 - m10 * r0)*invDet;
 
@@ -203,7 +203,7 @@ namespace Mathematics
 		m11 = U[2].GetX() - mTData[i].Center.GetX();
 		r0 = m00 * V[0].GetX() + m01 * V[0].GetY();
 		r1 = m10 * mTData[i].Center.GetX() + m11 * mTData[i].Center.GetY();
-		invDet = (static_cast<Real>(1)) / (m00*m11 - m01 * m10);
+		invDet = (Math::GetValue(1)) / (m00*m11 - m01 * m10);
 		mTData[i].Intersect[2][0] = (m11*r0 - m01 * r1)*invDet;
 		mTData[i].Intersect[2][1] = (m00*r1 - m10 * r0)*invDet;
 	}
@@ -248,7 +248,7 @@ namespace Mathematics
 			else
 			{
 				// No adjacent triangle, use center of edge.
-				U[j] = (static_cast<Real>(0.5))*(V[(j + 2) % 3] + V[(j + 1) % 3]);
+				U[j] = ( Math::GetRational(1,2))*(V[(j + 2) % 3] + V[(j + 1) % 3]);
 			}
 		}
 
@@ -262,33 +262,33 @@ namespace Mathematics
 		Real alpha = (cenT[1] * cen1[0] - cenT[0] * cen1[1]) / (cen1[0] - cenT[0]);
 		Real beta = (cenT[2] * cen2[1] - cenT[1] * cen2[2]) / (cen2[1] - cenT[1]);
 		Real gamma = (cenT[0] * cen0[2] - cenT[2] * cen0[0]) / (cen0[2] - cenT[2]);
-		Real oneMinusAlpha = static_cast<Real>(1) - alpha;
-		Real oneMinusBeta = static_cast<Real>(1) - beta;
-		Real oneMinusGamma = static_cast<Real>(1) - gamma;
+		Real oneMinusAlpha = Math::GetValue(1) - alpha;
+		Real oneMinusBeta = Math::GetValue(1) - beta;
+		Real oneMinusGamma = Math::GetValue(1) - gamma;
 
 		Real tmp, A[9], B[9];
 
 		tmp = cenT[0] * V[0].GetX() + cenT[1] * V[1].GetX() + cenT[2] * V[2].GetX();
-		A[0] = (static_cast<Real>(0.5))*(tmp - V[0].GetX());
-		A[1] = (static_cast<Real>(0.5))*(tmp - V[1].GetX());
-		A[2] = (static_cast<Real>(0.5))*(tmp - V[2].GetX());
-		A[3] = (static_cast<Real>(0.5))*beta*(V[2].GetX() - V[0].GetX());
-		A[4] = (static_cast<Real>(0.5))*oneMinusGamma*(V[1].GetX() - V[0].GetX());
-		A[5] = (static_cast<Real>(0.5))*gamma*(V[0].GetX() - V[1].GetX());
-		A[6] = (static_cast<Real>(0.5))*oneMinusAlpha*(V[2].GetX() - V[1].GetX());
-		A[7] = (static_cast<Real>(0.5))*alpha*(V[1].GetX() - V[2].GetX());
-		A[8] = (static_cast<Real>(0.5))*oneMinusBeta*(V[0].GetX() - V[2].GetX());
+		A[0] = ( Math::GetRational(1,2))*(tmp - V[0].GetX());
+		A[1] = ( Math::GetRational(1,2))*(tmp - V[1].GetX());
+		A[2] = ( Math::GetRational(1,2))*(tmp - V[2].GetX());
+		A[3] = ( Math::GetRational(1,2))*beta*(V[2].GetX() - V[0].GetX());
+		A[4] = ( Math::GetRational(1,2))*oneMinusGamma*(V[1].GetX() - V[0].GetX());
+		A[5] = ( Math::GetRational(1,2))*gamma*(V[0].GetX() - V[1].GetX());
+		A[6] = ( Math::GetRational(1,2))*oneMinusAlpha*(V[2].GetX() - V[1].GetX());
+		A[7] = ( Math::GetRational(1,2))*alpha*(V[1].GetX() - V[2].GetX());
+		A[8] = ( Math::GetRational(1,2))*oneMinusBeta*(V[0].GetX() - V[2].GetX());
 
 		tmp = cenT[0] * V[0].GetY() + cenT[1] * V[1].GetY() + cenT[2] * V[2].GetY();
-		B[0] = (static_cast<Real>(0.5))*(tmp - V[0].GetY());
-		B[1] = (static_cast<Real>(0.5))*(tmp - V[1].GetY());
-		B[2] = (static_cast<Real>(0.5))*(tmp - V[2].GetY());
-		B[3] = (static_cast<Real>(0.5))*beta*(V[2].GetY() - V[0].GetY());
-		B[4] = (static_cast<Real>(0.5))*oneMinusGamma*(V[1].GetY() - V[0].GetY());
-		B[5] = (static_cast<Real>(0.5))*gamma*(V[0].GetY() - V[1].GetY());
-		B[6] = (static_cast<Real>(0.5))*oneMinusAlpha*(V[2].GetY() - V[1].GetY());
-		B[7] = (static_cast<Real>(0.5))*alpha*(V[1].GetY() - V[2].GetY());
-		B[8] = (static_cast<Real>(0.5))*oneMinusBeta*(V[0].GetY() - V[2].GetY());
+		B[0] = ( Math::GetRational(1,2))*(tmp - V[0].GetY());
+		B[1] = ( Math::GetRational(1,2))*(tmp - V[1].GetY());
+		B[2] = ( Math::GetRational(1,2))*(tmp - V[2].GetY());
+		B[3] = ( Math::GetRational(1,2))*beta*(V[2].GetY() - V[0].GetY());
+		B[4] = ( Math::GetRational(1,2))*oneMinusGamma*(V[1].GetY() - V[0].GetY());
+		B[5] = ( Math::GetRational(1,2))*gamma*(V[0].GetY() - V[1].GetY());
+		B[6] = ( Math::GetRational(1,2))*oneMinusAlpha*(V[2].GetY() - V[1].GetY());
+		B[7] = ( Math::GetRational(1,2))*alpha*(V[1].GetY() - V[2].GetY());
+		B[8] = ( Math::GetRational(1,2))*oneMinusBeta*(V[0].GetY() - V[2].GetY());
 
 		// Compute Bezier coefficients.
 		tData.Coeff[2] = jet[0].F;
@@ -399,7 +399,7 @@ namespace Mathematics
 		Real m10 = sub0.GetY() - sub2.GetY();
 		Real m01 = sub1.GetX() - sub2.GetX();
 		Real m11 = sub1.GetY() - sub2.GetY();
-		Real inv = (static_cast<Real>(1)) / (m00*m11 - m10 * m01);
+		Real inv = (Math::GetValue(1)) / (m00*m11 - m10 * m01);
 
 		FX = inv * (m11*duw - m10 * dvw);
 		FY = inv * (m00*dvw - m01 * duw);

@@ -64,8 +64,8 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 					t = Math<Real>::GetValue(0);
 					if (-b0 >= a00)
 					{
-						s = static_cast<Real>(1);
-						sqrDistance = a00 + (static_cast<Real>(2))*b0 + c;
+						s = Math::GetValue(1);
+						sqrDistance = a00 + (Math::GetValue(2))*b0 + c;
 					}
 					else
 					{
@@ -83,8 +83,8 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 					}
 					else if (-b1 >= a11)
 					{
-						t = static_cast<Real>(1);
-						sqrDistance = a11 + (static_cast<Real>(2))*b1 + c;
+						t = Math::GetValue(1);
+						sqrDistance = a11 + (Math::GetValue(2))*b1 + c;
 					}
 					else
 					{
@@ -103,8 +103,8 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				}
 				else if (-b1 >= a11)
 				{
-					t = static_cast<Real>(1);
-					sqrDistance = a11 + (static_cast<Real>(2))*b1 + c;
+					t = Math::GetValue(1);
+					sqrDistance = a11 + (Math::GetValue(2))*b1 + c;
 				}
 				else
 				{
@@ -123,8 +123,8 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 			}
 			else if (-b0 >= a00)
 			{
-				s = static_cast<Real>(1);
-				sqrDistance = a00 + (static_cast<Real>(2))*b0 + c;
+				s = Math::GetValue(1);
+				sqrDistance = a00 + (Math::GetValue(2))*b0 + c;
 			}
 			else
 			{
@@ -135,10 +135,10 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 		else  // region 0
 		{
 			// minimum at interior point
-			Real invDet = (static_cast<Real>(1)) / det;
+			Real invDet = (Math::GetValue(1)) / det;
 			s *= invDet;
 			t *= invDet;
-			sqrDistance = s * (a00*s + a01 * t + (static_cast<Real>(2))*b0) + t * (a01*s + a11 * t + (static_cast<Real>(2))*b1) + c;
+			sqrDistance = s * (a00*s + a01 * t + (Math::GetValue(2))*b0) + t * (a01*s + a11 * t + (Math::GetValue(2))*b1) + c;
 		}
 	}
 	else
@@ -152,18 +152,18 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 			if (tmp1 > tmp0)
 			{
 				numer = tmp1 - tmp0;
-				denom = a00 - (static_cast<Real>(2))*a01 + a11;
+				denom = a00 - (Math::GetValue(2))*a01 + a11;
 				if (numer >= denom)
 				{
-					s = static_cast<Real>(1);
+					s = Math::GetValue(1);
 					t = Math<Real>::GetValue(0);
-					sqrDistance = a00 + (static_cast<Real>(2))*b0 + c;
+					sqrDistance = a00 + (Math::GetValue(2))*b0 + c;
 				}
 				else
 				{
 					s = numer / denom;
-					t = static_cast<Real>(1) - s;
-					sqrDistance = s * (a00*s + a01 * t + (static_cast<Real>(2))*b0) + t * (a01*s + a11 * t + (static_cast<Real>(2))*b1) + c;
+					t = Math::GetValue(1) - s;
+					sqrDistance = s * (a00*s + a01 * t + (Math::GetValue(2))*b0) + t * (a01*s + a11 * t + (Math::GetValue(2))*b1) + c;
 				}
 			}
 			else
@@ -171,8 +171,8 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				s = Math<Real>::GetValue(0);
 				if (tmp1 <= Math<Real>::GetValue(0))
 				{
-					t = static_cast<Real>(1);
-					sqrDistance = a11 + (static_cast<Real>(2))*b1 + c;
+					t = Math::GetValue(1);
+					sqrDistance = a11 + (Math::GetValue(2))*b1 + c;
 				}
 				else if (b1 >= Math<Real>::GetValue(0))
 				{
@@ -193,18 +193,18 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 			if (tmp1 > tmp0)
 			{
 				numer = tmp1 - tmp0;
-				denom = a00 - (static_cast<Real>(2))*a01 + a11;
+				denom = a00 - (Math::GetValue(2))*a01 + a11;
 				if (numer >= denom)
 				{
-					t = static_cast<Real>(1);
+					t = Math::GetValue(1);
 					s = Math<Real>::GetValue(0);
-					sqrDistance = a11 + (static_cast<Real>(2))*b1 + c;
+					sqrDistance = a11 + (Math::GetValue(2))*b1 + c;
 				}
 				else
 				{
 					t = numer / denom;
-					s = static_cast<Real>(1) - t;
-					sqrDistance = s * (a00*s + a01 * t + (static_cast<Real>(2))*b0) + t * (a01*s + a11 * t + (static_cast<Real>(2))*b1) + c;
+					s = Math::GetValue(1) - t;
+					sqrDistance = s * (a00*s + a01 * t + (Math::GetValue(2))*b0) + t * (a01*s + a11 * t + (Math::GetValue(2))*b1) + c;
 				}
 			}
 			else
@@ -212,8 +212,8 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 				t = Math<Real>::GetValue(0);
 				if (tmp1 <= Math<Real>::GetValue(0))
 				{
-					s = static_cast<Real>(1);
-					sqrDistance = a00 + (static_cast<Real>(2))*b0 + c;
+					s = Math::GetValue(1);
+					sqrDistance = a00 + (Math::GetValue(2))*b0 + c;
 				}
 				else if (b0 >= Math<Real>::GetValue(0))
 				{
@@ -233,23 +233,23 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 			if (numer <= Math<Real>::GetValue(0))
 			{
 				s = Math<Real>::GetValue(0);
-				t = static_cast<Real>(1);
-				sqrDistance = a11 + (static_cast<Real>(2))*b1 + c;
+				t = Math::GetValue(1);
+				sqrDistance = a11 + (Math::GetValue(2))*b1 + c;
 			}
 			else
 			{
-				denom = a00 - (static_cast<Real>(2))*a01 + a11;
+				denom = a00 - (Math::GetValue(2))*a01 + a11;
 				if (numer >= denom)
 				{
-					s = static_cast<Real>(1);
+					s = Math::GetValue(1);
 					t = Math<Real>::GetValue(0);
-					sqrDistance = a00 + (static_cast<Real>(2))*b0 + c;
+					sqrDistance = a00 + (Math::GetValue(2))*b0 + c;
 				}
 				else
 				{
 					s = numer / denom;
-					t = static_cast<Real>(1) - s;
-					sqrDistance = s * (a00*s + a01 * t + (static_cast<Real>(2))*b0) + t * (a01*s + a11 * t + (static_cast<Real>(2))*b1) + c;
+					t = Math::GetValue(1) - s;
+					sqrDistance = s * (a00*s + a01 * t + (Math::GetValue(2))*b0) + t * (a01*s + a11 * t + (Math::GetValue(2))*b1) + c;
 				}
 			}
 		}
@@ -265,7 +265,7 @@ typename const Mathematics::DistPoint3Triangle3<Real>::DistanceResult Mathematic
 	mClosestPoint1 = mTriangle.GetVertex(0) + s * edge0 + t * edge1;
 	mTriangleBary[1] = s;
 	mTriangleBary[2] = t;
-	mTriangleBary[0] = static_cast<Real>(1) - s - t;
+	mTriangleBary[0] = Math::GetValue(1) - s - t;
 
 	return DistanceResult{ sqrDistance, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
 }

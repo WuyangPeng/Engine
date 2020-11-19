@@ -56,7 +56,7 @@ Mathematics::Delaunay2<Real>
     {
         // Transform the vertices to the square [0,1]^2.
         mMin = info.GetMinExtreme();
-        mScale = (static_cast<Real>(1))/info.GetMaxRange();
+        mScale = (Math::GetValue(1))/info.GetMaxRange();
         for (i = 0; i < mNumVertices; ++i)
         {
             mSVertices[i] = (mVertices[i] - mMin)*mScale;
@@ -81,7 +81,7 @@ Mathematics::Delaunay2<Real>
         else // queryType == Query::QT_REAL
         {
             // No scaling for floating point.
-            expand = static_cast<Real>(1);
+            expand = Math::GetValue(1);
             mQuery = NEW0 Query2<Real>(mSVertices);
         }
 
@@ -95,7 +95,7 @@ Mathematics::Delaunay2<Real>
     {
         // No transformation needed for exact rational arithmetic.
         mMin = Vector2D<Real>::sm_Zero;
-        mScale = static_cast<Real>(1);
+        mScale = Math::GetValue(1);
         memcpy(&mSVertices[0], &mVertices[0], mNumVertices*sizeof(Vector2D<Real>));
 
         if (queryType == QueryType::Rational)

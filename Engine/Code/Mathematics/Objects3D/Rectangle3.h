@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 17:23)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/17 17:02)
 
 #ifndef MATHEMATICS_OBJECTS3D_RECTANGLE3_H
 #define MATHEMATICS_OBJECTS3D_RECTANGLE3_H
@@ -11,57 +14,65 @@
 
 #include "Mathematics/Algebra/Vector3D.h"
 
+#include <type_traits>
 #include <vector>
-#include <type_traits> 
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Rectangle3
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class Rectangle3Impl;
 
-		using ClassType = Rectangle3<Real>;
-		using Vector3D = Vector3D<Real>;
-		using Math = Math<Real>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Rectangle3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Rectangle3Impl<double>>;
 
-	public:
-		// 点Real(s,t) = C+s0*U0+s1*U1，其中C是矩形的中心，U0和U1是单位长度的垂直轴。
-		// 参数s0和s1是由约束|s0| <= e0 和|s1| <= e1，
-		// 其中e0 > 0和e1 > 0称为矩形的范围。
-		Rectangle3(const Vector3D& center, const Vector3D& axis0, const Vector3D& axis1, Real extent0, Real extent1, const Real epsilon = Math::GetZeroTolerance());
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Rectangle3Impl<Real>>;
 
-		CLASS_INVARIANT_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Rectangle3 final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		const Vector3D GetCenter() const;
-		const Vector3D GetFirstAxis() const;
-		const Vector3D GetSecondAxis() const;
-		Real GetFirstExtent() const;
-		Real GetSecondExtent() const;
+        using Rectangle3Impl = Rectangle3Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Rectangle3);
 
-		const Vector3D GetAxis(int index) const;
-		Real GetExtent(int index) const;
+        using Math = Math<Real>;
+        using Vector3D = Vector3D<Real>;
+        using VerticesType = std::vector<Vector3D>;
 
-		// 返回矩形的四个顶点
-		const std::vector<Vector3D> ComputeVertices() const;
+    public:
+        // 点Real(s,t) = C + s0 * U0 + s1 * U1，其中C是矩形的中心，U0和U1是单位长度的垂直轴。
+        // 参数s0和s1是由约束|s0| <= e0 和|s1| <= e1，
+        // 其中e0 > 0和e1 > 0称为矩形的范围。
+        Rectangle3(const Vector3D& center, const Vector3D& axis0, const Vector3D& axis1, Real extent0, Real extent1, const Real epsilon = Math::GetZeroTolerance());
 
-		// 获取矩形角。
-		const Vector3D GetPPCorner() const;  // C + e0*A0 + e1*A1
-		const Vector3D GetPMCorner() const;  // C + e0*A0 - e1*A1
-		const Vector3D GetMPCorner() const;  // C - e0*A0 + e1*A1
-		const Vector3D GetMMCorner() const;  // C - e0*A0 - e1*A1
+        CLASS_INVARIANT_DECLARE;
 
-	private:
-		Vector3D m_Center;
-		Vector3D m_Axis[2];
-		Real m_Extent[2];
+        [[nodiscard]] const Vector3D GetCenter() const noexcept;
+        [[nodiscard]] const Vector3D GetAxis0() const noexcept;
+        [[nodiscard]] const Vector3D GetAxis1() const noexcept;
+        [[nodiscard]] Real GetExtent0() const noexcept;
+        [[nodiscard]] Real GetExtent1() const noexcept;
 
-		Real m_Epsilon;
-	};
+        [[nodiscard]] const Vector3D GetAxis(int index) const;
+        [[nodiscard]] Real GetExtent(int index) const;
 
-	using Rectangle3f = Rectangle3<float>;
-	using Rectangle3d = Rectangle3<double>;
+        // 返回矩形的四个顶点
+        [[nodiscard]] const VerticesType ComputeVertices() const;
+
+        // 获取矩形角。
+        [[nodiscard]] const Vector3D GetPPCorner() const;  // C + e0 * A0 + e1 * A1
+        [[nodiscard]] const Vector3D GetPMCorner() const;  // C + e0 * A0 - e1 * A1
+        [[nodiscard]] const Vector3D GetMPCorner() const;  // C - e0 * A0 + e1 * A1
+        [[nodiscard]] const Vector3D GetMMCorner() const;  // C - e0 * A0 - e1 * A1
+
+    private:
+        IMPL_TYPE_DECLARE(Rectangle3);
+    };
+
+    using FloatRectangle3 = Rectangle3<float>;
+    using DoubleRectangle3 = Rectangle3<double>;
 }
 
-#endif // MATHEMATICS_OBJECTS3D_RECTANGLE3_H
+#endif  // MATHEMATICS_OBJECTS3D_RECTANGLE3_H

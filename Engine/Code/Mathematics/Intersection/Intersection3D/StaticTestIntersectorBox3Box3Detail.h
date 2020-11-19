@@ -41,7 +41,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>
     // the cases when at least one pair of axes are parallel.  If this
     // happens, there is no need to test for separation along the
     // Cross(A[i],B[j]) directions.
-    const auto cutoff = static_cast<Real>(1) - Math::GetZeroTolerance();
+    const auto cutoff = Math::GetValue(1) - Math::GetZeroTolerance();
 	auto existsParallelPair = false;
     int i;
 

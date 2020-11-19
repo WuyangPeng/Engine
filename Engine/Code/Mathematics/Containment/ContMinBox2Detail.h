@@ -44,7 +44,7 @@ Mathematics::MinBox2<Real>
 			auto length = Vector2DTools<Real>::VectorMagnitude(diff);
 			diff.Normalize();
 
-			mMinBox = Box2<Real>{ center,diff,Vector2DTools<Real>::GetPerp(mMinBox.GetFirstAxis()), (Real{0.5})*length,Math<Real>::GetValue(0) };
+			mMinBox = Box2<Real>{ center,diff,Vector2DTools<Real>::GetPerp(mMinBox.GetAxis0()), (Real{0.5})*length,Math<Real>::GetValue(0) };
 
             DELETE0(hull1);
             return;
@@ -157,7 +157,7 @@ Mathematics::MinBox2<Real>
  
 	mMinBox = Box2<Real>{ center, Vector2D<Real>::sm_UnitX, Vector2D<Real>::sm_UnitY,(Real{0.5})*(xmax - xmin), (Real{0.5})*(ymax - ymin) };
 
-	auto minAreaDiv4 = mMinBox.GetFirstExtent() *mMinBox.GetSecondExtent();
+	auto minAreaDiv4 = mMinBox.GetExtent0() *mMinBox.GetExtent1();
 
     // The rotating calipers algorithm.
 	auto U = Vector2D<Real>::sm_UnitX;

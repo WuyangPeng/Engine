@@ -33,11 +33,11 @@ void Mathematics::StaticTestIntersectorBox2Box2<Real>
 	auto boxCentersDifference = m_RhsBox.GetCenter() - m_LhsBox.GetCenter();
 
 	// Öá C0 + t * A0
-	auto absLhs0DotRhs0 = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetFirstAxis(), m_RhsBox.GetFirstAxis()));
-	auto absLhs0DotRhs1 = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetFirstAxis(), m_RhsBox.GetSecondAxis()));
+	auto absLhs0DotRhs0 = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetAxis0(), m_RhsBox.GetAxis0()));
+	auto absLhs0DotRhs1 = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetAxis0(), m_RhsBox.GetAxis1()));
 
-	auto absLhs0DotDifference = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetFirstAxis(), boxCentersDifference));
-	auto sum = m_LhsBox.GetFirstExtent() + m_RhsBox.GetFirstExtent() * absLhs0DotRhs0 + m_RhsBox.GetSecondExtent() * absLhs0DotRhs1;
+	auto absLhs0DotDifference = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetAxis0(), boxCentersDifference));
+	auto sum = m_LhsBox.GetExtent0() + m_RhsBox.GetExtent0() * absLhs0DotRhs0 + m_RhsBox.GetExtent1() * absLhs0DotRhs1;
 
 	if (sum < absLhs0DotDifference)
 	{
@@ -46,12 +46,12 @@ void Mathematics::StaticTestIntersectorBox2Box2<Real>
 	}
 
 	// Öá C0 + t * A1
-	auto absLhs1DotRhs0 = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetSecondAxis(), m_RhsBox.GetFirstAxis()));
-	auto absLhs1DotRhs1 = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetSecondAxis(), m_RhsBox.GetSecondAxis()));
+	auto absLhs1DotRhs0 = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetAxis1(), m_RhsBox.GetAxis0()));
+	auto absLhs1DotRhs1 = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetAxis1(), m_RhsBox.GetAxis1()));
 
-	auto absLhs1DotDifference = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetSecondAxis(), boxCentersDifference));
+	auto absLhs1DotDifference = Math::FAbs(Vector2DTools::DotProduct(m_LhsBox.GetAxis1(), boxCentersDifference));
 
-	sum = m_LhsBox.GetSecondExtent() + m_RhsBox.GetFirstExtent() * absLhs1DotRhs0 + m_RhsBox.GetSecondExtent() * absLhs1DotRhs1;
+	sum = m_LhsBox.GetExtent1() + m_RhsBox.GetExtent0() * absLhs1DotRhs0 + m_RhsBox.GetExtent1() * absLhs1DotRhs1;
 
 	if (sum < absLhs1DotDifference)
 	{
@@ -60,9 +60,9 @@ void Mathematics::StaticTestIntersectorBox2Box2<Real>
 	}
 
 	// Öá C0 + t * B0
-	auto absRhs0DotDifference = Math::FAbs(Vector2DTools::DotProduct(m_RhsBox.GetFirstAxis(), boxCentersDifference));
+	auto absRhs0DotDifference = Math::FAbs(Vector2DTools::DotProduct(m_RhsBox.GetAxis0(), boxCentersDifference));
 
-	sum = m_RhsBox.GetFirstExtent() + m_LhsBox.GetFirstExtent() * absLhs0DotRhs0 + m_LhsBox.GetSecondExtent() * absLhs1DotRhs0;
+	sum = m_RhsBox.GetExtent0() + m_LhsBox.GetExtent0() * absLhs0DotRhs0 + m_LhsBox.GetExtent1() * absLhs1DotRhs0;
 
 	if (sum < absRhs0DotDifference)
 	{
@@ -71,8 +71,8 @@ void Mathematics::StaticTestIntersectorBox2Box2<Real>
 	}
 
 	// Öá C0 + t * B1
-	auto absRhs1DotDifference = Math::FAbs(Vector2DTools::DotProduct(m_RhsBox.GetSecondAxis(), boxCentersDifference));
-	sum = m_RhsBox.GetSecondExtent() + m_LhsBox.GetFirstExtent() * absLhs0DotRhs1 + m_LhsBox.GetSecondExtent() * absLhs1DotRhs1;
+	auto absRhs1DotDifference = Math::FAbs(Vector2DTools::DotProduct(m_RhsBox.GetAxis1(), boxCentersDifference));
+	sum = m_RhsBox.GetExtent1() + m_LhsBox.GetExtent0() * absLhs0DotRhs1 + m_LhsBox.GetExtent1() * absLhs1DotRhs1;
 
 	if (sum < absRhs1DotDifference)
 	{

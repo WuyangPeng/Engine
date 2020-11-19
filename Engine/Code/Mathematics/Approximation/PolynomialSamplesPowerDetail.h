@@ -73,7 +73,7 @@ void Mathematics::PolynomialSamplesPower<Real>
 {
 	for (auto samplesIndex = 0; samplesIndex < m_NumSamples; ++samplesIndex)
 	{
-		m_Power[samplesIndex][0] = static_cast<Real>(1);
+		m_Power[samplesIndex][0] = Math::GetValue(1);
 		for (auto degreeIndex = 1; degreeIndex < m_NumDegree; ++degreeIndex)
 		{
 			m_Power[samplesIndex][degreeIndex] = samples[samplesIndex] * m_Power[samplesIndex][degreeIndex - 1];

@@ -359,7 +359,7 @@ Real Mathematics ::AQuaternion<Real>::ToAngle() const noexcept
 
     if (Math::GetZeroTolerance() < sqrareLength)
     {
-        return static_cast<Real>(2) * Math::ACos(m_W);
+        return Math::GetValue(2) * Math::ACos(m_W);
     }
     else
     {
@@ -593,7 +593,7 @@ void Mathematics::AQuaternion<Real>::Squad(Real t, const AQuaternion& q0, const 
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto slerpT = static_cast<Real>(2) * t * (Math::GetValue(1) - t);
+    auto slerpT = Math::GetValue(2) * t * (Math::GetValue(1) - t);
 
     AQuaternion slerpP{};
     slerpP.Slerp(t, q0, q1);

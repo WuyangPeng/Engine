@@ -73,8 +73,8 @@ const typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics
 		// 线不平行。	
 		auto lhsT = tool.GetLhsT() / det;
 		auto rhsT = tool.GetRhsT() / det;
-		auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-							   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
+		auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
+							   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 							   tool.GetOriginDifferenceSquaredLength();
 
 		return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::GetValue(0), m_LhsLine.GetOrigin() + lhsT * m_LhsLine.GetDirection(),

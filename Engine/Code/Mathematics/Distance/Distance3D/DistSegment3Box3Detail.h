@@ -79,8 +79,8 @@ typename const Mathematics::DistSegment3Box3<Real>::DistanceResult Mathematics::
 	auto movedCenter0 = mSegment.GetCenterPoint() + t * lhsVelocity;
 	auto movedCenter1 = mBox.GetCenter() + t * rhsVelocity;
 	Segment3 movedSegment{ movedCenter0, mSegment.GetDirection(),mSegment.GetExtent() };
-	Box3 movedBox{ movedCenter1,mBox.GetFirstAxis(),mBox.GetSecondAxis(),mBox.GetThirdAxis(),
-				   mBox.GetFirstExtent(), mBox.GetSecondExtent(),mBox.GetThirdExtent() };
+	Box3 movedBox{ movedCenter1,mBox.GetAxis0(),mBox.GetAxis1(),mBox.GetThirdAxis(),
+				   mBox.GetExtent0(), mBox.GetExtent1(),mBox.GetThirdExtent() };
 	return DistSegment3Box3<Real>{ movedSegment, movedBox }.GetSquared();
 }
 

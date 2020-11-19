@@ -173,7 +173,7 @@ Real Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	auto dot = dx * vx + dy * vy + dz * vz;
 	auto diff = dx * dx + dy * dy + dz * dz - rsqr;
 	auto inv = Math::InvSqrt(Math::FAbs(dot*dot - vsqr * diff));
-	return diff * inv / (static_cast<Real>(1) - dot * inv);
+	return diff * inv / (Math::GetValue(1) - dot * inv);
 }
 
 template <typename Real>
@@ -187,7 +187,7 @@ Real Mathematics::DynamicFindIntersectorBox3Sphere3<Real>
 	auto dot = vx * dx + vz * dz;
 	auto diff = dx * dx + dz * dz - rsqr;
 	auto inv = Math::InvSqrt(Math::FAbs(dot*dot - vsqr * diff));
-	return diff * inv / (static_cast<Real>(1) - dot * inv);
+	return diff * inv / (Math::GetValue(1) - dot * inv);
 }
 
 template <typename Real>

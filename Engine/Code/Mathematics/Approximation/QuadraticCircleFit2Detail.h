@@ -79,7 +79,7 @@ void Mathematics::QuadraticCircleFit2<Real>
 	// 当心除零
 	if (Math<Real>::GetZeroTolerance() < Math<Real>::FAbs(eigenVector[3]))
 	{
-		auto inv = static_cast<Real>(1) / eigenVector[3];
+		auto inv = Math::GetValue(1) / eigenVector[3];
 
 		Real coeff[3]{ };
 		for (auto row = 0; row < 3; ++row)
@@ -87,8 +87,8 @@ void Mathematics::QuadraticCircleFit2<Real>
 			coeff[row] = inv * eigenVector[row];
 		}
 
-		m_Center[0] = -(static_cast<Real>(0.5) * coeff[1]);
-		m_Center[1] = -(static_cast<Real>(0.5) * coeff[2]);
+		m_Center[0] = -( Math::GetRational(1,2) * coeff[1]);
+		m_Center[1] = -( Math::GetRational(1,2) * coeff[2]);
 		m_Radius = Math<Real>::Sqrt(Math<Real>::FAbs(m_Center[0] * m_Center[0] + m_Center[1] * m_Center[1] - coeff[0]));
 
 		// 对于精确配合，数字舍入误差可能使最小特征值仅仅略为负值。

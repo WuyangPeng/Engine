@@ -238,6 +238,21 @@
     <Filter Include="Algebra 头文件\Detail">
       <UniqueIdentifier>{35a980de-c8cc-49cc-9a17-59319e195292}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects2D 源文件">
+      <UniqueIdentifier>{0a79f17f-8c89-4199-99c5-27e55e9db527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects2D 头文件\Detail">
+      <UniqueIdentifier>{76aa3d14-427a-4832-87c9-b381d7575330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects2D 模板文件\Detail">
+      <UniqueIdentifier>{81a6456d-0e28-4354-9a96-9c92b584f021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects3D 模板文件\Detail">
+      <UniqueIdentifier>{6902edcf-e096-4a3d-9a7b-5082c5044c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects3D 头文件\Detail">
+      <UniqueIdentifier>{ae12d271-a85c-4241-a910-d240cb61b533}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -577,6 +592,114 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector3DOrthonormalize.cpp">
       <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Arc2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Box2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Circle2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Polygon2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Line2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Ray2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Segment2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\ConvexPolygon2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Ellipse2Coefficients.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Triangle2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Ellipse2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BarycentricCoordinates.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Box3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Segment3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Capsule3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Circle3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Cone3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Line3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Ray3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Triangle3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Sphere3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Cylinder3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Ellipse3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Frustum3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Plane3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Ellipsoid3Coefficients.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Ellipsoid3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Tetrahedron3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Rectangle3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Lozenge3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Polyhedron3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\ConvexPolyhedron3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\Integer.cpp">
+      <Filter>Rational 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\SignRational.cpp">
+      <Filter>Rational 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\RationalVector2.cpp">
+      <Filter>Rational 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\RationalVector3.cpp">
+      <Filter>Rational 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -4101,6 +4224,189 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector3DToolsAchieve.h">
       <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Arc2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Box2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Box2ImplDetail.h">
+      <Filter>Objects2D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Box2Impl.h">
+      <Filter>Objects2D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Circle2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Polygon2Impl.h">
+      <Filter>Objects2D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Polygon2ImplDetail.h">
+      <Filter>Objects2D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Polygon2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Line2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ray2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Segment2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\ConvexPolygon2Impl.h">
+      <Filter>Objects2D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\ConvexPolygon2ImplDetail.h">
+      <Filter>Objects2D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\ConvexPolygon2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Ellipse2CoefficientsImplDetail.h">
+      <Filter>Objects2D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Ellipse2CoefficientsImpl.h">
+      <Filter>Objects2D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ellipse2CoefficientsAchieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Triangle2Impl.h">
+      <Filter>Objects2D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Triangle2ImplDetail.h">
+      <Filter>Objects2D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Triangle2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Ellipse2Impl.h">
+      <Filter>Objects2D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Detail\Ellipse2ImplDetail.h">
+      <Filter>Objects2D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Ellipse2Achieve.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Box3ImplDetail.h">
+      <Filter>Objects3D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Box3Impl.h">
+      <Filter>Objects3D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Box3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Segment3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Capsule3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Circle3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Cone3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Line3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ray3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Triangle3ImplDetail.h">
+      <Filter>Objects3D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Triangle3Impl.h">
+      <Filter>Objects3D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Triangle3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Sphere3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Cylinder3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipse3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Frustum3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Plane3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Torus3ParametersAchieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Torus3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Ellipsoid3CoefficientsImpl.h">
+      <Filter>Objects3D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Ellipsoid3CoefficientsImplDetail.h">
+      <Filter>Objects3D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipsoid3CoefficientsAchieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Ellipsoid3Impl.h">
+      <Filter>Objects3D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Ellipsoid3ImplDetail.h">
+      <Filter>Objects3D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Ellipsoid3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Tetrahedron3Impl.h">
+      <Filter>Objects3D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Tetrahedron3ImplDetail.h">
+      <Filter>Objects3D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Tetrahedron3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Rectangle3Impl.h">
+      <Filter>Objects3D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Rectangle3ImplDetail.h">
+      <Filter>Objects3D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Rectangle3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Lozenge3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Polyhedron3Impl.h">
+      <Filter>Objects3D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\Polyhedron3ImplDetail.h">
+      <Filter>Objects3D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Polyhedron3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\ConvexPolyhedron3Impl.h">
+      <Filter>Objects3D 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Detail\ConvexPolyhedron3ImplDetail.h">
+      <Filter>Objects3D 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\ConvexPolyhedron3Achieve.h">
+      <Filter>Objects3D 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

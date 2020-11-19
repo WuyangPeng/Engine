@@ -54,11 +54,11 @@ void Mathematics::PolarDecompositionValue<Real>
 	// 数值舍入误差会导致不是对称的，
 	// 即S[i][j] 和S[j][i]]略有不同,当i != j。
 	// 通过平均S = (S + S^T)/2更正。
-	m_Symmetry(0, 1) = static_cast<Real>(0.5) * (m_Symmetry(0, 1) + m_Symmetry(1, 0));
+	m_Symmetry(0, 1) =  Math::GetRational(1,2) * (m_Symmetry(0, 1) + m_Symmetry(1, 0));
 	m_Symmetry(1, 0) = m_Symmetry(0, 1);
-	m_Symmetry(0, 2) = static_cast<Real>(0.5) * (m_Symmetry(0, 2) + m_Symmetry(2, 0));
+	m_Symmetry(0, 2) =  Math::GetRational(1,2) * (m_Symmetry(0, 2) + m_Symmetry(2, 0));
 	m_Symmetry(2, 0) = m_Symmetry(0, 2);
-	m_Symmetry(1, 2) = static_cast<Real>(0.5) * (m_Symmetry(1, 2) + m_Symmetry(2, 1));
+	m_Symmetry(1, 2) =  Math::GetRational(1,2) * (m_Symmetry(1, 2) + m_Symmetry(2, 1));
 	m_Symmetry(2, 1) = m_Symmetry(1, 2);
 }
 

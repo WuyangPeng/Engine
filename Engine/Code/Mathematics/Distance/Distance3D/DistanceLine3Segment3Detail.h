@@ -84,8 +84,8 @@ const typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathemat
 				auto lhsT = tool.GetLhsT() / det;
 				rhsT /= det;
 
-				auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-									   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) +
+				auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
+									   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
 									   tool.GetOriginDifferenceSquaredLength();
 
 				return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::GetValue(0), m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),
@@ -115,7 +115,7 @@ const typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathemat
 	::GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool, Real rhsExtent) const
 {
 	auto t = tool.GetLhsT(-rhsExtent);
-	auto rhsSquare = rhsExtent * (rhsExtent + static_cast<Real>(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
+	auto rhsSquare = rhsExtent * (rhsExtent + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
 
 	return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),Math::GetValue(0), m_Line.GetOrigin() + t * m_Line.GetDirection(),
 						   m_Segment.GetCenterPoint() + rhsExtent * m_Segment.GetDirection(),t,rhsExtent };

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/19 17:23)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/17 18:37)
 
 #ifndef MATHEMATICS_OBJECTS3D_POLYHEDRON3_H
 #define MATHEMATICS_OBJECTS3D_POLYHEDRON3_H
@@ -18,17 +21,28 @@
 namespace Mathematics
 {
     template <typename Real>
-    class Polyhedron3
+    class Polyhedron3Impl;
+
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Polyhedron3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Polyhedron3Impl<double>>;
+
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Polyhedron3Impl<Real>>;
+
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Polyhedron3
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using ClassType = Polyhedron3<Real>;
+        using Polyhedron3Impl = Polyhedron3Impl<Real>;
+        COPY_UNSHARE_CLASSES_BASE_TYPE_DECLARE(Polyhedron3, DESTRUCTOR_DEFAULT);
+
         using Math = Math<Real>;
         using Vector3D = Vector3D<Real>;
-        using Vector3DPtr = CoreTools::SmartPointer1DArray<Vector3D>;
-        using IntPtr = CoreTools::SmartPointer1DArray<int>;
         using Vector3DTools = Vector3DTools<Real>;
+        using VerticesType = std::vector<Vector3D>;
+        using IndicesType = std::vector<int>;
 
     public:
         // 调用者负责确保网格代表一个简单的多面体
@@ -38,45 +52,33 @@ namespace Mathematics
         // Polyhedron3对象一般从其他来源共享数据。
         // 这个类使用智能指针（SmartPointer1DArray）共享输入数组。
         // 如果您不希望类删除数组，使用自己的智能指针的数组。
-        Polyhedron3(int numVertices, Vector3DPtr vertices, int numTriangles, IntPtr indices);
-        virtual ~Polyhedron3();
-        Polyhedron3(const Polyhedron3& rhs) = delete;
-        Polyhedron3& operator=(const Polyhedron3& rhs) = delete;
-        Polyhedron3(Polyhedron3&& rhs) = delete;
-        Polyhedron3& operator=(Polyhedron3&& rhs) = delete;
+        Polyhedron3(const VerticesType& vertices, const IndicesType& indices);
 
-#ifdef OPEN_CLASS_INVARIANT
         CLASS_INVARIANT_VIRTUAL_DECLARE;
-        bool IndicesIsValid() const noexcept;
-#endif  // OPEN_CLASS_INVARIANT
 
         // 只读成员访问。
-        int GetNumVertices() const noexcept;
-        const Vector3DPtr GetVertices() const;
-        const Vector3D& GetVertex(int index) const;
-        int GetNumTriangles() const noexcept;
-        int GetNumIndices() const;  // = 3 * numTriangles
-        const IntPtr GetIndices() const;
-        const int* GetTriangle(int index) const;
+        [[nodiscard]] int GetNumVertices() const;
+        [[nodiscard]] const VerticesType GetVertices() const;
+        [[nodiscard]] const Vector3D& GetVertex(int index) const;
+        [[nodiscard]] int GetNumTriangles() const;
+        [[nodiscard]] int GetNumIndices() const;  // = 3 * numTriangles
+        [[nodiscard]] const IndicesType GetIndices() const;
+        [[nodiscard]] const IndicesType GetTriangle(int index) const;
 
         // 允许顶点修改。调用者必须确保多面体仍然是简单多面体。
         virtual void SetVertex(int index, const Vector3D& vertex);
 
         // 计算关于所述多面体的各种信息。
-        const Vector3D ComputeVertexAverage() const;
-        Real ComputeSurfaceArea() const;
-        Real ComputeVolume() const;
+        [[nodiscard]] const Vector3D ComputeVertexAverage() const;
+        [[nodiscard]] Real ComputeSurfaceArea() const;
+        [[nodiscard]] Real ComputeVolume() const;
 
     private:
-        int m_NumVertices;
-        Vector3DPtr m_Vertices;
-        int m_NumTriangles;
-        int m_NumIndices;
-        IntPtr m_Indices;
+        IMPL_TYPE_DECLARE(Polyhedron3);
     };
 
-    using Polyhedron3f = Polyhedron3<float>;
-    using Polyhedron3d = Polyhedron3<double>;
+    using FloatPolyhedron3 = Polyhedron3<float>;
+    using DoublePolyhedron3 = Polyhedron3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_POLYHEDRON3_H

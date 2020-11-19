@@ -13,6 +13,7 @@
 10. 不同平台或项目配置命名规则：Static + $(Platform) + $(Configuration)，如StaticX64Debug。
 11. 使用min和max表示[min,max]区间，使用begin和end表示[begin,end)区间。
 12. 多行注释使用///。
+13. 禁止注释掉代码，必需保留的代码使用预处理器。
 
 设计规范
 

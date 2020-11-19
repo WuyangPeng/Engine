@@ -44,7 +44,7 @@ namespace Mathematics
 					mXMax = X[i];
 				}
 			}
-			mXInvRange = (static_cast<Real>(1)) / (mXMax - mXMin);
+			mXInvRange = (Math::GetValue(1)) / (mXMax - mXMin);
 			for (i = 0; i < mQuantity; ++i)
 			{
 				mX[i] = (X[i] - mXMin)*mXInvRange;
@@ -63,7 +63,7 @@ namespace Mathematics
 					mYMax = Y[i];
 				}
 			}
-			mYInvRange = (static_cast<Real>(1)) / (mYMax - mYMin);
+			mYInvRange = (Math::GetValue(1)) / (mYMax - mYMin);
 			for (i = 0; i < mQuantity; ++i)
 			{
 				mY[i] = (Y[i] - mYMin)*mYInvRange;
@@ -75,11 +75,11 @@ namespace Mathematics
 			// mXMax and mYMax are not used, but they are initialized anyway
 			// (to irrelevant numbers).
 			mXMin = Math<Real>::GetValue(0);
-			mXMax = static_cast<Real>(1);
-			mXInvRange = static_cast<Real>(1);
+			mXMax = Math::GetValue(1);
+			mXInvRange = Math::GetValue(1);
 			mYMin = Math<Real>::GetValue(0);
-			mYMax = static_cast<Real>(1);
-			mYInvRange = static_cast<Real>(1);
+			mYMax = Math::GetValue(1);
+			mYInvRange = Math::GetValue(1);
 			memcpy(mX, X, mQuantity * sizeof(Real));
 			memcpy(mY, Y, mQuantity * sizeof(Real));
 		}
@@ -108,7 +108,7 @@ namespace Mathematics
 		VariableMatrix<Real> BMat(mQuantity, 3);
 		for (row = 0; row < mQuantity; ++row)
 		{
-			BMat[row][0] = static_cast<Real>(1);
+			BMat[row][0] = Math::GetValue(1);
 			BMat[row][1] = mX[row];
 			BMat[row][2] = mY[row];
 		}

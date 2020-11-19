@@ -25,7 +25,7 @@ Mathematics::QuaternionConstraints<Real>::QuaternionConstraints(Real minAngle, R
       m_SinMaxAngle{ Math::Sin(m_MaxAngle) },
       m_DiffCosMaxMin{ m_CosMaxAngle - m_CosMinAngle },
       m_DiffSinMaxMin{ m_SinMaxAngle - m_SinMinAngle },
-      m_AvrAngle{ static_cast<Real>(0.5) * (m_MinAngle + m_MaxAngle) },
+      m_AvrAngle{ Math::GetRational(1, 2) * (m_MinAngle + m_MaxAngle) },
       m_CosAvrAngle{ Math::Cos(m_AvrAngle) },
       m_SinAvrAngle{ Math::Sin(m_AvrAngle) }
 {

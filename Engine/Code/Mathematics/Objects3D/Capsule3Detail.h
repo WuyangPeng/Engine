@@ -1,51 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 17:29)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/16 15:39)
 
 #ifndef MATHEMATICS_OBJECTS3D_CAPSULE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_CAPSULE3_DETAIL_H
 
 #include "Capsule3.h"
-#include "Mathematics/Base/MathDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-template <typename Real>
-Mathematics::Capsule3<Real>
-	::Capsule3(const Segment3& segment, Real radius)
-	:m_Segment{ segment }, m_Radius{ radius }
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CAPSULE3_ACHIEVE)
 
-#ifdef OPEN_CLASS_INVARIANT
-template <typename Real>
-bool Mathematics::Capsule3<Real>
-	::IsValid() const noexcept
-{
-	return true;
-}
-#endif // OPEN_CLASS_INVARIANT
+    #include "Capsule3Achieve.h"
 
-template <typename Real>
-typename const Mathematics::Capsule3<Real>::Segment3 Mathematics::Capsule3<Real>
-	::GetSegment() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-	return m_Segment;
-}
-
-template <typename Real>
-Real Mathematics::Capsule3<Real>
-	::GetRadius() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-	return m_Radius;
-}
+#endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CAPSULE3_ACHIEVE)
 
 #endif // MATHEMATICS_OBJECTS3D_CAPSULE3_DETAIL_H

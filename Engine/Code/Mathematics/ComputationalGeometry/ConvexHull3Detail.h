@@ -71,7 +71,7 @@ Mathematics::ConvexHull3<Real>
     {
         // Transform the vertices to the cube [0,1]^3.
 		auto minValue = info.GetMinExtreme();
-		auto scale = (static_cast<Real>(1))/info.GetMaxRange();
+		auto scale = (Math::GetValue(1))/info.GetMaxRange();
         for (i = 0; i < mNumVertices; ++i)
         {
             mSVertices[i] = (mVertices[i] - minValue)*scale;
@@ -95,7 +95,7 @@ Mathematics::ConvexHull3<Real>
         else  // eQueryType == Query::QT_REAL
         {
             // No scaling for floating point.
-            expand = static_cast<Real>(1);
+            expand = Math::GetValue(1);
             mQuery = NEW0 Query3<Real>(mSVertices);
         }
 

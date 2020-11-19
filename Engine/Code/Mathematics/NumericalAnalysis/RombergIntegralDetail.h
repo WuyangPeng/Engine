@@ -76,7 +76,7 @@ void Mathematics::RombergIntegral<Real, UserDataType>
 {
 	auto difference = m_End - m_Begin;
 
-	m_Rom[0][0] = static_cast<Real>(0.5) * difference * (m_Function(m_Begin, m_UserData) + m_Function(m_End, m_UserData));
+	m_Rom[0][0] =  Math::GetRational(1,2) * difference * (m_Function(m_Begin, m_UserData) + m_Function(m_End, m_UserData));
 
 	auto p0 = 1;
 	for (auto orderIndex = 2; orderIndex <= m_Order; ++orderIndex)
@@ -86,11 +86,11 @@ void Mathematics::RombergIntegral<Real, UserDataType>
 
 		for (auto i = 1; i <= p0; ++i)
 		{
-			sum += m_Function(m_Begin + difference * (i - (static_cast<Real>(0.5))), m_UserData);
+			sum += m_Function(m_Begin + difference * (i - ( Math::GetRational(1,2))), m_UserData);
 		}
 
 		// Richardson Õ‚Õ∆∑®°£
-		m_Rom[1][0] = (static_cast<Real>(0.5) * (m_Rom[0][0] + difference * sum));
+		m_Rom[1][0] = ( Math::GetRational(1,2) * (m_Rom[0][0] + difference * sum));
 
 		auto p2 = 4;
 		for (auto i = 1; i < orderIndex; ++i)
@@ -109,7 +109,7 @@ void Mathematics::RombergIntegral<Real, UserDataType>
 		}
 
 		p0 *= 2;
-		difference *= static_cast<Real>(0.5);
+		difference *=  Math::GetRational(1,2);
 	}
 
 	m_Value = m_Rom[0][m_Order - 1];

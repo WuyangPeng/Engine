@@ -422,7 +422,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	// Unproject the segment of intersection.
 	if (maxNormal == 0)
 	{
-		Real invNX = (static_cast<Real>(1))/plane.GetNormal().GetX();
+		Real invNX = (Math::GetValue(1))/plane.GetNormal().GetX();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][1] = intr[i].GetX();
@@ -432,7 +432,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (maxNormal == 1)
 	{
-		Real invNY = (static_cast<Real>(1))/plane.GetNormal().GetY();
+		Real invNY = (Math::GetValue(1))/plane.GetNormal().GetY();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][0] = intr[i].GetX();
@@ -442,7 +442,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else
 	{
-		Real invNZ = (static_cast<Real>(1))/plane.GetNormal().GetZ();
+		Real invNZ = (Math::GetValue(1))/plane.GetNormal().GetZ();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][0] = intr[i].GetX();
@@ -544,7 +544,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	mQuantity = intr.GetQuantity();
 	if (maxNormal == 0)
 	{
-		auto invNX = (static_cast<Real>(1))/plane.GetNormal().GetX();
+		auto invNX = (Math::GetValue(1))/plane.GetNormal().GetX();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][1] = intr.GetPoint(i).GetX();
@@ -554,7 +554,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (maxNormal == 1)
 	{
-		auto invNY = (static_cast<Real>(1))/plane.GetNormal().GetY();
+		auto invNY = (Math::GetValue(1))/plane.GetNormal().GetY();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][0] = intr.GetPoint(i).GetX();
@@ -564,7 +564,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 	}
 	else
 	{
-		auto invNZ = (static_cast<Real>(1))/plane.GetNormal().GetZ();
+		auto invNZ = (Math::GetValue(1))/plane.GetNormal().GetZ();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][0] = intr.GetPoint(i).GetX();
@@ -1089,10 +1089,10 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 		MATHEMATICS_ASSERTION_0(s >= -Math::GetZeroTolerance(),"Unexpected s value.\n");
 		s = Math<Real>::GetZero();
 	}
-	else if (s > static_cast<Real>(1))
+	else if (s > Math::GetValue(1))
 	{
-		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::GetZeroTolerance(),"Unexpected s value.\n");
-		s = static_cast<Real>(1);
+		MATHEMATICS_ASSERTION_0(s <= Math::GetValue(1) + Math::GetZeroTolerance(),"Unexpected s value.\n");
+		s = Math::GetValue(1);
 	}
 
 	this->SetIntersectionType(IntersectionType::Point);

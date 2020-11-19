@@ -107,7 +107,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 
     // Compute t for which the circle of intersection has center
     // K = C0 + t*(C1 - C0).
-    auto t = (Real{0.5})*(static_cast<Real>(1) + rDif*rSum/sqrLen);
+    auto t = (Real{0.5})*(Math::GetValue(1) + rDif*rSum/sqrLen);
 
     // Center and radius of circle of intersection.
  

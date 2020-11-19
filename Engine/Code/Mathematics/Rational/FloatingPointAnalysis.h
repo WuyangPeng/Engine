@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/23 22:14)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/18 17:07)
 
 #ifndef MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
 #define MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
@@ -21,7 +21,7 @@
 namespace Mathematics
 {
     template <typename T>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FloatingPointAnalysis
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FloatingPointAnalysis final
     {
     public:
         static_assert(std::is_floating_point_v<T>, "T must be floating point.");

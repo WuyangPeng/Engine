@@ -26,10 +26,10 @@ IntpBicubic2<Real>::IntpBicubic2 (int xBound, int yBound, Real xMin, Real xSpaci
 
     mXMin = xMin;
     mXSpacing = xSpacing;
-    mInvXSpacing = (static_cast<Real>(1))/xSpacing;
+    mInvXSpacing = (Math::GetValue(1))/xSpacing;
     mYMin = yMin;
     mYSpacing = ySpacing;
-    mInvYSpacing = (static_cast<Real>(1))/ySpacing;
+    mInvYSpacing = (Math::GetValue(1))/ySpacing;
     mXMax = xMin + xSpacing*(xBound - 1);
     mYMax = yMin + ySpacing*(yBound - 1);
 
@@ -118,13 +118,13 @@ Real IntpBicubic2<Real>::operator() (Real x, Real y) const
     }
 
     Real U[4];
-    U[0] = static_cast<Real>(1);
+    U[0] = Math::GetValue(1);
     U[1] = xIndex - ix;
     U[2] = U[1]*U[1];
     U[3] = U[1]*U[2];
 
     Real V[4];
-    V[0] = static_cast<Real>(1);
+    V[0] = Math::GetValue(1);
     V[1] = yIndex - iy;
     V[2] = V[1]*V[1];
     V[3] = V[1]*V[2];
@@ -202,17 +202,17 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
     {
     case 0:
         dx = xIndex - ix;
-        U[0] = static_cast<Real>(1);
+        U[0] = Math::GetValue(1);
         U[1] = dx;
         U[2] = dx*U[1];
         U[3] = dx*U[2];
-        xMult = static_cast<Real>(1);
+        xMult = Math::GetValue(1);
         break;
     case 1:
         dx = xIndex - ix;
         U[0] = Math<Real>::GetValue(0);
-        U[1] = static_cast<Real>(1);
-        U[2] = (static_cast<Real>(2))*dx;
+        U[1] = Math::GetValue(1);
+        U[2] = (Math::GetValue(2))*dx;
         U[3] = (static_cast<Real>(3))*dx*dx;
         xMult = mInvXSpacing;
         break;
@@ -220,7 +220,7 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
         dx = xIndex - ix;
         U[0] = Math<Real>::GetValue(0);
         U[1] = Math<Real>::GetValue(0);
-        U[2] = static_cast<Real>(2);
+        U[2] = Math::GetValue(2);
         U[3] = (Real)6*dx;
         xMult = mInvXSpacing*mInvXSpacing;
         break;
@@ -240,17 +240,17 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
     {
     case 0:
         dy = yIndex - iy;
-        V[0] = static_cast<Real>(1);
+        V[0] = Math::GetValue(1);
         V[1] = dy;
         V[2] = dy*V[1];
         V[3] = dy*V[2];
-        yMult = static_cast<Real>(1);
+        yMult = Math::GetValue(1);
         break;
     case 1:
         dy = yIndex - iy;
         V[0] = Math<Real>::GetValue(0);
-        V[1] = static_cast<Real>(1);
-        V[2] = (static_cast<Real>(2))*dy;
+        V[1] = Math::GetValue(1);
+        V[2] = (Math::GetValue(2))*dy;
         V[3] = (static_cast<Real>(3))*dy*dy;
         yMult = mInvYSpacing;
         break;
@@ -258,7 +258,7 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
         dy = yIndex - iy;
         V[0] = Math<Real>::GetValue(0);
         V[1] = Math<Real>::GetValue(0);
-        V[2] = static_cast<Real>(2);
+        V[2] = Math::GetValue(2);
         V[3] = ((Real)6)*dy;
         yMult = mInvYSpacing*mInvYSpacing;
         break;

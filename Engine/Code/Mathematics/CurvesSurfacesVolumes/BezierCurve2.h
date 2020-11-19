@@ -17,7 +17,9 @@ namespace Mathematics
 {
 	template <typename Real>
 	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BezierCurve2 : public SingleCurve2<Real>
-	{
+    {
+    public:
+        using Math = Math<Real>;
 	public:	
 		// Construction and destruction.  BezierCurve2 accepts responsibility for
 		// deleting the input array.

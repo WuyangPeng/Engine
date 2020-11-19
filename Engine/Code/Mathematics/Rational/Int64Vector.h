@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 09:45)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/18 17:09)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR_H
@@ -10,56 +13,56 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "System/Helper/PragmaWarning/Operators.h"
+
 #include <iosfwd>
+#include <array>
 
 namespace Mathematics
 {
-	template <int VectorSize>
-	class Int64Vector : private boost::additive<Int64Vector<VectorSize>,
-								boost::totally_ordered<Int64Vector<VectorSize>,
-								boost::multiplicative<Int64Vector<VectorSize>, int64_t>>>
-	{
-	public:
-		using ClassType = Int64Vector<VectorSize>;
+    template <int VectorSize>
+    class Int64Vector final : private boost::additive<Int64Vector<VectorSize>, boost::totally_ordered<Int64Vector<VectorSize>, boost::multiplicative<Int64Vector<VectorSize>, int64_t>>>
+    {
+    public:
+        using ClassType = Int64Vector<VectorSize>;
 
-	public:
-		Int64Vector() noexcept;
-		Int64Vector(const Int64Vector& rhs) noexcept;
+    public:
+        Int64Vector() noexcept;
+        Int64Vector(int64_t x, int64_t y) noexcept;
+        Int64Vector(int64_t x, int64_t y, int64_t z) noexcept;
 
-		Int64Vector& operator= (const Int64Vector& rhs) noexcept;
-		~Int64Vector() noexcept = default;
-		Int64Vector(Int64Vector&& rhs) = default;
-		Int64Vector& operator= (Int64Vector&& rhs) = default;
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		// 坐标访问
-		const int64_t& operator[] (int index) const;
-		int64_t& operator[] (int index);
+        // 坐标访问
+        [[nodiscard]] const int64_t& operator[](int index) const;
+        [[nodiscard]] int64_t& operator[](int index);
 
-		const Int64Vector operator- () const noexcept;
+        [[nodiscard]] const Int64Vector operator-() const noexcept;
 
-		Int64Vector& operator+= (const Int64Vector& rhs) noexcept;
-		Int64Vector& operator-= (const Int64Vector& rhs) noexcept;
-		Int64Vector& operator*= (const int64_t& scalar) noexcept;
-		Int64Vector& operator/= (const int64_t& scalar);
+        Int64Vector& operator+=(const Int64Vector& rhs) noexcept;
+        Int64Vector& operator-=(const Int64Vector& rhs) noexcept;
+        Int64Vector& operator*=(const int64_t& scalar) noexcept;
+        Int64Vector& operator/=(const int64_t& scalar);
 
-		int64_t SquaredLength() const noexcept;
+        [[nodiscard]] int64_t SquaredLength() const noexcept;
 
-	private:
-		int64_t m_Tuple[VectorSize];
-	};
+    private:
+        using ArrayType = std::array<int64_t, VectorSize>;
 
-	template <int VectorSize>
-	bool operator== (const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
+    private:
+        ArrayType m_Tuple;
+    };
 
-	template <int VectorSize>
-	bool operator<  (const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
+    template <int VectorSize>
+    [[nodiscard]] bool operator==(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
 
-	template <int VectorSize>
-	int64_t Dot(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
+    template <int VectorSize>
+    [[nodiscard]] bool operator<(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
 
-	template <int VectorSize>
-	std::ostream& operator<< (std::ostream& os, const Int64Vector<VectorSize>& rhs);
+    template <int VectorSize>
+    [[nodiscard]] int64_t Dot(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
+
+    template <int VectorSize>
+    std::ostream& operator<<(std::ostream& os, const Int64Vector<VectorSize>& rhs);
 }
 
-#endif // MATHEMATICS_RATIONAL_INT64_VECTOR_H
+#endif  // MATHEMATICS_RATIONAL_INT64_VECTOR_H

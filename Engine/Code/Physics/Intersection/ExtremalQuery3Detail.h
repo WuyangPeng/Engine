@@ -18,6 +18,7 @@
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26489)
+#include SYSTEM_WARNING_DISABLE(26446)
 namespace Physics
 {
 	template <typename Real>
@@ -25,15 +26,18 @@ namespace Physics
 		:mPolytope(polytope)
 	{
 		// Create the triangle normals.
-		const Vector3D* vertices = mPolytope->GetVertices();
+		const auto vertices = mPolytope->GetVertices();
                 const int numTriangles = mPolytope->GetNumTriangles();
-		const int* indices = mPolytope->GetIndices();
+                const auto indices = mPolytope->GetIndices();
 		mFaceNormals = NEW1<Vector3D >(numTriangles);
 		for (int i = 0; i < numTriangles; ++i)
 		{
-			const Vector3D& v0 = vertices[*indices++];
-			const Vector3D& v1 = vertices[*indices++];
-			const Vector3D& v2 = vertices[*indices++];
+			//const Vector3D& v0 = vertices[*indices++];
+			//const Vector3D& v1 = vertices[*indices++];
+			//const Vector3D& v2 = vertices[*indices++];
+                    const Vector3D& v0 = vertices[indices[0]];
+                        const Vector3D& v1 = vertices[indices[1]];
+                    const Vector3D& v2 = vertices[indices[2]];
                         const Vector3D edge1 = v1 - v0;
                         const Vector3D edge2 = v2 - v0;
 			mFaceNormals[i] = Mathematics::Vector3DTools<Real>::UnitCrossProduct(edge1, edge2);

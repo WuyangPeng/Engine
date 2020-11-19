@@ -17,7 +17,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorRay3Triangle3<Real>
 	::StaticFindIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle,const Real epsilon) 
-	:ParentType{ epsilon }, m_Ray{ ray }, m_Triangle{ triangle }, m_RayParameter{}, m_TriangleBary0{}, m_TriangleBary1{},m_TriangleBary2{ static_cast<Real>(1) }
+	:ParentType{ epsilon }, m_Ray{ ray }, m_Triangle{ triangle }, m_RayParameter{}, m_TriangleBary0{}, m_TriangleBary1{},m_TriangleBary2{ Math::GetValue(1) }
 {
 	Find();
 
@@ -85,7 +85,7 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>
 	Real sign;
 	if (DdN > Math::GetZeroTolerance())
 	{
-		sign = static_cast<Real>(1);
+		sign = Math::GetValue(1);
 	}
 	else if (DdN < -Math::GetZeroTolerance())
 	{
@@ -113,11 +113,11 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>
 				if (QdN >= Math<Real>::GetZero())
 				{
 					// Ray intersects triangle.
-					auto inv = (static_cast<Real>(1))/DdN;
+					auto inv = (Math::GetValue(1))/DdN;
 					m_RayParameter = QdN*inv;
 					m_TriangleBary1 = DdQxE2*inv;
 					m_TriangleBary2 = DdE1xQ*inv;
-					m_TriangleBary0 = static_cast<Real>(1) - m_TriangleBary1 - m_TriangleBary2;
+					m_TriangleBary0 = Math::GetValue(1) - m_TriangleBary1 - m_TriangleBary2;
 					this->SetIntersectionType(IntersectionType::Point);
 					return;
 				}

@@ -131,8 +131,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             {
                 numer0 = -hhalf - z[0];
                 numer1 = +hhalf - z[0];
-                invDenom0 = (static_cast<Real>(1))/(z[1] - z[0]);
-                invDenom1 = (static_cast<Real>(1))/(z[2] - z[0]);
+                invDenom0 = (Math::GetValue(1))/(z[1] - z[0]);
+                invDenom1 = (Math::GetValue(1))/(z[2] - z[0]);
                 t = numer0*invDenom1;
                 polygon[0] = Q[0] + t*(Q[2] - Q[0]);
                 t = numer0*invDenom0;
@@ -156,8 +156,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             {
                 numer0 = -hhalf - z[2];
                 numer1 = +hhalf - z[2];
-                invDenom0 = (static_cast<Real>(1))/(z[1] - z[2]);
-                invDenom1 = (static_cast<Real>(1))/(z[0] - z[2]);
+                invDenom0 = (Math::GetValue(1))/(z[1] - z[2]);
+                invDenom1 = (Math::GetValue(1))/(z[0] - z[2]);
                 t = numer0*invDenom1;
                 polygon[0] = Q[2] + t*(Q[0] - Q[2]);
                 t = numer0*invDenom0;
@@ -181,8 +181,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             {
                 numer0 = -hhalf - z[0];
                 numer1 = +hhalf - z[0];
-                invDenom0 = (static_cast<Real>(1))/(z[1] - z[0]);
-                invDenom1 = (static_cast<Real>(1))/(z[2] - z[0]);
+                invDenom0 = (Math::GetValue(1))/(z[1] - z[0]);
+                invDenom1 = (Math::GetValue(1))/(z[2] - z[0]);
                 t = numer0*invDenom1;
                 polygon[0] = Q[0] + t*(Q[2] - Q[0]);
                 t = numer0*invDenom0;
@@ -209,8 +209,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             if (z[1] <= -hhalf)
             {
                 numer0 = -hhalf - z[2];
-                invDenom0 = (static_cast<Real>(1))/(z[1] - z[2]);
-                invDenom1 = (static_cast<Real>(1))/(z[0] - z[2]);
+                invDenom0 = (Math::GetValue(1))/(z[1] - z[2]);
+                invDenom1 = (Math::GetValue(1))/(z[0] - z[2]);
                 t = numer0*invDenom0;
                 polygon[0] = Q[2] + t*(Q[1] - Q[2]);
                 t = numer0*invDenom1;
@@ -230,8 +230,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
             else
             {
                 numer0 = -hhalf - z[0];
-                invDenom0 = (static_cast<Real>(1))/(z[2] - z[0]);
-                invDenom1 = (static_cast<Real>(1))/(z[1] - z[0]);
+                invDenom0 = (Math::GetValue(1))/(z[2] - z[0]);
+                invDenom1 = (Math::GetValue(1))/(z[1] - z[0]);
                 t = numer0*invDenom0;
                 polygon[0] = Q[0] + t*(Q[2] - Q[0]);
                 t = numer0*invDenom1;
@@ -285,8 +285,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
         if (z[1] >= hhalf)
         {
             numer0 = -hhalf - z[0];
-            invDenom0 = (static_cast<Real>(1))/(z[2] - z[0]);
-            invDenom1 = (static_cast<Real>(1))/(z[1] - z[0]);
+            invDenom0 = (Math::GetValue(1))/(z[2] - z[0]);
+            invDenom1 = (Math::GetValue(1))/(z[1] - z[0]);
             t = numer0*invDenom0;
             polygon[0] = Q[0] + t*(Q[2] - Q[0]);
             t = numer0*invDenom1;
@@ -306,8 +306,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
         else
         {
             numer0 = -hhalf - z[2];
-            invDenom0 = (static_cast<Real>(1))/(z[1] - z[2]);
-            invDenom1 = (static_cast<Real>(1))/(z[0] - z[2]);
+            invDenom0 = (Math::GetValue(1))/(z[1] - z[2]);
+            invDenom1 = (Math::GetValue(1))/(z[0] - z[2]);
             t = numer0*invDenom0;
             polygon[0] = Q[2] + t*(Q[1] - Q[2]);
             t = numer0*invDenom1;

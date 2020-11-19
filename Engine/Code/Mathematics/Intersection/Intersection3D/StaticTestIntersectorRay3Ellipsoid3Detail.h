@@ -48,7 +48,7 @@ void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
 	auto matDiff = M*diff;
 	auto a2 = Vector3DTools::DotProduct(mRay.GetDirection(),matDir);
 	auto a1 = Vector3DTools::DotProduct(mRay.GetDirection(),matDiff);
-	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - static_cast<Real>(1);
+	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
 
     // No intersection if Q(t) has no real roots.
 	auto discr = a1*a1 - a0*a2;

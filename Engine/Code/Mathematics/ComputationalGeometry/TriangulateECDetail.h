@@ -184,7 +184,7 @@ void Mathematics::TriangulateEC<Real>
 
     if (queryType == QueryType::Filtered)
     {
-        MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= epsilon && epsilon <= static_cast<Real>(1),"Epsilon must be in [0,1]\n");
+        MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= epsilon && epsilon <= Math::GetValue(1),"Epsilon must be in [0,1]\n");
     }
 
     Vector2D<Real> minValue, maxValue, range;

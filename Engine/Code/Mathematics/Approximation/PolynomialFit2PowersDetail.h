@@ -67,12 +67,12 @@ void Mathematics::PolynomialFit2Powers<Real>
 {
 	auto result = std::minmax_element(sourceSamples.begin(), sourceSamples.end());
 
-	auto scale = static_cast<Real>(1) / (*result.second - *result.first);
+	auto scale = Math::GetValue(1) / (*result.second - *result.first);
 	m_PowersData.SetScale(index, scale);
 
 	for (auto sample : sourceSamples)
 	{
-		auto newSample = static_cast<Real>(-1) + static_cast<Real>(2) * (sample - *result.first) * scale;
+		auto newSample = static_cast<Real>(-1) + Math::GetValue(2) * (sample - *result.first) * scale;
 		targetSamples.push_back(newSample);
 	}
 }
@@ -86,7 +86,7 @@ void Mathematics::PolynomialFit2Powers<Real>
 	auto maxXPower = m_PowersData.GetMaxPower(0);
 	auto powersSize = 2 * maxXPower + 1;
 	std::vector<Real> xPowers(powersSize);
-	xPowers[0] = static_cast<Real>(1);
+	xPowers[0] = Math::GetValue(1);
 
 	auto numPowers = m_Powers.size();
 
@@ -200,10 +200,10 @@ Real  Mathematics::PolynomialFit2Powers<Real>
 	auto maxXPower = m_PowersData.GetMaxPower(0);
 	auto temp = maxXPower + 1;
 	std::vector<Real> xPowers(temp);
-	xPowers[0] = static_cast<Real>(1);
+	xPowers[0] = Math::GetValue(1);
 
 	// 变换x从原来的空间到[-1,1]。
-	x = static_cast<Real>(-1) + (static_cast<Real>(2) * (x - m_PowersData.GetMin(0)) *  m_PowersData.GetScale(0));
+	x = static_cast<Real>(-1) + (Math::GetValue(2) * (x - m_PowersData.GetMin(0)) *  m_PowersData.GetScale(0));
 
 	// 计算x的有关幂
 	for (auto power = 1; power <= maxXPower; ++power)
@@ -220,7 +220,7 @@ Real  Mathematics::PolynomialFit2Powers<Real>
 	}
 
 	// 变换w从[-1,1]回到原来的空间。
-	w = (w + static_cast<Real>(1)) * m_PowersData.GetInvTwoWScale() + m_PowersData.GetMin(1);
+	w = (w + Math::GetValue(1)) * m_PowersData.GetInvTwoWScale() + m_PowersData.GetMin(1);
 
 	return w;
 }

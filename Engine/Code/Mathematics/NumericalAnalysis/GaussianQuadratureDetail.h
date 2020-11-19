@@ -14,7 +14,7 @@
 template <typename Real, typename UserDataType>
 Mathematics::GaussianQuadrature<Real, UserDataType>
 	::GaussianQuadrature(Real begin, Real end, Function function, const UserDataType* userData)
-	:m_Radius{ static_cast<Real>(0.5) * (end - begin) }, m_Center{ static_cast<Real>(0.5) * (end + begin) },
+	:m_Radius{  Math::GetRational(1,2) * (end - begin) }, m_Center{  Math::GetRational(1,2) * (end + begin) },
 	 m_Function{ function }, m_UserData{ userData }, m_Result{}
 {
 	Calculate();

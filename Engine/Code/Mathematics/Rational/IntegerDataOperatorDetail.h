@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/20 10:13)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/19 10:17)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
@@ -41,8 +44,8 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 
     const auto symbel = m_Master.GetSign();
 
-    uint32_t carry{ 0 };
-    for (auto index = 0u; index < sm_IntSize; ++index)
+    auto carry = 0u;
+    for (auto index = 0; index < sm_IntSize; ++index)
     {
         const auto lhsBit = m_Master[index];
         const auto rhsBit = rhs[index];
@@ -65,7 +68,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    IntegerDataAnalysis integerDataAnalysis{ rhs };
+    const IntegerDataAnalysis integerDataAnalysis{ rhs };
     *this += (-integerDataAnalysis);
 
     return *this;
@@ -78,7 +81,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
     MATHEMATICS_ASSERTION_1(0 <= shift, "shift必须大于或等于零");
 
     // 16位块要移位的数目。
-    auto blocks = shift / 16;
+    const auto blocks = shift / 16;
     if (sm_IntLast < blocks)
     {
         return *this;
@@ -100,7 +103,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
     }
 
     // 遗留的位要移位的数量
-    auto bits = shift % 16;
+    const auto bits = shift % 16;
     if (0 < bits)
     {
         for (auto index = sm_IntLast; 1 <= index; --index)
@@ -125,7 +128,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
     MATHEMATICS_ASSERTION_1(0 <= shift, "shift必须大于或等于零");
 
     // 16位块要移位的数目。
-    auto blocks = shift / 16;
+    const auto blocks = shift / 16;
     if (sm_IntLast < blocks)
     {
         return *this;
@@ -154,7 +157,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
     }
 
     // 遗留的位要移位的数量
-    auto bits = shift % 16;
+    const auto bits = shift % 16;
     if (0 < bits)
     {
         for (auto i = 0; i <= sm_IntLast - 1; ++i)
@@ -213,7 +216,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 }
 
 template <int N>
-Mathematics::IntegerData<N> Mathematics ::operator+(const IntegerData<N>& lhs, const IntegerData<N>& rhs)
+Mathematics::IntegerData<N> Mathematics::operator+(const IntegerData<N>& lhs, const IntegerData<N>& rhs)
 {
     IntegerData<N> sum{ lhs };
     IntegerDataOperator<N> dataOperator{ sum };
@@ -223,7 +226,7 @@ Mathematics::IntegerData<N> Mathematics ::operator+(const IntegerData<N>& lhs, c
 }
 
 template <int N>
-Mathematics::IntegerData<N> Mathematics ::operator-(const IntegerData<N>& lhs, const IntegerData<N>& rhs)
+Mathematics::IntegerData<N> Mathematics::operator-(const IntegerData<N>& lhs, const IntegerData<N>& rhs)
 {
     IntegerData<N> sum{ lhs };
     IntegerDataOperator<N> dataOperator{ sum };

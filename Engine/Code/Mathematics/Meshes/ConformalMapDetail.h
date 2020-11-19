@@ -60,7 +60,7 @@ Mathematics::ConformalMap<Real>
 			}
 		}
 
-		value *= -static_cast<Real>(0.5);
+		value *= - Math::GetRational(1,2);
 		AMat(v0, v1) = value;
 	}
 
@@ -99,9 +99,9 @@ Mathematics::ConformalMap<Real>
 	Vector3D<Real> E12 = V1 - V2;
 	Vector3D<Real> cross = Vector3DTools<Real>::CrossProduct(E20, E10);
 	Real len10 = Vector3DTools<Real>::VectorMagnitude(E10);
-	Real invLen10 = (static_cast<Real>(1)) / len10;
+	Real invLen10 = (Math::GetValue(1)) / len10;
 	Real twoArea = Vector3DTools<Real>::VectorMagnitude(cross);
-	Real invLenCross = (static_cast<Real>(1)) / twoArea;
+	Real invLenCross = (Math::GetValue(1)) / twoArea;
 	Real invProd = invLen10 * invLenCross;
 	Real re0 = -invLen10;
 	Real im0 = invProd * Vector3DTools<Real>::DotProduct(E12, E10);
@@ -177,12 +177,12 @@ Mathematics::ConformalMap<Real>
 			fmax = mPlanes[i].GetY();
 		}
 	}
-	Real halfRange = (static_cast<Real>(0.5))*(fmax - fmin);
-	Real invHalfRange = (static_cast<Real>(1)) / halfRange;
+	Real halfRange = ( Math::GetRational(1,2))*(fmax - fmin);
+	Real invHalfRange = (Math::GetValue(1)) / halfRange;
 	for (i = 0; i < numPoints; ++i)
 	{
-		mPlanes[i].SetX(-static_cast<Real>(1) + invHalfRange * (mPlanes[i].GetX() - fmin));
-		mPlanes[i].SetY(-static_cast<Real>(1) + invHalfRange * (mPlanes[i].GetY() - fmin));
+		mPlanes[i].SetX(-Math::GetValue(1) + invHalfRange * (mPlanes[i].GetX() - fmin));
+		mPlanes[i].SetY(-Math::GetValue(1) + invHalfRange * (mPlanes[i].GetY() - fmin));
 	}
 
 	// Map plane points to sphere using inverse stereographic projection.
@@ -249,9 +249,9 @@ Mathematics::ConformalMap<Real>
 	for (i = 0; i < numPoints; i++)
 	{
 		Real rSqr = Vector3DTools<Real>::VectorMagnitudeSquared(mPlanes[i]);
-		Real mult = (static_cast<Real>(1)) / (rSqr + radiusSqr);
-		Real x = (static_cast<Real>(2))*mult*radiusSqr*mPlanes[i].GetX();
-		Real y = (static_cast<Real>(2))*mult*radiusSqr*mPlanes[i].GetY();
+		Real mult = (Math::GetValue(1)) / (rSqr + radiusSqr);
+		Real x = (Math::GetValue(2))*mult*radiusSqr*mPlanes[i].GetX();
+		Real y = (Math::GetValue(2))*mult*radiusSqr*mPlanes[i].GetY();
 		Real z = mult * mRadius*(rSqr - radiusSqr);
 		mSpheres[i] = Vector3D<Real>(x, y, z) / mRadius;
 	}
@@ -330,18 +330,18 @@ Real Mathematics::ConformalMap<Real>
 	poly0[0] = Math<Real>::GetValue(0);
 	poly0[1] = Math<Real>::GetValue(0);
 	poly0[2] = e0 * e0;
-	poly0[3] = c0 * c0 + d0 * d0 + (static_cast<Real>(2))*e0*e1;
-	poly0[4] = (static_cast<Real>(2))*(c0*c1 + d0 * d1 + e0 * e1) + e1 * e1;
-	poly0[5] = c1 * c1 + d1 * d1 + (static_cast<Real>(2))*e1*e2;
+	poly0[3] = c0 * c0 + d0 * d0 + (Math::GetValue(2))*e0*e1;
+	poly0[4] = (Math::GetValue(2))*(c0*c1 + d0 * d1 + e0 * e1) + e1 * e1;
+	poly0[5] = c1 * c1 + d1 * d1 + (Math::GetValue(2))*e1*e2;
 	poly0[6] = e2 * e2;
 
 	Polynomial<Real> qpoly0(1), qpoly1(1), qpoly2(1);
 	qpoly0[0] = r0Sqr;
-	qpoly0[1] = static_cast<Real>(1);
+	qpoly0[1] = Math::GetValue(1);
 	qpoly1[0] = r1Sqr;
-	qpoly1[1] = static_cast<Real>(1);
+	qpoly1[1] = Math::GetValue(1);
 	qpoly2[0] = r2Sqr;
-	qpoly2[1] = static_cast<Real>(1);
+	qpoly2[1] = Math::GetValue(1);
 
 	Real tmp = areaFraction * Math<Real>::GetPI();
 	Real amp = tmp * tmp;
@@ -360,19 +360,19 @@ Real Mathematics::ConformalMap<Real>
 
 	// Bound a root near zero and apply bisection to find t.
 	Real tmin = Math<Real>::GetValue(0), fmin = final(tmin);
-	Real tmax = static_cast<Real>(1), fmax = final(tmax);
+	Real tmax = Math::GetValue(1), fmax = final(tmax);
 	MATHEMATICS_ASSERTION_0(fmin > Math<Real>::GetValue(0) && fmax < Math<Real>::GetValue(0), "Unexpected condition\n");
 
 	// Determine the number of iterations to get 'digits' of accuracy.
 	const int digits = 6;
 	Real tmp0 = Math<Real>::Log(tmax - tmin);
 	Real tmp1 = ((Real)digits)*Math<Real>::Log(static_cast<Real>(10));
-	Real arg = (tmp0 + tmp1) / Math<Real>::Log(static_cast<Real>(2));
-	int maxIter = (int)(arg + static_cast<Real>(0.5));
+	Real arg = (tmp0 + tmp1) / Math<Real>::Log(Math::GetValue(2));
+	int maxIter = (int)(arg +  Math::GetRational(1,2));
 	Real tmid = Math<Real>::GetValue(0), fmid;
 	for (int i = 0; i < maxIter; ++i)
 	{
-		tmid = (static_cast<Real>(0.5))*(tmin + tmax);
+		tmid = ( Math::GetRational(1,2))*(tmin + tmax);
 		fmid = final(tmid);
 		Real product = fmid * fmin;
 		if (product < Math<Real>::GetValue(0))

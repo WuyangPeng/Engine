@@ -177,7 +177,7 @@ void Physics::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& l
                 // 获取世界空间三角形。
 				auto lhsTrianglePosition =lhsMesh->GetWorldTriangle(lhsTriangleIndex);
 								
-				Mathematics::Triangle3f tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
+				Mathematics::FloatTriangle3 tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
 										      lhsTrianglePosition.GetSecondPosition().GetVector3D(),
 											  lhsTrianglePosition.GetThirdPosition().GetVector3D()	};
 
@@ -189,7 +189,7 @@ void Physics::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& l
 					// 获取世界空间三角形。
 					auto rhsTrianglePosition = rhsMesh->GetWorldTriangle(rhsTriangleIndex);
                     
-					Mathematics::Triangle3f tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
+					Mathematics::FloatTriangle3  tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
 												  rhsTrianglePosition.GetSecondPosition().GetVector3D(),
 												  rhsTrianglePosition.GetThirdPosition().GetVector3D() };
 
@@ -266,7 +266,7 @@ void Physics
 				// 获取世界空间三角形。
 				auto lhsTrianglePosition = lhsMesh->GetWorldTriangle(lhsTriangleIndex);
 
-				Mathematics::Triangle3f tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
+				Mathematics::FloatTriangle3 tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
 					                          lhsTrianglePosition.GetSecondPosition().GetVector3D(),
 											  lhsTrianglePosition.GetThirdPosition().GetVector3D() };
 
@@ -279,7 +279,7 @@ void Physics
 					auto rhsTrianglePosition =
 						rhsMesh->GetWorldTriangle(rhsTriangleIndex);
 
-					Mathematics::Triangle3f tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
+					Mathematics::FloatTriangle3 tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
 												  rhsTrianglePosition.GetSecondPosition().GetVector3D(),
 												  rhsTrianglePosition.GetThirdPosition().GetVector3D()	};
 
@@ -360,7 +360,7 @@ void Physics
 				// 获取世界空间三角形。
 				auto lhsTrianglePosition = lhsMesh->GetWorldTriangle(lhsTriangleIndex);
 
-				Mathematics::Triangle3f tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
+				Mathematics::FloatTriangle3 tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
 											  lhsTrianglePosition.GetSecondPosition().GetVector3D(),
 											  lhsTrianglePosition.GetThirdPosition().GetVector3D() };
 
@@ -372,7 +372,7 @@ void Physics
 					// 获取世界空间三角形。
 					auto rhsTrianglePosition = rhsMesh->GetWorldTriangle(rhsTriangleIndex);
 
-					Mathematics::Triangle3f tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
+					Mathematics::FloatTriangle3 tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
 												  rhsTrianglePosition.GetSecondPosition().GetVector3D(),
 												  rhsTrianglePosition.GetThirdPosition().GetVector3D() };
 
@@ -453,7 +453,7 @@ void Physics
 				// 获取世界空间三角形。
 				auto lhsTrianglePosition = lhsMesh->GetWorldTriangle(lhsTriangleIndex);
 
-				Mathematics::Triangle3f tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
+				Mathematics::FloatTriangle3 tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
 											  lhsTrianglePosition.GetSecondPosition().GetVector3D(),
 											  lhsTrianglePosition.GetThirdPosition().GetVector3D() };
 
@@ -466,7 +466,7 @@ void Physics
 					auto rhsTrianglePosition =
 						rhsMesh->GetWorldTriangle(rhsTriangleIndex);
 
-					Mathematics::Triangle3f tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
+					Mathematics::FloatTriangle3 tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
 												  rhsTrianglePosition.GetSecondPosition().GetVector3D(),
 											      rhsTrianglePosition.GetThirdPosition().GetVector3D() };
 

@@ -35,10 +35,10 @@ RiemannianGeodesic<Real>::RiemannianGeodesic (int dimension)
     DerivativeStep = static_cast<Real>(1e-04);
     Subdivisions = 7;
     Refinements = 8;
-    SearchRadius = static_cast<Real>(1);
+    SearchRadius = Math::GetValue(1);
 
-    mIntegralStep = (static_cast<Real>(1))/(Real)(IntegralSamples - 1);
-    mSearchStep = (static_cast<Real>(1))/(Real)SearchSamples;
+    mIntegralStep = (Math::GetValue(1))/(Real)(IntegralSamples - 1);
+    mSearchStep = (Math::GetValue(1))/(Real)SearchSamples;
     mDerivativeFactor = (Real{0.5})/DerivativeStep;
 
     RefineCallback = 0;

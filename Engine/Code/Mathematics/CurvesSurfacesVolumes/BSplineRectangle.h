@@ -15,7 +15,7 @@ namespace Mathematics
     template <typename Real>
     class BSplineRectangle : public ParametricSurface<Real>
     {
-    public:
+    public: using Math = Math<Real>;
         // Construction and destruction.   The caller is responsible for deleting
         // the input arrays if they were dynamically allocated.  Internal copies
         // of the arrays are made, so to dynamically change control points or

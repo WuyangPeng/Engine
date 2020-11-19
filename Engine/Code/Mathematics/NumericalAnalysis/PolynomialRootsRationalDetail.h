@@ -387,7 +387,7 @@ bool Mathematics::PolynomialRootsRational<Real>
 		auto angle = Math::ATan2(Math::Sqrt(negativeDiscriminant), negativeR) / static_cast<Real>(3);
 		auto cosValue = Math::Cos(angle);
 		auto sinValue = Math::Sin(angle);
-		auto root0 = negativeSecondaryDivide3 + static_cast<Real>(2) * magnitude * cosValue;
+		auto root0 = negativeSecondaryDivide3 + Math::GetValue(2) * magnitude * cosValue;
 		auto root1 = negativeSecondaryDivide3 - magnitude * (cosValue + sqrt3 * sinValue);
 		auto root2 = negativeSecondaryDivide3 - magnitude * (cosValue - sqrt3 * sinValue);
 

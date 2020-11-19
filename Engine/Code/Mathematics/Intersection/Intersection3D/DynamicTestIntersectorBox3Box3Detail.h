@@ -51,7 +51,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>
 	// the cases when at least one pair of axes are parallel.  If this
 	// happens, there is no need to include the cross-product axes for
 	// separation.
-	const auto cutoff = static_cast<Real>(1) - Math::GetZeroTolerance();
+	const auto cutoff = Math::GetValue(1) - Math::GetZeroTolerance();
 	auto existsParallelPair = false;
 
 	// convenience variables
@@ -283,7 +283,7 @@ bool Mathematics::DynamicTestIntersectorBox3Box3<Real>
 			// The projection intervals are moving apart.
 			return true;
 		}
-		invSpeed = (static_cast<Real>(1)) / speed;
+		invSpeed = (Math::GetValue(1)) / speed;
 
 		t = (min0 - max1)*invSpeed;
 		if (t > this->GetContactTime())
@@ -316,7 +316,7 @@ bool Mathematics::DynamicTestIntersectorBox3Box3<Real>
 			// The projection intervals are moving apart.
 			return true;
 		}
-		invSpeed = (static_cast<Real>(1)) / speed;
+		invSpeed = (Math::GetValue(1)) / speed;
 
 		t = (max0 - min1)*invSpeed;
 		if (t > this->GetContactTime())

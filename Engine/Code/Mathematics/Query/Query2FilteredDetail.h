@@ -32,7 +32,7 @@ template <typename Real>
 bool Mathematics::Query2Filtered<Real>
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && Math<Real>::GetValue(0) <= m_Uncertainty && m_Uncertainty <= static_cast<Real>(1))
+	if (ParentType::IsValid() && Math<Real>::GetValue(0) <= m_Uncertainty && m_Uncertainty <= Math::GetValue(1))
 		return true;
 	else
 		return false;

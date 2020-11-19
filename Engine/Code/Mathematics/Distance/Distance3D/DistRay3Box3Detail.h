@@ -69,8 +69,8 @@ typename const Mathematics::DistRay3Box3<Real>::DistanceResult Mathematics::Dist
 	auto movedOrigin = mRay.GetOrigin() + t * lhsVelocity;
 	auto movedCenter = mBox.GetCenter() + t * rhsVelocity;
 	Ray3 movedRay{ movedOrigin, mRay.GetDirection() };
-	Box3 movedBox{ movedCenter, mBox.GetFirstAxis(),mBox.GetSecondAxis(),mBox.GetThirdAxis(),
-				   mBox.GetFirstExtent(),mBox.GetSecondExtent(),mBox.GetThirdExtent() };
+	Box3 movedBox{ movedCenter, mBox.GetAxis0(),mBox.GetAxis1(),mBox.GetThirdAxis(),
+				   mBox.GetExtent0(),mBox.GetExtent1(),mBox.GetThirdExtent() };
 	return DistRay3Box3<Real>{ movedRay, movedBox }.GetSquared();
 }
 

@@ -97,7 +97,7 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	// unit-length direction.
 	auto dz = Vector3DTools::DotProduct(W, dir);
 
-	if (Math::FAbs(dz) >= static_cast<Real>(1) - Math::GetZeroTolerance())
+	if (Math::FAbs(dz) >= Math::GetValue(1) - Math::GetZeroTolerance())
 	{
 		// The line is parallel to the cylinder axis.  Determine if the line
 		// intersects the cylinder end disks.
@@ -154,7 +154,7 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 		{
 			// Line intersects cylinder in two places.
 			root = Math::Sqrt(discr);
-			inv = (static_cast<Real>(1)) / a2;
+			inv = (Math::GetValue(1)) / a2;
 			t[0] = (-a1 - root)*inv;
 			t[1] = (-a1 + root)*inv;
 			return 2;
@@ -218,7 +218,7 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	else if (discr > Math::GetZeroTolerance())
 	{
 		root = Math::Sqrt(discr);
-		inv = (static_cast<Real>(1)) / a2;
+		inv = (Math::GetValue(1)) / a2;
 		tValue = (-a1 - root)*inv;
 		if (t0 <= t1)
 		{

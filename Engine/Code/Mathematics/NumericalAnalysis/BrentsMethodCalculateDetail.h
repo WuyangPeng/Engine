@@ -245,19 +245,19 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>
 	else if (m_PreviousBisected)
 	{
 		// Brent的第一测试，以确定是否接受该插值 。
-		currentBisected = (static_cast<Real>(0.5) *  absEndSearchBeginDiff) <= absSolutionEndDiff || (absEndSearchBeginDiff <= m_BrentsMethod.GetStepXTolerance());
+		currentBisected = ( Math::GetRational(1,2) *  absEndSearchBeginDiff) <= absSolutionEndDiff || (absEndSearchBeginDiff <= m_BrentsMethod.GetStepXTolerance());
 	}
 	else
 	{
 		// Brent的第二测试，以确定是否接受该插值 。
-		currentBisected = ((static_cast<Real>(0.5) * absSearchBeginSearchEndDiff) <= absSolutionEndDiff || (absSearchBeginSearchEndDiff <= m_BrentsMethod.GetStepXTolerance()));
+		currentBisected = (( Math::GetRational(1,2) * absSearchBeginSearchEndDiff) <= absSolutionEndDiff || (absSearchBeginSearchEndDiff <= m_BrentsMethod.GetStepXTolerance()));
 	}
 
 	if (currentBisected)
 	{
 		// 其中一个额外的测试失败，
 		// 所以拒绝插值，并用二分法来代替。
-		m_Solution = static_cast<Real>(0.5) * (m_Begin + m_End);
+		m_Solution =  Math::GetRational(1,2) * (m_Begin + m_End);
 		m_PreviousBisected = true;
 	}
 	else

@@ -62,17 +62,17 @@ bool Mathematics::StaticFindIntersectorLine2Box2<Real>
 {
 	// Convert linear component to box coordinates.
 	auto diff = origin - box.GetCenter();
-	Vector2D BOrigin{ Vector2DTools::DotProduct(diff, box.GetFirstAxis()),
-					  Vector2DTools::DotProduct(diff, box.GetSecondAxis()) };
-	Vector2D BDirection{ Vector2DTools::DotProduct(direction, box.GetFirstAxis()),
-						 Vector2DTools::DotProduct(direction, box.GetSecondAxis()) };
+	Vector2D BOrigin{ Vector2DTools::DotProduct(diff, box.GetAxis0()),
+					  Vector2DTools::DotProduct(diff, box.GetAxis1()) };
+	Vector2D BDirection{ Vector2DTools::DotProduct(direction, box.GetAxis0()),
+						 Vector2DTools::DotProduct(direction, box.GetAxis1()) };
 
 	auto saveT0 = t0;
 	auto saveT1 = t1;
-	auto notAllClipped = Clip(+BDirection.GetX(), -BOrigin.GetX() - box.GetFirstExtent(), t0, t1) &&
-						 Clip(-BDirection.GetX(), +BOrigin.GetX() - box.GetFirstExtent(), t0, t1) &&
-						 Clip(+BDirection.GetY(), -BOrigin.GetY() - box.GetSecondExtent(), t0, t1) &&
-						 Clip(-BDirection.GetY(), +BOrigin.GetY() - box.GetSecondExtent(), t0, t1);
+	auto notAllClipped = Clip(+BDirection.GetX(), -BOrigin.GetX() - box.GetExtent0(), t0, t1) &&
+						 Clip(-BDirection.GetX(), +BOrigin.GetX() - box.GetExtent0(), t0, t1) &&
+						 Clip(+BDirection.GetY(), -BOrigin.GetY() - box.GetExtent1(), t0, t1) &&
+						 Clip(-BDirection.GetY(), +BOrigin.GetY() - box.GetExtent1(), t0, t1);
 
 	if (notAllClipped && (solid || t0 != saveT0 || t1 != saveT1))
 	{

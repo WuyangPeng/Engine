@@ -14,7 +14,7 @@ namespace Mathematics
 
 template <typename Real>
 PolynomialCurve3<Real>::PolynomialCurve3 (Polynomial<Real>* xPoly, Polynomial<Real>* yPoly, Polynomial<Real>* zPoly)
-	: SingleCurve3<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1) }
+	: SingleCurve3<Real>{ Math<Real>::GetValue(0), Math::GetValue(1) }
 {
     MATHEMATICS_ASSERTION_0(xPoly && yPoly && zPoly, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(xPoly->GetDegree() == yPoly->GetDegree(), "Invalid input\n");

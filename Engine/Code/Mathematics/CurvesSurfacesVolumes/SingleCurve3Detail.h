@@ -41,7 +41,7 @@ Real Mathematics::SingleCurve3<Real>::GetLength(Real t0, Real t1) const
 template <typename Real>
 Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real tolerance) const
 {
-    if (length <= Math<Real>::GetValue(0))
+    if (length <= Math ::GetValue(0))
     {
         return this->mTMin;
     }
@@ -63,7 +63,7 @@ Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real 
 
     // Initial guess for Newton's method.
     Real ratio = length / GetTotalLength();
-    Real oneMinusRatio = static_cast<Real>(1) - ratio;
+    Real oneMinusRatio = Math::GetValue(1) - ratio;
     Real t = oneMinusRatio * this->mTMin + ratio * this->mTMax;
 
     // Initial root-bounding interval for bisection.
@@ -72,7 +72,7 @@ Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real 
     for (int i = 0; i < iterations; ++i)
     {
         Real difference = GetLength(this->mTMin, t) - length;
-        if (Math<Real>::FAbs(difference) < tolerance)
+        if (Math ::FAbs(difference) < tolerance)
         {
             // |L(t)-length| is close enough to zero, report t as the time
             // at which 'length' is attained.
@@ -84,7 +84,7 @@ Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real 
 
         // Update the root-bounding interval and test for containment of the
         // candidate.
-        if (difference > Math<Real>::GetValue(0))
+        if (difference > Math ::GetValue(0))
         {
             upper = t;
             if (tCandidate <= lower)

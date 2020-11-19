@@ -37,7 +37,7 @@ void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	::Test()
 {
 	auto dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), mPlane1.GetNormal());
-	if (Math::FAbs(dot) < static_cast<Real>(1) - Math::GetZeroTolerance())
+	if (Math::FAbs(dot) < Math::GetValue(1) - Math::GetZeroTolerance())
 	{
 		// The planes are initially intersecting.  Linear velocities will
 		// not change the fact that they are intersecting.

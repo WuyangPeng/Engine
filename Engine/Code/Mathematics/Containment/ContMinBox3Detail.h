@@ -90,11 +90,11 @@ Mathematics::MinBox3<Real>
 
         // Lift the values into 3D.
 		mMinBox.Set(origin + box2.GetCenter().GetX()*U + box2.GetCenter().GetY()*V,
-					box2.GetFirstAxis().GetX()*U + box2.GetFirstAxis().GetY()*V,
-					box2.GetSecondAxis().GetX()*U + box2.GetSecondAxis().GetY()*V,
+					box2.GetAxis0().GetX()*U + box2.GetAxis0().GetY()*V,
+					box2.GetAxis1().GetX()*U + box2.GetAxis1().GetY()*V,
 					W,
-					box2.GetFirstExtent(),
-					box2.GetSecondExtent() ,
+					box2.GetExtent0(),
+					box2.GetExtent1() ,
 					Math<Real>::GetValue(0)); 
 
         return;
@@ -188,17 +188,17 @@ Mathematics::MinBox3<Real>
 		box2 = MinBox2<Real>{ points2, epsilon, queryType, false };
 
         // Update current minimum-volume box (if necessary).
-        volume = maxHeight*box2.GetFirstExtent()*box2.GetSecondExtent();
+        volume = maxHeight*box2.GetExtent0()*box2.GetExtent1();
         if (volume < minVolume)
         {
             minVolume = volume;
 
             // Lift the values into 3D.
-			auto extent0 = box2.GetFirstExtent();
-			auto extent1 = box2.GetSecondExtent();
+			auto extent0 = box2.GetExtent0();
+			auto extent1 = box2.GetExtent1();
 			auto extent2 = (Real{0.5})*maxHeight;
-			auto axis0 = box2.GetFirstAxis().GetX()*U + box2.GetFirstAxis().GetY()*V;
-			auto axis1 = box2.GetSecondAxis().GetX()*U + box2.GetSecondAxis().GetY()*V;
+			auto axis0 = box2.GetAxis0().GetX()*U + box2.GetAxis0().GetY()*V;
+			auto axis1 = box2.GetAxis1().GetX()*U + box2.GetAxis1().GetY()*V;
 			auto axis2 = W;
 			auto center = origin + box2.GetCenter().GetX()*U +box2.GetCenter().GetY()*V+ mMinBox.GetThirdExtent()*W;
 

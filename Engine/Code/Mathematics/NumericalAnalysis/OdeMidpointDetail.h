@@ -14,7 +14,7 @@
 template <typename Real, typename UserDataType>
 Mathematics::OdeMidpoint<Real, UserDataType>
 	::OdeMidpoint(int dimension, Real step, Function function, const UserDataType* userData)
-	:ParentType{ dimension, step, function, userData }, m_HalfStep{ static_cast<Real>(0.5) * step }, m_SecondXIn(dimension)
+	:ParentType{ dimension, step, function, userData }, m_HalfStep{  Math::GetRational(1,2) * step }, m_SecondXIn(dimension)
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -77,7 +77,7 @@ void Mathematics::OdeMidpoint<Real, UserDataType>
 
 	ParentType::SetStepSize(step);
 
-	m_HalfStep = static_cast<Real>(0.5) * step;
+	m_HalfStep =  Math::GetRational(1,2) * step;
 }
 
 #endif // MATHEMATICS_NUMERICAL_ANALYSIS_ODE_MID_POINT_DETAIL_H

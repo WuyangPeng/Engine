@@ -190,7 +190,7 @@ void Mathematics::IntervalDistanceBase<Real, Vector>
 	auto resultT = Math::GetValue(0);
 	for (auto loop = 0; loop < m_Distance.GetMaximumIterations(); ++loop)
 	{
-		resultT = static_cast<Real>(0.5) * (m_BeginT + m_EndT);
+		resultT =  Math::GetRational(1,2) * (m_BeginT + m_EndT);
 		auto derivativeResult = GetDerivative(resultT);
 		auto product = derivativeResult * m_BeginDerivativeDistanceResult;
 		if (product < -m_Distance.GetZeroThreshold())

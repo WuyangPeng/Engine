@@ -46,7 +46,7 @@ void Mathematics::StaticTestIntersectorPlane3Plane3<Real>
     // |Dot(N0,N1)| = 1.  I test the latter condition in Test() and Find().
 
 	auto dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), mPlane1.GetNormal());
-	if (Math::FAbs(dot) < static_cast<Real>(1) - Math::GetZeroTolerance())
+	if (Math::FAbs(dot) < Math::GetValue(1) - Math::GetZeroTolerance())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}

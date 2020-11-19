@@ -142,7 +142,7 @@ void Mathematics::ContEllipse2MinCR<Real>
     // constraint line constructed above.  The next vertex of the hull occurs
     // as the closest point to the first vertex on the current constraint
     // line.  The following loop finds each consecutive vertex.
-    Real x0 = Math<Real>::GetValue(0), xMax = (static_cast<Real>(1))/axMax;
+    Real x0 = Math<Real>::GetValue(0), xMax = (Math::GetValue(1))/axMax;
     int j;
     for (j = 0; j < numConstraints; ++j)
     {
@@ -195,7 +195,7 @@ void Mathematics::ContEllipse2MinCR<Real>
             // The maximum is f(x0) since the quadratic f decreases for
             // x > r.
             D[0] = x0;
-            D[1] = (static_cast<Real>(1) - A[iYMin].GetX()*D[0])/A[iYMin].GetY();  // = f(x0)
+            D[1] = (Math::GetValue(1) - A[iYMin].GetX()*D[0])/A[iYMin].GetY();  // = f(x0)
             break;
         }
 

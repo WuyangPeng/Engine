@@ -1,6 +1,6 @@
 TODO Level 4
 
-0.5.2.2 
+0.5.2.3
 
 1.  （Helper）完成帮助模块。
 2.  （Algebra）AQuaternion类FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。

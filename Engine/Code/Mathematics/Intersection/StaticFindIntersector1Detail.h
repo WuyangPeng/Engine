@@ -45,7 +45,7 @@ void Mathematics::StaticFindIntersector1<Real>
 
 				if (Math::Approximate(lhsIntersection, rhsIntersection, epsilon))
 				{
-					m_Intersections.push_back((lhsIntersection + rhsIntersection) / static_cast<Real>(2));
+					m_Intersections.push_back((lhsIntersection + rhsIntersection) / Math::GetValue(2));
 				}
 				else
 				{
@@ -55,12 +55,12 @@ void Mathematics::StaticFindIntersector1<Real>
 			}
 			else  // u0 == v1
 			{
-				m_Intersections.push_back((u0 + v1) / static_cast<Real>(2));
+				m_Intersections.push_back((u0 + v1) / Math::GetValue(2));
 			}
 		}
 		else  // v0 == u1
 		{
-			m_Intersections.push_back((v0 + u1) / static_cast<Real>(2));
+			m_Intersections.push_back((v0 + u1) / Math::GetValue(2));
 		}
 	}
 }

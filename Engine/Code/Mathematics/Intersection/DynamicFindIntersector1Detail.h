@@ -98,7 +98,7 @@ void Mathematics::DynamicFindIntersector1<Real>
 
 				if (Math::Approximate(lhsIntersection, rhsIntersection, epsilon))
 				{
-					m_Intersections.push_back((lhsIntersection + rhsIntersection) / static_cast<Real>(2));
+					m_Intersections.push_back((lhsIntersection + rhsIntersection) / Math::GetValue(2));
 				}
 				else
 				{
@@ -108,12 +108,12 @@ void Mathematics::DynamicFindIntersector1<Real>
 			}
 			else  // u0 == v1 
 			{
-				m_Intersections.push_back((u0 + v1) / static_cast<Real>(2));
+				m_Intersections.push_back((u0 + v1) / Math::GetValue(2));
 			}
 		}
 		else  // u1 == v0 
 		{
-			m_Intersections.push_back((u1 + v0) / static_cast<Real>(2));
+			m_Intersections.push_back((u1 + v0) / Math::GetValue(2));
 		}
 	}
 }

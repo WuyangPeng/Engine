@@ -98,7 +98,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	// Get the z-value, in capsule coordinates, of the incoming line's
 	// unit-length direction.
 	auto dz = Vector3DTools::DotProduct(W, dir);
-	if (Math::FAbs(dz) >= static_cast<Real>(1) - Math::GetZeroTolerance())
+	if (Math::FAbs(dz) >= Math::GetValue(1) - Math::GetZeroTolerance())
 	{
 		// The line is parallel to the capsule axis.  Determine whether the
 		// line intersects the capsule hemispheres.
@@ -147,7 +147,7 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	{
 		// Line intersects infinite cylinder in two places.
 		root = Math::Sqrt(discr);
-		inv = (static_cast<Real>(1)) / a2;
+		inv = (Math::GetValue(1)) / a2;
 		tValue = (-a1 - root)*inv;
 		zValue = P.GetZ() + tValue * D.GetZ();
 		if (Math::FAbs(zValue) <= extent)
@@ -251,8 +251,8 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 	// Use the fact that currently a1 = px*dx+py*dy+(pz+e)*dz and
 	// a0 = px^2+py^2+(pz+e)^2-r^2.  The leading coefficient is a2 = 1, so
 	// no need to include in the construction.
-	a1 -= (static_cast<Real>(2))*extent*D.GetZ();
-	a0 -= (static_cast<Real>(4))*extent*P.GetZ();
+	a1 -= (Math::GetValue(2))*extent*D.GetZ();
+	a0 -= (Math::GetValue(4))*extent*P.GetZ();
 	discr = a1 * a1 - a0;
 	if (discr > Math::GetZeroTolerance())
 	{

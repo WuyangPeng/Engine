@@ -44,18 +44,18 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 
     // Build quadratic Q'(t) = (d/dt)(x(t)y(t)z(t)) = a0+a1*t+a2*t^2.
 	auto a0 = D[0]*D[1]*zDir + D[0]*D[2]*yDir + D[1]*D[2]*xDir;
-	auto a1 = (static_cast<Real>(2))*(D[2]*xDir*yDir + D[1]*xDir*zDir + D[0]*yDir*zDir);
+	auto a1 = (Math::GetValue(2))*(D[2]*xDir*yDir + D[1]*xDir*zDir + D[0]*yDir*zDir);
 	auto a2 = (static_cast<Real>(3))*(xDir*yDir*zDir);
 
     // Find root to Q'(t) = 0 corresponding to maximum.
     Real tFinal;
     if (a2 != Math<Real>::GetValue(0))
     {
-		auto invA2 = (static_cast<Real>(1))/a2;
+		auto invA2 = (Math::GetValue(1))/a2;
 		auto discr = a1*a1 - ((Real)4)*a0*a2;
         discr = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
         tFinal = -(Real{0.5})*(a1 + discr)*invA2;
-        if (a1 + (static_cast<Real>(2))*a2*tFinal > Math<Real>::GetValue(0))
+        if (a1 + (Math::GetValue(2))*a2*tFinal > Math<Real>::GetValue(0))
         {
             tFinal = (Real{0.5})*(-a1 + discr)*invA2;
         }
@@ -104,7 +104,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         // constraints.  However, some numerical error may make this a small
         // negative number.  In that case set tmax = 0 (no change in
         // position).
-		auto numer = static_cast<Real>(1) - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
+		auto numer = Math::GetValue(1) - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
         if (numer < Math<Real>::GetValue(0))
         {
             MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(), "Unexpected condition\n");
@@ -156,7 +156,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 		auto zMax = oneThird/A[plane0][2];
 
         // Compute direction to local maximum point on plane.
-        tFinal = static_cast<Real>(1);
+        tFinal = Math::GetValue(1);
         xDir = xMax - D[0];
         yDir = yMax - D[1];
         zDir = zMax - D[2];
@@ -171,7 +171,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         }
         else
         {
-            xDir = static_cast<Real>(1);
+            xDir = Math::GetValue(1);
         }
 
 		if (A[plane0][1] > Math<Real>::GetZeroTolerance())
@@ -180,7 +180,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         }
         else
         {
-            yDir = static_cast<Real>(1);
+            yDir = Math::GetValue(1);
         }
 
 		if (A[plane0][2] > Math<Real>::GetZeroTolerance())
@@ -189,7 +189,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         }
         else
         {
-            zDir = static_cast<Real>(1);
+            zDir = Math::GetValue(1);
         }
     }
     
@@ -215,7 +215,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         // constraints.  However, some numerical error may make this a small
         // negative number.  In that case, set tmax = 0 (no change in
         // position).
-		auto numer = static_cast<Real>(1) - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
+		auto numer = Math::GetValue(1) - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
         if (numer < Math<Real>::GetValue(0))
         {
 			MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(),  "Unexpected condition\n");
@@ -237,7 +237,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
     D[1] += tMax*yDir;
     D[2] += tMax*zDir;
 
-    if (tMax == static_cast<Real>(1))
+    if (tMax == Math::GetValue(1))
     {
         return;
     }
@@ -289,7 +289,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
     // Walk along convex hull searching for maximum.
     D[0] = Math<Real>::GetValue(0);
     D[1] = Math<Real>::GetValue(0);
-    D[2] = (static_cast<Real>(1))/zmax;
+    D[2] = (Math::GetValue(1))/zmax;
     FindFacetMax(A, plane, D);
 }
 

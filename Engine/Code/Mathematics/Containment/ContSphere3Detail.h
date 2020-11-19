@@ -78,7 +78,7 @@ Mathematics::Sphere3<Real> Mathematics
 	Vector3D<Real> center;
     if (length > Math<Real>::GetZeroTolerance())
     {
-        Real coeff = (length + rDiff)/((static_cast<Real>(2))*length);
+        Real coeff = (length + rDiff)/((Math::GetValue(2))*length);
 		center = sphere0.GetCenter() + coeff*cenDiff;
     }
     else

@@ -33,8 +33,8 @@ namespace Rendering
 		using AVector = Mathematics::FloatAVector;
 		using Vector3D = Mathematics::FloatVector3D;
 		using Vector2D = Mathematics::FloatVector2D;
-		using Line3 = Mathematics::Line3f;
-		using Triangle3 = Mathematics::Triangle3f;
+		using Line3 = Mathematics::FloatLine3;
+		using Triangle3 = Mathematics::FloatTriangle3;
 		using TrianglesSharedPtr = std::shared_ptr<ClassType>;
 		using ConstTrianglesSharedPtr = std::shared_ptr<ClassType>;
 

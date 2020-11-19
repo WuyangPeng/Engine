@@ -42,14 +42,14 @@ void Mathematics::EllipseFit2<Real>
 	auto secondExtent = m_FirstExtent * Math<Real>::FAbs(m_Rotate[0][1]) +
 						m_SecondExtent * Math<Real>::FAbs(m_Rotate[1][1]);
 
-	std::vector<Real> begin{ static_cast<Real>(0.5) * m_FirstExtent,
-							 static_cast<Real>(0.5) * m_SecondExtent,
+	std::vector<Real> begin{  Math::GetRational(1,2) * m_FirstExtent,
+							  Math::GetRational(1,2) * m_SecondExtent,
 							 m_Center.GetX() - firstExtent,
 							 m_Center.GetY() - secondExtent,
 							 -Math<Real>::GetPI() };
 
-	std::vector<Real> end{ static_cast<Real>(2) * m_FirstExtent,
-						   static_cast<Real>(2) * m_SecondExtent,
+	std::vector<Real> end{ Math::GetValue(2) * m_FirstExtent,
+						   Math::GetValue(2) * m_SecondExtent,
 						   m_Center.GetX() + firstExtent,
 						   m_Center.GetY() + secondExtent,
 						   Math<Real>::GetPI() };
@@ -82,10 +82,10 @@ void Mathematics::EllipseFit2<Real>
 	m_Center = box.GetCenter();
 	m_Rotate[0][0] = box.GetFirstAxis().GetX();
 	m_Rotate[0][1] = box.GetFirstAxis().GetY();
-	m_Rotate[1][0] = box.GetSecondAxis().GetX();
-	m_Rotate[1][1] = box.GetSecondAxis().GetY();
-	m_FirstExtent = box.GetFirstExtent();
-	m_SecondExtent = box.GetSecondExtent();
+	m_Rotate[1][0] = box.GetAxis1().GetX();
+	m_Rotate[1][1] = box.GetAxis1().GetY();
+	m_FirstExtent = box.GetExtent0();
+	m_SecondExtent = box.GetExtent1();
 }
 
 // static

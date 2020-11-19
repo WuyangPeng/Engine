@@ -42,7 +42,7 @@ namespace Physics
 		using BoundTreeChildPtr = std::shared_ptr<ClassType>;
 		using APoint = Mathematics::FloatAPoint;
 		using AVector = Mathematics::FloatAVector;
-		using Line3 = Mathematics::Line3f;
+		using Line3 = Mathematics::FloatLine3;
 		using Centroids = std::vector<APoint>;
 		using Split = std::vector<int>;
 		using ConstMeshSmartPointer = typename MeshSmartPointer::ConstType;

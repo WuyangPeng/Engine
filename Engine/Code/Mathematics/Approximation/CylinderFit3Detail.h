@@ -109,7 +109,7 @@ template <typename Real>
 void Mathematics::CylinderFit3<Real>
 	::ComputeCenter(Real average)
 {
-	m_Center += static_cast<Real>(0.5) * average * m_Axis;
+	m_Center +=  Math::GetRational(1,2) * average * m_Axis;
 }
 
 #ifdef OPEN_CLASS_INVARIANT

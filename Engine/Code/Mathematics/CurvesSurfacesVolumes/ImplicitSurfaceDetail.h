@@ -99,7 +99,7 @@ bool ImplicitSurface<Real>::ComputePrincipalCurvatureInfo (const Vector3D<Real>&
 	auto fyfz = fy*fz;
 	auto fzfz = fz*fz;
 
-	auto invLength = (static_cast<Real>(1))/fLength;
+	auto invLength = (Math::GetValue(1))/fLength;
 	auto invLength2 = invLength*invLength;
 	auto invLength3 = invLength*invLength2;
 	auto invLength4 = invLength2*invLength2;
@@ -113,25 +113,25 @@ bool ImplicitSurface<Real>::ComputePrincipalCurvatureInfo (const Vector3D<Real>&
 	auto fzz = FZZ(pos);
 
     // mean curvature
-	auto meanCurv = (Real{0.5})*invLength3*(fxx*(fyfy + fzfz) + fyy*(fxfx + fzfz) + fzz*(fxfx + fyfy) - (static_cast<Real>(2))*(fxy*fxfy + fxz*fxfz +  fyz*fyfz));
+	auto meanCurv = (Real{0.5})*invLength3*(fxx*(fyfy + fzfz) + fyy*(fxfx + fzfz) + fzz*(fxfx + fyfy) - (Math::GetValue(2))*(fxy*fxfy + fxz*fxfz +  fyz*fyfz));
 
     // Gaussian curvature
-	auto gaussCurv = invLength4*(fxfx*(fyy*fzz - fyz*fyz) + fyfy*(fxx*fzz - fxz*fxz) + fzfz*(fxx*fyy - fxy*fxy) + (static_cast<Real>(2))*(fxfy*(fxz*fyz - fxy*fzz) + fxfz*(fxy*fyz - fxz*fyy)  + fyfz*(fxy*fxz - fxx*fyz)));
+	auto gaussCurv = invLength4*(fxfx*(fyy*fzz - fyz*fyz) + fyfy*(fxx*fzz - fxz*fxz) + fzfz*(fxx*fyy - fxy*fxy) + (Math::GetValue(2))*(fxfy*(fxz*fyz - fxy*fzz) + fxfz*(fxy*fyz - fxz*fyy)  + fyfz*(fxy*fxz - fxx*fyz)));
 
     // solve for principal curvatures
 	auto discr = Math<Real>::Sqrt(Math<Real>::FAbs(meanCurv*meanCurv-gaussCurv));
     curv0 = meanCurv - discr;
     curv1 = meanCurv + discr;
 
-	auto m00 = ((-static_cast<Real>(1) + fxfx*invLength2)*fxx)*invLength + (fxfy*fxy)*invLength3 + (fxfz*fxz)*invLength3;
-	auto m01 = ((-static_cast<Real>(1) + fxfx*invLength2)*fxy)*invLength +  (fxfy*fyy)*invLength3 + (fxfz*fyz)*invLength3;
-	auto m02 = ((-static_cast<Real>(1) + fxfx*invLength2)*fxz)*invLength + (fxfy*fyz)*invLength3 + (fxfz*fzz)*invLength3;
-	auto m10 = (fxfy*fxx)*invLength3 + ((-static_cast<Real>(1) + fyfy*invLength2)*fxy)*invLength + (fyfz*fxz)*invLength3;
-	auto m11 = (fxfy*fxy)*invLength3 + ((-static_cast<Real>(1) + fyfy*invLength2)*fyy)*invLength + (fyfz*fyz)*invLength3;
-	auto m12 = (fxfy*fxz)*invLength3 + ((-static_cast<Real>(1) + fyfy*invLength2)*fyz)*invLength + (fyfz*fzz)*invLength3;
-	auto m20 = (fxfz*fxx)*invLength3 + (fyfz*fxy)*invLength3 +  ((-static_cast<Real>(1) + fzfz*invLength2)*fxz)*invLength;
-	auto m21 = (fxfz*fxy)*invLength3 + (fyfz*fyy)*invLength3 +  ((-static_cast<Real>(1) + fzfz*invLength2)*fyz)*invLength;
-	auto m22 = (fxfz*fxz)*invLength3 + (fyfz*fyz)*invLength3 +  ((-static_cast<Real>(1) + fzfz*invLength2)*fzz)*invLength;
+	auto m00 = ((-Math::GetValue(1) + fxfx*invLength2)*fxx)*invLength + (fxfy*fxy)*invLength3 + (fxfz*fxz)*invLength3;
+	auto m01 = ((-Math::GetValue(1) + fxfx*invLength2)*fxy)*invLength +  (fxfy*fyy)*invLength3 + (fxfz*fyz)*invLength3;
+	auto m02 = ((-Math::GetValue(1) + fxfx*invLength2)*fxz)*invLength + (fxfy*fyz)*invLength3 + (fxfz*fzz)*invLength3;
+	auto m10 = (fxfy*fxx)*invLength3 + ((-Math::GetValue(1) + fyfy*invLength2)*fxy)*invLength + (fyfz*fxz)*invLength3;
+	auto m11 = (fxfy*fxy)*invLength3 + ((-Math::GetValue(1) + fyfy*invLength2)*fyy)*invLength + (fyfz*fyz)*invLength3;
+	auto m12 = (fxfy*fxz)*invLength3 + ((-Math::GetValue(1) + fyfy*invLength2)*fyz)*invLength + (fyfz*fzz)*invLength3;
+	auto m20 = (fxfz*fxx)*invLength3 + (fyfz*fxy)*invLength3 +  ((-Math::GetValue(1) + fzfz*invLength2)*fxz)*invLength;
+	auto m21 = (fxfz*fxy)*invLength3 + (fyfz*fyy)*invLength3 +  ((-Math::GetValue(1) + fzfz*invLength2)*fyz)*invLength;
+	auto m22 = (fxfz*fxz)*invLength3 + (fyfz*fyz)*invLength3 +  ((-Math::GetValue(1) + fzfz*invLength2)*fzz)*invLength;
 
     // solve for principal directions
 	auto tmp1 = m00 + curv0;
@@ -168,7 +168,7 @@ bool ImplicitSurface<Real>::ComputePrincipalCurvatureInfo (const Vector3D<Real>&
         maxIndex = 2;
     }
 
-    invLength = (static_cast<Real>(1))/lengths[maxIndex];
+    invLength = (Math::GetValue(1))/lengths[maxIndex];
     U[maxIndex] *= invLength;
 
     dir1 = U[maxIndex];

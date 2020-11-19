@@ -48,9 +48,9 @@ typename const Mathematics::DistTriangle3Rectangle3<Real>::DistanceResult Mathem
 	auto i1 = 0;
 	for (i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
 	{
-		auto center = (static_cast<Real>(0.5))*(mTriangle.GetVertex(i0) + mTriangle.GetVertex(i1));
+		auto center = ( Math::GetRational(1,2))*(mTriangle.GetVertex(i0) + mTriangle.GetVertex(i1));
 		auto direction = mTriangle.GetVertex(i1) - mTriangle.GetVertex(i0);
-		auto extent = (static_cast<Real>(0.5))*Vector3DTools::VectorMagnitude(direction);
+		auto extent = ( Math::GetRational(1,2))*Vector3DTools::VectorMagnitude(direction);
 
 		Segment3<Real> edge{ extent,center,direction };
 
@@ -106,7 +106,7 @@ typename const Mathematics::DistTriangle3Rectangle3<Real>::DistanceResult Mathem
 	auto movedV2 = mTriangle.GetVertex(2) + t * lhsVelocity;
 	auto movedCenter = mRectangle.GetCenter() + t * rhsVelocity;
 	Triangle3 movedTri{ movedV0, movedV1, movedV2 };
-	Rectangle3 movedRect{ movedCenter, mRectangle.GetFirstAxis(),mRectangle.GetSecondAxis(),mRectangle.GetFirstExtent(),mRectangle.GetSecondExtent() };
+	Rectangle3 movedRect{ movedCenter, mRectangle.GetAxis0(),mRectangle.GetAxis1(),mRectangle.GetExtent0(),mRectangle.GetExtent1() };
 	return DistTriangle3Rectangle3<Real>{ movedTri, movedRect }.GetSquared();
 }
 

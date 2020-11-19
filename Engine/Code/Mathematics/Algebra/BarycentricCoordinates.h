@@ -39,7 +39,7 @@ namespace Mathematics
 
         // ื๘ฑ๊ทรฮส
         [[nodiscard]] Real operator[](int index) const;
-        [[nodiscard]] bool IsBarycentricCoordinatesValid() const;
+        [[nodiscard]] bool IsBarycentricCoordinatesValid() const noexcept;
 
     private:
         bool m_IsValid;

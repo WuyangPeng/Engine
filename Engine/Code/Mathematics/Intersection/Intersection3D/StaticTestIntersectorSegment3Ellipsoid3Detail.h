@@ -48,7 +48,7 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
 	auto matDiff = M*diff;
 	auto a2 = Vector3DTools::DotProduct(mSegment.GetDirection(),matDir);
 	auto a1 = Vector3DTools::DotProduct(mSegment.GetDirection(),matDiff);
-	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - static_cast<Real>(1);
+	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
 
     // No intersection if Q(t) has no real roots.
 	auto discr = a1*a1 - a0*a2;
@@ -93,7 +93,7 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
     {
         // Roots are only possible on [0,e], e is the segment extent.  At
         // least one root occurs if Q(e) <= 0 or if Q(e) > 0 and Q'(e) > 0.
-        q = a0 + e*((static_cast<Real>(2))*a1 + a2*e);
+        q = a0 + e*((Math::GetValue(2))*a1 + a2*e);
         if (q <= Real{0.0})
         {
 			this->SetIntersectionType(IntersectionType::Other);

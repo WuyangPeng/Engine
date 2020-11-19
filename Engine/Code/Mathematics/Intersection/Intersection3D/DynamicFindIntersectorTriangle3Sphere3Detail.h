@@ -513,7 +513,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	auto diff = Vector3DTools::VectorMagnitudeSquared(D) - rSqr;
 	auto inv = Math::InvSqrt(Math::FAbs(dot * dot - vsqr * diff));
 
-	auto mContactTime = diff * inv / (static_cast<Real>(1) - dot * inv);
+	auto mContactTime = diff * inv / (Math::GetValue(1) - dot * inv);
 	if (mContactTime > tmax)
 	{
 		// The intersection occurs after max time.

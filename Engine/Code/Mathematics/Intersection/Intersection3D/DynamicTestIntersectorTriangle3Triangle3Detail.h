@@ -67,7 +67,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 	auto i0 = 0;
 	auto i1 = 0;
 
-	if (Math::FAbs(Vector3DTools::DotProduct(N, M)) < static_cast<Real>(1) - Math::GetZeroTolerance())
+	if (Math::FAbs(Vector3DTools::DotProduct(N, M)) < Math::GetValue(1) - Math::GetZeroTolerance())
 	{
 		// Triangles are not parallel.
 
@@ -888,10 +888,10 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>
 		MATHEMATICS_ASSERTION_0(s >= -Math::GetZeroTolerance(), "Unexpected s value.\n");
 		s = Math::GetValue(0);
 	}
-	else if (s > static_cast<Real>(1))
+	else if (s > Math::GetValue(1))
 	{
-		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::GetZeroTolerance(), "Unexpected s value.\n");
-		s = static_cast<Real>(1);
+		MATHEMATICS_ASSERTION_0(s <= Math::GetValue(1) + Math::GetZeroTolerance(), "Unexpected s value.\n");
+		s = Math::GetValue(1);
 	}
 
 	this->SetIntersectionType(IntersectionType::Point);

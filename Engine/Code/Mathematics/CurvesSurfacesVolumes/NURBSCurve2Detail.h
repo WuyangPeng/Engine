@@ -14,7 +14,7 @@ namespace Mathematics
 
 template <typename Real>
 NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints,const Vector2D<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, bool open)
-	: SingleCurve2<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1) }, mLoop{ loop }
+	: SingleCurve2<Real>{ Math<Real>::GetValue(0), Math::GetValue(1) }, mLoop{ loop }
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
@@ -27,7 +27,7 @@ NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints,const Vector2D<Real>* ctrlPoin
 
 template <typename Real>
 NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints, const Vector2D<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, const Real* knot)
-	: SingleCurve2<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1) }, mLoop{ loop }
+	: SingleCurve2<Real>{ Math<Real>::GetValue(0), Math::GetValue(1) }, mLoop{ loop }
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
@@ -197,7 +197,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
         X += tmp*mCtrlPoint[i];
         w += tmp;
     }
-    Real invW = (static_cast<Real>(1))/w;
+    Real invW = (Math::GetValue(1))/w;
 	auto P = invW*X;
     if (pos)
     {
@@ -238,7 +238,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
         XDer2 += tmp*mCtrlPoint[i];
         wDer2 += tmp;
     }
-	auto PDer2 = invW*(XDer2 - (static_cast<Real>(2))*wDer1*PDer1 - wDer2*P);
+	auto PDer2 = invW*(XDer2 - (Math::GetValue(2))*wDer1*PDer1 - wDer2*P);
     if (der2)
     {
         *der2 = PDer2;

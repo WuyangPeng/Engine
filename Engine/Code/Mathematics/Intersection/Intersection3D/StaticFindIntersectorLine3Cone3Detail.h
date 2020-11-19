@@ -78,7 +78,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>
 			// cone "behind" the vertex.  We are interested only in those
 			// intersections "in front" of the vertex.
 			auto root = Math::Sqrt(discr);
-			auto invC2 = (static_cast<Real>(1)) / c2;
+			auto invC2 = (Math::GetValue(1)) / c2;
 			mQuantity = 0;
 
 			auto t = (-c1 - root)*invC2;

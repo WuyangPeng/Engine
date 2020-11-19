@@ -61,7 +61,7 @@ typename const Mathematics::DistLine3Circle3<Real>::DistanceResult Mathematics::
 			auto rm0sqr = mCircle.GetRadius()*m0sqr;
 			if (rm0sqr > b1)
 			{
-				const auto twoThirds = static_cast<Real>(2) / static_cast<Real>(3);
+				const auto twoThirds = Math::GetValue(2) / static_cast<Real>(3);
 				auto sHat = sqrt(pow(rm0sqr*b1sqr, twoThirds) - b1sqr) / m0;
 				auto gHat = rm0sqr * sHat / sqrt(m0sqr*sHat*sHat + b1sqr);
 				auto cutoff = gHat - sHat;
@@ -274,7 +274,7 @@ Real Mathematics::DistLine3Circle3<Real>
 	auto s = Math<Real>::GetValue(0);
 	for (auto i = 0; i < 1024; ++i)
 	{
-		s = (static_cast<Real>(0.5)) * (smin + smax);
+		s = ( Math::GetRational(1,2)) * (smin + smax);
 		auto f = s + m2b2 - rm0sqr * s / Math<Real>::Sqrt(m0sqr*s*s + b1sqr);
 		if (f == Math<Real>::GetValue(0) || s == smin || s == smax)
 		{

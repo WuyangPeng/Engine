@@ -54,7 +54,7 @@ typename const Mathematics::DistPoint3Rectangle3<Real>::DistanceResult Mathemati
 	{
 		s0 = mRectangle.GetExtent(0);
 	}
-	sqrDistance += s0 * (s0 + (static_cast<Real>(2))*b0);
+	sqrDistance += s0 * (s0 + (Math::GetValue(2))*b0);
 
 	if (s1 < -mRectangle.GetExtent(1))
 	{
@@ -64,7 +64,7 @@ typename const Mathematics::DistPoint3Rectangle3<Real>::DistanceResult Mathemati
 	{
 		s1 = mRectangle.GetExtent(1);
 	}
-	sqrDistance += s1 * (s1 + (static_cast<Real>(2))*b1);
+	sqrDistance += s1 * (s1 + (Math::GetValue(2))*b1);
 
 	// Account for numerical round-off error.
 	if (sqrDistance < Math<Real>::GetValue(0))

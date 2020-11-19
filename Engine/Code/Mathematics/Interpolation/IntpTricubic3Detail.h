@@ -26,17 +26,17 @@ namespace Mathematics
 
 		mXMin = xMin;
 		mXSpacing = xSpacing;
-		mInvXSpacing = (static_cast<Real>(1)) / xSpacing;
+		mInvXSpacing = (Math::GetValue(1)) / xSpacing;
 		mXMax = xMin + xSpacing * (xBound - 1);
 
 		mYMin = yMin;
 		mYSpacing = ySpacing;
-		mInvYSpacing = (static_cast<Real>(1)) / ySpacing;
+		mInvYSpacing = (Math::GetValue(1)) / ySpacing;
 		mYMax = yMin + ySpacing * (yBound - 1);
 
 		mZMin = zMin;
 		mZSpacing = zSpacing;
-		mInvZSpacing = (static_cast<Real>(1)) / zSpacing;
+		mInvZSpacing = (Math::GetValue(1)) / zSpacing;
 		mZMax = yMin + zSpacing * (zBound - 1);
 
 		mF = F;
@@ -156,19 +156,19 @@ namespace Mathematics
 		}
 
 		Real U[4];
-		U[0] = static_cast<Real>(1);
+		U[0] = Math::GetValue(1);
 		U[1] = xIndex - ix;
 		U[2] = U[1] * U[1];
 		U[3] = U[1] * U[2];
 
 		Real V[4];
-		V[0] = static_cast<Real>(1);
+		V[0] = Math::GetValue(1);
 		V[1] = yIndex - iy;
 		V[2] = V[1] * V[1];
 		V[3] = V[1] * V[2];
 
 		Real W[4];
-		W[0] = static_cast<Real>(1);
+		W[0] = Math::GetValue(1);
 		W[1] = zIndex - iz;
 		W[2] = W[1] * W[1];
 		W[3] = W[1] * W[2];
@@ -271,17 +271,17 @@ namespace Mathematics
 		{
 		case 0:
 			dx = xIndex - ix;
-			U[0] = static_cast<Real>(1);
+			U[0] = Math::GetValue(1);
 			U[1] = dx;
 			U[2] = dx * U[1];
 			U[3] = dx * U[2];
-			xMult = static_cast<Real>(1);
+			xMult = Math::GetValue(1);
 			break;
 		case 1:
 			dx = xIndex - ix;
 			U[0] = Math<Real>::GetValue(0);
-			U[1] = static_cast<Real>(1);
-			U[2] = (static_cast<Real>(2))*dx;
+			U[1] = Math::GetValue(1);
+			U[2] = (Math::GetValue(2))*dx;
 			U[3] = (static_cast<Real>(3))*dx*dx;
 			xMult = mInvXSpacing;
 			break;
@@ -289,7 +289,7 @@ namespace Mathematics
 			dx = xIndex - ix;
 			U[0] = Math<Real>::GetValue(0);
 			U[1] = Math<Real>::GetValue(0);
-			U[2] = static_cast<Real>(2);
+			U[2] = Math::GetValue(2);
 			U[3] = ((Real)6)*dx;
 			xMult = mInvXSpacing * mInvXSpacing;
 			break;
@@ -309,17 +309,17 @@ namespace Mathematics
 		{
 		case 0:
 			dy = yIndex - iy;
-			V[0] = static_cast<Real>(1);
+			V[0] = Math::GetValue(1);
 			V[1] = dy;
 			V[2] = dy * V[1];
 			V[3] = dy * V[2];
-			yMult = static_cast<Real>(1);
+			yMult = Math::GetValue(1);
 			break;
 		case 1:
 			dy = yIndex - iy;
 			V[0] = Math<Real>::GetValue(0);
-			V[1] = static_cast<Real>(1);
-			V[2] = (static_cast<Real>(2))*dy;
+			V[1] = Math::GetValue(1);
+			V[2] = (Math::GetValue(2))*dy;
 			V[3] = (static_cast<Real>(3))*dy*dy;
 			yMult = mInvYSpacing;
 			break;
@@ -327,7 +327,7 @@ namespace Mathematics
 			dy = yIndex - iy;
 			V[0] = Math<Real>::GetValue(0);
 			V[1] = Math<Real>::GetValue(0);
-			V[2] = static_cast<Real>(2);
+			V[2] = Math::GetValue(2);
 			V[3] = ((Real)6)*dy;
 			yMult = mInvYSpacing * mInvYSpacing;
 			break;
@@ -347,17 +347,17 @@ namespace Mathematics
 		{
 		case 0:
 			dz = zIndex - iz;
-			W[0] = static_cast<Real>(1);
+			W[0] = Math::GetValue(1);
 			W[1] = dz;
 			W[2] = dz * W[1];
 			W[3] = dz * W[2];
-			zMult = static_cast<Real>(1);
+			zMult = Math::GetValue(1);
 			break;
 		case 1:
 			dz = zIndex - iz;
 			W[0] = Math<Real>::GetValue(0);
-			W[1] = static_cast<Real>(1);
-			W[2] = (static_cast<Real>(2))*dz;
+			W[1] = Math::GetValue(1);
+			W[2] = (Math::GetValue(2))*dz;
 			W[3] = (static_cast<Real>(3))*dz*dz;
 			zMult = mInvZSpacing;
 			break;
@@ -365,7 +365,7 @@ namespace Mathematics
 			dz = zIndex - iz;
 			W[0] = Math<Real>::GetValue(0);
 			W[1] = Math<Real>::GetValue(0);
-			W[2] = static_cast<Real>(2);
+			W[2] = Math::GetValue(2);
 			W[3] = ((Real)6)*dz;
 			zMult = mInvZSpacing * mInvZSpacing;
 			break;

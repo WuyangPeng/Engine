@@ -86,12 +86,12 @@ void TCBSpline2<Real>::ComputePoly (int i0, int i1, int i2, int i3)
     Real dt = mTimes[i2] - mTimes[i1];
 
     // Build multipliers at P1.
-    Real oneMinusT0 = static_cast<Real>(1) - mTension[i1];
-    Real oneMinusC0 = static_cast<Real>(1) - mContinuity[i1];
-    Real onePlusC0 = static_cast<Real>(1) + mContinuity[i1];
-    Real oneMinusB0 = static_cast<Real>(1) - mBias[i1];
-    Real onePlusB0 = static_cast<Real>(1) + mBias[i1];
-    Real adj0 = (static_cast<Real>(2))*dt/(mTimes[i2] - mTimes[i0]);
+    Real oneMinusT0 = Math::GetValue(1) - mTension[i1];
+    Real oneMinusC0 = Math::GetValue(1) - mContinuity[i1];
+    Real onePlusC0 = Math::GetValue(1) + mContinuity[i1];
+    Real oneMinusB0 = Math::GetValue(1) - mBias[i1];
+    Real onePlusB0 = Math::GetValue(1) + mBias[i1];
+    Real adj0 = (Math::GetValue(2))*dt/(mTimes[i2] - mTimes[i0]);
     Real out0 = (Real{0.5})*adj0*oneMinusT0*onePlusC0*onePlusB0;
     Real out1 = (Real{0.5})*adj0*oneMinusT0*oneMinusC0*oneMinusB0;
 
@@ -99,12 +99,12 @@ void TCBSpline2<Real>::ComputePoly (int i0, int i1, int i2, int i3)
     Vector2D<Real> TOut = out1*diff + out0*(mPoints[i1] - mPoints[i0]);
 
     // Build multipliers at point P2.
-    Real oneMinusT1 = static_cast<Real>(1) - mTension[i2];
-    Real oneMinusC1 = static_cast<Real>(1) - mContinuity[i2];
-    Real onePlusC1 = static_cast<Real>(1) + mContinuity[i2];
-    Real oneMinusB1 = static_cast<Real>(1) - mBias[i2];
-    Real onePlusB1 = static_cast<Real>(1) + mBias[i2];
-    Real adj1 = (static_cast<Real>(2))*dt/(mTimes[i3] - mTimes[i1]);
+    Real oneMinusT1 = Math::GetValue(1) - mTension[i2];
+    Real oneMinusC1 = Math::GetValue(1) - mContinuity[i2];
+    Real onePlusC1 = Math::GetValue(1) + mContinuity[i2];
+    Real oneMinusB1 = Math::GetValue(1) - mBias[i2];
+    Real onePlusB1 = Math::GetValue(1) + mBias[i2];
+    Real adj1 = (Math::GetValue(2))*dt/(mTimes[i3] - mTimes[i1]);
     Real in0 = (Real{0.5})*adj1*oneMinusT1*oneMinusC1*onePlusB1;
     Real in1 = (Real{0.5})*adj1*oneMinusT1*onePlusC1*oneMinusB1;
 
@@ -113,7 +113,7 @@ void TCBSpline2<Real>::ComputePoly (int i0, int i1, int i2, int i3)
 
     mA[i1] = mPoints[i1];
     mB[i1] = TOut;
-    mC[i1] = (static_cast<Real>(3))*diff - (static_cast<Real>(2))*TOut - TIn;
+    mC[i1] = (static_cast<Real>(3))*diff - (Math::GetValue(2))*TOut - TIn;
     mD[i1] = ((Real)-2)*diff + TOut + TIn;
 }
 
@@ -134,7 +134,7 @@ Vector2D<Real> TCBSpline2<Real>::GetFirstDerivative (Real t) const
     Real dt;
     GetKeyInfo(t, key, dt);
     dt /= (mTimes[key + 1] - mTimes[key]);
-    return mB[key] + dt*(mC[key]*(static_cast<Real>(2)) + mD[key]*((static_cast<Real>(3))*dt));
+    return mB[key] + dt*(mC[key]*(Math::GetValue(2)) + mD[key]*((static_cast<Real>(3))*dt));
 }
 
 template <typename Real>
@@ -144,7 +144,7 @@ Vector2D<Real> TCBSpline2<Real>::GetSecondDerivative (Real t) const
     Real dt;
     GetKeyInfo(t, key, dt);
     dt /= (mTimes[key + 1] - mTimes[key]);
-    return mC[key]*(static_cast<Real>(2)) + mD[key]*(((Real)6)*dt);
+    return mC[key]*(Math::GetValue(2)) + mD[key]*(((Real)6)*dt);
 }
 
 template <typename Real>
@@ -160,7 +160,7 @@ Vector2D<Real> TCBSpline2<Real>::GetThirdDerivative (Real t) const
 template <typename Real>
 Real TCBSpline2<Real>::GetSpeedKey (int key, Real t) const
 {
-    Vector2D<Real> velocity = mB[key] + t*(mC[key]*(static_cast<Real>(2)) +  mD[key]*((static_cast<Real>(3))*t));
+    Vector2D<Real> velocity = mB[key] + t*(mC[key]*(Math::GetValue(2)) +  mD[key]*((static_cast<Real>(3))*t));
 
 	return  Vector2DTools<Real>::VectorMagnitude(velocity);
 }

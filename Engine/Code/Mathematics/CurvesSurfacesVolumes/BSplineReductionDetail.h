@@ -60,7 +60,7 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
             mKnot[j][i] = Math<Real>::GetValue(0);
         }
 
-		auto factor = (static_cast<Real>(1))/(Real)(mQuantity[j] - mDegree);
+		auto factor = (Math::GetValue(1))/(Real)(mQuantity[j] - mDegree);
         for (/**/; i < mQuantity[j]; ++i)
         {
             mKnot[j][i] = (i-mDegree)*factor;
@@ -68,7 +68,7 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
 
         for (/**/; i < mNumKnots[j]; i++)
         {
-            mKnot[j][i] = static_cast<Real>(1);
+            mKnot[j][i] = Math::GetValue(1);
         }
     }
 
@@ -190,7 +190,7 @@ Real BSplineReduction<Real,TVector>::F (int basis, int i, int j, Real t)
 
     if (mKnot[basis][i] <= t && t < mKnot[basis][i + 1])
     {
-        return static_cast<Real>(1);
+        return Math::GetValue(1);
     }
     else
     {

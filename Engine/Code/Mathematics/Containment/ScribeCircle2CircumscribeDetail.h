@@ -41,8 +41,8 @@ void Mathematics::ScribeCircle2Circumscribe<Real>
 
 	Real inputVector[2]  
 	{
-		static_cast<Real>(0.5) * Vector2DTools<Real>::VectorMagnitudeSquared(e10), 
-		static_cast<Real>(0.5) * Vector2DTools<Real>::VectorMagnitudeSquared(e20),
+		 Math::GetRational(1,2) * Vector2DTools<Real>::VectorMagnitudeSquared(e10), 
+		 Math::GetRational(1,2) * Vector2DTools<Real>::VectorMagnitudeSquared(e20),
 	};
 
 	try

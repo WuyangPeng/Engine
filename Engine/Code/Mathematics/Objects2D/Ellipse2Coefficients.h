@@ -1,56 +1,72 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 16:46)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/16 10:51)
 
 #ifndef MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_H
 #define MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Base/MathDetail.h"
-#include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Matrix2.h"
+#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Base/MathDetail.h"
 
+#include <type_traits>
 #include <vector>
-#include <type_traits> 
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Ellipse2Coefficients
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class Ellipse2CoefficientsImpl;
 
-		using ClassType = Ellipse2Coefficients<Real>;
-		using Vector2D = Vector2D<Real>;
-		using Matrix2 = Matrix2<Real>;
-		using Math = Math<Real>;
-		using CoefficientsType = std::vector<Real>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2CoefficientsImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2CoefficientsImpl<double>>;
 
-	public:
-		Ellipse2Coefficients(const Matrix2& matrix, const Vector2D& vector, Real constants);
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2CoefficientsImpl<Real>>;
 
-		explicit Ellipse2Coefficients(const std::vector<Real>& coefficient);
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipse2Coefficients final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		CLASS_INVARIANT_DECLARE;
+        using Ellipse2CoefficientsImpl = Ellipse2CoefficientsImpl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Ellipse2Coefficients);
 
-		const Matrix2 GetMatrix() const;
-		const Vector2D GetVector() const;
-		Real GetConstants() const;
-		const CoefficientsType GetCoefficients() const;
+        using Math = Math<Real>;
+        using Matrix2 = Matrix2<Real>;
+        using Vector2D = Vector2D<Real>;
+        using CoefficientsType = std::vector<Real>;
 
-	private:
-		CoefficientsType m_Coefficients;
-	};
+        constexpr static auto sm_CoefficientsSize = 6;
 
-	template <typename Real>
-	bool Approximate(const Ellipse2Coefficients<Real>& lhs, const Ellipse2Coefficients<Real>& rhs, const Real epsilon);
+    public:
+        Ellipse2Coefficients(const Matrix2& matrix, const Vector2D& vector, Real constants);
 
-	using Ellipse2Coefficientsf = Ellipse2Coefficients<float>;
-	using Ellipse2Coefficientsd = Ellipse2Coefficients<double>;
+        explicit Ellipse2Coefficients(const CoefficientsType& coefficient);
+
+        CLASS_INVARIANT_DECLARE;
+
+        [[nodiscard]] const Matrix2 GetMatrix() const;
+        [[nodiscard]] const Vector2D GetVector() const;
+        [[nodiscard]] Real GetConstants() const;
+        [[nodiscard]] const CoefficientsType GetCoefficients() const;
+
+    private:
+        IMPL_TYPE_DECLARE(Ellipse2Coefficients);
+    };
+
+    template <typename Real>
+    [[nodiscard]] bool Approximate(const Ellipse2Coefficients<Real>& lhs, const Ellipse2Coefficients<Real>& rhs, const Real epsilon);
+
+    using FloatEllipse2Coefficients = Ellipse2Coefficients<float>;
+    using DoubleEllipse2Coefficients = Ellipse2Coefficients<double>;
 }
 
-#endif // MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_H
+#endif  // MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_H

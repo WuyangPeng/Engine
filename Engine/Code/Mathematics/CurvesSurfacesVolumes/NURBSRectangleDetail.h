@@ -14,7 +14,7 @@ namespace Mathematics
 
 template <typename Real>
 NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
-	: ParametricSurface<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1), Math<Real>::GetValue(0), static_cast<Real>(1), true }
+	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
@@ -36,7 +36,7 @@ NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Ve
 
 template <typename Real>
 NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,  int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
-    :  ParametricSurface<Real>(Math<Real>::GetValue(0), static_cast<Real>(1), Math<Real>::GetValue(0), static_cast<Real>(1), true)
+    :  ParametricSurface<Real>(Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true)
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1,  "Invalid input\n");
@@ -58,7 +58,7 @@ NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,  int numVCtrlPoints, V
 
 template <typename Real>
 NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
-	: ParametricSurface<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1), Math<Real>::GetValue(0), static_cast<Real>(1), true }
+	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1,"Invalid input\n");
@@ -80,7 +80,7 @@ NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Ve
 
 template <typename Real>
 NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight,int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot,Real* vKnot)
-	: ParametricSurface<Real>{ Math<Real>::GetValue(0), static_cast<Real>(1), Math<Real>::GetValue(0), static_cast<Real>(1), true }
+	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1,"Invalid input\n");
@@ -317,7 +317,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
             w += tmp;
         }
     }
-    Real invW = (static_cast<Real>(1))/w;
+    Real invW = (Math::GetValue(1))/w;
     Vector3D<Real> P = invW*X;
     if (pos)
     {
@@ -390,7 +390,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
                 wDerUU += tmp;
             }
         }
-        *derUU = invW*(XDerUU - (static_cast<Real>(2))*wDerU*PDerU - wDerUU*P);
+        *derUU = invW*(XDerUU - (Math::GetValue(2))*wDerU*PDerU - wDerUU*P);
     }
 
     if (derUV)
@@ -422,7 +422,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
                 wDerVV += tmp;
             }
         }
-        *derVV = invW*(XDerVV - (static_cast<Real>(2))*wDerV*PDerV - wDerVV*P);
+        *derVV = invW*(XDerVV - (Math::GetValue(2))*wDerV*PDerV - wDerVV*P);
     }
 }
 

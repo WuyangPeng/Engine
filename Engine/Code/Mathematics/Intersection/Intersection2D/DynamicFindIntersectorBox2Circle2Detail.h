@@ -46,12 +46,12 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 	// Convert circle center to box coordinates.
 	auto diff = m_Circle.GetCenter() - m_Box.GetCenter();
 	auto vel = this->GetRhsVelocity() - this->GetLhsVelocity();
-	auto cx = Vector2DTools<Real>::DotProduct(diff, m_Box.GetFirstAxis());
-	auto cy = Vector2DTools<Real>::DotProduct(diff, m_Box.GetSecondAxis());
-	auto vx = Vector2DTools<Real>::DotProduct(vel, m_Box.GetFirstAxis());
-	auto vy = Vector2DTools<Real>::DotProduct(vel, m_Box.GetSecondAxis());
-	auto ex = m_Box.GetFirstExtent();
-	auto ey = m_Box.GetSecondExtent();
+	auto cx = Vector2DTools<Real>::DotProduct(diff, m_Box.GetAxis0());
+	auto cy = Vector2DTools<Real>::DotProduct(diff, m_Box.GetAxis1());
+	auto vx = Vector2DTools<Real>::DotProduct(vel, m_Box.GetAxis0());
+	auto vy = Vector2DTools<Real>::DotProduct(vel, m_Box.GetAxis1());
+	auto ex = m_Box.GetExtent0();
+	auto ey = m_Box.GetExtent1();
 	auto ix = Math::GetValue(0);
 	auto iy = Math::GetValue(0);
 
@@ -130,7 +130,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 		return;
 	}
 
-	m_ContactPoint = m_Box.GetCenter() + ix * m_Box.GetFirstAxis() + iy * m_Box.GetSecondAxis();
+	m_ContactPoint = m_Box.GetCenter() + ix * m_Box.GetAxis0() + iy * m_Box.GetAxis1();
 	this->SetIntersectionType(IntersectionType::Point);
 	return;
 }
@@ -171,7 +171,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			iy = -ey;
 			vsqr = vx * vx + vy * vy;
 			inv = Math::InvSqrt(Math::FAbs(dot*dot - vsqr * diff));
-			this->SetContactTime(diff * inv / (static_cast<Real>(1) - dot * inv));
+			this->SetContactTime(diff * inv / (Math::GetValue(1) - dot * inv));
 			return 1;
 		}
 
@@ -206,7 +206,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			dot = vx * dx + vy * dy;
 			diff = dx * dx + dy * dy - rsqr;
 			inv = Math::InvSqrt(Math::FAbs(dot*dot - vsqr * diff));
-			this->SetContactTime(diff*inv / (static_cast<Real>(1) - dot * inv));
+			this->SetContactTime(diff*inv / (Math::GetValue(1) - dot * inv));
 			iy = ey;
 		}
 	}
@@ -220,7 +220,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			iy = -ey;
 			vsqr = vx * vx + vy * vy;
 			inv = Math::InvSqrt(Math::FAbs(dot*dot - vsqr * diff));
-			this->SetContactTime(diff * inv / (static_cast<Real>(1) - dot * inv));
+			this->SetContactTime(diff * inv / (Math::GetValue(1) - dot * inv));
 			return 1;
 		}
 
@@ -255,7 +255,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			dot = vx * dx + vy * dy;
 			diff = dx * dx + dy * dy - rsqr;
 			inv = Math::InvSqrt(Math::FAbs(dot*dot - vsqr * diff));
-			this->SetContactTime(diff*inv / (static_cast<Real>(1) - dot * inv));
+			this->SetContactTime(diff*inv / (Math::GetValue(1) - dot * inv));
 			ix = ex;
 		}
 	}
@@ -316,7 +316,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			dot = vx * dx + vy * dy;
 			diff = dx * dx + dy * dy - rsqr;
 			inv = Math::InvSqrt(Math::FAbs(dot*dot - vsqr * diff));
-			this->SetContactTime(diff*inv / (static_cast<Real>(1) - dot * inv));
+			this->SetContactTime(diff*inv / (Math::GetValue(1) - dot * inv));
 			iy = ey;
 		}
 	}
@@ -346,7 +346,7 @@ int Mathematics::DynamicFindIntersectorBox2Circle2<Real>
 			dot = vx * dx + vy * dy;
 			diff = dx * dx + dy * dy - rsqr;
 			inv = Math::InvSqrt(Math::FAbs(dot*dot - vsqr * diff));
-			this->SetContactTime(diff*inv / (static_cast<Real>(1) - dot * inv));
+			this->SetContactTime(diff*inv / (Math::GetValue(1) - dot * inv));
 			iy = -ey;
 		}
 	}

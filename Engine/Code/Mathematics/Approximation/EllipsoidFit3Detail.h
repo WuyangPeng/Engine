@@ -44,11 +44,11 @@ void Mathematics::EllipsoidFit3<Real>
 							  m_FirstExtent * Math<Real>::FAbs(m_Rotate[1][0]) + m_SecondExtent * Math<Real>::FAbs(m_Rotate[1][1]) + m_ThirdExtent * Math<Real>::FAbs(m_Rotate[1][2]),
 							  m_FirstExtent * Math<Real>::FAbs(m_Rotate[2][0]) + m_SecondExtent * Math<Real>::FAbs(m_Rotate[2][1]) + m_ThirdExtent * Math<Real>::FAbs(m_Rotate[2][2]) };
 
-	std::vector<Real> begin{ static_cast<Real>(0.5) * m_FirstExtent,static_cast<Real>(0.5) * m_SecondExtent,static_cast<Real>(0.5) * m_ThirdExtent,
+	std::vector<Real> begin{  Math::GetRational(1,2) * m_FirstExtent, Math::GetRational(1,2) * m_SecondExtent, Math::GetRational(1,2) * m_ThirdExtent,
 							 m_Center.GetX() - extent[0], m_Center.GetY() - extent[1], m_Center.GetZ() - extent[2],
 							 -Math<Real>::GetPI(), Math<Real>::GetValue(0), Math<Real>::GetValue(0) };
 
-	std::vector<Real> end{ static_cast<Real>(2) * m_FirstExtent, static_cast<Real>(2) * m_SecondExtent,static_cast<Real>(2) * m_ThirdExtent,
+	std::vector<Real> end{ Math::GetValue(2) * m_FirstExtent, Math::GetValue(2) * m_SecondExtent,Math::GetValue(2) * m_ThirdExtent,
 						   m_Center.GetX() + extent[0], m_Center.GetY() + extent[1], m_Center.GetZ() + extent[2],
 						   Math<Real>::GetPI(), Math<Real>::GetPI(), Math<Real>::GetPI() };
 
@@ -154,7 +154,7 @@ typename const Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit
 
 	if (static_cast<Real>(-1) < axis.GetZ())
 	{
-		if (axis.GetZ() < static_cast<Real>(1))
+		if (axis.GetZ() < Math::GetValue(1))
 		{
 			angle[0] = Math<Real>::ATan2(axis.GetY(), axis.GetX());
 			angle[1] = Math<Real>::ACos(axis.GetZ());

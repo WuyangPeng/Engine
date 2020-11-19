@@ -123,16 +123,16 @@ void Mathematics::QDUDecompositionValue<Real>
 	m_Diagonal.MakeDiagonal(right(0, 0), right(1, 1), right(2, 2));
 
 	// ¼ôÇÐ×é¼þ¡£	
-	auto invD00 = static_cast<Real>(1) / m_Diagonal(0, 0);
-	m_UpperTriangular(0, 0) = static_cast<Real>(1);
+	auto invD00 = Math::GetValue(1) / m_Diagonal(0, 0);
+	m_UpperTriangular(0, 0) = Math::GetValue(1);
 	m_UpperTriangular(0, 1) = right(0, 1) * invD00;
 	m_UpperTriangular(0, 2) = right(0, 2) * invD00;
 	m_UpperTriangular(1, 0) = Math<Real>::GetValue(0);
-	m_UpperTriangular(1, 1) = static_cast<Real>(1);
+	m_UpperTriangular(1, 1) = Math::GetValue(1);
 	m_UpperTriangular(1, 2) = right(1, 2) / m_Diagonal(1, 1);
 	m_UpperTriangular(2, 0) = Math<Real>::GetValue(0);
 	m_UpperTriangular(2, 1) = Math<Real>::GetValue(0);
-	m_UpperTriangular(2, 2) = static_cast<Real>(1);
+	m_UpperTriangular(2, 2) = Math::GetValue(1);
 }
 
 template <typename Real>

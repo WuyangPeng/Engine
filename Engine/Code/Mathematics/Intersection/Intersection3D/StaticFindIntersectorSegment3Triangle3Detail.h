@@ -53,7 +53,7 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>
     Real sign;
     if (DdN > Math::GetZeroTolerance())
     {
-        sign = static_cast<Real>(1);
+        sign = Math::GetValue(1);
     }
     else if (DdN < -Math::GetZeroTolerance())
     {
@@ -83,11 +83,11 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>
                 if (-extDdN <= QdN && QdN <= extDdN)
                 {
                     // Segment intersects triangle.
-					auto inv = (static_cast<Real>(1))/DdN;
+					auto inv = (Math::GetValue(1))/DdN;
                     mSegmentParameter = QdN*inv;
                     mTriBary1 = DdQxE2*inv;
                     mTriBary2 = DdE1xQ*inv;
-                    mTriBary0 = static_cast<Real>(1) - mTriBary1 - mTriBary2;
+                    mTriBary0 = Math::GetValue(1) - mTriBary1 - mTriBary2;
 
 					this->SetIntersectionType(IntersectionType::Point);
                     mQuantity = 1;

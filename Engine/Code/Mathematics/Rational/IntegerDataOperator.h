@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/20 09:48)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/19 10:16)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H
@@ -10,16 +13,16 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "RationalFwd.h"
+#include "System/Helper/PragmaWarning/Operators.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 
-#include "System/Helper/PragmaWarning/Operators.h"
 #include <vector>
 
 namespace Mathematics
 {
     // N是你想要元整数的32位字节的数目。
     template <int N>
-    class IntegerDataOperator
+    class IntegerDataOperator final
     {
     public:
         using ClassType = IntegerDataOperator<N>;
@@ -47,13 +50,13 @@ namespace Mathematics
         IntegerDataOperator& operator>>=(int shift);
 
     private:
-        static constexpr uint32_t sm_IntSize{ 2 * N };
-        static constexpr uint32_t sm_IntLast{ sm_IntSize - 1 };
-        static constexpr uint32_t sm_Carry{ 0x00010000 };
-        static constexpr uint32_t sm_Low{ 0x0000FFFF };
-        static constexpr uint32_t sm_High{ 0xFFFF0000 };
+        static constexpr auto sm_IntSize = 2 * N;
+        static constexpr auto sm_IntLast = sm_IntSize - 1;
+        static constexpr auto sm_Carry = 0x00010000u;
+        static constexpr auto sm_Low = 0x0000FFFFu;
+        static constexpr auto sm_High = 0xFFFF0000u;
         static constexpr uint16_t sm_Symbol{ 0x8000 };
-        static constexpr uint32_t sm_Positive{ 0xFFFFFFFF };
+        static constexpr auto sm_Positive = 0xFFFFFFFFu;
 
         IntegerData& m_Master;
         IntegerDataAmend m_Amend;
@@ -61,10 +64,10 @@ namespace Mathematics
     };
 
     template <int N>
-    IntegerData<N> operator+(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
+    [[nodiscard]] IntegerData<N> operator+(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
 
     template <int N>
-    IntegerData<N> operator-(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
+    [[nodiscard]] IntegerData<N> operator-(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
 }
 
 #endif  // MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H

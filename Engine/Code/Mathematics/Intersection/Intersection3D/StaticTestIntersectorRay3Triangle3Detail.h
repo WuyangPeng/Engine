@@ -85,7 +85,7 @@ void Mathematics::StaticTestIntersectorRay3Triangle3<Real>
 	Real sign;
 	if (DdN > Math::GetZeroTolerance())
 	{
-		sign = static_cast<Real>(1);
+		sign = Math::GetValue(1);
 	}
 	else if (DdN < -Math::GetZeroTolerance())
 	{

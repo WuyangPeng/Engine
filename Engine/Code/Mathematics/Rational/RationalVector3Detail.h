@@ -1,237 +1,217 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 10:19)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/19 11:14)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR3_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR3_DETAIL_H
 
 #include "RationalVector3.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+
+#include <iostream>
 
 template <int IntSize>
-Mathematics::RationalVector3<IntSize>
-	::RationalVector3()
-	:m_Tuple{}
+Mathematics::RationalVector3<IntSize>::RationalVector3() noexcept
+    : m_Tuple{}
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int IntSize>
-Mathematics::RationalVector3<IntSize>
-	::RationalVector3(const RationalVector<3, IntSize>& rhs)
-	:m_Tuple{ rhs }
+Mathematics::RationalVector3<IntSize>::RationalVector3(const RationalVector& rhs) noexcept
+    : m_Tuple{ rhs }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int IntSize>
-Mathematics::RationalVector3<IntSize>
-	::RationalVector3(const Rational& x, const Rational& y, const Rational& z)
-	:m_Tuple{}
+Mathematics::RationalVector3<IntSize>::RationalVector3(const Rational& x, const Rational& y, const Rational& z) noexcept
+    : m_Tuple{ x, y, z }
 {
-	m_Tuple[0] = x;
-	m_Tuple[1] = y;
-	m_Tuple[2] = z;
-
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <int IntSize>
-Mathematics::RationalVector3<IntSize>& Mathematics::RationalVector3<IntSize>
-	::operator= (const RationalVector<3, IntSize>& rhs)
+Mathematics::RationalVector3<IntSize>& Mathematics::RationalVector3<IntSize>::operator=(const RationalVector& rhs) noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Tuple = rhs;
+    m_Tuple = rhs;
 
-	return *this;
+    return *this;
 }
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <int IntSize>
-bool Mathematics::RationalVector3<IntSize>
-	::IsValid() const noexcept
+bool Mathematics::RationalVector3<IntSize>::IsValid() const noexcept
 {
-	return true;
+    return true;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <int IntSize>
-typename const Mathematics::RationalVector3<IntSize>::Rational	Mathematics::RationalVector3<IntSize>
-	::GetX() const
+typename const Mathematics::RationalVector3<IntSize>::Rational Mathematics::RationalVector3<IntSize>::GetX() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Tuple[0];
+    return m_Tuple[0];
 }
 
 template <int IntSize>
-void Mathematics::RationalVector3<IntSize>
-	::SetX(const Rational& x)
+void Mathematics::RationalVector3<IntSize>::SetX(const Rational& x)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Tuple[0] = x;
+    m_Tuple[0] = x;
 }
 
 template <int IntSize>
-typename const Mathematics::RationalVector3<IntSize>::Rational	Mathematics::RationalVector3<IntSize>
-	::GetY() const
+typename const Mathematics::RationalVector3<IntSize>::Rational Mathematics::RationalVector3<IntSize>::GetY() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Tuple[1];
+    return m_Tuple[1];
 }
 
 template <int IntSize>
-void Mathematics::RationalVector3<IntSize>
-	::SetY(const Rational& y)
+void Mathematics::RationalVector3<IntSize>::SetY(const Rational& y)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Tuple[1] = y;
+    m_Tuple[1] = y;
 }
 
 template <int IntSize>
-typename const Mathematics::RationalVector3<IntSize>::Rational	Mathematics::RationalVector3<IntSize>
-	::GetZ() const
+typename const Mathematics::RationalVector3<IntSize>::Rational Mathematics::RationalVector3<IntSize>::GetZ() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Tuple[2];
+    return m_Tuple[2];
 }
 
 template <int IntSize>
-void Mathematics::RationalVector3<IntSize>
-	::SetZ(const Rational& z)
+void Mathematics::RationalVector3<IntSize>::SetZ(const Rational& z)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Tuple[2] = z;
+    m_Tuple[2] = z;
 }
 
 template <int IntSize>
-const Mathematics::RationalVector3<IntSize>	Mathematics::RationalVector3<IntSize>
-	::operator- () const
+const Mathematics::RationalVector3<IntSize> Mathematics::RationalVector3<IntSize>::operator-() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return RationalVector3(-m_Tuple);
+    return RationalVector3{ -m_Tuple };
 }
 
 template <int IntSize>
-Mathematics::RationalVector3<IntSize>&	Mathematics::RationalVector3<IntSize>
-	::operator+= (const RationalVector3& rhs)
+Mathematics::RationalVector3<IntSize>& Mathematics::RationalVector3<IntSize>::operator+=(const RationalVector3& rhs)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Tuple += rhs.m_Tuple;
+    m_Tuple += rhs.m_Tuple;
 
-	return *this;
+    return *this;
 }
 
 template <int IntSize>
-Mathematics::RationalVector3<IntSize>&	Mathematics::RationalVector3<IntSize>
-	::operator-= (const RationalVector3& rhs)
+Mathematics::RationalVector3<IntSize>& Mathematics::RationalVector3<IntSize>::operator-=(const RationalVector3& rhs)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Tuple -= rhs.m_Tuple;
+    m_Tuple -= rhs.m_Tuple;
 
-	return *this;
+    return *this;
 }
 
 template <int IntSize>
-Mathematics::RationalVector3<IntSize>&	Mathematics::RationalVector3<IntSize>
-	::operator*= (const Rational& rational)
+Mathematics::RationalVector3<IntSize>& Mathematics::RationalVector3<IntSize>::operator*=(const Rational& rational)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Tuple *= rational;
+    m_Tuple *= rational;
 
-	return *this;
+    return *this;
 }
 
 template <int IntSize>
-Mathematics::RationalVector3<IntSize>&	Mathematics::RationalVector3<IntSize>
-	::operator/= (const Rational& rational)
+Mathematics::RationalVector3<IntSize>& Mathematics::RationalVector3<IntSize>::operator/=(const Rational& rational)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	m_Tuple /= rational;
+    m_Tuple /= rational;
 
-	return *this;
+    return *this;
 }
 
 template <int IntSize>
-typename const Mathematics::RationalVector3<IntSize>::Rational	Mathematics::RationalVector3<IntSize>
-	::SquaredLength() const
+typename const Mathematics::RationalVector3<IntSize>::Rational Mathematics::RationalVector3<IntSize>::SquaredLength() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Tuple.SquaredLength();
+    return m_Tuple.SquaredLength();
 }
 
 template <int IntSize>
-const Mathematics::SignRational<IntSize> Mathematics
-	::Dot(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs)
+const Mathematics::SignRational<IntSize> Mathematics::Dot(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs)
 {
-	return lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY() + lhs.GetZ() * rhs.GetZ();
+    return lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY() + lhs.GetZ() * rhs.GetZ();
 }
 
 template <int IntSize>
-const Mathematics::RationalVector3<IntSize>	Mathematics
-	::Cross(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs)
+const Mathematics::RationalVector3<IntSize> Mathematics::Cross(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs)
 {
-	return RationalVector3<IntSize>{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(),
-									 lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(),
-									 lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX()};
+    return RationalVector3<IntSize>{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(),
+                                     lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(),
+                                     lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX() };
 }
 
 template <int IntSize>
-const Mathematics::SignRational<IntSize> Mathematics
-	::TripleScalar(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& mhs, const RationalVector3<IntSize>& rhs)
+const Mathematics::SignRational<IntSize> Mathematics::TripleScalar(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& mhs, const RationalVector3<IntSize>& rhs)
 {
-	return Dot(lhs, Cross(mhs, rhs));
+    return Dot(lhs, Cross(mhs, rhs));
 }
 
 template <int IntSize>
-bool Mathematics
-	::operator== (const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs)
+bool Mathematics::operator==(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs)
 {
-	return lhs.GetX() == rhs.GetX() && lhs.GetY() == rhs.GetY() && lhs.GetZ() == rhs.GetZ();
+    return lhs.GetX() == rhs.GetX() && lhs.GetY() == rhs.GetY() && lhs.GetZ() == rhs.GetZ();
 }
 
 template <int IntSize>
-bool Mathematics
-	::operator<  (const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs)
+bool Mathematics::operator<(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs)
 {
-	if (lhs.GetX() < rhs.GetX())
-		return true;
-	else if (rhs.GetX() < lhs.GetX())
-		return false;
-	else if (lhs.GetY() < rhs.GetY())
-		return true;
-	else if (rhs.GetY() < lhs.GetY())
-		return false;
-	else if (lhs.GetZ() < rhs.GetZ())
-		return true;
-	else
-		return false;
+    if (lhs.GetX() < rhs.GetX())
+        return true;
+    else if (rhs.GetX() < lhs.GetX())
+        return false;
+    else if (lhs.GetY() < rhs.GetY())
+        return true;
+    else if (rhs.GetY() < lhs.GetY())
+        return false;
+    else if (lhs.GetZ() < rhs.GetZ())
+        return true;
+    else
+        return false;
 }
 
 template <int IntSize>
-std::ostream& Mathematics
-	::operator<<(std::ostream& os, const RationalVector3<IntSize>& rhs)
+std::ostream& Mathematics::operator<<(std::ostream& os, const RationalVector3<IntSize>& rhs)
 {
-	os << "x = " << rhs.GetX() << " y = " << rhs.GetY() << " z = " << rhs.GetZ();
+    os << "x = " << rhs.GetX() << " y = " << rhs.GetY() << " z = " << rhs.GetZ();
 
-	return os;
+    return os;
 }
 
-#endif // MATHEMATICS_RATIONAL_RATIONAL_VECTOR3_DETAIL_H
-
+#endif  // MATHEMATICS_RATIONAL_RATIONAL_VECTOR3_DETAIL_H

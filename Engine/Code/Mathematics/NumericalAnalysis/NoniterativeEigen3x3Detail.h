@@ -68,7 +68,7 @@ void Mathematics::NoniterativeEigen3x3<Real>
 	Matrix3 scaledEntry{ matrix };
 	auto maxValue = GetMaxValue(scaledEntry);
 
-	if (static_cast<Real>(1) < maxValue)
+	if (Math::GetValue(1) < maxValue)
 	{
 		scaledEntry /= maxValue;
 	}
@@ -119,7 +119,7 @@ template <typename Real>
 void Mathematics::NoniterativeEigen3x3<Real>
 	::RescaleBack(Real maxValue)
 {
-	if (static_cast<Real>(1) < maxValue)
+	if (Math::GetValue(1) < maxValue)
 	{
 		for (auto i = 0; i < sm_EigenMax; ++i)
 		{

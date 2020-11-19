@@ -28,7 +28,7 @@ namespace Mathematics
 		Real EAE = Vector3DTools<Real>::DotProduct(eye, AE);
 		Real BE = Vector3DTools<Real>::DotProduct(B, eye);
 		Real QuadE = ((Real)4)*(EAE + BE + C);
-		Vector3D<Real> Bp2AE = B + (static_cast<Real>(2))*AE;
+		Vector3D<Real> Bp2AE = B + (Math::GetValue(2))*AE;
 		Matrix3<Real> mat = Matrix3<Real>(Bp2AE, Bp2AE) - QuadE * A;
 
 		// Compute coefficients for projected ellipse.
@@ -45,8 +45,8 @@ namespace Mathematics
 		AOut[0][1] = Vector3DTools<Real>::DotProduct(U, MV);
 		AOut[1][1] = Vector3DTools<Real>::DotProduct(V, MV);
 		AOut[1][0] = AOut[0][1];
-		BOut[0] = (static_cast<Real>(2))*DmNdE*(Vector3DTools<Real>::DotProduct(U, MN));
-		BOut[1] = (static_cast<Real>(2))*DmNdE*(Vector3DTools<Real>::DotProduct(V, MN));
+		BOut[0] = (Math::GetValue(2))*DmNdE*(Vector3DTools<Real>::DotProduct(U, MN));
+		BOut[1] = (Math::GetValue(2))*DmNdE*(Vector3DTools<Real>::DotProduct(V, MN));
 		COut = DmNdE * DmNdE*(Vector3DTools<Real>::DotProduct(plane.GetNormal(), MN));
 
 		Ellipse2Coefficients<Real>  ellipsoid3Coefficients1(AOut, BOut, COut);

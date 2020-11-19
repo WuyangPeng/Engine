@@ -1,54 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/19 17:42)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.3 (2020/11/17 17:46)
 
 #ifndef MATHEMATICS_OBJECTS3D_LOZENGE3_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_LOZENGE3_DETAIL_H
 
 #include "Lozenge3.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-template <typename Real>
-Mathematics::Lozenge3<Real>
-	::Lozenge3(const Rectangle3& rectangle, Real radius)
-	:m_Rectangle{ rectangle }, m_Radius{ radius }
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_LOZENGE3_ACHIEVE)
 
-#ifdef OPEN_CLASS_INVARIANT
-template <typename Real>
-bool Mathematics::Lozenge3<Real>
-	::IsValid() const noexcept
-{
-	if (Math<Real>::GetValue(0) < m_Radius)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
+    #include "Lozenge3Achieve.h"
 
-template <typename Real>
-typename const Mathematics::Lozenge3<Real>::Rectangle3 Mathematics::Lozenge3<Real>
-	::GetRectangle() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+#endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_LOZENGE3_ACHIEVE)
 
-	return m_Rectangle;
-}
-
-template <typename Real>
-Real Mathematics::Lozenge3<Real>
-	::GetRadius() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	return m_Radius;
-}
-
-#endif // MATHEMATICS_OBJECTS3D_LOZENGE3_DETAIL_H
-
+#endif  // MATHEMATICS_OBJECTS3D_LOZENGE3_DETAIL_H

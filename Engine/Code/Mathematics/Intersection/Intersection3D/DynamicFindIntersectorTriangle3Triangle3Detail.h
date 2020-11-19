@@ -73,7 +73,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	auto i0 = 0;
 	auto i1 = 0;
 
-	if (Math::FAbs(Vector3DTools::DotProduct(N, M)) < static_cast<Real>(1) - Math::GetZeroTolerance())
+	if (Math::FAbs(Vector3DTools::DotProduct(N, M)) < Math::GetValue(1) - Math::GetZeroTolerance())
 	{
 		// Triangles are not parallel.
 
@@ -424,7 +424,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	// Unproject the segment of intersection.
 	if (maxNormal == 0)
 	{
-		auto invNX = (static_cast<Real>(1)) / plane.GetNormal().GetX();
+		auto invNX = (Math::GetValue(1)) / plane.GetNormal().GetX();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][1] = intr[i].GetX();
@@ -434,7 +434,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (maxNormal == 1)
 	{
-		auto invNY = (static_cast<Real>(1)) / plane.GetNormal().GetY();
+		auto invNY = (Math::GetValue(1)) / plane.GetNormal().GetY();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][0] = intr[i].GetX();
@@ -444,7 +444,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 	else
 	{
-		auto invNZ = (static_cast<Real>(1)) / plane.GetNormal().GetZ();
+		auto invNZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
 		for (i = 0; i < mQuantity; ++i)
 		{
 			mPoint[i][0] = intr[i].GetX();
@@ -545,7 +545,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	mQuantity = intr.GetQuantity();
 	if (maxNormal == 0)
 	{
-		auto invNX = (static_cast<Real>(1)) / plane.GetNormal().GetX();
+		auto invNX = (Math::GetValue(1)) / plane.GetNormal().GetX();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][1] = intr.GetPoint(i).GetX();
@@ -555,7 +555,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 	else if (maxNormal == 1)
 	{
-		auto invNY = (static_cast<Real>(1)) / plane.GetNormal().GetY();
+		auto invNY = (Math::GetValue(1)) / plane.GetNormal().GetY();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][0] = intr.GetPoint(i).GetX();
@@ -565,7 +565,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 	else
 	{
-		auto invNZ = (static_cast<Real>(1)) / plane.GetNormal().GetZ();
+		auto invNZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
 		for (i = 0; i < mQuantity; i++)
 		{
 			mPoint[i][0] = intr.GetPoint(i).GetX();
@@ -1095,10 +1095,10 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		MATHEMATICS_ASSERTION_0(s >= -Math::GetZeroTolerance(), "Unexpected s value.\n");
 		s = Math::GetValue(0);
 	}
-	else if (s > static_cast<Real>(1))
+	else if (s > Math::GetValue(1))
 	{
-		MATHEMATICS_ASSERTION_0(s <= static_cast<Real>(1) + Math::GetZeroTolerance(), "Unexpected s value.\n");
-		s = static_cast<Real>(1);
+		MATHEMATICS_ASSERTION_0(s <= Math::GetValue(1) + Math::GetZeroTolerance(), "Unexpected s value.\n");
+		s = Math::GetValue(1);
 	}
 
 	this->SetIntersectionType(IntersectionType::Point);

@@ -29,7 +29,7 @@ void Mathematics::TrapezoidRule<Real, UserDataType>
 { 
 	auto numSamples = m_NumSamples - 1;
 	auto difference = (m_End - m_Begin) / static_cast<Real>(numSamples);
-	m_Value = static_cast<Real>(0.5) * (m_Function(m_Begin, m_UserData) + m_Function(m_End, m_UserData));
+	m_Value =  Math::GetRational(1,2) * (m_Function(m_Begin, m_UserData) + m_Function(m_End, m_UserData));
 
 	for (auto i = 1; i <= m_NumSamples - 2; ++i)
 	{

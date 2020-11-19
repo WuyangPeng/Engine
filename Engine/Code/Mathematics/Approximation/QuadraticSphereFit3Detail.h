@@ -92,7 +92,7 @@ void Mathematics::QuadraticSphereFit3<Real>
 	// µ±ÐÄ³ýÁã
 	if (Math<Real>::GetZeroTolerance() < Math<Real>::FAbs(eigenVector[4]))
 	{
-		Real inv = static_cast<Real>(1) / eigenVector[4];
+		Real inv = Math::GetValue(1) / eigenVector[4];
 
 		Real coeff[4]{ };
 		for (auto row = 0; row < 4; ++row)
@@ -100,9 +100,9 @@ void Mathematics::QuadraticSphereFit3<Real>
 			coeff[row] = inv * eigenVector[row];
 		}
 
-		m_Center[0] = -static_cast<Real>(0.5) * coeff[1];
-		m_Center[1] = -static_cast<Real>(0.5) * coeff[2];
-		m_Center[2] = -static_cast<Real>(0.5) * coeff[3];
+		m_Center[0] = - Math::GetRational(1,2) * coeff[1];
+		m_Center[1] = - Math::GetRational(1,2) * coeff[2];
+		m_Center[2] = - Math::GetRational(1,2) * coeff[3];
 		m_Radius = Math<Real>::Sqrt(Math<Real>::FAbs(m_Center[0] * m_Center[0] + m_Center[1] * m_Center[1] + m_Center[2] * m_Center[2] - coeff[0]));
 	}
 	else

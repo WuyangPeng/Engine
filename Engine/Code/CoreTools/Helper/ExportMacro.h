@@ -162,7 +162,7 @@ public:                                                          \
     className& operator=(className&& rhs) noexcept;
 
 #define COPY_UNSHARE_CLASSES_BASE_TYPE_DECLARE(className, destructor) \
-private:                                                              \
+protected:                                                            \
     virtual void Swap(className& rhs) noexcept;                       \
                                                                       \
 public:                                                               \

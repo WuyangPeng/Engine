@@ -19,7 +19,7 @@ Mathematics::DistanceLine3Line3Tool<Real>
 	 m_OriginDifferenceDotLhsDirection{ Vector3DTools::DotProduct(m_OriginDifference, lhsDirection) },
 	 m_OriginDifferenceDotRhsDirection{ -Vector3DTools::DotProduct(m_OriginDifference, rhsDirection) },
 	 m_OriginDifferenceSquaredLength{ Vector3DTools::VectorMagnitudeSquared(m_OriginDifference) },
-	 m_Det{ Math::FAbs(static_cast<Real>(1) - m_DirectionDot * m_DirectionDot) }
+	 m_Det{ Math::FAbs(Math::GetValue(1) - m_DirectionDot * m_DirectionDot) }
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -153,8 +153,8 @@ Real  Mathematics::DistanceLine3Line3Tool<Real>
 {
 	MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto sign = (Math::GetValue(0) < m_DirectionDot ? static_cast<Real>(-1) : static_cast<Real>(1));
-	auto average = static_cast<Real>(0.5) * (m_OriginDifferenceDotLhsDirection - sign * m_OriginDifferenceDotRhsDirection);
+	auto sign = (Math::GetValue(0) < m_DirectionDot ? static_cast<Real>(-1) : Math::GetValue(1));
+	auto average =  Math::GetRational(1,2) * (m_OriginDifferenceDotLhsDirection - sign * m_OriginDifferenceDotRhsDirection);
 
 	return average;
 }

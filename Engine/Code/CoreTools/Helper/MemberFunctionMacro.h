@@ -364,7 +364,7 @@
 #define DELAY_COPY_CONSTRUCTION_DEFINE(namespaceName, className)                                                                                                               \
     void namespaceName::className::Copy()                                                                                                                                      \
     {                                                                                                                                                                          \
-        static_assert((std::is_same<ClassShareType::NonConstCopyMember, CoreTools::TrueType>::value), "It is not allowed to define the Copy function used for copy delayed."); \
+        static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "It is not allowed to define the Copy function used for copy delayed."); \
         CLASS_IS_VALID_0;                                                                                                                                                      \
         if (1 < m_Impl.use_count())                                                                                                                                            \
         {                                                                                                                                                                      \
@@ -375,7 +375,7 @@
 #define DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(namespaceName, className)                                                                                                         \
     void namespaceName::className::Copy()                                                                                                                                      \
     {                                                                                                                                                                          \
-        static_assert((std::is_same<ClassShareType::NonConstCopyMember, CoreTools::TrueType>::value), "It is not allowed to define the Copy function used for copy delayed."); \
+        static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "It is not allowed to define the Copy function used for copy delayed."); \
         CLASS_IS_VALID_0;                                                                                                                                                      \
         if (1 < m_Impl.use_count())                                                                                                                                            \
         {                                                                                                                                                                      \

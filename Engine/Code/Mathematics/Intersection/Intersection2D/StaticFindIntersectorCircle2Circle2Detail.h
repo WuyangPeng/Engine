@@ -84,7 +84,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>
 		if (lhsAdiusMinusRhsAdiusSquared + epsilon < centerDifferenceSquaredLength)
 		{
 
-			auto ordinal = static_cast<Real>(0.5) * ((lhsRadius * lhsRadius - rhsRadius * rhsRadius) / centerDifferenceSquaredLength + static_cast<Real>(1));
+			auto ordinal =  Math::GetRational(1,2) * ((lhsRadius * lhsRadius - rhsRadius * rhsRadius) / centerDifferenceSquaredLength + Math::GetValue(1));
 			auto amendmentCenter = m_LhsCircle.GetCenter() + ordinal * centerDifference;
 
 			// 理论上，discriminant是非负的。
@@ -102,7 +102,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>
 
 			if (Vector2DTools::Approximate(lhsPoint, rhsPoint, epsilon))
 			{
-				m_Point.push_back((lhsPoint + rhsPoint) / static_cast<Real>(2));
+				m_Point.push_back((lhsPoint + rhsPoint) / Math::GetValue(2));
 			}
 			else
 			{

@@ -50,7 +50,7 @@ Real Mathematics::BarycentricCoordinates<Real, WindowSize>::operator[](int index
 }
 
 template <typename Real, int WindowSize>
-bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsBarycentricCoordinatesValid() const
+bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsBarycentricCoordinatesValid() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
